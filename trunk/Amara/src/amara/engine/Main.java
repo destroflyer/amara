@@ -20,7 +20,7 @@ public class Main extends SimpleApplication{
     public void simpleInitApp(){
         Geometry box = new Geometry("Box", new Box(1, 1, 1));
         Material material = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        material.setColor("Color", ColorRGBA.Blue);
+        material.setColor("Color", ColorRGBA.Red);
         box.setMaterial(material);
         rootNode.attachChild(box);
     }
