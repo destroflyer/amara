@@ -117,7 +117,7 @@ public class EntityMap
         return components;
     }
     
-    public <T> T getComponent(int entity, Class componentClass)
+    public <T> T getComponent(int entity, Class<T> componentClass)
     {
         return (T)getComponentMap(componentClass).get(entity);
     }
