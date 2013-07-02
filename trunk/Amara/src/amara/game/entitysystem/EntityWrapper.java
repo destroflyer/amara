@@ -24,7 +24,7 @@ public class EntityWrapper
         return entity;
     }
     
-    public <T> T getComponent(Class componentClass)
+    public <T> T getComponent(Class<T> componentClass)
     {
         return entityMap.getComponent(entity, componentClass);
     }
