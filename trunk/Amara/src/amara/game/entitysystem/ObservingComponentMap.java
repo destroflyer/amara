@@ -71,11 +71,11 @@ class ObservingComponentMap extends SimpleComponentMap
         Object oldComponent = super.setComponent(entity, component);
         if(oldComponent != null)
         {
-            onComponentChanged(this, entity, oldComponent);
+            onComponentChanged(this, entity, component);
         }
         else
         {
-            onComponentAdded(this, entity, oldComponent);
+            onComponentAdded(this, entity, component);
         }
         return oldComponent;
     }
