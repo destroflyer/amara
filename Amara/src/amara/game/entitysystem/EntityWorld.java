@@ -14,20 +14,10 @@ import java.util.List;
 public class EntityWorld
 {
     private int nextEntity;
-    private ArrayList<EntitySystem> systems = new ArrayList<EntitySystem>();
     private ObservingComponentMap entityMap;
 
-    public ArrayList<EntitySystem> getSystems()
+    public void onFrameEnded()
     {
-        return systems;
-    }
-    
-    public void update(float deltaSeconds)
-    {
-        for(EntitySystem system: systems)
-        {
-            system.update(this, deltaSeconds);
-        }
         entityMap.clearObservations();
     }
     
