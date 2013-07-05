@@ -14,7 +14,7 @@ import java.util.List;
 public class EntityWorld
 {
     private int nextEntity;
-    private ObservingComponentMap entityMap;
+    private ObservingComponentMap entityMap = new ObservingComponentMap();
 
     public void onFrameEnded()
     {
