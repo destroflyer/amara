@@ -10,14 +10,17 @@ import com.jme3.math.Vector2f;
  *
  * @author Philipp
  */
-public class MovementSpeedComponent {
+public class MovementSpeedComponent
+{
     private Vector2f speed;
 
-    public MovementSpeedComponent(Vector2f speed) {
-        this.speed = speed;
+    public MovementSpeedComponent(Vector2f speed)
+    {
+        this.speed = speed.clone();
     }
 
-    public Vector2f getSpeed() {
-        return speed;
+    public Vector2f getSpeed()
+    {
+        return speed.clone();
     }
 }
