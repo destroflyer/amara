@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.game.entitysystem;
+package amara.game.entitysystem.components.physics;
 
 /**
  *
  * @author Philipp
  */
-public interface EntitySystem
+public class HitboxComponent
 {
-    public void update(EntityWorld entityWorld, float deltaSeconds);
+    
 }

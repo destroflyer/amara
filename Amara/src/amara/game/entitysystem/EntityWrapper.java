@@ -10,10 +10,10 @@ package amara.game.entitysystem;
  */
 public class EntityWrapper
 {
-    private EntityMap entityMap;
+    private EntityComponentMap entityMap;
     private int entity;
 
-    public EntityWrapper(EntityMap entityMap, int entity)
+    EntityWrapper(EntityComponentMap entityMap, int entity)
     {
         this.entityMap = entityMap;
         this.entity = entity;
@@ -39,9 +39,9 @@ public class EntityWrapper
         entityMap.removeComponent(entity, componentClass);
     }
     
-    public void clear()
+    public void clearComponents()
     {
-        entityMap.clear(entity);
+        entityMap.clearComponents(entity);
     }
 
     @Override
@@ -49,4 +49,19 @@ public class EntityWrapper
     {
         return "[Entity id=" + entity + "]";
     }
+
+    @Override
+    public int hashCode()
+    {
+        return entityMap.hashCode() ^ entity;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(obj == null || obj.getClass() != EntityWrapper.class) return false;
+        EntityWrapper wrapper = (EntityWrapper)obj;
+        return wrapper.entityMap.equals(entityMap) && wrapper.entity == entity;
+    }
+    
 }
