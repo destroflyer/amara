@@ -130,7 +130,7 @@ public class IntersectionSystem implements EntitySystem, IntersectionInformant
     
     public Set<Pair<Hitbox>> getEntries()
     {
-        return repeaters;
+        return entries;
     }
     
     public Set<Pair<Hitbox>> getRepeaters()
@@ -140,6 +140,6 @@ public class IntersectionSystem implements EntitySystem, IntersectionInformant
     
     public Set<Pair<Hitbox>> getLeavers()
     {
-        return repeaters;
+        return leavers;
     }
 }
