@@ -4,11 +4,22 @@
  */
 package amara.game.entitysystem.components.physics;
 
+import shapes.Shape;
+
 /**
  *
  * @author Philipp
  */
 public class HitboxComponent
 {
-    
+    private Shape shape;
+
+    public HitboxComponent(Shape shape)
+    {
+        this.shape = shape.clone();
+    }
+
+    public Shape getShape() {
+        return shape.clone();
+    }
 }
