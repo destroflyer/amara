@@ -46,11 +46,6 @@ public class EntityWorld
         return list;
     }
     
-    public List<Integer> getEntities(Class... requiredComponentsClasses)
-    {
-        return entityMap.getEntitiesWithAll(requiredComponentsClasses);
-    }
-    
     public EntityComponentMap getCurrent()
     {
         return entityMap;

@@ -16,7 +16,7 @@ public class MovementSystem implements EntitySystem
 {
 
     public void update(EntityWorld entityWorld, float deltaSeconds) {
-        for(EntityWrapper entity: entityWorld.getWrapped(entityWorld.getEntities(MovementSpeedComponent.class, PositionComponent.class)))
+        for(EntityWrapper entity: entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(MovementSpeedComponent.class, PositionComponent.class)))
         {
             Vector2f position = entity.getComponent(PositionComponent.class).getPosition();
             position.addLocal(entity.getComponent(MovementSpeedComponent.class).getSpeed().mult(deltaSeconds));
