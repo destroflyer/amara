@@ -15,7 +15,8 @@ import com.jme3.math.Vector2f;
 public class MovementSystem implements EntitySystem
 {
 
-    public void update(EntityWorld entityWorld, float deltaSeconds) {
+    public void update(EntityWorld entityWorld, float deltaSeconds)
+    {
         for(EntityWrapper entity: entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(MovementSpeedComponent.class, PositionComponent.class)))
         {
             Vector2f position = entity.getComponent(PositionComponent.class).getPosition();
