@@ -65,17 +65,17 @@ public class EntitySystemAppState extends BaseAppState{
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(entitiesNode);
         IntersectionSystem intersectionSystem = new IntersectionSystem();
+        addEntitySystem(new IntersectionPushSystem(intersectionSystem));
         addEntitySystem(new MovementSystem());
         addEntitySystem(intersectionSystem);
         addEntitySystem(new ModelSystem(entitySceneMap));
         addEntitySystem(new PositionSystem(entitySceneMap));
         addEntitySystem(new DirectionSystem(entitySceneMap));
         addEntitySystem(new ScaleSystem(entitySceneMap));
-        addEntitySystem(new IntersectionPushSystem(intersectionSystem));
         //Test
         entityWorld = new EntityWorld();
         EntityWrapper entity1 = entityWorld.getWrapped(entityWorld.createEntity());
-        entity1.setComponent(new ScaleComponent(1));
+//        entity1.setComponent(new ScaleComponent(1));
         entity1.setComponent(new PositionComponent(new Vector2f(0, 0)));
         entity1.setComponent(new DirectionComponent(new Vector2f(1, 0)));
         entity1.setComponent(new HitboxComponent(new RegularCyclic(6, 2)));
