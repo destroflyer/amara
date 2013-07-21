@@ -4,19 +4,16 @@
  */
 package amara.engine.client.appstates;
 
-import amara.engine.client.systems.DirectionSystem;
-import amara.engine.client.systems.EntitySceneMap;
-import amara.engine.client.systems.ModelSystem;
-import amara.engine.client.systems.PositionSystem;
-import amara.engine.client.systems.ScaleSystem;
 import java.util.ArrayList;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector2f;
+import com.jme3.scene.Node;
+import amara.engine.client.systems.*;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
+import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.physics.*;
-import com.jme3.scene.Node;
 import shapes.*;
 
 /**
@@ -72,16 +69,20 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new PositionSystem(entitySceneMap));
         addEntitySystem(new DirectionSystem(entitySceneMap));
         addEntitySystem(new ScaleSystem(entitySceneMap));
+        addEntitySystem(new AnimationSystem(entitySceneMap));
         //Test
         entityWorld = new EntityWorld();
         EntityWrapper entity1 = entityWorld.getWrapped(entityWorld.createEntity());
-//        entity1.setComponent(new ScaleComponent(1));
+        entity1.setComponent(new ModelComponent("Models/minion/skin.xml"));
+        entity1.setComponent(new AnimationComponent("dance", 1));
+        entity1.setComponent(new ScaleComponent(0.75f));
         entity1.setComponent(new PositionComponent(new Vector2f(0, 0)));
-        entity1.setComponent(new DirectionComponent(new Vector2f(1, 0)));
+        entity1.setComponent(new DirectionComponent(new Vector2f(0, 1)));
         entity1.setComponent(new HitboxComponent(new RegularCyclic(6, 2)));
         entity1.setComponent(new PushComponent());
         EntityWrapper entity2 = entityWorld.getWrapped(entityWorld.createEntity());
-        entity2.setComponent(new ScaleComponent(1.5f));
+        entity2.setComponent(new ModelComponent("Models/wizard/skin.xml"));
+        entity2.setComponent(new ScaleComponent(0.5f));
         entity2.setComponent(new PositionComponent(new Vector2f(7, 7)));
         entity2.setComponent(new DirectionComponent(new Vector2f(-1, -1)));
         entity2.setComponent(new MovementSpeedComponent(new Vector2f(-1, -1)));
