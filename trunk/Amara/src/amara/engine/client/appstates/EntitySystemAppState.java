@@ -71,7 +71,7 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new PositionSystem(entitySceneMap));
         addEntitySystem(new DirectionSystem(entitySceneMap));
         addEntitySystem(new ScaleSystem(entitySceneMap));
-        addEntitySystem(new IntersectionExceptionSystem(intersectionSystem));
+        addEntitySystem(new IntersectionPushSystem(intersectionSystem));
         //Test
         entityWorld = new EntityWorld();
         EntityWrapper entity1 = entityWorld.getWrapped(entityWorld.createEntity());
@@ -79,14 +79,14 @@ public class EntitySystemAppState extends BaseAppState{
         entity1.setComponent(new PositionComponent(new Vector2f(0, 0)));
         entity1.setComponent(new DirectionComponent(new Vector2f(1, 0)));
         entity1.setComponent(new HitboxComponent(new RegularCyclic(6, 2)));
-        entity1.setComponent(new IntersectionExceptionComponent());
+        entity1.setComponent(new PushComponent());
         EntityWrapper entity2 = entityWorld.getWrapped(entityWorld.createEntity());
         entity2.setComponent(new ScaleComponent(1.5f));
-        entity2.setComponent(new PositionComponent(new Vector2f(7, 4)));
+        entity2.setComponent(new PositionComponent(new Vector2f(7, 7)));
         entity2.setComponent(new DirectionComponent(new Vector2f(-1, -1)));
         entity2.setComponent(new MovementSpeedComponent(new Vector2f(-1, -1)));
         entity2.setComponent(new HitboxComponent(new Circle(1)));
-        entity2.setComponent(new IntersectionExceptionComponent());
+        entity2.setComponent(new PushComponent());
     }
     
     public void addEntitySystem(EntitySystem entitySystem){
