@@ -4,13 +4,10 @@
  */
 package amara.engine.client.systems;
 
-import com.jme3.math.ColorRGBA;
-import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.jme3.scene.shape.Box;
-import amara.engine.client.*;
+import amara.engine.client.models.*;
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.physics.*;
+import amara.game.entitysystem.components.visuals.*;
 
 /**
  *
@@ -25,15 +22,14 @@ public class ModelSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getNew().getEntitiesWithAll(PositionComponent.class))
+        for(int entity : entityWorld.getNew().getEntitiesWithAll(ModelComponent.class))
         {
             Node node = entitySceneMap.requestNode(entity);
-            Geometry box = new Geometry("", new Box(1, 1, 1));
-            box.setMaterial(MaterialFactory.generateLightingMaterial(ColorRGBA.Red));
-            box.getMaterial().getAdditionalRenderState().setWireframe(true);
-            node.attachChild(box);
+            ModelComponent modelComponent = entityWorld.getCurrent().getComponent(entity, ModelComponent.class);
+            ModelObject modelObject = new ModelObject("/" + modelComponent.getModelSkinPath());
+            node.attachChild(modelObject);
         }
-        for(int entity : entityWorld.getRemoved().getEntitiesWithAll(PositionComponent.class))
+        for(int entity : entityWorld.getRemoved().getEntitiesWithAll(ModelComponent.class))
         {
             entitySceneMap.removeNode(entity);
         }
