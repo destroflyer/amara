@@ -26,9 +26,9 @@ public class IntersectionSystem implements EntitySystem, IntersectionInformant
     
     HashSet<Integer> updateNeeded = new HashSet<Integer>();
     
-    private Set<Pair<Hitbox>> entries;
-    private Set<Pair<Hitbox>> repeaters;
-    private Set<Pair<Hitbox>> leavers;
+    private Set<Pair<Hitbox>> entries = new HashSet<Pair<Hitbox>>();
+    private Set<Pair<Hitbox>> repeaters = new HashSet<Pair<Hitbox>>();
+    private Set<Pair<Hitbox>> leavers = new HashSet<Pair<Hitbox>>();
     private IntersectionTracker tracker = new IntersectionTracker();
     
     public void update(EntityWorld entityWorld, float deltaSeconds)
@@ -108,7 +108,7 @@ public class IntersectionSystem implements EntitySystem, IntersectionInformant
         }
         else
         {
-            transform.setScale(0);
+            transform.setScale(1);
         }
     }
     
