@@ -20,6 +20,6 @@ public class HitboxComponent
     }
 
     public Shape getShape() {
-        return shape.clone();
+        return shape;
     }
 }
