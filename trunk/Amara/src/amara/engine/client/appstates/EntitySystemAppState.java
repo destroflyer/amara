@@ -70,6 +70,7 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new DirectionSystem(entitySceneMap));
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
+        addEntitySystem(new CollisionDebugSystem(entitySceneMap));
         //Test
         entityWorld = new EntityWorld();
         EntityWrapper entity1 = entityWorld.getWrapped(entityWorld.createEntity());
