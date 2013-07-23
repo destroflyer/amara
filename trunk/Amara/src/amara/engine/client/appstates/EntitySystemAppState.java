@@ -62,8 +62,9 @@ public class EntitySystemAppState extends BaseAppState{
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(entitiesNode);
         IntersectionSystem intersectionSystem = new IntersectionSystem();
-        addEntitySystem(new IntersectionPushSystem(intersectionSystem));
+        addEntitySystem(new IntersectionAntiGhostSystem(intersectionSystem));
         addEntitySystem(new MovementSystem());
+        addEntitySystem(new TransformUpdateSystem());
         addEntitySystem(intersectionSystem);
         addEntitySystem(new ModelSystem(entitySceneMap));
         addEntitySystem(new PositionSystem(entitySceneMap));
@@ -80,7 +81,7 @@ public class EntitySystemAppState extends BaseAppState{
         entity1.setComponent(new PositionComponent(new Vector2f(0, 0)));
         entity1.setComponent(new DirectionComponent(new Vector2f(0, 1)));
         entity1.setComponent(new HitboxComponent(new RegularCyclic(6, 2)));
-        entity1.setComponent(new PushComponent());
+        entity1.setComponent(new AntiGhostComponent());
         EntityWrapper entity2 = entityWorld.getWrapped(entityWorld.createEntity());
         entity2.setComponent(new ModelComponent("Models/wizard/skin.xml"));
         entity2.setComponent(new ScaleComponent(0.5f));
@@ -88,7 +89,7 @@ public class EntitySystemAppState extends BaseAppState{
         entity2.setComponent(new DirectionComponent(new Vector2f(-1, -1)));
         entity2.setComponent(new MovementSpeedComponent(new Vector2f(-1, -1)));
         entity2.setComponent(new HitboxComponent(new Circle(1)));
-        entity2.setComponent(new PushComponent());
+        entity2.setComponent(new AntiGhostComponent());
     }
     
     public void addEntitySystem(EntitySystem entitySystem){
