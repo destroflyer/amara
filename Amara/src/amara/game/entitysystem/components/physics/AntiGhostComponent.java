@@ -8,7 +8,7 @@ package amara.game.entitysystem.components.physics;
  *
  * @author Philipp
  */
-public class PushComponent
+public class AntiGhostComponent
 {
     
 }
