@@ -32,9 +32,9 @@ public class ShapeMesh extends Mesh{
                 indices[indicesIndex] = 0;
             }
             indicesIndex++;
-            positions.put((float) point.getX());
+            positions.put((float) (point.getX() - simpleConvex.getX()));
             positions.put(0);
-            positions.put((float) point.getY());
+            positions.put((float) (point.getY() - simpleConvex.getY()));
             normals.put(new float[]{0, 1, 0});
         }
         setBuffer(Type.Index, 2, indices);
