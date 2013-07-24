@@ -14,6 +14,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.physics.*;
+import amara.game.entitysystem.systems.physics.intersectionHelper.MapObstacle;
 import shapes.*;
 
 /**
@@ -62,6 +63,13 @@ public class EntitySystemAppState extends BaseAppState{
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(entitiesNode);
         IntersectionSystem intersectionSystem = new IntersectionSystem();
+        
+        ArrayList<Shape> obstacles = new ArrayList<Shape>();
+        obstacles.add(new shapes.SimpleConvex(new Vector2D(0, 0), new Vector2D(100, 0)));
+        obstacles.add(new shapes.SimpleConvex(new Vector2D(100, 0), new Vector2D(100, 100)));
+        obstacles.add(new shapes.SimpleConvex(new Vector2D(100, 100), new Vector2D(0, 100)));
+        obstacles.add(new shapes.SimpleConvex(new Vector2D(0, 100), new Vector2D(0, 0)));
+        
         addEntitySystem(new IntersectionAntiGhostSystem(intersectionSystem));
         addEntitySystem(new MovementSystem());
         addEntitySystem(new TransformUpdateSystem());
@@ -72,16 +80,18 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
         addEntitySystem(new CollisionDebugSystem(entitySceneMap));
+        addEntitySystem(new MapIntersectionSystem(100, 100, obstacles));
         //Test
         entityWorld = new EntityWorld();
         EntityWrapper entity1 = entityWorld.getWrapped(entityWorld.createEntity());
         entity1.setComponent(new ModelComponent("Models/minion/skin.xml"));
         entity1.setComponent(new AnimationComponent("dance", 1));
         entity1.setComponent(new ScaleComponent(0.75f));
-        entity1.setComponent(new PositionComponent(new Vector2f(0, 0)));
+        entity1.setComponent(new PositionComponent(new Vector2f(10, 10)));
         entity1.setComponent(new DirectionComponent(new Vector2f(0, 1)));
         entity1.setComponent(new HitboxComponent(new RegularCyclic(6, 2)));
         entity1.setComponent(new AntiGhostComponent());
+        entity1.setComponent(new CollidesWithMapComponent());
         EntityWrapper entity2 = entityWorld.getWrapped(entityWorld.createEntity());
         entity2.setComponent(new ModelComponent("Models/wizard/skin.xml"));
         entity2.setComponent(new ScaleComponent(0.5f));
@@ -90,6 +100,7 @@ public class EntitySystemAppState extends BaseAppState{
         entity2.setComponent(new MovementSpeedComponent(new Vector2f(-1, -1)));
         entity2.setComponent(new HitboxComponent(new Circle(1)));
         entity2.setComponent(new AntiGhostComponent());
+        entity2.setComponent(new CollidesWithMapComponent());
     }
     
     public void addEntitySystem(EntitySystem entitySystem){
