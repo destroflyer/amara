@@ -8,6 +8,7 @@ import com.jme3.collision.CollisionResults;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Node;
 import com.jme3.system.AppSettings;
 import amara.engine.client.appstates.*;
@@ -35,6 +36,7 @@ public class MainApplication extends SimpleApplication{
     @Override
     public void simpleInitApp(){
         MaterialFactory.setAssetManager(assetManager);
+        viewPort.getQueue().setGeometryComparator(RenderQueue.Bucket.Opaque, new LayerGeometryComparator());
         stateManager.attach(new NiftyAppState());
         stateManager.attach(new LightAppState());
         stateManager.attach(new PostFilterAppState());
