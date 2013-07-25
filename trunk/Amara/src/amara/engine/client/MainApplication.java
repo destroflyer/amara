@@ -1,9 +1,5 @@
 package amara.engine.client;
 
-import amara.engine.client.appstates.EntitySystemAppState;
-import amara.engine.client.appstates.LightAppState;
-import amara.engine.client.appstates.PostFilterAppState;
-import amara.engine.client.appstates.NiftyAppState;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +10,7 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.system.AppSettings;
+import amara.engine.client.appstates.*;
 
 /**
  * @author Carl
@@ -43,9 +40,9 @@ public class MainApplication extends SimpleApplication{
         stateManager.attach(new PostFilterAppState());
         stateManager.attach(new EntitySystemAppState());
         //Debug Camera
-        flyCam.setMoveSpeed(10);
-        cam.setLocation(new Vector3f(0, 8.5f, 12));
-        cam.lookAtDirection(new Vector3f(0, -0.528f, -0.85f), Vector3f.UNIT_Y);
+        flyCam.setMoveSpeed(12);
+        cam.setLocation(new Vector3f(10, 27, -3));
+        cam.lookAtDirection(new Vector3f(0.33f, -0.23f, 0.91f), Vector3f.UNIT_Y);
     }
 
     @Override
