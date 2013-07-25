@@ -4,10 +4,14 @@
  */
 package amara.engine.client.systems;
 
+import java.util.Iterator;
+import java.util.List;
+import com.jme3.scene.Node;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector2f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
-import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 import amara.engine.client.MaterialFactory;
 import amara.engine.client.systems.debug.*;
 import amara.game.entitysystem.*;
@@ -20,33 +24,54 @@ import shapes.*;
  */
 public class CollisionDebugSystem implements EntitySystem{
     
-    public CollisionDebugSystem(EntitySceneMap entitySceneMap){
-        this.entitySceneMap = entitySceneMap;
+    public CollisionDebugSystem(Node node, List<Shape> mapObstacles){
+        this.node = node;
+        Iterator<Shape> shapesIterator = mapObstacles.iterator();
+        while(shapesIterator.hasNext()){
+            Shape shape = shapesIterator.next();
+            Geometry collisionMeshGeometry = generateGeometry(shape);
+            node.attachChild(collisionMeshGeometry);
+        }
     }
-    public static final String NODE_NAME_COLLISION_MESH = "collisionMesh";
-    private EntitySceneMap entitySceneMap;
+    private Node node;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(int entity : entityWorld.getNew().getEntitiesWithAll(HitboxComponent.class))
         {
-            updateCollisionMeshGeometry(entityWorld, entity);
+            updateGeometry(entityWorld, entity);
         }
         for(int entity : entityWorld.getChanged().getEntitiesWithAll(HitboxComponent.class))
         {
-            updateCollisionMeshGeometry(entityWorld, entity);
+            updateGeometry(entityWorld, entity);
         }
         for(int entity : entityWorld.getRemoved().getEntitiesWithAll(HitboxComponent.class))
         {
-            removeCollisionMeshGeometry(entity);
+            removeGeometry(entity);
+        }
+        for(int entity : entityWorld.getNew().getEntitiesWithAll(PositionComponent.class))
+        {
+            updateGeometryLocation(entityWorld, entity);
+        }
+        for(int entity : entityWorld.getChanged().getEntitiesWithAll(PositionComponent.class))
+        {
+            updateGeometryLocation(entityWorld, entity);
         }
     }
     
-    private void updateCollisionMeshGeometry(EntityWorld entityWorld, int entity){
-        removeCollisionMeshGeometry(entity);
-        Node node = entitySceneMap.requestNode(entity);
+    private void updateGeometry(EntityWorld entityWorld, int entity){
+        removeGeometry(entity);
         HitboxComponent hitboxComponent = entityWorld.getCurrent().getComponent(entity, HitboxComponent.class);
-        Shape shape = hitboxComponent.getShape();
+        Geometry collisionMeshGeometry = generateGeometry(hitboxComponent.getShape());
+        collisionMeshGeometry.setName(getGeometryName(entity));
+        node.attachChild(collisionMeshGeometry);
+    }
+    
+    private void removeGeometry(int entity){
+        node.detachChildNamed(getGeometryName(entity));
+    }
+    
+    private Geometry generateGeometry(Shape shape){
         Mesh collisionMesh;
         ColorRGBA meshColor = ColorRGBA.Blue;
         if(shape instanceof Circle){
@@ -61,14 +86,21 @@ public class CollisionDebugSystem implements EntitySystem{
             collisionMesh = new CircleMesh((float) shape.getBoundRadius(), 64);
             meshColor = ColorRGBA.Red;
         }
-        Geometry collisionMeshGeometry = new Geometry(NODE_NAME_COLLISION_MESH, collisionMesh);
+        Geometry collisionMeshGeometry = new Geometry("", collisionMesh);
         collisionMeshGeometry.setMaterial(MaterialFactory.generateUnshadedMaterial(meshColor));
-        collisionMeshGeometry.getMaterial().getAdditionalRenderState().setWireframe(true);
-        node.attachChild(collisionMeshGeometry);
+        collisionMeshGeometry.setUserData("layer", 1);
+        collisionMeshGeometry.getMaterial().getAdditionalRenderState().setDepthTest(false);
+        return collisionMeshGeometry;
     }
     
-    private void removeCollisionMeshGeometry(int entity){
-        Node node = entitySceneMap.requestNode(entity);
-        node.detachChildNamed(NODE_NAME_COLLISION_MESH);
+    private void updateGeometryLocation(EntityWorld entityWorld, int entity){
+        Spatial geometry = node.getChild(getGeometryName(entity));
+        PositionComponent positionComponent = entityWorld.getCurrent().getComponent(entity, PositionComponent.class);
+        Vector2f location = positionComponent.getPosition();
+        geometry.setLocalTranslation(location.getX(), 0, location.getY());
+    }
+    
+    private String getGeometryName(int entity){
+        return ("collisionMesh_" + entity);
     }
 }

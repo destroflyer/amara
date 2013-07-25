@@ -4,12 +4,12 @@
  */
 package amara.engine.client.appstates;
 
-import amara.engine.client.maps.MapTerrain;
 import java.util.ArrayList;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector2f;
 import com.jme3.scene.Node;
+import amara.engine.client.maps.MapTerrain;
 import amara.engine.client.systems.*;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
@@ -62,18 +62,16 @@ public class EntitySystemAppState extends BaseAppState{
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(entitiesNode);
-        //Test: Load map terrain
+        //Test: Load map
         MapTerrain mapTerrain = new MapTerrain("testmap");
         mainApplication.getRootNode().attachChild(mapTerrain.getTerrain());
-        //Systems
-        IntersectionSystem intersectionSystem = new IntersectionSystem();
-        
         ArrayList<Shape> obstacles = new ArrayList<Shape>();
         obstacles.add(new shapes.SimpleConvex(new Vector2D(0, 0), new Vector2D(100, 0)));
         obstacles.add(new shapes.SimpleConvex(new Vector2D(100, 0), new Vector2D(100, 100)));
         obstacles.add(new shapes.SimpleConvex(new Vector2D(100, 100), new Vector2D(0, 100)));
         obstacles.add(new shapes.SimpleConvex(new Vector2D(0, 100), new Vector2D(0, 0)));
-        
+        //Systems
+        IntersectionSystem intersectionSystem = new IntersectionSystem();
         addEntitySystem(new IntersectionAntiGhostSystem(intersectionSystem));
         addEntitySystem(new MovementSystem());
         addEntitySystem(new TransformUpdateSystem());
@@ -84,9 +82,13 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new DirectionSystem(entitySceneMap));
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
-        addEntitySystem(new CollisionDebugSystem(entitySceneMap));
         addEntitySystem(new MapIntersectionSystem(100, 100, obstacles));
-        //Test
+        //Debug
+        Node collisionDebugNode = new Node();
+        collisionDebugNode.setLocalTranslation(0, 20, 0);
+        mainApplication.getRootNode().attachChild(collisionDebugNode);
+        addEntitySystem(new CollisionDebugSystem(collisionDebugNode, obstacles));
+        //Test-Entities
         entityWorld = new EntityWorld();
         EntityWrapper entity1 = entityWorld.getWrapped(entityWorld.createEntity());
         entity1.setComponent(new ModelComponent("Models/minion/skin.xml"));
