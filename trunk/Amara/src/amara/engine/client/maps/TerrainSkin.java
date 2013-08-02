@@ -42,7 +42,7 @@ public class TerrainSkin{
         SKINS.put("volcano", new TerrainSkin(
             new TerrainSkin_Texture[]{
                 new TerrainSkin_Texture("Textures/terrain/stone_dark.jpg", 32),
-                new TerrainSkin_Texture("Textures/terrain/wall_dunkel.jpg", 32),
+                new TerrainSkin_Texture("Textures/terrain/wall_dark.jpg", 32),
                 new TerrainSkin_Texture("Textures/terrain/magma.jpg", 128)
             },
             "Textures/skies/evening.jpg"

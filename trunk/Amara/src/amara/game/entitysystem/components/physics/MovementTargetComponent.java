@@ -10,16 +10,16 @@ import com.jme3.math.Vector2f;
  *
  * @author Philipp
  */
-public class PositionComponent
+public class MovementTargetComponent
 {
     private Vector2f position;
 
-    public PositionComponent(Vector2f position)
+    public MovementTargetComponent(Vector2f position)
     {
         this.position = position.clone();
     }
 
-    public Vector2f getPosition()
+    public Vector2f getTargetPosition()
     {
         return position;
     }
