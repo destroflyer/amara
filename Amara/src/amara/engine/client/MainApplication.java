@@ -37,14 +37,17 @@ public class MainApplication extends SimpleApplication{
     public void simpleInitApp(){
         MaterialFactory.setAssetManager(assetManager);
         viewPort.getQueue().setGeometryComparator(RenderQueue.Bucket.Opaque, new LayerGeometryComparator());
+        stateManager.attach(new EventManagerAppState());
         stateManager.attach(new NiftyAppState());
         stateManager.attach(new LightAppState());
         stateManager.attach(new PostFilterAppState());
+        stateManager.attach(new SendPlayerCommandsAppState());
         stateManager.attach(new EntitySystemAppState());
+        stateManager.attach(new MapAppState("testmap"));
+        stateManager.attach(new IngameCameraAppState());
         //Debug Camera
-        flyCam.setMoveSpeed(12);
-        cam.setLocation(new Vector3f(10, 27, -3));
-        cam.lookAtDirection(new Vector3f(0.33f, -0.23f, 0.91f), Vector3f.UNIT_Y);
+        cam.setLocation(new Vector3f(30, 52, -18));
+        cam.lookAtDirection(new Vector3f(0, -1.3f, 1), Vector3f.UNIT_Y);
     }
 
     @Override
@@ -52,11 +55,27 @@ public class MainApplication extends SimpleApplication{
         
     }
     
-    public CollisionResults getRayCastingResults(Node node){
+    public CollisionResults getRayCastingResults_Cursor(Node node){
+        Vector3f cursorRayOrigin = getCursorLocation(0);
+        Vector3f cursorRayDirection = getCursorLocation(1).subtractLocal(cursorRayOrigin).normalizeLocal();
+        return getRayCastingResults(node, new Ray(cursorRayOrigin, cursorRayDirection));
+    }
+    
+    private Vector3f getCursorLocation(float z){
+        return cam.getWorldCoordinates(inputManager.getCursorPosition(), z);
+    }
+    
+    public CollisionResults getRayCastingResults_Camera(Node node){
         Vector3f origin = cam.getWorldCoordinates(new Vector2f((settings.getWidth() / 2), (settings.getHeight() / 2)), 0.0f);
         Vector3f direction = cam.getWorldCoordinates(new Vector2f((settings.getWidth() / 2), (settings.getHeight() / 2)), 0.3f);
         direction.subtractLocal(origin).normalizeLocal();
-        Ray ray = new Ray(origin, direction);
+        return getRayCastingResults(node, new Ray(origin, direction));
+    }
+    
+    private  CollisionResults getRayCastingResults(Node node, Ray ray){
+        Vector3f origin = cam.getWorldCoordinates(new Vector2f((settings.getWidth() / 2), (settings.getHeight() / 2)), 0.0f);
+        Vector3f direction = cam.getWorldCoordinates(new Vector2f((settings.getWidth() / 2), (settings.getHeight() / 2)), 0.3f);
+        direction.subtractLocal(origin).normalizeLocal();
         CollisionResults results = new CollisionResults();
         node.collideWith(ray, results);
         return results;

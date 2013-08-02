@@ -21,6 +21,6 @@ public class MovementSpeedComponent
 
     public Vector2f getSpeed()
     {
-        return speed.clone();
+        return speed;
     }
 }

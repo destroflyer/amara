@@ -4,7 +4,6 @@
  */
 package amara.engine.client.maps;
 
-import amara.engine.client.MaterialFactory;
 import com.jme3.material.Material;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
@@ -12,6 +11,7 @@ import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.terrain.heightmap.AbstractHeightMap;
 import com.jme3.terrain.heightmap.ImageBasedHeightMap;
 import com.jme3.texture.Texture;
+import amara.engine.client.MaterialFactory;
 
 /**
  *
@@ -20,14 +20,12 @@ import com.jme3.texture.Texture;
 public class MapTerrain{
 
     public MapTerrain(String mapName){
-        this.mapName = mapName;
-        loadHeightmap();
-        loadMaterial();
+        loadHeightmap(mapName);
+        loadMaterial(mapName);
     }
-    private String mapName;
     private TerrainQuad terrain;
 
-    private void loadHeightmap(){
+    private void loadHeightmap(String mapName){
         Texture heightMapImage = MaterialFactory.getAssetManager().loadTexture("Maps/" + mapName + "/heightmap.png");
         AbstractHeightMap heightmap = new ImageBasedHeightMap(heightMapImage.getImage(), 0.8f);
         heightmap.load();
@@ -35,7 +33,7 @@ public class MapTerrain{
         terrain.setLocalTranslation((terrain.getTotalSize() / 2), 0, (terrain.getTotalSize() / 2));
     }
     
-    private void loadMaterial(){
+    private void loadMaterial(String mapName){
         Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Terrain/TerrainLighting.j3md");
         Texture alphaMapTexture = MaterialFactory.getAssetManager().loadTexture("Maps/" + mapName + "/alphamap.png");
         material.setTexture("AlphaMap", alphaMapTexture);
