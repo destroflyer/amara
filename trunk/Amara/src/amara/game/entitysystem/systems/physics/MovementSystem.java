@@ -17,11 +17,32 @@ public class MovementSystem implements EntitySystem
 
     public void update(EntityWorld entityWorld, float deltaSeconds)
     {
+        for(EntityWrapper entity: entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(MovementTargetComponent.class, PositionComponent.class)))
+        {
+            PositionComponent positionComponent = entity.getComponent(PositionComponent.class);
+            Vector2f moveDirection = entity.getComponent(MovementTargetComponent.class).getTargetPosition().subtract(positionComponent.getPosition()).normalizeLocal().multLocal(2.5f);
+            entity.setComponent(new MovementSpeedComponent(moveDirection));
+        }
+        
         for(EntityWrapper entity: entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(MovementSpeedComponent.class, PositionComponent.class)))
         {
             Vector2f position = entity.getComponent(PositionComponent.class).getPosition();
-            position.addLocal(entity.getComponent(MovementSpeedComponent.class).getSpeed().mult(deltaSeconds));
-            entity.setComponent(new PositionComponent(position));
+            Vector2f movement = entity.getComponent(MovementSpeedComponent.class).getSpeed().mult(deltaSeconds);
+            
+            Vector2f newPosition = position.add(movement);
+            
+            MovementTargetComponent targetComponent = entity.getComponent(MovementTargetComponent.class);
+            if(targetComponent != null)
+            {
+                Vector2f target = targetComponent.getTargetPosition();
+                if(movement.distanceSquared(0, 0) >= target.distanceSquared(position))
+                {
+                    newPosition = target;
+                    entity.removeComponent(MovementSpeedComponent.class);
+                    entity.removeComponent(MovementTargetComponent.class);
+                }
+            }
+            entity.setComponent(new PositionComponent(newPosition));
         }
     }
     

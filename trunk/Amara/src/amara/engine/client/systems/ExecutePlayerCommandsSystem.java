@@ -44,10 +44,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 MoveCommand moveCommand = (MoveCommand) command;
                 for(int entity : entityWorld.getCurrent().getEntitiesWithAll(IsSelectedComponent.class))
                 {
-                    //TODO: Replace with entityWorld.getCurrent().setComponent(entity, new MovementTargetComponent(moveCommand.getPosition()));
-                    PositionComponent positionComponent = entityWorld.getCurrent().getComponent(entity, PositionComponent.class);
-                    Vector2f moveDirection = moveCommand.getPosition().subtract(positionComponent.getPosition()).normalizeLocal().multLocal(2.5f);
-                    entityWorld.getCurrent().setComponent(entity, new MovementSpeedComponent(moveDirection));
+                    entityWorld.getCurrent().setComponent(entity, new MovementTargetComponent(moveCommand.getPosition()));
                 }
             }
         }
