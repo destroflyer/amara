@@ -13,6 +13,7 @@ import com.jme3.scene.Spatial;
 import amara.engine.client.systems.*;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.systems.physics.*;
+import amara.game.entitysystem.systems.skillshots.SkillDamageSystem;
 
 /**
  *
@@ -66,6 +67,7 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new ExecutePlayerCommandsSystem(SendPlayerCommandsAppState.TEST_COMMAND_QUEUE));
         IntersectionSystem intersectionSystem = new IntersectionSystem();
         addEntitySystem(new IntersectionAntiGhostSystem(intersectionSystem));
+        addEntitySystem(new SkillDamageSystem(intersectionSystem));
         addEntitySystem(new MovementSystem());
         addEntitySystem(new TransformUpdateSystem());
         addEntitySystem(intersectionSystem);

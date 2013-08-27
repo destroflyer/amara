@@ -16,7 +16,8 @@ public class ScaleComponent
     {
         if(scale <= 0)
         {
-            this.scale = 1;
+            throw new IllegalArgumentException("scale value must be greater than 0");
+            //this.scale = 1;
         }
         else
         {
