@@ -33,7 +33,7 @@ public class AnimationSystem implements EntitySystem{
         for(int entity : entityWorld.getRemoved().getEntitiesWithAll(AnimationComponent.class))
         {
             ModelObject modelObject = getModelObject(entity);
-            modelObject.stopAndRewindAnimation();
+            if(modelObject != null) modelObject.stopAndRewindAnimation();
         }
         for(int entity : entityWorld.getNew().getEntitiesWithAll(ModelComponent.class))
         {

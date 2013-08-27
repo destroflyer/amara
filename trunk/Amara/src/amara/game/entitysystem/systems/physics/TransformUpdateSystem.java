@@ -51,10 +51,12 @@ public class TransformUpdateSystem implements EntitySystem
     
     private void updateTransforms(EntityWrapper entity)
     {
+        HitboxComponent hitbox = entity.getComponent(HitboxComponent.class);
+        if(hitbox == null) return;
         PositionComponent pos = entity.getComponent(PositionComponent.class);
         DirectionComponent dir = entity.getComponent(DirectionComponent.class);
         ScaleComponent scale = entity.getComponent(ScaleComponent.class);
-        Shape shape = entity.getComponent(HitboxComponent.class).getShape();
+        Shape shape = hitbox.getShape();
         Transform transform = shape.getTransform();
         if(pos != null)
         {
