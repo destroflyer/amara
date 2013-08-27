@@ -30,6 +30,7 @@ public class CollisionDebugSystem implements EntitySystem{
         while(shapesIterator.hasNext()){
             Shape shape = shapesIterator.next();
             Geometry collisionMeshGeometry = generateGeometry(shape);
+            collisionMeshGeometry.setLocalTranslation((float) shape.getX(), 0, (float) shape.getY());
             node.attachChild(collisionMeshGeometry);
         }
     }
