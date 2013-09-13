@@ -10,11 +10,17 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import amara.engine.client.systems.*;
+import amara.engine.client.systems.visualisation.*;
+import amara.engine.client.systems.visualisation.effects.crodwcontrol.*;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.systems.attributes.*;
+import amara.game.entitysystem.systems.commands.*;
+import amara.game.entitysystem.systems.effects.*;
+import amara.game.entitysystem.systems.effects.crowdcontrol.*;
+import amara.game.entitysystem.systems.effects.damage.*;
 import amara.game.entitysystem.systems.physics.*;
-import amara.game.entitysystem.systems.skillshots.SkillDamageSystem;
+import amara.game.entitysystem.systems.skillshots.*;
+import amara.game.entitysystem.systems.spells.casting.*;
 
 /**
  *
@@ -65,8 +71,19 @@ public class EntitySystemAppState extends BaseAppState{
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(entitiesNode);
-        addEntitySystem(new ExecutePlayerCommandsSystem(SendPlayerCommandsAppState.TEST_COMMAND_QUEUE));
         addEntitySystem(new UpdateAttributesSystem());
+        addEntitySystem(new CountdownBindingSystem());
+        addEntitySystem(new CountdownSilenceSystem());
+        addEntitySystem(new CountdownStunSystem());
+        addEntitySystem(new ExecutePlayerCommandsSystem(SendPlayerCommandsAppState.TEST_COMMAND_QUEUE));
+        addEntitySystem(new CastSingleTargetSpellSystem());
+        addEntitySystem(new CalculateSpellEffectSystem());
+        addEntitySystem(new ApplyPhysicalDamageSystem());
+        addEntitySystem(new ApplyMagicDamageSystem());
+        addEntitySystem(new ApplyBindingSystem());
+        addEntitySystem(new ApplySilenceSystem());
+        addEntitySystem(new ApplyStunSystem());
+        addEntitySystem(new RemoveAppliedEffectsSystem());
         IntersectionSystem intersectionSystem = new IntersectionSystem();
         addEntitySystem(new IntersectionAntiGhostSystem(intersectionSystem));
         addEntitySystem(new SkillDamageSystem(intersectionSystem));
@@ -79,6 +96,8 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
         addEntitySystem(new SelectionMarkerSystem(entitySceneMap));
+        addEntitySystem(new StunVisualisationSystem(entitySceneMap));
+        addEntitySystem(new SilenceVisualisationSystem(entitySceneMap));
     }
     
     public void addEntitySystem(EntitySystem entitySystem){

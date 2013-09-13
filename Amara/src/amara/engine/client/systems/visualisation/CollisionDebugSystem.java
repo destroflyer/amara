@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.engine.client.systems;
+package amara.engine.client.systems.visualisation;
 
 import java.util.Iterator;
 import java.util.List;
@@ -89,7 +89,7 @@ public class CollisionDebugSystem implements EntitySystem{
         }
         Geometry collisionMeshGeometry = new Geometry("", collisionMesh);
         collisionMeshGeometry.setMaterial(MaterialFactory.generateUnshadedMaterial(meshColor));
-        collisionMeshGeometry.setUserData("layer", 1);
+        collisionMeshGeometry.setUserData("layer", 2);
         collisionMeshGeometry.getMaterial().getAdditionalRenderState().setDepthTest(false);
         return collisionMeshGeometry;
     }
