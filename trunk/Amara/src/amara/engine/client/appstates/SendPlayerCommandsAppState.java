@@ -12,7 +12,6 @@ import amara.Queue;
 import amara.engine.client.commands.*;
 import amara.engine.input.*;
 import amara.engine.input.events.*;
-import amara.game.entitysystem.components.selection.IsSelectableComponent;
 
 /**
  *
@@ -28,7 +27,6 @@ public class SendPlayerCommandsAppState extends BaseAppState{
     @Override
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
-        EntitySystemAppState entitySystemAppState = getAppState(EntitySystemAppState.class);
         Queue<Event> eventQueue = getAppState(EventManagerAppState.class).getEventQueue();
         Iterator<Event> eventsIterator = eventQueue.getIterator();
         while(eventsIterator.hasNext()){
@@ -37,27 +35,26 @@ public class SendPlayerCommandsAppState extends BaseAppState{
                 MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
                 switch(mouseClickEvent.getButton()){
                     case Left:
-                        boolean wasEntitySelected = false;
-                        CollisionResults entitiesColissionResults = mainApplication.getRayCastingResults_Cursor(entitySystemAppState.getEntitiesNode());
-                        for(int i=0;i<entitiesColissionResults.size();i++){
-                            CollisionResult collision = entitiesColissionResults.getCollision(i);
-                            int entity = entitySystemAppState.getEntity(collision.getGeometry());
-                            if(entity != -1){
-                                sendCommand(new SelectionCommand(entity));
-                                wasEntitySelected = true;
-                                break;
-                            }
+                        int entityToSelect = getCursorHoveredEntity();
+                        if(entityToSelect != -1){
+                            sendCommand(new SelectionCommand(entityToSelect));
                         }
-                        if(!wasEntitySelected){
+                        else{
                             sendCommand(new DeselectionCommand());
                         }
                         break;
                     
                     case Right:
-                        MapAppState mapAppState = getAppState(MapAppState.class);
-                        CollisionResult groundCollision = mainApplication.getRayCastingResults_Cursor(mapAppState.getMapTerrain().getTerrain()).getClosestCollision();
-                        Vector2f targetLocation = new Vector2f(groundCollision.getContactPoint().getX(), groundCollision.getContactPoint().getZ());
-                        sendCommand(new MoveCommand(targetLocation));
+                        int entityToAttack = getCursorHoveredEntity();
+                        if(entityToAttack != -1){
+                            sendCommand(new CastSingleTargetSpellCommand(0, entityToAttack));
+                        }
+                        else{
+                            MapAppState mapAppState = getAppState(MapAppState.class);
+                            CollisionResult groundCollision = mainApplication.getRayCastingResults_Cursor(mapAppState.getMapTerrain().getTerrain()).getClosestCollision();
+                            Vector2f targetLocation = new Vector2f(groundCollision.getContactPoint().getX(), groundCollision.getContactPoint().getZ());
+                            sendCommand(new MoveCommand(targetLocation));
+                        }
                         break;
                 }
             }
@@ -72,5 +69,18 @@ public class SendPlayerCommandsAppState extends BaseAppState{
     
     private void sendCommand(Command command){
         TEST_COMMAND_QUEUE.add(command);
+    }
+    
+    private int getCursorHoveredEntity(){
+        EntitySystemAppState entitySystemAppState = getAppState(EntitySystemAppState.class);
+        CollisionResults entitiesColissionResults = mainApplication.getRayCastingResults_Cursor(entitySystemAppState.getEntitiesNode());
+        for(int i=0;i<entitiesColissionResults.size();i++){
+            CollisionResult collision = entitiesColissionResults.getCollision(i);
+            int entity = entitySystemAppState.getEntity(collision.getGeometry());
+            if(entity != -1){
+                return entity;
+            }
+        }
+        return -1;
     }
 }

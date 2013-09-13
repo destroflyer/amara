@@ -2,15 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.engine.client.systems;
+package amara.game.entitysystem.systems.commands;
 
 import java.util.Iterator;
-import com.jme3.math.Vector2f;
 import amara.Queue;
 import amara.engine.client.commands.*;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.selection.*;
+import amara.game.entitysystem.components.units.SpellsComponent;
 
 /**
  *
@@ -45,6 +46,15 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 for(int entity : entityWorld.getCurrent().getEntitiesWithAll(IsSelectedComponent.class))
                 {
                     entityWorld.getCurrent().setComponent(entity, new MovementTargetComponent(moveCommand.getPosition()));
+                }
+            }
+            else if(command instanceof CastSingleTargetSpellCommand){
+                CastSingleTargetSpellCommand castSingleTargetSpellCommand = (CastSingleTargetSpellCommand) command;
+                for(int entity : entityWorld.getCurrent().getEntitiesWithAll(IsSelectedComponent.class))
+                {
+                    int[] spells = entityWorld.getCurrent().getComponent(entity, SpellsComponent.class).getSpellsEntitiesIDs();
+                    int spellEntityID = spells[castSingleTargetSpellCommand.getSpellIndex()];
+                    entityWorld.getCurrent().setComponent(entity, new CastSingleTargetSpellComponent(spellEntityID, castSingleTargetSpellCommand.getTargetEntityID()));
                 }
             }
         }

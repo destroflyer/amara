@@ -10,13 +10,18 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector2f;
 import com.jme3.scene.Node;
 import amara.engine.client.maps.MapTerrain;
-import amara.engine.client.systems.*;
+import amara.engine.client.systems.visualisation.*;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
+import amara.game.entitysystem.components.effects.crowdcontrol.*;
+import amara.game.entitysystem.components.effects.damage.*;
+import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.selection.*;
 import amara.game.entitysystem.components.skillshots.*;
+import amara.game.entitysystem.components.spells.*;
+import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.physics.*;
 import shapes.*;
@@ -51,6 +56,7 @@ public class MapAppState extends BaseAppState{
         entitySystemAppState.addEntitySystem(new MapIntersectionSystem(100, 100, obstacles));
         //Test-Entities
         EntityWorld entityWorld = entitySystemAppState.getEntityWorld();
+        //Entity #1
         EntityWrapper entity1 = entityWorld.getWrapped(entityWorld.createEntity());
         entity1.setComponent(new ModelComponent("Models/minion/skin.xml"));
         entity1.setComponent(new AnimationComponent("dance", 1));
@@ -60,8 +66,10 @@ public class MapAppState extends BaseAppState{
         entity1.setComponent(new HitboxComponent(new RegularCyclic(6, 2)));
         entity1.setComponent(new AntiGhostComponent());
         entity1.setComponent(new CollidesWithMapComponent());
+        entity1.setComponent(new HealthComponent(800));
         entity1.setComponent(new IsSelectableComponent());
-        
+        entity1.setComponent(new RequestUpdateAttributesComponent());
+        //Entity #2
         EntityWrapper entity2 = entityWorld.getWrapped(entityWorld.createEntity());
         entity2.setComponent(new ModelComponent("Models/wizard/skin.xml"));
         entity2.setComponent(new ScaleComponent(0.5f));
@@ -71,8 +79,10 @@ public class MapAppState extends BaseAppState{
         entity2.setComponent(new HitboxComponent(new Circle(1)));
         entity2.setComponent(new AntiGhostComponent());
         entity2.setComponent(new CollidesWithMapComponent());
+        entity2.setComponent(new HealthComponent(1200));
         entity2.setComponent(new IsSelectableComponent());
         entity2.setComponent(new IsSelectedComponent());
+        //Entity #2 - Attributes
         entity2.setComponent(new BaseMaximumHealthComponent(500));
         entity2.setComponent(new BaseAttackDamageComponent(60));
         entity2.setComponent(new BaseAbilityPowerComponent(0));
@@ -86,7 +96,25 @@ public class MapAppState extends BaseAppState{
         item3.setComponent(new BonusFlatAbilityPowerComponent(80));
         entity2.setComponent(new InventoryComponent(new int[]{item1.getId(), item2.getId(), item3.getId()}));
         entity2.setComponent(new RequestUpdateAttributesComponent());
-        
+        //Entity #1 - Spells
+        EntityWrapper spell1 = entityWorld.getWrapped(entityWorld.createEntity());
+        spell1.setComponent(new NameComponent("Scream"));
+        spell1.setComponent(new DescriptionComponent("Silences an enemy for a short duration."));
+        EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+        effect1.setComponent(new SilenceComponent(0.5f));
+        spell1.setComponent(new InstantSpellEffectComponent(effect1.getId()));
+        entity1.setComponent(new SpellsComponent(new int[]{spell1.getId()}));
+        //Entity #2 - Spells
+        EntityWrapper spell2 = entityWorld.getWrapped(entityWorld.createEntity());
+        spell2.setComponent(new NameComponent("Flamethrower"));
+        spell2.setComponent(new DescriptionComponent("Burns an enemy with a flame that damages and stuns."));
+        EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+        effect2.setComponent(new FlatMagicDamageComponent(100));
+        effect2.setComponent(new ScalingAbilityPowerMagicDamageComponent(0.7f));
+        effect2.setComponent(new StunComponent(1.5f));
+        spell2.setComponent(new InstantSpellEffectComponent(effect2.getId()));
+        entity2.setComponent(new SpellsComponent(new int[]{spell2.getId()}));
+        //Entity #3
         EntityWrapper entity3 = entityWorld.getWrapped(entityWorld.createEntity());
         entity3.setComponent(new ModelComponent("Models/fireball/skin.xml"));
         entity3.setComponent(new PositionComponent(Vector2f.ZERO));
