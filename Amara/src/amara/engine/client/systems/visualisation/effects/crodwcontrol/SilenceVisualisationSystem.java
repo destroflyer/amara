@@ -21,7 +21,7 @@ import amara.game.entitysystem.components.units.crowdcontrol.*;
 public class SilenceVisualisationSystem extends SimpleVisualAttachmentSystem{
 
     public SilenceVisualisationSystem(EntitySceneMap entitySceneMap){
-        super(entitySceneMap, IsSilencedComponentRenameDummy.class);
+        super(entitySceneMap, IsSilencedComponent.class);
     }
     
     @Override
