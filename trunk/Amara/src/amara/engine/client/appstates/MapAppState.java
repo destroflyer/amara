@@ -66,9 +66,7 @@ public class MapAppState extends BaseAppState{
         entity1.setComponent(new HitboxComponent(new RegularCyclic(6, 2)));
         entity1.setComponent(new AntiGhostComponent());
         entity1.setComponent(new CollidesWithMapComponent());
-        entity1.setComponent(new HealthComponent(800));
         entity1.setComponent(new IsSelectableComponent());
-        entity1.setComponent(new RequestUpdateAttributesComponent());
         //Entity #2
         EntityWrapper entity2 = entityWorld.getWrapped(entityWorld.createEntity());
         entity2.setComponent(new ModelComponent("Models/wizard/skin.xml"));
@@ -79,7 +77,7 @@ public class MapAppState extends BaseAppState{
         entity2.setComponent(new HitboxComponent(new Circle(1)));
         entity2.setComponent(new AntiGhostComponent());
         entity2.setComponent(new CollidesWithMapComponent());
-        entity2.setComponent(new HealthComponent(1200));
+        entity2.setComponent(new HealthComponent(400));
         entity2.setComponent(new IsSelectableComponent());
         entity2.setComponent(new IsSelectedComponent());
         //Entity #2 - Attributes

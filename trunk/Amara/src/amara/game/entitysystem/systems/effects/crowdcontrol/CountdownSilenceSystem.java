@@ -15,15 +15,15 @@ public class CountdownSilenceSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(IsSilencedComponent.class)))
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(IsSilencedComponentRenameDummy.class)))
         {
-            IsSilencedComponent isSilencedComponent = entityWrapper.getComponent(IsSilencedComponent.class);
+            IsSilencedComponentRenameDummy isSilencedComponent = entityWrapper.getComponent(IsSilencedComponentRenameDummy.class);
             float duration = (isSilencedComponent.getRemainingDuration() - deltaSeconds);
             if(duration >= 0){
-                entityWrapper.setComponent(new IsSilencedComponent(duration));
+                entityWrapper.setComponent(new IsSilencedComponentRenameDummy(duration));
             }
             else{
-                entityWrapper.removeComponent(IsSilencedComponent.class);
+                entityWrapper.removeComponent(IsSilencedComponentRenameDummy.class);
             }
         }
     }

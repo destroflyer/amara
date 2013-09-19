@@ -59,6 +59,9 @@ public class UpdateAttributesSystem implements EntitySystem{
                 abilityPower += bonusFlatAbilityPower;
             }
             entityWrapper.setComponent(new MaximumHealthComponent(maximumHealth));
+            if(entityWrapper.getComponent(HealthComponent.class) == null){
+                entityWrapper.setComponent(new HealthComponent(maximumHealth));
+            }
             entityWrapper.setComponent(new AttackDamageComponent(attackDamage));
             entityWrapper.setComponent(new AbilityPowerComponent(abilityPower));
             entityWrapper.removeComponent(RequestUpdateAttributesComponent.class);

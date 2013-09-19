@@ -21,9 +21,9 @@ public class ApplySilenceSystem implements EntitySystem{
         {
             int targetID = entityWrapper.getComponent(ApplyEffectComponent.class).getTargetID();
             SilenceComponent silenceComponent = entityWrapper.getComponent(SilenceComponent.class);
-            IsSilencedComponent isSilencedComponent = entityWorld.getCurrent().getComponent(targetID, IsSilencedComponent.class);
+            IsSilencedComponentRenameDummy isSilencedComponent = entityWorld.getCurrent().getComponent(targetID, IsSilencedComponentRenameDummy.class);
             if((isSilencedComponent == null) || (silenceComponent.getDuration() > isSilencedComponent.getRemainingDuration())){
-                entityWorld.getCurrent().setComponent(targetID, new IsSilencedComponent(silenceComponent.getDuration()));
+                entityWorld.getCurrent().setComponent(targetID, new IsSilencedComponentRenameDummy(silenceComponent.getDuration()));
             }
         }
     }
