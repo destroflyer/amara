@@ -26,13 +26,14 @@ public class StunVisualisationSystem extends SimpleVisualAttachmentSystem{
     
     @Override
     protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
-        Geometry geometry = new Geometry("", new SpeechBubbleMesh()); 
+        Geometry geometry = new Geometry("", new SpeechBubbleMesh());
         Material material = MaterialFactory.generateUnshadedMaterial("Textures/effects/stun.png");
         material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         material.getAdditionalRenderState().setDepthTest(false);
         geometry.setMaterial(material);
         geometry.addControl(new BillboardControl());
         geometry.setUserData("layer", 1);
+        geometry.setLocalTranslation(0, 2, 0);
         return geometry;
     }
 }

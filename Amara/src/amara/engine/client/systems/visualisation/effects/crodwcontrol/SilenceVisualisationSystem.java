@@ -21,18 +21,19 @@ import amara.game.entitysystem.components.units.crowdcontrol.*;
 public class SilenceVisualisationSystem extends SimpleVisualAttachmentSystem{
 
     public SilenceVisualisationSystem(EntitySceneMap entitySceneMap){
-        super(entitySceneMap, IsSilencedComponent.class);
+        super(entitySceneMap, IsSilencedComponentRenameDummy.class);
     }
     
     @Override
     protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
-        Geometry geometry = new Geometry("", new SpeechBubbleMesh()); 
+        Geometry geometry = new Geometry("", new SpeechBubbleMesh());
         Material material = MaterialFactory.generateUnshadedMaterial("Textures/effects/silence.png");
         material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         material.getAdditionalRenderState().setDepthTest(false);
         geometry.setMaterial(material);
         geometry.addControl(new BillboardControl());
         geometry.setUserData("layer", 1);
+        geometry.setLocalTranslation(0, 2, 0);
         return geometry;
     }
 }

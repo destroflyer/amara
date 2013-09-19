@@ -84,6 +84,7 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new ApplySilenceSystem());
         addEntitySystem(new ApplyStunSystem());
         addEntitySystem(new RemoveAppliedEffectsSystem());
+        addEntitySystem(new DeathSystem());
         IntersectionSystem intersectionSystem = new IntersectionSystem();
         addEntitySystem(new IntersectionAntiGhostSystem(intersectionSystem));
         addEntitySystem(new SkillDamageSystem(intersectionSystem));
@@ -96,6 +97,8 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
         addEntitySystem(new SelectionMarkerSystem(entitySceneMap));
+        addEntitySystem(new MaximumHealthBarSystem(entitySceneMap));
+        addEntitySystem(new CurrentHealthBarSystem(entitySceneMap));
         addEntitySystem(new StunVisualisationSystem(entitySceneMap));
         addEntitySystem(new SilenceVisualisationSystem(entitySceneMap));
     }

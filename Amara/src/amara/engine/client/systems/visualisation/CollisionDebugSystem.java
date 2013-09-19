@@ -89,7 +89,7 @@ public class CollisionDebugSystem implements EntitySystem{
         }
         Geometry collisionMeshGeometry = new Geometry("", collisionMesh);
         collisionMeshGeometry.setMaterial(MaterialFactory.generateUnshadedMaterial(meshColor));
-        collisionMeshGeometry.setUserData("layer", 2);
+        collisionMeshGeometry.setUserData("layer", 999);
         collisionMeshGeometry.getMaterial().getAdditionalRenderState().setDepthTest(false);
         return collisionMeshGeometry;
     }
