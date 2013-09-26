@@ -8,6 +8,7 @@ import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionIn
 import amara.game.entitysystem.systems.physics.intersectionHelper.Hitbox;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
+import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionFilter;
 import intersections.IntersectionTracker;
 import intersections.Pair;
 import intersections.SweepAndPrune;
@@ -36,7 +37,9 @@ public class IntersectionSystem implements EntitySystem, IntersectionInformant
     {
         updateHitboxes(entityWorld);
         
-        tracker.next(sap.getAllPairs());
+        IntersectionFilter filter = new IntersectionFilter(entityWorld);
+                
+        tracker.next(sap.getAllPairs(filter));
         entries = EntitiesFromHitboxes(tracker.getEntries());
         repeaters = EntitiesFromHitboxes(tracker.getRepeaters());
         leavers = EntitiesFromHitboxes(tracker.getLeavers());

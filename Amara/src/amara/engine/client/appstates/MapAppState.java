@@ -65,8 +65,8 @@ public class MapAppState extends BaseAppState{
         entity1.setComponent(new DirectionComponent(new Vector2f(0, -1)));
         entity1.setComponent(new HitboxComponent(new RegularCyclic(6, 2)));
         entity1.setComponent(new AntiGhostComponent());
-        entity1.setComponent(new CollidesWithMapComponent());
         entity1.setComponent(new IsSelectableComponent());
+        entity1.setComponent(new IntersectionFilterComponent(IntersectionFilterComponent.COLLISION_GROUP_2, IntersectionFilterComponent.COLLISION_GROUP_MAP | IntersectionFilterComponent.COLLISION_GROUP_2));
         //Entity #2
         EntityWrapper entity2 = entityWorld.getWrapped(entityWorld.createEntity());
         entity2.setComponent(new ModelComponent("Models/wizard/skin.xml"));
@@ -76,10 +76,10 @@ public class MapAppState extends BaseAppState{
         entity2.setComponent(new MovementSpeedComponent(new Vector2f(2, 2)));
         entity2.setComponent(new HitboxComponent(new Circle(1)));
         entity2.setComponent(new AntiGhostComponent());
-        entity2.setComponent(new CollidesWithMapComponent());
         entity2.setComponent(new HealthComponent(400));
         entity2.setComponent(new IsSelectableComponent());
         entity2.setComponent(new IsSelectedComponent());
+        entity2.setComponent(new IntersectionFilterComponent(IntersectionFilterComponent.COLLISION_GROUP_2, IntersectionFilterComponent.COLLISION_GROUP_MAP | IntersectionFilterComponent.COLLISION_GROUP_2));
         //Entity #2 - Attributes
         entity2.setComponent(new BaseMaximumHealthComponent(500));
         entity2.setComponent(new BaseAttackDamageComponent(60));
