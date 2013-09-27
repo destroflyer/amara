@@ -5,7 +5,7 @@
 package amara.game.entitysystem.systems.effects;
 
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.effects.ApplyEffectComponent;
+import amara.game.entitysystem.components.effects.ApplyEffectImpactComponent;
 
 /**
  *
@@ -15,7 +15,7 @@ public class RemoveAppliedEffectsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getCurrent().getEntitiesWithAll(ApplyEffectComponent.class))
+        for(int entity : entityWorld.getCurrent().getEntitiesWithAll(ApplyEffectImpactComponent.class))
         {
             entityWorld.removeEntity(entity);
         }

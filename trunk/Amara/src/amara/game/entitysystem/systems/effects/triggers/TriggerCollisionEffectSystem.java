@@ -1,0 +1,63 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package amara.game.entitysystem.systems.effects.triggers;
+
+import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.effects.*;
+import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.units.effects.*;
+import amara.game.entitysystem.components.units.intersections.*;
+import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionInformant;
+import intersections.Pair;
+
+/**
+ *
+ * @author Philipp
+ */
+public class TriggerCollisionEffectSystem implements EntitySystem{
+
+    public TriggerCollisionEffectSystem(IntersectionInformant info){
+        this.info = info;
+    }
+    private IntersectionInformant info;
+    
+    @Override
+    public void update(EntityWorld entityWorld, float deltaSeconds){
+        for(Pair<Integer> pair: info.getEntries()){
+            if(entityWorld.getCurrent().hasAllComponents(pair.getA(), CollisionTriggerEffectComponent.class)){
+                applyDamage(entityWorld, pair.getA(), pair.getB());
+            }
+            if(entityWorld.getCurrent().hasAllComponents(pair.getB(), CollisionTriggerEffectComponent.class)){
+                applyDamage(entityWorld, pair.getB(), pair.getA());
+            }
+        }
+    }
+    
+    private void applyDamage(EntityWorld entityWorld, int damageEntity, int damagedEntity){
+        EntityWrapper intersectionRules = entityWorld.getWrapped(entityWorld.getCurrent().getComponent(damageEntity, IntersectionRulesComponent.class).getRulesEntityID());
+        boolean triggerEffect;
+        TeamComponent damageTeamComponent = entityWorld.getCurrent().getComponent(damageEntity, TeamComponent.class);
+        TeamComponent damagedTeamComponent = entityWorld.getCurrent().getComponent(damagedEntity, TeamComponent.class);
+        if((damageTeamComponent != null) && (damagedTeamComponent != null)){
+            triggerEffect = false;
+            if(intersectionRules.getComponent(AcceptAlliesComponent.class) != null){
+                triggerEffect |= (damageTeamComponent.getTeamEntityID() == damagedTeamComponent.getTeamEntityID());
+            }
+            if(intersectionRules.getComponent(AcceptEnemiesComponent.class) != null){
+                triggerEffect |= (damageTeamComponent.getTeamEntityID() != damagedTeamComponent.getTeamEntityID());
+            }
+        }
+        else{
+            triggerEffect = true;
+        }
+        if(triggerEffect){
+            EntityWrapper spellCast = entityWorld.getWrapped(entityWorld.createEntity());
+            int effectID = entityWorld.getCurrent().getComponent(damageEntity, CollisionTriggerEffectComponent.class).getEffectEntityID();
+            spellCast.setComponent(new PrepareEffectComponent(effectID));
+            spellCast.setComponent(new AffectedTargetsComponent(new int[]{damagedEntity}));
+            entityWorld.removeEntity(damageEntity);
+        }
+    }
+}

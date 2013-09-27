@@ -7,6 +7,7 @@ package amara.game.entitysystem.systems.commands;
 import java.util.Iterator;
 import amara.Queue;
 import amara.engine.client.commands.*;
+import amara.engine.client.commands.casting.*;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.physics.*;
@@ -55,6 +56,15 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     int[] spells = entityWorld.getCurrent().getComponent(entity, SpellsComponent.class).getSpellsEntitiesIDs();
                     int spellEntityID = spells[castSingleTargetSpellCommand.getSpellIndex()];
                     entityWorld.getCurrent().setComponent(entity, new CastSingleTargetSpellComponent(spellEntityID, castSingleTargetSpellCommand.getTargetEntityID()));
+                }
+            }
+            else if(command instanceof CastLinearSkillshotSpellCommand){
+                CastLinearSkillshotSpellCommand castLinearSkillshotSpellCommand = (CastLinearSkillshotSpellCommand) command;
+                for(int entity : entityWorld.getCurrent().getEntitiesWithAll(IsSelectedComponent.class))
+                {
+                    int[] spells = entityWorld.getCurrent().getComponent(entity, SpellsComponent.class).getSpellsEntitiesIDs();
+                    int spellEntityID = spells[castLinearSkillshotSpellCommand.getSpellIndex()];
+                    entityWorld.getCurrent().setComponent(entity, new CastLinearSkillshotSpellComponent(spellEntityID, castLinearSkillshotSpellCommand.getDirection()));
                 }
             }
         }

@@ -4,6 +4,7 @@
  */
 package amara.engine.client.appstates;
 
+import amara.game.entitysystem.systems.effects.triggers.TriggerCollisionEffectSystem;
 import java.util.ArrayList;
 import java.util.Iterator;
 import com.jme3.app.Application;
@@ -19,7 +20,6 @@ import amara.game.entitysystem.systems.effects.*;
 import amara.game.entitysystem.systems.effects.crowdcontrol.*;
 import amara.game.entitysystem.systems.effects.damage.*;
 import amara.game.entitysystem.systems.physics.*;
-import amara.game.entitysystem.systems.skillshots.*;
 import amara.game.entitysystem.systems.spells.casting.*;
 
 /**
@@ -77,7 +77,8 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new CountdownStunSystem());
         addEntitySystem(new ExecutePlayerCommandsSystem(SendPlayerCommandsAppState.TEST_COMMAND_QUEUE));
         addEntitySystem(new CastSingleTargetSpellSystem());
-        addEntitySystem(new CalculateSpellEffectSystem());
+        addEntitySystem(new CastLinearSkillshotSpellSystem());
+        addEntitySystem(new CalculateEffectImpactSystem());
         addEntitySystem(new ApplyPhysicalDamageSystem());
         addEntitySystem(new ApplyMagicDamageSystem());
         addEntitySystem(new ApplyBindingSystem());
@@ -87,9 +88,9 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new DeathSystem());
         IntersectionSystem intersectionSystem = new IntersectionSystem();
         addEntitySystem(new IntersectionAntiGhostSystem(intersectionSystem));
-        addEntitySystem(new SkillDamageSystem(intersectionSystem));
         addEntitySystem(new MovementSystem());
         addEntitySystem(new TransformUpdateSystem());
+        addEntitySystem(new TriggerCollisionEffectSystem(intersectionSystem));
         addEntitySystem(intersectionSystem);
         addEntitySystem(new ModelSystem(entitySceneMap));
         addEntitySystem(new PositionSystem(entitySceneMap));

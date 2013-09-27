@@ -8,9 +8,9 @@ package amara.game.entitysystem.components.effects;
  *
  * @author Carl
  */
-public class ApplyEffectComponent{
+public class ApplyEffectImpactComponent{
 
-    public ApplyEffectComponent(int targetEntityID){
+    public ApplyEffectImpactComponent(int targetEntityID){
         this.targetEntityID = targetEntityID;
     }
     private int targetEntityID;

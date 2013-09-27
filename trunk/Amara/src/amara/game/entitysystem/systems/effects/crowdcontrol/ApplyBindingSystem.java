@@ -17,9 +17,9 @@ public class ApplyBindingSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(ApplyEffectComponent.class, BindingComponent.class)))
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(ApplyEffectImpactComponent.class, BindingComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectComponent.class).getTargetID();
+            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
             BindingComponent bindingComponent = entityWrapper.getComponent(BindingComponent.class);
             IsBindedComponent isBindedComponent = entityWorld.getCurrent().getComponent(targetID, IsBindedComponent.class);
             if((isBindedComponent == null) || (bindingComponent.getDuration() > isBindedComponent.getRemainingDuration())){

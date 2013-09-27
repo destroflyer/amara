@@ -17,9 +17,9 @@ public class ApplyMagicDamageSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(ApplyEffectComponent.class, MagicDamageComponent.class)))
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(ApplyEffectImpactComponent.class, MagicDamageComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectComponent.class).getTargetID();
+            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
             HealthComponent healthComponent = entityWorld.getCurrent().getComponent(targetID, HealthComponent.class);
             if(healthComponent != null){
                 MagicDamageComponent magicDamageComponent = entityWrapper.getComponent(MagicDamageComponent.class);
