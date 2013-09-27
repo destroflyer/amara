@@ -17,9 +17,9 @@ public class ApplyStunSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(ApplyEffectComponent.class, StunComponent.class)))
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(ApplyEffectImpactComponent.class, StunComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectComponent.class).getTargetID();
+            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
             StunComponent stunComponent = entityWrapper.getComponent(StunComponent.class);
             IsStunnedComponent isStunnedComponent = entityWorld.getCurrent().getComponent(targetID, IsStunnedComponent.class);
             if((isStunnedComponent == null) || (stunComponent.getDuration() > isStunnedComponent.getRemainingDuration())){

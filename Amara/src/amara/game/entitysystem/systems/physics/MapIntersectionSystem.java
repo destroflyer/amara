@@ -35,10 +35,10 @@ public final class MapIntersectionSystem implements EntitySystem
     
     public void update(EntityWorld entityWorld, float deltaSeconds)
     {
-        for (EntityWrapper entity : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(HitboxComponent.class, IntersectionFilterComponent.class)))
+        for (EntityWrapper entity : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(HitboxComponent.class, CollisionGroupComponent.class)))
         {
-            IntersectionFilterComponent filterComp = entity.getComponent(IntersectionFilterComponent.class);
-            if(IntersectionFilterComponent.groupsCollide(IntersectionFilterComponent.COLLISION_GROUP_MAP, filterComp.getCollidesWithGroups()))
+            CollisionGroupComponent filterComp = entity.getComponent(CollisionGroupComponent.class);
+            if(CollisionGroupComponent.groupsCollide(CollisionGroupComponent.COLLISION_GROUP_MAP, filterComp.getCollidesWithGroups()))
             {
                 solveIntersections(entity);
             }

@@ -96,9 +96,11 @@ public class CollisionDebugSystem implements EntitySystem{
     
     private void updateGeometryLocation(EntityWorld entityWorld, int entity){
         Spatial geometry = node.getChild(getGeometryName(entity));
-        PositionComponent positionComponent = entityWorld.getCurrent().getComponent(entity, PositionComponent.class);
-        Vector2f location = positionComponent.getPosition();
-        geometry.setLocalTranslation(location.getX(), 0, location.getY());
+        if(geometry != null){
+            PositionComponent positionComponent = entityWorld.getCurrent().getComponent(entity, PositionComponent.class);
+            Vector2f location = positionComponent.getPosition();
+            geometry.setLocalTranslation(location.getX(), 0, location.getY());
+        }
     }
     
     private String getGeometryName(int entity){

@@ -5,7 +5,7 @@
 package amara.game.entitysystem.systems.physics.intersectionHelper;
 
 import amara.game.entitysystem.EntityWorld;
-import amara.game.entitysystem.components.physics.IntersectionFilterComponent;
+import amara.game.entitysystem.components.physics.CollisionGroupComponent;
 import intersections.Filter;
 
 /**
@@ -23,9 +23,9 @@ public class IntersectionFilter extends Filter<Hitbox>
 
     private boolean pass(Integer a, Integer b)
     {
-        IntersectionFilterComponent filterCompA = entityWorld.getCurrent().getComponent(a, IntersectionFilterComponent.class);
+        CollisionGroupComponent filterCompA = entityWorld.getCurrent().getComponent(a, CollisionGroupComponent.class);
         if(filterCompA == null) return true;
-        IntersectionFilterComponent filterCompB = entityWorld.getCurrent().getComponent(b, IntersectionFilterComponent.class);
+        CollisionGroupComponent filterCompB = entityWorld.getCurrent().getComponent(b, CollisionGroupComponent.class);
         if(filterCompB == null) return true;
         return (filterCompA.getCollisionGroups() & filterCompB.getCollidesWithGroups()
               | filterCompB.getCollisionGroups() & filterCompA.getCollidesWithGroups()) != 0;

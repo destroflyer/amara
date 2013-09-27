@@ -5,6 +5,7 @@
 package amara.game.entitysystem.systems.spells.casting;
 
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.spells.*;
 
@@ -20,7 +21,9 @@ public class CastSingleTargetSpellSystem implements EntitySystem{
         {
             CastSingleTargetSpellComponent castSingleTargetSpellComponent = entityWorld.getCurrent().getComponent(entity, CastSingleTargetSpellComponent.class);
             EntityWrapper spellCast = entityWorld.getWrapped(entityWorld.createEntity());
-            spellCast.setComponent(new ApplyCastedSpellComponent(entity, castSingleTargetSpellComponent.getSpellEntityID()));
+            int instantTargetEffectID = entityWorld.getCurrent().getComponent(castSingleTargetSpellComponent.getSpellEntityID(), InstantTargetEffectComponent.class).getEffectEntityID();
+            spellCast.setComponent(new PrepareEffectComponent(instantTargetEffectID));
+            spellCast.setComponent(new EffectSourceComponent(entity));
             spellCast.setComponent(new AffectedTargetsComponent(new int[]{castSingleTargetSpellComponent.getTargetEntityID()}));
             entityWorld.getCurrent().removeComponent(entity, CastSingleTargetSpellComponent.class);
         }

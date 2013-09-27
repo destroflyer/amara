@@ -5,13 +5,18 @@
 package amara.engine.client.appstates;
 
 import java.util.Iterator;
-import com.jme3.math.Vector2f;
+import java.util.List;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
+import com.jme3.math.Vector2f;
 import amara.Queue;
 import amara.engine.client.commands.*;
+import amara.engine.client.commands.casting.*;
 import amara.engine.input.*;
 import amara.engine.input.events.*;
+import amara.game.entitysystem.EntityWrapper;
+import amara.game.entitysystem.components.physics.PositionComponent;
+import amara.game.entitysystem.components.selection.IsSelectedComponent;
 
 /**
  *
@@ -44,16 +49,23 @@ public class SendPlayerCommandsAppState extends BaseAppState{
                         }
                         break;
                     
+                    case Middle:
+                        Vector2f groundLocation = getCursorHoveredGroundLocation();
+                        Iterator<EntityWrapper> selectedEntitiesIterator = getSelectedEntities().iterator();
+                        while(selectedEntitiesIterator.hasNext()){
+                            EntityWrapper selectedEntity = selectedEntitiesIterator.next();
+                            Vector2f direction = groundLocation.subtract(selectedEntity.getComponent(PositionComponent.class).getPosition());
+                            sendCommand(new CastLinearSkillshotSpellCommand(1, direction));
+                        }
+                        break;
+                    
                     case Right:
                         int entityToAttack = getCursorHoveredEntity();
                         if(entityToAttack != -1){
                             sendCommand(new CastSingleTargetSpellCommand(0, entityToAttack));
                         }
                         else{
-                            MapAppState mapAppState = getAppState(MapAppState.class);
-                            CollisionResult groundCollision = mainApplication.getRayCastingResults_Cursor(mapAppState.getMapTerrain().getTerrain()).getClosestCollision();
-                            Vector2f targetLocation = new Vector2f(groundCollision.getContactPoint().getX(), groundCollision.getContactPoint().getZ());
-                            sendCommand(new MoveCommand(targetLocation));
+                            sendCommand(new MoveCommand(getCursorHoveredGroundLocation()));
                         }
                         break;
                 }
@@ -82,5 +94,16 @@ public class SendPlayerCommandsAppState extends BaseAppState{
             }
         }
         return -1;
+    }
+    
+    private Vector2f getCursorHoveredGroundLocation(){
+        MapAppState mapAppState = getAppState(MapAppState.class);
+        CollisionResult groundCollision = mainApplication.getRayCastingResults_Cursor(mapAppState.getMapTerrain().getTerrain()).getClosestCollision();
+        return new Vector2f(groundCollision.getContactPoint().getX(), groundCollision.getContactPoint().getZ());
+    }
+    
+    private List<EntityWrapper> getSelectedEntities(){
+        EntitySystemAppState entitySystemAppState = getAppState(EntitySystemAppState.class);
+        return entitySystemAppState.getEntityWorld().getWrapped(entitySystemAppState.getEntityWorld().getCurrent().getEntitiesWithAll(IsSelectedComponent.class));
     }
 }
