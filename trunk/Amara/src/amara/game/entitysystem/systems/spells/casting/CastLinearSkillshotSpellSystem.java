@@ -39,8 +39,8 @@ public class CastLinearSkillshotSpellSystem implements EntitySystem{
                 //TODO: Load template
                 spawnedObject.setComponent(new ModelComponent("Models/fireball/skin.xml"));
                 spawnedObject.setComponent(new HitboxComponent(new Circle(1)));
+                spawnedObject.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_UNITS));
                 EntityWrapper intersectionRules = entityWorld.getWrapped(spawnInformationEntitiesIDs[i]);
-                intersectionRules.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_UNITS));
                 intersectionRules.setComponent(new AcceptEnemiesComponent());
                 spawnedObject.setComponent(new IntersectionRulesComponent(intersectionRules.getId()));
                 EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
