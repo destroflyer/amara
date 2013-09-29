@@ -31,7 +31,7 @@ public class IntersectionSystem implements EntitySystem, IntersectionInformant
     private Set<Pair<Integer>> entries = new HashSet<Pair<Integer>>();
     private Set<Pair<Integer>> repeaters = new HashSet<Pair<Integer>>();
     private Set<Pair<Integer>> leavers = new HashSet<Pair<Integer>>();
-    private IntersectionTracker tracker = new IntersectionTracker();
+    private IntersectionTracker<Pair<Integer>> tracker = new IntersectionTracker<Pair<Integer>>();
     
     public void update(EntityWorld entityWorld, float deltaSeconds)
     {
@@ -39,20 +39,20 @@ public class IntersectionSystem implements EntitySystem, IntersectionInformant
         
         IntersectionFilter filter = new IntersectionFilter(entityWorld);
                 
-        tracker.next(sap.getAllPairs(filter));
-        entries = EntitiesFromHitboxes(tracker.getEntries());
-        repeaters = EntitiesFromHitboxes(tracker.getRepeaters());
-        leavers = EntitiesFromHitboxes(tracker.getLeavers());
+        tracker.next(EntitiesFromHitboxes(sap.getAllPairs(filter)));
+        entries = tracker.getEntries();
+        repeaters = tracker.getRepeaters();
+        leavers = tracker.getLeavers();
     }
     
-    private Set<Pair<Integer>> EntitiesFromHitboxes(Set<Pair<Hitbox>> hitboxes)
+    private HashSet<Pair<Integer>> EntitiesFromHitboxes(Set<Pair<Hitbox>> hitboxes)
     {
         HashSet<Pair<Integer>> set = new HashSet<Pair<Integer>>(hitboxes.size());
         for(Pair<Hitbox> pair: hitboxes)
         {
             set.add(new Pair<Integer>(pair.getA().getId(), pair.getB().getId()));
         }
-        return Collections.unmodifiableSet(set);
+        return set;
     }
     
     private void updateHitboxes(EntityWorld entityWorld)
