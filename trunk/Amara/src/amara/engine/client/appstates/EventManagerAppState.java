@@ -6,9 +6,8 @@ package amara.engine.client.appstates;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
-import com.jme3.input.MouseInput;
-import com.jme3.input.controls.ActionListener;
-import com.jme3.input.controls.MouseButtonTrigger;
+import com.jme3.input.*;
+import com.jme3.input.controls.*;
 import com.jme3.math.Vector2f;
 import amara.Queue;
 import amara.engine.input.*;
@@ -23,6 +22,7 @@ public class EventManagerAppState extends BaseAppState implements ActionListener
     public EventManagerAppState(){
         
     }
+    private static final String ACTION_NAME_PREFIX_KEY_PRESSED = "key_pressed_";
     private Queue<Event> eventQueue = new Queue<Event>();
     
     @Override
@@ -35,6 +35,16 @@ public class EventManagerAppState extends BaseAppState implements ActionListener
         mainApplication.getInputManager().addListener(this, new String[]{
             "mouse_click_left","mouse_click_middle","mouse_click_right"
         });
+        registerKeys(new int[]{KeyInput.KEY_Q, KeyInput.KEY_W, KeyInput.KEY_E, KeyInput.KEY_R});
+    }
+    
+    private void registerKeys(int[] keyCodes){
+        String[] actionNames = new String[keyCodes.length];
+        for(int i=0;i<keyCodes.length;i++){
+            actionNames[i] = (ACTION_NAME_PREFIX_KEY_PRESSED + keyCodes[i]);
+            mainApplication.getInputManager().addMapping(actionNames[i], new KeyTrigger(keyCodes[i]));
+        }
+        mainApplication.getInputManager().addListener(this, actionNames);
     }
 
     @Override
@@ -48,6 +58,7 @@ public class EventManagerAppState extends BaseAppState implements ActionListener
         super.update(lastTimePerFrame);
         mainApplication.enqueueTask(new Runnable(){
 
+            @Override
             public void run(){
                 eventQueue.clear();
             }
@@ -64,6 +75,10 @@ public class EventManagerAppState extends BaseAppState implements ActionListener
         }
         else if(actionName.equals("mouse_click_right") && value){
             eventQueue.add(new MouseClickEvent(MouseClickEvent.Button.Right, getMousePosition()));
+        }
+        else if(actionName.startsWith(ACTION_NAME_PREFIX_KEY_PRESSED) && value){
+            int keyCode = Integer.parseInt(actionName.substring(ACTION_NAME_PREFIX_KEY_PRESSED.length()));
+            eventQueue.add(new KeyPressedEvent(keyCode));
         }
     }
     

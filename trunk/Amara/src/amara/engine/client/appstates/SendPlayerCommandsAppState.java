@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
+import com.jme3.input.KeyInput;
 import com.jme3.math.Vector2f;
 import amara.Queue;
 import amara.engine.client.commands.*;
@@ -15,8 +16,10 @@ import amara.engine.client.commands.casting.*;
 import amara.engine.input.*;
 import amara.engine.input.events.*;
 import amara.game.entitysystem.EntityWrapper;
-import amara.game.entitysystem.components.physics.PositionComponent;
-import amara.game.entitysystem.components.selection.IsSelectedComponent;
+import amara.game.entitysystem.components.physics.*;
+import amara.game.entitysystem.components.selection.*;
+import amara.game.entitysystem.components.spells.*;
+import amara.game.entitysystem.components.units.*;
 
 /**
  *
@@ -49,24 +52,31 @@ public class SendPlayerCommandsAppState extends BaseAppState{
                         }
                         break;
                     
-                    case Middle:
-                        Vector2f groundLocation = getCursorHoveredGroundLocation();
-                        Iterator<EntityWrapper> selectedEntitiesIterator = getSelectedEntities().iterator();
-                        while(selectedEntitiesIterator.hasNext()){
-                            EntityWrapper selectedEntity = selectedEntitiesIterator.next();
-                            Vector2f direction = groundLocation.subtract(selectedEntity.getComponent(PositionComponent.class).getPosition());
-                            sendCommand(new CastLinearSkillshotSpellCommand(1, direction));
-                        }
-                        break;
-                    
                     case Right:
                         int entityToAttack = getCursorHoveredEntity();
-                        if(entityToAttack != -1){
-                            sendCommand(new CastSingleTargetSpellCommand(0, entityToAttack));
-                        }
-                        else{
+                        if(entityToAttack == -1){
                             sendCommand(new MoveCommand(getCursorHoveredGroundLocation()));
                         }
+                        break;
+                }
+            }
+            else if(event instanceof KeyPressedEvent){
+                KeyPressedEvent keyPressedEvent = (KeyPressedEvent) event;
+                switch(keyPressedEvent.getKeyCode()){
+                    case KeyInput.KEY_Q:
+                        castSpell(0);
+                        break;
+                    
+                    case KeyInput.KEY_W:
+                        castSpell(1);
+                        break;
+                    
+                    case KeyInput.KEY_E:
+                        castSpell(2);
+                        break;
+                    
+                    case KeyInput.KEY_R:
+                        castSpell(3);
                         break;
                 }
             }
@@ -81,6 +91,31 @@ public class SendPlayerCommandsAppState extends BaseAppState{
     
     private void sendCommand(Command command){
         TEST_COMMAND_QUEUE.add(command);
+    }
+    
+    private void castSpell(int spellIndex){
+        EntitySystemAppState entitySystemAppState = getAppState(EntitySystemAppState.class);
+        int cursorHoveredEntity = getCursorHoveredEntity();
+        Vector2f groundLocation = getCursorHoveredGroundLocation();
+        Iterator<EntityWrapper> selectedEntitiesIterator = getSelectedEntities().iterator();
+        while(selectedEntitiesIterator.hasNext()){
+            EntityWrapper selectedEntity = selectedEntitiesIterator.next();
+            int[] spells = selectedEntity.getComponent(SpellsComponent.class).getSpellsEntitiesIDs();
+            if(spellIndex < spells.length){
+                int spellEntity = spells[spellIndex];
+                CastTypeComponent.CastType castType = entitySystemAppState.getEntityWorld().getCurrent().getComponent(spellEntity, CastTypeComponent.class).getCastType();
+                switch(castType){
+                    case SINGLE_TARGET:
+                        sendCommand(new CastSingleTargetSpellCommand(selectedEntity.getId(), spellIndex, cursorHoveredEntity));
+                        break;
+
+                    case SKILLSHOT:
+                        Vector2f direction = groundLocation.subtract(selectedEntity.getComponent(PositionComponent.class).getPosition());
+                        sendCommand(new CastLinearSkillshotSpellCommand(selectedEntity.getId(), spellIndex, direction));
+                        break;
+                }
+            }
+        }
     }
     
     private int getCursorHoveredEntity(){
