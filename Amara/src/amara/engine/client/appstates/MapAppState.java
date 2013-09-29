@@ -104,6 +104,7 @@ public class MapAppState extends BaseAppState{
         effect1.setComponent(new SilenceComponent(0.5f));
         spell1.setComponent(new InstantTargetEffectComponent(effect1.getId()));
         entity1.setComponent(new SpellsComponent(new int[]{spell1.getId()}));
+        spell1.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
         //Entity #2 - Spells
         //Spell #1
         EntityWrapper spell2 = entityWorld.getWrapped(entityWorld.createEntity());
@@ -114,6 +115,7 @@ public class MapAppState extends BaseAppState{
         effect2.setComponent(new ScalingAbilityPowerMagicDamageComponent(0.7f));
         effect2.setComponent(new StunComponent(1.5f));
         spell2.setComponent(new InstantTargetEffectComponent(effect2.getId()));
+        spell2.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
         //Spell #2
         EntityWrapper spell3 = entityWorld.getWrapped(entityWorld.createEntity());
         spell3.setComponent(new NameComponent("Fireball"));
@@ -123,6 +125,7 @@ public class MapAppState extends BaseAppState{
         spawnInformation1.setComponent(new RelativeSpawnPositionComponent(new Vector2f(0, 0)));
         spawnInformation1.setComponent(new SpawnMovementSpeedComponent(4));
         spell3.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation1.getId()}));
+        spell3.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SKILLSHOT));
         entity2.setComponent(new SpellsComponent(new int[]{spell2.getId(), spell3.getId()}));
         //Field of test units
         for(int x=0;x<5;x++){

@@ -13,12 +13,18 @@ import amara.engine.client.commands.Command;
  */
 public class CastLinearSkillshotSpellCommand extends Command{
 
-    public CastLinearSkillshotSpellCommand(int spellIndex, Vector2f direction){
+    public CastLinearSkillshotSpellCommand(int entity, int spellIndex, Vector2f direction){
+        this.entity = entity;
         this.spellIndex = spellIndex;
         this.direction = direction;
     }
+    private int entity;
     private int spellIndex;
     private Vector2f direction;
+
+    public int getEntity(){
+        return entity;
+    }
 
     public int getSpellIndex(){
         return spellIndex;
