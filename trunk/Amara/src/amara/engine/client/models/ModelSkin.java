@@ -14,7 +14,6 @@ import com.jme3.material.RenderState.FaceCullMode;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.Util;
 import amara.engine.JMonkeyUtil;
@@ -80,6 +79,7 @@ public class ModelSkin{
         Spatial spatial = loadModel();
         loadMaterial(spatial);
         loadPosition(spatial);
+        applyGeometryInformation(spatial);
         return spatial;
     }
     
@@ -87,25 +87,7 @@ public class ModelSkin{
         String modelPath = getModelFilePath();
         Spatial spatial = MaterialFactory.getAssetManager().loadModel(modelPath);
         spatial.setLocalScale(modelScale);
-        applyModelScalePhysicsControl(spatial);
         return spatial;
-    }
-    
-    private void applyModelScalePhysicsControl(Spatial spatial){
-        if(spatial instanceof Node){
-            Node node = (Node) spatial;
-            List<Spatial> children = node.getChildren();
-            for(int i=0;i<children.size();i++){
-                applyModelScalePhysicsControl(children.get(i));
-            }
-        }
-        else if(spatial instanceof Geometry){
-            Geometry geometry = (Geometry) spatial;
-            RigidBodyControl rigidBodyControl = geometry.getControl(RigidBodyControl.class);
-            if(rigidBodyControl != null){
-                rigidBodyControl.getCollisionShape().setScale(new Vector3f(modelScale, modelScale, modelScale));
-            }
-        }
     }
     
     private String getModelFilePath(){
@@ -153,13 +135,6 @@ public class ModelSkin{
                 }
             }
         }
-        LinkedList<Geometry> geometryChilds = JMonkeyUtil.getAllGeometryChilds(spatial);
-        for(int i=0;i<geometryChilds.size();i++){
-            Geometry geometryChild = geometryChilds.get(i);
-            Material material = geometryChild.getMaterial();
-            MaterialFactory.generateAmbientColor(material, materialAmbient);
-            material.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
-        }
     }
     
     private String getResourcesFilePath(){
@@ -178,6 +153,21 @@ public class ModelSkin{
                 float[] direction = Util.parseToFloatArray(directionElement.getText().split(","));
                 JMonkeyUtil.setLocalRotation(spatial, new Vector3f(direction[0], direction[1], direction[2]));
             }
+        }
+    }
+    
+    private void applyGeometryInformation(Spatial spatial){
+        LinkedList<Geometry> geometryChilds = JMonkeyUtil.getAllGeometryChilds(spatial);
+        for(int i=0;i<geometryChilds.size();i++){
+            Geometry geometry = geometryChilds.get(i);
+            Material material = geometry.getMaterial();
+            MaterialFactory.generateAmbientColor(material, materialAmbient);
+            material.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
+            RigidBodyControl rigidBodyControl = geometry.getControl(RigidBodyControl.class);
+            if(rigidBodyControl != null){
+                rigidBodyControl.getCollisionShape().setScale(new Vector3f(modelScale, modelScale, modelScale));
+            }
+            geometry.setUserData("layer", 2);
         }
     }
     

@@ -41,7 +41,9 @@ public class MapAppState extends BaseAppState{
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
-        mapTerrain = new MapTerrain(mapName);
+        int mapWidth = 100;
+        int mapHeight = 100;
+        mapTerrain = new MapTerrain(mapName, mapWidth, mapHeight);
         mainApplication.getRootNode().attachChild(mapTerrain.getTerrain());
         EntitySystemAppState entitySystemAppState = getAppState(EntitySystemAppState.class);
         entitySystemAppState.addEntitySystem(new ModelYAdjustingSystem(entitySystemAppState.getEntitySceneMap(), mapTerrain));
@@ -53,7 +55,7 @@ public class MapAppState extends BaseAppState{
         obstacles.add(new SimpleConvex(new Vector2D(0, 100), new Vector2D(0, 0)));
         obstacles.add(new Rectangle(10, 7, 5, 8));
         obstacles.add(new Circle(30, 25, 3));
-        entitySystemAppState.addEntitySystem(new MapIntersectionSystem(100, 100, obstacles));
+        entitySystemAppState.addEntitySystem(new MapIntersectionSystem(mapWidth, mapHeight, obstacles));
         //Test-Entities
         EntityWorld entityWorld = entitySystemAppState.getEntityWorld();
         //Entity #1
@@ -145,7 +147,7 @@ public class MapAppState extends BaseAppState{
         }
         //Debug View
         Node collisionDebugNode = new Node();
-        collisionDebugNode.setLocalTranslation(0, 20, 0);
+        collisionDebugNode.setLocalTranslation(0, 1, 0);
         mainApplication.getRootNode().attachChild(collisionDebugNode);
         entitySystemAppState.addEntitySystem(new CollisionDebugSystem(collisionDebugNode, obstacles));
     }

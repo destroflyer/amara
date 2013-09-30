@@ -34,8 +34,8 @@ public class CurrentHealthBarSystem extends SimpleVisualAttachmentSystem{
         material.getAdditionalRenderState().setDepthTest(false);
         geometry.setMaterial(material);
         geometry.addControl(new BillboardControl());
-        geometry.setUserData("layer", 3);
         geometry.setLocalTranslation(MaximumHealthBarSystem.BAR_LOCATION);
+        geometry.setUserData("layer", 5);
         return geometry;
     }
 }

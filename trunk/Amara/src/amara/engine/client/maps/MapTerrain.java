@@ -19,18 +19,21 @@ import amara.engine.client.MaterialFactory;
  */
 public class MapTerrain{
 
-    public MapTerrain(String mapName){
-        loadHeightmap(mapName);
+    public MapTerrain(String mapName, int mapWidth, int mapHeight){
+        loadHeightmap(mapName, mapWidth, mapHeight);
         loadMaterial(mapName);
     }
     private TerrainQuad terrain;
 
-    private void loadHeightmap(String mapName){
+    private void loadHeightmap(String mapName, int mapWidth, int mapHeight){
         Texture heightMapImage = MaterialFactory.getAssetManager().loadTexture("Maps/" + mapName + "/heightmap.png");
-        AbstractHeightMap heightmap = new ImageBasedHeightMap(heightMapImage.getImage(), 0.8f);
+        AbstractHeightMap heightmap = new ImageBasedHeightMap(heightMapImage.getImage(), 0.15f);
         heightmap.load();
-        terrain = new TerrainQuad("terrain", 65, heightmap.getSize() + 1, heightmap.getScaledHeightMap());
-        terrain.setLocalTranslation((terrain.getTotalSize() / 2), 0, (terrain.getTotalSize() / 2));
+        terrain = new TerrainQuad("terrain", 20, heightmap.getSize() + 1, heightmap.getScaledHeightMap());
+        float scaleX = (((float) mapWidth) / terrain.getTotalSize());
+        float scaleZ = (((float) mapHeight) / terrain.getTotalSize());
+        terrain.setLocalScale(scaleX, 1, scaleZ);
+        terrain.setLocalTranslation((mapWidth / 2), 0, (mapHeight / 2));
     }
     
     private void loadMaterial(String mapName){
