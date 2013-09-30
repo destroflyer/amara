@@ -32,8 +32,8 @@ public class SilenceVisualisationSystem extends SimpleVisualAttachmentSystem{
         material.getAdditionalRenderState().setDepthTest(false);
         geometry.setMaterial(material);
         geometry.addControl(new BillboardControl());
-        geometry.setUserData("layer", 1);
         geometry.setLocalTranslation(0, 2, 0);
+        geometry.setUserData("layer", 3);
         return geometry;
     }
 }

@@ -50,6 +50,7 @@ public class SelectionMarkerSystem implements EntitySystem{
         material.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
         material.getAdditionalRenderState().setDepthTest(false);
         selectionMarker.setMaterial(material);
+        selectionMarker.setUserData("layer", 1);
         return selectionMarker;
     }
 }

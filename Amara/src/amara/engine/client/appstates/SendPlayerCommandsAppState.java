@@ -55,7 +55,10 @@ public class SendPlayerCommandsAppState extends BaseAppState{
                     case Right:
                         int entityToAttack = getCursorHoveredEntity();
                         if(entityToAttack == -1){
-                            sendCommand(new MoveCommand(getCursorHoveredGroundLocation()));
+                            Vector2f groundLocation = getCursorHoveredGroundLocation();
+                            if(groundLocation != null){
+                                sendCommand(new MoveCommand(groundLocation));
+                            }
                         }
                         break;
                 }
@@ -106,12 +109,16 @@ public class SendPlayerCommandsAppState extends BaseAppState{
                 CastTypeComponent.CastType castType = entitySystemAppState.getEntityWorld().getCurrent().getComponent(spellEntity, CastTypeComponent.class).getCastType();
                 switch(castType){
                     case SINGLE_TARGET:
-                        sendCommand(new CastSingleTargetSpellCommand(selectedEntity.getId(), spellIndex, cursorHoveredEntity));
+                        if(cursorHoveredEntity != -1){
+                            sendCommand(new CastSingleTargetSpellCommand(selectedEntity.getId(), spellIndex, cursorHoveredEntity));
+                        }
                         break;
 
                     case SKILLSHOT:
-                        Vector2f direction = groundLocation.subtract(selectedEntity.getComponent(PositionComponent.class).getPosition());
-                        sendCommand(new CastLinearSkillshotSpellCommand(selectedEntity.getId(), spellIndex, direction));
+                        if(groundLocation != null){
+                            Vector2f direction = groundLocation.subtract(selectedEntity.getComponent(PositionComponent.class).getPosition());
+                            sendCommand(new CastLinearSkillshotSpellCommand(selectedEntity.getId(), spellIndex, direction));
+                        }
                         break;
                 }
             }
@@ -134,7 +141,10 @@ public class SendPlayerCommandsAppState extends BaseAppState{
     private Vector2f getCursorHoveredGroundLocation(){
         MapAppState mapAppState = getAppState(MapAppState.class);
         CollisionResult groundCollision = mainApplication.getRayCastingResults_Cursor(mapAppState.getMapTerrain().getTerrain()).getClosestCollision();
-        return new Vector2f(groundCollision.getContactPoint().getX(), groundCollision.getContactPoint().getZ());
+        if(groundCollision != null){
+            return new Vector2f(groundCollision.getContactPoint().getX(), groundCollision.getContactPoint().getZ());
+        }
+        return null;
     }
     
     private List<EntityWrapper> getSelectedEntities(){

@@ -46,7 +46,7 @@ public class MainApplication extends SimpleApplication{
         stateManager.attach(new MapAppState("testmap"));
         stateManager.attach(new IngameCameraAppState());
         //Debug Camera
-        cam.setLocation(new Vector3f(30, 52, -18));
+        cam.setLocation(new Vector3f(22, 34, -10));
         cam.lookAtDirection(new Vector3f(0, -1.3f, 1), Vector3f.UNIT_Y);
     }
 
