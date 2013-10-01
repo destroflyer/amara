@@ -4,7 +4,6 @@
  */
 package amara.engine.client.appstates;
 
-import amara.game.entitysystem.systems.effects.triggers.TriggerCollisionEffectSystem;
 import java.util.ArrayList;
 import java.util.Iterator;
 import com.jme3.app.Application;
@@ -19,7 +18,9 @@ import amara.game.entitysystem.systems.commands.*;
 import amara.game.entitysystem.systems.effects.*;
 import amara.game.entitysystem.systems.effects.crowdcontrol.*;
 import amara.game.entitysystem.systems.effects.damage.*;
+import amara.game.entitysystem.systems.effects.triggers.*;
 import amara.game.entitysystem.systems.physics.*;
+import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.*;
 
 /**
@@ -72,10 +73,12 @@ public class EntitySystemAppState extends BaseAppState{
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(entitiesNode);
         addEntitySystem(new UpdateAttributesSystem());
+        addEntitySystem(new CountdownCooldownSystem());
         addEntitySystem(new CountdownBindingSystem());
         addEntitySystem(new CountdownSilenceSystem());
         addEntitySystem(new CountdownStunSystem());
         addEntitySystem(new ExecutePlayerCommandsSystem(SendPlayerCommandsAppState.TEST_COMMAND_QUEUE));
+        addEntitySystem(new SetCooldownOnCastingSystem());
         addEntitySystem(new CastSingleTargetSpellSystem());
         addEntitySystem(new CastLinearSkillshotSpellSystem());
         addEntitySystem(new CalculateEffectImpactSystem());

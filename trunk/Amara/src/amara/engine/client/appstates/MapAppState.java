@@ -128,6 +128,7 @@ public class MapAppState extends BaseAppState{
         spawnInformation1.setComponent(new SpawnMovementSpeedComponent(4));
         spell3.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation1.getId()}));
         spell3.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SKILLSHOT));
+        spell3.setComponent(new CooldownComponent(1));
         entity2.setComponent(new SpellsComponent(new int[]{spell2.getId(), spell3.getId()}));
         //Field of test units
         for(int x=0;x<5;x++){
