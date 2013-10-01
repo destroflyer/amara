@@ -13,6 +13,7 @@ import com.jme3.scene.Spatial;
 import amara.engine.client.systems.visualisation.*;
 import amara.engine.client.systems.visualisation.effects.crodwcontrol.*;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.systems.aggro.AggroSystem;
 import amara.game.entitysystem.systems.attributes.*;
 import amara.game.entitysystem.systems.commands.*;
 import amara.game.entitysystem.systems.effects.*;
@@ -95,6 +96,7 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new TransformUpdateSystem());
         addEntitySystem(new TriggerCollisionEffectSystem(intersectionSystem));
         addEntitySystem(intersectionSystem);
+        addEntitySystem(new AggroSystem());
         addEntitySystem(new ModelSystem(entitySceneMap));
         addEntitySystem(new PositionSystem(entitySceneMap));
         addEntitySystem(new DirectionSystem(entitySceneMap));
