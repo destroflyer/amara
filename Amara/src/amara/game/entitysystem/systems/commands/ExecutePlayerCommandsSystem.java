@@ -12,7 +12,8 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.selection.*;
-import amara.game.entitysystem.components.units.SpellsComponent;
+import amara.game.entitysystem.components.spells.*;
+import amara.game.entitysystem.components.units.*;
 
 /**
  *
@@ -51,13 +52,17 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             }
             else if(command instanceof CastSingleTargetSpellCommand){
                 CastSingleTargetSpellCommand castSingleTargetSpellCommand = (CastSingleTargetSpellCommand) command;
-                int[] spells = entityWorld.getCurrent().getComponent(castSingleTargetSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs();
-                entityWorld.getCurrent().setComponent(castSingleTargetSpellCommand.getEntity(), new CastSingleTargetSpellComponent(spells[castSingleTargetSpellCommand.getSpellIndex()], castSingleTargetSpellCommand.getTargetEntityID()));
+                int spell = entityWorld.getCurrent().getComponent(castSingleTargetSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castSingleTargetSpellCommand.getSpellIndex()];
+                if(entityWorld.getCurrent().getComponent(spell, RemainingCooldownComponent.class) == null){
+                    entityWorld.getCurrent().setComponent(castSingleTargetSpellCommand.getEntity(), new CastSingleTargetSpellComponent(spell, castSingleTargetSpellCommand.getTargetEntityID()));
+                }
             }
             else if(command instanceof CastLinearSkillshotSpellCommand){
                 CastLinearSkillshotSpellCommand castLinearSkillshotSpellCommand = (CastLinearSkillshotSpellCommand) command;
-                int[] spells = entityWorld.getCurrent().getComponent(castLinearSkillshotSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs();
-                entityWorld.getCurrent().setComponent(castLinearSkillshotSpellCommand.getEntity(), new CastLinearSkillshotSpellComponent(spells[castLinearSkillshotSpellCommand.getSpellIndex()], castLinearSkillshotSpellCommand.getDirection()));
+                int spell = entityWorld.getCurrent().getComponent(castLinearSkillshotSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castLinearSkillshotSpellCommand.getSpellIndex()];
+                if(entityWorld.getCurrent().getComponent(spell, RemainingCooldownComponent.class) == null){
+                    entityWorld.getCurrent().setComponent(castLinearSkillshotSpellCommand.getEntity(), new CastLinearSkillshotSpellComponent(spell, castLinearSkillshotSpellCommand.getDirection()));
+                }
             }
         }
     }
