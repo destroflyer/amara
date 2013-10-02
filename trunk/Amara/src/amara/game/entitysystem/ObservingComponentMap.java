@@ -43,11 +43,7 @@ class ObservingComponentMap extends SimpleComponentMap
 
     public void onComponentRemoved(ObservingComponentMap entityMap, int entity, Object component)
     {
-        if(added.removeComponent(entity, component.getClass()) != null)
-        {
-            changed.setComponent(entity, component);
-        }
-        else
+        if(added.removeComponent(entity, component.getClass()) == null)
         {
             changed.removeComponent(entity, component.getClass());
             removed.setComponent(entity, component);
