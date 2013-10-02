@@ -48,11 +48,13 @@ public class CastLinearSkillshotSpellSystem implements EntitySystem{
                 effect.setComponent(new StunComponent(0.5f));
                 spawnedObject.setComponent(new CollisionTriggerEffectComponent(effect.getId()));
                 
+                spawnedObject.setComponent(new CastSourceComponent(entityWrapper.getId()));
+                Vector2f position = entityWrapper.getComponent(PositionComponent.class).getPosition().clone();
                 RelativeSpawnPositionComponent relativeSpawnPositionComponent = spawnInformation.getComponent(RelativeSpawnPositionComponent.class);
                 if(relativeSpawnPositionComponent != null){
-                    Vector2f position = entityWrapper.getComponent(PositionComponent.class).getPosition().add(relativeSpawnPositionComponent.getPosition());
-                    spawnedObject.setComponent(new PositionComponent(position));
+                    position.addLocal(relativeSpawnPositionComponent.getPosition());
                 }
+                spawnedObject.setComponent(new PositionComponent(position));
                 spawnedObject.setComponent(new DirectionComponent(direction));
                 float spawnMovementSpeed = spawnInformation.getComponent(SpawnMovementSpeedComponent.class).getSpeed();
                 spawnedObject.setComponent(new MovementSpeedComponent(direction.normalize().multLocal(spawnMovementSpeed)));

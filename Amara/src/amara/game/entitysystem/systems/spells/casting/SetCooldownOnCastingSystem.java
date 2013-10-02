@@ -29,7 +29,7 @@ public class SetCooldownOnCastingSystem implements EntitySystem{
         }
     }
     
-    private void setOnCooldown(EntityWorld entityWorld, int spellEntityID){
+    public static void setOnCooldown(EntityWorld entityWorld, int spellEntityID){
         CooldownComponent cooldownComponent = entityWorld.getCurrent().getComponent(spellEntityID, CooldownComponent.class);
         if(cooldownComponent != null){
             entityWorld.getCurrent().setComponent(spellEntityID, new RemainingCooldownComponent(cooldownComponent.getDuration()));
