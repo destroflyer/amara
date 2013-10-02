@@ -6,6 +6,7 @@ package amara.game.entitysystem.systems.effects.triggers;
 
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
+import amara.game.entitysystem.components.spawns.CastSourceComponent;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.effects.*;
 import amara.game.entitysystem.components.units.intersections.*;
@@ -53,10 +54,14 @@ public class TriggerCollisionEffectSystem implements EntitySystem{
             triggerEffect = true;
         }
         if(triggerEffect){
-            EntityWrapper spellCast = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
             int effectID = entityWorld.getCurrent().getComponent(damageEntity, CollisionTriggerEffectComponent.class).getEffectEntityID();
-            spellCast.setComponent(new PrepareEffectComponent(effectID));
-            spellCast.setComponent(new AffectedTargetsComponent(new int[]{damagedEntity}));
+            effectCast.setComponent(new PrepareEffectComponent(effectID));
+            CastSourceComponent castSourceComponent = entityWorld.getCurrent().getComponent(damageEntity, CastSourceComponent.class);
+            if(castSourceComponent != null){
+                effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntitiyID()));
+            }
+            effectCast.setComponent(new AffectedTargetsComponent(new int[]{damagedEntity}));
             entityWorld.removeEntity(damageEntity);
         }
     }

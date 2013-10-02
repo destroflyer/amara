@@ -130,6 +130,16 @@ public class MapAppState extends BaseAppState{
         spell3.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SKILLSHOT));
         spell3.setComponent(new CooldownComponent(1));
         entity2.setComponent(new SpellsComponent(new int[]{spell2.getId(), spell3.getId()}));
+        //Autoattack #1
+        EntityWrapper autoAttack1 = entityWorld.getWrapped(entityWorld.createEntity());
+        EntityWrapper spawnInformation2 = entityWorld.getWrapped(entityWorld.createEntity());
+        spawnInformation2.setComponent(new SpawnTemplateComponent("fireball"));
+        spawnInformation2.setComponent(new SpawnMovementSpeedComponent(15));
+        autoAttack1.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation2.getId()}));
+        autoAttack1.setComponent(new CooldownComponent(1));
+        autoAttack1.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
+        entity2.setComponent(new AutoAttackComponent(autoAttack1.getId()));
+        entity2.setComponent(new AutoAggroComponent(9));
         //Field of test units
         for(int x=0;x<5;x++){
             for(int y=0;y<4;y++){
