@@ -47,9 +47,14 @@ public class AggroSystem implements EntitySystem
     
     private boolean isLegalTarget(EntityWorld world, int agressor, int target)
     {
-        if(world.getCurrent().getComponent(agressor, PositionComponent.class).getPosition().distanceSquared(world.getCurrent().getComponent(target, PositionComponent.class).getPosition()) <= world.getCurrent().getComponent(agressor, AutoAggroComponent.class).getRange())
+        float range = world.getCurrent().getComponent(agressor, AutoAggroComponent.class).getRange();
+        if(world.getCurrent().getComponent(agressor, PositionComponent.class).getPosition().distanceSquared(world.getCurrent().getComponent(target, PositionComponent.class).getPosition()) <= range * range)
         {
-            return true;
+            TeamComponent teamA = world.getCurrent().getComponent(agressor, TeamComponent.class);
+            if(teamA == null) return true;
+            TeamComponent teamB = world.getCurrent().getComponent(target, TeamComponent.class);
+            if(teamB == null) return true;
+            return teamA.getTeamEntityID() != teamB.getTeamEntityID();
         }
         return false;
     }
