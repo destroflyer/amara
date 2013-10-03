@@ -38,31 +38,33 @@ public class TriggerCollisionEffectSystem implements EntitySystem{
     
     private void applyDamage(EntityWorld entityWorld, int damageEntity, int damagedEntity){
         EntityWrapper intersectionRules = entityWorld.getWrapped(entityWorld.getCurrent().getComponent(damageEntity, IntersectionRulesComponent.class).getRulesEntityID());
-        boolean triggerEffect;
-        TeamComponent damageTeamComponent = entityWorld.getCurrent().getComponent(damageEntity, TeamComponent.class);
-        TeamComponent damagedTeamComponent = entityWorld.getCurrent().getComponent(damagedEntity, TeamComponent.class);
-        if((damageTeamComponent != null) && (damagedTeamComponent != null)){
-            triggerEffect = false;
-            if(intersectionRules.getComponent(AcceptAlliesComponent.class) != null){
-                triggerEffect |= (damageTeamComponent.getTeamEntityID() == damagedTeamComponent.getTeamEntityID());
+        if(entityWorld.getCurrent().hasComponent(damagedEntity, IsTargetableComponent.class)){
+            boolean triggerEffect;
+            TeamComponent damageTeamComponent = entityWorld.getCurrent().getComponent(damageEntity, TeamComponent.class);
+            TeamComponent damagedTeamComponent = entityWorld.getCurrent().getComponent(damagedEntity, TeamComponent.class);
+            if((damageTeamComponent != null) && (damagedTeamComponent != null)){
+                triggerEffect = false;
+                if(intersectionRules.getComponent(AcceptAlliesComponent.class) != null){
+                    triggerEffect |= (damageTeamComponent.getTeamEntityID() == damagedTeamComponent.getTeamEntityID());
+                }
+                if(intersectionRules.getComponent(AcceptEnemiesComponent.class) != null){
+                    triggerEffect |= (damageTeamComponent.getTeamEntityID() != damagedTeamComponent.getTeamEntityID());
+                }
             }
-            if(intersectionRules.getComponent(AcceptEnemiesComponent.class) != null){
-                triggerEffect |= (damageTeamComponent.getTeamEntityID() != damagedTeamComponent.getTeamEntityID());
+            else{
+                triggerEffect = true;
             }
-        }
-        else{
-            triggerEffect = true;
-        }
-        if(triggerEffect){
-            EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
-            int effectID = entityWorld.getCurrent().getComponent(damageEntity, CollisionTriggerEffectComponent.class).getEffectEntityID();
-            effectCast.setComponent(new PrepareEffectComponent(effectID));
-            CastSourceComponent castSourceComponent = entityWorld.getCurrent().getComponent(damageEntity, CastSourceComponent.class);
-            if(castSourceComponent != null){
-                effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntitiyID()));
+            if(triggerEffect){
+                EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
+                int effectID = entityWorld.getCurrent().getComponent(damageEntity, CollisionTriggerEffectComponent.class).getEffectEntityID();
+                effectCast.setComponent(new PrepareEffectComponent(effectID));
+                CastSourceComponent castSourceComponent = entityWorld.getCurrent().getComponent(damageEntity, CastSourceComponent.class);
+                if(castSourceComponent != null){
+                    effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntitiyID()));
+                }
+                effectCast.setComponent(new AffectedTargetsComponent(new int[]{damagedEntity}));
+                entityWorld.removeEntity(damageEntity);
             }
-            effectCast.setComponent(new AffectedTargetsComponent(new int[]{damagedEntity}));
-            entityWorld.removeEntity(damageEntity);
         }
     }
 }

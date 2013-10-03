@@ -70,6 +70,7 @@ public class MapAppState extends BaseAppState{
         entity1.setComponent(new IsSelectableComponent());
         entity1.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
         entity1.setComponent(new TeamComponent(1));
+        entity1.setComponent(new IsTargetableComponent());
         //Entity #2
         EntityWrapper entity2 = entityWorld.getWrapped(entityWorld.createEntity());
         entity2.setComponent(new ModelComponent("Models/wizard/skin.xml"));
@@ -84,6 +85,7 @@ public class MapAppState extends BaseAppState{
         entity2.setComponent(new IsSelectedComponent());
         entity2.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
         entity2.setComponent(new TeamComponent(2));
+        entity2.setComponent(new IsTargetableComponent());
         //Entity #2 - Attributes
         entity2.setComponent(new BaseMaximumHealthComponent(500));
         entity2.setComponent(new BaseAttackDamageComponent(60));
@@ -152,6 +154,7 @@ public class MapAppState extends BaseAppState{
                 entity.setComponent(new AntiGhostComponent());
                 entity.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
                 entity.setComponent(new TeamComponent(1));
+                entity.setComponent(new IsTargetableComponent());
                 entity.setComponent(new BaseMaximumHealthComponent(500));
                 entity.setComponent(new RequestUpdateAttributesComponent());
             }
