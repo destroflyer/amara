@@ -52,15 +52,17 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             }
             else if(command instanceof CastSingleTargetSpellCommand){
                 CastSingleTargetSpellCommand castSingleTargetSpellCommand = (CastSingleTargetSpellCommand) command;
-                int spell = entityWorld.getCurrent().getComponent(castSingleTargetSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castSingleTargetSpellCommand.getSpellIndex()];
-                if(entityWorld.getCurrent().getComponent(spell, RemainingCooldownComponent.class) == null){
-                    entityWorld.getCurrent().setComponent(castSingleTargetSpellCommand.getEntity(), new CastSingleTargetSpellComponent(spell, castSingleTargetSpellCommand.getTargetEntityID()));
+                if(entityWorld.getCurrent().hasComponent(castSingleTargetSpellCommand.getTargetEntityID(), IsTargetableComponent.class)){
+                    int spell = entityWorld.getCurrent().getComponent(castSingleTargetSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castSingleTargetSpellCommand.getSpellIndex()];
+                    if(!entityWorld.getCurrent().hasComponent(spell, RemainingCooldownComponent.class)){
+                        entityWorld.getCurrent().setComponent(castSingleTargetSpellCommand.getEntity(), new CastSingleTargetSpellComponent(spell, castSingleTargetSpellCommand.getTargetEntityID()));
+                    }
                 }
             }
             else if(command instanceof CastLinearSkillshotSpellCommand){
                 CastLinearSkillshotSpellCommand castLinearSkillshotSpellCommand = (CastLinearSkillshotSpellCommand) command;
                 int spell = entityWorld.getCurrent().getComponent(castLinearSkillshotSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castLinearSkillshotSpellCommand.getSpellIndex()];
-                if(entityWorld.getCurrent().getComponent(spell, RemainingCooldownComponent.class) == null){
+                if(!entityWorld.getCurrent().hasComponent(spell, RemainingCooldownComponent.class)){
                     entityWorld.getCurrent().setComponent(castLinearSkillshotSpellCommand.getEntity(), new CastLinearSkillshotSpellComponent(spell, castLinearSkillshotSpellCommand.getDirection()));
                 }
             }
