@@ -35,7 +35,7 @@ public class EventManagerAppState extends BaseAppState implements ActionListener
         mainApplication.getInputManager().addListener(this, new String[]{
             "mouse_click_left","mouse_click_middle","mouse_click_right"
         });
-        registerKeys(new int[]{KeyInput.KEY_Q, KeyInput.KEY_W, KeyInput.KEY_E, KeyInput.KEY_R});
+        registerKeys(new int[]{KeyInput.KEY_Q, KeyInput.KEY_W, KeyInput.KEY_E, KeyInput.KEY_R, KeyInput.KEY_S});
     }
     
     private void registerKeys(int[] keyCodes){

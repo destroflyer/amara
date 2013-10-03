@@ -50,6 +50,21 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     entityWorld.getCurrent().setComponent(entity, new MovementTargetComponent(moveCommand.getPosition()));
                 }
             }
+            else if(command instanceof StopCommand){
+                StopCommand stopCommand = (StopCommand) command;
+                for(int entity : entityWorld.getCurrent().getEntitiesWithAll(IsSelectedComponent.class))
+                {
+                    entityWorld.getCurrent().removeComponent(entity, MovementTargetComponent.class);
+                    entityWorld.getCurrent().removeComponent(entity, MovementSpeedComponent.class);
+                    entityWorld.getCurrent().removeComponent(entity, AutoAttackTargetComponent.class);
+                }
+            }
+            else if(command instanceof AutoAttackCommand){
+                AutoAttackCommand autoAttackCommand = (AutoAttackCommand) command;
+                if(entityWorld.getCurrent().hasComponent(autoAttackCommand.getTargetEntityID(), IsTargetableComponent.class)){
+                    entityWorld.getCurrent().setComponent(autoAttackCommand.getEntity(), new AutoAttackTargetComponent(autoAttackCommand.getTargetEntityID()));
+                }
+            }
             else if(command instanceof CastSingleTargetSpellCommand){
                 CastSingleTargetSpellCommand castSingleTargetSpellCommand = (CastSingleTargetSpellCommand) command;
                 if(entityWorld.getCurrent().hasComponent(castSingleTargetSpellCommand.getTargetEntityID(), IsTargetableComponent.class)){
