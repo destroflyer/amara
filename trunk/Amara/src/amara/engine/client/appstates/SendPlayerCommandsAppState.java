@@ -54,7 +54,10 @@ public class SendPlayerCommandsAppState extends BaseAppState{
                     
                     case Right:
                         int entityToAttack = getCursorHoveredEntity();
-                        if(entityToAttack == -1){
+                        if(entityToAttack != -1){
+                            autoAttack(entityToAttack);
+                        }
+                        else{
                             Vector2f groundLocation = getCursorHoveredGroundLocation();
                             if(groundLocation != null){
                                 sendCommand(new MoveCommand(groundLocation));
@@ -81,6 +84,10 @@ public class SendPlayerCommandsAppState extends BaseAppState{
                     case KeyInput.KEY_R:
                         castSpell(3);
                         break;
+                    
+                    case KeyInput.KEY_S:
+                        sendCommand(new StopCommand());
+                        break;
                 }
             }
         }
@@ -94,6 +101,14 @@ public class SendPlayerCommandsAppState extends BaseAppState{
     
     private void sendCommand(Command command){
         TEST_COMMAND_QUEUE.add(command);
+    }
+    
+    private void autoAttack(int targetEntityID){
+        Iterator<EntityWrapper> selectedEntitiesIterator = getSelectedEntities().iterator();
+        while(selectedEntitiesIterator.hasNext()){
+            EntityWrapper selectedEntity = selectedEntitiesIterator.next();
+            sendCommand(new AutoAttackCommand(selectedEntity.getId(), targetEntityID));
+        }
     }
     
     private void castSpell(int spellIndex){
