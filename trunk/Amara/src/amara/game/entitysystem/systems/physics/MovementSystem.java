@@ -6,6 +6,7 @@ package amara.game.entitysystem.systems.physics;
 
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
+import amara.game.entitysystem.components.units.crowdcontrol.*;
 import com.jme3.math.Vector2f;
 
 /**
@@ -14,7 +15,8 @@ import com.jme3.math.Vector2f;
  */
 public class MovementSystem implements EntitySystem
 {
-
+    private final static Class[] antiMovementComponentClasses = new Class[]{IsStunnedComponent.class, IsBindedComponent.class};
+    
     public void update(EntityWorld entityWorld, float deltaSeconds)
     {
         for(EntityWrapper entity: entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(MovementTargetComponent.class, PositionComponent.class)))
@@ -26,6 +28,11 @@ public class MovementSystem implements EntitySystem
         
         for(EntityWrapper entity: entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(MovementSpeedComponent.class, PositionComponent.class)))
         {
+            if(entityWorld.getCurrent().hasAnyComponent(entity.getId(), antiMovementComponentClasses))
+            {
+                continue;
+            }
+            
             Vector2f position = entity.getComponent(PositionComponent.class).getPosition();
             Vector2f movement = entity.getComponent(MovementSpeedComponent.class).getSpeed().mult(deltaSeconds);
             
