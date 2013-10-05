@@ -76,6 +76,7 @@ public class EntitySystemAppState extends BaseAppState{
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(entitiesNode);
+        addEntitySystem(new StrangeSystem());
         addEntitySystem(new UpdateAttributesSystem());
         addEntitySystem(new CountdownLifetimeSystem());
         addEntitySystem(new CountdownBuffsSystem());
