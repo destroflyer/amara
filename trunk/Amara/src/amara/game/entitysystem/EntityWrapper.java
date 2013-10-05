@@ -43,6 +43,21 @@ public class EntityWrapper
     {
         entityMap.clearComponents(entity);
     }
+    
+    public boolean hasAnyComponent(Class ... components)
+    {
+        return entityMap.hasAnyComponent(entity, components);
+    }
+    
+    public boolean hasAllComponents(Class ... components)
+    {
+        return entityMap.hasAllComponents(entity, components);
+    }
+    
+    public boolean hasComponent(Class componentClass)
+    {
+        return entityMap.hasComponent(entity, componentClass);
+    }
 
     @Override
     public String toString()
