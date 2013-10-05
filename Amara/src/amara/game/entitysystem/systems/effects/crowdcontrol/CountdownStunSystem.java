@@ -19,7 +19,7 @@ public class CountdownStunSystem implements EntitySystem{
         {
             IsStunnedComponent isStunnedComponent = entityWrapper.getComponent(IsStunnedComponent.class);
             float duration = (isStunnedComponent.getRemainingDuration() - deltaSeconds);
-            if(duration >= 0){
+            if(duration > 0){
                 entityWrapper.setComponent(new IsStunnedComponent(duration));
             }
             else{

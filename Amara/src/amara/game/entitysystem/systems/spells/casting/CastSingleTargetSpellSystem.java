@@ -4,17 +4,15 @@
  */
 package amara.game.entitysystem.systems.spells.casting;
 
+import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
-import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
-import amara.game.entitysystem.components.units.effects.*;
 import amara.game.entitysystem.components.units.movement.*;
-import amara.game.entitysystem.components.visuals.*;
-import com.jme3.math.Vector2f;
 
 /**
  *
@@ -40,20 +38,19 @@ public class CastSingleTargetSpellSystem implements EntitySystem{
             effectCast.setComponent(new EffectSourceComponent(casterEntityID));
             effectCast.setComponent(new AffectedTargetsComponent(new int[]{targetEntityID}));
         }
+        InstantTargetBuffComponent instantTargetBuffComponent = entityWorld.getCurrent().getComponent(spellEntityID, InstantTargetBuffComponent.class);
+        if(instantTargetBuffComponent != null){
+            EntityWrapper buffStatus = entityWorld.getWrapped(entityWorld.createEntity());
+            buffStatus.setComponent(new ActiveBuffComponent(targetEntityID, instantTargetBuffComponent.getBuffEntityID()));
+            buffStatus.setComponent(new CastSourceComponent(casterEntityID));
+            buffStatus.setComponent(new RemainingBuffDurationComponent(instantTargetBuffComponent.getDuration()));
+        }
         InstantSpawnsComponent instantSpawnsComponent = entityWorld.getCurrent().getComponent(spellEntityID, InstantSpawnsComponent.class);
         if(instantSpawnsComponent != null){
             int[] spawnInformationEntitiesIDs = instantSpawnsComponent.getSpawnInformationEntitiesIDs();
             for(int i=0;i<spawnInformationEntitiesIDs.length;i++){
                 EntityWrapper spawnedObject = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper spawnInformation = entityWorld.getWrapped(spawnInformationEntitiesIDs[i]);
-                String templateName = spawnInformation.getComponent(SpawnTemplateComponent.class).getTemplateName();
-
-                //TODO: Load template
-                spawnedObject.setComponent(new ModelComponent("Models/cloud/skin.xml"));
-                EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
-                effect.setComponent(new ScalingAttackDamagePhysicalDamageComponent(1));
-                spawnedObject.setComponent(new TargetReachedTriggerEffectComponent(effect.getId()));
-
                 spawnedObject.setComponent(new CastSourceComponent(casterEntityID));
                 Vector2f position = entityWorld.getCurrent().getComponent(casterEntityID, PositionComponent.class).getPosition().clone();
                 RelativeSpawnPositionComponent relativeSpawnPositionComponent = spawnInformation.getComponent(RelativeSpawnPositionComponent.class);
@@ -63,6 +60,7 @@ public class CastSingleTargetSpellSystem implements EntitySystem{
                 spawnedObject.setComponent(new PositionComponent(position));
                 float spawnMovementSpeed = spawnInformation.getComponent(SpawnMovementSpeedComponent.class).getSpeed();
                 spawnedObject.setComponent(new TargetedMovementComponent(targetEntityID, spawnMovementSpeed));
+                EntityTemplate.loadTemplates(entityWorld, spawnedObject.getId(), spawnInformation.getComponent(SpawnTemplateComponent.class).getTemplateNames());
             }
         }
     }

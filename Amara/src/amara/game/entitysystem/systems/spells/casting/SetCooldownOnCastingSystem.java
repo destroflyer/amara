@@ -16,16 +16,17 @@ public class SetCooldownOnCastingSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAny(CastSingleTargetSpellComponent.class, CastLinearSkillshotSpellComponent.class)))
+        for(int entity : entityWorld.getCurrent().getEntitiesWithAll(CastSingleTargetSpellComponent.class))
         {
-            CastSingleTargetSpellComponent castSingleTargetSpellComponent = entityWrapper.getComponent(CastSingleTargetSpellComponent.class);
-            if(castSingleTargetSpellComponent != null){
-                setOnCooldown(entityWorld, castSingleTargetSpellComponent.getSpellEntityID());
-            }
-            CastLinearSkillshotSpellComponent castLinearSkillshotSpellComponent = entityWrapper.getComponent(CastLinearSkillshotSpellComponent.class);
-            if(castLinearSkillshotSpellComponent != null){
-                setOnCooldown(entityWorld, castLinearSkillshotSpellComponent.getSpellEntityID());
-            }
+            setOnCooldown(entityWorld, entityWorld.getCurrent().getComponent(entity, CastSingleTargetSpellComponent.class).getSpellEntityID());
+        }
+        for(int entity : entityWorld.getCurrent().getEntitiesWithAll(CastLinearSkillshotSpellComponent.class))
+        {
+            setOnCooldown(entityWorld, entityWorld.getCurrent().getComponent(entity, CastLinearSkillshotSpellComponent.class).getSpellEntityID());
+        }
+        for(int entity : entityWorld.getCurrent().getEntitiesWithAll(CastPositionalSkillshotSpellComponent.class))
+        {
+            setOnCooldown(entityWorld, entityWorld.getCurrent().getComponent(entity, CastPositionalSkillshotSpellComponent.class).getSpellEntityID());
         }
     }
     

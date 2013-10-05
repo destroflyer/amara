@@ -35,12 +35,14 @@ public class ModelObject extends Node implements AnimEventListener{
     }
     
     public void playAnimation(final String animationName, final float speed){
-        if(!animationName.equals(animationChannel.getAnimationName())){
-            try{
-                animationChannel.setAnim(animationName);
-                animationChannel.setSpeed(speed);
-            }catch(IllegalArgumentException ex){
-                stopAndRewindAnimation();
+        if(animationChannel != null){
+            if(!animationName.equals(animationChannel.getAnimationName())){
+                try{
+                    animationChannel.setAnim(animationName);
+                    animationChannel.setSpeed(speed);
+                }catch(IllegalArgumentException ex){
+                    stopAndRewindAnimation();
+                }
             }
         }
     }

@@ -4,10 +4,10 @@
  */
 package amara.game.entitysystem.systems.physics;
 
+import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
-import com.jme3.math.Vector2f;
 
 /**
  *
