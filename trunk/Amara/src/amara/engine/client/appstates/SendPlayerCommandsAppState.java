@@ -129,10 +129,16 @@ public class SendPlayerCommandsAppState extends BaseAppState{
                         }
                         break;
 
-                    case SKILLSHOT:
+                    case LINEAR_SKILLSHOT:
                         if(groundLocation != null){
                             Vector2f direction = groundLocation.subtract(selectedEntity.getComponent(PositionComponent.class).getPosition());
                             sendCommand(new CastLinearSkillshotSpellCommand(selectedEntity.getId(), spellIndex, direction));
+                        }
+                        break;
+
+                    case POSITIONAL_SKILLSHOT:
+                        if(groundLocation != null){
+                            sendCommand(new CastPositionalSkillshotSpellCommand(selectedEntity.getId(), spellIndex, groundLocation));
                         }
                         break;
                 }

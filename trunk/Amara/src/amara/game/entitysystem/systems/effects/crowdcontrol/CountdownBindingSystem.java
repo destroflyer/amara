@@ -19,7 +19,7 @@ public class CountdownBindingSystem implements EntitySystem{
         {
             IsBindedComponent isBindedComponent = entityWrapper.getComponent(IsBindedComponent.class);
             float duration = (isBindedComponent.getRemainingDuration() - deltaSeconds);
-            if(duration >= 0){
+            if(duration > 0){
                 entityWrapper.setComponent(new IsBindedComponent(duration));
             }
             else{

@@ -10,12 +10,12 @@ package amara.game.entitysystem.components.spawns;
  */
 public class SpawnTemplateComponent{
 
-    public SpawnTemplateComponent(String templateName){
-        this.templateName = templateName;
+    public SpawnTemplateComponent(String... templateNames){
+        this.templateNames = templateNames;
     }
-    private String templateName;
+    private String[] templateNames;
 
-    public String getTemplateName(){
-        return templateName;
+    public String[] getTemplateNames(){
+        return templateNames;
     }
 }

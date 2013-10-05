@@ -19,7 +19,7 @@ public class CountdownSilenceSystem implements EntitySystem{
         {
             IsSilencedComponent isSilencedComponent = entityWrapper.getComponent(IsSilencedComponent.class);
             float duration = (isSilencedComponent.getRemainingDuration() - deltaSeconds);
-            if(duration >= 0){
+            if(duration > 0){
                 entityWrapper.setComponent(new IsSilencedComponent(duration));
             }
             else{

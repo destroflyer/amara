@@ -15,7 +15,8 @@ public class CastTypeComponent{
     }
     public enum CastType{
         SINGLE_TARGET,
-        SKILLSHOT
+        LINEAR_SKILLSHOT,
+        POSITIONAL_SKILLSHOT
     }
     private CastType castType;
 
