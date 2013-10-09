@@ -33,7 +33,7 @@ public class StunVisualisationSystem extends SimpleVisualAttachmentSystem{
         geometry.setMaterial(material);
         geometry.addControl(new BillboardControl());
         geometry.setLocalTranslation(0, 2, 0);
-        geometry.setUserData("layer", 3);
+        geometry.setUserData("layer", 4);
         return geometry;
     }
 }

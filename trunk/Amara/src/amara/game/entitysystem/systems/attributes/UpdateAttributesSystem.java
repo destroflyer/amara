@@ -7,6 +7,8 @@ package amara.game.entitysystem.systems.attributes;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.items.*;
+import amara.game.entitysystem.components.spells.*;
+import amara.game.entitysystem.components.units.*;
 
 /**
  *
@@ -21,6 +23,7 @@ public class UpdateAttributesSystem implements EntitySystem{
             float maximumHealth = 0;
             float attackDamage = 0;
             float abilityPower = 0;
+            float attackSpeed = 0;
             BaseMaximumHealthComponent baseMaximumHealthComponent = entityWrapper.getComponent(BaseMaximumHealthComponent.class);
             if(baseMaximumHealthComponent != null){
                 maximumHealth += baseMaximumHealthComponent.getValue();
@@ -32,6 +35,10 @@ public class UpdateAttributesSystem implements EntitySystem{
             BaseAbilityPowerComponent baseAbiliyPowerComponent = entityWrapper.getComponent(BaseAbilityPowerComponent.class);
             if(baseAbiliyPowerComponent != null){
                 abilityPower += baseAbiliyPowerComponent.getValue();
+            }
+            BaseAttackSpeedComponent baseAttackSpeedComponent = entityWrapper.getComponent(BaseAttackSpeedComponent.class);
+            if(baseAttackSpeedComponent != null){
+                attackSpeed += baseAttackSpeedComponent.getValue();
             }
             InventoryComponent inventoryComponent = entityWrapper.getComponent(InventoryComponent.class);
             if(inventoryComponent != null){
@@ -64,6 +71,11 @@ public class UpdateAttributesSystem implements EntitySystem{
             }
             entityWrapper.setComponent(new AttackDamageComponent(attackDamage));
             entityWrapper.setComponent(new AbilityPowerComponent(abilityPower));
+            entityWrapper.setComponent(new AttackSpeedComponent(attackSpeed));
+            AutoAttackComponent autoAttackComponent = entityWrapper.getComponent(AutoAttackComponent.class);
+            if(autoAttackComponent != null){
+                entityWorld.getCurrent().setComponent(autoAttackComponent.getAutoAttackEntityID(), new CooldownComponent(1 / attackSpeed));
+            }
             entityWrapper.removeComponent(RequestUpdateAttributesComponent.class);
         }
     }

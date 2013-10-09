@@ -13,6 +13,7 @@ import amara.engine.client.systems.visualisation.*;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.*;
+import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.items.*;
@@ -91,6 +92,7 @@ public class MapAppState extends BaseAppState{
         entity2.setComponent(new BaseMaximumHealthComponent(500));
         entity2.setComponent(new BaseAttackDamageComponent(60));
         entity2.setComponent(new BaseAbilityPowerComponent(0));
+        entity2.setComponent(new BaseAttackSpeedComponent(0.6f));
         EntityWrapper doransBlade = entityWorld.getWrapped(entityWorld.createEntity());
         doransBlade.setComponent(new BonusFlatMaximumHealthComponent(80));
         doransBlade.setComponent(new BonusFlatAttackDamageComponent(10));
@@ -122,6 +124,7 @@ public class MapAppState extends BaseAppState{
         ignite.setComponent(new NameComponent("Ignite"));
         ignite.setComponent(new DescriptionComponent("Deals damage over time to the target."));
         EntityWrapper igniteBuff = entityWorld.getWrapped(entityWorld.createEntity());
+        igniteBuff.setComponent(new BuffVisualisationComponent("burning"));
         EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
         effect2.setComponent(new FlatMagicDamageComponent(40));
         effect2.setComponent(new ScalingAbilityPowerMagicDamageComponent(1));

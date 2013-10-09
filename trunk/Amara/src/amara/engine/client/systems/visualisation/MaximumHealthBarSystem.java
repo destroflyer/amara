@@ -68,7 +68,7 @@ public class MaximumHealthBarSystem extends SimpleVisualAttachmentSystem{
         geometry.setMaterial(material);
         geometry.addControl(new BillboardControl());
         geometry.setLocalTranslation(BAR_LOCATION);
-        geometry.setUserData("layer", 4);
+        geometry.setUserData("layer", 5);
         return geometry;
     }
 }

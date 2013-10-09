@@ -41,8 +41,10 @@ public abstract class SimpleVisualAttachmentSystem implements EntitySystem{
         removeVisualAttachment(entity);
         Node node = entitySceneMap.requestNode(entity);
         Spatial visualAttachment = createVisualAttachment(entityWorld, entity);
-        visualAttachment.setName(getVisualAttachmentID());
-        node.attachChild(visualAttachment);
+        if(visualAttachment != null){
+            visualAttachment.setName(getVisualAttachmentID());
+            node.attachChild(visualAttachment);
+        }
     }
     
     private void removeVisualAttachment(int entity){
