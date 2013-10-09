@@ -14,11 +14,11 @@ import java.util.List;
 public class EntityWorld
 {
     private int nextEntity;
-    private ObservingComponentMap entityMap = new ObservingComponentMap();
+    private DelayedComponentMap entityMap = new DelayedComponentMap();
 
     public void onFrameEnded()
     {
-        entityMap.clearObservations();
+        entityMap.applyChanges();
     }
     
     public int createEntity()
@@ -46,7 +46,7 @@ public class EntityWorld
         return list;
     }
     
-    public EntityComponentMap getCurrent()
+    public DelayedEntityComponentMap getCurrent()
     {
         return entityMap;
     }

@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author Philipp
  */
-class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadonly
+class SimpleComponentMap implements EntityComponentMapReadonly
 {
     private ConcurrentHashMap<Class, ConcurrentHashMap<Integer, Object>> componentMaps = new ConcurrentHashMap<Class, ConcurrentHashMap<Integer, Object>>();
     private Comparator<Class> mapSizeComparator = new Comparator<Class>() {
@@ -149,6 +149,10 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
         {
             map.clear();
         }
+    }
+
+    public List<Integer> getEntitiesWith(Class componentsClass) {
+        return getEntitiesWithAny(componentsClass);
     }
     
 }

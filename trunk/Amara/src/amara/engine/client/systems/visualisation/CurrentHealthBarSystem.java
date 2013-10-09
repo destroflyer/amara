@@ -27,7 +27,8 @@ public class CurrentHealthBarSystem extends SimpleVisualAttachmentSystem{
     @Override
     protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
         float health = entityWorld.getCurrent().getComponent(entity, HealthComponent.class).getValue();
-        float maximumHealth = entityWorld.getCurrent().getComponent(entity, MaximumHealthComponent.class).getValue();
+        MaximumHealthComponent maxHealthComp = entityWorld.getCurrent().getComponent(entity, MaximumHealthComponent.class);
+        float maximumHealth = maxHealthComp == null? health: maxHealthComp.getValue();
         float healthPortion = (1 - (health / maximumHealth));
         Geometry geometry = new Geometry("", new RectangleMesh((MaximumHealthBarSystem.BAR_WIDTH / 2) - (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), 0, 0, (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), MaximumHealthBarSystem.BAR_HEIGHT));
         Material material = MaterialFactory.generateUnshadedMaterial(ColorRGBA.Black);
