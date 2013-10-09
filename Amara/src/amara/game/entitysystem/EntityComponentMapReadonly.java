@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface EntityComponentMapReadonly
 {
+    public <T> T getComponent(int entity, Class<T> componentClass);
     public boolean hasComponent(int entity, Class componentClass);
     public boolean hasAllComponents(int entity, Class... componentsClasses);
     public boolean hasAnyComponent(int entity, Class... componentsClasses);
