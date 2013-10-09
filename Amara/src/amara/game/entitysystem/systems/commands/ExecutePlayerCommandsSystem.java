@@ -14,6 +14,7 @@ import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.selection.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.visuals.*;
 
 /**
  *
@@ -57,16 +58,25 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     entityWorld.getCurrent().removeComponent(entity, MovementTargetComponent.class);
                     entityWorld.getCurrent().removeComponent(entity, MovementSpeedComponent.class);
                     entityWorld.getCurrent().removeComponent(entity, AutoAttackTargetComponent.class);
+                    entityWorld.getCurrent().removeComponent(entity, AnimationComponent.class);
                 }
             }
             else if(command instanceof AutoAttackCommand){
                 AutoAttackCommand autoAttackCommand = (AutoAttackCommand) command;
                 if(entityWorld.getCurrent().hasComponent(autoAttackCommand.getEntity(), AutoAttackComponent.class)){
                     if(entityWorld.getCurrent().hasComponent(autoAttackCommand.getTargetEntityID(), IsTargetableComponent.class)){
+                        entityWorld.getCurrent().removeComponent(autoAttackCommand.getEntity(), MovementTargetComponent.class);
+                        entityWorld.getCurrent().removeComponent(autoAttackCommand.getEntity(), MovementSpeedComponent.class);
                         entityWorld.getCurrent().setComponent(autoAttackCommand.getEntity(), new AutoAttackTargetComponent(autoAttackCommand.getTargetEntityID()));
                     }
                 }
-                
+            }
+            else if(command instanceof CastSelfcastSpellCommand){
+                CastSelfcastSpellCommand castSelfcastSpellCommand = (CastSelfcastSpellCommand) command;
+                int spell = entityWorld.getCurrent().getComponent(castSelfcastSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castSelfcastSpellCommand.getSpellIndex()];
+                if(!entityWorld.getCurrent().hasComponent(spell, RemainingCooldownComponent.class)){
+                    entityWorld.getCurrent().setComponent(castSelfcastSpellCommand.getEntity(), new CastSelfcastSpellComponent(spell));
+                }
             }
             else if(command instanceof CastSingleTargetSpellCommand){
                 CastSingleTargetSpellCommand castSingleTargetSpellCommand = (CastSingleTargetSpellCommand) command;

@@ -14,6 +14,7 @@ public class CastTypeComponent{
         this.castType = castType;
     }
     public enum CastType{
+        SELFCAST,
         SINGLE_TARGET,
         LINEAR_SKILLSHOT,
         POSITIONAL_SKILLSHOT
