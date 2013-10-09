@@ -48,6 +48,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 MoveCommand moveCommand = (MoveCommand) command;
                 for(int entity : entityWorld.getCurrent().getEntitiesWithAll(IsSelectedComponent.class))
                 {
+                    entityWorld.getCurrent().removeComponent(entity, AutoAttackTargetComponent.class);
                     entityWorld.getCurrent().setComponent(entity, new MovementTargetComponent(moveCommand.getPosition()));
                 }
             }
