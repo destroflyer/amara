@@ -11,6 +11,7 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.engine.client.systems.visualisation.*;
+import amara.engine.client.systems.visualisation.buffs.*;
 import amara.engine.client.systems.visualisation.effects.crodwcontrol.*;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.systems.aggro.*;
@@ -119,6 +120,7 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new CurrentHealthBarSystem(entitySceneMap));
         addEntitySystem(new StunVisualisationSystem(entitySceneMap));
         addEntitySystem(new SilenceVisualisationSystem(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_Burning(entitySceneMap));
     }
     
     public void addEntitySystem(EntitySystem entitySystem){

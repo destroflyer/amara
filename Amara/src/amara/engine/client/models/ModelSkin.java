@@ -167,7 +167,7 @@ public class ModelSkin{
             if(rigidBodyControl != null){
                 rigidBodyControl.getCollisionShape().setScale(new Vector3f(modelScale, modelScale, modelScale));
             }
-            geometry.setUserData("layer", 2);
+            geometry.setUserData("layer", 3);
         }
     }
     
