@@ -5,6 +5,7 @@
 package amara.game.entitysystem.systems.aggro;
 
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
 
 /**
@@ -17,7 +18,7 @@ public class AttackAggroedTargetsSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(AutoAttackComponent.class, TargetsInAggroRangeComponent.class)))
         {
-            if(entityWrapper.getComponent(AutoAttackTargetComponent.class) == null){
+            if((!entityWrapper.hasComponent(AutoAttackTargetComponent.class)) && (!entityWrapper.hasComponent(MovementTargetComponent.class))){
                 int[] aggroedTargets = entityWrapper.getComponent(TargetsInAggroRangeComponent.class).getTargets();
                 if(aggroedTargets.length > 0){
                     entityWrapper.setComponent(new AutoAttackTargetComponent(aggroedTargets[0]));
