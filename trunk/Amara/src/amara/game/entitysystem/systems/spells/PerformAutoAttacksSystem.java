@@ -5,8 +5,10 @@
 package amara.game.entitysystem.systems.spells;
 
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.spells.casting.*;
 
 /**
@@ -25,6 +27,8 @@ public class PerformAutoAttacksSystem implements EntitySystem{
                 if(!entityWorld.getCurrent().hasComponent(autoAttackEntityID, RemainingCooldownComponent.class)){
                     CastSingleTargetSpellSystem.castSingleTargetSpell(entityWorld, entityWrapper.getId(), autoAttackEntityID, targetEntityID);
                     SetCooldownOnCastingSystem.setOnCooldown(entityWorld, autoAttackEntityID);
+                    float attackSpeed = entityWrapper.getComponent(AttackSpeedComponent.class).getValue();
+                    entityWrapper.setComponent(new AnimationComponent("auto_attack", (1 / attackSpeed), false));
                 }
             }
             else{

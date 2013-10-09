@@ -123,6 +123,10 @@ public class SendPlayerCommandsAppState extends BaseAppState{
                 int spellEntity = spells[spellIndex];
                 CastTypeComponent.CastType castType = entitySystemAppState.getEntityWorld().getCurrent().getComponent(spellEntity, CastTypeComponent.class).getCastType();
                 switch(castType){
+                    case SELFCAST:
+                        sendCommand(new CastSelfcastSpellCommand(selectedEntity.getId(), spellIndex));
+                        break;
+
                     case SINGLE_TARGET:
                         if(cursorHoveredEntity != -1){
                             sendCommand(new CastSingleTargetSpellCommand(selectedEntity.getId(), spellIndex, cursorHoveredEntity));

@@ -10,9 +10,7 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import amara.engine.client.systems.visualisation.*;
-import amara.engine.client.systems.visualisation.buffs.*;
-import amara.engine.client.systems.visualisation.effects.crodwcontrol.*;
+import amara.engine.client.systems.visualisation.EntitySceneMap;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.systems.aggro.*;
 import amara.game.entitysystem.systems.attributes.*;
@@ -53,6 +51,7 @@ public class EntitySystemAppState extends BaseAppState{
             return node;
         }
 
+        @Override
         public Node removeNode(int entity){
             Node node = getNode(entity);
             if(node != null){
@@ -88,6 +87,7 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new SetCooldownOnCastingSystem());
         addEntitySystem(new AttackAggroedTargetsSystem());
         addEntitySystem(new PerformAutoAttacksSystem());
+        addEntitySystem(new CastSelfcastSpellSystem());
         addEntitySystem(new CastSingleTargetSpellSystem());
         addEntitySystem(new CastLinearSkillshotSpellSystem());
         addEntitySystem(new CastPositionalSkillshotSpellSystem());
@@ -109,17 +109,6 @@ public class EntitySystemAppState extends BaseAppState{
         addEntitySystem(new TriggerTargetReachedEffectSystem());
         addEntitySystem(intersectionSystem);
         addEntitySystem(new AggroSystem());
-        addEntitySystem(new ModelSystem(entitySceneMap));
-        addEntitySystem(new PositionSystem(entitySceneMap));
-        addEntitySystem(new DirectionSystem(entitySceneMap));
-        addEntitySystem(new ScaleSystem(entitySceneMap));
-        addEntitySystem(new AnimationSystem(entitySceneMap));
-        addEntitySystem(new SelectionMarkerSystem(entitySceneMap));
-        addEntitySystem(new MaximumHealthBarSystem(entitySceneMap));
-        addEntitySystem(new CurrentHealthBarSystem(entitySceneMap));
-        addEntitySystem(new StunVisualisationSystem(entitySceneMap));
-        addEntitySystem(new SilenceVisualisationSystem(entitySceneMap));
-        addEntitySystem(new BuffVisualisationSystem_Burning(entitySceneMap));
     }
     
     public void addEntitySystem(EntitySystem entitySystem){

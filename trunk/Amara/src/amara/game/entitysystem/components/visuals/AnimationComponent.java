@@ -10,18 +10,24 @@ package amara.game.entitysystem.components.visuals;
  */
 public class AnimationComponent{
 
-    public AnimationComponent(String name, float speed){
+    public AnimationComponent(String name, float loopDuration, boolean isLooped){
         this.name = name;
-        this.speed = speed;
+        this.loopDuration = loopDuration;
+        this.isLooped = isLooped;
     }
     private String name;
-    private float speed;
+    private float loopDuration;
+    private boolean isLooped;
 
     public String getName(){
         return name;
     }
 
-    public float getSpeed(){
-        return speed;
+    public float getLoopDuration(){
+        return loopDuration;
+    }
+
+    public boolean isLooped(){
+        return isLooped;
     }
 }

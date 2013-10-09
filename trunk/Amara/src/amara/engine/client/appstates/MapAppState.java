@@ -7,9 +7,12 @@ package amara.engine.client.appstates;
 import java.util.ArrayList;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.math.Vector2f;
 import com.jme3.scene.Node;
 import amara.engine.client.maps.MapTerrain;
 import amara.engine.client.systems.visualisation.*;
+import amara.engine.client.systems.visualisation.buffs.*;
+import amara.engine.client.systems.visualisation.effects.crodwcontrol.*;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.*;
@@ -25,7 +28,6 @@ import amara.game.entitysystem.components.spells.specials.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.physics.*;
-import com.jme3.math.Vector2f;
 import shapes.*;
 
 /**
@@ -48,7 +50,6 @@ public class MapAppState extends BaseAppState{
         mapTerrain = new MapTerrain(mapName, mapWidth, mapHeight);
         mainApplication.getRootNode().attachChild(mapTerrain.getTerrain());
         EntitySystemAppState entitySystemAppState = getAppState(EntitySystemAppState.class);
-        entitySystemAppState.addEntitySystem(new ModelYAdjustingSystem(entitySystemAppState.getEntitySceneMap(), mapTerrain));
         //Test-Obstacles
         ArrayList<Shape> obstacles = new ArrayList<Shape>();
         obstacles.add(new SimpleConvex(new Vector2D(0, 0), new Vector2D(100, 0)));
@@ -63,7 +64,7 @@ public class MapAppState extends BaseAppState{
         //Entity #1
         EntityWrapper entity1 = entityWorld.getWrapped(entityWorld.createEntity());
         entity1.setComponent(new ModelComponent("Models/minion/skin.xml"));
-        entity1.setComponent(new AnimationComponent("dance", 1));
+        entity1.setComponent(new AnimationComponent("dance", 2.66f, true));
         entity1.setComponent(new ScaleComponent(0.75f));
         entity1.setComponent(new PositionComponent(new Vector2f(22, 16)));
         entity1.setComponent(new DirectionComponent(new Vector2f(0, -1)));
@@ -101,7 +102,9 @@ public class MapAppState extends BaseAppState{
         doransRing.setComponent(new BonusFlatAbilityPowerComponent(15));
         EntityWrapper needlesslyLargeRod = entityWorld.getWrapped(entityWorld.createEntity());
         needlesslyLargeRod.setComponent(new BonusFlatAbilityPowerComponent(80));
-        entity2.setComponent(new InventoryComponent(new int[]{doransBlade.getId(), doransRing.getId(), needlesslyLargeRod.getId()}));
+        EntityWrapper dagger = entityWorld.getWrapped(entityWorld.createEntity());
+        dagger.setComponent(new BonusPercentageAttackSpeedComponent(0.12f));
+        entity2.setComponent(new InventoryComponent(new int[]{doransBlade.getId(), doransRing.getId(), needlesslyLargeRod.getId(), dagger.getId(), dagger.getId()}));
         entity2.setComponent(new RequestUpdateAttributesComponent());
         //Entity #1 - Spells
         //Spell #1
@@ -152,7 +155,17 @@ public class MapAppState extends BaseAppState{
         pillarOfFlame.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation3.getId()}));
         pillarOfFlame.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
         pillarOfFlame.setComponent(new CooldownComponent(2));
-        entity2.setComponent(new SpellsComponent(new int[]{sear.getId(), pillarOfFlame.getId()}));
+        //Spell #3
+        EntityWrapper battleCry = entityWorld.getWrapped(entityWorld.createEntity());
+        battleCry.setComponent(new NameComponent("Battle Cry"));
+        battleCry.setComponent(new DescriptionComponent("Increases the attack speed for a few seconds."));
+        EntityWrapper battleCryBuff = entityWorld.getWrapped(entityWorld.createEntity());
+        EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+        effect3.setComponent(new BonusPercentageAttackSpeedComponent(0.8f));
+        battleCryBuff.setComponent(new ContinuousEffectComponent(effect3.getId()));
+        battleCry.setComponent(new InstantTargetBuffComponent(battleCryBuff.getId(), 5));
+        battleCry.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+        entity2.setComponent(new SpellsComponent(new int[]{sear.getId(), pillarOfFlame.getId(), battleCry.getId()}));
         //Autoattack
         EntityWrapper autoAttack1 = entityWorld.getWrapped(entityWorld.createEntity());
         EntityWrapper spawnInformation4 = entityWorld.getWrapped(entityWorld.createEntity());
@@ -180,6 +193,19 @@ public class MapAppState extends BaseAppState{
                 entity.setComponent(new RequestUpdateAttributesComponent());
             }
         }
+        //Client systems
+        EntitySceneMap entitySceneMap = entitySystemAppState.getEntitySceneMap();
+        entitySystemAppState.addEntitySystem(new ModelSystem(entitySceneMap, mainApplication));
+        entitySystemAppState.addEntitySystem(new PositionSystem(entitySceneMap, mapTerrain));
+        entitySystemAppState.addEntitySystem(new DirectionSystem(entitySceneMap));
+        entitySystemAppState.addEntitySystem(new ScaleSystem(entitySceneMap));
+        entitySystemAppState.addEntitySystem(new AnimationSystem(entitySceneMap));
+        entitySystemAppState.addEntitySystem(new SelectionMarkerSystem(entitySceneMap));
+        entitySystemAppState.addEntitySystem(new MaximumHealthBarSystem(entitySceneMap));
+        entitySystemAppState.addEntitySystem(new CurrentHealthBarSystem(entitySceneMap));
+        entitySystemAppState.addEntitySystem(new StunVisualisationSystem(entitySceneMap));
+        entitySystemAppState.addEntitySystem(new SilenceVisualisationSystem(entitySceneMap));
+        entitySystemAppState.addEntitySystem(new BuffVisualisationSystem_Burning(entitySceneMap));
         //Debug View
         Node collisionDebugNode = new Node();
         collisionDebugNode.setLocalTranslation(0, 1, 0);

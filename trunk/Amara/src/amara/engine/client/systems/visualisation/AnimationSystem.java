@@ -33,7 +33,9 @@ public class AnimationSystem implements EntitySystem{
         for(int entity : entityWorld.getRemoved().getEntitiesWithAll(AnimationComponent.class))
         {
             ModelObject modelObject = getModelObject(entity);
-            if(modelObject != null) modelObject.stopAndRewindAnimation();
+            if(modelObject != null){
+                modelObject.stopAndRewindAnimation();
+            }
         }
         for(int entity : entityWorld.getNew().getEntitiesWithAll(ModelComponent.class))
         {
@@ -49,7 +51,7 @@ public class AnimationSystem implements EntitySystem{
         ModelObject modelObject = getModelObject(entity);
         AnimationComponent animationComponent = entityWorld.getCurrent().getComponent(entity, AnimationComponent.class);
         if(animationComponent != null){
-            modelObject.playAnimation(animationComponent.getName(), animationComponent.getSpeed());
+            modelObject.playAnimation(animationComponent.getName(), animationComponent.getLoopDuration(), animationComponent.isLooped());
         }
     }
     

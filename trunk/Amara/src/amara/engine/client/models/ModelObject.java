@@ -7,6 +7,7 @@ package amara.engine.client.models;
 import com.jme3.animation.*;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import amara.engine.client.MainApplication;
 
 /**
  *
@@ -14,11 +15,14 @@ import com.jme3.scene.Spatial;
  */
 public class ModelObject extends Node implements AnimEventListener{
 
-    public ModelObject(String skinResourcePath){
+    public ModelObject(MainApplication mainApplication, String skinResourcePath){
+        this.mainApplication = mainApplication;
         loadSkin(new ModelSkin(skinResourcePath));
     }
+    private MainApplication mainApplication;
     protected Spatial modelSpatial;
     private AnimChannel animationChannel;
+    private boolean isPlayingLoopedAnimation;
     
     private void loadSkin(ModelSkin skin){
         modelSpatial = skin.loadSpatial();
@@ -30,16 +34,13 @@ public class ModelObject extends Node implements AnimEventListener{
         }
     }
     
-    public void playAnimation(String animationName){
-        playAnimation(animationName, 1);
-    }
-    
-    public void playAnimation(final String animationName, final float speed){
+    public void playAnimation(String animationName, float loopDuration, boolean isLooped){
         if(animationChannel != null){
             if(!animationName.equals(animationChannel.getAnimationName())){
                 try{
                     animationChannel.setAnim(animationName);
-                    animationChannel.setSpeed(speed);
+                    animationChannel.setSpeed(animationChannel.getAnimMaxTime() / loopDuration);
+                    isPlayingLoopedAnimation = isLooped;
                 }catch(IllegalArgumentException ex){
                     stopAndRewindAnimation();
                 }
@@ -48,13 +49,23 @@ public class ModelObject extends Node implements AnimEventListener{
     }
     
     public void stopAndRewindAnimation(){
-        animationChannel.reset(true);
+        mainApplication.enqueueTask(new Runnable(){
+
+            @Override
+            public void run(){
+                animationChannel.reset(true);
+            }
+        });
     }
 
+    @Override
     public void onAnimCycleDone(AnimControl control, AnimChannel channel, String animationName){
-        
+        if(!isPlayingLoopedAnimation){
+            stopAndRewindAnimation();
+        }
     }
 
+    @Override
     public void onAnimChange(AnimControl control, AnimChannel channel, String animationName){
         
     }

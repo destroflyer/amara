@@ -46,6 +46,7 @@ public class UpdateAttributesSystem implements EntitySystem{
                 float bonusFlatMaximumHealth = 0;
                 float bonusFlatAttackDamage = 0;
                 float bonusFlatAbilityPower = 0;
+                float bonusPercentageAttackSpeed = 0;
                 for(int i=0;i<itemEntites.length;i++){
                     EntityWrapper itemWrapper = entityWorld.getWrapped(itemEntites[i]);
                     BonusFlatMaximumHealthComponent bonusFlatMaximumHealthComponent = itemWrapper.getComponent(BonusFlatMaximumHealthComponent.class);
@@ -60,10 +61,15 @@ public class UpdateAttributesSystem implements EntitySystem{
                     if(bonusFlatAbilityPowerComponent != null){
                         bonusFlatAbilityPower += bonusFlatAbilityPowerComponent.getValue();
                     }
+                    BonusPercentageAttackSpeedComponent bonusPercentageAttackSpeedComponent = itemWrapper.getComponent(BonusPercentageAttackSpeedComponent.class);
+                    if(bonusPercentageAttackSpeedComponent != null){
+                        bonusPercentageAttackSpeed += bonusPercentageAttackSpeedComponent.getValue();
+                    }
                 }
                 maximumHealth += bonusFlatMaximumHealth;
                 attackDamage += bonusFlatAttackDamage;
                 abilityPower += bonusFlatAbilityPower;
+                attackSpeed += (attackSpeed * bonusPercentageAttackSpeed);
             }
             entityWrapper.setComponent(new MaximumHealthComponent(maximumHealth));
             if(entityWrapper.getComponent(HealthComponent.class) == null){
