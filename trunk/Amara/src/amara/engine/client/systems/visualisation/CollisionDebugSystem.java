@@ -38,31 +38,33 @@ public class CollisionDebugSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getNew().getEntitiesWithAll(HitboxComponent.class))
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, HitboxComponent.class, PositionComponent.class);
+        for(int entity : observer.getNew().getEntitiesWithAll(HitboxComponent.class))
         {
             updateGeometry(entityWorld, entity);
         }
-        for(int entity : entityWorld.getChanged().getEntitiesWithAll(HitboxComponent.class))
+        for(int entity : observer.getChanged().getEntitiesWithAll(HitboxComponent.class))
         {
             updateGeometry(entityWorld, entity);
         }
-        for(int entity : entityWorld.getRemoved().getEntitiesWithAll(HitboxComponent.class))
+        for(int entity : observer.getRemoved().getEntitiesWithAll(HitboxComponent.class))
         {
             removeGeometry(entity);
         }
-        for(int entity : entityWorld.getNew().getEntitiesWithAll(PositionComponent.class))
+        for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class))
         {
             updateGeometryLocation(entityWorld, entity);
         }
-        for(int entity : entityWorld.getChanged().getEntitiesWithAll(PositionComponent.class))
+        for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class))
         {
             updateGeometryLocation(entityWorld, entity);
         }
+        observer.reset();
     }
     
     private void updateGeometry(EntityWorld entityWorld, int entity){
         removeGeometry(entity);
-        HitboxComponent hitboxComponent = entityWorld.getCurrent().getComponent(entity, HitboxComponent.class);
+        HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
         Geometry collisionMeshGeometry = generateGeometry(hitboxComponent.getShape());
         collisionMeshGeometry.setName(getGeometryName(entity));
         node.attachChild(collisionMeshGeometry);
@@ -97,7 +99,7 @@ public class CollisionDebugSystem implements EntitySystem{
     private void updateGeometryLocation(EntityWorld entityWorld, int entity){
         Spatial geometry = node.getChild(getGeometryName(entity));
         if(geometry != null){
-            PositionComponent positionComponent = entityWorld.getCurrent().getComponent(entity, PositionComponent.class);
+            PositionComponent positionComponent = entityWorld.getComponent(entity, PositionComponent.class);
             Vector2f location = positionComponent.getPosition();
             geometry.setLocalTranslation(location.getX(), 0, location.getY());
         }

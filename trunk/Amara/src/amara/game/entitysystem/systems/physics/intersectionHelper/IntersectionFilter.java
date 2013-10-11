@@ -23,9 +23,9 @@ public class IntersectionFilter extends Filter<Hitbox>
 
     private boolean pass(Integer a, Integer b)
     {
-        CollisionGroupComponent filterCompA = entityWorld.getCurrent().getComponent(a, CollisionGroupComponent.class);
+        CollisionGroupComponent filterCompA = entityWorld.getComponent(a, CollisionGroupComponent.class);
         if(filterCompA == null) return true;
-        CollisionGroupComponent filterCompB = entityWorld.getCurrent().getComponent(b, CollisionGroupComponent.class);
+        CollisionGroupComponent filterCompB = entityWorld.getComponent(b, CollisionGroupComponent.class);
         if(filterCompB == null) return true;
         return ((filterCompA.getCollisionGroups() & filterCompB.getCollidesWithGroups())
               | (filterCompB.getCollisionGroups() & filterCompA.getCollidesWithGroups())) != 0;

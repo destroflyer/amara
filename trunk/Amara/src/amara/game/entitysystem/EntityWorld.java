@@ -11,16 +11,10 @@ import java.util.List;
  *
  * @author Philipp
  */
-public class EntityWorld
+public class EntityWorld extends ObservedComponentMap
 {
     private int nextEntity;
-    private DelayedComponentMap entityMap = new DelayedComponentMap();
 
-    public void onFrameEnded()
-    {
-        entityMap.applyChanges();
-    }
-    
     public int createEntity()
     {
         return nextEntity++;
@@ -28,12 +22,12 @@ public class EntityWorld
     
     public void removeEntity(int entity)
     {
-        entityMap.clearComponents(entity);
+        clearComponents(entity);
     }
     
     public EntityWrapper getWrapped(int entity)
     {
-        return new EntityWrapper(entityMap, entity);
+        return new EntityWrapper(this, entity);
     }
     
     public List<EntityWrapper> getWrapped(List<Integer> entities)
@@ -41,28 +35,8 @@ public class EntityWorld
         ArrayList<EntityWrapper> list = new ArrayList<EntityWrapper>();
         for(int entity: entities)
         {
-            list.add(new EntityWrapper(entityMap, entity));
+            list.add(new EntityWrapper(this, entity));
         }
         return list;
-    }
-    
-    public DelayedEntityComponentMap getCurrent()
-    {
-        return entityMap;
-    }
-    
-    public EntityComponentMapReadonly getNew()
-    {
-        return entityMap.getAdded();
-    }
-    
-    public EntityComponentMapReadonly getChanged()
-    {
-        return entityMap.getChanged();
-    }
-    
-    public EntityComponentMapReadonly getRemoved()
-    {
-        return entityMap.getRemoved();
     }
 }

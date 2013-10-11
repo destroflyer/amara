@@ -23,19 +23,21 @@ public class DirectionSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getNew().getEntitiesWithAll(ScaleComponent.class))
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, ScaleComponent.class);
+        for(int entity : observer.getNew().getEntitiesWithAll(ScaleComponent.class))
         {
             updateDirection(entityWorld, entity);
         }
-        for(int entity : entityWorld.getChanged().getEntitiesWithAll(ScaleComponent.class))
+        for(int entity : observer.getChanged().getEntitiesWithAll(ScaleComponent.class))
         {
             updateDirection(entityWorld, entity);
         }
+        observer.reset();
     }
     
     private void updateDirection(EntityWorld entityWorld, int entity){
         Node node = entitySceneMap.requestNode(entity);
-        DirectionComponent directionComponent = entityWorld.getCurrent().getComponent(entity, DirectionComponent.class);
+        DirectionComponent directionComponent = entityWorld.getComponent(entity, DirectionComponent.class);
         JMonkeyUtil.setLocalRotation(node, new Vector3f(directionComponent.getVector().getX(), 0, directionComponent.getVector().getY()));
     }
 }

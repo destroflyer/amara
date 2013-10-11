@@ -19,12 +19,12 @@ public class PerformAutoAttacksSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(AutoAttackTargetComponent.class)))
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(AutoAttackTargetComponent.class)))
         {
             int targetEntityID = entityWrapper.getComponent(AutoAttackTargetComponent.class).getTargetEntityID();
-            if(entityWorld.getCurrent().hasComponent(targetEntityID, IsTargetableComponent.class)){
+            if(entityWorld.hasComponent(targetEntityID, IsTargetableComponent.class)){
                 int autoAttackEntityID = entityWrapper.getComponent(AutoAttackComponent.class).getAutoAttackEntityID();
-                if(!entityWorld.getCurrent().hasComponent(autoAttackEntityID, RemainingCooldownComponent.class)){
+                if(!entityWorld.hasComponent(autoAttackEntityID, RemainingCooldownComponent.class)){
                     CastSingleTargetSpellSystem.castSingleTargetSpell(entityWorld, entityWrapper.getId(), autoAttackEntityID, targetEntityID);
                     SetCooldownOnCastingSystem.setOnCooldown(entityWorld, autoAttackEntityID);
                     float attackSpeed = entityWrapper.getComponent(AttackSpeedComponent.class).getValue();

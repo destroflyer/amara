@@ -18,7 +18,7 @@ public class CastPositionalSkillshotSpellSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper caster : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(CastPositionalSkillshotSpellComponent.class)))
+        for(EntityWrapper caster : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(CastPositionalSkillshotSpellComponent.class)))
         {
             CastPositionalSkillshotSpellComponent castPositionalSkillshotSpellComponent = caster.getComponent(CastPositionalSkillshotSpellComponent.class);
             int spellEntityID = castPositionalSkillshotSpellComponent.getSpellEntityID();
@@ -30,8 +30,8 @@ public class CastPositionalSkillshotSpellSystem implements EntitySystem{
                     spawnedObject.setComponent(new PositionComponent(position.clone()));
                 }
             });
-            entityWorld.getCurrent().removeComponent(caster.getId(), CastPositionalSkillshotSpellComponent.class);
-            if(entityWorld.getCurrent().hasComponent(spellEntityID, TeleportCasterToTargetPositionComponent.class)){
+            entityWorld.removeComponent(caster.getId(), CastPositionalSkillshotSpellComponent.class);
+            if(entityWorld.hasComponent(spellEntityID, TeleportCasterToTargetPositionComponent.class)){
                 caster.setComponent(new PositionComponent(position.clone()));
                 caster.removeComponent(MovementTargetComponent.class);
                 caster.removeComponent(MovementSpeedComponent.class);

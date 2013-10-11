@@ -7,6 +7,7 @@ package amara.engine.client.systems.visualisation;
 import com.jme3.scene.Node;
 import amara.engine.client.models.ModelObject;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.ComponentMapObserver;
 import amara.game.entitysystem.components.visuals.*;
 
 /**
@@ -19,37 +20,39 @@ public class AnimationSystem implements EntitySystem{
         this.entitySceneMap = entitySceneMap;
     }
     private EntitySceneMap entitySceneMap;
-
+    
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getNew().getEntitiesWithAll(AnimationComponent.class))
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AnimationComponent.class, ModelComponent.class);
+        for(int entity : observer.getNew().getEntitiesWithAll(AnimationComponent.class))
         {
             updateAnimation(entityWorld, entity);
         }
-        for(int entity : entityWorld.getChanged().getEntitiesWithAll(AnimationComponent.class))
+        for(int entity : observer.getChanged().getEntitiesWithAll(AnimationComponent.class))
         {
             updateAnimation(entityWorld, entity);
         }
-        for(int entity : entityWorld.getRemoved().getEntitiesWithAll(AnimationComponent.class))
+        for(int entity : observer.getRemoved().getEntitiesWithAll(AnimationComponent.class))
         {
             ModelObject modelObject = getModelObject(entity);
             if(modelObject != null){
                 modelObject.stopAndRewindAnimation();
             }
         }
-        for(int entity : entityWorld.getNew().getEntitiesWithAll(ModelComponent.class))
+        for(int entity : observer.getNew().getEntitiesWithAll(ModelComponent.class))
         {
             updateAnimation(entityWorld, entity);
         }
-        for(int entity : entityWorld.getChanged().getEntitiesWithAll(ModelComponent.class))
+        for(int entity : observer.getChanged().getEntitiesWithAll(ModelComponent.class))
         {
             updateAnimation(entityWorld, entity);
         }
+        observer.reset();
     }
     
     private void updateAnimation(EntityWorld entityWorld, int entity){
         ModelObject modelObject = getModelObject(entity);
-        AnimationComponent animationComponent = entityWorld.getCurrent().getComponent(entity, AnimationComponent.class);
+        AnimationComponent animationComponent = entityWorld.getComponent(entity, AnimationComponent.class);
         if(animationComponent != null){
             modelObject.playAnimation(animationComponent.getName(), animationComponent.getLoopDuration(), animationComponent.isLooped());
         }

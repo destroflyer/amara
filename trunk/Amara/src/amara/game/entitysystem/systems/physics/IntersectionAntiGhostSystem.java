@@ -30,9 +30,9 @@ public class IntersectionAntiGhostSystem implements EntitySystem
     {
         for(Pair<Integer> pair: info.getEntries())
         {
-            if(entityWorld.getCurrent().hasAllComponents(pair.getA(), AntiGhostComponent.class, PositionComponent.class))
+            if(entityWorld.hasAllComponents(pair.getA(), AntiGhostComponent.class, PositionComponent.class))
             {
-                if(entityWorld.getCurrent().hasAllComponents(pair.getB(), AntiGhostComponent.class, PositionComponent.class))
+                if(entityWorld.hasAllComponents(pair.getB(), AntiGhostComponent.class, PositionComponent.class))
                 {
                     applyPushes(entityWorld, pair);
                 }
@@ -40,9 +40,9 @@ public class IntersectionAntiGhostSystem implements EntitySystem
         }
         for(Pair<Integer> pair: info.getRepeaters())
         {
-            if(entityWorld.getCurrent().hasAllComponents(pair.getA(), AntiGhostComponent.class, PositionComponent.class))
+            if(entityWorld.hasAllComponents(pair.getA(), AntiGhostComponent.class, PositionComponent.class))
             {
-                if(entityWorld.getCurrent().hasAllComponents(pair.getB(), AntiGhostComponent.class, PositionComponent.class))
+                if(entityWorld.hasAllComponents(pair.getB(), AntiGhostComponent.class, PositionComponent.class))
                 {
                     applyPushes(entityWorld, pair);
                 }

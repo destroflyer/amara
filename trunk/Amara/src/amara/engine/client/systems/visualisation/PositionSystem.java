@@ -25,19 +25,21 @@ public class PositionSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getNew().getEntitiesWithAll(PositionComponent.class))
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, PositionComponent.class);
+        for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class))
         {
             updatePosition(entityWorld, entity);
         }
-        for(int entity : entityWorld.getChanged().getEntitiesWithAll(PositionComponent.class))
+        for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class))
         {
             updatePosition(entityWorld, entity);
         }
+        observer.reset();
     }
     
     private void updatePosition(EntityWorld entityWorld, int entity){
         Node node = entitySceneMap.requestNode(entity);
-        Vector2f position = entityWorld.getCurrent().getComponent(entity, PositionComponent.class).getPosition();
+        Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
         node.setLocalTranslation(position.getX(), mapTerrain.getHeight(position), position.getY());
     }
 }

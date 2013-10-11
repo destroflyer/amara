@@ -10,10 +10,10 @@ package amara.game.entitysystem;
  */
 public class EntityWrapper
 {
-    private DelayedEntityComponentMap entityMap;
+    private EntityComponentMap entityMap;
     private int entity;
 
-    EntityWrapper(DelayedEntityComponentMap entityMap, int entity)
+    EntityWrapper(EntityComponentMap entityMap, int entity)
     {
         this.entityMap = entityMap;
         this.entity = entity;

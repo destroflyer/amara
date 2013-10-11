@@ -27,21 +27,21 @@ public class TriggerCollisionEffectSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(Pair<Integer> pair: info.getEntries()){
-            if(entityWorld.getCurrent().hasAllComponents(pair.getA(), CollisionTriggerEffectComponent.class)){
+            if(entityWorld.hasAllComponents(pair.getA(), CollisionTriggerEffectComponent.class)){
                 applyDamage(entityWorld, pair.getA(), pair.getB());
             }
-            if(entityWorld.getCurrent().hasAllComponents(pair.getB(), CollisionTriggerEffectComponent.class)){
+            if(entityWorld.hasAllComponents(pair.getB(), CollisionTriggerEffectComponent.class)){
                 applyDamage(entityWorld, pair.getB(), pair.getA());
             }
         }
     }
     
     private void applyDamage(EntityWorld entityWorld, int damageEntity, int damagedEntity){
-        EntityWrapper intersectionRules = entityWorld.getWrapped(entityWorld.getCurrent().getComponent(damageEntity, IntersectionRulesComponent.class).getRulesEntityID());
-        if(entityWorld.getCurrent().hasComponent(damagedEntity, IsTargetableComponent.class)){
+        EntityWrapper intersectionRules = entityWorld.getWrapped(entityWorld.getComponent(damageEntity, IntersectionRulesComponent.class).getRulesEntityID());
+        if(entityWorld.hasComponent(damagedEntity, IsTargetableComponent.class)){
             boolean triggerEffect;
-            TeamComponent damageTeamComponent = entityWorld.getCurrent().getComponent(damageEntity, TeamComponent.class);
-            TeamComponent damagedTeamComponent = entityWorld.getCurrent().getComponent(damagedEntity, TeamComponent.class);
+            TeamComponent damageTeamComponent = entityWorld.getComponent(damageEntity, TeamComponent.class);
+            TeamComponent damagedTeamComponent = entityWorld.getComponent(damagedEntity, TeamComponent.class);
             if((damageTeamComponent != null) && (damagedTeamComponent != null)){
                 triggerEffect = false;
                 if(intersectionRules.getComponent(AcceptAlliesComponent.class) != null){
@@ -56,9 +56,9 @@ public class TriggerCollisionEffectSystem implements EntitySystem{
             }
             if(triggerEffect){
                 EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
-                int effectID = entityWorld.getCurrent().getComponent(damageEntity, CollisionTriggerEffectComponent.class).getEffectEntityID();
+                int effectID = entityWorld.getComponent(damageEntity, CollisionTriggerEffectComponent.class).getEffectEntityID();
                 effectCast.setComponent(new PrepareEffectComponent(effectID));
-                CastSourceComponent castSourceComponent = entityWorld.getCurrent().getComponent(damageEntity, CastSourceComponent.class);
+                CastSourceComponent castSourceComponent = entityWorld.getComponent(damageEntity, CastSourceComponent.class);
                 if(castSourceComponent != null){
                     effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntitiyID()));
                 }

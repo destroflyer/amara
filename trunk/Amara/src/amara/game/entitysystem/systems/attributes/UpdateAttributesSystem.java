@@ -18,9 +18,10 @@ public class UpdateAttributesSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(RequestUpdateAttributesComponent.class)))
+        
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(RequestUpdateAttributesComponent.class)))
         {
-            float maximumHealth = 0;
+            float maximumHealth = 0 + 5 - 5;
             float attackDamage = 0;
             float abilityPower = 0;
             float attackSpeed = 0;
@@ -80,7 +81,7 @@ public class UpdateAttributesSystem implements EntitySystem{
             entityWrapper.setComponent(new AttackSpeedComponent(attackSpeed));
             AutoAttackComponent autoAttackComponent = entityWrapper.getComponent(AutoAttackComponent.class);
             if(autoAttackComponent != null){
-                entityWorld.getCurrent().setComponent(autoAttackComponent.getAutoAttackEntityID(), new CooldownComponent(1 / attackSpeed));
+                entityWorld.setComponent(autoAttackComponent.getAutoAttackEntityID(), new CooldownComponent(1 / attackSpeed));
             }
             entityWrapper.removeComponent(RequestUpdateAttributesComponent.class);
         }

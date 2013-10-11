@@ -15,7 +15,7 @@ public class CountdownBindingSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(IsBindedComponent.class)))
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(IsBindedComponent.class)))
         {
             IsBindedComponent isBindedComponent = entityWrapper.getComponent(IsBindedComponent.class);
             float duration = (isBindedComponent.getRemainingDuration() - deltaSeconds);
