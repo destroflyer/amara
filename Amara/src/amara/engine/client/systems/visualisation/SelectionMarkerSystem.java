@@ -29,16 +29,18 @@ public class SelectionMarkerSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getNew().getEntitiesWithAll(IsSelectedComponent.class))
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsSelectedComponent.class);
+        for(int entity : observer.getNew().getEntitiesWithAll(IsSelectedComponent.class))
         {
             Node node = entitySceneMap.requestNode(entity);
             node.attachChild(createSelectionMarker("Textures/selection_markers/circle.png", 2, 2));
         }
-        for(int entity : entityWorld.getRemoved().getEntitiesWithAll(IsSelectedComponent.class))
+        for(int entity : observer.getRemoved().getEntitiesWithAll(IsSelectedComponent.class))
         {
             Node node = entitySceneMap.requestNode(entity);
             node.detachChildNamed(NODE_NAME_SELECTION_MARKER);
         }
+        observer.reset();
     }
     
     private Spatial createSelectionMarker(String textureFilePath, float width, float height){

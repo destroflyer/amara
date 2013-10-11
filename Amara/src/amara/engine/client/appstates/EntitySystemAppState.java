@@ -122,7 +122,6 @@ public class EntitySystemAppState extends BaseAppState{
             EntitySystem entitySystem = entitySystems.get(i);
             entitySystem.update(entityWorld, lastTimePerFrame);
         }
-        entityWorld.onFrameEnded();
     }
 
     public int getEntity(Spatial spatial){

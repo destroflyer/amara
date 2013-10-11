@@ -22,37 +22,37 @@ public class CastSingleTargetSpellSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getCurrent().getEntitiesWithAll(CastSingleTargetSpellComponent.class))
+        for(int entity : entityWorld.getEntitiesWithAll(CastSingleTargetSpellComponent.class))
         {
-            CastSingleTargetSpellComponent castSingleTargetSpellComponent = entityWorld.getCurrent().getComponent(entity, CastSingleTargetSpellComponent.class);
+            CastSingleTargetSpellComponent castSingleTargetSpellComponent = entityWorld.getComponent(entity, CastSingleTargetSpellComponent.class);
             castSingleTargetSpell(entityWorld, entity, castSingleTargetSpellComponent.getSpellEntityID(), castSingleTargetSpellComponent.getTargetEntityID());
-            entityWorld.getCurrent().removeComponent(entity, CastSingleTargetSpellComponent.class);
+            entityWorld.removeComponent(entity, CastSingleTargetSpellComponent.class);
         }
     }
     
     public static void castSingleTargetSpell(EntityWorld entityWorld, int casterEntityID, int spellEntityID, int targetEntityID){
-        InstantTargetEffectComponent instantTargetEffectComponent = entityWorld.getCurrent().getComponent(spellEntityID, InstantTargetEffectComponent.class);
+        InstantTargetEffectComponent instantTargetEffectComponent = entityWorld.getComponent(spellEntityID, InstantTargetEffectComponent.class);
         if(instantTargetEffectComponent != null){
             EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
             effectCast.setComponent(new PrepareEffectComponent(instantTargetEffectComponent.getEffectEntityID()));
             effectCast.setComponent(new EffectSourceComponent(casterEntityID));
             effectCast.setComponent(new AffectedTargetsComponent(new int[]{targetEntityID}));
         }
-        InstantTargetBuffComponent instantTargetBuffComponent = entityWorld.getCurrent().getComponent(spellEntityID, InstantTargetBuffComponent.class);
+        InstantTargetBuffComponent instantTargetBuffComponent = entityWorld.getComponent(spellEntityID, InstantTargetBuffComponent.class);
         if(instantTargetBuffComponent != null){
             EntityWrapper buffStatus = entityWorld.getWrapped(entityWorld.createEntity());
             buffStatus.setComponent(new ActiveBuffComponent(targetEntityID, instantTargetBuffComponent.getBuffEntityID()));
             buffStatus.setComponent(new CastSourceComponent(casterEntityID));
             buffStatus.setComponent(new RemainingBuffDurationComponent(instantTargetBuffComponent.getDuration()));
         }
-        InstantSpawnsComponent instantSpawnsComponent = entityWorld.getCurrent().getComponent(spellEntityID, InstantSpawnsComponent.class);
+        InstantSpawnsComponent instantSpawnsComponent = entityWorld.getComponent(spellEntityID, InstantSpawnsComponent.class);
         if(instantSpawnsComponent != null){
             int[] spawnInformationEntitiesIDs = instantSpawnsComponent.getSpawnInformationEntitiesIDs();
             for(int i=0;i<spawnInformationEntitiesIDs.length;i++){
                 EntityWrapper spawnedObject = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper spawnInformation = entityWorld.getWrapped(spawnInformationEntitiesIDs[i]);
                 spawnedObject.setComponent(new CastSourceComponent(casterEntityID));
-                Vector2f position = entityWorld.getCurrent().getComponent(casterEntityID, PositionComponent.class).getPosition().clone();
+                Vector2f position = entityWorld.getComponent(casterEntityID, PositionComponent.class).getPosition().clone();
                 RelativeSpawnPositionComponent relativeSpawnPositionComponent = spawnInformation.getComponent(RelativeSpawnPositionComponent.class);
                 if(relativeSpawnPositionComponent != null){
                     position.addLocal(relativeSpawnPositionComponent.getPosition());

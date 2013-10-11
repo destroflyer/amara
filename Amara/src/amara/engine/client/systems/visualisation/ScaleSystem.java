@@ -23,30 +23,32 @@ public class ScaleSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getNew().getEntitiesWithAll(ScaleComponent.class))
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, ScaleComponent.class, ModelComponent.class);
+        for(int entity : observer.getNew().getEntitiesWithAll(ScaleComponent.class))
         {
             updateScale(entityWorld, entity);
         }
-        for(int entity : entityWorld.getChanged().getEntitiesWithAll(ScaleComponent.class))
+        for(int entity : observer.getChanged().getEntitiesWithAll(ScaleComponent.class))
         {
             updateScale(entityWorld, entity);
         }
-        for(int entity : entityWorld.getRemoved().getEntitiesWithAll(ScaleComponent.class))
+        for(int entity : observer.getRemoved().getEntitiesWithAll(ScaleComponent.class))
         {
             updateScale(entity, 1);
         }
-        for(int entity : entityWorld.getNew().getEntitiesWithAll(ModelComponent.class))
+        for(int entity : observer.getNew().getEntitiesWithAll(ModelComponent.class))
         {
             updateScale(entityWorld, entity);
         }
-        for(int entity : entityWorld.getChanged().getEntitiesWithAll(ModelComponent.class))
+        for(int entity : observer.getChanged().getEntitiesWithAll(ModelComponent.class))
         {
             updateScale(entityWorld, entity);
         }
+        observer.reset();
     }
     
     private void updateScale(EntityWorld entityWorld, int entity){
-        ScaleComponent scaleComponent = entityWorld.getCurrent().getComponent(entity, ScaleComponent.class);
+        ScaleComponent scaleComponent = entityWorld.getComponent(entity, ScaleComponent.class);
         if(scaleComponent != null){
             updateScale(entity, scaleComponent.getScale());
         }

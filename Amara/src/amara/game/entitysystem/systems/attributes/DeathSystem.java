@@ -15,9 +15,9 @@ public class DeathSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getCurrent().getEntitiesWithAll(HealthComponent.class))
+        for(int entity : entityWorld.getEntitiesWithAll(HealthComponent.class))
         {
-            float health = entityWorld.getCurrent().getComponent(entity, HealthComponent.class).getValue();
+            float health = entityWorld.getComponent(entity, HealthComponent.class).getValue();
             if(health < 1){
                 entityWorld.removeEntity(entity);
             }

@@ -18,22 +18,24 @@ public class AggroSystem implements EntitySystem
 
     public void update(EntityWorld entityWorld, float deltaSeconds)
     {
-        for (int entity : entityWorld.getCurrent().getEntitiesWithAll(AutoAggroComponent.class, PositionComponent.class))
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AutoAggroComponent.class);
+        for (int entity : entityWorld.getEntitiesWithAll(AutoAggroComponent.class, PositionComponent.class))
         {
             ArrayList<Integer> targets = new ArrayList<Integer>();
-            for (int target : entityWorld.getCurrent().getEntitiesWithAll(PositionComponent.class))
+            for (int target : entityWorld.getEntitiesWithAll(PositionComponent.class))
             {
                 if(isLegalTarget(entityWorld, entity, target))
                 {
                     targets.add(target);
                 }
             }
-            entityWorld.getCurrent().setComponent(entity, new TargetsInAggroRangeComponent(listToArray(targets)));
+            entityWorld.setComponent(entity, new TargetsInAggroRangeComponent(listToArray(targets)));
         }
-        for (int entity : entityWorld.getRemoved().getEntitiesWithAll(AutoAggroComponent.class))
+        for (int entity : observer.getRemoved().getEntitiesWithAll(AutoAggroComponent.class))
         {
-            entityWorld.getCurrent().removeComponent(entity, TargetsInAggroRangeComponent.class);
+            entityWorld.removeComponent(entity, TargetsInAggroRangeComponent.class);
         }
+        observer.reset();
     }
     
     private static int[] listToArray(ArrayList<Integer> list)
@@ -47,12 +49,12 @@ public class AggroSystem implements EntitySystem
     
     private boolean isLegalTarget(EntityWorld world, int agressor, int target)
     {
-        float range = world.getCurrent().getComponent(agressor, AutoAggroComponent.class).getRange();
-        if(world.getCurrent().getComponent(agressor, PositionComponent.class).getPosition().distanceSquared(world.getCurrent().getComponent(target, PositionComponent.class).getPosition()) <= range * range)
+        float range = world.getComponent(agressor, AutoAggroComponent.class).getRange();
+        if(world.getComponent(agressor, PositionComponent.class).getPosition().distanceSquared(world.getComponent(target, PositionComponent.class).getPosition()) <= range * range)
         {
-            TeamComponent teamA = world.getCurrent().getComponent(agressor, TeamComponent.class);
+            TeamComponent teamA = world.getComponent(agressor, TeamComponent.class);
             if(teamA == null) return true;
-            TeamComponent teamB = world.getCurrent().getComponent(target, TeamComponent.class);
+            TeamComponent teamB = world.getComponent(target, TeamComponent.class);
             if(teamB == null) return true;
             return teamA.getTeamEntityID() != teamB.getTeamEntityID();
         }

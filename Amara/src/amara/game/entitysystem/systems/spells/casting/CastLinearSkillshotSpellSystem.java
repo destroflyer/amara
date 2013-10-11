@@ -20,7 +20,7 @@ public class CastLinearSkillshotSpellSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(final EntityWrapper caster : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(CastLinearSkillshotSpellComponent.class)))
+        for(final EntityWrapper caster : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(CastLinearSkillshotSpellComponent.class)))
         {
             CastLinearSkillshotSpellComponent castLinearSkillshotSpellComponent = caster.getComponent(CastLinearSkillshotSpellComponent.class);
             final Vector2f direction = castLinearSkillshotSpellComponent.getDirection();
@@ -39,19 +39,19 @@ public class CastLinearSkillshotSpellSystem implements EntitySystem{
                     spawnedObject.setComponent(new MovementSpeedComponent(direction.normalize().multLocal(spawnMovementSpeed)));
                 }
             });
-            entityWorld.getCurrent().removeComponent(caster.getId(), CastLinearSkillshotSpellComponent.class);
+            entityWorld.removeComponent(caster.getId(), CastLinearSkillshotSpellComponent.class);
         }
     }
     
     public static void castSpawnSpell(EntityWorld entityWorld, int casterEntityID, int spellEntityID, SpawnedObjectModifier spawnedObjectModifier){
-        InstantSpawnsComponent instantSpawnsComponent = entityWorld.getCurrent().getComponent(spellEntityID, InstantSpawnsComponent.class);
+        InstantSpawnsComponent instantSpawnsComponent = entityWorld.getComponent(spellEntityID, InstantSpawnsComponent.class);
         if(instantSpawnsComponent != null){
             int[] spawnInformationEntitiesIDs = instantSpawnsComponent.getSpawnInformationEntitiesIDs();
             for(int i=0;i<spawnInformationEntitiesIDs.length;i++){
                 EntityWrapper spawnedObject = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper spawnInformation = entityWorld.getWrapped(spawnInformationEntitiesIDs[i]);
                 spawnedObject.setComponent(new CastSourceComponent(casterEntityID));
-                spawnedObject.setComponent(new TeamComponent(entityWorld.getCurrent().getComponent(casterEntityID, TeamComponent.class).getTeamEntityID()));
+                spawnedObject.setComponent(new TeamComponent(entityWorld.getComponent(casterEntityID, TeamComponent.class).getTeamEntityID()));
                 EntityTemplate.loadTemplates(entityWorld, spawnedObject.getId(), spawnInformation.getComponent(SpawnTemplateComponent.class).getTemplateNames());
                 spawnedObjectModifier.modify(spawnedObject, spawnInformation);
             }

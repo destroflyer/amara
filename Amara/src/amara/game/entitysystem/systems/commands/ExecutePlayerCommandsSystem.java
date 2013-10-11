@@ -36,8 +36,8 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 SelectionCommand selectionCommand = (SelectionCommand) command;
                 deselectAllEntites(entityWorld);
                 int entity = selectionCommand.getEntity();
-                if(entityWorld.getCurrent().hasAllComponents(entity, IsSelectableComponent.class)){
-                    entityWorld.getCurrent().setComponent(entity, new IsSelectedComponent());
+                if(entityWorld.hasAllComponents(entity, IsSelectableComponent.class)){
+                    entityWorld.setComponent(entity, new IsSelectedComponent());
                 }
             }
             else if(command instanceof DeselectionCommand){
@@ -46,69 +46,69 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             }
             else if(command instanceof MoveCommand){
                 MoveCommand moveCommand = (MoveCommand) command;
-                for(int entity : entityWorld.getCurrent().getEntitiesWithAll(IsSelectedComponent.class))
+                for(int entity : entityWorld.getEntitiesWithAll(IsSelectedComponent.class))
                 {
-                    entityWorld.getCurrent().removeComponent(entity, AutoAttackTargetComponent.class);
-                    entityWorld.getCurrent().setComponent(entity, new MovementTargetComponent(moveCommand.getPosition()));
+                    entityWorld.removeComponent(entity, AutoAttackTargetComponent.class);
+                    entityWorld.setComponent(entity, new MovementTargetComponent(moveCommand.getPosition()));
                 }
             }
             else if(command instanceof StopCommand){
                 StopCommand stopCommand = (StopCommand) command;
-                for(int entity : entityWorld.getCurrent().getEntitiesWithAll(IsSelectedComponent.class))
+                for(int entity : entityWorld.getEntitiesWithAll(IsSelectedComponent.class))
                 {
-                    entityWorld.getCurrent().removeComponent(entity, MovementTargetComponent.class);
-                    entityWorld.getCurrent().removeComponent(entity, MovementSpeedComponent.class);
-                    entityWorld.getCurrent().removeComponent(entity, AutoAttackTargetComponent.class);
-                    entityWorld.getCurrent().removeComponent(entity, AnimationComponent.class);
+                    entityWorld.removeComponent(entity, MovementTargetComponent.class);
+                    entityWorld.removeComponent(entity, MovementSpeedComponent.class);
+                    entityWorld.removeComponent(entity, AutoAttackTargetComponent.class);
+                    entityWorld.removeComponent(entity, AnimationComponent.class);
                 }
             }
             else if(command instanceof AutoAttackCommand){
                 AutoAttackCommand autoAttackCommand = (AutoAttackCommand) command;
-                if(entityWorld.getCurrent().hasComponent(autoAttackCommand.getEntity(), AutoAttackComponent.class)){
-                    if(entityWorld.getCurrent().hasComponent(autoAttackCommand.getTargetEntityID(), IsTargetableComponent.class)){
-                        entityWorld.getCurrent().removeComponent(autoAttackCommand.getEntity(), MovementTargetComponent.class);
-                        entityWorld.getCurrent().removeComponent(autoAttackCommand.getEntity(), MovementSpeedComponent.class);
-                        entityWorld.getCurrent().setComponent(autoAttackCommand.getEntity(), new AutoAttackTargetComponent(autoAttackCommand.getTargetEntityID()));
+                if(entityWorld.hasComponent(autoAttackCommand.getEntity(), AutoAttackComponent.class)){
+                    if(entityWorld.hasComponent(autoAttackCommand.getTargetEntityID(), IsTargetableComponent.class)){
+                        entityWorld.removeComponent(autoAttackCommand.getEntity(), MovementTargetComponent.class);
+                        entityWorld.removeComponent(autoAttackCommand.getEntity(), MovementSpeedComponent.class);
+                        entityWorld.setComponent(autoAttackCommand.getEntity(), new AutoAttackTargetComponent(autoAttackCommand.getTargetEntityID()));
                     }
                 }
             }
             else if(command instanceof CastSelfcastSpellCommand){
                 CastSelfcastSpellCommand castSelfcastSpellCommand = (CastSelfcastSpellCommand) command;
-                int spell = entityWorld.getCurrent().getComponent(castSelfcastSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castSelfcastSpellCommand.getSpellIndex()];
-                if(!entityWorld.getCurrent().hasComponent(spell, RemainingCooldownComponent.class)){
-                    entityWorld.getCurrent().setComponent(castSelfcastSpellCommand.getEntity(), new CastSelfcastSpellComponent(spell));
+                int spell = entityWorld.getComponent(castSelfcastSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castSelfcastSpellCommand.getSpellIndex()];
+                if(!entityWorld.hasComponent(spell, RemainingCooldownComponent.class)){
+                    entityWorld.setComponent(castSelfcastSpellCommand.getEntity(), new CastSelfcastSpellComponent(spell));
                 }
             }
             else if(command instanceof CastSingleTargetSpellCommand){
                 CastSingleTargetSpellCommand castSingleTargetSpellCommand = (CastSingleTargetSpellCommand) command;
-                if(entityWorld.getCurrent().hasComponent(castSingleTargetSpellCommand.getTargetEntityID(), IsTargetableComponent.class)){
-                    int spell = entityWorld.getCurrent().getComponent(castSingleTargetSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castSingleTargetSpellCommand.getSpellIndex()];
-                    if(!entityWorld.getCurrent().hasComponent(spell, RemainingCooldownComponent.class)){
-                        entityWorld.getCurrent().setComponent(castSingleTargetSpellCommand.getEntity(), new CastSingleTargetSpellComponent(spell, castSingleTargetSpellCommand.getTargetEntityID()));
+                if(entityWorld.hasComponent(castSingleTargetSpellCommand.getTargetEntityID(), IsTargetableComponent.class)){
+                    int spell = entityWorld.getComponent(castSingleTargetSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castSingleTargetSpellCommand.getSpellIndex()];
+                    if(!entityWorld.hasComponent(spell, RemainingCooldownComponent.class)){
+                        entityWorld.setComponent(castSingleTargetSpellCommand.getEntity(), new CastSingleTargetSpellComponent(spell, castSingleTargetSpellCommand.getTargetEntityID()));
                     }
                 }
             }
             else if(command instanceof CastLinearSkillshotSpellCommand){
                 CastLinearSkillshotSpellCommand castLinearSkillshotSpellCommand = (CastLinearSkillshotSpellCommand) command;
-                int spell = entityWorld.getCurrent().getComponent(castLinearSkillshotSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castLinearSkillshotSpellCommand.getSpellIndex()];
-                if(!entityWorld.getCurrent().hasComponent(spell, RemainingCooldownComponent.class)){
-                    entityWorld.getCurrent().setComponent(castLinearSkillshotSpellCommand.getEntity(), new CastLinearSkillshotSpellComponent(spell, castLinearSkillshotSpellCommand.getDirection()));
+                int spell = entityWorld.getComponent(castLinearSkillshotSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castLinearSkillshotSpellCommand.getSpellIndex()];
+                if(!entityWorld.hasComponent(spell, RemainingCooldownComponent.class)){
+                    entityWorld.setComponent(castLinearSkillshotSpellCommand.getEntity(), new CastLinearSkillshotSpellComponent(spell, castLinearSkillshotSpellCommand.getDirection()));
                 }
             }
             else if(command instanceof CastPositionalSkillshotSpellCommand){
                 CastPositionalSkillshotSpellCommand castPositionalSkillshotSpellCommand = (CastPositionalSkillshotSpellCommand) command;
-                int spell = entityWorld.getCurrent().getComponent(castPositionalSkillshotSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castPositionalSkillshotSpellCommand.getSpellIndex()];
-                if(!entityWorld.getCurrent().hasComponent(spell, RemainingCooldownComponent.class)){
-                    entityWorld.getCurrent().setComponent(castPositionalSkillshotSpellCommand.getEntity(), new CastPositionalSkillshotSpellComponent(spell, castPositionalSkillshotSpellCommand.getPosition()));
+                int spell = entityWorld.getComponent(castPositionalSkillshotSpellCommand.getEntity(), SpellsComponent.class).getSpellsEntitiesIDs()[castPositionalSkillshotSpellCommand.getSpellIndex()];
+                if(!entityWorld.hasComponent(spell, RemainingCooldownComponent.class)){
+                    entityWorld.setComponent(castPositionalSkillshotSpellCommand.getEntity(), new CastPositionalSkillshotSpellComponent(spell, castPositionalSkillshotSpellCommand.getPosition()));
                 }
             }
         }
     }
     
     private void deselectAllEntites(EntityWorld entityWorld){
-        for(int entity : entityWorld.getCurrent().getEntitiesWithAll(IsSelectedComponent.class))
+        for(int entity : entityWorld.getEntitiesWithAll(IsSelectedComponent.class))
         {
-            entityWorld.getCurrent().removeComponent(entity, IsSelectedComponent.class);
+            entityWorld.removeComponent(entity, IsSelectedComponent.class);
         }
     }
 }

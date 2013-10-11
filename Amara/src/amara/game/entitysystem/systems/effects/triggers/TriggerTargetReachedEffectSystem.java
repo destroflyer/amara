@@ -20,18 +20,18 @@ public class TriggerTargetReachedEffectSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getCurrent().getEntitiesWithAll(TargetedMovementComponent.class, TargetReachedTriggerEffectComponent.class))
+        for(int entity : entityWorld.getEntitiesWithAll(TargetedMovementComponent.class, TargetReachedTriggerEffectComponent.class))
         {
-            TargetedMovementComponent targetedMovementComponent = entityWorld.getCurrent().getComponent(entity, TargetedMovementComponent.class);
-            PositionComponent targetPositionComponent = entityWorld.getCurrent().getComponent(targetedMovementComponent.getTargetEntityID(), PositionComponent.class);
+            TargetedMovementComponent targetedMovementComponent = entityWorld.getComponent(entity, TargetedMovementComponent.class);
+            PositionComponent targetPositionComponent = entityWorld.getComponent(targetedMovementComponent.getTargetEntityID(), PositionComponent.class);
             if(targetPositionComponent != null){
-                Vector2f position = entityWorld.getCurrent().getComponent(entity, PositionComponent.class).getPosition();
+                Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
                 Vector2f targetPosition = targetPositionComponent.getPosition();
                 if(position.equals(targetPosition)){
                     EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
-                    int effectID = entityWorld.getCurrent().getComponent(entity, TargetReachedTriggerEffectComponent.class).getEffectEntityID();
+                    int effectID = entityWorld.getComponent(entity, TargetReachedTriggerEffectComponent.class).getEffectEntityID();
                     effectCast.setComponent(new PrepareEffectComponent(effectID));
-                    CastSourceComponent castSourceComponent = entityWorld.getCurrent().getComponent(entity, CastSourceComponent.class);
+                    CastSourceComponent castSourceComponent = entityWorld.getComponent(entity, CastSourceComponent.class);
                     if(castSourceComponent != null){
                         effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntitiyID()));
                     }

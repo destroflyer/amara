@@ -121,7 +121,7 @@ public class SendPlayerCommandsAppState extends BaseAppState{
             int[] spells = selectedEntity.getComponent(SpellsComponent.class).getSpellsEntitiesIDs();
             if(spellIndex < spells.length){
                 int spellEntity = spells[spellIndex];
-                CastTypeComponent.CastType castType = entitySystemAppState.getEntityWorld().getCurrent().getComponent(spellEntity, CastTypeComponent.class).getCastType();
+                CastTypeComponent.CastType castType = entitySystemAppState.getEntityWorld().getComponent(spellEntity, CastTypeComponent.class).getCastType();
                 switch(castType){
                     case SELFCAST:
                         sendCommand(new CastSelfcastSpellCommand(selectedEntity.getId(), spellIndex));
@@ -174,6 +174,6 @@ public class SendPlayerCommandsAppState extends BaseAppState{
     
     private List<EntityWrapper> getSelectedEntities(){
         EntitySystemAppState entitySystemAppState = getAppState(EntitySystemAppState.class);
-        return entitySystemAppState.getEntityWorld().getWrapped(entitySystemAppState.getEntityWorld().getCurrent().getEntitiesWithAll(IsSelectedComponent.class));
+        return entitySystemAppState.getEntityWorld().getWrapped(entitySystemAppState.getEntityWorld().getEntitiesWithAll(IsSelectedComponent.class));
     }
 }

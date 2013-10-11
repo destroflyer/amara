@@ -39,7 +39,7 @@ public class MaximumHealthBarSystem extends SimpleVisualAttachmentSystem{
         int imageHeight = 10;
         PaintableImage paintableImage = new PaintableImage(imageWidth, imageHeight);
         paintableImage.setBackground(new Color(0.3f, 0.9f, 0.2f));
-        float maximumHealth = entityWorld.getCurrent().getComponent(entity, MaximumHealthComponent.class).getValue();
+        float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();
         int subBarWidth = 100;
         float partWidth = (imageWidth / (maximumHealth / subBarWidth));
         int finishedSubBars = 0;

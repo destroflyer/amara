@@ -15,12 +15,12 @@ public class CountdownBuffsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int buffStatus : entityWorld.getCurrent().getEntitiesWithAll(RemainingBuffDurationComponent.class))
+        for(int buffStatus : entityWorld.getEntitiesWithAll(RemainingBuffDurationComponent.class))
         {
-            RemainingBuffDurationComponent remainingBuffDurationComponent = entityWorld.getCurrent().getComponent(buffStatus, RemainingBuffDurationComponent.class);
+            RemainingBuffDurationComponent remainingBuffDurationComponent = entityWorld.getComponent(buffStatus, RemainingBuffDurationComponent.class);
             float duration = (remainingBuffDurationComponent.getRemainingDuration() - deltaSeconds);
             if(duration > 0){
-                entityWorld.getCurrent().setComponent(buffStatus, new RemainingBuffDurationComponent(duration));
+                entityWorld.setComponent(buffStatus, new RemainingBuffDurationComponent(duration));
             }
             else{
                 entityWorld.removeEntity(buffStatus);

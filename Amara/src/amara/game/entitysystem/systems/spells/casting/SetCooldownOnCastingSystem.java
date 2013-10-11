@@ -16,24 +16,24 @@ public class SetCooldownOnCastingSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getCurrent().getEntitiesWithAll(CastSingleTargetSpellComponent.class))
+        for(int entity : entityWorld.getEntitiesWithAll(CastSingleTargetSpellComponent.class))
         {
-            setOnCooldown(entityWorld, entityWorld.getCurrent().getComponent(entity, CastSingleTargetSpellComponent.class).getSpellEntityID());
+            setOnCooldown(entityWorld, entityWorld.getComponent(entity, CastSingleTargetSpellComponent.class).getSpellEntityID());
         }
-        for(int entity : entityWorld.getCurrent().getEntitiesWithAll(CastLinearSkillshotSpellComponent.class))
+        for(int entity : entityWorld.getEntitiesWithAll(CastLinearSkillshotSpellComponent.class))
         {
-            setOnCooldown(entityWorld, entityWorld.getCurrent().getComponent(entity, CastLinearSkillshotSpellComponent.class).getSpellEntityID());
+            setOnCooldown(entityWorld, entityWorld.getComponent(entity, CastLinearSkillshotSpellComponent.class).getSpellEntityID());
         }
-        for(int entity : entityWorld.getCurrent().getEntitiesWithAll(CastPositionalSkillshotSpellComponent.class))
+        for(int entity : entityWorld.getEntitiesWithAll(CastPositionalSkillshotSpellComponent.class))
         {
-            setOnCooldown(entityWorld, entityWorld.getCurrent().getComponent(entity, CastPositionalSkillshotSpellComponent.class).getSpellEntityID());
+            setOnCooldown(entityWorld, entityWorld.getComponent(entity, CastPositionalSkillshotSpellComponent.class).getSpellEntityID());
         }
     }
     
     public static void setOnCooldown(EntityWorld entityWorld, int spellEntityID){
-        CooldownComponent cooldownComponent = entityWorld.getCurrent().getComponent(spellEntityID, CooldownComponent.class);
+        CooldownComponent cooldownComponent = entityWorld.getComponent(spellEntityID, CooldownComponent.class);
         if(cooldownComponent != null){
-            entityWorld.getCurrent().setComponent(spellEntityID, new RemainingCooldownComponent(cooldownComponent.getDuration()));
+            entityWorld.setComponent(spellEntityID, new RemainingCooldownComponent(cooldownComponent.getDuration()));
         }
     }
 }

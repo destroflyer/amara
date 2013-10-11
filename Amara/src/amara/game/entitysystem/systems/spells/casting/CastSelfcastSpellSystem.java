@@ -15,7 +15,7 @@ public class CastSelfcastSpellSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper caster : entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(CastSelfcastSpellComponent.class)))
+        for(EntityWrapper caster : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(CastSelfcastSpellComponent.class)))
         {
             CastSelfcastSpellComponent castSelfcastSpellComponent = caster.getComponent(CastSelfcastSpellComponent.class);
             CastSingleTargetSpellSystem.castSingleTargetSpell(entityWorld, caster.getId(), castSelfcastSpellComponent.getSpellEntityID(), caster.getId());

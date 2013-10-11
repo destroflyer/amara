@@ -19,16 +19,16 @@ public class MovementSystem implements EntitySystem
     
     public void update(EntityWorld entityWorld, float deltaSeconds)
     {
-        for(EntityWrapper entity: entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(MovementTargetComponent.class, PositionComponent.class)))
+        for(EntityWrapper entity: entityWorld.getWrapped(entityWorld.getEntitiesWithAll(MovementTargetComponent.class, PositionComponent.class)))
         {
             PositionComponent positionComponent = entity.getComponent(PositionComponent.class);
             Vector2f moveDirection = entity.getComponent(MovementTargetComponent.class).getTargetPosition().subtract(positionComponent.getPosition()).normalizeLocal().multLocal(2.5f);
             entity.setComponent(new MovementSpeedComponent(moveDirection));
         }
         
-        for(EntityWrapper entity: entityWorld.getWrapped(entityWorld.getCurrent().getEntitiesWithAll(MovementSpeedComponent.class, PositionComponent.class)))
+        for(EntityWrapper entity: entityWorld.getWrapped(entityWorld.getEntitiesWithAll(MovementSpeedComponent.class, PositionComponent.class)))
         {
-            if(entityWorld.getCurrent().hasAnyComponent(entity.getId(), antiMovementComponentClasses))
+            if(entityWorld.hasAnyComponent(entity.getId(), antiMovementComponentClasses))
             {
                 continue;
             }

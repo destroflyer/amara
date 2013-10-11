@@ -57,19 +57,21 @@ public class IntersectionSystem implements EntitySystem, IntersectionInformant
     
     private void updateHitboxes(EntityWorld entityWorld)
     {
-        for(int entity: entityWorld.getRemoved().getEntitiesWithAny(HitboxComponent.class))
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, HitboxComponent.class);
+        for(int entity: observer.getRemoved().getEntitiesWithAny(HitboxComponent.class))
         {
             remove(entity);
         }
-        for(EntityWrapper entity: entityWorld.getWrapped(entityWorld.getChanged().getEntitiesWithAny(HitboxComponent.class)))
+        for(EntityWrapper entity: entityWorld.getWrapped(observer.getChanged().getEntitiesWithAny(HitboxComponent.class)))
         {
             remove(entity.getId());
             add(entity);
         }
-        for(EntityWrapper entity: entityWorld.getWrapped(entityWorld.getNew().getEntitiesWithAny(HitboxComponent.class)))
+        for(EntityWrapper entity: entityWorld.getWrapped(observer.getNew().getEntitiesWithAny(HitboxComponent.class)))
         {
             add(entity);
         }
+        observer.reset();
     }
     
     private void remove(int entity)

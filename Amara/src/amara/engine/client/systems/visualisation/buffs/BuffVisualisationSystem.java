@@ -25,24 +25,26 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getNew().getEntitiesWithAll(ActiveBuffComponent.class))
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, ActiveBuffComponent.class);
+        for(int entity : observer.getNew().getEntitiesWithAll(ActiveBuffComponent.class))
         {
             updateVisualAttachment(entityWorld, entity);
         }
-        for(int entity : entityWorld.getChanged().getEntitiesWithAll(ActiveBuffComponent.class))
+        for(int entity : observer.getChanged().getEntitiesWithAll(ActiveBuffComponent.class))
         {
             updateVisualAttachment(entityWorld, entity);
         }
-        for(int entity : entityWorld.getRemoved().getEntitiesWithAll(ActiveBuffComponent.class))
+        for(int entity : observer.getRemoved().getEntitiesWithAll(ActiveBuffComponent.class))
         {
-            int targetEntityID = entityWorld.getRemoved().getComponent(entity, ActiveBuffComponent.class).getTargetEntityID();
+            int targetEntityID = observer.getRemoved().getComponent(entity, ActiveBuffComponent.class).getTargetEntityID();
             removeVisualAttachment(targetEntityID);
         }
+        observer.reset();
     }
     
     private void updateVisualAttachment(EntityWorld entityWorld, int buffStatusEntityID){
         if(shouldBeVisualized(entityWorld, buffStatusEntityID)){
-            int targetEntityID = entityWorld.getCurrent().getComponent(buffStatusEntityID, ActiveBuffComponent.class).getTargetEntityID();
+            int targetEntityID = entityWorld.getComponent(buffStatusEntityID, ActiveBuffComponent.class).getTargetEntityID();
             removeVisualAttachment(targetEntityID);
             Node node = entitySceneMap.requestNode(targetEntityID);
             Spatial visualAttachment = createBuffVisualisation(entityWorld, targetEntityID);
@@ -54,8 +56,8 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
     }
     
     private boolean shouldBeVisualized(EntityWorld entityWorld, int buffStatusEntityID){
-        ActiveBuffComponent activeBuffComponent = entityWorld.getCurrent().getComponent(buffStatusEntityID, ActiveBuffComponent.class);
-        BuffVisualisationComponent buffVisualisationComponent = entityWorld.getCurrent().getComponent(activeBuffComponent.getBuffEntityID(), BuffVisualisationComponent.class);
+        ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntityID, ActiveBuffComponent.class);
+        BuffVisualisationComponent buffVisualisationComponent = entityWorld.getComponent(activeBuffComponent.getBuffEntityID(), BuffVisualisationComponent.class);
         return ((buffVisualisationComponent != null) && (buffVisualisationComponent.getName().equals(visualisationName)));
     }
     
