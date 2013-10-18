@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
+    <useStyles filename="nifty-default-styles.xml"/>
+    <useControls filename="nifty-default-controls.xml"/>
+    <screen id="start" controller="amara.engine.client.gui.ScreenController_HUD">
+        <layer id="inventory" childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="130px">
+                    <panel width="174px"/>
+                    <panel childLayout="vertical" width="132px">
+                        <panel childLayout="horizontal" height="42px">
+                            <image id="inventory_item_0_image" filename="Interface/hud/items/none.png" width="34%" height="100%"></image>
+                            <image id="inventory_item_1_image" filename="Interface/hud/items/none.png" width="34%" height="100%"></image>
+                            <image id="inventory_item_2_image" filename="Interface/hud/items/none.png" width="34%" height="100%"></image>
+                        </panel>
+                        <panel childLayout="horizontal" height="42px">
+                            <image id="inventory_item_3_image" filename="Interface/hud/items/none.png" width="34%" height="100%"></image>
+                            <image id="inventory_item_4_image" filename="Interface/hud/items/none.png" width="34%" height="100%"></image>
+                            <image id="inventory_item_5_image" filename="Interface/hud/items/none.png" width="34%" height="100%"></image>
+                        </panel>
+                        <panel backgroundColor="#000D"/>
+                        <panel height="6px"/>
+                    </panel>
+                    <panel/>
+                </panel>
+            </panel>
+        </layer>
+        <layer id="windows" childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="200px">
+                    <image filename="Interface/hud/unit.png" width="400px" height="100%" valign="bottom"></image>
+                    <panel/>
+                </panel>
+            </panel>
+        </layer>
+        <layer id="character" childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="122px">
+                    <panel width="4px"/>
+                    <panel width="166px" childLayout="vertical" backgroundColor="#000D">
+                        <panel height="5px"/>
+                        <text text="destroflyer" width="100%" textHAlign="center" font="Interface/fonts/Verdana_12.fnt"/>
+                        <panel childLayout="horizontal">
+                            <panel width="10px"/>
+                            <panel childLayout="vertical">
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/health.png"/>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_health" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/attack_damage.png"/>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_attack_damage" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/ability_power.png"/>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_ability_power" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/attack_speed.png"/>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_attack_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/movement_speed.png"/>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_movement_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
+                        </panel>
+                    </panel>
+                    <panel/>
+                </panel>
+                <panel height="7px"/>
+            </panel>
+        </layer>
+    </screen>
+</nifty>

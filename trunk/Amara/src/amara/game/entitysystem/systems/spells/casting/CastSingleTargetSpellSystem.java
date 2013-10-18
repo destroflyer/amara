@@ -6,6 +6,7 @@ package amara.game.entitysystem.systems.spells.casting;
 
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.input.*;
@@ -44,6 +45,7 @@ public class CastSingleTargetSpellSystem implements EntitySystem{
             buffStatus.setComponent(new ActiveBuffComponent(targetEntityID, instantTargetBuffComponent.getBuffEntityID()));
             buffStatus.setComponent(new CastSourceComponent(casterEntityID));
             buffStatus.setComponent(new RemainingBuffDurationComponent(instantTargetBuffComponent.getDuration()));
+            entityWorld.setComponent(targetEntityID, new RequestUpdateAttributesComponent());
         }
         InstantSpawnsComponent instantSpawnsComponent = entityWorld.getComponent(spellEntityID, InstantSpawnsComponent.class);
         if(instantSpawnsComponent != null){
