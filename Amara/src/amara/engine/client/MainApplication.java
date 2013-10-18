@@ -36,6 +36,7 @@ public class MainApplication extends SimpleApplication{
     @Override
     public void simpleInitApp(){
         MaterialFactory.setAssetManager(assetManager);
+        setDisplayStatView(false);
         viewPort.getQueue().setGeometryComparator(RenderQueue.Bucket.Opaque, new LayerGeometryComparator());
         stateManager.attach(new EventManagerAppState());
         stateManager.attach(new NiftyAppState());

@@ -6,10 +6,12 @@ package amara.engine.client.appstates;
 
 
 import java.util.ArrayList;
+import com.jme3.app.Application;
+import com.jme3.app.state.AppStateManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
+import amara.engine.client.gui.GameScreenController;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.ScreenController;
-import amara.engine.client.gui.GameScreenController;
 
 /**
  *
@@ -18,9 +20,16 @@ import amara.engine.client.gui.GameScreenController;
 public class NiftyAppState extends BaseAppState{
 
     public NiftyAppState(){
+        
     }
     private ArrayList<Nifty> runningNifties = new ArrayList<Nifty>();
-    
+
+    @Override
+    public void initialize(AppStateManager stateManager, Application application){
+        super.initialize(stateManager, application);
+        createNifty("Interface/hud.xml");
+    }
+        
     public Nifty createNifty(String filePath){
         NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(mainApplication.getAssetManager(), mainApplication.getInputManager(), mainApplication.getAudioRenderer(), mainApplication.getGuiViewPort());
         mainApplication.getGuiViewPort().addProcessor(niftyDisplay);

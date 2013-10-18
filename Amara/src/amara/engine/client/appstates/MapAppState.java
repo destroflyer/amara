@@ -9,7 +9,10 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector2f;
 import com.jme3.scene.Node;
+import amara.engine.client.gui.*;
 import amara.engine.client.maps.MapTerrain;
+import amara.engine.client.systems.*;
+import amara.engine.client.systems.gui.*;
 import amara.engine.client.systems.visualisation.*;
 import amara.engine.client.systems.visualisation.buffs.*;
 import amara.engine.client.systems.visualisation.effects.crodwcontrol.*;
@@ -95,14 +98,18 @@ public class MapAppState extends BaseAppState{
         entity2.setComponent(new BaseAbilityPowerComponent(0));
         entity2.setComponent(new BaseAttackSpeedComponent(0.6f));
         EntityWrapper doransBlade = entityWorld.getWrapped(entityWorld.createEntity());
+        doransBlade.setComponent(new ItemVisualisationComponent("dorans_blade"));
         doransBlade.setComponent(new BonusFlatMaximumHealthComponent(80));
         doransBlade.setComponent(new BonusFlatAttackDamageComponent(10));
         EntityWrapper doransRing = entityWorld.getWrapped(entityWorld.createEntity());
+        doransRing.setComponent(new ItemVisualisationComponent("dorans_ring"));
         doransRing.setComponent(new BonusFlatMaximumHealthComponent(80));
         doransRing.setComponent(new BonusFlatAbilityPowerComponent(15));
         EntityWrapper needlesslyLargeRod = entityWorld.getWrapped(entityWorld.createEntity());
+        needlesslyLargeRod.setComponent(new ItemVisualisationComponent("needlessly_large_rod"));
         needlesslyLargeRod.setComponent(new BonusFlatAbilityPowerComponent(80));
         EntityWrapper dagger = entityWorld.getWrapped(entityWorld.createEntity());
+        dagger.setComponent(new ItemVisualisationComponent("dagger"));
         dagger.setComponent(new BonusPercentageAttackSpeedComponent(0.12f));
         entity2.setComponent(new InventoryComponent(new int[]{doransBlade.getId(), doransRing.getId(), needlesslyLargeRod.getId(), dagger.getId(), dagger.getId()}));
         entity2.setComponent(new RequestUpdateAttributesComponent());
@@ -195,6 +202,8 @@ public class MapAppState extends BaseAppState{
         }
         //Client systems
         EntitySceneMap entitySceneMap = entitySystemAppState.getEntitySceneMap();
+        SelectedUnitSystem selectedUnitSystem = new SelectedUnitSystem();
+        entitySystemAppState.addEntitySystem(selectedUnitSystem);
         entitySystemAppState.addEntitySystem(new ModelSystem(entitySceneMap, mainApplication));
         entitySystemAppState.addEntitySystem(new PositionSystem(entitySceneMap, mapTerrain));
         entitySystemAppState.addEntitySystem(new DirectionSystem(entitySceneMap));
@@ -206,6 +215,9 @@ public class MapAppState extends BaseAppState{
         entitySystemAppState.addEntitySystem(new StunVisualisationSystem(entitySceneMap));
         entitySystemAppState.addEntitySystem(new SilenceVisualisationSystem(entitySceneMap));
         entitySystemAppState.addEntitySystem(new BuffVisualisationSystem_Burning(entitySceneMap));
+        NiftyAppState niftyAppState = getAppState(NiftyAppState.class);
+        entitySystemAppState.addEntitySystem(new DisplayAttributesSystem(selectedUnitSystem, niftyAppState.getScreenController(ScreenController_HUD.class)));
+        entitySystemAppState.addEntitySystem(new DisplayInventorySystem(selectedUnitSystem, niftyAppState.getScreenController(ScreenController_HUD.class)));
         //Debug View
         Node collisionDebugNode = new Node();
         collisionDebugNode.setLocalTranslation(0, 1, 0);

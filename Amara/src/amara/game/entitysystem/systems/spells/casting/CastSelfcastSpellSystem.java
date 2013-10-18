@@ -19,6 +19,7 @@ public class CastSelfcastSpellSystem implements EntitySystem{
         {
             CastSelfcastSpellComponent castSelfcastSpellComponent = caster.getComponent(CastSelfcastSpellComponent.class);
             CastSingleTargetSpellSystem.castSingleTargetSpell(entityWorld, caster.getId(), castSelfcastSpellComponent.getSpellEntityID(), caster.getId());
+            entityWorld.removeComponent(caster.getId(), CastSelfcastSpellComponent.class);
         }
     }
 }
