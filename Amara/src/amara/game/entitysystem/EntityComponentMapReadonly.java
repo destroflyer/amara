@@ -16,6 +16,7 @@ public interface EntityComponentMapReadonly
     public boolean hasComponent(int entity, Class componentClass);
     public boolean hasAllComponents(int entity, Class... componentsClasses);
     public boolean hasAnyComponent(int entity, Class... componentsClasses);
+    public List<Object> getComponents(int entity);
     public List<Integer> getEntitiesWithAll(Class... componentsClasses);
     public List<Integer> getEntitiesWithAny(Class... componentsClasses);
 }
