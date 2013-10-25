@@ -6,6 +6,7 @@ package amara.game.entitysystem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -14,6 +15,7 @@ import java.util.List;
 public class EntityWorld extends ObservedComponentMap
 {
     private int nextEntity;
+    private ConcurrentHashMap<EntitySystem, EntityObserver> systemEntityObserverMap = new ConcurrentHashMap<EntitySystem, EntityObserver>();
 
     public int createEntity()
     {
@@ -38,5 +40,23 @@ public class EntityWorld extends ObservedComponentMap
             list.add(new EntityWrapper(this, entity));
         }
         return list;
+    }
+    
+    public EntityObserver getEntityObserver(EntitySystem key)
+    {
+        return systemEntityObserverMap.get(key);
+    }
+    
+    public void createEntityObserver(EntitySystem key)
+    {
+        EntityObserver observer = new EntityObserver(this);
+        systemEntityObserverMap.put(key, observer);
+        observer.reset();
+    }
+    
+    public EntityObserver getOrCreateEntityObserver(EntitySystem key)
+    {
+        if(getEntityObserver(key) == null) createEntityObserver(key);
+        return getEntityObserver(key);
     }
 }
