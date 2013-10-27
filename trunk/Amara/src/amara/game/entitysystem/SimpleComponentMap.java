@@ -31,6 +31,10 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
         }
         return componentMap;
     }
+
+    protected ConcurrentHashMap<Class, ConcurrentHashMap<Integer, Object>> getComponentMaps() {
+        return componentMaps;
+    }
     
     public <T> T getComponent(int entity, Class<T> componentClass)
     {
