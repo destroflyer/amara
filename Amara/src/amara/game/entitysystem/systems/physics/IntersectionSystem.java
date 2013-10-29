@@ -9,15 +9,12 @@ import amara.game.entitysystem.systems.physics.intersectionHelper.Hitbox;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionFilter;
-import intersections.IntersectionTracker;
-import intersections.Pair;
-import intersections.SweepAndPrune;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import shapes.Shape;
-import shapes.Transform;
+import amara.game.entitysystem.systems.physics.intersection.*;
+import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *

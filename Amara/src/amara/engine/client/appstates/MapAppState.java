@@ -31,7 +31,7 @@ import amara.game.entitysystem.components.spells.specials.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.physics.*;
-import shapes.*;
+import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *

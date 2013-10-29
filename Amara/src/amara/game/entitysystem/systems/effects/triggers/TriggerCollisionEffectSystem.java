@@ -11,7 +11,8 @@ import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.effects.*;
 import amara.game.entitysystem.components.units.intersections.*;
 import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionInformant;
-import intersections.Pair;
+import amara.game.entitysystem.systems.physics.intersection.*;
+import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *

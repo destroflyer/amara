@@ -7,7 +7,8 @@ package amara.game.entitysystem.systems.physics;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import java.util.HashSet;
-import shapes.*;
+import amara.game.entitysystem.systems.physics.intersection.*;
+import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *

@@ -4,7 +4,8 @@
  */
 package amara.game.entitysystem.components.physics;
 
-import shapes.Shape;
+import amara.game.entitysystem.systems.physics.intersection.*;
+import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *

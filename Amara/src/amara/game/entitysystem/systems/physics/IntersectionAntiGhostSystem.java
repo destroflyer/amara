@@ -10,8 +10,8 @@ import amara.game.entitysystem.components.physics.HitboxComponent;
 import amara.game.entitysystem.components.physics.PositionComponent;
 import amara.game.entitysystem.components.physics.AntiGhostComponent;
 import com.jme3.math.Vector2f;
-import intersections.Pair;
-import shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.intersection.*;
+import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *

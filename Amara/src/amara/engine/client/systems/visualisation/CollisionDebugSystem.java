@@ -16,7 +16,7 @@ import amara.engine.client.MaterialFactory;
 import amara.engine.client.systems.debug.*;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
-import shapes.*;
+import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *
