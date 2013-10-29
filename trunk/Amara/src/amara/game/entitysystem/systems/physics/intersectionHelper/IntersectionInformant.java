@@ -4,7 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.intersectionHelper;
 
-import intersections.Pair;
+import amara.game.entitysystem.systems.physics.intersection.*;
+import amara.game.entitysystem.systems.physics.shapes.*;
 import java.util.Set;
 
 /**

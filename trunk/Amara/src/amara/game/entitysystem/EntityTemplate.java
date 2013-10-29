@@ -11,7 +11,7 @@ import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.effects.*;
 import amara.game.entitysystem.components.units.intersections.*;
 import amara.game.entitysystem.components.visuals.*;
-import shapes.Circle;
+import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *

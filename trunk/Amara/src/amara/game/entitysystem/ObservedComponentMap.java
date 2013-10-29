@@ -95,9 +95,11 @@ class ObservedComponentMap extends SimpleComponentMap
         else
         {
             systemObserverMap.put(key, observer);
-            for (Class clazz : componentClasses) {
+            for (Class clazz : componentClasses)
+            {
                 getObservers(clazz).add(observer);
-                for (int entity : getEntitiesWithAny(clazz)) {
+                for (int entity : getEntitiesWithAny(clazz))
+                {
                     observer.onComponentAdded(this, entity, getComponent(entity, clazz));
                 }
             }

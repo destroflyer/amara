@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.intersectionHelper;
 
-import intersections.HasShape;
-import shapes.Shape;
+import amara.game.entitysystem.systems.physics.intersection.*;
+import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *

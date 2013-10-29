@@ -6,7 +6,8 @@ package amara.game.entitysystem.systems.physics.intersectionHelper;
 
 import amara.game.entitysystem.EntityWorld;
 import amara.game.entitysystem.components.physics.CollisionGroupComponent;
-import intersections.Filter;
+import amara.game.entitysystem.systems.physics.intersection.*;
+import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *

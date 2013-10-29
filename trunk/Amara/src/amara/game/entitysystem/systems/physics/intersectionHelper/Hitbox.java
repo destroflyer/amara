@@ -6,8 +6,8 @@ package amara.game.entitysystem.systems.physics.intersectionHelper;
 
 import amara.game.entitysystem.EntityWrapper;
 import amara.game.entitysystem.components.physics.HitboxComponent;
-import intersections.HasShape;
-import shapes.Shape;
+import amara.game.entitysystem.systems.physics.intersection.*;
+import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *

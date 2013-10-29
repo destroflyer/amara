@@ -4,7 +4,7 @@ import java.nio.FloatBuffer;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
-import shapes.*;
+import amara.game.entitysystem.systems.physics.shapes.*;
 
 public class ShapeMesh extends Mesh{
 
