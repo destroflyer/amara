@@ -17,7 +17,7 @@ import de.lessvoid.nifty.screen.ScreenController;
  *
  * @author Carl
  */
-public class NiftyAppState extends BaseAppState{
+public class NiftyAppState extends ClientBaseAppState{
 
     public NiftyAppState(){
         

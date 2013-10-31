@@ -15,7 +15,7 @@ import com.jme3.math.Vector3f;
  *
  * @author Carl
  */
-public class IngameCameraAppState extends BaseAppState implements ActionListener{
+public class IngameCameraAppState extends ClientBaseAppState implements ActionListener{
 
     public IngameCameraAppState(){
         

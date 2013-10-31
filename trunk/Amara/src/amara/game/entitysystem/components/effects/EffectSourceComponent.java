@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.effects;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class EffectSourceComponent{
 
+    public EffectSourceComponent(){
+        
+    }
+    
     public EffectSourceComponent(int sourceEntityID){
         this.sourceEntityID = sourceEntityID;
     }

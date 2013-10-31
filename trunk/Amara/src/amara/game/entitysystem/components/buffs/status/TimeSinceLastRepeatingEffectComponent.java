@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.buffs.status;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class TimeSinceLastRepeatingEffectComponent{
 
+    public TimeSinceLastRepeatingEffectComponent(){
+        
+    }
+    
     public TimeSinceLastRepeatingEffectComponent(float duration){
         this.duration = duration;
     }

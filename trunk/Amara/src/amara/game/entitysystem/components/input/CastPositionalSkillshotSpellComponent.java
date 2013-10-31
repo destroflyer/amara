@@ -5,13 +5,19 @@
 package amara.game.entitysystem.components.input;
 
 import com.jme3.math.Vector2f;
+import com.jme3.network.serializing.Serializable;
 
 /**
  *
  * @author Carl
  */
+@Serializable
 public class CastPositionalSkillshotSpellComponent{
 
+    public CastPositionalSkillshotSpellComponent(){
+        
+    }
+    
     public CastPositionalSkillshotSpellComponent(int spellEntityID, Vector2f position){
         this.spellEntityID = spellEntityID;
         this.position = position;

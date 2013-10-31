@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.effects.crowdcontrol;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class SilenceComponent{
 
+    public SilenceComponent(){
+        
+    }
+    
     public SilenceComponent(float duration){
         this.duration = duration;
     }

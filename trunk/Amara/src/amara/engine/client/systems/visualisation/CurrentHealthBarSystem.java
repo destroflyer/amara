@@ -26,16 +26,21 @@ public class CurrentHealthBarSystem extends SimpleVisualAttachmentSystem{
         
     @Override
     protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
-        float health = entityWorld.getComponent(entity, HealthComponent.class).getValue();
-        float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();
-        float healthPortion = (1 - (health / maximumHealth));
-        Geometry geometry = new Geometry("", new RectangleMesh((MaximumHealthBarSystem.BAR_WIDTH / 2) - (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), 0, 0, (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), MaximumHealthBarSystem.BAR_HEIGHT));
-        Material material = MaterialFactory.generateUnshadedMaterial(ColorRGBA.Black);
-        material.getAdditionalRenderState().setDepthTest(false);
-        geometry.setMaterial(material);
-        geometry.addControl(new BillboardControl());
-        geometry.setLocalTranslation(MaximumHealthBarSystem.BAR_LOCATION);
-        geometry.setUserData("layer", 6);
-        return geometry;
+        HealthComponent healthComponent = entityWorld.getComponent(entity, HealthComponent.class);
+        MaximumHealthComponent maximumHealthComponent = entityWorld.getComponent(entity, MaximumHealthComponent.class);
+        if((healthComponent != null) && (maximumHealthComponent != null)){
+            float health = healthComponent.getValue();
+            float maximumHealth = maximumHealthComponent.getValue();
+            float healthPortion = (1 - (health / maximumHealth));
+            Geometry geometry = new Geometry("", new RectangleMesh((MaximumHealthBarSystem.BAR_WIDTH / 2) - (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), 0, 0, (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), MaximumHealthBarSystem.BAR_HEIGHT));
+            Material material = MaterialFactory.generateUnshadedMaterial(ColorRGBA.Black);
+            material.getAdditionalRenderState().setDepthTest(false);
+            geometry.setMaterial(material);
+            geometry.addControl(new BillboardControl());
+            geometry.setLocalTranslation(MaximumHealthBarSystem.BAR_LOCATION);
+            geometry.setUserData("layer", 6);
+            return geometry;
+        }
+        return null;
     }
 }

@@ -4,10 +4,16 @@
  */
 package amara.game.entitysystem.components.units;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class IsTargetableComponent{
-    
+
+    public IsTargetableComponent(){
+        
+    }
 }

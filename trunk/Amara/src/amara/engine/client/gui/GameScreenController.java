@@ -16,7 +16,7 @@ import de.lessvoid.nifty.elements.render.*;
 import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import amara.engine.client.MainApplication;
+import amara.engine.client.ClientApplication;
 import amara.engine.client.appstates.NiftyAppState;
 
 /**
@@ -28,7 +28,7 @@ public class GameScreenController implements ScreenController{
     public GameScreenController(){
         
     }
-    protected MainApplication mainApplication;
+    protected ClientApplication clientApplication;
     protected Nifty nifty;
     private boolean isInitialized = false;
     
@@ -43,12 +43,12 @@ public class GameScreenController implements ScreenController{
         
     }
 
-    public MainApplication getMainApplication(){
-        return mainApplication;
+    public ClientApplication getClientApplication(){
+        return clientApplication;
     }
 
-    public void setMainApplication(MainApplication mainApplication){
-        this.mainApplication = mainApplication;
+    public void setMainApplication(ClientApplication clientApplication){
+        this.clientApplication = clientApplication;
     }
 
     public Nifty getNifty(){
@@ -94,7 +94,7 @@ public class GameScreenController implements ScreenController{
     }
     
     public void goToScreen(String screenID){
-        mainApplication.getStateManager().getState(NiftyAppState.class).goToScreen(getClass(), screenID);
+        clientApplication.getStateManager().getState(NiftyAppState.class).goToScreen(getClass(), screenID);
     }
     
     protected void removeAllChildElements(Element element){

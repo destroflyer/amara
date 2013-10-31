@@ -13,6 +13,10 @@ import com.jme3.network.serializing.Serializable;
 @Serializable
 public class Rectangle extends SimpleConvex {
 
+    public Rectangle(){
+        
+    }
+    
     public Rectangle(double width, double height) {
         this(0, 0, width, height);
     }

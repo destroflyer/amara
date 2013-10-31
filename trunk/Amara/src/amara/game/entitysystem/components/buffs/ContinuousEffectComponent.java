@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.buffs;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class ContinuousEffectComponent{
 
+    public ContinuousEffectComponent(){
+        
+    }
+    
     public ContinuousEffectComponent(int effectEntityID){
         this.effectEntityID = effectEntityID;
     }

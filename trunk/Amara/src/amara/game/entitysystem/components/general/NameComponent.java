@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.general;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class NameComponent{
 
+    public NameComponent(){
+        
+    }
+    
     public NameComponent(String name){
         this.name = name;
     }

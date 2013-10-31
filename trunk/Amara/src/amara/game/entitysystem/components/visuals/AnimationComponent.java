@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.visuals;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class AnimationComponent{
 
+    public AnimationComponent(){
+        
+    }
+    
     public AnimationComponent(String name, float loopDuration, boolean isLooped){
         this.name = name;
         this.loopDuration = loopDuration;

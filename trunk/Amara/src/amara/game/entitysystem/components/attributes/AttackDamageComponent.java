@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.attributes;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class AttackDamageComponent{
 
+    public AttackDamageComponent(){
+        
+    }
+    
     public AttackDamageComponent(float value){
         this.value = value;
     }

@@ -4,14 +4,21 @@
  */
 package amara.game.entitysystem.components.units;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Philipp
  */
+@Serializable
 public class AutoAggroComponent
 {
     private float range;
 
+    public AutoAggroComponent() {
+        
+    }
+    
     public AutoAggroComponent(float range) {
         this.range = range;
     }

@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.units.effects;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class TargetReachedTriggerEffectComponent{
 
+    public TargetReachedTriggerEffectComponent(){
+        
+    }
+    
     public TargetReachedTriggerEffectComponent(int effectEntityID){
         this.effectEntityID = effectEntityID;
     }

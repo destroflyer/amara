@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.spells;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class CastTypeComponent{
 
+    public CastTypeComponent(){
+        
+    }
+    
     public CastTypeComponent(CastType castType){
         this.castType = castType;
     }

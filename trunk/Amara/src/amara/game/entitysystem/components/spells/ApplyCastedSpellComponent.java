@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.spells;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class ApplyCastedSpellComponent{
 
+    public ApplyCastedSpellComponent(){
+        
+    }
+    
     public ApplyCastedSpellComponent(int casterEntityID, int castedSpellEntityID){
         this.casterEntityID = casterEntityID;
         this.castedSpellEntityID = castedSpellEntityID;

@@ -13,7 +13,7 @@ import com.jme3.post.*;
  *
  * @author Carl
  */
-public class PostFilterAppState extends BaseAppState{
+public class PostFilterAppState extends ClientBaseAppState{
 
     public PostFilterAppState(){
         

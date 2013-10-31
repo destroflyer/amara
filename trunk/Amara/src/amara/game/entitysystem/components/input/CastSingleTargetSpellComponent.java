@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.input;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class CastSingleTargetSpellComponent{
 
+    public CastSingleTargetSpellComponent(){
+        
+    }
+    
     public CastSingleTargetSpellComponent(int spellEntityID, int targetEntityID){
         this.spellEntityID = spellEntityID;
         this.targetEntityID = targetEntityID;

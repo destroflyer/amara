@@ -4,10 +4,16 @@
  */
 package amara.engine.client.commands;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class Command{
-    
+
+    public Command(){
+        
+    }
 }

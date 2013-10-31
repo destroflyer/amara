@@ -52,9 +52,11 @@ public class AnimationSystem implements EntitySystem{
     
     private void updateAnimation(EntityWorld entityWorld, int entity){
         ModelObject modelObject = getModelObject(entity);
-        AnimationComponent animationComponent = entityWorld.getComponent(entity, AnimationComponent.class);
-        if(animationComponent != null){
-            modelObject.playAnimation(animationComponent.getName(), animationComponent.getLoopDuration(), animationComponent.isLooped());
+        if(modelObject != null){
+            AnimationComponent animationComponent = entityWorld.getComponent(entity, AnimationComponent.class);
+            if(animationComponent != null){
+                modelObject.playAnimation(animationComponent.getName(), animationComponent.getLoopDuration(), animationComponent.isLooped());
+            }
         }
     }
     

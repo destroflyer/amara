@@ -14,6 +14,10 @@ import java.awt.Graphics;
 @Serializable
 public class SimpleConvex extends Shape {
 
+    public SimpleConvex(){
+        
+    }
+    
     public SimpleConvex(double centerX, double centerY, Vector2D... base) {
         this(base);
         transform.translate(centerX, centerY);

@@ -14,6 +14,10 @@ import java.awt.Graphics;
 @Serializable
 public class Circle extends Shape {
 
+    public Circle() {
+        
+    }
+    
     public Circle(double x, double y, double r) {
         transform.setPosition(x, y);
         baseBoundRadius = r;

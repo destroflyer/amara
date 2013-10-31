@@ -5,7 +5,6 @@
 package amara.engine.client.appstates;
 
 import java.util.Iterator;
-import java.util.List;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
 import com.jme3.input.KeyInput;
@@ -13,11 +12,13 @@ import com.jme3.math.Vector2f;
 import amara.Queue;
 import amara.engine.client.commands.*;
 import amara.engine.client.commands.casting.*;
+import amara.engine.client.network.NetworkClient;
 import amara.engine.input.*;
 import amara.engine.input.events.*;
-import amara.game.entitysystem.EntityWrapper;
+import amara.engine.network.messages.Message_Command;
+import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
-import amara.game.entitysystem.components.selection.*;
+import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 
@@ -25,12 +26,11 @@ import amara.game.entitysystem.components.units.*;
  *
  * @author Carl
  */
-public class SendPlayerCommandsAppState extends BaseAppState{
+public class SendPlayerCommandsAppState extends ClientBaseAppState{
 
     public SendPlayerCommandsAppState(){
         
     }
-    public static Queue<Command> TEST_COMMAND_QUEUE = new Queue<Command>();
 
     @Override
     public void update(float lastTimePerFrame){
@@ -41,21 +41,11 @@ public class SendPlayerCommandsAppState extends BaseAppState{
             Event event = eventsIterator.next();
             if(event instanceof MouseClickEvent){
                 MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
-                switch(mouseClickEvent.getButton()){
-                    case Left:
-                        int entityToSelect = getCursorHoveredEntity();
-                        if(entityToSelect != -1){
-                            sendCommand(new SelectionCommand(entityToSelect));
-                        }
-                        else{
-                            sendCommand(new DeselectionCommand());
-                        }
-                        break;
-                    
+                switch(mouseClickEvent.getButton()){                    
                     case Right:
                         int entityToAttack = getCursorHoveredEntity();
                         if(entityToAttack != -1){
-                            autoAttack(entityToAttack);
+                            sendCommand(new AutoAttackCommand(entityToAttack));
                         }
                         else{
                             Vector2f groundLocation = getCursorHoveredGroundLocation();
@@ -91,71 +81,55 @@ public class SendPlayerCommandsAppState extends BaseAppState{
                 }
             }
         }
-        mainApplication.enqueueTask(new Runnable(){
-
-            public void run(){
-                TEST_COMMAND_QUEUE.clear();
-            }
-        });
     }
     
     private void sendCommand(Command command){
-        TEST_COMMAND_QUEUE.add(command);
-    }
-    
-    private void autoAttack(int targetEntityID){
-        Iterator<EntityWrapper> selectedEntitiesIterator = getSelectedEntities().iterator();
-        while(selectedEntitiesIterator.hasNext()){
-            EntityWrapper selectedEntity = selectedEntitiesIterator.next();
-            sendCommand(new AutoAttackCommand(selectedEntity.getId(), targetEntityID));
-        }
+        NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
+        networkClient.sendMessage(new Message_Command(command));
     }
     
     private void castSpell(int spellIndex){
-        EntitySystemAppState entitySystemAppState = getAppState(EntitySystemAppState.class);
+        EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
         int cursorHoveredEntity = getCursorHoveredEntity();
         Vector2f groundLocation = getCursorHoveredGroundLocation();
-        Iterator<EntityWrapper> selectedEntitiesIterator = getSelectedEntities().iterator();
-        while(selectedEntitiesIterator.hasNext()){
-            EntityWrapper selectedEntity = selectedEntitiesIterator.next();
-            int[] spells = selectedEntity.getComponent(SpellsComponent.class).getSpellsEntitiesIDs();
-            if(spellIndex < spells.length){
-                int spellEntity = spells[spellIndex];
-                CastTypeComponent.CastType castType = entitySystemAppState.getEntityWorld().getComponent(spellEntity, CastTypeComponent.class).getCastType();
-                switch(castType){
-                    case SELFCAST:
-                        sendCommand(new CastSelfcastSpellCommand(selectedEntity.getId(), spellIndex));
-                        break;
+        EntityWrapper selectedEntity = entityWorld.getWrapped(entityWorld.getComponent(getPlayerEntityID(), SelectedUnitComponent.class).getEntityID());
+        int[] spells = selectedEntity.getComponent(SpellsComponent.class).getSpellsEntitiesIDs();
+        if(spellIndex < spells.length){
+            int spellEntity = spells[spellIndex];
+            CastTypeComponent.CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();
+            switch(castType){
+                case SELFCAST:
+                    sendCommand(new CastSelfcastSpellCommand(spellIndex));
+                    break;
 
-                    case SINGLE_TARGET:
-                        if(cursorHoveredEntity != -1){
-                            sendCommand(new CastSingleTargetSpellCommand(selectedEntity.getId(), spellIndex, cursorHoveredEntity));
-                        }
-                        break;
+                case SINGLE_TARGET:
+                    if(cursorHoveredEntity != -1){
+                        sendCommand(new CastSingleTargetSpellCommand(spellIndex, cursorHoveredEntity));
+                    }
+                    break;
 
-                    case LINEAR_SKILLSHOT:
-                        if(groundLocation != null){
-                            Vector2f direction = groundLocation.subtract(selectedEntity.getComponent(PositionComponent.class).getPosition());
-                            sendCommand(new CastLinearSkillshotSpellCommand(selectedEntity.getId(), spellIndex, direction));
-                        }
-                        break;
+                case LINEAR_SKILLSHOT:
+                    if(groundLocation != null){
+                        Vector2f direction = groundLocation.subtract(selectedEntity.getComponent(PositionComponent.class).getPosition());
+                        sendCommand(new CastLinearSkillshotSpellCommand(spellIndex, direction));
+                    }
+                    break;
 
-                    case POSITIONAL_SKILLSHOT:
-                        if(groundLocation != null){
-                            sendCommand(new CastPositionalSkillshotSpellCommand(selectedEntity.getId(), spellIndex, groundLocation));
-                        }
-                        break;
-                }
+                case POSITIONAL_SKILLSHOT:
+                    if(groundLocation != null){
+                        sendCommand(new CastPositionalSkillshotSpellCommand(spellIndex, groundLocation));
+                    }
+                    break;
             }
         }
     }
     
     private int getCursorHoveredEntity(){
-        EntitySystemAppState entitySystemAppState = getAppState(EntitySystemAppState.class);
-        CollisionResults entitiesColissionResults = mainApplication.getRayCastingResults_Cursor(entitySystemAppState.getEntitiesNode());
+        LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
+        CollisionResults entitiesColissionResults = mainApplication.getRayCastingResults_Cursor(localEntitySystemAppState.getEntitiesNode());
         for(int i=0;i<entitiesColissionResults.size();i++){
             CollisionResult collision = entitiesColissionResults.getCollision(i);
-            int entity = entitySystemAppState.getEntity(collision.getGeometry());
+            int entity = localEntitySystemAppState.getEntity(collision.getGeometry());
             if(entity != -1){
                 return entity;
             }
@@ -172,8 +146,14 @@ public class SendPlayerCommandsAppState extends BaseAppState{
         return null;
     }
     
-    private List<EntityWrapper> getSelectedEntities(){
-        EntitySystemAppState entitySystemAppState = getAppState(EntitySystemAppState.class);
-        return entitySystemAppState.getEntityWorld().getWrapped(entitySystemAppState.getEntityWorld().getEntitiesWithAll(IsSelectedComponent.class));
+    private int getPlayerEntityID(){
+        int clientID = getAppState(NetworkClientAppState.class).getNetworkClient().getID();
+        EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
+        for(int entity : entityWorld.getEntitiesWithAll(ClientComponent.class)){
+            if(entityWorld.getComponent(entity, ClientComponent.class).getClientID() == clientID){
+                return entity;
+            }
+        }
+        return -1;
     }
 }

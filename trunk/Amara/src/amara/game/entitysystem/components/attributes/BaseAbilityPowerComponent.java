@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.attributes;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class BaseAbilityPowerComponent{
 
+    public BaseAbilityPowerComponent(){
+        
+    }
+    
     public BaseAbilityPowerComponent(float value){
         this.value = value;
     }

@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.effects.crowdcontrol;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class BindingComponent{
 
+    public BindingComponent(){
+        
+    }
+    
     public BindingComponent(float duration){
         this.duration = duration;
     }

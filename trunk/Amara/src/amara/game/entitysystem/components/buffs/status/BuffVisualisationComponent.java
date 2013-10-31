@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.buffs.status;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class BuffVisualisationComponent{
 
+    public BuffVisualisationComponent(){
+        
+    }
+    
     public BuffVisualisationComponent(String name){
         this.name = name;
     }

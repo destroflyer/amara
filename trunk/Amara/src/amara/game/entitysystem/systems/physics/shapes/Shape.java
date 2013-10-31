@@ -5,14 +5,20 @@
 package amara.game.entitysystem.systems.physics.shapes;
 
 import java.awt.Graphics;
+import com.jme3.network.serializing.Serializable;
 
 /**
  * basic shape class
  * all shapes need to extend this class
  * @author Philipp
  */
+@Serializable
 public abstract class Shape {
 
+    public Shape(){
+        
+    }
+    
     /**
      *
      * @param x1 x of the first circles center

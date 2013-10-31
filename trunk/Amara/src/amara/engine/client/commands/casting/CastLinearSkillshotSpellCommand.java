@@ -5,26 +5,26 @@
 package amara.engine.client.commands.casting;
 
 import com.jme3.math.Vector2f;
+import com.jme3.network.serializing.Serializable;
 import amara.engine.client.commands.Command;
 
 /**
  *
  * @author Carl
  */
+@Serializable
 public class CastLinearSkillshotSpellCommand extends Command{
 
-    public CastLinearSkillshotSpellCommand(int entity, int spellIndex, Vector2f direction){
-        this.entity = entity;
+    public CastLinearSkillshotSpellCommand(){
+        
+    }
+    
+    public CastLinearSkillshotSpellCommand(int spellIndex, Vector2f direction){
         this.spellIndex = spellIndex;
         this.direction = direction;
     }
-    private int entity;
     private int spellIndex;
     private Vector2f direction;
-
-    public int getEntity(){
-        return entity;
-    }
 
     public int getSpellIndex(){
         return spellIndex;

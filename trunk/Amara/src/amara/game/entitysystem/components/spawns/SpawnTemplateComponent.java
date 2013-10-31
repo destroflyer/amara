@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.spawns;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class SpawnTemplateComponent{
 
+    public SpawnTemplateComponent(){
+        
+    }
+    
     public SpawnTemplateComponent(String... templateNames){
         this.templateNames = templateNames;
     }

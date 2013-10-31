@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.effects.damage;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class ScalingAbilityPowerMagicDamageComponent{
 
+    public ScalingAbilityPowerMagicDamageComponent(){
+        
+    }
+    
     public ScalingAbilityPowerMagicDamageComponent(float ratio){
         this.ratio = ratio;
     }

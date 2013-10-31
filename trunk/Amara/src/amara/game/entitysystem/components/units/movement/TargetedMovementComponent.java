@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.units.movement;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class TargetedMovementComponent{
 
+    public TargetedMovementComponent(){
+        
+    }
+    
     public TargetedMovementComponent(int targetEntityID, float speed){
         this.targetEntityID = targetEntityID;
         this.speed = speed;

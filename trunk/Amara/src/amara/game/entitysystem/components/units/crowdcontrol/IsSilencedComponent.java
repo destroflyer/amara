@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.units.crowdcontrol;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class IsSilencedComponent{
 
+    public IsSilencedComponent(){
+        
+    }
+    
     public IsSilencedComponent(float remainingDuration){
         this.remainingDuration = remainingDuration;
     }

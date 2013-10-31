@@ -5,13 +5,19 @@
 package amara.engine.client.commands;
 
 import com.jme3.math.Vector2f;
+import com.jme3.network.serializing.Serializable;
 
 /**
  *
  * @author Carl
  */
+@Serializable
 public class MoveCommand extends Command{
 
+    public MoveCommand(){
+        
+    }
+    
     public MoveCommand(Vector2f position){
         this.position = position;
     }
