@@ -5,12 +5,18 @@
 package amara.game.entitysystem.components.spawns;
 
 import com.jme3.math.Vector2f;
+import com.jme3.network.serializing.Serializable;
 
 /**
  *
  * @author Carl
  */
+@Serializable
 public class RelativeSpawnPositionComponent{
+
+    public RelativeSpawnPositionComponent(){
+        
+    }
     
     public RelativeSpawnPositionComponent(Vector2f position){
         this.position = position;

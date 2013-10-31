@@ -4,10 +4,13 @@
  */
 package amara.game.entitysystem.components.physics;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Philipp
  */
+@Serializable
 public class CollisionGroupComponent
 {
     private long collisionGroups;
@@ -25,6 +28,11 @@ public class CollisionGroupComponent
     public static boolean groupsCollide(long a, long b)
     {
         return (a & b) != 0;
+    }
+    
+    public CollisionGroupComponent()
+    {
+        
     }
 
     public CollisionGroupComponent(long collisionGroups, long collidesWithGroups)

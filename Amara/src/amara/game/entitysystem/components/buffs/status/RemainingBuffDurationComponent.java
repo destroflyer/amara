@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.buffs.status;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class RemainingBuffDurationComponent{
 
+    public RemainingBuffDurationComponent(){
+        
+    }
+    
     public RemainingBuffDurationComponent(float remainingDuration){
         this.remainingDuration = remainingDuration;
     }

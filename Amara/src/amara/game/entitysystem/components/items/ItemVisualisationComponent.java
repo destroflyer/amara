@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.items;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class ItemVisualisationComponent{
 
+    public ItemVisualisationComponent(){
+        
+    }
+    
     public ItemVisualisationComponent(String name){
         this.name = name;
     }

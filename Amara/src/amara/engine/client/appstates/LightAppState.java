@@ -16,7 +16,7 @@ import com.jme3.shadow.DirectionalLightShadowRenderer;
  *
  * @author Carl
  */
-public class LightAppState extends BaseAppState{
+public class LightAppState extends ClientBaseAppState{
 
     public LightAppState(){
         ambientLight = new AmbientLight();

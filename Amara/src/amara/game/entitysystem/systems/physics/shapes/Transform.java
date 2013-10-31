@@ -12,7 +12,10 @@ import com.jme3.network.serializing.Serializable;
  */
 @Serializable
 public class Transform {
-    
+
+    public Transform(){
+        
+    }
     
     public double getRadian() {
         return radian;

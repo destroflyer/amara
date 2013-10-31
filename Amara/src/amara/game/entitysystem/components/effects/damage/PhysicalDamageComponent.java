@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.effects.damage;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class PhysicalDamageComponent{
 
+    public PhysicalDamageComponent(){
+        
+    }
+    
     public PhysicalDamageComponent(float value){
         this.value = value;
     }

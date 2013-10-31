@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.spells;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class InstantTargetBuffComponent{
 
+    public InstantTargetBuffComponent(){
+        
+    }
+    
     public InstantTargetBuffComponent(int buffEntityID, float duration){
         this.buffEntityID = buffEntityID;
         this.duration = duration;

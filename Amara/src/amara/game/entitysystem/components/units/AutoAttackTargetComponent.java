@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.units;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class AutoAttackTargetComponent{
 
+    public AutoAttackTargetComponent(){
+        
+    }
+    
     public AutoAttackTargetComponent(int targetEntityID){
         this.targetEntityID = targetEntityID;
     }

@@ -15,17 +15,17 @@ import amara.game.entitysystem.components.attributes.*;
  */
 public class DisplayAttributesSystem implements EntitySystem{
 
-    public DisplayAttributesSystem(SelectedUnitSystem selectedUnitSystem, ScreenController_HUD screenController_HUD){
-        this.selectedUnitSystem = selectedUnitSystem;
+    public DisplayAttributesSystem(PlayerInformationSystem playerInformationSystem, ScreenController_HUD screenController_HUD){
+        this.playerInformationSystem = playerInformationSystem;
         this.screenController_HUD = screenController_HUD;
     }
     private final static String NON_EXISTING_ATTRIBUTE_TEXT = "-";
-    private SelectedUnitSystem selectedUnitSystem;
+    private PlayerInformationSystem playerInformationSystem;
     private ScreenController_HUD screenController_HUD;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        int selectedEntity = selectedUnitSystem.getSelectedEntity();
+        int selectedEntity = playerInformationSystem.getSelectedEntity();
         if(selectedEntity != -1){
             String healthText = NON_EXISTING_ATTRIBUTE_TEXT;
             String attackDamageText = NON_EXISTING_ATTRIBUTE_TEXT;

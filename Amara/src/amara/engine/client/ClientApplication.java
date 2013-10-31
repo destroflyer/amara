@@ -12,19 +12,21 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Node;
 import com.jme3.system.AppSettings;
 import amara.engine.client.appstates.*;
+import amara.engine.network.MessagesSerializer;
+import amara.engine.network.exceptions.*;
 
 /**
  * @author Carl
  */
-public class MainApplication extends SimpleApplication{
+public class ClientApplication extends SimpleApplication{
 
     public static void main(String[] args){
         Logger.getLogger("").setLevel(Level.SEVERE);
-        MainApplication app = new MainApplication();
-        app.start();
+        ClientApplication clientApplication = new ClientApplication();
+        clientApplication.start();
     }
 
-    public MainApplication(){
+    public ClientApplication(){
         settings = new AppSettings(true);
         settings.setTitle("Amara");
         settings.setWidth(1280);
@@ -35,20 +37,31 @@ public class MainApplication extends SimpleApplication{
 
     @Override
     public void simpleInitApp(){
+        MessagesSerializer.registerClasses();
         MaterialFactory.setAssetManager(assetManager);
         setDisplayStatView(false);
         viewPort.getQueue().setGeometryComparator(RenderQueue.Bucket.Opaque, new LayerGeometryComparator());
-        stateManager.attach(new EventManagerAppState());
-        stateManager.attach(new NiftyAppState());
-        stateManager.attach(new LightAppState());
-        stateManager.attach(new PostFilterAppState());
-        stateManager.attach(new SendPlayerCommandsAppState());
-        stateManager.attach(new EntitySystemAppState());
-        stateManager.attach(new MapAppState("testmap"));
-        stateManager.attach(new IngameCameraAppState());
-        //Debug Camera
-        cam.setLocation(new Vector3f(22, 34, -10));
-        cam.lookAtDirection(new Vector3f(0, -1.3f, 1), Vector3f.UNIT_Y);
+        try{
+            stateManager.attach(new NetworkClientAppState("localhost", 33900));
+            stateManager.attach(new EventManagerAppState());
+            stateManager.attach(new NiftyAppState());
+            stateManager.attach(new LightAppState());
+            stateManager.attach(new PostFilterAppState());
+            stateManager.attach(new SendPlayerCommandsAppState());
+            stateManager.attach(new LocalEntitySystemAppState());
+            stateManager.attach(new MapAppState("testmap"));
+            stateManager.attach(new IngameCameraAppState());
+            stateManager.attach(new ClientInitializedAppState());
+            //Debug Camera
+            cam.setLocation(new Vector3f(22, 34, -10));
+            cam.lookAtDirection(new Vector3f(0, -1.3f, 1), Vector3f.UNIT_Y);
+        }catch(ServerConnectionException ex){
+            System.out.println(ex.getMessage());
+            System.exit(0);
+        }catch(ServerConnectionTimeoutException ex){
+            System.out.println(ex.getMessage());
+            System.exit(0);
+        }
     }
 
     @Override

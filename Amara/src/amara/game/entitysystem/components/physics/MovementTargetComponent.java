@@ -5,15 +5,22 @@
 package amara.game.entitysystem.components.physics;
 
 import com.jme3.math.Vector2f;
+import com.jme3.network.serializing.Serializable;
 
 /**
  *
  * @author Philipp
  */
+@Serializable
 public class MovementTargetComponent
 {
     private Vector2f position;
 
+    public MovementTargetComponent()
+    {
+        
+    }
+    
     public MovementTargetComponent(Vector2f position)
     {
         this.position = position.clone();

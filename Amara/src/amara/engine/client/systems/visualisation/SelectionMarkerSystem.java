@@ -13,7 +13,7 @@ import com.jme3.scene.shape.Quad;
 import amara.engine.JMonkeyUtil;
 import amara.engine.client.MaterialFactory;
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.selection.IsSelectedComponent;
+import amara.game.entitysystem.components.players.SelectedUnitComponent;
 
 /**
  *
@@ -29,15 +29,17 @@ public class SelectionMarkerSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsSelectedComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(IsSelectedComponent.class))
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, SelectedUnitComponent.class);
+        for(int entity : observer.getNew().getEntitiesWithAll(SelectedUnitComponent.class))
         {
-            Node node = entitySceneMap.requestNode(entity);
+            int selectedUnit = observer.getNew().getComponent(entity, SelectedUnitComponent.class).getEntityID();
+            Node node = entitySceneMap.requestNode(selectedUnit);
             node.attachChild(createSelectionMarker("Textures/selection_markers/circle.png", 2, 2));
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(IsSelectedComponent.class))
+        for(int entity : observer.getRemoved().getEntitiesWithAll(SelectedUnitComponent.class))
         {
-            Node node = entitySceneMap.requestNode(entity);
+            int selectedUnit = observer.getRemoved().getComponent(entity, SelectedUnitComponent.class).getEntityID();
+            Node node = entitySceneMap.requestNode(selectedUnit);
             node.detachChildNamed(NODE_NAME_SELECTION_MARKER);
         }
         observer.reset();

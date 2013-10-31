@@ -17,7 +17,7 @@ import amara.engine.input.events.*;
  *
  * @author Carl
  */
-public class EventManagerAppState extends BaseAppState implements ActionListener{
+public class EventManagerAppState extends ClientBaseAppState implements ActionListener{
 
     public EventManagerAppState(){
         

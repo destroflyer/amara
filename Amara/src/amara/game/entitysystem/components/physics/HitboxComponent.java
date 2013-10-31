@@ -4,16 +4,22 @@
  */
 package amara.game.entitysystem.components.physics;
 
-import amara.game.entitysystem.systems.physics.intersection.*;
+import com.jme3.network.serializing.Serializable;
 import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *
  * @author Philipp
  */
+@Serializable
 public class HitboxComponent
 {
     private Shape shape;
+
+    public HitboxComponent()
+    {
+        
+    }
 
     public HitboxComponent(Shape shape)
     {

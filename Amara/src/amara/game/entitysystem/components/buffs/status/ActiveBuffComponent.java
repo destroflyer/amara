@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.buffs.status;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class ActiveBuffComponent{
 
+    public ActiveBuffComponent(){
+        
+    }
+    
     public ActiveBuffComponent(int targetEntityID, int buffEntityID){
         this.targetEntityID = targetEntityID;
         this.buffEntityID = buffEntityID;

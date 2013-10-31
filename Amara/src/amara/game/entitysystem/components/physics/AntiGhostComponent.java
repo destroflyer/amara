@@ -4,11 +4,17 @@
  */
 package amara.game.entitysystem.components.physics;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Philipp
  */
+@Serializable
 public class AntiGhostComponent
 {
     
+    public AntiGhostComponent(){
+        
+    }
 }

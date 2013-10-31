@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.attributes;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class HealthComponent{
 
+    public HealthComponent(){
+        
+    }
+    
     public HealthComponent(float value){
         this.value = value;
     }

@@ -13,6 +13,10 @@ import com.jme3.network.serializing.Serializable;
 @Serializable
 public class RegularCyclic extends SimpleConvex {
 
+    public RegularCyclic() {
+        
+    }
+    
     public RegularCyclic(double centerX, double centerY, int edges, double radius) {
         this(edges, radius);
         transform.translate(centerX, centerY);

@@ -4,25 +4,24 @@
  */
 package amara.engine.client.commands.casting;
 
-import com.jme3.math.Vector2f;
+import com.jme3.network.serializing.Serializable;
 import amara.engine.client.commands.Command;
 
 /**
  *
  * @author Carl
  */
+@Serializable
 public class CastSelfcastSpellCommand extends Command{
 
-    public CastSelfcastSpellCommand(int entity, int spellIndex){
-        this.entity = entity;
+    public CastSelfcastSpellCommand(){
+        
+    }
+    
+    public CastSelfcastSpellCommand(int spellIndex){
         this.spellIndex = spellIndex;
     }
-    private int entity;
     private int spellIndex;
-
-    public int getEntity(){
-        return entity;
-    }
 
     public int getSpellIndex(){
         return spellIndex;

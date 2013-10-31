@@ -4,12 +4,19 @@
  */
 package amara.game.entitysystem.components.buffs;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Carl
  */
+@Serializable
 public class RepeatingEffectComponent{
 
+    public RepeatingEffectComponent(){
+        
+    }
+    
     public RepeatingEffectComponent(int effectEntityID, float interval){
         this.effectEntityID = effectEntityID;
         this.interval = interval;
