@@ -6,8 +6,8 @@ package amara.game.entitysystem.systems.commands;
 
 import java.util.Iterator;
 import amara.Queue;
-import amara.engine.client.commands.*;
-import amara.engine.client.commands.casting.*;
+import amara.engine.applications.ingame.client.commands.*;
+import amara.engine.applications.ingame.client.commands.casting.*;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.physics.*;

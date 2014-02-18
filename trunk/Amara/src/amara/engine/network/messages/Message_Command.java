@@ -6,7 +6,7 @@ package amara.engine.network.messages;
 
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
-import amara.engine.client.commands.Command;
+import amara.engine.applications.ingame.client.commands.Command;
 
 /**
  *
