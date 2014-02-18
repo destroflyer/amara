@@ -8,6 +8,7 @@ import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
+import amara.game.entitysystem.components.visuals.AnimationComponent;
 
 /**
  *
@@ -38,18 +39,27 @@ public class MovementSystem implements EntitySystem
             
             Vector2f newPosition = position.add(movement);
             
+            boolean isTargetReached = false;
             MovementTargetComponent targetComponent = entity.getComponent(MovementTargetComponent.class);
             if(targetComponent != null)
             {
                 Vector2f target = targetComponent.getTargetPosition();
                 if(movement.distanceSquared(0, 0) >= target.distanceSquared(position))
                 {
+                    isTargetReached = true;
                     newPosition = target;
                     entity.removeComponent(MovementSpeedComponent.class);
                     entity.removeComponent(MovementTargetComponent.class);
                 }
             }
             entity.setComponent(new PositionComponent(newPosition));
+            entity.setComponent(new DirectionComponent(movement));
+            if(isTargetReached){
+                entity.removeComponent(AnimationComponent.class);
+            }
+            else{
+                entity.setComponent(new AnimationComponent("walk", 1, true));
+            }
         }
     }
     

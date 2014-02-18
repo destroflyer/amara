@@ -5,8 +5,8 @@
 package amara.game.entitysystem.systems.network;
 
 import java.util.LinkedList;
+import amara.engine.network.NetworkServer;
 import amara.engine.network.messages.entitysystem.Message_EntityChanges;
-import amara.engine.server.network.NetworkServer;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.synchronizing.*;
 

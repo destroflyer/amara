@@ -5,10 +5,13 @@
 package amara.engine.network;
 
 import com.jme3.network.serializing.Serializer;
-import amara.engine.client.commands.*;
-import amara.engine.client.commands.casting.*;
+import amara.engine.applications.ingame.client.commands.*;
+import amara.engine.applications.ingame.client.commands.casting.*;
+import amara.engine.applications.masterserver.server.network.messages.*;
+import amara.engine.applications.masterserver.server.protocol.AuthentificationInformation;
 import amara.engine.network.messages.*;
 import amara.engine.network.messages.entitysystem.*;
+import amara.engine.network.messages.protocol.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.*;
 import amara.game.entitysystem.components.buffs.status.*;
@@ -40,6 +43,13 @@ public class MessagesSerializer{
     
     public static void registerClasses(){
         Serializer.registerClasses(
+            Message_Login.class,
+                AuthentificationInformation.class,
+            Message_LoginResult.class,
+            
+            Message_StartGame.class,
+            Message_GameStarted.class,
+            
             Message_Command.class,
                 AutoAttackCommand.class,
                 Command.class,
@@ -168,7 +178,8 @@ public class MessagesSerializer{
                         AnimationComponent.class,
                         ModelComponent.class,
                     RemovedComponentChange.class,
-                    RemovedEntityChange.class
+                    RemovedEntityChange.class,
+            Message_PlayerAuthentification.class
         );
     }
 }
