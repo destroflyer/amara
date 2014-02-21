@@ -12,6 +12,7 @@ import com.jme3.math.Vector2f;
 import amara.Queue;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
+import amara.engine.appstates.NetworkClientAppState;
 import amara.engine.network.NetworkClient;
 import amara.engine.input.*;
 import amara.engine.input.events.*;
@@ -93,33 +94,36 @@ public class SendPlayerCommandsAppState extends ClientBaseAppState{
         int cursorHoveredEntity = getCursorHoveredEntity();
         Vector2f groundLocation = getCursorHoveredGroundLocation();
         EntityWrapper selectedEntity = entityWorld.getWrapped(entityWorld.getComponent(getPlayerEntityID(), SelectedUnitComponent.class).getEntityID());
-        int[] spells = selectedEntity.getComponent(SpellsComponent.class).getSpellsEntitiesIDs();
-        if(spellIndex < spells.length){
-            int spellEntity = spells[spellIndex];
-            CastTypeComponent.CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();
-            switch(castType){
-                case SELFCAST:
-                    sendCommand(new CastSelfcastSpellCommand(spellIndex));
-                    break;
+        SpellsComponent spellsComponent = selectedEntity.getComponent(SpellsComponent.class);
+        if(spellsComponent != null){
+            int[] spells = spellsComponent.getSpellsEntitiesIDs();
+            if(spellIndex < spells.length){
+                int spellEntity = spells[spellIndex];
+                CastTypeComponent.CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();
+                switch(castType){
+                    case SELFCAST:
+                        sendCommand(new CastSelfcastSpellCommand(spellIndex));
+                        break;
 
-                case SINGLE_TARGET:
-                    if(cursorHoveredEntity != -1){
-                        sendCommand(new CastSingleTargetSpellCommand(spellIndex, cursorHoveredEntity));
-                    }
-                    break;
+                    case SINGLE_TARGET:
+                        if(cursorHoveredEntity != -1){
+                            sendCommand(new CastSingleTargetSpellCommand(spellIndex, cursorHoveredEntity));
+                        }
+                        break;
 
-                case LINEAR_SKILLSHOT:
-                    if(groundLocation != null){
-                        Vector2f direction = groundLocation.subtract(selectedEntity.getComponent(PositionComponent.class).getPosition());
-                        sendCommand(new CastLinearSkillshotSpellCommand(spellIndex, direction));
-                    }
-                    break;
+                    case LINEAR_SKILLSHOT:
+                        if(groundLocation != null){
+                            Vector2f direction = groundLocation.subtract(selectedEntity.getComponent(PositionComponent.class).getPosition());
+                            sendCommand(new CastLinearSkillshotSpellCommand(spellIndex, direction));
+                        }
+                        break;
 
-                case POSITIONAL_SKILLSHOT:
-                    if(groundLocation != null){
-                        sendCommand(new CastPositionalSkillshotSpellCommand(spellIndex, groundLocation));
-                    }
-                    break;
+                    case POSITIONAL_SKILLSHOT:
+                        if(groundLocation != null){
+                            sendCommand(new CastPositionalSkillshotSpellCommand(spellIndex, groundLocation));
+                        }
+                        break;
+                }
             }
         }
     }

@@ -6,6 +6,7 @@ package amara.engine.applications.ingame.client.appstates;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import amara.engine.appstates.NetworkClientAppState;
 import amara.engine.network.messages.Message_ClientInitialized;
 
 /**
