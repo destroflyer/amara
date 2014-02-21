@@ -7,11 +7,10 @@ package amara.launcher.client;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
-import com.jme3.system.JmeContext;
-import amara.engine.applications.ingame.client.appstates.NetworkClientAppState;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
 import amara.engine.applications.masterserver.server.network.messages.Message_StartGame;
 import amara.engine.applications.masterserver.server.protocol.AuthentificationInformation;
+import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.HostInformation;
 import amara.engine.network.MessagesSerializer;
 import amara.engine.network.NetworkClient;
@@ -186,12 +185,12 @@ public class ClientLauncher extends javax.swing.JFrame{
         HostInformation hostInformation = new HostInformation(txtMasterserverHost.getText(), Integer.parseInt(txtMasterserverPort.getText()));
         AuthentificationInformation authentificationInformation = new AuthentificationInformation(txtLogin.getText(), txtPassword.getText());
         masterClient = new MasterserverClientApplication(hostInformation, authentificationInformation);
-        masterClient.start(JmeContext.Type.Headless);
+        masterClient.start();
         panStart.setVisible(true);
     }//GEN-LAST:event_btnMasterserverConnectActionPerformed
 
     private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
-        NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientAppState.class).getNetworkClient();
+        NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
         networkClient.sendMessage(new Message_StartGame(99, new int[]{0, 1, 2}));
     }//GEN-LAST:event_btnStartGameActionPerformed
 

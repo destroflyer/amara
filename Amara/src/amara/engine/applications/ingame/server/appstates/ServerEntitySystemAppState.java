@@ -4,12 +4,11 @@
  */
 package amara.engine.applications.ingame.server.appstates;
 
-import com.jme3.app.Application;
-import com.jme3.app.state.AppStateManager;
-import amara.engine.appstates.*;
+import amara.engine.applications.*;
 import amara.engine.applications.ingame.client.appstates.MapAppState;
 import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.engine.applications.ingame.server.network.backends.*;
+import amara.engine.appstates.*;
 import amara.engine.network.NetworkServer;
 import amara.game.entitysystem.EntityTemplate;
 import amara.game.entitysystem.EntityWrapper;
@@ -34,14 +33,14 @@ import amara.game.maps.Map;
  *
  * @author Carl
  */
-public class ServerEntitySystemAppState extends EntitySystemAppState<IngameServerApplication>{
+public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<IngameServerApplication>{
 
     public ServerEntitySystemAppState(){
         
     }
 
     @Override
-    public void initialize(AppStateManager stateManager, Application application){
+    public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
         NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
         networkServer.addMessageBackend(new AssignPlayerEntityBackend(mainApplication.getGame(), entityWorld));

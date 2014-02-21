@@ -4,14 +4,14 @@
  */
 package amara.engine.applications.masterserver.client.appstates;
 
-import amara.engine.appstates.BaseAppState;
+import amara.engine.appstates.BaseHeadlessAppState;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
 
 /**
  *
  * @author Carl
  */
-public class ClientBaseAppState extends BaseAppState<MasterserverClientApplication>{
+public class ClientBaseAppState extends BaseHeadlessAppState<MasterserverClientApplication>{
 
     public ClientBaseAppState(){
         

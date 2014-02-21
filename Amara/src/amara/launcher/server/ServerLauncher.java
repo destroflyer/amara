@@ -7,7 +7,6 @@ package amara.launcher.server;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
-import com.jme3.system.JmeContext;
 import amara.engine.applications.masterserver.server.MasterserverServerApplication;
 import amara.engine.network.MessagesSerializer;
 
@@ -21,7 +20,7 @@ public class ServerLauncher extends javax.swing.JFrame{
         initComponents();
         MessagesSerializer.registerClasses();
         MasterserverServerApplication masterServer = new MasterserverServerApplication(33900);
-        masterServer.start(JmeContext.Type.Headless);
+        masterServer.start();
     }
 
     /**

@@ -10,6 +10,7 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Node;
 import com.jme3.system.AppSettings;
 import amara.engine.applications.ingame.client.appstates.*;
+import amara.engine.appstates.NetworkClientAppState;
 import amara.engine.materials.MaterialFactory;
 import amara.engine.network.*;
 import amara.engine.network.exceptions.*;

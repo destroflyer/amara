@@ -4,10 +4,9 @@
  */
 package amara.engine.applications.masterserver.client.appstates;
 
-import com.jme3.app.Application;
-import com.jme3.app.state.AppStateManager;
-import amara.engine.applications.ingame.client.appstates.NetworkClientAppState;
+import amara.engine.applications.*;
 import amara.engine.applications.masterserver.client.network.backends.GameStartedBackend;
+import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.NetworkClient;
 
 /**
@@ -17,9 +16,9 @@ import amara.engine.network.NetworkClient;
 public class CurrentGameAppState extends ClientBaseAppState{
 
     @Override
-    public void initialize(AppStateManager stateManager, Application application){
+    public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
-        NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
+        NetworkClient networkClient = getAppState(NetworkClientHeadlessAppState.class).getNetworkClient();
         networkClient.addMessageBackend(new GameStartedBackend(mainApplication.getHostInformation()));
     }
 }

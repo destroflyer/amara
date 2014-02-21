@@ -4,9 +4,8 @@
  */
 package amara.engine.applications.ingame.server.appstates;
 
-import com.jme3.app.Application;
-import com.jme3.app.state.AppStateManager;
 import amara.Queue;
+import amara.engine.applications.*;
 import amara.engine.applications.ingame.server.network.backends.ReceiveCommandsBackend;
 import amara.engine.network.NetworkServer;
 import amara.game.entitysystem.systems.commands.PlayerCommand;
@@ -23,7 +22,7 @@ public class ReceiveCommandsAppState extends ServerBaseAppState{
     private Queue<PlayerCommand> playerCommandsQueue = new Queue<PlayerCommand>();
 
     @Override
-    public void initialize(AppStateManager stateManager, Application application){
+    public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
         NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
         networkServer.addMessageBackend(new ReceiveCommandsBackend(playerCommandsQueue));

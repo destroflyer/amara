@@ -4,14 +4,14 @@
  */
 package amara.engine.applications.ingame.server.appstates;
 
-import amara.engine.appstates.BaseAppState;
+import amara.engine.appstates.BaseHeadlessAppState;
 import amara.engine.applications.ingame.server.IngameServerApplication;
 
 /**
  *
  * @author Carl
  */
-public class ServerBaseAppState extends BaseAppState<IngameServerApplication>{
+public class ServerBaseAppState extends BaseHeadlessAppState<IngameServerApplication>{
 
     public ServerBaseAppState(){
         

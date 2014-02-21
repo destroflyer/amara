@@ -5,17 +5,14 @@
 package amara.engine.applications.masterserver.server.network.backends;
 
 import com.jme3.network.Message;
-import com.jme3.system.JmeContext;
 import amara.Util;
 import amara.engine.applications.ingame.server.IngameServerApplication;
-import amara.engine.applications.ingame.server.appstates.NetworkServerAppState;
 import amara.engine.applications.masterserver.server.MasterserverServerApplication;
 import amara.engine.applications.masterserver.server.appstates.*;
 import amara.engine.applications.masterserver.server.network.messages.*;
 import amara.engine.network.*;
 import amara.game.games.*;
 import amara.game.maps.TestMap;
-import amara.game.players.ConnectedPlayers;
 
 /**
  *
@@ -41,7 +38,7 @@ public class StartGameBackend implements MessageBackend{
             RunningGames runningGames = mainApplication.getStateManager().getState(GamesAppState.class).getRunningGames();
             runningGames.registerGame(game);
             IngameServerApplication ingameServerApplication = new IngameServerApplication(mainApplication, game);
-            ingameServerApplication.start(JmeContext.Type.Headless);
+            ingameServerApplication.start();
         }
     }
     
