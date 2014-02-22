@@ -72,16 +72,14 @@ public class NiftyAppState extends ClientBaseAppState{
     }
     
     public <T extends ScreenController> T getScreenController(Class<T> screenControllerClass){
-        for(int i=0;i<runningNifties.size();i++){
-            ScreenController screenController = getNiftyScreenController(runningNifties.get(i));
-            if(screenController.getClass().isAssignableFrom(screenControllerClass)){
-                return (T) screenController;
+        for(Nifty nifty : runningNifties){
+            for(String screenName : nifty.getAllScreensName()){
+                ScreenController screenController = nifty.getScreen(screenName).getScreenController();
+                if(screenControllerClass.isInstance(screenController)){
+                    return (T) screenController;
+                }
             }
         }
         return null;
-    }
-
-    private ScreenController getNiftyScreenController(Nifty nifty){
-        return nifty.getCurrentScreen().getScreenController();
     }
 }

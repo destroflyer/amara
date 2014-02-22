@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
+import amara.game.entitysystem.components.objectives.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.visuals.*;
@@ -33,6 +34,7 @@ public class TestMap extends Map{
     @Override
     public void load(EntityWorld entityWorld){
         //Field of test units
+        int targetEntity = -1;
         for(int x=0;x<5;x++){
             for(int y=0;y<4;y++){
                 EntityWrapper entity = entityWorld.getWrapped(entityWorld.createEntity());
@@ -47,7 +49,13 @@ public class TestMap extends Map{
                 entity.setComponent(new IsTargetableComponent());
                 entity.setComponent(new BaseMaximumHealthComponent(500));
                 entity.setComponent(new RequestUpdateAttributesComponent());
+                if((x == 4) && (y == 0)){
+                    targetEntity = entity.getId();
+                }
             }
         }
+        objectiveEntity = entityWorld.createEntity();
+        entityWorld.setComponent(objectiveEntity, new MissingEntitiesComponent(new int[]{targetEntity}));
+        entityWorld.setComponent(objectiveEntity, new OpenObjectiveComponent());
     }
 }

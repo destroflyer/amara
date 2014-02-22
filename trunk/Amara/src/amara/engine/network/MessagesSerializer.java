@@ -21,6 +21,7 @@ import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.items.*;
+import amara.game.entitysystem.components.objectives.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.spawns.*;
@@ -115,6 +116,10 @@ public class MessagesSerializer{
                         //items
                         InventoryComponent.class,
                         ItemVisualisationComponent.class,
+                        //objectives
+                        FinishedObjectiveComponent.class,
+                        MissingEntitiesComponent.class,
+                        OpenObjectiveComponent.class,
                         //physics
                         AntiGhostComponent.class,
                         CollisionGroupComponent.class,
@@ -179,6 +184,7 @@ public class MessagesSerializer{
                         ModelComponent.class,
                     RemovedComponentChange.class,
                     RemovedEntityChange.class,
+            Message_GameOver.class,
             Message_PlayerAuthentification.class
         );
     }

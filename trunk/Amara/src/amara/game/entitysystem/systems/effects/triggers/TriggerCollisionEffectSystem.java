@@ -12,7 +12,6 @@ import amara.game.entitysystem.components.units.effects.*;
 import amara.game.entitysystem.components.units.intersections.*;
 import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionInformant;
 import amara.game.entitysystem.systems.physics.intersection.*;
-import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *
@@ -28,10 +27,10 @@ public class TriggerCollisionEffectSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(Pair<Integer> pair: info.getEntries()){
-            if(entityWorld.hasAllComponents(pair.getA(), CollisionTriggerEffectComponent.class)){
+            if(entityWorld.hasComponent(pair.getA(), CollisionTriggerEffectComponent.class)){
                 applyDamage(entityWorld, pair.getA(), pair.getB());
             }
-            if(entityWorld.hasAllComponents(pair.getB(), CollisionTriggerEffectComponent.class)){
+            if(entityWorld.hasComponent(pair.getB(), CollisionTriggerEffectComponent.class)){
                 applyDamage(entityWorld, pair.getB(), pair.getA());
             }
         }

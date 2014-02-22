@@ -20,6 +20,7 @@ public class IngameServerApplication extends HeadlessApplication{
             System.out.println(ex.getMessage());
             System.exit(0);
         }
+        stateManager.attach(new GameRunningAppState());
         stateManager.attach(new ReceiveCommandsAppState());
         stateManager.attach(new ServerEntitySystemAppState());
         stateManager.attach(new ServerInitializedAppState());

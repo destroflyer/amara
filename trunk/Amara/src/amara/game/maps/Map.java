@@ -13,10 +13,15 @@ import amara.game.entitysystem.EntityWorld;
 public abstract class Map{
     
     protected MapPhysicsInformation physicsInformation;
+    protected int objectiveEntity;
     
     public abstract void load(EntityWorld entityWorld);
 
     public MapPhysicsInformation getPhysicsInformation(){
         return physicsInformation;
+    }
+
+    public int getObjectiveEntity(){
+        return objectiveEntity;
     }
 }
