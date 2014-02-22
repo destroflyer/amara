@@ -129,6 +129,7 @@ public class EntityTemplate{
                 unit.setComponent(new IsTargetableComponent());
                 
                 unit.setComponent(new InventoryComponent(new int[]{doransBlade.getId(), doransBlade.getId(), doransBlade.getId()}));
+                unit.setComponent(new RequestUpdateAttributesComponent());
                 
                 EntityWrapper nullSphere = entityWorld.getWrapped(entityWorld.createEntity());
                 nullSphere.setComponent(new NameComponent("Null Sphere"));
