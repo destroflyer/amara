@@ -23,6 +23,7 @@ import amara.game.entitysystem.systems.effects.triggers.*;
 import amara.game.entitysystem.systems.general.*;
 import amara.game.entitysystem.systems.movement.*;
 import amara.game.entitysystem.systems.network.*;
+import amara.game.entitysystem.systems.objectives.*;
 import amara.game.entitysystem.systems.physics.*;
 import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.*;
@@ -53,6 +54,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownBindingSystem());
         addEntitySystem(new CountdownSilenceSystem());
         addEntitySystem(new CountdownStunSystem());
+        addEntitySystem(new CheckOpenObjectivesSystem());
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue()));
         addEntitySystem(new SetCooldownOnCastingSystem());
         addEntitySystem(new AttackAggroedTargetsSystem());
@@ -87,5 +89,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
             player.setEntityID(playerEntity.getId());
         }
         map.load(entityWorld);
+        addEntitySystem(new CheckMapObjectiveSystem(map, getAppState(GameRunningAppState.class)));
     }
 }

@@ -39,6 +39,10 @@ public class GamesAppState extends ServerBaseAppState{
             networkServer.sendMessageToClient(clientID, new Message_GameStarted(game.getPort(), player.getAuthentificationKey()));
         }
     }
+    
+    public void onGameOver(Game game){
+        runningGames.removeGame(game);
+    }
 
     public RunningGames getRunningGames(){
         return runningGames;

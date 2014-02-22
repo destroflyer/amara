@@ -80,4 +80,14 @@
             </panel>
         </layer>
     </screen>
+    <screen id="gameOver" controller="amara.engine.applications.ingame.client.gui.ScreenController_GameOver">
+        <layer childLayout="center" backgroundColor="#0008">
+            <control name="button" x="35%" y="52%" width="40%" height="15%" label="Game Over">
+                <effect>
+                    <onStartScreen name="fade" length="1000" startDelay="100"/>
+                </effect>
+                <interact onClick="exit()"/>
+            </control>
+        </layer>
+    </screen>
 </nifty>

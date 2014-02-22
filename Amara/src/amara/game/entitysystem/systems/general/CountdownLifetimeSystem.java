@@ -15,7 +15,6 @@ public class CountdownLifetimeSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        int b = 7;
         for(int entity : entityWorld.getEntitiesWithAll(LifetimeComponent.class))
         {
             LifetimeComponent lifetimeComponent = entityWorld.getComponent(entity, LifetimeComponent.class);
