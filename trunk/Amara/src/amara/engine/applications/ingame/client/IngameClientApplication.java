@@ -43,6 +43,7 @@ public class IngameClientApplication extends SimpleApplication{
             stateManager.attach(new PlayerAuthentificationAppState(authentificationKey));
             stateManager.attach(new EventManagerAppState());
             stateManager.attach(new NiftyAppState());
+            stateManager.attach(new AudioAppState());
             stateManager.attach(new LightAppState());
             stateManager.attach(new PostFilterAppState());
             stateManager.attach(new SendPlayerCommandsAppState());
