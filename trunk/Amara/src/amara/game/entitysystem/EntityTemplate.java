@@ -10,6 +10,7 @@ import amara.game.entitysystem.components.buffs.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
+import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.physics.*;
@@ -18,9 +19,11 @@ import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.spells.specials.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.units.effects.*;
 import amara.game.entitysystem.components.units.intersections.*;
 import amara.game.entitysystem.components.visuals.*;
+import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 
 
@@ -42,8 +45,14 @@ public class EntityTemplate{
         }
     }
     
-    public static void loadTemplate(EntityWorld entityWorld, int entity, String templateName){
+    public static void loadTemplate(EntityWorld entityWorld, int entity, String template){
         EntityWrapper entityWrapper = entityWorld.getWrapped(entity);
+        String[] parts = template.split(",");
+        String templateName = parts[0];
+        int[] parameters = new int[parts.length - 1];
+        for(int i=0;i<parameters.length;i++){
+            parameters[i] = Integer.parseInt(parts[i + 1]);
+        }
         if(templateName.equals("autoattack_projectile")){
             EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
             effect.setComponent(new ScalingAttackDamagePhysicalDamageComponent(1));
@@ -83,6 +92,17 @@ public class EntityTemplate{
             effect.setComponent(new SilenceComponent(2));
             entityWrapper.setComponent(new TargetReachedTriggerEffectComponent(effect.getId()));
         }
+        else if(templateName.equals("grab_projectile")){
+            entityWrapper.setComponent(new HitboxComponent(new Circle(0.6f)));
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            EntityWrapper intersectionRules = entityWorld.getWrapped(entityWorld.createEntity());
+            intersectionRules.setComponent(new AcceptEnemiesComponent());
+            entityWrapper.setComponent(new IntersectionRulesComponent(intersectionRules.getId()));
+            EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
+            effect.setComponent(new MoveToEntityPositionComponent(parameters[0], 9));
+            entityWrapper.setComponent(new CollisionTriggerEffectComponent(effect.getId()));
+            entityWrapper.setComponent(new LifetimeComponent(0.75f));
+        }
         else if(templateName.equals("cloud")){
             entityWrapper.setComponent(new ModelComponent("Models/cloud/skin.xml"));
         }
@@ -115,12 +135,24 @@ public class EntityTemplate{
         EntityWrapper needlesslyLargeRod = EntityTemplate.createFromTemplate(entityWorld, "needlessly_large_rod");
         EntityWrapper dagger = EntityTemplate.createFromTemplate(entityWorld, "dagger");
         
+        EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+        walkAnimation.setComponent(new NameComponent("walk"));
+        walkAnimation.setComponent(new LoopDurationComponent(1));
+        unit.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+        EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+        autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
+        unit.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+        
         switch(playerID){
             case 0:
                 unit.setComponent(new ModelComponent("Models/minion/skin.xml"));
-                unit.setComponent(new AnimationComponent("dance", 2.66f, true));
+                EntityWrapper danceAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+                danceAnimation.setComponent(new NameComponent("dance"));
+                danceAnimation.setComponent(new LoopDurationComponent(2.66f));
+                unit.setComponent(new AnimationComponent(danceAnimation.getId()));
+                
                 unit.setComponent(new ScaleComponent(0.75f));
-                unit.setComponent(new PositionComponent(new Vector2f(22, 16)));
+                unit.setComponent(new PositionComponent(new Vector2f(22, 16.5f)));
                 unit.setComponent(new DirectionComponent(new Vector2f(0, -1)));
                 unit.setComponent(new HitboxComponent(new RegularCyclic(6, 2)));
                 unit.setComponent(new AntiGhostComponent());
@@ -163,6 +195,7 @@ public class EntityTemplate{
             
             case 1:
                 unit.setComponent(new ModelComponent("Models/wizard/skin.xml"));
+                
                 unit.setComponent(new ScaleComponent(0.5f));
                 unit.setComponent(new PositionComponent(new Vector2f(7, 7)));
                 unit.setComponent(new DirectionComponent(new Vector2f(1, 1)));
@@ -225,11 +258,12 @@ public class EntityTemplate{
             
             case 2:
                 unit.setComponent(new ModelComponent("Models/robot/skin.xml"));
+                
                 unit.setComponent(new PositionComponent(new Vector2f(20, 7)));
                 unit.setComponent(new DirectionComponent(new Vector2f(-1, -1)));
                 unit.setComponent(new HitboxComponent(new Circle(1.5f)));
                 unit.setComponent(new AntiGhostComponent());
-                unit.setComponent(new TeamComponent(1));
+                unit.setComponent(new TeamComponent(2));
                 unit.setComponent(new IsTargetableComponent());
                 unit.setComponent(new BaseMaximumHealthComponent(410));
                 unit.setComponent(new BaseAttackDamageComponent(40));
@@ -245,6 +279,22 @@ public class EntityTemplate{
                 autoAttack2.setComponent(new CooldownComponent(1));
                 autoAttack2.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
                 unit.setComponent(new AutoAttackComponent(autoAttack2.getId()));
+                
+                EntityWrapper grab = entityWorld.getWrapped(entityWorld.createEntity());
+                grab.setComponent(new NameComponent("Grab"));
+                grab.setComponent(new DescriptionComponent("Beep boop."));
+                EntityWrapper spawnInformation5 = entityWorld.getWrapped(entityWorld.createEntity());
+                spawnInformation5.setComponent(new SpawnTemplateComponent("grab_projectile," + unit.getId()));
+                spawnInformation5.setComponent(new SpawnMovementSpeedComponent(12));
+                grab.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation5.getId()}));
+                grab.setComponent(new CooldownComponent(3));
+                grab.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
+                EntityWrapper grabAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+                grabAnimation.setComponent(new NameComponent("grab"));
+                grabAnimation.setComponent(new LoopDurationComponent(1.5f));
+                grab.setComponent(new CastAnimationComponent(grabAnimation.getId()));
+                
+                unit.setComponent(new SpellsComponent(new int[]{grab.getId()}));
                 break;
         }
         player.setComponent(new SelectedUnitComponent(unit.getId()));

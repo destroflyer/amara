@@ -18,6 +18,7 @@ import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
+import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.items.*;
@@ -28,11 +29,13 @@ import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.spells.specials.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.units.effects.*;
 import amara.game.entitysystem.components.units.intersections.*;
 import amara.game.entitysystem.components.units.movement.*;
 import amara.game.entitysystem.components.visuals.*;
+import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.synchronizing.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 
@@ -92,6 +95,8 @@ public class MessagesSerializer{
                         //effects
                         AffectedTargetsComponent.class,
                         ApplyEffectImpactComponent.class,
+                        //effects/buff
+                        MoveToEntityPositionComponent.class,
                         //effects/crowdcontrol
                         BindingComponent.class,
                         SilenceComponent.class,
@@ -149,6 +154,7 @@ public class MessagesSerializer{
                         SpawnTemplateComponent.class,
                         //spells
                         ApplyCastedSpellComponent.class,
+                        CastAnimationComponent.class,
                         CastTypeComponent.class,
                         CooldownComponent.class,
                         InstantSpawnsComponent.class,
@@ -161,6 +167,9 @@ public class MessagesSerializer{
                         AutoAggroComponent.class,
                         AutoAttackComponent.class,
                         AutoAttackTargetComponent.class,
+                        //units/animations
+                        AutoAttackAnimationComponent.class,
+                        WalkAnimationComponent.class,
                         //units/crowdcontrol
                         IsBindedComponent.class,
                         IsSilencedComponent.class,
@@ -180,8 +189,12 @@ public class MessagesSerializer{
                         TargetsInAggroRangeComponent.class,
                         TeamComponent.class,
                         //visuals
-                        AnimationComponent.class,
                         ModelComponent.class,
+                        AnimationComponent.class,
+                        //visuals/animations
+                        LoopDurationComponent.class,
+                        PassedLoopTimeComponent.class,
+                        RemainingLoopsComponent.class,
                     RemovedComponentChange.class,
                     RemovedEntityChange.class,
             Message_GameOver.class,

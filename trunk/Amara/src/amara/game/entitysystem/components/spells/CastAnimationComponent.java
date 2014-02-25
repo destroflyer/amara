@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.game.entitysystem.components.visuals;
+package amara.game.entitysystem.components.spells;
 
 import com.jme3.network.serializing.Serializable;
 
@@ -11,13 +11,13 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class AnimationComponent{
+public class CastAnimationComponent{
 
-    public AnimationComponent(){
+    public CastAnimationComponent(){
         
     }
     
-    public AnimationComponent(int animationEntity){
+    public CastAnimationComponent(int animationEntity){
         this.animationEntity = animationEntity;
     }
     private int animationEntity;

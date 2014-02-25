@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
+import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.objectives.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
@@ -34,7 +35,6 @@ public class TestMap extends Map{
     @Override
     public void load(EntityWorld entityWorld){
         //Field of test units
-        int targetEntity = -1;
         for(int x=0;x<5;x++){
             for(int y=0;y<4;y++){
                 EntityWrapper entity = entityWorld.getWrapped(entityWorld.createEntity());
@@ -49,13 +49,24 @@ public class TestMap extends Map{
                 entity.setComponent(new IsTargetableComponent());
                 entity.setComponent(new BaseMaximumHealthComponent(500));
                 entity.setComponent(new RequestUpdateAttributesComponent());
-                if((x == 4) && (y == 0)){
-                    targetEntity = entity.getId();
-                }
             }
         }
+        EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
+        boss.setComponent(new NameComponent("Yalee"));
+        boss.setComponent(new DescriptionComponent("Stupid."));
+        boss.setComponent(new ModelComponent("Models/cow/skin.xml"));
+        boss.setComponent(new ScaleComponent(1.5f));
+        boss.setComponent(new PositionComponent(new Vector2f(35, 12)));
+        boss.setComponent(new DirectionComponent(new Vector2f(-0.5f, -1)));
+        boss.setComponent(new HitboxComponent(new Circle(2.25f)));
+        boss.setComponent(new AntiGhostComponent());
+        boss.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+        boss.setComponent(new TeamComponent(1));
+        boss.setComponent(new IsTargetableComponent());
+        boss.setComponent(new BaseMaximumHealthComponent(800));
+        boss.setComponent(new RequestUpdateAttributesComponent());
         objectiveEntity = entityWorld.createEntity();
-        entityWorld.setComponent(objectiveEntity, new MissingEntitiesComponent(new int[]{targetEntity}));
+        entityWorld.setComponent(objectiveEntity, new MissingEntitiesComponent(new int[]{boss.getId()}));
         entityWorld.setComponent(objectiveEntity, new OpenObjectiveComponent());
     }
 }

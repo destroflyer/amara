@@ -9,6 +9,7 @@ import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
+import amara.game.entitysystem.components.effects.movement.*;
 
 /**
  *
@@ -64,6 +65,10 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 StunComponent stunComponent = effect.getComponent(StunComponent.class);
                 if(stunComponent != null){
                     effectImpact.setComponent(stunComponent);
+                }
+                MoveToEntityPositionComponent moveToEntityPositionComponent = effect.getComponent(MoveToEntityPositionComponent.class);
+                if(moveToEntityPositionComponent != null){
+                    effectImpact.setComponent(moveToEntityPositionComponent);
                 }
                 effectImpact.setComponent(new ApplyEffectImpactComponent(targetEntity.getId()));
             }

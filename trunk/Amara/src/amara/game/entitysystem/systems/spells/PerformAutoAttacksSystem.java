@@ -8,7 +8,9 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.units.animations.AutoAttackAnimationComponent;
 import amara.game.entitysystem.components.visuals.*;
+import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.systems.spells.casting.*;
 
 /**
@@ -27,8 +29,11 @@ public class PerformAutoAttacksSystem implements EntitySystem{
                 if(!entityWorld.hasComponent(autoAttackEntityID, RemainingCooldownComponent.class)){
                     CastSingleTargetSpellSystem.castSingleTargetSpell(entityWorld, entityWrapper.getId(), autoAttackEntityID, targetEntityID);
                     SetCooldownOnCastingSystem.setOnCooldown(entityWorld, autoAttackEntityID);
+                    int animationEntity = entityWrapper.getComponent(AutoAttackAnimationComponent.class).getAnimationEntity();
                     float attackSpeed = entityWrapper.getComponent(AttackSpeedComponent.class).getValue();
-                    entityWrapper.setComponent(new AnimationComponent("auto_attack", (1 / attackSpeed), false));
+                    entityWorld.setComponent(animationEntity, new LoopDurationComponent(1 / attackSpeed));
+                    entityWorld.setComponent(animationEntity, new RemainingLoopsComponent(1));
+                    entityWrapper.setComponent(new AnimationComponent(animationEntity));
                 }
             }
             else{

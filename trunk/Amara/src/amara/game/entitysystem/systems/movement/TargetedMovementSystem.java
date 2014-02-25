@@ -8,6 +8,8 @@ import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.PositionComponent;
 import amara.game.entitysystem.components.units.movement.TargetedMovementComponent;
+import amara.game.entitysystem.systems.physics.intersection.Pair;
+import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionInformant;
 
 /**
  *
@@ -15,10 +17,22 @@ import amara.game.entitysystem.components.units.movement.TargetedMovementCompone
  */
 public class TargetedMovementSystem implements EntitySystem{
     
+    public TargetedMovementSystem(IntersectionInformant intersectionInformant){
+        this.intersectionInformant = intersectionInformant;
+    }
+    private IntersectionInformant intersectionInformant;
+    
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(TargetedMovementComponent.class))
-        {
+        for(Pair<Integer> pair: intersectionInformant.getEntries()){
+            if(entityWorld.hasComponent(pair.getA(), TargetedMovementComponent.class)){
+                checkCollidingStop(entityWorld, pair.getA(), pair.getB());
+            }
+            if(entityWorld.hasComponent(pair.getB(), TargetedMovementComponent.class)){
+                checkCollidingStop(entityWorld, pair.getB(), pair.getA());
+            }
+        }
+        for(int entity : entityWorld.getEntitiesWithAll(TargetedMovementComponent.class)){
             TargetedMovementComponent targetedMovementComponent = entityWorld.getComponent(entity, TargetedMovementComponent.class);
             PositionComponent targetPositionComponent = entityWorld.getComponent(targetedMovementComponent.getTargetEntityID(), PositionComponent.class);
             if(targetPositionComponent != null){
@@ -38,6 +52,13 @@ public class TargetedMovementSystem implements EntitySystem{
             else{
                 entityWorld.removeEntity(entity);
             }
+        }
+    }
+    
+    private void checkCollidingStop(EntityWorld entityWorld, int movingEntity, int targetEntity){
+        TargetedMovementComponent targetedMovementComponent = entityWorld.getComponent(movingEntity, TargetedMovementComponent.class);
+        if(targetedMovementComponent.getTargetEntityID() == targetEntity){
+            entityWorld.removeComponent(movingEntity, TargetedMovementComponent.class);
         }
     }
 }

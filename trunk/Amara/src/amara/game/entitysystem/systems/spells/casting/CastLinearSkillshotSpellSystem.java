@@ -39,6 +39,7 @@ public class CastLinearSkillshotSpellSystem implements EntitySystem{
                     spawnedObject.setComponent(new MovementSpeedComponent(direction.normalize().multLocal(spawnMovementSpeed)));
                 }
             });
+            entityWorld.setComponent(caster.getId(), new DirectionComponent(direction));
             entityWorld.removeComponent(caster.getId(), CastLinearSkillshotSpellComponent.class);
         }
     }
