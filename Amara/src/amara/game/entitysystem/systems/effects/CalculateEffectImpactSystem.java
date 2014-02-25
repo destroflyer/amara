@@ -9,6 +9,7 @@ import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
+import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
 
 /**
@@ -29,6 +30,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 EntityWrapper effectImpact = entityWorld.getWrapped(entityWorld.createEntity());
                 float physicalDamage = 0;
                 float magicDamage = 0;
+                float heal = 0;
                 FlatPhysicalDamageComponent flatPhysicalDamageComponent = effect.getComponent(FlatPhysicalDamageComponent.class);
                 if(flatPhysicalDamageComponent != null){
                     physicalDamage += flatPhysicalDamageComponent.getValue();
@@ -36,6 +38,10 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 FlatMagicDamageComponent flatMagicDamageComponent = effect.getComponent(FlatMagicDamageComponent.class);
                 if(flatMagicDamageComponent != null){
                     magicDamage += flatMagicDamageComponent.getValue();
+                }
+                FlatHealComponent flatHealComponent = effect.getComponent(FlatHealComponent.class);
+                if(flatHealComponent != null){
+                    heal += flatHealComponent.getValue();
                 }
                 if(effectSourceComponent != null){
                     EntityWrapper effectSource = entityWorld.getWrapped(effectSourceComponent.getSourceEntityID());
@@ -53,6 +59,9 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 }
                 if(magicDamage != 0){
                     effectImpact.setComponent(new MagicDamageComponent(magicDamage));
+                }
+                if(heal != 0){
+                    effectImpact.setComponent(new HealComponent(heal));
                 }
                 BindingComponent bindingComponent = effect.getComponent(BindingComponent.class);
                 if(bindingComponent != null){

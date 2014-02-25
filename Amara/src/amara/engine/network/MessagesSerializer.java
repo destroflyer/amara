@@ -18,6 +18,7 @@ import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
+import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.input.*;
@@ -110,6 +111,9 @@ public class MessagesSerializer{
                         ScalingAttackDamagePhysicalDamageComponent.class,
                         EffectSourceComponent.class,
                         PrepareEffectComponent.class,
+                        //effects/heal
+                        FlatHealComponent.class,
+                        HealComponent.class,
                         //general
                         DescriptionComponent.class,
                         NameComponent.class,
