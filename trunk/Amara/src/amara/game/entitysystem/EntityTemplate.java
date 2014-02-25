@@ -10,6 +10,7 @@ import amara.game.entitysystem.components.buffs.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
+import amara.game.entitysystem.components.effects.heals.FlatHealComponent;
 import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.items.*;
@@ -160,6 +161,7 @@ public class EntityTemplate{
                 unit.setComponent(new TeamComponent(1));
                 unit.setComponent(new IsTargetableComponent());
                 
+                unit.setComponent(new BaseMaximumHealthComponent(300));
                 unit.setComponent(new InventoryComponent(new int[]{doransBlade.getId(), doransBlade.getId(), doransBlade.getId()}));
                 unit.setComponent(new RequestUpdateAttributesComponent());
                 
@@ -251,7 +253,7 @@ public class EntityTemplate{
                 autoAttack1.setComponent(new CooldownComponent(1));
                 autoAttack1.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
                 unit.setComponent(new AutoAttackComponent(autoAttack1.getId()));
-                unit.setComponent(new AutoAggroComponent(9));
+                unit.setComponent(new AutoAggroComponent(4));
                 break;
             
             case 2:
@@ -264,11 +266,13 @@ public class EntityTemplate{
                 unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
                 unit.setComponent(new TeamComponent(3));
                 unit.setComponent(new IsTargetableComponent());
-                unit.setComponent(new BaseMaximumHealthComponent(410));
+                
+                unit.setComponent(new BaseMaximumHealthComponent(700));
                 unit.setComponent(new BaseAttackDamageComponent(40));
                 unit.setComponent(new BaseAbilityPowerComponent(0));
                 unit.setComponent(new BaseAttackSpeedComponent(0.7f));
                 unit.setComponent(new RequestUpdateAttributesComponent());
+                unit.setComponent(new HealthComponent(500));
                 
                 EntityWrapper autoAttack2 = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper autoAttackEffect1 = entityWorld.getWrapped(entityWorld.createEntity());
@@ -293,7 +297,15 @@ public class EntityTemplate{
                 grabAnimation.setComponent(new LoopDurationComponent(1.5f));
                 grab.setComponent(new CastAnimationComponent(grabAnimation.getId()));
                 
-                unit.setComponent(new SpellsComponent(new int[]{grab.getId()}));
+                EntityWrapper heal = entityWorld.getWrapped(entityWorld.createEntity());
+                grab.setComponent(new NameComponent("Heal"));
+                grab.setComponent(new DescriptionComponent("Sona in a nutshell."));
+                EntityWrapper healEffect = entityWorld.getWrapped(entityWorld.createEntity());
+                healEffect.setComponent(new FlatHealComponent(100));
+                heal.setComponent(new InstantTargetEffectComponent(healEffect.getId()));
+                heal.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+                
+                unit.setComponent(new SpellsComponent(new int[]{grab.getId(), heal.getId()}));
                 break;
         }
         player.setComponent(new SelectedUnitComponent(unit.getId()));
