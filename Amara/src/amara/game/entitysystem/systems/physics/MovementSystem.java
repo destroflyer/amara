@@ -7,6 +7,7 @@ package amara.game.entitysystem.systems.physics;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
+import amara.game.entitysystem.components.units.animations.WalkAnimationComponent;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.visuals.AnimationComponent;
 
@@ -58,7 +59,10 @@ public class MovementSystem implements EntitySystem
                 entity.removeComponent(AnimationComponent.class);
             }
             else{
-                entity.setComponent(new AnimationComponent("walk", 1, true));
+                WalkAnimationComponent walkAnimationComponent = entity.getComponent(WalkAnimationComponent.class);
+                if(walkAnimationComponent != null){
+                    entity.setComponent(new AnimationComponent(walkAnimationComponent.getAnimationEntity()));
+                }
             }
         }
     }

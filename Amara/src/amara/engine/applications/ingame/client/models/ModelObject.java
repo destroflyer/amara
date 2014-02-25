@@ -22,7 +22,7 @@ public class ModelObject extends Node implements AnimEventListener{
     private IngameClientApplication mainApplication;
     protected Spatial modelSpatial;
     private AnimChannel animationChannel;
-    private boolean isPlayingLoopedAnimation;
+    private int remainingAnimationLoops;
     
     private void loadSkin(ModelSkin skin){
         modelSpatial = skin.loadSpatial();
@@ -32,15 +32,19 @@ public class ModelObject extends Node implements AnimEventListener{
             animationControl.addListener(this);
             animationChannel = animationControl.createChannel();
         }
+        SkeletonControl skeletonControl = modelSpatial.getControl(SkeletonControl.class);
+        if(skeletonControl != null){
+            //skeletonControl.setHardwareSkinningPreferred(true);
+        }
     }
     
-    public void playAnimation(String animationName, float loopDuration, boolean isLooped){
+    public void playAnimation(String animationName, float loopDuration, int loopsCount){
         if(animationChannel != null){
             if(!animationName.equals(animationChannel.getAnimationName())){
                 try{
                     animationChannel.setAnim(animationName);
                     animationChannel.setSpeed(animationChannel.getAnimMaxTime() / loopDuration);
-                    isPlayingLoopedAnimation = isLooped;
+                    remainingAnimationLoops = loopsCount;
                 }catch(IllegalArgumentException ex){
                     stopAndRewindAnimation();
                 }
@@ -60,8 +64,11 @@ public class ModelObject extends Node implements AnimEventListener{
 
     @Override
     public void onAnimCycleDone(AnimControl control, AnimChannel channel, String animationName){
-        if(!isPlayingLoopedAnimation){
-            stopAndRewindAnimation();
+        if(remainingAnimationLoops != -1){
+            remainingAnimationLoops--;
+            if(remainingAnimationLoops == 0){
+                stopAndRewindAnimation();
+            }
         }
     }
 

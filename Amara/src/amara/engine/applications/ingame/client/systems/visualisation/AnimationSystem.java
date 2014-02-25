@@ -8,7 +8,9 @@ import com.jme3.scene.Node;
 import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.ComponentMapObserver;
+import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.visuals.*;
+import amara.game.entitysystem.components.visuals.animations.*;
 
 /**
  *
@@ -55,7 +57,14 @@ public class AnimationSystem implements EntitySystem{
         if(modelObject != null){
             AnimationComponent animationComponent = entityWorld.getComponent(entity, AnimationComponent.class);
             if(animationComponent != null){
-                modelObject.playAnimation(animationComponent.getName(), animationComponent.getLoopDuration(), animationComponent.isLooped());
+                EntityWrapper animation = entityWorld.getWrapped(animationComponent.getAnimationEntity());
+                String animationName = animation.getComponent(NameComponent.class).getName();
+                float loopDuration = animation.getComponent(LoopDurationComponent.class).getDuration();
+                int loopsCount = -1;
+                if(animation.hasComponent(RemainingLoopsComponent.class)){
+                    loopsCount = animation.getComponent(RemainingLoopsComponent.class).getLoopsCount();
+                }
+                modelObject.playAnimation(animationName, loopDuration, loopsCount);
             }
         }
     }

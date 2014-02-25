@@ -5,35 +5,23 @@
 package amara.game.entitysystem.systems.spells.casting;
 
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.spells.*;
 
 /**
  *
  * @author Carl
  */
-public class SetCooldownOnCastingSystem implements EntitySystem{
-    
+public class SetCooldownOnCastingSystem extends SimpleCastingSystem{
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(CastSingleTargetSpellComponent.class))
-        {
-            setOnCooldown(entityWorld, entityWorld.getComponent(entity, CastSingleTargetSpellComponent.class).getSpellEntityID());
-        }
-        for(int entity : entityWorld.getEntitiesWithAll(CastLinearSkillshotSpellComponent.class))
-        {
-            setOnCooldown(entityWorld, entityWorld.getComponent(entity, CastLinearSkillshotSpellComponent.class).getSpellEntityID());
-        }
-        for(int entity : entityWorld.getEntitiesWithAll(CastPositionalSkillshotSpellComponent.class))
-        {
-            setOnCooldown(entityWorld, entityWorld.getComponent(entity, CastPositionalSkillshotSpellComponent.class).getSpellEntityID());
-        }
+    public void onCasting(EntityWorld entityWorld, int casterEnttiy, int spellEntity){
+        setOnCooldown(entityWorld, spellEntity);
     }
     
-    public static void setOnCooldown(EntityWorld entityWorld, int spellEntityID){
-        CooldownComponent cooldownComponent = entityWorld.getComponent(spellEntityID, CooldownComponent.class);
+    public static void setOnCooldown(EntityWorld entityWorld, int spellEntity){
+        CooldownComponent cooldownComponent = entityWorld.getComponent(spellEntity, CooldownComponent.class);
         if(cooldownComponent != null){
-            entityWorld.setComponent(spellEntityID, new RemainingCooldownComponent(cooldownComponent.getDuration()));
+            entityWorld.setComponent(spellEntity, new RemainingCooldownComponent(cooldownComponent.getDuration()));
         }
     }
 }
