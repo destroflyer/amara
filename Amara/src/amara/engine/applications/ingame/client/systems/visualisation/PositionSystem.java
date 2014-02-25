@@ -26,12 +26,10 @@ public class PositionSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, PositionComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class))
-        {
+        for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
             updatePosition(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class))
-        {
+        for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
             updatePosition(entityWorld, entity);
         }
         observer.reset();

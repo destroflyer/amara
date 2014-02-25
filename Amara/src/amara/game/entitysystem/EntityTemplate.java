@@ -199,10 +199,8 @@ public class EntityTemplate{
                 unit.setComponent(new ScaleComponent(0.5f));
                 unit.setComponent(new PositionComponent(new Vector2f(7, 7)));
                 unit.setComponent(new DirectionComponent(new Vector2f(1, 1)));
-                unit.setComponent(new MovementSpeedComponent(new Vector2f(2, 2)));
                 unit.setComponent(new HitboxComponent(new Circle(1)));
                 unit.setComponent(new AntiGhostComponent());
-                unit.setComponent(new HealthComponent(400));
                 unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
                 unit.setComponent(new TeamComponent(2));
                 unit.setComponent(new IsTargetableComponent());
@@ -263,7 +261,8 @@ public class EntityTemplate{
                 unit.setComponent(new DirectionComponent(new Vector2f(-1, -1)));
                 unit.setComponent(new HitboxComponent(new Circle(1.5f)));
                 unit.setComponent(new AntiGhostComponent());
-                unit.setComponent(new TeamComponent(2));
+                unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+                unit.setComponent(new TeamComponent(3));
                 unit.setComponent(new IsTargetableComponent());
                 unit.setComponent(new BaseMaximumHealthComponent(410));
                 unit.setComponent(new BaseAttackDamageComponent(40));

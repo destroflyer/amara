@@ -45,7 +45,7 @@ public class TestMap extends Map{
                 entity.setComponent(new HitboxComponent(new Circle(1)));
                 entity.setComponent(new AntiGhostComponent());
                 entity.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
-                entity.setComponent(new TeamComponent(1));
+                entity.setComponent(new TeamComponent(0));
                 entity.setComponent(new IsTargetableComponent());
                 entity.setComponent(new BaseMaximumHealthComponent(500));
                 entity.setComponent(new RequestUpdateAttributesComponent());
@@ -61,7 +61,7 @@ public class TestMap extends Map{
         boss.setComponent(new HitboxComponent(new Circle(2.25f)));
         boss.setComponent(new AntiGhostComponent());
         boss.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
-        boss.setComponent(new TeamComponent(1));
+        boss.setComponent(new TeamComponent(0));
         boss.setComponent(new IsTargetableComponent());
         boss.setComponent(new BaseMaximumHealthComponent(800));
         boss.setComponent(new RequestUpdateAttributesComponent());

@@ -27,7 +27,7 @@ public class TestRun{
         masterServer.start();
         //Client
         HostInformation hostInformation = new HostInformation("localhost", 33900);
-        AuthentificationInformation authentificationInformation = new AuthentificationInformation("0", "");
+        AuthentificationInformation authentificationInformation = new AuthentificationInformation("2", "");
         final MasterserverClientApplication masterClient = new MasterserverClientApplication(hostInformation, authentificationInformation);
         masterClient.start();
         //Start game
