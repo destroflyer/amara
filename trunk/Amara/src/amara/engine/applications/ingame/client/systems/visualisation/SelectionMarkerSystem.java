@@ -30,14 +30,12 @@ public class SelectionMarkerSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, SelectedUnitComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(SelectedUnitComponent.class))
-        {
+        for(int entity : observer.getNew().getEntitiesWithAll(SelectedUnitComponent.class)){
             int selectedUnit = observer.getNew().getComponent(entity, SelectedUnitComponent.class).getEntityID();
             Node node = entitySceneMap.requestNode(selectedUnit);
             node.attachChild(createSelectionMarker("Textures/selection_markers/circle.png", 2, 2));
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(SelectedUnitComponent.class))
-        {
+        for(int entity : observer.getRemoved().getEntitiesWithAll(SelectedUnitComponent.class)){
             int selectedUnit = observer.getRemoved().getComponent(entity, SelectedUnitComponent.class).getEntityID();
             Node node = entitySceneMap.requestNode(selectedUnit);
             node.detachChildNamed(NODE_NAME_SELECTION_MARKER);

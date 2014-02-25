@@ -39,24 +39,19 @@ public class CollisionDebugSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, HitboxComponent.class, PositionComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(HitboxComponent.class))
-        {
+        for(int entity : observer.getNew().getEntitiesWithAll(HitboxComponent.class)){
             updateGeometry(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(HitboxComponent.class))
-        {
+        for(int entity : observer.getChanged().getEntitiesWithAll(HitboxComponent.class)){
             updateGeometry(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(HitboxComponent.class))
-        {
+        for(int entity : observer.getRemoved().getEntitiesWithAll(HitboxComponent.class)){
             removeGeometry(entity);
         }
-        for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class))
-        {
+        for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
             updateGeometryLocation(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class))
-        {
+        for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
             updateGeometryLocation(entityWorld, entity);
         }
         observer.reset();
@@ -68,6 +63,7 @@ public class CollisionDebugSystem implements EntitySystem{
         Geometry collisionMeshGeometry = generateGeometry(hitboxComponent.getShape());
         collisionMeshGeometry.setName(getGeometryName(entity));
         node.attachChild(collisionMeshGeometry);
+        updateGeometryLocation(entityWorld, entity);
     }
     
     private void removeGeometry(int entity){
