@@ -183,9 +183,6 @@ class Util {
                 }
             }
         }
-        if(refWallDirection.length() == 0) {
-            System.out.println("error");
-        }
         refWallDirection.setLength(1);
         return s;
     }

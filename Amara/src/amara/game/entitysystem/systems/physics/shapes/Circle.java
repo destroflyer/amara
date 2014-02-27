@@ -73,7 +73,11 @@ public class Circle extends Shape {
     @Override
     public Vector2D getResolveVector(Circle c) {
         Vector2D overlap = new Vector2D(c.getX() - getX(), c.getY() - getY());
-        overlap.addLength(-getBoundRadius() - c.getBoundRadius());
+        if(overlap.isZero())
+        {
+            overlap.addX(-getBoundRadius() - c.getBoundRadius());
+        }
+        else overlap.addLength(-getBoundRadius() - c.getBoundRadius());
         return overlap;
     }
 
