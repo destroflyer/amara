@@ -35,5 +35,4 @@ public class Pair<T> {
     }
     
     T a, b;
-//    public static int i;
 }
