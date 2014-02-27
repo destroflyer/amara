@@ -39,6 +39,7 @@ import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.synchronizing.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.game.games.PlayerData;
 
 /**
  *
@@ -53,6 +54,7 @@ public class MessagesSerializer{
             Message_LoginResult.class,
             
             Message_StartGame.class,
+                PlayerData.class,
             Message_GameStarted.class,
             
             Message_Command.class,

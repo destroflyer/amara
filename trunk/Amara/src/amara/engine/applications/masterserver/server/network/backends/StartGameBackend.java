@@ -29,10 +29,11 @@ public class StartGameBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_StartGame){
             Message_StartGame message = (Message_StartGame) receivedMessage;
-            int[] authentificationKeys = generateAuthentificationKeys(message.getPlayerIDs().length);
-            GamePlayer[] players = new GamePlayer[message.getPlayerIDs().length];
+            PlayerData[] playerDatas = message.getPlayerDatas();
+            GamePlayer[] players = new GamePlayer[playerDatas.length];
+            int[] authentificationKeys = generateAuthentificationKeys(playerDatas.length);
             for(int i=0;i<players.length;i++){
-                players[i] = new GamePlayer(message.getPlayerIDs()[i], authentificationKeys[i]);
+                players[i] = new GamePlayer(playerDatas[i], authentificationKeys[i]);
             }
             Game game = new Game(new TestMap(), players);
             RunningGames runningGames = mainApplication.getStateManager().getState(GamesAppState.class).getRunningGames();

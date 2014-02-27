@@ -12,6 +12,7 @@ import amara.engine.applications.masterserver.server.network.messages.Message_St
 import amara.engine.applications.masterserver.server.protocol.AuthentificationInformation;
 import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.*;
+import amara.game.games.PlayerData;
 
 /**
  *
@@ -28,10 +29,14 @@ public class TestRun{
         //Client
         HostInformation hostInformation = new HostInformation("localhost", 33900);
         AuthentificationInformation authentificationInformation = new AuthentificationInformation("0", "");
-        final MasterserverClientApplication masterClient = new MasterserverClientApplication(hostInformation, authentificationInformation);
+        MasterserverClientApplication masterClient = new MasterserverClientApplication(hostInformation, authentificationInformation);
         masterClient.start();
         //Start game
         NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.sendMessage(new Message_StartGame(99, new int[]{0, 1, 2}));
+        networkClient.sendMessage(new Message_StartGame(99, new PlayerData[]{
+            new PlayerData(0, "minion"),
+            new PlayerData(1, "wizard"),
+            new PlayerData(2, "robot")
+        }));
     }
 }

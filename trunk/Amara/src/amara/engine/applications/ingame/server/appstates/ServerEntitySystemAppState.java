@@ -10,8 +10,8 @@ import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.engine.applications.ingame.server.network.backends.*;
 import amara.engine.appstates.*;
 import amara.engine.network.NetworkServer;
-import amara.game.entitysystem.EntityTemplate;
-import amara.game.entitysystem.EntityWrapper;
+import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.systems.aggro.*;
 import amara.game.entitysystem.systems.attributes.*;
 import amara.game.entitysystem.systems.buffs.*;
@@ -92,11 +92,15 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new MapIntersectionSystem(100, 100, MapAppState.TEST_MAP_OBSTACLES));
         
         Map map = mainApplication.getGame().getMap();
-        for(GamePlayer player : mainApplication.getGame().getPlayers()){
-            EntityWrapper playerEntity = EntityTemplate.createPlayerEntity(entityWorld, player.getID());
+        map.load(entityWorld);
+        for(int i=0;i<mainApplication.getGame().getPlayers().length;i++){
+            GamePlayer player = mainApplication.getGame().getPlayers()[i];
+            EntityWrapper playerEntity = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper unit = EntityTemplate.createFromTemplate(entityWorld, player.getPlayerData().getUnitTemplate());
+            map.spawn(entityWorld, i, unit.getId());
+            playerEntity.setComponent(new SelectedUnitComponent(unit.getId()));
             player.setEntityID(playerEntity.getId());
         }
-        map.load(entityWorld);
         addEntitySystem(new CheckMapObjectiveSystem(map, getAppState(GameRunningAppState.class)));
     }
 }

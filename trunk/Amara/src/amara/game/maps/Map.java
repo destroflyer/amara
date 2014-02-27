@@ -16,6 +16,8 @@ public abstract class Map{
     protected int objectiveEntity;
     
     public abstract void load(EntityWorld entityWorld);
+    
+    public abstract void spawn(EntityWorld entityWorld, int playerIndex, int playerUnitEntity);
 
     public MapPhysicsInformation getPhysicsInformation(){
         return physicsInformation;

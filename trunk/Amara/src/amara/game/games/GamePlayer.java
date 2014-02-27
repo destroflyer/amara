@@ -10,16 +10,16 @@ package amara.game.games;
  */
 public class GamePlayer{
 
-    public GamePlayer(int id, int authentificationKey){
-        this.id = id;
+    public GamePlayer(PlayerData playerData, int authentificationKey){
+        this.playerData = playerData;
         this.authentificationKey = authentificationKey;
     }
-    private int id;
+    private PlayerData playerData;
     private int authentificationKey;
     private int entityID;
 
-    public int getID(){
-        return id;
+    public PlayerData getPlayerData(){
+        return playerData;
     }
 
     public int getAuthentificationKey(){

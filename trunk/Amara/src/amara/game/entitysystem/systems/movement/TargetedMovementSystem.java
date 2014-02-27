@@ -34,7 +34,7 @@ public class TargetedMovementSystem implements EntitySystem{
         }
         for(int entity : entityWorld.getEntitiesWithAll(TargetedMovementComponent.class)){
             TargetedMovementComponent targetedMovementComponent = entityWorld.getComponent(entity, TargetedMovementComponent.class);
-            PositionComponent targetPositionComponent = entityWorld.getComponent(targetedMovementComponent.getTargetEntityID(), PositionComponent.class);
+            PositionComponent targetPositionComponent = entityWorld.getComponent(targetedMovementComponent.getTargetEntity(), PositionComponent.class);
             if(targetPositionComponent != null){
                 Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
                 Vector2f targetPosition = targetPositionComponent.getPosition();
@@ -57,7 +57,7 @@ public class TargetedMovementSystem implements EntitySystem{
     
     private void checkCollidingStop(EntityWorld entityWorld, int movingEntity, int targetEntity){
         TargetedMovementComponent targetedMovementComponent = entityWorld.getComponent(movingEntity, TargetedMovementComponent.class);
-        if(targetedMovementComponent.getTargetEntityID() == targetEntity){
+        if(targetedMovementComponent.getTargetEntity() == targetEntity){
             entityWorld.removeComponent(movingEntity, TargetedMovementComponent.class);
         }
     }

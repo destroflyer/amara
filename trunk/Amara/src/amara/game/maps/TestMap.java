@@ -69,4 +69,29 @@ public class TestMap extends Map{
         entityWorld.setComponent(objectiveEntity, new MissingEntitiesComponent(new int[]{boss.getId()}));
         entityWorld.setComponent(objectiveEntity, new OpenObjectiveComponent());
     }
+
+    @Override
+    public void spawn(EntityWorld entityWorld, int playerIndex, int playerUnitEntity){
+        Vector2f position = new Vector2f();
+        Vector2f direction = new Vector2f();
+        switch(playerIndex){
+            case 0:
+                position = new Vector2f(22, 16.5f);
+                direction = new Vector2f(0, -1);
+                break;
+            
+            case 1:
+                position = new Vector2f(7, 7);
+                direction = new Vector2f(1, 1);
+                break;
+            
+            case 2:
+                position = new Vector2f(20, 7);
+                direction = new Vector2f(-1, -1);
+                break;
+        }
+        entityWorld.setComponent(playerUnitEntity, new PositionComponent(position));
+        entityWorld.setComponent(playerUnitEntity, new DirectionComponent(direction));
+        entityWorld.setComponent(playerUnitEntity, new TeamComponent(playerIndex + 1));
+    }
 }
