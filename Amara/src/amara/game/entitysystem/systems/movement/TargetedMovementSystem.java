@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.movement;
 
+import java.util.Set;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.PositionComponent;
@@ -24,7 +25,9 @@ public class TargetedMovementSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(Pair<Integer> pair: intersectionInformant.getEntries()){
+        Set<Pair<Integer>> collidingEntities = intersectionInformant.getEntries();
+        collidingEntities.addAll(intersectionInformant.getRepeaters());
+        for(Pair<Integer> pair : collidingEntities){
             if(entityWorld.hasComponent(pair.getA(), TargetedMovementComponent.class)){
                 checkCollidingStop(entityWorld, pair.getA(), pair.getB());
             }
