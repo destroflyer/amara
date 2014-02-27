@@ -8,7 +8,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
-import amara.game.entitysystem.components.units.animations.AutoAttackAnimationComponent;
+import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.systems.spells.casting.*;
@@ -23,12 +23,12 @@ public class PerformAutoAttacksSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(AutoAttackTargetComponent.class)))
         {
-            int targetEntityID = entityWrapper.getComponent(AutoAttackTargetComponent.class).getTargetEntityID();
-            if(entityWorld.hasComponent(targetEntityID, IsTargetableComponent.class)){
-                int autoAttackEntityID = entityWrapper.getComponent(AutoAttackComponent.class).getAutoAttackEntityID();
-                if(!entityWorld.hasComponent(autoAttackEntityID, RemainingCooldownComponent.class)){
-                    CastSingleTargetSpellSystem.castSingleTargetSpell(entityWorld, entityWrapper.getId(), autoAttackEntityID, targetEntityID);
-                    SetCooldownOnCastingSystem.setOnCooldown(entityWorld, autoAttackEntityID);
+            int targetEntity = entityWrapper.getComponent(AutoAttackTargetComponent.class).getTargetEntityID();
+            if(entityWorld.hasComponent(targetEntity, IsTargetableComponent.class)){
+                int autoAttackEntity = entityWrapper.getComponent(AutoAttackComponent.class).getAutoAttackEntityID();
+                if(!entityWorld.hasComponent(autoAttackEntity, RemainingCooldownComponent.class)){
+                    CastSingleTargetSpellSystem.castSingleTargetSpell(entityWorld, entityWrapper.getId(), autoAttackEntity, targetEntity);
+                    SetCooldownOnCastingSystem.setOnCooldown(entityWorld, autoAttackEntity);
                     int animationEntity = entityWrapper.getComponent(AutoAttackAnimationComponent.class).getAnimationEntity();
                     float attackSpeed = entityWrapper.getComponent(AttackSpeedComponent.class).getValue();
                     entityWorld.setComponent(animationEntity, new LoopDurationComponent(1 / attackSpeed));

@@ -23,7 +23,7 @@ public class TriggerTargetReachedEffectSystem implements EntitySystem{
         for(int entity : entityWorld.getEntitiesWithAll(TargetedMovementComponent.class, TargetReachedTriggerEffectComponent.class))
         {
             TargetedMovementComponent targetedMovementComponent = entityWorld.getComponent(entity, TargetedMovementComponent.class);
-            PositionComponent targetPositionComponent = entityWorld.getComponent(targetedMovementComponent.getTargetEntityID(), PositionComponent.class);
+            PositionComponent targetPositionComponent = entityWorld.getComponent(targetedMovementComponent.getTargetEntity(), PositionComponent.class);
             if(targetPositionComponent != null){
                 Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
                 Vector2f targetPosition = targetPositionComponent.getPosition();
@@ -35,7 +35,7 @@ public class TriggerTargetReachedEffectSystem implements EntitySystem{
                     if(castSourceComponent != null){
                         effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntitiyID()));
                     }
-                    effectCast.setComponent(new AffectedTargetsComponent(new int[]{targetedMovementComponent.getTargetEntityID()}));
+                    effectCast.setComponent(new AffectedTargetsComponent(new int[]{targetedMovementComponent.getTargetEntity()}));
                     entityWorld.removeEntity(entity);
                 }
             }

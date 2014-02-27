@@ -30,7 +30,7 @@ public class AssignPlayerEntityBackend implements MessageBackend{
             Message_PlayerAuthentification message = (Message_PlayerAuthentification) receivedMessage;
             GamePlayer player = game.getPlayer(message.getAuthentificationKey());
             entityWorld.setComponent(player.getEntityID(), new ClientComponent(messageResponse.getClientID()));
-            System.out.println(messageResponse.getClientID() + " => " + player.getID() + "  (" + player.getEntityID() + ")");
+            System.out.println("IngameClient #" + messageResponse.getClientID() + " (Player #" + player.getPlayerData().getID() + ") => Entity #" + player.getEntityID());
         }
     }
 }

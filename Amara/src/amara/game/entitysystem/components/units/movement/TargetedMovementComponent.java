@@ -17,15 +17,15 @@ public class TargetedMovementComponent{
         
     }
     
-    public TargetedMovementComponent(int targetEntityID, float speed){
-        this.targetEntityID = targetEntityID;
+    public TargetedMovementComponent(int targetEntity, float speed){
+        this.targetEntity = targetEntity;
         this.speed = speed;
     }
-    private int targetEntityID;
+    private int targetEntity;
     private float speed;
 
-    public int getTargetEntityID(){
-        return targetEntityID;
+    public int getTargetEntity(){
+        return targetEntity;
     }
 
     public float getSpeed(){

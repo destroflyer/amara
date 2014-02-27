@@ -6,6 +6,7 @@ package amara.engine.applications.masterserver.server.network.messages;
 
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
+import amara.game.games.PlayerData;
 
 /**
  *
@@ -18,18 +19,19 @@ public class Message_StartGame extends AbstractMessage{
         
     }
     
-    public Message_StartGame(int mapID, int[] playerIDs){
+    public Message_StartGame(int mapID, PlayerData[] playerDatas){
         this.mapID = mapID;
-        this.playerIDs = playerIDs;
+        this.playerDatas = playerDatas;
     }
     private int mapID;
-    private int[] playerIDs;
+    //May the gods forgive me this spelling mistake in order to have a nice iterator name
+    private PlayerData[] playerDatas;
 
     public int getMapID(){
         return mapID;
     }
 
-    public int[] getPlayerIDs(){
-        return playerIDs;
+    public PlayerData[] getPlayerDatas(){
+        return playerDatas;
     }
 }

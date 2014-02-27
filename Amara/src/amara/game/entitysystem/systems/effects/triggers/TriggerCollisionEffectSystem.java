@@ -6,7 +6,7 @@ package amara.game.entitysystem.systems.effects.triggers;
 
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
-import amara.game.entitysystem.components.spawns.CastSourceComponent;
+import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.effects.*;
 import amara.game.entitysystem.components.units.intersections.*;
@@ -28,27 +28,27 @@ public class TriggerCollisionEffectSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(Pair<Integer> pair: info.getEntries()){
             if(entityWorld.hasComponent(pair.getA(), CollisionTriggerEffectComponent.class)){
-                applyDamage(entityWorld, pair.getA(), pair.getB());
+                applyEffect(entityWorld, pair.getA(), pair.getB());
             }
             if(entityWorld.hasComponent(pair.getB(), CollisionTriggerEffectComponent.class)){
-                applyDamage(entityWorld, pair.getB(), pair.getA());
+                applyEffect(entityWorld, pair.getB(), pair.getA());
             }
         }
     }
     
-    private void applyDamage(EntityWorld entityWorld, int damageEntity, int damagedEntity){
-        EntityWrapper intersectionRules = entityWorld.getWrapped(entityWorld.getComponent(damageEntity, IntersectionRulesComponent.class).getRulesEntityID());
-        if(entityWorld.hasComponent(damagedEntity, IsTargetableComponent.class)){
+    private void applyEffect(EntityWorld entityWorld, int effectingEntity, int targetEntity){
+        EntityWrapper intersectionRules = entityWorld.getWrapped(entityWorld.getComponent(effectingEntity, IntersectionRulesComponent.class).getRulesEntityID());
+        if(entityWorld.hasComponent(targetEntity, IsTargetableComponent.class)){
             boolean triggerEffect;
-            TeamComponent damageTeamComponent = entityWorld.getComponent(damageEntity, TeamComponent.class);
-            TeamComponent damagedTeamComponent = entityWorld.getComponent(damagedEntity, TeamComponent.class);
-            if((damageTeamComponent != null) && (damagedTeamComponent != null)){
+            TeamComponent effectTeamComponent = entityWorld.getComponent(effectingEntity, TeamComponent.class);
+            TeamComponent targetTeamComponent = entityWorld.getComponent(targetEntity, TeamComponent.class);
+            if((effectTeamComponent != null) && (targetTeamComponent != null)){
                 triggerEffect = false;
                 if(intersectionRules.getComponent(AcceptAlliesComponent.class) != null){
-                    triggerEffect |= (damageTeamComponent.getTeamEntityID() == damagedTeamComponent.getTeamEntityID());
+                    triggerEffect |= (effectTeamComponent.getTeamEntityID() == targetTeamComponent.getTeamEntityID());
                 }
                 if(intersectionRules.getComponent(AcceptEnemiesComponent.class) != null){
-                    triggerEffect |= (damageTeamComponent.getTeamEntityID() != damagedTeamComponent.getTeamEntityID());
+                    triggerEffect |= (effectTeamComponent.getTeamEntityID() != targetTeamComponent.getTeamEntityID());
                 }
             }
             else{
@@ -56,14 +56,14 @@ public class TriggerCollisionEffectSystem implements EntitySystem{
             }
             if(triggerEffect){
                 EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
-                int effectID = entityWorld.getComponent(damageEntity, CollisionTriggerEffectComponent.class).getEffectEntityID();
-                effectCast.setComponent(new PrepareEffectComponent(effectID));
-                CastSourceComponent castSourceComponent = entityWorld.getComponent(damageEntity, CastSourceComponent.class);
+                int effectEntity = entityWorld.getComponent(effectingEntity, CollisionTriggerEffectComponent.class).getEffectEntityID();
+                effectCast.setComponent(new PrepareEffectComponent(effectEntity));
+                CastSourceComponent castSourceComponent = entityWorld.getComponent(effectingEntity, CastSourceComponent.class);
                 if(castSourceComponent != null){
                     effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntitiyID()));
                 }
-                effectCast.setComponent(new AffectedTargetsComponent(new int[]{damagedEntity}));
-                entityWorld.removeEntity(damageEntity);
+                effectCast.setComponent(new AffectedTargetsComponent(new int[]{targetEntity}));
+                entityWorld.removeEntity(effectingEntity);
             }
         }
     }
