@@ -12,7 +12,9 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -152,6 +154,15 @@ public class Util{
             }
         }
         return false;
+    }
+    
+    public static int[] convertToArray(Collection<Integer> collection){
+        int[] array = new int[collection.size()];
+        Iterator<Integer> iterator = collection.iterator();
+        for(int i=0;i<array.length;i++){
+            array[i] = iterator.next();
+        }
+        return array;
     }
     
     public static int[] cloneArray(int[] array){

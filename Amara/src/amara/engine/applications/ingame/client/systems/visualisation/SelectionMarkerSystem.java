@@ -33,7 +33,7 @@ public class SelectionMarkerSystem implements EntitySystem{
         for(int entity : observer.getNew().getEntitiesWithAll(SelectedUnitComponent.class)){
             int selectedUnit = observer.getNew().getComponent(entity, SelectedUnitComponent.class).getEntityID();
             Node node = entitySceneMap.requestNode(selectedUnit);
-            node.attachChild(createSelectionMarker("Textures/selection_markers/circle.png", 2, 2));
+            node.attachChild(createGroundTexture("Textures/selection_markers/circle.png", 2, 2));
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll(SelectedUnitComponent.class)){
             int selectedUnit = observer.getRemoved().getComponent(entity, SelectedUnitComponent.class).getEntityID();
@@ -43,7 +43,7 @@ public class SelectionMarkerSystem implements EntitySystem{
         observer.reset();
     }
     
-    private Spatial createSelectionMarker(String textureFilePath, float width, float height){
+    public static Spatial createGroundTexture(String textureFilePath, float width, float height){
         Spatial selectionMarker = new Geometry(NODE_NAME_SELECTION_MARKER, new Quad(width, height));
         selectionMarker.rotate(JMonkeyUtil.getQuaternion_X(-90));
         selectionMarker.setLocalTranslation((width / -2), 0, (height / 2));

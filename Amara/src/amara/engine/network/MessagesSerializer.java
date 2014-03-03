@@ -16,10 +16,12 @@ import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
+import amara.game.entitysystem.components.effects.buffs.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
+import amara.game.entitysystem.components.effects.spells.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.items.*;
@@ -32,7 +34,9 @@ import amara.game.entitysystem.components.spells.specials.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
-import amara.game.entitysystem.components.units.effects.*;
+import amara.game.entitysystem.components.units.effecttriggers.*;
+import amara.game.entitysystem.components.units.effecttriggers.targets.*;
+import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.units.intersections.*;
 import amara.game.entitysystem.components.units.movement.*;
 import amara.game.entitysystem.components.visuals.*;
@@ -89,17 +93,20 @@ public class MessagesSerializer{
                         RequestUpdateAttributesComponent.class,
                         //buffs
                         ContinuousEffectComponent.class,
+                        RemoveEffectTriggersComponent.class,
                         RepeatingEffectComponent.class,
                         //buffs/status
                         ActiveBuffComponent.class,
                         BuffVisualisationComponent.class,
                         RemainingBuffDurationComponent.class,
+                        RemoveFromTargetComponent.class,
                         TimeSinceLastRepeatingEffectComponent.class,
                         //effects
                         AffectedTargetsComponent.class,
                         ApplyEffectImpactComponent.class,
-                        //effects/buff
-                        MoveToEntityPositionComponent.class,
+                        //effects/buffs
+                        AddBuffComponent.class,
+                        RemoveBuffComponent.class,
                         //effects/crowdcontrol
                         BindingComponent.class,
                         SilenceComponent.class,
@@ -116,6 +123,10 @@ public class MessagesSerializer{
                         //effects/heal
                         FlatHealComponent.class,
                         HealComponent.class,
+                        //effects/movement,
+                        MoveToEntityPositionComponent.class,
+                        //effects/spells
+                        ReplaceSpellComponent.class,
                         //general
                         DescriptionComponent.class,
                         NameComponent.class,
@@ -165,7 +176,7 @@ public class MessagesSerializer{
                         CooldownComponent.class,
                         InstantSpawnsComponent.class,
                         InstantTargetBuffComponent.class,
-                        InstantTargetEffectComponent.class,
+                        InstantEffectTriggersComponent.class,
                         RemainingCooldownComponent.class,
                         //spells/specials
                         TeleportCasterToTargetPositionComponent.class,
@@ -173,6 +184,13 @@ public class MessagesSerializer{
                         AutoAggroComponent.class,
                         AutoAttackComponent.class,
                         AutoAttackTargetComponent.class,
+                        EffectTriggersComponent.class,
+                        IntersectionRulesComponent.class,
+                        IsTargetableComponent.class,
+                        LifetimeComponent.class,
+                        SpellsComponent.class,
+                        TargetsInAggroRangeComponent.class,
+                        TeamComponent.class,
                         //units/animations
                         AutoAttackAnimationComponent.class,
                         WalkAnimationComponent.class,
@@ -180,20 +198,19 @@ public class MessagesSerializer{
                         IsBindedComponent.class,
                         IsSilencedComponent.class,
                         IsStunnedComponent.class,
-                        //units/effects
-                        CollisionTriggerEffectComponent.class,
-                        TargetReachedTriggerEffectComponent.class,
-                        IntersectionRulesComponent.class,
+                        //units/effecttriggers
+                        TriggeredEffectComponent.class,
+                        //units/effecttriggers/targets
+                        CustomTargetComponent.class,
+                        TargetTargetComponent.class,
+                        //units/effecttriggers/triggers
+                        CollisionTriggerComponent.class,
+                        TargetReachedTriggerComponent.class,
                         //units/intersections
                         AcceptAlliesComponent.class,
                         AcceptEnemiesComponent.class,
-                        IsTargetableComponent.class,
-                        LifetimeComponent.class,
                         //units/movement
                         TargetedMovementComponent.class,
-                        SpellsComponent.class,
-                        TargetsInAggroRangeComponent.class,
-                        TeamComponent.class,
                         //visuals
                         ModelComponent.class,
                         AnimationComponent.class,

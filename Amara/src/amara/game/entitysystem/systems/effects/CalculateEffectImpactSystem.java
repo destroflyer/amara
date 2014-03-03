@@ -7,10 +7,12 @@ package amara.game.entitysystem.systems.effects;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
+import amara.game.entitysystem.components.effects.buffs.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
+import amara.game.entitysystem.components.effects.spells.*;
 
 /**
  *
@@ -63,25 +65,27 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 if(heal != 0){
                     effectImpact.setComponent(new HealComponent(heal));
                 }
-                BindingComponent bindingComponent = effect.getComponent(BindingComponent.class);
-                if(bindingComponent != null){
-                    effectImpact.setComponent(bindingComponent);
-                }
-                SilenceComponent silenceComponent = effect.getComponent(SilenceComponent.class);
-                if(silenceComponent != null){
-                    effectImpact.setComponent(silenceComponent);
-                }
-                StunComponent stunComponent = effect.getComponent(StunComponent.class);
-                if(stunComponent != null){
-                    effectImpact.setComponent(stunComponent);
-                }
-                MoveToEntityPositionComponent moveToEntityPositionComponent = effect.getComponent(MoveToEntityPositionComponent.class);
-                if(moveToEntityPositionComponent != null){
-                    effectImpact.setComponent(moveToEntityPositionComponent);
-                }
+                transferComponents(entityWorld, effect, effectImpact, new Class[]{
+                    BindingComponent.class,
+                    SilenceComponent.class,
+                    StunComponent.class,
+                    AddBuffComponent.class,
+                    RemoveBuffComponent.class,
+                    MoveToEntityPositionComponent.class,
+                    ReplaceSpellComponent.class
+                });
                 effectImpact.setComponent(new ApplyEffectImpactComponent(targetEntity.getId()));
             }
             entityWorld.removeEntity(entityWrapper.getId());
+        }
+    }
+    
+    private void transferComponents(EntityWorld entityWorld, EntityWrapper effect, EntityWrapper effectImpact, Class[] componentClasses){
+        for(Class componentClass : componentClasses){
+            Object component = effect.getComponent(componentClass);
+            if(component != null){
+                effectImpact.setComponent(component);
+            }
         }
     }
 }

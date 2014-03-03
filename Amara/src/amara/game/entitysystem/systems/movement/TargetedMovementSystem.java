@@ -7,8 +7,10 @@ package amara.game.entitysystem.systems.movement;
 import java.util.Set;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.physics.PositionComponent;
-import amara.game.entitysystem.components.units.movement.TargetedMovementComponent;
+import amara.game.entitysystem.components.physics.*;
+import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.units.movement.*;
+import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.physics.intersection.Pair;
 import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionInformant;
 
@@ -35,6 +37,14 @@ public class TargetedMovementSystem implements EntitySystem{
                 checkCollidingStop(entityWorld, pair.getB(), pair.getA());
             }
         }
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, TargetedMovementComponent.class);
+        for(int entity : observer.getNew().getEntitiesWithAll(TargetedMovementComponent.class)){
+            entityWorld.removeComponent(entity, MovementTargetComponent.class);
+            entityWorld.removeComponent(entity, MovementSpeedComponent.class);
+            entityWorld.removeComponent(entity, AutoAttackTargetComponent.class);
+            entityWorld.removeComponent(entity, AnimationComponent.class);
+        }
+        observer.reset();
         for(int entity : entityWorld.getEntitiesWithAll(TargetedMovementComponent.class)){
             TargetedMovementComponent targetedMovementComponent = entityWorld.getComponent(entity, TargetedMovementComponent.class);
             PositionComponent targetPositionComponent = entityWorld.getComponent(targetedMovementComponent.getTargetEntity(), PositionComponent.class);
