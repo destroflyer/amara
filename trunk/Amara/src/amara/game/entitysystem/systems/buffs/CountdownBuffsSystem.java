@@ -5,7 +5,6 @@
 package amara.game.entitysystem.systems.buffs;
 
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.status.*;
 
 /**
@@ -24,9 +23,7 @@ public class CountdownBuffsSystem implements EntitySystem{
                 entityWorld.setComponent(buffStatus, new RemainingBuffDurationComponent(duration));
             }
             else{
-                int targetEntityID = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class).getTargetEntityID();
-                entityWorld.removeEntity(buffStatus);
-                entityWorld.setComponent(targetEntityID, new RequestUpdateAttributesComponent());
+                entityWorld.setComponent(buffStatus, new RemoveFromTargetComponent());
             }
         }
     }

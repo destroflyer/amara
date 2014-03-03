@@ -6,11 +6,10 @@ package amara.game.entitysystem.systems.effects.triggers;
 
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.effects.*;
-import amara.game.entitysystem.components.physics.PositionComponent;
-import amara.game.entitysystem.components.spawns.CastSourceComponent;
-import amara.game.entitysystem.components.units.effects.TargetReachedTriggerEffectComponent;
-import amara.game.entitysystem.components.units.movement.TargetedMovementComponent;
+import amara.game.entitysystem.components.physics.*;
+import amara.game.entitysystem.components.units.effecttriggers.*;
+import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
+import amara.game.entitysystem.components.units.movement.*;
 
 /**
  *
@@ -20,23 +19,19 @@ public class TriggerTargetReachedEffectSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(TargetedMovementComponent.class, TargetReachedTriggerEffectComponent.class))
+        for(int entity : entityWorld.getEntitiesWithAll(TriggeredEffectComponent.class, TargetReachedTriggerComponent.class))
         {
-            TargetedMovementComponent targetedMovementComponent = entityWorld.getComponent(entity, TargetedMovementComponent.class);
-            PositionComponent targetPositionComponent = entityWorld.getComponent(targetedMovementComponent.getTargetEntity(), PositionComponent.class);
-            if(targetPositionComponent != null){
-                Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
-                Vector2f targetPosition = targetPositionComponent.getPosition();
-                if(position.equals(targetPosition)){
-                    EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
-                    int effectID = entityWorld.getComponent(entity, TargetReachedTriggerEffectComponent.class).getEffectEntityID();
-                    effectCast.setComponent(new PrepareEffectComponent(effectID));
-                    CastSourceComponent castSourceComponent = entityWorld.getComponent(entity, CastSourceComponent.class);
-                    if(castSourceComponent != null){
-                        effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntitiyID()));
+            TriggeredEffectComponent triggeredEffectComponent = entityWorld.getComponent(entity, TriggeredEffectComponent.class);
+            TargetedMovementComponent targetedMovementComponent = entityWorld.getComponent(triggeredEffectComponent.getSourceEntity(), TargetedMovementComponent.class);
+            if(targetedMovementComponent != null){
+                PositionComponent targetPositionComponent = entityWorld.getComponent(targetedMovementComponent.getTargetEntity(), PositionComponent.class);
+                if(targetPositionComponent != null){
+                    Vector2f position = entityWorld.getComponent(triggeredEffectComponent.getSourceEntity(), PositionComponent.class).getPosition();
+                    Vector2f targetPosition = targetPositionComponent.getPosition();
+                    if(position.equals(targetPosition)){
+                        EffectTriggerUtil.triggerEffect(entityWorld, entity, targetedMovementComponent.getTargetEntity());
+                        entityWorld.removeEntity(triggeredEffectComponent.getSourceEntity());
                     }
-                    effectCast.setComponent(new AffectedTargetsComponent(new int[]{targetedMovementComponent.getTargetEntity()}));
-                    entityWorld.removeEntity(entity);
                 }
             }
         }

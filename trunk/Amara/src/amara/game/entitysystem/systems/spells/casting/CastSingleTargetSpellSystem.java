@@ -8,12 +8,12 @@ import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.status.*;
-import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.movement.*;
+import amara.game.entitysystem.systems.effects.triggers.EffectTriggerUtil;
 
 /**
  *
@@ -32,12 +32,9 @@ public class CastSingleTargetSpellSystem implements EntitySystem{
     }
     
     public static void castSingleTargetSpell(EntityWorld entityWorld, int casterEntityID, int spellEntityID, int targetEntityID){
-        InstantTargetEffectComponent instantTargetEffectComponent = entityWorld.getComponent(spellEntityID, InstantTargetEffectComponent.class);
-        if(instantTargetEffectComponent != null){
-            EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
-            effectCast.setComponent(new PrepareEffectComponent(instantTargetEffectComponent.getEffectEntityID()));
-            effectCast.setComponent(new EffectSourceComponent(casterEntityID));
-            effectCast.setComponent(new AffectedTargetsComponent(new int[]{targetEntityID}));
+        InstantEffectTriggersComponent instantEffectTriggersComponent = entityWorld.getComponent(spellEntityID, InstantEffectTriggersComponent.class);
+        if(instantEffectTriggersComponent != null){
+            EffectTriggerUtil.triggerEffects(entityWorld, instantEffectTriggersComponent.getEffectTriggerEntities(), targetEntityID);
         }
         InstantTargetBuffComponent instantTargetBuffComponent = entityWorld.getComponent(spellEntityID, InstantTargetBuffComponent.class);
         if(instantTargetBuffComponent != null){
