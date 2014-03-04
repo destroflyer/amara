@@ -60,6 +60,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownSilenceSystem());
         addEntitySystem(new CountdownStunSystem());
         addEntitySystem(new CountdownAnimationLoopsSystem());
+        addEntitySystem(new StopAnimationsSystem());
         addEntitySystem(new CheckOpenObjectivesSystem());
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue()));
         addEntitySystem(new AttackAggroedTargetsSystem());

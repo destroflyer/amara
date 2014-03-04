@@ -193,6 +193,7 @@ public class MessagesSerializer{
                         TeamComponent.class,
                         //units/animations
                         AutoAttackAnimationComponent.class,
+                        IdleAnimationComponent.class,
                         WalkAnimationComponent.class,
                         //units/crowdcontrol
                         IsBindedComponent.class,
@@ -214,6 +215,7 @@ public class MessagesSerializer{
                         //visuals
                         ModelComponent.class,
                         AnimationComponent.class,
+                        StopPlayingAnimationComponent.class,
                         //visuals/animations
                         LoopDurationComponent.class,
                         PassedLoopTimeComponent.class,

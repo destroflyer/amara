@@ -89,6 +89,11 @@ public class TestMap extends Map{
                 position = new Vector2f(20, 7);
                 direction = new Vector2f(-1, -1);
                 break;
+            
+            case 3:
+                position = new Vector2f(29, 4);
+                direction = new Vector2f(-1, -1);
+                break;
         }
         entityWorld.setComponent(playerUnitEntity, new PositionComponent(position));
         entityWorld.setComponent(playerUnitEntity, new DirectionComponent(direction));
