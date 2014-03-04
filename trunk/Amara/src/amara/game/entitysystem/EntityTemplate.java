@@ -265,12 +265,12 @@ public class EntityTemplate{
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new HealthComponent(500));
 
-            EntityWrapper autoAttack2 = createFromTemplate(entityWorld, "default_autoattack");
-            entityWrapper.setComponent(new AutoAttackComponent(autoAttack2.getId()));
+            EntityWrapper autoAttack = createFromTemplate(entityWorld, "default_autoattack");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
 
             EntityWrapper grab = createFromTemplate(entityWorld, "grab," + entityWrapper.getId());
             EntityWrapper astralBlessing = createFromTemplate(entityWorld, "astral_blessing");
-            EntityWrapper sonicWave = createFromTemplate(entityWorld, "sonic_wave," + entityWrapper.getId());
+            EntityWrapper sonicWave = createFromTemplate(entityWorld, "sonic_wave," + entityWrapper.getId() + "," + 2);
             entityWrapper.setComponent(new SpellsComponent(new int[]{grab.getId(), astralBlessing.getId(), sonicWave.getId()}));
         }
         else if(templateName.equals("grab")){
@@ -316,7 +316,7 @@ public class EntityTemplate{
         else if(templateName.equals("sonic_wave")){
             entityWrapper.setComponent(new NameComponent("Sonic Wave"));
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-            spawnInformation.setComponent(new SpawnTemplateComponent("sonic_wave_projectile," + parameters[0]));
+            spawnInformation.setComponent(new SpawnTemplateComponent("sonic_wave_projectile," + parameters[0] + "," + parameters[1]));
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(12));
             entityWrapper.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation.getId()}));
             entityWrapper.setComponent(new CooldownComponent(3));
@@ -342,11 +342,11 @@ public class EntityTemplate{
             EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger3.setComponent(new CustomTargetComponent(parameters[0]));
             EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect3.setComponent(new ReplaceSpellComponent(2, "sonic_wave," + parameters[0]));
+            effect3.setComponent(new ReplaceSpellComponent(parameters[1], "sonic_wave," + parameters[0] + "," + parameters[1]));
             effectTrigger3.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect3.getId()));
             buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
             effect2.setComponent(new AddBuffComponent(buff.getId(), 3));
-            effect1.setComponent(new ReplaceSpellComponent(2, "resonating_strike," + buff.getId()));
+            effect1.setComponent(new ReplaceSpellComponent(parameters[1], "resonating_strike," + buff.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
             entityWrapper.setComponent(new EffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId()));
             entityWrapper.setComponent(new LifetimeComponent(1));
@@ -366,6 +366,38 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId()));
             entityWrapper.setComponent(new CooldownComponent(3));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+        }
+        else if(templateName.equals("jaime")){
+            entityWrapper.setComponent(new ModelComponent("Models/jaime/skin.xml"));
+            EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            idleAnimation.setComponent(new NameComponent("Idle"));
+            idleAnimation.setComponent(new LoopDurationComponent(8));
+            entityWrapper.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
+            EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            walkAnimation.setComponent(new NameComponent("Walk"));
+            walkAnimation.setComponent(new LoopDurationComponent(0.8f));
+            entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+            EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            autoAttackAnimation.setComponent(new NameComponent("Punches"));
+            entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+            entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
+            
+            entityWrapper.setComponent(new HitboxComponent(new Circle(0.8f)));
+            entityWrapper.setComponent(new AntiGhostComponent());
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new IsTargetableComponent());
+
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(450));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(50));
+            entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.8f));
+            entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+
+            EntityWrapper autoAttack = createFromTemplate(entityWorld, "default_autoattack");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+
+            EntityWrapper sonicWave = createFromTemplate(entityWorld, "sonic_wave," + entityWrapper.getId() + "," + 0);
+            entityWrapper.setComponent(new SpellsComponent(new int[]{sonicWave.getId()}));
         }
         else if(templateName.equals("dorans_blade")){
             entityWrapper.setComponent(new ItemVisualisationComponent("dorans_blade"));

@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.commands;
 
+import amara.game.entitysystem.components.visuals.StopPlayingAnimationComponent;
 import java.util.Iterator;
 import amara.Queue;
 import amara.engine.applications.ingame.client.commands.*;
@@ -16,6 +17,7 @@ import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.visuals.*;
+import amara.game.entitysystem.components.visuals.animations.*;
 
 /**
  *
@@ -46,7 +48,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 entityWorld.removeComponent(selectedUnit, MovementTargetComponent.class);
                 entityWorld.removeComponent(selectedUnit, MovementSpeedComponent.class);
                 entityWorld.removeComponent(selectedUnit, AutoAttackTargetComponent.class);
-                entityWorld.removeComponent(selectedUnit, AnimationComponent.class);
+                entityWorld.setComponent(selectedUnit, new StopPlayingAnimationComponent());
             }
             else if(command instanceof AutoAttackCommand){
                 AutoAttackCommand autoAttackCommand = (AutoAttackCommand) command;

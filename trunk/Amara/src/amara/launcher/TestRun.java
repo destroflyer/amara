@@ -36,7 +36,8 @@ public class TestRun{
         networkClient.sendMessage(new Message_StartGame(99, new PlayerData[]{
             new PlayerData(0, "minion"),
             new PlayerData(1, "wizard"),
-            new PlayerData(2, "robot")
+            new PlayerData(2, "robot"),
+            new PlayerData(3, "jaime")
         }));
     }
 }

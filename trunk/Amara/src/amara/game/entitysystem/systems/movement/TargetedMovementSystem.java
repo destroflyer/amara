@@ -42,7 +42,7 @@ public class TargetedMovementSystem implements EntitySystem{
             entityWorld.removeComponent(entity, MovementTargetComponent.class);
             entityWorld.removeComponent(entity, MovementSpeedComponent.class);
             entityWorld.removeComponent(entity, AutoAttackTargetComponent.class);
-            entityWorld.removeComponent(entity, AnimationComponent.class);
+            entityWorld.setComponent(entity, new StopPlayingAnimationComponent());
         }
         observer.reset();
         for(int entity : entityWorld.getEntitiesWithAll(TargetedMovementComponent.class)){
