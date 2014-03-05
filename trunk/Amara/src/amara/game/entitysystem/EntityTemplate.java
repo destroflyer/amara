@@ -402,7 +402,8 @@ public class EntityTemplate{
 
             EntityWrapper sonicWave = createFromTemplate(entityWorld, "sonic_wave," + entityWrapper.getId() + "," + 0);
             EntityWrapper intervention = createFromTemplate(entityWorld, "intervention," + entityWrapper.getId());
-            entityWrapper.setComponent(new SpellsComponent(new int[]{sonicWave.getId(), intervention.getId()}));
+            EntityWrapper zhonyas = createFromTemplate(entityWorld, "zhonyas," + entityWrapper.getId());
+            entityWrapper.setComponent(new SpellsComponent(new int[]{sonicWave.getId(), intervention.getId(), zhonyas.getId()}));
         }
         else if(templateName.equals("intervention")){
             entityWrapper.setComponent(new NameComponent("Intervention"));
@@ -432,6 +433,33 @@ public class EntityTemplate{
             
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId()));
             entityWrapper.setComponent(new CooldownComponent(6));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+        }
+        else if(templateName.equals("zhonyas")){
+            entityWrapper.setComponent(new NameComponent("Zhonyas"));
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            float duration = 2.5f;
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new RemoveTargetabilityComponent());
+            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
+            buff.setComponent(new BuffVisualisationComponent("zhonyas"));
+            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger3.setComponent(new CustomTargetComponent(parameters[0]));
+            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect3.setComponent(new AddTargetabilityComponent());
+            effectTrigger3.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect3.getId()));
+            buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
+            effect2.setComponent(new AddBuffComponent(buff.getId(), duration));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
+            
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId()));
+            entityWrapper.setComponent(new CooldownComponent(5));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
         }
         else if(templateName.equals("dorans_blade")){
