@@ -18,16 +18,16 @@ import amara.game.entitysystem.EntityWorld;
  *
  * @author Carl
  */
-public class BuffVisualisationSystem_Intervention extends BuffVisualisationSystem{
+public class BuffVisualisationSystem_Zhonyas extends BuffVisualisationSystem{
 
-    public BuffVisualisationSystem_Intervention(EntitySceneMap entitySceneMap){
-        super(entitySceneMap, "intervention");
+    public BuffVisualisationSystem_Zhonyas(EntitySceneMap entitySceneMap){
+        super(entitySceneMap, "zhonyas");
     }
     
     @Override
     protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity){
         Geometry geometry = new Geometry("", new Sphere(20, 20, 2.2f));
-        Material material = MaterialFactory.generateUnshadedMaterial(new ColorRGBA(1, 1, 0, 0.25f));
+        Material material = MaterialFactory.generateUnshadedMaterial(new ColorRGBA(1, 1, 1, 0.25f));
         material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         material.getAdditionalRenderState().setDepthTest(false);
         geometry.setMaterial(material);

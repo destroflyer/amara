@@ -32,7 +32,7 @@ public class TriggerCollisionEffectSystem implements EntitySystem{
     
     private void checkEffectTriggers(EntityWorld entityWorld, int effectingEntity, int targetEntity){
         EffectTriggersComponent effectTriggersComponent = entityWorld.getComponent(effectingEntity, EffectTriggersComponent.class);
-        if(effectTriggersComponent != null){
+        if((effectTriggersComponent != null) && entityWorld.hasComponent(targetEntity, IsTargetableComponent.class)){
             boolean wasTriggered = false;
             for(int effectTriggerEntity : effectTriggersComponent.getEffectTriggerEntities()){
                 if(entityWorld.hasComponent(effectTriggerEntity, CollisionTriggerComponent.class)){
