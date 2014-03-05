@@ -21,7 +21,7 @@ import amara.game.entitysystem.components.units.crowdcontrol.*;
 public class StunVisualisationSystem extends SimpleVisualAttachmentSystem{
 
     public StunVisualisationSystem(EntitySceneMap entitySceneMap){
-        super(entitySceneMap, IsStunnedComponent.class);
+        super(entitySceneMap, IsStunnedComponent.class, true);
     }
     
     @Override
@@ -33,7 +33,7 @@ public class StunVisualisationSystem extends SimpleVisualAttachmentSystem{
         geometry.setMaterial(material);
         geometry.addControl(new BillboardControl());
         geometry.setLocalTranslation(0, 2, 0);
-        geometry.setUserData("layer", 4);
+        geometry.setUserData("layer", 5);
         return geometry;
     }
 }

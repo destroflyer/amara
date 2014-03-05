@@ -11,13 +11,13 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class BindingComponent{
+public class AddSilenceImmuneComponent{
 
-    public BindingComponent(){
+    public AddSilenceImmuneComponent(){
         
     }
     
-    public BindingComponent(float duration){
+    public AddSilenceImmuneComponent(float duration){
         this.duration = duration;
     }
     private float duration;

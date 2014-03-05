@@ -21,7 +21,7 @@ import amara.game.entitysystem.components.attributes.*;
 public class CurrentHealthBarSystem extends SimpleVisualAttachmentSystem{
 
     public CurrentHealthBarSystem(EntitySceneMap entitySceneMap){
-        super(entitySceneMap, HealthComponent.class);
+        super(entitySceneMap, HealthComponent.class, true);
     }
         
     @Override
@@ -38,7 +38,7 @@ public class CurrentHealthBarSystem extends SimpleVisualAttachmentSystem{
             geometry.setMaterial(material);
             geometry.addControl(new BillboardControl());
             geometry.setLocalTranslation(MaximumHealthBarSystem.BAR_LOCATION);
-            geometry.setUserData("layer", 6);
+            geometry.setUserData("layer", 7);
             return geometry;
         }
         return null;

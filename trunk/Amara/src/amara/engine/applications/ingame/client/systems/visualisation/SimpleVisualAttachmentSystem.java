@@ -13,27 +13,38 @@ import amara.game.entitysystem.*;
  * @author Carl
  */
 public abstract class SimpleVisualAttachmentSystem implements EntitySystem{
-    
-    protected SimpleVisualAttachmentSystem(EntitySceneMap entitySceneMap, Class... componentClasses){
+
+    public SimpleVisualAttachmentSystem(EntitySceneMap entitySceneMap, Class componentClass, boolean displayExistanceOrAbsence){
         this.entitySceneMap = entitySceneMap;
-        this.componentClasses = componentClasses;
+        this.componentClass = componentClass;
+        this.displayExistanceOrAbsence = displayExistanceOrAbsence;
     }
     private EntitySceneMap entitySceneMap;
-    private Class[] componentClasses;
+    private Class componentClass;
+    private boolean displayExistanceOrAbsence;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, componentClasses);
-        for(int entity : observer.getNew().getEntitiesWithAll(componentClasses)){
-            updateVisualAttachment(entityWorld, entity);
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, componentClass);
+        for(int entity : observer.getNew().getEntitiesWithAll(componentClass)){
+            setVisualAttachmentVisible(entityWorld, entity, displayExistanceOrAbsence);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(componentClasses)){
-            updateVisualAttachment(entityWorld, entity);
+        for(int entity : observer.getChanged().getEntitiesWithAll(componentClass)){
+            setVisualAttachmentVisible(entityWorld, entity, displayExistanceOrAbsence);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(componentClasses)){
-            removeVisualAttachment(entity);
+        for(int entity : observer.getRemoved().getEntitiesWithAll(componentClass)){
+            setVisualAttachmentVisible(entityWorld, entity, (!displayExistanceOrAbsence));
         }
         observer.reset();
+    }
+    
+    private void setVisualAttachmentVisible(EntityWorld entityWorld,int entity, boolean isVisible){
+        if(isVisible){
+            updateVisualAttachment(entityWorld, entity);
+        }
+        else{
+            removeVisualAttachment(entity);
+        }
     }
     
     private void updateVisualAttachment(EntityWorld entityWorld, int entity){

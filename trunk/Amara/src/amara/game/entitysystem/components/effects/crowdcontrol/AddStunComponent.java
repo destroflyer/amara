@@ -11,13 +11,13 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class SilenceComponent{
+public class AddStunComponent{
 
-    public SilenceComponent(){
+    public AddStunComponent(){
         
     }
     
-    public SilenceComponent(float duration){
+    public AddStunComponent(float duration){
         this.duration = duration;
     }
     private float duration;

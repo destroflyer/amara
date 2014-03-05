@@ -94,6 +94,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AntiGhostComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
 
             entityWrapper.setComponent(new BaseMaximumHealthComponent(300));
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
@@ -122,7 +123,7 @@ public class EntityTemplate{
             EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
             effect.setComponent(new FlatMagicDamageComponent(80));
             effect.setComponent(new ScalingAbilityPowerMagicDamageComponent(0.7f));
-            effect.setComponent(new SilenceComponent(2));
+            effect.setComponent(new AddSilenceComponent(2));
             effectTrigger.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect.getId()));
             entityWrapper.setComponent(new EffectTriggersComponent(effectTrigger.getId()));
         }
@@ -159,6 +160,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AntiGhostComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
 
             entityWrapper.setComponent(new BaseMaximumHealthComponent(500));
             entityWrapper.setComponent(new BaseAttackDamageComponent(60));
@@ -203,7 +205,7 @@ public class EntityTemplate{
             EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
             effect.setComponent(new FlatMagicDamageComponent(165));
             effect.setComponent(new ScalingAbilityPowerMagicDamageComponent(0.65f));
-            effect.setComponent(new StunComponent(0.5f));
+            effect.setComponent(new AddStunComponent(0.5f));
             effectTrigger.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect.getId()));
             entityWrapper.setComponent(new EffectTriggersComponent(effectTrigger.getId()));
         }
@@ -257,6 +259,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AntiGhostComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
 
             entityWrapper.setComponent(new BaseMaximumHealthComponent(700));
             entityWrapper.setComponent(new BaseAttackDamageComponent(40));
@@ -386,6 +389,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AntiGhostComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
 
             entityWrapper.setComponent(new BaseMaximumHealthComponent(450));
             entityWrapper.setComponent(new BaseAttackDamageComponent(50));
@@ -397,7 +401,38 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
 
             EntityWrapper sonicWave = createFromTemplate(entityWorld, "sonic_wave," + entityWrapper.getId() + "," + 0);
-            entityWrapper.setComponent(new SpellsComponent(new int[]{sonicWave.getId()}));
+            EntityWrapper intervention = createFromTemplate(entityWorld, "intervention," + entityWrapper.getId());
+            entityWrapper.setComponent(new SpellsComponent(new int[]{sonicWave.getId(), intervention.getId()}));
+        }
+        else if(templateName.equals("intervention")){
+            entityWrapper.setComponent(new NameComponent("Intervention"));
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            float duration = 3;
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new AddBindingImmuneComponent(duration));
+            effect1.setComponent(new AddSilenceImmuneComponent(duration));
+            effect1.setComponent(new AddStunImmuneComponent(duration));
+            effect1.setComponent(new RemoveVulnerabilityComponent());
+            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
+            buff.setComponent(new BuffVisualisationComponent("intervention"));
+            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger3.setComponent(new CustomTargetComponent(parameters[0]));
+            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect3.setComponent(new AddVulnerabilityComponent());
+            effectTrigger3.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect3.getId()));
+            buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
+            effect2.setComponent(new AddBuffComponent(buff.getId(), duration));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
+            
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId()));
+            entityWrapper.setComponent(new CooldownComponent(6));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
         }
         else if(templateName.equals("dorans_blade")){
             entityWrapper.setComponent(new ItemVisualisationComponent("dorans_blade"));

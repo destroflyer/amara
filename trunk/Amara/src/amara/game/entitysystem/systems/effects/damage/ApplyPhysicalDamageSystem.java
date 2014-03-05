@@ -8,6 +8,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.damage.*;
+import amara.game.entitysystem.components.units.*;
 
 /**
  *
@@ -20,11 +21,13 @@ public class ApplyPhysicalDamageSystem implements EntitySystem{
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, PhysicalDamageComponent.class)))
         {
             int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
-            HealthComponent healthComponent = entityWorld.getComponent(targetID, HealthComponent.class);
-            if(healthComponent != null){
-                PhysicalDamageComponent physicalDamageComponent = entityWrapper.getComponent(PhysicalDamageComponent.class);
-                float health = (healthComponent.getValue() - physicalDamageComponent.getValue());
-                entityWorld.setComponent(targetID, new HealthComponent(health));
+            if(entityWorld.hasComponent(targetID, IsVulnerableComponent.class)){
+                HealthComponent healthComponent = entityWorld.getComponent(targetID, HealthComponent.class);
+                if(healthComponent != null){
+                    PhysicalDamageComponent physicalDamageComponent = entityWrapper.getComponent(PhysicalDamageComponent.class);
+                    float health = (healthComponent.getValue() - physicalDamageComponent.getValue());
+                    entityWorld.setComponent(targetID, new HealthComponent(health));
+                }
             }
         }
     }
