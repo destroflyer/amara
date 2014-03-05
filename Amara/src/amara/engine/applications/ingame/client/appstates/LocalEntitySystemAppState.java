@@ -81,6 +81,7 @@ public class LocalEntitySystemAppState extends EntitySystemAppState<IngameClient
         addEntitySystem(new SilenceVisualisationSystem(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Burning(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_SonicWaveMark(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_Intervention(entitySceneMap));
         PlayerInformationSystem playerInformationSystem = new PlayerInformationSystem(networkClient.getID());
         addEntitySystem(playerInformationSystem);
         NiftyAppState niftyAppState = getAppState(NiftyAppState.class);

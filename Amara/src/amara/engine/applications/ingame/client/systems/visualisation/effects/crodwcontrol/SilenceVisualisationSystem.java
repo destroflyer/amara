@@ -21,7 +21,7 @@ import amara.game.entitysystem.components.units.crowdcontrol.*;
 public class SilenceVisualisationSystem extends SimpleVisualAttachmentSystem{
 
     public SilenceVisualisationSystem(EntitySceneMap entitySceneMap){
-        super(entitySceneMap, IsSilencedComponent.class);
+        super(entitySceneMap, IsSilencedComponent.class, true);
     }
     
     @Override
@@ -33,7 +33,7 @@ public class SilenceVisualisationSystem extends SimpleVisualAttachmentSystem{
         geometry.setMaterial(material);
         geometry.addControl(new BillboardControl());
         geometry.setLocalTranslation(0, 2, 0);
-        geometry.setUserData("layer", 4);
+        geometry.setUserData("layer", 5);
         return geometry;
     }
 }

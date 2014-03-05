@@ -66,11 +66,21 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     effectImpact.setComponent(new HealComponent(heal));
                 }
                 transferComponents(entityWorld, effect, effectImpact, new Class[]{
-                    BindingComponent.class,
-                    SilenceComponent.class,
-                    StunComponent.class,
                     AddBuffComponent.class,
                     RemoveBuffComponent.class,
+                    AddBindingComponent.class,
+                    RemoveBindingComponent.class,
+                    AddBindingImmuneComponent.class,
+                    AddSilenceComponent.class,
+                    RemoveSilenceComponent.class,
+                    AddSilenceImmuneComponent.class,
+                    AddStunComponent.class,
+                    RemoveStunComponent.class,
+                    AddStunImmuneComponent.class,
+                    AddTargetabilityComponent.class,
+                    RemoveTargetabilityComponent.class,
+                    AddVulnerabilityComponent.class,
+                    RemoveVulnerabilityComponent.class,
                     MoveToEntityPositionComponent.class,
                     ReplaceSpellComponent.class
                 });

@@ -25,7 +25,7 @@ import amara.game.entitysystem.components.attributes.MaximumHealthComponent;
 public class MaximumHealthBarSystem extends SimpleVisualAttachmentSystem{
 
     public MaximumHealthBarSystem(EntitySceneMap entitySceneMap){
-        super(entitySceneMap, MaximumHealthComponent.class);
+        super(entitySceneMap, MaximumHealthComponent.class, true);
     }
     public static final float BAR_WIDTH = 3;
     public static final float BAR_HEIGHT = 0.3f;
@@ -68,7 +68,7 @@ public class MaximumHealthBarSystem extends SimpleVisualAttachmentSystem{
         geometry.setMaterial(material);
         geometry.addControl(new BillboardControl());
         geometry.setLocalTranslation(BAR_LOCATION);
-        geometry.setUserData("layer", 5);
+        geometry.setUserData("layer", 6);
         return geometry;
     }
 }
