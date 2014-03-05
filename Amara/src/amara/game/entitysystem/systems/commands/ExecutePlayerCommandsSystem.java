@@ -4,7 +4,6 @@
  */
 package amara.game.entitysystem.systems.commands;
 
-import amara.game.entitysystem.components.visuals.StopPlayingAnimationComponent;
 import java.util.Iterator;
 import amara.Queue;
 import amara.engine.applications.ingame.client.commands.*;
@@ -17,7 +16,6 @@ import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.visuals.*;
-import amara.game.entitysystem.components.visuals.animations.*;
 
 /**
  *
@@ -63,7 +61,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             else if(command instanceof CastSelfcastSpellCommand){
                 CastSelfcastSpellCommand castSelfcastSpellCommand = (CastSelfcastSpellCommand) command;
                 int spell = entityWorld.getComponent(selectedUnit, SpellsComponent.class).getSpellsEntitiesIDs()[castSelfcastSpellCommand.getSpellIndex()];
-                if(!entityWorld.hasAnyComponent(spell, RemainingCooldownComponent.class, IsSilencedComponent.class, IsStunnedComponent.class)){
+                if((!entityWorld.hasAnyComponent(selectedUnit, IsSilencedComponent.class, IsStunnedComponent.class)) && (!entityWorld.hasComponent(spell, RemainingCooldownComponent.class))){
                     entityWorld.setComponent(selectedUnit, new CastSelfcastSpellComponent(spell));
                 }
             }
@@ -71,7 +69,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 CastSingleTargetSpellCommand castSingleTargetSpellCommand = (CastSingleTargetSpellCommand) command;
                 if(entityWorld.hasComponent(castSingleTargetSpellCommand.getTargetEntityID(), IsTargetableComponent.class)){
                     int spell = entityWorld.getComponent(selectedUnit, SpellsComponent.class).getSpellsEntitiesIDs()[castSingleTargetSpellCommand.getSpellIndex()];
-                    if(!entityWorld.hasAnyComponent(spell, RemainingCooldownComponent.class, IsSilencedComponent.class, IsStunnedComponent.class)){
+                    if((!entityWorld.hasAnyComponent(selectedUnit, IsSilencedComponent.class, IsStunnedComponent.class)) && (!entityWorld.hasComponent(spell, RemainingCooldownComponent.class))){
                         entityWorld.setComponent(selectedUnit, new CastSingleTargetSpellComponent(spell, castSingleTargetSpellCommand.getTargetEntityID()));
                     }
                 }
@@ -79,14 +77,14 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             else if(command instanceof CastLinearSkillshotSpellCommand){
                 CastLinearSkillshotSpellCommand castLinearSkillshotSpellCommand = (CastLinearSkillshotSpellCommand) command;
                 int spell = entityWorld.getComponent(selectedUnit, SpellsComponent.class).getSpellsEntitiesIDs()[castLinearSkillshotSpellCommand.getSpellIndex()];
-                if(!entityWorld.hasAnyComponent(spell, RemainingCooldownComponent.class, IsSilencedComponent.class, IsStunnedComponent.class)){
+                if((!entityWorld.hasAnyComponent(selectedUnit, IsSilencedComponent.class, IsStunnedComponent.class)) && (!entityWorld.hasComponent(spell, RemainingCooldownComponent.class))){
                     entityWorld.setComponent(selectedUnit, new CastLinearSkillshotSpellComponent(spell, castLinearSkillshotSpellCommand.getDirection()));
                 }
             }
             else if(command instanceof CastPositionalSkillshotSpellCommand){
                 CastPositionalSkillshotSpellCommand castPositionalSkillshotSpellCommand = (CastPositionalSkillshotSpellCommand) command;
                 int spell = entityWorld.getComponent(selectedUnit, SpellsComponent.class).getSpellsEntitiesIDs()[castPositionalSkillshotSpellCommand.getSpellIndex()];
-                if(!entityWorld.hasAnyComponent(spell, RemainingCooldownComponent.class, IsSilencedComponent.class, IsStunnedComponent.class)){
+                if((!entityWorld.hasAnyComponent(selectedUnit, IsSilencedComponent.class, IsStunnedComponent.class)) && (!entityWorld.hasComponent(spell, RemainingCooldownComponent.class))){
                     entityWorld.setComponent(selectedUnit, new CastPositionalSkillshotSpellComponent(spell, castPositionalSkillshotSpellCommand.getPosition()));
                 }
             }
