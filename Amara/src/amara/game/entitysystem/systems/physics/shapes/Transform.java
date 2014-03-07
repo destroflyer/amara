@@ -80,10 +80,10 @@ public class Transform {
         setDegree(getDegree() + degree);
     }
 
-    public boolean hasChanged() {
+    boolean hasChanged() {
         return changed;
     }
-    public void setUnChanged() {
+    void resetChanged() {
         changed = false;
     }
     
