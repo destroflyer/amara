@@ -282,6 +282,15 @@ public class SimpleConvex extends Shape {
         updateShape();
         return points;
     }
+    
+    public final Vector2D[] getBase()
+    {
+        Vector2D[] result = new Vector2D[base.length];
+        for (int i = 0; i < base.length; i++) {
+            result[i] = base[i].clone();
+        }
+        return result;
+    }
 //    
 //    public ArrayList<Edge> getSolidEdges() {
 //        updateShape();
