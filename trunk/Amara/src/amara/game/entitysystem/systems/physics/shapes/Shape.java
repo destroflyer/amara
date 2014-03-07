@@ -91,7 +91,7 @@ public abstract class Shape {
     protected final void updateShape() {
         if(transform.hasChanged()) {
             updateTransform();
-            transform.setUnChanged();
+            transform.resetChanged();
         }
     }
     protected abstract void updateTransform();
