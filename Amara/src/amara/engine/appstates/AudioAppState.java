@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.engine.applications.ingame.client.appstates;
+package amara.engine.appstates;
 
 import java.util.HashMap;
 import com.jme3.audio.AudioNode;
@@ -14,7 +14,7 @@ import com.jme3.app.state.AppStateManager;
  *
  * @author Carl
  */
-public class AudioAppState extends ClientBaseAppState{
+public class AudioAppState extends BaseDisplayAppState{
 
     private final static float VOLUME_MUSIC = 0.5f;
     private final static float VOLUME_SOUND = 0.3f;

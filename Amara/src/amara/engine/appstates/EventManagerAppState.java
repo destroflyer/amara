@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.engine.applications.ingame.client.appstates;
+package amara.engine.appstates;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
@@ -17,7 +17,7 @@ import amara.engine.input.events.*;
  *
  * @author Carl
  */
-public class EventManagerAppState extends ClientBaseAppState implements ActionListener{
+public class EventManagerAppState extends BaseDisplayAppState implements ActionListener{
 
     public EventManagerAppState(){
         

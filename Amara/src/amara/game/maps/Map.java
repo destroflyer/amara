@@ -13,6 +13,7 @@ import amara.game.entitysystem.EntityWorld;
 public abstract class Map{
     
     protected MapPhysicsInformation physicsInformation;
+    protected MapVisuals visuals = new MapVisuals();
     protected int objectiveEntity;
     
     public abstract void load(EntityWorld entityWorld);
@@ -21,6 +22,14 @@ public abstract class Map{
 
     public MapPhysicsInformation getPhysicsInformation(){
         return physicsInformation;
+    }
+
+    public void setPhysicsInformation(MapPhysicsInformation physicsInformation){
+        this.physicsInformation = physicsInformation;
+    }
+
+    public MapVisuals getVisuals(){
+        return visuals;
     }
 
     public int getObjectiveEntity(){

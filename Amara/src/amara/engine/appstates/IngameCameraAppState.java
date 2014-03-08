@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.engine.applications.ingame.client.appstates;
+package amara.engine.appstates;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
@@ -17,13 +17,14 @@ import com.jme3.math.Vector3f;
  *
  * @author Carl
  */
-public class IngameCameraAppState extends ClientBaseAppState implements ActionListener{
+public class IngameCameraAppState extends BaseDisplayAppState implements ActionListener{
 
     public IngameCameraAppState(){
         
     }
     private boolean[] moveDirections = new boolean[4];
     private float movementSpeed = 20;
+    private boolean isZoomEnabled = true;
     private float zoomFactor = 2;
     
     @Override
@@ -83,10 +84,14 @@ public class IngameCameraAppState extends ClientBaseAppState implements ActionLi
             moveDirections[3] = value;
         }
         else if(actionName.equals("camera_zoom_out")){
-            zoom(false);
+            if(isZoomEnabled){
+                zoom(false);
+            }
         }
         else if(actionName.equals("camera_zoom_in")){
-            zoom(true);
+            if(isZoomEnabled){
+                zoom(true);
+            }
         }
     }
     
@@ -100,5 +105,9 @@ public class IngameCameraAppState extends ClientBaseAppState implements ActionLi
     
     private Vector3f getZoomDirection(){
         return mainApplication.getCamera().getDirection().mult(zoomFactor);
+    }
+
+    public void setZoomEnabled(boolean isZoomEnabled){
+        this.isZoomEnabled = isZoomEnabled;
     }
 }

@@ -4,7 +4,6 @@
  */
 package amara.game.maps;
 
-import java.util.ArrayList;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
@@ -22,14 +21,7 @@ import amara.game.entitysystem.systems.physics.shapes.*;
 public class TestMap extends Map{
 
     public TestMap(){
-        ArrayList<Shape> obstacles = new ArrayList<Shape>();
-        obstacles.add(new SimpleConvex(new Vector2D(0, 0), new Vector2D(100, 0)));
-        obstacles.add(new SimpleConvex(new Vector2D(100, 0), new Vector2D(100, 100)));
-        obstacles.add(new SimpleConvex(new Vector2D(100, 100), new Vector2D(0, 100)));
-        obstacles.add(new SimpleConvex(new Vector2D(0, 100), new Vector2D(0, 0)));
-        obstacles.add(new Rectangle(10, 7, 5, 8));
-        obstacles.add(new Circle(30, 25, 3));
-        physicsInformation = new MapPhysicsInformation("testmap", 100, 100, obstacles);
+        
     }
 
     @Override

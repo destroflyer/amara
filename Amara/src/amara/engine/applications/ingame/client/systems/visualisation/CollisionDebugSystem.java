@@ -4,19 +4,13 @@
  */
 package amara.engine.applications.ingame.client.systems.visualisation;
 
-import java.util.Iterator;
-import java.util.List;
 import com.jme3.scene.Node;
-import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Mesh;
 import com.jme3.scene.Spatial;
-import amara.engine.applications.ingame.client.systems.debug.*;
-import amara.engine.materials.MaterialFactory;
+import amara.engine.appstates.MapObstaclesAppState;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
-import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *
@@ -24,15 +18,8 @@ import amara.game.entitysystem.systems.physics.shapes.*;
  */
 public class CollisionDebugSystem implements EntitySystem{
     
-    public CollisionDebugSystem(Node node, List<Shape> mapObstacles){
+    public CollisionDebugSystem(Node node){
         this.node = node;
-        Iterator<Shape> shapesIterator = mapObstacles.iterator();
-        while(shapesIterator.hasNext()){
-            Shape shape = shapesIterator.next();
-            Geometry collisionMeshGeometry = generateGeometry(shape);
-            collisionMeshGeometry.setLocalTranslation((float) shape.getX(), 0, (float) shape.getY());
-            node.attachChild(collisionMeshGeometry);
-        }
     }
     private Node node;
 
@@ -60,7 +47,7 @@ public class CollisionDebugSystem implements EntitySystem{
     private void updateGeometry(EntityWorld entityWorld, int entity){
         removeGeometry(entity);
         HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
-        Geometry collisionMeshGeometry = generateGeometry(hitboxComponent.getShape());
+        Geometry collisionMeshGeometry = MapObstaclesAppState.generateGeometry(hitboxComponent.getShape());
         collisionMeshGeometry.setName(getGeometryName(entity));
         node.attachChild(collisionMeshGeometry);
         updateGeometryLocation(entityWorld, entity);
@@ -68,28 +55,6 @@ public class CollisionDebugSystem implements EntitySystem{
     
     private void removeGeometry(int entity){
         node.detachChildNamed(getGeometryName(entity));
-    }
-    
-    private Geometry generateGeometry(Shape shape){
-        Mesh collisionMesh;
-        ColorRGBA meshColor = ColorRGBA.Blue;
-        if(shape instanceof Circle){
-            Circle circle = (Circle) shape;
-            collisionMesh = new CircleMesh((float) circle.getBoundRadius(), 64);
-        }
-        else if(shape instanceof SimpleConvex){
-            SimpleConvex simpleConvex = (SimpleConvex) shape;
-            collisionMesh = new ShapeMesh(simpleConvex);
-        }
-        else{
-            collisionMesh = new CircleMesh((float) shape.getBoundRadius(), 64);
-            meshColor = ColorRGBA.Red;
-        }
-        Geometry collisionMeshGeometry = new Geometry("", collisionMesh);
-        collisionMeshGeometry.setMaterial(MaterialFactory.generateUnshadedMaterial(meshColor));
-        collisionMeshGeometry.getMaterial().getAdditionalRenderState().setDepthTest(false);
-        collisionMeshGeometry.setUserData("layer", 999);
-        return collisionMeshGeometry;
     }
     
     private void updateGeometryLocation(EntityWorld entityWorld, int entity){

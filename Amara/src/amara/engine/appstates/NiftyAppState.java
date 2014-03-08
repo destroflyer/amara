@@ -2,33 +2,25 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.engine.applications.ingame.client.appstates;
+package amara.engine.appstates;
 
 
 import java.util.ArrayList;
-import com.jme3.app.Application;
-import com.jme3.app.state.AppStateManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
-import amara.engine.applications.ingame.client.gui.GameScreenController;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.ScreenController;
+import amara.engine.gui.GameScreenController;
 
 /**
  *
  * @author Carl
  */
-public class NiftyAppState extends ClientBaseAppState{
+public class NiftyAppState extends BaseDisplayAppState{
 
     public NiftyAppState(){
         
     }
     private ArrayList<Nifty> runningNifties = new ArrayList<Nifty>();
-
-    @Override
-    public void initialize(AppStateManager stateManager, Application application){
-        super.initialize(stateManager, application);
-        createNifty("Interface/hud.xml");
-    }
         
     public Nifty createNifty(String filePath){
         NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(mainApplication.getAssetManager(), mainApplication.getInputManager(), mainApplication.getAudioRenderer(), mainApplication.getGuiViewPort());

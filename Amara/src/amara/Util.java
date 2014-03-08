@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.net.URI;
@@ -21,6 +22,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 /**
  *
  * @author carl
@@ -66,6 +69,28 @@ public class Util{
     
     public static Dimension getScreenResolution(){
         return Toolkit.getDefaultToolkit().getScreenSize(); 
+    }
+
+    public static File chooseFile(boolean loadOrSave, String directory, FileFilter... filters){
+        File file = null;
+        JFileChooser fileChooser = new JFileChooser(new File(directory).getAbsolutePath());
+        if((filters != null) && (filters.length > 0)){
+            for(int i=0;i<filters.length;i++) {
+                fileChooser.addChoosableFileFilter(filters[i]);
+            }
+            fileChooser.setFileFilter(filters[0]);
+        }
+        int result;
+        if(loadOrSave){
+            result = fileChooser.showOpenDialog(fileChooser);
+        }
+        else{
+            result = fileChooser.showSaveDialog(fileChooser);
+        }
+        if(result == JFileChooser.APPROVE_OPTION){
+            file = fileChooser.getSelectedFile();
+        }
+        return file;
     }
     
     public static String getFormattedDate(long timestamp){

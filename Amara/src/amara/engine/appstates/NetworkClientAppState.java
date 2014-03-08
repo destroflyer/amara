@@ -11,7 +11,7 @@ import amara.engine.network.exceptions.*;
  *
  * @author Carl
  */
-public class NetworkClientAppState extends BaseAppState{
+public class NetworkClientAppState extends BaseDisplayAppState{
 
     public NetworkClientAppState(String host, int port) throws ServerConnectionException, ServerConnectionTimeoutException{
         networkClient.connectToServer(host, port);

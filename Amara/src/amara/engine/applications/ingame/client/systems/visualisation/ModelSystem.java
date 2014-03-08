@@ -5,7 +5,7 @@
 package amara.engine.applications.ingame.client.systems.visualisation;
 
 import com.jme3.scene.Node;
-import amara.engine.applications.ingame.client.IngameClientApplication;
+import amara.engine.applications.DisplayApplication;
 import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.visuals.*;
@@ -16,13 +16,13 @@ import amara.game.entitysystem.components.visuals.*;
  */
 public class ModelSystem implements EntitySystem{
     
-    public ModelSystem(EntitySceneMap entitySceneMap, IngameClientApplication clientApplication){
+    public ModelSystem(EntitySceneMap entitySceneMap, DisplayApplication mainApplication){
         this.entitySceneMap = entitySceneMap;
-        this.clientApplication = clientApplication;
+        this.mainApplication = mainApplication;
     }
     public final static String NODE_NAME_MODEL = "model";
     private EntitySceneMap entitySceneMap;
-    private IngameClientApplication clientApplication;
+    private DisplayApplication mainApplication;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -43,7 +43,7 @@ public class ModelSystem implements EntitySystem{
         Node node = entitySceneMap.requestNode(entity);
         node.detachChildNamed(NODE_NAME_MODEL);
         ModelComponent modelComponent = entityWorld.getComponent(entity, ModelComponent.class);
-        ModelObject modelObject = new ModelObject(clientApplication, "/" + modelComponent.getModelSkinPath());
+        ModelObject modelObject = new ModelObject(mainApplication, "/" + modelComponent.getModelSkinPath());
         modelObject.setName(NODE_NAME_MODEL);
         node.attachChild(modelObject);
     }
