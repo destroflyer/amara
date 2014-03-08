@@ -7,7 +7,7 @@ package amara.engine.applications.ingame.client.models;
 import com.jme3.animation.*;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import amara.engine.applications.ingame.client.IngameClientApplication;
+import amara.engine.applications.DisplayApplication;
 
 /**
  *
@@ -15,11 +15,11 @@ import amara.engine.applications.ingame.client.IngameClientApplication;
  */
 public class ModelObject extends Node implements AnimEventListener{
 
-    public ModelObject(IngameClientApplication mainApplication, String skinResourcePath){
+    public ModelObject(DisplayApplication mainApplication, String skinResourcePath){
         this.mainApplication = mainApplication;
         loadSkin(new ModelSkin(skinResourcePath));
     }
-    private IngameClientApplication mainApplication;
+    private DisplayApplication mainApplication;
     protected Spatial modelSpatial;
     private AnimChannel animationChannel;
     private int remainingAnimationLoops;

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
+    <useStyles filename="nifty-default-styles.xml"/>
+    <useControls filename="nifty-default-controls.xml"/>
+    <screen id="start" controller="amara.engine.applications.ingame.editor.gui.ScreenController_MapEditor">
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel height="10px"/>
+                <panel childLayout="horizontal" height="130px">
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_open.png" width="60px" height="100%w">
+                        <interact onClick="openMap()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_save.png" width="60px" height="100%w">
+                        <interact onClick="saveMap()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_shape_circle.png" width="60px" height="100%w">
+                        <interact onClick="setAction_PlaceHitboxCircle()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_shape_custom.png" width="60px" height="100%w">
+                        <interact onClick="setAction_PlaceHitboxCustom()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_visual.png" width="60px" height="100%w">
+                        <interact onClick="setAction_PlaceVisual()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_cheesecake.png" width="60px" height="100%w">
+                        <interact onClick="showCheesecakeMessage()"/>
+                    </image>
+                    <panel/>
+                </panel>
+                <panel/>
+            </panel>
+        </layer>
+    </screen>
+</nifty>

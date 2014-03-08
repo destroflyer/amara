@@ -4,6 +4,8 @@
  */
 package amara.engine.applications.ingame.client.gui;
 
+import amara.engine.gui.GameScreenController;
+
 /**
  *
  * @author Carl
@@ -11,6 +13,6 @@ package amara.engine.applications.ingame.client.gui;
 public class ScreenController_GameOver extends GameScreenController{
     
     public void exit(){
-        clientApplication.stop();
+        mainApplication.stop();
     }
 }

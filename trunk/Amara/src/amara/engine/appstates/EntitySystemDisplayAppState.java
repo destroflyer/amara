@@ -5,16 +5,15 @@
 package amara.engine.appstates;
 
 import java.util.ArrayList;
-import com.jme3.app.SimpleApplication;
 import amara.game.entitysystem.*;
 
 /**
  *
  * @author Carl
  */
-public class EntitySystemAppState<T extends SimpleApplication> extends BaseAppState<T>{
+public class EntitySystemDisplayAppState extends BaseDisplayAppState{
 
-    public EntitySystemAppState(){
+    public EntitySystemDisplayAppState(){
         
     }
     protected EntityWorld entityWorld = new EntityWorld();

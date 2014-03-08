@@ -12,7 +12,7 @@ import com.jme3.math.Vector2f;
 import amara.Queue;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
-import amara.engine.appstates.NetworkClientAppState;
+import amara.engine.appstates.*;
 import amara.engine.network.NetworkClient;
 import amara.engine.input.*;
 import amara.engine.input.events.*;
@@ -27,7 +27,7 @@ import amara.game.entitysystem.components.units.*;
  *
  * @author Carl
  */
-public class SendPlayerCommandsAppState extends ClientBaseAppState{
+public class SendPlayerCommandsAppState extends BaseDisplayAppState{
 
     public SendPlayerCommandsAppState(){
         
@@ -49,7 +49,7 @@ public class SendPlayerCommandsAppState extends ClientBaseAppState{
                             sendCommand(new AutoAttackCommand(entityToAttack));
                         }
                         else{
-                            Vector2f groundLocation = getCursorHoveredGroundLocation();
+                            Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
                             if(groundLocation != null){
                                 sendCommand(new MoveCommand(groundLocation));
                             }
@@ -92,7 +92,7 @@ public class SendPlayerCommandsAppState extends ClientBaseAppState{
     private void castSpell(int spellIndex){
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
         int cursorHoveredEntity = getCursorHoveredEntity();
-        Vector2f groundLocation = getCursorHoveredGroundLocation();
+        Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
         EntityWrapper selectedEntity = entityWorld.getWrapped(entityWorld.getComponent(getPlayerEntityID(), SelectedUnitComponent.class).getEntityID());
         SpellsComponent spellsComponent = selectedEntity.getComponent(SpellsComponent.class);
         if(spellsComponent != null){
@@ -139,15 +139,6 @@ public class SendPlayerCommandsAppState extends ClientBaseAppState{
             }
         }
         return -1;
-    }
-    
-    private Vector2f getCursorHoveredGroundLocation(){
-        MapAppState mapAppState = getAppState(MapAppState.class);
-        CollisionResult groundCollision = mainApplication.getRayCastingResults_Cursor(mapAppState.getMapTerrain().getTerrain()).getClosestCollision();
-        if(groundCollision != null){
-            return new Vector2f(groundCollision.getContactPoint().getX(), groundCollision.getContactPoint().getZ());
-        }
-        return null;
     }
     
     private int getPlayerEntityID(){

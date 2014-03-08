@@ -2,11 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.engine.applications.ingame.client.gui;
+package amara.engine.gui;
 
 import java.util.List;
-import amara.engine.applications.ingame.client.IngameClientApplication;
-import amara.engine.applications.ingame.client.appstates.NiftyAppState;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.ElementBuilder;
 import de.lessvoid.nifty.builder.HoverEffectBuilder;
@@ -18,6 +16,8 @@ import de.lessvoid.nifty.elements.render.*;
 import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import amara.engine.applications.DisplayApplication;
+import amara.engine.appstates.NiftyAppState;
 
 /**
  *
@@ -28,7 +28,7 @@ public class GameScreenController implements ScreenController{
     public GameScreenController(){
         
     }
-    protected IngameClientApplication clientApplication;
+    protected DisplayApplication mainApplication;
     protected Nifty nifty;
     private boolean isInitialized = false;
     
@@ -43,12 +43,12 @@ public class GameScreenController implements ScreenController{
         
     }
 
-    public IngameClientApplication getClientApplication(){
-        return clientApplication;
+    public DisplayApplication getMainApplication(){
+        return mainApplication;
     }
 
-    public void setMainApplication(IngameClientApplication clientApplication){
-        this.clientApplication = clientApplication;
+    public void setMainApplication(DisplayApplication mainApplication){
+        this.mainApplication = mainApplication;
     }
 
     public Nifty getNifty(){
@@ -94,7 +94,7 @@ public class GameScreenController implements ScreenController{
     }
     
     public void goToScreen(String screenID){
-        clientApplication.getStateManager().getState(NiftyAppState.class).goToScreen(getClass(), screenID);
+        mainApplication.getStateManager().getState(NiftyAppState.class).goToScreen(getClass(), screenID);
     }
     
     protected void removeAllChildElements(Element element){

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.engine.applications.ingame.client.appstates;
+package amara.engine.appstates;
 
 import java.util.LinkedList;
 import com.jme3.app.Application;
@@ -13,7 +13,7 @@ import com.jme3.post.*;
  *
  * @author Carl
  */
-public class PostFilterAppState extends ClientBaseAppState{
+public class PostFilterAppState extends BaseDisplayAppState{
 
     public PostFilterAppState(){
         

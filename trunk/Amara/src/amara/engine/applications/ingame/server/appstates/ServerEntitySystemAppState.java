@@ -5,7 +5,6 @@
 package amara.engine.applications.ingame.server.appstates;
 
 import amara.engine.applications.*;
-import amara.engine.applications.ingame.client.appstates.MapAppState;
 import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.engine.applications.ingame.server.network.backends.*;
 import amara.engine.appstates.*;
@@ -33,7 +32,7 @@ import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.*;
 import amara.game.entitysystem.systems.visuals.*;
 import amara.game.games.GamePlayer;
-import amara.game.maps.Map;
+import amara.game.maps.*;
 
 /**
  *
@@ -109,7 +108,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new TriggerTargetReachedEffectSystem());
         addEntitySystem(intersectionSystem);
         addEntitySystem(new AggroSystem());
-        addEntitySystem(new MapIntersectionSystem(100, 100, MapAppState.TEST_MAP_OBSTACLES));
         
         Map map = mainApplication.getGame().getMap();
         map.load(entityWorld);
@@ -121,6 +119,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
             playerEntity.setComponent(new SelectedUnitComponent(unit.getId()));
             player.setEntityID(playerEntity.getId());
         }
+        MapPhysicsInformation mapPhysicsInformation = map.getPhysicsInformation();
+        addEntitySystem(new MapIntersectionSystem(mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight(), mapPhysicsInformation.getObstacles()));
         addEntitySystem(new CheckMapObjectiveSystem(map, getAppState(GameRunningAppState.class)));
     }
 }

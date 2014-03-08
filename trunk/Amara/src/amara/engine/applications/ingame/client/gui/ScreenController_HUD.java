@@ -4,6 +4,8 @@
  */
 package amara.engine.applications.ingame.client.gui;
 
+import amara.engine.gui.GameScreenController;
+
 /**
  *
  * @author Carl

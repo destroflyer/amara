@@ -5,7 +5,8 @@
 package amara.engine.applications.ingame.client.network.backends;
 
 import com.jme3.network.Message;
-import amara.engine.applications.ingame.client.IngameClientApplication;
+import amara.engine.appstates.*;
+import amara.engine.applications.DisplayApplication;
 import amara.engine.applications.ingame.client.appstates.*;
 import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
 import amara.engine.network.*;
@@ -17,10 +18,10 @@ import amara.engine.network.messages.Message_GameOver;
  */
 public class GameOverBackend implements MessageBackend{
 
-    public GameOverBackend(IngameClientApplication mainApplication){
+    public GameOverBackend(DisplayApplication mainApplication){
         this.mainApplication = mainApplication;
     }
-    private IngameClientApplication mainApplication;
+    private DisplayApplication mainApplication;
 
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){

@@ -10,7 +10,6 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.engine.appstates.*;
-import amara.engine.applications.ingame.client.IngameClientApplication;
 import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
 import amara.engine.applications.ingame.client.network.backends.*;
 import amara.engine.applications.ingame.client.systems.*;
@@ -24,7 +23,7 @@ import amara.engine.network.NetworkClient;
  *
  * @author Carl
  */
-public class LocalEntitySystemAppState extends EntitySystemAppState<IngameClientApplication>{
+public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
 
     public LocalEntitySystemAppState(){
         
@@ -70,6 +69,8 @@ public class LocalEntitySystemAppState extends EntitySystemAppState<IngameClient
         NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
         networkClient.addMessageBackend(new EntitySynchronizeBackend(entityWorld));
         networkClient.addMessageBackend(new GameOverBackend(mainApplication));
+        addEntitySystem(new PositionSystem(entitySceneMap, getAppState(MapAppState.class).getMapTerrain()));
+        addEntitySystem(new CollisionDebugSystem(getAppState(MapObstaclesAppState.class).getNode()));
         addEntitySystem(new ModelSystem(entitySceneMap, mainApplication));
         addEntitySystem(new DirectionSystem(entitySceneMap));
         addEntitySystem(new ScaleSystem(entitySceneMap));
