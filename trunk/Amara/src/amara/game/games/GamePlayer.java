@@ -16,7 +16,7 @@ public class GamePlayer{
     }
     private PlayerData playerData;
     private int authentificationKey;
-    private int clientID;
+    private int clientID = -1;
     private int entityID;
     private boolean isInitialized;
 
