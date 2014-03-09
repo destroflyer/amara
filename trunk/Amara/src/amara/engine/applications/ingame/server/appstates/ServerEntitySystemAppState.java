@@ -48,8 +48,9 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
         NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
-        networkServer.addMessageBackend(new AssignPlayerEntityBackend(mainApplication.getGame(), entityWorld));
+        networkServer.addMessageBackend(new AuthentificateClientsBackend(mainApplication.getGame(), entityWorld));
         networkServer.addMessageBackend(new UpdateNewClientBackend(entityWorld));
+        networkServer.addMessageBackend(new InitializeClientBackend(mainApplication.getGame(), getAppState(GameRunningAppState.class)));
         addEntitySystem(new SendEntityChangesSystem(networkServer));
         addEntitySystem(new UpdateAttributesSystem());
         addEntitySystem(new CountdownLifetimeSystem());
@@ -122,5 +123,12 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         MapPhysicsInformation mapPhysicsInformation = map.getPhysicsInformation();
         addEntitySystem(new MapIntersectionSystem(mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight(), mapPhysicsInformation.getObstacles()));
         addEntitySystem(new CheckMapObjectiveSystem(map, getAppState(GameRunningAppState.class)));
+    }
+
+    @Override
+    public void update(float lastTimePerFrame){
+        if(mainApplication.getGame().isStarted()){
+            super.update(lastTimePerFrame);
+        }
     }
 }

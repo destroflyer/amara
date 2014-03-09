@@ -19,17 +19,17 @@ public class Message_StartGame extends AbstractMessage{
         
     }
     
-    public Message_StartGame(int mapID, PlayerData[] playerDatas){
-        this.mapID = mapID;
+    public Message_StartGame(String mapName, PlayerData[] playerDatas){
+        this.mapName = mapName;
         this.playerDatas = playerDatas;
     }
-    private int mapID;
+    private String mapName;
     //May the gods forgive me this spelling mistake in order to have a nice iterator name
     private PlayerData[] playerDatas;
 
-    public int getMapID(){
-        return mapID;
-    }
+    public String getMapName(){
+        return mapName;
+    }    
 
     public PlayerData[] getPlayerDatas(){
         return playerDatas;

@@ -49,7 +49,8 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     private LinkedList<Vector2D> customShapePoints = new LinkedList<Vector2D>();
     private String[] visualsModelSkinPaths = new String[]{
         "Models/tree/skin.xml",
-        "Models/tree_2/skin.xml"
+        "Models/tree_2/skin.xml",
+        "Models/japanese_bridge/skin.xml",
     };
     private int visualModelSkinPathIndex = 0;
     private ModelObject visualToPlaceModelObject;

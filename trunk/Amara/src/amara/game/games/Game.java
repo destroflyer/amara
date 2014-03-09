@@ -19,6 +19,7 @@ public class Game{
     private Map map;
     private GamePlayer[] players;
     private int port;
+    private boolean isStarted;
 
     public Map getMap(){
         return map;
@@ -28,13 +29,32 @@ public class Game{
         return players;
     }
     
-    public GamePlayer getPlayer(int authentificationKey){
+    public GamePlayer onClientConnected(int clientID, int authentificationKey){
         for(GamePlayer player : players){
             if(player.getAuthentificationKey() == authentificationKey){
+                player.setClientID(clientID);
                 return player;
             }
         }
         return null;
+    }
+    
+    public GamePlayer getPlayer(int clientID){
+        for(GamePlayer player : players){
+            if(player.getClientID() == clientID){
+                return player;
+            }
+        }
+        return null;
+    }
+    
+    public boolean areAllPlayersInitialized(){
+        for(GamePlayer player : players){
+            if(!player.isInitialized()){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void setPort(int port){
@@ -43,5 +63,13 @@ public class Game{
 
     public int getPort(){
         return port;
+    }
+    
+    public void start(){
+        isStarted = true;
+    }
+
+    public boolean isStarted(){
+        return isStarted;
     }
 }

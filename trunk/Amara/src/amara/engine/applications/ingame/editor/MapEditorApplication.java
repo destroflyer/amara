@@ -1,6 +1,5 @@
 package amara.engine.applications.ingame.editor;
 
-import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.jme3.math.Vector3f;
@@ -29,13 +28,12 @@ public class MapEditorApplication extends DisplayApplication{
         stateManager.attach(new LightAppState());
         stateManager.attach(new PostFilterAppState());
         stateManager.attach(new IngameCameraAppState());
-        stateManager.attach(new MapAppState(MapFileHandler.loadFile(new File("./assets/Maps/empty.xml"))));
+        stateManager.attach(new MapAppState(MapFileHandler.load("empty")));
         stateManager.attach(new MapObstaclesAppState());
         stateManager.attach(new MapEditorAppState());
         //Debug Camera
         cam.setLocation(new Vector3f(22, 34, -10));
         cam.lookAtDirection(new Vector3f(0, -1.3f, 1), Vector3f.UNIT_Y);
-        
     }
 
     @Override

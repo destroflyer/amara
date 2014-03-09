@@ -13,20 +13,14 @@ import amara.game.entitysystem.systems.physics.shapes.Shape;
  */
 public class MapPhysicsInformation{
 
-    public MapPhysicsInformation(String terrainName, int width, int height, ArrayList<Shape> obstacles){
-        this.terrainName = terrainName;
+    public MapPhysicsInformation(int width, int height, ArrayList<Shape> obstacles){
         this.width = width;
         this.height = height;
         this.obstacles = obstacles;
     }
-    private String terrainName;
     private int width;
     private int height;
     private ArrayList<Shape> obstacles;
-
-    public String getTerrainName(){
-        return terrainName;
-    }
 
     public int getWidth(){
         return width;

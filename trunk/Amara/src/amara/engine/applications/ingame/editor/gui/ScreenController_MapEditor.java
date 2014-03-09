@@ -24,20 +24,21 @@ public class ScreenController_MapEditor extends GameScreenController{
         if(file != null){
             AppStateManager stateManager = mainApplication.getStateManager();
             stateManager.detach(stateManager.getState(MapAppState.class));
-            Map map = MapFileHandler.loadFile(file);
+            String mapName = file.getParentFile().getName();
+            Map map = MapFileHandler.load(mapName);
             stateManager.attach(new MapAppState(map));
             stateManager.getState(MapObstaclesAppState.class).update();
         }
     }
     
     public void saveMap(){
+        Map map = mainApplication.getStateManager().getState(MapAppState.class).getMap();
         File file = Util.chooseFile(false, "./assets/Maps/", MapFileHandler.FILE_FILTER);
         if(file != null){
             if(!file.getPath().endsWith("." + MapFileHandler.FILE_EXTENSION)){
                 file = new File(file.getPath() + "." + MapFileHandler.FILE_EXTENSION);
             }
-            Map map = mainApplication.getStateManager().getState(MapAppState.class).getMap();
-            MapFileHandler.saveFile(file, map);
+            MapFileHandler.saveFile(map, file);
         }
     }
     

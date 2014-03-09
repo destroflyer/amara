@@ -8,7 +8,7 @@ import amara.engine.applications.*;
 import amara.engine.applications.ingame.server.appstates.NetworkServerAppState;
 import amara.engine.applications.masterserver.server.network.PortProvider;
 import amara.engine.applications.masterserver.server.network.backends.StartGameBackend;
-import amara.engine.applications.masterserver.server.network.messages.Message_GameStarted;
+import amara.engine.applications.masterserver.server.network.messages.Message_GameCreated;
 import amara.engine.network.NetworkServer;
 import amara.game.games.*;
 import amara.game.players.ConnectedPlayers;
@@ -36,7 +36,7 @@ public class GamesAppState extends ServerBaseAppState{
         ConnectedPlayers connectedPlayers = mainApplication.getStateManager().getState(PlayersAppState.class).getConnectedPlayers();
         for(GamePlayer player : game.getPlayers()){
             int clientID = connectedPlayers.getClientID(player.getPlayerData().getID());
-            networkServer.sendMessageToClient(clientID, new Message_GameStarted(game.getPort(), player.getAuthentificationKey()));
+            networkServer.sendMessageToClient(clientID, new Message_GameCreated(game.getPort(), player.getAuthentificationKey()));
         }
     }
     

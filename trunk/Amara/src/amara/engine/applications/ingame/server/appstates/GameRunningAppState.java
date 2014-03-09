@@ -18,6 +18,10 @@ public class GameRunningAppState extends ServerBaseAppState{
         
     }
     
+    public void onGameStarted(){
+        
+    }
+    
     public void onGameOver(){
         GamesAppState gamesAppState = mainApplication.getMasterServer().getStateManager().getState(GamesAppState.class);
         gamesAppState.onGameOver(mainApplication.getGame());
