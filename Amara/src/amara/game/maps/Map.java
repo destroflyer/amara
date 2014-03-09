@@ -12,6 +12,7 @@ import amara.game.entitysystem.EntityWorld;
  */
 public abstract class Map{
     
+    private String name;
     protected MapPhysicsInformation physicsInformation;
     protected MapVisuals visuals = new MapVisuals();
     protected int objectiveEntity;
@@ -19,6 +20,14 @@ public abstract class Map{
     public abstract void load(EntityWorld entityWorld);
     
     public abstract void spawn(EntityWorld entityWorld, int playerIndex, int playerUnitEntity);
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
 
     public MapPhysicsInformation getPhysicsInformation(){
         return physicsInformation;

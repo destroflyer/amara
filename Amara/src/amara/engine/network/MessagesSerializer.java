@@ -59,7 +59,7 @@ public class MessagesSerializer{
             
             Message_StartGame.class,
                 PlayerData.class,
-            Message_GameStarted.class,
+            Message_GameCreated.class,
             
             Message_Command.class,
                 AutoAttackCommand.class,
@@ -236,6 +236,8 @@ public class MessagesSerializer{
                         RemainingLoopsComponent.class,
                     RemovedComponentChange.class,
                     RemovedEntityChange.class,
+            Message_GameInfo.class,
+            Message_GameStarted.class,
             Message_GameOver.class,
             Message_PlayerAuthentification.class
         );

@@ -32,7 +32,7 @@ public class MapAppState extends BaseDisplayAppState{
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         MapPhysicsInformation physicsInformation = map.getPhysicsInformation();
-        mapTerrain = new MapTerrain(physicsInformation.getTerrainName(), physicsInformation.getWidth(), physicsInformation.getHeight());
+        mapTerrain = new MapTerrain(map.getName(), physicsInformation.getWidth(), physicsInformation.getHeight());
         mainApplication.getRootNode().attachChild(mapTerrain.getTerrain());
         mainApplication.getRootNode().attachChild(visualsNode);
         updateVisuals();

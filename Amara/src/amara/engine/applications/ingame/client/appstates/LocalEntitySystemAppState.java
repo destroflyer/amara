@@ -68,6 +68,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         super.initialize(stateManager, application);
         NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
         networkClient.addMessageBackend(new EntitySynchronizeBackend(entityWorld));
+        networkClient.addMessageBackend(new GameStartedBackend(mainApplication));
         networkClient.addMessageBackend(new GameOverBackend(mainApplication));
         addEntitySystem(new PositionSystem(entitySceneMap, getAppState(MapAppState.class).getMapTerrain()));
         addEntitySystem(new CollisionDebugSystem(getAppState(MapObstaclesAppState.class).getNode()));

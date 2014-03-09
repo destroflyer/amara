@@ -192,11 +192,9 @@ public class ClientLauncher extends javax.swing.JFrame{
 
     private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
         NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.sendMessage(new Message_StartGame(99, new PlayerData[]{
+        networkClient.sendMessage(new Message_StartGame("testmap", new PlayerData[]{
             new PlayerData(0, "minion"),
-            new PlayerData(1, "wizard"),
-            new PlayerData(2, "robot"),
-            new PlayerData(3, "jaime")
+            new PlayerData(1, "robot")
         }));
     }//GEN-LAST:event_btnStartGameActionPerformed
 

@@ -1,14 +1,13 @@
 package amara.engine.applications.ingame.client;
 
-import java.io.File;
 import com.jme3.math.Vector3f;
 import com.jme3.system.AppSettings;
 import amara.engine.applications.DisplayApplication;
 import amara.engine.applications.ingame.client.appstates.*;
+import amara.engine.applications.ingame.client.network.backends.*;
 import amara.engine.appstates.*;
 import amara.engine.network.*;
 import amara.engine.network.exceptions.*;
-import amara.game.maps.MapFileHandler;
 
 /**
  * @author Carl
@@ -33,19 +32,16 @@ public class IngameClientApplication extends DisplayApplication{
         super.simpleInitApp();
         try{
             stateManager.attach(new NetworkClientAppState(hostInformation.getHost(), hostInformation.getPort()));
+            stateManager.getState(NetworkClientAppState.class).getNetworkClient().addMessageBackend(new GameInfoBackend(this));
             stateManager.attach(new PlayerAuthentificationAppState(authentificationKey));
-            stateManager.attach(new EventManagerAppState());
             stateManager.attach(new NiftyAppState());
             stateManager.attach(new NiftyAppState_IngameClient());
+            stateManager.attach(new EventManagerAppState());
             stateManager.attach(new AudioAppState());
             stateManager.attach(new LightAppState());
             stateManager.attach(new PostFilterAppState());
-            stateManager.attach(new SendPlayerCommandsAppState());
-            stateManager.attach(new MapAppState(MapFileHandler.loadFile(new File("./assets/Maps/testmap/map.xml"))));
-            stateManager.attach(new MapObstaclesAppState());
-            stateManager.attach(new LocalEntitySystemAppState());
             stateManager.attach(new IngameCameraAppState());
-            stateManager.attach(new ClientInitializedAppState());
+            stateManager.getState(IngameCameraAppState.class).setEnabled(false);
             //Debug Camera
             cam.setLocation(new Vector3f(22, 34, -10));
             cam.lookAtDirection(new Vector3f(0, -1.3f, 1), Vector3f.UNIT_Y);

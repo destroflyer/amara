@@ -4,7 +4,6 @@
  */
 package amara.engine.applications.masterserver.server.network.backends;
 
-import java.io.File;
 import com.jme3.network.Message;
 import amara.Util;
 import amara.engine.applications.ingame.server.IngameServerApplication;
@@ -36,7 +35,7 @@ public class StartGameBackend implements MessageBackend{
             for(int i=0;i<players.length;i++){
                 players[i] = new GamePlayer(playerDatas[i], authentificationKeys[i]);
             }
-            Map map = MapFileHandler.loadFile(new File("./assets/Maps/testmap/map.xml"));
+            Map map = MapFileHandler.load(message.getMapName());
             Game game = new Game(map, players);
             RunningGames runningGames = mainApplication.getStateManager().getState(GamesAppState.class).getRunningGames();
             runningGames.registerGame(game);

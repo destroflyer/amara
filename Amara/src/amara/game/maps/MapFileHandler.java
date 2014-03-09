@@ -12,10 +12,7 @@ import javax.swing.filechooser.FileFilter;
 import com.jme3.math.Vector3f;
 import amara.Util;
 import amara.engine.files.FileManager;
-import amara.game.entitysystem.systems.physics.shapes.Circle;
-import amara.game.entitysystem.systems.physics.shapes.Shape;
-import amara.game.entitysystem.systems.physics.shapes.SimpleConvex;
-import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.*;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -42,7 +39,7 @@ public class MapFileHandler{
         }
     };
     
-    public static void saveFile(File file, Map map){
+    public static void saveFile(Map map, File file){
         try{
             Element root = new Element("map");
             root.setAttribute("author", System.getProperty("user.name"));
@@ -81,25 +78,19 @@ public class MapFileHandler{
         }
     }
 
-    public static Map loadFile(File file){
+    public static Map load(String mapName){
         try{
-            return loadDocument(new SAXBuilder().build(file));
+            InputStream inputStream = Util.getResourceInputStrean("/Maps/" + mapName + "/map.xml");
+            Map map = load(new SAXBuilder().build(inputStream));
+            map.setName(mapName);
+            return map;
         }catch(Exception ex){
             System.out.println("Error while loading the map: " + ex.toString());
         }
         return null;
     }
 
-    public static Map loadInputStream(InputStream inputStream){
-        try{
-            return loadDocument(new SAXBuilder().build(inputStream));
-        }catch(Exception ex){
-            System.out.println("Error while loading the map: " + ex.toString());
-        }
-        return null;
-    }
-
-    private static Map loadDocument(Document document){
+    private static Map load(Document document){
         try{
             Element root = document.getRootElement();
             Map map = Util.createObjectByClassName(root.getAttributeValue("class"), Map.class);
@@ -114,7 +105,7 @@ public class MapFileHandler{
                 Shape shape = generateShape(elementShape);
                 obstacles.add(shape);
             }
-            MapPhysicsInformation physicsInformation = new MapPhysicsInformation("testmap", width, height, obstacles);
+            MapPhysicsInformation physicsInformation = new MapPhysicsInformation(width, height, obstacles);
             map.setPhysicsInformation(physicsInformation);
             Element elementVisuals = root.getChild("visuals");
             List elementVisualsChildren = elementVisuals.getChildren();

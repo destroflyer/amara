@@ -16,7 +16,9 @@ public class GamePlayer{
     }
     private PlayerData playerData;
     private int authentificationKey;
+    private int clientID;
     private int entityID;
+    private boolean isInitialized;
 
     public PlayerData getPlayerData(){
         return playerData;
@@ -26,11 +28,27 @@ public class GamePlayer{
         return authentificationKey;
     }
 
+    public void setClientID(int clientID){
+        this.clientID = clientID;
+    }
+
+    public int getClientID(){
+        return clientID;
+    }
+
     public void setEntityID(int entityID){
         this.entityID = entityID;
     }
 
     public int getEntityID(){
         return entityID;
+    }
+
+    public void setInitialized(boolean isInitialized){
+        this.isInitialized = isInitialized;
+    }
+
+    public boolean isInitialized(){
+        return isInitialized;
     }
 }
