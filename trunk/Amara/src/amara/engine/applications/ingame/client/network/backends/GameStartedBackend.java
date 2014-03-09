@@ -28,6 +28,7 @@ public class GameStartedBackend implements MessageBackend{
             Message_GameStarted message = (Message_GameStarted) receivedMessage;
             NiftyAppState niftyAppState = mainApplication.getStateManager().getState(NiftyAppState.class);
             niftyAppState.goToScreen(ScreenController_LoadingScreen.class, "ingame");
+            mainApplication.getStateManager().getState(IngameCameraAppState.class).setEnabled(true);
         }
     }
 }
