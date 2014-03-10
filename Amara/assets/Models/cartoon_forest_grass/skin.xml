@@ -1,0 +1,7 @@
+<skin name="cartoon_forest_grass">
+    <model scale="2.5">
+        <material>
+            <color index="0">0.2,0.4,0.05,1</color>
+        </material>
+    </model>
+</skin>

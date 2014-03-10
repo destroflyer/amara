@@ -17,6 +17,10 @@ public class MapVisuals{
     public void addVisual(MapVisual mapVisual){
         mapVisuals.add(mapVisual);
     }
+    
+    public void removeVisual(MapVisual mapVisual){
+        mapVisuals.remove(mapVisual);
+    }
 
     public ArrayList<MapVisual> getMapVisuals(){
         return mapVisuals;
