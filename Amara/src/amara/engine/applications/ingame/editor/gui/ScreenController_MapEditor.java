@@ -7,6 +7,8 @@ package amara.engine.applications.ingame.editor.gui;
 import java.io.File;
 import javax.swing.JOptionPane;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.math.Vector2f;
+import de.lessvoid.nifty.elements.Element;
 import amara.Util;
 import amara.engine.applications.ingame.editor.appstates.MapEditorAppState;
 import amara.engine.appstates.*;
@@ -64,6 +66,15 @@ public class ScreenController_MapEditor extends GameScreenController{
     
     private MapEditorAppState getMapEditorAppState(){
         return mainApplication.getStateManager().getState(MapEditorAppState.class);
+    }
+
+    public void setHoveredLocation(Vector2f hoveredLocation){
+        getTextRenderer("hoveredCoordinates").setText("(" + hoveredLocation.getX() + ", " + hoveredLocation.getY() + ")");
+    }
+    
+    public void showHoveredCoordinates(){
+        Element lblHoveredCoordinates = getElementByID("hoveredCoordinates");
+        lblHoveredCoordinates.setVisible(!lblHoveredCoordinates.isVisible());
     }
     
     public void showCheesecakeMessage(){
