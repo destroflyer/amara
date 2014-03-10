@@ -25,10 +25,10 @@ import amara.Util;
 import amara.engine.JMonkeyUtil;
 import amara.engine.applications.ingame.client.maps.MapTerrain;
 import amara.engine.applications.ingame.client.models.ModelObject;
+import amara.engine.applications.ingame.editor.gui.ScreenController_MapEditor;
 import amara.engine.appstates.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
-import amara.game.maps.Map;
-import amara.game.maps.MapVisual;
+import amara.game.maps.*;
 
 /**
  *
@@ -111,23 +111,23 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     @Override
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
-        if(currentAction != Action.VIEW){
-            Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
-            if(groundLocation != null){
-                currentHoveredLocation.set(groundLocation);
-                switch(currentAction){
-                    case PLACE_HITBOX_CIRCLE:
-                        shapeToPlace.getTransform().setX(groundLocation.getX());
-                        shapeToPlace.getTransform().setY(groundLocation.getY());
-                        shapeToPlaceGeometry.setLocalTranslation(groundLocation.getX(), 0, groundLocation.getY());
-                        break;
-                    
-                    case PLACE_VISUAL:
-                        MapTerrain mapTerrain = getAppState(MapAppState.class).getMapTerrain();
-                        visualToPlaceModelObject.setLocalTranslation(currentHoveredLocation.getX(), mapTerrain.getHeight(currentHoveredLocation), currentHoveredLocation.getY());
-                        break;
-                }
+        Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
+        if(groundLocation != null){
+            currentHoveredLocation.set(groundLocation);
+            switch(currentAction){
+                case PLACE_HITBOX_CIRCLE:
+                    shapeToPlace.getTransform().setX(groundLocation.getX());
+                    shapeToPlace.getTransform().setY(groundLocation.getY());
+                    shapeToPlaceGeometry.setLocalTranslation(groundLocation.getX(), 0, groundLocation.getY());
+                    break;
+
+                case PLACE_VISUAL:
+                    MapTerrain mapTerrain = getAppState(MapAppState.class).getMapTerrain();
+                    visualToPlaceModelObject.setLocalTranslation(currentHoveredLocation.getX(), mapTerrain.getHeight(currentHoveredLocation), currentHoveredLocation.getY());
+                    break;
             }
+            ScreenController_MapEditor screenController_MapEditor = getAppState(NiftyAppState.class).getScreenController(ScreenController_MapEditor.class);
+            screenController_MapEditor.setHoveredLocation(currentHoveredLocation);
         }
     }
 
@@ -221,10 +221,9 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
                         switch(actionBeforeRemove){
                             case PLACE_HITBOX_CIRCLE:
                             case PLACE_HITBOX_CUSTOM:
-                                Vector2f groundLocation = mapAppState.getCursorHoveredGroundLocation();
                                 for(int i=0;i<obstacles.size();i++){
                                     Shape shape = obstacles.get(i);
-                                    if(shape.contains(new Vector2D(groundLocation.getX(), groundLocation.getY()))){
+                                    if(shape.contains(new Vector2D(currentHoveredLocation.getX(), currentHoveredLocation.getY()))){
                                         obstacles.remove(i);
                                         getAppState(MapObstaclesAppState.class).update();
                                         break;

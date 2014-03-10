@@ -6,7 +6,7 @@
         <layer childLayout="center">
             <panel childLayout="vertical">
                 <panel height="10px"/>
-                <panel childLayout="horizontal" height="130px">
+                <panel childLayout="horizontal" height="60px">
                     <panel width="10px"/>
                     <image filename="Interface/hud/editor/button_open.png" width="60px" height="100%w">
                         <interact onClick="openMap()"/>
@@ -36,10 +36,18 @@
                         <interact onClick="changeCameraAngle()"/>
                     </image>
                     <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_coordinates.png" width="60px" height="100%w">
+                        <interact onClick="showHoveredCoordinates()"/>
+                    </image>
+                    <panel width="10px"/>
                     <image filename="Interface/hud/editor/button_cheesecake.png" width="60px" height="100%w">
                         <interact onClick="showCheesecakeMessage()"/>
                     </image>
                     <panel/>
+                </panel>
+                <panel height="10px"/>
+                <panel childLayout="absolute" height="20px">
+                    <text id="hoveredCoordinates" x="10px" y="0px" text="?" textHAlign="left" font="Interface/fonts/Verdana_12.fnt" visible="false"/>
                 </panel>
                 <panel/>
             </panel>
