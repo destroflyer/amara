@@ -16,6 +16,10 @@
                         <interact onClick="saveMap()"/>
                     </image>
                     <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_view.png" width="60px" height="100%w">
+                        <interact onClick="setAction_View()"/>
+                    </image>
+                    <panel width="10px"/>
                     <image filename="Interface/hud/editor/button_shape_circle.png" width="60px" height="100%w">
                         <interact onClick="setAction_PlaceHitboxCircle()"/>
                     </image>
@@ -26,6 +30,10 @@
                     <panel width="10px"/>
                     <image filename="Interface/hud/editor/button_visual.png" width="60px" height="100%w">
                         <interact onClick="setAction_PlaceVisual()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_camera.png" width="60px" height="100%w">
+                        <interact onClick="changeCameraAngle()"/>
                     </image>
                     <panel width="10px"/>
                     <image filename="Interface/hud/editor/button_cheesecake.png" width="60px" height="100%w">

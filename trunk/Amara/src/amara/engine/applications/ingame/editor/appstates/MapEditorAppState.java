@@ -16,6 +16,7 @@ import com.jme3.input.controls.KeyTrigger;
 import com.jme3.input.controls.MouseAxisTrigger;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import amara.Util;
@@ -35,6 +36,7 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
 
     public enum Action{
         NONE,
+        VIEW,
         PLACE_HITBOX_CIRCLE,
         PLACE_HITBOX_CUSTOM,
         PLACE_VISUAL
@@ -50,7 +52,7 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     private String[] visualsModelSkinPaths = new String[]{
         "Models/tree/skin.xml",
         "Models/tree_2/skin.xml",
-        "Models/japanese_bridge/skin.xml",
+        "Models/japanese_bridge/skin.xml"
     };
     private int visualModelSkinPathIndex = 0;
     private ModelObject visualToPlaceModelObject;
@@ -59,6 +61,7 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     private float visualDirectionStep = 5;
     private float visualScale = 1;
     private float visualScaleStep = 0.025f;
+    private boolean sideOrTopDownView;
     
     @Override
     public void initialize(AppStateManager stateManager, Application application){
@@ -70,13 +73,15 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
         mainApplication.getInputManager().addMapping("editor_1", new KeyTrigger(KeyInput.KEY_1));
         mainApplication.getInputManager().addMapping("editor_2", new KeyTrigger(KeyInput.KEY_2));
         mainApplication.getInputManager().addMapping("editor_3", new KeyTrigger(KeyInput.KEY_3));
+        mainApplication.getInputManager().addMapping("editor_4", new KeyTrigger(KeyInput.KEY_4));
         mainApplication.getInputManager().addMapping("editor_x", new KeyTrigger(KeyInput.KEY_X));
         mainApplication.getInputManager().addMapping("editor_enter", new KeyTrigger(KeyInput.KEY_RETURN));
         mainApplication.getInputManager().addMapping("editor_left_shift", new KeyTrigger(KeyInput.KEY_LSHIFT));
         mainApplication.getInputManager().addListener(this, new String[]{
-            "editor_mouse_click_left","editor_mouse_click_right","editor_mouse_wheel_up","editor_mouse_wheel_down","editor_1","editor_2","editor_3","editor_x","editor_enter","editor_left_shift"
+            "editor_mouse_click_left","editor_mouse_click_right","editor_mouse_wheel_up","editor_mouse_wheel_down","editor_1","editor_2","editor_3","editor_4","editor_x","editor_enter","editor_left_shift"
         });
-        getAppState(IngameCameraAppState.class).setZoomEnabled(false);
+        setAction(Action.VIEW);
+        changeCameraAngle();
     }
 
     @Override
@@ -88,7 +93,7 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     @Override
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
-        if(currentAction != Action.NONE){
+        if(currentAction != Action.VIEW){
             Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
             if(groundLocation != null){
                 currentHoveredLocation.set(groundLocation);
@@ -121,6 +126,9 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
         }
         else if(actionName.equals("editor_3") && value){
             setAction(Action.PLACE_VISUAL);
+        }
+        else if(actionName.equals("editor_4") && value){
+            changeCameraAngle();
         }
         else if(actionName.equals("editor_x")){
             isRemoveActivated = value;
@@ -202,21 +210,37 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     
     public void setAction(Action action){
         if(action != currentAction){
+            switch(currentAction){
+                case VIEW:
+                    getAppState(IngameCameraAppState.class).setZoomEnabled(false);
+                    break;
+                
+                case PLACE_HITBOX_CIRCLE:
+                    removeShapeToPlaceGeometry();
+                    break;
+                
+                case PLACE_HITBOX_CUSTOM:
+                    cancelCurrentCustomShape();
+                    break;
+                
+                case PLACE_VISUAL:
+                    removeVisualToPlaceModelObject();
+                    break;
+            }
             currentAction = action;
             switch(currentAction){
+                case VIEW:
+                    getAppState(IngameCameraAppState.class).setZoomEnabled(true);
+                    break;
+                
                 case PLACE_HITBOX_CIRCLE:
-                    cancelCurrentCustomShape();
-                    removeVisualToPlaceModelObject();
                     generateNewShape();
                     break;
                 
                 case PLACE_HITBOX_CUSTOM:
-                    removeShapeToPlaceGeometry();
-                    removeVisualToPlaceModelObject();
                     break;
                 
                 case PLACE_VISUAL:
-                    cancelCurrentCustomShape();
                     generateNewModelObject();
                     break;
             }
@@ -232,7 +256,11 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
             
             case PLACE_HITBOX_CUSTOM:
                 Vector2D[] basePoints = Util.toArray(customShapePoints, Vector2D.class);
-                shapeToPlace = new SimpleConvex(basePoints);
+                try{
+                    shapeToPlace = new SimpleConvex(basePoints);
+                }catch(Error error){
+                    customShapePoints.removeLast();
+                }
                 break;
         }
         shapeToPlaceGeometry = MapObstaclesAppState.generateGeometry(shapeToPlace);
@@ -288,5 +316,16 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     private void updateVisualToPlaceModelObject(){
         JMonkeyUtil.setLocalRotation(visualToPlaceModelObject, visualDirection);
         visualToPlaceModelObject.setLocalScale(visualScale);
+    }
+    
+    public void changeCameraAngle(){
+        sideOrTopDownView = (!sideOrTopDownView);
+        Camera camera = mainApplication.getCamera();
+        if(sideOrTopDownView){
+            camera.lookAtDirection(new Vector3f(0, -1.3f, 1), Vector3f.UNIT_Y);
+        }
+        else{
+            camera.lookAtDirection(new Vector3f(0, -1, 0), Vector3f.UNIT_Z);
+        }
     }
 }

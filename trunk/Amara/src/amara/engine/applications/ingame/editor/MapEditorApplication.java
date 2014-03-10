@@ -33,7 +33,6 @@ public class MapEditorApplication extends DisplayApplication{
         stateManager.attach(new MapEditorAppState());
         //Debug Camera
         cam.setLocation(new Vector3f(22, 34, -10));
-        cam.lookAtDirection(new Vector3f(0, -1.3f, 1), Vector3f.UNIT_Y);
     }
 
     @Override
