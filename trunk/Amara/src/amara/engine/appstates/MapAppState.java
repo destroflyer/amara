@@ -4,6 +4,7 @@
  */
 package amara.engine.appstates;
 
+import java.util.HashMap;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.collision.CollisionResult;
@@ -27,6 +28,7 @@ public class MapAppState extends BaseDisplayAppState{
     private Map map;
     private MapTerrain mapTerrain;
     private Node visualsNode = new Node();
+    private HashMap<ModelObject, MapVisual> modelObjectsVisuals = new HashMap<ModelObject, MapVisual>();
 
     @Override
     public void initialize(AppStateManager stateManager, Application application){
@@ -47,6 +49,7 @@ public class MapAppState extends BaseDisplayAppState{
     
     public void updateVisuals(){
         visualsNode.detachAllChildren();
+        modelObjectsVisuals.clear();
         MapVisuals visuals = map.getVisuals();
         for(MapVisual visual : visuals.getMapVisuals()){
             ModelObject modelObject = new ModelObject(mainApplication, "/" + visual.getModelSkinPath());
@@ -56,6 +59,7 @@ public class MapAppState extends BaseDisplayAppState{
             JMonkeyUtil.setLocalRotation(modelObject, visual.getDirection());
             modelObject.setLocalScale(visual.getScale());
             visualsNode.attachChild(modelObject);
+            modelObjectsVisuals.put(modelObject, visual);
         }
     }
     
@@ -65,6 +69,10 @@ public class MapAppState extends BaseDisplayAppState{
             return new Vector2f(groundCollision.getContactPoint().getX(), groundCollision.getContactPoint().getZ());
         }
         return null;
+    }
+    
+    public MapVisual getMapVisual(ModelObject modelObject){
+        return modelObjectsVisuals.get(modelObject);
     }
 
     public Map getMap(){
