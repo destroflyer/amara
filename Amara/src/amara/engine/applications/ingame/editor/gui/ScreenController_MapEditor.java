@@ -42,6 +42,10 @@ public class ScreenController_MapEditor extends GameScreenController{
         }
     }
     
+    public void setAction_View(){
+        getMapEditorAppState().setAction(MapEditorAppState.Action.VIEW);
+    }
+    
     public void setAction_PlaceHitboxCircle(){
         getMapEditorAppState().setAction(MapEditorAppState.Action.PLACE_HITBOX_CIRCLE);
     }
@@ -52,6 +56,10 @@ public class ScreenController_MapEditor extends GameScreenController{
     
     public void setAction_PlaceVisual(){
         getMapEditorAppState().setAction(MapEditorAppState.Action.PLACE_VISUAL);
+    }
+    
+    public void changeCameraAngle(){
+        getMapEditorAppState().changeCameraAngle();
     }
     
     private MapEditorAppState getMapEditorAppState(){

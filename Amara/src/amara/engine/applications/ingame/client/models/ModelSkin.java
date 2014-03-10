@@ -130,7 +130,7 @@ public class ModelSkin{
                         Geometry child = (Geometry) JMonkeyUtil.getChild(spatial, childIndex);
                         child.setMaterial(material);
                     }catch(Exception ex){
-                        System.out.println("Error while reading material for object '" + name + "'");
+                        System.out.println("Error while reading material for object '" + name + "'");ex.printStackTrace();
                     }
                 }
             }
