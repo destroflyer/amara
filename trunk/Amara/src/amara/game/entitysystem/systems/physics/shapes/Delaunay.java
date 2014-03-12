@@ -31,8 +31,6 @@ class Delaunay
         
         boolean circumCircleContains(ArrayList<Vector2D> vertices, int p)
         {
-            double x, y, r;
-            
             double ax = vertices.get(corners[0]).getX();
             double bx = vertices.get(corners[1]).getX();
             double cx = vertices.get(corners[2]).getX();
@@ -45,18 +43,21 @@ class Delaunay
             double c = cx * cx + cy * cy;
 
             double denominator = 2 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by));
-            x = (a * (by - cy) + b * (cy - ay) + c * (ay - by)) / denominator;
-            y = (a * (cx - bx) + b * (ax - cx) + c * (bx - ax)) / denominator;
+            double x = (a * (by - cy) + b * (cy - ay) + c * (ay - by)) / denominator;
+            double y = (a * (cx - bx) + b * (ax - cx) + c * (bx - ax)) / denominator;
 
             a = Util.square(bx - cx) + Util.square(by - cy);
             b = Util.square(ax - cx) + Util.square(ay - cy);
             c = Util.square(bx - ax) + Util.square(by - ay);
 
             double area = area(vertices);
-
-            r =  Math.sqrt(a * b * c) / (4 * area);
             
-            return Util.circlesIntersect(x, y, r, vertices.get(p).getX(), vertices.get(p).getY(), 0);
+//            double r =  Math.sqrt(a * b * c) / (4 * area);
+//            return Util.circlesIntersect(x, y, r, vertices.get(p).getX(), vertices.get(p).getY(), 0);
+            double rSquared = (a * b * c) / Util.square(4 * area);
+            x -= vertices.get(p).getX();
+            y -= vertices.get(p).getY();
+            return x * x + y * y < rSquared;
         }
         
         boolean hasCorner(int i)
@@ -121,7 +122,7 @@ class Delaunay
         int c = a.corners[(aI + 1) % 3];
         int d = a.corners[(aI + 2) % 3];
         int p = a.corners[aI];
-        int r = a.corners[bI];
+        int r = b.corners[bI];
         
         return Util.lineSegmentsIntersect(vertices.get(c), vertices.get(d), vertices.get(p), vertices.get(r));
     }
@@ -190,9 +191,9 @@ class Delaunay
             Triangle tri = new Triangle(indices.get(i), indices.get(i + 1), indices.get(i + 2));
             if(tri.area(vertices) < 0) tri.invert();
             tris.add(tri);
-            getFromMap(map, i).add(tri);
-            getFromMap(map, i + 1).add(tri);
-            getFromMap(map, i + 2).add(tri);
+            getFromMap(map, indices.get(i)).add(tri);
+            getFromMap(map, indices.get(i + 1)).add(tri);
+            getFromMap(map, indices.get(i + 2)).add(tri);
         }
         for (Triangle tri : tris) {
             for (int i = 0; i < 3; i++) {
@@ -202,12 +203,30 @@ class Delaunay
                     if(getFromMap(map, tri.corners[j]).contains(neighbor))
                     {
                         tri.neighbors[i] = neighbor;
+                        break;
                     }
                 }
             }
         }
+        
+        //checkNeighbors(tris);
+        
         return tris;
     }
+    
+    private void checkNeighbors(ArrayList<Triangle> tris)
+    {
+        for (Triangle tri : tris) {
+            for (int i = 0; i < 3; i++) {
+                Triangle n = tri.neighbors[i];
+                if(n != null)
+                {
+                    if(n.indexOf(tri) == -1) throw new Error("invalid tris");
+                }
+            }
+        }
+    }
+    
     private ArrayList<Triangle> getFromMap(Dictionary<Integer, ArrayList<Triangle>> map, int key)
     {
         if(map.get(key) == null) map.put(key, new ArrayList<Triangle>());
