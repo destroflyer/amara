@@ -62,8 +62,12 @@ public class MapObstaclesAppState extends BaseDisplayAppState{
             collisionMesh = new CircleMesh((float) shape.getBoundRadius(), 64);
             meshColor = ColorRGBA.Red;
         }
-        Geometry collisionMeshGeometry = new Geometry("", collisionMesh);
-        collisionMeshGeometry.setMaterial(MaterialFactory.generateUnshadedMaterial(meshColor));
+        return generateGeometry(collisionMesh, meshColor);
+    }
+    
+    public static Geometry generateGeometry(Mesh mesh, ColorRGBA color){
+        Geometry collisionMeshGeometry = new Geometry("", mesh);
+        collisionMeshGeometry.setMaterial(MaterialFactory.generateUnshadedMaterial(color));
         collisionMeshGeometry.getMaterial().getAdditionalRenderState().setDepthTest(false);
         collisionMeshGeometry.setUserData("layer", 999);
         return collisionMeshGeometry;
