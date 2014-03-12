@@ -15,6 +15,7 @@ import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.input.controls.MouseAxisTrigger;
+import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
@@ -25,6 +26,7 @@ import amara.Util;
 import amara.engine.JMonkeyUtil;
 import amara.engine.applications.ingame.client.maps.MapTerrain;
 import amara.engine.applications.ingame.client.models.ModelObject;
+import amara.engine.applications.ingame.client.systems.debug.ConnectedPointsMesh;
 import amara.engine.applications.ingame.editor.gui.ScreenController_MapEditor;
 import amara.engine.appstates.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
@@ -47,8 +49,8 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     private Action currentAction = Action.NONE;
     private Action actionBeforeRemove;
     private Vector2f currentHoveredLocation = new Vector2f();
-    private Shape shapeToPlace;
-    private Geometry shapeToPlaceGeometry;
+    private LinkedList<Shape> shapesToPlace = new LinkedList<Shape>();
+    private Geometry shapeToPlacePreviewGeometry;
     private double circleRadius = 3;
     private double circleRadiusStep = 0.2f;
     private LinkedList<Vector2D> customShapePoints = new LinkedList<Vector2D>();
@@ -116,9 +118,9 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
             currentHoveredLocation.set(groundLocation);
             switch(currentAction){
                 case PLACE_HITBOX_CIRCLE:
-                    shapeToPlace.getTransform().setX(groundLocation.getX());
-                    shapeToPlace.getTransform().setY(groundLocation.getY());
-                    shapeToPlaceGeometry.setLocalTranslation(groundLocation.getX(), 0, groundLocation.getY());
+                    shapesToPlace.get(0).getTransform().setX(groundLocation.getX());
+                    shapesToPlace.get(0).getTransform().setY(groundLocation.getY());
+                    shapeToPlacePreviewGeometry.setLocalTranslation(groundLocation.getX(), 0, groundLocation.getY());
                     break;
 
                 case PLACE_VISUAL:
@@ -160,7 +162,7 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
             switch(currentAction){
                 case PLACE_HITBOX_CIRCLE:
                     if(actionName.equals("editor_mouse_click_left") && value){
-                        addCurrentShape();
+                        addCurrentShapes();
                         generateNewShape();
                     }
                     else if(actionName.equals("editor_mouse_wheel_up")){
@@ -187,7 +189,12 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
                         cancelCurrentCustomShape();
                     }
                     else if(actionName.equals("editor_enter") && value){
-                        addCurrentShape();
+                        if(generateCustomShapes()){
+                            addCurrentShapes();
+                        }
+                        else{
+                            cancelCurrentCustomShape();
+                        }
                     }
                     break;
                 
@@ -296,29 +303,44 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     }
     
     private void generateNewShape(){
+        shapesToPlace.clear();
         removeShapeToPlaceGeometry();
         switch(currentAction){
             case PLACE_HITBOX_CIRCLE:
-                shapeToPlace = new Circle(circleRadius);
+                Circle circle = new Circle(circleRadius);
+                shapesToPlace.add(circle);
+                shapeToPlacePreviewGeometry = MapObstaclesAppState.generateGeometry(circle);
                 break;
             
             case PLACE_HITBOX_CUSTOM:
                 Vector2D[] basePoints = Util.toArray(customShapePoints, Vector2D.class);
-                try{
-                    shapeToPlace = new SimpleConvex(basePoints);
-                }catch(Error error){
-                    customShapePoints.removeLast();
-                }
+                ConnectedPointsMesh connectedPointsMesh = new ConnectedPointsMesh(basePoints);
+                shapeToPlacePreviewGeometry = MapObstaclesAppState.generateGeometry(connectedPointsMesh, ColorRGBA.Blue);
                 break;
         }
-        shapeToPlaceGeometry = MapObstaclesAppState.generateGeometry(shapeToPlace);
         Node obstaclesNode = getAppState(MapObstaclesAppState.class).getNode();
-        obstaclesNode.attachChild(shapeToPlaceGeometry);
+        obstaclesNode.attachChild(shapeToPlacePreviewGeometry);
     }
     
-    private void addCurrentShape(){
+    private boolean generateCustomShapes(){
+        Triangulator triangulator = new Triangulator();
+        if((!triangulator.isConvex(customShapePoints)) && triangulator.canTriangulate(customShapePoints)){
+            shapesToPlace.addAll(triangulator.createDelaunayTrisFromPoly(customShapePoints));
+        }
+        else{
+            try{
+                Vector2D[] basePoints = Util.toArray(customShapePoints, Vector2D.class);
+                shapesToPlace.add(new SimpleConvex(basePoints));
+            }catch(Error error){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private void addCurrentShapes(){
         ArrayList<Shape> obstacles = getAppState(MapAppState.class).getMap().getPhysicsInformation().getObstacles();
-        obstacles.add(shapeToPlace);
+        obstacles.addAll(shapesToPlace);
         getAppState(MapObstaclesAppState.class).update();
         cancelCurrentCustomShape();
     }
@@ -329,9 +351,10 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     }
     
     private void removeShapeToPlaceGeometry(){
-        if(shapeToPlaceGeometry != null){
+        if(shapeToPlacePreviewGeometry != null){
             Node obstaclesNode = getAppState(MapObstaclesAppState.class).getNode();
-            obstaclesNode.detachChild(shapeToPlaceGeometry);
+            obstaclesNode.detachChild(shapeToPlacePreviewGeometry);
+            shapeToPlacePreviewGeometry = null;
         }
     }
     
