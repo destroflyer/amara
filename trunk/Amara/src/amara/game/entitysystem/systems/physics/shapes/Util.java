@@ -144,6 +144,15 @@ class Util {
 //        return calc;
 //    }
     
+    public static boolean lineSegmentsIntersect(Vector2D a, Vector2D b, Vector2D c, Vector2D d)
+    {
+        return differentSides(a, b, c, d) && differentSides(c, d, a, b);
+    }
+    public static boolean differentSides(Vector2D a, Vector2D b, Vector2D c, Vector2D d)
+    {
+        return getLineSide(a, b, d) * getLineSide(a, b, c) < 0;
+    }
+    
     // a + s * av = b + t * bv
     //returns s
     public static double lineIntersection(double ax, double ay, double avx, double avy, double bx, double by, double bvx, double bvy) {
@@ -236,6 +245,29 @@ class Util {
     }
     public static long singleBit(int i) {
         return 1 << i;
+    }
+    
+    public static double square(double value)
+    {
+        return value * value;
+    }
+    
+    public static double calcArea(Vector2D... points)
+    {
+        double doubledArea = 0;
+        int j;
+        for(int i = 0; i < points.length; i++) {
+            j = (i + 1) % points.length;
+            doubledArea += (points[i].getX() - points[j].getX()) * (points[i].getY() + points[j].getY());
+        }
+        return doubledArea / 2;
+    }
+    
+    public static boolean circlesIntersect(double x1, double y1, double r1, double x2, double y2, double r2) {
+        x1 -= x2;
+        y1 -= y2;
+        r1 += r2;
+        return r1 * r1 > x1 * x1 + y1 * y1;
     }
     
 //    public final static long[] singleBit = calcSingle();
