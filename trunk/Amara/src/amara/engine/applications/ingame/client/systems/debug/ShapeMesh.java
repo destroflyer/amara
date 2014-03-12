@@ -5,6 +5,6 @@ import amara.game.entitysystem.systems.physics.shapes.*;
 public class ShapeMesh extends ConnectedPointsMesh{
 
     public ShapeMesh(SimpleConvex simpleConvex){
-        super((float) simpleConvex.getX(), (float) simpleConvex.getY(), simpleConvex.getBase());
+        super((float) simpleConvex.getX(), (float) simpleConvex.getY(), simpleConvex.getPoints());
     }
 }
