@@ -31,6 +31,7 @@ import amara.engine.applications.ingame.editor.gui.ScreenController_MapEditor;
 import amara.engine.appstates.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.maps.*;
+import amara.game.maps.visuals.*;
 
 /**
  *
@@ -201,8 +202,8 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
                 case PLACE_VISUAL:
                     if(actionName.equals("editor_mouse_click_left") && value){
                         Vector3f position = new Vector3f(currentHoveredLocation.getX(), 0, currentHoveredLocation.getY());
-                        MapVisual mapVisual = new MapVisual(visualsModelSkinPaths[visualModelSkinPathIndex], position, visualDirection, visualScale);
-                        map.getVisuals().addVisual(mapVisual);
+                        ModelVisual modelVisual = new ModelVisual(visualsModelSkinPaths[visualModelSkinPathIndex], position, visualDirection, visualScale);
+                        map.getVisuals().addVisual(modelVisual);
                         mapAppState.updateVisuals();
                         generateNewModelObject();
                     }

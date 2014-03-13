@@ -39,6 +39,7 @@ public class IngameClientApplication extends DisplayApplication{
             stateManager.attach(new EventManagerAppState());
             stateManager.attach(new AudioAppState());
             stateManager.attach(new LightAppState());
+            stateManager.attach(new WaterAppState());
             stateManager.attach(new PostFilterAppState());
             stateManager.attach(new IngameCameraAppState());
             stateManager.getState(IngameCameraAppState.class).setEnabled(false);

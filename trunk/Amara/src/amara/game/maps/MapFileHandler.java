@@ -13,6 +13,8 @@ import com.jme3.math.Vector3f;
 import amara.Util;
 import amara.engine.files.FileManager;
 import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.game.maps.visuals.*;
+import com.jme3.math.Vector2f;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -64,12 +66,24 @@ public class MapFileHandler{
             root.addContent(elementPhysics);
             Element elementVisuals = new Element("visuals");
             for(MapVisual mapVisual : map.getVisuals().getMapVisuals()){
-                Element elementVisual = new Element("visuals");
-                elementVisual.setAttribute("modelSkinPath", mapVisual.getModelSkinPath());
-                elementVisual.setAttribute("position", generateVector3fText(mapVisual.getPosition()));
-                elementVisual.setAttribute("direction", generateVector3fText(mapVisual.getDirection()));
-                elementVisual.setAttribute("scale", "" + mapVisual.getScale());
-                elementVisuals.addContent(elementVisual);
+                Element elementVisual = null;
+                if(mapVisual instanceof ModelVisual){
+                    ModelVisual modelVisual = (ModelVisual) mapVisual;
+                    elementVisual = new Element("model");
+                    elementVisual.setAttribute("modelSkinPath", modelVisual.getModelSkinPath());
+                    elementVisual.setAttribute("position", generateVectorText(modelVisual.getPosition()));
+                    elementVisual.setAttribute("direction", generateVectorText(modelVisual.getDirection()));
+                    elementVisual.setAttribute("scale", "" + modelVisual.getScale());
+                }
+                else if(mapVisual instanceof WaterVisual){
+                    WaterVisual waterVisual = (WaterVisual) mapVisual;
+                    elementVisual = new Element("water");
+                    elementVisual.setAttribute("position", generateVectorText(waterVisual.getPosition()));
+                    elementVisual.setAttribute("size", generateVectorText(waterVisual.getSize()));
+                }
+                if(elementVisual != null){
+                    elementVisuals.addContent(elementVisual);
+                }
             }
             root.addContent(elementVisuals);
             FileManager.putFileContent(file.getPath(), new XMLOutputter().outputString(document));
@@ -111,31 +125,28 @@ public class MapFileHandler{
             List elementVisualsChildren = elementVisuals.getChildren();
             for(int i=0;i<elementVisualsChildren.size();i++){
                 Element elementVisual = (Element) elementVisualsChildren.get(i);
-                String modelSkinPath = elementVisual.getAttributeValue("modelSkinPath");
-                Vector3f position = generateVector3f(elementVisual.getAttributeValue("position"));
-                Vector3f direction = generateVector3f(elementVisual.getAttributeValue("direction"));
-                float scale = elementVisual.getAttribute("scale").getFloatValue();
-                MapVisual mapVisual = new MapVisual(modelSkinPath, position, direction, scale);
-                map.getVisuals().addVisual(mapVisual);
+                MapVisual mapVisual = null;
+                if(elementVisual.getName().equals("model")){
+                    String modelSkinPath = elementVisual.getAttributeValue("modelSkinPath");
+                    Vector3f position = generateVector3f(elementVisual.getAttributeValue("position"));
+                    Vector3f direction = generateVector3f(elementVisual.getAttributeValue("direction"));
+                    float scale = elementVisual.getAttribute("scale").getFloatValue();
+                    mapVisual = new ModelVisual(modelSkinPath, position, direction, scale);
+                }
+                else if(elementVisual.getName().equals("water")){
+                    Vector3f position = generateVector3f(elementVisual.getAttributeValue("position"));
+                    Vector2f size = generateVector2f(elementVisual.getAttributeValue("size"));
+                    mapVisual = new WaterVisual(position, size);
+                }
+                if(mapVisual != null){
+                    map.getVisuals().addVisual(mapVisual);
+                }
             }
             return map;
         }catch(Exception ex){
             System.out.println("Error while loading the map: " + ex.toString());
         }
         return null;
-    }
-    
-    private static String generateVector3fText(Vector3f vector3f){
-        return (vector3f.getX() + VECTOR_COORDINATES_SEPARATOR + vector3f.getY() + VECTOR_COORDINATES_SEPARATOR + vector3f.getZ());
-    }
-    
-    private static String generateVector2DText(Vector2D vector2D){
-        return (vector2D.getX() + VECTOR_COORDINATES_SEPARATOR + vector2D.getY());
-    }
-    
-    private static Vector3f generateVector3f(String text){
-        float[] coordinates = Util.parseToFloatArray(text.split(VECTOR_COORDINATES_SEPARATOR));
-        return new Vector3f(coordinates[0], coordinates[1], coordinates[2]);
     }
     
     private static Vector2D generateVector2D(String text){
@@ -156,7 +167,7 @@ public class MapFileHandler{
             Element elementBase = new Element("base");
             for(Vector2D point : simpleConvex.getBase()){
                 Element elementPoint = new Element("point");
-                elementPoint.setText(generateVector2DText(point));
+                elementPoint.setText(generateVectorText(point));
                 elementBase.addContent(elementPoint);
             }
             element.addContent(elementBase);
@@ -192,5 +203,27 @@ public class MapFileHandler{
         shape.getTransform().setRadian(Double.parseDouble(elementTransform.getAttributeValue("direction")));
         shape.getTransform().setScale(Double.parseDouble(elementTransform.getAttributeValue("scale")));
         return shape;
+    }
+    
+    private static String generateVectorText(Vector2f vector2f){
+        return (vector2f.getX() + VECTOR_COORDINATES_SEPARATOR + vector2f.getY());
+    }
+    
+    private static String generateVectorText(Vector3f vector3f){
+        return (vector3f.getX() + VECTOR_COORDINATES_SEPARATOR + vector3f.getY() + VECTOR_COORDINATES_SEPARATOR + vector3f.getZ());
+    }
+    
+    private static String generateVectorText(Vector2D vector2D){
+        return (vector2D.getX() + VECTOR_COORDINATES_SEPARATOR + vector2D.getY());
+    }
+    
+    private static Vector2f generateVector2f(String text){
+        float[] coordinates = Util.parseToFloatArray(text.split(VECTOR_COORDINATES_SEPARATOR));
+        return new Vector2f(coordinates[0], coordinates[1]);
+    }
+    
+    private static Vector3f generateVector3f(String text){
+        float[] coordinates = Util.parseToFloatArray(text.split(VECTOR_COORDINATES_SEPARATOR));
+        return new Vector3f(coordinates[0], coordinates[1], coordinates[2]);
     }
 }

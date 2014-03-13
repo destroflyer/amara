@@ -8,13 +8,20 @@ import java.util.HashMap;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.collision.CollisionResult;
+import com.jme3.math.FastMath;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.BatchNode;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.shape.Quad;
+import com.jme3.util.SkyFactory;
 import com.jme3.scene.Node;
 import amara.engine.JMonkeyUtil;
 import amara.engine.applications.ingame.client.maps.MapTerrain;
 import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.game.maps.*;
+import amara.game.maps.visuals.*;
 
 /**
  *
@@ -50,17 +57,35 @@ public class MapAppState extends BaseDisplayAppState{
     public void updateVisuals(){
         visualsNode.detachAllChildren();
         modelObjectsVisuals.clear();
+        BatchNode modelsNode = new BatchNode();
         MapVisuals visuals = map.getVisuals();
         for(MapVisual visual : visuals.getMapVisuals()){
-            ModelObject modelObject = new ModelObject(mainApplication, "/" + visual.getModelSkinPath());
-            Vector3f translation = visual.getPosition().clone();
-            translation.setY(mapTerrain.getHeight(translation.getX(), translation.getZ()));
-            modelObject.setLocalTranslation(translation);
-            JMonkeyUtil.setLocalRotation(modelObject, visual.getDirection());
-            modelObject.setLocalScale(visual.getScale());
-            visualsNode.attachChild(modelObject);
-            modelObjectsVisuals.put(modelObject, visual);
+            if(visual instanceof ModelVisual){
+                ModelVisual modelVisual = (ModelVisual) visual;
+                ModelObject modelObject = new ModelObject(mainApplication, "/" + modelVisual.getModelSkinPath());
+                Vector3f translation = modelVisual.getPosition().clone();
+                translation.setY(mapTerrain.getHeight(translation.getX(), translation.getZ()));
+                modelObject.setLocalTranslation(translation);
+                JMonkeyUtil.setLocalRotation(modelObject, modelVisual.getDirection());
+                modelObject.setLocalScale(modelVisual.getScale());
+                modelsNode.attachChild(modelObject);
+                modelObjectsVisuals.put(modelObject, modelVisual);
+            }
+            else if(visual instanceof WaterVisual){
+                WaterVisual waterVisual = (WaterVisual) visual;
+                Quad quad = new Quad(waterVisual.getSize().getX(), waterVisual.getSize().getY());
+                quad.scaleTextureCoordinates(new Vector2f((quad.getWidth() / 20), (quad.getHeight() / 20)));
+                Geometry waterPlane = new Geometry("", quad);
+                waterPlane.setLocalRotation(new Quaternion().fromAngleAxis(-FastMath.HALF_PI, Vector3f.UNIT_X));
+                waterPlane.setMaterial(getAppState(WaterAppState.class).getMaterial());
+                float z = (waterVisual.getPosition().getZ() + waterVisual.getSize().getY());
+                waterPlane.setLocalTranslation(waterVisual.getPosition().getX(), waterVisual.getPosition().getY(), z);
+                visualsNode.attachChild(waterPlane);
+            }
         }
+        modelsNode.batch();
+        visualsNode.attachChild(modelsNode);
+        visualsNode.attachChild(SkyFactory.createSky(mainApplication.getAssetManager(), "Textures/skies/default.jpg", true));
     }
     
     public Vector2f getCursorHoveredGroundLocation(){
