@@ -26,6 +26,7 @@ public class MapEditorApplication extends DisplayApplication{
         stateManager.attach(new NiftyAppState_MapEditor());
         stateManager.attach(new AudioAppState());
         stateManager.attach(new LightAppState());
+        stateManager.attach(new WaterAppState());
         stateManager.attach(new PostFilterAppState());
         stateManager.attach(new IngameCameraAppState());
         stateManager.attach(new MapAppState(MapFileHandler.load("empty")));

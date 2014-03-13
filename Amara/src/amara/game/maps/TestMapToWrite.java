@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.jme3.math.Vector3f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.game.maps.visuals.*;
 
 /**
  *
@@ -26,8 +27,8 @@ public class TestMapToWrite extends Map{
         physicsInformation = new MapPhysicsInformation(100, 100, obstacles);
         for(int x=0;x<10;x++){
             for(int y=0;y<5;y++){
-                visuals.addVisual(new MapVisual("Models/tree/skin.xml", new Vector3f(50 + x*3, 2, 10 + y*3), new Vector3f(0, 0, -1), 1));
-                visuals.addVisual(new MapVisual("Models/tree_2/skin.xml", new Vector3f(50 + x*3, 2, 30 + y*3), new Vector3f(0, 0, -1), 1));
+                visuals.addVisual(new ModelVisual("Models/tree/skin.xml", new Vector3f(50 + x*3, 2, 10 + y*3), new Vector3f(0, 0, -1), 1));
+                visuals.addVisual(new ModelVisual("Models/tree_2/skin.xml", new Vector3f(50 + x*3, 2, 30 + y*3), new Vector3f(0, 0, -1), 1));
             }
         }
     }
