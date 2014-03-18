@@ -30,7 +30,7 @@ public class PanProfile extends javax.swing.JPanel{
 
     public PanProfile(){
         initComponents();
-        btnAvatar.setIcon(Util.getResourceImageIcon("/Interface/client/unknown.jpg", -1, 90));
+        btnAvatar.setIcon(Util.getResourceImageIcon("/Interface/client/unknown.jpg", 100, 100));
         lblSearchLoader.setIcon(new ImageIcon(Util.getResourceURL("/Interface/client/loaders/user_search.gif")));
         lblSearchLoader.setVisible(false);
     }
