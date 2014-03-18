@@ -18,12 +18,12 @@ public class Message_LoginResult extends AbstractMessage{
         
     }
     
-    public Message_LoginResult(boolean isSuccessfull){
-        this.isSuccessfull = isSuccessfull;
+    public Message_LoginResult(boolean wasSuccessfull){
+        this.wasSuccessfull = wasSuccessfull;
     }
-    private boolean isSuccessfull;
+    private boolean wasSuccessfull;
 
-    public boolean isSuccessfull(){
-        return isSuccessfull;
+    public boolean wasSuccessfull(){
+        return wasSuccessfull;
     }
 }

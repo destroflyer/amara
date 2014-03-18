@@ -15,21 +15,27 @@ public class MasterserverClientApplication extends HeadlessApplication{
     public MasterserverClientApplication(HostInformation hostInformation, AuthentificationInformation authentificationInformation){
         this.hostInformation = hostInformation;
         this.authentificationInformation = authentificationInformation;
+        LoginAppState loginAppState = new LoginAppState(authentificationInformation);
         try{
             stateManager.attach(new NetworkClientHeadlessAppState(hostInformation.getHost(), hostInformation.getPort()));
+            stateManager.attach(new PlayerProfilesAppState());
         }catch(ServerConnectionException ex){
             System.out.println(ex.getMessage());
-            System.exit(0);
+            loginAppState.setResult(LoginAppState.LoginResult.NO_CONNECTION_TO_MASTERSERVER);
         }catch(ServerConnectionTimeoutException ex){
             System.out.println(ex.getMessage());
-            System.exit(0);
+            loginAppState.setResult(LoginAppState.LoginResult.NO_CONNECTION_TO_MASTERSERVER);
         }
-        stateManager.attach(new LoginAppState(authentificationInformation));
+        stateManager.attach(loginAppState);
     }
     private HostInformation hostInformation;
     private AuthentificationInformation authentificationInformation;
 
     public HostInformation getHostInformation(){
         return hostInformation;
+    }
+
+    public AuthentificationInformation getAuthentificationInformation(){
+        return authentificationInformation;
     }
 }

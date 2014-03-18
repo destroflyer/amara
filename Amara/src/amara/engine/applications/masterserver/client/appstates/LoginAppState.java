@@ -19,14 +19,31 @@ public class LoginAppState extends ClientBaseAppState{
 
     public LoginAppState(AuthentificationInformation authentificationInformation){
         this.authentificationInformation = authentificationInformation;
-    }    
+    }
+    public enum LoginResult{
+        PENDING,
+        NO_CONNECTION_TO_MASTERSERVER,
+        FAILED,
+        SUCCESSFUL
+    }
     private AuthentificationInformation authentificationInformation;
+    private LoginResult result = LoginResult.PENDING;
     
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
-        NetworkClient networkClient = getAppState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.addMessageBackend(new LoginResultBackend(mainApplication));
-        networkClient.sendMessage(new Message_Login(authentificationInformation));
+        if(result != LoginResult.NO_CONNECTION_TO_MASTERSERVER){
+            NetworkClient networkClient = getAppState(NetworkClientHeadlessAppState.class).getNetworkClient();
+            networkClient.addMessageBackend(new LoginResultBackend(mainApplication, this));
+            networkClient.sendMessage(new Message_Login(authentificationInformation));
+        }
+    }
+
+    public void setResult(LoginResult result){
+        this.result = result;
+    }
+
+    public LoginResult getResult(){
+        return result;
     }
 }
