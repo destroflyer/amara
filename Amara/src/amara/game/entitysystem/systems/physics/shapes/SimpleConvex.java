@@ -40,6 +40,7 @@ public class SimpleConvex extends Shape {
             if(base[i].equals(base[j])) throw new Error("Point must not be connected to itself.");
         }
         if(!isConvex(base)) throw new Error("Outline is not convex.");
+        if(isSelfIntersecting(base)) throw new Error("Outline must not intersect itself.");
         if(isClockwise(base)) {
             revert();
         }
@@ -89,6 +90,14 @@ public class SimpleConvex extends Shape {
             doubledArea += (points[i].getX() - points[j].getX()) * (points[i].getY() + points[j].getY());
         }
         return doubledArea / 2;
+    }
+    private static boolean isSelfIntersecting(Vector2D[] points) {
+        for (int i = 1; i < points.length; i++) {
+            for (int j = i + 2; j < points.length; j++) {
+                if(Util.lineSegmentsIntersect(points[i - 1], points[i], points[j - 1], points[j])) return true;
+            }
+        }
+        return false;
     }
 
     @Override
