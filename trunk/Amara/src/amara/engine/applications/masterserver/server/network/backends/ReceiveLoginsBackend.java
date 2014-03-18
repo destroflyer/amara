@@ -5,6 +5,7 @@
 package amara.engine.applications.masterserver.server.network.backends;
 
 import com.jme3.network.Message;
+import amara.engine.applications.masterserver.server.appstates.DatabaseAppState;
 import amara.engine.applications.masterserver.server.protocol.AuthentificationInformation;
 import amara.engine.network.*;
 import amara.engine.network.messages.protocol.*;
@@ -16,9 +17,11 @@ import amara.game.players.*;
  */
 public class ReceiveLoginsBackend implements MessageBackend{
 
-    public ReceiveLoginsBackend(ConnectedPlayers connectedPlayers){
+    public ReceiveLoginsBackend(DatabaseAppState databaseAppState, ConnectedPlayers connectedPlayers){
+        this.databaseAppState = databaseAppState;
         this.connectedPlayers = connectedPlayers;
     }
+    private DatabaseAppState databaseAppState;
     private ConnectedPlayers connectedPlayers;
     
     @Override
@@ -26,11 +29,15 @@ public class ReceiveLoginsBackend implements MessageBackend{
         if(receivedMessage instanceof Message_Login){
             Message_Login message = (Message_Login) receivedMessage;
             AuthentificationInformation authentificationInformation = message.getAuthentificationInformation();
-            //For testing purposes
-            int playerID = Integer.parseInt(authentificationInformation.getLogin());
-            Player player = new Player(playerID, authentificationInformation.getLogin());
-            connectedPlayers.login(messageResponse.getClientID(), player);
-            messageResponse.addAnswerMessage(new Message_LoginResult(true));
+            boolean wasSuccessful = false;
+            int playerID = databaseAppState.getInteger("SELECT id FROM users WHERE login = '" + authentificationInformation.getLogin() + "'");
+            if(playerID != 0){
+                Player player = new Player(playerID, authentificationInformation.getLogin());
+                connectedPlayers.login(messageResponse.getClientID(), player);
+                wasSuccessful = true;
+                System.out.println("Login '" + player.getLogin() + "' (#" + player.getID() + ")");
+            }
+            messageResponse.addAnswerMessage(new Message_LoginResult(wasSuccessful));
         }
     }
 }

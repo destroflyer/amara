@@ -15,4 +15,8 @@ public abstract class HeadlessAppState{
     public void update(float lastTimePerFrame){
         
     }
+    
+    public void cleanup(){
+        
+    }
 }

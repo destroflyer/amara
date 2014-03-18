@@ -4,11 +4,8 @@
  */
 package amara.launcher.server;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.UIManager;
 import amara.engine.applications.masterserver.server.MasterserverServerApplication;
-import amara.engine.network.MessagesSerializer;
+import amara.launcher.FrameUtil;
 
 /**
  *
@@ -18,10 +15,11 @@ public class ServerLauncher extends javax.swing.JFrame{
 
     public ServerLauncher(){
         initComponents();
-        MessagesSerializer.registerClasses();
-        MasterserverServerApplication masterServer = new MasterserverServerApplication(33900);
+        FrameUtil.initFrameSpecials(this);
+        masterServer = new MasterserverServerApplication(33900);
         masterServer.start();
     }
+    private MasterserverServerApplication masterServer;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,7 +35,8 @@ public class ServerLauncher extends javax.swing.JFrame{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Amara - Server");
 
-        jLabel1.setText("Clients: ?");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Masterserver");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -53,18 +52,14 @@ public class ServerLauncher extends javax.swing.JFrame{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     public static void main(String args[]){
-        Logger.getLogger("").setLevel(Level.SEVERE);
-        try{
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        }catch(Exception ex){
-        }
+        FrameUtil.initProgramProperties();
         java.awt.EventQueue.invokeLater(new Runnable(){
             
             @Override

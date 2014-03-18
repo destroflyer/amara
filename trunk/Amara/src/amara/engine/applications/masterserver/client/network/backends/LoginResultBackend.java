@@ -6,7 +6,7 @@ package amara.engine.applications.masterserver.client.network.backends;
 
 import com.jme3.network.Message;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
-import amara.engine.applications.masterserver.client.appstates.CurrentGameAppState;
+import amara.engine.applications.masterserver.client.appstates.*;
 import amara.engine.network.*;
 import amara.engine.network.messages.protocol.Message_LoginResult;
 
@@ -16,21 +16,23 @@ import amara.engine.network.messages.protocol.Message_LoginResult;
  */
 public class LoginResultBackend implements MessageBackend{
 
-    public LoginResultBackend(MasterserverClientApplication mainApplication){
+    public LoginResultBackend(MasterserverClientApplication mainApplication, LoginAppState loginAppState){
         this.mainApplication = mainApplication;
+        this.loginAppState = loginAppState;
     }
     private MasterserverClientApplication mainApplication;
+    private LoginAppState loginAppState;
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_LoginResult){
             Message_LoginResult message = (Message_LoginResult) receivedMessage;
-            if(message.isSuccessfull()){
+            if(message.wasSuccessfull()){
+                loginAppState.setResult(LoginAppState.LoginResult.SUCCESSFUL);
                 mainApplication.getStateManager().attach(new CurrentGameAppState());
             }
             else{
-                System.out.println("Login not successfull.");
-                System.exit(0);
+                loginAppState.setResult(LoginAppState.LoginResult.FAILED);
             }
         }
     }

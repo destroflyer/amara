@@ -44,6 +44,7 @@ import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.synchronizing.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.games.PlayerData;
+import amara.launcher.client.protocol.*;
 
 /**
  *
@@ -53,9 +54,14 @@ public class MessagesSerializer{
     
     public static void registerClasses(){
         Serializer.registerClasses(
+            Message_EditUserMeta.class,
+            Message_GetPlayerProfileData.class,
             Message_Login.class,
                 AuthentificationInformation.class,
             Message_LoginResult.class,
+            Message_PlayerProfileData.class,
+                PlayerProfileData.class,
+            Message_PlayerProfileDataNotExistant.class,
             
             Message_StartGame.class,
                 PlayerData.class,
