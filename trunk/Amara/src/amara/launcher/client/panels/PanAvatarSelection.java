@@ -38,6 +38,8 @@ public class PanAvatarSelection extends javax.swing.JPanel{
         "mana_white",
         "mana_black",
         "ether_wolf",
+        "ether_anna",
+        "ether_demon1",
         "ether_woman"
     };
     private PanProfile panProfile;
