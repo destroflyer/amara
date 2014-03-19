@@ -16,6 +16,7 @@ import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.visuals.*;
+import amara.game.entitysystem.systems.spells.*;
 
 /**
  *
@@ -51,10 +52,10 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             else if(command instanceof AutoAttackCommand){
                 AutoAttackCommand autoAttackCommand = (AutoAttackCommand) command;
                 if(entityWorld.hasComponent(selectedUnit, AutoAttackComponent.class)){
-                    if(entityWorld.hasComponent(autoAttackCommand.getTargetEntityID(), IsTargetableComponent.class)){
+                    if(PerformAutoAttacksSystem.isAttackable(entityWorld, selectedUnit, autoAttackCommand.getTargetEntity())){
                         entityWorld.removeComponent(selectedUnit, MovementTargetComponent.class);
                         entityWorld.removeComponent(selectedUnit, MovementSpeedComponent.class);
-                        entityWorld.setComponent(selectedUnit, new AutoAttackTargetComponent(autoAttackCommand.getTargetEntityID()));
+                        entityWorld.setComponent(selectedUnit, new AutoAttackTargetComponent(autoAttackCommand.getTargetEntity()));
                     }
                 }
             }
