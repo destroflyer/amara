@@ -36,15 +36,19 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll(ActiveBuffComponent.class))
         {
-            int targetEntityID = observer.getRemoved().getComponent(entity, ActiveBuffComponent.class).getTargetEntityID();
-            removeVisualAttachment(targetEntityID);
+            ActiveBuffComponent activeBuffComponent = observer.getRemoved().getComponent(entity, ActiveBuffComponent.class);
+            if(shouldBeVisualized(entityWorld, activeBuffComponent)){
+                int targetEntityID = observer.getRemoved().getComponent(entity, ActiveBuffComponent.class).getTargetEntityID();
+                removeVisualAttachment(targetEntityID);
+            }
         }
         observer.reset();
     }
     
-    private void updateVisualAttachment(EntityWorld entityWorld, int buffStatusEntityID){
-        if(shouldBeVisualized(entityWorld, buffStatusEntityID)){
-            int targetEntityID = entityWorld.getComponent(buffStatusEntityID, ActiveBuffComponent.class).getTargetEntityID();
+    private void updateVisualAttachment(EntityWorld entityWorld, int buffStatusEntity){
+        ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
+        if(shouldBeVisualized(entityWorld, activeBuffComponent)){
+            int targetEntityID = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getTargetEntityID();
             removeVisualAttachment(targetEntityID);
             Node node = entitySceneMap.requestNode(targetEntityID);
             Spatial visualAttachment = createBuffVisualisation(entityWorld, targetEntityID);
@@ -55,8 +59,7 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
         }
     }
     
-    private boolean shouldBeVisualized(EntityWorld entityWorld, int buffStatusEntityID){
-        ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntityID, ActiveBuffComponent.class);
+    private boolean shouldBeVisualized(EntityWorld entityWorld, ActiveBuffComponent activeBuffComponent){
         BuffVisualisationComponent buffVisualisationComponent = entityWorld.getComponent(activeBuffComponent.getBuffEntityID(), BuffVisualisationComponent.class);
         return ((buffVisualisationComponent != null) && (buffVisualisationComponent.getName().equals(visualisationName)));
     }
