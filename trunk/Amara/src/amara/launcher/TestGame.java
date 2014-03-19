@@ -30,7 +30,7 @@ public class TestGame{
         masterClient.start();
         //Start game
         NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.sendMessage(new Message_StartGame("destroforest", new PlayerData[]{
+        networkClient.sendMessage(new Message_StartGame("testmap", new PlayerData[]{
             new PlayerData(1, "minion")
         }));
     }

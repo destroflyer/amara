@@ -17,12 +17,12 @@ public class AutoAttackCommand extends Command{
         
     }
     
-    public AutoAttackCommand(int targetEntityID){
-        this.targetEntityID = targetEntityID;
+    public AutoAttackCommand(int targetEntity){
+        this.targetEntity = targetEntity;
     }
-    private int targetEntityID;
+    private int targetEntity;
 
-    public int getTargetEntityID(){
-        return targetEntityID;
+    public int getTargetEntity(){
+        return targetEntity;
     }
 }

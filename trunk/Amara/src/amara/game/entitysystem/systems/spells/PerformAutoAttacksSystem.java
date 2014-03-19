@@ -24,7 +24,7 @@ public class PerformAutoAttacksSystem implements EntitySystem{
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(AutoAttackTargetComponent.class)))
         {
             int targetEntity = entityWrapper.getComponent(AutoAttackTargetComponent.class).getTargetEntityID();
-            if(entityWorld.hasComponent(targetEntity, IsTargetableComponent.class)){
+            if(isAttackable(entityWorld, entityWrapper.getId(), targetEntity)){
                 int autoAttackEntity = entityWrapper.getComponent(AutoAttackComponent.class).getAutoAttackEntityID();
                 if(!entityWorld.hasComponent(autoAttackEntity, RemainingCooldownComponent.class)){
                     CastSingleTargetSpellSystem.castSingleTargetSpell(entityWorld, entityWrapper.getId(), autoAttackEntity, targetEntity);
@@ -40,5 +40,17 @@ public class PerformAutoAttacksSystem implements EntitySystem{
                 entityWrapper.removeComponent(AutoAttackTargetComponent.class);
             }
         }
+    }
+    
+    public static boolean isAttackable(EntityWorld entityWorld, int attackingEntity, int targetEntity){
+        if(entityWorld.hasComponent(targetEntity, IsTargetableComponent.class)){
+            TeamComponent teamComponent1 = entityWorld.getComponent(attackingEntity, TeamComponent.class);
+            TeamComponent teamComponent2 = entityWorld.getComponent(targetEntity, TeamComponent.class);
+            if((teamComponent1 == null) || (teamComponent2 == null)){
+                return true;
+            }
+            return (teamComponent1.getTeamEntityID() != teamComponent2.getTeamEntityID());
+        }
+        return false;
     }
 }
