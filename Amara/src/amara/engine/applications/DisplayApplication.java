@@ -9,6 +9,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Node;
 import com.jme3.system.AppSettings;
+import amara.GameInfo;
 import amara.engine.materials.MaterialFactory;
 import amara.engine.applications.ingame.client.*;
 
@@ -19,7 +20,7 @@ public class DisplayApplication extends SimpleApplication{
 
     public DisplayApplication(){
         settings = new AppSettings(true);
-        settings.setTitle("Amara");
+        settings.setTitle(GameInfo.NAME);
         settings.setWidth(1280);
         settings.setHeight(720);
         settings.setFrameRate(60);

@@ -2,12 +2,14 @@ package amara.engine.applications.ingame.client;
 
 import com.jme3.math.Vector3f;
 import com.jme3.system.AppSettings;
+import amara.GameInfo;
 import amara.engine.applications.DisplayApplication;
 import amara.engine.applications.ingame.client.appstates.*;
 import amara.engine.applications.ingame.client.network.backends.*;
 import amara.engine.appstates.*;
 import amara.engine.network.*;
 import amara.engine.network.exceptions.*;
+import amara.engine.settings.Settings;
 
 /**
  * @author Carl
@@ -17,15 +19,31 @@ public class IngameClientApplication extends DisplayApplication{
     public IngameClientApplication(HostInformation hostInformation, int authentificationKey){
         this.hostInformation = hostInformation;
         this.authentificationKey = authentificationKey;
-        settings = new AppSettings(true);
-        settings.setTitle("Amara");
-        settings.setWidth(1280);
-        settings.setHeight(720);
-        settings.setFrameRate(60);
-        setPauseOnLostFocus(false);
+        loadSettings();
     }
     private HostInformation hostInformation;
     private int authentificationKey;
+    
+    private void loadSettings(){
+        settings = new AppSettings(true);
+        if(Settings.getBoolean("fullscreen")){
+            settings.setWidth(-1);
+            settings.setHeight(-1);
+            settings.setFullscreen(true);
+        }
+        else{
+            settings.setWidth(Settings.getInt("resolution_width"));
+            settings.setHeight(Settings.getInt("resolution_height"));
+        }
+        settings.setTitle(GameInfo.getClientTitle());
+        settings.setIcons(GameInfo.ICONS);
+        settings.setFrameRate(Settings.getInt("frame_rate"));
+        settings.setSamples(Settings.getInt("antialiasing"));
+        settings.setVSync(Settings.getBoolean("vsync"));
+        setShowSettings(false);
+        setPauseOnLostFocus(false);
+        setDisplayStatView(false);
+    }
 
     @Override
     public void simpleInitApp(){
