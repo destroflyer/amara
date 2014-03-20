@@ -9,6 +9,7 @@ import com.jme3.audio.AudioNode;
 import com.jme3.scene.Node;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import amara.engine.settings.Settings;
 
 /**
  *
@@ -16,8 +17,6 @@ import com.jme3.app.state.AppStateManager;
  */
 public class AudioAppState extends BaseDisplayAppState{
 
-    private final static float VOLUME_MUSIC = 0.5f;
-    private final static float VOLUME_SOUND = 0.3f;
     private Node audioNode = new Node("audio_manager_node");
     private AudioNode backgroundMusicNode;
     private String currentBackgroundMusicFilePath;
@@ -35,7 +34,7 @@ public class AudioAppState extends BaseDisplayAppState{
             backgroundMusicNode = new AudioNode(mainApplication.getAssetManager(), filePath);
             backgroundMusicNode.setPositional(false);
             backgroundMusicNode.setLooping(true);
-            backgroundMusicNode.setVolume(VOLUME_MUSIC);
+            backgroundMusicNode.setVolume(Settings.getFloat("audio_volume_music"));
             audioNode.attachChild(backgroundMusicNode);
             backgroundMusicNode.play();
             currentBackgroundMusicFilePath = filePath;
@@ -61,7 +60,7 @@ public class AudioAppState extends BaseDisplayAppState{
             soundNode = new AudioNode(mainApplication.getAssetManager(), filePath);
             soundNode.setPositional(false);
             soundNode.setLooping(false);
-            soundNode.setVolume(VOLUME_SOUND);
+            soundNode.setVolume(Settings.getFloat("audio_volume_sounds"));
             audioNode.attachChild(soundNode);
             soundNodes.put(filePath, soundNode);
         }
