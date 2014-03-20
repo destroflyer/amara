@@ -13,9 +13,9 @@ import amara.engine.network.messages.protocol.*;
  *
  * @author Carl
  */
-public class ReceivePlayerProfileDataBackend implements MessageBackend{
+public class ReceivePlayerProfilesDataBackend implements MessageBackend{
 
-    public ReceivePlayerProfileDataBackend(PlayerProfilesAppState playerProfilesAppState){
+    public ReceivePlayerProfilesDataBackend(PlayerProfilesAppState playerProfilesAppState){
         this.playerProfilesAppState = playerProfilesAppState;
     }
     private PlayerProfilesAppState playerProfilesAppState;
@@ -24,14 +24,14 @@ public class ReceivePlayerProfileDataBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_PlayerProfileData){
             Message_PlayerProfileData message = (Message_PlayerProfileData) receivedMessage;
-            playerProfilesAppState.onProfileUpdateFinished(message.getLogin());
+            playerProfilesAppState.onUpdateFinished(message.getLogin());
             if(message.getPlayerProfileData() != null){
                 playerProfilesAppState.setProfile(message.getLogin(), message.getPlayerProfileData());
             }
         }
         else if(receivedMessage instanceof Message_PlayerProfileDataNotExistant){
             Message_PlayerProfileDataNotExistant message = (Message_PlayerProfileDataNotExistant) receivedMessage;
-            playerProfilesAppState.onProfileUpdateFinished(message.getLogin());
+            playerProfilesAppState.onUpdateFinished(message.getLogin());
             playerProfilesAppState.setProfileNotExistant(message.getLogin());
         }
     }

@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import com.jme3.network.Message;
-import amara.engine.applications.masterserver.server.appstates.DatabaseAppState;
+import amara.engine.applications.masterserver.server.appstates.*;
 import amara.engine.network.*;
 import amara.engine.network.messages.protocol.*;
 import amara.launcher.client.protocol.PlayerProfileData;
@@ -17,9 +17,9 @@ import amara.launcher.client.protocol.PlayerProfileData;
  *
  * @author Carl
  */
-public class SendPlayerProfileDataBackend implements MessageBackend{
+public class SendPlayerProfilesDataBackend implements MessageBackend{
 
-    public SendPlayerProfileDataBackend(DatabaseAppState databaseAppState){
+    public SendPlayerProfilesDataBackend(DatabaseAppState databaseAppState){
         this.databaseAppState = databaseAppState;
     }
     private DatabaseAppState databaseAppState;
@@ -29,18 +29,18 @@ public class SendPlayerProfileDataBackend implements MessageBackend{
         if(receivedMessage instanceof Message_GetPlayerProfileData){
             Message_GetPlayerProfileData message = (Message_GetPlayerProfileData) receivedMessage;
             String login = message.getLogin();
-            int id = databaseAppState.getInteger("SELECT id FROM users WHERE login = '" + login + "'");
+            int id = databaseAppState.getInteger("SELECT id FROM users WHERE login = '" + login + "' LIMIT 1");
             if(id != 0){
                 PlayerProfileData playerProfileData = null;
-                long lastModificationDate = databaseAppState.getLong("SELECT last_modification_date FROM users WHERE id = " + id);
+                long lastModificationDate = databaseAppState.getLong("SELECT last_modification_date FROM users WHERE id = " + id + " LIMIT 1");
                 if(lastModificationDate > message.getCachedTimestamp()){
-                    ResultSet resultSet = databaseAppState.getResultSet("SELECT key, value FROM users_meta WHERE userid = " + id);
+                    ResultSet metaResultSet = databaseAppState.getResultSet("SELECT key, value FROM users_meta WHERE userid = " + id);
                     HashMap<String, String> meta = new HashMap<String, String>();
                     try{
-                        while(resultSet.next()){
-                            meta.put(resultSet.getString(1), resultSet.getString(2));
+                        while(metaResultSet.next()){
+                            meta.put(metaResultSet.getString(1), metaResultSet.getString(2));
                         }
-                        resultSet.close();
+                        metaResultSet.close();
                     }catch(SQLException ex){
                         ex.printStackTrace();
                     }

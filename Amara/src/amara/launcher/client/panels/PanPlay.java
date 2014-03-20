@@ -17,7 +17,7 @@ import amara.engine.network.NetworkClient;
 import amara.game.games.PlayerData;
 import amara.launcher.FrameUtil;
 import amara.launcher.client.MainFrame;
-import amara.launcher.client.protocol.PlayerProfileData;
+import amara.launcher.client.protocol.*;
 
 /**
  *
@@ -186,12 +186,18 @@ public class PanPlay extends javax.swing.JPanel{
         if((login != null) && (!login.isEmpty())){
             PlayerProfileData playerProfileData = MainFrame.getInstance().getPlayerProfile(login);
             if(playerProfileData != null){
-                if(isPlayerParticipating(login)){
-                    FrameUtil.showMessageDialog(this, "'" + login + "' is already participating.", FrameUtil.MessageType.WARNING);
+                if(!isPlayerParticipating(login)){
+                    PlayerStatus playerStatus = MainFrame.getInstance().getPlayerStatus(playerProfileData.getID());
+                    if(playerStatus == PlayerStatus.ONLINE){
+                        players.add(playerProfileData);
+                        updatePlayersList();
+                    }
+                    else{
+                        FrameUtil.showMessageDialog(this, "'" + login + "' is not available for a game.\nStatus: " + playerStatus, FrameUtil.MessageType.WARNING);
+                    }
                 }
                 else{
-                    players.add(playerProfileData);
-                    updatePlayersList();
+                    FrameUtil.showMessageDialog(this, "'" + login + "' is already participating.", FrameUtil.MessageType.WARNING);
                 }
             }
             else{

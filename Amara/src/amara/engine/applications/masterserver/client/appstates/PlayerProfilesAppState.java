@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import amara.engine.applications.*;;
-import amara.engine.applications.masterserver.client.network.backends.ReceivePlayerProfileDataBackend;
+import amara.engine.applications.masterserver.client.network.backends.ReceivePlayerProfilesDataBackend;
 import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.NetworkClient;
 import amara.launcher.client.protocol.PlayerProfileData;
@@ -27,18 +27,18 @@ public class PlayerProfilesAppState extends ClientBaseAppState{
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
         NetworkClient networkClient = getAppState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.addMessageBackend(new ReceivePlayerProfileDataBackend(this));
+        networkClient.addMessageBackend(new ReceivePlayerProfilesDataBackend(this));
     }
     
-    public void onProfileUpdateStarted(String login){
+    public void onUpdateStarted(String login){
         updatingProfiles.add(login);
     }
     
-    public boolean isProfileUpdating(String login){
+    public boolean isUpdating(String login){
         return updatingProfiles.contains(login);
     }
     
-    public void onProfileUpdateFinished(String login){
+    public void onUpdateFinished(String login){
         updatingProfiles.remove(login);
     }
     

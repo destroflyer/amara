@@ -56,12 +56,15 @@ public class MessagesSerializer{
         Serializer.registerClasses(
             Message_EditUserMeta.class,
             Message_GetPlayerProfileData.class,
+            Message_GetPlayerStatus.class,
             Message_Login.class,
                 AuthentificationInformation.class,
             Message_LoginResult.class,
+            Message_Logout.class,
             Message_PlayerProfileData.class,
                 PlayerProfileData.class,
             Message_PlayerProfileDataNotExistant.class,
+            Message_PlayerStatus.class,
             
             Message_StartGame.class,
                 PlayerData.class,
