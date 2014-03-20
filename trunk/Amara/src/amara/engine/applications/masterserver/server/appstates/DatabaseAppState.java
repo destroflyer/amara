@@ -114,4 +114,8 @@ public class DatabaseAppState extends ServerBaseAppState{
             ex.printStackTrace();
         }
     }
+    
+    public static String escape(String text){
+        return text.replaceAll("'", "\\'");
+    }
 }

@@ -29,7 +29,7 @@ public class SendPlayerProfilesDataBackend implements MessageBackend{
         if(receivedMessage instanceof Message_GetPlayerProfileData){
             Message_GetPlayerProfileData message = (Message_GetPlayerProfileData) receivedMessage;
             String login = message.getLogin();
-            int id = databaseAppState.getInteger("SELECT id FROM users WHERE login = '" + login + "' LIMIT 1");
+            int id = databaseAppState.getInteger("SELECT id FROM users WHERE login = '" + DatabaseAppState.escape(login) + "' LIMIT 1");
             if(id != 0){
                 PlayerProfileData playerProfileData = null;
                 long lastModificationDate = databaseAppState.getLong("SELECT last_modification_date FROM users WHERE id = " + id + " LIMIT 1");

@@ -28,7 +28,7 @@ public class EditUserMetaBackend implements MessageBackend{
         if(receivedMessage instanceof Message_EditUserMeta){
             Message_EditUserMeta message = (Message_EditUserMeta) receivedMessage;
             int playerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
-            databaseAppState.executeQuery("UPDATE users_meta SET value = '" + message.getValue() + "' WHERE (userid = " + playerID + ") AND (key = '" + message.getKey() + "')");
+            databaseAppState.executeQuery("UPDATE users_meta SET value = '" + DatabaseAppState.escape(message.getValue()) + "' WHERE (userid = " + playerID + ") AND (key = '" + DatabaseAppState.escape(message.getKey()) + "')");
             databaseAppState.executeQuery("UPDATE users SET last_modification_date = " + System.currentTimeMillis() + " WHERE id = " + playerID);
         }
     }

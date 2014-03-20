@@ -30,7 +30,7 @@ public class ReceiveLoginsBackend implements MessageBackend{
             Message_Login message = (Message_Login) receivedMessage;
             AuthentificationInformation authentificationInformation = message.getAuthentificationInformation();
             boolean wasSuccessful = false;
-            int playerID = databaseAppState.getInteger("SELECT id FROM users WHERE login = '" + authentificationInformation.getLogin() + "' LIMIT 1");
+            int playerID = databaseAppState.getInteger("SELECT id FROM users WHERE login = '" + DatabaseAppState.escape(authentificationInformation.getLogin()) + "' LIMIT 1");
             if(playerID != 0){
                 Player player = new Player(playerID, authentificationInformation.getLogin());
                 connectedPlayers.login(messageResponse.getClientID(), player);
