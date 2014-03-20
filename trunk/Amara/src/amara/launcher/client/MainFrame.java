@@ -18,10 +18,10 @@ import amara.engine.applications.masterserver.server.protocol.AuthentificationIn
 import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.HostInformation;
 import amara.engine.network.NetworkClient;
-import amara.engine.network.messages.protocol.Message_GetPlayerProfileData;
+import amara.engine.network.messages.protocol.*;
 import amara.launcher.FrameUtil;
 import amara.launcher.client.panels.*;
-import amara.launcher.client.protocol.PlayerProfileData;
+import amara.launcher.client.protocol.*;
 
 /**
  *
@@ -64,7 +64,7 @@ public class MainFrame extends javax.swing.JFrame{
                         break;
                     }
                     try{
-                        Thread.sleep(200);
+                        Thread.sleep(100);
                     }catch(Exception ex){
                     }
                 }
@@ -92,22 +92,38 @@ public class MainFrame extends javax.swing.JFrame{
     
     public PlayerProfileData getPlayerProfile(String login){
         PlayerProfilesAppState playerProfilesAppState = masterClient.getStateManager().getState(PlayerProfilesAppState.class);
-        playerProfilesAppState.onProfileUpdateStarted(login);
+        playerProfilesAppState.onUpdateStarted(login);
         PlayerProfileData playerProfileData = playerProfilesAppState.getProfile(login);
         long cachedTimestamp = ((playerProfileData != null)?playerProfileData.getTimestamp():-1);
         NetworkClient networkClient = getNetworkClient();
         networkClient.sendMessage(new Message_GetPlayerProfileData(login, cachedTimestamp));
         while(true){
-            if(!playerProfilesAppState.isProfileUpdating(login)){
+            if(!playerProfilesAppState.isUpdating(login)){
                 playerProfileData = playerProfilesAppState.getProfile(login);
                 break;
             }
             try{
-                Thread.sleep(200);
+                Thread.sleep(100);
             }catch(Exception ex){
             }
         }
         return playerProfileData;
+    }
+    
+    public PlayerStatus getPlayerStatus(int playerID){
+        PlayerStatusesAppState playerStatusesAppState = masterClient.getStateManager().getState(PlayerStatusesAppState.class);
+        playerStatusesAppState.onUpdateStarted(playerID);
+        NetworkClient networkClient = getNetworkClient();
+        networkClient.sendMessage(new Message_GetPlayerStatus(playerID));
+        while(true){
+            if(!playerStatusesAppState.isUpdating(playerID)){
+                return playerStatusesAppState.getStatus(playerID);
+            }
+            try{
+                Thread.sleep(100);
+            }catch(Exception ex){
+            }
+        }
     }
 
     public NetworkClient getNetworkClient(){

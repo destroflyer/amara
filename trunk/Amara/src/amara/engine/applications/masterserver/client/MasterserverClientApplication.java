@@ -19,6 +19,7 @@ public class MasterserverClientApplication extends HeadlessApplication{
         try{
             stateManager.attach(new NetworkClientHeadlessAppState(hostInformation.getHost(), hostInformation.getPort()));
             stateManager.attach(new PlayerProfilesAppState());
+            stateManager.attach(new PlayerStatusesAppState());
         }catch(ServerConnectionException ex){
             System.out.println(ex.getMessage());
             loginAppState.setResult(LoginAppState.LoginResult.NO_CONNECTION_TO_MASTERSERVER);

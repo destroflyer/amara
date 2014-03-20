@@ -27,6 +27,17 @@ public class RunningGames{
     public void removeGame(Game game){
         games.remove(game);
     }
+    
+    public Game getGame(int playerID){
+        for(Game game : games){
+            for(GamePlayer player : game.getPlayers()){
+                if(player.getPlayerData().getID() == playerID){
+                    return game;
+                }
+            }
+        }
+        return null;
+    }
 
     public ArrayList<Game> getGames(){
         return games;
