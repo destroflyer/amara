@@ -22,7 +22,6 @@ public class ModelObject extends Node implements AnimEventListener{
     private DisplayApplication mainApplication;
     protected Spatial modelSpatial;
     private AnimChannel animationChannel;
-    private int remainingAnimationLoops;
     
     private void loadSkin(ModelSkin skin){
         modelSpatial = skin.loadSpatial();
@@ -38,13 +37,12 @@ public class ModelObject extends Node implements AnimEventListener{
         }
     }
     
-    public void playAnimation(String animationName, float loopDuration, int loopsCount){
+    public void playAnimation(String animationName, float loopDuration){
         if(animationChannel != null){
             if(!animationName.equals(animationChannel.getAnimationName())){
                 try{
                     animationChannel.setAnim(animationName);
                     animationChannel.setSpeed(animationChannel.getAnimMaxTime() / loopDuration);
-                    remainingAnimationLoops = loopsCount;
                 }catch(IllegalArgumentException ex){
                     stopAndRewindAnimation();
                 }
@@ -64,12 +62,7 @@ public class ModelObject extends Node implements AnimEventListener{
 
     @Override
     public void onAnimCycleDone(AnimControl control, AnimChannel channel, String animationName){
-        if(remainingAnimationLoops != -1){
-            remainingAnimationLoops--;
-            if(remainingAnimationLoops == 0){
-                stopAndRewindAnimation();
-            }
-        }
+        
     }
 
     @Override
