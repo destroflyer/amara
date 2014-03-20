@@ -25,7 +25,7 @@ public class TestGame{
         masterServer.start();
         //Client
         HostInformation hostInformation = new HostInformation("localhost", 33900);
-        AuthentificationInformation authentificationInformation = new AuthentificationInformation("destroflyer", "");
+        AuthentificationInformation authentificationInformation = new AuthentificationInformation("destroflyer", "test");
         MasterserverClientApplication masterClient = new MasterserverClientApplication(hostInformation, authentificationInformation);
         masterClient.start();
         //Start game

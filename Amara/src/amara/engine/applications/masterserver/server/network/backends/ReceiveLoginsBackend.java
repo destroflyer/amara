@@ -5,7 +5,7 @@
 package amara.engine.applications.masterserver.server.network.backends;
 
 import com.jme3.network.Message;
-import amara.engine.applications.masterserver.server.appstates.DatabaseAppState;
+import amara.engine.applications.masterserver.server.appstates.*;
 import amara.engine.applications.masterserver.server.protocol.AuthentificationInformation;
 import amara.engine.network.*;
 import amara.engine.network.messages.protocol.*;
@@ -17,12 +17,12 @@ import amara.game.players.*;
  */
 public class ReceiveLoginsBackend implements MessageBackend{
 
-    public ReceiveLoginsBackend(DatabaseAppState databaseAppState, ConnectedPlayers connectedPlayers){
+    public ReceiveLoginsBackend(DatabaseAppState databaseAppState, PlayersAppState playersAppState){
         this.databaseAppState = databaseAppState;
-        this.connectedPlayers = connectedPlayers;
+        this.playersAppState = playersAppState;
     }
     private DatabaseAppState databaseAppState;
-    private ConnectedPlayers connectedPlayers;
+    private PlayersAppState playersAppState;
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
@@ -32,10 +32,15 @@ public class ReceiveLoginsBackend implements MessageBackend{
             boolean wasSuccessful = false;
             int playerID = databaseAppState.getInteger("SELECT id FROM users WHERE login = '" + DatabaseAppState.escape(authentificationInformation.getLogin()) + "' LIMIT 1");
             if(playerID != 0){
-                Player player = new Player(playerID, authentificationInformation.getLogin());
-                connectedPlayers.login(messageResponse.getClientID(), player);
-                wasSuccessful = true;
-                System.out.println("Login '" + player.getLogin() + "' (#" + player.getID() + ")");
+                String encodedSentPassword = playersAppState.getPasswordEncoder().encode(authentificationInformation.getPassword());
+                String encodedPassword = databaseAppState.getString("SELECT password FROM users WHERE id = " + playerID + " LIMIT 1");
+                if(encodedSentPassword.equals(encodedPassword)){
+                    Player player = new Player(playerID, authentificationInformation.getLogin());
+                    ConnectedPlayers connectedPlayers = playersAppState.getConnectedPlayers();
+                    connectedPlayers.login(messageResponse.getClientID(), player);
+                    wasSuccessful = true;
+                    System.out.println("Login '" + player.getLogin() + "' (#" + player.getID() + ")");
+                }
             }
             messageResponse.addAnswerMessage(new Message_LoginResult(wasSuccessful));
         }
