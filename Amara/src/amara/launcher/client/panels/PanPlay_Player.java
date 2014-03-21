@@ -18,7 +18,8 @@ public class PanPlay_Player extends javax.swing.JPanel{
     }
     
     public void setPlayer(PlayerProfileData playerProfileData){
-        lblIcon.setIcon(Util.getResourceImageIcon("/Interface/client/user.png", 30, 30));
+        String avatarResourcePath = PanAvatarSelection.getAvatarResourcePath(playerProfileData.getMeta("avatar"));
+        lblIcon.setIcon(Util.getResourceImageIcon(avatarResourcePath, 30, 30));
         lblName.setText(playerProfileData.getLogin());
     }
     
