@@ -13,6 +13,6 @@ import amara.engine.applications.ingame.client.systems.visualisation.meshes.Rect
 public class SpeechBubbleMesh extends RectangleMesh{
     
     public SpeechBubbleMesh(){
-        super(-0.5f, 0, 2.5f, 1.8f, 1.75f);
+        super(-10, 0, 0, 36, 35);
     }
 }

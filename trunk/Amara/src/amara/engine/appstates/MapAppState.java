@@ -18,7 +18,7 @@ import com.jme3.scene.shape.Quad;
 import com.jme3.util.SkyFactory;
 import com.jme3.scene.Node;
 import amara.engine.JMonkeyUtil;
-import amara.engine.applications.ingame.client.maps.MapTerrain;
+import amara.engine.applications.ingame.client.maps.*;
 import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.game.maps.*;
 import amara.game.maps.visuals.*;
@@ -33,6 +33,7 @@ public class MapAppState extends BaseDisplayAppState{
         this.map = map;
     }
     private Map map;
+    private MapHeightmap mapHeightmap;
     private MapTerrain mapTerrain;
     private Node visualsNode = new Node();
     private HashMap<ModelObject, MapVisual> modelObjectsVisuals = new HashMap<ModelObject, MapVisual>();
@@ -40,8 +41,8 @@ public class MapAppState extends BaseDisplayAppState{
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
-        MapPhysicsInformation physicsInformation = map.getPhysicsInformation();
-        mapTerrain = new MapTerrain(map.getName(), physicsInformation.getWidth(), physicsInformation.getHeight());
+        mapHeightmap = new MapHeightmap(map.getName(), map.getPhysicsInformation());
+        mapTerrain = new MapTerrain(map.getName(), map.getPhysicsInformation());
         mainApplication.getRootNode().attachChild(mapTerrain.getTerrain());
         mainApplication.getRootNode().attachChild(visualsNode);
         updateVisuals();
@@ -64,7 +65,7 @@ public class MapAppState extends BaseDisplayAppState{
                 ModelVisual modelVisual = (ModelVisual) visual;
                 ModelObject modelObject = new ModelObject(mainApplication, "/" + modelVisual.getModelSkinPath());
                 Vector3f translation = modelVisual.getPosition().clone();
-                translation.setY(mapTerrain.getHeight(translation.getX(), translation.getZ()));
+                translation.setY(mapHeightmap.getHeight(translation.getX(), translation.getZ()));
                 modelObject.setLocalTranslation(translation);
                 JMonkeyUtil.setLocalRotation(modelObject, modelVisual.getDirection());
                 modelObject.setLocalScale(modelVisual.getScale());
@@ -102,6 +103,10 @@ public class MapAppState extends BaseDisplayAppState{
 
     public Map getMap(){
         return map;
+    }
+
+    public MapHeightmap getMapHeightmap(){
+        return mapHeightmap;
     }
 
     public MapTerrain getMapTerrain(){

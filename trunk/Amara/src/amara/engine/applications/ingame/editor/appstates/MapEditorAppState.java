@@ -24,7 +24,7 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.Util;
 import amara.engine.JMonkeyUtil;
-import amara.engine.applications.ingame.client.maps.MapTerrain;
+import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.engine.applications.ingame.client.systems.debug.ConnectedPointsMesh;
 import amara.engine.applications.ingame.editor.gui.ScreenController_MapEditor;
@@ -125,8 +125,8 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
                     break;
 
                 case PLACE_VISUAL:
-                    MapTerrain mapTerrain = getAppState(MapAppState.class).getMapTerrain();
-                    visualToPlaceModelObject.setLocalTranslation(currentHoveredLocation.getX(), mapTerrain.getHeight(currentHoveredLocation), currentHoveredLocation.getY());
+                    MapHeightmap mapHeightmap = getAppState(MapAppState.class).getMapHeightmap();
+                    visualToPlaceModelObject.setLocalTranslation(currentHoveredLocation.getX(), mapHeightmap.getHeight(currentHoveredLocation), currentHoveredLocation.getY());
                     break;
             }
             ScreenController_MapEditor screenController_MapEditor = getAppState(NiftyAppState.class).getScreenController(ScreenController_MapEditor.class);

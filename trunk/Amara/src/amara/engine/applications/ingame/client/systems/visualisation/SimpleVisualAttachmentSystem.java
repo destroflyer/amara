@@ -4,7 +4,6 @@
  */
 package amara.engine.applications.ingame.client.systems.visualisation;
 
-import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.game.entitysystem.*;
 
@@ -14,18 +13,31 @@ import amara.game.entitysystem.*;
  */
 public abstract class SimpleVisualAttachmentSystem implements EntitySystem{
 
-    public SimpleVisualAttachmentSystem(EntitySceneMap entitySceneMap, Class componentClass, boolean displayExistanceOrAbsence){
-        this.entitySceneMap = entitySceneMap;
+    public SimpleVisualAttachmentSystem(Class componentClass, boolean displayExistanceOrAbsence){
+        componentClassesToObserve = new Class[]{componentClass};
         this.componentClass = componentClass;
         this.displayExistanceOrAbsence = displayExistanceOrAbsence;
     }
-    private EntitySceneMap entitySceneMap;
+    private Class[] componentClassesToObserve;
     private Class componentClass;
     private boolean displayExistanceOrAbsence;
+    
+    protected void setComponentClassesToObserve(Class... additionalComponentClassesToObserve){
+        componentClassesToObserve = new Class[additionalComponentClassesToObserve.length + 1];
+        componentClassesToObserve[0] = componentClass;
+        for(int i=1;i<componentClassesToObserve.length;i++){
+            componentClassesToObserve[i] = additionalComponentClassesToObserve[i - 1];
+        }
+    }
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, componentClass);
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, componentClassesToObserve);
+        observeEntities(entityWorld, observer);
+        observer.reset();
+    }
+    
+    protected void observeEntities(EntityWorld entityWorld, ComponentMapObserver observer){
         for(int entity : observer.getNew().getEntitiesWithAll(componentClass)){
             setVisualAttachmentVisible(entityWorld, entity, displayExistanceOrAbsence);
         }
@@ -35,7 +47,6 @@ public abstract class SimpleVisualAttachmentSystem implements EntitySystem{
         for(int entity : observer.getRemoved().getEntitiesWithAll(componentClass)){
             setVisualAttachmentVisible(entityWorld, entity, (!displayExistanceOrAbsence));
         }
-        observer.reset();
     }
     
     private void setVisualAttachmentVisible(EntityWorld entityWorld,int entity, boolean isVisible){
@@ -43,28 +54,26 @@ public abstract class SimpleVisualAttachmentSystem implements EntitySystem{
             updateVisualAttachment(entityWorld, entity);
         }
         else{
-            removeVisualAttachment(entity);
+            detach(entityWorld, entity);
         }
     }
     
     private void updateVisualAttachment(EntityWorld entityWorld, int entity){
-        removeVisualAttachment(entity);
-        Node node = entitySceneMap.requestNode(entity);
+        detach(entityWorld, entity);
         Spatial visualAttachment = createVisualAttachment(entityWorld, entity);
         if(visualAttachment != null){
-            visualAttachment.setName(getVisualAttachmentID());
-            node.attachChild(visualAttachment);
+            visualAttachment.setName(getVisualAttachmentID(entity));
+            attach(entityWorld, entity, visualAttachment);
         }
     }
     
-    private void removeVisualAttachment(int entity){
-        Node node = entitySceneMap.requestNode(entity);
-        node.detachChildNamed(getVisualAttachmentID());
+    protected String getVisualAttachmentID(int entity){
+        return ("visualAttachment_" + hashCode() + "_" + entity);
     }
     
-    private String getVisualAttachmentID(){
-        return ("visualAttachment_" + hashCode());
-    }
+    protected abstract void attach(EntityWorld entityWorld, int entity, Spatial visualAttachment);
+    
+    protected abstract void detach(EntityWorld entityWorld, int entity);
     
     protected abstract Spatial createVisualAttachment(EntityWorld entityWorld, int entity);
 }

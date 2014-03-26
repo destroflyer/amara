@@ -6,9 +6,12 @@ package amara.engine.applications.ingame.client.systems.visualisation.effects.cr
 
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
+import com.jme3.math.Vector3f;
+import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.control.BillboardControl;
+import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.materials.MaterialFactory;
 import amara.game.entitysystem.*;
@@ -18,10 +21,12 @@ import amara.game.entitysystem.components.units.crowdcontrol.*;
  *
  * @author Carl
  */
-public class StunVisualisationSystem extends SimpleVisualAttachmentSystem{
+public class StunVisualisationSystem extends HUDAttachmentSystem{
 
-    public StunVisualisationSystem(EntitySceneMap entitySceneMap){
-        super(entitySceneMap, IsStunnedComponent.class, true);
+    public StunVisualisationSystem(Node guiNode, Camera camera, MapHeightmap mapHeightmap){
+        super(IsStunnedComponent.class, true, guiNode, camera, mapHeightmap);
+        worldOffset = MaximumHealthBarSystem.BAR_LOCATION;
+        hudOffset = new Vector3f(0, 26, 0);
     }
     
     @Override
@@ -29,11 +34,7 @@ public class StunVisualisationSystem extends SimpleVisualAttachmentSystem{
         Geometry geometry = new Geometry("", new SpeechBubbleMesh());
         Material material = MaterialFactory.generateUnshadedMaterial("Textures/effects/stun.png");
         material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-        material.getAdditionalRenderState().setDepthTest(false);
         geometry.setMaterial(material);
-        geometry.addControl(new BillboardControl());
-        geometry.setLocalTranslation(0, 2, 0);
-        geometry.setUserData("layer", 5);
         return geometry;
     }
 }

@@ -6,10 +6,12 @@ package amara.engine.applications.ingame.client.systems.visualisation;
 
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.control.BillboardControl;
 import amara.engine.materials.MaterialFactory;
+import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.systems.visualisation.meshes.RectangleMesh;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
@@ -18,10 +20,11 @@ import amara.game.entitysystem.components.attributes.*;
  *
  * @author Carl
  */
-public class CurrentHealthBarSystem extends SimpleVisualAttachmentSystem{
+public class CurrentHealthBarSystem extends HUDAttachmentSystem{
 
-    public CurrentHealthBarSystem(EntitySceneMap entitySceneMap){
-        super(entitySceneMap, HealthComponent.class, true);
+    public CurrentHealthBarSystem(Node guiNode, Camera camera, MapHeightmap mapHeightmap){
+        super(HealthComponent.class, true, guiNode, camera, mapHeightmap);
+        worldOffset = MaximumHealthBarSystem.BAR_LOCATION;
     }
         
     @Override
@@ -36,9 +39,7 @@ public class CurrentHealthBarSystem extends SimpleVisualAttachmentSystem{
             Material material = MaterialFactory.generateUnshadedMaterial(ColorRGBA.Black);
             material.getAdditionalRenderState().setDepthTest(false);
             geometry.setMaterial(material);
-            geometry.addControl(new BillboardControl());
-            geometry.setLocalTranslation(MaximumHealthBarSystem.BAR_LOCATION);
-            geometry.setUserData("layer", 7);
+            geometry.setUserData("layer", -1);
             return geometry;
         }
         return null;

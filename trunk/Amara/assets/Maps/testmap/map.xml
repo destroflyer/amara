@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map author="Carl" date="1394278672121" class="amara.game.maps.TestMap">
-	<physics width="100" height="100">
+	<physics width="100" height="100" heightmapScale="0.0225">
 		<obstacles>
 			<simpleConvex>
 				<base>
