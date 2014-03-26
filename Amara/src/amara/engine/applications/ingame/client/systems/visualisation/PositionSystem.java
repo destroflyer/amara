@@ -6,7 +6,7 @@ package amara.engine.applications.ingame.client.systems.visualisation;
 
 import com.jme3.math.Vector2f;
 import com.jme3.scene.Node;
-import amara.engine.applications.ingame.client.maps.MapTerrain;
+import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 
@@ -16,12 +16,12 @@ import amara.game.entitysystem.components.physics.*;
  */
 public class PositionSystem implements EntitySystem{
     
-    public PositionSystem(EntitySceneMap entitySceneMap, MapTerrain mapTerrain){
+    public PositionSystem(EntitySceneMap entitySceneMap, MapHeightmap mapHeightmap){
         this.entitySceneMap = entitySceneMap;
-        this.mapTerrain = mapTerrain;
+        this.mapHeightmap =  mapHeightmap;
     }
     private EntitySceneMap entitySceneMap;
-    private MapTerrain mapTerrain;
+    private MapHeightmap mapHeightmap;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -38,6 +38,6 @@ public class PositionSystem implements EntitySystem{
     private void updatePosition(EntityWorld entityWorld, int entity){
         Node node = entitySceneMap.requestNode(entity);
         Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
-        node.setLocalTranslation(position.getX(), mapTerrain.getHeight(position), position.getY());
+        node.setLocalTranslation(position.getX(), mapHeightmap.getHeight(position), position.getY());
     }
 }

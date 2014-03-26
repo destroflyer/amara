@@ -239,6 +239,7 @@ public class MessagesSerializer{
                         ModelComponent.class,
                         AnimationComponent.class,
                         StopPlayingAnimationComponent.class,
+                        TitleComponent.class,
                         //visuals/animations
                         LoopDurationComponent.class,
                         PassedLoopTimeComponent.class,

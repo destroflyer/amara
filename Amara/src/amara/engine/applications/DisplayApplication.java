@@ -11,7 +11,7 @@ import com.jme3.scene.Node;
 import com.jme3.system.AppSettings;
 import amara.GameInfo;
 import amara.engine.materials.MaterialFactory;
-import amara.engine.applications.ingame.client.*;
+import amara.engine.applications.ingame.client.comparators.*;
 
 /**
  * @author Carl
@@ -31,7 +31,8 @@ public class DisplayApplication extends SimpleApplication{
     public void simpleInitApp(){
         MaterialFactory.setAssetManager(assetManager);
         setDisplayStatView(false);
-        viewPort.getQueue().setGeometryComparator(RenderQueue.Bucket.Opaque, new LayerGeometryComparator());
+        viewPort.getQueue().setGeometryComparator(RenderQueue.Bucket.Opaque, new LayerGeometryComparator_Opaque());
+        viewPort.getQueue().setGeometryComparator(RenderQueue.Bucket.Gui, new LayerGeometryComparator_GUI());
     }
 
     @Override

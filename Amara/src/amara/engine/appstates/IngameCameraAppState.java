@@ -100,7 +100,7 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
         if(!inOrOut){
             zoomDirection.negateLocal();
         }
-        mainApplication.getCamera().getLocation().addLocal(zoomDirection);
+        mainApplication.getCamera().setLocation(mainApplication.getCamera().getLocation().add(zoomDirection));
     }
     
     private Vector3f getZoomDirection(){

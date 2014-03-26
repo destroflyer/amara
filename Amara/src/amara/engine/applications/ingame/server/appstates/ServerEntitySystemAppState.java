@@ -7,10 +7,13 @@ package amara.engine.applications.ingame.server.appstates;
 import amara.engine.applications.*;
 import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.engine.applications.ingame.server.network.backends.*;
+import amara.engine.applications.masterserver.server.appstates.DatabaseAppState;
 import amara.engine.appstates.*;
 import amara.engine.network.NetworkServer;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.players.*;
+import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.aggro.*;
 import amara.game.entitysystem.systems.attributes.*;
 import amara.game.entitysystem.systems.buffs.*;
@@ -112,10 +115,14 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         
         Map map = mainApplication.getGame().getMap();
         map.load(entityWorld);
+        DatabaseAppState databaseAppState = mainApplication.getMasterServer().getStateManager().getState(DatabaseAppState.class);
         for(int i=0;i<mainApplication.getGame().getPlayers().length;i++){
             GamePlayer player = mainApplication.getGame().getPlayers()[i];
             EntityWrapper playerEntity = entityWorld.getWrapped(entityWorld.createEntity());
+            String login = databaseAppState.getString("SELECT login FROM users WHERE id = " + player.getPlayerData().getID() + " LIMIT 1");
+            playerEntity.setComponent(new NameComponent(login));
             EntityWrapper unit = EntityTemplate.createFromTemplate(entityWorld, player.getPlayerData().getUnitTemplate());
+            unit.setComponent(new TitleComponent(login));
             map.spawn(entityWorld, i, unit.getId());
             playerEntity.setComponent(new SelectedUnitComponent(unit.getId()));
             player.setEntityID(playerEntity.getId());

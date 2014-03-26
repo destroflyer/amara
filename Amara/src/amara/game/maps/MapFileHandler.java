@@ -55,6 +55,7 @@ public class MapFileHandler{
             Element elementPhysics = new Element("physics");
             elementPhysics.setAttribute("width", "" + map.getPhysicsInformation().getWidth());
             elementPhysics.setAttribute("height", "" + map.getPhysicsInformation().getHeight());
+            elementPhysics.setAttribute("heightmapScale", "" + map.getPhysicsInformation().getHeightmapScale());
             Element elementObstacles = new Element("obstacles");
             for(Shape shape : map.getPhysicsInformation().getObstacles()){
                 Element elementShape = generateElement(shape);
@@ -111,6 +112,7 @@ public class MapFileHandler{
             Element elementPhysics = root.getChild("physics");
             int width = elementPhysics.getAttribute("width").getIntValue();
             int height = elementPhysics.getAttribute("height").getIntValue();
+            float heightmapScale = elementPhysics.getAttribute("heightmapScale").getFloatValue();
             Element elementObstacles = elementPhysics.getChild("obstacles");
             List elementObstaclesChildren = elementObstacles.getChildren();
             ArrayList<Shape> obstacles = new ArrayList<Shape>();
@@ -119,7 +121,7 @@ public class MapFileHandler{
                 Shape shape = generateShape(elementShape);
                 obstacles.add(shape);
             }
-            MapPhysicsInformation physicsInformation = new MapPhysicsInformation(width, height, obstacles);
+            MapPhysicsInformation physicsInformation = new MapPhysicsInformation(width, height, heightmapScale, obstacles);
             map.setPhysicsInformation(physicsInformation);
             Element elementVisuals = root.getChild("visuals");
             List elementVisualsChildren = elementVisuals.getChildren();

@@ -7,12 +7,14 @@ package amara.engine.applications.ingame.client.systems.visualisation;
 import java.awt.Color;
 import com.jme3.math.Vector3f;
 import com.jme3.material.Material;
+import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.control.BillboardControl;
+import com.jme3.scene.Node;
 import com.jme3.texture.Texture;
 import com.jme3.texture.Texture2D;
 import amara.engine.materials.MaterialFactory;
+import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.systems.visualisation.meshes.RectangleMesh;
 import amara.engine.materials.PaintableImage;
 import amara.game.entitysystem.*;
@@ -22,14 +24,15 @@ import amara.game.entitysystem.components.attributes.MaximumHealthComponent;
  *
  * @author Carl
  */
-public class MaximumHealthBarSystem extends SimpleVisualAttachmentSystem{
+public class MaximumHealthBarSystem extends HUDAttachmentSystem{
 
-    public MaximumHealthBarSystem(EntitySceneMap entitySceneMap){
-        super(entitySceneMap, MaximumHealthComponent.class, true);
+    public MaximumHealthBarSystem(Node guiNode, Camera camera, MapHeightmap mapHeightmap) {
+        super(MaximumHealthComponent.class, true, guiNode, camera, mapHeightmap);
+        worldOffset = BAR_LOCATION;
     }
-    public static final float BAR_WIDTH = 3;
-    public static final float BAR_HEIGHT = 0.3f;
-    public static final Vector3f BAR_LOCATION = new Vector3f(0, 5.5f, 0);
+    public static final float BAR_WIDTH = 70;
+    public static final float BAR_HEIGHT = 8;
+    public static final Vector3f BAR_LOCATION = new Vector3f(0, 4.25f, 0);
         
     @Override
     protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
@@ -66,9 +69,7 @@ public class MaximumHealthBarSystem extends SimpleVisualAttachmentSystem{
         material.setTexture("ColorMap", texture2D);
         material.getAdditionalRenderState().setDepthTest(false);
         geometry.setMaterial(material);
-        geometry.addControl(new BillboardControl());
-        geometry.setLocalTranslation(BAR_LOCATION);
-        geometry.setUserData("layer", 6);
+        geometry.setUserData("layer", -2);
         return geometry;
     }
 }

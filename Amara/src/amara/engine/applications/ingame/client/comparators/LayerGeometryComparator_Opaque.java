@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.engine.applications.ingame.client;
+package amara.engine.applications.ingame.client.comparators;
 
 import com.jme3.renderer.queue.OpaqueComparator;
 import com.jme3.scene.Geometry;
@@ -11,7 +11,7 @@ import com.jme3.scene.Geometry;
  *
  * @author Carl
  */
-public class LayerGeometryComparator extends OpaqueComparator{
+public class LayerGeometryComparator_Opaque extends OpaqueComparator{
     
     @Override
     public int compare(Geometry geometry1, Geometry geometry2){
@@ -23,7 +23,7 @@ public class LayerGeometryComparator extends OpaqueComparator{
         return super.compare(geometry1, geometry2);
     }
     
-    private static int getLayer(Geometry geometry){
+    public static int getLayer(Geometry geometry){
         Integer layer = geometry.getUserData("layer");
         if(layer != null){
             return layer;
