@@ -30,7 +30,7 @@
             <panel childLayout="vertical">
                 <panel/>
                 <panel childLayout="horizontal" height="200px">
-                    <image filename="Interface/hud/unit.png" width="400px" height="100%" valign="bottom"></image>
+                    <image filename="Interface/hud/unit.png" width="400px" height="100%"></image>
                     <panel/>
                 </panel>
             </panel>
@@ -42,7 +42,7 @@
                     <panel width="4px"/>
                     <panel width="166px" childLayout="vertical" backgroundColor="#000D">
                         <panel height="5px"/>
-                        <text text="destroflyer" width="100%" textHAlign="center" font="Interface/fonts/Verdana_12.fnt"/>
+                        <text id="player_name" text="???" width="100%" textHAlign="center" font="Interface/fonts/Verdana_12.fnt"/>
                         <panel childLayout="horizontal">
                             <panel width="10px"/>
                             <panel childLayout="vertical">
