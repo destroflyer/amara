@@ -4,10 +4,10 @@
  */
 package amara.engine.applications.ingame.client.systems.gui;
 
-import amara.engine.applications.ingame.client.systems.PlayerInformationSystem;
 import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.items.*;
+import amara.game.entitysystem.components.players.SelectedUnitComponent;
 
 /**
  *
@@ -15,18 +15,19 @@ import amara.game.entitysystem.components.items.*;
  */
 public class DisplayInventorySystem implements EntitySystem{
 
-    public DisplayInventorySystem(PlayerInformationSystem playerInformationSystem, ScreenController_HUD screenController_HUD){
-        this.playerInformationSystem = playerInformationSystem;
+    public DisplayInventorySystem(int playerEntity, ScreenController_HUD screenController_HUD){
+        this.playerEntity = playerEntity;
         this.screenController_HUD = screenController_HUD;
     }
     private final static String NON_EXISTING_ITEM_VISUALISATION_NAME = "none";
-    private PlayerInformationSystem playerInformationSystem;
+    private int playerEntity;
     private ScreenController_HUD screenController_HUD;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        int selectedEntity = playerInformationSystem.getSelectedEntity();
-        if(selectedEntity != -1){
+        SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
+        if(selectedUnitComponent != null){
+            int selectedEntity = selectedUnitComponent.getEntityID();
             InventoryComponent inventoryComponent = entityWorld.getComponent(selectedEntity, InventoryComponent.class);
             for(int i=0;i<6;i++){
                 String itemVisualsiationName = NON_EXISTING_ITEM_VISUALISATION_NAME;

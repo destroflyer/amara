@@ -12,6 +12,10 @@ import amara.engine.gui.GameScreenController;
  */
 public class ScreenController_HUD extends GameScreenController{
     
+    public void setPlayerName(String name){
+        getTextRenderer("player_name").setText(name);
+    }
+    
     public void setAttributeValue_Health(String text){
         setAttributeValue("health", text);
     }

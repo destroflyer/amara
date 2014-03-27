@@ -4,10 +4,10 @@
  */
 package amara.engine.applications.ingame.client.systems.gui;
 
-import amara.engine.applications.ingame.client.systems.PlayerInformationSystem;
 import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
+import amara.game.entitysystem.components.players.SelectedUnitComponent;
 
 /**
  *
@@ -15,18 +15,19 @@ import amara.game.entitysystem.components.attributes.*;
  */
 public class DisplayAttributesSystem implements EntitySystem{
 
-    public DisplayAttributesSystem(PlayerInformationSystem playerInformationSystem, ScreenController_HUD screenController_HUD){
-        this.playerInformationSystem = playerInformationSystem;
+    public DisplayAttributesSystem(int playerEntity, ScreenController_HUD screenController_HUD){
+        this.playerEntity = playerEntity;
         this.screenController_HUD = screenController_HUD;
     }
     private final static String NON_EXISTING_ATTRIBUTE_TEXT = "-";
-    private PlayerInformationSystem playerInformationSystem;
+    private int playerEntity;
     private ScreenController_HUD screenController_HUD;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        int selectedEntity = playerInformationSystem.getSelectedEntity();
-        if(selectedEntity != -1){
+        SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
+        if(selectedUnitComponent != null){
+            int selectedEntity = selectedUnitComponent.getEntityID();
             String healthText = NON_EXISTING_ATTRIBUTE_TEXT;
             String attackDamageText = NON_EXISTING_ATTRIBUTE_TEXT;
             String abilityPowerText = NON_EXISTING_ATTRIBUTE_TEXT;

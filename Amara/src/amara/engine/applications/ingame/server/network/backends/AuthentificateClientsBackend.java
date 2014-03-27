@@ -30,7 +30,7 @@ public class AuthentificateClientsBackend implements MessageBackend{
             Message_PlayerAuthentification message = (Message_PlayerAuthentification) receivedMessage;
             GamePlayer player = game.onClientConnected(messageResponse.getClientID(), message.getAuthentificationKey());
             entityWorld.setComponent(player.getEntityID(), new ClientComponent(messageResponse.getClientID()));
-            messageResponse.addAnswerMessage(new Message_GameInfo(game.getMap().getName()));
+            messageResponse.addAnswerMessage(new Message_GameInfo(game.getMap().getName(), player.getEntityID()));
         }
     }
 }

@@ -10,11 +10,8 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.engine.appstates.*;
-import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
 import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.network.backends.*;
-import amara.engine.applications.ingame.client.systems.*;
-import amara.engine.applications.ingame.client.systems.gui.*;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.applications.ingame.client.systems.visualisation.buffs.*;
 import amara.engine.applications.ingame.client.systems.visualisation.effects.crodwcontrol.*;
@@ -67,6 +64,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
+        mainApplication.getRootNode().attachChild(entitiesNode);
         NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
         networkClient.addMessageBackend(new EntitySynchronizeBackend(entityWorld));
         networkClient.addMessageBackend(new GameStartedBackend(mainApplication));
@@ -88,12 +86,6 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new BuffVisualisationSystem_Intervention(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Zhonyas(entitySceneMap));
         addEntitySystem(new TitleSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
-        PlayerInformationSystem playerInformationSystem = new PlayerInformationSystem(networkClient.getID());
-        addEntitySystem(playerInformationSystem);
-        NiftyAppState niftyAppState = getAppState(NiftyAppState.class);
-        addEntitySystem(new DisplayAttributesSystem(playerInformationSystem, niftyAppState.getScreenController(ScreenController_HUD.class)));
-        addEntitySystem(new DisplayInventorySystem(playerInformationSystem, niftyAppState.getScreenController(ScreenController_HUD.class)));
-        mainApplication.getRootNode().attachChild(entitiesNode);
     }
 
     public int getEntity(Spatial spatial){
