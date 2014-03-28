@@ -28,6 +28,11 @@ public class MapHeightmap{
     public float getHeight(float x, float y){
         int pixelX = (int) ((x / mapPhysicsInformation.getWidth()) * image.getWidth());
         int pixelY = (int) ((y / mapPhysicsInformation.getHeight()) * image.getHeight());
-        return (image.getPixel_Red(pixelX, pixelY) * mapPhysicsInformation.getHeightmapScale());
+        float height = 0;
+        try{
+            height = image.getPixel_Red(pixelX, pixelY);
+        }catch(ArrayIndexOutOfBoundsException ex){
+        }
+        return (height * mapPhysicsInformation.getHeightmapScale());
     }
 }
