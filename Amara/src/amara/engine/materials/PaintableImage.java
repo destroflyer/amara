@@ -122,7 +122,7 @@ public class PaintableImage{
  
     private int getPixel_ColorValue(int x, int y, int bufferIndexOffset){
         int i = (x + y * width) * 4;
-        return data[i + bufferIndexOffset];
+        return (data[i + bufferIndexOffset] & 0xFF);
     }
 
     public int getWidth(){

@@ -93,13 +93,33 @@
                                 <image id="passive_image" filename="Interface/hud/spells/none.png" width="100%" height="100%w"></image>
                             </panel>
                             <panel width="11px"/>
-                            <image id="spell_0_image" filename="Interface/hud/spells/none.png" width="58px" height="100%w"></image>
+                            <panel childLayout="center" width="58px" height="100%w">
+                                <image id="spell_0_image" filename="Interface/hud/spells/none.png" width="100%" height="100%"></image>
+                                <panel id="spell_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="spell_0_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
+                                </panel>
+                            </panel>
                             <panel width="2px"/>
-                            <image id="spell_1_image" filename="Interface/hud/spells/none.png" width="58px" height="100%w"></image>
+                            <panel childLayout="center" width="58px" height="100%w">
+                                <image id="spell_1_image" filename="Interface/hud/spells/none.png" width="100%" height="100%"></image>
+                                <panel id="spell_1_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="spell_1_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
+                                </panel>
+                            </panel>
                             <panel width="2px"/>
-                            <image id="spell_2_image" filename="Interface/hud/spells/none.png" width="58px" height="100%w"></image>
+                            <panel childLayout="center" width="58px" height="100%w">
+                                <image id="spell_2_image" filename="Interface/hud/spells/none.png" width="100%" height="100%"></image>
+                                <panel id="spell_2_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="spell_2_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
+                                </panel>
+                            </panel>
                             <panel width="2px"/>
-                            <image id="spell_3_image" filename="Interface/hud/spells/none.png" width="58px" height="100%w"></image>
+                            <panel childLayout="center" width="58px" height="100%w">
+                                <image id="spell_3_image" filename="Interface/hud/spells/none.png" width="100%" height="100%"></image>
+                                <panel id="spell_3_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="spell_3_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
+                                </panel>
+                            </panel>
                             <panel width="14px"/>
                             <panel childLayout="vertical" width="39px">
                                 <panel height="10px"/>

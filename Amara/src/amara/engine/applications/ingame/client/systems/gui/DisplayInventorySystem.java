@@ -20,22 +20,30 @@ public class DisplayInventorySystem extends GUIDisplaySystem{
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
-        InventoryComponent inventoryComponent = entityWorld.getComponent(selectedEntity, InventoryComponent.class);
-        for(int i=0;i<6;i++){
-            String visualisationName = "none";
-            if(inventoryComponent != null){
-                int[] items = inventoryComponent.getItemEntities();
-                if(i < items.length){
-                    ItemVisualisationComponent itemVisualisationComponent = entityWorld.getComponent(items[i], ItemVisualisationComponent.class);
-                    if(itemVisualisationComponent != null){
-                        visualisationName = itemVisualisationComponent.getName();
-                    }
-                    else{
-                        visualisationName = "unknown";
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, InventoryComponent.class);
+        check(entityWorld, observer.getNew().getComponent(selectedEntity, InventoryComponent.class));
+        check(entityWorld, observer.getChanged().getComponent(selectedEntity, InventoryComponent.class));
+        observer.reset();
+    }
+    
+    private void check(EntityWorld entityWorld, InventoryComponent inventoryComponent){
+        if(inventoryComponent != null){
+            for(int i=0;i<6;i++){
+                String visualisationName = "none";
+                if(inventoryComponent != null){
+                    int[] items = inventoryComponent.getItemEntities();
+                    if(i < items.length){
+                        ItemVisualisationComponent itemVisualisationComponent = entityWorld.getComponent(items[i], ItemVisualisationComponent.class);
+                        if(itemVisualisationComponent != null){
+                            visualisationName = itemVisualisationComponent.getName();
+                        }
+                        else{
+                            visualisationName = "unknown";
+                        }
                     }
                 }
+                screenController_HUD.setInventoryItemImage(i, "Interface/hud/items/" + visualisationName + ".png");
             }
-            screenController_HUD.setInventoryItemImage(i, "Interface/hud/items/" + visualisationName + ".png");
         }
     }
 }

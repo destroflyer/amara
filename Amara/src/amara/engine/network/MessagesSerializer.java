@@ -145,7 +145,8 @@ public class MessagesSerializer{
                         //effects/movement,
                         MoveToEntityPositionComponent.class,
                         //effects/spells
-                        ReplaceSpellComponent.class,
+                        ReplaceSpellWithExistingSpellComponent.class,
+                        ReplaceSpellWithNewSpellComponent.class,
                         //general
                         DescriptionComponent.class,
                         NameComponent.class,

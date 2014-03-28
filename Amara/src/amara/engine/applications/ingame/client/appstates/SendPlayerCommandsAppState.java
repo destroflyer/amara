@@ -96,7 +96,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
         EntityWrapper selectedEntity = entityWorld.getWrapped(entityWorld.getComponent(getPlayerEntityID(), SelectedUnitComponent.class).getEntityID());
         SpellsComponent spellsComponent = selectedEntity.getComponent(SpellsComponent.class);
         if(spellsComponent != null){
-            int[] spells = spellsComponent.getSpellsEntitiesIDs();
+            int[] spells = spellsComponent.getSpellsEntities();
             if(spellIndex < spells.length){
                 int spellEntity = spells[spellIndex];
                 CastTypeComponent.CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();

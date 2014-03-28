@@ -17,12 +17,12 @@ public class SpellsComponent{
         
     }
     
-    public SpellsComponent(int[] spellsEntitiesIDs){
-        this.spellsEntitiesIDs = spellsEntitiesIDs;
+    public SpellsComponent(int[] spellsEntities){
+        this.spellsEntities = spellsEntities;
     }
-    private int[] spellsEntitiesIDs;
+    private int[] spellsEntities;
 
-    public int[] getSpellsEntitiesIDs(){
-        return spellsEntitiesIDs;
+    public int[] getSpellsEntities(){
+        return spellsEntities;
     }
 }
