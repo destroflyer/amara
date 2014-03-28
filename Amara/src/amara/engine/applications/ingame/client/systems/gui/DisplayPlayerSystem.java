@@ -12,17 +12,14 @@ import amara.game.entitysystem.components.general.NameComponent;
  *
  * @author Carl
  */
-public class DisplayPlayerSystem implements EntitySystem{
+public class DisplayPlayerSystem extends GUIDisplaySystem{
 
     public DisplayPlayerSystem(int playerEntity, ScreenController_HUD screenController_HUD){
-        this.playerEntity = playerEntity;
-        this.screenController_HUD = screenController_HUD;
+        super(playerEntity, screenController_HUD);
     }
-    private int playerEntity;
-    private ScreenController_HUD screenController_HUD;
-    
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
         ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, NameComponent.class);
         check(observer.getNew().getComponent(playerEntity, NameComponent.class));
         check(observer.getChanged().getComponent(playerEntity, NameComponent.class));
