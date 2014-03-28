@@ -197,6 +197,7 @@ public class MessagesSerializer{
                         InstantTargetBuffComponent.class,
                         InstantEffectTriggersComponent.class,
                         RemainingCooldownComponent.class,
+                        SpellVisualisationComponent.class,
                         //spells/specials
                         TeleportCasterToTargetPositionComponent.class,
                         //units

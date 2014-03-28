@@ -43,4 +43,8 @@ public class ScreenController_HUD extends GameScreenController{
     public void setInventoryItemImage(int index, String imagePath){
         getImageRenderer("inventory_item_" + index + "_image").setImage(createImage(imagePath));
     }
+    
+    public void setSpellImage(int index, String imagePath){
+        getImageRenderer("spell_" + index + "_image").setImage(createImage(imagePath));
+    }
 }

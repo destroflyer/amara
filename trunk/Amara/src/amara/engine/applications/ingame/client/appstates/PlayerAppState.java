@@ -25,10 +25,11 @@ public class PlayerAppState extends BaseDisplayAppState{
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
-        NiftyAppState niftyAppState = getAppState(NiftyAppState.class);
-        localEntitySystemAppState.addEntitySystem(new DisplayPlayerSystem(playerEntity, niftyAppState.getScreenController(ScreenController_HUD.class)));
-        localEntitySystemAppState.addEntitySystem(new DisplayAttributesSystem(playerEntity, niftyAppState.getScreenController(ScreenController_HUD.class)));
-        localEntitySystemAppState.addEntitySystem(new DisplayInventorySystem(playerEntity, niftyAppState.getScreenController(ScreenController_HUD.class)));
+        ScreenController_HUD screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
+        localEntitySystemAppState.addEntitySystem(new DisplayPlayerSystem(playerEntity, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayAttributesSystem(playerEntity, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayInventorySystem(playerEntity, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplaySpellsSystem(playerEntity, screenController_HUD));
     }
 
     public int getPlayerEntity(){

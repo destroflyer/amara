@@ -109,6 +109,7 @@ public class EntityTemplate{
         else if(templateName.equals("null_sphere")){
             entityWrapper.setComponent(new NameComponent("Null Sphere"));
             entityWrapper.setComponent(new DescriptionComponent("Silences an enemy."));
+            entityWrapper.setComponent(new SpellVisualisationComponent("null_sphere"));
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("null_sphere_projectile"));
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(25));
@@ -130,12 +131,14 @@ public class EntityTemplate{
         else if(templateName.equals("riftwalk")){
             entityWrapper.setComponent(new NameComponent("Riftwalk"));
             entityWrapper.setComponent(new DescriptionComponent("Teleports to the target location."));
+            entityWrapper.setComponent(new SpellVisualisationComponent("riftwalk"));
             entityWrapper.setComponent(new TeleportCasterToTargetPositionComponent());
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
         }
         else if(templateName.equals("ignite")){
             entityWrapper.setComponent(new NameComponent("Ignite"));
             entityWrapper.setComponent(new DescriptionComponent("Deals damage over time to the target."));
+            entityWrapper.setComponent(new SpellVisualisationComponent("ignite"));
             EntityWrapper igniteBuff = entityWorld.getWrapped(entityWorld.createEntity());
             igniteBuff.setComponent(new BuffVisualisationComponent("burning"));
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
@@ -185,6 +188,7 @@ public class EntityTemplate{
         else if(templateName.equals("sear")){
             entityWrapper.setComponent(new NameComponent("Sear"));
             entityWrapper.setComponent(new DescriptionComponent("Throws a fireball."));
+            entityWrapper.setComponent(new SpellVisualisationComponent("sear"));
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("fireball"));
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(4));
@@ -212,6 +216,7 @@ public class EntityTemplate{
         else if(templateName.equals("pillar_of_flame")){
             entityWrapper.setComponent(new NameComponent("Pillar of Flame"));
             entityWrapper.setComponent(new DescriptionComponent("Spawns a fire pillar at the target location."));
+            entityWrapper.setComponent(new SpellVisualisationComponent("pillar_of_flame"));
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("flame_pillar"));
             entityWrapper.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation.getId()}));
@@ -238,6 +243,7 @@ public class EntityTemplate{
         else if(templateName.equals("battle_cry")){
             entityWrapper.setComponent(new NameComponent("Battle Cry"));
             entityWrapper.setComponent(new DescriptionComponent("Increases the attack speed for a few seconds."));
+            entityWrapper.setComponent(new SpellVisualisationComponent("battle_cry"));
             EntityWrapper battleCryBuff = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
             effect3.setComponent(new BonusPercentageAttackSpeedComponent(0.8f));
@@ -279,6 +285,7 @@ public class EntityTemplate{
         else if(templateName.equals("grab")){
             entityWrapper.setComponent(new NameComponent("Grab"));
             entityWrapper.setComponent(new DescriptionComponent("Beep boop."));
+            entityWrapper.setComponent(new SpellVisualisationComponent("grab"));
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("grab_projectile," + parameters[0]));
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(12));
@@ -308,6 +315,7 @@ public class EntityTemplate{
         else if(templateName.equals("astral_blessing")){
             entityWrapper.setComponent(new NameComponent("Heal"));
             entityWrapper.setComponent(new DescriptionComponent("Soraka in a nutshell."));
+            entityWrapper.setComponent(new SpellVisualisationComponent("astral_blessing"));
             EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger.setComponent(new TargetTargetComponent());
             EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
@@ -318,6 +326,7 @@ public class EntityTemplate{
         }
         else if(templateName.equals("sonic_wave")){
             entityWrapper.setComponent(new NameComponent("Sonic Wave"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("sonic_wave"));
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("sonic_wave_projectile," + parameters[0] + "," + parameters[1]));
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(12));
@@ -356,6 +365,7 @@ public class EntityTemplate{
         }
         else if(templateName.equals("resonating_strike")){
             entityWrapper.setComponent(new NameComponent("Resonating Strike"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("resonating_strike"));
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new TargetTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
@@ -407,6 +417,7 @@ public class EntityTemplate{
         }
         else if(templateName.equals("intervention")){
             entityWrapper.setComponent(new NameComponent("Intervention"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("intervention"));
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new TargetTargetComponent());
             float duration = 3;
@@ -437,6 +448,7 @@ public class EntityTemplate{
         }
         else if(templateName.equals("zhonyas")){
             entityWrapper.setComponent(new NameComponent("Zhonyas"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("zhonyas"));
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new TargetTargetComponent());
             float duration = 2.5f;
