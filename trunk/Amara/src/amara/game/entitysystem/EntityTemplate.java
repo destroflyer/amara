@@ -146,6 +146,7 @@ public class EntityTemplate{
             effect2.setComponent(new ScalingAbilityPowerMagicDamageComponent(1));
             igniteBuff.setComponent(new RepeatingEffectComponent(effect2.getId(), 0.5f));
             entityWrapper.setComponent(new InstantTargetBuffComponent(igniteBuff.getId(), 3));
+            entityWrapper.setComponent(new CooldownComponent(3));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
         }
         else if(templateName.equals("wizard")){
@@ -328,7 +329,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new NameComponent("Sonic Wave"));
             entityWrapper.setComponent(new SpellVisualisationComponent("sonic_wave"));
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-            spawnInformation.setComponent(new SpawnTemplateComponent("sonic_wave_projectile," + parameters[0] + "," + parameters[1]));
+            spawnInformation.setComponent(new SpawnTemplateComponent("sonic_wave_projectile," + parameters[0] + "," + parameters[1] + "," + entityWrapper.getId()));
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(12));
             entityWrapper.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation.getId()}));
             entityWrapper.setComponent(new CooldownComponent(3));
@@ -354,11 +355,11 @@ public class EntityTemplate{
             EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger3.setComponent(new CustomTargetComponent(parameters[0]));
             EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect3.setComponent(new ReplaceSpellComponent(parameters[1], "sonic_wave," + parameters[0] + "," + parameters[1]));
+            effect3.setComponent(new ReplaceSpellWithExistingSpellComponent(parameters[1], parameters[2]));
             effectTrigger3.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect3.getId()));
             buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
             effect2.setComponent(new AddBuffComponent(buff.getId(), 3));
-            effect1.setComponent(new ReplaceSpellComponent(parameters[1], "resonating_strike," + buff.getId()));
+            effect1.setComponent(new ReplaceSpellWithNewSpellComponent(parameters[1], "resonating_strike," + buff.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
             entityWrapper.setComponent(new EffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId()));
             entityWrapper.setComponent(new LifetimeComponent(1));

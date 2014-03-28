@@ -99,7 +99,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyMagicDamageSystem());
         addEntitySystem(new ApplyHealSystem());
         addEntitySystem(new ApplyMoveToEntityPositionSystem());
-        addEntitySystem(new ApplyReplaceSpellsSystem());
+        addEntitySystem(new ApplyReplaceSpellsWithExistingSpellsSystem());
+        addEntitySystem(new ApplyReplaceSpellsWithNewSpellsSystem());
         addEntitySystem(new RemoveAppliedEffectsSystem());
         addEntitySystem(new DeathSystem());
         addEntitySystem(new MaximumHealthSystem());

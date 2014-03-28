@@ -29,9 +29,9 @@ public class EffectTriggerUtil{
         EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
         TriggeredEffectComponent triggeredEffectComponent = entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class);
         int effectEntity = triggeredEffectComponent.getEffectEntity();
-        ReplaceSpellComponent replaceSpellComponent = entityWorld.getComponent(effectEntity, ReplaceSpellComponent.class);
-        if(replaceSpellComponent != null){
-            entityWorld.setComponent(effectEntity, new ReplaceSpellComponent(replaceSpellComponent.getSpellIndex(), replaceSpellComponent.getNewSpellTemplate() + "," + targetEntity));
+        ReplaceSpellWithNewSpellComponent replaceSpellWithNewSpellComponent = entityWorld.getComponent(effectEntity, ReplaceSpellWithNewSpellComponent.class);
+        if(replaceSpellWithNewSpellComponent != null){
+            entityWorld.setComponent(effectEntity, new ReplaceSpellWithNewSpellComponent(replaceSpellWithNewSpellComponent.getSpellIndex(), replaceSpellWithNewSpellComponent.getNewSpellTemplate() + "," + targetEntity));
         }
         effectCast.setComponent(new PrepareEffectComponent(effectEntity));
         CastSourceComponent castSourceComponent = entityWorld.getComponent(triggeredEffectComponent.getSourceEntity(), CastSourceComponent.class);

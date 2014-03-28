@@ -11,24 +11,24 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class ReplaceSpellComponent{
+public class ReplaceSpellWithExistingSpellComponent{
 
-    public ReplaceSpellComponent(){
+    public ReplaceSpellWithExistingSpellComponent(){
         
     }
     
-    public ReplaceSpellComponent(int spellIndex, String newSpellTemplate){
+    public ReplaceSpellWithExistingSpellComponent(int spellIndex, int spellEntity){
         this.spellIndex = spellIndex;
-        this.newSpellTemplate = newSpellTemplate;
+        this.spellEntity = spellEntity;
     }
     private int spellIndex;
-    private String newSpellTemplate;
+    private int spellEntity;
 
     public int getSpellIndex(){
         return spellIndex;
     }
 
-    public String getNewSpellTemplate(){
-        return newSpellTemplate;
+    public int getSpellEntity(){
+        return spellEntity;
     }
 }

@@ -82,7 +82,8 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     AddVulnerabilityComponent.class,
                     RemoveVulnerabilityComponent.class,
                     MoveToEntityPositionComponent.class,
-                    ReplaceSpellComponent.class
+                    ReplaceSpellWithExistingSpellComponent.class,
+                    ReplaceSpellWithNewSpellComponent.class
                 });
                 effectImpact.setComponent(new ApplyEffectImpactComponent(targetEntity.getId()));
             }

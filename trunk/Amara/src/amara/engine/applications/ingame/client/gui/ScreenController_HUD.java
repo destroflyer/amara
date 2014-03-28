@@ -4,6 +4,7 @@
  */
 package amara.engine.applications.ingame.client.gui;
 
+import amara.Util;
 import amara.engine.gui.GameScreenController;
 
 /**
@@ -11,6 +12,14 @@ import amara.engine.gui.GameScreenController;
  * @author Carl
  */
 public class ScreenController_HUD extends GameScreenController{
+
+    @Override
+    public void onStartup(){
+        super.onStartup();
+        for(int i=0;i<4;i++){
+            hideSpellCooldown(i);
+        }
+    }
     
     public void setPlayerName(String name){
         getTextRenderer("player_name").setText(name);
@@ -46,5 +55,14 @@ public class ScreenController_HUD extends GameScreenController{
     
     public void setSpellImage(int index, String imagePath){
         getImageRenderer("spell_" + index + "_image").setImage(createImage(imagePath));
+    }
+    
+    public void showSpellCooldown(int index, float remainingTime){
+        getElementByID("spell_" + index + "_cooldown").show();
+        getTextRenderer("spell_" + index + "_cooldown_time").setText("" + Util.round(remainingTime, 1));
+    }
+    
+    public void hideSpellCooldown(int index){
+        getElementByID("spell_" + index + "_cooldown").hide();
     }
 }

@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URI;
 import java.net.URL;
 import java.text.DateFormat;
@@ -294,6 +296,10 @@ public class Util{
         }catch(Exception ex){
         }
         return -1;
+    }
+    
+    public static float round(double value, int decimals){
+        return (float) new BigDecimal(value).setScale(decimals, RoundingMode.HALF_UP).doubleValue();
     }
     
     public static float compensateFloatRoundingErrors(float number){

@@ -29,7 +29,8 @@ public class PlayerAppState extends BaseDisplayAppState{
         localEntitySystemAppState.addEntitySystem(new DisplayPlayerSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayAttributesSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayInventorySystem(playerEntity, screenController_HUD));
-        localEntitySystemAppState.addEntitySystem(new DisplaySpellsSystem(playerEntity, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplaySpellsImagesSystem(playerEntity, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplaySpellsCooldownsSystem(playerEntity, screenController_HUD));
     }
 
     public int getPlayerEntity(){
