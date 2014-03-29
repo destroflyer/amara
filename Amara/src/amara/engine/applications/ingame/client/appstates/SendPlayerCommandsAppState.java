@@ -36,49 +36,53 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
     @Override
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
-        Queue<Event> eventQueue = getAppState(EventManagerAppState.class).getEventQueue();
-        Iterator<Event> eventsIterator = eventQueue.getIterator();
-        while(eventsIterator.hasNext()){
-            Event event = eventsIterator.next();
-            if(event instanceof MouseClickEvent){
-                MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
-                switch(mouseClickEvent.getButton()){                    
-                    case Right:
-                        int entityToAttack = getCursorHoveredEntity();
-                        if(entityToAttack != -1){
-                            sendCommand(new AutoAttackCommand(entityToAttack));
-                        }
-                        else{
-                            Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
-                            if(groundLocation != null){
-                                sendCommand(new MoveCommand(groundLocation));
+        int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
+        EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
+        if(entityWorld.hasComponent(playerEntity, IsAliveComponent.class)){
+            Queue<Event> eventQueue = getAppState(EventManagerAppState.class).getEventQueue();
+            Iterator<Event> eventsIterator = eventQueue.getIterator();
+            while(eventsIterator.hasNext()){
+                Event event = eventsIterator.next();
+                if(event instanceof MouseClickEvent){
+                    MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
+                    switch(mouseClickEvent.getButton()){                    
+                        case Right:
+                            int entityToAttack = getCursorHoveredEntity();
+                            if(entityToAttack != -1){
+                                sendCommand(new AutoAttackCommand(entityToAttack));
                             }
-                        }
-                        break;
+                            else{
+                                Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
+                                if(groundLocation != null){
+                                    sendCommand(new MoveCommand(groundLocation));
+                                }
+                            }
+                            break;
+                    }
                 }
-            }
-            else if(event instanceof KeyPressedEvent){
-                KeyPressedEvent keyPressedEvent = (KeyPressedEvent) event;
-                switch(keyPressedEvent.getKeyCode()){
-                    case KeyInput.KEY_Q:
-                        castSpell(0);
-                        break;
-                    
-                    case KeyInput.KEY_W:
-                        castSpell(1);
-                        break;
-                    
-                    case KeyInput.KEY_E:
-                        castSpell(2);
-                        break;
-                    
-                    case KeyInput.KEY_R:
-                        castSpell(3);
-                        break;
-                    
-                    case KeyInput.KEY_S:
-                        sendCommand(new StopCommand());
-                        break;
+                else if(event instanceof KeyPressedEvent){
+                    KeyPressedEvent keyPressedEvent = (KeyPressedEvent) event;
+                    switch(keyPressedEvent.getKeyCode()){
+                        case KeyInput.KEY_Q:
+                            castSpell(0);
+                            break;
+
+                        case KeyInput.KEY_W:
+                            castSpell(1);
+                            break;
+
+                        case KeyInput.KEY_E:
+                            castSpell(2);
+                            break;
+
+                        case KeyInput.KEY_R:
+                            castSpell(3);
+                            break;
+
+                        case KeyInput.KEY_S:
+                            sendCommand(new StopCommand());
+                            break;
+                    }
                 }
             }
         }
@@ -90,10 +94,11 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
     }
     
     private void castSpell(int spellIndex){
+        int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
         int cursorHoveredEntity = getCursorHoveredEntity();
         Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
-        EntityWrapper selectedEntity = entityWorld.getWrapped(entityWorld.getComponent(getPlayerEntityID(), SelectedUnitComponent.class).getEntityID());
+        EntityWrapper selectedEntity = entityWorld.getWrapped(entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntityID());
         SpellsComponent spellsComponent = selectedEntity.getComponent(SpellsComponent.class);
         if(spellsComponent != null){
             int[] spells = spellsComponent.getSpellsEntities();
@@ -135,17 +140,6 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
             CollisionResult collision = entitiesColissionResults.getCollision(i);
             int entity = localEntitySystemAppState.getEntity(collision.getGeometry());
             if(entity != -1){
-                return entity;
-            }
-        }
-        return -1;
-    }
-    
-    private int getPlayerEntityID(){
-        int clientID = getAppState(NetworkClientAppState.class).getNetworkClient().getID();
-        EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
-        for(int entity : entityWorld.getEntitiesWithAll(ClientComponent.class)){
-            if(entityWorld.getComponent(entity, ClientComponent.class).getClientID() == clientID){
                 return entity;
             }
         }

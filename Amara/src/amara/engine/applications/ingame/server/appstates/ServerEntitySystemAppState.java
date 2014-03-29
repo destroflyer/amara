@@ -31,6 +31,7 @@ import amara.game.entitysystem.systems.movement.*;
 import amara.game.entitysystem.systems.network.*;
 import amara.game.entitysystem.systems.objectives.*;
 import amara.game.entitysystem.systems.physics.*;
+import amara.game.entitysystem.systems.players.*;
 import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.*;
 import amara.game.entitysystem.systems.visuals.*;
@@ -113,6 +114,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new TriggerTargetReachedEffectSystem());
         addEntitySystem(intersectionSystem);
         addEntitySystem(new AggroSystem());
+        addEntitySystem(new PlayerDeathSystem());
         
         Map map = mainApplication.getGame().getMap();
         map.load(entityWorld);
@@ -126,6 +128,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
             unit.setComponent(new TitleComponent(login));
             map.spawn(entityWorld, i, unit.getId());
             playerEntity.setComponent(new SelectedUnitComponent(unit.getId()));
+            playerEntity.setComponent(new IsAliveComponent());
             player.setEntityID(playerEntity.getId());
         }
         MapPhysicsInformation mapPhysicsInformation = map.getPhysicsInformation();
