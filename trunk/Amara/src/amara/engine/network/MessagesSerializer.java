@@ -183,6 +183,7 @@ public class MessagesSerializer{
                         UnitIntersectionPushComponent.class,
                         //players
                         ClientComponent.class,
+                        IsAliveComponent.class,
                         SelectedUnitComponent.class,
                         //spawns
                         CastSourceComponent.class,

@@ -7,6 +7,7 @@ package amara.engine.applications.ingame.client.appstates;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
+import amara.engine.applications.ingame.client.systems.filters.*;
 import amara.engine.applications.ingame.client.systems.gui.*;
 import amara.engine.appstates.*;
 
@@ -25,6 +26,7 @@ public class PlayerAppState extends BaseDisplayAppState{
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
+        localEntitySystemAppState.addEntitySystem(new PlayerDeathDisplaySystem(playerEntity, getAppState(PostFilterAppState.class)));
         ScreenController_HUD screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
         localEntitySystemAppState.addEntitySystem(new DisplayPlayerSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayAttributesSystem(playerEntity, screenController_HUD));
