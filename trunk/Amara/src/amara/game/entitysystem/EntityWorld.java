@@ -27,6 +27,11 @@ public class EntityWorld extends ObservedComponentMap
         clearComponents(entity);
     }
     
+    public boolean hasEntity(int entity)
+    {
+        return !getComponents(entity).isEmpty();
+    }
+    
     public EntityWrapper getWrapped(int entity)
     {
         return new EntityWrapper(this, entity);
