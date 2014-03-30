@@ -45,7 +45,7 @@ public class GrayScaleFilter extends Filter{
     
     @Override
     protected void initFilter(AssetManager manager, RenderManager renderManager, ViewPort vp, int w, int h){
-        material = new Material(manager, "MatDefs/filters/grayscale/grayscale.j3md");
+        material = new Material(manager, "Shaders/filters/grayscale/matdefs/grayscale.j3md");
     }
 
     @Override

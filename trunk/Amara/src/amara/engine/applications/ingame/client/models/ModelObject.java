@@ -20,7 +20,7 @@ public class ModelObject extends Node implements AnimEventListener{
         loadSkin(new ModelSkin(skinResourcePath));
     }
     private DisplayApplication mainApplication;
-    protected Spatial modelSpatial;
+    private Spatial modelSpatial;
     private AnimChannel animationChannel;
     
     private void loadSkin(ModelSkin skin){
@@ -35,6 +35,12 @@ public class ModelObject extends Node implements AnimEventListener{
         if(skeletonControl != null){
             //skeletonControl.setHardwareSkinningPreferred(true);
         }
+    }
+
+    public void applyModelTransformTo(Spatial spatial){
+        spatial.setLocalTranslation(modelSpatial.getLocalTranslation());
+        spatial.setLocalRotation(modelSpatial.getLocalRotation());
+        spatial.setLocalScale(modelSpatial.getLocalScale());
     }
     
     public void playAnimation(String animationName, float loopDuration){

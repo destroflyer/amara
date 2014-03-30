@@ -20,7 +20,7 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
         this.entitySceneMap = entitySceneMap;
         this.visualisationName = visualisationName;
     }
-    private EntitySceneMap entitySceneMap;
+    protected EntitySceneMap entitySceneMap;
     private String visualisationName;
 
     @Override
