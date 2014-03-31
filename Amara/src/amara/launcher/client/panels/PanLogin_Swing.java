@@ -37,7 +37,6 @@ public class PanLogin_Swing extends PanLogin{
         panBox.setBackground(new Color(255, 255, 255, 30));
         addTextFieldListeners();
         showIsLoading(false);
-        playBackgroundMusic("/Sounds/music/Lords of the Sky.mp3");
     }
     private Image backgroundImage;
     
@@ -71,6 +70,12 @@ public class PanLogin_Swing extends PanLogin{
         String login = txtLogin.getText();
         String password = new String(txtPassword.getPassword());
         login(login, password);
+    }
+
+    @Override
+    public void start(){
+        super.start();
+        playBackgroundMusic("/Sounds/music/Lords of the Sky.mp3");
     }
     
     @Override

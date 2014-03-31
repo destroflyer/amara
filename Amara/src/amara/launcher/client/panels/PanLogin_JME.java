@@ -16,25 +16,22 @@ import amara.engine.applications.launcher.startscreen.screens.LoginScreen;
 public class PanLogin_JME extends PanLogin{
     
     public PanLogin_JME(LoginScreen loginScreen){
+        this.loginScreen = loginScreen;
         setLayout(new GridLayout());
         loginScreenApplication = new LoginScreenApplication(this, loginScreen);
         loginScreenApplication.createCanvas();
         JmeCanvasContext jmeCanvasContext = (JmeCanvasContext) loginScreenApplication.getContext();
         jmeCanvasContext.setSystemListener(loginScreenApplication);
         add(jmeCanvasContext.getCanvas());
-        loginScreenApplication.startCanvas();
-        final String backgroundMusicPath = loginScreen.getBackgroundMusicPath();
-        if(backgroundMusicPath != null){
-            loginScreenApplication.enqueueTask(new Runnable(){
-
-                @Override
-                public void run(){
-                    playBackgroundMusic("/" + backgroundMusicPath);
-                }
-            });
-        }
     }
+    private LoginScreen loginScreen;
     private LoginScreenApplication loginScreenApplication;
+
+    @Override
+    public void start(){
+        loginScreenApplication.startCanvas();
+        playBackgroundMusic("/" + loginScreen.getBackgroundMusicPath());
+    }
 
     @Override
     public void showIsLoading(boolean isLoading){
