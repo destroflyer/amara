@@ -26,6 +26,10 @@ public abstract class PanLogin extends JPanel{
     
     public abstract void showIsLoading(boolean isLoading);
     
+    public void start(){
+        
+    }
+    
     public void close(){
         backgroundMusicPlayer.stop();
     }

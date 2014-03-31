@@ -35,6 +35,7 @@ public class MainFrame extends javax.swing.JFrame{
         this.masterserverHostInformation = masterserverHostInformation;
         this.panLogin = panLogin;
         setDisplayedPanel(panLogin);
+        panLogin.start();
         FrameUtil.initFrameSpecials(this);
         FrameUtil.centerFrame(this);
     }
