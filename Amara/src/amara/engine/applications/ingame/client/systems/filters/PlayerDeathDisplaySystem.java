@@ -7,7 +7,8 @@ package amara.engine.applications.ingame.client.systems.filters;
 import amara.engine.appstates.PostFilterAppState;
 import amara.engine.filters.GrayScaleFilter;
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.players.IsAliveComponent;
+import amara.game.entitysystem.components.players.*;
+import amara.game.entitysystem.components.units.*;
 
 /**
  *
@@ -25,13 +26,17 @@ public class PlayerDeathDisplaySystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsAliveComponent.class);
-        if(observer.getNew().hasComponent(playerEntity, IsAliveComponent.class)){
-            postFilterAppState.removeFilter(grayscaleFilter);
+        SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
+        if(selectedUnitComponent != null){
+            int selectedEntity = selectedUnitComponent.getEntityID();
+            ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsAliveComponent.class);
+            if(observer.getNew().hasComponent(selectedEntity, IsAliveComponent.class)){
+                postFilterAppState.removeFilter(grayscaleFilter);
+            }
+            else if(observer.getRemoved().hasComponent(selectedEntity, IsAliveComponent.class)){
+                postFilterAppState.addFilter(grayscaleFilter);
+            }
+            observer.reset();
         }
-        else if(observer.getRemoved().hasComponent(playerEntity, IsAliveComponent.class)){
-            postFilterAppState.addFilter(grayscaleFilter);
-        }
-        observer.reset();
     }
 }

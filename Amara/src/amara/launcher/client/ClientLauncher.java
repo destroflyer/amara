@@ -10,11 +10,16 @@
  */
 package amara.launcher.client;
 
+import java.awt.AWTEvent;
+import java.awt.Toolkit;
+import java.awt.event.AWTEventListener;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
+import amara.engine.applications.launcher.startscreen.screens.*;
 import amara.engine.network.HostInformation;
 import amara.engine.settings.DefaultSettings;
 import amara.launcher.FrameUtil;
-import amara.launcher.client.panels.PanLauncher;
+import amara.launcher.client.panels.*;
 
 /**
  *
@@ -28,11 +33,28 @@ public class ClientLauncher extends JFrame{
         panLauncher.setSize(panImage.getSize());
         panImage.add(panLauncher);
         txtMasterserverPort.setText("" + DefaultSettings.NETWORK_PORT);
+        Toolkit.getDefaultToolkit().addAWTEventListener(keyListener, AWTEvent.KEY_EVENT_MASK);
+        getContentPane().requestFocus();
         FrameUtil.initFrameSpecials(this);
         FrameUtil.centerFrame(this);
         //checkForUpdate();
     }
     private boolean wasUpdateNeeded = false;
+    private PanLogin forcedLoginPanel;
+    private AWTEventListener keyListener = new AWTEventListener(){
+
+        public void eventDispatched(AWTEvent event){
+            KeyEvent keyEvent = (KeyEvent) event;
+            if(keyEvent.getID() == KeyEvent.KEY_RELEASED){
+                switch(keyEvent.getKeyCode()){
+                    case KeyEvent.VK_NUMPAD1:
+                        forcedLoginPanel = new PanLogin_JME(new LoginScreen_Forest());
+                        break;
+                }
+            }
+        }
+    };
+    
     /*private UpdateFile[] filesToUpdate;
     
     private void checkForUpdate(){
@@ -93,7 +115,7 @@ public class ClientLauncher extends JFrame{
         }
         else{
             pbrCurrentFile.setValue(pbrCurrentFile.getMaximum());
-            pbrCurrentFile.setString("Datei vollständig");
+            pbrCurrentFile.setString("Datei vollstï¿½ndig");
         }
     }*/
 
@@ -218,7 +240,9 @@ private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     else{
         String host = cbxMasterserverHost.getSelectedItem().toString();
         int port = Integer.parseInt(txtMasterserverPort.getText());
-        MainFrame mainFrame = new MainFrame(new HostInformation(host, port));
+        Toolkit.getDefaultToolkit().removeAWTEventListener(keyListener);
+        PanLogin panLogin = ((forcedLoginPanel != null)?forcedLoginPanel:new PanLogin_Swing());
+        MainFrame mainFrame = new MainFrame(new HostInformation(host, port), panLogin);
         this.setVisible(false);
         mainFrame.setVisible(true);
     }

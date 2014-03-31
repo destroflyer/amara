@@ -25,6 +25,8 @@ import amara.game.entitysystem.components.effects.spells.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.items.*;
+import amara.game.entitysystem.components.maps.*;
+import amara.game.entitysystem.components.maps.playerdeathrules.*;
 import amara.game.entitysystem.components.objectives.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
@@ -158,6 +160,12 @@ public class MessagesSerializer{
                         //items
                         InventoryComponent.class,
                         ItemVisualisationComponent.class,
+                        //maps
+                        MapObjectiveComponent.class,
+                        PlayerDeathRulesComponent.class,
+                        //maps/playerdeathrules
+                        RespawnPlayersComponent.class,
+                        RespawnTimerComponent.class,
                         //objectives
                         FinishedObjectiveComponent.class,
                         MissingEntitiesComponent.class,
@@ -183,8 +191,10 @@ public class MessagesSerializer{
                         UnitIntersectionPushComponent.class,
                         //players
                         ClientComponent.class,
-                        IsAliveComponent.class,
+                        PlayerIndexComponent.class,
+                        RespawnComponent.class,
                         SelectedUnitComponent.class,
+                        WaitingToRespawnComponent.class,
                         //spawns
                         CastSourceComponent.class,
                         RelativeSpawnPositionComponent.class,
@@ -208,6 +218,7 @@ public class MessagesSerializer{
                         AutoAttackTargetComponent.class,
                         EffectTriggersComponent.class,
                         IntersectionRulesComponent.class,
+                        IsAliveComponent.class,
                         IsTargetableComponent.class,
                         IsVulnerableComponent.class,
                         LifetimeComponent.class,
@@ -216,6 +227,7 @@ public class MessagesSerializer{
                         TeamComponent.class,
                         //units/animations
                         AutoAttackAnimationComponent.class,
+                        DeathAnimationComponent.class,
                         IdleAnimationComponent.class,
                         WalkAnimationComponent.class,
                         //units/crowdcontrol
@@ -244,6 +256,7 @@ public class MessagesSerializer{
                         StopPlayingAnimationComponent.class,
                         TitleComponent.class,
                         //visuals/animations
+                        FreezeAfterPlayingComponent.class,
                         LoopDurationComponent.class,
                         PassedLoopTimeComponent.class,
                         RemainingLoopsComponent.class,

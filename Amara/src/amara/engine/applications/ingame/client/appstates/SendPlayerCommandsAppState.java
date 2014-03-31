@@ -36,53 +36,49 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
     @Override
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
-        int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
-        EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
-        if(entityWorld.hasComponent(playerEntity, IsAliveComponent.class)){
-            Queue<Event> eventQueue = getAppState(EventManagerAppState.class).getEventQueue();
-            Iterator<Event> eventsIterator = eventQueue.getIterator();
-            while(eventsIterator.hasNext()){
-                Event event = eventsIterator.next();
-                if(event instanceof MouseClickEvent){
-                    MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
-                    switch(mouseClickEvent.getButton()){                    
-                        case Right:
-                            int entityToAttack = getCursorHoveredEntity();
-                            if(entityToAttack != -1){
-                                sendCommand(new AutoAttackCommand(entityToAttack));
+        Queue<Event> eventQueue = getAppState(EventManagerAppState.class).getEventQueue();
+        Iterator<Event> eventsIterator = eventQueue.getIterator();
+        while(eventsIterator.hasNext()){
+            Event event = eventsIterator.next();
+            if(event instanceof MouseClickEvent){
+                MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
+                switch(mouseClickEvent.getButton()){                    
+                    case Right:
+                        int entityToAttack = getCursorHoveredEntity();
+                        if(entityToAttack != -1){
+                            sendCommand(new AutoAttackCommand(entityToAttack));
+                        }
+                        else{
+                            Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
+                            if(groundLocation != null){
+                                sendCommand(new MoveCommand(groundLocation));
                             }
-                            else{
-                                Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
-                                if(groundLocation != null){
-                                    sendCommand(new MoveCommand(groundLocation));
-                                }
-                            }
-                            break;
-                    }
+                        }
+                        break;
                 }
-                else if(event instanceof KeyPressedEvent){
-                    KeyPressedEvent keyPressedEvent = (KeyPressedEvent) event;
-                    switch(keyPressedEvent.getKeyCode()){
-                        case KeyInput.KEY_Q:
-                            castSpell(0);
-                            break;
+            }
+            else if(event instanceof KeyPressedEvent){
+                KeyPressedEvent keyPressedEvent = (KeyPressedEvent) event;
+                switch(keyPressedEvent.getKeyCode()){
+                    case KeyInput.KEY_Q:
+                        castSpell(0);
+                        break;
 
-                        case KeyInput.KEY_W:
-                            castSpell(1);
-                            break;
+                    case KeyInput.KEY_W:
+                        castSpell(1);
+                        break;
 
-                        case KeyInput.KEY_E:
-                            castSpell(2);
-                            break;
+                    case KeyInput.KEY_E:
+                        castSpell(2);
+                        break;
 
-                        case KeyInput.KEY_R:
-                            castSpell(3);
-                            break;
+                    case KeyInput.KEY_R:
+                        castSpell(3);
+                        break;
 
-                        case KeyInput.KEY_S:
-                            sendCommand(new StopCommand());
-                            break;
-                    }
+                    case KeyInput.KEY_S:
+                        sendCommand(new StopCommand());
+                        break;
                 }
             }
         }

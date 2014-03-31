@@ -88,14 +88,16 @@ public class EntityTemplate{
             EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
             entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+            EntityWrapper deathAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            deathAnimation.setComponent(new NameComponent("death"));
+            deathAnimation.setComponent(new LoopDurationComponent(1));
+            deathAnimation.setComponent(new FreezeAfterPlayingComponent());
+            entityWrapper.setComponent(new DeathAnimationComponent(deathAnimation.getId()));
 
             entityWrapper.setComponent(new ScaleComponent(0.75f));
-            entityWrapper.setComponent(new HitboxComponent(new RegularCyclic(6, 2)));
             entityWrapper.setComponent(new AntiGhostComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
-            entityWrapper.setComponent(new IsTargetableComponent());
-            entityWrapper.setComponent(new IsVulnerableComponent());
-
+            
             entityWrapper.setComponent(new BaseMaximumHealthComponent(300));
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
             entityWrapper.setComponent(new InventoryComponent(new int[]{doransBlade.getId(), doransBlade.getId(), doransBlade.getId()}));
@@ -105,6 +107,11 @@ public class EntityTemplate{
             EntityWrapper riftwalk = createFromTemplate(entityWorld, "riftwalk");
             EntityWrapper ignite = createFromTemplate(entityWorld, "ignite");
             entityWrapper.setComponent(new SpellsComponent(new int[]{nullSphere.getId(), riftwalk.getId(), ignite.getId()}));
+        }
+        else if(templateName.equals("minion_spawn")){
+            entityWrapper.setComponent(new HitboxComponent(new RegularCyclic(6, 2)));
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
         }
         else if(templateName.equals("null_sphere")){
             entityWrapper.setComponent(new NameComponent("Null Sphere"));
@@ -160,12 +167,9 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
 
             entityWrapper.setComponent(new ScaleComponent(0.5f));
-            entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
             entityWrapper.setComponent(new AntiGhostComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
-            entityWrapper.setComponent(new IsTargetableComponent());
-            entityWrapper.setComponent(new IsVulnerableComponent());
-
+            
             entityWrapper.setComponent(new BaseMaximumHealthComponent(500));
             entityWrapper.setComponent(new BaseAttackDamageComponent(60));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
@@ -185,6 +189,11 @@ public class EntityTemplate{
             EntityWrapper pillarOfFlame = createFromTemplate(entityWorld, "pillar_of_flame");
             EntityWrapper battleCry = createFromTemplate(entityWorld, "battle_cry");
             entityWrapper.setComponent(new SpellsComponent(new int[]{sear.getId(), pillarOfFlame.getId(), battleCry.getId()}));
+        }
+        else if(templateName.equals("wizard_spawn")){
+            entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
         }
         else if(templateName.equals("sear")){
             entityWrapper.setComponent(new NameComponent("Sear"));
@@ -262,18 +271,16 @@ public class EntityTemplate{
             autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
             entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
             
-            entityWrapper.setComponent(new HitboxComponent(new Circle(1.5f)));
             entityWrapper.setComponent(new AntiGhostComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
-            entityWrapper.setComponent(new IsTargetableComponent());
-            entityWrapper.setComponent(new IsVulnerableComponent());
-
+            
             entityWrapper.setComponent(new BaseMaximumHealthComponent(700));
             entityWrapper.setComponent(new BaseAttackDamageComponent(40));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new HealthComponent(500));
+            entityWrapper.setComponent(new IsAliveComponent());
 
             EntityWrapper autoAttack = createFromTemplate(entityWorld, "default_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
@@ -282,6 +289,11 @@ public class EntityTemplate{
             EntityWrapper astralBlessing = createFromTemplate(entityWorld, "astral_blessing");
             EntityWrapper sonicWave = createFromTemplate(entityWorld, "sonic_wave," + entityWrapper.getId() + "," + 2);
             entityWrapper.setComponent(new SpellsComponent(new int[]{grab.getId(), astralBlessing.getId(), sonicWave.getId()}));
+        }
+        else if(templateName.equals("robot_spawn")){
+            entityWrapper.setComponent(new HitboxComponent(new Circle(1.5f)));
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
         }
         else if(templateName.equals("grab")){
             entityWrapper.setComponent(new NameComponent("Grab"));
@@ -396,12 +408,9 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
             entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
             
-            entityWrapper.setComponent(new HitboxComponent(new Circle(0.8f)));
             entityWrapper.setComponent(new AntiGhostComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
-            entityWrapper.setComponent(new IsTargetableComponent());
-            entityWrapper.setComponent(new IsVulnerableComponent());
-
+            
             entityWrapper.setComponent(new BaseMaximumHealthComponent(450));
             entityWrapper.setComponent(new BaseAttackDamageComponent(50));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
@@ -415,6 +424,11 @@ public class EntityTemplate{
             EntityWrapper intervention = createFromTemplate(entityWorld, "intervention," + entityWrapper.getId());
             EntityWrapper zhonyas = createFromTemplate(entityWorld, "zhonyas," + entityWrapper.getId());
             entityWrapper.setComponent(new SpellsComponent(new int[]{sonicWave.getId(), intervention.getId(), zhonyas.getId()}));
+        }
+        else if(templateName.equals("jaime_spawn")){
+            entityWrapper.setComponent(new HitboxComponent(new Circle(0.8f)));
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
         }
         else if(templateName.equals("intervention")){
             entityWrapper.setComponent(new NameComponent("Intervention"));

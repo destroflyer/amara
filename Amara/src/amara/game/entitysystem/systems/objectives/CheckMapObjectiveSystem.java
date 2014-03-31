@@ -6,6 +6,7 @@ package amara.game.entitysystem.systems.objectives;
 
 import amara.engine.applications.ingame.server.appstates.GameRunningAppState;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.maps.*;
 import amara.game.entitysystem.components.objectives.*;
 import amara.game.maps.Map;
 
@@ -25,9 +26,12 @@ public class CheckMapObjectiveSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        if((!isFinished) && entityWorld.hasComponent(map.getObjectiveEntity(), FinishedObjectiveComponent.class)){
-            isFinished = true;
-            gameRunningAppState.onGameOver();
+        if(!isFinished){
+            int objectiveEntity = entityWorld.getComponent(map.getEntity(), MapObjectiveComponent.class).getObjectiveEntity();
+            if(entityWorld.hasComponent(objectiveEntity, FinishedObjectiveComponent.class)){
+                isFinished = true;
+                gameRunningAppState.onGameOver();
+            }
         }
     }
 }

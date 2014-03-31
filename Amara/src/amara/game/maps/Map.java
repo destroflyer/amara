@@ -15,11 +15,11 @@ public abstract class Map{
     private String name;
     protected MapPhysicsInformation physicsInformation;
     protected MapVisuals visuals = new MapVisuals();
-    protected int objectiveEntity;
+    protected int entity;
     
     public abstract void load(EntityWorld entityWorld);
     
-    public abstract void spawn(EntityWorld entityWorld, int playerIndex, int playerUnitEntity);
+    public abstract void spawn(EntityWorld entityWorld, int playerEntity);
 
     public String getName(){
         return name;
@@ -41,7 +41,11 @@ public abstract class Map{
         return visuals;
     }
 
-    public int getObjectiveEntity(){
-        return objectiveEntity;
+    public void setEntity(int entity){
+        this.entity = entity;
+    }
+
+    public int getEntity(){
+        return entity;
     }
 }
