@@ -29,16 +29,17 @@ import amara.launcher.client.protocol.*;
  */
 public class MainFrame extends javax.swing.JFrame{
 
-    public MainFrame(HostInformation masterserverHostInformation){
+    public MainFrame(HostInformation masterserverHostInformation, PanLogin panLogin){
         initComponents();
         instance = this;
         this.masterserverHostInformation = masterserverHostInformation;
+        this.panLogin = panLogin;
         setDisplayedPanel(panLogin);
         FrameUtil.initFrameSpecials(this);
         FrameUtil.centerFrame(this);
     }
     private static MainFrame instance;
-    private PanLogin panLogin = new PanLogin();;
+    private PanLogin panLogin;
     private HostInformation masterserverHostInformation;
     private MasterserverClientApplication masterClient;
     
@@ -53,7 +54,7 @@ public class MainFrame extends javax.swing.JFrame{
 
             @Override
             public void run(){
-                panLogin.showLoadingBar(true);
+                panLogin.showIsLoading(true);
                 masterClient = new MasterserverClientApplication(masterserverHostInformation, authentificationInformation);
                 masterClient.start();
                 LoginResult loginResult;
@@ -68,7 +69,7 @@ public class MainFrame extends javax.swing.JFrame{
                     }catch(Exception ex){
                     }
                 }
-                panLogin.showLoadingBar(false);
+                panLogin.showIsLoading(false);
                 switch(loginResult){
                     case NO_CONNECTION_TO_MASTERSERVER:
                         FrameUtil.showMessageDialog(MainFrame.this, "Couldn't connect to masterserver.", FrameUtil.MessageType.ERROR);
@@ -79,6 +80,7 @@ public class MainFrame extends javax.swing.JFrame{
                         break;
                     
                     case SUCCESSFUL:
+                        panLogin.close();
                         setDisplayedPanel(new PanMainMenu());
                         break;
                 }

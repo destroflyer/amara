@@ -11,9 +11,9 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class IsAliveComponent{
+public class RespawnComponent{
 
-    public IsAliveComponent(){
+    public RespawnComponent(){
         
     }
 }

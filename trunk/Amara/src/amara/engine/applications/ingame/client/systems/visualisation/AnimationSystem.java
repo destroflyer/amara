@@ -60,7 +60,8 @@ public class AnimationSystem implements EntitySystem{
                 EntityWrapper animation = entityWorld.getWrapped(animationComponent.getAnimationEntity());
                 String animationName = animation.getComponent(NameComponent.class).getName();
                 float loopDuration = animation.getComponent(LoopDurationComponent.class).getDuration();
-                modelObject.playAnimation(animationName, loopDuration);
+                boolean isLoop = (!animation.hasComponent(FreezeAfterPlayingComponent.class));
+                modelObject.playAnimation(animationName, loopDuration, isLoop);
             }
         }
     }

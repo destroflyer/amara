@@ -34,8 +34,9 @@ import amara.game.entitysystem.systems.physics.*;
 import amara.game.entitysystem.systems.players.*;
 import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.*;
+import amara.game.entitysystem.systems.units.*;
 import amara.game.entitysystem.systems.visuals.*;
-import amara.game.games.GamePlayer;
+import amara.game.games.*;
 import amara.game.maps.*;
 
 /**
@@ -57,6 +58,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         networkServer.addMessageBackend(new InitializeClientBackend(mainApplication.getGame(), getAppState(GameRunningAppState.class)));
         addEntitySystem(new SendEntityChangesSystem(networkServer));
         addEntitySystem(new UpdateAttributesSystem());
+        addEntitySystem(new CountdownPlayerRespawnSystem());
         addEntitySystem(new CountdownLifetimeSystem());
         addEntitySystem(new CountdownBuffsSystem());
         addEntitySystem(new CountdownCooldownSystem());
@@ -105,6 +107,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new RemoveAppliedEffectsSystem());
         addEntitySystem(new DeathSystem());
         addEntitySystem(new MaximumHealthSystem());
+        addEntitySystem(new RemoveDeadUnitsSystem());
         IntersectionSystem intersectionSystem = new IntersectionSystem();
         addEntitySystem(new IntersectionAntiGhostSystem(intersectionSystem));
         addEntitySystem(new MovementSystem());
@@ -114,26 +117,31 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new TriggerTargetReachedEffectSystem());
         addEntitySystem(intersectionSystem);
         addEntitySystem(new AggroSystem());
-        addEntitySystem(new PlayerDeathSystem());
         
-        Map map = mainApplication.getGame().getMap();
+        Game game = mainApplication.getGame();
+        Map map = game.getMap();
+        EntityWrapper mapEntity = entityWorld.getWrapped(entityWorld.createEntity());
+        map.setEntity(mapEntity.getId());
         map.load(entityWorld);
         DatabaseAppState databaseAppState = mainApplication.getMasterServer().getStateManager().getState(DatabaseAppState.class);
         for(int i=0;i<mainApplication.getGame().getPlayers().length;i++){
             GamePlayer player = mainApplication.getGame().getPlayers()[i];
             EntityWrapper playerEntity = entityWorld.getWrapped(entityWorld.createEntity());
+            playerEntity.setComponent(new PlayerIndexComponent(i));
             String login = databaseAppState.getString("SELECT login FROM users WHERE id = " + player.getPlayerData().getID() + " LIMIT 1");
             playerEntity.setComponent(new NameComponent(login));
             EntityWrapper unit = EntityTemplate.createFromTemplate(entityWorld, player.getPlayerData().getUnitTemplate());
+            EntityTemplate.loadTemplate(entityWorld, unit.getId(), player.getPlayerData().getUnitTemplate() + "_spawn");
             unit.setComponent(new TitleComponent(login));
-            map.spawn(entityWorld, i, unit.getId());
             playerEntity.setComponent(new SelectedUnitComponent(unit.getId()));
-            playerEntity.setComponent(new IsAliveComponent());
+            map.spawn(entityWorld, playerEntity.getId());
             player.setEntityID(playerEntity.getId());
         }
         MapPhysicsInformation mapPhysicsInformation = map.getPhysicsInformation();
         addEntitySystem(new MapIntersectionSystem(mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight(), mapPhysicsInformation.getObstacles()));
         addEntitySystem(new CheckMapObjectiveSystem(map, getAppState(GameRunningAppState.class)));
+        addEntitySystem(new PlayerDeathSystem(map));
+        addEntitySystem(new PlayerRespawnSystem(game));
     }
 
     @Override

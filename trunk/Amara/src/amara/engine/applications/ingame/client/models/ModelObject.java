@@ -44,11 +44,16 @@ public class ModelObject extends Node implements AnimEventListener{
     }
     
     public void playAnimation(String animationName, float loopDuration){
+        playAnimation(animationName, loopDuration, true);
+    }
+    
+    public void playAnimation(String animationName, float loopDuration, boolean isLoop){
         if(animationChannel != null){
             if(!animationName.equals(animationChannel.getAnimationName())){
                 try{
                     animationChannel.setAnim(animationName);
                     animationChannel.setSpeed(animationChannel.getAnimMaxTime() / loopDuration);
+                    animationChannel.setLoopMode(isLoop?LoopMode.Loop:LoopMode.DontLoop);
                 }catch(IllegalArgumentException ex){
                     stopAndRewindAnimation();
                 }
