@@ -23,7 +23,7 @@ public class LayerGeometryComparator_Opaque extends OpaqueComparator{
         return super.compare(geometry1, geometry2);
     }
     
-    public static int getLayer(Geometry geometry){
+    private int getLayer(Geometry geometry){
         Integer layer = geometry.getUserData("layer");
         if(layer != null){
             return layer;
