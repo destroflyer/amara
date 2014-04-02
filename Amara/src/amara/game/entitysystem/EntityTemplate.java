@@ -270,6 +270,11 @@ public class EntityTemplate{
             EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
             entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+            EntityWrapper deathAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            deathAnimation.setComponent(new NameComponent("death"));
+            deathAnimation.setComponent(new LoopDurationComponent(2.5f));
+            deathAnimation.setComponent(new FreezeAfterPlayingComponent());
+            entityWrapper.setComponent(new DeathAnimationComponent(deathAnimation.getId()));
             
             entityWrapper.setComponent(new AntiGhostComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
