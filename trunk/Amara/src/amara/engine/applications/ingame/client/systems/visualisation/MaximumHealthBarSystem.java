@@ -18,7 +18,7 @@ import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.systems.visualisation.meshes.RectangleMesh;
 import amara.engine.materials.PaintableImage;
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.attributes.MaximumHealthComponent;
+import amara.game.entitysystem.components.attributes.*;
 
 /**
  *
@@ -37,7 +37,6 @@ public class MaximumHealthBarSystem extends HUDAttachmentSystem{
     @Override
     protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
         Geometry geometry = new Geometry("", new RectangleMesh((BAR_WIDTH / -2), 0, 0, BAR_WIDTH, BAR_HEIGHT)); 
-        Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
         int imageWidth = 80;
         int imageHeight = 10;
         PaintableImage paintableImage = new PaintableImage(imageWidth, imageHeight);
@@ -64,12 +63,11 @@ public class MaximumHealthBarSystem extends HUDAttachmentSystem{
             paintableImage.setPixel(0, y, 0, 0, 0, 255);
             paintableImage.setPixel((imageWidth - 1), y, 0, 0, 0, 255);
         }
+        Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
         Texture2D texture2D = new Texture2D(paintableImage.getImage());
         texture2D.setMagFilter(Texture.MagFilter.Nearest);
         material.setTexture("ColorMap", texture2D);
-        material.getAdditionalRenderState().setDepthTest(false);
         geometry.setMaterial(material);
-        geometry.setUserData("layer", -2);
         return geometry;
     }
 }

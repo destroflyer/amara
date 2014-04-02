@@ -6,6 +6,7 @@ package amara.engine.applications.ingame.client.systems.visualisation;
 
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
@@ -25,6 +26,7 @@ public class CurrentHealthBarSystem extends HUDAttachmentSystem{
     public CurrentHealthBarSystem(Node guiNode, Camera camera, MapHeightmap mapHeightmap){
         super(HealthComponent.class, true, guiNode, camera, mapHeightmap);
         worldOffset = MaximumHealthBarSystem.BAR_LOCATION;
+        hudOffset = new Vector3f(0, 0, 1);
     }
         
     @Override
@@ -37,9 +39,7 @@ public class CurrentHealthBarSystem extends HUDAttachmentSystem{
             float healthPortion = (1 - (health / maximumHealth));
             Geometry geometry = new Geometry("", new RectangleMesh((MaximumHealthBarSystem.BAR_WIDTH / 2) - (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), 0, 0, (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), MaximumHealthBarSystem.BAR_HEIGHT));
             Material material = MaterialFactory.generateUnshadedMaterial(ColorRGBA.Black);
-            material.getAdditionalRenderState().setDepthTest(false);
             geometry.setMaterial(material);
-            geometry.setUserData("layer", -1);
             return geometry;
         }
         return null;

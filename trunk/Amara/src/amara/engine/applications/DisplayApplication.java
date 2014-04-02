@@ -32,7 +32,6 @@ public class DisplayApplication extends SimpleApplication{
         MaterialFactory.setAssetManager(assetManager);
         setDisplayStatView(false);
         viewPort.getQueue().setGeometryComparator(RenderQueue.Bucket.Opaque, new LayerGeometryComparator_Opaque());
-        viewPort.getQueue().setGeometryComparator(RenderQueue.Bucket.Gui, new LayerGeometryComparator_GUI());
     }
 
     @Override
