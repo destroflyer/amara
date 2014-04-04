@@ -7,10 +7,9 @@ package amara.game.entitysystem.systems.movement;
 import java.util.Set;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
-import amara.game.entitysystem.components.units.movement.*;
-import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.physics.intersection.Pair;
 import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionInformant;
 
@@ -30,48 +29,48 @@ public class TargetedMovementSystem implements EntitySystem{
         Set<Pair<Integer>> collidingEntities = intersectionInformant.getEntries();
         collidingEntities.addAll(intersectionInformant.getRepeaters());
         for(Pair<Integer> pair : collidingEntities){
-            if(entityWorld.hasComponent(pair.getA(), TargetedMovementComponent.class)){
+            if(entityWorld.hasComponent(pair.getA(), MovementComponent.class)){
                 checkCollidingStop(entityWorld, pair.getA(), pair.getB());
             }
-            if(entityWorld.hasComponent(pair.getB(), TargetedMovementComponent.class)){
+            if(entityWorld.hasComponent(pair.getB(), MovementComponent.class)){
                 checkCollidingStop(entityWorld, pair.getB(), pair.getA());
             }
         }
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, TargetedMovementComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(TargetedMovementComponent.class)){
-            entityWorld.removeComponent(entity, MovementTargetComponent.class);
-            entityWorld.removeComponent(entity, MovementSpeedComponent.class);
-            entityWorld.removeComponent(entity, AutoAttackTargetComponent.class);
-            entityWorld.setComponent(entity, new StopPlayingAnimationComponent());
-        }
-        observer.reset();
-        for(int entity : entityWorld.getEntitiesWithAll(TargetedMovementComponent.class)){
-            TargetedMovementComponent targetedMovementComponent = entityWorld.getComponent(entity, TargetedMovementComponent.class);
-            PositionComponent targetPositionComponent = entityWorld.getComponent(targetedMovementComponent.getTargetEntity(), PositionComponent.class);
-            if(targetPositionComponent != null){
-                Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
-                Vector2f targetPosition = targetPositionComponent.getPosition();
-                if(!position.equals(targetPosition)){
-                    Vector2f distanceToTarget = targetPosition.subtract(position);
-                    Vector2f movedDistance = distanceToTarget.normalize().multLocal(targetedMovementComponent.getSpeed()).multLocal(deltaSeconds);
-                    if(movedDistance.lengthSquared() < distanceToTarget.lengthSquared()){
-                        entityWorld.setComponent(entity, new PositionComponent(position.add(movedDistance)));
+        for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
+            int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
+            MovementTargetComponent movementTargetComponent = entityWorld.getComponent(movementEntity, MovementTargetComponent.class);
+            if(movementTargetComponent != null){
+                PositionComponent targetPositionComponent = entityWorld.getComponent(movementTargetComponent.getTargetEntity(), PositionComponent.class);
+                if(targetPositionComponent != null){
+                    Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
+                    Vector2f targetPosition = targetPositionComponent.getPosition();
+                    boolean isTargetReached = position.equals(targetPosition);
+                    if(!isTargetReached){
+                        Vector2f distanceToTarget = targetPosition.subtract(position);
+                        float speed = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class).getSpeed();
+                        Vector2f movedDistance = distanceToTarget.normalize().multLocal(speed).multLocal(deltaSeconds);
+                        isTargetReached = (movedDistance.lengthSquared() >= distanceToTarget.lengthSquared());
+                        if(!isTargetReached){
+                            entityWorld.setComponent(movementEntity, new MovementDirectionComponent(distanceToTarget));
+                            entityWorld.setComponent(entity, new DirectionComponent(distanceToTarget));
+                        }
                     }
-                    else{
+                    if(isTargetReached){
                         entityWorld.setComponent(entity, new PositionComponent(targetPosition.clone()));
                     }
                 }
-            }
-            else{
-                entityWorld.removeEntity(entity);
+                else{
+                    entityWorld.removeEntity(entity);
+                }
             }
         }
     }
     
     private void checkCollidingStop(EntityWorld entityWorld, int movingEntity, int targetEntity){
-        TargetedMovementComponent targetedMovementComponent = entityWorld.getComponent(movingEntity, TargetedMovementComponent.class);
-        if(targetedMovementComponent.getTargetEntity() == targetEntity){
-            entityWorld.removeComponent(movingEntity, TargetedMovementComponent.class);
+        int movementEntity = entityWorld.getComponent(movingEntity, MovementComponent.class).getMovementEntity();
+        MovementTargetComponent movementTargetComponent = entityWorld.getComponent(movementEntity, MovementTargetComponent.class);
+        if((movementTargetComponent != null) && (movementTargetComponent.getTargetEntity() == targetEntity)){
+            entityWorld.removeComponent(movingEntity, MovementComponent.class);
         }
     }
 }

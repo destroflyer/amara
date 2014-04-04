@@ -6,8 +6,9 @@ package amara.game.entitysystem.systems.effects.movement;
 
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
-import amara.game.entitysystem.components.effects.movement.MoveToEntityPositionComponent;
-import amara.game.entitysystem.components.units.movement.TargetedMovementComponent;
+import amara.game.entitysystem.components.effects.movement.*;
+import amara.game.entitysystem.components.movements.*;
+import amara.game.entitysystem.components.units.*;
 
 /**
  *
@@ -21,7 +22,10 @@ public class ApplyMoveToEntityPositionSystem implements EntitySystem{
         {
             int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
             MoveToEntityPositionComponent moveToEntityPositionComponent = entityWrapper.getComponent(MoveToEntityPositionComponent.class);
-            entityWorld.setComponent(targetID, new TargetedMovementComponent(moveToEntityPositionComponent.getTargetPositionEntity(), moveToEntityPositionComponent.getSpeed()));
+            EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
+            movement.setComponent(new MovementTargetComponent(moveToEntityPositionComponent.getTargetPositionEntity()));
+            movement.setComponent(new MovementSpeedComponent(moveToEntityPositionComponent.getSpeed()));
+            entityWorld.setComponent(targetID, new MovementComponent(movement.getId()));
         }
     }
 }

@@ -7,6 +7,7 @@ package amara.game.entitysystem.systems.spells.casting;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.input.*;
+import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
@@ -19,7 +20,7 @@ import amara.game.entitysystem.components.units.*;
 public class CastLinearSkillshotSpellSystem implements EntitySystem{
     
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
+    public void update(final EntityWorld entityWorld, float deltaSeconds){
         for(final EntityWrapper caster : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(CastLinearSkillshotSpellComponent.class)))
         {
             CastLinearSkillshotSpellComponent castLinearSkillshotSpellComponent = caster.getComponent(CastLinearSkillshotSpellComponent.class);
@@ -35,8 +36,10 @@ public class CastLinearSkillshotSpellSystem implements EntitySystem{
                     }
                     spawnedObject.setComponent(new PositionComponent(position));
                     spawnedObject.setComponent(new DirectionComponent(direction));
-                    float spawnMovementSpeed = spawnInformation.getComponent(SpawnMovementSpeedComponent.class).getSpeed();
-                    spawnedObject.setComponent(new MovementSpeedComponent(direction.normalize().multLocal(spawnMovementSpeed)));
+                    EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
+                    movement.setComponent(new MovementDirectionComponent(direction));
+                    movement.setComponent(new MovementSpeedComponent(spawnInformation.getComponent(SpawnMovementSpeedComponent.class).getSpeed()));
+                    spawnedObject.setComponent(new MovementComponent(movement.getId()));
                 }
             });
             entityWorld.setComponent(caster.getId(), new DirectionComponent(direction));

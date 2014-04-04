@@ -16,4 +16,13 @@ public class TargetReachedTriggerComponent{
     public TargetReachedTriggerComponent(){
         
     }
+
+    public TargetReachedTriggerComponent(float maximumDistance){
+        this.maximumDistance = maximumDistance;
+    }
+    private float maximumDistance;
+
+    public float getMaximumDistance(){
+        return maximumDistance;
+    }
 }

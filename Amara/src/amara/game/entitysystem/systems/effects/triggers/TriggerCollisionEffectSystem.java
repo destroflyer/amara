@@ -6,6 +6,7 @@ package amara.game.entitysystem.systems.effects.triggers;
 
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.units.intersections.*;
 import amara.game.entitysystem.systems.physics.intersectionHelper.*;
@@ -31,18 +32,12 @@ public class TriggerCollisionEffectSystem implements EntitySystem{
     }
     
     private void checkEffectTriggers(EntityWorld entityWorld, int effectingEntity, int targetEntity){
-        EffectTriggersComponent effectTriggersComponent = entityWorld.getComponent(effectingEntity, EffectTriggersComponent.class);
-        if((effectTriggersComponent != null) && entityWorld.hasComponent(targetEntity, IsTargetableComponent.class)){
-            boolean wasTriggered = false;
-            for(int effectTriggerEntity : effectTriggersComponent.getEffectTriggerEntities()){
+        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggeredEffectComponent.class)){
+            TriggeredEffectComponent triggeredEffectComponent = entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class);
+            if(triggeredEffectComponent.getSourceEntity() == effectingEntity){
                 if(entityWorld.hasComponent(effectTriggerEntity, CollisionTriggerComponent.class)){
-                    if(onEffectTriggered(entityWorld, effectingEntity, targetEntity, effectTriggerEntity)){
-                        wasTriggered = true;
-                    }
+                    onEffectTriggered(entityWorld, effectingEntity, targetEntity, effectTriggerEntity);
                 }
-            }
-            if(wasTriggered){
-                entityWorld.removeEntity(effectingEntity);
             }
         }
     }
@@ -67,6 +62,7 @@ public class TriggerCollisionEffectSystem implements EntitySystem{
             }
             if(triggerEffect){
                 EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, targetEntity);
+                entityWorld.removeEntity(effectTriggerEntity);
             }
         }
         return triggerEffect;

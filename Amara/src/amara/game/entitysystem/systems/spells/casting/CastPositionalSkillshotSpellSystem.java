@@ -9,6 +9,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spells.specials.*;
+import amara.game.entitysystem.components.units.*;
 
 /**
  *
@@ -32,9 +33,8 @@ public class CastPositionalSkillshotSpellSystem implements EntitySystem{
             });
             entityWorld.removeComponent(caster.getId(), CastPositionalSkillshotSpellComponent.class);
             if(entityWorld.hasComponent(spellEntityID, TeleportCasterToTargetPositionComponent.class)){
+                caster.removeComponent(MovementComponent.class);
                 caster.setComponent(new PositionComponent(position.clone()));
-                caster.removeComponent(MovementTargetComponent.class);
-                caster.removeComponent(MovementSpeedComponent.class);
             }
         }
     }
