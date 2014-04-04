@@ -9,10 +9,11 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.input.*;
+import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
-import amara.game.entitysystem.components.units.movement.*;
+import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.systems.effects.triggers.EffectTriggerUtil;
 
 /**
@@ -31,34 +32,36 @@ public class CastSingleTargetSpellSystem implements EntitySystem{
         }
     }
     
-    public static void castSingleTargetSpell(EntityWorld entityWorld, int casterEntityID, int spellEntityID, int targetEntityID){
-        InstantEffectTriggersComponent instantEffectTriggersComponent = entityWorld.getComponent(spellEntityID, InstantEffectTriggersComponent.class);
+    public static void castSingleTargetSpell(EntityWorld entityWorld, int casterEntity, int spellEntity, int targetEntity){
+        InstantEffectTriggersComponent instantEffectTriggersComponent = entityWorld.getComponent(spellEntity, InstantEffectTriggersComponent.class);
         if(instantEffectTriggersComponent != null){
-            EffectTriggerUtil.triggerEffects(entityWorld, instantEffectTriggersComponent.getEffectTriggerEntities(), targetEntityID);
+            EffectTriggerUtil.triggerEffects(entityWorld, instantEffectTriggersComponent.getEffectTriggerEntities(), targetEntity);
         }
-        InstantTargetBuffComponent instantTargetBuffComponent = entityWorld.getComponent(spellEntityID, InstantTargetBuffComponent.class);
+        InstantTargetBuffComponent instantTargetBuffComponent = entityWorld.getComponent(spellEntity, InstantTargetBuffComponent.class);
         if(instantTargetBuffComponent != null){
             EntityWrapper buffStatus = entityWorld.getWrapped(entityWorld.createEntity());
-            buffStatus.setComponent(new ActiveBuffComponent(targetEntityID, instantTargetBuffComponent.getBuffEntityID()));
-            buffStatus.setComponent(new CastSourceComponent(casterEntityID));
+            buffStatus.setComponent(new ActiveBuffComponent(targetEntity, instantTargetBuffComponent.getBuffEntityID()));
+            buffStatus.setComponent(new CastSourceComponent(casterEntity));
             buffStatus.setComponent(new RemainingBuffDurationComponent(instantTargetBuffComponent.getDuration()));
-            entityWorld.setComponent(targetEntityID, new RequestUpdateAttributesComponent());
+            entityWorld.setComponent(targetEntity, new RequestUpdateAttributesComponent());
         }
-        InstantSpawnsComponent instantSpawnsComponent = entityWorld.getComponent(spellEntityID, InstantSpawnsComponent.class);
+        InstantSpawnsComponent instantSpawnsComponent = entityWorld.getComponent(spellEntity, InstantSpawnsComponent.class);
         if(instantSpawnsComponent != null){
             int[] spawnInformationEntitiesIDs = instantSpawnsComponent.getSpawnInformationEntitiesIDs();
             for(int i=0;i<spawnInformationEntitiesIDs.length;i++){
                 EntityWrapper spawnedObject = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper spawnInformation = entityWorld.getWrapped(spawnInformationEntitiesIDs[i]);
-                spawnedObject.setComponent(new CastSourceComponent(casterEntityID));
-                Vector2f position = entityWorld.getComponent(casterEntityID, PositionComponent.class).getPosition().clone();
+                spawnedObject.setComponent(new CastSourceComponent(casterEntity));
+                Vector2f position = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition().clone();
                 RelativeSpawnPositionComponent relativeSpawnPositionComponent = spawnInformation.getComponent(RelativeSpawnPositionComponent.class);
                 if(relativeSpawnPositionComponent != null){
                     position.addLocal(relativeSpawnPositionComponent.getPosition());
                 }
                 spawnedObject.setComponent(new PositionComponent(position));
-                float spawnMovementSpeed = spawnInformation.getComponent(SpawnMovementSpeedComponent.class).getSpeed();
-                spawnedObject.setComponent(new TargetedMovementComponent(targetEntityID, spawnMovementSpeed));
+                EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
+                movement.setComponent(new MovementTargetComponent(targetEntity));
+                movement.setComponent(new MovementSpeedComponent(spawnInformation.getComponent(SpawnMovementSpeedComponent.class).getSpeed()));
+                spawnedObject.setComponent(new MovementComponent(movement.getId()));
                 EntityTemplate.loadTemplates(entityWorld, spawnedObject.getId(), spawnInformation.getComponent(SpawnTemplateComponent.class).getTemplateNames());
             }
         }

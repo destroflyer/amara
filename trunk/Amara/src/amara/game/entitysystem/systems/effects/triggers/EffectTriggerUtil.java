@@ -39,6 +39,9 @@ public class EffectTriggerUtil{
             effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntitiyID()));
         }
         LinkedList<Integer> affectedTargets = new LinkedList<Integer>();
+        if(entityWorld.hasComponent(effectTriggerEntity, SourceTargetComponent.class)){
+            affectedTargets.add(triggeredEffectComponent.getSourceEntity());
+        }
         if(entityWorld.hasComponent(effectTriggerEntity, TargetTargetComponent.class)){
             affectedTargets.add(targetEntity);
         }

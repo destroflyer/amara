@@ -10,6 +10,7 @@ import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.buffs.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
+import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.effects.spells.*;
@@ -66,6 +67,8 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     effectImpact.setComponent(new HealComponent(heal));
                 }
                 transferComponents(entityWorld, effect, effectImpact, new Class[]{
+                    AddComponentsComponent.class,
+                    RemoveEntityComponent.class,
                     AddBuffComponent.class,
                     RemoveBuffComponent.class,
                     AddBindingComponent.class,
@@ -82,6 +85,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     AddVulnerabilityComponent.class,
                     RemoveVulnerabilityComponent.class,
                     MoveToEntityPositionComponent.class,
+                    StopComponent.class,
                     ReplaceSpellWithExistingSpellComponent.class,
                     ReplaceSpellWithNewSpellComponent.class
                 });

@@ -19,6 +19,7 @@ import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.buffs.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
+import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.effects.spells.*;
@@ -27,6 +28,7 @@ import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.maps.*;
 import amara.game.entitysystem.components.maps.playerdeathrules.*;
+import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.objectives.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
@@ -40,7 +42,6 @@ import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.units.intersections.*;
-import amara.game.entitysystem.components.units.movement.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.synchronizing.*;
@@ -141,11 +142,15 @@ public class MessagesSerializer{
                         ScalingAttackDamagePhysicalDamageComponent.class,
                         EffectSourceComponent.class,
                         PrepareEffectComponent.class,
+                        //effects/general
+                        AddComponentsComponent.class,
+                        RemoveEntityComponent.class,
                         //effects/heal
                         FlatHealComponent.class,
                         HealComponent.class,
                         //effects/movement,
                         MoveToEntityPositionComponent.class,
+                        StopComponent.class,
                         //effects/spells
                         ReplaceSpellWithExistingSpellComponent.class,
                         ReplaceSpellWithNewSpellComponent.class,
@@ -166,6 +171,12 @@ public class MessagesSerializer{
                         //maps/playerdeathrules
                         RespawnPlayersComponent.class,
                         RespawnTimerComponent.class,
+                        //movements
+                        MovementAnimationComponent.class,
+                        MovementDirectionComponent.class,
+                        MovementIsCancelableComponent.class,
+                        MovementSpeedComponent.class,
+                        MovementTargetComponent.class,
                         //objectives
                         FinishedObjectiveComponent.class,
                         MissingEntitiesComponent.class,
@@ -182,13 +193,9 @@ public class MessagesSerializer{
                             SimpleConvex.class,
                             Transform.class,
                             Vector2D.class,
-                        MapIntersectionPushComponent.class,
                         MovementComponent.class,
-                        MovementSpeedComponent.class,
-                        MovementTargetComponent.class,
                         PositionComponent.class,
                         ScaleComponent.class,
-                        UnitIntersectionPushComponent.class,
                         //players
                         ClientComponent.class,
                         PlayerIndexComponent.class,
@@ -208,6 +215,7 @@ public class MessagesSerializer{
                         InstantSpawnsComponent.class,
                         InstantTargetBuffComponent.class,
                         InstantEffectTriggersComponent.class,
+                        RangeComponent.class,
                         RemainingCooldownComponent.class,
                         SpellVisualisationComponent.class,
                         //spells/specials
@@ -216,12 +224,12 @@ public class MessagesSerializer{
                         AutoAggroComponent.class,
                         AutoAttackComponent.class,
                         AutoAttackTargetComponent.class,
-                        EffectTriggersComponent.class,
                         IntersectionRulesComponent.class,
                         IsAliveComponent.class,
                         IsTargetableComponent.class,
                         IsVulnerableComponent.class,
                         LifetimeComponent.class,
+                        MovementComponent.class,
                         SpellsComponent.class,
                         TargetsInAggroRangeComponent.class,
                         TeamComponent.class,
@@ -241,6 +249,7 @@ public class MessagesSerializer{
                         TriggeredEffectComponent.class,
                         //units/effecttriggers/targets
                         CustomTargetComponent.class,
+                        SourceTargetComponent.class,
                         TargetTargetComponent.class,
                         //units/effecttriggers/triggers
                         CollisionTriggerComponent.class,
@@ -248,8 +257,6 @@ public class MessagesSerializer{
                         //units/intersections
                         AcceptAlliesComponent.class,
                         AcceptEnemiesComponent.class,
-                        //units/movement
-                        TargetedMovementComponent.class,
                         //visuals
                         ModelComponent.class,
                         AnimationComponent.class,
