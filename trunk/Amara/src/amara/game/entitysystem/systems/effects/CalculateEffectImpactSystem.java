@@ -14,6 +14,9 @@ import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.effects.spells.*;
+import amara.game.entitysystem.components.movements.*;
+import amara.game.entitysystem.components.spells.targets.*;
+import amara.game.entitysystem.components.visuals.ModelComponent;
 
 /**
  *
@@ -26,7 +29,6 @@ public class CalculateEffectImpactSystem implements EntitySystem{
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(PrepareEffectComponent.class)))
         {
             EntityWrapper effect = entityWorld.getWrapped(entityWrapper.getComponent(PrepareEffectComponent.class).getEffectEntityID());
-            EffectSourceComponent effectSourceComponent = entityWrapper.getComponent(EffectSourceComponent.class);
             int[] affectedTargetEntitesIDs = entityWrapper.getComponent(AffectedTargetsComponent.class).getTargetEntitiesIDs();
             for(int i=0;i<affectedTargetEntitesIDs.length;i++){
                 EntityWrapper targetEntity = entityWorld.getWrapped(affectedTargetEntitesIDs[i]);
@@ -46,8 +48,9 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 if(flatHealComponent != null){
                     heal += flatHealComponent.getValue();
                 }
+                EffectSourceComponent effectSourceComponent = entityWrapper.getComponent(EffectSourceComponent.class);
                 if(effectSourceComponent != null){
-                    EntityWrapper effectSource = entityWorld.getWrapped(effectSourceComponent.getSourceEntityID());
+                    EntityWrapper effectSource = entityWorld.getWrapped(effectSourceComponent.getSourceEntity());
                     ScalingAttackDamagePhysicalDamageComponent scalingAttackDamagePhysicalDamageComponent = effect.getComponent(ScalingAttackDamagePhysicalDamageComponent.class);
                     if((scalingAttackDamagePhysicalDamageComponent != null) && effectSource.hasComponent(AttackDamageComponent.class)){
                         physicalDamage += (effectSource.getComponent(AttackDamageComponent.class).getValue() * scalingAttackDamagePhysicalDamageComponent.getRatio());
@@ -66,7 +69,21 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 if(heal != 0){
                     effectImpact.setComponent(new HealComponent(heal));
                 }
-                transferComponents(entityWorld, effect, effectImpact, new Class[]{
+                EffectCastTargetComponent effectCastTargetComponent = entityWrapper.getComponent(EffectCastTargetComponent.class);
+                MoveComponent moveComponent = effect.getComponent(MoveComponent.class);
+                if(moveComponent != null){
+                    int movementEntity = entityWorld.createEntity();
+                    for(Object component : entityWorld.getComponents(moveComponent.getMovementEntity())){
+                        if(component instanceof TargetedMovementTargetComponent){
+                            entityWorld.setComponent(movementEntity, new MovementTargetComponent(effectCastTargetComponent.getTargetEntity()));
+                        }
+                        else{
+                            entityWorld.setComponent(movementEntity, component);
+                        }
+                    }
+                    effectImpact.setComponent(new MoveComponent(movementEntity));
+                }
+                transferComponents(effect, effectImpact, new Class[]{
                     AddComponentsComponent.class,
                     RemoveEntityComponent.class,
                     AddBuffComponent.class,
@@ -84,7 +101,6 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     RemoveTargetabilityComponent.class,
                     AddVulnerabilityComponent.class,
                     RemoveVulnerabilityComponent.class,
-                    MoveToEntityPositionComponent.class,
                     StopComponent.class,
                     ReplaceSpellWithExistingSpellComponent.class,
                     ReplaceSpellWithNewSpellComponent.class
@@ -95,7 +111,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
         }
     }
     
-    private void transferComponents(EntityWorld entityWorld, EntityWrapper effect, EntityWrapper effectImpact, Class[] componentClasses){
+    private void transferComponents(EntityWrapper effect, EntityWrapper effectImpact, Class[] componentClasses){
         for(Class componentClass : componentClasses){
             Object component = effect.getComponent(componentClass);
             if(component != null){

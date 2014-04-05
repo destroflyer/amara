@@ -11,18 +11,18 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class EffectSourceComponent{
+public class EffectCastTargetComponent{
 
-    public EffectSourceComponent(){
+    public EffectCastTargetComponent(){
         
     }
     
-    public EffectSourceComponent(int sourceEntity){
-        this.sourceEntity = sourceEntity;
+    public EffectCastTargetComponent(int targetEntity){
+        this.targetEntity = targetEntity;
     }
-    private int sourceEntity;
+    private int targetEntity;
 
-    public int getSourceEntity(){
-        return sourceEntity;
+    public int getTargetEntity(){
+        return targetEntity;
     }
 }

@@ -58,6 +58,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         networkServer.addMessageBackend(new UpdateNewClientBackend(entityWorld));
         networkServer.addMessageBackend(new InitializeClientBackend(mainApplication.getGame(), getAppState(GameRunningAppState.class)));
         addEntitySystem(new SendEntityChangesSystem(networkServer));
+        addEntitySystem(new SetSpellCasterSystem());
         addEntitySystem(new UpdateAttributesSystem());
         addEntitySystem(new CountdownPlayerRespawnSystem());
         addEntitySystem(new CountdownLifetimeSystem());
@@ -103,7 +104,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyMagicDamageSystem());
         addEntitySystem(new ApplyHealSystem());
         addEntitySystem(new ApplyStopSystem());
-        addEntitySystem(new ApplyMoveToEntityPositionSystem());
+        addEntitySystem(new ApplyMoveSystem());
         addEntitySystem(new ApplyReplaceSpellsWithExistingSpellsSystem());
         addEntitySystem(new ApplyReplaceSpellsWithNewSpellsSystem());
         addEntitySystem(new ApplyAddComponentsSystem());
