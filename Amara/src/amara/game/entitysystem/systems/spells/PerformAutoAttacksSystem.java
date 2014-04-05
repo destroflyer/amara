@@ -12,6 +12,7 @@ import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.systems.spells.casting.*;
+import amara.game.entitysystem.systems.targets.TargetUtil;
 
 /**
  *
@@ -43,14 +44,8 @@ public class PerformAutoAttacksSystem implements EntitySystem{
     }
     
     public static boolean isAttackable(EntityWorld entityWorld, int attackingEntity, int targetEntity){
-        if(entityWorld.hasComponent(targetEntity, IsTargetableComponent.class)){
-            TeamComponent teamComponent1 = entityWorld.getComponent(attackingEntity, TeamComponent.class);
-            TeamComponent teamComponent2 = entityWorld.getComponent(targetEntity, TeamComponent.class);
-            if((teamComponent1 == null) || (teamComponent2 == null)){
-                return true;
-            }
-            return (teamComponent1.getTeamEntityID() != teamComponent2.getTeamEntityID());
-        }
-        return false;
+        int autoAttackEntity = entityWorld.getComponent(attackingEntity, AutoAttackComponent.class).getAutoAttackEntityID();
+        int targetRulesEntity = entityWorld.getComponent(autoAttackEntity, SpellTargetRulesComponent.class).getTargetRulesEntity();
+        return TargetUtil.isValidTarget(entityWorld, attackingEntity, targetEntity, targetRulesEntity);
     }
 }

@@ -30,7 +30,7 @@ public class RepeatingBuffEffectsSystem implements EntitySystem{
                     effectCast.setComponent(new PrepareEffectComponent(repeatingEffectComponent.getEffectEntityID()));
                     CastSourceComponent castSourceComponent = entityWorld.getComponent(buffStatus, CastSourceComponent.class);
                     if(castSourceComponent != null){
-                        effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntitiyID()));
+                        effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntity()));
                     }
                     int targetEntityID = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class).getTargetEntityID();
                     effectCast.setComponent(new AffectedTargetsComponent(new int[]{targetEntityID}));

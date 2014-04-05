@@ -35,13 +35,14 @@ import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.spells.specials.*;
+import amara.game.entitysystem.components.spells.targets.*;
+import amara.game.entitysystem.components.targets.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
-import amara.game.entitysystem.components.units.intersections.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.synchronizing.*;
@@ -116,6 +117,9 @@ public class MessagesSerializer{
                         //effects
                         AffectedTargetsComponent.class,
                         ApplyEffectImpactComponent.class,
+                        EffectCastTargetComponent.class,
+                        EffectSourceComponent.class,
+                        PrepareEffectComponent.class,
                         //effects/buffs
                         AddBuffComponent.class,
                         RemoveBuffComponent.class,
@@ -140,8 +144,6 @@ public class MessagesSerializer{
                         RemoveVulnerabilityComponent.class,
                         ScalingAbilityPowerMagicDamageComponent.class,
                         ScalingAttackDamagePhysicalDamageComponent.class,
-                        EffectSourceComponent.class,
-                        PrepareEffectComponent.class,
                         //effects/general
                         AddComponentsComponent.class,
                         RemoveEntityComponent.class,
@@ -149,7 +151,7 @@ public class MessagesSerializer{
                         FlatHealComponent.class,
                         HealComponent.class,
                         //effects/movement,
-                        MoveToEntityPositionComponent.class,
+                        MoveComponent.class,
                         StopComponent.class,
                         //effects/spells
                         ReplaceSpellWithExistingSpellComponent.class,
@@ -217,9 +219,15 @@ public class MessagesSerializer{
                         InstantEffectTriggersComponent.class,
                         RangeComponent.class,
                         RemainingCooldownComponent.class,
+                        SpellTargetRulesComponent.class,
                         SpellVisualisationComponent.class,
                         //spells/specials
                         TeleportCasterToTargetPositionComponent.class,
+                        //spells/targets
+                        TargetedMovementTargetComponent.class,
+                        //targets
+                        AcceptAlliesComponent.class,
+                        AcceptEnemiesComponent.class,
                         //units
                         AutoAggroComponent.class,
                         AutoAttackComponent.class,
@@ -248,15 +256,13 @@ public class MessagesSerializer{
                         //units/effecttriggers
                         TriggeredEffectComponent.class,
                         //units/effecttriggers/targets
+                        CasterTargetComponent.class,
                         CustomTargetComponent.class,
                         SourceTargetComponent.class,
                         TargetTargetComponent.class,
                         //units/effecttriggers/triggers
                         CollisionTriggerComponent.class,
                         TargetReachedTriggerComponent.class,
-                        //units/intersections
-                        AcceptAlliesComponent.class,
-                        AcceptEnemiesComponent.class,
                         //visuals
                         ModelComponent.class,
                         AnimationComponent.class,

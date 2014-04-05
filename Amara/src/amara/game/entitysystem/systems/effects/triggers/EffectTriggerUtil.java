@@ -34,11 +34,15 @@ public class EffectTriggerUtil{
             entityWorld.setComponent(effectEntity, new ReplaceSpellWithNewSpellComponent(replaceSpellWithNewSpellComponent.getSpellIndex(), replaceSpellWithNewSpellComponent.getNewSpellTemplate() + "," + targetEntity));
         }
         effectCast.setComponent(new PrepareEffectComponent(effectEntity));
+        effectCast.setComponent(new EffectCastTargetComponent(targetEntity));
+        LinkedList<Integer> affectedTargets = new LinkedList<Integer>();
         CastSourceComponent castSourceComponent = entityWorld.getComponent(triggeredEffectComponent.getSourceEntity(), CastSourceComponent.class);
         if(castSourceComponent != null){
-            effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntitiyID()));
+            effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntity()));
+            if(entityWorld.hasComponent(effectTriggerEntity, CasterTargetComponent.class)){
+                affectedTargets.add(castSourceComponent.getSourceEntity());
+            }
         }
-        LinkedList<Integer> affectedTargets = new LinkedList<Integer>();
         if(entityWorld.hasComponent(effectTriggerEntity, SourceTargetComponent.class)){
             affectedTargets.add(triggeredEffectComponent.getSourceEntity());
         }

@@ -25,6 +25,7 @@ import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.systems.movement.MovementSystem;
 import amara.game.entitysystem.systems.spells.*;
+import amara.game.entitysystem.systems.targets.TargetUtil;
 
 /**
  *
@@ -107,35 +108,45 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
     
     private void castSpell(EntityWorld entityWorld, int casterEntity, int spellEntity, Object castSpellComponent){
         if((!entityWorld.hasAnyComponent(casterEntity, IsSilencedComponent.class, IsStunnedComponent.class)) && (!entityWorld.hasComponent(spellEntity, RemainingCooldownComponent.class))){
-            boolean castInstant = true;
-            RangeComponent rangeComponent = entityWorld.getComponent(spellEntity, RangeComponent.class);
-            if(rangeComponent != null){
-                Vector2f position = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
-                int targetEntity = -1;
-                if(castSpellComponent instanceof CastSingleTargetSpellComponent){
-                    targetEntity = ((CastSingleTargetSpellComponent) castSpellComponent).getTargetEntityID();
-                }
-                else if(castSpellComponent instanceof CastPositionalSkillshotSpellComponent){
-                    targetEntity = entityWorld.createEntity();
-                    Vector2f targetPosition = ((CastPositionalSkillshotSpellComponent) castSpellComponent).getPosition();
-                    entityWorld.setComponent(targetEntity, new PositionComponent(targetPosition));
-                }
-                float distance = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition().distance(position);
-                float range = rangeComponent.getDistance();
-                if(distance > range){
-                    move(entityWorld, casterEntity, targetEntity);
-                    EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
-                    effectTrigger.setComponent(new TargetReachedTriggerComponent(range));
-                    effectTrigger.setComponent(new SourceTargetComponent());
-                    EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
-                    effect.setComponent(new AddComponentsComponent(castSpellComponent));
-                    effect.setComponent(new StopComponent());
-                    effectTrigger.setComponent(new TriggeredEffectComponent(casterEntity, effect.getId()));
-                    castInstant = false;
+            int targetEntity = -1;
+            if(castSpellComponent instanceof CastSingleTargetSpellComponent){
+                targetEntity = ((CastSingleTargetSpellComponent) castSpellComponent).getTargetEntityID();
+            }
+            else if(castSpellComponent instanceof CastPositionalSkillshotSpellComponent){
+                targetEntity = entityWorld.createEntity();
+                Vector2f targetPosition = ((CastPositionalSkillshotSpellComponent) castSpellComponent).getPosition();
+                entityWorld.setComponent(targetEntity, new PositionComponent(targetPosition));
+            }
+            boolean canBeCasted = true;
+            if(targetEntity != -1){
+                SpellTargetRulesComponent spellTargetRulesComponent = entityWorld.getComponent(spellEntity, SpellTargetRulesComponent.class);
+                if(spellTargetRulesComponent != null){
+                    canBeCasted = TargetUtil.isValidTarget(entityWorld, casterEntity, targetEntity, spellTargetRulesComponent.getTargetRulesEntity());
                 }
             }
-            if(castInstant){
-                entityWorld.setComponent(casterEntity, castSpellComponent);
+            if(canBeCasted){
+                boolean castInstant = true;
+                RangeComponent rangeComponent = entityWorld.getComponent(spellEntity, RangeComponent.class);
+                if(rangeComponent != null){
+                    float range = rangeComponent.getDistance();
+                    Vector2f casterPosition = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
+                    Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
+                    float distance = targetPosition.distance(casterPosition);
+                    if(distance > range){
+                        move(entityWorld, casterEntity, targetEntity);
+                        EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+                        effectTrigger.setComponent(new TargetReachedTriggerComponent(range));
+                        effectTrigger.setComponent(new SourceTargetComponent());
+                        EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
+                        effect.setComponent(new AddComponentsComponent(castSpellComponent));
+                        effect.setComponent(new StopComponent());
+                        effectTrigger.setComponent(new TriggeredEffectComponent(casterEntity, effect.getId()));
+                        castInstant = false;
+                    }
+                }
+                if(castInstant){
+                    entityWorld.setComponent(casterEntity, castSpellComponent);
+                }
             }
         }
     }

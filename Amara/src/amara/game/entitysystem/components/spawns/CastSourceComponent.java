@@ -17,12 +17,12 @@ public class CastSourceComponent{
         
     }
     
-    public CastSourceComponent(int sourceEntitiyID){
-        this.sourceEntitiyID = sourceEntitiyID;
+    public CastSourceComponent(int sourceEntity){
+        this.sourceEntity = sourceEntity;
     }
-    private int sourceEntitiyID;
+    private int sourceEntity;
 
-    public int getSourceEntitiyID(){
-        return sourceEntitiyID;
+    public int getSourceEntity(){
+        return sourceEntity;
     }
 }
