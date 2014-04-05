@@ -66,7 +66,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(entitiesNode);
         NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
-        networkClient.addMessageBackend(new EntitySynchronizeBackend(entityWorld));
+        networkClient.addMessageBackend(new EntitySynchronizeBackend(mainApplication, entityWorld));
         networkClient.addMessageBackend(new GameStartedBackend(mainApplication));
         networkClient.addMessageBackend(new GameOverBackend(mainApplication));
         MapHeightmap mapHeightmap = getAppState(MapAppState.class).getMapHeightmap();
