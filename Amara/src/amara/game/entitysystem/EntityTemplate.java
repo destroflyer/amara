@@ -593,6 +593,54 @@ public class EntityTemplate{
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
         }
+        else if(templateName.equals("soldier")){
+            entityWrapper.setComponent(new ModelComponent("Models/soldier/skin.xml"));
+            EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            walkAnimation.setComponent(new NameComponent("walk"));
+            walkAnimation.setComponent(new LoopDurationComponent(1));
+            entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+
+            entityWrapper.setComponent(new AntiGhostComponent());
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(400));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(80));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
+            EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
+            EntityWrapper dagger = createFromTemplate(entityWorld, "dagger");
+            entityWrapper.setComponent(new InventoryComponent(new int[]{doransBlade.getId(), dagger.getId()}));
+            entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+
+            EntityWrapper spinningSlash = createFromTemplate(entityWorld, "spinning_slash");
+            entityWrapper.setComponent(new SpellsComponent(new int[]{spinningSlash.getId()}));
+        }
+        else if(templateName.equals("soldier_spawn")){
+            entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
+        }
+        else if(templateName.equals("spinning_slash")){
+            entityWrapper.setComponent(new NameComponent("Spinning Slash"));
+            entityWrapper.setComponent(new DescriptionComponent("Trynda."));
+            entityWrapper.setComponent(new SpellVisualisationComponent("spinning_slash"));
+            //Move to target
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new CasterTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
+            movement.setComponent(new TargetedMovementDirectionComponent());
+            movement.setComponent(new MovementSpeedComponent(15));
+            EntityWrapper movementAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            movementAnimation.setComponent(new NameComponent("spin"));
+            movementAnimation.setComponent(new LoopDurationComponent(0.3f));
+            movement.setComponent(new MovementAnimationComponent(movementAnimation.getId()));
+            movement.setComponent(new DistanceLimitComponent(10));
+            effect1.setComponent(new MoveComponent(movement.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
+            entityWrapper.setComponent(new CooldownComponent(1.5f));
+        }
         else if(templateName.equals("dorans_blade")){
             entityWrapper.setComponent(new ItemVisualisationComponent("dorans_blade"));
             entityWrapper.setComponent(new BonusFlatMaximumHealthComponent(80));

@@ -78,10 +78,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new PerformAutoAttacksSystem());
         addEntitySystem(new SetCooldownOnCastingSystem());
         addEntitySystem(new PlayCastAnimationSystem());
-        addEntitySystem(new CastSelfcastSpellSystem());
-        addEntitySystem(new CastSingleTargetSpellSystem());
-        addEntitySystem(new CastLinearSkillshotSpellSystem());
-        addEntitySystem(new CastPositionalSkillshotSpellSystem());
+        addEntitySystem(new CastSpellSystem());
         addEntitySystem(new RemoveBuffsSystem());
         addEntitySystem(new RepeatingBuffEffectsSystem());
         addEntitySystem(new CalculateEffectImpactSystem());

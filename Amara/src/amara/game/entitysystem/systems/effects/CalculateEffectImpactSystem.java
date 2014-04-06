@@ -4,6 +4,8 @@
  */
 package amara.game.entitysystem.systems.effects;
 
+import amara.game.entitysystem.components.effects.casts.EffectCastTargetComponent;
+import amara.game.entitysystem.components.effects.casts.EffectCastDirectionComponent;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
@@ -16,7 +18,6 @@ import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.effects.spells.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.spells.targets.*;
-import amara.game.entitysystem.components.visuals.ModelComponent;
 
 /**
  *
@@ -70,12 +71,16 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     effectImpact.setComponent(new HealComponent(heal));
                 }
                 EffectCastTargetComponent effectCastTargetComponent = entityWrapper.getComponent(EffectCastTargetComponent.class);
+                EffectCastDirectionComponent effectCastDirectionComponent = entityWrapper.getComponent(EffectCastDirectionComponent.class);
                 MoveComponent moveComponent = effect.getComponent(MoveComponent.class);
                 if(moveComponent != null){
                     int movementEntity = entityWorld.createEntity();
                     for(Object component : entityWorld.getComponents(moveComponent.getMovementEntity())){
                         if(component instanceof TargetedMovementTargetComponent){
                             entityWorld.setComponent(movementEntity, new MovementTargetComponent(effectCastTargetComponent.getTargetEntity()));
+                        }
+                        else if(component instanceof TargetedMovementDirectionComponent){
+                            entityWorld.setComponent(movementEntity, new MovementDirectionComponent(effectCastDirectionComponent.getDirection()));
                         }
                         else{
                             entityWorld.setComponent(movementEntity, component);
