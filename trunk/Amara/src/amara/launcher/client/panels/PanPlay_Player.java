@@ -46,7 +46,7 @@ public class PanPlay_Player extends javax.swing.JPanel{
         lblName.setForeground(new java.awt.Color(255, 255, 255));
         lblName.setText("???");
 
-        cbxPlayerEntityTemplate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "minion", "wizard", "robot", "jaime" }));
+        cbxPlayerEntityTemplate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "minion", "wizard", "robot", "jaime", "soldier" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
