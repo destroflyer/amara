@@ -20,13 +20,22 @@ public class RemoveFinishedMovementsSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
             int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
+            boolean isFinished = false;
             MovementTargetComponent movementTargetComponent = entityWorld.getComponent(movementEntity, MovementTargetComponent.class);
             if(movementTargetComponent != null){
                 Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
                 Vector2f targetPosition = entityWorld.getComponent(movementTargetComponent.getTargetEntity(), PositionComponent.class).getPosition();
-                if(position.equals(targetPosition)){
-                    entityWorld.removeComponent(entity, MovementComponent.class);
+                isFinished |= position.equals(targetPosition);
+            }
+            DistanceLimitComponent distanceLimitComponent = entityWorld.getComponent(movementEntity, DistanceLimitComponent.class);
+            if(distanceLimitComponent != null){
+                MovedDistanceComponent movedDistanceComponent = entityWorld.getComponent(movementEntity, MovedDistanceComponent.class);
+                if((movedDistanceComponent != null) && (movedDistanceComponent.getDistance() >= distanceLimitComponent.getDistance())){
+                    isFinished = true;
                 }
+            }
+            if(isFinished){
+                entityWorld.removeComponent(entity, MovementComponent.class);
             }
         }
     }

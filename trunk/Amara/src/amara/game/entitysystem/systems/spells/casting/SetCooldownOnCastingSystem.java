@@ -5,17 +5,21 @@
 package amara.game.entitysystem.systems.spells.casting;
 
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.spells.*;
 
 /**
  *
  * @author Carl
  */
-public class SetCooldownOnCastingSystem extends SimpleCastingSystem{
-
+public class SetCooldownOnCastingSystem implements EntitySystem{
+    
     @Override
-    public void onCasting(EntityWorld entityWorld, int casterEnttiy, int spellEntity){
-        setOnCooldown(entityWorld, spellEntity);
+    public void update(EntityWorld entityWorld, float deltaSeconds){
+        for(int casterEntity : entityWorld.getEntitiesWithAll(CastSpellComponent.class)){
+            int spellEntity = entityWorld.getComponent(casterEntity, CastSpellComponent.class).getSpellEntity();
+            setOnCooldown(entityWorld, spellEntity);
+        }
     }
     
     public static void setOnCooldown(EntityWorld entityWorld, int spellEntity){

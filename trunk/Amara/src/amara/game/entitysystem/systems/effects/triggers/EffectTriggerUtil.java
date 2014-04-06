@@ -19,13 +19,15 @@ import amara.game.entitysystem.components.units.effecttriggers.targets.*;
  */
 public class EffectTriggerUtil{
     
-    public static void triggerEffects(EntityWorld entityWorld, int[] effectTriggerEntities, int targetEntity){
+    public static LinkedList<EntityWrapper> triggerEffects(EntityWorld entityWorld, int[] effectTriggerEntities, int targetEntity){
+        LinkedList<EntityWrapper> effectCasts = new LinkedList<EntityWrapper>();
         for(int effectTriggerEntity : effectTriggerEntities){
-            triggerEffect(entityWorld, effectTriggerEntity, targetEntity);
+            effectCasts.add(triggerEffect(entityWorld, effectTriggerEntity, targetEntity));
         }
+        return effectCasts;
     }
     
-    public static void triggerEffect(EntityWorld entityWorld, int effectTriggerEntity, int targetEntity){
+    public static EntityWrapper triggerEffect(EntityWorld entityWorld, int effectTriggerEntity, int targetEntity){
         EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
         TriggeredEffectComponent triggeredEffectComponent = entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class);
         int effectEntity = triggeredEffectComponent.getEffectEntity();
@@ -34,7 +36,6 @@ public class EffectTriggerUtil{
             entityWorld.setComponent(effectEntity, new ReplaceSpellWithNewSpellComponent(replaceSpellWithNewSpellComponent.getSpellIndex(), replaceSpellWithNewSpellComponent.getNewSpellTemplate() + "," + targetEntity));
         }
         effectCast.setComponent(new PrepareEffectComponent(effectEntity));
-        effectCast.setComponent(new EffectCastTargetComponent(targetEntity));
         LinkedList<Integer> affectedTargets = new LinkedList<Integer>();
         CastSourceComponent castSourceComponent = entityWorld.getComponent(triggeredEffectComponent.getSourceEntity(), CastSourceComponent.class);
         if(castSourceComponent != null){
@@ -46,7 +47,7 @@ public class EffectTriggerUtil{
         if(entityWorld.hasComponent(effectTriggerEntity, SourceTargetComponent.class)){
             affectedTargets.add(triggeredEffectComponent.getSourceEntity());
         }
-        if(entityWorld.hasComponent(effectTriggerEntity, TargetTargetComponent.class)){
+        if(entityWorld.hasComponent(effectTriggerEntity, TargetTargetComponent.class) && (targetEntity != -1)){
             affectedTargets.add(targetEntity);
         }
         if(entityWorld.hasComponent(effectTriggerEntity, CustomTargetComponent.class)){
@@ -54,5 +55,6 @@ public class EffectTriggerUtil{
             affectedTargets.add(customTargetEntity);
         }
         effectCast.setComponent(new AffectedTargetsComponent(Util.convertToArray(affectedTargets)));
+        return effectCast;
     }
 }

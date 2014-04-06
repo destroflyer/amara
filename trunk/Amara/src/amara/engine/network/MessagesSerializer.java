@@ -17,6 +17,7 @@ import amara.game.entitysystem.components.buffs.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.buffs.*;
+import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.effects.general.*;
@@ -25,6 +26,7 @@ import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.effects.spells.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.input.*;
+import amara.game.entitysystem.components.input.casts.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.maps.*;
 import amara.game.entitysystem.components.maps.playerdeathrules.*;
@@ -117,12 +119,15 @@ public class MessagesSerializer{
                         //effects
                         AffectedTargetsComponent.class,
                         ApplyEffectImpactComponent.class,
-                        EffectCastTargetComponent.class,
                         EffectSourceComponent.class,
                         PrepareEffectComponent.class,
                         //effects/buffs
                         AddBuffComponent.class,
                         RemoveBuffComponent.class,
+                        //effects/casts
+                        EffectCastDirectionComponent.class,
+                        EffectCastPositionComponent.class,
+                        EffectCastTargetComponent.class,
                         //effects/crowdcontrol
                         AddBindingComponent.class,
                         AddBindingImmuneComponent.class,
@@ -160,10 +165,9 @@ public class MessagesSerializer{
                         DescriptionComponent.class,
                         NameComponent.class,
                         //input
-                        CastLinearSkillshotSpellComponent.class,
-                        CastPositionalSkillshotSpellComponent.class,
-                        CastSelfcastSpellComponent.class,
-                        CastSingleTargetSpellComponent.class,
+                        CastSpellComponent.class,
+                        //input/casts
+                        TargetComponent.class,
                         //items
                         InventoryComponent.class,
                         ItemVisualisationComponent.class,
@@ -174,6 +178,8 @@ public class MessagesSerializer{
                         RespawnPlayersComponent.class,
                         RespawnTimerComponent.class,
                         //movements
+                        DistanceLimitComponent.class,
+                        MovedDistanceComponent.class,
                         MovementAnimationComponent.class,
                         MovementDirectionComponent.class,
                         MovementIsCancelableComponent.class,
@@ -224,6 +230,7 @@ public class MessagesSerializer{
                         //spells/specials
                         TeleportCasterToTargetPositionComponent.class,
                         //spells/targets
+                        TargetedMovementDirectionComponent.class,
                         TargetedMovementTargetComponent.class,
                         //targets
                         AcceptAlliesComponent.class,

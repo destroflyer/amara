@@ -28,6 +28,12 @@ public class MovementSystem implements EntitySystem{
                     float speed = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class).getSpeed();
                     Vector2f movedDistance = direction.normalize().multLocal(speed).multLocal(deltaSeconds);
                     entityWorld.setComponent(entity, new PositionComponent(position.add(movedDistance)));
+                    float totalMovedDistance = movedDistance.length();
+                    MovedDistanceComponent movedDistanceComponent = entityWorld.getComponent(movementEntity, MovedDistanceComponent.class);
+                    if(movedDistanceComponent != null){
+                        totalMovedDistance += movedDistanceComponent.getDistance();
+                    }
+                    entityWorld.setComponent(movementEntity, new MovedDistanceComponent(totalMovedDistance));
                 }
             }
         }
