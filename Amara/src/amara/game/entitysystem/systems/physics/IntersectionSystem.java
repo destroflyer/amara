@@ -40,6 +40,19 @@ public class IntersectionSystem implements EntitySystem, IntersectionInformant
         entries = tracker.getEntries();
         repeaters = tracker.getRepeaters();
         leavers = tracker.getLeavers();
+        
+        HashSet<Pair<Integer>> tmp = new HashSet<Pair<Integer>>();
+        for (Pair<Integer> pair : leavers)
+        {
+            if(!(entityWorld.hasComponent(pair.getA(), HitboxComponent.class) && entityWorld.hasComponent(pair.getB(), HitboxComponent.class)))
+            {
+                tmp.add(pair);
+            }
+        }
+        for (Pair<Integer> pair : tmp)
+        {
+            leavers.remove(pair);
+        }
     }
     
     private HashSet<Pair<Integer>> EntitiesFromHitboxes(Set<Pair<Hitbox>> hitboxes)
