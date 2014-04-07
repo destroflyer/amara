@@ -273,7 +273,6 @@ public class MessagesSerializer{
                         //visuals
                         ModelComponent.class,
                         AnimationComponent.class,
-                        StopPlayingAnimationComponent.class,
                         TitleComponent.class,
                         //visuals/animations
                         FreezeAfterPlayingComponent.class,

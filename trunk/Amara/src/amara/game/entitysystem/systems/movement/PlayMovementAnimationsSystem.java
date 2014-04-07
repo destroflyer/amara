@@ -29,7 +29,7 @@ public class PlayMovementAnimationsSystem implements EntitySystem{
             MovementAnimationComponent movementAnimationComponent = entityWorld.getComponent(movementEntity, MovementAnimationComponent.class);
             AnimationComponent currentAnimationComponent = entityWorld.getComponent(entity, AnimationComponent.class);
             if((movementAnimationComponent != null) && (currentAnimationComponent != null) && (movementAnimationComponent.getAnimationEntity() == currentAnimationComponent.getAnimationEntity())){
-                entityWorld.setComponent(entity, new StopPlayingAnimationComponent());
+                entityWorld.removeComponent(entity, AnimationComponent.class);
             }
         }
         observer.reset();
@@ -42,7 +42,7 @@ public class PlayMovementAnimationsSystem implements EntitySystem{
             entityWorld.setComponent(entity, new AnimationComponent(movementAnimationComponent.getAnimationEntity()));
         }
         else{
-            entityWorld.setComponent(entity, new StopPlayingAnimationComponent());
+            entityWorld.removeComponent(entity, AnimationComponent.class);
         }
     }
 }

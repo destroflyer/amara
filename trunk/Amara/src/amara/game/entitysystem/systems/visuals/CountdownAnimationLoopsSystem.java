@@ -16,16 +16,22 @@ public class CountdownAnimationLoopsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(AnimationComponent.class)))
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AnimationComponent.class);
+        for(int entity : observer.getNew().getEntitiesWithAll(AnimationComponent.class)){
+            int animationEntity = observer.getNew().getComponent(entity, AnimationComponent.class).getAnimationEntity();
+            entityWorld.removeComponent(animationEntity, PassedLoopTimeComponent.class);
+        }
+        observer.reset();
+        for(int entity : entityWorld.getEntitiesWithAll(AnimationComponent.class))
         {
-            EntityWrapper animation = entityWorld.getWrapped(entityWrapper.getComponent(AnimationComponent.class).getAnimationEntity());
+            EntityWrapper animation = entityWorld.getWrapped(entityWorld.getComponent(entity, AnimationComponent.class).getAnimationEntity());
             float passedLoopTime = deltaSeconds;
             PassedLoopTimeComponent passedLoopTimeComponent = animation.getComponent(PassedLoopTimeComponent.class);
             if(passedLoopTimeComponent != null){
                 passedLoopTime += passedLoopTimeComponent.getPassedTime();
             }
             if(passedLoopTime >= animation.getComponent(LoopDurationComponent.class).getDuration()){
-                animation.setComponent(new PassedLoopTimeComponent(0));
+                animation.removeComponent(PassedLoopTimeComponent.class);
                 RemainingLoopsComponent remainingLoopsComponent = animation.getComponent(RemainingLoopsComponent.class);
                 if(remainingLoopsComponent != null){
                     int remainingLoops = (remainingLoopsComponent.getLoopsCount() - 1);
@@ -33,7 +39,7 @@ public class CountdownAnimationLoopsSystem implements EntitySystem{
                         animation.setComponent(new RemainingLoopsComponent(remainingLoops));
                     }
                     else{
-                        entityWrapper.setComponent(new StopPlayingAnimationComponent());
+                        entityWorld.removeComponent(entity, AnimationComponent.class);
                     }
                 }
             }

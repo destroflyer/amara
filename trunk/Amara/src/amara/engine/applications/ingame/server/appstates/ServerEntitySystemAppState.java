@@ -57,8 +57,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         networkServer.addMessageBackend(new AuthentificateClientsBackend(mainApplication.getGame(), entityWorld));
         networkServer.addMessageBackend(new UpdateNewClientBackend(entityWorld));
         networkServer.addMessageBackend(new InitializeClientBackend(mainApplication.getGame(), getAppState(GameRunningAppState.class)));
-        addEntitySystem(new SendEntityChangesSystem(networkServer));
-        addEntitySystem(new SetSpellCasterSystem());
+        addEntitySystem(new SetAutoAttacksCastAnimationsSystem());
+        addEntitySystem(new SetSpellsCastersSystem());
         addEntitySystem(new UpdateAttributesSystem());
         addEntitySystem(new CountdownPlayerRespawnSystem());
         addEntitySystem(new CountdownLifetimeSystem());
@@ -71,7 +71,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownStunSystem());
         addEntitySystem(new CountdownStunImmuneSystem());
         addEntitySystem(new CountdownAnimationLoopsSystem());
-        addEntitySystem(new StopAnimationsSystem());
         addEntitySystem(new CheckOpenObjectivesSystem());
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue()));
         addEntitySystem(new AttackAggroedTargetsSystem());
@@ -121,6 +120,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(intersectionSystem);
         addEntitySystem(new TriggerCollisionEffectSystem(intersectionSystem));
         addEntitySystem(new AggroSystem());
+        addEntitySystem(new SetIdleAnimationsSystem());
         
         Game game = mainApplication.getGame();
         Map map = game.getMap();
@@ -146,6 +146,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CheckMapObjectiveSystem(map, getAppState(GameRunningAppState.class)));
         addEntitySystem(new PlayerDeathSystem(map));
         addEntitySystem(new PlayerRespawnSystem(game));
+        
+        addEntitySystem(new SendEntityChangesSystem(networkServer));
     }
 
     @Override
