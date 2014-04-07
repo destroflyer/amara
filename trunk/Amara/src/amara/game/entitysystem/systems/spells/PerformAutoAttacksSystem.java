@@ -6,15 +6,14 @@ package amara.game.entitysystem.systems.spells;
 
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
-import amara.game.entitysystem.components.input.CastSpellComponent;
-import amara.game.entitysystem.components.input.casts.TargetComponent;
+import amara.game.entitysystem.components.input.*;
+import amara.game.entitysystem.components.input.casts.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.systems.commands.ExecutePlayerCommandsSystem;
-import amara.game.entitysystem.systems.spells.casting.*;
 import amara.game.entitysystem.systems.targets.TargetUtil;
 
 /**
