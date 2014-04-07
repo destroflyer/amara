@@ -84,6 +84,17 @@ public class EntityTemplate{
             effect2.setComponent(new RemoveEntityComponent());
             effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
         }
+        else if(templateName.equals("melee_autoattack")){
+            EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger.setComponent(new TargetTargetComponent());
+            EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
+            effect.setComponent(new ScalingAttackDamagePhysicalDamageComponent(1));
+            effectTrigger.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger.getId()));
+            EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
+            targetRules.setComponent(new AcceptEnemiesComponent());
+            entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
+        }
         else if(templateName.equals("cloud")){
             entityWrapper.setComponent(new ModelComponent("Models/cloud/skin.xml"));
         }
@@ -599,6 +610,9 @@ public class EntityTemplate{
             walkAnimation.setComponent(new NameComponent("walk"));
             walkAnimation.setComponent(new LoopDurationComponent(1));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+            EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
+            entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
 
             entityWrapper.setComponent(new AntiGhostComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
@@ -610,6 +624,9 @@ public class EntityTemplate{
             EntityWrapper dagger = createFromTemplate(entityWorld, "dagger");
             entityWrapper.setComponent(new InventoryComponent(new int[]{doransBlade.getId(), dagger.getId()}));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+
+            EntityWrapper autoAttack = createFromTemplate(entityWorld, "melee_autoattack");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
 
             EntityWrapper spinningSlash = createFromTemplate(entityWorld, "spinning_slash");
             entityWrapper.setComponent(new SpellsComponent(new int[]{spinningSlash.getId()}));

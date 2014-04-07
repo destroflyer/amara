@@ -9,6 +9,7 @@ import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.status.*;
+import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.input.casts.*;
@@ -35,11 +36,27 @@ public class CastSpellSystem implements EntitySystem{
             TargetComponent castTargetComponent = entityWorld.getComponent(castInformationEntity, TargetComponent.class);
             PositionComponent castPositionComponent = entityWorld.getComponent(castInformationEntity, PositionComponent.class);
             DirectionComponent castDirectionComponent = entityWorld.getComponent(castInformationEntity, DirectionComponent.class);
+            //Turn into cast direction
+            Vector2f turnDirection = entityWorld.getComponent(casterEntity, DirectionComponent.class).getVector().clone();
+            Vector2f casterPosition = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
+            if((castTargetComponent != null) && (castTargetComponent.getTargetEntity() != casterEntity)){
+                Vector2f targetPosition = entityWorld.getComponent(castTargetComponent.getTargetEntity(), PositionComponent.class).getPosition();
+                turnDirection = targetPosition.subtract(casterPosition);
+            }
+            else if(castPositionComponent != null){
+                turnDirection = castPositionComponent.getPosition().subtract(casterPosition);
+            }
+            else if(castDirectionComponent != null){
+                turnDirection = castDirectionComponent.getVector().clone();
+            }
+            entityWorld.setComponent(casterEntity, new DirectionComponent(turnDirection));
+            //Instant
             InstantEffectTriggersComponent instantEffectTriggersComponent = entityWorld.getComponent(spellEntity, InstantEffectTriggersComponent.class);
             if(instantEffectTriggersComponent != null){
                 int targetEntity = ((castTargetComponent != null)?castTargetComponent.getTargetEntity():-1);
                 LinkedList<EntityWrapper> effectCasts = EffectTriggerUtil.triggerEffects(entityWorld, instantEffectTriggersComponent.getEffectTriggerEntities(), targetEntity);
                 for(EntityWrapper effectCast : effectCasts){
+                    effectCast.setComponent(new EffectSourceComponent(casterEntity));
                     if(castTargetComponent != null){
                         effectCast.setComponent(new EffectCastTargetComponent(castTargetComponent.getTargetEntity()));
                     }
@@ -51,6 +68,7 @@ public class CastSpellSystem implements EntitySystem{
                     }
                 }
             }
+            //Buffs
             if(castTargetComponent != null){
                 InstantTargetBuffComponent instantTargetBuffComponent = entityWorld.getComponent(spellEntity, InstantTargetBuffComponent.class);
                 if(instantTargetBuffComponent != null){
@@ -61,12 +79,14 @@ public class CastSpellSystem implements EntitySystem{
                     entityWorld.setComponent(castTargetComponent.getTargetEntity(), new RequestUpdateAttributesComponent());
                 }
             }
+            //Specials
             if(castPositionComponent != null){
                 if(entityWorld.hasComponent(spellEntity, TeleportCasterToTargetPositionComponent.class)){
                     entityWorld.removeComponent(casterEntity, MovementComponent.class);
                     entityWorld.setComponent(casterEntity, new PositionComponent(castPositionComponent.getPosition().clone()));
                 }
             }
+            //Spawns
             InstantSpawnsComponent instantSpawnsComponent = entityWorld.getComponent(spellEntity, InstantSpawnsComponent.class);
             if(instantSpawnsComponent != null){
                 int[] spawnInformationEntitiesIDs = instantSpawnsComponent.getSpawnInformationEntitiesIDs();
