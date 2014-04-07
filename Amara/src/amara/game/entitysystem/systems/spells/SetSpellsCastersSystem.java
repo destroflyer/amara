@@ -12,7 +12,7 @@ import amara.game.entitysystem.components.units.*;
  *
  * @author Carl
  */
-public class SetSpellCasterSystem implements EntitySystem{
+public class SetSpellsCastersSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){

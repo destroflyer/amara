@@ -11,6 +11,7 @@ import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.visuals.animations.*;
 
 /**
  *
@@ -74,7 +75,12 @@ public class UpdateAttributesSystem implements EntitySystem{
             entityWrapper.setComponent(new AttackSpeedComponent(attackSpeed));
             AutoAttackComponent autoAttackComponent = entityWrapper.getComponent(AutoAttackComponent.class);
             if(autoAttackComponent != null){
-                entityWorld.setComponent(autoAttackComponent.getAutoAttackEntityID(), new CooldownComponent(1 / attackSpeed));
+                float autoAttackInterval = (1 / attackSpeed);
+                entityWorld.setComponent(autoAttackComponent.getAutoAttackEntity(), new CooldownComponent(autoAttackInterval));
+                CastAnimationComponent autoAttackCastAnimationComponent = entityWorld.getComponent(autoAttackComponent.getAutoAttackEntity(), CastAnimationComponent.class);
+                if(autoAttackCastAnimationComponent != null){
+                    entityWorld.setComponent(autoAttackCastAnimationComponent.getAnimationEntity(), new LoopDurationComponent(autoAttackInterval));
+                }
             }
             entityWrapper.removeComponent(RequestUpdateAttributesComponent.class);
         }

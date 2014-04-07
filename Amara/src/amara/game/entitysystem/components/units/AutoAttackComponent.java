@@ -17,12 +17,12 @@ public class AutoAttackComponent{
         
     }
     
-    public AutoAttackComponent(int autoAttackEntityID){
-        this.autoAttackEntityID = autoAttackEntityID;
+    public AutoAttackComponent(int autoAttackEntity){
+        this.autoAttackEntity = autoAttackEntity;
     }
-    private int autoAttackEntityID;
+    private int autoAttackEntity;
 
-    public int getAutoAttackEntityID(){
-        return autoAttackEntityID;
+    public int getAutoAttackEntity(){
+        return autoAttackEntity;
     }
 }

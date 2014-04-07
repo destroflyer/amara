@@ -31,7 +31,7 @@ public class PlayerRespawnSystem implements EntitySystem{
             String unitTemplate = game.getPlayers()[playerIndex].getPlayerData().getUnitTemplate();
             EntityTemplate.loadTemplate(entityWorld, selectedEntity, unitTemplate + "_spawn");
             entityWorld.setComponent(selectedEntity, new RequestUpdateAttributesComponent());
-            entityWorld.setComponent(selectedEntity, new StopPlayingAnimationComponent());
+            entityWorld.removeComponent(selectedEntity, AnimationComponent.class);
             game.getMap().spawn(entityWorld, playerEntity);
         }
     }
