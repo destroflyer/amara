@@ -116,8 +116,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new TargetedMovementSystem(intersectionSystem));
         addEntitySystem(new TriggerTargetReachedEffectSystem());
         addEntitySystem(new RemoveFinishedMovementsSystem());
-        addEntitySystem(new TransformUpdateSystem());
-        addEntitySystem(intersectionSystem);
         addEntitySystem(new TriggerCollisionEffectSystem(intersectionSystem));
         addEntitySystem(new AggroSystem());
         addEntitySystem(new SetIdleAnimationsSystem());
@@ -146,6 +144,9 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CheckMapObjectiveSystem(map, getAppState(GameRunningAppState.class)));
         addEntitySystem(new PlayerDeathSystem(map));
         addEntitySystem(new PlayerRespawnSystem(game));
+        
+        addEntitySystem(new TransformUpdateSystem());
+        addEntitySystem(intersectionSystem);
         
         addEntitySystem(new SendEntityChangesSystem(networkServer));
     }
