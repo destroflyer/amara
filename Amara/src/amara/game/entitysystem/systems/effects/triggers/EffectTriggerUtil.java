@@ -30,6 +30,7 @@ public class EffectTriggerUtil{
     public static EntityWrapper triggerEffect(EntityWorld entityWorld, int effectTriggerEntity, int targetEntity){
         EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
         TriggeredEffectComponent triggeredEffectComponent = entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class);
+        TriggerSourceComponent triggerSourceComponent = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class);
         int effectEntity = triggeredEffectComponent.getEffectEntity();
         ReplaceSpellWithNewSpellComponent replaceSpellWithNewSpellComponent = entityWorld.getComponent(effectEntity, ReplaceSpellWithNewSpellComponent.class);
         if(replaceSpellWithNewSpellComponent != null){
@@ -37,15 +38,17 @@ public class EffectTriggerUtil{
         }
         effectCast.setComponent(new PrepareEffectComponent(effectEntity));
         LinkedList<Integer> affectedTargets = new LinkedList<Integer>();
-        CastSourceComponent castSourceComponent = entityWorld.getComponent(triggeredEffectComponent.getSourceEntity(), CastSourceComponent.class);
-        if(castSourceComponent != null){
-            effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntity()));
-            if(entityWorld.hasComponent(effectTriggerEntity, CasterTargetComponent.class)){
-                affectedTargets.add(castSourceComponent.getSourceEntity());
+        if(triggerSourceComponent != null){
+            CastSourceComponent castSourceComponent = entityWorld.getComponent(triggerSourceComponent.getSourceEntity(), CastSourceComponent.class);
+            if(castSourceComponent != null){
+                effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntity()));
+                if(entityWorld.hasComponent(effectTriggerEntity, CasterTargetComponent.class)){
+                    affectedTargets.add(castSourceComponent.getSourceEntity());
+                }
             }
-        }
-        if(entityWorld.hasComponent(effectTriggerEntity, SourceTargetComponent.class)){
-            affectedTargets.add(triggeredEffectComponent.getSourceEntity());
+            if(entityWorld.hasComponent(effectTriggerEntity, SourceTargetComponent.class)){
+                affectedTargets.add(triggerSourceComponent.getSourceEntity());
+            }
         }
         if(entityWorld.hasComponent(effectTriggerEntity, TargetTargetComponent.class) && (targetEntity != -1)){
             affectedTargets.add(targetEntity);
@@ -55,6 +58,9 @@ public class EffectTriggerUtil{
             affectedTargets.add(customTargetEntity);
         }
         effectCast.setComponent(new AffectedTargetsComponent(Util.convertToArray(affectedTargets)));
+        if(entityWorld.hasComponent(effectTriggerEntity, TriggerOnceComponent.class)){
+            entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
+        }
         return effectCast;
     }
 }

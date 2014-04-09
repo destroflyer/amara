@@ -104,11 +104,13 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyReplaceSpellsWithExistingSpellsSystem());
         addEntitySystem(new ApplyReplaceSpellsWithNewSpellsSystem());
         addEntitySystem(new ApplyAddComponentsSystem());
+        addEntitySystem(new ApplyAddEffectTriggersSystem());
         addEntitySystem(new ApplyRemoveEntitySystem());
         addEntitySystem(new RemoveAppliedEffectsSystem());
         addEntitySystem(new DeathSystem());
         addEntitySystem(new MaximumHealthSystem());
         addEntitySystem(new RemoveDeadUnitsSystem());
+        addEntitySystem(new RemoveUnusedTriggersSystem());
         IntersectionSystem intersectionSystem = new IntersectionSystem();
         addEntitySystem(new IntersectionAntiGhostSystem(intersectionSystem));
         addEntitySystem(new PlayMovementAnimationsSystem());

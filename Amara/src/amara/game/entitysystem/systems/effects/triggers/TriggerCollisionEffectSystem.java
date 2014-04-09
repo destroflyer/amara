@@ -32,14 +32,17 @@ public class TriggerCollisionEffectSystem implements EntitySystem{
     }
     
     private void checkEffectTriggers(EntityWorld entityWorld, int effectingEntity, int targetEntity){
-        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggeredEffectComponent.class)){
-            TriggeredEffectComponent triggeredEffectComponent = entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class);
-            if(triggeredEffectComponent.getSourceEntity() == effectingEntity){
+        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class)){
+            int triggerSourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
+            if(triggerSourceEntity == effectingEntity){
                 if(entityWorld.hasComponent(effectTriggerEntity, CollisionTriggerComponent.class)){
-                    int targetRulesEntity = entityWorld.getComponent(effectingEntity, IntersectionRulesComponent.class).getTargetRulesEntity();
-                    if(TargetUtil.isValidTarget(entityWorld, effectingEntity, targetEntity, targetRulesEntity)){
+                    boolean triggerEffect = true;
+                    IntersectionRulesComponent intersectionRulesComponent = entityWorld.getComponent(effectingEntity, IntersectionRulesComponent.class);
+                    if(intersectionRulesComponent != null){
+                        triggerEffect = TargetUtil.isValidTarget(entityWorld, effectingEntity, targetEntity, intersectionRulesComponent.getTargetRulesEntity());
+                    }
+                    if(triggerEffect){
                         EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, targetEntity);
-                        entityWorld.removeEntity(effectTriggerEntity);
                     }
                 }
             }

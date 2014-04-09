@@ -75,21 +75,24 @@ public class EntityTemplate{
             effectTrigger1.setComponent(new TargetTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
             effect1.setComponent(new ScalingAttackDamagePhysicalDamageComponent(1));
-            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Remove projectile
             EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger2.setComponent(new TargetReachedTriggerComponent());
             effectTrigger2.setComponent(new SourceTargetComponent());
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             effect2.setComponent(new RemoveEntityComponent());
-            effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
         }
         else if(templateName.equals("melee_autoattack")){
             EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger.setComponent(new TargetTargetComponent());
             EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
             effect.setComponent(new ScalingAttackDamagePhysicalDamageComponent(1));
-            effectTrigger.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect.getId()));
+            effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
+            effectTrigger.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger.getId()));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
@@ -165,14 +168,16 @@ public class EntityTemplate{
             effect1.setComponent(new FlatMagicDamageComponent(80));
             effect1.setComponent(new ScalingAbilityPowerMagicDamageComponent(0.7f));
             effect1.setComponent(new AddSilenceComponent(2));
-            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Remove projectile
             EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger2.setComponent(new TargetReachedTriggerComponent());
             effectTrigger2.setComponent(new SourceTargetComponent());
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             effect2.setComponent(new RemoveEntityComponent());
-            effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
         }
         else if(templateName.equals("riftwalk")){
             entityWrapper.setComponent(new NameComponent("Riftwalk"));
@@ -267,14 +272,16 @@ public class EntityTemplate{
             effect1.setComponent(new FlatMagicDamageComponent(165));
             effect1.setComponent(new ScalingAbilityPowerMagicDamageComponent(0.65f));
             effect1.setComponent(new AddStunComponent(0.5f));
-            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Remove projectile
             EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger2.setComponent(new CollisionTriggerComponent());
             effectTrigger2.setComponent(new SourceTargetComponent());
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             effect2.setComponent(new RemoveEntityComponent());
-            effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
         }
         else if(templateName.equals("pillar_of_flame")){
             entityWrapper.setComponent(new NameComponent("Pillar of Flame"));
@@ -301,14 +308,16 @@ public class EntityTemplate{
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
             effect1.setComponent(new FlatMagicDamageComponent(120));
             effect1.setComponent(new ScalingAbilityPowerMagicDamageComponent(0.6f));
-            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Remove projectile
             EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger2.setComponent(new CollisionTriggerComponent());
             effectTrigger2.setComponent(new SourceTargetComponent());
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             effect2.setComponent(new RemoveEntityComponent());
-            effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new LifetimeComponent(1.5f));
         }
         else if(templateName.equals("battle_cry")){
@@ -391,14 +400,16 @@ public class EntityTemplate{
             movement.setComponent(new MovementTargetComponent(parameters[0]));
             movement.setComponent(new MovementSpeedComponent(9));
             effect1.setComponent(new MoveComponent(movement.getId()));
-            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Remove projectile
             EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger2.setComponent(new CollisionTriggerComponent());
             effectTrigger2.setComponent(new SourceTargetComponent());
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             effect2.setComponent(new RemoveEntityComponent());
-            effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new LifetimeComponent(0.75f));
         }
         else if(templateName.equals("astral_blessing")){
@@ -409,7 +420,8 @@ public class EntityTemplate{
             effectTrigger.setComponent(new TargetTargetComponent());
             EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
             effect.setComponent(new FlatHealComponent(100));
-            effectTrigger.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect.getId()));
+            effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
+            effectTrigger.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
         }
@@ -434,7 +446,8 @@ public class EntityTemplate{
             effectTrigger1.setComponent(new CollisionTriggerComponent());
             effectTrigger1.setComponent(new CustomTargetComponent(parameters[0]));
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Add mark
             EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger2.setComponent(new CollisionTriggerComponent());
@@ -447,18 +460,20 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new CustomTargetComponent(parameters[0]));
             EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
             effect3.setComponent(new ReplaceSpellWithExistingSpellComponent(parameters[1], parameters[2]));
-            effectTrigger3.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect3.getId()));
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
             buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
             effect2.setComponent(new AddBuffComponent(buff.getId(), 3));
             effect1.setComponent(new ReplaceSpellWithNewSpellComponent(parameters[1], "resonating_strike," + buff.getId()));
-            effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Remove projectile
             EntityWrapper effectTrigger4 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger4.setComponent(new CollisionTriggerComponent());
             effectTrigger4.setComponent(new SourceTargetComponent());
             EntityWrapper effect4 = entityWorld.getWrapped(entityWorld.createEntity());
             effect4.setComponent(new RemoveEntityComponent());
-            effectTrigger4.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect4.getId()));
+            effectTrigger4.setComponent(new TriggeredEffectComponent(effect4.getId()));
+            effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new LifetimeComponent(1));
         }
         else if(templateName.equals("resonating_strike")){
@@ -472,13 +487,15 @@ public class EntityTemplate{
             movement.setComponent(new MovementTargetComponent(parameters[1]));
             movement.setComponent(new MovementSpeedComponent(10));
             effect1.setComponent(new MoveComponent(movement.getId()));
-            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Remove mark
             EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger2.setComponent(new CustomTargetComponent(parameters[1]));
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             effect2.setComponent(new RemoveBuffComponent(parameters[0]));
-            effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
             entityWrapper.setComponent(new CooldownComponent(3));
@@ -532,7 +549,8 @@ public class EntityTemplate{
             effect1.setComponent(new AddSilenceImmuneComponent(duration));
             effect1.setComponent(new AddStunImmuneComponent(duration));
             effect1.setComponent(new RemoveVulnerabilityComponent());
-            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             
             EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger2.setComponent(new TargetTargetComponent());
@@ -543,10 +561,12 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new CustomTargetComponent(parameters[0]));
             EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
             effect3.setComponent(new AddVulnerabilityComponent());
-            effectTrigger3.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect3.getId()));
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
             effect2.setComponent(new AddBuffComponent(buff.getId(), duration));
-            effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
@@ -560,7 +580,8 @@ public class EntityTemplate{
             float duration = 2.5f;
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
             effect1.setComponent(new RemoveTargetabilityComponent());
-            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             
             EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger2.setComponent(new TargetTargetComponent());
@@ -571,10 +592,12 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new CustomTargetComponent(parameters[0]));
             EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
             effect3.setComponent(new AddTargetabilityComponent());
-            effectTrigger3.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect3.getId()));
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
             effect2.setComponent(new AddBuffComponent(buff.getId(), duration));
-            effectTrigger2.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect2.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
@@ -583,6 +606,15 @@ public class EntityTemplate{
         else if(templateName.equals("lunar_rush")){
             entityWrapper.setComponent(new NameComponent("Lunar Rush"));
             entityWrapper.setComponent(new SpellVisualisationComponent("lunar_rush"));
+            //Damage target
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetReachedTriggerComponent());
+            effectTrigger2.setComponent(new TargetTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new FlatMagicDamageComponent(100));
+            effect2.setComponent(new ScalingAbilityPowerMagicDamageComponent(0.6f));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerOnceComponent());
             //Move to target
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new CasterTargetComponent());
@@ -595,7 +627,9 @@ public class EntityTemplate{
             movementAnimation.setComponent(new LoopDurationComponent(0.6f));
             movement.setComponent(new MovementAnimationComponent(movementAnimation.getId()));
             effect1.setComponent(new MoveComponent(movement.getId()));
-            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            effect1.setComponent(new AddEffectTriggersComponent(effectTrigger2.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new RangeComponent(20));
@@ -658,7 +692,8 @@ public class EntityTemplate{
             movement.setComponent(new MovementAnimationComponent(movementAnimation.getId()));
             movement.setComponent(new DistanceLimitComponent(10));
             effect1.setComponent(new MoveComponent(movement.getId()));
-            effectTrigger1.setComponent(new TriggeredEffectComponent(entityWrapper.getId(), effect1.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
             entityWrapper.setComponent(new CooldownComponent(1.5f));

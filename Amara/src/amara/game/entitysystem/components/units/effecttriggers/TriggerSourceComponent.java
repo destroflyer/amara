@@ -11,18 +11,18 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class TriggeredEffectComponent{
+public class TriggerSourceComponent{
 
-    public TriggeredEffectComponent(){
+    public TriggerSourceComponent(){
         
     }
 
-    public TriggeredEffectComponent(int effectEntity){
-        this.effectEntity = effectEntity;
+    public TriggerSourceComponent(int sourceEntity){
+        this.sourceEntity = sourceEntity;
     }
-    private int effectEntity;
+    private int sourceEntity;
 
-    public int getEffectEntity(){
-        return effectEntity;
+    public int getSourceEntity(){
+        return sourceEntity;
     }
 }

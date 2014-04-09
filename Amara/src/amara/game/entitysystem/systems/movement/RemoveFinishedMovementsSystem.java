@@ -4,10 +4,8 @@
  */
 package amara.game.entitysystem.systems.movement;
 
-import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.movements.*;
-import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
 
 /**
@@ -21,11 +19,8 @@ public class RemoveFinishedMovementsSystem implements EntitySystem{
         for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
             int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
             boolean isFinished = false;
-            MovementTargetComponent movementTargetComponent = entityWorld.getComponent(movementEntity, MovementTargetComponent.class);
-            if(movementTargetComponent != null){
-                Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
-                Vector2f targetPosition = entityWorld.getComponent(movementTargetComponent.getTargetEntity(), PositionComponent.class).getPosition();
-                isFinished |= position.equals(targetPosition);
+            if(entityWorld.hasComponent(movementEntity, MovementTargetReachedComponent.class)){
+                isFinished = true;
             }
             DistanceLimitComponent distanceLimitComponent = entityWorld.getComponent(movementEntity, DistanceLimitComponent.class);
             if(distanceLimitComponent != null){
