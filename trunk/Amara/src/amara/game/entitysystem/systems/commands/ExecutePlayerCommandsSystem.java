@@ -52,7 +52,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     MoveCommand moveCommand = (MoveCommand) command;
                     int targetPositionEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetPositionEntity, new PositionComponent(moveCommand.getPosition()));
-                    boolean wasSuccessfull = move(entityWorld, selectedUnit, targetPositionEntity);
+                    boolean wasSuccessfull = move(entityWorld, selectedUnit, targetPositionEntity, -1);
                     if(!wasSuccessfull){
                         entityWorld.removeEntity(targetPositionEntity);
                     }
@@ -141,14 +141,16 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
                     float distance = targetPosition.distance(casterPosition);
                     if(distance > range){
-                        move(entityWorld, casterEntity, targetEntity);
+                        move(entityWorld, casterEntity, targetEntity, range);
                         EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
-                        effectTrigger.setComponent(new TargetReachedTriggerComponent(range));
+                        effectTrigger.setComponent(new TargetReachedTriggerComponent());
                         effectTrigger.setComponent(new SourceTargetComponent());
                         EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
                         effect.setComponent(new AddComponentsComponent(castSpellComponent));
                         effect.setComponent(new StopComponent());
-                        effectTrigger.setComponent(new TriggeredEffectComponent(casterEntity, effect.getId()));
+                        effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
+                        effectTrigger.setComponent(new TriggerSourceComponent(casterEntity));
+                        effectTrigger.setComponent(new TriggerOnceComponent());
                         castInstant = false;
                     }
                 }
@@ -159,7 +161,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
         }
     }
     
-    private static boolean move(EntityWorld entityWorld, int selectedUnit, int targetEntity){
+    private static boolean move(EntityWorld entityWorld, int selectedUnit, int targetEntity, float sufficientDistance){
         if(MovementSystem.canMove(entityWorld, selectedUnit)){
             boolean isAllowed = true;
             MovementComponent movementComponent = entityWorld.getComponent(selectedUnit, MovementComponent.class);
@@ -170,6 +172,9 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 entityWorld.removeComponent(selectedUnit, AutoAttackTargetComponent.class);
                 EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
                 movement.setComponent(new MovementTargetComponent(targetEntity));
+                if(sufficientDistance != -1){
+                    movement.setComponent(new MovementTargetSufficientDistanceComponent(sufficientDistance));
+                }
                 movement.setComponent(new MovementSpeedComponent(2.5f));
                 movement.setComponent(new MovementIsCancelableComponent());
                 WalkAnimationComponent walkAnimationComponent = entityWorld.getComponent(selectedUnit, WalkAnimationComponent.class);

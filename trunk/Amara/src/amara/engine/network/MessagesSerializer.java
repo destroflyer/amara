@@ -151,6 +151,7 @@ public class MessagesSerializer{
                         ScalingAttackDamagePhysicalDamageComponent.class,
                         //effects/general
                         AddComponentsComponent.class,
+                        AddEffectTriggersComponent.class,
                         RemoveEntityComponent.class,
                         //effects/heal
                         FlatHealComponent.class,
@@ -185,6 +186,8 @@ public class MessagesSerializer{
                         MovementIsCancelableComponent.class,
                         MovementSpeedComponent.class,
                         MovementTargetComponent.class,
+                        MovementTargetReachedComponent.class,
+                        MovementTargetSufficientDistanceComponent.class,
                         //objectives
                         FinishedObjectiveComponent.class,
                         MissingEntitiesComponent.class,
@@ -262,6 +265,8 @@ public class MessagesSerializer{
                         IsStunnedImmuneComponent.class,
                         //units/effecttriggers
                         TriggeredEffectComponent.class,
+                        TriggerOnceComponent.class,
+                        TriggerSourceComponent.class,
                         //units/effecttriggers/targets
                         CasterTargetComponent.class,
                         CustomTargetComponent.class,

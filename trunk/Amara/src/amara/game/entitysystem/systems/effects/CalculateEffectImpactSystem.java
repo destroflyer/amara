@@ -89,6 +89,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 }
                 transferComponents(effect, effectImpact, new Class[]{
                     AddComponentsComponent.class,
+                    AddEffectTriggersComponent.class,
                     RemoveEntityComponent.class,
                     AddBuffComponent.class,
                     RemoveBuffComponent.class,

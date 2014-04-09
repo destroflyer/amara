@@ -47,16 +47,27 @@ public class TargetedMovementSystem implements EntitySystem{
                     boolean isTargetReached = position.equals(targetPosition);
                     if(!isTargetReached){
                         Vector2f distanceToTarget = targetPosition.subtract(position);
-                        float speed = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class).getSpeed();
-                        Vector2f movedDistance = distanceToTarget.normalize().multLocal(speed).multLocal(deltaSeconds);
-                        isTargetReached = (movedDistance.lengthSquared() >= distanceToTarget.lengthSquared());
+                        MovementTargetSufficientDistanceComponent movementTargetSufficientDistanceComponent = entityWorld.getComponent(movementEntity, MovementTargetSufficientDistanceComponent.class);
+                        if(movementTargetSufficientDistanceComponent != null){
+                            if(distanceToTarget.length() <= movementTargetSufficientDistanceComponent.getDistance()){
+                                isTargetReached = true;
+                            }
+                        }
                         if(!isTargetReached){
-                            entityWorld.setComponent(movementEntity, new MovementDirectionComponent(distanceToTarget));
-                            entityWorld.setComponent(entity, new DirectionComponent(distanceToTarget));
+                            float speed = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class).getSpeed();
+                            Vector2f movedDistance = distanceToTarget.normalize().multLocal(speed).multLocal(deltaSeconds);
+                            if(movedDistance.lengthSquared() >= distanceToTarget.lengthSquared()){
+                                entityWorld.setComponent(entity, new PositionComponent(targetPosition.clone()));
+                                isTargetReached = true;
+                            }
+                            else{
+                                entityWorld.setComponent(movementEntity, new MovementDirectionComponent(distanceToTarget));
+                                entityWorld.setComponent(entity, new DirectionComponent(distanceToTarget));
+                            }
                         }
                     }
                     if(isTargetReached){
-                        entityWorld.setComponent(entity, new PositionComponent(targetPosition.clone()));
+                        entityWorld.setComponent(movementEntity, new MovementTargetReachedComponent());
                     }
                 }
                 else{
@@ -70,7 +81,7 @@ public class TargetedMovementSystem implements EntitySystem{
         int movementEntity = entityWorld.getComponent(movingEntity, MovementComponent.class).getMovementEntity();
         MovementTargetComponent movementTargetComponent = entityWorld.getComponent(movementEntity, MovementTargetComponent.class);
         if((movementTargetComponent != null) && (movementTargetComponent.getTargetEntity() == targetEntity)){
-            entityWorld.removeComponent(movingEntity, MovementComponent.class);
+            entityWorld.setComponent(movementEntity, new MovementTargetReachedComponent());
         }
     }
 }
