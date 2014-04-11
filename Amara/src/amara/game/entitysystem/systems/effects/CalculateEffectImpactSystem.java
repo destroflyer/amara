@@ -4,12 +4,11 @@
  */
 package amara.game.entitysystem.systems.effects;
 
-import amara.game.entitysystem.components.effects.casts.EffectCastTargetComponent;
-import amara.game.entitysystem.components.effects.casts.EffectCastDirectionComponent;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.buffs.*;
+import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.effects.general.*;
@@ -17,7 +16,7 @@ import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.effects.spells.*;
 import amara.game.entitysystem.components.movements.*;
-import amara.game.entitysystem.components.spells.targets.*;
+import amara.game.entitysystem.components.spells.placeholders.*;
 
 /**
  *
@@ -29,6 +28,8 @@ public class CalculateEffectImpactSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(PrepareEffectComponent.class))){
             EntityWrapper effect = entityWorld.getWrapped(entityWrapper.getComponent(PrepareEffectComponent.class).getEffectEntityID());
+            EffectCastSourceComponent effectCastSourceComponent = entityWrapper.getComponent(EffectCastSourceComponent.class);
+            EffectCastSourceSpellComponent effectCastSourceSpellComponent = entityWrapper.getComponent(EffectCastSourceSpellComponent.class);
             int[] affectedTargetEntitesIDs = entityWrapper.getComponent(AffectedTargetsComponent.class).getTargetEntitiesIDs();
             for(int i=0;i<affectedTargetEntitesIDs.length;i++){
                 EntityWrapper targetEntity = entityWorld.getWrapped(affectedTargetEntitesIDs[i]);
@@ -48,9 +49,8 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 if(flatHealComponent != null){
                     heal += flatHealComponent.getValue();
                 }
-                EffectSourceComponent effectSourceComponent = entityWrapper.getComponent(EffectSourceComponent.class);
-                if(effectSourceComponent != null){
-                    EntityWrapper effectSource = entityWorld.getWrapped(effectSourceComponent.getSourceEntity());
+                if(effectCastSourceComponent != null){
+                    EntityWrapper effectSource = entityWorld.getWrapped(effectCastSourceComponent.getSourceEntity());
                     ScalingAttackDamagePhysicalDamageComponent scalingAttackDamagePhysicalDamageComponent = effect.getComponent(ScalingAttackDamagePhysicalDamageComponent.class);
                     if((scalingAttackDamagePhysicalDamageComponent != null) && effectSource.hasComponent(AttackDamageComponent.class)){
                         physicalDamage += (effectSource.getComponent(AttackDamageComponent.class).getValue() * scalingAttackDamagePhysicalDamageComponent.getRatio());
@@ -87,7 +87,14 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     }
                     effectImpact.setComponent(new MoveComponent(movementEntity));
                 }
-                transferComponents(effect, effectImpact, new Class[]{
+                if(effect.hasComponent(TriggerCastedSpellEffectsComponent.class)){
+                    effect.setComponent(new TriggerSpellEffectsComponent(effectCastSourceSpellComponent.getSpellEntity()));
+                }
+                ReplaceSpellWithNewSpellComponent replaceSpellWithNewSpellComponent = effect.getComponent(ReplaceSpellWithNewSpellComponent.class);
+                if(replaceSpellWithNewSpellComponent != null){
+                    effectImpact.setComponent(new ReplaceSpellWithNewSpellComponent(replaceSpellWithNewSpellComponent.getSpellIndex(), replaceSpellWithNewSpellComponent.getNewSpellTemplate() + "," + effectCastTargetComponent.getTargetEntity()));
+                }
+                EntityUtil.transferComponents(effect, effectImpact, new Class[]{
                     AddComponentsComponent.class,
                     AddEffectTriggersComponent.class,
                     RemoveEntityComponent.class,
@@ -107,21 +114,14 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     AddVulnerabilityComponent.class,
                     RemoveVulnerabilityComponent.class,
                     StopComponent.class,
+                    AddAutoAttackSpellEffectsComponent.class,
+                    RemoveSpellEffectsComponent.class,
                     ReplaceSpellWithExistingSpellComponent.class,
-                    ReplaceSpellWithNewSpellComponent.class
+                    TriggerSpellEffectsComponent.class
                 });
                 effectImpact.setComponent(new ApplyEffectImpactComponent(targetEntity.getId()));
             }
             entityWorld.removeEntity(entityWrapper.getId());
-        }
-    }
-    
-    private void transferComponents(EntityWrapper effect, EntityWrapper effectImpact, Class[] componentClasses){
-        for(Class componentClass : componentClasses){
-            Object component = effect.getComponent(componentClass);
-            if(component != null){
-                effectImpact.setComponent(component);
-            }
         }
     }
 }

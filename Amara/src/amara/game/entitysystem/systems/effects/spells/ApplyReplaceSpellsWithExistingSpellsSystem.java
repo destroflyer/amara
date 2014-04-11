@@ -6,8 +6,8 @@ package amara.game.entitysystem.systems.effects.spells;
 
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
-import amara.game.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent;
-import amara.game.entitysystem.components.units.SpellsComponent;
+import amara.game.entitysystem.components.effects.spells.*;
+import amara.game.entitysystem.components.units.*;
 
 /**
  *

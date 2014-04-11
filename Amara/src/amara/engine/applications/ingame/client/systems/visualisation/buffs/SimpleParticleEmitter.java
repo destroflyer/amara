@@ -27,6 +27,7 @@ public class SimpleParticleEmitter extends Node{
         particleEmitter.getParticleInfluencer().setInitialVelocity(new Vector3f(0, 4, 0));
         particleEmitter.getParticleInfluencer().setVelocityVariation(0.3f);
         particleEmitter.setGravity(Vector3f.ZERO);
+        particleEmitter.setInWorldSpace(false);
         attachChild(particleEmitter);
     }
     protected ParticleEmitter particleEmitter;

@@ -9,7 +9,6 @@ import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.status.*;
-import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.input.casts.*;
@@ -56,10 +55,8 @@ public class CastSpellSystem implements EntitySystem{
                 int targetEntity = ((castTargetComponent != null)?castTargetComponent.getTargetEntity():-1);
                 LinkedList<EntityWrapper> effectCasts = EffectTriggerUtil.triggerEffects(entityWorld, instantEffectTriggersComponent.getEffectTriggerEntities(), targetEntity);
                 for(EntityWrapper effectCast : effectCasts){
-                    effectCast.setComponent(new EffectSourceComponent(casterEntity));
-                    if(castTargetComponent != null){
-                        effectCast.setComponent(new EffectCastTargetComponent(castTargetComponent.getTargetEntity()));
-                    }
+                    effectCast.setComponent(new EffectCastSourceComponent(casterEntity));
+                    effectCast.setComponent(new EffectCastSourceSpellComponent(spellEntity));
                     if(castPositionComponent != null){
                         effectCast.setComponent(new EffectCastPositionComponent(castPositionComponent.getPosition().clone()));
                     }
@@ -74,7 +71,8 @@ public class CastSpellSystem implements EntitySystem{
                 if(instantTargetBuffComponent != null){
                     EntityWrapper buffStatus = entityWorld.getWrapped(entityWorld.createEntity());
                     buffStatus.setComponent(new ActiveBuffComponent(castTargetComponent.getTargetEntity(), instantTargetBuffComponent.getBuffEntityID()));
-                    buffStatus.setComponent(new CastSourceComponent(casterEntity));
+                    buffStatus.setComponent(new EffectCastSourceComponent(casterEntity));
+                    buffStatus.setComponent(new EffectCastSourceSpellComponent(spellEntity));
                     buffStatus.setComponent(new RemainingBuffDurationComponent(instantTargetBuffComponent.getDuration()));
                     entityWorld.setComponent(castTargetComponent.getTargetEntity(), new RequestUpdateAttributesComponent());
                 }
@@ -94,7 +92,8 @@ public class CastSpellSystem implements EntitySystem{
                 for(int i=0;i<spawnInformationEntitiesIDs.length;i++){
                     EntityWrapper spawnedObject = entityWorld.getWrapped(entityWorld.createEntity());
                     EntityWrapper spawnInformation = entityWorld.getWrapped(spawnInformationEntitiesIDs[i]);
-                    spawnedObject.setComponent(new CastSourceComponent(casterEntity));
+                    spawnedObject.setComponent(new EffectCastSourceComponent(casterEntity));
+                    spawnedObject.setComponent(new EffectCastSourceSpellComponent(spellEntity));
                     if(teamComponent != null){
                         spawnedObject.setComponent(new TeamComponent(teamComponent.getTeamEntityID()));
                     }

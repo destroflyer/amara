@@ -36,8 +36,9 @@ import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
+import amara.game.entitysystem.components.spells.placeholders.*;
 import amara.game.entitysystem.components.spells.specials.*;
-import amara.game.entitysystem.components.spells.targets.*;
+import amara.game.entitysystem.components.spells.triggers.*;
 import amara.game.entitysystem.components.targets.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
@@ -119,7 +120,6 @@ public class MessagesSerializer{
                         //effects
                         AffectedTargetsComponent.class,
                         ApplyEffectImpactComponent.class,
-                        EffectSourceComponent.class,
                         PrepareEffectComponent.class,
                         //effects/buffs
                         AddBuffComponent.class,
@@ -127,6 +127,8 @@ public class MessagesSerializer{
                         //effects/casts
                         EffectCastDirectionComponent.class,
                         EffectCastPositionComponent.class,
+                        EffectCastSourceComponent.class,
+                        EffectCastSourceSpellComponent.class,
                         EffectCastTargetComponent.class,
                         //effects/crowdcontrol
                         AddBindingComponent.class,
@@ -160,8 +162,11 @@ public class MessagesSerializer{
                         MoveComponent.class,
                         StopComponent.class,
                         //effects/spells
+                        AddAutoAttackSpellEffectsComponent.class,
+                        RemoveSpellEffectsComponent.class,
                         ReplaceSpellWithExistingSpellComponent.class,
                         ReplaceSpellWithNewSpellComponent.class,
+                        TriggerSpellEffectsComponent.class,
                         //general
                         DescriptionComponent.class,
                         NameComponent.class,
@@ -214,7 +219,6 @@ public class MessagesSerializer{
                         SelectedUnitComponent.class,
                         WaitingToRespawnComponent.class,
                         //spawns
-                        CastSourceComponent.class,
                         RelativeSpawnPositionComponent.class,
                         SpawnMovementSpeedComponent.class,
                         SpawnTemplateComponent.class,
@@ -230,11 +234,15 @@ public class MessagesSerializer{
                         RemainingCooldownComponent.class,
                         SpellTargetRulesComponent.class,
                         SpellVisualisationComponent.class,
-                        //spells/specials
-                        TeleportCasterToTargetPositionComponent.class,
-                        //spells/targets
+                        //spells/placeholders
                         TargetedMovementDirectionComponent.class,
                         TargetedMovementTargetComponent.class,
+                        TriggerCastedSpellEffectsComponent.class,
+                        //spells/specials
+                        TeleportCasterToTargetPositionComponent.class,
+                        //spells/triggers
+                        CastedEffectTriggersComponent.class,
+                        CastedSpellComponent.class,
                         //targets
                         AcceptAlliesComponent.class,
                         AcceptEnemiesComponent.class,

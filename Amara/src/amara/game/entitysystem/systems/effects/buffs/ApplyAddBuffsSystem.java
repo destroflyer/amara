@@ -5,6 +5,7 @@
 package amara.game.entitysystem.systems.effects.buffs;
 
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.buffs.*;
@@ -21,9 +22,20 @@ public class ApplyAddBuffsSystem implements EntitySystem{
         {
             int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
             AddBuffComponent addBuffComponent = entityWrapper.getComponent(AddBuffComponent.class);
-            EntityWrapper buffStatus = entityWorld.getWrapped(entityWorld.createEntity());
-            buffStatus.setComponent(new ActiveBuffComponent(targetEntity, addBuffComponent.getBuffEntity()));
-            buffStatus.setComponent(new RemainingBuffDurationComponent(addBuffComponent.getDuration()));
+            int buffStatusEntity = -1;
+            for(int entity : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
+                ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(entity, ActiveBuffComponent.class);
+                if((activeBuffComponent.getTargetEntityID() == targetEntity) && (activeBuffComponent.getBuffEntityID() == addBuffComponent.getBuffEntity())){
+                    buffStatusEntity = entity;
+                    break;
+                }
+            }
+            if(buffStatusEntity == -1){
+                buffStatusEntity = entityWorld.createEntity();
+                entityWorld.setComponent(buffStatusEntity, new ActiveBuffComponent(targetEntity, addBuffComponent.getBuffEntity()));
+            }
+            entityWorld.setComponent(buffStatusEntity, new RemainingBuffDurationComponent(addBuffComponent.getDuration()));
+            entityWorld.setComponent(targetEntity, new RequestUpdateAttributesComponent());
         }
     }
 }

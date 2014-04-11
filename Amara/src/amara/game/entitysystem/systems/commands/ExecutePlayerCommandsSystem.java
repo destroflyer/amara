@@ -75,7 +75,6 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     CastSelfcastSpellCommand castSelfcastSpellCommand = (CastSelfcastSpellCommand) command;
                     int spellEntity = entityWorld.getComponent(selectedUnit, SpellsComponent.class).getSpellsEntities()[castSelfcastSpellCommand.getSpellIndex()];
                     int castInformationEntity = entityWorld.createEntity();
-                    entityWorld.setComponent(castInformationEntity, new TargetComponent(selectedUnit));
                     castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, castInformationEntity));
                 }
                 else if(command instanceof CastSingleTargetSpellCommand){
