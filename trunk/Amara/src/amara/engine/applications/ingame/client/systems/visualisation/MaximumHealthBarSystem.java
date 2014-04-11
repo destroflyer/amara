@@ -26,7 +26,7 @@ import amara.game.entitysystem.components.attributes.*;
  */
 public class MaximumHealthBarSystem extends HUDAttachmentSystem{
 
-    public MaximumHealthBarSystem(Node guiNode, Camera camera, MapHeightmap mapHeightmap) {
+    public MaximumHealthBarSystem(Node guiNode, Camera camera, MapHeightmap mapHeightmap){
         super(MaximumHealthComponent.class, true, guiNode, camera, mapHeightmap);
         worldOffset = BAR_LOCATION;
     }

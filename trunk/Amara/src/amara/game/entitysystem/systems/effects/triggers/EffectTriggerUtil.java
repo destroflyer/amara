@@ -8,8 +8,7 @@ import java.util.LinkedList;
 import amara.Util;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
-import amara.game.entitysystem.components.effects.spells.*;
-import amara.game.entitysystem.components.spawns.*;
+import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 
@@ -32,26 +31,26 @@ public class EffectTriggerUtil{
         TriggeredEffectComponent triggeredEffectComponent = entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class);
         TriggerSourceComponent triggerSourceComponent = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class);
         int effectEntity = triggeredEffectComponent.getEffectEntity();
-        ReplaceSpellWithNewSpellComponent replaceSpellWithNewSpellComponent = entityWorld.getComponent(effectEntity, ReplaceSpellWithNewSpellComponent.class);
-        if(replaceSpellWithNewSpellComponent != null){
-            entityWorld.setComponent(effectEntity, new ReplaceSpellWithNewSpellComponent(replaceSpellWithNewSpellComponent.getSpellIndex(), replaceSpellWithNewSpellComponent.getNewSpellTemplate() + "," + targetEntity));
-        }
         effectCast.setComponent(new PrepareEffectComponent(effectEntity));
         LinkedList<Integer> affectedTargets = new LinkedList<Integer>();
         if(triggerSourceComponent != null){
-            CastSourceComponent castSourceComponent = entityWorld.getComponent(triggerSourceComponent.getSourceEntity(), CastSourceComponent.class);
-            if(castSourceComponent != null){
-                effectCast.setComponent(new EffectSourceComponent(castSourceComponent.getSourceEntity()));
-                if(entityWorld.hasComponent(effectTriggerEntity, CasterTargetComponent.class)){
-                    affectedTargets.add(castSourceComponent.getSourceEntity());
-                }
-            }
+            EntityUtil.transferComponents(entityWorld, triggerSourceComponent.getSourceEntity(), effectCast.getId(), new Class[]{
+                EffectCastSourceComponent.class,
+                EffectCastSourceSpellComponent.class
+            });
             if(entityWorld.hasComponent(effectTriggerEntity, SourceTargetComponent.class)){
                 affectedTargets.add(triggerSourceComponent.getSourceEntity());
             }
+            EffectCastSourceComponent castSourceComponent = entityWorld.getComponent(triggerSourceComponent.getSourceEntity(), EffectCastSourceComponent.class);
+            if((castSourceComponent != null) && entityWorld.hasComponent(effectTriggerEntity, CasterTargetComponent.class)){
+                affectedTargets.add(castSourceComponent.getSourceEntity());
+            }
         }
-        if(entityWorld.hasComponent(effectTriggerEntity, TargetTargetComponent.class) && (targetEntity != -1)){
-            affectedTargets.add(targetEntity);
+        if(targetEntity != -1){
+            effectCast.setComponent(new EffectCastTargetComponent(targetEntity));
+            if(entityWorld.hasComponent(effectTriggerEntity, TargetTargetComponent.class)){
+                affectedTargets.add(targetEntity);
+            }
         }
         if(entityWorld.hasComponent(effectTriggerEntity, CustomTargetComponent.class)){
             int customTargetEntity = entityWorld.getComponent(effectTriggerEntity, CustomTargetComponent.class).getTargetEntity();
