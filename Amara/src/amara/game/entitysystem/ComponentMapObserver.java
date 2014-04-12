@@ -19,6 +19,12 @@ public class ComponentMapObserver {
         changed.clear();
         removed.clear();
     }
+    
+   public boolean isEmpty()
+   {
+       return added.isEmpty() && changed.isEmpty() && removed.isEmpty();
+   }
+    
     void onComponentAdded(ObservedComponentMap entityMap, int entity, Object component)
     {
         if(removed.removeComponent(entity, component.getClass()) != null)

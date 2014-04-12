@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class EntityWorld extends ObservedComponentMap
 {
     private int nextEntity;
-    private ConcurrentHashMap<EntitySystem, EntityObserver> systemEntityObserverMap = new ConcurrentHashMap<EntitySystem, EntityObserver>();
+    private ConcurrentHashMap<Object, EntityObserver> systemEntityObserverMap = new ConcurrentHashMap<Object, EntityObserver>();
 
     public int createEntity()
     {
@@ -47,19 +47,19 @@ public class EntityWorld extends ObservedComponentMap
         return list;
     }
     
-    public EntityObserver getEntityObserver(EntitySystem key)
+    public EntityObserver getEntityObserver(Object key)
     {
         return systemEntityObserverMap.get(key);
     }
     
-    public void createEntityObserver(EntitySystem key)
+    public void createEntityObserver(Object key)
     {
         EntityObserver observer = new EntityObserver(this);
         systemEntityObserverMap.put(key, observer);
         observer.reset();
     }
     
-    public EntityObserver getOrCreateEntityObserver(EntitySystem key)
+    public EntityObserver getOrCreateEntityObserver(Object key)
     {
         if(getEntityObserver(key) == null) createEntityObserver(key);
         return getEntityObserver(key);

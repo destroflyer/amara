@@ -144,7 +144,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new DeathAnimationComponent(deathAnimation.getId()));
 
             entityWrapper.setComponent(new ScaleComponent(0.75f));
-            entityWrapper.setComponent(new AntiGhostComponent());
+            entityWrapper.setComponent(new IntersectionPushComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             
             entityWrapper.setComponent(new BaseMaximumHealthComponent(300));
@@ -249,7 +249,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
 
             entityWrapper.setComponent(new ScaleComponent(0.5f));
-            entityWrapper.setComponent(new AntiGhostComponent());
+            entityWrapper.setComponent(new IntersectionPushComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             
             entityWrapper.setComponent(new BaseMaximumHealthComponent(500));
@@ -420,7 +420,7 @@ public class EntityTemplate{
             deathAnimation.setComponent(new FreezeAfterPlayingComponent());
             entityWrapper.setComponent(new DeathAnimationComponent(deathAnimation.getId()));
             
-            entityWrapper.setComponent(new AntiGhostComponent());
+            entityWrapper.setComponent(new IntersectionPushComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             
             entityWrapper.setComponent(new BaseMaximumHealthComponent(700));
@@ -641,7 +641,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
             entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
             
-            entityWrapper.setComponent(new AntiGhostComponent());
+            entityWrapper.setComponent(new IntersectionPushComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             
             entityWrapper.setComponent(new BaseMaximumHealthComponent(450));
@@ -807,7 +807,7 @@ public class EntityTemplate{
             deathAnimation.setComponent(new FreezeAfterPlayingComponent());
             entityWrapper.setComponent(new DeathAnimationComponent(deathAnimation.getId()));
 
-            entityWrapper.setComponent(new AntiGhostComponent());
+            entityWrapper.setComponent(new IntersectionPushComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             
             entityWrapper.setComponent(new BaseMaximumHealthComponent(400));

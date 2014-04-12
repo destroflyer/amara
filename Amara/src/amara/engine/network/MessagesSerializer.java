@@ -198,9 +198,10 @@ public class MessagesSerializer{
                         MissingEntitiesComponent.class,
                         OpenObjectiveComponent.class,
                         //physics
-                        AntiGhostComponent.class,
+                        IntersectionPushComponent.class,
                         CollisionGroupComponent.class,
                         DirectionComponent.class,
+                        HitboxActiveComponent.class,
                         HitboxComponent.class,
                             Circle.class,
                             Rectangle.class,

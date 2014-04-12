@@ -19,4 +19,5 @@ public interface EntityComponentMapReadonly
     public List<Object> getComponents(int entity);
     public List<Integer> getEntitiesWithAll(Class... componentsClasses);
     public List<Integer> getEntitiesWithAny(Class... componentsClasses);
+    boolean isEmpty();
 }

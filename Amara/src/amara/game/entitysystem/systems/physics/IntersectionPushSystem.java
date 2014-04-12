@@ -8,7 +8,7 @@ import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionIn
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.HitboxComponent;
 import amara.game.entitysystem.components.physics.PositionComponent;
-import amara.game.entitysystem.components.physics.AntiGhostComponent;
+import amara.game.entitysystem.components.physics.IntersectionPushComponent;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.systems.physics.intersection.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
@@ -17,32 +17,32 @@ import amara.game.entitysystem.systems.physics.shapes.*;
  *
  * @author Philipp
  */
-public class IntersectionAntiGhostSystem implements EntitySystem
+public class IntersectionPushSystem implements EntitySystem
 {
     private IntersectionInformant info;
 
-    public IntersectionAntiGhostSystem(IntersectionInformant info)
+    public IntersectionPushSystem(IntersectionInformant info)
     {
         this.info = info;
     }
 
     public void update(EntityWorld entityWorld, float deltaSeconds)
     {
-        for(Pair<Integer> pair: info.getEntries())
+        for(Pair<Integer> pair: info.getEntries(entityWorld))
         {
-            if(entityWorld.hasAllComponents(pair.getA(), AntiGhostComponent.class, PositionComponent.class))
+            if(entityWorld.hasAllComponents(pair.getA(), IntersectionPushComponent.class, PositionComponent.class))
             {
-                if(entityWorld.hasAllComponents(pair.getB(), AntiGhostComponent.class, PositionComponent.class))
+                if(entityWorld.hasAllComponents(pair.getB(), IntersectionPushComponent.class, PositionComponent.class))
                 {
                     applyPushes(entityWorld, pair);
                 }
             }
         }
-        for(Pair<Integer> pair: info.getRepeaters())
+        for(Pair<Integer> pair: info.getRepeaters(entityWorld))
         {
-            if(entityWorld.hasAllComponents(pair.getA(), AntiGhostComponent.class, PositionComponent.class))
+            if(entityWorld.hasAllComponents(pair.getA(), IntersectionPushComponent.class, PositionComponent.class))
             {
-                if(entityWorld.hasAllComponents(pair.getB(), AntiGhostComponent.class, PositionComponent.class))
+                if(entityWorld.hasAllComponents(pair.getB(), IntersectionPushComponent.class, PositionComponent.class))
                 {
                     applyPushes(entityWorld, pair);
                 }

@@ -26,8 +26,8 @@ public class TargetedMovementSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        Set<Pair<Integer>> collidingEntities = intersectionInformant.getEntries();
-        collidingEntities.addAll(intersectionInformant.getRepeaters());
+        Set<Pair<Integer>> collidingEntities = intersectionInformant.getEntries(entityWorld);
+        collidingEntities.addAll(intersectionInformant.getRepeaters(entityWorld));
         for(Pair<Integer> pair : collidingEntities){
             if(entityWorld.hasComponent(pair.getA(), MovementComponent.class)){
                 checkCollidingStop(entityWorld, pair.getA(), pair.getB());
