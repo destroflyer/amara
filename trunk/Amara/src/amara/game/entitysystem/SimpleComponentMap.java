@@ -21,6 +21,15 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
                 }
             };
     
+    public boolean isEmpty()
+    {
+        for (Class key : componentMaps.keySet())
+        {
+            if(!componentMaps.get(key).isEmpty()) return false;
+        }
+        return true;
+    }
+    
     private ConcurrentHashMap<Integer, Object> getComponentMap(Class componentClass)
     {
         ConcurrentHashMap<Integer, Object> componentMap = componentMaps.get(componentClass);

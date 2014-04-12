@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.intersectionHelper;
 
-import amara.game.entitysystem.systems.physics.intersection.*;
-import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.game.entitysystem.EntityWorld;
+import amara.game.entitysystem.systems.physics.intersection.Pair;
 import java.util.Set;
 
 /**
@@ -14,9 +14,9 @@ import java.util.Set;
  */
 public interface IntersectionInformant
 {
-    public Set<Pair<Integer>> getEntries();
+    public Set<Pair<Integer>> getEntries(EntityWorld entityWorld);
     
-    public Set<Pair<Integer>> getRepeaters();
+    public Set<Pair<Integer>> getRepeaters(EntityWorld entityWorld);
     
-    public Set<Pair<Integer>> getLeavers();
+    public Set<Pair<Integer>> getLeavers(EntityWorld entityWorld);
 }

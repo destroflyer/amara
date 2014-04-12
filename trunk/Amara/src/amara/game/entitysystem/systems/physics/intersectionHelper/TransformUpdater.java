@@ -2,28 +2,23 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.game.entitysystem.systems.physics;
+package amara.game.entitysystem.systems.physics.intersectionHelper;
 
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
-import java.util.HashSet;
-import amara.game.entitysystem.systems.physics.intersection.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
+import java.util.HashSet;
 
 /**
  *
  * @author Philipp
  */
-public class TransformUpdateSystem implements EntitySystem
+public class TransformUpdater
 {
-    public void update(EntityWorld entityWorld, float deltaSeconds)
-    {
-        updateTransforms(entityWorld);
-    }
-    
-    private void updateTransforms(EntityWorld entityWorld)
+    public boolean updateTransforms(EntityWorld entityWorld)
     {
         ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, PositionComponent.class, DirectionComponent.class, ScaleComponent.class);
+        if(observer.isEmpty()) return false;
         HashSet<Integer> updateNeeded = new HashSet<Integer>();
         for(int entity: observer.getRemoved().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
         {
@@ -50,6 +45,7 @@ public class TransformUpdateSystem implements EntitySystem
             updateTransforms(entityWorld.getWrapped(entity));
         }
         observer.reset();
+        return true;
     }
     
     private void updateTransforms(EntityWrapper entity)

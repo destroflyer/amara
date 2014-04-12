@@ -14,9 +14,9 @@ import java.util.concurrent.ConcurrentHashMap;
 class ObservedComponentMap extends SimpleComponentMap
 {
     private ConcurrentHashMap<Class, HashSet<ComponentMapObserver>> componentObserverMap = new ConcurrentHashMap<Class, HashSet<ComponentMapObserver>>();
-    private ConcurrentHashMap<EntitySystem, ComponentMapObserver> systemObserverMap = new ConcurrentHashMap<EntitySystem, ComponentMapObserver>();
+    private ConcurrentHashMap<Object, ComponentMapObserver> systemObserverMap = new ConcurrentHashMap<Object, ComponentMapObserver>();
     
-    private ConcurrentHashMap<EntitySystem, ComponentMapObserver> systemGlobalObserverMap = new ConcurrentHashMap<EntitySystem, ComponentMapObserver>();
+    private ConcurrentHashMap<Object, ComponentMapObserver> systemGlobalObserverMap = new ConcurrentHashMap<Object, ComponentMapObserver>();
     
     @Override
     public Object setComponent(int entity, Object component) {
@@ -71,14 +71,14 @@ class ObservedComponentMap extends SimpleComponentMap
         return set;
     }
     
-    public ComponentMapObserver getObserver(EntitySystem key)
+    public ComponentMapObserver getObserver(Object key)
     {
         ComponentMapObserver observer = systemObserverMap.get(key);
         if(observer == null) observer = systemGlobalObserverMap.get(key);
         return observer;
     }
     
-    public void createObserver(EntitySystem key, Class... componentClasses)
+    public void createObserver(Object key, Class... componentClasses)
     {
         ComponentMapObserver observer = new ComponentMapObserver();
         if(componentClasses.length == 0)
@@ -106,7 +106,7 @@ class ObservedComponentMap extends SimpleComponentMap
         }
     }
     
-    public ComponentMapObserver getOrCreateObserver(EntitySystem key, Class... componentClasses)
+    public ComponentMapObserver getOrCreateObserver(Object key, Class... componentClasses)
     {
         if(getObserver(key) == null) createObserver(key, componentClasses);
         return getObserver(key);
