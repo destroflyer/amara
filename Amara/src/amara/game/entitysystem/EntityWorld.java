@@ -5,6 +5,7 @@
 package amara.game.entitysystem;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -37,7 +38,7 @@ public class EntityWorld extends ObservedComponentMap
         return new EntityWrapper(this, entity);
     }
     
-    public List<EntityWrapper> getWrapped(List<Integer> entities)
+    public List<EntityWrapper> getWrapped(Collection<Integer> entities)
     {
         ArrayList<EntityWrapper> list = new ArrayList<EntityWrapper>();
         for(int entity: entities)

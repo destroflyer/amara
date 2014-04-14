@@ -65,8 +65,8 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
         return getComponentMap(componentClass).remove(entity);
     }
 
-    public List<Object> getComponents(int entity) {
-        ArrayList<Object> components = new ArrayList<Object>();
+    public Set<Object> getComponents(int entity) {
+        HashSet<Object> components = new HashSet<Object>();
         Object component;
         for(ConcurrentHashMap<Integer, Object> componentMap: componentMaps.values())
         {
@@ -111,45 +111,44 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
         return false;
     }
 
-    public List<Integer> getEntitiesWithAll(Class... componentsClasses)
+    public Set<Integer> getEntitiesWithAll(Class... componentsClasses)
     {
+        HashSet<Integer> entitySet = new HashSet<Integer>();
         if(componentsClasses.length == 0)
         {
-            HashSet<Integer> entitySet = new HashSet<Integer>();
             for(ConcurrentHashMap<Integer, Object> map: componentMaps.values())
             {
                 entitySet.addAll(map.keySet());
             }
-            return new ArrayList<Integer>(entitySet);
+            return entitySet;
         }
         
-        ArrayList<Integer> entityList = new ArrayList<Integer>();
         Arrays.sort(componentsClasses, mapSizeComparator);
         
         for(int entity: getComponentMap(componentsClasses[0]).keySet())
         {
             if(hasAllComponents(entity, componentsClasses))
             {
-                entityList.add(entity);
+                entitySet.add(entity);
             }
         }
-        return entityList;
+        return entitySet;
     }
 
-    public List<Integer> getEntitiesWithAny(Class... componentsClasses)
+    public Set<Integer> getEntitiesWithAny(Class... componentsClasses)
     {
-        ArrayList<Integer> entityList = new ArrayList<Integer>();
+        HashSet<Integer> entitySet = new HashSet<Integer>();
         for(Class componentClass: componentsClasses)
         {
             for(int entity: getComponentMap(componentClass).keySet())
             {
                 if(hasAnyComponent(entity, componentsClasses))
                 {
-                    entityList.add(entity);
+                    entitySet.add(entity);
                 }
             }
         }
-        return entityList;
+        return entitySet;
     }
 
     public void clear()

@@ -4,7 +4,7 @@
  */
 package amara.game.entitysystem;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -16,8 +16,8 @@ public interface EntityComponentMapReadonly
     public boolean hasComponent(int entity, Class componentClass);
     public boolean hasAllComponents(int entity, Class... componentsClasses);
     public boolean hasAnyComponent(int entity, Class... componentsClasses);
-    public List<Object> getComponents(int entity);
-    public List<Integer> getEntitiesWithAll(Class... componentsClasses);
-    public List<Integer> getEntitiesWithAny(Class... componentsClasses);
+    public Set<Object> getComponents(int entity);
+    public Set<Integer> getEntitiesWithAll(Class... componentsClasses);
+    public Set<Integer> getEntitiesWithAny(Class... componentsClasses);
     boolean isEmpty();
 }
