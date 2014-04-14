@@ -4,8 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.intersection;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  *
@@ -16,9 +15,9 @@ public class IntersectionTracker<Element> {
     public void next() {
         next(new HashSet<Element>());
     }
-    public void next(HashSet<Element> nextGroup) {
+    public void next(Collection<Element> nextGroup) {
         last = current;
-        current = nextGroup;
+        current = new HashSet<Element>(nextGroup);
     }
     public void add(Element element) {
         current.add(element);
@@ -27,30 +26,30 @@ public class IntersectionTracker<Element> {
         current.addAll(elements);
     }
     
-    public HashSet<Element> getLeavers() {
+    public Set<Element> getLeavers() {
         HashSet<Element> leavers = new HashSet<Element>();
         leavers.addAll(last);
         leavers.removeAll(current);
         return leavers;
     }
-    public HashSet<Element> getEntries() {
+    public Set<Element> getEntries() {
         HashSet<Element> entries = new HashSet<Element>();
         entries.addAll(current);
         entries.removeAll(last);
         return entries;
     }
-    public HashSet<Element> getRepeaters() {
+    public Set<Element> getRepeaters() {
         HashSet<Element> repeaters = new HashSet<Element>();
         repeaters.addAll(current);
         repeaters.retainAll(last);
         return repeaters;
     }
-    public HashSet<Element> getAll() {
+    public Set<Element> getAll() {
         HashSet<Element> all = new HashSet<Element>();
         all.addAll(current);
         return all;
     }
     
-    protected HashSet<Element> last = new HashSet<Element>();
-    protected HashSet<Element> current = new HashSet<Element>();
+    protected Set<Element> last = new HashSet<Element>();
+    protected Set<Element> current = new HashSet<Element>();
 }

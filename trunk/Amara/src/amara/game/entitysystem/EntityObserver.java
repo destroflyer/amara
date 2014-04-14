@@ -21,11 +21,11 @@ public class EntityObserver
         this.world = world;
     }
     
-    public HashSet<Integer> NewEntities()
+    public Set<Integer> NewEntities()
     {
         return tracker.getEntries();
     }
-    public HashSet<Integer> RemovedEntities()
+    public Set<Integer> RemovedEntities()
     {
         return tracker.getLeavers();
     }
@@ -41,7 +41,7 @@ public class EntityObserver
         next(set);
     }
     
-    public void next(HashSet<Integer> next)
+    public void next(Set<Integer> next)
     {
         tracker.next(next);
     }
