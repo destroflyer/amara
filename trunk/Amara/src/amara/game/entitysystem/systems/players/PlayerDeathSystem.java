@@ -44,7 +44,7 @@ public class PlayerDeathSystem implements EntitySystem{
     
     private void onSelectedUnitDeath(EntityWorld entityWorld, int selectedEntity){
         Class[] componentClassesToReomve = new Class[]{
-            HitboxComponent.class,
+            HitboxActiveComponent.class,
             MaximumHealthComponent.class,
             HealthComponent.class,
             //General

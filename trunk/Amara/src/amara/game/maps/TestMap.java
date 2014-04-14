@@ -40,11 +40,12 @@ public class TestMap extends Map{
                 unit.setComponent(new HitboxComponent(new Circle(1)));
                 unit.setComponent(new IntersectionPushComponent());
                 unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
-                unit.setComponent(new TeamComponent(0));
-                unit.setComponent(new IsTargetableComponent());
-                unit.setComponent(new IsVulnerableComponent());
+                unit.setComponent(new HitboxActiveComponent());
                 unit.setComponent(new BaseMaximumHealthComponent(500));
                 unit.setComponent(new RequestUpdateAttributesComponent());
+                unit.setComponent(new IsTargetableComponent());
+                unit.setComponent(new IsVulnerableComponent());
+                unit.setComponent(new TeamComponent(0));
             }
         }
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
@@ -57,11 +58,12 @@ public class TestMap extends Map{
         boss.setComponent(new HitboxComponent(new Circle(2.25f)));
         boss.setComponent(new IntersectionPushComponent());
         boss.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
-        boss.setComponent(new TeamComponent(0));
-        boss.setComponent(new IsTargetableComponent());
-        boss.setComponent(new IsVulnerableComponent());
+        boss.setComponent(new HitboxActiveComponent());
         boss.setComponent(new BaseMaximumHealthComponent(800));
         boss.setComponent(new RequestUpdateAttributesComponent());
+        boss.setComponent(new IsTargetableComponent());
+        boss.setComponent(new IsVulnerableComponent());
+        boss.setComponent(new TeamComponent(0));
         EntityWrapper gameObjective = entityWorld.getWrapped(entityWorld.createEntity());
         gameObjective.setComponent(new MissingEntitiesComponent(new int[]{boss.getId()}));
         gameObjective.setComponent(new OpenObjectiveComponent());
