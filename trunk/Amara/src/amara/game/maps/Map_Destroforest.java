@@ -43,19 +43,19 @@ public class Map_Destroforest extends Map{
             switch(i){
                 case 0:
                     unit.setComponent(new ScaleComponent(0.5f));
-                    unit.setComponent(new PositionComponent(new Vector2f(35, 80)));
+                    unit.setComponent(new PositionComponent(new Vector2f(85, 130)));
                     unit.setComponent(new DirectionComponent(new Vector2f(0, -1)));
                     break;
                 
                 case 1:
                     unit.setComponent(new ScaleComponent(0.5f));
-                    unit.setComponent(new PositionComponent(new Vector2f(35, 66)));
+                    unit.setComponent(new PositionComponent(new Vector2f(85, 116)));
                     unit.setComponent(new DirectionComponent(new Vector2f(0, 1)));
                     break;
                 
                 case 2:
                     unit.setComponent(new ScaleComponent(0.9f));
-                    unit.setComponent(new PositionComponent(new Vector2f(39, 73)));
+                    unit.setComponent(new PositionComponent(new Vector2f(89, 123)));
                     unit.setComponent(new DirectionComponent(new Vector2f(-1, 0)));
                     break;
             }
@@ -63,7 +63,7 @@ public class Map_Destroforest extends Map{
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
         boss.setComponent(new ModelComponent("Models/cow/skin.xml"));
         boss.setComponent(new ScaleComponent(1.5f));
-        boss.setComponent(new PositionComponent(new Vector2f(85.3f, 86.2f)));
+        boss.setComponent(new PositionComponent(new Vector2f(135.3f, 136.2f)));
         boss.setComponent(new DirectionComponent(new Vector2f(-0.5f, -1)));
         boss.setComponent(new HitboxComponent(new Circle(2.25f)));
         boss.setComponent(new IntersectionPushComponent());
@@ -91,22 +91,22 @@ public class Map_Destroforest extends Map{
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
         switch(playerIndex){
             case 0:
-                position = new Vector2f(45.4f, 18);
+                position = new Vector2f(95.4f, 68);
                 direction = new Vector2f(0, -1);
                 break;
             
             case 1:
-                position = new Vector2f(48.3f, 16.7f);
+                position = new Vector2f(98.3f, 66.7f);
                 direction = new Vector2f(-1, -1);
                 break;
             
             case 2:
-                position = new Vector2f(49.7f, 14);
+                position = new Vector2f(99.7f, 64);
                 direction = new Vector2f(-1, 0);
                 break;
             
             case 3:
-                position = new Vector2f(48.3f, 11.3f);
+                position = new Vector2f(68.3f, 61.3f);
                 direction = new Vector2f(-1, 1);
                 break;
             

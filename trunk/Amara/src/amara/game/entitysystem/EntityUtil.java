@@ -14,11 +14,11 @@ public class EntityUtil{
         transferComponents(entityWorld.getWrapped(sourceEntity), entityWorld.getWrapped(targetEntity), componentClasses);
     }
     
-    public static void transferComponents(EntityWrapper source, EntityWrapper effectImpact, Class[] componentClasses){
+    public static void transferComponents(EntityWrapper source, EntityWrapper targetEntity, Class[] componentClasses){
         for(Class componentClass : componentClasses){
             Object component = source.getComponent(componentClass);
             if(component != null){
-                effectImpact.setComponent(component);
+                targetEntity.setComponent(component);
             }
         }
     }
