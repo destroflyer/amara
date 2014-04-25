@@ -10,11 +10,13 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.collision.CollisionResult;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.Camera;
 import com.jme3.scene.BatchNode;
 import com.jme3.scene.Geometry;
 import com.jme3.util.SkyFactory;
 import com.jme3.scene.Node;
 import amara.engine.JMonkeyUtil;
+import amara.engine.applications.ingame.client.IngameClientApplication;
 import amara.engine.applications.ingame.client.maps.*;
 import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.game.maps.*;
@@ -42,7 +44,29 @@ public class MapAppState extends BaseDisplayAppState{
         mapTerrain = new MapTerrain(map.getName(), map.getPhysicsInformation());
         mainApplication.getRootNode().attachChild(mapTerrain.getTerrain());
         mainApplication.getRootNode().attachChild(visualsNode);
+        initializeCamera();
         updateVisuals();
+    }
+    
+    private void initializeCamera(){
+        Camera camera = mainApplication.getCamera();
+        camera.setLocation(map.getCamera().getInitialPosition());
+        camera.lookAtDirection(map.getCamera().getInitialDirection(), Vector3f.UNIT_Y);
+        IngameCameraAppState ingameCameraAppState = getAppState(IngameCameraAppState.class);
+        MapCamera_Zoom zoom = map.getCamera().getZoom();
+        if(zoom != null){
+            ingameCameraAppState.setZoomInterval(zoom.getInterval());
+            ingameCameraAppState.zoom(zoom.getInitialLevel());
+        }
+        if(mainApplication instanceof IngameClientApplication){
+            MapCamera_Limit limit = map.getCamera().getLimit();
+            if(limit != null){
+                ingameCameraAppState.setLimit(limit.getMinimum(), limit.getMaximum(), mapTerrain.getTerrain());
+            }
+            if(zoom != null){
+                ingameCameraAppState.setMaximumZoomLevel(zoom.getMaximumLevel());
+            }
+        }
     }
 
     @Override

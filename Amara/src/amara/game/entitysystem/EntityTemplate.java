@@ -149,6 +149,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
             
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(300));
             entityWrapper.setComponent(new BaseAttackDamageComponent(30));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
@@ -866,32 +867,6 @@ public class EntityTemplate{
             entityWrapper.setComponent(new RangeComponent(9));
             entityWrapper.setComponent(new CooldownComponent(4));
         }
-        else if(templateName.equals("spinning_slash")){
-            entityWrapper.setComponent(new NameComponent("Spinning Slash"));
-            entityWrapper.setComponent(new DescriptionComponent("Trynda."));
-            entityWrapper.setComponent(new SpellVisualisationComponent("spinning_slash"));
-            //Move to target
-            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger1.setComponent(new CasterTargetComponent());
-            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
-            EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
-            movement.setComponent(new TargetedMovementDirectionComponent());
-            movement.setComponent(new MovementSpeedComponent(15));
-            EntityWrapper movementAnimation = entityWorld.getWrapped(entityWorld.createEntity());
-            movementAnimation.setComponent(new NameComponent("spin"));
-            movementAnimation.setComponent(new LoopDurationComponent(0.3f));
-            movement.setComponent(new MovementAnimationComponent(movementAnimation.getId()));
-            movement.setComponent(new DistanceLimitComponent(10));
-            effect1.setComponent(new MoveComponent(movement.getId()));
-            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
-            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
-            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
-            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
-            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId()));
-            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
-            entityWrapper.setComponent(new CooldownComponent(1.5f));
-        }
         else if(templateName.equals("empower")){
             entityWrapper.setComponent(new NameComponent("Empower"));
             entityWrapper.setComponent(new SpellVisualisationComponent("empower"));
@@ -942,6 +917,32 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger5.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
             entityWrapper.setComponent(new CooldownComponent(3));
+        }
+        else if(templateName.equals("spinning_slash")){
+            entityWrapper.setComponent(new NameComponent("Spinning Slash"));
+            entityWrapper.setComponent(new DescriptionComponent("Trynda."));
+            entityWrapper.setComponent(new SpellVisualisationComponent("spinning_slash"));
+            //Move to target
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new CasterTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
+            movement.setComponent(new TargetedMovementDirectionComponent());
+            movement.setComponent(new MovementSpeedComponent(15));
+            EntityWrapper movementAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            movementAnimation.setComponent(new NameComponent("spin"));
+            movementAnimation.setComponent(new LoopDurationComponent(0.3f));
+            movement.setComponent(new MovementAnimationComponent(movementAnimation.getId()));
+            movement.setComponent(new DistanceLimitComponent(10));
+            effect1.setComponent(new MoveComponent(movement.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
+            entityWrapper.setComponent(new CooldownComponent(1.5f));
         }
         else if(templateName.equals("dorans_blade")){
             entityWrapper.setComponent(new ItemVisualisationComponent("dorans_blade"));

@@ -11,7 +11,9 @@ import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.input.controls.MouseAxisTrigger;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.Spatial;
 
 /**
  *
@@ -24,12 +26,21 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
     }
     private boolean[] moveDirections = new boolean[4];
     private float movementSpeed = 20;
+    private Vector2f limitMinimum;
+    private Vector2f limitMaximum;
+    private Spatial limitSurfaceSpatial;
+    private Vector2f leftTopCornerScreenLocation;
+    private Vector2f rightBottomCornerScreenLocation;
     private boolean isZoomEnabled = true;
-    private float zoomFactor = 2;
+    private int currentZoomLevel;
+    private int maximumZoomLevel = -1;
+    private float zoomInterval = 2;
     
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
+        leftTopCornerScreenLocation = new Vector2f(0, (mainApplication.getContext().getSettings().getHeight() - 1));
+        rightBottomCornerScreenLocation = new Vector2f((mainApplication.getContext().getSettings().getWidth() - 1), 0);
         mainApplication.getFlyByCamera().setEnabled(false);
         mainApplication.getInputManager().addMapping("camera_up", new KeyTrigger(KeyInput.KEY_UP));
         mainApplication.getInputManager().addMapping("camera_right", new KeyTrigger(KeyInput.KEY_RIGHT));
@@ -59,7 +70,21 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
             movedDistance.addLocal(1, 0, 0);
         }
         movedDistance.multLocal(movementSpeed * lastTimePerFrame);
-        mainApplication.getCamera().setLocation(mainApplication.getCamera().getLocation().add(movedDistance));
+        Vector3f oldLocation = mainApplication.getCamera().getLocation().clone();
+        mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
+        if(limitMinimum != null){
+            Vector3f minimumCornerLocation = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, rightBottomCornerScreenLocation).getClosestCollision().getContactPoint();
+            Vector3f maximumCornerLocation = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, leftTopCornerScreenLocation).getClosestCollision().getContactPoint();
+            if(((movedDistance.getX() < 0) && (minimumCornerLocation.getX() < limitMinimum.getX()))
+            || ((movedDistance.getX() > 0) && (maximumCornerLocation.getX() > limitMaximum.getX()))){
+                movedDistance.setX(0);
+            }
+            if(((movedDistance.getZ() < 0) && (minimumCornerLocation.getZ() < limitMinimum.getY()))
+            || ((movedDistance.getZ() > 0) && (maximumCornerLocation.getZ() > limitMaximum.getY()))){
+                movedDistance.setZ(0);
+            }
+            mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
+        }
     }
 
     @Override
@@ -85,29 +110,40 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
         }
         else if(actionName.equals("camera_zoom_out")){
             if(isZoomEnabled){
-                zoom(false);
+                zoom(-1);
             }
         }
         else if(actionName.equals("camera_zoom_in")){
             if(isZoomEnabled){
-                zoom(true);
+                zoom(1);
             }
         }
     }
     
-    private void zoom(boolean inOrOut){
-        Vector3f zoomDirection = getZoomDirection();
-        if(!inOrOut){
-            zoomDirection.negateLocal();
-        }
-        mainApplication.getCamera().setLocation(mainApplication.getCamera().getLocation().add(zoomDirection));
+    public void setLimit(Vector2f minimum, Vector2f maximum, Spatial surfaceSpatial){
+        limitMinimum = minimum;
+        limitMaximum = maximum;
+        limitSurfaceSpatial = surfaceSpatial;
     }
-    
-    private Vector3f getZoomDirection(){
-        return mainApplication.getCamera().getDirection().mult(zoomFactor);
+
+    public void zoom(int zoomLevelChange){
+        int newZoomLevel = (currentZoomLevel + zoomLevelChange);
+        if((maximumZoomLevel == -1) || ((newZoomLevel >= 0) && (newZoomLevel <= maximumZoomLevel))){
+            Vector3f distance = mainApplication.getCamera().getDirection().mult(zoomInterval * zoomLevelChange);
+            mainApplication.getCamera().setLocation(mainApplication.getCamera().getLocation().add(distance));
+            currentZoomLevel = newZoomLevel;
+        }
     }
 
     public void setZoomEnabled(boolean isZoomEnabled){
         this.isZoomEnabled = isZoomEnabled;
+    }
+
+    public void setMaximumZoomLevel(int maximumZoomLevel){
+        this.maximumZoomLevel = maximumZoomLevel;
+    }
+
+    public void setZoomInterval(float zoomInterval){
+        this.zoomInterval = zoomInterval;
     }
 }

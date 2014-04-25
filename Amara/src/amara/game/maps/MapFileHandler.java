@@ -9,12 +9,12 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.filechooser.FileFilter;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import amara.Util;
 import amara.engine.files.FileManager;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.maps.visuals.*;
-import com.jme3.math.Vector2f;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -52,6 +52,27 @@ public class MapFileHandler{
             }
             root.setAttribute("class", mapClass.getName());
             Document document = new Document(root);
+            Element elementCamera = new Element("camera");
+            elementCamera.setAttribute("initialPosition", "" + generateVectorText(map.getCamera().getInitialPosition()));
+            elementCamera.setAttribute("initialDirection", "" + generateVectorText(map.getCamera().getInitialDirection()));
+            Element elementLimit = new Element("limit");
+            MapCamera_Limit cameraLimit = map.getCamera().getLimit();
+            if(cameraLimit != null){
+                elementLimit.setAttribute("minX", "" + cameraLimit.getMinimum().getX());
+                elementLimit.setAttribute("minY", "" + cameraLimit.getMinimum().getY());
+                elementLimit.setAttribute("maxX", "" + cameraLimit.getMaximum().getX());
+                elementLimit.setAttribute("maxY", "" + cameraLimit.getMaximum().getY());
+                elementCamera.addContent(elementLimit);
+            }
+            MapCamera_Zoom cameraZoom = map.getCamera().getZoom();
+            if(cameraZoom != null){
+                Element elementZoom = new Element("zoom");
+                elementZoom.setAttribute("interval", "" + cameraZoom.getInterval());
+                elementZoom.setAttribute("maximumLevel", "" + cameraZoom.getMaximumLevel());
+                elementZoom.setAttribute("initialLevel", "" + cameraZoom.getInitialLevel());
+                elementCamera.addContent(elementZoom);
+            }
+            root.addContent(elementCamera);
             Element elementPhysics = new Element("physics");
             elementPhysics.setAttribute("width", "" + map.getPhysicsInformation().getWidth());
             elementPhysics.setAttribute("height", "" + map.getPhysicsInformation().getHeight());
@@ -109,6 +130,24 @@ public class MapFileHandler{
         try{
             Element root = document.getRootElement();
             Map map = Util.createObjectByClassName(root.getAttributeValue("class"), Map.class);
+            Element elementCamera = root.getChild("camera");
+            Vector3f initialPosition = generateVector3f(elementCamera.getAttributeValue("initialPosition"));
+            Vector3f initialDirection = generateVector3f(elementCamera.getAttributeValue("initialDirection"));
+            MapCamera camera = new MapCamera(initialPosition, initialDirection);
+            Element elementLimit = elementCamera.getChild("limit");
+            if(elementLimit != null){
+                Vector2f limitMinimum = new Vector2f(elementLimit.getAttribute("minX").getFloatValue(), elementLimit.getAttribute("minY").getFloatValue());
+                Vector2f limitMaximum = new Vector2f(elementLimit.getAttribute("maxX").getFloatValue(), elementLimit.getAttribute("maxY").getFloatValue());
+                camera.setLimit(new MapCamera_Limit(limitMinimum, limitMaximum));
+            }
+            Element elementZoom = elementCamera.getChild("zoom");
+            if(elementZoom != null){
+                float zoomInterval = elementZoom.getAttribute("interval").getFloatValue();
+                int zoomMaximumLevel = elementZoom.getAttribute("maximumLevel").getIntValue();
+                int zoomInitialLevel = elementZoom.getAttribute("initialLevel").getIntValue();
+                camera.setZoom(new MapCamera_Zoom(zoomInterval, zoomMaximumLevel, zoomInitialLevel));
+            }
+            map.setCamera(camera);
             Element elementPhysics = root.getChild("physics");
             int width = elementPhysics.getAttribute("width").getIntValue();
             int height = elementPhysics.getAttribute("height").getIntValue();

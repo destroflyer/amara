@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map author="Carl" date="1394278672121" class="amara.game.maps.TestMap">
+<map author="Carl" date="1394278672121" class="amara.game.maps.TestMap">	<camera initialPosition="22,34,-10" initialDirection="0,-1.3,1">	</camera>
 	<physics width="100" height="100" heightmapScale="0.0225">
 		<obstacles>
 			<simpleConvex>
