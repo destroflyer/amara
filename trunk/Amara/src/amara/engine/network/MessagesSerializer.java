@@ -226,6 +226,7 @@ public class MessagesSerializer{
                         //spells
                         ApplyCastedSpellComponent.class,
                         CastAnimationComponent.class,
+                        CastDurationComponent.class,
                         CastTypeComponent.class,
                         CooldownComponent.class,
                         InstantSpawnsComponent.class,
@@ -251,8 +252,10 @@ public class MessagesSerializer{
                         AutoAggroComponent.class,
                         AutoAttackComponent.class,
                         AutoAttackTargetComponent.class,
+                        CastSpellOnCooldownWhileAttackingComponent.class,
                         IntersectionRulesComponent.class,
                         IsAliveComponent.class,
+                        IsCastingComponent.class,
                         IsTargetableComponent.class,
                         IsVulnerableComponent.class,
                         LifetimeComponent.class,

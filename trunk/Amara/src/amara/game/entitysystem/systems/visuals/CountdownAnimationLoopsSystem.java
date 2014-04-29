@@ -21,6 +21,10 @@ public class CountdownAnimationLoopsSystem implements EntitySystem{
             int animationEntity = observer.getNew().getComponent(entity, AnimationComponent.class).getAnimationEntity();
             entityWorld.removeComponent(animationEntity, PassedLoopTimeComponent.class);
         }
+        for(int entity : observer.getChanged().getEntitiesWithAll(AnimationComponent.class)){
+            int animationEntity = observer.getChanged().getComponent(entity, AnimationComponent.class).getAnimationEntity();
+            entityWorld.removeComponent(animationEntity, PassedLoopTimeComponent.class);
+        }
         observer.reset();
         for(int entity : entityWorld.getEntitiesWithAll(AnimationComponent.class))
         {

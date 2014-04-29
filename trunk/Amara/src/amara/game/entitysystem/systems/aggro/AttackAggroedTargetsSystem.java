@@ -15,13 +15,11 @@ public class AttackAggroedTargetsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(AutoAttackComponent.class, TargetsInAggroRangeComponent.class)))
+        for(int entity : entityWorld.getEntitiesWithAll(AutoAttackComponent.class, TargetsInAggroRangeComponent.class))
         {
-            if((!entityWrapper.hasComponent(AutoAttackTargetComponent.class)) && (!entityWrapper.hasComponent(MovementComponent.class))){
-                int[] aggroedTargets = entityWrapper.getComponent(TargetsInAggroRangeComponent.class).getTargets();
-                if(aggroedTargets.length > 0){
-                    entityWrapper.setComponent(new AutoAttackTargetComponent(aggroedTargets[0]));
-                }
+            int[] aggroedTargets = entityWorld.getComponent(entity, TargetsInAggroRangeComponent.class).getTargets();
+            if(aggroedTargets.length > 0){
+                AggroUtil.drawAggro(entityWorld, entity, aggroedTargets[0]);
             }
         }
     }

@@ -24,7 +24,7 @@ public class PerformAutoAttacksSystem implements EntitySystem{
             int targetEntity = entityWrapper.getComponent(AutoAttackTargetComponent.class).getTargetEntityID();
             if(isAttackable(entityWorld, entityWrapper.getId(), targetEntity)){
                 int autoAttackEntity = entityWrapper.getComponent(AutoAttackComponent.class).getAutoAttackEntity();
-                if(!entityWorld.hasComponent(autoAttackEntity, RemainingCooldownComponent.class)){
+                if((!entityWrapper.hasComponent(IsCastingComponent.class)) && (!entityWorld.hasComponent(autoAttackEntity, RemainingCooldownComponent.class))){
                     int castInformationEntity = entityWorld.createEntity();
                     entityWorld.setComponent(castInformationEntity, new TargetComponent(targetEntity));
                     ExecutePlayerCommandsSystem.castSpell(entityWorld, entityWrapper.getId(), new CastSpellComponent(autoAttackEntity, castInformationEntity));
