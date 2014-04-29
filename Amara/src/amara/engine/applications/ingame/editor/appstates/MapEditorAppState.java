@@ -71,6 +71,16 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
         "Models/cartoon_forest_stone_4/skin.xml",
         "Models/cartoon_forest_stone_5/skin.xml",
         "Models/cartoon_forest_stone_6/skin.xml",
+        "Models/cartoon_city_house_1/skin.xml",
+        "Models/cartoon_city_house_2/skin.xml",
+        "Models/cartoon_city_house_3/skin.xml",
+        "Models/cartoon_city_mill/skin.xml",
+        "Models/cartoon_city_tower_1/skin.xml",
+        "Models/cartoon_city_tower_2/skin.xml",
+        "Models/cartoon_city_stock_1/skin.xml",
+        "Models/cartoon_city_stock_2/skin.xml",
+        "Models/cartoon_city_stock_3/skin.xml",
+        "Models/cartoon_city_chop/skin.xml",
         "Models/thousand_sunny/skin.xml"
     };
     private int visualModelSkinPathIndex = 0;
