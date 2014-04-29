@@ -1,0 +1,7 @@
+<skin name="cartoon_city_tower_2">
+    <model scale="1.7">
+        <material>
+            <texture index="0">texture.png</texture>
+        </material>
+    </model>
+</skin>
