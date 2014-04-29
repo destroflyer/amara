@@ -14,6 +14,7 @@ import amara.game.entitysystem.components.objectives.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.units.animations.AutoAttackAnimationComponent;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 
@@ -42,9 +43,13 @@ public class TestMap extends Map{
                 unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
                 unit.setComponent(new HitboxActiveComponent());
                 unit.setComponent(new BaseMaximumHealthComponent(500));
+                unit.setComponent(new BaseAttackDamageComponent(15));
+                unit.setComponent(new BaseAttackSpeedComponent(0.5f));
                 unit.setComponent(new RequestUpdateAttributesComponent());
                 unit.setComponent(new IsTargetableComponent());
                 unit.setComponent(new IsVulnerableComponent());
+                EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
+                unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
                 unit.setComponent(new TeamComponent(0));
             }
         }
@@ -52,6 +57,9 @@ public class TestMap extends Map{
         boss.setComponent(new NameComponent("Yalee"));
         boss.setComponent(new DescriptionComponent("Stupid."));
         boss.setComponent(new ModelComponent("Models/cow/skin.xml"));
+        EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+        autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
+        boss.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
         boss.setComponent(new ScaleComponent(1.5f));
         boss.setComponent(new PositionComponent(new Vector2f(35, 12)));
         boss.setComponent(new DirectionComponent(new Vector2f(-0.5f, -1)));
@@ -60,9 +68,16 @@ public class TestMap extends Map{
         boss.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
         boss.setComponent(new HitboxActiveComponent());
         boss.setComponent(new BaseMaximumHealthComponent(800));
+        boss.setComponent(new BaseAttackDamageComponent(50));
+        boss.setComponent(new BaseAttackSpeedComponent(0.6f));
         boss.setComponent(new RequestUpdateAttributesComponent());
         boss.setComponent(new IsTargetableComponent());
         boss.setComponent(new IsVulnerableComponent());
+        EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
+        boss.setComponent(new AutoAttackComponent(autoAttack.getId()));
+        EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "bodyslam");
+        boss.setComponent(new SpellsComponent(new int[]{bodyslam.getId()}));
+        boss.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
         boss.setComponent(new TeamComponent(0));
         EntityWrapper gameObjective = entityWorld.getWrapped(entityWorld.createEntity());
         gameObjective.setComponent(new MissingEntitiesComponent(new int[]{boss.getId()}));

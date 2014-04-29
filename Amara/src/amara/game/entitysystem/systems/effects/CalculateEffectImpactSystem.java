@@ -59,6 +59,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     if((scalingAbilityPowerMagicDamageComponent != null) && effectSource.hasComponent(AbilityPowerComponent.class)){
                         magicDamage += (effectSource.getComponent(AbilityPowerComponent.class).getValue() * scalingAbilityPowerMagicDamageComponent.getRatio());
                     }
+                    effectImpact.setComponent(effectCastSourceComponent);
                 }
                 if(physicalDamage != 0){
                     effectImpact.setComponent(new PhysicalDamageComponent(physicalDamage));

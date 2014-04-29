@@ -7,8 +7,10 @@ package amara.game.entitysystem.systems.effects.damage;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
+import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.systems.aggro.AggroUtil;
 
 /**
  *
@@ -27,6 +29,10 @@ public class ApplyMagicDamageSystem implements EntitySystem{
                     MagicDamageComponent magicDamageComponent = entityWrapper.getComponent(MagicDamageComponent.class);
                     float health = (healthComponent.getValue() - magicDamageComponent.getValue());
                     entityWorld.setComponent(targetID, new HealthComponent(health));
+                    EffectCastSourceComponent effectCastSourceComponent = entityWrapper.getComponent(EffectCastSourceComponent.class);
+                    if(effectCastSourceComponent != null){
+                        AggroUtil.drawAggro(entityWorld, targetID, effectCastSourceComponent.getSourceEntity());
+                    }
                 }
             }
         }

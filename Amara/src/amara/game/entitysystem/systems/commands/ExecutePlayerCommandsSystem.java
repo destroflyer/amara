@@ -140,16 +140,22 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
                     float distance = targetPosition.distance(casterPosition);
                     if(distance > range){
-                        move(entityWorld, casterEntity, targetEntity, range);
-                        EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
-                        effectTrigger.setComponent(new TargetReachedTriggerComponent());
-                        effectTrigger.setComponent(new SourceTargetComponent());
-                        EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
-                        effect.setComponent(new AddComponentsComponent(castSpellComponent));
-                        effect.setComponent(new StopComponent());
-                        effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
-                        effectTrigger.setComponent(new TriggerSourceComponent(casterEntity));
-                        effectTrigger.setComponent(new TriggerOnceComponent());
+                        if(move(entityWorld, casterEntity, targetEntity, range)){
+                            EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+                            effectTrigger.setComponent(new TargetReachedTriggerComponent());
+                            effectTrigger.setComponent(new SourceTargetComponent());
+                            EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
+                            Object componentToAdd = castSpellComponent;
+                            AutoAttackComponent autoAttackComponent = entityWorld.getComponent(casterEntity, AutoAttackComponent.class);
+                            if((autoAttackComponent != null) && (castSpellComponent.getSpellEntity() == autoAttackComponent.getAutoAttackEntity())){
+                                componentToAdd = new AutoAttackTargetComponent(targetEntity);
+                            }
+                            effect.setComponent(new AddComponentsComponent(componentToAdd));
+                            effect.setComponent(new StopComponent());
+                            effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
+                            effectTrigger.setComponent(new TriggerSourceComponent(casterEntity));
+                            effectTrigger.setComponent(new TriggerOnceComponent());
+                        }
                         castInstant = false;
                     }
                 }

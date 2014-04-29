@@ -63,6 +63,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownPlayerRespawnSystem());
         addEntitySystem(new CountdownLifetimeSystem());
         addEntitySystem(new CountdownBuffsSystem());
+        addEntitySystem(new CountdownCastingSystem());
         addEntitySystem(new CountdownCooldownSystem());
         addEntitySystem(new CountdownBindingSystem());
         addEntitySystem(new CountdownBindingImmuneSystem());
@@ -75,6 +76,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue()));
         addEntitySystem(new AttackAggroedTargetsSystem());
         addEntitySystem(new PerformAutoAttacksSystem());
+        addEntitySystem(new CastSpellOnCooldownWhileAttackingSystem());
+        addEntitySystem(new SetCastDurationOnCastingSystem());
         addEntitySystem(new SetCooldownOnCastingSystem());
         addEntitySystem(new PlayCastAnimationSystem());
         addEntitySystem(new CastSpellSystem());
