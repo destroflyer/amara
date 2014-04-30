@@ -6,6 +6,10 @@ package amara.engine.appstates;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.input.KeyInput;
+import com.jme3.input.controls.ActionListener;
+import com.jme3.input.controls.KeyTrigger;
+import com.jme3.scene.Spatial;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
@@ -19,14 +23,19 @@ import amara.game.maps.Map;
  *
  * @author Carl
  */
-public class MapObstaclesAppState extends BaseDisplayAppState{
+public class MapObstaclesAppState extends BaseDisplayAppState implements ActionListener{
 
     private Node node = new Node();
     private Node obstaclesNode = new Node();
+    private boolean displayObstacles = true;
     
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
+        mainApplication.getInputManager().addMapping("toggle_hitboxes", new KeyTrigger(KeyInput.KEY_H));
+        mainApplication.getInputManager().addListener(this, new String[]{
+            "toggle_hitboxes"
+        });
         node.setLocalTranslation(0, 1, 0);
         node.attachChild(obstaclesNode);
         mainApplication.getRootNode().attachChild(node);
@@ -40,6 +49,14 @@ public class MapObstaclesAppState extends BaseDisplayAppState{
             Geometry collisionMeshGeometry = generateGeometry(shape);
             collisionMeshGeometry.setLocalTranslation((float) shape.getX(), 0, (float) shape.getY());
             obstaclesNode.attachChild(collisionMeshGeometry);
+        }
+    }
+
+    @Override
+    public void onAction(String name, boolean isPressed, float lastTimePerFrame){
+        if(name.equals("toggle_hitboxes") && isPressed){
+            displayObstacles = (!displayObstacles);
+            obstaclesNode.setCullHint(displayObstacles?Spatial.CullHint.Inherit: Spatial.CullHint.Always);
         }
     }
 
