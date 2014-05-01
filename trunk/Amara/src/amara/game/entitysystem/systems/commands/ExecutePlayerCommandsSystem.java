@@ -52,7 +52,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     MoveCommand moveCommand = (MoveCommand) command;
                     int targetPositionEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetPositionEntity, new PositionComponent(moveCommand.getPosition()));
-                    boolean wasSuccessfull = move(entityWorld, selectedUnit, targetPositionEntity, -1);
+                    boolean wasSuccessfull = walk(entityWorld, selectedUnit, targetPositionEntity, -1);
                     if(!wasSuccessfull){
                         entityWorld.removeEntity(targetPositionEntity);
                     }
@@ -140,7 +140,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
                     float distance = targetPosition.distance(casterPosition);
                     if(distance > range){
-                        if(move(entityWorld, casterEntity, targetEntity, range)){
+                        if(walk(entityWorld, casterEntity, targetEntity, range)){
                             EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
                             effectTrigger.setComponent(new TargetReachedTriggerComponent());
                             effectTrigger.setComponent(new SourceTargetComponent());
@@ -166,7 +166,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
         }
     }
     
-    private static boolean move(EntityWorld entityWorld, int selectedUnit, int targetEntity, float sufficientDistance){
+    private static boolean walk(EntityWorld entityWorld, int selectedUnit, int targetEntity, float sufficientDistance){
         if(MovementSystem.canMove(entityWorld, selectedUnit)){
             boolean isAllowed = true;
             MovementComponent movementComponent = entityWorld.getComponent(selectedUnit, MovementComponent.class);
@@ -180,7 +180,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 if(sufficientDistance != -1){
                     movement.setComponent(new MovementTargetSufficientDistanceComponent(sufficientDistance));
                 }
-                movement.setComponent(new MovementSpeedComponent(2.5f));
+                movement.setComponent(new WalkMovementComponent());
                 movement.setComponent(new MovementIsCancelableComponent());
                 WalkAnimationComponent walkAnimationComponent = entityWorld.getComponent(selectedUnit, WalkAnimationComponent.class);
                 if(walkAnimationComponent != null){

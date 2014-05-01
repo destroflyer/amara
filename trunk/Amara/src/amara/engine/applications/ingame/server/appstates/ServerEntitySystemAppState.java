@@ -120,6 +120,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         IntersectionObserver intersectionObserver = new IntersectionObserver();
         addEntitySystem(new IntersectionPushSystem(intersectionObserver));
         addEntitySystem(new PlayMovementAnimationsSystem());
+        addEntitySystem(new UpdateWalkMovementsSystem());
         addEntitySystem(new MovementSystem());
         addEntitySystem(new TargetedMovementSystem(intersectionObserver));
         addEntitySystem(new TriggerTargetReachedEffectSystem());
