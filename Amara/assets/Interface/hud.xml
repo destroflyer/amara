@@ -35,9 +35,9 @@
                                     <text id="attribute_value_attack_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
                                 </panel>
                                 <panel childLayout="horizontal">
-                                    <image width="16px" height="16px" filename="Interface/hud/attributes/movement_speed.png"/>
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/walk_speed.png"/>
                                     <panel width="5px"/>
-                                    <text id="attribute_value_movement_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                    <text id="attribute_value_walk_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
                                 </panel>
                             </panel>
                         </panel>

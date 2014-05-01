@@ -27,6 +27,7 @@ public class UpdateAttributesSystem implements EntitySystem{
             float attackDamage = 0;
             float abilityPower = 0;
             float attackSpeed = 0;
+            float walkSpeed = 0;
             BaseMaximumHealthComponent baseMaximumHealthComponent = entityWrapper.getComponent(BaseMaximumHealthComponent.class);
             if(baseMaximumHealthComponent != null){
                 maximumHealth += baseMaximumHealthComponent.getValue();
@@ -42,6 +43,10 @@ public class UpdateAttributesSystem implements EntitySystem{
             BaseAttackSpeedComponent baseAttackSpeedComponent = entityWrapper.getComponent(BaseAttackSpeedComponent.class);
             if(baseAttackSpeedComponent != null){
                 attackSpeed += baseAttackSpeedComponent.getValue();
+            }
+            BaseWalkSpeedComponent baseWalkSpeedComponent = entityWrapper.getComponent(BaseWalkSpeedComponent.class);
+            if(baseWalkSpeedComponent != null){
+                walkSpeed += baseWalkSpeedComponent.getValue();
             }
             AttributeBonus attributeBonus = new AttributeBonus();
             InventoryComponent inventoryComponent = entityWrapper.getComponent(InventoryComponent.class);
@@ -65,6 +70,7 @@ public class UpdateAttributesSystem implements EntitySystem{
             attackDamage += attributeBonus.getFlatAttackDamage();
             abilityPower += attributeBonus.getFlatAbilityPower();
             attackSpeed += (attackSpeed * attributeBonus.getPercentageAttackSpeed());
+            walkSpeed += attributeBonus.getFlatWalkSpeed();
             entityWrapper.setComponent(new MaximumHealthComponent(maximumHealth));
             if(entityWrapper.getComponent(HealthComponent.class) == null){
                 entityWrapper.setComponent(new HealthComponent(maximumHealth));
@@ -82,6 +88,7 @@ public class UpdateAttributesSystem implements EntitySystem{
                     entityWorld.setComponent(autoAttackCastAnimationComponent.getAnimationEntity(), new LoopDurationComponent(autoAttackInterval));
                 }
             }
+            entityWrapper.setComponent(new WalkSpeedComponent(walkSpeed));
             entityWrapper.removeComponent(RequestUpdateAttributesComponent.class);
         }
     }
@@ -103,6 +110,10 @@ public class UpdateAttributesSystem implements EntitySystem{
         BonusPercentageAttackSpeedComponent bonusPercentageAttackSpeedComponent = itemWrapper.getComponent(BonusPercentageAttackSpeedComponent.class);
         if(bonusPercentageAttackSpeedComponent != null){
             attributeBonus.addPercentageAttackSpeed(bonusPercentageAttackSpeedComponent.getValue());
+        }
+        BonusFlatWalkSpeedComponent bonusFlatWalkSpeedComponent = itemWrapper.getComponent(BonusFlatWalkSpeedComponent.class);
+        if(bonusFlatWalkSpeedComponent != null){
+            attributeBonus.addFlatWalkSpeed(bonusFlatWalkSpeedComponent.getValue());
         }
     }
 }

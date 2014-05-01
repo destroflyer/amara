@@ -41,8 +41,8 @@ public class ScreenController_HUD extends GameScreenController{
         setAttributeValue("attack_speed", text);
     }
     
-    public void setAttributeValue_MovementSpeed(String text){
-        setAttributeValue("movement_speed", text);
+    public void setAttributeValue_WalkSpeed(String text){
+        setAttributeValue("walk_speed", text);
     }
     
     private void setAttributeValue(String attributeName, String text){

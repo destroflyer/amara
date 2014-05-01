@@ -14,7 +14,7 @@ import amara.game.entitysystem.components.objectives.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.units.*;
-import amara.game.entitysystem.components.units.animations.AutoAttackAnimationComponent;
+import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 
@@ -45,6 +45,7 @@ public class TestMap extends Map{
                 unit.setComponent(new BaseMaximumHealthComponent(500));
                 unit.setComponent(new BaseAttackDamageComponent(15));
                 unit.setComponent(new BaseAttackSpeedComponent(0.5f));
+                unit.setComponent(new BaseWalkSpeedComponent(2));
                 unit.setComponent(new RequestUpdateAttributesComponent());
                 unit.setComponent(new IsTargetableComponent());
                 unit.setComponent(new IsVulnerableComponent());
@@ -70,6 +71,7 @@ public class TestMap extends Map{
         boss.setComponent(new BaseMaximumHealthComponent(800));
         boss.setComponent(new BaseAttackDamageComponent(50));
         boss.setComponent(new BaseAttackSpeedComponent(0.6f));
+        boss.setComponent(new BaseWalkSpeedComponent(2));
         boss.setComponent(new RequestUpdateAttributesComponent());
         boss.setComponent(new IsTargetableComponent());
         boss.setComponent(new IsVulnerableComponent());
