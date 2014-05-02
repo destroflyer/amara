@@ -60,8 +60,8 @@ public class MapObstaclesAppState extends BaseDisplayAppState implements ActionL
         }
     }
 
-    public Node getNode(){
-        return node;
+    public Node getObstaclesNode(){
+        return obstaclesNode;
     }
     
     public static Geometry generateGeometry(Shape shape){
