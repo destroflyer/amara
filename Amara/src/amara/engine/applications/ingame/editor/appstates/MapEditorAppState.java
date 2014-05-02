@@ -329,7 +329,7 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
                 shapeToPlacePreviewGeometry = MapObstaclesAppState.generateGeometry(connectedPointsMesh, ColorRGBA.Blue);
                 break;
         }
-        Node obstaclesNode = getAppState(MapObstaclesAppState.class).getNode();
+        Node obstaclesNode = getAppState(MapObstaclesAppState.class).getObstaclesNode();
         obstaclesNode.attachChild(shapeToPlacePreviewGeometry);
     }
     
@@ -363,7 +363,7 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     
     private void removeShapeToPlaceGeometry(){
         if(shapeToPlacePreviewGeometry != null){
-            Node obstaclesNode = getAppState(MapObstaclesAppState.class).getNode();
+            Node obstaclesNode = getAppState(MapObstaclesAppState.class).getObstaclesNode();
             obstaclesNode.detachChild(shapeToPlacePreviewGeometry);
             shapeToPlacePreviewGeometry = null;
         }

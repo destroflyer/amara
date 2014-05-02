@@ -152,7 +152,7 @@ public class ClientLauncher extends JFrame{
         setResizable(false);
 
         cbxMasterserverHost.setEditable(true);
-        cbxMasterserverHost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "141.70.100.20" }));
+        cbxMasterserverHost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "141.70.100.145" }));
 
         javax.swing.GroupLayout panImageLayout = new javax.swing.GroupLayout(panImage);
         panImage.setLayout(panImageLayout);
