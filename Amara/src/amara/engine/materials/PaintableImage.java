@@ -15,11 +15,15 @@ import amara.Util;
 public class PaintableImage{
     
     public PaintableImage(String imageResourcePath){
+        this(imageResourcePath, false);
+    }
+    
+    public PaintableImage(String imageResourcePath, boolean flipY){
         BufferedImage loadedImage = Util.getResourceImage(imageResourcePath);
         setSize(loadedImage.getWidth(), loadedImage.getHeight());
         for(int x=0;x<width;x++){
             for(int y=0;y<height;y++){
-                setPixel(x, y, new Color(loadedImage.getRGB(x, y)));
+                setPixel(x, (flipY?(height - y):y), new Color(loadedImage.getRGB(x, y)));
             }
         }
     }
@@ -59,10 +63,8 @@ public class PaintableImage{
     }
  
     public void setBackground_Alpha(int colorValue){
-        for(int x=0;x<width;x++){
-            for(int y=0;y<width;y++){
-                setPixel_Alpha(x, y, colorValue);
-            }
+        for(int i=0;i<(width * height * 4);i += 4){
+            data[i + 3] = (byte) colorValue;
         }
     }
  
