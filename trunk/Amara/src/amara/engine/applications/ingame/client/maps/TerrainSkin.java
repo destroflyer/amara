@@ -27,7 +27,16 @@ public class TerrainSkin{
             new TerrainSkin_Texture[]{
                 new TerrainSkin_Texture("Textures/terrain/grass.jpg", 32),
                 new TerrainSkin_Texture("Textures/terrain/dirt.jpg", 32),
-                new TerrainSkin_Texture("Textures/terrain/road.jpg", 128)
+                new TerrainSkin_Texture("Textures/terrain/road.jpg", 128),
+                new TerrainSkin_Texture("Textures/terrain/blank.png", 1),
+                new TerrainSkin_Texture("Textures/terrain/stone_dark.jpg", 32),
+                new TerrainSkin_Texture("Textures/terrain/wall_dark.jpg", 32),
+                new TerrainSkin_Texture("Textures/terrain/wood.jpg", 32),
+                new TerrainSkin_Texture("Textures/terrain/blank.png", 1),
+                new TerrainSkin_Texture("Textures/terrain/magma.jpg", 128),
+                new TerrainSkin_Texture("Textures/terrain/snow.jpg", 32),
+                new TerrainSkin_Texture("Textures/terrain/water.jpg", 128),
+                new TerrainSkin_Texture("Textures/terrain/blank.png", 1)
             },
             "Textures/skies/default.jpg"
         ));

@@ -9,7 +9,8 @@ import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.terrain.heightmap.AbstractHeightMap;
 import com.jme3.terrain.heightmap.ImageBasedHeightMap;
 import com.jme3.texture.Texture;
-import amara.engine.materials.MaterialFactory;
+import com.jme3.texture.Texture2D;
+import amara.engine.materials.*;
 import amara.game.maps.MapPhysicsInformation;
 
 /**
@@ -39,8 +40,9 @@ public class MapTerrain{
     
     private void loadMaterial(String mapName){
         Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Terrain/TerrainLighting.j3md");
-        Texture alphaMapTexture = MaterialFactory.getAssetManager().loadTexture("Maps/" + mapName + "/terrain_alphamap.png");
-        material.setTexture("AlphaMap", alphaMapTexture);
+        material.setTexture("AlphaMap", loadAlphaMap("Maps/" + mapName + "/terrain_alphamap_0.png"));
+        material.setTexture("AlphaMap_1", loadAlphaMap("Maps/" + mapName + "/terrain_alphamap_1.png"));
+        material.setTexture("AlphaMap_2", loadAlphaMap("Maps/" + mapName + "/terrain_alphamap_2.png"));
         TerrainSkin skin = TerrainSkin.getSkin("grass");
         for(int i=0;i<skin.getTextures().length;i++){
             TerrainSkin_Texture terrainTexture = skin.getTextures()[i];
@@ -50,6 +52,14 @@ public class MapTerrain{
             material.setFloat("DiffuseMap_" + i + "_scale", terrainTexture.getScale());
         }
         terrain.setMaterial(material);
+    }
+    
+    private Texture2D loadAlphaMap(String imagePath){
+        PaintableImage paintableImage = new PaintableImage("/" + imagePath, true);
+        paintableImage.setBackground_Alpha(0);
+        Texture2D texture2D = new Texture2D();
+        texture2D.setImage(paintableImage.getImage());
+        return texture2D;
     }
 
     public TerrainQuad getTerrain(){
