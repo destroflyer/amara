@@ -20,4 +20,5 @@ public interface EntityComponentMapReadonly
     public Set<Integer> getEntitiesWithAll(Class... componentsClasses);
     public Set<Integer> getEntitiesWithAny(Class... componentsClasses);
     boolean isEmpty();
+    boolean hasEntity(int entity);
 }
