@@ -158,5 +158,9 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
             map.clear();
         }
     }
+
+    public boolean hasEntity(int entity) {
+        return !getComponents(entity).isEmpty();
+    }
     
 }
