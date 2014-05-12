@@ -14,8 +14,8 @@ import amara.game.entitysystem.components.units.*;
 public class AggroUtil{
     
     public static void drawAggro(EntityWorld entityWorld, int entity, int targetEntity){
-        if(entityWorld.hasComponent(entity, AutoAttackComponent.class) && (!entityWorld.hasAnyComponent(entity, AutoAttackTargetComponent.class, MovementComponent.class))){
-            entityWorld.setComponent(entity, new AutoAttackTargetComponent(targetEntity));
+        if(entityWorld.hasComponent(entity, AutoAttackComponent.class) && (!entityWorld.hasAnyComponent(entity, AggroTargetComponent.class, MovementComponent.class))){
+            entityWorld.setComponent(entity, new AggroTargetComponent(targetEntity));
         }
     }
 }

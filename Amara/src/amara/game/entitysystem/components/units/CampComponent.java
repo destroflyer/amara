@@ -11,9 +11,18 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class AutoAttackTargetComponent{
+public class CampComponent{
 
-    public AutoAttackTargetComponent(){
+    public CampComponent(){
         
+    }
+    
+    public CampComponent(int campEntity){
+        this.campEntity = campEntity;
+    }
+    private int campEntity;
+
+    public int getCampEntity(){
+        return campEntity;
     }
 }

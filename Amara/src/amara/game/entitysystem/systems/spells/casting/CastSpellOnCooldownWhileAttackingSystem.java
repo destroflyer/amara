@@ -18,7 +18,7 @@ public class CastSpellOnCooldownWhileAttackingSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int casterEntity : entityWorld.getEntitiesWithAll(CastSpellOnCooldownWhileAttackingComponent.class, AutoAttackTargetComponent.class)){
+        for(int casterEntity : entityWorld.getEntitiesWithAll(CastSpellOnCooldownWhileAttackingComponent.class, AggroTargetComponent.class)){
             int spellIndex = entityWorld.getComponent(casterEntity, CastSpellOnCooldownWhileAttackingComponent.class).getSpellIndex();
             int spellEntity = entityWorld.getComponent(casterEntity, SpellsComponent.class).getSpellsEntities()[spellIndex];
             if(!entityWorld.hasComponent(spellEntity, RemainingCooldownComponent.class)){
