@@ -67,6 +67,9 @@ public class TestMap extends Map{
         boss.setComponent(new NameComponent("Yalee"));
         boss.setComponent(new DescriptionComponent("Stupid."));
         boss.setComponent(new ModelComponent("Models/cow/skin.xml"));
+        EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+        walkAnimation.setComponent(new NameComponent("walk"));
+        boss.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
         EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
         autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
         boss.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));

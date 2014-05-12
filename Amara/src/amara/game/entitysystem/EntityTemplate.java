@@ -134,7 +134,6 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AnimationComponent(danceAnimation.getId()));
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
-            walkAnimation.setComponent(new LoopDurationComponent(1));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
             EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
@@ -245,7 +244,6 @@ public class EntityTemplate{
             entityWrapper.setComponent(new ModelComponent("Models/wizard/skin.xml"));
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
-            walkAnimation.setComponent(new LoopDurationComponent(1));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
             EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
@@ -415,7 +413,6 @@ public class EntityTemplate{
             entityWrapper.setComponent(new ModelComponent("Models/robot/skin.xml"));
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
-            walkAnimation.setComponent(new LoopDurationComponent(1));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
             EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
@@ -644,7 +641,6 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("Walk"));
-            walkAnimation.setComponent(new LoopDurationComponent(0.8f));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
             EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             autoAttackAnimation.setComponent(new NameComponent("Punches"));
@@ -808,7 +804,6 @@ public class EntityTemplate{
             entityWrapper.setComponent(new ModelComponent("Models/soldier/skin.xml"));
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
-            walkAnimation.setComponent(new LoopDurationComponent(1));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
             EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
