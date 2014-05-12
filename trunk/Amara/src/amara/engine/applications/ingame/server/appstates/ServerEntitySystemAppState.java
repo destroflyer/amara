@@ -17,6 +17,7 @@ import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.aggro.*;
 import amara.game.entitysystem.systems.attributes.*;
 import amara.game.entitysystem.systems.buffs.*;
+import amara.game.entitysystem.systems.camps.*;
 import amara.game.entitysystem.systems.commands.*;
 import amara.game.entitysystem.systems.effects.*;
 import amara.game.entitysystem.systems.effects.buffs.*;
@@ -119,6 +120,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new RemoveUnusedTriggersSystem());
         IntersectionObserver intersectionObserver = new IntersectionObserver();
         addEntitySystem(new IntersectionPushSystem(intersectionObserver));
+        addEntitySystem(new RemoveCancelledMovementsEffectTriggersSystem());
         addEntitySystem(new PlayMovementAnimationsSystem());
         addEntitySystem(new UpdateWalkMovementsSystem());
         addEntitySystem(new MovementSystem());
@@ -127,6 +129,9 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new RemoveFinishedMovementsSystem());
         addEntitySystem(new TriggerCollisionEffectSystem(intersectionObserver));
         addEntitySystem(new AggroSystem());
+        addEntitySystem(new CheckCampAggroTargetSystem());
+        addEntitySystem(new CheckCampMaximumAggroDistanceSystem());
+        addEntitySystem(new CampResetSystem());
         addEntitySystem(new SetIdleAnimationsSystem());
         
         Game game = mainApplication.getGame();

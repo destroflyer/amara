@@ -5,13 +5,13 @@
 package amara.game.entitysystem.systems.commands;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import com.jme3.math.Vector2f;
 import amara.Queue;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.general.*;
-import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.input.casts.*;
 import amara.game.entitysystem.components.movements.*;
@@ -60,6 +60,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 else if(command instanceof StopCommand){
                     StopCommand stopCommand = (StopCommand) command;
                     entityWorld.removeComponent(selectedUnit, MovementComponent.class);
+                    entityWorld.removeComponent(selectedUnit, AggroTargetComponent.class);
                     entityWorld.removeComponent(selectedUnit, AutoAttackTargetComponent.class);
                 }
                 else if(command instanceof AutoAttackCommand){
@@ -67,7 +68,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     if(entityWorld.hasComponent(selectedUnit, AutoAttackComponent.class)){
                         if(PerformAutoAttacksSystem.isAttackable(entityWorld, selectedUnit, autoAttackCommand.getTargetEntity())){
                             entityWorld.removeComponent(selectedUnit, MovementComponent.class);
-                            entityWorld.setComponent(selectedUnit, new AutoAttackTargetComponent(autoAttackCommand.getTargetEntity()));
+                            entityWorld.setComponent(selectedUnit, new AggroTargetComponent(autoAttackCommand.getTargetEntity()));
                         }
                     }
                 }
@@ -113,6 +114,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
     }
     
     public static void castSpell(EntityWorld entityWorld, int casterEntity, CastSpellComponent castSpellComponent){
+        boolean canBeCasted = false;
         if((!entityWorld.hasAnyComponent(casterEntity, IsSilencedComponent.class, IsStunnedComponent.class)) && (!entityWorld.hasComponent(castSpellComponent.getSpellEntity(), RemainingCooldownComponent.class))){
             int targetEntity = -1;
             TargetComponent targetComponent = entityWorld.getComponent(castSpellComponent.getCastInformationEntity(), TargetComponent.class);
@@ -124,7 +126,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 targetEntity = entityWorld.createEntity();
                 entityWorld.setComponent(targetEntity, new PositionComponent(positionComponent.getPosition().clone()));
             }
-            boolean canBeCasted = true;
+            canBeCasted = true;
             if(targetEntity != -1){
                 SpellTargetRulesComponent spellTargetRulesComponent = entityWorld.getComponent(castSpellComponent.getSpellEntity(), SpellTargetRulesComponent.class);
                 if(spellTargetRulesComponent != null){
@@ -132,6 +134,12 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 }
             }
             if(canBeCasted){
+                LinkedList<Object> componentsToAdd = new LinkedList<Object>();
+                componentsToAdd.add(castSpellComponent);
+                AutoAttackComponent autoAttackComponent = entityWorld.getComponent(casterEntity, AutoAttackComponent.class);
+                if((autoAttackComponent != null) && (castSpellComponent.getSpellEntity() == autoAttackComponent.getAutoAttackEntity())){
+                    componentsToAdd.add(new AggroTargetComponent(targetEntity));
+                }
                 boolean castInstant = true;
                 RangeComponent rangeComponent = entityWorld.getComponent(castSpellComponent.getSpellEntity(), RangeComponent.class);
                 if(rangeComponent != null){
@@ -145,13 +153,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                             effectTrigger.setComponent(new TargetReachedTriggerComponent());
                             effectTrigger.setComponent(new SourceTargetComponent());
                             EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
-                            Object componentToAdd = castSpellComponent;
-                            AutoAttackComponent autoAttackComponent = entityWorld.getComponent(casterEntity, AutoAttackComponent.class);
-                            if((autoAttackComponent != null) && (castSpellComponent.getSpellEntity() == autoAttackComponent.getAutoAttackEntity())){
-                                componentToAdd = new AutoAttackTargetComponent(targetEntity);
-                            }
-                            effect.setComponent(new AddComponentsComponent(componentToAdd));
-                            effect.setComponent(new StopComponent());
+                            effect.setComponent(new AddComponentsComponent(componentsToAdd.toArray(new Object[0])));
                             effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
                             effectTrigger.setComponent(new TriggerSourceComponent(casterEntity));
                             effectTrigger.setComponent(new TriggerOnceComponent());
@@ -160,13 +162,18 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     }
                 }
                 if(castInstant){
-                    entityWorld.setComponent(casterEntity, castSpellComponent);
+                    for(Object componentToAdd : componentsToAdd){
+                        entityWorld.setComponent(casterEntity, componentToAdd);
+                    }
                 }
             }
         }
+        if(!canBeCasted){
+            entityWorld.removeEntity(castSpellComponent.getCastInformationEntity());
+        }
     }
     
-    private static boolean walk(EntityWorld entityWorld, int selectedUnit, int targetEntity, float sufficientDistance){
+    public static boolean walk(EntityWorld entityWorld, int selectedUnit, int targetEntity, float sufficientDistance){
         if(MovementSystem.canMove(entityWorld, selectedUnit)){
             boolean isAllowed = true;
             MovementComponent movementComponent = entityWorld.getComponent(selectedUnit, MovementComponent.class);

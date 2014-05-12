@@ -7,6 +7,7 @@ package amara.game.maps;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
+import amara.game.entitysystem.components.camps.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.maps.*;
 import amara.game.entitysystem.components.maps.playerdeathrules.*;
@@ -36,14 +37,16 @@ public class TestMap extends Map{
                 EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
                 unit.setComponent(new ModelComponent("Models/wizard/skin.xml"));
                 unit.setComponent(new ScaleComponent(0.5f));
-                unit.setComponent(new PositionComponent(new Vector2f(12 + (x * 2), 22 + (y * 2))));
-                unit.setComponent(new DirectionComponent(new Vector2f(1, 1)));
+                Vector2f position = new Vector2f(12 + (x * 2), 22 + (y * 2));
+                Vector2f direction = new Vector2f(0.5f, -1);
+                unit.setComponent(new PositionComponent(position));
+                unit.setComponent(new DirectionComponent(direction));
                 unit.setComponent(new HitboxComponent(new Circle(1)));
                 unit.setComponent(new IntersectionPushComponent());
                 unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
                 unit.setComponent(new HitboxActiveComponent());
                 unit.setComponent(new BaseMaximumHealthComponent(500));
-                unit.setComponent(new BaseAttackDamageComponent(15));
+                unit.setComponent(new BaseAttackDamageComponent(25));
                 unit.setComponent(new BaseAttackSpeedComponent(0.5f));
                 unit.setComponent(new BaseWalkSpeedComponent(2));
                 unit.setComponent(new RequestUpdateAttributesComponent());
@@ -52,6 +55,12 @@ public class TestMap extends Map{
                 EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
                 unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
                 unit.setComponent(new TeamComponent(0));
+                EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
+                camp.setComponent(new PositionComponent(position));
+                camp.setComponent(new DirectionComponent(direction));
+                camp.setComponent(new CampMaximumAggroDistanceComponent(5));
+                camp.setComponent(new CampHealthResetComponent());
+                unit.setComponent(new CampComponent(camp.getId()));
             }
         }
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());

@@ -42,6 +42,7 @@ import amara.game.entitysystem.components.spells.triggers.*;
 import amara.game.entitysystem.components.targets.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
+import amara.game.entitysystem.components.camps.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
@@ -120,6 +121,9 @@ public class MessagesSerializer{
                         RemainingBuffDurationComponent.class,
                         RemoveFromTargetComponent.class,
                         TimeSinceLastRepeatingEffectComponent.class,
+                        //camps
+                        CampHealthResetComponent.class,
+                        CampMaximumAggroDistanceComponent.class,
                         //effects
                         AffectedTargetsComponent.class,
                         ApplyEffectImpactComponent.class,
@@ -253,9 +257,11 @@ public class MessagesSerializer{
                         AcceptAlliesComponent.class,
                         AcceptEnemiesComponent.class,
                         //units
+                        AggroTargetComponent.class,
                         AutoAggroComponent.class,
                         AutoAttackComponent.class,
                         AutoAttackTargetComponent.class,
+                        CampComponent.class,
                         CastSpellOnCooldownWhileAttackingComponent.class,
                         IntersectionRulesComponent.class,
                         IsAliveComponent.class,
@@ -264,6 +270,7 @@ public class MessagesSerializer{
                         IsVulnerableComponent.class,
                         LifetimeComponent.class,
                         MovementComponent.class,
+                        ResetCampComponent.class,
                         SpellsComponent.class,
                         TargetsInAggroRangeComponent.class,
                         TeamComponent.class,
