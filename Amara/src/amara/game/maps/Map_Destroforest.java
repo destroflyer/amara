@@ -7,13 +7,16 @@ package amara.game.maps;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
+import amara.game.entitysystem.components.general.NameComponent;
 import amara.game.entitysystem.components.maps.*;
 import amara.game.entitysystem.components.maps.playerdeathrules.*;
 import amara.game.entitysystem.components.objectives.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.visuals.*;
+import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
@@ -61,8 +64,12 @@ public class Map_Destroforest extends Map{
             }
         }
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
-        boss.setComponent(new ModelComponent("Models/cow/skin.xml"));
-        boss.setComponent(new ScaleComponent(1.5f));
+        boss.setComponent(new ModelComponent("Models/dragon/skin.xml"));
+        EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+        idleAnimation.setComponent(new NameComponent("fly"));
+        idleAnimation.setComponent(new LoopDurationComponent(2.5f));
+        boss.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
+        boss.setComponent(new AnimationComponent(idleAnimation.getId()));
         boss.setComponent(new PositionComponent(new Vector2f(135.3f, 136.2f)));
         boss.setComponent(new DirectionComponent(new Vector2f(-0.5f, -1)));
         boss.setComponent(new HitboxComponent(new Circle(2.25f)));
