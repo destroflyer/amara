@@ -33,7 +33,7 @@ public class ModelObject extends Node implements AnimEventListener{
         }
         SkeletonControl skeletonControl = modelSpatial.getControl(SkeletonControl.class);
         if(skeletonControl != null){
-            //skeletonControl.setHardwareSkinningPreferred(true);
+            skeletonControl.setHardwareSkinningPreferred(true);
         }
     }
 
