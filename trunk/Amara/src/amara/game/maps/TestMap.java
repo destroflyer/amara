@@ -56,8 +56,7 @@ public class TestMap extends Map{
                 unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
                 unit.setComponent(new TeamComponent(0));
                 EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
-                camp.setComponent(new PositionComponent(position));
-                camp.setComponent(new DirectionComponent(direction));
+                camp.setComponent(new CampTransformComponent(position, direction));
                 camp.setComponent(new CampMaximumAggroDistanceComponent(5));
                 camp.setComponent(new CampHealthResetComponent());
                 unit.setComponent(new CampComponent(camp.getId()));

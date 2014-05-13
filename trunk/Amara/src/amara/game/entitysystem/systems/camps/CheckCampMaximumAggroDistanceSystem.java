@@ -24,7 +24,7 @@ public class CheckCampMaximumAggroDistanceSystem implements EntitySystem{
             CampMaximumAggroDistanceComponent campMaximumAggroDistanceComponent = entityWorld.getComponent(campEntity, CampMaximumAggroDistanceComponent.class);
             if(campMaximumAggroDistanceComponent != null){
                 Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
-                Vector2f campPosition = entityWorld.getComponent(campEntity, PositionComponent.class).getPosition();
+                Vector2f campPosition = entityWorld.getComponent(campEntity, CampTransformComponent.class).getPosition();
                 if(position.distance(campPosition) > campMaximumAggroDistanceComponent.getDistance()){
                     entityWorld.setComponent(entity, new ResetCampComponent());
                 }

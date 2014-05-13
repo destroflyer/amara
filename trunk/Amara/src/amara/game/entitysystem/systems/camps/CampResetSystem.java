@@ -28,14 +28,16 @@ public class CampResetSystem implements EntitySystem{
         {
             entityWorld.removeComponent(entity, AggroTargetComponent.class);
             int campEntity = entityWorld.getComponent(entity, CampComponent.class).getCampEntity();
-            if(ExecutePlayerCommandsSystem.walk(entityWorld, entity, campEntity, -1)){
+            CampTransformComponent campTransformComponent = entityWorld.getComponent(campEntity, CampTransformComponent.class);
+            int targetPositionEntity = entityWorld.createEntity();
+            entityWorld.setComponent(targetPositionEntity, new PositionComponent(campTransformComponent.getPosition()));
+            if(ExecutePlayerCommandsSystem.walk(entityWorld, entity, targetPositionEntity, -1)){
                 EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
                 effectTrigger.setComponent(new TargetReachedTriggerComponent());
                 effectTrigger.setComponent(new SourceTargetComponent());
                 EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
                 LinkedList<Object> componentsToAdd = new LinkedList<Object>();
-                float campDirectionRadian = entityWorld.getComponent(campEntity, DirectionComponent.class).getRadian();
-                componentsToAdd.add(new DirectionComponent(campDirectionRadian));
+                componentsToAdd.add(new DirectionComponent(campTransformComponent.getDirection()));
                 if(entityWorld.hasComponent(campEntity, CampHealthResetComponent.class)){
                     float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();
                     componentsToAdd.add(new HealthComponent(maximumHealth));
