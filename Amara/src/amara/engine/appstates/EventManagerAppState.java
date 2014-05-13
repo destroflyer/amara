@@ -21,14 +21,13 @@ public class EventManagerAppState extends BaseDisplayAppState implements ActionL
 
     public EventManagerAppState(){
         
-    }
+    } 
     private static final String ACTION_NAME_PREFIX_KEY_PRESSED = "key_pressed_";
     private Queue<Event> eventQueue = new Queue<Event>();
     
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
-        mainApplication.getFlyByCamera().setEnabled(false);
         mainApplication.getInputManager().addMapping("mouse_click_left", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
         mainApplication.getInputManager().addMapping("mouse_click_middle", new MouseButtonTrigger(MouseInput.BUTTON_MIDDLE));
         mainApplication.getInputManager().addMapping("mouse_click_right", new MouseButtonTrigger(MouseInput.BUTTON_RIGHT));

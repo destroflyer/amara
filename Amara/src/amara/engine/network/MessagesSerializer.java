@@ -124,6 +124,7 @@ public class MessagesSerializer{
                         //camps
                         CampHealthResetComponent.class,
                         CampMaximumAggroDistanceComponent.class,
+                        CampTransformComponent.class,
                         //effects
                         AffectedTargetsComponent.class,
                         ApplyEffectImpactComponent.class,

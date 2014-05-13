@@ -7,7 +7,8 @@ package amara.game.maps;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
-import amara.game.entitysystem.components.general.NameComponent;
+import amara.game.entitysystem.components.camps.*;
+import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.maps.*;
 import amara.game.entitysystem.components.maps.playerdeathrules.*;
 import amara.game.entitysystem.components.objectives.*;
@@ -39,29 +40,44 @@ public class Map_Destroforest extends Map{
             unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             unit.setComponent(new HitboxActiveComponent());
             unit.setComponent(new BaseMaximumHealthComponent(500));
+            unit.setComponent(new BaseAttackDamageComponent((i == 2)?80:30));
+            unit.setComponent(new BaseAttackSpeedComponent(0.5f));
+            unit.setComponent(new BaseWalkSpeedComponent(2));
             unit.setComponent(new RequestUpdateAttributesComponent());
             unit.setComponent(new IsTargetableComponent());
             unit.setComponent(new IsVulnerableComponent());
-            unit.setComponent(new TeamComponent(0));
+            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
+            unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
+            unit.setComponent(new AutoAggroComponent(10));
+            Vector2f position = null;
+            Vector2f direction = null;
             switch(i){
                 case 0:
                     unit.setComponent(new ScaleComponent(0.5f));
-                    unit.setComponent(new PositionComponent(new Vector2f(85, 130)));
-                    unit.setComponent(new DirectionComponent(new Vector2f(0, -1)));
+                    position = new Vector2f(85, 130);
+                    direction = new Vector2f(0, -1);
                     break;
                 
                 case 1:
                     unit.setComponent(new ScaleComponent(0.5f));
-                    unit.setComponent(new PositionComponent(new Vector2f(85, 116)));
-                    unit.setComponent(new DirectionComponent(new Vector2f(0, 1)));
+                    position = new Vector2f(85, 116);
+                    direction = new Vector2f(0, 1);
                     break;
                 
                 case 2:
                     unit.setComponent(new ScaleComponent(0.9f));
-                    unit.setComponent(new PositionComponent(new Vector2f(89, 123)));
-                    unit.setComponent(new DirectionComponent(new Vector2f(-1, 0)));
+                    position = new Vector2f(89, 123);
+                    direction = new Vector2f(-1, 0);
                     break;
             }
+            unit.setComponent(new PositionComponent(position));
+            unit.setComponent(new DirectionComponent(direction));
+            unit.setComponent(new TeamComponent(0));
+            EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
+            camp.setComponent(new CampTransformComponent(position, direction));
+            camp.setComponent(new CampMaximumAggroDistanceComponent(5));
+            camp.setComponent(new CampHealthResetComponent());
+            unit.setComponent(new CampComponent(camp.getId()));
         }
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
         boss.setComponent(new ModelComponent("Models/dragon/skin.xml"));
