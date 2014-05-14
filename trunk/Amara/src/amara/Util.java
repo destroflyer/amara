@@ -192,6 +192,24 @@ public class Util{
         return array;
     }
     
+    public static <T> LinkedList<T[]> split(Collection<T> collection, int length, Class objectClass){
+        int arraysCount = (int) Math.ceil(((float) collection.size()) / length);
+        LinkedList<T[]> arraysList = new LinkedList<T[]>();
+        Iterator<T> iterator = collection.iterator();
+        for(int i=0;i<arraysCount;i++){
+            int arrayLength = length;
+            if(i == (arraysCount - 1)){
+                arrayLength = (collection.size() - ((arraysCount - 1) * length));
+            }
+            T[] array = (T[]) Array.newInstance(objectClass, arrayLength);
+            for(int r=0;r<array.length;r++){
+                array[r] = iterator.next();
+            }
+            arraysList.add(array);
+        }
+        return arraysList;
+    }
+    
     public static int[] cloneArray(int[] array){
         int[] clonedArray = new int[array.length];
         for(int i=0;i<clonedArray.length;i++){

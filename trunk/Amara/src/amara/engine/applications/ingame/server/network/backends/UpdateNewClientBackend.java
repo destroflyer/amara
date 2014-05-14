@@ -9,9 +9,9 @@ import java.util.LinkedList;
 import com.jme3.network.Message;
 import amara.engine.network.*;
 import amara.engine.network.messages.Message_ClientInitialized;
-import amara.engine.network.messages.entitysystem.Message_EntityChanges;
 import amara.game.entitysystem.EntityWorld;
 import amara.game.entitysystem.synchronizing.*;
+import amara.game.entitysystem.systems.network.SendEntityChangesSystem;
 
 /**
  *
@@ -38,7 +38,10 @@ public class UpdateNewClientBackend implements MessageBackend{
                     entityChanges.add(new NewComponentChange(entity, component));
                 }
             }
-            messageResponse.addAnswerMessage(new Message_EntityChanges(entityChanges.toArray(new EntityChange[0])));
+            Message[] entityChangeMessages = SendEntityChangesSystem.getEntityChangesMessages(entityChanges);
+            for(Message entityChangeMessage : entityChangeMessages){
+                messageResponse.addAnswerMessage(entityChangeMessage);
+            }
         }
     }
 }

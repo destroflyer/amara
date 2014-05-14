@@ -114,7 +114,7 @@ public class PanPlay extends javax.swing.JPanel{
             }
         });
 
-        cbxMapName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "testmap", "destroforest" }));
+        cbxMapName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "testmap", "destroforest", "techtest" }));
 
         btnClearPlayers.setText("Clear");
         btnClearPlayers.addActionListener(new java.awt.event.ActionListener() {

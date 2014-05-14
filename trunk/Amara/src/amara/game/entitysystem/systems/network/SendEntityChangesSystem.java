@@ -4,7 +4,10 @@
  */
 package amara.game.entitysystem.systems.network;
 
+import java.util.Iterator;
 import java.util.LinkedList;
+import com.jme3.network.Message;
+import amara.Util;
 import amara.engine.network.NetworkServer;
 import amara.engine.network.messages.entitysystem.Message_EntityChanges;
 import amara.game.entitysystem.*;
@@ -50,6 +53,19 @@ public class SendEntityChangesSystem implements EntitySystem{
             }
         }
         componentsObserver.reset();
-        networkServer.broadcastMessage(new Message_EntityChanges(entityChanges.toArray(new EntityChange[0])));
+        Message[] messages = getEntityChangesMessages(entityChanges);
+        for(Message message : messages){
+            networkServer.broadcastMessage(message);
+        }
+    }
+    
+    public static Message[] getEntityChangesMessages(LinkedList<EntityChange> entityChanges){
+        LinkedList<EntityChange[]> splitChanges = Util.split(entityChanges, 1000, EntityChange.class);
+        Message[] messages = new Message[splitChanges.size()];
+        Iterator<EntityChange[]> changesIterator = splitChanges.iterator();
+        for(int i=0;changesIterator.hasNext();i++){
+            messages[i] = new Message_EntityChanges(changesIterator.next());
+        }
+        return messages;
     }
 }
