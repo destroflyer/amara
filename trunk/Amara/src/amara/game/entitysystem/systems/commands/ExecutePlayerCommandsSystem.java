@@ -20,12 +20,12 @@ import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
-import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.systems.movement.MovementSystem;
 import amara.game.entitysystem.systems.spells.*;
+import amara.game.entitysystem.systems.spells.casting.CastSpellSystem;
 import amara.game.entitysystem.systems.targets.TargetUtil;
 
 /**
@@ -115,7 +115,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
     
     public static void castSpell(EntityWorld entityWorld, int casterEntity, CastSpellComponent castSpellComponent){
         boolean canBeCasted = false;
-        if((!entityWorld.hasAnyComponent(casterEntity, IsSilencedComponent.class, IsStunnedComponent.class)) && (!entityWorld.hasComponent(castSpellComponent.getSpellEntity(), RemainingCooldownComponent.class))){
+        if((!entityWorld.hasComponent(castSpellComponent.getSpellEntity(), RemainingCooldownComponent.class)) && CastSpellSystem.canCast(entityWorld, casterEntity, castSpellComponent.getSpellEntity())){
             int targetEntity = -1;
             TargetComponent targetComponent = entityWorld.getComponent(castSpellComponent.getCastInformationEntity(), TargetComponent.class);
             PositionComponent positionComponent = entityWorld.getComponent(castSpellComponent.getCastInformationEntity(), PositionComponent.class);

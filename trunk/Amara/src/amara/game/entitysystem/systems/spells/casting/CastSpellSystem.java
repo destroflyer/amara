@@ -18,6 +18,7 @@ import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.spells.specials.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.systems.effects.triggers.EffectTriggerUtil;
 
 /**
@@ -129,5 +130,16 @@ public class CastSpellSystem implements EntitySystem{
             }
             entityWorld.removeComponent(casterEntity, CastSpellComponent.class);
         }
+    }
+    
+    public static boolean canCast(EntityWorld entityWorld, int casterEntity, int spellEntity){
+        if(!entityWorld.hasComponent(casterEntity, IsStunnedComponent.class)){
+            AutoAttackComponent autoAttackComponent = entityWorld.getComponent(casterEntity, AutoAttackComponent.class);
+            if((autoAttackComponent != null) && (spellEntity == autoAttackComponent.getAutoAttackEntity())){
+                return true;
+            }
+            return (!entityWorld.hasComponent(casterEntity, IsSilencedComponent.class));
+        }
+        return false;
     }
 }
