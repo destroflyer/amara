@@ -10,7 +10,7 @@
  */
 package amara.launcher.client.panels;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import amara.Util;
 import amara.engine.applications.masterserver.server.network.messages.Message_StartGame;
 import amara.engine.network.NetworkClient;
@@ -28,8 +28,9 @@ public class PanPlay extends javax.swing.JPanel{
     public PanPlay(){
         initComponents();
         lblMapIcon.setIcon(Util.getResourceImageIcon("/Interface/client/unknown.jpg", 120, 120));
+        updatePlayersList();
     }
-    private LinkedList<PlayerProfileData> players = new LinkedList<PlayerProfileData>();
+    private ArrayList<LobbyPlayer> players = new ArrayList<LobbyPlayer>();
     private PanPlay_Player[] panPlay_Players;
     
     private void updatePlayersList(){
@@ -37,7 +38,7 @@ public class PanPlay extends javax.swing.JPanel{
         int y = 0;
         panPlay_Players = new PanPlay_Player[players.size()];
         for(int i=0;i<players.size();i++){
-            PanPlay_Player panPlay_Player = new PanPlay_Player();
+            PanPlay_Player panPlay_Player = new PanPlay_Player(this);
             panPlay_Player.setLocation(0, y);
             panPlay_Player.setSize(300, 30);
             panPlay_Player.setPlayer(players.get(i));
@@ -46,15 +47,23 @@ public class PanPlay extends javax.swing.JPanel{
             y += 30;
         }
         panPlayers.updateUI();
+        boolean playersExist = (players.size() > 0);
+        btnClearPlayers.setEnabled(playersExist);
+        btnStart.setEnabled(playersExist);
     }
     
     private boolean isPlayerParticipating(String login){
-        for(PlayerProfileData player : players){
-            if(player.getLogin().equals(login)){
+        for(LobbyPlayer player : players){
+            if(player.getPlayerProfileData().getLogin().equals(login)){
                 return true;
             }
         }
         return false;
+    }
+    
+    public void removePlayerFromLobby(LobbyPlayer lobbyPlayer){
+        players.remove(lobbyPlayer);
+        updatePlayersList();
     }
 
     /** This method is called from within the constructor to
@@ -189,7 +198,7 @@ public class PanPlay extends javax.swing.JPanel{
                 if(!isPlayerParticipating(login)){
                     PlayerStatus playerStatus = MainFrame.getInstance().getPlayerStatus(playerProfileData.getID());
                     if(playerStatus == PlayerStatus.ONLINE){
-                        players.add(playerProfileData);
+                        players.add(new LobbyPlayer(playerProfileData, new PlayerData(playerProfileData.getID(), "minion")));
                         updatePlayersList();
                     }
                     else{
@@ -208,17 +217,14 @@ public class PanPlay extends javax.swing.JPanel{
 
     private void btnClearPlayersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearPlayersActionPerformed
         players.clear();
-        panPlayers.removeAll();
-        panPlayers.updateUI();
+        updatePlayersList();
     }//GEN-LAST:event_btnClearPlayersActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         String mapName = cbxMapName.getSelectedItem().toString();
         PlayerData[] playerDatas = new PlayerData[players.size()];
         for(int i=0;i<players.size();i++){
-            PlayerProfileData playerProfileData = players.get(i);
-            PanPlay_Player panPlay_Player = panPlay_Players[i];
-            playerDatas[i] = new PlayerData(playerProfileData.getID(), panPlay_Player.getPlayerEntityTemplate());
+            playerDatas[i] = players.get(i).getPlayerData();
         }
         NetworkClient networkClient = MainFrame.getInstance().getNetworkClient();
         networkClient.sendMessage(new Message_StartGame(mapName, playerDatas));
