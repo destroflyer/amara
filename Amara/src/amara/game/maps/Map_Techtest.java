@@ -60,6 +60,7 @@ public class Map_Techtest extends Map{
                 unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
                 unit.setComponent(new HitboxActiveComponent());
                 unit.setComponent(new BaseMaximumHealthComponent(500));
+                unit.setComponent(new BaseWalkSpeedComponent(2));
                 unit.setComponent(new RequestUpdateAttributesComponent());
                 unit.setComponent(new IsTargetableComponent());
                 unit.setComponent(new IsVulnerableComponent());

@@ -5,7 +5,7 @@
 package amara.launcher.client.panels;
 
 import amara.Util;
-import amara.launcher.client.protocol.PlayerProfileData;
+import amara.game.games.PlayerData;
 
 /**
  *
@@ -13,18 +13,23 @@ import amara.launcher.client.protocol.PlayerProfileData;
  */
 public class PanPlay_Player extends javax.swing.JPanel{
 
-    public PanPlay_Player(){
+    public PanPlay_Player(PanPlay panPlay){
+        this.panPlay = panPlay;
         initComponents();
     }
+    private PanPlay panPlay;
+    private LobbyPlayer lobbyPlayer;
     
-    public void setPlayer(PlayerProfileData playerProfileData){
-        String avatarResourcePath = PanAvatarSelection.getAvatarResourcePath(playerProfileData.getMeta("avatar"));
-        lblIcon.setIcon(Util.getResourceImageIcon(avatarResourcePath, 30, 30));
-        lblName.setText(playerProfileData.getLogin());
+    public void setPlayer(LobbyPlayer lobbyPlayer){
+        this.lobbyPlayer = lobbyPlayer;
+        update();
     }
     
-    public String getPlayerEntityTemplate(){
-        return cbxPlayerEntityTemplate.getSelectedItem().toString();
+    private void update(){
+        String avatarResourcePath = PanAvatarSelection.getAvatarResourcePath(lobbyPlayer.getPlayerProfileData().getMeta("avatar"));
+        lblIcon.setIcon(Util.getResourceImageIcon(avatarResourcePath, 30, 30));
+        lblName.setText(lobbyPlayer.getPlayerProfileData().getLogin());
+        cbxPlayerEntityTemplate.setSelectedItem(lobbyPlayer.getPlayerData().getUnitTemplate());
     }
 
     /**
@@ -37,38 +42,60 @@ public class PanPlay_Player extends javax.swing.JPanel{
     private void initComponents() {
 
         lblIcon = new javax.swing.JLabel();
+        lblSeparator1 = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         cbxPlayerEntityTemplate = new javax.swing.JComboBox();
+        btnRemove = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(30, 30, 30));
+        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
+
+        lblIcon.setPreferredSize(new java.awt.Dimension(30, 30));
+        add(lblIcon);
+
+        lblSeparator1.setText("jLabel1");
+        lblSeparator1.setPreferredSize(new java.awt.Dimension(5, 30));
+        add(lblSeparator1);
 
         lblName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblName.setForeground(new java.awt.Color(255, 255, 255));
         lblName.setText("???");
+        lblName.setPreferredSize(new java.awt.Dimension(115, 30));
+        add(lblName);
 
         cbxPlayerEntityTemplate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "minion", "wizard", "robot", "jaime", "soldier" }));
+        cbxPlayerEntityTemplate.setPreferredSize(new java.awt.Dimension(110, 30));
+        cbxPlayerEntityTemplate.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxPlayerEntityTemplateItemStateChanged(evt);
+            }
+        });
+        add(cbxPlayerEntityTemplate);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbxPlayerEntityTemplate, 0, 130, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-            .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(cbxPlayerEntityTemplate)
-        );
+        btnRemove.setText("X");
+        btnRemove.setPreferredSize(new java.awt.Dimension(40, 30));
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
+        add(btnRemove);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbxPlayerEntityTemplateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxPlayerEntityTemplateItemStateChanged
+        String entityTemplate = cbxPlayerEntityTemplate.getSelectedItem().toString();
+        lobbyPlayer.setPlayerData(new PlayerData(lobbyPlayer.getPlayerProfileData().getID(), entityTemplate));
+    }//GEN-LAST:event_cbxPlayerEntityTemplateItemStateChanged
+
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        panPlay.removePlayerFromLobby(lobbyPlayer);
+    }//GEN-LAST:event_btnRemoveActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRemove;
     private javax.swing.JComboBox cbxPlayerEntityTemplate;
     private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblSeparator1;
     // End of variables declaration//GEN-END:variables
 }
