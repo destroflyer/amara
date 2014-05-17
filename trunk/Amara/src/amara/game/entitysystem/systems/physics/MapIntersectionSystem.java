@@ -9,6 +9,7 @@ import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.systems.physics.intersectionHelper.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public.*;
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Util;
 import com.jme3.math.Vector2f;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,11 +64,11 @@ public final class MapIntersectionSystem implements EntitySystem
         Vector2f position = entity.getComponent(PositionComponent.class).getPosition();
         Vector2D delta = new Vector2D();
         
-        for (MapObstacle obstacle : obstacles)
+        if(obstacles.size() == 1)
         {
-            delta.add(previous.getResolveVector(obstacle.getShape()));
+            delta.add(previous.getResolveVector(obstacles.get(0).getShape()));
+            delta.addLength(1e-6d);
         }
-        delta.addLength(1e-6d);
         Vector2D newPosition = new Vector2D(position.x + delta.getX(), position.y + delta.getY());
         
         Shape shape = previous.clone();
@@ -86,9 +87,9 @@ public final class MapIntersectionSystem implements EntitySystem
     
     public void AddObstacles(List<Shape> shapes)
     {
-        System.out.println("generating map polygon...");
-        PolygonBuilder builder = new PolygonBuilder();
-        Polygon inf = builder.build(true);
+        //System.out.println("generating map polygon...");
+        //PolygonBuilder builder = new PolygonBuilder();
+        //Polygon inf = builder.build(true);
         
         ArrayList<Polygon> polys = new ArrayList<Polygon>();
         
@@ -99,7 +100,7 @@ public final class MapIntersectionSystem implements EntitySystem
             Polygon p = PolyHelper.fromShape(shape);
             polys.add(p);
             //mapPoly = mapPoly.union(p);
-            if(mapPoly.equals(inf)) throw new Error();
+            //if(mapPoly.equals(inf)) throw new Error();
             //System.out.println("" + --remaining);
         }
         this.shapes.addAll(shapes);
@@ -108,12 +109,24 @@ public final class MapIntersectionSystem implements EntitySystem
         while(polys.size() > 1)
         {
             for (int i = 0; i + 1 < polys.size(); i++) {
-                polys.set(i, polys.get(i).union(polys.get(i + 1)));
+                Polygon poly = polys.get(i).union(polys.get(i + 1));
+                double a = polys.get(i).signedArea();
+                double b = polys.get(i + 1).signedArea();
+                double c = poly.signedArea();
+                if(!Util.withinEpsilon(a + b - c))
+                {
+                    System.out.println("" + polys.get(i));
+                    System.out.println("" + polys.get(i + 1));
+                    throw new Error("" + a + " / " + b + " / " + c);
+                }
+                polys.set(i, poly);
                 polys.remove(i + 1);
             }
         }
-        mapPoly = polys.get(0);
-        System.out.println("map polygon generation - " + (System.currentTimeMillis() - millis) + "ms");
+        mapPoly = polys.get(0).union(mapPoly);
+        //System.out.println("map polygon generation - " + (System.currentTimeMillis() - millis) + "ms");
+        //mapPoly.writeToFile("mapPoly");
+        //System.out.println("wrote mapPoly");
     }
     
     public ArrayList<Shape> getObstacles()
