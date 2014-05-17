@@ -167,7 +167,6 @@ public class SetPolygon
             }
         }
         assert(!distance.equals(Point2D.Zero));
-        if(areaContains(p.sub(distance)) == Containment.Inside) throw new Error(toString());
         assert areaContains(p.sub(distance)) == Containment.Border;
         return distance.inverse();
     }

@@ -6,6 +6,7 @@ package amara.game.entitysystem.systems.physics;
 
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public.*;
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Util;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -34,7 +35,7 @@ public class PolyHelper
         Vector2D[] points = convex.getPoints();
         for (int i = 0; i < points.length; i++)
         {
-            builder.add(points[i].getX(), points[(i + 1) % points.length].getY());
+            builder.add(points[i].getX(), points[i].getY());
         }
         return builder.build(false);
     }
@@ -52,7 +53,7 @@ public class PolyHelper
             Polygon result = masked.minkowskiAdd(flipped);
             solver = result.distanceToBorder(Point2D.Zero);
             solved = withinBorder(solver, border);
-            if(solved && result.contains(solver)) throw new Error();
+//            if(solved && result.contains(solver)) throw new Error();
             border += 5;
         }
         //System.out.println("" + solver);

@@ -150,4 +150,31 @@ public class SimplePolygonUtil {
 
         return false;
     }
+    
+    public static void write(ByteBuffer buffer, SimplePolygon simple)
+    {
+        if(simple == null)
+        {
+            buffer.writeInt(-1);
+            return;
+        }
+        buffer.writeInt(simple.numPoints());
+        for (int i = 0; i < simple.numPoints(); i++)
+        {
+            buffer.writeDouble(simple.getPoint(i).getX());
+            buffer.writeDouble(simple.getPoint(i).getY());
+        }
+    }
+
+    public static SimplePolygon read(ByteBuffer buffer)
+    {
+        int num = buffer.readInt();
+        if(num == -1) return null;
+        ArrayList<Point2D> points = new ArrayList<Point2D>();
+        for (int i = 0; i < num; i++)
+        {
+            points.add(new Point2D(buffer.readDouble(), buffer.readDouble()));
+        }
+        return new SimplePolygon(points);
+    }
 }

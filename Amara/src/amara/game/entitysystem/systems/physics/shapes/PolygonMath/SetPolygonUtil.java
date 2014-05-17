@@ -5,7 +5,12 @@
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public.Point2D;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -211,9 +216,6 @@ public class SetPolygonUtil
         switch (o)
         {
             case Union:
-                Containment aCon = B.areaContains(Point2DUtil.avg(a, b));
-                boolean hasE = B.hasEdge(a, b);
-                boolean hasC = B.hasEdge(b, a);
                 if (B.areaContains(Point2DUtil.avg(a, b)) == Containment.Outside
                         || B.hasEdge(a, b))
                 {
@@ -380,8 +382,8 @@ public class SetPolygonUtil
             }
         }
         boolean bla = !chains.isEmpty();
-        if(bla)
-            System.out.println("error in polygon operation, trying to hide it...");
+//        if(bla)
+//            System.out.println("error in polygon operation, trying to hide it...");
         while(!chains.isEmpty())
         {
             double permittedErrorSquared = 0.01d;
@@ -412,8 +414,8 @@ public class SetPolygonUtil
         if(bla)
         {
             if(!chains.isEmpty())
-                System.out.println("could not fix, polygon(s) discarded...");
-            else System.out.println("*fixed*");
+                System.out.println("could not hide polygon operation error, polygon(s) discarded...");
+//            else System.out.println("*fixed*");
         }
         assert(chains.isEmpty()): "" + chains + result;
         return result;
@@ -490,4 +492,65 @@ public class SetPolygonUtil
         return result;
     }
 
+    public static void write(ByteBuffer buffer, SetPolygon poly)
+    {
+        buffer.writeInt(poly.numPolygons());
+        for (int i = 0; i < poly.numPolygons(); i++)
+        {
+            HolePolygonUtil.write(buffer, poly.getPolygon(i));
+        }
+    }
+    public static SetPolygon read(ByteBuffer buffer)
+    {
+        SetPolygon set = new SetPolygon();
+        int num = buffer.readInt();
+        for (int i = 0; i < num; i++)
+        {
+            set.add(HolePolygonUtil.read(buffer));
+        }
+        return set;
+    }
+    public static void writePolys(ByteBuffer buffer, List<SetPolygon> polys)
+    {
+        buffer.writeInt(polys.size());
+        for (int i = 0; i < polys.size(); i++)
+        {
+            write(buffer, polys.get(i));
+        }
+    }
+    public static List<SetPolygon> readPolys(ByteBuffer buffer)
+    {
+        ArrayList<SetPolygon> list = new ArrayList<SetPolygon>();
+        int num = buffer.readInt();
+        for (int i = 0; i < num; i++)
+        {
+            list.add(read(buffer));
+        }
+        return list;
+    }
+
+    public static void writePolys(String filename, List<SetPolygon> polys)
+    {
+        ByteBuffer buffer = new ByteBuffer();
+        writePolys(buffer, polys);
+        byte[] data = buffer.toByteData();
+        ByteBuffer bufferA = new ByteBuffer();
+        bufferA.writeInt(data.length);
+
+        FileOutputStream stream = null;
+        try {
+            stream = new FileOutputStream(filename);
+            stream.write(bufferA.toByteData());
+            stream.write(data);
+            stream.close();
+        } catch (Exception ex) {
+            Logger.getLogger(SetPolygonUtil.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(SetPolygonUtil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }

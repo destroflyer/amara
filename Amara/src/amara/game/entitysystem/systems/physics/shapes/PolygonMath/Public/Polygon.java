@@ -5,6 +5,7 @@
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public;
 
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -63,10 +64,22 @@ public class Polygon
 //    {
 //        return setPoly.extractCutPolys();
 //    }
+    
+    public double signedArea()
+    {
+        return setPoly.signedArea();
+    }
 
     public boolean isInfinite()
     {
         return setPoly.isInfinite();
+    }
+    
+    public void writeToFile(String filename)
+    {
+        ArrayList<SetPolygon> list = new ArrayList<SetPolygon>();
+        list.add(setPoly);
+        SetPolygonUtil.writePolys(filename, list);
     }
     
     public BoundRectangle boundRectangle()

@@ -105,4 +105,25 @@ public class HolePolygonUtil
         return false;
     }
 
+    public static void write(ByteBuffer buffer, HolePolygon poly)
+    {
+        SimplePolygonUtil.write(buffer, poly.mainPoly());
+        buffer.writeInt(poly.numHolePolys());
+        for (int i = 0; i < poly.numHolePolys(); i++)
+        {
+            SimplePolygonUtil.write(buffer, poly.getHolePoly(i));
+        }
+    }
+
+    public static HolePolygon read(ByteBuffer buffer)
+    {
+        HolePolygon hole = new HolePolygon(SimplePolygonUtil.read(buffer));
+        int num = buffer.readInt();
+        for (int i = 0; i < num; i++)
+        {
+            hole.add(SimplePolygonUtil.read(buffer));
+        }
+        return hole;
+    }
+    
 }
