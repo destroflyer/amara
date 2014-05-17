@@ -55,7 +55,7 @@ public class PolyHelper
             if(solved && result.contains(solver)) throw new Error();
             border += 5;
         }
-        System.out.println("" + solver);
+        //System.out.println("" + solver);
         return solver;
     }
     private static boolean withinBorder(Point2D p, double border)
