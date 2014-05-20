@@ -13,6 +13,7 @@ import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
+import amara.game.entitysystem.components.effects.physics.*;
 import amara.game.entitysystem.components.effects.spells.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.items.*;
@@ -781,6 +782,7 @@ public class EntityTemplate{
             movementAnimation.setComponent(new LoopDurationComponent(0.6f));
             movement.setComponent(new MovementAnimationComponent(movementAnimation.getId()));
             effect2.setComponent(new MoveComponent(movement.getId()));
+            effect2.setComponent(new DeactivateHitboxComponent());
             //Trigger spell effects
             EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger3.setComponent(new TargetReachedTriggerComponent());
@@ -789,7 +791,15 @@ public class EntityTemplate{
             effect3.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
             effectTrigger3.setComponent(new TriggerOnceComponent());
-            effect2.setComponent(new AddEffectTriggersComponent(effectTrigger3.getId()));
+            //Reactivate hitbox
+            EntityWrapper effectTrigger4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger4.setComponent(new TargetReachedTriggerComponent());
+            effectTrigger4.setComponent(new SourceTargetComponent());
+            EntityWrapper effect4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect4.setComponent(new ActivateHitboxComponent());
+            effectTrigger4.setComponent(new TriggeredEffectComponent(effect4.getId()));
+            effectTrigger4.setComponent(new TriggerOnceComponent());
+            effect2.setComponent(new AddEffectTriggersComponent(effectTrigger3.getId(), effectTrigger4.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));

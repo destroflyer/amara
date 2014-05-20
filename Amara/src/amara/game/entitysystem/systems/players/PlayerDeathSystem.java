@@ -15,6 +15,7 @@ import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.visuals.*;
+import amara.game.entitysystem.systems.buffs.RemoveBuffsSystem;
 import amara.game.maps.Map;
 
 /**
@@ -64,20 +65,13 @@ public class PlayerDeathSystem implements EntitySystem{
         for(Class componentClass : componentClassesToReomve){
             entityWorld.removeComponent(selectedEntity, componentClass);
         }
+        RemoveBuffsSystem.removeAllBuffs(entityWorld, selectedEntity);
         DeathAnimationComponent deathAnimationComponent = entityWorld.getComponent(selectedEntity, DeathAnimationComponent.class);
         if(deathAnimationComponent != null){
             entityWorld.setComponent(selectedEntity, new AnimationComponent(deathAnimationComponent.getAnimationEntity()));
         }
         else{
             entityWorld.removeComponent(selectedEntity, AnimationComponent.class);
-        }
-        //Buffs
-        for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class))
-        {
-            int targetEntity = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class).getTargetEntityID();
-            if(targetEntity == selectedEntity){
-                entityWorld.removeEntity(buffStatus);
-            }
         }
     }
     
