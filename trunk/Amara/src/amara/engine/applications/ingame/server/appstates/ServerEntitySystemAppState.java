@@ -26,6 +26,7 @@ import amara.game.entitysystem.systems.effects.damage.*;
 import amara.game.entitysystem.systems.effects.general.*;
 import amara.game.entitysystem.systems.effects.heal.*;
 import amara.game.entitysystem.systems.effects.movement.*;
+import amara.game.entitysystem.systems.effects.physics.*;
 import amara.game.entitysystem.systems.effects.spells.*;
 import amara.game.entitysystem.systems.effects.triggers.*;
 import amara.game.entitysystem.systems.general.*;
@@ -105,6 +106,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyHealSystem());
         addEntitySystem(new ApplyStopSystem());
         addEntitySystem(new ApplyMoveSystem());
+        addEntitySystem(new ApplyActivateHitboxSystem());
+        addEntitySystem(new ApplyDeactivateHitboxSystem());
         addEntitySystem(new ApplyAddAutoAttackSpellEffectsSystem());
         addEntitySystem(new ApplyRemoveSpellEffectsSystem());
         addEntitySystem(new ApplyReplaceSpellsWithExistingSpellsSystem());
@@ -124,7 +127,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new PlayMovementAnimationsSystem());
         addEntitySystem(new UpdateWalkMovementsSystem());
         addEntitySystem(new MovementSystem());
-        addEntitySystem(new TargetedMovementSystem(intersectionObserver));
+        addEntitySystem(new TargetedMovementSystem());
         addEntitySystem(new TriggerTargetReachedEffectSystem());
         addEntitySystem(new RemoveFinishedMovementsSystem());
         addEntitySystem(new TriggerCollisionEffectSystem(intersectionObserver));

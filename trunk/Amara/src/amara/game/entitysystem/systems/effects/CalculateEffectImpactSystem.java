@@ -14,6 +14,7 @@ import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
+import amara.game.entitysystem.components.effects.physics.*;
 import amara.game.entitysystem.components.effects.spells.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.spells.placeholders.*;
@@ -115,6 +116,8 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     AddVulnerabilityComponent.class,
                     RemoveVulnerabilityComponent.class,
                     StopComponent.class,
+                    ActivateHitboxComponent.class,
+                    DeactivateHitboxComponent.class,
                     AddAutoAttackSpellEffectsComponent.class,
                     RemoveSpellEffectsComponent.class,
                     ReplaceSpellWithExistingSpellComponent.class,

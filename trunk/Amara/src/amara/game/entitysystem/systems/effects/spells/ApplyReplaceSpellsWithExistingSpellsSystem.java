@@ -21,9 +21,12 @@ public class ApplyReplaceSpellsWithExistingSpellsSystem implements EntitySystem{
         {
             int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
             ReplaceSpellWithExistingSpellComponent replaceSpellWithExistingSpellComponent = entityWrapper.getComponent(ReplaceSpellWithExistingSpellComponent.class);
-            int[] spellsEntities = entityWorld.getComponent(targetEntity, SpellsComponent.class).getSpellsEntities();
-            spellsEntities[replaceSpellWithExistingSpellComponent.getSpellIndex()] = replaceSpellWithExistingSpellComponent.getSpellEntity();
-            entityWorld.setComponent(targetEntity, new SpellsComponent(spellsEntities));
+            SpellsComponent spellsComponent = entityWorld.getComponent(targetEntity, SpellsComponent.class);
+            if(spellsComponent != null){
+                int[] spellsEntities = spellsComponent.getSpellsEntities();
+                spellsEntities[replaceSpellWithExistingSpellComponent.getSpellIndex()] = replaceSpellWithExistingSpellComponent.getSpellEntity();
+                entityWorld.setComponent(targetEntity, new SpellsComponent(spellsEntities));
+            }
         }
     }
 }

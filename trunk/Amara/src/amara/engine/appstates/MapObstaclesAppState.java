@@ -65,8 +65,12 @@ public class MapObstaclesAppState extends BaseDisplayAppState implements ActionL
     }
     
     public static Geometry generateGeometry(Shape shape){
+        return generateGeometry(shape, true);
+    }
+    
+    public static Geometry generateGeometry(Shape shape, boolean isActive){
         Mesh collisionMesh;
-        ColorRGBA meshColor = ColorRGBA.Blue;
+        ColorRGBA meshColor = (isActive?ColorRGBA.Blue:ColorRGBA.LightGray);
         if(shape instanceof Circle){
             Circle circle = (Circle) shape;
             collisionMesh = new CircleMesh((float) circle.getBoundRadius(), 64);

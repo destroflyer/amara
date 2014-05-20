@@ -43,6 +43,7 @@ import amara.game.entitysystem.components.targets.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.camps.*;
+import amara.game.entitysystem.components.effects.physics.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
@@ -169,6 +170,9 @@ public class MessagesSerializer{
                         //effects/movement,
                         MoveComponent.class,
                         StopComponent.class,
+                        //effects/physics
+                        ActivateHitboxComponent.class,
+                        DeactivateHitboxComponent.class,
                         //effects/spells
                         AddAutoAttackSpellEffectsComponent.class,
                         RemoveSpellEffectsComponent.class,
