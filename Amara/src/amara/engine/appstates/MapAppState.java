@@ -24,6 +24,7 @@ import amara.engine.JMonkeyUtil;
 import amara.engine.applications.ingame.client.IngameClientApplication;
 import amara.engine.applications.ingame.client.maps.*;
 import amara.engine.applications.ingame.client.models.ModelObject;
+import amara.engine.settings.Settings;
 import amara.game.maps.*;
 import amara.game.maps.lights.*;
 import amara.game.maps.visuals.*;
@@ -92,7 +93,7 @@ public class MapAppState extends BaseDisplayAppState{
                 light = directionalLight;
                 MapLight_Directional_Shadows shadows = mapLight_Directional.getShadows();
                 if(shadows != null){
-                    DirectionalLightShadowRenderer shadowRenderer = new DirectionalLightShadowRenderer(mainApplication.getAssetManager(), 2048, 3);
+                    DirectionalLightShadowRenderer shadowRenderer = new DirectionalLightShadowRenderer(mainApplication.getAssetManager(), 2048, Settings.getInt("shadows_quality"));
                     shadowRenderer.setLight(directionalLight);
                     shadowRenderer.setShadowIntensity(shadows.getIntensity());
                     lightAppState.addShadowRenderer(shadowRenderer);
