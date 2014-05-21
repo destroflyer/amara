@@ -131,6 +131,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new TriggerTargetReachedEffectSystem());
         addEntitySystem(new RemoveFinishedMovementsSystem());
         addEntitySystem(new TriggerCollisionEffectSystem(intersectionObserver));
+        addEntitySystem(new TriggerCastingFinishedEffectSystem());
         addEntitySystem(new AggroSystem());
         addEntitySystem(new CheckCampAggroTargetSystem());
         addEntitySystem(new CheckCampMaximumAggroDistanceSystem());

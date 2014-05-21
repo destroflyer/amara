@@ -8,6 +8,8 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.units.effecttriggers.*;
+import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 
 /**
  *
@@ -22,6 +24,16 @@ public class SetCastDurationOnCastingSystem implements EntitySystem{
             CastDurationComponent castDurationComponent = entityWorld.getComponent(spellEntity, CastDurationComponent.class);
             if(castDurationComponent != null){
                 entityWorld.setComponent(casterEntity, new IsCastingComponent(castDurationComponent.getDuration()));
+            }
+        }
+    }
+    
+    public static void cancelCasting(EntityWorld entityWorld, int entity){
+        entityWorld.removeComponent(entity, IsCastingComponent.class);
+        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, CastingFinishedTriggerComponent.class)){
+            int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
+            if(sourceEntity == entity){
+                entityWorld.removeEntity(effectTriggerEntity);
             }
         }
     }

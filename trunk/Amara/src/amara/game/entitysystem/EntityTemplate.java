@@ -473,11 +473,13 @@ public class EntityTemplate{
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(12));
             entityWrapper.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation.getId()}));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
-            entityWrapper.setComponent(new CooldownComponent(3));
+            entityWrapper.setComponent(new CastDurationComponent(1.5f));
+            entityWrapper.setComponent(new StopBeforeCastingComponent());
             EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             castAnimation.setComponent(new NameComponent("grab"));
             castAnimation.setComponent(new LoopDurationComponent(1.5f));
             entityWrapper.setComponent(new CastAnimationComponent(castAnimation.getId()));
+            entityWrapper.setComponent(new CooldownComponent(3));
         }
         else if(templateName.equals("grab_projectile")){
             entityWrapper.setComponent(new HitboxComponent(new Circle(0.6f)));
@@ -1010,11 +1012,12 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation.getId()}));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
             entityWrapper.setComponent(new CastDurationComponent(2));
-            entityWrapper.setComponent(new CooldownComponent(5));
+            entityWrapper.setComponent(new StopBeforeCastingComponent());
             EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             castAnimation.setComponent(new NameComponent("bodyslam"));
             castAnimation.setComponent(new LoopDurationComponent(2));
             entityWrapper.setComponent(new CastAnimationComponent(castAnimation.getId()));
+            entityWrapper.setComponent(new CooldownComponent(5));
         }
         else if(templateName.equals("bodyslam_object")){
             entityWrapper.setComponent(new HitboxComponent(new Circle(8)));
