@@ -5,6 +5,7 @@
 package amara.engine.applications.ingame.client.maps;
 
 import com.jme3.material.Material;
+import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.terrain.heightmap.AbstractHeightMap;
 import com.jme3.terrain.heightmap.ImageBasedHeightMap;
@@ -36,6 +37,7 @@ public class MapTerrain{
         float scaleZ = (((float) mapPhysicsInformation.getHeight()) / terrain.getTotalSize());
         terrain.setLocalScale(scaleX, 1, scaleZ);
         terrain.setLocalTranslation((mapPhysicsInformation.getWidth() / 2), 0, (mapPhysicsInformation.getHeight() / 2));
+        terrain.setShadowMode(RenderQueue.ShadowMode.Receive);
     }
     
     private void loadMaterial(String mapName){

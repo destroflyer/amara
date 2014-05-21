@@ -14,6 +14,7 @@ public abstract class Map{
     
     private String name;
     protected MapCamera camera;
+    protected MapLights lights = new MapLights();
     protected MapPhysicsInformation physicsInformation;
     protected MapVisuals visuals = new MapVisuals();
     protected int entity;
@@ -36,6 +37,10 @@ public abstract class Map{
 
     public MapCamera getCamera(){
         return camera;
+    }
+
+    public MapLights getLights(){
+        return lights;
     }
 
     public void setPhysicsInformation(MapPhysicsInformation physicsInformation){

@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import javax.swing.filechooser.FileFilter;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import com.jme3.math.ColorRGBA;
 import amara.Util;
 import amara.engine.files.FileManager;
 import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.game.maps.lights.*;
 import amara.game.maps.visuals.*;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -73,6 +75,30 @@ public class MapFileHandler{
                 elementCamera.addContent(elementZoom);
             }
             root.addContent(elementCamera);
+            Element elementLights = new Element("lights");
+            for(MapLight mapLight : map.getLights().getMapLights()){
+                Element elementLight = null;
+                if(mapLight instanceof MapLight_Ambient){
+                    MapLight_Ambient mapLight_Ambient = (MapLight_Ambient) mapLight;
+                    elementLight = new Element("ambient");
+                }
+                else if(mapLight instanceof MapLight_Directional){
+                    MapLight_Directional mapLight_Directional = (MapLight_Directional) mapLight;
+                    elementLight = new Element("directional");
+                    elementLight.setAttribute("direction", generateVectorText(mapLight_Directional.getDirection()));
+                    MapLight_Directional_Shadows shadows = mapLight_Directional.getShadows();
+                    if(shadows != null){
+                        Element elementShadows = new Element("shadows");
+                        elementShadows.setAttribute("intenstiy", "" + shadows.getIntensity());
+                        elementLight.addContent(elementShadows);
+                    }
+                }
+                if(elementLight != null){
+                    elementLight.setAttribute("color", generateVectorText(mapLight.getColor().toVector3f()));
+                    elementLights.addContent(elementLight);
+                }
+            }
+            root.addContent(elementLights);
             Element elementPhysics = new Element("physics");
             elementPhysics.setAttribute("width", "" + map.getPhysicsInformation().getWidth());
             elementPhysics.setAttribute("height", "" + map.getPhysicsInformation().getHeight());
@@ -148,24 +174,44 @@ public class MapFileHandler{
                 camera.setZoom(new MapCamera_Zoom(zoomInterval, zoomMaximumLevel, zoomInitialLevel));
             }
             map.setCamera(camera);
+            Element elementLights = root.getChild("lights");
+            for(Object elementLightObject : elementLights.getChildren()){
+                Element elemenLight = (Element) elementLightObject;
+                MapLight mapLight = null;
+                ColorRGBA color = generateColorRGBA(elemenLight.getAttributeValue("color"));
+                if(elemenLight.getName().equals("ambient")){
+                    mapLight = new MapLight_Ambient(color);
+                }
+                else if(elemenLight.getName().equals("directional")){
+                    Vector3f direction = generateVector3f(elemenLight.getAttributeValue("direction"));
+                    MapLight_Directional mapLight_Directional = new MapLight_Directional(color, direction);
+                    Element elementShadows = elemenLight.getChild("shadows");
+                    if(elementShadows != null){
+                        float intensity = elementShadows.getAttribute("intensity").getFloatValue();
+                        MapLight_Directional_Shadows shadows = new MapLight_Directional_Shadows(intensity);
+                        mapLight_Directional.setShadows(shadows);
+                    }
+                    mapLight = mapLight_Directional;
+                }
+                if(mapLight != null){
+                    map.getLights().addLight(mapLight);
+                }
+            }
             Element elementPhysics = root.getChild("physics");
             int width = elementPhysics.getAttribute("width").getIntValue();
             int height = elementPhysics.getAttribute("height").getIntValue();
             float heightmapScale = elementPhysics.getAttribute("heightmapScale").getFloatValue();
             Element elementObstacles = elementPhysics.getChild("obstacles");
-            List elementObstaclesChildren = elementObstacles.getChildren();
             ArrayList<Shape> obstacles = new ArrayList<Shape>();
-            for(int i=0;i<elementObstaclesChildren.size();i++){
-                Element elementShape = (Element) elementObstaclesChildren.get(i);
-                Shape shape = generateShape(elementShape);
+            for(Object elementShapeObject : elementObstacles.getChildren()){
+                Shape shape = generateShape((Element) elementShapeObject);
                 obstacles.add(shape);
             }
             MapPhysicsInformation physicsInformation = new MapPhysicsInformation(width, height, heightmapScale, obstacles);
             map.setPhysicsInformation(physicsInformation);
             Element elementVisuals = root.getChild("visuals");
-            List elementVisualsChildren = elementVisuals.getChildren();
-            for(int i=0;i<elementVisualsChildren.size();i++){
-                Element elementVisual = (Element) elementVisualsChildren.get(i);
+            for(Object elementVisualObject : elementVisuals.getChildren()){
+                Element elementVisual = (Element) elementVisualObject;
                 MapVisual mapVisual = null;
                 if(elementVisual.getName().equals("model")){
                     String modelSkinPath = elementVisual.getAttributeValue("modelSkinPath");
@@ -261,6 +307,11 @@ public class MapFileHandler{
     private static Vector2f generateVector2f(String text){
         float[] coordinates = Util.parseToFloatArray(text.split(VECTOR_COORDINATES_SEPARATOR));
         return new Vector2f(coordinates[0], coordinates[1]);
+    }
+    
+    private static ColorRGBA generateColorRGBA(String text){
+        Vector3f colorVector = generateVector3f(text);
+        return new ColorRGBA(colorVector.getX(), colorVector.getY(), colorVector.getZ(), 1);
     }
     
     private static Vector3f generateVector3f(String text){
