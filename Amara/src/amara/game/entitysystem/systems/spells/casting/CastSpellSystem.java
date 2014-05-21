@@ -10,6 +10,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.casts.*;
+import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.input.casts.*;
 import amara.game.entitysystem.components.movements.*;
@@ -19,6 +20,9 @@ import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.spells.specials.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
+import amara.game.entitysystem.components.units.effecttriggers.*;
+import amara.game.entitysystem.components.units.effecttriggers.targets.*;
+import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.systems.effects.triggers.EffectTriggerUtil;
 
 /**
@@ -126,6 +130,24 @@ public class CastSpellSystem implements EntitySystem{
                         spawnedObject.setComponent(new MovementComponent(movement.getId()));
                     }
                     EntityTemplate.loadTemplates(entityWorld, spawnedObject.getId(), spawnInformation.getComponent(SpawnTemplateComponent.class).getTemplateNames());
+                }
+            }
+            MovementComponent movementComponent = entityWorld.getComponent(casterEntity, MovementComponent.class);
+            if((movementComponent != null) && entityWorld.hasComponent(spellEntity, StopBeforeCastingComponent.class)){
+                int movementEntity = movementComponent.getMovementEntity();
+                entityWorld.removeComponent(casterEntity, MovementComponent.class);
+                if(entityWorld.hasComponent(spellEntity, StopAfterCastingComponent.class)){
+                    entityWorld.removeEntity(movementEntity);
+                }
+                else{
+                    EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+                    effectTrigger.setComponent(new CastingFinishedTriggerComponent());
+                    effectTrigger.setComponent(new SourceTargetComponent());
+                    EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
+                    effect.setComponent(new MoveComponent(movementEntity));
+                    effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
+                    effectTrigger.setComponent(new TriggerSourceComponent(casterEntity));
+                    effectTrigger.setComponent(new TriggerOnceComponent());
                 }
             }
             entityWorld.removeComponent(casterEntity, CastSpellComponent.class);

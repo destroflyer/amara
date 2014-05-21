@@ -26,6 +26,7 @@ import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.systems.movement.MovementSystem;
 import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.CastSpellSystem;
+import amara.game.entitysystem.systems.spells.casting.SetCastDurationOnCastingSystem;
 import amara.game.entitysystem.systems.targets.TargetUtil;
 
 /**
@@ -182,6 +183,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             }
             if(isAllowed){
                 entityWorld.removeComponent(selectedUnit, AutoAttackTargetComponent.class);
+                SetCastDurationOnCastingSystem.cancelCasting(entityWorld, selectedUnit);
                 EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
                 movement.setComponent(new MovementTargetComponent(targetEntity));
                 if(sufficientDistance != -1){

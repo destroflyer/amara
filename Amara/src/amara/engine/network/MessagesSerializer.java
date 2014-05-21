@@ -249,6 +249,8 @@ public class MessagesSerializer{
                         RemainingCooldownComponent.class,
                         SpellTargetRulesComponent.class,
                         SpellVisualisationComponent.class,
+                        StopAfterCastingComponent.class,
+                        StopBeforeCastingComponent.class,
                         //spells/placeholders
                         TargetedMovementDirectionComponent.class,
                         TargetedMovementTargetComponent.class,
@@ -301,6 +303,7 @@ public class MessagesSerializer{
                         SourceTargetComponent.class,
                         TargetTargetComponent.class,
                         //units/effecttriggers/triggers
+                        CastingFinishedTriggerComponent.class,
                         CollisionTriggerComponent.class,
                         TargetReachedTriggerComponent.class,
                         //visuals
