@@ -4,13 +4,9 @@
  */
 package amara.engine.appstates;
 
-import com.jme3.app.Application;
-import com.jme3.app.state.AppStateManager;
-import com.jme3.light.AmbientLight;
-import com.jme3.light.DirectionalLight;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector3f;
-import com.jme3.shadow.DirectionalLightShadowRenderer;
+import java.util.ArrayList;
+import com.jme3.light.Light;
+import com.jme3.shadow.AbstractShadowRenderer;
 
 /**
  *
@@ -19,49 +15,43 @@ import com.jme3.shadow.DirectionalLightShadowRenderer;
 public class LightAppState extends BaseDisplayAppState{
 
     public LightAppState(){
-        ambientLight = new AmbientLight();
-        directionalLight = new DirectionalLight();
+        
     }
-    private AmbientLight ambientLight;
-    private DirectionalLight directionalLight;
-    private DirectionalLightShadowRenderer shadowRenderer;
-    private float shadowsIntensity;
-
-    @Override
-    public void initialize(AppStateManager stateManager, Application application){
-        super.initialize(stateManager, application);
-        mainApplication.getRootNode().addLight(ambientLight);
-        mainApplication.getRootNode().addLight(directionalLight);
-        shadowRenderer = new DirectionalLightShadowRenderer(mainApplication.getAssetManager(), 2048, 3);
-        shadowRenderer.setLight(directionalLight);
-        shadowRenderer.setShadowIntensity(shadowsIntensity);
-        mainApplication.getViewPort().addProcessor(shadowRenderer);
+    private ArrayList<Light> lights = new ArrayList<Light>();
+    private ArrayList<AbstractShadowRenderer> shadowsRenderers = new ArrayList<AbstractShadowRenderer>();
+    
+    public void addLight(Light light){
+        lights.add(light);
+        mainApplication.getRootNode().addLight(light);
+    }
+    
+    public void removeLight(Light light){
+        lights.remove(light);
+        mainApplication.getRootNode().removeLight(light);
+    }
+    
+    public void addShadowRenderer(AbstractShadowRenderer abstractShadowRenderer){
+        shadowsRenderers.add(abstractShadowRenderer);
+        mainApplication.getViewPort().addProcessor(abstractShadowRenderer);
+    }
+    
+    public void removeShadowRenderer(AbstractShadowRenderer abstractShadowRenderer){
+        shadowsRenderers.remove(abstractShadowRenderer);
+        mainApplication.getViewPort().removeProcessor(abstractShadowRenderer);
     }
 
     @Override
     public void cleanup(){
         super.cleanup();
-        mainApplication.getRootNode().removeLight(ambientLight);
-        mainApplication.getRootNode().removeLight(directionalLight);
-        mainApplication.getViewPort().removeProcessor(shadowRenderer);
+        removeAll();
     }
     
-    public void setAmbientLightColor(ColorRGBA color){
-        ambientLight.setColor(color);
-    }
-    
-    public void setDirectionalLightColor(ColorRGBA color){
-        directionalLight.setColor(color);
-    }
-    
-    public void setLightDirection(Vector3f direction){
-        directionalLight.setDirection(direction);
-    }
-    
-    public void setShadowsIntensity(float intenstiy){
-        shadowsIntensity = intenstiy;
-        if(shadowRenderer != null){
-            shadowRenderer.setShadowIntensity(intenstiy);
+    public void removeAll(){
+        for(Light light : lights){
+            mainApplication.getRootNode().removeLight(light);
+        }
+        for(AbstractShadowRenderer abstractShadowRenderer : shadowsRenderers){
+            mainApplication.getViewPort().removeProcessor(abstractShadowRenderer);
         }
     }
 }
