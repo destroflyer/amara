@@ -93,10 +93,13 @@ public class MapAppState extends BaseDisplayAppState{
                 light = directionalLight;
                 MapLight_Directional_Shadows shadows = mapLight_Directional.getShadows();
                 if(shadows != null){
-                    DirectionalLightShadowRenderer shadowRenderer = new DirectionalLightShadowRenderer(mainApplication.getAssetManager(), 2048, Settings.getInt("shadows_quality"));
-                    shadowRenderer.setLight(directionalLight);
-                    shadowRenderer.setShadowIntensity(shadows.getIntensity());
-                    lightAppState.addShadowRenderer(shadowRenderer);
+                    int shadowQuality = Settings.getInt("shadows_quality");
+                    if(shadowQuality > 0){
+                        DirectionalLightShadowRenderer shadowRenderer = new DirectionalLightShadowRenderer(mainApplication.getAssetManager(), 2048, shadowQuality);
+                        shadowRenderer.setLight(directionalLight);
+                        shadowRenderer.setShadowIntensity(shadows.getIntensity());
+                        lightAppState.addShadowRenderer(shadowRenderer);
+                    }
                 }
             }
             if(light != null){
