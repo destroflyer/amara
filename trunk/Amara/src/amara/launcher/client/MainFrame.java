@@ -10,7 +10,9 @@
  */
 package amara.launcher.client;
 
+import java.awt.Insets;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
 import amara.engine.applications.masterserver.client.appstates.*;
 import amara.engine.applications.masterserver.client.appstates.LoginAppState.LoginResult;
@@ -38,6 +40,8 @@ public class MainFrame extends javax.swing.JFrame{
         panLogin.start();
         FrameUtil.initFrameSpecials(this);
         FrameUtil.centerFrame(this);
+        UIManager.getDefaults().put("TabbedPane.contentBorderInsets", new Insets(-1, 0, 0, 0));
+        setSize(650, 400);
     }
     private static MainFrame instance;
     private PanLogin panLogin;
@@ -161,7 +165,7 @@ public class MainFrame extends javax.swing.JFrame{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+            .addComponent(panContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
         pack();

@@ -28,7 +28,8 @@ public class Settings{
         set("vsync", "false");
         set("audio_volume_music", "0.5");
         set("audio_volume_sounds", "0.3");
-        set("shadows_quality", "2");
+        set("hardware_skinning", "false");
+        set("shadow_quality", "2");
         reloadFile();
     }
     

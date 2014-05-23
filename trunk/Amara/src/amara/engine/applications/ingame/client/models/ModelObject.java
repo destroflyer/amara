@@ -8,6 +8,7 @@ import com.jme3.animation.*;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.engine.applications.DisplayApplication;
+import amara.engine.settings.Settings;
 
 /**
  *
@@ -33,7 +34,7 @@ public class ModelObject extends Node implements AnimEventListener{
         }
         SkeletonControl skeletonControl = modelSpatial.getControl(SkeletonControl.class);
         if(skeletonControl != null){
-            skeletonControl.setHardwareSkinningPreferred(true);
+            skeletonControl.setHardwareSkinningPreferred(Settings.getBoolean("hardware_skinning"));
         }
     }
 

@@ -38,9 +38,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" max="32767" attributes="0"/>
-                  <Component id="lblMapIcon" alignment="0" max="-2" attributes="0"/>
-                  <Component id="cbxMapName" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                  <Component id="jLabel1" pref="120" max="32767" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="cbxMapName" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblMapIcon" alignment="0" pref="120" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -48,12 +50,13 @@
                   <Component id="panPlayers" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel3" min="-2" pref="200" max="-2" attributes="0"/>
-                  <Component id="btnInvite" min="-2" pref="120" max="-2" attributes="0"/>
-                  <Component id="btnClearPlayers" min="-2" pref="120" max="-2" attributes="0"/>
-                  <Component id="btnStart" min="-2" pref="120" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnInvite" max="32767" attributes="0"/>
+                  <Component id="btnClearPlayers" max="32767" attributes="0"/>
+                  <Component id="btnStart" max="32767" attributes="0"/>
+                  <Component id="jLabel3" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace pref="78" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -83,7 +86,7 @@
                               <Component id="lblMapIcon" min="-2" pref="120" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cbxMapName" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="125" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="96" max="32767" attributes="0"/>
                           </Group>
                           <Component id="panPlayers" max="32767" attributes="0"/>
                       </Group>
@@ -136,7 +139,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="242" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

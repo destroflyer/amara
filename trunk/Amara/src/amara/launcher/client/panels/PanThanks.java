@@ -121,7 +121,7 @@ public class PanThanks extends javax.swing.JPanel{
         panThanksList.setLayout(panThanksListLayout);
         panThanksListLayout.setHorizontalGroup(
             panThanksListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 575, Short.MAX_VALUE)
+            .addGap(0, 624, Short.MAX_VALUE)
         );
         panThanksListLayout.setVerticalGroup(
             panThanksListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +138,9 @@ public class PanThanks extends javax.swing.JPanel{
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
