@@ -6,6 +6,8 @@ package amara.engine.applications.launcher.startscreen.screens;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.light.AmbientLight;
+import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
@@ -74,6 +76,9 @@ public class LoginScreen_Forest extends LoginScreen{
             @Override
             public void initialize(AppStateManager stateManager, Application application){
                 super.initialize(stateManager, application);
+                LightAppState lightAppState = getAppState(LightAppState.class);
+                lightAppState.addLight(new AmbientLight());
+                lightAppState.addLight(new DirectionalLight(){{ setDirection(new Vector3f(-0.2f, -1, 1)); }});
                 getAppState(PostFilterAppState.class).addFilter(new FogFilter(new ColorRGBA(1, 1, 1, 1), 1.5f, 25));
                 Geometry waterPlane = getAppState(WaterAppState.class).createWaterPlane(new Vector3f(-30, 0.5f, -10), new Vector2f(35, 20));
                 mainApplication.getRootNode().attachChild(waterPlane);

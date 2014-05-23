@@ -69,7 +69,7 @@ public class PanMainMenu extends javax.swing.JPanel{
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panHeaderContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tpaneContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+                .addComponent(tpaneContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
