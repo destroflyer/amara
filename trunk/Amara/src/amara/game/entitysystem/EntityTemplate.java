@@ -448,7 +448,8 @@ public class EntityTemplate{
             EntityWrapper grab = createFromTemplate(entityWorld, "grab," + entityWrapper.getId());
             EntityWrapper astralBlessing = createFromTemplate(entityWorld, "astral_blessing");
             EntityWrapper sonicWave = createFromTemplate(entityWorld, "sonic_wave," + 2);
-            entityWrapper.setComponent(new SpellsComponent(new int[]{grab.getId(), astralBlessing.getId(), sonicWave.getId()}));
+            EntityWrapper wither = createFromTemplate(entityWorld, "wither");
+            entityWrapper.setComponent(new SpellsComponent(new int[]{grab.getId(), astralBlessing.getId(), sonicWave.getId(), wither.getId()}));
         }
         else if(templateName.equals("grab")){
             entityWrapper.setComponent(new NameComponent("Grab"));
@@ -635,6 +636,39 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
             entityWrapper.setComponent(new CooldownComponent(3));
+        }
+        else if(templateName.equals("wither")){
+            entityWrapper.setComponent(new NameComponent("Wither"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("wither"));
+            //Add buff
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
+            buff.setComponent(new BuffVisualisationComponent("withered"));
+            EntityWrapper buffEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            buffEffect.setComponent(new BonusPercentageWalkSpeedComponent(-0.6f));
+            buff.setComponent(new ContinuousEffectComponent(buffEffect.getId()));
+            effect1.setComponent(new AddBuffComponent(buff.getId(), 5));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
+            entityWrapper.setComponent(new RangeComponent(14));
+            entityWrapper.setComponent(new CooldownComponent(11));
+            EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
+            targetRules.setComponent(new AcceptEnemiesComponent());
+            entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
         }
         else if(templateName.equals("jaime")){
             entityWrapper.setComponent(new ModelComponent("Models/jaime/skin.xml"));

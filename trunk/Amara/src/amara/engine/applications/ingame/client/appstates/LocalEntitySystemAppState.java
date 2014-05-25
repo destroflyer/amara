@@ -87,6 +87,8 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new BuffVisualisationSystem_Zhonyas(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Empowered(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Electrified(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_Wither(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_Turbo(entitySceneMap));
         addEntitySystem(new TitleSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
     }
 

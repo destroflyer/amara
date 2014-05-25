@@ -18,6 +18,7 @@ public class AttributeBonus{
     private float flatAbilityPower = 0;
     private float percentageAttackSpeed = 0;
     private float flatWalkSpeed = 0;
+    private float percentageWalkSpeed = 1;
 
     public void addFlatMaximumHealth(float value){
         flatMaximumHealth += value;
@@ -57,5 +58,13 @@ public class AttributeBonus{
 
     public float getFlatWalkSpeed(){
         return flatWalkSpeed;
+    }
+    
+    public void multiplicatePercentageWalkSpeed(float value){
+        percentageWalkSpeed *= (1 + value);
+    }
+
+    public float getPercentageWalkSpeed(){
+        return percentageWalkSpeed;
     }
 }

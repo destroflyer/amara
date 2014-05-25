@@ -108,6 +108,7 @@ public class MessagesSerializer{
                         BonusFlatMaximumHealthComponent.class,
                         BonusFlatWalkSpeedComponent.class,
                         BonusPercentageAttackSpeedComponent.class,
+                        BonusPercentageWalkSpeedComponent.class,
                         HealthComponent.class,
                         MaximumHealthComponent.class,
                         RequestUpdateAttributesComponent.class,
