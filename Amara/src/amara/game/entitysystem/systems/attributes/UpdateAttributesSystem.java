@@ -71,6 +71,7 @@ public class UpdateAttributesSystem implements EntitySystem{
             abilityPower += attributeBonus.getFlatAbilityPower();
             attackSpeed += (attackSpeed * attributeBonus.getPercentageAttackSpeed());
             walkSpeed += attributeBonus.getFlatWalkSpeed();
+            walkSpeed *= attributeBonus.getPercentageWalkSpeed();
             entityWrapper.setComponent(new MaximumHealthComponent(maximumHealth));
             if(entityWrapper.getComponent(HealthComponent.class) == null){
                 entityWrapper.setComponent(new HealthComponent(maximumHealth));
@@ -114,6 +115,10 @@ public class UpdateAttributesSystem implements EntitySystem{
         BonusFlatWalkSpeedComponent bonusFlatWalkSpeedComponent = itemWrapper.getComponent(BonusFlatWalkSpeedComponent.class);
         if(bonusFlatWalkSpeedComponent != null){
             attributeBonus.addFlatWalkSpeed(bonusFlatWalkSpeedComponent.getValue());
+        }
+        BonusPercentageWalkSpeedComponent bonusPercentageWalkSpeedComponent = itemWrapper.getComponent(BonusPercentageWalkSpeedComponent.class);
+        if(bonusPercentageWalkSpeedComponent != null){
+            attributeBonus.multiplicatePercentageWalkSpeed(bonusPercentageWalkSpeedComponent.getValue());
         }
     }
 }
