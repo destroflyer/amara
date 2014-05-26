@@ -24,7 +24,7 @@ public class IntersectionObserver implements IntersectionInformant
     private Set<Pair<Integer>> leavers = new HashSet<Pair<Integer>>();
     private IntersectionTracker<Pair<Integer>> tracker = new IntersectionTracker<Pair<Integer>>();
     
-    private void update(EntityWorld entityWorld)
+    public void update(EntityWorld entityWorld)
     {
         transformUpdater.updateTransforms(entityWorld);
         if(hitboxUpdater.updateHitboxes(entityWorld))
