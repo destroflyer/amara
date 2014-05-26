@@ -9,6 +9,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.systems.physics.IntersectionObserver;
 
 /**
  *
@@ -16,8 +17,14 @@ import amara.game.entitysystem.components.units.*;
  */
 public class TargetedMovementSystem implements EntitySystem{
     
+    public TargetedMovementSystem(IntersectionObserver intersectionObserver){
+        this.intersectionObserver = intersectionObserver;
+    }
+    private IntersectionObserver intersectionObserver;
+    
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
+        intersectionObserver.update(entityWorld);
         for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
             int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
             MovementTargetComponent movementTargetComponent = entityWorld.getComponent(movementEntity, MovementTargetComponent.class);
