@@ -46,7 +46,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
         while(playerCommandsIterator.hasNext()){
             PlayerCommand playerCommand = playerCommandsIterator.next();
             Command command = playerCommand.getCommand();
-            EntityWrapper player = entityWorld.getWrapped(getPlayerEntityID(entityWorld, playerCommand.getClientID()));
+            EntityWrapper player = entityWorld.getWrapped(getPlayerEntity(entityWorld, playerCommand.getClientID()));
             int selectedUnit = player.getComponent(SelectedUnitComponent.class).getEntityID();
             if(entityWorld.hasComponent(selectedUnit, IsAliveComponent.class)){
                 if(command instanceof MoveCommand){
@@ -105,7 +105,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
         playerCommandsQueue.clear();
     }
     
-    private int getPlayerEntityID(EntityWorld entityWorld, int clientID){
+    private int getPlayerEntity(EntityWorld entityWorld, int clientID){
         for(int entity : entityWorld.getEntitiesWithAll(ClientComponent.class)){
             if(entityWorld.getComponent(entity, ClientComponent.class).getClientID() == clientID){
                 return entity;

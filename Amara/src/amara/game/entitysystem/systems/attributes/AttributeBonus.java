@@ -14,6 +14,7 @@ public class AttributeBonus{
         
     }
     private float flatMaximumHealth = 0;
+    private float flatHealthRegeneration = 0;
     private float flatAttackDamage = 0;
     private float flatAbilityPower = 0;
     private float percentageAttackSpeed = 0;
@@ -26,6 +27,14 @@ public class AttributeBonus{
     
     public float getFlatMaximumHealth(){
         return flatMaximumHealth;
+    }
+    
+    public void addFlatHealthRegeneration(float value){
+        flatHealthRegeneration += value;
+    }
+
+    public float getFlatHealthRegeneration(){
+        return flatHealthRegeneration;
     }
 
     public void addFlatAbilityPower(float value){
