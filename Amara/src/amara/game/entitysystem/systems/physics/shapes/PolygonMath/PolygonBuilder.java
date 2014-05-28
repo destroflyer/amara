@@ -2,9 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public;
+package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import java.util.*;
 
 /**
@@ -34,6 +33,10 @@ public class PolygonBuilder
     public void add(double x, double y)
     {
         outlines.get(outlines.size() - 1).add(x, y);
+    }
+    public void add(Point2D p)
+    {
+        outlines.get(outlines.size() - 1).add(p);
     }
     
     public void reset()

@@ -12,7 +12,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  *
  * @author Philipp
  */
-public class ByteBuffer
+class ByteBuffer
 {
     private ArrayList<Byte> bytes = new ArrayList<Byte>();
     private int position = 0;

@@ -8,7 +8,7 @@ package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
  *
  * @author Philipp
  */
-public enum PolygonOperation
+enum PolygonOperation
 {
     Union, Intersection, Exclude
 }

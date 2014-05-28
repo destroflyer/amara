@@ -5,8 +5,7 @@
 package amara.game.entitysystem.systems.physics;
 
 import amara.game.entitysystem.systems.physics.shapes.*;
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public.*;
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Util;
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

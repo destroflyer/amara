@@ -15,8 +15,7 @@ import java.util.Set;
 public interface IntersectionInformant
 {
     public Set<Pair<Integer>> getEntries(EntityWorld entityWorld);
-    
     public Set<Pair<Integer>> getRepeaters(EntityWorld entityWorld);
-    
     public Set<Pair<Integer>> getLeavers(EntityWorld entityWorld);
+    public void updateTrackers(EntityWorld entityWorld);
 }

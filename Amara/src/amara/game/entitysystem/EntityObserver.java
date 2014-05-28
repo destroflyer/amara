@@ -5,7 +5,6 @@
 package amara.game.entitysystem;
 
 import amara.game.entitysystem.systems.physics.intersection.*;
-import amara.game.entitysystem.systems.physics.shapes.*;
 import java.util.*;
 
 /**

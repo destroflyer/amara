@@ -4,21 +4,59 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public.Point2D;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
  * @author Philipp
  */
-public class SetPolygonUtil
+class SetPolygonUtil
 {
+    public static ArrayList<SimplePolygon> cutPolys(SetPolygon setPoly)
+    {
+        ArrayList<SimplePolygon> list = new ArrayList<SimplePolygon>();
+        for (int i = 0; i < setPoly.numPolygons(); i++)
+        {
+            SimplePolygon cutPoly = HolePolygonUtil.cutPolygon(setPoly.getPolygon(i));
+            list.add(cutPoly);
+            assert !cutPoly.isHole();
+        }
+        System.out.println("" + list.size() + " cutPolys");
+        return list;
+    }
+    public static ArrayList<Point2D> triangles(SetPolygon setPoly)
+    {
+        ArrayList<Point2D> list = new ArrayList<Point2D>();
+        for (SimplePolygon simple : cutPolys(setPoly))
+        {
+            assert simple.isAreaPositive();
+            //list.addAll(SimplePolygonUtil.triangles(simple));
+            for (SimplePolygon simplePolygon : SimplePolygonUtil.splitAtSelfTouch(simple, 1))
+            {
+                assert simplePolygon.isAreaPositive(): simplePolygon.signedArea();
+                list.addAll(SimplePolygonUtil.triangles(simplePolygon));
+            }
+            System.out.println("" + list.size() / 3 + " tris so far");
+        }
+        return list;
+    }
+    
+    public static void preSortedUnion(ArrayList<SetPolygon> polys)
+    {
+        while(polys.size() > 1)
+        {
+            for (int i = 0; i + 1 < polys.size(); i++)
+            {
+                SetPolygon poly = union(polys.get(i), polys.get(i + 1));
+                polys.set(i, poly);
+                polys.remove(i + 1);
+            }
+        }
+    }
+    
     public static boolean intersect(SetPolygon a, SetPolygon b)
     {
         for (int i = 0; i < a.numPolygons(); i++)
@@ -105,7 +143,7 @@ public class SetPolygonUtil
                 simpleSet.add(simple.inverse());
             }
         }
-        SetPolygon setPoly = simpleSetToSetPolygon(simpleSet, set.isInfinite());
+        SetPolygon setPoly = simpleSetToSetPolygon(simpleSet, !set.isInfinite());
 
         SetPolygon check = exclude(new SetPolygon(new HolePolygon()), set);
         assert(Util.withinEpsilon(setPoly.signedArea() + set.signedArea()));
@@ -484,7 +522,7 @@ public class SetPolygonUtil
 
         if(infinite)
         {
-            HolePolygon poly = new HolePolygon((SimplePolygon)null, leftOvers);
+            HolePolygon poly = new HolePolygon(null, leftOvers);
             result.add(poly);
         }
 
@@ -494,6 +532,7 @@ public class SetPolygonUtil
 
     public static void write(ByteBuffer buffer, SetPolygon poly)
     {
+        assert poly.isValid();
         buffer.writeInt(poly.numPolygons());
         for (int i = 0; i < poly.numPolygons(); i++)
         {
@@ -508,6 +547,7 @@ public class SetPolygonUtil
         {
             set.add(HolePolygonUtil.read(buffer));
         }
+        assert set.isValid();
         return set;
     }
     public static void writePolys(ByteBuffer buffer, List<SetPolygon> polys)

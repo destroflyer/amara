@@ -4,14 +4,13 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public.Point2D;
 import java.util.ArrayList;
 
 /**
  *
  * @author Philipp
  */
-public class SetPolygon
+class SetPolygon
 {
     private ArrayList<HolePolygon> polys = new ArrayList<HolePolygon>();
 
@@ -82,6 +81,18 @@ public class SetPolygon
             if (poly.hasLooseLines()) return true;
         }
         return false;
+    }
+    public boolean isValid()
+    {
+        for (int i = 0; i < polys.size(); i++)
+        {
+            if(!polys.get(i).isValid()) return false;
+            for (int j = i + 1; j < polys.size(); j++)
+            {
+                if(HolePolygonUtil.haveOverlappingAreas(polys.get(i), polys.get(j))) return false;
+            }
+        }
+        return true;
     }
 
     public double signedArea()

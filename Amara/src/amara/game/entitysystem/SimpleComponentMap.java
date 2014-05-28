@@ -140,13 +140,7 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
         HashSet<Integer> entitySet = new HashSet<Integer>();
         for(Class componentClass: componentsClasses)
         {
-            for(int entity: getComponentMap(componentClass).keySet())
-            {
-                if(hasAnyComponent(entity, componentsClasses))
-                {
-                    entitySet.add(entity);
-                }
-            }
+            entitySet.addAll(getComponentMap(componentClass).keySet());
         }
         return entitySet;
     }
@@ -159,8 +153,13 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
         }
     }
 
-    public boolean hasEntity(int entity) {
-        return !getComponents(entity).isEmpty();
+    public boolean hasEntity(int entity)
+    {
+        for (ConcurrentHashMap<Integer, Object> map : componentMaps.values())
+        {
+            if(map.containsKey(entity)) return true;
+        }
+        return false;
     }
     
 }

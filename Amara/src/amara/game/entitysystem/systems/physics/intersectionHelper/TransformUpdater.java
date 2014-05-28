@@ -15,10 +15,10 @@ import java.util.HashSet;
  */
 public class TransformUpdater
 {
-    public boolean updateTransforms(EntityWorld entityWorld)
+    public void updateTransforms(EntityWorld entityWorld)
     {
         ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, PositionComponent.class, DirectionComponent.class, ScaleComponent.class);
-        if(observer.isEmpty()) return false;
+        if(observer.isEmpty()) return;
         HashSet<Integer> updateNeeded = new HashSet<Integer>();
         for(int entity: observer.getRemoved().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
         {
@@ -45,7 +45,6 @@ public class TransformUpdater
             updateTransforms(entityWorld.getWrapped(entity));
         }
         observer.reset();
-        return true;
     }
     
     private void updateTransforms(EntityWrapper entity)
@@ -53,18 +52,13 @@ public class TransformUpdater
         HitboxComponent hitbox = entity.getComponent(HitboxComponent.class);
         if(hitbox == null) return;
         PositionComponent pos = entity.getComponent(PositionComponent.class);
+        if(pos == null) return;
         DirectionComponent dir = entity.getComponent(DirectionComponent.class);
         ScaleComponent scale = entity.getComponent(ScaleComponent.class);
         Shape shape = hitbox.getShape();
         Transform transform = shape.getTransform();
-        if(pos != null)
-        {
-            transform.setPosition(pos.getPosition().x, pos.getPosition().y);
-        }
-        else
-        {
-            transform.setPosition(0, 0);
-        }
+        
+        transform.setPosition(pos.getPosition().x, pos.getPosition().y);
         if(dir != null)
         {
             transform.setRadian(dir.getRadian());

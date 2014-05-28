@@ -4,14 +4,13 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public.*;
 import java.util.ArrayList;
 
 /**
  *
  * @author Philipp
  */
-public class MinkowskiUtil
+class MinkowskiUtil
 {
     
     public static SetPolygon flip(SetPolygon set)
@@ -20,8 +19,10 @@ public class MinkowskiUtil
     }
     public static SetPolygon add(SetPolygon a, SetPolygon b)
     {
-        SetPolygon result = new SetPolygon();
-        if (a.numPolygons() == 0 || b.numPolygons() == 0) return result;
+        if (a.numPolygons() == 0 || b.numPolygons() == 0) return new SetPolygon();
+        ArrayList<SetPolygon> list = new ArrayList<SetPolygon>();
+        ArrayList<SetPolygon> list2 = new ArrayList<SetPolygon>();
+        //SetPolygon result = new SetPolygon();
 
         for (int i = 0; i < a.numPolygons(); i++)
         {
@@ -29,7 +30,8 @@ public class MinkowskiUtil
             if (b.getPolygon(0).numSimplePolys() == 0) return new SetPolygon(new HolePolygon());
             SimplePolygon simple = b.getPolygon(0).getSimplePoly(0);
             Point2D translation = simple.getPoint(0);
-            result = union(result, scaleTranslate(new SetPolygon(polyA), translation, 1));
+            list2.add(scaleTranslate(new SetPolygon(polyA), translation, 1));
+            //result = union(result, scaleTranslate(new SetPolygon(polyA), translation, 1));
         }
         for (int i = 0; i < b.numPolygons(); i++)
         {
@@ -37,7 +39,8 @@ public class MinkowskiUtil
             if (a.getPolygon(0).numSimplePolys() == 0) return new SetPolygon(new HolePolygon());
             SimplePolygon simple = a.getPolygon(0).getSimplePoly(0);
             Point2D translation = simple.getPoint(0);
-            result = union(result, scaleTranslate(new SetPolygon(polyB), translation, 1));
+            list2.add(scaleTranslate(new SetPolygon(polyB), translation, 1));
+            //result = union(result, scaleTranslate(new SetPolygon(polyB), translation, 1));
         }
 
         for (int o = 0; o < a.numPolygons(); o++)
@@ -65,7 +68,8 @@ public class MinkowskiUtil
                                 points.add(simpleA.getPoint(j).add(simpleB.getPoint(k)));
                                 points.add(simpleA.getPoint(i).add(simpleB.getPoint(k)));
 
-                                result = union(result, fromPoints(points));
+                                list.add(fromPoints(points));
+                                //result = union(result, fromPoints(points));
                             }
                         }
                     }
@@ -73,7 +77,11 @@ public class MinkowskiUtil
             }
         }
 
-        return result;
+        SetPolygonUtil.preSortedUnion(list);
+        list.addAll(list2);
+        SetPolygonUtil.preSortedUnion(list);
+        return list.get(0);
+        //return result;
     }
 
     private static SetPolygon union(SetPolygon a, SetPolygon b)

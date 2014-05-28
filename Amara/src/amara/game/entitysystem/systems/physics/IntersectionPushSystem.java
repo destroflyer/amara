@@ -4,14 +4,12 @@
  */
 package amara.game.entitysystem.systems.physics;
 
-import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionInformant;
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.physics.HitboxComponent;
-import amara.game.entitysystem.components.physics.PositionComponent;
-import amara.game.entitysystem.components.physics.IntersectionPushComponent;
-import com.jme3.math.Vector2f;
+import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.systems.physics.intersection.*;
+import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionInformant;
 import amara.game.entitysystem.systems.physics.shapes.*;
+import com.jme3.math.Vector2f;
 
 /**
  *
@@ -28,6 +26,7 @@ public class IntersectionPushSystem implements EntitySystem
 
     public void update(EntityWorld entityWorld, float deltaSeconds)
     {
+        info.updateTrackers(entityWorld);
         for(Pair<Integer> pair: info.getEntries(entityWorld))
         {
             if(entityWorld.hasAllComponents(pair.getA(), IntersectionPushComponent.class, PositionComponent.class))

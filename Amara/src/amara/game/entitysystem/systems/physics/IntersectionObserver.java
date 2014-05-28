@@ -5,7 +5,6 @@
 package amara.game.entitysystem.systems.physics;
 
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.systems.physics.intersection.*;
 import amara.game.entitysystem.systems.physics.intersectionHelper.*;
 import java.util.*;
@@ -24,37 +23,37 @@ public class IntersectionObserver implements IntersectionInformant
     private Set<Pair<Integer>> leavers = new HashSet<Pair<Integer>>();
     private IntersectionTracker<Pair<Integer>> tracker = new IntersectionTracker<Pair<Integer>>();
     
-    public void update(EntityWorld entityWorld)
+    public void updateHitboxes(EntityWorld entityWorld)
     {
         transformUpdater.updateTransforms(entityWorld);
-        if(hitboxUpdater.updateHitboxes(entityWorld))
-        {
-            IntersectionFilter filter = new IntersectionFilter(entityWorld);
+        hitboxUpdater.updateHitboxes(entityWorld);
+    }
+    
+    public void updateTrackers(EntityWorld entityWorld)
+    {
+        updateHitboxes(entityWorld);
+        IntersectionFilter filter = new IntersectionFilter(entityWorld);
 
-            tracker.next(hitboxUpdater.getFilteredIntersections(filter));
-            entries = null;
-            repeaters = null;
-            leavers = null;
-        }
+        tracker.next(hitboxUpdater.getFilteredIntersections(filter));
+        entries = null;
+        repeaters = null;
+        leavers = null;
     }
 
     public Set<Pair<Integer>> getEntries(EntityWorld entityWorld)
     {
-        update(entityWorld);
         if(entries == null) entries = tracker.getEntries();
         return entries;
     }
 
     public Set<Pair<Integer>> getRepeaters(EntityWorld entityWorld)
     {
-        update(entityWorld);
         if(repeaters == null) repeaters = tracker.getRepeaters();
         return repeaters;
     }
 
     public Set<Pair<Integer>> getLeavers(EntityWorld entityWorld)
     {
-        update(entityWorld);
         if(leavers == null)
         {
             leavers = tracker.getLeavers();

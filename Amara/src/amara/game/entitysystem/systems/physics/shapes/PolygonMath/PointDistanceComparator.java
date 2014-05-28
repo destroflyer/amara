@@ -4,14 +4,13 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public.Point2D;
 import java.util.Comparator;
 
 /**
  *
  * @author Philipp
  */
-public class PointDistanceComparator implements Comparator<Point2D>
+class PointDistanceComparator implements Comparator<Point2D>
 {
     private Point2D p;
 
