@@ -34,7 +34,10 @@ public class ApplyAddBuffsSystem implements EntitySystem{
                 buffStatusEntity = entityWorld.createEntity();
                 entityWorld.setComponent(buffStatusEntity, new ActiveBuffComponent(targetEntity, addBuffComponent.getBuffEntity()));
             }
-            entityWorld.setComponent(buffStatusEntity, new RemainingBuffDurationComponent(addBuffComponent.getDuration()));
+            float duration = addBuffComponent.getDuration();
+            if(duration != -1){
+                entityWorld.setComponent(buffStatusEntity, new RemainingBuffDurationComponent(duration));
+            }
             entityWorld.setComponent(targetEntity, new RequestUpdateAttributesComponent());
         }
     }
