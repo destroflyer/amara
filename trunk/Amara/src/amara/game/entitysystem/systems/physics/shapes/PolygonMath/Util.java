@@ -4,15 +4,13 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
 /**
  *
  * @author Philipp
  */
-public class Util
+class Util
 {
     public static final double Epsilon = 1e-6d;
     public static boolean withinEpsilon(double d)

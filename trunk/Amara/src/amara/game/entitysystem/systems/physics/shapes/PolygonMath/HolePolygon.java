@@ -4,14 +4,13 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public.Point2D;
 import java.util.*;
 
 /**
  *
  * @author Philipp
  */
-public class HolePolygon
+class HolePolygon
 {
     private ArrayList<SimplePolygon> holes = new ArrayList<SimplePolygon>();
     private SimplePolygon main;
@@ -25,13 +24,16 @@ public class HolePolygon
     {
         if(main == null) this.main = null;
         else this.main = new SimplePolygon(main);
+        assert isValid();
     }
     public HolePolygon(SimplePolygon main, ArrayList<SimplePolygon> holes)
     {
         this(main);
-        for (int i = 0; i < holes.size(); i++) {
+        for (int i = 0; i < holes.size(); i++)
+        {
             this.holes.add(new SimplePolygon(holes.get(i)));
         }
+        assert isValid();
     }
     public HolePolygon(HolePolygon poly)
     {
@@ -85,6 +87,30 @@ public class HolePolygon
         return main.areaContainsOutline(simple);
     }
 
+    public boolean isValid()
+    {
+        if(main != null)
+        {
+            if(!main.isAreaPositive()) return false;
+            for (SimplePolygon hole : holes)
+            {
+                if(!main.areaContainsOutline(hole)) return false;
+            }
+        }
+        for (int i = 0; i + 1 < holes.size(); i++)
+        {
+            for (int j = i + 1; j < holes.size(); j++)
+            {
+                if(!holes.get(i).areaContainsOutline(holes.get(j))) return false;
+            }
+        }
+        for (int i = 0; i < numSimplePolys(); i++)
+        {
+            if(!getSimplePoly(i).isValid()) return false;
+        }
+        return true;
+    }
+    
     public double signedArea()
     {
         double area = 0;

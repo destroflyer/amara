@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public;
+package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
-import java.util.ArrayList;
+import java.util.*;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -15,7 +15,8 @@ public class Polygon
 {
     private SetPolygon setPoly;
 
-    Polygon(SetPolygon setPoly) {
+    Polygon(SetPolygon setPoly)
+    {
         this.setPoly = setPoly;
     }
     
@@ -30,6 +31,10 @@ public class Polygon
     public Polygon exclude(Polygon poly)
     {
         return new Polygon(SetPolygonUtil.exclude(setPoly, poly.setPoly));
+    }
+    public Polygon inverse()
+    {
+        return new Polygon(SetPolygonUtil.inverse(setPoly));
     }
     public boolean intersects(Polygon poly)
     {
@@ -55,15 +60,41 @@ public class Polygon
         return setPoly.minBorderDistance(point);
     }
 
+    public static Polygon preSortedUnion(Collection<Polygon> polys)
+    {
+        assert !polys.isEmpty();
+        ArrayList<SetPolygon> setPolys = new ArrayList<SetPolygon>();
+        for (Polygon poly : polys)
+        {
+            setPolys.add(poly.setPoly);
+        }
+        SetPolygonUtil.preSortedUnion(setPolys);
+        return new Polygon(setPolys.get(0));
+    }
+    
+    public static void writePolysToFile(Collection<Polygon> polys, String filename)
+    {
+        throw new NotImplementedException();
+    }
+    
 //    public ArrayList<ArrayList<Point2D>> lines()
 //    {
 //        return setPoly.extractLines();
 //    }
-//
-//    public ArrayList<ArrayList<Point2D>> cutPolys()
-//    {
-//        return setPoly.extractCutPolys();
-//    }
+    
+    public ArrayList<Polygon> cutPolys()
+    {
+        ArrayList<Polygon> list = new ArrayList<Polygon>();
+        for (SimplePolygon simple : SetPolygonUtil.cutPolys(setPoly))
+        {
+            list.add(new Polygon(new SetPolygon(simple)));
+        }
+        return list;
+    }
+    public ArrayList<Point2D> triangles()
+    {
+        return SetPolygonUtil.triangles(setPoly);
+    }
     
     public double signedArea()
     {
@@ -80,6 +111,7 @@ public class Polygon
         ArrayList<SetPolygon> list = new ArrayList<SetPolygon>();
         list.add(setPoly);
         SetPolygonUtil.writePolys(filename, list);
+        System.out.println("wrote " + filename);
     }
     
     public BoundRectangle boundRectangle()

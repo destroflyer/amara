@@ -4,13 +4,11 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public.Point2D;
-
 /**
  *
  * @author Philipp
  */
-public class Point2DUtil {
+class Point2DUtil {
     public static Point2D lineSegmentIntersectionPointWithoutCorners(Point2D p1, Point2D p2, Point2D p3, Point2D p4)
         {
             assert(!p1.equals(p2));
@@ -117,6 +115,49 @@ public class Point2DUtil {
     {
         if ((ax - xAxis) * (bx - xAxis) >= 0) return Double.NaN;
         return ay + ((xAxis - ax) / (bx - ax)) * (by - ay);
+    }
+    
+    public static boolean chainsCenterIntersection(Point2D a, Point2D b, Point2D c, Point2D d, Point2D p)
+    {
+        assert !a.equals(b);
+        assert !c.equals(d);
+        
+        assert !p.equals(a);
+        assert !p.equals(b);
+        assert !p.equals(c);
+        assert !p.equals(d);
+        
+        a = a.sub(p);
+        b = b.sub(p);
+        c = c.sub(p);
+        d = d.sub(p);
+        
+        double e = Math.atan2(a.getY(), a.getX());
+        double f = Math.atan2(b.getY(), b.getX());
+        double g = Math.atan2(c.getY(), c.getX());
+        double h = Math.atan2(d.getY(), d.getX());
+        
+        if(f < e)
+        {
+            double tmp = e;
+            e = f;
+            f = tmp;
+        }
+        if(h < g)
+        {
+            double tmp = g;
+            g = h;
+            h = tmp;
+        }
+        
+        if(e <= h) return false;
+        if(g <= f) return false;
+        if(f <= h && g <= e) return false;
+        if(h <= e && f <= g) return false;
+        
+        assert false;
+        
+        return true;
     }
     
 }

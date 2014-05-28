@@ -4,14 +4,13 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public.Point2D;
 import java.util.*;
 
 /**
  *
  * @author Philipp
  */
-public class SimplePolygon
+class SimplePolygon
 {
     private ArrayList<Point2D> points = new ArrayList<Point2D>();
     private double cachedArea = Double.NaN;
@@ -97,7 +96,7 @@ public class SimplePolygon
         {
             cachedArea = calcSignedArea();
         }
-        assert(Util.withinEpsilon(cachedArea - calcSignedArea()));
+        assert(Util.withinEpsilon(cachedArea - calcSignedArea())): "" + cachedArea + " / " + calcSignedArea();
         return cachedArea;
     }
     private double calcSignedArea()
@@ -150,19 +149,19 @@ public class SimplePolygon
         return !Util.withinEpsilon(signedArea());
     }
     
-    private void insertAtTouchPoint(SimplePolygon simple)
+    public void insertAtTouchPoint(SimplePolygon simple)
     {
         assert(SimplePolygonUtil.haveCommonPoint(this, simple));
         double prevArea = signedArea();
         for (int i = 0; i < points.size(); i++)
         {
-            for (int j = 0; j < points.size(); j++)
+            for (int j = 0; j < simple.points.size(); j++)
             {
-                if (points.get(i).equals(points.get(j)))
+                if (points.get(i).equals(simple.points.get(j)))
                 {
                     insertPoly(simple, i, j);
                     assert(!hasRepetitions());
-                    assert(Util.withinEpsilon(prevArea + simple.signedArea() - signedArea()));
+                    assert(Util.withinEpsilon(prevArea + simple.signedArea() - signedArea())): "" + prevArea + " / " + simple.signedArea() + " / " + signedArea();
                     return;
                 }
             }
@@ -172,24 +171,25 @@ public class SimplePolygon
     public void insertRange(int index, Collection<Point2D> points)
     {
         this.points.addAll(index, points);
+        cachedArea = Double.NaN;
     }
     public void insertPoly(SimplePolygon simple, int i, int j)
     {
         assert(!hasRepetitions());
         assert(!simple.hasRepetitions());
-        SimplePolygon old = new SimplePolygon(points);
-        ArrayList<Point2D> tmp = new ArrayList<Point2D>();
-        for (int k = j; k < points.size(); k++)
+        SimplePolygon tmp = new SimplePolygon();
+        for (int k = j; k < simple.numPoints(); k++)
         {
-            tmp.add(points.get(k));
+            tmp.add(simple.getPoint(k));
         }
         for (int k = 0; k < j; k++)
         {
-            tmp.add(points.get(k));
+            tmp.add(simple.getPoint(k));
         }
-        assert(tmp.equals(simple));
-        points.addAll(i, tmp);
+        assert(tmp.equals(simple)): "" + j + " / " + tmp.numPoints() + " / " + simple.numPoints();
+        points.addAll(i, tmp.points);
         assert(!hasRepetitions());
+        cachedArea = Double.NaN;
     }
 
     public void smooth()
@@ -353,6 +353,25 @@ public class SimplePolygon
         assert(!hasLooseLines());
     }
 
+    public boolean isSelfTouching()
+    {
+        for (int i = 0; i + 1 < points.size(); i++)
+        {
+            for (int j = i + 1; j < points.size(); j++)
+            {
+                if(points.get(i).withinEpsilon(points.get(j))) return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean isValid()
+    {
+        if(SimplePolygonUtil.outlinesIntersect(this, this)) return false;
+        if(hasRepetitions()) return false;
+        return true;
+    }
+    
     @Override
     public boolean equals(Object obj)
     {
@@ -365,6 +384,7 @@ public class SimplePolygon
     public boolean equals(SimplePolygon poly)
     {
         if (poly.points.size() != points.size()) return false;
+        if(!Util.withinEpsilon(signedArea() - poly.signedArea())) return false;
         for (int i = 0; i < points.size(); i++)
         {
             boolean equal = true;

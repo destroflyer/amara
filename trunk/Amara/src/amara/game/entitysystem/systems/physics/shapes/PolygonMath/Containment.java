@@ -8,6 +8,6 @@ package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
  *
  * @author Philipp
  */
-public enum Containment {
+enum Containment {
     Inside, Outside, Border
 }

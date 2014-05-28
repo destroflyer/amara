@@ -8,8 +8,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.systems.physics.intersectionHelper.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Public.*;
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Util;
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import com.jme3.math.Vector2f;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +27,7 @@ public final class MapIntersectionSystem implements EntitySystem
     public MapIntersectionSystem(int mapWidth, int mapHeight, List<Shape> shapes)
     {
         this(mapWidth, mapHeight);
+        if(shapes.isEmpty()) return;
         AddObstacles(shapes);
     }
     public MapIntersectionSystem(int mapWidth, int mapHeight)
@@ -87,6 +87,7 @@ public final class MapIntersectionSystem implements EntitySystem
     
     public void AddObstacles(List<Shape> shapes)
     {
+        if(shapes.isEmpty()) return;
         //System.out.println("generating map polygon...");
         //PolygonBuilder builder = new PolygonBuilder();
         //Polygon inf = builder.build(true);
@@ -105,28 +106,30 @@ public final class MapIntersectionSystem implements EntitySystem
         }
         this.shapes.addAll(shapes);
         //System.out.println("" + mapPoly);
-        long millis = System.currentTimeMillis();
-        while(polys.size() > 1)
-        {
-            for (int i = 0; i + 1 < polys.size(); i++) {
-                Polygon poly = polys.get(i).union(polys.get(i + 1));
-                double a = polys.get(i).signedArea();
-                double b = polys.get(i + 1).signedArea();
-                double c = poly.signedArea();
-                if(!Util.withinEpsilon(a + b - c))
-                {
-                    System.out.println("" + polys.get(i));
-                    System.out.println("" + polys.get(i + 1));
-                    throw new Error("" + a + " / " + b + " / " + c);
-                }
-                polys.set(i, poly);
-                polys.remove(i + 1);
-            }
-        }
-        mapPoly = polys.get(0).union(mapPoly);
-        //System.out.println("map polygon generation - " + (System.currentTimeMillis() - millis) + "ms");
-        //mapPoly.writeToFile("mapPoly");
-        //System.out.println("wrote mapPoly");
+        //long millis = System.currentTimeMillis();
+        
+        mapPoly = Polygon.preSortedUnion(polys).union(mapPoly);
+//////        mapPoly.writeToFile("map");
+//////        
+//////        Polygon pathPoly = mapPoly.inverse();
+//////        ArrayList<Point2D> tris = pathPoly.triangles();
+//////        ArrayList<Polygon> polyTris = new ArrayList<Polygon>();
+//////        PolygonBuilder builder = new PolygonBuilder();
+//////        for (int i = 0; i < tris.size(); i += 3)
+//////        {
+//////            builder.nextOutline(false);
+//////            builder.add(tris.get(i));
+//////            builder.add(tris.get(i + 1));
+//////            builder.add(tris.get(i + 2));
+//////            polyTris.add(builder.build(false));
+//////            builder.reset();
+//////        }
+//////        
+//////        Polygon nextPathPolys = Polygon.preSortedUnion(polyTris);
+//////        nextPathPolys.writeToFile("path");
+//////        //System.out.println("map polygon generation - " + (System.currentTimeMillis() - millis) + "ms");
+//////        //mapPoly.writeToFile("mapPoly");
+//////        //System.out.println("wrote mapPoly");
     }
     
     public ArrayList<Shape> getObstacles()

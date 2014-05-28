@@ -33,10 +33,10 @@ public class HitboxUpdater
         return set;
     }
     
-    public boolean updateHitboxes(EntityWorld entityWorld)
+    public void updateHitboxes(EntityWorld entityWorld)
     {
         ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, HitboxComponent.class, HitboxActiveComponent.class);
-        if(observer.isEmpty()) return false;
+        if(observer.isEmpty()) return;
         for(int entity: observer.getRemoved().getEntitiesWithAny(HitboxComponent.class, HitboxActiveComponent.class))
         {
             remove(entity);
@@ -51,7 +51,6 @@ public class HitboxUpdater
             checkedAdd(entity);
         }
         observer.reset();
-        return true;
     }
     
     private void remove(int entity)
