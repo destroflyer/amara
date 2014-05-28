@@ -1,12 +1,12 @@
 <skin name="steve">
-    <model scale="0.58">
+    <model scale="0.5">
         <position>
             <location>0,0,0</location>
             <direction>-1,0,0</direction>
         </position>
         <material>
             <!--body-->
-            <texture index="0" filter="nearest">steve.png</texture>
+            <texture index="0" filter="nearest">dr_mundo.png</texture>
         </material>
     </model>
 </skin>

@@ -35,10 +35,10 @@ public class BuffVisualisationSystem_Turbo extends BuffVisualisationSystem{
         particleEmitter.getParticleInfluencer().setInitialVelocity(new Vector3f(0, 0, -1f));
         particleEmitter.getParticleInfluencer().setVelocityVariation(0);
         particleEmitter.setGravity(Vector3f.ZERO);
-        particleEmitter.setParticlesPerSec(3.5f);
+        particleEmitter.setParticlesPerSec(11);
         particleEmitter.setShape(new EmitterPointShape(new Vector3f(0, 0, 0)));
-        particleEmitter.setLowLife(3.5f);
-        particleEmitter.setHighLife(3.5f);
+        particleEmitter.setLowLife(1);
+        particleEmitter.setHighLife(1);
         particleEmitter.setStartSize(0.6f);
         particleEmitter.setEndSize(0.6f);
         particleEmitter.setStartColor(new ColorRGBA(1, 0.5f, 0, 1));

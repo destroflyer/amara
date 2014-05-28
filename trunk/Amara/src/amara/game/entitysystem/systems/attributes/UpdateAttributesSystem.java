@@ -24,6 +24,7 @@ public class UpdateAttributesSystem implements EntitySystem{
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(RequestUpdateAttributesComponent.class)))
         {
             float maximumHealth = 0;
+            float healthRegeneration = 0;
             float attackDamage = 0;
             float abilityPower = 0;
             float attackSpeed = 0;
@@ -31,6 +32,10 @@ public class UpdateAttributesSystem implements EntitySystem{
             BaseMaximumHealthComponent baseMaximumHealthComponent = entityWrapper.getComponent(BaseMaximumHealthComponent.class);
             if(baseMaximumHealthComponent != null){
                 maximumHealth += baseMaximumHealthComponent.getValue();
+            }
+            BaseHealthRegenerationComponent baseHealthRegenerationComponent = entityWrapper.getComponent(BaseHealthRegenerationComponent.class);
+            if(baseHealthRegenerationComponent != null){
+                healthRegeneration += baseHealthRegenerationComponent.getValue();
             }
             BaseAttackDamageComponent baseAttackDamageComponent = entityWrapper.getComponent(BaseAttackDamageComponent.class);
             if(baseAttackDamageComponent != null){
@@ -67,6 +72,7 @@ public class UpdateAttributesSystem implements EntitySystem{
                 }
             }
             maximumHealth += attributeBonus.getFlatMaximumHealth();
+            healthRegeneration += attributeBonus.getFlatHealthRegeneration();
             attackDamage += attributeBonus.getFlatAttackDamage();
             abilityPower += attributeBonus.getFlatAbilityPower();
             attackSpeed += (attackSpeed * attributeBonus.getPercentageAttackSpeed());
@@ -77,6 +83,7 @@ public class UpdateAttributesSystem implements EntitySystem{
                 entityWrapper.setComponent(new HealthComponent(maximumHealth));
                 entityWrapper.setComponent(new IsAliveComponent());
             }
+            entityWrapper.setComponent(new HealthRegenerationComponent(healthRegeneration));
             entityWrapper.setComponent(new AttackDamageComponent(attackDamage));
             entityWrapper.setComponent(new AbilityPowerComponent(abilityPower));
             entityWrapper.setComponent(new AttackSpeedComponent(attackSpeed));
@@ -99,6 +106,10 @@ public class UpdateAttributesSystem implements EntitySystem{
         BonusFlatMaximumHealthComponent bonusFlatMaximumHealthComponent = itemWrapper.getComponent(BonusFlatMaximumHealthComponent.class);
         if(bonusFlatMaximumHealthComponent != null){
             attributeBonus.addFlatMaximumHealth(bonusFlatMaximumHealthComponent.getValue());
+        }
+        BonusFlatHealthRegenerationComponent bonusFlatHealthRegenerationComponen = itemWrapper.getComponent(BonusFlatHealthRegenerationComponent.class);
+        if(bonusFlatHealthRegenerationComponen != null){
+            attributeBonus.addFlatHealthRegeneration(bonusFlatHealthRegenerationComponen.getValue());
         }
         BonusFlatAttackDamageComponent bonusFlatAttackDamageComponent = itemWrapper.getComponent(BonusFlatAttackDamageComponent.class);
         if(bonusFlatAttackDamageComponent != null){
