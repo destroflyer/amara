@@ -8,6 +8,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.buffs.*;
+import amara.game.entitysystem.components.effects.buffs.areas.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
@@ -102,6 +103,8 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     RemoveEntityComponent.class,
                     AddBuffComponent.class,
                     RemoveBuffComponent.class,
+                    AddBuffAreaComponent.class,
+                    RemoveBuffAreaComponent.class,
                     AddBindingComponent.class,
                     RemoveBindingComponent.class,
                     AddBindingImmuneComponent.class,

@@ -6,8 +6,10 @@ package amara.game.entitysystem;
 
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.*;
+import amara.game.entitysystem.components.buffs.areas.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.buffs.*;
+import amara.game.entitysystem.components.effects.buffs.areas.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.effects.general.*;
@@ -1060,8 +1062,9 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
 
             EntityWrapper infectedCleaver = createFromTemplate(entityWorld, "infected_cleaver");
+            EntityWrapper burningAgony = createFromTemplate(entityWorld, "burning_agony," + 1);
             EntityWrapper sadism = createFromTemplate(entityWorld, "sadism");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{infectedCleaver.getId(), sadism.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(new int[]{infectedCleaver.getId(), burningAgony.getId(), sadism.getId()}));
         }
         else if(templateName.equals("infected_cleaver")){
             entityWrapper.setComponent(new NameComponent("Infected Cleaver"));
@@ -1115,6 +1118,94 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new LifetimeComponent(0.8f));
+        }
+        else if(templateName.equals("burning_agony")){
+            entityWrapper.setComponent(new NameComponent("Burning Agony"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("burning_agony"));
+            //Add buff area
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new CasterTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper buffArea = entityWorld.getWrapped(entityWorld.createEntity());
+            buffArea.setComponent(new HitboxComponent(new Circle(2.25f)));
+            EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
+            targetRules.setComponent(new AcceptEnemiesComponent());
+            buffArea.setComponent(new AreaBuffTargetRulesComponent(targetRules.getId()));
+            EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
+            buff.setComponent(new BuffVisualisationComponent("burning"));
+            EntityWrapper buffEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            buffEffect.setComponent(new FlatMagicDamageComponent(30));
+            buff.setComponent(new RepeatingEffectComponent(buffEffect.getId(), 0.5f));
+            buffArea.setComponent(new AreaBuffComponent(buff.getId()));
+            effect1.setComponent(new AddBuffAreaComponent(buffArea.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Add visualisation
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new CasterTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper visualisationBuff = entityWorld.getWrapped(entityWorld.createEntity());
+            visualisationBuff.setComponent(new BuffVisualisationComponent("burning"));
+            effect2.setComponent(new AddBuffComponent(visualisationBuff.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Replace spell
+            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger3.setComponent(new CasterTargetComponent());
+            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper burningAgonyDeactivate = createFromTemplate(entityWorld, "burning_agony_deactivate," + parameters[0] + "," + buffArea.getId() + "," + entityWrapper.getId() + "," + visualisationBuff.getId());
+            effect3.setComponent(new ReplaceSpellWithExistingSpellComponent(parameters[0], burningAgonyDeactivate.getId()));
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId(), effectTrigger3.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger4.setComponent(new CasterTargetComponent());
+            EntityWrapper effect4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect4.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effectTrigger4.setComponent(new TriggeredEffectComponent(effect4.getId()));
+            effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+        }
+        else if(templateName.equals("burning_agony_deactivate")){
+            entityWrapper.setComponent(new NameComponent("Deactivate Burning Agony"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("burning_agony_deactivate"));
+            //Remove buff area
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new CasterTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new RemoveBuffAreaComponent(parameters[1]));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Remove visualisation
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new CasterTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new RemoveBuffComponent(parameters[3]));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Replace spell
+            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger3.setComponent(new CasterTargetComponent());
+            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect3.setComponent(new ReplaceSpellWithExistingSpellComponent(parameters[0], parameters[2]));
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId(), effectTrigger3.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger4.setComponent(new CasterTargetComponent());
+            EntityWrapper effect4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect4.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effectTrigger4.setComponent(new TriggeredEffectComponent(effect4.getId()));
+            effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
         }
         else if(templateName.equals("sadism")){
             entityWrapper.setComponent(new NameComponent("Sadism"));

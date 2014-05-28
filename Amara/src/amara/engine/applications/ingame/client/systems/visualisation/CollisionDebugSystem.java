@@ -69,8 +69,13 @@ public class CollisionDebugSystem implements EntitySystem{
         Spatial geometry = node.getChild(getGeometryName(entity));
         if(geometry != null){
             PositionComponent positionComponent = entityWorld.getComponent(entity, PositionComponent.class);
-            Vector2f location = positionComponent.getPosition();
-            geometry.setLocalTranslation(location.getX(), 0, location.getY());
+            if(positionComponent != null){
+                Vector2f location = positionComponent.getPosition();
+                geometry.setLocalTranslation(location.getX(), 0, location.getY());
+            }
+            else{
+                removeGeometry(entity);
+            }
         }
     }
     

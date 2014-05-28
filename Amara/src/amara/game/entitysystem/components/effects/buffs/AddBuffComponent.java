@@ -17,6 +17,10 @@ public class AddBuffComponent{
         
     }
     
+    public AddBuffComponent(int buffEntity){
+        this(buffEntity, -1);
+    }
+    
     public AddBuffComponent(int buffEntity, float duration){
         this.buffEntity = buffEntity;
         this.duration = duration;

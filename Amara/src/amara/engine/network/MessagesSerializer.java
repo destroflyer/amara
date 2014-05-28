@@ -14,6 +14,7 @@ import amara.engine.network.messages.entitysystem.*;
 import amara.engine.network.messages.protocol.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.*;
+import amara.game.entitysystem.components.buffs.areas.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.buffs.*;
@@ -43,6 +44,7 @@ import amara.game.entitysystem.components.targets.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.camps.*;
+import amara.game.entitysystem.components.effects.buffs.areas.*;
 import amara.game.entitysystem.components.effects.physics.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
@@ -120,6 +122,11 @@ public class MessagesSerializer{
                         ContinuousEffectComponent.class,
                         RemoveEffectTriggersComponent.class,
                         RepeatingEffectComponent.class,
+                        //buffs/areas
+                        AreaBuffComponent.class,
+                        AreaBuffTargetRulesComponent.class,
+                        AreaOriginComponent.class,
+                        AreaSourceComponent.class,
                         //buffs/status
                         ActiveBuffComponent.class,
                         BuffVisualisationComponent.class,
@@ -137,6 +144,9 @@ public class MessagesSerializer{
                         //effects/buffs
                         AddBuffComponent.class,
                         RemoveBuffComponent.class,
+                        //effects/buffs/areas
+                        AddBuffAreaComponent.class,
+                        RemoveBuffAreaComponent.class,
                         //effects/casts
                         EffectCastDirectionComponent.class,
                         EffectCastPositionComponent.class,
