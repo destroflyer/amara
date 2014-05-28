@@ -8,31 +8,40 @@ package amara.game.entitysystem.systems.physics.intersection;
  *
  * @author Philipp
  */
-public class Pair<T> {
+public class Pair<T>
+{
+    private T a, b;
 
-    public Pair(T a, T b) {
+    public Pair(T a, T b)
+    {
         this.a = a;
         this.b = b;
     }
 
-    public T getA() {
+    public T getA()
+    {
         return a;
     }
 
-    public T getB() {
+    public T getB()
+    {
         return b;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return a.hashCode() ^ b.hashCode();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if(obj instanceof Pair) return ((((Pair)obj).getA() == b && ((Pair)obj).getB() == a) || (((Pair)obj).getA() == a && ((Pair)obj).getB() == b));
+    public boolean equals(Object obj)
+    {
+        if(obj.getClass() == Pair.class) return equals((Pair)obj);
         return false;
     }
-    
-    T a, b;
+    public boolean equals(Pair<T> pair)
+    {
+        return ((pair.getA().equals(b) && pair.getB().equals(a)) || (pair.getA().equals(a) && pair.getB().equals(b)));
+    }
 }
