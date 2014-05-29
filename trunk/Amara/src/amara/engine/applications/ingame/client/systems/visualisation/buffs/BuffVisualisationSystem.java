@@ -39,7 +39,7 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
             ActiveBuffComponent activeBuffComponent = observer.getRemoved().getComponent(entity, ActiveBuffComponent.class);
             if(shouldBeVisualized(entityWorld, activeBuffComponent)){
                 int targetEntityID = observer.getRemoved().getComponent(entity, ActiveBuffComponent.class).getTargetEntityID();
-                removeVisualAttachment(targetEntityID);
+                removeVisualAttachment(targetEntityID, entity);
             }
         }
         observer.reset();
@@ -49,11 +49,11 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
         ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
         if(shouldBeVisualized(entityWorld, activeBuffComponent)){
             int targetEntityID = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getTargetEntityID();
-            removeVisualAttachment(targetEntityID);
+            removeVisualAttachment(targetEntityID, buffStatusEntity);
             Node node = entitySceneMap.requestNode(targetEntityID);
             Spatial visualAttachment = createBuffVisualisation(entityWorld, targetEntityID);
             if(visualAttachment != null){
-                visualAttachment.setName(getVisualAttachmentID());
+                visualAttachment.setName(getVisualAttachmentID(buffStatusEntity));
                 node.attachChild(visualAttachment);
             }
         }
@@ -64,13 +64,13 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
         return ((buffVisualisationComponent != null) && (buffVisualisationComponent.getName().equals(visualisationName)));
     }
     
-    private void removeVisualAttachment(int entity){
+    private void removeVisualAttachment(int entity, int buffStatusEntity){
         Node node = entitySceneMap.requestNode(entity);
-        node.detachChildNamed(getVisualAttachmentID());
+        node.detachChildNamed(getVisualAttachmentID(buffStatusEntity));
     }
     
-    private String getVisualAttachmentID(){
-        return ("buffVisualisation_" + visualisationName);
+    private String getVisualAttachmentID(int buffStatusEntity){
+        return ("buffVisualisation_" + visualisationName + "_" + buffStatusEntity);
     }
     
     protected abstract Spatial createBuffVisualisation(EntityWorld entityWorld, int entity);
