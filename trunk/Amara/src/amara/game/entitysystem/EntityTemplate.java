@@ -1036,6 +1036,9 @@ public class EntityTemplate{
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+            EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            autoAttackAnimation.setComponent(new NameComponent("punch"));
+            entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
             entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
             
             entityWrapper.setComponent(new HitboxComponent(new Circle(0.8f)));
@@ -1058,7 +1061,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
 
-            EntityWrapper autoAttack = createFromTemplate(entityWorld, "default_autoattack");
+            EntityWrapper autoAttack = createFromTemplate(entityWorld, "melee_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
 
             EntityWrapper infectedCleaver = createFromTemplate(entityWorld, "infected_cleaver");
@@ -1090,6 +1093,12 @@ public class EntityTemplate{
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(12));
             entityWrapper.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation.getId()}));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
+            entityWrapper.setComponent(new CastDurationComponent(0.3f));
+            entityWrapper.setComponent(new StopBeforeCastingComponent());
+            EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            castAnimation.setComponent(new NameComponent("punch"));
+            castAnimation.setComponent(new LoopDurationComponent(0.3f));
+            entityWrapper.setComponent(new CastAnimationComponent(castAnimation.getId()));
             entityWrapper.setComponent(new CooldownComponent(3));
         }
         else if(templateName.equals("infected_cleaver_object")){
