@@ -802,7 +802,7 @@
             </faces>
         </submesh>
     </submeshes>
-    <skeletonlink name="player.skeleton"/>
+    <skeletonlink name="steve.skeleton"/>
     <boneassignments>
         <vertexboneassignment vertexindex="0" weight="1.000000238418579" boneindex="1"/>
         <vertexboneassignment vertexindex="1" weight="1.000000238418579" boneindex="1"/>
