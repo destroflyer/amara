@@ -18,6 +18,7 @@ public class PolyHelper
     
     public static Polygon fromShape(Shape shape)
     {
+        if(shape instanceof PolygonShape) return ((PolygonShape)shape).getTransformed();
         SimpleConvex convex;
         if(shape instanceof SimpleConvex)
         {

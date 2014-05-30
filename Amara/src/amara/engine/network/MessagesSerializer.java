@@ -54,6 +54,7 @@ import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.synchronizing.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import amara.game.games.PlayerData;
 import amara.launcher.client.protocol.*;
 
@@ -235,8 +236,14 @@ public class MessagesSerializer{
                             RegularCyclic.class,
                             Shape.class,
                             SimpleConvex.class,
-                            Transform.class,
+                            amara.game.entitysystem.systems.physics.shapes.Transform.class,
                             Vector2D.class,
+                            PolygonShape.class,
+                                Polygon.class,
+                                    SetPolygon.class,
+                                    HolePolygon.class,
+                                    SimplePolygon.class,
+                                    Point2D.class,
                         MovementComponent.class,
                         PositionComponent.class,
                         ScaleComponent.class,

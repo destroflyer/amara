@@ -593,4 +593,24 @@ class SetPolygonUtil
             }
         }
     }
+
+    static SetPolygon transform(SetPolygon set, Transform t)
+    {
+        SetPolygon result = new SetPolygon();
+        for (int i = 0; i < set.numPolygons(); i++)
+        {
+            result.add(HolePolygonUtil.transform(set.getPolygon(i), t));
+        }
+        return result;
+    }
+
+    static HashSet<Point2D> points(SetPolygon set)
+    {
+        HashSet<Point2D> points = new HashSet<Point2D>();
+        for (int i = 0; i < set.numPolygons(); i++)
+        {
+            points.addAll(HolePolygonUtil.points(set.getPolygon(i)));
+        }
+        return points;
+    }
 }
