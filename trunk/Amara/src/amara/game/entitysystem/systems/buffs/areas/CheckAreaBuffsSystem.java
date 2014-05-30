@@ -10,6 +10,7 @@ import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.areas.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.casts.*;
+import amara.game.entitysystem.systems.physics.intersection.IntersectionTracker;
 import amara.game.entitysystem.systems.physics.intersection.Pair;
 import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionInformant;
 import amara.game.entitysystem.systems.targets.TargetUtil;
@@ -27,9 +28,9 @@ public class CheckAreaBuffsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        intersectionInformant.updateTrackers(entityWorld);
-        Set<Pair<Integer>> intersectionEntries = intersectionInformant.getEntries(entityWorld);
-        Set<Pair<Integer>> intersectionLeavers = intersectionInformant.getLeavers(entityWorld);
+        IntersectionTracker<Pair<Integer>> tracker = intersectionInformant.getTracker(entityWorld, this);
+        Set<Pair<Integer>> intersectionEntries = tracker.getEntries();
+        Set<Pair<Integer>> intersectionLeavers = tracker.getLeavers();
         for(int buffAreaEntity : entityWorld.getEntitiesWithAll(AreaOriginComponent.class))
         {
             int buffEntity = entityWorld.getComponent(buffAreaEntity, AreaBuffComponent.class).getBuffEntity();

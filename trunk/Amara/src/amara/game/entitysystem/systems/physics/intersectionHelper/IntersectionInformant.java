@@ -5,8 +5,7 @@
 package amara.game.entitysystem.systems.physics.intersectionHelper;
 
 import amara.game.entitysystem.EntityWorld;
-import amara.game.entitysystem.systems.physics.intersection.Pair;
-import java.util.Set;
+import amara.game.entitysystem.systems.physics.intersection.*;
 
 /**
  *
@@ -14,8 +13,10 @@ import java.util.Set;
  */
 public interface IntersectionInformant
 {
-    public Set<Pair<Integer>> getEntries(EntityWorld entityWorld);
-    public Set<Pair<Integer>> getRepeaters(EntityWorld entityWorld);
-    public Set<Pair<Integer>> getLeavers(EntityWorld entityWorld);
-    public void updateTrackers(EntityWorld entityWorld);
+//    public Set<Pair<Integer>> getEntries(EntityWorld entityWorld);
+//    public Set<Pair<Integer>> getRepeaters(EntityWorld entityWorld);
+//    public Set<Pair<Integer>> getLeavers(EntityWorld entityWorld);
+//    public void updateTrackers(EntityWorld entityWorld);
+    public void updateHitboxes(EntityWorld entityWorld);
+    public IntersectionTracker<Pair<Integer>> getTracker(EntityWorld entityWorld, Object key);
 }

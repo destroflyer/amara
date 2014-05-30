@@ -26,8 +26,8 @@ public class IntersectionPushSystem implements EntitySystem
 
     public void update(EntityWorld entityWorld, float deltaSeconds)
     {
-        info.updateTrackers(entityWorld);
-        for(Pair<Integer> pair: info.getEntries(entityWorld))
+        IntersectionTracker<Pair<Integer>> tracker = info.getTracker(entityWorld, this);
+        for(Pair<Integer> pair: tracker.getEntries())
         {
             if(entityWorld.hasAllComponents(pair.getA(), IntersectionPushComponent.class, PositionComponent.class))
             {
@@ -37,7 +37,7 @@ public class IntersectionPushSystem implements EntitySystem
                 }
             }
         }
-        for(Pair<Integer> pair: info.getRepeaters(entityWorld))
+        for(Pair<Integer> pair: tracker.getRepeaters())
         {
             if(entityWorld.hasAllComponents(pair.getA(), IntersectionPushComponent.class, PositionComponent.class))
             {

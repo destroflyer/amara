@@ -25,8 +25,8 @@ public class TriggerCollisionEffectSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        info.updateTrackers(entityWorld);
-        for(Pair<Integer> pair: info.getEntries(entityWorld)){
+        IntersectionTracker<Pair<Integer>> tracker = info.getTracker(entityWorld, this);
+        for(Pair<Integer> pair: tracker.getEntries()){
             checkEffectTriggers(entityWorld, pair.getA(), pair.getB());
             checkEffectTriggers(entityWorld, pair.getB(), pair.getA());
         }
