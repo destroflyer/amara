@@ -1066,8 +1066,9 @@ public class EntityTemplate{
 
             EntityWrapper infectedCleaver = createFromTemplate(entityWorld, "infected_cleaver");
             EntityWrapper burningAgony = createFromTemplate(entityWorld, "burning_agony," + 1);
+            EntityWrapper eventHorizon = createFromTemplate(entityWorld, "event_horizon");
             EntityWrapper sadism = createFromTemplate(entityWorld, "sadism");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{infectedCleaver.getId(), burningAgony.getId(), sadism.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(new int[]{infectedCleaver.getId(), burningAgony.getId(), eventHorizon.getId(), sadism.getId()}));
         }
         else if(templateName.equals("infected_cleaver")){
             entityWrapper.setComponent(new NameComponent("Infected Cleaver"));
@@ -1215,6 +1216,45 @@ public class EntityTemplate{
             effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+        }
+        else if(templateName.equals("event_horizon")){
+            entityWrapper.setComponent(new NameComponent("Event Horizon"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("event_horizon"));
+            //Target effect
+            EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger.setComponent(new TargetTargetComponent());
+            EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
+            effect.setComponent(new AddStunComponent(2.5f));
+            effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
+            effectTrigger.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Spawn object
+            EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
+            spawnInformation.setComponent(new SpawnTemplateComponent("event_horizon_object"));
+            entityWrapper.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation.getId()}));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
+            entityWrapper.setComponent(new RangeComponent(12));
+            entityWrapper.setComponent(new CooldownComponent(5));
+        }
+        else if(templateName.equals("event_horizon_object")){
+            entityWrapper.setComponent(new ModelComponent("Models/event_horizon/skin.xml"));
+            entityWrapper.setComponent(new HitboxComponent(new Circle(4.5f)));
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
+            targetRules.setComponent(new AcceptEnemiesComponent());
+            entityWrapper.setComponent(new IntersectionRulesComponent(targetRules.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new CollisionTriggerComponent());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new TriggerCastedSpellEffectsComponent());
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new LifetimeComponent(3));
         }
         else if(templateName.equals("sadism")){
             entityWrapper.setComponent(new NameComponent("Sadism"));
