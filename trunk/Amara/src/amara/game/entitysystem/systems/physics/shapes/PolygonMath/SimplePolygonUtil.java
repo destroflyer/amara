@@ -518,4 +518,25 @@ class SimplePolygonUtil
         assert simple.isValid();
         return simple;
     }
+    
+    static SimplePolygon transform(SimplePolygon simple, Transform t)
+    {
+        if(simple == null) return null;
+        SimplePolygon result = new SimplePolygon();
+        for (int i = 0; i < simple.numPoints(); i++)
+        {
+            result.add(t.transform(simple.getPoint(i)));
+        }
+        return result;
+    }
+    
+    static HashSet<Point2D> points(SimplePolygon simple)
+    {
+        HashSet<Point2D> points = new HashSet<Point2D>();
+        for (int i = 0; i < simple.numPoints(); i++)
+        {
+            points.add(simple.getPoint(i));
+        }
+        return points;
+    }
 }

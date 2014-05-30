@@ -212,4 +212,24 @@ class HolePolygonUtil
         return hole;
     }
     
+    static HolePolygon transform(HolePolygon hole, Transform t)
+    {
+        HolePolygon result = new HolePolygon(SimplePolygonUtil.transform(hole.mainPoly(), t));
+        for (int i = 0; i < hole.numHolePolys(); i++)
+        {
+            result.add(SimplePolygonUtil.transform(hole.getHolePoly(i), t));
+        }
+        return result;
+    }
+
+    static HashSet<Point2D> points(HolePolygon polygon)
+    {
+        HashSet<Point2D> points = new HashSet<Point2D>();
+        for (int i = 0; i < polygon.numSimplePolys(); i++)
+        {
+            points.addAll(SimplePolygonUtil.points(polygon.getSimplePoly(i)));
+        }
+        return points;
+    }
+    
 }

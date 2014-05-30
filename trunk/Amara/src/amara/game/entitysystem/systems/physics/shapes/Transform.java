@@ -97,6 +97,6 @@ public class Transform {
         return c;
     }
     
-    protected boolean changed;
+    protected boolean changed = true;
     protected double x, y, radian, scale = 1;
 }

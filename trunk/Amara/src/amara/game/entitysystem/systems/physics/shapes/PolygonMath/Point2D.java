@@ -4,10 +4,14 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  *
  * @author Philipp
  */
+
+@Serializable
 public class Point2D
 {
     private double x, y;

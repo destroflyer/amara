@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import com.jme3.network.serializing.Serializable;
 import java.util.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -11,13 +12,23 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  *
  * @author Philipp
  */
+@Serializable
 public class Polygon
 {
     private SetPolygon setPoly;
 
+    public Polygon()
+    {
+    }
+    
     Polygon(SetPolygon setPoly)
     {
         this.setPoly = setPoly;
+    }
+    
+    public Polygon transform(double scale, double rotate, double x, double y)
+    {
+        return new Polygon(SetPolygonUtil.transform(setPoly, new Transform(scale, rotate, x, y)));
     }
     
     public Polygon union(Polygon poly)
@@ -94,6 +105,11 @@ public class Polygon
     public ArrayList<Point2D> triangles()
     {
         return SetPolygonUtil.triangles(setPoly);
+    }
+    
+    public HashSet<Point2D> points()
+    {
+        return SetPolygonUtil.points(setPoly);
     }
     
     public double signedArea()

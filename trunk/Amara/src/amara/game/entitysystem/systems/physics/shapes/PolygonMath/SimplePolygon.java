@@ -4,13 +4,15 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import com.jme3.network.serializing.Serializable;
 import java.util.*;
 
 /**
  *
  * @author Philipp
  */
-class SimplePolygon
+@Serializable
+public class SimplePolygon
 {
     private ArrayList<Point2D> points = new ArrayList<Point2D>();
     private double cachedArea = Double.NaN;

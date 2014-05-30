@@ -4,13 +4,15 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import com.jme3.network.serializing.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Philipp
  */
-class SetPolygon
+@Serializable
+public class SetPolygon
 {
     private ArrayList<HolePolygon> polys = new ArrayList<HolePolygon>();
 
