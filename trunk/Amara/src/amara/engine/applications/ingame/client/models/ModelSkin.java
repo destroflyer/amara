@@ -39,9 +39,11 @@ public class ModelSkin{
     private Element modelElement;
     private Element positionElement;
     private Element materialElement;
+    private Element modifiersElement;
     private String name;
     private float modelScale;
     private float materialAmbient;
+    private LinkedList<ModelModifier> modelModifiers = new LinkedList<ModelModifier>();
     
     private void loadFile(){
         try{
@@ -51,6 +53,7 @@ public class ModelSkin{
             modelElement = rootElement.getChild("model");
             positionElement = modelElement.getChild("position");
             materialElement = modelElement.getChild("material");
+            modifiersElement = modelElement.getChild("modifiers");
             modelScale = getAttributeValue(modelElement, "scale", 1);
             materialAmbient = getAttributeValue(materialElement, "ambient", 0.15f);
         }catch(Exception ex){
@@ -79,6 +82,7 @@ public class ModelSkin{
         Spatial spatial = loadModel();
         loadMaterial(spatial);
         loadPosition(spatial);
+        loadModifiers();
         applyGeometryInformation(spatial);
         return spatial;
     }
@@ -154,6 +158,23 @@ public class ModelSkin{
                 JMonkeyUtil.setLocalRotation(spatial, new Vector3f(direction[0], direction[1], direction[2]));
             }
         }
+    }
+    
+    private void loadModifiers(){
+        modelModifiers.clear();
+        if(modifiersElement != null){
+            for(Object childObject : modifiersElement.getChildren("modifier")){
+                Element modifierElement = (Element) childObject;
+                ModelModifier modelModifier = Util.createObjectByClassName(modifierElement.getText(), ModelModifier.class);
+                if(modelModifier != null){
+                    modelModifiers.add(modelModifier);
+                }
+            }
+        }
+    }
+
+    public LinkedList<ModelModifier> getModelModifiers(){
+        return modelModifiers;
     }
     
     private void applyGeometryInformation(Spatial spatial){

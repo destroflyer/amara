@@ -26,6 +26,9 @@ public class ModelObject extends Node implements AnimEventListener{
     
     private void loadSkin(ModelSkin skin){
         modelSpatial = skin.loadSpatial();
+        for(ModelModifier modelModifier : skin.getModelModifiers()){
+            modelModifier.modify(this);
+        }
         attachChild(modelSpatial);
         AnimControl animationControl = modelSpatial.getControl(AnimControl.class);
         if(animationControl != null){
