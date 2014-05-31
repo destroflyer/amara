@@ -6,7 +6,7 @@ package amara.engine.network.messages.protocol;
 
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
-import amara.launcher.client.protocol.PlayerStatus;
+import amara.engine.applications.masterserver.server.protocol.PlayerStatus;
 
 /**
  *

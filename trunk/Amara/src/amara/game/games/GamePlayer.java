@@ -4,24 +4,26 @@
  */
 package amara.game.games;
 
+import amara.engine.applications.masterserver.server.protocol.LobbyPlayer;
+
 /**
  *
  * @author Carl
  */
 public class GamePlayer{
 
-    public GamePlayer(PlayerData playerData, int authentificationKey){
-        this.playerData = playerData;
+    public GamePlayer(LobbyPlayer lobbyPlayer, int authentificationKey){
+        this.lobbyPlayer = lobbyPlayer;
         this.authentificationKey = authentificationKey;
     }
-    private PlayerData playerData;
+    private LobbyPlayer lobbyPlayer;
     private int authentificationKey;
     private int clientID = -1;
     private int entityID;
     private boolean isInitialized;
 
-    public PlayerData getPlayerData(){
-        return playerData;
+    public LobbyPlayer getLobbyPlayer(){
+        return lobbyPlayer;
     }
 
     public int getAuthentificationKey(){

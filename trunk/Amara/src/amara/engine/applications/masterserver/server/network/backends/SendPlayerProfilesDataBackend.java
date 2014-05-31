@@ -11,7 +11,7 @@ import com.jme3.network.Message;
 import amara.engine.applications.masterserver.server.appstates.*;
 import amara.engine.network.*;
 import amara.engine.network.messages.protocol.*;
-import amara.launcher.client.protocol.PlayerProfileData;
+import amara.engine.applications.masterserver.server.protocol.*;
 
 /**
  *
@@ -28,8 +28,14 @@ public class SendPlayerProfilesDataBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_GetPlayerProfileData){
             Message_GetPlayerProfileData message = (Message_GetPlayerProfileData) receivedMessage;
+            int id = message.getPlayerID();
             String login = message.getLogin();
-            int id = databaseAppState.getInteger("SELECT id FROM users WHERE login = '" + DatabaseAppState.escape(login) + "' LIMIT 1");
+            if(id != 0){
+                login = databaseAppState.getString("SELECT login FROM users WHERE id = " + id + " LIMIT 1");
+            }
+            else{
+                id = databaseAppState.getInteger("SELECT id FROM users WHERE login = '" + DatabaseAppState.escape(message.getLogin()) + "' LIMIT 1");
+            }
             if(id != 0){
                 PlayerProfileData playerProfileData = null;
                 long lastModificationDate = databaseAppState.getLong("SELECT last_modification_date FROM users WHERE id = " + id + " LIMIT 1");
@@ -46,10 +52,10 @@ public class SendPlayerProfilesDataBackend implements MessageBackend{
                     }
                     playerProfileData = new PlayerProfileData(id, login, meta, System.currentTimeMillis());
                 }
-                messageResponse.addAnswerMessage(new Message_PlayerProfileData(login, playerProfileData));
+                messageResponse.addAnswerMessage(new Message_PlayerProfileData(id, login, playerProfileData));
             }
             else{
-                messageResponse.addAnswerMessage(new Message_PlayerProfileDataNotExistant(login));
+                messageResponse.addAnswerMessage(new Message_PlayerProfileDataNotExistant(id, login));
             }
         }
     }

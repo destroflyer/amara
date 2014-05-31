@@ -12,7 +12,7 @@ import amara.engine.files.FileManager;
 import amara.engine.network.NetworkServer;
 import amara.game.games.RunningGames;
 import amara.game.players.ConnectedPlayers;
-import amara.launcher.client.protocol.PlayerStatus;
+import amara.engine.applications.masterserver.server.protocol.PlayerStatus;
 
 /**
  *

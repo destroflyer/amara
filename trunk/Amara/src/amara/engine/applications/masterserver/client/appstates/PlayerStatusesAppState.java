@@ -10,7 +10,7 @@ import amara.engine.applications.*;
 import amara.engine.applications.masterserver.client.network.backends.ReceivePlayerStatusesBackend;
 import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.NetworkClient;
-import amara.launcher.client.protocol.PlayerStatus;
+import amara.engine.applications.masterserver.server.protocol.PlayerStatus;
 
 /**
  *

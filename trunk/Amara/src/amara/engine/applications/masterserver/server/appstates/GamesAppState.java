@@ -35,7 +35,7 @@ public class GamesAppState extends ServerBaseAppState{
         NetworkServer networkServer = mainApplication.getStateManager().getState(NetworkServerAppState.class).getNetworkServer();
         ConnectedPlayers connectedPlayers = mainApplication.getStateManager().getState(PlayersAppState.class).getConnectedPlayers();
         for(GamePlayer player : game.getPlayers()){
-            int clientID = connectedPlayers.getClientID(player.getPlayerData().getID());
+            int clientID = connectedPlayers.getClientID(player.getLobbyPlayer().getID());
             networkServer.sendMessageToClient(clientID, new Message_GameCreated(game.getPort(), player.getAuthentificationKey()));
         }
     }

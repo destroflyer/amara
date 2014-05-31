@@ -12,9 +12,9 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class Message_StartGame extends AbstractMessage{
+public class Message_LobbyClosed extends AbstractMessage{
     
-    public Message_StartGame(){
+    public Message_LobbyClosed(){
         
     }
 }

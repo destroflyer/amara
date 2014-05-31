@@ -20,7 +20,7 @@ import amara.engine.network.NetworkClient;
 import amara.engine.network.messages.protocol.Message_EditUserMeta;
 import amara.launcher.FrameUtil;
 import amara.launcher.client.MainFrame;
-import amara.launcher.client.protocol.PlayerProfileData;
+import amara.engine.applications.masterserver.server.protocol.*;
 
 /**
  *
