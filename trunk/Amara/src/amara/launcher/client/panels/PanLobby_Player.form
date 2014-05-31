@@ -33,7 +33,6 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblSeparator1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel1"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[5, 30]"/>
         </Property>

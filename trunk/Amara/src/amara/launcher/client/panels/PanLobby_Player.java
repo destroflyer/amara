@@ -53,7 +53,6 @@ public class PanLobby_Player extends javax.swing.JPanel{
         lblIcon.setPreferredSize(new java.awt.Dimension(30, 30));
         add(lblIcon);
 
-        lblSeparator1.setText("jLabel1");
         lblSeparator1.setPreferredSize(new java.awt.Dimension(5, 30));
         add(lblSeparator1);
 
