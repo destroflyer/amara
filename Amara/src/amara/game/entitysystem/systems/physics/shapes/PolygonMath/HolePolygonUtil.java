@@ -231,5 +231,14 @@ class HolePolygonUtil
         }
         return points;
     }
+
+    static ArrayList<ArrayList<Point2D>> outlines(HolePolygon poly)
+    {
+        ArrayList<ArrayList<Point2D>> outlines = new ArrayList<ArrayList<Point2D>>();
+        for (int i = 0; i < poly.numSimplePolys(); i++) {
+            outlines.add(SimplePolygonUtil.outline(poly.getSimplePoly(i)));
+        }
+        return outlines;
+    }
     
 }

@@ -122,6 +122,11 @@ public class Polygon
         return setPoly.isInfinite();
     }
     
+    public ArrayList<ArrayList<Point2D>> outlines()
+    {
+        return SetPolygonUtil.outlines(setPoly);
+    }
+    
     public void writeToFile(String filename)
     {
         ArrayList<SetPolygon> list = new ArrayList<SetPolygon>();

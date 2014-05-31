@@ -613,4 +613,13 @@ class SetPolygonUtil
         }
         return points;
     }
+
+    static ArrayList<ArrayList<Point2D>> outlines(SetPolygon setPoly)
+    {
+        ArrayList<ArrayList<Point2D>> outlines = new ArrayList<ArrayList<Point2D>>();
+        for (int i = 0; i < setPoly.numPolygons(); i++) {
+            outlines.addAll(HolePolygonUtil.outlines(setPoly.getPolygon(i)));
+        }
+        return outlines;
+    }
 }
