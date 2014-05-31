@@ -37,16 +37,16 @@ public class HitboxUpdater
     {
         ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, HitboxComponent.class, HitboxActiveComponent.class);
         if(observer.isEmpty()) return;
-        for(int entity: observer.getRemoved().getEntitiesWithAny(HitboxComponent.class, HitboxActiveComponent.class))
+        for(int entity: observer.getRemoved().getEntitiesWithAll())
         {
             remove(entity);
         }
-        for(EntityWrapper entity: entityWorld.getWrapped(observer.getChanged().getEntitiesWithAny(HitboxComponent.class, HitboxActiveComponent.class)))
+        for(EntityWrapper entity: entityWorld.getWrapped(observer.getChanged().getEntitiesWithAll()))
         {
             remove(entity.getId());
             checkedAdd(entity);
         }
-        for(EntityWrapper entity: entityWorld.getWrapped(observer.getNew().getEntitiesWithAny(HitboxComponent.class, HitboxActiveComponent.class)))
+        for(EntityWrapper entity: entityWorld.getWrapped(observer.getNew().getEntitiesWithAll()))
         {
             checkedAdd(entity);
         }
@@ -60,11 +60,12 @@ public class HitboxUpdater
     
     private void add(int entity, Hitbox hitbox)
     {
+        assert !hitboxMap.containsKey(entity);
         sap.add(hitbox);
         hitboxMap.put(entity, hitbox);
     }
     private void checkedAdd(EntityWrapper entity)
     {
-        if(entity.hasAllComponents(HitboxComponent.class, HitboxActiveComponent.class)) add(entity.getId(), new Hitbox(entity));
+        if(entity.hasAllComponents(HitboxComponent.class, HitboxActiveComponent.class) && !hitboxMap.containsKey(entity)) add(entity.getId(), new Hitbox(entity));
     }
 }
