@@ -25,7 +25,7 @@ public class CircleMesh extends Mesh{
     private float radius;
     private int samples;
 
-    protected void updateMesh(){
+    private void updateMesh(){
         FloatBuffer positions = BufferUtils.createFloatBuffer(samples * 3);
         FloatBuffer normals = BufferUtils.createFloatBuffer(samples * 3);
         short[] indices = new short[samples * 2];

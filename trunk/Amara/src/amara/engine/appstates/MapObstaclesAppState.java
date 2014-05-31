@@ -17,6 +17,7 @@ import com.jme3.scene.Node;
 import amara.engine.applications.ingame.client.systems.debug.*;
 import amara.engine.materials.MaterialFactory;
 import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import amara.game.maps.Map;
 
 /**
@@ -77,7 +78,12 @@ public class MapObstaclesAppState extends BaseDisplayAppState implements ActionL
         }
         else if(shape instanceof SimpleConvex){
             SimpleConvex simpleConvex = (SimpleConvex) shape;
-            collisionMesh = new ShapeMesh(simpleConvex);
+            collisionMesh = new ConnectedPointsMesh((float) simpleConvex.getX(), (float) simpleConvex.getY(), simpleConvex.getPoints());
+        }
+        else if(shape instanceof PolygonShape){
+            PolygonShape polygonShape = (PolygonShape) shape;
+            Polygon polygon = polygonShape.getTransformed();
+            collisionMesh = new LinesMesh((float) polygonShape.getX(), (float) polygonShape.getY(), polygon.outlines());
         }
         else{
             collisionMesh = new CircleMesh((float) shape.getBoundRadius(), 64);

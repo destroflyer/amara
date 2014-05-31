@@ -4,6 +4,8 @@
  */
 package amara.game.entitysystem;
 
+import com.jme3.math.Vector2f;
+import amara.engine.applications.ingame.client.models.modifiers.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.*;
 import amara.game.entitysystem.components.buffs.areas.*;
@@ -35,6 +37,7 @@ import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 
 
 /**
@@ -1240,7 +1243,16 @@ public class EntityTemplate{
         }
         else if(templateName.equals("event_horizon_object")){
             entityWrapper.setComponent(new ModelComponent("Models/event_horizon/skin.xml"));
-            entityWrapper.setComponent(new HitboxComponent(new Circle(4.5f)));
+            PolygonBuilder polygonBuilder = new PolygonBuilder();
+            polygonBuilder.nextOutline(false);
+            for(Vector2f point : ModelModifier_EventHorizon.getCirclePoints(6.25f, 5)){
+                polygonBuilder.add(point.getX(), point.getY());
+            }
+            polygonBuilder.nextOutline(true);
+            for(Vector2f point : ModelModifier_EventHorizon.getCirclePoints(4.25f, 5)){
+                polygonBuilder.add(point.getX(), point.getY());
+            }
+            entityWrapper.setComponent(new HitboxComponent(new PolygonShape(polygonBuilder.build(false))));
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
