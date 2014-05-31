@@ -81,14 +81,15 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new CurrentHealthBarSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
         addEntitySystem(new StunVisualisationSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
         addEntitySystem(new SilenceVisualisationSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
+        addEntitySystem(new BuffVisualisationSystem_Bubble(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Burning(entitySceneMap));
-        addEntitySystem(new BuffVisualisationSystem_SonicWaveMark(entitySceneMap));
-        addEntitySystem(new BuffVisualisationSystem_Intervention(entitySceneMap));
-        addEntitySystem(new BuffVisualisationSystem_Zhonyas(entitySceneMap));
-        addEntitySystem(new BuffVisualisationSystem_Empowered(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Electrified(entitySceneMap));
-        addEntitySystem(new BuffVisualisationSystem_Wither(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_Empowered(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_Intervention(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_SonicWaveMark(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Turbo(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_Wither(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_Zhonyas(entitySceneMap));
         addEntitySystem(new TitleSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
     }
 
