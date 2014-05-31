@@ -539,4 +539,13 @@ class SimplePolygonUtil
         }
         return points;
     }
+
+    static ArrayList<Point2D> outline(SimplePolygon simple)
+    {
+        ArrayList<Point2D> outline = new ArrayList<Point2D>();
+        for (int i = 0; i < simple.numPoints(); i++) {
+            outline.add(simple.getPoint(i));
+        }
+        return outline;
+    }
 }
