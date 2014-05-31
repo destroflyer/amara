@@ -6,11 +6,10 @@ package amara.launcher;
 
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
 import amara.engine.applications.masterserver.server.MasterserverServerApplication;
-import amara.engine.applications.masterserver.server.network.messages.Message_StartGame;
-import amara.engine.applications.masterserver.server.protocol.AuthentificationInformation;
+import amara.engine.applications.masterserver.server.network.messages.*;
+import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.*;
-import amara.game.games.PlayerData;
 
 /**
  *
@@ -30,8 +29,8 @@ public class TestGame{
         masterClient.start();
         //Start game
         NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.sendMessage(new Message_StartGame("testmap", new PlayerData[]{
-            new PlayerData(1, "minion")
-        }));
+        networkClient.sendMessage(new Message_CreateLobby(new LobbyData("testmap")));
+        networkClient.sendMessage(new Message_SetLobbyPlayerData(new LobbyPlayerData("minion")));
+        networkClient.sendMessage(new Message_StartGame());
     }
 }

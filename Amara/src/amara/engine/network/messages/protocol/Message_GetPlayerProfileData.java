@@ -18,12 +18,18 @@ public class Message_GetPlayerProfileData extends AbstractMessage{
         
     }
     
-    public Message_GetPlayerProfileData(String login, long cachedTimestamp){
+    public Message_GetPlayerProfileData(int playerID, String login, long cachedTimestamp){
+        this.playerID = playerID;
         this.login = login;
         this.cachedTimestamp = cachedTimestamp;
     }
+    private int playerID;
     private String login;
     private long cachedTimestamp;
+
+    public int getPlayerID(){
+        return playerID;
+    }
 
     public String getLogin(){
         return login;

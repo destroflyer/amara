@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.game.games;
+package amara.engine.applications.masterserver.server.protocol;
 
 import com.jme3.network.serializing.Serializable;
 
@@ -11,22 +11,16 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class PlayerData{
+public class LobbyPlayerData{
 
-    public PlayerData(){
+    public LobbyPlayerData(){
         
     }
     
-    public PlayerData(int id, String unitTemplate){
-        this.id = id;
+    public LobbyPlayerData(String unitTemplate){
         this.unitTemplate = unitTemplate;
     }
-    private int id;
     private String unitTemplate;
-
-    public int getID(){
-        return id;
-    }
 
     public String getUnitTemplate(){
         return unitTemplate;

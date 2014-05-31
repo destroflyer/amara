@@ -8,7 +8,7 @@ import com.jme3.network.Message;
 import amara.engine.applications.masterserver.server.appstates.*;
 import amara.engine.network.*;
 import amara.engine.network.messages.protocol.*;
-import amara.launcher.client.protocol.PlayerStatus;
+import amara.engine.applications.masterserver.server.protocol.*;
 
 /**
  *

@@ -24,15 +24,22 @@ public class ReceivePlayerProfilesDataBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_PlayerProfileData){
             Message_PlayerProfileData message = (Message_PlayerProfileData) receivedMessage;
-            playerProfilesAppState.onUpdateFinished(message.getLogin());
             if(message.getPlayerProfileData() != null){
-                playerProfilesAppState.setProfile(message.getLogin(), message.getPlayerProfileData());
+                playerProfilesAppState.setProfile(message.getPlayerProfileData());
             }
+            playerProfilesAppState.onUpdateFinished(message.getPlayerID());
+            playerProfilesAppState.onUpdateFinished(message.getLogin());
         }
         else if(receivedMessage instanceof Message_PlayerProfileDataNotExistant){
             Message_PlayerProfileDataNotExistant message = (Message_PlayerProfileDataNotExistant) receivedMessage;
-            playerProfilesAppState.onUpdateFinished(message.getLogin());
-            playerProfilesAppState.setProfileNotExistant(message.getLogin());
+            if(message.getPlayerID() != 0){
+                playerProfilesAppState.setProfileNotExistant(message.getPlayerID());
+                playerProfilesAppState.onUpdateFinished(message.getPlayerID());
+            }
+            else{
+                playerProfilesAppState.setProfileNotExistant(message.getLogin());
+                playerProfilesAppState.onUpdateFinished(message.getLogin());
+            }
         }
     }
 }

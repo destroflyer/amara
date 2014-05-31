@@ -5,12 +5,11 @@
 package amara.launcher.client;
 
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
-import amara.engine.applications.masterserver.server.network.messages.Message_StartGame;
-import amara.engine.applications.masterserver.server.protocol.AuthentificationInformation;
+import amara.engine.applications.masterserver.server.network.messages.*;
+import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.HostInformation;
 import amara.engine.network.NetworkClient;
-import amara.game.games.PlayerData;
 import amara.launcher.FrameUtil;
 
 /**
@@ -188,10 +187,10 @@ public class SimpleClientLauncher extends javax.swing.JFrame{
 
     private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
         NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.sendMessage(new Message_StartGame("testmap", new PlayerData[]{
-            new PlayerData(1, "minion"),
-            new PlayerData(2, "robot")
-        }));
+        networkClient.sendMessage(new Message_CreateLobby(new LobbyData("testmap")));
+        networkClient.sendMessage(new Message_SetLobbyPlayerData(new LobbyPlayerData("minion")));
+        networkClient.sendMessage(new Message_InviteLobbyPlayer(2));
+        networkClient.sendMessage(new Message_StartGame());
     }//GEN-LAST:event_btnStartGameActionPerformed
 
     public static void main(String args[]){

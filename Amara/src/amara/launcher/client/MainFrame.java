@@ -16,14 +16,13 @@ import javax.swing.UIManager;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
 import amara.engine.applications.masterserver.client.appstates.*;
 import amara.engine.applications.masterserver.client.appstates.LoginAppState.LoginResult;
-import amara.engine.applications.masterserver.server.protocol.AuthentificationInformation;
+import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.HostInformation;
 import amara.engine.network.NetworkClient;
 import amara.engine.network.messages.protocol.*;
 import amara.launcher.FrameUtil;
 import amara.launcher.client.panels.*;
-import amara.launcher.client.protocol.*;
 
 /**
  *
@@ -93,20 +92,51 @@ public class MainFrame extends javax.swing.JFrame{
         }).start();
     }
     
+    public int getPlayerID(){
+        return getPlayerProfile(getLogin()).getID();
+    }
+    
     public String getLogin(){
         return masterClient.getAuthentificationInformation().getLogin();
     }
     
+    public PlayerProfileData getPlayerProfile(int playerID){
+        return getPlayerProfile(playerID, null);
+    }
+    
     public PlayerProfileData getPlayerProfile(String login){
+        return getPlayerProfile(0, login);
+    }
+    
+    private PlayerProfileData getPlayerProfile(int playerID, String login){
         PlayerProfilesAppState playerProfilesAppState = masterClient.getStateManager().getState(PlayerProfilesAppState.class);
-        playerProfilesAppState.onUpdateStarted(login);
-        PlayerProfileData playerProfileData = playerProfilesAppState.getProfile(login);
+        PlayerProfileData playerProfileData;
+        if(playerID != 0){
+            playerProfilesAppState.onUpdateStarted(playerID);
+            playerProfileData = playerProfilesAppState.getProfile(playerID);
+        }
+        else{
+            playerProfilesAppState.onUpdateStarted(login);
+            playerProfileData = playerProfilesAppState.getProfile(login);
+        }
         long cachedTimestamp = ((playerProfileData != null)?playerProfileData.getTimestamp():-1);
         NetworkClient networkClient = getNetworkClient();
-        networkClient.sendMessage(new Message_GetPlayerProfileData(login, cachedTimestamp));
+        networkClient.sendMessage(new Message_GetPlayerProfileData(playerID, login, cachedTimestamp));
         while(true){
-            if(!playerProfilesAppState.isUpdating(login)){
-                playerProfileData = playerProfilesAppState.getProfile(login);
+            boolean isUpdating;
+            if(playerID != 0){
+                isUpdating = playerProfilesAppState.isUpdating(playerID);
+            }
+            else{
+                isUpdating = playerProfilesAppState.isUpdating(login);
+            }
+            if(!isUpdating){
+                if(playerID != 0){
+                    playerProfileData = playerProfilesAppState.getProfile(playerID);
+                }
+                else{
+                    playerProfileData = playerProfilesAppState.getProfile(login);
+                }
                 break;
             }
             try{

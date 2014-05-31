@@ -31,7 +31,7 @@ public class RunningGames{
     public Game getGame(int playerID){
         for(Game game : games){
             for(GamePlayer player : game.getPlayers()){
-                if(player.getPlayerData().getID() == playerID){
+                if(player.getLobbyPlayer().getID() == playerID){
                     return game;
                 }
             }

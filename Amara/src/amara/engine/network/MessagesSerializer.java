@@ -8,7 +8,7 @@ import com.jme3.network.serializing.Serializer;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
 import amara.engine.applications.masterserver.server.network.messages.*;
-import amara.engine.applications.masterserver.server.protocol.AuthentificationInformation;
+import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.messages.*;
 import amara.engine.network.messages.entitysystem.*;
 import amara.engine.network.messages.protocol.*;
@@ -55,8 +55,6 @@ import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.synchronizing.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
-import amara.game.games.PlayerData;
-import amara.launcher.client.protocol.*;
 
 /**
  *
@@ -78,8 +76,19 @@ public class MessagesSerializer{
             Message_PlayerProfileDataNotExistant.class,
             Message_PlayerStatus.class,
             
+            Message_CreateLobby.class,
+            Message_SetLobbyData.class,
+                Lobby.class,
+                LobbyPlayer.class,
+                LobbyData.class,
+            Message_SetLobbyPlayerData.class,
+                LobbyPlayerData.class,
+            Message_InviteLobbyPlayer.class,
+            Message_LeaveLobby.class,
+            Message_LobbyClosed.class,
+            Message_KickLobbyPlayer.class,
+            Message_LobbyUpdate.class,
             Message_StartGame.class,
-                PlayerData.class,
             Message_GameCreated.class,
             
             Message_Command.class,
