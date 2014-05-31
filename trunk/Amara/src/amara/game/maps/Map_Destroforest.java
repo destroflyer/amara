@@ -35,6 +35,9 @@ public class Map_Destroforest extends Map{
         for(int i=0;i<3;i++){
             EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
             unit.setComponent(new ModelComponent("Models/wizard/skin.xml"));
+            EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
+            unit.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
             unit.setComponent(new HitboxComponent(new Circle(1)));
             unit.setComponent(new IntersectionPushComponent());
             unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
@@ -42,7 +45,7 @@ public class Map_Destroforest extends Map{
             unit.setComponent(new BaseMaximumHealthComponent(500));
             unit.setComponent(new BaseAttackDamageComponent((i == 2)?80:30));
             unit.setComponent(new BaseAttackSpeedComponent(0.5f));
-            unit.setComponent(new BaseWalkSpeedComponent(2));
+            unit.setComponent(new BaseWalkSpeedComponent(2.5f));
             unit.setComponent(new RequestUpdateAttributesComponent());
             unit.setComponent(new IsTargetableComponent());
             unit.setComponent(new IsVulnerableComponent());
