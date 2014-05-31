@@ -6,7 +6,6 @@ Material My Material : Shaders/electricity/matdefs/electricity4.j3md {
         thickness : 0.1
         noiseAmount : 2.1999998
         color : 0.2 0.6 0.8 0.7
-        Fog : 10.0
 
         fallOff : 1.1
      }

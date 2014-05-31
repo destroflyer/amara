@@ -7,7 +7,6 @@ Material My Material : Shaders/electricity/matdefs/electricity5_2.j3md {
         color : 0.2 0.4 0.8 1.0
         thickness : 0.01
         layer : 1.0
-        Fog : 10.0
      }
     AdditionalRenderState {
       Blend AlphaAdditive

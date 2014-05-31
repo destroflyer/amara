@@ -6,7 +6,6 @@ Material My Material : Shaders/electricity/matdefs/electricity3.j3md {
         speed : 0.1
         noiseAmount : 2.0
         color : 0.0 0.2 0.9 0.9
-        Fog : 10.0
      }
     AdditionalRenderState {
       FaceCull Off

@@ -7,7 +7,6 @@ Material My Material : Shaders/electricity/matdefs/electricity2_2.j3md {
         fallOff : 1.5
         speed : 0.10999999
         noiseAmount : 0.07
-        Fog : 10.0
      }
     AdditionalRenderState {
       Blend Alpha

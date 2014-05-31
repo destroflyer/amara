@@ -5,6 +5,7 @@
 package amara.engine;
 
 import java.util.LinkedList;
+import com.jme3.animation.AnimChannel;
 import com.jme3.bounding.BoundingBox;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
@@ -57,6 +58,15 @@ public class JMonkeyUtil{
             }
         }
         return geometryChilds;
+    }
+    
+    public static void copyAnimation(AnimChannel sourceAnimationChannel, AnimChannel targetAnimationChannel){
+        if(sourceAnimationChannel.getAnimationName() != null){
+            targetAnimationChannel.setAnim(sourceAnimationChannel.getAnimationName());
+            targetAnimationChannel.setSpeed(sourceAnimationChannel.getSpeed());
+            targetAnimationChannel.setTime(sourceAnimationChannel.getTime());
+            targetAnimationChannel.setLoopMode(sourceAnimationChannel.getLoopMode());
+        }
     }
     
     public static void setLocalRotation(Spatial spatial, Vector3f rotation){
