@@ -159,7 +159,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseMaximumHealthComponent(300));
             entityWrapper.setComponent(new BaseAttackDamageComponent(30));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
-            entityWrapper.setComponent(new BaseWalkSpeedComponent(2));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(3.75f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
             entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), doransBlade.getId(), doransBlade.getId(), doransBlade.getId()}));
@@ -265,7 +265,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackDamageComponent(60));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
-            entityWrapper.setComponent(new BaseWalkSpeedComponent(2));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(3.75f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
             EntityWrapper doransRing = createFromTemplate(entityWorld, "dorans_ring");
@@ -304,7 +304,7 @@ public class EntityTemplate{
             //Spawn projectile
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("fireball"));
-            spawnInformation.setComponent(new SpawnMovementSpeedComponent(4));
+            spawnInformation.setComponent(new SpawnMovementSpeedComponent(10));
             entityWrapper.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation.getId()}));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
             entityWrapper.setComponent(new CooldownComponent(1));
@@ -351,13 +351,13 @@ public class EntityTemplate{
             spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
             //Spawn object
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-            spawnInformation.setComponent(new SpawnTemplateComponent("flame_pillar"));
+            spawnInformation.setComponent(new SpawnTemplateComponent("pillar_of_flame_object"));
             entityWrapper.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation.getId()}));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
             entityWrapper.setComponent(new RangeComponent(15));
             entityWrapper.setComponent(new CooldownComponent(2));
         }
-        else if(templateName.equals("flame_pillar")){
+        else if(templateName.equals("pillar_of_flame_object")){
             entityWrapper.setComponent(new ModelComponent("Models/fireball/skin.xml"));
             entityWrapper.setComponent(new HitboxComponent(new Circle(2)));
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_UNITS));
@@ -435,7 +435,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackDamageComponent(40));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
-            entityWrapper.setComponent(new BaseWalkSpeedComponent(1.75f));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(3.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId()}));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
@@ -566,7 +566,7 @@ public class EntityTemplate{
             //Spawn projectile
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("sonic_wave_projectile"));
-            spawnInformation.setComponent(new SpawnMovementSpeedComponent(12));
+            spawnInformation.setComponent(new SpawnMovementSpeedComponent(15));
             entityWrapper.setComponent(new InstantSpawnsComponent(new int[]{spawnInformation.getId()}));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
             entityWrapper.setComponent(new CooldownComponent(3));
@@ -622,7 +622,7 @@ public class EntityTemplate{
             EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
             movement.setComponent(new MovementTargetComponent(parameters[1]));
-            movement.setComponent(new MovementSpeedComponent(10));
+            movement.setComponent(new MovementSpeedComponent(18));
             effect3.setComponent(new MoveComponent(movement.getId()));
             //Trigger spell effects
             EntityWrapper effectTrigger4 = entityWorld.getWrapped(entityWorld.createEntity());
@@ -695,7 +695,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackDamageComponent(50));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.8f));
-            entityWrapper.setComponent(new BaseWalkSpeedComponent(2.25f));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(4));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId()}));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
@@ -814,7 +814,7 @@ public class EntityTemplate{
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
             movement.setComponent(new TargetedMovementTargetComponent());
-            movement.setComponent(new MovementSpeedComponent(10));
+            movement.setComponent(new MovementSpeedComponent(40));
             EntityWrapper movementAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             movementAnimation.setComponent(new NameComponent("Jumping"));
             movementAnimation.setComponent(new LoopDurationComponent(0.6f));
@@ -870,7 +870,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseMaximumHealthComponent(400));
             entityWrapper.setComponent(new BaseAttackDamageComponent(80));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
-            entityWrapper.setComponent(new BaseWalkSpeedComponent(2));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(3.75f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
             EntityWrapper dagger = createFromTemplate(entityWorld, "dagger");
@@ -1011,7 +1011,7 @@ public class EntityTemplate{
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper buffEffect = entityWorld.getWrapped(entityWorld.createEntity());
-            buffEffect.setComponent(new BonusFlatWalkSpeedComponent(10));
+            buffEffect.setComponent(new BonusPercentageWalkSpeedComponent(0.55f));
             buff.setComponent(new ContinuousEffectComponent(buffEffect.getId()));
             effect1.setComponent(new AddBuffComponent(buff.getId(), 3));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
@@ -1053,8 +1053,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseHealthRegenerationComponent(10));
             entityWrapper.setComponent(new BaseAttackDamageComponent(40));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.65f));
-            entityWrapper.setComponent(new BaseWalkSpeedComponent(2));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.4f));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(3.75f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransRing = createFromTemplate(entityWorld, "dorans_ring");
             entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), doransRing.getId()}));
@@ -1279,7 +1279,7 @@ public class EntityTemplate{
             buff.setComponent(new BuffVisualisationComponent("turbo"));
             EntityWrapper buffEffect = entityWorld.getWrapped(entityWorld.createEntity());
             buffEffect.setComponent(new BonusFlatHealthRegenerationComponent(180));
-            buffEffect.setComponent(new BonusPercentageWalkSpeedComponent(1));
+            buffEffect.setComponent(new BonusPercentageWalkSpeedComponent(0.65f));
             buff.setComponent(new ContinuousEffectComponent(buffEffect.getId()));
             effect1.setComponent(new AddBuffComponent(buff.getId(), 10));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
@@ -1350,7 +1350,7 @@ public class EntityTemplate{
         }
         else if(templateName.equals("boots")){
             entityWrapper.setComponent(new ItemVisualisationComponent("boots"));
-            entityWrapper.setComponent(new BonusFlatWalkSpeedComponent(0.75f));
+            entityWrapper.setComponent(new BonusFlatWalkSpeedComponent(0.5f));
         }
         else if(templateName.equals("dorans_blade")){
             entityWrapper.setComponent(new ItemVisualisationComponent("dorans_blade"));
