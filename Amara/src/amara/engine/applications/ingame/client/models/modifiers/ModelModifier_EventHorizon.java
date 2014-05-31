@@ -61,4 +61,15 @@ public class ModelModifier_EventHorizon extends ModelModifier{
             modelObject.attachChild(particleEmitter);
         }
     }
+    
+    public static Vector2f[] getCirclePoints(float radius, int count){
+        Vector2f[] points = new Vector2f[count];
+        for(int i=0;i<count;i++){
+            float progress = (i * (FastMath.TWO_PI / 5));
+            float x = (FastMath.sin(progress) * radius);
+            float y = (FastMath.cos(progress) * radius);
+            points[i] = new Vector2f(x, y);
+        }
+        return points;
+    }
 }

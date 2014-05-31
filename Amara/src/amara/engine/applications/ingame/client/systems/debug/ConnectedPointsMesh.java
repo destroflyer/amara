@@ -23,7 +23,7 @@ public class ConnectedPointsMesh extends Mesh{
     private float y;
     private Vector2D[] points;
 
-    protected void updateMesh(){
+    private void updateMesh(){
         short[] indices = new short[points.length * 2];
         FloatBuffer positions = BufferUtils.createFloatBuffer(points.length * 3);
         FloatBuffer normals = BufferUtils.createFloatBuffer(points.length * 3);
