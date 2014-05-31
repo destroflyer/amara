@@ -36,6 +36,9 @@ public class TestMap extends Map{
             for(int y=0;y<4;y++){
                 EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
                 unit.setComponent(new ModelComponent("Models/wizard/skin.xml"));
+                EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+                autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
+                unit.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
                 unit.setComponent(new ScaleComponent(0.5f));
                 Vector2f position = new Vector2f(12 + (x * 2), 22 + (y * 2));
                 Vector2f direction = new Vector2f(0.5f, -1);

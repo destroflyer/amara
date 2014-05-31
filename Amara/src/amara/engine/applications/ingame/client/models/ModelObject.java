@@ -4,9 +4,11 @@
  */
 package amara.engine.applications.ingame.client.models;
 
+import java.util.ArrayList;
 import com.jme3.animation.*;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import amara.engine.JMonkeyUtil;
 import amara.engine.applications.DisplayApplication;
 import amara.engine.settings.Settings;
 
@@ -22,7 +24,7 @@ public class ModelObject extends Node implements AnimEventListener{
     }
     private DisplayApplication mainApplication;
     private Spatial modelSpatial;
-    private AnimChannel animationChannel;
+    private ArrayList<AnimChannel> animationChannels = new ArrayList<AnimChannel>();
     
     private void loadSkin(ModelSkin skin){
         modelSpatial = skin.loadSpatial();
@@ -30,10 +32,18 @@ public class ModelObject extends Node implements AnimEventListener{
             modelModifier.modify(this);
         }
         attachChild(modelSpatial);
-        AnimControl animationControl = modelSpatial.getControl(AnimControl.class);
+        registerModel(modelSpatial);
+    }
+
+    public void registerModel(Spatial spatial){
+        AnimControl animationControl = spatial.getControl(AnimControl.class);
         if(animationControl != null){
             animationControl.addListener(this);
-            animationChannel = animationControl.createChannel();
+            AnimChannel animationChannel = animationControl.createChannel();
+            if(animationChannels.size() > 0){
+                JMonkeyUtil.copyAnimation(animationChannels.get(0), animationChannel);
+            }
+            animationChannels.add(animationChannel);
         }
         SkeletonControl skeletonControl = modelSpatial.getControl(SkeletonControl.class);
         if(skeletonControl != null){
@@ -41,10 +51,13 @@ public class ModelObject extends Node implements AnimEventListener{
         }
     }
 
-    public void applyModelTransformTo(Spatial spatial){
-        spatial.setLocalTranslation(modelSpatial.getLocalTranslation());
-        spatial.setLocalRotation(modelSpatial.getLocalRotation());
-        spatial.setLocalScale(modelSpatial.getLocalScale());
+    public void unregisterModel(Spatial spatial){
+        AnimControl animationControl = spatial.getControl(AnimControl.class);
+        if(animationControl != null){
+            for(int i=0;i<animationControl.getNumChannels();i++){
+                animationChannels.remove(animationControl.getChannel(i));
+            }
+        }
     }
     
     public void playAnimation(String animationName, float loopDuration){
@@ -52,7 +65,7 @@ public class ModelObject extends Node implements AnimEventListener{
     }
     
     public void playAnimation(String animationName, float loopDuration, boolean isLoop){
-        if(animationChannel != null){
+        for(AnimChannel animationChannel : animationChannels){
             try{
                 if(!animationName.equals(animationChannel.getAnimationName())){
                     animationChannel.setAnim(animationName);
@@ -60,12 +73,18 @@ public class ModelObject extends Node implements AnimEventListener{
                 animationChannel.setSpeed(animationChannel.getAnimMaxTime() / loopDuration);
                 animationChannel.setLoopMode(isLoop?LoopMode.Loop:LoopMode.DontLoop);
             }catch(IllegalArgumentException ex){
-                stopAndRewindAnimation();
+                stopAndRewindAnimation(animationChannel);
             }
         }
     }
     
     public void stopAndRewindAnimation(){
+        for(AnimChannel animationChannel : animationChannels){
+            stopAndRewindAnimation(animationChannel);
+        }
+    }
+    
+    public void stopAndRewindAnimation(final AnimChannel animationChannel){
         mainApplication.enqueueTask(new Runnable(){
 
             @Override
@@ -83,5 +102,9 @@ public class ModelObject extends Node implements AnimEventListener{
     @Override
     public void onAnimChange(AnimControl control, AnimChannel channel, String animationName){
         
+    }
+    
+    public Spatial getModelSpatial(){
+        return modelSpatial;
     }
 }

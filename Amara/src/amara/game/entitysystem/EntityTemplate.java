@@ -180,12 +180,16 @@ public class EntityTemplate{
             entityWrapper.setComponent(new DescriptionComponent("Silences an enemy."));
             entityWrapper.setComponent(new SpellVisualisationComponent("null_sphere"));
             //Target effect
+            float duration = 2;
             EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger.setComponent(new TargetTargetComponent());
             EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
             effect.setComponent(new FlatMagicDamageComponent(80));
             effect.setComponent(new ScalingAbilityPowerMagicDamageComponent(0.7f));
-            effect.setComponent(new AddSilenceComponent(2));
+            effect.setComponent(new AddSilenceComponent(duration));
+            EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
+            buff.setComponent(new BuffVisualisationComponent("electrified"));
+            effect.setComponent(new AddBuffComponent(buff.getId(), duration));
             effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
             effectTrigger.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());

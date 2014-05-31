@@ -7,7 +7,6 @@ Material My Material : Shaders/electricity/matdefs/electricity2.j3md {
         lines : 0.614
         noiseAmount : 0.13999999
         color : 0.1 0.8 1.0 0.5
-        Fog : 10.0
      }
     AdditionalRenderState {
       Blend Alpha

@@ -7,7 +7,6 @@ Material My Material : Shaders/electricity/matdefs/electricity3.j3md {
         noiseAmount : 3.0
         color : 0.1 0.3 0.7 1.0
         texScale : 01 30
-        Fog : 10.0
         Distance : 19.9
      }
     AdditionalRenderState {
