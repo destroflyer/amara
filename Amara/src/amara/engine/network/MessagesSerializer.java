@@ -256,6 +256,7 @@ public class MessagesSerializer{
                         MovementComponent.class,
                         PositionComponent.class,
                         ScaleComponent.class,
+                        RemoveOnMapLeaveComponent.class,
                         //players
                         ClientComponent.class,
                         PlayerIndexComponent.class,

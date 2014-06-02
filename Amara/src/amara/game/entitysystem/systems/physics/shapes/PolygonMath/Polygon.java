@@ -180,4 +180,12 @@ public class Polygon
     {
         return setPoly.toString();
     }
+
+    @Override
+    public Polygon clone()
+    {
+        return new Polygon(setPoly);
+    }
+    
+    
 }

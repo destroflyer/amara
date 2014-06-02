@@ -89,7 +89,7 @@ public class PolygonShape extends Shape
     }
 
     @Override
-    public Shape clone()
+    public PolygonShape clone()
     {
         PolygonShape clone = new PolygonShape(poly);
         clone.transform = transform.clone();

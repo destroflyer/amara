@@ -321,6 +321,7 @@ public class EntityTemplate{
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new IntersectionRulesComponent(targetRules.getId()));
+            entityWrapper.setComponent(new RemoveOnMapLeaveComponent());
             //Trigger spell effects
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new CollisionTriggerComponent());
