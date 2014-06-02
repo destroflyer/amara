@@ -19,19 +19,22 @@ import java.util.List;
  */
 public final class MapIntersectionSystem implements EntitySystem
 {
+    private IntersectionInformant info;
     private MapGrid<MapObstacle> mapGrid;
     private ArrayList<Shape> shapes = new ArrayList<Shape>();
-    private int cellSize = 10;
+    private int cellSize = 10, width, height;
     private Polygon mapPoly;
+    private Polygon borderPoly;
 
-    public MapIntersectionSystem(int mapWidth, int mapHeight, List<Shape> shapes)
+    public MapIntersectionSystem(IntersectionInformant info, int mapWidth, int mapHeight, List<Shape> shapes)
     {
-        this(mapWidth, mapHeight);
+        this(info, mapWidth, mapHeight);
         if(shapes.isEmpty()) return;
         AddObstacles(shapes);
     }
-    public MapIntersectionSystem(int mapWidth, int mapHeight)
+    public MapIntersectionSystem(IntersectionInformant info, int mapWidth, int mapHeight)
     {
+         this.info = info;
          mapGrid = new MapGrid(mapWidth / cellSize + 1, mapHeight / cellSize + 1, cellSize);
          PolygonBuilder builder = new PolygonBuilder();
          builder.nextOutline(true);
@@ -39,12 +42,33 @@ public final class MapIntersectionSystem implements EntitySystem
          builder.add(mapWidth, 0);
          builder.add(mapWidth, mapHeight);
          builder.add(0, mapHeight);
-         mapPoly = builder.build(true);
-         assert mapPoly.isInfinite();
+         borderPoly = builder.build(true);
+         mapPoly = borderPoly.clone();
+         assert borderPoly.isInfinite();
+         width = mapWidth;
+         height = mapHeight;
+    }
+    
+    private boolean mapContains(Shape shape)
+    {
+        if(shape.getMinX() < 0) return false;
+        if(shape.getMaxX() > width) return false;
+        if(shape.getMinY() < 0) return false;
+        if(shape.getMaxY() > height) return false;
+        return true;
+    }
+    private boolean mapIntersects(Shape shape)
+    {
+        if(shape.getMaxX() <= 0) return false;
+        if(shape.getMinX() >= width) return false;
+        if(shape.getMaxY() <= 0) return false;
+        if(shape.getMinY() >= height) return false;
+        return true;
     }
     
     public void update(EntityWorld entityWorld, float deltaSeconds)
     {
+        info.updateHitboxes(entityWorld);
         for (EntityWrapper entity : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(HitboxComponent.class, HitboxActiveComponent.class, CollisionGroupComponent.class, PositionComponent.class)))
         {
             CollisionGroupComponent filterComp = entity.getComponent(CollisionGroupComponent.class);
@@ -53,35 +77,50 @@ public final class MapIntersectionSystem implements EntitySystem
                 solveIntersections(entity);
             }
         }
+        info.updateHitboxes(entityWorld);
+        for (EntityWrapper entity : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(HitboxComponent.class, HitboxActiveComponent.class, PositionComponent.class, RemoveOnMapLeaveComponent.class)))
+        {
+            if(!mapIntersects(entity.getComponent(HitboxComponent.class).getShape()))
+            {
+                entity.clearComponents();
+            }
+        }
     }
     
     private void solveIntersections(EntityWrapper entity)
     {
         Shape previous = entity.getComponent(HitboxComponent.class).getShape();
-        List<MapObstacle> obstacles = mapGrid.getAllIntersectionPartners(previous);
-        if(obstacles.isEmpty()) return;
-        
-        Vector2f position = entity.getComponent(PositionComponent.class).getPosition();
-        Vector2D delta = new Vector2D();
-        
-        if(obstacles.size() == 1)
-        {
-            delta.add(previous.getResolveVector(obstacles.get(0).getShape()));
-            delta.addLength(1e-6d);
-        }
-        Vector2D newPosition = new Vector2D(position.x + delta.getX(), position.y + delta.getY());
-        
         Shape shape = previous.clone();
-        shape.getTransform().setPosition(newPosition.getX(), newPosition.getY());
-        if(!mapGrid.getAllIntersectionPartners(shape).isEmpty())
+        Vector2f position = entity.getComponent(PositionComponent.class).getPosition();
+        Vector2D newPosition = null;
+        boolean solved = false;
+        if(mapContains(previous))
+        {
+            List<MapObstacle> obstacles = mapGrid.getAllIntersectionPartners(previous);
+            if(obstacles.isEmpty()) return;
+
+            Vector2D delta = new Vector2D();
+
+            if(obstacles.size() == 1)
+            {
+                delta.add(previous.getResolveVector(obstacles.get(0).getShape()));
+                delta.addLength(1e-6d);
+            }
+            newPosition = new Vector2D(position.x + delta.getX(), position.y + delta.getY());
+
+            shape.getTransform().setPosition(newPosition.getX(), newPosition.getY());
+            solved = mapGrid.getAllIntersectionPartners(shape).isEmpty();
+
+        }
+        if(!solved)
         {
             Polygon poly = PolyHelper.fromShape(shape);
             Point2D overlap = PolyHelper.stepwiseOverlap(mapPoly, poly);
             newPosition = new Vector2D(position.x + overlap.getX(), position.y + overlap.getY());
             shape.getTransform().setPosition(newPosition.getX(), newPosition.getY());
         }
+        assert newPosition != null;
         assert mapGrid.getAllIntersectionPartners(shape).isEmpty();
-        
         entity.setComponent(new PositionComponent(new Vector2f((float)newPosition.getX(), (float)newPosition.getY())));
     }
     

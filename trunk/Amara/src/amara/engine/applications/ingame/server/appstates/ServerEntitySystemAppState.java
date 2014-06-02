@@ -166,7 +166,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
             player.setEntityID(playerEntity.getId());
         }
         MapPhysicsInformation mapPhysicsInformation = map.getPhysicsInformation();
-        addEntitySystem(new MapIntersectionSystem(mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight(), mapPhysicsInformation.getObstacles()));
+        addEntitySystem(new MapIntersectionSystem(intersectionObserver, mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight(), mapPhysicsInformation.getObstacles()));
         addEntitySystem(new CheckMapObjectiveSystem(map, getAppState(GameRunningAppState.class)));
         addEntitySystem(new PlayerDeathSystem(map));
         addEntitySystem(new PlayerRespawnSystem(game));
