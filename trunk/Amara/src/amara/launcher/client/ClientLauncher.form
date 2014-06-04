@@ -60,7 +60,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="cbxMasterserverHost" pref="146" max="32767" attributes="0"/>
@@ -92,8 +92,14 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbxMasterserverHostItemStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtMasterserverPort">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMasterserverPortKeyReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -105,8 +111,8 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="pbrCurrentFile" pref="361" max="32767" attributes="1"/>
-                      <Component id="pbrCompleteUpdate" max="32767" attributes="1"/>
+                      <Component id="pbrCompleteUpdate" pref="361" max="32767" attributes="1"/>
+                      <Component id="pbrCurrentFile" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnPlay" min="-2" pref="113" max="-2" attributes="0"/>
@@ -119,12 +125,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnPlay" min="-2" pref="66" max="-2" attributes="1"/>
                       <Group type="102" attributes="0">
-                          <Component id="pbrCurrentFile" min="-2" pref="30" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="pbrCompleteUpdate" min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="pbrCurrentFile" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="btnPlay" min="-2" pref="66" max="-2" attributes="1"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -132,12 +138,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JProgressBar" name="pbrCurrentFile">
-          <Properties>
-            <Property name="string" type="java.lang.String" value=""/>
-            <Property name="stringPainted" type="boolean" value="true"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JProgressBar" name="pbrCompleteUpdate">
           <Properties>
             <Property name="string" type="java.lang.String" value=""/>
@@ -154,6 +154,12 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlayActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JProgressBar" name="pbrCurrentFile">
+          <Properties>
+            <Property name="string" type="java.lang.String" value=""/>
+            <Property name="stringPainted" type="boolean" value="true"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

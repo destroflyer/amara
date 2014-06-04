@@ -1058,7 +1058,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseHealthRegenerationComponent(10));
             entityWrapper.setComponent(new BaseAttackDamageComponent(40));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.4f));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(3.75f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransRing = createFromTemplate(entityWorld, "dorans_ring");
@@ -1302,6 +1302,43 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
             entityWrapper.setComponent(new CooldownComponent(15));
+        }
+        else if(templateName.equals("eragon")){
+            entityWrapper.setComponent(new ModelComponent("Models/little_dragon/skin.xml"));
+            EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            idleAnimation.setComponent(new NameComponent("default"));
+            idleAnimation.setComponent(new LoopDurationComponent(8));
+            entityWrapper.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
+            EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            walkAnimation.setComponent(new NameComponent("walk"));
+            entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+            EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
+            entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+            entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
+            
+            entityWrapper.setComponent(new HitboxComponent(new Circle(0.8f)));
+            entityWrapper.setComponent(new IntersectionPushComponent());
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(450));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(50));
+            entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(4));
+            EntityWrapper boots = createFromTemplate(entityWorld, "boots");
+            EntityWrapper needlesslyLargeRod = createFromTemplate(entityWorld, "needlessly_large_rod");
+            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), needlesslyLargeRod.getId()}));
+            entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
+
+            EntityWrapper autoAttack = createFromTemplate(entityWorld, "default_autoattack");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+
+            EntityWrapper sear = createFromTemplate(entityWorld, "sear");
+            entityWrapper.setComponent(new SpellsComponent(new int[]{sear.getId()}));
         }
         else if(templateName.equals("bodyslam")){
             entityWrapper.setComponent(new NameComponent("Bodyslam"));

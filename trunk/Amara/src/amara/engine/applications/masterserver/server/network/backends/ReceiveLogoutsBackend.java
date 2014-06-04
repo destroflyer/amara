@@ -5,7 +5,6 @@
 package amara.engine.applications.masterserver.server.network.backends;
 
 import com.jme3.network.Message;
-import amara.engine.applications.masterserver.server.appstates.DatabaseAppState;
 import amara.engine.network.*;
 import amara.engine.network.messages.*;
 import amara.engine.network.messages.protocol.*;
@@ -36,7 +35,9 @@ public class ReceiveLogoutsBackend implements MessageBackend{
     
     private void logout(int clientID){
         Player player = connectedPlayers.getPlayer(clientID);
-        connectedPlayers.logout(clientID);
-        System.out.println("Logout '" + player.getLogin() + "' (#" + player.getID() + ")");
+        if(player != null){
+            connectedPlayers.logout(clientID);
+            System.out.println("Logout '" + player.getLogin() + "' (#" + player.getID() + ")");
+        }
     }
 }

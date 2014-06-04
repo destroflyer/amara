@@ -64,6 +64,12 @@ public class MessagesSerializer{
     
     public static void registerClasses(){
         Serializer.registerClasses(
+            Message_GetUpdateFiles.class,
+            Message_GetUpdateFile.class,
+            Message_UpdateFilePart.class,
+            Message_UpdateFiles.class,
+                UpdateFile.class,
+            
             Message_EditUserMeta.class,
             Message_GetPlayerProfileData.class,
             Message_GetPlayerStatus.class,

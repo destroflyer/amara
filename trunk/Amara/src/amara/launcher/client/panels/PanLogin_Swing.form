@@ -161,6 +161,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JProgressBar" name="pbrLoading">
+      <Properties>
+        <Property name="indeterminate" type="boolean" value="true"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

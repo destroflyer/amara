@@ -16,6 +16,7 @@ public class MasterserverServerApplication extends HeadlessApplication{
         try{
             stateManager.attach(new DatabaseAppState());
             stateManager.attach(new NetworkServerAppState(port));
+            stateManager.attach(new UpdatesAppState());
             stateManager.attach(new PlayersAppState());
             stateManager.attach(new LobbiesAppState());
             stateManager.attach(new GamesAppState(new PortProvider(port + 1)));
@@ -25,4 +26,8 @@ public class MasterserverServerApplication extends HeadlessApplication{
         }
     }
     private int port;
+
+    public int getPort(){
+        return port;
+    }
 }
