@@ -5,11 +5,13 @@
 package amara.engine.applications.ingame.client.systems.visualisation.buffs;
 
 import com.jme3.material.Material;
-import com.jme3.material.RenderState;
-import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.shape.Sphere;
+import com.jme3.animation.AnimChannel;
+import com.jme3.renderer.queue.RenderQueue;
+import amara.engine.JMonkeyUtil;
+import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.materials.MaterialFactory;
 import amara.game.entitysystem.EntityWorld;
@@ -26,13 +28,27 @@ public class BuffVisualisationSystem_Zhonyas extends BuffVisualisationSystem{
     
     @Override
     protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity){
-        Geometry geometry = new Geometry("", new Sphere(20, 20, 2.2f));
-        Material material = MaterialFactory.generateUnshadedMaterial(new ColorRGBA(1, 1, 1, 0.25f));
-        material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-        material.getAdditionalRenderState().setDepthTest(false);
-        geometry.setMaterial(material);
-        geometry.setLocalTranslation(0, 2, 0);
-        geometry.setUserData("layer", 4);
-        return geometry;
+        ModelObject modelObject = getModelObject(entitySceneMap.requestNode(entity));
+        Spatial clonedModel = modelObject.getModelSpatial().deepClone();
+        Material material = MaterialFactory.getAssetManager().loadMaterial("Shaders/glass/materials/glass_3.j3m");
+        for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel)){
+            geometry.setMaterial(material);
+            geometry.setQueueBucket(RenderQueue.Bucket.Transparent);
+        }
+        AnimChannel animationChannel = modelObject.copyAnimation(clonedModel);
+        animationChannel.setSpeed(0);
+        modelObject.setCullHint(Spatial.CullHint.Always);
+        return clonedModel;
+    }
+
+    @Override
+    protected void removeVisualAttachment(Node node, Spatial visualAttachment){
+        super.removeVisualAttachment(node, visualAttachment);
+        ModelObject modelObject = getModelObject(node);
+        modelObject.setCullHint(Spatial.CullHint.Inherit);
+    }
+    
+    private ModelObject getModelObject(Node node){
+        return (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
     }
 }

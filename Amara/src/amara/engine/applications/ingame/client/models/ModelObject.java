@@ -39,16 +39,25 @@ public class ModelObject extends Node implements AnimEventListener{
         AnimControl animationControl = spatial.getControl(AnimControl.class);
         if(animationControl != null){
             animationControl.addListener(this);
-            AnimChannel animationChannel = animationControl.createChannel();
-            if(animationChannels.size() > 0){
-                JMonkeyUtil.copyAnimation(animationChannels.get(0), animationChannel);
-            }
+            AnimChannel animationChannel = copyAnimation(spatial);
             animationChannels.add(animationChannel);
         }
         SkeletonControl skeletonControl = modelSpatial.getControl(SkeletonControl.class);
         if(skeletonControl != null){
             skeletonControl.setHardwareSkinningPreferred(Settings.getBoolean("hardware_skinning"));
         }
+    }
+
+    public AnimChannel copyAnimation(Spatial spatial){
+        AnimControl animationControl = spatial.getControl(AnimControl.class);
+        if(animationControl != null){
+            AnimChannel animationChannel = animationControl.createChannel();
+            if(animationChannels.size() > 0){
+                JMonkeyUtil.copyAnimation(animationChannels.get(0), animationChannel);
+            }
+            return animationChannel;
+        }
+        return null;
     }
 
     public void unregisterModel(Spatial spatial){
