@@ -3,22 +3,27 @@
  * and open the template in the editor.
  */
 
-/*
- * Launcher.java
- *
- * Created on 15.09.2012, 02:33:08
- */
 package amara.launcher.client;
 
+import amara.Util;
 import java.awt.AWTEvent;
+import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.AWTEventListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import javax.swing.JFrame;
 import amara.engine.applications.launcher.startscreen.screens.*;
-import amara.engine.network.HostInformation;
+import amara.engine.applications.masterserver.client.MasterserverClientApplication;
+import amara.engine.applications.masterserver.server.network.messages.*;
+import amara.engine.applications.masterserver.server.protocol.*;
+import amara.engine.appstates.NetworkClientHeadlessAppState;
+import amara.engine.files.FileManager;
+import amara.engine.network.*;
+import amara.engine.network.exceptions.*;
 import amara.engine.settings.DefaultSettings;
 import amara.launcher.FrameUtil;
+import amara.launcher.client.network.backends.*;
 import amara.launcher.client.panels.*;
 
 /**
@@ -37,12 +42,14 @@ public class ClientLauncher extends JFrame{
         getContentPane().requestFocus();
         FrameUtil.initFrameSpecials(this);
         FrameUtil.centerFrame(this);
-        //checkForUpdate();
+        connectToMasterserver();
     }
-    private boolean wasUpdateNeeded = false;
+    private MasterserverClientApplication masterClient;
+    private boolean wasUpdateNeeded;
     private PanLogin forcedLoginPanel;
     private AWTEventListener keyListener = new AWTEventListener(){
 
+        @Override
         public void eventDispatched(AWTEvent event){
             KeyEvent keyEvent = (KeyEvent) event;
             if(keyEvent.getID() == KeyEvent.KEY_RELEASED){
@@ -55,69 +62,119 @@ public class ClientLauncher extends JFrame{
         }
     };
     
-    /*private UpdateFile[] filesToUpdate;
-    
-    private void checkForUpdate(){
-        filesToUpdate = Updater.getUpdateFiles();
+    private void connectToMasterserver(){
         new Thread(new Runnable(){
 
+            @Override
             public void run(){
-                update();
+                btnPlay.setEnabled(false);
+                pbrCompleteUpdate.setString("Connecting to masterserver...");
+                pbrCompleteUpdate.setIndeterminate(true);
+                pbrCompleteUpdate.setValue(0);
+                pbrCurrentFile.setValue(0);
+                cbxMasterserverHost.setEnabled(false);
+                txtMasterserverPort.setEnabled(false);
+                String host = cbxMasterserverHost.getSelectedItem().toString();
+                int port = Integer.parseInt(txtMasterserverPort.getText());
+                try{
+                    if(masterClient != null){
+                        NetworkClient networkClient = getNetworkClient();
+                        networkClient.disconnect();
+                    }
+                    masterClient = new MasterserverClientApplication(new HostInformation(host, port));
+                    masterClient.start();
+                    NetworkClient networkClient = getNetworkClient();
+                    networkClient.addMessageBackend(new UpdateFilesBackend(ClientLauncher.this));
+                    networkClient.sendMessage(new Message_GetUpdateFiles());
+                }catch(ServerConnectionException ex){
+                    onMasterserverOffline();
+                }catch(ServerConnectionTimeoutException ex){
+                    onMasterserverOffline();
+                }
+                EventQueue.invokeLater(new Runnable(){
+
+                    @Override
+                    public void run(){
+                        pbrCompleteUpdate.setIndeterminate(false);
+                    }
+                });
             }
         }).start();
     }
     
-    private void update(){
-        btnPlay.setEnabled(false);
-        pbrCompleteUpdate.setMaximum(filesToUpdate.length);
-        for(int i=0;i<filesToUpdate.length;i++){
-            UpdateFile updateFile = filesToUpdate[i];
-            pbrCompleteUpdate.setString(updateFile.getFilePath());
-            updateFile(updateFile);
-            pbrCompleteUpdate.setValue(i + 1);
-        }
-        pbrCompleteUpdate.setString("Das Spiel ist auf dem neuesten Stand.");
-        pbrCurrentFile.setString("");
-        if(wasUpdateNeeded){
-            pbrCurrentFile.setString("Damit das Update aktiv wird, starte das Spiel neu.");
-            btnPlay.setText("Beenden");
-        }
-        btnPlay.setEnabled(true);
+    private NetworkClient getNetworkClient(){
+        return masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
     }
     
-    private void updateFile(UpdateFile updateFile){
-        if(updateFile.isDirectory()){
-            FileManager.createDirectoryIfNotExists(updateFile.getFilePath());
-        }
-        else if(updateFile.needsUpdate()){
-            try{
-                int serverFileSize = updateFile.getServerFile_Size();
-                pbrCurrentFile.setMaximum(serverFileSize);
-                pbrCurrentFile.setString("Initialisiere Download (" + (serverFileSize / 100) + " kB)");
-                InputStream inputStream = updateFile.getServerFile_URL("content").openStream();
-                FileOutputStream fileOutputStream = new FileOutputStream(updateFile.getFilePath());
-                int writtenBytes = 0;
-                byte[] buffer = new byte[2048];
-                int readBytes;
-                while((readBytes = inputStream.read(buffer)) != -1){
-                    fileOutputStream.write(buffer, 0, readBytes);
-                    writtenBytes += readBytes;
-                    pbrCurrentFile.setString(Util.getPercentage_Rounded(serverFileSize, writtenBytes) + "%");
-                    pbrCurrentFile.setValue(writtenBytes);
+    private void onMasterserverOffline(){
+        pbrCompleteUpdate.setString("Couldn't connect to masterserver");
+        cbxMasterserverHost.setEnabled(true);
+        txtMasterserverPort.setEnabled(true);
+    }
+    
+    public void update(final UpdateFile[] updateFiles){
+        new Thread(new Runnable(){
+
+            @Override
+            public void run(){
+                pbrCompleteUpdate.setMaximum(updateFiles.length);
+                for(int i=0;i<updateFiles.length;i++){
+                    UpdateFile updateFile = updateFiles[i];
+                    pbrCompleteUpdate.setString(updateFile.getFilePath());
+                    updateFile(updateFiles, i);
+                    pbrCompleteUpdate.setValue(i + 1);
                 }
-                inputStream.close();
-                fileOutputStream.close();
-            }catch(Exception ex){
-                System.out.println("Error while downloading file '" + updateFile.getFilePath() + "'.");
+                pbrCompleteUpdate.setString("The game is up to date.");
+                pbrCurrentFile.setString("");
+                if(wasUpdateNeeded){
+                    pbrCompleteUpdate.setString("To activate the update, please restart the game.");
+                    btnPlay.setText("Close");
+                }
+                btnPlay.setEnabled(true);
+                cbxMasterserverHost.setEnabled(true);
+                txtMasterserverPort.setEnabled(true);
             }
-            VersionManager.getInstance().onFileUpdated(updateFile.getFilePath());
-            wasUpdateNeeded = true;
+        }).start();
+    }
+    
+    private void updateFile(UpdateFile[] updateFiles, int index){
+        UpdateFile updateFile = updateFiles[index];
+        File file = new File(updateFile.getFilePath());
+        if(FileManager.isDirectory(file)){
+            FileManager.createDirectoryIfNotExists(file.getPath());
         }
         else{
-            pbrCurrentFile.setValue(pbrCurrentFile.getMaximum());
-            pbrCurrentFile.setString("Datei vollst�ndig");
+            boolean needsUpdate = true;
+            if(file.exists()){
+                String checksumLocalFile = VersionManager.getInstance().getFileChecksumMD5(updateFile.getFilePath());
+                needsUpdate = (!checksumLocalFile.equals(updateFile.getChecksum_MD5()));
+            }
+            if(needsUpdate){
+                pbrCurrentFile.setMaximum((int) updateFile.getSize());
+                pbrCurrentFile.setString("Initializing download (" + (updateFile.getSize() / 100) + " kB)");
+                NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
+                WriteUpdateFileBackend writeUpdateFileBackend = new WriteUpdateFileBackend(updateFile);
+                networkClient.addMessageBackend(writeUpdateFileBackend);
+                networkClient.sendMessage(new Message_GetUpdateFile(index));
+                while(!writeUpdateFileBackend.isFinished()){
+                    try{
+                        Thread.sleep(20);
+                    }catch(InterruptedException ex){
+                    }
+                    int downloadedBytes = (int) file.length();
+                    pbrCurrentFile.setString(Util.getPercentage_Rounded(pbrCurrentFile.getMaximum(), downloadedBytes) + "%");
+                    pbrCurrentFile.setValue(downloadedBytes);
+                }
+                networkClient.removeMessageBackend(writeUpdateFileBackend);
+                VersionManager.getInstance().onFileUpdated(updateFile.getFilePath());
+                wasUpdateNeeded = true;
+            }
+            else{
+                pbrCurrentFile.setValue(pbrCurrentFile.getMaximum());
+                pbrCurrentFile.setString("File up to date");
+            }
         }
-    }*/
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -133,9 +190,9 @@ public class ClientLauncher extends JFrame{
         cbxMasterserverHost = new javax.swing.JComboBox();
         txtMasterserverPort = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        pbrCurrentFile = new javax.swing.JProgressBar();
         pbrCompleteUpdate = new javax.swing.JProgressBar();
         btnPlay = new javax.swing.JButton();
+        pbrCurrentFile = new javax.swing.JProgressBar();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,6 +210,17 @@ public class ClientLauncher extends JFrame{
 
         cbxMasterserverHost.setEditable(true);
         cbxMasterserverHost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "141.70.100.145" }));
+        cbxMasterserverHost.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxMasterserverHostItemStateChanged(evt);
+            }
+        });
+
+        txtMasterserverPort.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMasterserverPortKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout panImageLayout = new javax.swing.GroupLayout(panImage);
         panImage.setLayout(panImageLayout);
@@ -175,9 +243,6 @@ public class ClientLauncher extends JFrame{
                 .addGap(7, 7, 7))
         );
 
-        pbrCurrentFile.setString("");
-        pbrCurrentFile.setStringPainted(true);
-
         pbrCompleteUpdate.setString("");
         pbrCompleteUpdate.setStringPainted(true);
 
@@ -189,6 +254,9 @@ public class ClientLauncher extends JFrame{
             }
         });
 
+        pbrCurrentFile.setString("");
+        pbrCurrentFile.setStringPainted(true);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -196,8 +264,8 @@ public class ClientLauncher extends JFrame{
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pbrCurrentFile, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-                    .addComponent(pbrCompleteUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pbrCompleteUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                    .addComponent(pbrCurrentFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -207,11 +275,11 @@ public class ClientLauncher extends JFrame{
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(pbrCurrentFile, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pbrCompleteUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pbrCompleteUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pbrCurrentFile, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -238,15 +306,23 @@ private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         System.exit(0);
     }
     else{
-        String host = cbxMasterserverHost.getSelectedItem().toString();
-        int port = Integer.parseInt(txtMasterserverPort.getText());
         Toolkit.getDefaultToolkit().removeAWTEventListener(keyListener);
         PanLogin panLogin = ((forcedLoginPanel != null)?forcedLoginPanel:new PanLogin_Swing());
-        MainFrame mainFrame = new MainFrame(new HostInformation(host, port), panLogin);
+        MainFrame mainFrame = new MainFrame(masterClient, panLogin);
         this.setVisible(false);
         mainFrame.setVisible(true);
     }
 }//GEN-LAST:event_btnPlayActionPerformed
+
+    private void cbxMasterserverHostItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMasterserverHostItemStateChanged
+        connectToMasterserver();
+    }//GEN-LAST:event_cbxMasterserverHostItemStateChanged
+
+    private void txtMasterserverPortKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMasterserverPortKeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            connectToMasterserver();
+        }
+    }//GEN-LAST:event_txtMasterserverPortKeyReleased
 
     /**
      * @param args the command line arguments
@@ -255,6 +331,7 @@ private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         FrameUtil.initProgramProperties();
         java.awt.EventQueue.invokeLater(new Runnable(){
 
+            @Override
             public void run(){
                 new ClientLauncher().setVisible(true);
             }

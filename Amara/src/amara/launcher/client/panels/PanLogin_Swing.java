@@ -80,7 +80,6 @@ public class PanLogin_Swing extends PanLogin{
     
     @Override
     public void showIsLoading(boolean isLoading){
-        pbrLoading.setIndeterminate(isLoading);
         pbrLoading.setVisible(isLoading);
     }
 
@@ -169,6 +168,8 @@ public class PanLogin_Swing extends PanLogin{
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        pbrLoading.setIndeterminate(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

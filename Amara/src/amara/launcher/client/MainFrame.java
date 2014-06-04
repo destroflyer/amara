@@ -18,7 +18,6 @@ import amara.engine.applications.masterserver.client.appstates.*;
 import amara.engine.applications.masterserver.client.appstates.LoginAppState.LoginResult;
 import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.appstates.NetworkClientHeadlessAppState;
-import amara.engine.network.HostInformation;
 import amara.engine.network.NetworkClient;
 import amara.engine.network.messages.protocol.*;
 import amara.launcher.FrameUtil;
@@ -30,10 +29,10 @@ import amara.launcher.client.panels.*;
  */
 public class MainFrame extends javax.swing.JFrame{
 
-    public MainFrame(HostInformation masterserverHostInformation, PanLogin panLogin){
+    public MainFrame(MasterserverClientApplication masterClient, PanLogin panLogin){
         initComponents();
         instance = this;
-        this.masterserverHostInformation = masterserverHostInformation;
+        this.masterClient = masterClient;
         this.panLogin = panLogin;
         setDisplayedPanel(panLogin);
         panLogin.start();
@@ -43,9 +42,9 @@ public class MainFrame extends javax.swing.JFrame{
         setSize(650, 400);
     }
     private static MainFrame instance;
-    private PanLogin panLogin;
-    private HostInformation masterserverHostInformation;
     private MasterserverClientApplication masterClient;
+    private PanLogin panLogin;
+    private AuthentificationInformation authentificationInformation;
     
     public void setDisplayedPanel(JPanel panel){
         panContainer.removeAll();
@@ -54,17 +53,18 @@ public class MainFrame extends javax.swing.JFrame{
     }
     
     public void login(final AuthentificationInformation authentificationInformation){
+        this.authentificationInformation = authentificationInformation;
         new Thread(new Runnable(){
 
             @Override
             public void run(){
                 panLogin.showIsLoading(true);
-                masterClient = new MasterserverClientApplication(masterserverHostInformation, authentificationInformation);
-                masterClient.start();
+                NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
+                networkClient.sendMessage(new Message_Login(authentificationInformation));
+                LoginAppState loginAppState = masterClient.getStateManager().getState(LoginAppState.class);
                 LoginResult loginResult;
                 while(true){
-                    LoginAppState loginAppState = masterClient.getStateManager().getState(LoginAppState.class);
-                    if((loginAppState != null) && (loginAppState.getResult() != LoginAppState.LoginResult.PENDING)){
+                    if(loginAppState.getResult() != LoginAppState.LoginResult.PENDING){
                         loginResult = loginAppState.getResult();
                         break;
                     }
@@ -75,10 +75,6 @@ public class MainFrame extends javax.swing.JFrame{
                 }
                 panLogin.showIsLoading(false);
                 switch(loginResult){
-                    case NO_CONNECTION_TO_MASTERSERVER:
-                        FrameUtil.showMessageDialog(MainFrame.this, "Couldn't connect to masterserver.", FrameUtil.MessageType.ERROR);
-                        break;
-                    
                     case FAILED:
                         FrameUtil.showMessageDialog(MainFrame.this, "Login failed. Possible reasons:\n\n- Wrong login\n- Wrong password", FrameUtil.MessageType.ERROR);
                         break;
@@ -97,7 +93,7 @@ public class MainFrame extends javax.swing.JFrame{
     }
     
     public String getLogin(){
-        return masterClient.getAuthentificationInformation().getLogin();
+        return authentificationInformation.getLogin();
     }
     
     public PlayerProfileData getPlayerProfile(int playerID){

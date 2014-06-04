@@ -41,4 +41,8 @@ public abstract class NetworkListener{
     public void addMessageBackend(MessageBackend messageBackend){
         messageBackends.add(messageBackend);
     }
+
+    public void removeMessageBackend(MessageBackend messageBackend){
+        messageBackends.remove(messageBackend);
+    }
 }

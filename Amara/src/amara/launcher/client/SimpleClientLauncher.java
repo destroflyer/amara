@@ -8,8 +8,9 @@ import amara.engine.applications.masterserver.client.MasterserverClientApplicati
 import amara.engine.applications.masterserver.server.network.messages.*;
 import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.appstates.NetworkClientHeadlessAppState;
-import amara.engine.network.HostInformation;
-import amara.engine.network.NetworkClient;
+import amara.engine.network.*;
+import amara.engine.network.exceptions.*;
+import amara.engine.network.messages.protocol.*;
 import amara.launcher.FrameUtil;
 
 /**
@@ -180,9 +181,17 @@ public class SimpleClientLauncher extends javax.swing.JFrame{
     private void btnMasterserverConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasterserverConnectActionPerformed
         HostInformation hostInformation = new HostInformation(txtMasterserverHost.getText(), Integer.parseInt(txtMasterserverPort.getText()));
         AuthentificationInformation authentificationInformation = new AuthentificationInformation(txtLogin.getText(), txtPassword.getText());
-        masterClient = new MasterserverClientApplication(hostInformation, authentificationInformation);
-        masterClient.start();
-        panStart.setVisible(true);
+        try{
+            masterClient = new MasterserverClientApplication(hostInformation);
+            masterClient.start();
+            NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
+            networkClient.sendMessage(new Message_Login(authentificationInformation));
+            panStart.setVisible(true);
+        }catch(ServerConnectionException ex){
+            ex.printStackTrace();
+        }catch(ServerConnectionTimeoutException ex){
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_btnMasterserverConnectActionPerformed
 
     private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
