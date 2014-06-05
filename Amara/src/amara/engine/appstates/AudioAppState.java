@@ -17,7 +17,7 @@ import amara.engine.settings.Settings;
  */
 public class AudioAppState extends BaseDisplayAppState{
 
-    private Node audioNode = new Node("audio_manager_node");
+    private Node audioRootNode = new Node("audio_manager_node");
     private AudioNode backgroundMusicNode;
     private String currentBackgroundMusicFilePath;
     private HashMap<String, AudioNode> soundNodes = new HashMap<String, AudioNode>();
@@ -25,7 +25,7 @@ public class AudioAppState extends BaseDisplayAppState{
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
-        mainApplication.getRootNode().attachChild(audioNode);
+        mainApplication.getRootNode().attachChild(audioRootNode);
     }
     
     public void playBackgroundMusic(String filePath){
@@ -35,7 +35,7 @@ public class AudioAppState extends BaseDisplayAppState{
             backgroundMusicNode.setPositional(false);
             backgroundMusicNode.setLooping(true);
             backgroundMusicNode.setVolume(Settings.getFloat("audio_volume_music"));
-            audioNode.attachChild(backgroundMusicNode);
+            audioRootNode.attachChild(backgroundMusicNode);
             backgroundMusicNode.play();
             currentBackgroundMusicFilePath = filePath;
         }
@@ -44,7 +44,7 @@ public class AudioAppState extends BaseDisplayAppState{
     public void stopBackgroundMusic(){
         if(backgroundMusicNode != null){
             backgroundMusicNode.stop();
-            audioNode.detachChild(backgroundMusicNode);
+            audioRootNode.detachChild(backgroundMusicNode);
             currentBackgroundMusicFilePath = null;
         }
     }
@@ -61,9 +61,21 @@ public class AudioAppState extends BaseDisplayAppState{
             soundNode.setPositional(false);
             soundNode.setLooping(false);
             soundNode.setVolume(Settings.getFloat("audio_volume_sounds"));
-            audioNode.attachChild(soundNode);
+            audioRootNode.attachChild(soundNode);
             soundNodes.put(filePath, soundNode);
         }
         return soundNode;
+    }
+    
+    public AudioNode createAudioNode(String filePath){
+        AudioNode audioNode = new AudioNode(mainApplication.getAssetManager(), filePath);
+        audioNode.setPositional(false);
+        audioNode.setVolume(Settings.getFloat("audio_volume_sounds"));
+        audioRootNode.attachChild(audioNode);
+        return audioNode;
+    }
+    
+    public void removeAudioNode(AudioNode audioNode){
+        audioRootNode.detachChild(audioNode);
     }
 }
