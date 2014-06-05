@@ -22,6 +22,7 @@ import amara.game.entitysystem.systems.buffs.areas.*;
 import amara.game.entitysystem.systems.camps.*;
 import amara.game.entitysystem.systems.commands.*;
 import amara.game.entitysystem.systems.effects.*;
+import amara.game.entitysystem.systems.effects.audio.*;
 import amara.game.entitysystem.systems.effects.buffs.*;
 import amara.game.entitysystem.systems.effects.buffs.areas.*;
 import amara.game.entitysystem.systems.effects.crowdcontrol.*;
@@ -92,6 +93,9 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new RemoveBuffsSystem());
         addEntitySystem(new RepeatingBuffEffectsSystem());
         addEntitySystem(new CalculateEffectImpactSystem());
+        addEntitySystem(new ApplyPauseAudioSystem());
+        addEntitySystem(new ApplyPlayAudioSystem());
+        addEntitySystem(new ApplyStopAudioSystem());
         addEntitySystem(new ApplyAddBuffsSystem());
         addEntitySystem(new ApplyRemoveBuffsSystem());
         addEntitySystem(new ApplyAddBuffAreasSystem());

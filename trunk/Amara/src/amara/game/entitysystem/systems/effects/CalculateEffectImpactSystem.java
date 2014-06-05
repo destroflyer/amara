@@ -7,6 +7,7 @@ package amara.game.entitysystem.systems.effects;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
+import amara.game.entitysystem.components.effects.audio.*;
 import amara.game.entitysystem.components.effects.buffs.*;
 import amara.game.entitysystem.components.effects.buffs.areas.*;
 import amara.game.entitysystem.components.effects.casts.*;
@@ -101,6 +102,9 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     AddComponentsComponent.class,
                     AddEffectTriggersComponent.class,
                     RemoveEntityComponent.class,
+                    PauseAudioComponent.class,
+                    PlayAudioComponent.class,
+                    StopAudioComponent.class,
                     AddBuffComponent.class,
                     RemoveBuffComponent.class,
                     AddBuffAreaComponent.class,

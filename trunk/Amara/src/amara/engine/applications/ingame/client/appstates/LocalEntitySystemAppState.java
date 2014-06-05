@@ -12,6 +12,7 @@ import com.jme3.scene.Spatial;
 import amara.engine.appstates.*;
 import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.network.backends.*;
+import amara.engine.applications.ingame.client.systems.audio.*;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.applications.ingame.client.systems.visualisation.buffs.*;
 import amara.engine.applications.ingame.client.systems.visualisation.effects.crodwcontrol.*;
@@ -70,6 +71,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         networkClient.addMessageBackend(new GameStartedBackend(mainApplication));
         networkClient.addMessageBackend(new GameOverBackend(mainApplication));
         MapHeightmap mapHeightmap = getAppState(MapAppState.class).getMapHeightmap();
+        addEntitySystem(new AudioSystem(getAppState(AudioAppState.class)));
         addEntitySystem(new PositionSystem(entitySceneMap, mapHeightmap));
         addEntitySystem(new CollisionDebugSystem(getAppState(MapObstaclesAppState.class).getObstaclesNode()));
         addEntitySystem(new ModelSystem(entitySceneMap, mainApplication));

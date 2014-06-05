@@ -13,6 +13,7 @@ import amara.engine.network.messages.*;
 import amara.engine.network.messages.entitysystem.*;
 import amara.engine.network.messages.protocol.*;
 import amara.game.entitysystem.components.attributes.*;
+import amara.game.entitysystem.components.audio.*;
 import amara.game.entitysystem.components.buffs.*;
 import amara.game.entitysystem.components.buffs.areas.*;
 import amara.game.entitysystem.components.buffs.status.*;
@@ -44,6 +45,7 @@ import amara.game.entitysystem.components.targets.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.camps.*;
+import amara.game.entitysystem.components.effects.audio.*;
 import amara.game.entitysystem.components.effects.buffs.areas.*;
 import amara.game.entitysystem.components.effects.physics.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
@@ -134,6 +136,13 @@ public class MessagesSerializer{
                         MaximumHealthComponent.class,
                         RequestUpdateAttributesComponent.class,
                         WalkSpeedComponent.class,
+                        //audio
+                        AudioComponent.class,
+                        AudioLoopComponent.class,
+                        AudioSourceComponent.class,
+                        AudioSuccessorComponent.class,
+                        IsAudioPausedComponent.class,
+                        IsAudioPlayingComponent.class,
                         //buffs
                         ContinuousEffectComponent.class,
                         RemoveEffectTriggersComponent.class,
@@ -157,6 +166,10 @@ public class MessagesSerializer{
                         AffectedTargetsComponent.class,
                         ApplyEffectImpactComponent.class,
                         PrepareEffectComponent.class,
+                        //effects/audio
+                        PauseAudioComponent.class,
+                        PlayAudioComponent.class,
+                        StopAudioComponent.class,
                         //effects/buffs
                         AddBuffComponent.class,
                         RemoveBuffComponent.class,
