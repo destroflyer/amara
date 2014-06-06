@@ -11,6 +11,7 @@ import com.jme3.audio.AudioSource;
 import amara.engine.appstates.AudioAppState;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.audio.*;
+import amara.game.entitysystem.components.physics.*;
 
 /**
  *
@@ -28,12 +29,26 @@ public class AudioSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         increasePlayingAudioProgresses(deltaSeconds);
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AudioComponent.class, IsAudioPlayingComponent.class);
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AudioComponent.class, AudioSourceComponent.class, PositionComponent.class, IsAudioPlayingComponent.class);
         for(int entity : observer.getNew().getEntitiesWithAll(AudioComponent.class)){
             load(entityWorld, entity);
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll(AudioComponent.class)){
             remove(entity);
+        }
+        for(int entity : observer.getNew().getEntitiesWithAll(AudioSourceComponent.class)){
+            AudioNode audioNode = audioNodes.get(entity);
+            int audioSourceEntity = entityWorld.getComponent(entity, AudioSourceComponent.class).getEntity();
+            audioNode.setUserData("audio_source_entity", audioSourceEntity);
+            tryUpdateAudioPosition(audioNode, entityWorld.getComponent(audioSourceEntity, PositionComponent.class));
+            //audioNode.setPositional(true);
+            audioNode.setRefDistance(50);
+            audioNode.setMaxDistance(100);
+        }
+        for(int entity : observer.getRemoved().getEntitiesWithAll(AudioSourceComponent.class)){
+            AudioNode audioNode = audioNodes.get(entity);
+            audioNode.setUserData("audio_source_entity", null);
+            audioNode.setPositional(false);
         }
         for(int entity : observer.getNew().getEntitiesWithAll(IsAudioPlayingComponent.class)){
             enqueuePlay(entity);
@@ -52,6 +67,7 @@ public class AudioSystem implements EntitySystem{
                 play(entity);
             }
         }
+        updateAudioPositions(observer);
         observer.reset();
         playQueuedAudioEntities(entityWorld);
     }
@@ -121,5 +137,21 @@ public class AudioSystem implements EntitySystem{
     private float getProgress(AudioNode audioNode){
         Float progress = audioNode.getUserData("audio_progress");
         return ((progress != null)?progress:0);
+    }
+    
+    private void updateAudioPositions(ComponentMapObserver observer){
+        for(AudioNode audioNode : audioNodes.values()){
+            Integer audioSourceEntity = audioNode.getUserData("audio_source_entity");
+            if(audioSourceEntity != null){
+                tryUpdateAudioPosition(audioNode, observer.getNew().getComponent(audioSourceEntity, PositionComponent.class));
+                tryUpdateAudioPosition(audioNode, observer.getChanged().getComponent(audioSourceEntity, PositionComponent.class));
+            }
+        }
+    }
+    
+    private void tryUpdateAudioPosition(AudioNode audioNode, PositionComponent positionComponent){
+        if(positionComponent != null){
+            audioNode.setLocalTranslation(positionComponent.getPosition().getX(), 0, positionComponent.getPosition().getY());
+        }
     }
 }

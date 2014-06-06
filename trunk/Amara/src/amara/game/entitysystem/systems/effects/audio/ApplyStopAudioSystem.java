@@ -20,6 +20,7 @@ public class ApplyStopAudioSystem implements EntitySystem{
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, StopAudioComponent.class)))
         {
             for(int audioEntity : entityWrapper.getComponent(StopAudioComponent.class).getAudioEntities()){
+                entityWorld.removeComponent(audioEntity, AudioSourceComponent.class);
                 entityWorld.removeComponent(audioEntity, IsAudioPlayingComponent.class);
             }
         }

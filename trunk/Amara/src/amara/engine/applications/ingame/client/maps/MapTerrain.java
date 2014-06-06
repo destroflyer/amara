@@ -45,7 +45,7 @@ public class MapTerrain{
         material.setTexture("AlphaMap", loadAlphaMap("Maps/" + mapName + "/terrain_alphamap_0.png"));
         material.setTexture("AlphaMap_1", loadAlphaMap("Maps/" + mapName + "/terrain_alphamap_1.png"));
         material.setTexture("AlphaMap_2", loadAlphaMap("Maps/" + mapName + "/terrain_alphamap_2.png"));
-        TerrainSkin skin = TerrainSkin.getSkin("grass");
+        TerrainSkin skin = TerrainSkin.getSkin("cartoon_forest");
         for(int i=0;i<skin.getTextures().length;i++){
             TerrainSkin_Texture terrainTexture = skin.getTextures()[i];
             Texture texture = MaterialFactory.getAssetManager().loadTexture(terrainTexture.getFilePath());

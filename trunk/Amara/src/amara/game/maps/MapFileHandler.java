@@ -89,7 +89,7 @@ public class MapFileHandler{
                     MapLight_Directional_Shadows shadows = mapLight_Directional.getShadows();
                     if(shadows != null){
                         Element elementShadows = new Element("shadows");
-                        elementShadows.setAttribute("intenstiy", "" + shadows.getIntensity());
+                        elementShadows.setAttribute("intensity", "" + shadows.getIntensity());
                         elementLight.addContent(elementShadows);
                     }
                 }
@@ -231,7 +231,7 @@ public class MapFileHandler{
             }
             return map;
         }catch(Exception ex){
-            System.out.println("Error while loading the map: " + ex.toString());
+            System.out.println("Error while loading the map: " + ex.toString());ex.printStackTrace();
         }
         return null;
     }
