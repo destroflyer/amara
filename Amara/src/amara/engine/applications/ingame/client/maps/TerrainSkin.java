@@ -23,6 +23,23 @@ public class TerrainSkin{
     private boolean containsSnow = false;
     private static HashMap<String, TerrainSkin> SKINS = new HashMap<String, TerrainSkin>();
     static{
+        SKINS.put("cartoon_forest", new TerrainSkin(
+            new TerrainSkin_Texture[]{
+                new TerrainSkin_Texture("Textures/terrain/cartoon_forest/cracked_cliff.jpg", 18),
+                new TerrainSkin_Texture("Textures/terrain/cartoon_forest/sandstone.jpg", 24),
+                new TerrainSkin_Texture("Textures/terrain/cartoon_forest/pebbles_1.jpg", 24),
+                new TerrainSkin_Texture("Textures/terrain/blank.png", 1),
+                new TerrainSkin_Texture("Textures/terrain/cartoon_forest/grass_1.jpg", 10),
+                new TerrainSkin_Texture("Textures/terrain/cartoon_forest/stone_bright_1.jpg", 16),
+                new TerrainSkin_Texture("Textures/terrain/cartoon_forest/wood_1.jpg", 16),
+                new TerrainSkin_Texture("Textures/terrain/blank.png", 1),
+                new TerrainSkin_Texture("Textures/terrain/cartoon_forest/cliff.jpg", 24),
+                new TerrainSkin_Texture("Textures/terrain/cartoon_forest/bush.jpg", 16),
+                new TerrainSkin_Texture("Textures/terrain/cartoon_forest/dirt.jpg", 16),
+                new TerrainSkin_Texture("Textures/terrain/blank.png", 1)
+            },
+            "Textures/skies/default.jpg"
+        ));
         SKINS.put("grass", new TerrainSkin(
             new TerrainSkin_Texture[]{
                 new TerrainSkin_Texture("Textures/terrain/grass.jpg", 32),

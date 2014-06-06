@@ -205,9 +205,6 @@ public class EntityTemplate{
             EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
             buff.setComponent(new BuffVisualisationComponent("electrified"));
             effect1.setComponent(new AddBuffComponent(buff.getId(), duration));
-            EntityWrapper audioHit = entityWorld.getWrapped(entityWorld.createEntity());
-            audioHit.setComponent(new AudioComponent("Sounds/sounds/spells/thunder.ogg"));
-            effect1.setComponent(new PlayAudioComponent(audioHit.getId()));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
@@ -242,6 +239,9 @@ public class EntityTemplate{
             effectTrigger1.setComponent(new TargetTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
             effect1.setComponent(new TriggerCastedSpellEffectsComponent());
+            EntityWrapper audioHit = entityWorld.getWrapped(entityWorld.createEntity());
+            audioHit.setComponent(new AudioComponent("Sounds/sounds/spells/thunder.ogg"));
+            effect1.setComponent(new PlayAudioComponent(audioHit.getId()));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Remove projectile
@@ -411,7 +411,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CooldownComponent(2));
         }
         else if(templateName.equals("pillar_of_flame_object")){
-            entityWrapper.setComponent(new ModelComponent("Models/fireball/skin.xml"));
+            entityWrapper.setComponent(new ModelComponent("Models/pillar_of_flame/skin.xml"));
             entityWrapper.setComponent(new HitboxComponent(new Circle(2)));
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
@@ -518,9 +518,6 @@ public class EntityTemplate{
             movement.setComponent(new MovementTargetComponent(parameters[0]));
             movement.setComponent(new MovementSpeedComponent(9));
             effect1.setComponent(new MoveComponent(movement.getId()));
-            EntityWrapper audioHit = entityWorld.getWrapped(entityWorld.createEntity());
-            audioHit.setComponent(new AudioComponent("Sounds/sounds/spells/grab_hit.ogg"));
-            effect1.setComponent(new PlayAudioComponent(audioHit.getId()));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
@@ -563,6 +560,9 @@ public class EntityTemplate{
             effectTrigger1.setComponent(new TargetTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
             effect1.setComponent(new TriggerCastedSpellEffectsComponent());
+            EntityWrapper audioHit = entityWorld.getWrapped(entityWorld.createEntity());
+            audioHit.setComponent(new AudioComponent("Sounds/sounds/spells/grab_hit.ogg"));
+            effect1.setComponent(new PlayAudioComponent(audioHit.getId()));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Remove projectile
@@ -708,44 +708,50 @@ public class EntityTemplate{
         else if(templateName.equals("wither")){
             entityWrapper.setComponent(new NameComponent("Wither"));
             entityWrapper.setComponent(new SpellVisualisationComponent("wither"));
-            //Add buff
+            //Play sound
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger1.setComponent(new TargetTargetComponent());
+            effectTrigger1.setComponent(new CasterTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper audioStart = entityWorld.getWrapped(entityWorld.createEntity());
             audioStart.setComponent(new AudioComponent("Sounds/sounds/spells/wither_start.ogg"));
+            effect1.setComponent(new PlayAudioComponent(audioStart.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Add buff
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper audioLoop = entityWorld.getWrapped(entityWorld.createEntity());
             audioLoop.setComponent(new AudioComponent("Sounds/sounds/spells/wither_loop.ogg"));
             audioLoop.setComponent(new AudioLoopComponent());
-            effect1.setComponent(new PlayAudioComponent(audioStart.getId(), audioLoop.getId()));
             EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
             buff.setComponent(new BuffVisualisationComponent("withered"));
             EntityWrapper buffEffect = entityWorld.getWrapped(entityWorld.createEntity());
             buffEffect.setComponent(new BonusPercentageWalkSpeedComponent(-0.6f));
             buff.setComponent(new ContinuousEffectComponent(buffEffect.getId()));
             //On buff remove
-            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger2.setComponent(new CasterTargetComponent());
-            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect2.setComponent(new StopAudioComponent(audioLoop.getId()));
-            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
-            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger2.getId()));
-            effect1.setComponent(new AddBuffComponent(buff.getId(), 5));
-            effect1.setComponent(new PlayAudioComponent(audioStart.getId(), audioLoop.getId()));
-            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
-            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
-            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
-            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
-            //Trigger spell effects
             EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger3.setComponent(new TargetTargetComponent());
+            effectTrigger3.setComponent(new CasterTargetComponent());
             EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect3.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effect3.setComponent(new StopAudioComponent(audioLoop.getId()));
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger3.getId()));
+            buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
+            effect2.setComponent(new AddBuffComponent(buff.getId(), 4));
+            effect2.setComponent(new PlayAudioComponent(audioLoop.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger4.setComponent(new TargetTargetComponent());
+            EntityWrapper effect4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect4.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effectTrigger4.setComponent(new TriggeredEffectComponent(effect4.getId()));
+            effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new RangeComponent(14));
             entityWrapper.setComponent(new CooldownComponent(11));
@@ -1184,9 +1190,6 @@ public class EntityTemplate{
             buffEffect.setComponent(new BonusPercentageWalkSpeedComponent(-0.4f));
             buff.setComponent(new ContinuousEffectComponent(buffEffect.getId()));
             effect1.setComponent(new AddBuffComponent(buff.getId(), 2));
-            EntityWrapper audioHit = entityWorld.getWrapped(entityWorld.createEntity());
-            audioHit.setComponent(new AudioComponent("Sounds/sounds/spells/infected_cleaver_hit.ogg"));
-            effect1.setComponent(new PlayAudioComponent(audioHit.getId()));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
@@ -1231,6 +1234,9 @@ public class EntityTemplate{
             effectTrigger1.setComponent(new TargetTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
             effect1.setComponent(new TriggerCastedSpellEffectsComponent());
+            EntityWrapper audioHit = entityWorld.getWrapped(entityWorld.createEntity());
+            audioHit.setComponent(new AudioComponent("Sounds/sounds/spells/infected_cleaver_hit.ogg"));
+            effect1.setComponent(new PlayAudioComponent(audioHit.getId()));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Remove projectile
@@ -1406,7 +1412,7 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger2.getId()));
             effect1.setComponent(new AddBuffComponent(buff.getId(), 10));
-            effect1.setComponent(new PlayAudioComponent(audioStart.getId(), audioLoop.getId()));
+            effect1.setComponent(new PlayAudioComponent(/*audioStart.getId(),*/audioLoop.getId()));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());

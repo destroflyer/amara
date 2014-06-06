@@ -36,7 +36,7 @@ public class BuffVisualisationSystem_Burning extends BuffVisualisationSystem{
         particleEmitter.getParticleInfluencer().setInitialVelocity(new Vector3f(0, 2, 0));
         particleEmitter.setQueueBucket(RenderQueue.Bucket.Opaque);
         particleEmitter.getMaterial().getAdditionalRenderState().setDepthTest(false);
-        particleEmitter.setUserData("layer", 2);
+        particleEmitter.setUserData("layer", 1);
         return simpleParticleEmitter;
     }
 }

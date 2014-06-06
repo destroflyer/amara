@@ -50,7 +50,7 @@ public class BuffVisualisationSystem_Wither extends BuffVisualisationSystem{
         particleEmitter.setInWorldSpace(false);
         particleEmitter.setQueueBucket(RenderQueue.Bucket.Opaque);
         particleEmitter.getMaterial().getAdditionalRenderState().setDepthTest(false);
-        particleEmitter.setUserData("layer", 2);
+        particleEmitter.setUserData("layer", 1);
         return particleEmitter;
     }
 }

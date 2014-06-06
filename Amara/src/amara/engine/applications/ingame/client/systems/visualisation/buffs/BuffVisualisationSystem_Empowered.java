@@ -37,7 +37,7 @@ public class BuffVisualisationSystem_Empowered extends BuffVisualisationSystem{
         particleEmitter.getParticleInfluencer().setVelocityVariation(0.15f);
         particleEmitter.setQueueBucket(RenderQueue.Bucket.Opaque);
         particleEmitter.getMaterial().getAdditionalRenderState().setDepthTest(false);
-        particleEmitter.setUserData("layer", 2);
+        particleEmitter.setUserData("layer", 1);
         particleEmitter.updateLogicalState(10);
         return simpleParticleEmitter;
     }

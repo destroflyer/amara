@@ -112,22 +112,22 @@ public class TestMap extends Map{
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
         switch(playerIndex){
             case 0:
-                position = new Vector2f(22, 16.5f);
+                position = new Vector2f(26.5f, 18);
                 direction = new Vector2f(0, -1);
                 break;
             
             case 1:
-                position = new Vector2f(7, 7);
+                position = new Vector2f(17.5f, 8);
                 direction = new Vector2f(1, 1);
                 break;
             
             case 2:
-                position = new Vector2f(20, 7);
+                position = new Vector2f(44, 21);
                 direction = new Vector2f(-1, -1);
                 break;
             
             case 3:
-                position = new Vector2f(29, 4);
+                position = new Vector2f(48, 11.5f);
                 direction = new Vector2f(-1, -1);
                 break;
         }
