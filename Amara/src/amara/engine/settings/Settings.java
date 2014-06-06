@@ -27,7 +27,7 @@ public class Settings{
         set("antialiasing", "0");
         set("vsync", "false");
         set("audio_volume_music", "0.5");
-        set("audio_volume_sounds", "0.3");
+        set("audio_volume_sounds", "0.1");
         set("hardware_skinning", "false");
         set("shadow_quality", "2");
         reloadFile();
