@@ -47,6 +47,7 @@ public class PolyHelper
         double border = 5;
         Polygon flipped = poly.flip();
         Point2D solver = Point2D.Zero;
+        int numIterations = 0;
         while(!solved)
         {
             Polygon masked = bounds.grow(border).toPolygon().intersection(map);
@@ -55,6 +56,7 @@ public class PolyHelper
             solved = withinBorder(solver, border);
 //            if(solved && result.contains(solver)) throw new Error();
             border += 5;
+            if(numIterations++ > 1000) System.out.println("blubber");
         }
         //System.out.println("" + solver);
         return solver;
