@@ -7,6 +7,7 @@ package amara.game.maps;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
+import amara.game.entitysystem.components.audio.*;
 import amara.game.entitysystem.components.camps.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.maps.*;
@@ -32,6 +33,11 @@ public class Map_Destroforest extends Map{
 
     @Override
     public void load(EntityWorld entityWorld){
+        EntityWrapper audioBackgroundMusic = entityWorld.getWrapped(entityWorld.createEntity());
+        audioBackgroundMusic.setComponent(new AudioComponent("Sounds/music/mystic_river.ogg"));
+        audioBackgroundMusic.setComponent(new AudioVolumeComponent(1.75f));
+        audioBackgroundMusic.setComponent(new AudioLoopComponent());
+        audioBackgroundMusic.setComponent(new IsAudioPlayingComponent());
         for(int i=0;i<3;i++){
             EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
             unit.setComponent(new ModelComponent("Models/wizard/skin.xml"));

@@ -13,6 +13,7 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.math.ColorRGBA;
 import amara.Util;
+import amara.engine.applications.ingame.client.maps.*;
 import amara.engine.files.FileManager;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.maps.lights.*;
@@ -99,6 +100,17 @@ public class MapFileHandler{
                 }
             }
             root.addContent(elementLights);
+            Element elementTerrain = new Element("terrain");
+            TerrainSkin terrainSkin = map.getTerrainSkin();
+            Element elementTerrainTextures = new Element("textures");
+            for(TerrainSkin_Texture texture : terrainSkin.getTextures()){
+                Element elementTexture = new Element("texture");
+                elementTexture.setAttribute("scale", "" + texture.getScale());
+                elementTexture.setText(texture.getFilePath());
+                elementTerrainTextures.addContent(elementTexture);
+            }
+            elementTerrain.addContent(elementTerrainTextures);
+            root.addContent(elementTerrain);
             Element elementPhysics = new Element("physics");
             elementPhysics.setAttribute("width", "" + map.getPhysicsInformation().getWidth());
             elementPhysics.setAttribute("height", "" + map.getPhysicsInformation().getHeight());
@@ -174,6 +186,18 @@ public class MapFileHandler{
                 camera.setZoom(new MapCamera_Zoom(zoomInterval, zoomMaximumLevel, zoomInitialLevel));
             }
             map.setCamera(camera);
+            Element elementTerrain = root.getChild("terrain");
+            Element elementTerrainTextures = elementTerrain.getChild("textures");
+            List elementTerrainTexturesChildren = elementTerrainTextures.getChildren();
+            TerrainSkin_Texture[] terrainSkinTextures = new TerrainSkin_Texture[elementTerrainTexturesChildren.size()];
+            for(int i=0;i<terrainSkinTextures.length;i++){
+                Element elementTexture = (Element) elementTerrainTexturesChildren.get(i);
+                String filePath = elementTexture.getText();
+                float scale = elementTexture.getAttribute("scale").getFloatValue();
+                terrainSkinTextures[i] = new TerrainSkin_Texture(filePath, scale);
+            }
+            TerrainSkin terrainSkin = new TerrainSkin(terrainSkinTextures);
+            map.setTerrainSkin(terrainSkin);
             Element elementLights = root.getChild("lights");
             for(Object elementLightObject : elementLights.getChildren()){
                 Element elemenLight = (Element) elementLightObject;
@@ -231,7 +255,7 @@ public class MapFileHandler{
             }
             return map;
         }catch(Exception ex){
-            System.out.println("Error while loading the map: " + ex.toString());ex.printStackTrace();
+            System.out.println("Error while loading the map: " + ex.toString());
         }
         return null;
     }

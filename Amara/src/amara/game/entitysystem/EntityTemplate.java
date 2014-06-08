@@ -85,6 +85,7 @@ public class EntityTemplate{
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper audioCast = entityWorld.getWrapped(entityWorld.createEntity());
             audioCast.setComponent(new AudioComponent("Sounds/sounds/spells/range_autoattack_cast.ogg"));
+            audioCast.setComponent(new AudioVolumeComponent(0.75f));
             effect2.setComponent(new PlayAudioComponent(audioCast.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
@@ -125,6 +126,7 @@ public class EntityTemplate{
             effect1.setComponent(new ScalingAttackDamagePhysicalDamageComponent(1));
             EntityWrapper audioCast = entityWorld.getWrapped(entityWorld.createEntity());
             audioCast.setComponent(new AudioComponent("Sounds/sounds/spells/melee_autoattack_cast.ogg"));
+            audioCast.setComponent(new AudioVolumeComponent(0.75f));
             effect1.setComponent(new PlayAudioComponent(audioCast.getId()));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
@@ -257,6 +259,26 @@ public class EntityTemplate{
             entityWrapper.setComponent(new NameComponent("Riftwalk"));
             entityWrapper.setComponent(new DescriptionComponent("Teleports to the target location."));
             entityWrapper.setComponent(new SpellVisualisationComponent("riftwalk"));
+            //Play sound
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new CasterTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper audioCast = entityWorld.getWrapped(entityWorld.createEntity());
+            audioCast.setComponent(new AudioComponent("Sounds/sounds/spells/riftwalk_cast.ogg"));
+            effect1.setComponent(new PlayAudioComponent(audioCast.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new CasterTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new TeleportCasterToTargetPositionComponent());
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
         }

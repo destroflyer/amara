@@ -4,6 +4,7 @@
  */
 package amara.game.maps;
 
+import amara.engine.applications.ingame.client.maps.TerrainSkin;
 import amara.game.entitysystem.EntityWorld;
 
 /**
@@ -15,6 +16,7 @@ public abstract class Map{
     private String name;
     protected MapCamera camera;
     protected MapLights lights = new MapLights();
+    protected TerrainSkin terrainSkin;
     protected MapPhysicsInformation physicsInformation;
     protected MapVisuals visuals = new MapVisuals();
     protected int entity;
@@ -41,6 +43,14 @@ public abstract class Map{
 
     public MapLights getLights(){
         return lights;
+    }
+
+    public void setTerrainSkin(TerrainSkin terrainSkin){
+        this.terrainSkin = terrainSkin;
+    }
+
+    public TerrainSkin getTerrainSkin(){
+        return terrainSkin;
     }
 
     public void setPhysicsInformation(MapPhysicsInformation physicsInformation){
