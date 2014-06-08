@@ -141,6 +141,7 @@ public class MessagesSerializer{
                         AudioLoopComponent.class,
                         AudioSourceComponent.class,
                         AudioSuccessorComponent.class,
+                        AudioVolumeComponent.class,
                         IsAudioPausedComponent.class,
                         IsAudioPlayingComponent.class,
                         //buffs

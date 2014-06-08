@@ -48,7 +48,7 @@ public class MapAppState extends BaseDisplayAppState{
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         mapHeightmap = new MapHeightmap(map.getName(), map.getPhysicsInformation());
-        mapTerrain = new MapTerrain(map.getName(), map.getPhysicsInformation());
+        mapTerrain = new MapTerrain(map);
         mainApplication.getRootNode().attachChild(mapTerrain.getTerrain());
         mainApplication.getRootNode().attachChild(visualsNode);
         initializeCamera();

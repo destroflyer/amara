@@ -76,6 +76,10 @@ public class AudioSystem implements EntitySystem{
         String audioPath = entityWorld.getComponent(audioEntity, AudioComponent.class).getAudioPath();
         AudioNode audioNode = audioAppState.createAudioNode(audioPath);
         audioNode.setLooping(entityWorld.hasComponent(audioEntity, AudioLoopComponent.class));
+        AudioVolumeComponent audioVolumeComponent = entityWorld.getComponent(audioEntity, AudioVolumeComponent.class);
+        if(audioVolumeComponent != null){
+            audioNode.setVolume(audioNode.getVolume() * audioVolumeComponent.getVolume());
+        }
         audioNodes.put(audioEntity, audioNode);
     }
     
