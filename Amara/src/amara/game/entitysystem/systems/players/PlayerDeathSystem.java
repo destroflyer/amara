@@ -6,7 +6,6 @@ package amara.game.entitysystem.systems.players;
 
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
-import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.maps.*;
 import amara.game.entitysystem.components.maps.playerdeathrules.*;
 import amara.game.entitysystem.components.physics.*;
@@ -48,6 +47,7 @@ public class PlayerDeathSystem implements EntitySystem{
             HitboxActiveComponent.class,
             MaximumHealthComponent.class,
             HealthComponent.class,
+            RequestUpdateAttributesComponent.class,
             //General
             IsTargetableComponent.class,
             IsVulnerableComponent.class,
