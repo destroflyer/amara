@@ -79,9 +79,8 @@ public class UpdateAttributesSystem implements EntitySystem{
             walkSpeed += attributeBonus.getFlatWalkSpeed();
             walkSpeed *= attributeBonus.getPercentageWalkSpeed();
             entityWrapper.setComponent(new MaximumHealthComponent(maximumHealth));
-            if(entityWrapper.getComponent(HealthComponent.class) == null){
+            if((entityWrapper.getComponent(HealthComponent.class) == null) && entityWrapper.hasComponent(IsAliveComponent.class)){
                 entityWrapper.setComponent(new HealthComponent(maximumHealth));
-                entityWrapper.setComponent(new IsAliveComponent());
             }
             entityWrapper.setComponent(new HealthRegenerationComponent(healthRegeneration));
             entityWrapper.setComponent(new AttackDamageComponent(attackDamage));

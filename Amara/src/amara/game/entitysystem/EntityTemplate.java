@@ -173,6 +173,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
             
+            entityWrapper.setComponent(new IsAliveComponent());
             entityWrapper.setComponent(new BaseMaximumHealthComponent(300));
             entityWrapper.setComponent(new BaseAttackDamageComponent(30));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
@@ -315,6 +316,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
             
+            entityWrapper.setComponent(new IsAliveComponent());
             entityWrapper.setComponent(new BaseMaximumHealthComponent(500));
             entityWrapper.setComponent(new BaseAttackDamageComponent(60));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
@@ -506,6 +508,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
             
+            entityWrapper.setComponent(new IsAliveComponent());
             entityWrapper.setComponent(new BaseMaximumHealthComponent(700));
             entityWrapper.setComponent(new BaseAttackDamageComponent(40));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
@@ -800,6 +803,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
             
+            entityWrapper.setComponent(new IsAliveComponent());
             entityWrapper.setComponent(new BaseMaximumHealthComponent(450));
             entityWrapper.setComponent(new BaseAttackDamageComponent(50));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
@@ -828,9 +832,6 @@ public class EntityTemplate{
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new TargetTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect1.setComponent(new AddBindingImmuneComponent(duration));
-            effect1.setComponent(new AddSilenceImmuneComponent(duration));
-            effect1.setComponent(new AddStunImmuneComponent(duration));
             effect1.setComponent(new RemoveVulnerabilityComponent());
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
@@ -872,6 +873,7 @@ public class EntityTemplate{
             effectTrigger1.setComponent(new TargetTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
             effect1.setComponent(new RemoveTargetabilityComponent());
+            effect1.setComponent(new RemoveVulnerabilityComponent());
             EntityWrapper audioStart = entityWorld.getWrapped(entityWorld.createEntity());
             audioStart.setComponent(new AudioComponent("Sounds/sounds/spells/zhonyas_start.ogg"));
             EntityWrapper audioLoop = entityWorld.getWrapped(entityWorld.createEntity());
@@ -890,6 +892,7 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new CustomTargetComponent(parameters[0]));
             EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
             effect3.setComponent(new AddTargetabilityComponent());
+            effect3.setComponent(new AddVulnerabilityComponent());
             EntityWrapper audioEnd = entityWorld.getWrapped(entityWorld.createEntity());
             audioEnd.setComponent(new AudioComponent("Sounds/sounds/spells/zhonyas_end.ogg"));
             effect3.setComponent(new StopAudioComponent(audioLoop.getId()));
@@ -987,6 +990,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
             
+            entityWrapper.setComponent(new IsAliveComponent());
             entityWrapper.setComponent(new BaseMaximumHealthComponent(400));
             entityWrapper.setComponent(new BaseAttackDamageComponent(80));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
@@ -1175,6 +1179,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
             
+            entityWrapper.setComponent(new IsAliveComponent());
             entityWrapper.setComponent(new BaseMaximumHealthComponent(1200));
             entityWrapper.setComponent(new BaseHealthRegenerationComponent(10));
             entityWrapper.setComponent(new BaseAttackDamageComponent(40));
@@ -1470,6 +1475,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
             
+            entityWrapper.setComponent(new IsAliveComponent());
             entityWrapper.setComponent(new BaseMaximumHealthComponent(450));
             entityWrapper.setComponent(new BaseAttackDamageComponent(50));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
