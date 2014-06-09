@@ -59,6 +59,7 @@ public class Map_Techtest extends Map{
                 unit.setComponent(new IntersectionPushComponent());
                 unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
                 unit.setComponent(new HitboxActiveComponent());
+                unit.setComponent(new IsAliveComponent());
                 unit.setComponent(new BaseMaximumHealthComponent(500));
                 unit.setComponent(new BaseWalkSpeedComponent(2));
                 unit.setComponent(new RequestUpdateAttributesComponent());
@@ -78,6 +79,7 @@ public class Map_Techtest extends Map{
         boss.setComponent(new IntersectionPushComponent());
         boss.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
         boss.setComponent(new HitboxActiveComponent());
+        boss.setComponent(new IsAliveComponent());
         boss.setComponent(new BaseMaximumHealthComponent(800));
         boss.setComponent(new RequestUpdateAttributesComponent());
         boss.setComponent(new IsTargetableComponent());
