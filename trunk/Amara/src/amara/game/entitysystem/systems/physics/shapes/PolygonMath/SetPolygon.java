@@ -154,7 +154,6 @@ public class SetPolygon
 
     public Point2D minBorderDistance(Point2D p)
     {
-        assert(areaContains(p) == Containment.Inside);
         assert(areaContains(p) != Containment.Outside);
         double squaredDistance = Double.POSITIVE_INFINITY;
         Point2D distance = Point2D.Zero;
@@ -180,7 +179,6 @@ public class SetPolygon
             }
         }
         assert(!distance.equals(Point2D.Zero));
-        assert areaContains(p.sub(distance)) == Containment.Border;
         return distance.inverse();
     }
 

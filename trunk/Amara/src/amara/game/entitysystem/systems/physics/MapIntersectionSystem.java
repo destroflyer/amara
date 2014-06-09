@@ -114,10 +114,12 @@ public final class MapIntersectionSystem implements EntitySystem
         }
         if(!solved)
         {
-            Polygon poly = PolyHelper.fromShape(shape);
-            Point2D overlap = PolyHelper.stepwiseOverlap(mapPoly, poly);
-            newPosition = new Vector2D(position.x + overlap.getX(), position.y + overlap.getY());
-            shape.getTransform().setPosition(newPosition.getX(), newPosition.getY());
+            Polygon poly = PolyHelper.fromShape(previous);
+            if(mapPoly.intersects(poly))
+            {
+                Point2D overlap = PolyHelper.stepwiseOverlap(mapPoly, poly);
+                newPosition = new Vector2D(position.x + overlap.getX(), position.y + overlap.getY());
+            } else newPosition = new Vector2D(position.x, position.y);
         }
         assert newPosition != null;
         assert mapGrid.getAllIntersectionPartners(shape).isEmpty();

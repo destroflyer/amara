@@ -42,12 +42,12 @@ public class PolyHelper
     
     public static Point2D stepwiseOverlap(Polygon map, Polygon poly)
     {
+        assert map.intersects(poly);
         boolean solved = false;
         BoundRectangle bounds = poly.boundRectangle();
         double border = 5;
         Polygon flipped = poly.flip();
         Point2D solver = Point2D.Zero;
-        int numIterations = 0;
         while(!solved)
         {
             Polygon masked = bounds.grow(border).toPolygon().intersection(map);
@@ -56,7 +56,6 @@ public class PolyHelper
             solved = withinBorder(solver, border);
 //            if(solved && result.contains(solver)) throw new Error();
             border += 5;
-            if(numIterations++ > 1000) System.out.println("blubber");
         }
         //System.out.println("" + solver);
         return solver;

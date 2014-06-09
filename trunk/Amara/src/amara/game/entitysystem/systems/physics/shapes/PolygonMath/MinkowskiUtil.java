@@ -84,11 +84,6 @@ class MinkowskiUtil
         //return result;
     }
 
-    private static SetPolygon union(SetPolygon a, SetPolygon b)
-    {
-        return SetPolygonUtil.union(a, b);
-    }
-
     private static SetPolygon scaleTranslate(SetPolygon set, Point2D translation, double scale)
     {
         SetPolygon result = new SetPolygon();

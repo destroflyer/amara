@@ -419,10 +419,8 @@ class SetPolygonUtil
                 }
             }
         }
-        boolean bla = !chains.isEmpty();
-//        if(bla)
-//            System.out.println("error in polygon operation, trying to hide it...");
-        while(!chains.isEmpty())
+        
+        if(!chains.isEmpty())
         {
             double permittedErrorSquared = 0.01d;
             ArrayList<Point2D> firstChain = chains.get(0);
@@ -449,13 +447,17 @@ class SetPolygonUtil
                 }
             }
         }
-        if(bla)
+        
+        if(!chains.isEmpty())
         {
-            if(!chains.isEmpty())
-                System.out.println("could not hide polygon operation error, polygon(s) discarded...");
-//            else System.out.println("*fixed*");
+            System.out.println("could not hide polygon operation error, " + chains.size() + " polygon(s) will be deformed...");
+            while(!chains.isEmpty())
+            {
+                result.add(new SimplePolygon(chains.get(0)));
+                chains.remove(0);
+            }
         }
-        assert(chains.isEmpty()): "" + chains + result;
+        assert(chains.isEmpty());
         return result;
     }
     private static double simpleSetArea(List<SimplePolygon> simpleSet)
