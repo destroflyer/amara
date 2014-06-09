@@ -60,7 +60,7 @@ public class HitboxUpdater
     
     private void add(int entity, Hitbox hitbox)
     {
-        assert !hitboxMap.containsKey(entity);
+        if(hitboxMap.containsKey(entity)) return;
         sap.add(hitbox);
         hitboxMap.put(entity, hitbox);
     }
