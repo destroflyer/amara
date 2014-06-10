@@ -7,12 +7,9 @@ package amara.game.entitysystem.systems.spells.casting;
 import java.util.LinkedList;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.attributes.*;
-import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.input.*;
-import amara.game.entitysystem.components.input.casts.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spawns.*;
@@ -36,57 +33,40 @@ public class CastSpellSystem implements EntitySystem{
         for(int casterEntity : entityWorld.getEntitiesWithAll(CastSpellComponent.class)){
             CastSpellComponent castSpellComponent = entityWorld.getComponent(casterEntity, CastSpellComponent.class);
             int spellEntity = castSpellComponent.getSpellEntity();
-            int castInformationEntity = castSpellComponent.getCastInformationEntity();
-            TargetComponent castTargetComponent = entityWorld.getComponent(castInformationEntity, TargetComponent.class);
-            PositionComponent castPositionComponent = entityWorld.getComponent(castInformationEntity, PositionComponent.class);
-            DirectionComponent castDirectionComponent = entityWorld.getComponent(castInformationEntity, DirectionComponent.class);
-            //Turn into cast direction
-            Vector2f turnDirection = entityWorld.getComponent(casterEntity, DirectionComponent.class).getVector().clone();
-            Vector2f casterPosition = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
-            if((castTargetComponent != null) && (castTargetComponent.getTargetEntity() != casterEntity)){
-                Vector2f targetPosition = entityWorld.getComponent(castTargetComponent.getTargetEntity(), PositionComponent.class).getPosition();
-                turnDirection = targetPosition.subtract(casterPosition);
+            int targetEntity = castSpellComponent.getTargetEntity();
+            PositionComponent targetPositionComponent = null;
+            DirectionComponent targetDirectionComponent = null;
+            if(targetEntity != -1){
+                targetPositionComponent = entityWorld.getComponent(targetEntity, PositionComponent.class);
+                targetDirectionComponent = entityWorld.getComponent(targetEntity, DirectionComponent.class);
+                //Turn into cast direction
+                Vector2f turnDirection = null;
+                if(targetPositionComponent != null){
+                    Vector2f casterPosition = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
+                    turnDirection = targetPositionComponent.getPosition().subtract(casterPosition);
+                }
+                else if(targetDirectionComponent != null){
+                    turnDirection = targetDirectionComponent.getVector().clone();
+                }
+                if(turnDirection != null){
+                    entityWorld.setComponent(casterEntity, new DirectionComponent(turnDirection));
+                }
             }
-            else if(castPositionComponent != null){
-                turnDirection = castPositionComponent.getPosition().subtract(casterPosition);
-            }
-            else if(castDirectionComponent != null){
-                turnDirection = castDirectionComponent.getVector().clone();
-            }
-            entityWorld.setComponent(casterEntity, new DirectionComponent(turnDirection));
+            boolean isTargetRealUnit = ((targetPositionComponent != null) && (targetDirectionComponent != null));
             //Instant
             InstantEffectTriggersComponent instantEffectTriggersComponent = entityWorld.getComponent(spellEntity, InstantEffectTriggersComponent.class);
             if(instantEffectTriggersComponent != null){
-                int targetEntity = ((castTargetComponent != null)?castTargetComponent.getTargetEntity():-1);
                 LinkedList<EntityWrapper> effectCasts = EffectTriggerUtil.triggerEffects(entityWorld, instantEffectTriggersComponent.getEffectTriggerEntities(), targetEntity);
                 for(EntityWrapper effectCast : effectCasts){
                     effectCast.setComponent(new EffectCastSourceComponent(casterEntity));
                     effectCast.setComponent(new EffectCastSourceSpellComponent(spellEntity));
-                    if(castPositionComponent != null){
-                        effectCast.setComponent(new EffectCastPositionComponent(castPositionComponent.getPosition().clone()));
-                    }
-                    if(castDirectionComponent != null){
-                        effectCast.setComponent(new EffectCastDirectionComponent(castDirectionComponent.getVector().clone()));
-                    }
-                }
-            }
-            //Buffs
-            if(castTargetComponent != null){
-                InstantTargetBuffComponent instantTargetBuffComponent = entityWorld.getComponent(spellEntity, InstantTargetBuffComponent.class);
-                if(instantTargetBuffComponent != null){
-                    EntityWrapper buffStatus = entityWorld.getWrapped(entityWorld.createEntity());
-                    buffStatus.setComponent(new ActiveBuffComponent(castTargetComponent.getTargetEntity(), instantTargetBuffComponent.getBuffEntityID()));
-                    buffStatus.setComponent(new EffectCastSourceComponent(casterEntity));
-                    buffStatus.setComponent(new EffectCastSourceSpellComponent(spellEntity));
-                    buffStatus.setComponent(new RemainingBuffDurationComponent(instantTargetBuffComponent.getDuration()));
-                    entityWorld.setComponent(castTargetComponent.getTargetEntity(), new RequestUpdateAttributesComponent());
                 }
             }
             //Specials
-            if(castPositionComponent != null){
+            if(targetEntity != -1){
                 if(entityWorld.hasComponent(spellEntity, TeleportCasterToTargetPositionComponent.class)){
                     entityWorld.removeComponent(casterEntity, MovementComponent.class);
-                    entityWorld.setComponent(casterEntity, new PositionComponent(castPositionComponent.getPosition().clone()));
+                    entityWorld.setComponent(casterEntity, new PositionComponent(targetPositionComponent.getPosition().clone()));
                 }
             }
             //Spawns
@@ -103,8 +83,11 @@ public class CastSpellSystem implements EntitySystem{
                         spawnedObject.setComponent(new TeamComponent(teamComponent.getTeamEntityID()));
                     }
                     Vector2f position;
-                    if(castPositionComponent != null){
-                        position = castPositionComponent.getPosition().clone();
+                    if((targetPositionComponent != null) && (!isTargetRealUnit)){
+                        position = targetPositionComponent.getPosition().clone();
+                        if(targetDirectionComponent != null){
+                            spawnedObject.setComponent(new DirectionComponent(targetDirectionComponent.getVector().clone()));
+                        }
                     }
                     else{
                         position = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition().clone();
@@ -114,17 +97,14 @@ public class CastSpellSystem implements EntitySystem{
                         position.addLocal(relativeSpawnPositionComponent.getPosition());
                     }
                     spawnedObject.setComponent(new PositionComponent(position));
-                    if(castDirectionComponent != null){
-                        spawnedObject.setComponent(new DirectionComponent(castDirectionComponent.getVector().clone()));
-                    }
                     SpawnMovementSpeedComponent spawnMovementSpeedComponent = spawnInformation.getComponent(SpawnMovementSpeedComponent.class);
                     if(spawnMovementSpeedComponent != null){
                         EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
-                        if(castTargetComponent != null){
-                            movement.setComponent(new MovementTargetComponent(castTargetComponent.getTargetEntity()));
+                        if(isTargetRealUnit){
+                            movement.setComponent(new MovementTargetComponent(targetEntity));
                         }
-                        if(castDirectionComponent != null){
-                            movement.setComponent(new MovementDirectionComponent(castDirectionComponent.getVector().clone()));
+                        else if(targetDirectionComponent != null){
+                            movement.setComponent(new MovementDirectionComponent(targetDirectionComponent.getVector().clone()));
                         }
                         movement.setComponent(new MovementSpeedComponent(spawnMovementSpeedComponent.getSpeed()));
                         spawnedObject.setComponent(new MovementComponent(movement.getId()));

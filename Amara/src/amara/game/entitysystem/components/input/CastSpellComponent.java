@@ -17,18 +17,18 @@ public class CastSpellComponent{
         
     }
     
-    public CastSpellComponent(int spellEntity, int castInformationEntity){
+    public CastSpellComponent(int spellEntity, int targetEntity){
         this.spellEntity = spellEntity;
-        this.castInformationEntity = castInformationEntity;
+        this.targetEntity = targetEntity;
     }
     private int spellEntity;
-    private int castInformationEntity;
+    private int targetEntity;
 
     public int getSpellEntity(){
         return spellEntity;
     }
 
-    public int getCastInformationEntity(){
-        return castInformationEntity;
+    public int getTargetEntity(){
+        return targetEntity;
     }
 }
