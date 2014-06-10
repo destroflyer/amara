@@ -178,8 +178,6 @@ public class MessagesSerializer{
                         AddBuffAreaComponent.class,
                         RemoveBuffAreaComponent.class,
                         //effects/casts
-                        EffectCastDirectionComponent.class,
-                        EffectCastPositionComponent.class,
                         EffectCastSourceComponent.class,
                         EffectCastSourceSpellComponent.class,
                         EffectCastTargetComponent.class,

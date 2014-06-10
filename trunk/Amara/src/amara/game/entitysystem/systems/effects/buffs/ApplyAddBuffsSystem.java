@@ -9,6 +9,7 @@ import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.buffs.*;
+import amara.game.entitysystem.components.effects.casts.*;
 
 /**
  *
@@ -38,6 +39,13 @@ public class ApplyAddBuffsSystem implements EntitySystem{
             if(duration != -1){
                 entityWorld.setComponent(buffStatusEntity, new RemainingBuffDurationComponent(duration));
             }
+            else{
+                entityWorld.removeComponent(buffStatusEntity, RemainingBuffDurationComponent.class);
+            }
+            EntityUtil.transferComponents(entityWorld, entityWrapper.getId(), buffStatusEntity, new Class[]{
+                EffectCastSourceComponent.class,
+                EffectCastSourceSpellComponent.class
+            });
             entityWorld.setComponent(targetEntity, new RequestUpdateAttributesComponent());
         }
     }

@@ -287,13 +287,30 @@ public class EntityTemplate{
             entityWrapper.setComponent(new NameComponent("Ignite"));
             entityWrapper.setComponent(new DescriptionComponent("Deals damage over time to the target."));
             entityWrapper.setComponent(new SpellVisualisationComponent("ignite"));
-            EntityWrapper igniteBuff = entityWorld.getWrapped(entityWorld.createEntity());
-            igniteBuff.setComponent(new BuffVisualisationComponent("burning"));
+            //Add buff
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
+            buff.setComponent(new BuffVisualisationComponent("burning"));
+            EntityWrapper buffEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            buffEffect.setComponent(new FlatMagicDamageComponent(40));
+            buffEffect.setComponent(new ScalingAbilityPowerMagicDamageComponent(1));
+            buff.setComponent(new RepeatingEffectComponent(buffEffect.getId(), 0.5f));
+            effect1.setComponent(new AddBuffComponent(buff.getId(), 5));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetTargetComponent());
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect2.setComponent(new FlatMagicDamageComponent(40));
-            effect2.setComponent(new ScalingAbilityPowerMagicDamageComponent(1));
-            igniteBuff.setComponent(new RepeatingEffectComponent(effect2.getId(), 0.5f));
-            entityWrapper.setComponent(new InstantTargetBuffComponent(igniteBuff.getId(), 3));
+            effect2.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new RangeComponent(10));
             entityWrapper.setComponent(new CooldownComponent(3));

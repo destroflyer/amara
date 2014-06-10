@@ -6,7 +6,6 @@ package amara.game.entitysystem.systems.spells;
 
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.input.*;
-import amara.game.entitysystem.components.input.casts.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.systems.commands.ExecutePlayerCommandsSystem;
@@ -37,9 +36,7 @@ public class PerformAutoAttacksSystem implements EntitySystem{
                 if(entityWrapper.hasComponent(AutoAttackTargetComponent.class)){
                     int autoAttackEntity = entityWrapper.getComponent(AutoAttackComponent.class).getAutoAttackEntity();
                     if(!entityWrapper.hasComponent(IsCastingComponent.class)){
-                        int castInformationEntity = entityWorld.createEntity();
-                        entityWorld.setComponent(castInformationEntity, new TargetComponent(targetEntity));
-                        ExecutePlayerCommandsSystem.castSpell(entityWorld, entityWrapper.getId(), new CastSpellComponent(autoAttackEntity, castInformationEntity));
+                        ExecutePlayerCommandsSystem.castSpell(entityWorld, entityWrapper.getId(), new CastSpellComponent(autoAttackEntity, targetEntity));
                     }
                 }
             }

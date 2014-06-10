@@ -76,29 +76,26 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 else if(command instanceof CastSelfcastSpellCommand){
                     CastSelfcastSpellCommand castSelfcastSpellCommand = (CastSelfcastSpellCommand) command;
                     int spellEntity = entityWorld.getComponent(selectedUnit, SpellsComponent.class).getSpellsEntities()[castSelfcastSpellCommand.getSpellIndex()];
-                    int castInformationEntity = entityWorld.createEntity();
-                    castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, castInformationEntity));
+                    castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, -1));
                 }
                 else if(command instanceof CastSingleTargetSpellCommand){
                     CastSingleTargetSpellCommand castSingleTargetSpellCommand = (CastSingleTargetSpellCommand) command;
                     int spellEntity = entityWorld.getComponent(selectedUnit, SpellsComponent.class).getSpellsEntities()[castSingleTargetSpellCommand.getSpellIndex()];
-                    int castInformationEntity = entityWorld.createEntity();
-                    entityWorld.setComponent(castInformationEntity, new TargetComponent(castSingleTargetSpellCommand.getTargetEntityID()));
-                    castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, castInformationEntity));
+                    castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, castSingleTargetSpellCommand.getTargetEntityID()));
                 }
                 else if(command instanceof CastLinearSkillshotSpellCommand){
                     CastLinearSkillshotSpellCommand castLinearSkillshotSpellCommand = (CastLinearSkillshotSpellCommand) command;
                     int spellEntity = entityWorld.getComponent(selectedUnit, SpellsComponent.class).getSpellsEntities()[castLinearSkillshotSpellCommand.getSpellIndex()];
-                    int castInformationEntity = entityWorld.createEntity();
-                    entityWorld.setComponent(castInformationEntity, new DirectionComponent(castLinearSkillshotSpellCommand.getDirection().clone()));
-                    castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, castInformationEntity));
+                    int targetEntity = entityWorld.createEntity();
+                    entityWorld.setComponent(targetEntity, new DirectionComponent(castLinearSkillshotSpellCommand.getDirection().clone()));
+                    castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, targetEntity));
                 }
                 else if(command instanceof CastPositionalSkillshotSpellCommand){
                     CastPositionalSkillshotSpellCommand castPositionalSkillshotSpellCommand = (CastPositionalSkillshotSpellCommand) command;
                     int spellEntity = entityWorld.getComponent(selectedUnit, SpellsComponent.class).getSpellsEntities()[castPositionalSkillshotSpellCommand.getSpellIndex()];
-                    int castInformationEntity = entityWorld.createEntity();
-                    entityWorld.setComponent(castInformationEntity, new PositionComponent(castPositionalSkillshotSpellCommand.getPosition().clone()));
-                    castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, castInformationEntity));
+                    int targetEntity = entityWorld.createEntity();
+                    entityWorld.setComponent(targetEntity, new PositionComponent(castPositionalSkillshotSpellCommand.getPosition().clone()));
+                    castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, targetEntity));
                 }
             }
         }
@@ -117,16 +114,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
     public static void castSpell(EntityWorld entityWorld, int casterEntity, CastSpellComponent castSpellComponent){
         boolean canBeCasted = false;
         if((!entityWorld.hasComponent(castSpellComponent.getSpellEntity(), RemainingCooldownComponent.class)) && CastSpellSystem.canCast(entityWorld, casterEntity, castSpellComponent.getSpellEntity())){
-            int targetEntity = -1;
-            TargetComponent targetComponent = entityWorld.getComponent(castSpellComponent.getCastInformationEntity(), TargetComponent.class);
-            PositionComponent positionComponent = entityWorld.getComponent(castSpellComponent.getCastInformationEntity(), PositionComponent.class);
-            if(targetComponent != null){
-                targetEntity = targetComponent.getTargetEntity();
-            }
-            else if(positionComponent != null){
-                targetEntity = entityWorld.createEntity();
-                entityWorld.setComponent(targetEntity, new PositionComponent(positionComponent.getPosition().clone()));
-            }
+            int targetEntity = castSpellComponent.getTargetEntity();
             canBeCasted = true;
             if(targetEntity != -1){
                 SpellTargetRulesComponent spellTargetRulesComponent = entityWorld.getComponent(castSpellComponent.getSpellEntity(), SpellTargetRulesComponent.class);
@@ -168,9 +156,6 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     }
                 }
             }
-        }
-        if(!canBeCasted){
-            entityWorld.removeEntity(castSpellComponent.getCastInformationEntity());
         }
     }
     
