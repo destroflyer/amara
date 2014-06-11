@@ -60,6 +60,10 @@ public class EffectTriggerUtil{
         if(entityWorld.hasComponent(effectTriggerEntity, TriggerOnceComponent.class)){
             entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
         }
+        TriggerDelayComponent triggerDelayComponent = entityWorld.getComponent(effectTriggerEntity, TriggerDelayComponent.class);
+        if(triggerDelayComponent != null){
+            effectCast.setComponent(new RemainingEffectDelayComponent(triggerDelayComponent.getDuration()));
+        }
         return effectCast;
     }
 }

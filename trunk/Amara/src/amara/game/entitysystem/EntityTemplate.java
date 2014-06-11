@@ -1579,6 +1579,7 @@ public class EntityTemplate{
             effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            effectTrigger2.setComponent(new TriggerDelayComponent(1.1f));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
             entityWrapper.setComponent(new CastDurationComponent(2));
@@ -1612,7 +1613,7 @@ public class EntityTemplate{
             effect2.setComponent(new RemoveEntityComponent());
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            entityWrapper.setComponent(new LifetimeComponent(1));
+            entityWrapper.setComponent(new LifetimeComponent(0.2f));
         }
         else if(templateName.equals("boots")){
             entityWrapper.setComponent(new ItemVisualisationComponent("boots"));

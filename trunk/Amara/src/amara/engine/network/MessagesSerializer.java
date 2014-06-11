@@ -168,6 +168,7 @@ public class MessagesSerializer{
                         AffectedTargetsComponent.class,
                         ApplyEffectImpactComponent.class,
                         PrepareEffectComponent.class,
+                        RemainingEffectDelayComponent.class,
                         //effects/audio
                         PauseAudioComponent.class,
                         PlayAudioComponent.class,
@@ -344,6 +345,7 @@ public class MessagesSerializer{
                         IsStunnedComponent.class,
                         IsStunnedImmuneComponent.class,
                         //units/effecttriggers
+                        TriggerDelayComponent.class,
                         TriggeredEffectComponent.class,
                         TriggerOnceComponent.class,
                         TriggerSourceComponent.class,
