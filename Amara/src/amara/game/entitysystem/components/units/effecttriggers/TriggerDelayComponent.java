@@ -11,18 +11,18 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class ConclusionEffectComponent{
+public class TriggerDelayComponent{
 
-    public ConclusionEffectComponent(){
+    public TriggerDelayComponent(){
         
     }
 
-    public ConclusionEffectComponent(int effectEntity){
-        this.effectEntity = effectEntity;
+    public TriggerDelayComponent(float duration){
+        this.duration = duration;
     }
-    private int effectEntity;
+    private float duration;
 
-    public int getEffectEntity(){
-        return effectEntity;
+    public float getDuration(){
+        return duration;
     }
 }

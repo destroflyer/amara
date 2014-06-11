@@ -73,6 +73,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownBuffsSystem());
         addEntitySystem(new CountdownCastingSystem());
         addEntitySystem(new CountdownCooldownSystem());
+        addEntitySystem(new CountdownEffectDelaySystem());
         addEntitySystem(new CountdownBindingSystem());
         addEntitySystem(new CountdownBindingImmuneSystem());
         addEntitySystem(new CountdownSilenceSystem());
