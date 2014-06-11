@@ -79,7 +79,10 @@ public class ScreenController_HUD extends GameScreenController{
         }
         Element pingBar = getElementByID("ping_bar");
         pingBar.setWidth(width);
-        pingBar.setVisible(width > 0);
+        boolean shouldBeVisible = (width > 0);
+        if(pingBar.isVisible() != shouldBeVisible){
+            pingBar.setVisible(shouldBeVisible);
+        }
         Effect hoverEffect = getElementByID("ping_container").getEffects(EffectEventId.onHover, Hint.class).get(0);
         hoverEffect.getParameters().setProperty("hintText", "Ping: " + ping + " ms");
     }

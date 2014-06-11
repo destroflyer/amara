@@ -31,6 +31,7 @@ public class GameOverBackend implements MessageBackend{
 
                 @Override
                 public void run(){
+                    mainApplication.getStateManager().detach(mainApplication.getStateManager().getState(PingAppState.class));
                     mainApplication.getStateManager().detach(mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class));
                     mainApplication.getStateManager().detach(mainApplication.getStateManager().getState(LocalEntitySystemAppState.class));
                     mainApplication.getStateManager().getState(IngameCameraAppState.class).setEnabled(false);
