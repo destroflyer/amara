@@ -48,6 +48,7 @@ import amara.game.entitysystem.components.camps.*;
 import amara.game.entitysystem.components.effects.audio.*;
 import amara.game.entitysystem.components.effects.buffs.areas.*;
 import amara.game.entitysystem.components.effects.physics.*;
+import amara.game.entitysystem.components.effects.spawns.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
@@ -215,6 +216,8 @@ public class MessagesSerializer{
                         //effects/physics
                         ActivateHitboxComponent.class,
                         DeactivateHitboxComponent.class,
+                        //effects/spawns
+                        SpawnComponent.class,
                         //effects/spells
                         AddAutoAttackSpellEffectsComponent.class,
                         RemoveSpellEffectsComponent.class,
@@ -291,8 +294,6 @@ public class MessagesSerializer{
                         CastDurationComponent.class,
                         CastTypeComponent.class,
                         CooldownComponent.class,
-                        InstantSpawnsComponent.class,
-                        InstantTargetBuffComponent.class,
                         InstantEffectTriggersComponent.class,
                         RangeComponent.class,
                         RemainingCooldownComponent.class,
