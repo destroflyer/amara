@@ -67,6 +67,9 @@ public class MessagesSerializer{
     
     public static void registerClasses(){
         Serializer.registerClasses(
+            Message_Ping.class,
+            Message_Pong.class,
+            
             Message_GetUpdateFiles.class,
             Message_GetUpdateFile.class,
             Message_UpdateFilePart.class,

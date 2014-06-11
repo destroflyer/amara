@@ -496,7 +496,7 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new CollisionTriggerComponent());
             effectTrigger2.setComponent(new SourceTargetComponent());
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect2.setComponent(new RemoveEntityComponent());
+            effect2.setComponent(new DeactivateHitboxComponent());
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new LifetimeComponent(1.5f));
