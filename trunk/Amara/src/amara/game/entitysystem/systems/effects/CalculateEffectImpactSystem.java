@@ -18,6 +18,7 @@ import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.effects.physics.*;
+import amara.game.entitysystem.components.effects.spawns.*;
 import amara.game.entitysystem.components.effects.spells.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
@@ -93,8 +94,11 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     }
                     effectImpact.setComponent(new MoveComponent(movementEntity));
                 }
-                if(effect.hasComponent(TriggerCastedSpellEffectsComponent.class)){
-                    effect.setComponent(new TriggerSpellEffectsComponent(effectCastSourceSpellComponent.getSpellEntity()));
+                if(effectCastSourceSpellComponent != null){
+                    if(effect.hasComponent(TriggerCastedSpellEffectsComponent.class)){
+                        effect.setComponent(new TriggerSpellEffectsComponent(effectCastSourceSpellComponent.getSpellEntity()));
+                    }
+                    effectImpact.setComponent(effectCastSourceSpellComponent);
                 }
                 ReplaceSpellWithNewSpellComponent replaceSpellWithNewSpellComponent = effect.getComponent(ReplaceSpellWithNewSpellComponent.class);
                 if(replaceSpellWithNewSpellComponent != null){
@@ -127,6 +131,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     StopComponent.class,
                     ActivateHitboxComponent.class,
                     DeactivateHitboxComponent.class,
+                    SpawnComponent.class,
                     AddAutoAttackSpellEffectsComponent.class,
                     RemoveSpellEffectsComponent.class,
                     ReplaceSpellWithExistingSpellComponent.class,
