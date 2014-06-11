@@ -152,6 +152,30 @@
                 </panel>
             </panel>
         </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel height="21px"/>
+                <panel childLayout="horizontal">
+                    <panel/>
+                    <image id="ping_bar" filename="Interface/hud/ping_bar.png" width="69px" height="14px"></image>
+                    <panel width="21px"/>
+                </panel>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel height="20px"/>
+                <panel childLayout="horizontal">
+                    <panel/>
+                    <image id="ping_container" filename="Interface/hud/ping_container.png" width="71px" height="16px">
+                        <effect>
+                            <onHover name="hint" hintText="Ping: ? ms"/>
+                        </effect>
+                    </image>
+                    <panel width="20px"/>
+                </panel>
+            </panel>
+        </layer>
     </screen>
     <screen id="gameOver" controller="amara.engine.applications.ingame.client.gui.ScreenController_GameOver">
         <layer childLayout="center" backgroundColor="#0008">

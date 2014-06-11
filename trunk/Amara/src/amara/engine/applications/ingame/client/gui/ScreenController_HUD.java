@@ -6,6 +6,10 @@ package amara.engine.applications.ingame.client.gui;
 
 import amara.Util;
 import amara.engine.gui.GameScreenController;
+import de.lessvoid.nifty.effects.Effect;
+import de.lessvoid.nifty.effects.EffectEventId;
+import de.lessvoid.nifty.effects.impl.Hint;
+import de.lessvoid.nifty.elements.Element;
 
 /**
  *
@@ -64,5 +68,19 @@ public class ScreenController_HUD extends GameScreenController{
     
     public void hideSpellCooldown(int index){
         getElementByID("spell_" + index + "_cooldown").hide();
+    }
+    
+    public void setPing(int ping){
+        int maximumWidth = 69;
+        int maximumDisplayedPing = 400;
+        int width = (int) ((((float) ping) / maximumDisplayedPing) * maximumWidth);
+        if(width > maximumWidth){
+            width = maximumWidth;
+        }
+        Element pingBar = getElementByID("ping_bar");
+        pingBar.setWidth(width);
+        pingBar.setVisible(width > 0);
+        Effect hoverEffect = getElementByID("ping_container").getEffects(EffectEventId.onHover, Hint.class).get(0);
+        hoverEffect.getParameters().setProperty("hintText", "Ping: " + ping + " ms");
     }
 }
