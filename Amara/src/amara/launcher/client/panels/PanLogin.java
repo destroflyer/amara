@@ -14,10 +14,12 @@ import amara.launcher.client.*;
  */
 public abstract class PanLogin extends JPanel{
     
-    private MP3Player backgroundMusicPlayer = new MP3Player();
+    private OggClip backgroundMusicClip;
     
     protected void playBackgroundMusic(String musicResourcePath){
-        backgroundMusicPlayer.play(musicResourcePath);
+        backgroundMusicClip = new OggClip(musicResourcePath);
+        backgroundMusicClip.setGain(0.75f);
+        backgroundMusicClip.play();
     }
     
     public void login(String login, String password){
@@ -31,6 +33,8 @@ public abstract class PanLogin extends JPanel{
     }
     
     public void close(){
-        backgroundMusicPlayer.stop();
+        if(backgroundMusicClip != null){
+            backgroundMusicClip.stop();
+        }
     }
 }

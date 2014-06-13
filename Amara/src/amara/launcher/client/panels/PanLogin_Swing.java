@@ -75,7 +75,7 @@ public class PanLogin_Swing extends PanLogin{
     @Override
     public void start(){
         super.start();
-        playBackgroundMusic("/Sounds/music/Lords of the Sky.mp3");
+        playBackgroundMusic("/Sounds/music/Lords of the Sky.ogg");
     }
     
     @Override

@@ -53,7 +53,7 @@ public class Util{
         return (getResourceURL(resourcePath) != null);
     }
     
-    public static InputStream getResourceInputStrean(String resourcePath){
+    public static InputStream getResourceInputStream(String resourcePath){
         return Util.class.getResourceAsStream(resourcePath);
     }
     
