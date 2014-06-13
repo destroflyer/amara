@@ -32,7 +32,7 @@ import amara.engine.appstates.*;
 public class LoginScreen_Forest extends LoginScreen{
 
     public LoginScreen_Forest(){
-        backgroundMusicPath = "Sounds/music/Woods of Eremae.mp3";
+        backgroundMusicPath = "Sounds/music/Woods of Eremae.ogg";
         loginBoxImagePath = "Interface/client/login/forest/box.png";
     }
 

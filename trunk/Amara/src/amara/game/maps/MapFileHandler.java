@@ -154,7 +154,7 @@ public class MapFileHandler{
 
     public static Map load(String mapName){
         try{
-            InputStream inputStream = Util.getResourceInputStrean("/Maps/" + mapName + "/map.xml");
+            InputStream inputStream = Util.getResourceInputStream("/Maps/" + mapName + "/map.xml");
             Map map = load(new SAXBuilder().build(inputStream));
             map.setName(mapName);
             return map;
