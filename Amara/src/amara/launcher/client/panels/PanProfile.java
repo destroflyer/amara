@@ -16,11 +16,11 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 import amara.Util;
-import amara.engine.network.NetworkClient;
-import amara.engine.network.messages.protocol.Message_EditUserMeta;
-import amara.launcher.FrameUtil;
-import amara.launcher.client.MainFrame;
 import amara.engine.applications.masterserver.server.protocol.*;
+import amara.engine.network.NetworkClient;
+import amara.engine.network.messages.protocol.*;
+import amara.launcher.FrameUtil;
+import amara.launcher.client.MasterserverClientUtil;
 
 /**
  *
@@ -41,15 +41,29 @@ public class PanProfile extends javax.swing.JPanel{
     public void resetToOwnProfile(){
         txtSearchLogin.setText("");
         txtSearchLoginFocusLost(null);
-        loadPlayerProfile(MainFrame.getInstance().getLogin());
+        loadPlayerProfile(MasterserverClientUtil.getPlayerID());
     }
     
-    private void loadPlayerProfile(final String login){
+    private void loadPlayerProfile(int playerID){
+        loadPlayerProfile(playerID, null);
+    }
+    
+    private void loadPlayerProfile(String login){
+        loadPlayerProfile(0, login);
+    }
+    
+    private void loadPlayerProfile(final int playerID, final String login){
         new Thread(new Runnable(){
 
             public void run(){
                 lblSearchLoader.setVisible(true);
-                PlayerProfileData player = MainFrame.getInstance().getPlayerProfile(login);
+                PlayerProfileData player;
+                if(playerID != 0){
+                    player = MasterserverClientUtil.getPlayerProfile(playerID);
+                }
+                else{
+                    player = MasterserverClientUtil.getPlayerProfile(login);
+                }
                 lblSearchLoader.setVisible(false);
                 if(player != null){
                     showPlayerProfile(player);
@@ -66,7 +80,7 @@ public class PanProfile extends javax.swing.JPanel{
         setAvatarIcon(player.getMeta("avatar"));
         lblUserData_ID.setText("" + player.getID());
         //lblUserData_RegistrationDate.setText(Util.getFormattedDate(player.getRegistrationDate()));
-        isOwnProfile = player.getLogin().equals(MainFrame.getInstance().getLogin());
+        isOwnProfile = (player.getID() == MasterserverClientUtil.getPlayerID());
         if(isOwnProfile){
             btnAvatar.setCursor(new Cursor(Cursor.HAND_CURSOR));
             //lblUserData_EMail.setText(player.getEMail());
@@ -78,7 +92,7 @@ public class PanProfile extends javax.swing.JPanel{
     }
     
     public void changeAvatar(String avatar){
-        NetworkClient networkClient = MainFrame.getInstance().getNetworkClient();
+        NetworkClient networkClient = MasterserverClientUtil.getNetworkClient();
         networkClient.sendMessage(new Message_EditUserMeta("avatar", avatar));
         setAvatarIcon(avatar);
         panAvatarSelection.setVisible(false);

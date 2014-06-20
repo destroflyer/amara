@@ -63,13 +63,17 @@ public class NetworkServer extends NetworkListener{
     
     @Override
     protected void sendMessageResponse(MessageResponse messageResponse){
-        LinkedList<Message> answerMessages = messageResponse.getAnswerMessages();
-        for(int i=0;i<answerMessages.size();i++){
-            sendMessageToClient(messageResponse.getClientID(), answerMessages.get(i));
-        }
-        LinkedList<Message> broadcastMessages = messageResponse.getBroadcastMessages();
-        for(int i=0;i<broadcastMessages.size();i++){
-            broadcastMessage(broadcastMessages.get(i));
+        LinkedList<MessageResponse_Entry> messageResponseEntries = messageResponse.getEntries();
+        for(MessageResponse_Entry messageResponseEntry : messageResponseEntries){
+            switch(messageResponseEntry.getType()){
+                case BROADCAST:
+                    broadcastMessage(messageResponseEntry.getMessage());
+                    break;
+                
+                case ANSWER:
+                    sendMessageToClient(messageResponse.getClientID(), messageResponseEntry.getMessage());
+                    break;
+            }
         }
     }
     

@@ -7,10 +7,11 @@ package amara.engine.applications.masterserver.client.appstates;
 import java.util.HashMap;
 import java.util.LinkedList;
 import amara.engine.applications.*;
-import amara.engine.applications.masterserver.client.network.backends.ReceivePlayerStatusesBackend;
-import amara.engine.appstates.NetworkClientHeadlessAppState;
+import amara.engine.applications.masterserver.client.network.backends.*;
+import amara.engine.appstates.*;
 import amara.engine.network.NetworkClient;
-import amara.engine.applications.masterserver.server.protocol.PlayerStatus;
+import amara.engine.applications.masterserver.server.protocol.*;
+import amara.engine.network.messages.protocol.*;
 
 /**
  *
@@ -28,20 +29,23 @@ public class PlayerStatusesAppState extends ClientBaseAppState{
         networkClient.addMessageBackend(new ReceivePlayerStatusesBackend(this));
     }
     
-    public void onUpdateStarted(int playerID){
+    public PlayerStatus getPlayerStatus(int playerID){
         updatingStatuses.add(playerID);
-    }
-    
-    public boolean isUpdating(int playerID){
-        return updatingStatuses.contains(playerID);
+        NetworkClient networkClient = getAppState(NetworkClientHeadlessAppState.class).getNetworkClient();
+        networkClient.sendMessage(new Message_GetPlayerStatus(playerID));
+        while(true){
+            if(updatingStatuses.contains(playerID)){
+                return statuses.get(playerID);
+            }
+            try{
+                Thread.sleep(100);
+            }catch(Exception ex){
+            }
+        }
     }
     
     public void setStatus(int playerID, PlayerStatus playerStatus){
         updatingStatuses.remove((Integer) playerID);
         statuses.put(playerID, playerStatus);
-    }
-
-    public PlayerStatus getStatus(int playerID){
-        return statuses.get(playerID);
     }
 }

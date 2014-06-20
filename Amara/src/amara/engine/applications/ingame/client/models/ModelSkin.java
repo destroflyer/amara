@@ -10,11 +10,14 @@ import java.util.List;
 import java.util.LinkedList;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.material.Material;
+import com.jme3.material.RenderState;
 import com.jme3.material.RenderState.FaceCullMode;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
+import com.jme3.texture.Texture;
 import amara.Util;
 import amara.engine.JMonkeyUtil;
 import amara.engine.materials.MaterialFactory;
@@ -122,7 +125,11 @@ public class ModelSkin{
                 }
                 else if(currentMaterialElement.getName().equals("texture")){
                     String textureFilePath = getResourcesFilePath() + currentMaterialElement.getText();
-                    material = MaterialFactory.generateUnshadedMaterial(textureFilePath);
+                    material = MaterialFactory.generateLightingMaterial(textureFilePath);
+                    loadTexture(material, "NormalMap", currentMaterialElement.getAttributeValue("normalMap"));
+                    loadTexture(material, "AlphaMap", currentMaterialElement.getAttributeValue("alphaMap"));
+                    loadTexture(material, "SpecularMap", currentMaterialElement.getAttributeValue("specularMap"));
+                    loadTexture(material, "GlowMap", currentMaterialElement.getAttributeValue("glowMap"));
                 }
                 if(material != null){
                     String filter = currentMaterialElement.getAttributeValue("filter", "bilinear");
@@ -132,12 +139,23 @@ public class ModelSkin{
                     try{
                         int childIndex = currentMaterialElement.getAttribute("index").getIntValue();
                         Geometry child = (Geometry) JMonkeyUtil.getChild(spatial, childIndex);
+                        if(getAttributeValue(currentMaterialElement, "alpha", false)){
+                            child.setQueueBucket(RenderQueue.Bucket.Transparent);
+                            material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+                        }
                         child.setMaterial(material);
                     }catch(Exception ex){
-                        System.out.println("Error while reading material for object '" + name + "'");ex.printStackTrace();
+                        System.out.println("Error while reading material for object '" + name + "'");
                     }
                 }
             }
+        }
+    }
+    
+    private void loadTexture(Material material, String materialParameter, String textureName){
+        if(textureName != null){
+            Texture texture = MaterialFactory.loadTexture(getResourcesFilePath() + textureName);
+            material.setTexture(materialParameter, texture);
         }
     }
     

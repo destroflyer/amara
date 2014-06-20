@@ -103,6 +103,8 @@ public class MessagesSerializer{
             Message_StartGame.class,
             Message_GameCreated.class,
             
+            Message_SendChatMessage.class,
+            Message_ChatMessage.class,
             Message_Command.class,
                 AutoAttackCommand.class,
                 Command.class,

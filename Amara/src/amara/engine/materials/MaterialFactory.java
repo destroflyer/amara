@@ -32,8 +32,8 @@ public class MaterialFactory{
         material.setColor("Diffuse",  color);
         if(true){
             material.setColor("Ambient",  color);
-            material.setColor("Specular", ColorRGBA.White);
-            material.setFloat("Shininess", 10);
+            //material.setColor("Specular", ColorRGBA.White);
+            //material.setFloat("Shininess", 15);
         }
         return material;
     }
@@ -71,7 +71,7 @@ public class MaterialFactory{
         return material;
     }
     
-    private static Texture loadTexture(String filePath){
+    public static Texture loadTexture(String filePath){
         return assetManager.loadTexture(new TextureKey(filePath, false));
     }
 

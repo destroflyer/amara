@@ -24,6 +24,7 @@ public class LoginAppState extends ClientBaseAppState{
         SUCCESSFUL
     }
     private LoginResult result = LoginResult.PENDING;
+    private int playerID;
     
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
@@ -32,11 +33,20 @@ public class LoginAppState extends ClientBaseAppState{
         networkClient.addMessageBackend(new LoginResultBackend(mainApplication, this));
     }
 
-    public void setResult(LoginResult result){
-        this.result = result;
+    public void onLoginSuccessful(int playerID){
+        this.playerID = playerID;
+        result = LoginResult.SUCCESSFUL;
+    }
+
+    public void onLoginFailed(){
+        result = LoginResult.FAILED;
     }
 
     public LoginResult getResult(){
         return result;
+    }
+
+    public int getPlayerID(){
+        return playerID;
     }
 }

@@ -6,7 +6,7 @@ package amara.launcher.client.panels;
 
 import javax.swing.JPanel;
 import amara.engine.network.NetworkClient;
-import amara.launcher.client.MainFrame;
+import amara.launcher.client.MasterserverClientUtil;
 import amara.launcher.client.network.backends.*;
 
 /**
@@ -21,7 +21,7 @@ public class PanPlay extends javax.swing.JPanel{
         panCreateLobby = new PanCreateLobby();
         panLobby = new PanLobby(this);
         displayCreatePanel();
-        NetworkClient networkClient = MainFrame.getInstance().getNetworkClient();
+        NetworkClient networkClient = MasterserverClientUtil.getNetworkClient();
         networkClient.addMessageBackend(new UpdateLobbyBackend(this));
         networkClient.addMessageBackend(new ClosedLobbyBackend(this));
     }
