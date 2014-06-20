@@ -337,6 +337,7 @@ public class MessagesSerializer{
                         SpellsComponent.class,
                         TargetsInAggroRangeComponent.class,
                         TeamComponent.class,
+                        WalkStepDistanceComponent.class,
                         //units/animations
                         AutoAttackAnimationComponent.class,
                         DeathAnimationComponent.class,
