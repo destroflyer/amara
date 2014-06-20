@@ -1529,7 +1529,7 @@ public class EntityTemplate{
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
-            entityWrapper.setComponent(new WalkStepDistanceComponent(6));
+            entityWrapper.setComponent(new WalkStepDistanceComponent(7));
             EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             autoAttackAnimation.setComponent(new NameComponent("attack_1"));
             entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
@@ -1551,7 +1551,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackDamageComponent(400));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
-            entityWrapper.setComponent(new BaseWalkSpeedComponent(5.75f));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(3.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId()}));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
