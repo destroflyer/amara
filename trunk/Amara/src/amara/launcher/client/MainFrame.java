@@ -70,13 +70,25 @@ public class MainFrame extends javax.swing.JFrame{
                     }catch(Exception ex){
                     }
                 }
-                panLogin.showIsLoading(false);
                 switch(loginResult){
                     case FAILED:
                         FrameUtil.showMessageDialog(MainFrame.this, "Login failed. Possible reasons:\n\n- Wrong login\n- Wrong password", FrameUtil.MessageType.ERROR);
                         break;
                     
                     case SUCCESSFUL:
+                        networkClient.sendMessage(new Message_GetCharacters());
+                        networkClient.sendMessage(new Message_GetOwnedCharacters());
+                        CharactersAppState charactersAppState = masterClient.getStateManager().getState(CharactersAppState.class);
+                        while(true){
+                            if(charactersAppState.getOwnedCharacters() != null){
+                                break;
+                            }
+                            try{
+                                Thread.sleep(100);
+                            }catch(Exception ex){
+                            }
+                        }
+                        panLogin.showIsLoading(false);
                         panLogin.close();
                         setDisplayedPanel(new PanMainMenu());
                         break;

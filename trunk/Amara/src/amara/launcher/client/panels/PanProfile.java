@@ -13,6 +13,7 @@ package amara.launcher.client.panels;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
+import java.awt.event.ItemEvent;
 import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 import amara.Util;
@@ -21,6 +22,7 @@ import amara.engine.network.NetworkClient;
 import amara.engine.network.messages.protocol.*;
 import amara.launcher.FrameUtil;
 import amara.launcher.client.MasterserverClientUtil;
+import amara.launcher.client.comboboxes.*;
 
 /**
  *
@@ -33,6 +35,8 @@ public class PanProfile extends javax.swing.JPanel{
         btnAvatar.setIcon(Util.getResourceImageIcon("/Interface/client/unknown.jpg", 100, 100));
         lblSearchLoader.setIcon(new ImageIcon(Util.getResourceURL("/Interface/client/loaders/user_search.gif")));
         lblSearchLoader.setVisible(false);
+        cbxCharacters.setModel(new ComboboxModel_OwnedCharacters(MasterserverClientUtil.getOwnedCharacters()));
+        updateSelectedCharacterSkins();
     }
     private boolean isOwnProfile;
     private boolean isSearchLoginFieldEmpty = true;
@@ -102,6 +106,22 @@ public class PanProfile extends javax.swing.JPanel{
     private void setAvatarIcon(String avatar){
         btnAvatar.setIcon(Util.getResourceImageIcon(PanAvatarSelection.getAvatarResourcePath(avatar), btnAvatar.getWidth(), btnAvatar.getHeight()));
     }
+    
+    private void updateSelectedCharacterSkins(){
+        OwnedGameCharacter ownedCharacter = getSelectedOwnedCharacter();
+        GameCharacterSkin[] skins = ownedCharacter.getCharacter().getSkins();
+        cbxSkins.setModel(new ComboboxModel_CharacterSkins(skins));
+        for(int i=0;i<skins.length;i++){
+            if(skins[i].getID() == ownedCharacter.getActiveSkinID()){
+                cbxSkins.setSelectedIndex(i + 1);
+                break;
+            }
+        }
+    }
+    
+    private OwnedGameCharacter getSelectedOwnedCharacter(){
+        return MasterserverClientUtil.getOwnedCharacters()[cbxCharacters.getSelectedIndex()];
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -112,7 +132,6 @@ public class PanProfile extends javax.swing.JPanel{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bgrHostOrConnect = new javax.swing.ButtonGroup();
         panBox = new javax.swing.JPanel();
         lblProfileTitle = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -126,6 +145,10 @@ public class PanProfile extends javax.swing.JPanel{
         txtSearchLogin = new javax.swing.JTextField();
         lblSearchLoader = new javax.swing.JLabel();
         btnAvatar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        lblProfileTitle1 = new javax.swing.JLabel();
+        cbxCharacters = new javax.swing.JComboBox();
+        cbxSkins = new javax.swing.JComboBox();
 
         panBox.setBackground(new java.awt.Color(30, 30, 30));
 
@@ -269,13 +292,58 @@ public class PanProfile extends javax.swing.JPanel{
                 .addContainerGap())
         );
 
+        jPanel1.setBackground(new java.awt.Color(30, 30, 30));
+
+        lblProfileTitle1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblProfileTitle1.setForeground(new java.awt.Color(255, 255, 255));
+        lblProfileTitle1.setText("Character skins");
+
+        cbxCharacters.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxCharactersItemStateChanged(evt);
+            }
+        });
+
+        cbxSkins.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxSkinsItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblProfileTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxCharacters, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxSkins, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(370, 370, 370))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblProfileTitle1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbxSkins, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(cbxCharacters))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -283,7 +351,9 @@ public class PanProfile extends javax.swing.JPanel{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -336,14 +406,32 @@ public class PanProfile extends javax.swing.JPanel{
         }
     }//GEN-LAST:event_btnAvatarMouseExited
 
+    private void cbxCharactersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCharactersItemStateChanged
+        updateSelectedCharacterSkins();
+    }//GEN-LAST:event_cbxCharactersItemStateChanged
+
+    private void cbxSkinsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSkinsItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            GameCharacter character = getSelectedOwnedCharacter().getCharacter();
+            int skinID = 0;
+            if(cbxSkins.getSelectedIndex() != 0){
+                skinID = character.getSkins()[cbxSkins.getSelectedIndex() - 1].getID();
+            }
+            MasterserverClientUtil.getNetworkClient().sendMessage(new Message_EditActiveCharacterSkin(character.getID(), skinID));
+        }
+    }//GEN-LAST:event_cbxSkinsItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup bgrHostOrConnect;
     private javax.swing.JButton btnAvatar;
+    private javax.swing.JComboBox cbxCharacters;
+    private javax.swing.JComboBox cbxSkins;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblProfileTitle;
+    private javax.swing.JLabel lblProfileTitle1;
     private javax.swing.JLabel lblSearchLoader;
     private javax.swing.JLabel lblUserData_EMail;
     private javax.swing.JLabel lblUserData_ID;

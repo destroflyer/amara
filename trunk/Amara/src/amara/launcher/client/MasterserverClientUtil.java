@@ -37,6 +37,18 @@ public class MasterserverClientUtil{
         return getState(PlayerStatusesAppState.class).getPlayerStatus(playerID);
     }
     
+    public static GameCharacter getCharacter(int characterID){
+        return getState(CharactersAppState.class).getCharacter(characterID);
+    }
+    
+    public static GameCharacter[] getCharacters(){
+        return getState(CharactersAppState.class).getCharacters();
+    }
+    
+    public static OwnedGameCharacter[] getOwnedCharacters(){
+        return getState(CharactersAppState.class).getOwnedCharacters();
+    }
+    
     private static <T extends HeadlessAppState> T getState(Class<T> stateClass){
         return MasterserverClientApplication.getInstance().getStateManager().getState(stateClass);
     }

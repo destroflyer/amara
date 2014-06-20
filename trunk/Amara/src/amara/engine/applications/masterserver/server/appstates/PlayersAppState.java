@@ -7,12 +7,12 @@ package amara.engine.applications.masterserver.server.appstates;
 import amara.engine.applications.*;
 import amara.engine.applications.ingame.server.appstates.NetworkServerAppState;
 import amara.engine.applications.masterserver.server.network.backends.*;
+import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.encoding.*;
 import amara.engine.files.FileManager;
 import amara.engine.network.NetworkServer;
 import amara.game.games.RunningGames;
 import amara.game.players.ConnectedPlayers;
-import amara.engine.applications.masterserver.server.protocol.PlayerStatus;
 
 /**
  *
@@ -34,6 +34,9 @@ public class PlayersAppState extends ServerBaseAppState{
         networkServer.addMessageBackend(new SendPlayerProfilesDataBackend(databaseAppState));
         networkServer.addMessageBackend(new SendPlayerStatusesBackend(this));
         networkServer.addMessageBackend(new EditUserMetaBackend(databaseAppState, connectedPlayers));
+        networkServer.addMessageBackend(new SendCharactersBackend(databaseAppState));
+        networkServer.addMessageBackend(new SendOwnedCharactersBackend(databaseAppState, connectedPlayers));
+        networkServer.addMessageBackend(new EditActiveCharacterSkinsBackend(databaseAppState, connectedPlayers));
     }
     
     private void initializePasswordEncoder(){

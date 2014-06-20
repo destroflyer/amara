@@ -1,7 +1,7 @@
 <skin name="daydream">
     <model scale="1">
         <material>
-            <texture index="0">skin.png</texture>
+            <texture index="0">skin_default.png</texture>
         </material>
     </model>
 </skin>

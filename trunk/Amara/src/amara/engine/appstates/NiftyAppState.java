@@ -33,11 +33,11 @@ public class NiftyAppState extends BaseDisplayAppState{
         viewPort.setClearFlags(false, false, false);
     }
         
-    public Nifty createNifty(String filePath){
-        return createNifty(filePath, false);
+    public void createNifty(String filePath){
+        createNifty(filePath, false);
     }
         
-    public Nifty createNifty(String filePath, boolean useBatchedRenderer){
+    public void createNifty(String filePath, boolean useBatchedRenderer){
         NiftyJmeDisplay niftyDisplay;
         if(useBatchedRenderer){
             niftyDisplay = new NiftyJmeDisplay(mainApplication.getAssetManager(), mainApplication.getInputManager(), mainApplication.getAudioRenderer(), mainApplication.getGuiViewPort(), 2048, 2048);
@@ -50,7 +50,6 @@ public class NiftyAppState extends BaseDisplayAppState{
         nifty.addXml(filePath);
         goToScreen(nifty, "start");
         runningNifties.add(nifty);
-        return nifty;
     }
     
     public boolean isReadyForUpdate(){

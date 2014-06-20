@@ -156,7 +156,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new ModelComponent("Models/cloud/skin.xml"));
         }
         else if(templateName.equals("minion")){
-            entityWrapper.setComponent(new ModelComponent("Models/minion/skin.xml"));
+            entityWrapper.setComponent(new ModelComponent("Models/minion/skin_default.xml"));
             EntityWrapper danceAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             danceAnimation.setComponent(new NameComponent("dance"));
             danceAnimation.setComponent(new LoopDurationComponent(2.66f));
@@ -331,7 +331,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
         }
         else if(templateName.equals("wizard")){
-            entityWrapper.setComponent(new ModelComponent("Models/wizard/skin.xml"));
+            entityWrapper.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
@@ -531,7 +531,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CooldownComponent(10));
         }
         else if(templateName.equals("robot")){
-            entityWrapper.setComponent(new ModelComponent("Models/robot/skin.xml"));
+            entityWrapper.setComponent(new ModelComponent("Models/robot/skin_default.xml"));
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
@@ -838,7 +838,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
         }
         else if(templateName.equals("jaime")){
-            entityWrapper.setComponent(new ModelComponent("Models/jaime/skin.xml"));
+            entityWrapper.setComponent(new ModelComponent("Models/jaime/skin_default.xml"));
             EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             idleAnimation.setComponent(new NameComponent("Idle"));
             idleAnimation.setComponent(new LoopDurationComponent(8));
@@ -1025,7 +1025,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
         }
         else if(templateName.equals("soldier")){
-            entityWrapper.setComponent(new ModelComponent("Models/soldier/skin.xml"));
+            entityWrapper.setComponent(new ModelComponent("Models/soldier/skin_default.xml"));
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
@@ -1214,7 +1214,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CooldownComponent(5));
         }
         else if(templateName.equals("steve")){
-            entityWrapper.setComponent(new ModelComponent("Models/steve/skin.xml"));
+            entityWrapper.setComponent(new ModelComponent("Models/steve/skin_default.xml"));
             EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             idleAnimation.setComponent(new NameComponent("stand"));
             idleAnimation.setComponent(new LoopDurationComponent(8));
@@ -1521,7 +1521,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CooldownComponent(15));
         }
         else if(templateName.equals("daydream")){
-            entityWrapper.setComponent(new ModelComponent("Models/daydream/skin.xml"));
+            entityWrapper.setComponent(new ModelComponent("Models/daydream/skin_default.xml"));
             EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             idleAnimation.setComponent(new NameComponent("stand"));
             idleAnimation.setComponent(new LoopDurationComponent(8));
@@ -1562,7 +1562,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
         }
         else if(templateName.equals("eragon")){
-            entityWrapper.setComponent(new ModelComponent("Models/little_dragon/skin.xml"));
+            entityWrapper.setComponent(new ModelComponent("Models/little_dragon/skin_default.xml"));
             EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             idleAnimation.setComponent(new NameComponent("default"));
             idleAnimation.setComponent(new LoopDurationComponent(8));

@@ -166,8 +166,15 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
             String login = databaseAppState.getString("SELECT login FROM users WHERE id = " + player.getLobbyPlayer().getID() + " LIMIT 1");
             playerEntity.setComponent(new NameComponent(login));
             LobbyPlayerData lobbyPlayerData = player.getLobbyPlayer().getPlayerData();
-            EntityWrapper unit = EntityTemplate.createFromTemplate(entityWorld, lobbyPlayerData.getUnitTemplate());
+            String characterName = databaseAppState.getString("SELECT name FROM characters WHERE id = " + lobbyPlayerData.getCharacterID());
+            EntityWrapper unit = EntityTemplate.createFromTemplate(entityWorld, characterName);
             unit.setComponent(new TitleComponent(login));
+            int skinID = databaseAppState.getInteger("SELECT skinid FROM users_characters WHERE (userid = " + player.getLobbyPlayer().getID() + ") AND (characterid = " + lobbyPlayerData.getCharacterID() + ")");
+            String skinName = "default";
+            if(skinID != 0){
+                skinName = databaseAppState.getString("SELECT name FROM characters_skins WHERE id = " + skinID);
+            }
+            unit.setComponent(new ModelComponent("Models/" + characterName + "/skin_" + skinName + ".xml"));
             playerEntity.setComponent(new SelectedUnitComponent(unit.getId()));
             map.spawn(entityWorld, playerEntity.getId());
             player.setEntityID(playerEntity.getId());
