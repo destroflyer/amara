@@ -29,7 +29,6 @@ public class ReceiveLoginsBackend implements MessageBackend{
         if(receivedMessage instanceof Message_Login){
             Message_Login message = (Message_Login) receivedMessage;
             AuthentificationInformation authentificationInformation = message.getAuthentificationInformation();
-            boolean wasSuccessful = false;
             int playerID = databaseAppState.getInteger("SELECT id FROM users WHERE login = '" + DatabaseAppState.escape(authentificationInformation.getLogin()) + "' LIMIT 1");
             if(playerID != 0){
                 String encodedSentPassword = playersAppState.getPasswordEncoder().encode(authentificationInformation.getPassword());
@@ -38,11 +37,10 @@ public class ReceiveLoginsBackend implements MessageBackend{
                     Player player = new Player(playerID, authentificationInformation.getLogin());
                     ConnectedPlayers connectedPlayers = playersAppState.getConnectedPlayers();
                     connectedPlayers.login(messageResponse.getClientID(), player);
-                    wasSuccessful = true;
                     System.out.println("Login '" + player.getLogin() + "' (#" + player.getID() + ")");
                 }
             }
-            messageResponse.addAnswerMessage(new Message_LoginResult(wasSuccessful));
+            messageResponse.addAnswerMessage(new Message_LoginResult(playerID));
         }
     }
 }

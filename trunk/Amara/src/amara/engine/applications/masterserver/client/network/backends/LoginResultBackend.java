@@ -27,12 +27,13 @@ public class LoginResultBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_LoginResult){
             Message_LoginResult message = (Message_LoginResult) receivedMessage;
-            if(message.wasSuccessfull()){
-                loginAppState.setResult(LoginAppState.LoginResult.SUCCESSFUL);
+            int playerID = message.getPlayerID();
+            if(playerID != 0){
+                loginAppState.onLoginSuccessful(playerID);
                 mainApplication.getStateManager().attach(new CurrentGameAppState());
             }
             else{
-                loginAppState.setResult(LoginAppState.LoginResult.FAILED);
+                loginAppState.onLoginFailed();
             }
         }
     }

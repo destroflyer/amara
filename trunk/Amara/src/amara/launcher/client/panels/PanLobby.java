@@ -18,7 +18,7 @@ import amara.engine.applications.masterserver.server.network.messages.*;
 import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.NetworkClient;
 import amara.launcher.FrameUtil;
-import amara.launcher.client.MainFrame;
+import amara.launcher.client.MasterserverClientUtil;
 
 /**
  *
@@ -37,7 +37,7 @@ public class PanLobby extends javax.swing.JPanel{
     
     public void update(Lobby lobby){
         this.lobby = lobby;
-        isOwner = (MainFrame.getInstance().getPlayerID() == lobby.getOwnerID());
+        isOwner = (MasterserverClientUtil.getPlayerID() == lobby.getOwnerID());
         btnInvite.setEnabled(isOwner);
         btnStart.setEnabled(isOwner);
         cbxMapName.setEnabled(isOwner);
@@ -59,7 +59,7 @@ public class PanLobby extends javax.swing.JPanel{
     }
     
     public void sendMessage(Message message){
-        NetworkClient networkClient = MainFrame.getInstance().getNetworkClient();
+        NetworkClient networkClient = MasterserverClientUtil.getNetworkClient();
         networkClient.sendMessage(message);
     }
 
@@ -201,11 +201,11 @@ public class PanLobby extends javax.swing.JPanel{
     private void btnInviteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInviteActionPerformed
         String login = FrameUtil.showInputDialog(this, "Enter login:");
         if((login != null) && (!login.isEmpty())){
-            PlayerProfileData playerProfileData = MainFrame.getInstance().getPlayerProfile(login);
+            PlayerProfileData playerProfileData = MasterserverClientUtil.getPlayerProfile(login);
             if(playerProfileData != null){
                 int playerID = playerProfileData.getID();
                 if(!lobby.containsPlayer(playerID)){
-                    PlayerStatus playerStatus = MainFrame.getInstance().getPlayerStatus(playerProfileData.getID());
+                    PlayerStatus playerStatus = MasterserverClientUtil.getPlayerStatus(playerProfileData.getID());
                     if(playerStatus == PlayerStatus.ONLINE){
                         sendMessage(new Message_InviteLobbyPlayer(playerID));
                     }

@@ -6,13 +6,13 @@ package amara.engine.appstates;
 
 
 import java.util.ArrayList;
-import com.jme3.niftygui.NiftyJmeDisplay;
-import com.jme3.renderer.ViewPort;
-import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.screen.ScreenController;
-import amara.engine.gui.GameScreenController;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.niftygui.NiftyJmeDisplay;
+import com.jme3.renderer.ViewPort;
+import amara.engine.gui.GameScreenController;
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.screen.ScreenController;
 
 /**
  *
@@ -34,7 +34,17 @@ public class NiftyAppState extends BaseDisplayAppState{
     }
         
     public Nifty createNifty(String filePath){
-        NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(mainApplication.getAssetManager(), mainApplication.getInputManager(), mainApplication.getAudioRenderer(), mainApplication.getGuiViewPort());
+        return createNifty(filePath, false);
+    }
+        
+    public Nifty createNifty(String filePath, boolean useBatchedRenderer){
+        NiftyJmeDisplay niftyDisplay;
+        if(useBatchedRenderer){
+            niftyDisplay = new NiftyJmeDisplay(mainApplication.getAssetManager(), mainApplication.getInputManager(), mainApplication.getAudioRenderer(), mainApplication.getGuiViewPort(), 2048, 2048);
+        }
+        else{
+            niftyDisplay = new NiftyJmeDisplay(mainApplication.getAssetManager(), mainApplication.getInputManager(), mainApplication.getAudioRenderer(), mainApplication.getGuiViewPort());
+        }
         viewPort.addProcessor(niftyDisplay);
         Nifty nifty = niftyDisplay.getNifty();
         nifty.addXml(filePath);

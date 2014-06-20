@@ -8,7 +8,7 @@ import java.awt.event.ItemEvent;
 import amara.Util;
 import amara.engine.applications.masterserver.server.network.messages.*;
 import amara.engine.applications.masterserver.server.protocol.*;
-import amara.launcher.client.MainFrame;
+import amara.launcher.client.MasterserverClientUtil;
 
 /**
  *
@@ -20,12 +20,12 @@ public class PanLobby_Player extends javax.swing.JPanel{
         initComponents();
         this.panLobby = panLobby;
         this.lobbyPlayer = lobbyPlayer;
-        PlayerProfileData playerProfileData = MainFrame.getInstance().getPlayerProfile(lobbyPlayer.getID());
+        PlayerProfileData playerProfileData = MasterserverClientUtil.getPlayerProfile(lobbyPlayer.getID());
         String avatarResourcePath = PanAvatarSelection.getAvatarResourcePath(playerProfileData.getMeta("avatar"));
         lblIcon.setIcon(Util.getResourceImageIcon(avatarResourcePath, 30, 30));
         lblName.setText(playerProfileData.getLogin());
         cbxUnitTemplate.setSelectedItem(lobbyPlayer.getPlayerData().getUnitTemplate());
-        boolean isOwnPlayer = (MainFrame.getInstance().getPlayerID() == lobbyPlayer.getID());
+        boolean isOwnPlayer = (MasterserverClientUtil.getPlayerID() == lobbyPlayer.getID());
         cbxUnitTemplate.setEnabled(isOwnPlayer);
         btnKick.setEnabled(panLobby.isOwner() && (!isOwnPlayer));
     }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
+    <useStyles filename="nifty-default-styles.xml"/>
+    <useControls filename="nifty-default-controls.xml"/>
+    <screen id="start" controller="amara.engine.applications.ingame.client.gui.ScreenController_Chat">
+        <layer id="character" childLayout="center">
+            <panel childLayout="horizontal">
+                <panel width="25px"/>
+                <panel childLayout="vertical" width="400px">
+                    <panel/>
+                    <panel childLayout="vertical">
+                        <panel id="chat_output" childLayout="vertical">
+                            <text id="chat_line_5" height="21px" text="" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                            <text id="chat_line_4" height="21px" text="" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                            <text id="chat_line_3" height="21px" text="" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                            <text id="chat_line_2" height="21px" text="" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                            <text id="chat_line_1" height="21px" text="" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                            <text id="chat_line_0" height="21px" text="" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                        </panel>
+                        <panel height="2px"/>
+                        <panel id="chat_input" childLayout="horizontal" height="21px">
+                            <control id="chat_input_text" name="textfield" width="320px" height="100%" text="" maxLength="40"/>
+                            <control name="button" width="80px" height="100%" label="Ok">
+                                <interact onClick="sendMessage()"/>
+                            </control>
+                        </panel>
+                    </panel>
+                    <panel height="208px"/>
+                </panel>
+                <panel/>
+            </panel>
+        </layer>
+    </screen>
+</nifty>

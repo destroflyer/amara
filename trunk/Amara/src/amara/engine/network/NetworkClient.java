@@ -28,30 +28,34 @@ public class NetworkClient extends NetworkListener{
     public void connectToServer(String host, int port) throws ServerConnectionException, ServerConnectionTimeoutException{
         try{
             client = Network.connectToServer(host, port);
-            client.start();
-            long connectionStart = System.currentTimeMillis();
-            while(!isConnected()){
-                if(Util.isTimeElapsed(connectionStart, MAXIMUM_CONNECTION_TIME)){
-                    throw new ServerConnectionTimeoutException(host, port);
-                }
-            }
-            client.addMessageListener(new MessageListener<MessageConnection>(){
-                
-                @Override
-                public void messageReceived(MessageConnection source, Message message){
-                    onMessageReceived(source, message);
-                }
-            });
         }catch(Exception ex){
             throw new ServerConnectionException(host, port);
         }
+        client.start();
+        long connectionStart = System.currentTimeMillis();
+        while(!isConnected()){
+            if(Util.isTimeElapsed(connectionStart, MAXIMUM_CONNECTION_TIME)){
+                throw new ServerConnectionTimeoutException(host, port);
+            }
+            try{
+                Thread.sleep(100);
+            }catch(Exception ex){
+            }
+        }
+        client.addMessageListener(new MessageListener<MessageConnection>(){
+
+            @Override
+            public void messageReceived(MessageConnection source, Message message){
+                onMessageReceived(source, message);
+            }
+        });
     }
 
     @Override
     protected void sendMessageResponse(MessageResponse messageResponse){
-        LinkedList<Message> answerMessages = messageResponse.getAnswerMessages();
-        for(int i=0;i<answerMessages.size();i++){
-            sendMessage(answerMessages.get(i));
+        LinkedList<MessageResponse_Entry> messageResponseEntries = messageResponse.getEntries();
+        for(MessageResponse_Entry messageResponseEntry : messageResponseEntries){
+            sendMessage(messageResponseEntry.getMessage());
         }
     }
 

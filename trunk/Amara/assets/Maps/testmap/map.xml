@@ -3,7 +3,7 @@
 	<camera initialPosition="30.6,34.0,-7.7" initialDirection="0.0,-1.3,1.0" />
 	<lights>
 		<ambient color="1.5,1.5,1.5" />
-		<directional direction="-0.5,-1.75,-1.0" color="0.9,0.9,0.9">
+		<directional direction="-0.5,-1.75,-1.0" color="1,1,1">
 			<shadows intensity="0.4" />
 		</directional>
 	</lights>	<terrain>		<textures>			<texture scale="10">Textures/terrain/cartoon_forest/grass_1.jpg</texture>			<texture scale="16">Textures/terrain/cartoon_forest/stone_bright_1.jpg</texture>			<texture scale="16">Textures/terrain/cartoon_forest/wood_1.jpg</texture>			<texture scale="1">Textures/terrain/blank.png</texture>			<texture scale="24">Textures/terrain/cartoon_forest/cliff.jpg</texture>			<texture scale="24">Textures/terrain/cartoon_forest/sandstone.jpg</texture>			<texture scale="24">Textures/terrain/cartoon_forest/pebbles_1.jpg</texture>			<texture scale="1">Textures/terrain/blank.png</texture>			<texture scale="18">Textures/terrain/cartoon_forest/cracked_cliff.jpg</texture>			<texture scale="16">Textures/terrain/cartoon_forest/bush.jpg</texture>			<texture scale="16">Textures/terrain/cartoon_forest/dirt.jpg</texture>			<texture scale="1">Textures/terrain/blank.png</texture>		</textures>	</terrain>

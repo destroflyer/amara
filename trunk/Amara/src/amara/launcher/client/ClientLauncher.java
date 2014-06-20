@@ -308,8 +308,8 @@ private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     else{
         Toolkit.getDefaultToolkit().removeAWTEventListener(keyListener);
         PanLogin panLogin = ((forcedLoginPanel != null)?forcedLoginPanel:new PanLogin_Swing());
-        MainFrame mainFrame = new MainFrame(masterClient, panLogin);
-        this.setVisible(false);
+        MainFrame mainFrame = new MainFrame(panLogin);
+        setVisible(false);
         mainFrame.setVisible(true);
     }
 }//GEN-LAST:event_btnPlayActionPerformed

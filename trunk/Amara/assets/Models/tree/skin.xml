@@ -4,7 +4,7 @@
             <!--wood-->
             <color index="0">0.15,0.07,0.03,1</color>
             <!--leaves-->
-            <color index="1">0.57,0.8,0.08,1</color>
+            <color index="1">0.5,0.7,0.08,1</color>
         </material>
     </model>
 </skin>

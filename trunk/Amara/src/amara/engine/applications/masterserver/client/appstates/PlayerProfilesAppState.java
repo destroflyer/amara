@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import amara.engine.applications.*;;
+import amara.engine.network.messages.protocol.*;
 import amara.engine.applications.masterserver.client.network.backends.*;
-import amara.engine.appstates.NetworkClientHeadlessAppState;
+import amara.engine.appstates.*;
 import amara.engine.network.NetworkClient;
 import amara.engine.applications.masterserver.server.protocol.*;
 
@@ -33,20 +34,50 @@ public class PlayerProfilesAppState extends ClientBaseAppState{
         networkClient.addMessageBackend(new ReceivePlayerProfilesDataBackend(this));
     }
     
-    public void onUpdateStarted(int playerID){
-        updatingIDs.add(playerID);
+    public PlayerProfileData getPlayerProfile(int playerID){
+        return getPlayerProfile(playerID, null);
     }
     
-    public void onUpdateStarted(String login){
-        updatingLogins.add(login);
+    public PlayerProfileData getPlayerProfile(String login){
+        return getPlayerProfile(0, login);
     }
     
-    public boolean isUpdating(int playerID){
-        return updatingIDs.contains(playerID);
-    }
-    
-    public boolean isUpdating(String login){
-        return updatingLogins.contains(login);
+    public PlayerProfileData getPlayerProfile(int playerID, String login){
+        PlayerProfileData playerProfileData;
+        if(playerID != 0){
+            updatingIDs.add(playerID);
+            playerProfileData = profilesByIDs.get(playerID);
+        }
+        else{
+            updatingLogins.add(login);
+            playerProfileData = profilesByLogins.get(login);
+        }
+        long cachedTimestamp = ((playerProfileData != null)?playerProfileData.getTimestamp():-1);
+        NetworkClient networkClient = getAppState(NetworkClientHeadlessAppState.class).getNetworkClient();
+        networkClient.sendMessage(new Message_GetPlayerProfileData(playerID, login, cachedTimestamp));
+        while(true){
+            boolean isUpdating;
+            if(playerID != 0){
+                isUpdating = updatingIDs.contains(playerID);
+            }
+            else{
+                isUpdating = updatingLogins.contains(login);
+            }
+            if(!isUpdating){
+                if(playerID != 0){
+                    playerProfileData = profilesByIDs.get(playerID);
+                }
+                else{
+                    playerProfileData = profilesByLogins.get(login);
+                }
+                break;
+            }
+            try{
+                Thread.sleep(100);
+            }catch(Exception ex){
+            }
+        }
+        return playerProfileData;
     }
     
     public void onUpdateFinished(int playerID){
@@ -65,24 +96,8 @@ public class PlayerProfilesAppState extends ClientBaseAppState{
         notExistingLogins.add(login);
     }
     
-    public boolean isProfileNotExistant(int playerID){
-        return notExistingIDs.contains(playerID);
-    }
-    
-    public boolean isProfileNotExistant(String login){
-        return notExistingLogins.contains(login);
-    }
-    
     public void setProfile(PlayerProfileData playerProfileData){
         profilesByIDs.put(playerProfileData.getID(), playerProfileData);
         profilesByLogins.put(playerProfileData.getLogin(), playerProfileData);
-    }
-    
-    public PlayerProfileData getProfile(int playerID){
-        return profilesByIDs.get(playerID);
-    }
-    
-    public PlayerProfileData getProfile(String login){
-        return profilesByLogins.get(login);
     }
 }

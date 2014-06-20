@@ -17,26 +17,21 @@ public class MessageResponse{
         this.clientID = clientID;
     }
     private int clientID;
-    private LinkedList<Message> answerMessages = new LinkedList<Message>();
-    private LinkedList<Message> broadcastMessages = new LinkedList<Message>();
+    private LinkedList<MessageResponse_Entry> entries = new LinkedList<MessageResponse_Entry>();
+
+    public void addBroadcastMessage(Message message){
+        entries.add(new MessageResponse_Entry(MessageResponse_Entry.Type.BROADCAST, message));
+    }
+
+    public void addAnswerMessage(Message message){
+        entries.add(new MessageResponse_Entry(MessageResponse_Entry.Type.ANSWER, message));
+    }
 
     public int getClientID(){
         return clientID;
     }
 
-    public LinkedList<Message> getAnswerMessages(){
-        return answerMessages;
-    }
-
-    public void addAnswerMessage(Message message){
-        answerMessages.add(message);
-    }
-
-    public LinkedList<Message> getBroadcastMessages(){
-        return broadcastMessages;
-    }
-
-    public void addBroadcastMessage(Message message){
-        broadcastMessages.add(message);
+    public LinkedList<MessageResponse_Entry> getEntries(){
+        return entries;
     }
 }

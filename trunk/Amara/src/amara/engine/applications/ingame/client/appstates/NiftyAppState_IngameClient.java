@@ -19,6 +19,7 @@ public class NiftyAppState_IngameClient extends BaseDisplayAppState{
         super.initialize(stateManager, application);
         NiftyAppState niftyAppState = getAppState(NiftyAppState.class);
         niftyAppState.createNifty("Interface/hud.xml");
+        niftyAppState.createNifty("Interface/chat.xml", true);
         niftyAppState.createNifty("Interface/loading_screen.xml");
     }
 }

@@ -12,15 +12,21 @@ import amara.engine.network.exceptions.*;
 public class MasterserverClientApplication extends HeadlessApplication{
 
     public MasterserverClientApplication(HostInformation hostInformation) throws ServerConnectionException, ServerConnectionTimeoutException{
+        instance = this;
         this.hostInformation = hostInformation;
         stateManager.attach(new NetworkClientHeadlessAppState(hostInformation.getHost(), hostInformation.getPort()));
         stateManager.attach(new PlayerProfilesAppState());
         stateManager.attach(new PlayerStatusesAppState());
         stateManager.attach(new LoginAppState());
     }
+    private static MasterserverClientApplication instance;
     private HostInformation hostInformation;
 
     public HostInformation getHostInformation(){
         return hostInformation;
+    }
+
+    public static MasterserverClientApplication getInstance(){
+        return instance;
     }
 }
