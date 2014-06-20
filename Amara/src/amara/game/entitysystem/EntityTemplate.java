@@ -1257,6 +1257,49 @@ public class EntityTemplate{
             EntityWrapper sadism = createFromTemplate(entityWorld, "sadism");
             entityWrapper.setComponent(new SpellsComponent(new int[]{infectedCleaver.getId(), burningAgony.getId(), eventHorizon.getId(), sadism.getId()}));
         }
+        else if(templateName.equals("daydream")){
+            entityWrapper.setComponent(new ModelComponent("Models/daydream/skin.xml"));
+            EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            idleAnimation.setComponent(new NameComponent("stand"));
+            idleAnimation.setComponent(new LoopDurationComponent(8));
+            entityWrapper.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
+            EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            walkAnimation.setComponent(new NameComponent("walk"));
+            entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+            EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            autoAttackAnimation.setComponent(new NameComponent("attack_1"));
+            entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+            entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
+            
+            entityWrapper.setComponent(new HitboxComponent(new Circle(0.8f)));
+            entityWrapper.setComponent(new IntersectionPushComponent());
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            
+            entityWrapper.setComponent(new IsAliveComponent());
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(12000));
+            entityWrapper.setComponent(new BaseHealthRegenerationComponent(200));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(400));
+            entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(5.75f));
+            EntityWrapper boots = createFromTemplate(entityWorld, "boots");
+            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId()}));
+            entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+            entityWrapper.setComponent(new HealthComponent(4000));
+            entityWrapper.setComponent(new IsAliveComponent());
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
+
+            EntityWrapper autoAttack = createFromTemplate(entityWorld, "melee_autoattack");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+
+//            EntityWrapper infectedCleaver = createFromTemplate(entityWorld, "infected_cleaver");
+//            EntityWrapper burningAgony = createFromTemplate(entityWorld, "burning_agony," + 1);
+//            EntityWrapper eventHorizon = createFromTemplate(entityWorld, "event_horizon");
+//            EntityWrapper sadism = createFromTemplate(entityWorld, "sadism");
+//            entityWrapper.setComponent(new SpellsComponent(new int[]{infectedCleaver.getId(), burningAgony.getId(), eventHorizon.getId(), sadism.getId()}));
+        }
         else if(templateName.equals("infected_cleaver")){
             entityWrapper.setComponent(new NameComponent("Infected Cleaver"));
             entityWrapper.setComponent(new SpellVisualisationComponent("infected_cleaver"));
