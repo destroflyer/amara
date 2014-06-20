@@ -4,11 +4,11 @@
  */
 package amara.engine.applications.ingame.client.models.modifiers;
 
-import amara.engine.applications.ingame.client.models.*;
-import amara.engine.materials.MaterialFactory;
 import com.jme3.animation.SkeletonControl;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import amara.engine.applications.ingame.client.models.*;
+import amara.engine.materials.MaterialFactory;
 
 /**
  *

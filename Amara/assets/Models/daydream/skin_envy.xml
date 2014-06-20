@@ -1,0 +1,10 @@
+<skin name="daydream">
+    <model scale="1">
+        <material>
+            <texture index="0">skin.png</texture>
+        </material>
+        <modifiers>
+            <modifier>amara.engine.applications.ingame.client.models.modifiers.ModelModifier_Daydream_Envy</modifier>
+        </modifiers>
+    </model>
+</skin>
