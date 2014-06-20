@@ -5,10 +5,12 @@
 package amara.launcher.client.panels;
 
 import java.awt.event.ItemEvent;
+import javax.swing.DefaultComboBoxModel;
 import amara.Util;
 import amara.engine.applications.masterserver.server.network.messages.*;
 import amara.engine.applications.masterserver.server.protocol.*;
 import amara.launcher.client.MasterserverClientUtil;
+import amara.launcher.client.comboboxes.ComboboxModel_OwnedCharacters;
 
 /**
  *
@@ -24,9 +26,23 @@ public class PanLobby_Player extends javax.swing.JPanel{
         String avatarResourcePath = PanAvatarSelection.getAvatarResourcePath(playerProfileData.getMeta("avatar"));
         lblIcon.setIcon(Util.getResourceImageIcon(avatarResourcePath, 30, 30));
         lblName.setText(playerProfileData.getLogin());
-        cbxUnitTemplate.setSelectedItem(lobbyPlayer.getPlayerData().getUnitTemplate());
+        int characterID = lobbyPlayer.getPlayerData().getCharacterID();
         boolean isOwnPlayer = (MasterserverClientUtil.getPlayerID() == lobbyPlayer.getID());
-        cbxUnitTemplate.setEnabled(isOwnPlayer);
+        if(isOwnPlayer){
+            OwnedGameCharacter[] ownedCharacters = MasterserverClientUtil.getOwnedCharacters();
+            cbxCharacter.setModel(new ComboboxModel_OwnedCharacters(MasterserverClientUtil.getOwnedCharacters()));
+            for(int i=0;i<ownedCharacters.length;i++){
+                if(ownedCharacters[i].getCharacter().getID() == characterID){
+                    cbxCharacter.setSelectedIndex(i);
+                    break;
+                }
+            }
+        }
+        else{
+            GameCharacter character = MasterserverClientUtil.getCharacter(characterID);
+            cbxCharacter.setModel(new DefaultComboBoxModel(new String[]{ComboboxModel_OwnedCharacters.getItemTitle(character)}));
+        }
+        cbxCharacter.setEnabled(isOwnPlayer);
         btnKick.setEnabled(panLobby.isOwner() && (!isOwnPlayer));
     }
     private PanLobby panLobby;
@@ -44,7 +60,7 @@ public class PanLobby_Player extends javax.swing.JPanel{
         lblIcon = new javax.swing.JLabel();
         lblSeparator1 = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
-        cbxUnitTemplate = new javax.swing.JComboBox();
+        cbxCharacter = new javax.swing.JComboBox();
         btnKick = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(30, 30, 30));
@@ -62,14 +78,13 @@ public class PanLobby_Player extends javax.swing.JPanel{
         lblName.setPreferredSize(new java.awt.Dimension(115, 30));
         add(lblName);
 
-        cbxUnitTemplate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "minion", "wizard", "robot", "jaime", "soldier", "steve", "daydream" }));
-        cbxUnitTemplate.setPreferredSize(new java.awt.Dimension(110, 30));
-        cbxUnitTemplate.addItemListener(new java.awt.event.ItemListener() {
+        cbxCharacter.setPreferredSize(new java.awt.Dimension(110, 30));
+        cbxCharacter.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxUnitTemplateItemStateChanged(evt);
+                cbxCharacterItemStateChanged(evt);
             }
         });
-        add(cbxUnitTemplate);
+        add(cbxCharacter);
 
         btnKick.setText("X");
         btnKick.setPreferredSize(new java.awt.Dimension(40, 30));
@@ -81,14 +96,15 @@ public class PanLobby_Player extends javax.swing.JPanel{
         add(btnKick);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbxUnitTemplateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxUnitTemplateItemStateChanged
+    private void cbxCharacterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCharacterItemStateChanged
         if(evt.getStateChange() == ItemEvent.SELECTED){
-            String unitTemplate = cbxUnitTemplate.getSelectedItem().toString();
-            if(!unitTemplate.equals(lobbyPlayer.getPlayerData().getUnitTemplate())){
-                panLobby.sendMessage(new Message_SetLobbyPlayerData(new LobbyPlayerData(unitTemplate)));
+            OwnedGameCharacter ownedCharacter = MasterserverClientUtil.getOwnedCharacters()[cbxCharacter.getSelectedIndex()];
+            int characterID = ownedCharacter.getCharacter().getID();
+            if(characterID != lobbyPlayer.getPlayerData().getCharacterID()){
+                panLobby.sendMessage(new Message_SetLobbyPlayerData(new LobbyPlayerData(characterID)));
             }
         }
-    }//GEN-LAST:event_cbxUnitTemplateItemStateChanged
+    }//GEN-LAST:event_cbxCharacterItemStateChanged
 
     private void btnKickActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKickActionPerformed
         panLobby.sendMessage(new Message_KickLobbyPlayer(lobbyPlayer.getID()));
@@ -96,7 +112,7 @@ public class PanLobby_Player extends javax.swing.JPanel{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKick;
-    private javax.swing.JComboBox cbxUnitTemplate;
+    private javax.swing.JComboBox cbxCharacter;
     private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblSeparator1;

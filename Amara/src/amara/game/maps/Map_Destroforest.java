@@ -40,7 +40,7 @@ public class Map_Destroforest extends Map{
         audioBackgroundMusic.setComponent(new IsAudioPlayingComponent());
         for(int i=0;i<3;i++){
             EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
-            unit.setComponent(new ModelComponent("Models/wizard/skin.xml"));
+            unit.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));
             EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
             unit.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));

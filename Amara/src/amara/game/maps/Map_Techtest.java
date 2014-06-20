@@ -37,7 +37,7 @@ public class Map_Techtest extends Map{
             int unitMarginY = 2;
             int countX = 21;
             int marginX = 4;            
-            String modelSkinPath = "Models/wizard/skin.xml";
+            String modelSkinPath = "Models/wizard/skin_default.xml";
             String animationName = "dance";
             if(y > 5){
                 countX = 11;

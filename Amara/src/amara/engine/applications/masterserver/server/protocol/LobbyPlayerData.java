@@ -17,12 +17,12 @@ public class LobbyPlayerData{
         
     }
     
-    public LobbyPlayerData(String unitTemplate){
-        this.unitTemplate = unitTemplate;
+    public LobbyPlayerData(int characterID){
+        this.characterID = characterID;
     }
-    private String unitTemplate;
+    private int characterID;
 
-    public String getUnitTemplate(){
-        return unitTemplate;
+    public int getCharacterID(){
+        return characterID;
     }
 }

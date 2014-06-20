@@ -34,7 +34,7 @@ public class PlayerStatusesAppState extends ClientBaseAppState{
         NetworkClient networkClient = getAppState(NetworkClientHeadlessAppState.class).getNetworkClient();
         networkClient.sendMessage(new Message_GetPlayerStatus(playerID));
         while(true){
-            if(updatingStatuses.contains(playerID)){
+            if(!updatingStatuses.contains(playerID)){
                 return statuses.get(playerID);
             }
             try{
@@ -45,7 +45,7 @@ public class PlayerStatusesAppState extends ClientBaseAppState{
     }
     
     public void setStatus(int playerID, PlayerStatus playerStatus){
-        updatingStatuses.remove((Integer) playerID);
         statuses.put(playerID, playerStatus);
+        updatingStatuses.remove((Integer) playerID);
     }
 }

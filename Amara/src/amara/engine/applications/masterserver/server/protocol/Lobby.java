@@ -44,7 +44,7 @@ public class Lobby{
     }
     
     public void addPlayer(int playerID){
-        players.add(new LobbyPlayer(playerID, new LobbyPlayerData("minion")));
+        players.add(new LobbyPlayer(playerID, new LobbyPlayerData(1)));
     }
     
     public void removePlayer(int playerID){

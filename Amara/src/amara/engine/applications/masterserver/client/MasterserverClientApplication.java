@@ -17,6 +17,7 @@ public class MasterserverClientApplication extends HeadlessApplication{
         stateManager.attach(new NetworkClientHeadlessAppState(hostInformation.getHost(), hostInformation.getPort()));
         stateManager.attach(new PlayerProfilesAppState());
         stateManager.attach(new PlayerStatusesAppState());
+        stateManager.attach(new CharactersAppState());
         stateManager.attach(new LoginAppState());
     }
     private static MasterserverClientApplication instance;

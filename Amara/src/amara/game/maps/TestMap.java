@@ -35,7 +35,7 @@ public class TestMap extends Map{
         for(int x=0;x<5;x++){
             for(int y=0;y<4;y++){
                 EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
-                unit.setComponent(new ModelComponent("Models/wizard/skin.xml"));
+                unit.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));
                 EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
                 autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
                 unit.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
