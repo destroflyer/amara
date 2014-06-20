@@ -62,7 +62,7 @@ public class PanLobby_Player extends javax.swing.JPanel{
         lblName.setPreferredSize(new java.awt.Dimension(115, 30));
         add(lblName);
 
-        cbxUnitTemplate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "minion", "wizard", "robot", "jaime", "soldier", "steve" }));
+        cbxUnitTemplate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "minion", "wizard", "robot", "jaime", "soldier", "steve", "daydream" }));
         cbxUnitTemplate.setPreferredSize(new java.awt.Dimension(110, 30));
         cbxUnitTemplate.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
