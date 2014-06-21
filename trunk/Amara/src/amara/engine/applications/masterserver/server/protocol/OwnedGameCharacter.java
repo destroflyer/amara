@@ -28,12 +28,11 @@ public class OwnedGameCharacter{
         return character;
     }
 
-    public int getActiveSkinID(){
-        return activeSkinID;
+    public void setActiveSkinID(int activeSkinID){
+        this.activeSkinID = activeSkinID;
     }
 
-    @Override
-    public String toString(){
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    public int getActiveSkinID(){
+        return activeSkinID;
     }
 }
