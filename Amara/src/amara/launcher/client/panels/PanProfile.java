@@ -412,12 +412,14 @@ public class PanProfile extends javax.swing.JPanel{
 
     private void cbxSkinsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSkinsItemStateChanged
         if(evt.getStateChange() == ItemEvent.SELECTED){
-            GameCharacter character = getSelectedOwnedCharacter().getCharacter();
+            OwnedGameCharacter ownedCharacter = getSelectedOwnedCharacter();
+            GameCharacter character = ownedCharacter.getCharacter();
             int skinID = 0;
             if(cbxSkins.getSelectedIndex() != 0){
                 skinID = character.getSkins()[cbxSkins.getSelectedIndex() - 1].getID();
             }
             MasterserverClientUtil.getNetworkClient().sendMessage(new Message_EditActiveCharacterSkin(character.getID(), skinID));
+            ownedCharacter.setActiveSkinID(skinID);
         }
     }//GEN-LAST:event_cbxSkinsItemStateChanged
 
