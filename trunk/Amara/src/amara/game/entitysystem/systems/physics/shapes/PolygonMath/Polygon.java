@@ -6,7 +6,6 @@ package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
 import com.jme3.network.serializing.Serializable;
 import java.util.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -24,11 +23,12 @@ public class Polygon
     Polygon(SetPolygon setPoly)
     {
         this.setPoly = setPoly;
+        assert setPoly.isValid();
     }
     
     public Polygon transform(double scale, double rotate, double x, double y)
     {
-        return new Polygon(SetPolygonUtil.transform(setPoly, new Transform(scale, rotate, x, y)));
+        return new Polygon(SetPolygonUtil.transform(setPoly, new Transform2D(scale, rotate, x, y)));
     }
     
     public Polygon union(Polygon poly)
@@ -83,25 +83,6 @@ public class Polygon
         return new Polygon(setPolys.get(0));
     }
     
-    public static void writePolysToFile(Collection<Polygon> polys, String filename)
-    {
-        throw new NotImplementedException();
-    }
-    
-//    public ArrayList<ArrayList<Point2D>> lines()
-//    {
-//        return setPoly.extractLines();
-//    }
-    
-    public ArrayList<Polygon> cutPolys()
-    {
-        ArrayList<Polygon> list = new ArrayList<Polygon>();
-        for (SimplePolygon simple : SetPolygonUtil.cutPolys(setPoly))
-        {
-            list.add(new Polygon(new SetPolygon(simple)));
-        }
-        return list;
-    }
     public ArrayList<Point2D> triangles()
     {
         return SetPolygonUtil.triangles(setPoly);
@@ -133,6 +114,13 @@ public class Polygon
         list.add(setPoly);
         SetPolygonUtil.writePolys(filename, list);
         System.out.println("wrote " + filename);
+    }
+    public static Polygon readFromFile(String filename)
+    {
+        ArrayList<SetPolygon> list = SetPolygonUtil.readPolys(filename);
+        if(list == null) return null;
+        System.out.println("read " + filename);
+        return new Polygon(list.get(0));
     }
     
     public BoundRectangle boundRectangle()

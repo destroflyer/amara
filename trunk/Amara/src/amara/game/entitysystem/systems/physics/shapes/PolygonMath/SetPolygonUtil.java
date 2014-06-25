@@ -15,33 +15,33 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 class SetPolygonUtil
 {
-    public static ArrayList<SimplePolygon> cutPolys(SetPolygon setPoly)
-    {
-        ArrayList<SimplePolygon> list = new ArrayList<SimplePolygon>();
-        for (int i = 0; i < setPoly.numPolygons(); i++)
-        {
-            SimplePolygon cutPoly = HolePolygonUtil.cutPolygon(setPoly.getPolygon(i));
-            list.add(cutPoly);
-            assert !cutPoly.isHole();
-        }
-        System.out.println("" + list.size() + " cutPolys");
-        return list;
-    }
     public static ArrayList<Point2D> triangles(SetPolygon setPoly)
     {
         ArrayList<Point2D> list = new ArrayList<Point2D>();
-        for (SimplePolygon simple : cutPolys(setPoly))
+        for (int i = 0; i < setPoly.numPolygons(); i++)
         {
-            assert simple.isAreaPositive();
-            //list.addAll(SimplePolygonUtil.triangles(simple));
-            for (SimplePolygon simplePolygon : SimplePolygonUtil.splitAtSelfTouch(simple, 1))
-            {
-                assert simplePolygon.isAreaPositive(): simplePolygon.signedArea();
-                list.addAll(SimplePolygonUtil.triangles(simplePolygon));
-            }
-            System.out.println("" + list.size() / 3 + " tris so far");
+            list.addAll(HolePolygonUtil.triangles(setPoly.getPolygon(i)));
         }
+        assert triTest(list, setPoly);
         return list;
+    }
+    private static boolean triTest(ArrayList<Point2D> triangles, SetPolygon poly)
+    {
+        double area = 0;
+        for (int i = 0; i < triangles.size(); i += 3)
+        {
+            SimplePolygon tri = new SimplePolygon();
+            tri.add(triangles.get(i));
+            tri.add(triangles.get(i + 1));
+            tri.add(triangles.get(i + 2));
+            assert !tri.isHole(): tri.signedArea();
+            assert !triangles.get(i).withinEpsilon(triangles.get(i + 1));
+            assert !triangles.get(i).withinEpsilon(triangles.get(i + 2));
+            assert !triangles.get(i + 1).withinEpsilon(triangles.get(i + 2));
+            area += tri.signedArea();
+        }
+        assert Util.withinEpsilon(area - poly.signedArea());
+        return true;
     }
     
     public static void preSortedUnion(ArrayList<SetPolygon> polys)
@@ -51,6 +51,7 @@ class SetPolygonUtil
             for (int i = 0; i + 1 < polys.size(); i++)
             {
                 SetPolygon poly = union(polys.get(i), polys.get(i + 1));
+                assert poly.isValid();
                 polys.set(i, poly);
                 polys.remove(i + 1);
             }
@@ -105,8 +106,6 @@ class SetPolygonUtil
     }
     public static void insertCommonOutlinePoints(SetPolygon a, SetPolygon b)
     {
-        assert(!a.hasLooseLines());
-        assert(!b.hasLooseLines());
         for (int i = 0; i < a.numPolygons(); i++)
         {
             HolePolygon pA = a.getPolygon(i);
@@ -126,8 +125,6 @@ class SetPolygonUtil
                 HolePolygonUtil.insertCommonOutlinePoints(pA, pB);
             }
         }
-        assert(!a.hasLooseLines());
-        assert(!b.hasLooseLines());
     }
     
 
@@ -139,8 +136,7 @@ class SetPolygonUtil
             HolePolygon poly = set.getPolygon(i);
             for (int j = 0; j < poly.numSimplePolys(); j++)
             {
-                SimplePolygon simple = poly.getSimplePoly(j);
-                simpleSet.add(simple.inverse());
+                simpleSet.addAll(SimplePolygonUtil.splitAtSelfTouch(poly.getSimplePoly(j).inverse()));
             }
         }
         SetPolygon setPoly = simpleSetToSetPolygon(simpleSet, !set.isInfinite());
@@ -168,6 +164,10 @@ class SetPolygonUtil
     }
     private static SetPolygon operate(SetPolygon A, SetPolygon B, PolygonOperation o)
     {
+        assert A.isValid();
+//        triangles(A.isInfinite()? inverse(A): A);
+        assert B.isValid();
+//        triangles(B.isInfinite()? inverse(B): B);
         //System.out.println("a");
         boolean smoothA = A.isSmooth();
         boolean smoothB = B.isSmooth();
@@ -194,6 +194,8 @@ class SetPolygonUtil
         SetPolygon polySet = simpleSetToSetPolygon(simpleSet, isInfinite(A.isInfinite(), B.isInfinite(), o));
         polySet.smooth();
         //System.out.println("g");
+        assert polySet.isValid();
+//        triangles(polySet.isInfinite()? inverse(polySet): polySet);
         return polySet;
     }
 
@@ -213,8 +215,8 @@ class SetPolygonUtil
     }
     public static ArrayList<Point2D> operationEdges(SetPolygon A, SetPolygon B, PolygonOperation o)
     {
-        assert(!A.hasLooseLines());
-        assert(!B.hasLooseLines());
+//        assert(!A.hasLooseLines());
+//        assert(!B.hasLooseLines());
 
         ArrayList<Point2D> list = new ArrayList<Point2D>();
 
@@ -329,18 +331,6 @@ class SetPolygonUtil
     {
         edgeDuplicateCheck(edges);
 
-        //for (int i = edges.size() - 2; i >= 0; i -= 2)
-        //{
-        //    for (int j = i + 2; j < edges.size(); j += 2)
-        //    {
-        //        if (edges[i].equals(edges[j]) && edges[i + 1].equals(edges[j + 1]))
-        //        {
-        //            edges.RemoveAt(i + 1);
-        //            edges.RemoveAt(i);
-        //        }
-        //    }
-        //}
-
         HashMap<Point2D, Integer> starts = new HashMap<Point2D, Integer>();
         HashMap<Point2D, Integer> ends = new HashMap<Point2D, Integer>();
 
@@ -359,7 +349,6 @@ class SetPolygonUtil
 
         for(Point2D point: points)
         {
-            //assert(starts[point] == ends[point]);
             if (starts.get(point) != ends.get(point)) return false;
         }
         return true;
@@ -408,7 +397,13 @@ class SetPolygonUtil
                 {
                     if (endsWithA == startsWithB)
                     {
-                        result.add(new SimplePolygon(chains.get(endsWithA)));
+                        SimplePolygon simple = new SimplePolygon(chains.get(endsWithA));
+                        ArrayList<SimplePolygon> simples = SimplePolygonUtil.splitAtSelfTouch(simple);
+                        for (SimplePolygon simplePolygon : simples)
+                        {
+                            assert simplePolygon.isValid();
+                        }
+                        result.addAll(simples);
                         chains.remove(endsWithA);
                     }
                     else
@@ -440,7 +435,13 @@ class SetPolygonUtil
                     }
                     else
                     {
-                        result.add(new SimplePolygon(firstChain));
+                        SimplePolygon simple = new SimplePolygon(firstChain);
+                        ArrayList<SimplePolygon> simples = SimplePolygonUtil.splitAtSelfTouch(simple);
+                        for (SimplePolygon simplePolygon : simples)
+                        {
+                            assert simplePolygon.isValid();
+                        }
+                        result.addAll(simples);
                         chains.remove(0);
                     }
                     break;
@@ -453,11 +454,23 @@ class SetPolygonUtil
             System.out.println("could not hide polygon operation error, " + chains.size() + " polygon(s) will be deformed...");
             while(!chains.isEmpty())
             {
-                result.add(new SimplePolygon(chains.get(0)));
+                ArrayList<SimplePolygon> simples = SimplePolygonUtil.splitAtSelfTouch(new SimplePolygon(chains.get(0)));
+                for (SimplePolygon simplePolygon : simples)
+                {
+                    assert simplePolygon.isValid();
+                }
+                result.addAll(simples);
                 chains.remove(0);
             }
         }
         assert(chains.isEmpty());
+        for (SimplePolygon simplePolygon : result)
+        {
+            if(!simplePolygon.isValid())
+            {
+                int b = 7;
+            }
+        }
         return result;
     }
     private static double simpleSetArea(List<SimplePolygon> simpleSet)
@@ -477,6 +490,16 @@ class SetPolygonUtil
             simples.get(i).smooth();
             if (!simples.get(i).hasArea()) simples.remove(i);
         }
+        for (int i = 0; i < simples.size(); i++)
+        {
+            
+            assert !simples.get(i).isSelfTouching();
+            assert simples.get(i).isValid();
+            if(!simples.get(i).isValid())
+            {
+                int c = 0;
+            }
+        }
 
         SetPolygon result = new SetPolygon();
         double area = simpleSetArea(simples);
@@ -486,7 +509,9 @@ class SetPolygonUtil
             SimplePolygon current = simples.get(i);
             if (!current.isHole())
             {
-                result.add(new HolePolygon(current));
+                HolePolygon poly = new HolePolygon(current);
+                assert poly.isValid();
+                result.add(poly);
                 simples.remove(i);
             }
             else if (!current.hasArea())
@@ -515,20 +540,26 @@ class SetPolygonUtil
                         assert(main.areaContains(Point2DUtil.avg(hole.getPoint(j), hole.getPoint(k))) == Containment.Inside);
                     }
                     current.add(hole);
+                    assert current.isValid();
                     parentFound = true;
                     break;
                 }
             }
             if (!parentFound) leftOvers.add(hole);
         }
+        assert result.isValid();
 
         if(infinite)
         {
             HolePolygon poly = new HolePolygon(null, leftOvers);
+            assert poly.isValid();
+            assert result.isValid();
             result.add(poly);
-        }
+            assert result.isValid();
+        } else assert leftOvers.isEmpty();
 
         assert(Util.withinEpsilon(result.signedArea() - area));
+        assert result.isValid();
         return result;
     }
 
@@ -560,7 +591,7 @@ class SetPolygonUtil
             write(buffer, polys.get(i));
         }
     }
-    public static List<SetPolygon> readPolys(ByteBuffer buffer)
+    public static ArrayList<SetPolygon> readPolys(ByteBuffer buffer)
     {
         ArrayList<SetPolygon> list = new ArrayList<SetPolygon>();
         int num = buffer.readInt();
@@ -576,27 +607,59 @@ class SetPolygonUtil
         ByteBuffer buffer = new ByteBuffer();
         writePolys(buffer, polys);
         byte[] data = buffer.toByteData();
-        ByteBuffer bufferA = new ByteBuffer();
-        bufferA.writeInt(data.length);
+        ByteBuffer lengthBuffer = new ByteBuffer();
+        lengthBuffer.writeInt(data.length);
 
         FileOutputStream stream = null;
         try {
             stream = new FileOutputStream(filename);
-            stream.write(bufferA.toByteData());
+            stream.write(lengthBuffer.toByteData());
             stream.write(data);
             stream.close();
         } catch (Exception ex) {
-            Logger.getLogger(SetPolygonUtil.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(SetPolygonUtil.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                stream.close();
+                if(stream != null) stream.close();
             } catch (IOException ex) {
-                Logger.getLogger(SetPolygonUtil.class.getName()).log(Level.SEVERE, null, ex);
+//                Logger.getLogger(SetPolygonUtil.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
+    
+    public static ArrayList<SetPolygon> readPolys(String filename)
+    {
+        FileInputStream stream = null;
+        try
+        {
+            stream = new FileInputStream(filename);
+            
+            ByteBuffer buffer = new ByteBuffer();
+            
+            buffer.writeByte((byte)stream.read());
+            buffer.writeByte((byte)stream.read());
+            buffer.writeByte((byte)stream.read());
+            buffer.writeByte((byte)stream.read());
+            int len = buffer.readInt();
+            buffer.cleanup();
+            for (int i = 0; i < len; i++)
+            {
+                buffer.writeByte((byte)stream.read());
+            }
+            return readPolys(buffer);
+        } catch (Exception ex) {
+//            Logger.getLogger(SetPolygonUtil.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if(stream != null) stream.close();
+            } catch (IOException ex) {
+//                Logger.getLogger(SetPolygonUtil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+    }
 
-    static SetPolygon transform(SetPolygon set, Transform t)
+    static SetPolygon transform(SetPolygon set, Transform2D t)
     {
         SetPolygon result = new SetPolygon();
         for (int i = 0; i < set.numPolygons(); i++)

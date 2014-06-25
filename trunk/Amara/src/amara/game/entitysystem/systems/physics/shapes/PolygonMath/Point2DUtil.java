@@ -97,6 +97,10 @@ class Point2DUtil {
     {
         return sum(points).div(points.length);
     }
+    public static Point2D weightAvg(Point2D a, double weightA, Point2D b, double weightB)
+    {
+        return new Point2D((a.getX() * weightA + b.getX() * weightB) / (weightA + weightB), (a.getY() * weightA + b.getY() * weightB) / (weightA + weightB));
+    }
 //left < 0 < right
     public static double lineSide(Point2D p, Point2D a, Point2D b)
     {

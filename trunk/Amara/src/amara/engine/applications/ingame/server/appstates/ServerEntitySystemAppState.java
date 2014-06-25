@@ -39,6 +39,7 @@ import amara.game.entitysystem.systems.movement.*;
 import amara.game.entitysystem.systems.network.*;
 import amara.game.entitysystem.systems.objectives.*;
 import amara.game.entitysystem.systems.physics.*;
+import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
 import amara.game.entitysystem.systems.players.*;
 import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.*;
@@ -180,7 +181,19 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
             player.setEntityID(playerEntity.getId());
         }
         MapPhysicsInformation mapPhysicsInformation = map.getPhysicsInformation();
-        addEntitySystem(new MapIntersectionSystem(intersectionObserver, mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight(), mapPhysicsInformation.getObstacles()));
+        
+        System.out.println("Calculating navigation meshes...");
+        PolyMapManager mapManager = new PolyMapManager(PolyHelper.fromShapes(mapPhysicsInformation.getObstacles()), mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight());
+//        mapManager.calcNavigationMap(0.5);
+//        mapManager.calcNavigationMap(0.75);
+        mapManager.calcNavigationMap(1);
+//        mapManager.calcNavigationMap(1.25);
+//        mapManager.calcNavigationMap(1.5);
+//        mapManager.calcNavigationMap(2);
+//        mapManager.calcNavigationMap(3);
+        System.out.println("Finished calculating navigation meshes.");
+        
+        addEntitySystem(new MapIntersectionSystem(mapManager));
         addEntitySystem(new CheckMapObjectiveSystem(map, getAppState(GameRunningAppState.class)));
         addEntitySystem(new PlayerDeathSystem(map));
         addEntitySystem(new PlayerRespawnSystem(game));

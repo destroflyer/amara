@@ -52,12 +52,10 @@ class Delaunay
 
             double area = area(vertices);
             
-//            double r =  Math.sqrt(a * b * c) / (4 * area);
-//            return Util.circlesIntersect(x, y, r, vertices.get(p).getX(), vertices.get(p).getY(), 0);
             double rSquared = (a * b * c) / Util.square(4 * area);
             x -= vertices.get(p).getX();
             y -= vertices.get(p).getY();
-            return x * x + y * y < rSquared;
+            return x * x + y * y + 1e-6 < rSquared;
         }
         
         boolean hasCorner(int i)
@@ -96,6 +94,7 @@ class Delaunay
     {
         ArrayList<Triangle> tris = toTris(indices, vertices);
         
+        int numFlips = 0;
         for (int i = 0; i < tris.size(); i++) {
             Triangle tri = tris.get(i);
             for (int j = 0; j < 3; j++) {
@@ -103,6 +102,7 @@ class Delaunay
                 if(n != null && flipable(vertices, tri, n) && delaunayDir(vertices, tri, n))
                 {
                     flip(tris, tri, n);
+                    assert ++numFlips <= tris.size() * tris.size();
                     i = -1;
                     break;
                 }
@@ -209,12 +209,12 @@ class Delaunay
             }
         }
         
-        //checkNeighbors(tris);
+        assert checkNeighbors(tris);
         
         return tris;
     }
     
-    private void checkNeighbors(ArrayList<Triangle> tris)
+    private boolean checkNeighbors(ArrayList<Triangle> tris)
     {
         for (Triangle tri : tris) {
             for (int i = 0; i < 3; i++) {
@@ -225,6 +225,7 @@ class Delaunay
                 }
             }
         }
+        return true;
     }
     
     private ArrayList<Triangle> getFromMap(Dictionary<Integer, ArrayList<Triangle>> map, int key)

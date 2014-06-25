@@ -6,6 +6,7 @@ package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
 import com.jme3.network.serializing.Serializable;
 import java.util.*;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -75,7 +76,7 @@ public class HolePolygon
 
     public void add(SimplePolygon hole)
     {
-        assert(main.areaContainsOutline(hole));
+        assert(mainContainsOutline(hole));
         assert(hole.isHole());
         for (int i = 0; i < holes.size(); i++) {
             assert(!SimplePolygonUtil.haveTouchingEdge(hole, holes.get(i)));
@@ -91,12 +92,18 @@ public class HolePolygon
 
     public boolean isValid()
     {
+//        if(!isInfinite()) HolePolygonUtil.triangles(this);
+        for (int i = 0; i < numSimplePolys(); i++)
+        {
+            if(!getSimplePoly(i).isValid()) return false;
+        }
         if(main != null)
         {
             if(!main.isAreaPositive()) return false;
             for (SimplePolygon hole : holes)
             {
                 if(!main.areaContainsOutline(hole)) return false;
+                if(SimplePolygonUtil.numCommonPoints(main, hole) > 1) return false;
             }
         }
         for (int i = 0; i + 1 < holes.size(); i++)
@@ -105,10 +112,6 @@ public class HolePolygon
             {
                 if(!holes.get(i).areaContainsOutline(holes.get(j))) return false;
             }
-        }
-        for (int i = 0; i < numSimplePolys(); i++)
-        {
-            if(!getSimplePoly(i).isValid()) return false;
         }
         return true;
     }
@@ -196,61 +199,46 @@ public class HolePolygon
     }
     public boolean equals(HolePolygon poly)
     {
-        if(main == null)
-        {
-            if(poly.main != null) return false;
-        }
-        else if(poly.main == null) return false;
-        else if (!main.equals(poly.main)) return false;
-        if (poly.holes.size() != holes.size()) return false;
-        ArrayList<SimplePolygon> remaining = new ArrayList<SimplePolygon>(poly.holes);
-        for (int i = 0; i < holes.size(); i++)
-        {
-            boolean found = false;
-            for (int j = 0; j < remaining.size(); j++)
-            {
-                if (holes.get(i).equals(remaining.get(j)))
-                {
-                    found = true;
-                    remaining.remove(j);
-                }
-            }
-            if (!found)
-            {
-                assert(this != poly);
-                return false;
-            }
-        }
-        assert(remaining.size() == 0);
-        assert(hashCode() == poly.hashCode());
-        return true;
-
-        //for (int i = 0; i < holes.size(); i++)
-        //{
-        //    var equal = true;
-        //    for (int j = 0; j < holes.size(); j++)
-        //    {
-        //        var k = (i + j) % holes.size();
-        //        if (!holes[j].equals(poly.holes[k]))
-        //        {
-        //            equal = false;
-        //            break;
-        //        }
-        //    }
-        //    if (equal) return true;
-        //}
-        //Debug.Assert(this != poly);
-        //return false;
+        throw new NotImplementedException();
+//        if(main == null)
+//        {
+//            if(poly.main != null) return false;
+//        }
+//        else if(poly.main == null) return false;
+//        else if (!main.equals(poly.main)) return false;
+//        if (poly.holes.size() != holes.size()) return false;
+//        ArrayList<SimplePolygon> remaining = new ArrayList<SimplePolygon>(poly.holes);
+//        for (int i = 0; i < holes.size(); i++)
+//        {
+//            boolean found = false;
+//            for (int j = 0; j < remaining.size(); j++)
+//            {
+//                if (holes.get(i).equals(remaining.get(j)))
+//                {
+//                    found = true;
+//                    remaining.remove(j);
+//                }
+//            }
+//            if (!found)
+//            {
+//                assert(this != poly);
+//                return false;
+//            }
+//        }
+//        assert(remaining.size() == 0);
+//        assert(hashCode() == poly.hashCode());
+//        return true;
     }
     @Override
     public int hashCode()
     {
-        int hash = main == null? 0: main.hashCode();
-        for (int i = 0; i < holes.size(); i++)
-        {
-            hash ^= holes.get(i).hashCode();
-        }
-        return hash;
+        throw new NotImplementedException();
+//        int hash = main == null? 0: main.hashCode();
+//        for (int i = 0; i < holes.size(); i++)
+//        {
+//            hash ^= holes.get(i).hashCode();
+//        }
+//        return hash;
     }
     @Override
     public String toString()

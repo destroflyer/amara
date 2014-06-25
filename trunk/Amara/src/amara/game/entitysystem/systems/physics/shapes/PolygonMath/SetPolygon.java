@@ -6,6 +6,7 @@ package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
 import com.jme3.network.serializing.Serializable;
 import java.util.ArrayList;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -52,11 +53,6 @@ public class SetPolygon
 
     public void add(HolePolygon holePoly)
     {
-        for(HolePolygon poly: polys)
-        {
-            assert(!HolePolygonUtil.haveOverlappingAreas(holePoly, poly));
-            assert(!HolePolygonUtil.haveTouchingEdge(holePoly, poly));
-        }
         polys.add(holePoly);
     }
 
@@ -154,7 +150,10 @@ public class SetPolygon
 
     public Point2D minBorderDistance(Point2D p)
     {
-        assert(areaContains(p) != Containment.Outside);
+        Containment contain = areaContains(p);
+        if(contain == Containment.Border) return Point2D.Zero;
+        double sign = contain == Containment.Inside? 1: -1;
+        
         double squaredDistance = Double.POSITIVE_INFINITY;
         Point2D distance = Point2D.Zero;
         for(HolePolygon hole: polys)
@@ -167,7 +166,7 @@ public class SetPolygon
                     int j = (i + 1) % simple.numPoints();
                     Point2D a = simple.getPoint(i);
                     Point2D b = simple.getPoint(j);
-                    if (0 < Point2DUtil.lineSide(p, a, b)) continue;
+                    if (0 < Point2DUtil.lineSide(p, a, b) * sign) continue;
                     Point2D tmp = Point2DUtil.fromLineSegmentToPoint(a, b, p);
                     double squaredTmp = tmp.squaredLength();
                     if (squaredTmp < squaredDistance)
@@ -190,38 +189,40 @@ public class SetPolygon
     }
     public boolean equals(SetPolygon set)
     {
-        if (set.polys.size() != polys.size()) return false;
-        ArrayList<HolePolygon> remaining = new ArrayList<HolePolygon>(set.polys);
-        for(HolePolygon poly: polys)
-        {
-            boolean found = false;
-            for (int i = 0; i < remaining.size(); i++)
-            {
-                if (poly.equals(remaining.get(i)))
-                {
-                    found = true;
-                    remaining.remove(i);
-                }
-            }
-            if (!found)
-            {
-                assert(this != set);
-                return false;
-            }
-        }
-        assert(remaining.size() == 0);
-        assert(hashCode() == set.hashCode());
-        return true;
+        throw new NotImplementedException();
+//        if (set.polys.size() != polys.size()) return false;
+//        ArrayList<HolePolygon> remaining = new ArrayList<HolePolygon>(set.polys);
+//        for(HolePolygon poly: polys)
+//        {
+//            boolean found = false;
+//            for (int i = 0; i < remaining.size(); i++)
+//            {
+//                if (poly.equals(remaining.get(i)))
+//                {
+//                    found = true;
+//                    remaining.remove(i);
+//                }
+//            }
+//            if (!found)
+//            {
+//                assert(this != set);
+//                return false;
+//            }
+//        }
+//        assert(remaining.size() == 0);
+//        assert(hashCode() == set.hashCode());
+//        return true;
     }
     @Override
     public int hashCode()
     {
-        int hash = 0;
-        for(HolePolygon p: polys)
-        {
-            hash ^= p.hashCode();
-        }
-        return hash;
+        throw new NotImplementedException();
+//        int hash = 0;
+//        for(HolePolygon p: polys)
+//        {
+//            hash ^= p.hashCode();
+//        }
+//        return hash;
     }
     @Override
     public String toString()

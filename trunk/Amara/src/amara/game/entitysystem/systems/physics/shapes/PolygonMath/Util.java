@@ -39,4 +39,24 @@ class Util
         list.set(i, list.get(j));
         list.set(j, tmp);
     }
+    
+    public static <T> void keySort(ArrayList<T> list, ArrayList<Double> keys)
+    {
+        assert keys.size() == list.size();
+        boolean changed = true;
+        while(changed)
+        {
+            changed = false;
+            for (int i = 0; i + 1 < list.size(); i++)
+            {
+                int j = i + 1;
+                if(keys.get(i) > keys.get(j))
+                {
+                    changed = true;
+                    swap(list, i, j);
+                    swap(keys, i, j);
+                }
+            }
+        }
+    }
 }

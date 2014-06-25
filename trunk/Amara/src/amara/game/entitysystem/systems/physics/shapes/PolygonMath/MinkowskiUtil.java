@@ -20,27 +20,26 @@ class MinkowskiUtil
     public static SetPolygon add(SetPolygon a, SetPolygon b)
     {
         if (a.numPolygons() == 0 || b.numPolygons() == 0) return new SetPolygon();
-        ArrayList<SetPolygon> list = new ArrayList<SetPolygon>();
-        ArrayList<SetPolygon> list2 = new ArrayList<SetPolygon>();
-        //SetPolygon result = new SetPolygon();
-
         for (int i = 0; i < a.numPolygons(); i++)
         {
-            HolePolygon polyA = a.getPolygon(i);
-            if (b.getPolygon(0).numSimplePolys() == 0) return new SetPolygon(new HolePolygon());
-            SimplePolygon simple = b.getPolygon(0).getSimplePoly(0);
-            Point2D translation = simple.getPoint(0);
-            list2.add(scaleTranslate(new SetPolygon(polyA), translation, 1));
-            //result = union(result, scaleTranslate(new SetPolygon(polyA), translation, 1));
+            if (a.getPolygon(i).numSimplePolys() == 0) return new SetPolygon(new HolePolygon());
         }
         for (int i = 0; i < b.numPolygons(); i++)
         {
-            HolePolygon polyB = b.getPolygon(i);
-            if (a.getPolygon(0).numSimplePolys() == 0) return new SetPolygon(new HolePolygon());
-            SimplePolygon simple = a.getPolygon(0).getSimplePoly(0);
-            Point2D translation = simple.getPoint(0);
-            list2.add(scaleTranslate(new SetPolygon(polyB), translation, 1));
-            //result = union(result, scaleTranslate(new SetPolygon(polyB), translation, 1));
+            if (b.getPolygon(i).numSimplePolys() == 0) return new SetPolygon(new HolePolygon());
+        }
+        ArrayList<SetPolygon> list = new ArrayList<SetPolygon>();
+        ArrayList<SetPolygon> list2 = new ArrayList<SetPolygon>();
+
+        for (int i = 0; i < b.numPolygons(); i++)
+        {
+            Point2D translation = b.getPolygon(i).getSimplePoly(0).getPoint(0);
+            list2.add(scaleTranslate(a, translation, 1));
+        }
+        for (int i = 0; i < a.numPolygons(); i++)
+        {
+            Point2D translation = a.getPolygon(i).getSimplePoly(0).getPoint(0);
+            list2.add(scaleTranslate(b, translation, 1));
         }
 
         for (int o = 0; o < a.numPolygons(); o++)
@@ -69,7 +68,6 @@ class MinkowskiUtil
                                 points.add(simpleA.getPoint(i).add(simpleB.getPoint(k)));
 
                                 list.add(fromPoints(points));
-                                //result = union(result, fromPoints(points));
                             }
                         }
                     }
@@ -81,7 +79,6 @@ class MinkowskiUtil
         list.addAll(list2);
         SetPolygonUtil.preSortedUnion(list);
         return list.get(0);
-        //return result;
     }
 
     private static SetPolygon scaleTranslate(SetPolygon set, Point2D translation, double scale)
@@ -91,6 +88,18 @@ class MinkowskiUtil
         {
             HolePolygon poly = set.getPolygon(i);
             result.add(scaleTranslate(poly, translation, scale));
+        }
+        
+        for (int i = 0; i < set.numPolygons(); i++)
+        {
+            HolePolygon poly = set.getPolygon(i);
+            for (int j = 0; j < set.numPolygons(); j++)
+            {
+                if(i == j) continue;
+                HolePolygon holePoly = set.getPolygon(j);
+                assert(!HolePolygonUtil.haveOverlappingAreas(holePoly, poly));
+                assert(!HolePolygonUtil.haveTouchingEdge(holePoly, poly));
+            }
         }
         return result;
     }

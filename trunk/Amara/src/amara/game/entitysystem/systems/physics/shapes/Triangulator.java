@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.shapes;
 
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Point2D;
 import java.util.*;
 
 /**
@@ -57,6 +58,50 @@ public class Triangulator
         Delaunay d = new Delaunay();
         tris = d.delaunay(arrVertices, tris);
         return toShapes(vertices, tris);
+    }
+    public ArrayList<Point2D> delaunayTris(ArrayList<Point2D> tris)
+    {
+        
+        ArrayList<Point2D> vertices = new ArrayList<Point2D>();
+        ArrayList<Integer> indices = new ArrayList<Integer>();
+        indexTris(tris, vertices, indices);
+        
+        ArrayList<Vector2D> vecVerts = new ArrayList<Vector2D>();
+        for (int i = 0; i < vertices.size(); i++)
+        {
+            vecVerts.add(new Vector2D(vertices.get(i).getX(), vertices.get(i).getY()));
+        }
+        
+        indices = new Delaunay().delaunay(vecVerts, indices);
+        ArrayList<Point2D> result = new ArrayList<Point2D>();
+        for (int i = 0; i < indices.size(); i++)
+        {
+            Vector2D v = vecVerts.get(indices.get(i));
+            result.add(new Point2D(v.getX(), v.getY()));
+        }
+        return result;
+    }
+    
+    private void indexTris(ArrayList<Point2D> tris, ArrayList<Point2D> vertices, ArrayList<Integer> indices)
+    {
+        for (int i = 0; i < tris.size(); i++)
+        {
+            int index = indexOf(vertices, tris.get(i));
+            if(index == -1)
+            {
+                index = vertices.size();
+                vertices.add(tris.get(i));
+            }
+            indices.add(index);
+        }
+    }
+    private int indexOf(ArrayList<Point2D> vertices, Point2D vertex)
+    {
+        for (int i = 0; i < vertices.size(); i++)
+        {
+            if(vertices.get(i).withinEpsilon(vertex)) return i;
+        }
+        return -1;
     }
     
     private ArrayList<SimpleConvex> toShapes(List<Vector2D> vertices, ArrayList<Integer> tris)

@@ -86,11 +86,11 @@ public class SimplePolygon
 
     public boolean isHole()
     {
-        return Util.belowEpsilon(signedArea());
+        return signedArea() < 0;
     }
     public boolean isAreaPositive()
     {
-        return Util.aboveEpsilon(signedArea());
+        return signedArea() > 0;
     }
     public double signedArea()
     {
@@ -153,7 +153,10 @@ public class SimplePolygon
     
     public void insertAtTouchPoint(SimplePolygon simple)
     {
+        assert SimplePolygonUtil.numCommonPoints(this, simple) == 1;
         assert(SimplePolygonUtil.haveCommonPoint(this, simple));
+        assert !SimplePolygonUtil.outlinesIntersect(this, simple);
+        assert (isHole() == simple.isHole()) || SimplePolygonUtil.haveOverlappingAreas(this, simple);
         double prevArea = signedArea();
         for (int i = 0; i < points.size(); i++)
         {
@@ -189,9 +192,8 @@ public class SimplePolygon
             tmp.add(simple.getPoint(k));
         }
         assert(tmp.equals(simple)): "" + j + " / " + tmp.numPoints() + " / " + simple.numPoints();
-        points.addAll(i, tmp.points);
+        insertRange(i, tmp.points);
         assert(!hasRepetitions());
-        cachedArea = Double.NaN;
     }
 
     public void smooth()
@@ -208,16 +210,20 @@ public class SimplePolygon
     }
     public boolean hasLooseLines()
     {
+        return firstLooseLineIndex() != -1;
+    }
+    public int firstLooseLineIndex()
+    {
         for (int i = 0; i < points.size(); i++)
         {
             int j = (i + 1) % points.size();
             int k = (i + 2) % points.size();
 
-            if (points.get(i).withinEpsilon(points.get(k))) return true;
-            if (points.get(i).between(points.get(j), points.get(k))) return true;
-            if (points.get(k).between(points.get(i), points.get(j))) return true;
+            if (points.get(i).withinEpsilon(points.get(k))) return j;
+            if (points.get(i).between(points.get(j), points.get(k))) return j;
+            if (points.get(k).between(points.get(i), points.get(j))) return j;
         }
-        return false;
+        return -1;
     }
     public boolean hasStraightAngles()
     {
@@ -231,6 +237,8 @@ public class SimplePolygon
     }
     public void removeLooseLines()
     {
+        insertTouchPoints(this);
+        assert(!hasRepetitions());
         double area = signedArea();
         boolean changed = true;
         while (changed)
@@ -281,6 +289,29 @@ public class SimplePolygon
         assert(!hasStraightAngles());
         assert(Util.withinEpsilon(prevArea - signedArea()));
     }
+    public boolean hasDuplicates()
+    {
+        for (int i = 0; i + 1 < points.size(); i++)
+        {
+            for (int j = i + 1; j < points.size(); j++)
+            {
+                if (points.get(i).withinEpsilon(points.get(j))) return true;
+            }
+        }
+        return false;
+    }
+    public int numDuplicates()
+    {
+        int count = 0;
+        for (int i = 0; i + 1 < points.size(); i++)
+        {
+            for (int j = i + 1; j < points.size(); j++)
+            {
+                if (points.get(i).withinEpsilon(points.get(j))) count++;
+            }
+        }
+        return count;
+    }
     public boolean hasRepetitions()
     {
         for (int i = 0; i < points.size(); i++)
@@ -323,7 +354,6 @@ public class SimplePolygon
     public void insertTouchPoints(SimplePolygon poly)
     {
         assert(!hasRepetitions());
-        assert(!hasLooseLines());
         HashMap<Integer, HashSet<Point2D>> touchers = new HashMap<Integer, HashSet<Point2D>>();
         for (int k = 0; k < poly.numPoints(); k++)
         {
@@ -352,7 +382,6 @@ public class SimplePolygon
             }
         }
         assert(!hasRepetitions());
-        assert(!hasLooseLines());
     }
 
     public boolean isSelfTouching()
@@ -367,10 +396,84 @@ public class SimplePolygon
         return false;
     }
     
+    public boolean isSelfIntersecting()
+    {
+        for (int i = 0; i + 1 < points.size(); i++)
+        {
+            int j = i + 1;
+            
+            for (int k = j; k < points.size(); k++)
+            {
+                int l = (k + 1) % points.size();
+                if(Point2DUtil.lineSegmentIntersectionPointWithoutCorners(points.get(i), points.get(j), points.get(k), points.get(l)) != null) return true;
+            }
+        }
+//        if(SimplePolygonUtil.outlinesIntersect(this, this)) return true;
+//        SimplePolygon simple = new SimplePolygon(points);
+//        simple.smooth();
+//        SimplePolygonUtil.addIntersectionPoints(simple, simple);
+//        simple.insertTouchPoints(this);
+//        
+//        Point2D a, b, c, d;
+//        for (int i = 0; i < simple.numPoints(); i++)
+//        {
+//            a = simple.getPoint(i);
+//            int j = (i + 1) % simple.numPoints();
+//            
+//            for (int l = 0; l < simple.numPoints(); l++)
+//            {
+//                if(simple.getPoint(i).withinEpsilon(simple.getPoint(l))) continue;
+//                int k = (l + simple.numPoints() - 1) % simple.numPoints();
+//                d = simple.getPoint(l);
+//                
+//                int iterations = simple.numPoints();
+//                while(simple.getPoint(j).withinEpsilon(simple.getPoint(k)))
+//                {
+//                    if(--iterations == 0) break;
+//                    
+//                    j = (j + 1) % simple.numPoints();
+//                    k = (k + simple.numPoints() - 1) % simple.numPoints();
+//                }
+//                if(iterations == 0) continue;
+//                
+//                b = simple.getPoint(j);
+//                c = simple.getPoint(k);
+//                
+//                if(a.withinEpsilon(b)) continue;
+//                if(a.withinEpsilon(c)) continue;
+//                if(a.withinEpsilon(d)) continue;
+//                if(b.withinEpsilon(c)) continue;
+//                if(b.withinEpsilon(d)) continue;
+//                if(c.withinEpsilon(d)) continue;
+//                
+//                if(Point2DUtil.lineSegmentIntersectionPointWithoutCorners(a, b, c, d) != null)
+//                {
+//                    return true;
+//                }
+//            }
+//        }
+        return false;
+    }
+    
     public boolean isValid()
     {
-        if(SimplePolygonUtil.outlinesIntersect(this, this)) return false;
+        for (Point2D p : points)
+        {
+            if(Double.isInfinite(p.getX())) return false;
+            if(Double.isInfinite(p.getY())) return false;
+            if(Double.isNaN(p.getX())) return false;
+            if(Double.isNaN(p.getY())) return false;
+        }
+        SimplePolygon test = new SimplePolygon(points);
+        test.insertTouchPoints(test);
+        if(test.isSelfTouching()) return false;
+        if(test.hasDuplicates())
+        {
+            return false;
+        }
+        if(isSelfIntersecting()) return false;
         if(hasRepetitions()) return false;
+        SimplePolygonUtil.triangles(isHole()? inverse(): this);
         return true;
     }
     
