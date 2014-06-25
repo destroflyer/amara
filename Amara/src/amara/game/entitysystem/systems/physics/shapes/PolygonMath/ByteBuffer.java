@@ -111,7 +111,7 @@ class ByteBuffer
     
     public Object readObject() throws UnsupportedEncodingException
     {
-        byte type = readByte();
+        byte type = (byte)readByte();
         switch(type)
         {
             case type_string:
@@ -176,11 +176,13 @@ class ByteBuffer
     
     public long readLong()
     {
-        return readInt() | ((long)readInt() << 32);
+//        return (long)readByte() | ((long)readByte() << 8) | ((long)readByte() << 16) | ((long)readByte() << 24) | ((long)readByte() << 32) | ((long)readByte() << 40) | ((long)readByte() << 48) | ((long)readByte() << 56);
+        return (readInt() & 0xffffffffl) | ((readInt() & 0xffffffffl) << 32);
     }
     
     public int readInt()
     {
+        
         return readByte() | (readByte() << 8) | (readByte() << 16) | (readByte() << 24);
     }
     
@@ -193,7 +195,7 @@ class ByteBuffer
     {
         byte[] txt = new byte[length];
         for (int i = 0; i < length; i++) {
-            txt[i] = readByte();
+            txt[i] = (byte)readByte();
         }
         return txt;
     }
@@ -203,9 +205,9 @@ class ByteBuffer
         return readBytes(availableBytes());
     }
     
-    public byte readByte()
+    public int readByte()
     {
-        return bytes.get(position++);
+        return bytes.get(position++) & 0xff;
     }
     // </editor-fold>
     
@@ -286,7 +288,12 @@ class ByteBuffer
     
     public void writeDouble(double d)
     {
-        writeLong(Double.doubleToLongBits(d));
+        writeLong(Double.doubleToRawLongBits(d));
+        int tmp = position;
+        position = bytes.size() - 8;
+        double test = readDouble();
+        assert d == test;
+        position = tmp;
     }
     
     public void writeFloat(float f)
@@ -315,8 +322,8 @@ class ByteBuffer
     
     public void writeShort(short shrt)
     {
-        writeByte((byte)(shrt >> 8));
         writeByte((byte)shrt);
+        writeByte((byte)(shrt >> 8));
     }
     
     public static byte[] shortToBytes(short s)
@@ -326,22 +333,54 @@ class ByteBuffer
     
     public void writeInt(int i)
     {
-        writeByte((byte)i);
-        writeByte((byte)(i >> 8));
-        writeByte((byte)(i >> 16));
-        writeByte((byte)(i >> 24));
+        
+//        for (int j = 0; j < 4; j++)
+//        {
+//            int shift = j * 8;
+//            int shifted = i >> shift;
+//            assert (byte)(0xff & shifted) == (0xff & shifted);
+//            assert (byte)shifted == (0xff & shifted);
+//            assert (((byte)shifted) << shift) == (i & (0xff << shift));
+//        }
+        writeByte((byte)(i & 0xff));
+        writeByte((byte)((i >> 8) & 0xff));
+        writeByte((byte)((i >> 16) & 0xff));
+        writeByte((byte)((i >> 24) & 0xff));
+        int tmp = position;
+        position = bytes.size() - 4;
+        int test = readInt();
+        assert i == test;
+        position = tmp;
     }
     
-    public void writeLong(long i)
+    public void writeLong(long l)
     {
-        writeByte((byte)i);
-        writeByte((byte)(i >> 8));
-        writeByte((byte)(i >> 16));
-        writeByte((byte)(i >> 24));
-        writeByte((byte)(i >> 32));
-        writeByte((byte)(i >> 40));
-        writeByte((byte)(i >> 48));
-        writeByte((byte)(i >> 56));
+        writeInt((int)(l & 0xffffffff));
+        writeInt((int)((l >> 32) & 0xffffffff));
+        int tmp = position;
+        position = bytes.size() - 8;
+        long test = readLong();
+        assert l == test;
+        position = tmp;
+//        for (int j = 0; j < 8; j++) {
+//            assert ((long)((byte)(l >> (j * 8))) << (j * 8)) == (l & (0xffl << (j * 8)));
+//        }
+//        writeByte((byte)i);
+//        writeByte((byte)(i >> 8));
+//        writeByte((byte)(i >> 16));
+//        writeByte((byte)(i >> 24));
+//        writeByte((byte)(i >> 32));
+//        writeByte((byte)(i >> 40));
+//        writeByte((byte)(i >> 48));
+//        writeByte((byte)(i >> 56));
+//        writeByte((byte)i);
+//        writeByte((byte)(i >> 8));
+//        writeByte((byte)(i >> 16));
+//        writeByte((byte)(i >> 24));
+//        writeByte((byte)(i >> 32));
+//        writeByte((byte)(i >> 40));
+//        writeByte((byte)(i >> 48));
+//        writeByte((byte)(i >> 56));
     }
     // </editor-fold>
     
@@ -365,5 +404,15 @@ class ByteBuffer
         {
             bytes.remove(--position);
         }
+    }
+    
+    public boolean equals(ByteBuffer buffer)
+    {
+        if(availableBytes() != buffer.availableBytes()) return false;
+        for (int i = 0; i < availableBytes(); i++)
+        {
+            if(bytes.get(position + i) != buffer.bytes.get(buffer.position + i)) return false;
+        }
+        return true;
     }
 }

@@ -6,6 +6,7 @@ package amara.game.entitysystem.systems.physics;
 
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
+import java.util.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -28,6 +29,7 @@ public class PolyHelper
         {
             Circle circle = (Circle)shape;
             convex = new RegularCyclic(circle.getX(), circle.getY(), 8, circle.getBoundRadius());
+            convex.getTransform().rotateRadian(Math.PI / 8);
         }
         else throw new NotImplementedException();
         builder.reset();
@@ -37,6 +39,40 @@ public class PolyHelper
         {
             builder.add(points[i].getX(), points[i].getY());
         }
+        return builder.build(false);
+    }
+    public static Polygon fromShapes(ArrayList<Shape> shapes)
+    {
+        ArrayList<Polygon> polys = new ArrayList<Polygon>();
+        for (Shape shape : shapes)
+        {
+            polys.add(fromShape(shape));
+        }
+        return Polygon.preSortedUnion(polys);
+    }
+    
+    public static Polygon regularCyclic(double radius, int edges)
+    {
+        Point2D p = new Point2D(radius, 0);
+        Transform2D t = new Transform2D(1, Math.PI * 2 / edges, 0, 0);
+        builder.reset();
+        builder.nextOutline(false);
+        for (int i = 0; i < edges; i++)
+        {
+            builder.add(p);
+            p = t.transform(p);
+        }
+        return builder.build(false);
+    }
+    
+    public static Polygon rectangle(double x, double y, double width, double height)
+    {
+        builder.reset();
+        builder.nextOutline(false);
+        builder.add(new Point2D(x, y));
+        builder.add(new Point2D(x + width, y));
+        builder.add(new Point2D(x + width, y + height));
+        builder.add(new Point2D(x, y + height));
         return builder.build(false);
     }
     

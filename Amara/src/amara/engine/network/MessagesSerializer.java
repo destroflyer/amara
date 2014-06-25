@@ -280,7 +280,7 @@ public class MessagesSerializer{
                             RegularCyclic.class,
                             Shape.class,
                             SimpleConvex.class,
-                            amara.game.entitysystem.systems.physics.shapes.Transform.class,
+                            Transform.class,
                             Vector2D.class,
                             PolygonShape.class,
                                 Polygon.class,

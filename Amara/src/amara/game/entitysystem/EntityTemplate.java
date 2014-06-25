@@ -1540,17 +1540,17 @@ public class EntityTemplate{
             entityWrapper.setComponent(new DeathAnimationComponent(deathAnimation.getId()));
             entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
             
-            entityWrapper.setComponent(new HitboxComponent(new Circle(0.8f)));
+            entityWrapper.setComponent(new HitboxComponent(new Circle(1f)));
             entityWrapper.setComponent(new IntersectionPushComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
             
             entityWrapper.setComponent(new IsAliveComponent());
             entityWrapper.setComponent(new BaseMaximumHealthComponent(1000));
-            entityWrapper.setComponent(new BaseHealthRegenerationComponent(100));
-            entityWrapper.setComponent(new BaseAttackDamageComponent(400));
+            entityWrapper.setComponent(new BaseHealthRegenerationComponent(10));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(200));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(3.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId()}));
