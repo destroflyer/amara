@@ -369,4 +369,14 @@ class SimplePolygonUtil
         }
         return outline;
     }
+    static void edges(ArrayList<Point2D> edges, SimplePolygon polygon)
+    {
+        for (int i = 0; i < polygon.numPoints(); i++)
+        {
+            int j = (i + 1) % polygon.numPoints();
+            
+            edges.add(polygon.getPoint(i));
+            edges.add(polygon.getPoint(j));
+        }
+    }
 }

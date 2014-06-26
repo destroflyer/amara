@@ -43,6 +43,7 @@ public class PolyHelper
     }
     public static Polygon fromShapes(ArrayList<Shape> shapes)
     {
+        if(shapes.isEmpty()) return empty();
         ArrayList<Polygon> polys = new ArrayList<Polygon>();
         for (Shape shape : shapes)
         {
@@ -51,7 +52,23 @@ public class PolyHelper
         return Polygon.preSortedUnion(polys);
     }
     
-    public static Polygon regularCyclic(double radius, int edges)
+    public static Polygon fromOutline(ArrayList<Point2D> outline)
+    {
+        builder.reset();
+        builder.nextOutline(false);
+        for (int i = 0; i < outline.size(); i++)
+        {
+            builder.add(outline.get(i));
+        }
+        return builder.build(false);
+    }
+    
+    public static Polygon empty()
+    {
+        builder.reset();
+        return builder.build(false);
+    }
+    public static Polygon regularCyclic(double x, double y, double radius, int edges)
     {
         Point2D p = new Point2D(radius, 0);
         Transform2D t = new Transform2D(1, Math.PI * 2 / edges, 0, 0);
@@ -59,7 +76,7 @@ public class PolyHelper
         builder.nextOutline(false);
         for (int i = 0; i < edges; i++)
         {
-            builder.add(p);
+            builder.add(p.add(x, y));
             p = t.transform(p);
         }
         return builder.build(false);

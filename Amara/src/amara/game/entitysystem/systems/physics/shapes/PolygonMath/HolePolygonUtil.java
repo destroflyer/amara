@@ -18,6 +18,116 @@ class HolePolygonUtil
         return SimplePolygonUtil.triangles(cutToSimple(poly));
     }
     
+    private static int rightmostIndex(SimplePolygon simple)
+    {
+        int index = 0;
+        for (int i = 1; i < simple.numPoints(); i++)
+        {
+            if(simple.getPoint(i).getX() > simple.getPoint(index).getX()) index = i;
+        }
+        return index;
+    }
+    
+    private static int leftmostRayIntersectionPreIndex(Point2D raySource, SimplePolygon simple)
+    {
+        double minIntersectionX = Double.NaN;
+        int index = -1;
+        for (int i = 0; i < simple.numPoints(); i++)
+        {
+            int j = (i + 1) % simple.numPoints();
+            
+            double intersectionX = rayIntersectionHelper(raySource, simple.getPoint(i), simple.getPoint(j));
+            if(raySource.getX() <= intersectionX)
+            {
+                if(!(minIntersectionX <= intersectionX))
+                {
+                    index = i;
+                    minIntersectionX = intersectionX;
+                }
+            }
+        }
+        assert index != -1;
+        return index;
+    }
+    private static double rayIntersectionHelper(Point2D raySource, Point2D a, Point2D b)
+    {
+        if(Util.withinEpsilon(a.getY() - raySource.getY())) return a.getX();
+        return Point2DUtil.lineSegmentAxisIntersectionX(a, b, raySource.getY());
+    }
+    
+    private static int closestCandidateIndex(SimplePolygon outer, Point2D iP, int outerIndex, Point2D intersection)
+    {
+        int next = (outerIndex + 1) % outer.numPoints();
+        assert !intersection.withinEpsilon(outer.getPoint(next));
+        if(outer.getPoint(outerIndex).getX() < outer.getPoint(next).getX())
+        {
+            outerIndex = next;
+        }
+
+        SimplePolygon tri = new SimplePolygon();
+        tri.add(iP);
+        tri.add(outer.getPoint(outerIndex));
+        tri.add(intersection);
+        if(tri.isHole()) tri.invert();
+
+        double len = outer.getPoint(outerIndex).sub(iP).squaredLength();
+        for (int i = 0; i < outer.numPoints(); i++)
+        {
+            int j = (i + 1) % outer.numPoints();
+            int h = (i + 2) % outer.numPoints();
+
+            if(iP.getX() <= outer.getPoint(j).getX())
+            {
+                if(Point2DUtil.lineSide(outer.getPoint(j), outer.getPoint(i), outer.getPoint(h)) <= 0)
+                {
+                    SimplePolygon t = new SimplePolygon();
+                    t.add(outer.getPoint(i));
+                    t.add(outer.getPoint(j));
+                    t.add(outer.getPoint(h));
+                    assert !t.isAreaPositive();
+                    if(tri.areaContains(outer.getPoint(j)) != Containment.Outside)
+                    {
+                        double tmpLen = outer.getPoint(j).sub(iP).squaredLength();
+                        if(tmpLen < len)
+                        {
+                            len = tmpLen;
+                            outerIndex = j;
+                        }
+                    }
+                }
+                else
+                {
+                    SimplePolygon t = new SimplePolygon();
+                    t.add(outer.getPoint(i));
+                    t.add(outer.getPoint(j));
+                    t.add(outer.getPoint(h));
+                    assert !t.isHole();
+                }
+            }
+        }
+        assert iP.getX() <= outer.getPoint(outerIndex).getX(): iP.getX() + " - " + outer.getPoint(outerIndex).getX();
+
+        assert !SimplePolygonUtil.outlineIntersectsSegment(outer, iP, outer.getPoint(outerIndex));
+        return outerIndex;
+    }
+    
+    private static SimplePolygon mergeHelper(SimplePolygon outer, int outerIndex, SimplePolygon inner, int innerIndex)
+    {
+        SimplePolygon poly = new SimplePolygon();
+        poly.add(outer.getPoint(outerIndex));
+        for (int k = 0; k < inner.numPoints(); k++)
+        {
+            poly.add(inner.getPoint((innerIndex + k) % inner.numPoints()));
+        }
+        poly.add(inner.getPoint(innerIndex));
+        
+        assert Util.withinEpsilon(poly.signedArea() - inner.signedArea());
+        
+        SimplePolygon result = new SimplePolygon(outer);
+        result.insertPoly(poly, outerIndex, 0);
+        return result;
+    }
+    
     public static SimplePolygon mergePolys(SimplePolygon outer, SimplePolygon inner)
     {
         if(SimplePolygonUtil.haveCommonPoint(outer, inner))
@@ -33,127 +143,58 @@ class HolePolygonUtil
         assert !SimplePolygonUtil.outlinesIntersect(outer, inner);
         assert !SimplePolygonUtil.outlinesIntersect(outer, inner);
         
-        int innerIndex = 0;
-        for (int i = 1; i < inner.numPoints(); i++)
-        {
-            if(inner.getPoint(i).getX() > inner.getPoint(innerIndex).getX()) innerIndex = i;
-        }
+        int innerIndex = rightmostIndex(inner);
         Point2D iP = inner.getPoint(innerIndex);
         
-        double minIntersectionX = Double.NaN;
-        int outerIndex = -1;
-        for (int i = 0; i < outer.numPoints(); i++)
-        {
-            int j = (i + 1) % outer.numPoints();
-            
-            if(outer.getPoint(i).getY() == iP.getY())
-            {
-                if(iP.getX() < outer.getPoint(i).getX())
-                {
-                    if(!(minIntersectionX >= outer.getPoint(i).getX()))
-                    {
-                        if(outer.getPoint(j).getX() < outer.getPoint(i).getX()) outerIndex = i;
-                        else outerIndex = j;
-                        minIntersectionX = outer.getPoint(i).getX();
-                    }
-                }
-            }
-            if(outer.getPoint(j).getY() == iP.getY())
-            {
-                if(iP.getX() < outer.getPoint(j).getX())
-                {
-                    if(!(minIntersectionX >= outer.getPoint(j).getX()))
-                    {
-                        if(outer.getPoint(j).getX() < outer.getPoint(i).getX()) outerIndex = i;
-                        else outerIndex = j;
-                        minIntersectionX = outer.getPoint(j).getX();
-                    }
-                }
-            }
-            
-            double intersectionX = Point2DUtil.lineSegmentAxisIntersectionX(outer.getPoint(i), outer.getPoint(j), iP.getY());
-            if(iP.getX() < intersectionX)
-            {
-                if(!(minIntersectionX >= intersectionX))
-                {
-                    if(outer.getPoint(j).getX() < outer.getPoint(i).getX()) outerIndex = i;
-                    else outerIndex = j;
-                    minIntersectionX = intersectionX;
-                }
-            }
-        }
+        int outerIndex = leftmostRayIntersectionPreIndex(iP, outer);
+        Point2D oP = outer.getPoint(outerIndex);
+        double minIntersectionX = rayIntersectionHelper(iP, oP, outer.getPoint((outerIndex + 1) % outer.numPoints()));
+        
         assert outerIndex != -1;
-        assert iP.getX() <= outer.getPoint(outerIndex).getX(): iP.getX() + " - " + outer.getPoint(outerIndex).getX();
+        assert iP.getX() <= oP.getX(): iP.getX() + " - " + oP.getX();
         
         Point2D tmp = new Point2D(minIntersectionX, iP.getY());
-        if(tmp.withinEpsilon(outer.getPoint(outerIndex)))
+        assert !SimplePolygonUtil.outlineIntersectsSegment(outer, iP, tmp);
+        if(!tmp.withinEpsilon(oP))
         {
-            
+            outerIndex = closestCandidateIndex(outer, iP, outerIndex, tmp);
+            oP = outer.getPoint(outerIndex);
+        
+            assert iP.getX() <= oP.getX(): iP.getX() + " - " + oP.getX();
+
+            assert !SimplePolygonUtil.outlineIntersectsSegment(outer, iP, oP);
+            assert !SimplePolygonUtil.outlineIntersectsSegment(inner, iP, oP);
         }
-        else if(tmp.withinEpsilon(outer.getPoint((outerIndex + 1) % outer.numPoints())))
-        {
-            outerIndex = (outerIndex + 1) % outer.numPoints();
-        }
-        else
-        {
-            SimplePolygon tri = new SimplePolygon();
-            tri.add(iP);
-            tri.add(tmp);
-            tri.add(outer.getPoint(outerIndex));
-            if(tri.isHole()) tri.invert();
-            ArrayList<Integer> candidates = new ArrayList<Integer>();
-            for (int i = 0; i < outer.numPoints(); i++)
-            {
-                int j = (i + 1) % outer.numPoints();
-                int h = (i + 2) % outer.numPoints();
-                
-                if(iP.getX() <= outer.getPoint(j).getX())
-                {
-                    if(Point2DUtil.lineSide(outer.getPoint(j), outer.getPoint(i), outer.getPoint(h)) < 0)
-                    {
-                        if(tri.areaContains(outer.getPoint(j)) != Containment.Outside)
-                        {
-                            candidates.add(j);
-                        }
-                    }
-                }
-            }
-            assert iP.getX() <= outer.getPoint(outerIndex).getX(): iP.getX() + " - " + outer.getPoint(outerIndex).getX();
-            if(!candidates.isEmpty())
-            {
-                Point2D delta = outer.getPoint(outerIndex).sub(iP);
-                double len = delta.squaredLength();
-                for (int i = 0; i < candidates.size(); i++)
-                {
-                    delta = outer.getPoint(candidates.get(i)).sub(iP);
-                    double tmpLen = delta.squaredLength();
-                    if(tmpLen < len)
-                    {
-                        len = tmpLen;
-                        outerIndex = candidates.get(i);
-                    }
-                }
-            } else assert iP.getX() <= outer.getPoint(outerIndex).getX(): iP.getX() + " - " + outer.getPoint(outerIndex).getX();
-        }
+        assert !SimplePolygonUtil.outlineIntersectsSegment(outer, iP, oP);
+        assert !SimplePolygonUtil.outlineIntersectsSegment(inner, iP, oP);
         
-        assert iP.getX() <= outer.getPoint(outerIndex).getX(): iP.getX() + " - " + outer.getPoint(outerIndex).getX();
-        
-        assert !SimplePolygonUtil.outlineIntersectsSegment(outer, iP, outer.getPoint(outerIndex));
-        assert !SimplePolygonUtil.outlineIntersectsSegment(inner, iP, outer.getPoint(outerIndex));
-        
-        SimplePolygon poly = new SimplePolygon();
-        poly.add(outer.getPoint(outerIndex));
-        for (int k = 0; k < inner.numPoints(); k++)
-        {
-            poly.add(inner.getPoint((innerIndex + k) % inner.numPoints()));
-        }
-        poly.add(inner.getPoint(innerIndex));
-        
-        assert Util.withinEpsilon(poly.signedArea() - inner.signedArea());
-        
-        SimplePolygon result = new SimplePolygon(outer);
-        result.insertPoly(poly, outerIndex, 0);
+        SimplePolygon result = mergeHelper(outer, outerIndex, inner, innerIndex);
         assert Util.withinEpsilon(outer.signedArea() + inner.signedArea() - result.signedArea());
+        
+        try
+        {
+            SimplePolygonUtil.triangles(outer);
+        }
+        catch(IndexOutOfBoundsException e)
+        {
+            assert false;
+        }
+        try
+        {
+            SimplePolygonUtil.triangles(inner.inverse());
+        }
+        catch(IndexOutOfBoundsException e)
+        {
+            assert false;
+        }
+        try
+        {
+            SimplePolygonUtil.triangles(result);
+        }
+        catch(IndexOutOfBoundsException e)
+        {
+            assert false;
+        }
         
         return result;
     }
@@ -336,4 +377,11 @@ class HolePolygonUtil
         return outlines;
     }
     
+    static void edges(ArrayList<Point2D> edges, HolePolygon polygon)
+    {
+        for (int i = 0; i < polygon.numSimplePolys(); i++)
+        {
+            SimplePolygonUtil.edges(edges, polygon.getSimplePoly(i));
+        }
+    }
 }

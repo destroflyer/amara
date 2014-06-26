@@ -19,6 +19,7 @@ public class PolygonBuilder
     {
         for (int i = 0; i < outlines.size(); i++)
         {
+            assert !outlines.get(i).hasRepetitions();
             if(outlines.get(i).isHole() != holes.get(i)) outlines.get(i).invert();
         }
         return new Polygon(SetPolygonUtil.simpleSetToSetPolygon(outlines, infinite));

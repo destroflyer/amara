@@ -46,6 +46,7 @@ class SetPolygonUtil
     
     public static void preSortedUnion(ArrayList<SetPolygon> polys)
     {
+        assert !polys.isEmpty();
         while(polys.size() > 1)
         {
             for (int i = 0; i + 1 < polys.size(); i++)
@@ -466,10 +467,7 @@ class SetPolygonUtil
         assert(chains.isEmpty());
         for (SimplePolygon simplePolygon : result)
         {
-            if(!simplePolygon.isValid())
-            {
-                int b = 7;
-            }
+            assert simplePolygon.isValid();
         }
         return result;
     }
@@ -492,13 +490,8 @@ class SetPolygonUtil
         }
         for (int i = 0; i < simples.size(); i++)
         {
-            
             assert !simples.get(i).isSelfTouching();
             assert simples.get(i).isValid();
-            if(!simples.get(i).isValid())
-            {
-                int c = 0;
-            }
         }
 
         SetPolygon result = new SetPolygon();
@@ -686,5 +679,12 @@ class SetPolygonUtil
             outlines.addAll(HolePolygonUtil.outlines(setPoly.getPolygon(i)));
         }
         return outlines;
+    }
+    static void edges(ArrayList<Point2D> edges, SetPolygon polygon)
+    {
+        for (int i = 0; i < polygon.numPolygons(); i++)
+        {
+            HolePolygonUtil.edges(edges, polygon.getPolygon(i));
+        }
     }
 }
