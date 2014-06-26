@@ -14,6 +14,7 @@ import java.util.*;
  */
 public final class PolyMapManager
 {
+    private Vision vision = new Vision();
     private Polygon map;
     private HashMap<Double, NavigationMap> navis = new HashMap<Double, NavigationMap>();
     private double width, height;
@@ -46,7 +47,7 @@ public final class PolyMapManager
     public Polygon calcNavigationMap(double radius)
     {
         int edges = 8;
-        Polygon poly = PolyHelper.regularCyclic(radius, edges);
+        Polygon poly = PolyHelper.regularCyclic(0, 0, radius, edges);
         poly = map.minkowskiAdd(poly).inverse();
         addNavigationMap(poly, radius);
         return poly;
@@ -77,5 +78,15 @@ public final class PolyMapManager
     public ArrayList<Point2D> findPath(Point2D start, Point2D end, double radius)
     {
         return mapFromRadius(radius).findPath(start, end);
+    }
+    
+    public Polygon sightPolygon(Point2D source, double range)
+    {
+        if(map.contains(source))
+        {
+            return PolyHelper.empty();
+        }
+        Polygon mask = PolyHelper.regularCyclic(source.getX(), source.getY(), range, 16).inverse();
+        return PolyHelper.fromOutline(vision.sightPolyOutline(source, map.union(mask).edges()));
     }
 }

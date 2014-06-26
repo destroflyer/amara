@@ -4,11 +4,23 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import java.util.*;
+
 /**
  *
  * @author Philipp
  */
 class Point2DUtil {
+    public static Point2D lineIntersectionPoint(Point2D p1, Point2D p2, Point2D p3, Point2D p4)
+    {
+        double denom = (p4.getY() - p3.getY()) * (p2.getX() - p1.getX()) - (p4.getX() - p3.getX()) * (p2.getY() - p1.getY());
+        if (Util.withinEpsilon(denom)) return null;
+
+        double nomT = (p3.getX() - p1.getX()) * (p4.getY() - p3.getY()) + (p1.getY() - p3.getY()) * (p4.getX() - p3.getX());
+        double t = nomT / denom;
+
+        return new Point2D(p1.getX() + t * (p2.getX() - p1.getX()), p1.getY() + t * (p2.getY() - p1.getY()));
+    }
     public static Point2D lineSegmentIntersectionPointWithoutCorners(Point2D p1, Point2D p2, Point2D p3, Point2D p4)
         {
             assert(!p1.equals(p2));
@@ -121,47 +133,38 @@ class Point2DUtil {
         return ay + ((xAxis - ax) / (bx - ax)) * (by - ay);
     }
     
-    public static boolean chainsCenterIntersection(Point2D a, Point2D b, Point2D c, Point2D d, Point2D p)
+    public static boolean onLineSegment(Point2D p, Point2D a, Point2D b)
     {
-        assert !a.equals(b);
-        assert !c.equals(d);
-        
-        assert !p.equals(a);
-        assert !p.equals(b);
-        assert !p.equals(c);
-        assert !p.equals(d);
-        
-        a = a.sub(p);
-        b = b.sub(p);
-        c = c.sub(p);
-        d = d.sub(p);
-        
-        double e = Math.atan2(a.getY(), a.getX());
-        double f = Math.atan2(b.getY(), b.getX());
-        double g = Math.atan2(c.getY(), c.getX());
-        double h = Math.atan2(d.getY(), d.getX());
-        
-        if(f < e)
+        if(p == null || a == null || b == null)
         {
-            double tmp = e;
-            e = f;
-            f = tmp;
+            int hkl = 0;
         }
-        if(h < g)
-        {
-            double tmp = g;
-            g = h;
-            h = tmp;
-        }
-        
-        if(e <= h) return false;
-        if(g <= f) return false;
-        if(f <= h && g <= e) return false;
-        if(h <= e && f <= g) return false;
-        
-        assert false;
-        
+        assert p != null && a != null && b != null;
+        double cross = (p.getY() - a.getY()) * (b.getX() - a.getX()) - (p.getX() - a.getX()) * (b.getY() - a.getY());
+        if (!Util.withinEpsilon(cross)) return false;
+
+        double dot = (p.getX() - a.getX()) * (b.getX() - a.getX()) + (p.getY() - a.getY()) * (b.getY() - a.getY());
+        if (dot < 0) return false;
+        if (dot > a.squaredDistance(b)) return false;
         return true;
+    }
+    
+    public static Point2D rayLinesIntersectionPoint(Point2D source, Point2D through, ArrayList<Point2D> lines)
+    {
+        Point2D point = null;
+        double squaredDist = Double.POSITIVE_INFINITY;
+        for (int i = 0; i < lines.size(); i += 2)
+        {
+            Point2D tmp = lineIntersectionPoint(source, through, lines.get(i), lines.get(i + 1));
+            if(tmp == null) continue;
+            double tmpSqDist = source.squaredDistance(tmp);
+            if(tmpSqDist < squaredDist)
+            {
+                point = tmp;
+                squaredDist = tmpSqDist;
+            }
+        }
+        return point;
     }
     
 }

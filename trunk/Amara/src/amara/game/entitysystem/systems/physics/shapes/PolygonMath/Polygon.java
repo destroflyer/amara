@@ -73,7 +73,7 @@ public class Polygon
 
     public static Polygon preSortedUnion(Collection<Polygon> polys)
     {
-        assert !polys.isEmpty();
+        if(polys.isEmpty()) return new Polygon(new SetPolygon());
         ArrayList<SetPolygon> setPolys = new ArrayList<SetPolygon>();
         for (Polygon poly : polys)
         {
@@ -106,6 +106,12 @@ public class Polygon
     public ArrayList<ArrayList<Point2D>> outlines()
     {
         return SetPolygonUtil.outlines(setPoly);
+    }
+    public ArrayList<Point2D> edges()
+    {
+        ArrayList<Point2D> edges = new ArrayList<Point2D>();
+        SetPolygonUtil.edges(edges, setPoly);
+        return edges;
     }
     
     public void writeToFile(String filename)
