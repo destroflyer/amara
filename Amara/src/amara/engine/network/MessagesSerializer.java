@@ -305,6 +305,7 @@ public class MessagesSerializer{
                         //spells
                         ApplyCastedSpellComponent.class,
                         CastAnimationComponent.class,
+                        CastCancelableComponent.class,
                         CastDurationComponent.class,
                         CastTypeComponent.class,
                         CooldownComponent.class,
@@ -334,6 +335,7 @@ public class MessagesSerializer{
                         AutoAttackTargetComponent.class,
                         CampComponent.class,
                         CastSpellOnCooldownWhileAttackingComponent.class,
+                        CurrentActionEffectCastsComponent.class,
                         IntersectionRulesComponent.class,
                         IsAliveComponent.class,
                         IsCastingComponent.class,

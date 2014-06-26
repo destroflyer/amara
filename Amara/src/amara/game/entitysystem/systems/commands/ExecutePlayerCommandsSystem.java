@@ -13,7 +13,6 @@ import amara.engine.applications.ingame.client.commands.casting.*;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.input.*;
-import amara.game.entitysystem.components.input.casts.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
@@ -26,8 +25,8 @@ import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.systems.movement.MovementSystem;
 import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.CastSpellSystem;
-import amara.game.entitysystem.systems.spells.casting.SetCastDurationOnCastingSystem;
 import amara.game.entitysystem.systems.targets.TargetUtil;
+import amara.game.entitysystem.systems.units.UnitUtil;
 
 /**
  *
@@ -60,16 +59,18 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 }
                 else if(command instanceof StopCommand){
                     StopCommand stopCommand = (StopCommand) command;
-                    entityWorld.removeComponent(selectedUnit, MovementComponent.class);
-                    entityWorld.removeComponent(selectedUnit, AggroTargetComponent.class);
-                    entityWorld.removeComponent(selectedUnit, AutoAttackTargetComponent.class);
+                    if(UnitUtil.cancelAction(entityWorld, selectedUnit)){
+                        entityWorld.removeComponent(selectedUnit, MovementComponent.class);
+                        entityWorld.removeComponent(selectedUnit, AggroTargetComponent.class);
+                    }
                 }
                 else if(command instanceof AutoAttackCommand){
                     AutoAttackCommand autoAttackCommand = (AutoAttackCommand) command;
                     if(entityWorld.hasComponent(selectedUnit, AutoAttackComponent.class)){
                         if(PerformAutoAttacksSystem.isAttackable(entityWorld, selectedUnit, autoAttackCommand.getTargetEntity())){
-                            entityWorld.removeComponent(selectedUnit, MovementComponent.class);
-                            entityWorld.setComponent(selectedUnit, new AggroTargetComponent(autoAttackCommand.getTargetEntity()));
+                            if(UnitUtil.cancelAction(entityWorld, selectedUnit)){
+                                entityWorld.setComponent(selectedUnit, new AggroTargetComponent(autoAttackCommand.getTargetEntity()));
+                            }
                         }
                     }
                 }
@@ -112,10 +113,9 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
     }
     
     public static void castSpell(EntityWorld entityWorld, int casterEntity, CastSpellComponent castSpellComponent){
-        boolean canBeCasted = false;
         if((!entityWorld.hasComponent(castSpellComponent.getSpellEntity(), RemainingCooldownComponent.class)) && CastSpellSystem.canCast(entityWorld, casterEntity, castSpellComponent.getSpellEntity())){
             int targetEntity = castSpellComponent.getTargetEntity();
-            canBeCasted = true;
+            boolean canBeCasted = true;
             if(targetEntity != -1){
                 SpellTargetRulesComponent spellTargetRulesComponent = entityWorld.getComponent(castSpellComponent.getSpellEntity(), SpellTargetRulesComponent.class);
                 if(spellTargetRulesComponent != null){
@@ -151,8 +151,10 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     }
                 }
                 if(castInstant){
-                    for(Object componentToAdd : componentsToAdd){
-                        entityWorld.setComponent(casterEntity, componentToAdd);
+                    if(UnitUtil.cancelAction(entityWorld, casterEntity)){
+                        for(Object componentToAdd : componentsToAdd){
+                            entityWorld.setComponent(casterEntity, componentToAdd);
+                        }
                     }
                 }
             }
@@ -167,21 +169,22 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 isAllowed = entityWorld.hasComponent(movementComponent.getMovementEntity(), MovementIsCancelableComponent.class);
             }
             if(isAllowed){
-                entityWorld.removeComponent(selectedUnit, AutoAttackTargetComponent.class);
-                SetCastDurationOnCastingSystem.cancelCasting(entityWorld, selectedUnit);
-                EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
-                movement.setComponent(new MovementTargetComponent(targetEntity));
-                if(sufficientDistance != -1){
-                    movement.setComponent(new MovementTargetSufficientDistanceComponent(sufficientDistance));
+                if(UnitUtil.cancelAction(entityWorld, selectedUnit)){
+                    entityWorld.removeComponent(selectedUnit, AutoAttackTargetComponent.class);
+                    EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
+                    movement.setComponent(new MovementTargetComponent(targetEntity));
+                    if(sufficientDistance != -1){
+                        movement.setComponent(new MovementTargetSufficientDistanceComponent(sufficientDistance));
+                    }
+                    movement.setComponent(new WalkMovementComponent());
+                    movement.setComponent(new MovementIsCancelableComponent());
+                    WalkAnimationComponent walkAnimationComponent = entityWorld.getComponent(selectedUnit, WalkAnimationComponent.class);
+                    if(walkAnimationComponent != null){
+                        movement.setComponent(new MovementAnimationComponent(walkAnimationComponent.getAnimationEntity()));
+                    }
+                    entityWorld.setComponent(selectedUnit, new MovementComponent(movement.getId()));
+                    return true;
                 }
-                movement.setComponent(new WalkMovementComponent());
-                movement.setComponent(new MovementIsCancelableComponent());
-                WalkAnimationComponent walkAnimationComponent = entityWorld.getComponent(selectedUnit, WalkAnimationComponent.class);
-                if(walkAnimationComponent != null){
-                    movement.setComponent(new MovementAnimationComponent(walkAnimationComponent.getAnimationEntity()));
-                }
-                entityWorld.setComponent(selectedUnit, new MovementComponent(movement.getId()));
-                return true;
             }
         }
         return false;

@@ -101,6 +101,8 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
+            entityWrapper.setComponent(new CastCancelableComponent());
+            entityWrapper.setComponent(new StopBeforeCastingComponent());
             entityWrapper.setComponent(new RangeComponent(15));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
@@ -147,6 +149,8 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
+            entityWrapper.setComponent(new CastCancelableComponent());
+            entityWrapper.setComponent(new StopBeforeCastingComponent());
             entityWrapper.setComponent(new RangeComponent(6));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
@@ -563,7 +567,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
 
-            EntityWrapper autoAttack = createFromTemplate(entityWorld, "default_autoattack");
+            EntityWrapper autoAttack = createFromTemplate(entityWorld, "melee_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
 
             EntityWrapper grab = createFromTemplate(entityWorld, "grab," + entityWrapper.getId());
