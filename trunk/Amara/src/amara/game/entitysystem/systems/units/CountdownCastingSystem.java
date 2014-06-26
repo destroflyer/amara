@@ -19,10 +19,11 @@ public class CountdownCastingSystem implements EntitySystem{
             IsCastingComponent isCastingComponent = entityWrapper.getComponent(IsCastingComponent.class);
             float duration = (isCastingComponent.getRemainingDuration() - deltaSeconds);
             if(duration > 0){
-                entityWrapper.setComponent(new IsCastingComponent(duration));
+                entityWrapper.setComponent(new IsCastingComponent(duration, isCastingComponent.isCancelable()));
             }
             else{
                 entityWrapper.removeComponent(IsCastingComponent.class);
+                entityWrapper.removeComponent(CurrentActionEffectCastsComponent.class);
             }
         }
     }

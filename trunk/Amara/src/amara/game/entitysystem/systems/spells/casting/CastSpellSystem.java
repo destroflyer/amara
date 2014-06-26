@@ -56,6 +56,13 @@ public class CastSpellSystem implements EntitySystem{
                     effectCast.setComponent(new EffectCastSourceComponent(casterEntity));
                     effectCast.setComponent(new EffectCastSourceSpellComponent(spellEntity));
                 }
+                if(entityWorld.hasComponent(spellEntity, CastDurationComponent.class)){
+                    int[] currentActionEffectCastEntities = new int[effectCasts.size()];
+                    for(int i=0;i<currentActionEffectCastEntities.length;i++){
+                        currentActionEffectCastEntities[i] = effectCasts.get(i).getId();
+                    }
+                    entityWorld.setComponent(casterEntity, new CurrentActionEffectCastsComponent(currentActionEffectCastEntities));
+                }
             }
             //Specials
             if(targetEntity != -1){

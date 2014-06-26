@@ -250,6 +250,15 @@ public class Util{
         return sum;
     }
     
+    public static int[] merge(int[] array, int element){
+        int[] mergedArray = new int[array.length + 1];
+        for(int i=0;i<array.length;i++){
+            mergedArray[i] = array[i];
+        }
+        mergedArray[array.length] = element;
+        return mergedArray;
+    }
+    
     public static int[] getIncrementingNumbers(int count){
         return getIncrementingNumbers(count, 0);
     }

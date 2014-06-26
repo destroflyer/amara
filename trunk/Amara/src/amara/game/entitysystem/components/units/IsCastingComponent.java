@@ -17,12 +17,18 @@ public class IsCastingComponent{
         
     }
 
-    public IsCastingComponent(float remainingDuration){
+    public IsCastingComponent(float remainingDuration, boolean isCancelable){
         this.remainingDuration = remainingDuration;
+        this.isCancelable = isCancelable;
     }
     private float remainingDuration;
+    private boolean isCancelable;
 
     public float getRemainingDuration(){
         return remainingDuration;
+    }
+
+    public boolean isCancelable(){
+        return isCancelable;
     }
 }
