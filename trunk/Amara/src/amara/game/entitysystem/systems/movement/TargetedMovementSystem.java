@@ -6,7 +6,6 @@ package amara.game.entitysystem.systems.movement;
 
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
@@ -54,12 +53,12 @@ public class TargetedMovementSystem implements EntitySystem{
                         if(!isTargetReached){
                             float speed = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class).getSpeed();
                             Vector2f movedDistance;
-                            if(entityWorld.hasComponent(movementTargetComponent.getTargetEntity(), HealthComponent.class)){
+                            if(entityWorld.hasComponent(entity, HitboxActiveComponent.class)){
                                 Point2D pathfindingFrom = new Point2D(position.getX(), position.getY());
                                 Point2D pathfindingTo = new Point2D(targetPosition.getX(), targetPosition.getY());
                                 double hitboxRadius = 0;
                                 HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
-                                if((hitboxComponent != null) && entityWorld.hasComponent(entity, HitboxActiveComponent.class)){
+                                if((hitboxComponent != null)){
                                     hitboxRadius = hitboxComponent.getShape().getBoundRadius();
                                 }
                                 Point2D newPosition = polyMapManager.followPath(entity, pathfindingFrom, pathfindingTo, speed * deltaSeconds, hitboxRadius);
@@ -73,8 +72,8 @@ public class TargetedMovementSystem implements EntitySystem{
                                 isTargetReached = true;
                             }
                             else{
-                                entityWorld.setComponent(movementEntity, new MovementDirectionComponent(distanceToTarget));
-                                entityWorld.setComponent(entity, new DirectionComponent(distanceToTarget));
+                                entityWorld.setComponent(movementEntity, new MovementDirectionComponent(movedDistance));
+                                entityWorld.setComponent(entity, new DirectionComponent(movedDistance));
                             }
                         }
                     }

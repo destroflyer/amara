@@ -12,16 +12,15 @@ import java.util.*;
  */
 public class TriangleStar
 {
-    public static HashSet<TriangleNode> triangles = new HashSet<TriangleNode>();
-    public static ArrayList<Point2D> shortest = null;
+    private HashSet<TriangleNode> triangles = new HashSet<TriangleNode>();
     
-    HashMap<TriangleNode, TriangleNode> parentMap = new HashMap<TriangleNode, TriangleNode>();
-    HashMap<TriangleNode, Double> costMap = new HashMap<TriangleNode, Double>();
-    HashMap<TriangleNode, Double> estimateMap = new HashMap<TriangleNode, Double>();
-    HashSet<TriangleNode> open = new HashSet<TriangleNode>();
-    HashSet<TriangleNode> closed = new HashSet<TriangleNode>();
-    Point2D startPoint, endPoint;
-    double agentRadius = 0;
+    private HashMap<TriangleNode, TriangleNode> parentMap = new HashMap<TriangleNode, TriangleNode>();
+    private HashMap<TriangleNode, Double> costMap = new HashMap<TriangleNode, Double>();
+    private HashMap<TriangleNode, Double> estimateMap = new HashMap<TriangleNode, Double>();
+    private HashSet<TriangleNode> open = new HashSet<TriangleNode>();
+    private HashSet<TriangleNode> closed = new HashSet<TriangleNode>();
+    private Point2D startPoint, endPoint;
+    private double agentRadius = 0;
 
     public TriangleStar(ArrayList<Point2D> tris)
     {
@@ -241,8 +240,8 @@ public class TriangleStar
     private double estimate(Point2D edgeA, Point2D edgeB, Point2D p)
     {
         double dist = Point2DUtil.fromLineSegmentToPoint(edgeA, edgeB, p).length();
-        assert dist <= p.distance(edgeA);
-        assert dist <= p.distance(edgeB);
+        assert dist <= p.distance(edgeA): dist + " | " + p.distance(edgeA);
+        assert dist <= p.distance(edgeB): dist + " | " + p.distance(edgeB);
         return dist;
     }
     private int arcIndex(TriangleNode current, int i)
@@ -263,6 +262,18 @@ public class TriangleStar
             if(tri.areaContains(p)) return tri;
         }
         throw new Error("point not contained in triangulation");
+    }
+    
+    private ArrayList<Point2D> placeholderPath(ArrayList<TriangleNode> channel)
+    {
+        ArrayList<Point2D> path = new ArrayList<Point2D>();
+        path.add(startPoint);
+        for (int i = 1; i < channel.size(); i++)
+        {
+            path.add(Point2DUtil.avg(channel.get(i).center(), channel.get(i - 1).center()));
+        }
+        path.add(endPoint);
+        return path;
     }
     
     private void prepareFunnel(ArrayList<TriangleNode> channel, ArrayList<Point2D> outTunnel, ArrayList<Byte> outSides)
@@ -426,9 +437,10 @@ public class TriangleStar
         return tmp;
     }
     
-    public ArrayList<Point2D> findPath(Point2D start, Point2D end)
+    public ArrayList<Point2D> findPath(Point2D start, Point2D end, double radius)
     {
-        ArrayList<TriangleNode> channel = findChannel(start, end, 0);
+        ArrayList<TriangleNode> channel = findChannel(start, end, radius);
+//        return placeholderPath(channel);
         ArrayList<Point2D> tunnel = new ArrayList<Point2D>();
         ArrayList<Byte> sides = new ArrayList<Byte>();
         prepareFunnel(channel, tunnel, sides);

@@ -14,7 +14,6 @@ import java.util.ArrayList;
  */
 public class NavigationMap
 {
-    public static ArrayList<TriangleNode> path;
     private Polygon poly;
 //    private TriangleGraph graph;
     private TriangleStar star;
@@ -30,12 +29,12 @@ public class NavigationMap
 //        aStar = new AbstractTriangleStar(tris);
     }
     
-    public ArrayList<Point2D> findPath(Point2D start, Point2D end)
+    public ArrayList<Point2D> findPath(Point2D start, Point2D end, double radius)
     {
         start = closestValid(start);
         end = closestValid(end);
 //        path = star.findChannel(start, end, 0);
-        return star.findPath(start, end);
+        return star.findPath(start, end, radius);
 //        return graph.findPath(start, end);
     }
     public Point2D closestValid(Point2D p)
