@@ -151,7 +151,7 @@ public class TriangleStar
             }
         }
         
-        System.out.println("estimated path length: " + (costMap.get(current) + estimateMap.get(current)));
+//        System.out.println("estimated path length: " + (costMap.get(current) + estimateMap.get(current)));
         ArrayList<TriangleNode> channel = reverseChannel(current);
         Util.reverse(channel);
         return channel;
@@ -335,7 +335,7 @@ public class TriangleStar
         {
             length += path.get(i).distance(path.get(i - 1));
         }
-        System.out.println("exact path length: " + length);
+//        System.out.println("exact path length: " + length);
         
         return path;
     }
