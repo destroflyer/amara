@@ -10,7 +10,7 @@ import java.util.*;
  *
  * @author Philipp
  */
-class Util
+public class Util
 {
     public static final double Epsilon = 1e-6d;
     public static boolean withinEpsilon(double d)
@@ -77,16 +77,30 @@ class Util
     public static ArrayList<Point2D> circleCircleIntersectionPoints(double x1, double y1, double r1, double x2, double y2, double r2)
     {
         assert circlesIntersect(x1, y1, r1, x2, y2, r2);
-        double distance = Math.sqrt(squaredHelper(x2 - x1, y2 - y1));
-        double a = (r1 * r1 - r2 * r2 + distance * distance) / (2 * distance);
-        double h = Math.sqrt(r1 * r1 - a * a);
-        double x = (x2 - x1) * (a / distance) + x1;
-        double y = (y2 - y1) * (a / distance) + y1;
+        x2 -= x1;
+        y2 -= y1;
+        double distance = Math.sqrt(squaredHelper(x2, y2));
+        r1 *= r1;
+        r2 = (r1 - r2 * r2 + distance * distance) / (2 * distance);
+        r1 = Math.sqrt(r1 - r2 * r2);
+        r2 /= distance;
+        x1 += x2 * r2;
+        y1 += y2 * r2;
+        x2 *= r1 / distance;
+        y2 *= r1 / distance;
         ArrayList<Point2D> list = new ArrayList<Point2D>();
-        list.add(new Point2D(x + h * (y2 - y1) / distance, y - h * (x2 - x1) / distance));
-        list.add(new Point2D(x - h * (y2 - y1) / distance, y + h * (x2 - x1) / distance));
+        list.add(new Point2D(x1 + y2, y1 - x2));
+        list.add(new Point2D(x1 - y2, y1 + x2));
         return list;
     }
     
-    
+    public static double max(double... d)
+    {
+        double max = d[0];
+        for (int i = 1; i < d.length; i++)
+        {
+            if(max < d[i]) max = d[i];
+        }
+        return max;
+    }
 }
