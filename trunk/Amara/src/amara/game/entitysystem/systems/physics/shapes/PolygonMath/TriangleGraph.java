@@ -158,7 +158,7 @@ public class TriangleGraph
         costMap.put(start, 0d);
         priorityMap.put(start, 0d);
 
-        TriNode current;
+        TriNode current = null;
         while (!open.isEmpty() && (current = smallest(open, priorityMap)) != end)
         {
             open.remove(current);
@@ -185,12 +185,11 @@ public class TriangleGraph
             }
         }
         ArrayList<Point2D> path = new ArrayList<Point2D>();
-        path.add(nodeToPoint.get(end));
-        TriNode node = end;
-        while (parents.containsKey(node))
+        path.add(nodeToPoint.get(current));
+        while (parents.containsKey(current))
         {
-            node = parents.get(node);
-            path.add(nodeToPoint.get(node));
+            current = parents.get(current);
+            path.add(nodeToPoint.get(current));
         }
         Util.reverse(path);
         return path;

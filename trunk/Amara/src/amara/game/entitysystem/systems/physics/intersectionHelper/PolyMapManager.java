@@ -75,9 +75,29 @@ public final class PolyMapManager
         return mapFromRadius(radius).closestValid(pos);
     }
     
-    public ArrayList<Point2D> findPath(Point2D start, Point2D end, double radius)
+    private ArrayList<Point2D> findPath(Point2D start, Point2D end, double radius)
     {
         return mapFromRadius(radius).findPath(start, end);
+    }
+    public Point2D followPath(int id, Point2D from, Point2D to, double distance, double radius)
+    {
+        ArrayList<Point2D> path = findPath(from, to, radius);
+        int current = 0;
+        int next = 1;
+        while(next < path.size())
+        {
+            double distNext = path.get(current).distance(path.get(next));
+            if(distNext < distance)
+            {
+                distance -= distNext;
+                current = next++;
+            }
+            else
+            {
+                return Point2DUtil.interpolate(path.get(current), path.get(next), distance / distNext);
+            }
+        }
+        return path.get(path.size() - 1);
     }
     
     public Polygon sightPolygon(Point2D source, double range)

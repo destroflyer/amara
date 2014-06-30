@@ -47,6 +47,10 @@ public class Point2D
     {
         return squaredHelper(getX(), getY());
     }
+    public double distance(Point2D point)
+    {
+        return Math.sqrt(squaredDistance(point));
+    }
     public double squaredDistance(Point2D point)
     {
         return squaredHelper(getX() - point.getX(), getY() - point.getY());
@@ -102,6 +106,20 @@ public class Point2D
         return mult(value / length());
     }
     
+    public double undirectedAngle(Point2D p)
+    {
+        return Math.acos(unit().dot(p.unit()));
+    }
+    
+    public double dot(Point2D p)
+    {
+        return x * p.x + y * p.y;
+    }
+    public double cross(Point2D p)
+    {
+        return y * p.x - x * p.y;
+    }
+    
     public boolean between(Point2D a, Point2D b)
     {
         if (withinEpsilon(a)) return false;
@@ -110,10 +128,16 @@ public class Point2D
     }
     public boolean onLineSegment(Point2D a, Point2D b)
     {
-        double cross = (y - a.y) * (b.x - a.x) - (x - a.x) * (b.y - a.y);
+        Point2D c = sub(a);
+        Point2D d = b.sub(a);
+//        double cx = x - a.x;
+//        double cy = y - a.y;
+//        double dx = b.x - a.x;
+//        double dy = b.y - a.y;
+        double cross = c.cross(d);//cy * dx - cx * dy;
         if (Math.abs(cross) > Util.Epsilon) return false;
 
-        double dot = (x - a.x) * (b.x - a.x) + (y - a.y) * (b.y - a.y);
+        double dot = c.dot(d);//cx * dx + cy * dy;
         if (dot < 0) return false;
         if (dot > a.squaredDistance(b)) return false;
         return true;
