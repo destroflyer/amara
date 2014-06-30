@@ -18,6 +18,9 @@ public final class PolyMapManager
     private Polygon map;
     private HashMap<Double, NavigationMap> navis = new HashMap<Double, NavigationMap>();
     private double width, height;
+    
+    private HashMap<Integer, ArrayList<Point2D>> paths = new HashMap<Integer, ArrayList<Point2D>>();
+    private HashMap<Integer, Double> walked = new HashMap<Integer, Double>();
 
     public PolyMapManager(Polygon map, double width, double height)
     {
@@ -77,11 +80,23 @@ public final class PolyMapManager
     
     private ArrayList<Point2D> findPath(Point2D start, Point2D end, double radius)
     {
-        return mapFromRadius(radius).findPath(start, end);
+        return mapFromRadius(radius).findPath(start, end, 0);
     }
     public Point2D followPath(int id, Point2D from, Point2D to, double distance, double radius)
     {
-        ArrayList<Point2D> path = findPath(from, to, radius);
+        ArrayList<Point2D> path = paths.get(id);
+        if(path == null || 1 < path.get(path.size() - 1).squaredDistance(to))
+        {
+            path = findPath(from, to, radius);
+            paths.put(id, path);
+        }
+        else distance += walked.get(id);
+        walked.put(id, distance);
+        if(path.get(0).withinEpsilon(path.get(1)))
+        {
+            path.remove(0);
+        }
+        
         int current = 0;
         int next = 1;
         while(next < path.size())
@@ -97,6 +112,8 @@ public final class PolyMapManager
                 return Point2DUtil.interpolate(path.get(current), path.get(next), distance / distNext);
             }
         }
+        paths.remove(id);
+        walked.remove(id);
         return path.get(path.size() - 1);
     }
     
