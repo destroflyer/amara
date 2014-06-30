@@ -65,6 +65,45 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         networkServer.addMessageBackend(new AuthentificateClientsBackend(mainApplication.getGame(), entityWorld));
         networkServer.addMessageBackend(new UpdateNewClientBackend(entityWorld));
         networkServer.addMessageBackend(new InitializeClientBackend(mainApplication.getGame(), getAppState(GameRunningAppState.class)));
+        
+        Game game = mainApplication.getGame();
+        Map map = game.getMap();
+        EntityWrapper mapEntity = entityWorld.getWrapped(entityWorld.createEntity());
+        map.setEntity(mapEntity.getId());
+        map.load(entityWorld);
+        DatabaseAppState databaseAppState = mainApplication.getMasterServer().getStateManager().getState(DatabaseAppState.class);
+        for(int i=0;i<mainApplication.getGame().getPlayers().length;i++){
+            GamePlayer player = mainApplication.getGame().getPlayers()[i];
+            EntityWrapper playerEntity = entityWorld.getWrapped(entityWorld.createEntity());
+            playerEntity.setComponent(new PlayerIndexComponent(i));
+            String login = databaseAppState.getString("SELECT login FROM users WHERE id = " + player.getLobbyPlayer().getID() + " LIMIT 1");
+            playerEntity.setComponent(new NameComponent(login));
+            LobbyPlayerData lobbyPlayerData = player.getLobbyPlayer().getPlayerData();
+            String characterName = databaseAppState.getString("SELECT name FROM characters WHERE id = " + lobbyPlayerData.getCharacterID());
+            EntityWrapper unit = EntityTemplate.createFromTemplate(entityWorld, characterName);
+            unit.setComponent(new TitleComponent(login));
+            int skinID = databaseAppState.getInteger("SELECT skinid FROM users_characters WHERE (userid = " + player.getLobbyPlayer().getID() + ") AND (characterid = " + lobbyPlayerData.getCharacterID() + ")");
+            String skinName = "default";
+            if(skinID != 0){
+                skinName = databaseAppState.getString("SELECT name FROM characters_skins WHERE id = " + skinID);
+            }
+            unit.setComponent(new ModelComponent("Models/" + characterName + "/skin_" + skinName + ".xml"));
+            playerEntity.setComponent(new SelectedUnitComponent(unit.getId()));
+            map.spawn(entityWorld, playerEntity.getId());
+            player.setEntityID(playerEntity.getId());
+        }
+        System.out.println("Calculating navigation meshes...");
+        MapPhysicsInformation mapPhysicsInformation = map.getPhysicsInformation();
+        PolyMapManager mapManager = new PolyMapManager(PolyHelper.fromShapes(mapPhysicsInformation.getObstacles()), mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight());
+        //mapManager.calcNavigationMap(0.5);
+        //mapManager.calcNavigationMap(0.75);
+        mapManager.calcNavigationMap(1);
+        ///apManager.calcNavigationMap(1.25); //error, do not enable
+        //mapManager.calcNavigationMap(1.5);
+        //mapManager.calcNavigationMap(2);
+        //mapManager.calcNavigationMap(3);
+        System.out.println("Finished calculating navigation meshes.");
+        
         IntersectionObserver intersectionObserver = new IntersectionObserver();
         addEntitySystem(new SetAutoAttacksCastAnimationsSystem());
         addEntitySystem(new SetSpellsCastersSystem());
@@ -143,7 +182,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new PlayMovementAnimationsSystem());
         addEntitySystem(new UpdateWalkMovementsSystem());
         addEntitySystem(new MovementSystem());
-        addEntitySystem(new TargetedMovementSystem(intersectionObserver));
+        addEntitySystem(new TargetedMovementSystem(intersectionObserver, mapManager));
         addEntitySystem(new TriggerTargetReachedEffectSystem());
         addEntitySystem(new RemoveFinishedMovementsSystem());
         addEntitySystem(new TriggerCollisionEffectSystem(intersectionObserver));
@@ -153,46 +192,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CheckCampMaximumAggroDistanceSystem());
         addEntitySystem(new CampResetSystem());
         addEntitySystem(new SetIdleAnimationsSystem());
-        
-        Game game = mainApplication.getGame();
-        Map map = game.getMap();
-        EntityWrapper mapEntity = entityWorld.getWrapped(entityWorld.createEntity());
-        map.setEntity(mapEntity.getId());
-        map.load(entityWorld);
-        DatabaseAppState databaseAppState = mainApplication.getMasterServer().getStateManager().getState(DatabaseAppState.class);
-        for(int i=0;i<mainApplication.getGame().getPlayers().length;i++){
-            GamePlayer player = mainApplication.getGame().getPlayers()[i];
-            EntityWrapper playerEntity = entityWorld.getWrapped(entityWorld.createEntity());
-            playerEntity.setComponent(new PlayerIndexComponent(i));
-            String login = databaseAppState.getString("SELECT login FROM users WHERE id = " + player.getLobbyPlayer().getID() + " LIMIT 1");
-            playerEntity.setComponent(new NameComponent(login));
-            LobbyPlayerData lobbyPlayerData = player.getLobbyPlayer().getPlayerData();
-            String characterName = databaseAppState.getString("SELECT name FROM characters WHERE id = " + lobbyPlayerData.getCharacterID());
-            EntityWrapper unit = EntityTemplate.createFromTemplate(entityWorld, characterName);
-            unit.setComponent(new TitleComponent(login));
-            int skinID = databaseAppState.getInteger("SELECT skinid FROM users_characters WHERE (userid = " + player.getLobbyPlayer().getID() + ") AND (characterid = " + lobbyPlayerData.getCharacterID() + ")");
-            String skinName = "default";
-            if(skinID != 0){
-                skinName = databaseAppState.getString("SELECT name FROM characters_skins WHERE id = " + skinID);
-            }
-            unit.setComponent(new ModelComponent("Models/" + characterName + "/skin_" + skinName + ".xml"));
-            playerEntity.setComponent(new SelectedUnitComponent(unit.getId()));
-            map.spawn(entityWorld, playerEntity.getId());
-            player.setEntityID(playerEntity.getId());
-        }
-        MapPhysicsInformation mapPhysicsInformation = map.getPhysicsInformation();
-        
-        System.out.println("Calculating navigation meshes...");
-        PolyMapManager mapManager = new PolyMapManager(PolyHelper.fromShapes(mapPhysicsInformation.getObstacles()), mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight());
-//        mapManager.calcNavigationMap(0.5);
-//        mapManager.calcNavigationMap(0.75);
-        mapManager.calcNavigationMap(1);
-////        mapManager.calcNavigationMap(1.25); error, do not enable
-//        mapManager.calcNavigationMap(1.5);
-//        mapManager.calcNavigationMap(2);
-//        mapManager.calcNavigationMap(3);
-        System.out.println("Finished calculating navigation meshes.");
-        
         addEntitySystem(new MapIntersectionSystem(mapManager));
         addEntitySystem(new CheckMapObjectiveSystem(map, getAppState(GameRunningAppState.class)));
         addEntitySystem(new PlayerDeathSystem(map));
