@@ -10,6 +10,8 @@ import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.systems.physics.IntersectionObserver;
+import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Point2D;
 
 /**
  *
@@ -17,10 +19,12 @@ import amara.game.entitysystem.systems.physics.IntersectionObserver;
  */
 public class TargetedMovementSystem implements EntitySystem{
     
-    public TargetedMovementSystem(IntersectionObserver intersectionObserver){
+    public TargetedMovementSystem(IntersectionObserver intersectionObserver, PolyMapManager polyMapManager){
         this.intersectionObserver = intersectionObserver;
+        this.polyMapManager = polyMapManager;
     }
     private IntersectionObserver intersectionObserver;
+    private PolyMapManager polyMapManager;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -47,8 +51,16 @@ public class TargetedMovementSystem implements EntitySystem{
                             }
                         }
                         if(!isTargetReached){
+                            Point2D pathfindingFrom = new Point2D(position.getX(), position.getY());
+                            Point2D pathfindingTo = new Point2D(targetPosition.getX(), targetPosition.getY());
                             float speed = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class).getSpeed();
-                            Vector2f movedDistance = distanceToTarget.normalize().multLocal(speed).multLocal(deltaSeconds);
+                            double hitboxRadius = 0;
+                            HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
+                            if((hitboxComponent != null) && entityWorld.hasComponent(entity, HitboxActiveComponent.class)){
+                                hitboxRadius = hitboxComponent.getShape().getBoundRadius();
+                            }
+                            Point2D newPosition = polyMapManager.followPath(entity, pathfindingFrom, pathfindingTo, speed * deltaSeconds, hitboxRadius);
+                            Vector2f movedDistance = new Vector2f((float) newPosition.getX(), (float) newPosition.getY()).subtractLocal(position);
                             if(movedDistance.lengthSquared() >= distanceToTarget.lengthSquared()){
                                 entityWorld.setComponent(entity, new PositionComponent(targetPosition.clone()));
                                 isTargetReached = true;
