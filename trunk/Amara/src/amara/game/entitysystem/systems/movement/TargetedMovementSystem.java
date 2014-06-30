@@ -6,6 +6,7 @@ package amara.game.entitysystem.systems.movement;
 
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
@@ -51,16 +52,22 @@ public class TargetedMovementSystem implements EntitySystem{
                             }
                         }
                         if(!isTargetReached){
-                            Point2D pathfindingFrom = new Point2D(position.getX(), position.getY());
-                            Point2D pathfindingTo = new Point2D(targetPosition.getX(), targetPosition.getY());
                             float speed = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class).getSpeed();
-                            double hitboxRadius = 0;
-                            HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
-                            if((hitboxComponent != null) && entityWorld.hasComponent(entity, HitboxActiveComponent.class)){
-                                hitboxRadius = hitboxComponent.getShape().getBoundRadius();
+                            Vector2f movedDistance;
+                            if(entityWorld.hasComponent(movementTargetComponent.getTargetEntity(), HealthComponent.class)){
+                                Point2D pathfindingFrom = new Point2D(position.getX(), position.getY());
+                                Point2D pathfindingTo = new Point2D(targetPosition.getX(), targetPosition.getY());
+                                double hitboxRadius = 0;
+                                HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
+                                if((hitboxComponent != null) && entityWorld.hasComponent(entity, HitboxActiveComponent.class)){
+                                    hitboxRadius = hitboxComponent.getShape().getBoundRadius();
+                                }
+                                Point2D newPosition = polyMapManager.followPath(entity, pathfindingFrom, pathfindingTo, speed * deltaSeconds, hitboxRadius);
+                                movedDistance = new Vector2f((float) newPosition.getX(), (float) newPosition.getY()).subtractLocal(position);
                             }
-                            Point2D newPosition = polyMapManager.followPath(entity, pathfindingFrom, pathfindingTo, speed * deltaSeconds, hitboxRadius);
-                            Vector2f movedDistance = new Vector2f((float) newPosition.getX(), (float) newPosition.getY()).subtractLocal(position);
+                            else{
+                                movedDistance = distanceToTarget.normalize().multLocal(speed * deltaSeconds);
+                            }
                             if(movedDistance.lengthSquared() >= distanceToTarget.lengthSquared()){
                                 entityWorld.setComponent(entity, new PositionComponent(targetPosition.clone()));
                                 isTargetReached = true;
