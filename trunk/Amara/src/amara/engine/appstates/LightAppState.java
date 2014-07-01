@@ -6,7 +6,7 @@ package amara.engine.appstates;
 
 import java.util.ArrayList;
 import com.jme3.light.Light;
-import com.jme3.shadow.AbstractShadowRenderer;
+import com.jme3.shadow.AbstractShadowFilter;
 
 /**
  *
@@ -18,7 +18,7 @@ public class LightAppState extends BaseDisplayAppState{
         
     }
     private ArrayList<Light> lights = new ArrayList<Light>();
-    private ArrayList<AbstractShadowRenderer> shadowsRenderers = new ArrayList<AbstractShadowRenderer>();
+    private ArrayList<AbstractShadowFilter> shadowsFilters = new ArrayList<AbstractShadowFilter>();
     
     public void addLight(Light light){
         lights.add(light);
@@ -30,14 +30,16 @@ public class LightAppState extends BaseDisplayAppState{
         mainApplication.getRootNode().removeLight(light);
     }
     
-    public void addShadowRenderer(AbstractShadowRenderer abstractShadowRenderer){
-        shadowsRenderers.add(abstractShadowRenderer);
-        mainApplication.getViewPort().addProcessor(abstractShadowRenderer);
+    public void addShadowFilter(AbstractShadowFilter abstractShadowFilter){
+        shadowsFilters.add(abstractShadowFilter);
+        PostFilterAppState postFilterAppState = getAppState(PostFilterAppState.class);
+        postFilterAppState.addFilter(abstractShadowFilter);
     }
     
-    public void removeShadowRenderer(AbstractShadowRenderer abstractShadowRenderer){
-        shadowsRenderers.remove(abstractShadowRenderer);
-        mainApplication.getViewPort().removeProcessor(abstractShadowRenderer);
+    public void removeShadowFilter(AbstractShadowFilter abstractShadowFilter){
+        shadowsFilters.remove(abstractShadowFilter);
+        PostFilterAppState postFilterAppState = getAppState(PostFilterAppState.class);
+        postFilterAppState.removeFilter(abstractShadowFilter);
     }
 
     @Override
@@ -50,8 +52,11 @@ public class LightAppState extends BaseDisplayAppState{
         for(Light light : lights){
             mainApplication.getRootNode().removeLight(light);
         }
-        for(AbstractShadowRenderer abstractShadowRenderer : shadowsRenderers){
-            mainApplication.getViewPort().removeProcessor(abstractShadowRenderer);
+        lights.clear();
+        PostFilterAppState postFilterAppState = getAppState(PostFilterAppState.class);
+        for(AbstractShadowFilter abstractShadowFilter : shadowsFilters){
+            postFilterAppState.removeFilter(abstractShadowFilter);
         }
+        shadowsFilters.clear();
     }
 }
