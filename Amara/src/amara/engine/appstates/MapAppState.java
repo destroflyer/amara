@@ -17,7 +17,7 @@ import com.jme3.renderer.Camera;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.BatchNode;
 import com.jme3.scene.Geometry;
-import com.jme3.shadow.DirectionalLightShadowRenderer;
+import com.jme3.shadow.DirectionalLightShadowFilter;
 import com.jme3.util.SkyFactory;
 import com.jme3.scene.Node;
 import amara.engine.JMonkeyUtil;
@@ -95,10 +95,10 @@ public class MapAppState extends BaseDisplayAppState{
                 if(shadows != null){
                     int shadowQuality = Settings.getInt("shadow_quality");
                     if(shadowQuality > 0){
-                        DirectionalLightShadowRenderer shadowRenderer = new DirectionalLightShadowRenderer(mainApplication.getAssetManager(), 2048, shadowQuality);
-                        shadowRenderer.setLight(directionalLight);
-                        shadowRenderer.setShadowIntensity(shadows.getIntensity());
-                        lightAppState.addShadowRenderer(shadowRenderer);
+                        DirectionalLightShadowFilter shadowFilter = new DirectionalLightShadowFilter(mainApplication.getAssetManager(), 2048, shadowQuality);
+                        shadowFilter.setLight(directionalLight);
+                        shadowFilter.setShadowIntensity(shadows.getIntensity());
+                        lightAppState.addShadowFilter(shadowFilter);
                     }
                 }
             }

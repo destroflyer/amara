@@ -94,14 +94,14 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         }
         System.out.println("Calculating navigation meshes...");
         MapPhysicsInformation mapPhysicsInformation = map.getPhysicsInformation();
-        PolyMapManager mapManager = new PolyMapManager(PolyHelper.fromShapes(mapPhysicsInformation.getObstacles()), mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight());
-        //mapManager.calcNavigationMap(0.5);
-        //mapManager.calcNavigationMap(0.75);
-//        mapManager.calcNavigationMap(1);
-        ///apManager.calcNavigationMap(1.25); //error, do not enable
-        //mapManager.calcNavigationMap(1.5);
-        //mapManager.calcNavigationMap(2);
-        //mapManager.calcNavigationMap(3);
+        PolyMapManager polyMapManager = mapPhysicsInformation.getPolyMapManager();
+        //polyMapManager.calcNavigationMap(0.5);
+        //polyMapManager.calcNavigationMap(0.75);
+        //polyMapManager.calcNavigationMap(1);
+        //polyMapManager.calcNavigationMap(1.25); //error, do not enable
+        //polyMapManager.calcNavigationMap(1.5);
+        //polyMapManager.calcNavigationMap(2);
+        //polyMapManager.calcNavigationMap(3);
         System.out.println("Finished calculating navigation meshes.");
         
         IntersectionObserver intersectionObserver = new IntersectionObserver();
@@ -182,7 +182,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new PlayMovementAnimationsSystem());
         addEntitySystem(new UpdateWalkMovementsSystem());
         addEntitySystem(new MovementSystem());
-        addEntitySystem(new TargetedMovementSystem(intersectionObserver, mapManager));
+        addEntitySystem(new TargetedMovementSystem(intersectionObserver, polyMapManager));
         addEntitySystem(new TriggerTargetReachedEffectSystem());
         addEntitySystem(new RemoveFinishedMovementsSystem());
         addEntitySystem(new TriggerCollisionEffectSystem(intersectionObserver));
@@ -192,7 +192,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CheckCampMaximumAggroDistanceSystem());
         addEntitySystem(new CampResetSystem());
         addEntitySystem(new SetIdleAnimationsSystem());
-        addEntitySystem(new MapIntersectionSystem(mapManager));
+        addEntitySystem(new MapIntersectionSystem(polyMapManager));
         addEntitySystem(new CheckMapObjectiveSystem(map, getAppState(GameRunningAppState.class)));
         addEntitySystem(new PlayerDeathSystem(map));
         addEntitySystem(new PlayerRespawnSystem(game));

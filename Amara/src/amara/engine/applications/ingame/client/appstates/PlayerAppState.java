@@ -10,6 +10,8 @@ import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
 import amara.engine.applications.ingame.client.systems.filters.*;
 import amara.engine.applications.ingame.client.systems.gui.*;
 import amara.engine.appstates.*;
+import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
+import amara.game.maps.Map;
 
 /**
  *
@@ -26,7 +28,11 @@ public class PlayerAppState extends BaseDisplayAppState{
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
-        localEntitySystemAppState.addEntitySystem(new PlayerDeathDisplaySystem(playerEntity, getAppState(PostFilterAppState.class)));
+        PostFilterAppState postFilterAppState = getAppState(PostFilterAppState.class);
+        localEntitySystemAppState.addEntitySystem(new PlayerDeathDisplaySystem(playerEntity, postFilterAppState));
+        Map map = getAppState(MapAppState.class).getMap();
+        PolyMapManager polyMapManager = map.getPhysicsInformation().getPolyMapManager();
+        localEntitySystemAppState.addEntitySystem(new PlayerVisionDisplaySystem(playerEntity, postFilterAppState, polyMapManager));
         ScreenController_HUD screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
         localEntitySystemAppState.addEntitySystem(new DisplayPlayerSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayAttributesSystem(playerEntity, screenController_HUD));

@@ -29,6 +29,7 @@ public class Settings{
         set("audio_volume", "0.07");
         set("hardware_skinning", "false");
         set("shadow_quality", "2");
+        set("fog_of_war_update_interval", "0.1");
         reloadFile();
     }
     
