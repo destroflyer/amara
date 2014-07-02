@@ -64,6 +64,14 @@ public class Util
     {
         return a * a + b * b;
     }
+    public static float squaredHelper(float a, float b)
+    {
+        return a * a + b * b;
+    }
+    public static int squaredHelper(int a, int b)
+    {
+        return a * a + b * b;
+    }
     
     public static boolean circleContainsOrOnBorder(double px, double py, double cx, double cy, double r)
     {
@@ -92,6 +100,18 @@ public class Util
         list.add(new Point2D(x1 + y2, y1 - x2));
         list.add(new Point2D(x1 - y2, y1 + x2));
         return list;
+    }
+    public static ArrayList<Point2D> tangentPoints(Point2D p, Point2D c, double r)
+    {
+        return tangentPoints(p.getX(), p.getY(), c.getX(), c.getY(), r);
+    }
+    public static ArrayList<Point2D> tangentPoints(double px, double py, double x, double y, double r)
+    {
+        assert !(circleContainsOrOnBorder(px, py, x, y, r));
+        double x1 = (px + x) / 2;
+        double y1 = (py + y) / 2;
+        double r1 = Math.sqrt(Util.squaredHelper(x1 - x, y1 - y));
+        return Util.circleCircleIntersectionPoints(x1, y1, r1, x, y, r);
     }
     
     public static double max(double... d)

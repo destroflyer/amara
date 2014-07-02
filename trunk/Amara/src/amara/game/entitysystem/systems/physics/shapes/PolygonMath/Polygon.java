@@ -129,6 +129,11 @@ public class Polygon
         return new Polygon(list.get(0));
     }
     
+    public void rasterize(RasterMap raster, Point2D source, double radius)
+    {
+        SetPolygonUtil.rasterize(setPoly, raster, source, radius * radius);
+    }
+    
     public BoundRectangle boundRectangle()
     {
         double minX , minY, maxX, maxY;

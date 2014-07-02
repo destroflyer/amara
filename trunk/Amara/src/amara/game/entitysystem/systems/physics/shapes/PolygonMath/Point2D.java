@@ -24,6 +24,8 @@ public class Point2D
 
     public Point2D(double x, double y)
     {
+        assert !Double.isNaN(x);
+        assert !Double.isNaN(y);
         this.x = x;
         this.y = y;
     }
@@ -141,6 +143,11 @@ public class Point2D
         if (dot < 0) return false;
         if (dot > a.squaredDistance(b)) return false;
         return true;
+    }
+    
+    public Point2D scale(double scaleX, double scaleY)
+    {
+        return new Point2D(x * scaleX, y * scaleY);
     }
 
     public boolean withinEpsilon()

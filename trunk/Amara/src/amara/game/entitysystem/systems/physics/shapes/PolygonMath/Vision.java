@@ -26,10 +26,7 @@ public class Vision implements Comparator<Point2D>
     private void convertCircle(ArrayList<Point2D> edges, Point2D source, double x, double y, double r)
     {
         if(Util.circleContainsOrOnBorder(source.getX(), source.getY(), x, y, r)) return;
-        double x1 = (source.getX() + x) / 2;
-        double y1 = (source.getY() + y) / 2;
-        double r1 = Math.sqrt(Util.squaredHelper(x1 - x, y1 - y));
-        ArrayList<Point2D> points = Util.circleCircleIntersectionPoints(x1, y1, r1, x, y, r);
+        ArrayList<Point2D> points = Util.tangentPoints(x, y, r, source.getX(), source.getY());
         edges.addAll(points);
         Util.reverse(points);
         edges.addAll(points);
