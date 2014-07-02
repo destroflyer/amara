@@ -4,6 +4,7 @@
  */
 package amara.engine.applications.ingame.client.systems.filters;
 
+import amara.engine.materials.Raster;
 import com.jme3.asset.AssetManager;
 import com.jme3.renderer.RenderManager;
 import com.jme3.math.Vector2f;
@@ -73,16 +74,19 @@ public class PlayerVisionDisplaySystem implements EntitySystem{
     
     private void updateFog(Vector2f playerUnitPosition){
         Point2D position = new Point2D(playerUnitPosition.getX(), playerUnitPosition.getY());
-        Polygon sightPolygon = polyMapManager.sightPolygon(position, 30);
+        double sightRange = 30;
+        Polygon sightPolygon = polyMapManager.sightPolygon(position, sightRange);
         float resolutionFactor = 1;
         PaintableImage paintableImage = new PaintableImage((int) (polyMapManager.getWidth() * resolutionFactor), (int) (polyMapManager.getHeight() * resolutionFactor));
+        Raster r = new Raster(paintableImage, resolutionFactor, 80, 255);
+        
         for(int x=0;x<paintableImage.getWidth();x++){
             for(int y=0;y<paintableImage.getHeight();y++){
-                Point2D point = new Point2D(((double) x) / resolutionFactor, ((double) y) / resolutionFactor);
-                boolean isVisible = sightPolygon.contains(point);
-                paintableImage.setPixel_Red(x, y, (isVisible?255:80));
+                paintableImage.setPixel_Red(x, y, 80);
             }
         }
+        sightPolygon.rasterize(r, position, sightRange);
+        
         Texture2D texture2D = new Texture2D();
         texture2D.setImage(paintableImage.getImage());
         fogOfWarFilter.setFog(texture2D);

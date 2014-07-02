@@ -128,6 +128,15 @@ public class Point2DUtil {
         return (b.getY() - a.getY()) * (p.getX() - a.getX()) - (b.getX() - a.getX()) * (p.getY() - a.getY());
     }
 
+    public static double lineAxisIntersectionX(Point2D a, Point2D b, double yAxis)
+    {
+        return lineAxisIntersectionYHelper(a.getY(), a.getX(), b.getY(), b.getX(), yAxis);
+    }
+    private static double lineAxisIntersectionYHelper(double ax, double ay, double bx, double by, double xAxis)
+    {
+        if (ax == bx) return Double.NaN;
+        return ay + ((xAxis - ax) / (bx - ax)) * (by - ay);
+    }
     public static double lineSegmentAxisIntersectionX(Point2D a, Point2D b, double yAxis)
     {
         return lineSegmentAxisIntersectionYHelper(a.getY(), a.getX(), b.getY(), b.getX(), yAxis);
