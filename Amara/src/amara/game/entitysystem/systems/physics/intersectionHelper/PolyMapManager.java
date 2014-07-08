@@ -137,6 +137,7 @@ public final class PolyMapManager
             }
             triPaths.put(id, path);
             Point2D position = path.moveDistance(from, to, distance);
+            if(position == null) return Point2DUtil.interpolate(from, to, distance / from.distance(to));
             if(position.equals(to)) triPaths.remove(id);
             return position;
         }
