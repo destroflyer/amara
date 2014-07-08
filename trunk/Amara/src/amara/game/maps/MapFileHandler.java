@@ -183,7 +183,7 @@ public class MapFileHandler{
                 float zoomInterval = elementZoom.getAttribute("interval").getFloatValue();
                 int zoomMaximumLevel = elementZoom.getAttribute("maximumLevel").getIntValue();
                 int zoomInitialLevel = elementZoom.getAttribute("initialLevel").getIntValue();
-                camera.setZoom(new MapCamera_Zoom(zoomInterval, zoomMaximumLevel, zoomInitialLevel));
+                camera.setZoom(new MapCamera_Zoom(zoomInterval, zoomInitialLevel, zoomMaximumLevel));
             }
             map.setCamera(camera);
             Element elementTerrain = root.getChild("terrain");

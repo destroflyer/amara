@@ -1660,6 +1660,64 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new LifetimeComponent(0.2f));
         }
+        else if(templateName.equals("etherdesert_creep_melee")){
+            entityWrapper.setComponent(new ModelComponent("Models/minion/skin_default.xml"));
+            EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            walkAnimation.setComponent(new NameComponent("walk"));
+            entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+            EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
+            entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+            
+            entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
+            entityWrapper.setComponent(new ScaleComponent(0.75f));
+            entityWrapper.setComponent(new IntersectionPushComponent());
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            
+            entityWrapper.setComponent(new IsAliveComponent());
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(600));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(30));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(2.5f));
+            entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
+            
+            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "melee_autoattack");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+            entityWrapper.setComponent(new AutoAggroComponent(12));
+            entityWrapper.setComponent(new TeamComponent(0));
+        }
+        else if(templateName.equals("etherdesert_creep_range")){
+            entityWrapper.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));
+            EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            walkAnimation.setComponent(new NameComponent("walk"));
+            entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+            EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
+            entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+            
+            entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
+            entityWrapper.setComponent(new ScaleComponent(0.5f));
+            entityWrapper.setComponent(new IntersectionPushComponent());
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            
+            entityWrapper.setComponent(new IsAliveComponent());
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(450));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(20));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(2.5f));
+            entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
+            
+            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+            entityWrapper.setComponent(new AutoAggroComponent(12));
+            entityWrapper.setComponent(new TeamComponent(0));
+        }
         else if(templateName.equals("boots")){
             entityWrapper.setComponent(new ItemVisualisationComponent("boots"));
             entityWrapper.setComponent(new BonusFlatWalkSpeedComponent(0.5f));

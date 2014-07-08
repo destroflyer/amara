@@ -23,11 +23,12 @@ import amara.game.entitysystem.components.attributes.*;
  */
 public class CurrentHealthBarSystem extends HUDAttachmentSystem{
 
-    public CurrentHealthBarSystem(Node guiNode, Camera camera, MapHeightmap mapHeightmap){
+    public CurrentHealthBarSystem(EntitySceneMap entitySceneMap, Node guiNode, Camera camera, MapHeightmap mapHeightmap){
         super(HealthComponent.class, true, guiNode, camera, mapHeightmap);
-        worldOffset = MaximumHealthBarSystem.BAR_LOCATION;
+        this.entitySceneMap = entitySceneMap;
         hudOffset = new Vector3f(0, 0, 1);
     }
+    private EntitySceneMap entitySceneMap;
         
     @Override
     protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
@@ -43,5 +44,10 @@ public class CurrentHealthBarSystem extends HUDAttachmentSystem{
             return geometry;
         }
         return null;
+    }
+
+    @Override
+    protected Vector3f getWorldOffset(EntityWorld entityWorld, int entity){
+        return MaximumHealthBarSystem.getWorldOffset(entityWorld, entity, entitySceneMap);
     }
 }

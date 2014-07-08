@@ -5,6 +5,7 @@
 package amara.engine.applications.ingame.client.systems.visualisation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
@@ -26,8 +27,8 @@ public abstract class HUDAttachmentSystem extends SimpleVisualAttachmentSystem{
         this.mapHeightmap = mapHeightmap;
         setComponentClassesToObserve(PositionComponent.class);
     }
-    protected Vector3f worldOffset = new Vector3f();
     protected Vector3f hudOffset = new Vector3f();
+    private HashMap<Integer, Vector3f> worldOffsets = new HashMap<Integer, Vector3f>();
     protected Node guiNode;
     private Camera camera;
     private MapHeightmap mapHeightmap;
@@ -41,10 +42,19 @@ public abstract class HUDAttachmentSystem extends SimpleVisualAttachmentSystem{
             if(positionComponent != null){
                 Vector3f entityPosition = new Vector3f(positionComponent.getPosition().getX(), mapHeightmap.getHeight(positionComponent.getPosition()), positionComponent.getPosition().getY());
                 Spatial visualAttachment = guiNode.getChild(getVisualAttachmentID(entity));
+                Vector3f worldOffset = worldOffsets.get(entity);
+                if(worldOffset == null){
+                    worldOffset = getWorldOffset(entityWorld, entity);
+                    worldOffsets.put(entity, worldOffset);
+                }
                 Vector3f attachmentPosition = camera.getScreenCoordinates(entityPosition.addLocal(worldOffset)).addLocal(hudOffset);
                 visualAttachment.setLocalTranslation(attachmentPosition);
             }
         }
+    }
+    
+    protected Vector3f getWorldOffset(EntityWorld entityWorld, int entity){
+        return Vector3f.ZERO;
     }
 
     @Override

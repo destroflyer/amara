@@ -79,10 +79,10 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
         addEntitySystem(new SelectionMarkerSystem(entitySceneMap));
-        addEntitySystem(new MaximumHealthBarSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
-        addEntitySystem(new CurrentHealthBarSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
-        addEntitySystem(new StunVisualisationSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
-        addEntitySystem(new SilenceVisualisationSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
+        addEntitySystem(new MaximumHealthBarSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
+        addEntitySystem(new CurrentHealthBarSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
+        addEntitySystem(new StunVisualisationSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
+        addEntitySystem(new SilenceVisualisationSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
         addEntitySystem(new BuffVisualisationSystem_Bubble(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Burning(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Electrified(entitySceneMap));
@@ -92,7 +92,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new BuffVisualisationSystem_Turbo(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Wither(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Zhonyas(entitySceneMap));
-        addEntitySystem(new TitleSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
+        addEntitySystem(new TitleSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
     }
 
     public int getEntity(Spatial spatial){
