@@ -112,7 +112,10 @@ public class TriangleStar
     
     public ArrayList<TriangleNode> findChannel(Point2D startP, Point2D endP, double agentRadius)
     {
-        return findChannel(container(startP), container(endP), startP, endP, agentRadius);
+        TriangleNode start = container(startP);
+        TriangleNode end = container(endP);
+        if(end == null || start == null) return null;
+        return findChannel(start, end, startP, endP, agentRadius);
     }
     private ArrayList<TriangleNode> findChannel(TriangleNode start, TriangleNode end, Point2D startP, Point2D endP, double agentRadius)
     {
@@ -132,7 +135,10 @@ public class TriangleStar
                 TriangleNode next = neighbor(current, i);
                 if(parent == next) continue;
                 if(next == null) continue;
-                if(cornerWidth(current, i) < agentRadius) continue;
+                if(cornerWidth(current, i) < agentRadius * 2)
+                {
+                    continue;
+                }
                 
                 double cost = cost(current, i);
 //                assert !closed.contains(next) || costMap.get(next) <= cost;
@@ -149,7 +155,7 @@ public class TriangleStar
                 open.add(next);
             }
         }
-        
+        if(current != end) return null;
 //        System.out.println("estimated path length: " + (costMap.get(current) + estimateMap.get(current)));
         ArrayList<TriangleNode> channel = reverseChannel(current);
         Util.reverse(channel);
@@ -261,7 +267,7 @@ public class TriangleStar
         {
             if(tri.areaContains(p)) return tri;
         }
-        throw new Error("point not contained in triangulation");
+        return null;
     }
     
     private ArrayList<Point2D> placeholderPath(ArrayList<TriangleNode> channel)
@@ -341,11 +347,11 @@ public class TriangleStar
         }
         path.add(endPoint);
         
-        double length = 0;
-        for (int i = 1; i < path.size(); i++)
-        {
-            length += path.get(i).distance(path.get(i - 1));
-        }
+//        double length = 0;
+//        for (int i = 1; i < path.size(); i++)
+//        {
+//            length += path.get(i).distance(path.get(i - 1));
+//        }
 //        System.out.println("exact path length: " + length);
         
         return path;
@@ -399,7 +405,6 @@ public class TriangleStar
             {
                 feelers[side] = i;
                 feelers_v[side] = v;
-//                if(i == 2) assert feelers_v[1].cross(feelers_v[0]) <= 0;
                 
                 side ^= 1;
                 if(apex != feelers[side] && (tunnel.get(i).equals(tunnel.get(feelers[side])) || (v.cross(feelers_v[side]) < 0) == (side != 0)))
@@ -427,7 +432,7 @@ public class TriangleStar
         return path;
     }
     
-    private ArrayList<Point2D> postRadiusFunnel(ArrayList<Integer> path, ArrayList<Point2D> tunnel, ArrayList<Byte> sides)
+    private ArrayList<Point2D> postRadiusFunnelPlaceholder(ArrayList<Integer> path, ArrayList<Point2D> tunnel, ArrayList<Byte> sides)
     {
         ArrayList<Point2D> tmp = new ArrayList<Point2D>();
         for (int i = 0; i < path.size(); i++)
@@ -436,16 +441,86 @@ public class TriangleStar
         }
         return tmp;
     }
+    private ArrayList<Point2D> postRadiusFunnel(ArrayList<Integer> path, ArrayList<Point2D> tunnel, ArrayList<Byte> sides)
+    {
+        ArrayList<Point2D> tmp = new ArrayList<Point2D>();
+        for (int i = 1; i < path.size(); i++)
+        {
+            int sideA = i == 1? 0: (sides.get(i - 1) == 0? -1: 1);
+            int sideB = i == path.size() - 1? 0: (sides.get(i) == 0? -1: 1);
+            Point2D a = tunnel.get(path.get(i - 1));
+            Point2D b = tunnel.get(path.get(i));
+            
+            Point2D[] r = new Point2D[2];
+            offsetLine(a, b, sideA, sideB, r);
+            tmp.add(r[0]);
+            tmp.add(r[1]);
+        }
+        return tmp;
+    }
+    //-1 = left < 0 < right = 1
+    private void offsetLine(Point2D a, Point2D b, int sideA, int sideB, Point2D[] result)
+    {
+        if(sideA == 0)
+        {
+            result[0] = a;
+            if(sideB == 0)
+            {
+                result[1] = b;
+            }
+            else
+            {
+                int i = sideB < 0? 0: 1;
+                result[1] = Util.tangentPoints(a, b, agentRadius).get(i);
+            }
+        }
+        else
+        {
+            if(sideB == 0)
+            {
+                int i = sideA < 0? 0: 1;
+                result[0] = Util.tangentPoints(b, a, agentRadius).get(i);
+                result[1] = b;
+            }
+            else
+            {
+                if(sideA == sideB)
+                {
+                    Point2D offset = b.sub(a).unit();
+                    if(sideA < 0) offset = offset.leftHand();
+                    else offset = offset.rightHand();
+                    result[0] = a.add(offset);
+                    result[1] = b.add(offset);
+                }
+                else
+                {
+                    Point2D c = Point2DUtil.avg(a, b);
+                    int i = sideA < 0? 0: 1;
+                    result[0] = Util.tangentPoints(c, a, agentRadius).get(i);
+                    result[1] = Util.tangentPoints(c, b, agentRadius).get(i ^ 1);
+                }
+            }
+        }
+    }
     
     public ArrayList<Point2D> findPath(Point2D start, Point2D end, double radius)
     {
         ArrayList<TriangleNode> channel = findChannel(start, end, radius);
+        if(channel == null) return null;
 //        return placeholderPath(channel);
         ArrayList<Point2D> tunnel = new ArrayList<Point2D>();
         ArrayList<Byte> sides = new ArrayList<Byte>();
         prepareFunnel(channel, tunnel, sides);
         return stupidFunnel(tunnel, sides);
+//        return postRadiusFunnelPlaceholder(radiusFunnel(tunnel, sides), tunnel, sides);
 //        return postRadiusFunnel(radiusFunnel(tunnel, sides), tunnel, sides);
+    }
+    
+    public TrianglePath findTriPath(Point2D start, Point2D end, double radius)
+    {
+        ArrayList<TriangleNode> channel = findChannel(start, end, radius);
+        if(channel == null) return null;
+        return new TrianglePath(channel, radius);
     }
 //    public ArrayList<Point2D> funnel(ArrayList<TriangleNode> channel)
 //    {

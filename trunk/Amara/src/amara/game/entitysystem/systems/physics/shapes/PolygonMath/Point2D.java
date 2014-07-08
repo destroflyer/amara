@@ -112,6 +112,14 @@ public class Point2D
     {
         return Math.acos(unit().dot(p.unit()));
     }
+    public double directedAngle(Point2D p)
+    {
+        return p.angle() - angle();
+    }
+    public double angle()
+    {
+        return Math.atan2(y, x);
+    }
     
     public double dot(Point2D p)
     {

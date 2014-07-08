@@ -61,7 +61,7 @@ public class TargetedMovementSystem implements EntitySystem{
                                 if((hitboxComponent != null)){
                                     hitboxRadius = hitboxComponent.getShape().getBoundRadius();
                                 }
-                                Point2D newPosition = polyMapManager.followPath(entity, pathfindingFrom, pathfindingTo, speed * deltaSeconds, hitboxRadius);
+                                Point2D newPosition = polyMapManager.followTriPath(entity, pathfindingFrom, pathfindingTo, speed * deltaSeconds, hitboxRadius);
                                 movedDistance = new Vector2f((float) newPosition.getX(), (float) newPosition.getY()).subtractLocal(position);
                             }
                             else{
