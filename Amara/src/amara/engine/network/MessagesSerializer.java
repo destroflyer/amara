@@ -300,6 +300,7 @@ public class MessagesSerializer{
                         WaitingToRespawnComponent.class,
                         //spawns
                         RelativeSpawnPositionComponent.class,
+                        SpawnAttackMoveComponent.class,
                         SpawnMovementSpeedComponent.class,
                         SpawnTemplateComponent.class,
                         //spells
@@ -330,6 +331,7 @@ public class MessagesSerializer{
                         AcceptEnemiesComponent.class,
                         //units
                         AggroTargetComponent.class,
+                        AttackMoveComponent.class,
                         AutoAggroComponent.class,
                         AutoAttackComponent.class,
                         AutoAttackTargetComponent.class,
@@ -373,7 +375,9 @@ public class MessagesSerializer{
                         //units/effecttriggers/triggers
                         CastingFinishedTriggerComponent.class,
                         CollisionTriggerComponent.class,
+                        RepeatingTriggerComponent.class,
                         TargetReachedTriggerComponent.class,
+                        TimeSinceLastRepeatTriggerComponent.class,
                         //visuals
                         ModelComponent.class,
                         AnimationComponent.class,

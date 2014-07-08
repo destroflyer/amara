@@ -72,6 +72,9 @@ public class ApplySpawnsSystems implements EntitySystem{
                         movement.setComponent(new MovementSpeedComponent(spawnMovementSpeedComponent.getSpeed()));
                         spawnedObject.setComponent(new MovementComponent(movement.getId()));
                     }
+                    if(spawnInformation.hasComponent(SpawnAttackMoveComponent.class)){
+                        spawnedObject.setComponent(new AttackMoveComponent(targetEntity));
+                    }
                     EntityTemplate.loadTemplates(entityWorld, spawnedObject.getId(), spawnInformation.getComponent(SpawnTemplateComponent.class).getTemplateNames());
                 }
             }

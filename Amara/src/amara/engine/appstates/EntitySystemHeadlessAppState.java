@@ -17,9 +17,9 @@ public class EntitySystemHeadlessAppState<T extends HeadlessApplication> extends
     public EntitySystemHeadlessAppState(){
         
     }
-    private final static float maxFrameDuration = 0.2f;
     protected EntityWorld entityWorld = new EntityWorld();
     private ArrayList<EntitySystem> entitySystems = new ArrayList<EntitySystem>();
+    private final float maxFrameDuration = 0.2f;
     
     public void addEntitySystem(EntitySystem entitySystem){
         entitySystems.add(entitySystem);
