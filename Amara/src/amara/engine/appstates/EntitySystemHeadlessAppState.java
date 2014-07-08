@@ -17,6 +17,7 @@ public class EntitySystemHeadlessAppState<T extends HeadlessApplication> extends
     public EntitySystemHeadlessAppState(){
         
     }
+    private final static float maxFrameDuration = 0.2f;
     protected EntityWorld entityWorld = new EntityWorld();
     private ArrayList<EntitySystem> entitySystems = new ArrayList<EntitySystem>();
     
@@ -29,7 +30,7 @@ public class EntitySystemHeadlessAppState<T extends HeadlessApplication> extends
         super.update(lastTimePerFrame);
         for(int i=0;i<entitySystems.size();i++){
             EntitySystem entitySystem = entitySystems.get(i);
-            entitySystem.update(entityWorld, lastTimePerFrame);
+            entitySystem.update(entityWorld, Math.min(lastTimePerFrame, maxFrameDuration));
         }
     }
 

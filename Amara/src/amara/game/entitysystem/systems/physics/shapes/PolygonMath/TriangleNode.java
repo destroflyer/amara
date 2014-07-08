@@ -80,12 +80,23 @@ public class TriangleNode
     
     public boolean areaContains(Point2D p)
     {
-        for (int i = 0; i < 3; i++)
+        int c = 0;
+        int i, j;
+        for (i = 2, j = 0; j < 3; i = j++)
         {
-            int j = (i + 1) % 3;
-            if (Point2DUtil.lineSide(p, points[i], points[j]) > 0) return false;
+            if (((points[j].getY() > p.getY()) != (points[i].getY() > p.getY()))
+                && (p.getX() < (points[i].getX() - points[j].getX()) * (p.getY() - points[j].getY()) / (points[i].getY() - points[j].getY()) + points[j].getX()))
+            {
+                c++;
+            }
         }
-        return true;
+        return (c & 1) != 0;
+//        for (int i = 0; i < 3; i++)
+//        {
+//            int j = (i + 1) % 3;
+//            if (Point2DUtil.lineSide(p, points[i], points[j]) > Util.Epsilon) return false;
+//        }
+//        return true;
     }
     
     public Point2D center()

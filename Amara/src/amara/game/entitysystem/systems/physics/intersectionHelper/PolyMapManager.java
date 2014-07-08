@@ -21,6 +21,8 @@ public final class PolyMapManager
     
     private HashMap<Integer, ArrayList<Point2D>> paths = new HashMap<Integer, ArrayList<Point2D>>();
     private HashMap<Integer, Double> walked = new HashMap<Integer, Double>();
+    
+    private HashMap<Integer, TrianglePath> triPaths = new HashMap<Integer, TrianglePath>();
 
     public PolyMapManager(Polygon map, double width, double height)
     {
@@ -80,7 +82,7 @@ public final class PolyMapManager
     
     private ArrayList<Point2D> findPath(Point2D start, Point2D end, double radius)
     {
-        return mapFromRadius(radius).findPath(start, end, 0);
+        return mapFromRadius(0).findPath(start, end, radius);
     }
     public Point2D followPath(int id, Point2D from, Point2D to, double distance, double radius)
     {
@@ -88,6 +90,11 @@ public final class PolyMapManager
         if(path == null || 1 < path.get(path.size() - 1).squaredDistance(to))
         {
             path = findPath(from, to, radius);
+            if(path == null)
+            {
+                if(distance * distance < from.squaredDistance(to)) return Point2DUtil.interpolate(from, to, distance);
+                return to;
+            }
             paths.put(id, path);
         }
         else distance += walked.get(id);
@@ -115,6 +122,32 @@ public final class PolyMapManager
         paths.remove(id);
         walked.remove(id);
         return path.get(path.size() - 1);
+    }
+    
+    public Point2D followTriPath(int id, Point2D from, Point2D to, double distance, double radius)
+    {
+        TrianglePath path = triPaths.get(id);
+        if(path == null)
+        {
+            path = mapFromRadius(0).findTriPath(from, to, radius);
+            if(path == null)
+            {
+                if(distance * distance < from.squaredDistance(to)) return Point2DUtil.interpolate(from, to, distance);
+                return to;
+            }
+            triPaths.put(id, path);
+            Point2D position = path.moveDistance(from, to, distance);
+            if(position.equals(to)) triPaths.remove(id);
+            return position;
+        }
+        Point2D position = path.moveDistance(from, to, distance);
+        if(position == null)
+        {
+            triPaths.remove(id);
+            return followTriPath(id, from, to, distance, radius);
+        }
+        if(position.equals(to)) triPaths.remove(id);
+        return position;
     }
     
     public Polygon sightPolygon(Point2D source, double range)

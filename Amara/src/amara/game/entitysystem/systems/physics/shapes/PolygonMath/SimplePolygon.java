@@ -126,17 +126,17 @@ public class SimplePolygon
     }
     public boolean areaContainsFast(Point2D point)
     {
-        int c = isHole() ? 1 : 0;
+        boolean inside = isHole();
         int i, j;
         for (i = points.size() - 1, j = 0; j < points.size(); i = j++)
         {
             if (((points.get(j).getY() > point.getY()) != (points.get(i).getY() > point.getY()))
                 && (point.getX() < (points.get(i).getX() - points.get(j).getX()) * (point.getY() - points.get(j).getY()) / (points.get(i).getY() - points.get(j).getY()) + points.get(j).getX()))
             {
-                c++;
+                inside = !inside;
             }
         }
-        return (c & 1) == 1;
+        return inside;
     }
     public Containment areaContains(Point2D point)
     {

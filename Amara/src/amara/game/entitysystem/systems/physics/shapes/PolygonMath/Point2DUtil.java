@@ -120,6 +120,7 @@ public class Point2DUtil {
     }
     public static Point2D interpolate(Point2D a, Point2D b, double weight)
     {
+        assert 0 <= weight && weight <= 1 : weight;
         return weightAvg(a, 1 - weight, b, weight);
     }
 //left < 0 < right
@@ -128,35 +129,35 @@ public class Point2DUtil {
         return (b.getY() - a.getY()) * (p.getX() - a.getX()) - (b.getX() - a.getX()) * (p.getY() - a.getY());
     }
 
-    public static double lineAxisIntersectionX(Point2D a, Point2D b, double yAxis)
+    public static double lineAxisIntersectionX(Point2D a, Point2D b, double yValue)
     {
-        return lineAxisIntersectionYHelper(a.getY(), a.getX(), b.getY(), b.getX(), yAxis);
+        return lineAxisIntersectionYHelper(a.getY(), a.getX(), b.getY(), b.getX(), yValue);
     }
-    private static double lineAxisIntersectionYHelper(double ax, double ay, double bx, double by, double xAxis)
+    public static double lineAxisIntersectionY(Point2D a, Point2D b, double xValue)
+    {
+        return lineAxisIntersectionYHelper(a.getX(), a.getY(), b.getX(), b.getY(), xValue);
+    }
+    private static double lineAxisIntersectionYHelper(double ax, double ay, double bx, double by, double xValue)
     {
         if (ax == bx) return Double.NaN;
-        return ay + ((xAxis - ax) / (bx - ax)) * (by - ay);
+        return ay + ((xValue - ax) / (bx - ax)) * (by - ay);
     }
-    public static double lineSegmentAxisIntersectionX(Point2D a, Point2D b, double yAxis)
+    public static double lineSegmentAxisIntersectionX(Point2D a, Point2D b, double yValue)
     {
-        return lineSegmentAxisIntersectionYHelper(a.getY(), a.getX(), b.getY(), b.getX(), yAxis);
+        return lineSegmentAxisIntersectionYHelper(a.getY(), a.getX(), b.getY(), b.getX(), yValue);
     }
-    public static double lineSegmentAxisIntersectionY(Point2D a, Point2D b, double xAxis)
+    public static double lineSegmentAxisIntersectionY(Point2D a, Point2D b, double xValue)
     {
-        return lineSegmentAxisIntersectionYHelper(a.getX(), a.getY(), b.getX(), b.getY(), xAxis);
+        return lineSegmentAxisIntersectionYHelper(a.getX(), a.getY(), b.getX(), b.getY(), xValue);
     }
-    private static double lineSegmentAxisIntersectionYHelper(double ax, double ay, double bx, double by, double xAxis)
+    private static double lineSegmentAxisIntersectionYHelper(double ax, double ay, double bx, double by, double xValue)
     {
-        if ((ax - xAxis) * (bx - xAxis) >= 0) return Double.NaN;
-        return ay + ((xAxis - ax) / (bx - ax)) * (by - ay);
+        if ((ax - xValue) * (bx - xValue) >= 0) return Double.NaN;
+        return ay + ((xValue - ax) / (bx - ax)) * (by - ay);
     }
     
     public static boolean onLineSegment(Point2D p, Point2D a, Point2D b)
     {
-        if(p == null || a == null || b == null)
-        {
-            int hkl = 0;
-        }
         assert p != null && a != null && b != null;
         double cross = (p.getY() - a.getY()) * (b.getX() - a.getX()) - (p.getX() - a.getX()) * (b.getY() - a.getY());
         if (!Util.withinEpsilon(cross)) return false;
