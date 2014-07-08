@@ -126,6 +126,8 @@ public final class PolyMapManager
     
     public Point2D followTriPath(int id, Point2D from, Point2D to, double distance, double radius)
     {
+        from = closestValid(from, radius);
+        to = closestValid(to, radius);
         TrianglePath path = triPaths.get(id);
         if(path == null)
         {
@@ -137,7 +139,6 @@ public final class PolyMapManager
             }
             triPaths.put(id, path);
             Point2D position = path.moveDistance(from, to, distance);
-            if(position == null) return Point2DUtil.interpolate(from, to, distance / from.distance(to));
             if(position.equals(to)) triPaths.remove(id);
             return position;
         }

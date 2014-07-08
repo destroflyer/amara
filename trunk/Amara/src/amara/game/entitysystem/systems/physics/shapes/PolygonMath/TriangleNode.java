@@ -80,23 +80,23 @@ public class TriangleNode
     
     public boolean areaContains(Point2D p)
     {
-//        int c = 0;
-//        int i, j;
-//        for (i = 2, j = 0; j < 3; i = j++)
-//        {
-//            if (((points[j].getY() > p.getY()) != (points[i].getY() > p.getY()))
-//                && (p.getX() < (points[i].getX() - points[j].getX()) * (p.getY() - points[j].getY()) / (points[i].getY() - points[j].getY()) + points[j].getX()))
-//            {
-//                c++;
-//            }
-//        }
-//        return (c & 1) != 0;
-        for (int i = 0; i < 3; i++)
+        boolean inside = false;
+        int i, j;
+        for (i = 2, j = 0; j < 3; i = j++)
         {
-            int j = (i + 1) % 3;
-            if (Point2DUtil.lineSide(p, points[i], points[j]) > Util.Epsilon) return false;
+            if (((points[j].getY() > p.getY()) != (points[i].getY() > p.getY()))
+                && (p.getX() < (points[i].getX() - points[j].getX()) * (p.getY() - points[j].getY()) / (points[i].getY() - points[j].getY()) + points[j].getX()))
+            {
+                inside = !inside;
+            }
         }
-        return true;
+        return inside;
+//        for (int i = 0; i < 3; i++)
+//        {
+//            int j = (i + 1) % 3;
+//            if (Point2DUtil.lineSide(p, points[i], points[j]) > Util.Epsilon) return false;
+//        }
+//        return true;
     }
     
     public Point2D center()
