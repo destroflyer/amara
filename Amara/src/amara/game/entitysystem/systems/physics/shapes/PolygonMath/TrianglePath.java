@@ -196,32 +196,32 @@ public class TrianglePath
         for (TriangleNode current = startTri; !current.areaContains(end); current = current.neighbor(followTris.get(followIndex++)))
         {
             int follow = followTris.get(followIndex);
-            Point2D a = startTri.point(follow).sub(start);
-            Point2D b = startTri.point((follow + 1) % 3).sub(start);
-            if(b.cross(a) <= Util.Epsilon)
-            {
-                startTri = current.neighbor(followTris.get(followIndex));
-                continue;
-            }
-//            assert a.cross(b) < 0;
+            Point2D a = current.point((follow + 1) % 3).sub(start);
+            Point2D b = current.point(follow).sub(start);
+            
             double distance = a.distance(b);
             assert 2 * radius <= distance: radius + " | " + distance;
             Point2D A = Point2DUtil.interpolate(a, b, radius / distance);
             Point2D B = Point2DUtil.interpolate(b, a, radius / distance);
             assert Util.withinEpsilon(a.distance(A) + b.distance(B) + A.distance(B) - distance);
-//            assert A.cross(B) < 0;
+            
             if(current == startTri)
             {
+                if(b.cross(a) <= Util.Epsilon)
+                {
+                    startTri = current.neighbor(followTris.get(followIndex));
+                    continue;
+                }
                 feelerA = A;
                 feelerB = B;
                 continue;
             }
-//            return feelerB.add(start);
-//            assert feelerA.cross(feelerB) <= 0;
-            boolean error = false;
+            assert !feelerA.equals(A);
+            assert !feelerB.equals(B);
+            assert !feelerA.equals(B);
+            assert !feelerB.equals(A);
             if(feelerA.cross(A) <= 0)
             {
-                error = true;
                 if(feelerB.cross(A) <= 0)
                 {
                     assert !feelerB.withinEpsilon();
@@ -234,7 +234,6 @@ public class TrianglePath
                 if(feelerA.cross(B) >= 0)
                 {
                     assert !feelerA.withinEpsilon();
-                    assert !error;
                     return feelerA.add(start);
                 }
                 feelerB = B;
@@ -261,9 +260,9 @@ public class TrianglePath
         if(setPathEnds(from, to))
         {
             Point2D result;
-            result = centerWalk(from, to);
+//            result = centerWalk(from, to);
             
-//            result = firstTriFunnel(from, to);
+            result = firstTriFunnel(from, to);
             
 //            ArrayList<Point2D> tunnel = new ArrayList<Point2D>();
 //            ArrayList<Byte> sides = new ArrayList<Byte>();

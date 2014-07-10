@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import static amara.game.entitysystem.systems.physics.shapes.PolygonMath.PolygonOperation.*;
 import java.util.ArrayList;
 import sun.reflect.generics.reflectiveObjects.*;
 
@@ -13,9 +14,15 @@ import sun.reflect.generics.reflectiveObjects.*;
  */
 public class SweepPolygon
 {
-    private ArrayList<SweepEdge> edges = new ArrayList<SweepEdge>();//ascending a.x value
+    private ArrayList<SweepEdge> edges;//ascending a.x value
     private ArrayList<SweepEdge> actives = new ArrayList<SweepEdge>();//ascending b.x value
     private boolean infinite;
+
+    public SweepPolygon(ArrayList<SweepEdge> edges, boolean infinite)
+    {
+        this.edges = edges;
+        this.infinite = infinite;
+    }
     
     public boolean areaContains(Point2D p)
     {
@@ -55,6 +62,44 @@ public class SweepPolygon
     public boolean intersects(SweepPolygon poly)
     {
         throw new NotImplementedException();
+    }
+    
+    public SweepPolygon operate(SweepPolygon poly, PolygonOperation o)
+    {
+        ArrayList<SweepEdge> result = new ArrayList<SweepEdge>();
+        int i = 0, j = 0;
+        while(i + j < edges.size() + poly.edges.size())
+        {
+            boolean select;
+            if(i == edges.size()) select = false;
+            else if(j == poly.edges.size()) select = true;
+            else select = edges.get(i).minX() <= poly.edges.get(j).minX();
+            
+            if(select)
+            {
+                
+            }
+            else
+            {
+                
+            }
+            throw new NotImplementedException();
+        }
+        return new SweepPolygon(edges, isInfinite(infinite, poly.infinite, o));
+    }
+    private static boolean isInfinite(boolean aInfinite, boolean bInfinite, PolygonOperation o)
+    {
+        switch (o)
+        {
+            case Union:
+                return aInfinite || bInfinite;
+            case Exclude:
+                return aInfinite && !bInfinite;
+            case Intersection:
+                return aInfinite && bInfinite;
+            default:
+                throw new NotImplementedException();
+        }
     }
     
     private boolean lineSegmentsIntersect(SweepEdge first, SweepEdge second)

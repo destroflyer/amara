@@ -127,7 +127,7 @@ public class Point2D
     }
     public double cross(Point2D p)
     {
-        return y * p.x - x * p.y;
+        return x * p.y - y * p.x;
     }
     
     public boolean between(Point2D a, Point2D b)

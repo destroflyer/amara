@@ -134,11 +134,17 @@ public final class PolyMapManager
             path = mapFromRadius(0).findTriPath(from, to, radius);
             if(path == null)
             {
-                if(distance * distance < from.squaredDistance(to)) return Point2DUtil.interpolate(from, to, distance);
+                System.out.println("Error in pathfinding, walking straight line.");
+                if(distance * distance < from.squaredDistance(to)) return Point2DUtil.interpolate(from, to, distance / from.distance(to));
                 return to;
             }
             triPaths.put(id, path);
             Point2D position = path.moveDistance(from, to, distance);
+            if(position == null)
+            {
+                System.out.println("Error in pathfinding, walking straight line.");
+                return Point2DUtil.interpolate(from, to, distance / from.distance(to));
+            }
             if(position.equals(to)) triPaths.remove(id);
             return position;
         }
