@@ -55,7 +55,7 @@ public class PlayerVisionDisplaySystem implements EntitySystem{
             if(timeSinceLastUpdate > Settings.getFloat("fog_of_war_update_interval")){
                 SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
                 if(selectedUnitComponent != null){
-                    int selectedEntity = selectedUnitComponent.getEntityID();
+                    int selectedEntity = selectedUnitComponent.getEntity();
                     ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, PositionComponent.class);
                     if((observer.getNew().getComponent(selectedEntity, PositionComponent.class) != null)
                     || (observer.getChanged().getComponent(selectedEntity, PositionComponent.class) != null)){

@@ -122,6 +122,7 @@ public class MessagesSerializer{
                 CastPositionalSkillshotSpellCommand.class,
                 CastSelfcastSpellCommand.class,
                 CastSingleTargetSpellCommand.class,
+                    SpellIndex.class,
             Message_ClientConnection.class,
             Message_ClientDisconnection.class,
             Message_ClientInitialized.class,
@@ -247,6 +248,7 @@ public class MessagesSerializer{
                         TargetComponent.class,
                         //items
                         InventoryComponent.class,
+                        ItemActiveComponent.class,
                         ItemVisualisationComponent.class,
                         //maps
                         MapObjectiveComponent.class,

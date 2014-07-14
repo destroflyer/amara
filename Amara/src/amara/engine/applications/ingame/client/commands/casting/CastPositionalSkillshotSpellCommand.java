@@ -19,14 +19,14 @@ public class CastPositionalSkillshotSpellCommand extends Command{
         
     }
     
-    public CastPositionalSkillshotSpellCommand(int spellIndex, Vector2f position){
+    public CastPositionalSkillshotSpellCommand(SpellIndex spellIndex, Vector2f position){
         this.spellIndex = spellIndex;
         this.position = position;
     }
-    private int spellIndex;
+    private SpellIndex spellIndex;
     private Vector2f position;
 
-    public int getSpellIndex(){
+    public SpellIndex getSpellIndex(){
         return spellIndex;
     }
 

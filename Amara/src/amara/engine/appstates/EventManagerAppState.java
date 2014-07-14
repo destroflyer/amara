@@ -34,7 +34,12 @@ public class EventManagerAppState extends BaseDisplayAppState implements ActionL
         mainApplication.getInputManager().addListener(this, new String[]{
             "mouse_click_left","mouse_click_middle","mouse_click_right"
         });
-        registerKeys(new int[]{KeyInput.KEY_RETURN, KeyInput.KEY_Q, KeyInput.KEY_W, KeyInput.KEY_E, KeyInput.KEY_R, KeyInput.KEY_S});
+        registerKeys(new int[]{
+            KeyInput.KEY_RETURN,
+            KeyInput.KEY_Q, KeyInput.KEY_W, KeyInput.KEY_E, KeyInput.KEY_R,
+            KeyInput.KEY_1, KeyInput.KEY_2, KeyInput.KEY_3, KeyInput.KEY_4, KeyInput.KEY_5, KeyInput.KEY_6,
+            KeyInput.KEY_S
+        });
     }
     
     private void registerKeys(int[] keyCodes){

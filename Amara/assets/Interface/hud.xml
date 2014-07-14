@@ -54,14 +54,44 @@
                     <panel width="174px"/>
                     <panel childLayout="vertical" width="132px">
                         <panel childLayout="horizontal" height="42px">
-                            <image id="inventory_item_0_image" filename="Interface/hud/items/none.png" width="34%" height="100%"></image>
-                            <image id="inventory_item_1_image" filename="Interface/hud/items/none.png" width="34%" height="100%"></image>
-                            <image id="inventory_item_2_image" filename="Interface/hud/items/none.png" width="34%" height="100%"></image>
+                            <panel childLayout="center" width="34%" height="100%">
+                                <image id="inventory_item_0_image" filename="Interface/hud/items/none.png" width="100%" height="100%"></image>
+                                <panel id="inventory_item_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="inventory_item_0_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel childLayout="center" width="34%" height="100%">
+                                <image id="inventory_item_1_image" filename="Interface/hud/items/none.png" width="100%" height="100%"></image>
+                                <panel id="inventory_item_1_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="inventory_item_1_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel childLayout="center" width="34%" height="100%">
+                                <image id="inventory_item_2_image" filename="Interface/hud/items/none.png" width="100%" height="100%"></image>
+                                <panel id="inventory_item_2_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="inventory_item_2_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
                         </panel>
                         <panel childLayout="horizontal" height="42px">
-                            <image id="inventory_item_3_image" filename="Interface/hud/items/none.png" width="34%" height="100%"></image>
-                            <image id="inventory_item_4_image" filename="Interface/hud/items/none.png" width="34%" height="100%"></image>
-                            <image id="inventory_item_5_image" filename="Interface/hud/items/none.png" width="34%" height="100%"></image>
+                            <panel childLayout="center" width="34%" height="100%">
+                                <image id="inventory_item_3_image" filename="Interface/hud/items/none.png" width="100%" height="100%"></image>
+                                <panel id="inventory_item_3_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="inventory_item_3_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel childLayout="center" width="34%" height="100%">
+                                <image id="inventory_item_4_image" filename="Interface/hud/items/none.png" width="100%" height="100%"></image>
+                                <panel id="inventory_item_4_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="inventory_item_4_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel childLayout="center" width="34%" height="100%">
+                                <image id="inventory_item_5_image" filename="Interface/hud/items/none.png" width="100%" height="100%"></image>
+                                <panel id="inventory_item_5_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="inventory_item_5_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
                         </panel>
                         <panel backgroundColor="#000D"/>
                         <panel height="6px"/>

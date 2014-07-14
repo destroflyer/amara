@@ -18,6 +18,7 @@ import amara.engine.input.*;
 import amara.engine.input.events.*;
 import amara.engine.network.messages.Message_Command;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.spells.*;
@@ -61,19 +62,43 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                 KeyPressedEvent keyPressedEvent = (KeyPressedEvent) event;
                 switch(keyPressedEvent.getKeyCode()){
                     case KeyInput.KEY_Q:
-                        castSpell(0);
+                        castSpell(new SpellIndex(SpellIndex.SpellSet.SPELLS, 0));
                         break;
 
                     case KeyInput.KEY_W:
-                        castSpell(1);
+                        castSpell(new SpellIndex(SpellIndex.SpellSet.SPELLS, 1));
                         break;
 
                     case KeyInput.KEY_E:
-                        castSpell(2);
+                        castSpell(new SpellIndex(SpellIndex.SpellSet.SPELLS, 2));
                         break;
 
                     case KeyInput.KEY_R:
-                        castSpell(3);
+                        castSpell(new SpellIndex(SpellIndex.SpellSet.SPELLS, 4));
+                        break;
+
+                    case KeyInput.KEY_1:
+                        castSpell(new SpellIndex(SpellIndex.SpellSet.ITEMS, 0));
+                        break;
+
+                    case KeyInput.KEY_2:
+                        castSpell(new SpellIndex(SpellIndex.SpellSet.ITEMS, 1));
+                        break;
+
+                    case KeyInput.KEY_3:
+                        castSpell(new SpellIndex(SpellIndex.SpellSet.ITEMS, 2));
+                        break;
+
+                    case KeyInput.KEY_4:
+                        castSpell(new SpellIndex(SpellIndex.SpellSet.ITEMS, 3));
+                        break;
+
+                    case KeyInput.KEY_5:
+                        castSpell(new SpellIndex(SpellIndex.SpellSet.ITEMS, 4));
+                        break;
+
+                    case KeyInput.KEY_6:
+                        castSpell(new SpellIndex(SpellIndex.SpellSet.ITEMS, 5));
                         break;
 
                     case KeyInput.KEY_S:
@@ -89,42 +114,39 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
         networkClient.sendMessage(new Message_Command(command));
     }
     
-    private void castSpell(int spellIndex){
+    private void castSpell(SpellIndex spellIndex){
         int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
         int cursorHoveredEntity = getCursorHoveredEntity();
         Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
-        EntityWrapper selectedEntity = entityWorld.getWrapped(entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntityID());
-        SpellsComponent spellsComponent = selectedEntity.getComponent(SpellsComponent.class);
-        if(spellsComponent != null){
-            int[] spells = spellsComponent.getSpellsEntities();
-            if(spellIndex < spells.length){
-                int spellEntity = spells[spellIndex];
-                CastTypeComponent.CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();
-                switch(castType){
-                    case SELFCAST:
-                        sendCommand(new CastSelfcastSpellCommand(spellIndex));
-                        break;
+        int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
+        int spellEntity = getSpellEntity(entityWorld, selectedEntity, spellIndex);
+        if(spellEntity != -1){
+            CastTypeComponent.CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();
+            switch(castType){
+                case SELFCAST:
+                    sendCommand(new CastSelfcastSpellCommand(spellIndex));
+                    break;
 
-                    case SINGLE_TARGET:
-                        if(cursorHoveredEntity != -1){
-                            sendCommand(new CastSingleTargetSpellCommand(spellIndex, cursorHoveredEntity));
-                        }
-                        break;
+                case SINGLE_TARGET:
+                    if(cursorHoveredEntity != -1){
+                        sendCommand(new CastSingleTargetSpellCommand(spellIndex, cursorHoveredEntity));
+                    }
+                    break;
 
-                    case LINEAR_SKILLSHOT:
-                        if(groundLocation != null){
-                            Vector2f direction = groundLocation.subtract(selectedEntity.getComponent(PositionComponent.class).getPosition());
-                            sendCommand(new CastLinearSkillshotSpellCommand(spellIndex, direction));
-                        }
-                        break;
+                case LINEAR_SKILLSHOT:
+                    if(groundLocation != null){
+                        Vector2f casterPosition = entityWorld.getComponent(selectedEntity, PositionComponent.class).getPosition();
+                        Vector2f direction = groundLocation.subtract(casterPosition);
+                        sendCommand(new CastLinearSkillshotSpellCommand(spellIndex, direction));
+                    }
+                    break;
 
-                    case POSITIONAL_SKILLSHOT:
-                        if(groundLocation != null){
-                            sendCommand(new CastPositionalSkillshotSpellCommand(spellIndex, groundLocation));
-                        }
-                        break;
-                }
+                case POSITIONAL_SKILLSHOT:
+                    if(groundLocation != null){
+                        sendCommand(new CastPositionalSkillshotSpellCommand(spellIndex, groundLocation));
+                    }
+                    break;
             }
         }
     }
@@ -138,6 +160,34 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
             if(entity != -1){
                 return entity;
             }
+        }
+        return -1;
+    }
+    
+    public static int getSpellEntity(EntityWorld entityWorld, int casterEntity, SpellIndex spellIndex){
+        switch(spellIndex.getSpellSet()){
+            case SPELLS:
+                SpellsComponent spellsComponent = entityWorld.getComponent(casterEntity, SpellsComponent.class);
+                if(spellsComponent != null){
+                    int[] spells = spellsComponent.getSpellsEntities();
+                    if(spellIndex.getIndex() < spells.length){
+                        return spells[spellIndex.getIndex()];
+                    }
+                }
+                break;
+            
+            case ITEMS:
+                InventoryComponent inventoryComponent = entityWorld.getComponent(casterEntity, InventoryComponent.class);
+                if(inventoryComponent != null){
+                    int[] items = inventoryComponent.getItemEntities();
+                    if(spellIndex.getIndex() < items.length){
+                        ItemActiveComponent itemActiveComponent = entityWorld.getComponent(items[spellIndex.getIndex()], ItemActiveComponent.class);
+                        if(itemActiveComponent != null){
+                            return itemActiveComponent.getSpellEntity();
+                        }
+                    }
+                }
+                break;
         }
         return -1;
     }

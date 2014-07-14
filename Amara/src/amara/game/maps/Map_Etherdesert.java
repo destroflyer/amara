@@ -107,7 +107,7 @@ public class Map_Etherdesert extends Map{
                 direction = new Vector2f(0, -1);
                 break;
         }
-        int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntityID();
+        int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
         entityWorld.setComponent(unitEntity, new PositionComponent(position));
         entityWorld.setComponent(unitEntity, new DirectionComponent(direction));
         entityWorld.setComponent(unitEntity, new TeamComponent(1));

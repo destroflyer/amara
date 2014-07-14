@@ -18,14 +18,14 @@ public class CastSingleTargetSpellCommand extends Command{
         
     }
     
-    public CastSingleTargetSpellCommand(int spellIndex, int targetEntityID){
+    public CastSingleTargetSpellCommand(SpellIndex spellIndex, int targetEntityID){
         this.spellIndex = spellIndex;
         this.targetEntityID = targetEntityID;
     }
-    private int spellIndex;
+    private SpellIndex spellIndex;
     private int targetEntityID;
 
-    public int getSpellIndex(){
+    public SpellIndex getSpellIndex(){
         return spellIndex;
     }
 

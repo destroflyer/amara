@@ -17,12 +17,12 @@ public class SelectedUnitComponent{
         
     }
 
-    public SelectedUnitComponent(int entityID){
-        this.entityID = entityID;
+    public SelectedUnitComponent(int entity){
+        this.entity = entity;
     }
-    private int entityID;
+    private int entity;
 
-    public int getEntityID(){
-        return entityID;
+    public int getEntity(){
+        return entity;
     }
 }

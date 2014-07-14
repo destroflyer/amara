@@ -867,7 +867,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.8f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(4));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
-            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId()}));
+            EntityWrapper zhonyasHourglass = createFromTemplate(entityWorld, "zhonyas_hourglass");
+            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), zhonyasHourglass.getId()}));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
@@ -877,9 +878,8 @@ public class EntityTemplate{
 
             EntityWrapper sonicWave = createFromTemplate(entityWorld, "sonic_wave," + 0);
             EntityWrapper intervention = createFromTemplate(entityWorld, "intervention," + entityWrapper.getId());
-            EntityWrapper zhonyas = createFromTemplate(entityWorld, "zhonyas," + entityWrapper.getId());
             EntityWrapper lunarRush = createFromTemplate(entityWorld, "lunar_rush");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{sonicWave.getId(), intervention.getId(), zhonyas.getId(), lunarRush.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(new int[]{sonicWave.getId(), intervention.getId(), lunarRush.getId()}));
         }
         else if(templateName.equals("intervention")){
             entityWrapper.setComponent(new NameComponent("Intervention"));
@@ -920,59 +920,6 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
             entityWrapper.setComponent(new CooldownComponent(6));
-        }
-        else if(templateName.equals("zhonyas")){
-            entityWrapper.setComponent(new NameComponent("Zhonyas"));
-            entityWrapper.setComponent(new SpellVisualisationComponent("zhonyas"));
-            //Target effect
-            float duration = 2.5f;
-            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger1.setComponent(new TargetTargetComponent());
-            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect1.setComponent(new RemoveTargetabilityComponent());
-            effect1.setComponent(new RemoveVulnerabilityComponent());
-            EntityWrapper audioStart = entityWorld.getWrapped(entityWorld.createEntity());
-            audioStart.setComponent(new AudioComponent("Sounds/sounds/spells/zhonyas_start.ogg"));
-            EntityWrapper audioLoop = entityWorld.getWrapped(entityWorld.createEntity());
-            audioLoop.setComponent(new AudioComponent("Sounds/sounds/spells/zhonyas_loop.ogg"));
-            audioLoop.setComponent(new AudioLoopComponent());
-            audioLoop.setComponent(new AudioSuccessorComponent(audioStart.getId(), 0.05f));
-            effect1.setComponent(new PlayAudioComponent(audioStart.getId(), audioLoop.getId()));
-            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
-            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger2.setComponent(new TargetTargetComponent());
-            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
-            EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
-            buff.setComponent(new BuffVisualisationComponent("zhonyas"));
-            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger3.setComponent(new CustomTargetComponent(parameters[0]));
-            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect3.setComponent(new AddTargetabilityComponent());
-            effect3.setComponent(new AddVulnerabilityComponent());
-            EntityWrapper audioEnd = entityWorld.getWrapped(entityWorld.createEntity());
-            audioEnd.setComponent(new AudioComponent("Sounds/sounds/spells/zhonyas_end.ogg"));
-            effect3.setComponent(new StopAudioComponent(audioLoop.getId()));
-            effect3.setComponent(new PlayAudioComponent(audioEnd.getId()));
-            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
-            effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
-            effect2.setComponent(new AddBuffComponent(buff.getId(), duration));
-            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
-            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
-            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId()));
-            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
-            //Trigger spell effects
-            EntityWrapper effectTrigger4 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger4.setComponent(new CasterTargetComponent());
-            EntityWrapper effect4 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect4.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
-            effectTrigger4.setComponent(new TriggeredEffectComponent(effect4.getId()));
-            effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
-            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
-            entityWrapper.setComponent(new CooldownComponent(5));
         }
         else if(templateName.equals("lunar_rush")){
             entityWrapper.setComponent(new NameComponent("Lunar Rush"));
@@ -1739,6 +1686,64 @@ public class EntityTemplate{
         else if(templateName.equals("dagger")){
             entityWrapper.setComponent(new ItemVisualisationComponent("dagger"));
             entityWrapper.setComponent(new BonusPercentageAttackSpeedComponent(0.12f));
+        }
+        else if(templateName.equals("zhonyas_hourglass")){
+            entityWrapper.setComponent(new ItemVisualisationComponent("zhonyas_hourglass"));
+            entityWrapper.setComponent(new BonusFlatAbilityPowerComponent(120));
+            EntityWrapper itemActive = createFromTemplate(entityWorld, "zhonyas_hourglass_active");
+            entityWrapper.setComponent(new ItemActiveComponent(itemActive.getId()));
+        }
+        else if(templateName.equals("zhonyas_hourglass_active")){
+            entityWrapper.setComponent(new NameComponent("Zhonyas"));
+            //Target effect
+            float duration = 2.5f;
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new RemoveTargetabilityComponent());
+            effect1.setComponent(new RemoveVulnerabilityComponent());
+            EntityWrapper audioStart = entityWorld.getWrapped(entityWorld.createEntity());
+            audioStart.setComponent(new AudioComponent("Sounds/sounds/spells/zhonyas_start.ogg"));
+            EntityWrapper audioLoop = entityWorld.getWrapped(entityWorld.createEntity());
+            audioLoop.setComponent(new AudioComponent("Sounds/sounds/spells/zhonyas_loop.ogg"));
+            audioLoop.setComponent(new AudioLoopComponent());
+            audioLoop.setComponent(new AudioSuccessorComponent(audioStart.getId(), 0.05f));
+            effect1.setComponent(new PlayAudioComponent(audioStart.getId(), audioLoop.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
+            buff.setComponent(new BuffVisualisationComponent("zhonyas"));
+            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger3.setComponent(new CasterTargetComponent());
+            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect3.setComponent(new AddTargetabilityComponent());
+            effect3.setComponent(new AddVulnerabilityComponent());
+            EntityWrapper audioEnd = entityWorld.getWrapped(entityWorld.createEntity());
+            audioEnd.setComponent(new AudioComponent("Sounds/sounds/spells/zhonyas_end.ogg"));
+            effect3.setComponent(new StopAudioComponent(audioLoop.getId()));
+            effect3.setComponent(new PlayAudioComponent(audioEnd.getId()));
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
+            effect2.setComponent(new AddBuffComponent(buff.getId(), duration));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger4.setComponent(new CasterTargetComponent());
+            EntityWrapper effect4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect4.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effectTrigger4.setComponent(new TriggeredEffectComponent(effect4.getId()));
+            effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+            entityWrapper.setComponent(new CooldownComponent(5));
         }
     }
 }

@@ -26,7 +26,7 @@ public abstract class GUIDisplaySystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
         if(selectedUnitComponent != null){
-            update(entityWorld, deltaSeconds, selectedUnitComponent.getEntityID());
+            update(entityWorld, deltaSeconds, selectedUnitComponent.getEntity());
         }
     }
     
