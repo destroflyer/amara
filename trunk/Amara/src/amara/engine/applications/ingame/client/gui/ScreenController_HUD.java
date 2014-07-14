@@ -23,6 +23,9 @@ public class ScreenController_HUD extends GameScreenController{
         for(int i=0;i<4;i++){
             hideSpellCooldown(i);
         }
+        for(int i=0;i<6;i++){
+            hideItemCooldown(i);
+        }
     }
     
     public void setPlayerName(String name){
@@ -53,21 +56,37 @@ public class ScreenController_HUD extends GameScreenController{
         getTextRenderer("attribute_value_" + attributeName).setText(text);
     }
     
-    public void setInventoryItemImage(int index, String imagePath){
-        getImageRenderer("inventory_item_" + index + "_image").setImage(createImage(imagePath));
-    }
-    
     public void setSpellImage(int index, String imagePath){
         getImageRenderer("spell_" + index + "_image").setImage(createImage(imagePath));
     }
     
     public void showSpellCooldown(int index, float remainingTime){
-        getElementByID("spell_" + index + "_cooldown").show();
-        getTextRenderer("spell_" + index + "_cooldown_time").setText("" + Util.round(remainingTime, 1));
+        showCooldown("spell", index, remainingTime);
     }
     
     public void hideSpellCooldown(int index){
-        getElementByID("spell_" + index + "_cooldown").hide();
+        hideCooldown("spell", index);
+    }
+    
+    public void setInventoryItemImage(int index, String imagePath){
+        getImageRenderer("inventory_item_" + index + "_image").setImage(createImage(imagePath));
+    }
+    
+    public void showItemCooldown(int index, float remainingTime){
+        showCooldown("inventory_item", index, remainingTime);
+    }
+    
+    public void hideItemCooldown(int index){
+        hideCooldown("inventory_item", index);
+    }
+    
+    private void showCooldown(String prefix, int index, float remainingTime){
+        getElementByID(prefix + "_" + index + "_cooldown").show();
+        getTextRenderer(prefix + "_" + index + "_cooldown_time").setText("" + Util.round(remainingTime, 1));
+    }
+    
+    private void hideCooldown(String prefix, int index){
+        getElementByID(prefix + "_" + index + "_cooldown").hide();
     }
     
     public void setPing(int ping){

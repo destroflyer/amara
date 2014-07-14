@@ -18,12 +18,12 @@ public class CastSelfcastSpellCommand extends Command{
         
     }
     
-    public CastSelfcastSpellCommand(int spellIndex){
+    public CastSelfcastSpellCommand(SpellIndex spellIndex){
         this.spellIndex = spellIndex;
     }
-    private int spellIndex;
+    private SpellIndex spellIndex;
 
-    public int getSpellIndex(){
+    public SpellIndex getSpellIndex(){
         return spellIndex;
     }
 }

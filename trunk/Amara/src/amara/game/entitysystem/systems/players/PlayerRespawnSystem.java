@@ -28,7 +28,7 @@ public class PlayerRespawnSystem implements EntitySystem{
         for(int playerEntity : entityWorld.getEntitiesWithAll(RespawnComponent.class))
         {
             entityWorld.removeComponent(playerEntity, RespawnComponent.class);
-            int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntityID();
+            int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
             entityWorld.removeComponent(selectedEntity, AnimationComponent.class);
             entityWorld.setComponent(selectedEntity, new HitboxActiveComponent());
             entityWorld.setComponent(selectedEntity, new IsAliveComponent());

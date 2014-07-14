@@ -28,7 +28,7 @@ public class PlayerDeathDisplaySystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
         if(selectedUnitComponent != null){
-            int selectedEntity = selectedUnitComponent.getEntityID();
+            int selectedEntity = selectedUnitComponent.getEntity();
             ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsAliveComponent.class);
             if(observer.getNew().hasComponent(selectedEntity, IsAliveComponent.class)){
                 postFilterAppState.removeFilter(grayscaleFilter);

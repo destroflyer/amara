@@ -34,7 +34,7 @@ public class PlayerDeathSystem implements EntitySystem{
         ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsAliveComponent.class);
         for(int playerEntity : entityWorld.getEntitiesWithAll(SelectedUnitComponent.class))
         {
-            int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntityID();
+            int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
             if(observer.getRemoved().hasComponent(selectedEntity, IsAliveComponent.class)){
                 onSelectedUnitDeath(entityWorld, selectedEntity);
                 onPlayerDeath(entityWorld, playerEntity);

@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import com.jme3.math.Vector2f;
 import amara.Queue;
+import amara.engine.applications.ingame.client.appstates.SendPlayerCommandsAppState;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
 import amara.game.entitysystem.*;
@@ -45,8 +46,8 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
         while(playerCommandsIterator.hasNext()){
             PlayerCommand playerCommand = playerCommandsIterator.next();
             Command command = playerCommand.getCommand();
-            EntityWrapper player = entityWorld.getWrapped(getPlayerEntity(entityWorld, playerCommand.getClientID()));
-            int selectedUnit = player.getComponent(SelectedUnitComponent.class).getEntityID();
+            int playerEntity = getPlayerEntity(entityWorld, playerCommand.getClientID());
+            int selectedUnit = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
             if(entityWorld.hasComponent(selectedUnit, IsAliveComponent.class)){
                 if(command instanceof MoveCommand){
                     MoveCommand moveCommand = (MoveCommand) command;
@@ -76,24 +77,24 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 }
                 else if(command instanceof CastSelfcastSpellCommand){
                     CastSelfcastSpellCommand castSelfcastSpellCommand = (CastSelfcastSpellCommand) command;
-                    int spellEntity = entityWorld.getComponent(selectedUnit, SpellsComponent.class).getSpellsEntities()[castSelfcastSpellCommand.getSpellIndex()];
+                    int spellEntity = SendPlayerCommandsAppState.getSpellEntity(entityWorld, selectedUnit, castSelfcastSpellCommand.getSpellIndex());
                     castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, -1));
                 }
                 else if(command instanceof CastSingleTargetSpellCommand){
                     CastSingleTargetSpellCommand castSingleTargetSpellCommand = (CastSingleTargetSpellCommand) command;
-                    int spellEntity = entityWorld.getComponent(selectedUnit, SpellsComponent.class).getSpellsEntities()[castSingleTargetSpellCommand.getSpellIndex()];
+                    int spellEntity = SendPlayerCommandsAppState.getSpellEntity(entityWorld, selectedUnit, castSingleTargetSpellCommand.getSpellIndex());
                     castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, castSingleTargetSpellCommand.getTargetEntityID()));
                 }
                 else if(command instanceof CastLinearSkillshotSpellCommand){
                     CastLinearSkillshotSpellCommand castLinearSkillshotSpellCommand = (CastLinearSkillshotSpellCommand) command;
-                    int spellEntity = entityWorld.getComponent(selectedUnit, SpellsComponent.class).getSpellsEntities()[castLinearSkillshotSpellCommand.getSpellIndex()];
+                    int spellEntity = SendPlayerCommandsAppState.getSpellEntity(entityWorld, selectedUnit, castLinearSkillshotSpellCommand.getSpellIndex());
                     int targetEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetEntity, new DirectionComponent(castLinearSkillshotSpellCommand.getDirection().clone()));
                     castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, targetEntity));
                 }
                 else if(command instanceof CastPositionalSkillshotSpellCommand){
                     CastPositionalSkillshotSpellCommand castPositionalSkillshotSpellCommand = (CastPositionalSkillshotSpellCommand) command;
-                    int spellEntity = entityWorld.getComponent(selectedUnit, SpellsComponent.class).getSpellsEntities()[castPositionalSkillshotSpellCommand.getSpellIndex()];
+                    int spellEntity = SendPlayerCommandsAppState.getSpellEntity(entityWorld, selectedUnit, castPositionalSkillshotSpellCommand.getSpellIndex());
                     int targetEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetEntity, new PositionComponent(castPositionalSkillshotSpellCommand.getPosition().clone()));
                     castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, targetEntity));
