@@ -30,16 +30,14 @@ public class DisplayInventorySystem extends GUIDisplaySystem{
         if(inventoryComponent != null){
             for(int i=0;i<6;i++){
                 String visualisationName = "none";
-                if(inventoryComponent != null){
-                    int[] items = inventoryComponent.getItemEntities();
-                    if(i < items.length){
-                        ItemVisualisationComponent itemVisualisationComponent = entityWorld.getComponent(items[i], ItemVisualisationComponent.class);
-                        if(itemVisualisationComponent != null){
-                            visualisationName = itemVisualisationComponent.getName();
-                        }
-                        else{
-                            visualisationName = "unknown";
-                        }
+                int[] items = inventoryComponent.getItemEntities();
+                if(i < items.length){
+                    ItemVisualisationComponent itemVisualisationComponent = entityWorld.getComponent(items[i], ItemVisualisationComponent.class);
+                    if(itemVisualisationComponent != null){
+                        visualisationName = itemVisualisationComponent.getName();
+                    }
+                    else{
+                        visualisationName = "unknown";
                     }
                 }
                 screenController_HUD.setInventoryItemImage(i, "Interface/hud/items/" + visualisationName + ".png");
