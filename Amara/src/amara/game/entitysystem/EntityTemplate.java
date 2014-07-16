@@ -395,7 +395,7 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TargetTargetComponent());
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-            spawnInformation.setComponent(new SpawnTemplateComponent("fireball"));
+            spawnInformation.setComponent(new SpawnTemplateComponent("sear_projectile"));
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(10));
             effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
@@ -414,7 +414,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
             entityWrapper.setComponent(new CooldownComponent(1));
         }
-        else if(templateName.equals("fireball")){
+        else if(templateName.equals("sear_projectile")){
             entityWrapper.setComponent(new ModelComponent("Models/fireball/skin.xml"));
             entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_UNITS));
