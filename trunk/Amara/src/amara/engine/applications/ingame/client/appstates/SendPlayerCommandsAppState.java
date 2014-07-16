@@ -74,7 +74,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                         break;
 
                     case KeyInput.KEY_R:
-                        castSpell(new SpellIndex(SpellIndex.SpellSet.SPELLS, 4));
+                        castSpell(new SpellIndex(SpellIndex.SpellSet.SPELLS, 3));
                         break;
 
                     case KeyInput.KEY_1:

@@ -1504,7 +1504,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(3.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
-            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId()}));
+            EntityWrapper youmuusGhostblade = createFromTemplate(entityWorld, "youmuus_ghostblade");
+            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), youmuusGhostblade.getId()}));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
@@ -1694,7 +1695,6 @@ public class EntityTemplate{
             entityWrapper.setComponent(new ItemActiveComponent(itemActive.getId()));
         }
         else if(templateName.equals("zhonyas_hourglass_active")){
-            entityWrapper.setComponent(new NameComponent("Zhonyas"));
             //Target effect
             float duration = 2.5f;
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
@@ -1744,6 +1744,47 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
             entityWrapper.setComponent(new CooldownComponent(5));
+        }
+        else if(templateName.equals("youmuus_ghostblade")){
+            entityWrapper.setComponent(new ItemVisualisationComponent("youmuus_ghostblade"));
+            entityWrapper.setComponent(new BonusFlatAttackDamageComponent(30));
+            EntityWrapper itemActive = createFromTemplate(entityWorld, "youmuus_ghostblade_active");
+            entityWrapper.setComponent(new ItemActiveComponent(itemActive.getId()));
+        }
+        else if(templateName.equals("youmuus_ghostblade_active")){
+            //Add buff
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper buffEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            buffEffect.setComponent(new BonusPercentageAttackSpeedComponent(1));
+            buffEffect.setComponent(new BonusPercentageWalkSpeedComponent(0.35f));
+            buff.setComponent(new ContinuousEffectComponent(buffEffect.getId()));
+            effect1.setComponent(new AddBuffComponent(buff.getId(), 6));
+            EntityWrapper audioStart = entityWorld.getWrapped(entityWorld.createEntity());
+            audioStart.setComponent(new AudioComponent("Sounds/sounds/spells/youmuus_ghostblade_cast.ogg"));
+            effect1.setComponent(new PlayAudioComponent(audioStart.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new CasterTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+            entityWrapper.setComponent(new CooldownComponent(15));
+        }
+        else if(templateName.equals("tiamat")){
+            entityWrapper.setComponent(new ItemVisualisationComponent("tiamat"));
+            entityWrapper.setComponent(new BonusFlatAttackDamageComponent(40));
+            entityWrapper.setComponent(new BonusFlatHealthRegenerationComponent(15));
         }
     }
 }
