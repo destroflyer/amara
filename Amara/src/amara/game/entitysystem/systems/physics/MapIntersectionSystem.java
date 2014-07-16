@@ -45,7 +45,7 @@ public final class MapIntersectionSystem implements EntitySystem
             Vector2f pos = entity.getComponent(PositionComponent.class).getPosition();
             Point2D position = new Point2D(pos.x, pos.y);
                 double radius = entity.getComponent(HitboxComponent.class).getShape().getBoundRadius();
-            if(!map.outOfMapBounds(position, radius))
+            if(map.outOfMapBounds(position, radius))
             {
                 entity.clearComponents();
             }
