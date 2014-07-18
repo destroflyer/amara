@@ -101,6 +101,7 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CastCancelableComponent());
             entityWrapper.setComponent(new StopBeforeCastingComponent());
             entityWrapper.setComponent(new RangeComponent(15));
@@ -149,6 +150,7 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CastCancelableComponent());
             entityWrapper.setComponent(new StopBeforeCastingComponent());
             entityWrapper.setComponent(new RangeComponent(6));
@@ -245,6 +247,7 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new RangeComponent(14));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
@@ -298,6 +301,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new TeleportCasterToTargetPositionComponent());
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
+            entityWrapper.setComponent(new CastCancelActionComponent());
         }
         else if(templateName.equals("ignite")){
             entityWrapper.setComponent(new NameComponent("Ignite"));
@@ -412,6 +416,7 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CooldownComponent(1));
         }
         else if(templateName.equals("sear_projectile")){
@@ -476,6 +481,7 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new RangeComponent(15));
             entityWrapper.setComponent(new CooldownComponent(2));
         }
@@ -615,6 +621,7 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CastDurationComponent(1.5f));
             entityWrapper.setComponent(new StopBeforeCastingComponent());
             EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
@@ -717,6 +724,7 @@ public class EntityTemplate{
             effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CooldownComponent(3));
         }
         else if(templateName.equals("sonic_wave_projectile")){
@@ -785,6 +793,7 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CooldownComponent(3));
         }
         else if(templateName.equals("wither")){
@@ -969,6 +978,7 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new RangeComponent(20));
             entityWrapper.setComponent(new CooldownComponent(3));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
@@ -1050,6 +1060,7 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new RangeComponent(9));
             entityWrapper.setComponent(new CooldownComponent(4));
         }
@@ -1134,6 +1145,7 @@ public class EntityTemplate{
             spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CooldownComponent(1.5f));
         }
         else if(templateName.equals("bear_stance")){
@@ -1247,6 +1259,7 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CastDurationComponent(0.3f));
             entityWrapper.setComponent(new StopBeforeCastingComponent());
             EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
@@ -1397,6 +1410,7 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new RangeComponent(12));
             entityWrapper.setComponent(new CooldownComponent(5));
         }
@@ -1575,6 +1589,7 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggerDelayComponent(1.1f));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CastDurationComponent(2));
             entityWrapper.setComponent(new StopBeforeCastingComponent());
             EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
