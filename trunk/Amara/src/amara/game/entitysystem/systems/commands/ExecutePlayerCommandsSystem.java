@@ -152,7 +152,11 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     }
                 }
                 if(castInstant){
-                    if(UnitUtil.cancelAction(entityWorld, casterEntity)){
+                    boolean isAllowed = true;
+                    if(entityWorld.hasComponent(castSpellComponent.getSpellEntity(), CastCancelActionComponent.class)){
+                        isAllowed = UnitUtil.cancelAction(entityWorld, casterEntity);
+                    }
+                    if(isAllowed){
                         for(Object componentToAdd : componentsToAdd){
                             entityWorld.setComponent(casterEntity, componentToAdd);
                         }

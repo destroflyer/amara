@@ -309,6 +309,7 @@ public class MessagesSerializer{
                         ApplyCastedSpellComponent.class,
                         CastAnimationComponent.class,
                         CastCancelableComponent.class,
+                        CastCancelActionComponent.class,
                         CastDurationComponent.class,
                         CastTypeComponent.class,
                         CooldownComponent.class,
