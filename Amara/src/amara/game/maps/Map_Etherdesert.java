@@ -64,7 +64,8 @@ public class Map_Etherdesert extends Map{
             spawnTrigger.setComponent(new CustomTargetComponent(nexus.getId()));
             EntityWrapper spawnEffect = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-            spawnInformation.setComponent(new SpawnTemplateComponent((i < 3)?"etherdesert_creep_melee":"etherdesert_creep_range"));
+            String unitTemplate = ((i < 3)?"etherdesert_creep_melee":"etherdesert_creep_range");
+            spawnInformation.setComponent(new SpawnTemplateComponent(unitTemplate + "," + spawnTrigger.getId()));
             spawnInformation.setComponent(new SpawnAttackMoveComponent());
             spawnEffect.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
             spawnTrigger.setComponent(new TriggeredEffectComponent(spawnEffect.getId()));

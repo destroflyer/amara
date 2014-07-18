@@ -1624,8 +1624,9 @@ public class EntityTemplate{
             entityWrapper.setComponent(new HitboxActiveComponent());
             
             entityWrapper.setComponent(new IsAliveComponent());
-            entityWrapper.setComponent(new BaseMaximumHealthComponent(600));
-            entityWrapper.setComponent(new BaseAttackDamageComponent(30));
+            int spawnCounter = entityWorld.getComponent(parameters[0], RepeatingTriggerCounterComponent.class).getCounter();
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(600 + (spawnCounter * 100)));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(30 + (spawnCounter * 5)));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(2.5f));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
@@ -1653,8 +1654,9 @@ public class EntityTemplate{
             entityWrapper.setComponent(new HitboxActiveComponent());
             
             entityWrapper.setComponent(new IsAliveComponent());
-            entityWrapper.setComponent(new BaseMaximumHealthComponent(450));
-            entityWrapper.setComponent(new BaseAttackDamageComponent(20));
+            int spawnCounter = entityWorld.getComponent(parameters[0], RepeatingTriggerCounterComponent.class).getCounter();
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(450 + (spawnCounter * 100)));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(20 + (spawnCounter * 5)));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(2.5f));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());

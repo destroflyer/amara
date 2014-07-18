@@ -378,6 +378,7 @@ public class MessagesSerializer{
                         CastingFinishedTriggerComponent.class,
                         CollisionTriggerComponent.class,
                         RepeatingTriggerComponent.class,
+                        RepeatingTriggerCounterComponent.class,
                         TargetReachedTriggerComponent.class,
                         TimeSinceLastRepeatTriggerComponent.class,
                         //visuals
