@@ -1527,6 +1527,48 @@ public class EntityTemplate{
             EntityWrapper autoAttack = createFromTemplate(entityWorld, "melee_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
         }
+        else if(templateName.equals("oz")){
+            entityWrapper.setComponent(new ModelComponent("Models/oz/skin_default.xml"));
+            EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            idleAnimation.setComponent(new NameComponent("stand"));
+            idleAnimation.setComponent(new LoopDurationComponent(8));
+            entityWrapper.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
+            EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            walkAnimation.setComponent(new NameComponent("walk"));
+            entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+            entityWrapper.setComponent(new WalkStepDistanceComponent(7));
+            EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            autoAttackAnimation.setComponent(new NameComponent("attack1"));
+            entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+            EntityWrapper deathAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            deathAnimation.setComponent(new NameComponent("die"));
+            deathAnimation.setComponent(new LoopDurationComponent(4));
+            deathAnimation.setComponent(new FreezeAfterPlayingComponent());
+            entityWrapper.setComponent(new DeathAnimationComponent(deathAnimation.getId()));
+            entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
+            
+            entityWrapper.setComponent(new HitboxComponent(new Circle(2f)));
+            entityWrapper.setComponent(new IntersectionPushComponent());
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            
+            entityWrapper.setComponent(new IsAliveComponent());
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(1000));
+            entityWrapper.setComponent(new BaseHealthRegenerationComponent(10));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(200));
+            entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(3.5f));
+            EntityWrapper boots = createFromTemplate(entityWorld, "boots");
+            EntityWrapper youmuusGhostblade = createFromTemplate(entityWorld, "youmuus_ghostblade");
+            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), youmuusGhostblade.getId()}));
+            entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
+
+            EntityWrapper autoAttack = createFromTemplate(entityWorld, "melee_autoattack");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+        }
         else if(templateName.equals("eragon")){
             entityWrapper.setComponent(new ModelComponent("Models/little_dragon/skin_default.xml"));
             EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
