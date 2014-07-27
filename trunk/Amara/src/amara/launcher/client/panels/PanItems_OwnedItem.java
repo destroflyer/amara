@@ -5,6 +5,7 @@
 package amara.launcher.client.panels;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import amara.Util;
 import amara.engine.applications.masterserver.server.protocol.OwnedItem;
 
@@ -14,14 +15,22 @@ import amara.engine.applications.masterserver.server.protocol.OwnedItem;
  */
 public class PanItems_OwnedItem extends javax.swing.JPanel{
 
-    public PanItems_OwnedItem(OwnedItem ownedItem){
+    public PanItems_OwnedItem(){
         initComponents();
+    }
+    private final Color backgroundColor_Default = new Color(30, 30, 30);
+    private final Color backgroundColor_NotAvailable = new Color(68, 30, 30);
+    private final Color backgroundColor_Highlight = new Color(50, 50, 50);
+    private boolean isAvailable;
+    
+    public void setOwnedItem(OwnedItem ownedItem){
         lblIcon.setIcon(Util.getResourceImageIcon("/Interface/hud/items/" + ownedItem.getItem().getName() + ".png", 38, 38));
         lblTitle.setText(ownedItem.getItem().getTitle());
         lblAmount.setText(ownedItem.getAmount() + "x");
+        isAvailable = (ownedItem.getAmount() > 0);
+        setCursor(new Cursor(isAvailable?Cursor.HAND_CURSOR:Cursor.DEFAULT_CURSOR));
+        setBackground(isAvailable?backgroundColor_Default:backgroundColor_NotAvailable);
     }
-    private Color backgroundColor_Default = new Color(30, 30, 30);
-    private Color backgroundColor_Highlight = new Color(50, 50, 50);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,7 +46,6 @@ public class PanItems_OwnedItem extends javax.swing.JPanel{
         lblAmount = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(30, 30, 30));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 formMouseEntered(evt);
@@ -83,11 +91,15 @@ public class PanItems_OwnedItem extends javax.swing.JPanel{
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-        setBackground(backgroundColor_Highlight);
+        if(isAvailable){
+            setBackground(backgroundColor_Highlight);
+        }
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
-        setBackground(backgroundColor_Default);
+        if(isAvailable){
+            setBackground(backgroundColor_Default);
+        }
     }//GEN-LAST:event_formMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

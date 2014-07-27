@@ -39,7 +39,7 @@ public class PanItems extends javax.swing.JPanel{
 
     public PanItems(){
         initComponents();
-        loadItems();
+        loadOwnedItems();
         cbxCharacters.setModel(new ComboboxModel_OwnedCharacters(MasterserverClientUtil.getOwnedCharacters()));
         loadInventory();
         JComponent btnSave = FrameUtil.addImageBackgroundButton(panContainer_btnSave, new DefaultButtonBuilder("default_150x50", "Save"));
@@ -54,26 +54,58 @@ public class PanItems extends javax.swing.JPanel{
         updateSelectedCharacterInventory();
     }
     private final int dragItemSize = 55;
+    private PanItems_OwnedItem[] panOwnedItems;
     private HashMap<Item, ImageIcon> itemIcons;
     private ImageIcon itemIcon_None = Util.getResourceImageIcon("/Interface/hud/items/none.png", dragItemSize, dragItemSize);
+    private OwnedItem[] availableItems;
     private JLabel lblInvetoryItems[] = new JLabel[6];
     private int[] inventory = new int[6];
     private JLabel lblDragItem;
     
-    private void loadItems(){
+    private void loadOwnedItems(){
         OwnedItem[] ownedItems = MasterserverClientUtil.getOwnedItems();
+        availableItems = new OwnedItem[ownedItems.length];
+        for(int i=0;i<availableItems.length;i++){
+            int amount = ownedItems[i].getAmount();
+            for(int r=0;r<inventory.length;r++){
+                if(inventory[r] == ownedItems[i].getItem().getID()){
+                    amount--;
+                }
+            }
+            availableItems[i] = new OwnedItem(ownedItems[i].getItem(), amount);
+        }
+        panOwnedItems = new PanItems_OwnedItem[ownedItems.length];
         itemIcons = new HashMap<Item, ImageIcon>(ownedItems.length);
         int padding = 2;
         int y = padding;
-        for(final OwnedItem ownedItem : ownedItems){
-            PanItems_OwnedItem panItem = new PanItems_OwnedItem(ownedItem);
+        for(int i=0;i<ownedItems.length;i++){
+            PanItems_OwnedItem panItem = new PanItems_OwnedItem();
             panItem.setLocation(padding, y);
             panItem.setSize(320, 60);
             panelItems.add(panItem);
-            enableDragAndDrop(panItem, ownedItem.getItem());
+            panOwnedItems[i] = panItem;
             y += (60 + padding);
         }
         panelItems.setPreferredSize(new Dimension(320 + (2 * padding) + 18, y));
+    }
+    
+    private void updateAvailableItems(){
+        OwnedItem[] ownedItems = MasterserverClientUtil.getOwnedItems();
+        availableItems = new OwnedItem[ownedItems.length];
+        for(int i=0;i<availableItems.length;i++){
+            int amount = ownedItems[i].getAmount();
+            for(int r=0;r<inventory.length;r++){
+                if(inventory[r] == ownedItems[i].getItem().getID()){
+                    amount--;
+                }
+            }
+            availableItems[i] = new OwnedItem(ownedItems[i].getItem(), amount);
+            panOwnedItems[i].setOwnedItem(availableItems[i]);
+            disableDragAndDrop(panOwnedItems[i]);
+            if(amount > 0){
+                enableDragAndDrop(panOwnedItems[i], ownedItems[i].getItem());
+            }
+        }
     }
     
     private void loadInventory(){
@@ -130,6 +162,7 @@ public class PanItems extends javax.swing.JPanel{
             inventory[i] = itemID;
             lblInvetoryItems[i].setIcon(itemIcon);
         }
+        updateAvailableItems();
     }
     
     private ImageIcon getItemIcon(Item item){
@@ -300,6 +333,7 @@ public class PanItems extends javax.swing.JPanel{
                 lblInvetoryItems[itemIndex].setIcon(getItemIcon(item));
                 enableDragAndDrop(lblInvetoryItems[itemIndex], item);
             }
+            updateAvailableItems();
             MainFrame.getInstance().remove(lblDragItem);
             MainFrame.getInstance().repaint();
         }
