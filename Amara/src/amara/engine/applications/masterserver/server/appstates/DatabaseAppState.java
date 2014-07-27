@@ -118,4 +118,16 @@ public class DatabaseAppState extends ServerBaseAppState{
     public static String escape(String text){
         return text.replaceAll("'", "\\'");
     }
+    
+    public static String prepare(int[] array){
+        String text = "ARRAY[";
+        for(int i=0;i<array.length;i++){
+            if(i != 0){
+                text += ",";
+            }
+            text += array[i];
+        }
+        text += "]";
+        return text;
+    }
 }

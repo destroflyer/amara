@@ -34,8 +34,7 @@ public class DisplayItemsCooldownsSystem extends GUIDisplaySystem{
     private void checkChangedItems(EntityWorld entityWorld, InventoryComponent inventoryComponent){
         if(inventoryComponent != null){
             int[] items = inventoryComponent.getItemEntities();
-            for(int i=0;i<4;i++){
-                boolean hideCooldown = true;
+            for(int i=0;i<6;i++){
                 if(i < items.length){
                     ItemActiveComponent itemActiveComponent = entityWorld.getComponent(items[i], ItemActiveComponent.class);
                     if(itemActiveComponent != null){
@@ -49,14 +48,14 @@ public class DisplayItemsCooldownsSystem extends GUIDisplaySystem{
                     }
                 }
                 else{
-                    screenController_HUD.hideSpellCooldown(i);
+                    screenController_HUD.hideItemCooldown(i);
                 }
             }
         }
     }
     
     private void checkCurrentItemsCooldowns(EntityWorld entityWorld, ComponentMapObserver observer, int[] items){
-        for(int i=0;i<4;i++){
+        for(int i=0;i<6;i++){
             if(i < items.length){
                 ItemActiveComponent itemActiveComponent = entityWorld.getComponent(items[i], ItemActiveComponent.class);
                 if(itemActiveComponent != null){

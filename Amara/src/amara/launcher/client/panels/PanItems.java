@@ -24,9 +24,11 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import amara.Util;
 import amara.engine.applications.masterserver.server.protocol.*;
+import amara.engine.network.messages.protocol.Message_EditCharacterInventory;
 import amara.launcher.FrameUtil;
 import amara.launcher.client.MainFrame;
 import amara.launcher.client.MasterserverClientUtil;
+import amara.launcher.client.buttons.DefaultButtonBuilder;
 import amara.launcher.client.comboboxes.ComboboxModel_OwnedCharacters;
 
 /**
@@ -40,12 +42,22 @@ public class PanItems extends javax.swing.JPanel{
         loadItems();
         cbxCharacters.setModel(new ComboboxModel_OwnedCharacters(MasterserverClientUtil.getOwnedCharacters()));
         loadInventory();
+        JComponent btnSave = FrameUtil.addImageBackgroundButton(panContainer_btnSave, new DefaultButtonBuilder("default_150x50", "Save"));
+        btnSave.addMouseListener(new MouseAdapter(){
+
+            @Override
+            public void mouseClicked(MouseEvent evt){
+                super.mouseClicked(evt);
+                saveInventory();
+            }
+        });
+        updateSelectedCharacterInventory();
     }
     private final int dragItemSize = 55;
     private HashMap<Item, ImageIcon> itemIcons;
     private ImageIcon itemIcon_None = Util.getResourceImageIcon("/Interface/hud/items/none.png", dragItemSize, dragItemSize);
     private JLabel lblInvetoryItems[] = new JLabel[6];
-    private int[] inventoryItemIDs = new int[6];
+    private int[] inventory = new int[6];
     private JLabel lblDragItem;
     
     private void loadItems(){
@@ -103,12 +115,40 @@ public class PanItems extends javax.swing.JPanel{
         }
     }
     
+    private void updateSelectedCharacterInventory(){
+        OwnedGameCharacter ownedCharacter = getSelectedOwnedCharacter();
+        for(int i=0;i<inventory.length;i++){
+            disableDragAndDrop(lblInvetoryItems[i]);
+            int itemID = 0;
+            ImageIcon itemIcon = itemIcon_None;
+            if((i < ownedCharacter.getInventory().length) && (ownedCharacter.getInventory()[i] != 0)){
+                Item item = MasterserverClientUtil.getItem(ownedCharacter.getInventory()[i]);
+                itemID = item.getID();
+                itemIcon = getItemIcon(item);
+                enableDragAndDrop(lblInvetoryItems[i], item);
+            }
+            inventory[i] = itemID;
+            lblInvetoryItems[i].setIcon(itemIcon);
+        }
+    }
+    
     private ImageIcon getItemIcon(Item item){
         ImageIcon icon = itemIcons.get(item);
         if(icon == null){
             icon = Util.getResourceImageIcon("/Interface/hud/items/" + item.getName() + ".png", dragItemSize, dragItemSize);
         }
         return icon;
+    }
+    
+    private void saveInventory(){
+        OwnedGameCharacter ownedCharacter = getSelectedOwnedCharacter();
+        int[] newInventory = inventory.clone();
+        MasterserverClientUtil.getNetworkClient().sendMessage(new Message_EditCharacterInventory(ownedCharacter.getCharacter().getID(), newInventory));
+        ownedCharacter.setInventory(newInventory);
+    }
+    
+    private OwnedGameCharacter getSelectedOwnedCharacter(){
+        return MasterserverClientUtil.getOwnedCharacters()[cbxCharacters.getSelectedIndex()];
     }
 
     /** This method is called from within the constructor to
@@ -125,6 +165,7 @@ public class PanItems extends javax.swing.JPanel{
         panelItems = new javax.swing.JPanel();
         cbxCharacters = new javax.swing.JComboBox();
         panInventory = new javax.swing.JPanel();
+        panContainer_btnSave = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(30, 30, 30));
 
@@ -146,6 +187,12 @@ public class PanItems extends javax.swing.JPanel{
 
         scrollpanelItems.setViewportView(panelItems);
 
+        cbxCharacters.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxCharactersItemStateChanged(evt);
+            }
+        });
+
         panInventory.setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout panInventoryLayout = new javax.swing.GroupLayout(panInventory);
@@ -159,6 +206,17 @@ public class PanItems extends javax.swing.JPanel{
             .addGap(0, 113, Short.MAX_VALUE)
         );
 
+        javax.swing.GroupLayout panContainer_btnSaveLayout = new javax.swing.GroupLayout(panContainer_btnSave);
+        panContainer_btnSave.setLayout(panContainer_btnSaveLayout);
+        panContainer_btnSaveLayout.setHorizontalGroup(
+            panContainer_btnSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        panContainer_btnSaveLayout.setVerticalGroup(
+            panContainer_btnSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,11 +224,17 @@ public class PanItems extends javax.swing.JPanel{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(scrollpanelItems, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxCharacters, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(panInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxCharacters, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                        .addComponent(panContainer_btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,15 +246,19 @@ public class PanItems extends javax.swing.JPanel{
                         .addComponent(cbxCharacters, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panInventory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panContainer_btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbxCharactersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCharactersItemStateChanged
+        updateSelectedCharacterInventory();
+    }//GEN-LAST:event_cbxCharactersItemStateChanged
+
     private class ItemDragAdapter extends MouseAdapter{
 
         public ItemDragAdapter(JComponent sourceComponent, Item item){
-            this.sourceComponent = sourceComponent;
             this.item = item;
             for(int i=0;i<lblInvetoryItems.length;i++){
                 if(sourceComponent == lblInvetoryItems[i]){
@@ -199,7 +267,6 @@ public class PanItems extends javax.swing.JPanel{
                 }
             }
         }
-        private JComponent sourceComponent;
         private Item item;
         private int inventorySourceIndex = -1;
 
@@ -214,7 +281,7 @@ public class PanItems extends javax.swing.JPanel{
         public void mouseReleased(MouseEvent evt){
             super.mouseReleased(evt);
             if(inventorySourceIndex != -1){
-                inventoryItemIDs[inventorySourceIndex] = 0;
+                inventory[inventorySourceIndex] = 0;
                 lblInvetoryItems[inventorySourceIndex].setIcon(itemIcon_None);
                 disableDragAndDrop(lblInvetoryItems[inventorySourceIndex]);
             }
@@ -229,7 +296,7 @@ public class PanItems extends javax.swing.JPanel{
                 if(yPortion >= 0.5){
                     itemIndex += 3;
                 }
-                inventoryItemIDs[itemIndex] = item.getID();
+                inventory[itemIndex] = item.getID();
                 lblInvetoryItems[itemIndex].setIcon(getItemIcon(item));
                 enableDragAndDrop(lblInvetoryItems[itemIndex], item);
             }
@@ -258,6 +325,7 @@ public class PanItems extends javax.swing.JPanel{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgrHostOrConnect;
     private javax.swing.JComboBox cbxCharacters;
+    private javax.swing.JPanel panContainer_btnSave;
     private javax.swing.JPanel panInventory;
     private javax.swing.JPanel panelItems;
     private javax.swing.JScrollPane scrollpanelItems;

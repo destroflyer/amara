@@ -77,6 +77,7 @@ public class MessagesSerializer{
                 UpdateFile.class,
             
             Message_EditActiveCharacterSkin.class,
+            Message_EditCharacterInventory.class,
             Message_EditUserMeta.class,
             Message_GameContents.class,
                 GameCharacter.class,

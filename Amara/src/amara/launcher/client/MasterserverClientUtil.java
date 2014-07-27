@@ -49,6 +49,10 @@ public class MasterserverClientUtil{
         return getState(CharactersAppState.class).getOwnedCharacters();
     }
     
+    public static Item getItem(int itemID){
+        return getState(ItemsAppState.class).getItem(itemID);
+    }
+    
     public static Item[] getItems(){
         return getState(ItemsAppState.class).getItems();
     }

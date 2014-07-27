@@ -37,6 +37,7 @@ public class PlayersAppState extends ServerBaseAppState{
         networkServer.addMessageBackend(new EditUserMetaBackend(databaseAppState, connectedPlayers));
         networkServer.addMessageBackend(new SendGameContentsBackend(databaseAppState, connectedPlayers, playersContentsAppState));
         networkServer.addMessageBackend(new EditActiveCharacterSkinsBackend(databaseAppState, connectedPlayers));
+        networkServer.addMessageBackend(new EditCharacterInventoriesBackend(databaseAppState, connectedPlayers));
     }
     
     private void initializePasswordEncoder(){

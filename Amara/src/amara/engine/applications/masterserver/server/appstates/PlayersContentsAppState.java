@@ -7,6 +7,7 @@ package amara.engine.applications.masterserver.server.appstates;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import amara.Util;
 import amara.engine.applications.masterserver.server.protocol.*;
 
 /**
@@ -18,7 +19,7 @@ public class PlayersContentsAppState extends ServerBaseAppState{
     public OwnedGameCharacter[] getOwnedCharacters(int playerID){
         DatabaseAppState databaseAppState = getAppState(DatabaseAppState.class);
         try{
-            ResultSet charactersResultSet = databaseAppState.getResultSet("SELECT characterid, skinid FROM users_characters WHERE userid = " + playerID);
+            ResultSet charactersResultSet = databaseAppState.getResultSet("SELECT characterid, skinid, inventory FROM users_characters WHERE userid = " + playerID);
             LinkedList<OwnedGameCharacter> ownedCharacters = new LinkedList<OwnedGameCharacter>();
             while(charactersResultSet.next()){
                 int characterID = charactersResultSet.getInt(1);
@@ -38,9 +39,15 @@ public class PlayersContentsAppState extends ServerBaseAppState{
                         skins.add(new GameCharacterSkin(skinID, skinTitle));
                     }
                 }
+                LinkedList<Integer> inventory = new LinkedList<Integer>();
+                ResultSet inventorySet = charactersResultSet.getArray(3).getResultSet();
+                while(inventorySet.next()){
+                    inventory.add(inventorySet.getInt(2));
+                }
+                inventorySet.close();
                 skinsResultSet.close();
                 GameCharacter character = new GameCharacter(characterID, characterName, characterTitle, skins.toArray(new GameCharacterSkin[0]));
-                ownedCharacters.add(new OwnedGameCharacter(character, activeSkinID));
+                ownedCharacters.add(new OwnedGameCharacter(character, activeSkinID, Util.convertToArray(inventory)));
             }
             charactersResultSet.close();
             return ownedCharacters.toArray(new OwnedGameCharacter[0]);
