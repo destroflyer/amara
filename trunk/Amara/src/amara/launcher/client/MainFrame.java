@@ -76,11 +76,10 @@ public class MainFrame extends javax.swing.JFrame{
                         break;
                     
                     case SUCCESSFUL:
-                        networkClient.sendMessage(new Message_GetCharacters());
-                        networkClient.sendMessage(new Message_GetOwnedCharacters());
-                        CharactersAppState charactersAppState = masterClient.getStateManager().getState(CharactersAppState.class);
+                        networkClient.sendMessage(new Message_GetGameContents());
+                        ItemsAppState itemsAppState = masterClient.getStateManager().getState(ItemsAppState.class);
                         while(true){
-                            if(charactersAppState.getOwnedCharacters() != null){
+                            if(itemsAppState.getOwnedItems() != null){
                                 break;
                             }
                             try{

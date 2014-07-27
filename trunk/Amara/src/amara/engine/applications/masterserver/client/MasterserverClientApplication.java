@@ -18,6 +18,7 @@ public class MasterserverClientApplication extends HeadlessApplication{
         stateManager.attach(new PlayerProfilesAppState());
         stateManager.attach(new PlayerStatusesAppState());
         stateManager.attach(new CharactersAppState());
+        stateManager.attach(new ItemsAppState());
         stateManager.attach(new LoginAppState());
     }
     private static MasterserverClientApplication instance;

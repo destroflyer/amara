@@ -22,6 +22,7 @@ import javax.swing.UIManager;
 import amara.*;
 import amara.engine.network.MessagesSerializer;
 import amara.launcher.client.buttons.*;
+import java.awt.Point;
 
 /**
  *
@@ -81,6 +82,18 @@ public class FrameUtil{
             }
         }
         return null;
+    }
+    
+    public static Point getLocationIn(JComponent component, Container parent){
+        int x = 0;
+        int y = 0;
+        Container container = component;
+        do{
+            x += container.getX();
+            y += container.getY();
+            container = container.getParent();
+        }while(container != parent);
+        return new Point(x, y);
     }
     
     public enum MessageType{

@@ -12,9 +12,9 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class Message_GetOwnedCharacters extends AbstractMessage{
+public class Message_GetGameContents extends AbstractMessage{
     
-    public Message_GetOwnedCharacters(){
+    public Message_GetGameContents(){
         
     }
 }
