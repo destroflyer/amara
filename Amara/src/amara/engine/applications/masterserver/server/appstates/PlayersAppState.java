@@ -29,13 +29,13 @@ public class PlayersAppState extends ServerBaseAppState{
         initializePasswordEncoder();
         NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
         DatabaseAppState databaseAppState = getAppState(DatabaseAppState.class);
+        PlayersContentsAppState playersContentsAppState = getAppState(PlayersContentsAppState.class);
         networkServer.addMessageBackend(new ReceiveLoginsBackend(databaseAppState, this));
         networkServer.addMessageBackend(new ReceiveLogoutsBackend(connectedPlayers));
         networkServer.addMessageBackend(new SendPlayerProfilesDataBackend(databaseAppState));
         networkServer.addMessageBackend(new SendPlayerStatusesBackend(this));
         networkServer.addMessageBackend(new EditUserMetaBackend(databaseAppState, connectedPlayers));
-        networkServer.addMessageBackend(new SendCharactersBackend(databaseAppState));
-        networkServer.addMessageBackend(new SendOwnedCharactersBackend(databaseAppState, connectedPlayers));
+        networkServer.addMessageBackend(new SendGameContentsBackend(databaseAppState, connectedPlayers, playersContentsAppState));
         networkServer.addMessageBackend(new EditActiveCharacterSkinsBackend(databaseAppState, connectedPlayers));
     }
     

@@ -49,6 +49,14 @@ public class MasterserverClientUtil{
         return getState(CharactersAppState.class).getOwnedCharacters();
     }
     
+    public static Item[] getItems(){
+        return getState(ItemsAppState.class).getItems();
+    }
+    
+    public static OwnedItem[] getOwnedItems(){
+        return getState(ItemsAppState.class).getOwnedItems();
+    }
+    
     private static <T extends HeadlessAppState> T getState(Class<T> stateClass){
         return MasterserverClientApplication.getInstance().getStateManager().getState(stateClass);
     }
