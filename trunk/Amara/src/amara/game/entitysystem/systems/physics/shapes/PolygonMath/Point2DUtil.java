@@ -159,12 +159,14 @@ public class Point2DUtil {
     public static boolean onLineSegment(Point2D p, Point2D a, Point2D b)
     {
         assert p != null && a != null && b != null;
-        double cross = (p.getY() - a.getY()) * (b.getX() - a.getX()) - (p.getX() - a.getX()) * (b.getY() - a.getY());
+        p = p.sub(a);
+        b = b.sub(a);
+        double cross = b.cross(p);
         if (!Util.withinEpsilon(cross)) return false;
 
-        double dot = (p.getX() - a.getX()) * (b.getX() - a.getX()) + (p.getY() - a.getY()) * (b.getY() - a.getY());
+        double dot = b.dot(p);
         if (dot < 0) return false;
-        if (dot > a.squaredDistance(b)) return false;
+        if (dot > b.squaredLength()) return false;
         return true;
     }
     
