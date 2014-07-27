@@ -4,6 +4,9 @@
  */
 package amara.engine.applications.ingame.server.appstates;
 
+import java.sql.ResultSet;
+import java.util.LinkedList;
+import amara.Util;
 import amara.engine.applications.*;
 import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.engine.applications.ingame.server.network.backends.*;
@@ -13,6 +16,7 @@ import amara.engine.appstates.*;
 import amara.engine.network.NetworkServer;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.general.*;
+import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.aggro.*;
@@ -82,12 +86,31 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
             String characterName = databaseAppState.getString("SELECT name FROM characters WHERE id = " + lobbyPlayerData.getCharacterID());
             EntityWrapper unit = EntityTemplate.createFromTemplate(entityWorld, characterName);
             unit.setComponent(new TitleComponent(login));
-            int skinID = databaseAppState.getInteger("SELECT skinid FROM users_characters WHERE (userid = " + player.getLobbyPlayer().getID() + ") AND (characterid = " + lobbyPlayerData.getCharacterID() + ")");
-            String skinName = "default";
-            if(skinID != 0){
-                skinName = databaseAppState.getString("SELECT name FROM characters_skins WHERE id = " + skinID);
+            try{
+                ResultSet ownedCharacterResultSet = databaseAppState.getResultSet("SELECT skinid, inventory FROM users_characters WHERE (userid = " + player.getLobbyPlayer().getID() + ") AND (characterid = " + lobbyPlayerData.getCharacterID() + ")");
+                ownedCharacterResultSet.next();
+                String skinName = "default";
+                int skinID = ownedCharacterResultSet.getInt(1);
+                if(skinID != 0){
+                    skinName = databaseAppState.getString("SELECT name FROM characters_skins WHERE id = " + skinID);
+                }
+                unit.setComponent(new ModelComponent("Models/" + characterName + "/skin_" + skinName + ".xml"));
+                ResultSet inventoryResultSet = ownedCharacterResultSet.getArray(2).getResultSet();
+                LinkedList<Integer> inventory = new LinkedList<Integer>();
+                while(inventoryResultSet.next()){
+                    int itemID = inventoryResultSet.getInt(2);
+                    if(itemID != 0){
+                        String itemName = databaseAppState.getString("SELECT name FROM items WHERE id = " + itemID);
+                        EntityWrapper item = EntityTemplate.createFromTemplate(entityWorld, itemName);
+                        inventory.add(item.getId());
+                    }
+                }
+                inventoryResultSet.close();
+                ownedCharacterResultSet.close();
+                unit.setComponent(new InventoryComponent(Util.convertToArray(inventory)));
+            }catch(Exception ex){
+                ex.printStackTrace();
             }
-            unit.setComponent(new ModelComponent("Models/" + characterName + "/skin_" + skinName + ".xml"));
             playerEntity.setComponent(new SelectedUnitComponent(unit.getId()));
             map.spawn(entityWorld, playerEntity.getId());
             player.setEntityID(playerEntity.getId());

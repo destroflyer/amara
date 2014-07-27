@@ -27,8 +27,8 @@ public class PanSettings extends javax.swing.JPanel{
 
     public PanSettings(){
         initComponents();
-        JComponent btnPlay = FrameUtil.addImageBackgroundButton(panContainer_btnSave, new DefaultButtonBuilder("default_150x50", "Save"));
-        btnPlay.addMouseListener(new MouseAdapter(){
+        JComponent btnSave = FrameUtil.addImageBackgroundButton(panContainer_btnSave, new DefaultButtonBuilder("default_150x50", "Save"));
+        btnSave.addMouseListener(new MouseAdapter(){
 
             @Override
             public void mouseClicked(MouseEvent evt){
