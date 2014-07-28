@@ -129,7 +129,7 @@ public class Map_Destroforest extends Map{
         entityWorld.setComponent(entity, new MapObjectiveComponent(gameObjective.getId()));
         EntityWrapper playerDeathRules = entityWorld.getWrapped(entityWorld.createEntity());
         playerDeathRules.setComponent(new RespawnPlayersComponent());
-        playerDeathRules.setComponent(new RespawnTimerComponent(3, 0));
+        playerDeathRules.setComponent(new RespawnTimerComponent(10, 0));
         entityWorld.setComponent(entity, new PlayerDeathRulesComponent(playerDeathRules.getId()));
     }
 

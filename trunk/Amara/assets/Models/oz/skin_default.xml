@@ -1,7 +1,7 @@
 <skin name="oz">
     <model scale="3">
         <material>
-            <texture index="0">skin_default.png</texture>
+            <texture index="0">ozmozroz.png</texture>
         </material>
     </model>
 </skin>
