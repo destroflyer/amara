@@ -201,7 +201,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new MaximumHealthSystem());
         addEntitySystem(new RemoveDeadUnitsSystem());
         addEntitySystem(new RemoveUnusedTriggersSystem());
-        addEntitySystem(new IntersectionPushSystem(intersectionObserver));
         addEntitySystem(new RemoveCancelledMovementsEffectTriggersSystem());
         addEntitySystem(new PlayMovementAnimationsSystem());
         addEntitySystem(new UpdateWalkMovementsSystem());
@@ -217,6 +216,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CheckCampMaximumAggroDistanceSystem());
         addEntitySystem(new CampResetSystem());
         addEntitySystem(new SetIdleAnimationsSystem());
+        addEntitySystem(new IntersectionPushSystem(intersectionObserver));
         addEntitySystem(new MapIntersectionSystem(polyMapManager));
         addEntitySystem(new CheckMapObjectiveSystem(map, getAppState(GameRunningAppState.class)));
         addEntitySystem(new PlayerDeathSystem(map));
