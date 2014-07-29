@@ -40,8 +40,8 @@ public class PanAvatarSelection extends javax.swing.JPanel{
         "ether_wolf",
         "ether_anna",
         "ether_demon1",
-        "ether_amara",
-        "ether_yuki"
+        "ether_yuki",
+        "ether_amara"
     };
     private PanProfile panProfile;
     
