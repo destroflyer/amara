@@ -53,6 +53,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                             Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
                             if(groundLocation != null){
                                 sendCommand(new MoveCommand(groundLocation));
+                                getAppState(IngameFeedbackAppState.class).displayMovementTarget(groundLocation);
                             }
                         }
                         break;

@@ -61,6 +61,7 @@ public class IngameClientApplication extends DisplayApplication{
             stateManager.attach(new WaterAppState());
             stateManager.attach(new PostFilterAppState());
             stateManager.attach(new IngameCameraAppState());
+            stateManager.attach(new IngameFeedbackAppState());
             stateManager.getState(IngameCameraAppState.class).setEnabled(false);
             //Debug Camera
             cam.setLocation(new Vector3f(22, 34, -10));
