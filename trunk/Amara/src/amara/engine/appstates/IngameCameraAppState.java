@@ -31,6 +31,7 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
     private Spatial limitSurfaceSpatial;
     private Vector2f leftTopCornerScreenLocation;
     private Vector2f rightBottomCornerScreenLocation;
+    private boolean isMovementEnabled = true;
     private boolean isZoomEnabled = true;
     private int currentZoomLevel;
     private int maximumZoomLevel = -1;
@@ -56,34 +57,36 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
     @Override
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
-        Vector3f movedDistance = new Vector3f();
-        if(moveDirections[0]){
-            movedDistance.addLocal(0, 0, 1);
-        }
-        if(moveDirections[1]){
-            movedDistance.addLocal(-1, 0, 0);
-        }
-        if(moveDirections[2]){
-            movedDistance.addLocal(0, 0, -1);
-        }
-        if(moveDirections[3]){
-            movedDistance.addLocal(1, 0, 0);
-        }
-        movedDistance.multLocal(movementSpeed * lastTimePerFrame);
-        Vector3f oldLocation = mainApplication.getCamera().getLocation().clone();
-        mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
-        if(limitMinimum != null){
-            Vector3f minimumCornerLocation = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, rightBottomCornerScreenLocation).getClosestCollision().getContactPoint();
-            Vector3f maximumCornerLocation = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, leftTopCornerScreenLocation).getClosestCollision().getContactPoint();
-            if(((movedDistance.getX() < 0) && (minimumCornerLocation.getX() < limitMinimum.getX()))
-            || ((movedDistance.getX() > 0) && (maximumCornerLocation.getX() > limitMaximum.getX()))){
-                movedDistance.setX(0);
+        if(isMovementEnabled){
+            Vector3f movedDistance = new Vector3f();
+            if(moveDirections[0]){
+                movedDistance.addLocal(0, 0, 1);
             }
-            if(((movedDistance.getZ() < 0) && (minimumCornerLocation.getZ() < limitMinimum.getY()))
-            || ((movedDistance.getZ() > 0) && (maximumCornerLocation.getZ() > limitMaximum.getY()))){
-                movedDistance.setZ(0);
+            if(moveDirections[1]){
+                movedDistance.addLocal(-1, 0, 0);
             }
+            if(moveDirections[2]){
+                movedDistance.addLocal(0, 0, -1);
+            }
+            if(moveDirections[3]){
+                movedDistance.addLocal(1, 0, 0);
+            }
+            movedDistance.multLocal(movementSpeed * lastTimePerFrame);
+            Vector3f oldLocation = mainApplication.getCamera().getLocation().clone();
             mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
+            if(limitMinimum != null){
+                Vector3f minimumCornerLocation = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, rightBottomCornerScreenLocation).getClosestCollision().getContactPoint();
+                Vector3f maximumCornerLocation = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, leftTopCornerScreenLocation).getClosestCollision().getContactPoint();
+                if(((movedDistance.getX() < 0) && (minimumCornerLocation.getX() < limitMinimum.getX()))
+                || ((movedDistance.getX() > 0) && (maximumCornerLocation.getX() > limitMaximum.getX()))){
+                    movedDistance.setX(0);
+                }
+                if(((movedDistance.getZ() < 0) && (minimumCornerLocation.getZ() < limitMinimum.getY()))
+                || ((movedDistance.getZ() > 0) && (maximumCornerLocation.getZ() > limitMaximum.getY()))){
+                    movedDistance.setZ(0);
+                }
+                mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
+            }
         }
     }
 
@@ -134,9 +137,28 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
             currentZoomLevel = newZoomLevel;
         }
     }
+    
+    public void lookAt(Vector2f mapLocation){
+        float mapHeight = getAppState(MapAppState.class).getMapHeightmap().getHeight(mapLocation);
+        mainApplication.getCamera().setLocation(new Vector3f(mapLocation.getX(), mapHeight, mapLocation.getY()));
+        Vector3f distance = mainApplication.getCamera().getDirection().mult(-40);
+        mainApplication.getCamera().setLocation(mainApplication.getCamera().getLocation().add(distance));
+    }
+
+    public void setMovementEnabled(boolean isMovementEnabled){
+        this.isMovementEnabled = isMovementEnabled;
+    }
+
+    public boolean isMovementEnabled(){
+        return isMovementEnabled;
+    }
 
     public void setZoomEnabled(boolean isZoomEnabled){
         this.isZoomEnabled = isZoomEnabled;
+    }
+
+    public boolean isZoomEnabled(){
+        return isZoomEnabled;
     }
 
     public void setMaximumZoomLevel(int maximumZoomLevel){
