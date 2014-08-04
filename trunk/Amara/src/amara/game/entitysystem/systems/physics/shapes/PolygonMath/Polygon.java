@@ -4,7 +4,9 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Polygon;
 import com.jme3.network.serializing.Serializable;
+import java.awt.*;
 import java.util.*;
 
 /**
@@ -26,9 +28,9 @@ public class Polygon
         assert setPoly.isValid();
     }
     
-    public Polygon transform(double scale, double rotate, double x, double y)
+    public Polygon transform(Transform2D transform)
     {
-        return new Polygon(SetPolygonUtil.transform(setPoly, new Transform2D(scale, rotate, x, y)));
+        return new Polygon(SetPolygonUtil.transform(setPoly, transform));
     }
     
     public Polygon union(Polygon poly)
@@ -155,6 +157,48 @@ public class Polygon
             }
         }
         return new BoundRectangle(minX, minY, maxX, maxY);
+    }
+    
+    public void draw(Graphics graphics)
+    {
+        for (ArrayList<Point2D> poly : outlines())
+        {
+            int[] xPoints = new int[poly.size()];
+            int[] yPoints = new int[poly.size()];
+            toDrawPoly(xPoints, yPoints, poly);
+            graphics.drawPolygon(xPoints, yPoints, poly.size());
+        }
+    }
+    private void toDrawPoly(int[] xPoints, int[] yPoints, ArrayList<Point2D> poly)
+    {
+        for (int i = 0; i < poly.size(); i++)
+        {
+            xPoints[i] = (int)poly.get(i).getX();
+            yPoints[i] = (int)poly.get(i).getY();
+        }
+    }
+    private void toDrawPoly(int[] xPoints, int[] yPoints, SimplePolygon poly)
+    {
+        for (int i = 0; i < poly.numPoints(); i++)
+        {
+            xPoints[i] = (int)poly.getPoint(i).getX();
+            yPoints[i] = (int)poly.getPoint(i).getY();
+        }
+    }
+    public void fill(Graphics graphics)
+    {
+        for (int i = 0; i < setPoly.numPolygons(); i++)
+        {
+            HolePolygon hole = setPoly.getPolygon(i);
+            fill(graphics, HolePolygonUtil.cutToSimple(hole));
+        }
+    }
+    private  void fill(Graphics graphics, SimplePolygon simple)
+    {
+        int[] xPoints = new int[simple.numPoints()];
+        int[] yPoints = new int[simple.numPoints()];
+        toDrawPoly(xPoints, yPoints, simple);
+        graphics.fillPolygon(xPoints, yPoints, simple.numPoints());
     }
 
     @Override

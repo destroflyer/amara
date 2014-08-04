@@ -80,7 +80,7 @@ public class PolygonShape extends Shape
     @Override
     protected void updateTransform()
     {
-        cache = poly.transform(transform.getScale(), transform.getRadian(), transform.getX(), transform.getY());
+        cache = poly.transform(new Transform2D(transform.getScale(), transform.getRadian(), transform.getX(), transform.getY()));
     }
 
     @Override
