@@ -29,12 +29,29 @@ public class Transform2D
         this.y = y;
     }
     
+    public double extractRadians()
+    {
+        return Math.asin(sin);
+    }
+    public double extractScale()
+    {
+        return scalecos / Math.sqrt(1 - sin * sin);
+    }
+    public double extractX()
+    {
+        return x;
+    }
+    public double extractY()
+    {
+        return y;
+    }
+    
     public Point2D transform(Point2D p)
     {
         return new Point2D(scalecos * p.getX() - sin * p.getY() + x, sin * p.getX() + scalecos * p.getY() + y);
     }
     
-    public Transform2D mult(Transform2D t)
+    public Transform2D append(Transform2D t)
     {
         double sc = scalecos * t.scalecos - sin * t.sin;
         double s = scalecos * t.sin + sin * t.scalecos;
@@ -59,8 +76,8 @@ public class Transform2D
         double ny = (sin * x - scalecos * y) / det;
 
         Transform2D t = new Transform2D(sc, s, nx, ny, true);
-        assert t.mult(this).withinEpsilon(Identity);
-        assert this.mult(t).withinEpsilon(Identity);
+        assert t.append(this).withinEpsilon(Identity);
+        assert this.append(t).withinEpsilon(Identity);
         return t;
     }
     
