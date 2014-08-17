@@ -4,220 +4,196 @@
  */
 package amara.game.entitysystem.systems.physics.shapes;
 
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Util;
 import com.jme3.network.serializing.Serializable;
 
 /**
  *
  * @author Philipp
  */
+
 @Serializable
-public class Vector2D {
-    public Vector2D() {
+public class Vector2D
+{
+    private double x, y;
+
+    public static Vector2D Zero = new Vector2D();
+    
+    public Vector2D()
+    {
     }
 
-    public Vector2D(double x, double y) {
+    public Vector2D(double x, double y)
+    {
+        assert !Double.isNaN(x);
+        assert !Double.isNaN(y);
         this.x = x;
         this.y = y;
     }
 
-    public final double getX() {
+    public double getX()
+    {
         return x;
     }
-    public final double getY() {
+
+    public double getY()
+    {
         return y;
     }
+    
+    
+    public double length()
+    {
+        return Math.sqrt(squaredLength());
+    }
+    public double squaredLength()
+    {
+        return squaredHelper(getX(), getY());
+    }
+    public double distance(Vector2D point)
+    {
+        return Math.sqrt(squaredDistance(point));
+    }
+    public double squaredDistance(Vector2D point)
+    {
+        return squaredHelper(getX() - point.getX(), getY() - point.getY());
+    }
+    private static double squaredHelper(double a, double b)
+    {
+        return a * a + b * b;
+    }
+    
+    public Vector2D mult(double factor)
+    {
+        return new Vector2D(x * factor, y * factor);
+    }
+    public Vector2D div(double denom)
+    {
+        assert(denom != 0);
+        return mult(1d / denom);
+    }
+    public Vector2D add(Vector2D p)
+    {
+        return add(p.x, p.y);
+    }
+    public Vector2D add(double x, double y)
+    {
+        return new Vector2D(this.x + x, this.y + y);
+    }
+    public Vector2D sub(Vector2D p)
+    {
+        return add(-p.x, -p.y);
+    }
+    public Vector2D inverse()
+    {
+        return new Vector2D(-x, -y);
+    }
+    public Vector2D leftHand()
+    {
+        return new Vector2D(-y, x);
+    }
+    public Vector2D rightHand()
+    {
+        return new Vector2D(y, -x);
+    }
+    public Vector2D unit()
+    {
+        return div(length());
+    }
+    public boolean isUnit()
+    {
+        return Util.withinEpsilon(length() - 1);
+    }
+    public Vector2D addLength(double value)
+    {
+        return mult(value / length() + 1);
+    }
+    public Vector2D setLength(double value)
+    {
+        return mult(value / length());
+    }
+    
+    public double undirectedAngle(Vector2D p)
+    {
+        return Math.acos(unit().dot(p.unit()));
+    }
+    public double directedAngle(Vector2D p)
+    {
+        return p.angle() - angle();
+    }
+    public double angle()
+    {
+        return Math.atan2(y, x);
+    }
+    
+    public double dot(Vector2D p)
+    {
+        return x * p.x + y * p.y;
+    }
+    public double cross(Vector2D p)
+    {
+        return x * p.y - y * p.x;
+    }
+    
+    public boolean between(Vector2D a, Vector2D b)
+    {
+        if (withinEpsilon(a)) return false;
+        if (withinEpsilon(b)) return false;
+        return onLineSegment(a, b);
+    }
+    public boolean onLineSegment(Vector2D a, Vector2D b)
+    {
+        Vector2D c = sub(a);
+        Vector2D d = b.sub(a);
+        double cross = c.cross(d);
+        if (Math.abs(cross) > Util.Epsilon) return false;
 
-    public final void setX(double x) {
-        this.x = x;
-    }
-    public final void setY(double y) {
-        this.y = y;
-    }
-    
-    public final void set(Vector2D vector) {
-        set(vector.getX(), vector.getY());
-    }
-    public final void set(double x, double y) {
-        setX(x);
-        setY(y);
+        double dot = c.dot(d);
+        if (dot < 0) return false;
+        if (dot > a.squaredDistance(b)) return false;
+        return true;
     }
     
-    public final double squareLength() {
-        return x * x + y * y;
-    }
-    public final double length() {
-        return Math.sqrt(squareLength());
-    }
-    
-    public final void setLength(double length) {
-        if(isZero()) throw new Error("Can not resize zero-vector.");
-        scale(length / length());
-    }
-    
-    public final void add(double deltaX, double deltaY) {
-        x += deltaX;
-        y += deltaY;
-    }
-    public final void addX(double deltaX) {
-        x += deltaX;
-    }
-    public final void addY(double deltaY) {
-        y += deltaY;
-    }
-    public final void addLength(double deltaLength) {
-        if(isZero()) throw new Error("Can not resize zero-vector.");
-        double length = length();
-        scale((length + deltaLength) / length);
-    }
-    public final Vector2D getScaled(double factor) {
-        Vector2D scaled = clone();
-        scaled.scale(factor);
-        return scaled;
-    }
-    public final void scale(double factor) {
-        scaleX(factor);
-        scaleY(factor);
-    }
-    public final void scaleX(double factorX) {
-        x *= factorX;
-    }
-    public final void scaleY(double factorY) {
-        y *= factorY;
-    }
-    public final Vector2D getRotatedbyRadian(double radian) {
-        Vector2D rotated = clone();
-        rotated.rotateByRadian(radian);
-        return rotated;
-    }
-    public final Vector2D getRotatedbyDegree(double degree) {
-        return getRotatedbyRadian(Math.toRadians(degree));
-    }
-    public final void rotateByRadian(double radian) {
-        double sin = Math.sin(radian);
-        double cos = Math.cos(radian);
-        set(x * cos - y * sin, x * sin + y * cos);
-    }
-    public final void rotateByDegree(double degree) {
-        rotateByRadian(Math.toRadians(degree));
-    }
-    
-    public final void add(Vector2D vector) {
-        add(vector.getX(), vector.getY());
-    }
-    public final void sub(Vector2D vector) {
-        add(-vector.getX(), -vector.getY());
-    }
-    
-    public final void invert() {
-        x = -x;
-        y = -y;
-    }
-    public final Vector2D getInverse() {
-        Vector2D vec = clone();
-        vec.invert();
-        return vec;
-    }
-    
-    static double dotProduct(Vector2D v1, Vector2D v2) {
-        return v1.getX() * v2.getX() + v1.getY() * v2.getY();
-    }
-    static double crossProductZ(Vector2D v1, Vector2D v2) {
-        return v1.getX() * v2.getY() - v1.getY() * v2.getX();
-    }
-    public static Vector2D sum(Vector2D a, Vector2D b) {
-        return new Vector2D(a.getX() + b.getX(), a.getY() + b.getY());
-    }
-    public static Vector2D difference(Vector2D a, Vector2D b) {
-        return new Vector2D(a.getX() - b.getX(), a.getY() - b.getY());
-    }
-    public static Vector2D average(Vector2D... vecs) {
-        Vector2D average = new Vector2D();
-        for(Vector2D vec: vecs) {
-            average.add(vec);
-        }
-        average.scale(1 / (double)vecs.length);
-        return average;
-    }
-    
-    public final double getScalarProjectOnto(Vector2D vec) {
-        return dotProduct(this, vec) / vec.length();
-    }
-    
-    public final void projectOnto(Vector2D vector) {
-        projectOntoUnit(vector.getUnit());
-    }
-    private void projectOntoUnit(Vector2D unitVector) {
-        y = dotProduct(this, unitVector);
-        x = y * unitVector.getX();
-        y *= unitVector.getY();
-    }
-    public final Vector2D getProjectedOnto(Vector2D vector) {
-        Vector2D vec = clone();
-        vec.projectOnto(vector);
-        return vec;
-    }
-    
-    public final void toLeftHand() {
-        double t = x;
-        x = -y;
-        y = t;
-    }
-    public final Vector2D getLeftHand() {
-        Vector2D vec = clone();
-        vec.toLeftHand();
-        return vec;
-    }
-    public final void toRightHand() {
-        double t = x;
-        x = y;
-        y = -t;
-    }
-    public final Vector2D getRightHand() {
-        Vector2D vec = clone();
-        vec.toRightHand();
-        return vec;
-    }
-    
-    public final void toUnit() {
-        scale(1 / length());
-    }
-    public final Vector2D getUnit() {
-        Vector2D vec = clone();
-        vec.toUnit();
-        return vec;
-    }
-    
-    public final boolean isZero() {
-        return x == 0 && y == 0;
-    }
-    
-    @Override
-    public Vector2D clone() {
-        return new Vector2D(x, y);
+    public Vector2D scale(double scaleX, double scaleY)
+    {
+        return new Vector2D(x * scaleX, y * scaleY);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if(obj instanceof Vector2D) {
-            Vector2D vec = (Vector2D)obj;
-            return (x == vec.getX()) && (y == vec.getY());
-        }
-        return false;
+    public boolean withinEpsilon()
+    {
+        return Util.withinEpsilon(x) && Util.withinEpsilon(y);
+    }
+    public boolean withinEpsilon(Vector2D b)
+    {
+        return sub(b).withinEpsilon();
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 47 * hash + (int) (Double.doubleToLongBits(this.x) ^ (Double.doubleToLongBits(this.x) >>> 32));
-        hash = 47 * hash + (int) (Double.doubleToLongBits(this.y) ^ (Double.doubleToLongBits(this.y) >>> 32));
-        return hash;
+        return Double.valueOf(x).hashCode() ^ (373 * Double.valueOf(y).hashCode());
     }
-    
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(obj instanceof Vector2D) {
+            return equals((Vector2D)obj);
+        }
+        return false;
+    }
+    public boolean equals(Vector2D p)
+    {
+        return p.x == x && p.y == y;
+    }
+
+    @Override
+    protected Vector2D clone() 
+    {
+        return new Vector2D(x, y);
+    }
+
     @Override
     public String toString() {
-        return "[" + x + ", " + y + "]";
-        
+        return "(" + x + ", " + y + ")";
     }
-    
-    protected double x, y;
 }

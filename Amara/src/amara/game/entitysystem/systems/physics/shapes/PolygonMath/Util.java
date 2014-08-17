@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import java.util.*;
 
 /**
@@ -64,6 +65,10 @@ public class Util
     {
         return a * a + b * b;
     }
+    public static double squared(double a)
+    {
+        return a * a;
+    }
     public static float squaredHelper(float a, float b)
     {
         return a * a + b * b;
@@ -82,7 +87,7 @@ public class Util
         return squaredHelper(x1 - x2, y1 - y2) < (r1 + r2) * (r1 + r2);
     }
     
-    public static ArrayList<Point2D> circleCircleIntersectionPoints(double x1, double y1, double r1, double x2, double y2, double r2)
+    public static ArrayList<Vector2D> circleCircleIntersectionPoints(double x1, double y1, double r1, double x2, double y2, double r2)
     {
         assert circlesIntersect(x1, y1, r1, x2, y2, r2);
         x2 -= x1;
@@ -96,16 +101,16 @@ public class Util
         y1 += y2 * r2;
         x2 *= r1 / distance;
         y2 *= r1 / distance;
-        ArrayList<Point2D> list = new ArrayList<Point2D>();
-        list.add(new Point2D(x1 + y2, y1 - x2));
-        list.add(new Point2D(x1 - y2, y1 + x2));
+        ArrayList<Vector2D> list = new ArrayList<Vector2D>();
+        list.add(new Vector2D(x1 + y2, y1 - x2));
+        list.add(new Vector2D(x1 - y2, y1 + x2));
         return list;
     }
-    public static ArrayList<Point2D> tangentPoints(Point2D p, Point2D c, double r)
+    public static ArrayList<Vector2D> tangentPoints(Vector2D p, Vector2D c, double r)
     {
         return tangentPoints(p.getX(), p.getY(), c.getX(), c.getY(), r);
     }
-    public static ArrayList<Point2D> tangentPoints(double px, double py, double x, double y, double r)
+    public static ArrayList<Vector2D> tangentPoints(double px, double py, double x, double y, double r)
     {
         assert !(circleContainsOrOnBorder(px, py, x, y, r));
         double x1 = (px + x) / 2;

@@ -4,6 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
 import java.util.*;
 
 /**
@@ -14,7 +16,7 @@ public class TrianglePath
 {
     private TriangleNode startTri;
     private ArrayList<Integer> followTris = new ArrayList<Integer>();
-    private Point2D start, end;
+    private Vector2D start, end;
     private double radius;
 
     public TrianglePath(ArrayList<TriangleNode> channel, double radius)
@@ -27,7 +29,7 @@ public class TrianglePath
         }
     }
     
-    private boolean setPathEnds(Point2D from, Point2D to)
+    private boolean setPathEnds(Vector2D from, Vector2D to)
     {
         TriangleNode current = startTri;
         int next = 0;
@@ -52,7 +54,7 @@ public class TrianglePath
         return true;
     }
     
-    private void prepareFunnel(ArrayList<Point2D> outTunnel, ArrayList<Byte> outSides)
+    private void prepareFunnel(ArrayList<Vector2D> outTunnel, ArrayList<Byte> outSides)
     {
         outTunnel.add(start);
         outSides.add((byte)-1);
@@ -68,10 +70,10 @@ public class TrianglePath
             {
                 int j = current.indexOf(next);
                 int k = (j + 1) % 3;
-                Point2D left = current.point(k);
-                Point2D right = current.point(j);
+                Vector2D left = current.point(k);
+                Vector2D right = current.point(j);
 
-                assert Point2DUtil.lineSide(current.point((k + 1) % 3), left, right) > 0;
+                assert Vector2DUtil.lineSide(current.point((k + 1) % 3), left, right) > 0;
 
                 if(!outTunnel.contains(left))
                 {
@@ -92,7 +94,7 @@ public class TrianglePath
         outSides.add((byte)1);
     }
     
-    private void prepareFunnelAlternate(ArrayList<Point2D> outTunnel, ArrayList<Byte> outSides)
+    private void prepareFunnelAlternate(ArrayList<Vector2D> outTunnel, ArrayList<Byte> outSides)
     {
         outTunnel.add(start);
         outSides.add((byte)-1);
@@ -108,14 +110,14 @@ public class TrianglePath
             {
                 int j = current.indexOf(next);
                 int k = (j + 1) % 3;
-                Point2D left = current.point(k);
-                Point2D right = current.point(j);
+                Vector2D left = current.point(k);
+                Vector2D right = current.point(j);
                 double d = left.distance(right);
                 
-                outTunnel.add(Point2DUtil.interpolate(left, right, radius / d));
+                outTunnel.add(Vector2DUtil.interpolate(left, right, radius / d));
                 outSides.add((byte)0);
                 
-                outTunnel.add(Point2DUtil.interpolate(right, left, radius / d));
+                outTunnel.add(Vector2DUtil.interpolate(right, left, radius / d));
                 outSides.add((byte)1);
             }
             current = next;
@@ -126,15 +128,15 @@ public class TrianglePath
         outSides.add((byte)1);
     }
     
-    private Point2D firstFunnel(ArrayList<Point2D> tunnel, ArrayList<Byte> sides)
+    private Vector2D firstFunnel(ArrayList<Vector2D> tunnel, ArrayList<Byte> sides)
     {
         final int apex = 0;
         int[] feelers = new int[]{0, 0};
-        Point2D[] feelers_v = new Point2D[2];
+        Vector2D[] feelers_v = new Vector2D[2];
         for (int i = 1; i < tunnel.size(); i++)
         {
             int side = sides.get(i);
-            Point2D v = tunnel.get(i).sub(tunnel.get(apex));
+            Vector2D v = tunnel.get(i).sub(tunnel.get(apex));
             if(apex == feelers[side] || (v.cross(feelers_v[side]) < 0) == (side == 0))
             {
                 feelers[side] = i;
@@ -151,7 +153,7 @@ public class TrianglePath
         return end;
     }
     
-    private Point2D centerWalk(Point2D start, Point2D end)
+    private Vector2D centerWalk(Vector2D start, Vector2D end)
     {
         TriangleNode current = startTri;
         int next = 0;
@@ -162,18 +164,18 @@ public class TrianglePath
         }
         return centerWalk(current, next, start, end);
     }
-    private Point2D centerWalk(TriangleNode startTri, int followIndex, Point2D start, Point2D end)
+    private Vector2D centerWalk(TriangleNode startTri, int followIndex, Vector2D start, Vector2D end)
     {
         if(startTri.areaContains(end)) return end;
         int follow = followTris.get(followIndex);
-        Point2D b = startTri.point(follow);
-        Point2D a = startTri.point((follow + 1) % 3);
-        Point2D c = Point2DUtil.avg(a, b);
+        Vector2D b = startTri.point(follow);
+        Vector2D a = startTri.point((follow + 1) % 3);
+        Vector2D c = Vector2DUtil.avg(a, b);
         if(start.withinEpsilon(c)) return centerWalk(startTri.neighbor(follow), followIndex + 1, start, end);
         return c;
     }
     
-    private Point2D firstTriFunnel(Point2D start, Point2D end)
+    private Vector2D firstTriFunnel(Vector2D start, Vector2D end)
     {
         TriangleNode current = startTri;
         int next = 0;
@@ -188,21 +190,21 @@ public class TrianglePath
 //        }
         return firstTriFunnel(current, next, start, end);
     }
-    private Point2D firstTriFunnel(TriangleNode startTri, int followIndex, Point2D start, Point2D end)
+    private Vector2D firstTriFunnel(TriangleNode startTri, int followIndex, Vector2D start, Vector2D end)
     {
         assert startTri.areaContains(start);
-        Point2D feelerA = null;
-        Point2D feelerB = null;
+        Vector2D feelerA = null;
+        Vector2D feelerB = null;
         for (TriangleNode current = startTri; !current.areaContains(end); current = current.neighbor(followTris.get(followIndex++)))
         {
             int follow = followTris.get(followIndex);
-            Point2D a = current.point((follow + 1) % 3).sub(start);
-            Point2D b = current.point(follow).sub(start);
+            Vector2D a = current.point((follow + 1) % 3).sub(start);
+            Vector2D b = current.point(follow).sub(start);
             
             double distance = a.distance(b);
             assert 2 * radius <= distance: radius + " | " + distance;
-            Point2D A = Point2DUtil.interpolate(a, b, radius / distance);
-            Point2D B = Point2DUtil.interpolate(b, a, radius / distance);
+            Vector2D A = Vector2DUtil.interpolate(a, b, radius / distance);
+            Vector2D B = Vector2DUtil.interpolate(b, a, radius / distance);
             assert Util.withinEpsilon(a.distance(A) + b.distance(B) + A.distance(B) - distance);
             
             if(current == startTri)
@@ -241,7 +243,7 @@ public class TrianglePath
         }
         if(feelerA == null) return end;
         
-        Point2D delta = end.sub(start);
+        Vector2D delta = end.sub(start);
         if(feelerB.cross(delta) < 0)
         {
             return feelerB.add(start);
@@ -253,13 +255,13 @@ public class TrianglePath
         return end;
     }
     
-    public Point2D moveDistance(Point2D from, Point2D to, double distance)
+    public Vector2D moveDistance(Vector2D from, Vector2D to, double distance)
     {
         assert 0 < distance;
         if(from.squaredDistance(to) <= distance * distance) return to;
         if(setPathEnds(from, to))
         {
-            Point2D result;
+            Vector2D result;
 //            result = centerWalk(from, to);
             
             result = firstTriFunnel(from, to);
@@ -272,7 +274,7 @@ public class TrianglePath
             double d = from.distance(result);
             assert 0 < d;
             if(d < distance) return moveDistance(result, to, distance - d);
-            return Point2DUtil.interpolate(from, result, distance / d);
+            return Vector2DUtil.interpolate(from, result, distance / d);
         }
         return null;
     }

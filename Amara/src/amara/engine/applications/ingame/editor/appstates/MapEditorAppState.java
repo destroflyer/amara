@@ -51,7 +51,7 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     private Action currentAction = Action.NONE;
     private Action actionBeforeRemove;
     private Vector2f currentHoveredLocation = new Vector2f();
-    private LinkedList<Shape> shapesToPlace = new LinkedList<Shape>();
+    private LinkedList<ConvexShape> shapesToPlace = new LinkedList<ConvexShape>();
     private Geometry shapeToPlacePreviewGeometry;
     private double circleRadius = 3;
     private double circleRadiusStep = 0.2f;
@@ -130,8 +130,7 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
             currentHoveredLocation.set(groundLocation);
             switch(currentAction){
                 case PLACE_HITBOX_CIRCLE:
-                    shapesToPlace.get(0).getTransform().setX(groundLocation.getX());
-                    shapesToPlace.get(0).getTransform().setY(groundLocation.getY());
+                    shapesToPlace.get(0).setTransform(new Transform2D(1, 0, groundLocation.getX(), groundLocation.getY()));
                     shapeToPlacePreviewGeometry.setLocalTranslation(groundLocation.getX(), 0, groundLocation.getY());
                     break;
 
@@ -149,7 +148,7 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     public void onAction(String actionName, boolean value, float lastTimePerFrame){
         MapAppState mapAppState = getAppState(MapAppState.class);
         Map map = mapAppState.getMap();
-        ArrayList<Shape> obstacles = map.getPhysicsInformation().getObstacles();
+        ArrayList<ConvexShape> obstacles = map.getPhysicsInformation().getObstacles();
         if(actionName.equals("editor_1") && value){
             setAction(Action.PLACE_HITBOX_CIRCLE);
         }
@@ -342,7 +341,7 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
         else{
             try{
                 Vector2D[] basePoints = Util.toArray(customShapePoints, Vector2D.class);
-                shapesToPlace.add(new SimpleConvex(basePoints));
+                shapesToPlace.add(new SimpleConvexPolygon(basePoints));
             }catch(Error error){
                 return false;
             }
@@ -351,7 +350,7 @@ public class MapEditorAppState extends BaseDisplayAppState implements ActionList
     }
     
     private void addCurrentShapes(){
-        ArrayList<Shape> obstacles = getAppState(MapAppState.class).getMap().getPhysicsInformation().getObstacles();
+        ArrayList<ConvexShape> obstacles = getAppState(MapAppState.class).getMap().getPhysicsInformation().getObstacles();
         obstacles.addAll(shapesToPlace);
         getAppState(MapObstaclesAppState.class).update();
         cancelCurrentCustomShape();

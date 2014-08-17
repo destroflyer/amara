@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.shapes;
 
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Util;
 import java.util.*;
 
 /**
@@ -46,13 +47,13 @@ class Delaunay
             double x = (a * (by - cy) + b * (cy - ay) + c * (ay - by)) / denominator;
             double y = (a * (cx - bx) + b * (ax - cx) + c * (bx - ax)) / denominator;
 
-            a = Util.square(bx - cx) + Util.square(by - cy);
-            b = Util.square(ax - cx) + Util.square(ay - cy);
-            c = Util.square(bx - ax) + Util.square(by - ay);
+            a = Util.squared(bx - cx) + Util.squared(by - cy);
+            b = Util.squared(ax - cx) + Util.squared(ay - cy);
+            c = Util.squared(bx - ax) + Util.squared(by - ay);
 
             double area = area(vertices);
             
-            double rSquared = (a * b * c) / Util.square(4 * area);
+            double rSquared = (a * b * c) / Util.squared(4 * area);
             x -= vertices.get(p).getX();
             y -= vertices.get(p).getY();
             return x * x + y * y + 1e-6 < rSquared;
@@ -68,7 +69,7 @@ class Delaunay
         
         double area(ArrayList<Vector2D> vertices)
         {
-            return Util.calcArea(vertices.get(corners[0]), vertices.get(corners[1]), vertices.get(corners[2]));
+            return Vector2DUtil.area(vertices.get(corners[0]), vertices.get(corners[1]), vertices.get(corners[2]));
         }
         
         boolean hasNeighbor(Triangle neighbor)
@@ -124,7 +125,7 @@ class Delaunay
         int p = a.corners[aI];
         int r = b.corners[bI];
         
-        return Util.lineSegmentsIntersect(vertices.get(c), vertices.get(d), vertices.get(p), vertices.get(r));
+        return Vector2DUtil.lineSegmentIntersectionPointWithoutCorners(vertices.get(c), vertices.get(d), vertices.get(p), vertices.get(r)) != null;
     }
     
     private boolean delaunayDir(ArrayList<Vector2D> vertices, Triangle a, Triangle b)

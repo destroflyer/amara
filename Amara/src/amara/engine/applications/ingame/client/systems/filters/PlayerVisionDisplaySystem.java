@@ -4,6 +4,7 @@
  */
 package amara.engine.applications.ingame.client.systems.filters;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import amara.engine.materials.Raster;
 import com.jme3.asset.AssetManager;
 import com.jme3.renderer.RenderManager;
@@ -73,7 +74,7 @@ public class PlayerVisionDisplaySystem implements EntitySystem{
     }
     
     private void updateFog(Vector2f playerUnitPosition){
-        Point2D position = new Point2D(playerUnitPosition.getX(), playerUnitPosition.getY());
+        Vector2D position = new Vector2D(playerUnitPosition.getX(), playerUnitPosition.getY());
         double sightRange = 30;
         Polygon sightPolygon = polyMapManager.sightPolygon(position, sightRange);
         float resolutionFactor = 1;

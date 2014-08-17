@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,7 @@ class MinkowskiUtil
     
     public static SetPolygon flip(SetPolygon set)
     {
-        return scaleTranslate(set, Point2D.Zero, -1);
+        return scaleTranslate(set, Vector2D.Zero, -1);
     }
     public static SetPolygon add(SetPolygon a, SetPolygon b)
     {
@@ -33,12 +34,12 @@ class MinkowskiUtil
 
         for (int i = 0; i < b.numPolygons(); i++)
         {
-            Point2D translation = b.getPolygon(i).getSimplePoly(0).getPoint(0);
+            Vector2D translation = b.getPolygon(i).getSimplePoly(0).getPoint(0);
             list2.add(scaleTranslate(a, translation, 1));
         }
         for (int i = 0; i < a.numPolygons(); i++)
         {
-            Point2D translation = a.getPolygon(i).getSimplePoly(0).getPoint(0);
+            Vector2D translation = a.getPolygon(i).getSimplePoly(0).getPoint(0);
             list2.add(scaleTranslate(b, translation, 1));
         }
 
@@ -60,7 +61,7 @@ class MinkowskiUtil
                             for (int k = 0; k < simpleB.numPoints(); k++)
                             {
                                 int l = (k + 1) % simpleB.numPoints();
-                                ArrayList<Point2D> points = new ArrayList<Point2D>();
+                                ArrayList<Vector2D> points = new ArrayList<Vector2D>();
 
                                 points.add(simpleA.getPoint(i).add(simpleB.getPoint(l)));
                                 points.add(simpleA.getPoint(j).add(simpleB.getPoint(l)));
@@ -81,7 +82,7 @@ class MinkowskiUtil
         return list.get(0);
     }
 
-    private static SetPolygon scaleTranslate(SetPolygon set, Point2D translation, double scale)
+    private static SetPolygon scaleTranslate(SetPolygon set, Vector2D translation, double scale)
     {
         SetPolygon result = new SetPolygon();
         for (int i = 0; i < set.numPolygons(); i++)
@@ -103,7 +104,7 @@ class MinkowskiUtil
         }
         return result;
     }
-    private static HolePolygon scaleTranslate(HolePolygon holePoly, Point2D translation, double scale)
+    private static HolePolygon scaleTranslate(HolePolygon holePoly, Vector2D translation, double scale)
     {
         HolePolygon result = new HolePolygon(scaleTranslate(holePoly.mainPoly(), translation, scale));
         for (int i = 0; i < holePoly.numHolePolys(); i++)
@@ -113,19 +114,19 @@ class MinkowskiUtil
         }
         return result;
     }
-    private static SimplePolygon scaleTranslate(SimplePolygon simple, Point2D translation, double scale)
+    private static SimplePolygon scaleTranslate(SimplePolygon simple, Vector2D translation, double scale)
     {
         if(simple == null) return null;
         SimplePolygon result = new SimplePolygon();
         for (int i = 0; i < simple.numPoints(); i++)
         {
-            Point2D point = simple.getPoint(i);
+            Vector2D point = simple.getPoint(i);
             result.add(point.mult(scale).add(translation));
         }
         return result;
     }
 
-    private static SetPolygon fromPoints(ArrayList<Point2D> points)
+    private static SetPolygon fromPoints(ArrayList<Vector2D> points)
     {
         SimplePolygon simple = new SimplePolygon(points);
         if (!simple.hasArea()) return new SetPolygon();

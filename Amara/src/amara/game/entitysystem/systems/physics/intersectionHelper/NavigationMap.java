@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.intersectionHelper;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import java.util.ArrayList;
@@ -22,14 +23,14 @@ public class NavigationMap
     public NavigationMap(Polygon poly)
     {
         this.poly = poly;
-        ArrayList<Point2D> tris = poly.triangles();
+        ArrayList<Vector2D> tris = poly.triangles();
         tris = new Triangulator().delaunayTris(tris);
 //        graph = new TriangleGraph(tris, 2, 3);
         star = new TriangleStar(tris);
 //        aStar = new AbstractTriangleStar(tris);
     }
     
-    public ArrayList<Point2D> findPath(Point2D start, Point2D end, double radius)
+    public ArrayList<Vector2D> findPath(Vector2D start, Vector2D end, double radius)
     {
         start = closestValid(start);
         end = closestValid(end);
@@ -37,7 +38,7 @@ public class NavigationMap
         return star.findPath(start, end, radius);
 //        return graph.findPath(start, end);
     }
-    public TrianglePath findTriPath(Point2D start, Point2D end, double radius)
+    public TrianglePath findTriPath(Vector2D start, Vector2D end, double radius)
     {
         start = closestValid(start);
         end = closestValid(end);
@@ -45,7 +46,7 @@ public class NavigationMap
         return star.findTriPath(start, end, radius);
 //        return graph.findPath(start, end);
     }
-    public Point2D closestValid(Point2D p)
+    public Vector2D closestValid(Vector2D p)
     {
         if(!poly.contains(p)) return p.add(poly.distanceToBorder(p).mult(1 + Util.Epsilon));
         return p;

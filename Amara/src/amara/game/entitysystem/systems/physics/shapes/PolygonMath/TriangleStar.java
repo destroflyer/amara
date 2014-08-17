@@ -4,6 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
 import java.util.*;
 
 /**
@@ -19,16 +21,16 @@ public class TriangleStar
     private HashMap<TriangleNode, Double> estimateMap = new HashMap<TriangleNode, Double>();
     private HashSet<TriangleNode> open = new HashSet<TriangleNode>();
     private HashSet<TriangleNode> closed = new HashSet<TriangleNode>();
-    private Point2D startPoint, endPoint;
+    private Vector2D startPoint, endPoint;
     private double agentRadius = 0;
 
-    public TriangleStar(ArrayList<Point2D> tris)
+    public TriangleStar(ArrayList<Vector2D> tris)
     {
         for (int i = 0; i < tris.size(); i+=3)
         {
-            Point2D a = tris.get(i);
-            Point2D b = tris.get(i + 1);
-            Point2D c = tris.get(i + 2);
+            Vector2D a = tris.get(i);
+            Vector2D b = tris.get(i + 1);
+            Vector2D c = tris.get(i + 2);
             TriangleNode tri = new TriangleNode(a, b, c);
             int num = 0;
             for (TriangleNode triangle : triangles)
@@ -52,7 +54,7 @@ public class TriangleStar
     }
     private static double cornerAngle(TriangleNode tri, int corner)
     {
-        return Point2DUtil.angle(tri.point((corner + 2) % 3), tri.point(corner), tri.point((corner + 1) % 3));
+        return Vector2DUtil.angle(tri.point((corner + 2) % 3), tri.point(corner), tri.point((corner + 1) % 3));
     }
     private static double edgeLength(TriangleNode tri, int i)
     {
@@ -70,22 +72,22 @@ public class TriangleStar
         int a = (corner + 2) % 3;
         int b = corner;
         int c = (corner + 1) % 3;
-        Point2D C = tri.point(b);
-        Point2D A = tri.point(c);
-        Point2D B = tri.point(a);
+        Vector2D C = tri.point(b);
+        Vector2D A = tri.point(c);
+        Vector2D B = tri.point(a);
         double distance = Math.min(edgeLength(tri, a), edgeLength(tri, b));
         if(isObtuse(tri, c) || isObtuse(tri, a)) return distance;
-        if(tri.neighbor(c) == null) return Point2DUtil.fromLineSegmentToPoint(A, B, C).length();
+        if(tri.neighbor(c) == null) return Vector2DUtil.fromLineSegmentToPoint(A, B, C).length();
         return searchWidth(tri, C, c, distance);
     }
-    private static double searchWidth(TriangleNode tri, Point2D C, int e, double distance)
+    private static double searchWidth(TriangleNode tri, Vector2D C, int e, double distance)
     {
         int f = (e + 1) % 3;
-        Point2D U = tri.point(e);
-        Point2D V = tri.point(f);
+        Vector2D U = tri.point(e);
+        Vector2D V = tri.point(f);
         assert !C.equals(U) && !C.equals(V);
         if(isObtuse(tri, e) || isObtuse(tri, f)) return distance;
-        double tmpDist = Point2DUtil.fromLineSegmentToPoint(U, V, C).length();
+        double tmpDist = Vector2DUtil.fromLineSegmentToPoint(U, V, C).length();
         if(tmpDist > distance) return distance;
         if(tri.neighbor(e) == null) return tmpDist;
         TriangleNode next = tri.neighbor(e);
@@ -97,7 +99,7 @@ public class TriangleStar
     }
     
     
-    private void init(Point2D startP, Point2D endP, double agentRadius)
+    private void init(Vector2D startP, Vector2D endP, double agentRadius)
     {
         parentMap.clear();
         costMap.clear();
@@ -110,14 +112,14 @@ public class TriangleStar
         this.agentRadius = agentRadius;
     }
     
-    public ArrayList<TriangleNode> findChannel(Point2D startP, Point2D endP, double agentRadius)
+    public ArrayList<TriangleNode> findChannel(Vector2D startP, Vector2D endP, double agentRadius)
     {
         TriangleNode start = container(startP);
         TriangleNode end = container(endP);
         if(end == null || start == null) return null;
         return findChannel(start, end, startP, endP, agentRadius);
     }
-    private ArrayList<TriangleNode> findChannel(TriangleNode start, TriangleNode end, Point2D startP, Point2D endP, double agentRadius)
+    private ArrayList<TriangleNode> findChannel(TriangleNode start, TriangleNode end, Vector2D startP, Vector2D endP, double agentRadius)
     {
         init(startP, endP, agentRadius);
         open.add(start);
@@ -208,7 +210,7 @@ public class TriangleStar
 //        Point2D b = point(tri, (i + 1) % 3);
 //        return a.distance(b);
     }
-    private Point2D point(TriangleNode tri, int i)
+    private Vector2D point(TriangleNode tri, int i)
     {
         return tri.point(i);
     }
@@ -221,7 +223,7 @@ public class TriangleStar
         if(arc == -1) arcLength = 0;
         else
         {
-            double arcAngle = Point2DUtil.angle(point(current, (arc + 2) % 3), point(current, arc), point(current, (arc + 1) % 3));
+            double arcAngle = Vector2DUtil.angle(point(current, (arc + 2) % 3), point(current, arc), point(current, (arc + 1) % 3));
             assert 0 <= arcAngle && arcAngle <= Math.PI;
             double arcRadius = agentRadius;
             arcLength = arcAngle * arcRadius;
@@ -239,15 +241,15 @@ public class TriangleStar
         assert c1 <= c4;
         return Util.max(c2, c4);
     }
-    private double estimate(TriangleNode parent, int i, Point2D p)
+    private double estimate(TriangleNode parent, int i, Vector2D p)
     {
         return estimate(point(parent, i), point(parent, (i + 1) % 3), p);
     }
-    private double estimate(Point2D edgeA, Point2D edgeB, Point2D p)
+    private double estimate(Vector2D edgeA, Vector2D edgeB, Vector2D p)
     {
-        double dist = Point2DUtil.fromLineSegmentToPoint(edgeA, edgeB, p).length();
-        assert dist <= p.distance(edgeA): dist + " | " + p.distance(edgeA);
-        assert dist <= p.distance(edgeB): dist + " | " + p.distance(edgeB);
+        double dist = Vector2DUtil.fromLineSegmentToPoint(edgeA, edgeB, p).length();
+        assert dist <= p.distance(edgeA) + Util.Epsilon: dist + " | " + p.distance(edgeA);
+        assert dist <= p.distance(edgeB) + Util.Epsilon: dist + " | " + p.distance(edgeB);
         return dist;
     }
     private int arcIndex(TriangleNode current, int i)
@@ -261,7 +263,7 @@ public class TriangleStar
         assert j == (i + 1) % 3;
         return j;
     }
-    private TriangleNode container(Point2D p)
+    private TriangleNode container(Vector2D p)
     {
         for (TriangleNode tri : triangles)
         {
@@ -270,19 +272,19 @@ public class TriangleStar
         return null;
     }
     
-    private ArrayList<Point2D> placeholderPath(ArrayList<TriangleNode> channel)
+    private ArrayList<Vector2D> placeholderPath(ArrayList<TriangleNode> channel)
     {
-        ArrayList<Point2D> path = new ArrayList<Point2D>();
+        ArrayList<Vector2D> path = new ArrayList<Vector2D>();
         path.add(startPoint);
         for (int i = 1; i < channel.size(); i++)
         {
-            path.add(Point2DUtil.avg(channel.get(i).center(), channel.get(i - 1).center()));
+            path.add(Vector2DUtil.avg(channel.get(i).center(), channel.get(i - 1).center()));
         }
         path.add(endPoint);
         return path;
     }
     
-    private void prepareFunnel(ArrayList<TriangleNode> channel, ArrayList<Point2D> outTunnel, ArrayList<Byte> outSides)
+    private void prepareFunnel(ArrayList<TriangleNode> channel, ArrayList<Vector2D> outTunnel, ArrayList<Byte> outSides)
     {
         outTunnel.add(startPoint);
         outSides.add((byte)-1);
@@ -293,10 +295,10 @@ public class TriangleStar
             
             int j = current.indexOf(next);
             int k = (j + 1) % 3;
-            Point2D left = current.point(k);
-            Point2D right = current.point(j);
+            Vector2D left = current.point(k);
+            Vector2D right = current.point(j);
             
-            assert Point2DUtil.lineSide(current.point((k + 1) % 3), left, right) > 0;
+            assert Vector2DUtil.lineSide(current.point((k + 1) % 3), left, right) > 0;
             
             if(!outTunnel.contains(left))
             {
@@ -316,17 +318,17 @@ public class TriangleStar
     }
     
     //sides: 0 left, 1 right
-    private ArrayList<Point2D> stupidFunnel(ArrayList<Point2D> tunnel, ArrayList<Byte> sides)
+    private ArrayList<Vector2D> stupidFunnel(ArrayList<Vector2D> tunnel, ArrayList<Byte> sides)
     {
-        ArrayList<Point2D> path = new ArrayList<Point2D>();
+        ArrayList<Vector2D> path = new ArrayList<Vector2D>();
         
         int apex = 0;
         int[] feelers = new int[]{0, 0};
-        Point2D[] feelers_v = new Point2D[2];
+        Vector2D[] feelers_v = new Vector2D[2];
         for (int i = 1; i < tunnel.size(); i++)
         {
             int side = sides.get(i);
-            Point2D v = tunnel.get(i).sub(tunnel.get(apex));
+            Vector2D v = tunnel.get(i).sub(tunnel.get(apex));
             if(apex == feelers[side] || (v.cross(feelers_v[side]) < 0) == (side == 0))
             {
                 feelers[side] = i;
@@ -357,17 +359,17 @@ public class TriangleStar
         return path;
     }
     //sides: 0 left, 1 right
-    private ArrayList<Integer> radiusFunnel(ArrayList<Point2D> tunnel, ArrayList<Byte> sides)
+    private ArrayList<Integer> radiusFunnel(ArrayList<Vector2D> tunnel, ArrayList<Byte> sides)
     {
         ArrayList<Integer> path = new ArrayList<Integer>();
         
         int apex = 0;
         int[] feelers = new int[]{0, 0};
-        Point2D[] feelers_v = new Point2D[2];
+        Vector2D[] feelers_v = new Vector2D[2];
         for (int i = 1; i < tunnel.size(); i++)
         {
             int side = sides.get(i);
-            Point2D v = tunnel.get(i).sub(tunnel.get(apex));
+            Vector2D v = tunnel.get(i).sub(tunnel.get(apex));
             
             if( v.squaredLength()> agentRadius * agentRadius ) //if v.length is below halfwidth, then the vertices are too close together
 				//to form meaningful tangent calculations. This is not the case for vertices on the same side of funnel,
@@ -382,7 +384,7 @@ public class TriangleStar
                         double len = v.length();
                         double sin = agentRadius / len * ( side == 1 ? -1 : 1 );
                         double cos = Math.sqrt( len * len - agentRadius * agentRadius ) / len;
-                        v = new Point2D(v.getX() * cos - v.getY() * sin, v.getX() * sin + v.getY() * cos);
+                        v = new Vector2D(v.getX() * cos - v.getY() * sin, v.getX() * sin + v.getY() * cos);
                     }
                 }
                 else if( i >= tunnel.size() - 2 ) //Current point is end point
@@ -390,14 +392,14 @@ public class TriangleStar
                     double len = v.length();
                     double sin = agentRadius / len * ( side == 1 ? 1 : -1 );
                     double cos = Math.sqrt( len * len - agentRadius * agentRadius ) / len;
-                    v = new Point2D(v.getX() * cos - v.getY() * sin, v.getX() * sin + v.getY() * cos);
+                    v = new Vector2D(v.getX() * cos - v.getY() * sin, v.getX() * sin + v.getY() * cos);
                 }
                 else if(side != sides.get(apex)) //Opposite sides of list
                 {
                     double len = v.length() * 0.5;
                     double sin = agentRadius / len * ( side == 1 ? -1 : 1 );
                     double cos = Math.sqrt( len * len - agentRadius * agentRadius ) / len;
-                    v = new Point2D(v.getX() * cos - v.getY() * sin, v.getX() * sin + v.getY() * cos);
+                    v = new Vector2D(v.getX() * cos - v.getY() * sin, v.getX() * sin + v.getY() * cos);
                 }
             }
             
@@ -432,26 +434,26 @@ public class TriangleStar
         return path;
     }
     
-    private ArrayList<Point2D> postRadiusFunnelPlaceholder(ArrayList<Integer> path, ArrayList<Point2D> tunnel, ArrayList<Byte> sides)
+    private ArrayList<Vector2D> postRadiusFunnelPlaceholder(ArrayList<Integer> path, ArrayList<Vector2D> tunnel, ArrayList<Byte> sides)
     {
-        ArrayList<Point2D> tmp = new ArrayList<Point2D>();
+        ArrayList<Vector2D> tmp = new ArrayList<Vector2D>();
         for (int i = 0; i < path.size(); i++)
         {
             tmp.add(tunnel.get(path.get(i)));
         }
         return tmp;
     }
-    private ArrayList<Point2D> postRadiusFunnel(ArrayList<Integer> path, ArrayList<Point2D> tunnel, ArrayList<Byte> sides)
+    private ArrayList<Vector2D> postRadiusFunnel(ArrayList<Integer> path, ArrayList<Vector2D> tunnel, ArrayList<Byte> sides)
     {
-        ArrayList<Point2D> tmp = new ArrayList<Point2D>();
+        ArrayList<Vector2D> tmp = new ArrayList<Vector2D>();
         for (int i = 1; i < path.size(); i++)
         {
             int sideA = i == 1? 0: (sides.get(i - 1) == 0? -1: 1);
             int sideB = i == path.size() - 1? 0: (sides.get(i) == 0? -1: 1);
-            Point2D a = tunnel.get(path.get(i - 1));
-            Point2D b = tunnel.get(path.get(i));
+            Vector2D a = tunnel.get(path.get(i - 1));
+            Vector2D b = tunnel.get(path.get(i));
             
-            Point2D[] r = new Point2D[2];
+            Vector2D[] r = new Vector2D[2];
             offsetLine(a, b, sideA, sideB, r);
             tmp.add(r[0]);
             tmp.add(r[1]);
@@ -459,7 +461,7 @@ public class TriangleStar
         return tmp;
     }
     //-1 = left < 0 < right = 1
-    private void offsetLine(Point2D a, Point2D b, int sideA, int sideB, Point2D[] result)
+    private void offsetLine(Vector2D a, Vector2D b, int sideA, int sideB, Vector2D[] result)
     {
         if(sideA == 0)
         {
@@ -486,7 +488,7 @@ public class TriangleStar
             {
                 if(sideA == sideB)
                 {
-                    Point2D offset = b.sub(a).unit();
+                    Vector2D offset = b.sub(a).unit();
                     if(sideA < 0) offset = offset.leftHand();
                     else offset = offset.rightHand();
                     result[0] = a.add(offset);
@@ -494,7 +496,7 @@ public class TriangleStar
                 }
                 else
                 {
-                    Point2D c = Point2DUtil.avg(a, b);
+                    Vector2D c = Vector2DUtil.avg(a, b);
                     int i = sideA < 0? 0: 1;
                     result[0] = Util.tangentPoints(c, a, agentRadius).get(i);
                     result[1] = Util.tangentPoints(c, b, agentRadius).get(i ^ 1);
@@ -503,12 +505,12 @@ public class TriangleStar
         }
     }
     
-    public ArrayList<Point2D> findPath(Point2D start, Point2D end, double radius)
+    public ArrayList<Vector2D> findPath(Vector2D start, Vector2D end, double radius)
     {
         ArrayList<TriangleNode> channel = findChannel(start, end, radius);
         if(channel == null) return null;
 //        return placeholderPath(channel);
-        ArrayList<Point2D> tunnel = new ArrayList<Point2D>();
+        ArrayList<Vector2D> tunnel = new ArrayList<Vector2D>();
         ArrayList<Byte> sides = new ArrayList<Byte>();
         prepareFunnel(channel, tunnel, sides);
         return stupidFunnel(tunnel, sides);
@@ -516,7 +518,7 @@ public class TriangleStar
 //        return postRadiusFunnel(radiusFunnel(tunnel, sides), tunnel, sides);
     }
     
-    public TrianglePath findTriPath(Point2D start, Point2D end, double radius)
+    public TrianglePath findTriPath(Vector2D start, Vector2D end, double radius)
     {
         ArrayList<TriangleNode> channel = findChannel(start, end, radius);
         if(channel == null) return null;

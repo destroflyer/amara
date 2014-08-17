@@ -4,100 +4,119 @@
  */
 package amara.game.entitysystem.systems.physics.shapes;
 
-import com.jme3.network.serializing.Serializable;
-import java.awt.Graphics;
+import com.jme3.network.serializing.*;
 
 /**
  *
  * @author Philipp
  */
 @Serializable
-public class Circle extends Shape {
+public class Circle extends ConvexShape
+{
+    private Vector2D localPosition;
+    private double localRadius;
+    
+    private Vector2D globalPosition = null;
+    private double globalRadius = Double.NaN;
 
-    public Circle() {
-        
+    public Circle()
+    {
+    }
+
+    public Circle(Vector2D localPosition, double localRadius)
+    {
+        this.localPosition = localPosition;
+        this.localRadius = localRadius;
+    }
+    public Circle(double x, double y, double localRadius)
+    {
+        this.localPosition = new Vector2D(x, y);
+        this.localRadius = localRadius;
+    }
+    public Circle(double localRadius)
+    {
+        this.localPosition = Vector2D.Zero;
+        this.localRadius = localRadius;
+    }
+
+    @Override
+    public void setTransform(Transform2D transform)
+    {
+        globalPosition = null;
+        this.transform = transform;
+    }
+
+    public Vector2D getLocalPosition()
+    {
+        return localPosition;
+    }
+
+    public double getLocalRadius()
+    {
+        return localRadius;
+    }
+
+    public Vector2D getGlobalPosition()
+    {
+        updateCache();
+        return globalPosition;
+    }
+
+    public double getGlobalRadius()
+    {
+        updateCache();
+        return globalRadius;
     }
     
-    public Circle(double x, double y, double r) {
-        transform.setPosition(x, y);
-        baseBoundRadius = r;
-    }
-    public Circle(double r) {
-        baseBoundRadius = r;
-    }
-
-    @Override
-    public void draw(Graphics graphics) {
-        drawBoundCircle(graphics);
-    }
-
-    @Override
-    public void fill(Graphics graphics) {
-        fillBoundCircle(graphics);
-    }
-
-    @Override
-    public boolean contains(Vector2D point) {
-        return circlesIntersect(getX(), getY(), getBoundRadius(), point.getX(), point.getY(), 0);
-    }
-    
-    @Override
-    public boolean intersects(Shape s) {
-        return s.intersects(this);
-    }
-
-    @Override
-    public boolean intersects(SimpleConvex c) {
-        return c.intersects(this);
-    }
-
-    @Override
-    public boolean intersects(Circle c) {
-        return circlesIntersect(getX(), getY(), getBoundRadius(), c.getX(), c.getY(), c.getBoundRadius());
-    }
-
-    @Override
-    public Vector2D getResolveVector(Shape s) {
-        Vector2D overlap = s.getResolveVector(this);
-        overlap.invert();
-        return overlap;
-    }
-
-    @Override
-    public Vector2D getResolveVector(SimpleConvex c) {
-        Vector2D overlap = c.getResolveVector(this);
-        overlap.invert();
-        return overlap;
-    }
-
-    @Override
-    public Vector2D getResolveVector(Circle c) {
-        Vector2D overlap = new Vector2D(c.getX() - getX(), c.getY() - getY());
-        if(overlap.isZero())
+    private void updateCache()
+    {
+        if(globalPosition == null)
         {
-            overlap.addX(-getBoundRadius() - c.getBoundRadius());
+            globalPosition = transform.transform(localPosition);
+            globalRadius = localRadius * transform.extractScale();
         }
-        else overlap.addLength(-getBoundRadius() - c.getBoundRadius());
-        return overlap;
     }
 
     @Override
-    public Bounds getScalarProjectOnto(Vector2D vec) {
-        double center = new Vector2D(getX(), getY()).getScalarProjectOnto(vec);
-        double fac = getBoundRadius() / vec.length();
-        return new Bounds(center - fac, center + fac);
+    public boolean contains(Vector2D point)
+    {
+        updateCache();
+        return point.squaredDistance(globalPosition) < globalRadius * globalRadius;
     }
 
     @Override
-    public Circle clone() {
-        Circle clone = new Circle(baseBoundRadius);
-        clone.transform = transform.clone();
-        return clone;
+    public void draw(ShapeGraphics graphics, boolean global)
+    {
+        if(global)
+        {
+            updateCache();
+            graphics.drawCircle(globalPosition, globalRadius);
+        }
+        else graphics.drawCircle(localPosition, localRadius);
     }
-    
+
     @Override
-    public void updateTransform() {
-        
+    public void fill(ShapeGraphics graphics, boolean global)
+    {
+        if(global)
+        {
+            updateCache();
+            graphics.fillCircle(globalPosition, globalRadius);
+        }
+        else graphics.fillCircle(localPosition, localRadius);
     }
-    
+
+    @Override
+    public Circle clone()
+    {
+        Circle c = new Circle(localPosition, localRadius);
+        c.setTransform(transform);
+        return c;
+    }
+
+    @Override
+    public Circle getBoundCircle()
+    {
+        return this;
+    }
 }

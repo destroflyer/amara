@@ -4,6 +4,7 @@
  */
 package amara.engine.network;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import com.jme3.network.serializing.Serializer;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
@@ -284,15 +285,15 @@ public class MessagesSerializer{
                             Rectangle.class,
                             RegularCyclic.class,
                             Shape.class,
-                            SimpleConvex.class,
-                            Transform.class,
+                            ConvexShape.class,
+                            SimpleConvexPolygon.class,
+                            Transform2D.class,
                             Vector2D.class,
                             PolygonShape.class,
                                 Polygon.class,
                                     SetPolygon.class,
                                     HolePolygon.class,
                                     SimplePolygon.class,
-                                    Point2D.class,
                         MovementComponent.class,
                         PositionComponent.class,
                         ScaleComponent.class,

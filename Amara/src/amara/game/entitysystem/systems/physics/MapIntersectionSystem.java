@@ -4,10 +4,11 @@
  */
 package amara.game.entitysystem.systems.physics;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.systems.physics.intersectionHelper.*;
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
+import amara.game.entitysystem.systems.physics.shapes.*;
 import com.jme3.math.Vector2f;
 
 /**
@@ -30,24 +31,34 @@ public final class MapIntersectionSystem implements EntitySystem
             CollisionGroupComponent filterComp = entity.getComponent(CollisionGroupComponent.class);
             if(CollisionGroupComponent.groupsCollide(CollisionGroupComponent.COLLISION_GROUP_MAP, filterComp.getCollidesWithGroups()))
             {
-                Vector2f pos = entity.getComponent(PositionComponent.class).getPosition();
-                Point2D position = new Point2D(pos.x, pos.y);
-                double radius = entity.getComponent(HitboxComponent.class).getShape().getBoundRadius();
-                Point2D validPos = map.closestValid(position, radius);
-                if(!position.equals(validPos))
+                Shape shape = entity.getComponent(HitboxComponent.class).getShape();
+                if(shape instanceof ConvexShape)
                 {
-                    entity.setComponent(new PositionComponent(new Vector2f((float)validPos.getX(), (float)validPos.getY())));
+                    ConvexShape convex = (ConvexShape)shape;
+                    Vector2f pos = entity.getComponent(PositionComponent.class).getPosition();
+                    Vector2D position = new Vector2D(pos.x, pos.y);
+                    double radius = convex.getBoundCircle().getGlobalRadius();
+                    Vector2D validPos = map.closestValid(position, radius);
+                    if(!position.equals(validPos))
+                    {
+                        entity.setComponent(new PositionComponent(new Vector2f((float)validPos.getX(), (float)validPos.getY())));
+                    }
                 }
             }
         }
         for (EntityWrapper entity : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(HitboxComponent.class, HitboxActiveComponent.class, PositionComponent.class, RemoveOnMapLeaveComponent.class)))
         {
-            Vector2f pos = entity.getComponent(PositionComponent.class).getPosition();
-            Point2D position = new Point2D(pos.x, pos.y);
-                double radius = entity.getComponent(HitboxComponent.class).getShape().getBoundRadius();
-            if(map.outOfMapBounds(position, radius))
+            Shape shape = entity.getComponent(HitboxComponent.class).getShape();
+            if(shape instanceof ConvexShape)
             {
-                entity.clearComponents();
+                ConvexShape convex = (ConvexShape)shape;
+                Vector2f pos = entity.getComponent(PositionComponent.class).getPosition();
+                Vector2D position = new Vector2D(pos.x, pos.y);
+                double radius = convex.getBoundCircle().getGlobalRadius();
+                if(map.outOfMapBounds(position, radius))
+                {
+                    entity.clearComponents();
+                }
             }
         }
     }

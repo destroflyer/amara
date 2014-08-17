@@ -4,6 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
 import static amara.game.entitysystem.systems.physics.shapes.PolygonMath.PolygonOperation.*;
 import java.util.ArrayList;
 import sun.reflect.generics.reflectiveObjects.*;
@@ -24,7 +26,7 @@ public class SweepPolygon
         this.infinite = infinite;
     }
     
-    public boolean areaContains(Point2D p)
+    public boolean areaContains(Vector2D p)
     {
         boolean inside = infinite;
         for (int i = 0; i < edges.size(); i++)
@@ -33,7 +35,7 @@ public class SweepPolygon
             if(p.getX() < edge.minX()) break;
             if(p.getX() < edge.maxX())
             {
-                if(Point2DUtil.lineAxisIntersectionY(edge.getA(), edge.getB(), p.getX()) <= p.getY())
+                if(Vector2DUtil.lineAxisIntersectionY(edge.getA(), edge.getB(), p.getX()) <= p.getY())
                 {
                     inside = !inside;
                 }
@@ -114,17 +116,17 @@ public class SweepPolygon
         if(first.minX() == first.maxX())
         {
             if(second.minX() == second.maxX()) return false;
-            double a = Point2DUtil.lineAxisIntersectionY(second.getA(), second.getB(), first.maxX());
+            double a = Vector2DUtil.lineAxisIntersectionY(second.getA(), second.getB(), first.maxX());
             return first.minY() < a && a < first.maxY();
         }
         if(second.minX() == second.maxX())
         {
-            double b = Point2DUtil.lineAxisIntersectionY(first.getA(), first.getB(), second.minX());
+            double b = Vector2DUtil.lineAxisIntersectionY(first.getA(), first.getB(), second.minX());
             return second.minY() < b && b < second.maxY();
         }
         
-        double a = Point2DUtil.lineAxisIntersectionY(second.getA(), second.getB(), first.maxX());
-        double b = Point2DUtil.lineAxisIntersectionY(first.getA(), first.getB(), second.minX());
+        double a = Vector2DUtil.lineAxisIntersectionY(second.getA(), second.getB(), first.maxX());
+        double b = Vector2DUtil.lineAxisIntersectionY(first.getA(), first.getB(), second.minX());
         assert !Double.isNaN(a) && !Double.isNaN(b);
         return (a - first.getB().getY()) * (b - second.getA().getY()) < 0;
     }

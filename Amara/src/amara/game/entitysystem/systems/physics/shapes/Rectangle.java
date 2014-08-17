@@ -11,24 +11,27 @@ import com.jme3.network.serializing.Serializable;
  * @author Philipp
  */
 @Serializable
-public class Rectangle extends SimpleConvex {
+public class Rectangle extends SimpleConvexPolygon
+{
 
-    public Rectangle(){
-        
+    public Rectangle()
+    {
     }
     
     public Rectangle(double width, double height) {
-        this(0, 0, width, height);
+        this(Vector2D.Zero, width, height);
+    }
+    public Rectangle(double x, double y, double width, double height) {
+        this(new Vector2D(x, y), width, height);
     }
 
-    public Rectangle(double centerX, double centerY, double width, double height) {
+    public Rectangle(Vector2D position, double width, double height) {
         super(new Vector2D[] {
-            new Vector2D(width / 2, height / 2),
-            new Vector2D(width / 2, -height / 2),
-            new Vector2D(-width / 2, -height / 2),
-            new Vector2D(-width / 2, height / 2)
+            new Vector2D(width / 2, height / 2).add(position),
+            new Vector2D(width / 2, -height / 2).add(position),
+            new Vector2D(-width / 2, -height / 2).add(position),
+            new Vector2D(-width / 2, height / 2).add(position)
         });
-        transform.setPosition(centerX, centerY);
     }
     
     

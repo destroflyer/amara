@@ -4,13 +4,15 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+
 /**
  *
  * @author Philipp
  */
 public class AbstractTriangleNode
 {
-    private Point2D[] points;
+    private Vector2D[] points;
     private AbstractTriangleNode[] neighbors = new AbstractTriangleNode[3];
     private int level = -1;
     private int connected = -1;
@@ -19,12 +21,12 @@ public class AbstractTriangleNode
     private double[] chokeWidth = new double[3];
     private double[] edgeWidth = new double[3];
 
-    public AbstractTriangleNode(Point2D... points)
+    public AbstractTriangleNode(Vector2D... points)
     {
         this.points = points;
     }
     
-    public Point2D getPoint(int i)
+    public Vector2D getPoint(int i)
     {
         return points[i];
     }
@@ -68,7 +70,7 @@ public class AbstractTriangleNode
         return false;
     }
     
-    public int indexOf(Point2D p)
+    public int indexOf(Vector2D p)
     {
         for (int i = 0; i < 3; i++)
         {

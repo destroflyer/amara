@@ -127,8 +127,7 @@ public class MapGrid<Hitbox extends HasShape>
     
     private void setGridChecker(int x, int y)
     {
-        gridChecker.setX(((double) x + 0.5) * cellSize);
-        gridChecker.setY(((double) y + 0.5) * cellSize);
+        gridChecker.setTransform(new Transform2D(1, 0, ((double) x + 0.5) * cellSize, ((double) y + 0.5) * cellSize));
     }
     
     public void reset()

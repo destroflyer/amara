@@ -4,22 +4,23 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import java.util.Comparator;
 
 /**
  *
  * @author Philipp
  */
-class PointDistanceComparator implements Comparator<Point2D>
+class PointDistanceComparator implements Comparator<Vector2D>
 {
-    private Point2D p;
+    private Vector2D p;
 
-    public PointDistanceComparator(Point2D p) {
+    public PointDistanceComparator(Vector2D p) {
         this.p = p;
     }
     
     
-    public int compare(Point2D o1, Point2D o2) {
+    public int compare(Vector2D o1, Vector2D o2) {
         return (int)Math.signum(p.squaredDistance(o1) - p.squaredDistance(o2));
     }
     

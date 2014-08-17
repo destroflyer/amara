@@ -4,6 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
 import com.jme3.network.serializing.Serializable;
 import java.util.*;
 
@@ -14,13 +16,13 @@ import java.util.*;
 @Serializable
 public class SimplePolygon
 {
-    private ArrayList<Point2D> points = new ArrayList<Point2D>();
+    private ArrayList<Vector2D> points = new ArrayList<Vector2D>();
     private double cachedArea = Double.NaN;
 
     public SimplePolygon() {
     }
 
-    public SimplePolygon(Collection<Point2D> points)
+    public SimplePolygon(Collection<Vector2D> points)
     {
         this.points.addAll(points);
     }
@@ -34,20 +36,20 @@ public class SimplePolygon
     {
         return points.size();
     }
-    public Point2D getPoint(int index)
+    public Vector2D getPoint(int index)
     {
         return points.get(index);
     }
-    public void add(Point2D point)
+    public void add(Vector2D point)
     {
         cachedArea = Double.NaN;
         points.add(point);
     }
     public void add(double x, double y)
     {
-        add(new Point2D(x, y));
+        add(new Vector2D(x, y));
     }
-    public void insert(int index, Point2D point)
+    public void insert(int index, Vector2D point)
     {
         cachedArea = Double.NaN;
         points.add(index, point);
@@ -57,7 +59,7 @@ public class SimplePolygon
         cachedArea = Double.NaN;
         points.remove(index);
     }
-    public boolean hasPoint(Point2D p)
+    public boolean hasPoint(Vector2D p)
     {
         return points.contains(p);
     }
@@ -74,7 +76,7 @@ public class SimplePolygon
         Util.reverse(points);
     }
 
-    public boolean hasEdge(Point2D a, Point2D b)
+    public boolean hasEdge(Vector2D a, Vector2D b)
     {
         for (int i = 0; i < points.size(); i++)
         {
@@ -114,7 +116,7 @@ public class SimplePolygon
         return area;
     }
     
-    public boolean onBorder(Point2D point)
+    public boolean onBorder(Vector2D point)
     {
         if (hasPoint(point)) return true;
         for (int i = 0; i < points.size(); i++)
@@ -124,7 +126,7 @@ public class SimplePolygon
         }
         return false;
     }
-    public boolean areaContainsFast(Point2D point)
+    public boolean areaContainsFast(Vector2D point)
     {
         boolean inside = isHole();
         int i, j;
@@ -138,7 +140,7 @@ public class SimplePolygon
         }
         return inside;
     }
-    public Containment areaContains(Point2D point)
+    public Containment areaContains(Vector2D point)
     {
         if (onBorder(point)) return Containment.Border;
         return areaContainsFast(point) ? Containment.Inside : Containment.Outside;
@@ -162,7 +164,7 @@ public class SimplePolygon
         {
             for (int j = 0; j < simple.points.size(); j++)
             {
-                if (points.get(i).equals(simple.points.get(j)))
+                if (points.get(i).withinEpsilon(simple.points.get(j)))
                 {
                     insertPoly(simple, i, j);
                     assert(!hasRepetitions());
@@ -173,7 +175,7 @@ public class SimplePolygon
         }
         throw new Error("polys do not touch");
     }
-    public void insertRange(int index, Collection<Point2D> points)
+    public void insertRange(int index, Collection<Vector2D> points)
     {
         this.points.addAll(index, points);
         cachedArea = Double.NaN;
@@ -252,7 +254,7 @@ public class SimplePolygon
             for (int i = 0; i < points.size(); i++)
             {
                 int j = (i + 2) % points.size();
-                if (points.get(i).equals(points.get(j)))
+                if (points.get(i).withinEpsilon(points.get(j)))
                 {
                     ArrayList<Integer> rem = new ArrayList<Integer>();
                     rem.add(i);
@@ -335,14 +337,14 @@ public class SimplePolygon
         {
             int j = (i + 1) % tmp.numPoints();
 
-            if (areaContains(Point2DUtil.avg(tmp.getPoint(i), tmp.getPoint(j))) == Containment.Outside) return false;
-            if (areaContains(Point2DUtil.avg(tmp.getPoint(i), tmp.getPoint(j))) == Containment.Inside)
+            if (areaContains(Vector2DUtil.avg(tmp.getPoint(i), tmp.getPoint(j))) == Containment.Outside) return false;
+            if (areaContains(Vector2DUtil.avg(tmp.getPoint(i), tmp.getPoint(j))) == Containment.Inside)
             {
                 for (int k = i + 1; k < tmp.numPoints(); k++)
                 {
                     int l = (k + 1) % tmp.numPoints();
 
-                    assert(areaContains(Point2DUtil.avg(tmp.getPoint(k), tmp.getPoint(l))) != Containment.Outside);
+                    assert(areaContains(Vector2DUtil.avg(tmp.getPoint(k), tmp.getPoint(l))) != Containment.Outside);
                 }
                 return true;
             }
@@ -354,16 +356,16 @@ public class SimplePolygon
     public void insertTouchPoints(SimplePolygon poly)
     {
         assert(!hasRepetitions());
-        HashMap<Integer, HashSet<Point2D>> touchers = new HashMap<Integer, HashSet<Point2D>>();
+        HashMap<Integer, HashSet<Vector2D>> touchers = new HashMap<Integer, HashSet<Vector2D>>();
         for (int k = 0; k < poly.numPoints(); k++)
         {
-            Point2D p = poly.getPoint(k);
+            Vector2D p = poly.getPoint(k);
             for (int i = 0; i < numPoints(); i++)
             {
                 int j = (i + 1) % numPoints();
                 if (p.between(getPoint(i), getPoint(j)))
                 {
-                    if (!touchers.containsKey(i)) touchers.put(i, new HashSet<Point2D>());
+                    if (!touchers.containsKey(i)) touchers.put(i, new HashSet<Vector2D>());
                     touchers.get(i).add(p);
                 }
             }
@@ -373,7 +375,7 @@ public class SimplePolygon
         {
             if (touchers.containsKey(i))
             {
-                ArrayList<Point2D> list = new ArrayList<Point2D>(touchers.get(i));
+                ArrayList<Vector2D> list = new ArrayList<Vector2D>(touchers.get(i));
                 Collections.sort(list, new PointDistanceComparator(getPoint(i)));
                 for (int j = list.size() - 1; j >= 0; j--)
                 {
@@ -405,7 +407,8 @@ public class SimplePolygon
             for (int k = j; k < points.size(); k++)
             {
                 int l = (k + 1) % points.size();
-                if(Point2DUtil.lineSegmentIntersectionPointWithoutCorners(points.get(i), points.get(j), points.get(k), points.get(l)) != null) return true;
+                if(!Vector2DUtil.segmentAaBbCheck(points.get(i), points.get(j), points.get(k), points.get(l))) continue;
+                if(Vector2DUtil.lineSegmentIntersectionPointWithoutCorners(points.get(i), points.get(j), points.get(k), points.get(l)) != null) return true;
             }
         }
 //        if(SimplePolygonUtil.outlinesIntersect(this, this)) return true;
@@ -457,7 +460,7 @@ public class SimplePolygon
     
     public boolean isValid()
     {
-        for (Point2D p : points)
+        for (Vector2D p : points)
         {
             if(Double.isInfinite(p.getX())) return false;
             if(Double.isInfinite(p.getY())) return false;
@@ -515,7 +518,7 @@ public class SimplePolygon
     public int hashCode()
     {
         int hash = 0;
-        for(Point2D p: points)
+        for(Vector2D p: points)
         {
             hash ^= p.hashCode();
         }

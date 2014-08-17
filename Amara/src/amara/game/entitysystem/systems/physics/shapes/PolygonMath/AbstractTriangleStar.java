@@ -4,6 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
 import java.util.*;
 
 /**
@@ -14,13 +16,13 @@ public class AbstractTriangleStar
 {
     ArrayList<AbstractTriangleNode> triangles = new ArrayList<AbstractTriangleNode>();
 
-    public AbstractTriangleStar(ArrayList<Point2D> tris)
+    public AbstractTriangleStar(ArrayList<Vector2D> tris)
     {
         for (int i = 0; i < tris.size(); i+=3)
         {
-            Point2D a = tris.get(i);
-            Point2D b = tris.get(i + 1);
-            Point2D c = tris.get(i + 2);
+            Vector2D a = tris.get(i);
+            Vector2D b = tris.get(i + 1);
+            Vector2D c = tris.get(i + 2);
             AbstractTriangleNode tri = new AbstractTriangleNode(a, b, c);
             int num = 0;
             for (AbstractTriangleNode triangle : triangles)
@@ -342,7 +344,7 @@ public class AbstractTriangleStar
     }
     private static double cornerAngle(AbstractTriangleNode tri, int corner)
     {
-        return Point2DUtil.angle(tri.getPoint((corner + 2) % 3), tri.getPoint(corner), tri.getPoint((corner + 1) % 3));
+        return Vector2DUtil.angle(tri.getPoint((corner + 2) % 3), tri.getPoint(corner), tri.getPoint((corner + 1) % 3));
     }
     private static double angleBetween(AbstractTriangleNode tri, int a, int b)
     {
@@ -369,22 +371,22 @@ public class AbstractTriangleStar
         int a = (corner + 2) % 3;
         int b = corner;
         int c = (corner + 1) % 3;
-        Point2D C = tri.getPoint(b);
-        Point2D A = tri.getPoint(c);
-        Point2D B = tri.getPoint(a);
+        Vector2D C = tri.getPoint(b);
+        Vector2D A = tri.getPoint(c);
+        Vector2D B = tri.getPoint(a);
         double distance = Math.min(edgeLength(tri, a), edgeLength(tri, b));
         if(isObtuse(tri, c) || isObtuse(tri, a)) return distance;
-        if(tri.getNeighbor(c) == null) return Point2DUtil.fromLineSegmentToPoint(A, B, C).length();
+        if(tri.getNeighbor(c) == null) return Vector2DUtil.fromLineSegmentToPoint(A, B, C).length();
         return searchWidth(tri, C, c, distance);
     }
-    private static double searchWidth(AbstractTriangleNode tri, Point2D C, int e, double distance)
+    private static double searchWidth(AbstractTriangleNode tri, Vector2D C, int e, double distance)
     {
         int f = (e + 1) % 3;
-        Point2D U = tri.getPoint(e);
-        Point2D V = tri.getPoint(f);
+        Vector2D U = tri.getPoint(e);
+        Vector2D V = tri.getPoint(f);
         assert !C.equals(U) && !C.equals(V);
         if(isObtuse(tri, e) || isObtuse(tri, f)) return distance;
-        double tmpDist = Point2DUtil.fromLineSegmentToPoint(U, V, C).length();
+        double tmpDist = Vector2DUtil.fromLineSegmentToPoint(U, V, C).length();
         if(tmpDist > distance) return distance;
         if(tri.getNeighbor(e) == null) return tmpDist;
         AbstractTriangleNode next = tri.getNeighbor(e);
