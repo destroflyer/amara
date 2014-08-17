@@ -22,6 +22,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
+import sun.reflect.generics.reflectiveObjects.*;
 
 /**
  *
@@ -116,7 +117,7 @@ public class MapFileHandler{
             elementPhysics.setAttribute("height", "" + map.getPhysicsInformation().getHeight());
             elementPhysics.setAttribute("heightmapScale", "" + map.getPhysicsInformation().getHeightmapScale());
             Element elementObstacles = new Element("obstacles");
-            for(Shape shape : map.getPhysicsInformation().getObstacles()){
+            for(ConvexShape shape : map.getPhysicsInformation().getObstacles()){
                 Element elementShape = generateElement(shape);
                 if(elementShape != null){
                     elementObstacles.addContent(elementShape);
@@ -226,9 +227,9 @@ public class MapFileHandler{
             int height = elementPhysics.getAttribute("height").getIntValue();
             float heightmapScale = elementPhysics.getAttribute("heightmapScale").getFloatValue();
             Element elementObstacles = elementPhysics.getChild("obstacles");
-            ArrayList<Shape> obstacles = new ArrayList<Shape>();
+            ArrayList<ConvexShape> obstacles = new ArrayList<ConvexShape>();
             for(Object elementShapeObject : elementObstacles.getChildren()){
-                Shape shape = generateShape((Element) elementShapeObject);
+                ConvexShape shape = generateShape((Element) elementShapeObject);
                 obstacles.add(shape);
             }
             MapPhysicsInformation physicsInformation = new MapPhysicsInformation(width, height, heightmapScale, obstacles);
@@ -265,18 +266,18 @@ public class MapFileHandler{
         return new Vector2D(coordinates[0], coordinates[1]);
     }
     
-    private static Element generateElement(Shape shape){
+    private static Element generateElement(ConvexShape shape){
         Element element = null;
         if(shape instanceof Circle){
             Circle circle = (Circle) shape;
             element = new Element("circle");
-            element.setAttribute("radius", "" + circle.getBoundRadius());
+            element.setAttribute("radius", "" + circle.getGlobalRadius());
         }
-        else if(shape instanceof SimpleConvex){
-            SimpleConvex simpleConvex = (SimpleConvex) shape;
+        else if(shape instanceof SimpleConvexPolygon){
+            SimpleConvexPolygon simpleConvex = (SimpleConvexPolygon) shape;
             element = new Element("simpleConvex");
             Element elementBase = new Element("base");
-            for(Vector2D point : simpleConvex.getBase()){
+            for(Vector2D point : simpleConvex.getLocalPoints()){
                 Element elementPoint = new Element("point");
                 elementPoint.setText(generateVectorText(point));
                 elementBase.addContent(elementPoint);
@@ -284,16 +285,16 @@ public class MapFileHandler{
             element.addContent(elementBase);
         }
         Element elementTransform = new Element("transform");
-        elementTransform.setAttribute("x", "" + shape.getTransform().getX());
-        elementTransform.setAttribute("y", "" + shape.getTransform().getY());
-        elementTransform.setAttribute("direction", "" + shape.getTransform().getRadian());
-        elementTransform.setAttribute("scale", "" + shape.getTransform().getScale());
+        elementTransform.setAttribute("x", "" + shape.getTransform().extractX());
+        elementTransform.setAttribute("y", "" + shape.getTransform().extractY());
+        elementTransform.setAttribute("direction", "" + shape.getTransform().extractRadians());
+        elementTransform.setAttribute("scale", "" + shape.getTransform().extractScale());
         element.addContent(elementTransform);
         return element;
     }
     
-    private static Shape generateShape(Element element){
-        Shape shape = null;
+    private static ConvexShape generateShape(Element element){
+        ConvexShape shape = null;
         if(element.getName().equals("circle")){
             double radius = Double.parseDouble(element.getAttributeValue("radius"));
             shape = new Circle(radius);
@@ -306,13 +307,16 @@ public class MapFileHandler{
                 Element elementPoint = (Element) elementBaseChildren.get(i);
                 base[i] = generateVector2D(elementPoint.getText());
             }
-            shape = new SimpleConvex(base);
+            shape = new SimpleConvexPolygon(base);
         }
+        else throw new NotImplementedException();
         Element elementTransform = element.getChild("transform");
-        shape.getTransform().setX(Double.parseDouble(elementTransform.getAttributeValue("x")));
-        shape.getTransform().setY(Double.parseDouble(elementTransform.getAttributeValue("y")));
-        shape.getTransform().setRadian(Double.parseDouble(elementTransform.getAttributeValue("direction")));
-        shape.getTransform().setScale(Double.parseDouble(elementTransform.getAttributeValue("scale")));
+        shape.setTransform(
+                new Transform2D(
+                Double.parseDouble(elementTransform.getAttributeValue("scale")),
+                Double.parseDouble(elementTransform.getAttributeValue("direction")),
+                Double.parseDouble(elementTransform.getAttributeValue("x")),
+                Double.parseDouble(elementTransform.getAttributeValue("y"))));
         return shape;
     }
     

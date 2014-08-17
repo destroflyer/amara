@@ -2,16 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
+package amara.game.entitysystem.systems.physics.shapes;
 
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Util;
 import java.util.*;
 
 /**
  *
  * @author Philipp
  */
-public class Point2DUtil {
-    public static Point2D lineIntersectionPoint(Point2D p1, Point2D p2, Point2D p3, Point2D p4)
+public class Vector2DUtil {
+    public static Vector2D lineIntersectionPoint(Vector2D p1, Vector2D p2, Vector2D p3, Vector2D p4)
     {
         double denom = (p4.getY() - p3.getY()) * (p2.getX() - p1.getX()) - (p4.getX() - p3.getX()) * (p2.getY() - p1.getY());
         if (Util.withinEpsilon(denom)) return null;
@@ -19,9 +20,57 @@ public class Point2DUtil {
         double nomT = (p3.getX() - p1.getX()) * (p4.getY() - p3.getY()) + (p1.getY() - p3.getY()) * (p4.getX() - p3.getX());
         double t = nomT / denom;
 
-        return new Point2D(p1.getX() + t * (p2.getX() - p1.getX()), p1.getY() + t * (p2.getY() - p1.getY()));
+        return new Vector2D(p1.getX() + t * (p2.getX() - p1.getX()), p1.getY() + t * (p2.getY() - p1.getY()));
     }
-    public static Point2D lineSegmentIntersectionPointWithoutCorners(Point2D p1, Point2D p2, Point2D p3, Point2D p4)
+    public static boolean segmentAaBbCheck(Vector2D a, Vector2D b, Vector2D c, Vector2D d)
+    {
+        double aMin, aMax, bMin, bMax;
+        if(a.getX() < b.getX())
+        {
+            aMin = a.getX();
+            aMax = b.getX();
+        }
+        else
+        {
+            aMin = b.getX();
+            aMax = a.getX();
+        }
+        if(c.getX() < d.getX())
+        {
+            bMin = c.getX();
+            bMax = d.getX();
+        }
+        else
+        {
+            bMin = d.getX();
+            bMax = c.getX();
+        }
+        if(aMax <= bMin || bMax <= aMin) return false;
+        
+        if(a.getY() < b.getY())
+        {
+            aMin = a.getY();
+            aMax = b.getY();
+        }
+        else
+        {
+            aMin = b.getY();
+            aMax = a.getY();
+        }
+        if(c.getY() < d.getY())
+        {
+            bMin = c.getY();
+            bMax = d.getY();
+        }
+        else
+        {
+            bMin = d.getY();
+            bMax = c.getY();
+        }
+        if(aMax <= bMin || bMax <= aMin) return false;
+        return true;
+    }
+    public static Vector2D lineSegmentIntersectionPointWithoutCorners(Vector2D p1, Vector2D p2, Vector2D p3, Vector2D p4)
     {
         assert(!p1.equals(p2));
         assert(!p3.equals(p4));
@@ -51,7 +100,7 @@ public class Point2DUtil {
 
         if (test2) return null;
 
-        Point2D result = new Point2D(p1.getX() + t * (p2.getX() - p1.getX()), p1.getY() + t * (p2.getY() - p1.getY()));
+        Vector2D result = new Vector2D(p1.getX() + t * (p2.getX() - p1.getX()), p1.getY() + t * (p2.getY() - p1.getY()));
         if (result.withinEpsilon(p1)) return null;
         if (result.withinEpsilon(p2)) return null;
         if (result.withinEpsilon(p3)) return null;
@@ -73,67 +122,98 @@ public class Point2DUtil {
         return result;
     }
     
-    public static double angle(Point2D a, Point2D b, Point2D c)
+    public static double angle(Vector2D a, Vector2D b, Vector2D c)
     {
         return a.sub(b).undirectedAngle(c.sub(b));
     }
     
-    public static Point2D fromLineSegmentToPoint(Point2D a, Point2D b, Point2D p)
+    public static Vector2D fromLineSegmentToPoint(Vector2D a, Vector2D b, Vector2D p)
     {
         return fromLineSegmentToPoint(a.getX(), a.getY(), b.getX(), b.getY(), p.getX(), p.getY());
     }
-    public static Point2D fromLineSegmentToPoint(double ax, double ay, double bx, double by, double px, double py)
+    public static Vector2D fromLineSegmentToPoint(double ax, double ay, double bx, double by, double px, double py)
     {
         bx -= ax;
         by -= ay;
         px -= ax;
         py -= ay;
         ay = (px * bx + py * by);
-        if (ay <= 0) return new Point2D(px, py);
+        if (ay <= 0) return new Vector2D(px, py);
         ax = (bx * bx + by * by);
         assert(0 < ax);
-        if (ax <= ay) return new Point2D(px - bx, py - by);
+        if (ax <= ay) return new Vector2D(px - bx, py - by);
         ay /= -ax;
         ax = ay * bx + px;
         ay = ay * by + py;
-        return new Point2D(ax, ay);
+        return new Vector2D(ax, ay);
+    }
+    public static Vector2D fromLineToPoint(Vector2D a, Vector2D b, Vector2D p)
+    {
+        return fromLineToPoint(a.getX(), a.getY(), b.getX(), b.getY(), p.getX(), p.getY());
+    }
+    public static Vector2D fromLineToPoint(double ax, double ay, double bx, double by, double px, double py)
+    {
+        bx -= ax;
+        by -= ay;
+        px -= ax;
+        py -= ay;
+        ay = (px * bx + py * by);
+        ax = (bx * bx + by * by);
+        assert(0 < ax);
+        ay /= -ax;
+        ax = ay * bx + px;
+        ay = ay * by + py;
+        return new Vector2D(ax, ay);
+    }
+    
+    public static double area(Vector2D... points)
+    {
+        double area = 0d;
+        for (int i = 0; i < points.length; i++)
+        {
+            int j = (i + 1) % points.length;
+
+            area += (points[i].getX() - points[j].getX()) * (points[i].getY() + points[j].getY());
+        }
+        area /= 2;
+        return area;
     }
 
-    public static Point2D sum(Point2D... points)
+    public static Vector2D sum(Vector2D... points)
     {
         double x = 0d;
         double y = 0d;
-        for(Point2D point: points)
+        for(Vector2D point: points)
         {
             x += point.getX();
             y += point.getY();
         }
-        return new Point2D(x, y);
+        return new Vector2D(x, y);
     }
-    public static Point2D avg(Point2D... points)
+    public static Vector2D avg(Vector2D... points)
     {
         return sum(points).div(points.length);
     }
-    public static Point2D weightAvg(Point2D a, double weightA, Point2D b, double weightB)
+    public static Vector2D weightAvg(Vector2D a, double weightA, Vector2D b, double weightB)
     {
-        return new Point2D((a.getX() * weightA + b.getX() * weightB) / (weightA + weightB), (a.getY() * weightA + b.getY() * weightB) / (weightA + weightB));
+        return new Vector2D((a.getX() * weightA + b.getX() * weightB) / (weightA + weightB), (a.getY() * weightA + b.getY() * weightB) / (weightA + weightB));
     }
-    public static Point2D interpolate(Point2D a, Point2D b, double weight)
+    public static Vector2D interpolate(Vector2D a, Vector2D b, double weight)
     {
         assert 0 <= weight && weight <= 1 : weight;
         return weightAvg(a, 1 - weight, b, weight);
     }
 //left < 0 < right
-    public static double lineSide(Point2D p, Point2D a, Point2D b)
+    public static double lineSide(Vector2D p, Vector2D a, Vector2D b)
     {
         return (b.getY() - a.getY()) * (p.getX() - a.getX()) - (b.getX() - a.getX()) * (p.getY() - a.getY());
     }
 
-    public static double lineAxisIntersectionX(Point2D a, Point2D b, double yValue)
+    public static double lineAxisIntersectionX(Vector2D a, Vector2D b, double yValue)
     {
         return lineAxisIntersectionYHelper(a.getY(), a.getX(), b.getY(), b.getX(), yValue);
     }
-    public static double lineAxisIntersectionY(Point2D a, Point2D b, double xValue)
+    public static double lineAxisIntersectionY(Vector2D a, Vector2D b, double xValue)
     {
         return lineAxisIntersectionYHelper(a.getX(), a.getY(), b.getX(), b.getY(), xValue);
     }
@@ -142,11 +222,11 @@ public class Point2DUtil {
         if (ax == bx) return Double.NaN;
         return ay + ((xValue - ax) / (bx - ax)) * (by - ay);
     }
-    public static double lineSegmentAxisIntersectionX(Point2D a, Point2D b, double yValue)
+    public static double lineSegmentAxisIntersectionX(Vector2D a, Vector2D b, double yValue)
     {
         return lineSegmentAxisIntersectionYHelper(a.getY(), a.getX(), b.getY(), b.getX(), yValue);
     }
-    public static double lineSegmentAxisIntersectionY(Point2D a, Point2D b, double xValue)
+    public static double lineSegmentAxisIntersectionY(Vector2D a, Vector2D b, double xValue)
     {
         return lineSegmentAxisIntersectionYHelper(a.getX(), a.getY(), b.getX(), b.getY(), xValue);
     }
@@ -156,7 +236,7 @@ public class Point2DUtil {
         return ay + ((xValue - ax) / (bx - ax)) * (by - ay);
     }
     
-    public static boolean onLineSegment(Point2D p, Point2D a, Point2D b)
+    public static boolean onLineSegment(Vector2D p, Vector2D a, Vector2D b)
     {
         assert p != null && a != null && b != null;
         p = p.sub(a);
@@ -170,13 +250,13 @@ public class Point2DUtil {
         return true;
     }
     
-    public static Point2D rayLinesIntersectionPoint(Point2D source, Point2D through, ArrayList<Point2D> lines)
+    public static Vector2D rayLinesIntersectionPoint(Vector2D source, Vector2D through, ArrayList<Vector2D> lines)
     {
-        Point2D point = null;
+        Vector2D point = null;
         double squaredDist = Double.POSITIVE_INFINITY;
         for (int i = 0; i < lines.size(); i += 2)
         {
-            Point2D tmp = lineIntersectionPoint(source, through, lines.get(i), lines.get(i + 1));
+            Vector2D tmp = lineIntersectionPoint(source, through, lines.get(i), lines.get(i + 1));
             if(tmp == null) continue;
             double tmpSqDist = source.squaredDistance(tmp);
             if(tmpSqDist < squaredDist)

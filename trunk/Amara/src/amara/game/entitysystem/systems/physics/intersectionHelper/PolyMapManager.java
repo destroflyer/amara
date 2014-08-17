@@ -4,6 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.intersectionHelper;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
 import amara.game.entitysystem.systems.physics.*;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import java.util.*;
@@ -19,7 +21,7 @@ public final class PolyMapManager
     private HashMap<Double, NavigationMap> navis = new HashMap<Double, NavigationMap>();
     private double width, height;
     
-    private HashMap<Integer, ArrayList<Point2D>> paths = new HashMap<Integer, ArrayList<Point2D>>();
+    private HashMap<Integer, ArrayList<Vector2D>> paths = new HashMap<Integer, ArrayList<Vector2D>>();
     private HashMap<Integer, Double> walked = new HashMap<Integer, Double>();
     
     private HashMap<Integer, TrianglePath> triPaths = new HashMap<Integer, TrianglePath>();
@@ -42,7 +44,7 @@ public final class PolyMapManager
         return height;
     }
     
-    public boolean outOfMapBounds(Point2D pos, double radius)
+    public boolean outOfMapBounds(Vector2D pos, double radius)
     {
         if(pos.getX() + radius <= 0 || width <= pos.getX() - radius) return true;
         if(pos.getY() + radius <= 0 || height <= pos.getY() - radius) return true;
@@ -75,24 +77,24 @@ public final class PolyMapManager
         return navis.get(key);
     }
     
-    public Point2D closestValid(Point2D pos, double radius)
+    public Vector2D closestValid(Vector2D pos, double radius)
     {
         return mapFromRadius(radius).closestValid(pos);
     }
     
-    private ArrayList<Point2D> findPath(Point2D start, Point2D end, double radius)
+    private ArrayList<Vector2D> findPath(Vector2D start, Vector2D end, double radius)
     {
         return mapFromRadius(0).findPath(start, end, radius);
     }
-    public Point2D followPath(int id, Point2D from, Point2D to, double distance, double radius)
+    public Vector2D followPath(int id, Vector2D from, Vector2D to, double distance, double radius)
     {
-        ArrayList<Point2D> path = paths.get(id);
+        ArrayList<Vector2D> path = paths.get(id);
         if(path == null || 1 < path.get(path.size() - 1).squaredDistance(to))
         {
             path = findPath(from, to, radius);
             if(path == null)
             {
-                if(distance * distance < from.squaredDistance(to)) return Point2DUtil.interpolate(from, to, distance);
+                if(distance * distance < from.squaredDistance(to)) return Vector2DUtil.interpolate(from, to, distance);
                 return to;
             }
             paths.put(id, path);
@@ -116,7 +118,7 @@ public final class PolyMapManager
             }
             else
             {
-                return Point2DUtil.interpolate(path.get(current), path.get(next), distance / distNext);
+                return Vector2DUtil.interpolate(path.get(current), path.get(next), distance / distNext);
             }
         }
         paths.remove(id);
@@ -124,7 +126,7 @@ public final class PolyMapManager
         return path.get(path.size() - 1);
     }
     
-    public Point2D followTriPath(int id, Point2D from, Point2D to, double distance, double radius)
+    public Vector2D followTriPath(int id, Vector2D from, Vector2D to, double distance, double radius)
     {
         from = closestValid(from, radius);
         to = closestValid(to, radius);
@@ -135,20 +137,20 @@ public final class PolyMapManager
             if(path == null)
             {
                 System.out.println("Error in pathfinding, walking straight line.");
-                if(distance * distance < from.squaredDistance(to)) return Point2DUtil.interpolate(from, to, distance / from.distance(to));
+                if(distance * distance < from.squaredDistance(to)) return Vector2DUtil.interpolate(from, to, distance / from.distance(to));
                 return to;
             }
             triPaths.put(id, path);
-            Point2D position = path.moveDistance(from, to, distance);
+            Vector2D position = path.moveDistance(from, to, distance);
             if(position == null)
             {
                 System.out.println("Error in pathfinding, walking straight line.");
-                return Point2DUtil.interpolate(from, to, distance / from.distance(to));
+                return Vector2DUtil.interpolate(from, to, distance / from.distance(to));
             }
             if(position.equals(to)) triPaths.remove(id);
             return position;
         }
-        Point2D position = path.moveDistance(from, to, distance);
+        Vector2D position = path.moveDistance(from, to, distance);
         if(position == null)
         {
             triPaths.remove(id);
@@ -158,7 +160,7 @@ public final class PolyMapManager
         return position;
     }
     
-    public Polygon sightPolygon(Point2D source, double range)
+    public Polygon sightPolygon(Vector2D source, double range)
     {
         if(map.contains(source))
         {

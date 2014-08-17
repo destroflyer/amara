@@ -4,6 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+
 /**
  *
  * @author Philipp
@@ -54,7 +56,7 @@ public class BoundRectangle
         return new BoundRectangle(minX - value, minY - value, maxX + value, maxY + value);
     }
     
-    public boolean contains(Point2D p)
+    public boolean contains(Vector2D p)
     {
         return containsHelper(p.getX(), p.getY(), p.getX(), p.getY());
     }

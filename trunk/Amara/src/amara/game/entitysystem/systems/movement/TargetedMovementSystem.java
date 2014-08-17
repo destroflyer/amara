@@ -11,7 +11,8 @@ import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.systems.physics.IntersectionObserver;
 import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Point2D;
+import amara.game.entitysystem.systems.physics.shapes.ConvexShape;
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 
 /**
  *
@@ -54,14 +55,14 @@ public class TargetedMovementSystem implements EntitySystem{
                             float speed = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class).getSpeed();
                             Vector2f movedDistance;
                             if(entityWorld.hasComponent(entity, HitboxActiveComponent.class)){
-                                Point2D pathfindingFrom = new Point2D(position.getX(), position.getY());
-                                Point2D pathfindingTo = new Point2D(targetPosition.getX(), targetPosition.getY());
+                                Vector2D pathfindingFrom = new Vector2D(position.getX(), position.getY());
+                                Vector2D pathfindingTo = new Vector2D(targetPosition.getX(), targetPosition.getY());
                                 double hitboxRadius = 0;
                                 HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
                                 if((hitboxComponent != null)){
-                                    hitboxRadius = hitboxComponent.getShape().getBoundRadius();
+                                    hitboxRadius = ((ConvexShape)hitboxComponent.getShape()).getBoundCircle().getGlobalRadius();
                                 }
-                                Point2D newPosition = polyMapManager.followTriPath(entity, pathfindingFrom, pathfindingTo, speed * deltaSeconds, hitboxRadius);
+                                Vector2D newPosition = polyMapManager.followTriPath(entity, pathfindingFrom, pathfindingTo, speed * deltaSeconds, hitboxRadius);
                                 movedDistance = new Vector2f((float) newPosition.getX(), (float) newPosition.getY()).subtractLocal(position);
                             }
                             else{

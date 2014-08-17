@@ -4,6 +4,9 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Transform2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
 import java.util.*;
 
 /**
@@ -12,7 +15,7 @@ import java.util.*;
  */
 class HolePolygonUtil
 {
-    public static ArrayList<Point2D> triangles(HolePolygon poly)
+    public static ArrayList<Vector2D> triangles(HolePolygon poly)
     {
         assert !poly.isInfinite();
         return SimplePolygonUtil.triangles(cutToSimple(poly));
@@ -28,7 +31,7 @@ class HolePolygonUtil
         return index;
     }
     
-    private static int leftmostRayIntersectionPreIndex(Point2D raySource, SimplePolygon simple)
+    private static int leftmostRayIntersectionPreIndex(Vector2D raySource, SimplePolygon simple)
     {
         double minIntersectionX = Double.NaN;
         int index = -1;
@@ -49,13 +52,13 @@ class HolePolygonUtil
         assert index != -1;
         return index;
     }
-    private static double rayIntersectionHelper(Point2D raySource, Point2D a, Point2D b)
+    private static double rayIntersectionHelper(Vector2D raySource, Vector2D a, Vector2D b)
     {
         if(Util.withinEpsilon(a.getY() - raySource.getY())) return a.getX();
-        return Point2DUtil.lineSegmentAxisIntersectionX(a, b, raySource.getY());
+        return Vector2DUtil.lineSegmentAxisIntersectionX(a, b, raySource.getY());
     }
     
-    private static int closestCandidateIndex(SimplePolygon outer, Point2D iP, int outerIndex, Point2D intersection)
+    private static int closestCandidateIndex(SimplePolygon outer, Vector2D iP, int outerIndex, Vector2D intersection)
     {
         int next = (outerIndex + 1) % outer.numPoints();
         assert !intersection.withinEpsilon(outer.getPoint(next));
@@ -78,7 +81,7 @@ class HolePolygonUtil
 
             if(iP.getX() <= outer.getPoint(j).getX())
             {
-                if(Point2DUtil.lineSide(outer.getPoint(j), outer.getPoint(i), outer.getPoint(h)) <= 0)
+                if(Vector2DUtil.lineSide(outer.getPoint(j), outer.getPoint(i), outer.getPoint(h)) <= 0)
                 {
                     SimplePolygon t = new SimplePolygon();
                     t.add(outer.getPoint(i));
@@ -144,16 +147,16 @@ class HolePolygonUtil
         assert !SimplePolygonUtil.outlinesIntersect(outer, inner);
         
         int innerIndex = rightmostIndex(inner);
-        Point2D iP = inner.getPoint(innerIndex);
+        Vector2D iP = inner.getPoint(innerIndex);
         
         int outerIndex = leftmostRayIntersectionPreIndex(iP, outer);
-        Point2D oP = outer.getPoint(outerIndex);
+        Vector2D oP = outer.getPoint(outerIndex);
         double minIntersectionX = rayIntersectionHelper(iP, oP, outer.getPoint((outerIndex + 1) % outer.numPoints()));
         
         assert outerIndex != -1;
         assert iP.getX() <= oP.getX(): iP.getX() + " - " + oP.getX();
         
-        Point2D tmp = new Point2D(minIntersectionX, iP.getY());
+        Vector2D tmp = new Vector2D(minIntersectionX, iP.getY());
         assert !SimplePolygonUtil.outlineIntersectsSegment(outer, iP, tmp);
         if(!tmp.withinEpsilon(oP))
         {
@@ -358,9 +361,9 @@ class HolePolygonUtil
         return result;
     }
 
-    static HashSet<Point2D> points(HolePolygon polygon)
+    static HashSet<Vector2D> points(HolePolygon polygon)
     {
-        HashSet<Point2D> points = new HashSet<Point2D>();
+        HashSet<Vector2D> points = new HashSet<Vector2D>();
         for (int i = 0; i < polygon.numSimplePolys(); i++)
         {
             points.addAll(SimplePolygonUtil.points(polygon.getSimplePoly(i)));
@@ -368,16 +371,16 @@ class HolePolygonUtil
         return points;
     }
 
-    static ArrayList<ArrayList<Point2D>> outlines(HolePolygon poly)
+    static ArrayList<ArrayList<Vector2D>> outlines(HolePolygon poly)
     {
-        ArrayList<ArrayList<Point2D>> outlines = new ArrayList<ArrayList<Point2D>>();
+        ArrayList<ArrayList<Vector2D>> outlines = new ArrayList<ArrayList<Vector2D>>();
         for (int i = 0; i < poly.numSimplePolys(); i++) {
             outlines.add(SimplePolygonUtil.outline(poly.getSimplePoly(i)));
         }
         return outlines;
     }
     
-    static void edges(ArrayList<Point2D> edges, HolePolygon polygon)
+    static void edges(ArrayList<Vector2D> edges, HolePolygon polygon)
     {
         for (int i = 0; i < polygon.numSimplePolys(); i++)
         {

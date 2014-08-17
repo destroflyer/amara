@@ -4,7 +4,6 @@
  */
 package amara.game.entitysystem.systems.physics.shapes;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Point2D;
 import java.util.*;
 
 /**
@@ -21,13 +20,13 @@ public class Triangulator
         for(i = 0; side == 0 && i < points.length; i++) {
             j = (i + 1) % points.length;
             k = (j + 1) % points.length;
-            side = Util.getLineSide(points[i], points[j], points[k]);
+            side = Vector2DUtil.lineSide(points[k], points[i], points[j]);
         }
         if(side == 0) return true;
         for(i = 0; i < points.length; i++) {
             j = (i + 1) % points.length;
             k = (j + 1) % points.length;
-            if(side * Util.getLineSide(points[i], points[j], points[k]) < 0) return false;
+            if(side * Vector2DUtil.lineSide(points[k], points[i], points[j]) < 0) return false;
         }
         return true;
     }
@@ -43,14 +42,14 @@ public class Triangulator
         return true;
     }
     
-    public ArrayList<SimpleConvex> createTrisFromPoly(List<Vector2D> vertices)
+    public ArrayList<SimpleConvexPolygon> createTrisFromPoly(List<Vector2D> vertices)
     {
         ArrayList<Integer> indices = counterClockwiseIndices(vertices);
         ArrayList<Integer> tris = triangulatePoly(vertices, indices);
         return toShapes(vertices, tris);
     }
     
-    public ArrayList<SimpleConvex> createDelaunayTrisFromPoly(List<Vector2D> vertices)
+    public ArrayList<SimpleConvexPolygon> createDelaunayTrisFromPoly(List<Vector2D> vertices)
     {
         ArrayList<Vector2D> arrVertices = new ArrayList<Vector2D>(vertices);
         ArrayList<Integer> indices = counterClockwiseIndices(vertices);
@@ -59,10 +58,10 @@ public class Triangulator
         tris = d.delaunay(arrVertices, tris);
         return toShapes(vertices, tris);
     }
-    public ArrayList<Point2D> delaunayTris(ArrayList<Point2D> tris)
+    public ArrayList<Vector2D> delaunayTris(ArrayList<Vector2D> tris)
     {
         
-        ArrayList<Point2D> vertices = new ArrayList<Point2D>();
+        ArrayList<Vector2D> vertices = new ArrayList<Vector2D>();
         ArrayList<Integer> indices = new ArrayList<Integer>();
         indexTris(tris, vertices, indices);
         
@@ -73,16 +72,16 @@ public class Triangulator
         }
         
         indices = new Delaunay().delaunay(vecVerts, indices);
-        ArrayList<Point2D> result = new ArrayList<Point2D>();
+        ArrayList<Vector2D> result = new ArrayList<Vector2D>();
         for (int i = 0; i < indices.size(); i++)
         {
             Vector2D v = vecVerts.get(indices.get(i));
-            result.add(new Point2D(v.getX(), v.getY()));
+            result.add(new Vector2D(v.getX(), v.getY()));
         }
         return result;
     }
     
-    private void indexTris(ArrayList<Point2D> tris, ArrayList<Point2D> vertices, ArrayList<Integer> indices)
+    private void indexTris(ArrayList<Vector2D> tris, ArrayList<Vector2D> vertices, ArrayList<Integer> indices)
     {
         for (int i = 0; i < tris.size(); i++)
         {
@@ -95,7 +94,7 @@ public class Triangulator
             indices.add(index);
         }
     }
-    private int indexOf(ArrayList<Point2D> vertices, Point2D vertex)
+    private int indexOf(ArrayList<Vector2D> vertices, Vector2D vertex)
     {
         for (int i = 0; i < vertices.size(); i++)
         {
@@ -104,13 +103,13 @@ public class Triangulator
         return -1;
     }
     
-    private ArrayList<SimpleConvex> toShapes(List<Vector2D> vertices, ArrayList<Integer> tris)
+    private ArrayList<SimpleConvexPolygon> toShapes(List<Vector2D> vertices, ArrayList<Integer> tris)
     {
-        ArrayList<SimpleConvex> list = new ArrayList<SimpleConvex>();
+        ArrayList<SimpleConvexPolygon> list = new ArrayList<SimpleConvexPolygon>();
         for (int i = 0; i < tris.size(); i += 3)
         {
             Vector2D[] vecs = new Vector2D[]{vertices.get(tris.get(i)), vertices.get(tris.get(i + 1)), vertices.get(tris.get(i + 2))};
-            list.add(new SimpleConvex(vecs));
+            list.add(new SimpleConvexPolygon(vecs));
         }
         return list;
     }
@@ -233,11 +232,11 @@ public class Triangulator
         Vector2D prev = vertices.get(poly.get((i + poly.size() - 1) % poly.size()));
         Vector2D curr = vertices.get(poly.get(i));
         Vector2D next = vertices.get(poly.get((i + 1) % poly.size()));
-        if(Util.isSideLeft(Util.getLineSide(prev, next, curr)))
+        if(Vector2DUtil.lineSide(curr, prev, next) < 0)
         {
-            return Util.isSideLeft(Util.getLineSide(curr, next, p)) || Util.isSideLeft(Util.getLineSide(prev, curr, p));
+            return Vector2DUtil.lineSide(p, curr, next) < 0 || Vector2DUtil.lineSide(p, prev, curr) < 0;
         }
-        return Util.isSideLeft(Util.getLineSide(curr, next, p)) && Util.isSideLeft(Util.getLineSide(prev, curr, p));
+        return Vector2DUtil.lineSide(p, curr, next) < 0 && Vector2DUtil.lineSide(p, prev, curr) < 0;
     }
     
     private boolean multiIntersect(ArrayList<Vector2D> vertices, Vector2D a, Vector2D b, ArrayList<ArrayList<Integer>> polys)
@@ -257,7 +256,7 @@ public class Triangulator
             Vector2D d = vertices.get(poly.get((j + 1) % poly.size()));
 
             if((a.equals(c) && b.equals(d)) || (a.equals(d) && b.equals(c))) continue;
-            if(Util.lineSegmentsIntersect(a, b, c, d)) return true;
+            if(Vector2DUtil.lineSegmentIntersectionPointWithoutCorners(a, b, c, d) != null) return true;
         }
         return false;
     }

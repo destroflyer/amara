@@ -4,16 +4,18 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+
 /**
  *
  * @author Philipp
  */
 public class SweepEdge
 {
-    private Point2D a, b;
+    private Vector2D a, b;
     private double minY, maxY;
 
-    public SweepEdge(Point2D a, Point2D b)
+    public SweepEdge(Vector2D a, Vector2D b)
     {
         assert !a.equals(b);
         if(a.getX() <= b.getX())
@@ -39,11 +41,11 @@ public class SweepEdge
         }
     }
 
-    public Point2D getA()
+    public Vector2D getA()
     {
         return a;
     }
-    public Point2D getB()
+    public Vector2D getB()
     {
         return b;
     }

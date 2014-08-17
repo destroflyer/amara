@@ -4,9 +4,9 @@
  */
 package amara.game.entitysystem.systems.physics.shapes;
 
-import amara.game.entitysystem.systems.physics.PolyHelper;
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
-import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Polygon;
+import com.jme3.network.serializing.*;
+import java.util.*;
 
 /**
  *
@@ -15,85 +15,119 @@ import com.jme3.network.serializing.Serializable;
 @Serializable
 public class PolygonShape extends Shape
 {
-    private Polygon poly, cache;
+    private Polygon localPolygon, globalPolygon = null;
 
-    public PolygonShape() {
+    public PolygonShape()
+    {
     }
 
-    public PolygonShape(Polygon poly)
+    public PolygonShape(Polygon polygon)
     {
-        if(poly.isInfinite()) throw new Error("does not support infinite polys");
-        this.poly = poly;
-        calcBoundRadius();
+        localPolygon = polygon;
+    }
+
+    @Override
+    public void setTransform(Transform2D transform)
+    {
+        globalPolygon = null;
+        this.transform = transform;
     }
     
-    private void calcBoundRadius()
+    private void updateCache()
     {
-        for (Point2D point : poly.points())
+        if(globalPolygon == null)
         {
-            if(point.length() > baseBoundRadius) baseBoundRadius = point.length();
+            globalPolygon = localPolygon.transform(transform);
         }
     }
-    
-    public Polygon getTransformed()
+
+    @Override
+    public boolean contains(Vector2D point)
     {
-        updateShape();
-        return cache;
-    }
-    
-    @Override
-    public boolean contains(Vector2D point) {
-        return poly.contains(new Point2D(point.getX(), point.getY()));
+        updateCache();
+        return globalPolygon.contains(point);
     }
 
     @Override
-    public boolean intersects(Shape s)
+    public void draw(ShapeGraphics graphics, boolean global)
     {
-        return PolyHelper.fromShape(s).intersects(getTransformed());
+        Polygon polygon;
+        if(global)
+        {
+            updateCache();
+            polygon = globalPolygon;
+        }
+        else polygon = localPolygon;
+        
+        for (ArrayList<Vector2D> poly : polygon.outlines())
+        {
+            graphics.drawPolygon(poly.toArray(new Vector2D[0]));
+        }
     }
 
     @Override
-    public boolean intersects(SimpleConvex c) {
-        return PolyHelper.fromShape(c).intersects(getTransformed());
-    }
-
-    @Override
-    public boolean intersects(Circle c) {
-        return PolyHelper.fromShape(c).intersects(getTransformed());
-    }
-
-    @Override
-    public Vector2D getResolveVector(Shape shape) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Vector2D getResolveVector(SimpleConvex convex) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Vector2D getResolveVector(Circle circle) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    protected void updateTransform()
+    public void fill(ShapeGraphics graphics, boolean global)
     {
-        cache = poly.transform(new Transform2D(transform.getScale(), transform.getRadian(), transform.getX(), transform.getY()));
+        Polygon polygon;
+        if(global)
+        {
+            updateCache();
+            polygon = globalPolygon;
+        }
+        else polygon = localPolygon;
+        
+        for (ArrayList<Vector2D> poly : polygon.cutPolys())
+        {
+            graphics.fillPolygon(poly.toArray(new Vector2D[0]));
+        }
     }
 
-    @Override
-    public Bounds getScalarProjectOnto(Vector2D axis) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Polygon getLocalPolygon()
+    {
+        return localPolygon;
+    }
+
+    public Polygon getGlobalPolygon()
+    {
+        return globalPolygon;
     }
 
     @Override
     public PolygonShape clone()
     {
-        PolygonShape clone = new PolygonShape(poly);
-        clone.transform = transform.clone();
-        return clone;
+        PolygonShape p = new PolygonShape(localPolygon);
+        p.setTransform(transform);
+        return p;
+    }
+
+    @Override
+    public Vector2D getIntersectionResolver(Shape s)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public double getMinX()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public double getMaxX()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public double getMinY()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public double getMaxY()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

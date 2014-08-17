@@ -4,6 +4,9 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Transform2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
 import java.io.*;
 import java.util.*;
 import java.util.logging.*;
@@ -15,9 +18,9 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 class SetPolygonUtil
 {
-    public static ArrayList<Point2D> triangles(SetPolygon setPoly)
+    public static ArrayList<Vector2D> triangles(SetPolygon setPoly)
     {
-        ArrayList<Point2D> list = new ArrayList<Point2D>();
+        ArrayList<Vector2D> list = new ArrayList<Vector2D>();
         for (int i = 0; i < setPoly.numPolygons(); i++)
         {
             list.addAll(HolePolygonUtil.triangles(setPoly.getPolygon(i)));
@@ -25,7 +28,7 @@ class SetPolygonUtil
         assert triTest(list, setPoly);
         return list;
     }
-    private static boolean triTest(ArrayList<Point2D> triangles, SetPolygon poly)
+    private static boolean triTest(ArrayList<Vector2D> triangles, SetPolygon poly)
     {
         double area = 0;
         for (int i = 0; i < triangles.size(); i += 3)
@@ -188,7 +191,7 @@ class SetPolygonUtil
         assert(smoothA == A.isSmooth());
         assert(smoothB == B.isSmooth());
         //System.out.println("d");
-        ArrayList<Point2D> edges = operationEdges(a, b, o);
+        ArrayList<Vector2D> edges = operationEdges(a, b, o);
         //System.out.println("e");
         ArrayList<SimplePolygon> simpleSet = edgesToSimpleSet(edges);
         //System.out.println("f");
@@ -214,12 +217,12 @@ class SetPolygonUtil
                 throw new NotImplementedException();
         }
     }
-    public static ArrayList<Point2D> operationEdges(SetPolygon A, SetPolygon B, PolygonOperation o)
+    public static ArrayList<Vector2D> operationEdges(SetPolygon A, SetPolygon B, PolygonOperation o)
     {
 //        assert(!A.hasLooseLines());
 //        assert(!B.hasLooseLines());
 
-        ArrayList<Point2D> list = new ArrayList<Point2D>();
+        ArrayList<Vector2D> list = new ArrayList<Vector2D>();
 
         for (int k = 0; k < A.numPolygons(); k++)
         {
@@ -252,12 +255,12 @@ class SetPolygonUtil
         assert(edgeCheck(list));
         return list;
     }
-    private static void operationLineHelperA(ArrayList<Point2D> edges, Point2D a, Point2D b, SetPolygon B, PolygonOperation o)
+    private static void operationLineHelperA(ArrayList<Vector2D> edges, Vector2D a, Vector2D b, SetPolygon B, PolygonOperation o)
     {
         switch (o)
         {
             case Union:
-                if (B.areaContains(Point2DUtil.avg(a, b)) == Containment.Outside
+                if (B.areaContains(Vector2DUtil.avg(a, b)) == Containment.Outside
                         || B.hasEdge(a, b))
                 {
                     edges.add(a);
@@ -265,7 +268,7 @@ class SetPolygonUtil
                 }
                 break;
             case Exclude:
-                if (B.areaContains(Point2DUtil.avg(a, b)) == Containment.Outside
+                if (B.areaContains(Vector2DUtil.avg(a, b)) == Containment.Outside
                         || B.hasEdge(b, a))
                 {
                     edges.add(a);
@@ -273,7 +276,7 @@ class SetPolygonUtil
                 }
                 break;
             case Intersection:
-                if (B.areaContains(Point2DUtil.avg(a, b)) == Containment.Inside
+                if (B.areaContains(Vector2DUtil.avg(a, b)) == Containment.Inside
                         || B.hasEdge(a, b))
                 {
                     edges.add(a);
@@ -285,26 +288,26 @@ class SetPolygonUtil
         }
         assert(edgeDuplicateCheck(edges));
     }
-    private static void operationLineHelperB(ArrayList<Point2D> edges, Point2D a, Point2D b, SetPolygon A, PolygonOperation o)
+    private static void operationLineHelperB(ArrayList<Vector2D> edges, Vector2D a, Vector2D b, SetPolygon A, PolygonOperation o)
     {
         switch (o)
         {
             case Union:
-                if (A.areaContains(Point2DUtil.avg(a, b)) == Containment.Outside)
+                if (A.areaContains(Vector2DUtil.avg(a, b)) == Containment.Outside)
                 {
                     edges.add(a);
                     edges.add(b);
                 }
                 break;
             case Exclude:
-                if (A.areaContains(Point2DUtil.avg(a, b)) == Containment.Inside)
+                if (A.areaContains(Vector2DUtil.avg(a, b)) == Containment.Inside)
                 {
                     edges.add(b);
                     edges.add(a);
                 }
                 break;
             case Intersection:
-                if (A.areaContains(Point2DUtil.avg(a, b)) == Containment.Inside)
+                if (A.areaContains(Vector2DUtil.avg(a, b)) == Containment.Inside)
                 {
                     edges.add(a);
                     edges.add(b);
@@ -315,7 +318,7 @@ class SetPolygonUtil
         }
         assert(edgeDuplicateCheck(edges));
     }
-    private static boolean edgeDuplicateCheck(List<Point2D> edges)
+    private static boolean edgeDuplicateCheck(List<Vector2D> edges)
     {
         assert((edges.size() & 1) == 0);
 
@@ -323,20 +326,20 @@ class SetPolygonUtil
         {
             for (int j = i + 2; j < edges.size(); j += 2)
             {
-                assert(!(edges.get(i).equals(edges.get(j)) && edges.get(i + 1).equals(edges.get(j + 1))));
+                assert(!(edges.get(i).withinEpsilon(edges.get(j)) && edges.get(i + 1).withinEpsilon(edges.get(j + 1))));
             }
         }
         return true;
     }
-    private static boolean edgeCheck(List<Point2D> edges)
+    private static boolean edgeCheck(List<Vector2D> edges)
     {
         edgeDuplicateCheck(edges);
 
-        HashMap<Point2D, Integer> starts = new HashMap<Point2D, Integer>();
-        HashMap<Point2D, Integer> ends = new HashMap<Point2D, Integer>();
+        HashMap<Vector2D, Integer> starts = new HashMap<Vector2D, Integer>();
+        HashMap<Vector2D, Integer> ends = new HashMap<Vector2D, Integer>();
 
-        HashSet<Point2D> points = new HashSet<Point2D>(edges);
-        for(Point2D point: points)
+        HashSet<Vector2D> points = new HashSet<Vector2D>(edges);
+        for(Vector2D point: points)
         {
             starts.put(point, 0);
             ends.put(point, 0);
@@ -348,28 +351,28 @@ class SetPolygonUtil
             ends.put(edges.get(i), ends.get(edges.get(i)) + 1);
         }
 
-        for(Point2D point: points)
+        for(Vector2D point: points)
         {
             if (starts.get(point) != ends.get(point)) return false;
         }
         return true;
     }
-    private static ArrayList<SimplePolygon> edgesToSimpleSet(List<Point2D> edges)
+    private static ArrayList<SimplePolygon> edgesToSimpleSet(List<Vector2D> edges)
     {
         assert(edgeCheck(edges));
         ArrayList<SimplePolygon> result = new ArrayList<SimplePolygon>();
-        ArrayList<ArrayList<Point2D>> chains = new ArrayList<ArrayList<Point2D>>();
+        ArrayList<ArrayList<Vector2D>> chains = new ArrayList<ArrayList<Vector2D>>();
         for (int i = 0; i < edges.size(); i += 2)
         {
-            Point2D A = edges.get(i);
-            Point2D B = edges.get(i + 1);
+            Vector2D A = edges.get(i);
+            Vector2D B = edges.get(i + 1);
 
             int endsWithA = -1;
             int startsWithB = -1;
 
             for (int j = 0; j < chains.size(); j++)
             {
-                ArrayList<Point2D> chain = chains.get(j);
+                ArrayList<Vector2D> chain = chains.get(j);
                 if (chain.get(chain.size() - 1).withinEpsilon(A)) endsWithA = j;
                 if (chain.get(0).withinEpsilon(B)) startsWithB = j;
             }
@@ -378,7 +381,7 @@ class SetPolygonUtil
             {
                 if (startsWithB == -1)
                 {
-                    ArrayList<Point2D> C = new ArrayList<Point2D>();
+                    ArrayList<Vector2D> C = new ArrayList<Vector2D>();
                     C.add(A);
                     C.add(B);
                     chains.add(C);
@@ -419,14 +422,14 @@ class SetPolygonUtil
         if(!chains.isEmpty())
         {
             double permittedErrorSquared = 0.01d;
-            ArrayList<Point2D> firstChain = chains.get(0);
-            Point2D last = firstChain.get(firstChain.size() - 1);
+            ArrayList<Vector2D> firstChain = chains.get(0);
+            Vector2D last = firstChain.get(firstChain.size() - 1);
             for (int i = 0; i < chains.size(); i++)
             {
-                Point2D first = chains.get(i).get(0);
+                Vector2D first = chains.get(i).get(0);
                 if(first.squaredDistance(last) < permittedErrorSquared)
                 {
-                    Point2D avg = Point2DUtil.avg(first, last);
+                    Vector2D avg = Vector2DUtil.avg(first, last);
                     firstChain.set(firstChain.size() - 1, avg);
                     chains.get(i).remove(0);
                     if(i != 0)
@@ -523,14 +526,14 @@ class SetPolygonUtil
             {
                 HolePolygon current = result.getPolygon(i);
                 SimplePolygon main = current.mainPoly();
-                Point2D avg = Point2DUtil.avg(hole.getPoint(0), hole.getPoint(1));
+                Vector2D avg = Vector2DUtil.avg(hole.getPoint(0), hole.getPoint(1));
                 if (main.areaContains(avg) == Containment.Inside)
                 {
                     for (int j = 0; j < hole.numPoints(); j++)
                     {
                         int k = (j + 1) % hole.numPoints();
 
-                        assert(main.areaContains(Point2DUtil.avg(hole.getPoint(j), hole.getPoint(k))) == Containment.Inside);
+                        assert(main.areaContains(Vector2DUtil.avg(hole.getPoint(j), hole.getPoint(k))) == Containment.Inside);
                     }
                     current.add(hole);
                     assert current.isValid();
@@ -566,7 +569,7 @@ class SetPolygonUtil
         }
         return value;
     }
-    public static void rasterize(SetPolygon poly, RasterMap raster, Point2D source, double squaredDistance)
+    public static void rasterize(SetPolygon poly, RasterMap raster, Vector2D source, double squaredDistance)
     {
         HashMap<Integer, ArrayList<Float>> map = new HashMap<Integer, ArrayList<Float>>();
         
@@ -574,23 +577,23 @@ class SetPolygonUtil
         float cy = (float) (source.getY() * raster.getScale());
         float cr = (float) (squaredDistance * raster.getScale() * raster.getScale());
         
-        ArrayList<ArrayList<Point2D>> outlines = outlines(poly);
+        ArrayList<ArrayList<Vector2D>> outlines = outlines(poly);
         for (int h = 0; h < outlines.size(); h++)
         {
             for (int i = 0; i < outlines.get(h).size(); i++)
             {
                 int j = (i + 1) % outlines.get(h).size();
-                Point2D a = outlines.get(h).get(i).scale(raster.getScale(), raster.getScale()).add(0, -0.5);
-                Point2D b = outlines.get(h).get(j).scale(raster.getScale(), raster.getScale()).add(0, -0.5);
+                Vector2D a = outlines.get(h).get(i).scale(raster.getScale(), raster.getScale()).add(0, -0.5);
+                Vector2D b = outlines.get(h).get(j).scale(raster.getScale(), raster.getScale()).add(0, -0.5);
                 if(b.getY() < a.getY())
                 {
-                    Point2D tmp = a;
+                    Vector2D tmp = a;
                     a = b;
                     b = tmp;
                 }
                 for (int y = (int)b.getY(); y > (int)a.getY(); y--)
                 {
-                    float x = (float)(Point2DUtil.lineAxisIntersectionX(a, b, y));
+                    float x = (float)(Vector2DUtil.lineAxisIntersectionX(a, b, y));
                     x = Math.max(0, x);
                     x = Math.min(x, raster.getWidth() - 1);
                     
@@ -732,9 +735,9 @@ class SetPolygonUtil
         return result;
     }
 
-    static HashSet<Point2D> points(SetPolygon set)
+    static HashSet<Vector2D> points(SetPolygon set)
     {
-        HashSet<Point2D> points = new HashSet<Point2D>();
+        HashSet<Vector2D> points = new HashSet<Vector2D>();
         for (int i = 0; i < set.numPolygons(); i++)
         {
             points.addAll(HolePolygonUtil.points(set.getPolygon(i)));
@@ -742,15 +745,15 @@ class SetPolygonUtil
         return points;
     }
 
-    static ArrayList<ArrayList<Point2D>> outlines(SetPolygon setPoly)
+    static ArrayList<ArrayList<Vector2D>> outlines(SetPolygon setPoly)
     {
-        ArrayList<ArrayList<Point2D>> outlines = new ArrayList<ArrayList<Point2D>>();
+        ArrayList<ArrayList<Vector2D>> outlines = new ArrayList<ArrayList<Vector2D>>();
         for (int i = 0; i < setPoly.numPolygons(); i++) {
             outlines.addAll(HolePolygonUtil.outlines(setPoly.getPolygon(i)));
         }
         return outlines;
     }
-    static void edges(ArrayList<Point2D> edges, SetPolygon polygon)
+    static void edges(ArrayList<Vector2D> edges, SetPolygon polygon)
     {
         for (int i = 0; i < polygon.numPolygons(); i++)
         {

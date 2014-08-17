@@ -4,6 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
 import com.jme3.network.serializing.Serializable;
 import java.util.ArrayList;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -112,7 +114,7 @@ public class SetPolygon
         return false;
     }
 
-    public Containment areaContains(Point2D point)
+    public Containment areaContains(Vector2D point)
     {
         for(HolePolygon poly: polys)
         {
@@ -121,7 +123,7 @@ public class SetPolygon
         }
         return Containment.Outside;
     }
-    public boolean areaContainsFast(Point2D point)
+    public boolean areaContainsFast(Vector2D point)
     {
         for(HolePolygon poly: polys)
         {
@@ -130,7 +132,7 @@ public class SetPolygon
         return false;
     }
 
-    public boolean hasEdge(Point2D a, Point2D b)
+    public boolean hasEdge(Vector2D a, Vector2D b)
     {
         for(HolePolygon poly: polys)
         {
@@ -139,7 +141,7 @@ public class SetPolygon
         return false;
     }
 
-    public boolean hasPoint(Point2D p)
+    public boolean hasPoint(Vector2D p)
     {
         for(HolePolygon poly: polys)
         {
@@ -148,14 +150,14 @@ public class SetPolygon
         return false;
     }
 
-    public Point2D minBorderDistance(Point2D p)
+    public Vector2D minBorderDistance(Vector2D p)
     {
         Containment contain = areaContains(p);
-        if(contain == Containment.Border) return Point2D.Zero;
+        if(contain == Containment.Border) return Vector2D.Zero;
         double sign = contain == Containment.Inside? 1: -1;
         
         double squaredDistance = Double.POSITIVE_INFINITY;
-        Point2D distance = Point2D.Zero;
+        Vector2D distance = Vector2D.Zero;
         for(HolePolygon hole: polys)
         {
             for (int k = 0; k < hole.numSimplePolys(); k++)
@@ -164,10 +166,10 @@ public class SetPolygon
                 for (int i = 0; i < simple.numPoints(); i++)
                 {
                     int j = (i + 1) % simple.numPoints();
-                    Point2D a = simple.getPoint(i);
-                    Point2D b = simple.getPoint(j);
-                    if (0 < Point2DUtil.lineSide(p, a, b) * sign) continue;
-                    Point2D tmp = Point2DUtil.fromLineSegmentToPoint(a, b, p);
+                    Vector2D a = simple.getPoint(i);
+                    Vector2D b = simple.getPoint(j);
+                    if (0 < Vector2DUtil.lineSide(p, a, b) * sign) continue;
+                    Vector2D tmp = Vector2DUtil.fromLineSegmentToPoint(a, b, p);
                     double squaredTmp = tmp.squaredLength();
                     if (squaredTmp < squaredDistance)
                     {
@@ -177,7 +179,7 @@ public class SetPolygon
                 }
             }
         }
-        assert(!distance.equals(Point2D.Zero));
+        assert(!distance.equals(Vector2D.Zero));
         return distance.inverse();
     }
 

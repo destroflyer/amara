@@ -4,30 +4,33 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
+
 /**
  *
  * @author Philipp
  */
 public class TriangleNode
 {
-    private Point2D[] points;
+    private Vector2D[] points;
     private TriangleNode[] neighbors = new TriangleNode[3];
     private double[] cornerWidth = new double[3];
     
-    TriangleNode(Point2D a, Point2D b, Point2D c)
+    TriangleNode(Vector2D a, Vector2D b, Vector2D c)
     {
         assert !a.equals(b);
         assert !a.equals(c);
         assert !b.equals(c);
-        points = new Point2D[]{a, b, c};
+        points = new Vector2D[]{a, b, c};
     }
 
-    public Point2D[] getPoints()
+    public Vector2D[] getPoints()
     {
         return points;
     }
     
-    public Point2D point(int i)
+    public Vector2D point(int i)
     {
         return points[i];
     }
@@ -44,7 +47,7 @@ public class TriangleNode
         this.cornerWidth[i] = edgeWidth;
     }
     
-    public int indexOf(Point2D p)
+    public int indexOf(Vector2D p)
     {
         for (int i = 0; i < 3; i++)
         {
@@ -78,7 +81,7 @@ public class TriangleNode
         return false;
     }
     
-    public boolean areaContains(Point2D p)
+    public boolean areaContains(Vector2D p)
     {
         boolean inside = false;
         int i, j;
@@ -99,9 +102,9 @@ public class TriangleNode
 //        return true;
     }
     
-    public Point2D center()
+    public Vector2D center()
     {
-        return Point2DUtil.avg(points);
+        return Vector2DUtil.avg(points);
     }
     
     public int numNeighbors()

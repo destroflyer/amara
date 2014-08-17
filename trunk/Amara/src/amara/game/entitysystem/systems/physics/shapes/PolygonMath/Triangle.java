@@ -4,24 +4,27 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
+
 /**
  *
  * @author Philipp
  */
 public class Triangle
 {
-    private Point2D[] points;
+    private Vector2D[] points;
     private Triangle[] neighbors = new Triangle[3];
     
-    public Triangle(Point2D a, Point2D b, Point2D c)
+    public Triangle(Vector2D a, Vector2D b, Vector2D c)
     {
         assert !a.equals(b);
         assert !a.equals(c);
         assert !b.equals(c);
-        points = new Point2D[]{a, b, c};
+        points = new Vector2D[]{a, b, c};
     }
 
-    public Point2D[] getPoints()
+    public Vector2D[] getPoints()
     {
         return points;
     }
@@ -53,12 +56,12 @@ public class Triangle
         return false;
     }
 
-    public boolean hasCorner(Point2D p)
+    public boolean hasCorner(Vector2D p)
     {
         return indexOf(p) != -1;
     }
 
-    public int indexOf(Point2D p)
+    public int indexOf(Vector2D p)
     {
         for (int i = 0; i < 3; i++)
         {
@@ -81,37 +84,37 @@ public class Triangle
         neighbors[indexOf(oldNeighbor)] = newNeighbor;
     }
 
-    public boolean areaContains(Point2D p)
+    public boolean areaContains(Vector2D p)
     {
         for (int i = 0; i < 3; i++)
         {
             int j = (i + 1) % 3;
-            if (Point2DUtil.lineSide(p, points[i], points[j]) >= 0) return false;
+            if (Vector2DUtil.lineSide(p, points[i], points[j]) >= 0) return false;
         }
         return true;
     }
-    public boolean areaContainsOrBorder(Point2D p)
+    public boolean areaContainsOrBorder(Vector2D p)
     {
         for (int i = 0; i < 3; i++)
         {
             int j = (i + 1) % 3;
-            if (Point2DUtil.lineSide(p, points[i], points[j]) > 0) return false;
+            if (Vector2DUtil.lineSide(p, points[i], points[j]) > 0) return false;
         }
         return true;
     }
 
-    public boolean intersectsLineSegment(Point2D a, Point2D b)
+    public boolean intersectsLineSegment(Vector2D a, Vector2D b)
     {
         boolean seperated;
-        double side = Point2DUtil.lineSide(points[0], a, b);
+        double side = Vector2DUtil.lineSide(points[0], a, b);
         if (side == 0)
         {
-            seperated = Point2DUtil.lineSide(points[1], a, b) * Point2DUtil.lineSide(points[2], a, b) < 0;
+            seperated = Vector2DUtil.lineSide(points[1], a, b) * Vector2DUtil.lineSide(points[2], a, b) < 0;
         }
         else
         {
-            seperated = side * Point2DUtil.lineSide(points[1], a, b) < 0 ||
-                        side * Point2DUtil.lineSide(points[2], a, b) < 0;
+            seperated = side * Vector2DUtil.lineSide(points[1], a, b) < 0 ||
+                        side * Vector2DUtil.lineSide(points[2], a, b) < 0;
         }
         if (seperated) return false;
 
@@ -119,9 +122,9 @@ public class Triangle
         {
             int j = (i + 1) % 3;
             int k = (j + 1) % 3;
-            side = Point2DUtil.lineSide(points[k], points[i], points[j]);
-            seperated = side * Point2DUtil.lineSide(a, points[i], points[j]) < 0 ||
-                        side * Point2DUtil.lineSide(b, points[i], points[j]) < 0;
+            side = Vector2DUtil.lineSide(points[k], points[i], points[j]);
+            seperated = side * Vector2DUtil.lineSide(a, points[i], points[j]) < 0 ||
+                        side * Vector2DUtil.lineSide(b, points[i], points[j]) < 0;
             if (seperated) return false;
         }
         return true;
@@ -140,8 +143,8 @@ public class Triangle
         return area;
     }
 
-    public Point2D center()
+    public Vector2D center()
     {
-        return Point2DUtil.avg(points);
+        return Vector2DUtil.avg(points);
     }
 }

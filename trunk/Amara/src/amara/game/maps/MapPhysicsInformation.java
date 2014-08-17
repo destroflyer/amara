@@ -7,7 +7,7 @@ package amara.game.maps;
 import java.util.ArrayList;
 import amara.game.entitysystem.systems.physics.PolyHelper;
 import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
-import amara.game.entitysystem.systems.physics.shapes.Shape;
+import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *
@@ -15,17 +15,17 @@ import amara.game.entitysystem.systems.physics.shapes.Shape;
  */
 public class MapPhysicsInformation{
 
-    public MapPhysicsInformation(int width, int height, float heightmapScale, ArrayList<Shape> obstacles){
+    public MapPhysicsInformation(int width, int height, float heightmapScale, ArrayList<ConvexShape> obstacles){
         this.width = width;
         this.height = height;
         this.heightmapScale = heightmapScale;
         this.obstacles = obstacles;
-        polyMapManager = new PolyMapManager(PolyHelper.fromShapes(obstacles), width, height);
+        polyMapManager = new PolyMapManager(PolyHelper.fromConvexShapes(obstacles), width, height);
     }
     private int width;
     private int height;
     private float heightmapScale;
-    private ArrayList<Shape> obstacles;
+    private ArrayList<ConvexShape> obstacles;
     private PolyMapManager polyMapManager;
 
     public int getWidth(){
@@ -40,7 +40,7 @@ public class MapPhysicsInformation{
         return heightmapScale;
     }
 
-    public ArrayList<Shape> getObstacles(){
+    public ArrayList<ConvexShape> getObstacles(){
         return obstacles;
     }
 

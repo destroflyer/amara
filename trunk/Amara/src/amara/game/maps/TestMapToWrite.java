@@ -17,11 +17,11 @@ import amara.game.maps.visuals.*;
 public class TestMapToWrite extends Map{
 
     public TestMapToWrite(){
-        ArrayList<Shape> obstacles = new ArrayList<Shape>();
-        obstacles.add(new SimpleConvex(new Vector2D(0, 0), new Vector2D(100, 0)));
-        obstacles.add(new SimpleConvex(new Vector2D(100, 0), new Vector2D(100, 100)));
-        obstacles.add(new SimpleConvex(new Vector2D(100, 100), new Vector2D(0, 100)));
-        obstacles.add(new SimpleConvex(new Vector2D(0, 100), new Vector2D(0, 0)));
+        ArrayList<ConvexShape> obstacles = new ArrayList<ConvexShape>();
+        obstacles.add(new SimpleConvexPolygon(new Vector2D(0, 0), new Vector2D(100, 0)));
+        obstacles.add(new SimpleConvexPolygon(new Vector2D(100, 0), new Vector2D(100, 100)));
+        obstacles.add(new SimpleConvexPolygon(new Vector2D(100, 100), new Vector2D(0, 100)));
+        obstacles.add(new SimpleConvexPolygon(new Vector2D(0, 100), new Vector2D(0, 0)));
         obstacles.add(new Rectangle(10, 7, 5, 8));
         obstacles.add(new Circle(30, 25, 3));
         physicsInformation = new MapPhysicsInformation(100, 100, 0.0225f, obstacles);

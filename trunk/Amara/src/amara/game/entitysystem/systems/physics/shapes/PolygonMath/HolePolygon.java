@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import com.jme3.network.serializing.Serializable;
 import java.util.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -126,7 +127,7 @@ public class HolePolygon
         return area;
     }
 
-    public Containment areaContains(Point2D point)
+    public Containment areaContains(Vector2D point)
     {
         for (int i = 0; i < numSimplePolys(); i++)
         {
@@ -135,7 +136,7 @@ public class HolePolygon
         }
         return Containment.Inside;
     }
-    public boolean areaContainsFast(Point2D point)
+    public boolean areaContainsFast(Vector2D point)
     {
         for (int i = 0; i < numSimplePolys(); i++)
         {
@@ -170,7 +171,7 @@ public class HolePolygon
         return false;
     }
 
-    public boolean hasEdge(Point2D a, Point2D b)
+    public boolean hasEdge(Vector2D a, Vector2D b)
     {
         for (int i = 0; i < numSimplePolys(); i++)
         {
@@ -179,7 +180,7 @@ public class HolePolygon
         return false;
     }
 
-    public boolean hasPoint(Point2D p)
+    public boolean hasPoint(Vector2D p)
     {
         for (int i = 0; i < numSimplePolys(); i++)
         {

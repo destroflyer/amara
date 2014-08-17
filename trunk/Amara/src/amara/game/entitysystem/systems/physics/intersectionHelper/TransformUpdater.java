@@ -56,25 +56,17 @@ public class TransformUpdater
         DirectionComponent dir = entity.getComponent(DirectionComponent.class);
         ScaleComponent scale = entity.getComponent(ScaleComponent.class);
         Shape shape = hitbox.getShape();
-        Transform transform = shape.getTransform();
         
-        transform.setPosition(pos.getPosition().x, pos.getPosition().y);
-        if(dir != null)
-        {
-            transform.setRadian(dir.getRadian());
-        }
-        else
-        {
-            transform.setRadian(0);
-        }
-        if(scale != null)
-        {
-            transform.setScale(scale.getScale());
-        }
-        else
-        {
-            transform.setScale(1);
-        }
+        double x = pos.getPosition().x;
+        double y = pos.getPosition().y;
+        double radian, s;
+        
+        if(dir != null) radian = dir.getRadian();
+        else radian = 0;
+        if(scale != null) s = scale.getScale();
+        else s = 1;
+        
+        shape.setTransform(new Transform2D(s, radian, x, y));
         entity.setComponent(new HitboxComponent(shape));
     }
 }

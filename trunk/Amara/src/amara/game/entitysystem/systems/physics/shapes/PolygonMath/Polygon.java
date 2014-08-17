@@ -4,7 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Polygon;
+import amara.game.entitysystem.systems.physics.shapes.*;
 import com.jme3.network.serializing.Serializable;
 import java.awt.*;
 import java.util.*;
@@ -62,13 +62,13 @@ public class Polygon
         return new Polygon(MinkowskiUtil.add(setPoly, poly.setPoly));
     }
 
-    public boolean contains(Point2D point)
+    public boolean contains(Vector2D point)
     {
         //return setPoly.areaContainsFast(point);
         return setPoly.areaContains(point) == Containment.Inside;
     }
 
-    public Point2D distanceToBorder(Point2D point)
+    public Vector2D distanceToBorder(Vector2D point)
     {
         return setPoly.minBorderDistance(point);
     }
@@ -85,12 +85,12 @@ public class Polygon
         return new Polygon(setPolys.get(0));
     }
     
-    public ArrayList<Point2D> triangles()
+    public ArrayList<Vector2D> triangles()
     {
         return SetPolygonUtil.triangles(setPoly);
     }
     
-    public HashSet<Point2D> points()
+    public HashSet<Vector2D> points()
     {
         return SetPolygonUtil.points(setPoly);
     }
@@ -105,13 +105,28 @@ public class Polygon
         return setPoly.isInfinite();
     }
     
-    public ArrayList<ArrayList<Point2D>> outlines()
+    public ArrayList<ArrayList<Vector2D>> outlines()
     {
         return SetPolygonUtil.outlines(setPoly);
     }
-    public ArrayList<Point2D> edges()
+    public ArrayList<ArrayList<Vector2D>> cutPolys()
     {
-        ArrayList<Point2D> edges = new ArrayList<Point2D>();
+        ArrayList<ArrayList<Vector2D>> list = new ArrayList<ArrayList<Vector2D>>();
+        for (int i = 0; i < setPoly.numPolygons(); i++)
+        {
+            SimplePolygon simple = HolePolygonUtil.cutToSimple(setPoly.getPolygon(i));
+            ArrayList<Vector2D> points = new ArrayList<Vector2D>();
+            for (int j = 0; j < simple.numPoints(); j++)
+            {
+                points.add(simple.getPoint(j));
+            }
+            list.add(points);
+        }
+        return list;
+    }
+    public ArrayList<Vector2D> edges()
+    {
+        ArrayList<Vector2D> edges = new ArrayList<Vector2D>();
         SetPolygonUtil.edges(edges, setPoly);
         return edges;
     }
@@ -131,7 +146,7 @@ public class Polygon
         return new Polygon(list.get(0));
     }
     
-    public void rasterize(RasterMap raster, Point2D source, double radius)
+    public void rasterize(RasterMap raster, Vector2D source, double radius)
     {
         SetPolygonUtil.rasterize(setPoly, raster, source, radius * radius);
     }
@@ -146,7 +161,7 @@ public class Polygon
             for (int j = 0; j < poly.numSimplePolys(); j++) {
                 SimplePolygon simple = poly.getSimplePoly(j);
                 for (int k = 0; k < simple.numPoints(); k++) {
-                    Point2D p = simple.getPoint(k);
+                    Vector2D p = simple.getPoint(k);
                     double x = p.getX();
                     double y = p.getY();
                     if(x < minX) minX = x;
@@ -161,7 +176,7 @@ public class Polygon
     
     public void draw(Graphics graphics)
     {
-        for (ArrayList<Point2D> poly : outlines())
+        for (ArrayList<Vector2D> poly : outlines())
         {
             int[] xPoints = new int[poly.size()];
             int[] yPoints = new int[poly.size()];
@@ -169,7 +184,7 @@ public class Polygon
             graphics.drawPolygon(xPoints, yPoints, poly.size());
         }
     }
-    private void toDrawPoly(int[] xPoints, int[] yPoints, ArrayList<Point2D> poly)
+    private void toDrawPoly(int[] xPoints, int[] yPoints, ArrayList<Vector2D> poly)
     {
         for (int i = 0; i < poly.size(); i++)
         {

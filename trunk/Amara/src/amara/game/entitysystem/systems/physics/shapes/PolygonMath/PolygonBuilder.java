@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import java.util.*;
 
 /**
@@ -35,7 +36,7 @@ public class PolygonBuilder
     {
         outlines.get(outlines.size() - 1).add(x, y);
     }
-    public void add(Point2D p)
+    public void add(Vector2D p)
     {
         outlines.get(outlines.size() - 1).add(p);
     }

@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Point2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 
 public class LinesMesh extends Mesh{
 
-    public LinesMesh(ArrayList<ArrayList<Point2D>> lines){
+    public LinesMesh(ArrayList<ArrayList<Vector2D>> lines){
         this(0, 0, lines);
     }
 
-    public LinesMesh(float x, float y, ArrayList<ArrayList<Point2D>> lines){
+    public LinesMesh(float x, float y, ArrayList<ArrayList<Vector2D>> lines){
         this.x = x;
         this.y = y;
         this.lines = lines;
@@ -22,11 +22,11 @@ public class LinesMesh extends Mesh{
     }
     private float x;
     private float y;
-    private ArrayList<ArrayList<Point2D>> lines;
+    private ArrayList<ArrayList<Vector2D>> lines;
 
     private void updateMesh(){
         int pointsCount = 0;
-        for(ArrayList<Point2D> line : lines){
+        for(ArrayList<Vector2D> line : lines){
             pointsCount += line.size();
         }
         short[] indices = new short[pointsCount * 2];
@@ -35,10 +35,10 @@ public class LinesMesh extends Mesh{
         short pointIndex = 0;
         int indicesIndex = 0;
         for(int i=0;i<lines.size();i++){
-            ArrayList<Point2D> line = lines.get(i);
+            ArrayList<Vector2D> line = lines.get(i);
             short firstLinePointIndex = -1;
             for(int r=0;r<line.size();r++){
-                Point2D point = line.get(r);
+                Vector2D point = line.get(r);
                 if(r == 0){
                     firstLinePointIndex = pointIndex;
                 }

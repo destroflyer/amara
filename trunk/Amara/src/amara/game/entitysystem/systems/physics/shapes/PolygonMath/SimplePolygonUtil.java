@@ -4,6 +4,9 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
+import amara.game.entitysystem.systems.physics.shapes.Transform2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
 import java.util.*;
 
 /**
@@ -12,11 +15,11 @@ import java.util.*;
  */
 class SimplePolygonUtil
 {
-    public static ArrayList<Point2D> triangles(SimplePolygon simple)
+    public static ArrayList<Vector2D> triangles(SimplePolygon simple)
     {
         assert !simple.hasRepetitions();
         assert simple.isAreaPositive();
-        ArrayList<Point2D> list = new ArrayList<Point2D>();
+        ArrayList<Vector2D> list = new ArrayList<Vector2D>();
         if(simple.numPoints() < 3) return list;
         SimplePolygon helper = new SimplePolygon(simple);
         while(helper.numPoints() > 3)
@@ -104,7 +107,7 @@ class SimplePolygonUtil
                     break;
                 }
                 int m = (l + 1) % simple.numPoints();
-                if(tri.areaContains(Point2DUtil.avg(simple.getPoint(l), simple.getPoint(m))) == Containment.Inside)
+                if(tri.areaContains(Vector2DUtil.avg(simple.getPoint(l), simple.getPoint(m))) == Containment.Inside)
                 {
                     ear = false;
                     break;
@@ -114,11 +117,11 @@ class SimplePolygonUtil
         }
         throw new IndexOutOfBoundsException();
     }
-    public static boolean isValidCut(SimplePolygon simple, Point2D a, Point2D b)
+    public static boolean isValidCut(SimplePolygon simple, Vector2D a, Vector2D b)
     {
-        if(a.equals(b)) return true;
-        assert !a.equals(b);
-        return !outlineIntersectsSegment(simple, a, b) && simple.areaContains(Point2DUtil.avg(a, b)) != Containment.Outside;
+        if(a.withinEpsilon(b)) return true;
+        assert !a.withinEpsilon(b);
+        return !outlineIntersectsSegment(simple, a, b) && simple.areaContains(Vector2DUtil.avg(a, b)) != Containment.Outside;
     }
     public static ArrayList<SimplePolygon> splitAtSelfTouch(SimplePolygon simple)
     {
@@ -148,7 +151,7 @@ class SimplePolygonUtil
                     SimplePolygon b = new SimplePolygon();
                     for (int k = j; k > i; k--)
                     {
-                        Point2D p = simple.getPoint(k);
+                        Vector2D p = simple.getPoint(k);
                         a.removeAt(k);
                         b.add(p);
                     }
@@ -202,8 +205,8 @@ class SimplePolygonUtil
         assert(!a.hasRepetitions());
         assert(!b.hasRepetitions());
 
-        HashMap<Integer, HashSet<Point2D>> intersectionsA = new HashMap<Integer, HashSet<Point2D>>();
-        HashMap<Integer, HashSet<Point2D>> intersectionsB = new HashMap<Integer, HashSet<Point2D>>();
+        HashMap<Integer, HashSet<Vector2D>> intersectionsA = new HashMap<Integer, HashSet<Vector2D>>();
+        HashMap<Integer, HashSet<Vector2D>> intersectionsB = new HashMap<Integer, HashSet<Vector2D>>();
         
         for (int i = 0; i < a.numPoints(); i++)
         {
@@ -211,13 +214,14 @@ class SimplePolygonUtil
             for (int k = 0; k < b.numPoints(); k++)
             {
                 int l = (k + 1) % b.numPoints();
-                Point2D intersection = Point2DUtil.lineSegmentIntersectionPointWithoutCorners(a.getPoint(i), a.getPoint(j), b.getPoint(k), b.getPoint(l));
+                if(!Vector2DUtil.segmentAaBbCheck(a.getPoint(i), a.getPoint(j), b.getPoint(k), b.getPoint(l))) continue;
+                Vector2D intersection = Vector2DUtil.lineSegmentIntersectionPointWithoutCorners(a.getPoint(i), a.getPoint(j), b.getPoint(k), b.getPoint(l));
                 if (intersection != null)
                 {
                     assert(!a.hasPoint(intersection));
                     assert(!b.hasPoint(intersection));
-                    if (!intersectionsA.containsKey(i)) intersectionsA.put(i, new HashSet<Point2D>());
-                    if (!intersectionsB.containsKey(k)) intersectionsB.put(k, new HashSet<Point2D>());
+                    if (!intersectionsA.containsKey(i)) intersectionsA.put(i, new HashSet<Vector2D>());
+                    if (!intersectionsB.containsKey(k)) intersectionsB.put(k, new HashSet<Vector2D>());
                     intersectionsA.get(i).add(intersection);
                     intersectionsB.get(k).add(intersection);
                 }
@@ -229,14 +233,14 @@ class SimplePolygonUtil
         assert(!a.hasRepetitions());
         assert(!b.hasRepetitions());
     }
-    private static void insertIntersectionHelper(SimplePolygon simple, HashMap<Integer, HashSet<Point2D>> intersections)
+    private static void insertIntersectionHelper(SimplePolygon simple, HashMap<Integer, HashSet<Vector2D>> intersections)
     {
         for (int i = simple.numPoints() - 1; i >= 0; i--)
         {
             if (intersections.containsKey(i))
             {
-                ArrayList<Point2D> list = new ArrayList<Point2D>(intersections.get(i));
-                Point2D point = simple.getPoint(i);
+                ArrayList<Vector2D> list = new ArrayList<Vector2D>(intersections.get(i));
+                Vector2D point = simple.getPoint(i);
                 Collections.sort(list, new PointDistanceComparator(point));
                 simple.insertRange(i + 1, list);
             }
@@ -252,7 +256,7 @@ class SimplePolygonUtil
         for (int i = 0; i < b.numPoints(); i++)
         {
             int j = (i + 1) % b.numPoints();
-            Containment tmp = a.areaContains(Point2DUtil.avg(b.getPoint(i), b.getPoint(j)));
+            Containment tmp = a.areaContains(Vector2DUtil.avg(b.getPoint(i), b.getPoint(j)));
             if (tmp == Containment.Border) continue;
             if (cont == Containment.Border) cont = tmp;
             if (cont != tmp) return true;
@@ -286,12 +290,14 @@ class SimplePolygonUtil
         return polysLinesIntersectIndirectlyHelper(a, b);
     }
      
-    public static boolean outlineIntersectsSegment(SimplePolygon simple, Point2D a, Point2D b)
+    public static boolean outlineIntersectsSegment(SimplePolygon simple, Vector2D a, Vector2D b)
     {
         for (int i = 0; i < simple.numPoints(); i++)
         {
             int j = (i + 1) % simple.numPoints();
-            boolean inter = Point2DUtil.lineSegmentIntersectionPointWithoutCorners(a, b, simple.getPoint(i), simple.getPoint(j)) != null;
+            
+            if(!Vector2DUtil.segmentAaBbCheck(a, b, simple.getPoint(i), simple.getPoint(j))) continue;
+            boolean inter = Vector2DUtil.lineSegmentIntersectionPointWithoutCorners(a, b, simple.getPoint(i), simple.getPoint(j)) != null;
             if (inter)
             {
                 return true;
@@ -330,10 +336,10 @@ class SimplePolygonUtil
     {
         int num = buffer.readInt();
         if(num == -1) return null;
-        ArrayList<Point2D> points = new ArrayList<Point2D>();
+        ArrayList<Vector2D> points = new ArrayList<Vector2D>();
         for (int i = 0; i < num; i++)
         {
-            points.add(new Point2D(buffer.readDouble(), buffer.readDouble()));
+            points.add(new Vector2D(buffer.readDouble(), buffer.readDouble()));
         }
         SimplePolygon simple = new SimplePolygon(points);
         assert simple.isValid();
@@ -351,9 +357,9 @@ class SimplePolygonUtil
         return result;
     }
     
-    static HashSet<Point2D> points(SimplePolygon simple)
+    static HashSet<Vector2D> points(SimplePolygon simple)
     {
-        HashSet<Point2D> points = new HashSet<Point2D>();
+        HashSet<Vector2D> points = new HashSet<Vector2D>();
         for (int i = 0; i < simple.numPoints(); i++)
         {
             points.add(simple.getPoint(i));
@@ -361,15 +367,15 @@ class SimplePolygonUtil
         return points;
     }
 
-    static ArrayList<Point2D> outline(SimplePolygon simple)
+    static ArrayList<Vector2D> outline(SimplePolygon simple)
     {
-        ArrayList<Point2D> outline = new ArrayList<Point2D>();
+        ArrayList<Vector2D> outline = new ArrayList<Vector2D>();
         for (int i = 0; i < simple.numPoints(); i++) {
             outline.add(simple.getPoint(i));
         }
         return outline;
     }
-    static void edges(ArrayList<Point2D> edges, SimplePolygon polygon)
+    static void edges(ArrayList<Vector2D> edges, SimplePolygon polygon)
     {
         for (int i = 0; i < polygon.numPoints(); i++)
         {

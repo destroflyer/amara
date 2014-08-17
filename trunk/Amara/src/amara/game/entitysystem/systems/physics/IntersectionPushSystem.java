@@ -53,7 +53,7 @@ public class IntersectionPushSystem implements EntitySystem
     {
         EntityWrapper entityA = entityWorld.getWrapped(pair.getA());
         EntityWrapper entityB = entityWorld.getWrapped(pair.getB());
-        Vector2D vec = entityA.getComponent(HitboxComponent.class).getShape().getResolveVector(entityB.getComponent(HitboxComponent.class).getShape());
+        Vector2D vec = entityA.getComponent(HitboxComponent.class).getShape().getIntersectionResolver(entityB.getComponent(HitboxComponent.class).getShape());
         float deltaX = (float)vec.getX() / 2;
         float deltaY = (float)vec.getY() / 2;
         
