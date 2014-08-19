@@ -12,23 +12,40 @@ import java.awt.*;
  */
 public class AwtShapeGraphics implements ShapeGraphics
 {
-    private Graphics graphics;
+    private Graphics graphics = null;
+
+    public AwtShapeGraphics()
+    {
+    }
 
     public AwtShapeGraphics(Graphics graphics)
     {
         this.graphics = graphics;
     }
 
+    public Graphics getGraphics()
+    {
+        return graphics;
+    }
+
+    public void setGraphics(Graphics graphics)
+    {
+        this.graphics = graphics;
+    }
+
+    @Override
     public void drawCircle(Vector2D position, double radius)
     {
         graphics.drawOval((int)(position.getX() - radius), (int)(position.getY() - radius), (int)(2 * radius), (int)(2 * radius));
     }
 
+    @Override
     public void fillCircle(Vector2D position, double radius)
     {
         graphics.fillOval((int)(position.getX() - radius), (int)(position.getY() - radius), (int)(2 * radius), (int)(2 * radius));
     }
 
+    @Override
     public void drawPolygon(Vector2D[] points)
     {
         int[] xPoints = new int[points.length];
@@ -37,6 +54,7 @@ public class AwtShapeGraphics implements ShapeGraphics
         graphics.drawPolygon(xPoints, yPoints, points.length);
     }
 
+    @Override
     public void fillPolygon(Vector2D[] points)
     {
         int[] xPoints = new int[points.length];

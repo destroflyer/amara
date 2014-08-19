@@ -4,7 +4,6 @@
  */
 package amara.game.entitysystem.systems.physics.shapes;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Util;
 import com.jme3.network.serializing.*;
 
 /**
@@ -102,5 +101,22 @@ public class Transform2D
         if(!Util.withinEpsilon(t.x - x)) return false;
         if(!Util.withinEpsilon(t.y - y)) return false;
         return true;
+    }
+    
+    public static Transform2D createTranslation(Vector2D v)
+    {
+        return createTranslation(v.getX(), v.getY());
+    }
+    public static Transform2D createTranslation(double x, double y)
+    {
+        return new Transform2D(1, 0, x, y, true);
+    }
+    public static Transform2D createScale(double scale)
+    {
+        return new Transform2D(scale, 0, 0, 0, true);
+    }
+    public static Transform2D createRotation(double radians)
+    {
+        return new Transform2D(1, radians, 0, 0);
     }
 }

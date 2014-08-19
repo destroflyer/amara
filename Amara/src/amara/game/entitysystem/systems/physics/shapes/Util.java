@@ -2,9 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
+package amara.game.entitysystem.systems.physics.shapes;
 
-import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import java.util.*;
 
 /**
@@ -14,6 +13,7 @@ import java.util.*;
 public class Util
 {
     public static final double Epsilon = 1e-6d;
+    
     public static boolean withinEpsilon(double d)
     {
         return Math.abs(d) < Epsilon;
@@ -39,6 +39,36 @@ public class Util
         T tmp = list.get(i);
         list.set(i, list.get(j));
         list.set(j, tmp);
+    }
+    public static <T> void reverse(T[] arr)
+    {
+        for (int i = 0; i < arr.length / 2; i++)
+        {
+            swap(arr, i, arr.length - 1 - i);
+        }
+    }
+    public static <T> void swap(T[] arr, int i, int j)
+    {
+        T tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+    
+    public static <T> ArrayList<T> toList(T[] arr)
+    {
+        ArrayList<T> list = new ArrayList<T>(arr.length);
+        for (int i = 0; i < arr.length; i++)
+        {
+            list.add(arr[i]);
+        }
+        return list;
+    }
+    public static <T> void copy(T[] source, int startS, int num, T[] destination, int startD)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            destination[i + startD] = source[i + startS];
+        }
     }
     
     public static <T> void keySort(ArrayList<T> list, ArrayList<Double> keys)
