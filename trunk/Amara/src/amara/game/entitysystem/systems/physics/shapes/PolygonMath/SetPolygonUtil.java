@@ -4,12 +4,9 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.Transform2D;
-import amara.game.entitysystem.systems.physics.shapes.Vector2D;
-import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
+import amara.game.entitysystem.systems.physics.shapes.*;
 import java.io.*;
 import java.util.*;
-import java.util.logging.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

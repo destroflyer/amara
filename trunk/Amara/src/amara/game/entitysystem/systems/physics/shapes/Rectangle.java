@@ -27,10 +27,10 @@ public class Rectangle extends SimpleConvexPolygon
 
     public Rectangle(Vector2D position, double width, double height) {
         super(new Vector2D[] {
-            new Vector2D(width / 2, height / 2).add(position),
-            new Vector2D(width / 2, -height / 2).add(position),
+            new Vector2D(-width / 2, height / 2).add(position),
             new Vector2D(-width / 2, -height / 2).add(position),
-            new Vector2D(-width / 2, height / 2).add(position)
+            new Vector2D(width / 2, -height / 2).add(position),
+            new Vector2D(width / 2, height / 2).add(position)
         });
     }
     

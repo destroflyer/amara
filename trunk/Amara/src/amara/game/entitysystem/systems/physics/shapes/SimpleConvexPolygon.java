@@ -23,17 +23,104 @@ public class SimpleConvexPolygon extends ConvexShape
 
     public SimpleConvexPolygon(Vector2D... localPoints)
     {
+        assert localPoints.length >= 2;
+        if(Vector2DUtil.area(localPoints) < 0) Util.reverse(localPoints);
+        assert Vector2DUtil.area(localPoints) >= 0;
         this.localPoints = localPoints;
         globalPoints = new Vector2D[localPoints.length];
-        double lengthSquared = localPoints[0].squaredLength();
-        for (int i = 1; i < localPoints.length; i++)
-        {
-            double tmp = localPoints[i].squaredLength();
-            if(tmp > lengthSquared) lengthSquared = tmp;
-        }
-        boundCircle = new Circle(Math.sqrt(lengthSquared));
+        boundCircle = bouncingBubble(localPoints);
+        assert boundCircleTest(boundCircle, localPoints);
     }
-
+    
+    private static Circle bouncingBubble(Vector2D... points)
+    {
+        Vector2D center = points[0];
+        double radius = Util.Epsilon;
+        double len, alphaSquared, alpha;
+        Vector2D diff;
+        
+        for (int i = 0; i < 2; i++)
+        {
+            for (Vector2D p : points)
+            {
+                len = center.distance(p);
+                if(len > radius)
+                {
+                    alpha = len / radius;
+                    alphaSquared = alpha * alpha;
+                    radius = 0.5 * (alpha + 1 / alpha) * radius;
+                    center = center.mult(1 + 1 / alphaSquared).add(p.mult(1 - 1 / alphaSquared)).mult(0.5);
+                }
+            }
+        }
+        for (Vector2D p : points)
+        {
+            diff = p.sub(center);
+            len = diff.length();
+            if(len > radius)
+            {
+                radius = (radius + len) * 0.5;
+                center = center.add(diff.mult((len - radius) / len));
+            }
+        }
+        return new Circle(center, radius);
+    }
+    
+    private static boolean boundCircleTest(Circle circle, Vector2D... localPoints)
+    {
+        for (Vector2D v : localPoints)
+        {
+            assert circle.getLocalPosition().distance(v) <= circle.getLocalRadius() + Util.Epsilon;
+        }
+        return true;
+    }
+    private static boolean optimalBoundCircleTest(Circle circle, Vector2D... localPoints)
+    {
+        Circle c = computeBoundCircle(localPoints);
+        assert c.getLocalPosition().withinEpsilon(circle.getLocalPosition()): c.getLocalPosition() + " / " + circle.getLocalPosition() + "\n\r" + c.getLocalRadius()+ " / " + circle.getLocalRadius();
+        assert Util.withinEpsilon(c.getLocalRadius() - circle.getLocalRadius()): c.getLocalRadius()+ " / " + circle.getLocalRadius();
+        return true;
+    }
+    private static Circle computeBoundCircle(Vector2D... localPoints)
+    {
+        Vector2D center = null;
+        double squaredRadius = Double.POSITIVE_INFINITY;
+        for (Vector2D a : localPoints)
+        {
+            for (Vector2D b : localPoints)
+            {
+                if(a == b) continue;
+                for (Vector2D c : localPoints)
+                {
+                    if(a == c) continue;
+                    Vector2D tmpCenter;
+                    double tmpDistSquared;
+                    if(b == c) tmpCenter = Vector2DUtil.avg(a, b);
+                    else tmpCenter = Vector2DUtil.circumCircleCenter(a, b, c);
+                    tmpDistSquared = tmpCenter.squaredDistance(a);
+                    
+                    boolean containsAll = true;
+                    for (Vector2D v : localPoints)
+                    {
+                        if(!(tmpCenter.squaredDistance(v) <= tmpDistSquared + Util.Epsilon))
+                        {
+                            containsAll = false;
+                            break;
+                        }
+                    }
+                    
+                    if(containsAll && tmpDistSquared < squaredRadius)
+                    {
+                        center = tmpCenter;
+                        squaredRadius = tmpDistSquared;
+                    }
+                }
+            }
+        }
+        
+        Circle circle = new Circle(center, Math.sqrt(squaredRadius));
+        return circle;
+    }
     public Circle getBoundCircle()
     {
         return boundCircle;

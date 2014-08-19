@@ -4,7 +4,6 @@
  */
 package amara.game.entitysystem.systems.physics.shapes;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Util;
 import java.util.*;
 
 /**

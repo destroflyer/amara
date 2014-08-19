@@ -4,8 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.Vector2D;
-import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
+import amara.game.entitysystem.systems.physics.shapes.*;
 import com.jme3.network.serializing.Serializable;
 import java.util.*;
 

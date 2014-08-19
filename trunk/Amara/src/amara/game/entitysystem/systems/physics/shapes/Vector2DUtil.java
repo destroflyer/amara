@@ -4,7 +4,6 @@
  */
 package amara.game.entitysystem.systems.physics.shapes;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Util;
 import java.util.*;
 
 /**
@@ -266,6 +265,35 @@ public class Vector2DUtil {
             }
         }
         return point;
+    }
+    
+    public static Vector2D circumCircleCenter(Vector2D A, Vector2D B, Vector2D C)
+    {
+        assert !A.withinEpsilon(B);
+        assert !A.withinEpsilon(C);
+        assert !B.withinEpsilon(C);
+        
+        double ax = A.getX();
+        double bx = B.getX();
+        double cx = C.getX();
+        double ay = A.getY();
+        double by = B.getY();
+        double cy = C.getY();
+
+        double a = ax * ax + ay * ay;
+        double b = bx * bx + by * by;
+        double c = cx * cx + cy * cy;
+
+        double denominator = 2 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by));
+        double x = (a * (by - cy) + b * (cy - ay) + c * (ay - by)) / denominator;
+        double y = (a * (cx - bx) + b * (ax - cx) + c * (bx - ax)) / denominator;
+
+        Vector2D center = new Vector2D(x, y);
+        assert Util.withinEpsilon(center.squaredDistance(A) - center.squaredDistance(B));
+        assert Util.withinEpsilon(center.squaredDistance(A) - center.squaredDistance(C));
+        assert Util.withinEpsilon(center.squaredDistance(B) - center.squaredDistance(C));
+        
+        return center;
     }
     
 }

@@ -29,7 +29,6 @@ public class PolyHelper
         {
             Circle circle = (Circle)shape;
             convex = new RegularCyclic(circle.getGlobalPosition(), 8, circle.getGlobalRadius(), Math.PI / 8);
-//            convex.getTransform().rotateRadian(Math.PI / 8);
         }
         else throw new NotImplementedException();
         builder.reset();

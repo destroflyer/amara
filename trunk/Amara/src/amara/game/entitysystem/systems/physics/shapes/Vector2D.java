@@ -4,7 +4,6 @@
  */
 package amara.game.entitysystem.systems.physics.shapes;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Util;
 import com.jme3.network.serializing.Serializable;
 
 /**
@@ -25,8 +24,8 @@ public class Vector2D
 
     public Vector2D(double x, double y)
     {
-        assert !Double.isNaN(x);
-        assert !Double.isNaN(y);
+        assert !Double.isNaN(x): "remove this assert if NaN is intended";
+        assert !Double.isNaN(y): "remove this assert if NaN is intended";
         this.x = x;
         this.y = y;
     }
@@ -169,14 +168,16 @@ public class Vector2D
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Double.valueOf(x).hashCode() ^ (373 * Double.valueOf(y).hashCode());
     }
 
     @Override
     public boolean equals(Object obj)
     {
-        if(obj instanceof Vector2D) {
+        if(obj instanceof Vector2D)
+        {
             return equals((Vector2D)obj);
         }
         return false;
@@ -193,7 +194,8 @@ public class Vector2D
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "(" + x + ", " + y + ")";
     }
 }
