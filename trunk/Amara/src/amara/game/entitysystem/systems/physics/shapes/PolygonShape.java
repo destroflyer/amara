@@ -109,25 +109,25 @@ public class PolygonShape extends Shape
     @Override
     public double getMinX()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Double.NEGATIVE_INFINITY;
     }
 
     @Override
     public double getMaxX()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Double.POSITIVE_INFINITY;
     }
 
     @Override
     public double getMinY()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Double.NEGATIVE_INFINITY;
     }
 
     @Override
     public double getMaxY()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Double.POSITIVE_INFINITY;
     }
     
 }
