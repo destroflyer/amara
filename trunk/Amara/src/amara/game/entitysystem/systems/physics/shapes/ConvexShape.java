@@ -23,6 +23,10 @@ public abstract class ConvexShape extends Shape
         return ShapeUtil.intersectionResolver(this, s);
     }
     
+    public abstract Vector2D calcLocalCentroid();
+    
+    public abstract double calcLocalArea();
+    
     public abstract Circle getBoundCircle();
     
     @Override

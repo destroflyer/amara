@@ -119,4 +119,16 @@ public class Circle extends ConvexShape
     {
         return this;
     }
+
+    @Override
+    public Vector2D calcLocalCentroid()
+    {
+        return localPosition;
+    }
+
+    @Override
+    public double calcLocalArea()
+    {
+        return Math.PI * localRadius * localRadius;
+    }
 }
