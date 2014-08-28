@@ -201,5 +201,41 @@ public class SimpleConvexPolygon extends ConvexShape
         c.setTransform(transform);
         return c;
     }
+
+    @Override
+    public Vector2D calcLocalCentroid()
+    {
+        if(localPoints.length <= 2) return Vector2DUtil.avg(localPoints);
+        double area = calcLocalArea();
+        assert 0 < area;
+        double x = 0;
+        double y = 0;
+        for (int i = 0; i < localPoints.length; i++)
+        {
+            int j = (i + 1) % localPoints.length;
+            Vector2D a = localPoints[i];
+            Vector2D b = localPoints[j];
+            double f = (a.getX() * b.getY() - b.getX() * a.getY());
+            x += (a.getX() + b.getX()) * f;
+            y += (a.getY() + b.getY()) * f;
+        }
+        area *= 6;
+        return new Vector2D(x / area, y / area);
+    }
+
+    @Override
+    public double calcLocalArea()
+    {
+        double area = 0d;
+        for (int i = 0; i < localPoints.length; i++)
+        {
+            int j = (i + 1) % localPoints.length;
+
+            area += (localPoints[i].getX() - localPoints[j].getX()) * (localPoints[i].getY() + localPoints[j].getY());
+        }
+        area /= 2;
+        assert 0 <= area;
+        return area;
+    }
     
 }

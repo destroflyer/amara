@@ -66,8 +66,7 @@ public class Vector2DUtil {
             bMin = d.getY();
             bMax = c.getY();
         }
-        if(aMax <= bMin || bMax <= aMin) return false;
-        return true;
+        return aMax > bMin && bMax > aMin;
     }
     public static Vector2D lineSegmentIntersectionPointWithoutCorners(Vector2D p1, Vector2D p2, Vector2D p3, Vector2D p4)
     {

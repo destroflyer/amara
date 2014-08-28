@@ -221,38 +221,6 @@ public class ShapeUtil
         double len = delta.length();
         return delta.mult((len - distance) / len);
     }
-//    public static Vector2D intersectionResolver_alternate(Circle a, SimpleConvexPolygon b)
-//    {
-//        Vector2D[] points = b.getGlobalPoints();
-//        Vector2D center = a.getGlobalPosition();
-//        
-//        Vector2D overlap = new Vector2D();
-//        double length = Double.POSITIVE_INFINITY;
-//        
-//        for(int i = 0; i < points.length; i++)
-//        {
-//            int j = (i + 1) % points.length;
-//            Vector2D axis = points[j].sub(points[i]).leftHand().unit();
-//            double tmp = b.getPenetration(a, axis);
-//            if(Math.abs(tmp) < length)
-//            {
-//                axis = axis.mult(tmp);
-//                overlap = axis;
-//                length = overlap.length();
-//            }
-//            
-//            
-//            axis = center.sub(points[i]).unit();
-//            tmp = b.getPenetration(a, axis);
-//            if(Math.abs(tmp) < length)
-//            {
-//                axis = axis.mult(tmp);
-//                overlap = axis;
-//                length = overlap.length();
-//            }
-//        }
-//        return overlap;
-//    }
     public static Vector2D intersectionResolver(Circle a, SimpleConvexPolygon b)
     {
         Vector2D center = a.getGlobalPosition();
@@ -333,7 +301,7 @@ public class ShapeUtil
             {
                 if(Vector2DUtil.lineSide(c2[i], c1[a], c1[b]) < 0)
                 {
-                    tmp = Vector2DUtil.fromLineToPoint(c1[a], c1[b], c2[i]);
+                    tmp = Vector2DUtil.fromLineSegmentToPoint(c1[a], c1[b], c2[i]);
                     if(inner.squaredLength() < tmp.squaredLength()) inner = tmp;
                 }
             }
