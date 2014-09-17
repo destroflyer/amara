@@ -209,7 +209,7 @@ public class ClientLauncher extends JFrame{
         setResizable(false);
 
         cbxMasterserverHost.setEditable(true);
-        cbxMasterserverHost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "148.251.154.16" }));
+        cbxMasterserverHost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "141.70.100.23" }));
         cbxMasterserverHost.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxMasterserverHostItemStateChanged(evt);
