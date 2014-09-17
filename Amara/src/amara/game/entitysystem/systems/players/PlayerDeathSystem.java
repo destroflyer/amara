@@ -51,8 +51,6 @@ public class PlayerDeathSystem implements EntitySystem{
             //General
             IsTargetableComponent.class,
             IsVulnerableComponent.class,
-            MovementComponent.class,
-            AggroTargetComponent.class,
             IsCastingComponent.class,
             //Crowdcontrol
             IsBindedComponent.class,

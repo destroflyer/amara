@@ -148,6 +148,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue()));
         addEntitySystem(new AttackMoveSystem());
         addEntitySystem(new AttackAggroedTargetsSystem());
+        addEntitySystem(new CheckCampAggroTargetSystem());
         addEntitySystem(new PerformAutoAttacksSystem());
         addEntitySystem(new CastSpellOnCooldownWhileAttackingSystem());
         addEntitySystem(new SetCastDurationOnCastingSystem());
@@ -194,6 +195,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyTriggerSpellEffectsSystem());
         addEntitySystem(new ApplyAddComponentsSystem());
         addEntitySystem(new ApplyAddEffectTriggersSystem());
+        addEntitySystem(new ApplyRemoveComponentsSystem());
         addEntitySystem(new ApplyRemoveEntitySystem());
         addEntitySystem(new RemoveAppliedEffectsSystem());
         addEntitySystem(new HealthRegenerationSystem());
@@ -212,7 +214,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new TriggerCastingFinishedEffectSystem());
         addEntitySystem(new TriggerRepeatingEffectSystem());
         addEntitySystem(new AggroSystem());
-        addEntitySystem(new CheckCampAggroTargetSystem());
         addEntitySystem(new CheckCampMaximumAggroDistanceSystem());
         addEntitySystem(new CampResetSystem());
         addEntitySystem(new SetIdleAnimationsSystem());

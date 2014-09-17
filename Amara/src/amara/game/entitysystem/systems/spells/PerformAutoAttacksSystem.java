@@ -19,30 +19,14 @@ public class PerformAutoAttacksSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AggroTargetComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(AggroTargetComponent.class)){
-            entityWorld.setComponent(entity, new AutoAttackTargetComponent());
-        }
-        for(int entity : observer.getChanged().getEntitiesWithAll(AggroTargetComponent.class)){
-            entityWorld.setComponent(entity, new AutoAttackTargetComponent());
-        }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(AggroTargetComponent.class)){
-            entityWorld.removeComponent(entity, AutoAttackTargetComponent.class);
-        }
-        observer.reset();
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(AggroTargetComponent.class))){
             int targetEntity = entityWrapper.getComponent(AggroTargetComponent.class).getTargetEntity();
             if(isAttackable(entityWorld, entityWrapper.getId(), targetEntity)){
-                if(entityWrapper.hasComponent(AutoAttackTargetComponent.class)){
-                    int autoAttackEntity = entityWrapper.getComponent(AutoAttackComponent.class).getAutoAttackEntity();
-                    if(!entityWrapper.hasComponent(IsCastingComponent.class)){
-                        ExecutePlayerCommandsSystem.castSpell(entityWorld, entityWrapper.getId(), new CastSpellComponent(autoAttackEntity, targetEntity));
-                    }
-                }
+                int autoAttackEntity = entityWrapper.getComponent(AutoAttackComponent.class).getAutoAttackEntity();
+                ExecutePlayerCommandsSystem.castSpell(entityWorld, entityWrapper.getId(), new CastSpellComponent(autoAttackEntity, targetEntity));
             }
             else{
                 entityWrapper.removeComponent(AggroTargetComponent.class);
-                entityWrapper.removeComponent(AutoAttackTargetComponent.class);
             }
         }
     }
