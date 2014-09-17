@@ -10,7 +10,8 @@ import java.util.*;
  *
  * @author Philipp
  */
-public class Vector2DUtil {
+public class Vector2DUtil
+{
     public static Vector2D lineIntersectionPoint(Vector2D p1, Vector2D p2, Vector2D p3, Vector2D p4)
     {
         double denom = (p4.getY() - p3.getY()) * (p2.getX() - p1.getX()) - (p4.getX() - p3.getX()) * (p2.getY() - p1.getY());
@@ -175,6 +176,24 @@ public class Vector2DUtil {
         }
         area /= 2;
         return area;
+    }
+    public static double kahanSumArea(Vector2D... points)
+    {
+        double[] values = new double[points.length];
+        for (int i = 0; i < points.length; i++)
+        {
+            int j = (i + 1) % points.length;
+            values[i] = (points[i].getX() - points[j].getX()) * (points[i].getY() + points[j].getY());
+        }
+        return Util.kahanSum(values) / 2;
+    }
+    public static double area(List<Vector2D> points)
+    {
+        return area(points.toArray(new Vector2D[0]));
+    }
+    public static double kahanSumArea(List<Vector2D> points)
+    {
+        return kahanSumArea(points.toArray(new Vector2D[0]));
     }
 
     public static Vector2D sum(Vector2D... points)

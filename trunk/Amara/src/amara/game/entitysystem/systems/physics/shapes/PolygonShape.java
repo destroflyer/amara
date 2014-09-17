@@ -4,7 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.shapes;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.Polygon;
+import amara.game.entitysystem.systems.physics.*;
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import com.jme3.network.serializing.*;
 import java.util.*;
 
@@ -16,6 +17,7 @@ import java.util.*;
 public class PolygonShape extends Shape
 {
     private Polygon localPolygon, globalPolygon = null;
+    private BoundRectangle aabb = null;
 
     public PolygonShape()
     {
@@ -89,6 +91,7 @@ public class PolygonShape extends Shape
 
     public Polygon getGlobalPolygon()
     {
+        updateCache();
         return globalPolygon;
     }
 
@@ -103,31 +106,51 @@ public class PolygonShape extends Shape
     @Override
     public Vector2D getIntersectionResolver(Shape s)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        System.out.println("Warning, slow function, do not use!");
+        Polygon p = PolyHelper.fromShape(s).flip();
+        p = globalPolygon.minkowskiAdd(p);
+        return p.distanceToBorder(Vector2D.Zero);
+    }
+    
+    private void updateAabb()
+    {
+        if(aabb == null)
+        {
+            updateCache();
+            aabb = globalPolygon.boundRectangle();
+        }
     }
 
     @Override
     public double getMinX()
     {
-        return Double.NEGATIVE_INFINITY;
+        if(localPolygon.isInfinite()) return Double.NEGATIVE_INFINITY;
+        updateAabb();
+        return aabb.getMinX();
     }
 
     @Override
     public double getMaxX()
     {
-        return Double.POSITIVE_INFINITY;
+        if(localPolygon.isInfinite()) return Double.POSITIVE_INFINITY;
+        updateAabb();
+        return aabb.getMaxX();
     }
 
     @Override
     public double getMinY()
     {
-        return Double.NEGATIVE_INFINITY;
+        if(localPolygon.isInfinite()) return Double.NEGATIVE_INFINITY;
+        updateAabb();
+        return aabb.getMinY();
     }
 
     @Override
     public double getMaxY()
     {
-        return Double.POSITIVE_INFINITY;
+        if(localPolygon.isInfinite()) return Double.POSITIVE_INFINITY;
+        updateAabb();
+        return aabb.getMaxY();
     }
     
 }

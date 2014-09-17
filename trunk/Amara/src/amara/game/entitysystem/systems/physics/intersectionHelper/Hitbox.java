@@ -13,7 +13,7 @@ import amara.game.entitysystem.systems.physics.shapes.*;
  *
  * @author Philipp
  */
-public class Hitbox implements HasShape
+public class Hitbox implements BoundAabb
 {
     EntityWrapper entity;
 
@@ -30,5 +30,25 @@ public class Hitbox implements HasShape
     public Shape getShape()
     {
         return entity.getComponent(HitboxComponent.class).getShape();
+    }
+
+    public double getMinX()
+    {
+        return getShape().getMinX();
+    }
+
+    public double getMinY()
+    {
+        return getShape().getMinY();
+    }
+
+    public double getMaxX()
+    {
+        return getShape().getMaxX();
+    }
+
+    public double getMaxY()
+    {
+        return getShape().getMaxY();
     }
 }

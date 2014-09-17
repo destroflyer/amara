@@ -352,6 +352,16 @@ class SetPolygonUtil
         {
             if (starts.get(point) != ends.get(point)) return false;
         }
+        
+        for (Vector2D a : edges)
+        {
+            int num = 0;
+            for (Vector2D b : edges)
+            {
+                if(a.withinEpsilon(b)) num++;
+            }
+            assert (num & 1) == 0: num;
+        }
         return true;
     }
     private static ArrayList<SimplePolygon> edgesToSimpleSet(List<Vector2D> edges)
@@ -418,6 +428,7 @@ class SetPolygonUtil
         
         if(!chains.isEmpty())
         {
+//            throw new Error("invalid input");
             double permittedErrorSquared = 0.01d;
             ArrayList<Vector2D> firstChain = chains.get(0);
             Vector2D last = firstChain.get(firstChain.size() - 1);

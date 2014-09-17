@@ -158,4 +158,18 @@ public class Util
         }
         return max;
     }
+    
+    public static double kahanSum(double... values)
+    {
+        double sum = 0;
+        double c = 0;
+        for (int i = 0; i < values.length; i++)
+        {
+            double y = values[i] - c;
+            double t = sum + y;
+            c = (t - sum) - y;
+            sum = t;
+        }
+        return sum;
+    }
 }

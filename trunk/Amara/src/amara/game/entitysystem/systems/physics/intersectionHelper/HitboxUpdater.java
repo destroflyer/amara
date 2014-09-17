@@ -15,7 +15,7 @@ import java.util.*;
  */
 public class HitboxUpdater
 {
-    private SweepAndPrune sap = new SweepAndPrune();
+    private SweepAndPrune<Hitbox> sap = new SweepAndPrune<Hitbox>();
     private HashMap<Integer, Hitbox> hitboxMap = new HashMap<Integer, Hitbox>();
     
     public HashSet<Pair<Integer>> getFilteredIntersections(Filter<Hitbox> filter)
@@ -66,6 +66,6 @@ public class HitboxUpdater
     }
     private void checkedAdd(EntityWrapper entity)
     {
-        if(entity.hasAllComponents(HitboxComponent.class, HitboxActiveComponent.class) && !hitboxMap.containsKey(entity)) add(entity.getId(), new Hitbox(entity));
+        if(entity.hasAllComponents(HitboxComponent.class, HitboxActiveComponent.class) && !hitboxMap.containsKey(entity.getId())) add(entity.getId(), new Hitbox(entity));
     }
 }

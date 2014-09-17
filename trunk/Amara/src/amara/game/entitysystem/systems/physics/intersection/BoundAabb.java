@@ -4,12 +4,14 @@
  */
 package amara.game.entitysystem.systems.physics.intersection;
 
-import amara.game.entitysystem.systems.physics.shapes.*;
-
 /**
  *
  * @author Philipp
  */
-public interface HasShape {
-    public Shape getShape();
+public interface BoundAabb
+{
+    public double getMinX();
+    public double getMinY();
+    public double getMaxX();
+    public double getMaxY();
 }

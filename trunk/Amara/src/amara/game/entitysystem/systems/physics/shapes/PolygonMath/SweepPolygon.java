@@ -4,10 +4,9 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.Vector2D;
-import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
-import static amara.game.entitysystem.systems.physics.shapes.PolygonMath.PolygonOperation.*;
-import java.util.ArrayList;
+import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.game.entitysystem.systems.physics.shapes.PolygonMath.PolygonOperation.*;
+import java.util.*;
 import sun.reflect.generics.reflectiveObjects.*;
 
 /**

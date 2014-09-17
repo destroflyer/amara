@@ -8,8 +8,10 @@ package amara.game.entitysystem.systems.physics.intersection;
  *
  * @author Philipp
  */
-public class Filter<T> {
-    public boolean pass(T a, T b) {
+public class Filter<T>
+{
+    public boolean pass(T a, T b)
+    {
         return true;
     }
 }

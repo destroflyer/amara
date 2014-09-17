@@ -13,10 +13,6 @@ import amara.game.entitysystem.systems.physics.intersection.*;
  */
 public interface IntersectionInformant
 {
-//    public Set<Pair<Integer>> getEntries(EntityWorld entityWorld);
-//    public Set<Pair<Integer>> getRepeaters(EntityWorld entityWorld);
-//    public Set<Pair<Integer>> getLeavers(EntityWorld entityWorld);
-//    public void updateTrackers(EntityWorld entityWorld);
     public void updateHitboxes(EntityWorld entityWorld);
     public IntersectionTracker<Pair<Integer>> getTracker(EntityWorld entityWorld, Object key);
 }

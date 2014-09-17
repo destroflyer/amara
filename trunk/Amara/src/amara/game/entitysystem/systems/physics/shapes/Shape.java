@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.shapes;
 
+import amara.game.entitysystem.systems.physics.intersection.BoundAabb;
 import com.jme3.network.serializing.*;
 
 /**
@@ -11,7 +12,7 @@ import com.jme3.network.serializing.*;
  * @author Philipp
  */
 @Serializable
-public abstract class Shape
+public abstract class Shape implements BoundAabb//TODO: remove BoundAabb implementation
 {
     protected Transform2D transform = Transform2D.Identity;
 
