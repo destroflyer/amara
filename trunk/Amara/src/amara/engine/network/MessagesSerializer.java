@@ -225,6 +225,7 @@ public class MessagesSerializer{
                         //effects/general
                         AddComponentsComponent.class,
                         AddEffectTriggersComponent.class,
+                        RemoveComponentsComponent.class,
                         RemoveEntityComponent.class,
                         //effects/heal
                         FlatHealComponent.class,
@@ -341,7 +342,6 @@ public class MessagesSerializer{
                         AttackMoveComponent.class,
                         AutoAggroComponent.class,
                         AutoAttackComponent.class,
-                        AutoAttackTargetComponent.class,
                         CampComponent.class,
                         CastSpellOnCooldownWhileAttackingComponent.class,
                         CurrentActionEffectCastsComponent.class,

@@ -1631,7 +1631,6 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggerDelayComponent(1.1f));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
-            entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CastDurationComponent(2));
             entityWrapper.setComponent(new StopBeforeCastingComponent());
             EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());

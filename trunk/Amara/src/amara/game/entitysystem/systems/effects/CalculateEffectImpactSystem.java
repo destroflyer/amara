@@ -107,6 +107,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     }
                     EntityUtil.transferComponents(effect, effectImpact, new Class[]{
                         AddComponentsComponent.class,
+                        RemoveComponentsComponent.class,
                         AddEffectTriggersComponent.class,
                         RemoveEntityComponent.class,
                         PauseAudioComponent.class,

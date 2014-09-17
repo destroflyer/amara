@@ -18,7 +18,7 @@ public class CheckCampMaximumAggroDistanceSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(CampComponent.class, AggroTargetComponent.class))
+        for(int entity : entityWorld.getEntitiesWithAll(CampComponent.class))
         {
             int campEntity = entityWorld.getComponent(entity, CampComponent.class).getCampEntity();
             CampMaximumAggroDistanceComponent campMaximumAggroDistanceComponent = entityWorld.getComponent(campEntity, CampMaximumAggroDistanceComponent.class);

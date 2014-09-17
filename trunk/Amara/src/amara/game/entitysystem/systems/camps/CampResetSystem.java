@@ -24,9 +24,9 @@ public class CampResetSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(ResetCampComponent.class))
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, ResetCampComponent.class);
+        for(int entity : observer.getNew().getEntitiesWithAll(ResetCampComponent.class))
         {
-            entityWorld.removeComponent(entity, AggroTargetComponent.class);
             int campEntity = entityWorld.getComponent(entity, CampComponent.class).getCampEntity();
             CampTransformComponent campTransformComponent = entityWorld.getComponent(campEntity, CampTransformComponent.class);
             int targetPositionEntity = entityWorld.createEntity();
@@ -42,12 +42,13 @@ public class CampResetSystem implements EntitySystem{
                     float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();
                     componentsToAdd.add(new HealthComponent(maximumHealth));
                 }
-                effect.setComponent(new AddComponentsComponent(componentsToAdd.toArray(new Object[0])));
+                effect.setComponent(new AddComponentsComponent(componentsToAdd.toArray(new Object[componentsToAdd.size()])));
+                effect.setComponent(new RemoveComponentsComponent(ResetCampComponent.class));
                 effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
                 effectTrigger.setComponent(new TriggerSourceComponent(entity));
                 effectTrigger.setComponent(new TriggerOnceComponent());
-                entityWorld.removeComponent(entity, ResetCampComponent.class);
             }
         }
+        observer.reset();
     }
 }

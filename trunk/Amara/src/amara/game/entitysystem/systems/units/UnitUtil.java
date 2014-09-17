@@ -8,7 +8,6 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
-import amara.game.entitysystem.components.visuals.*;
 
 /**
  *
@@ -23,9 +22,8 @@ public class UnitUtil{
             isAllowed = false;
         }
         if(isAllowed){
-            if(!entityWorld.hasComponent(entity, MovementComponent.class)){
-                entityWorld.removeComponent(entity, AnimationComponent.class);
-            }
+            entityWorld.removeComponent(entity, MovementComponent.class);
+            entityWorld.removeComponent(entity, AggroTargetComponent.class);
             CurrentActionEffectCastsComponent currentActionEffectCastsComponent = entityWorld.getComponent(entity, CurrentActionEffectCastsComponent.class);
             if(currentActionEffectCastsComponent != null){
                 for(int effectCastEntity : currentActionEffectCastsComponent.getEffectCastEntities()){
