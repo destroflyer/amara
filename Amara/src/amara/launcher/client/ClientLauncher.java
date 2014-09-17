@@ -183,8 +183,7 @@ public class ClientLauncher extends JFrame{
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         panImage = new javax.swing.JPanel();
@@ -210,19 +209,15 @@ public class ClientLauncher extends JFrame{
         setResizable(false);
 
         cbxMasterserverHost.setEditable(true);
-        cbxMasterserverHost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "141.70.100.23" }));
-        cbxMasterserverHost.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
+        cbxMasterserverHost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "148.251.154.16" }));
+        cbxMasterserverHost.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxMasterserverHostItemStateChanged(evt);
             }
         });
 
-        txtMasterserverPort.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyReleased(java.awt.event.KeyEvent evt)
-            {
+        txtMasterserverPort.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtMasterserverPortKeyReleased(evt);
             }
         });
@@ -253,10 +248,8 @@ public class ClientLauncher extends JFrame{
 
         btnPlay.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnPlay.setText("Play");
-        btnPlay.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPlay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPlayActionPerformed(evt);
             }
         });
