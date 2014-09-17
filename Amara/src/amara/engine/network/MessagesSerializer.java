@@ -57,6 +57,7 @@ import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.synchronizing.*;
+import amara.game.entitysystem.systems.physics.intersection.BoundAabb;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 
@@ -291,6 +292,7 @@ public class MessagesSerializer{
                             Transform2D.class,
                             Vector2D.class,
                             PolygonShape.class,
+                                BoundRectangle.class,
                                 Polygon.class,
                                     SetPolygon.class,
                                     HolePolygon.class,

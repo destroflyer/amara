@@ -7,7 +7,6 @@ package amara.game.entitysystem.systems.physics.intersectionHelper;
 import amara.game.entitysystem.EntityWorld;
 import amara.game.entitysystem.components.physics.CollisionGroupComponent;
 import amara.game.entitysystem.systems.physics.intersection.*;
-import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *
@@ -35,7 +34,7 @@ public class IntersectionFilter extends Filter<Hitbox>
     @Override
     public boolean pass(Hitbox a, Hitbox b)
     {
-        return pass(a.getId(), b.getId());
+        return pass(a.getId(), b.getId()) && a.getShape().intersects(b.getShape());
     }
     
 }

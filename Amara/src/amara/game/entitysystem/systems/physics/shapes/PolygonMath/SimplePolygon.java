@@ -98,21 +98,13 @@ public class SimplePolygon
         if (Double.isNaN(cachedArea))
         {
             cachedArea = calcSignedArea();
+            assert cachedArea * Vector2DUtil.kahanSumArea(points) >= 0;
         }
-        assert(Util.withinEpsilon(cachedArea - calcSignedArea())): "" + cachedArea + " / " + calcSignedArea();
         return cachedArea;
     }
     private double calcSignedArea()
     {
-        double area = 0d;
-        for (int i = 0; i < points.size(); i++)
-        {
-            int j = (i + 1) % points.size();
-
-            area += (points.get(i).getX() - points.get(j).getX()) * (points.get(i).getY() + points.get(j).getY());
-        }
-        area /= 2;
-        return area;
+        return Vector2DUtil.area(points);
     }
     
     public boolean onBorder(Vector2D point)

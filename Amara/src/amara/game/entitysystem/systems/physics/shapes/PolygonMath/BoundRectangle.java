@@ -4,16 +4,22 @@
  */
 package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
-import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.game.entitysystem.systems.physics.shapes.*;
+import com.jme3.network.serializing.*;
 
 /**
  *
  * @author Philipp
  */
+@Serializable
 public class BoundRectangle
 {
     private double minX, minY, maxX, maxY;
 
+    public BoundRectangle()
+    {
+    }
+    
     public BoundRectangle(double minX, double minY, double maxX, double maxY) {
         assert minX <= maxX;
         assert minY <= maxY;

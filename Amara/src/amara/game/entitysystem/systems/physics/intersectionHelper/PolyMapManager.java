@@ -4,8 +4,7 @@
  */
 package amara.game.entitysystem.systems.physics.intersectionHelper;
 
-import amara.game.entitysystem.systems.physics.shapes.Vector2D;
-import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
+import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.entitysystem.systems.physics.*;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import java.util.*;
