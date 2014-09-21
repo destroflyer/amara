@@ -48,6 +48,7 @@ import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.camps.*;
 import amara.game.entitysystem.components.effects.audio.*;
 import amara.game.entitysystem.components.effects.buffs.areas.*;
+import amara.game.entitysystem.components.effects.crowdcontrol.knockup.*;
 import amara.game.entitysystem.components.effects.physics.*;
 import amara.game.entitysystem.components.effects.spawns.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
@@ -57,7 +58,6 @@ import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.synchronizing.*;
-import amara.game.entitysystem.systems.physics.intersection.BoundAabb;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 
@@ -205,13 +205,19 @@ public class MessagesSerializer{
                         //effects/crowdcontrol
                         AddBindingComponent.class,
                         AddBindingImmuneComponent.class,
+                        AddKnockupComponent.class,
+                        AddKnockupImmuneComponent.class,
                         AddSilenceComponent.class,
                         AddSilenceImmuneComponent.class,
                         AddStunComponent.class,
                         AddStunImmuneComponent.class,
                         RemoveBindingComponent.class,
+                        RemoveKnockupComponent.class,
                         RemoveSilenceComponent.class,
                         RemoveStunComponent.class,
+                        //effects/crowdcontrol/knockup
+                        KnockupDurationComponent.class,
+                        KnockupHeightComponent.class,
                         //effects/damage
                         AddTargetabilityComponent.class,
                         AddVulnerabilityComponent.class,
@@ -367,6 +373,8 @@ public class MessagesSerializer{
                         //units/crowdcontrol
                         IsBindedComponent.class,
                         IsBindedImmuneComponent.class,
+                        IsKnockupedComponent.class,
+                        IsKnockupedImmuneComponent.class,
                         IsSilencedComponent.class,
                         IsSilencedImmuneComponent.class,
                         IsStunnedComponent.class,

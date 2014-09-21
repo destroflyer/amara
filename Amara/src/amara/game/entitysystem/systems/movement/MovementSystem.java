@@ -40,6 +40,6 @@ public class MovementSystem implements EntitySystem{
     }
     
     public static boolean canMove(EntityWorld entityWorld, int entity){
-        return (!entityWorld.hasAnyComponent(entity, IsBindedComponent.class, IsStunnedComponent.class));
+        return (!entityWorld.hasAnyComponent(entity, IsBindedComponent.class, IsStunnedComponent.class, IsKnockupedComponent.class));
     }
 }

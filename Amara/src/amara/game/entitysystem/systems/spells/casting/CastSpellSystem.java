@@ -95,7 +95,7 @@ public class CastSpellSystem implements EntitySystem{
     }
     
     public static boolean canCast(EntityWorld entityWorld, int casterEntity, int spellEntity){
-        if(!entityWorld.hasComponent(casterEntity, IsStunnedComponent.class)){
+        if(!entityWorld.hasAnyComponent(casterEntity, IsStunnedComponent.class, IsKnockupedComponent.class)){
             AutoAttackComponent autoAttackComponent = entityWorld.getComponent(casterEntity, AutoAttackComponent.class);
             if((autoAttackComponent != null) && (spellEntity == autoAttackComponent.getAutoAttackEntity())){
                 return true;

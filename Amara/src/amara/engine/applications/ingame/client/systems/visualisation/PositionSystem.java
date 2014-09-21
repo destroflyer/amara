@@ -35,7 +35,7 @@ public class PositionSystem implements EntitySystem{
         observer.reset();
     }
     
-    private void updatePosition(EntityWorld entityWorld, int entity){
+    public void updatePosition(EntityWorld entityWorld, int entity){
         Node node = entitySceneMap.requestNode(entity);
         Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
         node.setLocalTranslation(position.getX(), mapHeightmap.getHeight(position), position.getY());

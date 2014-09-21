@@ -15,6 +15,7 @@ import amara.game.entitysystem.components.effects.audio.*;
 import amara.game.entitysystem.components.effects.buffs.*;
 import amara.game.entitysystem.components.effects.buffs.areas.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
+import amara.game.entitysystem.components.effects.crowdcontrol.knockup.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.effects.heals.*;
@@ -1568,6 +1569,72 @@ public class EntityTemplate{
 
             EntityWrapper autoAttack = createFromTemplate(entityWorld, "melee_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+
+            EntityWrapper pulverize = createFromTemplate(entityWorld, "pulverize");
+            entityWrapper.setComponent(new SpellsComponent(new int[]{pulverize.getId()}));
+        }
+        else if(templateName.equals("pulverize")){
+            entityWrapper.setComponent(new NameComponent("Pulverize"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("pulverize"));
+            //Damage target
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new FlatMagicDamageComponent(60));
+            EntityWrapper knockup = entityWorld.getWrapped(entityWorld.createEntity());
+            knockup.setComponent(new KnockupDurationComponent(1));
+            knockup.setComponent(new KnockupHeightComponent(5));
+            effect1.setComponent(new AddKnockupComponent(knockup.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Spawn object
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new CasterTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
+            spawnInformation.setComponent(new SpawnTemplateComponent("pulverize_object"));
+            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            effectTrigger2.setComponent(new TriggerDelayComponent(0.25f));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+            entityWrapper.setComponent(new CastDurationComponent(0.75f));
+            entityWrapper.setComponent(new StopAfterCastingComponent());
+            entityWrapper.setComponent(new StopBeforeCastingComponent());
+            EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            castAnimation.setComponent(new NameComponent("attack1"));
+            castAnimation.setComponent(new LoopDurationComponent(0.5f));
+            entityWrapper.setComponent(new CastAnimationComponent(castAnimation.getId()));
+            entityWrapper.setComponent(new CooldownComponent(0.75f));
+        }
+        else if(templateName.equals("pulverize_object")){
+            entityWrapper.setComponent(new HitboxComponent(new Circle(7)));
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
+            targetRules.setComponent(new AcceptEnemiesComponent());
+            entityWrapper.setComponent(new IntersectionRulesComponent(targetRules.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new CollisionTriggerComponent());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new TriggerCastedSpellEffectsComponent());
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Remove object
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new CollisionTriggerComponent());
+            effectTrigger2.setComponent(new SourceTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new RemoveEntityComponent());
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new LifetimeComponent(0.2f));
         }
         else if(templateName.equals("eragon")){
             entityWrapper.setComponent(new ModelComponent("Models/little_dragon/skin_default.xml"));
@@ -1621,7 +1688,7 @@ public class EntityTemplate{
             spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
             //Spawn object
             EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger2.setComponent(new TargetTargetComponent());
+            effectTrigger2.setComponent(new CasterTargetComponent());
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("bodyslam_object"));
