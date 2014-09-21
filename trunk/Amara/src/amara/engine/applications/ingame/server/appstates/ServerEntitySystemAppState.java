@@ -143,6 +143,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownSilenceImmuneSystem());
         addEntitySystem(new CountdownStunSystem());
         addEntitySystem(new CountdownStunImmuneSystem());
+        addEntitySystem(new CountdownKnockupSystem());
+        addEntitySystem(new CountdownKnockupImmuneSystem());
         addEntitySystem(new CountdownAnimationLoopsSystem());
         addEntitySystem(new CheckOpenObjectivesSystem());
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue()));
@@ -176,6 +178,9 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyAddStunImmuneSystem());
         addEntitySystem(new ApplyAddStunSystem());
         addEntitySystem(new ApplyRemoveStunSystem());
+        addEntitySystem(new ApplyAddKnockupImmuneSystem());
+        addEntitySystem(new ApplyAddKnockupSystem());
+        addEntitySystem(new ApplyRemoveKnockupSystem());
         addEntitySystem(new ApplyAddTargetabilitySystem());
         addEntitySystem(new ApplyRemoveTargetabilitySystem());
         addEntitySystem(new ApplyAddVulnerabilitySystem());

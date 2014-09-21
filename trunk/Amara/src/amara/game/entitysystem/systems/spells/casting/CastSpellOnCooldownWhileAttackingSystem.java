@@ -26,23 +26,26 @@ public class CastSpellOnCooldownWhileAttackingSystem implements EntitySystem{
             int spellIndex = entityWorld.getComponent(casterEntity, CastSpellOnCooldownWhileAttackingComponent.class).getSpellIndex();
             int spellEntity = entityWorld.getComponent(casterEntity, SpellsComponent.class).getSpellsEntities()[spellIndex];
             if(!entityWorld.hasComponent(spellEntity, RemainingCooldownComponent.class)){
-                int castInformationEntity = entityWorld.createEntity();
-                int targetEntity = entityWorld.getComponent(casterEntity, AggroTargetComponent.class).getTargetEntity();
-                Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
+                int castInformationEntity = -1;
                 CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();
-                switch(castType){
-                    case SINGLE_TARGET:
-                        entityWorld.setComponent(castInformationEntity, new TargetComponent(targetEntity));
-                        break;
-                    
-                    case POSITIONAL_SKILLSHOT:
-                        entityWorld.setComponent(castInformationEntity, new PositionComponent(targetPosition.clone()));
-                        break;
-                    
-                    case LINEAR_SKILLSHOT:
-                        Vector2f casterPosition = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
-                        entityWorld.setComponent(castInformationEntity, new DirectionComponent(targetPosition.subtract(casterPosition)));
-                        break;
+                if(castType != CastType.SELFCAST){
+                    castInformationEntity = entityWorld.createEntity();
+                    int targetEntity = entityWorld.getComponent(casterEntity, AggroTargetComponent.class).getTargetEntity();
+                    Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
+                    switch(castType){
+                        case SINGLE_TARGET:
+                            entityWorld.setComponent(castInformationEntity, new TargetComponent(targetEntity));
+                            break;
+
+                        case POSITIONAL_SKILLSHOT:
+                            entityWorld.setComponent(castInformationEntity, new PositionComponent(targetPosition.clone()));
+                            break;
+
+                        case LINEAR_SKILLSHOT:
+                            Vector2f casterPosition = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
+                            entityWorld.setComponent(castInformationEntity, new DirectionComponent(targetPosition.subtract(casterPosition)));
+                            break;
+                    }
                 }
                 ExecutePlayerCommandsSystem.castSpell(entityWorld, casterEntity, new CastSpellComponent(spellEntity, castInformationEntity));
             }

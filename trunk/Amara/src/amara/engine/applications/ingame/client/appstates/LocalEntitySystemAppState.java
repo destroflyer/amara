@@ -72,7 +72,8 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         networkClient.addMessageBackend(new GameOverBackend(mainApplication));
         MapHeightmap mapHeightmap = getAppState(MapAppState.class).getMapHeightmap();
         addEntitySystem(new AudioSystem(getAppState(AudioAppState.class)));
-        addEntitySystem(new PositionSystem(entitySceneMap, mapHeightmap));
+        PositionSystem positionSystem = new PositionSystem(entitySceneMap, mapHeightmap);
+        addEntitySystem(positionSystem);
         addEntitySystem(new CollisionDebugSystem(getAppState(MapObstaclesAppState.class).getObstaclesNode()));
         addEntitySystem(new ModelSystem(entitySceneMap, mainApplication));
         addEntitySystem(new DirectionSystem(entitySceneMap));
@@ -83,6 +84,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new CurrentHealthBarSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
         addEntitySystem(new StunVisualisationSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
         addEntitySystem(new SilenceVisualisationSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
+        addEntitySystem(new KnockupVisualisationSystem(entitySceneMap, positionSystem));
         addEntitySystem(new BuffVisualisationSystem_Bubble(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Burning(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Electrified(entitySceneMap));
