@@ -60,14 +60,14 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 }
                 else if(command instanceof StopCommand){
                     StopCommand stopCommand = (StopCommand) command;
-                    UnitUtil.cancelAction(entityWorld, selectedUnit);
+                    UnitUtil.tryCancelAction(entityWorld, selectedUnit);
                 }
                 else if(command instanceof AutoAttackCommand){
                     AutoAttackCommand autoAttackCommand = (AutoAttackCommand) command;
                     AutoAttackComponent autoAttackComponent = entityWorld.getComponent(selectedUnit, AutoAttackComponent.class);
                     if(autoAttackComponent != null){
                         if(PerformAutoAttacksSystem.isAttackable(entityWorld, selectedUnit, autoAttackCommand.getTargetEntity())){
-                            if(UnitUtil.cancelAction(entityWorld, selectedUnit)){
+                            if(UnitUtil.tryCancelAction(entityWorld, selectedUnit)){
                                 entityWorld.setComponent(selectedUnit, new AggroTargetComponent(autoAttackCommand.getTargetEntity()));
                             }
                         }
@@ -145,6 +145,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             if(distance > range){
                 if(walk(entityWorld, casterEntity, targetEntity, range)){
                     EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+                    effectTrigger.setComponent(new TriggerTemporaryComponent());
                     effectTrigger.setComponent(new TargetReachedTriggerComponent());
                     effectTrigger.setComponent(new SourceTargetComponent());
                     EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
@@ -159,7 +160,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
         if(castInstant){
             boolean isAllowed = true;
             if(entityWorld.hasComponent(spellEntity, CastCancelActionComponent.class)){
-                isAllowed = UnitUtil.cancelAction(entityWorld, casterEntity);
+                isAllowed = UnitUtil.tryCancelAction(entityWorld, casterEntity);
             }
             if(isAllowed){
                 for(Object componentToAdd : componentsToAdd){
@@ -177,7 +178,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 isAllowed = entityWorld.hasComponent(movementComponent.getMovementEntity(), MovementIsCancelableComponent.class);
             }
             if(isAllowed){
-                if(UnitUtil.cancelAction(entityWorld, selectedUnit)){
+                if(UnitUtil.tryCancelAction(entityWorld, selectedUnit)){
                     EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
                     movement.setComponent(new MovementTargetComponent(targetEntity));
                     if(sufficientDistance != -1){

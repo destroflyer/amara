@@ -31,16 +31,14 @@ public class DisplaySpellsImagesSystem extends GUIDisplaySystem{
         if(spellsComponent != null){
             for(int i=0;i<4;i++){
                 String visualisationName = "none";
-                if(spellsComponent != null){
-                    int[] spells = spellsComponent.getSpellsEntities();
-                    if(i < spells.length){
-                        SpellVisualisationComponent spellVisualisationComponent = entityWorld.getComponent(spells[i], SpellVisualisationComponent.class);
-                        if(spellVisualisationComponent != null){
-                            visualisationName = spellVisualisationComponent.getName();
-                        }
-                        else{
-                            visualisationName = "unknown";
-                        }
+                int[] spells = spellsComponent.getSpellsEntities();
+                if((i < spells.length) && (spells[i] != -1)){
+                    SpellVisualisationComponent spellVisualisationComponent = entityWorld.getComponent(spells[i], SpellVisualisationComponent.class);
+                    if(spellVisualisationComponent != null){
+                        visualisationName = spellVisualisationComponent.getName();
+                    }
+                    else{
+                        visualisationName = "unknown";
                     }
                 }
                 screenController_HUD.setSpellImage(i, "Interface/hud/spells/" + visualisationName + ".png");

@@ -19,6 +19,7 @@ import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.systems.effects.triggers.EffectTriggerUtil;
+import amara.game.entitysystem.systems.movement.MovementSystem;
 
 /**
  *
@@ -81,6 +82,7 @@ public class CastSpellSystem implements EntitySystem{
                 }
                 else{
                     EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+                    effectTrigger.setComponent(new TriggerTemporaryComponent());
                     effectTrigger.setComponent(new CastingFinishedTriggerComponent());
                     effectTrigger.setComponent(new SourceTargetComponent());
                     EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
@@ -95,7 +97,7 @@ public class CastSpellSystem implements EntitySystem{
     }
     
     public static boolean canCast(EntityWorld entityWorld, int casterEntity, int spellEntity){
-        if(!entityWorld.hasAnyComponent(casterEntity, IsStunnedComponent.class, IsKnockupedComponent.class)){
+        if(isAbleToPerformAction(entityWorld, casterEntity)){
             AutoAttackComponent autoAttackComponent = entityWorld.getComponent(casterEntity, AutoAttackComponent.class);
             if((autoAttackComponent != null) && (spellEntity == autoAttackComponent.getAutoAttackEntity())){
                 return true;
@@ -103,5 +105,9 @@ public class CastSpellSystem implements EntitySystem{
             return (!entityWorld.hasComponent(casterEntity, IsSilencedComponent.class));
         }
         return false;
+    }
+    
+    public static boolean isAbleToPerformAction(EntityWorld entityWorld, int casterEntity){
+        return ((!entityWorld.hasAnyComponent(casterEntity, IsStunnedComponent.class, IsKnockupedComponent.class)) && (!MovementSystem.isDisplaced(entityWorld, casterEntity)));
     }
 }

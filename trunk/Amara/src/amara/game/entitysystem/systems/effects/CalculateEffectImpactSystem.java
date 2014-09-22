@@ -37,6 +37,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 EntityWrapper effect = entityWorld.getWrapped(entityWrapper.getComponent(PrepareEffectComponent.class).getEffectEntityID());
                 EffectCastSourceComponent effectCastSourceComponent = entityWrapper.getComponent(EffectCastSourceComponent.class);
                 EffectCastSourceSpellComponent effectCastSourceSpellComponent = entityWrapper.getComponent(EffectCastSourceSpellComponent.class);
+                EffectCastTargetComponent effectCastTargetComponent = entityWrapper.getComponent(EffectCastTargetComponent.class);
                 int[] affectedTargetEntitesIDs = entityWrapper.getComponent(AffectedTargetsComponent.class).getTargetEntitiesIDs();
                 for(int i=0;i<affectedTargetEntitesIDs.length;i++){
                     EntityWrapper targetEntity = entityWorld.getWrapped(affectedTargetEntitesIDs[i]);
@@ -77,17 +78,20 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     if(heal != 0){
                         effectImpact.setComponent(new HealComponent(heal));
                     }
-                    EffectCastTargetComponent effectCastTargetComponent = entityWrapper.getComponent(EffectCastTargetComponent.class);
                     MoveComponent moveComponent = effect.getComponent(MoveComponent.class);
                     if(moveComponent != null){
                         int movementEntity = entityWorld.createEntity();
                         for(Object component : entityWorld.getComponents(moveComponent.getMovementEntity())){
-                            if(component instanceof TargetedMovementTargetComponent){
-                                entityWorld.setComponent(movementEntity, new MovementTargetComponent(effectCastTargetComponent.getTargetEntity()));
+                            if(component instanceof SourceMovementDirectionComponent){
+                                Vector2f direction = entityWorld.getComponent(effectCastSourceComponent.getSourceEntity(), DirectionComponent.class).getVector();
+                                entityWorld.setComponent(movementEntity, new MovementDirectionComponent(direction));
                             }
                             else if(component instanceof TargetedMovementDirectionComponent){
                                 Vector2f direction = entityWorld.getComponent(effectCastTargetComponent.getTargetEntity(), DirectionComponent.class).getVector();
                                 entityWorld.setComponent(movementEntity, new MovementDirectionComponent(direction));
+                            }
+                            else if(component instanceof TargetedMovementTargetComponent){
+                                entityWorld.setComponent(movementEntity, new MovementTargetComponent(effectCastTargetComponent.getTargetEntity()));
                             }
                             else{
                                 entityWorld.setComponent(movementEntity, component);

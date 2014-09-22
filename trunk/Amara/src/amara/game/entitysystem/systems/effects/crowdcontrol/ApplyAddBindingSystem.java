@@ -8,6 +8,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
+import amara.game.entitysystem.systems.units.UnitUtil;
 
 /**
  *
@@ -25,6 +26,7 @@ public class ApplyAddBindingSystem implements EntitySystem{
                 IsBindedComponent isBindedComponent = entityWorld.getComponent(targetID, IsBindedComponent.class);
                 if((isBindedComponent == null) || (addBindingComponent.getDuration() > isBindedComponent.getRemainingDuration())){
                     entityWorld.setComponent(targetID, new IsBindedComponent(addBindingComponent.getDuration()));
+                    UnitUtil.cancelMovement(entityWorld, targetID);
                 }
             }
         }

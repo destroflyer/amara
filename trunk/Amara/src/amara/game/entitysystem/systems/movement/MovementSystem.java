@@ -10,6 +10,7 @@ import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
+import amara.game.entitysystem.systems.spells.casting.CastSpellSystem;
 
 /**
  *
@@ -20,7 +21,7 @@ public class MovementSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
-            if(canMove(entityWorld, entity)){
+            if(isDisplaced(entityWorld, entity) || canMove(entityWorld, entity)){
                 int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
                 if(entityWorld.hasAllComponents(movementEntity, MovementDirectionComponent.class, MovementSpeedComponent.class)){
                     Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
@@ -40,6 +41,14 @@ public class MovementSystem implements EntitySystem{
     }
     
     public static boolean canMove(EntityWorld entityWorld, int entity){
-        return (!entityWorld.hasAnyComponent(entity, IsBindedComponent.class, IsStunnedComponent.class, IsKnockupedComponent.class));
+        return (CastSpellSystem.isAbleToPerformAction(entityWorld, entity) && (!entityWorld.hasComponent(entity, IsBindedComponent.class)));
+    }
+    
+    public static boolean isDisplaced(EntityWorld entityWorld, int entity){
+        MovementComponent movementComponent = entityWorld.getComponent(entity, MovementComponent.class);
+        if(movementComponent != null){
+            return entityWorld.hasComponent(movementComponent.getMovementEntity(), DisplacementComponent.class);
+        }
+        return false;
     }
 }

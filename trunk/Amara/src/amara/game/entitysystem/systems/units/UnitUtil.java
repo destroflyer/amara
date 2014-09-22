@@ -8,6 +8,8 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
+import amara.game.entitysystem.components.visuals.*;
+import amara.game.entitysystem.systems.movement.MovementSystem;
 
 /**
  *
@@ -15,29 +17,54 @@ import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
  */
 public class UnitUtil{
     
-    public static boolean cancelAction(EntityWorld entityWorld, int entity){
+    public static boolean tryCancelAction(EntityWorld entityWorld, int entity){
         boolean isAllowed = true;
         IsCastingComponent isCastingComponent = entityWorld.getComponent(entity, IsCastingComponent.class);
         if((isCastingComponent != null) && (!isCastingComponent.isCancelable())){
             isAllowed = false;
         }
         if(isAllowed){
-            entityWorld.removeComponent(entity, MovementComponent.class);
-            entityWorld.removeComponent(entity, AggroTargetComponent.class);
-            CurrentActionEffectCastsComponent currentActionEffectCastsComponent = entityWorld.getComponent(entity, CurrentActionEffectCastsComponent.class);
-            if(currentActionEffectCastsComponent != null){
-                for(int effectCastEntity : currentActionEffectCastsComponent.getEffectCastEntities()){
-                    entityWorld.removeEntity(effectCastEntity);
-                }
+            if(MovementSystem.isDisplaced(entityWorld, entity)){
+                isAllowed = false;
             }
-            entityWorld.removeComponent(entity, IsCastingComponent.class);
-            for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, CastingFinishedTriggerComponent.class)){
-                int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
-                if(sourceEntity == entity){
-                    entityWorld.removeEntity(effectTriggerEntity);
-                }
+            else{
+                cancelAction(entityWorld, entity);
             }
         }
         return isAllowed;
+    }
+    
+    public static void cancelAction(EntityWorld entityWorld, int entity){
+        cancelMovement(entityWorld, entity);
+        entityWorld.removeComponent(entity, AggroTargetComponent.class);
+        entityWorld.removeComponent(entity, AnimationComponent.class);
+        CurrentActionEffectCastsComponent currentActionEffectCastsComponent = entityWorld.getComponent(entity, CurrentActionEffectCastsComponent.class);
+        if(currentActionEffectCastsComponent != null){
+            for(int effectCastEntity : currentActionEffectCastsComponent.getEffectCastEntities()){
+                entityWorld.removeEntity(effectCastEntity);
+            }
+        }
+        entityWorld.removeComponent(entity, IsCastingComponent.class);
+        removeTemporaryTriggers(entityWorld, entity, CastingFinishedTriggerComponent.class);
+    }
+    
+    public static void cancelMovement(EntityWorld entityWorld, int entity){
+        entityWorld.removeComponent(entity, MovementComponent.class);
+        removeTemporaryTriggers(entityWorld, entity, TargetReachedTriggerComponent.class);
+        removeTemporaryTriggers(entityWorld, entity, CollisionTriggerComponent.class);
+    }
+    
+    private static void removeTemporaryTriggers(EntityWorld entityWorld, int sourceEntity, Class triggerComponentClass){
+        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, triggerComponentClass)){
+            if(entityWorld.hasComponent(effectTriggerEntity, TriggerTemporaryComponent.class)){
+                int triggerSourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
+                if(triggerSourceEntity == sourceEntity){
+                    entityWorld.removeEntity(effectTriggerEntity);
+                }
+            }
+            else if(entityWorld.hasComponent(effectTriggerEntity, TriggerOnceComponent.class)){
+                entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
+            }
+        }
     }
 }
