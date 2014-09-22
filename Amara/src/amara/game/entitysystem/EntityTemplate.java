@@ -1144,7 +1144,14 @@ public class EntityTemplate{
             EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
             spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
             spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
-            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new CasterTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CooldownComponent(1.5f));
@@ -1571,7 +1578,9 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
 
             EntityWrapper pulverize = createFromTemplate(entityWorld, "pulverize");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{pulverize.getId()}));
+            EntityWrapper headbutt = createFromTemplate(entityWorld, "headbutt");
+            EntityWrapper unstoppableForce = createFromTemplate(entityWorld, "unstoppable_force");
+            entityWrapper.setComponent(new SpellsComponent(new int[]{pulverize.getId(), headbutt.getId(), -1, unstoppableForce.getId()}));
         }
         else if(templateName.equals("pulverize")){
             entityWrapper.setComponent(new NameComponent("Pulverize"));
@@ -1580,7 +1589,8 @@ public class EntityTemplate{
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new TargetTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect1.setComponent(new FlatMagicDamageComponent(60));
+            effect1.setComponent(new FlatMagicDamageComponent(80));
+            effect1.setComponent(new ScalingAbilityPowerMagicDamageComponent(0.5f));
             EntityWrapper knockup = entityWorld.getWrapped(entityWorld.createEntity());
             knockup.setComponent(new KnockupDurationComponent(1));
             knockup.setComponent(new KnockupHeightComponent(5));
@@ -1599,10 +1609,9 @@ public class EntityTemplate{
             effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            effectTrigger2.setComponent(new TriggerDelayComponent(0.25f));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
-            entityWrapper.setComponent(new CastDurationComponent(0.75f));
+            entityWrapper.setComponent(new CastDurationComponent(0.8f));
             entityWrapper.setComponent(new StopAfterCastingComponent());
             entityWrapper.setComponent(new StopBeforeCastingComponent());
             EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
@@ -1624,6 +1633,126 @@ public class EntityTemplate{
             effectTrigger1.setComponent(new TargetTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
             effect1.setComponent(new TriggerCastedSpellEffectsComponent());
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Remove object
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new CollisionTriggerComponent());
+            effectTrigger2.setComponent(new SourceTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new RemoveEntityComponent());
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new LifetimeComponent(0.2f));
+        }
+        else if(templateName.equals("headbutt")){
+            entityWrapper.setComponent(new NameComponent("Headbutt"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("headbutt"));
+            //Move to target
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new CasterTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper movement1 = entityWorld.getWrapped(entityWorld.createEntity());
+            movement1.setComponent(new TargetedMovementTargetComponent());
+            movement1.setComponent(new MovementSpeedComponent(30));
+            effect1.setComponent(new MoveComponent(movement1.getId()));
+            //Knockback target
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetReachedTriggerComponent());
+            effectTrigger2.setComponent(new TargetTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new FlatMagicDamageComponent(110));
+            effect2.setComponent(new ScalingAbilityPowerMagicDamageComponent(0.7f));
+            EntityWrapper movement2 = entityWorld.getWrapped(entityWorld.createEntity());
+            movement2.setComponent(new DisplacementComponent());
+            movement2.setComponent(new SourceMovementDirectionComponent());
+            movement2.setComponent(new MovementSpeedComponent(30));
+            movement2.setComponent(new DistanceLimitComponent(10));
+            effect2.setComponent(new MoveComponent(movement2.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerOnceComponent());
+            effect1.setComponent(new AddEffectTriggersComponent(effectTrigger2.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger3.setComponent(new TargetTargetComponent());
+            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect3.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger3.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
+            entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new RangeComponent(14));
+            EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
+            targetRules.setComponent(new AcceptEnemiesComponent());
+            entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
+            entityWrapper.setComponent(new CooldownComponent(2));
+        }
+        else if(templateName.equals("unstoppable_force")){
+            entityWrapper.setComponent(new NameComponent("Unstoppable Force"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("unstoppable_force"));
+            //Knockup target
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new FlatMagicDamageComponent(200));
+            effect1.setComponent(new ScalingAbilityPowerMagicDamageComponent(1));
+            EntityWrapper knockup = entityWorld.getWrapped(entityWorld.createEntity());
+            knockup.setComponent(new KnockupDurationComponent(1.5f));
+            knockup.setComponent(new KnockupHeightComponent(7));
+            effect1.setComponent(new AddKnockupComponent(knockup.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Move to target
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new CasterTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
+            movement.setComponent(new TargetedMovementTargetComponent());
+            movement.setComponent(new MovementSpeedComponent(35));
+            effect2.setComponent(new MoveComponent(movement.getId()));
+            effect2.setComponent(new DeactivateHitboxComponent());
+            //Spawn object
+            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger3.setComponent(new TargetReachedTriggerComponent());
+            effectTrigger3.setComponent(new CasterTargetComponent());
+            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
+            spawnInformation.setComponent(new SpawnTemplateComponent("unstoppable_force_object," + entityWrapper.getId()));
+            effect3.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect3.setComponent(new ActivateHitboxComponent());
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerOnceComponent());
+            effect2.setComponent(new AddEffectTriggersComponent(effectTrigger3.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
+            entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new RangeComponent(16));
+            entityWrapper.setComponent(new CooldownComponent(2));
+        }
+        else if(templateName.equals("unstoppable_force_object")){
+            entityWrapper.setComponent(new HitboxComponent(new Circle(7)));
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
+            targetRules.setComponent(new AcceptEnemiesComponent());
+            entityWrapper.setComponent(new IntersectionRulesComponent(targetRules.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new CollisionTriggerComponent());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new TriggerSpellEffectsComponent(parameters[0]));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Remove object

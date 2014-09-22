@@ -51,7 +51,6 @@ public class PlayerDeathSystem implements EntitySystem{
             //General
             IsTargetableComponent.class,
             IsVulnerableComponent.class,
-            IsCastingComponent.class,
             //Crowdcontrol
             IsBindedComponent.class,
             IsBindedImmuneComponent.class,
@@ -63,8 +62,8 @@ public class PlayerDeathSystem implements EntitySystem{
         for(Class componentClass : componentClassesToReomve){
             entityWorld.removeComponent(selectedEntity, componentClass);
         }
-        RemoveBuffsSystem.removeAllBuffs(entityWorld, selectedEntity);
         UnitUtil.cancelAction(entityWorld, selectedEntity);
+        RemoveBuffsSystem.removeAllBuffs(entityWorld, selectedEntity);
         DeathAnimationComponent deathAnimationComponent = entityWorld.getComponent(selectedEntity, DeathAnimationComponent.class);
         if(deathAnimationComponent != null){
             entityWorld.setComponent(selectedEntity, new AnimationComponent(deathAnimationComponent.getAnimationEntity()));

@@ -31,7 +31,7 @@ public class DisplayInventorySystem extends GUIDisplaySystem{
             for(int i=0;i<6;i++){
                 String visualisationName = "none";
                 int[] items = inventoryComponent.getItemEntities();
-                if(i < items.length){
+                if((i < items.length) && (items[i] != -1)){
                     ItemVisualisationComponent itemVisualisationComponent = entityWorld.getComponent(items[i], ItemVisualisationComponent.class);
                     if(itemVisualisationComponent != null){
                         visualisationName = itemVisualisationComponent.getName();

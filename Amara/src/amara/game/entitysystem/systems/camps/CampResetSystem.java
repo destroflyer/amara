@@ -33,6 +33,7 @@ public class CampResetSystem implements EntitySystem{
             entityWorld.setComponent(targetPositionEntity, new PositionComponent(campTransformComponent.getPosition()));
             if(ExecutePlayerCommandsSystem.walk(entityWorld, entity, targetPositionEntity, -1)){
                 EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+                effectTrigger.setComponent(new TriggerTemporaryComponent());
                 effectTrigger.setComponent(new TargetReachedTriggerComponent());
                 effectTrigger.setComponent(new SourceTargetComponent());
                 EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());

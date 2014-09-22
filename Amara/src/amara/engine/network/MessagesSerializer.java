@@ -269,6 +269,7 @@ public class MessagesSerializer{
                         RespawnPlayersComponent.class,
                         RespawnTimerComponent.class,
                         //movements
+                        DisplacementComponent.class,
                         DistanceLimitComponent.class,
                         MovedDistanceComponent.class,
                         MovementAnimationComponent.class,
@@ -334,6 +335,7 @@ public class MessagesSerializer{
                         StopAfterCastingComponent.class,
                         StopBeforeCastingComponent.class,
                         //spells/placeholders
+                        SourceMovementDirectionComponent.class,
                         TargetedMovementDirectionComponent.class,
                         TargetedMovementTargetComponent.class,
                         TriggerCastedSpellEffectsComponent.class,
@@ -384,6 +386,7 @@ public class MessagesSerializer{
                         TriggeredEffectComponent.class,
                         TriggerOnceComponent.class,
                         TriggerSourceComponent.class,
+                        TriggerTemporaryComponent.class,
                         //units/effecttriggers/targets
                         CasterTargetComponent.class,
                         CustomTargetComponent.class,

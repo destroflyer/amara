@@ -8,6 +8,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
+import amara.game.entitysystem.systems.units.UnitUtil;
 
 /**
  *
@@ -25,6 +26,7 @@ public class ApplyAddStunSystem implements EntitySystem{
                 IsStunnedComponent isStunnedComponent = entityWorld.getComponent(targetID, IsStunnedComponent.class);
                 if((isStunnedComponent == null) || (addStunComponent.getDuration() > isStunnedComponent.getRemainingDuration())){
                     entityWorld.setComponent(targetID, new IsStunnedComponent(addStunComponent.getDuration()));
+                    UnitUtil.cancelAction(entityWorld, targetID);
                 }
             }
         }
