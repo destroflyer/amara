@@ -19,11 +19,13 @@ class ObservedComponentMap extends SimpleComponentMap
     private ConcurrentHashMap<Object, ComponentMapObserver> systemGlobalObserverMap = new ConcurrentHashMap<Object, ComponentMapObserver>();
     
     @Override
-    public Object setComponent(int entity, Object component) {
+    public Object setComponent(int entity, Object component)
+    {
         Object oldComponent = super.setComponent(entity, component);
         if(oldComponent != null)
         {
-            for (ComponentMapObserver observer : getObservers(component.getClass())) {
+            for (ComponentMapObserver observer : getObservers(component.getClass()))
+            {
                 observer.onComponentChanged(this, entity, component);
             }
             for(ComponentMapObserver observer : systemGlobalObserverMap.values())
@@ -33,7 +35,8 @@ class ObservedComponentMap extends SimpleComponentMap
         }
         else
         {
-            for (ComponentMapObserver observer : getObservers(component.getClass())) {
+            for (ComponentMapObserver observer : getObservers(component.getClass()))
+            {
                 observer.onComponentAdded(this, entity, component);
             }
             for(ComponentMapObserver observer : systemGlobalObserverMap.values())
