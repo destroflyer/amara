@@ -14,14 +14,14 @@ public class Grid<Hitbox extends BoundAabb>
 {
     private ArrayList<ArrayList<Hitbox>> cells;
     private double cellSize;
-    private int cols, rows, size;
+    private int cols, rows;
     
     public Grid(int cols, int rows, double cellSize)
     {
         this.cellSize = cellSize;
         this.cols = cols;
         this.rows = rows;
-        size = cols * rows;
+        int size = cols * rows;
         cells = new ArrayList<ArrayList<Hitbox>>();
         for (int i = 0; i < size; i++)
         {
@@ -45,36 +45,48 @@ public class Grid<Hitbox extends BoundAabb>
         }
     }
     
-    public List<Hitbox> getAllIntersectionPartners(Hitbox hitbox, Filter<BoundAabb> filter)
+    public Set<Hitbox> getAllNeighbors(Hitbox hitbox)
     {
-        ArrayList<ArrayList<Hitbox>> cellList = getCells(hitbox);
         HashSet<Hitbox> neighbors = new HashSet<Hitbox>();
-        for(ArrayList<Hitbox> cell: cellList)
+        for(ArrayList<Hitbox> cell: getCells(hitbox))
         {
             neighbors.addAll(cell);
         }
-        ArrayList<Hitbox> partners = new ArrayList<Hitbox>();
-        for(Hitbox hitable: neighbors)
-        {
-            if(filter.pass(hitbox, hitable))
-            {
-                partners.add(hitable);
-            }
-        }
-        return partners;
+        return neighbors;
     }
+    
+//    public List<Hitbox> getAllIntersectionPartners(Hitbox hitbox, Filter<BoundAabb> filter)
+//    {
+//        ArrayList<ArrayList<Hitbox>> cellList = getCells(hitbox);
+//        HashSet<Hitbox> neighbors = new HashSet<Hitbox>();
+//        for(ArrayList<Hitbox> cell: cellList)
+//        {
+//            neighbors.addAll(cell);
+//        }
+//        ArrayList<Hitbox> partners = new ArrayList<Hitbox>();
+//        for(Hitbox hitable: neighbors)
+//        {
+//            if(filter.pass(hitbox, hitable))
+//            {
+//                partners.add(hitable);
+//            }
+//        }
+//        return partners;
+//    }
     
     private ArrayList<ArrayList<Hitbox>> getCells(Hitbox hitbox)
     {
         ArrayList<ArrayList<Hitbox>> out = new ArrayList<ArrayList<Hitbox>>();
         int minX = (int)((hitbox.getMinX()) / cellSize);
         if(minX < 0) minX = 0;
-        int maxX = (int)((hitbox.getMaxX()) / cellSize);
-        if(maxX >= cols) maxX = cols - 1;
         int minY = (int)((hitbox.getMinY()) / cellSize);
         if(minY < 0) minY = 0;
+        
+        int maxX = (int)((hitbox.getMaxX()) / cellSize);
+        if(maxX >= cols) maxX = cols - 1;
         int maxY = (int)((hitbox.getMaxY()) / cellSize);
         if(maxY >= rows) maxY = rows - 1;
+        
         for (int x = minX; x <= maxX; x++)
         {
             for (int y = minY; y <= maxY; y++)
@@ -91,9 +103,9 @@ public class Grid<Hitbox extends BoundAabb>
     
     public void clear()
     {
-        for (int i = 0; i < size; i++)
+        for (ArrayList<Hitbox> cell : cells)
         {
-            cells.get(i).clear();
+            cell.clear();
         }
     }
     
