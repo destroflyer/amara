@@ -9,6 +9,7 @@ import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.visuals.*;
+import amara.game.entitysystem.systems.effects.triggers.EffectTriggerUtil;
 import amara.game.entitysystem.systems.movement.MovementSystem;
 
 /**
@@ -56,6 +57,9 @@ public class UnitUtil{
     
     private static void removeTemporaryTriggers(EntityWorld entityWorld, int sourceEntity, Class triggerComponentClass){
         for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, triggerComponentClass)){
+            if(entityWorld.hasComponent(effectTriggerEntity, TriggerOnCancelComponent.class)){
+                EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, -1);
+            }
             if(entityWorld.hasComponent(effectTriggerEntity, TriggerTemporaryComponent.class)){
                 int triggerSourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
                 if(triggerSourceEntity == sourceEntity){
