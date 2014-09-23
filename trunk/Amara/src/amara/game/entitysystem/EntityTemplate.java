@@ -1033,6 +1033,8 @@ public class EntityTemplate{
             EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
             effect3.setComponent(new RemoveEffectTriggersComponent(effectTrigger2.getId()));
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerOnceComponent());
+            effectTrigger3.setComponent(new TriggerOnCancelComponent());
             effect1.setComponent(new AddEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
