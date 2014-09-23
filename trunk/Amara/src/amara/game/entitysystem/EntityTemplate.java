@@ -975,6 +975,7 @@ public class EntityTemplate{
             effect4.setComponent(new ActivateHitboxComponent());
             effectTrigger4.setComponent(new TriggeredEffectComponent(effect4.getId()));
             effectTrigger4.setComponent(new TriggerOnceComponent());
+            effectTrigger4.setComponent(new TriggerOnCancelComponent());
             effect2.setComponent(new AddEffectTriggersComponent(effectTrigger3.getId(), effectTrigger4.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
@@ -1812,10 +1813,18 @@ public class EntityTemplate{
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("unstoppable_force_object," + entityWrapper.getId()));
             effect3.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
-            effect3.setComponent(new ActivateHitboxComponent());
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
             effectTrigger3.setComponent(new TriggerOnceComponent());
-            effect2.setComponent(new AddEffectTriggersComponent(effectTrigger3.getId()));
+            //Reactivate hitbox
+            EntityWrapper effectTrigger4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger4.setComponent(new TargetReachedTriggerComponent());
+            effectTrigger4.setComponent(new CasterTargetComponent());
+            EntityWrapper effect4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect4.setComponent(new ActivateHitboxComponent());
+            effectTrigger4.setComponent(new TriggeredEffectComponent(effect4.getId()));
+            effectTrigger4.setComponent(new TriggerOnceComponent());
+            effectTrigger4.setComponent(new TriggerOnCancelComponent());
+            effect2.setComponent(new AddEffectTriggersComponent(effectTrigger3.getId(), effectTrigger4.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));

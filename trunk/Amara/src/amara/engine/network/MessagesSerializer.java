@@ -384,6 +384,7 @@ public class MessagesSerializer{
                         //units/effecttriggers
                         TriggerDelayComponent.class,
                         TriggeredEffectComponent.class,
+                        TriggerOnCancelComponent.class,
                         TriggerOnceComponent.class,
                         TriggerSourceComponent.class,
                         TriggerTemporaryComponent.class,
