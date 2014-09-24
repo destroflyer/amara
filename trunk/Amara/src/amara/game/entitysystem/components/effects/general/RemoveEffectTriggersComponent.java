@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.game.entitysystem.components.buffs;
+package amara.game.entitysystem.components.effects.general;
 
 import com.jme3.network.serializing.Serializable;
 
@@ -16,7 +16,7 @@ public class RemoveEffectTriggersComponent{
     public RemoveEffectTriggersComponent(){
         
     }
-    
+
     public RemoveEffectTriggersComponent(int... effectTriggerEntities){
         this.effectTriggerEntities = effectTriggerEntities;
     }

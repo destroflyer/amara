@@ -113,6 +113,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         AddComponentsComponent.class,
                         RemoveComponentsComponent.class,
                         AddEffectTriggersComponent.class,
+                        RemoveEffectTriggersComponent.class,
                         RemoveEntityComponent.class,
                         PauseAudioComponent.class,
                         PlayAudioComponent.class,
