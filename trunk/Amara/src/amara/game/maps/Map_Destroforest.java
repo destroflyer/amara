@@ -118,8 +118,8 @@ public class Map_Destroforest extends Map{
         boss.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
         boss.setComponent(new HitboxActiveComponent());
         boss.setComponent(new IsAliveComponent());
-        boss.setComponent(new BaseMaximumHealthComponent(8000));
-        boss.setComponent(new HealthRegenerationComponent(50));
+        boss.setComponent(new BaseMaximumHealthComponent(4000));
+        boss.setComponent(new BaseHealthRegenerationComponent(40));
         boss.setComponent(new RequestUpdateAttributesComponent());
         boss.setComponent(new IsTargetableComponent());
         boss.setComponent(new IsVulnerableComponent());
