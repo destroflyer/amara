@@ -24,7 +24,11 @@ public class TriggerTargetReachedEffectSystem implements EntitySystem{
             MovementComponent movementComponent = entityWorld.getComponent(sourceEntity, MovementComponent.class);
             if(movementComponent != null){
                 if(entityWorld.hasComponent(movementComponent.getMovementEntity(), MovementTargetReachedComponent.class)){
-                    int targetEntity = entityWorld.getComponent(movementComponent.getMovementEntity(), MovementTargetComponent.class).getTargetEntity();
+                    int targetEntity = -1;
+                    MovementTargetComponent movementTargetComponent = entityWorld.getComponent(movementComponent.getMovementEntity(), MovementTargetComponent.class);
+                    if(movementTargetComponent != null){
+                        targetEntity = movementTargetComponent.getTargetEntity();
+                    }
                     EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, targetEntity);
                 }
             }

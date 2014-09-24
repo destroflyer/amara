@@ -12,14 +12,18 @@ import amara.game.entitysystem.components.units.*;
  *
  * @author Carl
  */
-public class RemoveFinishedMovementsSystem implements EntitySystem{
+public class CheckDistanceLimitMovementsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
             int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
-            if(entityWorld.hasComponent(movementEntity, MovementTargetReachedComponent.class)){
-                entityWorld.removeComponent(entity, MovementComponent.class);
+            DistanceLimitComponent distanceLimitComponent = entityWorld.getComponent(movementEntity, DistanceLimitComponent.class);
+            if(distanceLimitComponent != null){
+                MovedDistanceComponent movedDistanceComponent = entityWorld.getComponent(movementEntity, MovedDistanceComponent.class);
+                if((movedDistanceComponent != null) && (movedDistanceComponent.getDistance() >= distanceLimitComponent.getDistance())){
+                    entityWorld.setComponent(movementEntity, new MovementTargetReachedComponent());
+                }
             }
         }
     }

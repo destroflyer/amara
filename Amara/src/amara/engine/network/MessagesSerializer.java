@@ -166,7 +166,7 @@ public class MessagesSerializer{
                         IsAudioPlayingComponent.class,
                         //buffs
                         ContinuousEffectComponent.class,
-                        RemoveEffectTriggersComponent.class,
+                        OnBuffRemoveEffectTriggersComponent.class,
                         RepeatingEffectComponent.class,
                         //buffs/areas
                         AreaBuffComponent.class,
@@ -233,6 +233,7 @@ public class MessagesSerializer{
                         AddComponentsComponent.class,
                         AddEffectTriggersComponent.class,
                         RemoveComponentsComponent.class,
+                        RemoveEffectTriggersComponent.class,
                         RemoveEntityComponent.class,
                         //effects/heal
                         FlatHealComponent.class,

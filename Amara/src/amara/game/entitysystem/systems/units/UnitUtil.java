@@ -57,17 +57,17 @@ public class UnitUtil{
     
     private static void removeTemporaryTriggers(EntityWorld entityWorld, int sourceEntity, Class triggerComponentClass){
         for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, triggerComponentClass)){
-            if(entityWorld.hasComponent(effectTriggerEntity, TriggerOnCancelComponent.class)){
-                EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, -1);
-            }
-            if(entityWorld.hasComponent(effectTriggerEntity, TriggerTemporaryComponent.class)){
-                int triggerSourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
-                if(triggerSourceEntity == sourceEntity){
+            int triggerSourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
+            if(triggerSourceEntity == sourceEntity){
+                if(entityWorld.hasComponent(effectTriggerEntity, TriggerOnCancelComponent.class)){
+                    EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, -1);
+                }
+                if(entityWorld.hasComponent(effectTriggerEntity, TriggerTemporaryComponent.class)){
                     entityWorld.removeEntity(effectTriggerEntity);
                 }
-            }
-            else if(entityWorld.hasComponent(effectTriggerEntity, TriggerOnceComponent.class)){
-                entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
+                else if(entityWorld.hasComponent(effectTriggerEntity, TriggerOnceComponent.class)){
+                    entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
+                }
             }
         }
     }

@@ -705,7 +705,7 @@ public class EntityTemplate{
             effect3.setComponent(new ReplaceSpellWithExistingSpellComponent(parameters[0], entityWrapper.getId()));
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
+            buff.setComponent(new OnBuffRemoveEffectTriggersComponent(effectTrigger3.getId()));
             effect2.setComponent(new AddBuffComponent(buff.getId(), 3));
             effect1.setComponent(new ReplaceSpellWithNewSpellComponent(parameters[0], "resonating_strike," + buff.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
@@ -828,7 +828,7 @@ public class EntityTemplate{
             effect3.setComponent(new StopAudioComponent(audioLoop.getId()));
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
+            buff.setComponent(new OnBuffRemoveEffectTriggersComponent(effectTrigger3.getId()));
             effect2.setComponent(new AddBuffComponent(buff.getId(), 4));
             effect2.setComponent(new PlayAudioComponent(audioLoop.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
@@ -914,7 +914,7 @@ public class EntityTemplate{
             effect3.setComponent(new AddVulnerabilityComponent());
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
+            buff.setComponent(new OnBuffRemoveEffectTriggersComponent(effectTrigger3.getId()));
             effect2.setComponent(new AddBuffComponent(buff.getId(), duration));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
@@ -1029,7 +1029,7 @@ public class EntityTemplate{
             //Knockup targets
             EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger3.setComponent(new TargetReachedTriggerComponent());
-            effectTrigger3.setComponent(new TargetTargetComponent());
+            effectTrigger3.setComponent(new SourceTargetComponent());
             EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
             effect3.setComponent(new RemoveEffectTriggersComponent(effectTrigger2.getId()));
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
@@ -1153,7 +1153,7 @@ public class EntityTemplate{
             effect2.setComponent(new RemoveSpellEffectsComponent(spellEffect1.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger2.getId()));
+            buff.setComponent(new OnBuffRemoveEffectTriggersComponent(effectTrigger2.getId()));
             effect1.setComponent(new AddBuffComponent(buff.getId(), 5));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
@@ -1545,7 +1545,7 @@ public class EntityTemplate{
             effect2.setComponent(new StopAudioComponent(audioLoop.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger2.getId()));
+            buff.setComponent(new OnBuffRemoveEffectTriggersComponent(effectTrigger2.getId()));
             effect1.setComponent(new AddBuffComponent(buff.getId(), 10));
             effect1.setComponent(new PlayAudioComponent(/*audioStart.getId(),*/audioLoop.getId()));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
@@ -2080,7 +2080,7 @@ public class EntityTemplate{
             effect3.setComponent(new PlayAudioComponent(audioEnd.getId()));
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            buff.setComponent(new RemoveEffectTriggersComponent(effectTrigger3.getId()));
+            buff.setComponent(new OnBuffRemoveEffectTriggersComponent(effectTrigger3.getId()));
             effect2.setComponent(new AddBuffComponent(buff.getId(), duration));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));

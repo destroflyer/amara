@@ -36,9 +36,9 @@ public class RemoveBuffsSystem implements EntitySystem{
         ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
         entityWorld.removeEntity(buffStatusEntity);
         entityWorld.setComponent(activeBuffComponent.getTargetEntityID(), new RequestUpdateAttributesComponent());
-        RemoveEffectTriggersComponent removeEffectTriggersComponent = entityWorld.getComponent(activeBuffComponent.getBuffEntityID(), RemoveEffectTriggersComponent.class);
-        if(removeEffectTriggersComponent != null){
-            EffectTriggerUtil.triggerEffects(entityWorld, removeEffectTriggersComponent.getEffectTriggerEntities(), activeBuffComponent.getTargetEntityID());
+        OnBuffRemoveEffectTriggersComponent onBuffRemoveEffectTriggersComponent = entityWorld.getComponent(activeBuffComponent.getBuffEntityID(), OnBuffRemoveEffectTriggersComponent.class);
+        if(onBuffRemoveEffectTriggersComponent != null){
+            EffectTriggerUtil.triggerEffects(entityWorld, onBuffRemoveEffectTriggersComponent.getEffectTriggerEntities(), activeBuffComponent.getTargetEntityID());
         }
     }
 }
