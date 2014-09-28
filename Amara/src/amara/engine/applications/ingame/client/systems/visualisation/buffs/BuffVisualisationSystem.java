@@ -5,6 +5,7 @@
 package amara.engine.applications.ingame.client.systems.visualisation.buffs;
 
 import com.jme3.scene.Node;
+import com.jme3.scene.SceneGraphVisitor;
 import com.jme3.scene.Spatial;
 import amara.engine.applications.ingame.client.systems.visualisation.EntitySceneMap;
 import amara.game.entitysystem.*;
@@ -22,6 +23,7 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
     }
     protected EntitySceneMap entitySceneMap;
     private String visualisationName;
+    private RemoveVisualAttachmentVisitor removeVisitor = new RemoveVisualAttachmentVisitor();
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -50,9 +52,9 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
         if(shouldBeVisualized(entityWorld, activeBuffComponent)){
             int targetEntityID = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getTargetEntityID();
             removeVisualAttachment(targetEntityID, buffStatusEntity);
-            Spatial visualAttachment = createBuffVisualisation(entityWorld, targetEntityID);
+            Spatial visualAttachment = createBuffVisualisation(entityWorld, targetEntityID, buffStatusEntity);
             if(visualAttachment != null){
-                visualAttachment.setName(getVisualAttachmentID(buffStatusEntity));
+                prepareVisualAttachment(visualAttachment, buffStatusEntity);
                 Node node = entitySceneMap.requestNode(targetEntityID);
                 node.attachChild(visualAttachment);
             }
@@ -66,19 +68,39 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
     
     private void removeVisualAttachment(int entity, int buffStatusEntity){
         Node node = entitySceneMap.requestNode(entity);
-        Spatial visualAttachment = node.getChild(getVisualAttachmentID(buffStatusEntity));
-        if(visualAttachment != null){
-            removeVisualAttachment(node, visualAttachment);
-        }
+        removeVisitor.prepare(node, buffStatusEntity);
+        node.depthFirstTraversal(removeVisitor);
     }
     
     protected void removeVisualAttachment(Node node, Spatial visualAttachment){
-        node.detachChild(visualAttachment);
+        visualAttachment.getParent().detachChild(visualAttachment);
+    }
+    
+    protected void prepareVisualAttachment(Spatial visualAttachment, int buffStatusEntity){
+        visualAttachment.setName(getVisualAttachmentID(buffStatusEntity));
     }
     
     private String getVisualAttachmentID(int buffStatusEntity){
         return ("buffVisualisation_" + visualisationName + "_" + buffStatusEntity);
     }
     
-    protected abstract Spatial createBuffVisualisation(EntityWorld entityWorld, int entity);
+    protected abstract Spatial createBuffVisualisation(EntityWorld entityWorld, int entity, int buffStatusEntity);
+    
+    private class RemoveVisualAttachmentVisitor implements SceneGraphVisitor{
+        
+        private Node entityNode;
+        private int buffStatusEntity;
+
+        @Override
+        public void visit(Spatial spatial){
+            if(getVisualAttachmentID(buffStatusEntity).equals(spatial.getName())){
+                removeVisualAttachment(entityNode, spatial);
+            }
+        }
+        
+        public void prepare(Node entityNode, int buffStatusEntity){
+            this.entityNode = entityNode;
+            this.buffStatusEntity = buffStatusEntity;
+        }
+    }
 }

@@ -19,7 +19,7 @@ public class BuffVisualisationSystem_SonicWaveMark extends BuffVisualisationSyst
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity, int buffStatusEntity){
         return SelectionMarkerSystem.createGroundTexture("Textures/effects/sonic_wave_mark.png", 3.5f, 3.5f);
     }
 }
