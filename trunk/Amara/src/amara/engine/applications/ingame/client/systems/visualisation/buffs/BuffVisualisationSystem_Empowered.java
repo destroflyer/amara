@@ -23,7 +23,7 @@ public class BuffVisualisationSystem_Empowered extends BuffVisualisationSystem{
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity, int buffStatusEntity){
         SimpleParticleEmitter simpleParticleEmitter = new SimpleParticleEmitter();
         ParticleEmitter particleEmitter = simpleParticleEmitter.getParticleEmitter();
         particleEmitter.setParticlesPerSec(10);

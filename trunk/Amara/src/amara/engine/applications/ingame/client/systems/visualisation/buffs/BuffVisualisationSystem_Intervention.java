@@ -25,7 +25,7 @@ public class BuffVisualisationSystem_Intervention extends BuffVisualisationSyste
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity, int buffStatusEntity){
         Geometry geometry = new Geometry("", new Sphere(20, 20, 2.2f));
         Material material = MaterialFactory.generateUnshadedMaterial(new ColorRGBA(1, 1, 0, 0.25f));
         material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);

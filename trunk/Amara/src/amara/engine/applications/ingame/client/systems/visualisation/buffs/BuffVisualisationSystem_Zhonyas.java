@@ -27,7 +27,7 @@ public class BuffVisualisationSystem_Zhonyas extends BuffVisualisationSystem{
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity, int buffStatusEntity){
         ModelObject modelObject = getModelObject(entitySceneMap.requestNode(entity));
         Spatial clonedModel = modelObject.getModelSpatial().deepClone();
         Material material = MaterialFactory.getAssetManager().loadMaterial("Shaders/glass/materials/glass_3.j3m");

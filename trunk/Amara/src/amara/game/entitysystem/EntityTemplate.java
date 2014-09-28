@@ -1052,10 +1052,10 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new RangeComponent(6));
+            entityWrapper.setComponent(new CooldownComponent(4));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
-            entityWrapper.setComponent(new CooldownComponent(4));
         }
         else if(templateName.equals("soldier")){
             entityWrapper.setComponent(new ModelComponent("Models/soldier/skin_default.xml"));

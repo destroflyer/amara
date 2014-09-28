@@ -26,7 +26,7 @@ public class BuffVisualisationSystem_Electrified extends BuffVisualisationSystem
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity, int buffStatusEntity){
         ModelObject modelObject = getModelObject(entitySceneMap.requestNode(entity));
         Spatial clonedModel = modelObject.getModelSpatial().deepClone();
         Material material = MaterialFactory.getAssetManager().loadMaterial("Shaders/electricity/materials/electricity2.j3m");
@@ -39,9 +39,9 @@ public class BuffVisualisationSystem_Electrified extends BuffVisualisationSystem
     }
 
     @Override
-    protected void removeVisualAttachment(Node node, Spatial visualAttachment){
-        super.removeVisualAttachment(node, visualAttachment);
-        ModelObject modelObject = getModelObject(node);
+    protected void removeVisualAttachment(Node entityNode, Spatial visualAttachment){
+        super.removeVisualAttachment(entityNode, visualAttachment);
+        ModelObject modelObject = getModelObject(entityNode);
         modelObject.unregisterModel(visualAttachment);
     }
     
