@@ -227,6 +227,7 @@ public class EntityTemplate{
             spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
             spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
             //Spawn projectile
+            float delay = 0.3f;
             EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger2.setComponent(new TargetTargetComponent());
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
@@ -236,6 +237,7 @@ public class EntityTemplate{
             effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            effectTrigger2.setComponent(new TriggerDelayComponent(delay));
             //Play audio
             EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger3.setComponent(new CasterTargetComponent());
@@ -246,10 +248,18 @@ public class EntityTemplate{
             effect3.setComponent(new PlayAudioComponent(audioCast.getId()));
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            effectTrigger3.setComponent(new TriggerDelayComponent(delay));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastDurationComponent(0.6f));
+            entityWrapper.setComponent(new StopBeforeCastingComponent());
+            EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            castAnimation.setComponent(new NameComponent("cast_1"));
+            castAnimation.setComponent(new LoopDurationComponent(0.6f));
+            entityWrapper.setComponent(new CastAnimationComponent(castAnimation.getId()));
             entityWrapper.setComponent(new RangeComponent(14));
+            entityWrapper.setComponent(new CooldownComponent(0.6f));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
