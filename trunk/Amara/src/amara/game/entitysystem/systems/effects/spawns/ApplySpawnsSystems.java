@@ -31,7 +31,6 @@ public class ApplySpawnsSystems implements EntitySystem{
                 targetPositionComponent = entityWorld.getComponent(targetEntity, PositionComponent.class);
                 targetDirectionComponent = entityWorld.getComponent(targetEntity, DirectionComponent.class);
             }
-            boolean isTargetRealUnit = ((targetPositionComponent != null) && (targetDirectionComponent != null));
             int casterEntity = entityWrapper.getComponent(EffectCastSourceComponent.class).getSourceEntity();
             if(entityWorld.hasEntity(casterEntity)){
                 TeamComponent teamComponent = entityWorld.getComponent(casterEntity, TeamComponent.class);
@@ -45,8 +44,9 @@ public class ApplySpawnsSystems implements EntitySystem{
                     if(teamComponent != null){
                         spawnedObject.setComponent(new TeamComponent(teamComponent.getTeamEntityID()));
                     }
+                    boolean moveToTarget = spawnInformation.hasComponent(SpawnMoveToTargetComponent.class);
                     Vector2f position;
-                    if((targetPositionComponent != null) && (!isTargetRealUnit)){
+                    if((targetPositionComponent != null) && (!moveToTarget)){
                         position = targetPositionComponent.getPosition().clone();
                         if(targetDirectionComponent != null){
                             spawnedObject.setComponent(new DirectionComponent(targetDirectionComponent.getVector().clone()));
@@ -63,13 +63,17 @@ public class ApplySpawnsSystems implements EntitySystem{
                     SpawnMovementSpeedComponent spawnMovementSpeedComponent = spawnInformation.getComponent(SpawnMovementSpeedComponent.class);
                     if(spawnMovementSpeedComponent != null){
                         EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
-                        if(isTargetRealUnit){
+                        if(moveToTarget){
                             movement.setComponent(new MovementTargetComponent(targetEntity));
                         }
                         else if(targetDirectionComponent != null){
                             movement.setComponent(new MovementDirectionComponent(targetDirectionComponent.getVector().clone()));
                         }
                         movement.setComponent(new MovementSpeedComponent(spawnMovementSpeedComponent.getSpeed()));
+                        SpawnMovementAnimationComponent spawnMovementAnimationComponent = spawnInformation.getComponent(SpawnMovementAnimationComponent.class);
+                        if(spawnMovementAnimationComponent != null){
+                            movement.setComponent(new MovementAnimationComponent(spawnMovementAnimationComponent.getAnimationEntity()));
+                        }
                         spawnedObject.setComponent(new MovementComponent(movement.getId()));
                     }
                     if(spawnInformation.hasComponent(SpawnAttackMoveComponent.class)){

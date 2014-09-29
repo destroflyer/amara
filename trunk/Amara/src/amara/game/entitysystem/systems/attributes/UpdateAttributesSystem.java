@@ -95,9 +95,12 @@ public class UpdateAttributesSystem implements EntitySystem{
                 if(autoAttackCastAnimationComponent != null){
                     entityWorld.setComponent(autoAttackCastAnimationComponent.getAnimationEntity(), new LoopDurationComponent(autoAttackInterval));
                 }
-                int[] instantEffectTriggerEntities = entityWorld.getComponent(autoAttackComponent.getAutoAttackEntity(), InstantEffectTriggersComponent.class).getEffectTriggerEntities();
-                for(int effectTriggerEntity : instantEffectTriggerEntities){
-                    entityWorld.setComponent(effectTriggerEntity, new TriggerDelayComponent(autoAttackInterval / 2));
+                InstantEffectTriggersComponent instantEffectTriggersComponent = entityWorld.getComponent(autoAttackComponent.getAutoAttackEntity(), InstantEffectTriggersComponent.class);
+                if(instantEffectTriggersComponent != null){
+                    int[] instantEffectTriggerEntities = instantEffectTriggersComponent.getEffectTriggerEntities();
+                    for(int effectTriggerEntity : instantEffectTriggerEntities){
+                        entityWorld.setComponent(effectTriggerEntity, new TriggerDelayComponent(autoAttackInterval / 2));
+                    }
                 }
                 entityWorld.setComponent(autoAttackComponent.getAutoAttackEntity(), new CastDurationComponent(autoAttackInterval));
             }

@@ -318,7 +318,9 @@ public class MessagesSerializer{
                         //spawns
                         RelativeSpawnPositionComponent.class,
                         SpawnAttackMoveComponent.class,
+                        SpawnMovementAnimationComponent.class,
                         SpawnMovementSpeedComponent.class,
+                        SpawnMoveToTargetComponent.class,
                         SpawnTemplateComponent.class,
                         //spells
                         ApplyCastedSpellComponent.class,
