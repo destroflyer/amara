@@ -87,6 +87,7 @@ public class EntityTemplate{
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("default_autoattack_projectile", "cloud"));
+            spawnInformation.setComponent(new SpawnMoveToTargetComponent());
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(25));
             effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
@@ -155,6 +156,12 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastCancelableComponent());
             entityWrapper.setComponent(new StopBeforeCastingComponent());
             entityWrapper.setComponent(new RangeComponent(6));
+            EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
+            targetRules.setComponent(new AcceptEnemiesComponent());
+            entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
+        }
+        else if(templateName.equals("empty_autoattack")){
+            entityWrapper.setComponent(new RangeComponent(0));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
@@ -233,6 +240,7 @@ public class EntityTemplate{
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("null_sphere_projectile"));
+            spawnInformation.setComponent(new SpawnMoveToTargetComponent());
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(25));
             effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
@@ -1953,7 +1961,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new DeathAnimationComponent(deathAnimation.getId()));
             entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
             
-            entityWrapper.setComponent(new HitboxComponent(new Circle(0.8f)));
+            entityWrapper.setComponent(new HitboxComponent(new Circle(1.5f)));
             entityWrapper.setComponent(new IntersectionPushComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
@@ -1973,6 +1981,104 @@ public class EntityTemplate{
 
             EntityWrapper autoAttack = createFromTemplate(entityWorld, "default_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+
+            EntityWrapper saplingToss = createFromTemplate(entityWorld, "sapling_toss");
+            entityWrapper.setComponent(new SpellsComponent(new int[]{-1, -1, saplingToss.getId()}));
+        }
+        else if(templateName.equals("sapling_toss")){
+            entityWrapper.setComponent(new NameComponent("Sapling Toss"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("sapling_toss"));
+            //Target effect
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new FlatMagicDamageComponent(120));
+            effect1.setComponent(new ScalingAbilityPowerMagicDamageComponent(0.4f));
+            EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper buffEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            buffEffect.setComponent(new BonusPercentageWalkSpeedComponent(-0.5f));
+            buff.setComponent(new ContinuousEffectComponent(buffEffect.getId()));
+            effect1.setComponent(new AddBuffComponent(buff.getId(), 1));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Spawn projectile
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
+            spawnInformation.setComponent(new SpawnTemplateComponent("sapling_toss_projectile"));
+            spawnInformation.setComponent(new SpawnMoveToTargetComponent());
+            spawnInformation.setComponent(new SpawnMovementSpeedComponent(15));
+            EntityWrapper movementAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            movementAnimation.setComponent(new NameComponent("walk"));
+            movementAnimation.setComponent(new LoopDurationComponent(1));
+            spawnInformation.setComponent(new SpawnMovementAnimationComponent(movementAnimation.getId()));
+            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Play audio
+            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger3.setComponent(new CasterTargetComponent());
+            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper audioCast = entityWorld.getWrapped(entityWorld.createEntity());
+            audioCast.setComponent(new AudioComponent("Sounds/sounds/spells/sapling_toss_cast.ogg"));
+            audioCast.setComponent(new AudioVolumeComponent(0.75f));
+            effect3.setComponent(new PlayAudioComponent(audioCast.getId()));
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
+            entityWrapper.setComponent(new CastCancelActionComponent());
+        }
+        else if(templateName.equals("sapling_toss_projectile")){
+            entityWrapper.setComponent(new ModelComponent("Models/varus/skin_default.xml"));
+            EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            idleAnimation.setComponent(new NameComponent("idle"));
+            idleAnimation.setComponent(new LoopDurationComponent(1));
+            entityWrapper.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
+            EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            walkAnimation.setComponent(new NameComponent("walk"));
+            walkAnimation.setComponent(new LoopDurationComponent(1));
+            entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+            entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
+            
+            entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
+            entityWrapper.setComponent(new ScaleComponent(0.6f));
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
+            targetRules.setComponent(new AcceptEnemiesComponent());
+            entityWrapper.setComponent(new IntersectionRulesComponent(targetRules.getId()));
+            entityWrapper.setComponent(new RemoveOnMapLeaveComponent());
+            //Trigger spell effects
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new CollisionTriggerComponent());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new TriggerCastedSpellEffectsComponent());
+            EntityWrapper audioHit = entityWorld.getWrapped(entityWorld.createEntity());
+            audioHit.setComponent(new AudioComponent("Sounds/sounds/spells/sapling_toss_hit.ogg"));
+            audioHit.setComponent(new AudioVolumeComponent(1.25f));
+            effect1.setComponent(new PlayAudioComponent(audioHit.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Remove projectile
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new CollisionTriggerComponent());
+            effectTrigger2.setComponent(new SourceTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new RemoveEntityComponent());
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            
+            entityWrapper.setComponent(new WalkSpeedComponent(4));
+            EntityWrapper autoAttack = createFromTemplate(entityWorld, "empty_autoattack");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+            entityWrapper.setComponent(new AutoAggroComponent(12));
+            entityWrapper.setComponent(new LifetimeComponent(30));
         }
         else if(templateName.equals("eragon")){
             entityWrapper.setComponent(new ModelComponent("Models/little_dragon/skin_default.xml"));
