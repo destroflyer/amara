@@ -48,8 +48,10 @@ public class SendEntityChangesSystem implements EntitySystem{
         }
         for(int entity : componentsObserver.getRemoved().getEntitiesWithAll())
         {
-            for(Object component : componentsObserver.getRemoved().getComponents(entity)){
-                entityChanges.add(new RemovedComponentChange(entity, component.getClass().getName()));
+            if(entityWorld.hasEntity(entity)){
+                for(Object component : componentsObserver.getRemoved().getComponents(entity)){
+                    entityChanges.add(new RemovedComponentChange(entity, component.getClass().getName()));
+                }
             }
         }
         componentsObserver.reset();
