@@ -163,7 +163,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new ModelComponent("Models/cloud/skin.xml"));
         }
         else if(templateName.equals("minion")){
-            entityWrapper.setComponent(new ModelComponent("Models/minion/skin_default.xml"));
+            entityWrapper.setComponent(new ModelComponent("Models/varus/skin_default.xml"));
             EntityWrapper danceAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             danceAnimation.setComponent(new NameComponent("dance"));
             danceAnimation.setComponent(new LoopDurationComponent(2.66f));
@@ -1625,7 +1625,6 @@ public class EntityTemplate{
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
-            entityWrapper.setComponent(new WalkStepDistanceComponent(7));
             EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             autoAttackAnimation.setComponent(new NameComponent("attack1"));
             entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
@@ -1933,6 +1932,47 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new LifetimeComponent(0.2f));
+        }
+        else if(templateName.equals("varus")){
+            entityWrapper.setComponent(new ModelComponent("Models/varus/skin_default.xml"));
+            EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            idleAnimation.setComponent(new NameComponent("idle"));
+            idleAnimation.setComponent(new LoopDurationComponent(3));
+            entityWrapper.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
+            EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            walkAnimation.setComponent(new NameComponent("walk"));
+            entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+            entityWrapper.setComponent(new WalkStepDistanceComponent(3.5f));
+            EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
+            entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+            EntityWrapper deathAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            deathAnimation.setComponent(new NameComponent("death"));
+            deathAnimation.setComponent(new LoopDurationComponent(1.5f));
+            deathAnimation.setComponent(new FreezeAfterPlayingComponent());
+            entityWrapper.setComponent(new DeathAnimationComponent(deathAnimation.getId()));
+            entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
+            
+            entityWrapper.setComponent(new HitboxComponent(new Circle(0.8f)));
+            entityWrapper.setComponent(new IntersectionPushComponent());
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            
+            entityWrapper.setComponent(new IsAliveComponent());
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(500));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(80));
+            entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(4));
+            EntityWrapper boots = createFromTemplate(entityWorld, "boots");
+            EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
+            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), doransBlade.getId()}));
+            entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
+
+            EntityWrapper autoAttack = createFromTemplate(entityWorld, "default_autoattack");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
         }
         else if(templateName.equals("eragon")){
             entityWrapper.setComponent(new ModelComponent("Models/little_dragon/skin_default.xml"));
