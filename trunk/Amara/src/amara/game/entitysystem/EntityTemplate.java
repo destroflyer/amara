@@ -2048,31 +2048,39 @@ public class EntityTemplate{
             entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
             entityWrapper.setComponent(new ScaleComponent(0.6f));
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
-            entityWrapper.setComponent(new HitboxActiveComponent());
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new IntersectionRulesComponent(targetRules.getId()));
             entityWrapper.setComponent(new RemoveOnMapLeaveComponent());
-            //Trigger spell effects
+            //Activate hitbox
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger1.setComponent(new CollisionTriggerComponent());
-            effectTrigger1.setComponent(new TargetTargetComponent());
+            effectTrigger1.setComponent(new TargetReachedTriggerComponent());
+            effectTrigger1.setComponent(new SourceTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect1.setComponent(new TriggerCastedSpellEffectsComponent());
+            effect1.setComponent(new ActivateHitboxComponent());
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            effectTrigger1.setComponent(new TriggerOnceComponent());
+            //Trigger spell effects
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new CollisionTriggerComponent());
+            effectTrigger2.setComponent(new TargetTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new TriggerCastedSpellEffectsComponent());
             EntityWrapper audioHit = entityWorld.getWrapped(entityWorld.createEntity());
             audioHit.setComponent(new AudioComponent("Sounds/sounds/spells/sapling_toss_hit.ogg"));
             audioHit.setComponent(new AudioVolumeComponent(1.25f));
-            effect1.setComponent(new PlayAudioComponent(audioHit.getId()));
-            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
-            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            //Remove projectile
-            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger2.setComponent(new CollisionTriggerComponent());
-            effectTrigger2.setComponent(new SourceTargetComponent());
-            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect2.setComponent(new RemoveEntityComponent());
+            effect2.setComponent(new PlayAudioComponent(audioHit.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Remove projectile
+            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger3.setComponent(new CollisionTriggerComponent());
+            effectTrigger3.setComponent(new SourceTargetComponent());
+            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect3.setComponent(new RemoveEntityComponent());
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             
             entityWrapper.setComponent(new WalkSpeedComponent(4));
             EntityWrapper autoAttack = createFromTemplate(entityWorld, "empty_autoattack");
