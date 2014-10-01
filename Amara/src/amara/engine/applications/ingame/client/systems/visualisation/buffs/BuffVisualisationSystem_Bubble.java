@@ -29,7 +29,7 @@ public class BuffVisualisationSystem_Bubble extends BuffVisualisationSystem{
         Geometry geometry = new Geometry("Sphere", new Sphere(200, 200, 3.5f));
         Material material = new Material(MaterialFactory.getAssetManager(), "Shaders/bubble/matdefs/bubble.j3md");
         material.setTexture("ColorMap", MaterialFactory.getAssetManager().loadTexture("Shaders/bubble/textures/rainbow.png"));
-        material.setFloat("Shininess", 20f);
+        material.setFloat("Shininess", 5f);
         material.setColor("SpecularColor", ColorRGBA.Blue);
         material.setBoolean("UseSpecularNormal", true);
         geometry.setMaterial(material);
