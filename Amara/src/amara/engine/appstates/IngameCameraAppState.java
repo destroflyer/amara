@@ -6,6 +6,7 @@ package amara.engine.appstates;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.collision.CollisionResult;
 import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
@@ -75,17 +76,19 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
             Vector3f oldLocation = mainApplication.getCamera().getLocation().clone();
             mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
             if(limitMinimum != null){
-                Vector3f minimumCornerLocation = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, rightBottomCornerScreenLocation).getClosestCollision().getContactPoint();
-                Vector3f maximumCornerLocation = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, leftTopCornerScreenLocation).getClosestCollision().getContactPoint();
-                if(((movedDistance.getX() < 0) && (minimumCornerLocation.getX() < limitMinimum.getX()))
-                || ((movedDistance.getX() > 0) && (maximumCornerLocation.getX() > limitMaximum.getX()))){
-                    movedDistance.setX(0);
+                CollisionResult minimumCornerCollisionResult = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, rightBottomCornerScreenLocation).getClosestCollision();
+                CollisionResult maximumCornerCollisionResult = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, leftTopCornerScreenLocation).getClosestCollision();
+                if((minimumCornerCollisionResult != null) && (maximumCornerCollisionResult != null)){
+                    if(((movedDistance.getX() < 0) && (minimumCornerCollisionResult.getContactPoint().getX() < limitMinimum.getX()))
+                    || ((movedDistance.getX() > 0) && (minimumCornerCollisionResult.getContactPoint().getX() > limitMaximum.getX()))){
+                        movedDistance.setX(0);
+                    }
+                    if(((movedDistance.getZ() < 0) && (maximumCornerCollisionResult.getContactPoint().getZ() < limitMinimum.getY()))
+                    || ((movedDistance.getZ() > 0) && (maximumCornerCollisionResult.getContactPoint().getZ() > limitMaximum.getY()))){
+                        movedDistance.setZ(0);
+                    }
+                    mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
                 }
-                if(((movedDistance.getZ() < 0) && (minimumCornerLocation.getZ() < limitMinimum.getY()))
-                || ((movedDistance.getZ() > 0) && (maximumCornerLocation.getZ() > limitMaximum.getY()))){
-                    movedDistance.setZ(0);
-                }
-                mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
             }
         }
     }
