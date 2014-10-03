@@ -120,9 +120,9 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         PolyMapManager polyMapManager = mapPhysicsInformation.getPolyMapManager();
         //polyMapManager.calcNavigationMap(0.5);
         //polyMapManager.calcNavigationMap(0.75);
-        polyMapManager.calcNavigationMap(1);
+        //polyMapManager.calcNavigationMap(1);
         //polyMapManager.calcNavigationMap(1.25); //error, do not enable
-        //polyMapManager.calcNavigationMap(1.5);
+        polyMapManager.calcNavigationMap(1.5);
         //polyMapManager.calcNavigationMap(2);
         //polyMapManager.calcNavigationMap(3);
         System.out.println("Finished calculating navigation meshes.");
