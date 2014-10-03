@@ -58,25 +58,25 @@ public class Map_Destroforest extends Map{
             unit.setComponent(new IsVulnerableComponent());
             EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
             unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
-            unit.setComponent(new AutoAggroComponent(10));
+            unit.setComponent(new AutoAggroComponent(24));
             Vector2f position = null;
             Vector2f direction = null;
             switch(i){
                 case 0:
-                    unit.setComponent(new ScaleComponent(0.5f));
-                    position = new Vector2f(85, 130);
+                    unit.setComponent(new ScaleComponent(0.75f));
+                    position = new Vector2f(142.5f, 195);
                     direction = new Vector2f(0, -1);
                     break;
                 
                 case 1:
-                    unit.setComponent(new ScaleComponent(0.5f));
-                    position = new Vector2f(85, 116);
+                    unit.setComponent(new ScaleComponent(0.75f));
+                    position = new Vector2f(142.5f, 167);
                     direction = new Vector2f(0, 1);
                     break;
                 
                 case 2:
-                    unit.setComponent(new ScaleComponent(0.9f));
-                    position = new Vector2f(89, 123);
+                    unit.setComponent(new ScaleComponent(1.4f));
+                    position = new Vector2f(142.5f, 182);
                     direction = new Vector2f(-1, 0);
                     break;
             }
@@ -85,13 +85,13 @@ public class Map_Destroforest extends Map{
             unit.setComponent(new TeamComponent(0));
             EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
             camp.setComponent(new CampTransformComponent(position, direction));
-            camp.setComponent(new CampMaximumAggroDistanceComponent(5));
+            camp.setComponent(new CampMaximumAggroDistanceComponent(10));
             camp.setComponent(new CampHealthResetComponent());
             unit.setComponent(new CampComponent(camp.getId()));
         }
         //Enemy 1
         EntityWrapper enemy1 = EntityTemplate.createFromTemplate(entityWorld, "jaime");
-        Vector2f positionEnemy1 = new Vector2f(65.6f, 82);
+        Vector2f positionEnemy1 = new Vector2f(98, 91);
         Vector2f directionEnemy1 = new Vector2f(0, -1);
         enemy1.setComponent(new PositionComponent(positionEnemy1));
         enemy1.setComponent(new DirectionComponent(directionEnemy1));
@@ -111,8 +111,9 @@ public class Map_Destroforest extends Map{
         idleAnimation.setComponent(new LoopDurationComponent(2.5f));
         boss.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
         boss.setComponent(new AnimationComponent(idleAnimation.getId()));
-        boss.setComponent(new PositionComponent(new Vector2f(135.3f, 136.2f)));
+        boss.setComponent(new PositionComponent(new Vector2f(255, 213)));
         boss.setComponent(new DirectionComponent(new Vector2f(-0.5f, -1)));
+        boss.setComponent(new ScaleComponent(1.5f));
         boss.setComponent(new HitboxComponent(new Circle(2.25f)));
         boss.setComponent(new IntersectionPushComponent());
         boss.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
@@ -141,28 +142,23 @@ public class Map_Destroforest extends Map{
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
         switch(playerIndex){
             case 0:
-                position = new Vector2f(95.4f, 68);
+                position = new Vector2f(165, 54);
                 direction = new Vector2f(0, -1);
                 break;
             
             case 1:
-                position = new Vector2f(98.3f, 66.7f);
-                direction = new Vector2f(-1, -1);
-                break;
-            
-            case 2:
-                position = new Vector2f(99.7f, 64);
+                position = new Vector2f(173, 46);
                 direction = new Vector2f(-1, 0);
                 break;
             
-            case 3:
-                position = new Vector2f(68.3f, 61.3f);
-                direction = new Vector2f(-1, 1);
+            case 2:
+                position = new Vector2f(165, 37);
+                direction = new Vector2f(0, 1);
                 break;
             
-            case 4:
-                position = new Vector2f(45.4f, 9.4f);
-                direction = new Vector2f(0, 1);
+            case 3:
+                position = new Vector2f(157, 46);
+                direction = new Vector2f(1, 0);
                 break;
         }
         int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();

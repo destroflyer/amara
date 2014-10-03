@@ -11,34 +11,6 @@
 		<obstacles>
 			<simpleConvex>
 				<base>
-					<point>0.0,0.0</point>
-					<point>100.0,0.0</point>
-				</base>
-				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
-			</simpleConvex>
-			<simpleConvex>
-				<base>
-					<point>100.0,0.0</point>
-					<point>100.0,100.0</point>
-				</base>
-				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
-			</simpleConvex>
-			<simpleConvex>
-				<base>
-					<point>100.0,100.0</point>
-					<point>0.0,100.0</point>
-				</base>
-				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
-			</simpleConvex>
-			<simpleConvex>
-				<base>
-					<point>0.0,100.0</point>
-					<point>0.0,0.0</point>
-				</base>
-				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
-			</simpleConvex>
-			<simpleConvex>
-				<base>
 					<point>-2.5,4.0</point>
 					<point>-2.5,-4.0</point>
 					<point>2.5,-4.0</point>
