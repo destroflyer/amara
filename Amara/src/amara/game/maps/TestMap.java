@@ -53,7 +53,7 @@ public class TestMap extends Map{
                 unit.setComponent(new BaseHealthRegenerationComponent(10));
                 unit.setComponent(new BaseAttackDamageComponent(25));
                 unit.setComponent(new BaseAttackSpeedComponent(0.5f));
-                unit.setComponent(new BaseWalkSpeedComponent(2.5f));
+                unit.setComponent(new BaseWalkSpeedComponent(3));
                 unit.setComponent(new RequestUpdateAttributesComponent());
                 unit.setComponent(new IsTargetableComponent());
                 unit.setComponent(new IsVulnerableComponent());

@@ -41,7 +41,7 @@ public class UpdateWalkMovementsSystem implements EntitySystem{
             entityWorld.setComponent(movementEntity, new MovementSpeedComponent(walkSpeed));
             MovementAnimationComponent movementAnimationComponent = entityWorld.getComponent(movementEntity, MovementAnimationComponent.class);
             if(movementAnimationComponent != null){
-                float walkStepDistance = 2.75f;
+                float walkStepDistance = 3.75f;
                 WalkStepDistanceComponent walkStepDistanceComponent = entityWorld.getComponent(movingEntity, WalkStepDistanceComponent.class);
                 if(walkStepDistanceComponent != null){
                     walkStepDistance = walkStepDistanceComponent.getDistance();
