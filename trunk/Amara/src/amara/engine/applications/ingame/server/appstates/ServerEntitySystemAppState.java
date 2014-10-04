@@ -190,6 +190,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyHealSystem());
         addEntitySystem(new ApplyStopSystem());
         addEntitySystem(new ApplyMoveSystem());
+        addEntitySystem(new ApplyTeleportSystem());
         addEntitySystem(new ApplyActivateHitboxSystem());
         addEntitySystem(new ApplyDeactivateHitboxSystem());
         addEntitySystem(new ApplySpawnsSystems());

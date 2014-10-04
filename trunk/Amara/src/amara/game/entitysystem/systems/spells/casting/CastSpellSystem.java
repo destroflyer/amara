@@ -12,7 +12,6 @@ import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spells.*;
-import amara.game.entitysystem.components.spells.specials.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
@@ -63,14 +62,6 @@ public class CastSpellSystem implements EntitySystem{
                         currentActionEffectCastEntities[i] = effectCasts.get(i).getId();
                     }
                     entityWorld.setComponent(casterEntity, new CurrentActionEffectCastsComponent(currentActionEffectCastEntities));
-                }
-            }
-            //Specials
-            if(targetEntity != -1){
-                if(entityWorld.hasComponent(spellEntity, TeleportCasterToTargetPositionComponent.class)){
-                    entityWorld.removeComponent(casterEntity, MovementComponent.class);
-                    Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
-                    entityWorld.setComponent(casterEntity, new PositionComponent(targetPosition.clone()));
                 }
             }
             MovementComponent movementComponent = entityWorld.getComponent(casterEntity, MovementComponent.class);

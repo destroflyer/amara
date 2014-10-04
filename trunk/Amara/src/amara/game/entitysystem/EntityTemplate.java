@@ -30,7 +30,6 @@ import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.spells.placeholders.*;
-import amara.game.entitysystem.components.spells.specials.*;
 import amara.game.entitysystem.components.spells.triggers.*;
 import amara.game.entitysystem.components.targets.*;
 import amara.game.entitysystem.components.units.*;
@@ -302,6 +301,7 @@ public class EntityTemplate{
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new CasterTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new TeleportToTargetPositionComponent());
             EntityWrapper audioCast = entityWorld.getWrapped(entityWorld.createEntity());
             audioCast.setComponent(new AudioComponent("Sounds/sounds/spells/riftwalk_cast.ogg"));
             effect1.setComponent(new PlayAudioComponent(audioCast.getId()));
@@ -311,16 +311,23 @@ public class EntityTemplate{
             spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
             spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
             //Trigger spell effects
+            float castDuration = 0.5f;
             EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger2.setComponent(new CasterTargetComponent());
+            effectTrigger2.setComponent(new TargetTargetComponent());
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             effect2.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            effectTrigger2.setComponent(new TriggerDelayComponent(castDuration / 2));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
-            entityWrapper.setComponent(new TeleportCasterToTargetPositionComponent());
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastDurationComponent(castDuration));
+            EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            castAnimation.setComponent(new NameComponent("pop"));
+            castAnimation.setComponent(new LoopDurationComponent(castDuration));
+            entityWrapper.setComponent(new CastAnimationComponent(castAnimation.getId()));
+            entityWrapper.setComponent(new CooldownComponent(castDuration));
         }
         else if(templateName.equals("ignite")){
             entityWrapper.setComponent(new NameComponent("Ignite"));
