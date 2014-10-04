@@ -61,7 +61,7 @@ public class Map_Techtest extends Map{
                 unit.setComponent(new HitboxActiveComponent());
                 unit.setComponent(new IsAliveComponent());
                 unit.setComponent(new BaseMaximumHealthComponent(500));
-                unit.setComponent(new BaseWalkSpeedComponent(2));
+                unit.setComponent(new BaseWalkSpeedComponent(3));
                 unit.setComponent(new RequestUpdateAttributesComponent());
                 unit.setComponent(new IsTargetableComponent());
                 unit.setComponent(new IsVulnerableComponent());

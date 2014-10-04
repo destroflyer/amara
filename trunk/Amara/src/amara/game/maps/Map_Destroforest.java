@@ -52,7 +52,7 @@ public class Map_Destroforest extends Map{
             unit.setComponent(new BaseMaximumHealthComponent(1500));
             unit.setComponent(new BaseAttackDamageComponent((i == 2)?80:30));
             unit.setComponent(new BaseAttackSpeedComponent(0.5f));
-            unit.setComponent(new BaseWalkSpeedComponent(2.5f));
+            unit.setComponent(new BaseWalkSpeedComponent(3));
             unit.setComponent(new RequestUpdateAttributesComponent());
             unit.setComponent(new IsTargetableComponent());
             unit.setComponent(new IsVulnerableComponent());
