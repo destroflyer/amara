@@ -40,7 +40,6 @@ import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.spells.placeholders.*;
-import amara.game.entitysystem.components.spells.specials.*;
 import amara.game.entitysystem.components.spells.triggers.*;
 import amara.game.entitysystem.components.targets.*;
 import amara.game.entitysystem.components.units.*;
@@ -241,6 +240,7 @@ public class MessagesSerializer{
                         //effects/movement,
                         MoveComponent.class,
                         StopComponent.class,
+                        TeleportComponent.class,
                         //effects/physics
                         ActivateHitboxComponent.class,
                         DeactivateHitboxComponent.class,
@@ -341,9 +341,8 @@ public class MessagesSerializer{
                         SourceMovementDirectionComponent.class,
                         TargetedMovementDirectionComponent.class,
                         TargetedMovementTargetComponent.class,
+                        TeleportToTargetPositionComponent.class,
                         TriggerCastedSpellEffectsComponent.class,
-                        //spells/specials
-                        TeleportCasterToTargetPositionComponent.class,
                         //spells/triggers
                         CastedEffectTriggersComponent.class,
                         CastedSpellComponent.class,

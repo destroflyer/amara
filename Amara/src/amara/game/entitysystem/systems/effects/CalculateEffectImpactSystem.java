@@ -99,6 +99,9 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         }
                         effectImpact.setComponent(new MoveComponent(movementEntity));
                     }
+                    if(effect.hasComponent(TeleportToTargetPositionComponent.class)){
+                        effectImpact.setComponent(new TeleportComponent(effectCastTargetComponent.getTargetEntity()));
+                    }
                     if(effectCastSourceSpellComponent != null){
                         if(effect.hasComponent(TriggerCastedSpellEffectsComponent.class)){
                             effect.setComponent(new TriggerSpellEffectsComponent(effectCastSourceSpellComponent.getSpellEntity()));
