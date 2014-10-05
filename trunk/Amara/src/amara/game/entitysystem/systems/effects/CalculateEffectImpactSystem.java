@@ -20,6 +20,7 @@ import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.effects.physics.*;
 import amara.game.entitysystem.components.effects.spawns.*;
 import amara.game.entitysystem.components.effects.spells.*;
+import amara.game.entitysystem.components.effects.visuals.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spells.placeholders.*;
@@ -148,7 +149,9 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         AddAutoAttackSpellEffectsComponent.class,
                         RemoveSpellEffectsComponent.class,
                         ReplaceSpellWithExistingSpellComponent.class,
-                        TriggerSpellEffectsComponent.class
+                        TriggerSpellEffectsComponent.class,
+                        PlayAnimationComponent.class,
+                        StopAnimationComponent.class
                     });
                     effectImpact.setComponent(new ApplyEffectImpactComponent(targetEntity.getId()));
                 }

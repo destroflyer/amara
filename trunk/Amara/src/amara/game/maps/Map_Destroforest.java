@@ -89,20 +89,53 @@ public class Map_Destroforest extends Map{
             camp.setComponent(new CampHealthResetComponent());
             unit.setComponent(new CampComponent(camp.getId()));
         }
-        //Enemy 1
+        //Enemies 1
         EntityWrapper enemy1 = EntityTemplate.createFromTemplate(entityWorld, "jaime");
         Vector2f positionEnemy1 = new Vector2f(98, 91);
         Vector2f directionEnemy1 = new Vector2f(0, -1);
         enemy1.setComponent(new PositionComponent(positionEnemy1));
         enemy1.setComponent(new DirectionComponent(directionEnemy1));
-        enemy1.setComponent(new AutoAggroComponent(10));
+        enemy1.setComponent(new AutoAggroComponent(15));
         enemy1.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
         enemy1.setComponent(new TeamComponent(0));
-        EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
-        camp.setComponent(new CampTransformComponent(positionEnemy1, directionEnemy1));
-        camp.setComponent(new CampMaximumAggroDistanceComponent(8));
-        camp.setComponent(new CampHealthResetComponent());
-        enemy1.setComponent(new CampComponent(camp.getId()));
+        EntityWrapper camp1 = entityWorld.getWrapped(entityWorld.createEntity());
+        camp1.setComponent(new CampTransformComponent(positionEnemy1, directionEnemy1));
+        camp1.setComponent(new CampMaximumAggroDistanceComponent(15));
+        camp1.setComponent(new CampHealthResetComponent());
+        enemy1.setComponent(new CampComponent(camp1.getId()));
+        //Enemies 2
+        for(int i=0;i<3;i++){
+            EntityWrapper enemy = EntityTemplate.createFromTemplate(entityWorld, "beetle_golem");
+            Vector2f positionEnemy = null;
+            Vector2f directionEnemy = null;
+            switch(i){
+                case 0:
+                    positionEnemy = new Vector2f(173, 102);
+                    directionEnemy = new Vector2f(-1, -1);
+                    break;
+                
+                case 1:
+                    positionEnemy = new Vector2f(190, 95);
+                    directionEnemy = new Vector2f(-1, 0);
+                    break;
+                
+                case 2:
+                    positionEnemy = new Vector2f(169, 82);
+                    directionEnemy = new Vector2f(-1, 1);
+                    break;
+            }
+            enemy.setComponent(new PositionComponent(positionEnemy));
+            enemy.setComponent(new DirectionComponent(directionEnemy));
+            enemy.setComponent(new AutoAggroComponent(15));
+            enemy.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
+            enemy.setComponent(new SetNewTargetSpellsOnCooldownComponent(new int[]{0}, new int[]{6}));
+            enemy.setComponent(new TeamComponent(0));
+            EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
+            camp.setComponent(new CampTransformComponent(positionEnemy, directionEnemy));
+            camp.setComponent(new CampMaximumAggroDistanceComponent(15));
+            camp.setComponent(new CampHealthResetComponent());
+            enemy.setComponent(new CampComponent(camp.getId()));
+        }
         //Boss
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
         boss.setComponent(new ModelComponent("Models/dragon/skin.xml"));

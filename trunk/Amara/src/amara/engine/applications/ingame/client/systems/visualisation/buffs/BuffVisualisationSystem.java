@@ -68,11 +68,11 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
     
     private void removeVisualAttachment(int entity, int buffStatusEntity){
         Node node = entitySceneMap.requestNode(entity);
-        removeVisitor.prepare(node, buffStatusEntity);
+        removeVisitor.prepare(entity, buffStatusEntity, node);
         node.depthFirstTraversal(removeVisitor);
     }
     
-    protected void removeVisualAttachment(Node node, Spatial visualAttachment){
+    protected void removeVisualAttachment(int entity, Node node, Spatial visualAttachment){
         visualAttachment.getParent().detachChild(visualAttachment);
     }
     
@@ -88,19 +88,21 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
     
     private class RemoveVisualAttachmentVisitor implements SceneGraphVisitor{
         
-        private Node entityNode;
+        private int entity;
         private int buffStatusEntity;
+        private Node entityNode;
 
         @Override
         public void visit(Spatial spatial){
             if(getVisualAttachmentID(buffStatusEntity).equals(spatial.getName())){
-                removeVisualAttachment(entityNode, spatial);
+                removeVisualAttachment(entity, entityNode, spatial);
             }
         }
         
-        public void prepare(Node entityNode, int buffStatusEntity){
-            this.entityNode = entityNode;
+        public void prepare(int entity, int buffStatusEntity, Node entityNode){
+            this.entity = entity;
             this.buffStatusEntity = buffStatusEntity;
+            this.entityNode = entityNode;
         }
     }
 }

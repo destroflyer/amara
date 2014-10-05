@@ -23,31 +23,32 @@ public class CastSpellOnCooldownWhileAttackingSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(int casterEntity : entityWorld.getEntitiesWithAll(CastSpellOnCooldownWhileAttackingComponent.class, AggroTargetComponent.class)){
-            int spellIndex = entityWorld.getComponent(casterEntity, CastSpellOnCooldownWhileAttackingComponent.class).getSpellIndex();
-            int spellEntity = entityWorld.getComponent(casterEntity, SpellsComponent.class).getSpellsEntities()[spellIndex];
-            if(!entityWorld.hasComponent(spellEntity, RemainingCooldownComponent.class)){
-                int castInformationEntity = -1;
-                CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();
-                if(castType != CastType.SELFCAST){
-                    castInformationEntity = entityWorld.createEntity();
-                    int targetEntity = entityWorld.getComponent(casterEntity, AggroTargetComponent.class).getTargetEntity();
-                    Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
-                    switch(castType){
-                        case SINGLE_TARGET:
-                            entityWorld.setComponent(castInformationEntity, new TargetComponent(targetEntity));
-                            break;
+            for(int spellIndex : entityWorld.getComponent(casterEntity, CastSpellOnCooldownWhileAttackingComponent.class).getSpellIndices()){
+                int spellEntity = entityWorld.getComponent(casterEntity, SpellsComponent.class).getSpellsEntities()[spellIndex];
+                if(!entityWorld.hasComponent(spellEntity, RemainingCooldownComponent.class)){
+                    int castInformationEntity = -1;
+                    CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();
+                    if(castType != CastType.SELFCAST){
+                        castInformationEntity = entityWorld.createEntity();
+                        int targetEntity = entityWorld.getComponent(casterEntity, AggroTargetComponent.class).getTargetEntity();
+                        Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
+                        switch(castType){
+                            case SINGLE_TARGET:
+                                entityWorld.setComponent(castInformationEntity, new TargetComponent(targetEntity));
+                                break;
 
-                        case POSITIONAL_SKILLSHOT:
-                            entityWorld.setComponent(castInformationEntity, new PositionComponent(targetPosition.clone()));
-                            break;
+                            case POSITIONAL_SKILLSHOT:
+                                entityWorld.setComponent(castInformationEntity, new PositionComponent(targetPosition.clone()));
+                                break;
 
-                        case LINEAR_SKILLSHOT:
-                            Vector2f casterPosition = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
-                            entityWorld.setComponent(castInformationEntity, new DirectionComponent(targetPosition.subtract(casterPosition)));
-                            break;
+                            case LINEAR_SKILLSHOT:
+                                Vector2f casterPosition = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
+                                entityWorld.setComponent(castInformationEntity, new DirectionComponent(targetPosition.subtract(casterPosition)));
+                                break;
+                        }
                     }
+                    ExecutePlayerCommandsSystem.castSpell(entityWorld, casterEntity, new CastSpellComponent(spellEntity, castInformationEntity));
                 }
-                ExecutePlayerCommandsSystem.castSpell(entityWorld, casterEntity, new CastSpellComponent(spellEntity, castInformationEntity));
             }
         }
     }

@@ -42,13 +42,13 @@ public class BuffVisualisationSystem_Zhonyas extends BuffVisualisationSystem{
     }
 
     @Override
-    protected void removeVisualAttachment(Node node, Spatial visualAttachment){
-        super.removeVisualAttachment(node, visualAttachment);
-        ModelObject modelObject = getModelObject(node);
+    protected void removeVisualAttachment(int entity, Node entityNode, Spatial visualAttachment){
+        super.removeVisualAttachment(entity, entityNode, visualAttachment);
+        ModelObject modelObject = getModelObject(entityNode);
         modelObject.setCullHint(Spatial.CullHint.Inherit);
     }
     
-    private ModelObject getModelObject(Node node){
-        return (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
+    private ModelObject getModelObject(Node entityNode){
+        return (ModelObject) entityNode.getChild(ModelSystem.NODE_NAME_MODEL);
     }
 }

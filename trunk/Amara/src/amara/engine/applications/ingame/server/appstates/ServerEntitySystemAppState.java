@@ -38,6 +38,7 @@ import amara.game.entitysystem.systems.effects.physics.*;
 import amara.game.entitysystem.systems.effects.spawns.*;
 import amara.game.entitysystem.systems.effects.spells.*;
 import amara.game.entitysystem.systems.effects.triggers.*;
+import amara.game.entitysystem.systems.effects.visuals.*;
 import amara.game.entitysystem.systems.general.*;
 import amara.game.entitysystem.systems.movement.*;
 import amara.game.entitysystem.systems.network.*;
@@ -152,6 +153,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new AttackAggroedTargetsSystem());
         addEntitySystem(new CheckCampAggroTargetSystem());
         addEntitySystem(new PerformAutoAttacksSystem());
+        addEntitySystem(new SetNewTargetSpellsOnCooldownSystem());
         addEntitySystem(new CastSpellOnCooldownWhileAttackingSystem());
         addEntitySystem(new SetCastDurationOnCastingSystem());
         addEntitySystem(new SetCooldownOnCastingSystem());
@@ -199,6 +201,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyReplaceSpellsWithExistingSpellsSystem());
         addEntitySystem(new ApplyReplaceSpellsWithNewSpellsSystem());
         addEntitySystem(new ApplyTriggerSpellEffectsSystem());
+        addEntitySystem(new ApplyPlayAnimationsSystem());
+        addEntitySystem(new ApplyStopAnimationsSystem());
         addEntitySystem(new ApplyAddComponentsSystem());
         addEntitySystem(new ApplyAddEffectTriggersSystem());
         addEntitySystem(new ApplyRemoveComponentsSystem());

@@ -17,12 +17,12 @@ public class CastSpellOnCooldownWhileAttackingComponent{
         
     }
     
-    public CastSpellOnCooldownWhileAttackingComponent(int spellIndex){
-        this.spellIndex = spellIndex;
+    public CastSpellOnCooldownWhileAttackingComponent(int... spellIndices){
+        this.spellIndices = spellIndices;
     }
-    private int spellIndex;
+    private int[] spellIndices;
 
-    public int getSpellIndex(){
-        return spellIndex;
+    public int[] getSpellIndices(){
+        return spellIndices;
     }
 }
