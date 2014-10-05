@@ -18,15 +18,22 @@ import amara.game.entitysystem.components.audio.*;
 import amara.game.entitysystem.components.buffs.*;
 import amara.game.entitysystem.components.buffs.areas.*;
 import amara.game.entitysystem.components.buffs.status.*;
+import amara.game.entitysystem.components.camps.*;
 import amara.game.entitysystem.components.effects.*;
+import amara.game.entitysystem.components.effects.audio.*;
 import amara.game.entitysystem.components.effects.buffs.*;
+import amara.game.entitysystem.components.effects.buffs.areas.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
+import amara.game.entitysystem.components.effects.crowdcontrol.knockup.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
+import amara.game.entitysystem.components.effects.physics.*;
+import amara.game.entitysystem.components.effects.spawns.*;
 import amara.game.entitysystem.components.effects.spells.*;
+import amara.game.entitysystem.components.effects.visuals.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.input.casts.*;
@@ -44,12 +51,6 @@ import amara.game.entitysystem.components.spells.triggers.*;
 import amara.game.entitysystem.components.targets.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
-import amara.game.entitysystem.components.camps.*;
-import amara.game.entitysystem.components.effects.audio.*;
-import amara.game.entitysystem.components.effects.buffs.areas.*;
-import amara.game.entitysystem.components.effects.crowdcontrol.knockup.*;
-import amara.game.entitysystem.components.effects.physics.*;
-import amara.game.entitysystem.components.effects.spawns.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
@@ -252,6 +253,9 @@ public class MessagesSerializer{
                         ReplaceSpellWithExistingSpellComponent.class,
                         ReplaceSpellWithNewSpellComponent.class,
                         TriggerSpellEffectsComponent.class,
+                        //effects/visuals
+                        PlayAnimationComponent.class,
+                        StopAnimationComponent.class,
                         //general
                         DescriptionComponent.class,
                         NameComponent.class,
@@ -365,6 +369,7 @@ public class MessagesSerializer{
                         LifetimeComponent.class,
                         MovementComponent.class,
                         ResetCampComponent.class,
+                        SetNewTargetSpellsOnCooldownComponent.class,
                         SpellsComponent.class,
                         TargetsInAggroRangeComponent.class,
                         TeamComponent.class,

@@ -39,8 +39,8 @@ public class BuffVisualisationSystem_Electrified extends BuffVisualisationSystem
     }
 
     @Override
-    protected void removeVisualAttachment(Node entityNode, Spatial visualAttachment){
-        super.removeVisualAttachment(entityNode, visualAttachment);
+    protected void removeVisualAttachment(int entity, Node entityNode, Spatial visualAttachment){
+        super.removeVisualAttachment(entity, entityNode, visualAttachment);
         ModelObject modelObject = getModelObject(entityNode);
         modelObject.unregisterModel(visualAttachment);
     }

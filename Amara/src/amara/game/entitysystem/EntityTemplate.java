@@ -23,6 +23,7 @@ import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.effects.physics.*;
 import amara.game.entitysystem.components.effects.spawns.*;
 import amara.game.entitysystem.components.effects.spells.*;
+import amara.game.entitysystem.components.effects.visuals.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.movements.*;
@@ -2311,6 +2312,104 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             entityWrapper.setComponent(new AutoAggroComponent(12));
             entityWrapper.setComponent(new TeamComponent(0));
+        }
+        else if(templateName.equals("beetle_golem")){
+            entityWrapper.setComponent(new ModelComponent("Models/beetle_golem/skin_dark.xml"));
+            EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            idleAnimation.setComponent(new NameComponent("Idle_Normal"));
+            idleAnimation.setComponent(new LoopDurationComponent(2.5f));
+            entityWrapper.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
+            EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            walkAnimation.setComponent(new NameComponent("Walk"));
+            entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+            EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            autoAttackAnimation.setComponent(new NameComponent("Attack1"));
+            entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+            EntityWrapper deathAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            deathAnimation.setComponent(new NameComponent("Death"));
+            deathAnimation.setComponent(new LoopDurationComponent(2));
+            deathAnimation.setComponent(new FreezeAfterPlayingComponent());
+            entityWrapper.setComponent(new DeathAnimationComponent(deathAnimation.getId()));
+            
+            entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
+            entityWrapper.setComponent(new IntersectionPushComponent());
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            
+            entityWrapper.setComponent(new IsAliveComponent());
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(900));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(35));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(4));
+            entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
+            
+            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "melee_autoattack");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+
+            EntityWrapper sleep = createFromTemplate(entityWorld, "beetle_golem_sleep");
+            entityWrapper.setComponent(new SpellsComponent(new int[]{sleep.getId()}));
+        }
+        else if(templateName.equals("beetle_golem_sleep")){
+            entityWrapper.setComponent(new NameComponent("Sleep"));
+            float transitionTime = 2.5f;
+            float sleepTime = 4;
+            //Start
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new CasterTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper startAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            startAnimation.setComponent(new NameComponent("Sleep_Start"));
+            startAnimation.setComponent(new LoopDurationComponent(2.5f));
+            startAnimation.setComponent(new FreezeAfterPlayingComponent());
+            effect1.setComponent(new PlayAnimationComponent(startAnimation.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Idle
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new CasterTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
+            buff.setComponent(new BuffVisualisationComponent("meditating"));
+            EntityWrapper buffEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            buffEffect.setComponent(new BonusFlatHealthRegenerationComponent(100));
+            buff.setComponent(new ContinuousEffectComponent(buffEffect.getId()));
+            effect2.setComponent(new AddBuffComponent(buff.getId(), sleepTime));
+            EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            idleAnimation.setComponent(new NameComponent("Sleep_Idle"));
+            idleAnimation.setComponent(new LoopDurationComponent(2.5f));
+            effect2.setComponent(new PlayAnimationComponent(idleAnimation.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            effectTrigger2.setComponent(new TriggerDelayComponent(transitionTime));
+            //End
+            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger3.setComponent(new CasterTargetComponent());
+            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper endAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            endAnimation.setComponent(new NameComponent("Sleep_End"));
+            endAnimation.setComponent(new LoopDurationComponent(transitionTime));
+            endAnimation.setComponent(new FreezeAfterPlayingComponent());
+            effect3.setComponent(new PlayAnimationComponent(endAnimation.getId()));
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            effectTrigger3.setComponent(new TriggerDelayComponent(transitionTime + sleepTime));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId(), effectTrigger3.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger4.setComponent(new CasterTargetComponent());
+            EntityWrapper effect4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect4.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effectTrigger4.setComponent(new TriggeredEffectComponent(effect4.getId()));
+            effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+            entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastDurationComponent(transitionTime + sleepTime + transitionTime));
+            entityWrapper.setComponent(new CooldownComponent(15));
         }
         else if(templateName.equals("boots")){
             entityWrapper.setComponent(new ItemVisualisationComponent("boots"));
