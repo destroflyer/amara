@@ -136,6 +136,32 @@ public class Map_Destroforest extends Map{
             camp.setComponent(new CampHealthResetComponent());
             enemy.setComponent(new CampComponent(camp.getId()));
         }
+        //Enemies 3
+        for(int i=0;i<2;i++){
+            EntityWrapper enemy = EntityTemplate.createFromTemplate(entityWorld, "earth_elemental");
+            Vector2f positionEnemy = null;
+            Vector2f directionEnemy = null;
+            switch(i){
+                case 0:
+                    positionEnemy = new Vector2f(150,136);
+                    directionEnemy = new Vector2f(1, 0);
+                    break;
+                
+                case 1:
+                    positionEnemy = new Vector2f(115,145);
+                    directionEnemy = new Vector2f(-1, -1);
+                    break;
+            }
+            enemy.setComponent(new PositionComponent(positionEnemy));
+            enemy.setComponent(new DirectionComponent(directionEnemy));
+            enemy.setComponent(new AutoAggroComponent(17));
+            enemy.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
+            enemy.setComponent(new TeamComponent(0));
+            EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
+            camp.setComponent(new CampTransformComponent(positionEnemy, directionEnemy));
+            camp.setComponent(new CampHealthResetComponent());
+            enemy.setComponent(new CampComponent(camp.getId()));
+        }
         //Boss
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
         boss.setComponent(new ModelComponent("Models/dragon/skin.xml"));

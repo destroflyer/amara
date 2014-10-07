@@ -36,7 +36,6 @@ import amara.game.entitysystem.components.effects.spells.*;
 import amara.game.entitysystem.components.effects.visuals.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.input.*;
-import amara.game.entitysystem.components.input.casts.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.maps.*;
 import amara.game.entitysystem.components.maps.playerdeathrules.*;
@@ -261,8 +260,6 @@ public class MessagesSerializer{
                         NameComponent.class,
                         //input
                         CastSpellComponent.class,
-                        //input/casts
-                        TargetComponent.class,
                         //items
                         InventoryComponent.class,
                         ItemActiveComponent.class,
