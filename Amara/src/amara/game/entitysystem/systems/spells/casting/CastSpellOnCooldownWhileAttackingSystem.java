@@ -7,7 +7,6 @@ package amara.game.entitysystem.systems.spells.casting;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.input.*;
-import amara.game.entitysystem.components.input.casts.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.spells.CastTypeComponent.*;
@@ -26,28 +25,29 @@ public class CastSpellOnCooldownWhileAttackingSystem implements EntitySystem{
             for(int spellIndex : entityWorld.getComponent(casterEntity, CastSpellOnCooldownWhileAttackingComponent.class).getSpellIndices()){
                 int spellEntity = entityWorld.getComponent(casterEntity, SpellsComponent.class).getSpellsEntities()[spellIndex];
                 if(!entityWorld.hasComponent(spellEntity, RemainingCooldownComponent.class)){
-                    int castInformationEntity = -1;
+                    int targetEntity = -1;
                     CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();
                     if(castType != CastType.SELFCAST){
-                        castInformationEntity = entityWorld.createEntity();
-                        int targetEntity = entityWorld.getComponent(casterEntity, AggroTargetComponent.class).getTargetEntity();
-                        Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
+                        int aggoTargetEntity = entityWorld.getComponent(casterEntity, AggroTargetComponent.class).getTargetEntity();
+                        Vector2f aggroTargetPosition = entityWorld.getComponent(aggoTargetEntity, PositionComponent.class).getPosition();
                         switch(castType){
                             case SINGLE_TARGET:
-                                entityWorld.setComponent(castInformationEntity, new TargetComponent(targetEntity));
+                                targetEntity = aggoTargetEntity;
                                 break;
 
                             case POSITIONAL_SKILLSHOT:
-                                entityWorld.setComponent(castInformationEntity, new PositionComponent(targetPosition.clone()));
+                                targetEntity = entityWorld.createEntity();
+                                entityWorld.setComponent(targetEntity, new PositionComponent(aggroTargetPosition.clone()));
                                 break;
 
                             case LINEAR_SKILLSHOT:
+                                targetEntity = entityWorld.createEntity();
                                 Vector2f casterPosition = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
-                                entityWorld.setComponent(castInformationEntity, new DirectionComponent(targetPosition.subtract(casterPosition)));
+                                entityWorld.setComponent(targetEntity, new DirectionComponent(aggroTargetPosition.subtract(casterPosition)));
                                 break;
                         }
                     }
-                    ExecutePlayerCommandsSystem.castSpell(entityWorld, casterEntity, new CastSpellComponent(spellEntity, castInformationEntity));
+                    ExecutePlayerCommandsSystem.castSpell(entityWorld, casterEntity, new CastSpellComponent(spellEntity, targetEntity));
                 }
             }
         }

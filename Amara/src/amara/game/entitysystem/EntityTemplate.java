@@ -2330,6 +2330,7 @@ public class EntityTemplate{
             deathAnimation.setComponent(new LoopDurationComponent(2));
             deathAnimation.setComponent(new FreezeAfterPlayingComponent());
             entityWrapper.setComponent(new DeathAnimationComponent(deathAnimation.getId()));
+            entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
             
             entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
             entityWrapper.setComponent(new IntersectionPushComponent());
@@ -2410,6 +2411,116 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CastDurationComponent(transitionTime + sleepTime + transitionTime));
             entityWrapper.setComponent(new CooldownComponent(15));
+        }
+        else if(templateName.equals("earth_elemental")){
+            entityWrapper.setComponent(new ModelComponent("Models/earth_elemental/skin.xml"));
+            EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            idleAnimation.setComponent(new NameComponent("idle"));
+            idleAnimation.setComponent(new LoopDurationComponent(2.5f));
+            entityWrapper.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
+            EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            walkAnimation.setComponent(new NameComponent("walk"));
+            entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+            EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            autoAttackAnimation.setComponent(new NameComponent("punch_right"));
+            entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+            EntityWrapper deathAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            deathAnimation.setComponent(new NameComponent("death"));
+            deathAnimation.setComponent(new LoopDurationComponent(1));
+            deathAnimation.setComponent(new FreezeAfterPlayingComponent());
+            entityWrapper.setComponent(new DeathAnimationComponent(deathAnimation.getId()));
+            entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
+            
+            entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
+            entityWrapper.setComponent(new IntersectionPushComponent());
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            
+            entityWrapper.setComponent(new IsAliveComponent());
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(1100));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(25));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(4));
+            entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
+            
+            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "melee_autoattack");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+
+            EntityWrapper powerball = createFromTemplate(entityWorld, "powerball");
+            entityWrapper.setComponent(new SpellsComponent(new int[]{powerball.getId()}));
+        }
+        else if(templateName.equals("powerball")){
+            entityWrapper.setComponent(new NameComponent("Powerball"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("powerball"));
+            //Move to target
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new CasterTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper movement1 = entityWorld.getWrapped(entityWorld.createEntity());
+            movement1.setComponent(new TargetedMovementTargetComponent());
+            movement1.setComponent(new MovementSpeedComponent(9));
+            EntityWrapper loopAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            loopAnimation.setComponent(new NameComponent("roll_loop"));
+            loopAnimation.setComponent(new LoopDurationComponent(0.3f));
+            movement1.setComponent(new MovementAnimationComponent(loopAnimation.getId()));
+            effect1.setComponent(new MoveComponent(movement1.getId()));
+            EntityWrapper audioStart = entityWorld.getWrapped(entityWorld.createEntity());
+            audioStart.setComponent(new AudioComponent("Sounds/sounds/spells/powerball_start.ogg"));
+            EntityWrapper audioLoop = entityWorld.getWrapped(entityWorld.createEntity());
+            audioLoop.setComponent(new AudioComponent("Sounds/sounds/spells/powerball_loop.ogg"));
+            audioLoop.setComponent(new AudioLoopComponent());
+            audioLoop.setComponent(new AudioSuccessorComponent(audioStart.getId(), 0.1f));
+            effect1.setComponent(new PlayAudioComponent(audioStart.getId(), audioLoop.getId()));
+            //Knockback target
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetReachedTriggerComponent());
+            effectTrigger2.setComponent(new TargetTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new FlatMagicDamageComponent(120));
+            EntityWrapper movement2 = entityWorld.getWrapped(entityWorld.createEntity());
+            movement2.setComponent(new DisplacementComponent());
+            movement2.setComponent(new SourceMovementDirectionComponent());
+            movement2.setComponent(new MovementSpeedComponent(30));
+            movement2.setComponent(new DistanceLimitComponent(2));
+            effect2.setComponent(new MoveComponent(movement2.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerOnceComponent());
+            //Stop animation
+            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger3.setComponent(new TargetReachedTriggerComponent());
+            effectTrigger3.setComponent(new CasterTargetComponent());
+            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect3.setComponent(new StopAnimationComponent());
+            effect3.setComponent(new StopAudioComponent(audioLoop.getId()));
+            EntityWrapper audioHit = entityWorld.getWrapped(entityWorld.createEntity());
+            audioHit.setComponent(new AudioComponent("Sounds/sounds/spells/powerball_hit.ogg"));
+            audioHit.setComponent(new AudioVolumeComponent(0.75f));
+            effect3.setComponent(new PlayAudioComponent(audioHit.getId()));
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerOnceComponent());
+            effectTrigger3.setComponent(new TriggerOnCancelComponent());
+            effect1.setComponent(new AddEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Trigger spell effects
+            EntityWrapper effectTrigger4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger4.setComponent(new TargetTargetComponent());
+            EntityWrapper effect4 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect4.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effectTrigger4.setComponent(new TriggeredEffectComponent(effect4.getId()));
+            effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
+            entityWrapper.setComponent(new CastCancelActionComponent());
+            EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
+            targetRules.setComponent(new AcceptEnemiesComponent());
+            entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
+            entityWrapper.setComponent(new CooldownComponent(7));
         }
         else if(templateName.equals("boots")){
             entityWrapper.setComponent(new ItemVisualisationComponent("boots"));
