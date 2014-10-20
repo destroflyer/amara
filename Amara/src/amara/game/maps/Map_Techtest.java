@@ -71,7 +71,7 @@ public class Map_Techtest extends Map{
             }
         }
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
-        boss.setComponent(new ModelComponent("Models/cow/skin.xml"));
+        boss.setComponent(new ModelComponent("Models/cow/skin_default.xml"));
         boss.setComponent(new ScaleComponent(1.5f));
         boss.setComponent(new PositionComponent(new Vector2f(40, 5)));
         boss.setComponent(new DirectionComponent(new Vector2f(-1, 0)));

@@ -4,6 +4,7 @@
  */
 package amara.engine.appstates;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
@@ -15,15 +16,18 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.queue.RenderQueue;
+import com.jme3.post.Filter;
 import com.jme3.scene.BatchNode;
 import com.jme3.scene.Geometry;
 import com.jme3.shadow.DirectionalLightShadowFilter;
 import com.jme3.util.SkyFactory;
 import com.jme3.scene.Node;
+import com.jme3.water.WaterFilter;
 import amara.engine.JMonkeyUtil;
 import amara.engine.applications.ingame.client.IngameClientApplication;
 import amara.engine.applications.ingame.client.maps.*;
 import amara.engine.applications.ingame.client.models.ModelObject;
+import amara.engine.applications.ingame.client.models.objects.SnowEmitter;
 import amara.engine.settings.Settings;
 import amara.game.maps.*;
 import amara.game.maps.lights.*;
@@ -43,6 +47,8 @@ public class MapAppState extends BaseDisplayAppState{
     private MapTerrain mapTerrain;
     private Node visualsNode = new Node();
     private HashMap<ModelObject, MapVisual> modelObjectsVisuals = new HashMap<ModelObject, MapVisual>();
+    private Node cameraNode = new Node();
+    private ArrayList<Filter> activeFilters = new ArrayList<Filter>();
 
     @Override
     public void initialize(AppStateManager stateManager, Application application){
@@ -51,6 +57,7 @@ public class MapAppState extends BaseDisplayAppState{
         mapTerrain = new MapTerrain(map);
         mainApplication.getRootNode().attachChild(mapTerrain.getTerrain());
         mainApplication.getRootNode().attachChild(visualsNode);
+        mainApplication.getRootNode().attachChild(cameraNode);
         initializeCamera();
         initializeLights();
         updateVisuals();
@@ -110,15 +117,26 @@ public class MapAppState extends BaseDisplayAppState{
     }
 
     @Override
+    public void update(float lastTimePerFrame){
+        super.update(lastTimePerFrame);
+        cameraNode.setLocalTranslation(mainApplication.getCamera().getLocation());
+        JMonkeyUtil.setLocalRotation(cameraNode, mainApplication.getCamera().getDirection());
+    }
+
+    @Override
     public void cleanup(){
         super.cleanup();
         mainApplication.getRootNode().detachChild(mapTerrain.getTerrain());
         mainApplication.getRootNode().detachChild(visualsNode);
+        mainApplication.getRootNode().detachChild(cameraNode);
+        removeFilters();
     }
     
     public void updateVisuals(){
         visualsNode.detachAllChildren();
         modelObjectsVisuals.clear();
+        cameraNode.detachAllChildren();
+        removeFilters();
         BatchNode modelsNode = new BatchNode();
         MapVisuals visuals = map.getVisuals();
         for(MapVisual visual : visuals.getMapVisuals()){
@@ -135,14 +153,37 @@ public class MapAppState extends BaseDisplayAppState{
             }
             else if(visual instanceof WaterVisual){
                 WaterVisual waterVisual = (WaterVisual) visual;
-                Geometry waterPlane = getAppState(WaterAppState.class).createWaterPlane(waterVisual.getPosition(), waterVisual.getSize());
-                visualsNode.attachChild(waterPlane);
+                if(true){
+                    WaterFilter waterFilter = getAppState(WaterAppState.class).createWaterFilter(waterVisual.getPosition(), waterVisual.getSize());
+                    addFilter(waterFilter);
+                }
+                else{
+                    Geometry waterPlane = getAppState(WaterAppState.class).createWaterPlane(waterVisual.getPosition(), waterVisual.getSize());
+                    visualsNode.attachChild(waterPlane);
+                }
+            }
+            else if(visual instanceof SnowVisual){
+                SnowVisual snowVisual = (SnowVisual) visual;
+                SnowEmitter snowEmitter = new SnowEmitter();
+                cameraNode.attachChild(snowEmitter.getParticleEmitter());
             }
         }
         modelsNode.batch();
         modelsNode.setShadowMode(RenderQueue.ShadowMode.Cast);
         visualsNode.attachChild(modelsNode);
         visualsNode.attachChild(SkyFactory.createSky(mainApplication.getAssetManager(), "Textures/skies/default.jpg", true));
+    }
+    
+    private void addFilter(Filter filter){
+        getAppState(PostFilterAppState.class).addFilter(filter);
+        activeFilters.add(filter);
+    }
+    
+    private void removeFilters(){
+        for(Filter filter : activeFilters){
+            getAppState(PostFilterAppState.class).removeFilter(filter);
+        }
+        activeFilters.clear();
     }
     
     public Vector2f getCursorHoveredGroundLocation(){
@@ -171,5 +212,13 @@ public class MapAppState extends BaseDisplayAppState{
 
     public Node getVisualsNode(){
         return visualsNode;
+    }
+
+    public Node getCameraNode(){
+        return cameraNode;
+    }
+
+    public ArrayList<Filter> getActiveFilters(){
+        return activeFilters;
     }
 }

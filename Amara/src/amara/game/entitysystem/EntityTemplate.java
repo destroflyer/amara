@@ -2281,7 +2281,6 @@ public class EntityTemplate{
             EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "melee_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             entityWrapper.setComponent(new AutoAggroComponent(12));
-            entityWrapper.setComponent(new TeamComponent(0));
         }
         else if(templateName.equals("etherdesert_creep_range")){
             entityWrapper.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));
@@ -2311,7 +2310,6 @@ public class EntityTemplate{
             EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             entityWrapper.setComponent(new AutoAggroComponent(12));
-            entityWrapper.setComponent(new TeamComponent(0));
         }
         else if(templateName.equals("beetle_golem")){
             entityWrapper.setComponent(new ModelComponent("Models/beetle_golem/skin_dark.xml"));
