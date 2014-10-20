@@ -124,7 +124,7 @@ public class PanLobby extends javax.swing.JPanel{
             }
         });
 
-        cbxMapName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "testmap", "destroforest", "etherdesert", "techtest" }));
+        cbxMapName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "testmap", "destroforest", "etherdesert", "arama", "techtest" }));
         cbxMapName.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxMapNameItemStateChanged(evt);
