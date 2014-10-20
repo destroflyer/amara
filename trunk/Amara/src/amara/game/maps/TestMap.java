@@ -70,7 +70,7 @@ public class TestMap extends Map{
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
         boss.setComponent(new NameComponent("Yalee"));
         boss.setComponent(new DescriptionComponent("Stupid."));
-        boss.setComponent(new ModelComponent("Models/cow/skin.xml"));
+        boss.setComponent(new ModelComponent("Models/cow/skin_default.xml"));
         EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
         walkAnimation.setComponent(new NameComponent("walk"));
         boss.setComponent(new WalkAnimationComponent(walkAnimation.getId()));

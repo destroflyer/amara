@@ -142,6 +142,10 @@ public class MapFileHandler{
                     elementVisual.setAttribute("position", generateVectorText(waterVisual.getPosition()));
                     elementVisual.setAttribute("size", generateVectorText(waterVisual.getSize()));
                 }
+                else if(mapVisual instanceof SnowVisual){
+                    SnowVisual snowVisual = (SnowVisual) mapVisual;
+                    elementVisual = new Element("snow");
+                }
                 if(elementVisual != null){
                     elementVisuals.addContent(elementVisual);
                 }
@@ -249,6 +253,9 @@ public class MapFileHandler{
                     Vector3f position = generateVector3f(elementVisual.getAttributeValue("position"));
                     Vector2f size = generateVector2f(elementVisual.getAttributeValue("size"));
                     mapVisual = new WaterVisual(position, size);
+                }
+                else if(elementVisual.getName().equals("snow")){
+                    mapVisual = new SnowVisual();
                 }
                 if(mapVisual != null){
                     map.getVisuals().addVisual(mapVisual);
