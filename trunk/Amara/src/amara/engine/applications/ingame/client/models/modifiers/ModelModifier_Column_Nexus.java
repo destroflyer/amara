@@ -7,7 +7,6 @@ package amara.engine.applications.ingame.client.models.modifiers;
 import com.jme3.material.Material;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
-import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.control.AbstractControl;
@@ -23,14 +22,13 @@ public class ModelModifier_Column_Nexus extends ModelModifier{
 
     @Override
     public void modify(ModelObject modelObject){
-        Spatial minion = new ModelSkin("/Models/minion/skin_default.xml").loadSpatial();
+        Spatial statue = new ModelSkin("/Models/nidalee/skin.xml").loadSpatial();
         Material material = MaterialFactory.getAssetManager().loadMaterial("Shaders/glass/materials/glass_3.j3m");
-        for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(minion)){
+        for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(statue)){
             geometry.setMaterial(material);
         }
-        minion.setLocalTranslation(0, 6, 0);
-        minion.setLocalScale(0.9f);
-        minion.addControl(new AbstractControl(){
+        statue.setLocalTranslation(0, 6, 0);
+        statue.addControl(new AbstractControl(){
 
             @Override
             protected void controlUpdate(float lastTimePerFrame){
@@ -42,6 +40,6 @@ public class ModelModifier_Column_Nexus extends ModelModifier{
                 
             }
         });
-        modelObject.attachChild(minion);
+        modelObject.attachChild(statue);
     }
 }
