@@ -159,6 +159,7 @@ public class Map_Destroforest extends Map{
             enemy.setComponent(new TeamComponent(0));
             EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
             camp.setComponent(new CampTransformComponent(positionEnemy, directionEnemy));
+            camp.setComponent(new CampMaximumAggroDistanceComponent(15));
             camp.setComponent(new CampHealthResetComponent());
             enemy.setComponent(new CampComponent(camp.getId()));
         }

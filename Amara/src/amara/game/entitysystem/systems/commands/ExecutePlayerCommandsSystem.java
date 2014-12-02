@@ -53,7 +53,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     MoveCommand moveCommand = (MoveCommand) command;
                     int targetPositionEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetPositionEntity, new PositionComponent(moveCommand.getPosition()));
-                    boolean wasSuccessfull = walk(entityWorld, selectedUnit, targetPositionEntity, -1);
+                    boolean wasSuccessfull = tryWalk(entityWorld, selectedUnit, targetPositionEntity, -1);
                     if(!wasSuccessfull){
                         entityWorld.removeEntity(targetPositionEntity);
                     }
@@ -144,14 +144,21 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
             float distance = targetPosition.distance(casterPosition);
             if(distance > range){
-                if(walk(entityWorld, casterEntity, targetEntity, range)){
+                if(tryWalk(entityWorld, casterEntity, targetEntity, range)){
                     if(isAutoAttack){
-                        AutoAggroComponent autoAggroComponent = entityWorld.getComponent(casterEntity, AutoAggroComponent.class);
-                        if(autoAggroComponent != null){
-                            entityWorld.removeComponent(casterEntity, AutoAggroComponent.class);
-                            componentsToAdd.add(autoAggroComponent);
-                        }
+                        entityWorld.setComponent(casterEntity, new AggroTargetComponent(targetEntity));
+                        entityWorld.setComponent(casterEntity, new IsWalkingToAggroTargetComponent());
+                        EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+                        effectTrigger.setComponent(new TriggerTemporaryComponent());
+                        effectTrigger.setComponent(new TargetReachedTriggerComponent());
+                        effectTrigger.setComponent(new SourceTargetComponent());
+                        EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
+                        effect.setComponent(new RemoveComponentsComponent(IsWalkingToAggroTargetComponent.class));
+                        effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
+                        effectTrigger.setComponent(new TriggerSourceComponent(casterEntity));
+                        effectTrigger.setComponent(new TriggerOnCancelComponent());
                     }
+                    //Cast Spell
                     EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
                     effectTrigger.setComponent(new TriggerTemporaryComponent());
                     effectTrigger.setComponent(new TargetReachedTriggerComponent());
@@ -171,6 +178,9 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 isAllowed = UnitUtil.tryCancelAction(entityWorld, casterEntity);
             }
             if(isAllowed){
+                if(isAutoAttack){
+                    entityWorld.setComponent(casterEntity, new AggroTargetComponent(targetEntity));
+                }
                 for(Object componentToAdd : componentsToAdd){
                     entityWorld.setComponent(casterEntity, componentToAdd);
                 }
@@ -178,7 +188,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
         }
     }
     
-    public static boolean walk(EntityWorld entityWorld, int selectedUnit, int targetEntity, float sufficientDistance){
+    public static boolean tryWalk(EntityWorld entityWorld, int selectedUnit, int targetEntity, float sufficientDistance){
         if(MovementSystem.canMove(entityWorld, selectedUnit)){
             boolean isAllowed = true;
             MovementComponent movementComponent = entityWorld.getComponent(selectedUnit, MovementComponent.class);
@@ -186,22 +196,27 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 isAllowed = entityWorld.hasComponent(movementComponent.getMovementEntity(), MovementIsCancelableComponent.class);
             }
             if(isAllowed){
-                if(UnitUtil.tryCancelAction(entityWorld, selectedUnit)){
-                    EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
-                    movement.setComponent(new MovementTargetComponent(targetEntity));
-                    if(sufficientDistance != -1){
-                        movement.setComponent(new MovementTargetSufficientDistanceComponent(sufficientDistance));
-                    }
-                    movement.setComponent(new WalkMovementComponent());
-                    movement.setComponent(new MovementIsCancelableComponent());
-                    WalkAnimationComponent walkAnimationComponent = entityWorld.getComponent(selectedUnit, WalkAnimationComponent.class);
-                    if(walkAnimationComponent != null){
-                        movement.setComponent(new MovementAnimationComponent(walkAnimationComponent.getAnimationEntity()));
-                    }
-                    entityWorld.setComponent(selectedUnit, new MovementComponent(movement.getId()));
-                    return true;
-                }
+                return walk(entityWorld, selectedUnit, targetEntity, sufficientDistance);
             }
+        }
+        return false;
+    }
+    
+    public static boolean walk(EntityWorld entityWorld, int selectedUnit, int targetEntity, float sufficientDistance){
+        if(UnitUtil.tryCancelAction(entityWorld, selectedUnit)){
+            EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
+            movement.setComponent(new MovementTargetComponent(targetEntity));
+            if(sufficientDistance != -1){
+                movement.setComponent(new MovementTargetSufficientDistanceComponent(sufficientDistance));
+            }
+            movement.setComponent(new WalkMovementComponent());
+            movement.setComponent(new MovementIsCancelableComponent());
+            WalkAnimationComponent walkAnimationComponent = entityWorld.getComponent(selectedUnit, WalkAnimationComponent.class);
+            if(walkAnimationComponent != null){
+                movement.setComponent(new MovementAnimationComponent(walkAnimationComponent.getAnimationEntity()));
+            }
+            entityWorld.setComponent(selectedUnit, new MovementComponent(movement.getId()));
+            return true;
         }
         return false;
     }

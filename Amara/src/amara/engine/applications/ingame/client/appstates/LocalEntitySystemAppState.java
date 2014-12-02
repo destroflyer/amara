@@ -13,6 +13,7 @@ import amara.engine.appstates.*;
 import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.network.backends.*;
 import amara.engine.applications.ingame.client.systems.audio.*;
+import amara.engine.applications.ingame.client.systems.filters.*;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.applications.ingame.client.systems.visualisation.buffs.*;
 import amara.engine.applications.ingame.client.systems.visualisation.effects.crodwcontrol.*;
@@ -70,7 +71,8 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         networkClient.addMessageBackend(new EntitySynchronizeBackend(mainApplication, entityWorld));
         networkClient.addMessageBackend(new GameStartedBackend(mainApplication));
         networkClient.addMessageBackend(new GameOverBackend(mainApplication));
-        MapHeightmap mapHeightmap = getAppState(MapAppState.class).getMapHeightmap();
+        MapAppState mapAppState = getAppState(MapAppState.class);
+        MapHeightmap mapHeightmap = mapAppState.getMapHeightmap();
         addEntitySystem(new AudioSystem(getAppState(AudioAppState.class)));
         PositionSystem positionSystem = new PositionSystem(entitySceneMap, mapHeightmap);
         addEntitySystem(positionSystem);
@@ -97,6 +99,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new BuffVisualisationSystem_Wither(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Zhonyas(entitySceneMap));
         addEntitySystem(new TitleSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
+        addEntitySystem(new WaterSpeedSystem(mapAppState));
     }
 
     public int getEntity(Spatial spatial){

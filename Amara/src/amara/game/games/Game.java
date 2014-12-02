@@ -16,6 +16,7 @@ public class Game{
         this.map = map;
         this.players = players;
     }
+    public static int ENTITY = 0;
     private Map map;
     private GamePlayer[] players;
     private int port;
