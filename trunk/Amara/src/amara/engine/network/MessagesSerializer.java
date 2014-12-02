@@ -34,6 +34,7 @@ import amara.game.entitysystem.components.effects.physics.*;
 import amara.game.entitysystem.components.effects.spawns.*;
 import amara.game.entitysystem.components.effects.spells.*;
 import amara.game.entitysystem.components.effects.visuals.*;
+import amara.game.entitysystem.components.game.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.items.*;
@@ -255,6 +256,8 @@ public class MessagesSerializer{
                         //effects/visuals
                         PlayAnimationComponent.class,
                         StopAnimationComponent.class,
+                        //game
+                        GameSpeedComponent.class,
                         //general
                         DescriptionComponent.class,
                         NameComponent.class,
@@ -363,6 +366,7 @@ public class MessagesSerializer{
                         IsCastingComponent.class,
                         IsTargetableComponent.class,
                         IsVulnerableComponent.class,
+                        IsWalkingToAggroTargetComponent.class,
                         LifetimeComponent.class,
                         MovementComponent.class,
                         ResetCampComponent.class,

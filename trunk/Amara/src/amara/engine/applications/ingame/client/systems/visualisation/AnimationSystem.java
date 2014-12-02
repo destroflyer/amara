@@ -8,9 +8,11 @@ import com.jme3.scene.Node;
 import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.ComponentMapObserver;
+import amara.game.entitysystem.components.game.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
+import amara.game.games.Game;
 
 /**
  *
@@ -25,7 +27,7 @@ public class AnimationSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AnimationComponent.class, ModelComponent.class);
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AnimationComponent.class, ModelComponent.class, GameSpeedComponent.class);
         for(int entity : observer.getNew().getEntitiesWithAll(AnimationComponent.class))
         {
             updateAnimation(entityWorld, entity);
@@ -49,6 +51,12 @@ public class AnimationSystem implements EntitySystem{
         {
             updateAnimation(entityWorld, entity);
         }
+        GameSpeedComponent gameSpeedComponent = observer.getChanged().getComponent(Game.ENTITY, GameSpeedComponent.class);
+        if(gameSpeedComponent != null){
+            for(int entity : entityWorld.getEntitiesWithAll(AnimationComponent.class)){
+                updateAnimation(entityWorld, entity);
+            }
+        }
         observer.reset();
     }
     
@@ -59,7 +67,8 @@ public class AnimationSystem implements EntitySystem{
             if(animationComponent != null){
                 EntityWrapper animation = entityWorld.getWrapped(animationComponent.getAnimationEntity());
                 String animationName = animation.getComponent(NameComponent.class).getName();
-                float loopDuration = animation.getComponent(LoopDurationComponent.class).getDuration();
+                float gameSpeed = entityWorld.getComponent(Game.ENTITY, GameSpeedComponent.class).getSpeed();
+                float loopDuration = (animation.getComponent(LoopDurationComponent.class).getDuration() / gameSpeed);
                 boolean isLoop = (!animation.hasComponent(FreezeAfterPlayingComponent.class));
                 modelObject.playAnimation(animationName, loopDuration, isLoop);
             }

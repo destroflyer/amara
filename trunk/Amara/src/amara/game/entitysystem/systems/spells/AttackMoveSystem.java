@@ -29,7 +29,7 @@ public class AttackMoveSystem implements EntitySystem{
     private void walk(EntityWorld entityWorld, int entity){
         AttackMoveComponent attackMoveComponent = entityWorld.getComponent(entity, AttackMoveComponent.class);
         if(attackMoveComponent != null){
-            ExecutePlayerCommandsSystem.walk(entityWorld, entity, attackMoveComponent.getTargetEntity(), -1);
+            ExecutePlayerCommandsSystem.tryWalk(entityWorld, entity, attackMoveComponent.getTargetEntity(), -1);
         }
     }
 }

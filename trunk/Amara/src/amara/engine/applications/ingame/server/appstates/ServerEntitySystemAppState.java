@@ -15,6 +15,7 @@ import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.appstates.*;
 import amara.engine.network.NetworkServer;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.game.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.players.*;
@@ -72,6 +73,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         networkServer.addMessageBackend(new InitializeClientBackend(mainApplication.getGame(), getAppState(GameRunningAppState.class)));
         
         Game game = mainApplication.getGame();
+        EntityWrapper gameEntity = entityWorld.getWrapped(entityWorld.createEntity());
+        gameEntity.setComponent(new GameSpeedComponent(1));
         Map map = game.getMap();
         EntityWrapper mapEntity = entityWorld.getWrapped(entityWorld.createEntity());
         map.setEntity(mapEntity.getId());
@@ -241,7 +244,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
     @Override
     public void update(float lastTimePerFrame){
         if(mainApplication.getGame().isStarted()){
-            super.update(lastTimePerFrame);
+            float gameSpeed = entityWorld.getComponent(Game.ENTITY, GameSpeedComponent.class).getSpeed();
+            super.update(lastTimePerFrame * gameSpeed);
         }
     }
 }

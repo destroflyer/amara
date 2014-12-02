@@ -22,8 +22,10 @@ public class PerformAutoAttacksSystem implements EntitySystem{
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(AggroTargetComponent.class))){
             int targetEntity = entityWrapper.getComponent(AggroTargetComponent.class).getTargetEntity();
             if(isAttackable(entityWorld, entityWrapper.getId(), targetEntity)){
-                int autoAttackEntity = entityWrapper.getComponent(AutoAttackComponent.class).getAutoAttackEntity();
-                ExecutePlayerCommandsSystem.castSpell(entityWorld, entityWrapper.getId(), new CastSpellComponent(autoAttackEntity, targetEntity));
+                if(!entityWrapper.hasComponent(IsWalkingToAggroTargetComponent.class)){
+                    int autoAttackEntity = entityWrapper.getComponent(AutoAttackComponent.class).getAutoAttackEntity();
+                    ExecutePlayerCommandsSystem.castSpell(entityWorld, entityWrapper.getId(), new CastSpellComponent(autoAttackEntity, targetEntity));
+                }
             }
             else{
                 entityWrapper.removeComponent(AggroTargetComponent.class);

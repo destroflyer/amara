@@ -19,6 +19,6 @@ public class ServerChatAppState extends ServerBaseAppState{
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
         NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
-        networkServer.addMessageBackend(new ReceiveChatMessagesBackend(mainApplication.getGame()));
+        networkServer.addMessageBackend(new ReceiveChatMessagesBackend(mainApplication.getGame(), getAppState(ServerEntitySystemAppState.class).getEntityWorld()));
     }
 }

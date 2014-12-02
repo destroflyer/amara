@@ -23,6 +23,7 @@ import com.jme3.water.WaterFilter;
  */
 public class WaterAppState extends BaseDisplayAppState{
     
+    public static final float DEFAULT_SPEED = 0.5f;
     private SimpleWaterProcessor waterProcessor;
 
     @Override
@@ -66,7 +67,7 @@ public class WaterAppState extends BaseDisplayAppState{
         waterFilter.setFoamHardness(0.8f);
         waterFilter.setRefractionStrength(0.2f);
         waterFilter.setShininess(0.5f);
-        waterFilter.setSpeed(0.5f);
+        waterFilter.setSpeed(DEFAULT_SPEED);
         waterFilter.setUseRipples(false);
         waterFilter.setWaterTransparency(0.2f);
         waterFilter.setWaterColor(new ColorRGBA(0, 0.2f, 0.8f, 1));
