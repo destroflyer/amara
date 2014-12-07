@@ -17,6 +17,10 @@ import de.lessvoid.nifty.elements.Element;
  */
 public class ScreenController_HUD extends GameScreenController{
 
+    public ScreenController_HUD(){
+        super("start");
+    }
+    
     @Override
     public void onStartup(){
         super.onStartup();

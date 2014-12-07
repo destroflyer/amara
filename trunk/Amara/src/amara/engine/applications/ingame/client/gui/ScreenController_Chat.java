@@ -17,6 +17,10 @@ import de.lessvoid.nifty.screen.KeyInputHandler;
  */
 public class ScreenController_Chat extends GameScreenController{
 
+    public ScreenController_Chat(){
+        super("start");
+    }
+
     @Override
     public void onStartup(){
         super.onStartup();

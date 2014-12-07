@@ -13,6 +13,7 @@ import amara.engine.appstates.*;
 import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.network.backends.*;
 import amara.engine.applications.ingame.client.systems.audio.*;
+import amara.engine.applications.ingame.client.systems.cinematics.*;
 import amara.engine.applications.ingame.client.systems.filters.*;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.applications.ingame.client.systems.visualisation.buffs.*;
@@ -100,6 +101,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new BuffVisualisationSystem_Zhonyas(entitySceneMap));
         addEntitySystem(new TitleSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
         addEntitySystem(new WaterSpeedSystem(mapAppState));
+        addEntitySystem(new CinematicsSystem(getAppState(CinematicAppState.class)));
     }
 
     public int getEntity(Spatial spatial){

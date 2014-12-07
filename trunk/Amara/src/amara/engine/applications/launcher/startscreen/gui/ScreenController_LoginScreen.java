@@ -16,6 +16,10 @@ import de.lessvoid.nifty.screen.KeyInputHandler;
  * @author Carl
  */
 public class ScreenController_LoginScreen extends GameScreenController{
+
+    public ScreenController_LoginScreen(){
+        super("start");
+    }
     
     private KeyInputHandler loginKeyInputHandler = new KeyInputHandler(){
         

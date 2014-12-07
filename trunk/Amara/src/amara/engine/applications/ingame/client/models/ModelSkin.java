@@ -5,9 +5,10 @@
 package amara.engine.applications.ingame.client.models;
 
 
-import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedList;
+import java.net.URL;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
@@ -37,6 +38,7 @@ public class ModelSkin{
         loadFile();
     }
     private static final String[] FILE_EXTENSIONS = new String[]{"j3o", "mesh.xml", "blend"};
+    private static final HashMap<String, Material> MATERIALS = new HashMap<String, Material>();
     private URL fileResourceURL;
     private Element rootElement;
     private Element modelElement;
@@ -116,40 +118,50 @@ public class ModelSkin{
             List<Element> materialElements = materialElement.getChildren();
             for(int i=0;i<materialElements.size();i++){
                 Element currentMaterialElement = materialElements.get(i);
-                String materialDefintion = currentMaterialElement.getText();
-                Material material = null;
-                if(currentMaterialElement.getName().equals("color")){
-                    float[] colorComponents = Util.parseToFloatArray(materialDefintion.split(","));
-                    ColorRGBA colorRGBA = new ColorRGBA(colorComponents[0], colorComponents[1], colorComponents[2], colorComponents[3]);
-                    material = MaterialFactory.generateLightingMaterial(colorRGBA);
-                }
-                else if(currentMaterialElement.getName().equals("texture")){
-                    String textureFilePath = getResourcesFilePath() + currentMaterialElement.getText();
-                    material = MaterialFactory.generateLightingMaterial(textureFilePath);
-                    loadTexture(material, "NormalMap", currentMaterialElement.getAttributeValue("normalMap"));
-                    loadTexture(material, "AlphaMap", currentMaterialElement.getAttributeValue("alphaMap"));
-                    loadTexture(material, "SpecularMap", currentMaterialElement.getAttributeValue("specularMap"));
-                    loadTexture(material, "GlowMap", currentMaterialElement.getAttributeValue("glowMap"));
-                }
-                if(material != null){
-                    String filter = currentMaterialElement.getAttributeValue("filter", "bilinear");
-                    if(filter.equals("nearest")){
-                        MaterialFactory.setFilter_Nearest(material);
+                try{
+                    int childIndex = currentMaterialElement.getAttribute("index").getIntValue();
+                    String materialKey = getMaterialKey(childIndex);
+                    Material material = MATERIALS.get(materialKey);
+                    if(material == null){
+                        String materialDefintion = currentMaterialElement.getText();
+                        if(currentMaterialElement.getName().equals("color")){
+                            float[] colorComponents = Util.parseToFloatArray(materialDefintion.split(","));
+                            ColorRGBA colorRGBA = new ColorRGBA(colorComponents[0], colorComponents[1], colorComponents[2], colorComponents[3]);
+                            material = MaterialFactory.generateLightingMaterial(colorRGBA);
+                        }
+                        else if(currentMaterialElement.getName().equals("texture")){
+                            String textureFilePath = getResourcesFilePath() + currentMaterialElement.getText();
+                            material = MaterialFactory.generateLightingMaterial(textureFilePath);
+                            loadTexture(material, "NormalMap", currentMaterialElement.getAttributeValue("normalMap"));
+                            loadTexture(material, "AlphaMap", currentMaterialElement.getAttributeValue("alphaMap"));
+                            loadTexture(material, "SpecularMap", currentMaterialElement.getAttributeValue("specularMap"));
+                            loadTexture(material, "GlowMap", currentMaterialElement.getAttributeValue("glowMap"));
+                        }
+                        if(material != null){
+                            String filter = currentMaterialElement.getAttributeValue("filter", "bilinear");
+                            if(filter.equals("nearest")){
+                                MaterialFactory.setFilter_Nearest(material);
+                            }
+                            MATERIALS.put(materialKey, material);
+                        }
                     }
-                    try{
-                        int childIndex = currentMaterialElement.getAttribute("index").getIntValue();
+                    if(material != null){
                         Geometry child = (Geometry) JMonkeyUtil.getChild(spatial, childIndex);
                         if(getAttributeValue(currentMaterialElement, "alpha", false)){
                             child.setQueueBucket(RenderQueue.Bucket.Transparent);
                             material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
                         }
                         child.setMaterial(material);
-                    }catch(Exception ex){
-                        System.out.println("Error while reading material for object '" + name + "'");
                     }
+                }catch(Exception ex){
+                    System.out.println("Error while reading material for object '" + name + "'");
                 }
             }
         }
+    }
+    
+    private String getMaterialKey(int materialIndex){
+        return (fileResourceURL.toExternalForm() + "_" + materialIndex);
     }
     
     private void loadTexture(Material material, String materialParameter, String textureName){

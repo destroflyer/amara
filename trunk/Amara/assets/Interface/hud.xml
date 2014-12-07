@@ -207,6 +207,8 @@
             </panel>
         </layer>
     </screen>
+    <screen id="cinematic" controller="amara.engine.applications.ingame.client.gui.ScreenController_Cinematic">
+    </screen>
     <screen id="gameOver" controller="amara.engine.applications.ingame.client.gui.ScreenController_GameOver">
         <layer childLayout="center" backgroundColor="#0008">
             <control name="button" x="35%" y="52%" width="40%" height="15%" label="Game Over">
