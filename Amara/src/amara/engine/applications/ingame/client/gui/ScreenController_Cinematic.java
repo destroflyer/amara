@@ -10,13 +10,9 @@ import amara.engine.gui.GameScreenController;
  *
  * @author Carl
  */
-public class ScreenController_GameOver extends GameScreenController{
+public class ScreenController_Cinematic extends GameScreenController{
 
-    public ScreenController_GameOver(){
-        super("gameOver");
-    }
-    
-    public void exit(){
-        mainApplication.stop();
+    public ScreenController_Cinematic(){
+        super("cinematic");
     }
 }

@@ -20,6 +20,10 @@ import amara.game.maps.*;
  * @author Carl
  */
 public class ScreenController_MapEditor extends GameScreenController{
+
+    public ScreenController_MapEditor(){
+        super("start");
+    }
     
     public void openMap(){
         File file = Util.chooseFile(true, "./assets/Maps/", MapFileHandler.FILE_FILTER);

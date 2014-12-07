@@ -257,6 +257,7 @@ public class MessagesSerializer{
                         PlayAnimationComponent.class,
                         StopAnimationComponent.class,
                         //game
+                        CinematicComponent.class,
                         GameSpeedComponent.class,
                         //general
                         DescriptionComponent.class,

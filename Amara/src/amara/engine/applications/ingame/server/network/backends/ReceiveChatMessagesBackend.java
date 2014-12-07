@@ -10,6 +10,7 @@ import amara.engine.network.messages.*;
 import amara.game.entitysystem.EntityWorld;
 import amara.game.entitysystem.components.game.*;
 import amara.game.games.*;
+import amara.game.maps.*;
 
 /**
  *
@@ -40,6 +41,9 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                         entityWorld.setComponent(Game.ENTITY, new GameSpeedComponent(speed));
                     }catch(NumberFormatException ex){
                     }
+                }
+                else if(message.getText().startsWith("/cinematic")){
+                    entityWorld.setComponent(Game.ENTITY, new CinematicComponent(TestMap_TestCinematic.class.getName()));
                 }
             }
         }

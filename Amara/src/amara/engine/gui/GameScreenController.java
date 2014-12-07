@@ -5,6 +5,8 @@
 package amara.engine.gui;
 
 import java.util.List;
+import amara.engine.applications.DisplayApplication;
+import amara.engine.appstates.NiftyAppState;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.ElementBuilder;
 import de.lessvoid.nifty.builder.HoverEffectBuilder;
@@ -16,8 +18,6 @@ import de.lessvoid.nifty.elements.render.*;
 import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import amara.engine.applications.DisplayApplication;
-import amara.engine.appstates.NiftyAppState;
 
 /**
  *
@@ -25,9 +25,10 @@ import amara.engine.appstates.NiftyAppState;
  */
 public class GameScreenController implements ScreenController{
 
-    public GameScreenController(){
-        
+    public GameScreenController(String screenID){
+        this.screenID = screenID;
     }
+    private String screenID;
     protected DisplayApplication mainApplication;
     protected Nifty nifty;
     private boolean isInitialized = false;
@@ -59,8 +60,8 @@ public class GameScreenController implements ScreenController{
         this.nifty = nifty;
     }
     
-    public String getCurrentScreenID(){
-        return nifty.getCurrentScreen().getScreenId();
+    public boolean isVisible(){
+        return nifty.getCurrentScreen().getScreenId().equals(screenID);
     }
     
     //Helper methods
@@ -78,19 +79,19 @@ public class GameScreenController implements ScreenController{
     }
     
     protected Button getButton(String id){
-        return nifty.getCurrentScreen().findNiftyControl(id, Button.class);
+        return nifty.getScreen(screenID).findNiftyControl(id, Button.class);
     }
     
     protected TextField getTextField(String id){
-        return nifty.getCurrentScreen().findNiftyControl(id, TextField.class);
+        return nifty.getScreen(screenID).findNiftyControl(id, TextField.class);
     }
     
     protected RadioButton getRadioButton(String id){
-        return nifty.getCurrentScreen().findNiftyControl(id, RadioButton.class);
+        return nifty.getScreen(screenID).findNiftyControl(id, RadioButton.class);
     }
     
     protected Element getElementByID(String id){
-        return nifty.getCurrentScreen().findElementByName(id);
+        return nifty.getScreen(screenID).findElementByName(id);
     }
     
     public void goToScreen(String screenID){

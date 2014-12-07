@@ -54,7 +54,9 @@ public class PingAppState extends BaseDisplayAppState{
             this.pingTimestamp = pingTimestamp;
             ping = (int) (System.currentTimeMillis() - pingTimestamp);
             ScreenController_HUD screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
-            screenController_HUD.setPing(ping);
+            if(screenController_HUD.isVisible()){
+                screenController_HUD.setPing(ping);
+            }
         }
     }
 

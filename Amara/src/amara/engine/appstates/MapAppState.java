@@ -63,7 +63,7 @@ public class MapAppState extends BaseDisplayAppState{
         updateVisuals();
     }
     
-    private void initializeCamera(){
+    public void initializeCamera(){
         Camera camera = mainApplication.getCamera();
         camera.setLocation(map.getCamera().getInitialPosition());
         camera.lookAtDirection(map.getCamera().getInitialDirection(), Vector3f.UNIT_Y);
