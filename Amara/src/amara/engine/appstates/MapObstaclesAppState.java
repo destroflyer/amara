@@ -57,13 +57,21 @@ public class MapObstaclesAppState extends BaseDisplayAppState implements ActionL
     @Override
     public void onAction(String name, boolean isPressed, float lastTimePerFrame){
         if(name.equals("toggle_hitboxes") && isPressed){
-            displayObstacles = (!displayObstacles);
-            obstaclesNode.setCullHint(displayObstacles?Spatial.CullHint.Inherit: Spatial.CullHint.Always);
+            setDisplayObstacles(!displayObstacles);
         }
     }
 
     public Node getObstaclesNode(){
         return obstaclesNode;
+    }
+
+    public void setDisplayObstacles(boolean displayObstacles){
+        this.displayObstacles = displayObstacles;
+        obstaclesNode.setCullHint(displayObstacles?Spatial.CullHint.Inherit: Spatial.CullHint.Always);
+    }
+
+    public boolean areObstaclesDisplayed(){
+        return displayObstacles;
     }
     
     public static Geometry generateGeometry(Shape shape){

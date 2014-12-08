@@ -6,6 +6,8 @@ package amara.engine.appstates;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.math.Quaternion;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.CameraNode;
 import com.jme3.scene.control.CameraControl;
 import amara.engine.cinematics.*;
@@ -23,6 +25,9 @@ public class CinematicAppState extends BaseDisplayAppState{
     }
     private Cinematic currentCinematic;
     private CameraNode cameraNode;
+    private Vector3f tmpCameraLocation = new Vector3f();
+    private Quaternion tmpCameraRotation = new Quaternion();
+    private boolean tmpAreObstaclesDisplayed;
 
     @Override
     public void initialize(AppStateManager stateManager, Application application){
@@ -67,10 +72,16 @@ public class CinematicAppState extends BaseDisplayAppState{
         getAppState(IngameCameraAppState.class).setEnabled(!isEnabled);
         getAppState(SendPlayerCommandsAppState.class).setEnabled(!isEnabled);
         if(isEnabled){
+            tmpCameraLocation.set(mainApplication.getCamera().getLocation());
+            tmpCameraRotation.set(mainApplication.getCamera().getRotation());
+            tmpAreObstaclesDisplayed = getAppState(MapObstaclesAppState.class).areObstaclesDisplayed();
+            getAppState(MapObstaclesAppState.class).setDisplayObstacles(false);
             getAppState(NiftyAppState.class).goToScreen(ScreenController_HUD.class, "cinematic");
         }
         else{
-            getAppState(MapAppState.class).initializeCamera();
+            mainApplication.getCamera().setLocation(tmpCameraLocation);
+            mainApplication.getCamera().setRotation(tmpCameraRotation);
+            getAppState(MapObstaclesAppState.class).setDisplayObstacles(tmpAreObstaclesDisplayed);
             getAppState(NiftyAppState.class).goToScreen(ScreenController_Cinematic.class, "start");
         }
     }

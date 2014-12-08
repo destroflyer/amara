@@ -35,8 +35,8 @@ public class FogOfWarFilter extends Filter{
     }
 
     @Override
-    protected void preFrame(float tpf){
-        super.preFrame(tpf);
+    protected void preFrame(float lastTimePerFrame){
+        super.preFrame(lastTimePerFrame);
         material.setMatrix4("ViewProjectionMatrixInverse", camera.getViewProjectionMatrix().invert());
     }
 

@@ -4,8 +4,6 @@
  */
 package amara.engine.applications.ingame.client.systems.filters;
 
-import amara.game.entitysystem.systems.physics.shapes.Vector2D;
-import amara.engine.materials.Raster;
 import com.jme3.asset.AssetManager;
 import com.jme3.renderer.RenderManager;
 import com.jme3.math.Vector2f;
@@ -14,11 +12,13 @@ import com.jme3.texture.Texture2D;
 import amara.engine.appstates.PostFilterAppState;
 import amara.engine.filters.FogOfWarFilter;
 import amara.engine.materials.PaintableImage;
+import amara.engine.materials.Raster;
 import amara.engine.settings.Settings;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
+import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 
 /**
@@ -31,6 +31,8 @@ public class PlayerVisionDisplaySystem implements EntitySystem{
         this.playerEntity = playerEntity;
         this.postFilterAppState = postFilterAppState;
         this.polyMapManager = polyMapManager;
+        fogImage = new PaintableImage((int) (polyMapManager.getWidth() * resolutionFactor), (int) (polyMapManager.getHeight() * resolutionFactor));
+        fogRaster = new Raster(fogImage, resolutionFactor, 80, 255);
         fogOfWarFilter = new FogOfWarFilter(){
 
             @Override
@@ -41,9 +43,13 @@ public class PlayerVisionDisplaySystem implements EntitySystem{
         };
         postFilterAppState.addFilter(fogOfWarFilter);
     }
+    private final float resolutionFactor = 1;
     private int playerEntity;
     private PostFilterAppState postFilterAppState;
     private PolyMapManager polyMapManager;
+    private PaintableImage fogImage;
+    private Texture2D fogTexture = new Texture2D();
+    private Raster fogRaster;
     private FogOfWarFilter fogOfWarFilter;
     private float timeSinceLastUpdate;
     private boolean isUpdateNeeded;
@@ -77,19 +83,13 @@ public class PlayerVisionDisplaySystem implements EntitySystem{
         Vector2D position = new Vector2D(playerUnitPosition.getX(), playerUnitPosition.getY());
         double sightRange = 30;
         Polygon sightPolygon = polyMapManager.sightPolygon(position, sightRange);
-        float resolutionFactor = 1;
-        PaintableImage paintableImage = new PaintableImage((int) (polyMapManager.getWidth() * resolutionFactor), (int) (polyMapManager.getHeight() * resolutionFactor));
-        Raster r = new Raster(paintableImage, resolutionFactor, 80, 255);
-        
-        for(int x=0;x<paintableImage.getWidth();x++){
-            for(int y=0;y<paintableImage.getHeight();y++){
-                paintableImage.setPixel_Red(x, y, 80);
+        for(int x=0;x<fogImage.getWidth();x++){
+            for(int y=0;y<fogImage.getHeight();y++){
+                fogImage.setPixel_Red(x, y, 80);
             }
         }
-        sightPolygon.rasterize(r, position, sightRange);
-        
-        Texture2D texture2D = new Texture2D();
-        texture2D.setImage(paintableImage.getImage());
-        fogOfWarFilter.setFog(texture2D);
+        sightPolygon.rasterize(fogRaster, position, sightRange);
+        fogTexture.setImage(fogImage.getImage());
+        fogOfWarFilter.setFog(fogTexture);
     }
 }
