@@ -150,6 +150,10 @@ public class Polygon
     {
         SetPolygonUtil.rasterize(setPoly, raster, source, radius * radius);
     }
+    public void rasterize(RasterMap raster)
+    {
+        SetPolygonUtil.rasterize(setPoly, raster);
+    }
     
     public BoundRectangle boundRectangle()
     {

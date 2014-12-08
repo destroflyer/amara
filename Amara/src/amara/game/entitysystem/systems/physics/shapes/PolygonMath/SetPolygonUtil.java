@@ -637,6 +637,62 @@ class SetPolygonUtil
         }
     }
     
+    public static void rasterize(SetPolygon poly, RasterMap raster)
+    {
+        HashMap<Integer, ArrayList<Float>> map = new HashMap<Integer, ArrayList<Float>>();
+        
+        ArrayList<ArrayList<Vector2D>> outlines = outlines(poly);
+        for (int h = 0; h < outlines.size(); h++)
+        {
+            for (int i = 0; i < outlines.get(h).size(); i++)
+            {
+                int j = (i + 1) % outlines.get(h).size();
+                Vector2D a = outlines.get(h).get(i).scale(raster.getScale(), raster.getScale()).add(0, -0.5);
+                Vector2D b = outlines.get(h).get(j).scale(raster.getScale(), raster.getScale()).add(0, -0.5);
+                if(b.getY() < a.getY())
+                {
+                    Vector2D tmp = a;
+                    a = b;
+                    b = tmp;
+                }
+                for (int y = (int)b.getY(); y > (int)a.getY(); y--)
+                {
+                    float x = (float)(Vector2DUtil.lineAxisIntersectionX(a, b, y));
+                    x = Math.max(0, x);
+                    x = Math.min(x, raster.getWidth() - 1);
+                    
+                    ArrayList<Float> line = createGet(map, y);
+                    line.add(x);
+                }
+            }
+        }
+        for (Integer y : map.keySet())
+        {
+            ArrayList<Float> limits = map.get(y);
+            Collections.sort(limits);
+            for (int i = 0; i < limits.size(); i += 2)
+            {
+                int startX = (int)(float)limits.get(i);
+                int endX = (int)(float)limits.get(i + 1);
+                for (int x = startX + 1; x < endX; x++)
+                {
+                    raster.setValue(x, y, 1);
+                }
+                float weightA = (float)Math.floor(limits.get(i) + 1) - limits.get(i);
+                float weightB = limits.get(i + 1) - (float)Math.floor(limits.get(i + 1));
+                if(startX == endX)
+                {
+                    raster.setValue(startX, y, weightA + weightB - 1);
+                }
+                else
+                {
+                    raster.setValue(startX, y, weightA);
+                    raster.setValue(endX, y, weightB);
+                }
+            }
+        }
+    }
+    
     public static void write(ByteBuffer buffer, SetPolygon poly)
     {
         assert poly.isValid();
