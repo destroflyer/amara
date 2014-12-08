@@ -30,6 +30,7 @@ public class ModelAppState extends BaseDisplayAppState implements ActionListener
         "/Models/daydream/skin_fire.xml",
         "/Models/daydream/skin_nightmare.xml",
         "/Models/daydream/skin_envy.xml",
+        "/Models/daydream/skin_inuyasha.xml",
         "/Models/oz/skin_default.xml",
         "/Models/oz/skin_oz_junior.xml",
         "/Models/minion/skin_default.xml",
