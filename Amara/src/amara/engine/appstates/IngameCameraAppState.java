@@ -12,6 +12,7 @@ import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.input.controls.MouseAxisTrigger;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
@@ -37,6 +38,8 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
     private int currentZoomLevel;
     private int maximumZoomLevel = -1;
     private float zoomInterval = 2;
+    private Vector3f tmpCameraLocation = new Vector3f();
+    private Quaternion tmpCameraRotation = new Quaternion();
     
     @Override
     public void initialize(AppStateManager stateManager, Application application){
@@ -146,6 +149,16 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
         mainApplication.getCamera().setLocation(new Vector3f(mapLocation.getX(), mapHeight, mapLocation.getY()));
         Vector3f distance = mainApplication.getCamera().getDirection().mult(-40);
         mainApplication.getCamera().setLocation(mainApplication.getCamera().getLocation().add(distance));
+    }
+    
+    public void saveState(){
+        tmpCameraLocation.set(mainApplication.getCamera().getLocation());
+        tmpCameraRotation.set(mainApplication.getCamera().getRotation());
+    }
+    
+    public void restoreState(){
+        mainApplication.getCamera().setLocation(tmpCameraLocation);
+        mainApplication.getCamera().setRotation(tmpCameraRotation);
     }
 
     public void setMovementEnabled(boolean isMovementEnabled){

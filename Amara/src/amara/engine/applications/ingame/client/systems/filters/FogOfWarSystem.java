@@ -25,9 +25,9 @@ import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
  *
  * @author Carl
  */
-public class PlayerVisionDisplaySystem implements EntitySystem{
+public class FogOfWarSystem implements EntitySystem{
 
-    public PlayerVisionDisplaySystem(int playerEntity, PostFilterAppState postFilterAppState, final PolyMapManager polyMapManager){
+    public FogOfWarSystem(int playerEntity, PostFilterAppState postFilterAppState, final PolyMapManager polyMapManager){
         this.playerEntity = playerEntity;
         this.postFilterAppState = postFilterAppState;
         this.polyMapManager = polyMapManager;
@@ -42,6 +42,7 @@ public class PlayerVisionDisplaySystem implements EntitySystem{
             }
         };
         postFilterAppState.addFilter(fogOfWarFilter);
+        tmpPlayerSightFogImageData = new byte[fogImage.getData().length];
     }
     private final float resolutionFactor = 1;
     private int playerEntity;
@@ -53,42 +54,79 @@ public class PlayerVisionDisplaySystem implements EntitySystem{
     private FogOfWarFilter fogOfWarFilter;
     private float timeSinceLastUpdate;
     private boolean isUpdateNeeded;
+    private boolean displayMapSight;
+    private byte[] tmpPlayerSightFogImageData;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        float updateInterval = Settings.getFloat("fog_of_war_update_interval");
-        if(updateInterval != -1){
-            timeSinceLastUpdate += deltaSeconds;
-            if(timeSinceLastUpdate > Settings.getFloat("fog_of_war_update_interval")){
-                SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
-                if(selectedUnitComponent != null){
-                    int selectedEntity = selectedUnitComponent.getEntity();
-                    ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, PositionComponent.class);
-                    if((observer.getNew().getComponent(selectedEntity, PositionComponent.class) != null)
-                    || (observer.getChanged().getComponent(selectedEntity, PositionComponent.class) != null)){
-                        isUpdateNeeded = true;
+        if(!displayMapSight){
+            float updateInterval = Settings.getFloat("fog_of_war_update_interval");
+            if(updateInterval != -1){
+                timeSinceLastUpdate += deltaSeconds;
+                if(timeSinceLastUpdate > Settings.getFloat("fog_of_war_update_interval")){
+                    SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
+                    if(selectedUnitComponent != null){
+                        int selectedEntity = selectedUnitComponent.getEntity();
+                        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, PositionComponent.class);
+                        if((observer.getNew().getComponent(selectedEntity, PositionComponent.class) != null)
+                        || (observer.getChanged().getComponent(selectedEntity, PositionComponent.class) != null)){
+                            isUpdateNeeded = true;
+                        }
+                        observer.reset();
+                        if(isUpdateNeeded){
+                            updateFogTexture_PlayerSight(entityWorld.getComponent(selectedEntity, PositionComponent.class).getPosition());
+                            isUpdateNeeded = false;
+                        }
                     }
-                    observer.reset();
-                    if(isUpdateNeeded){
-                        updateFog(entityWorld.getComponent(selectedEntity, PositionComponent.class).getPosition());
-                        isUpdateNeeded = false;
-                    }
+                    timeSinceLastUpdate = 0;
                 }
-                timeSinceLastUpdate = 0;
             }
         }
     }
     
-    private void updateFog(Vector2f playerUnitPosition){
+    public void setDisplayMapSight(boolean displayMapSight){
+        if(displayMapSight != this.displayMapSight){
+            this.displayMapSight = displayMapSight;
+            if(displayMapSight){
+                System.arraycopy(fogImage.getData(), 0, tmpPlayerSightFogImageData, 0, fogImage.getData().length);
+                updateFogTexture_MapSight();
+            }
+            else{
+                fogImage.setData(tmpPlayerSightFogImageData);
+                onFogImageUpdated();
+            }
+        }
+    }
+
+    public boolean isDisplayMapSight(){
+        return displayMapSight;
+    }
+    
+    private void updateFogTexture_MapSight(){
+        resetFogTexture();
+        Polygon sightPolygon = polyMapManager.getNavigationPolygon(0);
+        sightPolygon.rasterize(fogRaster);
+        onFogImageUpdated();
+    }
+    
+    private void updateFogTexture_PlayerSight(Vector2f playerUnitPosition){
+        resetFogTexture();
         Vector2D position = new Vector2D(playerUnitPosition.getX(), playerUnitPosition.getY());
         double sightRange = 30;
         Polygon sightPolygon = polyMapManager.sightPolygon(position, sightRange);
+        sightPolygon.rasterize(fogRaster, position, sightRange);
+        onFogImageUpdated();
+    }
+    
+    private void resetFogTexture(){
         for(int x=0;x<fogImage.getWidth();x++){
             for(int y=0;y<fogImage.getHeight();y++){
                 fogImage.setPixel_Red(x, y, 80);
             }
         }
-        sightPolygon.rasterize(fogRaster, position, sightRange);
+    }
+    
+    private void onFogImageUpdated(){
         fogTexture.setImage(fogImage.getImage());
         fogOfWarFilter.setFog(fogTexture);
     }
