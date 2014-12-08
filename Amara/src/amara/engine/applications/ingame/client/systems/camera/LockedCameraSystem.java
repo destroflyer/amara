@@ -38,16 +38,18 @@ public class LockedCameraSystem implements EntitySystem{
     }
     
     public void setEnabled(boolean isEnabled){
-        this.isEnabled = isEnabled;
-        ingameCameraAppState.setMovementEnabled(!isEnabled);
-        if(isEnabled){
-            ingameCameraAppState.saveState();
-            wasZoomEnabled = ingameCameraAppState.isZoomEnabled();
-            ingameCameraAppState.setZoomEnabled(false);
-        }
-        else{
-            ingameCameraAppState.restoreState();
-            ingameCameraAppState.setZoomEnabled(wasZoomEnabled);
+        if(isEnabled != this.isEnabled){
+            this.isEnabled = isEnabled;
+            ingameCameraAppState.setMovementEnabled(!isEnabled);
+            if(isEnabled){
+                ingameCameraAppState.saveState();
+                wasZoomEnabled = ingameCameraAppState.isZoomEnabled();
+                ingameCameraAppState.setZoomEnabled(false);
+            }
+            else{
+                ingameCameraAppState.restoreState();
+                ingameCameraAppState.setZoomEnabled(wasZoomEnabled);
+            }
         }
     }
 
