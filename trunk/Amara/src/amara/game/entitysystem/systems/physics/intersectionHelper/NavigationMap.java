@@ -28,6 +28,11 @@ public class NavigationMap
         star = new TriangleStar(tris);
 //        aStar = new AbstractTriangleStar(tris);
     }
+
+    public Polygon getPoly()
+    {
+        return poly;
+    }
     
     public ArrayList<Vector2D> findPath(Vector2D start, Vector2D end, double radius)
     {

@@ -32,6 +32,16 @@ public final class PolyMapManager
         this.map = map.union(PolyHelper.rectangle(0, 0, width, height).inverse());
         addNavigationMap(this.map.inverse(), 0);
     }
+    
+    public Polygon getMapPolygon()
+    {
+       return map;
+    }
+    
+    public Polygon getNavigationPolygon(double radius)
+    {
+       return mapFromRadius(radius).getPoly();
+    }
 
     public double getWidth()
     {
