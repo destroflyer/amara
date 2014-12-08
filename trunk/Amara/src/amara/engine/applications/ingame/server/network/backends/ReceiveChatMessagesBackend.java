@@ -37,13 +37,25 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                 }
                 else if(message.getText().startsWith("/speed ")){
                     try{
-                        float speed = Float.parseFloat(message.getText().substring(6));
+                        float speed = Float.parseFloat(message.getText().substring(7));
                         entityWorld.setComponent(Game.ENTITY, new GameSpeedComponent(speed));
                     }catch(NumberFormatException ex){
                     }
                 }
-                else if(message.getText().startsWith("/cinematic")){
-                    entityWorld.setComponent(Game.ENTITY, new CinematicComponent(TestMap_TestCinematic.class.getName()));
+                else if(message.getText().startsWith("/cinematic ")){
+                    try{
+                        int cinematicIndex = Integer.parseInt(message.getText().substring(11));
+                        switch(cinematicIndex){
+                            case 0:
+                                entityWorld.setComponent(Game.ENTITY, new CinematicComponent(TestMap_TestCinematic.class.getName()));
+                                break;
+                            
+                            case 1:
+                                entityWorld.setComponent(Game.ENTITY, new CinematicComponent(Map_Destroforest_CinematicIntro.class.getName()));
+                                break;
+                        }
+                    }catch(NumberFormatException ex){
+                    }
                 }
             }
         }

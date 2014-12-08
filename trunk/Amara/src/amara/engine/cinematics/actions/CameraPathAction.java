@@ -4,9 +4,8 @@
  */
 package amara.engine.cinematics.actions;
 
-import com.jme3.cinematic.MotionPath;
+import com.jme3.cinematic.PlayState;
 import com.jme3.cinematic.events.MotionEvent;
-import com.jme3.math.Vector3f;
 import com.jme3.scene.CameraNode;
 import amara.engine.applications.DisplayApplication;
 import amara.engine.appstates.CinematicAppState;
@@ -18,12 +17,9 @@ import amara.engine.cinematics.CinematicAction;
  */
 public class CameraPathAction extends CinematicAction{
 
-    public CameraPathAction(MotionPath motionPath, float speed){
-        this.motionPath = motionPath;
-        this.speed = speed;
+    public CameraPathAction(MotionEvent motionEvent){
+        this.motionEvent = motionEvent;
     }
-    private MotionPath motionPath;
-    private float speed;
     private MotionEvent motionEvent;
     private boolean hasPassedFirstWayPoint;
 
@@ -31,10 +27,8 @@ public class CameraPathAction extends CinematicAction{
     public void trigger(DisplayApplication displayApplication){
         CameraNode cameraNode = getCameraNode(displayApplication);
         cameraNode.setEnabled(true);
-        motionEvent = new MotionEvent(cameraNode, motionPath);
-        motionEvent.setSpeed(speed);
-        motionEvent.setLookAt(new Vector3f(30, 10, 0), Vector3f.UNIT_Y);
-        motionEvent.setDirectionType(MotionEvent.Direction.LookAt);
+        motionEvent.setSpatial(cameraNode);
+        cameraNode.addControl(motionEvent);
         motionEvent.play();
         hasPassedFirstWayPoint = false;
     }
@@ -54,10 +48,6 @@ public class CameraPathAction extends CinematicAction{
 
     @Override
     protected boolean isFinished(){
-        int currentWayPoint = motionEvent.getCurrentWayPoint();
-        if(currentWayPoint != 0){
-            hasPassedFirstWayPoint = true;
-        }
-        return (hasPassedFirstWayPoint && (currentWayPoint == 0));
+        return (motionEvent.getPlayState() == PlayState.Stopped);
     }
 }
