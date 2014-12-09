@@ -11,6 +11,8 @@ import com.jme3.scene.control.CameraControl;
 import amara.engine.cinematics.*;
 import amara.engine.applications.ingame.client.appstates.*;
 import amara.engine.applications.ingame.client.gui.*;
+import amara.engine.applications.ingame.client.systems.visualisation.HUDAttachmentSystem;
+import amara.game.entitysystem.EntitySystem;
 
 /**
  *
@@ -68,6 +70,7 @@ public class CinematicAppState extends BaseDisplayAppState{
     
     private void setCinematicModeEnabled(boolean isEnabled){
         getAppState(IngameCameraAppState.class).setEnabled(!isEnabled);
+        setHUDAttachmentSystemsEnabled(!isEnabled);
         getAppState(SendPlayerCommandsAppState.class).setEnabled(!isEnabled);
         if(isEnabled){
             getAppState(IngameCameraAppState.class).saveState();
@@ -85,6 +88,15 @@ public class CinematicAppState extends BaseDisplayAppState{
             getAppState(PlayerAppState.class).getLockedCameraSystem().setEnabled(tmpWasLockedCameraEnabled);
             getAppState(PlayerAppState.class).getFogOfWarSystem().setDisplayMapSight(tmpWasDisplayMapSight);
             getAppState(NiftyAppState.class).goToScreen(ScreenController_Cinematic.class, "start");
+        }
+    }
+    
+    private void setHUDAttachmentSystemsEnabled(boolean isEnabled){
+        for(EntitySystem entitySystem : getAppState(LocalEntitySystemAppState.class).getEntitySystems()){
+            if(entitySystem instanceof HUDAttachmentSystem){
+                HUDAttachmentSystem hudAttachmentSystem = (HUDAttachmentSystem) entitySystem;
+                hudAttachmentSystem.setEnabled(isEnabled);
+            }
         }
     }
 

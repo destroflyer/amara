@@ -33,6 +33,7 @@ public abstract class HUDAttachmentSystem extends SimpleVisualAttachmentSystem{
     private Camera camera;
     private MapHeightmap mapHeightmap;
     private ArrayList<Integer> entitiesWithAttachments = new ArrayList<Integer>();
+    private boolean isEnabled;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -59,6 +60,7 @@ public abstract class HUDAttachmentSystem extends SimpleVisualAttachmentSystem{
 
     @Override
     protected void attach(EntityWorld entityWorld, int entity, Spatial visualAttachment){
+        updateVisualAttachmentVisibility(visualAttachment);
         guiNode.attachChild(visualAttachment);
         entitiesWithAttachments.add(entity);
     }
@@ -70,4 +72,16 @@ public abstract class HUDAttachmentSystem extends SimpleVisualAttachmentSystem{
     }
     
     protected abstract Spatial createVisualAttachment(EntityWorld entityWorld, int entity);
+    
+    public void setEnabled(boolean isEnabled){
+        this.isEnabled = isEnabled;
+        for(int entity : entitiesWithAttachments){
+            Spatial visualAttachment = guiNode.getChild(getVisualAttachmentID(entity));
+            updateVisualAttachmentVisibility(visualAttachment);
+        }
+    }
+    
+    private void updateVisualAttachmentVisibility(Spatial visualAttachment){
+        visualAttachment.setCullHint(isEnabled?Spatial.CullHint.Inherit:Spatial.CullHint.Always);
+    }
 }
