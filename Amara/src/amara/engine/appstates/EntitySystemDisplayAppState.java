@@ -35,4 +35,8 @@ public class EntitySystemDisplayAppState extends BaseDisplayAppState{
     public EntityWorld getEntityWorld(){
         return entityWorld;
     }
+
+    public ArrayList<EntitySystem> getEntitySystems(){
+        return entitySystems;
+    }
 }
