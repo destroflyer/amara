@@ -17,7 +17,7 @@ public class MissingEntitiesComponent{
         
     }
 
-    public MissingEntitiesComponent(int[] entities){
+    public MissingEntitiesComponent(int... entities){
         this.entities = entities;
     }
     private int[] entities;

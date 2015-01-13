@@ -32,6 +32,7 @@ import amara.game.entitysystem.systems.effects.buffs.*;
 import amara.game.entitysystem.systems.effects.buffs.areas.*;
 import amara.game.entitysystem.systems.effects.crowdcontrol.*;
 import amara.game.entitysystem.systems.effects.damage.*;
+import amara.game.entitysystem.systems.effects.game.*;
 import amara.game.entitysystem.systems.effects.general.*;
 import amara.game.entitysystem.systems.effects.heal.*;
 import amara.game.entitysystem.systems.effects.movement.*;
@@ -167,6 +168,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new RemoveBuffsSystem());
         addEntitySystem(new RepeatingBuffEffectsSystem());
         addEntitySystem(new CalculateEffectImpactSystem());
+        addEntitySystem(new ApplyPlayCinematicSystem());
         addEntitySystem(new ApplyPauseAudioSystem());
         addEntitySystem(new ApplyPlayAudioSystem());
         addEntitySystem(new ApplyStopAudioSystem());
@@ -228,6 +230,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new TriggerCollisionEffectSystem(intersectionObserver));
         addEntitySystem(new TriggerCastingFinishedEffectSystem());
         addEntitySystem(new TriggerRepeatingEffectSystem());
+        addEntitySystem(new TriggerInstantEffectSystem());
         addEntitySystem(new AggroSystem());
         addEntitySystem(new CheckCampMaximumAggroDistanceSystem());
         addEntitySystem(new CampResetSystem());

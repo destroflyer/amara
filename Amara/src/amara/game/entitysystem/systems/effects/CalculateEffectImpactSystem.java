@@ -14,6 +14,7 @@ import amara.game.entitysystem.components.effects.buffs.areas.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
+import amara.game.entitysystem.components.effects.game.*;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
@@ -142,6 +143,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         RemoveTargetabilityComponent.class,
                         AddVulnerabilityComponent.class,
                         RemoveVulnerabilityComponent.class,
+                        PlayCinematicComponent.class,
                         StopComponent.class,
                         ActivateHitboxComponent.class,
                         DeactivateHitboxComponent.class,

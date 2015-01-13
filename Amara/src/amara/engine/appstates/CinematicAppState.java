@@ -6,6 +6,9 @@ package amara.engine.appstates;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.input.controls.ActionListener;
+import com.jme3.input.controls.KeyTrigger;
+import com.jme3.input.KeyInput;
 import com.jme3.scene.CameraNode;
 import com.jme3.scene.control.CameraControl;
 import amara.engine.cinematics.*;
@@ -18,7 +21,7 @@ import amara.game.entitysystem.EntitySystem;
  *
  * @author Carl
  */
-public class CinematicAppState extends BaseDisplayAppState{
+public class CinematicAppState extends BaseDisplayAppState implements ActionListener{
 
     public CinematicAppState(){
         
@@ -36,6 +39,16 @@ public class CinematicAppState extends BaseDisplayAppState{
         cameraNode.setControlDir(CameraControl.ControlDirection.SpatialToCamera);
         cameraNode.setEnabled(false);
         mainApplication.getRootNode().attachChild(cameraNode);
+        mainApplication.getInputManager().addMapping("stop_cinematic", new KeyTrigger(KeyInput.KEY_ESCAPE));
+        mainApplication.getInputManager().addListener(this, new String[]{
+            "stop_cinematic"
+        });
+    }
+
+    @Override
+    public void cleanup(){
+        super.cleanup();
+        mainApplication.getInputManager().removeListener(this);
     }
     
     public void playCinematic(Cinematic cinematic){
@@ -49,9 +62,12 @@ public class CinematicAppState extends BaseDisplayAppState{
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
         if(currentCinematic != null){
-            currentCinematic.update(lastTimePerFrame, mainApplication);
-            if(currentCinematic.isFinished()){
-                onCinematicStop();
+            //Avoid (initial) lag influencing the cinematic
+            if(lastTimePerFrame < 1){
+                currentCinematic.update(lastTimePerFrame, mainApplication);
+                if(currentCinematic.isFinished()){
+                    onCinematicStop();
+                }
             }
         }
     }
@@ -97,6 +113,13 @@ public class CinematicAppState extends BaseDisplayAppState{
                 HUDAttachmentSystem hudAttachmentSystem = (HUDAttachmentSystem) entitySystem;
                 hudAttachmentSystem.setEnabled(isEnabled);
             }
+        }
+    }
+
+    @Override
+    public void onAction(String name, boolean isPressed, float lastTimePerFrame){
+        if(name.equals("stop_cinematic") && isPressed){
+            stopCinematic();
         }
     }
 

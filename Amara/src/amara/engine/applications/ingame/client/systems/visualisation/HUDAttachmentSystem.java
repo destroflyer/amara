@@ -33,7 +33,7 @@ public abstract class HUDAttachmentSystem extends SimpleVisualAttachmentSystem{
     private Camera camera;
     private MapHeightmap mapHeightmap;
     private ArrayList<Integer> entitiesWithAttachments = new ArrayList<Integer>();
-    private boolean isEnabled;
+    private boolean isEnabled = true;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){

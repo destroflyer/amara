@@ -27,6 +27,7 @@ import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.knockup.*;
 import amara.game.entitysystem.components.effects.damage.*;
+import amara.game.entitysystem.components.effects.game.*;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.effects.heals.*;
 import amara.game.entitysystem.components.effects.movement.*;
@@ -229,6 +230,8 @@ public class MessagesSerializer{
                         RemoveVulnerabilityComponent.class,
                         ScalingAbilityPowerMagicDamageComponent.class,
                         ScalingAttackDamagePhysicalDamageComponent.class,
+                        //effects/game
+                        PlayCinematicComponent.class,
                         //effects/general
                         AddComponentsComponent.class,
                         AddEffectTriggersComponent.class,
@@ -290,6 +293,7 @@ public class MessagesSerializer{
                         FinishedObjectiveComponent.class,
                         MissingEntitiesComponent.class,
                         OpenObjectiveComponent.class,
+                        OrObjectivesComponent.class,
                         //physics
                         IntersectionPushComponent.class,
                         CollisionGroupComponent.class,
@@ -405,6 +409,7 @@ public class MessagesSerializer{
                         //units/effecttriggers/triggers
                         CastingFinishedTriggerComponent.class,
                         CollisionTriggerComponent.class,
+                        InstantTriggerComponent.class,
                         RepeatingTriggerComponent.class,
                         RepeatingTriggerCounterComponent.class,
                         TargetReachedTriggerComponent.class,

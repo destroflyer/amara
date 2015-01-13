@@ -30,6 +30,7 @@ public class Settings{
         set("hardware_skinning", "false");
         set("shadow_quality", "2");
         set("fog_of_war_update_interval", "0.1");
+        set("map_load_server_information", false);
         reloadFile();
     }
     
