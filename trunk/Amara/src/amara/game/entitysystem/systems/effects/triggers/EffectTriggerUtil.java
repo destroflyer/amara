@@ -66,4 +66,9 @@ public class EffectTriggerUtil{
         }
         return effectCast;
     }
+    
+    public static void removeTriggerEntity(EntityWorld entityWorld, int effectTriggerEntity){
+        entityWorld.removeEntity(entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class).getEffectEntity());
+        entityWorld.removeEntity(effectTriggerEntity);
+    }
 }

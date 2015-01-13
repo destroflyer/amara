@@ -31,6 +31,7 @@ public class DisplayApplication extends SimpleApplication{
     public void simpleInitApp(){
         MaterialFactory.setAssetManager(assetManager);
         setDisplayStatView(false);
+        inputManager.deleteMapping(SimpleApplication.INPUT_MAPPING_EXIT);
         viewPort.getQueue().setGeometryComparator(RenderQueue.Bucket.Opaque, new LayerGeometryComparator_Opaque());
     }
 

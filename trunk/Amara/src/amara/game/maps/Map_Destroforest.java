@@ -9,6 +9,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.audio.*;
 import amara.game.entitysystem.components.camps.*;
+import amara.game.entitysystem.components.effects.game.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.maps.*;
 import amara.game.entitysystem.components.maps.playerdeathrules.*;
@@ -17,9 +18,13 @@ import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
+import amara.game.entitysystem.components.units.effecttriggers.*;
+import amara.game.entitysystem.components.units.effecttriggers.targets.*;
+import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.game.games.Game;
 
 /**
  *
@@ -38,6 +43,15 @@ public class Map_Destroforest extends Map{
         audioBackgroundMusic.setComponent(new AudioVolumeComponent(1.75f));
         audioBackgroundMusic.setComponent(new AudioLoopComponent());
         audioBackgroundMusic.setComponent(new IsAudioPlayingComponent());
+        
+        EntityWrapper instantEffectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+        instantEffectTrigger.setComponent(new TriggerTemporaryComponent());
+        instantEffectTrigger.setComponent(new InstantTriggerComponent());
+        instantEffectTrigger.setComponent(new CustomTargetComponent(Game.ENTITY));
+        EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+        effect1.setComponent(new PlayCinematicComponent(Map_Destroforest_CinematicIntro.class.getName()));
+        instantEffectTrigger.setComponent(new TriggeredEffectComponent(effect1.getId()));
+        
         for(int i=0;i<3;i++){
             EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
             unit.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));

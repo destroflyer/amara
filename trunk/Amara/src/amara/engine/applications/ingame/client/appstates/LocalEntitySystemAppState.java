@@ -82,7 +82,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new DirectionSystem(entitySceneMap));
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
-        addEntitySystem(new SelectionMarkerSystem(entitySceneMap));
+        //addEntitySystem(new SelectionMarkerSystem(entitySceneMap));
         addEntitySystem(new MaximumHealthBarSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
         addEntitySystem(new CurrentHealthBarSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
         addEntitySystem(new StunVisualisationSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));

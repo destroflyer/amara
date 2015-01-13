@@ -115,8 +115,15 @@ public class Map_Arama extends Map{
         boss.setComponent(new SpellsComponent(new int[]{bodyslam.getId()}));
         boss.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
         boss.setComponent(new TeamComponent(0));
+        //GameObjective
         EntityWrapper gameObjective = entityWorld.getWrapped(entityWorld.createEntity());
-        gameObjective.setComponent(new MissingEntitiesComponent(new int[]{nexi[0].getId(), nexi[1].getId()}));
+        EntityWrapper nexusObjective1 = entityWorld.getWrapped(entityWorld.createEntity());
+        nexusObjective1.setComponent(new MissingEntitiesComponent(nexi[0].getId()));
+        nexusObjective1.setComponent(new OpenObjectiveComponent());
+        EntityWrapper nexusObjective2 = entityWorld.getWrapped(entityWorld.createEntity());
+        nexusObjective2.setComponent(new MissingEntitiesComponent(nexi[1].getId()));
+        nexusObjective2.setComponent(new OpenObjectiveComponent());
+        gameObjective.setComponent(new OrObjectivesComponent(nexusObjective1.getId(), nexusObjective2.getId()));
         gameObjective.setComponent(new OpenObjectiveComponent());
         entityWorld.setComponent(entity, new MapObjectiveComponent(gameObjective.getId()));
         EntityWrapper playerDeathRules = entityWorld.getWrapped(entityWorld.createEntity());

@@ -21,7 +21,6 @@ public class CameraPathAction extends CinematicAction{
         this.motionEvent = motionEvent;
     }
     private MotionEvent motionEvent;
-    private boolean hasPassedFirstWayPoint;
 
     @Override
     public void trigger(DisplayApplication displayApplication){
@@ -30,7 +29,6 @@ public class CameraPathAction extends CinematicAction{
         motionEvent.setSpatial(cameraNode);
         cameraNode.addControl(motionEvent);
         motionEvent.play();
-        hasPassedFirstWayPoint = false;
     }
 
     @Override
