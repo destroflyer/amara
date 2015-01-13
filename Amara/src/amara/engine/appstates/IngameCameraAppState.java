@@ -4,6 +4,7 @@
  */
 package amara.engine.appstates;
 
+import java.awt.MouseInfo;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.collision.CollisionResult;
@@ -16,6 +17,8 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
+import amara.engine.settings.Settings;
+import org.lwjgl.opengl.Display;
 
 /**
  *
@@ -26,8 +29,9 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
     public IngameCameraAppState(){
         
     }
-    private boolean[] moveDirections = new boolean[4];
-    private float movementSpeed = 20;
+    private boolean[] moveDirections_Keys = new boolean[4];
+    private boolean[] moveDirections_Cursor = new boolean[4];
+    private boolean isCursorPositionInitialized;
     private Vector2f limitMinimum;
     private Vector2f limitMaximum;
     private Spatial limitSurfaceSpatial;
@@ -62,20 +66,21 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
         if(isMovementEnabled){
+            checkCursorCameraMovement();
             Vector3f movedDistance = new Vector3f();
-            if(moveDirections[0]){
+            if(moveDirections_Keys[0] || moveDirections_Cursor[0]){
                 movedDistance.addLocal(0, 0, 1);
             }
-            if(moveDirections[1]){
+            if(moveDirections_Keys[1] || moveDirections_Cursor[1]){
                 movedDistance.addLocal(-1, 0, 0);
             }
-            if(moveDirections[2]){
+            if(moveDirections_Keys[2] || moveDirections_Cursor[2]){
                 movedDistance.addLocal(0, 0, -1);
             }
-            if(moveDirections[3]){
+            if(moveDirections_Keys[3] || moveDirections_Cursor[3]){
                 movedDistance.addLocal(1, 0, 0);
             }
-            movedDistance.multLocal(movementSpeed * lastTimePerFrame);
+            movedDistance.multLocal(Settings.getFloat("camera_movement_speed") * lastTimePerFrame);
             Vector3f oldLocation = mainApplication.getCamera().getLocation().clone();
             mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
             if(limitMinimum != null){
@@ -95,6 +100,28 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
             }
         }
     }
+    
+    private void checkCursorCameraMovement(){
+        for(int i=0;i<moveDirections_Cursor.length;i++){
+            moveDirections_Cursor[i] = false;
+        }
+        Vector2f cursorPosition = mainApplication.getInputManager().getCursorPosition();
+        if(isCursorPositionInitialized){
+            if(isMouseInWindow()){
+                float width = mainApplication.getContext().getSettings().getWidth();
+                float height = mainApplication.getContext().getSettings().getHeight();
+                float cursorMovementBorderSize = Settings.getFloat("camera_movement_cursor_border");
+                moveDirections_Cursor[0] = ((cursorPosition.getY() >= (height - cursorMovementBorderSize)) && (cursorPosition.getY() < height));
+                moveDirections_Cursor[1] = ((cursorPosition.getX() >= (width - cursorMovementBorderSize)) && (cursorPosition.getX() < width));
+                moveDirections_Cursor[2] = ((cursorPosition.getY() >= 0) && (cursorPosition.getY() < cursorMovementBorderSize));
+                moveDirections_Cursor[3] = ((cursorPosition.getX() >= 0) && (cursorPosition.getX() < cursorMovementBorderSize));
+            }
+        }
+        else{
+            //[0|0] is the uninitialized state of the cursor position
+            isCursorPositionInitialized = ((cursorPosition.getX() != 0) || (cursorPosition.getY() != 0));
+        }
+    }
 
     @Override
     public void cleanup(){
@@ -106,16 +133,16 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
     @Override
     public void onAction(String actionName, boolean value, float lastTimePerFrame){
         if(actionName.equals("camera_up")){
-            moveDirections[0] = value;
+            moveDirections_Keys[0] = value;
         }
         else if(actionName.equals("camera_right")){
-            moveDirections[1] = value;
+            moveDirections_Keys[1] = value;
         }
         else if(actionName.equals("camera_down")){
-            moveDirections[2] = value;
+            moveDirections_Keys[2] = value;
         }
         else if(actionName.equals("camera_left")){
-            moveDirections[3] = value;
+            moveDirections_Keys[3] = value;
         }
         else if(actionName.equals("camera_zoom_out")){
             if(isZoomEnabled){
@@ -183,5 +210,19 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
 
     public void setZoomInterval(float zoomInterval){
         this.zoomInterval = zoomInterval;
+    }
+    
+    private static boolean isMouseInWindow(){
+        int mouseX = MouseInfo.getPointerInfo().getLocation().x;
+        int mouseY = MouseInfo.getPointerInfo().getLocation().y;
+        int minX = Display.getX();
+        int minY = Display.getY();
+        if(!Settings.getBoolean("fullscreen")){
+            minX += 2;
+            minY += 26;
+        }
+        int maxX = (minX + Display.getWidth());
+        int maxY = (minY + Display.getHeight());
+        return !((mouseX < minX) || (mouseX > maxX) || (mouseY < minY) || (mouseY > maxY));
     }
 }
