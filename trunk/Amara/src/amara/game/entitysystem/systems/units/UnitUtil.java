@@ -66,7 +66,7 @@ public class UnitUtil{
                     entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
                 }
                 else if(entityWorld.hasComponent(effectTriggerEntity, TriggerTemporaryComponent.class)){
-                    EffectTriggerUtil.removeTriggerEntity(entityWorld, effectTriggerEntity);
+                    entityWorld.removeEntity(effectTriggerEntity);
                 }
             }
         }

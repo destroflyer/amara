@@ -74,7 +74,7 @@ public class Map_Arama extends Map{
                 EntityWrapper spawnEffect = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
                 String unitTemplate = ((r < 3)?"etherdesert_creep_melee":"etherdesert_creep_range");
-                spawnInformation.setComponent(new SpawnTemplateComponent(unitTemplate + "," + spawnTrigger.getId()));
+                spawnInformation.setComponent(new SpawnTemplateComponent(unitTemplate + "," + spawnTrigger.getId() + "," + i));
                 spawnInformation.setComponent(new SpawnMoveToTargetComponent());
                 spawnInformation.setComponent(new SpawnAttackMoveComponent());
                 spawnEffect.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
