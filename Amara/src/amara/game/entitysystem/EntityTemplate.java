@@ -2254,7 +2254,11 @@ public class EntityTemplate{
             entityWrapper.setComponent(new LifetimeComponent(0.2f));
         }
         else if(templateName.equals("etherdesert_creep_melee")){
-            entityWrapper.setComponent(new ModelComponent("Models/minion/skin_default.xml"));
+            String skinName = "default";
+            if(parameters.length > 1){
+                skinName = "team_" + parameters[1];
+            }
+            entityWrapper.setComponent(new ModelComponent("Models/minion/skin_" + skinName + ".xml"));
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
@@ -2283,7 +2287,11 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAggroComponent(12));
         }
         else if(templateName.equals("etherdesert_creep_range")){
-            entityWrapper.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));
+            String skinName = "default";
+            if(parameters.length > 1){
+                skinName = "team_" + parameters[1];
+            }
+            entityWrapper.setComponent(new ModelComponent("Models/wizard/skin_" + skinName + ".xml"));
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
             entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
