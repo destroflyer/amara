@@ -59,6 +59,7 @@ public class MainFrame extends javax.swing.JFrame{
                 NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
                 networkClient.sendMessage(new Message_Login(authentificationInformation));
                 LoginAppState loginAppState = masterClient.getStateManager().getState(LoginAppState.class);
+                loginAppState.onLoginPending();
                 LoginResult loginResult;
                 while(true){
                     if(loginAppState.getResult() != LoginAppState.LoginResult.PENDING){
@@ -70,6 +71,7 @@ public class MainFrame extends javax.swing.JFrame{
                     }catch(Exception ex){
                     }
                 }
+                panLogin.showIsLoading(false);
                 switch(loginResult){
                     case FAILED:
                         FrameUtil.showMessageDialog(MainFrame.this, "Login failed. Possible reasons:\n\n- Wrong login\n- Wrong password", FrameUtil.MessageType.ERROR);
@@ -87,7 +89,6 @@ public class MainFrame extends javax.swing.JFrame{
                             }catch(Exception ex){
                             }
                         }
-                        panLogin.showIsLoading(false);
                         panLogin.close();
                         setDisplayedPanel(new PanMainMenu());
                         break;

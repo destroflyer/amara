@@ -23,7 +23,7 @@ public class LoginAppState extends ClientBaseAppState{
         FAILED,
         SUCCESSFUL
     }
-    private LoginResult result = LoginResult.PENDING;
+    private LoginResult result;
     private int playerID;
     
     @Override
@@ -31,6 +31,10 @@ public class LoginAppState extends ClientBaseAppState{
         super.initialize(stateManager, application);
         NetworkClient networkClient = getAppState(NetworkClientHeadlessAppState.class).getNetworkClient();
         networkClient.addMessageBackend(new LoginResultBackend(mainApplication, this));
+    }
+    
+    public void onLoginPending(){
+        result = LoginResult.PENDING;
     }
 
     public void onLoginSuccessful(int playerID){
