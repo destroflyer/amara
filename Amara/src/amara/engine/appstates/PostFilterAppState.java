@@ -29,7 +29,18 @@ public class PostFilterAppState extends BaseDisplayAppState{
             Filter filter = queuedFilters.get(i);
             filterPostProcessor.addFilter(filter);
         }
-        mainApplication.getViewPort().addProcessor(filterPostProcessor);
+        setEnabled(true);
+    }
+
+    @Override
+    public void setEnabled(boolean enabled){
+        super.setEnabled(enabled);
+        if(enabled){
+            mainApplication.getViewPort().addProcessor(filterPostProcessor);
+        }
+        else{
+            mainApplication.getViewPort().removeProcessor(filterPostProcessor);
+        }
     }
 
     @Override

@@ -24,10 +24,12 @@ public class ModelViewerApplication extends DisplayApplication{
 
     @Override
     public void simpleInitApp(){
+        super.simpleInitApp();
         MaterialFactory.setAssetManager(assetManager);
         setDisplayStatView(false);
         stateManager.attach(new LightAppState());
         stateManager.attach(new PostFilterAppState());
+        stateManager.attach(new WireframeAppState());
         stateManager.attach(new ModelAppState());
         stateManager.attach(new InitializeAppState());
         cam.setLocation(new Vector3f(0, 3, 10));
