@@ -24,7 +24,7 @@ import amara.game.entitysystem.components.attributes.*;
 public class CurrentHealthBarSystem extends HUDAttachmentSystem{
 
     public CurrentHealthBarSystem(EntitySceneMap entitySceneMap, Node guiNode, Camera camera, MapHeightmap mapHeightmap){
-        super(HealthComponent.class, true, guiNode, camera, mapHeightmap);
+        super(HealthComponent.class, guiNode, camera, mapHeightmap);
         this.entitySceneMap = entitySceneMap;
         hudOffset = new Vector3f(0, 0, 1);
     }
@@ -35,15 +35,21 @@ public class CurrentHealthBarSystem extends HUDAttachmentSystem{
         HealthComponent healthComponent = entityWorld.getComponent(entity, HealthComponent.class);
         MaximumHealthComponent maximumHealthComponent = entityWorld.getComponent(entity, MaximumHealthComponent.class);
         if((healthComponent != null) && (maximumHealthComponent != null)){
-            float health = healthComponent.getValue();
-            float maximumHealth = maximumHealthComponent.getValue();
-            float healthPortion = (1 - (health / maximumHealth));
-            Geometry geometry = new Geometry("", new RectangleMesh((MaximumHealthBarSystem.BAR_WIDTH / 2) - (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), 0, 0, (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), MaximumHealthBarSystem.BAR_HEIGHT));
+            Geometry geometry = new Geometry();
             Material material = MaterialFactory.generateUnshadedMaterial(ColorRGBA.Black);
             geometry.setMaterial(material);
             return geometry;
         }
         return null;
+    }
+
+    @Override
+    protected void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment){
+        Geometry geometry = (Geometry) visualAttachment;
+        float health = entityWorld.getComponent(entity, HealthComponent.class).getValue();
+        float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();
+        float healthPortion = (1 - (health / maximumHealth));
+        geometry.setMesh(new RectangleMesh((MaximumHealthBarSystem.BAR_WIDTH / 2) - (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), 0, 0, (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), MaximumHealthBarSystem.BAR_HEIGHT));
     }
 
     @Override

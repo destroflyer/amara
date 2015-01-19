@@ -13,14 +13,12 @@ import amara.game.entitysystem.*;
  */
 public abstract class SimpleVisualAttachmentSystem implements EntitySystem{
 
-    public SimpleVisualAttachmentSystem(Class componentClass, boolean displayExistanceOrAbsence){
+    public SimpleVisualAttachmentSystem(Class componentClass){
         componentClassesToObserve = new Class[]{componentClass};
         this.componentClass = componentClass;
-        this.displayExistanceOrAbsence = displayExistanceOrAbsence;
     }
     private Class[] componentClassesToObserve;
     private Class componentClass;
-    private boolean displayExistanceOrAbsence;
     
     protected void setComponentClassesToObserve(Class... additionalComponentClassesToObserve){
         componentClassesToObserve = new Class[additionalComponentClassesToObserve.length + 1];
@@ -39,41 +37,35 @@ public abstract class SimpleVisualAttachmentSystem implements EntitySystem{
     
     protected void observeEntities(EntityWorld entityWorld, ComponentMapObserver observer){
         for(int entity : observer.getNew().getEntitiesWithAll(componentClass)){
-            setVisualAttachmentVisible(entityWorld, entity, displayExistanceOrAbsence);
+            Spatial visualAttachment = createVisualAttachment(entityWorld, entity);
+            if(visualAttachment != null){
+                visualAttachment.setName(getVisualAttachmentID(entity));
+                updateVisualAttachment(entityWorld, entity, visualAttachment);
+                attach(entity, visualAttachment);
+            }
         }
         for(int entity : observer.getChanged().getEntitiesWithAll(componentClass)){
-            setVisualAttachmentVisible(entityWorld, entity, displayExistanceOrAbsence);
+            Spatial visualAttachment = getVisualAttachment(entity);
+            if(visualAttachment != null){
+                updateVisualAttachment(entityWorld, entity, visualAttachment);
+            }
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll(componentClass)){
-            setVisualAttachmentVisible(entityWorld, entity, (!displayExistanceOrAbsence));
+            detach(entity);
         }
     }
     
-    private void setVisualAttachmentVisible(EntityWorld entityWorld,int entity, boolean isVisible){
-        if(isVisible){
-            updateVisualAttachment(entityWorld, entity);
-        }
-        else{
-            detach(entityWorld, entity);
-        }
-    }
+    protected abstract void attach(int entity, Spatial visualAttachment);
     
-    private void updateVisualAttachment(EntityWorld entityWorld, int entity){
-        detach(entityWorld, entity);
-        Spatial visualAttachment = createVisualAttachment(entityWorld, entity);
-        if(visualAttachment != null){
-            visualAttachment.setName(getVisualAttachmentID(entity));
-            attach(entityWorld, entity, visualAttachment);
-        }
-    }
+    protected abstract void detach(int entity);
+    
+    protected abstract Spatial getVisualAttachment(int entity);
+    
+    protected abstract Spatial createVisualAttachment(EntityWorld entityWorld, int entity);
+    
+    protected abstract void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment);
     
     protected String getVisualAttachmentID(int entity){
         return ("visualAttachment_" + hashCode() + "_" + entity);
     }
-    
-    protected abstract void attach(EntityWorld entityWorld, int entity, Spatial visualAttachment);
-    
-    protected abstract void detach(EntityWorld entityWorld, int entity);
-    
-    protected abstract Spatial createVisualAttachment(EntityWorld entityWorld, int entity);
 }

@@ -21,9 +21,11 @@ public class PaintableImage{
     public PaintableImage(String imageResourcePath, boolean flipY){
         BufferedImage loadedImage = Util.getResourceImage(imageResourcePath);
         setSize(loadedImage.getWidth(), loadedImage.getHeight());
+        int rgb;
         for(int x=0;x<width;x++){
             for(int y=0;y<height;y++){
-                setPixel(x, (flipY?(height - y):y), new Color(loadedImage.getRGB(x, y)));
+                rgb = loadedImage.getRGB(x, y);
+                setPixel(x, (flipY?(height - y):y), ((rgb >> 16) & 0xFF), ((rgb >> 8) & 0xFF), (rgb & 0xFF), ((rgb >> 24) & 0xFF));
             }
         }
     }

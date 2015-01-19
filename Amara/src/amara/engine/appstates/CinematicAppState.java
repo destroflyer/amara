@@ -14,6 +14,7 @@ import com.jme3.scene.control.CameraControl;
 import amara.engine.cinematics.*;
 import amara.engine.applications.ingame.client.appstates.*;
 import amara.engine.applications.ingame.client.gui.*;
+import amara.engine.applications.ingame.client.systems.filters.FogOfWarSystem;
 import amara.engine.applications.ingame.client.systems.visualisation.HUDAttachmentSystem;
 import amara.game.entitysystem.EntitySystem;
 
@@ -88,21 +89,26 @@ public class CinematicAppState extends BaseDisplayAppState implements ActionList
         getAppState(IngameCameraAppState.class).setEnabled(!isEnabled);
         setHUDAttachmentSystemsEnabled(!isEnabled);
         getAppState(SendPlayerCommandsAppState.class).setEnabled(!isEnabled);
+        FogOfWarSystem fogOfWarSystem = getAppState(PlayerAppState.class).getFogOfWarSystem();
         if(isEnabled){
             getAppState(IngameCameraAppState.class).saveState();
             tmpAreObstaclesDisplayed = getAppState(MapObstaclesAppState.class).areObstaclesDisplayed();
             getAppState(MapObstaclesAppState.class).setDisplayObstacles(false);
             tmpWasLockedCameraEnabled = getAppState(PlayerAppState.class).getLockedCameraSystem().isEnabled();
             getAppState(PlayerAppState.class).getLockedCameraSystem().setEnabled(false);
-            tmpWasDisplayMapSight = getAppState(PlayerAppState.class).getFogOfWarSystem().isDisplayMapSight();
-            getAppState(PlayerAppState.class).getFogOfWarSystem().setDisplayMapSight(true);
+            if(fogOfWarSystem != null){
+                tmpWasDisplayMapSight = fogOfWarSystem.isDisplayMapSight();
+                fogOfWarSystem.setDisplayMapSight(true);
+            }
             getAppState(NiftyAppState.class).goToScreen(ScreenController_HUD.class, "cinematic");
         }
         else{
             getAppState(IngameCameraAppState.class).restoreState();
             getAppState(MapObstaclesAppState.class).setDisplayObstacles(tmpAreObstaclesDisplayed);
             getAppState(PlayerAppState.class).getLockedCameraSystem().setEnabled(tmpWasLockedCameraEnabled);
-            getAppState(PlayerAppState.class).getFogOfWarSystem().setDisplayMapSight(tmpWasDisplayMapSight);
+            if(fogOfWarSystem != null){
+                fogOfWarSystem.setDisplayMapSight(tmpWasDisplayMapSight);
+            }
             getAppState(NiftyAppState.class).goToScreen(ScreenController_Cinematic.class, "start");
         }
     }

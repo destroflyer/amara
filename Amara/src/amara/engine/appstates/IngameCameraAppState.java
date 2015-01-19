@@ -88,10 +88,10 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
                 CollisionResult maximumCornerCollisionResult = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, leftTopCornerScreenLocation).getClosestCollision();
                 if((minimumCornerCollisionResult != null) && (maximumCornerCollisionResult != null)){
                     if(((movedDistance.getX() < 0) && (minimumCornerCollisionResult.getContactPoint().getX() < limitMinimum.getX()))
-                    || ((movedDistance.getX() > 0) && (minimumCornerCollisionResult.getContactPoint().getX() > limitMaximum.getX()))){
+                    || ((movedDistance.getX() > 0) && (maximumCornerCollisionResult.getContactPoint().getX() > limitMaximum.getX()))){
                         movedDistance.setX(0);
                     }
-                    if(((movedDistance.getZ() < 0) && (maximumCornerCollisionResult.getContactPoint().getZ() < limitMinimum.getY()))
+                    if(((movedDistance.getZ() < 0) && (minimumCornerCollisionResult.getContactPoint().getZ() < limitMinimum.getY()))
                     || ((movedDistance.getZ() > 0) && (maximumCornerCollisionResult.getContactPoint().getZ() > limitMaximum.getY()))){
                         movedDistance.setZ(0);
                     }
