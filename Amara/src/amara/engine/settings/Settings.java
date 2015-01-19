@@ -30,9 +30,9 @@ public class Settings{
         set("hardware_skinning", "false");
         set("shadow_quality", "2");
         set("fog_of_war_update_interval", "0.1");
-        set("map_load_server_information", false);
-        set("camera_movement_speed", 20);
-        set("camera_movement_cursor_border", 90);
+        set("terrain_quality", "1");
+        set("camera_movement_speed", "20");
+        set("camera_movement_cursor_border", "90");
         reloadFile();
     }
     
