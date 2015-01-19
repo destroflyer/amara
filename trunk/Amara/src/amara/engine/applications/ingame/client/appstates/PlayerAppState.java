@@ -14,6 +14,7 @@ import amara.engine.applications.ingame.client.systems.camera.*;
 import amara.engine.applications.ingame.client.systems.filters.*;
 import amara.engine.applications.ingame.client.systems.gui.*;
 import amara.engine.appstates.*;
+import amara.engine.settings.Settings;
 import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
 import amara.game.maps.Map;
 
@@ -43,10 +44,12 @@ public class PlayerAppState extends BaseDisplayAppState implements ActionListene
         localEntitySystemAppState.addEntitySystem(lockedCameraSystem);
         PostFilterAppState postFilterAppState = getAppState(PostFilterAppState.class);
         localEntitySystemAppState.addEntitySystem(new PlayerDeathDisplaySystem(playerEntity, postFilterAppState));
-        Map map = getAppState(MapAppState.class).getMap();
-        PolyMapManager polyMapManager = map.getPhysicsInformation().getPolyMapManager();
-        fogOfWarSystem = new FogOfWarSystem(playerEntity, postFilterAppState, polyMapManager);
-        localEntitySystemAppState.addEntitySystem(fogOfWarSystem);
+        if(Settings.getFloat("fog_of_war_update_interval") != -1){
+            Map map = getAppState(MapAppState.class).getMap();
+            PolyMapManager polyMapManager = map.getPhysicsInformation().getPolyMapManager();
+            fogOfWarSystem = new FogOfWarSystem(playerEntity, postFilterAppState, polyMapManager);
+            localEntitySystemAppState.addEntitySystem(fogOfWarSystem);
+        }
         ScreenController_HUD screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
         localEntitySystemAppState.addEntitySystem(new DisplayPlayerSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayAttributesSystem(playerEntity, screenController_HUD));
@@ -62,7 +65,9 @@ public class PlayerAppState extends BaseDisplayAppState implements ActionListene
             lockedCameraSystem.setEnabled(!lockedCameraSystem.isEnabled());
         }
         else if(actionName.equals("display_map_sight") && value){
-            fogOfWarSystem.setDisplayMapSight(!fogOfWarSystem.isDisplayMapSight());
+            if(fogOfWarSystem != null){
+                fogOfWarSystem.setDisplayMapSight(!fogOfWarSystem.isDisplayMapSight());
+            }
         }
     }
 

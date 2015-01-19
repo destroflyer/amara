@@ -24,7 +24,7 @@ import amara.game.entitysystem.components.visuals.TitleComponent;
 public class TitleSystem extends HUDAttachmentSystem{
 
     public TitleSystem(EntitySceneMap entitySceneMap, Node guiNode, Camera camera, MapHeightmap mapHeightmap){
-        super(TitleComponent.class, true, guiNode, camera, mapHeightmap);
+        super(TitleComponent.class, guiNode, camera, mapHeightmap);
         this.entitySceneMap = entitySceneMap;
         hudOffset = new Vector3f(0, 24, 0);
     }
@@ -34,16 +34,21 @@ public class TitleSystem extends HUDAttachmentSystem{
         
     @Override
     protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
-        TitleComponent titleComponent = entityWorld.getComponent(entity, TitleComponent.class);
         BitmapFont font = MaterialFactory.getAssetManager().loadFont("Interface/fonts/Verdana_18.fnt");
         BitmapText bitmapText = new BitmapText(font);
         bitmapText.setSize(textSize);
         bitmapText.setColor(ColorRGBA.White);
-        bitmapText.setText(titleComponent.getTitle());
         bitmapText.setBox(new Rectangle((-1 * (width / 2)), 0, width, 1));
         bitmapText.setAlignment(BitmapFont.Align.Center);
         bitmapText.setLocalTranslation(100, 100, 0);
         return bitmapText;
+    }
+
+    @Override
+    protected void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment){
+        BitmapText bitmapText = (BitmapText) visualAttachment;
+        String title = entityWorld.getComponent(entity, TitleComponent.class).getTitle();
+        bitmapText.setText(title);
     }
 
     @Override

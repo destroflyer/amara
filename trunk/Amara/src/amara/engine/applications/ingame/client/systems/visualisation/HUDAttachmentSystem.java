@@ -20,8 +20,8 @@ import amara.game.entitysystem.components.physics.PositionComponent;
  */
 public abstract class HUDAttachmentSystem extends SimpleVisualAttachmentSystem{
 
-    public HUDAttachmentSystem(Class componentClass, boolean displayExistanceOrAbsence, Node guiNode, Camera camera, MapHeightmap mapHeightmap){
-        super(componentClass, displayExistanceOrAbsence);
+    public HUDAttachmentSystem(Class componentClass, Node guiNode, Camera camera, MapHeightmap mapHeightmap){
+        super(componentClass);
         this.guiNode = guiNode;
         this.camera = camera;
         this.mapHeightmap = mapHeightmap;
@@ -34,6 +34,8 @@ public abstract class HUDAttachmentSystem extends SimpleVisualAttachmentSystem{
     private MapHeightmap mapHeightmap;
     private ArrayList<Integer> entitiesWithAttachments = new ArrayList<Integer>();
     private boolean isEnabled = true;
+    private Vector3f tmpEntityPosition = new Vector3f();
+    private Vector3f tmpAttachmentPosition = new Vector3f();
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -41,15 +43,15 @@ public abstract class HUDAttachmentSystem extends SimpleVisualAttachmentSystem{
         for(int entity : entitiesWithAttachments){
             PositionComponent positionComponent = entityWorld.getComponent(entity, PositionComponent.class);
             if(positionComponent != null){
-                Vector3f entityPosition = new Vector3f(positionComponent.getPosition().getX(), mapHeightmap.getHeight(positionComponent.getPosition()), positionComponent.getPosition().getY());
+                tmpEntityPosition.set(positionComponent.getPosition().getX(), mapHeightmap.getHeight(positionComponent.getPosition()), positionComponent.getPosition().getY());
                 Spatial visualAttachment = guiNode.getChild(getVisualAttachmentID(entity));
                 Vector3f worldOffset = worldOffsets.get(entity);
                 if(worldOffset == null){
                     worldOffset = getWorldOffset(entityWorld, entity);
                     worldOffsets.put(entity, worldOffset);
                 }
-                Vector3f attachmentPosition = camera.getScreenCoordinates(entityPosition.addLocal(worldOffset)).addLocal(hudOffset);
-                visualAttachment.setLocalTranslation(attachmentPosition);
+                camera.getScreenCoordinates(tmpEntityPosition.addLocal(worldOffset), tmpAttachmentPosition).addLocal(hudOffset);
+                visualAttachment.setLocalTranslation(tmpAttachmentPosition);
             }
         }
     }
@@ -59,19 +61,26 @@ public abstract class HUDAttachmentSystem extends SimpleVisualAttachmentSystem{
     }
 
     @Override
-    protected void attach(EntityWorld entityWorld, int entity, Spatial visualAttachment){
+    protected void attach(int entity, Spatial visualAttachment){
         updateVisualAttachmentVisibility(visualAttachment);
         guiNode.attachChild(visualAttachment);
         entitiesWithAttachments.add(entity);
     }
 
     @Override
-    protected void detach(EntityWorld entityWorld, int entity){
+    protected void detach(int entity){
         guiNode.detachChildNamed(getVisualAttachmentID(entity));
         entitiesWithAttachments.remove((Integer) entity);
     }
+
+    @Override
+    protected Spatial getVisualAttachment(int entity){
+        return guiNode.getChild(getVisualAttachmentID(entity));
+    }
     
     protected abstract Spatial createVisualAttachment(EntityWorld entityWorld, int entity);
+
+    protected abstract void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment);
     
     public void setEnabled(boolean isEnabled){
         this.isEnabled = isEnabled;

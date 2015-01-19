@@ -24,7 +24,7 @@ import amara.game.entitysystem.components.units.crowdcontrol.*;
 public class SilenceVisualisationSystem extends HUDAttachmentSystem{
 
     public SilenceVisualisationSystem(EntitySceneMap entitySceneMap, Node guiNode, Camera camera, MapHeightmap mapHeightmap){
-        super(IsSilencedComponent.class, true, guiNode, camera, mapHeightmap);
+        super(IsSilencedComponent.class, guiNode, camera, mapHeightmap);
         this.entitySceneMap = entitySceneMap;
         hudOffset = new Vector3f(0, 26, 0);
     }
@@ -37,6 +37,11 @@ public class SilenceVisualisationSystem extends HUDAttachmentSystem{
         material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         geometry.setMaterial(material);
         return geometry;
+    }
+
+    @Override
+    protected void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment){
+        
     }
 
     @Override
