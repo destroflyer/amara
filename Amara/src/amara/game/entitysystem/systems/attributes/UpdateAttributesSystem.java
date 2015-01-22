@@ -91,18 +91,19 @@ public class UpdateAttributesSystem implements EntitySystem{
             if(autoAttackComponent != null){
                 float autoAttackInterval = (1 / attackSpeed);
                 entityWorld.setComponent(autoAttackComponent.getAutoAttackEntity(), new CooldownComponent(autoAttackInterval));
+                float autoAttackDuration = (float) (Math.min(attackSpeed / 1.2f, 1) * autoAttackInterval);
                 CastAnimationComponent autoAttackCastAnimationComponent = entityWorld.getComponent(autoAttackComponent.getAutoAttackEntity(), CastAnimationComponent.class);
                 if(autoAttackCastAnimationComponent != null){
-                    entityWorld.setComponent(autoAttackCastAnimationComponent.getAnimationEntity(), new LoopDurationComponent(autoAttackInterval));
+                    entityWorld.setComponent(autoAttackCastAnimationComponent.getAnimationEntity(), new LoopDurationComponent(autoAttackDuration));
                 }
                 InstantEffectTriggersComponent instantEffectTriggersComponent = entityWorld.getComponent(autoAttackComponent.getAutoAttackEntity(), InstantEffectTriggersComponent.class);
                 if(instantEffectTriggersComponent != null){
                     int[] instantEffectTriggerEntities = instantEffectTriggersComponent.getEffectTriggerEntities();
                     for(int effectTriggerEntity : instantEffectTriggerEntities){
-                        entityWorld.setComponent(effectTriggerEntity, new TriggerDelayComponent(autoAttackInterval / 2));
+                        entityWorld.setComponent(effectTriggerEntity, new TriggerDelayComponent(autoAttackDuration / 2));
                     }
                 }
-                entityWorld.setComponent(autoAttackComponent.getAutoAttackEntity(), new CastDurationComponent(autoAttackInterval));
+                entityWorld.setComponent(autoAttackComponent.getAutoAttackEntity(), new CastDurationComponent(autoAttackDuration));
             }
             entityWrapper.setComponent(new WalkSpeedComponent(walkSpeed));
             entityWrapper.removeComponent(RequestUpdateAttributesComponent.class);

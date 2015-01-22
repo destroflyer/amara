@@ -18,9 +18,11 @@ public class CheckCampAggroTargetSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(int entity : entityWorld.getEntitiesWithAll(CampComponent.class, AggroTargetComponent.class))
         {
-            int targetEntity = entityWorld.getComponent(entity, AggroTargetComponent.class).getTargetEntity();
-            if(!PerformAutoAttacksSystem.isAttackable(entityWorld, entity, targetEntity)){
-                entityWorld.setComponent(entity, new ResetCampComponent());
+            if(!entityWorld.hasComponent(entity, ResetCampComponent.class)){
+                int targetEntity = entityWorld.getComponent(entity, AggroTargetComponent.class).getTargetEntity();
+                if(!PerformAutoAttacksSystem.isAttackable(entityWorld, entity, targetEntity)){
+                    entityWorld.setComponent(entity, new ResetCampComponent());
+                }
             }
         }
     }

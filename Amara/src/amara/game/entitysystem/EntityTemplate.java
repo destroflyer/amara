@@ -196,7 +196,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsAliveComponent());
             entityWrapper.setComponent(new BaseMaximumHealthComponent(300));
             entityWrapper.setComponent(new BaseAttackDamageComponent(30));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
@@ -384,7 +384,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseMaximumHealthComponent(500));
             entityWrapper.setComponent(new BaseAttackDamageComponent(60));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
@@ -901,7 +901,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseMaximumHealthComponent(450));
             entityWrapper.setComponent(new BaseAttackDamageComponent(50));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.8f));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper zhonyasHourglass = createFromTemplate(entityWorld, "zhonyas_hourglass");
@@ -1106,7 +1106,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsAliveComponent());
             entityWrapper.setComponent(new BaseMaximumHealthComponent(400));
             entityWrapper.setComponent(new BaseAttackDamageComponent(80));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
@@ -1307,7 +1307,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseHealthRegenerationComponent(10));
             entityWrapper.setComponent(new BaseAttackDamageComponent(40));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransRing = createFromTemplate(entityWorld, "dorans_ring");
@@ -1622,7 +1622,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseHealthRegenerationComponent(10));
             entityWrapper.setComponent(new BaseAttackDamageComponent(200));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(4.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper youmuusGhostblade = createFromTemplate(entityWorld, "youmuus_ghostblade");
@@ -1664,7 +1664,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseHealthRegenerationComponent(10));
             entityWrapper.setComponent(new BaseAttackDamageComponent(200));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(4.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper youmuusGhostblade = createFromTemplate(entityWorld, "youmuus_ghostblade");
@@ -2181,7 +2181,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseMaximumHealthComponent(450));
             entityWrapper.setComponent(new BaseAttackDamageComponent(50));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper needlesslyLargeRod = createFromTemplate(entityWorld, "needlessly_large_rod");
@@ -2274,9 +2274,9 @@ public class EntityTemplate{
             
             entityWrapper.setComponent(new IsAliveComponent());
             int spawnCounter = entityWorld.getComponent(parameters[0], RepeatingTriggerCounterComponent.class).getCounter();
-            entityWrapper.setComponent(new BaseMaximumHealthComponent(600 + (spawnCounter * 100)));
-            entityWrapper.setComponent(new BaseAttackDamageComponent(30 + (spawnCounter * 5)));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(600 + (spawnCounter * 10)));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(30 + (spawnCounter * 1)));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(3));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
@@ -2307,9 +2307,9 @@ public class EntityTemplate{
             
             entityWrapper.setComponent(new IsAliveComponent());
             int spawnCounter = entityWorld.getComponent(parameters[0], RepeatingTriggerCounterComponent.class).getCounter();
-            entityWrapper.setComponent(new BaseMaximumHealthComponent(450 + (spawnCounter * 100)));
-            entityWrapper.setComponent(new BaseAttackDamageComponent(20 + (spawnCounter * 5)));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(450 + (spawnCounter * 10)));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(20 + (spawnCounter * 1)));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(3));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
@@ -2346,7 +2346,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsAliveComponent());
             entityWrapper.setComponent(new BaseMaximumHealthComponent(900));
             entityWrapper.setComponent(new BaseAttackDamageComponent(35));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(4));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
@@ -2445,7 +2445,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsAliveComponent());
             entityWrapper.setComponent(new BaseMaximumHealthComponent(1100));
             entityWrapper.setComponent(new BaseAttackDamageComponent(25));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.5f));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(4));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
