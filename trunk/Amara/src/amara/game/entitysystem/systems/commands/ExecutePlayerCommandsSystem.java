@@ -66,9 +66,12 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     AutoAttackCommand autoAttackCommand = (AutoAttackCommand) command;
                     AutoAttackComponent autoAttackComponent = entityWorld.getComponent(selectedUnit, AutoAttackComponent.class);
                     if(autoAttackComponent != null){
-                        if(PerformAutoAttacksSystem.isAttackable(entityWorld, selectedUnit, autoAttackCommand.getTargetEntity())){
-                            if(UnitUtil.tryCancelAction(entityWorld, selectedUnit)){
-                                entityWorld.setComponent(selectedUnit, new AggroTargetComponent(autoAttackCommand.getTargetEntity()));
+                        AggroTargetComponent aggroTargetComponent = entityWorld.getComponent(selectedUnit, AggroTargetComponent.class);
+                        if((aggroTargetComponent == null) || (autoAttackCommand.getTargetEntity() != aggroTargetComponent.getTargetEntity())){
+                            if(PerformAutoAttacksSystem.isAttackable(entityWorld, selectedUnit, autoAttackCommand.getTargetEntity())){
+                                if(UnitUtil.tryCancelAction(entityWorld, selectedUnit)){
+                                    entityWorld.setComponent(selectedUnit, new AggroTargetComponent(autoAttackCommand.getTargetEntity()));
+                                }
                             }
                         }
                     }

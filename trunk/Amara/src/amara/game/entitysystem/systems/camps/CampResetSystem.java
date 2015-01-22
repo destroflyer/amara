@@ -9,6 +9,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.camps.*;
 import amara.game.entitysystem.components.effects.general.*;
+import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
@@ -24,14 +25,14 @@ public class CampResetSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, ResetCampComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(ResetCampComponent.class))
-        {
+        for(int entity : entityWorld.getEntitiesWithAll(ResetCampComponent.class)){
             int campEntity = entityWorld.getComponent(entity, CampComponent.class).getCampEntity();
             CampTransformComponent campTransformComponent = entityWorld.getComponent(campEntity, CampTransformComponent.class);
             int targetPositionEntity = entityWorld.createEntity();
             entityWorld.setComponent(targetPositionEntity, new PositionComponent(campTransformComponent.getPosition()));
-            if(ExecutePlayerCommandsSystem.walk(entityWorld, entity, targetPositionEntity, -1)){
+            if(ExecutePlayerCommandsSystem.tryWalk(entityWorld, entity, targetPositionEntity, -1)){
+                int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
+                entityWorld.removeComponent(movementEntity, MovementIsCancelableComponent.class);
                 EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
                 effectTrigger.setComponent(new TriggerTemporaryComponent());
                 effectTrigger.setComponent(new TargetReachedTriggerComponent());
@@ -49,7 +50,9 @@ public class CampResetSystem implements EntitySystem{
                 effectTrigger.setComponent(new TriggerSourceComponent(entity));
                 effectTrigger.setComponent(new TriggerOnceComponent());
             }
+            else{
+                entityWorld.removeEntity(targetPositionEntity);
+            }
         }
-        observer.reset();
     }
 }
