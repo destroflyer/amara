@@ -29,21 +29,28 @@ public class GameInfoBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_GameInfo){
             final Message_GameInfo message = (Message_GameInfo) receivedMessage;
-            System.out.println("Loading map \"" + message.getMapName() + "\".");
+            final AppStateManager stateManager = mainApplication.getStateManager();
             mainApplication.enqueueTask(new Runnable(){
 
                 @Override
                 public void run(){
-                    AppStateManager stateManager = mainApplication.getStateManager();
-                    Map map = MapFileHandler.load(message.getMapName());
-                    stateManager.attach(new MapAppState(map));
-                    stateManager.attach(new MapObstaclesAppState());
-                    stateManager.attach(new LocalEntitySystemAppState());
-                    stateManager.attach(new PlayerAppState(message.getPlayerEntity()));
-                    stateManager.attach(new ClientChatAppState());
-                    stateManager.attach(new SendPlayerCommandsAppState());
-                    stateManager.attach(new ClientInitializedAppState());
-                    stateManager.getState(NiftyAppState.class).getScreenController(ScreenController_LoadingScreen.class).setTitle("Waiting for all players...");
+                    stateManager.getState(NiftyAppState.class).getScreenController(ScreenController_LoadingScreen.class).setTitle("Loading map...");
+                    new Thread(new Runnable(){
+
+                        @Override
+                        public void run(){
+                            System.out.println("Loading map \"" + message.getMapName() + "\".");
+                            Map map = MapFileHandler.load(message.getMapName());
+                            stateManager.attach(new MapAppState(map));
+                            stateManager.attach(new MapObstaclesAppState());
+                            stateManager.attach(new LocalEntitySystemAppState());
+                            stateManager.attach(new PlayerAppState(message.getPlayerEntity()));
+                            stateManager.attach(new ClientChatAppState());
+                            stateManager.attach(new SendPlayerCommandsAppState());
+                            stateManager.attach(new ClientInitializedAppState());
+                            stateManager.getState(NiftyAppState.class).getScreenController(ScreenController_LoadingScreen.class).setTitle("Waiting for all players...");
+                        }
+                    }).start();
                 }
             });
         }

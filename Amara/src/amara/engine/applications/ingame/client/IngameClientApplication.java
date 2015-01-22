@@ -64,10 +64,7 @@ public class IngameClientApplication extends DisplayApplication{
             stateManager.attach(new CinematicAppState());
             stateManager.attach(new IngameCameraAppState());
             stateManager.attach(new IngameFeedbackAppState());
-            stateManager.getState(IngameCameraAppState.class).setEnabled(false);
-            //Debug Camera
-            cam.setLocation(new Vector3f(22, 34, -10));
-            cam.lookAtDirection(new Vector3f(0, -1.3f, 1), Vector3f.UNIT_Y);
+            stateManager.attach(new LoadingScreenAppState());
         }catch(ServerConnectionException ex){
             System.out.println(ex.getMessage());
             System.exit(0);
