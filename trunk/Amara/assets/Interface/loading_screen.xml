@@ -3,8 +3,8 @@
     <useStyles filename="nifty-default-styles.xml"/>
     <useControls filename="nifty-default-controls.xml"/>
     <screen id="start" controller="amara.engine.applications.ingame.client.gui.ScreenController_LoadingScreen">
-        <layer childLayout="center" backgroundColor="#000F">
-            <control id="title" name="button" x="35%" y="52%" width="40%" height="15%" label="Connecting...">
+        <layer childLayout="absolute" backgroundColor="#FFFF">
+            <control id="title" name="button" x="30%" y="75%" width="40%" height="15%" label="Connecting...">
             </control>
         </layer>
     </screen>

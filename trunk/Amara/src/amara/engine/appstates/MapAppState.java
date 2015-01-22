@@ -41,6 +41,8 @@ public class MapAppState extends BaseDisplayAppState{
 
     public MapAppState(Map map){
         this.map = map;
+        mapHeightmap = new MapHeightmap(map.getName(), map.getPhysicsInformation());
+        mapTerrain = new MapTerrain(map);
     }
     private Map map;
     private MapHeightmap mapHeightmap;
@@ -53,14 +55,17 @@ public class MapAppState extends BaseDisplayAppState{
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
-        mapHeightmap = new MapHeightmap(map.getName(), map.getPhysicsInformation());
-        mapTerrain = new MapTerrain(map);
         mainApplication.getRootNode().attachChild(mapTerrain.getTerrain());
         mainApplication.getRootNode().attachChild(visualsNode);
         mainApplication.getRootNode().attachChild(cameraNode);
-        initializeCamera();
-        initializeLights();
-        updateVisuals();
+        new Thread(new Runnable(){
+
+            public void run(){
+                initializeCamera();
+                initializeLights();
+                updateVisuals();
+            }
+        }).start();
     }
     
     public void initializeCamera(){
@@ -137,7 +142,7 @@ public class MapAppState extends BaseDisplayAppState{
         modelObjectsVisuals.clear();
         cameraNode.detachAllChildren();
         removeFilters();
-        BatchNode modelsNode = new BatchNode();
+        final BatchNode modelsNode = new BatchNode();
         MapVisuals visuals = map.getVisuals();
         for(MapVisual visual : visuals.getMapVisuals()){
             if(visual instanceof ModelVisual){
@@ -170,8 +175,13 @@ public class MapAppState extends BaseDisplayAppState{
         }
         modelsNode.batch();
         modelsNode.setShadowMode(RenderQueue.ShadowMode.Cast);
-        visualsNode.attachChild(modelsNode);
-        visualsNode.attachChild(SkyFactory.createSky(mainApplication.getAssetManager(), "Textures/skies/default.jpg", true));
+        mainApplication.enqueueTask(new Runnable(){
+
+            public void run(){
+                visualsNode.attachChild(modelsNode);
+                visualsNode.attachChild(SkyFactory.createSky(mainApplication.getAssetManager(), "Textures/skies/default.jpg", true));
+            }
+        });
     }
     
     private void addFilter(Filter filter){

@@ -20,14 +20,26 @@ public class LightAppState extends BaseDisplayAppState{
     private ArrayList<Light> lights = new ArrayList<Light>();
     private ArrayList<AbstractShadowFilter> shadowsFilters = new ArrayList<AbstractShadowFilter>();
     
-    public void addLight(Light light){
+    public void addLight(final Light light){
         lights.add(light);
-        mainApplication.getRootNode().addLight(light);
+        mainApplication.enqueueTask(new Runnable(){
+
+            @Override
+            public void run(){
+                mainApplication.getRootNode().addLight(light);
+            }
+        });
     }
     
-    public void removeLight(Light light){
+    public void removeLight(final Light light){
         lights.remove(light);
-        mainApplication.getRootNode().removeLight(light);
+        mainApplication.enqueueTask(new Runnable(){
+
+            @Override
+            public void run(){
+                mainApplication.getRootNode().removeLight(light);
+            }
+        });
     }
     
     public void addShadowFilter(AbstractShadowFilter abstractShadowFilter){
@@ -50,13 +62,10 @@ public class LightAppState extends BaseDisplayAppState{
     
     public void removeAll(){
         for(Light light : lights){
-            mainApplication.getRootNode().removeLight(light);
+            removeLight(light);
         }
-        lights.clear();
-        PostFilterAppState postFilterAppState = getAppState(PostFilterAppState.class);
         for(AbstractShadowFilter abstractShadowFilter : shadowsFilters){
-            postFilterAppState.removeFilter(abstractShadowFilter);
+            removeShadowFilter(abstractShadowFilter);
         }
-        shadowsFilters.clear();
     }
 }
