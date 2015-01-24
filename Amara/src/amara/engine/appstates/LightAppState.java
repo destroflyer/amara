@@ -61,20 +61,26 @@ public class LightAppState extends BaseDisplayAppState{
     }
     
     public void removeAll(){
-        mainApplication.enqueueTask(new Runnable(){
+        for(final Light light : lights){
+            mainApplication.enqueueTask(new Runnable(){
 
-            @Override
-            public void run(){
-                for(Light light : lights){
+                @Override
+                public void run(){
                     mainApplication.getRootNode().removeLight(light);
                 }
-                lights.clear();
-                PostFilterAppState postFilterAppState = getAppState(PostFilterAppState.class);
-                for(AbstractShadowFilter abstractShadowFilter : shadowsFilters){
+            });
+        }
+        lights.clear();
+        final PostFilterAppState postFilterAppState = getAppState(PostFilterAppState.class);
+        for(final AbstractShadowFilter abstractShadowFilter : shadowsFilters){
+            mainApplication.enqueueTask(new Runnable(){
+
+                @Override
+                public void run(){
                     postFilterAppState.removeFilter(abstractShadowFilter);
                 }
-                shadowsFilters.clear();
-            }
-        });
+            });
+        }
+        shadowsFilters.clear();
     }
 }
