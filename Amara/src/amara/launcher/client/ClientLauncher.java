@@ -5,7 +5,6 @@
 
 package amara.launcher.client;
 
-import amara.Util;
 import java.awt.AWTEvent;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -13,6 +12,7 @@ import java.awt.event.AWTEventListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import javax.swing.JFrame;
+import amara.Util;
 import amara.engine.applications.launcher.startscreen.screens.*;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
 import amara.engine.applications.masterserver.server.network.messages.*;
@@ -21,8 +21,9 @@ import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.files.FileManager;
 import amara.engine.network.*;
 import amara.engine.network.exceptions.*;
-import amara.engine.settings.DefaultSettings;
 import amara.launcher.FrameUtil;
+import amara.launcher.client.api.objects.Masterserver;
+import amara.launcher.client.api.requests.GetMasterserversRequest;
 import amara.launcher.client.network.backends.*;
 import amara.launcher.client.panels.*;
 
@@ -37,11 +38,11 @@ public class ClientLauncher extends JFrame{
         PanLauncher panLauncher = new PanLauncher();
         panLauncher.setSize(panImage.getSize());
         panImage.add(panLauncher);
-        txtMasterserverPort.setText("" + DefaultSettings.NETWORK_PORT);
         Toolkit.getDefaultToolkit().addAWTEventListener(keyListener, AWTEvent.KEY_EVENT_MASK);
         getContentPane().requestFocus();
         FrameUtil.initFrameSpecials(this);
         FrameUtil.centerFrame(this);
+        loadMasterservers();
         connectToMasterserver();
     }
     private MasterserverClientApplication masterClient;
@@ -62,44 +63,60 @@ public class ClientLauncher extends JFrame{
         }
     };
     
+    private void loadMasterservers(){
+        cbxMasterserverHost.removeAllItems();
+        GetMasterserversRequest request = new GetMasterserversRequest();
+        request.send();
+        if(request.getMasterservers().length > 0){
+            Masterserver masterserver = request.getMasterservers()[0];
+            cbxMasterserverHost.addItem(masterserver.getIP());
+            txtMasterserverPort.setText("" + masterserver.getPort());
+        }
+    }
+    
     private void connectToMasterserver(){
-        new Thread(new Runnable(){
+        btnPlay.setEnabled(false);
+        if((cbxMasterserverHost.getSelectedItem() != null) && (!txtMasterserverPort.getText().isEmpty())){
+            new Thread(new Runnable(){
 
-            @Override
-            public void run(){
-                btnPlay.setEnabled(false);
-                pbrCompleteUpdate.setString("Connecting to masterserver...");
-                pbrCompleteUpdate.setIndeterminate(true);
-                pbrCompleteUpdate.setValue(0);
-                pbrCurrentFile.setValue(0);
-                cbxMasterserverHost.setEnabled(false);
-                txtMasterserverPort.setEnabled(false);
-                String host = cbxMasterserverHost.getSelectedItem().toString();
-                int port = Integer.parseInt(txtMasterserverPort.getText());
-                try{
-                    if(masterClient != null){
+                @Override
+                public void run(){
+                    pbrCompleteUpdate.setString("Connecting to masterserver...");
+                    pbrCompleteUpdate.setIndeterminate(true);
+                    pbrCompleteUpdate.setValue(0);
+                    pbrCurrentFile.setValue(0);
+                    cbxMasterserverHost.setEnabled(false);
+                    txtMasterserverPort.setEnabled(false);
+                    String host = cbxMasterserverHost.getSelectedItem().toString();
+                    int port = Integer.parseInt(txtMasterserverPort.getText());
+                    try{
+                        if(masterClient != null){
+                            NetworkClient networkClient = getNetworkClient();
+                            networkClient.disconnect();
+                        }
+                        masterClient = new MasterserverClientApplication(new HostInformation(host, port));
+                        masterClient.start();
                         NetworkClient networkClient = getNetworkClient();
-                        networkClient.disconnect();
+                        networkClient.addMessageBackend(new UpdateFilesBackend(ClientLauncher.this));
+                        networkClient.sendMessage(new Message_GetUpdateFiles());
+                    }catch(ServerConnectionException ex){
+                        onMasterserverOffline();
+                    }catch(ServerConnectionTimeoutException ex){
+                        onMasterserverOffline();
                     }
-                    masterClient = new MasterserverClientApplication(new HostInformation(host, port));
-                    masterClient.start();
-                    NetworkClient networkClient = getNetworkClient();
-                    networkClient.addMessageBackend(new UpdateFilesBackend(ClientLauncher.this));
-                    networkClient.sendMessage(new Message_GetUpdateFiles());
-                }catch(ServerConnectionException ex){
-                    onMasterserverOffline();
-                }catch(ServerConnectionTimeoutException ex){
-                    onMasterserverOffline();
-                }
-                EventQueue.invokeLater(new Runnable(){
+                    EventQueue.invokeLater(new Runnable(){
 
-                    @Override
-                    public void run(){
-                        pbrCompleteUpdate.setIndeterminate(false);
-                    }
-                });
-            }
-        }).start();
+                        @Override
+                        public void run(){
+                            pbrCompleteUpdate.setIndeterminate(false);
+                        }
+                    });
+                }
+            }).start();
+        }
+        else{
+            onMasterserverOffline();
+        }
     }
     
     private NetworkClient getNetworkClient(){
@@ -209,7 +226,6 @@ public class ClientLauncher extends JFrame{
         setResizable(false);
 
         cbxMasterserverHost.setEditable(true);
-        cbxMasterserverHost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "141.70.100.184" }));
         cbxMasterserverHost.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxMasterserverHostItemStateChanged(evt);

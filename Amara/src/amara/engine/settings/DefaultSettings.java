@@ -12,7 +12,6 @@ import java.awt.Dimension;
  */
 public class DefaultSettings{
     
-    public static final int NETWORK_PORT = 33900;
     public static final Dimension[] RESOLUTIONS = new Dimension[]{
         new Dimension(320, 240),
         new Dimension(400, 240),

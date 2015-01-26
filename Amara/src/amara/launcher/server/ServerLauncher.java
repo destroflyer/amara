@@ -6,6 +6,7 @@ package amara.launcher.server;
 
 import amara.engine.applications.masterserver.server.MasterserverServerApplication;
 import amara.launcher.FrameUtil;
+import amara.launcher.client.api.requests.RegisterMasterserverRequest;
 
 /**
  *
@@ -18,6 +19,7 @@ public class ServerLauncher extends javax.swing.JFrame{
         FrameUtil.initFrameSpecials(this);
         masterServer = new MasterserverServerApplication(33900);
         masterServer.start();
+        new RegisterMasterserverRequest(masterServer.getPort()).send();
     }
     private MasterserverServerApplication masterServer;
 
