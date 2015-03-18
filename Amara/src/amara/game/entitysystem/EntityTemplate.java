@@ -745,7 +745,7 @@ public class EntityTemplate{
             EntityWrapper effect4 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("sonic_wave_projectile"));
-            spawnInformation.setComponent(new SpawnMovementSpeedComponent(15));
+            spawnInformation.setComponent(new SpawnMovementSpeedComponent(17));
             effect4.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
             effectTrigger4.setComponent(new TriggeredEffectComponent(effect4.getId()));
             effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
@@ -755,6 +755,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CooldownComponent(3));
         }
         else if(templateName.equals("sonic_wave_projectile")){
+            entityWrapper.setComponent(new ModelComponent("Models/cloud/skin.xml"));
             entityWrapper.setComponent(new HitboxComponent(new Circle(0.9f)));
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
@@ -777,7 +778,7 @@ public class EntityTemplate{
             effect2.setComponent(new RemoveEntityComponent());
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            entityWrapper.setComponent(new LifetimeComponent(1));
+            entityWrapper.setComponent(new LifetimeComponent(0.9f));
         }
         else if(templateName.equals("resonating_strike")){
             entityWrapper.setComponent(new NameComponent("Resonating Strike"));
@@ -1227,29 +1228,40 @@ public class EntityTemplate{
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
             movement.setComponent(new TargetedMovementDirectionComponent());
-            movement.setComponent(new MovementSpeedComponent(15));
+            movement.setComponent(new MovementSpeedComponent(20));
             EntityWrapper movementAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             movementAnimation.setComponent(new NameComponent("spin"));
             movementAnimation.setComponent(new LoopDurationComponent(0.3f));
             movement.setComponent(new MovementAnimationComponent(movementAnimation.getId()));
             movement.setComponent(new DistanceLimitComponent(10));
             effect1.setComponent(new MoveComponent(movement.getId()));
+            effect1.setComponent(new DeactivateHitboxComponent());
             EntityWrapper audioCast = entityWorld.getWrapped(entityWorld.createEntity());
             audioCast.setComponent(new AudioComponent("Sounds/sounds/spells/spinning_slash_cast.ogg"));
             effect1.setComponent(new PlayAudioComponent(audioCast.getId()));
+            //Reactivate hitbox
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetReachedTriggerComponent());
+            effectTrigger2.setComponent(new SourceTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new ActivateHitboxComponent());
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerOnceComponent());
+            effectTrigger2.setComponent(new TriggerOnCancelComponent());
+            effect1.setComponent(new AddEffectTriggersComponent(effectTrigger2.getId()));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
             spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
             spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
             //Trigger spell effects
-            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
-            effectTrigger2.setComponent(new CasterTargetComponent());
-            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
-            effect2.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
-            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
-            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
+            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger3.setComponent(new CasterTargetComponent());
+            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect3.setComponent(new TriggerSpellEffectsComponent(entityWrapper.getId()));
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CooldownComponent(1.5f));
@@ -1351,7 +1363,7 @@ public class EntityTemplate{
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("infected_cleaver_object"));
-            spawnInformation.setComponent(new SpawnMovementSpeedComponent(12));
+            spawnInformation.setComponent(new SpawnMovementSpeedComponent(17));
             effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
@@ -1371,7 +1383,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new StopBeforeCastingComponent());
             EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             castAnimation.setComponent(new NameComponent("punch"));
-            castAnimation.setComponent(new LoopDurationComponent(0.3f));
+            castAnimation.setComponent(new LoopDurationComponent(0.25f));
             entityWrapper.setComponent(new CastAnimationComponent(castAnimation.getId()));
             entityWrapper.setComponent(new CooldownComponent(3));
         }
@@ -1403,7 +1415,7 @@ public class EntityTemplate{
             effect2.setComponent(new RemoveEntityComponent());
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
-            entityWrapper.setComponent(new LifetimeComponent(0.8f));
+            entityWrapper.setComponent(new LifetimeComponent(0.6f));
         }
         else if(templateName.equals("burning_agony")){
             entityWrapper.setComponent(new NameComponent("Burning Agony"));
