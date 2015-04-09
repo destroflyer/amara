@@ -93,7 +93,20 @@
                                 </panel>
                             </panel>
                         </panel>
-                        <panel backgroundColor="#000D"/>
+                        <panel childLayout="horizontal" backgroundColor="#000D">
+                            <panel width="32px"/>
+                            <panel childLayout="vertical" width="26px">
+                                <panel height="7px"/>
+                                <panel childLayout="horizontal">
+                                    <image filename="Interface/hud/gold.png" width="26px" height="26px"></image>
+                                </panel>
+                            </panel>
+                            <panel width="7px"/>
+                            <panel childLayout="vertical">
+                                <panel height="11px"/>
+                                <text id="gold" text="????" textHAlign="left" font="Interface/fonts/Verdana_14.fnt"/>
+                            </panel>
+                        </panel>
                         <panel height="6px"/>
                     </panel>
                     <panel/>

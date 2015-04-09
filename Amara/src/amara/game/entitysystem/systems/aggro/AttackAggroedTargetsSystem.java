@@ -19,7 +19,7 @@ public class AttackAggroedTargetsSystem implements EntitySystem{
         {
             int[] aggroedTargets = entityWorld.getComponent(entity, TargetsInAggroRangeComponent.class).getTargets();
             if(aggroedTargets.length > 0){
-                AggroUtil.drawAggro(entityWorld, entity, aggroedTargets[0]);
+                AggroUtil.tryDrawAggro(entityWorld, entity, aggroedTargets[0]);
             }
         }
     }

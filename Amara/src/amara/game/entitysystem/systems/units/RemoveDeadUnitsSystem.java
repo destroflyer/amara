@@ -5,7 +5,6 @@
 package amara.game.entitysystem.systems.units;
 
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.systems.buffs.RemoveBuffsSystem;
 
@@ -20,21 +19,11 @@ public class RemoveDeadUnitsSystem implements EntitySystem{
         ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsAliveComponent.class);
         for(int entity : observer.getRemoved().getEntitiesWithAll(IsAliveComponent.class))
         {
-            if(!isPlayerUnit(entityWorld, entity)){
+            if(!UnitUtil.isPlayerUnit(entityWorld, entity)){
                 RemoveBuffsSystem.removeAllBuffs(entityWorld, entity);
                 entityWorld.removeEntity(entity);
             }
         }
         observer.reset();
-    }
-    
-    private boolean isPlayerUnit(EntityWorld entityWorld, int entity){
-        for(int playerEntity : entityWorld.getEntitiesWithAll(SelectedUnitComponent.class)){
-            int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-            if(selectedEntity == entity){
-                return true;
-            }
-        }
-        return false;
     }
 }

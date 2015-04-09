@@ -22,10 +22,10 @@ public class TargetUtil{
             if((sourceTeamComponent != null) && (targetTeamComponent != null)){
                 isValid = false;
                 if(entityWorld.getComponent(targetRulesEntity, AcceptAlliesComponent.class) != null){
-                    isValid |= (sourceTeamComponent.getTeamEntityID() == targetTeamComponent.getTeamEntityID());
+                    isValid |= (sourceTeamComponent.getTeamEntity() == targetTeamComponent.getTeamEntity());
                 }
                 if(entityWorld.getComponent(targetRulesEntity, AcceptEnemiesComponent.class) != null){
-                    isValid |= (sourceTeamComponent.getTeamEntityID() != targetTeamComponent.getTeamEntityID());
+                    isValid |= (sourceTeamComponent.getTeamEntity() != targetTeamComponent.getTeamEntity());
                 }
             }
             else{

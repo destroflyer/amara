@@ -29,18 +29,18 @@ public class DisplayInventorySystem extends GUIDisplaySystem{
     private void check(EntityWorld entityWorld, InventoryComponent inventoryComponent){
         if(inventoryComponent != null){
             for(int i=0;i<6;i++){
-                String visualisationName = "none";
+                String itemImageName = "none";
                 int[] items = inventoryComponent.getItemEntities();
                 if((i < items.length) && (items[i] != -1)){
-                    ItemVisualisationComponent itemVisualisationComponent = entityWorld.getComponent(items[i], ItemVisualisationComponent.class);
-                    if(itemVisualisationComponent != null){
-                        visualisationName = itemVisualisationComponent.getName();
+                    ItemIDComponent itemIDComponent = entityWorld.getComponent(items[i], ItemIDComponent.class);
+                    if(itemIDComponent != null){
+                        itemImageName = itemIDComponent.getID();
                     }
                     else{
-                        visualisationName = "unknown";
+                        itemImageName = "unknown";
                     }
                 }
-                screenController_HUD.setInventoryItemImage(i, "Interface/hud/items/" + visualisationName + ".png");
+                screenController_HUD.setInventoryItemImage(i, "Interface/hud/items/" + itemImageName + ".png");
             }
         }
     }

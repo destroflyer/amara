@@ -9,6 +9,8 @@ import amara.engine.network.*;
 import amara.engine.network.messages.*;
 import amara.game.entitysystem.EntityWorld;
 import amara.game.entitysystem.components.game.*;
+import amara.game.entitysystem.components.players.*;
+import amara.game.entitysystem.components.units.*;
 import amara.game.games.*;
 import amara.game.maps.*;
 
@@ -53,6 +55,19 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                             case 1:
                                 entityWorld.setComponent(Game.ENTITY, new CinematicComponent(Map_Destroforest_CinematicIntro.class.getName()));
                                 break;
+                        }
+                    }catch(NumberFormatException ex){
+                    }
+                }
+                else if(message.getText().startsWith("/gold ")){
+                    try{
+                        int gold = Integer.parseInt(message.getText().substring(6));
+                        if(gold >= 0){
+                            int selectedUnit = entityWorld.getComponent(gamePlayer.getEntityID(), SelectedUnitComponent.class).getEntity();
+                            entityWorld.setComponent(selectedUnit, new GoldComponent(gold));
+                        }
+                        else{
+                            messageResponse.addAnswerMessage(new Message_ChatMessage("No negative gold values allowed"));
                         }
                     }catch(NumberFormatException ex){
                     }
