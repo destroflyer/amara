@@ -8,6 +8,7 @@ import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
+import amara.game.entitysystem.components.effects.aggro.*;
 import amara.game.entitysystem.components.effects.audio.*;
 import amara.game.entitysystem.components.effects.buffs.*;
 import amara.game.entitysystem.components.effects.buffs.areas.*;
@@ -120,6 +121,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         AddEffectTriggersComponent.class,
                         RemoveEffectTriggersComponent.class,
                         RemoveEntityComponent.class,
+                        DrawTeamAggroComponent.class,
                         PauseAudioComponent.class,
                         PlayAudioComponent.class,
                         StopAudioComponent.class,

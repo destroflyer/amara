@@ -19,6 +19,7 @@ import amara.game.entitysystem.components.game.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.players.*;
+import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.aggro.*;
 import amara.game.entitysystem.systems.attributes.*;
@@ -27,6 +28,7 @@ import amara.game.entitysystem.systems.buffs.areas.*;
 import amara.game.entitysystem.systems.camps.*;
 import amara.game.entitysystem.systems.commands.*;
 import amara.game.entitysystem.systems.effects.*;
+import amara.game.entitysystem.systems.effects.aggro.*;
 import amara.game.entitysystem.systems.effects.audio.*;
 import amara.game.entitysystem.systems.effects.buffs.*;
 import amara.game.entitysystem.systems.effects.buffs.areas.*;
@@ -113,6 +115,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
                 inventoryResultSet.close();
                 ownedCharacterResultSet.close();
                 unit.setComponent(new InventoryComponent(Util.convertToArray(inventory)));
+                unit.setComponent(new GoldComponent(475));
             }catch(Exception ex){
                 ex.printStackTrace();
             }
@@ -169,6 +172,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new RepeatingBuffEffectsSystem());
         addEntitySystem(new CalculateEffectImpactSystem());
         addEntitySystem(new ApplyPlayCinematicSystem());
+        addEntitySystem(new ApplyDrawTeamAggroSystem());
         addEntitySystem(new ApplyPauseAudioSystem());
         addEntitySystem(new ApplyPlayAudioSystem());
         addEntitySystem(new ApplyStopAudioSystem());
@@ -213,6 +217,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyRemoveComponentsSystem());
         addEntitySystem(new ApplyRemoveEffectTriggersSystem());
         addEntitySystem(new ApplyRemoveEntitySystem());
+        addEntitySystem(new DrawAggroOnDamageSystem());
         addEntitySystem(new RemoveAppliedEffectsSystem());
         addEntitySystem(new HealthRegenerationSystem());
         addEntitySystem(new DeathSystem());

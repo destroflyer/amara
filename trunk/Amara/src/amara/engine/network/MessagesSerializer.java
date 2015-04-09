@@ -20,6 +20,7 @@ import amara.game.entitysystem.components.buffs.areas.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.camps.*;
 import amara.game.entitysystem.components.effects.*;
+import amara.game.entitysystem.components.effects.aggro.*;
 import amara.game.entitysystem.components.effects.audio.*;
 import amara.game.entitysystem.components.effects.buffs.*;
 import amara.game.entitysystem.components.effects.buffs.areas.*;
@@ -121,6 +122,7 @@ public class MessagesSerializer{
             Message_ChatMessage.class,
             Message_Command.class,
                 AutoAttackCommand.class,
+                BuyItemCommand.class,
                 Command.class,
                 MoveCommand.class,
                 StopCommand.class,
@@ -129,6 +131,7 @@ public class MessagesSerializer{
                 CastSelfcastSpellCommand.class,
                 CastSingleTargetSpellCommand.class,
                     SpellIndex.class,
+                SellItemCommand.class,
             Message_ClientConnection.class,
             Message_ClientDisconnection.class,
             Message_ClientInitialized.class,
@@ -189,6 +192,8 @@ public class MessagesSerializer{
                         ApplyEffectImpactComponent.class,
                         PrepareEffectComponent.class,
                         RemainingEffectDelayComponent.class,
+                        //effects/aggro
+                        DrawTeamAggroComponent.class,
                         //effects/audio
                         PauseAudioComponent.class,
                         PlayAudioComponent.class,
@@ -269,8 +274,10 @@ public class MessagesSerializer{
                         CastSpellComponent.class,
                         //items
                         InventoryComponent.class,
+                        IsSellableComponent.class,
                         ItemActiveComponent.class,
-                        ItemVisualisationComponent.class,
+                        ItemIDComponent.class,
+                        ItemRecipeComponent.class,
                         //maps
                         MapObjectiveComponent.class,
                         PlayerDeathRulesComponent.class,
@@ -366,6 +373,7 @@ public class MessagesSerializer{
                         CampComponent.class,
                         CastSpellOnCooldownWhileAttackingComponent.class,
                         CurrentActionEffectCastsComponent.class,
+                        GoldComponent.class,
                         IntersectionRulesComponent.class,
                         IsAliveComponent.class,
                         IsCastingComponent.class,

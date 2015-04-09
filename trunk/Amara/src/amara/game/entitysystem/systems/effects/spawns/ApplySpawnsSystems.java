@@ -42,7 +42,7 @@ public class ApplySpawnsSystems implements EntitySystem{
                         EffectCastSourceSpellComponent.class
                     });
                     if(teamComponent != null){
-                        spawnedObject.setComponent(new TeamComponent(teamComponent.getTeamEntityID()));
+                        spawnedObject.setComponent(new TeamComponent(teamComponent.getTeamEntity()));
                     }
                     boolean moveToTarget = spawnInformation.hasComponent(SpawnMoveToTargetComponent.class);
                     Vector2f position;

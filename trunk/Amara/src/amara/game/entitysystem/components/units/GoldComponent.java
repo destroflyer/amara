@@ -11,18 +11,18 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class TeamComponent{
+public class GoldComponent{
 
-    public TeamComponent(){
+    public GoldComponent(){
         
     }
     
-    public TeamComponent(int teamEntity){
-        this.teamEntity = teamEntity;
+    public GoldComponent(int gold){
+        this.gold = gold;
     }
-    private int teamEntity;
+    private int gold;
 
-    public int getTeamEntity(){
-        return teamEntity;
+    public int getGold(){
+        return gold;
     }
 }

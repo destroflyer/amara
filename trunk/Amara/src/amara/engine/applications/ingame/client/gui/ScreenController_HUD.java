@@ -93,6 +93,10 @@ public class ScreenController_HUD extends GameScreenController{
         getElementByID(prefix + "_" + index + "_cooldown").hide();
     }
     
+    public void setGold(int gold){
+        getTextRenderer("gold").setText("" + gold);
+    }
+    
     public void setPing(int ping){
         int maximumWidth = 69;
         int maximumDisplayedPing = 400;

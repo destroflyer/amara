@@ -11,6 +11,7 @@ import amara.game.entitysystem.components.audio.*;
 import amara.game.entitysystem.components.buffs.*;
 import amara.game.entitysystem.components.buffs.areas.*;
 import amara.game.entitysystem.components.buffs.status.*;
+import amara.game.entitysystem.components.effects.aggro.*;
 import amara.game.entitysystem.components.effects.audio.*;
 import amara.game.entitysystem.components.effects.buffs.*;
 import amara.game.entitysystem.components.effects.buffs.areas.*;
@@ -76,6 +77,7 @@ public class EntityTemplate{
             effectTrigger1.setComponent(new TargetTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
             effect1.setComponent(new ScalingAttackDamagePhysicalDamageComponent(1));
+            effect1.setComponent(new DrawTeamAggroComponent(15));
             effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
             effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
@@ -135,6 +137,7 @@ public class EntityTemplate{
             effectTrigger1.setComponent(new TargetTargetComponent());
             EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
             effect1.setComponent(new ScalingAttackDamagePhysicalDamageComponent(1));
+            effect1.setComponent(new DrawTeamAggroComponent(15));
             EntityWrapper audioCast = entityWorld.getWrapped(entityWorld.createEntity());
             audioCast.setComponent(new AudioComponent("Sounds/sounds/spells/melee_autoattack_cast.ogg"));
             audioCast.setComponent(new AudioVolumeComponent(0.75f));
@@ -2541,29 +2544,41 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CooldownComponent(7));
         }
         else if(templateName.equals("boots")){
-            entityWrapper.setComponent(new ItemVisualisationComponent("boots"));
+            entityWrapper.setComponent(new ItemIDComponent("boots"));
+            entityWrapper.setComponent(new ItemRecipeComponent(325));
+            entityWrapper.setComponent(new IsSellableComponent(227));
             entityWrapper.setComponent(new BonusFlatWalkSpeedComponent(0.5f));
         }
         else if(templateName.equals("dorans_blade")){
-            entityWrapper.setComponent(new ItemVisualisationComponent("dorans_blade"));
+            entityWrapper.setComponent(new ItemIDComponent("dorans_blade"));
+            entityWrapper.setComponent(new ItemRecipeComponent(440));
+            entityWrapper.setComponent(new IsSellableComponent(176));
             entityWrapper.setComponent(new BonusFlatMaximumHealthComponent(80));
             entityWrapper.setComponent(new BonusFlatAttackDamageComponent(10));
         }
         else if(templateName.equals("dorans_ring")){
-            entityWrapper.setComponent(new ItemVisualisationComponent("dorans_ring"));
+            entityWrapper.setComponent(new ItemIDComponent("dorans_ring"));
+            entityWrapper.setComponent(new ItemRecipeComponent(400));
+            entityWrapper.setComponent(new IsSellableComponent(160));
             entityWrapper.setComponent(new BonusFlatMaximumHealthComponent(80));
             entityWrapper.setComponent(new BonusFlatAbilityPowerComponent(15));
         }
         else if(templateName.equals("needlessly_large_rod")){
-            entityWrapper.setComponent(new ItemVisualisationComponent("needlessly_large_rod"));
+            entityWrapper.setComponent(new ItemIDComponent("needlessly_large_rod"));
+            entityWrapper.setComponent(new ItemRecipeComponent(1600));
+            entityWrapper.setComponent(new IsSellableComponent(1120));
             entityWrapper.setComponent(new BonusFlatAbilityPowerComponent(80));
         }
         else if(templateName.equals("dagger")){
-            entityWrapper.setComponent(new ItemVisualisationComponent("dagger"));
+            entityWrapper.setComponent(new ItemIDComponent("dagger"));
+            entityWrapper.setComponent(new ItemRecipeComponent(450));
+            entityWrapper.setComponent(new IsSellableComponent(315));
             entityWrapper.setComponent(new BonusPercentageAttackSpeedComponent(0.12f));
         }
         else if(templateName.equals("zhonyas_hourglass")){
-            entityWrapper.setComponent(new ItemVisualisationComponent("zhonyas_hourglass"));
+            entityWrapper.setComponent(new ItemIDComponent("zhonyas_hourglass"));
+            entityWrapper.setComponent(new ItemRecipeComponent(500, "dorans_ring", "dorans_ring", "needlessly_large_rod"));
+            entityWrapper.setComponent(new IsSellableComponent(2310));
             entityWrapper.setComponent(new BonusFlatAbilityPowerComponent(120));
             EntityWrapper itemActive = createFromTemplate(entityWorld, "zhonyas_hourglass_active");
             entityWrapper.setComponent(new ItemActiveComponent(itemActive.getId()));
@@ -2620,7 +2635,9 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CooldownComponent(5));
         }
         else if(templateName.equals("youmuus_ghostblade")){
-            entityWrapper.setComponent(new ItemVisualisationComponent("youmuus_ghostblade"));
+            entityWrapper.setComponent(new ItemIDComponent("youmuus_ghostblade"));
+            entityWrapper.setComponent(new ItemRecipeComponent(2700));
+            entityWrapper.setComponent(new IsSellableComponent(1890));
             entityWrapper.setComponent(new BonusFlatAttackDamageComponent(30));
             EntityWrapper itemActive = createFromTemplate(entityWorld, "youmuus_ghostblade_active");
             entityWrapper.setComponent(new ItemActiveComponent(itemActive.getId()));
@@ -2656,12 +2673,16 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CooldownComponent(15));
         }
         else if(templateName.equals("tiamat")){
-            entityWrapper.setComponent(new ItemVisualisationComponent("tiamat"));
+            entityWrapper.setComponent(new ItemIDComponent("tiamat"));
+            entityWrapper.setComponent(new ItemRecipeComponent(1900));
+            entityWrapper.setComponent(new IsSellableComponent(1330));
             entityWrapper.setComponent(new BonusFlatAttackDamageComponent(40));
             entityWrapper.setComponent(new BonusFlatHealthRegenerationComponent(15));
         }
         else if(templateName.equals("warmogs_armor")){
-            entityWrapper.setComponent(new ItemVisualisationComponent("warmogs_armor"));
+            entityWrapper.setComponent(new ItemIDComponent("warmogs_armor"));
+            entityWrapper.setComponent(new ItemRecipeComponent(2500));
+            entityWrapper.setComponent(new IsSellableComponent(1981));
             entityWrapper.setComponent(new BonusFlatMaximumHealthComponent(1000));
             entityWrapper.setComponent(new BonusFlatHealthRegenerationComponent(15));
         }

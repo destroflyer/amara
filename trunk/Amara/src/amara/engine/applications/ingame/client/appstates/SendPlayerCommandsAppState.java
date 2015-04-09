@@ -105,6 +105,34 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                     case KeyInput.KEY_S:
                         sendCommand(new StopCommand());
                         break;
+
+                    case KeyInput.KEY_NUMPAD0:
+                        sendCommand(new SellItemCommand(0));
+                        break;
+
+                    case KeyInput.KEY_NUMPAD1:
+                        sendCommand(new BuyItemCommand("dorans_blade"));
+                        break;
+
+                    case KeyInput.KEY_NUMPAD2:
+                        sendCommand(new BuyItemCommand("dorans_ring"));
+                        break;
+
+                    case KeyInput.KEY_NUMPAD3:
+                        sendCommand(new BuyItemCommand("boots"));
+                        break;
+
+                    case KeyInput.KEY_NUMPAD4:
+                        sendCommand(new BuyItemCommand("needlessly_large_rod"));
+                        break;
+
+                    case KeyInput.KEY_NUMPAD5:
+                        sendCommand(new BuyItemCommand("zhonyas_hourglass"));
+                        break;
+
+                    case KeyInput.KEY_NUMPAD6:
+                        sendCommand(new BuyItemCommand("warmogs_armor"));
+                        break;
                 }
             }
         }
