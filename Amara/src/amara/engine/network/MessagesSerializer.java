@@ -267,6 +267,7 @@ public class MessagesSerializer{
                         //game
                         CinematicComponent.class,
                         GameSpeedComponent.class,
+                        GameTimeComponent.class,
                         //general
                         DescriptionComponent.class,
                         NameComponent.class,
@@ -373,6 +374,8 @@ public class MessagesSerializer{
                         CampComponent.class,
                         CastSpellOnCooldownWhileAttackingComponent.class,
                         CurrentActionEffectCastsComponent.class,
+                        DamageHistoryComponent.class,
+                            DamageHistoryComponent.DamageHistoryEntry.class,
                         GoldComponent.class,
                         IntersectionRulesComponent.class,
                         IsAliveComponent.class,

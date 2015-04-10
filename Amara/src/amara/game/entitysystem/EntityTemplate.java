@@ -72,6 +72,7 @@ public class EntityTemplate{
             parameters[i] = Integer.parseInt(parts[i + 1]);
         }
         if(templateName.equals("default_autoattack")){
+            entityWrapper.setComponent(new NameComponent("Ranged Autoattack"));
             //Damage target
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new TargetTargetComponent());
@@ -132,6 +133,7 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
         }
         else if(templateName.equals("melee_autoattack")){
+            entityWrapper.setComponent(new NameComponent("Melee Autoattack"));
             //Damage target
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new TargetTargetComponent());

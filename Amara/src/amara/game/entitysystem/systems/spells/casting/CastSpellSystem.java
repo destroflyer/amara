@@ -52,10 +52,6 @@ public class CastSpellSystem implements EntitySystem{
             InstantEffectTriggersComponent instantEffectTriggersComponent = entityWorld.getComponent(spellEntity, InstantEffectTriggersComponent.class);
             if(instantEffectTriggersComponent != null){
                 LinkedList<EntityWrapper> effectCasts = EffectTriggerUtil.triggerEffects(entityWorld, instantEffectTriggersComponent.getEffectTriggerEntities(), targetEntity);
-                for(EntityWrapper effectCast : effectCasts){
-                    effectCast.setComponent(new EffectCastSourceComponent(casterEntity));
-                    effectCast.setComponent(new EffectCastSourceSpellComponent(spellEntity));
-                }
                 if(entityWorld.hasComponent(spellEntity, CastDurationComponent.class)){
                     int[] currentActionEffectCastEntities = new int[effectCasts.size()];
                     for(int i=0;i<currentActionEffectCastEntities.length;i++){

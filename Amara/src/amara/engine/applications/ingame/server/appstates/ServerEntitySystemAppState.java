@@ -43,6 +43,7 @@ import amara.game.entitysystem.systems.effects.spawns.*;
 import amara.game.entitysystem.systems.effects.spells.*;
 import amara.game.entitysystem.systems.effects.triggers.*;
 import amara.game.entitysystem.systems.effects.visuals.*;
+import amara.game.entitysystem.systems.game.*;
 import amara.game.entitysystem.systems.general.*;
 import amara.game.entitysystem.systems.movement.*;
 import amara.game.entitysystem.systems.network.*;
@@ -138,7 +139,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         IntersectionObserver intersectionObserver = new IntersectionObserver();
         addEntitySystem(new SetAutoAttacksCastAnimationsSystem());
         addEntitySystem(new SetSpellsCastersSystem());
-        addEntitySystem(new UpdateAttributesSystem());
+        addEntitySystem(new UpdateGameTimeSystem());
         addEntitySystem(new CountdownPlayerRespawnSystem());
         addEntitySystem(new CountdownLifetimeSystem());
         addEntitySystem(new CountdownBuffsSystem());
@@ -155,6 +156,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownKnockupImmuneSystem());
         addEntitySystem(new CountdownAnimationLoopsSystem());
         addEntitySystem(new CheckOpenObjectivesSystem());
+        addEntitySystem(new UpdateAttributesSystem());
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue()));
         addEntitySystem(new AttackMoveSystem());
         addEntitySystem(new AttackAggroedTargetsSystem());
@@ -218,6 +220,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyRemoveEffectTriggersSystem());
         addEntitySystem(new ApplyRemoveEntitySystem());
         addEntitySystem(new DrawAggroOnDamageSystem());
+        addEntitySystem(new UpdateDamageHistorySystem());
         addEntitySystem(new RemoveAppliedEffectsSystem());
         addEntitySystem(new HealthRegenerationSystem());
         addEntitySystem(new DeathSystem());
