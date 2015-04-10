@@ -74,5 +74,6 @@ public class SetSpellsCastersSystem implements EntitySystem{
     private void updateCaster(EntityWorld entityWorld, int casterEntity, int spellEntity){
         entityWorld.setComponent(casterEntity, new EffectCastSourceComponent(casterEntity));
         entityWorld.setComponent(spellEntity, new EffectCastSourceComponent(casterEntity));
+        entityWorld.setComponent(spellEntity, new EffectCastSourceSpellComponent(spellEntity));
     }
 }
