@@ -47,6 +47,7 @@ public class Map_Arama extends Map{
         float[] nexiX = new float[]{252, 98};
         for(int i=0;i<2;i++){
             EntityWrapper nexus = entityWorld.getWrapped(entityWorld.createEntity());
+            nexus.setComponent(new NameComponent("Nexus"));
             nexus.setComponent(new ModelComponent("Models/column/skin_nexus.xml"));
             nexus.setComponent(new PositionComponent(new Vector2f(nexiX[i], 173.5f)));
             nexus.setComponent(new DirectionComponent(new Vector2f(0, -1)));
@@ -85,6 +86,7 @@ public class Map_Arama extends Map{
         }
         //Boss
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
+        boss.setComponent(new NameComponent("Baron Nashor"));
         boss.setComponent(new TitleComponent("Baron Nashor"));
         boss.setComponent(new ModelComponent("Models/cow/skin_baron.xml"));
         EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
