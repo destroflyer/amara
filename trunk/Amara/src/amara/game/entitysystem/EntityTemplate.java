@@ -175,7 +175,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new ModelComponent("Models/cloud/skin.xml"));
         }
         else if(templateName.equals("minion")){
-            entityWrapper.setComponent(new ModelComponent("Models/varus/skin_default.xml"));
+            entityWrapper.setComponent(new NameComponent("Minion"));
+            entityWrapper.setComponent(new ModelComponent("Models/minion/skin_default.xml"));
             EntityWrapper danceAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             danceAnimation.setComponent(new NameComponent("dance"));
             danceAnimation.setComponent(new LoopDurationComponent(2.66f));
@@ -371,6 +372,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
         }
         else if(templateName.equals("wizard")){
+            entityWrapper.setComponent(new NameComponent("Wizard"));
             entityWrapper.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
@@ -573,6 +575,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CooldownComponent(10));
         }
         else if(templateName.equals("robot")){
+            entityWrapper.setComponent(new NameComponent("Robot"));
             entityWrapper.setComponent(new ModelComponent("Models/robot/skin_default.xml"));
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
@@ -884,6 +887,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
         }
         else if(templateName.equals("jaime")){
+            entityWrapper.setComponent(new NameComponent("Jaime"));
             entityWrapper.setComponent(new ModelComponent("Models/jaime/skin_default.xml"));
             EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             idleAnimation.setComponent(new NameComponent("Idle"));
@@ -1091,6 +1095,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
         }
         else if(templateName.equals("soldier")){
+            entityWrapper.setComponent(new NameComponent("Soldier"));
             entityWrapper.setComponent(new ModelComponent("Models/soldier/skin_default.xml"));
             EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             walkAnimation.setComponent(new NameComponent("walk"));
@@ -1300,6 +1305,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CooldownComponent(5));
         }
         else if(templateName.equals("steve")){
+            entityWrapper.setComponent(new NameComponent("Steve"));
             entityWrapper.setComponent(new ModelComponent("Models/steve/skin_default.xml"));
             EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             idleAnimation.setComponent(new NameComponent("stand"));
@@ -1610,6 +1616,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CooldownComponent(15));
         }
         else if(templateName.equals("daydream")){
+            entityWrapper.setComponent(new NameComponent("Daydream"));
             entityWrapper.setComponent(new ModelComponent("Models/daydream/skin_default.xml"));
             EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             idleAnimation.setComponent(new NameComponent("stand"));
@@ -1652,6 +1659,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
         }
         else if(templateName.equals("oz")){
+            entityWrapper.setComponent(new NameComponent("Oz"));
             entityWrapper.setComponent(new ModelComponent("Models/oz/skin_default.xml"));
             EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             idleAnimation.setComponent(new NameComponent("stand"));
@@ -1970,6 +1978,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new LifetimeComponent(0.2f));
         }
         else if(templateName.equals("varus")){
+            entityWrapper.setComponent(new NameComponent("Varus"));
             entityWrapper.setComponent(new ModelComponent("Models/varus/skin_default.xml"));
             EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             idleAnimation.setComponent(new NameComponent("idle"));
@@ -2176,6 +2185,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new LifetimeComponent(30));
         }
         else if(templateName.equals("eragon")){
+            entityWrapper.setComponent(new NameComponent("Eragon"));
             entityWrapper.setComponent(new ModelComponent("Models/little_dragon/skin_default.xml"));
             EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             idleAnimation.setComponent(new NameComponent("default"));
@@ -2271,6 +2281,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new LifetimeComponent(0.2f));
         }
         else if(templateName.equals("etherdesert_creep_melee")){
+            entityWrapper.setComponent(new NameComponent("Melee Creep"));
             String skinName = "default";
             if(parameters.length > 1){
                 skinName = "team_" + parameters[1];
@@ -2304,6 +2315,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAggroComponent(12));
         }
         else if(templateName.equals("etherdesert_creep_range")){
+            entityWrapper.setComponent(new NameComponent("Ranged Creep"));
             String skinName = "default";
             if(parameters.length > 1){
                 skinName = "team_" + parameters[1];
@@ -2337,6 +2349,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAggroComponent(12));
         }
         else if(templateName.equals("beetle_golem")){
+            entityWrapper.setComponent(new NameComponent("Beetle Golem"));
             entityWrapper.setComponent(new ModelComponent("Models/beetle_golem/skin_dark.xml"));
             EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             idleAnimation.setComponent(new NameComponent("Idle_Normal"));
@@ -2436,6 +2449,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CooldownComponent(15));
         }
         else if(templateName.equals("earth_elemental")){
+            entityWrapper.setComponent(new NameComponent("Earth Elemental"));
             entityWrapper.setComponent(new ModelComponent("Models/earth_elemental/skin.xml"));
             EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             idleAnimation.setComponent(new NameComponent("idle"));

@@ -13,6 +13,7 @@ import de.lessvoid.nifty.builder.HoverEffectBuilder;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.controls.RadioButton;
+import de.lessvoid.nifty.controls.ScrollPanel;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.*;
 import de.lessvoid.nifty.render.NiftyImage;
@@ -88,6 +89,10 @@ public class GameScreenController implements ScreenController{
     
     protected RadioButton getRadioButton(String id){
         return nifty.getScreen(screenID).findNiftyControl(id, RadioButton.class);
+    }
+    
+    protected ScrollPanel getScrollPanel(String id){
+        return nifty.getScreen(screenID).findNiftyControl(id, ScrollPanel.class);
     }
     
     protected Element getElementByID(String id){
