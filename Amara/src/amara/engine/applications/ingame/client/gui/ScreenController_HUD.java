@@ -6,6 +6,7 @@ package amara.engine.applications.ingame.client.gui;
 
 import amara.Util;
 import amara.engine.gui.GameScreenController;
+import de.lessvoid.nifty.controls.label.builder.LabelBuilder;
 import de.lessvoid.nifty.effects.Effect;
 import de.lessvoid.nifty.effects.EffectEventId;
 import de.lessvoid.nifty.effects.impl.Hint;
@@ -112,5 +113,27 @@ public class ScreenController_HUD extends GameScreenController{
         }
         Effect hoverEffect = getElementByID("ping_container").getEffects(EffectEventId.onHover, Hint.class).get(0);
         hoverEffect.getParameters().setProperty("hintText", "Ping: " + ping + " ms");
+    }
+    
+    public void setDeathLayersVisible(boolean isVisible){
+        getElementByID("death_recap_layer").setVisible(isVisible);
+    }
+    
+    public void toggleDisplayDeathRecap(){
+        setDeathRecapVisible(!getElementByID("death_recap").isVisible());
+    }
+    
+    public void setDeathRecapVisible(boolean isVisible){
+        getElementByID("death_recap").setVisible(isVisible);
+    }
+    
+    public void setDeathRecapText(String text){
+        Element textContainer = getElementByID("death_recap_text_container");
+        removeAllChildElements(textContainer);
+        new LabelBuilder("death-recap_text", text){{
+            width("100%");
+            textHAlignLeft();
+            font("Interface/fonts/Verdana_14.fnt");
+        }}.build(nifty, nifty.getCurrentScreen(), textContainer);
     }
 }

@@ -219,6 +219,25 @@
                 </panel>
             </panel>
         </layer>
+        <layer id="death_recap_layer" childLayout="center" visible="false">
+            <panel childLayout="vertical">
+                <panel height="120px"/>
+                <panel childLayout="horizontal" height="200px">
+                    <panel/>
+                    <panel childLayout="vertical" width="400px">
+                        <control name="button" width="100%" height="28px" label="Death Recap">
+                            <interact onClick="toggleDisplayDeathRecap()"/>
+                        </control>
+                        <control id="death_recap" name="scrollPanel" horizontal="false" width="100%" height="250px" style="nifty-listbox" visible="false">
+                            <panel id="death_recap_text_container" childLayout="center" padding="0px,10px,10px,10px">
+                            </panel>
+                        </control>
+                    </panel>
+                    <panel/>
+                </panel>
+                <panel/>
+            </panel>
+        </layer>
     </screen>
     <screen id="cinematic" controller="amara.engine.applications.ingame.client.gui.ScreenController_Cinematic">
     </screen>

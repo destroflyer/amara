@@ -5,12 +5,12 @@
 package amara.engine.applications.ingame.server.network.backends;
 
 import com.jme3.network.Message;
-import amara.Util;
 import amara.engine.network.*;
 import amara.engine.network.messages.*;
 import amara.game.entitysystem.EntityWorld;
 import amara.game.entitysystem.components.game.*;
-import amara.game.entitysystem.components.general.*;
+import amara.game.entitysystem.components.maps.*;
+import amara.game.entitysystem.components.maps.playerdeathrules.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.games.*;
@@ -74,51 +74,18 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                     }catch(NumberFormatException ex){
                     }
                 }
-                else if(message.getText().equals("/damagehistory")){
-                    String text = "[No damage history existing]";
-                    DamageHistoryComponent damageHistoryComponent = entityWorld.getComponent(selectedUnit, DamageHistoryComponent.class);
-                    if(damageHistoryComponent != null){
-                        float totalDamage = 0;
-                        for(int i=0;i<damageHistoryComponent.getEntries().length;i++){
-                            totalDamage += damageHistoryComponent.getEntries()[i].getDamage();
+                else if(message.getText().startsWith("/deathtimer ")){
+                    try{
+                        int initialDuration = Integer.parseInt(message.getText().substring(12));
+                        if(initialDuration >= 0){
+                            int playerDeathRulesEntity = entityWorld.getComponent(game.getMap().getEntity(), PlayerDeathRulesComponent.class).getRulesEntity();
+                            entityWorld.setComponent(playerDeathRulesEntity, new RespawnTimerComponent(initialDuration, 0));
                         }
-                        text = "[DamageHistory: " + ((int) totalDamage) + " total damage over " + Util.round(damageHistoryComponent.getLastDamageTime() - damageHistoryComponent.getFirstDamageTime(), 3) + " seconds";
-                        for(int i=0;i<damageHistoryComponent.getEntries().length;i++){
-                            DamageHistoryComponent.DamageHistoryEntry entry = damageHistoryComponent.getEntries()[i];
-                            String sourceName = null;
-                            if(entry.getSourceEntity() != -1){
-                                NameComponent nameComponent = entityWorld.getComponent(entry.getSourceEntity(), NameComponent.class);
-                                if(nameComponent != null){
-                                    sourceName = nameComponent.getName();
-                                }
-                                else{
-                                    sourceName = "[Unnamed unit]";
-                                }
-                            }
-                            String sourceSpellName = null;
-                            if(entry.getSourceSpellEntity() != -1){
-                                NameComponent nameComponent = entityWorld.getComponent(entry.getSourceSpellEntity(), NameComponent.class);
-                                if(nameComponent != null){
-                                    sourceSpellName = nameComponent.getName();
-                                }
-                                else{
-                                    sourceSpellName = "[Unnamed spell]";
-                                }
-                            }
-                            text += "\n    ";
-                            if(sourceName != null){
-                                text += sourceName + " -> ";
-                            }
-                            if(sourceSpellName != null){
-                                text += sourceSpellName + " -> ";
-                            }
-                            text += ((int) entry.getDamage()) + " " + entry.getDamageType().name().toLowerCase();
-                            if(i == (damageHistoryComponent.getEntries().length - 1)){
-                                text += "]";
-                            }
+                        else{
+                            messageResponse.addAnswerMessage(new Message_ChatMessage("No negative death timers allowed"));
                         }
+                    }catch(NumberFormatException ex){
                     }
-                    System.out.println(text);
                 }
             }
         }
