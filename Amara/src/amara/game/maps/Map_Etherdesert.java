@@ -10,6 +10,7 @@ import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.audio.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.spawns.*;
+import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.maps.*;
 import amara.game.entitysystem.components.maps.playerdeathrules.*;
 import amara.game.entitysystem.components.objectives.*;
@@ -41,6 +42,7 @@ public class Map_Etherdesert extends Map{
         audioBackgroundMusic.setComponent(new IsAudioPlayingComponent());
         //Nexus
         EntityWrapper nexus = entityWorld.getWrapped(entityWorld.createEntity());
+        nexus.setComponent(new NameComponent("Nexus"));
         nexus.setComponent(new ModelComponent("Models/column/skin_nexus.xml"));
         nexus.setComponent(new PositionComponent(new Vector2f(96, 87.75f)));
         nexus.setComponent(new DirectionComponent(new Vector2f(0, -1)));

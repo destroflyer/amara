@@ -54,6 +54,7 @@ public class Map_Destroforest extends Map{
         
         for(int i=0;i<3;i++){
             EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
+            unit.setComponent(new NameComponent("Wizard Creep"));
             unit.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));
             EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
@@ -179,6 +180,7 @@ public class Map_Destroforest extends Map{
         }
         //Boss
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
+        boss.setComponent(new NameComponent("Dragon"));
         boss.setComponent(new ModelComponent("Models/dragon/skin.xml"));
         EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
         idleAnimation.setComponent(new NameComponent("fly"));
