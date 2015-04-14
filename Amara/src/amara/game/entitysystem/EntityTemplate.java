@@ -2702,5 +2702,12 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BonusFlatMaximumHealthComponent(1000));
             entityWrapper.setComponent(new BonusFlatHealthRegenerationComponent(15));
         }
+        else if(templateName.equals("rod_of_ages")){
+            entityWrapper.setComponent(new ItemIDComponent("rod_of_ages"));
+            entityWrapper.setComponent(new ItemRecipeComponent(2800));
+            entityWrapper.setComponent(new IsSellableComponent(1960));
+            entityWrapper.setComponent(new BonusFlatMaximumHealthComponent(450));
+            entityWrapper.setComponent(new BonusFlatAbilityPowerComponent(60));
+        }
     }
 }

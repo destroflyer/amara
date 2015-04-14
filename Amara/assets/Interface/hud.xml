@@ -106,6 +106,7 @@
                                 <panel height="11px"/>
                                 <text id="gold" text="????" textHAlign="left" font="Interface/fonts/Verdana_14.fnt"/>
                             </panel>
+                            <interact onClick="toggleShopVisible()"/>
                         </panel>
                         <panel height="6px"/>
                     </panel>
@@ -237,6 +238,67 @@
                 </panel>
                 <panel/>
             </panel>
+        </layer>
+        <layer childLayout="absolute">
+            <control id="shop_window" name="window" title="Shop" x="150px" y="150px" width="525px" height="400px" hideOnClose="true" visible="false">
+                <panel id="shop_container" childLayout="horizontal" width="100%" height="100%">
+                    <panel childLayout="vertical" width="200px" height="100%" padding="10px" backgroundColor="#000D">
+                        <panel childLayout="horizontal" height="32px">
+                            <control id="shop_item_filter_text" name="textfield" width="100%"/>
+                        </panel>
+                        <panel childLayout="horizontal" height="32px">
+                            <control id="shop_item_filter_checkbox_0" name="checkbox"/>
+                            <panel width="6px"/>
+                            <text text="All Items" font="Interface/fonts/Verdana_14.fnt" height="23px" checked="true"/>
+                        </panel>
+                        <panel childLayout="horizontal" height="32px">
+                            <control id="shop_item_filter_checkbox_1" name="checkbox"/>
+                            <panel width="6px"/>
+                            <text text="Attack Damage" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                        </panel>
+                        <panel childLayout="horizontal" height="32px">
+                            <control id="shop_item_filter_checkbox_2" name="checkbox"/>
+                            <panel width="6px"/>
+                            <text text="Ability Power" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                        </panel>
+                        <panel childLayout="horizontal" height="32px">
+                            <control id="shop_item_filter_checkbox_3" name="checkbox"/>
+                            <panel width="6px"/>
+                            <text text="Movement Speed" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                        </panel>
+                        <panel childLayout="horizontal" height="32px">
+                            <control id="shop_item_filter_checkbox_4" name="checkbox"/>
+                            <panel width="6px"/>
+                            <text text="Teemo" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                        </panel>
+                        <panel/>
+                        <text text="Sell Item" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                        <panel childLayout="horizontal">
+                            <control id="sell_item_button_0" name="button" width="32px" height="32px">
+                                <interact onClick="sellItem(0)"/>
+                            </control>
+                            <control id="sell_item_button_1" name="button" width="32px" height="32px">
+                                <interact onClick="sellItem(1)"/>
+                            </control>
+                            <control id="sell_item_button_2" name="button" width="32px" height="32px">
+                                <interact onClick="sellItem(2)"/>
+                            </control>
+                        </panel>
+                        <panel childLayout="horizontal">
+                            <control id="sell_item_button_3" name="button" width="32px" height="32px">
+                                <interact onClick="sellItem(3)"/>
+                            </control>
+                            <control id="sell_item_button_4" name="button" width="32px" height="32px">
+                                <interact onClick="sellItem(4)"/>
+                            </control>
+                            <control id="sell_item_button_5" name="button" width="32px" height="32px">
+                                <interact onClick="sellItem(5)"/>
+                            </control>
+                        </panel>
+                    </panel>
+                    <!--Generated ScrollPanel "shop_available_items"-->
+                </panel>
+            </control>
         </layer>
     </screen>
     <screen id="cinematic" controller="amara.engine.applications.ingame.client.gui.ScreenController_Cinematic">
