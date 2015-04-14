@@ -5,6 +5,8 @@
 package amara.engine.applications.ingame.client.appstates;
 
 import java.util.Iterator;
+import com.jme3.app.Application;
+import com.jme3.app.state.AppStateManager;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
 import com.jme3.input.KeyInput;
@@ -12,6 +14,7 @@ import com.jme3.math.Vector2f;
 import amara.Queue;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
+import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
 import amara.engine.appstates.*;
 import amara.engine.network.NetworkClient;
 import amara.engine.input.*;
@@ -32,6 +35,14 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
 
     public SendPlayerCommandsAppState(){
         
+    }
+    private ScreenController_HUD screenController_HUD;
+
+    @Override
+    public void initialize(AppStateManager stateManager, Application application){
+        super.initialize(stateManager, application);
+        screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
+        screenController_HUD.setAppStates(this);
     }
 
     @Override
@@ -106,39 +117,15 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                         sendCommand(new StopCommand());
                         break;
 
-                    case KeyInput.KEY_NUMPAD0:
-                        sendCommand(new SellItemCommand(0));
-                        break;
-
-                    case KeyInput.KEY_NUMPAD1:
-                        sendCommand(new BuyItemCommand("dorans_blade"));
-                        break;
-
-                    case KeyInput.KEY_NUMPAD2:
-                        sendCommand(new BuyItemCommand("dorans_ring"));
-                        break;
-
-                    case KeyInput.KEY_NUMPAD3:
-                        sendCommand(new BuyItemCommand("boots"));
-                        break;
-
-                    case KeyInput.KEY_NUMPAD4:
-                        sendCommand(new BuyItemCommand("needlessly_large_rod"));
-                        break;
-
-                    case KeyInput.KEY_NUMPAD5:
-                        sendCommand(new BuyItemCommand("zhonyas_hourglass"));
-                        break;
-
-                    case KeyInput.KEY_NUMPAD6:
-                        sendCommand(new BuyItemCommand("warmogs_armor"));
+                    case KeyInput.KEY_P:
+                        screenController_HUD.toggleShopVisible();
                         break;
                 }
             }
         }
     }
     
-    private void sendCommand(Command command){
+    public void sendCommand(Command command){
         NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
         networkClient.sendMessage(new Message_Command(command));
     }
