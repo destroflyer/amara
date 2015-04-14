@@ -20,7 +20,6 @@ import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.builder.TextBuilder;
 import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 import de.lessvoid.nifty.controls.TextFieldChangedEvent;
-import de.lessvoid.nifty.controls.label.builder.LabelBuilder;
 import de.lessvoid.nifty.controls.scrollpanel.builder.ScrollPanelBuilder;
 import de.lessvoid.nifty.effects.Effect;
 import de.lessvoid.nifty.effects.EffectEventId;
@@ -174,14 +173,31 @@ public class ScreenController_HUD extends GameScreenController{
         getElementByID("death_recap").setVisible(isVisible);
     }
     
-    public void setDeathRecapText(String text){
-        Element textContainer = getElementByID("death_recap_text_container");
-        removeAllChildElements(textContainer);
-        new LabelBuilder("death-recap_text", text){{
-            width("100%");
-            textHAlignLeft();
-            font("Interface/fonts/Verdana_14.fnt");
-        }}.build(nifty, nifty.getCurrentScreen(), textContainer);
+    public void setDeathRecapText(final String text){
+        Element deathRecapScrollPanel = getElementByID("death_recap");
+        if(deathRecapScrollPanel != null){
+            deathRecapScrollPanel.markForRemoval();
+        }
+        Element deathRecapContainer = getElementByID("death_recap_container");
+        new ScrollPanelBuilder("death_recap"){{
+            set("width", "100%");
+            set("height", "250px");
+            set("horizontal", "false");
+            set("style", "nifty-listbox");
+            set("visible","true");
+            
+            panel(new PanelBuilder(){{
+                childLayoutCenter();
+                padding("10px");
+                
+                text(new TextBuilder("death_recap_text"){{
+                    width("100%");
+                    text(text);
+                    textHAlignLeft();
+                    font("Interface/fonts/Verdana_14.fnt");
+                }});
+            }});
+        }}.build(nifty, nifty.getCurrentScreen(), deathRecapContainer);
     }
     
     @NiftyEventSubscriber(pattern = ".*")
