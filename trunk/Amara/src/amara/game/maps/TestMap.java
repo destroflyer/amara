@@ -61,6 +61,7 @@ public class TestMap extends Map{
                 EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
                 unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
                 unit.setComponent(new TeamComponent(0));
+                unit.setComponent(new BountyComponent(20));
                 EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
                 camp.setComponent(new CampTransformComponent(position, direction));
                 camp.setComponent(new CampMaximumAggroDistanceComponent(5));
@@ -78,6 +79,7 @@ public class TestMap extends Map{
                 enemy.setComponent(new DirectionComponent(directionEnemy));
                 enemy.setComponent(new AutoAggroComponent(10));
                 enemy.setComponent(new TeamComponent(0));
+                enemy.setComponent(new BountyComponent(10));
                 EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
                 camp.setComponent(new CampTransformComponent(positionEnemy, directionEnemy));
                 camp.setComponent(new CampMaximumAggroDistanceComponent(10));
@@ -157,5 +159,6 @@ public class TestMap extends Map{
         entityWorld.setComponent(unitEntity, new PositionComponent(position));
         entityWorld.setComponent(unitEntity, new DirectionComponent(direction));
         entityWorld.setComponent(unitEntity, new TeamComponent(playerIndex + 1));
+        entityWorld.setComponent(unitEntity, new BountyComponent(300));
     }
 }
