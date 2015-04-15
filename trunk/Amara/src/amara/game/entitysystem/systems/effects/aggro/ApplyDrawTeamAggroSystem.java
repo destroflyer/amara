@@ -30,11 +30,13 @@ public class ApplyDrawTeamAggroSystem implements EntitySystem{
                 int targetTeamEntity = entityWorld.getComponent(targetEntity, TeamComponent.class).getTeamEntity();
                 Vector2f aggroCenter = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
                 for(int entity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class)){
-                    int teamEntity = entityWorld.getComponent(entity, TeamComponent.class).getTeamEntity();
-                    Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
-                    float range = effectImpact.getComponent(DrawTeamAggroComponent.class).getRange();
-                    if((teamEntity == targetTeamEntity) && (position.distanceSquared(aggroCenter) <= (range * range))){
-                        AggroUtil.drawAggro(entityWorld, entity, effectCastSourceComponent.getSourceEntity());
+                    if(entity != targetEntity){
+                        int teamEntity = entityWorld.getComponent(entity, TeamComponent.class).getTeamEntity();
+                        Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
+                        float range = effectImpact.getComponent(DrawTeamAggroComponent.class).getRange();
+                        if((teamEntity == targetTeamEntity) && (position.distanceSquared(aggroCenter) <= (range * range))){
+                            AggroUtil.drawAggro(entityWorld, entity, effectCastSourceComponent.getSourceEntity());
+                        }
                     }
                 }
             }

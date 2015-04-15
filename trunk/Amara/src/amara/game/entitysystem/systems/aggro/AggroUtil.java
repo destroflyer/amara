@@ -20,7 +20,7 @@ public class AggroUtil{
     }
     
     public static void drawAggro(EntityWorld entityWorld, int entity, int targetEntity){
-        if(entityWorld.hasComponent(entity, AutoAttackComponent.class)){
+        if(entityWorld.hasAllComponents(entity, AutoAttackComponent.class, IsAliveComponent.class)){
             if(entityWorld.hasComponent(entity, AttackMoveComponent.class) || (!entityWorld.hasComponent(entity, MovementComponent.class))){
                 entityWorld.setComponent(entity, new AggroTargetComponent(targetEntity));
             }
