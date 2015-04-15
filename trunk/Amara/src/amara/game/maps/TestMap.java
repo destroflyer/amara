@@ -68,6 +68,23 @@ public class TestMap extends Map{
                 unit.setComponent(new CampComponent(camp.getId()));
             }
         }
+        //Test Camp
+        for(int x=0;x<3;x++){
+            for(int y=0;y<2;y++){
+                EntityWrapper enemy = EntityTemplate.createFromTemplate(entityWorld, "pseudospider");
+                Vector2f positionEnemy = new Vector2f(40 + (x * 3), 68 + (y * 3));
+                Vector2f directionEnemy = new Vector2f(0, -1);
+                enemy.setComponent(new PositionComponent(positionEnemy));
+                enemy.setComponent(new DirectionComponent(directionEnemy));
+                enemy.setComponent(new AutoAggroComponent(10));
+                enemy.setComponent(new TeamComponent(0));
+                EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
+                camp.setComponent(new CampTransformComponent(positionEnemy, directionEnemy));
+                camp.setComponent(new CampMaximumAggroDistanceComponent(10));
+                camp.setComponent(new CampHealthResetComponent());
+                enemy.setComponent(new CampComponent(camp.getId()));
+            }
+        }
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
         boss.setComponent(new NameComponent("Yalee"));
         boss.setComponent(new DescriptionComponent("Stupid."));
