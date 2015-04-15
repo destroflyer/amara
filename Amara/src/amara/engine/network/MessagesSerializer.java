@@ -371,6 +371,7 @@ public class MessagesSerializer{
                         AttackMoveComponent.class,
                         AutoAggroComponent.class,
                         AutoAttackComponent.class,
+                        BountyComponent.class,
                         CampComponent.class,
                         CastSpellOnCooldownWhileAttackingComponent.class,
                         CurrentActionEffectCastsComponent.class,

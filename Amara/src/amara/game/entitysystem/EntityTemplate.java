@@ -2313,6 +2313,7 @@ public class EntityTemplate{
             EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "melee_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             entityWrapper.setComponent(new AutoAggroComponent(12));
+            entityWrapper.setComponent(new BountyComponent(20 + (spawnCounter * 1)));
         }
         else if(templateName.equals("etherdesert_creep_range")){
             entityWrapper.setComponent(new NameComponent("Ranged Creep"));

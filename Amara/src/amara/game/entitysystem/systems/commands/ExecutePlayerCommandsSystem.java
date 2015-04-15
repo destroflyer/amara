@@ -31,6 +31,7 @@ import amara.game.entitysystem.systems.movement.MovementSystem;
 import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.CastSpellSystem;
 import amara.game.entitysystem.systems.targets.TargetUtil;
+import amara.game.entitysystem.systems.units.GoldUtil;
 import amara.game.entitysystem.systems.units.UnitUtil;
 
 /**
@@ -109,11 +110,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     String itemID = buyItemCommand.getItemID();
                     EntityWrapper item = EntityTemplate.createFromTemplate(entityWorld, itemID);
                     ItemRecipeComponent itemRecipeComponent = item.getComponent(ItemRecipeComponent.class);
-                    int gold = 0;
-                    GoldComponent goldComponent = entityWorld.getComponent(selectedUnit, GoldComponent.class);
-                    if(goldComponent != null){
-                        gold = goldComponent.getGold();
-                    }
+                    int gold = GoldUtil.getGold(entityWorld, selectedUnit);
                     if(gold >= itemRecipeComponent.getGold()){
                         LinkedList<String> remainingIngredientIDs = new LinkedList<String>();
                         for(String ingredientID : itemRecipeComponent.getItemIDs()){
@@ -163,11 +160,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                             int itemEntity = oldItemsEntities[inventoryIndex];
                             IsSellableComponent isSellableComponent = entityWorld.getComponent(itemEntity, IsSellableComponent.class);
                             if(isSellableComponent != null){
-                                int gold = 0;
-                                GoldComponent goldComponent = entityWorld.getComponent(selectedUnit, GoldComponent.class);
-                                if(goldComponent != null){
-                                    gold = goldComponent.getGold();
-                                }
+                                int gold = GoldUtil.getGold(entityWorld, selectedUnit);
                                 int[] newItemEntities = new int[oldItemsEntities.length - 1];
                                 int currentIndex = 0;
                                 for(int i=0;i<oldItemsEntities.length;i++){
