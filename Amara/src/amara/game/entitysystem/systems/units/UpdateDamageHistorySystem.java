@@ -4,8 +4,12 @@
  */
 package amara.game.entitysystem.systems.units;
 
+import java.util.Iterator;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Set;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.damage.*;
@@ -20,15 +24,20 @@ public class UpdateDamageHistorySystem implements EntitySystem{
     
     private static final int RESET_TIME = 10;
     private Set<Integer> entitiesWithInactiveDamageHistory;
+    private HashMap<Integer, LinkedList<DamageHistoryComponent.DamageHistoryEntry>> damageEntriesMap = new HashMap<Integer, LinkedList<DamageHistoryComponent.DamageHistoryEntry>>();
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         entitiesWithInactiveDamageHistory = entityWorld.getEntitiesWithAll(DamageHistoryComponent.class);
+        damageEntriesMap.clear();
         for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, PhysicalDamageComponent.class)){
             onDamageTaken(entityWorld, effectImpactEntity, DamageHistoryComponent.DamageType.PHYSICAL);
         }
         for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, MagicDamageComponent.class)){
             onDamageTaken(entityWorld, effectImpactEntity, DamageHistoryComponent.DamageType.MAGIC);
+        }
+        for(int entity : damageEntriesMap.keySet()){
+            updateDamageHistory(entityWorld, entity);
         }
         for(int entity : entitiesWithInactiveDamageHistory){
             if(entityWorld.hasComponent(entity, IsAliveComponent.class)){
@@ -63,6 +72,24 @@ public class UpdateDamageHistorySystem implements EntitySystem{
         if(effectCastSourceSpellComponent != null){
             sourceSpellEntity = effectCastSourceSpellComponent.getSpellEntity();
         }
+        LinkedList<DamageHistoryComponent.DamageHistoryEntry> damageEntries = damageEntriesMap.get(targetEntity);
+        if(damageEntries == null){
+            damageEntries = new LinkedList<DamageHistoryComponent.DamageHistoryEntry>();
+            damageEntriesMap.put(targetEntity, damageEntries);
+        }
+        Iterator<DamageHistoryComponent.DamageHistoryEntry> iterator = damageEntries.iterator();
+        int index = 0;
+        while(iterator.hasNext()){
+            DamageHistoryComponent.DamageHistoryEntry entry = iterator.next();
+            if(damage > entry.getDamage()){
+                break;
+            }
+            index++;
+        }
+        damageEntries.add(index, new DamageHistoryComponent.DamageHistoryEntry(damageType, damage, sourceEntity, sourceSpellEntity));
+    }
+    
+    private void updateDamageHistory(EntityWorld entityWorld, int targetEntity){
         DamageHistoryComponent.DamageHistoryEntry[] oldEntries = new DamageHistoryComponent.DamageHistoryEntry[0];
         float gameTime = UpdateGameTimeSystem.getGameTime(entityWorld);
         float firstDamageTime = gameTime;
@@ -71,11 +98,24 @@ public class UpdateDamageHistorySystem implements EntitySystem{
             oldEntries = damageHistoryComponent.getEntries();
             firstDamageTime = damageHistoryComponent.getFirstDamageTime();
         }
-        DamageHistoryComponent.DamageHistoryEntry[] newEntries = new DamageHistoryComponent.DamageHistoryEntry[oldEntries.length + 1];
+        LinkedList<DamageHistoryComponent.DamageHistoryEntry> damageEntries = damageEntriesMap.get(targetEntity);
+        LinkedList<DamageHistoryComponent.DamageHistoryEntry> appliedEntries = damageEntries;
+        float health = entityWorld.getComponent(targetEntity, HealthComponent.class).getValue();
+        if(health < 1){
+            appliedEntries = new LinkedList<DamageHistoryComponent.DamageHistoryEntry>();
+            while(health < 1){
+                DamageHistoryComponent.DamageHistoryEntry entry = damageEntries.pop();
+                health += entry.getDamage();
+                appliedEntries.add(entry);
+            }
+        }
+        DamageHistoryComponent.DamageHistoryEntry[] newEntries = new DamageHistoryComponent.DamageHistoryEntry[oldEntries.length + appliedEntries.size()];
         for(int i=0;i<oldEntries.length;i++){
             newEntries[i] = oldEntries[i];
         }
-        newEntries[oldEntries.length] = new DamageHistoryComponent.DamageHistoryEntry(damageType, damage, sourceEntity, sourceSpellEntity);
+        for(int i=0;i<appliedEntries.size();i++){
+            newEntries[oldEntries.length + i] = appliedEntries.get(i);
+        }
         entityWorld.setComponent(targetEntity, new DamageHistoryComponent(newEntries, firstDamageTime, gameTime));
         entitiesWithInactiveDamageHistory.remove(targetEntity);
     }
