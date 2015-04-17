@@ -46,6 +46,7 @@ import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.objectives.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
+import amara.game.entitysystem.components.shop.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.spells.placeholders.*;
@@ -332,6 +333,8 @@ public class MessagesSerializer{
                         RespawnComponent.class,
                         SelectedUnitComponent.class,
                         WaitingToRespawnComponent.class,
+                        //shop
+                        ShopRangeComponent.class,
                         //spawns
                         RelativeSpawnPositionComponent.class,
                         SpawnAttackMoveComponent.class,
