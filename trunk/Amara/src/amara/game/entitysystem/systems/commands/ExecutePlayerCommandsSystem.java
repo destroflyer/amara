@@ -28,6 +28,7 @@ import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.systems.movement.MovementSystem;
+import amara.game.entitysystem.systems.shop.ShopUtil;
 import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.CastSpellSystem;
 import amara.game.entitysystem.systems.targets.TargetUtil;
@@ -107,71 +108,75 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 }
                 else if(command instanceof BuyItemCommand){
                     BuyItemCommand buyItemCommand = (BuyItemCommand) command;
-                    String itemID = buyItemCommand.getItemID();
-                    EntityWrapper item = EntityTemplate.createFromTemplate(entityWorld, itemID);
-                    ItemRecipeComponent itemRecipeComponent = item.getComponent(ItemRecipeComponent.class);
-                    int gold = GoldUtil.getGold(entityWorld, selectedUnit);
-                    if(gold >= itemRecipeComponent.getGold()){
-                        LinkedList<String> remainingIngredientIDs = new LinkedList<String>();
-                        for(String ingredientID : itemRecipeComponent.getItemIDs()){
-                            remainingIngredientIDs.add(ingredientID);
-                        }
-                        int[] oldItemsEntities = new int[0];
-                        InventoryComponent inventoryComponent = entityWorld.getComponent(selectedUnit, InventoryComponent.class);
-                        if(inventoryComponent != null){
-                            oldItemsEntities = inventoryComponent.getItemEntities();
-                        }
-                        int firstIngredientIndex = -1;
-                        ArrayList<Integer> newItemsEntities = new ArrayList<Integer>();
-                        for(int i=0;i<oldItemsEntities.length;i++){
-                            String oldItemID = entityWorld.getComponent(oldItemsEntities[i], ItemIDComponent.class).getID();
-                            if(remainingIngredientIDs.contains(oldItemID)){
-                                remainingIngredientIDs.remove(oldItemID);
-                                if(firstIngredientIndex == -1){
-                                    firstIngredientIndex = i;
+                    if(ShopUtil.isInShopRange(entityWorld, selectedUnit)){
+                        String itemID = buyItemCommand.getItemID();
+                        EntityWrapper item = EntityTemplate.createFromTemplate(entityWorld, itemID);
+                        ItemRecipeComponent itemRecipeComponent = item.getComponent(ItemRecipeComponent.class);
+                        int gold = GoldUtil.getGold(entityWorld, selectedUnit);
+                        if(gold >= itemRecipeComponent.getGold()){
+                            LinkedList<String> remainingIngredientIDs = new LinkedList<String>();
+                            for(String ingredientID : itemRecipeComponent.getItemIDs()){
+                                remainingIngredientIDs.add(ingredientID);
+                            }
+                            int[] oldItemsEntities = new int[0];
+                            InventoryComponent inventoryComponent = entityWorld.getComponent(selectedUnit, InventoryComponent.class);
+                            if(inventoryComponent != null){
+                                oldItemsEntities = inventoryComponent.getItemEntities();
+                            }
+                            int firstIngredientIndex = -1;
+                            ArrayList<Integer> newItemsEntities = new ArrayList<Integer>();
+                            for(int i=0;i<oldItemsEntities.length;i++){
+                                String oldItemID = entityWorld.getComponent(oldItemsEntities[i], ItemIDComponent.class).getID();
+                                if(remainingIngredientIDs.contains(oldItemID)){
+                                    remainingIngredientIDs.remove(oldItemID);
+                                    if(firstIngredientIndex == -1){
+                                        firstIngredientIndex = i;
+                                    }
+                                }
+                                else{
+                                    newItemsEntities.add(oldItemsEntities[i]);
                                 }
                             }
-                            else{
-                                newItemsEntities.add(oldItemsEntities[i]);
-                            }
-                        }
-                        if(remainingIngredientIDs.isEmpty()){
-                            if(firstIngredientIndex != -1){
-                                newItemsEntities.add(firstIngredientIndex, item.getId());
-                            }
-                            else{
-                                newItemsEntities.add(item.getId());
-                            }
-                            if(newItemsEntities.size() <= 6){
-                                entityWorld.setComponent(selectedUnit, new GoldComponent(gold - itemRecipeComponent.getGold()));
-                                entityWorld.setComponent(selectedUnit, new InventoryComponent(Util.convertToArray(newItemsEntities)));
-                                entityWorld.setComponent(selectedUnit, new RequestUpdateAttributesComponent());
+                            if(remainingIngredientIDs.isEmpty()){
+                                if(firstIngredientIndex != -1){
+                                    newItemsEntities.add(firstIngredientIndex, item.getId());
+                                }
+                                else{
+                                    newItemsEntities.add(item.getId());
+                                }
+                                if(newItemsEntities.size() <= 6){
+                                    entityWorld.setComponent(selectedUnit, new GoldComponent(gold - itemRecipeComponent.getGold()));
+                                    entityWorld.setComponent(selectedUnit, new InventoryComponent(Util.convertToArray(newItemsEntities)));
+                                    entityWorld.setComponent(selectedUnit, new RequestUpdateAttributesComponent());
+                                }
                             }
                         }
                     }
                 }
                 else if(command instanceof SellItemCommand){
                     SellItemCommand sellItemCommand = (SellItemCommand) command;
-                    int inventoryIndex = sellItemCommand.getInventoryIndex();
-                    InventoryComponent inventoryComponent = entityWorld.getComponent(selectedUnit, InventoryComponent.class);
-                    if(inventoryComponent != null){
-                        int[] oldItemsEntities = inventoryComponent.getItemEntities();
-                        if((inventoryIndex >= 0) && (inventoryIndex < oldItemsEntities.length)){
-                            int itemEntity = oldItemsEntities[inventoryIndex];
-                            IsSellableComponent isSellableComponent = entityWorld.getComponent(itemEntity, IsSellableComponent.class);
-                            if(isSellableComponent != null){
-                                int gold = GoldUtil.getGold(entityWorld, selectedUnit);
-                                int[] newItemEntities = new int[oldItemsEntities.length - 1];
-                                int currentIndex = 0;
-                                for(int i=0;i<oldItemsEntities.length;i++){
-                                    if(i != inventoryIndex){
-                                        newItemEntities[currentIndex] = oldItemsEntities[i];
-                                        currentIndex++;
+                    if(ShopUtil.isInShopRange(entityWorld, selectedUnit)){
+                        int inventoryIndex = sellItemCommand.getInventoryIndex();
+                        InventoryComponent inventoryComponent = entityWorld.getComponent(selectedUnit, InventoryComponent.class);
+                        if(inventoryComponent != null){
+                            int[] oldItemsEntities = inventoryComponent.getItemEntities();
+                            if((inventoryIndex >= 0) && (inventoryIndex < oldItemsEntities.length)){
+                                int itemEntity = oldItemsEntities[inventoryIndex];
+                                IsSellableComponent isSellableComponent = entityWorld.getComponent(itemEntity, IsSellableComponent.class);
+                                if(isSellableComponent != null){
+                                    int gold = GoldUtil.getGold(entityWorld, selectedUnit);
+                                    int[] newItemEntities = new int[oldItemsEntities.length - 1];
+                                    int currentIndex = 0;
+                                    for(int i=0;i<oldItemsEntities.length;i++){
+                                        if(i != inventoryIndex){
+                                            newItemEntities[currentIndex] = oldItemsEntities[i];
+                                            currentIndex++;
+                                        }
                                     }
+                                    entityWorld.setComponent(selectedUnit, new GoldComponent(gold + isSellableComponent.getGold()));
+                                    entityWorld.setComponent(selectedUnit, new InventoryComponent(newItemEntities));
+                                    entityWorld.setComponent(selectedUnit, new RequestUpdateAttributesComponent());
                                 }
-                                entityWorld.setComponent(selectedUnit, new GoldComponent(gold + isSellableComponent.getGold()));
-                                entityWorld.setComponent(selectedUnit, new InventoryComponent(newItemEntities));
-                                entityWorld.setComponent(selectedUnit, new RequestUpdateAttributesComponent());
                             }
                         }
                     }

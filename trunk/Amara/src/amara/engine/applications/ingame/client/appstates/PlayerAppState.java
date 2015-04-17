@@ -13,6 +13,7 @@ import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
 import amara.engine.applications.ingame.client.systems.camera.*;
 import amara.engine.applications.ingame.client.systems.filters.*;
 import amara.engine.applications.ingame.client.systems.gui.*;
+import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.appstates.*;
 import amara.engine.settings.Settings;
 import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
@@ -44,6 +45,7 @@ public class PlayerAppState extends BaseDisplayAppState implements ActionListene
         localEntitySystemAppState.addEntitySystem(lockedCameraSystem);
         PostFilterAppState postFilterAppState = getAppState(PostFilterAppState.class);
         localEntitySystemAppState.addEntitySystem(new PlayerDeathDisplaySystem(playerEntity, postFilterAppState));
+        localEntitySystemAppState.addEntitySystem(new ShopAnimationSystem(playerEntity, localEntitySystemAppState.getEntitySceneMap()));
         if(Settings.getFloat("fog_of_war_update_interval") != -1){
             Map map = getAppState(MapAppState.class).getMap();
             PolyMapManager polyMapManager = map.getPhysicsInformation().getPolyMapManager();
