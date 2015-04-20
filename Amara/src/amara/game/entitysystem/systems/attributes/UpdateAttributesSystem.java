@@ -30,6 +30,7 @@ public class UpdateAttributesSystem implements EntitySystem{
             float abilityPower = 0;
             float attackSpeed = 0;
             float walkSpeed = 0;
+            float cooldownSpeed = 1;
             BaseMaximumHealthComponent baseMaximumHealthComponent = entityWrapper.getComponent(BaseMaximumHealthComponent.class);
             if(baseMaximumHealthComponent != null){
                 maximumHealth += baseMaximumHealthComponent.getValue();
@@ -62,8 +63,7 @@ public class UpdateAttributesSystem implements EntitySystem{
                     addAttributeBonus(entityWorld, attributeBonus, itemEntities[i]);
                 }
             }
-            for(EntityWrapper buffStatus : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)))
-            {
+            for(EntityWrapper buffStatus : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ActiveBuffComponent.class))){
                 ActiveBuffComponent activeBuffComponent = buffStatus.getComponent(ActiveBuffComponent.class);
                 if(activeBuffComponent.getTargetEntityID() == entityWrapper.getId()){
                     ContinuousEffectComponent continuousEffectComponent = entityWorld.getComponent(activeBuffComponent.getBuffEntityID(), ContinuousEffectComponent.class);
@@ -76,9 +76,10 @@ public class UpdateAttributesSystem implements EntitySystem{
             healthRegeneration += attributeBonus.getFlatHealthRegeneration();
             attackDamage += attributeBonus.getFlatAttackDamage();
             abilityPower += attributeBonus.getFlatAbilityPower();
-            attackSpeed += (attackSpeed * attributeBonus.getPercentageAttackSpeed());
+            attackSpeed *= (1 + attributeBonus.getPercentageAttackSpeed());
             walkSpeed += attributeBonus.getFlatWalkSpeed();
             walkSpeed *= attributeBonus.getPercentageWalkSpeed();
+            cooldownSpeed *= (1 + attributeBonus.getPercentageCooldownSpeed());
             entityWrapper.setComponent(new MaximumHealthComponent(maximumHealth));
             if((entityWrapper.getComponent(HealthComponent.class) == null) && entityWrapper.hasComponent(IsAliveComponent.class)){
                 entityWrapper.setComponent(new HealthComponent(maximumHealth));
@@ -106,39 +107,53 @@ public class UpdateAttributesSystem implements EntitySystem{
                 entityWorld.setComponent(autoAttackComponent.getAutoAttackEntity(), new CastDurationComponent(autoAttackDuration));
             }
             entityWrapper.setComponent(new WalkSpeedComponent(walkSpeed));
+            SpellsComponent spellsComponent = entityWrapper.getComponent(SpellsComponent.class);
+            if(spellsComponent != null){
+                for(int spellEntity : spellsComponent.getSpellsEntities()){
+                    BaseCooldownComponent baseCooldownComponent = entityWorld.getComponent(spellEntity, BaseCooldownComponent.class);
+                    if(baseCooldownComponent != null){
+                        float cooldownDuration = (baseCooldownComponent.getDuration() / cooldownSpeed);
+                        entityWorld.setComponent(spellEntity, new CooldownComponent(cooldownDuration));
+                    }
+                }
+            }
             entityWrapper.removeComponent(RequestUpdateAttributesComponent.class);
         }
     }
     
     private void addAttributeBonus(EntityWorld entityWorld, AttributeBonus attributeBonus, int bonusAttributesEntity){
-        EntityWrapper itemWrapper = entityWorld.getWrapped(bonusAttributesEntity);
-        BonusFlatMaximumHealthComponent bonusFlatMaximumHealthComponent = itemWrapper.getComponent(BonusFlatMaximumHealthComponent.class);
+        EntityWrapper bonusEntityWrapper = entityWorld.getWrapped(bonusAttributesEntity);
+        BonusFlatMaximumHealthComponent bonusFlatMaximumHealthComponent = bonusEntityWrapper.getComponent(BonusFlatMaximumHealthComponent.class);
         if(bonusFlatMaximumHealthComponent != null){
             attributeBonus.addFlatMaximumHealth(bonusFlatMaximumHealthComponent.getValue());
         }
-        BonusFlatHealthRegenerationComponent bonusFlatHealthRegenerationComponen = itemWrapper.getComponent(BonusFlatHealthRegenerationComponent.class);
+        BonusFlatHealthRegenerationComponent bonusFlatHealthRegenerationComponen = bonusEntityWrapper.getComponent(BonusFlatHealthRegenerationComponent.class);
         if(bonusFlatHealthRegenerationComponen != null){
             attributeBonus.addFlatHealthRegeneration(bonusFlatHealthRegenerationComponen.getValue());
         }
-        BonusFlatAttackDamageComponent bonusFlatAttackDamageComponent = itemWrapper.getComponent(BonusFlatAttackDamageComponent.class);
+        BonusFlatAttackDamageComponent bonusFlatAttackDamageComponent = bonusEntityWrapper.getComponent(BonusFlatAttackDamageComponent.class);
         if(bonusFlatAttackDamageComponent != null){
             attributeBonus.addFlatAttackDamage(bonusFlatAttackDamageComponent.getValue());
         }
-        BonusFlatAbilityPowerComponent bonusFlatAbilityPowerComponent = itemWrapper.getComponent(BonusFlatAbilityPowerComponent.class);
+        BonusFlatAbilityPowerComponent bonusFlatAbilityPowerComponent = bonusEntityWrapper.getComponent(BonusFlatAbilityPowerComponent.class);
         if(bonusFlatAbilityPowerComponent != null){
             attributeBonus.addFlatAbilityPower(bonusFlatAbilityPowerComponent.getValue());
         }
-        BonusPercentageAttackSpeedComponent bonusPercentageAttackSpeedComponent = itemWrapper.getComponent(BonusPercentageAttackSpeedComponent.class);
+        BonusPercentageAttackSpeedComponent bonusPercentageAttackSpeedComponent = bonusEntityWrapper.getComponent(BonusPercentageAttackSpeedComponent.class);
         if(bonusPercentageAttackSpeedComponent != null){
             attributeBonus.addPercentageAttackSpeed(bonusPercentageAttackSpeedComponent.getValue());
         }
-        BonusFlatWalkSpeedComponent bonusFlatWalkSpeedComponent = itemWrapper.getComponent(BonusFlatWalkSpeedComponent.class);
+        BonusFlatWalkSpeedComponent bonusFlatWalkSpeedComponent = bonusEntityWrapper.getComponent(BonusFlatWalkSpeedComponent.class);
         if(bonusFlatWalkSpeedComponent != null){
             attributeBonus.addFlatWalkSpeed(bonusFlatWalkSpeedComponent.getValue());
         }
-        BonusPercentageWalkSpeedComponent bonusPercentageWalkSpeedComponent = itemWrapper.getComponent(BonusPercentageWalkSpeedComponent.class);
+        BonusPercentageWalkSpeedComponent bonusPercentageWalkSpeedComponent = bonusEntityWrapper.getComponent(BonusPercentageWalkSpeedComponent.class);
         if(bonusPercentageWalkSpeedComponent != null){
             attributeBonus.multiplicatePercentageWalkSpeed(bonusPercentageWalkSpeedComponent.getValue());
+        }
+        BonusPercentageCooldownSpeedComponent bonusPercentageCooldownSpeedComponent = bonusEntityWrapper.getComponent(BonusPercentageCooldownSpeedComponent.class);
+        if(bonusPercentageCooldownSpeedComponent != null){
+            attributeBonus.addPercentageCooldownSpeed(bonusPercentageCooldownSpeedComponent.getValue());
         }
     }
 }

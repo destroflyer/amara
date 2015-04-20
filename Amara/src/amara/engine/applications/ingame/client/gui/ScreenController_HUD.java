@@ -40,7 +40,7 @@ public class ScreenController_HUD extends GameScreenController{
     private final static int SHOP_ITEMS_PER_ROW = 5;
     private EntityWorld shopEntityWorld = new EntityWorld();
     private String[] shopItemTemplateNames = new String[]{
-        "boots","dorans_blade","dorans_ring","dagger","needlessly_large_rod","zhonyas_hourglass","warmogs_armor","youmuus_ghostblade","tiamat"
+        "boots","dorans_blade","dorans_ring","dagger","needlessly_large_rod","zhonyas_hourglass","warmogs_armor","youmuus_ghostblade","tiamat","amplifying_tome","fiendish_codex","ionian_boots_of_lucidity"
     };
     private EntityWrapper[] shopItems;
     private EntityWrapper[] shopItems_Special;
@@ -230,8 +230,12 @@ public class ScreenController_HUD extends GameScreenController{
     }
     
     public void toggleShopVisible(){
+        setShopVisible(!getElementByID("shop_window").isVisible());
+    }
+    
+    public void setShopVisible(boolean isVisible){
         Element shopWindow = getElementByID("shop_window");
-        shopWindow.setVisible(!shopWindow.isVisible());
+        shopWindow.setVisible(isVisible);
     }
     
     public void onShopItemFilter(int filterIndex, boolean isSelected){

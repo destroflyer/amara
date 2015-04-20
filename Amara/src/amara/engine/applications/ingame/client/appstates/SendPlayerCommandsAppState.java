@@ -24,6 +24,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
+import amara.game.entitysystem.components.shop.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 
@@ -54,11 +55,20 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
             Event event = eventsIterator.next();
             if(event instanceof MouseClickEvent){
                 MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
-                switch(mouseClickEvent.getButton()){                    
+                int hoveredEntity = getCursorHoveredEntity();
+                switch(mouseClickEvent.getButton()){
+                    case Left:
+                        if(hoveredEntity != -1){
+                            EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
+                            if(entityWorld.hasComponent(hoveredEntity, ShopRangeComponent.class)){
+                                screenController_HUD.setShopVisible(true);
+                            }
+                        }
+                        break;
+
                     case Right:
-                        int entityToAttack = getCursorHoveredEntity();
-                        if(entityToAttack != -1){
-                            sendCommand(new AutoAttackCommand(entityToAttack));
+                        if(hoveredEntity != -1){
+                            sendCommand(new AutoAttackCommand(hoveredEntity));
                         }
                         else{
                             Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
