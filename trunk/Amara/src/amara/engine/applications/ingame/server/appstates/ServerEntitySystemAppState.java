@@ -139,6 +139,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         IntersectionObserver intersectionObserver = new IntersectionObserver();
         addEntitySystem(new SetAutoAttacksCastAnimationsSystem());
         addEntitySystem(new SetSpellsCastersSystem());
+        addEntitySystem(new SetBaseCooldownSystem());
         addEntitySystem(new UpdateGameTimeSystem());
         addEntitySystem(new CountdownPlayerRespawnSystem());
         addEntitySystem(new CountdownLifetimeSystem());

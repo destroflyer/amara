@@ -20,6 +20,7 @@ public class AttributeBonus{
     private float percentageAttackSpeed = 0;
     private float flatWalkSpeed = 0;
     private float percentageWalkSpeed = 1;
+    private float percentageCooldownSpeed = 0;
 
     public void addFlatMaximumHealth(float value){
         flatMaximumHealth += value;
@@ -75,5 +76,13 @@ public class AttributeBonus{
 
     public float getPercentageWalkSpeed(){
         return percentageWalkSpeed;
+    }
+
+    public void addPercentageCooldownSpeed(float value){
+        percentageCooldownSpeed += value;
+    }
+
+    public float getPercentageCooldownSpeed(){
+        return percentageCooldownSpeed;
     }
 }

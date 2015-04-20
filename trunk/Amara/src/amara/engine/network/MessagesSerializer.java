@@ -155,7 +155,9 @@ public class MessagesSerializer{
                         BonusFlatMaximumHealthComponent.class,
                         BonusFlatWalkSpeedComponent.class,
                         BonusPercentageAttackSpeedComponent.class,
+                        BonusPercentageCooldownSpeedComponent.class,
                         BonusPercentageWalkSpeedComponent.class,
+                        CooldownSpeedComponent.class,
                         HealthComponent.class,
                         HealthRegenerationComponent.class,
                         MaximumHealthComponent.class,
@@ -344,6 +346,7 @@ public class MessagesSerializer{
                         SpawnTemplateComponent.class,
                         //spells
                         ApplyCastedSpellComponent.class,
+                        BaseCooldownComponent.class,
                         CastAnimationComponent.class,
                         CastCancelableComponent.class,
                         CastCancelActionComponent.class,
