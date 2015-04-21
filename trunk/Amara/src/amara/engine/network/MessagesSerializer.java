@@ -4,7 +4,6 @@
  */
 package amara.engine.network;
 
-import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import com.jme3.network.serializing.Serializer;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
@@ -173,6 +172,7 @@ public class MessagesSerializer{
                         IsAudioPlayingComponent.class,
                         //buffs
                         ContinuousEffectComponent.class,
+                        KeepOnDeathComponent.class,
                         OnBuffRemoveEffectTriggersComponent.class,
                         RepeatingEffectComponent.class,
                         //buffs/areas
