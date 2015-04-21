@@ -7,12 +7,15 @@ package amara.engine.applications.ingame.server.network.backends;
 import com.jme3.network.Message;
 import amara.engine.network.*;
 import amara.engine.network.messages.*;
-import amara.game.entitysystem.EntityWorld;
+import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.attributes.*;
+import amara.game.entitysystem.components.buffs.*;
 import amara.game.entitysystem.components.game.*;
 import amara.game.entitysystem.components.maps.*;
 import amara.game.entitysystem.components.maps.playerdeathrules.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
 import amara.game.games.*;
 import amara.game.maps.*;
 
@@ -84,6 +87,17 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                         else{
                             messageResponse.addAnswerMessage(new Message_ChatMessage("No negative death timers allowed"));
                         }
+                    }catch(NumberFormatException ex){
+                    }
+                }
+                else if(message.getText().startsWith("/urf ")){
+                    try{
+                        float cooldownSpeed = Float.parseFloat(message.getText().substring(5));
+                        EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
+                        EntityWrapper buffEffect = entityWorld.getWrapped(entityWorld.createEntity());
+                        buffEffect.setComponent(new BonusPercentageCooldownSpeedComponent(cooldownSpeed));
+                        buff.setComponent(new ContinuousEffectComponent(buffEffect.getId()));
+                        ApplyAddBuffsSystem.addBuff(entityWorld, selectedUnit, buff.getId());
                     }catch(NumberFormatException ex){
                     }
                 }

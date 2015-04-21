@@ -273,7 +273,7 @@ public class EntityTemplate{
             castAnimation.setComponent(new LoopDurationComponent(0.6f));
             entityWrapper.setComponent(new CastAnimationComponent(castAnimation.getId()));
             entityWrapper.setComponent(new RangeComponent(14));
-            entityWrapper.setComponent(new BaseCooldownComponent(0.6f));
+            entityWrapper.setComponent(new BaseCooldownComponent(9));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
@@ -334,7 +334,7 @@ public class EntityTemplate{
             castAnimation.setComponent(new NameComponent("pop"));
             castAnimation.setComponent(new LoopDurationComponent(castDuration));
             entityWrapper.setComponent(new CastAnimationComponent(castAnimation.getId()));
-            entityWrapper.setComponent(new BaseCooldownComponent(castDuration));
+            entityWrapper.setComponent(new BaseCooldownComponent(6));
         }
         else if(templateName.equals("ignite")){
             entityWrapper.setComponent(new NameComponent("Ignite"));
@@ -366,7 +366,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new RangeComponent(10));
-            entityWrapper.setComponent(new BaseCooldownComponent(3));
+            entityWrapper.setComponent(new BaseCooldownComponent(18));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
@@ -451,7 +451,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
-            entityWrapper.setComponent(new BaseCooldownComponent(1));
+            entityWrapper.setComponent(new BaseCooldownComponent(8));
         }
         else if(templateName.equals("sear_projectile")){
             entityWrapper.setComponent(new ModelComponent("Models/fireball/skin.xml"));
@@ -517,7 +517,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new RangeComponent(15));
-            entityWrapper.setComponent(new BaseCooldownComponent(2));
+            entityWrapper.setComponent(new BaseCooldownComponent(10));
         }
         else if(templateName.equals("pillar_of_flame_object")){
             entityWrapper.setComponent(new ModelComponent("Models/pillar_of_flame/skin.xml"));
@@ -572,7 +572,7 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
-            entityWrapper.setComponent(new BaseCooldownComponent(10));
+            entityWrapper.setComponent(new BaseCooldownComponent(16));
         }
         else if(templateName.equals("robot")){
             entityWrapper.setComponent(new NameComponent("Robot"));
@@ -663,7 +663,7 @@ public class EntityTemplate{
             castAnimation.setComponent(new NameComponent("grab"));
             castAnimation.setComponent(new LoopDurationComponent(1.5f));
             entityWrapper.setComponent(new CastAnimationComponent(castAnimation.getId()));
-            entityWrapper.setComponent(new BaseCooldownComponent(3));
+            entityWrapper.setComponent(new BaseCooldownComponent(20));
         }
         else if(templateName.equals("grab_projectile")){
             entityWrapper.setComponent(new HitboxComponent(new Circle(0.6f)));
@@ -716,6 +716,7 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+            entityWrapper.setComponent(new BaseCooldownComponent(4.5f));
         }
         else if(templateName.equals("sonic_wave")){
             entityWrapper.setComponent(new NameComponent("Sonic Wave"));
@@ -760,7 +761,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
-            entityWrapper.setComponent(new BaseCooldownComponent(3));
+            entityWrapper.setComponent(new BaseCooldownComponent(11));
         }
         else if(templateName.equals("sonic_wave_projectile")){
             entityWrapper.setComponent(new ModelComponent("Models/cloud/skin.xml"));
@@ -830,7 +831,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
             entityWrapper.setComponent(new CastCancelActionComponent());
-            entityWrapper.setComponent(new BaseCooldownComponent(3));
+            entityWrapper.setComponent(new BaseCooldownComponent(11));
         }
         else if(templateName.equals("wither")){
             entityWrapper.setComponent(new NameComponent("Wither"));
@@ -881,7 +882,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new RangeComponent(14));
-            entityWrapper.setComponent(new BaseCooldownComponent(11));
+            entityWrapper.setComponent(new BaseCooldownComponent(15));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
@@ -967,7 +968,7 @@ public class EntityTemplate{
             effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
-            entityWrapper.setComponent(new BaseCooldownComponent(6));
+            entityWrapper.setComponent(new BaseCooldownComponent(90));
         }
         else if(templateName.equals("lunar_rush")){
             entityWrapper.setComponent(new NameComponent("Lunar Rush"));
@@ -1020,7 +1021,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new RangeComponent(20));
-            entityWrapper.setComponent(new BaseCooldownComponent(3));
+            entityWrapper.setComponent(new BaseCooldownComponent(25));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
@@ -1089,7 +1090,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new RangeComponent(6));
-            entityWrapper.setComponent(new BaseCooldownComponent(4));
+            entityWrapper.setComponent(new BaseCooldownComponent(90));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
@@ -1172,7 +1173,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new RangeComponent(9));
-            entityWrapper.setComponent(new BaseCooldownComponent(4));
+            entityWrapper.setComponent(new BaseCooldownComponent(16));
         }
         else if(templateName.equals("empower")){
             entityWrapper.setComponent(new NameComponent("Empower"));
@@ -1226,7 +1227,7 @@ public class EntityTemplate{
             effectTrigger5.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger5.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
-            entityWrapper.setComponent(new BaseCooldownComponent(3));
+            entityWrapper.setComponent(new BaseCooldownComponent(7));
         }
         else if(templateName.equals("spinning_slash")){
             entityWrapper.setComponent(new NameComponent("Spinning Slash"));
@@ -1274,7 +1275,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
-            entityWrapper.setComponent(new BaseCooldownComponent(1.5f));
+            entityWrapper.setComponent(new BaseCooldownComponent(13));
         }
         else if(templateName.equals("bear_stance")){
             entityWrapper.setComponent(new NameComponent("Bear Stance"));
@@ -1302,7 +1303,7 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
-            entityWrapper.setComponent(new BaseCooldownComponent(5));
+            entityWrapper.setComponent(new BaseCooldownComponent(6));
         }
         else if(templateName.equals("steve")){
             entityWrapper.setComponent(new NameComponent("Steve"));
@@ -1396,7 +1397,7 @@ public class EntityTemplate{
             castAnimation.setComponent(new NameComponent("punch"));
             castAnimation.setComponent(new LoopDurationComponent(0.25f));
             entityWrapper.setComponent(new CastAnimationComponent(castAnimation.getId()));
-            entityWrapper.setComponent(new BaseCooldownComponent(3));
+            entityWrapper.setComponent(new BaseCooldownComponent(4));
         }
         else if(templateName.equals("infected_cleaver_object")){
             entityWrapper.setComponent(new ModelComponent("Models/cartoon_forest_stone_1/skin.xml"));
@@ -1478,6 +1479,7 @@ public class EntityTemplate{
             effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+            entityWrapper.setComponent(new BaseCooldownComponent(4));
         }
         else if(templateName.equals("burning_agony_deactivate")){
             entityWrapper.setComponent(new NameComponent("Deactivate Burning Agony"));
@@ -1542,7 +1544,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new RangeComponent(12));
-            entityWrapper.setComponent(new BaseCooldownComponent(5));
+            entityWrapper.setComponent(new BaseCooldownComponent(18));
         }
         else if(templateName.equals("event_horizon_object")){
             entityWrapper.setComponent(new ModelComponent("Models/event_horizon/skin.xml"));
@@ -1613,7 +1615,7 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
-            entityWrapper.setComponent(new BaseCooldownComponent(15));
+            entityWrapper.setComponent(new BaseCooldownComponent(75));
         }
         else if(templateName.equals("daydream")){
             entityWrapper.setComponent(new NameComponent("Daydream"));
@@ -1747,7 +1749,7 @@ public class EntityTemplate{
             castAnimation.setComponent(new NameComponent("attack1"));
             castAnimation.setComponent(new LoopDurationComponent(0.5f));
             entityWrapper.setComponent(new CastAnimationComponent(castAnimation.getId()));
-            entityWrapper.setComponent(new BaseCooldownComponent(0.75f));
+            entityWrapper.setComponent(new BaseCooldownComponent(17));
         }
         else if(templateName.equals("pulverize_object")){
             entityWrapper.setComponent(new HitboxComponent(new Circle(7)));
@@ -1828,7 +1830,7 @@ public class EntityTemplate{
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
-            entityWrapper.setComponent(new BaseCooldownComponent(2));
+            entityWrapper.setComponent(new BaseCooldownComponent(14));
         }
         else if(templateName.equals("slap")){
             entityWrapper.setComponent(new NameComponent("Slap"));
@@ -1887,7 +1889,7 @@ public class EntityTemplate{
             effectTrigger5.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger5.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
-            entityWrapper.setComponent(new BaseCooldownComponent(3));
+            entityWrapper.setComponent(new BaseCooldownComponent(7));
         }
         else if(templateName.equals("unstoppable_force")){
             entityWrapper.setComponent(new NameComponent("Unstoppable Force"));
@@ -1946,7 +1948,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new RangeComponent(16));
-            entityWrapper.setComponent(new BaseCooldownComponent(2));
+            entityWrapper.setComponent(new BaseCooldownComponent(130));
         }
         else if(templateName.equals("unstoppable_force_object")){
             entityWrapper.setComponent(new HitboxComponent(new Circle(7)));
@@ -2079,7 +2081,7 @@ public class EntityTemplate{
             effectTrigger5.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger5.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
-            entityWrapper.setComponent(new BaseCooldownComponent(10));
+            entityWrapper.setComponent(new BaseCooldownComponent(15));
         }
         else if(templateName.equals("sapling_toss")){
             entityWrapper.setComponent(new NameComponent("Sapling Toss"));
@@ -2128,6 +2130,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new BaseCooldownComponent(12));
         }
         else if(templateName.equals("sapling_toss_projectile")){
             entityWrapper.setComponent(new ModelComponent("Models/varus/skin_default.xml"));
@@ -2178,6 +2181,7 @@ public class EntityTemplate{
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
             effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             
+            entityWrapper.setComponent(new IsAliveComponent());
             entityWrapper.setComponent(new WalkSpeedComponent(5.5f));
             EntityWrapper autoAttack = createFromTemplate(entityWorld, "empty_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));

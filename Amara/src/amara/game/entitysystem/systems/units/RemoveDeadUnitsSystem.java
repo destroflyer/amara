@@ -20,6 +20,7 @@ public class RemoveDeadUnitsSystem implements EntitySystem{
         for(int entity : observer.getRemoved().getEntitiesWithAll(IsAliveComponent.class))
         {
             if(!UnitUtil.isPlayerUnit(entityWorld, entity)){
+                UnitUtil.cancelAction(entityWorld, entity);
                 RemoveBuffsSystem.removeAllBuffs(entityWorld, entity);
                 entityWorld.removeEntity(entity);
             }

@@ -6,6 +6,8 @@ package amara.game.entitysystem.systems.players;
 
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
+import amara.game.entitysystem.components.buffs.*;
+import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.maps.*;
 import amara.game.entitysystem.components.maps.playerdeathrules.*;
 import amara.game.entitysystem.components.physics.*;
@@ -63,7 +65,12 @@ public class PlayerDeathSystem implements EntitySystem{
             entityWorld.removeComponent(selectedEntity, componentClass);
         }
         UnitUtil.cancelAction(entityWorld, selectedEntity);
-        RemoveBuffsSystem.removeAllBuffs(entityWorld, selectedEntity);
+        for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
+            ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class);
+            if((activeBuffComponent.getTargetEntityID() == selectedEntity) && (!entityWorld.hasComponent(activeBuffComponent.getBuffEntityID(), KeepOnDeathComponent.class))){
+                RemoveBuffsSystem.removeBuff(entityWorld, buffStatus);
+            }
+        }
         DeathAnimationComponent deathAnimationComponent = entityWorld.getComponent(selectedEntity, DeathAnimationComponent.class);
         if(deathAnimationComponent != null){
             entityWorld.setComponent(selectedEntity, new AnimationComponent(deathAnimationComponent.getAnimationEntity()));
