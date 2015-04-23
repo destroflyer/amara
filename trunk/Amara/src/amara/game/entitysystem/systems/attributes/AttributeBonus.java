@@ -18,9 +18,11 @@ public class AttributeBonus{
     private float flatAttackDamage = 0;
     private float flatAbilityPower = 0;
     private float percentageAttackSpeed = 0;
+    private float percentageCooldownSpeed = 0;
+    private float flatArmor = 0;
+    private float flatMagicResistance = 0;
     private float flatWalkSpeed = 0;
     private float percentageWalkSpeed = 1;
-    private float percentageCooldownSpeed = 0;
 
     public void addFlatMaximumHealth(float value){
         flatMaximumHealth += value;
@@ -61,6 +63,30 @@ public class AttributeBonus{
     public float getPercentageAttackSpeed(){
         return percentageAttackSpeed;
     }
+
+    public void addPercentageCooldownSpeed(float value){
+        percentageCooldownSpeed += value;
+    }
+
+    public float getPercentageCooldownSpeed(){
+        return percentageCooldownSpeed;
+    }
+
+    public void addFlatArmor(float value){
+        flatArmor += value;
+    }
+
+    public float getFlatArmor(){
+        return flatArmor;
+    }
+
+    public void addFlatMagicResistance(float value){
+        flatMagicResistance += value;
+    }
+
+    public float getFlatMagicResistance(){
+        return flatMagicResistance;
+    }
     
     public void addFlatWalkSpeed(float value){
         flatWalkSpeed += value;
@@ -76,13 +102,5 @@ public class AttributeBonus{
 
     public float getPercentageWalkSpeed(){
         return percentageWalkSpeed;
-    }
-
-    public void addPercentageCooldownSpeed(float value){
-        percentageCooldownSpeed += value;
-    }
-
-    public float getPercentageCooldownSpeed(){
-        return percentageCooldownSpeed;
     }
 }

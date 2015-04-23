@@ -26,6 +26,9 @@ public class DisplayAttributesSystem extends GUIDisplaySystem{
         String attackDamageText = NON_EXISTING_ATTRIBUTE_TEXT;
         String abilityPowerText = NON_EXISTING_ATTRIBUTE_TEXT;
         String attackSpeedText = NON_EXISTING_ATTRIBUTE_TEXT;
+        String cooldownSpeedText = NON_EXISTING_ATTRIBUTE_TEXT;
+        String armorText = NON_EXISTING_ATTRIBUTE_TEXT;
+        String magicResistanceText = NON_EXISTING_ATTRIBUTE_TEXT;
         String walkSpeedText = NON_EXISTING_ATTRIBUTE_TEXT;
         if(entityWorld.hasComponent(selectedEntity, HealthComponent.class)){
             healthText = ("" + (int) entityWorld.getComponent(selectedEntity, HealthComponent.class).getValue());
@@ -39,6 +42,15 @@ public class DisplayAttributesSystem extends GUIDisplaySystem{
         if(entityWorld.hasComponent(selectedEntity, AttackSpeedComponent.class)){
             attackSpeedText = ("" + Util.round(entityWorld.getComponent(selectedEntity, AttackSpeedComponent.class).getValue(), 2));
         }
+        if(entityWorld.hasComponent(selectedEntity, CooldownSpeedComponent.class)){
+            cooldownSpeedText = ("" + Util.round(entityWorld.getComponent(selectedEntity, CooldownSpeedComponent.class).getValue(), 2));
+        }
+        if(entityWorld.hasComponent(selectedEntity, ArmorComponent.class)){
+            armorText = ("" + (int) entityWorld.getComponent(selectedEntity, ArmorComponent.class).getValue());
+        }
+        if(entityWorld.hasComponent(selectedEntity, MagicResistanceComponent.class)){
+            magicResistanceText = ("" + (int) entityWorld.getComponent(selectedEntity, MagicResistanceComponent.class).getValue());
+        }
         if(entityWorld.hasComponent(selectedEntity, WalkSpeedComponent.class)){
             walkSpeedText = ("" + Util.round(entityWorld.getComponent(selectedEntity, WalkSpeedComponent.class).getValue(), 2));
         }
@@ -46,6 +58,9 @@ public class DisplayAttributesSystem extends GUIDisplaySystem{
         screenController_HUD.setAttributeValue_AttackDamage(attackDamageText);
         screenController_HUD.setAttributeValue_AbilityPower(abilityPowerText);
         screenController_HUD.setAttributeValue_AttackSpeed(attackSpeedText);
+        screenController_HUD.setAttributeValue_CooldownSpeed(cooldownSpeedText);
+        screenController_HUD.setAttributeValue_Armor(armorText);
+        screenController_HUD.setAttributeValue_MagicResistance(magicResistanceText);
         screenController_HUD.setAttributeValue_WalkSpeed(walkSpeedText);
     }
 }

@@ -20,14 +20,14 @@
                                     <text id="attribute_value_health" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
                                 </panel>
                                 <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/walk_speed_16.png"/>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_walk_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="horizontal">
                                     <image width="16px" height="16px" filename="Interface/hud/attributes/attack_damage_16.png"/>
                                     <panel width="5px"/>
                                     <text id="attribute_value_attack_damage" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
-                                </panel>
-                                <panel childLayout="horizontal">
-                                    <image width="16px" height="16px" filename="Interface/hud/attributes/ability_power_16.png"/>
-                                    <panel width="5px"/>
-                                    <text id="attribute_value_ability_power" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
                                 </panel>
                                 <panel childLayout="horizontal">
                                     <image width="16px" height="16px" filename="Interface/hud/attributes/attack_speed_16.png"/>
@@ -35,9 +35,28 @@
                                     <text id="attribute_value_attack_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
                                 </panel>
                                 <panel childLayout="horizontal">
-                                    <image width="16px" height="16px" filename="Interface/hud/attributes/walk_speed_16.png"/>
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/armor_16.png"/>
                                     <panel width="5px"/>
-                                    <text id="attribute_value_walk_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                    <text id="attribute_value_armor" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel width="10px"/>
+                            <panel childLayout="vertical">
+                                <panel height="40px"/>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/ability_power_16.png"/>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_ability_power" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/cooldown_speed_16.png"/>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_cooldown_speed" text="150" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/magic_resistance_16.png"/>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_magic_resistance" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
                                 </panel>
                             </panel>
                         </panel>

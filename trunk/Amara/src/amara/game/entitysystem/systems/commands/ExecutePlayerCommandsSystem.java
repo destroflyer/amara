@@ -4,20 +4,16 @@
  */
 package amara.game.entitysystem.systems.commands;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import com.jme3.math.Vector2f;
 import amara.Queue;
-import amara.Util;
 import amara.engine.applications.ingame.client.appstates.SendPlayerCommandsAppState;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.input.*;
-import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
@@ -32,7 +28,6 @@ import amara.game.entitysystem.systems.shop.ShopUtil;
 import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.CastSpellSystem;
 import amara.game.entitysystem.systems.targets.TargetUtil;
-import amara.game.entitysystem.systems.units.GoldUtil;
 import amara.game.entitysystem.systems.units.UnitUtil;
 
 /**
@@ -54,7 +49,20 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             Command command = playerCommand.getCommand();
             int playerEntity = getPlayerEntity(entityWorld, playerCommand.getClientID());
             int selectedUnit = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-            if(entityWorld.hasComponent(selectedUnit, IsAliveComponent.class)){
+            boolean isUnitAlive = entityWorld.hasComponent(selectedUnit, IsAliveComponent.class);
+            if(command instanceof BuyItemCommand){
+                BuyItemCommand buyItemCommand = (BuyItemCommand) command;
+                if((!isUnitAlive) || ShopUtil.isInShopRange(entityWorld, selectedUnit)){
+                    ShopUtil.buy(entityWorld, selectedUnit, buyItemCommand.getItemID());
+                }
+            }
+            else if(command instanceof SellItemCommand){
+                SellItemCommand sellItemCommand = (SellItemCommand) command;
+                if((!isUnitAlive) || ShopUtil.isInShopRange(entityWorld, selectedUnit)){
+                    ShopUtil.sell(entityWorld, selectedUnit, sellItemCommand.getInventoryIndex());
+                }
+            }
+            else if(isUnitAlive){
                 if(command instanceof MoveCommand){
                     MoveCommand moveCommand = (MoveCommand) command;
                     int targetPositionEntity = entityWorld.createEntity();
@@ -105,81 +113,6 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     int targetEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetEntity, new PositionComponent(castPositionalSkillshotSpellCommand.getPosition().clone()));
                     castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, targetEntity));
-                }
-                else if(command instanceof BuyItemCommand){
-                    BuyItemCommand buyItemCommand = (BuyItemCommand) command;
-                    if(ShopUtil.isInShopRange(entityWorld, selectedUnit)){
-                        String itemID = buyItemCommand.getItemID();
-                        EntityWrapper item = EntityTemplate.createFromTemplate(entityWorld, itemID);
-                        ItemRecipeComponent itemRecipeComponent = item.getComponent(ItemRecipeComponent.class);
-                        int gold = GoldUtil.getGold(entityWorld, selectedUnit);
-                        if(gold >= itemRecipeComponent.getGold()){
-                            LinkedList<String> remainingIngredientIDs = new LinkedList<String>();
-                            for(String ingredientID : itemRecipeComponent.getItemIDs()){
-                                remainingIngredientIDs.add(ingredientID);
-                            }
-                            int[] oldItemsEntities = new int[0];
-                            InventoryComponent inventoryComponent = entityWorld.getComponent(selectedUnit, InventoryComponent.class);
-                            if(inventoryComponent != null){
-                                oldItemsEntities = inventoryComponent.getItemEntities();
-                            }
-                            int firstIngredientIndex = -1;
-                            ArrayList<Integer> newItemsEntities = new ArrayList<Integer>();
-                            for(int i=0;i<oldItemsEntities.length;i++){
-                                String oldItemID = entityWorld.getComponent(oldItemsEntities[i], ItemIDComponent.class).getID();
-                                if(remainingIngredientIDs.contains(oldItemID)){
-                                    remainingIngredientIDs.remove(oldItemID);
-                                    if(firstIngredientIndex == -1){
-                                        firstIngredientIndex = i;
-                                    }
-                                }
-                                else{
-                                    newItemsEntities.add(oldItemsEntities[i]);
-                                }
-                            }
-                            if(remainingIngredientIDs.isEmpty()){
-                                if(firstIngredientIndex != -1){
-                                    newItemsEntities.add(firstIngredientIndex, item.getId());
-                                }
-                                else{
-                                    newItemsEntities.add(item.getId());
-                                }
-                                if(newItemsEntities.size() <= 6){
-                                    entityWorld.setComponent(selectedUnit, new GoldComponent(gold - itemRecipeComponent.getGold()));
-                                    entityWorld.setComponent(selectedUnit, new InventoryComponent(Util.convertToArray(newItemsEntities)));
-                                    entityWorld.setComponent(selectedUnit, new RequestUpdateAttributesComponent());
-                                }
-                            }
-                        }
-                    }
-                }
-                else if(command instanceof SellItemCommand){
-                    SellItemCommand sellItemCommand = (SellItemCommand) command;
-                    if(ShopUtil.isInShopRange(entityWorld, selectedUnit)){
-                        int inventoryIndex = sellItemCommand.getInventoryIndex();
-                        InventoryComponent inventoryComponent = entityWorld.getComponent(selectedUnit, InventoryComponent.class);
-                        if(inventoryComponent != null){
-                            int[] oldItemsEntities = inventoryComponent.getItemEntities();
-                            if((inventoryIndex >= 0) && (inventoryIndex < oldItemsEntities.length)){
-                                int itemEntity = oldItemsEntities[inventoryIndex];
-                                IsSellableComponent isSellableComponent = entityWorld.getComponent(itemEntity, IsSellableComponent.class);
-                                if(isSellableComponent != null){
-                                    int gold = GoldUtil.getGold(entityWorld, selectedUnit);
-                                    int[] newItemEntities = new int[oldItemsEntities.length - 1];
-                                    int currentIndex = 0;
-                                    for(int i=0;i<oldItemsEntities.length;i++){
-                                        if(i != inventoryIndex){
-                                            newItemEntities[currentIndex] = oldItemsEntities[i];
-                                            currentIndex++;
-                                        }
-                                    }
-                                    entityWorld.setComponent(selectedUnit, new GoldComponent(gold + isSellableComponent.getGold()));
-                                    entityWorld.setComponent(selectedUnit, new InventoryComponent(newItemEntities));
-                                    entityWorld.setComponent(selectedUnit, new RequestUpdateAttributesComponent());
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }

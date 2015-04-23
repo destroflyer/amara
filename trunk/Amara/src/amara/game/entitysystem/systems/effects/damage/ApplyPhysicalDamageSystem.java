@@ -25,10 +25,24 @@ public class ApplyPhysicalDamageSystem implements EntitySystem{
             if(entityWorld.hasComponent(targetID, IsVulnerableComponent.class)){
                 HealthComponent healthComponent = entityWorld.getComponent(targetID, HealthComponent.class);
                 if(healthComponent != null){
-                    PhysicalDamageComponent physicalDamageComponent = entityWrapper.getComponent(PhysicalDamageComponent.class);
-                    float health = (healthComponent.getValue() - physicalDamageComponent.getValue());
-                    entityWorld.setComponent(targetID, new HealthComponent(health));
-                    wasDamaged = true;
+                    float armor = 0;
+                    ArmorComponent armorComponent = entityWorld.getComponent(targetID, ArmorComponent.class);
+                    if(armorComponent != null){
+                        armor = armorComponent.getValue();
+                    }
+                    float damageFactor;
+                    if(armor >= 0){
+                        damageFactor = (100 / (100 + armor));
+                    }
+                    else{
+                        damageFactor = (2 - (100 / (100 - armor)));
+                    }
+                    float damage = (damageFactor * entityWrapper.getComponent(PhysicalDamageComponent.class).getValue());
+                    if(damage > 0){
+                        float health = (healthComponent.getValue() - damage);
+                        entityWorld.setComponent(targetID, new HealthComponent(health));
+                        wasDamaged = true;
+                    }
                 }
             }
             if(!wasDamaged){
