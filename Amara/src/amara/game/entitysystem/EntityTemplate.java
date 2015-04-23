@@ -203,6 +203,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseMaximumHealthComponent(300));
             entityWrapper.setComponent(new BaseAttackDamageComponent(30));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
+            entityWrapper.setComponent(new BaseArmorComponent(25));
+            entityWrapper.setComponent(new BaseMagicResistanceComponent(30));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
@@ -392,6 +394,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackDamageComponent(60));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
+            entityWrapper.setComponent(new BaseArmorComponent(20));
+            entityWrapper.setComponent(new BaseMagicResistanceComponent(30));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
@@ -599,6 +603,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackDamageComponent(40));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
+            entityWrapper.setComponent(new BaseArmorComponent(27));
+            entityWrapper.setComponent(new BaseMagicResistanceComponent(30));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId()}));
@@ -913,6 +919,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackDamageComponent(50));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
+            entityWrapper.setComponent(new BaseArmorComponent(25));
+            entityWrapper.setComponent(new BaseMagicResistanceComponent(30));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper zhonyasHourglass = createFromTemplate(entityWorld, "zhonyas_hourglass");
@@ -1119,6 +1127,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseMaximumHealthComponent(400));
             entityWrapper.setComponent(new BaseAttackDamageComponent(80));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
+            entityWrapper.setComponent(new BaseArmorComponent(25));
+            entityWrapper.setComponent(new BaseMagicResistanceComponent(30));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
@@ -1332,6 +1342,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackDamageComponent(40));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
+            entityWrapper.setComponent(new BaseArmorComponent(28));
+            entityWrapper.setComponent(new BaseMagicResistanceComponent(30));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransRing = createFromTemplate(entityWorld, "dorans_ring");
@@ -1649,6 +1661,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackDamageComponent(200));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
+            entityWrapper.setComponent(new BaseArmorComponent(30));
+            entityWrapper.setComponent(new BaseMagicResistanceComponent(30));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(4.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper youmuusGhostblade = createFromTemplate(entityWorld, "youmuus_ghostblade");
@@ -1692,6 +1706,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackDamageComponent(200));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
+            entityWrapper.setComponent(new BaseArmorComponent(30));
+            entityWrapper.setComponent(new BaseMagicResistanceComponent(30));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(4.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper youmuusGhostblade = createFromTemplate(entityWorld, "youmuus_ghostblade");
@@ -2010,6 +2026,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackDamageComponent(80));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
+            entityWrapper.setComponent(new BaseArmorComponent(22));
+            entityWrapper.setComponent(new BaseMagicResistanceComponent(30));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
@@ -2213,6 +2231,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseAttackDamageComponent(50));
             entityWrapper.setComponent(new BaseAbilityPowerComponent(0));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
+            entityWrapper.setComponent(new BaseArmorComponent(25));
+            entityWrapper.setComponent(new BaseMagicResistanceComponent(30));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper needlesslyLargeRod = createFromTemplate(entityWorld, "needlessly_large_rod");
@@ -2737,9 +2757,21 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BonusFlatAttackDamageComponent(40));
             entityWrapper.setComponent(new BonusFlatHealthRegenerationComponent(15));
         }
+        else if(templateName.equals("giants_belt")){
+            entityWrapper.setComponent(new ItemIDComponent("giants_belt"));
+            entityWrapper.setComponent(new ItemRecipeComponent(1000));
+            entityWrapper.setComponent(new IsSellableComponent(700));
+            entityWrapper.setComponent(new BonusFlatMaximumHealthComponent(380));
+        }
+        else if(templateName.equals("rejuvenation_bead")){
+            entityWrapper.setComponent(new ItemIDComponent("rejuvenation_bead"));
+            entityWrapper.setComponent(new ItemRecipeComponent(180));
+            entityWrapper.setComponent(new IsSellableComponent(126));
+            entityWrapper.setComponent(new BonusFlatMaximumHealthComponent(2));
+        }
         else if(templateName.equals("warmogs_armor")){
             entityWrapper.setComponent(new ItemIDComponent("warmogs_armor"));
-            entityWrapper.setComponent(new ItemRecipeComponent(2500));
+            entityWrapper.setComponent(new ItemRecipeComponent(1500, "giants_belt", "rejuvenation_bead", "rejuvenation_bead"));
             entityWrapper.setComponent(new IsSellableComponent(1981));
             entityWrapper.setComponent(new BonusFlatMaximumHealthComponent(1000));
             entityWrapper.setComponent(new BonusFlatHealthRegenerationComponent(15));
@@ -2770,6 +2802,45 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsSellableComponent(700));
             entityWrapper.setComponent(new BonusFlatWalkSpeedComponent(0.9f));
             entityWrapper.setComponent(new BonusPercentageCooldownSpeedComponent(0.15f));
+        }
+        else if(templateName.equals("cloth_armor")){
+            entityWrapper.setComponent(new ItemIDComponent("cloth_armor"));
+            entityWrapper.setComponent(new ItemRecipeComponent(300));
+            entityWrapper.setComponent(new IsSellableComponent(210));
+            entityWrapper.setComponent(new BonusFlatArmorComponent(15));
+        }
+        else if(templateName.equals("chain_vest")){
+            entityWrapper.setComponent(new ItemIDComponent("chain_vest"));
+            entityWrapper.setComponent(new ItemRecipeComponent(450, "cloth_armor"));
+            entityWrapper.setComponent(new IsSellableComponent(525));
+            entityWrapper.setComponent(new BonusFlatArmorComponent(40));
+        }
+        else if(templateName.equals("randuins_omen")){
+            entityWrapper.setComponent(new ItemIDComponent("randuins_omen"));
+            entityWrapper.setComponent(new ItemRecipeComponent(800, "giants_belt", "chain_vest"));
+            entityWrapper.setComponent(new IsSellableComponent(1995));
+            entityWrapper.setComponent(new BonusFlatMaximumHealthComponent(500));
+            entityWrapper.setComponent(new BonusFlatArmorComponent(70));
+        }
+        else if(templateName.equals("null_magic_mantle")){
+            entityWrapper.setComponent(new ItemIDComponent("null_magic_mantle"));
+            entityWrapper.setComponent(new ItemRecipeComponent(500));
+            entityWrapper.setComponent(new IsSellableComponent(350));
+            entityWrapper.setComponent(new BonusFlatMagicResistanceComponent(25));
+        }
+        else if(templateName.equals("negatron_cloak")){
+            entityWrapper.setComponent(new ItemIDComponent("negatron_cloak"));
+            entityWrapper.setComponent(new ItemRecipeComponent(350, "null_magic_mantle"));
+            entityWrapper.setComponent(new IsSellableComponent(595));
+            entityWrapper.setComponent(new BonusFlatMagicResistanceComponent(45));
+        }
+        else if(templateName.equals("force_of_nature")){
+            entityWrapper.setComponent(new ItemIDComponent("force_of_nature"));
+            entityWrapper.setComponent(new ItemRecipeComponent(1000, "rejuvenation_bead", "rejuvenation_bead", "negatron_cloak"));
+            entityWrapper.setComponent(new IsSellableComponent(1700));
+            entityWrapper.setComponent(new BonusFlatHealthRegenerationComponent(10));
+            entityWrapper.setComponent(new BonusFlatMagicResistanceComponent(76));
+            entityWrapper.setComponent(new BonusFlatWalkSpeedComponent(0.16f));
         }
     }
 }

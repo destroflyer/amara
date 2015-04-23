@@ -40,7 +40,7 @@ public class ScreenController_HUD extends GameScreenController{
     private final static int SHOP_ITEMS_PER_ROW = 5;
     private EntityWorld shopEntityWorld = new EntityWorld();
     private String[] shopItemTemplateNames = new String[]{
-        "boots","dorans_blade","dorans_ring","dagger","needlessly_large_rod","zhonyas_hourglass","warmogs_armor","youmuus_ghostblade","tiamat","amplifying_tome","fiendish_codex","ionian_boots_of_lucidity"
+        "boots","dorans_blade","dorans_ring","dagger","needlessly_large_rod","zhonyas_hourglass","giants_belt","rejuvenation_bead","warmogs_armor","youmuus_ghostblade","tiamat","amplifying_tome","fiendish_codex","ionian_boots_of_lucidity","cloth_armor","chain_vest","randuins_omen","null_magic_mantle","negatron_cloak","force_of_nature"
     };
     private EntityWrapper[] shopItems;
     private EntityWrapper[] shopItems_Special;
@@ -97,6 +97,18 @@ public class ScreenController_HUD extends GameScreenController{
     
     public void setAttributeValue_AttackSpeed(String text){
         setAttributeValue("attack_speed", text);
+    }
+    
+    public void setAttributeValue_CooldownSpeed(String text){
+        setAttributeValue("cooldown_speed", text);
+    }
+    
+    public void setAttributeValue_Armor(String text){
+        setAttributeValue("armor", text);
+    }
+    
+    public void setAttributeValue_MagicResistance(String text){
+        setAttributeValue("magic_resistance", text);
     }
     
     public void setAttributeValue_WalkSpeed(String text){
