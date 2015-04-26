@@ -27,6 +27,7 @@ import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.shop.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.systems.shop.ShopUtil;
 
 /**
  *
@@ -61,7 +62,11 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                         if(hoveredEntity != -1){
                             EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
                             if(entityWorld.hasComponent(hoveredEntity, ShopRangeComponent.class)){
-                                screenController_HUD.setShopVisible(true);
+                                int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
+                                int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
+                                if(ShopUtil.canUseShop(entityWorld, selectedEntity, hoveredEntity)){
+                                    screenController_HUD.setShopVisible(true);
+                                }
                             }
                         }
                         break;

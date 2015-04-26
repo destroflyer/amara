@@ -22,19 +22,23 @@ public class ShopUtil{
     
     public static boolean isInShopRange(EntityWorld entityWorld, int entity){
         for(int shopEntity : entityWorld.getEntitiesWithAll(ShopRangeComponent.class, PositionComponent.class)){
-            if(isInShopRange(entityWorld, entity, shopEntity)){
+            if(canUseShop(entityWorld, entity, shopEntity)){
                 return true;
             }
         }
         return false;
     }
     
-    public static boolean isInShopRange(EntityWorld entityWorld, int entity, int shopEntity){
-        PositionComponent entityPositionComponent = entityWorld.getComponent(entity, PositionComponent.class);
-        PositionComponent shopPositionComponent = entityWorld.getComponent(shopEntity, PositionComponent.class);
-        if((entityPositionComponent != null) && (shopPositionComponent != null)){
-            float shopRange = entityWorld.getComponent(shopEntity, ShopRangeComponent.class).getRange();
-            return shopPositionComponent.getPosition().distanceSquared(entityPositionComponent.getPosition()) <= (shopRange * shopRange);
+    public static boolean canUseShop(EntityWorld entityWorld, int entity, int shopEntity){
+        TeamComponent entityTeamComponent = entityWorld.getComponent(entity, TeamComponent.class);
+        TeamComponent shopTeamComponent = entityWorld.getComponent(shopEntity, TeamComponent.class);
+        if((shopTeamComponent == null) || ((entityTeamComponent != null) && (entityTeamComponent.getTeamEntity() == shopTeamComponent.getTeamEntity()))){
+            PositionComponent entityPositionComponent = entityWorld.getComponent(entity, PositionComponent.class);
+            PositionComponent shopPositionComponent = entityWorld.getComponent(shopEntity, PositionComponent.class);
+            if((entityPositionComponent != null) && (shopPositionComponent != null)){
+                float shopRange = entityWorld.getComponent(shopEntity, ShopRangeComponent.class).getRange();
+                return shopPositionComponent.getPosition().distanceSquared(entityPositionComponent.getPosition()) <= (shopRange * shopRange);
+            }
         }
         return false;
     }

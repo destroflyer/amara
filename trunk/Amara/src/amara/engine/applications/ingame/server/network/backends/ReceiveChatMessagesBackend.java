@@ -97,6 +97,7 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                         EntityWrapper buffEffect = entityWorld.getWrapped(entityWorld.createEntity());
                         buffEffect.setComponent(new BonusPercentageCooldownSpeedComponent(cooldownSpeed));
                         buff.setComponent(new ContinuousEffectComponent(buffEffect.getId()));
+                        buff.setComponent(new KeepOnDeathComponent());
                         ApplyAddBuffsSystem.addBuff(entityWorld, selectedUnit, buff.getId());
                     }catch(NumberFormatException ex){
                     }

@@ -25,25 +25,25 @@ public class ShopAnimationSystem implements EntitySystem{
     }
     private int playerEntity;
     private EntitySceneMap entitySceneMap;
-    private boolean[] isInShopRange;
+    private boolean[] canUseShop;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
         if(selectedUnitComponent != null){
             Set<Integer> shopEntities = entityWorld.getEntitiesWithAll(ShopRangeComponent.class);
-            if(isInShopRange == null){
-                isInShopRange = new boolean[shopEntities.size()];
+            if(canUseShop == null){
+                canUseShop = new boolean[shopEntities.size()];
             }
             int i = 0;
             for(int shopEntity : shopEntities){
-                boolean wasInRange = isInShopRange[i];
-                isInShopRange[i] = ShopUtil.isInShopRange(entityWorld, selectedUnitComponent.getEntity(), shopEntity);
-                if(isInShopRange[i] != wasInRange){
+                boolean couldUseShop = canUseShop[i];
+                canUseShop[i] = ShopUtil.canUseShop(entityWorld, selectedUnitComponent.getEntity(), shopEntity);
+                if(canUseShop[i] != couldUseShop){
                     ModelComponent modelComponent = entityWorld.getComponent(shopEntity, ModelComponent.class);
                     if(modelComponent.getModelSkinPath().equals("Models/chest/skin.xml")){
                         ModelObject chestModelObject = getModelObject(shopEntity);
-                        chestModelObject.playAnimation((isInShopRange[i]?"open":"close"), 1, false);
+                        chestModelObject.playAnimation((canUseShop[i]?"open":"close"), 1, false);
                     }
                 }
                 i++;
