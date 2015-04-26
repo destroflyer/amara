@@ -16,6 +16,7 @@ import amara.game.entitysystem.components.maps.playerdeathrules.*;
 import amara.game.entitysystem.components.objectives.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
+import amara.game.entitysystem.components.shop.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
@@ -59,6 +60,12 @@ public class Map_Arama extends Map{
             nexus.setComponent(new IsVulnerableComponent());
             nexus.setComponent(new TeamComponent(i + 1));
             nexi[i] = nexus;
+            EntityWrapper shop = entityWorld.getWrapped(entityWorld.createEntity());
+            shop.setComponent(new ModelComponent("Models/chest/skin.xml"));
+            shop.setComponent(new PositionComponent(new Vector2f(((i == 0)?275:75), 173.5f)));
+            shop.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));
+            shop.setComponent(new ShopRangeComponent(10));
+            shop.setComponent(new TeamComponent(i + 1));
         }
         //Waves
         for(int i=0;i<2;i++){
