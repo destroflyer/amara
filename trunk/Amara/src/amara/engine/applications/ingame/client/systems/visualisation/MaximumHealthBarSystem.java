@@ -8,15 +8,12 @@ import java.awt.Color;
 import java.util.HashMap;
 import com.jme3.math.Vector3f;
 import com.jme3.material.Material;
-import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.Node;
 import com.jme3.texture.Texture;
 import com.jme3.texture.Texture2D;
 import amara.engine.JMonkeyUtil;
 import amara.engine.materials.MaterialFactory;
-import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.engine.applications.ingame.client.systems.visualisation.meshes.RectangleMesh;
 import amara.engine.materials.PaintableImage;
@@ -27,10 +24,10 @@ import amara.game.entitysystem.components.attributes.*;
  *
  * @author Carl
  */
-public class MaximumHealthBarSystem extends HUDAttachmentSystem{
+public class MaximumHealthBarSystem extends SimpleHUDAttachmentSystem{
 
-    public MaximumHealthBarSystem(EntitySceneMap entitySceneMap, Node guiNode, Camera camera, MapHeightmap mapHeightmap){
-        super(MaximumHealthComponent.class, guiNode, camera, mapHeightmap);
+    public MaximumHealthBarSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntitySceneMap entitySceneMap){
+        super(hudAttachmentsSystem, MaximumHealthComponent.class);
         this.entitySceneMap = entitySceneMap;
     }
     public static final float BAR_WIDTH = 70;
