@@ -6,6 +6,7 @@ package amara.engine.applications.ingame.client.systems.visualisation;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
@@ -37,19 +38,25 @@ public class HUDAttachmentsSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(HUDAttachmentInfo hudAttachmentInfo : hudAttachmentInfos.values()){
-            if(hudAttachmentInfo.isFollowEntity() || (!hudAttachmentInfo.wasHandled())){
+            Vector2f gameLocation = hudAttachmentInfo.getFixedGameLocation();
+            if(hudAttachmentInfo.isFollowEntity() || (gameLocation == null)){
                 PositionComponent positionComponent = entityWorld.getComponent(hudAttachmentInfo.getEntity(), PositionComponent.class);
                 if(positionComponent != null){
-                    tmpEntityPosition.set(positionComponent.getPosition().getX(), mapHeightmap.getHeight(positionComponent.getPosition()), positionComponent.getPosition().getY());
-                    Spatial hudAttachment = getHUDAttachment(hudAttachmentInfo.getAttachmentID());
-                    if(hudAttachment != null){
-                        camera.getScreenCoordinates(tmpEntityPosition.addLocal(hudAttachmentInfo.getWorldOffset()), tmpAttachmentPosition).addLocal(hudAttachmentInfo.getHUDOffset());
-                        hudAttachment.setLocalTranslation(tmpAttachmentPosition);
+                    gameLocation = positionComponent.getPosition();
+                    if(!hudAttachmentInfo.isFollowEntity()){
+                        hudAttachmentInfo.setFixedGamedLocation(gameLocation);
                     }
-                    else{
-                        attachmentIDsToRemove.add(hudAttachmentInfo.getAttachmentID());
-                    }
-                    hudAttachmentInfo.setWasHandled();
+                }
+            }
+            if(gameLocation != null){
+                tmpEntityPosition.set(gameLocation.getX(), mapHeightmap.getHeight(gameLocation), gameLocation.getY());
+                Spatial hudAttachment = getHUDAttachment(hudAttachmentInfo.getAttachmentID());
+                if(hudAttachment != null){
+                    camera.getScreenCoordinates(tmpEntityPosition.addLocal(hudAttachmentInfo.getWorldOffset()), tmpAttachmentPosition).addLocal(hudAttachmentInfo.getHUDOffset());
+                    hudAttachment.setLocalTranslation(tmpAttachmentPosition);
+                }
+                else{
+                    attachmentIDsToRemove.add(hudAttachmentInfo.getAttachmentID());
                 }
             }
         }

@@ -75,7 +75,7 @@ public class GoldChangeSystem implements EntitySystem{
         bitmapText.setAlignment(BitmapFont.Align.Center);
         bitmapText.setText(((goldChange > 0)?"+":"") + goldChange + " g");
         node.attachChild(bitmapText);
-        node.addControl(new GoldChangeAttachmentControl(20, 2.25f));
+        node.addControl(new GoldChangeAttachmentControl(15, 1.75f));
         return node;
     }
 }
