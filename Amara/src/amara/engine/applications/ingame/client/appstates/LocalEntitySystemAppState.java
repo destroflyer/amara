@@ -83,10 +83,12 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
         //addEntitySystem(new SelectionMarkerSystem(entitySceneMap));
-        addEntitySystem(new MaximumHealthBarSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
-        addEntitySystem(new CurrentHealthBarSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
-        addEntitySystem(new StunVisualisationSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
-        addEntitySystem(new SilenceVisualisationSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
+        HUDAttachmentsSystem hudAttachmentsSystem = new HUDAttachmentsSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap);
+        addEntitySystem(hudAttachmentsSystem);
+        addEntitySystem(new MaximumHealthBarSystem(hudAttachmentsSystem, entitySceneMap));
+        addEntitySystem(new CurrentHealthBarSystem(hudAttachmentsSystem, entitySceneMap));
+        addEntitySystem(new StunVisualisationSystem(hudAttachmentsSystem, entitySceneMap));
+        addEntitySystem(new SilenceVisualisationSystem(hudAttachmentsSystem, entitySceneMap));
         addEntitySystem(new KnockupVisualisationSystem(entitySceneMap, positionSystem));
         addEntitySystem(new BuffVisualisationSystem_Bubble(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Burning(entitySceneMap));
@@ -99,7 +101,8 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new BuffVisualisationSystem_Turbo(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Wither(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Zhonyas(entitySceneMap));
-        addEntitySystem(new TitleSystem(entitySceneMap, mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap));
+        addEntitySystem(new TitleSystem(hudAttachmentsSystem, entitySceneMap));
+        addEntitySystem(new GoldChangeSystem(hudAttachmentsSystem, entitySceneMap));
         addEntitySystem(new WaterSpeedSystem(mapAppState));
         addEntitySystem(new CinematicsSystem(getAppState(CinematicAppState.class)));
     }

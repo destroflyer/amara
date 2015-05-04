@@ -7,12 +7,9 @@ package amara.engine.applications.ingame.client.systems.visualisation;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.engine.materials.MaterialFactory;
-import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.systems.visualisation.meshes.RectangleMesh;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
@@ -21,10 +18,10 @@ import amara.game.entitysystem.components.attributes.*;
  *
  * @author Carl
  */
-public class CurrentHealthBarSystem extends HUDAttachmentSystem{
+public class CurrentHealthBarSystem extends SimpleHUDAttachmentSystem{
 
-    public CurrentHealthBarSystem(EntitySceneMap entitySceneMap, Node guiNode, Camera camera, MapHeightmap mapHeightmap){
-        super(HealthComponent.class, guiNode, camera, mapHeightmap);
+    public CurrentHealthBarSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntitySceneMap entitySceneMap){
+        super(hudAttachmentsSystem, HealthComponent.class);
         this.entitySceneMap = entitySceneMap;
         hudOffset = new Vector3f(0, 0, 1);
     }

@@ -15,7 +15,7 @@ import amara.engine.cinematics.*;
 import amara.engine.applications.ingame.client.appstates.*;
 import amara.engine.applications.ingame.client.gui.*;
 import amara.engine.applications.ingame.client.systems.filters.FogOfWarSystem;
-import amara.engine.applications.ingame.client.systems.visualisation.HUDAttachmentSystem;
+import amara.engine.applications.ingame.client.systems.visualisation.HUDAttachmentsSystem;
 import amara.game.entitysystem.EntitySystem;
 
 /**
@@ -87,7 +87,7 @@ public class CinematicAppState extends BaseDisplayAppState implements ActionList
     
     private void setCinematicModeEnabled(boolean isEnabled){
         getAppState(IngameCameraAppState.class).setEnabled(!isEnabled);
-        setHUDAttachmentSystemsEnabled(!isEnabled);
+        setHUDAttachmentSystemEnabled(!isEnabled);
         getAppState(SendPlayerCommandsAppState.class).setEnabled(!isEnabled);
         FogOfWarSystem fogOfWarSystem = getAppState(PlayerAppState.class).getFogOfWarSystem();
         if(isEnabled){
@@ -113,11 +113,12 @@ public class CinematicAppState extends BaseDisplayAppState implements ActionList
         }
     }
     
-    private void setHUDAttachmentSystemsEnabled(boolean isEnabled){
+    private void setHUDAttachmentSystemEnabled(boolean isEnabled){
         for(EntitySystem entitySystem : getAppState(LocalEntitySystemAppState.class).getEntitySystems()){
-            if(entitySystem instanceof HUDAttachmentSystem){
-                HUDAttachmentSystem hudAttachmentSystem = (HUDAttachmentSystem) entitySystem;
-                hudAttachmentSystem.setEnabled(isEnabled);
+            if(entitySystem instanceof HUDAttachmentsSystem){
+                HUDAttachmentsSystem hudAttachmentsSystem = (HUDAttachmentsSystem) entitySystem;
+                hudAttachmentsSystem.setEnabled(isEnabled);
+                break;
             }
         }
     }

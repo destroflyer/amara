@@ -9,10 +9,7 @@ import com.jme3.font.BitmapText;
 import com.jme3.font.Rectangle;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.Camera;
-import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.materials.MaterialFactory;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.visuals.TitleComponent;
@@ -21,10 +18,10 @@ import amara.game.entitysystem.components.visuals.TitleComponent;
  *
  * @author Carl
  */
-public class TitleSystem extends HUDAttachmentSystem{
+public class TitleSystem extends SimpleHUDAttachmentSystem{
 
-    public TitleSystem(EntitySceneMap entitySceneMap, Node guiNode, Camera camera, MapHeightmap mapHeightmap){
-        super(TitleComponent.class, guiNode, camera, mapHeightmap);
+    public TitleSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntitySceneMap entitySceneMap){
+        super(hudAttachmentsSystem, TitleComponent.class);
         this.entitySceneMap = entitySceneMap;
         hudOffset = new Vector3f(0, 24, 0);
     }
