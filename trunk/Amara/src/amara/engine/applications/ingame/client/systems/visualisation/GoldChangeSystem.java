@@ -60,13 +60,13 @@ public class GoldChangeSystem implements EntitySystem{
     
     private void displayGoldChange(EntityWorld entityWorld, int entity, int goldChange){
         Vector3f worldOffset = MaximumHealthBarSystem.getWorldOffset(entityWorld, entity, entitySceneMap);
-        hudAttachmentsSystem.attach(new HUDAttachmentInfo(entity, "gold_change_" + nextChangeID, worldOffset, new Vector3f(0, 20, 0)), createHUDAttachment(goldChange));
+        hudAttachmentsSystem.attach(new HUDAttachmentInfo(entity, "gold_change_" + nextChangeID, worldOffset, new Vector3f(0, 20, 0), false), createHUDAttachment(goldChange));
         nextChangeID++;
     }
     
     private Spatial createHUDAttachment(int goldChange){
         Node node = new Node();
-        BitmapFont font = MaterialFactory.getAssetManager().loadFont("Interface/fonts/Verdana_18.fnt");
+        BitmapFont font = MaterialFactory.getAssetManager().loadFont("Interface/fonts/Verdana_18_bold.fnt");
         BitmapText bitmapText = new BitmapText(font);
         bitmapText.setSize(12);
         bitmapText.setColor(new ColorRGBA(1, 1, 0, 1));

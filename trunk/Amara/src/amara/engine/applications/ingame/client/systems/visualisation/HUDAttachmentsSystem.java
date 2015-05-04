@@ -37,16 +37,19 @@ public class HUDAttachmentsSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(HUDAttachmentInfo hudAttachmentInfo : hudAttachmentInfos.values()){
-            PositionComponent positionComponent = entityWorld.getComponent(hudAttachmentInfo.getEntity(), PositionComponent.class);
-            if(positionComponent != null){
-                tmpEntityPosition.set(positionComponent.getPosition().getX(), mapHeightmap.getHeight(positionComponent.getPosition()), positionComponent.getPosition().getY());
-                Spatial hudAttachment = getHUDAttachment(hudAttachmentInfo.getAttachmentID());
-                if(hudAttachment != null){
-                    camera.getScreenCoordinates(tmpEntityPosition.addLocal(hudAttachmentInfo.getWorldOffset()), tmpAttachmentPosition).addLocal(hudAttachmentInfo.getHUDOffset());
-                    hudAttachment.setLocalTranslation(tmpAttachmentPosition);
-                }
-                else{
-                    attachmentIDsToRemove.add(hudAttachmentInfo.getAttachmentID());
+            if(hudAttachmentInfo.isFollowEntity() || (!hudAttachmentInfo.wasHandled())){
+                PositionComponent positionComponent = entityWorld.getComponent(hudAttachmentInfo.getEntity(), PositionComponent.class);
+                if(positionComponent != null){
+                    tmpEntityPosition.set(positionComponent.getPosition().getX(), mapHeightmap.getHeight(positionComponent.getPosition()), positionComponent.getPosition().getY());
+                    Spatial hudAttachment = getHUDAttachment(hudAttachmentInfo.getAttachmentID());
+                    if(hudAttachment != null){
+                        camera.getScreenCoordinates(tmpEntityPosition.addLocal(hudAttachmentInfo.getWorldOffset()), tmpAttachmentPosition).addLocal(hudAttachmentInfo.getHUDOffset());
+                        hudAttachment.setLocalTranslation(tmpAttachmentPosition);
+                    }
+                    else{
+                        attachmentIDsToRemove.add(hudAttachmentInfo.getAttachmentID());
+                    }
+                    hudAttachmentInfo.setWasHandled();
                 }
             }
         }
