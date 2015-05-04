@@ -4,6 +4,7 @@
  */
 package amara.engine.applications.ingame.client.systems.visualisation;
 
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 
 /**
@@ -24,7 +25,7 @@ public class HUDAttachmentInfo{
     private Vector3f worldOffset;
     private Vector3f hudOffset;
     private boolean followEntity;
-    private boolean wasHandled;
+    private Vector2f fixedGameLocation;
 
     public int getEntity(){
         return entity;
@@ -46,11 +47,11 @@ public class HUDAttachmentInfo{
         return followEntity;
     }
 
-    public void setWasHandled(){
-        this.wasHandled = true;
+    public void setFixedGamedLocation(Vector2f fixedGameLocation){
+        this.fixedGameLocation = fixedGameLocation;
     }
 
-    public boolean wasHandled(){
-        return wasHandled;
+    public Vector2f getFixedGameLocation(){
+        return fixedGameLocation;
     }
 }
