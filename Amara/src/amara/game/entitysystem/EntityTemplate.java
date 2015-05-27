@@ -116,6 +116,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
         }
         else if(templateName.equals("default_autoattack_projectile")){
+            entityWrapper.setComponent(new IsProjectileComponent());
             //Trigger spell effects
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new TargetReachedTriggerComponent());
@@ -285,6 +286,7 @@ public class EntityTemplate{
         }
         else if(templateName.equals("null_sphere_projectile")){
             entityWrapper.setComponent(new ModelComponent("Models/cloud/skin.xml"));
+            entityWrapper.setComponent(new IsProjectileComponent());
             //Trigger spell effects
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new TargetReachedTriggerComponent());
@@ -472,6 +474,7 @@ public class EntityTemplate{
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new IntersectionRulesComponent(targetRules.getId()));
             entityWrapper.setComponent(new RemoveOnMapLeaveComponent());
+            entityWrapper.setComponent(new IsProjectileComponent());
             //Trigger spell effects
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new CollisionTriggerComponent());
@@ -686,6 +689,7 @@ public class EntityTemplate{
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new IntersectionRulesComponent(targetRules.getId()));
+            entityWrapper.setComponent(new IsProjectileComponent());
             //Trigger spell effects
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new CollisionTriggerComponent());
@@ -786,6 +790,7 @@ public class EntityTemplate{
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new IntersectionRulesComponent(targetRules.getId()));
+            entityWrapper.setComponent(new IsProjectileComponent());
             //Trigger spell effects
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new CollisionTriggerComponent());
@@ -1435,6 +1440,7 @@ public class EntityTemplate{
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new IntersectionRulesComponent(targetRules.getId()));
+            entityWrapper.setComponent(new IsProjectileComponent());
             //Trigger spell effects
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new CollisionTriggerComponent());
@@ -2188,6 +2194,8 @@ public class EntityTemplate{
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new IntersectionRulesComponent(targetRules.getId()));
             entityWrapper.setComponent(new RemoveOnMapLeaveComponent());
+            
+            entityWrapper.setComponent(new IsProjectileComponent());
             //Activate hitbox
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new TargetReachedTriggerComponent());
@@ -2356,6 +2364,7 @@ public class EntityTemplate{
             EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "melee_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             entityWrapper.setComponent(new AutoAggroComponent(12));
+            entityWrapper.setComponent(new MaximumAggroRangeComponent(30));
             entityWrapper.setComponent(new BountyComponent(20 + (int) (spawnCounter * 0.5)));
         }
         else if(templateName.equals("etherdesert_creep_range")){
@@ -2704,6 +2713,7 @@ public class EntityTemplate{
         }
         else if(templateName.equals("tower_shot_projectile")){
             entityWrapper.setComponent(new ModelComponent("Models/fireball/skin.xml"));
+            entityWrapper.setComponent(new IsProjectileComponent());
             //Trigger spell effects
             EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
             effectTrigger1.setComponent(new TargetReachedTriggerComponent());

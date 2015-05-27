@@ -394,6 +394,7 @@ public class MessagesSerializer{
                         IntersectionRulesComponent.class,
                         IsAliveComponent.class,
                         IsCastingComponent.class,
+                        IsProjectileComponent.class,
                         IsTargetableComponent.class,
                         IsVulnerableComponent.class,
                         IsWalkingToAggroTargetComponent.class,

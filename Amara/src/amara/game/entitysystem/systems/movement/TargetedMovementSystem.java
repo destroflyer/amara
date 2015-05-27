@@ -82,8 +82,11 @@ public class TargetedMovementSystem implements EntitySystem{
                         entityWorld.setComponent(movementEntity, new MovementTargetReachedComponent());
                     }
                 }
-                else{
+                else if(entityWorld.hasComponent(entity, IsProjectileComponent.class)){
                     entityWorld.removeEntity(entity);
+                }
+                else{
+                    entityWorld.removeComponent(entity, MovementComponent.class);
                 }
             }
         }
