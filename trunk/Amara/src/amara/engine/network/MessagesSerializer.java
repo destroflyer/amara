@@ -357,6 +357,7 @@ public class MessagesSerializer{
                         CastCancelableComponent.class,
                         CastCancelActionComponent.class,
                         CastDurationComponent.class,
+                        CastTurnToTargetComponent.class,
                         CastTypeComponent.class,
                         CooldownComponent.class,
                         InstantEffectTriggersComponent.class,

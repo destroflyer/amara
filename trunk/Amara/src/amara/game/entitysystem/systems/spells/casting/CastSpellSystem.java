@@ -7,7 +7,6 @@ package amara.game.entitysystem.systems.spells.casting;
 import java.util.LinkedList;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.physics.*;
@@ -32,7 +31,7 @@ public class CastSpellSystem implements EntitySystem{
             CastSpellComponent castSpellComponent = entityWorld.getComponent(casterEntity, CastSpellComponent.class);
             int spellEntity = castSpellComponent.getSpellEntity();
             int targetEntity = castSpellComponent.getTargetEntity();
-            if(targetEntity != -1){
+            if((targetEntity != -1) && entityWorld.hasComponent(spellEntity, CastTurnToTargetComponent.class)){
                 PositionComponent targetPositionComponent = entityWorld.getComponent(targetEntity, PositionComponent.class);
                 DirectionComponent targetDirectionComponent = entityWorld.getComponent(targetEntity, DirectionComponent.class);
                 //Turn into cast direction

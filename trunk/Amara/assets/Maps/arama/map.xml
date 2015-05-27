@@ -1,2 +1,578 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map author="Carl" date="1413846198831" class="amara.game.maps.Map_Arama"><camera initialPosition="175.0,56.0,140.0" initialDirection="0.0,-1.3,1.0" /><lights><ambient color="1.5,1.5,1.5" /><directional direction="-0.5,-1.75,1.0" color="1.0,1.0,1.0"><shadows intensity="0.4" /></directional></lights><terrain><textures><texture scale="12.0">Textures/terrain/cartoon_forest/stone_bright_1.jpg</texture><texture scale="20.0">Textures/terrain/cartoon_forest/cracked_cliff.jpg</texture><texture scale="16.0">Textures/terrain/cartoon_forest/cliff.jpg</texture><texture scale="1.0">Textures/terrain/blank.png</texture><texture scale="48.0">Textures/terrain/cartoon_forest/wall.jpg</texture><texture scale="48.0">Textures/terrain/cartoon_forest/bush.jpg</texture><texture scale="48.0">Textures/terrain/cartoon_forest/dark_dirt.jpg</texture><texture scale="1.0">Textures/terrain/blank.png</texture><texture scale="18.0">Textures/terrain/cartoon_forest/cracked_cliff.jpg</texture><texture scale="16.0">Textures/terrain/cartoon_forest/bush.jpg</texture><texture scale="16.0">Textures/terrain/cartoon_forest/dirt.jpg</texture><texture scale="1.0">Textures/terrain/blank.png</texture></textures></terrain><physics width="350" height="350" heightmapScale="0.075"><obstacles><simpleConvex><base><point>199.1763458251953,193.75987243652344</point><point>197.9571075439453,198.1068572998047</point><point>193.60426330566406,201.76284790039062</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>156.4207305908203,201.91238403320312</point><point>151.6888885498047,197.63571166992188</point><point>150.1030731201172,192.54124450683594</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>150.1030731201172,192.54124450683594</point><point>147.21038818359375,187.96932983398438</point><point>200.87513732910156,190.18484497070312</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>204.9363555908203,185.03623962402344</point><point>200.87513732910156,190.18484497070312</point><point>147.21038818359375,187.96932983398438</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>147.21038818359375,187.96932983398438</point><point>145.01304626464844,184.9563751220703</point><point>204.9363555908203,185.03623962402344</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>150.1030731201172,192.54124450683594</point><point>200.87513732910156,190.18484497070312</point><point>199.1763458251953,193.75987243652344</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>156.4207305908203,201.91238403320312</point><point>150.1030731201172,192.54124450683594</point><point>199.1763458251953,193.75987243652344</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>199.1763458251953,193.75987243652344</point><point>193.60426330566406,201.76284790039062</point><point>156.4207305908203,201.91238403320312</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>143.5518035888672,193.16757202148438</point><point>143.53233337402344,199.5322265625</point><point>138.39759826660156,196.30528259277344</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>129.17745971679688,206.2722625732422</point><point>131.2443084716797,209.02662658691406</point><point>122.74689483642578,208.36126708984375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>128.96177673339844,203.1940460205078</point><point>129.17745971679688,206.2722625732422</point><point>122.74689483642578,208.36126708984375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>128.96177673339844,203.1940460205078</point><point>122.74689483642578,208.36126708984375</point><point>116.11913299560547,206.49038696289062</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>116.11913299560547,206.49038696289062</point><point>130.69313049316406,198.59735107421875</point><point>128.96177673339844,203.1940460205078</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>140.8731231689453,188.25445556640625</point><point>143.5518035888672,193.16757202148438</point><point>138.39759826660156,196.30528259277344</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>136.06912231445312,184.73007202148438</point><point>133.76290893554688,196.4401397705078</point><point>130.69313049316406,198.59735107421875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>130.69313049316406,198.59735107421875</point><point>110.3436508178711,184.78819274902344</point><point>136.06912231445312,184.73007202148438</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>133.76290893554688,196.4401397705078</point><point>136.06912231445312,184.73007202148438</point><point>140.8731231689453,188.25445556640625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>140.8731231689453,188.25445556640625</point><point>138.39759826660156,196.30528259277344</point><point>133.76290893554688,196.4401397705078</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>110.3436508178711,184.78819274902344</point><point>130.69313049316406,198.59735107421875</point><point>116.11913299560547,206.49038696289062</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>106.10525512695312,188.3388671875</point><point>108.7552719116211,203.10427856445312</point><point>104.26763916015625,199.79541015625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>108.7552719116211,203.10427856445312</point><point>106.10525512695312,188.3388671875</point><point>110.3436508178711,184.78819274902344</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>110.3436508178711,184.78819274902344</point><point>116.11913299560547,206.49038696289062</point><point>108.7552719116211,203.10427856445312</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>101.5328598022461,194.6837921142578</point><point>101.8864974975586,189.76995849609375</point><point>106.10525512695312,188.3388671875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>106.10525512695312,188.3388671875</point><point>104.26763916015625,199.79541015625</point><point>101.5328598022461,194.6837921142578</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>209.7288055419922,196.2675323486328</point><point>206.09844970703125,200.00961303710938</point><point>205.90541076660156,194.0071258544922</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>209.7288055419922,196.2675323486328</point><point>205.90541076660156,194.0071258544922</point><point>207.48883056640625,190.05908203125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>211.404296875,186.2869110107422</point><point>213.65530395507812,185.1723175048828</point><point>212.77857971191406,195.92735290527344</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>207.48883056640625,190.05908203125</point><point>211.404296875,186.2869110107422</point><point>212.77857971191406,195.92735290527344</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>212.77857971191406,195.92735290527344</point><point>209.7288055419922,196.2675323486328</point><point>207.48883056640625,190.05908203125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>213.65530395507812,185.1723175048828</point><point>239.69610595703125,184.86073303222656</point><point>217.00503540039062,196.64266967773438</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>217.00503540039062,196.64266967773438</point><point>212.77857971191406,195.92735290527344</point><point>213.65530395507812,185.1723175048828</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>220.35275268554688,209.4989776611328</point><point>218.09031677246094,209.41702270507812</point><point>220.2631378173828,205.81765747070312</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>224.78749084472656,209.3580780029297</point><point>220.35275268554688,209.4989776611328</point><point>220.2631378173828,205.81765747070312</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>220.64303588867188,202.4510955810547</point><point>229.4281463623047,207.84164428710938</point><point>224.78749084472656,209.3580780029297</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>224.78749084472656,209.3580780029297</point><point>220.2631378173828,205.81765747070312</point><point>220.64303588867188,202.4510955810547</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>233.6809539794922,207.1214141845703</point><point>229.4281463623047,207.84164428710938</point><point>220.64303588867188,202.4510955810547</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>248.39837646484375,196.0543975830078</point><point>246.0205841064453,199.76654052734375</point><point>244.8207244873047,188.8568572998047</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>244.8207244873047,188.8568572998047</point><point>248.2269287109375,189.67739868164062</point><point>248.39837646484375,196.0543975830078</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>219.18099975585938,199.19424438476562</point><point>217.00503540039062,196.64266967773438</point><point>239.69610595703125,184.86073303222656</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>236.66845703125,205.67552185058594</point><point>233.6809539794922,207.1214141845703</point><point>220.64303588867188,202.4510955810547</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>220.64303588867188,202.4510955810547</point><point>219.18099975585938,199.19424438476562</point><point>236.66845703125,205.67552185058594</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>241.22813415527344,203.5898895263672</point><point>236.66845703125,205.67552185058594</point><point>242.2094268798828,187.69190979003906</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>246.0205841064453,199.76654052734375</point><point>241.22813415527344,203.5898895263672</point><point>242.2094268798828,187.69190979003906</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>242.2094268798828,187.69190979003906</point><point>244.8207244873047,188.8568572998047</point><point>246.0205841064453,199.76654052734375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>239.69610595703125,184.86073303222656</point><point>242.2094268798828,187.69190979003906</point><point>236.66845703125,205.67552185058594</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>236.66845703125,205.67552185058594</point><point>219.18099975585938,199.19424438476562</point><point>239.69610595703125,184.86073303222656</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>184.52713012695312,215.45762634277344</point><point>184.74530029296875,214.2398223876953</point><point>193.90249633789062,214.06600952148438</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>193.90249633789062,214.06600952148438</point><point>194.71023559570312,215.8212890625</point><point>184.52713012695312,215.45762634277344</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>194.71023559570312,215.8212890625</point><point>193.90249633789062,214.06600952148438</point><point>198.11769104003906,214.888427734375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>198.11769104003906,214.888427734375</point><point>197.72830200195312,216.6917266845703</point><point>194.71023559570312,215.8212890625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>201.48316955566406,216.80206298828125</point><point>202.88668823242188,220.99269104003906</point><point>200.37689208984375,218.02935791015625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>202.88668823242188,220.99269104003906</point><point>201.48316955566406,216.80206298828125</point><point>204.42555236816406,220.27728271484375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>204.2181396484375,225.3424835205078</point><point>202.88668823242188,220.99269104003906</point><point>204.42555236816406,220.27728271484375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>204.42555236816406,220.27728271484375</point><point>206.05059814453125,225.5002899169922</point><point>204.2181396484375,225.3424835205078</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>197.72830200195312,216.6917266845703</point><point>198.11769104003906,214.888427734375</point><point>201.48316955566406,216.80206298828125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>201.48316955566406,216.80206298828125</point><point>200.37689208984375,218.02935791015625</point><point>197.72830200195312,216.6917266845703</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>145.60887145996094,223.23345947265625</point><point>145.47738647460938,225.96522521972656</point><point>143.94253540039062,225.45187377929688</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>145.60887145996094,223.23345947265625</point><point>143.94253540039062,225.45187377929688</point><point>144.93040466308594,221.50694274902344</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>144.93040466308594,221.50694274902344</point><point>146.36155700683594,221.3802490234375</point><point>145.60887145996094,223.23345947265625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>146.78770446777344,218.6088104248047</point><point>149.73275756835938,217.79620361328125</point><point>147.93057250976562,219.35528564453125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>146.36155700683594,221.3802490234375</point><point>144.93040466308594,221.50694274902344</point><point>146.78770446777344,218.6088104248047</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>146.78770446777344,218.6088104248047</point><point>147.93057250976562,219.35528564453125</point><point>146.36155700683594,221.3802490234375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>149.73275756835938,217.79620361328125</point><point>146.78770446777344,218.6088104248047</point><point>149.32391357421875,216.18765258789062</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>149.32391357421875,216.18765258789062</point><point>152.05650329589844,216.52960205078125</point><point>149.73275756835938,217.79620361328125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>152.05650329589844,216.52960205078125</point><point>149.32391357421875,216.18765258789062</point><point>154.29405212402344,213.96893310546875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>154.29405212402344,213.96893310546875</point><point>154.5110321044922,215.56851196289062</point><point>152.05650329589844,216.52960205078125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>154.5110321044922,215.56851196289062</point><point>154.29405212402344,213.96893310546875</point><point>165.34494018554688,214.25015258789062</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>165.34494018554688,214.25015258789062</point><point>165.22911071777344,215.41073608398438</point><point>154.5110321044922,215.56851196289062</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex></obstacles></physics><visuals><water position="0.0,7.0,0.0" size="350.0,350.0" /><snow /></visuals></map>
+<map author="Carl" date="1413846198831" class="amara.game.maps.Map_Arama">
+	<camera initialPosition="175.0,56.0,140.0" initialDirection="0.0,-1.3,1.0" />
+	<lights>
+		<ambient color="1.5,1.5,1.5" />
+		<directional direction="-0.5,-1.75,1.0" color="1.0,1.0,1.0">
+			<shadows intensity="0.4" />
+		</directional>
+	</lights>
+	<terrain>
+		<textures>
+			<texture scale="12.0">Textures/terrain/cartoon_forest/stone_bright_1.jpg</texture>
+			<texture scale="20.0">Textures/terrain/cartoon_forest/cracked_cliff.jpg</texture>
+			<texture scale="16.0">Textures/terrain/cartoon_forest/cliff.jpg</texture>
+			<texture scale="1.0">Textures/terrain/blank.png</texture>
+			<texture scale="48.0">Textures/terrain/cartoon_forest/wall.jpg</texture>
+			<texture scale="48.0">Textures/terrain/cartoon_forest/bush.jpg</texture>
+			<texture scale="48.0">Textures/terrain/cartoon_forest/dark_dirt.jpg</texture>
+			<texture scale="1.0">Textures/terrain/blank.png</texture>
+			<texture scale="18.0">Textures/terrain/cartoon_forest/cracked_cliff.jpg</texture>
+			<texture scale="16.0">Textures/terrain/cartoon_forest/bush.jpg</texture>
+			<texture scale="16.0">Textures/terrain/cartoon_forest/dirt.jpg</texture>
+			<texture scale="1.0">Textures/terrain/blank.png</texture>
+		</textures>
+	</terrain>
+	<physics width="350" height="350" heightmapScale="0.075">
+		<obstacles>			<circle radius="3.0">				<transform x="114.0" y="173.5" direction="0.0" scale="1.0" />			</circle>			<circle radius="3.0">				<transform x="136.0" y="173.5" direction="0.0" scale="1.0" />			</circle>			<circle radius="3.0">				<transform x="214.0" y="173.5" direction="0.0" scale="1.0" />			</circle>			<circle radius="3.0">				<transform x="236.0" y="173.5" direction="0.0" scale="1.0" />			</circle>
+			<simpleConvex>
+				<base>
+					<point>199.1763458251953,193.75987243652344</point>
+					<point>197.9571075439453,198.1068572998047</point>
+					<point>193.60426330566406,201.76284790039062</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>156.4207305908203,201.91238403320312</point>
+					<point>151.6888885498047,197.63571166992188</point>
+					<point>150.1030731201172,192.54124450683594</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>150.1030731201172,192.54124450683594</point>
+					<point>147.21038818359375,187.96932983398438</point>
+					<point>200.87513732910156,190.18484497070312</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>204.9363555908203,185.03623962402344</point>
+					<point>200.87513732910156,190.18484497070312</point>
+					<point>147.21038818359375,187.96932983398438</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>147.21038818359375,187.96932983398438</point>
+					<point>145.01304626464844,184.9563751220703</point>
+					<point>204.9363555908203,185.03623962402344</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>150.1030731201172,192.54124450683594</point>
+					<point>200.87513732910156,190.18484497070312</point>
+					<point>199.1763458251953,193.75987243652344</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>156.4207305908203,201.91238403320312</point>
+					<point>150.1030731201172,192.54124450683594</point>
+					<point>199.1763458251953,193.75987243652344</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>199.1763458251953,193.75987243652344</point>
+					<point>193.60426330566406,201.76284790039062</point>
+					<point>156.4207305908203,201.91238403320312</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>143.5518035888672,193.16757202148438</point>
+					<point>143.53233337402344,199.5322265625</point>
+					<point>138.39759826660156,196.30528259277344</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>129.17745971679688,206.2722625732422</point>
+					<point>131.2443084716797,209.02662658691406</point>
+					<point>122.74689483642578,208.36126708984375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>128.96177673339844,203.1940460205078</point>
+					<point>129.17745971679688,206.2722625732422</point>
+					<point>122.74689483642578,208.36126708984375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>128.96177673339844,203.1940460205078</point>
+					<point>122.74689483642578,208.36126708984375</point>
+					<point>116.11913299560547,206.49038696289062</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>116.11913299560547,206.49038696289062</point>
+					<point>130.69313049316406,198.59735107421875</point>
+					<point>128.96177673339844,203.1940460205078</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>140.8731231689453,188.25445556640625</point>
+					<point>143.5518035888672,193.16757202148438</point>
+					<point>138.39759826660156,196.30528259277344</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>136.06912231445312,184.73007202148438</point>
+					<point>133.76290893554688,196.4401397705078</point>
+					<point>130.69313049316406,198.59735107421875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>130.69313049316406,198.59735107421875</point>
+					<point>110.3436508178711,184.78819274902344</point>
+					<point>136.06912231445312,184.73007202148438</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>133.76290893554688,196.4401397705078</point>
+					<point>136.06912231445312,184.73007202148438</point>
+					<point>140.8731231689453,188.25445556640625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>140.8731231689453,188.25445556640625</point>
+					<point>138.39759826660156,196.30528259277344</point>
+					<point>133.76290893554688,196.4401397705078</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>110.3436508178711,184.78819274902344</point>
+					<point>130.69313049316406,198.59735107421875</point>
+					<point>116.11913299560547,206.49038696289062</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>106.10525512695312,188.3388671875</point>
+					<point>108.7552719116211,203.10427856445312</point>
+					<point>104.26763916015625,199.79541015625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>108.7552719116211,203.10427856445312</point>
+					<point>106.10525512695312,188.3388671875</point>
+					<point>110.3436508178711,184.78819274902344</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>110.3436508178711,184.78819274902344</point>
+					<point>116.11913299560547,206.49038696289062</point>
+					<point>108.7552719116211,203.10427856445312</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>101.5328598022461,194.6837921142578</point>
+					<point>101.8864974975586,189.76995849609375</point>
+					<point>106.10525512695312,188.3388671875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>106.10525512695312,188.3388671875</point>
+					<point>104.26763916015625,199.79541015625</point>
+					<point>101.5328598022461,194.6837921142578</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>209.7288055419922,196.2675323486328</point>
+					<point>206.09844970703125,200.00961303710938</point>
+					<point>205.90541076660156,194.0071258544922</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>209.7288055419922,196.2675323486328</point>
+					<point>205.90541076660156,194.0071258544922</point>
+					<point>207.48883056640625,190.05908203125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>211.404296875,186.2869110107422</point>
+					<point>213.65530395507812,185.1723175048828</point>
+					<point>212.77857971191406,195.92735290527344</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>207.48883056640625,190.05908203125</point>
+					<point>211.404296875,186.2869110107422</point>
+					<point>212.77857971191406,195.92735290527344</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>212.77857971191406,195.92735290527344</point>
+					<point>209.7288055419922,196.2675323486328</point>
+					<point>207.48883056640625,190.05908203125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>213.65530395507812,185.1723175048828</point>
+					<point>239.69610595703125,184.86073303222656</point>
+					<point>217.00503540039062,196.64266967773438</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>217.00503540039062,196.64266967773438</point>
+					<point>212.77857971191406,195.92735290527344</point>
+					<point>213.65530395507812,185.1723175048828</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>220.35275268554688,209.4989776611328</point>
+					<point>218.09031677246094,209.41702270507812</point>
+					<point>220.2631378173828,205.81765747070312</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>224.78749084472656,209.3580780029297</point>
+					<point>220.35275268554688,209.4989776611328</point>
+					<point>220.2631378173828,205.81765747070312</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>220.64303588867188,202.4510955810547</point>
+					<point>229.4281463623047,207.84164428710938</point>
+					<point>224.78749084472656,209.3580780029297</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>224.78749084472656,209.3580780029297</point>
+					<point>220.2631378173828,205.81765747070312</point>
+					<point>220.64303588867188,202.4510955810547</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>233.6809539794922,207.1214141845703</point>
+					<point>229.4281463623047,207.84164428710938</point>
+					<point>220.64303588867188,202.4510955810547</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>248.39837646484375,196.0543975830078</point>
+					<point>246.0205841064453,199.76654052734375</point>
+					<point>244.8207244873047,188.8568572998047</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>244.8207244873047,188.8568572998047</point>
+					<point>248.2269287109375,189.67739868164062</point>
+					<point>248.39837646484375,196.0543975830078</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>219.18099975585938,199.19424438476562</point>
+					<point>217.00503540039062,196.64266967773438</point>
+					<point>239.69610595703125,184.86073303222656</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>236.66845703125,205.67552185058594</point>
+					<point>233.6809539794922,207.1214141845703</point>
+					<point>220.64303588867188,202.4510955810547</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>220.64303588867188,202.4510955810547</point>
+					<point>219.18099975585938,199.19424438476562</point>
+					<point>236.66845703125,205.67552185058594</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>241.22813415527344,203.5898895263672</point>
+					<point>236.66845703125,205.67552185058594</point>
+					<point>242.2094268798828,187.69190979003906</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>246.0205841064453,199.76654052734375</point>
+					<point>241.22813415527344,203.5898895263672</point>
+					<point>242.2094268798828,187.69190979003906</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>242.2094268798828,187.69190979003906</point>
+					<point>244.8207244873047,188.8568572998047</point>
+					<point>246.0205841064453,199.76654052734375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>239.69610595703125,184.86073303222656</point>
+					<point>242.2094268798828,187.69190979003906</point>
+					<point>236.66845703125,205.67552185058594</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>236.66845703125,205.67552185058594</point>
+					<point>219.18099975585938,199.19424438476562</point>
+					<point>239.69610595703125,184.86073303222656</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>184.52713012695312,215.45762634277344</point>
+					<point>184.74530029296875,214.2398223876953</point>
+					<point>193.90249633789062,214.06600952148438</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>193.90249633789062,214.06600952148438</point>
+					<point>194.71023559570312,215.8212890625</point>
+					<point>184.52713012695312,215.45762634277344</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>194.71023559570312,215.8212890625</point>
+					<point>193.90249633789062,214.06600952148438</point>
+					<point>198.11769104003906,214.888427734375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>198.11769104003906,214.888427734375</point>
+					<point>197.72830200195312,216.6917266845703</point>
+					<point>194.71023559570312,215.8212890625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>201.48316955566406,216.80206298828125</point>
+					<point>202.88668823242188,220.99269104003906</point>
+					<point>200.37689208984375,218.02935791015625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>202.88668823242188,220.99269104003906</point>
+					<point>201.48316955566406,216.80206298828125</point>
+					<point>204.42555236816406,220.27728271484375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>204.2181396484375,225.3424835205078</point>
+					<point>202.88668823242188,220.99269104003906</point>
+					<point>204.42555236816406,220.27728271484375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>204.42555236816406,220.27728271484375</point>
+					<point>206.05059814453125,225.5002899169922</point>
+					<point>204.2181396484375,225.3424835205078</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>197.72830200195312,216.6917266845703</point>
+					<point>198.11769104003906,214.888427734375</point>
+					<point>201.48316955566406,216.80206298828125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>201.48316955566406,216.80206298828125</point>
+					<point>200.37689208984375,218.02935791015625</point>
+					<point>197.72830200195312,216.6917266845703</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>145.60887145996094,223.23345947265625</point>
+					<point>145.47738647460938,225.96522521972656</point>
+					<point>143.94253540039062,225.45187377929688</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>145.60887145996094,223.23345947265625</point>
+					<point>143.94253540039062,225.45187377929688</point>
+					<point>144.93040466308594,221.50694274902344</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>144.93040466308594,221.50694274902344</point>
+					<point>146.36155700683594,221.3802490234375</point>
+					<point>145.60887145996094,223.23345947265625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>146.78770446777344,218.6088104248047</point>
+					<point>149.73275756835938,217.79620361328125</point>
+					<point>147.93057250976562,219.35528564453125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>146.36155700683594,221.3802490234375</point>
+					<point>144.93040466308594,221.50694274902344</point>
+					<point>146.78770446777344,218.6088104248047</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>146.78770446777344,218.6088104248047</point>
+					<point>147.93057250976562,219.35528564453125</point>
+					<point>146.36155700683594,221.3802490234375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>149.73275756835938,217.79620361328125</point>
+					<point>146.78770446777344,218.6088104248047</point>
+					<point>149.32391357421875,216.18765258789062</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>149.32391357421875,216.18765258789062</point>
+					<point>152.05650329589844,216.52960205078125</point>
+					<point>149.73275756835938,217.79620361328125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>152.05650329589844,216.52960205078125</point>
+					<point>149.32391357421875,216.18765258789062</point>
+					<point>154.29405212402344,213.96893310546875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>154.29405212402344,213.96893310546875</point>
+					<point>154.5110321044922,215.56851196289062</point>
+					<point>152.05650329589844,216.52960205078125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>154.5110321044922,215.56851196289062</point>
+					<point>154.29405212402344,213.96893310546875</point>
+					<point>165.34494018554688,214.25015258789062</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>165.34494018554688,214.25015258789062</point>
+					<point>165.22911071777344,215.41073608398438</point>
+					<point>154.5110321044922,215.56851196289062</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+		</obstacles>
+	</physics>
+	<visuals>
+		<water position="0.0,7.0,0.0" size="350.0,350.0" />
+		<snow />
+	</visuals>
+</map>
