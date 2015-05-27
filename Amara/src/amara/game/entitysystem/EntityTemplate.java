@@ -2658,6 +2658,7 @@ public class EntityTemplate{
             EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "tower_shot");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             entityWrapper.setComponent(new AutoAggroComponent(19));
+            entityWrapper.setComponent(new MaximumAggroRangeComponent(19));
         }
         else if(templateName.equals("tower_shot")){
             entityWrapper.setComponent(new NameComponent("Tower Shot"));

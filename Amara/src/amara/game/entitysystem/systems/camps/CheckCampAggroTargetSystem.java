@@ -6,7 +6,7 @@ package amara.game.entitysystem.systems.camps;
 
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.units.*;
-import amara.game.entitysystem.systems.spells.PerformAutoAttacksSystem;
+import amara.game.entitysystem.systems.aggro.*;
 
 /**
  *
@@ -20,7 +20,7 @@ public class CheckCampAggroTargetSystem implements EntitySystem{
         {
             if(!entityWorld.hasComponent(entity, ResetCampComponent.class)){
                 int targetEntity = entityWorld.getComponent(entity, AggroTargetComponent.class).getTargetEntity();
-                if(!PerformAutoAttacksSystem.isAttackable(entityWorld, entity, targetEntity)){
+                if(!CheckAggroTargetAttackibilitySystem.isAttackable(entityWorld, entity, targetEntity)){
                     entityWorld.setComponent(entity, new ResetCampComponent());
                 }
             }

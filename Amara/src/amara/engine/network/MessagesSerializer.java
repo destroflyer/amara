@@ -398,6 +398,7 @@ public class MessagesSerializer{
                         IsVulnerableComponent.class,
                         IsWalkingToAggroTargetComponent.class,
                         LifetimeComponent.class,
+                        MaximumAggroRangeComponent.class,
                         MovementComponent.class,
                         ResetCampComponent.class,
                         SetNewTargetSpellsOnCooldownComponent.class,

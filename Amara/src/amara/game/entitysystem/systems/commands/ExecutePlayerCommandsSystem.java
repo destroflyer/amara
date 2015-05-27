@@ -23,9 +23,9 @@ import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
+import amara.game.entitysystem.systems.aggro.CheckAggroTargetAttackibilitySystem;
 import amara.game.entitysystem.systems.movement.MovementSystem;
 import amara.game.entitysystem.systems.shop.ShopUtil;
-import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.CastSpellSystem;
 import amara.game.entitysystem.systems.targets.TargetUtil;
 import amara.game.entitysystem.systems.units.UnitUtil;
@@ -82,7 +82,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     if(autoAttackComponent != null){
                         AggroTargetComponent aggroTargetComponent = entityWorld.getComponent(selectedUnit, AggroTargetComponent.class);
                         if((aggroTargetComponent == null) || (autoAttackCommand.getTargetEntity() != aggroTargetComponent.getTargetEntity())){
-                            if(PerformAutoAttacksSystem.isAttackable(entityWorld, selectedUnit, autoAttackCommand.getTargetEntity())){
+                            if(CheckAggroTargetAttackibilitySystem.isAttackable(entityWorld, selectedUnit, autoAttackCommand.getTargetEntity())){
                                 if(UnitUtil.tryCancelAction(entityWorld, selectedUnit)){
                                     entityWorld.setComponent(selectedUnit, new AggroTargetComponent(autoAttackCommand.getTargetEntity()));
                                 }
