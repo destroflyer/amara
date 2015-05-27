@@ -35,6 +35,7 @@ public class Map_Arama extends Map{
     public Map_Arama(){
         
     }
+    private final float laneCenterY = 173.5f;
 
     @Override
     public void load(EntityWorld entityWorld){
@@ -50,7 +51,7 @@ public class Map_Arama extends Map{
             EntityWrapper nexus = entityWorld.getWrapped(entityWorld.createEntity());
             nexus.setComponent(new NameComponent("Nexus"));
             nexus.setComponent(new ModelComponent("Models/column/skin_nexus.xml"));
-            nexus.setComponent(new PositionComponent(new Vector2f(nexiX[i], 173.5f)));
+            nexus.setComponent(new PositionComponent(new Vector2f(nexiX[i], laneCenterY)));
             nexus.setComponent(new DirectionComponent(new Vector2f(0, -1)));
             nexus.setComponent(new IsAliveComponent());
             nexus.setComponent(new BaseMaximumHealthComponent(1000));
@@ -60,24 +61,33 @@ public class Map_Arama extends Map{
             nexus.setComponent(new IsVulnerableComponent());
             nexus.setComponent(new TeamComponent(i + 1));
             nexi[i] = nexus;
+        }
+        for(int i=0;i<2;i++){
             EntityWrapper shop = entityWorld.getWrapped(entityWorld.createEntity());
             shop.setComponent(new ModelComponent("Models/chest/skin.xml"));
-            shop.setComponent(new PositionComponent(new Vector2f(((i == 0)?275:75), 173.5f)));
+            shop.setComponent(new PositionComponent(new Vector2f(((i == 0)?275:75), laneCenterY)));
             shop.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));
             shop.setComponent(new ShopRangeComponent(10));
             shop.setComponent(new TeamComponent(i + 1));
-        }
-        //Waves
-        for(int i=0;i<2;i++){
+            //Tower
+            EntityWrapper tower1 = EntityTemplate.createFromTemplate(entityWorld, "tower");
+            tower1.setComponent(new PositionComponent(new Vector2f(((i == 0)?236:113), laneCenterY)));
+            tower1.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));
+            tower1.setComponent(new TeamComponent(i + 1));
+            EntityWrapper tower2 = EntityTemplate.createFromTemplate(entityWorld, "tower");
+            tower2.setComponent(new PositionComponent(new Vector2f(((i == 0)?214:136), laneCenterY)));
+            tower2.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));
+            tower2.setComponent(new TeamComponent(i + 1));
+            //Waves
             int spawnCasterEntity = entityWorld.createEntity();
-            entityWorld.setComponent(spawnCasterEntity, new PositionComponent(new Vector2f(nexiX[i] + (((i == 0)?-1:1) * 5), 173.5f)));
+            entityWorld.setComponent(spawnCasterEntity, new PositionComponent(new Vector2f(nexiX[i] + (((i == 0)?-1:1) * 5), laneCenterY)));
             entityWorld.setComponent(spawnCasterEntity, new TeamComponent(i + 1));
             int spawnSourceEntity = entityWorld.createEntity();
             entityWorld.setComponent(spawnSourceEntity, new EffectCastSourceComponent(spawnCasterEntity));
-            for(int r=0;r<1;r++){
+            for(int r=0;r<3;r++){
                 EntityWrapper spawnTrigger = entityWorld.getWrapped(entityWorld.createEntity());
-                spawnTrigger.setComponent(new RepeatingTriggerComponent(10));
-                spawnTrigger.setComponent(new TimeSinceLastRepeatTriggerComponent(7));
+                spawnTrigger.setComponent(new RepeatingTriggerComponent(20));
+                spawnTrigger.setComponent(new TimeSinceLastRepeatTriggerComponent(17));
                 spawnTrigger.setComponent(new CustomTargetComponent(nexi[(i == 0)?1:0].getId()));
                 EntityWrapper spawnEffect = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
@@ -148,12 +158,12 @@ public class Map_Arama extends Map{
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
         switch(playerIndex){
             case 0:
-                position = new Vector2f(271, 173.5f);
+                position = new Vector2f(271, laneCenterY);
                 direction = new Vector2f(-1, 0);
                 break;
             
             case 1:
-                position = new Vector2f(79, 173.5f);
+                position = new Vector2f(79, laneCenterY);
                 direction = new Vector2f(1, 0);
                 break;
         }

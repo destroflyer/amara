@@ -109,6 +109,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CastCancelableComponent());
             entityWrapper.setComponent(new StopBeforeCastingComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new RangeComponent(15));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
@@ -160,6 +161,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CastCancelableComponent());
             entityWrapper.setComponent(new StopBeforeCastingComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new RangeComponent(6));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
@@ -270,6 +272,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CastDurationComponent(0.6f));
             entityWrapper.setComponent(new StopBeforeCastingComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             castAnimation.setComponent(new NameComponent("cast_1"));
             castAnimation.setComponent(new LoopDurationComponent(0.6f));
@@ -332,6 +335,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CastDurationComponent(castDuration));
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             castAnimation.setComponent(new NameComponent("pop"));
             castAnimation.setComponent(new LoopDurationComponent(castDuration));
@@ -367,6 +371,7 @@ public class EntityTemplate{
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new RangeComponent(10));
             entityWrapper.setComponent(new BaseCooldownComponent(18));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
@@ -455,6 +460,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new BaseCooldownComponent(8));
         }
         else if(templateName.equals("sear_projectile")){
@@ -520,6 +526,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new RangeComponent(15));
             entityWrapper.setComponent(new BaseCooldownComponent(10));
         }
@@ -665,6 +672,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CastDurationComponent(1.5f));
             entityWrapper.setComponent(new StopBeforeCastingComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             castAnimation.setComponent(new NameComponent("grab"));
             castAnimation.setComponent(new LoopDurationComponent(1.5f));
@@ -767,6 +775,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new BaseCooldownComponent(11));
         }
         else if(templateName.equals("sonic_wave_projectile")){
@@ -887,6 +896,7 @@ public class EntityTemplate{
             effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new RangeComponent(14));
             entityWrapper.setComponent(new BaseCooldownComponent(15));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
@@ -1028,6 +1038,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new RangeComponent(20));
             entityWrapper.setComponent(new BaseCooldownComponent(25));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
@@ -1097,6 +1108,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new RangeComponent(6));
             entityWrapper.setComponent(new BaseCooldownComponent(90));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
@@ -1182,6 +1194,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new RangeComponent(9));
             entityWrapper.setComponent(new BaseCooldownComponent(16));
         }
@@ -1285,6 +1298,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new BaseCooldownComponent(13));
         }
         else if(templateName.equals("bear_stance")){
@@ -1405,6 +1419,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new CastCancelActionComponent());
             entityWrapper.setComponent(new CastDurationComponent(0.3f));
             entityWrapper.setComponent(new StopBeforeCastingComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             EntityWrapper castAnimation = entityWorld.getWrapped(entityWorld.createEntity());
             castAnimation.setComponent(new NameComponent("punch"));
             castAnimation.setComponent(new LoopDurationComponent(0.25f));
@@ -1555,6 +1570,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new RangeComponent(12));
             entityWrapper.setComponent(new BaseCooldownComponent(18));
         }
@@ -1842,6 +1858,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new RangeComponent(14));
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
@@ -1963,6 +1980,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new RangeComponent(16));
             entityWrapper.setComponent(new BaseCooldownComponent(130));
         }
@@ -2148,6 +2166,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             entityWrapper.setComponent(new BaseCooldownComponent(12));
         }
         else if(templateName.equals("sapling_toss_projectile")){
@@ -2326,8 +2345,8 @@ public class EntityTemplate{
             
             entityWrapper.setComponent(new IsAliveComponent());
             int spawnCounter = entityWorld.getComponent(parameters[0], RepeatingTriggerCounterComponent.class).getCounter();
-            entityWrapper.setComponent(new BaseMaximumHealthComponent(600 + (spawnCounter * 10)));
-            entityWrapper.setComponent(new BaseAttackDamageComponent(30 + (spawnCounter * 1)));
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(320 + (spawnCounter * 2)));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(12 + (spawnCounter * 0.25f)));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(3));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
@@ -2337,7 +2356,7 @@ public class EntityTemplate{
             EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "melee_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             entityWrapper.setComponent(new AutoAggroComponent(12));
-            entityWrapper.setComponent(new BountyComponent(20 + (spawnCounter * 1)));
+            entityWrapper.setComponent(new BountyComponent(20 + (int) (spawnCounter * 0.5)));
         }
         else if(templateName.equals("etherdesert_creep_range")){
             entityWrapper.setComponent(new NameComponent("Ranged Creep"));
@@ -2579,6 +2598,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
             entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.SINGLE_TARGET));
             entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
@@ -2620,6 +2640,85 @@ public class EntityTemplate{
             
             EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "melee_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+        }
+        else if(templateName.equals("tower")){
+            entityWrapper.setComponent(new NameComponent("Tower"));
+            entityWrapper.setComponent(new ModelComponent("Models/tower/skin.xml"));
+            
+            entityWrapper.setComponent(new IsAliveComponent());
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(1200));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(150));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.8f));
+            entityWrapper.setComponent(new BaseArmorComponent(100));
+            entityWrapper.setComponent(new BaseMagicResistanceComponent(100));
+            entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
+            
+            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "tower_shot");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+            entityWrapper.setComponent(new AutoAggroComponent(19));
+        }
+        else if(templateName.equals("tower_shot")){
+            entityWrapper.setComponent(new NameComponent("Tower Shot"));
+            //Damage target
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new ScalingAttackDamagePhysicalDamageComponent(1));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            EntityWrapper spellEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            spellEffect.setComponent(new CastedEffectTriggersComponent(effectTrigger1.getId()));
+            spellEffect.setComponent(new CastedSpellComponent(entityWrapper.getId()));
+            //Spawn projectile
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
+            spawnInformation.setComponent(new SpawnTemplateComponent("tower_shot_projectile"));
+            spawnInformation.setComponent(new SpawnMoveToTargetComponent());
+            spawnInformation.setComponent(new SpawnMovementSpeedComponent(18));
+            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Play audio
+            EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger3.setComponent(new CasterTargetComponent());
+            EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper audioCast = entityWorld.getWrapped(entityWorld.createEntity());
+            audioCast.setComponent(new AudioComponent("Sounds/sounds/spells/tower_shot_cast.ogg"));
+            audioCast.setComponent(new AudioVolumeComponent(0.75f));
+            effect3.setComponent(new PlayAudioComponent(audioCast.getId()));
+            effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+            effectTrigger3.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId(), effectTrigger3.getId()));
+            entityWrapper.setComponent(new CastCancelActionComponent());
+            entityWrapper.setComponent(new CastCancelableComponent());
+            entityWrapper.setComponent(new StopBeforeCastingComponent());
+            entityWrapper.setComponent(new RangeComponent(19));
+            EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
+            targetRules.setComponent(new AcceptEnemiesComponent());
+            entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
+        }
+        else if(templateName.equals("tower_shot_projectile")){
+            entityWrapper.setComponent(new ModelComponent("Models/fireball/skin.xml"));
+            //Trigger spell effects
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new TargetReachedTriggerComponent());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new TriggerCastedSpellEffectsComponent());
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Remove projectile
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetReachedTriggerComponent());
+            effectTrigger2.setComponent(new SourceTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect2.setComponent(new RemoveEntityComponent());
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
         }
         else if(templateName.equals("boots")){
             entityWrapper.setComponent(new ItemIDComponent("boots"));
