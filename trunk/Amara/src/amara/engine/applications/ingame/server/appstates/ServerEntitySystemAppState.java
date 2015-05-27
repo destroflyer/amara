@@ -157,6 +157,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownKnockupImmuneSystem());
         addEntitySystem(new CountdownAnimationLoopsSystem());
         addEntitySystem(new CheckOpenObjectivesSystem());
+        addEntitySystem(new CheckAggroTargetAttackibilitySystem());
+        addEntitySystem(new CheckMaximumAggroRangeSystem());
         addEntitySystem(new UpdateAttributesSystem());
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue()));
         addEntitySystem(new AttackMoveSystem());
