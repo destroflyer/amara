@@ -7,6 +7,8 @@ package amara.game.maps;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
+import amara.game.entitysystem.components.buffs.*;
+import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.camps.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.maps.*;
@@ -17,6 +19,7 @@ import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.shop.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
+import amara.game.entitysystem.components.units.bounties.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 
@@ -33,6 +36,8 @@ public class TestMap extends Map{
     @Override
     public void load(EntityWorld entityWorld){
         //Field of test units
+        EntityWrapper testUnitBounty = entityWorld.getWrapped(entityWorld.createEntity());
+        testUnitBounty.setComponent(new BountyGoldComponent(20));
         for(int x=0;x<5;x++){
             for(int y=0;y<4;y++){
                 EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
@@ -62,7 +67,7 @@ public class TestMap extends Map{
                 EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
                 unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
                 unit.setComponent(new TeamComponent(0));
-                unit.setComponent(new BountyComponent(20));
+                unit.setComponent(new BountyComponent(testUnitBounty.getId()));
                 EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
                 camp.setComponent(new CampTransformComponent(position, direction));
                 camp.setComponent(new CampMaximumAggroDistanceComponent(5));
@@ -71,6 +76,14 @@ public class TestMap extends Map{
             }
         }
         //Test Camp
+        EntityWrapper testCampUnitBounty = entityWorld.getWrapped(entityWorld.createEntity());
+        testCampUnitBounty.setComponent(new BountyGoldComponent(10));
+        EntityWrapper testBountyBuff = entityWorld.getWrapped(entityWorld.createEntity());
+        testBountyBuff.setComponent(new BuffVisualisationComponent("turbo"));
+        EntityWrapper testBountyBuffEffect = entityWorld.getWrapped(entityWorld.createEntity());
+        testBountyBuffEffect.setComponent(new BonusFlatWalkSpeedComponent(4));
+        testBountyBuff.setComponent(new ContinuousEffectComponent(testBountyBuffEffect.getId()));
+        testCampUnitBounty.setComponent(new BountyBuffComponent(testBountyBuff.getId(), 3));
         for(int x=0;x<3;x++){
             for(int y=0;y<2;y++){
                 EntityWrapper enemy = EntityTemplate.createFromTemplate(entityWorld, "pseudospider");
@@ -80,7 +93,7 @@ public class TestMap extends Map{
                 enemy.setComponent(new DirectionComponent(directionEnemy));
                 enemy.setComponent(new AutoAggroComponent(10));
                 enemy.setComponent(new TeamComponent(0));
-                enemy.setComponent(new BountyComponent(10));
+                enemy.setComponent(new BountyComponent(testCampUnitBounty.getId()));
                 EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
                 camp.setComponent(new CampTransformComponent(positionEnemy, directionEnemy));
                 camp.setComponent(new CampMaximumAggroDistanceComponent(10));
@@ -165,6 +178,8 @@ public class TestMap extends Map{
         entityWorld.setComponent(unitEntity, new PositionComponent(position));
         entityWorld.setComponent(unitEntity, new DirectionComponent(direction));
         entityWorld.setComponent(unitEntity, new TeamComponent(playerIndex + 1));
-        entityWorld.setComponent(unitEntity, new BountyComponent(300));
+        EntityWrapper characterBounty = entityWorld.getWrapped(entityWorld.createEntity());
+        characterBounty.setComponent(new BountyGoldComponent(300));
+        entityWorld.setComponent(unitEntity, new BountyComponent(characterBounty.getId()));
     }
 }

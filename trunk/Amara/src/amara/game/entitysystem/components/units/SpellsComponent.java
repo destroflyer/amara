@@ -17,7 +17,7 @@ public class SpellsComponent{
         
     }
     
-    public SpellsComponent(int[] spellsEntities){
+    public SpellsComponent(int... spellsEntities){
         this.spellsEntities = spellsEntities;
     }
     private int[] spellsEntities;
