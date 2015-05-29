@@ -8,7 +8,10 @@ import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.audio.*;
+import amara.game.entitysystem.components.buffs.*;
+import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.casts.*;
+import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.effects.spawns.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.maps.*;
@@ -20,6 +23,7 @@ import amara.game.entitysystem.components.shop.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
+import amara.game.entitysystem.components.units.bounties.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
@@ -57,8 +61,6 @@ public class Map_Arama extends Map{
             nexus.setComponent(new BaseMaximumHealthComponent(1000));
             nexus.setComponent(new BaseHealthRegenerationComponent(2));
             nexus.setComponent(new RequestUpdateAttributesComponent());
-            nexus.setComponent(new IsTargetableComponent());
-            nexus.setComponent(new IsVulnerableComponent());
             nexus.setComponent(new TeamComponent(i + 1));
             nexi[i] = nexus;
         }
@@ -69,15 +71,35 @@ public class Map_Arama extends Map{
             shop.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));
             shop.setComponent(new ShopRangeComponent(10));
             shop.setComponent(new TeamComponent(i + 1));
-            //Tower
+            //Towers
             EntityWrapper tower1 = EntityTemplate.createFromTemplate(entityWorld, "tower");
             tower1.setComponent(new PositionComponent(new Vector2f(((i == 0)?236:113), laneCenterY)));
             tower1.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));
             tower1.setComponent(new TeamComponent(i + 1));
+            tower1.removeComponent(IsTargetableComponent.class);
+            tower1.removeComponent(IsVulnerableComponent.class);
             EntityWrapper tower2 = EntityTemplate.createFromTemplate(entityWorld, "tower");
             tower2.setComponent(new PositionComponent(new Vector2f(((i == 0)?214:136), laneCenterY)));
             tower2.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));
             tower2.setComponent(new TeamComponent(i + 1));
+            //Tower 1 death trigger
+            EntityWrapper tower1DeathTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+            tower1DeathTrigger.setComponent(new DeathTriggerComponent());
+            tower1DeathTrigger.setComponent(new CustomTargetComponent(nexi[i].getId()));
+            EntityWrapper tower1DeathEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            tower1DeathEffect.setComponent(new AddTargetabilityComponent());
+            tower1DeathEffect.setComponent(new AddVulnerabilityComponent());
+            tower1DeathTrigger.setComponent(new TriggeredEffectComponent(tower1DeathEffect.getId()));
+            tower1DeathTrigger.setComponent(new TriggerSourceComponent(tower1.getId()));
+            //Tower 2 death trigger
+            EntityWrapper tower2DeathTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+            tower2DeathTrigger.setComponent(new DeathTriggerComponent());
+            tower2DeathTrigger.setComponent(new CustomTargetComponent(tower1.getId()));
+            EntityWrapper tower2DeathEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            tower2DeathEffect.setComponent(new AddTargetabilityComponent());
+            tower2DeathEffect.setComponent(new AddVulnerabilityComponent());
+            tower2DeathTrigger.setComponent(new TriggeredEffectComponent(tower2DeathEffect.getId()));
+            tower2DeathTrigger.setComponent(new TriggerSourceComponent(tower2.getId()));
             //Waves
             int spawnCasterEntity = entityWorld.createEntity();
             entityWorld.setComponent(spawnCasterEntity, new PositionComponent(new Vector2f(nexiX[i] + (((i == 0)?-1:1) * 5), laneCenterY)));
@@ -134,6 +156,18 @@ public class Map_Arama extends Map{
         boss.setComponent(new SpellsComponent(new int[]{bodyslam.getId()}));
         boss.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
         boss.setComponent(new TeamComponent(0));
+        //Boss Bounty
+        EntityWrapper bossBounty = entityWorld.getWrapped(entityWorld.createEntity());
+        bossBounty.setComponent(new BountyGoldComponent(10));
+        EntityWrapper bossBountyBuff = entityWorld.getWrapped(entityWorld.createEntity());
+        bossBountyBuff.setComponent(new BuffVisualisationComponent("baron_nashor"));
+        EntityWrapper testBountyBuffEffect = entityWorld.getWrapped(entityWorld.createEntity());
+        testBountyBuffEffect.setComponent(new BonusFlatAttackDamageComponent(50));
+        testBountyBuffEffect.setComponent(new BonusFlatAbilityPowerComponent(50));
+        testBountyBuffEffect.setComponent(new BonusFlatWalkSpeedComponent(0.5f));
+        bossBountyBuff.setComponent(new ContinuousEffectComponent(testBountyBuffEffect.getId()));
+        bossBounty.setComponent(new BountyBuffComponent(bossBountyBuff.getId(), 60));
+        boss.setComponent(new BountyComponent(bossBounty.getId()));
         //GameObjective
         EntityWrapper gameObjective = entityWorld.getWrapped(entityWorld.createEntity());
         EntityWrapper nexusObjective1 = entityWorld.getWrapped(entityWorld.createEntity());

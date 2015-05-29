@@ -90,6 +90,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new StunVisualisationSystem(hudAttachmentsSystem, entitySceneMap));
         addEntitySystem(new SilenceVisualisationSystem(hudAttachmentsSystem, entitySceneMap));
         addEntitySystem(new KnockupVisualisationSystem(entitySceneMap, positionSystem));
+        addEntitySystem(new BuffVisualisationSystem_BaronNashor(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Bubble(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Burning(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Electrified(entitySceneMap));
