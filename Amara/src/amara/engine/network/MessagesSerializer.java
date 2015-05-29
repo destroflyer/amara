@@ -53,6 +53,7 @@ import amara.game.entitysystem.components.spells.triggers.*;
 import amara.game.entitysystem.components.targets.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
+import amara.game.entitysystem.components.units.bounties.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
@@ -412,6 +413,9 @@ public class MessagesSerializer{
                         DeathAnimationComponent.class,
                         IdleAnimationComponent.class,
                         WalkAnimationComponent.class,
+                        //units/bounties
+                        BountyBuffComponent.class,
+                        BountyGoldComponent.class,
                         //units/crowdcontrol
                         IsBindedComponent.class,
                         IsBindedImmuneComponent.class,

@@ -36,6 +36,7 @@ import amara.game.entitysystem.components.spells.triggers.*;
 import amara.game.entitysystem.components.targets.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
+import amara.game.entitysystem.components.units.bounties.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
@@ -2365,7 +2366,9 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             entityWrapper.setComponent(new AutoAggroComponent(12));
             entityWrapper.setComponent(new MaximumAggroRangeComponent(30));
-            entityWrapper.setComponent(new BountyComponent(20 + (int) (spawnCounter * 0.5)));
+            int bountyEntity = entityWorld.createEntity();
+            entityWorld.setComponent(bountyEntity, new BountyGoldComponent(20 + (int) (spawnCounter * 0.5)));
+            entityWrapper.setComponent(new BountyComponent(bountyEntity));
         }
         else if(templateName.equals("etherdesert_creep_range")){
             entityWrapper.setComponent(new NameComponent("Ranged Creep"));
