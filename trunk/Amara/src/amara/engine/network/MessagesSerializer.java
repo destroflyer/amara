@@ -440,6 +440,7 @@ public class MessagesSerializer{
                         //units/effecttriggers/triggers
                         CastingFinishedTriggerComponent.class,
                         CollisionTriggerComponent.class,
+                        DeathTriggerComponent.class,
                         InstantTriggerComponent.class,
                         RepeatingTriggerComponent.class,
                         RepeatingTriggerCounterComponent.class,

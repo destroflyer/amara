@@ -227,6 +227,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new RemoveAppliedEffectsSystem());
         addEntitySystem(new HealthRegenerationSystem());
         addEntitySystem(new DeathSystem());
+        addEntitySystem(new TriggerDeathEffectSystem());
         addEntitySystem(new MaximumHealthSystem());
         addEntitySystem(new PayOutBountiesSystem());
         addEntitySystem(new RemoveDeadUnitsSystem());
