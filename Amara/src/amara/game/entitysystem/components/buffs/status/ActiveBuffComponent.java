@@ -17,18 +17,18 @@ public class ActiveBuffComponent{
         
     }
     
-    public ActiveBuffComponent(int targetEntityID, int buffEntityID){
-        this.targetEntityID = targetEntityID;
-        this.buffEntityID = buffEntityID;
+    public ActiveBuffComponent(int targetEntity, int buffEntity){
+        this.targetEntity = targetEntity;
+        this.buffEntity = buffEntity;
     }
-    private int targetEntityID;
-    private int buffEntityID;
+    private int targetEntity;
+    private int buffEntity;
 
-    public int getTargetEntityID(){
-        return targetEntityID;
+    public int getTargetEntity(){
+        return targetEntity;
     }
 
-    public int getBuffEntityID(){
-        return buffEntityID;
+    public int getBuffEntity(){
+        return buffEntity;
     }
 }

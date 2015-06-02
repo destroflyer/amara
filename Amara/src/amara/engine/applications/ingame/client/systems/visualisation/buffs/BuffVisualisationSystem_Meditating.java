@@ -39,9 +39,9 @@ public class BuffVisualisationSystem_Meditating extends BuffVisualisationSystem{
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity, int buffStatusEntity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int buffStatusEntity, int targetEntity){
         MeditatingParticleSystem particleSystem = new MeditatingParticleSystem();
-        particleSystems.put(entity, particleSystem);
+        particleSystems.put(targetEntity, particleSystem);
         return particleSystem.getRootNode();
     }
 

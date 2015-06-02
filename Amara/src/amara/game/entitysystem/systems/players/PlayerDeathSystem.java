@@ -67,7 +67,7 @@ public class PlayerDeathSystem implements EntitySystem{
         UnitUtil.cancelAction(entityWorld, selectedEntity);
         for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
             ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class);
-            if((activeBuffComponent.getTargetEntityID() == selectedEntity) && (!entityWorld.hasComponent(activeBuffComponent.getBuffEntityID(), KeepOnDeathComponent.class))){
+            if((activeBuffComponent.getTargetEntity() == selectedEntity) && (!entityWorld.hasComponent(activeBuffComponent.getBuffEntity(), KeepOnDeathComponent.class))){
                 RemoveBuffsSystem.removeBuff(entityWorld, buffStatus);
             }
         }

@@ -27,7 +27,7 @@ public class BuffVisualisationSystem_Wither extends BuffVisualisationSystem{
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity, int buffStatusEntity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int buffStatusEntity, int targetEntity){
         ParticleEmitter particleEmitter = new ParticleEmitter("buff", ParticleMesh.Type.Triangle, 30);
         Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Misc/Particle.j3md");
         material.setTexture("Texture", MaterialFactory.getAssetManager().loadTexture("Textures/effects/flame_alpha.png"));

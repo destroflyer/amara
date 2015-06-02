@@ -75,8 +75,8 @@ public class UpdateAttributesSystem implements EntitySystem{
             }
             for(EntityWrapper buffStatus : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ActiveBuffComponent.class))){
                 ActiveBuffComponent activeBuffComponent = buffStatus.getComponent(ActiveBuffComponent.class);
-                if(activeBuffComponent.getTargetEntityID() == entityWrapper.getId()){
-                    ContinuousEffectComponent continuousEffectComponent = entityWorld.getComponent(activeBuffComponent.getBuffEntityID(), ContinuousEffectComponent.class);
+                if(activeBuffComponent.getTargetEntity() == entityWrapper.getId()){
+                    ContinuousEffectComponent continuousEffectComponent = entityWorld.getComponent(activeBuffComponent.getBuffEntity(), ContinuousEffectComponent.class);
                     if(continuousEffectComponent != null){
                         addAttributeBonus(entityWorld, attributeBonus, continuousEffectComponent.getEffectEntityID());
                     }
