@@ -20,13 +20,15 @@ public class ModelObject extends Node implements AnimEventListener{
 
     public ModelObject(DisplayApplication mainApplication, String skinResourcePath){
         this.mainApplication = mainApplication;
-        loadSkin(new ModelSkin(skinResourcePath));
+        skin = new ModelSkin(skinResourcePath);
+        loadSkin();
     }
     private DisplayApplication mainApplication;
+    private ModelSkin skin;
     private Spatial modelSpatial;
     private ArrayList<AnimChannel> animationChannels = new ArrayList<AnimChannel>();
     
-    private void loadSkin(ModelSkin skin){
+    private void loadSkin(){
         modelSpatial = skin.loadSpatial();
         for(ModelModifier modelModifier : skin.getModelModifiers()){
             modelModifier.modify(this);
@@ -111,6 +113,10 @@ public class ModelObject extends Node implements AnimEventListener{
     @Override
     public void onAnimChange(AnimControl control, AnimChannel channel, String animationName){
         
+    }
+
+    public ModelSkin getSkin(){
+        return skin;
     }
     
     public Spatial getModelSpatial(){

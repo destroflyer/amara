@@ -44,6 +44,7 @@ public class ModelSkin{
     private Element materialElement;
     private Element modifiersElement;
     private String name;
+    private float modelNormScale;
     private float modelScale;
     private float materialAmbient;
     private LinkedList<ModelModifier> modelModifiers = new LinkedList<ModelModifier>();
@@ -57,6 +58,7 @@ public class ModelSkin{
             positionElement = modelElement.getChild("position");
             materialElement = modelElement.getChild("material");
             modifiersElement = modelElement.getChild("modifiers");
+            modelNormScale = getAttributeValue(modelElement, "normScale", 1);
             modelScale = getAttributeValue(modelElement, "scale", 1);
             materialAmbient = getAttributeValue(materialElement, "ambient", 0.15f);
         }catch(Exception ex){
@@ -93,7 +95,7 @@ public class ModelSkin{
     private Spatial loadModel(){
         String modelPath = getModelFilePath();
         Spatial spatial = MaterialFactory.getAssetManager().loadModel(modelPath);
-        spatial.setLocalScale(modelScale);
+        spatial.setLocalScale(modelNormScale * modelScale);
         return spatial;
     }
    
@@ -197,6 +199,8 @@ public class ModelSkin{
    
     private void applyGeometryInformation(Spatial spatial){
         LinkedList<Geometry> geometryChilds = JMonkeyUtil.getAllGeometryChilds(spatial);
+        float scale = (modelNormScale * modelScale);
+        Vector3f scaleVector = new Vector3f(scale, scale, scale);
         for(int i=0;i<geometryChilds.size();i++){
             Geometry geometry = geometryChilds.get(i);
             Material material = geometry.getMaterial();
@@ -204,7 +208,7 @@ public class ModelSkin{
             material.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
             RigidBodyControl rigidBodyControl = geometry.getControl(RigidBodyControl.class);
             if(rigidBodyControl != null){
-                rigidBodyControl.getCollisionShape().setScale(new Vector3f(modelScale, modelScale, modelScale));
+                rigidBodyControl.getCollisionShape().setScale(scaleVector);
             }
             geometry.setUserData("layer", 3);
         }
@@ -224,6 +228,10 @@ public class ModelSkin{
 
     public float getModelScale(){
         return modelScale;
+    }
+
+    public float getModelNormScale(){
+        return modelNormScale;
     }
    
     public float getMaterialAmbient(){

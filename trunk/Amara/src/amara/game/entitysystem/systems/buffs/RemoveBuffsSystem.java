@@ -25,7 +25,7 @@ public class RemoveBuffsSystem implements EntitySystem{
     
     public static void removeAllBuffs(EntityWorld entityWorld, int entity){
         for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
-            int targetEntity = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class).getTargetEntityID();
+            int targetEntity = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class).getTargetEntity();
             if(targetEntity == entity){
                 removeBuff(entityWorld, buffStatus);
             }
@@ -35,10 +35,10 @@ public class RemoveBuffsSystem implements EntitySystem{
     public static void removeBuff(EntityWorld entityWorld, int buffStatusEntity){
         ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
         entityWorld.removeEntity(buffStatusEntity);
-        entityWorld.setComponent(activeBuffComponent.getTargetEntityID(), new RequestUpdateAttributesComponent());
-        OnBuffRemoveEffectTriggersComponent onBuffRemoveEffectTriggersComponent = entityWorld.getComponent(activeBuffComponent.getBuffEntityID(), OnBuffRemoveEffectTriggersComponent.class);
+        entityWorld.setComponent(activeBuffComponent.getTargetEntity(), new RequestUpdateAttributesComponent());
+        OnBuffRemoveEffectTriggersComponent onBuffRemoveEffectTriggersComponent = entityWorld.getComponent(activeBuffComponent.getBuffEntity(), OnBuffRemoveEffectTriggersComponent.class);
         if(onBuffRemoveEffectTriggersComponent != null){
-            EffectTriggerUtil.triggerEffects(entityWorld, onBuffRemoveEffectTriggersComponent.getEffectTriggerEntities(), activeBuffComponent.getTargetEntityID());
+            EffectTriggerUtil.triggerEffects(entityWorld, onBuffRemoveEffectTriggersComponent.getEffectTriggerEntities(), activeBuffComponent.getTargetEntity());
         }
     }
 }

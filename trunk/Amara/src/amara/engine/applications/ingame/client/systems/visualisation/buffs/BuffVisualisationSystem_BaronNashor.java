@@ -23,7 +23,7 @@ public class BuffVisualisationSystem_BaronNashor extends BuffVisualisationSystem
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity, int buffStatusEntity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int buffStatusEntity, int targetEntity){
         SimpleParticleEmitter simpleParticleEmitter = new SimpleParticleEmitter();
         ParticleEmitter particleEmitter = simpleParticleEmitter.getParticleEmitter();
         particleEmitter.setParticlesPerSec(10);
@@ -39,7 +39,6 @@ public class BuffVisualisationSystem_BaronNashor extends BuffVisualisationSystem
         particleEmitter.getMaterial().getAdditionalRenderState().setDepthTest(false);
         particleEmitter.setUserData("layer", 1);
         particleEmitter.updateLogicalState(10);
-        particleEmitter.setLocalScale(1.5f);
         return simpleParticleEmitter;
     }
 }

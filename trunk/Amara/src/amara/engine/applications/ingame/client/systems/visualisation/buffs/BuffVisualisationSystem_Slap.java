@@ -24,20 +24,20 @@ public class BuffVisualisationSystem_Slap extends BuffVisualisationSystem{
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity, int buffStatusEntity){
-        ModelObject modelObject = getModelObject(entitySceneMap.requestNode(entity));
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int buffStatusEntity, int targetEntity){
+        ModelObject modelObject = getModelObject(entitySceneMap.requestNode(targetEntity));
         SkeletonControl skeletonControl = modelObject.getModelSpatial().getControl(SkeletonControl.class);
-        attachVisualisation(skeletonControl.getAttachmentsNode("hand.R"), buffStatusEntity);
-        attachVisualisation(skeletonControl.getAttachmentsNode("hand.L"), buffStatusEntity);
+        attachVisualisation(skeletonControl.getAttachmentsNode("hand.R"), buffStatusEntity, targetEntity);
+        attachVisualisation(skeletonControl.getAttachmentsNode("hand.L"), buffStatusEntity, targetEntity);
         return null;
     }
     
-    private void attachVisualisation(Node boneAttachmentNode, int buffStatusEntity){
+    private void attachVisualisation(Node boneAttachmentNode, int buffStatusEntity, int targetEntity){
         Spatial fire = MaterialFactory.getAssetManager().loadModel("Models/fireball/fireball.j3o");
         fire.setLocalTranslation(0, 0.3f, 0);
         fire.setLocalScale(0.25f);
         boneAttachmentNode.attachChild(fire);
-        prepareVisualAttachment(fire, buffStatusEntity);
+        prepareVisualAttachment(buffStatusEntity, targetEntity, fire);
     }
     
     private ModelObject getModelObject(Node node){

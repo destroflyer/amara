@@ -24,11 +24,12 @@ public class BuffVisualisationSystem_Zhonyas extends BuffVisualisationSystem{
 
     public BuffVisualisationSystem_Zhonyas(EntitySceneMap entitySceneMap){
         super(entitySceneMap, "zhonyas");
+        scaleVisualisation = false;
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int entity, int buffStatusEntity){
-        ModelObject modelObject = getModelObject(entitySceneMap.requestNode(entity));
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int buffStatusEntity, int targetEntity){
+        ModelObject modelObject = getModelObject(entitySceneMap.requestNode(targetEntity));
         Spatial clonedModel = modelObject.getModelSpatial().deepClone();
         Material material = MaterialFactory.getAssetManager().loadMaterial("Shaders/glass/materials/glass_3.j3m");
         for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel)){
