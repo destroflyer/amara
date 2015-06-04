@@ -5,7 +5,6 @@
 package amara.game.entitysystem.systems.commands;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import com.jme3.math.Vector2f;
 import amara.Queue;
 import amara.engine.applications.ingame.client.appstates.SendPlayerCommandsAppState;
@@ -140,19 +139,14 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 }
             }
             if(canBeCasted){
-                LinkedList<Object> componentsToAdd = new LinkedList<Object>();
-                componentsToAdd.add(castSpellComponent);
-                addSpellCastComponents(entityWorld, casterEntity, castSpellComponent.getSpellEntity(), targetEntity, componentsToAdd);
+                addSpellCastComponents(entityWorld, casterEntity, castSpellComponent.getSpellEntity(), targetEntity, castSpellComponent);
             }
         }
     }
     
-    private static void addSpellCastComponents(EntityWorld entityWorld, int casterEntity, int spellEntity, int targetEntity, LinkedList<Object> componentsToAdd){
+    private static void addSpellCastComponents(EntityWorld entityWorld, int casterEntity, int spellEntity, int targetEntity, CastSpellComponent castSpellComponent){
         AutoAttackComponent autoAttackComponent = entityWorld.getComponent(casterEntity, AutoAttackComponent.class);
         boolean isAutoAttack = ((autoAttackComponent != null) && (spellEntity == autoAttackComponent.getAutoAttackEntity()));
-        if(isAutoAttack){
-            componentsToAdd.add(entityWorld.getComponent(casterEntity, AggroTargetComponent.class));
-        }
         boolean castInstant = true;
         RangeComponent rangeComponent = entityWorld.getComponent(spellEntity, RangeComponent.class);
         if(rangeComponent != null){
@@ -181,7 +175,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     effectTrigger.setComponent(new TargetReachedTriggerComponent());
                     effectTrigger.setComponent(new SourceTargetComponent());
                     EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
-                    effect.setComponent(new AddComponentsComponent(componentsToAdd.toArray(new Object[componentsToAdd.size()])));
+                    effect.setComponent(new AddComponentsComponent(castSpellComponent));
                     effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
                     effectTrigger.setComponent(new TriggerSourceComponent(casterEntity));
                     effectTrigger.setComponent(new TriggerOnceComponent());
@@ -198,9 +192,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 if(isAutoAttack){
                     entityWorld.setComponent(casterEntity, new AggroTargetComponent(targetEntity));
                 }
-                for(Object componentToAdd : componentsToAdd){
-                    entityWorld.setComponent(casterEntity, componentToAdd);
-                }
+                entityWorld.setComponent(casterEntity, castSpellComponent);
             }
         }
     }

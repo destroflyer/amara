@@ -38,6 +38,9 @@ public class TestMap extends Map{
         //Field of test units
         EntityWrapper testUnitBounty = entityWorld.getWrapped(entityWorld.createEntity());
         testUnitBounty.setComponent(new BountyGoldComponent(20));
+        EntityWrapper testUnitCamp = entityWorld.getWrapped(entityWorld.createEntity());
+        testUnitCamp.setComponent(new CampMaximumAggroDistanceComponent(5));
+        testUnitCamp.setComponent(new CampHealthResetComponent());
         for(int x=0;x<5;x++){
             for(int y=0;y<4;y++){
                 EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
@@ -68,11 +71,7 @@ public class TestMap extends Map{
                 unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
                 unit.setComponent(new TeamComponent(0));
                 unit.setComponent(new BountyComponent(testUnitBounty.getId()));
-                EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
-                camp.setComponent(new CampTransformComponent(position, direction));
-                camp.setComponent(new CampMaximumAggroDistanceComponent(5));
-                camp.setComponent(new CampHealthResetComponent());
-                unit.setComponent(new CampComponent(camp.getId()));
+                unit.setComponent(new CampComponent(testUnitCamp.getId(), position, direction));
             }
         }
         //Test Camp
@@ -84,21 +83,21 @@ public class TestMap extends Map{
         testBountyBuffEffect.setComponent(new BonusFlatWalkSpeedComponent(4));
         testBountyBuff.setComponent(new ContinuousEffectComponent(testBountyBuffEffect.getId()));
         testCampUnitBounty.setComponent(new BountyBuffComponent(testBountyBuff.getId(), 3));
+        EntityWrapper testCamp = entityWorld.getWrapped(entityWorld.createEntity());
+        testCamp.setComponent(new CampUnionAggroComponent());
+        testCamp.setComponent(new CampMaximumAggroDistanceComponent(10));
+        testCamp.setComponent(new CampHealthResetComponent());
         for(int x=0;x<3;x++){
             for(int y=0;y<2;y++){
                 EntityWrapper enemy = EntityTemplate.createFromTemplate(entityWorld, "pseudospider");
-                Vector2f positionEnemy = new Vector2f(40 + (x * 3), 68 + (y * 3));
-                Vector2f directionEnemy = new Vector2f(0, -1);
-                enemy.setComponent(new PositionComponent(positionEnemy));
-                enemy.setComponent(new DirectionComponent(directionEnemy));
+                Vector2f position = new Vector2f(40 + (x * 3), 68 + (y * 3));
+                Vector2f direction = new Vector2f(0, -1);
+                enemy.setComponent(new PositionComponent(position));
+                enemy.setComponent(new DirectionComponent(direction));
                 enemy.setComponent(new AutoAggroComponent(10));
                 enemy.setComponent(new TeamComponent(0));
                 enemy.setComponent(new BountyComponent(testCampUnitBounty.getId()));
-                EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
-                camp.setComponent(new CampTransformComponent(positionEnemy, directionEnemy));
-                camp.setComponent(new CampMaximumAggroDistanceComponent(10));
-                camp.setComponent(new CampHealthResetComponent());
-                enemy.setComponent(new CampComponent(camp.getId()));
+                enemy.setComponent(new CampComponent(testCamp.getId(), position, direction));
             }
         }
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
