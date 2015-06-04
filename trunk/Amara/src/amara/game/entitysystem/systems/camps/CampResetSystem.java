@@ -25,11 +25,10 @@ public class CampResetSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(ResetCampComponent.class)){
-            int campEntity = entityWorld.getComponent(entity, CampComponent.class).getCampEntity();
-            CampTransformComponent campTransformComponent = entityWorld.getComponent(campEntity, CampTransformComponent.class);
+        for(int entity : entityWorld.getEntitiesWithAll(CampComponent.class, CampResetComponent.class)){
+            CampComponent campComponent = entityWorld.getComponent(entity, CampComponent.class);
             int targetPositionEntity = entityWorld.createEntity();
-            entityWorld.setComponent(targetPositionEntity, new PositionComponent(campTransformComponent.getPosition()));
+            entityWorld.setComponent(targetPositionEntity, new PositionComponent(campComponent.getPosition()));
             if(ExecutePlayerCommandsSystem.tryWalk(entityWorld, entity, targetPositionEntity, -1)){
                 int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
                 entityWorld.removeComponent(movementEntity, MovementIsCancelableComponent.class);
@@ -39,13 +38,13 @@ public class CampResetSystem implements EntitySystem{
                 effectTrigger.setComponent(new SourceTargetComponent());
                 EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
                 LinkedList<Object> componentsToAdd = new LinkedList<Object>();
-                componentsToAdd.add(new DirectionComponent(campTransformComponent.getDirection()));
-                if(entityWorld.hasComponent(campEntity, CampHealthResetComponent.class)){
+                componentsToAdd.add(new DirectionComponent(campComponent.getDirection()));
+                if(entityWorld.hasComponent(campComponent.getCampEntity(), CampHealthResetComponent.class)){
                     float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();
                     componentsToAdd.add(new HealthComponent(maximumHealth));
                 }
                 effect.setComponent(new AddComponentsComponent(componentsToAdd.toArray(new Object[componentsToAdd.size()])));
-                effect.setComponent(new RemoveComponentsComponent(ResetCampComponent.class));
+                effect.setComponent(new RemoveComponentsComponent(CampResetComponent.class));
                 effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
                 effectTrigger.setComponent(new TriggerSourceComponent(entity));
                 effectTrigger.setComponent(new TriggerOnceComponent());

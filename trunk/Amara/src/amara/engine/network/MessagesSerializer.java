@@ -196,7 +196,7 @@ public class MessagesSerializer{
                         //camps
                         CampHealthResetComponent.class,
                         CampMaximumAggroDistanceComponent.class,
-                        CampTransformComponent.class,
+                        CampUnionAggroComponent.class,
                         //effects
                         AffectedTargetsComponent.class,
                         ApplyEffectImpactComponent.class,
@@ -387,6 +387,7 @@ public class MessagesSerializer{
                         AutoAttackComponent.class,
                         BountyComponent.class,
                         CampComponent.class,
+                        CampResetComponent.class,
                         CastSpellOnCooldownWhileAttackingComponent.class,
                         CurrentActionEffectCastsComponent.class,
                         DamageHistoryComponent.class,
@@ -402,7 +403,6 @@ public class MessagesSerializer{
                         LifetimeComponent.class,
                         MaximumAggroRangeComponent.class,
                         MovementComponent.class,
-                        ResetCampComponent.class,
                         SetNewTargetSpellsOnCooldownComponent.class,
                         SpellsComponent.class,
                         TargetsInAggroRangeComponent.class,
