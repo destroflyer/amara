@@ -17,12 +17,12 @@ public class CustomTargetComponent{
         
     }
 
-    public CustomTargetComponent(int targetEntity){
-        this.targetEntity = targetEntity;
+    public CustomTargetComponent(int... targetEntities){
+        this.targetEntities = targetEntities;
     }
-    private int targetEntity;
+    private int[] targetEntities;
 
-    public int getTargetEntity(){
-        return targetEntity;
+    public int[] getTargetEntities(){
+        return targetEntities;
     }
 }

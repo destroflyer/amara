@@ -6,7 +6,9 @@ package amara.game.entitysystem.systems.spells.casting;
 
 import java.util.LinkedList;
 import com.jme3.math.Vector2f;
+import amara.Util;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.physics.*;
@@ -18,6 +20,7 @@ import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.systems.effects.triggers.EffectTriggerUtil;
 import amara.game.entitysystem.systems.movement.MovementSystem;
+import amara.game.entitysystem.systems.units.UnitUtil;
 
 /**
  *
@@ -64,15 +67,26 @@ public class CastSpellSystem implements EntitySystem{
                 int movementEntity = movementComponent.getMovementEntity();
                 entityWorld.removeComponent(casterEntity, MovementComponent.class);
                 if(entityWorld.hasComponent(spellEntity, StopAfterCastingComponent.class)){
+                    UnitUtil.cancelMovement(entityWorld, casterEntity);
                     entityWorld.removeEntity(movementEntity);
                 }
                 else{
+                    //Deactivate movement triggers temporarily
+                    LinkedList<Integer> deactivatedTriggers = new LinkedList<Integer>();
+                    for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, TargetReachedTriggerComponent.class)){
+                        int triggerSourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
+                        if(triggerSourceEntity == casterEntity){
+                            entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
+                            deactivatedTriggers.add(effectTriggerEntity);
+                        }
+                    }
                     EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
                     effectTrigger.setComponent(new TriggerTemporaryComponent());
                     effectTrigger.setComponent(new CastingFinishedTriggerComponent());
                     effectTrigger.setComponent(new SourceTargetComponent());
                     EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
                     effect.setComponent(new MoveComponent(movementEntity));
+                    effect.setComponent(new AddEffectTriggersComponent(Util.convertToArray(deactivatedTriggers)));
                     effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
                     effectTrigger.setComponent(new TriggerSourceComponent(casterEntity));
                     effectTrigger.setComponent(new TriggerOnceComponent());
