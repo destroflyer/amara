@@ -196,6 +196,10 @@ public class MessagesSerializer{
                         //camps
                         CampHealthResetComponent.class,
                         CampMaximumAggroDistanceComponent.class,
+                        CampRemainingRespawnDurationComponent.class,
+                        CampRespawnDurationComponent.class,
+                        CampSpawnComponent.class,
+                        CampSpawnInformationComponent.class,
                         CampUnionAggroComponent.class,
                         //effects
                         AffectedTargetsComponent.class,
