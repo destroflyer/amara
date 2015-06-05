@@ -53,8 +53,10 @@ public class EffectTriggerUtil{
             }
         }
         if(entityWorld.hasComponent(effectTriggerEntity, CustomTargetComponent.class)){
-            int customTargetEntity = entityWorld.getComponent(effectTriggerEntity, CustomTargetComponent.class).getTargetEntity();
-            affectedTargets.add(customTargetEntity);
+            int[] customTargetEntities = entityWorld.getComponent(effectTriggerEntity, CustomTargetComponent.class).getTargetEntities();
+            for(int customTargetEntity : customTargetEntities){
+                affectedTargets.add(customTargetEntity);
+            }
         }
         effectCast.setComponent(new AffectedTargetsComponent(Util.convertToArray(affectedTargets)));
         if(entityWorld.hasComponent(effectTriggerEntity, TriggerOnceComponent.class)){
