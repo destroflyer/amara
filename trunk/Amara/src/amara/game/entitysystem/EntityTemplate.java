@@ -2653,6 +2653,13 @@ public class EntityTemplate{
             EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "melee_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
         }
+        else if(templateName.equals("testmap_camp_pseudospider")){
+            entityWrapper.setComponent(new PositionComponent(new Vector2f(40 + (parameters[0] * 3), 68 + (parameters[1] * 3))));
+            entityWrapper.setComponent(new DirectionComponent(new Vector2f(0, -1)));
+            entityWrapper.setComponent(new AutoAggroComponent(10));
+            entityWrapper.setComponent(new TeamComponent(0));
+            entityWrapper.setComponent(new BountyComponent(parameters[2]));
+        }
         else if(templateName.equals("tower")){
             entityWrapper.setComponent(new NameComponent("Tower"));
             entityWrapper.setComponent(new ModelComponent("Models/tower/skin.xml"));

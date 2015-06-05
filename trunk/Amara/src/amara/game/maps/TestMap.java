@@ -17,6 +17,7 @@ import amara.game.entitysystem.components.objectives.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.shop.*;
+import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.units.bounties.*;
@@ -87,19 +88,18 @@ public class TestMap extends Map{
         testCamp.setComponent(new CampUnionAggroComponent());
         testCamp.setComponent(new CampMaximumAggroDistanceComponent(10));
         testCamp.setComponent(new CampHealthResetComponent());
+        int[] campSpawnInformationEntities = new int[6];
         for(int x=0;x<3;x++){
             for(int y=0;y<2;y++){
-                EntityWrapper enemy = EntityTemplate.createFromTemplate(entityWorld, "pseudospider");
-                Vector2f position = new Vector2f(40 + (x * 3), 68 + (y * 3));
-                Vector2f direction = new Vector2f(0, -1);
-                enemy.setComponent(new PositionComponent(position));
-                enemy.setComponent(new DirectionComponent(direction));
-                enemy.setComponent(new AutoAggroComponent(10));
-                enemy.setComponent(new TeamComponent(0));
-                enemy.setComponent(new BountyComponent(testCampUnitBounty.getId()));
-                enemy.setComponent(new CampComponent(testCamp.getId(), position, direction));
+                EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
+                spawnInformation.setComponent(new SpawnTemplateComponent("pseudospider", "testmap_camp_pseudospider," + x + "," + y + "," + testCampUnitBounty.getId()));
+                campSpawnInformationEntities[(x * 2) + y] = spawnInformation.getId();
             }
         }
+        testCamp.setComponent(new CampSpawnInformationComponent(campSpawnInformationEntities));
+        testCamp.setComponent(new CampRespawnDurationComponent(5));
+        testCamp.setComponent(new CampSpawnComponent());
+        //Boss
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
         boss.setComponent(new NameComponent("Yalee"));
         boss.setComponent(new DescriptionComponent("Stupid."));

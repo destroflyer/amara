@@ -155,6 +155,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownStunImmuneSystem());
         addEntitySystem(new CountdownKnockupSystem());
         addEntitySystem(new CountdownKnockupImmuneSystem());
+        addEntitySystem(new CountdownCampRespawnSystem());
         addEntitySystem(new CountdownAnimationLoopsSystem());
         addEntitySystem(new CheckOpenObjectivesSystem());
         addEntitySystem(new CheckAggroTargetAttackibilitySystem());
@@ -248,6 +249,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new AggroSystem());
         addEntitySystem(new CheckCampMaximumAggroDistanceSystem());
         addEntitySystem(new CampResetSystem());
+        addEntitySystem(new CheckDeadCampsRespawnSystem());
+        addEntitySystem(new CampSpawnSystem());
         addEntitySystem(new SetIdleAnimationsSystem());
         addEntitySystem(new IntersectionPushSystem(intersectionObserver));
         addEntitySystem(new MapIntersectionSystem(polyMapManager));
