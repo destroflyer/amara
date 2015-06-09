@@ -2660,6 +2660,98 @@ public class EntityTemplate{
             entityWrapper.setComponent(new TeamComponent(0));
             entityWrapper.setComponent(new BountyComponent(parameters[2]));
         }
+        else if(templateName.equals("arama_camp_pseudospider")){
+            Vector2f position = null;
+            Vector2f direction = null;
+            switch(parameters[1]){
+                case 0:
+                    position = new Vector2f(212, 199);
+                    direction = new Vector2f(0, 1);
+                    break;
+                
+                case 1:
+                    position = new Vector2f(217.5f, 204.5f);
+                    direction = new Vector2f(-1, 0);
+                    break;
+            }
+            if(parameters[0] == 1){
+                position.setX(350 - position.getX());
+                direction.setX(-1 * direction.getX());
+            }
+            entityWrapper.setComponent(new PositionComponent(position));
+            entityWrapper.setComponent(new DirectionComponent(direction));
+            entityWrapper.setComponent(new TeamComponent(0));
+            EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
+            bounty.setComponent(new BountyGoldComponent(30));
+            entityWrapper.setComponent(new BountyComponent(bounty.getId()));
+        }
+        else if(templateName.equals("arama_camp_beetle_golem")){
+            Vector2f position = new Vector2f(216.5f, 200);
+            Vector2f direction = new Vector2f(-1, 1);
+            if(parameters[0] == 1){
+                position.setX(350 - position.getX());
+                direction.setX(-1 * direction.getX());
+            }
+            entityWrapper.setComponent(new PositionComponent(position));
+            entityWrapper.setComponent(new DirectionComponent(direction));
+            entityWrapper.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
+            entityWrapper.setComponent(new SetNewTargetSpellsOnCooldownComponent(new int[]{0}, new int[]{6}));
+            entityWrapper.setComponent(new TeamComponent(0));
+            EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
+            bounty.setComponent(new BountyGoldComponent(60));
+            entityWrapper.setComponent(new BountyComponent(bounty.getId()));
+        }
+        else if(templateName.equals("arama_boss")){
+            entityWrapper.setComponent(new NameComponent("Baron Nashor"));
+            entityWrapper.setComponent(new TitleComponent("Baron Nashor"));
+            entityWrapper.setComponent(new ModelComponent("Models/cow/skin_baron.xml"));
+            EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            walkAnimation.setComponent(new NameComponent("walk"));
+            entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+            EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+            autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
+            entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+            
+            entityWrapper.setComponent(new ScaleComponent(2.25f));
+            entityWrapper.setComponent(new HitboxComponent(new Circle(2)));
+            entityWrapper.setComponent(new IntersectionPushComponent());
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            
+            entityWrapper.setComponent(new IsAliveComponent());
+            entityWrapper.setComponent(new BaseMaximumHealthComponent(4000));
+            entityWrapper.setComponent(new BaseHealthRegenerationComponent(40));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(150));
+            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
+            entityWrapper.setComponent(new BaseWalkSpeedComponent(2.5f));
+            entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+            entityWrapper.setComponent(new IsTargetableComponent());
+            entityWrapper.setComponent(new IsVulnerableComponent());
+            
+            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
+            entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
+            
+            EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "bodyslam");
+            entityWrapper.setComponent(new SpellsComponent(new int[]{bodyslam.getId()}));
+            
+            EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
+            bounty.setComponent(new BountyGoldComponent(150));
+            EntityWrapper bountyBuff = entityWorld.getWrapped(entityWorld.createEntity());
+            bountyBuff.setComponent(new BuffVisualisationComponent("baron_nashor"));
+            EntityWrapper bountyBuffEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            bountyBuffEffect.setComponent(new BonusFlatAttackDamageComponent(50));
+            bountyBuffEffect.setComponent(new BonusFlatAbilityPowerComponent(50));
+            bountyBuffEffect.setComponent(new BonusFlatWalkSpeedComponent(0.5f));
+            bountyBuff.setComponent(new ContinuousEffectComponent(bountyBuffEffect.getId()));
+            bounty.setComponent(new BountyBuffComponent(bountyBuff.getId(), 60));
+            entityWrapper.setComponent(new BountyComponent(bounty.getId()));
+        }
+        else if(templateName.equals("arama_camp_boss")){
+            entityWrapper.setComponent(new PositionComponent(new Vector2f(175, 226)));
+            entityWrapper.setComponent(new DirectionComponent(new Vector2f(0, -1)));
+            entityWrapper.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
+            entityWrapper.setComponent(new TeamComponent(0));
+        }
         else if(templateName.equals("tower")){
             entityWrapper.setComponent(new NameComponent("Tower"));
             entityWrapper.setComponent(new ModelComponent("Models/tower/skin.xml"));

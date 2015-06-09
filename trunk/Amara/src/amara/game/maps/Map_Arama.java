@@ -8,8 +8,7 @@ import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.audio.*;
-import amara.game.entitysystem.components.buffs.*;
-import amara.game.entitysystem.components.buffs.status.*;
+import amara.game.entitysystem.components.camps.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.effects.spawns.*;
@@ -22,13 +21,10 @@ import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.shop.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.units.*;
-import amara.game.entitysystem.components.units.animations.*;
-import amara.game.entitysystem.components.units.bounties.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.visuals.*;
-import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
  *
@@ -123,51 +119,33 @@ public class Map_Arama extends Map{
                 spawnTrigger.setComponent(new TriggerDelayComponent(1.25f * r));
             }
         }
+        //Camps
+        for(int i=0;i<2;i++){
+            EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());
+            camp.setComponent(new CampUnionAggroComponent());
+            camp.setComponent(new CampMaximumAggroDistanceComponent(10));
+            camp.setComponent(new CampHealthResetComponent());
+            int[] campSpawnInformationEntities = new int[3];
+            for(int r=0;r<2;r++){
+                EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
+                spawnInformation.setComponent(new SpawnTemplateComponent("pseudospider", "arama_camp_pseudospider," + i + "," + r));
+                campSpawnInformationEntities[r] = spawnInformation.getId();
+            }
+            EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
+            spawnInformation.setComponent(new SpawnTemplateComponent("beetle_golem", "arama_camp_beetle_golem," + i));
+            campSpawnInformationEntities[2] = spawnInformation.getId();
+            camp.setComponent(new CampSpawnInformationComponent(campSpawnInformationEntities));
+            camp.setComponent(new CampRespawnDurationComponent(40));
+            camp.setComponent(new CampSpawnComponent());
+        }
         //Boss
-        EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
-        boss.setComponent(new NameComponent("Baron Nashor"));
-        boss.setComponent(new TitleComponent("Baron Nashor"));
-        boss.setComponent(new ModelComponent("Models/cow/skin_baron.xml"));
-        EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
-        walkAnimation.setComponent(new NameComponent("walk"));
-        boss.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
-        EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
-        autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
-        boss.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
-        boss.setComponent(new ScaleComponent(2.25f));
-        boss.setComponent(new PositionComponent(new Vector2f(175, 226)));
-        boss.setComponent(new DirectionComponent(new Vector2f(0, -1)));
-        boss.setComponent(new HitboxComponent(new Circle(2)));
-        boss.setComponent(new IntersectionPushComponent());
-        boss.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
-        boss.setComponent(new HitboxActiveComponent());
-        boss.setComponent(new IsAliveComponent());
-        boss.setComponent(new BaseMaximumHealthComponent(4000));
-        boss.setComponent(new BaseHealthRegenerationComponent(40));
-        boss.setComponent(new BaseAttackDamageComponent(150));
-        boss.setComponent(new BaseAttackSpeedComponent(0.6f));
-        boss.setComponent(new BaseWalkSpeedComponent(2.5f));
-        boss.setComponent(new RequestUpdateAttributesComponent());
-        boss.setComponent(new IsTargetableComponent());
-        boss.setComponent(new IsVulnerableComponent());
-        EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
-        boss.setComponent(new AutoAttackComponent(autoAttack.getId()));
-        EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "bodyslam");
-        boss.setComponent(new SpellsComponent(new int[]{bodyslam.getId()}));
-        boss.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
-        boss.setComponent(new TeamComponent(0));
-        //Boss Bounty
-        EntityWrapper bossBounty = entityWorld.getWrapped(entityWorld.createEntity());
-        bossBounty.setComponent(new BountyGoldComponent(10));
-        EntityWrapper bossBountyBuff = entityWorld.getWrapped(entityWorld.createEntity());
-        bossBountyBuff.setComponent(new BuffVisualisationComponent("baron_nashor"));
-        EntityWrapper testBountyBuffEffect = entityWorld.getWrapped(entityWorld.createEntity());
-        testBountyBuffEffect.setComponent(new BonusFlatAttackDamageComponent(50));
-        testBountyBuffEffect.setComponent(new BonusFlatAbilityPowerComponent(50));
-        testBountyBuffEffect.setComponent(new BonusFlatWalkSpeedComponent(0.5f));
-        bossBountyBuff.setComponent(new ContinuousEffectComponent(testBountyBuffEffect.getId()));
-        bossBounty.setComponent(new BountyBuffComponent(bossBountyBuff.getId(), 60));
-        boss.setComponent(new BountyComponent(bossBounty.getId()));
+        EntityWrapper bossCamp = entityWorld.getWrapped(entityWorld.createEntity());
+        bossCamp.setComponent(new CampHealthResetComponent());
+        EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
+        spawnInformation.setComponent(new SpawnTemplateComponent("arama_boss", "arama_camp_boss"));
+        bossCamp.setComponent(new CampSpawnInformationComponent(spawnInformation.getId()));
+        bossCamp.setComponent(new CampRespawnDurationComponent(240));
+        bossCamp.setComponent(new CampSpawnComponent());
         //GameObjective
         EntityWrapper gameObjective = entityWorld.getWrapped(entityWorld.createEntity());
         EntityWrapper nexusObjective1 = entityWorld.getWrapped(entityWorld.createEntity());
