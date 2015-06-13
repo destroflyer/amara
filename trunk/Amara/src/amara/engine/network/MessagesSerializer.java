@@ -384,6 +384,7 @@ public class MessagesSerializer{
                         //targets
                         AcceptAlliesComponent.class,
                         AcceptEnemiesComponent.class,
+                        RequireProjectileComponent.class,
                         //units
                         AggroTargetComponent.class,
                         AttackMoveComponent.class,

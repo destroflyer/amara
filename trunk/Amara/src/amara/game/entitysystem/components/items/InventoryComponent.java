@@ -17,7 +17,7 @@ public class InventoryComponent{
         
     }
     
-    public InventoryComponent(int[] itemEntities){
+    public InventoryComponent(int... itemEntities){
         this.itemEntities = itemEntities;
     }
     private int[] itemEntities;

@@ -46,20 +46,26 @@ public class ApplySpawnsSystems implements EntitySystem{
                     }
                     boolean moveToTarget = spawnInformation.hasComponent(SpawnMoveToTargetComponent.class);
                     Vector2f position;
+                    Vector2f direction = null;
+                    Vector2f casterPosition = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
                     if((targetPositionComponent != null) && (!moveToTarget)){
                         position = targetPositionComponent.getPosition().clone();
-                        if(targetDirectionComponent != null){
-                            spawnedObject.setComponent(new DirectionComponent(targetDirectionComponent.getVector().clone()));
-                        }
+                        direction = position.subtract(casterPosition).normalizeLocal();
                     }
                     else{
-                        position = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition().clone();
+                        position = casterPosition.clone();
                     }
                     RelativeSpawnPositionComponent relativeSpawnPositionComponent = spawnInformation.getComponent(RelativeSpawnPositionComponent.class);
                     if(relativeSpawnPositionComponent != null){
                         position.addLocal(relativeSpawnPositionComponent.getPosition());
                     }
                     spawnedObject.setComponent(new PositionComponent(position));
+                    if(targetDirectionComponent != null){
+                        direction = targetDirectionComponent.getVector().clone();
+                    }
+                    if(direction != null){
+                        spawnedObject.setComponent(new DirectionComponent(direction));
+                    }
                     SpawnMovementSpeedComponent spawnMovementSpeedComponent = spawnInformation.getComponent(SpawnMovementSpeedComponent.class);
                     if(spawnMovementSpeedComponent != null){
                         EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
