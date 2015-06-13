@@ -93,7 +93,7 @@ public class EntityTemplate{
             spawnInformation.setComponent(new SpawnTemplateComponent("default_autoattack_projectile", "cloud"));
             spawnInformation.setComponent(new SpawnMoveToTargetComponent());
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(25));
-            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect2.setComponent(new SpawnComponent(spawnInformation.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Play audio
@@ -212,7 +212,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
-            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), doransBlade.getId(), doransBlade.getId(), doransBlade.getId()}));
+            entityWrapper.setComponent(new InventoryComponent(boots.getId(), doransBlade.getId(), doransBlade.getId(), doransBlade.getId()));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
@@ -223,7 +223,7 @@ public class EntityTemplate{
             EntityWrapper nullSphere = createFromTemplate(entityWorld, "null_sphere");
             EntityWrapper riftwalk = createFromTemplate(entityWorld, "riftwalk");
             EntityWrapper ignite = createFromTemplate(entityWorld, "ignite");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{nullSphere.getId(), riftwalk.getId(), ignite.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(nullSphere.getId(), riftwalk.getId(), ignite.getId()));
         }
         else if(templateName.equals("null_sphere")){
             entityWrapper.setComponent(new NameComponent("Null Sphere"));
@@ -254,7 +254,7 @@ public class EntityTemplate{
             spawnInformation.setComponent(new SpawnTemplateComponent("null_sphere_projectile"));
             spawnInformation.setComponent(new SpawnMoveToTargetComponent());
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(25));
-            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect2.setComponent(new SpawnComponent(spawnInformation.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             effectTrigger2.setComponent(new TriggerDelayComponent(delay));
@@ -410,7 +410,7 @@ public class EntityTemplate{
             EntityWrapper doransRing = createFromTemplate(entityWorld, "dorans_ring");
             EntityWrapper needlesslyLargeRod = createFromTemplate(entityWorld, "needlessly_large_rod");
             EntityWrapper dagger = createFromTemplate(entityWorld, "dagger");
-            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), doransBlade.getId(), doransRing.getId(), needlesslyLargeRod.getId(), dagger.getId(), dagger.getId()}));
+            entityWrapper.setComponent(new InventoryComponent(boots.getId(), doransBlade.getId(), doransRing.getId(), needlesslyLargeRod.getId(), dagger.getId(), dagger.getId()));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
@@ -422,7 +422,7 @@ public class EntityTemplate{
             EntityWrapper sear = createFromTemplate(entityWorld, "sear");
             EntityWrapper pillarOfFlame = createFromTemplate(entityWorld, "pillar_of_flame");
             EntityWrapper battleCry = createFromTemplate(entityWorld, "battle_cry");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{sear.getId(), pillarOfFlame.getId(), battleCry.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(sear.getId(), pillarOfFlame.getId(), battleCry.getId()));
         }
         else if(templateName.equals("sear")){
             entityWrapper.setComponent(new NameComponent("Sear"));
@@ -447,7 +447,7 @@ public class EntityTemplate{
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("sear_projectile"));
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(10));
-            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect2.setComponent(new SpawnComponent(spawnInformation.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Play audio
@@ -514,7 +514,7 @@ public class EntityTemplate{
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("pillar_of_flame_object"));
-            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect2.setComponent(new SpawnComponent(spawnInformation.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Play audio
@@ -618,7 +618,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseMagicResistanceComponent(30));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
-            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId()}));
+            entityWrapper.setComponent(new InventoryComponent(boots.getId()));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new HealthComponent(500));
             entityWrapper.setComponent(new IsAliveComponent());
@@ -632,7 +632,7 @@ public class EntityTemplate{
             EntityWrapper astralBlessing = createFromTemplate(entityWorld, "astral_blessing");
             EntityWrapper sonicWave = createFromTemplate(entityWorld, "sonic_wave," + 2);
             EntityWrapper wither = createFromTemplate(entityWorld, "wither");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{grab.getId(), astralBlessing.getId(), sonicWave.getId(), wither.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(grab.getId(), astralBlessing.getId(), sonicWave.getId(), wither.getId()));
         }
         else if(templateName.equals("grab")){
             entityWrapper.setComponent(new NameComponent("Grab"));
@@ -658,7 +658,7 @@ public class EntityTemplate{
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("grab_projectile," + parameters[0]));
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(12));
-            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect2.setComponent(new SpawnComponent(spawnInformation.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Play audio
@@ -774,7 +774,7 @@ public class EntityTemplate{
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("sonic_wave_projectile"));
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(17));
-            effect4.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect4.setComponent(new SpawnComponent(spawnInformation.getId()));
             effectTrigger4.setComponent(new TriggeredEffectComponent(effect4.getId()));
             effectTrigger4.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger4.getId()));
@@ -940,7 +940,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper zhonyasHourglass = createFromTemplate(entityWorld, "zhonyas_hourglass");
-            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), zhonyasHourglass.getId()}));
+            entityWrapper.setComponent(new InventoryComponent(boots.getId(), zhonyasHourglass.getId()));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
@@ -952,7 +952,7 @@ public class EntityTemplate{
             EntityWrapper intervention = createFromTemplate(entityWorld, "intervention," + entityWrapper.getId());
             EntityWrapper lunarRush = createFromTemplate(entityWorld, "lunar_rush");
             EntityWrapper dragonsRage = createFromTemplate(entityWorld, "dragons_rage");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{sonicWave.getId(), intervention.getId(), lunarRush.getId(), dragonsRage.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(sonicWave.getId(), intervention.getId(), lunarRush.getId(), dragonsRage.getId()));
         }
         else if(templateName.equals("intervention")){
             entityWrapper.setComponent(new NameComponent("Intervention"));
@@ -1151,7 +1151,7 @@ public class EntityTemplate{
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
             EntityWrapper dagger = createFromTemplate(entityWorld, "dagger");
-            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), doransBlade.getId(), dagger.getId()}));
+            entityWrapper.setComponent(new InventoryComponent(boots.getId(), doransBlade.getId(), dagger.getId()));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
@@ -1163,7 +1163,7 @@ public class EntityTemplate{
             EntityWrapper empower = createFromTemplate(entityWorld, "empower");
             EntityWrapper spinningSlash = createFromTemplate(entityWorld, "spinning_slash");
             EntityWrapper bearStance = createFromTemplate(entityWorld, "bear_stance");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{leapStrike.getId(), empower.getId(), spinningSlash.getId(), bearStance.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(leapStrike.getId(), empower.getId(), spinningSlash.getId(), bearStance.getId()));
         }
         else if(templateName.equals("leap_strike")){
             entityWrapper.setComponent(new NameComponent("Leap Strike"));
@@ -1367,7 +1367,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransRing = createFromTemplate(entityWorld, "dorans_ring");
-            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), doransRing.getId()}));
+            entityWrapper.setComponent(new InventoryComponent(boots.getId(), doransRing.getId()));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new HealthComponent(400));
             entityWrapper.setComponent(new IsAliveComponent());
@@ -1381,7 +1381,7 @@ public class EntityTemplate{
             EntityWrapper burningAgony = createFromTemplate(entityWorld, "burning_agony," + 1);
             EntityWrapper eventHorizon = createFromTemplate(entityWorld, "event_horizon");
             EntityWrapper sadism = createFromTemplate(entityWorld, "sadism");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{infectedCleaver.getId(), burningAgony.getId(), eventHorizon.getId(), sadism.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(infectedCleaver.getId(), burningAgony.getId(), eventHorizon.getId(), sadism.getId()));
         }
         else if(templateName.equals("infected_cleaver")){
             entityWrapper.setComponent(new NameComponent("Infected Cleaver"));
@@ -1408,7 +1408,7 @@ public class EntityTemplate{
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("infected_cleaver_object"));
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(17));
-            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect2.setComponent(new SpawnComponent(spawnInformation.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Play audio
@@ -1571,7 +1571,7 @@ public class EntityTemplate{
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("event_horizon_object"));
-            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect2.setComponent(new SpawnComponent(spawnInformation.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger2.getId()));
@@ -1689,7 +1689,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseWalkSpeedComponent(4.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper youmuusGhostblade = createFromTemplate(entityWorld, "youmuus_ghostblade");
-            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), youmuusGhostblade.getId()}));
+            entityWrapper.setComponent(new InventoryComponent(boots.getId(), youmuusGhostblade.getId()));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
@@ -1734,7 +1734,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseWalkSpeedComponent(4.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper youmuusGhostblade = createFromTemplate(entityWorld, "youmuus_ghostblade");
-            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), youmuusGhostblade.getId()}));
+            entityWrapper.setComponent(new InventoryComponent(boots.getId(), youmuusGhostblade.getId()));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
@@ -1746,7 +1746,7 @@ public class EntityTemplate{
             EntityWrapper headbutt = createFromTemplate(entityWorld, "headbutt");
             EntityWrapper slap = createFromTemplate(entityWorld, "slap");
             EntityWrapper unstoppableForce = createFromTemplate(entityWorld, "unstoppable_force");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{pulverize.getId(), headbutt.getId(), slap.getId(), unstoppableForce.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(pulverize.getId(), headbutt.getId(), slap.getId(), unstoppableForce.getId()));
         }
         else if(templateName.equals("pulverize")){
             entityWrapper.setComponent(new NameComponent("Pulverize"));
@@ -1772,7 +1772,7 @@ public class EntityTemplate{
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("pulverize_object"));
-            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect2.setComponent(new SpawnComponent(spawnInformation.getId()));
             EntityWrapper audioCast = entityWorld.getWrapped(entityWorld.createEntity());
             audioCast.setComponent(new AudioComponent("Sounds/sounds/spells/pulverize_hit.ogg"));
             audioCast.setComponent(new AudioVolumeComponent(1));
@@ -1969,7 +1969,7 @@ public class EntityTemplate{
             EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("unstoppable_force_object," + entityWrapper.getId()));
-            effect3.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect3.setComponent(new SpawnComponent(spawnInformation.getId()));
             effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
             effectTrigger3.setComponent(new TriggerOnceComponent());
             //Reactivate hitbox
@@ -2056,7 +2056,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper doransBlade = createFromTemplate(entityWorld, "dorans_blade");
-            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), doransBlade.getId()}));
+            entityWrapper.setComponent(new InventoryComponent(boots.getId(), doransBlade.getId()));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
@@ -2066,7 +2066,8 @@ public class EntityTemplate{
 
             EntityWrapper bubbleGun = createFromTemplate(entityWorld, "bubble_gun");
             EntityWrapper saplingToss = createFromTemplate(entityWorld, "sapling_toss");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{-1, bubbleGun.getId(), saplingToss.getId()}));
+            EntityWrapper glassWall = createFromTemplate(entityWorld, "glass_wall");
+            entityWrapper.setComponent(new SpellsComponent(-1, bubbleGun.getId(), saplingToss.getId(), glassWall.getId()));
         }
         else if(templateName.equals("bubble_gun")){
             entityWrapper.setComponent(new NameComponent("BubbleGun"));
@@ -2157,7 +2158,7 @@ public class EntityTemplate{
             movementAnimation.setComponent(new NameComponent("walk"));
             movementAnimation.setComponent(new LoopDurationComponent(1));
             spawnInformation.setComponent(new SpawnMovementAnimationComponent(movementAnimation.getId()));
-            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect2.setComponent(new SpawnComponent(spawnInformation.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Play audio
@@ -2234,6 +2235,57 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAggroComponent(12));
             entityWrapper.setComponent(new LifetimeComponent(30));
         }
+        else if(templateName.equals("glass_wall")){
+            entityWrapper.setComponent(new NameComponent("Glass Wall"));
+            entityWrapper.setComponent(new SpellVisualisationComponent("glass_wall"));
+            //Spawn object
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
+            spawnInformation.setComponent(new SpawnTemplateComponent("glass_wall_object"));
+            spawnInformation.setComponent(new SpawnMovementSpeedComponent(1.5f));
+            effect1.setComponent(new SpawnComponent(spawnInformation.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            //Play audio
+            EntityWrapper effectTrigger2 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger2.setComponent(new TargetTargetComponent());
+            EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper audioCast = entityWorld.getWrapped(entityWorld.createEntity());
+            audioCast.setComponent(new AudioComponent("Sounds/sounds/spells/glass_wall_cast.ogg"));
+            audioCast.setComponent(new AudioVolumeComponent(0.75f));
+            effect2.setComponent(new PlayAudioComponent(audioCast.getId()));
+            effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
+            effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTrigger1.getId(), effectTrigger2.getId()));
+            entityWrapper.setComponent(new CastTypeComponent(CastTypeComponent.CastType.LINEAR_SKILLSHOT));
+            entityWrapper.setComponent(new CastTurnToTargetComponent());
+            entityWrapper.setComponent(new BaseCooldownComponent(20));
+        }
+        else if(templateName.equals("glass_wall_object")){
+            entityWrapper.setComponent(new ModelComponent("Models/syfi_glass_wall/skin.xml"));
+            entityWrapper.setComponent(new HitboxComponent(new Rectangle(0.75f, 9.5f)));
+            entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_SPELLS, CollisionGroupComponent.COLLISION_GROUP_SPELLS));
+            entityWrapper.setComponent(new HitboxActiveComponent());
+            EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
+            targetRules.setComponent(new RequireProjectileComponent());
+            targetRules.setComponent(new AcceptEnemiesComponent());
+            entityWrapper.setComponent(new IntersectionRulesComponent(targetRules.getId()));
+            //Remove projectile
+            EntityWrapper effectTrigger1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effectTrigger1.setComponent(new CollisionTriggerComponent());
+            effectTrigger1.setComponent(new TargetTargetComponent());
+            EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
+            effect1.setComponent(new RemoveEntityComponent());
+            EntityWrapper audioBlock = entityWorld.getWrapped(entityWorld.createEntity());
+            audioBlock.setComponent(new AudioComponent("Sounds/sounds/spells/glass_wall_block.ogg"));
+            audioBlock.setComponent(new AudioVolumeComponent(0.75f));
+            effect1.setComponent(new PlayAudioComponent(audioBlock.getId()));
+            effectTrigger1.setComponent(new TriggeredEffectComponent(effect1.getId()));
+            effectTrigger1.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+            entityWrapper.setComponent(new LifetimeComponent(3.75f));
+        }
         else if(templateName.equals("eragon")){
             entityWrapper.setComponent(new NameComponent("Eragon"));
             entityWrapper.setComponent(new ModelComponent("Models/little_dragon/skin_default.xml"));
@@ -2264,7 +2316,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BaseWalkSpeedComponent(5.5f));
             EntityWrapper boots = createFromTemplate(entityWorld, "boots");
             EntityWrapper needlesslyLargeRod = createFromTemplate(entityWorld, "needlessly_large_rod");
-            entityWrapper.setComponent(new InventoryComponent(new int[]{boots.getId(), needlesslyLargeRod.getId()}));
+            entityWrapper.setComponent(new InventoryComponent(boots.getId(), needlesslyLargeRod.getId()));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
@@ -2273,7 +2325,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
 
             EntityWrapper sear = createFromTemplate(entityWorld, "sear");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{sear.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(sear.getId()));
         }
         else if(templateName.equals("bodyslam")){
             entityWrapper.setComponent(new NameComponent("Bodyslam"));
@@ -2293,7 +2345,7 @@ public class EntityTemplate{
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
             spawnInformation.setComponent(new SpawnTemplateComponent("bodyslam_object"));
-            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect2.setComponent(new SpawnComponent(spawnInformation.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             effectTrigger2.setComponent(new TriggerDelayComponent(1.1f));
@@ -2442,7 +2494,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
 
             EntityWrapper sleep = createFromTemplate(entityWorld, "beetle_golem_sleep");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{sleep.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(sleep.getId()));
         }
         else if(templateName.equals("beetle_golem_sleep")){
             entityWrapper.setComponent(new NameComponent("Sleep"));
@@ -2542,7 +2594,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
 
             EntityWrapper powerball = createFromTemplate(entityWorld, "powerball");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{powerball.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(powerball.getId()));
         }
         else if(templateName.equals("powerball")){
             entityWrapper.setComponent(new NameComponent("Powerball"));
@@ -2732,7 +2784,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             
             EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "bodyslam");
-            entityWrapper.setComponent(new SpellsComponent(new int[]{bodyslam.getId()}));
+            entityWrapper.setComponent(new SpellsComponent(bodyslam.getId()));
             
             EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
             bounty.setComponent(new BountyGoldComponent(150));
@@ -2791,7 +2843,7 @@ public class EntityTemplate{
             spawnInformation.setComponent(new SpawnTemplateComponent("tower_shot_projectile"));
             spawnInformation.setComponent(new SpawnMoveToTargetComponent());
             spawnInformation.setComponent(new SpawnMovementSpeedComponent(18));
-            effect2.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+            effect2.setComponent(new SpawnComponent(spawnInformation.getId()));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Play audio
