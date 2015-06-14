@@ -19,7 +19,7 @@ public class ApplyActivateHitboxSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ActivateHitboxComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             entityWorld.setComponent(targetID, new HitboxActiveComponent());
         }
     }

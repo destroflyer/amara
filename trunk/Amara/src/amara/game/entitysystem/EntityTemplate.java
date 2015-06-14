@@ -44,6 +44,7 @@ import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
+import amara.game.entitysystem.templates.XMLTemplateManager;
 
 
 /**
@@ -72,6 +73,7 @@ public class EntityTemplate{
         for(int i=0;i<parameters.length;i++){
             parameters[i] = Integer.parseInt(parts[i + 1]);
         }
+        XMLTemplateManager.getInstance().loadTemplate(entityWorld, entity, templateName);
         if(templateName.equals("default_autoattack")){
             entityWrapper.setComponent(new NameComponent("Ranged Autoattack"));
             //Damage target
@@ -178,7 +180,7 @@ public class EntityTemplate{
         else if(templateName.equals("cloud")){
             entityWrapper.setComponent(new ModelComponent("Models/cloud/skin.xml"));
         }
-        else if(templateName.equals("minion")){
+        /*else if(templateName.equals("minion")){
             entityWrapper.setComponent(new NameComponent("Minion"));
             entityWrapper.setComponent(new ModelComponent("Models/minion/skin_default.xml"));
             EntityWrapper danceAnimation = entityWorld.getWrapped(entityWorld.createEntity());
@@ -380,7 +382,7 @@ public class EntityTemplate{
             EntityWrapper targetRules = entityWorld.getWrapped(entityWorld.createEntity());
             targetRules.setComponent(new AcceptEnemiesComponent());
             entityWrapper.setComponent(new SpellTargetRulesComponent(targetRules.getId()));
-        }
+        }*/
         else if(templateName.equals("wizard")){
             entityWrapper.setComponent(new NameComponent("Wizard"));
             entityWrapper.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));
@@ -1490,7 +1492,7 @@ public class EntityTemplate{
             EntityWrapper effect2 = entityWorld.getWrapped(entityWorld.createEntity());
             EntityWrapper visualisationBuff = entityWorld.getWrapped(entityWorld.createEntity());
             visualisationBuff.setComponent(new BuffVisualisationComponent("burning"));
-            effect2.setComponent(new AddBuffComponent(visualisationBuff.getId()));
+            effect2.setComponent(new AddBuffComponent(visualisationBuff.getId(), -1));
             effectTrigger2.setComponent(new TriggeredEffectComponent(effect2.getId()));
             effectTrigger2.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
             //Replace spell

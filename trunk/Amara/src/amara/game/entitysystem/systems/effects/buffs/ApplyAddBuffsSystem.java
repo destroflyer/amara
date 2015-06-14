@@ -21,7 +21,7 @@ public class ApplyAddBuffsSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddBuffComponent.class)))
         {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             AddBuffComponent addBuffComponent = entityWrapper.getComponent(AddBuffComponent.class);
             int buffStatusEntity = addBuff(entityWorld, targetEntity, addBuffComponent.getBuffEntity(), addBuffComponent.getDuration());
             EntityUtil.transferComponents(entityWorld, entityWrapper.getId(), buffStatusEntity, new Class[]{

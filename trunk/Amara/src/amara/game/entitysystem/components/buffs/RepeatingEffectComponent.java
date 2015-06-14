@@ -17,15 +17,15 @@ public class RepeatingEffectComponent{
         
     }
     
-    public RepeatingEffectComponent(int effectEntityID, float interval){
-        this.effectEntityID = effectEntityID;
+    public RepeatingEffectComponent(int effectEntity, float interval){
+        this.effectEntity = effectEntity;
         this.interval = interval;
     }
-    private int effectEntityID;
+    private int effectEntity;
     private float interval;
 
-    public int getEffectEntityID(){
-        return effectEntityID;
+    public int getEffectEntity(){
+        return effectEntity;
     }
 
     public float getInterval(){

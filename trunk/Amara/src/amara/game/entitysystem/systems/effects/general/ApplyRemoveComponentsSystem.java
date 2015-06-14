@@ -17,7 +17,7 @@ public class ApplyRemoveComponentsSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, RemoveComponentsComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             for(String componentClassName : entityWrapper.getComponent(RemoveComponentsComponent.class).getComponentsClassesNames()){
                 try{
                     entityWorld.removeComponent(targetID, Class.forName(componentClassName));

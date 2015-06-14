@@ -19,7 +19,7 @@ public class ApplyAddKnockupImmuneSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddKnockupImmuneComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             AddKnockupImmuneComponent addKnockupImmuneComponent = entityWrapper.getComponent(AddKnockupImmuneComponent.class);
             IsKnockupedImmuneComponent isKnockupedImmuneComponent = entityWorld.getComponent(targetID, IsKnockupedImmuneComponent.class);
             if((isKnockupedImmuneComponent == null) || (addKnockupImmuneComponent.getDuration() > isKnockupedImmuneComponent.getRemainingDuration())){

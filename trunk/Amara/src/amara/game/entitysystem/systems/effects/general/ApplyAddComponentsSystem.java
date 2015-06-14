@@ -18,7 +18,7 @@ public class ApplyAddComponentsSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddComponentsComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             for(Object component : entityWrapper.getComponent(AddComponentsComponent.class).getComponents()){
                 entityWorld.setComponent(targetID, component);
             }

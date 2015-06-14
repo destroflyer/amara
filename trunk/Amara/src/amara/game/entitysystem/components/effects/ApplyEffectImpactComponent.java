@@ -17,12 +17,12 @@ public class ApplyEffectImpactComponent{
         
     }
     
-    public ApplyEffectImpactComponent(int targetEntityID){
-        this.targetEntityID = targetEntityID;
+    public ApplyEffectImpactComponent(int targetEntity){
+        this.targetEntity = targetEntity;
     }
-    private int targetEntityID;
+    private int targetEntity;
 
-    public int getTargetID(){
-        return targetEntityID;
+    public int getTargetEntity(){
+        return targetEntity;
     }
 }

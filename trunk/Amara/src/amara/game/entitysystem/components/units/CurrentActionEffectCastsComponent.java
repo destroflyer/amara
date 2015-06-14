@@ -17,7 +17,7 @@ public class CurrentActionEffectCastsComponent{
         
     }
     
-    public CurrentActionEffectCastsComponent(int[] effectCastEntities){
+    public CurrentActionEffectCastsComponent(int... effectCastEntities){
         this.effectCastEntities = effectCastEntities;
     }
     private int[] effectCastEntities;

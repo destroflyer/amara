@@ -19,7 +19,7 @@ public class ApplyReplaceSpellsWithExistingSpellsSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ReplaceSpellWithExistingSpellComponent.class)))
         {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             ReplaceSpellWithExistingSpellComponent replaceSpellWithExistingSpellComponent = entityWrapper.getComponent(ReplaceSpellWithExistingSpellComponent.class);
             SpellsComponent spellsComponent = entityWorld.getComponent(targetEntity, SpellsComponent.class);
             if(spellsComponent != null){

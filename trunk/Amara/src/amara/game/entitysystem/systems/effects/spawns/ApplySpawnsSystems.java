@@ -24,7 +24,7 @@ public class ApplySpawnsSystems implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, SpawnComponent.class)))
         {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             PositionComponent targetPositionComponent = null;
             DirectionComponent targetDirectionComponent = null;
             if(targetEntity != -1){

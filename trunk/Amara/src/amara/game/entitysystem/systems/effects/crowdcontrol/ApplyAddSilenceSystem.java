@@ -19,7 +19,7 @@ public class ApplyAddSilenceSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddSilenceComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             if(!entityWorld.hasComponent(targetID, IsSilencedImmuneComponent.class)){
                 AddSilenceComponent addSilenceComponent = entityWrapper.getComponent(AddSilenceComponent.class);
                 IsSilencedComponent isSilencedComponent = entityWorld.getComponent(targetID, IsSilencedComponent.class);

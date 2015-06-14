@@ -19,7 +19,7 @@ public class ApplyAddEffectTriggersSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddEffectTriggersComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             for(int effectTriggerEntity : entityWrapper.getComponent(AddEffectTriggersComponent.class).getEffectTriggerEntities()){
                 entityWorld.setComponent(effectTriggerEntity, new TriggerSourceComponent(targetID));
             }

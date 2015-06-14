@@ -19,7 +19,7 @@ public class ApplyAddBindingImmuneSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddBindingImmuneComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             AddBindingImmuneComponent addBindingImmuneComponent = entityWrapper.getComponent(AddBindingImmuneComponent.class);
             IsBindedImmuneComponent isBindedImmuneComponent = entityWorld.getComponent(targetID, IsBindedImmuneComponent.class);
             if((isBindedImmuneComponent == null) || (addBindingImmuneComponent.getDuration() > isBindedImmuneComponent.getRemainingDuration())){

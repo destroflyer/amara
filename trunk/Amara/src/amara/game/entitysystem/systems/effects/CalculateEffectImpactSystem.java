@@ -37,13 +37,13 @@ public class CalculateEffectImpactSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(PrepareEffectComponent.class))){
             if(!entityWrapper.hasComponent(RemainingEffectDelayComponent.class)){
-                EntityWrapper effect = entityWorld.getWrapped(entityWrapper.getComponent(PrepareEffectComponent.class).getEffectEntityID());
+                EntityWrapper effect = entityWorld.getWrapped(entityWrapper.getComponent(PrepareEffectComponent.class).getEffectEntity());
                 EffectCastSourceComponent effectCastSourceComponent = entityWrapper.getComponent(EffectCastSourceComponent.class);
                 EffectCastSourceSpellComponent effectCastSourceSpellComponent = entityWrapper.getComponent(EffectCastSourceSpellComponent.class);
                 EffectCastTargetComponent effectCastTargetComponent = entityWrapper.getComponent(EffectCastTargetComponent.class);
-                int[] affectedTargetEntitesIDs = entityWrapper.getComponent(AffectedTargetsComponent.class).getTargetEntitiesIDs();
-                for(int i=0;i<affectedTargetEntitesIDs.length;i++){
-                    EntityWrapper targetEntity = entityWorld.getWrapped(affectedTargetEntitesIDs[i]);
+                int[] affectedTargetEntities = entityWrapper.getComponent(AffectedTargetsComponent.class).getTargetEntities();
+                for(int i=0;i<affectedTargetEntities.length;i++){
+                    EntityWrapper targetEntity = entityWorld.getWrapped(affectedTargetEntities[i]);
                     EntityWrapper effectImpact = entityWorld.getWrapped(entityWorld.createEntity());
                     float physicalDamage = 0;
                     float magicDamage = 0;

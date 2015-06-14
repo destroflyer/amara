@@ -1,0 +1,61 @@
+<template>
+    <entity id="spell">
+        <name>Riftwalk</name>
+        <description>Teleports to the target location.</description>
+        <spellVisualisation>riftwalk</spellVisualisation>
+        <instantEffectTriggers>
+            <!--triggerSpellEffect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>0.25</triggerDelay>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/riftwalk_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>positional_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>0.5</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>pop</name>
+                <loopDuration>0.5</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>6</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--teleport-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <teleportToTargetPosition/>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

@@ -1,0 +1,62 @@
+<template>
+    <entity>
+        <name>Minion</name>
+        <!--model-->
+        <model>Models/minion/skin_default.xml</model>
+        <animation>
+            <entity>
+                <name>dance</name>
+                <loopDuration>2.66</loopDuration>
+            </entity>
+        </animation>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>auto_attack</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>death</name>
+                <loopDuration>1</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <!--physics-->
+        <hitbox>
+            <regularCyclic edges="6" radius="2"/>
+        </hitbox>
+        <scale>0.75</scale>
+        <intersectionPush/>
+        <collisionGroup group="units" collidesWith="map|units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseMaximumHealth>300</baseMaximumHealth>
+        <baseAttackDamage>30</baseAttackDamage>
+        <baseAttackSpeed>0.7</baseAttackSpeed>
+        <baseArmor>25</baseArmor>
+        <baseMagicResistance>30</baseMagicResistance>
+        <baseWalkSpeed>5</baseWalkSpeed>
+        <inventory>
+            <entity template="boots"/>
+            <entity template="dorans_blade"/>
+        </inventory>
+        <requestUpdateAttributes/>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="default_autoattack"/>
+        </autoAttack>
+        <spells>
+            <entity template="null_sphere"/>
+            <entity template="riftwalk"/>
+            <entity template="ignite"/>
+        </spells>
+    </entity>
+</template>

@@ -20,7 +20,7 @@ public class ApplyTeleportSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, TeleportComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             int targetPositionEntity = entityWrapper.getComponent(TeleportComponent.class).getTargetEntity();
             Vector2f targetPosition = entityWorld.getComponent(targetPositionEntity, PositionComponent.class).getPosition();
             entityWorld.setComponent(targetID, new PositionComponent(targetPosition.clone()));
