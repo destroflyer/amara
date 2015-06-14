@@ -17,12 +17,12 @@ public class ContinuousEffectComponent{
         
     }
     
-    public ContinuousEffectComponent(int effectEntityID){
-        this.effectEntityID = effectEntityID;
+    public ContinuousEffectComponent(int effectEntity){
+        this.effectEntity = effectEntity;
     }
-    private int effectEntityID;
+    private int effectEntity;
 
-    public int getEffectEntityID(){
-        return effectEntityID;
+    public int getEffectEntity(){
+        return effectEntity;
     }
 }

@@ -17,12 +17,12 @@ public class AffectedTargetsComponent{
         
     }
     
-    public AffectedTargetsComponent(int[] targetEntitiesIDs){
-        this.targetEntitiesIDs = targetEntitiesIDs;
+    public AffectedTargetsComponent(int... targetEntities){
+        this.targetEntities = targetEntities;
     }
-    private int[] targetEntitiesIDs;
+    private int[] targetEntities;
 
-    public int[] getTargetEntitiesIDs(){
-        return targetEntitiesIDs;
+    public int[] getTargetEntities(){
+        return targetEntities;
     }
 }

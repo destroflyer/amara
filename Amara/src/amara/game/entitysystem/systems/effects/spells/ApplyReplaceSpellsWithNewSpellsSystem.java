@@ -19,7 +19,7 @@ public class ApplyReplaceSpellsWithNewSpellsSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ReplaceSpellWithNewSpellComponent.class)))
         {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             ReplaceSpellWithNewSpellComponent replaceSpellWithNewSpellComponent = entityWrapper.getComponent(ReplaceSpellWithNewSpellComponent.class);
             EntityWrapper newSpell = EntityTemplate.createFromTemplate(entityWorld, replaceSpellWithNewSpellComponent.getNewSpellTemplate());
             int[] spellsEntities = entityWorld.getComponent(targetEntity, SpellsComponent.class).getSpellsEntities();

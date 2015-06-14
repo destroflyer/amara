@@ -17,12 +17,12 @@ public class PrepareEffectComponent{
         
     }
     
-    public PrepareEffectComponent(int effectEntityID){
-        this.effectEntityID = effectEntityID;
+    public PrepareEffectComponent(int effectEntity){
+        this.effectEntity = effectEntity;
     }
-    private int effectEntityID;
+    private int effectEntity;
 
-    public int getEffectEntityID(){
-        return effectEntityID;
+    public int getEffectEntity(){
+        return effectEntity;
     }
 }

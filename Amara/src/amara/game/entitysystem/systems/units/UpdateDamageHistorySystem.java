@@ -51,7 +51,7 @@ public class UpdateDamageHistorySystem implements EntitySystem{
     }
     
     private void onDamageTaken(EntityWorld entityWorld, int effectImpactEntity, DamageHistoryComponent.DamageType damageType){
-        int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetID();
+        int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
         float damage = -1;
         switch(damageType){
             case PHYSICAL:

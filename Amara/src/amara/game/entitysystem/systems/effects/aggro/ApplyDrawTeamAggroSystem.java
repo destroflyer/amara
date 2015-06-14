@@ -24,7 +24,7 @@ public class ApplyDrawTeamAggroSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper effectImpact : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, DrawTeamAggroComponent.class)))
         {
-            int targetEntity = effectImpact.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetEntity = effectImpact.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             EffectCastSourceComponent effectCastSourceComponent = effectImpact.getComponent(EffectCastSourceComponent.class);
             if((effectCastSourceComponent != null) && UnitUtil.isPlayerUnit(entityWorld, targetEntity)){
                 int targetTeamEntity = entityWorld.getComponent(targetEntity, TeamComponent.class).getTeamEntity();

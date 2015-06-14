@@ -26,7 +26,7 @@ public class DrawAggroOnDamageSystem implements EntitySystem{
     }
     
     private void drawAggro(EntityWorld entityWorld, int effectImpactEntity){
-        int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetID();
+        int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
         EffectCastSourceComponent effectCastSourceComponent = entityWorld.getComponent(effectImpactEntity, EffectCastSourceComponent.class);
         if(effectCastSourceComponent != null){
             AggroUtil.tryDrawAggro(entityWorld, targetEntity, effectCastSourceComponent.getSourceEntity());

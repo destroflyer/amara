@@ -20,7 +20,7 @@ public class ApplyAddStunSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddStunComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             if(!entityWorld.hasComponent(targetID, IsStunnedImmuneComponent.class)){
                 AddStunComponent addStunComponent = entityWrapper.getComponent(AddStunComponent.class);
                 IsStunnedComponent isStunnedComponent = entityWorld.getComponent(targetID, IsStunnedComponent.class);

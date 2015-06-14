@@ -20,7 +20,7 @@ public class ApplyAddBindingSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddBindingComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             if(!entityWorld.hasComponent(targetID, IsBindedImmuneComponent.class)){
                 AddBindingComponent addBindingComponent = entityWrapper.getComponent(AddBindingComponent.class);
                 IsBindedComponent isBindedComponent = entityWorld.getComponent(targetID, IsBindedComponent.class);

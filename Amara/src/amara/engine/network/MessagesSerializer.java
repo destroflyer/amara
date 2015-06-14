@@ -12,57 +12,14 @@ import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.messages.*;
 import amara.engine.network.messages.entitysystem.*;
 import amara.engine.network.messages.protocol.*;
-import amara.game.entitysystem.components.attributes.*;
-import amara.game.entitysystem.components.audio.*;
-import amara.game.entitysystem.components.buffs.*;
-import amara.game.entitysystem.components.buffs.areas.*;
-import amara.game.entitysystem.components.buffs.status.*;
-import amara.game.entitysystem.components.camps.*;
-import amara.game.entitysystem.components.effects.*;
-import amara.game.entitysystem.components.effects.aggro.*;
-import amara.game.entitysystem.components.effects.audio.*;
-import amara.game.entitysystem.components.effects.buffs.*;
-import amara.game.entitysystem.components.effects.buffs.areas.*;
-import amara.game.entitysystem.components.effects.casts.*;
-import amara.game.entitysystem.components.effects.crowdcontrol.*;
-import amara.game.entitysystem.components.effects.crowdcontrol.knockup.*;
-import amara.game.entitysystem.components.effects.damage.*;
-import amara.game.entitysystem.components.effects.game.*;
-import amara.game.entitysystem.components.effects.general.*;
-import amara.game.entitysystem.components.effects.heals.*;
-import amara.game.entitysystem.components.effects.movement.*;
-import amara.game.entitysystem.components.effects.physics.*;
-import amara.game.entitysystem.components.effects.spawns.*;
-import amara.game.entitysystem.components.effects.spells.*;
-import amara.game.entitysystem.components.effects.visuals.*;
-import amara.game.entitysystem.components.game.*;
-import amara.game.entitysystem.components.general.*;
-import amara.game.entitysystem.components.input.*;
-import amara.game.entitysystem.components.items.*;
-import amara.game.entitysystem.components.maps.*;
-import amara.game.entitysystem.components.maps.playerdeathrules.*;
-import amara.game.entitysystem.components.movements.*;
-import amara.game.entitysystem.components.objectives.*;
 import amara.game.entitysystem.components.physics.*;
-import amara.game.entitysystem.components.players.*;
-import amara.game.entitysystem.components.shop.*;
-import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
-import amara.game.entitysystem.components.spells.placeholders.*;
-import amara.game.entitysystem.components.spells.triggers.*;
-import amara.game.entitysystem.components.targets.*;
 import amara.game.entitysystem.components.units.*;
-import amara.game.entitysystem.components.units.animations.*;
-import amara.game.entitysystem.components.units.bounties.*;
-import amara.game.entitysystem.components.units.crowdcontrol.*;
-import amara.game.entitysystem.components.units.effecttriggers.*;
-import amara.game.entitysystem.components.units.effecttriggers.targets.*;
-import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
-import amara.game.entitysystem.components.visuals.*;
-import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.synchronizing.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
+import amara.game.entitysystem.templates.*;
+import org.jdom.Element;
 
 /**
  *
@@ -139,327 +96,23 @@ public class MessagesSerializer{
             Message_EntityChanges.class,
                 EntityChange.class,
                     NewComponentChange.class,
-                        //attributes
-                        AbilityPowerComponent.class,
-                        ArmorComponent.class,
-                        AttackDamageComponent.class,
-                        AttackSpeedComponent.class,
-                        BaseAbilityPowerComponent.class,
-                        BaseArmorComponent.class,
-                        BaseAttackDamageComponent.class,
-                        BaseAttackSpeedComponent.class,
-                        BaseHealthRegenerationComponent.class,
-                        BaseMagicResistanceComponent.class,
-                        BaseMaximumHealthComponent.class,
-                        BaseWalkSpeedComponent.class,
-                        BonusFlatAbilityPowerComponent.class,
-                        BonusFlatArmorComponent.class,
-                        BonusFlatAttackDamageComponent.class,
-                        BonusFlatHealthRegenerationComponent.class,
-                        BonusFlatMagicResistanceComponent.class,
-                        BonusFlatMaximumHealthComponent.class,
-                        BonusFlatWalkSpeedComponent.class,
-                        BonusPercentageAttackSpeedComponent.class,
-                        BonusPercentageCooldownSpeedComponent.class,
-                        BonusPercentageWalkSpeedComponent.class,
-                        CooldownSpeedComponent.class,
-                        HealthComponent.class,
-                        HealthRegenerationComponent.class,
-                        MagicResistanceComponent.class,
-                        MaximumHealthComponent.class,
-                        RequestUpdateAttributesComponent.class,
-                        WalkSpeedComponent.class,
-                        //audio
-                        AudioComponent.class,
-                        AudioLoopComponent.class,
-                        AudioSourceComponent.class,
-                        AudioSuccessorComponent.class,
-                        AudioVolumeComponent.class,
-                        IsAudioPausedComponent.class,
-                        IsAudioPlayingComponent.class,
-                        //buffs
-                        ContinuousEffectComponent.class,
-                        KeepOnDeathComponent.class,
-                        OnBuffRemoveEffectTriggersComponent.class,
-                        RepeatingEffectComponent.class,
-                        //buffs/areas
-                        AreaBuffComponent.class,
-                        AreaBuffTargetRulesComponent.class,
-                        AreaOriginComponent.class,
-                        AreaSourceComponent.class,
-                        //buffs/status
-                        ActiveBuffComponent.class,
-                        BuffVisualisationComponent.class,
-                        RemainingBuffDurationComponent.class,
-                        RemoveFromTargetComponent.class,
-                        TimeSinceLastRepeatingEffectComponent.class,
-                        //camps
-                        CampHealthResetComponent.class,
-                        CampMaximumAggroDistanceComponent.class,
-                        CampRemainingRespawnDurationComponent.class,
-                        CampRespawnDurationComponent.class,
-                        CampSpawnComponent.class,
-                        CampSpawnInformationComponent.class,
-                        CampUnionAggroComponent.class,
-                        //effects
-                        AffectedTargetsComponent.class,
-                        ApplyEffectImpactComponent.class,
-                        PrepareEffectComponent.class,
-                        RemainingEffectDelayComponent.class,
-                        //effects/aggro
-                        DrawTeamAggroComponent.class,
-                        //effects/audio
-                        PauseAudioComponent.class,
-                        PlayAudioComponent.class,
-                        StopAudioComponent.class,
-                        //effects/buffs
-                        AddBuffComponent.class,
-                        RemoveBuffComponent.class,
-                        //effects/buffs/areas
-                        AddBuffAreaComponent.class,
-                        RemoveBuffAreaComponent.class,
-                        //effects/casts
-                        EffectCastSourceComponent.class,
-                        EffectCastSourceSpellComponent.class,
-                        EffectCastTargetComponent.class,
-                        //effects/crowdcontrol
-                        AddBindingComponent.class,
-                        AddBindingImmuneComponent.class,
-                        AddKnockupComponent.class,
-                        AddKnockupImmuneComponent.class,
-                        AddSilenceComponent.class,
-                        AddSilenceImmuneComponent.class,
-                        AddStunComponent.class,
-                        AddStunImmuneComponent.class,
-                        RemoveBindingComponent.class,
-                        RemoveKnockupComponent.class,
-                        RemoveSilenceComponent.class,
-                        RemoveStunComponent.class,
-                        //effects/crowdcontrol/knockup
-                        KnockupDurationComponent.class,
-                        KnockupHeightComponent.class,
-                        //effects/damage
-                        AddTargetabilityComponent.class,
-                        AddVulnerabilityComponent.class,
-                        FlatMagicDamageComponent.class,
-                        FlatPhysicalDamageComponent.class,
-                        MagicDamageComponent.class,
-                        PhysicalDamageComponent.class,
-                        RemoveTargetabilityComponent.class,
-                        RemoveVulnerabilityComponent.class,
-                        ScalingAbilityPowerMagicDamageComponent.class,
-                        ScalingAttackDamagePhysicalDamageComponent.class,
-                        //effects/game
-                        PlayCinematicComponent.class,
-                        //effects/general
-                        AddComponentsComponent.class,
-                        AddEffectTriggersComponent.class,
-                        RemoveComponentsComponent.class,
-                        RemoveEffectTriggersComponent.class,
-                        RemoveEntityComponent.class,
-                        //effects/heal
-                        FlatHealComponent.class,
-                        HealComponent.class,
-                        //effects/movement,
-                        MoveComponent.class,
-                        StopComponent.class,
-                        TeleportComponent.class,
-                        //effects/physics
-                        ActivateHitboxComponent.class,
-                        DeactivateHitboxComponent.class,
-                        //effects/spawns
-                        SpawnComponent.class,
-                        //effects/spells
-                        AddAutoAttackSpellEffectsComponent.class,
-                        RemoveSpellEffectsComponent.class,
-                        ReplaceSpellWithExistingSpellComponent.class,
-                        ReplaceSpellWithNewSpellComponent.class,
-                        TriggerSpellEffectsComponent.class,
-                        //effects/visuals
-                        PlayAnimationComponent.class,
-                        StopAnimationComponent.class,
-                        //game
-                        CinematicComponent.class,
-                        GameSpeedComponent.class,
-                        GameTimeComponent.class,
-                        //general
-                        DescriptionComponent.class,
-                        NameComponent.class,
-                        //input
-                        CastSpellComponent.class,
-                        //items
-                        InventoryComponent.class,
-                        IsSellableComponent.class,
-                        ItemActiveComponent.class,
-                        ItemIDComponent.class,
-                        ItemRecipeComponent.class,
-                        //maps
-                        MapObjectiveComponent.class,
-                        PlayerDeathRulesComponent.class,
-                        //maps/playerdeathrules
-                        RespawnPlayersComponent.class,
-                        RespawnTimerComponent.class,
-                        //movements
-                        DisplacementComponent.class,
-                        DistanceLimitComponent.class,
-                        MovedDistanceComponent.class,
-                        MovementAnimationComponent.class,
-                        MovementDirectionComponent.class,
-                        MovementIsCancelableComponent.class,
-                        MovementSpeedComponent.class,
-                        MovementTargetComponent.class,
-                        MovementTargetReachedComponent.class,
-                        MovementTargetSufficientDistanceComponent.class,
-                        WalkMovementComponent.class,
-                        //objectives
-                        FinishedObjectiveComponent.class,
-                        MissingEntitiesComponent.class,
-                        OpenObjectiveComponent.class,
-                        OrObjectivesComponent.class,
-                        //physics
-                        IntersectionPushComponent.class,
-                        CollisionGroupComponent.class,
-                        DirectionComponent.class,
-                        HitboxActiveComponent.class,
-                        HitboxComponent.class,
-                            Circle.class,
-                            Rectangle.class,
-                            RegularCyclic.class,
-                            Shape.class,
-                            ConvexShape.class,
-                            SimpleConvexPolygon.class,
-                            Transform2D.class,
-                            Vector2D.class,
-                            PolygonShape.class,
-                                BoundRectangle.class,
-                                Polygon.class,
-                                    SetPolygon.class,
-                                    HolePolygon.class,
-                                    SimplePolygon.class,
-                        MovementComponent.class,
-                        PositionComponent.class,
-                        ScaleComponent.class,
-                        RemoveOnMapLeaveComponent.class,
-                        //players
-                        ClientComponent.class,
-                        PlayerIndexComponent.class,
-                        RespawnComponent.class,
-                        SelectedUnitComponent.class,
-                        WaitingToRespawnComponent.class,
-                        //shop
-                        ShopRangeComponent.class,
-                        //spawns
-                        RelativeSpawnPositionComponent.class,
-                        SpawnAttackMoveComponent.class,
-                        SpawnMovementAnimationComponent.class,
-                        SpawnMovementSpeedComponent.class,
-                        SpawnMoveToTargetComponent.class,
-                        SpawnTemplateComponent.class,
-                        //spells
-                        ApplyCastedSpellComponent.class,
-                        BaseCooldownComponent.class,
-                        CastAnimationComponent.class,
-                        CastCancelableComponent.class,
-                        CastCancelActionComponent.class,
-                        CastDurationComponent.class,
-                        CastTurnToTargetComponent.class,
-                        CastTypeComponent.class,
-                        CooldownComponent.class,
-                        InstantEffectTriggersComponent.class,
-                        RangeComponent.class,
-                        RemainingCooldownComponent.class,
-                        SpellTargetRulesComponent.class,
-                        SpellVisualisationComponent.class,
-                        StopAfterCastingComponent.class,
-                        StopBeforeCastingComponent.class,
-                        //spells/placeholders
-                        SourceMovementDirectionComponent.class,
-                        TargetedMovementDirectionComponent.class,
-                        TargetedMovementTargetComponent.class,
-                        TeleportToTargetPositionComponent.class,
-                        TriggerCastedSpellEffectsComponent.class,
-                        //spells/triggers
-                        CastedEffectTriggersComponent.class,
-                        CastedSpellComponent.class,
-                        //targets
-                        AcceptAlliesComponent.class,
-                        AcceptEnemiesComponent.class,
-                        RequireProjectileComponent.class,
-                        //units
-                        AggroTargetComponent.class,
-                        AttackMoveComponent.class,
-                        AutoAggroComponent.class,
-                        AutoAttackComponent.class,
-                        BountyComponent.class,
-                        CampComponent.class,
-                        CampResetComponent.class,
-                        CastSpellOnCooldownWhileAttackingComponent.class,
-                        CurrentActionEffectCastsComponent.class,
-                        DamageHistoryComponent.class,
-                            DamageHistoryComponent.DamageHistoryEntry.class,
-                        GoldComponent.class,
-                        IntersectionRulesComponent.class,
-                        IsAliveComponent.class,
-                        IsCastingComponent.class,
-                        IsProjectileComponent.class,
-                        IsTargetableComponent.class,
-                        IsVulnerableComponent.class,
-                        IsWalkingToAggroTargetComponent.class,
-                        LifetimeComponent.class,
-                        MaximumAggroRangeComponent.class,
-                        MovementComponent.class,
-                        SetNewTargetSpellsOnCooldownComponent.class,
-                        SpellsComponent.class,
-                        TargetsInAggroRangeComponent.class,
-                        TeamComponent.class,
-                        WalkStepDistanceComponent.class,
-                        //units/animations
-                        AutoAttackAnimationComponent.class,
-                        DeathAnimationComponent.class,
-                        IdleAnimationComponent.class,
-                        WalkAnimationComponent.class,
-                        //units/bounties
-                        BountyBuffComponent.class,
-                        BountyGoldComponent.class,
-                        //units/crowdcontrol
-                        IsBindedComponent.class,
-                        IsBindedImmuneComponent.class,
-                        IsKnockupedComponent.class,
-                        IsKnockupedImmuneComponent.class,
-                        IsSilencedComponent.class,
-                        IsSilencedImmuneComponent.class,
-                        IsStunnedComponent.class,
-                        IsStunnedImmuneComponent.class,
-                        //units/effecttriggers
-                        TriggerDelayComponent.class,
-                        TriggeredEffectComponent.class,
-                        TriggerOnCancelComponent.class,
-                        TriggerOnceComponent.class,
-                        TriggerSourceComponent.class,
-                        TriggerTemporaryComponent.class,
-                        //units/effecttriggers/targets
-                        CasterTargetComponent.class,
-                        CustomTargetComponent.class,
-                        SourceTargetComponent.class,
-                        TargetTargetComponent.class,
-                        //units/effecttriggers/triggers
-                        CastingFinishedTriggerComponent.class,
-                        CollisionTriggerComponent.class,
-                        DeathTriggerComponent.class,
-                        InstantTriggerComponent.class,
-                        RepeatingTriggerComponent.class,
-                        RepeatingTriggerCounterComponent.class,
-                        TargetReachedTriggerComponent.class,
-                        TimeSinceLastRepeatTriggerComponent.class,
-                        //visuals
-                        ModelComponent.class,
-                        AnimationComponent.class,
-                        TitleComponent.class,
-                        //visuals/animations
-                        FreezeAfterPlayingComponent.class,
-                        LoopDurationComponent.class,
-                        PassedLoopTimeComponent.class,
-                        RemainingLoopsComponent.class,
+                        //physics/HitboxComponent
+                        Circle.class,
+                        Rectangle.class,
+                        RegularCyclic.class,
+                        Shape.class,
+                        ConvexShape.class,
+                        SimpleConvexPolygon.class,
+                        Transform2D.class,
+                        Vector2D.class,
+                        PolygonShape.class,
+                            BoundRectangle.class,
+                            Polygon.class,
+                                SetPolygon.class,
+                                HolePolygon.class,
+                                SimplePolygon.class,
+                        //units/DamageHistoryComponent
+                        DamageHistoryComponent.DamageHistoryEntry.class,
                     RemovedComponentChange.class,
                     RemovedEntityChange.class,
             Message_GameInfo.class,
@@ -467,5 +120,72 @@ public class MessagesSerializer{
             Message_GameOver.class,
             Message_PlayerAuthentification.class
         );
+        ComponentsRegistrator.registerComponents();
+        XMLTemplateManager xmlTemplateManager = XMLTemplateManager.getInstance();
+        //physics
+        xmlTemplateManager.registerComponent(HitboxComponent.class, new XMLComponentConstructor<HitboxComponent>("hitbox"){
+
+            @Override
+            public HitboxComponent construct(){
+                Shape shape = null;
+                Element childElement = (Element) element.getChildren().get(0);
+                String shapeType = childElement.getName();
+                if(shapeType.equals("regularCyclic")){
+                    int edges = Integer.parseInt(childElement.getAttributeValue("edges"));
+                    int radius = Integer.parseInt(childElement.getAttributeValue("radius"));
+                    shape = new RegularCyclic(edges, radius);
+                }
+                if(shape == null){
+                    throw new UnsupportedOperationException("Unsupported shape type '" + shapeType + "'.");
+                }
+                return new HitboxComponent(shape);
+            }
+        });
+        //spells
+        xmlTemplateManager.registerComponent(CastTypeComponent.class, new XMLComponentConstructor<CastTypeComponent>("castType"){
+
+            @Override
+            public CastTypeComponent construct(){
+                return new CastTypeComponent(CastTypeComponent.CastType.valueOf(element.getText().toUpperCase()));
+            }
+        });
+        //units
+        xmlTemplateManager.registerComponent(CollisionGroupComponent.class, new XMLComponentConstructor<CollisionGroupComponent>("collisionGroup"){
+
+            @Override
+            public CollisionGroupComponent construct(){
+                long collisionGroups = getCollisionBitMask(element.getAttributeValue("group"));
+                long collidesWithGroups = getCollisionBitMask(element.getAttributeValue("collidesWith"));
+                return new CollisionGroupComponent(collisionGroups, collidesWithGroups);
+            }
+            
+            private long getCollisionBitMask(String text){
+                long bitMask = 0;
+                String[] groupNames = text.split("\\|");
+                for(String groupName : groupNames){
+                    bitMask |= getCollisionGroup(groupName);
+                }
+                return bitMask;
+            }
+            
+            private long getCollisionGroup(String name){
+                if(name.equals("none")){
+                    return CollisionGroupComponent.COLLISION_GROUP_NONE;
+                }
+                else if(name.equals("map")){
+                    return CollisionGroupComponent.COLLISION_GROUP_MAP;
+                }
+                else if(name.equals("units")){
+                    return CollisionGroupComponent.COLLISION_GROUP_UNITS;
+                }
+                else if(name.equals("spells")){
+                    return CollisionGroupComponent.COLLISION_GROUP_SPELLS;
+                }
+                else if(name.equals("all")){
+                    return CollisionGroupComponent.COLLISION_GROUP_ALL;
+                }
+                throw new UnsupportedOperationException("Unsupported collision group name '" + name + "'.");
+            }
+        });
     }
 }

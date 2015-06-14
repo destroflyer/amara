@@ -20,7 +20,7 @@ public class ApplyAddAutoAttackSpellEffectsSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddAutoAttackSpellEffectsComponent.class)))
         {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             int autoAttackEntity = entityWorld.getComponent(targetEntity, AutoAttackComponent.class).getAutoAttackEntity();
             for(int spellEffect : entityWrapper.getComponent(AddAutoAttackSpellEffectsComponent.class).getSpellEffectEntities()){
                 entityWorld.setComponent(spellEffect, new CastedSpellComponent(autoAttackEntity));

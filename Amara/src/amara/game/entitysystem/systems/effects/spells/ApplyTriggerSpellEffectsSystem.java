@@ -20,7 +20,7 @@ public class ApplyTriggerSpellEffectsSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, TriggerSpellEffectsComponent.class)))
         {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetID();
+            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             int spellEntity = entityWrapper.getComponent(TriggerSpellEffectsComponent.class).getSpellEntity();
             for(int spellEffectEntity : entityWorld.getEntitiesWithAll(CastedSpellComponent.class, CastedEffectTriggersComponent.class)){
                 if(entityWorld.getComponent(spellEffectEntity, CastedSpellComponent.class).getSpellEntity() == spellEntity){
