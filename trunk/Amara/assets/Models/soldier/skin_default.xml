@@ -1,5 +1,5 @@
 <skin name="soldier">
-    <model scale="1.2">
+    <model normScale="1.33" scale="0.9">
         <material>
             <!--zipper-->
             <color index="0">0.8,0.8,0.8,1</color>

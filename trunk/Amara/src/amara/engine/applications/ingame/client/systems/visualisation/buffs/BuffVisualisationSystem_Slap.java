@@ -33,11 +33,12 @@ public class BuffVisualisationSystem_Slap extends BuffVisualisationSystem{
     }
     
     private void attachVisualisation(Node boneAttachmentNode, int buffStatusEntity, int targetEntity){
+        Node node = new Node();
         Spatial fire = MaterialFactory.getAssetManager().loadModel("Models/fireball/fireball.j3o");
-        fire.setLocalTranslation(0, 0.3f, 0);
-        fire.setLocalScale(0.25f);
-        boneAttachmentNode.attachChild(fire);
-        prepareVisualAttachment(buffStatusEntity, targetEntity, fire);
+        fire.setLocalScale(0.3f);
+        node.attachChild(fire);
+        boneAttachmentNode.attachChild(node);
+        prepareVisualAttachment(buffStatusEntity, targetEntity, node);
     }
     
     private ModelObject getModelObject(Node node){
