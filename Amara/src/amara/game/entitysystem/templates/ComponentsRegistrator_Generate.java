@@ -9,6 +9,7 @@ import java.io.File;
 import amara.engine.files.FileManager;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.physics.*;
+import amara.game.entitysystem.components.spawns.SpawnTemplateComponent;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 
@@ -25,6 +26,7 @@ public class ComponentsRegistrator_Generate{
         AddComponentsComponent.class,
         RemoveComponentsComponent.class,
         HitboxComponent.class,
+        SpawnTemplateComponent.class,
         CastTypeComponent.class,
         CollisionGroupComponent.class,
         DamageHistoryComponent.class
@@ -84,25 +86,30 @@ public class ComponentsRegistrator_Generate{
                                 String parameterName = parameterParts[1];
                                 String textAccessCode = ((parameters.length == 1)?"element.getText()":"element.getAttributeValue(\"" + parameterName + "\")");
                                 if(parameterType.equals("int") && parameterName.toLowerCase().endsWith("entity")){
-                                    code += "                int " + parameterName + " = createChildEntity(" + childIndex + ");\n";
+                                    code += "                int " + parameterName + " = createChildEntity(" + childIndex + ", \"" + parameterName + "\");\n";
                                     wasHandled = true;
                                 }
                                 else if(parameterType.equals("int...") && parameterName.toLowerCase().endsWith("entities")){
-                                    code += "                int[] " + parameterName + " = createChildEntities(" + childIndex + ");\n";
+                                    code += "                int[] " + parameterName + " = createChildEntities(" + childIndex + ", \"" + parameterName + "\");\n";
                                     wasHandled = true;
                                 }
                                 else if(parameterType.equals("String")){
-                                    code += "                String " + parameterName + " = " + textAccessCode + ";\n";
+                                    String parseMethodName = (parameterName.endsWith("Template")?"parseTemplate":"parseValue");
+                                    code += "                String " + parameterName + " = xmlTemplateManager." + parseMethodName + "(" + textAccessCode + ");\n";
                                     wasHandled = true;
                                 }
-                                else if(parameterType.equals("String...")){
+                                else if(parameterType.equals("String...") || parameterType.equals("String[]")){
+                                    String parseMethodName = (parameterName.endsWith("Templates")?"parseTemplate":"parseValue");
                                     code += "                String[] " + parameterName + " = " + textAccessCode + ".split(\"" + LIST_SEPERATOR + "\");\n";
+                                    code += "                for(int i=0;i<" + parameterName + ".length;i++){\n";
+                                    code += "                    " + parameterName + "[i] = xmlTemplateManager." + parseMethodName + "(" + parameterName + "[i]);\n";
+                                    code += "                }\n";
                                     wasHandled = true;
                                 }
                                 else if(parameterType.equals("Vector2f")){
                                     code += "                String[] " + parameterName + "Coordinates = " + textAccessCode + ".split(\"" + LIST_SEPERATOR + "\");\n";
-                                    code += "                float " + parameterName + "X = Float.parseFloat(" + parameterName + "Coordinates[0]);\n";
-                                    code += "                float " + parameterName + "Y = Float.parseFloat(" + parameterName + "Coordinates[1]);\n";
+                                    code += "                float " + parameterName + "X = Float.parseFloat(xmlTemplateManager.parseValue(" + parameterName + "Coordinates[0]));\n";
+                                    code += "                float " + parameterName + "Y = Float.parseFloat(xmlTemplateManager.parseValue(" + parameterName + "Coordinates[1]));\n";
                                     code += "                Vector2f " + parameterName + " = new Vector2f(" + parameterName + "X, " + parameterName + "Y);\n";
                                     wasHandled = true;
                                 }
@@ -117,7 +124,7 @@ public class ComponentsRegistrator_Generate{
                                             parseMethodName = (datatypeClassName + ".parse" + datatypeClassName);
                                         }
                                         if(parameterType.equals(nativeDataTypes[r])){
-                                            code += "                " + nativeDataTypes[r] + " " + parameterName + " = " + parseMethodName + "(" + textAccessCode + ");\n";
+                                            code += "                " + nativeDataTypes[r] + " " + parameterName + " = " + parseMethodName + "(xmlTemplateManager.parseValue(" + textAccessCode + "));\n";
                                             wasHandled = true;
                                             break;
                                         }
@@ -125,7 +132,7 @@ public class ComponentsRegistrator_Generate{
                                             code += "                String[] " + parameterName + "Parts = " + textAccessCode + ".split(\"" + LIST_SEPERATOR + "\");\n";
                                             code += "                " + nativeDataTypes[r] + "[] " + parameterName + " = new " + nativeDataTypes[r] + "[" + parameterName + "Parts.length];\n";
                                             code += "                for(int i=0;i<" + parameterName + ".length;i++){\n";
-                                            code += "                    " + parameterName + "[i] = " + parseMethodName + "(" + parameterName + "Parts[i]);\n";
+                                            code += "                    " + parameterName + "[i] = " + parseMethodName + "(xmlTemplateManager.parseValue(" + textAccessCode + "));\n";
                                             code += "                }\n";
                                             wasHandled = true;
                                             break;

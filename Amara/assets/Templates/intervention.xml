@@ -1,12 +1,11 @@
 <template>
     <entity id="spell">
-        <name>Ignite</name>
-        <description>Deals damage over time to the target.</description>
-        <spellVisualisation>ignite</spellVisualisation>
+        <name>Intervention</name>
+        <spellVisualisation>intervention</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
-                <targetTarget/>
+                <casterTarget/>
                 <triggeredEffect>
                     <entity>
                         <triggerSpellEffects>#spell</triggerSpellEffects>
@@ -15,34 +14,32 @@
                 <triggerSource>#spell</triggerSource>
             </entity>
         </instantEffectTriggers>
-        <castType>single_target</castType>
-        <castTurnToTarget/>
-        <range>10</range>
-        <baseCooldown>18</baseCooldown>
-        <spellTargetRules>
-            <entity>
-                <acceptEnemies/>
-            </entity>
-        </spellTargetRules>
+        <castType>selfcast</castType>
+        <baseCooldown>90</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>
         <castedSpell>#spell</castedSpell>
         <castedEffectTriggers>
-            <!--target effect-->
+            <!--remove vulnerability-->
             <entity>
-                <targetTarget/>
+                <casterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <addBuff duration="5">
+                        <removeVulnerability/>
+                        <addBuff duration="3">
                             <entity>
-                                <buffVisualisation>burning</buffVisualisation>
-                                <repeatingEffect interval="0.5">
+                                <buffVisualisation>intervention</buffVisualisation>
+                                <onBuffRemoveEffectTriggers>
                                     <entity>
-                                        <flatMagicDamage>40</flatMagicDamage>
-                                        <scalingAbilityPowerMagicDamage>1</scalingAbilityPowerMagicDamage>
+                                        <customTarget>[0]</customTarget>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <addVulnerability/>
+                                            </entity>
+                                        </triggeredEffect>
                                     </entity>
-                                </repeatingEffect>
+                                </onBuffRemoveEffectTriggers>
                             </entity>
                         </addBuff>
                     </entity>

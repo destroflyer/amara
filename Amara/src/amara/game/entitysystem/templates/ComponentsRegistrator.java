@@ -14,7 +14,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.AbilityPowerComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.AbilityPowerComponent(value);
             }
         });
@@ -23,7 +23,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.ArmorComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.ArmorComponent(value);
             }
         });
@@ -32,7 +32,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.AttackDamageComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.AttackDamageComponent(value);
             }
         });
@@ -41,7 +41,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.AttackSpeedComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.AttackSpeedComponent(value);
             }
         });
@@ -50,7 +50,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent(value);
             }
         });
@@ -59,7 +59,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BaseArmorComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BaseArmorComponent(value);
             }
         });
@@ -68,7 +68,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BaseAttackDamageComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BaseAttackDamageComponent(value);
             }
         });
@@ -77,7 +77,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent(value);
             }
         });
@@ -86,7 +86,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent(value);
             }
         });
@@ -95,7 +95,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent(value);
             }
         });
@@ -104,7 +104,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent(value);
             }
         });
@@ -113,7 +113,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent(value);
             }
         });
@@ -122,7 +122,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BonusFlatAbilityPowerComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BonusFlatAbilityPowerComponent(value);
             }
         });
@@ -131,7 +131,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BonusFlatArmorComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BonusFlatArmorComponent(value);
             }
         });
@@ -140,7 +140,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BonusFlatAttackDamageComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BonusFlatAttackDamageComponent(value);
             }
         });
@@ -149,7 +149,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent(value);
             }
         });
@@ -158,7 +158,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BonusFlatMagicResistanceComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BonusFlatMagicResistanceComponent(value);
             }
         });
@@ -167,7 +167,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BonusFlatMaximumHealthComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BonusFlatMaximumHealthComponent(value);
             }
         });
@@ -176,7 +176,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BonusFlatWalkSpeedComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BonusFlatWalkSpeedComponent(value);
             }
         });
@@ -185,7 +185,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent(value);
             }
         });
@@ -194,7 +194,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent(value);
             }
         });
@@ -203,7 +203,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent(value);
             }
         });
@@ -212,7 +212,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.CooldownSpeedComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.CooldownSpeedComponent(value);
             }
         });
@@ -221,7 +221,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.HealthComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.HealthComponent(value);
             }
         });
@@ -230,7 +230,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.HealthRegenerationComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.HealthRegenerationComponent(value);
             }
         });
@@ -239,7 +239,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.MagicResistanceComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.MagicResistanceComponent(value);
             }
         });
@@ -248,7 +248,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.MaximumHealthComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.MaximumHealthComponent(value);
             }
         });
@@ -265,7 +265,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.attributes.WalkSpeedComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.attributes.WalkSpeedComponent(value);
             }
         });
@@ -275,7 +275,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.audio.AudioComponent construct(){
-                String audioPath = element.getText();
+                String audioPath = xmlTemplateManager.parseValue(element.getText());
                 return new amara.game.entitysystem.components.audio.AudioComponent(audioPath);
             }
         });
@@ -292,7 +292,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.audio.AudioSourceComponent construct(){
-                int entity = createChildEntity(0);
+                int entity = createChildEntity(0, "entity");
                 return new amara.game.entitysystem.components.audio.AudioSourceComponent(entity);
             }
         });
@@ -301,8 +301,8 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.audio.AudioSuccessorComponent construct(){
-                int audioEntity = createChildEntity(0);
-                float delay = Float.parseFloat(element.getAttributeValue("delay"));
+                int audioEntity = createChildEntity(0, "audioEntity");
+                float delay = Float.parseFloat(xmlTemplateManager.parseValue(element.getAttributeValue("delay")));
                 return new amara.game.entitysystem.components.audio.AudioSuccessorComponent(audioEntity, delay);
             }
         });
@@ -311,7 +311,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.audio.AudioVolumeComponent construct(){
-                float volume = Float.parseFloat(element.getText());
+                float volume = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.audio.AudioVolumeComponent(volume);
             }
         });
@@ -338,7 +338,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.buffs.areas.AreaBuffComponent construct(){
-                int buffEntity = createChildEntity(0);
+                int buffEntity = createChildEntity(0, "buffEntity");
                 return new amara.game.entitysystem.components.buffs.areas.AreaBuffComponent(buffEntity);
             }
         });
@@ -347,7 +347,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent construct(){
-                int targetRulesEntity = createChildEntity(0);
+                int targetRulesEntity = createChildEntity(0, "targetRulesEntity");
                 return new amara.game.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent(targetRulesEntity);
             }
         });
@@ -356,7 +356,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.buffs.areas.AreaOriginComponent construct(){
-                int originEntity = createChildEntity(0);
+                int originEntity = createChildEntity(0, "originEntity");
                 return new amara.game.entitysystem.components.buffs.areas.AreaOriginComponent(originEntity);
             }
         });
@@ -365,7 +365,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.buffs.areas.AreaSourceComponent construct(){
-                int sourceEntity = createChildEntity(0);
+                int sourceEntity = createChildEntity(0, "sourceEntity");
                 return new amara.game.entitysystem.components.buffs.areas.AreaSourceComponent(sourceEntity);
             }
         });
@@ -374,7 +374,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.buffs.ContinuousEffectComponent construct(){
-                int effectEntity = createChildEntity(0);
+                int effectEntity = createChildEntity(0, "effectEntity");
                 return new amara.game.entitysystem.components.buffs.ContinuousEffectComponent(effectEntity);
             }
         });
@@ -391,7 +391,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0);
+                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
                 return new amara.game.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -400,8 +400,8 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.buffs.RepeatingEffectComponent construct(){
-                int effectEntity = createChildEntity(0);
-                float interval = Float.parseFloat(element.getAttributeValue("interval"));
+                int effectEntity = createChildEntity(0, "effectEntity");
+                float interval = Float.parseFloat(xmlTemplateManager.parseValue(element.getAttributeValue("interval")));
                 return new amara.game.entitysystem.components.buffs.RepeatingEffectComponent(effectEntity, interval);
             }
         });
@@ -411,8 +411,8 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.buffs.status.ActiveBuffComponent construct(){
-                int targetEntity = createChildEntity(0);
-                int buffEntity = createChildEntity(0);
+                int targetEntity = createChildEntity(0, "targetEntity");
+                int buffEntity = createChildEntity(0, "buffEntity");
                 return new amara.game.entitysystem.components.buffs.status.ActiveBuffComponent(targetEntity, buffEntity);
             }
         });
@@ -421,7 +421,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.buffs.status.BuffVisualisationComponent construct(){
-                String name = element.getText();
+                String name = xmlTemplateManager.parseValue(element.getText());
                 return new amara.game.entitysystem.components.buffs.status.BuffVisualisationComponent(name);
             }
         });
@@ -430,7 +430,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.buffs.status.RemainingBuffDurationComponent construct(){
-                float remainingDuration = Float.parseFloat(element.getText());
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.buffs.status.RemainingBuffDurationComponent(remainingDuration);
             }
         });
@@ -447,7 +447,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent(duration);
             }
         });
@@ -465,7 +465,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.camps.CampMaximumAggroDistanceComponent construct(){
-                float distance = Float.parseFloat(element.getText());
+                float distance = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.camps.CampMaximumAggroDistanceComponent(distance);
             }
         });
@@ -474,7 +474,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.camps.CampRemainingRespawnDurationComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.camps.CampRemainingRespawnDurationComponent(duration);
             }
         });
@@ -483,7 +483,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.camps.CampRespawnDurationComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.camps.CampRespawnDurationComponent(duration);
             }
         });
@@ -500,7 +500,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.camps.CampSpawnInformationComponent construct(){
-                int[] spawnInformationEntities = createChildEntities(0);
+                int[] spawnInformationEntities = createChildEntities(0, "spawnInformationEntities");
                 return new amara.game.entitysystem.components.camps.CampSpawnInformationComponent(spawnInformationEntities);
             }
         });
@@ -518,7 +518,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.AffectedTargetsComponent construct(){
-                int[] targetEntities = createChildEntities(0);
+                int[] targetEntities = createChildEntities(0, "targetEntities");
                 return new amara.game.entitysystem.components.effects.AffectedTargetsComponent(targetEntities);
             }
         });
@@ -528,7 +528,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.aggro.DrawTeamAggroComponent construct(){
-                float range = Float.parseFloat(element.getText());
+                float range = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.aggro.DrawTeamAggroComponent(range);
             }
         });
@@ -537,7 +537,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.ApplyEffectImpactComponent construct(){
-                int targetEntity = createChildEntity(0);
+                int targetEntity = createChildEntity(0, "targetEntity");
                 return new amara.game.entitysystem.components.effects.ApplyEffectImpactComponent(targetEntity);
             }
         });
@@ -547,7 +547,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.audio.PauseAudioComponent construct(){
-                int[] audioEntities = createChildEntities(0);
+                int[] audioEntities = createChildEntities(0, "audioEntities");
                 return new amara.game.entitysystem.components.effects.audio.PauseAudioComponent(audioEntities);
             }
         });
@@ -556,7 +556,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.audio.PlayAudioComponent construct(){
-                int[] audioEntities = createChildEntities(0);
+                int[] audioEntities = createChildEntities(0, "audioEntities");
                 return new amara.game.entitysystem.components.effects.audio.PlayAudioComponent(audioEntities);
             }
         });
@@ -565,7 +565,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.audio.StopAudioComponent construct(){
-                int[] audioEntities = createChildEntities(0);
+                int[] audioEntities = createChildEntities(0, "audioEntities");
                 return new amara.game.entitysystem.components.effects.audio.StopAudioComponent(audioEntities);
             }
         });
@@ -575,8 +575,8 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.buffs.AddBuffComponent construct(){
-                int buffEntity = createChildEntity(0);
-                float duration = Float.parseFloat(element.getAttributeValue("duration"));
+                int buffEntity = createChildEntity(0, "buffEntity");
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getAttributeValue("duration")));
                 return new amara.game.entitysystem.components.effects.buffs.AddBuffComponent(buffEntity, duration);
             }
         });
@@ -586,7 +586,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent construct(){
-                int buffAreaEntity = createChildEntity(0);
+                int buffAreaEntity = createChildEntity(0, "buffAreaEntity");
                 return new amara.game.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent(buffAreaEntity);
             }
         });
@@ -595,7 +595,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent construct(){
-                int buffAreaEntity = createChildEntity(0);
+                int buffAreaEntity = createChildEntity(0, "buffAreaEntity");
                 return new amara.game.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent(buffAreaEntity);
             }
         });
@@ -604,7 +604,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.buffs.RemoveBuffComponent construct(){
-                int buffEntity = createChildEntity(0);
+                int buffEntity = createChildEntity(0, "buffEntity");
                 return new amara.game.entitysystem.components.effects.buffs.RemoveBuffComponent(buffEntity);
             }
         });
@@ -614,7 +614,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.casts.EffectCastSourceComponent construct(){
-                int sourceEntity = createChildEntity(0);
+                int sourceEntity = createChildEntity(0, "sourceEntity");
                 return new amara.game.entitysystem.components.effects.casts.EffectCastSourceComponent(sourceEntity);
             }
         });
@@ -623,7 +623,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.casts.EffectCastSourceSpellComponent construct(){
-                int spellEntity = createChildEntity(0);
+                int spellEntity = createChildEntity(0, "spellEntity");
                 return new amara.game.entitysystem.components.effects.casts.EffectCastSourceSpellComponent(spellEntity);
             }
         });
@@ -632,7 +632,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.casts.EffectCastTargetComponent construct(){
-                int targetEntity = createChildEntity(0);
+                int targetEntity = createChildEntity(0, "targetEntity");
                 return new amara.game.entitysystem.components.effects.casts.EffectCastTargetComponent(targetEntity);
             }
         });
@@ -642,7 +642,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.crowdcontrol.AddBindingComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddBindingComponent(duration);
             }
         });
@@ -651,7 +651,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent(duration);
             }
         });
@@ -660,7 +660,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupComponent construct(){
-                int knockupEntity = createChildEntity(0);
+                int knockupEntity = createChildEntity(0, "knockupEntity");
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupComponent(knockupEntity);
             }
         });
@@ -669,7 +669,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent(duration);
             }
         });
@@ -678,7 +678,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceComponent(duration);
             }
         });
@@ -687,7 +687,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent(duration);
             }
         });
@@ -696,7 +696,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.crowdcontrol.AddStunComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddStunComponent(duration);
             }
         });
@@ -705,7 +705,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent(duration);
             }
         });
@@ -715,7 +715,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent(duration);
             }
         });
@@ -724,7 +724,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent construct(){
-                float height = Float.parseFloat(element.getText());
+                float height = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent(height);
             }
         });
@@ -782,7 +782,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent(value);
             }
         });
@@ -791,7 +791,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent(value);
             }
         });
@@ -800,7 +800,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.damage.MagicDamageComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.damage.MagicDamageComponent(value);
             }
         });
@@ -809,7 +809,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent(value);
             }
         });
@@ -834,7 +834,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent construct(){
-                float ratio = Float.parseFloat(element.getText());
+                float ratio = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent(ratio);
             }
         });
@@ -843,7 +843,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.damage.ScalingAttackDamagePhysicalDamageComponent construct(){
-                float ratio = Float.parseFloat(element.getText());
+                float ratio = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.damage.ScalingAttackDamagePhysicalDamageComponent(ratio);
             }
         });
@@ -853,7 +853,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.game.PlayCinematicComponent construct(){
-                String cinematicClassName = element.getText();
+                String cinematicClassName = xmlTemplateManager.parseValue(element.getText());
                 return new amara.game.entitysystem.components.effects.game.PlayCinematicComponent(cinematicClassName);
             }
         });
@@ -864,7 +864,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.general.AddEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0);
+                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
                 return new amara.game.entitysystem.components.effects.general.AddEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -874,7 +874,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.general.RemoveEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0);
+                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
                 return new amara.game.entitysystem.components.effects.general.RemoveEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -892,7 +892,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.heals.FlatHealComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.heals.FlatHealComponent(value);
             }
         });
@@ -901,7 +901,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.heals.HealComponent construct(){
-                float value = Float.parseFloat(element.getText());
+                float value = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.heals.HealComponent(value);
             }
         });
@@ -911,7 +911,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.movement.MoveComponent construct(){
-                int movementEntity = createChildEntity(0);
+                int movementEntity = createChildEntity(0, "movementEntity");
                 return new amara.game.entitysystem.components.effects.movement.MoveComponent(movementEntity);
             }
         });
@@ -928,7 +928,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.movement.TeleportComponent construct(){
-                int targetEntity = createChildEntity(0);
+                int targetEntity = createChildEntity(0, "targetEntity");
                 return new amara.game.entitysystem.components.effects.movement.TeleportComponent(targetEntity);
             }
         });
@@ -954,7 +954,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.PrepareEffectComponent construct(){
-                int effectEntity = createChildEntity(0);
+                int effectEntity = createChildEntity(0, "effectEntity");
                 return new amara.game.entitysystem.components.effects.PrepareEffectComponent(effectEntity);
             }
         });
@@ -963,7 +963,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.RemainingEffectDelayComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.effects.RemainingEffectDelayComponent(duration);
             }
         });
@@ -973,7 +973,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.spawns.SpawnComponent construct(){
-                int[] spawnInformationEntities = createChildEntities(0);
+                int[] spawnInformationEntities = createChildEntities(0, "spawnInformationEntities");
                 return new amara.game.entitysystem.components.effects.spawns.SpawnComponent(spawnInformationEntities);
             }
         });
@@ -983,7 +983,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent construct(){
-                int[] spellEffectEntities = createChildEntities(0);
+                int[] spellEffectEntities = createChildEntities(0, "spellEffectEntities");
                 return new amara.game.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent(spellEffectEntities);
             }
         });
@@ -992,7 +992,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.spells.RemoveSpellEffectsComponent construct(){
-                int[] spellEffectEntities = createChildEntities(0);
+                int[] spellEffectEntities = createChildEntities(0, "spellEffectEntities");
                 return new amara.game.entitysystem.components.effects.spells.RemoveSpellEffectsComponent(spellEffectEntities);
             }
         });
@@ -1001,8 +1001,8 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent construct(){
-                int spellIndex = Integer.parseInt(element.getAttributeValue("spellIndex"));
-                int spellEntity = createChildEntity(0);
+                int spellIndex = Integer.parseInt(xmlTemplateManager.parseValue(element.getAttributeValue("spellIndex")));
+                int spellEntity = createChildEntity(0, "spellEntity");
                 return new amara.game.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent(spellIndex, spellEntity);
             }
         });
@@ -1011,8 +1011,8 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent construct(){
-                int spellIndex = Integer.parseInt(element.getAttributeValue("spellIndex"));
-                String newSpellTemplate = element.getAttributeValue("newSpellTemplate");
+                int spellIndex = Integer.parseInt(xmlTemplateManager.parseValue(element.getAttributeValue("spellIndex")));
+                String newSpellTemplate = xmlTemplateManager.parseTemplate(element.getAttributeValue("newSpellTemplate"));
                 return new amara.game.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent(spellIndex, newSpellTemplate);
             }
         });
@@ -1021,7 +1021,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.spells.TriggerSpellEffectsComponent construct(){
-                int spellEntity = createChildEntity(0);
+                int spellEntity = createChildEntity(0, "spellEntity");
                 return new amara.game.entitysystem.components.effects.spells.TriggerSpellEffectsComponent(spellEntity);
             }
         });
@@ -1031,7 +1031,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.visuals.PlayAnimationComponent construct(){
-                int animationEntity = createChildEntity(0);
+                int animationEntity = createChildEntity(0, "animationEntity");
                 return new amara.game.entitysystem.components.effects.visuals.PlayAnimationComponent(animationEntity);
             }
         });
@@ -1049,7 +1049,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.game.CinematicComponent construct(){
-                String cinematicClassName = element.getText();
+                String cinematicClassName = xmlTemplateManager.parseValue(element.getText());
                 return new amara.game.entitysystem.components.game.CinematicComponent(cinematicClassName);
             }
         });
@@ -1058,7 +1058,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.game.GameSpeedComponent construct(){
-                float speed = Float.parseFloat(element.getText());
+                float speed = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.game.GameSpeedComponent(speed);
             }
         });
@@ -1067,7 +1067,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.game.GameTimeComponent construct(){
-                float time = Float.parseFloat(element.getText());
+                float time = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.game.GameTimeComponent(time);
             }
         });
@@ -1077,7 +1077,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.general.DescriptionComponent construct(){
-                String description = element.getText();
+                String description = xmlTemplateManager.parseValue(element.getText());
                 return new amara.game.entitysystem.components.general.DescriptionComponent(description);
             }
         });
@@ -1086,7 +1086,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.general.NameComponent construct(){
-                String name = element.getText();
+                String name = xmlTemplateManager.parseValue(element.getText());
                 return new amara.game.entitysystem.components.general.NameComponent(name);
             }
         });
@@ -1096,8 +1096,8 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.input.CastSpellComponent construct(){
-                int spellEntity = createChildEntity(0);
-                int targetEntity = createChildEntity(0);
+                int spellEntity = createChildEntity(0, "spellEntity");
+                int targetEntity = createChildEntity(0, "targetEntity");
                 return new amara.game.entitysystem.components.input.CastSpellComponent(spellEntity, targetEntity);
             }
         });
@@ -1107,7 +1107,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.items.InventoryComponent construct(){
-                int[] itemEntities = createChildEntities(0);
+                int[] itemEntities = createChildEntities(0, "itemEntities");
                 return new amara.game.entitysystem.components.items.InventoryComponent(itemEntities);
             }
         });
@@ -1116,7 +1116,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.items.IsSellableComponent construct(){
-                int gold = Integer.parseInt(element.getText());
+                int gold = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.items.IsSellableComponent(gold);
             }
         });
@@ -1125,7 +1125,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.items.ItemActiveComponent construct(){
-                int spellEntity = createChildEntity(0);
+                int spellEntity = createChildEntity(0, "spellEntity");
                 return new amara.game.entitysystem.components.items.ItemActiveComponent(spellEntity);
             }
         });
@@ -1134,7 +1134,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.items.ItemIDComponent construct(){
-                String id = element.getText();
+                String id = xmlTemplateManager.parseValue(element.getText());
                 return new amara.game.entitysystem.components.items.ItemIDComponent(id);
             }
         });
@@ -1143,8 +1143,11 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.items.ItemRecipeComponent construct(){
-                int gold = Integer.parseInt(element.getAttributeValue("gold"));
+                int gold = Integer.parseInt(xmlTemplateManager.parseValue(element.getAttributeValue("gold")));
                 String[] itemIDs = element.getAttributeValue("itemIDs").split(",");
+                for(int i=0;i<itemIDs.length;i++){
+                    itemIDs[i] = xmlTemplateManager.parseValue(itemIDs[i]);
+                }
                 return new amara.game.entitysystem.components.items.ItemRecipeComponent(gold, itemIDs);
             }
         });
@@ -1154,7 +1157,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.maps.MapObjectiveComponent construct(){
-                int objectiveEntity = createChildEntity(0);
+                int objectiveEntity = createChildEntity(0, "objectiveEntity");
                 return new amara.game.entitysystem.components.maps.MapObjectiveComponent(objectiveEntity);
             }
         });
@@ -1172,8 +1175,8 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent construct(){
-                float initialDuration = Float.parseFloat(element.getAttributeValue("initialDuration"));
-                float deltaDurationPerTime = Float.parseFloat(element.getAttributeValue("deltaDurationPerTime"));
+                float initialDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getAttributeValue("initialDuration")));
+                float deltaDurationPerTime = Float.parseFloat(xmlTemplateManager.parseValue(element.getAttributeValue("deltaDurationPerTime")));
                 return new amara.game.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent(initialDuration, deltaDurationPerTime);
             }
         });
@@ -1182,7 +1185,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.maps.PlayerDeathRulesComponent construct(){
-                int rulesEntity = createChildEntity(0);
+                int rulesEntity = createChildEntity(0, "rulesEntity");
                 return new amara.game.entitysystem.components.maps.PlayerDeathRulesComponent(rulesEntity);
             }
         });
@@ -1200,7 +1203,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.movements.DistanceLimitComponent construct(){
-                float distance = Float.parseFloat(element.getText());
+                float distance = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.movements.DistanceLimitComponent(distance);
             }
         });
@@ -1209,7 +1212,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.movements.MovedDistanceComponent construct(){
-                float distance = Float.parseFloat(element.getText());
+                float distance = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.movements.MovedDistanceComponent(distance);
             }
         });
@@ -1218,7 +1221,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.movements.MovementAnimationComponent construct(){
-                int animationEntity = createChildEntity(0);
+                int animationEntity = createChildEntity(0, "animationEntity");
                 return new amara.game.entitysystem.components.movements.MovementAnimationComponent(animationEntity);
             }
         });
@@ -1228,8 +1231,8 @@ public class ComponentsRegistrator{
             @Override
             public amara.game.entitysystem.components.movements.MovementDirectionComponent construct(){
                 String[] directionCoordinates = element.getText().split(",");
-                float directionX = Float.parseFloat(directionCoordinates[0]);
-                float directionY = Float.parseFloat(directionCoordinates[1]);
+                float directionX = Float.parseFloat(xmlTemplateManager.parseValue(directionCoordinates[0]));
+                float directionY = Float.parseFloat(xmlTemplateManager.parseValue(directionCoordinates[1]));
                 Vector2f direction = new Vector2f(directionX, directionY);
                 return new amara.game.entitysystem.components.movements.MovementDirectionComponent(direction);
             }
@@ -1247,7 +1250,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.movements.MovementSpeedComponent construct(){
-                float speed = Float.parseFloat(element.getText());
+                float speed = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.movements.MovementSpeedComponent(speed);
             }
         });
@@ -1256,7 +1259,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.movements.MovementTargetComponent construct(){
-                int targetEntity = createChildEntity(0);
+                int targetEntity = createChildEntity(0, "targetEntity");
                 return new amara.game.entitysystem.components.movements.MovementTargetComponent(targetEntity);
             }
         });
@@ -1273,7 +1276,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.movements.MovementTargetSufficientDistanceComponent construct(){
-                float distance = Float.parseFloat(element.getText());
+                float distance = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.movements.MovementTargetSufficientDistanceComponent(distance);
             }
         });
@@ -1299,7 +1302,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.objectives.MissingEntitiesComponent construct(){
-                int[] entities = createChildEntities(0);
+                int[] entities = createChildEntities(0, "entities");
                 return new amara.game.entitysystem.components.objectives.MissingEntitiesComponent(entities);
             }
         });
@@ -1316,7 +1319,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.objectives.OrObjectivesComponent construct(){
-                int[] objectiveEntities = createChildEntities(0);
+                int[] objectiveEntities = createChildEntities(0, "objectiveEntities");
                 return new amara.game.entitysystem.components.objectives.OrObjectivesComponent(objectiveEntities);
             }
         });
@@ -1327,7 +1330,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.physics.DirectionComponent construct(){
-                float radian = Float.parseFloat(element.getText());
+                float radian = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.physics.DirectionComponent(radian);
             }
         });
@@ -1354,8 +1357,8 @@ public class ComponentsRegistrator{
             @Override
             public amara.game.entitysystem.components.physics.PositionComponent construct(){
                 String[] positionCoordinates = element.getText().split(",");
-                float positionX = Float.parseFloat(positionCoordinates[0]);
-                float positionY = Float.parseFloat(positionCoordinates[1]);
+                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[0]));
+                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[1]));
                 Vector2f position = new Vector2f(positionX, positionY);
                 return new amara.game.entitysystem.components.physics.PositionComponent(position);
             }
@@ -1373,7 +1376,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.physics.ScaleComponent construct(){
-                float scale = Float.parseFloat(element.getText());
+                float scale = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.physics.ScaleComponent(scale);
             }
         });
@@ -1383,7 +1386,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.players.ClientComponent construct(){
-                int clientID = Integer.parseInt(element.getText());
+                int clientID = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.players.ClientComponent(clientID);
             }
         });
@@ -1392,7 +1395,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.players.PlayerIndexComponent construct(){
-                int index = Integer.parseInt(element.getText());
+                int index = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.players.PlayerIndexComponent(index);
             }
         });
@@ -1409,7 +1412,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.players.SelectedUnitComponent construct(){
-                int entity = createChildEntity(0);
+                int entity = createChildEntity(0, "entity");
                 return new amara.game.entitysystem.components.players.SelectedUnitComponent(entity);
             }
         });
@@ -1418,7 +1421,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.players.WaitingToRespawnComponent construct(){
-                float remainingDuration = Float.parseFloat(element.getText());
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.players.WaitingToRespawnComponent(remainingDuration);
             }
         });
@@ -1428,7 +1431,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.shop.ShopRangeComponent construct(){
-                float range = Float.parseFloat(element.getText());
+                float range = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.shop.ShopRangeComponent(range);
             }
         });
@@ -1439,8 +1442,8 @@ public class ComponentsRegistrator{
             @Override
             public amara.game.entitysystem.components.spawns.RelativeSpawnPositionComponent construct(){
                 String[] positionCoordinates = element.getText().split(",");
-                float positionX = Float.parseFloat(positionCoordinates[0]);
-                float positionY = Float.parseFloat(positionCoordinates[1]);
+                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[0]));
+                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[1]));
                 Vector2f position = new Vector2f(positionX, positionY);
                 return new amara.game.entitysystem.components.spawns.RelativeSpawnPositionComponent(position);
             }
@@ -1458,7 +1461,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spawns.SpawnMovementAnimationComponent construct(){
-                int animationEntity = createChildEntity(0);
+                int animationEntity = createChildEntity(0, "animationEntity");
                 return new amara.game.entitysystem.components.spawns.SpawnMovementAnimationComponent(animationEntity);
             }
         });
@@ -1467,7 +1470,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spawns.SpawnMovementSpeedComponent construct(){
-                float speed = Float.parseFloat(element.getText());
+                float speed = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.spawns.SpawnMovementSpeedComponent(speed);
             }
         });
@@ -1480,22 +1483,14 @@ public class ComponentsRegistrator{
             }
         });
         Serializer.registerClass(amara.game.entitysystem.components.spawns.SpawnTemplateComponent.class);
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spawns.SpawnTemplateComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spawns.SpawnTemplateComponent>("spawnTemplate"){
-
-            @Override
-            public amara.game.entitysystem.components.spawns.SpawnTemplateComponent construct(){
-                String[] templateNames = element.getText().split(",");
-                return new amara.game.entitysystem.components.spawns.SpawnTemplateComponent(templateNames);
-            }
-        });
         //spells
         Serializer.registerClass(amara.game.entitysystem.components.spells.ApplyCastedSpellComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.ApplyCastedSpellComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.ApplyCastedSpellComponent>("applyCastedSpell"){
 
             @Override
             public amara.game.entitysystem.components.spells.ApplyCastedSpellComponent construct(){
-                int casterEntityID = Integer.parseInt(element.getAttributeValue("casterEntityID"));
-                int castedSpellEntityID = Integer.parseInt(element.getAttributeValue("castedSpellEntityID"));
+                int casterEntityID = Integer.parseInt(xmlTemplateManager.parseValue(element.getAttributeValue("casterEntityID")));
+                int castedSpellEntityID = Integer.parseInt(xmlTemplateManager.parseValue(element.getAttributeValue("castedSpellEntityID")));
                 return new amara.game.entitysystem.components.spells.ApplyCastedSpellComponent(casterEntityID, castedSpellEntityID);
             }
         });
@@ -1504,7 +1499,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spells.BaseCooldownComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.spells.BaseCooldownComponent(duration);
             }
         });
@@ -1513,7 +1508,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spells.CastAnimationComponent construct(){
-                int animationEntity = createChildEntity(0);
+                int animationEntity = createChildEntity(0, "animationEntity");
                 return new amara.game.entitysystem.components.spells.CastAnimationComponent(animationEntity);
             }
         });
@@ -1538,7 +1533,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spells.CastDurationComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.spells.CastDurationComponent(duration);
             }
         });
@@ -1556,7 +1551,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spells.CooldownComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.spells.CooldownComponent(duration);
             }
         });
@@ -1565,7 +1560,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spells.InstantEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0);
+                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
                 return new amara.game.entitysystem.components.spells.InstantEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -1615,7 +1610,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spells.RangeComponent construct(){
-                float distange = Float.parseFloat(element.getText());
+                float distange = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.spells.RangeComponent(distange);
             }
         });
@@ -1624,7 +1619,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spells.RemainingCooldownComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.spells.RemainingCooldownComponent(duration);
             }
         });
@@ -1633,7 +1628,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spells.SpellTargetRulesComponent construct(){
-                int targetRulesEntity = createChildEntity(0);
+                int targetRulesEntity = createChildEntity(0, "targetRulesEntity");
                 return new amara.game.entitysystem.components.spells.SpellTargetRulesComponent(targetRulesEntity);
             }
         });
@@ -1642,7 +1637,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spells.SpellVisualisationComponent construct(){
-                String name = element.getText();
+                String name = xmlTemplateManager.parseValue(element.getText());
                 return new amara.game.entitysystem.components.spells.SpellVisualisationComponent(name);
             }
         });
@@ -1668,7 +1663,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spells.triggers.CastedEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0);
+                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
                 return new amara.game.entitysystem.components.spells.triggers.CastedEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -1677,7 +1672,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spells.triggers.CastedSpellComponent construct(){
-                int spellEntity = createChildEntity(0);
+                int spellEntity = createChildEntity(0, "spellEntity");
                 return new amara.game.entitysystem.components.spells.triggers.CastedSpellComponent(spellEntity);
             }
         });
@@ -1712,7 +1707,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.AggroTargetComponent construct(){
-                int targetEntity = createChildEntity(0);
+                int targetEntity = createChildEntity(0, "targetEntity");
                 return new amara.game.entitysystem.components.units.AggroTargetComponent(targetEntity);
             }
         });
@@ -1722,7 +1717,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.animations.AutoAttackAnimationComponent construct(){
-                int animationEntity = createChildEntity(0);
+                int animationEntity = createChildEntity(0, "animationEntity");
                 return new amara.game.entitysystem.components.units.animations.AutoAttackAnimationComponent(animationEntity);
             }
         });
@@ -1731,7 +1726,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.animations.DeathAnimationComponent construct(){
-                int animationEntity = createChildEntity(0);
+                int animationEntity = createChildEntity(0, "animationEntity");
                 return new amara.game.entitysystem.components.units.animations.DeathAnimationComponent(animationEntity);
             }
         });
@@ -1740,7 +1735,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.animations.IdleAnimationComponent construct(){
-                int animationEntity = createChildEntity(0);
+                int animationEntity = createChildEntity(0, "animationEntity");
                 return new amara.game.entitysystem.components.units.animations.IdleAnimationComponent(animationEntity);
             }
         });
@@ -1749,7 +1744,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.animations.WalkAnimationComponent construct(){
-                int animationEntity = createChildEntity(0);
+                int animationEntity = createChildEntity(0, "animationEntity");
                 return new amara.game.entitysystem.components.units.animations.WalkAnimationComponent(animationEntity);
             }
         });
@@ -1758,7 +1753,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.AttackMoveComponent construct(){
-                int targetEntity = createChildEntity(0);
+                int targetEntity = createChildEntity(0, "targetEntity");
                 return new amara.game.entitysystem.components.units.AttackMoveComponent(targetEntity);
             }
         });
@@ -1767,7 +1762,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.AutoAggroComponent construct(){
-                float range = Float.parseFloat(element.getText());
+                float range = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.AutoAggroComponent(range);
             }
         });
@@ -1776,7 +1771,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.AutoAttackComponent construct(){
-                int autoAttackEntity = createChildEntity(0);
+                int autoAttackEntity = createChildEntity(0, "autoAttackEntity");
                 return new amara.game.entitysystem.components.units.AutoAttackComponent(autoAttackEntity);
             }
         });
@@ -1786,8 +1781,8 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.bounties.BountyBuffComponent construct(){
-                int buffEntity = createChildEntity(0);
-                float duration = Float.parseFloat(element.getAttributeValue("duration"));
+                int buffEntity = createChildEntity(0, "buffEntity");
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getAttributeValue("duration")));
                 return new amara.game.entitysystem.components.units.bounties.BountyBuffComponent(buffEntity, duration);
             }
         });
@@ -1796,7 +1791,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.bounties.BountyGoldComponent construct(){
-                int gold = Integer.parseInt(element.getText());
+                int gold = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.bounties.BountyGoldComponent(gold);
             }
         });
@@ -1805,7 +1800,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.BountyComponent construct(){
-                int bountyEntity = createChildEntity(0);
+                int bountyEntity = createChildEntity(0, "bountyEntity");
                 return new amara.game.entitysystem.components.units.BountyComponent(bountyEntity);
             }
         });
@@ -1814,14 +1809,14 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.CampComponent construct(){
-                int campEntity = createChildEntity(0);
+                int campEntity = createChildEntity(0, "campEntity");
                 String[] positionCoordinates = element.getAttributeValue("position").split(",");
-                float positionX = Float.parseFloat(positionCoordinates[0]);
-                float positionY = Float.parseFloat(positionCoordinates[1]);
+                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[0]));
+                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[1]));
                 Vector2f position = new Vector2f(positionX, positionY);
                 String[] directionCoordinates = element.getAttributeValue("direction").split(",");
-                float directionX = Float.parseFloat(directionCoordinates[0]);
-                float directionY = Float.parseFloat(directionCoordinates[1]);
+                float directionX = Float.parseFloat(xmlTemplateManager.parseValue(directionCoordinates[0]));
+                float directionY = Float.parseFloat(xmlTemplateManager.parseValue(directionCoordinates[1]));
                 Vector2f direction = new Vector2f(directionX, directionY);
                 return new amara.game.entitysystem.components.units.CampComponent(campEntity, position, direction);
             }
@@ -1842,7 +1837,7 @@ public class ComponentsRegistrator{
                 String[] spellIndicesParts = element.getText().split(",");
                 int[] spellIndices = new int[spellIndicesParts.length];
                 for(int i=0;i<spellIndices.length;i++){
-                    spellIndices[i] = Integer.parseInt(spellIndicesParts[i]);
+                    spellIndices[i] = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
                 }
                 return new amara.game.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent(spellIndices);
             }
@@ -1853,7 +1848,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.crowdcontrol.IsBindedComponent construct(){
-                float remainingDuration = Float.parseFloat(element.getText());
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsBindedComponent(remainingDuration);
             }
         });
@@ -1862,7 +1857,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent construct(){
-                float remainingDuration = Float.parseFloat(element.getText());
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent(remainingDuration);
             }
         });
@@ -1871,8 +1866,8 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedComponent construct(){
-                int knockupEntity = createChildEntity(0);
-                float remainingDuration = Float.parseFloat(element.getAttributeValue("remainingDuration"));
+                int knockupEntity = createChildEntity(0, "knockupEntity");
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getAttributeValue("remainingDuration")));
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedComponent(knockupEntity, remainingDuration);
             }
         });
@@ -1881,7 +1876,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent construct(){
-                float remainingDuration = Float.parseFloat(element.getText());
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent(remainingDuration);
             }
         });
@@ -1890,7 +1885,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.crowdcontrol.IsSilencedComponent construct(){
-                float remainingDuration = Float.parseFloat(element.getText());
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsSilencedComponent(remainingDuration);
             }
         });
@@ -1899,7 +1894,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent construct(){
-                float remainingDuration = Float.parseFloat(element.getText());
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent(remainingDuration);
             }
         });
@@ -1908,7 +1903,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.crowdcontrol.IsStunnedComponent construct(){
-                float remainingDuration = Float.parseFloat(element.getText());
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsStunnedComponent(remainingDuration);
             }
         });
@@ -1917,7 +1912,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent construct(){
-                float remainingDuration = Float.parseFloat(element.getText());
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent(remainingDuration);
             }
         });
@@ -1926,7 +1921,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.CurrentActionEffectCastsComponent construct(){
-                int[] effectCastEntities = createChildEntities(0);
+                int[] effectCastEntities = createChildEntities(0, "effectCastEntities");
                 return new amara.game.entitysystem.components.units.CurrentActionEffectCastsComponent(effectCastEntities);
             }
         });
@@ -1946,7 +1941,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent construct(){
-                int[] targetEntities = createChildEntities(0);
+                int[] targetEntities = createChildEntities(0, "targetEntities");
                 return new amara.game.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent(targetEntities);
             }
         });
@@ -1971,7 +1966,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.effecttriggers.TriggerDelayComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.effecttriggers.TriggerDelayComponent(duration);
             }
         });
@@ -1980,7 +1975,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.effecttriggers.TriggeredEffectComponent construct(){
-                int effectEntity = createChildEntity(0);
+                int effectEntity = createChildEntity(0, "effectEntity");
                 return new amara.game.entitysystem.components.units.effecttriggers.TriggeredEffectComponent(effectEntity);
             }
         });
@@ -2038,7 +2033,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent construct(){
-                float intervalDuration = Float.parseFloat(element.getText());
+                float intervalDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent(intervalDuration);
             }
         });
@@ -2047,7 +2042,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent construct(){
-                int counter = Integer.parseInt(element.getText());
+                int counter = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent(counter);
             }
         });
@@ -2064,7 +2059,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent(duration);
             }
         });
@@ -2073,7 +2068,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.effecttriggers.TriggerSourceComponent construct(){
-                int sourceEntity = createChildEntity(0);
+                int sourceEntity = createChildEntity(0, "sourceEntity");
                 return new amara.game.entitysystem.components.units.effecttriggers.TriggerSourceComponent(sourceEntity);
             }
         });
@@ -2090,7 +2085,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.GoldComponent construct(){
-                int gold = Integer.parseInt(element.getText());
+                int gold = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.GoldComponent(gold);
             }
         });
@@ -2099,7 +2094,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.IntersectionRulesComponent construct(){
-                int targetRulesEntity = createChildEntity(0);
+                int targetRulesEntity = createChildEntity(0, "targetRulesEntity");
                 return new amara.game.entitysystem.components.units.IntersectionRulesComponent(targetRulesEntity);
             }
         });
@@ -2116,8 +2111,8 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.IsCastingComponent construct(){
-                float remainingDuration = Float.parseFloat(element.getAttributeValue("remainingDuration"));
-                boolean isCancelable = Boolean.parseBoolean(element.getAttributeValue("isCancelable"));
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getAttributeValue("remainingDuration")));
+                boolean isCancelable = Boolean.parseBoolean(xmlTemplateManager.parseValue(element.getAttributeValue("isCancelable")));
                 return new amara.game.entitysystem.components.units.IsCastingComponent(remainingDuration, isCancelable);
             }
         });
@@ -2158,7 +2153,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.LifetimeComponent construct(){
-                float remainingDuration = Float.parseFloat(element.getText());
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.LifetimeComponent(remainingDuration);
             }
         });
@@ -2167,7 +2162,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.MaximumAggroRangeComponent construct(){
-                float range = Float.parseFloat(element.getText());
+                float range = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.MaximumAggroRangeComponent(range);
             }
         });
@@ -2176,7 +2171,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.MovementComponent construct(){
-                int movementEntity = createChildEntity(0);
+                int movementEntity = createChildEntity(0, "movementEntity");
                 return new amara.game.entitysystem.components.units.MovementComponent(movementEntity);
             }
         });
@@ -2188,12 +2183,12 @@ public class ComponentsRegistrator{
                 String[] spellIndicesParts = element.getAttributeValue("spellIndices").split(",");
                 int[] spellIndices = new int[spellIndicesParts.length];
                 for(int i=0;i<spellIndices.length;i++){
-                    spellIndices[i] = Integer.parseInt(spellIndicesParts[i]);
+                    spellIndices[i] = Integer.parseInt(xmlTemplateManager.parseValue(element.getAttributeValue("spellIndices")));
                 }
                 String[] cooldownsParts = element.getAttributeValue("cooldowns").split(",");
                 int[] cooldowns = new int[cooldownsParts.length];
                 for(int i=0;i<cooldowns.length;i++){
-                    cooldowns[i] = Integer.parseInt(cooldownsParts[i]);
+                    cooldowns[i] = Integer.parseInt(xmlTemplateManager.parseValue(element.getAttributeValue("cooldowns")));
                 }
                 return new amara.game.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent(spellIndices, cooldowns);
             }
@@ -2203,7 +2198,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.SpellsComponent construct(){
-                int[] spellsEntities = createChildEntities(0);
+                int[] spellsEntities = createChildEntities(0, "spellsEntities");
                 return new amara.game.entitysystem.components.units.SpellsComponent(spellsEntities);
             }
         });
@@ -2215,7 +2210,7 @@ public class ComponentsRegistrator{
                 String[] targetsParts = element.getText().split(",");
                 int[] targets = new int[targetsParts.length];
                 for(int i=0;i<targets.length;i++){
-                    targets[i] = Integer.parseInt(targetsParts[i]);
+                    targets[i] = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
                 }
                 return new amara.game.entitysystem.components.units.TargetsInAggroRangeComponent(targets);
             }
@@ -2225,7 +2220,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.TeamComponent construct(){
-                int teamEntity = createChildEntity(0);
+                int teamEntity = createChildEntity(0, "teamEntity");
                 return new amara.game.entitysystem.components.units.TeamComponent(teamEntity);
             }
         });
@@ -2234,7 +2229,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.WalkStepDistanceComponent construct(){
-                float distance = Float.parseFloat(element.getText());
+                float distance = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.WalkStepDistanceComponent(distance);
             }
         });
@@ -2244,7 +2239,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.visuals.AnimationComponent construct(){
-                int animationEntity = createChildEntity(0);
+                int animationEntity = createChildEntity(0, "animationEntity");
                 return new amara.game.entitysystem.components.visuals.AnimationComponent(animationEntity);
             }
         });
@@ -2262,7 +2257,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.visuals.animations.LoopDurationComponent construct(){
-                float duration = Float.parseFloat(element.getText());
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.visuals.animations.LoopDurationComponent(duration);
             }
         });
@@ -2271,7 +2266,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.visuals.animations.PassedLoopTimeComponent construct(){
-                float passedTime = Float.parseFloat(element.getText());
+                float passedTime = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.visuals.animations.PassedLoopTimeComponent(passedTime);
             }
         });
@@ -2280,7 +2275,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.visuals.animations.RemainingLoopsComponent construct(){
-                int loopsCount = Integer.parseInt(element.getText());
+                int loopsCount = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.visuals.animations.RemainingLoopsComponent(loopsCount);
             }
         });
@@ -2289,7 +2284,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.visuals.ModelComponent construct(){
-                String modelSkinPath = element.getText();
+                String modelSkinPath = xmlTemplateManager.parseValue(element.getText());
                 return new amara.game.entitysystem.components.visuals.ModelComponent(modelSkinPath);
             }
         });
@@ -2298,7 +2293,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.visuals.TitleComponent construct(){
-                String title = element.getText();
+                String title = xmlTemplateManager.parseValue(element.getText());
                 return new amara.game.entitysystem.components.visuals.TitleComponent(title);
             }
         });

@@ -1,24 +1,30 @@
 <template>
     <entity id="spell">
-        <name>Ignite</name>
-        <description>Deals damage over time to the target.</description>
-        <spellVisualisation>ignite</spellVisualisation>
+        <name>Melee Autoattack</name>
         <instantEffectTriggers>
-            <!--trigger spell effects-->
+            <!--trigger spell effects, play audio-->
             <entity>
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
                         <triggerSpellEffects>#spell</triggerSpellEffects>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/melee_autoattack_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
             </entity>
         </instantEffectTriggers>
         <castType>single_target</castType>
+        <castCancelAction/>
+        <castCancelable/>
+        <stopBeforeCasting/>
         <castTurnToTarget/>
-        <range>10</range>
-        <baseCooldown>18</baseCooldown>
+        <range>6</range>
         <spellTargetRules>
             <entity>
                 <acceptEnemies/>
@@ -34,17 +40,8 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <addBuff duration="5">
-                            <entity>
-                                <buffVisualisation>burning</buffVisualisation>
-                                <repeatingEffect interval="0.5">
-                                    <entity>
-                                        <flatMagicDamage>40</flatMagicDamage>
-                                        <scalingAbilityPowerMagicDamage>1</scalingAbilityPowerMagicDamage>
-                                    </entity>
-                                </repeatingEffect>
-                            </entity>
-                        </addBuff>
+                        <scalingAttackDamagePhysicalDamage>1</scalingAttackDamagePhysicalDamage>
+                        <drawTeamAggro>15</drawTeamAggro>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

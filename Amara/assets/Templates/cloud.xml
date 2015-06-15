@@ -1,0 +1,5 @@
+<template>
+    <entity>
+        <model>Models/cloud/skin.xml</model>
+    </entity>
+</template>
