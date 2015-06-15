@@ -34,27 +34,29 @@ public class XMLTemplateManager{
     private String resourcePath;
     private HashMap<String, XMLComponentConstructor> xmlComponentConstructors = new HashMap<String, XMLComponentConstructor>();
     private Stack<HashMap<String, Integer>> cachedEntities = new Stack<HashMap<String, Integer>>();
+    private String[] cachedParameters;
     
     public <T> void registerComponent(Class<T> componentClass, XMLComponentConstructor<T> xmlComponentConstructor){
         xmlComponentConstructors.put(xmlComponentConstructor.getElementName(), xmlComponentConstructor);
-        //registerMessageSerializer(componentClass);
     }
     
-    public void loadTemplate(EntityWorld entityWorld, int entity, String templateName){
+    public void loadTemplate(EntityWorld entityWorld, int entity, String templateName, String[] parameters){
         String templateResourcePath = (resourcePath + templateName + ".xml");
         if(Util.existsResource(templateResourcePath)){
             try{
                 InputStream inputStream = Util.getResourceInputStream(templateResourcePath);
-                loadTemplate(entityWorld, entity, new SAXBuilder().build(inputStream));
+                loadTemplate(entityWorld, entity, new SAXBuilder().build(inputStream), parameters);
             }catch(Exception ex){
-                System.out.println("Error while loading template '" + templateName + "': " + ex.toString());
+                System.err.println("Error while loading template '" + templateName + "'.");
+                ex.printStackTrace();
             }
         }
     }
     
-    public void loadTemplate(EntityWorld entityWorld, int entity, Document document){
+    public void loadTemplate(EntityWorld entityWorld, int entity, Document document, String[] parameters){
         Element templateElement = document.getRootElement();
         cachedEntities.push(new HashMap<String, Integer>(10));
+        cachedParameters = parameters;
         boolean isFirstChild = true;
         for(Object entityElementObject : templateElement.getChildren()){
             Element entityElement = (Element) entityElementObject;
@@ -78,11 +80,11 @@ public class XMLTemplateManager{
     private void loadEntity(EntityWorld entityWorld, int entity, Element entityElement){
         String id = entityElement.getAttributeValue("id");
         if(id != null){
-            getCachedEntities().put(id, entity);
+            cachedEntities.lastElement().put(id, entity);
         }
-        String template = entityElement.getAttributeValue("template");
-        if(template != null){
-            EntityTemplate.loadTemplate(entityWorld, entity, template);
+        String templateXMLText = entityElement.getAttributeValue("template");
+        if(templateXMLText != null){
+            EntityTemplate.loadTemplate(entityWorld, entity, parseTemplate(templateXMLText));
         }
         for(Object componentElementObject : entityElement.getChildren()){
             Element componentElement = (Element) componentElementObject;
@@ -93,8 +95,34 @@ public class XMLTemplateManager{
         }
     }
     
-    public HashMap<String, Integer> getCachedEntities(){
-        return cachedEntities.lastElement();
+    public String parseTemplate(String templateXMLText){
+        String template = templateXMLText;
+        if(template.matches("(.*)\\((.*)\\)")){
+            int bracketStart = template.indexOf("(");
+            int bracketEnd = template.indexOf(")");
+            String[] parameters = template.substring(bracketStart + 1, bracketEnd).split(",");
+            template = template.substring(0, bracketStart);
+            for(String parameter : parameters){
+                template += "," + parseValue(parameter);
+            }
+        }
+        return template;
+    }
+    
+    public String parseValue(String text){
+        if(text.startsWith("#")){
+            String entityID = text.substring(1);
+            Integer entity = cachedEntities.lastElement().get(entityID);
+            if(entity != null){
+                return entity.toString();
+            }
+            System.err.println("Undefined entity id '" + entityID + "'.");
+        }
+        else if(text.startsWith("[") && text.endsWith("]")){
+            int parameterIndex = Integer.parseInt(text.substring(1, text.length() - 1));
+            return cachedParameters[parameterIndex];
+        }
+        return text;
     }
     
     private <T> T constructComponent(EntityWorld entityWorld, Element element){

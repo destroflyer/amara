@@ -1,12 +1,12 @@
 <template>
     <entity id="spell">
-        <name>Ignite</name>
-        <description>Deals damage over time to the target.</description>
-        <spellVisualisation>ignite</spellVisualisation>
+        <name>Battle Cry</name>
+        <description>Increases the attack speed for a few seconds.</description>
+        <spellVisualisation>battle_cry</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
-                <targetTarget/>
+                <casterTarget/>
                 <triggeredEffect>
                     <entity>
                         <triggerSpellEffects>#spell</triggerSpellEffects>
@@ -15,15 +15,8 @@
                 <triggerSource>#spell</triggerSource>
             </entity>
         </instantEffectTriggers>
-        <castType>single_target</castType>
-        <castTurnToTarget/>
-        <range>10</range>
-        <baseCooldown>18</baseCooldown>
-        <spellTargetRules>
-            <entity>
-                <acceptEnemies/>
-            </entity>
-        </spellTargetRules>
+        <castType>selfcast</castType>
+        <baseCooldown>16</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>
@@ -36,13 +29,11 @@
                     <entity>
                         <addBuff duration="5">
                             <entity>
-                                <buffVisualisation>burning</buffVisualisation>
-                                <repeatingEffect interval="0.5">
+                                <continuousEffect>
                                     <entity>
-                                        <flatMagicDamage>40</flatMagicDamage>
-                                        <scalingAbilityPowerMagicDamage>1</scalingAbilityPowerMagicDamage>
+                                        <bonusPercentageAttackSpeed>0.8</bonusPercentageAttackSpeed>
                                     </entity>
-                                </repeatingEffect>
+                                </continuousEffect>
                             </entity>
                         </addBuff>
                     </entity>

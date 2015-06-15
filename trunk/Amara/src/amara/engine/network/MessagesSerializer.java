@@ -13,6 +13,7 @@ import amara.engine.network.messages.*;
 import amara.engine.network.messages.entitysystem.*;
 import amara.engine.network.messages.protocol.*;
 import amara.game.entitysystem.components.physics.*;
+import amara.game.entitysystem.components.spawns.SpawnTemplateComponent;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.synchronizing.*;
@@ -132,13 +133,29 @@ public class MessagesSerializer{
                 String shapeType = childElement.getName();
                 if(shapeType.equals("regularCyclic")){
                     int edges = Integer.parseInt(childElement.getAttributeValue("edges"));
-                    int radius = Integer.parseInt(childElement.getAttributeValue("radius"));
+                    double radius = Double.parseDouble(childElement.getAttributeValue("radius"));
                     shape = new RegularCyclic(edges, radius);
+                }
+                else if(shapeType.equals("circle")){
+                    double radius = Double.parseDouble(childElement.getAttributeValue("radius"));
+                    shape = new Circle(radius);
                 }
                 if(shape == null){
                     throw new UnsupportedOperationException("Unsupported shape type '" + shapeType + "'.");
                 }
                 return new HitboxComponent(shape);
+            }
+        });
+        //spawns
+        xmlTemplateManager.registerComponent(SpawnTemplateComponent.class, new XMLComponentConstructor<SpawnTemplateComponent>("spawnTemplate"){
+
+            @Override
+            public SpawnTemplateComponent construct(){
+                String[] templates = element.getText().split(",");
+                for(int i=0;i<templates.length;i++){
+                    templates[i] = xmlTemplateManager.parseTemplate(templates[i]);
+                }
+                return new SpawnTemplateComponent(templates);
             }
         });
         //spells

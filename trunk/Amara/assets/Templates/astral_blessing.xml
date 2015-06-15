@@ -1,0 +1,37 @@
+<template>
+    <entity id="spell">
+        <name>Heal</name>
+        <description>Soraka in a nutshell.</description>
+        <spellVisualisation>astral_blessing</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <baseCooldown>4.5</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <flatHeal>100</flatHeal>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

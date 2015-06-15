@@ -1,19 +1,23 @@
 <template>
     <entity id="spell">
-        <name>Riftwalk</name>
-        <description>Teleports to the target location.</description>
-        <spellVisualisation>riftwalk</spellVisualisation>
+        <name>Grab</name>
+        <description>Beep boop.</description>
+        <spellVisualisation>grab</spellVisualisation>
         <instantEffectTriggers>
-            <!--trigger spell effects-->
+            <!--spawn projectile-->
             <entity>
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>grab_projectile</spawnTemplate>
+                                <spawnMovementSpeed>12</spawnMovementSpeed>
+                            </entity>
+                        </spawn>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
-                <triggerDelay>0.25</triggerDelay>
             </entity>
             <!--play audio-->
             <entity>
@@ -22,7 +26,8 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/riftwalk_cast.ogg</audio>
+                                <audio>Sounds/sounds/spells/grab_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>
                     </entity>
@@ -30,28 +35,34 @@
                 <triggerSource>#spell</triggerSource>
             </entity>
         </instantEffectTriggers>
-        <castType>positional_skillshot</castType>
+        <castType>linear_skillshot</castType>
         <castCancelAction/>
-        <castDuration>0.5</castDuration>
+        <castDuration>1.5</castDuration>
+        <stopBeforeCasting/>
         <castTurnToTarget/>
         <castAnimation>
             <entity>
-                <name>pop</name>
-                <loopDuration>0.5</loopDuration>
+                <name>grab</name>
+                <loopDuration>1.5</loopDuration>
             </entity>
         </castAnimation>
-        <baseCooldown>6</baseCooldown>
+        <baseCooldown>20</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>
         <castedSpell>#spell</castedSpell>
         <castedEffectTriggers>
-            <!--teleport-->
+            <!--target effect-->
             <entity>
-                <casterTarget/>
+                <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <teleportToTargetPosition/>
+                        <move>
+                            <entity>
+                                <movementTarget>[0]</movementTarget>
+                                <movementSpeed>9</movementSpeed>
+                            </entity>
+                        </move>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
