@@ -1,5 +1,5 @@
 <skin name="steve">
-    <model scale="0.5">
+    <model normScale="0.59" scale="0.85">
         <position>
             <location>0,0,0</location>
             <direction>-1,0,0</direction>

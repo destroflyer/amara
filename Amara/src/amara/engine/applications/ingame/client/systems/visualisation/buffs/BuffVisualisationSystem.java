@@ -74,10 +74,14 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
     
     private void removeVisualAttachment(int buffStatusEntity, int targetEntity){
         Node entityNode = entitySceneMap.requestNode(targetEntity);
-        Spatial visualAttachment = entityNode.getChild(getVisualAttachmentID(buffStatusEntity));
-        if(visualAttachment != null){
-            removeVisualAttachment(targetEntity, entityNode, visualAttachment);
-        }
+        Spatial visualAttachment;
+        do{
+            visualAttachment = entityNode.getChild(getVisualAttachmentID(buffStatusEntity));
+            if(visualAttachment != null){
+                removeVisualAttachment(targetEntity, entityNode, visualAttachment);
+            }
+        }while(visualAttachment != null);
+        
     }
     
     protected void removeVisualAttachment(int targetEntity, Node entityNode, Spatial visualAttachment){

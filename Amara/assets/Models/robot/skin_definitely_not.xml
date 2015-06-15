@@ -1,5 +1,5 @@
 <skin name="robot">
-    <model scale="1">
+    <model normScale="1.11" scale="0.9">
         <material>
             <!--metal_gold-->
             <color index="0">0.8,0.66,0.1,1</color>
