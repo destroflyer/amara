@@ -1,0 +1,57 @@
+<template>
+    <entity>
+        <name>Soldier</name>
+        <!--model-->
+        <model>Models/soldier/skin_default.xml</model>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>auto_attack</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>death</name>
+                <loopDuration>0.9</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup group="units" collidesWith="map|units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseMaximumHealth>400</baseMaximumHealth>
+        <baseAttackDamage>80</baseAttackDamage>
+        <baseAttackSpeed>0.7</baseAttackSpeed>
+        <baseArmor>25</baseArmor>
+        <baseMagicResistance>30</baseMagicResistance>
+        <baseWalkSpeed>5</baseWalkSpeed>
+        <inventory>
+            <entity template="boots"/>
+            <entity template="dorans_blade"/>
+            <entity template="dagger"/>
+        </inventory>
+        <requestUpdateAttributes/>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="melee_autoattack"/>
+        </autoAttack>
+        <spells>
+            <entity template="leap_strike"/>
+            <entity template="empower"/>
+            <entity template="spinning_slash"/>
+            <entity template="bear_stance"/>
+        </spells>
+    </entity>
+</template>

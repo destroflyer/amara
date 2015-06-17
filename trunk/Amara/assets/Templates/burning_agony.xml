@@ -1,0 +1,65 @@
+<template>
+    <entity id="spell">
+        <name>Burning Agony</name>
+        <spellVisualisation>burning_agony</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <baseCooldown>4</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--add buff area-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuffArea>
+                            <entity id="buffArea">
+                                <hitbox>
+                                    <circle radius="2.25"/>
+                                </hitbox>
+                                <areaBuff>
+                                    <entity>
+                                        <buffVisualisation>burning</buffVisualisation>
+                                        <repeatingEffect interval="0.5">
+                                            <entity>
+                                                <flatMagicDamage>30</flatMagicDamage>
+                                            </entity>
+                                        </repeatingEffect>
+                                    </entity>
+                                </areaBuff>
+                                <areaBuffTargetRules>
+                                    <entity>
+                                        <acceptEnemies/>
+                                    </entity>
+                                </areaBuffTargetRules>
+                            </entity>
+                        </addBuffArea>
+                        <addBuff duration="-1">
+                            <entity id="visualisationBuff">
+                                <buffVisualisation>burning</buffVisualisation>
+                            </entity>
+                        </addBuff>
+                        <replaceSpellWithExistingSpell spellIndex="[0]">
+                            <entity template="burning_agony_deactivate([0],#buffArea,#spell,#visualisationBuff)"/>
+                        </replaceSpellWithExistingSpell>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

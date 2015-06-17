@@ -1,0 +1,57 @@
+<template>
+    <entity id="spell">
+        <name>Leap Strike</name>
+        <spellVisualisation>leap_strike</spellVisualisation>
+        <instantEffectTriggers>
+            <!--move to target-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <move>
+                            <entity>
+                                <targetedMovementTarget/>
+                                <movementSpeed>30</movementSpeed>
+                            </entity>
+                        </move>
+                        <addEffectTriggers>
+                            <!--trigger spell effects-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <targetTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castCancelAction/>
+        <castTurnToTarget/>
+        <range>9</range>
+        <baseCooldown>16</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <flatPhysicalDamage>70</flatPhysicalDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>
