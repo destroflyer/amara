@@ -1,0 +1,43 @@
+<template>
+    <entity id="spell">
+        <name>Event Horizon</name>
+        <spellVisualisation>event_horizon</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn object-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>event_horizon_object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>positional_skillshot</castType>
+        <castCancelAction/>
+        <castTurnToTarget/>
+        <range>12</range>
+        <baseCooldown>18</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addStun>2.5</addStun>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

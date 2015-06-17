@@ -27,8 +27,8 @@ public class BuffVisualisationSystem_Empowered extends BuffVisualisationSystem{
         SimpleParticleEmitter simpleParticleEmitter = new SimpleParticleEmitter();
         ParticleEmitter particleEmitter = simpleParticleEmitter.getParticleEmitter();
         particleEmitter.setParticlesPerSec(10);
-        particleEmitter.setLowLife(4);
-        particleEmitter.setHighLife(4);
+        particleEmitter.setLowLife(2.75f);
+        particleEmitter.setHighLife(2.75f);
         particleEmitter.setStartSize(0.7f);
         particleEmitter.setEndSize(0.7f);
         particleEmitter.setStartColor(new ColorRGBA(1, 1, 0, 1));
@@ -39,6 +39,7 @@ public class BuffVisualisationSystem_Empowered extends BuffVisualisationSystem{
         particleEmitter.getMaterial().getAdditionalRenderState().setDepthTest(false);
         particleEmitter.setUserData("layer", 1);
         particleEmitter.updateLogicalState(10);
+        particleEmitter.setLocalScale(2.5f);
         return simpleParticleEmitter;
     }
 }

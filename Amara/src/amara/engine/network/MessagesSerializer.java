@@ -140,6 +140,11 @@ public class MessagesSerializer{
                     double radius = Double.parseDouble(childElement.getAttributeValue("radius"));
                     shape = new Circle(radius);
                 }
+                else if(shapeType.equals("rectangle")){
+                    double width = Double.parseDouble(childElement.getAttributeValue("width"));
+                    double height = Double.parseDouble(childElement.getAttributeValue("height"));
+                    shape = new Rectangle(width, height);
+                }
                 if(shape == null){
                     throw new UnsupportedOperationException("Unsupported shape type '" + shapeType + "'.");
                 }

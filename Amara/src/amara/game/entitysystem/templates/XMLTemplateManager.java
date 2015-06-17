@@ -61,6 +61,10 @@ public class XMLTemplateManager{
         for(Object entityElementObject : templateElement.getChildren()){
             Element entityElement = (Element) entityElementObject;
             if(isFirstChild){
+                String id = entityElement.getAttributeValue("id");
+                if(id != null){
+                    cachedEntities.lastElement().put(id, entity);
+                }
                 loadEntity(entityWorld, entity, entityElement);
             }
             else{
@@ -72,16 +76,25 @@ public class XMLTemplateManager{
     }
     
     public int createEntity(EntityWorld entityWorld, Element entityElement){
-        int entity = entityWorld.createEntity();
+        if(entityElement.getName().equals("empty")){
+            return -1;
+        }
+        Integer entity = null;
+        String id = entityElement.getAttributeValue("id");
+        if(id != null){
+            entity = cachedEntities.lastElement().get(id);
+        }
+        if(entity == null){
+            entity = entityWorld.createEntity();
+            if(id != null){
+                cachedEntities.lastElement().put(id, entity);
+            }
+        }
         loadEntity(entityWorld, entity, entityElement);
         return entity;
     }
     
     private void loadEntity(EntityWorld entityWorld, int entity, Element entityElement){
-        String id = entityElement.getAttributeValue("id");
-        if(id != null){
-            cachedEntities.lastElement().put(id, entity);
-        }
         String templateXMLText = entityElement.getAttributeValue("template");
         if(templateXMLText != null){
             EntityTemplate.loadTemplate(entityWorld, entity, parseTemplate(templateXMLText));
