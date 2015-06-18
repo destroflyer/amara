@@ -1,0 +1,9 @@
+<template>
+    <entity>
+        <itemID>chain_vest</itemID>
+        <itemRecipe gold="450" itemIDs="cloth_armor"/>
+        <isSellable>525</isSellable>
+        <!--stats-->
+        <bonusFlatArmor>40</bonusFlatArmor>
+    </entity>
+</template>

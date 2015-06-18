@@ -1,7 +1,7 @@
 <template>
     <entity id="object">
         <hitbox>
-            <circle radius="7"/>
+            <circle radius="8"/>
         </hitbox>
         <collisionGroup group="spells" collidesWith="units"/>
         <hitboxActive/>
@@ -18,13 +18,7 @@
         <targetTarget/>
         <triggeredEffect>
             <entity>
-                <triggerSpellEffects>[parameter0]</triggerSpellEffects>
-                <playAudio>
-                    <entity>
-                        <audio>Sounds/sounds/spells/unstoppable_force_hit.ogg</audio>
-                        <audioVolume>1.5</audioVolume>
-                    </entity>
-                </playAudio>
+                <triggerCastedSpellEffects/>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>

@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>randuins_omen</itemID>
+        <itemRecipe gold="800" itemIDs="giants_belt,chain_vest"/>
+        <isSellable>1995</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumHealth>500</bonusFlatMaximumHealth>
+        <bonusFlatArmor>70</bonusFlatArmor>
+    </entity>
+</template>

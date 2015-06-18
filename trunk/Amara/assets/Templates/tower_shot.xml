@@ -1,8 +1,6 @@
 <template>
     <entity id="spell">
-        <name>Grab</name>
-        <description>Beep boop.</description>
-        <spellVisualisation>grab</spellVisualisation>
+        <name>Tower Shot</name>
         <instantEffectTriggers>
             <!--spawn projectile-->
             <entity>
@@ -11,8 +9,9 @@
                     <entity>
                         <spawn>
                             <entity>
-                                <spawnTemplate>grab_projectile</spawnTemplate>
-                                <spawnMovementSpeed>12</spawnMovementSpeed>
+                                <spawnTemplate>tower_shot_projectile</spawnTemplate>
+                                <spawnMoveToTarget/>
+                                <spawnMovementSpeed>18</spawnMovementSpeed>
                             </entity>
                         </spawn>
                     </entity>
@@ -26,7 +25,7 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/grab_cast.ogg</audio>
+                                <audio>Sounds/sounds/spells/tower_shot_cast.ogg</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>
@@ -35,18 +34,15 @@
                 <triggerSource>#spell</triggerSource>
             </entity>
         </instantEffectTriggers>
-        <castType>linear_skillshot</castType>
         <castCancelAction/>
-        <castDuration>1.5</castDuration>
+        <castCancelable/>
         <stopBeforeCasting/>
-        <castTurnToTarget/>
-        <castAnimation>
+        <range>19</range>
+        <spellTargetRules>
             <entity>
-                <name>grab</name>
-                <loopDuration>1.5</loopDuration>
+                <acceptEnemies/>
             </entity>
-        </castAnimation>
-        <baseCooldown>20</baseCooldown>
+        </spellTargetRules>
     </entity>
     <!--spell effect-->
     <entity>
@@ -57,12 +53,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <move>
-                            <entity>
-                                <movementTarget>[parameter0]</movementTarget>
-                                <movementSpeed>9</movementSpeed>
-                            </entity>
-                        </move>
+                        <scalingAttackDamagePhysicalDamage>1</scalingAttackDamagePhysicalDamage>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

@@ -1,7 +1,5 @@
 <template>
     <entity id="spell">
-        <name>Intervention</name>
-        <spellVisualisation>intervention</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
@@ -15,33 +13,32 @@
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
-        <baseCooldown>90</baseCooldown>
+        <baseCooldown>15</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>
         <castedSpell>#spell</castedSpell>
         <castedEffectTriggers>
-            <!--remove vulnerability-->
+            <!--target effect-->
             <entity>
-                <casterTarget/>
+                <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <removeVulnerability/>
-                        <addBuff duration="3">
+                        <addBuff duration="6">
                             <entity>
-                                <buffVisualisation>intervention</buffVisualisation>
-                                <onBuffRemoveEffectTriggers>
+                                <continuousEffect>
                                     <entity>
-                                        <customTarget>[parameter0]</customTarget>
-                                        <triggeredEffect>
-                                            <entity>
-                                                <addVulnerability/>
-                                            </entity>
-                                        </triggeredEffect>
+                                        <bonusPercentageAttackSpeed>1</bonusPercentageAttackSpeed>
+                                        <bonusPercentageWalkSpeed>0.35</bonusPercentageWalkSpeed>
                                     </entity>
-                                </onBuffRemoveEffectTriggers>
+                                </continuousEffect>
                             </entity>
                         </addBuff>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/youmuus_ghostblade_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

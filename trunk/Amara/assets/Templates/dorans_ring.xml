@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>dorans_ring</itemID>
+        <itemRecipe gold="400"/>
+        <isSellable>160</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumHealth>80</bonusFlatMaximumHealth>
+        <bonusFlatAbilityPower>15</bonusFlatAbilityPower>
+    </entity>
+</template>

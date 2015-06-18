@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>ionian_boots_of_lucidity</itemID>
+        <itemRecipe gold="675" itemIDs="boots"/>
+        <isSellable>700</isSellable>
+        <!--stats-->
+        <bonusFlatWalkSpeed>0.9</bonusFlatWalkSpeed>
+        <bonusPercentageCooldownSpeed>0.15</bonusPercentageCooldownSpeed>
+    </entity>
+</template>

@@ -53,8 +53,8 @@
                                 <buffVisualisation>burning</buffVisualisation>
                             </entity>
                         </addBuff>
-                        <replaceSpellWithExistingSpell spellIndex="[0]">
-                            <entity template="burning_agony_deactivate([0],#buffArea,#spell,#visualisationBuff)"/>
+                        <replaceSpellWithExistingSpell spellIndex="[parameter0]">
+                            <entity template="burning_agony_deactivate([parameter0],#buffArea,#spell,#visualisationBuff)"/>
                         </replaceSpellWithExistingSpell>
                     </entity>
                 </triggeredEffect>

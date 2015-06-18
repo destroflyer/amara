@@ -1,0 +1,9 @@
+<template>
+    <entity>
+        <itemID>giants_belt</itemID>
+        <itemRecipe gold="1000"/>
+        <isSellable>700</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumHealth>380</bonusFlatMaximumHealth>
+    </entity>
+</template>

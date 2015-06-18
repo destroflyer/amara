@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>tiamat</itemID>
+        <itemRecipe gold="1900"/>
+        <isSellable>1330</isSellable>
+        <!--stats-->
+        <bonusFlatAttackDamage>40</bonusFlatAttackDamage>
+        <bonusFlatHealthRegeneration>15</bonusFlatHealthRegeneration>
+    </entity>
+</template>

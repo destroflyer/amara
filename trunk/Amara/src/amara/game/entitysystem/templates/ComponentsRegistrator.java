@@ -1144,9 +1144,13 @@ public class ComponentsRegistrator{
             @Override
             public amara.game.entitysystem.components.items.ItemRecipeComponent construct(){
                 int gold = Integer.parseInt(xmlTemplateManager.parseValue(element.getAttributeValue("gold")));
-                String[] itemIDs = element.getAttributeValue("itemIDs").split(",");
-                for(int i=0;i<itemIDs.length;i++){
-                    itemIDs[i] = xmlTemplateManager.parseValue(itemIDs[i]);
+                String[] itemIDs = new String[0];
+                String itemIDsText = element.getAttributeValue("itemIDs");
+                if(itemIDsText != null){
+                    itemIDs = itemIDsText.split(",");
+                    for(int i=0;i<itemIDs.length;i++){
+                        itemIDs[i] = xmlTemplateManager.parseValue(itemIDs[i]);
+                    }
                 }
                 return new amara.game.entitysystem.components.items.ItemRecipeComponent(gold, itemIDs);
             }

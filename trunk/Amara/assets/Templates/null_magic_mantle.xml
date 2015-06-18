@@ -1,0 +1,9 @@
+<template>
+    <entity>
+        <itemID>null_magic_mantle</itemID>
+        <itemRecipe gold="500"/>
+        <isSellable>350</isSellable>
+        <!--stats-->
+        <bonusFlatMagicResistance>25</bonusFlatMagicResistance>
+    </entity>
+</template>
