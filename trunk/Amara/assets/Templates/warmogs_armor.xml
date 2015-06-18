@@ -4,7 +4,7 @@
         <itemRecipe gold="1500" itemIDs="giants_belt,rejuvenation_bead,rejuvenation_bead"/>
         <isSellable>1981</isSellable>
         <!--stats-->
-        <bnusFlatMaximumHealth>1000</bnusFlatMaximumHealth>
+        <bonusFlatMaximumHealth>1000</bonusFlatMaximumHealth>
         <bonusFlatHealthRegeneration>15</bonusFlatHealthRegeneration>
     </entity>
 </template>
