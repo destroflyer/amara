@@ -100,9 +100,13 @@ public class ComponentsRegistrator_Generate{
                                 }
                                 else if(parameterType.equals("String...") || parameterType.equals("String[]")){
                                     String parseMethodName = (parameterName.endsWith("Templates")?"parseTemplate":"parseValue");
-                                    code += "                String[] " + parameterName + " = " + textAccessCode + ".split(\"" + LIST_SEPERATOR + "\");\n";
-                                    code += "                for(int i=0;i<" + parameterName + ".length;i++){\n";
-                                    code += "                    " + parameterName + "[i] = xmlTemplateManager." + parseMethodName + "(" + parameterName + "[i]);\n";
+                                    code += "                String[] " + parameterName + " = new String[0];\n";
+                                    code += "                String " + parameterName + "Text = " + textAccessCode + ";\n";
+                                    code += "                if(" + parameterName + "Text != null){\n";
+                                    code += "                    " + parameterName + " = " + parameterName + "Text.split(\"" + LIST_SEPERATOR + "\");\n";
+                                    code += "                    for(int i=0;i<" + parameterName + ".length;i++){\n";
+                                    code += "                        " + parameterName + "[i] = xmlTemplateManager." + parseMethodName + "(" + parameterName + "[i]);\n";
+                                    code += "                    }\n";
                                     code += "                }\n";
                                     wasHandled = true;
                                 }

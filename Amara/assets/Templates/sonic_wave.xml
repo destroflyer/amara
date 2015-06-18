@@ -41,7 +41,7 @@
                                         <casterTarget/>
                                         <triggeredEffect>
                                             <entity>
-                                                <replaceSpellWithExistingSpell spellIndex="[0]">#spell</replaceSpellWithExistingSpell>
+                                                <replaceSpellWithExistingSpell spellIndex="[parameter0]">#spell</replaceSpellWithExistingSpell>
                                             </entity>
                                         </triggeredEffect>
                                         <triggerSource>#spell</triggerSource>
@@ -58,7 +58,7 @@
                 <casterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <replaceSpellWithNewSpell spellIndex="[0]" newSpellTemplate="resonating_strike(#buff)"/>
+                        <replaceSpellWithNewSpell spellIndex="[parameter0]" newSpellTemplate="resonating_strike(#buff)"/>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

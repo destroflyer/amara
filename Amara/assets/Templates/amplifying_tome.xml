@@ -1,0 +1,9 @@
+<template>
+    <entity>
+        <itemID>amplifying_tome</itemID>
+        <itemRecipe gold="435"/>
+        <isSellable>305</isSellable>
+        <!--stats-->
+        <bonusFlatAbilityPower>20</bonusFlatAbilityPower>
+    </entity>
+</template>

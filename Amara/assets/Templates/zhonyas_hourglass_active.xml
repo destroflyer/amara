@@ -1,7 +1,5 @@
 <template>
     <entity id="spell">
-        <name>Intervention</name>
-        <spellVisualisation>intervention</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
@@ -15,29 +13,48 @@
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
-        <baseCooldown>90</baseCooldown>
+        <baseCooldown>5</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>
         <castedSpell>#spell</castedSpell>
         <castedEffectTriggers>
-            <!--remove vulnerability-->
+            <!--target effect-->
             <entity>
-                <casterTarget/>
+                <targetTarget/>
                 <triggeredEffect>
                     <entity>
+                        <removeTargetability/>
                         <removeVulnerability/>
-                        <addBuff duration="3">
+                        <playAudio>
+                            <entity id="audioStart">
+                                <audio>Sounds/sounds/spells/zhonyas_start.ogg</audio>
+                            </entity>
+                            <entity id="audioLoop">
+                                <audio>Sounds/sounds/spells/zhonyas_loop.ogg</audio>
+                                <audioLoop/>
+                                <audioSuccessor delay="0.05">#audioStart</audioSuccessor>
+                            </entity>
+                        </playAudio>
+                        <addBuff duration="2.5">
                             <entity>
-                                <buffVisualisation>intervention</buffVisualisation>
+                                <buffVisualisation>zhonyas</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
-                                        <customTarget>[parameter0]</customTarget>
+                                        <casterTarget/>
                                         <triggeredEffect>
                                             <entity>
+                                                <addTargetability/>
                                                 <addVulnerability/>
+                                                <stopAudio>#audioLoop</stopAudio>
+                                                <playAudio>
+                                                    <entity>
+                                                        <audio>Sounds/sounds/spells/zhonyas_end.ogg</audio>
+                                                    </entity>
+                                                </playAudio>
                                             </entity>
                                         </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
                                     </entity>
                                 </onBuffRemoveEffectTriggers>
                             </entity>

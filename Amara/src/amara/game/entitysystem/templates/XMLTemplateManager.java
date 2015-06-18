@@ -34,7 +34,7 @@ public class XMLTemplateManager{
     private String resourcePath;
     private HashMap<String, XMLComponentConstructor> xmlComponentConstructors = new HashMap<String, XMLComponentConstructor>();
     private Stack<HashMap<String, Integer>> cachedEntities = new Stack<HashMap<String, Integer>>();
-    private String[] cachedParameters;
+    private Stack<HashMap<String, String>> cachedValues = new Stack<HashMap<String, String>>();
     
     public <T> void registerComponent(Class<T> componentClass, XMLComponentConstructor<T> xmlComponentConstructor){
         xmlComponentConstructors.put(xmlComponentConstructor.getElementName(), xmlComponentConstructor);
@@ -56,23 +56,35 @@ public class XMLTemplateManager{
     public void loadTemplate(EntityWorld entityWorld, int entity, Document document, String[] parameters){
         Element templateElement = document.getRootElement();
         cachedEntities.push(new HashMap<String, Integer>(10));
-        cachedParameters = parameters;
-        boolean isFirstChild = true;
+        HashMap<String, String> values = new HashMap<String, String>();
+        for(int i=0;i<parameters.length;i++){
+            values.put("parameter" + i, parameters[0]);
+        }
+        cachedValues.push(values);
+        boolean isFirstEntity = true;
         for(Object entityElementObject : templateElement.getChildren()){
             Element entityElement = (Element) entityElementObject;
-            if(isFirstChild){
-                String id = entityElement.getAttributeValue("id");
-                if(id != null){
-                    cachedEntities.lastElement().put(id, entity);
+            if(entityElement.getName().equals("entity")){
+                if(isFirstEntity){
+                    String id = entityElement.getAttributeValue("id");
+                    if(id != null){
+                        cachedEntities.lastElement().put(id, entity);
+                    }
+                    loadEntity(entityWorld, entity, entityElement);
                 }
-                loadEntity(entityWorld, entity, entityElement);
+                else{
+                    createEntity(entityWorld, entityElement);
+                }
+                isFirstEntity = false;
             }
-            else{
-                createEntity(entityWorld, entityElement);
+            else if(entityElement.getName().equals("value")){
+                String valueName = entityElement.getAttributeValue("name");
+                String value = parseValue(entityElement.getText());
+                cachedValues.lastElement().put(valueName, value);
             }
-            isFirstChild = false;
         }
         cachedEntities.pop();
+        cachedValues.pop();
     }
     
     public int createEntity(EntityWorld entityWorld, Element entityElement){
@@ -132,8 +144,8 @@ public class XMLTemplateManager{
             System.err.println("Undefined entity id '" + entityID + "'.");
         }
         else if(text.startsWith("[") && text.endsWith("]")){
-            int parameterIndex = Integer.parseInt(text.substring(1, text.length() - 1));
-            return cachedParameters[parameterIndex];
+            String valueName = text.substring(1, text.length() - 1);
+            return cachedValues.lastElement().get(valueName);
         }
         return text;
     }

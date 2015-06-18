@@ -1,33 +1,44 @@
 <template>
     <entity id="spell">
-        <name>Deactivate Burning Agony</name>
-        <spellVisualisation>burning_agony_deactivate</spellVisualisation>
+        <name>Bodyslam</name>
         <instantEffectTriggers>
-            <!--trigger spell effects-->
+            <!--spawn object-->
             <entity>
                 <casterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>bodyslam_object</spawnTemplate>
+                            </entity>
+                        </spawn>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
+                <triggerDelay>1.1</triggerDelay>
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
+        <castDuration>2</castDuration>
+        <stopBeforeCasting/>
+        <castAnimation>
+            <entity>
+                <name>bodyslam</name>
+                <loopDuration>2</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>5</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>
         <castedSpell>#spell</castedSpell>
         <castedEffectTriggers>
-            <!--remove buff area-->
+            <!--target effect-->
             <entity>
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <removeBuffArea>[parameter1]</removeBuffArea>
-                        <removeBuff>[parameter3]</removeBuff>
-                        <replaceSpellWithExistingSpell spellIndex="[parameter0]">[parameter2]</replaceSpellWithExistingSpell>
+                        <flatPhysicalDamage>160</flatPhysicalDamage>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

@@ -1,0 +1,23 @@
+<template>
+    <entity>
+        <name>Tower</name>
+        <!--model-->
+        <model>Models/tower/skin.xml</model>
+        <!--stats-->
+        <isAlive/>
+        <baseMaximumHealth>1200</baseMaximumHealth>
+        <baseAttackDamage>150</baseAttackDamage>
+        <baseAttackSpeed>0.8</baseAttackSpeed>
+        <baseArmor>100</baseArmor>
+        <baseMagicResistance>100</baseMagicResistance>
+        <requestUpdateAttributes/>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="tower_shot"/>
+        </autoAttack>
+        <autoAggro>19</autoAggro>
+        <maximumAggroRange>19</maximumAggroRange>
+    </entity>
+</template>

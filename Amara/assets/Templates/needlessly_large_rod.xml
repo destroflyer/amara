@@ -1,0 +1,9 @@
+<template>
+    <entity>
+        <itemID>needlessly_large_rod</itemID>
+        <itemRecipe gold="1600"/>
+        <isSellable>1120</isSellable>
+        <!--stats-->
+        <bonusFlatAbilityPower>80</bonusFlatAbilityPower>
+    </entity>
+</template>
