@@ -58,7 +58,7 @@ public class XMLTemplateManager{
         cachedEntities.push(new HashMap<String, Integer>(10));
         HashMap<String, String> values = new HashMap<String, String>();
         for(int i=0;i<parameters.length;i++){
-            values.put("parameter" + i, parameters[0]);
+            values.put("parameter" + i, parameters[i]);
         }
         cachedValues.push(values);
         boolean isFirstEntity = true;
