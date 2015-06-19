@@ -1,0 +1,55 @@
+<template>
+    <entity id="unit">
+        <name>Robot</name>
+        <!--model-->
+        <model>Models/robot/skin_default.xml</model>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>auto_attack</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>death</name>
+                <loopDuration>2.5</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1.5"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup group="units" collidesWith="map|units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseMaximumHealth>700</baseMaximumHealth>
+        <baseAttackDamage>40</baseAttackDamage>
+        <baseAttackSpeed>0.6</baseAttackSpeed>
+        <baseArmor>27</baseArmor>
+        <baseMagicResistance>30</baseMagicResistance>
+        <baseWalkSpeed>5</baseWalkSpeed>
+        <inventory>
+            <entity template="items/boots"/>
+        </inventory>
+        <requestUpdateAttributes/>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/melee_autoattack"/>
+        </autoAttack>
+        <spells>
+            <entity template="spells/grab(#unit)"/>
+            <entity template="spells/astral_blessing"/>
+            <entity template="spells/sonic_wave(2)"/>
+            <entity template="spells/wither"/>
+        </spells>
+    </entity>
+</template>

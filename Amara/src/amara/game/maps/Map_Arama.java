@@ -68,13 +68,13 @@ public class Map_Arama extends Map{
             shop.setComponent(new ShopRangeComponent(10));
             shop.setComponent(new TeamComponent(i + 1));
             //Towers
-            EntityWrapper tower1 = EntityTemplate.createFromTemplate(entityWorld, "tower");
+            EntityWrapper tower1 = EntityTemplate.createFromTemplate(entityWorld, "structures/tower");
             tower1.setComponent(new PositionComponent(new Vector2f(((i == 0)?236:113), laneCenterY)));
             tower1.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));
             tower1.setComponent(new TeamComponent(i + 1));
             tower1.removeComponent(IsTargetableComponent.class);
             tower1.removeComponent(IsVulnerableComponent.class);
-            EntityWrapper tower2 = EntityTemplate.createFromTemplate(entityWorld, "tower");
+            EntityWrapper tower2 = EntityTemplate.createFromTemplate(entityWorld, "structures/tower");
             tower2.setComponent(new PositionComponent(new Vector2f(((i == 0)?214:136), laneCenterY)));
             tower2.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));
             tower2.setComponent(new TeamComponent(i + 1));
@@ -128,11 +128,11 @@ public class Map_Arama extends Map{
             int[] campSpawnInformationEntities = new int[3];
             for(int r=0;r<2;r++){
                 EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-                spawnInformation.setComponent(new SpawnTemplateComponent("pseudospider", "arama_camp_pseudospider," + i + "," + r));
+                spawnInformation.setComponent(new SpawnTemplateComponent("units/pseudospider", "arama_camp_pseudospider," + i + "," + r));
                 campSpawnInformationEntities[r] = spawnInformation.getId();
             }
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-            spawnInformation.setComponent(new SpawnTemplateComponent("beetle_golem", "arama_camp_beetle_golem," + i));
+            spawnInformation.setComponent(new SpawnTemplateComponent("units/beetle_golem", "arama_camp_beetle_golem," + i));
             campSpawnInformationEntities[2] = spawnInformation.getId();
             camp.setComponent(new CampSpawnInformationComponent(campSpawnInformationEntities));
             camp.setComponent(new CampRespawnDurationComponent(40));

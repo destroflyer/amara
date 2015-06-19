@@ -56,7 +56,7 @@ public class EntityTemplate{
         for(int i=0;i<parameters.length;i++){
             parameters[i] = Integer.parseInt(parametersText[i]);
         }
-        if(templateName.equals("event_horizon_object")){
+        if(templateName.equals("spells/event_horizon_object")){
             PolygonBuilder polygonBuilder = new PolygonBuilder();
             polygonBuilder.nextOutline(false);
             for(Vector2f point : ModelModifier_EventHorizon.getCirclePoints(6.25f, 5)){
@@ -98,7 +98,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
             
-            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "melee_autoattack");
+            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/melee_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             entityWrapper.setComponent(new AutoAggroComponent(12));
             entityWrapper.setComponent(new MaximumAggroRangeComponent(30));
@@ -136,7 +136,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
             
-            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
+            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/default_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             entityWrapper.setComponent(new AutoAggroComponent(12));
         }
@@ -215,10 +215,10 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
             
-            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
+            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/default_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             
-            EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "bodyslam");
+            EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "spells/bodyslam");
             entityWrapper.setComponent(new SpellsComponent(bodyslam.getId()));
             
             EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());

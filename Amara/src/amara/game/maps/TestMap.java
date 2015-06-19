@@ -68,7 +68,7 @@ public class TestMap extends Map{
                 unit.setComponent(new RequestUpdateAttributesComponent());
                 unit.setComponent(new IsTargetableComponent());
                 unit.setComponent(new IsVulnerableComponent());
-                EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
+                EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/default_autoattack");
                 unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
                 unit.setComponent(new TeamComponent(0));
                 unit.setComponent(new BountyComponent(testUnitBounty.getId()));
@@ -92,7 +92,7 @@ public class TestMap extends Map{
         for(int x=0;x<3;x++){
             for(int y=0;y<2;y++){
                 EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-                spawnInformation.setComponent(new SpawnTemplateComponent("pseudospider", "testmap_camp_pseudospider," + x + "," + y + "," + testCampUnitBounty.getId()));
+                spawnInformation.setComponent(new SpawnTemplateComponent("units/pseudospider", "testmap_camp_pseudospider," + x + "," + y + "," + testCampUnitBounty.getId()));
                 campSpawnInformationEntities[(x * 2) + y] = spawnInformation.getId();
             }
         }
@@ -126,9 +126,9 @@ public class TestMap extends Map{
         boss.setComponent(new RequestUpdateAttributesComponent());
         boss.setComponent(new IsTargetableComponent());
         boss.setComponent(new IsVulnerableComponent());
-        EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
+        EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/default_autoattack");
         boss.setComponent(new AutoAttackComponent(autoAttack.getId()));
-        EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "bodyslam");
+        EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "spells/bodyslam");
         boss.setComponent(new SpellsComponent(new int[]{bodyslam.getId()}));
         boss.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
         boss.setComponent(new TeamComponent(0));

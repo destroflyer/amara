@@ -1,0 +1,52 @@
+<template>
+    <entity>
+        <name>Wizard</name>
+        <!--model-->
+        <model>Models/wizard/skin_default.xml</model>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>auto_attack</name>
+            </entity>
+        </autoAttackAnimation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <scale>0.5</scale>
+        <intersectionPush/>
+        <collisionGroup group="units" collidesWith="map|units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseMaximumHealth>500</baseMaximumHealth>
+        <baseAttackDamage>60</baseAttackDamage>
+        <baseAttackSpeed>0.7</baseAttackSpeed>
+        <baseArmor>20</baseArmor>
+        <baseMagicResistance>30</baseMagicResistance>
+        <baseWalkSpeed>5</baseWalkSpeed>
+        <inventory>
+            <entity template="items/boots"/>
+            <entity template="items/dorans_blade"/>
+            <entity template="items/dorans_ring"/>
+            <entity template="items/needlessly_large_rod"/>
+            <entity template="items/dagger"/>
+        </inventory>
+        <requestUpdateAttributes/>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/default_autoattack"/>
+        </autoAttack>
+        <spells>
+            <entity template="spells/sear"/>
+            <entity template="spells/pillar_of_flame"/>
+            <entity template="spells/battle_cry"/>
+        </spells>
+    </entity>
+</template>

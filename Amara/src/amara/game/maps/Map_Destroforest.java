@@ -75,7 +75,7 @@ public class Map_Destroforest extends Map{
             unit.setComponent(new RequestUpdateAttributesComponent());
             unit.setComponent(new IsTargetableComponent());
             unit.setComponent(new IsVulnerableComponent());
-            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "default_autoattack");
+            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/default_autoattack");
             unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
             unit.setComponent(new AutoAggroComponent(24));
             Vector2f position = null;
@@ -108,7 +108,7 @@ public class Map_Destroforest extends Map{
         EntityWrapper campEnemies1 = entityWorld.getWrapped(entityWorld.createEntity());
         campEnemies1.setComponent(new CampMaximumAggroDistanceComponent(15));
         campEnemies1.setComponent(new CampHealthResetComponent());
-        EntityWrapper enemy1 = EntityTemplate.createFromTemplate(entityWorld, "jaime");
+        EntityWrapper enemy1 = EntityTemplate.createFromTemplate(entityWorld, "units/jaime");
         Vector2f positionEnemy1 = new Vector2f(98, 91);
         Vector2f directionEnemy1 = new Vector2f(0, -1);
         enemy1.setComponent(new PositionComponent(positionEnemy1));
@@ -122,7 +122,7 @@ public class Map_Destroforest extends Map{
         campEnemies2.setComponent(new CampMaximumAggroDistanceComponent(15));
         campEnemies2.setComponent(new CampHealthResetComponent());
         for(int i=0;i<3;i++){
-            EntityWrapper enemy = EntityTemplate.createFromTemplate(entityWorld, "beetle_golem");
+            EntityWrapper enemy = EntityTemplate.createFromTemplate(entityWorld, "units/beetle_golem");
             Vector2f position = null;
             Vector2f direction = null;
             switch(i){
@@ -154,7 +154,7 @@ public class Map_Destroforest extends Map{
         campEnemies3.setComponent(new CampMaximumAggroDistanceComponent(15));
         campEnemies3.setComponent(new CampHealthResetComponent());
         for(int i=0;i<2;i++){
-            EntityWrapper enemy = EntityTemplate.createFromTemplate(entityWorld, "earth_elemental");
+            EntityWrapper enemy = EntityTemplate.createFromTemplate(entityWorld, "units/earth_elemental");
             Vector2f position = null;
             Vector2f direction = null;
             switch(i){

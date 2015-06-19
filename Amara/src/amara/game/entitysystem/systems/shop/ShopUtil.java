@@ -56,7 +56,7 @@ public class ShopUtil{
         entityWorld.removeEntity(itemEntity);
         int gold = GoldUtil.getGold(entityWorld, entity);
         if((gold > goldCost) && (inventoryItemEntities.size() <= 5)){
-            EntityTemplate.loadTemplate(entityWorld, itemEntity, itemID);
+            EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + itemID);
             inventoryItemEntities.add(itemEntity);
             entityWorld.setComponent(entity, new GoldComponent(gold - goldCost));
             entityWorld.setComponent(entity, new InventoryComponent(Util.convertToArray(inventoryItemEntities)));
@@ -68,7 +68,7 @@ public class ShopUtil{
     
     private static int resolveItemRecipe(EntityWorld entityWorld, int entity, String itemID, LinkedList<Integer> inventoryItemEntities, int tmpItemEntity){
         entityWorld.removeEntity(tmpItemEntity);
-        EntityTemplate.loadTemplate(entityWorld, tmpItemEntity, itemID);
+        EntityTemplate.loadTemplate(entityWorld, tmpItemEntity, "items/" + itemID);
         ItemRecipeComponent itemRecipeComponent = entityWorld.getComponent(tmpItemEntity, ItemRecipeComponent.class);
         int goldCost = itemRecipeComponent.getGold();
         for(String ingredientID : itemRecipeComponent.getItemIDs()){
