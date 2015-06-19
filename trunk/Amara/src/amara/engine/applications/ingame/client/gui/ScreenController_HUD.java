@@ -72,10 +72,10 @@ public class ScreenController_HUD extends GameScreenController{
     private void initializeShopEntities(){
         shopItems = new EntityWrapper[shopItemTemplateNames.length];
         for(int i=0;i<shopItems.length;i++){
-            shopItems[i] = EntityTemplate.createFromTemplate(shopEntityWorld, shopItemTemplateNames[i]);
+            shopItems[i] = EntityTemplate.createFromTemplate(shopEntityWorld, "items/" + shopItemTemplateNames[i]);
         }
         shopItems_Special = new EntityWrapper[]{
-            EntityTemplate.createFromTemplate(shopEntityWorld, "rod_of_ages")
+            EntityTemplate.createFromTemplate(shopEntityWorld, "items/rod_of_ages")
         };
     }
     

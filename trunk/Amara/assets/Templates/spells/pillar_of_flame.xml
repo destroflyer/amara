@@ -1,0 +1,51 @@
+<template>
+    <entity id="spell">
+        <name>Pillar of Flame</name>
+        <description>Spawns a fire pillar at the target location.</description>
+        <spellVisualisation>pillar_of_flame</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn object, play audio-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./pillar_of_flame_object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/pillar_of_flame_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>positional_skillshot</castType>
+        <castCancelAction/>
+        <castTurnToTarget/>
+        <range>15</range>
+        <baseCooldown>10</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <flatMagicDamage>120</flatMagicDamage>
+                        <scalingAbilityPowerMagicDamage>0.6</scalingAbilityPowerMagicDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

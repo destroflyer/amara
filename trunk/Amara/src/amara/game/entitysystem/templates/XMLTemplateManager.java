@@ -33,6 +33,7 @@ public class XMLTemplateManager{
     private static XMLTemplateManager instance;
     private String resourcePath;
     private HashMap<String, XMLComponentConstructor> xmlComponentConstructors = new HashMap<String, XMLComponentConstructor>();
+    private String currentDirectory;
     private Stack<HashMap<String, Integer>> cachedEntities = new Stack<HashMap<String, Integer>>();
     private Stack<HashMap<String, String>> cachedValues = new Stack<HashMap<String, String>>();
     
@@ -41,6 +42,11 @@ public class XMLTemplateManager{
     }
     
     public void loadTemplate(EntityWorld entityWorld, int entity, String templateName, String[] parameters){
+        currentDirectory = "";
+        String[] directories = templateName.split("/");
+        for(int i=0;i<(directories.length - 1);i++){
+            currentDirectory += directories[i] + "/";
+        }
         String templateResourcePath = (resourcePath + templateName + ".xml");
         if(Util.existsResource(templateResourcePath)){
             try{
@@ -121,7 +127,7 @@ public class XMLTemplateManager{
     }
     
     public String parseTemplate(String templateXMLText){
-        String template = templateXMLText;
+        String template = templateXMLText.replaceAll("\\./", currentDirectory);
         if(template.matches("(.*)\\((.*)\\)")){
             int bracketStart = template.indexOf("(");
             int bracketEnd = template.indexOf(")");

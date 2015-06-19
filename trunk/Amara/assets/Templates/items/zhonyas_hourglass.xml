@@ -1,0 +1,12 @@
+<template>
+    <entity>
+        <itemID>zhonyas_hourglass</itemID>
+        <itemRecipe gold="500" itemIDs="dorans_ring,dorans_ring,needlessly_large_rod"/>
+        <isSellable>2310</isSellable>
+        <!--stats-->
+        <bonusFlatAbilityPower>120</bonusFlatAbilityPower>
+        <itemActive>
+            <entity template="./zhonyas_hourglass_active"/>
+        </itemActive>
+    </entity>
+</template>

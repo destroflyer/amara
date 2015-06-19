@@ -92,7 +92,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
             playerEntity.setComponent(new NameComponent(login));
             LobbyPlayerData lobbyPlayerData = player.getLobbyPlayer().getPlayerData();
             String characterName = databaseAppState.getString("SELECT name FROM characters WHERE id = " + lobbyPlayerData.getCharacterID());
-            EntityWrapper unit = EntityTemplate.createFromTemplate(entityWorld, characterName);
+            EntityWrapper unit = EntityTemplate.createFromTemplate(entityWorld, "units/" + characterName);
             unit.setComponent(new TitleComponent(login));
             try{
                 ResultSet ownedCharacterResultSet = databaseAppState.getResultSet("SELECT skinid, inventory FROM users_characters WHERE (userid = " + player.getLobbyPlayer().getID() + ") AND (characterid = " + lobbyPlayerData.getCharacterID() + ")");
@@ -109,7 +109,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
                     int itemID = inventoryResultSet.getInt(2);
                     if(itemID != 0){
                         String itemName = databaseAppState.getString("SELECT name FROM items WHERE id = " + itemID);
-                        EntityWrapper item = EntityTemplate.createFromTemplate(entityWorld, itemName);
+                        EntityWrapper item = EntityTemplate.createFromTemplate(entityWorld, "items/" + itemName);
                         inventory.add(item.getId());
                     }
                 }

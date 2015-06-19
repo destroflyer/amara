@@ -1,0 +1,58 @@
+<template>
+    <entity>
+        <name>Steve</name>
+        <!--model-->
+        <model>Models/steve/skin_default.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>stand</name>
+                <loopDuration>8</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <walkStepDistance>5</walkStepDistance>
+        <autoAttackAnimation>
+            <entity>
+                <name>punch</name>
+            </entity>
+        </autoAttackAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="0.8"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup group="units" collidesWith="map|units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseMaximumHealth>1200</baseMaximumHealth>
+        <baseHealthRegeneration>10</baseHealthRegeneration>
+        <baseAttackDamage>40</baseAttackDamage>
+        <baseAttackSpeed>0.7</baseAttackSpeed>
+        <baseArmor>28</baseArmor>
+        <baseMagicResistance>30</baseMagicResistance>
+        <baseWalkSpeed>5</baseWalkSpeed>
+        <inventory>
+            <entity template="items/boots"/>
+            <entity template="items/dorans_ring"/>
+        </inventory>
+        <requestUpdateAttributes/>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/melee_autoattack"/>
+        </autoAttack>
+        <spells>
+            <entity template="spells/infected_cleaver"/>
+            <entity template="spells/burning_agony(1)"/>
+            <entity template="spells/event_horizon"/>
+            <entity template="spells/sadism"/>
+        </spells>
+    </entity>
+</template>
