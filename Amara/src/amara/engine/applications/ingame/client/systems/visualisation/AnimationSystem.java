@@ -65,12 +65,15 @@ public class AnimationSystem implements EntitySystem{
         if(modelObject != null){
             AnimationComponent animationComponent = entityWorld.getComponent(entity, AnimationComponent.class);
             if(animationComponent != null){
-                EntityWrapper animation = entityWorld.getWrapped(animationComponent.getAnimationEntity());
-                String animationName = animation.getComponent(NameComponent.class).getName();
-                float gameSpeed = entityWorld.getComponent(Game.ENTITY, GameSpeedComponent.class).getSpeed();
-                float loopDuration = (animation.getComponent(LoopDurationComponent.class).getDuration() / gameSpeed);
-                boolean isLoop = (!animation.hasComponent(FreezeAfterPlayingComponent.class));
-                modelObject.playAnimation(animationName, loopDuration, isLoop);
+                int animationEntity = animationComponent.getAnimationEntity();
+                NameComponent nameComponent = entityWorld.getComponent(animationEntity, NameComponent.class);
+                LoopDurationComponent loopDurationComponent = entityWorld.getComponent(animationEntity, LoopDurationComponent.class);
+                if((nameComponent != null) && (loopDurationComponent != null)){
+                    float gameSpeed = entityWorld.getComponent(Game.ENTITY, GameSpeedComponent.class).getSpeed();
+                    float loopDuration = (loopDurationComponent.getDuration() / gameSpeed);
+                    boolean isLoop = (!entityWorld.hasComponent(animationEntity, FreezeAfterPlayingComponent.class));
+                    modelObject.playAnimation(nameComponent.getName(), loopDuration, isLoop);
+                }
             }
         }
     }
