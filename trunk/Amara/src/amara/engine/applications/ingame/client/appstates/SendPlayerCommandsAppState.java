@@ -135,14 +135,25 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                     case KeyInput.KEY_P:
                         screenController_HUD.toggleShopVisible();
                         break;
+
+                    case KeyInput.KEY_F1:
+                        showReaction("kappa");
+                        break;
+
+                    case KeyInput.KEY_F2:
+                        showReaction("pogchamp");
+                        break;
+
+                    case KeyInput.KEY_F3:
+                        showReaction("kreygasm");
+                        break;
+
+                    case KeyInput.KEY_F4:
+                        showReaction("biblethump");
+                        break;
                 }
             }
         }
-    }
-    
-    public void sendCommand(Command command){
-        NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
-        networkClient.sendMessage(new Message_Command(command));
     }
     
     private void castSpell(SpellIndex spellIndex){
@@ -180,6 +191,15 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                     break;
             }
         }
+    }
+    
+    private void showReaction(String reaction){
+        sendCommand(new ShowReactionCommand(reaction));
+    }
+    
+    public void sendCommand(Command command){
+        NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
+        networkClient.sendMessage(new Message_Command(command));
     }
     
     private int getCursorHoveredEntity(){

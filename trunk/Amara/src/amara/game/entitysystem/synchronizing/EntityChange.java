@@ -17,12 +17,12 @@ public class EntityChange{
         
     }
 
-    protected EntityChange(int entityID){
-        this.entityID = entityID;
+    protected EntityChange(int entity){
+        this.entity = entity;
     }
-    private int entityID;
+    private int entity;
 
-    public int getEntityID(){
-        return entityID;
+    public int getEntity(){
+        return entity;
     }
 }

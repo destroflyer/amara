@@ -4,7 +4,9 @@
  */
 package amara.game.entitysystem.systems.units;
 
+import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.bounties.*;
 import amara.game.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
@@ -15,6 +17,8 @@ import amara.game.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
  */
 public class PayOutBountiesSystem implements EntitySystem{
     
+    private final float experienceRange = 20;
+    
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsAliveComponent.class);
@@ -23,17 +27,37 @@ public class PayOutBountiesSystem implements EntitySystem{
             DamageHistoryComponent damageHistoryComponent = entityWorld.getComponent(entity, DamageHistoryComponent.class);
             if((bountyComponent != null) && (damageHistoryComponent != null) && (damageHistoryComponent.getEntries().length > 0)){
                 DamageHistoryComponent.DamageHistoryEntry lastDamageHistoryEntry = damageHistoryComponent.getEntries()[damageHistoryComponent.getEntries().length - 1];
-                int receivingEntity = lastDamageHistoryEntry.getSourceEntity();
+                int killerEntity = lastDamageHistoryEntry.getSourceEntity();
                 //Gold
                 BountyGoldComponent bountyGoldComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyGoldComponent.class);
                 if(bountyGoldComponent != null){
-                    int currentGold = GoldUtil.getGold(entityWorld, lastDamageHistoryEntry.getSourceEntity());
-                    entityWorld.setComponent(receivingEntity, new GoldComponent(currentGold + bountyGoldComponent.getGold()));
+                    GoldComponent goldComponent = entityWorld.getComponent(killerEntity, GoldComponent.class);
+                    if(goldComponent != null){
+                        entityWorld.setComponent(killerEntity, new GoldComponent(goldComponent.getGold() + bountyGoldComponent.getGold()));
+                    }
+                }
+                //Experience
+                BountyExperienceComponent bountyExperienceComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyExperienceComponent.class);
+                if(bountyExperienceComponent != null){
+                    int killerExperience = entityWorld.getComponent(killerEntity, ExperienceComponent.class).getExperience();
+                    entityWorld.setComponent(killerEntity, new ExperienceComponent(killerExperience + bountyExperienceComponent.getExperience()));
+                    int killerTeamEntity = entityWorld.getComponent(killerEntity, TeamComponent.class).getTeamEntity();
+                    Vector2f deathPosition = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
+                    for(int rewardedEntity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class, ExperienceComponent.class)){
+                        if(rewardedEntity != killerEntity){
+                            int teamEntity = entityWorld.getComponent(rewardedEntity, TeamComponent.class).getTeamEntity();
+                            Vector2f position = entityWorld.getComponent(rewardedEntity, PositionComponent.class).getPosition();
+                            if((teamEntity == killerTeamEntity) && (position.distanceSquared(deathPosition) <= (experienceRange * experienceRange))){
+                                int experience = entityWorld.getComponent(rewardedEntity, ExperienceComponent.class).getExperience();
+                                entityWorld.setComponent(rewardedEntity, new ExperienceComponent(experience + bountyExperienceComponent.getExperience()));
+                            }
+                        }
+                    }
                 }
                 //Buff
                 BountyBuffComponent bountyBuffComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyBuffComponent.class);
                 if(bountyBuffComponent != null){
-                    ApplyAddBuffsSystem.addBuff(entityWorld, receivingEntity, bountyBuffComponent.getBuffEntity(), bountyBuffComponent.getDuration());
+                    ApplyAddBuffsSystem.addBuff(entityWorld, killerEntity, bountyBuffComponent.getBuffEntity(), bountyBuffComponent.getDuration());
                 }
             }
         }

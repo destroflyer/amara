@@ -17,7 +17,7 @@ public class RemovedEntityChange extends EntityChange{
         
     }
     
-    public RemovedEntityChange(int entityID){
-        super(entityID);
+    public RemovedEntityChange(int entity){
+        super(entity);
     }
 }

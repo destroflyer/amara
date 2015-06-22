@@ -39,6 +39,7 @@ public class TestMap extends Map{
         //Field of test units
         EntityWrapper testUnitBounty = entityWorld.getWrapped(entityWorld.createEntity());
         testUnitBounty.setComponent(new BountyGoldComponent(20));
+        testUnitBounty.setComponent(new BountyExperienceComponent(100));
         EntityWrapper testUnitCamp = entityWorld.getWrapped(entityWorld.createEntity());
         testUnitCamp.setComponent(new CampMaximumAggroDistanceComponent(5));
         testUnitCamp.setComponent(new CampHealthResetComponent());

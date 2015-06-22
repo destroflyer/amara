@@ -113,6 +113,10 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     entityWorld.setComponent(targetEntity, new PositionComponent(castPositionalSkillshotSpellCommand.getPosition().clone()));
                     castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, targetEntity));
                 }
+                else if(command instanceof ShowReactionCommand){
+                    ShowReactionCommand showReactionCommand = (ShowReactionCommand) command;
+                    entityWorld.setComponent(selectedUnit, new ReactionComponent(showReactionCommand.getReaction(), 2));
+                }
             }
         }
         playerCommandsQueue.clear();

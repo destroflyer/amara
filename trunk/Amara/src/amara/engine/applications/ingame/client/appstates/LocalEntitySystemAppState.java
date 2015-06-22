@@ -18,6 +18,7 @@ import amara.engine.applications.ingame.client.systems.filters.*;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.applications.ingame.client.systems.visualisation.buffs.*;
 import amara.engine.applications.ingame.client.systems.visualisation.effects.crodwcontrol.*;
+import amara.engine.applications.ingame.client.systems.visualisation.effects.reactions.*;
 import amara.engine.network.NetworkClient;
 
 /**
@@ -104,6 +105,9 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new BuffVisualisationSystem_Zhonyas(entitySceneMap));
         addEntitySystem(new TitleSystem(hudAttachmentsSystem, entitySceneMap));
         addEntitySystem(new GoldChangeSystem(hudAttachmentsSystem, entitySceneMap));
+        addEntitySystem(new ExperienceChangeSystem(hudAttachmentsSystem, entitySceneMap));
+        addEntitySystem(new LevelUpNotificationSystem(hudAttachmentsSystem, entitySceneMap));
+        addEntitySystem(new ReactionVisualisationSystem(hudAttachmentsSystem, entitySceneMap));
         addEntitySystem(new WaterSpeedSystem(mapAppState));
         addEntitySystem(new CinematicsSystem(getAppState(CinematicAppState.class)));
     }

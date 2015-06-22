@@ -1790,6 +1790,15 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.bounties.BountyBuffComponent(buffEntity, duration);
             }
         });
+        Serializer.registerClass(amara.game.entitysystem.components.units.bounties.BountyExperienceComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.bounties.BountyExperienceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.bounties.BountyExperienceComponent>("bountyExperience"){
+
+            @Override
+            public amara.game.entitysystem.components.units.bounties.BountyExperienceComponent construct(){
+                int experience = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
+                return new amara.game.entitysystem.components.units.bounties.BountyExperienceComponent(experience);
+            }
+        });
         Serializer.registerClass(amara.game.entitysystem.components.units.bounties.BountyGoldComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.bounties.BountyGoldComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.bounties.BountyGoldComponent>("bountyGold"){
 
@@ -2084,6 +2093,15 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent();
             }
         });
+        Serializer.registerClass(amara.game.entitysystem.components.units.ExperienceComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.ExperienceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.ExperienceComponent>("experience"){
+
+            @Override
+            public amara.game.entitysystem.components.units.ExperienceComponent construct(){
+                int experience = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
+                return new amara.game.entitysystem.components.units.ExperienceComponent(experience);
+            }
+        });
         Serializer.registerClass(amara.game.entitysystem.components.units.GoldComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.GoldComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.GoldComponent>("gold"){
 
@@ -2152,6 +2170,15 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.IsWalkingToAggroTargetComponent();
             }
         });
+        Serializer.registerClass(amara.game.entitysystem.components.units.LevelComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.LevelComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.LevelComponent>("level"){
+
+            @Override
+            public amara.game.entitysystem.components.units.LevelComponent construct(){
+                int level = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
+                return new amara.game.entitysystem.components.units.LevelComponent(level);
+            }
+        });
         Serializer.registerClass(amara.game.entitysystem.components.units.LifetimeComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.LifetimeComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.LifetimeComponent>("lifetime"){
 
@@ -2177,6 +2204,16 @@ public class ComponentsRegistrator{
             public amara.game.entitysystem.components.units.MovementComponent construct(){
                 int movementEntity = createChildEntity(0, "movementEntity");
                 return new amara.game.entitysystem.components.units.MovementComponent(movementEntity);
+            }
+        });
+        Serializer.registerClass(amara.game.entitysystem.components.units.ReactionComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.ReactionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.ReactionComponent>("reaction"){
+
+            @Override
+            public amara.game.entitysystem.components.units.ReactionComponent construct(){
+                String reaction = xmlTemplateManager.parseValue(element.getAttributeValue("reaction"));
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getAttributeValue("remainingDuration")));
+                return new amara.game.entitysystem.components.units.ReactionComponent(reaction, remainingDuration);
             }
         });
         Serializer.registerClass(amara.game.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent.class);

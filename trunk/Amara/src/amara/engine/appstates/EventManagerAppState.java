@@ -39,7 +39,8 @@ public class EventManagerAppState extends BaseDisplayAppState implements ActionL
             KeyInput.KEY_Q, KeyInput.KEY_W, KeyInput.KEY_E, KeyInput.KEY_R,
             KeyInput.KEY_1, KeyInput.KEY_2, KeyInput.KEY_3, KeyInput.KEY_4, KeyInput.KEY_5, KeyInput.KEY_6,
             KeyInput.KEY_S,
-            KeyInput.KEY_P
+            KeyInput.KEY_P,
+            KeyInput.KEY_F1, KeyInput.KEY_F2, KeyInput.KEY_F3, KeyInput.KEY_F4
         });
     }
     

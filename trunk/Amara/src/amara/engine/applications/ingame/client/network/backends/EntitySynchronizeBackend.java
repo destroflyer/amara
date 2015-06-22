@@ -37,17 +37,17 @@ public class EntitySynchronizeBackend implements MessageBackend{
                         EntityChange entityChange = entityChanges[i];
                         if(entityChange instanceof RemovedEntityChange){
                             RemovedEntityChange removedEntityChange = (RemovedEntityChange) entityChange;
-                            entityWorld.removeEntity(removedEntityChange.getEntityID());
+                            entityWorld.removeEntity(removedEntityChange.getEntity());
                         }
                         else if(entityChange instanceof NewComponentChange){
                             NewComponentChange newComponentChange = (NewComponentChange) entityChange;
-                            entityWorld.setComponent(newComponentChange.getEntityID(), newComponentChange.getComponent());
+                            entityWorld.setComponent(newComponentChange.getEntity(), newComponentChange.getComponent());
                         }
                         else if(entityChange instanceof RemovedComponentChange){
                             RemovedComponentChange removedComponentChange = (RemovedComponentChange) entityChange;
                             try{
                                 Class componentClass = Class.forName(removedComponentChange.getComponentClassName());
-                                entityWorld.removeComponent(removedComponentChange.getEntityID(), componentClass);
+                                entityWorld.removeComponent(removedComponentChange.getEntity(), componentClass);
                             }catch(ClassNotFoundException ex){
                                 ex.printStackTrace();
                             }
