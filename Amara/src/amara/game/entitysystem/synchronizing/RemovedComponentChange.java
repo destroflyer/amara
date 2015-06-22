@@ -17,8 +17,8 @@ public class RemovedComponentChange extends EntityChange{
         
     }
     
-    public RemovedComponentChange(int entityID, String componentClassName){
-        super(entityID);
+    public RemovedComponentChange(int entity, String componentClassName){
+        super(entity);
         this.componentClassName = componentClassName;
     }
     private String componentClassName;

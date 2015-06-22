@@ -9,7 +9,7 @@ import java.io.File;
 import amara.engine.files.FileManager;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.physics.*;
-import amara.game.entitysystem.components.spawns.SpawnTemplateComponent;
+import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 

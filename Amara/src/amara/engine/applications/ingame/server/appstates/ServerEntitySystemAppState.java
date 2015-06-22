@@ -73,7 +73,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         super.initialize(stateManager, application);
         NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
         networkServer.addMessageBackend(new AuthentificateClientsBackend(mainApplication.getGame(), entityWorld));
-        networkServer.addMessageBackend(new UpdateNewClientBackend(entityWorld));
+        //networkServer.addMessageBackend(new UpdateNewClientBackend(entityWorld));
         networkServer.addMessageBackend(new InitializeClientBackend(mainApplication.getGame(), getAppState(GameRunningAppState.class)));
         
         Game game = mainApplication.getGame();
@@ -117,6 +117,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
                 ownedCharacterResultSet.close();
                 unit.setComponent(new InventoryComponent(Util.convertToArray(inventory)));
                 unit.setComponent(new GoldComponent(475));
+                unit.setComponent(new LevelComponent(1));
             }catch(Exception ex){
                 ex.printStackTrace();
             }
@@ -140,6 +141,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new SetAutoAttacksCastAnimationsSystem());
         addEntitySystem(new SetSpellsCastersSystem());
         addEntitySystem(new SetBaseCooldownSystem());
+        addEntitySystem(new SetLevelExperienceSystem());
         addEntitySystem(new UpdateGameTimeSystem());
         addEntitySystem(new CountdownPlayerRespawnSystem());
         addEntitySystem(new CountdownLifetimeSystem());
@@ -157,9 +159,11 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownKnockupImmuneSystem());
         addEntitySystem(new CountdownCampRespawnSystem());
         addEntitySystem(new CountdownAnimationLoopsSystem());
+        addEntitySystem(new CountdownReactionsSystem());
         addEntitySystem(new CheckOpenObjectivesSystem());
         addEntitySystem(new CheckAggroTargetAttackibilitySystem());
         addEntitySystem(new CheckMaximumAggroRangeSystem());
+        addEntitySystem(new LevelUpSystem());
         addEntitySystem(new UpdateAttributesSystem());
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue()));
         addEntitySystem(new AttackMoveSystem());

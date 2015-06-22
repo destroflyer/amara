@@ -15,14 +15,16 @@ import com.jme3.scene.control.AbstractControl;
  *
  * @author Carl
  */
-public class GoldChangeAttachmentControl extends AbstractControl{
+public class TextNotificationAttachmentControl extends AbstractControl{
 
-    public GoldChangeAttachmentControl(float height, float duration){
+    public TextNotificationAttachmentControl(float height, float duration, ColorRGBA color){
         this.height = height;
         this.duration = duration;
+        this.color = color;
     }
     private float height;
     private float duration;
+    private ColorRGBA color;
     private float y;
     private float alpha = 1;
     
@@ -32,7 +34,7 @@ public class GoldChangeAttachmentControl extends AbstractControl{
         alpha -= ((1 / duration) * lastTimePerFrame);
         if(alpha > 0){
             BitmapText bitmapText = (BitmapText) ((Node) spatial).getChild(0);
-            bitmapText.setColor(new ColorRGBA(1, 1, 0, alpha));
+            bitmapText.setColor(new ColorRGBA(color.getRed(), color.getGreen(), color.getBlue(), alpha));
             bitmapText.setLocalTranslation(0, y, 0);
         }
         else{

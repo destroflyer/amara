@@ -12,7 +12,6 @@ import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.shop.*;
 import amara.game.entitysystem.components.units.*;
-import amara.game.entitysystem.systems.units.GoldUtil;
 
 /**
  *
@@ -54,14 +53,18 @@ public class ShopUtil{
         int itemEntity = entityWorld.createEntity();
         int goldCost = resolveItemRecipe(entityWorld, entity, itemID, inventoryItemEntities, itemEntity);
         entityWorld.removeEntity(itemEntity);
-        int gold = GoldUtil.getGold(entityWorld, entity);
-        if((gold > goldCost) && (inventoryItemEntities.size() <= 5)){
-            EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + itemID);
-            inventoryItemEntities.add(itemEntity);
-            entityWorld.setComponent(entity, new GoldComponent(gold - goldCost));
-            entityWorld.setComponent(entity, new InventoryComponent(Util.convertToArray(inventoryItemEntities)));
-            entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
-            return true;
+        if(inventoryItemEntities.size() <= 5){
+            GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
+            if((goldCost == 0) || ((goldComponent != null) && (goldComponent.getGold() > goldCost))){
+                EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + itemID);
+                inventoryItemEntities.add(itemEntity);
+                if(goldComponent != null){
+                    entityWorld.setComponent(entity, new GoldComponent(goldComponent.getGold() - goldCost));
+                }
+                entityWorld.setComponent(entity, new InventoryComponent(Util.convertToArray(inventoryItemEntities)));
+                entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
+                return true;
+            }
         }
         return false;
     }
@@ -96,7 +99,6 @@ public class ShopUtil{
                 int itemEntity = oldItemsEntities[inventoryIndex];
                 IsSellableComponent isSellableComponent = entityWorld.getComponent(itemEntity, IsSellableComponent.class);
                 if(isSellableComponent != null){
-                    int gold = GoldUtil.getGold(entityWorld, entity);
                     int[] newItemEntities = new int[oldItemsEntities.length - 1];
                     int currentIndex = 0;
                     for(int i=0;i<oldItemsEntities.length;i++){
@@ -105,7 +107,10 @@ public class ShopUtil{
                             currentIndex++;
                         }
                     }
-                    entityWorld.setComponent(entity, new GoldComponent(gold + isSellableComponent.getGold()));
+                    GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
+                    if(goldComponent != null){
+                        entityWorld.setComponent(entity, new GoldComponent(goldComponent.getGold() + isSellableComponent.getGold()));
+                    }
                     entityWorld.setComponent(entity, new InventoryComponent(newItemEntities));
                     entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
                 }

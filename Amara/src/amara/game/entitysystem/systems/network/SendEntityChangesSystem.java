@@ -28,26 +28,22 @@ public class SendEntityChangesSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         LinkedList<EntityChange> entityChanges = new LinkedList<EntityChange>();
         EntityObserver entitiesObserver = entityWorld.getOrCreateEntityObserver(this);
-        for(int entity : entitiesObserver.RemovedEntities())
-        {
+        for(int entity : entitiesObserver.RemovedEntities()){
             entityChanges.add(new RemovedEntityChange(entity));
         }
         entitiesObserver.reset();
         ComponentMapObserver componentsObserver = entityWorld.getOrCreateObserver(this);
-        for(int entity : componentsObserver.getNew().getEntitiesWithAll())
-        {
+        for(int entity : componentsObserver.getNew().getEntitiesWithAll()){
             for(Object component : componentsObserver.getNew().getComponents(entity)){
                 entityChanges.add(new NewComponentChange(entity, component));
             }
         }
-        for(int entity : componentsObserver.getChanged().getEntitiesWithAll())
-        {
+        for(int entity : componentsObserver.getChanged().getEntitiesWithAll()){
             for(Object component : componentsObserver.getChanged().getComponents(entity)){
                 entityChanges.add(new NewComponentChange(entity, component));
             }
         }
-        for(int entity : componentsObserver.getRemoved().getEntitiesWithAll())
-        {
+        for(int entity : componentsObserver.getRemoved().getEntitiesWithAll()){
             if(entityWorld.hasEntity(entity)){
                 for(Object component : componentsObserver.getRemoved().getComponents(entity)){
                     entityChanges.add(new RemovedComponentChange(entity, component.getClass().getName()));
