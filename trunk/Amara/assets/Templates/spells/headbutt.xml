@@ -1,7 +1,7 @@
 <template>
     <entity id="spell">
-        <name>Lunar Rush</name>
-        <spellVisualisation>lunar_rush</spellVisualisation>
+        <name>Headbutt</name>
+        <spellVisualisation>headbutt</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects, play cast audio-->
             <entity>
