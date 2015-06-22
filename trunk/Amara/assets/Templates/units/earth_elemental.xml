@@ -45,7 +45,7 @@
         <isVulnerable/>
         <!--spells-->
         <autoAttack>
-            <entity template="items/melee_autoattack"/>
+            <entity template="spells/melee_autoattack"/>
         </autoAttack>
         <spells>
             <entity template="spells/powerball"/>
