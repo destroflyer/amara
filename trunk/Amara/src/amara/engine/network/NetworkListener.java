@@ -36,7 +36,7 @@ public abstract class NetworkListener{
         return -1;
     }
     
-    protected abstract void sendMessageResponse(MessageResponse messageResponse);
+    public abstract void sendMessageResponse(MessageResponse messageResponse);
 
     public void addMessageBackend(MessageBackend messageBackend){
         messageBackends.add(messageBackend);
