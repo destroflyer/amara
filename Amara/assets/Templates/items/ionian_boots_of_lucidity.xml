@@ -4,7 +4,7 @@
         <itemRecipe gold="675" itemIDs="boots"/>
         <isSellable>700</isSellable>
         <!--stats-->
-        <bonusFlatWalkSpeed>0.9</bonusFlatWalkSpeed>
+        <bonusFlatWalkSpeed>0.55</bonusFlatWalkSpeed>
         <bonusPercentageCooldownSpeed>0.15</bonusPercentageCooldownSpeed>
     </entity>
 </template>

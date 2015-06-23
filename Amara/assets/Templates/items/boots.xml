@@ -4,6 +4,6 @@
         <itemRecipe gold="325"/>
         <isSellable>227</isSellable>
         <!--stats-->
-        <bonusFlatWalkSpeed>0.5</bonusFlatWalkSpeed>
+        <bonusFlatWalkSpeed>0.35</bonusFlatWalkSpeed>
     </entity>
 </template>

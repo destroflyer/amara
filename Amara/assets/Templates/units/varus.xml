@@ -41,7 +41,7 @@
         <baseAttackSpeed>0.7</baseAttackSpeed>
         <baseArmor>22</baseArmor>
         <baseMagicResistance>30</baseMagicResistance>
-        <baseWalkSpeed>5.5</baseWalkSpeed>
+        <baseWalkSpeed>6.25</baseWalkSpeed>
         <inventory>
             <entity template="items/boots"/>
             <entity template="items/dorans_blade"/>

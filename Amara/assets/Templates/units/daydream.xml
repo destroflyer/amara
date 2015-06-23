@@ -43,7 +43,7 @@
         <baseAttackSpeed>0.6</baseAttackSpeed>
         <baseArmor>30</baseArmor>
         <baseMagicResistance>30</baseMagicResistance>
-        <baseWalkSpeed>4.5</baseWalkSpeed>
+        <baseWalkSpeed>5.75</baseWalkSpeed>
         <inventory>
             <entity template="items/boots"/>
             <entity template="items/youmuus_ghostblade"/>
