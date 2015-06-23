@@ -144,14 +144,16 @@ public class IngameCameraAppState extends BaseDisplayAppState implements ActionL
         else if(actionName.equals("camera_left")){
             moveDirections_Keys[3] = value;
         }
-        else if(actionName.equals("camera_zoom_out")){
-            if(isZoomEnabled){
-                zoom(-1);
+        else if(isEnabled()){
+            if(actionName.equals("camera_zoom_out")){
+                if(isZoomEnabled){
+                    zoom(-1);
+                }
             }
-        }
-        else if(actionName.equals("camera_zoom_in")){
-            if(isZoomEnabled){
-                zoom(1);
+            else if(actionName.equals("camera_zoom_in")){
+                if(isZoomEnabled){
+                    zoom(1);
+                }
             }
         }
     }
