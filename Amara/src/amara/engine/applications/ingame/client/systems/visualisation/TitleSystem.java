@@ -18,14 +18,12 @@ import amara.game.entitysystem.components.visuals.TitleComponent;
  *
  * @author Carl
  */
-public class TitleSystem extends SimpleHUDAttachmentSystem{
+public class TitleSystem extends TopHUDAttachmentSystem{
 
-    public TitleSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntitySceneMap entitySceneMap){
-        super(hudAttachmentsSystem, TitleComponent.class);
-        this.entitySceneMap = entitySceneMap;
+    public TitleSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
+        super(hudAttachmentsSystem, entityHeightMap, TitleComponent.class);
         hudOffset = new Vector3f(0, 24, 0);
     }
-    private EntitySceneMap entitySceneMap;
     private final float textSize = 12;
     private final float width = 100;
         
@@ -46,10 +44,5 @@ public class TitleSystem extends SimpleHUDAttachmentSystem{
         BitmapText bitmapText = (BitmapText) visualAttachment;
         String title = entityWorld.getComponent(entity, TitleComponent.class).getTitle();
         bitmapText.setText(title);
-    }
-
-    @Override
-    protected Vector3f getWorldOffset(EntityWorld entityWorld, int entity){
-        return MaximumHealthBarSystem.getWorldOffset(entityWorld, entity, entitySceneMap);
     }
 }

@@ -19,14 +19,12 @@ import amara.game.entitysystem.components.units.crowdcontrol.*;
  *
  * @author Carl
  */
-public class StunVisualisationSystem extends SimpleHUDAttachmentSystem{
+public class StunVisualisationSystem extends TopHUDAttachmentSystem{
 
-    public StunVisualisationSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntitySceneMap entitySceneMap){
-        super(hudAttachmentsSystem, IsStunnedComponent.class);
-        this.entitySceneMap = entitySceneMap;
+    public StunVisualisationSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
+        super(hudAttachmentsSystem, entityHeightMap, IsStunnedComponent.class);
         hudOffset = new Vector3f(0, 26, 0);
     }
-    private EntitySceneMap entitySceneMap;
     
     @Override
     protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
@@ -40,10 +38,5 @@ public class StunVisualisationSystem extends SimpleHUDAttachmentSystem{
     @Override
     protected void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment){
         
-    }
-
-    @Override
-    protected Vector3f getWorldOffset(EntityWorld entityWorld, int entity){
-        return MaximumHealthBarSystem.getWorldOffset(entityWorld, entity, entitySceneMap);
     }
 }

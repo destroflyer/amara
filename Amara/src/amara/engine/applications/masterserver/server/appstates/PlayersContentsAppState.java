@@ -19,11 +19,11 @@ public class PlayersContentsAppState extends ServerBaseAppState{
     public OwnedGameCharacter[] getOwnedCharacters(int playerID){
         DatabaseAppState databaseAppState = getAppState(DatabaseAppState.class);
         try{
-            ResultSet charactersResultSet = databaseAppState.getResultSet("SELECT characterid, skinid, inventory FROM users_characters WHERE userid = " + playerID);
+            ResultSet charactersResultSet = databaseAppState.getResultSet("SELECT characterid, skinid, inventory FROM users_characters WHERE userid = " + playerID + " ORDER BY characterid");
             LinkedList<OwnedGameCharacter> ownedCharacters = new LinkedList<OwnedGameCharacter>();
             while(charactersResultSet.next()){
                 int characterID = charactersResultSet.getInt(1);
-                ResultSet characterInformationResultSet = databaseAppState.getResultSet("SELECT name, title FROM characters WHERE id = " + characterID);
+                ResultSet characterInformationResultSet = databaseAppState.getResultSet("SELECT name, title FROM characters WHERE id = " + characterID + " LIMIT 1");
                 characterInformationResultSet.next();
                 String characterName = characterInformationResultSet.getString(1);
                 String characterTitle = characterInformationResultSet.getString(2);
@@ -33,7 +33,7 @@ public class PlayersContentsAppState extends ServerBaseAppState{
                 ResultSet skinsResultSet = databaseAppState.getResultSet("SELECT id, title FROM characters_skins WHERE characterid = " + characterID);
                 while(skinsResultSet.next()){
                     int skinID = skinsResultSet.getInt(1);
-                    int id = databaseAppState.getInteger("SELECT id FROM users_characters_skins WHERE (userid = " + playerID + ") AND (skinid = " + skinID + ")");
+                    int id = databaseAppState.getInteger("SELECT id FROM users_characters_skins WHERE (userid = " + playerID + ") AND (skinid = " + skinID + ") LIMIT 1");
                     if(id != 0){
                         String skinTitle = skinsResultSet.getString(2);
                         skins.add(new GameCharacterSkin(skinID, skinTitle));

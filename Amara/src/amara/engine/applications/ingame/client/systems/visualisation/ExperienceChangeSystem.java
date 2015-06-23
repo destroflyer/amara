@@ -15,8 +15,8 @@ import amara.game.entitysystem.components.units.*;
  */
 public class ExperienceChangeSystem extends EntityTextNotificationSystem{
 
-    public ExperienceChangeSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntitySceneMap entitySceneMap){
-        super(hudAttachmentsSystem, entitySceneMap);
+    public ExperienceChangeSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
+        super(hudAttachmentsSystem, entityHeightMap);
         hudOffset.set(0, 35, 0);
     }
     private HashMap<Integer, Integer> cachedExperience = new HashMap<Integer, Integer>();

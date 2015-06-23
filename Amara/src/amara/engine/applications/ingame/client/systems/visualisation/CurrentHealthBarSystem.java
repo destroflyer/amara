@@ -18,14 +18,12 @@ import amara.game.entitysystem.components.attributes.*;
  *
  * @author Carl
  */
-public class CurrentHealthBarSystem extends SimpleHUDAttachmentSystem{
+public class CurrentHealthBarSystem extends TopHUDAttachmentSystem{
 
-    public CurrentHealthBarSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntitySceneMap entitySceneMap){
-        super(hudAttachmentsSystem, HealthComponent.class);
-        this.entitySceneMap = entitySceneMap;
+    public CurrentHealthBarSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
+        super(hudAttachmentsSystem, entityHeightMap, HealthComponent.class);
         hudOffset = new Vector3f(0, 0, 1);
     }
-    private EntitySceneMap entitySceneMap;
         
     @Override
     protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
@@ -47,10 +45,5 @@ public class CurrentHealthBarSystem extends SimpleHUDAttachmentSystem{
         float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();
         float healthPortion = (1 - (health / maximumHealth));
         geometry.setMesh(new RectangleMesh((MaximumHealthBarSystem.BAR_WIDTH / 2) - (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), 0, 0, (healthPortion * MaximumHealthBarSystem.BAR_WIDTH), MaximumHealthBarSystem.BAR_HEIGHT));
-    }
-
-    @Override
-    protected Vector3f getWorldOffset(EntityWorld entityWorld, int entity){
-        return MaximumHealthBarSystem.getWorldOffset(entityWorld, entity, entitySceneMap);
     }
 }

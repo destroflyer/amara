@@ -14,8 +14,8 @@ import amara.game.entitysystem.components.units.LevelComponent;
  */
 public class LevelUpNotificationSystem extends EntityTextNotificationSystem{
 
-    public LevelUpNotificationSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntitySceneMap entitySceneMap){
-        super(hudAttachmentsSystem, entitySceneMap);
+    public LevelUpNotificationSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
+        super(hudAttachmentsSystem, entityHeightMap);
         hudOffset.set(0, 50, 0);
     }
     private final ColorRGBA color = new ColorRGBA(1, 1, 1, 1);
