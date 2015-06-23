@@ -47,6 +47,7 @@ public class GameInfoBackend implements MessageBackend{
                             stateManager.attach(new PlayerAppState(message.getPlayerEntity()));
                             stateManager.attach(new ClientChatAppState());
                             stateManager.attach(new SendPlayerCommandsAppState());
+                            stateManager.attach(new FreeCameraAppState());
                             stateManager.attach(new ClientInitializedAppState());
                             stateManager.getState(NiftyAppState.class).getScreenController(ScreenController_LoadingScreen.class).setTitle("Waiting for all players...");
                         }

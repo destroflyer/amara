@@ -85,9 +85,9 @@ public class CinematicAppState extends BaseDisplayAppState implements ActionList
         setCinematicModeEnabled(false);
     }
     
-    private void setCinematicModeEnabled(boolean isEnabled){
+    public void setCinematicModeEnabled(boolean isEnabled){
         getAppState(IngameCameraAppState.class).setEnabled(!isEnabled);
-        setHUDAttachmentSystemEnabled(!isEnabled);
+        setHUDAttachmentSystemsEnabled(!isEnabled);
         getAppState(SendPlayerCommandsAppState.class).setEnabled(!isEnabled);
         FogOfWarSystem fogOfWarSystem = getAppState(PlayerAppState.class).getFogOfWarSystem();
         if(isEnabled){
@@ -113,7 +113,7 @@ public class CinematicAppState extends BaseDisplayAppState implements ActionList
         }
     }
     
-    private void setHUDAttachmentSystemEnabled(boolean isEnabled){
+    private void setHUDAttachmentSystemsEnabled(boolean isEnabled){
         for(EntitySystem entitySystem : getAppState(LocalEntitySystemAppState.class).getEntitySystems()){
             if(entitySystem instanceof HUDAttachmentsSystem){
                 HUDAttachmentsSystem hudAttachmentsSystem = (HUDAttachmentsSystem) entitySystem;

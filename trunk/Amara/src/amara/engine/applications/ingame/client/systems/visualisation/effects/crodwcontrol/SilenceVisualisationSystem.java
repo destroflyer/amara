@@ -19,14 +19,12 @@ import amara.game.entitysystem.components.units.crowdcontrol.*;
  *
  * @author Carl
  */
-public class SilenceVisualisationSystem extends SimpleHUDAttachmentSystem{
+public class SilenceVisualisationSystem extends TopHUDAttachmentSystem{
 
-    public SilenceVisualisationSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntitySceneMap entitySceneMap){
-        super(hudAttachmentsSystem, IsSilencedComponent.class);
-        this.entitySceneMap = entitySceneMap;
+    public SilenceVisualisationSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
+        super(hudAttachmentsSystem, entityHeightMap, IsSilencedComponent.class);
         hudOffset = new Vector3f(0, 26, 0);
     }
-    private EntitySceneMap entitySceneMap;
     
     @Override
     protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
@@ -40,10 +38,5 @@ public class SilenceVisualisationSystem extends SimpleHUDAttachmentSystem{
     @Override
     protected void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment){
         
-    }
-
-    @Override
-    protected Vector3f getWorldOffset(EntityWorld entityWorld, int entity){
-        return MaximumHealthBarSystem.getWorldOffset(entityWorld, entity, entitySceneMap);
     }
 }

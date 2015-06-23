@@ -15,8 +15,8 @@ import amara.game.entitysystem.components.units.GoldComponent;
  */
 public class GoldChangeSystem extends EntityTextNotificationSystem{
 
-    public GoldChangeSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntitySceneMap entitySceneMap){
-        super(hudAttachmentsSystem, entitySceneMap);
+    public GoldChangeSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
+        super(hudAttachmentsSystem, entityHeightMap);
         hudOffset.set(0, 20, 0);
     }
     private HashMap<Integer, Integer> cachedGold = new HashMap<Integer, Integer>();

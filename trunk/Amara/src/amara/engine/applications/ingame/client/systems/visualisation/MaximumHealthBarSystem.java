@@ -12,9 +12,7 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.texture.Texture;
 import com.jme3.texture.Texture2D;
-import amara.engine.JMonkeyUtil;
 import amara.engine.materials.MaterialFactory;
-import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.engine.applications.ingame.client.systems.visualisation.meshes.RectangleMesh;
 import amara.engine.materials.PaintableImage;
 import amara.game.entitysystem.*;
@@ -24,15 +22,13 @@ import amara.game.entitysystem.components.attributes.*;
  *
  * @author Carl
  */
-public class MaximumHealthBarSystem extends SimpleHUDAttachmentSystem{
+public class MaximumHealthBarSystem extends TopHUDAttachmentSystem{
 
-    public MaximumHealthBarSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntitySceneMap entitySceneMap){
-        super(hudAttachmentsSystem, MaximumHealthComponent.class);
-        this.entitySceneMap = entitySceneMap;
+    public MaximumHealthBarSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
+        super(hudAttachmentsSystem, entityHeightMap, MaximumHealthComponent.class);
     }
     public static final float BAR_WIDTH = 70;
     public static final float BAR_HEIGHT = 8;
-    private EntitySceneMap entitySceneMap;
     public static final Vector3f BAR_LOCATION = new Vector3f(0, 4.25f, 0);
     private HashMap<Integer, PaintableImage> paintableImages = new HashMap<Integer, PaintableImage>();
         
@@ -81,19 +77,5 @@ public class MaximumHealthBarSystem extends SimpleHUDAttachmentSystem{
         Geometry geometry = (Geometry) visualAttachment;
         Texture texture = geometry.getMaterial().getTextureParam("ColorMap").getTextureValue();
         texture.setImage(paintableImage.getImage());
-    }
-
-    @Override
-    protected Vector3f getWorldOffset(EntityWorld entityWorld, int entity){
-        return getWorldOffset(entityWorld, entity, entitySceneMap);
-    }
-    
-    public static Vector3f getWorldOffset(EntityWorld entityWorld, int entity, EntitySceneMap entitySceneMap){
-        ModelObject modelObject = (ModelObject) entitySceneMap.requestNode(entity).getChild(ModelSystem.NODE_NAME_MODEL);
-        if(modelObject != null){
-            Vector3f spatialDimension = JMonkeyUtil.getSpatialDimension(modelObject);
-            return new Vector3f(0, spatialDimension.getY() + 1, 0);
-        }
-        return Vector3f.ZERO;
     }
 }

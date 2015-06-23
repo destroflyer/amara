@@ -19,14 +19,12 @@ import amara.game.entitysystem.components.units.ReactionComponent;
  *
  * @author Carl
  */
-public class ReactionVisualisationSystem extends SimpleHUDAttachmentSystem{
+public class ReactionVisualisationSystem extends TopHUDAttachmentSystem{
 
-    public ReactionVisualisationSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntitySceneMap entitySceneMap){
-        super(hudAttachmentsSystem, ReactionComponent.class);
-        this.entitySceneMap = entitySceneMap;
+    public ReactionVisualisationSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
+        super(hudAttachmentsSystem, entityHeightMap, ReactionComponent.class);
         hudOffset = new Vector3f(0, 26, 0);
     }
-    private EntitySceneMap entitySceneMap;
     
     @Override
     protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
@@ -41,10 +39,5 @@ public class ReactionVisualisationSystem extends SimpleHUDAttachmentSystem{
         Material material = MaterialFactory.generateUnshadedMaterial("Textures/effects/reactions/" + reaction + ".png");
         material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         geometry.setMaterial(material);
-    }
-
-    @Override
-    protected Vector3f getWorldOffset(EntityWorld entityWorld, int entity){
-        return MaximumHealthBarSystem.getWorldOffset(entityWorld, entity, entitySceneMap);
     }
 }

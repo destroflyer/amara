@@ -84,12 +84,6 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
         //addEntitySystem(new SelectionMarkerSystem(entitySceneMap));
-        HUDAttachmentsSystem hudAttachmentsSystem = new HUDAttachmentsSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap);
-        addEntitySystem(hudAttachmentsSystem);
-        addEntitySystem(new MaximumHealthBarSystem(hudAttachmentsSystem, entitySceneMap));
-        addEntitySystem(new CurrentHealthBarSystem(hudAttachmentsSystem, entitySceneMap));
-        addEntitySystem(new StunVisualisationSystem(hudAttachmentsSystem, entitySceneMap));
-        addEntitySystem(new SilenceVisualisationSystem(hudAttachmentsSystem, entitySceneMap));
         addEntitySystem(new KnockupVisualisationSystem(entitySceneMap, positionSystem));
         addEntitySystem(new BuffVisualisationSystem_BaronNashor(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Bubble(entitySceneMap));
@@ -103,11 +97,18 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new BuffVisualisationSystem_Turbo(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Wither(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Zhonyas(entitySceneMap));
-        addEntitySystem(new TitleSystem(hudAttachmentsSystem, entitySceneMap));
-        addEntitySystem(new GoldChangeSystem(hudAttachmentsSystem, entitySceneMap));
-        addEntitySystem(new ExperienceChangeSystem(hudAttachmentsSystem, entitySceneMap));
-        addEntitySystem(new LevelUpNotificationSystem(hudAttachmentsSystem, entitySceneMap));
-        addEntitySystem(new ReactionVisualisationSystem(hudAttachmentsSystem, entitySceneMap));
+        HUDAttachmentsSystem hudAttachmentsSystem = new HUDAttachmentsSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap);
+        addEntitySystem(hudAttachmentsSystem);
+        EntityHeightMap entityHeightMap = new EntityHeightMap(entitySceneMap);
+        addEntitySystem(new MaximumHealthBarSystem(hudAttachmentsSystem, entityHeightMap));
+        addEntitySystem(new CurrentHealthBarSystem(hudAttachmentsSystem, entityHeightMap));
+        addEntitySystem(new StunVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
+        addEntitySystem(new SilenceVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
+        addEntitySystem(new TitleSystem(hudAttachmentsSystem, entityHeightMap));
+        addEntitySystem(new GoldChangeSystem(hudAttachmentsSystem, entityHeightMap));
+        addEntitySystem(new ExperienceChangeSystem(hudAttachmentsSystem, entityHeightMap));
+        addEntitySystem(new LevelUpNotificationSystem(hudAttachmentsSystem, entityHeightMap));
+        addEntitySystem(new ReactionVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new WaterSpeedSystem(mapAppState));
         addEntitySystem(new CinematicsSystem(getAppState(CinematicAppState.class)));
     }

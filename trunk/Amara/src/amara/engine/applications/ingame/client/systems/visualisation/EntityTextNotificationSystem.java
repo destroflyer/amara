@@ -21,12 +21,12 @@ import amara.game.entitysystem.*;
  */
 public class EntityTextNotificationSystem implements EntitySystem{
 
-    protected EntityTextNotificationSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntitySceneMap entitySceneMap){
+    protected EntityTextNotificationSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
         this.hudAttachmentsSystem = hudAttachmentsSystem;
-        this.entitySceneMap = entitySceneMap;
+        this.entityHeightMap = entityHeightMap;
     }
     private HUDAttachmentsSystem hudAttachmentsSystem;
-    private EntitySceneMap entitySceneMap;
+    private EntityHeightMap entityHeightMap;
     private int nextChangeID;
     protected Vector3f hudOffset = new Vector3f();
 
@@ -36,8 +36,9 @@ public class EntityTextNotificationSystem implements EntitySystem{
     }
     
     protected void displayTextNotification(EntityWorld entityWorld, int entity, String text, ColorRGBA color){
-        Vector3f worldOffset = MaximumHealthBarSystem.getWorldOffset(entityWorld, entity, entitySceneMap);
-        hudAttachmentsSystem.attach(new HUDAttachmentInfo(entity, "text_notification_" + hashCode() + "_" + nextChangeID, worldOffset, hudOffset, false), createHUDAttachment(text, color));
+        Vector3f worldOffset = entityHeightMap.getWorldOffset(entity);
+        Spatial hudAttachment = createHUDAttachment(text, color);
+        hudAttachmentsSystem.attach(new HUDAttachmentInfo(entity, "text_notification_" + hashCode() + "_" + nextChangeID, worldOffset, hudOffset, false), hudAttachment);
         nextChangeID++;
     }
     
