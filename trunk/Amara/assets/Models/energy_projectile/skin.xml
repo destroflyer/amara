@@ -1,0 +1,10 @@
+<skin name="energy_projectile">
+    <model scale="0.2">
+        <position>
+            <location>0,2,0</location>
+        </position>
+        <modifiers>
+            <modifier>amara.engine.applications.ingame.client.models.modifiers.ModelModifier_EnergyProjectile</modifier>
+        </modifiers>
+    </model>
+</skin>

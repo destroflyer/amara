@@ -9,7 +9,7 @@
                     <entity>
                         <spawn>
                             <entity>
-                                <spawnTemplate>./default_autoattack_projectile,cloud</spawnTemplate>
+                                <spawnTemplate>./default_autoattack_projectile</spawnTemplate>
                                 <spawnMoveToTarget/>
                                 <spawnMovementSpeed>25</spawnMovementSpeed>
                             </entity>
