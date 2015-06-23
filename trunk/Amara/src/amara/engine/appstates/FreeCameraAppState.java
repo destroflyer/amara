@@ -24,6 +24,7 @@ public class FreeCameraAppState extends BaseDisplayAppState implements ActionLis
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         mainApplication.getFlyByCamera().setMoveSpeed(20);
+        mainApplication.getFlyByCamera().setZoomSpeed(0);
         mainApplication.getInputManager().addMapping("toggle_free_camera", new KeyTrigger(KeyInput.KEY_O));
         mainApplication.getInputManager().addListener(this, new String[]{
             "toggle_free_camera"

@@ -4,7 +4,7 @@
  */
 package amara.engine.applications.ingame.server.network.backends;
 
-import amara.Queue;
+import amara.engine.applications.ingame.server.appstates.ReceiveCommandsAppState;
 import com.jme3.network.Message;
 import amara.engine.network.*;
 import amara.engine.network.messages.Message_Command;
@@ -16,20 +16,16 @@ import amara.game.entitysystem.systems.commands.PlayerCommand;
  */
 public class ReceiveCommandsBackend implements MessageBackend{
 
-    public ReceiveCommandsBackend(Queue<PlayerCommand> playerCommandsQueue){
-        this.playerCommandsQueue = playerCommandsQueue;
+    public ReceiveCommandsBackend(ReceiveCommandsAppState receiveCommandsAppState){
+        this.receiveCommandsAppState = receiveCommandsAppState;
     }
-    private Queue<PlayerCommand> playerCommandsQueue;
+    private ReceiveCommandsAppState receiveCommandsAppState;
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_Command){
             Message_Command message = (Message_Command) receivedMessage;
-            playerCommandsQueue.add(new PlayerCommand(messageResponse.getClientID(), message.getCommand()));
+            receiveCommandsAppState.onCommandReceived(new PlayerCommand(messageResponse.getClientID(), message.getCommand()));
         }
-    }
-
-    public Queue<PlayerCommand> getPlayerCommandsQueue(){
-        return playerCommandsQueue;
     }
 }

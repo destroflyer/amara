@@ -25,7 +25,17 @@ public class ReceiveCommandsAppState extends ServerBaseAppState{
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
         NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
-        networkServer.addMessageBackend(new ReceiveCommandsBackend(playerCommandsQueue));
+        networkServer.addMessageBackend(new ReceiveCommandsBackend(this));
+    }
+    
+    public void onCommandReceived(final PlayerCommand playerCommand){
+        mainApplication.enqueueTask(new Runnable(){
+
+            @Override
+            public void run(){
+                playerCommandsQueue.add(playerCommand);
+            }
+        });
     }
 
     public Queue<PlayerCommand> getPlayerCommandsQueue(){
