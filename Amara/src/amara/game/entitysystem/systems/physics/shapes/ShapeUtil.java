@@ -16,6 +16,9 @@ public class ShapeUtil
 {
     public static boolean intersect(Shape a, Shape b)
     {
+        if(a instanceof PointShape) {
+            return intersect((PointShape)a, b);
+        }
         if(a instanceof Circle)
         {
             return intersect((Circle)a, b);
@@ -32,6 +35,9 @@ public class ShapeUtil
     }
     public static boolean intersect(Circle a, Shape b)
     {
+        if(b instanceof PointShape) {
+            return intersect(a, (PointShape)b);
+        }
         if(b instanceof Circle)
         {
             return intersect(a, (Circle)b);
@@ -48,6 +54,9 @@ public class ShapeUtil
     }
     public static boolean intersect(SimpleConvexPolygon a, Shape b)
     {
+        if(b instanceof PointShape) {
+            return intersect(a, (PointShape)b);
+        }
         if(b instanceof Circle)
         {
             return intersect((Circle)b, a);
@@ -64,6 +73,9 @@ public class ShapeUtil
     }
     public static boolean intersect(PolygonShape a, Shape b)
     {
+        if(b instanceof PointShape) {
+            return intersect(a, (PointShape)b);
+        }
         if(b instanceof Circle)
         {
             return intersect((Circle)b, a);
@@ -77,6 +89,10 @@ public class ShapeUtil
             return intersect((PolygonShape)b, a);
         }
         throw new NotImplementedException();
+    }
+    
+    public static boolean intersect(PointShape a, Shape b) {
+        return b.contains(a.getGlobalPoint());
     }
     
     public static boolean intersect(Circle a, Circle b)

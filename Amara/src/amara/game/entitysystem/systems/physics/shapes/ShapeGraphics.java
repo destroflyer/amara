@@ -10,6 +10,8 @@ package amara.game.entitysystem.systems.physics.shapes;
  */
 public interface ShapeGraphics
 {
+    public void drawPoint(Vector2D position);
+    
     public void drawCircle(Vector2D position, double radius);
     public void fillCircle(Vector2D position, double radius);
     
