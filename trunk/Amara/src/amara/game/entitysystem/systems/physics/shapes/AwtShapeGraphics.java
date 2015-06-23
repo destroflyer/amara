@@ -71,5 +71,9 @@ public class AwtShapeGraphics implements ShapeGraphics
             yPoints[i] = (int)points[i].getY();
         }
     }
+
+    public void drawPoint(Vector2D position) {
+        graphics.drawOval((int)(position.getX() - 0.5), (int)(position.getY() - 0.5), 1, 1);
+    }
     
 }
