@@ -62,7 +62,7 @@ public class NetworkServer extends NetworkListener{
     }
     
     @Override
-    protected void sendMessageResponse(MessageResponse messageResponse){
+    public void sendMessageResponse(MessageResponse messageResponse){
         LinkedList<MessageResponse_Entry> messageResponseEntries = messageResponse.getEntries();
         for(MessageResponse_Entry messageResponseEntry : messageResponseEntries){
             switch(messageResponseEntry.getType()){
