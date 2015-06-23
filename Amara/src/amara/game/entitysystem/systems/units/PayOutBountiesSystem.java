@@ -39,8 +39,10 @@ public class PayOutBountiesSystem implements EntitySystem{
                 //Experience
                 BountyExperienceComponent bountyExperienceComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyExperienceComponent.class);
                 if(bountyExperienceComponent != null){
-                    int killerExperience = entityWorld.getComponent(killerEntity, ExperienceComponent.class).getExperience();
-                    entityWorld.setComponent(killerEntity, new ExperienceComponent(killerExperience + bountyExperienceComponent.getExperience()));
+                    ExperienceComponent experienceComponent = entityWorld.getComponent(killerEntity, ExperienceComponent.class);
+                    if(experienceComponent != null){
+                        entityWorld.setComponent(killerEntity, new ExperienceComponent(experienceComponent.getExperience() + bountyExperienceComponent.getExperience()));
+                    }
                     int killerTeamEntity = entityWorld.getComponent(killerEntity, TeamComponent.class).getTeamEntity();
                     Vector2f deathPosition = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
                     for(int rewardedEntity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class, ExperienceComponent.class)){
