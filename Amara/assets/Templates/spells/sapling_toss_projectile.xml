@@ -32,7 +32,7 @@
         <isProjectile/>
         <!--spells-->
         <autoAttack>
-            <entity template="empty_autoattack"/>
+            <entity template="spells/empty_autoattack"/>
         </autoAttack>
         <autoAggro>12</autoAggro>
         <lifetime>30</lifetime>
