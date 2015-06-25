@@ -147,6 +147,16 @@ public class MessagesSerializer{
                     double height = Double.parseDouble(childElement.getAttributeValue("height"));
                     shape = new Rectangle(width, height);
                 }
+                else if(shapeType.equals("point")){
+                    Vector2D localPoint = new Vector2D();
+                    String[] positionCoordinates = element.getText().split(",");
+                    if(positionCoordinates.length > 1){
+                        double localPointX = Double.parseDouble(xmlTemplateManager.parseValue(positionCoordinates[0]));
+                        double localPointY = Double.parseDouble(xmlTemplateManager.parseValue(positionCoordinates[1]));
+                        localPoint = new Vector2D(localPointX, localPointY);
+                    }
+                    shape = new PointShape(localPoint);
+                }
                 if(shape == null){
                     throw new UnsupportedOperationException("Unsupported shape type '" + shapeType + "'.");
                 }
