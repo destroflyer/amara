@@ -1,6 +1,10 @@
 <template>
     <entity id="projectile">
         <model>Models/energy_projectile/skin.xml</model>
+        <hitbox>
+            <point/>
+        </hitbox>
+        <hitboxActive/>
         <isProjectile/>
     </entity>
     <!--trigger spell effects-->
