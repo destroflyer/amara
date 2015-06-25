@@ -16,8 +16,13 @@ public class PointShape extends ConvexShape {
     private Circle boundCircle;
     private boolean cached = false;
 
+    public PointShape() {
+        this(Vector2D.Zero);
+    }
+
     public PointShape(Vector2D localPoint) {
         this.localPoint = localPoint;
+        boundCircle = new Circle(localPoint, 0);
     }
     
     @Override
