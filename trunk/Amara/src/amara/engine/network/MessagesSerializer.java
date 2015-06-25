@@ -105,6 +105,7 @@ public class MessagesSerializer{
                         Shape.class,
                         ConvexShape.class,
                         SimpleConvexPolygon.class,
+                        PointShape.class,
                         Transform2D.class,
                         Vector2D.class,
                         PolygonShape.class,
