@@ -39,6 +39,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
         
     }
     private ScreenController_HUD screenController_HUD;
+    private int cursorHoveredEntity = -1;
 
     @Override
     public void initialize(AppStateManager stateManager, Application application){
@@ -50,21 +51,21 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
     @Override
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
+        updateCursorHoveredEntity();
         Queue<Event> eventQueue = getAppState(EventManagerAppState.class).getEventQueue();
         Iterator<Event> eventsIterator = eventQueue.getIterator();
         while(eventsIterator.hasNext()){
             Event event = eventsIterator.next();
             if(event instanceof MouseClickEvent){
                 MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
-                int hoveredEntity = getCursorHoveredEntity();
                 switch(mouseClickEvent.getButton()){
                     case Left:
-                        if(hoveredEntity != -1){
+                        if(cursorHoveredEntity != -1){
                             EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
-                            if(entityWorld.hasComponent(hoveredEntity, ShopRangeComponent.class)){
+                            if(entityWorld.hasComponent(cursorHoveredEntity, ShopRangeComponent.class)){
                                 int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
                                 int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-                                if(ShopUtil.canUseShop(entityWorld, selectedEntity, hoveredEntity)){
+                                if(ShopUtil.canUseShop(entityWorld, selectedEntity, cursorHoveredEntity)){
                                     screenController_HUD.setShopVisible(true);
                                 }
                             }
@@ -72,8 +73,8 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                         break;
 
                     case Right:
-                        if(hoveredEntity != -1){
-                            sendCommand(new AutoAttackCommand(hoveredEntity));
+                        if(cursorHoveredEntity != -1){
+                            sendCommand(new AutoAttackCommand(cursorHoveredEntity));
                         }
                         else{
                             Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
@@ -159,7 +160,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
     private void castSpell(SpellIndex spellIndex){
         int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
-        int cursorHoveredEntity = getCursorHoveredEntity();
+        
         Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
         int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
         int spellEntity = getSpellEntity(entityWorld, selectedEntity, spellIndex);
@@ -202,9 +203,41 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
         networkClient.sendMessage(new Message_Command(command));
     }
     
-    private int getCursorHoveredEntity(){
+    private void updateCursorHoveredEntity(){
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
-        CollisionResults entitiesColissionResults = mainApplication.getRayCastingResults_Cursor(localEntitySystemAppState.getEntitiesNode());
+        Vector2f cursorPosition = mainApplication.getInputManager().getCursorPosition();
+        int tmpCursorHoveredEntity = cursorHoveredEntity;
+        cursorHoveredEntity = getCollisionResultEntity(mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getEntitiesNode(), cursorPosition));
+        if(cursorHoveredEntity == -1){
+            float alternativeRange = 20;
+            Vector2f alternativePosition = new Vector2f();
+            for(int x=-1;x<2;x++){
+                for(int y=-1;y<2;y++){
+                    if((x != 0) || (y != 0)){
+                        alternativePosition.set(cursorPosition.getX() + (x * alternativeRange), cursorPosition.getY() + (y * alternativeRange));
+                        cursorHoveredEntity = getCollisionResultEntity(mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getEntitiesNode(), alternativePosition));
+                        if(cursorHoveredEntity != -1){
+                            break;
+                        }
+                    }
+                }
+                if(cursorHoveredEntity != -1){
+                    break;
+                }
+            }
+        }
+        if(cursorHoveredEntity != tmpCursorHoveredEntity){
+            if(tmpCursorHoveredEntity != -1){
+                localEntitySystemAppState.getEntityWorld().removeComponent(tmpCursorHoveredEntity, IsHoveredComponent.class);
+            }
+            if(cursorHoveredEntity != -1){
+                localEntitySystemAppState.getEntityWorld().setComponent(cursorHoveredEntity, new IsHoveredComponent());
+            }
+        }
+    }
+    
+    private int getCollisionResultEntity(CollisionResults entitiesColissionResults){
+        LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
         for(int i=0;i<entitiesColissionResults.size();i++){
             CollisionResult collision = entitiesColissionResults.getCollision(i);
             int entity = localEntitySystemAppState.getEntity(collision.getGeometry());

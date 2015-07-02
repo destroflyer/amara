@@ -1,5 +1,8 @@
 <skin name="wizard">
-    <model normScale="0.8" scale="1.56">
+    <model normScale="0.8" scale="1">
+        <position>
+            <location>0,0.91,0</location>
+        </position>
         <material>
             <!--skin-->
             <color index="0">0.5,0.75,0.1,1</color>

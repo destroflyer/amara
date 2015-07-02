@@ -2138,6 +2138,14 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.IsCastingComponent(remainingDuration, isCancelable);
             }
         });
+        Serializer.registerClass(amara.game.entitysystem.components.units.IsHoveredComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.IsHoveredComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.IsHoveredComponent>("isHovered"){
+
+            @Override
+            public amara.game.entitysystem.components.units.IsHoveredComponent construct(){
+                return new amara.game.entitysystem.components.units.IsHoveredComponent();
+            }
+        });
         Serializer.registerClass(amara.game.entitysystem.components.units.IsProjectileComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.IsProjectileComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.IsProjectileComponent>("isProjectile"){
 

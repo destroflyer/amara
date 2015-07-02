@@ -5,9 +5,11 @@
 package amara.engine.applications.ingame.client.systems.visualisation;
 
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
+import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.engine.applications.ingame.client.systems.visualisation.buffs.BuffVisualisationSystem_SonicWaveMark;
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.players.SelectedUnitComponent;
+import amara.game.entitysystem.components.units.IsHoveredComponent;
 
 /**
  *
@@ -23,15 +25,19 @@ public class SelectionMarkerSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, SelectedUnitComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(SelectedUnitComponent.class)){
-            int selectedUnit = observer.getNew().getComponent(entity, SelectedUnitComponent.class).getEntity();
-            Node node = entitySceneMap.requestNode(selectedUnit);
-            node.attachChild(BuffVisualisationSystem_SonicWaveMark.createGroundTexture("Textures/selection_markers/circle.png", 2, 2));
+        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsHoveredComponent.class);
+        for(int entity : observer.getNew().getEntitiesWithAll(IsHoveredComponent.class)){
+            Node node = entitySceneMap.requestNode(entity);
+            Node attachmentNode = new Node();
+            attachmentNode.setName(NODE_NAME_SELECTION_MARKER);
+            Spatial attachment = BuffVisualisationSystem_SonicWaveMark.createGroundTexture("Textures/selection_markers/circle.png", 2, 2);
+            ModelObject modelObject = (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
+            attachmentNode.attachChild(attachment);
+            attachmentNode.setLocalScale(modelObject.getSkin().getModelScale());
+            node.attachChild(attachmentNode);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(SelectedUnitComponent.class)){
-            int selectedUnit = observer.getRemoved().getComponent(entity, SelectedUnitComponent.class).getEntity();
-            Node node = entitySceneMap.requestNode(selectedUnit);
+        for(int entity : observer.getRemoved().getEntitiesWithAll(IsHoveredComponent.class)){
+            Node node = entitySceneMap.requestNode(entity);
             node.detachChildNamed(NODE_NAME_SELECTION_MARKER);
         }
         observer.reset();
