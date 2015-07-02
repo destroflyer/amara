@@ -31,13 +31,13 @@ public class BuffVisualisationSystem_SonicWaveMark extends BuffVisualisationSyst
         float height = 3.5f;
         Node node = new Node();
         Spatial texture = createGroundTexture("Textures/effects/sonic_wave_mark.png", width, height);
-        texture.setLocalTranslation((width / -2), 0, (height / 2));
         node.attachChild(texture);
         return node;
     }
     
     public static Spatial createGroundTexture(String textureFilePath, float width, float height){
         Spatial texture = new Geometry(null, new Quad(width, height));
+        texture.setLocalTranslation((width / -2), 0, (height / 2));
         texture.rotate(JMonkeyUtil.getQuaternion_X(-90));
         Material material = MaterialFactory.generateLightingMaterial(textureFilePath);
         material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);

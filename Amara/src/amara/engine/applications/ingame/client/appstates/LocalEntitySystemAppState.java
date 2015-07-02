@@ -83,7 +83,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new DirectionSystem(entitySceneMap));
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
-        //addEntitySystem(new SelectionMarkerSystem(entitySceneMap));
+        addEntitySystem(new SelectionMarkerSystem(entitySceneMap));
         addEntitySystem(new KnockupVisualisationSystem(entitySceneMap, positionSystem));
         addEntitySystem(new BuffVisualisationSystem_BaronNashor(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Bubble(entitySceneMap));

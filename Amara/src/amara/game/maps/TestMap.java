@@ -22,6 +22,7 @@ import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.units.bounties.*;
 import amara.game.entitysystem.components.visuals.*;
+import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 
 /**
@@ -48,10 +49,14 @@ public class TestMap extends Map{
                 EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
                 unit.setComponent(new NameComponent("Test Wizard"));
                 unit.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));
+                EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+                idleAnimation.setComponent(new NameComponent("idle"));
+                idleAnimation.setComponent(new LoopDurationComponent(6));
+                unit.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
                 EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
                 autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
                 unit.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
-                unit.setComponent(new ScaleComponent(0.5f));
+                unit.setComponent(new AnimationComponent(idleAnimation.getId()));
                 Vector2f position = new Vector2f(12 + (x * 2), 22 + (y * 2));
                 Vector2f direction = new Vector2f(0.5f, -1);
                 unit.setComponent(new PositionComponent(position));
