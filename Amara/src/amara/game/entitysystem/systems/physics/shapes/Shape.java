@@ -27,7 +27,7 @@ public abstract class Shape implements BoundAabb//TODO: remove BoundAabb impleme
     public abstract Vector2D getIntersectionResolver(Shape s);
     public boolean intersects(Shape s)
     {
-        return Intersectors.SINGLETON.intersect(this, s);
+        return Util.INTERSECTORS.intersect(this, s);
     }
     
     public abstract void draw(ShapeGraphics graphics, boolean global);

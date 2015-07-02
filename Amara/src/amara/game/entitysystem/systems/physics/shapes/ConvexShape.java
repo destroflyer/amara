@@ -20,8 +20,8 @@ public abstract class ConvexShape extends Shape implements BoundAabb
     }
     public Vector2D getIntersectionResolver(ConvexShape s)
     {
-        assert Intersectors.SINGLETON.intersect(this, s);
-        return Intersectors.SINGLETON.resolveVector(this, s);
+        assert Util.INTERSECTORS.intersect(this, s);
+        return Util.INTERSECTORS.resolveVector(this, s);
     }
     
     public abstract Vector2D calcLocalCentroid();

@@ -14,6 +14,12 @@ public class Util
 {
     public static final double Epsilon = 1e-6d;
     
+    public static final Intersectors INTERSECTORS;
+    static {
+        INTERSECTORS = new CachedIntersectors(new IntersectorsImpl());
+        new IntersectorsPopulator().populate(INTERSECTORS);
+    }
+    
     public static boolean withinEpsilon(double d)
     {
         return Math.abs(d) < Epsilon;
