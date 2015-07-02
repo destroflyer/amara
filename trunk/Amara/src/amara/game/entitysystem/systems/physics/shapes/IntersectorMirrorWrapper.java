@@ -22,7 +22,7 @@ public class IntersectorMirrorWrapper<A, B> implements Intersector {
     
     @Override
     public Vector2D resolveVector(Object a, Object b) {
-        return intersector.resolve_((B)b, (A)a);
+        return intersector.resolve_((B)b, (A)a).inverse();
     }
 
     @Override
