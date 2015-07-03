@@ -4,11 +4,15 @@
  */
 package amara.engine.applications.ingame.client.appstates;
 
+import java.util.HashMap;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.collision.CollisionResult;
+import com.jme3.collision.CollisionResults;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
+import com.jme3.math.Vector2f;
 import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
 import amara.engine.applications.ingame.client.systems.camera.*;
 import amara.engine.applications.ingame.client.systems.filters.*;
@@ -16,6 +20,7 @@ import amara.engine.applications.ingame.client.systems.gui.*;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.appstates.*;
 import amara.engine.settings.Settings;
+import amara.game.entitysystem.components.units.IsHoveredComponent;
 import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
 import amara.game.maps.Map;
 
@@ -31,6 +36,9 @@ public class PlayerAppState extends BaseDisplayAppState implements ActionListene
     private int playerEntity;
     private LockedCameraSystem lockedCameraSystem;
     private FogOfWarSystem fogOfWarSystem;
+    private int cursorHoveredEntity = -1;
+    private CollisionResults[] tmpEntitiesColisionResults = new CollisionResults[8];
+    private HashMap<Integer, Integer> tmpHoveredEntitiesCount = new HashMap<Integer, Integer>();
 
     @Override
     public void initialize(AppStateManager stateManager, Application application){
@@ -64,6 +72,73 @@ public class PlayerAppState extends BaseDisplayAppState implements ActionListene
     }
 
     @Override
+    public void update(float lastTimePerFrame){
+        super.update(lastTimePerFrame);
+        updateCursorHoveredEntity();
+    }
+    
+    private void updateCursorHoveredEntity(){
+        LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
+        Vector2f cursorPosition = mainApplication.getInputManager().getCursorPosition();
+        int tmpCursorHoveredEntity = cursorHoveredEntity;
+        cursorHoveredEntity = getCollisionResultEntity(mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getEntitiesNode(), cursorPosition));
+        if(cursorHoveredEntity == -1){
+            float alternativeRange = 17;
+            Vector2f alternativePosition = new Vector2f();
+            int i = 0;
+            for(int x=-1;x<2;x++){
+                for(int y=-1;y<2;y++){
+                    if((x != 0) || (y != 0)){
+                        alternativePosition.set(cursorPosition.getX() + (x * alternativeRange), cursorPosition.getY() + (y * alternativeRange));
+                        tmpEntitiesColisionResults[i] = mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getEntitiesNode(), alternativePosition);
+                        i++;
+                    }
+                }
+            }
+            cursorHoveredEntity = getCollisionResultEntity(tmpEntitiesColisionResults);
+        }
+        if(cursorHoveredEntity != tmpCursorHoveredEntity){
+            if(tmpCursorHoveredEntity != -1){
+                localEntitySystemAppState.getEntityWorld().removeComponent(tmpCursorHoveredEntity, IsHoveredComponent.class);
+            }
+            if(cursorHoveredEntity != -1){
+                localEntitySystemAppState.getEntityWorld().setComponent(cursorHoveredEntity, new IsHoveredComponent());
+            }
+        }
+    }
+    
+    private int getCollisionResultEntity(CollisionResults... entitiesColisionResults){
+        LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
+        tmpHoveredEntitiesCount.clear();
+        int resultEntity = -1;
+        //float minimumDistance = Float.MAX_VALUE;
+        int maximumCount = 0;
+        for(CollisionResults collisionResults : entitiesColisionResults){
+            for(CollisionResult collision : collisionResults){
+                int entity = localEntitySystemAppState.getEntity(collision.getGeometry());
+                /*if((entity != -1) && (collision.getDistance() < minimumDistance)){
+                    resultEntity = entity;
+                    minimumDistance = collision.getDistance();
+                    break;
+                }*/
+                if(entity != -1){
+                    Integer count = tmpHoveredEntitiesCount.get(entity);
+                    if(count == null){
+                        count = 0;
+                    }
+                    count++;
+                    tmpHoveredEntitiesCount.put(entity, count);
+                    if(count > maximumCount){
+                        resultEntity = entity;
+                    }
+                    break;
+                }
+            }
+        }
+        return resultEntity;
+    }
+
+    @Override
     public void onAction(String actionName, boolean value, float lastTimePerFrame){
         if(actionName.equals("lock_camera") && value){
             lockedCameraSystem.setEnabled(!lockedCameraSystem.isEnabled());
@@ -85,5 +160,9 @@ public class PlayerAppState extends BaseDisplayAppState implements ActionListene
 
     public FogOfWarSystem getFogOfWarSystem(){
         return fogOfWarSystem;
+    }
+
+    public int getCursorHoveredEntity(){
+        return cursorHoveredEntity;
     }
 }
