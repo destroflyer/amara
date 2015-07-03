@@ -1,0 +1,40 @@
+MaterialDef CartoonEdgeMatDef {
+
+    MaterialParameters {
+        Color EdgesColor 
+        Float EdgeSize
+        Boolean Fog_Edges
+    }
+
+    Technique {
+        VertexShader GLSL100:   Shaders/cartoonedge/shaders/cartoonedge.vert
+        FragmentShader GLSL100: Shaders/cartoonedge/shaders/cartoonedge.frag
+
+        WorldParameters {
+            WorldViewProjectionMatrix
+            NormalMatrix
+            WorldViewMatrix
+            ViewMatrix
+            CameraPosition
+            WorldMatrix
+            NUM_BONES : NumberOfBones
+        }
+
+        Defines {
+
+            SPHERE_MAP : SphereMap
+            FOG : FogColor
+            FOG_SKY : FogSkyBox
+            TOON_EDGES : EdgesColor
+            FOG_EDGES : Fog_Edges
+            NUM_BONES : NumberOfBones
+        }
+
+        RenderState {
+            FaceCull Front
+            DepthTest On
+            DepthWrite On
+        }
+    }
+
+}

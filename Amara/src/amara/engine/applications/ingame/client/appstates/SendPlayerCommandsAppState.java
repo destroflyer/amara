@@ -7,8 +7,6 @@ package amara.engine.applications.ingame.client.appstates;
 import java.util.Iterator;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
-import com.jme3.collision.CollisionResult;
-import com.jme3.collision.CollisionResults;
 import com.jme3.input.KeyInput;
 import com.jme3.math.Vector2f;
 import amara.Queue;
@@ -39,7 +37,6 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
         
     }
     private ScreenController_HUD screenController_HUD;
-    private int cursorHoveredEntity = -1;
 
     @Override
     public void initialize(AppStateManager stateManager, Application application){
@@ -51,21 +48,21 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
     @Override
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
-        updateCursorHoveredEntity();
         Queue<Event> eventQueue = getAppState(EventManagerAppState.class).getEventQueue();
         Iterator<Event> eventsIterator = eventQueue.getIterator();
         while(eventsIterator.hasNext()){
             Event event = eventsIterator.next();
             if(event instanceof MouseClickEvent){
                 MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
+                int hoveredEntity = getAppState(PlayerAppState.class).getCursorHoveredEntity();
                 switch(mouseClickEvent.getButton()){
                     case Left:
-                        if(cursorHoveredEntity != -1){
+                        if(hoveredEntity != -1){
                             EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
-                            if(entityWorld.hasComponent(cursorHoveredEntity, ShopRangeComponent.class)){
+                            if(entityWorld.hasComponent(hoveredEntity, ShopRangeComponent.class)){
                                 int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
                                 int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-                                if(ShopUtil.canUseShop(entityWorld, selectedEntity, cursorHoveredEntity)){
+                                if(ShopUtil.canUseShop(entityWorld, selectedEntity, hoveredEntity)){
                                     screenController_HUD.setShopVisible(true);
                                 }
                             }
@@ -73,8 +70,8 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                         break;
 
                     case Right:
-                        if(cursorHoveredEntity != -1){
-                            sendCommand(new AutoAttackCommand(cursorHoveredEntity));
+                        if(hoveredEntity != -1){
+                            sendCommand(new AutoAttackCommand(hoveredEntity));
                         }
                         else{
                             Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
@@ -158,13 +155,12 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
     }
     
     private void castSpell(SpellIndex spellIndex){
-        int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
-        
-        Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
-        int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
+        PlayerAppState playerAppState = getAppState(PlayerAppState.class);
+        int selectedEntity = entityWorld.getComponent(playerAppState.getPlayerEntity(), SelectedUnitComponent.class).getEntity();
         int spellEntity = getSpellEntity(entityWorld, selectedEntity, spellIndex);
         if(spellEntity != -1){
+            Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
             CastTypeComponent.CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();
             switch(castType){
                 case SELFCAST:
@@ -172,8 +168,8 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                     break;
 
                 case SINGLE_TARGET:
-                    if(cursorHoveredEntity != -1){
-                        sendCommand(new CastSingleTargetSpellCommand(spellIndex, cursorHoveredEntity));
+                    if(playerAppState.getCursorHoveredEntity() != -1){
+                        sendCommand(new CastSingleTargetSpellCommand(spellIndex, playerAppState.getCursorHoveredEntity()));
                     }
                     break;
 
@@ -201,51 +197,6 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
     public void sendCommand(Command command){
         NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
         networkClient.sendMessage(new Message_Command(command));
-    }
-    
-    private void updateCursorHoveredEntity(){
-        LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
-        Vector2f cursorPosition = mainApplication.getInputManager().getCursorPosition();
-        int tmpCursorHoveredEntity = cursorHoveredEntity;
-        cursorHoveredEntity = getCollisionResultEntity(mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getEntitiesNode(), cursorPosition));
-        if(cursorHoveredEntity == -1){
-            float alternativeRange = 20;
-            Vector2f alternativePosition = new Vector2f();
-            for(int x=-1;x<2;x++){
-                for(int y=-1;y<2;y++){
-                    if((x != 0) || (y != 0)){
-                        alternativePosition.set(cursorPosition.getX() + (x * alternativeRange), cursorPosition.getY() + (y * alternativeRange));
-                        cursorHoveredEntity = getCollisionResultEntity(mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getEntitiesNode(), alternativePosition));
-                        if(cursorHoveredEntity != -1){
-                            break;
-                        }
-                    }
-                }
-                if(cursorHoveredEntity != -1){
-                    break;
-                }
-            }
-        }
-        if(cursorHoveredEntity != tmpCursorHoveredEntity){
-            if(tmpCursorHoveredEntity != -1){
-                localEntitySystemAppState.getEntityWorld().removeComponent(tmpCursorHoveredEntity, IsHoveredComponent.class);
-            }
-            if(cursorHoveredEntity != -1){
-                localEntitySystemAppState.getEntityWorld().setComponent(cursorHoveredEntity, new IsHoveredComponent());
-            }
-        }
-    }
-    
-    private int getCollisionResultEntity(CollisionResults entitiesColissionResults){
-        LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
-        for(int i=0;i<entitiesColissionResults.size();i++){
-            CollisionResult collision = entitiesColissionResults.getCollision(i);
-            int entity = localEntitySystemAppState.getEntity(collision.getGeometry());
-            if(entity != -1){
-                return entity;
-            }
-        }
-        return -1;
     }
     
     public static int getSpellEntity(EntityWorld entityWorld, int casterEntity, SpellIndex spellIndex){
