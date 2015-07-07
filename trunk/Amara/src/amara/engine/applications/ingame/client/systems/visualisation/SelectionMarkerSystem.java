@@ -50,9 +50,11 @@ public class SelectionMarkerSystem implements EntitySystem{
         for(int entity : observer.getRemoved().getEntitiesWithAll(IsHoveredComponent.class)){
             Node node = entitySceneMap.requestNode(entity);
             Node attachmentNode = (Node) node.getChild(NODE_NAME_SELECTION_MARKER);
-            ModelObject modelObject = (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
-            modelObject.unregisterModel(attachmentNode.getChild(0));
-            node.detachChild(attachmentNode);
+            if(attachmentNode != null){
+                ModelObject modelObject = (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
+                modelObject.unregisterModel(attachmentNode.getChild(0));
+                node.detachChild(attachmentNode);
+            }
         }
         observer.reset();
     }
