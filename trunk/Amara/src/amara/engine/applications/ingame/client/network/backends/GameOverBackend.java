@@ -34,6 +34,7 @@ public class GameOverBackend implements MessageBackend{
                     mainApplication.getStateManager().detach(mainApplication.getStateManager().getState(PingAppState.class));
                     mainApplication.getStateManager().detach(mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class));
                     mainApplication.getStateManager().detach(mainApplication.getStateManager().getState(LocalEntitySystemAppState.class));
+                    mainApplication.getStateManager().detach(mainApplication.getStateManager().getState(PlayerAppState.class));
                     mainApplication.getStateManager().getState(IngameCameraAppState.class).setEnabled(false);
                     NiftyAppState niftyAppState = mainApplication.getStateManager().getState(NiftyAppState.class);
                     niftyAppState.goToScreen(ScreenController_HUD.class, "gameOver");

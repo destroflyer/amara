@@ -1,0 +1,7 @@
+<skin name="mjolnir">
+    <model normScale="0.95" scale="1">
+        <material>
+            <texture index="0" normalMap="normal.png" specularMap="specular.png">diffuse.png</texture>
+        </material>
+    </model>
+</skin>
