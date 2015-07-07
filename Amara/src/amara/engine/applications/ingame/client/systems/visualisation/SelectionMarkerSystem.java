@@ -36,16 +36,18 @@ public class SelectionMarkerSystem implements EntitySystem{
             Node attachmentNode = new Node();
             attachmentNode.setName(NODE_NAME_SELECTION_MARKER);
             ModelObject modelObject = (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
-            Spatial clonedModel = modelObject.getModelSpatial().deepClone();
-            Material material = new Material(MaterialFactory.getAssetManager(), "Shaders/cartoonedge/matdefs/cartoonedge.j3md");
-            material.setColor("EdgesColor", ColorRGBA.Red);
-            material.setFloat("EdgeSize", 0.1f / FastMath.pow(modelObject.getSkin().getModelScale(), 2.5f));
-            for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel)){
-                geometry.setMaterial(material);
+            if(modelObject != null){
+                Spatial clonedModel = modelObject.getModelSpatial().deepClone();
+                Material material = new Material(MaterialFactory.getAssetManager(), "Shaders/cartoonedge/matdefs/cartoonedge.j3md");
+                material.setColor("EdgesColor", ColorRGBA.Red);
+                material.setFloat("EdgeSize", 0.1f / FastMath.pow(modelObject.getSkin().getModelScale(), 2.5f));
+                for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel)){
+                    geometry.setMaterial(material);
+                }
+                modelObject.registerModel(clonedModel);
+                attachmentNode.attachChild(clonedModel);
+                node.attachChild(attachmentNode);
             }
-            modelObject.registerModel(clonedModel);
-            attachmentNode.attachChild(clonedModel);
-            node.attachChild(attachmentNode);
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll(IsHoveredComponent.class)){
             Node node = entitySceneMap.requestNode(entity);
