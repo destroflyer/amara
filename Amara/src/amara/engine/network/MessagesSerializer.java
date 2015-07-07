@@ -30,15 +30,16 @@ public class MessagesSerializer{
     
     public static void registerClasses(){
         Serializer.registerClasses(
-            Message_Ping.class,
-            Message_Pong.class,
-            
+            //These update classes have to be always registered first to keep the updater backwards compatible
             Message_GetUpdateFiles.class,
             Message_GetUpdateFile.class,
             Message_UpdateFilePart.class,
             Message_UpdateFiles.class,
                 UpdateFile.class,
             
+            Message_Ping.class,
+            Message_Pong.class,
+                
             Message_EditActiveCharacterSkin.class,
             Message_EditCharacterInventory.class,
             Message_EditUserMeta.class,
