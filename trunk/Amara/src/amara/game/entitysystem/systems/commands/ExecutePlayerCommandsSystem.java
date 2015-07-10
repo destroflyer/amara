@@ -222,6 +222,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             if(sufficientDistance != -1){
                 movement.setComponent(new MovementTargetSufficientDistanceComponent(sufficientDistance));
             }
+            movement.setComponent(new MovementPathfindingComponent());
             movement.setComponent(new WalkMovementComponent());
             movement.setComponent(new MovementIsCancelableComponent());
             WalkAnimationComponent walkAnimationComponent = entityWorld.getComponent(selectedUnit, WalkAnimationComponent.class);
