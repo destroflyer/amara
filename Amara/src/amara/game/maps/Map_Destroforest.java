@@ -45,12 +45,13 @@ public class Map_Destroforest extends Map{
         audioBackgroundMusic.setComponent(new IsAudioPlayingComponent());
         
         EntityWrapper instantEffectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
-        instantEffectTrigger.setComponent(new TriggerTemporaryComponent());
         instantEffectTrigger.setComponent(new InstantTriggerComponent());
-        instantEffectTrigger.setComponent(new CustomTargetComponent(Game.ENTITY));
+        instantEffectTrigger.setComponent(new SourceTargetComponent());
         EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
         effect1.setComponent(new PlayCinematicComponent(Map_Destroforest_CinematicIntro.class.getName()));
         instantEffectTrigger.setComponent(new TriggeredEffectComponent(effect1.getId()));
+        instantEffectTrigger.setComponent(new TriggerSourceComponent(Game.ENTITY));
+        instantEffectTrigger.setComponent(new TriggerOnceComponent());
         
         EntityWrapper campWizards = entityWorld.getWrapped(entityWorld.createEntity());
         campWizards.setComponent(new CampUnionAggroComponent());

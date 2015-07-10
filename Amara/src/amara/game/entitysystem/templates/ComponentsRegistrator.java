@@ -1249,6 +1249,14 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.MovementIsCancelableComponent();
             }
         });
+        Serializer.registerClass(amara.game.entitysystem.components.movements.MovementPathfindingComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovementPathfindingComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovementPathfindingComponent>("movementPathfinding"){
+
+            @Override
+            public amara.game.entitysystem.components.movements.MovementPathfindingComponent construct(){
+                return new amara.game.entitysystem.components.movements.MovementPathfindingComponent();
+            }
+        });
         Serializer.registerClass(amara.game.entitysystem.components.movements.MovementSpeedComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovementSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovementSpeedComponent>("movementSpeed"){
 

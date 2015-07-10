@@ -28,12 +28,10 @@ public class RemoveCancelledMovementsEffectTriggersSystem implements EntitySyste
     }
     
     private void removeMovementEffectTriggers(EntityWorld entityWorld, ComponentMapObserver observer, int entity){
-        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, TargetReachedTriggerComponent.class)){
-            if(entityWorld.hasComponent(effectTriggerEntity, TriggerTemporaryComponent.class)){
-                int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
-                if((sourceEntity == entity) && (!observer.getNew().hasEntity(effectTriggerEntity))){
-                    entityWorld.removeEntity(effectTriggerEntity);
-                }
+        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, TargetReachedTriggerComponent.class, TriggerTemporaryComponent.class)){
+            int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
+            if((sourceEntity == entity) && (!observer.getNew().hasEntity(effectTriggerEntity))){
+                entityWorld.removeEntity(effectTriggerEntity);
             }
         }
     }

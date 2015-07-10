@@ -54,13 +54,13 @@ public class TargetedMovementSystem implements EntitySystem{
                         if(!isTargetReached){
                             float speed = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class).getSpeed();
                             Vector2f movedDistance;
-                            if(entityWorld.hasComponent(entity, HitboxActiveComponent.class)){
+                            if(entityWorld.hasComponent(movementEntity, MovementPathfindingComponent.class)){
                                 Vector2D pathfindingFrom = new Vector2D(position.getX(), position.getY());
                                 Vector2D pathfindingTo = new Vector2D(targetPosition.getX(), targetPosition.getY());
                                 double hitboxRadius = 0;
                                 HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
                                 if((hitboxComponent != null)){
-                                    hitboxRadius = ((ConvexShape)hitboxComponent.getShape()).getBoundCircle().getGlobalRadius();
+                                    hitboxRadius = ((ConvexShape) hitboxComponent.getShape()).getBoundCircle().getGlobalRadius();
                                 }
                                 Vector2D newPosition = polyMapManager.followTriPath(entity, pathfindingFrom, pathfindingTo, speed * deltaSeconds, hitboxRadius);
                                 movedDistance = new Vector2f((float) newPosition.getX(), (float) newPosition.getY()).subtractLocal(position);
