@@ -1714,6 +1714,15 @@ public class ComponentsRegistrator{
             }
         });
         //units
+        Serializer.registerClass(amara.game.entitysystem.components.units.AggroResetTimerComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.AggroResetTimerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.AggroResetTimerComponent>("aggroResetTimer"){
+
+            @Override
+            public amara.game.entitysystem.components.units.AggroResetTimerComponent construct(){
+                float duration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
+                return new amara.game.entitysystem.components.units.AggroResetTimerComponent(duration);
+            }
+        });
         Serializer.registerClass(amara.game.entitysystem.components.units.AggroTargetComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.AggroTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.AggroTargetComponent>("aggroTarget"){
 
@@ -2230,6 +2239,15 @@ public class ComponentsRegistrator{
                 String reaction = xmlTemplateManager.parseValue(element.getAttributeValue("reaction"));
                 float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getAttributeValue("remainingDuration")));
                 return new amara.game.entitysystem.components.units.ReactionComponent(reaction, remainingDuration);
+            }
+        });
+        Serializer.registerClass(amara.game.entitysystem.components.units.RemainingAggroResetDurationComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.RemainingAggroResetDurationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.RemainingAggroResetDurationComponent>("remainingAggroResetDuration"){
+
+            @Override
+            public amara.game.entitysystem.components.units.RemainingAggroResetDurationComponent construct(){
+                float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
+                return new amara.game.entitysystem.components.units.RemainingAggroResetDurationComponent(remainingDuration);
             }
         });
         Serializer.registerClass(amara.game.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent.class);
