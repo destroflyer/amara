@@ -91,7 +91,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsAliveComponent());
             int spawnCounter = entityWorld.getComponent(parameters[0], RepeatingTriggerCounterComponent.class).getCounter();
             entityWrapper.setComponent(new BaseMaximumHealthComponent(320 + (spawnCounter * 2)));
-            entityWrapper.setComponent(new BaseAttackDamageComponent(12 + (spawnCounter * 0.25f)));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(18 + (spawnCounter * 0.3f)));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(3));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
@@ -102,6 +102,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             entityWrapper.setComponent(new AutoAggroComponent(12));
             entityWrapper.setComponent(new MaximumAggroRangeComponent(30));
+            entityWrapper.setComponent(new AggroResetTimerComponent(4));
             int bountyEntity = entityWorld.createEntity();
             entityWorld.setComponent(bountyEntity, new BountyGoldComponent(20 + (int) (spawnCounter * 0.5)));
             entityWrapper.setComponent(new BountyComponent(bountyEntity));
@@ -129,7 +130,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsAliveComponent());
             int spawnCounter = entityWorld.getComponent(parameters[0], RepeatingTriggerCounterComponent.class).getCounter();
             entityWrapper.setComponent(new BaseMaximumHealthComponent(450 + (spawnCounter * 10)));
-            entityWrapper.setComponent(new BaseAttackDamageComponent(20 + (spawnCounter * 1)));
+            entityWrapper.setComponent(new BaseAttackDamageComponent(22 + (spawnCounter * 1)));
             entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
             entityWrapper.setComponent(new BaseWalkSpeedComponent(3));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
@@ -139,6 +140,8 @@ public class EntityTemplate{
             EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/default_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
             entityWrapper.setComponent(new AutoAggroComponent(12));
+            entityWrapper.setComponent(new MaximumAggroRangeComponent(30));
+            entityWrapper.setComponent(new AggroResetTimerComponent(4));
         }
         else if(templateName.equals("testmap_camp_pseudospider")){
             entityWrapper.setComponent(new PositionComponent(new Vector2f(40 + (parameters[0] * 3), 68 + (parameters[1] * 3))));

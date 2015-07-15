@@ -160,6 +160,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownCampRespawnSystem());
         addEntitySystem(new CountdownAnimationLoopsSystem());
         addEntitySystem(new CountdownReactionsSystem());
+        addEntitySystem(new CountdownAggroResetTimersSystem());
         addEntitySystem(new CheckOpenObjectivesSystem());
         addEntitySystem(new CheckAggroTargetAttackibilitySystem());
         addEntitySystem(new CheckMaximumAggroRangeSystem());
@@ -168,6 +169,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue()));
         addEntitySystem(new AttackMoveSystem());
         addEntitySystem(new AttackAggroedTargetsSystem());
+        addEntitySystem(new StartAggroResetTimersSystem());
         addEntitySystem(new CheckCampUnionAggroSystem());
         addEntitySystem(new CheckLostAggroCampsSystem());
         addEntitySystem(new SetNewTargetSpellsOnCooldownSystem());
@@ -229,6 +231,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyRemoveEffectTriggersSystem());
         addEntitySystem(new ApplyRemoveEntitySystem());
         addEntitySystem(new DrawAggroOnDamageSystem());
+        addEntitySystem(new ResetAggroTimerOnDamageSystem());
         addEntitySystem(new UpdateDamageHistorySystem());
         addEntitySystem(new RemoveAppliedEffectsSystem());
         addEntitySystem(new HealthRegenerationSystem());
