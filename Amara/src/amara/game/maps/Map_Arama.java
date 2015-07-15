@@ -104,8 +104,8 @@ public class Map_Arama extends Map{
             entityWorld.setComponent(spawnSourceEntity, new EffectCastSourceComponent(spawnCasterEntity));
             for(int r=0;r<3;r++){
                 EntityWrapper spawnTrigger = entityWorld.getWrapped(entityWorld.createEntity());
-                spawnTrigger.setComponent(new RepeatingTriggerComponent(20));
-                spawnTrigger.setComponent(new TimeSinceLastRepeatTriggerComponent(17));
+                spawnTrigger.setComponent(new RepeatingTriggerComponent(25));
+                spawnTrigger.setComponent(new TimeSinceLastRepeatTriggerComponent(22));
                 spawnTrigger.setComponent(new CustomTargetComponent(nexi[(i == 0)?1:0].getId()));
                 EntityWrapper spawnEffect = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
