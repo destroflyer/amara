@@ -49,7 +49,6 @@ public class PlayerDeathSystem implements EntitySystem{
             HitboxActiveComponent.class,
             MaximumHealthComponent.class,
             HealthComponent.class,
-            IsWalkingToAggroTargetComponent.class,
             //General
             IsTargetableComponent.class,
             IsVulnerableComponent.class,
