@@ -1249,6 +1249,14 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.MovementIsCancelableComponent();
             }
         });
+        Serializer.registerClass(amara.game.entitysystem.components.movements.MovementLocalAvoidanceComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovementLocalAvoidanceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovementLocalAvoidanceComponent>("movementLocalAvoidance"){
+
+            @Override
+            public amara.game.entitysystem.components.movements.MovementLocalAvoidanceComponent construct(){
+                return new amara.game.entitysystem.components.movements.MovementLocalAvoidanceComponent();
+            }
+        });
         Serializer.registerClass(amara.game.entitysystem.components.movements.MovementPathfindingComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovementPathfindingComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovementPathfindingComponent>("movementPathfinding"){
 
@@ -2211,6 +2219,14 @@ public class ComponentsRegistrator{
             public amara.game.entitysystem.components.units.LifetimeComponent construct(){
                 float remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
                 return new amara.game.entitysystem.components.units.LifetimeComponent(remainingDuration);
+            }
+        });
+        Serializer.registerClass(amara.game.entitysystem.components.units.LocalAvoidanceWalkComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.LocalAvoidanceWalkComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.LocalAvoidanceWalkComponent>("localAvoidanceWalk"){
+
+            @Override
+            public amara.game.entitysystem.components.units.LocalAvoidanceWalkComponent construct(){
+                return new amara.game.entitysystem.components.units.LocalAvoidanceWalkComponent();
             }
         });
         Serializer.registerClass(amara.game.entitysystem.components.units.MaximumAggroRangeComponent.class);
