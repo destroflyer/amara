@@ -223,6 +223,9 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 movement.setComponent(new MovementTargetSufficientDistanceComponent(sufficientDistance));
             }
             movement.setComponent(new MovementPathfindingComponent());
+            if(entityWorld.hasComponent(selectedUnit, LocalAvoidanceWalkComponent.class)){
+                movement.setComponent(new MovementLocalAvoidanceComponent());
+            }
             movement.setComponent(new WalkMovementComponent());
             movement.setComponent(new MovementIsCancelableComponent());
             WalkAnimationComponent walkAnimationComponent = entityWorld.getComponent(selectedUnit, WalkAnimationComponent.class);

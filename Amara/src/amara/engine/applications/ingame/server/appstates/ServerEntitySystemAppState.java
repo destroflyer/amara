@@ -244,8 +244,9 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new RemoveCancelledMovementsEffectTriggersSystem());
         addEntitySystem(new PlayMovementAnimationsSystem());
         addEntitySystem(new UpdateWalkMovementsSystem());
-        addEntitySystem(new MovementSystem());
         addEntitySystem(new TargetedMovementSystem(intersectionObserver, polyMapManager));
+        addEntitySystem(new LocalAvoidanceSystem());
+        addEntitySystem(new MovementSystem());
         addEntitySystem(new CheckDistanceLimitMovementsSystem());
         addEntitySystem(new TriggerTargetReachedEffectSystem());
         addEntitySystem(new RemoveFinishedMovementsSystem());
