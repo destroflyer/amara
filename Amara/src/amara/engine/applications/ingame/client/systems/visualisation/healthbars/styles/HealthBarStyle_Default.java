@@ -18,7 +18,7 @@ public class HealthBarStyle_Default extends HealthBarStyle{
         super(50, 5, 50, 5);
     }
     public static final Color COLOR_ALLIES = new Color(0.3f, 0.9f, 0.2f);
-    public static final Color COLOR_ENEMIES = new Color(0.95f, 0.25f, 0.25f);
+    public static final Color COLOR_ENEMIES = new Color(0.95f, 0.2f, 0.2f);
 
     @Override
     protected void drawMaximumHealth(PaintableImage paintableImage, float maximumHealth, boolean isAllied){
