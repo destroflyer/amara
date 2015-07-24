@@ -36,13 +36,13 @@ public class CurrentHealthBarSystem extends TopHUDAttachmentSystem{
     protected void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment){
         HealthBarStyle style = healthBarStyleManager.getStyle(entityWorld, entity);
         PaintableImage paintableImage = healthBarStyleManager.getImage_CurrentHealth(entity, style);
+        float healthPortion = 1;
         MaximumHealthComponent maximumHealthComponent = entityWorld.getComponent(entity, MaximumHealthComponent.class);
         if(maximumHealthComponent != null){
             float health = entityWorld.getComponent(entity, HealthComponent.class).getValue();
-            float maximumHealth = maximumHealthComponent.getValue();
-            float healthPortion = (health / maximumHealth);
-            style.drawCurrentHealth(paintableImage, healthPortion);
+            healthPortion = (health / maximumHealthComponent.getValue());
         }
+        style.drawCurrentHealth(paintableImage, healthPortion);
         Geometry geometry = (Geometry) visualAttachment;
         Texture texture = geometry.getMaterial().getTextureParam("ColorMap").getTextureValue();
         texture.setImage(paintableImage.getImage());
