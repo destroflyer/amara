@@ -29,7 +29,8 @@ public class ComponentsRegistrator_Generate{
         SpawnTemplateComponent.class,
         CastTypeComponent.class,
         CollisionGroupComponent.class,
-        DamageHistoryComponent.class
+        DamageHistoryComponent.class,
+        HealthBarStyleComponent.class
     };
     private static final String[] nativeDataTypes = new String[]{"boolean","int","long","float","double"};
     private static String code;

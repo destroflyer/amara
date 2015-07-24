@@ -54,5 +54,7 @@
             <entity template="spells/event_horizon"/>
             <entity template="spells/sadism"/>
         </spells>
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
     </entity>
 </template>

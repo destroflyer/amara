@@ -36,7 +36,8 @@ public class Map_Techtest extends Map{
         for(int y=0;y<10;y++){
             int unitMarginY = 2;
             int countX = 21;
-            int marginX = 4;            
+            int marginX = 4;        
+            float scale = 1;
             String modelSkinPath = "Models/wizard/skin_default.xml";
             String animationName = "dance";
             if(y > 5){
@@ -44,12 +45,13 @@ public class Map_Techtest extends Map{
                 marginX = 8;    
                 modelSkinPath = "Models/dragon/skin.xml";
                 animationName = "fly";
+                scale = 0.5f;
             }
             for(int x=0;x<countX;x++){
                 EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
                 unit.setComponent(new NameComponent("TechTest Creep"));
                 unit.setComponent(new ModelComponent(modelSkinPath));
-                unit.setComponent(new ScaleComponent(0.5f));
+                unit.setComponent(new ScaleComponent(scale));
                 EntityWrapper animation = entityWorld.getWrapped(entityWorld.createEntity());
                 animation.setComponent(new NameComponent(animationName));
                 animation.setComponent(new LoopDurationComponent(2.5f));
@@ -86,6 +88,7 @@ public class Map_Techtest extends Map{
         boss.setComponent(new RequestUpdateAttributesComponent());
         boss.setComponent(new IsTargetableComponent());
         boss.setComponent(new IsVulnerableComponent());
+        boss.setComponent(new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.BOSS));
         boss.setComponent(new TeamComponent(0));
         EntityWrapper gameObjective = entityWorld.getWrapped(entityWorld.createEntity());
         gameObjective.setComponent(new MissingEntitiesComponent(new int[]{boss.getId()}));

@@ -15,10 +15,12 @@ import amara.engine.applications.ingame.client.network.backends.*;
 import amara.engine.applications.ingame.client.systems.audio.*;
 import amara.engine.applications.ingame.client.systems.cinematics.*;
 import amara.engine.applications.ingame.client.systems.filters.*;
+import amara.engine.applications.ingame.client.systems.information.*;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.applications.ingame.client.systems.visualisation.buffs.*;
 import amara.engine.applications.ingame.client.systems.visualisation.effects.crodwcontrol.*;
 import amara.engine.applications.ingame.client.systems.visualisation.effects.reactions.*;
+import amara.engine.applications.ingame.client.systems.visualisation.healthbars.*;
 import amara.engine.network.NetworkClient;
 
 /**
@@ -73,9 +75,11 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         networkClient.addMessageBackend(new EntitySynchronizeBackend(mainApplication, entityWorld));
         networkClient.addMessageBackend(new GameStartedBackend(mainApplication));
         networkClient.addMessageBackend(new GameOverBackend(mainApplication));
+        PlayerTeamSystem playerTeamSystem = new PlayerTeamSystem(getAppState(PlayerAppState.class).getPlayerEntity());
+        addEntitySystem(playerTeamSystem);
+        addEntitySystem(new AudioSystem(getAppState(AudioAppState.class)));
         MapAppState mapAppState = getAppState(MapAppState.class);
         MapHeightmap mapHeightmap = mapAppState.getMapHeightmap();
-        addEntitySystem(new AudioSystem(getAppState(AudioAppState.class)));
         PositionSystem positionSystem = new PositionSystem(entitySceneMap, mapHeightmap);
         addEntitySystem(positionSystem);
         addEntitySystem(new CollisionDebugSystem(getAppState(MapObstaclesAppState.class).getObstaclesNode()));
@@ -83,7 +87,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new DirectionSystem(entitySceneMap));
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
-        addEntitySystem(new SelectionMarkerSystem(entitySceneMap));
+        addEntitySystem(new MarkHoveredUnitsSystem(entitySceneMap, playerTeamSystem));
         addEntitySystem(new KnockupVisualisationSystem(entitySceneMap, positionSystem));
         addEntitySystem(new BuffVisualisationSystem_BaronNashor(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Bubble(entitySceneMap));
@@ -97,11 +101,12 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new BuffVisualisationSystem_Turbo(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Wither(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Zhonyas(entitySceneMap));
-        HUDAttachmentsSystem hudAttachmentsSystem = new HUDAttachmentsSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap);
+        HealthBarStyleManager healthBarStyleManager = new HealthBarStyleManager();
+        HUDAttachmentsSystem hudAttachmentsSystem = new HUDAttachmentsSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap, healthBarStyleManager);
         addEntitySystem(hudAttachmentsSystem);
         EntityHeightMap entityHeightMap = new EntityHeightMap(entitySceneMap);
-        addEntitySystem(new MaximumHealthBarSystem(hudAttachmentsSystem, entityHeightMap));
-        addEntitySystem(new CurrentHealthBarSystem(hudAttachmentsSystem, entityHeightMap));
+        addEntitySystem(new MaximumHealthBarSystem(hudAttachmentsSystem, entityHeightMap, healthBarStyleManager, playerTeamSystem));
+        addEntitySystem(new CurrentHealthBarSystem(hudAttachmentsSystem, entityHeightMap, healthBarStyleManager));
         addEntitySystem(new StunVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new SilenceVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new TitleSystem(hudAttachmentsSystem, entityHeightMap));

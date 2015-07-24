@@ -59,5 +59,7 @@
             <entity template="spells/sapling_toss"/>
             <entity template="spells/glass_wall"/>
         </spells>
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
     </entity>
 </template>

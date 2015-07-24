@@ -58,5 +58,7 @@
             <entity template="spells/riftwalk"/>
             <entity template="spells/ignite"/>
         </spells>
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
     </entity>
 </template>

@@ -17,7 +17,7 @@ public class ExperienceChangeSystem extends EntityTextNotificationSystem{
 
     public ExperienceChangeSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
         super(hudAttachmentsSystem, entityHeightMap);
-        hudOffset.set(0, 35, 0);
+        hudOffset.set(0, 29, 0);
     }
     private HashMap<Integer, Integer> cachedExperience = new HashMap<Integer, Integer>();
     private final ColorRGBA color = new ColorRGBA(1, 1, 1, 1);

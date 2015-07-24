@@ -198,6 +198,7 @@ public class Map_Destroforest extends Map{
         boss.setComponent(new RequestUpdateAttributesComponent());
         boss.setComponent(new IsTargetableComponent());
         boss.setComponent(new IsVulnerableComponent());
+        boss.setComponent(new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.BOSS));
         boss.setComponent(new TeamComponent(0));
         EntityWrapper gameObjective = entityWorld.getWrapped(entityWorld.createEntity());
         gameObjective.setComponent(new MissingEntitiesComponent(new int[]{boss.getId()}));

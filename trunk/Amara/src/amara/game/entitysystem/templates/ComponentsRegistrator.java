@@ -2136,6 +2136,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.GoldComponent(gold);
             }
         });
+        Serializer.registerClass(amara.game.entitysystem.components.units.HealthBarStyleComponent.class);
         Serializer.registerClass(amara.game.entitysystem.components.units.IntersectionRulesComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.IntersectionRulesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.IntersectionRulesComponent>("intersectionRules"){
 

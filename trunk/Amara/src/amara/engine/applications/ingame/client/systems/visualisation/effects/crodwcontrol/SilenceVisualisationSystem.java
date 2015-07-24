@@ -23,7 +23,7 @@ public class SilenceVisualisationSystem extends TopHUDAttachmentSystem{
 
     public SilenceVisualisationSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
         super(hudAttachmentsSystem, entityHeightMap, IsSilencedComponent.class);
-        hudOffset = new Vector3f(0, 26, 0);
+        hudOffset = new Vector3f(0, 22, 0);
     }
     
     @Override

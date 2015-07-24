@@ -30,7 +30,11 @@ public abstract class SimpleHUDAttachmentSystem extends SimpleVisualAttachmentSy
 
     @Override
     protected void attach(int entity, Spatial visualAttachment){
-        hudAttachmentsSystem.attach(new HUDAttachmentInfo(entity, getVisualAttachmentID(entity), getWorldOffset(entityWorld, entity), hudOffset, true), visualAttachment);
+        hudAttachmentsSystem.attach(new HUDAttachmentInfo(entity, getVisualAttachmentID(entity), getWorldOffset(entityWorld, entity), getPreparedHUDOffset(), true), visualAttachment);
+    }
+    
+    protected Vector3f getPreparedHUDOffset(){
+        return hudOffset.clone();
     }
     
     protected Vector3f getWorldOffset(EntityWorld entityWorld, int entity){

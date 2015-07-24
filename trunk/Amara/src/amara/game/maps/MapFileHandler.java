@@ -52,7 +52,7 @@ public class MapFileHandler{
             root.setAttribute("date", "" + System.currentTimeMillis());
             Class mapClass = map.getClass();
             if(mapClass == TestMapToWrite.class){
-                mapClass = TestMap.class;
+                mapClass = Map_Testmap.class;
             }
             root.setAttribute("class", mapClass.getName());
             Document document = new Document(root);

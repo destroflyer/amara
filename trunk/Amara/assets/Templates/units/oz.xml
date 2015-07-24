@@ -61,5 +61,7 @@
             <entity template="spells/slap"/>
             <entity template="spells/unstoppable_force"/>
         </spells>
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
     </entity>
 </template>

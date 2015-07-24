@@ -23,7 +23,7 @@ public class StunVisualisationSystem extends TopHUDAttachmentSystem{
 
     public StunVisualisationSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
         super(hudAttachmentsSystem, entityHeightMap, IsStunnedComponent.class);
-        hudOffset = new Vector3f(0, 26, 0);
+        hudOffset = new Vector3f(0, 22, 0);
     }
     
     @Override

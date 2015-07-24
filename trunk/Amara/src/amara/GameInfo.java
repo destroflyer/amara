@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 public class GameInfo{
     
     public static final String NAME = "Amara";
-    public static final String VERSION = "0.2";
+    public static final String VERSION = "0.3";
     public static final BufferedImage ICON_16 = Util.getResourceImage("/Interface/client/icon/16.png");
     public static final BufferedImage ICON_32 = Util.getResourceImage("/Interface/client/icon/32.png");
     public static final BufferedImage ICON_64 = Util.getResourceImage("/Interface/client/icon/64.png");
