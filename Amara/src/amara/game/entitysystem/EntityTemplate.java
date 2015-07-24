@@ -106,6 +106,7 @@ public class EntityTemplate{
             int bountyEntity = entityWorld.createEntity();
             entityWorld.setComponent(bountyEntity, new BountyGoldComponent(20 + (int) (spawnCounter * 0.5)));
             entityWrapper.setComponent(new BountyComponent(bountyEntity));
+            entityWrapper.setComponent(new LocalAvoidanceWalkComponent());
         }
         else if(templateName.equals("etherdesert_creep_range")){
             entityWrapper.setComponent(new NameComponent("Ranged Creep"));
@@ -224,6 +225,7 @@ public class EntityTemplate{
             EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "spells/bodyslam");
             entityWrapper.setComponent(new SpellsComponent(bodyslam.getId()));
             
+            entityWrapper.setComponent(new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.BOSS));
             EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
             bounty.setComponent(new BountyGoldComponent(150));
             EntityWrapper bountyBuff = entityWorld.getWrapped(entityWorld.createEntity());

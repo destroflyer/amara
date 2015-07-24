@@ -17,7 +17,7 @@ public class GoldChangeSystem extends EntityTextNotificationSystem{
 
     public GoldChangeSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
         super(hudAttachmentsSystem, entityHeightMap);
-        hudOffset.set(0, 20, 0);
+        hudOffset.set(0, 16, 0);
     }
     private HashMap<Integer, Integer> cachedGold = new HashMap<Integer, Integer>();
     private final ColorRGBA color = new ColorRGBA(1, 1, 0, 1);

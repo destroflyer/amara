@@ -22,7 +22,7 @@ public class TitleSystem extends TopHUDAttachmentSystem{
 
     public TitleSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
         super(hudAttachmentsSystem, entityHeightMap, TitleComponent.class);
-        hudOffset = new Vector3f(0, 24, 0);
+        hudOffset = new Vector3f(0, 18, 0);
     }
     private final float textSize = 12;
     private final float width = 100;
@@ -35,7 +35,6 @@ public class TitleSystem extends TopHUDAttachmentSystem{
         bitmapText.setColor(ColorRGBA.White);
         bitmapText.setBox(new Rectangle((-1 * (width / 2)), 0, width, 1));
         bitmapText.setAlignment(BitmapFont.Align.Center);
-        bitmapText.setLocalTranslation(100, 100, 0);
         return bitmapText;
     }
 

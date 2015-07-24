@@ -21,13 +21,7 @@ public class PaintableImage{
     public PaintableImage(String imageResourcePath, boolean flipY){
         BufferedImage loadedImage = Util.getResourceImage(imageResourcePath);
         setSize(loadedImage.getWidth(), loadedImage.getHeight());
-        int rgb;
-        for(int x=0;x<width;x++){
-            for(int y=0;y<height;y++){
-                rgb = loadedImage.getRGB(x, y);
-                setPixel(x, (flipY?(height - y):y), ((rgb >> 16) & 0xFF), ((rgb >> 8) & 0xFF), (rgb & 0xFF), ((rgb >> 24) & 0xFF));
-            }
-        }
+        loadImage(loadedImage, flipY);
     }
     
     public PaintableImage(int width, int height){
@@ -53,6 +47,25 @@ public class PaintableImage{
         ByteBuffer buffer = BufferUtils.createByteBuffer(data);
         image.setData(buffer);
         return image;
+    }
+    
+    public void loadImage(String imageResourcePath){
+        loadImage(imageResourcePath, false);
+    }
+    
+    public void loadImage(String imageResourcePath, boolean flipY){
+        BufferedImage loadedImage = Util.getResourceImage(imageResourcePath);
+        loadImage(loadedImage, flipY);
+    }
+    
+    public void loadImage(BufferedImage loadedImage, boolean flipY){
+        int rgb;
+        for(int x=0;x<width;x++){
+            for(int y=0;y<height;y++){
+                rgb = loadedImage.getRGB(x, y);
+                setPixel(x, (flipY?(height - y):y), ((rgb >> 16) & 0xFF), ((rgb >> 8) & 0xFF), (rgb & 0xFF), ((rgb >> 24) & 0xFF));
+            }
+        }
     }
  
     public void setBackground(Color color){

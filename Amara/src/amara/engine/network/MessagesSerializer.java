@@ -222,5 +222,12 @@ public class MessagesSerializer{
                 throw new UnsupportedOperationException("Unsupported collision group name '" + name + "'.");
             }
         });
+        xmlTemplateManager.registerComponent(HealthBarStyleComponent.class, new XMLComponentConstructor<HealthBarStyleComponent>("healthBarStyle"){
+
+            @Override
+            public HealthBarStyleComponent construct(){
+                return new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.valueOf(element.getText().toUpperCase()));
+            }
+        });
     }
 }

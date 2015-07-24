@@ -54,5 +54,7 @@
             <entity template="spells/pillar_of_flame"/>
             <entity template="spells/battle_cry"/>
         </spells>
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
     </entity>
 </template>

@@ -51,5 +51,7 @@
             <entity template="spells/sonic_wave(2)"/>
             <entity template="spells/wither"/>
         </spells>
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
     </entity>
 </template>

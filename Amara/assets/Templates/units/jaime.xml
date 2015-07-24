@@ -53,5 +53,7 @@
             <entity template="spells/lunar_rush"/>
             <entity template="spells/dragons_rage"/>
         </spells>
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
     </entity>
 </template>

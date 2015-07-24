@@ -29,9 +29,9 @@ import amara.game.entitysystem.systems.physics.shapes.*;
  *
  * @author Carl
  */
-public class TestMap extends Map{
+public class Map_Testmap extends Map{
 
-    public TestMap(){
+    public Map_Testmap(){
         
     }
 
@@ -124,7 +124,7 @@ public class TestMap extends Map{
         boss.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
         boss.setComponent(new HitboxActiveComponent());
         boss.setComponent(new IsAliveComponent());
-        boss.setComponent(new BaseMaximumHealthComponent(4000));
+        boss.setComponent(new BaseMaximumHealthComponent(800));
         boss.setComponent(new BaseHealthRegenerationComponent(40));
         boss.setComponent(new BaseAttackDamageComponent(150));
         boss.setComponent(new BaseAttackSpeedComponent(0.6f));
@@ -137,6 +137,7 @@ public class TestMap extends Map{
         EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "spells/bodyslam");
         boss.setComponent(new SpellsComponent(new int[]{bodyslam.getId()}));
         boss.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
+        boss.setComponent(new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.BOSS));
         boss.setComponent(new TeamComponent(0));
         EntityWrapper shop = entityWorld.getWrapped(entityWorld.createEntity());
         shop.setComponent(new ModelComponent("Models/chest/skin.xml"));

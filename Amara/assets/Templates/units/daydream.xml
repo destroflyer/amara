@@ -61,5 +61,7 @@
             <empty/>
             <entity template="spells/hammer_of_wrath"/>
         </spells>
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
     </entity>
 </template>
