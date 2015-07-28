@@ -20,6 +20,7 @@ import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.systems.effects.triggers.EffectTriggerUtil;
 import amara.game.entitysystem.systems.movement.MovementSystem;
+import amara.game.entitysystem.systems.movement.TargetedMovementSystem;
 import amara.game.entitysystem.systems.units.UnitUtil;
 
 /**
@@ -109,5 +110,16 @@ public class CastSpellSystem implements EntitySystem{
     
     public static boolean isAbleToPerformAction(EntityWorld entityWorld, int casterEntity){
         return ((!entityWorld.hasAnyComponent(casterEntity, IsStunnedComponent.class, IsKnockupedComponent.class)) && (!MovementSystem.isDisplaced(entityWorld, casterEntity)));
+    }
+    
+    public static float getMinimumCastRange(EntityWorld entityWorld, int casterEntity, int spellEntity, int targetEntity){
+        float minimumCastRange = entityWorld.getComponent(spellEntity, RangeComponent.class).getDistance();
+        AutoAttackComponent autoAttackComponent = entityWorld.getComponent(casterEntity, AutoAttackComponent.class);
+        if((autoAttackComponent != null) && (spellEntity == autoAttackComponent.getAutoAttackEntity())){
+            float casterHitboxRadius = TargetedMovementSystem.getHitboxRadius(entityWorld, casterEntity);
+            float targetHitboxRadius = TargetedMovementSystem.getHitboxRadius(entityWorld, targetEntity);
+            minimumCastRange += (casterHitboxRadius + targetHitboxRadius);
+        }
+        return minimumCastRange;
     }
 }

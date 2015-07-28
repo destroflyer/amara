@@ -47,12 +47,12 @@
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
-        <spells>
+        <learnableSpells>
             <entity template="spells/sonic_wave(0)"/>
             <entity template="spells/intervention(#unit)"/>
             <entity template="spells/lunar_rush"/>
             <entity template="spells/dragons_rage"/>
-        </spells>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>

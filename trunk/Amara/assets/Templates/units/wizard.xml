@@ -49,11 +49,11 @@
         <autoAttack>
             <entity template="spells/default_autoattack"/>
         </autoAttack>
-        <spells>
+        <learnableSpells>
             <entity template="spells/sear"/>
             <entity template="spells/pillar_of_flame"/>
             <entity template="spells/battle_cry"/>
-        </spells>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>

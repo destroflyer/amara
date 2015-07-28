@@ -22,7 +22,7 @@ public class EmptyMap extends Map{
     }
 
     @Override
-    public void spawn(EntityWorld entityWorld, int playerEntity){
+    public void spawnPlayer(EntityWorld entityWorld, int playerEntity){
         
     }
 }

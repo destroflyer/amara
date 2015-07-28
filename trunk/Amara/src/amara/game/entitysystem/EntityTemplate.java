@@ -105,6 +105,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AggroResetTimerComponent(3));
             int bountyEntity = entityWorld.createEntity();
             entityWorld.setComponent(bountyEntity, new BountyGoldComponent(20 + (int) (spawnCounter * 0.5)));
+            entityWorld.setComponent(bountyEntity, new BountyExperienceComponent(59));
             entityWrapper.setComponent(new BountyComponent(bountyEntity));
             entityWrapper.setComponent(new LocalAvoidanceWalkComponent());
         }

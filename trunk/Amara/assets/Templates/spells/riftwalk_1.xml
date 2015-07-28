@@ -2,7 +2,7 @@
     <entity id="spell">
         <name>Riftwalk</name>
         <description>Teleports to the target location.</description>
-        <spellVisualisation>riftwalk</spellVisualisation>
+        <spellVisualisation>riftwalk_1</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
@@ -40,11 +40,7 @@
                 <loopDuration>0.5</loopDuration>
             </entity>
         </castAnimation>
-        <baseCooldown>6</baseCooldown>
-        <spellUpgrades>
-            <entity template="./riftwalk_0"/>
-            <entity template="./riftwalk_1"/>
-        </spellUpgrades>
+        <baseCooldown>3</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>

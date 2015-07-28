@@ -28,11 +28,19 @@ public class LevelUpSystem implements EntitySystem{
     private void checkLevelUp(EntityWorld entityWorld, int entity){
         int level = entityWorld.getComponent(entity, LevelComponent.class).getLevel();
         int experience = entityWorld.getComponent(entity, ExperienceComponent.class).getExperience();
-        int neededLevelUpExperience = (180 + (level * 100));
+        int neededLevelUpExperience = getNeededLevelUpExperience(level);
         if(experience >= neededLevelUpExperience){
             entityWorld.setComponent(entity, new LevelComponent(level + 1));
             entityWorld.setComponent(entity, new ExperienceComponent(experience - neededLevelUpExperience));
+            SpellsUpgradePointsComponent spellsUpgradePointsComponent = entityWorld.getComponent(entity, SpellsUpgradePointsComponent.class);
+            if(spellsUpgradePointsComponent != null){
+                entityWorld.setComponent(entity, new SpellsUpgradePointsComponent(spellsUpgradePointsComponent.getUpgradePoints() + 1));
+            }
             checkLevelUp(entityWorld, entity);
         }
+    }
+    
+    public static int getNeededLevelUpExperience(int level){
+        return (180 + (level * 100));
     }
 }

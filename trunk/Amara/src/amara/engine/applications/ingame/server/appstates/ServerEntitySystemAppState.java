@@ -118,11 +118,14 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
                 unit.setComponent(new InventoryComponent(Util.convertToArray(inventory)));
                 unit.setComponent(new GoldComponent(475));
                 unit.setComponent(new LevelComponent(1));
+                unit.setComponent(new SpellsComponent(new int[0]));
+                unit.setComponent(new SpellsUpgradePointsComponent(1));
             }catch(Exception ex){
                 ex.printStackTrace();
             }
             playerEntity.setComponent(new SelectedUnitComponent(unit.getId()));
-            map.spawn(entityWorld, playerEntity.getId());
+            map.initializePlayer(entityWorld, playerEntity.getId());
+            map.spawnPlayer(entityWorld, playerEntity.getId());
             player.setEntityID(playerEntity.getId());
         }
         System.out.println("Calculating navigation meshes...");

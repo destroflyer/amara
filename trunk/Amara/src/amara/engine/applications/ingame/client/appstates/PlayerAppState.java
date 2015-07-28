@@ -62,11 +62,14 @@ public class PlayerAppState extends BaseDisplayAppState implements ActionListene
         }
         ScreenController_HUD screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
         localEntitySystemAppState.addEntitySystem(new DisplayPlayerSystem(playerEntity, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayLevelSystem(playerEntity, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayExperienceSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayAttributesSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayInventorySystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplaySpellsImagesSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplaySpellsCooldownsSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayItemsCooldownsSystem(playerEntity, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new UpdateUpgradeSpellsPanelSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayGoldSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayDeathRecapSystem(playerEntity, screenController_HUD));
     }

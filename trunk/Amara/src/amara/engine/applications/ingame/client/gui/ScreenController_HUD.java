@@ -26,6 +26,7 @@ import de.lessvoid.nifty.effects.EffectEventId;
 import de.lessvoid.nifty.effects.impl.Hint;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.events.NiftyMousePrimaryClickedEvent;
+import de.lessvoid.nifty.tools.SizeValue;
 
 /**
  *
@@ -48,11 +49,12 @@ public class ScreenController_HUD extends GameScreenController{
     private boolean[] shopItemFilters = new boolean[5];
     private boolean isUpdatingShopItemFilters;
     private LinkedList<EntityWrapper> shopFilteredItems = new LinkedList<EntityWrapper>();
-    private SendPlayerCommandsAppState sendPlayerCommandsAppState;
+    private int currentUpgradeSpellIndex = -1;
     
     @Override
     public void onStartup(){
         super.onStartup();
+        setExperience(0);
         for(int i=0;i<4;i++){
             hideSpellCooldown(i);
         }
@@ -60,6 +62,8 @@ public class ScreenController_HUD extends GameScreenController{
             hideItemCooldown(i);
         }
         onShopItemFilter(0, true);
+        setUpgradeSpellsLayerVisible(false);
+        hideUpgradeSpell();
     }
 
     @Override
@@ -81,6 +85,17 @@ public class ScreenController_HUD extends GameScreenController{
     
     public void setPlayerName(String name){
         getTextRenderer("player_name").setText(name);
+    }
+    
+    public void setLevel(int level){
+        getTextRenderer("level").setText("" + level);
+    }
+    
+    public void setExperience(float portion){
+        int width = (int) (portion * 257);
+        Element experienceBar = getElementByID("experience_bar");
+        experienceBar.setConstraintWidth(new SizeValue(width + "px"));
+        experienceBar.getParent().layoutElements();
     }
     
     public void setAttributeValue_Health(String text){
@@ -164,11 +179,12 @@ public class ScreenController_HUD extends GameScreenController{
             width = maximumWidth;
         }
         Element pingBar = getElementByID("ping_bar");
-        pingBar.setWidth(width);
         boolean shouldBeVisible = (width > 0);
         if(pingBar.isVisible() != shouldBeVisible){
             pingBar.setVisible(shouldBeVisible);
         }
+        pingBar.setConstraintWidth(new SizeValue(width + "px"));
+        pingBar.getParent().layoutElements();
         Effect hoverEffect = getElementByID("ping_container").getEffects(EffectEventId.onHover, Hint.class).get(0);
         hoverEffect.getParameters().setProperty("hintText", "Ping: " + ping + " ms");
     }
@@ -236,6 +252,7 @@ public class ScreenController_HUD extends GameScreenController{
                 int itemIndex = Integer.parseInt(elementID.substring(10));
                 EntityWrapper item = shopFilteredItems.get(itemIndex);
                 String itemID = item.getComponent(ItemIDComponent.class).getID();
+                SendPlayerCommandsAppState sendPlayerCommandsAppState = mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class);
                 sendPlayerCommandsAppState.sendCommand(new BuyItemCommand(itemID));
             }
         }
@@ -373,10 +390,52 @@ public class ScreenController_HUD extends GameScreenController{
     
     public void sellItem(String inventoryIndexString){
         int inventoryIndex = Integer.parseInt(inventoryIndexString);
+        SendPlayerCommandsAppState sendPlayerCommandsAppState = mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class);
         sendPlayerCommandsAppState.sendCommand(new SellItemCommand(inventoryIndex));
     }
-
-    public void setAppStates(SendPlayerCommandsAppState sendPlayerCommandsAppState){
-        this.sendPlayerCommandsAppState = sendPlayerCommandsAppState;
+    
+    public void setUpgradeSpellsLayerVisible(boolean isVisible){
+        getElementByID("upgrade_spells_layer").setVisible(isVisible);
+    }
+    
+    public void setUpgradeSpellsButtonVisible(int spellIndex, boolean isVisible){
+        getElementByID("upgrade_spells_button_" + spellIndex).setVisible(isVisible);
+    }
+    
+    public void setUpgradeSpellsButtonImage(int spellIndex, String imagePath){
+        getImageRenderer("upgrade_spells_button_" + spellIndex).setImage(createImage(imagePath));
+    }
+    
+    public void learnOrUpgradeSpell(String spellIndexString){
+        int spellIndex = Integer.parseInt(spellIndexString);
+        SendPlayerCommandsAppState sendPlayerCommandsAppState = mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class);
+        sendPlayerCommandsAppState.learnOrUpgradeSpell(spellIndex);
+    }
+    
+    public void showUpgradeSpell(int spellIndex){
+        currentUpgradeSpellIndex = spellIndex;
+        getElementByID("upgrade_spell_layer_container").setVisible(true);
+        getElementByID("upgrade_spell_layer_images").setVisible(true);
+        int offset = (spellIndex * 60);
+        getElementByID("upgrade_spell_offset_container").setConstraintWidth(new SizeValue(offset + "px"));
+        getElementByID("upgrade_spell_offset_container").getParent().layoutElements();
+        getElementByID("upgrade_spell_offset_images").setConstraintWidth(new SizeValue((7 + offset) + "px"));
+        getElementByID("upgrade_spell_offset_images").getParent().layoutElements();
+    }
+    
+    public void setSpellUpgradeImage(int upgradeIndex, String imagePath){
+        getImageRenderer("upgrade_spell_image_" + upgradeIndex).setImage(createImage(imagePath));
+    }
+    
+    public void upgradeSpell(String upgradeIndexString){
+        int upgradeIndex = Integer.parseInt(upgradeIndexString);
+        SendPlayerCommandsAppState sendPlayerCommandsAppState = mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class);
+        sendPlayerCommandsAppState.upgradeSpell(currentUpgradeSpellIndex, upgradeIndex);
+        hideUpgradeSpell();
+    }
+    
+    private void hideUpgradeSpell(){
+        getElementByID("upgrade_spell_layer_container").setVisible(false);
+        getElementByID("upgrade_spell_layer_images").setVisible(false);
     }
 }

@@ -9,7 +9,6 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
-import amara.game.entitysystem.systems.physics.shapes.ConvexShape;
 
 /**
  *
@@ -33,7 +32,7 @@ public class LocalAvoidanceSystem implements EntitySystem{
     }
     
     public static Vector2f correctMovementDirection(EntityWorld entityWorld, int entity, Vector2f movementDirection, float deltaSeconds){
-        float hitboxRadius = getHitboxRadius(entityWorld, entity);
+        float hitboxRadius = TargetedMovementSystem.getHitboxRadius(entityWorld, entity);
         Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
         int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
         Vector2f movementDirectionNormalized = movementDirection.normalize();
@@ -52,7 +51,7 @@ public class LocalAvoidanceSystem implements EntitySystem{
                 if(distanceLengthSquared <= squaredMinimumDistance){
                     float angle = movementDirectionNormalized.dot(distanceNormalized);
                     if(angle > 0){
-                        float targetHitboxRadius = getHitboxRadius(entityWorld, targetEntity);
+                        float targetHitboxRadius = TargetedMovementSystem.getHitboxRadius(entityWorld, targetEntity);
                         float scale = ((minimumDistance - distance.length() + targetHitboxRadius + hitboxRadius) / minimumDistance);
                         scale *= angle;
                         Vector2f avoidanceVector = distanceNormalized.mult(-1 * movementSpeedPerFrame * scale);
@@ -64,14 +63,5 @@ public class LocalAvoidanceSystem implements EntitySystem{
         }
         resultingVector.normalizeLocal();
         return resultingVector;
-    }
-    
-    private static float getHitboxRadius(EntityWorld entityWorld, int entity){
-        float hitboxRadius = 0;
-        HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
-        if(hitboxComponent.getShape() instanceof ConvexShape){
-            hitboxRadius = (float) ((ConvexShape) hitboxComponent.getShape()).getBoundCircle().getGlobalRadius();
-        }
-        return hitboxRadius;
     }
 }

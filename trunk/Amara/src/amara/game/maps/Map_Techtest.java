@@ -101,7 +101,7 @@ public class Map_Techtest extends Map{
     }
 
     @Override
-    public void spawn(EntityWorld entityWorld, int playerEntity){
+    public void spawnPlayer(EntityWorld entityWorld, int playerEntity){
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
         int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
         entityWorld.setComponent(unitEntity, new PositionComponent(new Vector2f(((playerIndex + 1) * 5), 5)));

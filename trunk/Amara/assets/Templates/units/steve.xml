@@ -48,12 +48,12 @@
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
-        <spells>
+        <learnableSpells>
             <entity template="spells/infected_cleaver"/>
             <entity template="spells/burning_agony(1)"/>
             <entity template="spells/event_horizon"/>
             <entity template="spells/sadism"/>
-        </spells>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>

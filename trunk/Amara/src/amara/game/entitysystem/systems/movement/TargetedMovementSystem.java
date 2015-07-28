@@ -45,9 +45,10 @@ public class TargetedMovementSystem implements EntitySystem{
                     boolean isTargetReached = position.equals(targetPosition);
                     if(!isTargetReached){
                         Vector2f distanceToTarget = targetPosition.subtract(position);
+                        float distanceToTargetLengthSquared = distanceToTarget.lengthSquared();
                         MovementTargetSufficientDistanceComponent movementTargetSufficientDistanceComponent = entityWorld.getComponent(movementEntity, MovementTargetSufficientDistanceComponent.class);
                         if(movementTargetSufficientDistanceComponent != null){
-                            if(distanceToTarget.length() <= movementTargetSufficientDistanceComponent.getDistance()){
+                            if(distanceToTargetLengthSquared <= (movementTargetSufficientDistanceComponent.getDistance() * movementTargetSufficientDistanceComponent.getDistance())){
                                 isTargetReached = true;
                             }
                         }
@@ -57,18 +58,14 @@ public class TargetedMovementSystem implements EntitySystem{
                             if(entityWorld.hasComponent(movementEntity, MovementPathfindingComponent.class)){
                                 Vector2D pathfindingFrom = new Vector2D(position.getX(), position.getY());
                                 Vector2D pathfindingTo = new Vector2D(targetPosition.getX(), targetPosition.getY());
-                                double hitboxRadius = 0;
-                                HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
-                                if((hitboxComponent != null)){
-                                    hitboxRadius = ((ConvexShape) hitboxComponent.getShape()).getBoundCircle().getGlobalRadius();
-                                }
+                                double hitboxRadius = getHitboxRadius(entityWorld, entity);
                                 Vector2D newPosition = polyMapManager.followTriPath(entity, pathfindingFrom, pathfindingTo, speed * deltaSeconds, hitboxRadius);
                                 movedDistance = new Vector2f((float) newPosition.getX(), (float) newPosition.getY()).subtractLocal(position);
                             }
                             else{
                                 movedDistance = distanceToTarget.normalize().multLocal(speed * deltaSeconds);
                             }
-                            if(movedDistance.lengthSquared() >= distanceToTarget.lengthSquared()){
+                            if(movedDistance.lengthSquared() >= distanceToTargetLengthSquared){
                                 entityWorld.setComponent(entity, new PositionComponent(targetPosition.clone()));
                                 isTargetReached = true;
                             }
@@ -96,5 +93,16 @@ public class TargetedMovementSystem implements EntitySystem{
         HitboxComponent hitboxComponent1 = entityWorld.getComponent(movingEntity, HitboxComponent.class);
         HitboxComponent hitboxComponent2 = entityWorld.getComponent(targetEntity, HitboxComponent.class);
         return ((hitboxComponent1 != null) && (hitboxComponent2 != null) && hitboxComponent1.getShape().intersects(hitboxComponent2.getShape()));
+    }
+    
+    public static float getHitboxRadius(EntityWorld entityWorld, int entity){
+        float hitboxRadius = 0;
+        HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
+        if(hitboxComponent != null){
+            if(hitboxComponent.getShape() instanceof ConvexShape){
+                hitboxRadius = (float) ((ConvexShape) hitboxComponent.getShape()).getBoundCircle().getGlobalRadius();
+            }
+        }
+        return hitboxRadius;
     }
 }

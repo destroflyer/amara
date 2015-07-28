@@ -45,12 +45,12 @@
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
-        <spells>
+        <learnableSpells>
             <entity template="spells/grab(#unit)"/>
             <entity template="spells/astral_blessing"/>
             <entity template="spells/sonic_wave(2)"/>
             <entity template="spells/wither"/>
-        </spells>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>

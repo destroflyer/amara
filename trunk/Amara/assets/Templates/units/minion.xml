@@ -53,11 +53,11 @@
         <autoAttack>
             <entity template="spells/default_autoattack"/>
         </autoAttack>
-        <spells>
+        <learnableSpells>
             <entity template="spells/null_sphere"/>
             <entity template="spells/riftwalk"/>
             <entity template="spells/ignite"/>
-        </spells>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>

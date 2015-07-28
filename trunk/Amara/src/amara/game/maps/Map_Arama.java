@@ -21,6 +21,7 @@ import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.shop.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.components.units.bounties.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
@@ -164,7 +165,16 @@ public class Map_Arama extends Map{
     }
 
     @Override
-    public void spawn(EntityWorld entityWorld, int playerEntity){
+    public void initializePlayer(EntityWorld entityWorld, int playerEntity){
+        super.initializePlayer(entityWorld, playerEntity);
+        int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
+        EntityWrapper characterBounty = entityWorld.getWrapped(entityWorld.createEntity());
+        characterBounty.setComponent(new BountyGoldComponent(300));
+        entityWorld.setComponent(unitEntity, new BountyComponent(characterBounty.getId()));
+    }
+
+    @Override
+    public void spawnPlayer(EntityWorld entityWorld, int playerEntity){
         Vector2f position = new Vector2f();
         Vector2f direction = new Vector2f();
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();

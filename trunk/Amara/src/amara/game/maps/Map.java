@@ -23,7 +23,11 @@ public abstract class Map{
     
     public abstract void load(EntityWorld entityWorld);
     
-    public abstract void spawn(EntityWorld entityWorld, int playerEntity);
+    public void initializePlayer(EntityWorld entityWorld, int playerEntity){
+        
+    }
+    
+    public abstract void spawnPlayer(EntityWorld entityWorld, int playerEntity);
 
     public void setName(String name){
         this.name = name;

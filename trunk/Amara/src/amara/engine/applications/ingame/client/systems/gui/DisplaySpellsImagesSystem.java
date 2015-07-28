@@ -29,20 +29,30 @@ public class DisplaySpellsImagesSystem extends GUIDisplaySystem{
     
     private void checkChangedSpells(EntityWorld entityWorld, SpellsComponent spellsComponent){
         if(spellsComponent != null){
+            int[] spells = spellsComponent.getSpellsEntities();
+            String imagePath;
             for(int i=0;i<4;i++){
-                String visualisationName = "none";
-                int[] spells = spellsComponent.getSpellsEntities();
                 if((i < spells.length) && (spells[i] != -1)){
-                    SpellVisualisationComponent spellVisualisationComponent = entityWorld.getComponent(spells[i], SpellVisualisationComponent.class);
-                    if(spellVisualisationComponent != null){
-                        visualisationName = spellVisualisationComponent.getName();
-                    }
-                    else{
-                        visualisationName = "unknown";
-                    }
+                    imagePath = getSpellImagePath(entityWorld, spells[i]);
                 }
-                screenController_HUD.setSpellImage(i, "Interface/hud/spells/" + visualisationName + ".png");
+                else{
+                    imagePath = "Interface/hud/spells/none.png";
+                }
+                screenController_HUD.setSpellImage(i, imagePath);
+                
             }
         }
+    }
+    
+    public static String getSpellImagePath(EntityWorld entityWorld, int spellEntity){
+        String visualisationName;
+        SpellVisualisationComponent spellVisualisationComponent = entityWorld.getComponent(spellEntity, SpellVisualisationComponent.class);
+        if(spellVisualisationComponent != null){
+            visualisationName = spellVisualisationComponent.getName();
+        }
+        else{
+            visualisationName = "unknown";
+        }
+        return ("Interface/hud/spells/" + visualisationName + ".png");
     }
 }

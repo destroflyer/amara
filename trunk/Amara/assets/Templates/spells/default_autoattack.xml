@@ -39,7 +39,7 @@
         <castCancelable/>
         <stopBeforeCasting/>
         <castTurnToTarget/>
-        <range>15</range>
+        <range>9</range>
         <spellTargetRules>
             <entity>
                 <acceptEnemies/>
