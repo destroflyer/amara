@@ -13,6 +13,7 @@ import amara.Queue;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
 import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
+import amara.engine.applications.ingame.client.systems.gui.DisplaySpellsImagesSystem;
 import amara.engine.appstates.*;
 import amara.engine.network.NetworkClient;
 import amara.engine.input.*;
@@ -42,7 +43,6 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
-        screenController_HUD.setAppStates(this);
     }
 
     @Override
@@ -152,6 +152,31 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                 }
             }
         }
+    }
+    
+    public void learnOrUpgradeSpell(int spellIndex){
+        EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
+        PlayerAppState playerAppState = getAppState(PlayerAppState.class);
+        int selectedEntity = entityWorld.getComponent(playerAppState.getPlayerEntity(), SelectedUnitComponent.class).getEntity();
+        int[] spells = entityWorld.getComponent(selectedEntity, SpellsComponent.class).getSpellsEntities();
+        if((spellIndex < spells.length) && (spells[spellIndex] != -1)){
+            int spellEntity = spells[spellIndex];
+            SpellUpgradesComponent spellUpgradesComponent = entityWorld.getComponent(spellEntity, SpellUpgradesComponent.class);
+            if(spellUpgradesComponent != null){
+                int[] upgradedSpellEntities = spellUpgradesComponent.getSpellsEntities();
+                for(int i=0;i<upgradedSpellEntities.length;i++){
+                    screenController_HUD.setSpellUpgradeImage(i, DisplaySpellsImagesSystem.getSpellImagePath(entityWorld, upgradedSpellEntities[i]));
+                }
+                screenController_HUD.showUpgradeSpell(spellIndex);
+            }
+        }
+        else{
+            sendCommand(new LearnSpellCommand(spellIndex));
+        }
+    }
+    
+    public void upgradeSpell(int spellIndex, int upgradeIndex){
+        sendCommand(new UpgradeSpellCommand(spellIndex, upgradeIndex));
     }
     
     private void castSpell(SpellIndex spellIndex){

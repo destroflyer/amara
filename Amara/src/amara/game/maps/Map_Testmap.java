@@ -24,6 +24,7 @@ import amara.game.entitysystem.components.units.bounties.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.game.entitysystem.systems.spells.SpellUtil;
 
 /**
  *
@@ -155,7 +156,21 @@ public class Map_Testmap extends Map{
     }
 
     @Override
-    public void spawn(EntityWorld entityWorld, int playerEntity){
+    public void initializePlayer(EntityWorld entityWorld, int playerEntity){
+        super.initializePlayer(entityWorld, playerEntity);
+        int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
+        EntityWrapper characterBounty = entityWorld.getWrapped(entityWorld.createEntity());
+        characterBounty.setComponent(new BountyGoldComponent(300));
+        entityWorld.setComponent(unitEntity, new BountyComponent(characterBounty.getId()));
+        entityWorld.setComponent(unitEntity, new LevelComponent(6));
+        entityWorld.setComponent(unitEntity, new SpellsUpgradePointsComponent(6));
+        for(int i=0;i<4;i++){
+            SpellUtil.learnSpell(entityWorld, unitEntity, i);
+        }
+    }
+
+    @Override
+    public void spawnPlayer(EntityWorld entityWorld, int playerEntity){
         Vector2f position = new Vector2f();
         Vector2f direction = new Vector2f();
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
@@ -184,8 +199,5 @@ public class Map_Testmap extends Map{
         entityWorld.setComponent(unitEntity, new PositionComponent(position));
         entityWorld.setComponent(unitEntity, new DirectionComponent(direction));
         entityWorld.setComponent(unitEntity, new TeamComponent(playerIndex + 1));
-        EntityWrapper characterBounty = entityWorld.getWrapped(entityWorld.createEntity());
-        characterBounty.setComponent(new BountyGoldComponent(300));
-        entityWorld.setComponent(unitEntity, new BountyComponent(characterBounty.getId()));
     }
 }

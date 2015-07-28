@@ -2,7 +2,7 @@
     <entity id="spell">
         <name>Riftwalk</name>
         <description>Teleports to the target location.</description>
-        <spellVisualisation>riftwalk</spellVisualisation>
+        <spellVisualisation>riftwalk_0</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
@@ -13,7 +13,6 @@
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
-                <triggerDelay>0.25</triggerDelay>
             </entity>
             <!--play audio-->
             <entity>
@@ -32,19 +31,8 @@
         </instantEffectTriggers>
         <castType>positional_skillshot</castType>
         <castCancelAction/>
-        <castDuration>0.5</castDuration>
         <castTurnToTarget/>
-        <castAnimation>
-            <entity>
-                <name>pop</name>
-                <loopDuration>0.5</loopDuration>
-            </entity>
-        </castAnimation>
         <baseCooldown>6</baseCooldown>
-        <spellUpgrades>
-            <entity template="./riftwalk_0"/>
-            <entity template="./riftwalk_1"/>
-        </spellUpgrades>
     </entity>
     <!--spell effect-->
     <entity>

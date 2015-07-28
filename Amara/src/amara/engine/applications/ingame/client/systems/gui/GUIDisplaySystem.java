@@ -20,7 +20,6 @@ public abstract class GUIDisplaySystem implements EntitySystem{
     }
     protected int playerEntity;
     protected ScreenController_HUD screenController_HUD;
-    protected int selectedEntity;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){

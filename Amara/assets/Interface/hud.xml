@@ -136,10 +136,41 @@
         <layer childLayout="center">
             <panel childLayout="vertical">
                 <panel/>
+                <panel childLayout="horizontal" height="10px">
+                    <panel width="59px"/>
+                    <panel width="257px" height="100%" backgroundColor="#000F"/>
+                </panel>
+                <panel height="140px"/>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="10px">
+                    <panel width="59px"/>
+                    <panel id="experience_bar" width="257px" height="100%" backgroundColor="#09FF"/>
+                </panel>
+                <panel height="140px"/>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
                 <panel childLayout="horizontal" height="200px">
                     <image filename="Interface/hud/unit.png" width="400px" height="100%"></image>
                     <panel/>
                 </panel>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="17px">
+                    <panel width="14px"/>
+                    <text id="level" text="?" width="40px" textHAlign="center" font="Interface/fonts/Verdana_12.fnt"/>
+                    <panel/>
+                </panel>
+                <panel height="153px"/>
             </panel>
         </layer>
         <layer childLayout="center">
@@ -213,6 +244,86 @@
                     <image filename="Interface/hud/center.png" width="575px" height="100%"></image>
                     <panel width="*"/>
                 </panel>
+            </panel>
+        </layer>
+        <layer id="upgrade_spells_layer" childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="45px">
+                    <panel width="*"/>
+                    <panel childLayout="horizontal" width="575px">
+                        <panel width="158px"/>
+                        <image filename="Interface/hud/upgrade_spells_container.png" width="262px" height="100%"></image>
+                        <panel width="*"/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+                <panel height="150px"/>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="32px">
+                    <panel width="*"/>
+                    <panel childLayout="horizontal" width="575px">
+                        <panel width="183px"/>
+                        <image id="upgrade_spells_button_0" filename="Interface/hud/learn_spell_button.png" width="32px" height="32px">
+                            <interact onClick="learnOrUpgradeSpell(0)"/>
+                        </image>
+                        <panel width="28px"/>
+                        <image id="upgrade_spells_button_1" filename="Interface/hud/learn_spell_button.png" width="32px" height="32px">
+                            <interact onClick="learnOrUpgradeSpell(1)"/>
+                        </image>
+                        <panel width="28px"/>
+                        <image id="upgrade_spells_button_2" filename="Interface/hud/learn_spell_button.png" width="32px" height="32px">
+                            <interact onClick="learnOrUpgradeSpell(2)"/>
+                        </image>
+                        <panel width="28px"/>
+                        <image id="upgrade_spells_button_3" filename="Interface/hud/learn_spell_button.png" width="32px" height="32px">
+                            <interact onClick="learnOrUpgradeSpell(3)"/>
+                        </image>
+                        <panel width="*"/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+                <panel height="150px"/>
+            </panel>
+        </layer>
+        <layer id="upgrade_spell_layer_container" childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="68px">
+                    <panel width="*"/>
+                    <panel childLayout="horizontal" width="312px">
+                        <panel id="upgrade_spell_offset_container" width="0px"/>
+                        <image filename="Interface/hud/upgrade_spell_container.png" width="132px" height="100%"></image>
+                        <panel width="*"/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+                <panel height="150px"/>
+            </panel>
+        </layer>
+        <layer id="upgrade_spell_layer_images" childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="55px">
+                    <panel width="*"/>
+                    <panel childLayout="horizontal" width="312px">
+                        <panel id="upgrade_spell_offset_images" width="7px"/>
+                        <image id="upgrade_spell_image_0" filename="Interface/hud/spells/ignite.png" width="55px" height="55px">
+                            <interact onClick="upgradeSpell(0)"/>
+                        </image>
+                        <panel width="8px"/>
+                        <image id="upgrade_spell_image_1" filename="Interface/hud/spells/ignite.png" width="55px" height="55px">
+                            <interact onClick="upgradeSpell(1)"/>
+                        </image>
+                        <panel width="*"/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+                <panel height="156px"/>
             </panel>
         </layer>
         <layer childLayout="center">

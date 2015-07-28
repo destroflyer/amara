@@ -25,8 +25,7 @@ public class PlayerRespawnSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int playerEntity : entityWorld.getEntitiesWithAll(RespawnComponent.class))
-        {
+        for(int playerEntity : entityWorld.getEntitiesWithAll(RespawnComponent.class)){
             entityWorld.removeComponent(playerEntity, RespawnComponent.class);
             int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
             entityWorld.removeComponent(selectedEntity, AnimationComponent.class);
@@ -36,7 +35,7 @@ public class PlayerRespawnSystem implements EntitySystem{
             entityWorld.setComponent(selectedEntity, new IsTargetableComponent());
             entityWorld.setComponent(selectedEntity, new IsVulnerableComponent());
             entityWorld.setComponent(selectedEntity, new RequestUpdateAttributesComponent());
-            game.getMap().spawn(entityWorld, playerEntity);
+            game.getMap().spawnPlayer(entityWorld, playerEntity);
         }
     }
 }

@@ -1652,6 +1652,15 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.SpellTargetRulesComponent(targetRulesEntity);
             }
         });
+        Serializer.registerClass(amara.game.entitysystem.components.spells.SpellUpgradesComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.SpellUpgradesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.SpellUpgradesComponent>("spellUpgrades"){
+
+            @Override
+            public amara.game.entitysystem.components.spells.SpellUpgradesComponent construct(){
+                int[] spellsEntities = createChildEntities(0, "spellsEntities");
+                return new amara.game.entitysystem.components.spells.SpellUpgradesComponent(spellsEntities);
+            }
+        });
         Serializer.registerClass(amara.game.entitysystem.components.spells.SpellVisualisationComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.SpellVisualisationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.SpellVisualisationComponent>("spellVisualisation"){
 
@@ -2204,6 +2213,15 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.IsWalkingToAggroTargetComponent();
             }
         });
+        Serializer.registerClass(amara.game.entitysystem.components.units.LearnableSpellsComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.LearnableSpellsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.LearnableSpellsComponent>("learnableSpells"){
+
+            @Override
+            public amara.game.entitysystem.components.units.LearnableSpellsComponent construct(){
+                int[] spellsEntities = createChildEntities(0, "spellsEntities");
+                return new amara.game.entitysystem.components.units.LearnableSpellsComponent(spellsEntities);
+            }
+        });
         Serializer.registerClass(amara.game.entitysystem.components.units.LevelComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.LevelComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.LevelComponent>("level"){
 
@@ -2292,6 +2310,15 @@ public class ComponentsRegistrator{
             public amara.game.entitysystem.components.units.SpellsComponent construct(){
                 int[] spellsEntities = createChildEntities(0, "spellsEntities");
                 return new amara.game.entitysystem.components.units.SpellsComponent(spellsEntities);
+            }
+        });
+        Serializer.registerClass(amara.game.entitysystem.components.units.SpellsUpgradePointsComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.SpellsUpgradePointsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.SpellsUpgradePointsComponent>("spellsUpgradePoints"){
+
+            @Override
+            public amara.game.entitysystem.components.units.SpellsUpgradePointsComponent construct(){
+                int upgradePoints = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
+                return new amara.game.entitysystem.components.units.SpellsUpgradePointsComponent(upgradePoints);
             }
         });
         Serializer.registerClass(amara.game.entitysystem.components.units.TargetsInAggroRangeComponent.class);

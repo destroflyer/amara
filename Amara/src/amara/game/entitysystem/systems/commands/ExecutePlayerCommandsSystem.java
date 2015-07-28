@@ -25,6 +25,7 @@ import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.systems.aggro.CheckAggroTargetAttackibilitySystem;
 import amara.game.entitysystem.systems.movement.MovementSystem;
 import amara.game.entitysystem.systems.shop.ShopUtil;
+import amara.game.entitysystem.systems.spells.SpellUtil;
 import amara.game.entitysystem.systems.spells.casting.CastSpellSystem;
 import amara.game.entitysystem.systems.targets.TargetUtil;
 import amara.game.entitysystem.systems.units.UnitUtil;
@@ -89,6 +90,14 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                         }
                     }
                 }
+                else if(command instanceof LearnSpellCommand){
+                    LearnSpellCommand learnSpellCommand = (LearnSpellCommand) command;
+                    SpellUtil.learnSpell(entityWorld, selectedUnit, learnSpellCommand.getSpellIndex());
+                }
+                else if(command instanceof UpgradeSpellCommand){
+                    UpgradeSpellCommand upgradeSpellCommand = (UpgradeSpellCommand) command;
+                    SpellUtil.upgradeSpell(entityWorld, selectedUnit, upgradeSpellCommand.getSpellIndex(), upgradeSpellCommand.getUpgradeIndex());
+                }
                 else if(command instanceof CastSelfcastSpellCommand){
                     CastSelfcastSpellCommand castSelfcastSpellCommand = (CastSelfcastSpellCommand) command;
                     int spellEntity = SendPlayerCommandsAppState.getSpellEntity(entityWorld, selectedUnit, castSelfcastSpellCommand.getSpellIndex());
@@ -152,14 +161,13 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
         AutoAttackComponent autoAttackComponent = entityWorld.getComponent(casterEntity, AutoAttackComponent.class);
         boolean isAutoAttack = ((autoAttackComponent != null) && (spellEntity == autoAttackComponent.getAutoAttackEntity()));
         boolean castInstant = true;
-        RangeComponent rangeComponent = entityWorld.getComponent(spellEntity, RangeComponent.class);
-        if(rangeComponent != null){
-            float range = rangeComponent.getDistance();
+        if(entityWorld.hasComponent(spellEntity, RangeComponent.class)){
+            float minimumCastRange = CastSpellSystem.getMinimumCastRange(entityWorld, casterEntity, spellEntity, targetEntity);
             Vector2f casterPosition = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
             Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
-            float distance = targetPosition.distance(casterPosition);
-            if(distance > range){
-                if(tryWalk(entityWorld, casterEntity, targetEntity, range)){
+            float distanceSquared = targetPosition.distanceSquared(casterPosition);
+            if(distanceSquared > (minimumCastRange * minimumCastRange)){
+                if(tryWalk(entityWorld, casterEntity, targetEntity, minimumCastRange)){
                     if(isAutoAttack){
                         entityWorld.setComponent(casterEntity, new AggroTargetComponent(targetEntity));
                         entityWorld.setComponent(casterEntity, new IsWalkingToAggroTargetComponent());

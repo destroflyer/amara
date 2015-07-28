@@ -24,7 +24,7 @@
         <castCancelable/>
         <stopBeforeCasting/>
         <castTurnToTarget/>
-        <range>6</range>
+        <range>2</range>
         <spellTargetRules>
             <entity>
                 <acceptEnemies/>

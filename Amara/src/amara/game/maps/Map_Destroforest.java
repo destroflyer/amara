@@ -211,7 +211,7 @@ public class Map_Destroforest extends Map{
     }
 
     @Override
-    public void spawn(EntityWorld entityWorld, int playerEntity){
+    public void spawnPlayer(EntityWorld entityWorld, int playerEntity){
         Vector2f position = new Vector2f();
         Vector2f direction = new Vector2f();
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();

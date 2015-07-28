@@ -55,12 +55,12 @@
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
-        <spells>
+        <learnableSpells>
             <entity template="spells/pulverize"/>
             <entity template="spells/headbutt"/>
             <entity template="spells/slap"/>
             <entity template="spells/unstoppable_force"/>
-        </spells>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>

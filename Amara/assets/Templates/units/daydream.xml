@@ -55,12 +55,12 @@
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
-        <spells>
+        <learnableSpells>
             <empty/>
             <empty/>
             <empty/>
             <entity template="spells/hammer_of_wrath"/>
-        </spells>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>
