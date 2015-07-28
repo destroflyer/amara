@@ -68,7 +68,9 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
         if(scaleVisualisation){
             Node entityNode = entitySceneMap.requestNode(targetEntity);
             ModelObject modelObject = (ModelObject) entityNode.getChild(ModelSystem.NODE_NAME_MODEL);
-            visualAttachment.setLocalScale(modelObject.getSkin().getModelScale());
+            if(modelObject != null){
+                visualAttachment.setLocalScale(modelObject.getSkin().getModelScale());
+            }
         }
     }
     

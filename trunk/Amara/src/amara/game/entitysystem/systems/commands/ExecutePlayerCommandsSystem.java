@@ -62,6 +62,14 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     ShopUtil.sell(entityWorld, selectedUnit, sellItemCommand.getInventoryIndex());
                 }
             }
+            else if(command instanceof LearnSpellCommand){
+                LearnSpellCommand learnSpellCommand = (LearnSpellCommand) command;
+                SpellUtil.learnSpell(entityWorld, selectedUnit, learnSpellCommand.getSpellIndex());
+            }
+            else if(command instanceof UpgradeSpellCommand){
+                UpgradeSpellCommand upgradeSpellCommand = (UpgradeSpellCommand) command;
+                SpellUtil.upgradeSpell(entityWorld, selectedUnit, upgradeSpellCommand.getSpellIndex(), upgradeSpellCommand.getUpgradeIndex());
+            }
             else if(isUnitAlive){
                 if(command instanceof MoveCommand){
                     MoveCommand moveCommand = (MoveCommand) command;
@@ -89,14 +97,6 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                             }
                         }
                     }
-                }
-                else if(command instanceof LearnSpellCommand){
-                    LearnSpellCommand learnSpellCommand = (LearnSpellCommand) command;
-                    SpellUtil.learnSpell(entityWorld, selectedUnit, learnSpellCommand.getSpellIndex());
-                }
-                else if(command instanceof UpgradeSpellCommand){
-                    UpgradeSpellCommand upgradeSpellCommand = (UpgradeSpellCommand) command;
-                    SpellUtil.upgradeSpell(entityWorld, selectedUnit, upgradeSpellCommand.getSpellIndex(), upgradeSpellCommand.getUpgradeIndex());
                 }
                 else if(command instanceof CastSelfcastSpellCommand){
                     CastSelfcastSpellCommand castSelfcastSpellCommand = (CastSelfcastSpellCommand) command;
