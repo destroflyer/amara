@@ -3,6 +3,10 @@
         <name>Tower</name>
         <!--model-->
         <model>Models/tower/skin.xml</model>
+        <!--physics-->
+        <hitbox>
+            <circle radius="3"/>
+        </hitbox>
         <!--stats-->
         <isAlive/>
         <baseMaximumHealth>1200</baseMaximumHealth>
