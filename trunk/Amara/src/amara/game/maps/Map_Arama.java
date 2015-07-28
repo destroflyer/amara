@@ -70,7 +70,7 @@ public class Map_Arama extends Map{
             shop.setComponent(new TeamComponent(i + 1));
             //Towers
             EntityWrapper tower1 = EntityTemplate.createFromTemplate(entityWorld, "structures/tower");
-            tower1.setComponent(new PositionComponent(new Vector2f(((i == 0)?236:113), laneCenterY)));
+            tower1.setComponent(new PositionComponent(new Vector2f(((i == 0)?236:114), laneCenterY)));
             tower1.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));
             tower1.setComponent(new TeamComponent(i + 1));
             tower1.removeComponent(IsTargetableComponent.class);
