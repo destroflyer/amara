@@ -18,7 +18,7 @@ public class PlayerTeamSystem implements EntitySystem{
         this.playerEntity = playerEntity;
     }
     private int playerEntity;
-    private int playerTeamEntity;
+    private int playerTeamEntity = -1;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
