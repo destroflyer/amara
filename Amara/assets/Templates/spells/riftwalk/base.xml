@@ -42,8 +42,8 @@
         </castAnimation>
         <baseCooldown>6</baseCooldown>
         <spellUpgrades>
-            <entity template="./riftwalk_0"/>
-            <entity template="./riftwalk_1"/>
+            <entity template="./upgrade_0"/>
+            <entity template="./upgrade_1"/>
         </spellUpgrades>
     </entity>
     <!--spell effect-->

@@ -115,6 +115,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
                 }
                 inventoryResultSet.close();
                 ownedCharacterResultSet.close();
+                unit.setComponent(new SightRangeComponent(30));
                 unit.setComponent(new InventoryComponent(Util.convertToArray(inventory)));
                 unit.setComponent(new GoldComponent(475));
                 unit.setComponent(new LevelComponent(1));

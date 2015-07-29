@@ -33,7 +33,10 @@ public class Raster implements RasterMap
 
     public void setValue(int x, int y, float value)
     {
-        image.setPixel_Red(x, y, (int)(upper * value + lower * (1 - value)));
+        int pixelValue = (int) ((upper * value) + (lower * (1 - value)));
+        if(image.getPixel_Red(x, y) < pixelValue){
+            image.setPixel_Red(x, y, pixelValue);
+        }
     }
 
     public float getScale() {

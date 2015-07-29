@@ -17,6 +17,7 @@ import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
 import amara.engine.applications.ingame.client.systems.camera.*;
 import amara.engine.applications.ingame.client.systems.filters.*;
 import amara.engine.applications.ingame.client.systems.gui.*;
+import amara.engine.applications.ingame.client.systems.information.PlayerTeamSystem;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.appstates.*;
 import amara.engine.settings.Settings;
@@ -32,8 +33,10 @@ public class PlayerAppState extends BaseDisplayAppState implements ActionListene
 
     public PlayerAppState(int playerEntity){
         this.playerEntity = playerEntity;
+        playerTeamSystem = new PlayerTeamSystem(playerEntity);
     }
     private int playerEntity;
+    private PlayerTeamSystem playerTeamSystem;
     private LockedCameraSystem lockedCameraSystem;
     private FogOfWarSystem fogOfWarSystem;
     private int cursorHoveredEntity = -1;
@@ -57,7 +60,7 @@ public class PlayerAppState extends BaseDisplayAppState implements ActionListene
         if(Settings.getFloat("fog_of_war_update_interval") != -1){
             Map map = getAppState(MapAppState.class).getMap();
             PolyMapManager polyMapManager = map.getPhysicsInformation().getPolyMapManager();
-            fogOfWarSystem = new FogOfWarSystem(playerEntity, postFilterAppState, polyMapManager);
+            fogOfWarSystem = new FogOfWarSystem(playerTeamSystem, postFilterAppState, polyMapManager);
             localEntitySystemAppState.addEntitySystem(fogOfWarSystem);
         }
         ScreenController_HUD screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
@@ -155,6 +158,10 @@ public class PlayerAppState extends BaseDisplayAppState implements ActionListene
 
     public int getPlayerEntity(){
         return playerEntity;
+    }
+
+    public PlayerTeamSystem getPlayerTeamSystem(){
+        return playerTeamSystem;
     }
 
     public LockedCameraSystem getLockedCameraSystem(){

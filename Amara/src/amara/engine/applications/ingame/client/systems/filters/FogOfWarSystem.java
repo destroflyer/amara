@@ -6,9 +6,9 @@ package amara.engine.applications.ingame.client.systems.filters;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.renderer.RenderManager;
-import com.jme3.math.Vector2f;
 import com.jme3.renderer.ViewPort;
 import com.jme3.texture.Texture2D;
+import amara.engine.applications.ingame.client.systems.information.PlayerTeamSystem;
 import amara.engine.appstates.PostFilterAppState;
 import amara.engine.filters.FogOfWarFilter;
 import amara.engine.materials.PaintableImage;
@@ -16,7 +16,8 @@ import amara.engine.materials.Raster;
 import amara.engine.settings.Settings;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
-import amara.game.entitysystem.components.players.*;
+import amara.game.entitysystem.components.units.SightRangeComponent;
+import amara.game.entitysystem.components.units.TeamComponent;
 import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
 import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
@@ -27,8 +28,8 @@ import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
  */
 public class FogOfWarSystem implements EntitySystem{
 
-    public FogOfWarSystem(int playerEntity, PostFilterAppState postFilterAppState, final PolyMapManager polyMapManager){
-        this.playerEntity = playerEntity;
+    public FogOfWarSystem(PlayerTeamSystem playerTeamSystem, PostFilterAppState postFilterAppState, final PolyMapManager polyMapManager){
+        this.playerTeamSystem = playerTeamSystem;
         this.postFilterAppState = postFilterAppState;
         this.polyMapManager = polyMapManager;
         fogImage = new PaintableImage((int) (polyMapManager.getWidth() * resolutionFactor), (int) (polyMapManager.getHeight() * resolutionFactor));
@@ -45,7 +46,7 @@ public class FogOfWarSystem implements EntitySystem{
         tmpPlayerSightFogImageData = new byte[fogImage.getData().length];
     }
     private final float resolutionFactor = 1;
-    private int playerEntity;
+    private PlayerTeamSystem playerTeamSystem;
     private PostFilterAppState postFilterAppState;
     private PolyMapManager polyMapManager;
     private PaintableImage fogImage;
@@ -62,22 +63,26 @@ public class FogOfWarSystem implements EntitySystem{
         if(!displayMapSight){
             timeSinceLastUpdate += deltaSeconds;
             if(timeSinceLastUpdate > Settings.getFloat("fog_of_war_update_interval")){
-                SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
-                if(selectedUnitComponent != null){
-                    int selectedEntity = selectedUnitComponent.getEntity();
-                    ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, PositionComponent.class);
-                    if((observer.getNew().getComponent(selectedEntity, PositionComponent.class) != null)
-                    || (observer.getChanged().getComponent(selectedEntity, PositionComponent.class) != null)){
-                        isUpdateNeeded = true;
-                    }
-                    observer.reset();
-                    if(isUpdateNeeded){
-                        updateFogTexture_PlayerSight(entityWorld.getComponent(selectedEntity, PositionComponent.class).getPosition());
-                        isUpdateNeeded = false;
-                    }
+                ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, PositionComponent.class);
+                for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
+                    checkChangedPositionComponent(entityWorld, entity);
+                }
+                for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
+                    checkChangedPositionComponent(entityWorld, entity);
+                }
+                observer.reset();
+                if(isUpdateNeeded){
+                    updateFogTexture_PlayerSight(entityWorld);
+                    isUpdateNeeded = false;
                 }
                 timeSinceLastUpdate = 0;
             }
+        }
+    }
+    
+    private void checkChangedPositionComponent(EntityWorld entityWorld, int entity){
+        if(entityWorld.hasComponent(entity, SightRangeComponent.class) && playerTeamSystem.isAllied(entityWorld, entity)){
+            isUpdateNeeded = true;
         }
     }
     
@@ -106,12 +111,17 @@ public class FogOfWarSystem implements EntitySystem{
         onFogImageUpdated();
     }
     
-    private void updateFogTexture_PlayerSight(Vector2f playerUnitPosition){
+    private void updateFogTexture_PlayerSight(EntityWorld entityWorld){
         resetFogTexture();
-        Vector2D position = new Vector2D(playerUnitPosition.getX(), playerUnitPosition.getY());
-        double sightRange = 30;
-        Polygon sightPolygon = polyMapManager.sightPolygon(position, sightRange);
-        sightPolygon.rasterize(fogRaster, position, sightRange);
+        for(int entity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class, SightRangeComponent.class)){
+            if(playerTeamSystem.isAllied(entityWorld, entity)){
+                PositionComponent positionComponent = entityWorld.getComponent(entity, PositionComponent.class);
+                Vector2D position = new Vector2D(positionComponent.getPosition().getX(), positionComponent.getPosition().getY());
+                double sightRange = entityWorld.getComponent(entity, SightRangeComponent.class).getRange();
+                Polygon sightPolygon = polyMapManager.sightPolygon(position, sightRange);
+                sightPolygon.rasterize(fogRaster, position, sightRange);
+            }
+        }
         onFogImageUpdated();
     }
     
