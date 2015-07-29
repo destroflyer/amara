@@ -30,6 +30,7 @@
         <isAlive/>
         <walkSpeed>5.5</walkSpeed>
         <isProjectile/>
+        <sightRange>9</sightRange>
         <!--spells-->
         <autoAttack>
             <entity template="spells/empty_autoattack"/>

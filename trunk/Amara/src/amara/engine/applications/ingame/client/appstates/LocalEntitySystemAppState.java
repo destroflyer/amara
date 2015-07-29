@@ -75,7 +75,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         networkClient.addMessageBackend(new EntitySynchronizeBackend(mainApplication, entityWorld));
         networkClient.addMessageBackend(new GameStartedBackend(mainApplication));
         networkClient.addMessageBackend(new GameOverBackend(mainApplication));
-        PlayerTeamSystem playerTeamSystem = new PlayerTeamSystem(getAppState(PlayerAppState.class).getPlayerEntity());
+        PlayerTeamSystem playerTeamSystem = getAppState(PlayerAppState.class).getPlayerTeamSystem();
         addEntitySystem(playerTeamSystem);
         addEntitySystem(new AudioSystem(getAppState(AudioAppState.class)));
         MapAppState mapAppState = getAppState(MapAppState.class);

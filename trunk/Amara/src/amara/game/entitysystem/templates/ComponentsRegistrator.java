@@ -2303,6 +2303,15 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent(spellIndices, cooldowns);
             }
         });
+        Serializer.registerClass(amara.game.entitysystem.components.units.SightRangeComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.SightRangeComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.SightRangeComponent>("sightRange"){
+
+            @Override
+            public amara.game.entitysystem.components.units.SightRangeComponent construct(){
+                float range = Float.parseFloat(xmlTemplateManager.parseValue(element.getText()));
+                return new amara.game.entitysystem.components.units.SightRangeComponent(range);
+            }
+        });
         Serializer.registerClass(amara.game.entitysystem.components.units.SpellsComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.SpellsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.SpellsComponent>("spells"){
 

@@ -97,6 +97,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
+            entityWrapper.setComponent(new SightRangeComponent(28));
             
             EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/melee_autoattack");
             entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));

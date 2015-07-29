@@ -55,7 +55,7 @@
         </autoAttack>
         <learnableSpells>
             <entity template="spells/null_sphere"/>
-            <entity template="spells/riftwalk"/>
+            <entity template="spells/riftwalk/base"/>
             <entity template="spells/ignite"/>
         </learnableSpells>
         <!--other-->
