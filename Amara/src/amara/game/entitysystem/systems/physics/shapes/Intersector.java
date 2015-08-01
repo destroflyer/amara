@@ -8,9 +8,9 @@ package amara.game.entitysystem.systems.physics.shapes;
  *
  * @author Philipp
  */
-public interface Intersector {
-    boolean intersect(Object a, Object b);
-    Vector2D resolveVector(Object a, Object b);
-    Class getClassA();
-    Class getClassB();
+public interface Intersector<A, B> {
+    boolean intersect(A a, B b);
+    Vector2D resolveVector(A a, B b);
+    Class<A> getClassA();
+    Class<B> getClassB();
 }

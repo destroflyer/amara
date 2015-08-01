@@ -32,7 +32,7 @@ public class IntersectorsPopulator {
     
     private AbstractIntersector<Circle, Circle> circle_circle = new AbstractIntersector<Circle, Circle>(Circle.class, Circle.class) {
             @Override
-            protected Vector2D resolve_(Circle a, Circle b) {
+            public Vector2D resolveVector(Circle a, Circle b) {
                 Vector2D delta = b.getGlobalPosition().sub(a.getGlobalPosition());
                 return intersectionResolverHelper(delta, a.getGlobalRadius() + b.getGlobalRadius());
             }
@@ -43,14 +43,14 @@ public class IntersectorsPopulator {
             }
             
             @Override
-            protected boolean intersect_(Circle a, Circle b) {
+            public boolean intersect(Circle a, Circle b) {
                 return a.getGlobalPosition().squaredDistance(b.getGlobalPosition()) < Util.squared(a.getGlobalRadius() + b.getGlobalRadius());
             }
         };
     
     private AbstractIntersector<Circle, SimpleConvexPolygon> circle_convex = new AbstractIntersector<Circle, SimpleConvexPolygon>(Circle.class, SimpleConvexPolygon.class) {
             @Override
-            protected Vector2D resolve_(Circle a, SimpleConvexPolygon b) {
+            public Vector2D resolveVector(Circle a, SimpleConvexPolygon b) {
                 Vector2D center = a.getGlobalPosition();
                 double radius = a.getGlobalRadius();
 
@@ -106,8 +106,8 @@ public class IntersectorsPopulator {
             }
             
             @Override
-            protected boolean intersect_(Circle a, SimpleConvexPolygon b) {
-                if(circle_circle.intersect_(a, b.getBoundCircle()))
+            public boolean intersect(Circle a, SimpleConvexPolygon b) {
+                if(circle_circle.intersect(a, b.getBoundCircle()))
                 {
                     if(outlineCircleIntersect(a.getGlobalPosition(), Util.squared(a.getGlobalRadius()), b.getGlobalPoints()))
                     {
@@ -125,12 +125,12 @@ public class IntersectorsPopulator {
     
     private AbstractIntersector<Circle, PolygonShape> circle_poly = new AbstractIntersector<Circle, PolygonShape>(Circle.class, PolygonShape.class) {
         @Override
-        protected Vector2D resolve_(Circle a, PolygonShape b) {
+        public Vector2D resolveVector(Circle a, PolygonShape b) {
             throw new RuntimeException("resolveVector is not implemented for circle<->poly");
         }
         
         @Override
-        protected boolean intersect_(Circle a, PolygonShape b) {
+        public boolean intersect(Circle a, PolygonShape b) {
             Polygon poly = b.getGlobalPolygon();
             Vector2D center = a.getGlobalPosition();
 
@@ -161,7 +161,7 @@ public class IntersectorsPopulator {
     
     private AbstractIntersector<SimpleConvexPolygon, SimpleConvexPolygon> convex_convex = new AbstractIntersector<SimpleConvexPolygon, SimpleConvexPolygon>(SimpleConvexPolygon.class, SimpleConvexPolygon.class) {
         @Override
-        protected Vector2D resolve_(SimpleConvexPolygon a, SimpleConvexPolygon b) {
+        public Vector2D resolveVector(SimpleConvexPolygon a, SimpleConvexPolygon b) {
             return pusher(a.getGlobalPoints(), b.getGlobalPoints());
         }
         public Vector2D pusher(Vector2D[] convex1, Vector2D[] convex2)
@@ -195,8 +195,8 @@ public class IntersectorsPopulator {
         }
         
         @Override
-        protected boolean intersect_(SimpleConvexPolygon a, SimpleConvexPolygon b) {
-            if(circle_circle.intersect_(a.getBoundCircle(), b.getBoundCircle()))
+        public boolean intersect(SimpleConvexPolygon a, SimpleConvexPolygon b) {
+            if(circle_circle.intersect(a.getBoundCircle(), b.getBoundCircle()))
             {
                 return !(seperated(a.getGlobalPoints(), b.getGlobalPoints()) || seperated(b.getGlobalPoints(), a.getGlobalPoints()));
             }
@@ -206,12 +206,12 @@ public class IntersectorsPopulator {
     
     private AbstractIntersector<SimpleConvexPolygon, PolygonShape> convex_poly = new AbstractIntersector<SimpleConvexPolygon, PolygonShape>(SimpleConvexPolygon.class, PolygonShape.class) {
         @Override
-        protected Vector2D resolve_(SimpleConvexPolygon a, PolygonShape b) {
+        public Vector2D resolveVector(SimpleConvexPolygon a, PolygonShape b) {
             throw new RuntimeException("resolveVector is not implemented for convex<->poly");
         }
         
         @Override
-        protected boolean intersect_(SimpleConvexPolygon a, PolygonShape b) {
+        public boolean intersect(SimpleConvexPolygon a, PolygonShape b) {
             if(seperated(a.getGlobalPoints(), b.getGlobalPolygon().points().toArray(new Vector2D[0]))) return false;
         
             Vector2D[] points = a.getGlobalPoints();
@@ -250,12 +250,12 @@ public class IntersectorsPopulator {
     
     private AbstractIntersector<PointShape, Shape> point_shape = new AbstractIntersector<PointShape, Shape>(PointShape.class, Shape.class) {
         @Override
-        protected Vector2D resolve_(PointShape a, Shape b) {
+        public Vector2D resolveVector(PointShape a, Shape b) {
             throw new RuntimeException("resolveVector is not implemented for point<->shape");
         }
         
         @Override
-        protected boolean intersect_(PointShape a, Shape b) {
+        public boolean intersect(PointShape a, Shape b) {
             return b.contains(a.getGlobalPoint());
         }
     };
@@ -269,12 +269,12 @@ public class IntersectorsPopulator {
     
     private AbstractIntersector<PolygonShape, PolygonShape> poly_poly = new AbstractIntersector<PolygonShape, PolygonShape>(PolygonShape.class, PolygonShape.class) {
         @Override
-        protected Vector2D resolve_(PolygonShape a, PolygonShape b) {
+        public Vector2D resolveVector(PolygonShape a, PolygonShape b) {
             throw new RuntimeException("resolveVector is not implemented for poly<->poly");
         }
         
         @Override
-        protected boolean intersect_(PolygonShape a, PolygonShape b) {
+        public boolean intersect(PolygonShape a, PolygonShape b) {
             return a.getGlobalPolygon().intersects(b.getGlobalPolygon());
         }
     };

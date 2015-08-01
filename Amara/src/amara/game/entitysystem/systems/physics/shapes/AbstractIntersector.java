@@ -8,7 +8,7 @@ package amara.game.entitysystem.systems.physics.shapes;
  *
  * @author Philipp
  */
-public abstract class AbstractIntersector<A, B> implements Intersector {
+public abstract class AbstractIntersector<A, B> implements Intersector<A, B> {
     private final Class<A> classA;
     private final Class<B> classB;
 
@@ -17,20 +17,6 @@ public abstract class AbstractIntersector<A, B> implements Intersector {
         this.classB = classB;
     }
     
-    protected abstract Vector2D resolve_(A a, B b);
-    
-    protected abstract boolean intersect_(A a, B b);
-    
-    @Override
-    public boolean intersect(Object a, Object b) {
-        return intersect_((A)a, (B)b);
-    }
-    
-    @Override
-    public Vector2D resolveVector(Object a, Object b) {
-        return resolve_((A)a, (B)b);
-    }
-
     @Override
     public Class getClassA() {
         return classA;

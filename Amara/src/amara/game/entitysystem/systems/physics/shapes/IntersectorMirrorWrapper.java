@@ -17,12 +17,12 @@ public class IntersectorMirrorWrapper<A, B> implements Intersector {
     
     @Override
     public boolean intersect(Object a, Object b) {
-        return intersector.intersect_((B)b, (A)a);
+        return intersector.intersect((B)b, (A)a);
     }
     
     @Override
     public Vector2D resolveVector(Object a, Object b) {
-        return intersector.resolve_((B)b, (A)a).inverse();
+        return intersector.resolveVector((B)b, (A)a).inverse();
     }
 
     @Override
