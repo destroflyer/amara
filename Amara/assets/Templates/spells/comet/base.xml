@@ -1,0 +1,56 @@
+<template>
+    <entity id="spell">
+        <name>Comet</name>
+        <spellVisualisation>comet</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn object-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>positional_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>1</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>spellCastC</name>
+                <loopDuration>2</loopDuration>
+            </entity>
+        </castAnimation>
+        <range>20</range>
+        <baseCooldown>10</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <flatMagicDamage>300</flatMagicDamage>
+                        <addKnockup>
+                            <entity>
+                                <knockupDuration>1</knockupDuration>
+                                <knockupHeight>5</knockupHeight>
+                            </entity>
+                        </addKnockup>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

@@ -56,7 +56,7 @@
         <learnableSpells>
             <entity template="spells/null_sphere"/>
             <entity template="spells/riftwalk/base"/>
-            <entity template="spells/ignite"/>
+            <entity template="spells/ignite/base"/>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

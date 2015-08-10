@@ -4,16 +4,23 @@
  */
 package amara.game.entitysystem;
 
+import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 import amara.engine.applications.ingame.client.models.modifiers.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.*;
 import amara.game.entitysystem.components.buffs.status.*;
+import amara.game.entitysystem.components.effects.spawns.*;
 import amara.game.entitysystem.components.general.*;
+import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
+import amara.game.entitysystem.components.spawns.*;
+import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.units.bounties.*;
+import amara.game.entitysystem.components.units.effecttriggers.*;
+import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
@@ -67,6 +74,31 @@ public class EntityTemplate{
                 polygonBuilder.add(point.getX(), point.getY());
             }
             entityWrapper.setComponent(new HitboxComponent(new PolygonShape(polygonBuilder.build(false))));
+        }
+        else if(templateName.equals("spells/firestorm/base")){
+            int[] effectTriggers = new int[46];
+            for(int i=0;i<effectTriggers.length;i++){
+                EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+                effectTrigger.setComponent(new CasterTargetComponent());
+                EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
+                EntityWrapper spawnInformationEntity = entityWorld.getWrapped(entityWorld.createEntity());
+                spawnInformationEntity.setComponent(new SpawnTemplateComponent("spells/sear_projectile", "spells/firestorm/projectile," + i));
+                effect.setComponent(new SpawnComponent(spawnInformationEntity.getId()));
+                effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
+                effectTrigger.setComponent(new TriggerSourceComponent(entityWrapper.getId()));
+                effectTrigger.setComponent(new TriggerDelayComponent(i * 0.05f));
+                effectTriggers[i] = effectTrigger.getId();
+            }
+            entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTriggers));
+        }
+        else if(templateName.equals("spells/firestorm/projectile")){
+            Vector2f direction = new Vector2f(0, 1);
+            direction.rotateAroundOrigin(parameters[0] * (FastMath.TWO_PI / 20), true);
+            entityWrapper.setComponent(new DirectionComponent(direction));
+            EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
+            movement.setComponent(new MovementDirectionComponent(direction));
+            movement.setComponent(new MovementSpeedComponent(25));
+            entityWrapper.setComponent(new MovementComponent(movement.getId()));
         }
         else if(templateName.equals("etherdesert_creep_melee")){
             entityWrapper.setComponent(new NameComponent("Melee Creep"));

@@ -1,0 +1,63 @@
+<template>
+    <entity id="spell">
+        <name>Ignite</name>
+        <description>Deals damage over time to the target.</description>
+        <spellVisualisation>ignite</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>0.2</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castCancelAction/>
+        <castDuration>0.2</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>magicLightSpell</name>
+                <loopDuration>0.8</loopDuration>
+            </entity>
+        </castAnimation>
+        <range>10</range>
+        <baseCooldown>18</baseCooldown>
+        <spellTargetRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </spellTargetRules>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="5">
+                            <entity>
+                                <buffVisualisation>burning</buffVisualisation>
+                                <repeatingEffect interval="0.5">
+                                    <entity>
+                                        <flatMagicDamage>40</flatMagicDamage>
+                                        <scalingAbilityPowerMagicDamage>1</scalingAbilityPowerMagicDamage>
+                                    </entity>
+                                </repeatingEffect>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>
