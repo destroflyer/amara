@@ -1,0 +1,36 @@
+<template>
+    <entity id="spell">
+        <name>Firestorm</name>
+        <spellVisualisation>firestorm</spellVisualisation>
+        <!--<instantEffectTriggers>
+            [code]
+        </instantEffectTriggers>-->
+        <castType>selfcast</castType>
+        <castCancelAction/>
+        <castDuration>3</castDuration>
+        <castAnimation>
+            <entity>
+                <name>helixSpell</name>
+                <loopDuration>3</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>60</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <flatMagicDamage>80</flatMagicDamage>
+                        <scalingAbilityPowerMagicDamage>0.8</scalingAbilityPowerMagicDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

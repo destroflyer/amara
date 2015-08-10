@@ -41,6 +41,7 @@ public class ModelAppState extends BaseDisplayAppState implements ActionListener
         "/Models/jaime/skin_default.xml",
         "/Models/soldier/skin_default.xml",
         "/Models/steve/skin_default.xml",
+        "/Models/nathalya/skin_default.xml"
     };
     private ModelObject[] modelObjects;
     private String[][] animationNames;

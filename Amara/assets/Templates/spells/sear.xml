@@ -1,4 +1,5 @@
 <template>
+    <value name="delay">0.18</value>
     <entity id="spell">
         <name>Sear</name>
         <description>Throws a fireball.</description>
@@ -18,6 +19,7 @@
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
             </entity>
             <!--play audio-->
             <entity>
@@ -33,11 +35,19 @@
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
             </entity>
         </instantEffectTriggers>
         <castType>linear_skillshot</castType>
         <castCancelAction/>
+        <castDuration>[delay]</castDuration>
         <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>spellCastD</name>
+                <loopDuration>0.5</loopDuration>
+            </entity>
+        </castAnimation>
         <baseCooldown>8</baseCooldown>
     </entity>
     <!--spell effect-->
