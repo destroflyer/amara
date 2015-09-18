@@ -38,6 +38,7 @@ public class SpellUtil{
                 SpellUpgradesComponent spellUpgradesComponent = entityWorld.getComponent(spells[spellIndex], SpellUpgradesComponent.class);
                 if((spellUpgradesComponent != null) && (upgradeIndex < spellUpgradesComponent.getSpellsEntities().length)){
                     int upgradedSpellEntity = spellUpgradesComponent.getSpellsEntities()[upgradeIndex];
+                    transferRemainingCooldown(entityWorld, spells[spellIndex], upgradedSpellEntity);
                     setSpell(entityWorld, entity, spellIndex, upgradedSpellEntity);
                     entityWorld.setComponent(entity, new SpellsUpgradePointsComponent(spellsUpgradePoints - SPELL_POINTS_COST_UPGRADE));
                 }
@@ -70,5 +71,17 @@ public class SpellUtil{
         }
         entityWorld.setComponent(entity, new SpellsComponent(newSpells));
         entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
+    }
+    
+    public static void transferRemainingCooldown(EntityWorld entityWorld, int sourceSpellEntity, int targetSpellEntity){
+        RemainingCooldownComponent remainingCooldownComponent = entityWorld.getComponent(sourceSpellEntity, RemainingCooldownComponent.class);
+        if(remainingCooldownComponent != null){
+            CooldownComponent sourceCooldownComponent = entityWorld.getComponent(sourceSpellEntity, CooldownComponent.class);
+            CooldownComponent targetCooldownComponent = entityWorld.getComponent(targetSpellEntity, CooldownComponent.class);
+            if((sourceCooldownComponent != null) && (targetCooldownComponent != null)){
+                float remainingDuration = (targetCooldownComponent.getDuration() - (sourceCooldownComponent.getDuration() - remainingCooldownComponent.getDuration()));
+                entityWorld.setComponent(targetSpellEntity, new RemainingCooldownComponent(remainingDuration));
+            }
+        }
     }
 }
