@@ -71,8 +71,7 @@ public class CheckAreaBuffsSystem implements EntitySystem{
     }
     
     private void removeBuff(EntityWorld entityWorld, int targetEntity, int buffEntity){
-        for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class))
-        {
+        for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
             ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class);
             if((activeBuffComponent.getTargetEntity() == targetEntity) && (activeBuffComponent.getBuffEntity() == buffEntity)){
                 entityWorld.setComponent(buffStatus, new RemoveFromTargetComponent());

@@ -16,4 +16,17 @@ public class SourceMovementDirectionComponent{
     public SourceMovementDirectionComponent(){
         
     }
+
+    public SourceMovementDirectionComponent(float angle_Degrees){
+        this.angle_Degrees = angle_Degrees;
+    }
+    private float angle_Degrees;
+
+    public float getAngle_Degrees(){
+        return angle_Degrees;
+    }
+    
+    public float getAngle_Radian(){
+        return (float) Math.toRadians(angle_Degrees);
+    }
 }

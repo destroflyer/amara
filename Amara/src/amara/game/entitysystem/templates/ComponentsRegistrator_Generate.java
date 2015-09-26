@@ -33,6 +33,7 @@ public class ComponentsRegistrator_Generate{
         HealthBarStyleComponent.class
     };
     private static final String[] nativeDataTypes = new String[]{"boolean","int","long","float","double"};
+    private static final String[] nativeDataTypes_Defaults = new String[]{"false","0","0","0","0"};
     private static String code;
 
     public static void main(String[] args){
@@ -129,7 +130,11 @@ public class ComponentsRegistrator_Generate{
                                             parseMethodName = (datatypeClassName + ".parse" + datatypeClassName);
                                         }
                                         if(parameterType.equals(nativeDataTypes[r])){
-                                            code += "                " + nativeDataTypes[r] + " " + parameterName + " = " + parseMethodName + "(xmlTemplateManager.parseValue(" + textAccessCode + "));\n";
+                                            code += "                " + nativeDataTypes[r] + " " + parameterName + " = " + nativeDataTypes_Defaults[r] + ";\n";
+                                            code += "                String " + parameterName + "Text = " + textAccessCode + ";\n";
+                                            code += "                if((" + parameterName + "Text != null) && (" + parameterName + "Text.length() > 0)){\n";
+                                            code += "                    " + parameterName + " = " + parseMethodName + "(xmlTemplateManager.parseValue(" + parameterName + "Text));\n";
+                                            code += "                }\n";
                                             wasHandled = true;
                                             break;
                                         }

@@ -1,0 +1,62 @@
+<template>
+    <entity>
+        <name>Ganfaul</name>
+        <!--model-->
+        <model>Models/nathalya/skin_default.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>standing_idle</name>
+                <loopDuration>2.5</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>standing_walk_forward</name>
+            </entity>
+        </walkAnimation>
+        <walkStepDistance>6</walkStepDistance>
+        <autoAttackAnimation>
+            <entity>
+                <name>standing_1h_magic_attack_01</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>standing_react_death_backward</name>
+                <loopDuration>3</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup group="units" collidesWith="map|units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseMaximumHealth>350</baseMaximumHealth>
+        <baseAttackDamage>35</baseAttackDamage>
+        <baseAttackSpeed>0.7</baseAttackSpeed>
+        <baseArmor>25</baseArmor>
+        <baseMagicResistance>30</baseMagicResistance>
+        <baseWalkSpeed>6</baseWalkSpeed>
+        <requestUpdateAttributes/>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/default_autoattack"/>
+        </autoAttack>
+        <learnableSpells>
+            <empty/>
+            <entity template="spells/ganfaul_laser/base"/>
+            <entity template="spells/backflip/base"/>
+            <empty/>
+        </learnableSpells>
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
+    </entity>
+</template>
