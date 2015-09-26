@@ -86,11 +86,15 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         int movementEntity = entityWorld.createEntity();
                         for(Object component : entityWorld.getComponents(moveComponent.getMovementEntity())){
                             if(component instanceof SourceMovementDirectionComponent){
-                                Vector2f direction = entityWorld.getComponent(effectCastSourceComponent.getSourceEntity(), DirectionComponent.class).getVector();
+                                SourceMovementDirectionComponent sourceMovementDirectionComponent = (SourceMovementDirectionComponent) component;
+                                Vector2f direction = entityWorld.getComponent(effectCastSourceComponent.getSourceEntity(), DirectionComponent.class).getVector().clone();
+                                direction.rotateAroundOrigin(sourceMovementDirectionComponent.getAngle_Radian(), true);
                                 entityWorld.setComponent(movementEntity, new MovementDirectionComponent(direction));
                             }
                             else if(component instanceof TargetedMovementDirectionComponent){
-                                Vector2f direction = entityWorld.getComponent(effectCastTargetComponent.getTargetEntity(), DirectionComponent.class).getVector();
+                                TargetedMovementDirectionComponent targetedMovementDirectionComponent = (TargetedMovementDirectionComponent) component;
+                                Vector2f direction = entityWorld.getComponent(effectCastTargetComponent.getTargetEntity(), DirectionComponent.class).getVector().clone();
+                                direction.rotateAroundOrigin(targetedMovementDirectionComponent.getAngle_Radian(), true);
                                 entityWorld.setComponent(movementEntity, new MovementDirectionComponent(direction));
                             }
                             else if(component instanceof TargetedMovementTargetComponent){

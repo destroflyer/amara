@@ -146,9 +146,19 @@ public class MessagesSerializer{
                     shape = new Circle(radius);
                 }
                 else if(shapeType.equals("rectangle")){
+                    double x = 0;
+                    String xText = childElement.getAttributeValue("x");
+                    if(xText != null){
+                        x = Double.parseDouble(xText);
+                    }
+                    double y = 0;
+                    String yText = childElement.getAttributeValue("y");
+                    if(yText != null){
+                        y = Double.parseDouble(yText);
+                    }
                     double width = Double.parseDouble(childElement.getAttributeValue("width"));
                     double height = Double.parseDouble(childElement.getAttributeValue("height"));
-                    shape = new Rectangle(width, height);
+                    shape = new Rectangle(x, y, width, height);
                 }
                 else if(shapeType.equals("point")){
                     Vector2D localPoint = new Vector2D();

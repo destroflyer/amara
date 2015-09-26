@@ -1,0 +1,63 @@
+<template>
+    <entity id="spell">
+        <name>Backflip</name>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castCancelAction/>
+        <baseCooldown>2</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <move>
+                            <entity>
+                                <targetedMovementDirection>180</targetedMovementDirection>
+                                <movementSpeed>15</movementSpeed>
+                                <movementAnimation>
+                                    <entity>
+                                        <name>backflip</name>
+                                        <loopDuration>1</loopDuration>
+                                    </entity>
+                                </movementAnimation>
+                                <distanceLimit>8</distanceLimit>
+                            </entity>
+                        </move>
+                        <deactivateHitbox/>
+                        <addEffectTriggers>
+                            <!--reactivate hitbox-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <activateHitbox/>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

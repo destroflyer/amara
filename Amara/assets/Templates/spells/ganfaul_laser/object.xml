@@ -1,0 +1,60 @@
+<template>
+    <entity id="object">
+        <model>Models/ganfaul_laser/skin.xml</model>
+    </entity>
+    <!--add buff area-->
+    <entity>
+        <instantTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <activateHitbox/>
+                <addBuffArea>
+                    <entity id="buffArea">
+                        <hitbox>
+                            <rectangle x="12.5" width="25" height="2.5"/>
+                        </hitbox>
+                        <collisionGroup group="spells" collidesWith="units"/>
+                        <intersectionRules>
+                            <entity>
+                                <acceptEnemies/>
+                            </entity>
+                        </intersectionRules>
+                        <areaBuff>
+                            <entity>
+                                <repeatingEffect interval="0.25">
+                                    <entity>
+                                        <flatMagicDamage>50</flatMagicDamage>
+                                        <scalingAbilityPowerMagicDamage>0.15</scalingAbilityPowerMagicDamage>
+                                    </entity>
+                                </repeatingEffect>
+                            </entity>
+                        </areaBuff>
+                        <areaBuffTargetRules>
+                            <entity>
+                                <acceptEnemies/>
+                            </entity>
+                        </areaBuffTargetRules>
+                    </entity>
+                </addBuffArea>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+        <triggerDelay>0.7</triggerDelay>
+        <triggerOnce/>
+    </entity>
+    <!--remove buff area-->
+    <entity>
+        <instantTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+                <removeBuffArea>#buffArea</removeBuffArea>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+        <triggerDelay>2.3</triggerDelay>
+        <triggerOnce/>
+    </entity>
+</template>

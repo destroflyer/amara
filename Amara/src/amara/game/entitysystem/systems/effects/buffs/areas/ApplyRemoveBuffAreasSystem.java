@@ -6,6 +6,7 @@ package amara.game.entitysystem.systems.effects.buffs.areas;
 
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.buffs.areas.*;
+import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.buffs.areas.*;
 import amara.game.entitysystem.components.physics.*;
@@ -25,6 +26,13 @@ public class ApplyRemoveBuffAreasSystem implements EntitySystem{
             entityWorld.removeComponent(buffAreaEntity, AreaOriginComponent.class);
             entityWorld.removeComponent(buffAreaEntity, HitboxActiveComponent.class);
             entityWorld.removeComponent(buffAreaEntity, PositionComponent.class);
+            int buffEntity = entityWorld.getComponent(buffAreaEntity, AreaBuffComponent.class).getBuffEntity();
+            for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
+                ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class);
+                if(activeBuffComponent.getBuffEntity() == buffEntity){
+                    entityWorld.setComponent(buffStatus, new RemoveFromTargetComponent());
+                }
+            }
         }
     }
 }
