@@ -11,6 +11,7 @@ import com.jme3.network.MessageConnection;
 import com.jme3.network.MessageListener;
 import com.jme3.network.Network;
 import amara.Util;
+import amara.engine.network.debug.*;
 import amara.engine.network.exceptions.*;
 
 /**
@@ -24,6 +25,7 @@ public class NetworkClient extends NetworkListener{
     }
     public static final int MAXIMUM_CONNECTION_TIME = 5000;
     private Client client;
+    private LoadHistory uploadHistory;
     
     public void connectToServer(String host, int port) throws ServerConnectionException, ServerConnectionTimeoutException{
         try{
@@ -61,6 +63,9 @@ public class NetworkClient extends NetworkListener{
 
     public void sendMessage(Message message){
         client.send(message);
+        if(uploadHistory != null){
+            uploadHistory.add(MessageSizeCalculator.getMessageSize(message));
+        }
     }
     
     public void disconnect(){
@@ -78,5 +83,17 @@ public class NetworkClient extends NetworkListener{
 
     public int getID(){
         return client.getId();
+    }
+    
+    public void enableUploadHistory(int interval){
+        uploadHistory = new LoadHistory(interval);
+    }
+    
+    public void disableUploadHistory(){
+        uploadHistory = null;
+    }
+
+    public LoadHistory getUploadHistory(){
+        return uploadHistory;
     }
 }

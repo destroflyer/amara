@@ -6,6 +6,7 @@ package amara.engine.network;
 
 import java.util.ArrayList;
 import com.jme3.network.*;
+import amara.engine.network.debug.*;
 
 /**
  *
@@ -17,6 +18,7 @@ public abstract class NetworkListener{
         
     }
     private ArrayList<MessageBackend> messageBackends = new ArrayList<MessageBackend>();
+    private LoadHistory downloadHistory;
 
     protected void onMessageReceived(MessageConnection source, Message message){
         int clientID = getMessageClientID(source);
@@ -26,6 +28,9 @@ public abstract class NetworkListener{
             messageBackend.onMessageReceived(message, messageResponse);
         }
         sendMessageResponse(messageResponse);
+        if(downloadHistory != null){
+            downloadHistory.add(MessageSizeCalculator.getMessageSize(message));
+        }
     }
     
     private int getMessageClientID(MessageConnection source){
@@ -44,5 +49,17 @@ public abstract class NetworkListener{
 
     public void removeMessageBackend(MessageBackend messageBackend){
         messageBackends.remove(messageBackend);
+    }
+    
+    public void enableDownloadHistory(int interval){
+        downloadHistory = new LoadHistory(interval);
+    }
+    
+    public void disableDownloadHistory(){
+        downloadHistory = null;
+    }
+
+    public LoadHistory getDownloadHistory(){
+        return downloadHistory;
     }
 }
