@@ -19,6 +19,7 @@ import amara.engine.input.events.KeyPressedEvent;
 import amara.engine.network.MessageBackend;
 import amara.engine.network.MessageResponse;
 import amara.engine.network.NetworkClient;
+import amara.engine.network.debug.frame.NetworkLoadDisplay;
 import amara.engine.network.messages.*;
 import amara.launcher.client.MasterserverClientUtil;
 
@@ -120,6 +121,28 @@ public class ClientChatAppState extends BaseDisplayAppState{
     
     public void sendMessage(String text){
         NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
-        networkClient.sendMessage(new Message_SendChatMessage(text));
+        if(text.startsWith("/networklog down ")){
+            try{
+                int interval = Integer.parseInt(text.substring(17));
+                networkClient.enableDownloadHistory(interval);
+                new NetworkLoadDisplay(networkClient.getDownloadHistory(), 100*1024, "Download (Ingame)").setVisible(true);
+            }catch(NumberFormatException ex){
+            }
+        }
+        else if(text.startsWith("/networklog up ")){
+            try{
+                int interval = Integer.parseInt(text.substring(15));
+                networkClient.enableUploadHistory(interval);
+                new NetworkLoadDisplay(networkClient.getUploadHistory(), 200, "Upload (Ingame)").setVisible(true);
+            }catch(NumberFormatException ex){
+            }
+        }
+        else if(text.startsWith("/networklog stop")){
+            networkClient.disableDownloadHistory();
+            networkClient.disableUploadHistory();
+        }
+        else{
+            networkClient.sendMessage(new Message_SendChatMessage(text));
+        }
     }
 }
