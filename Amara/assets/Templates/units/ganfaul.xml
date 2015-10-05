@@ -51,7 +51,7 @@
             <entity template="spells/default_autoattack"/>
         </autoAttack>
         <learnableSpells>
-            <empty/>
+            <entity template="spells/ganfaul_binding/base"/>
             <entity template="spells/ganfaul_laser/base"/>
             <entity template="spells/backflip/base"/>
             <empty/>

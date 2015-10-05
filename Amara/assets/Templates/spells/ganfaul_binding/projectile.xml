@@ -1,0 +1,39 @@
+<template>
+    <entity id="projectile">
+        <model>Models/ganfaul_binding/skin.xml</model>
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <collisionGroup group="spells" collidesWith="units"/>
+        <hitboxActive/>
+        <intersectionRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </intersectionRules>
+        <removeOnMapLeave/>
+        <isProjectile/>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <collisionTrigger/>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--remove projectile-->
+    <entity>
+        <collisionTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+</template>

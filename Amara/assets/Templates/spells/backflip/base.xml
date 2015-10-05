@@ -1,6 +1,7 @@
 <template>
     <entity id="spell">
         <name>Backflip</name>
+        <spellVisualisation>ganfaul_backflip</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>

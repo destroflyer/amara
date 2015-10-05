@@ -1,6 +1,7 @@
 <template>
     <entity id="spell">
         <name>Laser</name>
+        <spellVisualisation>ganfaul_laser</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn object-->
             <entity>
