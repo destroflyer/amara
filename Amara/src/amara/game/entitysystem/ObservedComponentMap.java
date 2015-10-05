@@ -21,45 +21,58 @@ class ObservedComponentMap extends SimpleComponentMap
     @Override
     public Object setComponent(int entity, Object component)
     {
+        Class componentClass = component.getClass();
+        for (ComponentMapObserver observer : getObservers(componentClass)) {
+            observer.preChange(entity, componentClass);
+        }
+        for (ComponentMapObserver observer : systemGlobalObserverMap.values()) {
+            observer.preChange(entity, componentClass);
+        }
         Object oldComponent = super.setComponent(entity, component);
-        if(oldComponent != null)
-        {
-            for (ComponentMapObserver observer : getObservers(component.getClass()))
-            {
-                observer.onComponentChanged(this, entity, component);
-            }
-            for(ComponentMapObserver observer : systemGlobalObserverMap.values())
-            {
-                observer.onComponentChanged(this, entity, component);
-            }
-        }
-        else
-        {
-            for (ComponentMapObserver observer : getObservers(component.getClass()))
-            {
-                observer.onComponentAdded(this, entity, component);
-            }
-            for(ComponentMapObserver observer : systemGlobalObserverMap.values())
-            {
-                observer.onComponentAdded(this, entity, component);
-            }
-        }
+//        if(oldComponent != null)
+//        {
+//            for (ComponentMapObserver observer : getObservers(component.getClass()))
+//            {
+//                observer.onComponentChanged(this, entity, component);
+//            }
+//            for(ComponentMapObserver observer : systemGlobalObserverMap.values())
+//            {
+//                observer.onComponentChanged(this, entity, component);
+//            }
+//        }
+//        else
+//        {
+//            for (ComponentMapObserver observer : getObservers(component.getClass()))
+//            {
+//                observer.onComponentAdded(this, entity, component);
+//            }
+//            for(ComponentMapObserver observer : systemGlobalObserverMap.values())
+//            {
+//                observer.onComponentAdded(this, entity, component);
+//            }
+//        }
         return oldComponent;
     }
 
     @Override
     public Object removeComponent(int entity, Class componentClass) {
-        Object oldComponent = super.removeComponent(entity, componentClass);
-        if(oldComponent != null)
-        {
-            for (ComponentMapObserver observer : getObservers(componentClass)) {
-                observer.onComponentRemoved(this, entity, oldComponent);
-            }
-            for(ComponentMapObserver observer : systemGlobalObserverMap.values())
-            {
-                observer.onComponentRemoved(this, entity, oldComponent);
-            }
+        for (ComponentMapObserver observer : getObservers(componentClass)) {
+            observer.preChange(entity, componentClass);
         }
+        for (ComponentMapObserver observer : systemGlobalObserverMap.values()) {
+            observer.preChange(entity, componentClass);
+        }
+        Object oldComponent = super.removeComponent(entity, componentClass);
+//        if(oldComponent != null)
+//        {
+//            for (ComponentMapObserver observer : getObservers(componentClass)) {
+//                observer.onComponentRemoved(this, entity, oldComponent);
+//            }
+//            for(ComponentMapObserver observer : systemGlobalObserverMap.values())
+//            {
+//                observer.onComponentRemoved(this, entity, oldComponent);
+//            }
+//        }
         return oldComponent;
     }
     
@@ -77,13 +90,15 @@ class ObservedComponentMap extends SimpleComponentMap
     public ComponentMapObserver getObserver(Object key)
     {
         ComponentMapObserver observer = systemObserverMap.get(key);
-        if(observer == null) observer = systemGlobalObserverMap.get(key);
+        if(observer == null) {
+            observer = systemGlobalObserverMap.get(key);
+        }
         return observer;
     }
     
     public void createObserver(Object key, Class... componentClasses)
     {
-        ComponentMapObserver observer = new ComponentMapObserver();
+        ComponentMapObserver observer = new ComponentMapObserver(this);
         if(componentClasses.length == 0)
         {
             systemGlobalObserverMap.put(key, observer);
@@ -91,7 +106,7 @@ class ObservedComponentMap extends SimpleComponentMap
             {
                 for(int entity: getComponentMaps().get(clazz).keySet())
                 {
-                    observer.onComponentAdded(this, entity, getComponent(entity, clazz));
+                    observer.setOldEmpty(entity, clazz);//onComponentAdded(this, entity, getComponent(entity, clazz));
                 }
             }
         }
@@ -103,7 +118,7 @@ class ObservedComponentMap extends SimpleComponentMap
                 getObservers(clazz).add(observer);
                 for (int entity : getEntitiesWithAny(clazz))
                 {
-                    observer.onComponentAdded(this, entity, getComponent(entity, clazz));
+                    observer.setOldEmpty(entity, clazz);//onComponentAdded(this, entity, getComponent(entity, clazz));
                 }
             }
         }

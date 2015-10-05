@@ -4,8 +4,6 @@
  */
 package amara.game.entitysystem;
 
-import java.util.List;
-
 /**
  *
  * @author Philipp
