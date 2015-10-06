@@ -16,6 +16,7 @@
         </instantEffectTriggers>
         <castType>selfcast</castType>
         <castCancelAction/>
+        <castDuration>0.5</castDuration>
         <baseCooldown>2</baseCooldown>
     </entity>
     <!--spell effect-->
@@ -30,7 +31,7 @@
                         <move>
                             <entity>
                                 <targetedMovementDirection>180</targetedMovementDirection>
-                                <movementSpeed>15</movementSpeed>
+                                <movementSpeed>16</movementSpeed>
                                 <movementAnimation>
                                     <entity>
                                         <name>backflip</name>

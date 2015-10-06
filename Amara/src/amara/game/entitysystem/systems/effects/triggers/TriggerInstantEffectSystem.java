@@ -5,6 +5,7 @@
 package amara.game.entitysystem.systems.effects.triggers;
 
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 
 /**
@@ -15,7 +16,7 @@ public class TriggerInstantEffectSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(InstantTriggerComponent.class)){
+        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(InstantTriggerComponent.class, TriggerSourceComponent.class)){
             EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, -1);
         }
     }

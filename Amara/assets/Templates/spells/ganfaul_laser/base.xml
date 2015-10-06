@@ -20,7 +20,7 @@
         </instantEffectTriggers>
         <castType>linear_skillshot</castType>
         <castCancelAction/>
-        <castDuration>3</castDuration>
+        <castDuration>2.5</castDuration>
         <castTurnToTarget/>
         <castAnimation>
             <entity>
