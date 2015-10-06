@@ -25,7 +25,6 @@ public class ModelModifier_Firecomet extends ModelModifier{
         Node node = (Node) modelObject.getModelSpatial();
         Geometry rock = new Geometry(null, new Sphere(20, 20, 0.58f));
         rock.setMaterial(MaterialFactory.generateUnshadedMaterial("Textures/terrain/rock.jpg"));
-        modelObject.attachChild(rock);
         node.attachChild(rock);
         ParticleEmitter particleEmitter = (ParticleEmitter) node.getChild(0);
         particleEmitter.updateLogicalState(10);

@@ -61,6 +61,11 @@
                         <flatMagicDamage>90</flatMagicDamage>
                         <scalingAbilityPowerMagicDamage>0.5</scalingAbilityPowerMagicDamage>
                         <addBinding>1</addBinding>
+                        <addBuff duration="1">
+                            <entity>
+                                <buffVisualisation>ganfaul_binded</buffVisualisation>
+                            </entity>
+                        </addBuff>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

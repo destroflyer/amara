@@ -94,6 +94,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         addEntitySystem(new BuffVisualisationSystem_Burning(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Electrified(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Empowered(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_Ganfaul_Binded(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Intervention(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Meditating(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Slap(entitySceneMap));
