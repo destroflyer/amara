@@ -54,15 +54,18 @@ public class IntersectionPushSystem implements EntitySystem
         EntityWrapper entityA = entityWorld.getWrapped(pair.getA());
         EntityWrapper entityB = entityWorld.getWrapped(pair.getB());
         Vector2D vec = entityA.getComponent(HitboxComponent.class).getShape().getIntersectionResolver(entityB.getComponent(HitboxComponent.class).getShape());
-        float deltaX = (float)vec.getX() / 2;
-        float deltaY = (float)vec.getY() / 2;
-        
-        Vector2f oldPosition = entityA.getComponent(PositionComponent.class).getPosition();
-        Vector2f newPosition = new Vector2f(oldPosition.x + deltaX, oldPosition.y + deltaY);
-        entityA.setComponent(new PositionComponent(newPosition));
-        
-        oldPosition = entityB.getComponent(PositionComponent.class).getPosition();
-        newPosition = new Vector2f(oldPosition.x - deltaX, oldPosition.y - deltaY);
-        entityB.setComponent(new PositionComponent(newPosition));
+        vec = vec.mult(0.5);
+        if(!vec.withinEpsilon()) {
+            float deltaX = (float)vec.getX();
+            float deltaY = (float)vec.getY();
+
+            Vector2f oldPosition = entityA.getComponent(PositionComponent.class).getPosition();
+            Vector2f newPosition = new Vector2f(oldPosition.x + deltaX, oldPosition.y + deltaY);
+            entityA.setComponent(new PositionComponent(newPosition));
+
+            oldPosition = entityB.getComponent(PositionComponent.class).getPosition();
+            newPosition = new Vector2f(oldPosition.x - deltaX, oldPosition.y - deltaY);
+            entityB.setComponent(new PositionComponent(newPosition));
+        }
     }
 }

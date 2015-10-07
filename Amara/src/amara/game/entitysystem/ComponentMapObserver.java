@@ -78,8 +78,9 @@ public class ComponentMapObserver {
             return;
         }
         
-        if(! (added.isEmpty() && changed.isEmpty() && removed.isEmpty())) {
+        if(!(added.isEmpty() && changed.isEmpty() && removed.isEmpty())) {
             System.err.println("ComponentMapObserverWarning! " + ++i);
+            new Exception().printStackTrace();
         }
         
         added.clear();
