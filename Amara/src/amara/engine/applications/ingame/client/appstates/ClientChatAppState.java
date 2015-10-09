@@ -125,7 +125,7 @@ public class ClientChatAppState extends BaseDisplayAppState{
             try{
                 int interval = Integer.parseInt(text.substring(17));
                 networkClient.enableDownloadHistory(interval);
-                new NetworkLoadDisplay(networkClient.getDownloadHistory(), 100*1024, "Download (Ingame)").setVisible(true);
+                new NetworkLoadDisplay(networkClient.getDownloadHistory(), 20*1024, "Download (Ingame)").setVisible(true);
             }catch(NumberFormatException ex){
             }
         }

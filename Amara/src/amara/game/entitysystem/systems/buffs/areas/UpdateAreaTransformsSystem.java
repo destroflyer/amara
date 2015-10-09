@@ -17,14 +17,16 @@ public class UpdateAreaTransformsSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AreaOriginComponent.class, PositionComponent.class);
-        for(int buffAreaEntity : observer.getNew().getEntitiesWithAll(AreaOriginComponent.class)){
+        EntityComponentMapReadonly observerNew = observer.getNew();
+        EntityComponentMapReadonly observerChanged = observer.getChanged();
+        for(int buffAreaEntity : observerNew.getEntitiesWithAll(AreaOriginComponent.class)){
             int originEntity = entityWorld.getComponent(buffAreaEntity, AreaOriginComponent.class).getOriginEntity();
             tryTransformUpdate(entityWorld, buffAreaEntity, originEntity, entityWorld);
         }
         for(int buffAreaEntity : entityWorld.getEntitiesWithAll(AreaOriginComponent.class)){
             int originEntity = entityWorld.getComponent(buffAreaEntity, AreaOriginComponent.class).getOriginEntity();
-            tryTransformUpdate(entityWorld, buffAreaEntity, originEntity, observer.getNew());
-            tryTransformUpdate(entityWorld, buffAreaEntity, originEntity, observer.getChanged());
+            tryTransformUpdate(entityWorld, buffAreaEntity, originEntity, observerNew);
+            tryTransformUpdate(entityWorld, buffAreaEntity, originEntity, observerChanged);
         }
         observer.reset();
     }

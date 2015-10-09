@@ -26,29 +26,28 @@ public class CountdownAnimationLoopsSystem implements EntitySystem{
             entityWorld.removeComponent(animationEntity, PassedLoopTimeComponent.class);
         }
         observer.reset();
-        for(int entity : entityWorld.getEntitiesWithAll(AnimationComponent.class))
-        {
-            EntityWrapper animation = entityWorld.getWrapped(entityWorld.getComponent(entity, AnimationComponent.class).getAnimationEntity());
-            float passedLoopTime = deltaSeconds;
-            PassedLoopTimeComponent passedLoopTimeComponent = animation.getComponent(PassedLoopTimeComponent.class);
-            if(passedLoopTimeComponent != null){
-                passedLoopTime += passedLoopTimeComponent.getPassedTime();
-            }
-            if(passedLoopTime >= animation.getComponent(LoopDurationComponent.class).getDuration()){
-                animation.removeComponent(PassedLoopTimeComponent.class);
-                RemainingLoopsComponent remainingLoopsComponent = animation.getComponent(RemainingLoopsComponent.class);
-                if(remainingLoopsComponent != null){
+        for(int entity : entityWorld.getEntitiesWithAll(AnimationComponent.class)){
+            int animationEntity = entityWorld.getComponent(entity, AnimationComponent.class).getAnimationEntity();
+            RemainingLoopsComponent remainingLoopsComponent = entityWorld.getComponent(animationEntity, RemainingLoopsComponent.class);
+            if(remainingLoopsComponent != null){
+                float passedLoopTime = deltaSeconds;
+                PassedLoopTimeComponent passedLoopTimeComponent = entityWorld.getComponent(animationEntity, PassedLoopTimeComponent.class);
+                if(passedLoopTimeComponent != null){
+                    passedLoopTime += passedLoopTimeComponent.getPassedTime();
+                }
+                if(passedLoopTime >= entityWorld.getComponent(animationEntity, LoopDurationComponent.class).getDuration()){
+                    entityWorld.removeComponent(animationEntity, PassedLoopTimeComponent.class);
                     int remainingLoops = (remainingLoopsComponent.getLoopsCount() - 1);
                     if(remainingLoops > 0){
-                        animation.setComponent(new RemainingLoopsComponent(remainingLoops));
+                        entityWorld.setComponent(entity, new RemainingLoopsComponent(remainingLoops));
                     }
                     else{
                         entityWorld.removeComponent(entity, AnimationComponent.class);
                     }
                 }
-            }
-            else{
-                animation.setComponent(new PassedLoopTimeComponent(passedLoopTime));
+                else{
+                    entityWorld.setComponent(animationEntity, new PassedLoopTimeComponent(passedLoopTime));
+                }
             }
         }
     }

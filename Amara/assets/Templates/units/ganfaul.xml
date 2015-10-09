@@ -54,7 +54,7 @@
             <entity template="spells/ganfaul_binding/base"/>
             <entity template="spells/ganfaul_laser/base"/>
             <entity template="spells/backflip/base"/>
-            <empty/>
+            <entity template="spells/ganfaul_ult/base"/>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

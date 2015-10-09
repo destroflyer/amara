@@ -1,0 +1,54 @@
+<template>
+    <entity id="spell">
+        <name>Ganfaul Ult</name>
+        <spellVisualisation>ganfaul_ult</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn object, play audio-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <!--<spawn>
+                            <entity>
+                                <spawnTemplate>./object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/?.ogg</audio>
+                            </entity>
+                        </playAudio>-->
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castCancelAction/>
+        <castDuration>2</castDuration>
+        <castAnimation>
+            <entity>
+                <name>standing_2h_magic_area_attack_01</name>
+                <loopDuration>2.5</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>10</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <flatMagicDamage>250</flatMagicDamage>
+                        <scalingAbilityPowerMagicDamage>0.6</scalingAbilityPowerMagicDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>
