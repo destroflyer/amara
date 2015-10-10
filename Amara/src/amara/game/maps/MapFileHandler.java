@@ -22,7 +22,6 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
-import sun.reflect.generics.reflectiveObjects.*;
 
 /**
  *
@@ -316,7 +315,7 @@ public class MapFileHandler{
             }
             shape = new SimpleConvexPolygon(base);
         }
-        else throw new NotImplementedException();
+        else throw new UnsupportedOperationException();
         Element elementTransform = element.getChild("transform");
         shape.setTransform(
                 new Transform2D(

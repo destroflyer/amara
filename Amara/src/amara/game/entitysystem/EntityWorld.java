@@ -16,17 +16,17 @@ public class EntityWorld extends ObservedComponentMap
     private int nextEntity;
     private ConcurrentHashMap<Object, EntityObserver> systemEntityObserverMap = new ConcurrentHashMap<Object, EntityObserver>();
 
-    public int createEntity()
+    public Integer createEntity()
     {
         return nextEntity++;
     }
     
-    public void removeEntity(int entity)
+    public void removeEntity(Integer entity)
     {
         clearComponents(entity);
     }
     
-    public EntityWrapper getWrapped(int entity)
+    public EntityWrapper getWrapped(Integer entity)
     {
         return new EntityWrapper(this, entity);
     }
@@ -34,7 +34,7 @@ public class EntityWorld extends ObservedComponentMap
     public List<EntityWrapper> getWrapped(Collection<Integer> entities)
     {
         ArrayList<EntityWrapper> list = new ArrayList<EntityWrapper>();
-        for(int entity: entities)
+        for(Integer entity: entities)
         {
             list.add(new EntityWrapper(this, entity));
         }

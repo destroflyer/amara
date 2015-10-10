@@ -23,10 +23,9 @@ public class DisplayExperienceSystem extends GUIDisplaySystem{
     protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
         LevelComponent levelComponent = entityWorld.getComponent(selectedEntity, LevelComponent.class);
         if(levelComponent != null){
-            ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, ExperienceComponent.class);
+            ComponentMapObserver observer = entityWorld.requestObserver(this, ExperienceComponent.class);
             check(levelComponent, observer.getNew().getComponent(selectedEntity, ExperienceComponent.class));
             check(levelComponent, observer.getChanged().getComponent(selectedEntity, ExperienceComponent.class));
-            observer.reset();
         }
     }
     

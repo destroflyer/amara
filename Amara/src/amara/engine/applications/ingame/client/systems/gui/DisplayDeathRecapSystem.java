@@ -22,7 +22,7 @@ public class DisplayDeathRecapSystem extends GUIDisplaySystem{
     
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsAliveComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
         if(observer.getRemoved().hasComponent(selectedEntity, IsAliveComponent.class)){
             String text = "[No damage history existing]";
             DamageHistoryComponent damageHistoryComponent = entityWorld.getComponent(selectedEntity, DamageHistoryComponent.class);
@@ -71,6 +71,5 @@ public class DisplayDeathRecapSystem extends GUIDisplaySystem{
         else if(observer.getNew().hasComponent(selectedEntity, IsAliveComponent.class)){
             screenController_HUD.setDeathLayersVisible(false);
         }
-        observer.reset();
     }
 }

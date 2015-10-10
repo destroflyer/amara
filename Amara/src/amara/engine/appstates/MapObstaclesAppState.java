@@ -19,7 +19,6 @@ import amara.engine.materials.MaterialFactory;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import amara.game.maps.Map;
-import sun.reflect.generics.reflectiveObjects.*;
 
 /**
  *
@@ -100,7 +99,7 @@ public class MapObstaclesAppState extends BaseDisplayAppState implements ActionL
             collisionMesh = new CircleMesh((float) convexShape.getBoundCircle().getGlobalRadius(), 64);
             meshColor = ColorRGBA.Red;
         }
-        else throw new NotImplementedException();
+        else throw new UnsupportedOperationException();
         return generateGeometry(collisionMesh, meshColor);
     }
     

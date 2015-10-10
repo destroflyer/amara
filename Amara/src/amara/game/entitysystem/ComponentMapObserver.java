@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.game.entitysystem;
 
 import java.lang.reflect.Array;
@@ -23,71 +19,65 @@ public class ComponentMapObserver {
     private final SimpleComponentMap added = new SimpleComponentMap();
     private final SimpleComponentMap changed = new SimpleComponentMap();
     private final SimpleComponentMap removed = new SimpleComponentMap();
-    private final HashMap<Class, HashSet<Integer>> oldEmpty = new HashMap<Class, HashSet<Integer>>();
-    private final SimpleComponentMap oldValues = new SimpleComponentMap();
-    private boolean cached = false;
+    
+    private final HashMap<Class, HashSet<Integer>> previousNulls = new HashMap<Class, HashSet<Integer>>();
+    private final SimpleComponentMap previousValues = new SimpleComponentMap();
+    
 
-    public ComponentMapObserver(EntityComponentMapReadonly data) {
+    ComponentMapObserver(EntityComponentMapReadonly data) {
         this.data = data;
     }
 
-    public void reset() {
-        //TODO 3 lines for debugging, only needed for the warning serr
-        added.clear();
-        changed.clear();
-        removed.clear();
-        
-        oldValues.clear();
-        for (HashSet<Integer> hashSet : oldEmpty.values()) {
+    void refresh() {
+        refreshAdded();
+        refreshChangedAndRemoved();
+        clearPreviousValues();
+    }
+
+    private void clearPreviousValues() {
+        previousValues.clear();
+        for (HashSet<Integer> hashSet : previousNulls.values()) {
             hashSet.clear();
         }
-        cached = false;
     }
 
-    public boolean isEmpty() {
-        updateCache();
-        return added.isEmpty() && changed.isEmpty() && removed.isEmpty();
-    }
-
-    public void preChange(Integer entity, Class componentClass) {
-        if (hasAlreadyChanged(componentClass, entity)) {
+    void markAsChanged(Integer entity, Class componentClass) {
+        if (isComponentMarked(componentClass, entity)) {
             return;
         }
-        Object oldComponent = data.getComponent(entity, componentClass);
-        setOldComponent(entity, componentClass, oldComponent);
+        Object previousComponent = data.getComponent(entity, componentClass);
+        markWithPreviousValue(entity, componentClass, previousComponent);
     }
 
-    private void setOldComponent(Integer entity, Class componentClass, Object componentValue) {
+    private void markWithPreviousValue(Integer entity, Class componentClass, Object componentValue) {
         if (componentValue == null) {
-            setOldEmpty(entity, componentClass);
+            markAsNull(entity, componentClass);
         } else {
-            cached = false;
-            oldValues.setComponent(entity, componentValue);
+            previousValues.setComponent(entity, componentValue);
         }
     }
 
-    public void setOldEmpty(Integer entity, Class componentClass) {
-        cached = false;
-        HashSet<Integer> entities = createGetEmptyMap(componentClass);
+    void markAsNull(Integer entity, Class componentClass) {
+        HashSet<Integer> entities = lazyGetPreviousNulls(componentClass);
         entities.add(entity);
     }
+
+    private boolean isComponentMarked(Class componentClass, Integer entity) {
+        return previousValues.hasComponent(entity, componentClass) ||  lazyGetPreviousNulls(componentClass).contains(entity);
+    }
+
+    private HashSet<Integer> lazyGetPreviousNulls(Class componentClass) {
+        HashSet<Integer> entities = previousNulls.get(componentClass);
+        if(entities == null) {
+            entities = new HashSet<Integer>();
+            previousNulls.put(componentClass, entities);
+        }
+        return entities;
+    }
     
-    int i = 0;
-    private void updateCache() {
-        if (cached) {
-            return;
-        }
-        
-        if(!(added.isEmpty() && changed.isEmpty() && removed.isEmpty())) {
-            System.err.println("ComponentMapObserverWarning! " + ++i);
-            new Exception().printStackTrace();
-        }
-        
+    private void refreshAdded() {
         added.clear();
-        changed.clear();
-        removed.clear();
-        cached = true;
-        for (Map.Entry<Class, HashSet<Integer>> entry : oldEmpty.entrySet()) {
+        for (Map.Entry<Class, HashSet<Integer>> entry : previousNulls.entrySet()) {
             for (Integer entity : entry.getValue()) {
                 Class componentClass = entry.getKey();
                 Object newComponent = data.getComponent(entity, componentClass);
@@ -96,8 +86,12 @@ public class ComponentMapObserver {
                 }
             }
         }
-        
-        for (Map.Entry<Class, ConcurrentHashMap<Integer, Object>> classEntity : oldValues.getComponentMaps().entrySet()) {
+    }
+    
+    private void refreshChangedAndRemoved() {
+        changed.clear();
+        removed.clear();
+        for (Map.Entry<Class, ConcurrentHashMap<Integer, Object>> classEntity : previousValues.getComponentMaps().entrySet()) {
             for (Map.Entry<Integer, Object> entityValue : classEntity.getValue().entrySet()) {
                 Integer entity = entityValue.getKey();
                 Object oldComponent = entityValue.getValue();
@@ -169,30 +163,14 @@ public class ComponentMapObserver {
     }
 
     public EntityComponentMapReadonly getNew() {
-        updateCache();
         return added;
     }
 
     public EntityComponentMapReadonly getChanged() {
-        updateCache();
         return changed;
     }
 
     public EntityComponentMapReadonly getRemoved() {
-        updateCache();
         return removed;
-    }
-
-    private boolean hasAlreadyChanged(Class componentClass, Integer entity) {
-        return oldValues.hasComponent(entity, componentClass) ||  createGetEmptyMap(componentClass).contains(entity);
-    }
-
-    private HashSet<Integer> createGetEmptyMap(Class componentClass) {
-        HashSet<Integer> entities = oldEmpty.get(componentClass);
-        if(entities == null) {
-            entities = new HashSet<Integer>();
-            oldEmpty.put(componentClass, entities);
-        }
-        return entities;
     }
 }

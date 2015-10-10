@@ -20,10 +20,9 @@ public class DisplayPlayerSystem extends GUIDisplaySystem{
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, NameComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, NameComponent.class);
         check(observer.getNew().getComponent(playerEntity, NameComponent.class));
         check(observer.getChanged().getComponent(playerEntity, NameComponent.class));
-        observer.reset();
     }
     
     private void check(NameComponent nameComponent){

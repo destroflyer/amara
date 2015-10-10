@@ -21,10 +21,9 @@ public class DisplaySpellsImagesSystem extends GUIDisplaySystem{
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, SpellsComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, SpellsComponent.class);
         checkChangedSpells(entityWorld, observer.getNew().getComponent(selectedEntity, SpellsComponent.class));
         checkChangedSpells(entityWorld, observer.getChanged().getComponent(selectedEntity, SpellsComponent.class));
-        observer.reset();
     }
     
     private void checkChangedSpells(EntityWorld entityWorld, SpellsComponent spellsComponent){

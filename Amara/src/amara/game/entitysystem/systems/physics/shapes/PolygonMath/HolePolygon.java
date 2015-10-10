@@ -7,7 +7,6 @@ package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import com.jme3.network.serializing.Serializable;
 import java.util.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -200,7 +199,7 @@ public class HolePolygon
     }
     public boolean equals(HolePolygon poly)
     {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
 //        if(main == null)
 //        {
 //            if(poly.main != null) return false;
@@ -233,7 +232,7 @@ public class HolePolygon
     @Override
     public int hashCode()
     {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
 //        int hash = main == null? 0: main.hashCode();
 //        for (int i = 0; i < holes.size(); i++)
 //        {

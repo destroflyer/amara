@@ -31,7 +31,7 @@ public class UpdateNewClientBackend implements MessageBackend{
             LinkedList<EntityChange> entityChanges = new LinkedList<EntityChange>();
             Iterator<Integer> entitiesIterator = entityWorld.getEntitiesWithAll().iterator();
             while(entitiesIterator.hasNext()){
-                int entity = entitiesIterator.next();
+                Integer entity = entitiesIterator.next();
                 Iterator<Object> componentsIterator = entityWorld.getComponents(entity).iterator();
                 while(componentsIterator.hasNext()){
                     Object component = componentsIterator.next();

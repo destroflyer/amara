@@ -24,24 +24,23 @@ public class ExperienceChangeSystem extends EntityTextNotificationSystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, ExperienceComponent.class, LevelComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll()){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, ExperienceComponent.class, LevelComponent.class);
+        for(Integer entity : observer.getNew().getEntitiesWithAll()){
             cachedExperience.put(entity, entityWorld.getComponent(entity, ExperienceComponent.class).getExperience());
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll()){
+        for(Integer entity : observer.getChanged().getEntitiesWithAll()){
             int experience = entityWorld.getComponent(entity, ExperienceComponent.class).getExperience();
             if(!observer.getChanged().hasComponent(entity, LevelComponent.class)){
                 onExperienceChange(entityWorld, entity, experience);
             }
             cachedExperience.put(entity, experience);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll()){
+        for(Integer entity : observer.getRemoved().getEntitiesWithAll()){
             cachedExperience.put(entity, 0);
         }
-        observer.reset();
     }
     
-    private void onExperienceChange(EntityWorld entityWorld, int entity, int currentExperience){
+    private void onExperienceChange(EntityWorld entityWorld, Integer entity, int currentExperience){
         Integer oldExperience = cachedExperience.get(entity);
         if(oldExperience == null){
             oldExperience = 0;

@@ -15,7 +15,7 @@ public class HealthRegenerationSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(HealthComponent.class, HealthRegenerationComponent.class)){
+        for(Integer entity : entityWorld.getEntitiesWithAll(HealthComponent.class, HealthRegenerationComponent.class)){
             float health = entityWorld.getComponent(entity, HealthComponent.class).getValue();
             float healthRegeneration = entityWorld.getComponent(entity, HealthRegenerationComponent.class).getValue();
             entityWorld.setComponent(entity, new HealthComponent(health + (healthRegeneration * deltaSeconds)));

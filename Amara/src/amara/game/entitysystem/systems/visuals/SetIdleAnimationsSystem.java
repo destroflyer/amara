@@ -16,13 +16,12 @@ public class SetIdleAnimationsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AnimationComponent.class);
-        for(int entity : observer.getRemoved().getEntitiesWithAll(AnimationComponent.class)){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, AnimationComponent.class);
+        for(Integer entity : observer.getRemoved().getEntitiesWithAll(AnimationComponent.class)){
             IdleAnimationComponent idleAnimationComponent = entityWorld.getComponent(entity, IdleAnimationComponent.class);
             if(idleAnimationComponent != null){
                 entityWorld.setComponent(entity, new AnimationComponent(idleAnimationComponent.getAnimationEntity()));
             }
         }
-        observer.reset();
     }
 }

@@ -35,9 +35,8 @@ public class HitboxUpdater
     
     public void updateHitboxes(EntityWorld entityWorld)
     {
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, HitboxComponent.class, HitboxActiveComponent.class);
-        if(observer.isEmpty()) return;
-        for(int entity: observer.getRemoved().getEntitiesWithAll())
+        ComponentMapObserver observer = entityWorld.requestObserver(this, HitboxComponent.class, HitboxActiveComponent.class);
+        for(Integer entity: observer.getRemoved().getEntitiesWithAll())
         {
             remove(entity);
         }
@@ -50,15 +49,14 @@ public class HitboxUpdater
         {
             checkedAdd(entity);
         }
-        observer.reset();
     }
     
-    private void remove(int entity)
+    private void remove(Integer entity)
     {
         sap.remove(hitboxMap.remove(entity));
     }
     
-    private void add(int entity, Hitbox hitbox)
+    private void add(Integer entity, Hitbox hitbox)
     {
         if(hitboxMap.containsKey(entity)) return;
         sap.add(hitbox);

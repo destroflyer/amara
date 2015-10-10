@@ -24,12 +24,11 @@ public class UpdateUpgradeSpellsPanelSystem extends GUIDisplaySystem{
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
         isUpdateRequired = false;
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, SpellsComponent.class, SpellsUpgradePointsComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, SpellsComponent.class, SpellsUpgradePointsComponent.class);
         checkChangedComponent(observer.getNew().getComponent(selectedEntity, SpellsComponent.class));
         checkChangedComponent(observer.getChanged().getComponent(selectedEntity, SpellsComponent.class));
         checkChangedComponent(observer.getNew().getComponent(selectedEntity, SpellsUpgradePointsComponent.class));
         checkChangedComponent(observer.getChanged().getComponent(selectedEntity, SpellsUpgradePointsComponent.class));
-        observer.reset();
         if(isUpdateRequired){
             updateUpgradeSpellsPanel(entityWorld, selectedEntity);
         }

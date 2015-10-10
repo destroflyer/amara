@@ -16,14 +16,13 @@ public class SetNewTargetSpellsOnCooldownSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AggroTargetComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(AggroTargetComponent.class)){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, AggroTargetComponent.class);
+        for(Integer entity : observer.getNew().getEntitiesWithAll(AggroTargetComponent.class)){
             checkSetSpellOnCooldown(entityWorld, entity);
         }
-        observer.reset();
     }
     
-    private void checkSetSpellOnCooldown(EntityWorld entityWorld, int entity){
+    private void checkSetSpellOnCooldown(EntityWorld entityWorld, Integer entity){
         SetNewTargetSpellsOnCooldownComponent setNewTargetSpellsOnCooldownComponent = entityWorld.getComponent(entity, SetNewTargetSpellsOnCooldownComponent.class);
         if(setNewTargetSpellsOnCooldownComponent != null){
             int[] spellEntities = entityWorld.getComponent(entity, SpellsComponent.class).getSpellsEntities();

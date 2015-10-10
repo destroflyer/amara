@@ -19,7 +19,7 @@ public class GamePlayer{
     private LobbyPlayer lobbyPlayer;
     private int authentificationKey;
     private int clientID = -1;
-    private int entityID;
+    private Integer entityID;
     private boolean isInitialized;
 
     public LobbyPlayer getLobbyPlayer(){
@@ -38,11 +38,11 @@ public class GamePlayer{
         return clientID;
     }
 
-    public void setEntityID(int entityID){
+    public void setEntityID(Integer entityID){
         this.entityID = entityID;
     }
 
-    public int getEntityID(){
+    public Integer getEntityID(){
         return entityID;
     }
 

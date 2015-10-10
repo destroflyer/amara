@@ -10,8 +10,8 @@ package amara.game.entitysystem;
  */
 public interface EntityComponentMap extends EntityComponentMapReadonly
 {
-    public Object setComponent(int entity, Object component);
-    public Object removeComponent(int entity, Class componentClass);
-    public void clearComponents(int entity);
+    public Object setComponent(Integer entity, Object component);
+    public Object removeComponent(Integer entity, Class componentClass);
+    public void clearComponents(Integer entity);
     public void clear();
 }

@@ -25,12 +25,12 @@ public class CampResetSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(CampComponent.class, CampResetComponent.class)){
+        for(Integer entity : entityWorld.getEntitiesWithAll(CampComponent.class, CampResetComponent.class)){
             CampComponent campComponent = entityWorld.getComponent(entity, CampComponent.class);
-            int targetPositionEntity = entityWorld.createEntity();
+            Integer targetPositionEntity = entityWorld.createEntity();
             entityWorld.setComponent(targetPositionEntity, new PositionComponent(campComponent.getPosition()));
             if(ExecutePlayerCommandsSystem.tryWalk(entityWorld, entity, targetPositionEntity, -1)){
-                int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
+                Integer movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
                 entityWorld.removeComponent(movementEntity, MovementIsCancelableComponent.class);
                 EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
                 effectTrigger.setComponent(new TriggerTemporaryComponent());

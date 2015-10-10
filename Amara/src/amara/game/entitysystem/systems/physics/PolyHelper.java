@@ -7,7 +7,6 @@ package amara.game.entitysystem.systems.physics;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import java.util.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -30,7 +29,7 @@ public class PolyHelper
             Circle circle = (Circle)shape;
             convex = new RegularCyclic(circle.getGlobalPosition(), 8, circle.getGlobalRadius(), Math.PI / 8);
         }
-        else throw new NotImplementedException();
+        else throw new UnsupportedOperationException();
         builder.reset();
         builder.nextOutline(false);
         Vector2D[] points = convex.getGlobalPoints();

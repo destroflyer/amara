@@ -30,16 +30,16 @@ public class UpdateDamageHistorySystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         entitiesWithInactiveDamageHistory = entityWorld.getEntitiesWithAll(DamageHistoryComponent.class);
         damageEntriesMap.clear();
-        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, PhysicalDamageComponent.class)){
+        for(Integer effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, PhysicalDamageComponent.class)){
             onDamageTaken(entityWorld, effectImpactEntity, DamageHistoryComponent.DamageType.PHYSICAL);
         }
-        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, MagicDamageComponent.class)){
+        for(Integer effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, MagicDamageComponent.class)){
             onDamageTaken(entityWorld, effectImpactEntity, DamageHistoryComponent.DamageType.MAGIC);
         }
-        for(int entity : damageEntriesMap.keySet()){
+        for(Integer entity : damageEntriesMap.keySet()){
             updateDamageHistory(entityWorld, entity);
         }
-        for(int entity : entitiesWithInactiveDamageHistory){
+        for(Integer entity : entitiesWithInactiveDamageHistory){
             if(entityWorld.hasComponent(entity, IsAliveComponent.class)){
                 DamageHistoryComponent damageHistoryComponent = entityWorld.getComponent(entity, DamageHistoryComponent.class);
                 float timeSinceLastDamage = (UpdateGameTimeSystem.getGameTime(entityWorld) - damageHistoryComponent.getLastDamageTime());

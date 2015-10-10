@@ -16,13 +16,13 @@ public class CheckDeadCampsRespawnSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, CampComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, CampComponent.class);
         for(int deadEntity : observer.getRemoved().getEntitiesWithAll(CampComponent.class)){
             if(!entityWorld.hasEntity(deadEntity)){
                 int campEntity = observer.getRemoved().getComponent(deadEntity, CampComponent.class).getCampEntity();
                 if(entityWorld.hasComponent(campEntity, CampRespawnDurationComponent.class)){
                     boolean isCampDead = true;
-                    for(int entity : entityWorld.getEntitiesWithAll(CampComponent.class)){
+                    for(Integer entity : entityWorld.getEntitiesWithAll(CampComponent.class)){
                         int aliveCampEntity = entityWorld.getComponent(entity, CampComponent.class).getCampEntity();
                         if(aliveCampEntity == campEntity){
                             isCampDead = false;
@@ -41,6 +41,5 @@ public class CheckDeadCampsRespawnSystem implements EntitySystem{
                 }
             }
         }
-        observer.reset();
     }
 }

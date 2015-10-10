@@ -45,27 +45,27 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
         return componentMaps;
     }
     
-    public <T> T getComponent(int entity, Class<T> componentClass)
+    public <T> T getComponent(Integer entity, Class<T> componentClass)
     {
         return (T)getComponentMap(componentClass).get(entity);
     }
 
-    public boolean hasComponent(int entity, Class componentClass)
+    public boolean hasComponent(Integer entity, Class componentClass)
     {
         return getComponentMap(componentClass).get(entity) != null;
     }
 
-    public Object setComponent(int entity, Object component)
+    public Object setComponent(Integer entity, Object component)
     {
         return getComponentMap(component.getClass()).put(entity, component);
     }
 
-    public Object removeComponent(int entity, Class componentClass)
+    public Object removeComponent(Integer entity, Class componentClass)
     {
         return getComponentMap(componentClass).remove(entity);
     }
 
-    public Set<Object> getComponents(int entity) {
+    public Set<Object> getComponents(Integer entity) {
         HashSet<Object> components = new HashSet<Object>();
         Object component;
         for(ConcurrentHashMap<Integer, Object> componentMap: componentMaps.values())
@@ -79,7 +79,7 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
         return components;
     }
 
-    public void clearComponents(int entity)
+    public void clearComponents(Integer entity)
     {
         for(Object component: getComponents(entity))
         {
@@ -87,7 +87,7 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
         }
     }
 
-    public boolean hasAllComponents(int entity, Class... componentsClasses)
+    public boolean hasAllComponents(Integer entity, Class... componentsClasses)
     {
         for(Class componentClass: componentsClasses)
         {
@@ -99,7 +99,7 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
         return true;
     }
 
-    public boolean hasAnyComponent(int entity, Class... componentsClasses)
+    public boolean hasAnyComponent(Integer entity, Class... componentsClasses)
     {
         for(Class componentClass: componentsClasses)
         {
@@ -125,7 +125,7 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
         
         Arrays.sort(componentsClasses, mapSizeComparator);
         
-        for(int entity: getComponentMap(componentsClasses[0]).keySet())
+        for(Integer entity: getComponentMap(componentsClasses[0]).keySet())
         {
             if(hasAllComponents(entity, componentsClasses))
             {
@@ -153,7 +153,7 @@ class SimpleComponentMap implements EntityComponentMap, EntityComponentMapReadon
         }
     }
 
-    public boolean hasEntity(int entity)
+    public boolean hasEntity(Integer entity)
     {
         for (ConcurrentHashMap<Integer, Object> map : componentMaps.values())
         {

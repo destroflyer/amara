@@ -24,10 +24,9 @@ public class CinematicsSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, CinematicComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, CinematicComponent.class);
         checkCinematicComponent(observer.getNew().getComponent(Game.ENTITY, CinematicComponent.class));
         checkCinematicComponent(observer.getChanged().getComponent(Game.ENTITY, CinematicComponent.class));
-        observer.reset();
     }
     
     private void checkCinematicComponent(CinematicComponent cinematicComponent){

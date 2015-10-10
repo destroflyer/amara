@@ -12,13 +12,13 @@ import java.util.Set;
  */
 public interface EntityComponentMapReadonly
 {
-    public <T> T getComponent(int entity, Class<T> componentClass);
-    public boolean hasComponent(int entity, Class componentClass);
-    public boolean hasAllComponents(int entity, Class... componentsClasses);
-    public boolean hasAnyComponent(int entity, Class... componentsClasses);
-    public Set<Object> getComponents(int entity);
+    public <T> T getComponent(Integer entity, Class<T> componentClass);
+    public boolean hasComponent(Integer entity, Class componentClass);
+    public boolean hasAllComponents(Integer entity, Class... componentsClasses);
+    public boolean hasAnyComponent(Integer entity, Class... componentsClasses);
+    public Set<Object> getComponents(Integer entity);
     public Set<Integer> getEntitiesWithAll(Class... componentsClasses);
     public Set<Integer> getEntitiesWithAny(Class... componentsClasses);
     boolean isEmpty();
-    boolean hasEntity(int entity);
+    boolean hasEntity(Integer entity);
 }

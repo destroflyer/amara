@@ -24,20 +24,19 @@ public class GoldChangeSystem extends EntityTextNotificationSystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, GoldComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll()){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, GoldComponent.class);
+        for(Integer entity : observer.getNew().getEntitiesWithAll()){
             cachedGold.put(entity, entityWorld.getComponent(entity, GoldComponent.class).getGold());
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll()){
+        for(Integer entity : observer.getChanged().getEntitiesWithAll()){
             onGoldChange(entityWorld, entity, entityWorld.getComponent(entity, GoldComponent.class).getGold());
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll()){
+        for(Integer entity : observer.getRemoved().getEntitiesWithAll()){
             cachedGold.put(entity, 0);
         }
-        observer.reset();
     }
     
-    private void onGoldChange(EntityWorld entityWorld, int entity, int currentGold){
+    private void onGoldChange(EntityWorld entityWorld, Integer entity, int currentGold){
         Integer oldGold = cachedGold.get(entity);
         if(oldGold == null){
             oldGold = 0;

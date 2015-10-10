@@ -47,7 +47,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
         while(playerCommandsIterator.hasNext()){
             PlayerCommand playerCommand = playerCommandsIterator.next();
             Command command = playerCommand.getCommand();
-            int playerEntity = getPlayerEntity(entityWorld, playerCommand.getClientID());
+            Integer playerEntity = getPlayerEntity(entityWorld, playerCommand.getClientID());
             int selectedUnit = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
             boolean isUnitAlive = entityWorld.hasComponent(selectedUnit, IsAliveComponent.class);
             if(command instanceof BuyItemCommand){
@@ -131,8 +131,8 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
         playerCommandsQueue.clear();
     }
     
-    private int getPlayerEntity(EntityWorld entityWorld, int clientID){
-        for(int entity : entityWorld.getEntitiesWithAll(ClientComponent.class)){
+    private Integer getPlayerEntity(EntityWorld entityWorld, int clientID){
+        for(Integer entity : entityWorld.getEntitiesWithAll(ClientComponent.class)){
             if(entityWorld.getComponent(entity, ClientComponent.class).getClientID() == clientID){
                 return entity;
             }

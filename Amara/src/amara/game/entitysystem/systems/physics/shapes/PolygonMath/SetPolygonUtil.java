@@ -7,7 +7,6 @@ package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import java.io.*;
 import java.util.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -211,7 +210,7 @@ class SetPolygonUtil
             case Intersection:
                 return aInfinite && bInfinite;
             default:
-                throw new NotImplementedException();
+                throw new UnsupportedOperationException();
         }
     }
     public static ArrayList<Vector2D> operationEdges(SetPolygon A, SetPolygon B, PolygonOperation o)
@@ -281,7 +280,7 @@ class SetPolygonUtil
                 }
                 break;
             default:
-                throw new NotImplementedException();
+                throw new UnsupportedOperationException();
         }
         assert(edgeDuplicateCheck(edges));
     }
@@ -311,7 +310,7 @@ class SetPolygonUtil
                 }
                 break;
             default:
-                throw new NotImplementedException();
+                throw new UnsupportedOperationException();
         }
         assert(edgeDuplicateCheck(edges));
     }

@@ -17,21 +17,20 @@ public class CheckCampUnionAggroSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AggroTargetComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(AggroTargetComponent.class)){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, AggroTargetComponent.class);
+        for(Integer entity : observer.getNew().getEntitiesWithAll(AggroTargetComponent.class)){
             onAggroTargetChanged(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(AggroTargetComponent.class)){
+        for(Integer entity : observer.getChanged().getEntitiesWithAll(AggroTargetComponent.class)){
             onAggroTargetChanged(entityWorld, entity);
         }
-        observer.reset();
     }
     
-    private void onAggroTargetChanged(EntityWorld entityWorld, int entity){
+    private void onAggroTargetChanged(EntityWorld entityWorld, Integer entity){
         CampComponent campComponent = entityWorld.getComponent(entity, CampComponent.class);
         if((campComponent != null) && entityWorld.hasComponent(campComponent.getCampEntity(), CampUnionAggroComponent.class)){
             int targetEntity = entityWorld.getComponent(entity, AggroTargetComponent.class).getTargetEntity();
-            for(int otherEntity : entityWorld.getEntitiesWithAll(CampComponent.class)){
+            for(Integer otherEntity : entityWorld.getEntitiesWithAll(CampComponent.class)){
                 int otherCampEntity = entityWorld.getComponent(otherEntity, CampComponent.class).getCampEntity();
                 if(otherCampEntity == campComponent.getCampEntity()){
                     AggroUtil.tryDrawAggro(entityWorld, otherEntity, targetEntity);

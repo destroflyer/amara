@@ -33,7 +33,7 @@ public class PlayerDeathSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsAliveComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
         for(int playerEntity : entityWorld.getEntitiesWithAll(SelectedUnitComponent.class)){
             int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
             if(observer.getRemoved().hasComponent(selectedEntity, IsAliveComponent.class)){
@@ -41,7 +41,6 @@ public class PlayerDeathSystem implements EntitySystem{
                 onPlayerDeath(entityWorld, playerEntity);
             }
         }
-        observer.reset();
     }
     
     private void onSelectedUnitDeath(EntityWorld entityWorld, int selectedEntity){

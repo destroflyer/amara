@@ -31,17 +31,16 @@ public class KnockupVisualisationSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         updateCurves(deltaSeconds);
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsKnockupedComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(IsKnockupedComponent.class)){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, IsKnockupedComponent.class);
+        for(Integer entity : observer.getNew().getEntitiesWithAll(IsKnockupedComponent.class)){
             addCurve(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(IsKnockupedComponent.class)){
+        for(Integer entity : observer.getChanged().getEntitiesWithAll(IsKnockupedComponent.class)){
             addCurve(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(IsKnockupedComponent.class)){
+        for(Integer entity : observer.getRemoved().getEntitiesWithAll(IsKnockupedComponent.class)){
             knockupCurves.remove(entity);
         }
-        observer.reset();
         updatePositions(entityWorld);
     }
     
@@ -51,7 +50,7 @@ public class KnockupVisualisationSystem implements EntitySystem{
         }
     }
     
-    private void addCurve(EntityWorld entityWorld, int entity){
+    private void addCurve(EntityWorld entityWorld, Integer entity){
         IsKnockupedComponent isKnockupedComponent = entityWorld.getComponent(entity, IsKnockupedComponent.class);
         KnockupCurve knockupCurve = knockupCurves.get(entity);
         if((knockupCurve == null) || (isKnockupedComponent.getRemainingDuration() > knockupCurve.getIsKnockupedComponent().getRemainingDuration())){
@@ -80,7 +79,7 @@ public class KnockupVisualisationSystem implements EntitySystem{
                 node.move(0, knockupCurve.getCurrentHeight(), 0);
             }
         }
-        for(int entity : knockupCurvesToRemove){
+        for(Integer entity : knockupCurvesToRemove){
             knockupCurves.remove(entity);
         }
     }

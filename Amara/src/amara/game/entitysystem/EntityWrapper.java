@@ -11,15 +11,15 @@ package amara.game.entitysystem;
 public class EntityWrapper
 {
     private EntityComponentMap entityMap;
-    private int entity;
+    private Integer entity;
 
-    EntityWrapper(EntityComponentMap entityMap, int entity)
+    EntityWrapper(EntityComponentMap entityMap, Integer entity)
     {
         this.entityMap = entityMap;
         this.entity = entity;
     }
 
-    public int getId()
+    public Integer getId()
     {
         return entity;
     }

@@ -17,18 +17,17 @@ public class RemoveCancelledMovementsEffectTriggersSystem implements EntitySyste
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, MovementComponent.class, TriggerSourceComponent.class);
-        for(int entity : observer.getChanged().getEntitiesWithAll(MovementComponent.class)){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, MovementComponent.class, TriggerSourceComponent.class);
+        for(Integer entity : observer.getChanged().getEntitiesWithAll(MovementComponent.class)){
             removeMovementEffectTriggers(entityWorld, observer, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(MovementComponent.class)){
+        for(Integer entity : observer.getRemoved().getEntitiesWithAll(MovementComponent.class)){
             removeMovementEffectTriggers(entityWorld, observer, entity);
         }
-        observer.reset();
     }
     
     private void removeMovementEffectTriggers(EntityWorld entityWorld, ComponentMapObserver observer, int entity){
-        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, TargetReachedTriggerComponent.class, TriggerTemporaryComponent.class)){
+        for(Integer effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, TargetReachedTriggerComponent.class, TriggerTemporaryComponent.class)){
             int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
             if((sourceEntity == entity) && (!observer.getNew().hasEntity(effectTriggerEntity))){
                 entityWorld.removeEntity(effectTriggerEntity);

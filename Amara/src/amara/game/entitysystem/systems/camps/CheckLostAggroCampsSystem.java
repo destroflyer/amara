@@ -15,12 +15,11 @@ public class CheckLostAggroCampsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AggroTargetComponent.class);
-        for(int entity : observer.getRemoved().getEntitiesWithAll(AggroTargetComponent.class)){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, AggroTargetComponent.class);
+        for(Integer entity : observer.getRemoved().getEntitiesWithAll(AggroTargetComponent.class)){
             if(entityWorld.hasComponent(entity, CampComponent.class) && (!entityWorld.hasComponent(entity, CampResetComponent.class))){
                 entityWorld.setComponent(entity, new CampResetComponent());
             }
         }
-        observer.reset();
     }
 }

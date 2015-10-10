@@ -63,14 +63,13 @@ public class FogOfWarSystem implements EntitySystem{
         if(!displayMapSight){
             timeSinceLastUpdate += deltaSeconds;
             if(timeSinceLastUpdate > Settings.getFloat("fog_of_war_update_interval")){
-                ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, PositionComponent.class);
-                for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
+                ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class);
+                for(Integer entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
                     checkChangedPositionComponent(entityWorld, entity);
                 }
-                for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
+                for(Integer entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
                     checkChangedPositionComponent(entityWorld, entity);
                 }
-                observer.reset();
                 if(isUpdateNeeded){
                     updateFogTexture_PlayerSight(entityWorld);
                     isUpdateNeeded = false;
@@ -80,7 +79,7 @@ public class FogOfWarSystem implements EntitySystem{
         }
     }
     
-    private void checkChangedPositionComponent(EntityWorld entityWorld, int entity){
+    private void checkChangedPositionComponent(EntityWorld entityWorld, Integer entity){
         if(entityWorld.hasComponent(entity, SightRangeComponent.class) && playerTeamSystem.isAllied(entityWorld, entity)){
             isUpdateNeeded = true;
         }
@@ -113,7 +112,7 @@ public class FogOfWarSystem implements EntitySystem{
     
     private void updateFogTexture_PlayerSight(EntityWorld entityWorld){
         resetFogTexture();
-        for(int entity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class, SightRangeComponent.class)){
+        for(Integer entity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class, SightRangeComponent.class)){
             if(playerTeamSystem.isAllied(entityWorld, entity)){
                 PositionComponent positionComponent = entityWorld.getComponent(entity, PositionComponent.class);
                 Vector2D position = new Vector2D(positionComponent.getPosition().getX(), positionComponent.getPosition().getY());

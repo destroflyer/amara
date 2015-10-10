@@ -27,24 +27,23 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, ActiveBuffComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(ActiveBuffComponent.class)){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, ActiveBuffComponent.class);
+        for(Integer entity : observer.getNew().getEntitiesWithAll(ActiveBuffComponent.class)){
             updateVisualAttachment(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(ActiveBuffComponent.class)){
+        for(Integer entity : observer.getChanged().getEntitiesWithAll(ActiveBuffComponent.class)){
             updateVisualAttachment(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(ActiveBuffComponent.class)){
+        for(Integer entity : observer.getRemoved().getEntitiesWithAll(ActiveBuffComponent.class)){
             ActiveBuffComponent activeBuffComponent = observer.getRemoved().getComponent(entity, ActiveBuffComponent.class);
             if(shouldBeVisualized(entityWorld, activeBuffComponent)){
                 int targetEntity = observer.getRemoved().getComponent(entity, ActiveBuffComponent.class).getTargetEntity();
                 removeVisualAttachment(entity, targetEntity);
             }
         }
-        observer.reset();
     }
     
-    private void updateVisualAttachment(EntityWorld entityWorld, int buffStatusEntity){
+    private void updateVisualAttachment(EntityWorld entityWorld, Integer buffStatusEntity){
         ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
         if(shouldBeVisualized(entityWorld, activeBuffComponent)){
             int targetEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getTargetEntity();
@@ -63,7 +62,7 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
         return ((buffVisualisationComponent != null) && (buffVisualisationComponent.getName().equals(visualisationName)));
     }
     
-    protected void prepareVisualAttachment(int buffStatusEntity, int targetEntity, Spatial visualAttachment){
+    protected void prepareVisualAttachment(Integer buffStatusEntity, int targetEntity, Spatial visualAttachment){
         visualAttachment.setName(getVisualAttachmentID(buffStatusEntity));
         if(scaleVisualisation){
             Node entityNode = entitySceneMap.requestNode(targetEntity);
@@ -74,7 +73,7 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
         }
     }
     
-    private void removeVisualAttachment(int buffStatusEntity, int targetEntity){
+    private void removeVisualAttachment(Integer buffStatusEntity, int targetEntity){
         Node entityNode = entitySceneMap.requestNode(targetEntity);
         Spatial visualAttachment;
         do{
@@ -90,7 +89,7 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
         visualAttachment.getParent().detachChild(visualAttachment);
     }
     
-    private String getVisualAttachmentID(int buffStatusEntity){
+    private String getVisualAttachmentID(Integer buffStatusEntity){
         return ("buffVisualisation_" + visualisationName + "_" + buffStatusEntity);
     }
     

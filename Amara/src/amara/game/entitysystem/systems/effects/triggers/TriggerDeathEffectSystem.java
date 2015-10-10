@@ -17,7 +17,7 @@ public class TriggerDeathEffectSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsAliveComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
         for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, DeathTriggerComponent.class))
         {
             int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
@@ -25,6 +25,5 @@ public class TriggerDeathEffectSystem implements EntitySystem{
                 EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, -1);
             }
         }
-        observer.reset();
     }
 }

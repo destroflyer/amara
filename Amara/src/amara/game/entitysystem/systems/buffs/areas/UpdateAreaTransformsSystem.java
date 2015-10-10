@@ -16,7 +16,7 @@ public class UpdateAreaTransformsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AreaOriginComponent.class, PositionComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, AreaOriginComponent.class, PositionComponent.class);
         EntityComponentMapReadonly observerNew = observer.getNew();
         EntityComponentMapReadonly observerChanged = observer.getChanged();
         for(int buffAreaEntity : observerNew.getEntitiesWithAll(AreaOriginComponent.class)){
@@ -28,7 +28,6 @@ public class UpdateAreaTransformsSystem implements EntitySystem{
             tryTransformUpdate(entityWorld, buffAreaEntity, originEntity, observerNew);
             tryTransformUpdate(entityWorld, buffAreaEntity, originEntity, observerChanged);
         }
-        observer.reset();
     }
     
     private void tryTransformUpdate(EntityWorld entityWorld, int buffAreaEntity, int originEntity, EntityComponentMapReadonly entityComponentMapReadonly){

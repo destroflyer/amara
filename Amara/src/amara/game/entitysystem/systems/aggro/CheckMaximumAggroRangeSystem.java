@@ -17,7 +17,7 @@ public class CheckMaximumAggroRangeSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(AggroTargetComponent.class, MaximumAggroRangeComponent.class)){
+        for(Integer entity : entityWorld.getEntitiesWithAll(AggroTargetComponent.class, MaximumAggroRangeComponent.class)){
             int targetEntity = entityWorld.getComponent(entity, AggroTargetComponent.class).getTargetEntity();
             Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
             Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();

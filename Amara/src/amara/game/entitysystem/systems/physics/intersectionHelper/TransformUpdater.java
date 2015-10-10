@@ -17,34 +17,32 @@ public class TransformUpdater
 {
     public void updateTransforms(EntityWorld entityWorld)
     {
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, PositionComponent.class, DirectionComponent.class, ScaleComponent.class);
-        if(observer.isEmpty()) return;
+        ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class, DirectionComponent.class, ScaleComponent.class);
         HashSet<Integer> updateNeeded = new HashSet<Integer>();
-        for(int entity: observer.getRemoved().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
+        for(Integer entity: observer.getRemoved().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
         {
             updateNeeded.add(entity);
         }
-        for(int entity: observer.getChanged().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
+        for(Integer entity: observer.getChanged().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
         {
             updateNeeded.add(entity);
         }
-        for(int entity: observer.getNew().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
+        for(Integer entity: observer.getNew().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
         {
             updateNeeded.add(entity);
         }
-        for(int entity: observer.getChanged().getEntitiesWithAny(HitboxComponent.class))
+        for(Integer entity: observer.getChanged().getEntitiesWithAny(HitboxComponent.class))
         {
             updateNeeded.add(entity);
         }
-        for(int entity: observer.getNew().getEntitiesWithAny(HitboxComponent.class))
+        for(Integer entity: observer.getNew().getEntitiesWithAny(HitboxComponent.class))
         {
             updateNeeded.add(entity);
         }
-        for(int entity: updateNeeded)
+        for(Integer entity: updateNeeded)
         {
             updateTransforms(entityWorld.getWrapped(entity));
         }
-        observer.reset();
     }
     
     private void updateTransforms(EntityWrapper entity)

@@ -6,7 +6,6 @@ package amara.game.entitysystem.systems.physics.shapes.PolygonMath;
 
 import java.io.*;
 import java.util.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -137,7 +136,7 @@ class ByteBuffer
             case type_float:
                 return readFloat();
         }
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
     
     public Object[] readArray() throws UnsupportedEncodingException
@@ -252,7 +251,7 @@ class ByteBuffer
                 writeFloat((Float)obj);
                 return;
         }
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
     
     public void writeHashMap(HashMap<String, Object> map) throws UnsupportedEncodingException

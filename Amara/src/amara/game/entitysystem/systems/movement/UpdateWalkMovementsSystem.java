@@ -19,8 +19,8 @@ public class UpdateWalkMovementsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, WalkSpeedComponent.class);
-        for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, WalkSpeedComponent.class);
+        for(Integer entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
             int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
             if(entityWorld.hasComponent(movementEntity, WalkMovementComponent.class)){
                 if(entityWorld.hasComponent(movementEntity, MovementSpeedComponent.class)){
@@ -31,10 +31,9 @@ public class UpdateWalkMovementsSystem implements EntitySystem{
                 }
             }
         }
-        observer.reset();
     }
     
-    private void setMovementWalkSpeed(EntityWorld entityWorld, int movingEntity, WalkSpeedComponent walkSpeedComponent){
+    private void setMovementWalkSpeed(EntityWorld entityWorld, Integer movingEntity, WalkSpeedComponent walkSpeedComponent){
         if(walkSpeedComponent != null){
             float walkSpeed = walkSpeedComponent.getValue();
             int movementEntity = entityWorld.getComponent(movingEntity, MovementComponent.class).getMovementEntity();

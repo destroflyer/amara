@@ -31,14 +31,14 @@ public class AudioSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         increasePlayingAudioProgresses(deltaSeconds);
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, AudioComponent.class, AudioSourceComponent.class, PositionComponent.class, IsAudioPlayingComponent.class, GameSpeedComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(AudioComponent.class)){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, AudioComponent.class, AudioSourceComponent.class, PositionComponent.class, IsAudioPlayingComponent.class, GameSpeedComponent.class);
+        for(Integer entity : observer.getNew().getEntitiesWithAll(AudioComponent.class)){
             load(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(AudioComponent.class)){
+        for(Integer entity : observer.getRemoved().getEntitiesWithAll(AudioComponent.class)){
             remove(entity);
         }
-        for(int entity : observer.getNew().getEntitiesWithAll(AudioSourceComponent.class)){
+        for(Integer entity : observer.getNew().getEntitiesWithAll(AudioSourceComponent.class)){
             AudioNode audioNode = audioNodes.get(entity);
             int audioSourceEntity = entityWorld.getComponent(entity, AudioSourceComponent.class).getEntity();
             audioNode.setUserData("audio_source_entity", audioSourceEntity);
@@ -47,24 +47,24 @@ public class AudioSystem implements EntitySystem{
             audioNode.setRefDistance(50);
             audioNode.setMaxDistance(100);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(AudioSourceComponent.class)){
+        for(Integer entity : observer.getRemoved().getEntitiesWithAll(AudioSourceComponent.class)){
             AudioNode audioNode = audioNodes.get(entity);
             audioNode.setUserData("audio_source_entity", null);
             audioNode.setPositional(false);
         }
-        for(int entity : observer.getNew().getEntitiesWithAll(IsAudioPlayingComponent.class)){
+        for(Integer entity : observer.getNew().getEntitiesWithAll(IsAudioPlayingComponent.class)){
             enqueuePlay(entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(IsAudioPlayingComponent.class)){
+        for(Integer entity : observer.getChanged().getEntitiesWithAll(IsAudioPlayingComponent.class)){
             enqueuePlay(entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(IsAudioPlayingComponent.class)){
+        for(Integer entity : observer.getRemoved().getEntitiesWithAll(IsAudioPlayingComponent.class)){
             stop(entity);
         }
-        for(int entity : observer.getNew().getEntitiesWithAll(IsAudioPausedComponent.class)){
+        for(Integer entity : observer.getNew().getEntitiesWithAll(IsAudioPausedComponent.class)){
             pause(entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(IsAudioPausedComponent.class)){
+        for(Integer entity : observer.getRemoved().getEntitiesWithAll(IsAudioPausedComponent.class)){
             if(entityWorld.hasComponent(entity, IsAudioPlayingComponent.class)){
                 play(entity);
             }
@@ -76,7 +76,6 @@ public class AudioSystem implements EntitySystem{
                 updateAudioPitch(entityWorld, audioNode);
             }
         }
-        observer.reset();
         playQueuedAudioEntities(entityWorld);
     }
     

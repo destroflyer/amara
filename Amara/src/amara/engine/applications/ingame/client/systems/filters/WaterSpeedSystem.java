@@ -24,7 +24,7 @@ public class WaterSpeedSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, GameSpeedComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, GameSpeedComponent.class);
         GameSpeedComponent gameSpeedComponent = observer.getChanged().getComponent(Game.ENTITY, GameSpeedComponent.class);
         if(gameSpeedComponent != null){
             for(Filter filter : mapAppState.getActiveFilters()){
@@ -34,6 +34,5 @@ public class WaterSpeedSystem implements EntitySystem{
                 }
             }
         }
-        observer.reset();
     }
 }

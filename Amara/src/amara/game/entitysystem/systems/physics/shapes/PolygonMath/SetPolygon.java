@@ -8,7 +8,6 @@ import amara.game.entitysystem.systems.physics.shapes.Vector2D;
 import amara.game.entitysystem.systems.physics.shapes.Vector2DUtil;
 import com.jme3.network.serializing.Serializable;
 import java.util.ArrayList;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -191,7 +190,7 @@ public class SetPolygon
     }
     public boolean equals(SetPolygon set)
     {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
 //        if (set.polys.size() != polys.size()) return false;
 //        ArrayList<HolePolygon> remaining = new ArrayList<HolePolygon>(set.polys);
 //        for(HolePolygon poly: polys)
@@ -218,7 +217,7 @@ public class SetPolygon
     @Override
     public int hashCode()
     {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
 //        int hash = 0;
 //        for(HolePolygon p: polys)
 //        {

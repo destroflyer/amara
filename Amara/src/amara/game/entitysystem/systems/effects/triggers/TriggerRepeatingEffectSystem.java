@@ -16,15 +16,14 @@ public class TriggerRepeatingEffectSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, RepeatingTriggerComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(RepeatingTriggerComponent.class)){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, RepeatingTriggerComponent.class);
+        for(Integer entity : observer.getNew().getEntitiesWithAll(RepeatingTriggerComponent.class)){
             entityWorld.setComponent(entity, new RepeatingTriggerCounterComponent(0));
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(RepeatingTriggerComponent.class)){
+        for(Integer entity : observer.getRemoved().getEntitiesWithAll(RepeatingTriggerComponent.class)){
             entityWorld.removeComponent(entity, RepeatingTriggerCounterComponent.class);
         }
-        observer.reset();
-        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, RepeatingTriggerComponent.class))
+        for(Integer effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, RepeatingTriggerComponent.class))
         {
             float timeSinceLastRepeatTrigger = deltaSeconds;
             TimeSinceLastRepeatTriggerComponent timeSinceLastRepeatTriggerComponent = entityWorld.getComponent(effectTriggerEntity, TimeSinceLastRepeatTriggerComponent.class);
@@ -43,7 +42,7 @@ public class TriggerRepeatingEffectSystem implements EntitySystem{
         }
     }
     
-    private void increaseRepeatingTriggerCounter(EntityWorld entityWorld, int effectTriggerEnttiy){
+    private void increaseRepeatingTriggerCounter(EntityWorld entityWorld, Integer effectTriggerEnttiy){
         int counter = 0;
         RepeatingTriggerCounterComponent repeatingTriggerCounterComponent = entityWorld.getComponent(effectTriggerEnttiy, RepeatingTriggerCounterComponent.class);
         if(repeatingTriggerCounterComponent != null){

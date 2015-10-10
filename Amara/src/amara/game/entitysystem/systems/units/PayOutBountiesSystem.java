@@ -21,8 +21,8 @@ public class PayOutBountiesSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.getOrCreateObserver(this, IsAliveComponent.class);
-        for(int entity : observer.getRemoved().getEntitiesWithAll(IsAliveComponent.class)){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
+        for(Integer entity : observer.getRemoved().getEntitiesWithAll(IsAliveComponent.class)){
             BountyComponent bountyComponent = entityWorld.getComponent(entity, BountyComponent.class);
             DamageHistoryComponent damageHistoryComponent = entityWorld.getComponent(entity, DamageHistoryComponent.class);
             if((bountyComponent != null) && (damageHistoryComponent != null) && (damageHistoryComponent.getEntries().length > 0)){
@@ -63,6 +63,5 @@ public class PayOutBountiesSystem implements EntitySystem{
                 }
             }
         }
-        observer.reset();
     }
 }
