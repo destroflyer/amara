@@ -22,7 +22,7 @@ public class AggroSystem implements EntitySystem
 
     public void update(EntityWorld entityWorld, float deltaSeconds)
     {
-        for(Integer entity : entityWorld.getEntitiesWithAll(AutoAggroComponent.class, AutoAttackComponent.class, PositionComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAll(AutoAggroComponent.class, AutoAttackComponent.class, PositionComponent.class)){
             Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
             float autoAggroRange = entityWorld.getComponent(entity, AutoAggroComponent.class).getRange();
             int autoAttackEntity = entityWorld.getComponent(entity, AutoAttackComponent.class).getAutoAttackEntity();
@@ -37,7 +37,7 @@ public class AggroSystem implements EntitySystem
             entityWorld.setComponent(entity, new TargetsInAggroRangeComponent(Util.convertToArray(targets)));
         }
         ComponentMapObserver observer = entityWorld.requestObserver(this, AutoAggroComponent.class);
-        for(Integer entity : observer.getRemoved().getEntitiesWithAll(AutoAggroComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAll(AutoAggroComponent.class)){
             entityWorld.removeComponent(entity, TargetsInAggroRangeComponent.class);
         }
     }

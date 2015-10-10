@@ -19,27 +19,27 @@ public class TransformUpdater
     {
         ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class, DirectionComponent.class, ScaleComponent.class);
         HashSet<Integer> updateNeeded = new HashSet<Integer>();
-        for(Integer entity: observer.getRemoved().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
+        for(int entity: observer.getRemoved().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
         {
             updateNeeded.add(entity);
         }
-        for(Integer entity: observer.getChanged().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
+        for(int entity: observer.getChanged().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
         {
             updateNeeded.add(entity);
         }
-        for(Integer entity: observer.getNew().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
+        for(int entity: observer.getNew().getEntitiesWithAny(PositionComponent.class, DirectionComponent.class, ScaleComponent.class))
         {
             updateNeeded.add(entity);
         }
-        for(Integer entity: observer.getChanged().getEntitiesWithAny(HitboxComponent.class))
+        for(int entity: observer.getChanged().getEntitiesWithAny(HitboxComponent.class))
         {
             updateNeeded.add(entity);
         }
-        for(Integer entity: observer.getNew().getEntitiesWithAny(HitboxComponent.class))
+        for(int entity: observer.getNew().getEntitiesWithAny(HitboxComponent.class))
         {
             updateNeeded.add(entity);
         }
-        for(Integer entity: updateNeeded)
+        for(int entity: updateNeeded)
         {
             updateTransforms(entityWorld.getWrapped(entity));
         }

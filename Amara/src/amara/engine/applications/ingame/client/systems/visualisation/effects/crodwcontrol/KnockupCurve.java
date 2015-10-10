@@ -13,14 +13,14 @@ import amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedComponen
  */
 public class KnockupCurve{
 
-    public KnockupCurve(Integer entity, float duration, float height, float offset){
+    public KnockupCurve(int entity, float duration, float height, float offset){
         this.entity = entity;
         this.duration = duration;
         this.height = height;
         this.offset = offset;
         this.remainingDuration = duration;
     }
-    private Integer entity;
+    private int entity;
     private float duration;
     private float height;
     private float offset;

@@ -15,7 +15,7 @@ public class RemoveAppliedEffectsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(Integer entity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class)){
             entityWorld.removeEntity(entity);
         }
     }

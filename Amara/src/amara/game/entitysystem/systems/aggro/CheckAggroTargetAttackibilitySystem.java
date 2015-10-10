@@ -17,7 +17,7 @@ public class CheckAggroTargetAttackibilitySystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(Integer entity : entityWorld.getEntitiesWithAll(AggroTargetComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAll(AggroTargetComponent.class)){
             int targetEntity = entityWorld.getComponent(entity, AggroTargetComponent.class).getTargetEntity();
             if(!isAttackable(entityWorld, entity, targetEntity)){
                 entityWorld.removeComponent(entity, AggroTargetComponent.class);
@@ -25,7 +25,7 @@ public class CheckAggroTargetAttackibilitySystem implements EntitySystem{
         }
     }
     
-    public static boolean isAttackable(EntityWorld entityWorld, Integer attackingEntity, Integer targetEntity){
+    public static boolean isAttackable(EntityWorld entityWorld, int attackingEntity, int targetEntity){
         int autoAttackEntity = entityWorld.getComponent(attackingEntity, AutoAttackComponent.class).getAutoAttackEntity();
         int targetRulesEntity = entityWorld.getComponent(autoAttackEntity, SpellTargetRulesComponent.class).getTargetRulesEntity();
         return TargetUtil.isValidTarget(entityWorld, attackingEntity, targetEntity, targetRulesEntity);

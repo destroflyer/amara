@@ -64,10 +64,10 @@ public class FogOfWarSystem implements EntitySystem{
             timeSinceLastUpdate += deltaSeconds;
             if(timeSinceLastUpdate > Settings.getFloat("fog_of_war_update_interval")){
                 ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class);
-                for(Integer entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
+                for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
                     checkChangedPositionComponent(entityWorld, entity);
                 }
-                for(Integer entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
+                for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
                     checkChangedPositionComponent(entityWorld, entity);
                 }
                 if(isUpdateNeeded){
@@ -79,7 +79,7 @@ public class FogOfWarSystem implements EntitySystem{
         }
     }
     
-    private void checkChangedPositionComponent(EntityWorld entityWorld, Integer entity){
+    private void checkChangedPositionComponent(EntityWorld entityWorld, int entity){
         if(entityWorld.hasComponent(entity, SightRangeComponent.class) && playerTeamSystem.isAllied(entityWorld, entity)){
             isUpdateNeeded = true;
         }
@@ -112,7 +112,7 @@ public class FogOfWarSystem implements EntitySystem{
     
     private void updateFogTexture_PlayerSight(EntityWorld entityWorld){
         resetFogTexture();
-        for(Integer entity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class, SightRangeComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class, SightRangeComponent.class)){
             if(playerTeamSystem.isAllied(entityWorld, entity)){
                 PositionComponent positionComponent = entityWorld.getComponent(entity, PositionComponent.class);
                 Vector2D position = new Vector2D(positionComponent.getPosition().getX(), positionComponent.getPosition().getY());

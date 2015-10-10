@@ -141,7 +141,7 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                             }
                         }
                         else if(message.getText().startsWith("/nochickens")){
-                            for(Integer entity : entityWorld.getEntitiesWithAll(NameComponent.class, ModelComponent.class)){
+                            for(int entity : entityWorld.getEntitiesWithAll(NameComponent.class, ModelComponent.class)){
                                 String name = entityWorld.getComponent(entity, NameComponent.class).getName();
                                 if(name.equals("Chicken")){
                                     entityWorld.removeEntity(entityWorld.getComponent(entity, AnimationComponent.class).getAnimationEntity());

@@ -10,7 +10,7 @@ package amara.game.entitysystem;
  */
 public class EntityUtil{
     
-    public static void transferComponents(EntityWorld entityWorld, Integer sourceEntity, Integer targetEntity, Class[] componentClasses){
+    public static void transferComponents(EntityWorld entityWorld, int sourceEntity, int targetEntity, Class[] componentClasses){
         transferComponents(entityWorld.getWrapped(sourceEntity), entityWorld.getWrapped(targetEntity), componentClasses);
     }
     

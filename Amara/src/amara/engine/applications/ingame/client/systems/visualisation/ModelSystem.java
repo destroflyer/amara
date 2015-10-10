@@ -28,18 +28,18 @@ public class ModelSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, ModelComponent.class);
-        for(Integer entity : observer.getNew().getEntitiesWithAll(ModelComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAll(ModelComponent.class)){
             updateModel(entityWorld, entity);
         }
-        for(Integer entity : observer.getChanged().getEntitiesWithAll(ModelComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAll(ModelComponent.class)){
             updateModel(entityWorld, entity);
         }
-        for(Integer entity : observer.getRemoved().getEntitiesWithAll(ModelComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAll(ModelComponent.class)){
             entitySceneMap.removeNode(entity);
         }
     }
     
-    private void updateModel(EntityWorld entityWorld, Integer entity){
+    private void updateModel(EntityWorld entityWorld, int entity){
         Node node = entitySceneMap.requestNode(entity);
         node.detachChildNamed(NODE_NAME_MODEL);
         ModelComponent modelComponent = entityWorld.getComponent(entity, ModelComponent.class);

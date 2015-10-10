@@ -28,38 +28,38 @@ public class AnimationSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, AnimationComponent.class, ModelComponent.class, GameSpeedComponent.class);
-        for(Integer entity : observer.getNew().getEntitiesWithAll(AnimationComponent.class))
+        for(int entity : observer.getNew().getEntitiesWithAll(AnimationComponent.class))
         {
             updateAnimation(entityWorld, entity);
         }
-        for(Integer entity : observer.getChanged().getEntitiesWithAll(AnimationComponent.class))
+        for(int entity : observer.getChanged().getEntitiesWithAll(AnimationComponent.class))
         {
             updateAnimation(entityWorld, entity);
         }
-        for(Integer entity : observer.getRemoved().getEntitiesWithAll(AnimationComponent.class))
+        for(int entity : observer.getRemoved().getEntitiesWithAll(AnimationComponent.class))
         {
             ModelObject modelObject = getModelObject(entity);
             if(modelObject != null){
                 modelObject.stopAndRewindAnimation();
             }
         }
-        for(Integer entity : observer.getNew().getEntitiesWithAll(ModelComponent.class))
+        for(int entity : observer.getNew().getEntitiesWithAll(ModelComponent.class))
         {
             updateAnimation(entityWorld, entity);
         }
-        for(Integer entity : observer.getChanged().getEntitiesWithAll(ModelComponent.class))
+        for(int entity : observer.getChanged().getEntitiesWithAll(ModelComponent.class))
         {
             updateAnimation(entityWorld, entity);
         }
         GameSpeedComponent gameSpeedComponent = observer.getChanged().getComponent(Game.ENTITY, GameSpeedComponent.class);
         if(gameSpeedComponent != null){
-            for(Integer entity : entityWorld.getEntitiesWithAll(AnimationComponent.class)){
+            for(int entity : entityWorld.getEntitiesWithAll(AnimationComponent.class)){
                 updateAnimation(entityWorld, entity);
             }
         }
     }
     
-    private void updateAnimation(EntityWorld entityWorld, Integer entity){
+    private void updateAnimation(EntityWorld entityWorld, int entity){
         ModelObject modelObject = getModelObject(entity);
         if(modelObject != null){
             AnimationComponent animationComponent = entityWorld.getComponent(entity, AnimationComponent.class);
@@ -77,7 +77,7 @@ public class AnimationSystem implements EntitySystem{
         }
     }
     
-    private ModelObject getModelObject(Integer entity){
+    private ModelObject getModelObject(int entity){
         Node node = entitySceneMap.requestNode(entity);
         return (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
     }

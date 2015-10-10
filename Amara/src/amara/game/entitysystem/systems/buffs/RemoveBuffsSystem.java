@@ -18,12 +18,12 @@ public class RemoveBuffsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(Integer buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class, RemoveFromTargetComponent.class)){
+        for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class, RemoveFromTargetComponent.class)){
             removeBuff(entityWorld, buffStatus);
         }
     }
     
-    public static void removeAllBuffs(EntityWorld entityWorld, Integer entity){
+    public static void removeAllBuffs(EntityWorld entityWorld, int entity){
         for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
             int targetEntity = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class).getTargetEntity();
             if(targetEntity == entity){

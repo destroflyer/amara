@@ -19,7 +19,7 @@ public abstract class Map{
     protected TerrainSkin terrainSkin;
     protected MapPhysicsInformation physicsInformation;
     protected MapVisuals visuals = new MapVisuals();
-    protected Integer entity;
+    protected int entity;
     
     public abstract void load(EntityWorld entityWorld);
     
@@ -69,11 +69,11 @@ public abstract class Map{
         return visuals;
     }
 
-    public void setEntity(Integer entity){
+    public void setEntity(int entity){
         this.entity = entity;
     }
 
-    public Integer getEntity(){
+    public int getEntity(){
         return entity;
     }
 }

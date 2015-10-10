@@ -19,11 +19,11 @@ public class CampSpawnSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(Integer campEntity : entityWorld.getEntitiesWithAll(CampSpawnComponent.class, CampSpawnInformationComponent.class)){
+        for(int campEntity : entityWorld.getEntitiesWithAll(CampSpawnComponent.class, CampSpawnInformationComponent.class)){
             int[] spawnInformationEntites = entityWorld.getComponent(campEntity, CampSpawnInformationComponent.class).getSpawnInformationEntites();
             for(int spawnInformationEntity : spawnInformationEntites){
                 String[] templateNames = entityWorld.getComponent(spawnInformationEntity, SpawnTemplateComponent.class).getTemplateNames();
-                Integer entity = entityWorld.createEntity();
+                int entity = entityWorld.createEntity();
                 EntityTemplate.loadTemplates(entityWorld, entity, templateNames);
                 Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
                 Vector2f direction = entityWorld.getComponent(entity, DirectionComponent.class).getVector();

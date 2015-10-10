@@ -15,7 +15,7 @@ public class MaximumHealthSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(Integer entity : entityWorld.getEntitiesWithAll(MaximumHealthComponent.class, HealthComponent.class))
+        for(int entity : entityWorld.getEntitiesWithAll(MaximumHealthComponent.class, HealthComponent.class))
         {
             float health = entityWorld.getComponent(entity, HealthComponent.class).getValue();
             float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();

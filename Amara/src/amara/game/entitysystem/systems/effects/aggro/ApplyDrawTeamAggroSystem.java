@@ -29,7 +29,7 @@ public class ApplyDrawTeamAggroSystem implements EntitySystem{
             if((effectCastSourceComponent != null) && UnitUtil.isPlayerUnit(entityWorld, targetEntity)){
                 int targetTeamEntity = entityWorld.getComponent(targetEntity, TeamComponent.class).getTeamEntity();
                 Vector2f aggroCenter = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
-                for(Integer entity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class)){
+                for(int entity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class)){
                     if(entity != targetEntity){
                         int teamEntity = entityWorld.getComponent(entity, TeamComponent.class).getTeamEntity();
                         Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();

@@ -23,7 +23,7 @@ public class LevelUpNotificationSystem extends EntityTextNotificationSystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, LevelComponent.class);
-        for(Integer entity : observer.getChanged().getEntitiesWithAll()){
+        for(int entity : observer.getChanged().getEntitiesWithAll()){
             displayTextNotification(entityWorld, entity, "LEVEL UP", color);
         }
     }

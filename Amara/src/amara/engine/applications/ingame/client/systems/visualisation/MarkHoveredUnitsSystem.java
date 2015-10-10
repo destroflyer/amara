@@ -36,7 +36,7 @@ public class MarkHoveredUnitsSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsHoveredComponent.class);
-        for(Integer entity : observer.getNew().getEntitiesWithAll(IsHoveredComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAll(IsHoveredComponent.class)){
             Node node = entitySceneMap.requestNode(entity);
             Node attachmentNode = new Node();
             attachmentNode.setName(NODE_NAME_MARKER);
@@ -54,7 +54,7 @@ public class MarkHoveredUnitsSystem implements EntitySystem{
                 node.attachChild(attachmentNode);
             }
         }
-        for(Integer entity : observer.getRemoved().getEntitiesWithAll(IsHoveredComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAll(IsHoveredComponent.class)){
             Node node = entitySceneMap.requestNode(entity);
             Node attachmentNode = (Node) node.getChild(NODE_NAME_MARKER);
             if(attachmentNode != null){

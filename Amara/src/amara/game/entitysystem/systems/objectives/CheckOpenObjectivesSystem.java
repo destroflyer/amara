@@ -15,7 +15,7 @@ public class CheckOpenObjectivesSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(Integer entity : entityWorld.getEntitiesWithAll(OpenObjectiveComponent.class))
+        for(int entity : entityWorld.getEntitiesWithAll(OpenObjectiveComponent.class))
         {
             boolean isFinished = true;
             OrObjectivesComponent orObjectivesComponent = entityWorld.getComponent(entity, OrObjectivesComponent.class);

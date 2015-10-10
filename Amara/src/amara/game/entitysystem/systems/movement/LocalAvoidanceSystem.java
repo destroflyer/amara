@@ -18,7 +18,7 @@ public class LocalAvoidanceSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(Integer entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
             int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
             if(entityWorld.hasAllComponents(movementEntity, MovementLocalAvoidanceComponent.class, MovementDirectionComponent.class)){
                 Vector2f direction = entityWorld.getComponent(movementEntity, MovementDirectionComponent.class).getDirection();
@@ -31,7 +31,7 @@ public class LocalAvoidanceSystem implements EntitySystem{
         }
     }
     
-    public static Vector2f correctMovementDirection(EntityWorld entityWorld, Integer entity, Vector2f movementDirection, float deltaSeconds){
+    public static Vector2f correctMovementDirection(EntityWorld entityWorld, int entity, Vector2f movementDirection, float deltaSeconds){
         float hitboxRadius = TargetedMovementSystem.getHitboxRadius(entityWorld, entity);
         Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
         int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();

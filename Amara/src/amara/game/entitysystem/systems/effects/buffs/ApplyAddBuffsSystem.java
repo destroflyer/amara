@@ -37,7 +37,7 @@ public class ApplyAddBuffsSystem implements EntitySystem{
     
     public static int addBuff(EntityWorld entityWorld, int targetEntity, int buffEntity, float duration){
         int buffStatusEntity = -1;
-        for(Integer entity : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
             ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(entity, ActiveBuffComponent.class);
             if((activeBuffComponent.getTargetEntity() == targetEntity) && (activeBuffComponent.getBuffEntity() == buffEntity)){
                 buffStatusEntity = entity;

@@ -30,7 +30,7 @@ public class TargetedMovementSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         intersectionObserver.updateHitboxes(entityWorld);
-        for(Integer entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
             int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
             MovementTargetComponent movementTargetComponent = entityWorld.getComponent(movementEntity, MovementTargetComponent.class);
             if(movementTargetComponent != null){
@@ -89,13 +89,13 @@ public class TargetedMovementSystem implements EntitySystem{
         }
     }
     
-    private boolean checkCollision(EntityWorld entityWorld, Integer movingEntity, int targetEntity){
+    private boolean checkCollision(EntityWorld entityWorld, int movingEntity, int targetEntity){
         HitboxComponent hitboxComponent1 = entityWorld.getComponent(movingEntity, HitboxComponent.class);
         HitboxComponent hitboxComponent2 = entityWorld.getComponent(targetEntity, HitboxComponent.class);
         return ((hitboxComponent1 != null) && (hitboxComponent2 != null) && hitboxComponent1.getShape().intersects(hitboxComponent2.getShape()));
     }
     
-    public static float getHitboxRadius(EntityWorld entityWorld, Integer entity){
+    public static float getHitboxRadius(EntityWorld entityWorld, int entity){
         float hitboxRadius = 0;
         HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
         if(hitboxComponent != null){

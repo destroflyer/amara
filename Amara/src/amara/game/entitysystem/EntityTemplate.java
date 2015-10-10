@@ -35,18 +35,18 @@ import amara.game.entitysystem.templates.XMLTemplateManager;
 public class EntityTemplate{
     
     public static EntityWrapper createFromTemplate(EntityWorld entityWorld, String... templateNames){
-        Integer entity = entityWorld.createEntity();
+        int entity = entityWorld.createEntity();
         loadTemplates(entityWorld, entity, templateNames);
         return entityWorld.getWrapped(entity);
     }
     
-    public static void loadTemplates(EntityWorld entityWorld, Integer entity, String... templateNames){
+    public static void loadTemplates(EntityWorld entityWorld, int entity, String... templateNames){
         for(int i=0;i<templateNames.length;i++){
             loadTemplate(entityWorld, entity, templateNames[i]);
         }
     }
     
-    public static void loadTemplate(EntityWorld entityWorld, Integer entity, String template){
+    public static void loadTemplate(EntityWorld entityWorld, int entity, String template){
         String[] parts = template.split(",");
         String templateName = parts[0];
         String[] parameters = new String[parts.length - 1];
@@ -56,7 +56,7 @@ public class EntityTemplate{
         loadTemplate(entityWorld, entity, templateName, parameters);
     }
     
-    public static void loadTemplate(EntityWorld entityWorld, Integer entity, String templateName, String[] parametersText){
+    public static void loadTemplate(EntityWorld entityWorld, int entity, String templateName, String[] parametersText){
         EntityWrapper entityWrapper = entityWorld.getWrapped(entity);
         XMLTemplateManager.getInstance().loadTemplate(entityWorld, entity, templateName, parametersText);
         int[] parameters = new int[parametersText.length];

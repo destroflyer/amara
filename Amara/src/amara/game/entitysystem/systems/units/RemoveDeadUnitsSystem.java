@@ -17,7 +17,7 @@ public class RemoveDeadUnitsSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
-        for(Integer entity : observer.getRemoved().getEntitiesWithAll(IsAliveComponent.class))
+        for(int entity : observer.getRemoved().getEntitiesWithAll(IsAliveComponent.class))
         {
             if(!UnitUtil.isPlayerUnit(entityWorld, entity)){
                 UnitUtil.cancelAction(entityWorld, entity);

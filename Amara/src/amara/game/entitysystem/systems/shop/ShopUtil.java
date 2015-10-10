@@ -19,8 +19,8 @@ import amara.game.entitysystem.components.units.*;
  */
 public class ShopUtil{
     
-    public static boolean isInShopRange(EntityWorld entityWorld, Integer entity){
-        for(Integer shopEntity : entityWorld.getEntitiesWithAll(ShopRangeComponent.class, PositionComponent.class)){
+    public static boolean isInShopRange(EntityWorld entityWorld, int entity){
+        for(int shopEntity : entityWorld.getEntitiesWithAll(ShopRangeComponent.class, PositionComponent.class)){
             if(canUseShop(entityWorld, entity, shopEntity)){
                 return true;
             }
@@ -28,7 +28,7 @@ public class ShopUtil{
         return false;
     }
     
-    public static boolean canUseShop(EntityWorld entityWorld, Integer entity, Integer shopEntity){
+    public static boolean canUseShop(EntityWorld entityWorld, int entity, int shopEntity){
         TeamComponent entityTeamComponent = entityWorld.getComponent(entity, TeamComponent.class);
         TeamComponent shopTeamComponent = entityWorld.getComponent(shopEntity, TeamComponent.class);
         if((shopTeamComponent == null) || ((entityTeamComponent != null) && (entityTeamComponent.getTeamEntity() == shopTeamComponent.getTeamEntity()))){
@@ -42,7 +42,7 @@ public class ShopUtil{
         return false;
     }
     
-    public static boolean buy(EntityWorld entityWorld, Integer entity, String itemID){
+    public static boolean buy(EntityWorld entityWorld, int entity, String itemID){
         LinkedList<Integer> inventoryItemEntities = new LinkedList<Integer>();
         InventoryComponent inventoryComponent = entityWorld.getComponent(entity, InventoryComponent.class);
         if(inventoryComponent != null){
@@ -69,7 +69,7 @@ public class ShopUtil{
         return false;
     }
     
-    private static int resolveItemRecipe(EntityWorld entityWorld, Integer entity, String itemID, LinkedList<Integer> inventoryItemEntities, Integer tmpItemEntity){
+    private static int resolveItemRecipe(EntityWorld entityWorld, int entity, String itemID, LinkedList<Integer> inventoryItemEntities, int tmpItemEntity){
         entityWorld.removeEntity(tmpItemEntity);
         EntityTemplate.loadTemplate(entityWorld, tmpItemEntity, "items/" + itemID);
         ItemRecipeComponent itemRecipeComponent = entityWorld.getComponent(tmpItemEntity, ItemRecipeComponent.class);
@@ -91,7 +91,7 @@ public class ShopUtil{
         return goldCost;
     }
     
-    public static void sell(EntityWorld entityWorld, Integer entity, int inventoryIndex){
+    public static void sell(EntityWorld entityWorld, int entity, int inventoryIndex){
         InventoryComponent inventoryComponent = entityWorld.getComponent(entity, InventoryComponent.class);
         if(inventoryComponent != null){
             int[] oldItemsEntities = inventoryComponent.getItemEntities();

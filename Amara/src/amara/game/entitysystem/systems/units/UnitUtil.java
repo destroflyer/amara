@@ -19,7 +19,7 @@ import amara.game.entitysystem.systems.movement.MovementSystem;
  */
 public class UnitUtil{
     
-    public static boolean tryCancelAction(EntityWorld entityWorld, Integer entity){
+    public static boolean tryCancelAction(EntityWorld entityWorld, int entity){
         boolean isAllowed = true;
         IsCastingComponent isCastingComponent = entityWorld.getComponent(entity, IsCastingComponent.class);
         if((isCastingComponent != null) && (!isCastingComponent.isCancelable())){
@@ -36,7 +36,7 @@ public class UnitUtil{
         return isAllowed;
     }
     
-    public static void cancelAction(EntityWorld entityWorld, Integer entity){
+    public static void cancelAction(EntityWorld entityWorld, int entity){
         cancelMovement(entityWorld, entity);
         entityWorld.removeComponent(entity, AggroTargetComponent.class);
         entityWorld.removeComponent(entity, IsWalkingToAggroTargetComponent.class);
@@ -51,7 +51,7 @@ public class UnitUtil{
         removeTemporaryTriggers(entityWorld, entity, CastingFinishedTriggerComponent.class);
     }
     
-    public static void cancelMovement(EntityWorld entityWorld, Integer entity){
+    public static void cancelMovement(EntityWorld entityWorld, int entity){
         entityWorld.removeComponent(entity, MovementComponent.class);
         removeTemporaryTriggers(entityWorld, entity, TargetReachedTriggerComponent.class);
         removeTemporaryTriggers(entityWorld, entity, CollisionTriggerComponent.class);
@@ -75,7 +75,7 @@ public class UnitUtil{
     }
     
     public static boolean isPlayerUnit(EntityWorld entityWorld, int entity){
-        for(Integer playerEntity : entityWorld.getEntitiesWithAll(SelectedUnitComponent.class)){
+        for(int playerEntity : entityWorld.getEntitiesWithAll(SelectedUnitComponent.class)){
             int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
             if(selectedEntity == entity){
                 return true;

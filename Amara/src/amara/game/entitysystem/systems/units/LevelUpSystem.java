@@ -16,15 +16,15 @@ public class LevelUpSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, ExperienceComponent.class);
-        for(Integer entity : observer.getNew().getEntitiesWithAll(ExperienceComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAll(ExperienceComponent.class)){
             checkLevelUp(entityWorld, entity);
         }
-        for(Integer entity : observer.getChanged().getEntitiesWithAll(ExperienceComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAll(ExperienceComponent.class)){
             checkLevelUp(entityWorld, entity);
         }
     }
     
-    private void checkLevelUp(EntityWorld entityWorld, Integer entity){
+    private void checkLevelUp(EntityWorld entityWorld, int entity){
         int level = entityWorld.getComponent(entity, LevelComponent.class).getLevel();
         int experience = entityWorld.getComponent(entity, ExperienceComponent.class).getExperience();
         int neededLevelUpExperience = getNeededLevelUpExperience(level);

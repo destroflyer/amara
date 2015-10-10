@@ -22,7 +22,7 @@ public class CheckDeadCampsRespawnSystem implements EntitySystem{
                 int campEntity = observer.getRemoved().getComponent(deadEntity, CampComponent.class).getCampEntity();
                 if(entityWorld.hasComponent(campEntity, CampRespawnDurationComponent.class)){
                     boolean isCampDead = true;
-                    for(Integer entity : entityWorld.getEntitiesWithAll(CampComponent.class)){
+                    for(int entity : entityWorld.getEntitiesWithAll(CampComponent.class)){
                         int aliveCampEntity = entityWorld.getComponent(entity, CampComponent.class).getCampEntity();
                         if(aliveCampEntity == campEntity){
                             isCampDead = false;

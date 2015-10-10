@@ -18,7 +18,7 @@ public class SpellUtil{
     public static final int SPELL_POINTS_COST_LEARN = 1;
     public static final int SPELL_POINTS_COST_UPGRADE = 2;
     
-    public static void learnSpell(EntityWorld entityWorld, Integer entity, int spellIndex){
+    public static void learnSpell(EntityWorld entityWorld, int entity, int spellIndex){
         int spellsUpgradePoints = entityWorld.getComponent(entity, SpellsUpgradePointsComponent.class).getUpgradePoints();
         if(spellsUpgradePoints >= SPELL_POINTS_COST_LEARN){
             LearnableSpellsComponent learnableSpellsComponent = entityWorld.getComponent(entity, LearnableSpellsComponent.class);
@@ -30,7 +30,7 @@ public class SpellUtil{
         }
     }
     
-    public static void upgradeSpell(EntityWorld entityWorld, Integer entity, int spellIndex, int upgradeIndex){
+    public static void upgradeSpell(EntityWorld entityWorld, int entity, int spellIndex, int upgradeIndex){
         int spellsUpgradePoints = entityWorld.getComponent(entity, SpellsUpgradePointsComponent.class).getUpgradePoints();
         if(spellsUpgradePoints >= SPELL_POINTS_COST_UPGRADE){
             int[] spells = entityWorld.getComponent(entity, SpellsComponent.class).getSpellsEntities();
@@ -46,7 +46,7 @@ public class SpellUtil{
         }
     }
     
-    public static void setSpell(EntityWorld entityWorld, Integer entity, int spellIndex, int spellEntity){
+    public static void setSpell(EntityWorld entityWorld, int entity, int spellIndex, int spellEntity){
         int[] oldSpells = new int[0];
         int newSpellsCount = 1;
         SpellsComponent spellsComponent = entityWorld.getComponent(entity, SpellsComponent.class);
@@ -73,7 +73,7 @@ public class SpellUtil{
         entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
     }
     
-    public static void transferRemainingCooldown(EntityWorld entityWorld, Integer sourceSpellEntity, Integer targetSpellEntity){
+    public static void transferRemainingCooldown(EntityWorld entityWorld, int sourceSpellEntity, int targetSpellEntity){
         RemainingCooldownComponent remainingCooldownComponent = entityWorld.getComponent(sourceSpellEntity, RemainingCooldownComponent.class);
         if(remainingCooldownComponent != null){
             CooldownComponent sourceCooldownComponent = entityWorld.getComponent(sourceSpellEntity, CooldownComponent.class);

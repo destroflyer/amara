@@ -17,15 +17,15 @@ public class AttackMoveSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, AttackMoveComponent.class, AggroTargetComponent.class);
-        for(Integer entity : observer.getNew().getEntitiesWithAll(AttackMoveComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAll(AttackMoveComponent.class)){
             walk(entityWorld, entity);
         }
-        for(Integer entity : observer.getRemoved().getEntitiesWithAll(AggroTargetComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAll(AggroTargetComponent.class)){
             walk(entityWorld, entity);
         }
     }
     
-    private void walk(EntityWorld entityWorld, Integer entity){
+    private void walk(EntityWorld entityWorld, int entity){
         AttackMoveComponent attackMoveComponent = entityWorld.getComponent(entity, AttackMoveComponent.class);
         if(attackMoveComponent != null){
             ExecutePlayerCommandsSystem.tryWalk(entityWorld, entity, attackMoveComponent.getTargetEntity(), -1);

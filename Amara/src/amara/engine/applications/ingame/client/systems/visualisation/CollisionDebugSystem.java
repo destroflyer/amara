@@ -26,30 +26,30 @@ public class CollisionDebugSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, HitboxComponent.class, HitboxActiveComponent.class, PositionComponent.class);
-        for(Integer entity : observer.getNew().getEntitiesWithAll(HitboxComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAll(HitboxComponent.class)){
             updateGeometry(entityWorld, entity);
         }
-        for(Integer entity : observer.getChanged().getEntitiesWithAll(HitboxComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAll(HitboxComponent.class)){
             updateGeometry(entityWorld, entity);
         }
-        for(Integer entity : observer.getRemoved().getEntitiesWithAll(HitboxComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAll(HitboxComponent.class)){
             removeGeometry(entity);
         }
-        for(Integer entity : observer.getNew().getEntitiesWithAll(HitboxActiveComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAll(HitboxActiveComponent.class)){
             updateGeometry(entityWorld, entity);
         }
-        for(Integer entity : observer.getRemoved().getEntitiesWithAll(HitboxActiveComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAll(HitboxActiveComponent.class)){
             updateGeometry(entityWorld, entity);
         }
-        for(Integer entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
             updateGeometryLocation(entityWorld, entity);
         }
-        for(Integer entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
             updateGeometryLocation(entityWorld, entity);
         }
     }
     
-    private void updateGeometry(EntityWorld entityWorld, Integer entity){
+    private void updateGeometry(EntityWorld entityWorld, int entity){
         removeGeometry(entity);
         HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
         if(hitboxComponent != null){
@@ -60,11 +60,11 @@ public class CollisionDebugSystem implements EntitySystem{
         }
     }
     
-    private void removeGeometry(Integer entity){
+    private void removeGeometry(int entity){
         node.detachChildNamed(getGeometryName(entity));
     }
     
-    private void updateGeometryLocation(EntityWorld entityWorld, Integer entity){
+    private void updateGeometryLocation(EntityWorld entityWorld, int entity){
         Spatial geometry = node.getChild(getGeometryName(entity));
         if(geometry != null){
             PositionComponent positionComponent = entityWorld.getComponent(entity, PositionComponent.class);
@@ -78,7 +78,7 @@ public class CollisionDebugSystem implements EntitySystem{
         }
     }
     
-    private String getGeometryName(Integer entity){
+    private String getGeometryName(int entity){
         return ("collisionMesh_" + entity);
     }
 }
