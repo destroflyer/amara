@@ -16,8 +16,8 @@ public class Circle extends ConvexShape
     private Vector2D localPosition;
     private double localRadius;
     
-    private Vector2D globalPosition = null;
-    private double globalRadius = Double.NaN;
+    private transient Vector2D globalPosition = null;
+    private transient double globalRadius = Double.NaN;
 
     public Circle()
     {

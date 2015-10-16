@@ -144,7 +144,6 @@ public class ComponentMapObserver {
             return false;
         }
         if (a.getClass().isArray() && b.getClass().isArray()) {
-
             int length = Array.getLength(a);
             if (length > 0 && !a.getClass().getComponentType().equals(b.getClass().getComponentType())) {
                 return false;

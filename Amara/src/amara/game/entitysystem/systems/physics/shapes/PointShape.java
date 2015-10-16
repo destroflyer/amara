@@ -12,9 +12,9 @@ import com.jme3.network.serializing.Serializable;
  */
 @Serializable
 public class PointShape extends ConvexShape {
-    private Vector2D localPoint, globalPoint;
-    private Circle boundCircle;
-    private boolean cached = false;
+    private Vector2D localPoint;
+    private transient Circle boundCircle = null;
+    private transient Vector2D globalPoint = null;
 
     public PointShape() {
         this(Vector2D.Zero);
@@ -22,7 +22,6 @@ public class PointShape extends ConvexShape {
 
     public PointShape(Vector2D localPoint) {
         this.localPoint = localPoint;
-        boundCircle = new Circle(localPoint, 0);
     }
     
     @Override
@@ -37,6 +36,9 @@ public class PointShape extends ConvexShape {
 
     @Override
     public Circle getBoundCircle() {
+        if(boundCircle == null) {
+            boundCircle = new Circle(localPoint, 0);
+        }
         return boundCircle;
     }
 
@@ -50,8 +52,8 @@ public class PointShape extends ConvexShape {
     @Override
     public void setTransform(Transform2D transform) {
         this.transform = transform;
-        boundCircle.setTransform(transform);
-        cached = false;
+        getBoundCircle().setTransform(transform);
+        globalPoint = null;
     }
 
     @Override
@@ -74,9 +76,8 @@ public class PointShape extends ConvexShape {
     }
     
     private void updateCache() {
-        if(cached) return;
+        if(globalPoint != null) return;
         globalPoint = transform.transform(localPoint);
-        cached = true;
     }
 
     public Vector2D getLocalPoint() {

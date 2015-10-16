@@ -16,8 +16,9 @@ import java.util.*;
 @Serializable
 public class PolygonShape extends Shape
 {
-    private Polygon localPolygon, globalPolygon = null;
-    private BoundRectangle aabb = null;
+    private Polygon localPolygon;
+    private transient Polygon globalPolygon = null;
+    private transient BoundRectangle aabb = null;
 
     public PolygonShape()
     {
