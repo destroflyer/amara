@@ -7,6 +7,7 @@ package amara.launcher;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
@@ -22,7 +23,6 @@ import javax.swing.UIManager;
 import amara.*;
 import amara.engine.network.MessagesSerializer;
 import amara.launcher.client.buttons.*;
-import java.awt.Point;
 
 /**
  *

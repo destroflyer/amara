@@ -18,7 +18,7 @@ void main(){
     float fogY = (pos.z / m_MapSize.y);
     float density = texture2D(m_Fog, vec2(fogX, fogY)).r;
     vec3 color = texture2D(m_Texture, texCoord).rgb;
-    if((pos.x >= 0) && (pos.z >= 0) && (pos.x < m_MapSize.x) && (pos.z < m_MapSize.y)){
+    if((pos.x >= 0.0) && (pos.z >= 0.0) && (pos.x < m_MapSize.x) && (pos.z < m_MapSize.y)){
         color *= density;
     }
     gl_FragColor = vec4(color.r, color.g, color.b, 1.0);

@@ -1,38 +1,53 @@
 <template>
+    <value name="delay">0.9</value>
     <entity id="spell">
-        <name>Ganfaul Ult</name>
+        <name>Ult</name>
         <spellVisualisation>ganfaul_ult</spellVisualisation>
         <instantEffectTriggers>
-            <!--spawn object, play audio-->
+            <!--spawn projectile-->
             <entity>
-                <casterTarget/>
+                <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <!--<spawn>
+                        <spawn>
                             <entity>
-                                <spawnTemplate>./object</spawnTemplate>
+                                <spawnTemplate>./projectile</spawnTemplate>
+                                <spawnMovementSpeed>25</spawnMovementSpeed>
                             </entity>
                         </spawn>
-                        <playAudio>
-                            <entity>
-                                <audio>Sounds/sounds/spells/?.ogg</audio>
-                            </entity>
-                        </playAudio>-->
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
             </entity>
+            <!--play audio-->
+            <!--<entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/sear_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>-->
         </instantEffectTriggers>
-        <castType>selfcast</castType>
+        <castType>linear_skillshot</castType>
         <castCancelAction/>
-        <castDuration>2</castDuration>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
         <castAnimation>
             <entity>
                 <name>standing_2h_magic_area_attack_01</name>
-                <loopDuration>2.5</loopDuration>
+                <loopDuration>2</loopDuration>
             </entity>
         </castAnimation>
-        <baseCooldown>10</baseCooldown>
+        <baseCooldown>8</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>
@@ -43,8 +58,8 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <flatMagicDamage>250</flatMagicDamage>
-                        <scalingAbilityPowerMagicDamage>0.6</scalingAbilityPowerMagicDamage>
+                        <flatMagicDamage>300</flatMagicDamage>
+                        <scalingAbilityPowerMagicDamage>1</scalingAbilityPowerMagicDamage>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

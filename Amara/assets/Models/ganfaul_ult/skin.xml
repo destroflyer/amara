@@ -1,0 +1,10 @@
+<skin name="ganfaul_ult">
+    <model scale="1.5">
+        <position>
+            <location>0,3.7,0</location>
+        </position>
+        <modifiers>
+            <modifier>amara.engine.applications.ingame.client.models.modifiers.ModelModifier_Ganfaul_Ult</modifier>
+        </modifiers>
+    </model>
+</skin>
