@@ -13,7 +13,7 @@ import amara.engine.network.messages.*;
 import amara.engine.network.messages.entitysystem.*;
 import amara.engine.network.messages.protocol.*;
 import amara.game.entitysystem.components.physics.*;
-import amara.game.entitysystem.components.spawns.SpawnTemplateComponent;
+import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.synchronizing.*;
@@ -99,32 +99,30 @@ public class MessagesSerializer{
             Message_ClientDisconnection.class,
             Message_ClientInitialized.class,
             Message_EntityChanges.class,
-                EntityChange.class,
-                    NewComponentChange.class,
-                        //physics/HitboxComponent
-                        Circle.class,
-                        Rectangle.class,
-                        RegularCyclic.class,
-                        Shape.class,
-                        ConvexShape.class,
-                        SimpleConvexPolygon.class,
-                        PointShape.class,
-                        Transform2D.class,
-                        Vector2D.class,
-                        PolygonShape.class,
-                            BoundRectangle.class,
-                            Polygon.class,
-                                SetPolygon.class,
-                                HolePolygon.class,
-                                SimplePolygon.class,
-                        //units/DamageHistoryComponent
-                        DamageHistoryComponent.DamageHistoryEntry.class,
-                    RemovedComponentChange.class,
-                    RemovedEntityChange.class,
             Message_GameInfo.class,
             Message_GameStarted.class,
             Message_GameOver.class,
             Message_PlayerAuthentification.class
+        );
+        BitstreamClassManager.getInstance().register(
+            //physics/HitboxComponent
+            Circle.class,
+            Rectangle.class,
+            RegularCyclic.class,
+            Shape.class,
+            ConvexShape.class,
+            SimpleConvexPolygon.class,
+            PointShape.class,
+            Transform2D.class,
+            Vector2D.class,
+            PolygonShape.class,
+                BoundRectangle.class,
+                Polygon.class,
+                    SetPolygon.class,
+                    HolePolygon.class,
+                    SimplePolygon.class,
+            //units/DamageHistoryComponent
+            DamageHistoryComponent.DamageHistoryEntry.class
         );
         ComponentsRegistrator.registerComponents();
         XMLTemplateManager xmlTemplateManager = XMLTemplateManager.getInstance();

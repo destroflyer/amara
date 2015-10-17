@@ -4,14 +4,14 @@
  */
 package amara.game.entitysystem.synchronizing;
 
-import com.jme3.network.serializing.Serializable;
+import java.io.IOException;
+import amara.engine.network.*;
 
 /**
  *
  * @author Carl
  */
-@Serializable
-public class EntityChange{
+public class EntityChange implements BitSerializable{
 
     public EntityChange(){
         
@@ -24,5 +24,13 @@ public class EntityChange{
 
     public int getEntity(){
         return entity;
+    }
+
+    public void write(BitOutputStream outputStream){
+        outputStream.writeInteger(entity);
+    }
+
+    public void read(BitInputStream inputStream) throws IOException{
+        entity = inputStream.readInteger();
     }
 }

@@ -93,13 +93,14 @@ public class MapObstaclesAppState extends BaseDisplayAppState implements ActionL
             Polygon polygon = polygonShape.getGlobalPolygon();
             collisionMesh = new LinesMesh((float) polygonShape.getTransform().extractX(), (float) polygonShape.getTransform().extractY(), polygon.outlines());
         }
-        else if(shape instanceof ConvexShape)
-        {
+        else if(shape instanceof ConvexShape){
             ConvexShape convexShape = (ConvexShape) shape;
             collisionMesh = new CircleMesh((float) convexShape.getBoundCircle().getGlobalRadius(), 64);
             meshColor = ColorRGBA.Red;
         }
-        else throw new UnsupportedOperationException();
+        else{
+            throw new UnsupportedOperationException();
+        }
         return generateGeometry(collisionMesh, meshColor);
     }
     

@@ -41,12 +41,13 @@ public class ComponentsRegistrator_Generate{
         code = "package " + packageName + ";\n";
         code += "\n";
         code += "import com.jme3.math.Vector2f;\n";
-        code += "import com.jme3.network.serializing.Serializer;\n";
+        code += "import amara.game.entitysystem.synchronizing.BitstreamClassManager;\n";
         code += "\n";
         code += "/**GENERATED**/\n";
         code += "public class ComponentsRegistrator{\n\n";
         code += "    public static void registerComponents(){\n";
         code += "        XMLTemplateManager xmlTemplateManager = XMLTemplateManager.getInstance();\n";
+        code += "        BitstreamClassManager bitstreamClassManager = BitstreamClassManager.getInstance();\n";
         checkDirectory(SOURCE_DIRECTORY + PACKAGE_COMPONENTS.replace(".", "/"));
         code += "    }\n}";
         FileManager.putFileContent(SOURCE_DIRECTORY + packageName.replace(".", "/") + "/ComponentsRegistrator.java", code);
@@ -61,7 +62,7 @@ public class ComponentsRegistrator_Generate{
                     int subPackageStart = (SOURCE_DIRECTORY.length() + PACKAGE_COMPONENTS.length());
                     String subPackage = directory.substring(subPackageStart).replace("/", ".");
                     Class componentClass = Class.forName(PACKAGE_COMPONENTS + subPackage + componentClassName);
-                    code += "        Serializer.registerClass(" + componentClass.getName() + ".class);\n";
+                    code += "        bitstreamClassManager.register(" + componentClass.getName() + ".class);\n";
                     if(isComponentClassXMLSupported(componentClass)){
                         String elementName = componentClassName.substring(0, 1).toLowerCase() + componentClassName.substring(1, componentClassName.length() - 9);
                         code += "        xmlTemplateManager.registerComponent(" + componentClass.getName() + ".class, new XMLComponentConstructor<" + componentClass.getName() + ">(\"" + elementName + "\"){\n\n";
