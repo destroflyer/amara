@@ -5,25 +5,26 @@
 package amara.game.entitysystem.components.units;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
  * @author Philipp
  */
 @Serializable
-public class AutoAggroComponent
-{
-    private float range;
+public class AutoAggroComponent{
 
-    public AutoAggroComponent() {
+    public AutoAggroComponent(){
         
     }
-    
-    public AutoAggroComponent(float range) {
+
+    public AutoAggroComponent(float range){
         this.range = range;
     }
+    @ComponentField(type=ComponentField.Type.DISTANCE)
+    private float range;
 
-    public float getRange() {
+    public float getRange(){
         return range;
     }
 }

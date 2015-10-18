@@ -4,6 +4,8 @@
  */
 package amara.engine.network;
 
+import java.lang.reflect.Field;
+import com.jme3.math.Vector2f;
 import com.jme3.network.serializing.Serializer;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
@@ -17,6 +19,7 @@ import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.synchronizing.*;
+import amara.game.entitysystem.synchronizing.fieldserializers.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import amara.game.entitysystem.templates.*;
@@ -125,6 +128,23 @@ public class MessagesSerializer{
             DamageHistoryComponent.DamageHistoryEntry.class
         );
         ComponentsRegistrator.registerComponents();
+        try{
+            ComponentSerializer.registerFieldSerializer(new Field[]{ 
+                Vector2f.class.getDeclaredField("x"),
+                Vector2f.class.getDeclaredField("y")
+            }, new FieldSerializer_Float(20, 8));
+            ComponentSerializer.registerFieldSerializer(new Field[]{ 
+                Vector2D.class.getDeclaredField("x"),
+                Vector2D.class.getDeclaredField("y"),
+                Transform2D.class.getDeclaredField("scalecos"),
+                Transform2D.class.getDeclaredField("scalesin"),
+                Transform2D.class.getDeclaredField("x"),
+                Transform2D.class.getDeclaredField("y"),
+                Circle.class.getDeclaredField("localRadius"),
+            }, new FieldSerializer_Double(20, 8));
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         XMLTemplateManager xmlTemplateManager = XMLTemplateManager.getInstance();
         //physics
         xmlTemplateManager.registerComponent(HitboxComponent.class, new XMLComponentConstructor<HitboxComponent>("hitbox"){

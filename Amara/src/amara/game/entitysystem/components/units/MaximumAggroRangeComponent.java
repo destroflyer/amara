@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.units;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -16,6 +17,7 @@ public class MaximumAggroRangeComponent{
     public MaximumAggroRangeComponent(){
         
     }
+    @ComponentField(type=ComponentField.Type.DISTANCE)
     private float range;
     
     public MaximumAggroRangeComponent(float range){

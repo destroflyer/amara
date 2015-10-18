@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.units;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class MovementComponent{
     public MovementComponent(int movementEntity){
         this.movementEntity = movementEntity;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int movementEntity;
 
     public int getMovementEntity(){

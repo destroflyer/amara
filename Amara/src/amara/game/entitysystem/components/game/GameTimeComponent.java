@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.game;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class GameTimeComponent{
     public GameTimeComponent(float time){
         this.time = time;
     }
+    @ComponentField(type=ComponentField.Type.TIMER)
     private float time;
 
     public float getTime(){

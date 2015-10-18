@@ -220,7 +220,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new PositionComponent(position));
             entityWrapper.setComponent(new DirectionComponent(direction));
             entityWrapper.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
-            entityWrapper.setComponent(new SetNewTargetSpellsOnCooldownComponent(new int[]{0}, new int[]{6}));
+            entityWrapper.setComponent(new SetNewTargetSpellsOnCooldownComponent(new int[]{0}, new float[]{6}));
             entityWrapper.setComponent(new TeamComponent(0));
             EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
             bounty.setComponent(new BountyGoldComponent(60));

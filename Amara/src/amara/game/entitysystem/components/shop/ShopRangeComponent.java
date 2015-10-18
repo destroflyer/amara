@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.shop;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class ShopRangeComponent{
     public ShopRangeComponent(float range){
         this.range = range;
     }
+    @ComponentField(type=ComponentField.Type.DISTANCE)
     private float range;
 
     public float getRange(){

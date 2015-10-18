@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.spells;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -21,7 +22,9 @@ public class ApplyCastedSpellComponent{
         this.casterEntityID = casterEntityID;
         this.castedSpellEntityID = castedSpellEntityID;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int casterEntityID;
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int castedSpellEntityID;
 
     public int getCasterEntityID(){

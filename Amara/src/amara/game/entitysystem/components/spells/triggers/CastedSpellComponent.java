@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.spells.triggers;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class CastedSpellComponent{
     public CastedSpellComponent(int spellEntity){
         this.spellEntity = spellEntity;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int spellEntity;
 
     public int getSpellEntity(){

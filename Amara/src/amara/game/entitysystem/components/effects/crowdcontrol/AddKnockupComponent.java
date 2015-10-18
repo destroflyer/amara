@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.effects.crowdcontrol;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class AddKnockupComponent{
     public AddKnockupComponent(int knockupEntity){
         this.knockupEntity = knockupEntity;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int knockupEntity;
 
     public int getKnockupEntity(){

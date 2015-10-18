@@ -5,25 +5,26 @@
 package amara.game.entitysystem.components.units;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
  * @author Philipp
  */
 @Serializable
-public class TargetsInAggroRangeComponent
-{
-    private int[] targets;
+public class TargetsInAggroRangeComponent{
 
-    public TargetsInAggroRangeComponent() {
+    public TargetsInAggroRangeComponent(){
         
     }
     
-    public TargetsInAggroRangeComponent(int[] targets) {
-        this.targets = targets;
+    public TargetsInAggroRangeComponent(int[] targetEntities){
+        this.targetEntities = targetEntities;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
+    private int[] targetEntities;
 
-    public int[] getTargets() {
-        return targets;
+    public int[] getTargetEntities(){
+        return targetEntities;
     }
 }

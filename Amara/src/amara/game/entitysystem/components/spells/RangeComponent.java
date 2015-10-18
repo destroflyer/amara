@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.spells;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -19,7 +20,8 @@ public class RangeComponent{
     
     public RangeComponent(float distange){
         this.distance = distange;
-    }    
+    }
+    @ComponentField(type=ComponentField.Type.DISTANCE)
     private float distance;
 
     public float getDistance(){

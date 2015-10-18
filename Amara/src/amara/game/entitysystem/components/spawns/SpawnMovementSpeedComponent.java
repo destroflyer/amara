@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.spawns;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class SpawnMovementSpeedComponent{
     public SpawnMovementSpeedComponent(float speed){
         this.speed = speed;
     }
+    @ComponentField(type=ComponentField.Type.DISTANCE)
     private float speed;
 
     public float getSpeed(){

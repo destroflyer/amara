@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.units.effecttriggers.triggers;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class RepeatingTriggerComponent{
     public RepeatingTriggerComponent(float intervalDuration){
         this.intervalDuration = intervalDuration;
     }
+    @ComponentField(type=ComponentField.Type.TIMER)
     private float intervalDuration;
 
     public float getIntervalDuration(){

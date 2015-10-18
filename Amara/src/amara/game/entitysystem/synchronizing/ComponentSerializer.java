@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.HashMap;
 import java.util.LinkedList;
 import amara.Util;
 import amara.engine.network.*;
@@ -17,6 +18,18 @@ import amara.engine.network.*;
  * @author Carl
  */
 public class ComponentSerializer{
+    
+    private static HashMap<Field, FieldSerializer> fieldSerializers = new HashMap<Field, FieldSerializer>();
+    
+    public static void registerFieldSerializer(Field[] fields, FieldSerializer fieldSerializer){
+        for(Field field : fields){
+            registerFieldSerializer(field, fieldSerializer);
+        }
+    }
+    
+    public static void registerFieldSerializer(Field field, FieldSerializer fieldSerializer){
+        fieldSerializers.put(field, fieldSerializer);
+    }
     
     public static void writeClassAndObject(BitOutputStream outputStream, Object component){
         writeClass(outputStream, component.getClass());
@@ -31,13 +44,25 @@ public class ComponentSerializer{
     }
     
     public static void writeObject(BitOutputStream outputStream, Class type, Object value){
+        writeObject(outputStream, type, value, null);
+    }
+    
+    private static void writeObject(BitOutputStream outputStream, Class type, Object value, FieldSerializer fieldSerializer){
         if(type.isArray()){
             int length = Array.getLength(value);
             outputStream.writeInteger(length);
             for(int i=0;i<length;i++){
                 Object element = Array.get(value, i);
-                writeObject(outputStream, type.getComponentType(), element);
+                if(fieldSerializer != null){
+                    fieldSerializer.writeField(outputStream, element);
+                }
+                else{
+                    writeObject(outputStream, type.getComponentType(), element);
+                }
             }
+        }
+        else if(fieldSerializer != null){
+            fieldSerializer.writeField(outputStream, value);
         }
         else if((type == boolean.class) || (type == Boolean.class)){
             outputStream.writeBoolean((Boolean) value);
@@ -73,7 +98,7 @@ public class ComponentSerializer{
             for(Field field : getAllSerializedFields(type)){
                 try{
                     Object fieldValue = field.get(value);
-                    writeObject(outputStream, field.getType(), fieldValue);
+                    writeObject(outputStream, field.getType(), fieldValue, fieldSerializers.get(field));
                 }catch(IllegalArgumentException ex){
                     ex.printStackTrace();
                 }catch(IllegalAccessException ex){
@@ -96,14 +121,27 @@ public class ComponentSerializer{
     }
     
     public static Object readObject(BitInputStream inputStream, Class type) throws IOException{
+        return readObject(inputStream, type, null);
+    }
+    
+    private static Object readObject(BitInputStream inputStream, Class type, FieldSerializer fieldSerializer) throws IOException{
         if(type.isArray()){
             int length = inputStream.readInteger();
             Object array = Array.newInstance(type.getComponentType(), length);
             for(int i=0;i<length;i++){
-                Object element = readObject(inputStream, type.getComponentType());
+                Object element;
+                if(fieldSerializer != null){
+                    element = fieldSerializer.readField(inputStream);
+                }
+                else{
+                    element = readObject(inputStream, type.getComponentType());
+                }
                 Array.set(array, i, element);
             }
             return array;
+        }
+        else if(fieldSerializer != null){
+            return fieldSerializer.readField(inputStream);
         }
         else if((type == boolean.class) || (type == Boolean.class)){
             return inputStream.readBoolean();
@@ -139,7 +177,7 @@ public class ComponentSerializer{
                 Object object = type.newInstance();
                 for(Field field : getAllSerializedFields(type)){
                     try{
-                        Object fieldValue = readObject(inputStream, field.getType());
+                        Object fieldValue = readObject(inputStream, field.getType(), fieldSerializers.get(field));
                         field.set(object, fieldValue);
                     }catch(IOException ex){
                         ex.printStackTrace();

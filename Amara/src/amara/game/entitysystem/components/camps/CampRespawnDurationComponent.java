@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.camps;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class CampRespawnDurationComponent{
     public CampRespawnDurationComponent(float duration){
         this.duration = duration;
     }
+    @ComponentField(type=ComponentField.Type.TIMER)
     private float duration;
 
     public float getDuration(){

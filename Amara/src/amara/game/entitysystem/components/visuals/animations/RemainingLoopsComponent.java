@@ -21,7 +21,6 @@ public class RemainingLoopsComponent{
         this.loopsCount = loopsCount;
     }
     private int loopsCount;
-    
 
     public int getLoopsCount(){
         return loopsCount;

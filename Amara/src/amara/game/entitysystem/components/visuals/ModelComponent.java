@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.visuals;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class ModelComponent{
     public ModelComponent(String modelSkinPath){
         this.modelSkinPath = modelSkinPath;
     }
+    @ComponentField(type=ComponentField.Type.FILEPATH)
     private String modelSkinPath;
 
     public String getModelSkinPath(){

@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.effects.spells;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class RemoveSpellEffectsComponent{
     public RemoveSpellEffectsComponent(int... spellEffectEntities){
         this.spellEffectEntities = spellEffectEntities;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int[] spellEffectEntities;
 
     public int[] getSpellEffectEntities(){

@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.objectives;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class MissingEntitiesComponent{
     public MissingEntitiesComponent(int... entities){
         this.entities = entities;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int[] entities;
 
     public int[] getEntities(){

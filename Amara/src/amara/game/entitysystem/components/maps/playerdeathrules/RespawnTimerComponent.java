@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.maps.playerdeathrules;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -21,7 +22,9 @@ public class RespawnTimerComponent{
         this.initialDuration = initialDuration;
         this.deltaDurationPerTime = deltaDurationPerTime;
     }
+    @ComponentField(type=ComponentField.Type.TIMER)
     private float initialDuration;
+    @ComponentField(type=ComponentField.Type.TIMER)
     private float deltaDurationPerTime;
 
     public float getInitialDuration(){

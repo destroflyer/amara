@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.audio;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class AudioComponent{
     public AudioComponent(String audioPath){
         this.audioPath = audioPath;
     }
+    @ComponentField(type=ComponentField.Type.FILEPATH)
     private String audioPath;
 
     public String getAudioPath(){

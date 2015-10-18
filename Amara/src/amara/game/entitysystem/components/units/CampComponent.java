@@ -6,6 +6,7 @@ package amara.game.entitysystem.components.units;
 
 import com.jme3.math.Vector2f;
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -23,6 +24,7 @@ public class CampComponent{
         this.position = position;
         this.direction = direction;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int campEntity;
     private Vector2f position;
     private Vector2f direction;

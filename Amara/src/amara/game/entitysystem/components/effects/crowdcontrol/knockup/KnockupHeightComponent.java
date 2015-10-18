@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem.components.effects.crowdcontrol.knockup;
 
-import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -21,6 +21,7 @@ public class KnockupHeightComponent{
     public KnockupHeightComponent(float height){
         this.height = height;
     }
+    @ComponentField(type=ComponentField.Type.DISTANCE)
     private float height;
 
     public float getHeight(){
