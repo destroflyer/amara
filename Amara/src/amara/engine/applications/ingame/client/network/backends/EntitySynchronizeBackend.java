@@ -28,13 +28,13 @@ public class EntitySynchronizeBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_EntityChanges){
             Message_EntityChanges message = (Message_EntityChanges) receivedMessage;
-            final EntityChange[] entityChanges = message.getEntityChanges();
+            final EntityChanges entityChanges = new EntityChanges();
+            NetworkUtil.readFromBytes(entityChanges, message.getData());
             displayApplication.enqueueTask(new Runnable(){
 
                 @Override
                 public void run(){
-                    for(int i=0;i<entityChanges.length;i++){
-                        EntityChange entityChange = entityChanges[i];
+                    for(EntityChange entityChange : entityChanges.getChanges()){
                         if(entityChange instanceof RemovedEntityChange){
                             RemovedEntityChange removedEntityChange = (RemovedEntityChange) entityChange;
                             entityWorld.removeEntity(removedEntityChange.getEntity());
@@ -45,12 +45,7 @@ public class EntitySynchronizeBackend implements MessageBackend{
                         }
                         else if(entityChange instanceof RemovedComponentChange){
                             RemovedComponentChange removedComponentChange = (RemovedComponentChange) entityChange;
-                            try{
-                                Class componentClass = Class.forName(removedComponentChange.getComponentClassName());
-                                entityWorld.removeComponent(removedComponentChange.getEntity(), componentClass);
-                            }catch(ClassNotFoundException ex){
-                                ex.printStackTrace();
-                            }
+                            entityWorld.removeComponent(removedComponentChange.getEntity(), removedComponentChange.getComponentClass());
                         }
                     }
                 }
