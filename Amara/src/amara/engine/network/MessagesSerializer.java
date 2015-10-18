@@ -141,7 +141,7 @@ public class MessagesSerializer{
                 Transform2D.class.getDeclaredField("x"),
                 Transform2D.class.getDeclaredField("y"),
                 Circle.class.getDeclaredField("localRadius"),
-            }, new FieldSerializer_Double(20, 8));
+            }, new FieldSerializer_Double(20, 11));
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
