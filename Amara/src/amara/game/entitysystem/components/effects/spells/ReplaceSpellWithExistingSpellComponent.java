@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.effects.spells;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -22,6 +23,7 @@ public class ReplaceSpellWithExistingSpellComponent{
         this.spellEntity = spellEntity;
     }
     private int spellIndex;
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int spellEntity;
 
     public int getSpellIndex(){

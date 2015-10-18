@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.effects.damage;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class ScalingAbilityPowerMagicDamageComponent{
     public ScalingAbilityPowerMagicDamageComponent(float ratio){
         this.ratio = ratio;
     }
+    @ComponentField(type=ComponentField.Type.ATTRIBUTE)
     private float ratio;
 
     public float getRatio(){

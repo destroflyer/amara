@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.buffs.areas;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class AreaSourceComponent{
     public AreaSourceComponent(int sourceEntity){
         this.sourceEntity = sourceEntity;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int sourceEntity;
 
     public int getSourceEntity(){

@@ -4,13 +4,10 @@
  */
 package amara.game.entitysystem.synchronizing;
 
-import com.jme3.network.serializing.Serializable;
-
 /**
  *
  * @author Carl
  */
-@Serializable
 public class RemovedEntityChange extends EntityChange{
 
     public RemovedEntityChange(){

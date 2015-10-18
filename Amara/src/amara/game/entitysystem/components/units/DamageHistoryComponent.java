@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.units;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -27,7 +28,9 @@ public class DamageHistoryComponent{
         MAGIC
     }
     private DamageHistoryEntry[] entries;
+    @ComponentField(type=ComponentField.Type.TIMER)
     private float firstDamageTime;
+    @ComponentField(type=ComponentField.Type.TIMER)
     private float lastDamageTime;
 
     public DamageHistoryEntry[] getEntries(){

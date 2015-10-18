@@ -4,6 +4,9 @@
  */
 package amara.engine.network;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
 
@@ -12,6 +15,23 @@ import java.net.ServerSocket;
  * @author Carl
  */
 public class NetworkUtil{
+    
+    public static byte[] writeToBytes(BitSerializable bitSerializable){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        BitOutputStream bitOutputStream = new BitOutputStream(byteArrayOutputStream);
+        bitSerializable.write(bitOutputStream);
+        bitOutputStream.close();
+        return byteArrayOutputStream.toByteArray();
+    }
+    
+    public static void readFromBytes(BitSerializable bitSerializable, byte[] bytes){
+        BitInputStream bitInputStream = new BitInputStream(new ByteArrayInputStream(bytes));
+        try{
+            bitSerializable.read(bitInputStream);
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }
     
     public static boolean isPortAvailable(int port){
         ServerSocket serverSocket = null;

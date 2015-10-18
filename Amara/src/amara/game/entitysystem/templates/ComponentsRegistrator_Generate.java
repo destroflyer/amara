@@ -6,12 +6,14 @@
 package amara.game.entitysystem.templates;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import amara.engine.files.FileManager;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
+import amara.game.entitysystem.synchronizing.*;
 
 /**
  *
@@ -41,12 +43,20 @@ public class ComponentsRegistrator_Generate{
         code = "package " + packageName + ";\n";
         code += "\n";
         code += "import com.jme3.math.Vector2f;\n";
-        code += "import com.jme3.network.serializing.Serializer;\n";
+        code += "import amara.game.entitysystem.synchronizing.BitstreamClassManager;\n";
+        code += "import amara.game.entitysystem.synchronizing.ComponentSerializer;\n";
+        code += "import amara.game.entitysystem.synchronizing.FieldSerializer;\n";
+        code += "import amara.game.entitysystem.synchronizing.fieldserializers.*;\n";
         code += "\n";
         code += "/**GENERATED**/\n";
         code += "public class ComponentsRegistrator{\n\n";
         code += "    public static void registerComponents(){\n";
         code += "        XMLTemplateManager xmlTemplateManager = XMLTemplateManager.getInstance();\n";
+        code += "        BitstreamClassManager bitstreamClassManager = BitstreamClassManager.getInstance();\n";
+        code += "        FieldSerializer componentFieldSerializer_Entity = new FieldSerializer_Integer(32);\n";
+        code += "        FieldSerializer componentFieldSerializer_Timer = new FieldSerializer_Float(20, 8);\n";
+        code += "        FieldSerializer componentFieldSerializer_Distance = new FieldSerializer_Float(20, 8);\n";
+        code += "        FieldSerializer componentFieldSerializer_Attribute = new FieldSerializer_Float(20, 8);\n";
         checkDirectory(SOURCE_DIRECTORY + PACKAGE_COMPONENTS.replace(".", "/"));
         code += "    }\n}";
         FileManager.putFileContent(SOURCE_DIRECTORY + packageName.replace(".", "/") + "/ComponentsRegistrator.java", code);
@@ -61,7 +71,38 @@ public class ComponentsRegistrator_Generate{
                     int subPackageStart = (SOURCE_DIRECTORY.length() + PACKAGE_COMPONENTS.length());
                     String subPackage = directory.substring(subPackageStart).replace("/", ".");
                     Class componentClass = Class.forName(PACKAGE_COMPONENTS + subPackage + componentClassName);
-                    code += "        Serializer.registerClass(" + componentClass.getName() + ".class);\n";
+                    code += "        bitstreamClassManager.register(" + componentClass.getName() + ".class);\n";
+                    for(Field field : componentClass.getDeclaredFields()){
+                        field.setAccessible(true);
+                        ComponentField componentField = field.getAnnotation(ComponentField.class);
+                        if(componentField != null){
+                            String fieldSerializerName = null;
+                            switch(componentField.type()){
+                                case ENTITY:
+                                    fieldSerializerName = "componentFieldSerializer_Entity";
+                                    break;
+                                
+                                case TIMER:
+                                    fieldSerializerName = "componentFieldSerializer_Timer";
+                                    break;
+                                
+                                case DISTANCE:
+                                    fieldSerializerName = "componentFieldSerializer_Distance";
+                                    break;
+                                
+                                case ATTRIBUTE:
+                                    fieldSerializerName = "componentFieldSerializer_Attribute";
+                                    break;
+                            }
+                            if(fieldSerializerName != null){
+                                code += "        try{\n";
+                                code += "            ComponentSerializer.registerFieldSerializer(" + componentClass.getName() + ".class.getDeclaredField(\"" + field.getName() + "\"), " + fieldSerializerName + ");\n";
+                                code += "        }catch(NoSuchFieldException ex){\n";
+                                code += "            ex.printStackTrace();\n";
+                                code += "        }\n";
+                            }
+                        }
+                    }
                     if(isComponentClassXMLSupported(componentClass)){
                         String elementName = componentClassName.substring(0, 1).toLowerCase() + componentClassName.substring(1, componentClassName.length() - 9);
                         code += "        xmlTemplateManager.registerComponent(" + componentClass.getName() + ".class, new XMLComponentConstructor<" + componentClass.getName() + ">(\"" + elementName + "\"){\n\n";

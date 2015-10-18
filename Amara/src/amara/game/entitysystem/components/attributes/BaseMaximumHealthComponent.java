@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.attributes;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class BaseMaximumHealthComponent{
     public BaseMaximumHealthComponent(float value){
         this.value = value;
     }
+    @ComponentField(type=ComponentField.Type.ATTRIBUTE)
     private float value;
 
     public float getValue(){

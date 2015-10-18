@@ -45,8 +45,16 @@ public class BitInputStream{
         return Float.intBitsToFloat(readBits(32));
     }
     
+    public double readDouble() throws IOException{
+        return Double.longBitsToDouble(readLongBits(64));
+    }
+    
     public int readInteger() throws IOException{
         return readBits(32);
+    }
+    
+    public long readLong() throws IOException{
+        return readLongBits(64);
     }
     
     public boolean readBoolean() throws IOException{

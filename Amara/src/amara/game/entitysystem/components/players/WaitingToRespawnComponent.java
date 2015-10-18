@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.players;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class WaitingToRespawnComponent{
     public WaitingToRespawnComponent(float remainingDuration){
         this.remainingDuration = remainingDuration;
     }
+    @ComponentField(type=ComponentField.Type.TIMER)
     private float remainingDuration;
 
     public float getRemainingDuration(){

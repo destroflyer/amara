@@ -6,7 +6,6 @@ package amara.engine.network.messages.entitysystem;
 
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
-import amara.game.entitysystem.synchronizing.EntityChange;
 
 /**
  *
@@ -19,12 +18,12 @@ public class Message_EntityChanges extends AbstractMessage{
         
     }
     
-    public Message_EntityChanges(EntityChange[] entityChanges){
-        this.entityChanges = entityChanges;
+    public Message_EntityChanges(byte[] data){
+        this.data = data;
     }
-    private EntityChange[] entityChanges;
+    private byte[] data;
 
-    public EntityChange[] getEntityChanges(){
-        return entityChanges;
+    public byte[] getData(){
+        return data;
     }
 }

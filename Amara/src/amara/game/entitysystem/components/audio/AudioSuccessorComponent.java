@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.audio;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -21,7 +22,9 @@ public class AudioSuccessorComponent{
         this.audioEntity = audioEntity;
         this.delay = delay;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int audioEntity;
+    @ComponentField(type=ComponentField.Type.TIMER)
     private float delay;
 
     public int getAudioEntity(){

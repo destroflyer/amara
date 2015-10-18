@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import com.jme3.network.Message;
 import amara.Util;
-import amara.engine.network.NetworkServer;
+import amara.engine.network.*;
 import amara.engine.network.messages.entitysystem.Message_EntityChanges;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.synchronizing.*;
@@ -26,42 +26,44 @@ public class SendEntityChangesSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        LinkedList<EntityChange> entityChanges = new LinkedList<EntityChange>();
+        LinkedList<EntityChange> changes = new LinkedList<EntityChange>();
         EntityObserver entitiesObserver = entityWorld.getOrCreateEntityObserver(this);
         for(int entity : entitiesObserver.RemovedEntities()){
-            entityChanges.add(new RemovedEntityChange(entity));
+            changes.add(new RemovedEntityChange(entity));
         }
         entitiesObserver.reset();
         ComponentMapObserver componentsObserver = entityWorld.requestObserver(this);
         for(int entity : componentsObserver.getNew().getEntitiesWithAll()){
             for(Object component : componentsObserver.getNew().getComponents(entity)){
-                entityChanges.add(new NewComponentChange(entity, component));
+                changes.add(new NewComponentChange(entity, component));
             }
         }
         for(int entity : componentsObserver.getChanged().getEntitiesWithAll()){
             for(Object component : componentsObserver.getChanged().getComponents(entity)){
-                entityChanges.add(new NewComponentChange(entity, component));
+                changes.add(new NewComponentChange(entity, component));
             }
         }
         for(int entity : componentsObserver.getRemoved().getEntitiesWithAll()){
             if(entityWorld.hasEntity(entity)){
                 for(Object component : componentsObserver.getRemoved().getComponents(entity)){
-                    entityChanges.add(new RemovedComponentChange(entity, component.getClass().getName()));
+                    changes.add(new RemovedComponentChange(entity, component.getClass()));
                 }
             }
         }
-        Message[] messages = getEntityChangesMessages(entityChanges);
+        Message[] messages = getEntityChangesMessages(changes);
         for(Message message : messages){
             networkServer.broadcastMessage(message);
         }
     }
     
-    public static Message[] getEntityChangesMessages(LinkedList<EntityChange> entityChanges){
-        LinkedList<EntityChange[]> splitChanges = Util.split(entityChanges, 1000, EntityChange.class);
+    public static Message[] getEntityChangesMessages(LinkedList<EntityChange> changes){
+        LinkedList<EntityChange[]> splitChanges = Util.split(changes, 1000, EntityChange.class);
         Message[] messages = new Message[splitChanges.size()];
         Iterator<EntityChange[]> changesIterator = splitChanges.iterator();
         for(int i=0;changesIterator.hasNext();i++){
-            messages[i] = new Message_EntityChanges(changesIterator.next());
+            EntityChanges entityChanges = new EntityChanges(changesIterator.next());
+            byte[] data = NetworkUtil.writeToBytes(entityChanges);
+            messages[i] = new Message_EntityChanges(data);
         }
         return messages;
     }

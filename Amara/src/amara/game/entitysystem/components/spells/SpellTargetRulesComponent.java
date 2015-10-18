@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.spells;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class SpellTargetRulesComponent{
     public SpellTargetRulesComponent(int targetRulesEntity){
         this.targetRulesEntity = targetRulesEntity;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int targetRulesEntity;
 
     public int getTargetRulesEntity(){

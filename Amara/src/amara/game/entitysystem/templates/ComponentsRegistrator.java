@@ -1,15 +1,28 @@
 package amara.game.entitysystem.templates;
 
 import com.jme3.math.Vector2f;
-import com.jme3.network.serializing.Serializer;
+import amara.game.entitysystem.synchronizing.BitstreamClassManager;
+import amara.game.entitysystem.synchronizing.ComponentSerializer;
+import amara.game.entitysystem.synchronizing.FieldSerializer;
+import amara.game.entitysystem.synchronizing.fieldserializers.*;
 
 /**GENERATED**/
 public class ComponentsRegistrator{
 
     public static void registerComponents(){
         XMLTemplateManager xmlTemplateManager = XMLTemplateManager.getInstance();
+        BitstreamClassManager bitstreamClassManager = BitstreamClassManager.getInstance();
+        FieldSerializer componentFieldSerializer_Entity = new FieldSerializer_Integer(32);
+        FieldSerializer componentFieldSerializer_Timer = new FieldSerializer_Float(20, 8);
+        FieldSerializer componentFieldSerializer_Distance = new FieldSerializer_Float(20, 8);
+        FieldSerializer componentFieldSerializer_Attribute = new FieldSerializer_Float(20, 8);
         //attributes
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.AbilityPowerComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.AbilityPowerComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.AbilityPowerComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.AbilityPowerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.AbilityPowerComponent>("abilityPower"){
 
             @Override
@@ -22,7 +35,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.AbilityPowerComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.ArmorComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.ArmorComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.ArmorComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.ArmorComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.ArmorComponent>("armor"){
 
             @Override
@@ -35,7 +53,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.ArmorComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.AttackDamageComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.AttackDamageComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.AttackDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.AttackDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.AttackDamageComponent>("attackDamage"){
 
             @Override
@@ -48,7 +71,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.AttackDamageComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.AttackSpeedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.AttackSpeedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.AttackSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.AttackSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.AttackSpeedComponent>("attackSpeed"){
 
             @Override
@@ -61,7 +89,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.AttackSpeedComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent>("baseAbilityPower"){
 
             @Override
@@ -74,7 +107,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BaseArmorComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseArmorComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseArmorComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseArmorComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseArmorComponent>("baseArmor"){
 
             @Override
@@ -87,7 +125,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BaseArmorComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BaseAttackDamageComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseAttackDamageComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseAttackDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseAttackDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseAttackDamageComponent>("baseAttackDamage"){
 
             @Override
@@ -100,7 +143,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BaseAttackDamageComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent>("baseAttackSpeed"){
 
             @Override
@@ -113,7 +161,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent>("baseHealthRegeneration"){
 
             @Override
@@ -126,7 +179,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent>("baseMagicResistance"){
 
             @Override
@@ -139,7 +197,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent>("baseMaximumHealth"){
 
             @Override
@@ -152,7 +215,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent>("baseWalkSpeed"){
 
             @Override
@@ -165,7 +233,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BonusFlatAbilityPowerComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusFlatAbilityPowerComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusFlatAbilityPowerComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusFlatAbilityPowerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusFlatAbilityPowerComponent>("bonusFlatAbilityPower"){
 
             @Override
@@ -178,7 +251,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BonusFlatAbilityPowerComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BonusFlatArmorComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusFlatArmorComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusFlatArmorComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusFlatArmorComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusFlatArmorComponent>("bonusFlatArmor"){
 
             @Override
@@ -191,7 +269,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BonusFlatArmorComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BonusFlatAttackDamageComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusFlatAttackDamageComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusFlatAttackDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusFlatAttackDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusFlatAttackDamageComponent>("bonusFlatAttackDamage"){
 
             @Override
@@ -204,7 +287,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BonusFlatAttackDamageComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent>("bonusFlatHealthRegeneration"){
 
             @Override
@@ -217,7 +305,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BonusFlatMagicResistanceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusFlatMagicResistanceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusFlatMagicResistanceComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusFlatMagicResistanceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusFlatMagicResistanceComponent>("bonusFlatMagicResistance"){
 
             @Override
@@ -230,7 +323,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BonusFlatMagicResistanceComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BonusFlatMaximumHealthComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusFlatMaximumHealthComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusFlatMaximumHealthComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusFlatMaximumHealthComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusFlatMaximumHealthComponent>("bonusFlatMaximumHealth"){
 
             @Override
@@ -243,7 +341,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BonusFlatMaximumHealthComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BonusFlatWalkSpeedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusFlatWalkSpeedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusFlatWalkSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusFlatWalkSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusFlatWalkSpeedComponent>("bonusFlatWalkSpeed"){
 
             @Override
@@ -256,7 +359,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BonusFlatWalkSpeedComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent>("bonusPercentageAttackSpeed"){
 
             @Override
@@ -269,7 +377,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent>("bonusPercentageCooldownSpeed"){
 
             @Override
@@ -282,7 +395,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent>("bonusPercentageWalkSpeed"){
 
             @Override
@@ -295,7 +413,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.CooldownSpeedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.CooldownSpeedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.CooldownSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.CooldownSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.CooldownSpeedComponent>("cooldownSpeed"){
 
             @Override
@@ -308,7 +431,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.CooldownSpeedComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.HealthComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.HealthComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.HealthComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.HealthComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.HealthComponent>("health"){
 
             @Override
@@ -321,7 +449,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.HealthComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.HealthRegenerationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.HealthRegenerationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.HealthRegenerationComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.HealthRegenerationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.HealthRegenerationComponent>("healthRegeneration"){
 
             @Override
@@ -334,7 +467,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.HealthRegenerationComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.MagicResistanceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.MagicResistanceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.MagicResistanceComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.MagicResistanceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.MagicResistanceComponent>("magicResistance"){
 
             @Override
@@ -347,7 +485,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.MagicResistanceComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.MaximumHealthComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.MaximumHealthComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.MaximumHealthComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.MaximumHealthComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.MaximumHealthComponent>("maximumHealth"){
 
             @Override
@@ -360,7 +503,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.MaximumHealthComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.RequestUpdateAttributesComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.RequestUpdateAttributesComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.RequestUpdateAttributesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.RequestUpdateAttributesComponent>("requestUpdateAttributes"){
 
             @Override
@@ -368,7 +511,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.RequestUpdateAttributesComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.attributes.WalkSpeedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.WalkSpeedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.WalkSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.WalkSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.WalkSpeedComponent>("walkSpeed"){
 
             @Override
@@ -382,7 +530,7 @@ public class ComponentsRegistrator{
             }
         });
         //audio
-        Serializer.registerClass(amara.game.entitysystem.components.audio.AudioComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.audio.AudioComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.audio.AudioComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.audio.AudioComponent>("audio"){
 
             @Override
@@ -391,7 +539,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.audio.AudioComponent(audioPath);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.audio.AudioLoopComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.audio.AudioLoopComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.audio.AudioLoopComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.audio.AudioLoopComponent>("audioLoop"){
 
             @Override
@@ -399,7 +547,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.audio.AudioLoopComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.audio.AudioSourceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.audio.AudioSourceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.audio.AudioSourceComponent.class.getDeclaredField("entity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.audio.AudioSourceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.audio.AudioSourceComponent>("audioSource"){
 
             @Override
@@ -408,7 +561,17 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.audio.AudioSourceComponent(entity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.audio.AudioSuccessorComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.audio.AudioSuccessorComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.audio.AudioSuccessorComponent.class.getDeclaredField("audioEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.audio.AudioSuccessorComponent.class.getDeclaredField("delay"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.audio.AudioSuccessorComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.audio.AudioSuccessorComponent>("audioSuccessor"){
 
             @Override
@@ -422,7 +585,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.audio.AudioSuccessorComponent(audioEntity, delay);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.audio.AudioVolumeComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.audio.AudioVolumeComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.audio.AudioVolumeComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.audio.AudioVolumeComponent>("audioVolume"){
 
             @Override
@@ -435,7 +598,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.audio.AudioVolumeComponent(volume);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.audio.IsAudioPausedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.audio.IsAudioPausedComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.audio.IsAudioPausedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.audio.IsAudioPausedComponent>("isAudioPaused"){
 
             @Override
@@ -443,7 +606,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.audio.IsAudioPausedComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.audio.IsAudioPlayingComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.audio.IsAudioPlayingComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.audio.IsAudioPlayingComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.audio.IsAudioPlayingComponent>("isAudioPlaying"){
 
             @Override
@@ -453,7 +616,12 @@ public class ComponentsRegistrator{
         });
         //buffs
         //areas
-        Serializer.registerClass(amara.game.entitysystem.components.buffs.areas.AreaBuffComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.areas.AreaBuffComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.areas.AreaBuffComponent.class.getDeclaredField("buffEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.areas.AreaBuffComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.areas.AreaBuffComponent>("areaBuff"){
 
             @Override
@@ -462,7 +630,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.buffs.areas.AreaBuffComponent(buffEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent.class.getDeclaredField("targetRulesEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent>("areaBuffTargetRules"){
 
             @Override
@@ -471,7 +644,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent(targetRulesEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.buffs.areas.AreaOriginComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.areas.AreaOriginComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.areas.AreaOriginComponent.class.getDeclaredField("originEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.areas.AreaOriginComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.areas.AreaOriginComponent>("areaOrigin"){
 
             @Override
@@ -480,7 +658,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.buffs.areas.AreaOriginComponent(originEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.buffs.areas.AreaSourceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.areas.AreaSourceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.areas.AreaSourceComponent.class.getDeclaredField("sourceEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.areas.AreaSourceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.areas.AreaSourceComponent>("areaSource"){
 
             @Override
@@ -489,7 +672,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.buffs.areas.AreaSourceComponent(sourceEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.buffs.ContinuousEffectComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.ContinuousEffectComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.ContinuousEffectComponent.class.getDeclaredField("effectEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.ContinuousEffectComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.ContinuousEffectComponent>("continuousEffect"){
 
             @Override
@@ -498,7 +686,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.buffs.ContinuousEffectComponent(effectEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.buffs.KeepOnDeathComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.KeepOnDeathComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.KeepOnDeathComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.KeepOnDeathComponent>("keepOnDeath"){
 
             @Override
@@ -506,7 +694,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.buffs.KeepOnDeathComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent>("onBuffRemoveEffectTriggers"){
 
             @Override
@@ -515,7 +708,17 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent(effectTriggerEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.buffs.RepeatingEffectComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.RepeatingEffectComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.RepeatingEffectComponent.class.getDeclaredField("effectEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.RepeatingEffectComponent.class.getDeclaredField("interval"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.RepeatingEffectComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.RepeatingEffectComponent>("repeatingEffect"){
 
             @Override
@@ -530,7 +733,17 @@ public class ComponentsRegistrator{
             }
         });
         //status
-        Serializer.registerClass(amara.game.entitysystem.components.buffs.status.ActiveBuffComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.status.ActiveBuffComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.status.ActiveBuffComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.status.ActiveBuffComponent.class.getDeclaredField("buffEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.status.ActiveBuffComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.status.ActiveBuffComponent>("activeBuff"){
 
             @Override
@@ -540,7 +753,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.buffs.status.ActiveBuffComponent(targetEntity, buffEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.buffs.status.BuffVisualisationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.status.BuffVisualisationComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.status.BuffVisualisationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.status.BuffVisualisationComponent>("buffVisualisation"){
 
             @Override
@@ -549,7 +762,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.buffs.status.BuffVisualisationComponent(name);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.buffs.status.RemainingBuffDurationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.status.RemainingBuffDurationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.status.RemainingBuffDurationComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.status.RemainingBuffDurationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.status.RemainingBuffDurationComponent>("remainingBuffDuration"){
 
             @Override
@@ -562,7 +780,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.buffs.status.RemainingBuffDurationComponent(remainingDuration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.buffs.status.RemoveFromTargetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.status.RemoveFromTargetComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.status.RemoveFromTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.status.RemoveFromTargetComponent>("removeFromTarget"){
 
             @Override
@@ -570,7 +788,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.buffs.status.RemoveFromTargetComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent>("timeSinceLastRepeatingEffect"){
 
             @Override
@@ -584,7 +807,7 @@ public class ComponentsRegistrator{
             }
         });
         //camps
-        Serializer.registerClass(amara.game.entitysystem.components.camps.CampHealthResetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.camps.CampHealthResetComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.camps.CampHealthResetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.camps.CampHealthResetComponent>("campHealthReset"){
 
             @Override
@@ -592,7 +815,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.camps.CampHealthResetComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.camps.CampMaximumAggroDistanceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.camps.CampMaximumAggroDistanceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.camps.CampMaximumAggroDistanceComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.camps.CampMaximumAggroDistanceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.camps.CampMaximumAggroDistanceComponent>("campMaximumAggroDistance"){
 
             @Override
@@ -605,7 +833,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.camps.CampMaximumAggroDistanceComponent(distance);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.camps.CampRemainingRespawnDurationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.camps.CampRemainingRespawnDurationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.camps.CampRemainingRespawnDurationComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.camps.CampRemainingRespawnDurationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.camps.CampRemainingRespawnDurationComponent>("campRemainingRespawnDuration"){
 
             @Override
@@ -618,7 +851,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.camps.CampRemainingRespawnDurationComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.camps.CampRespawnDurationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.camps.CampRespawnDurationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.camps.CampRespawnDurationComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.camps.CampRespawnDurationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.camps.CampRespawnDurationComponent>("campRespawnDuration"){
 
             @Override
@@ -631,7 +869,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.camps.CampRespawnDurationComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.camps.CampSpawnComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.camps.CampSpawnComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.camps.CampSpawnComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.camps.CampSpawnComponent>("campSpawn"){
 
             @Override
@@ -639,7 +877,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.camps.CampSpawnComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.camps.CampSpawnInformationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.camps.CampSpawnInformationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.camps.CampSpawnInformationComponent.class.getDeclaredField("spawnInformationEntites"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.camps.CampSpawnInformationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.camps.CampSpawnInformationComponent>("campSpawnInformation"){
 
             @Override
@@ -648,7 +891,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.camps.CampSpawnInformationComponent(spawnInformationEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.camps.CampUnionAggroComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.camps.CampUnionAggroComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.camps.CampUnionAggroComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.camps.CampUnionAggroComponent>("campUnionAggro"){
 
             @Override
@@ -657,7 +900,12 @@ public class ComponentsRegistrator{
             }
         });
         //effects
-        Serializer.registerClass(amara.game.entitysystem.components.effects.AffectedTargetsComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.AffectedTargetsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.AffectedTargetsComponent.class.getDeclaredField("targetEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.AffectedTargetsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.AffectedTargetsComponent>("affectedTargets"){
 
             @Override
@@ -667,7 +915,12 @@ public class ComponentsRegistrator{
             }
         });
         //aggro
-        Serializer.registerClass(amara.game.entitysystem.components.effects.aggro.DrawTeamAggroComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.aggro.DrawTeamAggroComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.aggro.DrawTeamAggroComponent.class.getDeclaredField("range"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.aggro.DrawTeamAggroComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.aggro.DrawTeamAggroComponent>("drawTeamAggro"){
 
             @Override
@@ -680,7 +933,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.aggro.DrawTeamAggroComponent(range);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.ApplyEffectImpactComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.ApplyEffectImpactComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.ApplyEffectImpactComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.ApplyEffectImpactComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.ApplyEffectImpactComponent>("applyEffectImpact"){
 
             @Override
@@ -690,7 +948,12 @@ public class ComponentsRegistrator{
             }
         });
         //audio
-        Serializer.registerClass(amara.game.entitysystem.components.effects.audio.PauseAudioComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.audio.PauseAudioComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.audio.PauseAudioComponent.class.getDeclaredField("audioEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.audio.PauseAudioComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.audio.PauseAudioComponent>("pauseAudio"){
 
             @Override
@@ -699,7 +962,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.audio.PauseAudioComponent(audioEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.audio.PlayAudioComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.audio.PlayAudioComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.audio.PlayAudioComponent.class.getDeclaredField("audioEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.audio.PlayAudioComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.audio.PlayAudioComponent>("playAudio"){
 
             @Override
@@ -708,7 +976,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.audio.PlayAudioComponent(audioEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.audio.StopAudioComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.audio.StopAudioComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.audio.StopAudioComponent.class.getDeclaredField("audioEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.audio.StopAudioComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.audio.StopAudioComponent>("stopAudio"){
 
             @Override
@@ -718,7 +991,17 @@ public class ComponentsRegistrator{
             }
         });
         //buffs
-        Serializer.registerClass(amara.game.entitysystem.components.effects.buffs.AddBuffComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.buffs.AddBuffComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.buffs.AddBuffComponent.class.getDeclaredField("buffEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.buffs.AddBuffComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.buffs.AddBuffComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.buffs.AddBuffComponent>("addBuff"){
 
             @Override
@@ -733,7 +1016,12 @@ public class ComponentsRegistrator{
             }
         });
         //areas
-        Serializer.registerClass(amara.game.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent.class.getDeclaredField("buffAreaEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent>("addBuffArea"){
 
             @Override
@@ -742,7 +1030,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent(buffAreaEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent.class.getDeclaredField("buffAreaEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent>("removeBuffArea"){
 
             @Override
@@ -751,7 +1044,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent(buffAreaEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.buffs.RemoveBuffComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.buffs.RemoveBuffComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.buffs.RemoveBuffComponent.class.getDeclaredField("buffEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.buffs.RemoveBuffComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.buffs.RemoveBuffComponent>("removeBuff"){
 
             @Override
@@ -761,7 +1059,12 @@ public class ComponentsRegistrator{
             }
         });
         //casts
-        Serializer.registerClass(amara.game.entitysystem.components.effects.casts.EffectCastSourceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.casts.EffectCastSourceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.casts.EffectCastSourceComponent.class.getDeclaredField("sourceEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.casts.EffectCastSourceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.casts.EffectCastSourceComponent>("effectCastSource"){
 
             @Override
@@ -770,7 +1073,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.casts.EffectCastSourceComponent(sourceEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.casts.EffectCastSourceSpellComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.casts.EffectCastSourceSpellComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.casts.EffectCastSourceSpellComponent.class.getDeclaredField("spellEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.casts.EffectCastSourceSpellComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.casts.EffectCastSourceSpellComponent>("effectCastSourceSpell"){
 
             @Override
@@ -779,7 +1087,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.casts.EffectCastSourceSpellComponent(spellEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.casts.EffectCastTargetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.casts.EffectCastTargetComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.casts.EffectCastTargetComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.casts.EffectCastTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.casts.EffectCastTargetComponent>("effectCastTarget"){
 
             @Override
@@ -789,7 +1102,12 @@ public class ComponentsRegistrator{
             }
         });
         //crowdcontrol
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.AddBindingComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.AddBindingComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.crowdcontrol.AddBindingComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.AddBindingComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.AddBindingComponent>("addBinding"){
 
             @Override
@@ -802,7 +1120,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddBindingComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent>("addBindingImmune"){
 
             @Override
@@ -815,7 +1138,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupComponent.class.getDeclaredField("knockupEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupComponent>("addKnockup"){
 
             @Override
@@ -824,7 +1152,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupComponent(knockupEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent>("addKnockupImmune"){
 
             @Override
@@ -837,7 +1170,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceComponent>("addSilence"){
 
             @Override
@@ -850,7 +1188,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent>("addSilenceImmune"){
 
             @Override
@@ -863,7 +1206,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.AddStunComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.AddStunComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.crowdcontrol.AddStunComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.AddStunComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.AddStunComponent>("addStun"){
 
             @Override
@@ -876,7 +1224,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddStunComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent>("addStunImmune"){
 
             @Override
@@ -890,7 +1243,12 @@ public class ComponentsRegistrator{
             }
         });
         //knockup
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent>("knockupDuration"){
 
             @Override
@@ -903,7 +1261,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent.class.getDeclaredField("height"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent>("knockupHeight"){
 
             @Override
@@ -916,7 +1279,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent(height);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent>("removeBinding"){
 
             @Override
@@ -924,7 +1287,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent>("removeKnockup"){
 
             @Override
@@ -932,7 +1295,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent>("removeSilence"){
 
             @Override
@@ -940,7 +1303,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.crowdcontrol.RemoveStunComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.crowdcontrol.RemoveStunComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.crowdcontrol.RemoveStunComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.crowdcontrol.RemoveStunComponent>("removeStun"){
 
             @Override
@@ -949,7 +1312,7 @@ public class ComponentsRegistrator{
             }
         });
         //damage
-        Serializer.registerClass(amara.game.entitysystem.components.effects.damage.AddTargetabilityComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.AddTargetabilityComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.AddTargetabilityComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.AddTargetabilityComponent>("addTargetability"){
 
             @Override
@@ -957,7 +1320,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.damage.AddTargetabilityComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.damage.AddVulnerabilityComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.AddVulnerabilityComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.AddVulnerabilityComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.AddVulnerabilityComponent>("addVulnerability"){
 
             @Override
@@ -965,7 +1328,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.damage.AddVulnerabilityComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent>("flatMagicDamage"){
 
             @Override
@@ -978,7 +1346,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent>("flatPhysicalDamage"){
 
             @Override
@@ -991,7 +1364,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.damage.MagicDamageComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.MagicDamageComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.MagicDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.MagicDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.MagicDamageComponent>("magicDamage"){
 
             @Override
@@ -1004,7 +1382,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.damage.MagicDamageComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent>("physicalDamage"){
 
             @Override
@@ -1017,7 +1400,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.damage.RemoveTargetabilityComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.RemoveTargetabilityComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.RemoveTargetabilityComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.RemoveTargetabilityComponent>("removeTargetability"){
 
             @Override
@@ -1025,7 +1408,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.damage.RemoveTargetabilityComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.damage.RemoveVulnerabilityComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.RemoveVulnerabilityComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.RemoveVulnerabilityComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.RemoveVulnerabilityComponent>("removeVulnerability"){
 
             @Override
@@ -1033,7 +1416,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.damage.RemoveVulnerabilityComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent.class.getDeclaredField("ratio"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent>("scalingAbilityPowerMagicDamage"){
 
             @Override
@@ -1046,7 +1434,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent(ratio);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.damage.ScalingAttackDamagePhysicalDamageComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.ScalingAttackDamagePhysicalDamageComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.ScalingAttackDamagePhysicalDamageComponent.class.getDeclaredField("ratio"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.ScalingAttackDamagePhysicalDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.ScalingAttackDamagePhysicalDamageComponent>("scalingAttackDamagePhysicalDamage"){
 
             @Override
@@ -1060,7 +1453,7 @@ public class ComponentsRegistrator{
             }
         });
         //game
-        Serializer.registerClass(amara.game.entitysystem.components.effects.game.PlayCinematicComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.game.PlayCinematicComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.game.PlayCinematicComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.game.PlayCinematicComponent>("playCinematic"){
 
             @Override
@@ -1070,8 +1463,13 @@ public class ComponentsRegistrator{
             }
         });
         //general
-        Serializer.registerClass(amara.game.entitysystem.components.effects.general.AddComponentsComponent.class);
-        Serializer.registerClass(amara.game.entitysystem.components.effects.general.AddEffectTriggersComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.general.AddComponentsComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.general.AddEffectTriggersComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.general.AddEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.general.AddEffectTriggersComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.general.AddEffectTriggersComponent>("addEffectTriggers"){
 
             @Override
@@ -1080,8 +1478,13 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.general.AddEffectTriggersComponent(effectTriggerEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.general.RemoveComponentsComponent.class);
-        Serializer.registerClass(amara.game.entitysystem.components.effects.general.RemoveEffectTriggersComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.general.RemoveComponentsComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.general.RemoveEffectTriggersComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.general.RemoveEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.general.RemoveEffectTriggersComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.general.RemoveEffectTriggersComponent>("removeEffectTriggers"){
 
             @Override
@@ -1090,7 +1493,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.general.RemoveEffectTriggersComponent(effectTriggerEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.general.RemoveEntityComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.general.RemoveEntityComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.general.RemoveEntityComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.general.RemoveEntityComponent>("removeEntity"){
 
             @Override
@@ -1099,7 +1502,12 @@ public class ComponentsRegistrator{
             }
         });
         //heals
-        Serializer.registerClass(amara.game.entitysystem.components.effects.heals.FlatHealComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.heals.FlatHealComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.heals.FlatHealComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.heals.FlatHealComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.heals.FlatHealComponent>("flatHeal"){
 
             @Override
@@ -1112,7 +1520,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.heals.FlatHealComponent(value);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.heals.HealComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.heals.HealComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.heals.HealComponent.class.getDeclaredField("value"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.heals.HealComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.heals.HealComponent>("heal"){
 
             @Override
@@ -1126,7 +1539,12 @@ public class ComponentsRegistrator{
             }
         });
         //movement
-        Serializer.registerClass(amara.game.entitysystem.components.effects.movement.MoveComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.movement.MoveComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.movement.MoveComponent.class.getDeclaredField("movementEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.movement.MoveComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.movement.MoveComponent>("move"){
 
             @Override
@@ -1135,7 +1553,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.movement.MoveComponent(movementEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.movement.StopComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.movement.StopComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.movement.StopComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.movement.StopComponent>("stop"){
 
             @Override
@@ -1143,7 +1561,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.movement.StopComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.movement.TeleportComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.movement.TeleportComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.movement.TeleportComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.movement.TeleportComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.movement.TeleportComponent>("teleport"){
 
             @Override
@@ -1153,7 +1576,7 @@ public class ComponentsRegistrator{
             }
         });
         //physics
-        Serializer.registerClass(amara.game.entitysystem.components.effects.physics.ActivateHitboxComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.physics.ActivateHitboxComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.physics.ActivateHitboxComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.physics.ActivateHitboxComponent>("activateHitbox"){
 
             @Override
@@ -1161,7 +1584,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.physics.ActivateHitboxComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.physics.DeactivateHitboxComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.physics.DeactivateHitboxComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.physics.DeactivateHitboxComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.physics.DeactivateHitboxComponent>("deactivateHitbox"){
 
             @Override
@@ -1169,7 +1592,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.physics.DeactivateHitboxComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.PrepareEffectComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.PrepareEffectComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.PrepareEffectComponent.class.getDeclaredField("effectEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.PrepareEffectComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.PrepareEffectComponent>("prepareEffect"){
 
             @Override
@@ -1178,7 +1606,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.PrepareEffectComponent(effectEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.RemainingEffectDelayComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.RemainingEffectDelayComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.RemainingEffectDelayComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.RemainingEffectDelayComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.RemainingEffectDelayComponent>("remainingEffectDelay"){
 
             @Override
@@ -1192,7 +1625,12 @@ public class ComponentsRegistrator{
             }
         });
         //spawns
-        Serializer.registerClass(amara.game.entitysystem.components.effects.spawns.SpawnComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.spawns.SpawnComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.spawns.SpawnComponent.class.getDeclaredField("spawnInformationEntites"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.spawns.SpawnComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.spawns.SpawnComponent>("spawn"){
 
             @Override
@@ -1202,7 +1640,12 @@ public class ComponentsRegistrator{
             }
         });
         //spells
-        Serializer.registerClass(amara.game.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent.class.getDeclaredField("spellEffectEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent>("addAutoAttackSpellEffects"){
 
             @Override
@@ -1211,7 +1654,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent(spellEffectEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.spells.RemoveSpellEffectsComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.spells.RemoveSpellEffectsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.spells.RemoveSpellEffectsComponent.class.getDeclaredField("spellEffectEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.spells.RemoveSpellEffectsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.spells.RemoveSpellEffectsComponent>("removeSpellEffects"){
 
             @Override
@@ -1220,7 +1668,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.spells.RemoveSpellEffectsComponent(spellEffectEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent.class.getDeclaredField("spellEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent>("replaceSpellWithExistingSpell"){
 
             @Override
@@ -1234,7 +1687,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent(spellIndex, spellEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent>("replaceSpellWithNewSpell"){
 
             @Override
@@ -1248,7 +1701,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent(spellIndex, newSpellTemplate);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.spells.TriggerSpellEffectsComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.spells.TriggerSpellEffectsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.spells.TriggerSpellEffectsComponent.class.getDeclaredField("spellEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.spells.TriggerSpellEffectsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.spells.TriggerSpellEffectsComponent>("triggerSpellEffects"){
 
             @Override
@@ -1258,7 +1716,12 @@ public class ComponentsRegistrator{
             }
         });
         //visuals
-        Serializer.registerClass(amara.game.entitysystem.components.effects.visuals.PlayAnimationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.visuals.PlayAnimationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.visuals.PlayAnimationComponent.class.getDeclaredField("animationEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.visuals.PlayAnimationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.visuals.PlayAnimationComponent>("playAnimation"){
 
             @Override
@@ -1267,7 +1730,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.visuals.PlayAnimationComponent(animationEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.effects.visuals.StopAnimationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.visuals.StopAnimationComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.visuals.StopAnimationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.visuals.StopAnimationComponent>("stopAnimation"){
 
             @Override
@@ -1276,7 +1739,7 @@ public class ComponentsRegistrator{
             }
         });
         //game
-        Serializer.registerClass(amara.game.entitysystem.components.game.CinematicComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.game.CinematicComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.game.CinematicComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.game.CinematicComponent>("cinematic"){
 
             @Override
@@ -1285,7 +1748,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.game.CinematicComponent(cinematicClassName);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.game.GameSpeedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.game.GameSpeedComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.game.GameSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.game.GameSpeedComponent>("gameSpeed"){
 
             @Override
@@ -1298,7 +1761,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.game.GameSpeedComponent(speed);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.game.GameTimeComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.game.GameTimeComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.game.GameTimeComponent.class.getDeclaredField("time"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.game.GameTimeComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.game.GameTimeComponent>("gameTime"){
 
             @Override
@@ -1312,7 +1780,7 @@ public class ComponentsRegistrator{
             }
         });
         //general
-        Serializer.registerClass(amara.game.entitysystem.components.general.DescriptionComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.general.DescriptionComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.general.DescriptionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.general.DescriptionComponent>("description"){
 
             @Override
@@ -1321,7 +1789,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.general.DescriptionComponent(description);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.general.NameComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.general.NameComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.general.NameComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.general.NameComponent>("name"){
 
             @Override
@@ -1331,7 +1799,17 @@ public class ComponentsRegistrator{
             }
         });
         //input
-        Serializer.registerClass(amara.game.entitysystem.components.input.CastSpellComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.input.CastSpellComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.input.CastSpellComponent.class.getDeclaredField("spellEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.input.CastSpellComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.input.CastSpellComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.input.CastSpellComponent>("castSpell"){
 
             @Override
@@ -1342,7 +1820,12 @@ public class ComponentsRegistrator{
             }
         });
         //items
-        Serializer.registerClass(amara.game.entitysystem.components.items.InventoryComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.items.InventoryComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.items.InventoryComponent.class.getDeclaredField("itemEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.items.InventoryComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.items.InventoryComponent>("inventory"){
 
             @Override
@@ -1351,7 +1834,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.items.InventoryComponent(itemEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.items.IsSellableComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.items.IsSellableComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.items.IsSellableComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.items.IsSellableComponent>("isSellable"){
 
             @Override
@@ -1364,7 +1847,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.items.IsSellableComponent(gold);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.items.ItemActiveComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.items.ItemActiveComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.items.ItemActiveComponent.class.getDeclaredField("spellEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.items.ItemActiveComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.items.ItemActiveComponent>("itemActive"){
 
             @Override
@@ -1373,7 +1861,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.items.ItemActiveComponent(spellEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.items.ItemIDComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.items.ItemIDComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.items.ItemIDComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.items.ItemIDComponent>("itemID"){
 
             @Override
@@ -1382,7 +1870,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.items.ItemIDComponent(id);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.items.ItemRecipeComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.items.ItemRecipeComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.items.ItemRecipeComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.items.ItemRecipeComponent>("itemRecipe"){
 
             @Override
@@ -1404,7 +1892,12 @@ public class ComponentsRegistrator{
             }
         });
         //maps
-        Serializer.registerClass(amara.game.entitysystem.components.maps.MapObjectiveComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.maps.MapObjectiveComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.maps.MapObjectiveComponent.class.getDeclaredField("objectiveEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.maps.MapObjectiveComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.maps.MapObjectiveComponent>("mapObjective"){
 
             @Override
@@ -1414,7 +1907,7 @@ public class ComponentsRegistrator{
             }
         });
         //playerdeathrules
-        Serializer.registerClass(amara.game.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent>("respawnPlayers"){
 
             @Override
@@ -1422,7 +1915,17 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent.class.getDeclaredField("initialDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent.class.getDeclaredField("deltaDurationPerTime"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent>("respawnTimer"){
 
             @Override
@@ -1440,7 +1943,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent(initialDuration, deltaDurationPerTime);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.maps.PlayerDeathRulesComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.maps.PlayerDeathRulesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.maps.PlayerDeathRulesComponent.class.getDeclaredField("rulesEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.maps.PlayerDeathRulesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.maps.PlayerDeathRulesComponent>("playerDeathRules"){
 
             @Override
@@ -1450,7 +1958,7 @@ public class ComponentsRegistrator{
             }
         });
         //movements
-        Serializer.registerClass(amara.game.entitysystem.components.movements.DisplacementComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.movements.DisplacementComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.DisplacementComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.DisplacementComponent>("displacement"){
 
             @Override
@@ -1458,7 +1966,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.DisplacementComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.movements.DistanceLimitComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.movements.DistanceLimitComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.movements.DistanceLimitComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.DistanceLimitComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.DistanceLimitComponent>("distanceLimit"){
 
             @Override
@@ -1471,7 +1984,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.DistanceLimitComponent(distance);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.movements.MovedDistanceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.movements.MovedDistanceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.movements.MovedDistanceComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovedDistanceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovedDistanceComponent>("movedDistance"){
 
             @Override
@@ -1484,7 +2002,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.MovedDistanceComponent(distance);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.movements.MovementAnimationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.movements.MovementAnimationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.movements.MovementAnimationComponent.class.getDeclaredField("animationEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovementAnimationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovementAnimationComponent>("movementAnimation"){
 
             @Override
@@ -1493,7 +2016,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.MovementAnimationComponent(animationEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.movements.MovementDirectionComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.movements.MovementDirectionComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovementDirectionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovementDirectionComponent>("movementDirection"){
 
             @Override
@@ -1505,7 +2028,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.MovementDirectionComponent(direction);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.movements.MovementIsCancelableComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.movements.MovementIsCancelableComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovementIsCancelableComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovementIsCancelableComponent>("movementIsCancelable"){
 
             @Override
@@ -1513,7 +2036,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.MovementIsCancelableComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.movements.MovementLocalAvoidanceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.movements.MovementLocalAvoidanceComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovementLocalAvoidanceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovementLocalAvoidanceComponent>("movementLocalAvoidance"){
 
             @Override
@@ -1521,7 +2044,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.MovementLocalAvoidanceComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.movements.MovementPathfindingComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.movements.MovementPathfindingComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovementPathfindingComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovementPathfindingComponent>("movementPathfinding"){
 
             @Override
@@ -1529,7 +2052,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.MovementPathfindingComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.movements.MovementSpeedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.movements.MovementSpeedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.movements.MovementSpeedComponent.class.getDeclaredField("speed"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovementSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovementSpeedComponent>("movementSpeed"){
 
             @Override
@@ -1542,7 +2070,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.MovementSpeedComponent(speed);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.movements.MovementTargetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.movements.MovementTargetComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.movements.MovementTargetComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovementTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovementTargetComponent>("movementTarget"){
 
             @Override
@@ -1551,7 +2084,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.MovementTargetComponent(targetEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.movements.MovementTargetReachedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.movements.MovementTargetReachedComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovementTargetReachedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovementTargetReachedComponent>("movementTargetReached"){
 
             @Override
@@ -1559,7 +2092,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.MovementTargetReachedComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.movements.MovementTargetSufficientDistanceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.movements.MovementTargetSufficientDistanceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.movements.MovementTargetSufficientDistanceComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.MovementTargetSufficientDistanceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.MovementTargetSufficientDistanceComponent>("movementTargetSufficientDistance"){
 
             @Override
@@ -1572,7 +2110,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.movements.MovementTargetSufficientDistanceComponent(distance);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.movements.WalkMovementComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.movements.WalkMovementComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.movements.WalkMovementComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.movements.WalkMovementComponent>("walkMovement"){
 
             @Override
@@ -1581,7 +2119,7 @@ public class ComponentsRegistrator{
             }
         });
         //objectives
-        Serializer.registerClass(amara.game.entitysystem.components.objectives.FinishedObjectiveComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.objectives.FinishedObjectiveComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.objectives.FinishedObjectiveComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.objectives.FinishedObjectiveComponent>("finishedObjective"){
 
             @Override
@@ -1589,7 +2127,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.objectives.FinishedObjectiveComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.objectives.MissingEntitiesComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.objectives.MissingEntitiesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.objectives.MissingEntitiesComponent.class.getDeclaredField("entities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.objectives.MissingEntitiesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.objectives.MissingEntitiesComponent>("missingEntities"){
 
             @Override
@@ -1598,7 +2141,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.objectives.MissingEntitiesComponent(entities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.objectives.OpenObjectiveComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.objectives.OpenObjectiveComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.objectives.OpenObjectiveComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.objectives.OpenObjectiveComponent>("openObjective"){
 
             @Override
@@ -1606,7 +2149,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.objectives.OpenObjectiveComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.objectives.OrObjectivesComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.objectives.OrObjectivesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.objectives.OrObjectivesComponent.class.getDeclaredField("objectiveEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.objectives.OrObjectivesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.objectives.OrObjectivesComponent>("orObjectives"){
 
             @Override
@@ -1616,8 +2164,8 @@ public class ComponentsRegistrator{
             }
         });
         //physics
-        Serializer.registerClass(amara.game.entitysystem.components.physics.CollisionGroupComponent.class);
-        Serializer.registerClass(amara.game.entitysystem.components.physics.DirectionComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.physics.CollisionGroupComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.physics.DirectionComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.physics.DirectionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.physics.DirectionComponent>("direction"){
 
             @Override
@@ -1630,7 +2178,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.physics.DirectionComponent(radian);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.physics.HitboxActiveComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.physics.HitboxActiveComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.physics.HitboxActiveComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.physics.HitboxActiveComponent>("hitboxActive"){
 
             @Override
@@ -1638,8 +2186,8 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.physics.HitboxActiveComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.physics.HitboxComponent.class);
-        Serializer.registerClass(amara.game.entitysystem.components.physics.IntersectionPushComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.physics.HitboxComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.physics.IntersectionPushComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.physics.IntersectionPushComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.physics.IntersectionPushComponent>("intersectionPush"){
 
             @Override
@@ -1647,7 +2195,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.physics.IntersectionPushComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.physics.PositionComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.physics.PositionComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.physics.PositionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.physics.PositionComponent>("position"){
 
             @Override
@@ -1659,7 +2207,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.physics.PositionComponent(position);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.physics.RemoveOnMapLeaveComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.physics.RemoveOnMapLeaveComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.physics.RemoveOnMapLeaveComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.physics.RemoveOnMapLeaveComponent>("removeOnMapLeave"){
 
             @Override
@@ -1667,7 +2215,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.physics.RemoveOnMapLeaveComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.physics.ScaleComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.physics.ScaleComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.physics.ScaleComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.physics.ScaleComponent>("scale"){
 
             @Override
@@ -1681,7 +2229,7 @@ public class ComponentsRegistrator{
             }
         });
         //players
-        Serializer.registerClass(amara.game.entitysystem.components.players.ClientComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.players.ClientComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.players.ClientComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.players.ClientComponent>("client"){
 
             @Override
@@ -1694,7 +2242,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.players.ClientComponent(clientID);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.players.PlayerIndexComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.players.PlayerIndexComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.players.PlayerIndexComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.players.PlayerIndexComponent>("playerIndex"){
 
             @Override
@@ -1707,7 +2255,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.players.PlayerIndexComponent(index);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.players.RespawnComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.players.RespawnComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.players.RespawnComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.players.RespawnComponent>("respawn"){
 
             @Override
@@ -1715,7 +2263,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.players.RespawnComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.players.SelectedUnitComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.players.SelectedUnitComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.players.SelectedUnitComponent.class.getDeclaredField("entity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.players.SelectedUnitComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.players.SelectedUnitComponent>("selectedUnit"){
 
             @Override
@@ -1724,7 +2277,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.players.SelectedUnitComponent(entity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.players.WaitingToRespawnComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.players.WaitingToRespawnComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.players.WaitingToRespawnComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.players.WaitingToRespawnComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.players.WaitingToRespawnComponent>("waitingToRespawn"){
 
             @Override
@@ -1738,7 +2296,12 @@ public class ComponentsRegistrator{
             }
         });
         //shop
-        Serializer.registerClass(amara.game.entitysystem.components.shop.ShopRangeComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.shop.ShopRangeComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.shop.ShopRangeComponent.class.getDeclaredField("range"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.shop.ShopRangeComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.shop.ShopRangeComponent>("shopRange"){
 
             @Override
@@ -1752,7 +2315,7 @@ public class ComponentsRegistrator{
             }
         });
         //spawns
-        Serializer.registerClass(amara.game.entitysystem.components.spawns.RelativeSpawnPositionComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spawns.RelativeSpawnPositionComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spawns.RelativeSpawnPositionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spawns.RelativeSpawnPositionComponent>("relativeSpawnPosition"){
 
             @Override
@@ -1764,7 +2327,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spawns.RelativeSpawnPositionComponent(position);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spawns.SpawnAttackMoveComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spawns.SpawnAttackMoveComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spawns.SpawnAttackMoveComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spawns.SpawnAttackMoveComponent>("spawnAttackMove"){
 
             @Override
@@ -1772,7 +2335,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spawns.SpawnAttackMoveComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spawns.SpawnMovementAnimationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spawns.SpawnMovementAnimationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spawns.SpawnMovementAnimationComponent.class.getDeclaredField("animationEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spawns.SpawnMovementAnimationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spawns.SpawnMovementAnimationComponent>("spawnMovementAnimation"){
 
             @Override
@@ -1781,7 +2349,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spawns.SpawnMovementAnimationComponent(animationEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spawns.SpawnMovementSpeedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spawns.SpawnMovementSpeedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spawns.SpawnMovementSpeedComponent.class.getDeclaredField("speed"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spawns.SpawnMovementSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spawns.SpawnMovementSpeedComponent>("spawnMovementSpeed"){
 
             @Override
@@ -1794,7 +2367,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spawns.SpawnMovementSpeedComponent(speed);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spawns.SpawnMoveToTargetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spawns.SpawnMoveToTargetComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spawns.SpawnMoveToTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spawns.SpawnMoveToTargetComponent>("spawnMoveToTarget"){
 
             @Override
@@ -1802,9 +2375,19 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spawns.SpawnMoveToTargetComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spawns.SpawnTemplateComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spawns.SpawnTemplateComponent.class);
         //spells
-        Serializer.registerClass(amara.game.entitysystem.components.spells.ApplyCastedSpellComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.ApplyCastedSpellComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.ApplyCastedSpellComponent.class.getDeclaredField("casterEntityID"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.ApplyCastedSpellComponent.class.getDeclaredField("castedSpellEntityID"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.ApplyCastedSpellComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.ApplyCastedSpellComponent>("applyCastedSpell"){
 
             @Override
@@ -1822,7 +2405,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.ApplyCastedSpellComponent(casterEntityID, castedSpellEntityID);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.BaseCooldownComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.BaseCooldownComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.BaseCooldownComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.BaseCooldownComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.BaseCooldownComponent>("baseCooldown"){
 
             @Override
@@ -1835,7 +2423,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.BaseCooldownComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.CastAnimationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.CastAnimationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.CastAnimationComponent.class.getDeclaredField("animationEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.CastAnimationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.CastAnimationComponent>("castAnimation"){
 
             @Override
@@ -1844,7 +2437,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.CastAnimationComponent(animationEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.CastCancelableComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.CastCancelableComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.CastCancelableComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.CastCancelableComponent>("castCancelable"){
 
             @Override
@@ -1852,7 +2445,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.CastCancelableComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.CastCancelActionComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.CastCancelActionComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.CastCancelActionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.CastCancelActionComponent>("castCancelAction"){
 
             @Override
@@ -1860,7 +2453,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.CastCancelActionComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.CastDurationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.CastDurationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.CastDurationComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.CastDurationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.CastDurationComponent>("castDuration"){
 
             @Override
@@ -1873,7 +2471,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.CastDurationComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.CastTurnToTargetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.CastTurnToTargetComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.CastTurnToTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.CastTurnToTargetComponent>("castTurnToTarget"){
 
             @Override
@@ -1881,8 +2479,13 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.CastTurnToTargetComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.CastTypeComponent.class);
-        Serializer.registerClass(amara.game.entitysystem.components.spells.CooldownComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.CastTypeComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.CooldownComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.CooldownComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.CooldownComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.CooldownComponent>("cooldown"){
 
             @Override
@@ -1895,7 +2498,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.CooldownComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.InstantEffectTriggersComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.InstantEffectTriggersComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.InstantEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.InstantEffectTriggersComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.InstantEffectTriggersComponent>("instantEffectTriggers"){
 
             @Override
@@ -1905,7 +2513,7 @@ public class ComponentsRegistrator{
             }
         });
         //placeholders
-        Serializer.registerClass(amara.game.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent>("sourceMovementDirection"){
 
             @Override
@@ -1918,7 +2526,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent(angle_Degrees);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent>("targetedMovementDirection"){
 
             @Override
@@ -1931,7 +2539,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent(angle_Degrees);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent>("targetedMovementTarget"){
 
             @Override
@@ -1939,7 +2547,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent>("teleportToTargetPosition"){
 
             @Override
@@ -1947,7 +2555,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent>("triggerCastedSpellEffects"){
 
             @Override
@@ -1955,7 +2563,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.RangeComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.RangeComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.RangeComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.RangeComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.RangeComponent>("range"){
 
             @Override
@@ -1968,7 +2581,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.RangeComponent(distange);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.RemainingCooldownComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.RemainingCooldownComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.RemainingCooldownComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.RemainingCooldownComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.RemainingCooldownComponent>("remainingCooldown"){
 
             @Override
@@ -1981,7 +2599,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.RemainingCooldownComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.SpellTargetRulesComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.SpellTargetRulesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.SpellTargetRulesComponent.class.getDeclaredField("targetRulesEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.SpellTargetRulesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.SpellTargetRulesComponent>("spellTargetRules"){
 
             @Override
@@ -1990,7 +2613,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.SpellTargetRulesComponent(targetRulesEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.SpellUpgradesComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.SpellUpgradesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.SpellUpgradesComponent.class.getDeclaredField("spellsEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.SpellUpgradesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.SpellUpgradesComponent>("spellUpgrades"){
 
             @Override
@@ -1999,7 +2627,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.SpellUpgradesComponent(spellsEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.SpellVisualisationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.SpellVisualisationComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.SpellVisualisationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.SpellVisualisationComponent>("spellVisualisation"){
 
             @Override
@@ -2008,7 +2636,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.SpellVisualisationComponent(name);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.StopAfterCastingComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.StopAfterCastingComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.StopAfterCastingComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.StopAfterCastingComponent>("stopAfterCasting"){
 
             @Override
@@ -2016,7 +2644,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.StopAfterCastingComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.StopBeforeCastingComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.StopBeforeCastingComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.StopBeforeCastingComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.StopBeforeCastingComponent>("stopBeforeCasting"){
 
             @Override
@@ -2025,7 +2653,12 @@ public class ComponentsRegistrator{
             }
         });
         //triggers
-        Serializer.registerClass(amara.game.entitysystem.components.spells.triggers.CastedEffectTriggersComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.triggers.CastedEffectTriggersComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.triggers.CastedEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.triggers.CastedEffectTriggersComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.triggers.CastedEffectTriggersComponent>("castedEffectTriggers"){
 
             @Override
@@ -2034,7 +2667,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.spells.triggers.CastedEffectTriggersComponent(effectTriggerEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.spells.triggers.CastedSpellComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.triggers.CastedSpellComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.triggers.CastedSpellComponent.class.getDeclaredField("spellEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.triggers.CastedSpellComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.triggers.CastedSpellComponent>("castedSpell"){
 
             @Override
@@ -2044,7 +2682,7 @@ public class ComponentsRegistrator{
             }
         });
         //targets
-        Serializer.registerClass(amara.game.entitysystem.components.targets.AcceptAlliesComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.targets.AcceptAlliesComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.targets.AcceptAlliesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.targets.AcceptAlliesComponent>("acceptAllies"){
 
             @Override
@@ -2052,7 +2690,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.targets.AcceptAlliesComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.targets.AcceptEnemiesComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.targets.AcceptEnemiesComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.targets.AcceptEnemiesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.targets.AcceptEnemiesComponent>("acceptEnemies"){
 
             @Override
@@ -2060,7 +2698,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.targets.AcceptEnemiesComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.targets.RequireProjectileComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.targets.RequireProjectileComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.targets.RequireProjectileComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.targets.RequireProjectileComponent>("requireProjectile"){
 
             @Override
@@ -2069,7 +2707,12 @@ public class ComponentsRegistrator{
             }
         });
         //units
-        Serializer.registerClass(amara.game.entitysystem.components.units.AggroResetTimerComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.AggroResetTimerComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.AggroResetTimerComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.AggroResetTimerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.AggroResetTimerComponent>("aggroResetTimer"){
 
             @Override
@@ -2082,7 +2725,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.AggroResetTimerComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.AggroTargetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.AggroTargetComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.AggroTargetComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.AggroTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.AggroTargetComponent>("aggroTarget"){
 
             @Override
@@ -2092,7 +2740,12 @@ public class ComponentsRegistrator{
             }
         });
         //animations
-        Serializer.registerClass(amara.game.entitysystem.components.units.animations.AutoAttackAnimationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.animations.AutoAttackAnimationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.animations.AutoAttackAnimationComponent.class.getDeclaredField("animationEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.animations.AutoAttackAnimationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.animations.AutoAttackAnimationComponent>("autoAttackAnimation"){
 
             @Override
@@ -2101,7 +2754,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.animations.AutoAttackAnimationComponent(animationEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.animations.DeathAnimationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.animations.DeathAnimationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.animations.DeathAnimationComponent.class.getDeclaredField("animationEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.animations.DeathAnimationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.animations.DeathAnimationComponent>("deathAnimation"){
 
             @Override
@@ -2110,7 +2768,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.animations.DeathAnimationComponent(animationEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.animations.IdleAnimationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.animations.IdleAnimationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.animations.IdleAnimationComponent.class.getDeclaredField("animationEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.animations.IdleAnimationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.animations.IdleAnimationComponent>("idleAnimation"){
 
             @Override
@@ -2119,7 +2782,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.animations.IdleAnimationComponent(animationEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.animations.WalkAnimationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.animations.WalkAnimationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.animations.WalkAnimationComponent.class.getDeclaredField("animationEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.animations.WalkAnimationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.animations.WalkAnimationComponent>("walkAnimation"){
 
             @Override
@@ -2128,7 +2796,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.animations.WalkAnimationComponent(animationEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.AttackMoveComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.AttackMoveComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.AttackMoveComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.AttackMoveComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.AttackMoveComponent>("attackMove"){
 
             @Override
@@ -2137,7 +2810,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.AttackMoveComponent(targetEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.AutoAggroComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.AutoAggroComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.AutoAggroComponent.class.getDeclaredField("range"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.AutoAggroComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.AutoAggroComponent>("autoAggro"){
 
             @Override
@@ -2150,7 +2828,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.AutoAggroComponent(range);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.AutoAttackComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.AutoAttackComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.AutoAttackComponent.class.getDeclaredField("autoAttackEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.AutoAttackComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.AutoAttackComponent>("autoAttack"){
 
             @Override
@@ -2160,7 +2843,17 @@ public class ComponentsRegistrator{
             }
         });
         //bounties
-        Serializer.registerClass(amara.game.entitysystem.components.units.bounties.BountyBuffComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.bounties.BountyBuffComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.bounties.BountyBuffComponent.class.getDeclaredField("buffEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.bounties.BountyBuffComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.bounties.BountyBuffComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.bounties.BountyBuffComponent>("bountyBuff"){
 
             @Override
@@ -2174,7 +2867,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.bounties.BountyBuffComponent(buffEntity, duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.bounties.BountyExperienceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.bounties.BountyExperienceComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.bounties.BountyExperienceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.bounties.BountyExperienceComponent>("bountyExperience"){
 
             @Override
@@ -2187,7 +2880,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.bounties.BountyExperienceComponent(experience);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.bounties.BountyGoldComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.bounties.BountyGoldComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.bounties.BountyGoldComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.bounties.BountyGoldComponent>("bountyGold"){
 
             @Override
@@ -2200,7 +2893,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.bounties.BountyGoldComponent(gold);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.BountyComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.BountyComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.BountyComponent.class.getDeclaredField("bountyEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.BountyComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.BountyComponent>("bounty"){
 
             @Override
@@ -2209,7 +2907,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.BountyComponent(bountyEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.CampComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.CampComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.CampComponent.class.getDeclaredField("campEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.CampComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.CampComponent>("camp"){
 
             @Override
@@ -2226,7 +2929,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.CampComponent(campEntity, position, direction);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.CampResetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.CampResetComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.CampResetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.CampResetComponent>("campReset"){
 
             @Override
@@ -2234,7 +2937,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.CampResetComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent>("castSpellOnCooldownWhileAttacking"){
 
             @Override
@@ -2248,7 +2951,12 @@ public class ComponentsRegistrator{
             }
         });
         //crowdcontrol
-        Serializer.registerClass(amara.game.entitysystem.components.units.crowdcontrol.IsBindedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.crowdcontrol.IsBindedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.crowdcontrol.IsBindedComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.crowdcontrol.IsBindedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.crowdcontrol.IsBindedComponent>("isBinded"){
 
             @Override
@@ -2261,7 +2969,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsBindedComponent(remainingDuration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent>("isBindedImmune"){
 
             @Override
@@ -2274,7 +2987,17 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent(remainingDuration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedComponent.class.getDeclaredField("knockupEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedComponent>("isKnockuped"){
 
             @Override
@@ -2288,7 +3011,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedComponent(knockupEntity, remainingDuration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent>("isKnockupedImmune"){
 
             @Override
@@ -2301,7 +3029,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent(remainingDuration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.crowdcontrol.IsSilencedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.crowdcontrol.IsSilencedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.crowdcontrol.IsSilencedComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.crowdcontrol.IsSilencedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.crowdcontrol.IsSilencedComponent>("isSilenced"){
 
             @Override
@@ -2314,7 +3047,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsSilencedComponent(remainingDuration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent>("isSilencedImmune"){
 
             @Override
@@ -2327,7 +3065,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent(remainingDuration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.crowdcontrol.IsStunnedComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.crowdcontrol.IsStunnedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.crowdcontrol.IsStunnedComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.crowdcontrol.IsStunnedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.crowdcontrol.IsStunnedComponent>("isStunned"){
 
             @Override
@@ -2340,7 +3083,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsStunnedComponent(remainingDuration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent>("isStunnedImmune"){
 
             @Override
@@ -2353,7 +3101,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent(remainingDuration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.CurrentActionEffectCastsComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.CurrentActionEffectCastsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.CurrentActionEffectCastsComponent.class.getDeclaredField("effectCastEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.CurrentActionEffectCastsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.CurrentActionEffectCastsComponent>("currentActionEffectCasts"){
 
             @Override
@@ -2362,10 +3115,20 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.CurrentActionEffectCastsComponent(effectCastEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.DamageHistoryComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.DamageHistoryComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.DamageHistoryComponent.class.getDeclaredField("firstDamageTime"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.DamageHistoryComponent.class.getDeclaredField("lastDamageTime"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         //effecttriggers
         //targets
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent>("casterTarget"){
 
             @Override
@@ -2373,7 +3136,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent.class.getDeclaredField("targetEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent>("customTarget"){
 
             @Override
@@ -2382,7 +3150,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent(targetEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent>("sourceTarget"){
 
             @Override
@@ -2390,7 +3158,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent>("targetTarget"){
 
             @Override
@@ -2398,7 +3166,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.TriggerDelayComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.TriggerDelayComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.effecttriggers.TriggerDelayComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.TriggerDelayComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.TriggerDelayComponent>("triggerDelay"){
 
             @Override
@@ -2411,7 +3184,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.TriggerDelayComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.TriggeredEffectComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.TriggeredEffectComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.effecttriggers.TriggeredEffectComponent.class.getDeclaredField("effectEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.TriggeredEffectComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.TriggeredEffectComponent>("triggeredEffect"){
 
             @Override
@@ -2420,7 +3198,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.TriggeredEffectComponent(effectEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent>("triggerOnCancel"){
 
             @Override
@@ -2428,7 +3206,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.TriggerOnceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.TriggerOnceComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.TriggerOnceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.TriggerOnceComponent>("triggerOnce"){
 
             @Override
@@ -2437,7 +3215,7 @@ public class ComponentsRegistrator{
             }
         });
         //triggers
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent>("castingFinishedTrigger"){
 
             @Override
@@ -2445,7 +3223,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent>("collisionTrigger"){
 
             @Override
@@ -2453,7 +3231,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent>("deathTrigger"){
 
             @Override
@@ -2461,7 +3239,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent>("instantTrigger"){
 
             @Override
@@ -2469,7 +3247,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent.class.getDeclaredField("intervalDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent>("repeatingTrigger"){
 
             @Override
@@ -2482,7 +3265,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent(intervalDuration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent>("repeatingTriggerCounter"){
 
             @Override
@@ -2495,7 +3278,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent(counter);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent>("targetReachedTrigger"){
 
             @Override
@@ -2503,7 +3286,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent>("timeSinceLastRepeatTrigger"){
 
             @Override
@@ -2516,7 +3304,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.TriggerSourceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.TriggerSourceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.effecttriggers.TriggerSourceComponent.class.getDeclaredField("sourceEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.TriggerSourceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.TriggerSourceComponent>("triggerSource"){
 
             @Override
@@ -2525,7 +3318,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.TriggerSourceComponent(sourceEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent>("triggerTemporary"){
 
             @Override
@@ -2533,7 +3326,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.ExperienceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.ExperienceComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.ExperienceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.ExperienceComponent>("experience"){
 
             @Override
@@ -2546,7 +3339,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.ExperienceComponent(experience);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.GoldComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.GoldComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.GoldComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.GoldComponent>("gold"){
 
             @Override
@@ -2559,8 +3352,13 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.GoldComponent(gold);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.HealthBarStyleComponent.class);
-        Serializer.registerClass(amara.game.entitysystem.components.units.IntersectionRulesComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.HealthBarStyleComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.IntersectionRulesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.IntersectionRulesComponent.class.getDeclaredField("targetRulesEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.IntersectionRulesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.IntersectionRulesComponent>("intersectionRules"){
 
             @Override
@@ -2569,7 +3367,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.IntersectionRulesComponent(targetRulesEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.IsAliveComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.IsAliveComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.IsAliveComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.IsAliveComponent>("isAlive"){
 
             @Override
@@ -2577,7 +3375,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.IsAliveComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.IsCastingComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.IsCastingComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.IsCastingComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.IsCastingComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.IsCastingComponent>("isCasting"){
 
             @Override
@@ -2595,7 +3398,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.IsCastingComponent(remainingDuration, isCancelable);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.IsHoveredComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.IsHoveredComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.IsHoveredComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.IsHoveredComponent>("isHovered"){
 
             @Override
@@ -2603,7 +3406,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.IsHoveredComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.IsProjectileComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.IsProjectileComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.IsProjectileComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.IsProjectileComponent>("isProjectile"){
 
             @Override
@@ -2611,7 +3414,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.IsProjectileComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.IsTargetableComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.IsTargetableComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.IsTargetableComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.IsTargetableComponent>("isTargetable"){
 
             @Override
@@ -2619,7 +3422,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.IsTargetableComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.IsVulnerableComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.IsVulnerableComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.IsVulnerableComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.IsVulnerableComponent>("isVulnerable"){
 
             @Override
@@ -2627,7 +3430,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.IsVulnerableComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.IsWalkingToAggroTargetComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.IsWalkingToAggroTargetComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.IsWalkingToAggroTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.IsWalkingToAggroTargetComponent>("isWalkingToAggroTarget"){
 
             @Override
@@ -2635,7 +3438,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.IsWalkingToAggroTargetComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.LearnableSpellsComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.LearnableSpellsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.LearnableSpellsComponent.class.getDeclaredField("spellsEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.LearnableSpellsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.LearnableSpellsComponent>("learnableSpells"){
 
             @Override
@@ -2644,7 +3452,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.LearnableSpellsComponent(spellsEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.LevelComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.LevelComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.LevelComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.LevelComponent>("level"){
 
             @Override
@@ -2657,7 +3465,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.LevelComponent(level);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.LifetimeComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.LifetimeComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.LifetimeComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.LifetimeComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.LifetimeComponent>("lifetime"){
 
             @Override
@@ -2670,7 +3483,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.LifetimeComponent(remainingDuration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.LocalAvoidanceWalkComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.LocalAvoidanceWalkComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.LocalAvoidanceWalkComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.LocalAvoidanceWalkComponent>("localAvoidanceWalk"){
 
             @Override
@@ -2678,7 +3491,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.LocalAvoidanceWalkComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.MaximumAggroRangeComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.MaximumAggroRangeComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.MaximumAggroRangeComponent.class.getDeclaredField("range"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.MaximumAggroRangeComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.MaximumAggroRangeComponent>("maximumAggroRange"){
 
             @Override
@@ -2691,7 +3509,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.MaximumAggroRangeComponent(range);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.MovementComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.MovementComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.MovementComponent.class.getDeclaredField("movementEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.MovementComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.MovementComponent>("movement"){
 
             @Override
@@ -2700,7 +3523,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.MovementComponent(movementEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.ReactionComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.ReactionComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.ReactionComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.ReactionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.ReactionComponent>("reaction"){
 
             @Override
@@ -2714,7 +3542,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.ReactionComponent(reaction, remainingDuration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.RemainingAggroResetDurationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.RemainingAggroResetDurationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.RemainingAggroResetDurationComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.RemainingAggroResetDurationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.RemainingAggroResetDurationComponent>("remainingAggroResetDuration"){
 
             @Override
@@ -2727,7 +3560,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.RemainingAggroResetDurationComponent(remainingDuration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent.class.getDeclaredField("cooldowns"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent>("setNewTargetSpellsOnCooldown"){
 
             @Override
@@ -2738,14 +3576,19 @@ public class ComponentsRegistrator{
                     spellIndices[i] = Integer.parseInt(xmlTemplateManager.parseValue(element.getAttributeValue("spellIndices")));
                 }
                 String[] cooldownsParts = element.getAttributeValue("cooldowns").split(",");
-                int[] cooldowns = new int[cooldownsParts.length];
+                float[] cooldowns = new float[cooldownsParts.length];
                 for(int i=0;i<cooldowns.length;i++){
-                    cooldowns[i] = Integer.parseInt(xmlTemplateManager.parseValue(element.getAttributeValue("cooldowns")));
+                    cooldowns[i] = Float.parseFloat(xmlTemplateManager.parseValue(element.getAttributeValue("cooldowns")));
                 }
                 return new amara.game.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent(spellIndices, cooldowns);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.SightRangeComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.SightRangeComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.SightRangeComponent.class.getDeclaredField("range"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.SightRangeComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.SightRangeComponent>("sightRange"){
 
             @Override
@@ -2758,7 +3601,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.SightRangeComponent(range);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.SpellsComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.SpellsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.SpellsComponent.class.getDeclaredField("spellsEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.SpellsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.SpellsComponent>("spells"){
 
             @Override
@@ -2767,7 +3615,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.SpellsComponent(spellsEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.SpellsUpgradePointsComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.SpellsUpgradePointsComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.SpellsUpgradePointsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.SpellsUpgradePointsComponent>("spellsUpgradePoints"){
 
             @Override
@@ -2780,20 +3628,30 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.SpellsUpgradePointsComponent(upgradePoints);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.TargetsInAggroRangeComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.TargetsInAggroRangeComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.TargetsInAggroRangeComponent.class.getDeclaredField("targetEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.TargetsInAggroRangeComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.TargetsInAggroRangeComponent>("targetsInAggroRange"){
 
             @Override
             public amara.game.entitysystem.components.units.TargetsInAggroRangeComponent construct(){
-                String[] targetsParts = element.getText().split(",");
-                int[] targets = new int[targetsParts.length];
-                for(int i=0;i<targets.length;i++){
-                    targets[i] = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
+                String[] targetEntitiesParts = element.getText().split(",");
+                int[] targetEntities = new int[targetEntitiesParts.length];
+                for(int i=0;i<targetEntities.length;i++){
+                    targetEntities[i] = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
                 }
-                return new amara.game.entitysystem.components.units.TargetsInAggroRangeComponent(targets);
+                return new amara.game.entitysystem.components.units.TargetsInAggroRangeComponent(targetEntities);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.TeamComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.TeamComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.TeamComponent.class.getDeclaredField("teamEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.TeamComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.TeamComponent>("team"){
 
             @Override
@@ -2802,7 +3660,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.TeamComponent(teamEntity);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.units.WalkStepDistanceComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.WalkStepDistanceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.WalkStepDistanceComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.WalkStepDistanceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.WalkStepDistanceComponent>("walkStepDistance"){
 
             @Override
@@ -2816,7 +3679,12 @@ public class ComponentsRegistrator{
             }
         });
         //visuals
-        Serializer.registerClass(amara.game.entitysystem.components.visuals.AnimationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.visuals.AnimationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.visuals.AnimationComponent.class.getDeclaredField("animationEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.visuals.AnimationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.visuals.AnimationComponent>("animation"){
 
             @Override
@@ -2826,7 +3694,7 @@ public class ComponentsRegistrator{
             }
         });
         //animations
-        Serializer.registerClass(amara.game.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent>("freezeAfterPlaying"){
 
             @Override
@@ -2834,7 +3702,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent();
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.visuals.animations.LoopDurationComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.visuals.animations.LoopDurationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.visuals.animations.LoopDurationComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.visuals.animations.LoopDurationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.visuals.animations.LoopDurationComponent>("loopDuration"){
 
             @Override
@@ -2847,7 +3720,12 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.visuals.animations.LoopDurationComponent(duration);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.visuals.animations.PassedLoopTimeComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.visuals.animations.PassedLoopTimeComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.visuals.animations.PassedLoopTimeComponent.class.getDeclaredField("passedTime"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.visuals.animations.PassedLoopTimeComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.visuals.animations.PassedLoopTimeComponent>("passedLoopTime"){
 
             @Override
@@ -2860,7 +3738,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.visuals.animations.PassedLoopTimeComponent(passedTime);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.visuals.animations.RemainingLoopsComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.visuals.animations.RemainingLoopsComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.visuals.animations.RemainingLoopsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.visuals.animations.RemainingLoopsComponent>("remainingLoops"){
 
             @Override
@@ -2873,7 +3751,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.visuals.animations.RemainingLoopsComponent(loopsCount);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.visuals.ModelComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.visuals.ModelComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.visuals.ModelComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.visuals.ModelComponent>("model"){
 
             @Override
@@ -2882,7 +3760,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.visuals.ModelComponent(modelSkinPath);
             }
         });
-        Serializer.registerClass(amara.game.entitysystem.components.visuals.TitleComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.visuals.TitleComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.visuals.TitleComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.visuals.TitleComponent>("title"){
 
             @Override

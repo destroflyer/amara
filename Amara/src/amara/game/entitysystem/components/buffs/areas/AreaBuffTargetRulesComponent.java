@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.buffs.areas;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class AreaBuffTargetRulesComponent{
     public AreaBuffTargetRulesComponent(int targetRulesEntity){
         this.targetRulesEntity = targetRulesEntity;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int targetRulesEntity;
 
     public int getTargetRulesEntity(){

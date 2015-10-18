@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.units;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class LearnableSpellsComponent{
     public LearnableSpellsComponent(int... spellsEntities){
         this.spellsEntities = spellsEntities;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int[] spellsEntities;
 
     public int[] getSpellsEntities(){

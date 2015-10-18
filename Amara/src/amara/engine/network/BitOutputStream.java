@@ -49,8 +49,16 @@ public class BitOutputStream{
         writeBits(Float.floatToIntBits(value), 32);
     }
  
+    public void writeDouble(double value){
+        writeLongBits(Double.doubleToLongBits(value), 64);
+    }
+ 
     public void writeInteger(int value){
         writeBits(value, 32);
+    }
+ 
+    public void writeLong(long value){
+        writeLongBits(value, 64);
     }
  
     public void writeBoolean(boolean value){

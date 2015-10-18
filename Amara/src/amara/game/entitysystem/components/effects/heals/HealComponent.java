@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.effects.heals;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class HealComponent{
     public HealComponent(float value){
         this.value = value;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private float value;
 
     public float getValue(){

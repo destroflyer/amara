@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.units;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -17,18 +18,19 @@ public class SetNewTargetSpellsOnCooldownComponent{
         
     }
     
-    public SetNewTargetSpellsOnCooldownComponent(int[] spellIndices, int[] cooldowns){
+    public SetNewTargetSpellsOnCooldownComponent(int[] spellIndices, float[] cooldowns){
         this.spellIndices = spellIndices;
         this.cooldowns = cooldowns;
     }
     private int[] spellIndices;
-    private int[] cooldowns;
+    @ComponentField(type=ComponentField.Type.TIMER)
+    private float[] cooldowns;
 
     public int[] getSpellIndices(){
         return spellIndices;
     }
 
-    public int[] getCooldowns(){
+    public float[] getCooldowns(){
         return cooldowns;
     }
 }

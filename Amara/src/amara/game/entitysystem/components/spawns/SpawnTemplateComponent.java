@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.spawns;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class SpawnTemplateComponent{
     public SpawnTemplateComponent(String... templateNames){
         this.templateNames = templateNames;
     }
+    @ComponentField(type=ComponentField.Type.TEMPLATE)
     private String[] templateNames;
 
     public String[] getTemplateNames(){

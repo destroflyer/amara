@@ -4,26 +4,38 @@
  */
 package amara.game.entitysystem.synchronizing;
 
-import com.jme3.network.serializing.Serializable;
+import java.io.IOException;
+import amara.engine.network.*;
 
 /**
  *
  * @author Carl
  */
-@Serializable
 public class RemovedComponentChange extends EntityChange{
 
     public RemovedComponentChange(){
         
     }
     
-    public RemovedComponentChange(int entity, String componentClassName){
+    public RemovedComponentChange(int entity, Class componentClass){
         super(entity);
-        this.componentClassName = componentClassName;
+        this.componentClass = componentClass;
     }
-    private String componentClassName;
+    private Class componentClass;
 
-    public String getComponentClassName(){
-        return componentClassName;
+    public Class getComponentClass(){
+        return componentClass;
+    }
+
+    @Override
+    public void write(BitOutputStream outputStream){
+        super.write(outputStream);
+        ComponentSerializer.writeClass(outputStream, componentClass);
+    }
+
+    @Override
+    public void read(BitInputStream inputStream) throws IOException{
+        super.read(inputStream);
+        componentClass = ComponentSerializer.readClass(inputStream);
     }
 }

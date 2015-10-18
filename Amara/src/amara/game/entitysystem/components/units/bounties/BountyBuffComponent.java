@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.units.bounties;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -21,7 +22,9 @@ public class BountyBuffComponent{
         this.buffEntity = buffEntity;
         this.duration = duration;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private int buffEntity;
+    @ComponentField(type=ComponentField.Type.TIMER)
     private float duration;
 
     public int getBuffEntity(){

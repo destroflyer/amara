@@ -5,6 +5,7 @@
 package amara.game.entitysystem.components.units.crowdcontrol;
 
 import com.jme3.network.serializing.Serializable;
+import amara.game.entitysystem.synchronizing.ComponentField;
 
 /**
  *
@@ -20,6 +21,7 @@ public class IsStunnedComponent{
     public IsStunnedComponent(float remainingDuration){
         this.remainingDuration = remainingDuration;
     }
+    @ComponentField(type=ComponentField.Type.TIMER)
     private float remainingDuration;
 
     public float getRemainingDuration(){
