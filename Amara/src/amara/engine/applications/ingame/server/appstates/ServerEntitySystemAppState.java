@@ -21,6 +21,7 @@ import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.visuals.*;
+import amara.game.entitysystem.synchronizing.*;
 import amara.game.entitysystem.systems.aggro.*;
 import amara.game.entitysystem.systems.attributes.*;
 import amara.game.entitysystem.systems.buffs.*;
@@ -43,7 +44,6 @@ import amara.game.entitysystem.systems.effects.spawns.*;
 import amara.game.entitysystem.systems.effects.spells.*;
 import amara.game.entitysystem.systems.effects.triggers.*;
 import amara.game.entitysystem.systems.effects.visuals.*;
-import amara.game.entitysystem.systems.game.*;
 import amara.game.entitysystem.systems.general.*;
 import amara.game.entitysystem.systems.movement.*;
 import amara.game.entitysystem.systems.network.*;
@@ -146,13 +146,12 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new SetSpellsCastersSystem());
         addEntitySystem(new SetBaseCooldownSystem());
         addEntitySystem(new SetLevelExperienceSystem());
-        addEntitySystem(new UpdateGameTimeSystem());
-        addEntitySystem(new CountdownPlayerRespawnSystem());
+        for(EntitySystem entitySystem : ParallelNetworkSystems.generateSystems()){
+            addEntitySystem(entitySystem);
+        }
         addEntitySystem(new CountdownLifetimeSystem());
         addEntitySystem(new CountdownBuffsSystem());
-        addEntitySystem(new CountdownCastingSystem());
         addEntitySystem(new CountdownCooldownSystem());
-        addEntitySystem(new CountdownEffectDelaySystem());
         addEntitySystem(new CountdownBindingSystem());
         addEntitySystem(new CountdownBindingImmuneSystem());
         addEntitySystem(new CountdownSilenceSystem());
@@ -161,9 +160,10 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownStunImmuneSystem());
         addEntitySystem(new CountdownKnockupSystem());
         addEntitySystem(new CountdownKnockupImmuneSystem());
+        addEntitySystem(new CountdownReactionsSystem());
+        addEntitySystem(new CountdownEffectDelaySystem());
         addEntitySystem(new CountdownCampRespawnSystem());
         addEntitySystem(new CountdownAnimationLoopsSystem());
-        addEntitySystem(new CountdownReactionsSystem());
         addEntitySystem(new CountdownAggroResetTimersSystem());
         addEntitySystem(new CheckOpenObjectivesSystem());
         addEntitySystem(new CheckAggroTargetAttackibilitySystem());
@@ -270,7 +270,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new PlayerDeathSystem(map));
         addEntitySystem(new PlayerRespawnSystem(game));
         
-        addEntitySystem(new SendEntityChangesSystem(networkServer));
+        addEntitySystem(new SendEntityChangesSystem(networkServer, new ClientComponentBlacklist()));
     }
 
     @Override

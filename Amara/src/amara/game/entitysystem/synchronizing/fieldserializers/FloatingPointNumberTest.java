@@ -19,10 +19,10 @@ public class FloatingPointNumberTest{
     
     
     public static void main(String[] args){
-        double number = 567.82472f;
+        double number = 567.82472;
         int exponentBits = 8;
-        for(int mantisseBits=52;mantisseBits>=1;mantisseBits--){
-            FieldSerializer serializer = new FieldSerializer_Double(mantisseBits, exponentBits);
+        for(int mantisseBits=23;mantisseBits>=1;mantisseBits--){
+            FieldSerializer serializer = new FieldSerializer_DoubleAsFloat(mantisseBits, exponentBits);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             BitOutputStream bitOutputStream = new BitOutputStream(byteArrayOutputStream);
             serializer.writeField(bitOutputStream, number);

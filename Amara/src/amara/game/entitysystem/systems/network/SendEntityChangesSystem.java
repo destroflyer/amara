@@ -19,34 +19,45 @@ import amara.game.entitysystem.synchronizing.*;
  */
 public class SendEntityChangesSystem implements EntitySystem{
 
-    public SendEntityChangesSystem(NetworkServer networkServer){
+    public SendEntityChangesSystem(NetworkServer networkServer, ClientComponentBlacklist clientComponentBlacklist){
         this.networkServer = networkServer;
+        this.clientComponentBlacklist = clientComponentBlacklist;
     }
     private NetworkServer networkServer;
+    private ClientComponentBlacklist clientComponentBlacklist;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         LinkedList<EntityChange> changes = new LinkedList<EntityChange>();
-        EntityObserver entitiesObserver = entityWorld.getOrCreateEntityObserver(this);
-        for(int entity : entitiesObserver.RemovedEntities()){
-            changes.add(new RemovedEntityChange(entity));
-        }
-        entitiesObserver.reset();
         ComponentMapObserver componentsObserver = entityWorld.requestObserver(this);
         for(int entity : componentsObserver.getNew().getEntitiesWithAll()){
             for(Object component : componentsObserver.getNew().getComponents(entity)){
-                changes.add(new NewComponentChange(entity, component));
+                if(!clientComponentBlacklist.contains(ClientComponentBlacklist.ChangeType.NEW, component.getClass())){
+                    changes.add(new NewComponentChange(entity, component));
+                }
             }
         }
         for(int entity : componentsObserver.getChanged().getEntitiesWithAll()){
             for(Object component : componentsObserver.getChanged().getComponents(entity)){
-                changes.add(new NewComponentChange(entity, component));
+                if(!clientComponentBlacklist.contains(ClientComponentBlacklist.ChangeType.CHANGED, component.getClass())){
+                    changes.add(new NewComponentChange(entity, component));
+                }
             }
         }
         for(int entity : componentsObserver.getRemoved().getEntitiesWithAll()){
             if(entityWorld.hasEntity(entity)){
                 for(Object component : componentsObserver.getRemoved().getComponents(entity)){
-                    changes.add(new RemovedComponentChange(entity, component.getClass()));
+                    if(!clientComponentBlacklist.contains(ClientComponentBlacklist.ChangeType.REMOVED, component.getClass())){
+                        changes.add(new RemovedComponentChange(entity, component.getClass()));
+                    }
+                }
+            }
+            else{
+                for(Object component : componentsObserver.getRemoved().getComponents(entity)){
+                    if(!clientComponentBlacklist.contains(ClientComponentBlacklist.ChangeType.REMOVED, component.getClass())){
+                        changes.add(new RemovedEntityChange(entity));
+                        break;
+                    }
                 }
             }
         }

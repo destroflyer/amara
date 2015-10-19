@@ -22,6 +22,8 @@ import amara.engine.applications.ingame.client.systems.visualisation.effects.cro
 import amara.engine.applications.ingame.client.systems.visualisation.effects.reactions.*;
 import amara.engine.applications.ingame.client.systems.visualisation.healthbars.*;
 import amara.engine.network.NetworkClient;
+import amara.game.entitysystem.EntitySystem;
+import amara.game.entitysystem.synchronizing.ParallelNetworkSystems;
 
 /**
  *
@@ -75,6 +77,9 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         networkClient.addMessageBackend(new EntitySynchronizeBackend(mainApplication, entityWorld));
         networkClient.addMessageBackend(new GameStartedBackend(mainApplication));
         networkClient.addMessageBackend(new GameOverBackend(mainApplication));
+        for(EntitySystem entitySystem : ParallelNetworkSystems.generateSystems()){
+            addEntitySystem(entitySystem);
+        }
         PlayerTeamSystem playerTeamSystem = getAppState(PlayerAppState.class).getPlayerTeamSystem();
         addEntitySystem(playerTeamSystem);
         addEntitySystem(new AudioSystem(getAppState(AudioAppState.class)));
