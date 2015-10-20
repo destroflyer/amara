@@ -40,7 +40,11 @@ public class BitstreamClassManager{
     }
     
     public int getID(Class serializedClass){
-        return ids.get(serializedClass);
+        Integer id = ids.get(serializedClass);
+        if(id == null){
+            System.err.println("Bitstream class not registered: " + serializedClass.getName());
+        }
+        return id;
     }
     
     public Class getClass(int id){

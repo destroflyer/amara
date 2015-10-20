@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import amara.Util;
 import amara.engine.network.*;
@@ -32,8 +34,12 @@ public class ComponentSerializer{
     }
     
     public static void writeClassAndObject(BitOutputStream outputStream, Object component){
+        writeClassAndObject(outputStream, component, null);
+    }
+    
+    private static void writeClassAndObject(BitOutputStream outputStream, Object component, FieldSerializer fieldSerializer){
         writeClass(outputStream, component.getClass());
-        writeObject(outputStream, component.getClass(), component);
+        writeObject(outputStream, component.getClass(), component, fieldSerializer);
     }
     
     public static void writeClass(BitOutputStream outputStream, Class componentClass){
@@ -53,12 +59,25 @@ public class ComponentSerializer{
             outputStream.writeInteger(length);
             for(int i=0;i<length;i++){
                 Object element = Array.get(value, i);
-                if(fieldSerializer != null){
-                    fieldSerializer.writeField(outputStream, element);
+                if(!Modifier.isFinal(type.getComponentType().getModifiers())){
+                    boolean isDeclaredClass = isDeclaredClassElement(type.getComponentType(), element.getClass());
+                    outputStream.writeBoolean(isDeclaredClass);
+                    if(!isDeclaredClass){
+                        writeClass(outputStream, element.getClass());
+                    }
                 }
-                else{
-                    writeObject(outputStream, type.getComponentType(), element);
-                }
+                writeObject(outputStream, type.getComponentType(), element, fieldSerializer);
+            }
+        }
+        else if(Collection.class.isAssignableFrom(type)){
+            Collection collection = (Collection) value;
+            writeClass(outputStream, value.getClass());
+            int length = collection.size();
+            outputStream.writeInteger(length);
+            Iterator iterator = collection.iterator();
+            while(iterator.hasNext()){
+                Object element = iterator.next();
+                writeClassAndObject(outputStream, element, fieldSerializer);
             }
         }
         else if(fieldSerializer != null){
@@ -80,7 +99,7 @@ public class ComponentSerializer{
             outputStream.writeDouble((Double) value);
         }
         else if((type == Object.class) || Modifier.isAbstract(type.getModifiers())){
-            writeClassAndObject(outputStream, value);
+            writeClassAndObject(outputStream, value, fieldSerializer);
         }
         else if(type.isEnum()){
             try{
@@ -108,6 +127,22 @@ public class ComponentSerializer{
         }
     }
     
+    private static boolean isDeclaredClassElement(Class declaredClass, Class elementClass){
+        if(isClassesPair(declaredClass, elementClass, boolean.class, Boolean.class)
+        || isClassesPair(declaredClass, elementClass, int.class, Integer.class)
+        || isClassesPair(declaredClass, elementClass, long.class, Long.class)
+        || isClassesPair(declaredClass, elementClass, float.class, Float.class)
+        || isClassesPair(declaredClass, elementClass, double.class, Double.class)){
+            return true;
+        }
+        return (declaredClass == elementClass);
+    }
+    
+    private static boolean isClassesPair(Class class1, Class class2, Class pairClass1, Class pairClass2){
+        return (((class1 == pairClass1) && (class2 == pairClass2))
+             || ((class1 == pairClass2) && (class2 == pairClass1)));
+    }
+    
     public static Object readClassAndObject(BitInputStream inputStream) throws IOException{
         Class componentClass = readClass(inputStream);
         return readObject(inputStream, componentClass);
@@ -129,16 +164,34 @@ public class ComponentSerializer{
             int length = inputStream.readInteger();
             Object array = Array.newInstance(type.getComponentType(), length);
             for(int i=0;i<length;i++){
-                Object element;
-                if(fieldSerializer != null){
-                    element = fieldSerializer.readField(inputStream);
+                Class elementClass = type.getComponentType();
+                if(!Modifier.isFinal(type.getComponentType().getModifiers())){
+                    boolean isDeclaredClass = inputStream.readBoolean();
+                    if(!isDeclaredClass){
+                        elementClass = readClass(inputStream);
+                    }
                 }
-                else{
-                    element = readObject(inputStream, type.getComponentType());
-                }
+                Object element = readObject(inputStream, elementClass, fieldSerializer);
                 Array.set(array, i, element);
             }
             return array;
+        }
+        else if(Collection.class.isAssignableFrom(type)){
+            try{
+                Class<? extends Collection> collectionClass = readClass(inputStream);
+                Collection collection = collectionClass.newInstance();
+                int length = inputStream.readInteger();
+                for(int i=0;i<length;i++){
+                    Class elementClass = readClass(inputStream);
+                    Object element = readObject(inputStream, elementClass, fieldSerializer);
+                    collection.add(element);
+                }
+                return collection;
+            }catch(InstantiationException ex){
+                ex.printStackTrace();
+            } catch (IllegalAccessException ex){
+                ex.printStackTrace();
+            }
         }
         else if(fieldSerializer != null){
             return fieldSerializer.readField(inputStream);
