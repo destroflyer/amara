@@ -44,7 +44,7 @@ public class Map_Arama extends Map{
         audioBackgroundMusic.setComponent(new AudioComponent("Sounds/music/world_of_ice.ogg"));
         audioBackgroundMusic.setComponent(new AudioVolumeComponent(1.25f));
         audioBackgroundMusic.setComponent(new AudioLoopComponent());
-        audioBackgroundMusic.setComponent(new IsAudioPlayingComponent());
+        audioBackgroundMusic.setComponent(new StartPlayingAudioComponent());
         //Nexus
         EntityWrapper[] nexi = new EntityWrapper[2];
         float[] nexiX = new float[]{252, 98};

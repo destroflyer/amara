@@ -85,7 +85,6 @@ public class ClientComponentBlacklist{
             //effects/aggro
             DrawTeamAggroComponent.class,
             //effects/audio
-            PauseAudioComponent.class,
             PlayAudioComponent.class,
             StopAudioComponent.class,
             //effects/buffs

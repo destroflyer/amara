@@ -31,7 +31,7 @@ public class AudioSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         increasePlayingAudioProgresses(deltaSeconds);
-        ComponentMapObserver observer = entityWorld.requestObserver(this, AudioComponent.class, AudioSourceComponent.class, PositionComponent.class, IsAudioPlayingComponent.class, GameSpeedComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, AudioComponent.class, AudioSourceComponent.class, PositionComponent.class, StartPlayingAudioComponent.class, StopPlayingAudioComponent.class, GameSpeedComponent.class);
         for(int entity : observer.getNew().getEntitiesWithAll(AudioComponent.class)){
             load(entityWorld, entity);
         }
@@ -52,22 +52,11 @@ public class AudioSystem implements EntitySystem{
             audioNode.setUserData("audio_source_entity", null);
             audioNode.setPositional(false);
         }
-        for(int entity : observer.getNew().getEntitiesWithAll(IsAudioPlayingComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAll(StartPlayingAudioComponent.class)){
             enqueuePlay(entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(IsAudioPlayingComponent.class)){
-            enqueuePlay(entity);
-        }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(IsAudioPlayingComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAll(StopPlayingAudioComponent.class)){
             stop(entity);
-        }
-        for(int entity : observer.getNew().getEntitiesWithAll(IsAudioPausedComponent.class)){
-            pause(entity);
-        }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(IsAudioPausedComponent.class)){
-            if(entityWorld.hasComponent(entity, IsAudioPlayingComponent.class)){
-                play(entity);
-            }
         }
         updateAudioPositions(observer);
         GameSpeedComponent gameSpeedComponent = observer.getChanged().getComponent(Game.ENTITY, GameSpeedComponent.class);

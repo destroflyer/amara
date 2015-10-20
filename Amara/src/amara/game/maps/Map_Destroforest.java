@@ -42,7 +42,7 @@ public class Map_Destroforest extends Map{
         audioBackgroundMusic.setComponent(new AudioComponent("Sounds/music/mystic_river.ogg"));
         audioBackgroundMusic.setComponent(new AudioVolumeComponent(1.75f));
         audioBackgroundMusic.setComponent(new AudioLoopComponent());
-        audioBackgroundMusic.setComponent(new IsAudioPlayingComponent());
+        audioBackgroundMusic.setComponent(new StartPlayingAudioComponent());
         
         EntityWrapper instantEffectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
         instantEffectTrigger.setComponent(new InstantTriggerComponent());

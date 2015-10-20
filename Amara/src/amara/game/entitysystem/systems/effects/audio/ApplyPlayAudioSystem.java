@@ -22,7 +22,7 @@ public class ApplyPlayAudioSystem implements EntitySystem{
             int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             for(int audioEntity : entityWrapper.getComponent(PlayAudioComponent.class).getAudioEntities()){
                 entityWorld.setComponent(audioEntity, new AudioSourceComponent(targetEntity));
-                entityWorld.setComponent(audioEntity, new IsAudioPlayingComponent());
+                entityWorld.setComponent(audioEntity, new StartPlayingAudioComponent());
             }
         }
     }
