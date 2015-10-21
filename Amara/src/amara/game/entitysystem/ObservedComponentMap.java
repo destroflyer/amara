@@ -58,7 +58,7 @@ class ObservedComponentMap extends SimpleComponentMap {
             systemGlobalObserverMap.put(key, observer);
             for (Class clazz : getComponentMaps().keySet()) {
                 for (Integer entity : getComponentMaps().get(clazz).keySet()) {
-                    observer.markAsNull(entity, clazz);
+                    observer.markAsNew(entity, clazz);
                 }
             }
         } else {
@@ -66,7 +66,7 @@ class ObservedComponentMap extends SimpleComponentMap {
             for (Class clazz : componentClasses) {
                 getObservers(clazz).add(observer);
                 for (Integer entity : getEntitiesWithAny(clazz)) {
-                    observer.markAsNull(entity, clazz);
+                    observer.markAsNew(entity, clazz);
                 }
             }
         }

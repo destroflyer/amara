@@ -15,7 +15,7 @@ import java.util.*;
  */
 public class IntersectionObserver implements IntersectionInformant
 {
-    private TransformUpdater transformUpdater = new TransformUpdater();
+    private TransformUpdateSystem transformUpdater = new TransformUpdateSystem();
     private HitboxUpdater hitboxUpdater = new HitboxUpdater();
     
     private HashMap<Object, Object> trackers = new HashMap<Object, Object>();

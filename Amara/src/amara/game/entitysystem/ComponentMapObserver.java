@@ -51,13 +51,13 @@ public class ComponentMapObserver {
 
     private void markWithPreviousValue(Integer entity, Class componentClass, Object componentValue) {
         if (componentValue == null) {
-            markAsNull(entity, componentClass);
+            markAsNew(entity, componentClass);
         } else {
             previousValues.setComponent(entity, componentValue);
         }
     }
 
-    void markAsNull(Integer entity, Class componentClass) {
+    void markAsNew(Integer entity, Class componentClass) {
         HashSet<Integer> entities = lazyGetPreviousNulls(componentClass);
         entities.add(entity);
     }

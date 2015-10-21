@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import amara.Util;
 import amara.engine.network.*;
+import amara.game.entitysystem.components.physics.HitboxComponent;
+import amara.game.entitysystem.systems.physics.shapes.PolygonShape;
 
 /**
  *
@@ -32,6 +34,11 @@ public class ComponentSerializer{
     }
     
     public static void writeClassAndObject(BitOutputStream outputStream, Object component){
+        if(component instanceof HitboxComponent) {
+            if(((HitboxComponent)component).getShape() instanceof PolygonShape) {
+                System.out.println("written:" + ((PolygonShape)((HitboxComponent)component).getShape()).getLocalPolygon());
+            }
+        }
         writeClass(outputStream, component.getClass());
         writeObject(outputStream, component.getClass(), component);
     }
@@ -110,7 +117,14 @@ public class ComponentSerializer{
     
     public static Object readClassAndObject(BitInputStream inputStream) throws IOException{
         Class componentClass = readClass(inputStream);
-        return readObject(inputStream, componentClass);
+        Object obj = readObject(inputStream, componentClass);
+        
+        if(obj instanceof HitboxComponent) {
+            if(((HitboxComponent)obj).getShape() instanceof PolygonShape) {
+                System.out.println("read:" + ((PolygonShape)((HitboxComponent)obj).getShape()).getLocalPolygon());
+            }
+        }
+        return obj;
     }
     
     public static Class readClass(BitInputStream inputStream) throws IOException{

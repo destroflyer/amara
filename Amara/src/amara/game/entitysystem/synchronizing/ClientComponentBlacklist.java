@@ -268,7 +268,7 @@ public class ClientComponentBlacklist{
             //game
             GameTimeComponent.class,
             //physics
-            //HitboxComponent.class,
+            HitboxComponent.class,
             //players
             WaitingToRespawnComponent.class,
             //units
