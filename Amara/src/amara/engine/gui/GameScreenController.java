@@ -15,6 +15,7 @@ import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.controls.CheckBox;
 import de.lessvoid.nifty.controls.RadioButton;
 import de.lessvoid.nifty.controls.ScrollPanel;
+import de.lessvoid.nifty.controls.Slider;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.*;
 import de.lessvoid.nifty.render.NiftyImage;
@@ -94,6 +95,10 @@ public class GameScreenController implements ScreenController{
     
     protected RadioButton getRadioButton(String id){
         return nifty.getScreen(screenID).findNiftyControl(id, RadioButton.class);
+    }
+    
+    protected Slider getSlider(String id){
+        return nifty.getScreen(screenID).findNiftyControl(id, Slider.class);
     }
     
     protected ScrollPanel getScrollPanel(String id){

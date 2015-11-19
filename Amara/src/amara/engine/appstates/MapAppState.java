@@ -105,7 +105,7 @@ public class MapAppState extends BaseDisplayAppState{
                 light = directionalLight;
                 MapLight_Directional_Shadows shadows = mapLight_Directional.getShadows();
                 if(shadows != null){
-                    int shadowQuality = Settings.getInt("shadow_quality");
+                    int shadowQuality = Settings.getInteger("shadow_quality");
                     if(shadowQuality > 0){
                         DirectionalLightShadowFilter shadowFilter = new DirectionalLightShadowFilter(mainApplication.getAssetManager(), 2048, shadowQuality);
                         shadowFilter.setLight(directionalLight);

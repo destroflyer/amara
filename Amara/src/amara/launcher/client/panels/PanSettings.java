@@ -52,7 +52,7 @@ public class PanSettings extends javax.swing.JPanel{
         for(int i=0;i<DefaultSettings.RESOLUTIONS.length;i++){
             Dimension resolution = DefaultSettings.RESOLUTIONS[i];
             cbxResolution.addItem(getResolutionString(resolution));
-            if((resolution.getWidth() == Settings.getInt("resolution_width")) && (resolution.getHeight() == Settings.getInt("resolution_height"))){
+            if((resolution.getWidth() == Settings.getInteger("resolution_width")) && (resolution.getHeight() == Settings.getInteger("resolution_height"))){
                 cbxResolution.setSelectedIndex(i);
             }
         }
@@ -60,13 +60,13 @@ public class PanSettings extends javax.swing.JPanel{
         for(int i=0;i<DefaultSettings.ANTIALIASING_SAMPLES.length;i++){
             int antiAliasingSamples = DefaultSettings.ANTIALIASING_SAMPLES[i];
             cbxAntialiasing.addItem((antiAliasingSamples != 0)?antiAliasingSamples + "x":"Deactivated");
-            if(antiAliasingSamples == Settings.getInt("antialiasing")){
+            if(antiAliasingSamples == Settings.getInteger("antialiasing")){
                 cbxAntialiasing.setSelectedIndex(i);
             }
         }
         cbxVSync.setSelected(Settings.getBoolean("vsync"));
         cbxHardwareSkinning.setSelected(Settings.getBoolean("hardware_skinning"));
-        sldShadowQuality.setValue(Settings.getInt("shadow_quality"));
+        sldShadowQuality.setValue(Settings.getInteger("shadow_quality"));
     }
     
     private static String getResolutionString(Dimension resolution){
