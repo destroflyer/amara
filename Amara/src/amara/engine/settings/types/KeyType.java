@@ -4,7 +4,7 @@
  */
 package amara.engine.settings.types;
 
-import amara.engine.settings.SettingType;
+import amara.engine.settings.*;
 
 /**
  *
@@ -12,8 +12,13 @@ import amara.engine.settings.SettingType;
  */
 public class KeyType extends SettingType{
 
+    public KeyType(int defaultKeyType){
+        this.defaultKeyType = defaultKeyType;
+    }
+    private int defaultKeyType;
+    
     @Override
     public String getDefaultValue(){
-        return null;
+        return Settings.toString(defaultKeyType);
     }
 }

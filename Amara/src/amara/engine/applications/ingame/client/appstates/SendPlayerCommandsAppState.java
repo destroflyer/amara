@@ -7,7 +7,6 @@ package amara.engine.applications.ingame.client.appstates;
 import java.util.Iterator;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
-import com.jme3.input.KeyInput;
 import com.jme3.math.Vector2f;
 import amara.Queue;
 import amara.engine.applications.ingame.client.commands.*;
@@ -19,6 +18,7 @@ import amara.engine.network.NetworkClient;
 import amara.engine.input.*;
 import amara.engine.input.events.*;
 import amara.engine.network.messages.Message_Command;
+import amara.engine.settings.Settings;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.physics.*;
@@ -56,105 +56,80 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
             Event event = eventsIterator.next();
             if(event instanceof MouseClickEvent){
                 MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
+                int mouseButtonIndex = mouseClickEvent.getButton().ordinal();
                 int hoveredEntity = getAppState(PlayerAppState.class).getCursorHoveredEntity();
-                switch(mouseClickEvent.getButton()){
-                    case Left:
-                        if(hoveredEntity != -1){
-                            EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
-                            if(entityWorld.hasComponent(hoveredEntity, ShopRangeComponent.class)){
-                                int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
-                                int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-                                if(ShopUtil.canUseShop(entityWorld, selectedEntity, hoveredEntity)){
-                                    screenController_HUD.setShopVisible(true);
-                                }
+                if(mouseButtonIndex == Settings.getInteger("controls_navigation_select")){
+                    if(hoveredEntity != -1){
+                        EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
+                        if(entityWorld.hasComponent(hoveredEntity, ShopRangeComponent.class)){
+                            int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
+                            int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
+                            if(ShopUtil.canUseShop(entityWorld, selectedEntity, hoveredEntity)){
+                                screenController_HUD.setShopVisible(true);
                             }
                         }
-                        break;
-
-                    case Right:
-                        if(hoveredEntity != -1){
-                            sendCommand(new AutoAttackCommand(hoveredEntity));
+                    }
+                }
+                else if(mouseButtonIndex == Settings.getInteger("controls_navigation_walk_attack")){
+                    if(hoveredEntity != -1){
+                        sendCommand(new AutoAttackCommand(hoveredEntity));
+                    }
+                    else{
+                        Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
+                        if(groundLocation != null){
+                            sendCommand(new MoveCommand(groundLocation));
+                            getAppState(IngameFeedbackAppState.class).displayMovementTarget(groundLocation);
                         }
-                        else{
-                            Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
-                            if(groundLocation != null){
-                                sendCommand(new MoveCommand(groundLocation));
-                                getAppState(IngameFeedbackAppState.class).displayMovementTarget(groundLocation);
-                            }
-                        }
-                        break;
+                    }
                 }
             }
             else if(event instanceof KeyPressedEvent){
                 KeyPressedEvent keyPressedEvent = (KeyPressedEvent) event;
-                switch(keyPressedEvent.getKeyCode()){
-                    case KeyInput.KEY_Q:
-                        castSpell(new SpellIndex(SpellIndex.SpellSet.SPELLS, 0));
-                        break;
-
-                    case KeyInput.KEY_W:
-                        castSpell(new SpellIndex(SpellIndex.SpellSet.SPELLS, 1));
-                        break;
-
-                    case KeyInput.KEY_E:
-                        castSpell(new SpellIndex(SpellIndex.SpellSet.SPELLS, 2));
-                        break;
-
-                    case KeyInput.KEY_R:
-                        castSpell(new SpellIndex(SpellIndex.SpellSet.SPELLS, 3));
-                        break;
-
-                    case KeyInput.KEY_1:
-                        castSpell(new SpellIndex(SpellIndex.SpellSet.ITEMS, 0));
-                        break;
-
-                    case KeyInput.KEY_2:
-                        castSpell(new SpellIndex(SpellIndex.SpellSet.ITEMS, 1));
-                        break;
-
-                    case KeyInput.KEY_3:
-                        castSpell(new SpellIndex(SpellIndex.SpellSet.ITEMS, 2));
-                        break;
-
-                    case KeyInput.KEY_4:
-                        castSpell(new SpellIndex(SpellIndex.SpellSet.ITEMS, 3));
-                        break;
-
-                    case KeyInput.KEY_5:
-                        castSpell(new SpellIndex(SpellIndex.SpellSet.ITEMS, 4));
-                        break;
-
-                    case KeyInput.KEY_6:
-                        castSpell(new SpellIndex(SpellIndex.SpellSet.ITEMS, 5));
-                        break;
-
-                    case KeyInput.KEY_S:
-                        sendCommand(new StopCommand());
-                        break;
-
-                    case KeyInput.KEY_P:
-                        screenController_HUD.toggleShopVisible();
-                        break;
-
-                    case KeyInput.KEY_ESCAPE:
-                        screenController_Menu.toggleMenuVisible();
-                        break;
-
-                    case KeyInput.KEY_F1:
-                        showReaction("kappa");
-                        break;
-
-                    case KeyInput.KEY_F2:
-                        showReaction("pogchamp");
-                        break;
-
-                    case KeyInput.KEY_F3:
-                        showReaction("kreygasm");
-                        break;
-
-                    case KeyInput.KEY_F4:
-                        showReaction("biblethump");
-                        break;
+                if(screenController_Menu.isReadingKeyInput()){
+                    screenController_Menu.readKey(keyPressedEvent.getKeyCode());
+                }
+                else{
+                    int keyCode = keyPressedEvent.getKeyCode();
+                    boolean searchKey = true;
+                    for(int i=0;i<4;i++){
+                        if(keyCode == Settings.getInteger("controls_spells_" + i)){
+                            castSpell(new SpellIndex(SpellIndex.SpellSet.SPELLS, i));
+                            searchKey = false;
+                            break;
+                        }
+                    }
+                    if(searchKey){
+                        for(int i=0;i<6;i++){
+                            if(keyCode == Settings.getInteger("controls_items_" + i)){
+                                castSpell(new SpellIndex(SpellIndex.SpellSet.ITEMS, i));
+                                searchKey = false;
+                                break;
+                            }
+                        }
+                    }
+                    if(searchKey){
+                        if(keyCode == Settings.getInteger("controls_navigation_stop")){
+                            sendCommand(new StopCommand());
+                        }
+                        else if(keyCode == Settings.getInteger("controls_interface_shop")){
+                            screenController_HUD.toggleShopVisible();
+                        }
+                        else if(keyCode == Settings.getInteger("controls_interface_menu")){
+                            screenController_Menu.toggleMenuVisible();
+                        }
+                        else if(keyCode == Settings.getInteger("controls_reactions_0")){
+                            showReaction("kappa");
+                        }
+                        else if(keyCode == Settings.getInteger("controls_reactions_1")){
+                            showReaction("pogchamp");
+                        }
+                        else if(keyCode == Settings.getInteger("controls_reactions_2")){
+                            showReaction("kreygasm");
+                        }
+                        else if(keyCode == Settings.getInteger("controls_reactions_3")){
+                            showReaction("biblethump");
+                        }
+                    }
                 }
             }
         }

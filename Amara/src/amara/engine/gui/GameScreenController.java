@@ -13,9 +13,11 @@ import de.lessvoid.nifty.builder.HoverEffectBuilder;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.controls.CheckBox;
+import de.lessvoid.nifty.controls.DropDown;
 import de.lessvoid.nifty.controls.RadioButton;
 import de.lessvoid.nifty.controls.ScrollPanel;
 import de.lessvoid.nifty.controls.Slider;
+import de.lessvoid.nifty.controls.Window;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.*;
 import de.lessvoid.nifty.render.NiftyImage;
@@ -101,8 +103,16 @@ public class GameScreenController implements ScreenController{
         return nifty.getScreen(screenID).findNiftyControl(id, Slider.class);
     }
     
+    protected DropDown getDropDown(String id){
+        return nifty.getScreen(screenID).findNiftyControl(id, DropDown.class);
+    }
+    
     protected ScrollPanel getScrollPanel(String id){
         return nifty.getScreen(screenID).findNiftyControl(id, ScrollPanel.class);
+    }
+    
+    protected Window getWindow(String id){
+        return nifty.getScreen(screenID).findNiftyControl(id, Window.class);
     }
     
     protected Element getElementByID(String id){

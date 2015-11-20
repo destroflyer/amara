@@ -4,6 +4,7 @@
  */
 package amara.engine.settings;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import amara.Util;
 import amara.engine.files.FileManager;
@@ -114,7 +115,8 @@ public class Settings{
 
     public static void saveFile(){
         String fileContent = "#Settings";
-        Object[] keySet = values.keySet().toArray();
+        String[] keySet = values.keySet().toArray(new String[values.size()]);
+        Arrays.sort(keySet, String.CASE_INSENSITIVE_ORDER);
         for(int i=0;i<keySet.length;i++){
             String key = (String) keySet[i];
             String value = get(key);

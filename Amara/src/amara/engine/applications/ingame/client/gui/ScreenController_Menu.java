@@ -6,6 +6,8 @@ package amara.engine.applications.ingame.client.gui;
 
 import java.util.HashMap;
 import amara.engine.gui.GameScreenController;
+import amara.engine.input.KeyTitles;
+import amara.engine.input.events.MouseClickEvent;
 import amara.engine.settings.*;
 import amara.engine.settings.types.*;
 import de.lessvoid.nifty.NiftyEvent;
@@ -13,7 +15,8 @@ import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.builder.*;
 import de.lessvoid.nifty.controls.*;
 import de.lessvoid.nifty.controls.checkbox.builder.CheckboxBuilder;
-import de.lessvoid.nifty.controls.scrollpanel.builder.*;
+import de.lessvoid.nifty.controls.dropdown.builder.DropDownBuilder;
+import de.lessvoid.nifty.controls.scrollpanel.builder.ScrollPanelBuilder;
 import de.lessvoid.nifty.controls.slider.builder.SliderBuilder;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
@@ -29,14 +32,18 @@ public class ScreenController_Menu extends GameScreenController{
     }
     private static final String SUFFIX_SLIDER_VALUE = "_value";
     private IngameSettings ingameSettings = new IngameSettings();
+    private int pageID;
     private int currentCategoryIndex = -1;
+    private HashMap<String, String[]> builtDropDownSettings = new HashMap<String, String[]>();
     private HashMap<String, String> editedSettings = new HashMap<String, String>();
+    private String currentEditingSettingKey;
+    private boolean isReadingKeyInput;
 
     @Override
     public void onStartup(){
         super.onStartup();
         generateMenuNavigation();
-        selectCategory("0");
+        selectCategory(0);
     }
     
     private void generateMenuNavigation(){
@@ -60,7 +67,7 @@ public class ScreenController_Menu extends GameScreenController{
                         set("height", "30px");
                         set("label", settingsCategory.getTitle());
                         
-                        interactOnClick("selectCategory(" + categoryIndex + ")");
+                        interactOnClick("selectCategory_Nifty(" + categoryIndex + ")");
                     }});
                 }});
             }
@@ -70,11 +77,18 @@ public class ScreenController_Menu extends GameScreenController{
                 set("height", "32px");
                 
                 control(new ControlBuilder("button"){{
-                    set("width", "100%");
+                    set("width", "50%");
                     set("height", "30px");
                     set("label", "Apply");
 
                     interactOnClick("applyChanges()");
+                }});
+                control(new ControlBuilder("button"){{
+                    set("width", "50%");
+                    set("height", "30px");
+                    set("label", "Reset");
+
+                    interactOnClick("reset()");
                 }});
             }});
             panel(new PanelBuilder(){{
@@ -101,16 +115,31 @@ public class ScreenController_Menu extends GameScreenController{
         menuWindow.setVisible(isVisible);
     }
     
-    public void selectCategory(String indexString){
+    public void selectCategory_Nifty(String indexString){
         int index = Integer.parseInt(indexString);
         if(index != currentCategoryIndex){
-            if(currentCategoryIndex != -1){
-                cacheEditedSettings(ingameSettings.getSubCategories()[currentCategoryIndex]);
-                getElementByID("menu_content_" + currentCategoryIndex).markForRemoval();
+            selectCategory(index);
+        }
+    }
+    
+    public void selectCategory(int index){
+        if(currentCategoryIndex != -1){
+            getElementByID("menu_content_" + currentCategoryIndex).markForRemoval();
+        }
+        pageID++;
+        currentCategoryIndex = index;
+        Element menuContainer = getElementByID("menu_container");
+        builtDropDownSettings.clear();
+        generateMenuContentBuilder(currentCategoryIndex).build(nifty, nifty.getCurrentScreen(), menuContainer);
+        for(String settingKey : builtDropDownSettings.keySet()){
+            String[] items = builtDropDownSettings.get(settingKey);
+            //Retrieve this before adding the items since the event listener updates the editedSettings hashmap
+            int mouseButtonIndex = Settings.toInteger(getSettingValue(settingKey));
+            DropDown dropDown = getDropDown(pageID + "_" + settingKey);
+            for(String item : items){
+                dropDown.addItem(item);
             }
-            currentCategoryIndex = index;
-            Element menuContainer = getElementByID("menu_container");
-            generateMenuContentBuilder(currentCategoryIndex).build(nifty, nifty.getCurrentScreen(), menuContainer);
+            dropDown.selectItemByIndex(mouseButtonIndex);
         }
     }
     
@@ -146,25 +175,28 @@ public class ScreenController_Menu extends GameScreenController{
                             text(new TextBuilder(){{
                                 set("x", "0px");
                                 set("y", "0px");
-                                set("text", setting.getTitle());
-                                set("font", "Interface/fonts/Verdana_14.fnt");
                                 set("width", "160px");
                                 set("height", "30px");
+                                set("text", setting.getTitle());
+                                set("font", "Interface/fonts/Verdana_14.fnt");
                                 set("textHAlign", "left");
                             }});
                             SettingType settingType = setting.getType();
+                            String elementID = (pageID + "_" + settingKey);
                             if(settingType instanceof KeyType){
-                                control(new ControlBuilder("button"){{
+                                control(new ControlBuilder(elementID, "button"){{
                                     set("x", "165px");
                                     set("y", "0px");
                                     set("width", "30px");
                                     set("height", "30px");
-                                    set("label", "?");
+                                    set("label", getKeyTitle(Settings.toInteger(getSettingValue(settingKey))));
+                                    
+                                    interactOnClick("readKeyInput(" + settingKey + ")");
                                 }});
                             }
                             else if(settingType instanceof SliderType){
                                 final SliderType sliderType = (SliderType) settingType;
-                                control(new SliderBuilder(settingKey, false){{
+                                control(new SliderBuilder(elementID, false){{
                                     set("x", "165px");
                                     set("y", "3px");
                                     set("width", "160px");
@@ -172,9 +204,9 @@ public class ScreenController_Menu extends GameScreenController{
                                     max(sliderType.getMaximum());
                                     stepSize(sliderType.getStepSize());
                                     buttonStepSize(sliderType.getButtonStepSize());
-                                    initial(Settings.toFloat(getSettingsValue(settingKey)));
+                                    initial(Settings.toFloat(getSettingValue(settingKey)));
                                 }});
-                                text(new TextBuilder(settingKey + SUFFIX_SLIDER_VALUE){{
+                                text(new TextBuilder(elementID + SUFFIX_SLIDER_VALUE){{
                                     set("x", "330px");
                                     set("y", "0px");
                                     set("width", "62px");
@@ -184,20 +216,24 @@ public class ScreenController_Menu extends GameScreenController{
                                 }});
                             }
                             else if(settingType instanceof BooleanType){
-                                control(new CheckboxBuilder(settingKey){{
+                                control(new CheckboxBuilder(elementID){{
                                     set("x", "165px");
                                     set("y", "0px");
-                                    checked(Settings.toBoolean(getSettingsValue(settingKey)));
+                                    checked(Settings.toBoolean(getSettingValue(settingKey)));
                                 }});
                             }
                             else if(settingType instanceof MouseButtonType){
-                                control(new ControlBuilder("button"){{
+                                control(new DropDownBuilder(elementID){{
                                     set("x", "165px");
                                     set("y", "0px");
                                     set("width", "100px");
                                     set("height", "30px");
-                                    set("label", "???");
                                 }});
+                                String[] items = new String[MouseClickEvent.Button.values().length];
+                                for(int i=0;i<items.length;i++){
+                                    items[i] = getMouseButtonTitle(MouseClickEvent.Button.values()[i]);
+                                }
+                                builtDropDownSettings.put(settingKey, items);
                             }
                         }});
                     }
@@ -206,58 +242,35 @@ public class ScreenController_Menu extends GameScreenController{
         }};
     }
     
-    private String getSettingsValue(String key){
-        String value = editedSettings.get(key);
-        return ((value != null)?value:Settings.get(key));
-    }
-    
     @NiftyEventSubscriber(pattern = ".*")
     public void onNiftyEvent(String elementID, NiftyEvent receivedEvent){
         if(receivedEvent instanceof SliderChangedEvent){
             SliderChangedEvent event = (SliderChangedEvent) receivedEvent;
-            String settinsValue = Settings.toString(event.getValue());
+            String settingKey = getSettingKey(elementID);
+            String settingValue = Settings.toString(event.getValue());
             TextRenderer textRenderer = getTextRenderer(elementID + SUFFIX_SLIDER_VALUE);
             if(textRenderer != null){
-                textRenderer.setText(settinsValue);
+                textRenderer.setText(settingValue);
             }
-            editedSettings.put(elementID, settinsValue);
+            editedSettings.put(settingKey, settingValue);
         }
         else if(receivedEvent instanceof CheckBoxStateChangedEvent){
             CheckBoxStateChangedEvent event = (CheckBoxStateChangedEvent) receivedEvent;
-            editedSettings.put(elementID, Settings.toString(event.isChecked()));
+            editedSettings.put(getSettingKey(elementID), Settings.toString(event.isChecked()));
+        }
+        else if(receivedEvent instanceof DropDownSelectionChangedEvent){
+            DropDownSelectionChangedEvent event = (DropDownSelectionChangedEvent) receivedEvent;
+            editedSettings.put(getSettingKey(elementID), Settings.toString(event.getSelectionItemIndex()));
         }
     }
     
-    private void cacheEditedSettings(SettingsCategory settingsCategory){
-        if(settingsCategory.getSubCategories() != null){
-            for(SettingsCategory settingsSubCategory : settingsCategory.getSubCategories()){
-                cacheEditedSettings(settingsSubCategory);
-            }
-        }
-        else{
-            for(Setting setting : settingsCategory.getSettings()){
-                String settingKey = setting.getKey();
-                SettingType settingType = setting.getType();
-                String settingValue = null;
-                if(settingType instanceof KeyType){
-                    
-                }
-                else if(settingType instanceof SliderType){
-                    Slider slider = getSlider(settingKey);
-                    settingValue = Settings.toString(slider.getValue());
-                }
-                else if(settingType instanceof BooleanType){
-                    CheckBox checkBox = getCheckBox(settingKey);
-                    settingValue = Settings.toString(checkBox.isChecked());
-                }
-                else if(settingType instanceof MouseButtonType){
-                    
-                }
-                if(settingValue != null){
-                    editedSettings.put(settingKey, settingValue);
-                }
-            }
-        }
+    private String getSettingKey(String elementID){
+        return elementID.substring(("" + pageID).length() + 1);
+    }
+    
+    private String getSettingValue(String key){
+        String value = editedSettings.get(key);
+        return ((value != null)?value:Settings.get(key));
     }
     
     public void applyChanges(){
@@ -269,7 +282,39 @@ public class ScreenController_Menu extends GameScreenController{
         editedSettings.clear();
     }
     
+    public void reset(){
+        editedSettings.clear();
+        selectCategory(currentCategoryIndex);
+    }
+    
     public void exitGame(){
         System.exit(0);
+    }
+
+    public void readKeyInput(String settingKey){
+        if(!isReadingKeyInput){
+            getButton(pageID + "_" + settingKey).setText("");
+            currentEditingSettingKey = settingKey;
+            isReadingKeyInput = true;
+        }
+    }
+    
+    public void readKey(int keyCode){
+        editedSettings.put(currentEditingSettingKey, Settings.toString(keyCode));
+        getButton(pageID + "_" + currentEditingSettingKey).setText(getKeyTitle(keyCode));
+        currentEditingSettingKey = null;
+        isReadingKeyInput = false;
+    }
+
+    public boolean isReadingKeyInput(){
+        return isReadingKeyInput;
+    }
+    
+    private static String getKeyTitle(int keyCode){
+        return KeyTitles.getTitle(keyCode);
+    }
+    
+    private static String getMouseButtonTitle(MouseClickEvent.Button mouseButton){
+        return mouseButton.name();
     }
 }

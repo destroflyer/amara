@@ -4,6 +4,8 @@
  */
 package amara.engine.settings;
 
+import com.jme3.input.KeyInput;
+import amara.engine.input.events.MouseClickEvent;
 import amara.engine.settings.types.*;
 
 /**
@@ -18,17 +20,18 @@ public class IngameSettings extends SettingsCategory{
                 new CategorizedSettingsCategory(
                     "spells", "Spells",
                     new Setting[]{
-                        new CategorizedSetting("0", "Spell #1", new KeyType()),
-                        new CategorizedSetting("1", "Spell #2", new KeyType()),
-                        new CategorizedSetting("2", "Spell #3", new KeyType()),
-                        new CategorizedSetting("3", "Spell #4", new KeyType())
+                        new CategorizedSetting("0", "Spell #1", new KeyType(KeyInput.KEY_Q)),
+                        new CategorizedSetting("1", "Spell #2", new KeyType(KeyInput.KEY_W)),
+                        new CategorizedSetting("2", "Spell #3", new KeyType(KeyInput.KEY_E)),
+                        new CategorizedSetting("3", "Spell #4", new KeyType(KeyInput.KEY_R))
                     }
                 ),
-                new SettingsCategory(
+                new CategorizedSettingsCategory(
                     "navigation", "Navigation",
                     new Setting[]{
-                        new CategorizedSetting("select", "Select", new MouseButtonType()),
-                        new CategorizedSetting("walk_attack", "Walk / Attack", new MouseButtonType())
+                        new CategorizedSetting("select", "Select", new MouseButtonType(MouseClickEvent.Button.Left)),
+                        new CategorizedSetting("walk_attack", "Walk / Attack", new MouseButtonType(MouseClickEvent.Button.Right)),
+                        new CategorizedSetting("stop", "Stop", new KeyType(KeyInput.KEY_S))
                     }
                 ),
                 new SettingsCategory(
@@ -36,6 +39,33 @@ public class IngameSettings extends SettingsCategory{
                     new Setting[]{
                         new CategorizedSetting("movement_speed", "Movement Speed", new SliderType(20, 1, 100, 1, 5)),
                         new CategorizedSetting("movement_cursor_border", "Cursor Border Size", new SliderType(90, 0, 200, 1, 5))
+                    }
+                ),
+                new CategorizedSettingsCategory(
+                    "items", "Items",
+                    new Setting[]{
+                        new CategorizedSetting("0", "Item #1", new KeyType(KeyInput.KEY_1)),
+                        new CategorizedSetting("1", "Item #2", new KeyType(KeyInput.KEY_2)),
+                        new CategorizedSetting("2", "Item #3", new KeyType(KeyInput.KEY_3)),
+                        new CategorizedSetting("3", "Item #4", new KeyType(KeyInput.KEY_4)),
+                        new CategorizedSetting("4", "Item #5", new KeyType(KeyInput.KEY_5)),
+                        new CategorizedSetting("5", "Item #6", new KeyType(KeyInput.KEY_6))
+                    }
+                ),
+                new CategorizedSettingsCategory(
+                    "interface", "Interface",
+                    new Setting[]{
+                        new CategorizedSetting("shop", "Shop", new KeyType(KeyInput.KEY_P)),
+                        new CategorizedSetting("menu", "Menu", new KeyType(KeyInput.KEY_ESCAPE))
+                    }
+                ),
+                new CategorizedSettingsCategory(
+                    "reactions", "Reactions",
+                    new Setting[]{
+                        new CategorizedSetting("0", "Kappa", new KeyType(KeyInput.KEY_F1)),
+                        new CategorizedSetting("1", "PogChamp", new KeyType(KeyInput.KEY_F2)),
+                        new CategorizedSetting("2", "Kreygasm", new KeyType(KeyInput.KEY_F3)),
+                        new CategorizedSetting("3", "BibleThump", new KeyType(KeyInput.KEY_F4))
                     }
                 )
             }),
