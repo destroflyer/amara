@@ -13,11 +13,7 @@ import java.util.HashSet;
  *
  * @author Philipp
  */
-public class TransformUpdateSystem implements EntitySystem {
-
-    public void update(EntityWorld entityWorld, float deltaSeconds) {
-        updateTransforms(entityWorld);
-    }
+public class TransformUpdater {
 
     public void updateTransforms(EntityWorld entityWorld) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class, DirectionComponent.class, ScaleComponent.class);

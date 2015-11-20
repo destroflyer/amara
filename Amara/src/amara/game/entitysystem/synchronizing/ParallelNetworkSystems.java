@@ -6,7 +6,7 @@ package amara.game.entitysystem.synchronizing;
 
 import amara.game.entitysystem.EntitySystem;
 import amara.game.entitysystem.systems.game.*;
-import amara.game.entitysystem.systems.physics.intersectionHelper.TransformUpdateSystem;
+import amara.game.entitysystem.systems.physics.TransformUpdateSystem;
 import amara.game.entitysystem.systems.players.*;
 import amara.game.entitysystem.systems.units.*;
 
