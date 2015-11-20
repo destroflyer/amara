@@ -147,14 +147,7 @@ public class ComponentSerializer{
     
     public static Object readClassAndObject(BitInputStream inputStream) throws IOException{
         Class componentClass = readClass(inputStream);
-        Object obj = readObject(inputStream, componentClass);
-        
-        if(obj instanceof HitboxComponent) {
-            if(((HitboxComponent)obj).getShape() instanceof PolygonShape) {
-                System.out.println("read:" + ((PolygonShape)((HitboxComponent)obj).getShape()).getLocalPolygon());
-            }
-        }
-        return obj;
+        return readObject(inputStream, componentClass);
     }
     
     public static Class readClass(BitInputStream inputStream) throws IOException{
