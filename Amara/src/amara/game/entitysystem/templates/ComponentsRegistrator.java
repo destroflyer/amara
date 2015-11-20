@@ -598,20 +598,20 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.audio.AudioVolumeComponent(volume);
             }
         });
-        bitstreamClassManager.register(amara.game.entitysystem.components.audio.IsAudioPausedComponent.class);
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.audio.IsAudioPausedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.audio.IsAudioPausedComponent>("isAudioPaused"){
+        bitstreamClassManager.register(amara.game.entitysystem.components.audio.StartPlayingAudioComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.audio.StartPlayingAudioComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.audio.StartPlayingAudioComponent>("startPlayingAudio"){
 
             @Override
-            public amara.game.entitysystem.components.audio.IsAudioPausedComponent construct(){
-                return new amara.game.entitysystem.components.audio.IsAudioPausedComponent();
+            public amara.game.entitysystem.components.audio.StartPlayingAudioComponent construct(){
+                return new amara.game.entitysystem.components.audio.StartPlayingAudioComponent();
             }
         });
-        bitstreamClassManager.register(amara.game.entitysystem.components.audio.IsAudioPlayingComponent.class);
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.audio.IsAudioPlayingComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.audio.IsAudioPlayingComponent>("isAudioPlaying"){
+        bitstreamClassManager.register(amara.game.entitysystem.components.audio.StopPlayingAudioComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.audio.StopPlayingAudioComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.audio.StopPlayingAudioComponent>("stopPlayingAudio"){
 
             @Override
-            public amara.game.entitysystem.components.audio.IsAudioPlayingComponent construct(){
-                return new amara.game.entitysystem.components.audio.IsAudioPlayingComponent();
+            public amara.game.entitysystem.components.audio.StopPlayingAudioComponent construct(){
+                return new amara.game.entitysystem.components.audio.StopPlayingAudioComponent();
             }
         });
         //buffs
@@ -948,20 +948,6 @@ public class ComponentsRegistrator{
             }
         });
         //audio
-        bitstreamClassManager.register(amara.game.entitysystem.components.effects.audio.PauseAudioComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.audio.PauseAudioComponent.class.getDeclaredField("audioEntities"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.audio.PauseAudioComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.audio.PauseAudioComponent>("pauseAudio"){
-
-            @Override
-            public amara.game.entitysystem.components.effects.audio.PauseAudioComponent construct(){
-                int[] audioEntities = createChildEntities(0, "audioEntities");
-                return new amara.game.entitysystem.components.effects.audio.PauseAudioComponent(audioEntities);
-            }
-        });
         bitstreamClassManager.register(amara.game.entitysystem.components.effects.audio.PlayAudioComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.audio.PlayAudioComponent.class.getDeclaredField("audioEntities"), componentFieldSerializer_Entity);

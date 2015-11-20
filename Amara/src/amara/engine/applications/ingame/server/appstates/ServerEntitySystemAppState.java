@@ -24,6 +24,7 @@ import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.synchronizing.*;
 import amara.game.entitysystem.systems.aggro.*;
 import amara.game.entitysystem.systems.attributes.*;
+import amara.game.entitysystem.systems.audio.*;
 import amara.game.entitysystem.systems.buffs.*;
 import amara.game.entitysystem.systems.buffs.areas.*;
 import amara.game.entitysystem.systems.camps.*;
@@ -146,6 +147,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new SetSpellsCastersSystem());
         addEntitySystem(new SetBaseCooldownSystem());
         addEntitySystem(new SetLevelExperienceSystem());
+        addEntitySystem(new RemoveAudioCommandsSystem());
         for(EntitySystem entitySystem : ParallelNetworkSystems.generateSystems()){
             addEntitySystem(entitySystem);
         }
@@ -190,7 +192,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CalculateEffectImpactSystem());
         addEntitySystem(new ApplyPlayCinematicSystem());
         addEntitySystem(new ApplyDrawTeamAggroSystem());
-        addEntitySystem(new ApplyPauseAudioSystem());
         addEntitySystem(new ApplyPlayAudioSystem());
         addEntitySystem(new ApplyStopAudioSystem());
         addEntitySystem(new ApplyAddBuffsSystem());

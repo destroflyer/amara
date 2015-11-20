@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.effects.spells;
 
+import amara.Util;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.spells.*;
@@ -23,8 +24,9 @@ public class ApplyReplaceSpellsWithNewSpellsSystem implements EntitySystem{
             ReplaceSpellWithNewSpellComponent replaceSpellWithNewSpellComponent = entityWrapper.getComponent(ReplaceSpellWithNewSpellComponent.class);
             EntityWrapper newSpell = EntityTemplate.createFromTemplate(entityWorld, replaceSpellWithNewSpellComponent.getNewSpellTemplate());
             int[] spellsEntities = entityWorld.getComponent(targetEntity, SpellsComponent.class).getSpellsEntities();
-            spellsEntities[replaceSpellWithNewSpellComponent.getSpellIndex()] = newSpell.getId();
-            entityWorld.setComponent(targetEntity, new SpellsComponent(spellsEntities));
+            int[] newSpellsEntities = Util.cloneArray(spellsEntities);
+            newSpellsEntities[replaceSpellWithNewSpellComponent.getSpellIndex()] = newSpell.getId();
+            entityWorld.setComponent(targetEntity, new SpellsComponent(newSpellsEntities));
         }
     }
 }

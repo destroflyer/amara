@@ -37,6 +37,13 @@
                         </areaBuffTargetRules>
                     </entity>
                 </addBuffArea>
+                <playAudio>
+                    <entity id="audioLoop">
+                        <audio>Sounds/sounds/spells/ganfaul_laser_loop.ogg</audio>
+                        <audioLoop/>
+                        <audioVolume>0.75</audioVolume>
+                    </entity>
+                </playAudio>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
@@ -51,6 +58,7 @@
             <entity>
                 <removeEntity/>
                 <removeBuffArea>#buffArea</removeBuffArea>
+                <stopAudio>#audioLoop</stopAudio>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>

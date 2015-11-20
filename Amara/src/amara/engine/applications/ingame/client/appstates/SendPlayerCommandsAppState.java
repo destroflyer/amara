@@ -12,7 +12,7 @@ import com.jme3.math.Vector2f;
 import amara.Queue;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
-import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
+import amara.engine.applications.ingame.client.gui.*;
 import amara.engine.applications.ingame.client.systems.gui.DisplaySpellsImagesSystem;
 import amara.engine.appstates.*;
 import amara.engine.network.NetworkClient;
@@ -38,11 +38,13 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
         
     }
     private ScreenController_HUD screenController_HUD;
+    private ScreenController_Menu screenController_Menu;
 
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
+        screenController_Menu = getAppState(NiftyAppState.class).getScreenController(ScreenController_Menu.class);
     }
 
     @Override
@@ -132,6 +134,10 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
 
                     case KeyInput.KEY_P:
                         screenController_HUD.toggleShopVisible();
+                        break;
+
+                    case KeyInput.KEY_ESCAPE:
+                        screenController_Menu.toggleMenuVisible();
                         break;
 
                     case KeyInput.KEY_F1:

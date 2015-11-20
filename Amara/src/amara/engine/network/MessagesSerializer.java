@@ -5,6 +5,7 @@
 package amara.engine.network;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import com.jme3.math.Vector2f;
 import com.jme3.network.serializing.Serializer;
 import amara.engine.applications.ingame.client.commands.*;
@@ -108,6 +109,7 @@ public class MessagesSerializer{
             Message_PlayerAuthentification.class
         );
         BitstreamClassManager.getInstance().register(
+            ArrayList.class,
             //physics/HitboxComponent
             Circle.class,
             Rectangle.class,

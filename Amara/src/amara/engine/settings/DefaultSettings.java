@@ -50,4 +50,17 @@ public class DefaultSettings{
     public static int[] ANTIALIASING_SAMPLES = new int[]{
         0, 2, 4, 8, 16, 32
     };
+    
+    public static void setDefaults(SettingsCategory settingsCategory){
+        if(settingsCategory.getSubCategories() != null){
+            for(SettingsCategory settingsSubCategory : settingsCategory.getSubCategories()){
+                setDefaults(settingsSubCategory);
+            }
+        }
+        else{
+            for(Setting setting : settingsCategory.getSettings()){
+                Settings.set(setting.getKey(), setting.getType().getDefaultValue());
+            }
+        }
+    }
 }

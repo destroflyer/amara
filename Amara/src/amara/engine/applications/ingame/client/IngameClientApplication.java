@@ -31,13 +31,13 @@ public class IngameClientApplication extends DisplayApplication{
             settings.setFullscreen(true);
         }
         else{
-            settings.setWidth(Settings.getInt("resolution_width"));
-            settings.setHeight(Settings.getInt("resolution_height"));
+            settings.setWidth(Settings.getInteger("resolution_width"));
+            settings.setHeight(Settings.getInteger("resolution_height"));
         }
         settings.setTitle(GameInfo.getClientTitle());
         settings.setIcons(GameInfo.ICONS);
-        settings.setFrameRate(Settings.getInt("frame_rate"));
-        settings.setSamples(Settings.getInt("antialiasing"));
+        settings.setFrameRate(Settings.getInteger("frame_rate"));
+        settings.setSamples(Settings.getInteger("antialiasing"));
         settings.setVSync(Settings.getBoolean("vsync"));
         setShowSettings(false);
         setPauseOnLostFocus(false);

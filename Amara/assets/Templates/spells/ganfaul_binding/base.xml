@@ -21,13 +21,13 @@
                 <triggerDelay>[delay]</triggerDelay>
             </entity>
             <!--play audio-->
-            <!--<entity>
+            <entity>
                 <casterTarget/>
                 <triggeredEffect>
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/sear_cast.ogg</audio>
+                                <audio>Sounds/sounds/spells/ganfaul_binding_cast.ogg</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>
@@ -35,7 +35,7 @@
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
                 <triggerDelay>[delay]</triggerDelay>
-            </entity>-->
+            </entity>
         </instantEffectTriggers>
         <castType>linear_skillshot</castType>
         <castCancelAction/>

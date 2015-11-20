@@ -21,7 +21,7 @@ public class ApplyStopAudioSystem implements EntitySystem{
         {
             for(int audioEntity : entityWrapper.getComponent(StopAudioComponent.class).getAudioEntities()){
                 entityWorld.removeComponent(audioEntity, AudioSourceComponent.class);
-                entityWorld.removeComponent(audioEntity, IsAudioPlayingComponent.class);
+                entityWorld.setComponent(audioEntity, new StopPlayingAudioComponent());
             }
         }
     }

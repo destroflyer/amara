@@ -5,6 +5,7 @@
 package amara.engine.settings;
 
 import java.util.HashMap;
+import amara.Util;
 import amara.engine.files.FileManager;
 
 /**
@@ -20,19 +21,7 @@ public class Settings{
     public static final String FILE__BOOLEAN_FALSE = "false";
     private static HashMap<String, String> values = new HashMap<String, String>();
     static{
-        set("frame_rate", "60");
-        set("resolution_width", "1280");
-        set("resolution_height", "720");
-        set("fullscreen", "false");
-        set("antialiasing", "0");
-        set("vsync", "false");
-        set("audio_volume", "0.07");
-        set("hardware_skinning", "false");
-        set("shadow_quality", "2");
-        set("fog_of_war_update_interval", "0.1");
-        set("terrain_quality", "1");
-        set("camera_movement_speed", "20");
-        set("camera_movement_cursor_border", "90");
+        DefaultSettings.setDefaults(new IngameSettings());
         reloadFile();
     }
     
@@ -64,35 +53,63 @@ public class Settings{
     }
     
     public static void set(String key, int value){
-        set(key, "" + value);
+        set(key, toString(value));
     }
     
     public static void set(String key, float value){
-        set(key, "" + value);
+        set(key, toString(value));
     }
     
     public static void set(String key, boolean value){
-        set(key, (value?FILE__BOOLEAN_TRUE:FILE__BOOLEAN_FALSE));
+        set(key, toString(value));
     }
     
     public static void set(String key, String value){
         values.put(key, value);
     }
     
-    public static int getInt(String key){
-        return Integer.parseInt(get(key));
+    public static int getInteger(String key){
+        return toInteger(get(key));
     }
     
     public static float getFloat(String key){
-        return Float.parseFloat(get(key));
+        return toFloat(get(key));
     }
     
     public static boolean getBoolean(String key){
-        return get(key).equals(FILE__BOOLEAN_TRUE);
+        return toBoolean(get(key));
     }
     
     public static String get(String key){
         return values.get(key);
+    }
+    
+    public static boolean toBoolean(String value){
+        return FILE__BOOLEAN_TRUE.equals(value);
+    }
+    
+    public static int toInteger(String value){
+        return Integer.parseInt(value);
+    }
+    
+    public static float toFloat(String value){
+        return Float.parseFloat(value);
+    }
+    
+    public static String toString(boolean value){
+        return (value?FILE__BOOLEAN_TRUE:FILE__BOOLEAN_FALSE);
+    }
+    
+    public static String toString(int value){
+        return ("" + value);
+    }
+    
+    public static String toString(float value){
+        int valueInt = (int) value;
+        if(valueInt == value){
+            return ("" + valueInt);
+        }
+        return ("" + Util.round(value, 4));
     }
 
     public static void saveFile(){
