@@ -16,7 +16,6 @@ import amara.game.entitysystem.components.effects.buffs.*;
 import amara.game.entitysystem.components.effects.buffs.areas.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
-import amara.game.entitysystem.components.effects.crowdcontrol.knockup.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.effects.game.*;
 import amara.game.entitysystem.components.effects.general.*;
@@ -110,9 +109,6 @@ public class ClientComponentBlacklist{
             RemoveKnockupComponent.class,
             RemoveSilenceComponent.class,
             RemoveStunComponent.class,
-            //effects/crowdcontrol/knockup
-            KnockupDurationComponent.class,
-            KnockupHeightComponent.class,
             //effects/damage
             AddTargetabilityComponent.class,
             AddVulnerabilityComponent.class,
