@@ -67,7 +67,6 @@ public class NiftyAppState extends BaseDisplayAppState{
             Nifty nifty = runningNifties.get(i);
             if(screenControllerClass.isInstance(nifty.getCurrentScreen().getScreenController())){
                 goToScreen(nifty, screenID);
-                break;
             }
         }
     }

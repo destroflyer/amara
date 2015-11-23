@@ -6,7 +6,7 @@ package amara.engine.applications.ingame.client.gui;
 
 import java.util.HashMap;
 import amara.engine.gui.GameScreenController;
-import amara.engine.input.KeyTitles;
+import amara.engine.input.Keys;
 import amara.engine.input.events.MouseClickEvent;
 import amara.engine.settings.*;
 import amara.engine.settings.types.*;
@@ -218,16 +218,15 @@ public class ScreenController_Menu extends GameScreenController{
                             else if(settingType instanceof BooleanType){
                                 control(new CheckboxBuilder(elementID){{
                                     set("x", "165px");
-                                    set("y", "0px");
+                                    set("y", "3px");
                                     checked(Settings.toBoolean(getSettingValue(settingKey)));
                                 }});
                             }
                             else if(settingType instanceof MouseButtonType){
                                 control(new DropDownBuilder(elementID){{
                                     set("x", "165px");
-                                    set("y", "0px");
+                                    set("y", "3px");
                                     set("width", "100px");
-                                    set("height", "30px");
                                 }});
                                 String[] items = new String[MouseClickEvent.Button.values().length];
                                 for(int i=0;i<items.length;i++){
@@ -311,7 +310,7 @@ public class ScreenController_Menu extends GameScreenController{
     }
     
     private static String getKeyTitle(int keyCode){
-        return KeyTitles.getTitle(keyCode);
+        return Keys.getTitle(keyCode);
     }
     
     private static String getMouseButtonTitle(MouseClickEvent.Button mouseButton){

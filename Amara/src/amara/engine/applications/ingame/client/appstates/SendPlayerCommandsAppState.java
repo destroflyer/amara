@@ -38,12 +38,14 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
         
     }
     private ScreenController_HUD screenController_HUD;
+    private ScreenController_Shop screenController_Shop;
     private ScreenController_Menu screenController_Menu;
 
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
+        screenController_Shop = getAppState(NiftyAppState.class).getScreenController(ScreenController_Shop.class);
         screenController_Menu = getAppState(NiftyAppState.class).getScreenController(ScreenController_Menu.class);
     }
 
@@ -65,7 +67,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                             int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
                             int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
                             if(ShopUtil.canUseShop(entityWorld, selectedEntity, hoveredEntity)){
-                                screenController_HUD.setShopVisible(true);
+                                screenController_Shop.setShopVisible(true);
                             }
                         }
                     }
@@ -112,7 +114,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                             sendCommand(new StopCommand());
                         }
                         else if(keyCode == Settings.getInteger("controls_interface_shop")){
-                            screenController_HUD.toggleShopVisible();
+                            screenController_Shop.toggleShopVisible();
                         }
                         else if(keyCode == Settings.getInteger("controls_interface_menu")){
                             screenController_Menu.toggleMenuVisible();

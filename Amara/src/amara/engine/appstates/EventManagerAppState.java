@@ -4,14 +4,14 @@
  */
 package amara.engine.appstates;
 
+import amara.Queue;
+import amara.engine.input.*;
+import amara.engine.input.events.*;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.input.*;
 import com.jme3.input.controls.*;
 import com.jme3.math.Vector2f;
-import amara.Queue;
-import amara.engine.input.*;
-import amara.engine.input.events.*;
 
 /**
  *
@@ -34,14 +34,7 @@ public class EventManagerAppState extends BaseDisplayAppState implements ActionL
         mainApplication.getInputManager().addListener(this, new String[]{
             "mouse_click_left","mouse_click_middle","mouse_click_right"
         });
-        registerKeys(new int[]{
-            KeyInput.KEY_RETURN,
-            KeyInput.KEY_Q, KeyInput.KEY_W, KeyInput.KEY_E, KeyInput.KEY_R,
-            KeyInput.KEY_1, KeyInput.KEY_2, KeyInput.KEY_3, KeyInput.KEY_4, KeyInput.KEY_5, KeyInput.KEY_6,
-            KeyInput.KEY_S,
-            KeyInput.KEY_P, KeyInput.KEY_ESCAPE,
-            KeyInput.KEY_F1, KeyInput.KEY_F2, KeyInput.KEY_F3, KeyInput.KEY_F4
-        });
+        registerKeys(Keys.KEY_CODES);
     }
     
     private void registerKeys(int[] keyCodes){

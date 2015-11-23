@@ -12,34 +12,41 @@ import com.jme3.input.KeyInput;
  *
  * @author Carl
  */
-public class KeyTitles{
+public class Keys{
     
     public static final String UNKNOWN_TITLE = "?";
     private static final String FIELD_NAME_PREFIX = "KEY_";
     private static HashMap<Integer, String> titles = new HashMap<Integer, String>();
-    
-    public static String getTitle(int keyCode){
-        String title = titles.get(keyCode);
-        if(title == null){
-            title = UNKNOWN_TITLE;
-            for(Field field : KeyInput.class.getFields()){
-                field.setAccessible(true);
-                String fieldName = field.getName();
+    public static int[] KEY_CODES;
+    static{
+        for(Field field : KeyInput.class.getFields()){
+            field.setAccessible(true);
+            String fieldName = field.getName();
+            if((field.getType() == int.class) && fieldName.startsWith(FIELD_NAME_PREFIX)){
                 try{
-                    if((field.getType() == int.class) && fieldName.startsWith(FIELD_NAME_PREFIX) && (field.getInt(null) == keyCode)){
-                        title = fieldName.substring(FIELD_NAME_PREFIX.length()).toUpperCase();
-                        break;
-                    }
+                    int keyCode = field.getInt(null);
+                    String title = fieldName.substring(FIELD_NAME_PREFIX.length()).toUpperCase();
+                    titles.put(keyCode, title);
                 }catch(Exception ex){
                     ex.printStackTrace();
                 }
             }
-            titles.put(keyCode, title);
         }
-        return title;
+        KEY_CODES = new int[titles.keySet().size()];
+        int i = 0;
+        for(int keyCode : titles.keySet()){
+            KEY_CODES[i] = keyCode;
+            i++;
+        }
+    }
+    
+    public static String getTitle(int keyCode){
+        String title = titles.get(keyCode);
+        return ((title != null)?title:UNKNOWN_TITLE);
     }
     
     public static void main(String[] args){
+        System.out.println("Keys: " + KEY_CODES.length);
         System.out.println(getTitle(KeyInput.KEY_A));
         System.out.println(getTitle(KeyInput.KEY_B));
         System.out.println(getTitle(KeyInput.KEY_C));

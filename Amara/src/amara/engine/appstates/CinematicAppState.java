@@ -101,6 +101,7 @@ public class CinematicAppState extends BaseDisplayAppState implements ActionList
                 fogOfWarSystem.setDisplayMapSight(true);
             }
             getAppState(NiftyAppState.class).goToScreen(ScreenController_HUD.class, "cinematic");
+            getAppState(NiftyAppState.class).goToScreen(ScreenController_Shop.class, "cinematic");
         }
         else{
             getAppState(IngameCameraAppState.class).restoreState();
