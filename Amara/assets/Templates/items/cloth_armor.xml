@@ -1,9 +1,0 @@
-<template>
-    <entity>
-        <itemID>cloth_armor</itemID>
-        <itemRecipe gold="300"/>
-        <isSellable>210</isSellable>
-        <!--stats-->
-        <bonusFlatArmor>15</bonusFlatArmor>
-    </entity>
-</template>

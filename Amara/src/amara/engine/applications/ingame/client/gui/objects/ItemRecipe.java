@@ -4,7 +4,8 @@
  */
 package amara.engine.applications.ingame.client.gui.objects;
 
-import amara.game.entitysystem.EntityWrapper;
+import amara.Util;
+import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 
 /**
@@ -19,12 +20,15 @@ public class ItemRecipe{
         this.ingredientsRecipes = ingredientsRecipes;
         this.depth = depth;
         generateDescription();
+        updateTotalGold();
     }
     private EntityWrapper item;
     private int gold;
     private ItemRecipe[] ingredientsRecipes;
     private int depth;
     private String description;
+    private int totalGold;
+    private int resolvedGold = -1;
 
     public EntityWrapper getItem(){
         return item;
@@ -74,6 +78,16 @@ public class ItemRecipe{
             addDescriptionSeperator();
             description += getSignedValueText(bonusPercentageAttackSpeedComponent.getValue() * 100) + "% Attack Speed";
         }
+        BonusPercentageCriticalChanceComponent bonusPercentageCriticalChanceComponent = item.getComponent(BonusPercentageCriticalChanceComponent.class);
+        if(bonusPercentageCriticalChanceComponent != null){
+            addDescriptionSeperator();
+            description += getSignedValueText(bonusPercentageCriticalChanceComponent.getValue() * 100) + "% Critical Chance";
+        }
+        BonusPercentageLifestealComponent bonusPercentageLifestealComponent = item.getComponent(BonusPercentageLifestealComponent.class);
+        if(bonusPercentageLifestealComponent != null){
+            addDescriptionSeperator();
+            description += getSignedValueText(bonusPercentageLifestealComponent.getValue() * 100) + "% Lifesteal";
+        }
         BonusFlatAbilityPowerComponent bonusFlatAbilityPowerComponent = item.getComponent(BonusFlatAbilityPowerComponent.class);
         if(bonusFlatAbilityPowerComponent != null){
             addDescriptionSeperator();
@@ -103,6 +117,7 @@ public class ItemRecipe{
     }
     
     private String getSignedValueText(float value){
+        value = Util.compensateFloatRoundingErrors(value);
         String text = "";
         if(value >= 0){
             text += "+";
@@ -119,5 +134,43 @@ public class ItemRecipe{
 
     public String getDescription(){
         return description;
+    }
+    
+    private void updateTotalGold(){
+        totalGold = gold;
+        for(ItemRecipe ingredientRecipe : ingredientsRecipes){
+            ingredientRecipe.updateTotalGold();
+            totalGold += ingredientRecipe.getTotalGold();
+        }
+    }
+
+    public int getTotalGold(){
+        return totalGold;
+    }
+    
+    public void updateResolvedGold(ItemRecipe[] inventoryItemsRecipes){
+        resolvedGold = resolveGold(inventoryItemsRecipes, new boolean[inventoryItemsRecipes.length]);
+    }
+    
+    private int resolveGold(ItemRecipe[] inventoryItemsRecipes, boolean[] usedInventoryIngredients){
+        int neededGold = gold;
+        for(ItemRecipe ingredientRecipe : ingredientsRecipes){
+            boolean ingrendientHasToBeBought = true;
+            for(int r=0;r<inventoryItemsRecipes.length;r++){
+                if((!usedInventoryIngredients[r]) && (inventoryItemsRecipes[r] == ingredientRecipe)){
+                    ingrendientHasToBeBought = false;
+                    usedInventoryIngredients[r] = true;
+                    break;
+                }
+            }
+            if(ingrendientHasToBeBought){
+                neededGold += ingredientRecipe.resolveGold(inventoryItemsRecipes, usedInventoryIngredients);
+            }
+        }
+        return neededGold;
+    }
+
+    public int getResolvedGold(){
+        return resolvedGold;
     }
 }

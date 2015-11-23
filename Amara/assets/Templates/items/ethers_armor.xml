@@ -1,0 +1,11 @@
+<template>
+    <entity>
+        <itemID>ethers_armor</itemID>
+        <name>Ether's Armor</name>
+        <itemRecipe gold="600" itemIDs="heavy_leather_armor,book_of_vitality,book_of_vitality"/>
+        <isSellable>1800</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumHealth>650</bonusFlatMaximumHealth>
+        <bonusFlatHealthRegeneration>10</bonusFlatHealthRegeneration>
+    </entity>
+</template>

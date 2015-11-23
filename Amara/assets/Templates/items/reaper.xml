@@ -1,0 +1,11 @@
+<template>
+    <entity>
+        <itemID>reaper</itemID>
+        <name>Reaper</name>
+        <itemRecipe gold="500" itemIDs="heavy_leather_armor,reinforced_sword"/>
+        <isSellable>1300</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumHealth>400</bonusFlatMaximumHealth>
+        <bonusFlatAttackDamage>40</bonusFlatAttackDamage>
+    </entity>
+</template>

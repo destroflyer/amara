@@ -4,7 +4,7 @@
     <useControls filename="nifty-default-controls.xml"/>
     <screen id="start" controller="amara.engine.applications.ingame.client.gui.ScreenController_Shop">
         <layer childLayout="absolute">
-            <control id="shop_window" name="window" title="Shop" x="150px" y="150px" width="525px" height="400px" hideOnClose="true" visible="false">
+            <control id="shop_window" name="window" title="Shop" x="100px" y="100px" width="525px" height="400px" hideOnClose="true" visible="false">
                 <panel childLayout="horizontal" width="100%" height="100%">
                     <panel id="shop_container" childLayout="horizontal" width="100%" height="100%">
                         <panel childLayout="vertical" width="200px" height="100%" padding="10px" backgroundColor="#000D">
@@ -19,22 +19,32 @@
                             <panel childLayout="horizontal" height="32px">
                                 <control id="shop_item_filter_checkbox_1" name="checkbox"/>
                                 <panel width="6px"/>
-                                <text text="Attack Damage" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                                <text text="Health" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
                             </panel>
                             <panel childLayout="horizontal" height="32px">
                                 <control id="shop_item_filter_checkbox_2" name="checkbox"/>
                                 <panel width="6px"/>
-                                <text text="Ability Power" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                                <text text="Attack Damage" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
                             </panel>
                             <panel childLayout="horizontal" height="32px">
                                 <control id="shop_item_filter_checkbox_3" name="checkbox"/>
                                 <panel width="6px"/>
-                                <text text="Movement Speed" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                                <text text="Ability Power" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
                             </panel>
                             <panel childLayout="horizontal" height="32px">
                                 <control id="shop_item_filter_checkbox_4" name="checkbox"/>
                                 <panel width="6px"/>
-                                <text text="Teemo" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                                <text text="Armor" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_5" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="Magic Resistance" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_6" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="Walk Speed" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
                             </panel>
                             <panel/>
                             <text text="Sell Item" font="Interface/fonts/Verdana_14.fnt" height="23px"/>

@@ -51,7 +51,7 @@ public class ShopUtil{
             }
         }
         int itemEntity = entityWorld.createEntity();
-        int goldCost = resolveItemRecipe(entityWorld, entity, itemID, inventoryItemEntities, itemEntity);
+        int goldCost = resolveItemRecipe(entityWorld, itemID, inventoryItemEntities, itemEntity);
         entityWorld.removeEntity(itemEntity);
         if(inventoryItemEntities.size() <= 5){
             GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
@@ -69,7 +69,7 @@ public class ShopUtil{
         return false;
     }
     
-    private static int resolveItemRecipe(EntityWorld entityWorld, int entity, String itemID, LinkedList<Integer> inventoryItemEntities, int tmpItemEntity){
+    private static int resolveItemRecipe(EntityWorld entityWorld, String itemID, LinkedList<Integer> inventoryItemEntities, int tmpItemEntity){
         entityWorld.removeEntity(tmpItemEntity);
         EntityTemplate.loadTemplate(entityWorld, tmpItemEntity, "items/" + itemID);
         ItemRecipeComponent itemRecipeComponent = entityWorld.getComponent(tmpItemEntity, ItemRecipeComponent.class);
@@ -85,7 +85,7 @@ public class ShopUtil{
                 }
             }
             if(ingrendientHasToBeBought){
-                goldCost += resolveItemRecipe(entityWorld, entity, ingredientID, inventoryItemEntities, tmpItemEntity);
+                goldCost += resolveItemRecipe(entityWorld, ingredientID, inventoryItemEntities, tmpItemEntity);
             }
         }
         return goldCost;

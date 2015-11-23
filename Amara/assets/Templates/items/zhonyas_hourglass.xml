@@ -1,7 +1,8 @@
 <template>
     <entity>
         <itemID>zhonyas_hourglass</itemID>
-        <itemRecipe gold="500" itemIDs="dorans_ring,dorans_ring,needlessly_large_rod"/>
+        <name>Zhonya's Hourglass</name>
+        <itemRecipe gold="2700"/>
         <isSellable>2310</isSellable>
         <!--stats-->
         <bonusFlatAbilityPower>120</bonusFlatAbilityPower>

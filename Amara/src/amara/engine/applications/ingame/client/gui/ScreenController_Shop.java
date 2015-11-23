@@ -36,17 +36,28 @@ public class ScreenController_Shop extends GameScreenController{
     }
     private final static String ITEM_FILTER_CHECKBOX_ID_PREFIX = "shop_item_filter_checkbox_";
     private final static int ITEMS_PER_ROW = 5;
+    private final static int ITEMS_ROW_HEIGHT = 70;
     private static final int INGREDIENT_WIDTH = 45;
     private static final int INGREDIENT_HEIGHT = 60;
     private EntityWorld shopEntityWorld = new EntityWorld();
     private String[] shopItemTemplateNames = new String[]{
-        "boots","dorans_blade","dorans_ring","dagger","needlessly_large_rod","zhonyas_hourglass","giants_belt","rejuvenation_bead","warmogs_armor","youmuus_ghostblade","tiamat","amplifying_tome","fiendish_codex","ionian_boots_of_lucidity","cloth_armor","chain_vest","randuins_omen","null_magic_mantle","negatron_cloak","force_of_nature"
+        "egos_sword","egos_shield","egos_ring",
+        "boots","boots_of_haste","boots_of_ferocity","boots_of_sorcery","boots_of_intellect","boots_of_iron","boots_of_silence",
+        "sword","reinforced_sword","greatsword","dagger","bow",
+        "leather_armor","heavy_leather_armor","cotton_armor","iron_armor","arcane_vesture","enchanted_vesture",
+        "book_of_vampirism","doomblade","hells_scream",
+        "book_of_precision","book_of_extreme_precision","blinkstrike","new_dawn",
+        "swift_dagger","swift_bow",
+        "scepter","rod","the_untamed",
+        "book_of_wisdom","moonlight","nightkiss","requiem",
+        "book_of_vitality","ethers_armor","iron_shield","natures_protector",
+        "reaper","soulblade","misty_arcaneblade"
     };
     private EntityWrapper[] shopItems;
     private EntityWrapper[] shopItems_Special;
     private HashMap<String, ItemRecipe> itemsRecipes = new HashMap<String, ItemRecipe>();
     private String shopItemFilterText = "";
-    private boolean[] shopItemFilters = new boolean[5];
+    private boolean[] shopItemFilters = new boolean[7];
     private boolean isUpdatingShopItemFilters;
     private LinkedList<EntityWrapper> shopFilteredItems = new LinkedList<EntityWrapper>();
     
@@ -73,7 +84,8 @@ public class ScreenController_Shop extends GameScreenController{
             getItemRecipe(shopItemTemplateNames[i]);
         }
         shopItems_Special = new EntityWrapper[]{
-            EntityTemplate.createFromTemplate(shopEntityWorld, "items/rod_of_ages")
+            EntityTemplate.createFromTemplate(shopEntityWorld, "items/zhonyas_hourglass"),
+            EntityTemplate.createFromTemplate(shopEntityWorld, "items/youmuus_ghostblade")
         };
     }
     
@@ -95,6 +107,18 @@ public class ScreenController_Shop extends GameScreenController{
             itemsRecipes.put(itemID, itemRecipe);
         }
         return itemRecipe;
+    }
+    
+    public void updateRecipeCosts(EntityWorld entityWorld, int[] inventoryItemEntities){
+        ItemRecipe[] inventoryItemsRecipes = new ItemRecipe[inventoryItemEntities.length];
+        for(int i=0;i<inventoryItemsRecipes.length;i++){
+            String itemID = entityWorld.getComponent(inventoryItemEntities[i], ItemIDComponent.class).getID();
+            inventoryItemsRecipes[i] = getItemRecipe(itemID);
+        }
+        for(ItemRecipe itemRecipe : itemsRecipes.values()){
+            itemRecipe.updateResolvedGold(inventoryItemsRecipes);
+        }
+        updateShopAvailableItems();
     }
     
     @NiftyEventSubscriber(pattern = ".*")
@@ -169,10 +193,12 @@ public class ScreenController_Shop extends GameScreenController{
             if(!itemID.toLowerCase().contains(itemFilterTextLowerCase)){
                 isFiltered = false;
             }
-            else if((shopItemFilters[1] && (!item.hasComponent(BonusFlatAttackDamageComponent.class)))
-            || (shopItemFilters[2] && (!item.hasComponent(BonusFlatAbilityPowerComponent.class)))
-            || (shopItemFilters[3] && (!item.hasComponent(BonusFlatWalkSpeedComponent.class)))
-            || shopItemFilters[4]){
+            else if((shopItemFilters[1] && (!item.hasComponent(BonusFlatMaximumHealthComponent.class)))
+            || (shopItemFilters[2] && (!item.hasComponent(BonusFlatAttackDamageComponent.class)))
+            || (shopItemFilters[3] && (!item.hasComponent(BonusFlatAbilityPowerComponent.class)))
+            || (shopItemFilters[4] && (!item.hasComponent(BonusFlatArmorComponent.class)))
+            || (shopItemFilters[5] && (!item.hasComponent(BonusFlatMagicResistanceComponent.class)))
+            || (shopItemFilters[6] && (!item.hasComponent(BonusFlatWalkSpeedComponent.class)))){
                 isFiltered = false;
             }
             if(isFiltered){
@@ -181,23 +207,25 @@ public class ScreenController_Shop extends GameScreenController{
         }
         if(itemFilterTextLowerCase.equals("etherblood")){
             shopFilteredItems.add(shopItems_Special[0]);
+            shopFilteredItems.add(shopItems_Special[1]);
         }
         new ScrollPanelBuilder("shop_available_items"){{
             set("height", "100%");
             set("horizontal", "false");
             set("style", "nifty-listbox");
             
+            final int rows = (int) FastMath.ceil(((float) shopFilteredItems.size()) / ITEMS_PER_ROW);
             panel(new PanelBuilder(){{
                 childLayoutVertical();
+                height(((rows * ITEMS_ROW_HEIGHT) + 10) + "px");
                 padding("10px");
                 backgroundColor("#000C");
                 
-                int rows = (int) FastMath.ceil(((float) shopFilteredItems.size()) / ITEMS_PER_ROW);
                 for(int i=0;i<rows;i++){
                     final int rowIndex = i;
                     panel(new PanelBuilder(){{
                         childLayoutHorizontal();
-                        height("70px");
+                        height(ITEMS_ROW_HEIGHT + "px");
                         
                         for(int r=0;r<ITEMS_PER_ROW;r++){
                             final int itemIndex = ((rowIndex * ITEMS_PER_ROW) + r);
@@ -206,6 +234,7 @@ public class ScreenController_Shop extends GameScreenController{
                             }
                             final EntityWrapper item = shopFilteredItems.get(itemIndex);
                             final String itemID = item.getComponent(ItemIDComponent.class).getID();
+                            final ItemRecipe itemRecipe = itemsRecipes.get(itemID);
                             panel(new PanelBuilder(){{
                                 childLayoutVertical();
                                 width("55px");
@@ -237,7 +266,7 @@ public class ScreenController_Shop extends GameScreenController{
                                         width("1px");
                                     }});
                                     text(new TextBuilder(){{
-                                        text("" + item.getComponent(ItemRecipeComponent.class).getGold());
+                                        text("" + getRecipeGoldText(itemRecipe));
                                         font("Interface/fonts/Verdana_12.fnt");
                                     }});
                                     panel(new PanelBuilder());
@@ -267,7 +296,6 @@ public class ScreenController_Shop extends GameScreenController{
     
     private void createRecipeContainer(final Element container, final ItemRecipe itemRecipe, final int x, int width, final int depth, final int maximumDepth){
         final String itemID = itemRecipe.getItem().getComponent(ItemIDComponent.class).getID();
-        final int gold = itemRecipe.getItem().getComponent(ItemRecipeComponent.class).getGold();
         final int recipeContainerPaddingY = ((maximumDepth > 1)?20:50);
         new PanelBuilder(){{
             childLayoutVertical();
@@ -294,7 +322,7 @@ public class ScreenController_Shop extends GameScreenController{
                 text(new TextBuilder(){{
                     width("30px");
                     height("100%");
-                    text("" + gold);
+                    text(getRecipeGoldText(itemRecipe));
                     font("Interface/fonts/Verdana_12.fnt");
                     textHAlignCenter();
                 }});
@@ -307,6 +335,15 @@ public class ScreenController_Shop extends GameScreenController{
                 createRecipeContainer(container, itemRecipe.getIngredients()[i], ingredientX, subWidth, (depth - 1), maximumDepth);
             }
         }
+    }
+    
+    private static String getRecipeGoldText(ItemRecipe itemRecipe){
+        String text = "";
+        if(itemRecipe.getResolvedGold() != itemRecipe.getTotalGold()){
+            text += "\\#00CE00#";
+        }
+        text += itemRecipe.getResolvedGold();
+        return text;
     }
     
     public void hideShopItemInformation(){

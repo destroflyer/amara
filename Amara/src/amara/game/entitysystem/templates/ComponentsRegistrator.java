@@ -395,6 +395,42 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent(value);
             }
         });
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent>("bonusPercentageCriticalChance"){
+
+            @Override
+            public amara.game.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                }
+                return new amara.game.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent(value);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusPercentageLifestealComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusPercentageLifestealComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusPercentageLifestealComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusPercentageLifestealComponent>("bonusPercentageLifesteal"){
+
+            @Override
+            public amara.game.entitysystem.components.attributes.BonusPercentageLifestealComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                }
+                return new amara.game.entitysystem.components.attributes.BonusPercentageLifestealComponent(value);
+            }
+        });
         bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);

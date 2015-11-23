@@ -1,9 +1,0 @@
-<template>
-    <entity>
-        <itemID>rejuvenation_bead</itemID>
-        <itemRecipe gold="180"/>
-        <isSellable>126</isSellable>
-        <!--stats-->
-        <bonusFlatHealthRegeneration>2</bonusFlatHealthRegeneration>
-    </entity>
-</template>

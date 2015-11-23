@@ -1,0 +1,11 @@
+<template>
+    <entity>
+        <itemID>boots_of_iron</itemID>
+        <name>Boots of Iron</name>
+        <itemRecipe gold="500" itemIDs="boots"/>
+        <isSellable>500</isSellable>
+        <!--stats-->
+        <bonusFlatWalkSpeed>0.4</bonusFlatWalkSpeed>
+        <bonusFlatArmor>0.15</bonusFlatArmor>
+    </entity>
+</template>

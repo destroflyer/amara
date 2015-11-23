@@ -13,7 +13,7 @@ import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.math.Vector2f;
-import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
+import amara.engine.applications.ingame.client.gui.*;
 import amara.engine.applications.ingame.client.systems.camera.*;
 import amara.engine.applications.ingame.client.systems.filters.*;
 import amara.engine.applications.ingame.client.systems.gui.*;
@@ -64,6 +64,7 @@ public class PlayerAppState extends BaseDisplayAppState implements ActionListene
             localEntitySystemAppState.addEntitySystem(fogOfWarSystem);
         }
         ScreenController_HUD screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
+        ScreenController_Shop screenController_Shop = getAppState(NiftyAppState.class).getScreenController(ScreenController_Shop.class);
         localEntitySystemAppState.addEntitySystem(new DisplayPlayerSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayLevelSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayExperienceSystem(playerEntity, screenController_HUD));
@@ -75,6 +76,7 @@ public class PlayerAppState extends BaseDisplayAppState implements ActionListene
         localEntitySystemAppState.addEntitySystem(new UpdateUpgradeSpellsPanelSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayGoldSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayDeathRecapSystem(playerEntity, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new UpdateRecipeCostsSystem(playerEntity, screenController_Shop));
     }
 
     @Override

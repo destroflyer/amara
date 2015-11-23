@@ -1,9 +1,0 @@
-<template>
-    <entity>
-        <itemID>negatron_cloak</itemID>
-        <itemRecipe gold="350" itemIDs="null_magic_mantle"/>
-        <isSellable>595</isSellable>
-        <!--stats-->
-        <bonusFlatMagicResistance>45</bonusFlatMagicResistance>
-    </entity>
-</template>
