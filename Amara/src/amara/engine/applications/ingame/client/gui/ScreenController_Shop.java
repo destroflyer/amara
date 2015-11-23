@@ -53,6 +53,9 @@ public class ScreenController_Shop extends GameScreenController{
         "book_of_vitality","ethers_armor","iron_shield","natures_protector",
         "reaper","soulblade","misty_arcaneblade"
     };
+    private String[] shopItemTemplateNames_Special = new String[]{
+        "zhonyas_hourglass","youmuus_ghostblade"
+    };
     private EntityWrapper[] shopItems;
     private EntityWrapper[] shopItems_Special;
     private HashMap<String, ItemRecipe> itemsRecipes = new HashMap<String, ItemRecipe>();
@@ -79,14 +82,17 @@ public class ScreenController_Shop extends GameScreenController{
         for(int i=0;i<shopItems.length;i++){
             shopItems[i] = EntityTemplate.createFromTemplate(shopEntityWorld, "items/" + shopItemTemplateNames[i]);
         }
+        shopItems_Special = new EntityWrapper[shopItemTemplateNames_Special.length];
+        for(int i=0;i<shopItems_Special.length;i++){
+            shopItems_Special[i] = EntityTemplate.createFromTemplate(shopEntityWorld, "items/" + shopItemTemplateNames_Special[i]);
+        }
         //Preload recipes
         for(int i=0;i<shopItems.length;i++){
             getItemRecipe(shopItemTemplateNames[i]);
         }
-        shopItems_Special = new EntityWrapper[]{
-            EntityTemplate.createFromTemplate(shopEntityWorld, "items/zhonyas_hourglass"),
-            EntityTemplate.createFromTemplate(shopEntityWorld, "items/youmuus_ghostblade")
-        };
+        for(int i=0;i<shopItems_Special.length;i++){
+            getItemRecipe(shopItemTemplateNames_Special[i]);
+        }
     }
     
     private ItemRecipe getItemRecipe(String itemID){
@@ -234,7 +240,7 @@ public class ScreenController_Shop extends GameScreenController{
                             }
                             final EntityWrapper item = shopFilteredItems.get(itemIndex);
                             final String itemID = item.getComponent(ItemIDComponent.class).getID();
-                            final ItemRecipe itemRecipe = itemsRecipes.get(itemID);
+                            final ItemRecipe itemRecipe = getItemRecipe(itemID);
                             panel(new PanelBuilder(){{
                                 childLayoutVertical();
                                 width("55px");
