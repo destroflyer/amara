@@ -37,17 +37,27 @@
         <hitboxActive/>
         <!--stats-->
         <isAlive/>
-        <baseMaximumHealth>1000</baseMaximumHealth>
-        <baseHealthRegeneration>10</baseHealthRegeneration>
-        <baseAttackDamage>200</baseAttackDamage>
-        <baseAttackSpeed>0.6</baseAttackSpeed>
-        <baseArmor>30</baseArmor>
-        <baseMagicResistance>30</baseMagicResistance>
-        <baseWalkSpeed>5.75</baseWalkSpeed>
-        <inventory>
-            <entity template="items/boots"/>
-            <entity template="items/youmuus_ghostblade"/>
-        </inventory>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>600</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>1.5</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>60</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.6</bonusFlatAttackSpeed>
+                <bonusFlatArmor>30</bonusFlatArmor>
+                <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>5.75</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <attributesPerLevel>
+            <entity>
+                <bonusFlatMaximumHealth>90</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>0.2</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>3</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.02</bonusFlatAttackSpeed>
+                <bonusFlatArmor>4</bonusFlatArmor>
+                <bonusFlatMagicResistance>0</bonusFlatMagicResistance>
+            </entity>
+        </attributesPerLevel>
         <requestUpdateAttributes/>
         <isTargetable/>
         <isVulnerable/>

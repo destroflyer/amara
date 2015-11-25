@@ -30,17 +30,27 @@
         <hitboxActive/>
         <!--stats-->
         <isAlive/>
-        <baseMaximumHealth>1200</baseMaximumHealth>
-        <baseHealthRegeneration>10</baseHealthRegeneration>
-        <baseAttackDamage>40</baseAttackDamage>
-        <baseAttackSpeed>0.7</baseAttackSpeed>
-        <baseArmor>28</baseArmor>
-        <baseMagicResistance>30</baseMagicResistance>
-        <baseWalkSpeed>6</baseWalkSpeed>
-        <inventory>
-            <entity template="items/boots"/>
-            <entity template="items/dorans_ring"/>
-        </inventory>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>630</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>2</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>48</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.6</bonusFlatAttackSpeed>
+                <bonusFlatArmor>30</bonusFlatArmor>
+                <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>6</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <attributesPerLevel>
+            <entity>
+                <bonusFlatMaximumHealth>95</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>0.3</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>2.5</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.02</bonusFlatAttackSpeed>
+                <bonusFlatArmor>3</bonusFlatArmor>
+                <bonusFlatMagicResistance>0</bonusFlatMagicResistance>
+            </entity>
+        </attributesPerLevel>
         <requestUpdateAttributes/>
         <isTargetable/>
         <isVulnerable/>

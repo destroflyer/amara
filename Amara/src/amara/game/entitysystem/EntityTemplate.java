@@ -121,11 +121,13 @@ public class EntityTemplate{
             entityWrapper.setComponent(new HitboxActiveComponent());
             
             entityWrapper.setComponent(new IsAliveComponent());
+            int baseAttributesEntity = entityWorld.createEntity();
             int spawnCounter = entityWorld.getComponent(parameters[0], RepeatingTriggerCounterComponent.class).getCounter();
-            entityWrapper.setComponent(new BaseMaximumHealthComponent(320 + (spawnCounter * 2)));
-            entityWrapper.setComponent(new BaseAttackDamageComponent(18 + (spawnCounter * 0.3f)));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
-            entityWrapper.setComponent(new BaseWalkSpeedComponent(3));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(320 + (spawnCounter * 2)));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackDamageComponent(18 + (spawnCounter * 0.3f)));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackSpeedComponent(0.7f));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(3));
+            entityWrapper.setComponent(new BaseAttributesComponent(baseAttributesEntity));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
@@ -163,11 +165,13 @@ public class EntityTemplate{
             entityWrapper.setComponent(new HitboxActiveComponent());
             
             entityWrapper.setComponent(new IsAliveComponent());
+            int baseAttributesEntity = entityWorld.createEntity();
             int spawnCounter = entityWorld.getComponent(parameters[0], RepeatingTriggerCounterComponent.class).getCounter();
-            entityWrapper.setComponent(new BaseMaximumHealthComponent(450 + (spawnCounter * 10)));
-            entityWrapper.setComponent(new BaseAttackDamageComponent(22 + (spawnCounter * 1)));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.7f));
-            entityWrapper.setComponent(new BaseWalkSpeedComponent(3));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(450 + (spawnCounter * 10)));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackDamageComponent(22 + (spawnCounter * 1)));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackSpeedComponent(0.7f));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(3));
+            entityWrapper.setComponent(new BaseAttributesComponent(baseAttributesEntity));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());
@@ -244,11 +248,13 @@ public class EntityTemplate{
             entityWrapper.setComponent(new HitboxActiveComponent());
             
             entityWrapper.setComponent(new IsAliveComponent());
-            entityWrapper.setComponent(new BaseMaximumHealthComponent(4000));
-            entityWrapper.setComponent(new BaseHealthRegenerationComponent(40));
-            entityWrapper.setComponent(new BaseAttackDamageComponent(150));
-            entityWrapper.setComponent(new BaseAttackSpeedComponent(0.6f));
-            entityWrapper.setComponent(new BaseWalkSpeedComponent(2.5f));
+            int baseAttributesEntity = entityWorld.createEntity();
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(4000));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatHealthRegenerationComponent(40));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackDamageComponent(150));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackSpeedComponent(0.6f));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(2.5f));
+            entityWrapper.setComponent(new BaseAttributesComponent(baseAttributesEntity));
             entityWrapper.setComponent(new RequestUpdateAttributesComponent());
             entityWrapper.setComponent(new IsTargetableComponent());
             entityWrapper.setComponent(new IsVulnerableComponent());

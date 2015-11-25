@@ -36,10 +36,14 @@
         <hitboxActive/>
         <!--stats-->
         <isAlive/>
-        <baseMaximumHealth>1100</baseMaximumHealth>
-        <baseAttackDamage>25</baseAttackDamage>
-        <baseAttackSpeed>0.7</baseAttackSpeed>
-        <baseWalkSpeed>4</baseWalkSpeed>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>1100</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>25</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.7</bonusFlatAttackSpeed>
+                <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
         <requestUpdateAttributes/>
         <isTargetable/>
         <isVulnerable/>

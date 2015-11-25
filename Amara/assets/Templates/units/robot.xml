@@ -29,15 +29,27 @@
         <hitboxActive/>
         <!--stats-->
         <isAlive/>
-        <baseMaximumHealth>700</baseMaximumHealth>
-        <baseAttackDamage>40</baseAttackDamage>
-        <baseAttackSpeed>0.6</baseAttackSpeed>
-        <baseArmor>27</baseArmor>
-        <baseMagicResistance>30</baseMagicResistance>
-        <baseWalkSpeed>6</baseWalkSpeed>
-        <inventory>
-            <entity template="items/boots"/>
-        </inventory>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>550</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>1</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>55</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.6</bonusFlatAttackSpeed>
+                <bonusFlatArmor>27</bonusFlatArmor>
+                <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>6</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <attributesPerLevel>
+            <entity>
+                <bonusFlatMaximumHealth>85</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>0.15</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>3</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.03</bonusFlatAttackSpeed>
+                <bonusFlatArmor>4</bonusFlatArmor>
+                <bonusFlatMagicResistance>0</bonusFlatMagicResistance>
+            </entity>
+        </attributesPerLevel>
         <requestUpdateAttributes/>
         <isTargetable/>
         <isVulnerable/>

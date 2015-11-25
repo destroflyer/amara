@@ -36,16 +36,27 @@
         <hitboxActive/>
         <!--stats-->
         <isAlive/>
-        <baseMaximumHealth>500</baseMaximumHealth>
-        <baseAttackDamage>80</baseAttackDamage>
-        <baseAttackSpeed>0.7</baseAttackSpeed>
-        <baseArmor>22</baseArmor>
-        <baseMagicResistance>30</baseMagicResistance>
-        <baseWalkSpeed>6.25</baseWalkSpeed>
-        <inventory>
-            <entity template="items/boots"/>
-            <entity template="items/dorans_blade"/>
-        </inventory>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>520</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>1</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>55</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.7</bonusFlatAttackSpeed>
+                <bonusFlatArmor>25</bonusFlatArmor>
+                <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>6.25</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <attributesPerLevel>
+            <entity>
+                <bonusFlatMaximumHealth>75</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>0.15</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>4</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.035</bonusFlatAttackSpeed>
+                <bonusFlatArmor>3</bonusFlatArmor>
+                <bonusFlatMagicResistance>0</bonusFlatMagicResistance>
+            </entity>
+        </attributesPerLevel>
         <requestUpdateAttributes/>
         <isTargetable/>
         <isVulnerable/>

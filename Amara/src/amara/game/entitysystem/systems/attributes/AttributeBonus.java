@@ -17,6 +17,7 @@ public class AttributeBonus{
     private float flatHealthRegeneration = 0;
     private float flatAttackDamage = 0;
     private float flatAbilityPower = 0;
+    private float flatAttackSpeed = 0;
     private float percentageAttackSpeed = 0;
     private float percentageCooldownSpeed = 0;
     private float flatArmor = 0;
@@ -40,14 +41,6 @@ public class AttributeBonus{
         return flatHealthRegeneration;
     }
 
-    public void addFlatAbilityPower(float value){
-        flatAbilityPower += value;
-    }
-
-    public float getFlatAbilityPower(){
-        return flatAbilityPower;
-    }
-
     public void addFlatAttackDamage(float value){
         flatAttackDamage += value;
     }
@@ -56,6 +49,22 @@ public class AttributeBonus{
         return flatAttackDamage;
     }
 
+    public void addFlatAbilityPower(float value){
+        flatAbilityPower += value;
+    }
+
+    public float getFlatAbilityPower(){
+        return flatAbilityPower;
+    }
+    
+    public void addFlatAttackSpeed(float value){
+        flatAttackSpeed += value;
+    }
+
+    public float getFlatAttackSpeed(){
+        return flatAttackSpeed;
+    }
+    
     public void addPercentageAttackSpeed(float value){
         percentageAttackSpeed += value;
     }

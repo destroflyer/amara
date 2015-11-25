@@ -63,8 +63,10 @@ public class Map_Techtest extends Map{
                 unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
                 unit.setComponent(new HitboxActiveComponent());
                 unit.setComponent(new IsAliveComponent());
-                unit.setComponent(new BaseMaximumHealthComponent(500));
-                unit.setComponent(new BaseWalkSpeedComponent(3));
+                int baseAttributesEntity = entityWorld.createEntity();
+                entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(500));
+                entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(3));
+                unit.setComponent(new BaseAttributesComponent(baseAttributesEntity));
                 unit.setComponent(new RequestUpdateAttributesComponent());
                 unit.setComponent(new IsTargetableComponent());
                 unit.setComponent(new IsVulnerableComponent());
@@ -84,7 +86,9 @@ public class Map_Techtest extends Map{
         boss.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
         boss.setComponent(new HitboxActiveComponent());
         boss.setComponent(new IsAliveComponent());
-        boss.setComponent(new BaseMaximumHealthComponent(800));
+        int baseAttributesEntity = entityWorld.createEntity();
+        entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(800));
+        boss.setComponent(new BaseAttributesComponent(baseAttributesEntity));
         boss.setComponent(new RequestUpdateAttributesComponent());
         boss.setComponent(new IsTargetableComponent());
         boss.setComponent(new IsVulnerableComponent());

@@ -195,8 +195,8 @@ public class ScreenController_Shop extends GameScreenController{
         for(int i=0;i<shopItems.length;i++){
             EntityWrapper item = shopItems[i];
             boolean isFiltered = true;
-            String itemID = item.getComponent(ItemIDComponent.class).getID();
-            if(!itemID.toLowerCase().contains(itemFilterTextLowerCase)){
+            String itemName = item.getComponent(NameComponent.class).getName();
+            if(!itemName.toLowerCase().contains(itemFilterTextLowerCase)){
                 isFiltered = false;
             }
             else if((shopItemFilters[1] && (!item.hasComponent(BonusFlatMaximumHealthComponent.class)))

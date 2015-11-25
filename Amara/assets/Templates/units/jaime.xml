@@ -30,16 +30,27 @@
         <hitboxActive/>
         <!--stats-->
         <isAlive/>
-        <baseMaximumHealth>450</baseMaximumHealth>
-        <baseAttackDamage>50</baseAttackDamage>
-        <baseAttackSpeed>0.7</baseAttackSpeed>
-        <baseArmor>25</baseArmor>
-        <baseMagicResistance>30</baseMagicResistance>
-        <baseWalkSpeed>6</baseWalkSpeed>
-        <inventory>
-            <entity template="items/boots"/>
-            <entity template="items/zhonyas_hourglass"/>
-        </inventory>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>550</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>1.25</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>52</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.7</bonusFlatAttackSpeed>
+                <bonusFlatArmor>27</bonusFlatArmor>
+                <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>6</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <attributesPerLevel>
+            <entity>
+                <bonusFlatMaximumHealth>80</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>0.15</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>4</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.02</bonusFlatAttackSpeed>
+                <bonusFlatArmor>3</bonusFlatArmor>
+                <bonusFlatMagicResistance>0</bonusFlatMagicResistance>
+            </entity>
+        </attributesPerLevel>
         <requestUpdateAttributes/>
         <isTargetable/>
         <isVulnerable/>

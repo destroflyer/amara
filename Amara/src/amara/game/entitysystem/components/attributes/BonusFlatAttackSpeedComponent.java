@@ -12,13 +12,13 @@ import amara.game.entitysystem.synchronizing.ComponentField;
  * @author Carl
  */
 @Serializable
-public class BaseAbilityPowerComponent{
+public class BonusFlatAttackSpeedComponent{
 
-    public BaseAbilityPowerComponent(){
+    public BonusFlatAttackSpeedComponent(){
         
     }
     
-    public BaseAbilityPowerComponent(float value){
+    public BonusFlatAttackSpeedComponent(float value){
         this.value = value;
     }
     @ComponentField(type=ComponentField.Type.ATTRIBUTE)

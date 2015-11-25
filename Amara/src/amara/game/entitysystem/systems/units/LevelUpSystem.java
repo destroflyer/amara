@@ -5,6 +5,7 @@
 package amara.game.entitysystem.systems.units;
 
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.units.*;
 
 /**
@@ -31,6 +32,7 @@ public class LevelUpSystem implements EntitySystem{
         if(experience >= neededLevelUpExperience){
             entityWorld.setComponent(entity, new LevelComponent(level + 1));
             entityWorld.setComponent(entity, new ExperienceComponent(experience - neededLevelUpExperience));
+            entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
             SpellsUpgradePointsComponent spellsUpgradePointsComponent = entityWorld.getComponent(entity, SpellsUpgradePointsComponent.class);
             if(spellsUpgradePointsComponent != null){
                 entityWorld.setComponent(entity, new SpellsUpgradePointsComponent(spellsUpgradePointsComponent.getUpgradePoints() + 1));

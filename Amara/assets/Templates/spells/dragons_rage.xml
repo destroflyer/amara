@@ -77,7 +77,6 @@
                                         </playAudio>
                                     </entity>
                                 </triggeredEffect>
-                                <triggerOnce/>
                             </entity>
                             <!--remove collision trigger-->
                             <entity>

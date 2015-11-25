@@ -89,150 +89,6 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.AttackSpeedComponent(value);
             }
         });
-        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent>("baseAbilityPower"){
-
-            @Override
-            public amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
-                }
-                return new amara.game.entitysystem.components.attributes.BaseAbilityPowerComponent(value);
-            }
-        });
-        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseArmorComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseArmorComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseArmorComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseArmorComponent>("baseArmor"){
-
-            @Override
-            public amara.game.entitysystem.components.attributes.BaseArmorComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
-                }
-                return new amara.game.entitysystem.components.attributes.BaseArmorComponent(value);
-            }
-        });
-        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseAttackDamageComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseAttackDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseAttackDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseAttackDamageComponent>("baseAttackDamage"){
-
-            @Override
-            public amara.game.entitysystem.components.attributes.BaseAttackDamageComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
-                }
-                return new amara.game.entitysystem.components.attributes.BaseAttackDamageComponent(value);
-            }
-        });
-        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent>("baseAttackSpeed"){
-
-            @Override
-            public amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
-                }
-                return new amara.game.entitysystem.components.attributes.BaseAttackSpeedComponent(value);
-            }
-        });
-        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent>("baseHealthRegeneration"){
-
-            @Override
-            public amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
-                }
-                return new amara.game.entitysystem.components.attributes.BaseHealthRegenerationComponent(value);
-            }
-        });
-        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent>("baseMagicResistance"){
-
-            @Override
-            public amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
-                }
-                return new amara.game.entitysystem.components.attributes.BaseMagicResistanceComponent(value);
-            }
-        });
-        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent>("baseMaximumHealth"){
-
-            @Override
-            public amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
-                }
-                return new amara.game.entitysystem.components.attributes.BaseMaximumHealthComponent(value);
-            }
-        });
-        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent>("baseWalkSpeed"){
-
-            @Override
-            public amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
-                }
-                return new amara.game.entitysystem.components.attributes.BaseWalkSpeedComponent(value);
-            }
-        });
         bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusFlatAbilityPowerComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusFlatAbilityPowerComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
@@ -285,6 +141,24 @@ public class ComponentsRegistrator{
                     value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusFlatAttackDamageComponent(value);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusFlatAttackSpeedComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusFlatAttackSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusFlatAttackSpeedComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusFlatAttackSpeedComponent>("bonusFlatAttackSpeed"){
+
+            @Override
+            public amara.game.entitysystem.components.attributes.BonusFlatAttackSpeedComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                }
+                return new amara.game.entitysystem.components.attributes.BonusFlatAttackSpeedComponent(value);
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent.class);
@@ -2832,6 +2706,20 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.units.AttackMoveComponent(targetEntity);
             }
         });
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.AttributesPerLevelComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.AttributesPerLevelComponent.class.getDeclaredField("bonusAttributesEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.AttributesPerLevelComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.AttributesPerLevelComponent>("attributesPerLevel"){
+
+            @Override
+            public amara.game.entitysystem.components.units.AttributesPerLevelComponent construct(){
+                int bonusAttributesEntity = createChildEntity(0, "bonusAttributesEntity");
+                return new amara.game.entitysystem.components.units.AttributesPerLevelComponent(bonusAttributesEntity);
+            }
+        });
         bitstreamClassManager.register(amara.game.entitysystem.components.units.AutoAggroComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.AutoAggroComponent.class.getDeclaredField("range"), componentFieldSerializer_Distance);
@@ -2862,6 +2750,20 @@ public class ComponentsRegistrator{
             public amara.game.entitysystem.components.units.AutoAttackComponent construct(){
                 int autoAttackEntity = createChildEntity(0, "autoAttackEntity");
                 return new amara.game.entitysystem.components.units.AutoAttackComponent(autoAttackEntity);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.BaseAttributesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.BaseAttributesComponent.class.getDeclaredField("bonusAttributesEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.BaseAttributesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.BaseAttributesComponent>("baseAttributes"){
+
+            @Override
+            public amara.game.entitysystem.components.units.BaseAttributesComponent construct(){
+                int bonusAttributesEntity = createChildEntity(0, "bonusAttributesEntity");
+                return new amara.game.entitysystem.components.units.BaseAttributesComponent(bonusAttributesEntity);
             }
         });
         //bounties
