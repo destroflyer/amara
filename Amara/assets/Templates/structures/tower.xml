@@ -9,11 +9,15 @@
         </hitbox>
         <!--stats-->
         <isAlive/>
-        <baseMaximumHealth>1200</baseMaximumHealth>
-        <baseAttackDamage>150</baseAttackDamage>
-        <baseAttackSpeed>0.8</baseAttackSpeed>
-        <baseArmor>100</baseArmor>
-        <baseMagicResistance>100</baseMagicResistance>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>1200</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>150</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.8</bonusFlatAttackSpeed>
+                <bonusFlatArmor>100</bonusFlatArmor>
+                <bonusFlatMagicResistance>100</bonusFlatMagicResistance>
+            </entity>
+        </baseAttributes>
         <requestUpdateAttributes/>
         <isTargetable/>
         <isVulnerable/>
