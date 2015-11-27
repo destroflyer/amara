@@ -24,6 +24,8 @@ public class AttributeBonus{
     private float flatMagicResistance = 0;
     private float flatWalkSpeed = 0;
     private float percentageWalkSpeed = 1;
+    private float percentageCriticalChance = 0;
+    private float percentageLifesteal = 0;
 
     public void addFlatMaximumHealth(float value){
         flatMaximumHealth += value;
@@ -111,5 +113,21 @@ public class AttributeBonus{
 
     public float getPercentageWalkSpeed(){
         return percentageWalkSpeed;
+    }
+
+    public float getPercentageCriticalChance(){
+        return percentageCriticalChance;
+    }
+
+    public void addPercentageCriticalChance(float value){
+        percentageCriticalChance += value;
+    }
+
+    public float getPercentageLifesteal(){
+        return percentageLifesteal;
+    }
+    
+    public void addPercentageLifesteal(float value){
+        percentageLifesteal += value;
     }
 }

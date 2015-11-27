@@ -25,19 +25,7 @@ public class ApplyMagicDamageSystem implements EntitySystem{
             if(entityWorld.hasComponent(targetID, IsVulnerableComponent.class)){
                 HealthComponent healthComponent = entityWorld.getComponent(targetID, HealthComponent.class);
                 if(healthComponent != null){
-                    float magicResistance = 0;
-                    MagicResistanceComponent magicResistanceComponent = entityWorld.getComponent(targetID, MagicResistanceComponent.class);
-                    if(magicResistanceComponent != null){
-                        magicResistance = magicResistanceComponent.getValue();
-                    }
-                    float damageFactor;
-                    if(magicResistance >= 0){
-                        damageFactor = (100 / (100 + magicResistance));
-                    }
-                    else{
-                        damageFactor = (2 - (100 / (100 - magicResistance)));
-                    }
-                    float damage = (damageFactor * entityWrapper.getComponent(MagicDamageComponent.class).getValue());
+                    float damage = entityWrapper.getComponent(MagicDamageComponent.class).getValue();
                     if(damage > 0){
                         float health = (healthComponent.getValue() - damage);
                         entityWorld.setComponent(targetID, new HealthComponent(health));

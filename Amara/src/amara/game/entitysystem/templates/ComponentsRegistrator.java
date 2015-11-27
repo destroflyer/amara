@@ -341,6 +341,24 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.CooldownSpeedComponent(value);
             }
         });
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.CriticalChanceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.CriticalChanceComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.CriticalChanceComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.CriticalChanceComponent>("criticalChance"){
+
+            @Override
+            public amara.game.entitysystem.components.attributes.CriticalChanceComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                }
+                return new amara.game.entitysystem.components.attributes.CriticalChanceComponent(value);
+            }
+        });
         bitstreamClassManager.register(amara.game.entitysystem.components.attributes.HealthComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.HealthComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
@@ -375,6 +393,24 @@ public class ComponentsRegistrator{
                     value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.HealthRegenerationComponent(value);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.LifestealComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.LifestealComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.LifestealComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.LifestealComponent>("lifesteal"){
+
+            @Override
+            public amara.game.entitysystem.components.attributes.LifestealComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                }
+                return new amara.game.entitysystem.components.attributes.LifestealComponent(value);
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.attributes.MagicResistanceComponent.class);
@@ -1222,6 +1258,14 @@ public class ComponentsRegistrator{
             @Override
             public amara.game.entitysystem.components.effects.damage.AddVulnerabilityComponent construct(){
                 return new amara.game.entitysystem.components.effects.damage.AddVulnerabilityComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.CanCritComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.CanCritComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.CanCritComponent>("canCrit"){
+
+            @Override
+            public amara.game.entitysystem.components.effects.damage.CanCritComponent construct(){
+                return new amara.game.entitysystem.components.effects.damage.CanCritComponent();
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent.class);

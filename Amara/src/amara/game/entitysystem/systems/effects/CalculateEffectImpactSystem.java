@@ -43,7 +43,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 EffectCastTargetComponent effectCastTargetComponent = entityWrapper.getComponent(EffectCastTargetComponent.class);
                 int[] affectedTargetEntities = entityWrapper.getComponent(AffectedTargetsComponent.class).getTargetEntities();
                 for(int i=0;i<affectedTargetEntities.length;i++){
-                    EntityWrapper targetEntity = entityWorld.getWrapped(affectedTargetEntities[i]);
+                    int targetEntity = affectedTargetEntities[i];
                     EntityWrapper effectImpact = entityWorld.getWrapped(entityWorld.createEntity());
                     float physicalDamage = 0;
                     float magicDamage = 0;
@@ -70,12 +70,31 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         if((scalingAbilityPowerMagicDamageComponent != null) && effectSource.hasComponent(AbilityPowerComponent.class)){
                             magicDamage += (effectSource.getComponent(AbilityPowerComponent.class).getValue() * scalingAbilityPowerMagicDamageComponent.getRatio());
                         }
+                        if(effect.hasComponent(CanCritComponent.class)){
+                            CriticalChanceComponent criticalChanceComponent = effectSource.getComponent(CriticalChanceComponent.class);
+                            if((criticalChanceComponent != null) && (Math.random() < criticalChanceComponent.getValue())){
+                                physicalDamage *= 2;
+                                magicDamage *= 2;
+                            }
+                        }
                         effectImpact.setComponent(effectCastSourceComponent);
                     }
                     if(physicalDamage != 0){
+                        float armor = 0;
+                        ArmorComponent armorComponent = entityWorld.getComponent(targetEntity, ArmorComponent.class);
+                        if(armorComponent != null){
+                            armor = armorComponent.getValue();
+                        }
+                        physicalDamage *= getResistanceDamageFactor(armor);
                         effectImpact.setComponent(new PhysicalDamageComponent(physicalDamage));
                     }
                     if(magicDamage != 0){
+                        float magicResistance = 0;
+                        MagicResistanceComponent magicResistanceComponent = entityWorld.getComponent(targetEntity, MagicResistanceComponent.class);
+                        if(magicResistanceComponent != null){
+                            magicResistance = magicResistanceComponent.getValue();
+                        }
+                        magicDamage *= getResistanceDamageFactor(magicResistance);
                         effectImpact.setComponent(new MagicDamageComponent(magicDamage));
                     }
                     if(heal != 0){
@@ -160,10 +179,19 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         PlayAnimationComponent.class,
                         StopAnimationComponent.class
                     });
-                    effectImpact.setComponent(new ApplyEffectImpactComponent(targetEntity.getId()));
+                    effectImpact.setComponent(new ApplyEffectImpactComponent(targetEntity));
                 }
                 entityWorld.removeEntity(entityWrapper.getId());
             }
+        }
+    }
+    
+    public static float getResistanceDamageFactor(float resistance){
+        if(resistance >= 0){
+            return (100 / (100 + resistance));
+        }
+        else{
+            return (2 - (100 / (100 - resistance)));
         }
     }
 }

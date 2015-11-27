@@ -41,6 +41,7 @@
                 <triggeredEffect>
                     <entity>
                         <scalingAttackDamagePhysicalDamage>1</scalingAttackDamagePhysicalDamage>
+                        <canCrit/>
                         <drawTeamAggro>15</drawTeamAggro>
                     </entity>
                 </triggeredEffect>

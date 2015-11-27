@@ -70,6 +70,8 @@ public class UpdateAttributesSystem implements EntitySystem{
             float magicResistance = attributeBonus.getFlatMagicResistance();
             float walkSpeed = attributeBonus.getFlatWalkSpeed();
             walkSpeed *= attributeBonus.getPercentageWalkSpeed();
+            float criticalChance = attributeBonus.getPercentageCriticalChance();
+            float lifesteal = attributeBonus.getPercentageLifesteal();
             entityWrapper.setComponent(new MaximumHealthComponent(maximumHealth));
             if((entityWrapper.getComponent(HealthComponent.class) == null) && entityWrapper.hasComponent(IsAliveComponent.class)){
                 entityWrapper.setComponent(new HealthComponent(maximumHealth));
@@ -110,6 +112,8 @@ public class UpdateAttributesSystem implements EntitySystem{
             entityWrapper.setComponent(new ArmorComponent(armor));
             entityWrapper.setComponent(new MagicResistanceComponent(magicResistance));
             entityWrapper.setComponent(new WalkSpeedComponent(walkSpeed));
+            entityWrapper.setComponent(new CriticalChanceComponent(criticalChance));
+            entityWrapper.setComponent(new LifestealComponent(lifesteal));
             entityWrapper.removeComponent(RequestUpdateAttributesComponent.class);
         }
     }
@@ -140,6 +144,10 @@ public class UpdateAttributesSystem implements EntitySystem{
         if(bonusPercentageAttackSpeedComponent != null){
             attributeBonus.addPercentageAttackSpeed(bonusPercentageAttackSpeedComponent.getValue());
         }
+        BonusPercentageCooldownSpeedComponent bonusPercentageCooldownSpeedComponent = bonusEntityWrapper.getComponent(BonusPercentageCooldownSpeedComponent.class);
+        if(bonusPercentageCooldownSpeedComponent != null){
+            attributeBonus.addPercentageCooldownSpeed(bonusPercentageCooldownSpeedComponent.getValue());
+        }
         BonusFlatArmorComponent bonusFlatArmorComponent = bonusEntityWrapper.getComponent(BonusFlatArmorComponent.class);
         if(bonusFlatArmorComponent != null){
             attributeBonus.addFlatArmor(bonusFlatArmorComponent.getValue());
@@ -156,9 +164,13 @@ public class UpdateAttributesSystem implements EntitySystem{
         if(bonusPercentageWalkSpeedComponent != null){
             attributeBonus.multiplicatePercentageWalkSpeed(bonusPercentageWalkSpeedComponent.getValue());
         }
-        BonusPercentageCooldownSpeedComponent bonusPercentageCooldownSpeedComponent = bonusEntityWrapper.getComponent(BonusPercentageCooldownSpeedComponent.class);
-        if(bonusPercentageCooldownSpeedComponent != null){
-            attributeBonus.addPercentageCooldownSpeed(bonusPercentageCooldownSpeedComponent.getValue());
+        BonusPercentageCriticalChanceComponent bonusPercentageCriticalChanceComponent = bonusEntityWrapper.getComponent(BonusPercentageCriticalChanceComponent.class);
+        if(bonusPercentageCriticalChanceComponent != null){
+            attributeBonus.addPercentageCriticalChance(bonusPercentageCriticalChanceComponent.getValue());
+        }
+        BonusPercentageLifestealComponent bonusPercentageLifestealComponent = bonusEntityWrapper.getComponent(BonusPercentageLifestealComponent.class);
+        if(bonusPercentageLifestealComponent != null){
+            attributeBonus.addPercentageLifesteal(bonusPercentageLifestealComponent.getValue());
         }
     }
 }
