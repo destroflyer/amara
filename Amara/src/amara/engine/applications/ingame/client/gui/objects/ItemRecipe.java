@@ -7,6 +7,9 @@ package amara.engine.applications.ingame.client.gui.objects;
 import amara.Util;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
+import amara.game.entitysystem.components.general.*;
+import amara.game.entitysystem.components.items.*;
+import amara.game.entitysystem.components.spells.*;
 
 /**
  *
@@ -14,15 +17,17 @@ import amara.game.entitysystem.components.attributes.*;
  */
 public class ItemRecipe{
 
-    public ItemRecipe(EntityWrapper item, int gold, ItemRecipe[] ingredientsRecipes, int depth){
-        this.item = item;
+    public ItemRecipe(EntityWorld entityWorld, int entity, int gold, ItemRecipe[] ingredientsRecipes, int depth){
+        this.entityWorld = entityWorld;
+        this.entity = entity;
         this.gold = gold;
         this.ingredientsRecipes = ingredientsRecipes;
         this.depth = depth;
         generateDescription();
         updateTotalGold();
     }
-    private EntityWrapper item;
+    private EntityWorld entityWorld;
+    private int entity;
     private int gold;
     private ItemRecipe[] ingredientsRecipes;
     private int depth;
@@ -30,8 +35,8 @@ public class ItemRecipe{
     private int totalGold;
     private int resolvedGold = -1;
 
-    public EntityWrapper getItem(){
-        return item;
+    public int getEntity(){
+        return entity;
     }
 
     public int getGold(){
@@ -48,88 +53,119 @@ public class ItemRecipe{
     
     private void generateDescription(){
         description = "";
-        BonusFlatWalkSpeedComponent bonusFlatWalkSpeedComponent = item.getComponent(BonusFlatWalkSpeedComponent.class);
+        BonusFlatWalkSpeedComponent bonusFlatWalkSpeedComponent = entityWorld.getComponent(entity, BonusFlatWalkSpeedComponent.class);
         if(bonusFlatWalkSpeedComponent != null){
-            addDescriptionSeperator();
-            description += getSignedValueText(bonusFlatWalkSpeedComponent.getValue()) + " Walk Speed";
+            addDescription_Seperator();
+            description += getValueText_Signed(bonusFlatWalkSpeedComponent.getValue()) + " Walk Speed";
         }
-        BonusPercentageWalkSpeedComponent bonusPercentageWalkSpeedComponent = item.getComponent(BonusPercentageWalkSpeedComponent.class);
+        BonusPercentageWalkSpeedComponent bonusPercentageWalkSpeedComponent = entityWorld.getComponent(entity, BonusPercentageWalkSpeedComponent.class);
         if(bonusPercentageWalkSpeedComponent != null){
-            addDescriptionSeperator();
-            description += getSignedValueText(bonusPercentageWalkSpeedComponent.getValue() * 100) + "% Walk Speed";
+            addDescription_Seperator();
+            description += getValueText_Signed(bonusPercentageWalkSpeedComponent.getValue() * 100) + "% Walk Speed";
         }
-        BonusFlatMaximumHealthComponent bonusFlatMaximumHealthComponent = item.getComponent(BonusFlatMaximumHealthComponent.class);
+        BonusFlatMaximumHealthComponent bonusFlatMaximumHealthComponent = entityWorld.getComponent(entity, BonusFlatMaximumHealthComponent.class);
         if(bonusFlatMaximumHealthComponent != null){
-            addDescriptionSeperator();
-            description += getSignedValueText(bonusFlatMaximumHealthComponent.getValue()) + " Health";
+            addDescription_Seperator();
+            description += getValueText_Signed(bonusFlatMaximumHealthComponent.getValue()) + " Health";
         }
-        BonusFlatHealthRegenerationComponent bonusFlatHealthRegenerationComponent = item.getComponent(BonusFlatHealthRegenerationComponent.class);
+        BonusFlatHealthRegenerationComponent bonusFlatHealthRegenerationComponent = entityWorld.getComponent(entity, BonusFlatHealthRegenerationComponent.class);
         if(bonusFlatHealthRegenerationComponent != null){
-            addDescriptionSeperator();
-            description += getSignedValueText(bonusFlatHealthRegenerationComponent.getValue()) + " Health Regeneration (per Second)";
+            addDescription_Seperator();
+            description += getValueText_Signed(bonusFlatHealthRegenerationComponent.getValue()) + " Health Regeneration (per Second)";
         }
-        BonusFlatAttackDamageComponent bonusFlatAttackDamageComponent = item.getComponent(BonusFlatAttackDamageComponent.class);
+        BonusFlatAttackDamageComponent bonusFlatAttackDamageComponent = entityWorld.getComponent(entity, BonusFlatAttackDamageComponent.class);
         if(bonusFlatAttackDamageComponent != null){
-            addDescriptionSeperator();
-            description += getSignedValueText(bonusFlatAttackDamageComponent.getValue()) + " Attack Damage";
+            addDescription_Seperator();
+            description += getValueText_Signed(bonusFlatAttackDamageComponent.getValue()) + " Attack Damage";
         }
-        BonusPercentageAttackSpeedComponent bonusPercentageAttackSpeedComponent = item.getComponent(BonusPercentageAttackSpeedComponent.class);
+        BonusPercentageAttackSpeedComponent bonusPercentageAttackSpeedComponent = entityWorld.getComponent(entity, BonusPercentageAttackSpeedComponent.class);
         if(bonusPercentageAttackSpeedComponent != null){
-            addDescriptionSeperator();
-            description += getSignedValueText(bonusPercentageAttackSpeedComponent.getValue() * 100) + "% Attack Speed";
+            addDescription_Seperator();
+            description += getValueText_Signed(bonusPercentageAttackSpeedComponent.getValue() * 100) + "% Attack Speed";
         }
-        BonusPercentageCriticalChanceComponent bonusPercentageCriticalChanceComponent = item.getComponent(BonusPercentageCriticalChanceComponent.class);
+        BonusPercentageCriticalChanceComponent bonusPercentageCriticalChanceComponent = entityWorld.getComponent(entity, BonusPercentageCriticalChanceComponent.class);
         if(bonusPercentageCriticalChanceComponent != null){
-            addDescriptionSeperator();
-            description += getSignedValueText(bonusPercentageCriticalChanceComponent.getValue() * 100) + "% Critical Chance";
+            addDescription_Seperator();
+            description += getValueText_Signed(bonusPercentageCriticalChanceComponent.getValue() * 100) + "% Critical Chance";
         }
-        BonusPercentageLifestealComponent bonusPercentageLifestealComponent = item.getComponent(BonusPercentageLifestealComponent.class);
+        BonusPercentageLifestealComponent bonusPercentageLifestealComponent = entityWorld.getComponent(entity, BonusPercentageLifestealComponent.class);
         if(bonusPercentageLifestealComponent != null){
-            addDescriptionSeperator();
-            description += getSignedValueText(bonusPercentageLifestealComponent.getValue() * 100) + "% Lifesteal";
+            addDescription_Seperator();
+            description += getValueText_Signed(bonusPercentageLifestealComponent.getValue() * 100) + "% Lifesteal";
         }
-        BonusFlatAbilityPowerComponent bonusFlatAbilityPowerComponent = item.getComponent(BonusFlatAbilityPowerComponent.class);
+        BonusFlatAbilityPowerComponent bonusFlatAbilityPowerComponent = entityWorld.getComponent(entity, BonusFlatAbilityPowerComponent.class);
         if(bonusFlatAbilityPowerComponent != null){
-            addDescriptionSeperator();
-            description += getSignedValueText(bonusFlatAbilityPowerComponent.getValue()) + " Ability Power";
+            addDescription_Seperator();
+            description += getValueText_Signed(bonusFlatAbilityPowerComponent.getValue()) + " Ability Power";
         }
-        BonusPercentageCooldownSpeedComponent bonusPercentageCooldownSpeedComponent = item.getComponent(BonusPercentageCooldownSpeedComponent.class);
+        BonusPercentageCooldownSpeedComponent bonusPercentageCooldownSpeedComponent = entityWorld.getComponent(entity, BonusPercentageCooldownSpeedComponent.class);
         if(bonusPercentageCooldownSpeedComponent != null){
-            addDescriptionSeperator();
-            description += getSignedValueText(bonusPercentageCooldownSpeedComponent.getValue()) + " Cooldown Speed";
+            addDescription_Seperator();
+            description += getValueText_Signed(bonusPercentageCooldownSpeedComponent.getValue()) + " Cooldown Speed";
         }
-        BonusFlatArmorComponent bonusFlatArmorComponent = item.getComponent(BonusFlatArmorComponent.class);
+        BonusFlatArmorComponent bonusFlatArmorComponent = entityWorld.getComponent(entity, BonusFlatArmorComponent.class);
         if(bonusFlatArmorComponent != null){
-            addDescriptionSeperator();
-            description += getSignedValueText(bonusFlatArmorComponent.getValue()) + " Armor";
+            addDescription_Seperator();
+            description += getValueText_Signed(bonusFlatArmorComponent.getValue()) + " Armor";
         }
-        BonusFlatMagicResistanceComponent bonusFlatMagicResistanceComponent = item.getComponent(BonusFlatMagicResistanceComponent.class);
+        BonusFlatMagicResistanceComponent bonusFlatMagicResistanceComponent = entityWorld.getComponent(entity, BonusFlatMagicResistanceComponent.class);
         if(bonusFlatMagicResistanceComponent != null){
-            addDescriptionSeperator();
-            description += getSignedValueText(bonusFlatMagicResistanceComponent.getValue()) + " Magic Resistance";
+            addDescription_Seperator();
+            description += getValueText_Signed(bonusFlatMagicResistanceComponent.getValue()) + " Magic Resistance";
+        }
+        ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(entity, ItemPassivesComponent.class);
+        if(itemPassivesComponent != null){
+            for(int itemPassiveEntity : itemPassivesComponent.getPassiveEntities()){
+                DescriptionComponent descriptionComponent = entityWorld.getComponent(itemPassiveEntity, DescriptionComponent.class);
+                if(descriptionComponent != null){
+                    addDescription_NewLine();
+                    description += "Passive: " + descriptionComponent.getDescription();
+                }
+            }
+        }
+        ItemActiveComponent itemActiveComponent = entityWorld.getComponent(entity, ItemActiveComponent.class);
+        if(itemActiveComponent != null){
+            DescriptionComponent descriptionComponent = entityWorld.getComponent(itemActiveComponent.getSpellEntity(), DescriptionComponent.class);
+            if(descriptionComponent != null){
+                addDescription_NewLine();
+                description += "Active: " + descriptionComponent.getDescription();
+                BaseCooldownComponent baseCooldownComponent = entityWorld.getComponent(itemActiveComponent.getSpellEntity(), BaseCooldownComponent.class);
+                if(baseCooldownComponent != null){
+                    description += " (" + getValueText(baseCooldownComponent.getDuration()) + " seconds cooldown)";
+                }
+            }
         }
     }
     
-    private void addDescriptionSeperator(){
+    private void addDescription_Seperator(){
         if(description.length() > 0){
             description += ", ";
         }
     }
     
-    private String getSignedValueText(float value){
-        value = Util.compensateFloatRoundingErrors(value);
-        String text = "";
-        if(value >= 0){
-            text += "+";
+    private void addDescription_NewLine(){
+        if(description.length() > 0){
+            description += "\n";
         }
+    }
+    
+    private String getValueText_Signed(float value){
+        value = Util.compensateFloatRoundingErrors(value);
+        String signText = "";
+        if(value >= 0){
+            signText += "+";
+        }
+        return (signText + getValueText(value));
+    }
+    
+    private String getValueText(float value){
         int valueInt = (int) value;
         if(value == valueInt){
-            text += valueInt;
+            return ("" + valueInt);
         }
         else{
-            text += value;
+            return ("" + value);
         }
-        return text;
     }
 
     public String getDescription(){

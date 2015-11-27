@@ -1,0 +1,54 @@
+<template>
+    <value name="duration">1</value>
+    <entity id="passive">
+        <description>Your basic attacks ignite the target, dealing 40 damage over [duration] second.</description>
+        <itemAddedEffectTriggers>
+            <!--add spelleffect-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addAutoAttackSpellEffects>
+                            <entity id="newSpellEffect">
+                                <castedEffectTriggers>
+                                    <!--target effect-->
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <addBuff duration="[duration]">
+                                                    <entity>
+                                                        <buffVisualisation>burning</buffVisualisation>
+                                                        <repeatingEffect interval="0.25">
+                                                            <entity>
+                                                                <flatMagicDamage>10</flatMagicDamage>
+                                                            </entity>
+                                                        </repeatingEffect>
+                                                    </entity>
+                                                </addBuff>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#passive</triggerSource>
+                                    </entity>
+                                </castedEffectTriggers>
+                            </entity>
+                        </addAutoAttackSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </itemAddedEffectTriggers>6
+        <itemRemovedEffectTriggers>
+            <!--remove spelleffect-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeSpellEffects>#newSpellEffect</removeSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </itemRemovedEffectTriggers>
+    </entity>
+</template>

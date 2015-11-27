@@ -7,6 +7,7 @@ package amara.game.entitysystem.templates;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Stack;
 import amara.Util;
 import amara.game.entitysystem.*;
@@ -33,6 +34,7 @@ public class XMLTemplateManager{
     private static XMLTemplateManager instance;
     private String resourcePath;
     private HashMap<String, XMLComponentConstructor> xmlComponentConstructors = new HashMap<String, XMLComponentConstructor>();
+    private HashMap<String, Document> cachedDocuments = new HashMap<String, Document>();
     private String currentDirectory;
     private Stack<HashMap<String, Integer>> cachedEntities = new Stack<HashMap<String, Integer>>();
     private Stack<HashMap<String, String>> cachedValues = new Stack<HashMap<String, String>>();
@@ -48,15 +50,25 @@ public class XMLTemplateManager{
             currentDirectory += directories[i] + "/";
         }
         String templateResourcePath = (resourcePath + templateName + ".xml");
-        if(Util.existsResource(templateResourcePath)){
+        Document document = getDocument(templateResourcePath);
+        if(document != null){
+            loadTemplate(entityWorld, entity, document, parameters);
+        }
+    }
+    
+    private Document getDocument(String resourcePath){
+        Document document = cachedDocuments.get(resourcePath);
+        if((document == null) && Util.existsResource(resourcePath)){
             try{
-                InputStream inputStream = Util.getResourceInputStream(templateResourcePath);
-                loadTemplate(entityWorld, entity, new SAXBuilder().build(inputStream), parameters);
+                InputStream inputStream = Util.getResourceInputStream(resourcePath);
+                document = new SAXBuilder().build(inputStream);
             }catch(Exception ex){
-                System.err.println("Error while loading template '" + templateName + "'.");
+                System.err.println("Error while loading template resource '" + resourcePath + "'.");
                 ex.printStackTrace();
             }
+            cachedDocuments.put(resourcePath, document);
         }
+        return document;
     }
     
     public void loadTemplate(EntityWorld entityWorld, int entity, Document document, String[] parameters){
@@ -149,9 +161,9 @@ public class XMLTemplateManager{
             }
             System.err.println("Undefined entity id '" + entityID + "'.");
         }
-        else if(text.startsWith("[") && text.endsWith("]")){
-            String valueName = text.substring(1, text.length() - 1);
-            return cachedValues.lastElement().get(valueName);
+        HashMap<String, String> values = cachedValues.lastElement();
+        for(Entry<String, String> valueEntry : values.entrySet()){
+            text = text.replaceAll("\\[" + valueEntry.getKey() + "\\]", valueEntry.getValue());
         }
         return text;
     }

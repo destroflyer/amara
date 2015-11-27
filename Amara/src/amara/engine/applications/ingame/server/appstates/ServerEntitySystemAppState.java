@@ -52,6 +52,7 @@ import amara.game.entitysystem.systems.objectives.*;
 import amara.game.entitysystem.systems.physics.*;
 import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
 import amara.game.entitysystem.systems.players.*;
+import amara.game.entitysystem.systems.shop.TriggerItemPassivesSystem;
 import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.*;
 import amara.game.entitysystem.systems.units.*;
@@ -172,6 +173,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CheckMaximumAggroRangeSystem());
         addEntitySystem(new LevelUpSystem());
         addEntitySystem(new UpdateAttributesSystem());
+        addEntitySystem(new TriggerItemPassivesSystem());
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue()));
         addEntitySystem(new AttackMoveSystem());
         addEntitySystem(new AttackAggroedTargetsSystem());

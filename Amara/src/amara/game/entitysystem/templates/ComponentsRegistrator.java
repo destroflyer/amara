@@ -1766,6 +1766,20 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.items.ItemIDComponent(id);
             }
         });
+        bitstreamClassManager.register(amara.game.entitysystem.components.items.ItemPassivesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.items.ItemPassivesComponent.class.getDeclaredField("passiveEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.items.ItemPassivesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.items.ItemPassivesComponent>("itemPassives"){
+
+            @Override
+            public amara.game.entitysystem.components.items.ItemPassivesComponent construct(){
+                int[] passiveEntities = createChildEntities(0, "passiveEntities");
+                return new amara.game.entitysystem.components.items.ItemPassivesComponent(passiveEntities);
+            }
+        });
         bitstreamClassManager.register(amara.game.entitysystem.components.items.ItemRecipeComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.items.ItemRecipeComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.items.ItemRecipeComponent>("itemRecipe"){
 
@@ -1785,6 +1799,35 @@ public class ComponentsRegistrator{
                     }
                 }
                 return new amara.game.entitysystem.components.items.ItemRecipeComponent(gold, itemIDs);
+            }
+        });
+        //passives
+        bitstreamClassManager.register(amara.game.entitysystem.components.items.passives.ItemAddedEffectTriggersComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.items.passives.ItemAddedEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.items.passives.ItemAddedEffectTriggersComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.items.passives.ItemAddedEffectTriggersComponent>("itemAddedEffectTriggers"){
+
+            @Override
+            public amara.game.entitysystem.components.items.passives.ItemAddedEffectTriggersComponent construct(){
+                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
+                return new amara.game.entitysystem.components.items.passives.ItemAddedEffectTriggersComponent(effectTriggerEntities);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.items.passives.ItemRemovedEffectTriggersComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.items.passives.ItemRemovedEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.items.passives.ItemRemovedEffectTriggersComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.items.passives.ItemRemovedEffectTriggersComponent>("itemRemovedEffectTriggers"){
+
+            @Override
+            public amara.game.entitysystem.components.items.passives.ItemRemovedEffectTriggersComponent construct(){
+                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
+                return new amara.game.entitysystem.components.items.passives.ItemRemovedEffectTriggersComponent(effectTriggerEntities);
             }
         });
         //maps

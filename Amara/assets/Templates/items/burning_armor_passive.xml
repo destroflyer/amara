@@ -1,0 +1,56 @@
+<template>
+    <entity id="passive">
+        <description>Deals 40 magic damage per second to nearby enemies.</description>
+        <itemAddedEffectTriggers>
+            <!--add spelleffect-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuffArea>
+                            <entity id="buffArea">
+                                <hitbox>
+                                    <circle radius="2.25"/>
+                                </hitbox>
+                                <areaBuff>
+                                    <entity>
+                                        <buffVisualisation>burning</buffVisualisation>
+                                        <repeatingEffect interval="0.5">
+                                            <entity>
+                                                <flatMagicDamage>20</flatMagicDamage>
+                                            </entity>
+                                        </repeatingEffect>
+                                    </entity>
+                                </areaBuff>
+                                <areaBuffTargetRules>
+                                    <entity>
+                                        <acceptEnemies/>
+                                    </entity>
+                                </areaBuffTargetRules>
+                            </entity>
+                        </addBuffArea>
+                        <addBuff duration="-1">
+                            <entity id="visualisationBuff">
+                                <buffVisualisation>burning</buffVisualisation>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </itemAddedEffectTriggers>6
+        <itemRemovedEffectTriggers>
+            <!--remove spelleffect-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeBuffArea>#buffArea</removeBuffArea>
+                        <removeBuff>#visualisationBuff</removeBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </itemRemovedEffectTriggers>
+    </entity>
+</template>

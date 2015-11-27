@@ -1,5 +1,7 @@
 <template>
+    <value name="duration">2.5</value>
     <entity id="spell">
+        <description>Put yourself in stasis for [duration] seconds, rendering yourself untargetable and invulnerable.</description>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
@@ -36,7 +38,7 @@
                                 <audioSuccessor delay="0.05">#audioStart</audioSuccessor>
                             </entity>
                         </playAudio>
-                        <addBuff duration="2.5">
+                        <addBuff duration="[duration]">
                             <entity>
                                 <buffVisualisation>zhonyas</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>

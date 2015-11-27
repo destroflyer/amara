@@ -51,6 +51,12 @@ public class SetSpellsCastersSystem implements EntitySystem{
                 if(itemActiveComponent != null){
                     entityWorld.removeComponent(itemActiveComponent.getSpellEntity(), EffectCastSourceComponent.class);
                 }
+                ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(itemEntity, ItemPassivesComponent.class);
+                if(itemPassivesComponent != null){
+                    for(int itemPassiveEntity : itemPassivesComponent.getPassiveEntities()){
+                        entityWorld.removeComponent(itemPassiveEntity, EffectCastSourceComponent.class);
+                    }
+                }
             }
         }
     }
@@ -67,12 +73,18 @@ public class SetSpellsCastersSystem implements EntitySystem{
             if(itemActiveComponent != null){
                 updateCaster(entityWorld, casterEntity, itemActiveComponent.getSpellEntity());
             }
+            ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(itemEntity, ItemPassivesComponent.class);
+            if(itemPassivesComponent != null){
+                for(int itemPassiveEntity : itemPassivesComponent.getPassiveEntities()){
+                    updateCaster(entityWorld, casterEntity, itemPassiveEntity);
+                }
+            }
         }
     }
     
-    private void updateCaster(EntityWorld entityWorld, int casterEntity, int spellEntity){
+    private void updateCaster(EntityWorld entityWorld, int casterEntity, int targetEntity){
         entityWorld.setComponent(casterEntity, new EffectCastSourceComponent(casterEntity));
-        entityWorld.setComponent(spellEntity, new EffectCastSourceComponent(casterEntity));
-        entityWorld.setComponent(spellEntity, new EffectCastSourceSpellComponent(spellEntity));
+        entityWorld.setComponent(targetEntity, new EffectCastSourceComponent(casterEntity));
+        entityWorld.setComponent(targetEntity, new EffectCastSourceSpellComponent(targetEntity));
     }
 }
