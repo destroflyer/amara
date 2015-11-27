@@ -1,5 +1,5 @@
 <template>
-    <value name="duration">2.5</value>
+    <value name="duration">6</value>
     <entity id="spell">
         <description>Gain +100% attack speed and +35% movement speed for [duration] seconds.</description>
         <instantEffectTriggers>

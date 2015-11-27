@@ -52,7 +52,7 @@ import amara.game.entitysystem.systems.objectives.*;
 import amara.game.entitysystem.systems.physics.*;
 import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
 import amara.game.entitysystem.systems.players.*;
-import amara.game.entitysystem.systems.shop.TriggerItemPassivesSystem;
+import amara.game.entitysystem.systems.shop.*;
 import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.*;
 import amara.game.entitysystem.systems.units.*;
