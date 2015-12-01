@@ -14,6 +14,7 @@ import amara.game.entitysystem.components.effects.aggro.*;
 import amara.game.entitysystem.components.effects.audio.*;
 import amara.game.entitysystem.components.effects.buffs.*;
 import amara.game.entitysystem.components.effects.buffs.areas.*;
+import amara.game.entitysystem.components.effects.buffs.stacks.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.effects.damage.*;
@@ -57,6 +58,7 @@ public class ClientComponentBlacklist{
             //audio
             //buffs
             ContinuousAttributesComponent.class,
+            ContinuousAttributesPerStackComponent.class,
             KeepOnDeathComponent.class,
             OnBuffRemoveEffectTriggersComponent.class,
             RepeatingEffectComponent.class,
@@ -92,6 +94,10 @@ public class ClientComponentBlacklist{
             //effects/buffs/areas
             AddBuffAreaComponent.class,
             RemoveBuffAreaComponent.class,
+            //effects/buffs/stacks
+            AddStacksComponent.class,
+            ClearStacksComponent.class,
+            RemoveStacksComponent.class,
             //effects/ccasts
             EffectCastSourceComponent.class,
             EffectCastSourceSpellComponent.class,
@@ -241,6 +247,7 @@ public class ClientComponentBlacklist{
             TriggerTemporaryComponent.class,
             TriggeredEffectComponent.class,
             //units/effecttriggers/targets
+            BuffTargetsTargetComponent.class,
             CasterTargetComponent.class,
             CustomTargetComponent.class,
             SourceTargetComponent.class,
