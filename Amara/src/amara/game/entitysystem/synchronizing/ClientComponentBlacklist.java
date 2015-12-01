@@ -56,7 +56,7 @@ public class ClientComponentBlacklist{
             RequestUpdateAttributesComponent.class,
             //audio
             //buffs
-            ContinuousEffectComponent.class,
+            ContinuousAttributesComponent.class,
             KeepOnDeathComponent.class,
             OnBuffRemoveEffectTriggersComponent.class,
             RepeatingEffectComponent.class,

@@ -29,7 +29,7 @@
                         <addBuffArea>
                             <entity id="buffArea">
                                 <hitbox>
-                                    <circle radius="2.25"/>
+                                    <circle radius="3"/>
                                 </hitbox>
                                 <areaBuff>
                                     <entity>

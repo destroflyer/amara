@@ -317,12 +317,12 @@ public class MapFileHandler{
         }
         else throw new UnsupportedOperationException();
         Element elementTransform = element.getChild("transform");
-        shape.setTransform(
-                new Transform2D(
-                Double.parseDouble(elementTransform.getAttributeValue("scale")),
-                Double.parseDouble(elementTransform.getAttributeValue("direction")),
-                Double.parseDouble(elementTransform.getAttributeValue("x")),
-                Double.parseDouble(elementTransform.getAttributeValue("y"))));
+        shape.setTransform(new Transform2D(
+            Double.parseDouble(elementTransform.getAttributeValue("scale")),
+            Double.parseDouble(elementTransform.getAttributeValue("direction")),
+            Double.parseDouble(elementTransform.getAttributeValue("x")),
+            Double.parseDouble(elementTransform.getAttributeValue("y"))
+        ));
         return shape;
     }
     

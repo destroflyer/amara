@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.game.entitysystem.components.buffs;
+package amara.game.entitysystem.components.units.effecttriggers.targets;
 
 import com.jme3.network.serializing.Serializable;
 import amara.game.entitysystem.synchronizing.ComponentField;
@@ -12,19 +12,19 @@ import amara.game.entitysystem.synchronizing.ComponentField;
  * @author Carl
  */
 @Serializable
-public class ContinuousEffectComponent{
+public class BuffTargetsTargetComponent{
 
-    public ContinuousEffectComponent(){
+    public BuffTargetsTargetComponent(){
         
     }
-    
-    public ContinuousEffectComponent(int effectEntity){
-        this.effectEntity = effectEntity;
+
+    public BuffTargetsTargetComponent(int buffEntity){
+        this.buffEntity = buffEntity;
     }
     @ComponentField(type=ComponentField.Type.ENTITY)
-    private int effectEntity;
+    private int buffEntity;
 
-    public int getEffectEntity(){
-        return effectEntity;
+    public int getBuffEntity(){
+        return buffEntity;
     }
 }

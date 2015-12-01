@@ -28,12 +28,12 @@
                     <entity>
                         <addBuff duration="[duration]">
                             <entity>
-                                <continuousEffect>
+                                <continuousAttributes>
                                     <entity>
                                         <bonusPercentageAttackSpeed>1</bonusPercentageAttackSpeed>
                                         <bonusPercentageWalkSpeed>0.35</bonusPercentageWalkSpeed>
                                     </entity>
-                                </continuousEffect>
+                                </continuousAttributes>
                             </entity>
                         </addBuff>
                         <playAudio>

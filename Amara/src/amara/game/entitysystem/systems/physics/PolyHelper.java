@@ -27,7 +27,8 @@ public class PolyHelper
         else if(shape instanceof Circle)
         {
             Circle circle = (Circle)shape;
-            convex = new RegularCyclic(circle.getGlobalPosition(), 8, circle.getGlobalRadius(), Math.PI / 8);
+            int edges = 10;
+            convex = new RegularCyclic(circle.getGlobalPosition(), edges, circle.getGlobalRadius(), Math.PI / edges);
         }
         else throw new UnsupportedOperationException();
         builder.reset();

@@ -6,6 +6,6 @@
         <isSellable>1100</isSellable>
         <!--stats-->
         <bonusFlatMaximumHealth>420</bonusFlatMaximumHealth>
-        <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
+        <bonusFlatMagicResistance>35</bonusFlatMagicResistance>
     </entity>
 </template>

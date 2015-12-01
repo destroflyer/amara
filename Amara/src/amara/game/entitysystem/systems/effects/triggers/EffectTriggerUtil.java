@@ -7,6 +7,7 @@ package amara.game.entitysystem.systems.effects.triggers;
 import java.util.LinkedList;
 import amara.Util;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
@@ -50,6 +51,15 @@ public class EffectTriggerUtil{
             effectCast.setComponent(new EffectCastTargetComponent(targetEntity));
             if(entityWorld.hasComponent(effectTriggerEntity, TargetTargetComponent.class)){
                 affectedTargets.add(targetEntity);
+            }
+        }
+        BuffTargetsTargetComponent buffTargetTargetComponent = entityWorld.getComponent(effectTriggerEntity, BuffTargetsTargetComponent.class);
+        if(buffTargetTargetComponent != null){
+            for(int buffStatusEntity : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
+                ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
+                if(activeBuffComponent.getBuffEntity() == buffTargetTargetComponent.getBuffEntity()){
+                    affectedTargets.add(activeBuffComponent.getTargetEntity());
+                }
             }
         }
         if(entityWorld.hasComponent(effectTriggerEntity, CustomTargetComponent.class)){

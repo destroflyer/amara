@@ -28,11 +28,11 @@
                     <entity>
                         <addBuff duration="3">
                             <entity>
-                                <continuousEffect>
+                                <continuousAttributes>
                                     <entity>
                                         <bonusPercentageWalkSpeed>0.55</bonusPercentageWalkSpeed>
                                     </entity>
-                                </continuousEffect>
+                                </continuousAttributes>
                             </entity>
                         </addBuff>
                     </entity>

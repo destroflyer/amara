@@ -58,11 +58,11 @@
                         <flatMagicDamage>100</flatMagicDamage>
                         <addBuff duration="2">
                             <entity>
-                                <continuousEffect>
+                                <continuousAttributes>
                                     <entity>
                                         <bonusPercentageWalkSpeed>-0.4</bonusPercentageWalkSpeed>
                                     </entity>
-                                </continuousEffect>
+                                </continuousAttributes>
                             </entity>
                         </addBuff>
                     </entity>

@@ -46,7 +46,7 @@ public class ScreenController_Shop extends GameScreenController{
         "sword","reinforced_sword","greatsword","dagger","bow",
         "leather_armor","heavy_leather_armor","cotton_armor","iron_armor","arcane_vesture","enchanted_vesture",
         "book_of_vampirism","doomblade","hells_scream",
-        "cataclysm","icecold",
+        "cataclysm","icecold","spike_dagger","thunderbolt",
         "book_of_precision","book_of_extreme_precision","blinkstrike","new_dawn",
         "swift_dagger","swift_bow",
         "scepter","rod","the_untamed",

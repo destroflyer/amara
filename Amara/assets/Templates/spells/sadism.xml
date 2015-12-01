@@ -35,12 +35,12 @@
                         <addBuff duration="10">
                             <entity>
                                 <buffVisualisation>turbo</buffVisualisation>
-                                <continuousEffect>
+                                <continuousAttributes>
                                     <entity>
                                         <bonusFlatHealthRegeneration>180</bonusFlatHealthRegeneration>
                                         <bonusPercentageWalkSpeed>0.65</bonusPercentageWalkSpeed>
                                     </entity>
-                                </continuousEffect>
+                                </continuousAttributes>
                                 <onBuffRemoveEffectTriggers>
                                     <!--end audio-->
                                     <entity>

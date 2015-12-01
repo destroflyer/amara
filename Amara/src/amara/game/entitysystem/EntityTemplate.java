@@ -123,8 +123,8 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsAliveComponent());
             int baseAttributesEntity = entityWorld.createEntity();
             int spawnCounter = entityWorld.getComponent(parameters[0], RepeatingTriggerCounterComponent.class).getCounter();
-            entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(320 + (spawnCounter * 2)));
-            entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackDamageComponent(18 + (spawnCounter * 0.3f)));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(420 + (spawnCounter * 3)));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackDamageComponent(15 + (spawnCounter * 0.3f)));
             entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackSpeedComponent(0.7f));
             entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(3));
             entityWrapper.setComponent(new BaseAttributesComponent(baseAttributesEntity));
@@ -138,6 +138,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAggroComponent(12));
             entityWrapper.setComponent(new MaximumAggroRangeComponent(30));
             entityWrapper.setComponent(new AggroResetTimerComponent(3));
+            
             int bountyEntity = entityWorld.createEntity();
             entityWorld.setComponent(bountyEntity, new BountyGoldComponent(20 + (int) (spawnCounter * 0.5)));
             entityWorld.setComponent(bountyEntity, new BountyExperienceComponent(59));
@@ -159,7 +160,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
             
             entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
-            entityWrapper.setComponent(new ScaleComponent(0.5f));
+            entityWrapper.setComponent(new ScaleComponent(0.75f));
             entityWrapper.setComponent(new IntersectionPushComponent());
             entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
             entityWrapper.setComponent(new HitboxActiveComponent());
@@ -167,7 +168,7 @@ public class EntityTemplate{
             entityWrapper.setComponent(new IsAliveComponent());
             int baseAttributesEntity = entityWorld.createEntity();
             int spawnCounter = entityWorld.getComponent(parameters[0], RepeatingTriggerCounterComponent.class).getCounter();
-            entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(450 + (spawnCounter * 10)));
+            entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(320 + (spawnCounter * 3)));
             entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackDamageComponent(22 + (spawnCounter * 1)));
             entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackSpeedComponent(0.7f));
             entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(3));
@@ -181,6 +182,12 @@ public class EntityTemplate{
             entityWrapper.setComponent(new AutoAggroComponent(12));
             entityWrapper.setComponent(new MaximumAggroRangeComponent(30));
             entityWrapper.setComponent(new AggroResetTimerComponent(4));
+            
+            int bountyEntity = entityWorld.createEntity();
+            entityWorld.setComponent(bountyEntity, new BountyGoldComponent(15 + (int) (spawnCounter * 0.5)));
+            entityWorld.setComponent(bountyEntity, new BountyExperienceComponent(29));
+            entityWrapper.setComponent(new BountyComponent(bountyEntity));
+            entityWrapper.setComponent(new LocalAvoidanceWalkComponent());
         }
         else if(templateName.equals("testmap_camp_pseudospider")){
             entityWrapper.setComponent(new PositionComponent(new Vector2f(40 + (parameters[0] * 3), 68 + (parameters[1] * 3))));
@@ -194,17 +201,17 @@ public class EntityTemplate{
             Vector2f direction = null;
             switch(parameters[1]){
                 case 0:
-                    position = new Vector2f(212, 199);
+                    position = new Vector2f(318, 298.5f);
                     direction = new Vector2f(0, 1);
                     break;
                 
                 case 1:
-                    position = new Vector2f(217.5f, 204.5f);
+                    position = new Vector2f(326.25f, 306.75f);
                     direction = new Vector2f(-1, 0);
                     break;
             }
             if(parameters[0] == 1){
-                position.setX(350 - position.getX());
+                position.setX(525 - position.getX());
                 direction.setX(-1 * direction.getX());
             }
             entityWrapper.setComponent(new PositionComponent(position));
@@ -215,10 +222,10 @@ public class EntityTemplate{
             entityWrapper.setComponent(new BountyComponent(bounty.getId()));
         }
         else if(templateName.equals("arama_camp_beetle_golem")){
-            Vector2f position = new Vector2f(216.5f, 200);
+            Vector2f position = new Vector2f(324.75f, 300);
             Vector2f direction = new Vector2f(-1, 1);
             if(parameters[0] == 1){
-                position.setX(350 - position.getX());
+                position.setX(525 - position.getX());
                 direction.setX(-1 * direction.getX());
             }
             entityWrapper.setComponent(new PositionComponent(position));
@@ -270,16 +277,16 @@ public class EntityTemplate{
             bounty.setComponent(new BountyGoldComponent(150));
             EntityWrapper bountyBuff = entityWorld.getWrapped(entityWorld.createEntity());
             bountyBuff.setComponent(new BuffVisualisationComponent("baron_nashor"));
-            EntityWrapper bountyBuffEffect = entityWorld.getWrapped(entityWorld.createEntity());
-            bountyBuffEffect.setComponent(new BonusFlatAttackDamageComponent(50));
-            bountyBuffEffect.setComponent(new BonusFlatAbilityPowerComponent(50));
-            bountyBuffEffect.setComponent(new BonusFlatWalkSpeedComponent(0.5f));
-            bountyBuff.setComponent(new ContinuousEffectComponent(bountyBuffEffect.getId()));
+            EntityWrapper bountyBuffAttributes = entityWorld.getWrapped(entityWorld.createEntity());
+            bountyBuffAttributes.setComponent(new BonusFlatAttackDamageComponent(50));
+            bountyBuffAttributes.setComponent(new BonusFlatAbilityPowerComponent(50));
+            bountyBuffAttributes.setComponent(new BonusFlatWalkSpeedComponent(0.5f));
+            bountyBuff.setComponent(new ContinuousAttributesComponent(bountyBuffAttributes.getId()));
             bounty.setComponent(new BountyBuffComponent(bountyBuff.getId(), 60));
             entityWrapper.setComponent(new BountyComponent(bounty.getId()));
         }
         else if(templateName.equals("arama_camp_boss")){
-            entityWrapper.setComponent(new PositionComponent(new Vector2f(175, 226)));
+            entityWrapper.setComponent(new PositionComponent(new Vector2f(262.5f, 339)));
             entityWrapper.setComponent(new DirectionComponent(new Vector2f(0, -1)));
             entityWrapper.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
             entityWrapper.setComponent(new TeamComponent(0));

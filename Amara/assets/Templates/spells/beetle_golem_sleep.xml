@@ -49,11 +49,11 @@
                         <addBuff duration="[sleepTime]">
                             <entity>
                                 <buffVisualisation>meditating</buffVisualisation>
-                                <continuousEffect>
+                                <continuousAttributes>
                                     <entity>
                                         <bonusFlatHealthRegeneration>100</bonusFlatHealthRegeneration>
                                     </entity>
-                                </continuousEffect>
+                                </continuousAttributes>
                             </entity>
                         </addBuff>
                         <playAnimation>

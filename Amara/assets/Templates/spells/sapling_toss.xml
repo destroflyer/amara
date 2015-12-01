@@ -60,9 +60,9 @@
                         <scalingAbilityPowerMagicDamage>0.4</scalingAbilityPowerMagicDamage>
                         <addBuff duration="1">
                             <entity>
-                                <continuousEffect>
+                                <continuousAttributes>
                                     <bonusPercentageWalkSpeed>-0.5</bonusPercentageWalkSpeed>
-                                </continuousEffect>
+                                </continuousAttributes>
                             </entity>
                         </addBuff>
                     </entity>

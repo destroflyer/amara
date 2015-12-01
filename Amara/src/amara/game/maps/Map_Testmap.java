@@ -89,9 +89,9 @@ public class Map_Testmap extends Map{
         testCampUnitBounty.setComponent(new BountyGoldComponent(10));
         EntityWrapper testBountyBuff = entityWorld.getWrapped(entityWorld.createEntity());
         testBountyBuff.setComponent(new BuffVisualisationComponent("turbo"));
-        EntityWrapper testBountyBuffEffect = entityWorld.getWrapped(entityWorld.createEntity());
-        testBountyBuffEffect.setComponent(new BonusFlatWalkSpeedComponent(4));
-        testBountyBuff.setComponent(new ContinuousEffectComponent(testBountyBuffEffect.getId()));
+        EntityWrapper testBountyBuffAttributes = entityWorld.getWrapped(entityWorld.createEntity());
+        testBountyBuffAttributes.setComponent(new BonusFlatWalkSpeedComponent(4));
+        testBountyBuff.setComponent(new ContinuousAttributesComponent(testBountyBuffAttributes.getId()));
         testCampUnitBounty.setComponent(new BountyBuffComponent(testBountyBuff.getId(), 3));
         EntityWrapper testCamp = entityWorld.getWrapped(entityWorld.createEntity());
         testCamp.setComponent(new CampUnionAggroComponent());
@@ -128,10 +128,12 @@ public class Map_Testmap extends Map{
         boss.setComponent(new HitboxActiveComponent());
         boss.setComponent(new IsAliveComponent());
         int baseAttributesEntity = entityWorld.createEntity();
-        entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(800));
-        entityWorld.setComponent(baseAttributesEntity, new BonusFlatHealthRegenerationComponent(40));
+        entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(2000));
+        entityWorld.setComponent(baseAttributesEntity, new BonusFlatHealthRegenerationComponent(30));
         entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackDamageComponent(150));
         entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackSpeedComponent(0.6f));
+        entityWorld.setComponent(baseAttributesEntity, new BonusFlatArmorComponent(50));
+        entityWorld.setComponent(baseAttributesEntity, new BonusFlatMagicResistanceComponent(50));
         entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(2.5f));
         boss.setComponent(new BaseAttributesComponent(baseAttributesEntity));
         boss.setComponent(new RequestUpdateAttributesComponent());

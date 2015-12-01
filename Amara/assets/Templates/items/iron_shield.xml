@@ -6,6 +6,6 @@
         <isSellable>1200</isSellable>
         <!--stats-->
         <bonusFlatMaximumHealth>450</bonusFlatMaximumHealth>
-        <bonusFlatArmor>35</bonusFlatArmor>
+        <bonusFlatArmor>40</bonusFlatArmor>
     </entity>
 </template>

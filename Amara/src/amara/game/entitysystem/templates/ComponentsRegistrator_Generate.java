@@ -57,6 +57,7 @@ public class ComponentsRegistrator_Generate{
         code += "        FieldSerializer componentFieldSerializer_Timer = new FieldSerializer_Float(20, 8);\n";
         code += "        FieldSerializer componentFieldSerializer_Distance = new FieldSerializer_Float(20, 8);\n";
         code += "        FieldSerializer componentFieldSerializer_Attribute = new FieldSerializer_Float(20, 8);\n";
+        code += "        FieldSerializer componentFieldSerializer_Stacks = new FieldSerializer_Integer(16);\n";
         checkDirectory(SOURCE_DIRECTORY + PACKAGE_COMPONENTS.replace(".", "/"));
         code += "    }\n}";
         FileManager.putFileContent(SOURCE_DIRECTORY + packageName.replace(".", "/") + "/ComponentsRegistrator.java", code);
@@ -92,6 +93,10 @@ public class ComponentsRegistrator_Generate{
                                 
                                 case ATTRIBUTE:
                                     fieldSerializerName = "componentFieldSerializer_Attribute";
+                                    break;
+                                
+                                case STACKS:
+                                    fieldSerializerName = "componentFieldSerializer_Stacks";
                                     break;
                             }
                             if(fieldSerializerName != null){

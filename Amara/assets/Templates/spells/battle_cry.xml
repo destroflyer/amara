@@ -29,11 +29,11 @@
                     <entity>
                         <addBuff duration="5">
                             <entity>
-                                <continuousEffect>
+                                <continuousAttributes>
                                     <entity>
                                         <bonusPercentageAttackSpeed>0.8</bonusPercentageAttackSpeed>
                                     </entity>
-                                </continuousEffect>
+                                </continuousAttributes>
                             </entity>
                         </addBuff>
                     </entity>

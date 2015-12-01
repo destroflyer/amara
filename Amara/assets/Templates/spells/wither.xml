@@ -45,11 +45,11 @@
                         <addBuff duration="4">
                             <entity>
                                 <buffVisualisation>withered</buffVisualisation>
-                                <continuousEffect>
+                                <continuousAttributes>
                                     <entity>
                                         <bonusPercentageWalkSpeed>-0.6</bonusPercentageWalkSpeed>
                                     </entity>
-                                </continuousEffect>
+                                </continuousAttributes>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
                                         <targetTarget/>

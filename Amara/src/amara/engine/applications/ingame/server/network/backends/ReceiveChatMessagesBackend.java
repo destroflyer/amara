@@ -106,9 +106,9 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                             try{
                                 float cooldownSpeed = Float.parseFloat(message.getText().substring(5));
                                 EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
-                                EntityWrapper buffEffect = entityWorld.getWrapped(entityWorld.createEntity());
-                                buffEffect.setComponent(new BonusPercentageCooldownSpeedComponent(cooldownSpeed));
-                                buff.setComponent(new ContinuousEffectComponent(buffEffect.getId()));
+                                EntityWrapper buffAttributes = entityWorld.getWrapped(entityWorld.createEntity());
+                                buffAttributes.setComponent(new BonusPercentageCooldownSpeedComponent(cooldownSpeed));
+                                buff.setComponent(new ContinuousAttributesComponent(buffAttributes.getId()));
                                 buff.setComponent(new KeepOnDeathComponent());
                                 ApplyAddBuffsSystem.addBuff(entityWorld, selectedUnit, buff.getId());
                             }catch(NumberFormatException ex){

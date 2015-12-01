@@ -16,6 +16,7 @@ public class ComponentsRegistrator{
         FieldSerializer componentFieldSerializer_Timer = new FieldSerializer_Float(20, 8);
         FieldSerializer componentFieldSerializer_Distance = new FieldSerializer_Float(20, 8);
         FieldSerializer componentFieldSerializer_Attribute = new FieldSerializer_Float(20, 8);
+        FieldSerializer componentFieldSerializer_Stacks = new FieldSerializer_Integer(16);
         //attributes
         bitstreamClassManager.register(amara.game.entitysystem.components.attributes.AbilityPowerComponent.class);
         try{
@@ -618,18 +619,46 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.buffs.areas.AreaSourceComponent(sourceEntity);
             }
         });
-        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.ContinuousEffectComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.BuffStacksComponent.class);
         try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.ContinuousEffectComponent.class.getDeclaredField("effectEntity"), componentFieldSerializer_Entity);
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.BuffStacksComponent.class.getDeclaredField("stacksEntity"), componentFieldSerializer_Entity);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.ContinuousEffectComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.ContinuousEffectComponent>("continuousEffect"){
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.BuffStacksComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.BuffStacksComponent>("buffStacks"){
 
             @Override
-            public amara.game.entitysystem.components.buffs.ContinuousEffectComponent construct(){
-                int effectEntity = createChildEntity(0, "effectEntity");
-                return new amara.game.entitysystem.components.buffs.ContinuousEffectComponent(effectEntity);
+            public amara.game.entitysystem.components.buffs.BuffStacksComponent construct(){
+                int stacksEntity = createChildEntity(0, "stacksEntity");
+                return new amara.game.entitysystem.components.buffs.BuffStacksComponent(stacksEntity);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.ContinuousAttributesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.ContinuousAttributesComponent.class.getDeclaredField("bonusAttributesEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.ContinuousAttributesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.ContinuousAttributesComponent>("continuousAttributes"){
+
+            @Override
+            public amara.game.entitysystem.components.buffs.ContinuousAttributesComponent construct(){
+                int bonusAttributesEntity = createChildEntity(0, "bonusAttributesEntity");
+                return new amara.game.entitysystem.components.buffs.ContinuousAttributesComponent(bonusAttributesEntity);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.ContinuousAttributesPerStackComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.ContinuousAttributesPerStackComponent.class.getDeclaredField("bonusAttributesEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.ContinuousAttributesPerStackComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.ContinuousAttributesPerStackComponent>("continuousAttributesPerStack"){
+
+            @Override
+            public amara.game.entitysystem.components.buffs.ContinuousAttributesPerStackComponent construct(){
+                int bonusAttributesEntity = createChildEntity(0, "bonusAttributesEntity");
+                return new amara.game.entitysystem.components.buffs.ContinuousAttributesPerStackComponent(bonusAttributesEntity);
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.buffs.KeepOnDeathComponent.class);
@@ -676,6 +705,61 @@ public class ComponentsRegistrator{
                     interval = Float.parseFloat(xmlTemplateManager.parseValue(intervalText));
                 }
                 return new amara.game.entitysystem.components.buffs.RepeatingEffectComponent(effectEntity, interval);
+            }
+        });
+        //stacks
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.stacks.MaximumStacksComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.stacks.MaximumStacksComponent.class.getDeclaredField("stacks"), componentFieldSerializer_Stacks);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.stacks.MaximumStacksComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.stacks.MaximumStacksComponent>("maximumStacks"){
+
+            @Override
+            public amara.game.entitysystem.components.buffs.stacks.MaximumStacksComponent construct(){
+                int stacks = 0;
+                String stacksText = element.getText();
+                if((stacksText != null) && (stacksText.length() > 0)){
+                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(stacksText));
+                }
+                return new amara.game.entitysystem.components.buffs.stacks.MaximumStacksComponent(stacks);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.stacks.StacksComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.stacks.StacksComponent.class.getDeclaredField("stacks"), componentFieldSerializer_Stacks);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.stacks.StacksComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.stacks.StacksComponent>("stacks"){
+
+            @Override
+            public amara.game.entitysystem.components.buffs.stacks.StacksComponent construct(){
+                int stacks = 0;
+                String stacksText = element.getText();
+                if((stacksText != null) && (stacksText.length() > 0)){
+                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(stacksText));
+                }
+                return new amara.game.entitysystem.components.buffs.stacks.StacksComponent(stacks);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.buffs.stacks.StacksRefreshmentComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.buffs.stacks.StacksRefreshmentComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.buffs.stacks.StacksRefreshmentComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.buffs.stacks.StacksRefreshmentComponent>("stacksRefreshment"){
+
+            @Override
+            public amara.game.entitysystem.components.buffs.stacks.StacksRefreshmentComponent construct(){
+                float duration = 0;
+                String durationText = element.getText();
+                if((durationText != null) && (durationText.length() > 0)){
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                }
+                return new amara.game.entitysystem.components.buffs.stacks.StacksRefreshmentComponent(duration);
             }
         });
         //status
@@ -988,6 +1072,51 @@ public class ComponentsRegistrator{
             public amara.game.entitysystem.components.effects.buffs.RemoveBuffComponent construct(){
                 int buffEntity = createChildEntity(0, "buffEntity");
                 return new amara.game.entitysystem.components.effects.buffs.RemoveBuffComponent(buffEntity);
+            }
+        });
+        //stacks
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.buffs.stacks.AddStacksComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.buffs.stacks.AddStacksComponent.class.getDeclaredField("stacks"), componentFieldSerializer_Stacks);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.buffs.stacks.AddStacksComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.buffs.stacks.AddStacksComponent>("addStacks"){
+
+            @Override
+            public amara.game.entitysystem.components.effects.buffs.stacks.AddStacksComponent construct(){
+                int stacks = 0;
+                String stacksText = element.getText();
+                if((stacksText != null) && (stacksText.length() > 0)){
+                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(stacksText));
+                }
+                return new amara.game.entitysystem.components.effects.buffs.stacks.AddStacksComponent(stacks);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.buffs.stacks.ClearStacksComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.buffs.stacks.ClearStacksComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.buffs.stacks.ClearStacksComponent>("clearStacks"){
+
+            @Override
+            public amara.game.entitysystem.components.effects.buffs.stacks.ClearStacksComponent construct(){
+                return new amara.game.entitysystem.components.effects.buffs.stacks.ClearStacksComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.buffs.stacks.RemoveStacksComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.buffs.stacks.RemoveStacksComponent.class.getDeclaredField("stacks"), componentFieldSerializer_Stacks);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.buffs.stacks.RemoveStacksComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.buffs.stacks.RemoveStacksComponent>("removeStacks"){
+
+            @Override
+            public amara.game.entitysystem.components.effects.buffs.stacks.RemoveStacksComponent construct(){
+                int stacks = 0;
+                String stacksText = element.getText();
+                if((stacksText != null) && (stacksText.length() > 0)){
+                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(stacksText));
+                }
+                return new amara.game.entitysystem.components.effects.buffs.stacks.RemoveStacksComponent(stacks);
             }
         });
         //casts
@@ -3139,6 +3268,20 @@ public class ComponentsRegistrator{
         }
         //effecttriggers
         //targets
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent.class.getDeclaredField("buffEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent>("buffTargetsTarget"){
+
+            @Override
+            public amara.game.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent construct(){
+                int buffEntity = createChildEntity(0, "buffEntity");
+                return new amara.game.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent(buffEntity);
+            }
+        });
         bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent>("casterTarget"){
 
@@ -3287,6 +3430,24 @@ public class ComponentsRegistrator{
                     counter = Integer.parseInt(xmlTemplateManager.parseValue(counterText));
                 }
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent(counter);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent.class.getDeclaredField("stacks"), componentFieldSerializer_Stacks);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent>("stacksReachedTrigger"){
+
+            @Override
+            public amara.game.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent construct(){
+                int stacks = 0;
+                String stacksText = element.getText();
+                if((stacksText != null) && (stacksText.length() > 0)){
+                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(stacksText));
+                }
+                return new amara.game.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent(stacks);
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent.class);

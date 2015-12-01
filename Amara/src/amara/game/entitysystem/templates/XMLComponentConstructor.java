@@ -42,7 +42,10 @@ public abstract class XMLComponentConstructor<T>{
             }
         }
         else if(element.getText().length() > 0){
-            childEntities.add(parseEntity(element.getText()));
+            String[] textParts = element.getText().split(",");
+            for(String textPart : textParts){
+                childEntities.add(parseEntity(textPart));
+            }
         }
         int parameterIndex = 0;
         String attributeValue;

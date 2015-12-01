@@ -10,7 +10,7 @@
                         <addBuffArea>
                             <entity id="buffArea">
                                 <hitbox>
-                                    <circle radius="2.25"/>
+                                    <circle radius="3"/>
                                 </hitbox>
                                 <areaBuff>
                                     <entity>
@@ -38,7 +38,7 @@
                 </triggeredEffect>
                 <triggerSource>#passive</triggerSource>
             </entity>
-        </itemAddedEffectTriggers>6
+        </itemAddedEffectTriggers>
         <itemRemovedEffectTriggers>
             <!--remove spelleffect-->
             <entity>

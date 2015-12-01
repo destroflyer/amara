@@ -1,31 +1,38 @@
 <template>
-    <value name="duration">1</value>
+    <value name="maximumStacks">10</value>
     <entity id="passive">
-        <description>Your basic attacks ignite the target, dealing 40 damage over [duration] second.</description>
+        <description>Your basic attacks grant a stack (+12% attack speed), up to a maximum of [maximumStacks] stacks. (TODO: The stacks will get removed of 2 seconds of not attacking)</description>
         <itemAddedEffectTriggers>
-            <!--add spelleffect-->
+            <!--add buff and spelleffect-->
             <entity>
                 <casterTarget/>
                 <triggeredEffect>
                     <entity>
+                        <addBuff duration="-1">
+                            <entity id="buff">
+                                <buffStacks>
+                                    <entity id="buffStacks">
+                                        <stacks>0</stacks>
+                                        <maximumStacks>[maximumStacks]</maximumStacks>
+                                    </entity>
+                                </buffStacks>
+                                <continuousAttributesPerStack>
+                                    <entity>
+                                        <bonusPercentageAttackSpeed>0.12</bonusPercentageAttackSpeed>
+                                    </entity>
+                                </continuousAttributesPerStack>
+                                <keepOnDeath/>
+                            </entity>
+                        </addBuff>
                         <addAutoAttackSpellEffects>
                             <entity id="newSpellEffect">
                                 <castedEffectTriggers>
-                                    <!--target effect-->
+                                    <!--add stacks-->
                                     <entity>
-                                        <targetTarget/>
+                                        <customTarget>#buffStacks</customTarget>
                                         <triggeredEffect>
                                             <entity>
-                                                <addBuff duration="[duration]">
-                                                    <entity>
-                                                        <buffVisualisation>burning</buffVisualisation>
-                                                        <repeatingEffect interval="0.25">
-                                                            <entity>
-                                                                <flatMagicDamage>10</flatMagicDamage>
-                                                            </entity>
-                                                        </repeatingEffect>
-                                                    </entity>
-                                                </addBuff>
+                                                <addStacks>1</addStacks>
                                             </entity>
                                         </triggeredEffect>
                                         <triggerSource>#passive</triggerSource>
@@ -44,6 +51,7 @@
                 <casterTarget/>
                 <triggeredEffect>
                     <entity>
+                        <removeBuff>#buff</removeBuff>
                         <removeSpellEffects>#newSpellEffect</removeSpellEffects>
                     </entity>
                 </triggeredEffect>

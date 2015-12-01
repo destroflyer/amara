@@ -19,11 +19,11 @@
                                                 <addBuff duration="[duration]">
                                                     <entity>
                                                         <buffVisualisation>frost</buffVisualisation>
-                                                        <continuousEffect>
+                                                        <continuousAttributes>
                                                             <entity>
                                                                 <bonusPercentageWalkSpeed>-0.4</bonusPercentageWalkSpeed>
                                                             </entity>
-                                                        </continuousEffect>
+                                                        </continuousAttributes>
                                                     </entity>
                                                 </addBuff>
                                             </entity>
@@ -37,7 +37,7 @@
                 </triggeredEffect>
                 <triggerSource>#passive</triggerSource>
             </entity>
-        </itemAddedEffectTriggers>6
+        </itemAddedEffectTriggers>
         <itemRemovedEffectTriggers>
             <!--remove spelleffect-->
             <entity>

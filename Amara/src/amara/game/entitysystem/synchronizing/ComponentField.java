@@ -22,6 +22,7 @@ public @interface ComponentField{
         TIMER,
         DISTANCE,
         ATTRIBUTE,
+        STACKS,
         TEMPLATE,
         FILEPATH
     }
