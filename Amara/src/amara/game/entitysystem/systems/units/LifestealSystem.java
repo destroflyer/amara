@@ -30,8 +30,10 @@ public class LifestealSystem implements EntitySystem{
                     if((lifestealComponent != null) && (lifestealComponent.getValue() > 0)){
                         float physicalDamage = entityWorld.getComponent(effectImpactEntity, PhysicalDamageComponent.class).getValue();
                         float healedAmount = (lifestealComponent.getValue() * physicalDamage);
-                        float currentHealth = entityWorld.getComponent(sourceEntity, HealthComponent.class).getValue();
-                        entityWorld.setComponent(sourceEntity, new HealthComponent(currentHealth + healedAmount));
+                        HealthComponent healthComponent = entityWorld.getComponent(sourceEntity, HealthComponent.class);
+                        if(healthComponent != null){
+                            entityWorld.setComponent(sourceEntity, new HealthComponent(healthComponent.getValue() + healedAmount));
+                        }
                     }
                 }
             }

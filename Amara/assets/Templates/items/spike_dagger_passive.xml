@@ -1,7 +1,7 @@
 <template>
     <value name="maximumStacks">10</value>
     <entity id="passive">
-        <description>Your basic attacks grant a stack (+12% attack speed), up to a maximum of [maximumStacks] stacks. (TODO: The stacks will get removed of 2 seconds of not attacking)</description>
+        <description>Your basic attacks grant a stack (+12% attack speed), up to a maximum of [maximumStacks] stacks. (TODO: The stacks will get removed after 2 seconds of not attacking)</description>
         <itemAddedEffectTriggers>
             <!--add buff and spelleffect-->
             <entity>

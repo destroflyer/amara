@@ -21,6 +21,7 @@ import com.jme3.texture.Texture;
 import amara.Util;
 import amara.engine.JMonkeyUtil;
 import amara.engine.materials.MaterialFactory;
+import amara.engine.settings.Settings;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -128,7 +129,10 @@ public class ModelSkin{
                 else if(currentMaterialElement.getName().equals("texture")){
                     String textureFilePath = getResourcesFilePath() + currentMaterialElement.getText();
                     material = MaterialFactory.generateLightingMaterial(textureFilePath);
-                    loadTexture(material, "NormalMap", currentMaterialElement.getAttributeValue("normalMap"));
+                    //[jME 3.0 Stable] Hardware skinning currently doesn't seem to support normal maps correctly
+                    if(!Settings.getBoolean("hardware_skinning")){
+                        loadTexture(material, "NormalMap", currentMaterialElement.getAttributeValue("normalMap"));
+                    }
                     loadTexture(material, "AlphaMap", currentMaterialElement.getAttributeValue("alphaMap"));
                     loadTexture(material, "SpecularMap", currentMaterialElement.getAttributeValue("specularMap"));
                     loadTexture(material, "GlowMap", currentMaterialElement.getAttributeValue("glowMap"));
