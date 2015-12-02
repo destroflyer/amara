@@ -26,11 +26,17 @@ import amara.engine.appstates.BaseDisplayAppState;
 public class ModelAppState extends BaseDisplayAppState implements ActionListener{
     
     private final String[] modelSkinPaths = new String[]{
+        "/Models/kachujin/skin_default.xml",
+        "/Models/maw/skin_default.xml",
+        "/Models/maria/skin_default.xml",
+        "/Models/erika/skin_default.xml",
+        "/Models/ganfaul/skin_default.xml",
         "/Models/daydream/skin_default.xml",
         "/Models/daydream/skin_fire.xml",
         "/Models/daydream/skin_nightmare.xml",
         "/Models/daydream/skin_envy.xml",
         "/Models/daydream/skin_inuyasha.xml",
+        "/Models/daydream/skin_amazoness.xml",
         "/Models/oz/skin_default.xml",
         "/Models/oz/skin_oz_junior.xml",
         "/Models/minion/skin_default.xml",
@@ -41,7 +47,8 @@ public class ModelAppState extends BaseDisplayAppState implements ActionListener
         "/Models/jaime/skin_default.xml",
         "/Models/soldier/skin_default.xml",
         "/Models/steve/skin_default.xml",
-        "/Models/nathalya/skin_default.xml"
+        "/Models/nathalya/skin_default.xml",
+        "/Models/vampire_a_lusth/skin_default.xml"
     };
     private ModelObject[] modelObjects;
     private String[][] animationNames;
