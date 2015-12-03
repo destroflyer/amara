@@ -10,7 +10,7 @@ import amara.Util;
 import amara.engine.applications.*;
 import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.engine.applications.ingame.server.network.backends.*;
-import amara.engine.applications.masterserver.server.appstates.DatabaseAppState;
+import amara.engine.applications.masterserver.server.appstates.*;
 import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.appstates.*;
 import amara.engine.network.NetworkServer;
@@ -78,7 +78,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
         networkServer.addMessageBackend(new AuthentificateClientsBackend(mainApplication.getGame(), entityWorld));
         //networkServer.addMessageBackend(new UpdateNewClientBackend(entityWorld));
-        networkServer.addMessageBackend(new InitializeClientBackend(mainApplication.getGame(), getAppState(GameRunningAppState.class)));
+        networkServer.addMessageBackend(new InitializeClientBackend(mainApplication.getGame()));
         
         Game game = mainApplication.getGame();
         EntityWrapper gameEntity = entityWorld.getWrapped(entityWorld.createEntity());
@@ -277,7 +277,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new SetIdleAnimationsSystem());
         addEntitySystem(new IntersectionPushSystem(intersectionObserver));
         addEntitySystem(new MapIntersectionSystem(polyMapManager));
-        addEntitySystem(new CheckMapObjectiveSystem(map, getAppState(GameRunningAppState.class)));
+        addEntitySystem(new CheckMapObjectiveSystem(map, mainApplication));
         addEntitySystem(new PlayerDeathSystem(map));
         addEntitySystem(new PlayerRespawnSystem(game));
         

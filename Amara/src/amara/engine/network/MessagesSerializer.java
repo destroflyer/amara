@@ -103,6 +103,7 @@ public class MessagesSerializer{
             Message_ClientDisconnection.class,
             Message_ClientInitialized.class,
             Message_EntityChanges.class,
+            Message_GameCrashed.class,
             Message_GameInfo.class,
             Message_GameStarted.class,
             Message_GameOver.class,

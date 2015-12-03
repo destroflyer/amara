@@ -17,7 +17,7 @@
         <walkStepDistance>4</walkStepDistance>
         <autoAttackAnimation>
             <entity>
-                <name>standing_aim_recoil</name>
+                <name>shoot_arrow</name>
             </entity>
         </autoAttackAnimation>
         <deathAnimation>

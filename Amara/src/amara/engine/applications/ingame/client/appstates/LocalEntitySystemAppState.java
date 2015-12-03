@@ -76,6 +76,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState{
         NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
         networkClient.addMessageBackend(new EntitySynchronizeBackend(mainApplication, entityWorld));
         networkClient.addMessageBackend(new GameStartedBackend(mainApplication));
+        networkClient.addMessageBackend(new GameCrashedBackend(mainApplication));
         networkClient.addMessageBackend(new GameOverBackend(mainApplication));
         for(EntitySystem entitySystem : ParallelNetworkSystems.generateSystems()){
             addEntitySystem(entitySystem);

@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import com.jme3.animation.SkeletonControl;
 import amara.*;
 import amara.engine.network.MessagesSerializer;
 import amara.launcher.client.buttons.*;
@@ -33,6 +34,7 @@ public class FrameUtil{
     public static void initProgramProperties(){
         //ConsoleOutput
         Logger.getLogger("").setLevel(Level.SEVERE);
+        Logger.getLogger(SkeletonControl.class.getName()).setLevel(Level.SEVERE);
         try{
             FileOutputStream logFileOutputStream = new FileOutputStream("./log.txt");
             System.setOut(new PrintStream(new MultipleOutputStream(System.out, logFileOutputStream)));

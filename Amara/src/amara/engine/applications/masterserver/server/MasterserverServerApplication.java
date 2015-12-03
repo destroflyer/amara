@@ -14,6 +14,7 @@ public class MasterserverServerApplication extends HeadlessApplication{
     public MasterserverServerApplication(int port){
         this.port = port;
         try{
+            stateManager.attach(new LogsAppState());
             stateManager.attach(new DatabaseAppState());
             stateManager.attach(new NetworkServerAppState(port));
             stateManager.attach(new UpdatesAppState());

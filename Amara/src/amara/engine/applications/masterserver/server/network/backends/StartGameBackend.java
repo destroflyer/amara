@@ -44,10 +44,15 @@ public class StartGameBackend implements MessageBackend{
                 LobbyData lobbyData = lobby.getLobbyData();
                 Map map = MapFileHandler.load(lobbyData.getMapName());
                 Game game = new Game(map, players);
-                RunningGames runningGames = mainApplication.getStateManager().getState(GamesAppState.class).getRunningGames();
-                runningGames.registerGame(game);
-                IngameServerApplication ingameServerApplication = new IngameServerApplication(mainApplication, game);
-                ingameServerApplication.start();
+                GamesAppState gamesAppState = mainApplication.getStateManager().getState(GamesAppState.class);
+                gamesAppState.onGameStartRequested(game);
+                IngameServerApplication ingameServerApplication = null;
+                try{
+                    ingameServerApplication = new IngameServerApplication(mainApplication, game);
+                    ingameServerApplication.start();
+                }catch(Exception ex){
+                    gamesAppState.onGameCrashed(ingameServerApplication, ex);
+                }
             }
         }
     }

@@ -5,7 +5,6 @@
 package amara.engine.applications.ingame.server.network.backends;
 
 import com.jme3.network.Message;
-import amara.engine.applications.ingame.server.appstates.GameRunningAppState;
 import amara.engine.network.*;
 import amara.engine.network.messages.*;
 import amara.game.games.*;
@@ -16,12 +15,10 @@ import amara.game.games.*;
  */
 public class InitializeClientBackend implements MessageBackend{
 
-    public InitializeClientBackend(Game game, GameRunningAppState gameRunningAppState){
+    public InitializeClientBackend(Game game){
         this.game = game;
-        this.gameRunningAppState = gameRunningAppState;
     }
     private Game game;
-    private GameRunningAppState gameRunningAppState;
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
@@ -31,7 +28,6 @@ public class InitializeClientBackend implements MessageBackend{
             player.setInitialized(true);
             if(game.areAllPlayersInitialized()){
                 game.start();
-                gameRunningAppState.onGameStarted();
                 messageResponse.addBroadcastMessage(new Message_GameStarted());
                 System.out.println("All players connected, game started.");
             }

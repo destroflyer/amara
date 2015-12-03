@@ -217,7 +217,7 @@
                             <panel width="14px"/>
                             <panel childLayout="vertical" width="39px">
                                 <panel height="10px"/>
-                                <image id="passive_image" filename="Interface/hud/spells/none.png" width="100%" height="100%w"></image>
+                                <image filename="Interface/hud/spells/none.png" width="100%" height="100%w"></image>
                             </panel>
                             <panel/>
                         </panel>

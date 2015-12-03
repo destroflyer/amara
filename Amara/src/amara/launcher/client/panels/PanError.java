@@ -22,12 +22,11 @@ import amara.*;
  */
 public class PanError extends javax.swing.JPanel{
 
-    /** Creates new form panHeader */
-    public PanError(Exception exception){
+    public PanError(String errorMessage){
         initComponents();
         setBackground(Color.BLACK);
         panContent.setPreferredSize(new Dimension(270, 0));
-        lblMessage.setText("<html>" + exception.getMessage() + "</html>");
+        lblMessage.setText("<html>" + errorMessage + "</html>");
     }
     private Image backgroundImage;
 
@@ -57,7 +56,7 @@ public class PanError extends javax.swing.JPanel{
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitle.setText("Ups - Etwas lief falsch");
+        lblTitle.setText("Oops...");
 
         lblMessage.setForeground(new java.awt.Color(255, 255, 255));
         lblMessage.setVerticalAlignment(javax.swing.SwingConstants.TOP);

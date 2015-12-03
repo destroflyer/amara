@@ -7,7 +7,6 @@ package amara.launcher.client;
 import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import amara.engine.network.exceptions.ServerConnectionTimeoutException;
 import amara.launcher.FrameUtil;
 import amara.launcher.client.panels.PanError;
 
@@ -17,28 +16,36 @@ import amara.launcher.client.panels.PanError;
  */
 public class ErrorDialog extends javax.swing.JDialog{
 
-    public ErrorDialog(Frame parent, Exception exception){
+    public ErrorDialog(Frame parent, String errorMessage){
         super(parent);
         initComponents();
-        panContainer.add(new PanError(exception));
+        panContainer.add(new PanError(errorMessage));
         FrameUtil.initDialogSpecials(this);
         FrameUtil.centerFrame(this);
     }
     
-    public static void show(Exception exception){
+    public static ErrorDialog show(String errorMessage){
         final MainFrame mainFrame = MainFrame.getInstance();
-        mainFrame.setEnabled(false);
-        ErrorDialog errorDialog = new ErrorDialog(mainFrame, exception);
+        if(mainFrame != null){
+            mainFrame.setEnabled(false);
+        }
+        ErrorDialog errorDialog = new ErrorDialog(mainFrame, errorMessage);
         errorDialog.addWindowListener(new WindowAdapter(){
 
             @Override
             public void windowClosed(WindowEvent evt){
                 super.windowClosed(evt);
-                mainFrame.setEnabled(true);
-                mainFrame.toFront();
+                if(mainFrame != null){
+                    mainFrame.setEnabled(true);
+                    mainFrame.toFront();
+                }
+                else{
+                    System.exit(0);
+                }
             }
         });
         errorDialog.setVisible(true);
+        return errorDialog;
     }
 
     /**
@@ -71,21 +78,11 @@ public class ErrorDialog extends javax.swing.JDialog{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]){
         FrameUtil.initProgramProperties();
-        ErrorDialog dialog = new ErrorDialog(null, new ServerConnectionTimeoutException("127.0.0.1", 42));
-        dialog.addWindowListener(new java.awt.event.WindowAdapter(){
-            
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent e){
-                System.exit(0);
-            }
-        });
-        dialog.setVisible(true);
+        show("Timeout while connecting to \"127.0.0.1\" at port 42.");
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel panContainer;
     // End of variables declaration//GEN-END:variables

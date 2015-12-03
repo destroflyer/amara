@@ -4,7 +4,8 @@
  */
 package amara.game.entitysystem.systems.objectives;
 
-import amara.engine.applications.ingame.server.appstates.GameRunningAppState;
+import amara.engine.applications.ingame.server.IngameServerApplication;
+import amara.engine.applications.masterserver.server.appstates.GamesAppState;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.maps.*;
 import amara.game.entitysystem.components.objectives.*;
@@ -16,12 +17,12 @@ import amara.game.maps.Map;
  */
 public class CheckMapObjectiveSystem implements EntitySystem{
 
-    public CheckMapObjectiveSystem(Map map, GameRunningAppState gameRunningAppState){
+    public CheckMapObjectiveSystem(Map map, IngameServerApplication mainApplication){
         this.map = map;
-        this.gameRunningAppState = gameRunningAppState;
+        this.mainApplication = mainApplication;
     }
     private Map map;
-    private GameRunningAppState gameRunningAppState;
+    private IngameServerApplication mainApplication;
     private boolean isFinished = false;
     
     @Override
@@ -30,7 +31,8 @@ public class CheckMapObjectiveSystem implements EntitySystem{
             int objectiveEntity = entityWorld.getComponent(map.getEntity(), MapObjectiveComponent.class).getObjectiveEntity();
             if(entityWorld.hasComponent(objectiveEntity, FinishedObjectiveComponent.class)){
                 isFinished = true;
-                gameRunningAppState.onGameOver();
+                GamesAppState gamesAppState = mainApplication.getMasterServer().getStateManager().getState(GamesAppState.class);
+                gamesAppState.onGameOver(mainApplication);
             }
         }
     }
