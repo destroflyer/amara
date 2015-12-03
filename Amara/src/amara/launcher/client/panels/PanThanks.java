@@ -61,7 +61,7 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("silveralv", "Model \"Tower\"", "/Interface/client/thanks/blender.png", "http://silveralv.deviantart.com"),
         new Thanks("xuroiux", "Model \"Tree\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/xuroiux"),
         //Textures
-        new Thanks("Temporalcortex", "HUD Overlay \"Metal Tech\"", "/Interface/client/thanks/youtube.png", "http://youtube.com/user/Temporalcortex"),
+        new Thanks("Temporalcortex", "HUD Overlay \"Metal Tech\"", "/Interface/client/thanks/youtube.png", "http://youtube.com/Temporalcortex"),
         new Thanks("RigzSoft", "Texture \"Frost\"", "/Textures/effects/frost_additive.png", "http://rigzsoft.co.uk"),
         new Thanks("Twitch", "Reaction Emotes", "/Interface/client/thanks/twitch.png", "http://twitch.tv"),
         new Thanks("Pixel Mixer", "Icon set \"Basic Icons\"", "/Interface/client/user.png", "http://iconarchive.com/artist/pixelmixer.html"),

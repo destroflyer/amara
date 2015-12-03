@@ -62,7 +62,7 @@ public class ScreenController_Menu extends GameScreenController{
                     childLayoutHorizontal();
                     set("height", "32px");
                     
-                    control(new ControlBuilder("button"){{
+                    control(new ControlBuilder("category_" + categoryIndex, "button"){{
                         set("width", "100%");
                         set("height", "30px");
                         set("label", settingsCategory.getTitle());
@@ -76,14 +76,14 @@ public class ScreenController_Menu extends GameScreenController{
                 childLayoutHorizontal();
                 set("height", "32px");
                 
-                control(new ControlBuilder("button"){{
+                control(new ControlBuilder("apply_changes", "button"){{
                     set("width", "50%");
                     set("height", "30px");
                     set("label", "Apply");
 
                     interactOnClick("applyChanges()");
                 }});
-                control(new ControlBuilder("button"){{
+                control(new ControlBuilder("reset", "button"){{
                     set("width", "50%");
                     set("height", "30px");
                     set("label", "Reset");
@@ -95,7 +95,7 @@ public class ScreenController_Menu extends GameScreenController{
                 childLayoutHorizontal();
                 set("height", "32px");
                 
-                control(new ControlBuilder("button"){{
+                control(new ControlBuilder("exit_game", "button"){{
                     set("width", "100%");
                     set("height", "30px");
                     set("label", "Exit Game");

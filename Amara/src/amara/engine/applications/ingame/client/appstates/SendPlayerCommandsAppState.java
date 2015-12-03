@@ -73,7 +73,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                     }
                 }
                 else if(mouseButtonIndex == Settings.getInteger("controls_navigation_walk_attack")){
-                    if(hoveredEntity != -1){
+                    if((hoveredEntity != -1) && (hoveredEntity != getPlayerSelectedUnitEntity())){
                         sendCommand(new AutoAttackCommand(hoveredEntity));
                     }
                     else{
@@ -164,8 +164,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
     
     private void castSpell(SpellIndex spellIndex){
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
-        PlayerAppState playerAppState = getAppState(PlayerAppState.class);
-        int selectedEntity = entityWorld.getComponent(playerAppState.getPlayerEntity(), SelectedUnitComponent.class).getEntity();
+        int selectedEntity = getPlayerSelectedUnitEntity();
         int spellEntity = getSpellEntity(entityWorld, selectedEntity, spellIndex);
         if(spellEntity != -1){
             Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
@@ -176,8 +175,9 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                     break;
 
                 case SINGLE_TARGET:
-                    if(playerAppState.getCursorHoveredEntity() != -1){
-                        sendCommand(new CastSingleTargetSpellCommand(spellIndex, playerAppState.getCursorHoveredEntity()));
+                    int hoveredEntity = getAppState(PlayerAppState.class).getCursorHoveredEntity();
+                    if(hoveredEntity != -1){
+                        sendCommand(new CastSingleTargetSpellCommand(spellIndex, hoveredEntity));
                     }
                     break;
 
@@ -196,6 +196,12 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState{
                     break;
             }
         }
+    }
+    
+    private int getPlayerSelectedUnitEntity(){
+        EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
+        int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
+        return entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
     }
     
     private void showReaction(String reaction){

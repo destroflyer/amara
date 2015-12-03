@@ -11,10 +11,10 @@
         </idleAnimation>
         <walkAnimation>
             <entity>
-                <name>walking_inPlace</name>
+                <name>crouch_walk_forward_inPlace</name>
             </entity>
         </walkAnimation>
-        <walkStepDistance>2.5</walkStepDistance>
+        <walkStepDistance>5</walkStepDistance>
         <autoAttackAnimation>
             <entity>
                 <name>boxing</name>
