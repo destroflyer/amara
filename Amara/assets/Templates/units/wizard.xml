@@ -55,7 +55,7 @@
         <isVulnerable/>
         <!--spells-->
         <autoAttack>
-            <entity template="spells/default_autoattack"/>
+            <entity template="spells/ranged_autoattack"/>
         </autoAttack>
         <learnableSpells>
             <entity template="spells/sear"/>

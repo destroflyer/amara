@@ -63,7 +63,7 @@
         <isVulnerable/>
         <!--spells-->
         <autoAttack>
-            <entity template="spells/default_autoattack"/>
+            <entity template="spells/ranged_autoattack(Models/erika_arrow/skin.xml)"/>
         </autoAttack>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

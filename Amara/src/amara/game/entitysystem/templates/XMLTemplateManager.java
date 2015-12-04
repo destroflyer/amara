@@ -75,8 +75,17 @@ public class XMLTemplateManager{
         Element templateElement = document.getRootElement();
         cachedEntities.push(new HashMap<String, Integer>(10));
         HashMap<String, String> values = new HashMap<String, String>();
+        String defaultParameterText = templateElement.getAttributeValue("defaultParameters");
+        if(defaultParameterText != null){
+            String[] defaultParameters = defaultParameterText.split(",");
+            for(int i=0;i<defaultParameters.length;i++){
+                values.put("parameter" + i, defaultParameters[i]);
+            }
+        }
         for(int i=0;i<parameters.length;i++){
-            values.put("parameter" + i, parameters[i]);
+            if(!parameters[i].equals("default")){
+                values.put("parameter" + i, parameters[i]);
+            }
         }
         cachedValues.push(values);
         boolean isFirstEntity = true;

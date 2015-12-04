@@ -1,0 +1,32 @@
+<template>
+    <entity id="projectile">
+        <model>[parameter0]</model>
+        <hitbox>
+            <point/>
+        </hitbox>
+        <hitboxActive/>
+        <isProjectile/>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <targetReachedTrigger/>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--remove projectile-->
+    <entity>
+        <targetReachedTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+</template>

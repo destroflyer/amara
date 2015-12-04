@@ -77,7 +77,7 @@ public class Map_Testmap extends Map{
                 unit.setComponent(new RequestUpdateAttributesComponent());
                 unit.setComponent(new IsTargetableComponent());
                 unit.setComponent(new IsVulnerableComponent());
-                EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/default_autoattack");
+                EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
                 unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
                 unit.setComponent(new TeamComponent(0));
                 unit.setComponent(new BountyComponent(testUnitBounty.getId()));
@@ -139,7 +139,7 @@ public class Map_Testmap extends Map{
         boss.setComponent(new RequestUpdateAttributesComponent());
         boss.setComponent(new IsTargetableComponent());
         boss.setComponent(new IsVulnerableComponent());
-        EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/default_autoattack");
+        EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
         boss.setComponent(new AutoAttackComponent(autoAttack.getId()));
         EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "spells/bodyslam");
         boss.setComponent(new SpellsComponent(new int[]{bodyslam.getId()}));

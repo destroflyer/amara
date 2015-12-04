@@ -202,7 +202,7 @@ public class MessagesSerializer{
 
             @Override
             public SpawnTemplateComponent construct(){
-                String[] templates = element.getText().split(",");
+                String[] templates = element.getText().split("\\|");
                 for(int i=0;i<templates.length;i++){
                     templates[i] = xmlTemplateManager.parseTemplate(templates[i]);
                 }

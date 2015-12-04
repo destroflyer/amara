@@ -78,7 +78,7 @@ public class Map_Destroforest extends Map{
             unit.setComponent(new RequestUpdateAttributesComponent());
             unit.setComponent(new IsTargetableComponent());
             unit.setComponent(new IsVulnerableComponent());
-            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/default_autoattack");
+            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
             unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
             unit.setComponent(new AutoAggroComponent(24));
             Vector2f position = null;
