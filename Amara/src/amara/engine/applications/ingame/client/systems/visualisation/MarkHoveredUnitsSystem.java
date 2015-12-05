@@ -45,7 +45,7 @@ public class MarkHoveredUnitsSystem implements EntitySystem{
                 Spatial clonedModel = modelObject.getModelSpatial().deepClone();
                 Material material = new Material(MaterialFactory.getAssetManager(), "Shaders/cartoonedge/matdefs/cartoonedge.j3md");
                 material.setColor("EdgesColor", (playerTeamSystem.isAllied(entityWorld, entity)?colorAllies:colorEnemies));
-                material.setFloat("EdgeSize", 0.1f / FastMath.pow(modelObject.getSkin().getModelScale(), 2.5f));
+                material.setFloat("EdgeSize", 0.1f / FastMath.pow(modelObject.getSkin().getModelScale().getY(), 2.5f));
                 for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel)){
                     geometry.setMaterial(material);
                 }

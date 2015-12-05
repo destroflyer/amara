@@ -26,6 +26,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.Attribute;
+import org.jdom.DataConversionException;
 
 /**
  *
@@ -46,7 +47,7 @@ public class ModelSkin{
     private Element modifiersElement;
     private String name;
     private float modelNormScale;
-    private float modelScale;
+    private Vector3f modelScale;
     private float materialAmbient;
     private LinkedList<ModelModifier> modelModifiers = new LinkedList<ModelModifier>();
    
@@ -60,7 +61,7 @@ public class ModelSkin{
             materialElement = modelElement.getChild("material");
             modifiersElement = modelElement.getChild("modifiers");
             modelNormScale = getAttributeValue(modelElement, "normScale", 1);
-            modelScale = getAttributeValue(modelElement, "scale", 1);
+            modelScale = getAttributeValue(modelElement, "scale", Vector3f.UNIT_XYZ);
             materialAmbient = getAttributeValue(materialElement, "ambient", 0.15f);
         }catch(Exception ex){
             System.out.println("Error while loading object skin '" + fileResourceURL + "'");
@@ -77,7 +78,30 @@ public class ModelSkin{
             if(attribute != null){
                 try{
                     return attribute.getFloatValue();
-                }catch(Exception ex){
+                }catch(DataConversionException ex){
+                }
+            }
+        }
+        return defaultValue;
+    }
+   
+    private Vector3f getAttributeValue(Element element, String attributeName, Vector3f defaultValue){
+        if(element != null){
+            Attribute attribute = element.getAttribute(attributeName);
+            if(attribute != null){
+                String[] coordinates = attribute.getValue().split(",");
+                if(coordinates.length == 3){
+                    float x = Float.parseFloat(coordinates[0]);
+                    float y = Float.parseFloat(coordinates[1]);
+                    float z = Float.parseFloat(coordinates[2]);
+                    return new Vector3f(x, y, z);
+                }
+                else{
+                    try{
+                        float value = attribute.getFloatValue();
+                        return new Vector3f(value, value, value);
+                    }catch(DataConversionException ex){
+                    }
                 }
             }
         }
@@ -96,7 +120,7 @@ public class ModelSkin{
     private Spatial loadModel(){
         String modelPath = getModelFilePath();
         Spatial spatial = MaterialFactory.getAssetManager().loadModel(modelPath);
-        spatial.setLocalScale(modelNormScale * modelScale);
+        spatial.setLocalScale(modelScale.mult(modelNormScale));
         return spatial;
     }
    
@@ -203,8 +227,7 @@ public class ModelSkin{
    
     private void applyGeometryInformation(Spatial spatial){
         LinkedList<Geometry> geometryChilds = JMonkeyUtil.getAllGeometryChilds(spatial);
-        float scale = (modelNormScale * modelScale);
-        Vector3f scaleVector = new Vector3f(scale, scale, scale);
+        Vector3f scaleVector = modelScale.mult(modelNormScale);
         for(int i=0;i<geometryChilds.size();i++){
             Geometry geometry = geometryChilds.get(i);
             Material material = geometry.getMaterial();
@@ -230,7 +253,7 @@ public class ModelSkin{
         return name;
     }
 
-    public float getModelScale(){
+    public Vector3f getModelScale(){
         return modelScale;
     }
 
