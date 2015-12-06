@@ -44,7 +44,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <flatPhysicalDamage>80</flatPhysicalDamage>
+                        <physicalDamage>80</physicalDamage>
                         <removeBuff>[parameter0]</removeBuff>
                     </entity>
                 </triggeredEffect>

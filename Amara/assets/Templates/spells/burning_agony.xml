@@ -36,7 +36,7 @@
                                         <buffVisualisation>burning</buffVisualisation>
                                         <repeatingEffect interval="0.5">
                                             <entity>
-                                                <flatMagicDamage>30</flatMagicDamage>
+                                                <magicDamage>30</magicDamage>
                                             </entity>
                                         </repeatingEffect>
                                     </entity>

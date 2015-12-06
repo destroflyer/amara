@@ -47,7 +47,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <flatPhysicalDamage>70</flatPhysicalDamage>
+                        <physicalDamage>70</physicalDamage>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

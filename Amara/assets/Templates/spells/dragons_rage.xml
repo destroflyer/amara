@@ -44,8 +44,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <flatPhysicalDamage>200</flatPhysicalDamage>
-                        <scalingAttackDamagePhysicalDamage>2</scalingAttackDamagePhysicalDamage>
+                        <physicalDamage>200 + (2 * source.attackDamage)</physicalDamage>
                         <move>
                             <entity>
                                 <displacement/>
@@ -61,8 +60,7 @@
                                 <targetTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <flatPhysicalDamage>200</flatPhysicalDamage>
-                                        <scalingAttackDamagePhysicalDamage>2</scalingAttackDamagePhysicalDamage>
+                                        <physicalDamage>200 + (2 * source.attackDamage)</physicalDamage>
                                         <addKnockup>
                                             <entity>
                                                 <knockupDuration>1</knockupDuration>

@@ -40,7 +40,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <scalingAttackDamagePhysicalDamage>1</scalingAttackDamagePhysicalDamage>
+                        <physicalDamage>1 * source.attackDamage</physicalDamage>
                         <canCrit/>
                         <drawTeamAggro>15</drawTeamAggro>
                     </entity>

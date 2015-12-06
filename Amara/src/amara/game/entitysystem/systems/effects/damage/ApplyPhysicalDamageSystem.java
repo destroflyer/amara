@@ -18,14 +18,14 @@ public class ApplyPhysicalDamageSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, PhysicalDamageComponent.class)))
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingPhysicalDamageComponent.class)))
         {
             int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             boolean wasDamaged = false;
             if(entityWorld.hasComponent(targetID, IsVulnerableComponent.class)){
                 HealthComponent healthComponent = entityWorld.getComponent(targetID, HealthComponent.class);
                 if(healthComponent != null){
-                    float damage = entityWrapper.getComponent(PhysicalDamageComponent.class).getValue();
+                    float damage = entityWrapper.getComponent(ResultingPhysicalDamageComponent.class).getValue();
                     if(damage > 0){
                         float health = (healthComponent.getValue() - damage);
                         entityWorld.setComponent(targetID, new HealthComponent(health));

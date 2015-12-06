@@ -40,7 +40,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <flatMagicDamage>300</flatMagicDamage>
+                        <magicDamage>300</magicDamage>
                         <addKnockup>
                             <entity>
                                 <knockupDuration>1</knockupDuration>

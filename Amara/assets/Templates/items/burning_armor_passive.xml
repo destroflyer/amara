@@ -1,7 +1,7 @@
 <template>
     <entity id="passive">
         <description>Deals 40 magic damage per second to nearby enemies.</description>
-        <itemAddedEffectTriggers>
+        <passiveAddedEffectTriggers>
             <!--add spelleffect-->
             <entity>
                 <casterTarget/>
@@ -17,7 +17,7 @@
                                         <buffVisualisation>burning</buffVisualisation>
                                         <repeatingEffect interval="0.5">
                                             <entity>
-                                                <flatMagicDamage>20</flatMagicDamage>
+                                                <magicDamage>20</magicDamage>
                                             </entity>
                                         </repeatingEffect>
                                     </entity>
@@ -38,8 +38,8 @@
                 </triggeredEffect>
                 <triggerSource>#passive</triggerSource>
             </entity>
-        </itemAddedEffectTriggers>
-        <itemRemovedEffectTriggers>
+        </passiveAddedEffectTriggers>
+        <passiveRemovedEffectTriggers>
             <!--remove spelleffect-->
             <entity>
                 <casterTarget/>
@@ -51,6 +51,6 @@
                 </triggeredEffect>
                 <triggerSource>#passive</triggerSource>
             </entity>
-        </itemRemovedEffectTriggers>
+        </passiveRemovedEffectTriggers>
     </entity>
 </template>

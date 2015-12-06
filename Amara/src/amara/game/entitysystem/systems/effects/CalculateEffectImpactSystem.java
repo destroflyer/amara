@@ -27,6 +27,8 @@ import amara.game.entitysystem.components.effects.visuals.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spells.placeholders.*;
+import amara.game.expressions.*;
+import amara.game.expressions.exceptions.*;
 
 /**
  *
@@ -36,43 +38,52 @@ public class CalculateEffectImpactSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
+        ExpressionSpace expressionSpace = GlobalExpressionSpace.getInstance();
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(PrepareEffectComponent.class))){
             if(!entityWrapper.hasComponent(RemainingEffectDelayComponent.class)){
                 EntityWrapper effect = entityWorld.getWrapped(entityWrapper.getComponent(PrepareEffectComponent.class).getEffectEntity());
                 EffectCastSourceComponent effectCastSourceComponent = entityWrapper.getComponent(EffectCastSourceComponent.class);
                 EffectCastSourceSpellComponent effectCastSourceSpellComponent = entityWrapper.getComponent(EffectCastSourceSpellComponent.class);
                 EffectCastTargetComponent effectCastTargetComponent = entityWrapper.getComponent(EffectCastTargetComponent.class);
+                int effectSourceEntity = ((effectCastSourceComponent != null)?effectCastSourceComponent.getSourceEntity():-1);
+                if(effectSourceEntity != -1){
+                    ExpressionUtil.setEntityValues(entityWorld, expressionSpace, "source", effectSourceEntity);
+                }
                 int[] affectedTargetEntities = entityWrapper.getComponent(AffectedTargetsComponent.class).getTargetEntities();
                 for(int i=0;i<affectedTargetEntities.length;i++){
                     int targetEntity = affectedTargetEntities[i];
+                    ExpressionUtil.setEntityValues(entityWorld, expressionSpace, "target", targetEntity);
                     EntityWrapper effectImpact = entityWorld.getWrapped(entityWorld.createEntity());
                     float physicalDamage = 0;
                     float magicDamage = 0;
                     float heal = 0;
-                    FlatPhysicalDamageComponent flatPhysicalDamageComponent = effect.getComponent(FlatPhysicalDamageComponent.class);
-                    if(flatPhysicalDamageComponent != null){
-                        physicalDamage += flatPhysicalDamageComponent.getValue();
-                    }
-                    FlatMagicDamageComponent flatMagicDamageComponent = effect.getComponent(FlatMagicDamageComponent.class);
-                    if(flatMagicDamageComponent != null){
-                        magicDamage += flatMagicDamageComponent.getValue();
-                    }
-                    FlatHealComponent flatHealComponent = effect.getComponent(FlatHealComponent.class);
-                    if(flatHealComponent != null){
-                        heal += flatHealComponent.getValue();
-                    }
-                    if(effectCastSourceComponent != null){
-                        EntityWrapper effectSource = entityWorld.getWrapped(effectCastSourceComponent.getSourceEntity());
-                        ScalingAttackDamagePhysicalDamageComponent scalingAttackDamagePhysicalDamageComponent = effect.getComponent(ScalingAttackDamagePhysicalDamageComponent.class);
-                        if((scalingAttackDamagePhysicalDamageComponent != null) && effectSource.hasComponent(AttackDamageComponent.class)){
-                            physicalDamage += (effectSource.getComponent(AttackDamageComponent.class).getValue() * scalingAttackDamagePhysicalDamageComponent.getRatio());
+                    PhysicalDamageComponent physicalDamageComponent = effect.getComponent(PhysicalDamageComponent.class);
+                    if(physicalDamageComponent != null){
+                        try{
+                            expressionSpace.parse(physicalDamageComponent.getExpression());
+                            physicalDamage += expressionSpace.getResult_Float();
+                        }catch(ExpressionException ex){
                         }
-                        ScalingAbilityPowerMagicDamageComponent scalingAbilityPowerMagicDamageComponent = effect.getComponent(ScalingAbilityPowerMagicDamageComponent.class);
-                        if((scalingAbilityPowerMagicDamageComponent != null) && effectSource.hasComponent(AbilityPowerComponent.class)){
-                            magicDamage += (effectSource.getComponent(AbilityPowerComponent.class).getValue() * scalingAbilityPowerMagicDamageComponent.getRatio());
+                    }
+                    MagicDamageComponent magicDamageComponent = effect.getComponent(MagicDamageComponent.class);
+                    if(magicDamageComponent != null){
+                        try{
+                            expressionSpace.parse(magicDamageComponent.getExpression());
+                            magicDamage += expressionSpace.getResult_Float();
+                        }catch(ExpressionException ex){
                         }
+                    }
+                    HealComponent healComponent = effect.getComponent(HealComponent.class);
+                    if(healComponent != null){
+                        try{
+                            expressionSpace.parse(healComponent.getExpression());
+                            heal += expressionSpace.getResult_Float();
+                        }catch(ExpressionException ex){
+                        }
+                    }
+                    if(effectSourceEntity != -1){
                         if(effect.hasComponent(CanCritComponent.class)){
-                            CriticalChanceComponent criticalChanceComponent = effectSource.getComponent(CriticalChanceComponent.class);
+                            CriticalChanceComponent criticalChanceComponent = entityWorld.getComponent(effectSourceEntity, CriticalChanceComponent.class);
                             if((criticalChanceComponent != null) && (Math.random() < criticalChanceComponent.getValue())){
                                 physicalDamage *= 2;
                                 magicDamage *= 2;
@@ -87,7 +98,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                             armor = armorComponent.getValue();
                         }
                         physicalDamage *= getResistanceDamageFactor(armor);
-                        effectImpact.setComponent(new PhysicalDamageComponent(physicalDamage));
+                        effectImpact.setComponent(new ResultingPhysicalDamageComponent(physicalDamage));
                     }
                     if(magicDamage != 0){
                         float magicResistance = 0;
@@ -96,10 +107,10 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                             magicResistance = magicResistanceComponent.getValue();
                         }
                         magicDamage *= getResistanceDamageFactor(magicResistance);
-                        effectImpact.setComponent(new MagicDamageComponent(magicDamage));
+                        effectImpact.setComponent(new ResultingMagicDamageComponent(magicDamage));
                     }
                     if(heal != 0){
-                        effectImpact.setComponent(new HealComponent(heal));
+                        effectImpact.setComponent(new ResultingHealComponent(heal));
                     }
                     MoveComponent moveComponent = effect.getComponent(MoveComponent.class);
                     if(moveComponent != null){

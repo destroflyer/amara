@@ -24,8 +24,7 @@
                             <entity>
                                 <repeatingEffect interval="0.25">
                                     <entity>
-                                        <flatMagicDamage>50</flatMagicDamage>
-                                        <scalingAbilityPowerMagicDamage>0.15</scalingAbilityPowerMagicDamage>
+                                        <magicDamage>50 + (0.15 * source.abilityPower)</magicDamage>
                                     </entity>
                                 </repeatingEffect>
                             </entity>

@@ -18,13 +18,13 @@ public class HealComponent{
         
     }
     
-    public HealComponent(float value){
-        this.value = value;
+    public HealComponent(String expression){
+        this.expression = expression;
     }
-    @ComponentField(type=ComponentField.Type.ENTITY)
-    private float value;
+    @ComponentField(type=ComponentField.Type.EXPRESSION)
+    private String expression;
 
-    public float getValue(){
-        return value;
+    public String getExpression(){
+        return expression;
     }
 }

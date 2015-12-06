@@ -2,7 +2,7 @@
     <value name="maximumStacks">3</value>
     <entity id="passive">
         <description>Your basic attacks grant a stack - After reaching [maximumStacks] stacks, the stacks will get removed and your next basic attack will deal 70 magic damage (Can crit).</description>
-        <itemAddedEffectTriggers>
+        <passiveAddedEffectTriggers>
             <!--add buff and spelleffect-->
             <entity>
                 <casterTarget/>
@@ -69,7 +69,7 @@
                                                         <targetTarget/>
                                                         <triggeredEffect>
                                                             <entity>
-                                                                <flatMagicDamage>70</flatMagicDamage>
+                                                                <magicDamage>70</magicDamage>
                                                                 <canCrit/>
                                                                 <addBuff duration="0.2">
                                                                     <entity>
@@ -101,8 +101,8 @@
                 </triggeredEffect>
                 <triggerSource>#passive</triggerSource>
             </entity>
-        </itemAddedEffectTriggers>
-        <itemRemovedEffectTriggers>
+        </passiveAddedEffectTriggers>
+        <passiveRemovedEffectTriggers>
             <!--remove spelleffects-->
             <entity>
                 <casterTarget/>
@@ -114,6 +114,6 @@
                 </triggeredEffect>
                 <triggerSource>#passive</triggerSource>
             </entity>
-        </itemRemovedEffectTriggers>
+        </passiveRemovedEffectTriggers>
     </entity>
 </template>

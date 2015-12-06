@@ -12,13 +12,13 @@ import amara.game.entitysystem.synchronizing.ComponentField;
  * @author Carl
  */
 @Serializable
-public class FlatMagicDamageComponent{
+public class ResultingMagicDamageComponent{
 
-    public FlatMagicDamageComponent(){
+    public ResultingMagicDamageComponent(){
         
     }
-    
-    public FlatMagicDamageComponent(float value){
+
+    public ResultingMagicDamageComponent(float value){
         this.value = value;
     }
     @ComponentField(type=ComponentField.Type.ATTRIBUTE)

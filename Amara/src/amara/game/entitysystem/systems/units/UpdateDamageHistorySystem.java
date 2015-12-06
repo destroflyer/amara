@@ -30,10 +30,10 @@ public class UpdateDamageHistorySystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         entitiesWithInactiveDamageHistory = entityWorld.getEntitiesWithAll(DamageHistoryComponent.class);
         damageEntriesMap.clear();
-        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, PhysicalDamageComponent.class)){
+        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingPhysicalDamageComponent.class)){
             onDamageTaken(entityWorld, effectImpactEntity, DamageHistoryComponent.DamageType.PHYSICAL);
         }
-        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, MagicDamageComponent.class)){
+        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingMagicDamageComponent.class)){
             onDamageTaken(entityWorld, effectImpactEntity, DamageHistoryComponent.DamageType.MAGIC);
         }
         for(int entity : damageEntriesMap.keySet()){
@@ -55,11 +55,11 @@ public class UpdateDamageHistorySystem implements EntitySystem{
         float damage = -1;
         switch(damageType){
             case PHYSICAL:
-                damage = entityWorld.getComponent(effectImpactEntity, PhysicalDamageComponent.class).getValue();
+                damage = entityWorld.getComponent(effectImpactEntity, ResultingPhysicalDamageComponent.class).getValue();
                 break;
             
             case MAGIC:
-                damage = entityWorld.getComponent(effectImpactEntity, MagicDamageComponent.class).getValue();
+                damage = entityWorld.getComponent(effectImpactEntity, ResultingMagicDamageComponent.class).getValue();
                 break;
         }
         int sourceEntity = -1;

@@ -53,8 +53,7 @@
                                 <targetTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <flatMagicDamage>110</flatMagicDamage>
-                                        <scalingAbilityPowerMagicDamage>0.7</scalingAbilityPowerMagicDamage>
+                                        <magicDamage>110 + (0.7 * source.abilityPower)</magicDamage>
                                         <move>
                                             <entity>
                                                 <displacement/>

@@ -48,8 +48,7 @@
                                 <buffVisualisation>burning</buffVisualisation>
                                 <repeatingEffect interval="0.5">
                                     <entity>
-                                        <flatMagicDamage>40</flatMagicDamage>
-                                        <scalingAbilityPowerMagicDamage>1</scalingAbilityPowerMagicDamage>
+                                        <magicDamage>40 + (1 * source.abilityPower)</magicDamage>
                                     </entity>
                                 </repeatingEffect>
                             </entity>

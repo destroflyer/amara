@@ -7,8 +7,7 @@ package amara.game.entitysystem.systems.shop;
 import java.util.HashMap;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.items.*;
-import amara.game.entitysystem.components.items.passives.*;
-import amara.game.entitysystem.systems.effects.triggers.EffectTriggerUtil;
+import amara.game.entitysystem.systems.units.PassiveUtil;
 
 /**
  *
@@ -29,7 +28,7 @@ public class TriggerItemPassivesSystem implements EntitySystem{
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll(InventoryComponent.class)){
             for(int itemEntity : observer.getRemoved().getComponent(entity, InventoryComponent.class).getItemEntities()){
-                trigger(entityWorld, itemEntity, false);
+                onItemRemoved(entityWorld, itemEntity);
             }
         }
     }
@@ -49,7 +48,7 @@ public class TriggerItemPassivesSystem implements EntitySystem{
                 }
             }
             if(wasItemAdded){
-                trigger(entityWorld, newItemEntity, true);
+                onItemAdded(entityWorld, newItemEntity);
             }
         }
         if(oldItemEntities != null){
@@ -63,29 +62,24 @@ public class TriggerItemPassivesSystem implements EntitySystem{
                     }
                 }
                 if(wasItemRemoved){
-                    trigger(entityWorld, oldItemEntity, false);
+                    onItemRemoved(entityWorld, oldItemEntity);
                 }
             }
         }
         cachedItems.put(entity, newItemEntities);
     }
     
-    private void trigger(EntityWorld entityWorld, int itemEntity, boolean addedOrRemoved){
+    private void onItemAdded(EntityWorld entityWorld, int itemEntity){
         ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(itemEntity, ItemPassivesComponent.class);
         if(itemPassivesComponent != null){
-            int[] itemPassivesEntities = itemPassivesComponent.getPassiveEntities();
-            for(int itemPassiveEntity : itemPassivesEntities){
-                int[] effectTriggersEntities;
-                if(addedOrRemoved){
-                    effectTriggersEntities = entityWorld.getComponent(itemPassiveEntity, ItemAddedEffectTriggersComponent.class).getEffectTriggerEntities();
-                }
-                else{
-                    effectTriggersEntities = entityWorld.getComponent(itemPassiveEntity, ItemRemovedEffectTriggersComponent.class).getEffectTriggerEntities();
-                }
-                for(int effectTriggerEntity : effectTriggersEntities){
-                    EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, -1);
-                }
-            }
+            PassiveUtil.addPassives(entityWorld, itemPassivesComponent.getPassiveEntities());
+        }
+    }
+    
+    private void onItemRemoved(EntityWorld entityWorld, int itemEntity){
+        ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(itemEntity, ItemPassivesComponent.class);
+        if(itemPassivesComponent != null){
+            PassiveUtil.removePassives(entityWorld, itemPassivesComponent.getPassiveEntities());
         }
     }
 }

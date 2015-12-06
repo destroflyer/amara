@@ -1397,76 +1397,22 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.damage.CanCritComponent();
             }
         });
-        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent>("flatMagicDamage"){
-
-            @Override
-            public amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
-                }
-                return new amara.game.entitysystem.components.effects.damage.FlatMagicDamageComponent(value);
-            }
-        });
-        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent>("flatPhysicalDamage"){
-
-            @Override
-            public amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
-                }
-                return new amara.game.entitysystem.components.effects.damage.FlatPhysicalDamageComponent(value);
-            }
-        });
         bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.MagicDamageComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.MagicDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.MagicDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.MagicDamageComponent>("magicDamage"){
 
             @Override
             public amara.game.entitysystem.components.effects.damage.MagicDamageComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
-                }
-                return new amara.game.entitysystem.components.effects.damage.MagicDamageComponent(value);
+                String expression = xmlTemplateManager.parseValue(element.getText());
+                return new amara.game.entitysystem.components.effects.damage.MagicDamageComponent(expression);
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent>("physicalDamage"){
 
             @Override
             public amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
-                }
-                return new amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent(value);
+                String expression = xmlTemplateManager.parseValue(element.getText());
+                return new amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent(expression);
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.RemoveTargetabilityComponent.class);
@@ -1485,40 +1431,40 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.damage.RemoveVulnerabilityComponent();
             }
         });
-        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.ResultingMagicDamageComponent.class);
         try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent.class.getDeclaredField("ratio"), componentFieldSerializer_Attribute);
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.ResultingMagicDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent>("scalingAbilityPowerMagicDamage"){
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.ResultingMagicDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.ResultingMagicDamageComponent>("resultingMagicDamage"){
 
             @Override
-            public amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent construct(){
-                float ratio = 0;
-                String ratioText = element.getText();
-                if((ratioText != null) && (ratioText.length() > 0)){
-                    ratio = Float.parseFloat(xmlTemplateManager.parseValue(ratioText));
+            public amara.game.entitysystem.components.effects.damage.ResultingMagicDamageComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
                 }
-                return new amara.game.entitysystem.components.effects.damage.ScalingAbilityPowerMagicDamageComponent(ratio);
+                return new amara.game.entitysystem.components.effects.damage.ResultingMagicDamageComponent(value);
             }
         });
-        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.ScalingAttackDamagePhysicalDamageComponent.class);
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent.class);
         try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.ScalingAttackDamagePhysicalDamageComponent.class.getDeclaredField("ratio"), componentFieldSerializer_Attribute);
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.ScalingAttackDamagePhysicalDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.ScalingAttackDamagePhysicalDamageComponent>("scalingAttackDamagePhysicalDamage"){
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent>("resultingPhysicalDamage"){
 
             @Override
-            public amara.game.entitysystem.components.effects.damage.ScalingAttackDamagePhysicalDamageComponent construct(){
-                float ratio = 0;
-                String ratioText = element.getText();
-                if((ratioText != null) && (ratioText.length() > 0)){
-                    ratio = Float.parseFloat(xmlTemplateManager.parseValue(ratioText));
+            public amara.game.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
                 }
-                return new amara.game.entitysystem.components.effects.damage.ScalingAttackDamagePhysicalDamageComponent(ratio);
+                return new amara.game.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent(value);
             }
         });
         //game
@@ -1571,40 +1517,31 @@ public class ComponentsRegistrator{
             }
         });
         //heals
-        bitstreamClassManager.register(amara.game.entitysystem.components.effects.heals.FlatHealComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.heals.FlatHealComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.heals.FlatHealComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.heals.FlatHealComponent>("flatHeal"){
-
-            @Override
-            public amara.game.entitysystem.components.effects.heals.FlatHealComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
-                }
-                return new amara.game.entitysystem.components.effects.heals.FlatHealComponent(value);
-            }
-        });
         bitstreamClassManager.register(amara.game.entitysystem.components.effects.heals.HealComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.heals.HealComponent.class.getDeclaredField("value"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.heals.HealComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.heals.HealComponent>("heal"){
 
             @Override
             public amara.game.entitysystem.components.effects.heals.HealComponent construct(){
+                String expression = xmlTemplateManager.parseValue(element.getText());
+                return new amara.game.entitysystem.components.effects.heals.HealComponent(expression);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.heals.ResultingHealComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.heals.ResultingHealComponent.class.getDeclaredField("value"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.heals.ResultingHealComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.heals.ResultingHealComponent>("resultingHeal"){
+
+            @Override
+            public amara.game.entitysystem.components.effects.heals.ResultingHealComponent construct(){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
                     value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
                 }
-                return new amara.game.entitysystem.components.effects.heals.HealComponent(value);
+                return new amara.game.entitysystem.components.effects.heals.ResultingHealComponent(value);
             }
         });
         //movement
@@ -1972,35 +1909,6 @@ public class ComponentsRegistrator{
                     }
                 }
                 return new amara.game.entitysystem.components.items.ItemRecipeComponent(gold, itemIDs);
-            }
-        });
-        //passives
-        bitstreamClassManager.register(amara.game.entitysystem.components.items.passives.ItemAddedEffectTriggersComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.items.passives.ItemAddedEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.items.passives.ItemAddedEffectTriggersComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.items.passives.ItemAddedEffectTriggersComponent>("itemAddedEffectTriggers"){
-
-            @Override
-            public amara.game.entitysystem.components.items.passives.ItemAddedEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
-                return new amara.game.entitysystem.components.items.passives.ItemAddedEffectTriggersComponent(effectTriggerEntities);
-            }
-        });
-        bitstreamClassManager.register(amara.game.entitysystem.components.items.passives.ItemRemovedEffectTriggersComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.items.passives.ItemRemovedEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.items.passives.ItemRemovedEffectTriggersComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.items.passives.ItemRemovedEffectTriggersComponent>("itemRemovedEffectTriggers"){
-
-            @Override
-            public amara.game.entitysystem.components.items.passives.ItemRemovedEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
-                return new amara.game.entitysystem.components.items.passives.ItemRemovedEffectTriggersComponent(effectTriggerEntities);
             }
         });
         //maps
@@ -3693,6 +3601,49 @@ public class ComponentsRegistrator{
             public amara.game.entitysystem.components.units.MovementComponent construct(){
                 int movementEntity = createChildEntity(0, "movementEntity");
                 return new amara.game.entitysystem.components.units.MovementComponent(movementEntity);
+            }
+        });
+        //passives
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent>("passiveAddedEffectTriggers"){
+
+            @Override
+            public amara.game.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent construct(){
+                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
+                return new amara.game.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent(effectTriggerEntities);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent>("passiveRemovedEffectTriggers"){
+
+            @Override
+            public amara.game.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent construct(){
+                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
+                return new amara.game.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent(effectTriggerEntities);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.PassivesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.PassivesComponent.class.getDeclaredField("passiveEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.PassivesComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.PassivesComponent>("passives"){
+
+            @Override
+            public amara.game.entitysystem.components.units.PassivesComponent construct(){
+                int[] passiveEntities = createChildEntities(0, "passiveEntities");
+                return new amara.game.entitysystem.components.units.PassivesComponent(passiveEntities);
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.units.ReactionComponent.class);

@@ -23,6 +23,7 @@ public @interface ComponentField{
         DISTANCE,
         ATTRIBUTE,
         STACKS,
+        EXPRESSION,
         TEMPLATE,
         FILEPATH
     }

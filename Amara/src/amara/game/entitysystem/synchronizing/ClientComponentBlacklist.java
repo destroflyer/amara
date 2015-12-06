@@ -118,14 +118,12 @@ public class ClientComponentBlacklist{
             //effects/damage
             AddTargetabilityComponent.class,
             AddVulnerabilityComponent.class,
-            FlatMagicDamageComponent.class,
-            FlatPhysicalDamageComponent.class,
             MagicDamageComponent.class,
             PhysicalDamageComponent.class,
             RemoveTargetabilityComponent.class,
             RemoveVulnerabilityComponent.class,
-            ScalingAbilityPowerMagicDamageComponent.class,
-            ScalingAttackDamagePhysicalDamageComponent.class,
+            ResultingMagicDamageComponent.class,
+            ResultingPhysicalDamageComponent.class,
             //effects/game
             PlayCinematicComponent.class,
             //effects/general
@@ -135,8 +133,8 @@ public class ClientComponentBlacklist{
             RemoveEffectTriggersComponent.class,
             RemoveEntityComponent.class,
             //effects/heals
-            FlatHealComponent.class,
             HealComponent.class,
+            ResultingHealComponent.class,
             //effects/movement
             MoveComponent.class,
             StopComponent.class,

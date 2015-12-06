@@ -17,13 +17,13 @@ public class ApplyHealSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, HealComponent.class)))
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingHealComponent.class)))
         {
             int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             HealthComponent healthComponent = entityWorld.getComponent(targetID, HealthComponent.class);
             if(healthComponent != null){
-                HealComponent healComponent = entityWrapper.getComponent(HealComponent.class);
-                float health = (healthComponent.getValue() + healComponent.getValue());
+                ResultingHealComponent resultingHealComponent = entityWrapper.getComponent(ResultingHealComponent.class);
+                float health = (healthComponent.getValue() + resultingHealComponent.getValue());
                 entityWorld.setComponent(targetID, new HealthComponent(health));
             }
         }

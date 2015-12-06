@@ -35,7 +35,7 @@
                                         <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
-                                                <flatMagicDamage>30</flatMagicDamage>
+                                                <magicDamage>30</magicDamage>
                                                 <move>
                                                     <entity>
                                                         <displacement/>

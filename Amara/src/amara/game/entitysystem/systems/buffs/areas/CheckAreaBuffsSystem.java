@@ -31,8 +31,7 @@ public class CheckAreaBuffsSystem implements EntitySystem{
         IntersectionTracker<Pair<Integer>> tracker = intersectionInformant.getTracker(entityWorld, this);
         Set<Pair<Integer>> intersectionEntries = tracker.getEntries();
         Set<Pair<Integer>> intersectionLeavers = tracker.getLeavers();
-        for(int buffAreaEntity : entityWorld.getEntitiesWithAll(AreaOriginComponent.class))
-        {
+        for(int buffAreaEntity : entityWorld.getEntitiesWithAll(AreaOriginComponent.class)){
             int buffEntity = entityWorld.getComponent(buffAreaEntity, AreaBuffComponent.class).getBuffEntity();
             for(Pair<Integer> pair : intersectionEntries){
                 if(pair.getA() == buffAreaEntity){

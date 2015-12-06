@@ -59,8 +59,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <flatMagicDamage>80</flatMagicDamage>
-                        <scalingAbilityPowerMagicDamage>0.65</scalingAbilityPowerMagicDamage>
+                        <magicDamage>80 + (0.65 * source.abilityPower)</magicDamage>
                         <addStun>0.5</addStun>
                     </entity>
                 </triggeredEffect>

@@ -19,7 +19,7 @@ public class LifestealSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, PhysicalDamageComponent.class)){
+        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingPhysicalDamageComponent.class)){
             EffectCastSourceComponent effectCastSourceComponent = entityWorld.getComponent(effectImpactEntity, EffectCastSourceComponent.class);
             EffectCastSourceSpellComponent effectCastSourceSpellComponent = entityWorld.getComponent(effectImpactEntity, EffectCastSourceSpellComponent.class);
             if((effectCastSourceComponent != null) && (effectCastSourceSpellComponent != null)){
@@ -28,7 +28,7 @@ public class LifestealSystem implements EntitySystem{
                 if(effectCastSourceSpellComponent.getSpellEntity() == autoAttackEntity){
                     LifestealComponent lifestealComponent = entityWorld.getComponent(sourceEntity, LifestealComponent.class);
                     if((lifestealComponent != null) && (lifestealComponent.getValue() > 0)){
-                        float physicalDamage = entityWorld.getComponent(effectImpactEntity, PhysicalDamageComponent.class).getValue();
+                        float physicalDamage = entityWorld.getComponent(effectImpactEntity, ResultingPhysicalDamageComponent.class).getValue();
                         float healedAmount = (lifestealComponent.getValue() * physicalDamage);
                         HealthComponent healthComponent = entityWorld.getComponent(sourceEntity, HealthComponent.class);
                         if(healthComponent != null){

@@ -58,8 +58,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <flatMagicDamage>90</flatMagicDamage>
-                        <scalingAbilityPowerMagicDamage>0.5</scalingAbilityPowerMagicDamage>
+                        <magicDamage>90 + (0.5 * source.abilityPower)</magicDamage>
                         <addBinding>1</addBinding>
                         <addBuff duration="1">
                             <entity>

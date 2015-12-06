@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.game.entitysystem.components.items.passives;
+package amara.game.entitysystem.components.units.passives;
 
 import com.jme3.network.serializing.Serializable;
 import amara.game.entitysystem.synchronizing.ComponentField;
@@ -12,13 +12,13 @@ import amara.game.entitysystem.synchronizing.ComponentField;
  * @author Carl
  */
 @Serializable
-public class ItemRemovedEffectTriggersComponent{
+public class PassiveRemovedEffectTriggersComponent{
 
-    public ItemRemovedEffectTriggersComponent(){
+    public PassiveRemovedEffectTriggersComponent(){
         
     }
     
-    public ItemRemovedEffectTriggersComponent(int... effectTriggerEntities){
+    public PassiveRemovedEffectTriggersComponent(int... effectTriggerEntities){
         this.effectTriggerEntities = effectTriggerEntities;
     }
     @ComponentField(type=ComponentField.Type.ENTITY)

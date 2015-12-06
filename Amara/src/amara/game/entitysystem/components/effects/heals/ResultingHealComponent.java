@@ -12,16 +12,16 @@ import amara.game.entitysystem.synchronizing.ComponentField;
  * @author Carl
  */
 @Serializable
-public class FlatHealComponent{
+public class ResultingHealComponent{
 
-    public FlatHealComponent(){
+    public ResultingHealComponent(){
         
     }
-    
-    public FlatHealComponent(float value){
+
+    public ResultingHealComponent(float value){
         this.value = value;
     }
-    @ComponentField(type=ComponentField.Type.ATTRIBUTE)
+    @ComponentField(type=ComponentField.Type.ENTITY)
     private float value;
 
     public float getValue(){

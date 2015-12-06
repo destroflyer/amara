@@ -17,14 +17,14 @@ public class MagicDamageComponent{
     public MagicDamageComponent(){
         
     }
-    
-    public MagicDamageComponent(float value){
-        this.value = value;
-    }
-    @ComponentField(type=ComponentField.Type.ATTRIBUTE)
-    private float value;
 
-    public float getValue(){
-        return value;
+    public MagicDamageComponent(String expression){
+        this.expression = expression;
+    }
+    @ComponentField(type=ComponentField.Type.EXPRESSION)
+    private String expression;
+
+    public String getExpression(){
+        return expression;
     }
 }

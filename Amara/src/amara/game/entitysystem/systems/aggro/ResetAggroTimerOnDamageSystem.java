@@ -8,7 +8,7 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.damage.*;
-import amara.game.entitysystem.components.units.RemainingAggroResetDurationComponent;
+import amara.game.entitysystem.components.units.*;
 
 /**
  *
@@ -18,10 +18,10 @@ public class ResetAggroTimerOnDamageSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, PhysicalDamageComponent.class)){
+        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingPhysicalDamageComponent.class)){
             resetAggroTimer(entityWorld, effectImpactEntity);
         }
-        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, MagicDamageComponent.class)){
+        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingMagicDamageComponent.class)){
             resetAggroTimer(entityWorld, effectImpactEntity);
         }
     }

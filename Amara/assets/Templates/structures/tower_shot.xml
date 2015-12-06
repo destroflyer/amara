@@ -53,7 +53,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <scalingAttackDamagePhysicalDamage>1</scalingAttackDamagePhysicalDamage>
+                        <physicalDamage>1 * source.attackDamage</physicalDamage>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

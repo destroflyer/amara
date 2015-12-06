@@ -12,13 +12,13 @@ import amara.game.entitysystem.synchronizing.ComponentField;
  * @author Carl
  */
 @Serializable
-public class FlatPhysicalDamageComponent{
+public class ResultingPhysicalDamageComponent{
 
-    public FlatPhysicalDamageComponent(){
+    public ResultingPhysicalDamageComponent(){
         
     }
-    
-    public FlatPhysicalDamageComponent(float value){
+
+    public ResultingPhysicalDamageComponent(float value){
         this.value = value;
     }
     @ComponentField(type=ComponentField.Type.ATTRIBUTE)

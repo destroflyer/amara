@@ -60,8 +60,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <flatMagicDamage>200</flatMagicDamage>
-                        <scalingAbilityPowerMagicDamage>1</scalingAbilityPowerMagicDamage>
+                        <magicDamage>200 + (1 * source.abilityPower)</magicDamage>
                         <addKnockup>
                             <entity>
                                 <knockupDuration>1.5</knockupDuration>

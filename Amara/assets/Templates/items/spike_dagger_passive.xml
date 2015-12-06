@@ -2,7 +2,7 @@
     <value name="maximumStacks">10</value>
     <entity id="passive">
         <description>Your basic attacks grant a stack (+12% attack speed), up to a maximum of [maximumStacks] stacks. (TODO: The stacks will get removed after 2 seconds of not attacking)</description>
-        <itemAddedEffectTriggers>
+        <passiveAddedEffectTriggers>
             <!--add buff and spelleffect-->
             <entity>
                 <casterTarget/>
@@ -44,8 +44,8 @@
                 </triggeredEffect>
                 <triggerSource>#passive</triggerSource>
             </entity>
-        </itemAddedEffectTriggers>
-        <itemRemovedEffectTriggers>
+        </passiveAddedEffectTriggers>
+        <passiveRemovedEffectTriggers>
             <!--remove spelleffect-->
             <entity>
                 <casterTarget/>
@@ -57,6 +57,6 @@
                 </triggeredEffect>
                 <triggerSource>#passive</triggerSource>
             </entity>
-        </itemRemovedEffectTriggers>
+        </passiveRemovedEffectTriggers>
     </entity>
 </template>

@@ -27,7 +27,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <flatHeal>100</flatHeal>
+                        <heal>100</heal>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

@@ -176,6 +176,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CheckBuffStacksUpdateAttributesSystem());
         addEntitySystem(new LevelUpSystem());
         addEntitySystem(new UpdateAttributesSystem());
+        addEntitySystem(new TriggerUnitsPassivesSystem());
         addEntitySystem(new TriggerItemPassivesSystem());
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue()));
         addEntitySystem(new AttackMoveSystem());
