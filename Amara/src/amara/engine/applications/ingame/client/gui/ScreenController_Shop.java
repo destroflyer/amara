@@ -53,7 +53,7 @@ public class ScreenController_Shop extends GameScreenController{
         "book_of_wisdom","moonlight","nightkiss","requiem",
         "book_of_vitality","ethers_armor",
         "iron_shield","natures_protector",
-        "burning_armor",
+        "burning_armor","reflective_armor",
         "reaper","soulblade","misty_arcaneblade"
     };
     private String[] shopItemTemplateNames_Special = new String[]{

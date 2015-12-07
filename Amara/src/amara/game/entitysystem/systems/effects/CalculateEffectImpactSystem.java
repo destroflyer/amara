@@ -39,17 +39,22 @@ public class CalculateEffectImpactSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ExpressionSpace expressionSpace = GlobalExpressionSpace.getInstance();
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(PrepareEffectComponent.class))){
-            if(!entityWrapper.hasComponent(RemainingEffectDelayComponent.class)){
-                EntityWrapper effect = entityWorld.getWrapped(entityWrapper.getComponent(PrepareEffectComponent.class).getEffectEntity());
-                EffectCastSourceComponent effectCastSourceComponent = entityWrapper.getComponent(EffectCastSourceComponent.class);
-                EffectCastSourceSpellComponent effectCastSourceSpellComponent = entityWrapper.getComponent(EffectCastSourceSpellComponent.class);
-                EffectCastTargetComponent effectCastTargetComponent = entityWrapper.getComponent(EffectCastTargetComponent.class);
+        for(EntityWrapper effectCast : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(PrepareEffectComponent.class))){
+            if(!effectCast.hasComponent(RemainingEffectDelayComponent.class)){
+                EntityWrapper effect = entityWorld.getWrapped(effectCast.getComponent(PrepareEffectComponent.class).getEffectEntity());
+                EffectCastSourceComponent effectCastSourceComponent = effectCast.getComponent(EffectCastSourceComponent.class);
+                EffectCastSourceSpellComponent effectCastSourceSpellComponent = effectCast.getComponent(EffectCastSourceSpellComponent.class);
+                EffectCastTargetComponent effectCastTargetComponent = effectCast.getComponent(EffectCastTargetComponent.class);
+                expressionSpace.clearValues();
                 int effectSourceEntity = ((effectCastSourceComponent != null)?effectCastSourceComponent.getSourceEntity():-1);
                 if(effectSourceEntity != -1){
                     ExpressionUtil.setEntityValues(entityWorld, expressionSpace, "source", effectSourceEntity);
                 }
-                int[] affectedTargetEntities = entityWrapper.getComponent(AffectedTargetsComponent.class).getTargetEntities();
+                CustomEffectValuesComponent customEffectValuesComponent = effectCast.getComponent(CustomEffectValuesComponent.class);
+                if(customEffectValuesComponent != null){
+                    expressionSpace.addValues(customEffectValuesComponent.getValues());
+                }
+                int[] affectedTargetEntities = effectCast.getComponent(AffectedTargetsComponent.class).getTargetEntities();
                 for(int i=0;i<affectedTargetEntities.length;i++){
                     int targetEntity = affectedTargetEntities[i];
                     ExpressionUtil.setEntityValues(entityWorld, expressionSpace, "target", targetEntity);
@@ -196,7 +201,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     });
                     effectImpact.setComponent(new ApplyEffectImpactComponent(targetEntity));
                 }
-                entityWorld.removeEntity(entityWrapper.getId());
+                entityWorld.removeEntity(effectCast.getId());
             }
         }
     }

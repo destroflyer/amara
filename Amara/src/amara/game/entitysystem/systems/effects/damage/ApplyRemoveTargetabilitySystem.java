@@ -19,8 +19,8 @@ public class ApplyRemoveTargetabilitySystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, RemoveTargetabilityComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            entityWorld.removeComponent(targetID, IsTargetableComponent.class);
+            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
+            entityWorld.removeComponent(targetEntity, IsTargetableComponent.class);
         }
     }
 }

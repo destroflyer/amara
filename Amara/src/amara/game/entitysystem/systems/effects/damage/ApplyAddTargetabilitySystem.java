@@ -19,8 +19,8 @@ public class ApplyAddTargetabilitySystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddTargetabilityComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            entityWorld.setComponent(targetID, new IsTargetableComponent());
+            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
+            entityWorld.setComponent(targetEntity, new IsTargetableComponent());
         }
     }
 }

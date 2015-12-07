@@ -18,8 +18,7 @@ public class TriggerCastingFinishedEffectSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsCastingComponent.class);
-        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, CastingFinishedTriggerComponent.class))
-        {
+        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, CastingFinishedTriggerComponent.class)){
             int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
             if(observer.getRemoved().hasEntity(sourceEntity)){
                 EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, -1);

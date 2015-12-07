@@ -1372,6 +1372,7 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.crowdcontrol.RemoveStunComponent();
             }
         });
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.CustomEffectValuesComponent.class);
         //damage
         bitstreamClassManager.register(amara.game.entitysystem.components.effects.damage.AddTargetabilityComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.damage.AddTargetabilityComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.damage.AddTargetabilityComponent>("addTargetability"){
@@ -3291,6 +3292,29 @@ public class ComponentsRegistrator{
             @Override
             public amara.game.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent construct(){
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent>("damageTakenTrigger"){
+
+            @Override
+            public amara.game.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent construct(){
+                boolean physicalDamage = false;
+                String physicalDamageText = element.getAttributeValue("physicalDamage");
+                if((physicalDamageText != null) && (physicalDamageText.length() > 0)){
+                    physicalDamage = Boolean.parseBoolean(xmlTemplateManager.parseValue(physicalDamageText));
+                }
+                boolean magicDamage = false;
+                String magicDamageText = element.getAttributeValue("magicDamage");
+                if((magicDamageText != null) && (magicDamageText.length() > 0)){
+                    magicDamage = Boolean.parseBoolean(xmlTemplateManager.parseValue(magicDamageText));
+                }
+                boolean trueDamage = false;
+                String trueDamageText = element.getAttributeValue("trueDamage");
+                if((trueDamageText != null) && (trueDamageText.length() > 0)){
+                    trueDamage = Boolean.parseBoolean(xmlTemplateManager.parseValue(trueDamageText));
+                }
+                return new amara.game.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent(physicalDamage, magicDamage, trueDamage);
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent.class);

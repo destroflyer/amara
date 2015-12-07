@@ -24,6 +24,14 @@ public class ExpressionSpace{
         expressionParser = new ExpressionParser(functionsMap, text);
     }
     
+    public void clearValues(){
+        values.clear();
+    }
+    
+    public void addValues(Values values){
+        this.values.add(values);
+    }
+    
     public void setValue(String name, Value value){
         values.setVariable(name, value);
     }

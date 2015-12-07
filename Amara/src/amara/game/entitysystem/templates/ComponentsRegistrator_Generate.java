@@ -8,6 +8,7 @@ package amara.game.entitysystem.templates;
 import java.io.File;
 import java.lang.reflect.Field;
 import amara.engine.files.FileManager;
+import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spawns.*;
@@ -25,6 +26,7 @@ public class ComponentsRegistrator_Generate{
     private static final String PACKAGE_COMPONENTS = "amara.game.entitysystem.components.";
     private static final String LIST_SEPERATOR = ",";
     private static final Class[] notXMLSupportedComponentClasses = new Class[]{
+        CustomEffectValuesComponent.class,
         AddComponentsComponent.class,
         RemoveComponentsComponent.class,
         HitboxComponent.class,

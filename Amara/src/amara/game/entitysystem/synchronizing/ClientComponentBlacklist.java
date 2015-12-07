@@ -81,6 +81,7 @@ public class ClientComponentBlacklist{
             //effects
             AffectedTargetsComponent.class,
             ApplyEffectImpactComponent.class,
+            CustomEffectValuesComponent.class,
             PrepareEffectComponent.class,
             RemainingEffectDelayComponent.class,
             //effects/aggro

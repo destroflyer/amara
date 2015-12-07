@@ -20,15 +20,15 @@ public class ApplyMagicDamageSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingMagicDamageComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
+            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             boolean wasDamaged = false;
-            if(entityWorld.hasComponent(targetID, IsVulnerableComponent.class)){
-                HealthComponent healthComponent = entityWorld.getComponent(targetID, HealthComponent.class);
+            if(entityWorld.hasComponent(targetEntity, IsVulnerableComponent.class)){
+                HealthComponent healthComponent = entityWorld.getComponent(targetEntity, HealthComponent.class);
                 if(healthComponent != null){
                     float damage = entityWrapper.getComponent(ResultingMagicDamageComponent.class).getValue();
                     if(damage > 0){
                         float health = (healthComponent.getValue() - damage);
-                        entityWorld.setComponent(targetID, new HealthComponent(health));
+                        entityWorld.setComponent(targetEntity, new HealthComponent(health));
                         wasDamaged = true;
                     }
                 }
