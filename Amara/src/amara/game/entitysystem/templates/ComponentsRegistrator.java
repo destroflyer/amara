@@ -1031,6 +1031,25 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.effects.buffs.AddBuffComponent(buffEntity, duration);
             }
         });
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.buffs.AddNewBuffComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.buffs.AddNewBuffComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.buffs.AddNewBuffComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.buffs.AddNewBuffComponent>("addNewBuff"){
+
+            @Override
+            public amara.game.entitysystem.components.effects.buffs.AddNewBuffComponent construct(){
+                String templateExpression = xmlTemplateManager.parseValue(element.getAttributeValue("templateExpression"));
+                float duration = 0;
+                String durationText = element.getAttributeValue("duration");
+                if((durationText != null) && (durationText.length() > 0)){
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                }
+                return new amara.game.entitysystem.components.effects.buffs.AddNewBuffComponent(templateExpression, duration);
+            }
+        });
         //areas
         bitstreamClassManager.register(amara.game.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent.class);
         try{

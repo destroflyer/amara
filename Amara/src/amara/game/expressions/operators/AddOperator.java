@@ -21,10 +21,20 @@ public class AddOperator extends Operator{
             double numeric2 = ((NumericValue) value2).getValue(values);
             return new NumericValue(numeric1 + numeric2);
         }
-        if((value1 instanceof StringValue) && (value2 instanceof StringValue)){
+        else if((value1 instanceof StringValue) && (value2 instanceof StringValue)){
             String string1 = ((StringValue) value1).getValue(values);
             String string2 = ((StringValue) value2).getValue(values);
             return new StringValue(string1 + string2);
+        }
+        else if((value1 instanceof StringValue) && (value2 instanceof NumericValue)){
+            String string1 = ((StringValue) value1).getValue(values);
+            double numeric2 = ((NumericValue) value2).getValue(values);
+            return new StringValue(string1 + numeric2);
+        }
+        else if((value1 instanceof NumericValue) && (value2 instanceof StringValue)){
+            double numeric1 = ((NumericValue) value1).getValue(values);
+            String string2 = ((StringValue) value2).getValue(values);
+            return new StringValue(numeric1 + string2);
         }
         throw new WrongOperatorException();
     }

@@ -117,6 +117,15 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     if(heal != 0){
                         effectImpact.setComponent(new ResultingHealComponent(heal));
                     }
+                    AddNewBuffComponent addNewBuffComponent = effect.getComponent(AddNewBuffComponent.class);
+                    if(addNewBuffComponent != null){
+                        try{
+                            expressionSpace.parse(addNewBuffComponent.getTemplateExpression());
+                            EntityWrapper buff = EntityTemplate.createFromTemplate(entityWorld, EntityTemplate.parseToOldTemplate(expressionSpace.getResult_String()));
+                            effectImpact.setComponent(new AddBuffComponent(buff.getId(), addNewBuffComponent.getDuration()));
+                        }catch(ExpressionException ex){
+                        }
+                    }
                     MoveComponent moveComponent = effect.getComponent(MoveComponent.class);
                     if(moveComponent != null){
                         int movementEntity = entityWorld.createEntity();

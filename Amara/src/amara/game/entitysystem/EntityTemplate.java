@@ -46,6 +46,19 @@ public class EntityTemplate{
         }
     }
     
+    public static String parseToOldTemplate(String template){
+        if(template.matches("(.*)\\((.*)\\)")){
+            int bracketStart = template.indexOf("(");
+            int bracketEnd = template.indexOf(")");
+            String[] parameters = template.substring(bracketStart + 1, bracketEnd).split(",");
+            template = template.substring(0, bracketStart);
+            for(String parameter : parameters){
+                template += "," + parameter;
+            }
+        }
+        return template;
+    }
+    
     public static void loadTemplate(EntityWorld entityWorld, int entity, String template){
         String[] parts = template.split(",");
         String templateName = parts[0];

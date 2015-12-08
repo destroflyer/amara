@@ -65,6 +65,15 @@
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
+        <passives>
+            <entity template="spells/maw_passive/passive"/>
+        </passives>
+        <learnableSpells>
+            <entity template="spells/maw_rock/base"/>
+            <entity template="spells/maw_knockback/base"/>
+            <entity template="spells/maw_jump/base"/>
+            <entity template="spells/maw_ult/base"/>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>
