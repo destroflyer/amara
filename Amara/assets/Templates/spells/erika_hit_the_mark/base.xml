@@ -1,0 +1,64 @@
+<template>
+    <entity id="spell">
+        <name>Hit the Mark</name>
+        <spellVisualisation>erika_hit_the_mark</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./projectile</spawnTemplate>
+                                <spawnMovementSpeed>20</spawnMovementSpeed>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/infected_cleaver_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <stopBeforeCasting/>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>standing_aim_recoil</name>
+                <loopDuration>1</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>4</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>50 + (0.5 * source.attackDamage)</physicalDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

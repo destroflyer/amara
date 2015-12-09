@@ -12,13 +12,13 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class RelativeSpawnPositionComponent{
+public class SpawnRelativePositionComponent{
 
-    public RelativeSpawnPositionComponent(){
+    public SpawnRelativePositionComponent(){
         
     }
     
-    public RelativeSpawnPositionComponent(Vector2f position){
+    public SpawnRelativePositionComponent(Vector2f position){
         this.position = position;
     }
     private Vector2f position;

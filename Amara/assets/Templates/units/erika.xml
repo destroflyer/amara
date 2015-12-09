@@ -65,6 +65,12 @@
         <autoAttack>
             <entity template="spells/ranged_autoattack(Models/erika_arrow/skin.xml)"/>
         </autoAttack>
+        <learnableSpells>
+            <entity template="spells/erika_hit_the_mark/base"/>
+            <entity template="spells/erika_splitshot/base"/>
+            <entity template="spells/erika_fire_it_up/base"/>
+            <entity template="spells/erika_feel_the_drawback/base"/>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>

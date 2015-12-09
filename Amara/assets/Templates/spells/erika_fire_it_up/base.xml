@@ -1,0 +1,50 @@
+<template>
+    <entity id="spell">
+        <name>Fire it up</name>
+        <spellVisualisation>erika_fire_it_up</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn object-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>positional_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>0.3</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>shoot_arrow</name>
+                <loopDuration>1</loopDuration>
+            </entity>
+        </castAnimation>
+        <range>20</range>
+        <baseCooldown>10</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>150 + (0.5 * source.attackDamage)</physicalDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

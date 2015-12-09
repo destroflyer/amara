@@ -191,11 +191,13 @@ public class ClientComponentBlacklist{
             RespawnComponent.class,
             //shop
             //spawns
-            RelativeSpawnPositionComponent.class,
             SpawnAttackMoveComponent.class,
             SpawnMoveToTargetComponent.class,
             SpawnMovementAnimationComponent.class,
+            SpawnMovementRelativeDirectionComponent.class,
             SpawnMovementSpeedComponent.class,
+            SpawnRelativeDirectionComponent.class,
+            SpawnRelativePositionComponent.class,
             SpawnTemplateComponent.class,
             //spells
             ApplyCastedSpellComponent.class,

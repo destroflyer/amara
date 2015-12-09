@@ -1,0 +1,44 @@
+<template>
+    <entity id="projectile">
+        <model>Models/erika_arrow/skin.xml</model>
+        <hitbox>
+            <circle radius="0.5"/>
+        </hitbox>
+        <collisionGroup group="spells" collidesWith="units"/>
+        <hitboxActive/>
+        <intersectionRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </intersectionRules>
+        <isProjectile/>
+        <lifetime>0.7</lifetime>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <collisionTrigger/>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/infected_cleaver_hit.ogg</audio>
+                    </entity>
+                </playAudio>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--remove projectile-->
+    <entity>
+        <collisionTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+</template>

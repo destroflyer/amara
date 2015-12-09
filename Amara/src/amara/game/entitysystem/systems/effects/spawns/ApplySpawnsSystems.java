@@ -55,15 +55,19 @@ public class ApplySpawnsSystems implements EntitySystem{
                     else{
                         position = casterPosition.clone();
                     }
-                    RelativeSpawnPositionComponent relativeSpawnPositionComponent = spawnInformation.getComponent(RelativeSpawnPositionComponent.class);
-                    if(relativeSpawnPositionComponent != null){
-                        position.addLocal(relativeSpawnPositionComponent.getPosition());
+                    SpawnRelativePositionComponent spawnRelativePositionComponent = spawnInformation.getComponent(SpawnRelativePositionComponent.class);
+                    if(spawnRelativePositionComponent != null){
+                        position.addLocal(spawnRelativePositionComponent.getPosition());
                     }
                     spawnedObject.setComponent(new PositionComponent(position));
                     if(targetDirectionComponent != null){
                         direction = targetDirectionComponent.getVector().clone();
                     }
                     if(direction != null){
+                        SpawnRelativeDirectionComponent spawnRelativeDirectionComponent = spawnInformation.getComponent(SpawnRelativeDirectionComponent.class);
+                        if(spawnRelativeDirectionComponent != null){
+                            direction.rotateAroundOrigin(spawnRelativeDirectionComponent.getAngle_Radian(), true);
+                        }
                         spawnedObject.setComponent(new DirectionComponent(direction));
                     }
                     SpawnMovementSpeedComponent spawnMovementSpeedComponent = spawnInformation.getComponent(SpawnMovementSpeedComponent.class);
@@ -73,7 +77,12 @@ public class ApplySpawnsSystems implements EntitySystem{
                             movement.setComponent(new MovementTargetComponent(targetEntity));
                         }
                         else if(targetDirectionComponent != null){
-                            movement.setComponent(new MovementDirectionComponent(targetDirectionComponent.getVector().clone()));
+                            Vector2f movementDirection = targetDirectionComponent.getVector().clone();
+                            SpawnMovementRelativeDirectionComponent spawnMovementRelativeDirectionComponent = spawnInformation.getComponent(SpawnMovementRelativeDirectionComponent.class);
+                            if(spawnMovementRelativeDirectionComponent != null){
+                                movementDirection.rotateAroundOrigin(spawnMovementRelativeDirectionComponent.getAngle_Radian(), true);
+                            }
+                            movement.setComponent(new MovementDirectionComponent(movementDirection));
                         }
                         movement.setComponent(new MovementSpeedComponent(spawnMovementSpeedComponent.getSpeed()));
                         SpawnMovementAnimationComponent spawnMovementAnimationComponent = spawnInformation.getComponent(SpawnMovementAnimationComponent.class);

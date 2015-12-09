@@ -2355,18 +2355,6 @@ public class ComponentsRegistrator{
             }
         });
         //spawns
-        bitstreamClassManager.register(amara.game.entitysystem.components.spawns.RelativeSpawnPositionComponent.class);
-        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spawns.RelativeSpawnPositionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spawns.RelativeSpawnPositionComponent>("relativeSpawnPosition"){
-
-            @Override
-            public amara.game.entitysystem.components.spawns.RelativeSpawnPositionComponent construct(){
-                String[] positionCoordinates = element.getText().split(",");
-                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[0]));
-                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[1]));
-                Vector2f position = new Vector2f(positionX, positionY);
-                return new amara.game.entitysystem.components.spawns.RelativeSpawnPositionComponent(position);
-            }
-        });
         bitstreamClassManager.register(amara.game.entitysystem.components.spawns.SpawnAttackMoveComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spawns.SpawnAttackMoveComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spawns.SpawnAttackMoveComponent>("spawnAttackMove"){
 
@@ -2387,6 +2375,19 @@ public class ComponentsRegistrator{
             public amara.game.entitysystem.components.spawns.SpawnMovementAnimationComponent construct(){
                 int animationEntity = createChildEntity(0, "animationEntity");
                 return new amara.game.entitysystem.components.spawns.SpawnMovementAnimationComponent(animationEntity);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent>("spawnMovementRelativeDirection"){
+
+            @Override
+            public amara.game.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent construct(){
+                float angle_Degrees = 0;
+                String angle_DegreesText = element.getText();
+                if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
+                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(angle_DegreesText));
+                }
+                return new amara.game.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent(angle_Degrees);
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.spawns.SpawnMovementSpeedComponent.class);
@@ -2413,6 +2414,31 @@ public class ComponentsRegistrator{
             @Override
             public amara.game.entitysystem.components.spawns.SpawnMoveToTargetComponent construct(){
                 return new amara.game.entitysystem.components.spawns.SpawnMoveToTargetComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.spawns.SpawnRelativeDirectionComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spawns.SpawnRelativeDirectionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spawns.SpawnRelativeDirectionComponent>("spawnRelativeDirection"){
+
+            @Override
+            public amara.game.entitysystem.components.spawns.SpawnRelativeDirectionComponent construct(){
+                float angle_Degrees = 0;
+                String angle_DegreesText = element.getText();
+                if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
+                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(angle_DegreesText));
+                }
+                return new amara.game.entitysystem.components.spawns.SpawnRelativeDirectionComponent(angle_Degrees);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.spawns.SpawnRelativePositionComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spawns.SpawnRelativePositionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spawns.SpawnRelativePositionComponent>("spawnRelativePosition"){
+
+            @Override
+            public amara.game.entitysystem.components.spawns.SpawnRelativePositionComponent construct(){
+                String[] positionCoordinates = element.getText().split(",");
+                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[0]));
+                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[1]));
+                Vector2f position = new Vector2f(positionX, positionY);
+                return new amara.game.entitysystem.components.spawns.SpawnRelativePositionComponent(position);
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.spawns.SpawnTemplateComponent.class);
