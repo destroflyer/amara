@@ -44,6 +44,18 @@
             </entity>
         </castAnimation>
         <baseCooldown>4</baseCooldown>
+        <erikaPassiveEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>80 + (0.2 * source.attackDamage)</physicalDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </erikaPassiveEffectTriggers>
     </entity>
     <!--spell effect-->
     <entity>

@@ -33,20 +33,22 @@ public class TriggerDamageTakenSystem implements EntitySystem{
                             castSourceEntity = effectCastSourceComponent.getSourceEntity();
                         }
                         EntityWrapper effectCast = EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, castSourceEntity);
-                        Values values = new Values();
-                        float totalDamage = 0;
-                        ResultingPhysicalDamageComponent resultingPhysicalDamageComponent = entityWorld.getComponent(effectImpactEntity, ResultingPhysicalDamageComponent.class);
-                        if(resultingPhysicalDamageComponent != null){
-                            values.setVariable("physicalDamage", new NumericValue(resultingPhysicalDamageComponent.getValue()));
-                            totalDamage += resultingPhysicalDamageComponent.getValue();
+                        if(effectCast != null){
+                            Values values = new Values();
+                            float totalDamage = 0;
+                            ResultingPhysicalDamageComponent resultingPhysicalDamageComponent = entityWorld.getComponent(effectImpactEntity, ResultingPhysicalDamageComponent.class);
+                            if(resultingPhysicalDamageComponent != null){
+                                values.setVariable("physicalDamage", new NumericValue(resultingPhysicalDamageComponent.getValue()));
+                                totalDamage += resultingPhysicalDamageComponent.getValue();
+                            }
+                            ResultingMagicDamageComponent resultingMagicDamageComponent = entityWorld.getComponent(effectImpactEntity, ResultingMagicDamageComponent.class);
+                            if(resultingMagicDamageComponent != null){
+                                values.setVariable("magicDamage", new NumericValue(resultingMagicDamageComponent.getValue()));
+                                totalDamage += resultingMagicDamageComponent.getValue();
+                            }
+                            values.setVariable("totalDamage", new NumericValue(totalDamage));
+                            effectCast.setComponent(new CustomEffectValuesComponent(values));
                         }
-                        ResultingMagicDamageComponent resultingMagicDamageComponent = entityWorld.getComponent(effectImpactEntity, ResultingMagicDamageComponent.class);
-                        if(resultingMagicDamageComponent != null){
-                            values.setVariable("magicDamage", new NumericValue(resultingMagicDamageComponent.getValue()));
-                            totalDamage += resultingMagicDamageComponent.getValue();
-                        }
-                        values.setVariable("totalDamage", new NumericValue(totalDamage));
-                        effectCast.setComponent(new CustomEffectValuesComponent(values));
                     }
                 }
             }

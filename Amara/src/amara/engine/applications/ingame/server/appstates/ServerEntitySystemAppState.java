@@ -55,6 +55,7 @@ import amara.game.entitysystem.systems.physics.*;
 import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
 import amara.game.entitysystem.systems.players.*;
 import amara.game.entitysystem.systems.shop.*;
+import amara.game.entitysystem.systems.specials.erika.*;
 import amara.game.entitysystem.systems.spells.*;
 import amara.game.entitysystem.systems.spells.casting.*;
 import amara.game.entitysystem.systems.units.*;
@@ -233,6 +234,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyDeactivateHitboxSystem());
         addEntitySystem(new ApplySpawnsSystems());
         addEntitySystem(new ApplyAddAutoAttackSpellEffectsSystem());
+        addEntitySystem(new ApplyAddSpellsSpellEffectsSystem());
         addEntitySystem(new ApplyRemoveSpellEffectsSystem());
         addEntitySystem(new ApplyReplaceSpellsWithExistingSpellsSystem());
         addEntitySystem(new ApplyReplaceSpellsWithNewSpellsSystem());
@@ -244,6 +246,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyRemoveComponentsSystem());
         addEntitySystem(new ApplyRemoveEffectTriggersSystem());
         addEntitySystem(new ApplyRemoveEntitySystem());
+        addEntitySystem(new ApplyTriggerErikaPassivesSystem());
         addEntitySystem(new DrawAggroOnDamageSystem());
         addEntitySystem(new ResetAggroTimerOnDamageSystem());
         addEntitySystem(new UpdateDamageHistorySystem());

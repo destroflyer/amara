@@ -30,6 +30,26 @@
         </castAnimation>
         <range>20</range>
         <baseCooldown>10</baseCooldown>
+        <erikaPassiveEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="4">
+                            <entity>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusFlatArmor>-10</bonusFlatArmor>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </erikaPassiveEffectTriggers>
     </entity>
     <!--spell effect-->
     <entity>

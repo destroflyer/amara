@@ -26,6 +26,7 @@ import amara.game.entitysystem.components.effects.spells.*;
 import amara.game.entitysystem.components.effects.visuals.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
+import amara.game.entitysystem.components.specials.erika.*;
 import amara.game.entitysystem.components.spells.placeholders.*;
 import amara.game.expressions.*;
 import amara.game.expressions.exceptions.*;
@@ -202,11 +203,14 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         DeactivateHitboxComponent.class,
                         SpawnComponent.class,
                         AddAutoAttackSpellEffectsComponent.class,
+                        AddSpellsSpellEffectsComponent.class,
                         RemoveSpellEffectsComponent.class,
                         ReplaceSpellWithExistingSpellComponent.class,
                         TriggerSpellEffectsComponent.class,
                         PlayAnimationComponent.class,
-                        StopAnimationComponent.class
+                        StopAnimationComponent.class,
+                        //specials
+                        TriggerErikaPassiveComponent.class
                     });
                     effectImpact.setComponent(new ApplyEffectImpactComponent(targetEntity));
                 }

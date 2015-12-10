@@ -139,7 +139,7 @@ public class ComponentsRegistrator_Generate{
                                     code += "                int " + parameterName + " = createChildEntity(" + childIndex + ", \"" + parameterName + "\");\n";
                                     wasHandled = true;
                                 }
-                                else if(parameterType.equals("int...") && parameterName.toLowerCase().endsWith("entities")){
+                                else if((parameterType.equals("int[]") || parameterType.equals("int...")) && parameterName.toLowerCase().endsWith("entities")){
                                     code += "                int[] " + parameterName + " = createChildEntities(" + childIndex + ", \"" + parameterName + "\");\n";
                                     wasHandled = true;
                                 }

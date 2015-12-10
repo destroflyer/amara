@@ -929,6 +929,58 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.camps.CampUnionAggroComponent();
             }
         });
+        //conditions
+        bitstreamClassManager.register(amara.game.entitysystem.components.conditions.HasBuffConditionComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.conditions.HasBuffConditionComponent.class.getDeclaredField("buffEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.conditions.HasBuffConditionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.conditions.HasBuffConditionComponent>("hasBuffCondition"){
+
+            @Override
+            public amara.game.entitysystem.components.conditions.HasBuffConditionComponent construct(){
+                int[] buffEntities = createChildEntities(0, "buffEntities");
+                return new amara.game.entitysystem.components.conditions.HasBuffConditionComponent(buffEntities);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.conditions.HasHealthPortionConditionComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.conditions.HasHealthPortionConditionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.conditions.HasHealthPortionConditionComponent>("hasHealthPortionCondition"){
+
+            @Override
+            public amara.game.entitysystem.components.conditions.HasHealthPortionConditionComponent construct(){
+                float portion = 0;
+                String portionText = element.getAttributeValue("portion");
+                if((portionText != null) && (portionText.length() > 0)){
+                    portion = Float.parseFloat(xmlTemplateManager.parseValue(portionText));
+                }
+                boolean lessOrMore = false;
+                String lessOrMoreText = element.getAttributeValue("lessOrMore");
+                if((lessOrMoreText != null) && (lessOrMoreText.length() > 0)){
+                    lessOrMore = Boolean.parseBoolean(xmlTemplateManager.parseValue(lessOrMoreText));
+                }
+                boolean allowEqual = false;
+                String allowEqualText = element.getAttributeValue("allowEqual");
+                if((allowEqualText != null) && (allowEqualText.length() > 0)){
+                    allowEqual = Boolean.parseBoolean(xmlTemplateManager.parseValue(allowEqualText));
+                }
+                return new amara.game.entitysystem.components.conditions.HasHealthPortionConditionComponent(portion, lessOrMore, allowEqual);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.conditions.OrConditionsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.conditions.OrConditionsComponent.class.getDeclaredField("conditionEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.conditions.OrConditionsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.conditions.OrConditionsComponent>("orConditions"){
+
+            @Override
+            public amara.game.entitysystem.components.conditions.OrConditionsComponent construct(){
+                int[] conditionEntities = createChildEntities(0, "conditionEntities");
+                return new amara.game.entitysystem.components.conditions.OrConditionsComponent(conditionEntities);
+            }
+        });
         //effects
         bitstreamClassManager.register(amara.game.entitysystem.components.effects.AffectedTargetsComponent.class);
         try{
@@ -1678,6 +1730,25 @@ public class ComponentsRegistrator{
             public amara.game.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent construct(){
                 int[] spellEffectEntities = createChildEntities(0, "spellEffectEntities");
                 return new amara.game.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent(spellEffectEntities);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent.class.getDeclaredField("spellEffectEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent>("addSpellsSpellEffects"){
+
+            @Override
+            public amara.game.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent construct(){
+                int[] spellEffectEntities = createChildEntities(0, "spellEffectEntities");
+                boolean setSourcesToSpells = false;
+                String setSourcesToSpellsText = element.getAttributeValue("setSourcesToSpells");
+                if((setSourcesToSpellsText != null) && (setSourcesToSpellsText.length() > 0)){
+                    setSourcesToSpells = Boolean.parseBoolean(xmlTemplateManager.parseValue(setSourcesToSpellsText));
+                }
+                return new amara.game.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent(spellEffectEntities, setSourcesToSpells);
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.effects.spells.RemoveSpellEffectsComponent.class);
@@ -2442,6 +2513,30 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.spawns.SpawnTemplateComponent.class);
+        //specials
+        //erika
+        bitstreamClassManager.register(amara.game.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent>("erikaPassiveEffectTriggers"){
+
+            @Override
+            public amara.game.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent construct(){
+                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
+                return new amara.game.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent(effectTriggerEntities);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.specials.erika.TriggerErikaPassiveComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.specials.erika.TriggerErikaPassiveComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.specials.erika.TriggerErikaPassiveComponent>("triggerErikaPassive"){
+
+            @Override
+            public amara.game.entitysystem.components.specials.erika.TriggerErikaPassiveComponent construct(){
+                return new amara.game.entitysystem.components.specials.erika.TriggerErikaPassiveComponent();
+            }
+        });
         //spells
         bitstreamClassManager.register(amara.game.entitysystem.components.spells.ApplyCastedSpellComponent.class);
         try{
@@ -2745,6 +2840,20 @@ public class ComponentsRegistrator{
             public amara.game.entitysystem.components.spells.triggers.CastedSpellComponent construct(){
                 int spellEntity = createChildEntity(0, "spellEntity");
                 return new amara.game.entitysystem.components.spells.triggers.CastedSpellComponent(spellEntity);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.spells.triggers.SpellEffectParentComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.spells.triggers.SpellEffectParentComponent.class.getDeclaredField("spellEffectEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.spells.triggers.SpellEffectParentComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.spells.triggers.SpellEffectParentComponent>("spellEffectParent"){
+
+            @Override
+            public amara.game.entitysystem.components.spells.triggers.SpellEffectParentComponent construct(){
+                int spellEffectEntity = createChildEntity(0, "spellEffectEntity");
+                return new amara.game.entitysystem.components.spells.triggers.SpellEffectParentComponent(spellEffectEntity);
             }
         });
         //targets
@@ -3272,6 +3381,20 @@ public class ComponentsRegistrator{
             @Override
             public amara.game.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent construct(){
                 return new amara.game.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.TriggerConditionsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.effecttriggers.TriggerConditionsComponent.class.getDeclaredField("conditionEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.effecttriggers.TriggerConditionsComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.effecttriggers.TriggerConditionsComponent>("triggerConditions"){
+
+            @Override
+            public amara.game.entitysystem.components.units.effecttriggers.TriggerConditionsComponent construct(){
+                int[] conditionEntities = createChildEntities(0, "conditionEntities");
+                return new amara.game.entitysystem.components.units.effecttriggers.TriggerConditionsComponent(conditionEntities);
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.units.effecttriggers.TriggerDelayComponent.class);
@@ -3830,11 +3953,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.TargetsInAggroRangeComponent construct(){
-                String[] targetEntitiesParts = element.getText().split(",");
-                int[] targetEntities = new int[targetEntitiesParts.length];
-                for(int i=0;i<targetEntities.length;i++){
-                    targetEntities[i] = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
-                }
+                int[] targetEntities = createChildEntities(0, "targetEntities");
                 return new amara.game.entitysystem.components.units.TargetsInAggroRangeComponent(targetEntities);
             }
         });
