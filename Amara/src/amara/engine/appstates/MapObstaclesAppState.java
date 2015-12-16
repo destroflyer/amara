@@ -11,6 +11,7 @@ import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.scene.Spatial;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
@@ -82,7 +83,8 @@ public class MapObstaclesAppState extends BaseDisplayAppState implements ActionL
         ColorRGBA meshColor = (isActive?ColorRGBA.Blue:ColorRGBA.LightGray);
         if(shape instanceof Circle){
             Circle circle = (Circle) shape;
-            collisionMesh = new CircleMesh((float) circle.getGlobalRadius(), 64);
+            Vector3f center = new Vector3f((float) circle.getLocalPosition().getX(), 0, (float) circle.getLocalPosition().getY());
+            collisionMesh = new CircleMesh(center, (float) circle.getGlobalRadius(), 64);
         }
         else if(shape instanceof SimpleConvexPolygon){
             SimpleConvexPolygon simpleConvex = (SimpleConvexPolygon) shape;

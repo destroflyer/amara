@@ -26,6 +26,7 @@ public class AttributeBonus{
     private float percentageWalkSpeed = 1;
     private float percentageCriticalChance = 0;
     private float percentageLifesteal = 0;
+    private float percentageDamageReduction = 0;
 
     public void addFlatMaximumHealth(float value){
         flatMaximumHealth += value;
@@ -129,5 +130,13 @@ public class AttributeBonus{
     
     public void addPercentageLifesteal(float value){
         percentageLifesteal += value;
+    }
+
+    public void addPercentageDamageReduction(float value){
+        percentageDamageReduction += value;
+    }
+
+    public float getPercentageDamageReduction(){
+        return percentageDamageReduction;
     }
 }

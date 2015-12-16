@@ -86,6 +86,7 @@ public class UpdateAttributesSystem implements EntitySystem{
             walkSpeed *= attributeBonus.getPercentageWalkSpeed();
             float criticalChance = attributeBonus.getPercentageCriticalChance();
             float lifesteal = attributeBonus.getPercentageLifesteal();
+            float damageReduction = Math.min(attributeBonus.getPercentageDamageReduction(), 1);
             entityWrapper.setComponent(new MaximumHealthComponent(maximumHealth));
             if((entityWrapper.getComponent(HealthComponent.class) == null) && entityWrapper.hasComponent(IsAliveComponent.class)){
                 entityWrapper.setComponent(new HealthComponent(maximumHealth));
@@ -128,6 +129,7 @@ public class UpdateAttributesSystem implements EntitySystem{
             entityWrapper.setComponent(new WalkSpeedComponent(walkSpeed));
             entityWrapper.setComponent(new CriticalChanceComponent(criticalChance));
             entityWrapper.setComponent(new LifestealComponent(lifesteal));
+            entityWrapper.setComponent(new DamageReductionComponent(damageReduction));
             entityWrapper.removeComponent(RequestUpdateAttributesComponent.class);
         }
     }
@@ -185,6 +187,10 @@ public class UpdateAttributesSystem implements EntitySystem{
         BonusPercentageLifestealComponent bonusPercentageLifestealComponent = bonusEntityWrapper.getComponent(BonusPercentageLifestealComponent.class);
         if(bonusPercentageLifestealComponent != null){
             attributeBonus.addPercentageLifesteal(bonusPercentageLifestealComponent.getValue());
+        }
+        BonusPercentageDamageReductionComponent bonusPercentageDamageReductionComponent = bonusEntityWrapper.getComponent(BonusPercentageDamageReductionComponent.class);
+        if(bonusPercentageDamageReductionComponent != null){
+            attributeBonus.addPercentageDamageReduction(bonusPercentageDamageReductionComponent.getValue());
         }
     }
 }

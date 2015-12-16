@@ -113,6 +113,11 @@ public class ItemRecipe{
             addDescription_Seperator();
             description += getValueText_Signed(bonusFlatMagicResistanceComponent.getValue()) + " Magic Resistance";
         }
+        BonusPercentageDamageReductionComponent bonusPercentageDamageReductionComponent = entityWorld.getComponent(entity, BonusPercentageDamageReductionComponent.class);
+        if(bonusPercentageDamageReductionComponent != null){
+            addDescription_Seperator();
+            description += getValueText_Signed(bonusPercentageDamageReductionComponent.getValue() * 100) + "% Damage Reduction";
+        }
         ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(entity, ItemPassivesComponent.class);
         if(itemPassivesComponent != null){
             for(int itemPassiveEntity : itemPassivesComponent.getPassiveEntities()){

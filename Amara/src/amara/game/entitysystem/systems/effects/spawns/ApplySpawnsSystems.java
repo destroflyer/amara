@@ -57,7 +57,13 @@ public class ApplySpawnsSystems implements EntitySystem{
                     }
                     SpawnRelativePositionComponent spawnRelativePositionComponent = spawnInformation.getComponent(SpawnRelativePositionComponent.class);
                     if(spawnRelativePositionComponent != null){
-                        position.addLocal(spawnRelativePositionComponent.getPosition());
+                        DirectionComponent casterDirectionComponent = entityWorld.getComponent(casterEntity, DirectionComponent.class);
+                        if(casterDirectionComponent !=  null){
+                            float casterDirection_Radian = casterDirectionComponent.getRadian();
+                            Vector2f relativePosition = spawnRelativePositionComponent.getPosition().clone();
+                            relativePosition.rotateAroundOrigin(casterDirection_Radian, false);
+                            position.addLocal(relativePosition);
+                        }
                     }
                     spawnedObject.setComponent(new PositionComponent(position));
                     if(targetDirectionComponent != null){
@@ -66,7 +72,7 @@ public class ApplySpawnsSystems implements EntitySystem{
                     if(direction != null){
                         SpawnRelativeDirectionComponent spawnRelativeDirectionComponent = spawnInformation.getComponent(SpawnRelativeDirectionComponent.class);
                         if(spawnRelativeDirectionComponent != null){
-                            direction.rotateAroundOrigin(spawnRelativeDirectionComponent.getAngle_Radian(), true);
+                            direction.rotateAroundOrigin(spawnRelativeDirectionComponent.getAngle_Radian(), false);
                         }
                         spawnedObject.setComponent(new DirectionComponent(direction));
                     }

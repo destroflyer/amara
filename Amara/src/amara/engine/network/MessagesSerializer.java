@@ -157,6 +157,16 @@ public class MessagesSerializer{
                 Shape shape = null;
                 Element childElement = (Element) element.getChildren().get(0);
                 String shapeType = childElement.getName();
+                double x = 0;
+                String xText = childElement.getAttributeValue("x");
+                if(xText != null){
+                    x = Double.parseDouble(xText);
+                }
+                double y = 0;
+                String yText = childElement.getAttributeValue("y");
+                if(yText != null){
+                    y = Double.parseDouble(yText);
+                }
                 if(shapeType.equals("regularCyclic")){
                     int edges = Integer.parseInt(childElement.getAttributeValue("edges"));
                     double radius = Double.parseDouble(childElement.getAttributeValue("radius"));
@@ -164,19 +174,9 @@ public class MessagesSerializer{
                 }
                 else if(shapeType.equals("circle")){
                     double radius = Double.parseDouble(childElement.getAttributeValue("radius"));
-                    shape = new Circle(radius);
+                    shape = new Circle(x, y, radius);
                 }
                 else if(shapeType.equals("rectangle")){
-                    double x = 0;
-                    String xText = childElement.getAttributeValue("x");
-                    if(xText != null){
-                        x = Double.parseDouble(xText);
-                    }
-                    double y = 0;
-                    String yText = childElement.getAttributeValue("y");
-                    if(yText != null){
-                        y = Double.parseDouble(yText);
-                    }
                     double width = Double.parseDouble(childElement.getAttributeValue("width"));
                     double height = Double.parseDouble(childElement.getAttributeValue("height"));
                     shape = new Rectangle(x, y, width, height);

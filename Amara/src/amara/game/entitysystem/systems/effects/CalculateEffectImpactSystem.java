@@ -104,6 +104,10 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                             armor = armorComponent.getValue();
                         }
                         physicalDamage *= getResistanceDamageFactor(armor);
+                        DamageReductionComponent damageReductionComponent = entityWorld.getComponent(targetEntity, DamageReductionComponent.class);
+                        if(damageReductionComponent != null){
+                            physicalDamage *= (1 - damageReductionComponent.getValue());
+                        }
                         effectImpact.setComponent(new ResultingPhysicalDamageComponent(physicalDamage));
                     }
                     if(magicDamage != 0){
@@ -113,6 +117,10 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                             magicResistance = magicResistanceComponent.getValue();
                         }
                         magicDamage *= getResistanceDamageFactor(magicResistance);
+                        DamageReductionComponent damageReductionComponent = entityWorld.getComponent(targetEntity, DamageReductionComponent.class);
+                        if(damageReductionComponent != null){
+                            magicDamage *= (1 - damageReductionComponent.getValue());
+                        }
                         effectImpact.setComponent(new ResultingMagicDamageComponent(magicDamage));
                     }
                     if(heal != 0){

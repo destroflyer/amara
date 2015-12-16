@@ -288,6 +288,24 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent(value);
             }
         });
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusPercentageDamageReductionComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusPercentageDamageReductionComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.BonusPercentageDamageReductionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.BonusPercentageDamageReductionComponent>("bonusPercentageDamageReduction"){
+
+            @Override
+            public amara.game.entitysystem.components.attributes.BonusPercentageDamageReductionComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                }
+                return new amara.game.entitysystem.components.attributes.BonusPercentageDamageReductionComponent(value);
+            }
+        });
         bitstreamClassManager.register(amara.game.entitysystem.components.attributes.BonusPercentageLifestealComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.BonusPercentageLifestealComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
@@ -358,6 +376,24 @@ public class ComponentsRegistrator{
                     value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.CriticalChanceComponent(value);
+            }
+        });
+        bitstreamClassManager.register(amara.game.entitysystem.components.attributes.DamageReductionComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.attributes.DamageReductionComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.attributes.DamageReductionComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.attributes.DamageReductionComponent>("damageReduction"){
+
+            @Override
+            public amara.game.entitysystem.components.attributes.DamageReductionComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                }
+                return new amara.game.entitysystem.components.attributes.DamageReductionComponent(value);
             }
         });
         bitstreamClassManager.register(amara.game.entitysystem.components.attributes.HealthComponent.class);

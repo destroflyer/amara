@@ -57,7 +57,7 @@ public class ScreenController_Shop extends GameScreenController{
         "reaper","soulblade","misty_arcaneblade"
     };
     private String[] shopItemTemplateNames_Special = new String[]{
-        "zhonyas_hourglass","youmuus_ghostblade"
+        "zhonyas_hourglass","youmuus_ghostblade","lifebinder"
     };
     private EntityWrapper[] shopItems;
     private EntityWrapper[] shopItems_Special;
@@ -215,8 +215,9 @@ public class ScreenController_Shop extends GameScreenController{
             }
         }
         if(itemFilterTextLowerCase.equals("etherblood")){
-            shopFilteredItems.add(shopItems_Special[0]);
-            shopFilteredItems.add(shopItems_Special[1]);
+            for(EntityWrapper shopItem_Special : shopItems_Special){
+                shopFilteredItems.add(shopItem_Special);
+            }
         }
         new ScrollPanelBuilder("shop_available_items"){{
             set("height", "100%");

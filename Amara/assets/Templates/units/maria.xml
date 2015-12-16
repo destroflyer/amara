@@ -63,8 +63,14 @@
         <isVulnerable/>
         <!--spells-->
         <autoAttack>
-            <entity template="spells/melee_autoattack"/>
+            <entity template="spells/melee_autoattack(Sounds/sounds/spells/maria_autoattack_cast.ogg)"/>
         </autoAttack>
+        <learnableSpells>
+            <entity template="spells/maria_slash/base"/>
+            <entity template="spells/maria_block/base"/>
+            <entity template="spells/maria_stab/base"/>
+            <entity template="spells/maria_ult/base"/>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>
