@@ -51,9 +51,22 @@ class ObservedComponentMap extends SimpleComponentMap {
         }
         return observer;
     }
+    
+    public ComponentMapObserver requestObserver(Object key, Class... componentClasses) {
+        return requestObserver(key, DefaultComponentEqualityDefinition.SINGLETON, componentClasses);
+    }
 
-    public void createObserver(Object key, Class... componentClasses) {
-        ComponentMapObserver observer = new ComponentMapObserver(this);
+    public ComponentMapObserver requestObserver(Object key, ComponentEqualityDefinition componentEquality, Class... componentClasses) {
+        if (getObserver(key) == null) {
+            createObserver(key, componentEquality, componentClasses);
+        }
+        ComponentMapObserver observer = getObserver(key);
+        observer.refresh();
+        return observer;
+    }
+
+    private void createObserver(Object key, ComponentEqualityDefinition componentEquality, Class... componentClasses) {
+        ComponentMapObserver observer = new ComponentMapObserver(this, componentEquality);
         if (componentClasses.length == 0) {
             systemGlobalObserverMap.put(key, observer);
             for (Class clazz : getComponentMaps().keySet()) {
@@ -70,14 +83,5 @@ class ObservedComponentMap extends SimpleComponentMap {
                 }
             }
         }
-    }
-
-    public ComponentMapObserver requestObserver(Object key, Class... componentClasses) {
-        if (getObserver(key) == null) {
-            createObserver(key, componentClasses);
-        }
-        ComponentMapObserver observer = getObserver(key);
-        observer.refresh();
-        return observer;
     }
 }

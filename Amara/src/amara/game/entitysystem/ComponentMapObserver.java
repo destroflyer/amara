@@ -1,13 +1,9 @@
 package amara.game.entitysystem;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,10 +18,11 @@ public class ComponentMapObserver {
     
     private final HashMap<Class, HashSet<Integer>> previousNulls = new HashMap<Class, HashSet<Integer>>();
     private final SimpleComponentMap previousValues = new SimpleComponentMap();
-    
+    private final ComponentEqualityDefinition componentEquality;
 
-    ComponentMapObserver(EntityComponentMapReadonly data) {
+    ComponentMapObserver(EntityComponentMapReadonly data, ComponentEqualityDefinition componentEquality) {
         this.data = data;
+        this.componentEquality = componentEquality;
     }
 
     void refresh() {
@@ -99,66 +96,13 @@ public class ComponentMapObserver {
                 Object newComponent = data.getComponent(entity, componentClass);
                 if (newComponent == null) {
                     removed.setComponent(entity, oldComponent);
-                } else if (componentsEqual(oldComponent, newComponent)) {
+                } else if (componentEquality.areComponentsEqual(oldComponent, newComponent)) {
 //                    System.out.println(newComponent.toString() + " change discarded");
                 } else {
                     changed.setComponent(entity, newComponent);
                 }
             }
         }
-    }
-
-    private boolean componentsEqual(Object componentA, Object componentB) {
-        if (componentA.equals(componentB)) {
-            return true;
-        }
-        Class componentClass = componentA.getClass();
-        if (componentB.getClass() != componentClass) {
-            return false;
-        }
-        for (Field field : componentClass.getDeclaredFields()) {
-            field.setAccessible(true);
-            try {
-                if(!equals(field.get(componentA), field.get(componentB))) {
-                    return false;
-                }
-            } catch (IllegalArgumentException ex) {
-                Logger.getLogger(ComponentMapObserver.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(ComponentMapObserver.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            }
-        }
-        if (componentClass.getSuperclass() != Object.class) {
-            System.err.println("components with superclasses not supported by ComponentMapObserver.componentsEqual");
-        }
-        return true;
-    }
-    
-    private boolean equals(Object a, Object b) {
-        if (a == b) {
-            return true;
-        }
-        if (a == null || b == null) {
-            return false;
-        }
-        if (a.getClass().isArray() && b.getClass().isArray()) {
-            int length = Array.getLength(a);
-            if (length > 0 && !a.getClass().getComponentType().equals(b.getClass().getComponentType())) {
-                return false;
-            }
-            if (Array.getLength(b) != length) {
-                return false;
-            }
-            for (int i = 0; i < length; i++) {
-                if (!equals(Array.get(a, i), Array.get(b, i))) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return a.equals(b);
     }
 
     public EntityComponentMapReadonly getNew() {
