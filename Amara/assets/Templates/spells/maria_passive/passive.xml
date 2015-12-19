@@ -8,7 +8,7 @@
                 <casterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <addSpellsSpellEffects setSourcesToSpells="true">
+                        <addSpellsSpellEffects>
                             <entity id="newSpellEffect1">
                                 <castedEffectTriggers>
                                     <!--add buff-->
@@ -60,6 +60,7 @@
                                                 </addBuff>
                                             </entity>
                                         </triggeredEffect>
+                                        <triggerSource>#passive</triggerSource>
                                     </entity>
                                 </castedEffectTriggers>
                             </entity>
