@@ -35,7 +35,8 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/infected_cleaver_cast.ogg</audio>
+                                <audio>Sounds/sounds/spells/erika_w_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>
                     </entity>

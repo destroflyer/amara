@@ -4,6 +4,7 @@
  */
 package amara.game.entitysystem.systems.units;
 
+import java.util.LinkedList;
 import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
@@ -18,6 +19,7 @@ import amara.game.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
 public class PayOutBountiesSystem implements EntitySystem{
     
     private final float experienceRange = 20;
+    private LinkedList<Integer> tmpRewardedEntities = new LinkedList<Integer>();
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -39,10 +41,7 @@ public class PayOutBountiesSystem implements EntitySystem{
                 //Experience
                 BountyExperienceComponent bountyExperienceComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyExperienceComponent.class);
                 if(bountyExperienceComponent != null){
-                    ExperienceComponent experienceComponent = entityWorld.getComponent(killerEntity, ExperienceComponent.class);
-                    if(experienceComponent != null){
-                        entityWorld.setComponent(killerEntity, new ExperienceComponent(experienceComponent.getExperience() + bountyExperienceComponent.getExperience()));
-                    }
+                    tmpRewardedEntities.clear();
                     int killerTeamEntity = entityWorld.getComponent(killerEntity, TeamComponent.class).getTeamEntity();
                     Vector2f deathPosition = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
                     for(int rewardedEntity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class, ExperienceComponent.class)){
@@ -50,9 +49,18 @@ public class PayOutBountiesSystem implements EntitySystem{
                             int teamEntity = entityWorld.getComponent(rewardedEntity, TeamComponent.class).getTeamEntity();
                             Vector2f position = entityWorld.getComponent(rewardedEntity, PositionComponent.class).getPosition();
                             if((teamEntity == killerTeamEntity) && (position.distanceSquared(deathPosition) <= (experienceRange * experienceRange))){
-                                int experience = entityWorld.getComponent(rewardedEntity, ExperienceComponent.class).getExperience();
-                                entityWorld.setComponent(rewardedEntity, new ExperienceComponent(experience + bountyExperienceComponent.getExperience()));
+                                tmpRewardedEntities.add(rewardedEntity);
                             }
+                        }
+                    }
+                    if((!tmpRewardedEntities.contains(killerEntity)) && entityWorld.hasComponent(killerEntity, ExperienceComponent.class)){
+                        tmpRewardedEntities.add(killerEntity);
+                    }
+                    if(tmpRewardedEntities.size() > 0){
+                        int experienceShare = (bountyExperienceComponent.getExperience() / tmpRewardedEntities.size());
+                        for(int rewardedEntity : tmpRewardedEntities){
+                            int experience = entityWorld.getComponent(rewardedEntity, ExperienceComponent.class).getExperience();
+                            entityWorld.setComponent(rewardedEntity, new ExperienceComponent(experience + experienceShare));
                         }
                     }
                 }

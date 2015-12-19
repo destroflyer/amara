@@ -63,7 +63,7 @@
         <isVulnerable/>
         <!--spells-->
         <autoAttack>
-            <entity template="spells/ranged_autoattack(Models/erika_arrow/skin.xml)"/>
+            <entity template="spells/ranged_autoattack(Models/erika_arrow/skin.xml,Sounds/sounds/spells/erika_autoattack_cast.ogg,Sounds/sounds/spells/erika_autoattack_hit.ogg)"/>
         </autoAttack>
         <passives>
             <entity template="spells/erika_passive/passive"/>

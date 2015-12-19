@@ -76,16 +76,24 @@ public class ModelObject extends Node implements AnimEventListener{
     }
     
     public void playAnimation(String animationName, float loopDuration, boolean isLoop){
+        setAnimationName(animationName);
+        setAnimationProperties(loopDuration, isLoop);
+    }
+    
+    public void setAnimationName(String animationName){
         for(AnimChannel animationChannel : animationChannels){
             try{
-                if(!animationName.equals(animationChannel.getAnimationName())){
-                    animationChannel.setAnim(animationName);
-                }
-                animationChannel.setSpeed(animationChannel.getAnimMaxTime() / loopDuration);
-                animationChannel.setLoopMode(isLoop?LoopMode.Loop:LoopMode.DontLoop);
+                animationChannel.setAnim(animationName);
             }catch(IllegalArgumentException ex){
                 stopAndRewindAnimation(animationChannel);
             }
+        }
+    }
+    
+    public void setAnimationProperties(float loopDuration, boolean isLoop){
+        for(AnimChannel animationChannel : animationChannels){
+            animationChannel.setSpeed(animationChannel.getAnimMaxTime() / loopDuration);
+            animationChannel.setLoopMode(isLoop?LoopMode.Loop:LoopMode.DontLoop);
         }
     }
     
