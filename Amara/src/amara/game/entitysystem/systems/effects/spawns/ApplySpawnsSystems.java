@@ -86,7 +86,7 @@ public class ApplySpawnsSystems implements EntitySystem{
                             Vector2f movementDirection = targetDirectionComponent.getVector().clone();
                             SpawnMovementRelativeDirectionComponent spawnMovementRelativeDirectionComponent = spawnInformation.getComponent(SpawnMovementRelativeDirectionComponent.class);
                             if(spawnMovementRelativeDirectionComponent != null){
-                                movementDirection.rotateAroundOrigin(spawnMovementRelativeDirectionComponent.getAngle_Radian(), true);
+                                movementDirection.rotateAroundOrigin(spawnMovementRelativeDirectionComponent.getAngle_Radian(), false);
                             }
                             movement.setComponent(new MovementDirectionComponent(movementDirection));
                         }

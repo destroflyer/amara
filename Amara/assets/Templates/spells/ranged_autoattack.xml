@@ -1,4 +1,4 @@
-<template defaultParameters="Models/energy_projectile/skin.xml,Sounds/sounds/spells/range_autoattack_cast.ogg">
+<template defaultParameters="Models/energy_projectile/skin.xml,Sounds/sounds/spells/ranged_autoattack_cast.ogg,Sounds/sounds/spells/ranged_autoattack_hit.ogg">
     <entity id="spell">
         <name>Ranged Autoattack</name>
         <instantEffectTriggers>
@@ -9,7 +9,7 @@
                     <entity>
                         <spawn>
                             <entity>
-                                <spawnTemplate>./ranged_autoattack_projectile([parameter0])</spawnTemplate>
+                                <spawnTemplate>./ranged_autoattack_projectile([parameter0],[parameter2])</spawnTemplate>
                                 <spawnMoveToTarget/>
                                 <spawnMovementSpeed>25</spawnMovementSpeed>
                             </entity>

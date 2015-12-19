@@ -17,6 +17,21 @@
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
             </entity>
+            <!--play audio-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/erika_e_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
         </instantEffectTriggers>
         <castType>positional_skillshot</castType>
         <castCancelAction/>

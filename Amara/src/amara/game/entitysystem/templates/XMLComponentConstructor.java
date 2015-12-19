@@ -22,7 +22,7 @@ public abstract class XMLComponentConstructor<T>{
     }
     private String elementName;
     protected XMLTemplateManager xmlTemplateManager;
-    private EntityWorld entityWorld;
+    protected EntityWorld entityWorld;
     protected Element element;
     
     public void prepare(XMLTemplateManager xmlTemplateManager, EntityWorld entityWorld, Element element){
@@ -38,7 +38,7 @@ public abstract class XMLComponentConstructor<T>{
         List children = element.getChildren();
         if(children.size() > 0){
             for(int i=0;i<children.size();i++){
-                childEntities.add(xmlTemplateManager.createEntity(entityWorld, (Element) children.get(i)));
+                childEntities.add(xmlTemplateManager.createAndLoadEntity(entityWorld, (Element) children.get(i)));
             }
         }
         else if(element.getText().length() > 0){
@@ -60,7 +60,7 @@ public abstract class XMLComponentConstructor<T>{
         List children = element.getChildren();
         if(children.size() > 0){
             if(index < children.size()){
-                return xmlTemplateManager.createEntity(entityWorld, (Element) children.get(index));
+                return xmlTemplateManager.createAndLoadEntity(entityWorld, (Element) children.get(index));
             }
         }
         else if((index == 0) && (element.getText().length() > 0)){
@@ -70,7 +70,7 @@ public abstract class XMLComponentConstructor<T>{
     }
     
     private int parseEntity(String text){
-        return Integer.parseInt(xmlTemplateManager.parseValue(text));
+        return Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, text));
     }
     
     public String getElementName(){

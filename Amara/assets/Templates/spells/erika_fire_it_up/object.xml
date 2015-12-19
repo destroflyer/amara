@@ -19,6 +19,12 @@
         <triggeredEffect>
             <entity>
                 <activateHitbox/>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/erika_e_hit.ogg</audio>
+                        <audioVolume>0.75</audioVolume>
+                    </entity>
+                </playAudio>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>

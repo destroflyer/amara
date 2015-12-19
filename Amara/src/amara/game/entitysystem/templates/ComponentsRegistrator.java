@@ -31,7 +31,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.AbilityPowerComponent(value);
             }
@@ -49,7 +49,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.ArmorComponent(value);
             }
@@ -67,7 +67,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.AttackDamageComponent(value);
             }
@@ -85,7 +85,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.AttackSpeedComponent(value);
             }
@@ -103,7 +103,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusFlatAbilityPowerComponent(value);
             }
@@ -121,7 +121,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusFlatArmorComponent(value);
             }
@@ -139,7 +139,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusFlatAttackDamageComponent(value);
             }
@@ -157,7 +157,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusFlatAttackSpeedComponent(value);
             }
@@ -175,7 +175,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent(value);
             }
@@ -193,7 +193,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusFlatMagicResistanceComponent(value);
             }
@@ -211,7 +211,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusFlatMaximumHealthComponent(value);
             }
@@ -229,7 +229,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusFlatWalkSpeedComponent(value);
             }
@@ -247,7 +247,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent(value);
             }
@@ -265,7 +265,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent(value);
             }
@@ -283,7 +283,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent(value);
             }
@@ -301,7 +301,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusPercentageDamageReductionComponent(value);
             }
@@ -319,7 +319,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusPercentageLifestealComponent(value);
             }
@@ -337,7 +337,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent(value);
             }
@@ -355,7 +355,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.CooldownSpeedComponent(value);
             }
@@ -373,7 +373,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.CriticalChanceComponent(value);
             }
@@ -391,7 +391,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.DamageReductionComponent(value);
             }
@@ -409,7 +409,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.HealthComponent(value);
             }
@@ -427,7 +427,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.HealthRegenerationComponent(value);
             }
@@ -445,7 +445,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.LifestealComponent(value);
             }
@@ -463,7 +463,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.MagicResistanceComponent(value);
             }
@@ -481,7 +481,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.MaximumHealthComponent(value);
             }
@@ -507,7 +507,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.attributes.WalkSpeedComponent(value);
             }
@@ -518,7 +518,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.audio.AudioComponent construct(){
-                String audioPath = xmlTemplateManager.parseValue(element.getText());
+                String audioPath = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.game.entitysystem.components.audio.AudioComponent(audioPath);
             }
         });
@@ -563,7 +563,7 @@ public class ComponentsRegistrator{
                 float delay = 0;
                 String delayText = element.getAttributeValue("delay");
                 if((delayText != null) && (delayText.length() > 0)){
-                    delay = Float.parseFloat(xmlTemplateManager.parseValue(delayText));
+                    delay = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, delayText));
                 }
                 return new amara.game.entitysystem.components.audio.AudioSuccessorComponent(audioEntity, delay);
             }
@@ -576,7 +576,7 @@ public class ComponentsRegistrator{
                 float volume = 0;
                 String volumeText = element.getText();
                 if((volumeText != null) && (volumeText.length() > 0)){
-                    volume = Float.parseFloat(xmlTemplateManager.parseValue(volumeText));
+                    volume = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, volumeText));
                 }
                 return new amara.game.entitysystem.components.audio.AudioVolumeComponent(volume);
             }
@@ -738,7 +738,7 @@ public class ComponentsRegistrator{
                 float interval = 0;
                 String intervalText = element.getAttributeValue("interval");
                 if((intervalText != null) && (intervalText.length() > 0)){
-                    interval = Float.parseFloat(xmlTemplateManager.parseValue(intervalText));
+                    interval = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, intervalText));
                 }
                 return new amara.game.entitysystem.components.buffs.RepeatingEffectComponent(effectEntity, interval);
             }
@@ -757,7 +757,7 @@ public class ComponentsRegistrator{
                 int stacks = 0;
                 String stacksText = element.getText();
                 if((stacksText != null) && (stacksText.length() > 0)){
-                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(stacksText));
+                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, stacksText));
                 }
                 return new amara.game.entitysystem.components.buffs.stacks.MaximumStacksComponent(stacks);
             }
@@ -775,7 +775,7 @@ public class ComponentsRegistrator{
                 int stacks = 0;
                 String stacksText = element.getText();
                 if((stacksText != null) && (stacksText.length() > 0)){
-                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(stacksText));
+                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, stacksText));
                 }
                 return new amara.game.entitysystem.components.buffs.stacks.StacksComponent(stacks);
             }
@@ -793,7 +793,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.buffs.stacks.StacksRefreshmentComponent(duration);
             }
@@ -824,7 +824,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.buffs.status.BuffVisualisationComponent construct(){
-                String name = xmlTemplateManager.parseValue(element.getText());
+                String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.game.entitysystem.components.buffs.status.BuffVisualisationComponent(name);
             }
         });
@@ -841,7 +841,7 @@ public class ComponentsRegistrator{
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.game.entitysystem.components.buffs.status.RemainingBuffDurationComponent(remainingDuration);
             }
@@ -867,7 +867,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent(duration);
             }
@@ -894,7 +894,7 @@ public class ComponentsRegistrator{
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(distanceText));
+                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
                 }
                 return new amara.game.entitysystem.components.camps.CampMaximumAggroDistanceComponent(distance);
             }
@@ -912,7 +912,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.camps.CampRemainingRespawnDurationComponent(duration);
             }
@@ -930,7 +930,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.camps.CampRespawnDurationComponent(duration);
             }
@@ -988,17 +988,17 @@ public class ComponentsRegistrator{
                 float portion = 0;
                 String portionText = element.getAttributeValue("portion");
                 if((portionText != null) && (portionText.length() > 0)){
-                    portion = Float.parseFloat(xmlTemplateManager.parseValue(portionText));
+                    portion = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, portionText));
                 }
                 boolean lessOrMore = false;
                 String lessOrMoreText = element.getAttributeValue("lessOrMore");
                 if((lessOrMoreText != null) && (lessOrMoreText.length() > 0)){
-                    lessOrMore = Boolean.parseBoolean(xmlTemplateManager.parseValue(lessOrMoreText));
+                    lessOrMore = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, lessOrMoreText));
                 }
                 boolean allowEqual = false;
                 String allowEqualText = element.getAttributeValue("allowEqual");
                 if((allowEqualText != null) && (allowEqualText.length() > 0)){
-                    allowEqual = Boolean.parseBoolean(xmlTemplateManager.parseValue(allowEqualText));
+                    allowEqual = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, allowEqualText));
                 }
                 return new amara.game.entitysystem.components.conditions.HasHealthPortionConditionComponent(portion, lessOrMore, allowEqual);
             }
@@ -1046,7 +1046,7 @@ public class ComponentsRegistrator{
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
-                    range = Float.parseFloat(xmlTemplateManager.parseValue(rangeText));
+                    range = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, rangeText));
                 }
                 return new amara.game.entitysystem.components.effects.aggro.DrawTeamAggroComponent(range);
             }
@@ -1114,7 +1114,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getAttributeValue("duration");
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.effects.buffs.AddBuffComponent(buffEntity, duration);
             }
@@ -1129,11 +1129,11 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.buffs.AddNewBuffComponent construct(){
-                String templateExpression = xmlTemplateManager.parseValue(element.getAttributeValue("templateExpression"));
+                String templateExpression = xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("templateExpression"));
                 float duration = 0;
                 String durationText = element.getAttributeValue("duration");
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.effects.buffs.AddNewBuffComponent(templateExpression, duration);
             }
@@ -1195,7 +1195,7 @@ public class ComponentsRegistrator{
                 int stacks = 0;
                 String stacksText = element.getText();
                 if((stacksText != null) && (stacksText.length() > 0)){
-                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(stacksText));
+                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, stacksText));
                 }
                 return new amara.game.entitysystem.components.effects.buffs.stacks.AddStacksComponent(stacks);
             }
@@ -1221,7 +1221,7 @@ public class ComponentsRegistrator{
                 int stacks = 0;
                 String stacksText = element.getText();
                 if((stacksText != null) && (stacksText.length() > 0)){
-                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(stacksText));
+                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, stacksText));
                 }
                 return new amara.game.entitysystem.components.effects.buffs.stacks.RemoveStacksComponent(stacks);
             }
@@ -1283,7 +1283,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddBindingComponent(duration);
             }
@@ -1301,7 +1301,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent(duration);
             }
@@ -1333,7 +1333,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent(duration);
             }
@@ -1351,7 +1351,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceComponent(duration);
             }
@@ -1369,7 +1369,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent(duration);
             }
@@ -1387,7 +1387,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddStunComponent(duration);
             }
@@ -1405,7 +1405,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent(duration);
             }
@@ -1424,7 +1424,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent(duration);
             }
@@ -1442,7 +1442,7 @@ public class ComponentsRegistrator{
                 float height = 0;
                 String heightText = element.getText();
                 if((heightText != null) && (heightText.length() > 0)){
-                    height = Float.parseFloat(xmlTemplateManager.parseValue(heightText));
+                    height = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, heightText));
                 }
                 return new amara.game.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent(height);
             }
@@ -1510,7 +1510,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.damage.MagicDamageComponent construct(){
-                String expression = xmlTemplateManager.parseValue(element.getText());
+                String expression = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.game.entitysystem.components.effects.damage.MagicDamageComponent(expression);
             }
         });
@@ -1519,7 +1519,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent construct(){
-                String expression = xmlTemplateManager.parseValue(element.getText());
+                String expression = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.game.entitysystem.components.effects.damage.PhysicalDamageComponent(expression);
             }
         });
@@ -1552,7 +1552,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.effects.damage.ResultingMagicDamageComponent(value);
             }
@@ -1570,7 +1570,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent(value);
             }
@@ -1581,7 +1581,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.game.PlayCinematicComponent construct(){
-                String cinematicClassName = xmlTemplateManager.parseValue(element.getText());
+                String cinematicClassName = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.game.entitysystem.components.effects.game.PlayCinematicComponent(cinematicClassName);
             }
         });
@@ -1630,7 +1630,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.effects.heals.HealComponent construct(){
-                String expression = xmlTemplateManager.parseValue(element.getText());
+                String expression = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.game.entitysystem.components.effects.heals.HealComponent(expression);
             }
         });
@@ -1647,7 +1647,7 @@ public class ComponentsRegistrator{
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(valueText));
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.game.entitysystem.components.effects.heals.ResultingHealComponent(value);
             }
@@ -1733,7 +1733,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.effects.RemainingEffectDelayComponent(duration);
             }
@@ -1782,7 +1782,7 @@ public class ComponentsRegistrator{
                 boolean setSourcesToSpells = false;
                 String setSourcesToSpellsText = element.getAttributeValue("setSourcesToSpells");
                 if((setSourcesToSpellsText != null) && (setSourcesToSpellsText.length() > 0)){
-                    setSourcesToSpells = Boolean.parseBoolean(xmlTemplateManager.parseValue(setSourcesToSpellsText));
+                    setSourcesToSpells = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, setSourcesToSpellsText));
                 }
                 return new amara.game.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent(spellEffectEntities, setSourcesToSpells);
             }
@@ -1814,7 +1814,7 @@ public class ComponentsRegistrator{
                 int spellIndex = 0;
                 String spellIndexText = element.getAttributeValue("spellIndex");
                 if((spellIndexText != null) && (spellIndexText.length() > 0)){
-                    spellIndex = Integer.parseInt(xmlTemplateManager.parseValue(spellIndexText));
+                    spellIndex = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, spellIndexText));
                 }
                 int spellEntity = createChildEntity(0, "spellEntity");
                 return new amara.game.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent(spellIndex, spellEntity);
@@ -1828,9 +1828,9 @@ public class ComponentsRegistrator{
                 int spellIndex = 0;
                 String spellIndexText = element.getAttributeValue("spellIndex");
                 if((spellIndexText != null) && (spellIndexText.length() > 0)){
-                    spellIndex = Integer.parseInt(xmlTemplateManager.parseValue(spellIndexText));
+                    spellIndex = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, spellIndexText));
                 }
-                String newSpellTemplate = xmlTemplateManager.parseTemplate(element.getAttributeValue("newSpellTemplate"));
+                String newSpellTemplate = xmlTemplateManager.parseTemplate(entityWorld, element.getAttributeValue("newSpellTemplate"));
                 return new amara.game.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent(spellIndex, newSpellTemplate);
             }
         });
@@ -1877,7 +1877,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.game.CinematicComponent construct(){
-                String cinematicClassName = xmlTemplateManager.parseValue(element.getText());
+                String cinematicClassName = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.game.entitysystem.components.game.CinematicComponent(cinematicClassName);
             }
         });
@@ -1889,7 +1889,7 @@ public class ComponentsRegistrator{
                 float speed = 0;
                 String speedText = element.getText();
                 if((speedText != null) && (speedText.length() > 0)){
-                    speed = Float.parseFloat(xmlTemplateManager.parseValue(speedText));
+                    speed = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, speedText));
                 }
                 return new amara.game.entitysystem.components.game.GameSpeedComponent(speed);
             }
@@ -1907,7 +1907,7 @@ public class ComponentsRegistrator{
                 float time = 0;
                 String timeText = element.getText();
                 if((timeText != null) && (timeText.length() > 0)){
-                    time = Float.parseFloat(xmlTemplateManager.parseValue(timeText));
+                    time = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, timeText));
                 }
                 return new amara.game.entitysystem.components.game.GameTimeComponent(time);
             }
@@ -1918,7 +1918,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.general.DescriptionComponent construct(){
-                String description = xmlTemplateManager.parseValue(element.getText());
+                String description = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.game.entitysystem.components.general.DescriptionComponent(description);
             }
         });
@@ -1927,7 +1927,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.general.NameComponent construct(){
-                String name = xmlTemplateManager.parseValue(element.getText());
+                String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.game.entitysystem.components.general.NameComponent(name);
             }
         });
@@ -1975,7 +1975,7 @@ public class ComponentsRegistrator{
                 int gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Integer.parseInt(xmlTemplateManager.parseValue(goldText));
+                    gold = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, goldText));
                 }
                 return new amara.game.entitysystem.components.items.IsSellableComponent(gold);
             }
@@ -1999,7 +1999,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.items.ItemIDComponent construct(){
-                String id = xmlTemplateManager.parseValue(element.getText());
+                String id = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.game.entitysystem.components.items.ItemIDComponent(id);
             }
         });
@@ -2025,14 +2025,14 @@ public class ComponentsRegistrator{
                 int gold = 0;
                 String goldText = element.getAttributeValue("gold");
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Integer.parseInt(xmlTemplateManager.parseValue(goldText));
+                    gold = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, goldText));
                 }
                 String[] itemIDs = new String[0];
                 String itemIDsText = element.getAttributeValue("itemIDs");
                 if(itemIDsText != null){
                     itemIDs = itemIDsText.split(",");
                     for(int i=0;i<itemIDs.length;i++){
-                        itemIDs[i] = xmlTemplateManager.parseValue(itemIDs[i]);
+                        itemIDs[i] = xmlTemplateManager.parseValue(entityWorld, itemIDs[i]);
                     }
                 }
                 return new amara.game.entitysystem.components.items.ItemRecipeComponent(gold, itemIDs);
@@ -2080,12 +2080,12 @@ public class ComponentsRegistrator{
                 float initialDuration = 0;
                 String initialDurationText = element.getAttributeValue("initialDuration");
                 if((initialDurationText != null) && (initialDurationText.length() > 0)){
-                    initialDuration = Float.parseFloat(xmlTemplateManager.parseValue(initialDurationText));
+                    initialDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, initialDurationText));
                 }
                 float deltaDurationPerTime = 0;
                 String deltaDurationPerTimeText = element.getAttributeValue("deltaDurationPerTime");
                 if((deltaDurationPerTimeText != null) && (deltaDurationPerTimeText.length() > 0)){
-                    deltaDurationPerTime = Float.parseFloat(xmlTemplateManager.parseValue(deltaDurationPerTimeText));
+                    deltaDurationPerTime = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, deltaDurationPerTimeText));
                 }
                 return new amara.game.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent(initialDuration, deltaDurationPerTime);
             }
@@ -2126,7 +2126,7 @@ public class ComponentsRegistrator{
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(distanceText));
+                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
                 }
                 return new amara.game.entitysystem.components.movements.DistanceLimitComponent(distance);
             }
@@ -2144,7 +2144,7 @@ public class ComponentsRegistrator{
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(distanceText));
+                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
                 }
                 return new amara.game.entitysystem.components.movements.MovedDistanceComponent(distance);
             }
@@ -2169,8 +2169,8 @@ public class ComponentsRegistrator{
             @Override
             public amara.game.entitysystem.components.movements.MovementDirectionComponent construct(){
                 String[] directionCoordinates = element.getText().split(",");
-                float directionX = Float.parseFloat(xmlTemplateManager.parseValue(directionCoordinates[0]));
-                float directionY = Float.parseFloat(xmlTemplateManager.parseValue(directionCoordinates[1]));
+                float directionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[0]));
+                float directionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[1]));
                 Vector2f direction = new Vector2f(directionX, directionY);
                 return new amara.game.entitysystem.components.movements.MovementDirectionComponent(direction);
             }
@@ -2212,7 +2212,7 @@ public class ComponentsRegistrator{
                 float speed = 0;
                 String speedText = element.getText();
                 if((speedText != null) && (speedText.length() > 0)){
-                    speed = Float.parseFloat(xmlTemplateManager.parseValue(speedText));
+                    speed = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, speedText));
                 }
                 return new amara.game.entitysystem.components.movements.MovementSpeedComponent(speed);
             }
@@ -2252,7 +2252,7 @@ public class ComponentsRegistrator{
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(distanceText));
+                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
                 }
                 return new amara.game.entitysystem.components.movements.MovementTargetSufficientDistanceComponent(distance);
             }
@@ -2320,7 +2320,7 @@ public class ComponentsRegistrator{
                 float radian = 0;
                 String radianText = element.getText();
                 if((radianText != null) && (radianText.length() > 0)){
-                    radian = Float.parseFloat(xmlTemplateManager.parseValue(radianText));
+                    radian = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, radianText));
                 }
                 return new amara.game.entitysystem.components.physics.DirectionComponent(radian);
             }
@@ -2348,8 +2348,8 @@ public class ComponentsRegistrator{
             @Override
             public amara.game.entitysystem.components.physics.PositionComponent construct(){
                 String[] positionCoordinates = element.getText().split(",");
-                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[0]));
-                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[1]));
+                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[0]));
+                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[1]));
                 Vector2f position = new Vector2f(positionX, positionY);
                 return new amara.game.entitysystem.components.physics.PositionComponent(position);
             }
@@ -2370,7 +2370,7 @@ public class ComponentsRegistrator{
                 float scale = 0;
                 String scaleText = element.getText();
                 if((scaleText != null) && (scaleText.length() > 0)){
-                    scale = Float.parseFloat(xmlTemplateManager.parseValue(scaleText));
+                    scale = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, scaleText));
                 }
                 return new amara.game.entitysystem.components.physics.ScaleComponent(scale);
             }
@@ -2384,7 +2384,7 @@ public class ComponentsRegistrator{
                 int clientID = 0;
                 String clientIDText = element.getText();
                 if((clientIDText != null) && (clientIDText.length() > 0)){
-                    clientID = Integer.parseInt(xmlTemplateManager.parseValue(clientIDText));
+                    clientID = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, clientIDText));
                 }
                 return new amara.game.entitysystem.components.players.ClientComponent(clientID);
             }
@@ -2397,7 +2397,7 @@ public class ComponentsRegistrator{
                 int index = 0;
                 String indexText = element.getText();
                 if((indexText != null) && (indexText.length() > 0)){
-                    index = Integer.parseInt(xmlTemplateManager.parseValue(indexText));
+                    index = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, indexText));
                 }
                 return new amara.game.entitysystem.components.players.PlayerIndexComponent(index);
             }
@@ -2437,7 +2437,7 @@ public class ComponentsRegistrator{
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.game.entitysystem.components.players.WaitingToRespawnComponent(remainingDuration);
             }
@@ -2456,7 +2456,7 @@ public class ComponentsRegistrator{
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
-                    range = Float.parseFloat(xmlTemplateManager.parseValue(rangeText));
+                    range = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, rangeText));
                 }
                 return new amara.game.entitysystem.components.shop.ShopRangeComponent(range);
             }
@@ -2492,7 +2492,7 @@ public class ComponentsRegistrator{
                 float angle_Degrees = 0;
                 String angle_DegreesText = element.getText();
                 if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
-                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(angle_DegreesText));
+                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, angle_DegreesText));
                 }
                 return new amara.game.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent(angle_Degrees);
             }
@@ -2510,7 +2510,7 @@ public class ComponentsRegistrator{
                 float speed = 0;
                 String speedText = element.getText();
                 if((speedText != null) && (speedText.length() > 0)){
-                    speed = Float.parseFloat(xmlTemplateManager.parseValue(speedText));
+                    speed = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, speedText));
                 }
                 return new amara.game.entitysystem.components.spawns.SpawnMovementSpeedComponent(speed);
             }
@@ -2531,7 +2531,7 @@ public class ComponentsRegistrator{
                 float angle_Degrees = 0;
                 String angle_DegreesText = element.getText();
                 if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
-                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(angle_DegreesText));
+                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, angle_DegreesText));
                 }
                 return new amara.game.entitysystem.components.spawns.SpawnRelativeDirectionComponent(angle_Degrees);
             }
@@ -2542,8 +2542,8 @@ public class ComponentsRegistrator{
             @Override
             public amara.game.entitysystem.components.spawns.SpawnRelativePositionComponent construct(){
                 String[] positionCoordinates = element.getText().split(",");
-                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[0]));
-                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[1]));
+                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[0]));
+                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[1]));
                 Vector2f position = new Vector2f(positionX, positionY);
                 return new amara.game.entitysystem.components.spawns.SpawnRelativePositionComponent(position);
             }
@@ -2592,12 +2592,12 @@ public class ComponentsRegistrator{
                 int casterEntityID = 0;
                 String casterEntityIDText = element.getAttributeValue("casterEntityID");
                 if((casterEntityIDText != null) && (casterEntityIDText.length() > 0)){
-                    casterEntityID = Integer.parseInt(xmlTemplateManager.parseValue(casterEntityIDText));
+                    casterEntityID = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, casterEntityIDText));
                 }
                 int castedSpellEntityID = 0;
                 String castedSpellEntityIDText = element.getAttributeValue("castedSpellEntityID");
                 if((castedSpellEntityIDText != null) && (castedSpellEntityIDText.length() > 0)){
-                    castedSpellEntityID = Integer.parseInt(xmlTemplateManager.parseValue(castedSpellEntityIDText));
+                    castedSpellEntityID = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, castedSpellEntityIDText));
                 }
                 return new amara.game.entitysystem.components.spells.ApplyCastedSpellComponent(casterEntityID, castedSpellEntityID);
             }
@@ -2615,7 +2615,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.spells.BaseCooldownComponent(duration);
             }
@@ -2663,7 +2663,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.spells.CastDurationComponent(duration);
             }
@@ -2690,7 +2690,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.spells.CooldownComponent(duration);
             }
@@ -2718,7 +2718,7 @@ public class ComponentsRegistrator{
                 float angle_Degrees = 0;
                 String angle_DegreesText = element.getText();
                 if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
-                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(angle_DegreesText));
+                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, angle_DegreesText));
                 }
                 return new amara.game.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent(angle_Degrees);
             }
@@ -2731,7 +2731,7 @@ public class ComponentsRegistrator{
                 float angle_Degrees = 0;
                 String angle_DegreesText = element.getText();
                 if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
-                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(angle_DegreesText));
+                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, angle_DegreesText));
                 }
                 return new amara.game.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent(angle_Degrees);
             }
@@ -2773,7 +2773,7 @@ public class ComponentsRegistrator{
                 float distange = 0;
                 String distangeText = element.getText();
                 if((distangeText != null) && (distangeText.length() > 0)){
-                    distange = Float.parseFloat(xmlTemplateManager.parseValue(distangeText));
+                    distange = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distangeText));
                 }
                 return new amara.game.entitysystem.components.spells.RangeComponent(distange);
             }
@@ -2791,7 +2791,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.spells.RemainingCooldownComponent(duration);
             }
@@ -2829,7 +2829,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.spells.SpellVisualisationComponent construct(){
-                String name = xmlTemplateManager.parseValue(element.getText());
+                String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.game.entitysystem.components.spells.SpellVisualisationComponent(name);
             }
         });
@@ -2931,7 +2931,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.units.AggroResetTimerComponent(duration);
             }
@@ -3048,7 +3048,7 @@ public class ComponentsRegistrator{
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
-                    range = Float.parseFloat(xmlTemplateManager.parseValue(rangeText));
+                    range = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, rangeText));
                 }
                 return new amara.game.entitysystem.components.units.AutoAggroComponent(range);
             }
@@ -3101,7 +3101,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getAttributeValue("duration");
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.units.bounties.BountyBuffComponent(buffEntity, duration);
             }
@@ -3114,7 +3114,7 @@ public class ComponentsRegistrator{
                 int experience = 0;
                 String experienceText = element.getText();
                 if((experienceText != null) && (experienceText.length() > 0)){
-                    experience = Integer.parseInt(xmlTemplateManager.parseValue(experienceText));
+                    experience = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, experienceText));
                 }
                 return new amara.game.entitysystem.components.units.bounties.BountyExperienceComponent(experience);
             }
@@ -3127,7 +3127,7 @@ public class ComponentsRegistrator{
                 int gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Integer.parseInt(xmlTemplateManager.parseValue(goldText));
+                    gold = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, goldText));
                 }
                 return new amara.game.entitysystem.components.units.bounties.BountyGoldComponent(gold);
             }
@@ -3158,12 +3158,12 @@ public class ComponentsRegistrator{
             public amara.game.entitysystem.components.units.CampComponent construct(){
                 int campEntity = createChildEntity(0, "campEntity");
                 String[] positionCoordinates = element.getAttributeValue("position").split(",");
-                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[0]));
-                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(positionCoordinates[1]));
+                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[0]));
+                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[1]));
                 Vector2f position = new Vector2f(positionX, positionY);
                 String[] directionCoordinates = element.getAttributeValue("direction").split(",");
-                float directionX = Float.parseFloat(xmlTemplateManager.parseValue(directionCoordinates[0]));
-                float directionY = Float.parseFloat(xmlTemplateManager.parseValue(directionCoordinates[1]));
+                float directionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[0]));
+                float directionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[1]));
                 Vector2f direction = new Vector2f(directionX, directionY);
                 return new amara.game.entitysystem.components.units.CampComponent(campEntity, position, direction);
             }
@@ -3184,7 +3184,7 @@ public class ComponentsRegistrator{
                 String[] spellIndicesParts = element.getText().split(",");
                 int[] spellIndices = new int[spellIndicesParts.length];
                 for(int i=0;i<spellIndices.length;i++){
-                    spellIndices[i] = Integer.parseInt(xmlTemplateManager.parseValue(element.getText()));
+                    spellIndices[i] = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, element.getText()));
                 }
                 return new amara.game.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent(spellIndices);
             }
@@ -3203,7 +3203,7 @@ public class ComponentsRegistrator{
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsBindedComponent(remainingDuration);
             }
@@ -3221,7 +3221,7 @@ public class ComponentsRegistrator{
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent(remainingDuration);
             }
@@ -3245,7 +3245,7 @@ public class ComponentsRegistrator{
                 float remainingDuration = 0;
                 String remainingDurationText = element.getAttributeValue("remainingDuration");
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedComponent(knockupEntity, remainingDuration);
             }
@@ -3263,7 +3263,7 @@ public class ComponentsRegistrator{
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent(remainingDuration);
             }
@@ -3281,7 +3281,7 @@ public class ComponentsRegistrator{
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsSilencedComponent(remainingDuration);
             }
@@ -3299,7 +3299,7 @@ public class ComponentsRegistrator{
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent(remainingDuration);
             }
@@ -3317,7 +3317,7 @@ public class ComponentsRegistrator{
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsStunnedComponent(remainingDuration);
             }
@@ -3335,7 +3335,7 @@ public class ComponentsRegistrator{
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.game.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent(remainingDuration);
             }
@@ -3446,7 +3446,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.units.effecttriggers.TriggerDelayComponent(duration);
             }
@@ -3506,17 +3506,17 @@ public class ComponentsRegistrator{
                 boolean physicalDamage = false;
                 String physicalDamageText = element.getAttributeValue("physicalDamage");
                 if((physicalDamageText != null) && (physicalDamageText.length() > 0)){
-                    physicalDamage = Boolean.parseBoolean(xmlTemplateManager.parseValue(physicalDamageText));
+                    physicalDamage = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, physicalDamageText));
                 }
                 boolean magicDamage = false;
                 String magicDamageText = element.getAttributeValue("magicDamage");
                 if((magicDamageText != null) && (magicDamageText.length() > 0)){
-                    magicDamage = Boolean.parseBoolean(xmlTemplateManager.parseValue(magicDamageText));
+                    magicDamage = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, magicDamageText));
                 }
                 boolean trueDamage = false;
                 String trueDamageText = element.getAttributeValue("trueDamage");
                 if((trueDamageText != null) && (trueDamageText.length() > 0)){
-                    trueDamage = Boolean.parseBoolean(xmlTemplateManager.parseValue(trueDamageText));
+                    trueDamage = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, trueDamageText));
                 }
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent(physicalDamage, magicDamage, trueDamage);
             }
@@ -3550,7 +3550,7 @@ public class ComponentsRegistrator{
                 float intervalDuration = 0;
                 String intervalDurationText = element.getText();
                 if((intervalDurationText != null) && (intervalDurationText.length() > 0)){
-                    intervalDuration = Float.parseFloat(xmlTemplateManager.parseValue(intervalDurationText));
+                    intervalDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, intervalDurationText));
                 }
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent(intervalDuration);
             }
@@ -3563,7 +3563,7 @@ public class ComponentsRegistrator{
                 int counter = 0;
                 String counterText = element.getText();
                 if((counterText != null) && (counterText.length() > 0)){
-                    counter = Integer.parseInt(xmlTemplateManager.parseValue(counterText));
+                    counter = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, counterText));
                 }
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent(counter);
             }
@@ -3581,7 +3581,7 @@ public class ComponentsRegistrator{
                 int stacks = 0;
                 String stacksText = element.getText();
                 if((stacksText != null) && (stacksText.length() > 0)){
-                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(stacksText));
+                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, stacksText));
                 }
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent(stacks);
             }
@@ -3607,7 +3607,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent(duration);
             }
@@ -3642,7 +3642,7 @@ public class ComponentsRegistrator{
                 int experience = 0;
                 String experienceText = element.getText();
                 if((experienceText != null) && (experienceText.length() > 0)){
-                    experience = Integer.parseInt(xmlTemplateManager.parseValue(experienceText));
+                    experience = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, experienceText));
                 }
                 return new amara.game.entitysystem.components.units.ExperienceComponent(experience);
             }
@@ -3655,7 +3655,7 @@ public class ComponentsRegistrator{
                 int gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Integer.parseInt(xmlTemplateManager.parseValue(goldText));
+                    gold = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, goldText));
                 }
                 return new amara.game.entitysystem.components.units.GoldComponent(gold);
             }
@@ -3696,12 +3696,12 @@ public class ComponentsRegistrator{
                 float remainingDuration = 0;
                 String remainingDurationText = element.getAttributeValue("remainingDuration");
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 boolean isCancelable = false;
                 String isCancelableText = element.getAttributeValue("isCancelable");
                 if((isCancelableText != null) && (isCancelableText.length() > 0)){
-                    isCancelable = Boolean.parseBoolean(xmlTemplateManager.parseValue(isCancelableText));
+                    isCancelable = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, isCancelableText));
                 }
                 return new amara.game.entitysystem.components.units.IsCastingComponent(remainingDuration, isCancelable);
             }
@@ -3768,7 +3768,7 @@ public class ComponentsRegistrator{
                 int level = 0;
                 String levelText = element.getText();
                 if((levelText != null) && (levelText.length() > 0)){
-                    level = Integer.parseInt(xmlTemplateManager.parseValue(levelText));
+                    level = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, levelText));
                 }
                 return new amara.game.entitysystem.components.units.LevelComponent(level);
             }
@@ -3786,7 +3786,7 @@ public class ComponentsRegistrator{
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.game.entitysystem.components.units.LifetimeComponent(remainingDuration);
             }
@@ -3812,7 +3812,7 @@ public class ComponentsRegistrator{
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
-                    range = Float.parseFloat(xmlTemplateManager.parseValue(rangeText));
+                    range = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, rangeText));
                 }
                 return new amara.game.entitysystem.components.units.MaximumAggroRangeComponent(range);
             }
@@ -3884,11 +3884,11 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.units.ReactionComponent construct(){
-                String reaction = xmlTemplateManager.parseValue(element.getAttributeValue("reaction"));
+                String reaction = xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("reaction"));
                 float remainingDuration = 0;
                 String remainingDurationText = element.getAttributeValue("remainingDuration");
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.game.entitysystem.components.units.ReactionComponent(reaction, remainingDuration);
             }
@@ -3906,7 +3906,7 @@ public class ComponentsRegistrator{
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(remainingDurationText));
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.game.entitysystem.components.units.RemainingAggroResetDurationComponent(remainingDuration);
             }
@@ -3924,12 +3924,12 @@ public class ComponentsRegistrator{
                 String[] spellIndicesParts = element.getAttributeValue("spellIndices").split(",");
                 int[] spellIndices = new int[spellIndicesParts.length];
                 for(int i=0;i<spellIndices.length;i++){
-                    spellIndices[i] = Integer.parseInt(xmlTemplateManager.parseValue(element.getAttributeValue("spellIndices")));
+                    spellIndices[i] = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("spellIndices")));
                 }
                 String[] cooldownsParts = element.getAttributeValue("cooldowns").split(",");
                 float[] cooldowns = new float[cooldownsParts.length];
                 for(int i=0;i<cooldowns.length;i++){
-                    cooldowns[i] = Float.parseFloat(xmlTemplateManager.parseValue(element.getAttributeValue("cooldowns")));
+                    cooldowns[i] = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("cooldowns")));
                 }
                 return new amara.game.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent(spellIndices, cooldowns);
             }
@@ -3947,7 +3947,7 @@ public class ComponentsRegistrator{
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
-                    range = Float.parseFloat(xmlTemplateManager.parseValue(rangeText));
+                    range = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, rangeText));
                 }
                 return new amara.game.entitysystem.components.units.SightRangeComponent(range);
             }
@@ -3974,7 +3974,7 @@ public class ComponentsRegistrator{
                 int upgradePoints = 0;
                 String upgradePointsText = element.getText();
                 if((upgradePointsText != null) && (upgradePointsText.length() > 0)){
-                    upgradePoints = Integer.parseInt(xmlTemplateManager.parseValue(upgradePointsText));
+                    upgradePoints = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, upgradePointsText));
                 }
                 return new amara.game.entitysystem.components.units.SpellsUpgradePointsComponent(upgradePoints);
             }
@@ -4020,7 +4020,7 @@ public class ComponentsRegistrator{
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(distanceText));
+                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
                 }
                 return new amara.game.entitysystem.components.units.WalkStepDistanceComponent(distance);
             }
@@ -4062,7 +4062,7 @@ public class ComponentsRegistrator{
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(durationText));
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
                 }
                 return new amara.game.entitysystem.components.visuals.animations.LoopDurationComponent(duration);
             }
@@ -4080,7 +4080,7 @@ public class ComponentsRegistrator{
                 float passedTime = 0;
                 String passedTimeText = element.getText();
                 if((passedTimeText != null) && (passedTimeText.length() > 0)){
-                    passedTime = Float.parseFloat(xmlTemplateManager.parseValue(passedTimeText));
+                    passedTime = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, passedTimeText));
                 }
                 return new amara.game.entitysystem.components.visuals.animations.PassedLoopTimeComponent(passedTime);
             }
@@ -4093,7 +4093,7 @@ public class ComponentsRegistrator{
                 int loopsCount = 0;
                 String loopsCountText = element.getText();
                 if((loopsCountText != null) && (loopsCountText.length() > 0)){
-                    loopsCount = Integer.parseInt(xmlTemplateManager.parseValue(loopsCountText));
+                    loopsCount = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, loopsCountText));
                 }
                 return new amara.game.entitysystem.components.visuals.animations.RemainingLoopsComponent(loopsCount);
             }
@@ -4103,7 +4103,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.visuals.ModelComponent construct(){
-                String modelSkinPath = xmlTemplateManager.parseValue(element.getText());
+                String modelSkinPath = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.game.entitysystem.components.visuals.ModelComponent(modelSkinPath);
             }
         });
@@ -4112,7 +4112,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.game.entitysystem.components.visuals.TitleComponent construct(){
-                String title = xmlTemplateManager.parseValue(element.getText());
+                String title = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.game.entitysystem.components.visuals.TitleComponent(title);
             }
         });

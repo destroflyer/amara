@@ -64,7 +64,6 @@ public class XMLTemplateManager{
                 document = new SAXBuilder().build(inputStream);
             }catch(Exception ex){
                 System.err.println("Error while loading template resource '" + resourcePath + "'.");
-                ex.printStackTrace();
             }
             cachedDocuments.put(resourcePath, document);
         }
@@ -100,13 +99,13 @@ public class XMLTemplateManager{
                     loadEntity(entityWorld, entity, entityElement);
                 }
                 else{
-                    createEntity(entityWorld, entityElement);
+                    createAndLoadEntity(entityWorld, entityElement);
                 }
                 isFirstEntity = false;
             }
             else if(entityElement.getName().equals("value")){
                 String valueName = entityElement.getAttributeValue("name");
-                String value = parseValue(entityElement.getText());
+                String value = parseValue(entityWorld, entityElement.getText());
                 cachedValues.lastElement().put(valueName, value);
             }
         }
@@ -114,7 +113,7 @@ public class XMLTemplateManager{
         cachedValues.pop();
     }
     
-    public int createEntity(EntityWorld entityWorld, Element entityElement){
+    public int createAndLoadEntity(EntityWorld entityWorld, Element entityElement){
         if(entityElement.getName().equals("empty")){
             return -1;
         }
@@ -124,19 +123,24 @@ public class XMLTemplateManager{
             entity = cachedEntities.lastElement().get(id);
         }
         if(entity == null){
-            entity = entityWorld.createEntity();
-            if(id != null){
-                cachedEntities.lastElement().put(id, entity);
-            }
+            entity = createEntity(entityWorld, id);
         }
         loadEntity(entityWorld, entity, entityElement);
+        return entity;
+    }
+    
+    private int createEntity(EntityWorld entityWorld, String id){
+        int entity = entityWorld.createEntity();
+        if(id != null){
+            cachedEntities.lastElement().put(id, entity);
+        }
         return entity;
     }
     
     private void loadEntity(EntityWorld entityWorld, int entity, Element entityElement){
         String templateXMLText = entityElement.getAttributeValue("template");
         if(templateXMLText != null){
-            EntityTemplate.loadTemplate(entityWorld, entity, parseTemplate(templateXMLText));
+            EntityTemplate.loadTemplate(entityWorld, entity, parseTemplate(entityWorld, templateXMLText));
         }
         for(Object componentElementObject : entityElement.getChildren()){
             Element componentElement = (Element) componentElementObject;
@@ -147,7 +151,7 @@ public class XMLTemplateManager{
         }
     }
     
-    public String parseTemplate(String templateXMLText){
+    public String parseTemplate(EntityWorld entityWorld, String templateXMLText){
         String template = templateXMLText.replaceAll("\\./", currentDirectory);
         if(template.matches("(.*)\\((.*)\\)")){
             int bracketStart = template.indexOf("(");
@@ -155,20 +159,27 @@ public class XMLTemplateManager{
             String[] parameters = template.substring(bracketStart + 1, bracketEnd).split(",");
             template = template.substring(0, bracketStart);
             for(String parameter : parameters){
-                template += "," + parseValue(parameter);
+                template += "," + parseValue(entityWorld, parameter);
             }
         }
         return template;
     }
     
-    public String parseValue(String text){
+    public String parseValue(EntityWorld entityWorld, String text){
         if(text.startsWith("#")){
             String entityID = text.substring(1);
-            Integer entity = cachedEntities.lastElement().get(entityID);
-            if(entity != null){
-                return entity.toString();
+            Integer entity;
+            if(entityID.startsWith("#")){
+                entityID = entityID.substring(1);
+                entity = createEntity(entityWorld, entityID);
             }
-            System.err.println("Undefined entity id '" + entityID + "'.");
+            else{
+                entity = cachedEntities.lastElement().get(entityID);
+                if(entity == null){
+                    System.err.println("Undefined entity id '" + entityID + "'.");
+                }
+            }
+            return entity.toString();
         }
         HashMap<String, String> values = cachedValues.lastElement();
         for(Entry<String, String> valueEntry : values.entrySet()){
