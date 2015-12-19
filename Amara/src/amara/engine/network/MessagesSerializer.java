@@ -185,8 +185,8 @@ public class MessagesSerializer{
                     Vector2D localPoint = new Vector2D();
                     String[] positionCoordinates = element.getText().split(",");
                     if(positionCoordinates.length > 1){
-                        double localPointX = Double.parseDouble(xmlTemplateManager.parseValue(positionCoordinates[0]));
-                        double localPointY = Double.parseDouble(xmlTemplateManager.parseValue(positionCoordinates[1]));
+                        double localPointX = Double.parseDouble(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[0]));
+                        double localPointY = Double.parseDouble(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[1]));
                         localPoint = new Vector2D(localPointX, localPointY);
                     }
                     shape = new PointShape(localPoint);
@@ -204,7 +204,7 @@ public class MessagesSerializer{
             public SpawnTemplateComponent construct(){
                 String[] templates = element.getText().split("\\|");
                 for(int i=0;i<templates.length;i++){
-                    templates[i] = xmlTemplateManager.parseTemplate(templates[i]);
+                    templates[i] = xmlTemplateManager.parseTemplate(entityWorld, templates[i]);
                 }
                 return new SpawnTemplateComponent(templates);
             }

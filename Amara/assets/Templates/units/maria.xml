@@ -65,6 +65,9 @@
         <autoAttack>
             <entity template="spells/melee_autoattack(Sounds/sounds/spells/maria_autoattack_cast.ogg)"/>
         </autoAttack>
+        <passives>
+            <entity template="spells/maria_passive/passive"/>
+        </passives>
         <learnableSpells>
             <entity template="spells/maria_slash/base"/>
             <entity template="spells/maria_block/base"/>

@@ -145,7 +145,7 @@ public class ComponentsRegistrator_Generate{
                                 }
                                 else if(parameterType.equals("String")){
                                     String parseMethodName = (parameterName.endsWith("Template")?"parseTemplate":"parseValue");
-                                    code += "                String " + parameterName + " = xmlTemplateManager." + parseMethodName + "(" + textAccessCode + ");\n";
+                                    code += "                String " + parameterName + " = xmlTemplateManager." + parseMethodName + "(entityWorld, " + textAccessCode + ");\n";
                                     wasHandled = true;
                                 }
                                 else if(parameterType.equals("String...") || parameterType.equals("String[]")){
@@ -155,15 +155,15 @@ public class ComponentsRegistrator_Generate{
                                     code += "                if(" + parameterName + "Text != null){\n";
                                     code += "                    " + parameterName + " = " + parameterName + "Text.split(\"" + LIST_SEPERATOR + "\");\n";
                                     code += "                    for(int i=0;i<" + parameterName + ".length;i++){\n";
-                                    code += "                        " + parameterName + "[i] = xmlTemplateManager." + parseMethodName + "(" + parameterName + "[i]);\n";
+                                    code += "                        " + parameterName + "[i] = xmlTemplateManager." + parseMethodName + "(entityWorld, " + parameterName + "[i]);\n";
                                     code += "                    }\n";
                                     code += "                }\n";
                                     wasHandled = true;
                                 }
                                 else if(parameterType.equals("Vector2f")){
                                     code += "                String[] " + parameterName + "Coordinates = " + textAccessCode + ".split(\"" + LIST_SEPERATOR + "\");\n";
-                                    code += "                float " + parameterName + "X = Float.parseFloat(xmlTemplateManager.parseValue(" + parameterName + "Coordinates[0]));\n";
-                                    code += "                float " + parameterName + "Y = Float.parseFloat(xmlTemplateManager.parseValue(" + parameterName + "Coordinates[1]));\n";
+                                    code += "                float " + parameterName + "X = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, " + parameterName + "Coordinates[0]));\n";
+                                    code += "                float " + parameterName + "Y = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, " + parameterName + "Coordinates[1]));\n";
                                     code += "                Vector2f " + parameterName + " = new Vector2f(" + parameterName + "X, " + parameterName + "Y);\n";
                                     wasHandled = true;
                                 }
@@ -181,7 +181,7 @@ public class ComponentsRegistrator_Generate{
                                             code += "                " + nativeDataTypes[r] + " " + parameterName + " = " + nativeDataTypes_Defaults[r] + ";\n";
                                             code += "                String " + parameterName + "Text = " + textAccessCode + ";\n";
                                             code += "                if((" + parameterName + "Text != null) && (" + parameterName + "Text.length() > 0)){\n";
-                                            code += "                    " + parameterName + " = " + parseMethodName + "(xmlTemplateManager.parseValue(" + parameterName + "Text));\n";
+                                            code += "                    " + parameterName + " = " + parseMethodName + "(xmlTemplateManager.parseValue(entityWorld, " + parameterName + "Text));\n";
                                             code += "                }\n";
                                             wasHandled = true;
                                             break;
@@ -190,7 +190,7 @@ public class ComponentsRegistrator_Generate{
                                             code += "                String[] " + parameterName + "Parts = " + textAccessCode + ".split(\"" + LIST_SEPERATOR + "\");\n";
                                             code += "                " + nativeDataTypes[r] + "[] " + parameterName + " = new " + nativeDataTypes[r] + "[" + parameterName + "Parts.length];\n";
                                             code += "                for(int i=0;i<" + parameterName + ".length;i++){\n";
-                                            code += "                    " + parameterName + "[i] = " + parseMethodName + "(xmlTemplateManager.parseValue(" + textAccessCode + "));\n";
+                                            code += "                    " + parameterName + "[i] = " + parseMethodName + "(xmlTemplateManager.parseValue(entityWorld, " + textAccessCode + "));\n";
                                             code += "                }\n";
                                             wasHandled = true;
                                             break;
