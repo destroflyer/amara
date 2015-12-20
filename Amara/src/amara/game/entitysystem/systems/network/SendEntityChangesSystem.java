@@ -11,6 +11,7 @@ import amara.Util;
 import amara.engine.network.*;
 import amara.engine.network.messages.entitysystem.Message_EntityChanges;
 import amara.game.entitysystem.*;
+import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.synchronizing.*;
 
 /**
@@ -25,11 +26,21 @@ public class SendEntityChangesSystem implements EntitySystem{
     }
     private NetworkServer networkServer;
     private ClientComponentBlacklist clientComponentBlacklist;
+    public static ComponentEqualityDefinition COMPONENT_EQUALITY_DEFINTION = new DefaultComponentEqualityDefinition(){
+
+        @Override
+        public boolean areComponentsEqual(Object oldComponent, Object newComponent){
+            if(newComponent instanceof RestartClientAnimationComponent){
+                return false;
+            }
+            return super.areComponentsEqual(oldComponent, newComponent);
+        }
+    };
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         LinkedList<EntityChange> changes = new LinkedList<EntityChange>();
-        ComponentMapObserver componentsObserver = entityWorld.requestObserver(this);
+        ComponentMapObserver componentsObserver = entityWorld.requestObserver(this, COMPONENT_EQUALITY_DEFINTION);
         for(int entity : componentsObserver.getNew().getEntitiesWithAll()){
             for(Object component : componentsObserver.getNew().getComponents(entity)){
                 if(!clientComponentBlacklist.contains(ClientComponentBlacklist.ChangeType.NEW, component.getClass())){

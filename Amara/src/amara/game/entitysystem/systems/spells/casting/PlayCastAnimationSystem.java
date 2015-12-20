@@ -24,6 +24,7 @@ public class PlayCastAnimationSystem implements EntitySystem{
             if(castAnimationComponent != null){
                 entityWorld.setComponent(castAnimationComponent.getAnimationEntity(), new RemainingLoopsComponent(1));
                 entityWorld.setComponent(castAnimationComponent.getAnimationEntity(), new PassedLoopTimeComponent(0));
+                entityWorld.setComponent(castAnimationComponent.getAnimationEntity(), new RestartClientAnimationComponent());
                 entityWorld.setComponent(casterEntity, new AnimationComponent(castAnimationComponent.getAnimationEntity()));
             }
         }

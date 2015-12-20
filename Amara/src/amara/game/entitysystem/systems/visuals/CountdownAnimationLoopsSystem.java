@@ -18,12 +18,10 @@ public class CountdownAnimationLoopsSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, AnimationComponent.class);
         for(int entity : observer.getNew().getEntitiesWithAll(AnimationComponent.class)){
-            int animationEntity = observer.getNew().getComponent(entity, AnimationComponent.class).getAnimationEntity();
-            entityWorld.removeComponent(animationEntity, PassedLoopTimeComponent.class);
+            prepareAnimation(entityWorld, entity);
         }
         for(int entity : observer.getChanged().getEntitiesWithAll(AnimationComponent.class)){
-            int animationEntity = observer.getChanged().getComponent(entity, AnimationComponent.class).getAnimationEntity();
-            entityWorld.removeComponent(animationEntity, PassedLoopTimeComponent.class);
+            prepareAnimation(entityWorld, entity);
         }
         for(int entity : entityWorld.getEntitiesWithAll(AnimationComponent.class)){
             int animationEntity = entityWorld.getComponent(entity, AnimationComponent.class).getAnimationEntity();
@@ -49,5 +47,10 @@ public class CountdownAnimationLoopsSystem implements EntitySystem{
                 }
             }
         }
+    }
+    
+    private void prepareAnimation(EntityWorld entityWorld, int entity){
+        int animationEntity = entityWorld.getComponent(entity, AnimationComponent.class).getAnimationEntity();
+        entityWorld.removeComponent(animationEntity, PassedLoopTimeComponent.class);
     }
 }

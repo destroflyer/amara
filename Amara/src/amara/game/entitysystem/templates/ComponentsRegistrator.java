@@ -4098,6 +4098,14 @@ public class ComponentsRegistrator{
                 return new amara.game.entitysystem.components.visuals.animations.RemainingLoopsComponent(loopsCount);
             }
         });
+        bitstreamClassManager.register(amara.game.entitysystem.components.visuals.animations.RestartClientAnimationComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.visuals.animations.RestartClientAnimationComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.visuals.animations.RestartClientAnimationComponent>("restartClientAnimation"){
+
+            @Override
+            public amara.game.entitysystem.components.visuals.animations.RestartClientAnimationComponent construct(){
+                return new amara.game.entitysystem.components.visuals.animations.RestartClientAnimationComponent();
+            }
+        });
         bitstreamClassManager.register(amara.game.entitysystem.components.visuals.ModelComponent.class);
         xmlTemplateManager.registerComponent(amara.game.entitysystem.components.visuals.ModelComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.visuals.ModelComponent>("model"){
 

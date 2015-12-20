@@ -14,6 +14,7 @@ import amara.game.entitysystem.components.game.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
+import amara.game.entitysystem.systems.network.SendEntityChangesSystem;
 import amara.game.games.Game;
 
 /**
@@ -33,7 +34,7 @@ public class AnimationSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.requestObserver(this, AnimationComponent.class, ModelComponent.class, NameComponent.class, LoopDurationComponent.class, GameSpeedComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, SendEntityChangesSystem.COMPONENT_EQUALITY_DEFINTION, AnimationComponent.class, ModelComponent.class, NameComponent.class, LoopDurationComponent.class, RestartClientAnimationComponent.class, GameSpeedComponent.class);
         //Animation
         for(int entity : observer.getNew().getEntitiesWithAll(AnimationComponent.class)){
             addAnimation(entityWorld, entity);
@@ -64,6 +65,10 @@ public class AnimationSystem implements EntitySystem{
         }
         for(int animationEntity : observer.getChanged().getEntitiesWithAll(LoopDurationComponent.class)){
             updateAnimation(entityWorld, animationEntity, false, true);
+        }
+        //AssignedAnimation
+        for(int animationEntity : observer.getChanged().getEntitiesWithAll(RestartClientAnimationComponent.class)){
+            updateAnimation(entityWorld, animationEntity, true, true);
         }
         //GameSpeed
         GameSpeedComponent gameSpeedComponent = observer.getChanged().getComponent(Game.ENTITY, GameSpeedComponent.class);
