@@ -18,6 +18,7 @@ public class DisplaySpellsImagesSystem extends GUIDisplaySystem{
     public DisplaySpellsImagesSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
     }
+    public static final String DIRECTORY = "Interface/hud/spells/";
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
@@ -35,7 +36,7 @@ public class DisplaySpellsImagesSystem extends GUIDisplaySystem{
                     imagePath = getSpellImagePath(entityWorld, spells[i]);
                 }
                 else{
-                    imagePath = "Interface/hud/spells/none.png";
+                    imagePath = (DIRECTORY + "none.png");
                 }
                 screenController_HUD.setSpellImage(i, imagePath);
                 
@@ -43,15 +44,15 @@ public class DisplaySpellsImagesSystem extends GUIDisplaySystem{
         }
     }
     
-    public static String getSpellImagePath(EntityWorld entityWorld, int spellEntity){
-        String visualisationName;
-        SpellVisualisationComponent spellVisualisationComponent = entityWorld.getComponent(spellEntity, SpellVisualisationComponent.class);
+    public static String getSpellImagePath(EntityWorld entityWorld, int entity){
+        String fileName;
+        SpellVisualisationComponent spellVisualisationComponent = entityWorld.getComponent(entity, SpellVisualisationComponent.class);
         if(spellVisualisationComponent != null){
-            visualisationName = spellVisualisationComponent.getName();
+            fileName = (spellVisualisationComponent.getName() + ".png");
         }
         else{
-            visualisationName = "unknown";
+            fileName = "unknown.png";
         }
-        return ("Interface/hud/spells/" + visualisationName + ".png");
+        return (DIRECTORY + fileName);
     }
 }

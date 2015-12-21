@@ -6,6 +6,7 @@ package amara.engine.applications.ingame.client.gui;
 
 import amara.Util;
 import amara.engine.applications.ingame.client.appstates.SendPlayerCommandsAppState;
+import amara.engine.applications.ingame.client.gui.objects.SpellInformation;
 import amara.engine.appstates.NiftyAppState;
 import amara.engine.gui.GameScreenController;
 import de.lessvoid.nifty.builder.PanelBuilder;
@@ -27,6 +28,12 @@ public class ScreenController_HUD extends GameScreenController{
         super("start");
     }
     private int currentUpgradeSpellIndex = -1;
+    private SpellInformation[] spellInformations_Passives = new SpellInformation[0];
+    private SpellInformation[] spellInformations_Spells = new SpellInformation[0];
+    //Show/Hide the information by saving the actions and checking them in an update loop
+    //(Since NiftyGUI sometimes seems to be ordering start/end effect methods wrong)
+    private SpellInformation action_ShowSpellInformation;
+    private boolean action_HideSpellInformation;
     
     @Override
     public void onStartup(){
@@ -91,6 +98,10 @@ public class ScreenController_HUD extends GameScreenController{
     
     private void setAttributeValue(String attributeName, String text){
         getTextRenderer("attribute_value_" + attributeName).setText(text);
+    }
+    
+    public void setPassiveImage(String imagePath){
+        getImageRenderer("passive_image").setImage(createImage(imagePath));
     }
     
     public void setSpellImage(int index, String imagePath){
@@ -190,6 +201,55 @@ public class ScreenController_HUD extends GameScreenController{
     public void toggleShopVisible(){
         NiftyAppState niftyAppState = mainApplication.getStateManager().getState(NiftyAppState.class);
         niftyAppState.getScreenController(ScreenController_Shop.class).toggleShopVisible();
+    }
+
+    public void setSpellInformations_Passives(SpellInformation[] spellInformations_Passives){
+        this.spellInformations_Passives = spellInformations_Passives;
+    }
+
+    public void setSpellInformations_Spells(SpellInformation[] spellInformations_Spells){
+        this.spellInformations_Spells = spellInformations_Spells;
+    }
+    
+    public void showSpellInformation_Passive(String indexText){
+        int index = Integer.parseInt(indexText);
+        if(index < spellInformations_Passives.length){
+            action_ShowSpellInformation = spellInformations_Passives[index];
+        }
+    }
+    
+    public void showSpellInformation_Spell(String indexText){
+        int index = Integer.parseInt(indexText);
+        if(index < spellInformations_Spells.length){
+            action_ShowSpellInformation = spellInformations_Spells[index];
+        }
+    }
+    
+    public void hideSpellInformation(){
+        action_HideSpellInformation = true;
+    }
+    
+    public void checkAction_SpellInformation(){
+        if(action_ShowSpellInformation != null){
+            showSpellInformation(action_ShowSpellInformation);
+            action_ShowSpellInformation = null;
+            action_HideSpellInformation = false;
+        }
+        else if(action_HideSpellInformation){
+            getElementByID("spell_information_layer").setVisible(false);
+            action_HideSpellInformation = false;
+        }
+    }
+    
+    private void showSpellInformation(SpellInformation spellInformation){
+        getElementByID("spell_information_layer").setVisible(true);
+        getTextRenderer("spell_information_name").setText(spellInformation.getName());
+        getTextRenderer("spell_information_description").setText(spellInformation.getDescription());
+        boolean hasCooldown = (spellInformation.getCooldown() != -1);
+        getElementByID("spell_information_cooldown").setVisible(hasCooldown);
+        if(hasCooldown){
+            getTextRenderer("spell_information_cooldown").setText(GUIUtil.getValueText(spellInformation.getCooldown()) + "s");
+        }
     }
     
     public void setUpgradeSpellsLayerVisible(boolean isVisible){

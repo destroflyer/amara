@@ -4,7 +4,7 @@
  */
 package amara.engine.applications.ingame.client.gui.objects;
 
-import amara.Util;
+import amara.engine.applications.ingame.client.gui.GUIUtil;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.general.*;
@@ -56,67 +56,67 @@ public class ItemRecipe{
         BonusFlatWalkSpeedComponent bonusFlatWalkSpeedComponent = entityWorld.getComponent(entity, BonusFlatWalkSpeedComponent.class);
         if(bonusFlatWalkSpeedComponent != null){
             addDescription_Seperator();
-            description += getValueText_Signed(bonusFlatWalkSpeedComponent.getValue()) + " Walk Speed";
+            description += GUIUtil.getValueText_Signed(bonusFlatWalkSpeedComponent.getValue()) + " Walk Speed";
         }
         BonusPercentageWalkSpeedComponent bonusPercentageWalkSpeedComponent = entityWorld.getComponent(entity, BonusPercentageWalkSpeedComponent.class);
         if(bonusPercentageWalkSpeedComponent != null){
             addDescription_Seperator();
-            description += getValueText_Signed(bonusPercentageWalkSpeedComponent.getValue() * 100) + "% Walk Speed";
+            description += GUIUtil.getValueText_Signed(bonusPercentageWalkSpeedComponent.getValue() * 100) + "% Walk Speed";
         }
         BonusFlatMaximumHealthComponent bonusFlatMaximumHealthComponent = entityWorld.getComponent(entity, BonusFlatMaximumHealthComponent.class);
         if(bonusFlatMaximumHealthComponent != null){
             addDescription_Seperator();
-            description += getValueText_Signed(bonusFlatMaximumHealthComponent.getValue()) + " Health";
+            description += GUIUtil.getValueText_Signed(bonusFlatMaximumHealthComponent.getValue()) + " Health";
         }
         BonusFlatHealthRegenerationComponent bonusFlatHealthRegenerationComponent = entityWorld.getComponent(entity, BonusFlatHealthRegenerationComponent.class);
         if(bonusFlatHealthRegenerationComponent != null){
             addDescription_Seperator();
-            description += getValueText_Signed(bonusFlatHealthRegenerationComponent.getValue()) + " Health Regeneration (per Second)";
+            description += GUIUtil.getValueText_Signed(bonusFlatHealthRegenerationComponent.getValue()) + " Health Regeneration (per Second)";
         }
         BonusFlatAttackDamageComponent bonusFlatAttackDamageComponent = entityWorld.getComponent(entity, BonusFlatAttackDamageComponent.class);
         if(bonusFlatAttackDamageComponent != null){
             addDescription_Seperator();
-            description += getValueText_Signed(bonusFlatAttackDamageComponent.getValue()) + " Attack Damage";
+            description += GUIUtil.getValueText_Signed(bonusFlatAttackDamageComponent.getValue()) + " Attack Damage";
         }
         BonusPercentageAttackSpeedComponent bonusPercentageAttackSpeedComponent = entityWorld.getComponent(entity, BonusPercentageAttackSpeedComponent.class);
         if(bonusPercentageAttackSpeedComponent != null){
             addDescription_Seperator();
-            description += getValueText_Signed(bonusPercentageAttackSpeedComponent.getValue() * 100) + "% Attack Speed";
+            description += GUIUtil.getValueText_Signed(bonusPercentageAttackSpeedComponent.getValue() * 100) + "% Attack Speed";
         }
         BonusPercentageCriticalChanceComponent bonusPercentageCriticalChanceComponent = entityWorld.getComponent(entity, BonusPercentageCriticalChanceComponent.class);
         if(bonusPercentageCriticalChanceComponent != null){
             addDescription_Seperator();
-            description += getValueText_Signed(bonusPercentageCriticalChanceComponent.getValue() * 100) + "% Critical Chance";
+            description += GUIUtil.getValueText_Signed(bonusPercentageCriticalChanceComponent.getValue() * 100) + "% Critical Chance";
         }
         BonusPercentageLifestealComponent bonusPercentageLifestealComponent = entityWorld.getComponent(entity, BonusPercentageLifestealComponent.class);
         if(bonusPercentageLifestealComponent != null){
             addDescription_Seperator();
-            description += getValueText_Signed(bonusPercentageLifestealComponent.getValue() * 100) + "% Lifesteal";
+            description += GUIUtil.getValueText_Signed(bonusPercentageLifestealComponent.getValue() * 100) + "% Lifesteal";
         }
         BonusFlatAbilityPowerComponent bonusFlatAbilityPowerComponent = entityWorld.getComponent(entity, BonusFlatAbilityPowerComponent.class);
         if(bonusFlatAbilityPowerComponent != null){
             addDescription_Seperator();
-            description += getValueText_Signed(bonusFlatAbilityPowerComponent.getValue()) + " Ability Power";
+            description += GUIUtil.getValueText_Signed(bonusFlatAbilityPowerComponent.getValue()) + " Ability Power";
         }
         BonusPercentageCooldownSpeedComponent bonusPercentageCooldownSpeedComponent = entityWorld.getComponent(entity, BonusPercentageCooldownSpeedComponent.class);
         if(bonusPercentageCooldownSpeedComponent != null){
             addDescription_Seperator();
-            description += getValueText_Signed(bonusPercentageCooldownSpeedComponent.getValue()) + " Cooldown Speed";
+            description += GUIUtil.getValueText_Signed(bonusPercentageCooldownSpeedComponent.getValue()) + " Cooldown Speed";
         }
         BonusFlatArmorComponent bonusFlatArmorComponent = entityWorld.getComponent(entity, BonusFlatArmorComponent.class);
         if(bonusFlatArmorComponent != null){
             addDescription_Seperator();
-            description += getValueText_Signed(bonusFlatArmorComponent.getValue()) + " Armor";
+            description += GUIUtil.getValueText_Signed(bonusFlatArmorComponent.getValue()) + " Armor";
         }
         BonusFlatMagicResistanceComponent bonusFlatMagicResistanceComponent = entityWorld.getComponent(entity, BonusFlatMagicResistanceComponent.class);
         if(bonusFlatMagicResistanceComponent != null){
             addDescription_Seperator();
-            description += getValueText_Signed(bonusFlatMagicResistanceComponent.getValue()) + " Magic Resistance";
+            description += GUIUtil.getValueText_Signed(bonusFlatMagicResistanceComponent.getValue()) + " Magic Resistance";
         }
         BonusPercentageDamageReductionComponent bonusPercentageDamageReductionComponent = entityWorld.getComponent(entity, BonusPercentageDamageReductionComponent.class);
         if(bonusPercentageDamageReductionComponent != null){
             addDescription_Seperator();
-            description += getValueText_Signed(bonusPercentageDamageReductionComponent.getValue() * 100) + "% Damage Reduction";
+            description += GUIUtil.getValueText_Signed(bonusPercentageDamageReductionComponent.getValue() * 100) + "% Damage Reduction";
         }
         ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(entity, ItemPassivesComponent.class);
         if(itemPassivesComponent != null){
@@ -136,7 +136,7 @@ public class ItemRecipe{
                 description += "Active: " + descriptionComponent.getDescription();
                 BaseCooldownComponent baseCooldownComponent = entityWorld.getComponent(itemActiveComponent.getSpellEntity(), BaseCooldownComponent.class);
                 if(baseCooldownComponent != null){
-                    description += " (" + getValueText(baseCooldownComponent.getDuration()) + " seconds cooldown)";
+                    description += " (" + GUIUtil.getValueText(baseCooldownComponent.getDuration()) + " seconds cooldown)";
                 }
             }
         }
@@ -151,25 +151,6 @@ public class ItemRecipe{
     private void addDescription_NewLine(){
         if(description.length() > 0){
             description += "\n";
-        }
-    }
-    
-    private String getValueText_Signed(float value){
-        value = Util.compensateFloatRoundingErrors(value);
-        String signText = "";
-        if(value >= 0){
-            signText += "+";
-        }
-        return (signText + getValueText(value));
-    }
-    
-    private String getValueText(float value){
-        int valueInt = (int) value;
-        if(value == valueInt){
-            return ("" + valueInt);
-        }
-        else{
-            return ("" + value);
         }
     }
 

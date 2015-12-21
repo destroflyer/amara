@@ -184,32 +184,52 @@
                             <panel width="113px"/>
                             <panel childLayout="vertical" width="46px">
                                 <panel height="5px"/>
-                                <image id="passive_image" filename="Interface/hud/spells/none.png" width="100%" height="100%w"></image>
+                                <image id="passive_image" filename="Interface/hud/spells/none.png" width="100%" height="100%w">
+                                    <effect>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Passive(0)" onEndEffect="hideSpellInformation()"/>
+                                    </effect>
+                                </image>
                             </panel>
                             <panel width="11px"/>
                             <panel childLayout="center" width="58px" height="100%w">
-                                <image id="spell_0_image" filename="Interface/hud/spells/none.png" width="100%" height="100%"></image>
+                                <image id="spell_0_image" filename="Interface/hud/spells/none.png" width="100%" height="100%">
+                                    <effect>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(0)" onEndEffect="hideSpellInformation()"/>
+                                    </effect>
+                                </image>
                                 <panel id="spell_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
                                     <text id="spell_0_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
                             </panel>
                             <panel width="2px"/>
                             <panel childLayout="center" width="58px" height="100%w">
-                                <image id="spell_1_image" filename="Interface/hud/spells/none.png" width="100%" height="100%"></image>
+                                <image id="spell_1_image" filename="Interface/hud/spells/none.png" width="100%" height="100%">
+                                    <effect>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(1)" onEndEffect="hideSpellInformation()"/>
+                                    </effect>
+                                </image>
                                 <panel id="spell_1_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
                                     <text id="spell_1_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
                             </panel>
                             <panel width="2px"/>
                             <panel childLayout="center" width="58px" height="100%w">
-                                <image id="spell_2_image" filename="Interface/hud/spells/none.png" width="100%" height="100%"></image>
+                                <image id="spell_2_image" filename="Interface/hud/spells/none.png" width="100%" height="100%">
+                                    <effect>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(2)" onEndEffect="hideSpellInformation()"/>
+                                    </effect>
+                                </image>
                                 <panel id="spell_2_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
                                     <text id="spell_2_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
                             </panel>
                             <panel width="2px"/>
                             <panel childLayout="center" width="58px" height="100%w">
-                                <image id="spell_3_image" filename="Interface/hud/spells/none.png" width="100%" height="100%"></image>
+                                <image id="spell_3_image" filename="Interface/hud/spells/none.png" width="100%" height="100%">
+                                    <effect>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(3)" onEndEffect="hideSpellInformation()"/>
+                                    </effect>
+                                </image>
                                 <panel id="spell_3_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
                                     <text id="spell_3_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
@@ -234,6 +254,32 @@
                     </panel>
                     <panel width="*"/>
                 </panel>
+            </panel>
+        </layer>
+        <layer id="spell_information_layer" childLayout="center" visible="false">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="150px">
+                    <panel width="*"/>
+                    <panel childLayout="horizontal" width="376px" backgroundColor="#000D">
+                        <panel width="8px"/>
+                        <panel childLayout="vertical">
+                            <panel height="8px"/>
+                            <panel childLayout="horizontal" height="20px">
+                                <text id="spell_information_name" text="?" font="Interface/fonts/Verdana_18.fnt" textHAlign="left"/>
+                                <panel width="*"/>
+                                <text id="spell_information_cooldown" text="?" font="Interface/fonts/Verdana_18.fnt" textHAlign="right"/>
+                            </panel>
+                            <panel height="8px"/>
+                            <text id="spell_information_description" text="???" font="Interface/fonts/Verdana_14.fnt" textHAlign="left" textVAlign="top" wrap="true" width="100%"/>
+                            <panel height="*"/>
+                            <panel height="8px"/>
+                        </panel>
+                        <panel width="8px"/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+                <panel height="150px"/>
             </panel>
         </layer>
         <layer childLayout="center">
