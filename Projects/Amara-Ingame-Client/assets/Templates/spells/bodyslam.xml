@@ -1,0 +1,48 @@
+<template>
+    <entity id="spell">
+        <name>Bodyslam</name>
+        <instantEffectTriggers>
+            <!--spawn object-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./bodyslam_object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>1.1</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castDuration>2</castDuration>
+        <stopBeforeCasting/>
+        <castAnimation>
+            <entity>
+                <name>bodyslam</name>
+                <loopDuration>2</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>5</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>160</physicalDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

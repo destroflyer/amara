@@ -1,0 +1,43 @@
+<template>
+    <entity id="object">
+        <hitbox>
+            <circle radius="7"/>
+        </hitbox>
+        <collisionGroup group="spells" collidesWith="units"/>
+        <hitboxActive/>
+        <intersectionRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </intersectionRules>
+        <lifetime>0.2</lifetime>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <collisionTrigger/>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerSpellEffects>[parameter0]</triggerSpellEffects>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/unstoppable_force_hit.ogg</audio>
+                        <audioVolume>1.5</audioVolume>
+                    </entity>
+                </playAudio>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+    </entity>
+    <!--remove object-->
+    <entity>
+        <collisionTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+    </entity>
+</template>

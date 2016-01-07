@@ -1,0 +1,11 @@
+<template>
+    <entity>
+        <itemID>egos_shield</itemID>
+        <name>Ego's Shield</name>
+        <itemRecipe gold="400"/>
+        <isSellable>250</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumHealth>80</bonusFlatMaximumHealth>
+        <bonusFlatArmor>10</bonusFlatArmor>
+    </entity>
+</template>

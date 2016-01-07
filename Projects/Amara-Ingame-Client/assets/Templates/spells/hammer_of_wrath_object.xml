@@ -1,0 +1,58 @@
+<template>
+    <entity id="object">
+        <model>Models/mjolnir/skin.xml</model>
+        <animation>
+            <entity>
+                <name>fall</name>
+                <loopDuration>1</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </animation>
+        <scale>5</scale>
+        <hitbox>
+            <rectangle width="1.2" height="2"/>
+        </hitbox>
+        <collisionGroup group="spells" collidesWith="units"/>
+        <intersectionRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </intersectionRules>
+        <lifetime>1.2</lifetime>
+    </entity>
+    <!--activate hitbox-->
+    <entity>
+        <instantTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <activateHitbox/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+        <triggerDelay>0.9</triggerDelay>
+        <triggerOnce/>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <collisionTrigger/>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+    </entity>
+    <!--remove object-->
+    <entity>
+        <collisionTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+    </entity>
+</template>

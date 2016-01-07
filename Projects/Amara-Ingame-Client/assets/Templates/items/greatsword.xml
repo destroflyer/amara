@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>greatsword</itemID>
+        <name>Greatsword</name>
+        <itemRecipe gold="1100"/>
+        <isSellable>800</isSellable>
+        <!--stats-->
+        <bonusFlatAttackDamage>40</bonusFlatAttackDamage>
+    </entity>
+</template>

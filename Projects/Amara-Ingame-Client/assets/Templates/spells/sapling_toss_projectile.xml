@@ -1,0 +1,80 @@
+<template>
+    <entity id="projectile">
+        <!--model-->
+        <model>Models/varus/skin_default.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>idle</name>
+                <loopDuration>3</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <scale>0.6</scale>
+        <collisionGroup group="spells" collidesWith="map|units"/>
+        <intersectionRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </intersectionRules>
+        <removeOnMapLeave/>
+        <!--stats-->
+        <isAlive/>
+        <walkSpeed>5.5</walkSpeed>
+        <isProjectile/>
+        <sightRange>9</sightRange>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/empty_autoattack"/>
+        </autoAttack>
+        <autoAggro>12</autoAggro>
+        <lifetime>30</lifetime>
+    </entity>
+    <!--activate hitbox-->
+    <entity>
+        <targetReachedTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <activateHitbox/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <collisionTrigger/>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/sapling_toss_hit.ogg</audio>
+                        <audioVolume>1.25</audioVolume>
+                    </entity>
+                </playAudio>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--remove projectile-->
+    <entity>
+        <collisionTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+</template>

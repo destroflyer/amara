@@ -1,0 +1,98 @@
+<template>
+    <entity id="spell">
+        <name>Dragon's Rage</name>
+        <spellVisualisation>dragons_rage</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/dragons_rage_cast.ogg</audio>
+                                <audioVolume>1.5</audioVolume>
+                            </entity>
+                            <entity>
+                                <audio>Sounds/sounds/spells/dragons_rage_hit_knockback.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castCancelAction/>
+        <castTurnToTarget/>
+        <range>6</range>
+        <baseCooldown>90</baseCooldown>
+        <spellTargetRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </spellTargetRules>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--knockback target-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>200 + (2 * source.attackDamage)</physicalDamage>
+                        <move>
+                            <entity>
+                                <displacement/>
+                                <sourceMovementDirection/>
+                                <movementSpeed>13</movementSpeed>
+                                <distanceLimit>13</distanceLimit>
+                            </entity>
+                        </move>
+                        <addEffectTriggers>
+                            <!--knockup targets-->
+                            <entity id="knockupTrigger">
+                                <collisionTrigger/>
+                                <targetTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <physicalDamage>200 + (2 * source.attackDamage)</physicalDamage>
+                                        <addKnockup>
+                                            <entity>
+                                                <knockupDuration>1</knockupDuration>
+                                                <knockupHeight>5</knockupHeight>
+                                            </entity>
+                                        </addKnockup>
+                                        <playAudio>
+                                            <entity>
+                                                <audio>Sounds/sounds/spells/dragons_rage_hit_knockup.ogg</audio>
+                                                <audioVolume>0.75</audioVolume>
+                                            </entity>
+                                        </playAudio>
+                                    </entity>
+                                </triggeredEffect>
+                            </entity>
+                            <!--remove collision trigger-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <removeEffectTriggers>#knockupTrigger</removeEffectTriggers>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

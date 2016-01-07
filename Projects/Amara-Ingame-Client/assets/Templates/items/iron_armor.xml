@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>iron_armor</itemID>
+        <name>Iron Armor</name>
+        <itemRecipe gold="300" itemIDs="cotton_armor"/>
+        <isSellable>400</isSellable>
+        <!--stats-->
+        <bonusFlatArmor>25</bonusFlatArmor>
+    </entity>
+</template>

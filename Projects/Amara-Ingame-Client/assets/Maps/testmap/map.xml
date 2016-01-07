@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map author="Carl" date="1402054147616" class="amara.game.maps.Map_Testmap">
+	<camera initialPosition="30.6,34.0,-7.7" initialDirection="0.0,-1.3,1.0" />
+	<lights>
+		<ambient color="1.5,1.5,1.5" />
+		<directional color="1,1,1" direction="-0.5,-1.75,1.0">
+			<shadows intensity="0.4" />
+		</directional>
+	</lights>	<terrain>		<textures>			<texture scale="10">Textures/terrain/cartoon_forest/grass_1.jpg</texture>			<texture scale="16">Textures/terrain/cartoon_forest/stone_bright_1.jpg</texture>			<texture scale="16">Textures/terrain/cartoon_forest/wood_1.jpg</texture>			<texture scale="1">Textures/terrain/blank.png</texture>			<texture scale="24">Textures/terrain/cartoon_forest/cliff.jpg</texture>			<texture scale="24">Textures/terrain/cartoon_forest/sandstone.jpg</texture>			<texture scale="24">Textures/terrain/cartoon_forest/pebbles_1.jpg</texture>			<texture scale="1">Textures/terrain/blank.png</texture>			<texture scale="18">Textures/terrain/cartoon_forest/cracked_cliff.jpg</texture>			<texture scale="16">Textures/terrain/cartoon_forest/bush.jpg</texture>			<texture scale="16">Textures/terrain/cartoon_forest/dirt.jpg</texture>			<texture scale="1">Textures/terrain/blank.png</texture>		</textures>	</terrain>
+	<physics width="100" height="100" heightmapScale="0.0225">
+		<obstacles>
+			<simpleConvex>
+				<base>
+					<point>-2.5,4.0</point>
+					<point>-2.5,-4.0</point>
+					<point>2.5,-4.0</point>
+					<point>2.5,4.0</point>
+				</base>
+				<transform x="10.0" y="7.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<circle radius="3.0">
+				<transform x="30.0" y="25.0" direction="0.0" scale="1.0" />
+			</circle>
+			<simpleConvex>
+				<base>
+					<point>60.774024963378906,34.482818603515625</point>
+					<point>59.46154022216797,36.468387603759766</point>
+					<point>56.73698043823242,35.84795379638672</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>65.26435852050781,31.34218978881836</point>
+					<point>66.2842788696289,25.975948333740234</point>
+					<point>68.8226089477539,27.410945892333984</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>65.26435852050781,31.34218978881836</point>
+					<point>68.8226089477539,27.410945892333984</point>
+					<point>70.47418212890625,29.67088508605957</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>56.73698043823242,35.84795379638672</point>
+					<point>52.43540954589844,36.52516555786133</point>
+					<point>52.251502990722656,33.217411041259766</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>53.169342041015625,32.26675796508789</point>
+					<point>51.82612609863281,30.684633255004883</point>
+					<point>54.73203659057617,26.554624557495117</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>64.8342514038086,0.2525477707386017</point>
+					<point>64.93477630615234,10.447942733764648</point>
+					<point>56.81547546386719,5.572394847869873</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>56.81547546386719,5.572394847869873</point>
+					<point>56.83045959472656,0.18297675251960754</point>
+					<point>64.8342514038086,0.2525477707386017</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>56.73698043823242,35.84795379638672</point>
+					<point>52.251502990722656,33.217411041259766</point>
+					<point>53.169342041015625,32.26675796508789</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>53.169342041015625,32.26675796508789</point>
+					<point>60.774024963378906,34.482818603515625</point>
+					<point>56.73698043823242,35.84795379638672</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>60.774024963378906,34.482818603515625</point>
+					<point>53.169342041015625,32.26675796508789</point>
+					<point>54.73203659057617,26.554624557495117</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>54.73203659057617,26.554624557495117</point>
+					<point>65.26435852050781,31.34218978881836</point>
+					<point>60.774024963378906,34.482818603515625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>54.73203659057617,26.554624557495117</point>
+					<point>57.07277297973633,14.869847297668457</point>
+					<point>66.2842788696289,25.975948333740234</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>66.2842788696289,25.975948333740234</point>
+					<point>65.26435852050781,31.34218978881836</point>
+					<point>54.73203659057617,26.554624557495117</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>66.2345962524414,16.519779205322266</point>
+					<point>66.2842788696289,25.975948333740234</point>
+					<point>57.07277297973633,14.869847297668457</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>56.23190689086914,8.49465560913086</point>
+					<point>56.81547546386719,5.572394847869873</point>
+					<point>64.93477630615234,10.447942733764648</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>71.80131530761719,31.48332977294922</point>
+					<point>65.26435852050781,31.34218978881836</point>
+					<point>70.47418212890625,29.67088508605957</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>74.76829528808594,29.513111114501953</point>
+					<point>75.03375244140625,30.663715362548828</point>
+					<point>71.80131530761719,31.48332977294922</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>71.80131530761719,31.48332977294922</point>
+					<point>70.47418212890625,29.67088508605957</point>
+					<point>74.76829528808594,29.513111114501953</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>56.29880905151367,11.908650398254395</point>
+					<point>56.23190689086914,8.49465560913086</point>
+					<point>64.93477630615234,10.447942733764648</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>57.07277297973633,14.869847297668457</point>
+					<point>56.29880905151367,11.908650398254395</point>
+					<point>64.93477630615234,10.447942733764648</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>64.93477630615234,10.447942733764648</point>
+					<point>66.2345962524414,16.519779205322266</point>
+					<point>57.07277297973633,14.869847297668457</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>40.2479362487793,48.40644073486328</point>
+					<point>36.003849029541016,49.77482604980469</point>
+					<point>34.518959045410156,47.08883285522461</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>34.518959045410156,47.08883285522461</point>
+					<point>33.640071868896484,48.057247161865234</point>
+					<point>30.620464324951172,45.78335189819336</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>30.620464324951172,45.78335189819336</point>
+					<point>29.893293380737305,46.70999526977539</point>
+					<point>25.556591033935547,43.79107666015625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>30.620464324951172,45.78335189819336</point>
+					<point>25.556591033935547,43.79107666015625</point>
+					<point>28.411212921142578,40.9848747253418</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>26.872140884399414,38.47533416748047</point>
+					<point>22.85851287841797,35.29742431640625</point>
+					<point>25.668781280517578,33.03080368041992</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>25.668781280517578,33.03080368041992</point>
+					<point>28.16158103942871,37.278167724609375</point>
+					<point>26.872140884399414,38.47533416748047</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>27.940696716308594,33.665218353271484</point>
+					<point>29.6361141204834,37.07477951049805</point>
+					<point>28.16158103942871,37.278167724609375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>28.16158103942871,37.278167724609375</point>
+					<point>25.668781280517578,33.03080368041992</point>
+					<point>27.940696716308594,33.665218353271484</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>29.6361141204834,37.07477951049805</point>
+					<point>27.940696716308594,33.665218353271484</point>
+					<point>29.59359359741211,33.270328521728516</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>33.066253662109375,42.123634338378906</point>
+					<point>34.394615173339844,35.87135314941406</point>
+					<point>39.19565200805664,43.71645736694336</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>30.620464324951172,45.78335189819336</point>
+					<point>28.411212921142578,40.9848747253418</point>
+					<point>33.066253662109375,42.123634338378906</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>33.066253662109375,42.123634338378906</point>
+					<point>34.518959045410156,47.08883285522461</point>
+					<point>30.620464324951172,45.78335189819336</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>34.518959045410156,47.08883285522461</point>
+					<point>33.066253662109375,42.123634338378906</point>
+					<point>39.19565200805664,43.71645736694336</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>39.19565200805664,43.71645736694336</point>
+					<point>40.2479362487793,48.40644073486328</point>
+					<point>34.518959045410156,47.08883285522461</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>29.6361141204834,37.07477951049805</point>
+					<point>29.59359359741211,33.270328521728516</point>
+					<point>34.394615173339844,35.87135314941406</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>34.394615173339844,35.87135314941406</point>
+					<point>33.066253662109375,42.123634338378906</point>
+					<point>29.6361141204834,37.07477951049805</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+		</obstacles>
+	</physics>
+	<visuals>		<water position="5,0.5,32" size="16,10" />
+		<model modelSkinPath="Models/cartoon_city_house_1/skin.xml" position="54.119766,0.0,29.898973" direction="-0.76604474,0.0,-0.6427877" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_house_2/skin.xml" position="34.90455,0.0,40.730797" direction="0.8191524,0.0,-0.5735767" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_house_3/skin.xml" position="24.903442,0.0,54.16413" direction="0.34202024,0.0,-0.9396932" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_mill/skin.xml" position="62.527992,0.0,45.44551" direction="-0.90630984,0.0,-0.4226194" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_tower_1/skin.xml" position="54.098732,0.0,34.263725" direction="-0.9848112,0.0,0.17364885" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_tower_1/skin.xml" position="17.610312,0.0,53.00618" direction="-0.17364883,0.0,-0.9848124" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_tower_1/skin.xml" position="30.592386,0.0,35.245483" direction="0.57357925,0.0,-0.81915575" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_stock_2/skin.xml" position="26.526651,0.0,36.066452" direction="0.57357925,0.0,-0.81915575" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_stock_3/skin.xml" position="71.18634,0.0,35.87214" direction="-0.087156095,0.0,-0.99620044" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_house_3/skin.xml" position="57.551964,0.0,20.463278" direction="-0.9848137,0.0,-0.17364931" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_chop/skin.xml" position="32.7607,0.0,35.722446" direction="-0.9848137,0.0,-0.17364931" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_chop/skin.xml" position="55.911865,0.0,27.723602" direction="-0.9848137,0.0,-0.17364931" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_chop/skin.xml" position="55.69362,0.0,26.144516" direction="-0.4226207,0.0,-0.9063134" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_chop/skin.xml" position="56.783283,0.0,26.654839" direction="0.2588209,0.0,-0.9659318" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_forest_stone_2/skin.xml" position="57.917915,0.0,15.209792" direction="0.4226211,0.0,-0.9063133" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_forest_stone_2/skin.xml" position="15.293688,0.0,53.25158" direction="0.4226211,0.0,-0.9063133" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_stock_1/skin.xml" position="58.423473,0.0,33.52091" direction="-0.25882128,0.0,0.96593225" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_tower_1/skin.xml" position="62.727966,0.0,32.566418" direction="-0.0871568,0.0,0.99620146" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_stock_2/skin.xml" position="37.69191,0.0,47.692574" direction="0.25882047,0.0,0.9659328" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_tower_1/skin.xml" position="33.373222,0.0,46.03619" direction="-0.57358116,0.0,0.8191579" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_house_1/skin.xml" position="28.994732,0.0,44.21589" direction="-0.42262194,0.0,0.90631443" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_chop/skin.xml" position="26.459795,0.0,43.529526" direction="-0.42262194,0.0,0.90631443" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_chop/skin.xml" position="19.541765,0.0,52.13653" direction="-0.42262194,0.0,0.90631443" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_chop/skin.xml" position="28.26731,0.0,34.353004" direction="-0.42262194,0.0,0.90631443" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_city_chop/skin.xml" position="65.17893,0.0,40.69949" direction="-0.42262194,0.0,0.90631443" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="61.906036,0.0,17.91521" direction="-0.8660323,0.0,0.50000334" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="60.77672,0.0,14.429034" direction="0.2588207,0.0,0.96593344" scale="1.1749998" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="57.915066,0.0,12.476046" direction="-0.96593374,0.0,0.2588206" scale="0.9250001" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="61.90814,0.0,11.417616" direction="-0.96593374,0.0,0.2588206" scale="1.0" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="58.907356,0.0,9.185493" direction="-0.99620277,0.0,-0.08715705" scale="1.0999999" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="56.340103,0.0,10.388671" direction="-0.42262116,0.0,-0.90631574" scale="0.85000014" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="63.09576,0.0,9.254888" direction="-0.81915855,0.0,-0.573582" scale="0.975" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="60.928944,0.0,6.3617654" direction="8.634961E-7,0.0,-1.0000087" scale="0.8750001" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="57.0107,0.0,5.5343003" direction="-0.2588205,0.0,-0.9659345" scale="0.95000005" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="63.491272,0.0,4.8648314" direction="0.5735823,0.0,-0.8191588" scale="0.75000024" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="60.853737,0.0,3.57055" direction="0.7071126,0.0,0.7071141" scale="0.85000014" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="58.00781,0.0,2.8037887" direction="-0.4226232,0.0,0.9063158" scale="1.0" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="63.0029,0.0,1.8395349" direction="-0.4226232,0.0,0.9063158" scale="0.9250001" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="59.68203,0.0,1.202661" direction="-0.9063168,0.0,0.42262125" scale="0.82500017" />
+		<model modelSkinPath="Models/cartoon_forest_stone_2/skin.xml" position="58.956085,0.0,2.1533508" direction="-0.98481727,0.0,0.1736487" scale="0.82500017" />
+		<model modelSkinPath="Models/cartoon_forest_stone_3/skin.xml" position="57.332947,0.0,9.114346" direction="-0.8191604,0.0,0.57358104" scale="0.82500017" />
+		<model modelSkinPath="Models/cartoon_forest_stone_3/skin.xml" position="60.165703,0.0,7.6197" direction="-0.98481697,0.0,-0.17365089" scale="0.82500017" />
+		<model modelSkinPath="Models/cartoon_forest_stone_3/skin.xml" position="63.513622,0.0,7.7505755" direction="-0.98481697,0.0,-0.17365089" scale="0.82500017" />
+		<model modelSkinPath="Models/cartoon_forest_stone_1/skin.xml" position="62.13348,0.0,14.1914425" direction="-0.98481697,0.0,-0.17365089" scale="0.82500017" />
+		<model modelSkinPath="Models/cartoon_forest_stone_1/skin.xml" position="64.83267,0.0,32.63598" direction="-0.9962044,0.0,0.08715552" scale="0.82500017" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="58.419167,0.0,29.581312" direction="-0.9962044,0.0,0.08715552" scale="0.9250001" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="65.49694,0.0,29.483948" direction="-0.7660525,0.0,0.6427931" scale="1.025" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="62.333652,0.0,29.365204" direction="-0.9397015,0.0,-0.34202445" scale="0.8750001" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="60.2087,0.0,26.83418" direction="-0.9848176,0.0,0.17364897" scale="1.0749999" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="62.68628,0.0,21.843643" direction="-0.7071131,0.0,-0.7071146" scale="1.0749999" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="61.66168,0.0,24.69838" direction="-0.34202257,0.0,-0.9397024" scale="0.9000001" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="64.641,0.0,26.139475" direction="0.5000061,0.0,-0.86603385" scale="0.8750001" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="68.175865,0.0,28.424404" direction="0.9397028,0.0,-0.3420227" scale="0.85000014" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="64.14677,0.0,15.187372" direction="0.99620503,0.0,0.087157786" scale="1.0" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="65.65197,0.0,18.248955" direction="0.76605165,0.0,0.64279526" scale="0.9250001" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="64.834206,0.0,12.832638" direction="-0.5000045,0.0,-0.8660352" scale="0.8000002" />
+		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="65.68924,0.0,22.485626" direction="-0.8191613,0.0,0.57358193" scale="0.9000001" />
+		<model modelSkinPath="Models/cartoon_forest_stone_2/skin.xml" position="59.323402,0.0,28.396885" direction="-0.90631723,0.0,-0.42262357" scale="0.8750001" />
+	</visuals>
+</map>

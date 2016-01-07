@@ -1,0 +1,58 @@
+<template>
+    <entity>
+        <name>Beetle Golem</name>
+        <!--model-->
+        <model>Models/beetle_golem/skin_dark.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>Idle_Normal</name>
+                <loopDuration>2.5</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>Walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>Attack1</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>Death</name>
+                <loopDuration>2</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup group="units" collidesWith="map|units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>900</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>35</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.7</bonusFlatAttackSpeed>
+                <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <requestUpdateAttributes/>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/melee_autoattack"/>
+        </autoAttack>
+        <spells>
+            <entity template="spells/beetle_golem_sleep"/>
+        </spells>
+    </entity>
+</template>

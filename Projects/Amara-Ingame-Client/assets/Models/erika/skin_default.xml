@@ -1,0 +1,11 @@
+<skin name="erika">
+    <model normScale="0.028" scale="1.15">
+        <material>
+            <texture index="0" normalMap="body_normal.png">body_diffuse.png</texture>
+            <texture index="1" normalMap="body_normal.png">body_diffuse.png</texture>
+            <texture index="2" normalMap="body_normal.png">body_diffuse.png</texture>
+            <texture index="3" normalMap="bow_normal.jpg">bow_diffuse.jpg</texture>
+            <texture index="4" normalMap="clothes_normal.png">clothes_diffuse.png</texture>
+        </material>
+    </model>
+</skin>

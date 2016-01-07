@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>dagger</itemID>
+        <name>Dagger</name>
+        <itemRecipe gold="400"/>
+        <isSellable>250</isSellable>
+        <!--stats-->
+        <bonusPercentageAttackSpeed>0.1</bonusPercentageAttackSpeed>
+    </entity>
+</template>

@@ -1,0 +1,90 @@
+<template>
+    <entity id="spell">
+        <name>Sleep</name>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castCancelAction/>
+        <!--castDuration = transitionTime + sleepTime + transitionTime-->
+        <castDuration>9</castDuration>
+        <baseCooldown>15</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <value name="transitionTime">2.5</value>
+    <value name="sleepTime">4</value>
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--start-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAnimation>
+                            <entity>
+                                <name>Sleep_Start</name>
+                                <loopDuration>[transitionTime]</loopDuration>
+                                <freezeAfterPlaying/>
+                            </entity>
+                        </playAnimation>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--idle-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="[sleepTime]">
+                            <entity>
+                                <buffVisualisation>meditating</buffVisualisation>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusFlatHealthRegeneration>100</bonusFlatHealthRegeneration>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                        <playAnimation>
+                            <entity>
+                                <name>Sleep_Idle</name>
+                                <loopDuration>2.5</loopDuration>
+                            </entity>
+                        </playAnimation>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[transitionTime]</triggerDelay>
+            </entity>
+            <!--end-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAnimation>
+                            <entity>
+                                <name>Sleep_End</name>
+                                <loopDuration>[transitionTime]</loopDuration>
+                                <freezeAfterPlaying/>
+                            </entity>
+                        </playAnimation>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <!--triggerDelay = transitionTime + sleepTime-->
+                <triggerDelay>6.5</triggerDelay>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

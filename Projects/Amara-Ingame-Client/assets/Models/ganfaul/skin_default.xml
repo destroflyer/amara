@@ -1,0 +1,7 @@
+<skin name="ganfaul">
+    <model normScale="0.028">
+        <material>
+            <texture index="0" normalMap="normal.png" specularMap="specular.png" glowMap="glow.png">diffuse.png</texture>
+        </material>
+    </model>
+</skin>

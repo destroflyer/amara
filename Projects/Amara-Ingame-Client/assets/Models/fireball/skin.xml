@@ -1,0 +1,7 @@
+<skin name="fireball">
+    <model scale="1">
+        <position>
+            <location>0,3,0</location>
+        </position>
+    </model>
+</skin>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
+    <useStyles filename="nifty-default-styles.xml"/>
+    <useControls filename="nifty-default-controls.xml"/>
+    <screen id="start" controller="amara.engine.applications.ingame.client.gui.ScreenController_Shop">
+        <layer childLayout="absolute">
+            <control id="shop_window" name="window" title="Shop" x="100px" y="100px" width="525px" height="400px" hideOnClose="true" visible="false">
+                <panel childLayout="horizontal" width="100%" height="100%">
+                    <panel id="shop_container" childLayout="horizontal" width="100%" height="100%">
+                        <panel childLayout="vertical" width="200px" height="100%" padding="10px" backgroundColor="#000D">
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_text" name="textfield" width="100%"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_0" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="All Items" font="Interface/fonts/Verdana_14.fnt" height="23px" checked="true"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_1" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="Health" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_2" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="Attack Damage" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_3" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="Ability Power" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_4" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="Armor" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_5" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="Magic Resistance" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_6" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="Walk Speed" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            </panel>
+                            <panel/>
+                            <text text="Sell Item" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            <panel childLayout="horizontal">
+                                <control id="sell_item_button_0" name="button" width="32px" height="32px">
+                                    <interact onClick="sellItem(0)"/>
+                                </control>
+                                <control id="sell_item_button_1" name="button" width="32px" height="32px">
+                                    <interact onClick="sellItem(1)"/>
+                                </control>
+                                <control id="sell_item_button_2" name="button" width="32px" height="32px">
+                                    <interact onClick="sellItem(2)"/>
+                                </control>
+                            </panel>
+                            <panel childLayout="horizontal">
+                                <control id="sell_item_button_3" name="button" width="32px" height="32px">
+                                    <interact onClick="sellItem(3)"/>
+                                </control>
+                                <control id="sell_item_button_4" name="button" width="32px" height="32px">
+                                    <interact onClick="sellItem(4)"/>
+                                </control>
+                                <control id="sell_item_button_5" name="button" width="32px" height="32px">
+                                    <interact onClick="sellItem(5)"/>
+                                </control>
+                            </panel>
+                        </panel>
+                        <!--Generated ScrollPanel "shop_available_items"-->
+                    </panel>
+                    <panel width="10px"/>
+                    <panel id="shop_item_information" childLayout="horizontal" width="300px" height="100%" backgroundColor="#333A">
+                        <panel width="1px"/>
+                        <panel childLayout="vertical">
+                            <panel height="1px"/>
+                            <panel childLayout="horizontal" width="100%" height="35px" backgroundColor="#000A">
+                                <panel width="10px"/>
+                                <text id="shop_item_information_name" height="100%" text="???" font="Interface/fonts/Verdana_14.fnt" textHAlign="left"/>
+                            </panel>
+                            <panel id="shop_item_information_recipe" childLayout="absolute" width="100%" backgroundColor="#666F"/>
+                            <panel childLayout="horizontal" width="100%" height="80px" backgroundColor="#000A">
+                                <panel width="10px"/>
+                                <panel childLayout="vertical">
+                                    <panel height="10px"/>
+                                    <text id="shop_item_information_description" text="???" font="Interface/fonts/Verdana_14.fnt" width="100%" height="100%" textHAlign="left" textVAlign="top" wrap="true"/>
+                                </panel>
+                            </panel>
+                            <panel height="1px"/>
+                        </panel>
+                        <panel width="1px"/>
+                    </panel>
+                </panel>
+            </control>
+        </layer>
+    </screen>
+    <screen id="cinematic" controller="amara.engine.applications.ingame.client.gui.ScreenController_Cinematic">
+    </screen>
+</nifty>

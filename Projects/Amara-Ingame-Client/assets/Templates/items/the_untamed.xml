@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>the_untamed</itemID>
+        <name>The Untamed</name>
+        <itemRecipe gold="800" itemIDs="rod,scepter,scepter"/>
+        <isSellable>1500</isSellable>
+        <!--stats-->
+        <bonusFlatAbilityPower>120</bonusFlatAbilityPower>
+    </entity>
+</template>

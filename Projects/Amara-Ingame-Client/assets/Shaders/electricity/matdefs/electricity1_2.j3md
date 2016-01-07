@@ -1,0 +1,69 @@
+// author: cvlad
+
+MaterialDef electricity1 {
+
+    MaterialParameters {
+        Float speed
+        Float fallOff
+        Float width
+        Float noiseAmount : 1.0
+        Color outlineColor
+        Float outlineColorFallOff
+        Texture2D noise
+        Texture2D ramp
+
+        // For hardware skinning
+        Int NumberOfBones
+        Matrix4Array BoneMatrices
+
+        // Fog
+        Float Fog
+
+        // Refraction Filter
+        Boolean DoRefract : False
+        Float Distance : 200.0
+        Texture2D Mask_Texture  
+    }
+
+    Technique {
+
+        LightMode Disable
+
+        VertexShader GLSL100:   Shaders/electricity/shaders/electricity1.vert
+        FragmentShader GLSL100: Shaders/electricity/shaders/electricity1_2.frag
+
+        WorldParameters {
+            WorldViewProjectionMatrix
+            WorldViewMatrixInverse
+            Time
+        }
+
+        Defines {
+            FOG : Fog
+            NUM_BONES : NumberOfBones
+        }
+
+        RenderState {
+            DepthTest On
+            DepthWrite Off
+            ColorWrite On
+        }
+    }
+
+Technique Refract {
+
+VertexShader GLSL100:   Shaders/filters/simple_refraction/shaders/refract.vert
+FragmentShader GLSL100: Shaders/filters/simple_refraction/shaders/refract.frag
+
+WorldParameters {
+WorldViewProjectionMatrix
+}
+
+Defines {
+DO_REFRACT : DoRefract
+MASK_TEXTURE : Mask_Texture
+NUM_BONES : NumberOfBones
+}
+}
+
+}

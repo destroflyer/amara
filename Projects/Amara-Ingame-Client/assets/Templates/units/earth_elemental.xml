@@ -1,0 +1,58 @@
+<template>
+    <entity>
+        <name>Earth Elemental</name>
+        <!--model-->
+        <model>Models/earth_elemental/skin.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>idle</name>
+                <loopDuration>2.5</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>punch_right</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>death</name>
+                <loopDuration>1</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup group="units" collidesWith="map|units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>1100</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>25</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.7</bonusFlatAttackSpeed>
+                <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <requestUpdateAttributes/>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/melee_autoattack"/>
+        </autoAttack>
+        <spells>
+            <entity template="spells/powerball"/>
+        </spells>
+    </entity>
+</template>

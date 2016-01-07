@@ -1,0 +1,67 @@
+<template>
+    <entity id="object">
+        <model>Models/ganfaul_laser/skin.xml</model>
+    </entity>
+    <!--add buff area-->
+    <entity>
+        <instantTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <activateHitbox/>
+                <addBuffArea>
+                    <entity id="buffArea">
+                        <hitbox>
+                            <rectangle x="12.5" width="25" height="2.5"/>
+                        </hitbox>
+                        <collisionGroup group="spells" collidesWith="units"/>
+                        <intersectionRules>
+                            <entity>
+                                <acceptEnemies/>
+                            </entity>
+                        </intersectionRules>
+                        <areaBuff>
+                            <entity>
+                                <repeatingEffect interval="0.25">
+                                    <entity>
+                                        <magicDamage>50 + (0.15 * source.abilityPower)</magicDamage>
+                                    </entity>
+                                </repeatingEffect>
+                            </entity>
+                        </areaBuff>
+                        <areaBuffTargetRules>
+                            <entity>
+                                <acceptEnemies/>
+                            </entity>
+                        </areaBuffTargetRules>
+                    </entity>
+                </addBuffArea>
+                <playAudio>
+                    <entity id="audioLoop">
+                        <audio>Sounds/sounds/spells/ganfaul_laser_loop.ogg</audio>
+                        <audioLoop/>
+                        <audioVolume>0.75</audioVolume>
+                    </entity>
+                </playAudio>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+        <triggerDelay>0.7</triggerDelay>
+        <triggerOnce/>
+    </entity>
+    <!--remove buff area-->
+    <entity>
+        <instantTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+                <removeBuffArea>#buffArea</removeBuffArea>
+                <stopAudio>#audioLoop</stopAudio>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+        <triggerDelay>2.3</triggerDelay>
+        <triggerOnce/>
+    </entity>
+</template>

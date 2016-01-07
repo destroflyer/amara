@@ -1,0 +1,11 @@
+<skin name="japanese_bridge">
+    <model scale="1">
+        <position>
+            <location>6.5,0,0</location>
+        </position>
+        <material>
+            <texture index="0">wood.jpg</texture>
+            <texture index="1">red.jpg</texture>
+        </material>
+    </model>
+</skin>

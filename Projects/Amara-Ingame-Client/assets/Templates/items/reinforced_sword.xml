@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>reinforced_sword</itemID>
+        <name>Reinforced Sword</name>
+        <itemRecipe gold="200" itemIDs="sword,sword"/>
+        <isSellable>600</isSellable>
+        <!--stats-->
+        <bonusFlatAttackDamage>25</bonusFlatAttackDamage>
+    </entity>
+</template>

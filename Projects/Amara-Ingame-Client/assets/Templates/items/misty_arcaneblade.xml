@@ -1,0 +1,11 @@
+<template>
+    <entity>
+        <itemID>misty_arcaneblade</itemID>
+        <name>Misty Arcaneblade</name>
+        <itemRecipe gold="600" itemIDs="soulblade,greatsword"/>
+        <isSellable>1200</isSellable>
+        <!--stats-->
+        <bonusFlatAttackDamage>60</bonusFlatAttackDamage>
+        <bonusFlatMagicResistance>20</bonusFlatMagicResistance>
+    </entity>
+</template>

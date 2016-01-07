@@ -1,0 +1,105 @@
+<template>
+    <entity id="spell">
+        <name>Powerball</name>
+        <spellVisualisation>powerball</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castCancelAction/>
+        <castTurnToTarget/>
+        <range>20</range>
+        <baseCooldown>25</baseCooldown>
+        <spellTargetRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </spellTargetRules>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--move to target-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <move>
+                            <entity>
+                                <targetedMovementTarget/>
+                                <movementSpeed>9</movementSpeed>
+                                <movementAnimation>
+                                    <entity>
+                                        <name>roll_loop</name>
+                                        <loopDuration>0.3</loopDuration>
+                                    </entity>
+                                </movementAnimation>
+                            </entity>
+                        </move>
+                        <playAudio>
+                            <entity id="audioStart">
+                                <audio>Sounds/sounds/spells/powerball_start.ogg</audio>
+                            </entity>
+                            <entity id="audioLoop">
+                                <audio>Sounds/sounds/spells/powerball_loop.ogg</audio>
+                                <audioLoop/>
+                                <audioSuccessor delay="0.1">#audioStart</audioSuccessor>
+                            </entity>
+                        </playAudio>
+                        <addEffectTriggers>
+                            <!--trigger spell effects-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <targetTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <magicDamage>120</magicDamage>
+                                        <move>
+                                            <entity>
+                                                <displacement/>
+                                                <sourceMovementDirection/>
+                                                <movementSpeed>30</movementSpeed>
+                                                <distanceLimit>2</distanceLimit>
+                                            </entity>
+                                        </move>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                            </entity>
+                            <!--stop animation-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <stopAnimation/>
+                                        <stopAudio>#audioLoop</stopAudio>
+                                        <playAudio>
+                                            <entity>
+                                                <audio>Sounds/sounds/spells/powerball_hit.ogg</audio>
+                                                <audioVolume>0.75</audioVolume>
+                                            </entity>
+                                        </playAudio>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>
