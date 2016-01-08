@@ -32,7 +32,7 @@ public class PlayerStatusesAppState extends ClientBaseAppState{
     public PlayerStatus getPlayerStatus(int playerID){
         updatingStatuses.add(playerID);
         NetworkClient networkClient = getAppState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.sendMessage(new Message_GetPlayerStatus(0));
+        networkClient.sendMessage(new Message_GetPlayerStatus(playerID));
         while(true){
             if(!updatingStatuses.contains(playerID)){
                 return statuses.get(playerID);
