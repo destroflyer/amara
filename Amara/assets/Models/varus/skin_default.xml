@@ -1,7 +1,0 @@
-<skin name="varus">
-    <model normScale="1.18" scale="0.85">
-        <material>
-            <texture index="0">diffuse.png</texture>
-        </material>
-    </model>
-</skin>

@@ -1,7 +1,0 @@
-<skin name="ganfaul_laser">
-    <model scale="1.75">
-        <position>
-            <location>0,3.7,3.5</location>
-        </position>
-    </model>
-</skin>
