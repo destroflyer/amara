@@ -6,7 +6,6 @@ package amara.launcher.client.network.backends;
 
 import com.jme3.network.Message;
 import amara.engine.applications.masterserver.server.network.messages.*;
-import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.*;
 import amara.launcher.client.ClientLauncher;
 
@@ -25,8 +24,7 @@ public class UpdateFilesBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_UpdateFiles){
             Message_UpdateFiles message = (Message_UpdateFiles) receivedMessage;
-            final UpdateFile[] updateFiles = message.getUpdateFiles();
-            clientLauncher.update(updateFiles);
+            clientLauncher.update(message.getUpdateFiles());
         }
     }
 }

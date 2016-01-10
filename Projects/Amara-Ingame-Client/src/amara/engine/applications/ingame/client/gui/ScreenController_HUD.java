@@ -100,6 +100,16 @@ public class ScreenController_HUD extends GameScreenController{
         getTextRenderer("attribute_value_" + attributeName).setText(text);
     }
     
+    public void setResourceBarWidth_Health(float portion){
+        setResourceBarWidth("health", portion);
+    }
+    
+    private void setResourceBarWidth(String resourceName, float portion){
+        Element resourceBar = getElementByID("resource_bar_" + resourceName);
+        resourceBar.setConstraintWidth(new SizeValue((portion * 100) + "%"));
+        resourceBar.getParent().layoutElements();
+    }
+    
     public void setPassiveImage(String imagePath){
         getImageRenderer("passive_image").setImage(createImage(imagePath));
     }

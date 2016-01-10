@@ -23,7 +23,7 @@ public class WriteUpdateFileBackend implements MessageBackend{
         try{
             fileOutputStream = new FileOutputStream(updateFile.getFilePath());
         }catch(FileNotFoundException ex){
-            System.out.println("Error while initializing download '" + updateFile.getFilePath() + "'.");
+            System.err.println("Error while initializing download '" + updateFile.getFilePath() + "'.");
         }
     }
     private UpdateFile updateFile;
@@ -41,7 +41,7 @@ public class WriteUpdateFileBackend implements MessageBackend{
                     fileOutputStream.close();
                 }
             }catch(IOException ex){
-                System.out.println("Error while downloading file '" + updateFile.getFilePath() + "'.");
+                System.err.println("Error while downloading file '" + updateFile.getFilePath() + "'.");
             }
         }
     }

@@ -30,8 +30,14 @@ public class DisplayAttributesSystem extends GUIDisplaySystem{
         String armorText = NON_EXISTING_ATTRIBUTE_TEXT;
         String magicResistanceText = NON_EXISTING_ATTRIBUTE_TEXT;
         String walkSpeedText = NON_EXISTING_ATTRIBUTE_TEXT;
+        float healthPortion = 0;
         if(entityWorld.hasComponent(selectedEntity, HealthComponent.class)){
-            healthText = ("" + (int) entityWorld.getComponent(selectedEntity, HealthComponent.class).getValue());
+            float health = entityWorld.getComponent(selectedEntity, HealthComponent.class).getValue();
+            healthText = ("" + (int) health);
+            MaximumHealthComponent maximumHealthComponent = entityWorld.getComponent(selectedEntity, MaximumHealthComponent.class);
+            if(maximumHealthComponent != null){
+                healthPortion = (health / maximumHealthComponent.getValue());
+            }
         }
         if(entityWorld.hasComponent(selectedEntity, AttackDamageComponent.class)){
             attackDamageText = ("" + (int) entityWorld.getComponent(selectedEntity, AttackDamageComponent.class).getValue());
@@ -62,5 +68,6 @@ public class DisplayAttributesSystem extends GUIDisplaySystem{
         screenController_HUD.setAttributeValue_Armor(armorText);
         screenController_HUD.setAttributeValue_MagicResistance(magicResistanceText);
         screenController_HUD.setAttributeValue_WalkSpeed(walkSpeedText);
+        screenController_HUD.setResourceBarWidth_Health(healthPortion);
     }
 }

@@ -37,7 +37,7 @@ public class UpdatesAppState extends ServerBaseAppState{
         LinkedList<UpdateFile> filesList = new LinkedList<UpdateFile>();
         File parentDirectory = new File(UPDATE_FILES_DIRECTORY);
         addUpdateFiles(parentDirectory, parentDirectory, filesList);
-        updateFiles = filesList.toArray(new UpdateFile[0]);
+        updateFiles = filesList.toArray(new UpdateFile[filesList.size()]);
     }
     
     private void addUpdateFiles(File parentDirectory, File file, LinkedList<UpdateFile> filesList){
