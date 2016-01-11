@@ -34,12 +34,13 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("Blender", "Model editor", "/Interface/client/thanks/blender.png", "http://blender.org"),
         new Thanks("YouTube", "Feedback", "/Interface/client/thanks/youtube.png", "http://youtube.com/destrostudios"),
         //Persons
+        new Thanks("TeMMeZz", "Tester, Game logic advices", "/Interface/client/thanks/nidalee.jpg"),
+        new Thanks("egoVidiTe", "Tester", "/Interface/client/user.png"),
         new Thanks("Icecold", "Tester", "/Interface/client/user.png"),
         new Thanks("Yalee", "Tester", "/Interface/client/user.png"),
-        new Thanks("TeMMeZz", "Tester, Game logic advices", "/Interface/client/thanks/nidalee.jpg"),
         new Thanks("XBody", "Tester, Model advices", "/Interface/client/user.png"),
-        new Thanks("Marcel", "Code structure advices", "/Interface/client/thanks/enton.png"),
         new Thanks("Kappa", "Inspiration", "/Interface/client/thanks/kappa.png"),
+        new Thanks("Marcel", "Code structure advices", "/Interface/client/thanks/enton.png"),
         //Models
         new Thanks("Arteria3d", "Model \"Female Druid\"", "/Interface/client/thanks/arteria3d.png", "http://arteria3d.myshopify.com"),
         new Thanks("PigArt", "Model \"Cartoon Forest\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/PigArt"),

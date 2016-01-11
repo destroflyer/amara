@@ -42,6 +42,7 @@ public class PanLobby extends javax.swing.JPanel{
         btnStart.setEnabled(isOwner);
         cbxMapName.setEnabled(isOwner);
         cbxMapName.setSelectedItem(lobby.getLobbyData().getMapName());
+        lblMapIcon.setIcon(Util.getResourceImageIcon("/Maps/" + lobby.getLobbyData().getMapName() + "/icon.png", 120, 120));
         updatePlayersList(lobby.getPlayers());
     }
     
@@ -103,6 +104,8 @@ public class PanLobby extends javax.swing.JPanel{
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Options:");
+
+        lblMapIcon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(65, 65, 65)));
 
         panPlayers.setBackground(new java.awt.Color(30, 30, 30));
 

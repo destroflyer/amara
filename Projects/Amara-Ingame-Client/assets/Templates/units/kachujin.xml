@@ -14,7 +14,7 @@
                 <name>running_inPlace</name>
             </entity>
         </walkAnimation>
-        <walkStepDistance>4.25</walkStepDistance>
+        <walkStepDistance>5</walkStepDistance>
         <autoAttackAnimation>
             <entity>
                 <name>boxing</name>

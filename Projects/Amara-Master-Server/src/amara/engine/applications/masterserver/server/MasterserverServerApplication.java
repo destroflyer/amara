@@ -26,6 +26,7 @@ public class MasterserverServerApplication extends HeadlessApplication implement
             stateManager.attach(new PlayersAppState());
             stateManager.attach(new LobbiesAppState());
             stateManager.attach(new GamesAppState(new PortProvider(port + 1)));
+            stateManager.attach(new MasterServerInitializedAppState());
         }catch(ServerCreationException ex){
             System.out.println(ex.getMessage());
             System.exit(0);

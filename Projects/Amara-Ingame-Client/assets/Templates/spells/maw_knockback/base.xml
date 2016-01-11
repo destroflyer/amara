@@ -2,6 +2,7 @@
     <value name="delay">0.35</value>
     <entity id="spell">
         <name>Knockback</name>
+        <description>Maw takes a swing and knockbacks an enemy with a punch.</description>
         <spellVisualisation>maw_knockback</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->

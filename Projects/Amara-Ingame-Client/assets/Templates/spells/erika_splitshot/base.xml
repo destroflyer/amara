@@ -1,7 +1,9 @@
 <template>
     <value name="delay">0.3</value>
+    <value name="stunDuration">1</value>
     <entity id="spell">
         <name>Splitshot</name>
+        <description>Erika shoots two arrows in a 90 degrees angle, each of them damaging the first enemy hit. If a target is marked by "Robin's Gift", it will be stunned for [stunDuration] seconds.</description>
         <spellVisualisation>erika_splitshot</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn projectiles-->
@@ -63,7 +65,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <addStun>1</addStun>
+                        <addStun>[stunDuration]</addStun>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

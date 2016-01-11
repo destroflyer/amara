@@ -1,7 +1,8 @@
 <template>
     <value name="delay">0.9</value>
     <entity id="spell">
-        <name>Ult</name>
+        <name>Galaxy Blast</name>
+        <description>After gathering energy for [delay] seconds, Ganfaul fires a global energy missile in the target direction, dealing damage to enemies it passes through.</description>
         <spellVisualisation>ganfaul_ult</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn projectile-->

@@ -31,7 +31,6 @@ public class PlayersAppState extends ServerBaseAppState{
         DatabaseAppState databaseAppState = getAppState(DatabaseAppState.class);
         PlayersContentsAppState playersContentsAppState = getAppState(PlayersContentsAppState.class);
         networkServer.addMessageBackend(new ReceiveLoginsBackend(databaseAppState, this));
-        networkServer.addMessageBackend(new ReceiveLogoutsBackend(connectedPlayers));
         networkServer.addMessageBackend(new SendPlayerProfilesDataBackend(databaseAppState));
         networkServer.addMessageBackend(new SendPlayerStatusesBackend(this));
         networkServer.addMessageBackend(new EditUserMetaBackend(databaseAppState, connectedPlayers));

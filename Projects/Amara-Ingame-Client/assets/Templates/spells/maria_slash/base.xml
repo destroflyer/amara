@@ -1,6 +1,7 @@
 <template>
     <entity id="spell">
         <name>Slash</name>
+        <description>Maria dashes towards the target location, damaging all enemies in front of her.</description>
         <spellVisualisation>maria_slash</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->

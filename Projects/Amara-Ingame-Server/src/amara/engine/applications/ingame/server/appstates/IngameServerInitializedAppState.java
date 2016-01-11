@@ -8,9 +8,9 @@ package amara.engine.applications.ingame.server.appstates;
  *
  * @author Carl
  */
-public class ServerInitializedAppState extends ServerBaseAppState{
+public class IngameServerInitializedAppState extends ServerBaseAppState{
 
-    public ServerInitializedAppState(){
+    public IngameServerInitializedAppState(){
         
     }
     private int frameIndex;

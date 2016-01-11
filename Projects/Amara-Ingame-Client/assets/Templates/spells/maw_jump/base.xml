@@ -2,6 +2,7 @@
     <value name="delay">1</value>
     <entity id="spell">
         <name>Jump</name>
+        <description>After [delay] second, Maw jumps to the target location, damaging and knockuping all enemies around.</description>
         <spellVisualisation>maw_jump</spellVisualisation>
         <instantEffectTriggers>
             <!--move to target-->

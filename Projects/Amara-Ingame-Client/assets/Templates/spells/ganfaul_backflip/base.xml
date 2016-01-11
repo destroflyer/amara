@@ -1,6 +1,7 @@
 <template>
     <entity id="spell">
-        <name>Backflip</name>
+        <name>Moon Jump</name>
+        <description>Ganfaul makes a backflip, jumping a short distance in the opposite direction, that he is facing.</description>
         <spellVisualisation>ganfaul_backflip</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->

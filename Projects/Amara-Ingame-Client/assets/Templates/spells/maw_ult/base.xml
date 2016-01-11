@@ -1,6 +1,8 @@
 <template>
+    <value name="duration">15</value>
     <entity id="spell">
         <name>Ult</name>
+        <description>Maw empowers himself for [duration] seconds, gaining health, attack damage, armor and magic resistance.</description>
         <spellVisualisation>maw_ult</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
@@ -26,7 +28,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <addBuff duration="15">
+                        <addBuff duration="[duration]">
                             <entity>
                                 <buffVisualisation>baron_nashor</buffVisualisation>
                                 <continuousAttributes>

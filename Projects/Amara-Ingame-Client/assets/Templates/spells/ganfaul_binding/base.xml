@@ -1,7 +1,9 @@
 <template>
     <value name="delay">0.18</value>
+    <value name="bindDuration">1</value>
     <entity id="spell">
-        <name>Binding</name>
+        <name>Planetary Binding</name>
+        <description>Shoots an energetic projectile. The first enemy hit is damaged and binded for [bindDuration] second.</description>
         <spellVisualisation>ganfaul_binding</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn projectile-->
@@ -59,8 +61,8 @@
                 <triggeredEffect>
                     <entity>
                         <magicDamage>90 + (0.5 * source.abilityPower)</magicDamage>
-                        <addBinding>1</addBinding>
-                        <addBuff duration="1">
+                        <addBinding>[bindDuration]</addBinding>
+                        <addBuff duration="[bindDuration]">
                             <entity>
                                 <buffVisualisation>ganfaul_binded</buffVisualisation>
                             </entity>

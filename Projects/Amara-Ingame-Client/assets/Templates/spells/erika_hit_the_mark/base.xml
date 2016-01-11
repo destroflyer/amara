@@ -1,6 +1,7 @@
 <template>
     <entity id="spell">
         <name>Hit the Mark</name>
+        <description>Erika instantly shoots an arrow in the target direction, damaging the first enemy hit. If the target is marked by "Robin's Gift", it will receive additional damage.</description>
         <spellVisualisation>erika_hit_the_mark</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn projectile-->

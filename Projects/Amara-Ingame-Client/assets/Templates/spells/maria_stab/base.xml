@@ -1,7 +1,9 @@
 <template>
     <value name="delay">0.5</value>
+    <value name="slowDuration">2</value>
     <entity id="spell">
         <name>Stab</name>
+        <description>Afer [delay] seconds, Maria stabs her sword in a straight line. The first enemy hit will be damaged and slowed for [slowDuration] seconds.</description>
         <spellVisualisation>maria_stab</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn object-->
@@ -59,7 +61,7 @@
                 <triggeredEffect>
                     <entity>
                         <physicalDamage>100 + (0.3 * source.attackDamage)</physicalDamage>
-                        <addBuff duration="2">
+                        <addBuff duration="[slowDuration]">
                             <entity>
                                 <continuousAttributes>
                                     <entity>

@@ -8,7 +8,8 @@ import com.jme3.network.Message;
 import amara.engine.applications.masterserver.server.appstates.*;
 import amara.engine.applications.masterserver.server.network.messages.*;
 import amara.engine.network.*;
-import amara.game.players.ConnectedPlayers;
+import amara.engine.network.messages.*;
+import amara.game.players.*;
 
 /**
  *
@@ -27,8 +28,18 @@ public class LeaveLobbiesBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_LeaveLobby){
             Message_LeaveLobby message = (Message_LeaveLobby) receivedMessage;
-            int playerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
-            lobbiesAppState.leaveLobby(playerID);
+            leaveLobby(messageResponse.getClientID());
+        }
+        else if(receivedMessage instanceof Message_ClientDisconnection){
+            Message_ClientDisconnection message = (Message_ClientDisconnection) receivedMessage;
+            leaveLobby(messageResponse.getClientID());
+        }
+    }
+    
+    private void leaveLobby(int clientID){
+        Player player = connectedPlayers.getPlayer(clientID);
+        if(player != null){
+            lobbiesAppState.leaveLobby(player.getID());
         }
     }
 }

@@ -1,7 +1,9 @@
 <template>
     <value name="delay">0.4</value>
+    <value name="slowDuration">2</value>
     <entity id="spell">
         <name>Rock</name>
+        <description>Throws a rock in the target direction. The first enemy hit is damaged and slowed for [slowDuration] seconds.</description>
         <spellVisualisation>maw_rock</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn projectile-->
@@ -59,7 +61,7 @@
                 <triggeredEffect>
                     <entity>
                         <magicDamage>100</magicDamage>
-                        <addBuff duration="2">
+                        <addBuff duration="[slowDuration]">
                             <entity>
                                 <continuousAttributes>
                                     <entity>

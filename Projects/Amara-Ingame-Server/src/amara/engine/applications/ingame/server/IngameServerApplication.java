@@ -20,7 +20,7 @@ public class IngameServerApplication extends HeadlessApplication{
         stateManager.attach(new ReceiveCommandsAppState());
         stateManager.attach(new ServerEntitySystemAppState());
         stateManager.attach(new ServerChatAppState());
-        stateManager.attach(new ServerInitializedAppState());
+        stateManager.attach(new IngameServerInitializedAppState());
     }
     private MasterserverServerApplicationInterface masterServer;
     private Game game;

@@ -87,10 +87,20 @@ public class UpdateAttributesSystem implements EntitySystem{
             float criticalChance = attributeBonus.getPercentageCriticalChance();
             float lifesteal = attributeBonus.getPercentageLifesteal();
             float damageReduction = Math.min(attributeBonus.getPercentageDamageReduction(), 1);
-            entityWrapper.setComponent(new MaximumHealthComponent(maximumHealth));
-            if((entityWrapper.getComponent(HealthComponent.class) == null) && entityWrapper.hasComponent(IsAliveComponent.class)){
+            HealthComponent oldHealthComponent = entityWrapper.getComponent(HealthComponent.class);
+            if(oldHealthComponent != null){
+                MaximumHealthComponent oldMaximumHealthComponent = entityWrapper.getComponent(MaximumHealthComponent.class);
+                if(oldMaximumHealthComponent != null){
+                    float healthDifference = (maximumHealth - oldMaximumHealthComponent.getValue());
+                    if(healthDifference > 0){
+                        entityWrapper.setComponent(new HealthComponent(oldHealthComponent.getValue() + healthDifference));
+                    }
+                }
+            }
+            else if(entityWrapper.hasComponent(IsAliveComponent.class)){
                 entityWrapper.setComponent(new HealthComponent(maximumHealth));
             }
+            entityWrapper.setComponent(new MaximumHealthComponent(maximumHealth));
             entityWrapper.setComponent(new HealthRegenerationComponent(healthRegeneration));
             entityWrapper.setComponent(new AttackDamageComponent(attackDamage));
             entityWrapper.setComponent(new AbilityPowerComponent(abilityPower));
