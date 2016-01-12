@@ -1,0 +1,70 @@
+<template>
+    <entity id="unit">
+        <name>Jaime</name>
+        <!--model-->
+        <model>Models/jaime/skin_default.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>Idle</name>
+                <loopDuration>8</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>Walk</name>
+            </entity>
+        </walkAnimation>
+        <walkStepDistance>4.5</walkStepDistance>
+        <autoAttackAnimation>
+            <entity>
+                <name>Punches</name>
+            </entity>
+        </autoAttackAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="0.8"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup group="units" collidesWith="map|units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>550</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>1.25</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>52</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.7</bonusFlatAttackSpeed>
+                <bonusFlatArmor>27</bonusFlatArmor>
+                <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>6</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <attributesPerLevel>
+            <entity>
+                <bonusFlatMaximumHealth>80</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>0.15</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>4</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.02</bonusFlatAttackSpeed>
+                <bonusFlatArmor>3</bonusFlatArmor>
+                <bonusFlatMagicResistance>0</bonusFlatMagicResistance>
+            </entity>
+        </attributesPerLevel>
+        <requestUpdateAttributes/>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/melee_autoattack"/>
+        </autoAttack>
+        <learnableSpells>
+            <entity template="spells/sonic_wave(0)"/>
+            <entity template="spells/intervention(#unit)"/>
+            <entity template="spells/lunar_rush"/>
+            <entity template="spells/dragons_rage"/>
+        </learnableSpells>
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
+    </entity>
+</template>

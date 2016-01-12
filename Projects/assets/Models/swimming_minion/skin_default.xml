@@ -1,0 +1,16 @@
+<skin name="swimming_minion">
+    <model scale="2">
+        <material>
+            <!--boat-->
+            <texture index="0">holz.jpg</texture>
+            <!--skin-->
+            <color index="1">0.5,0.75,0.1,1</color>
+            <!--mouth-->
+            <color index="2">1,0,0,1</color>
+            <!--eyes_outer-->
+            <color index="3">1,1,1,1</color>
+            <!--eyes_inner-->
+            <color index="4">0,0,0,1</color>
+        </material>
+    </model>
+</skin>

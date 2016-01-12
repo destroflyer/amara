@@ -1,0 +1,7 @@
+<skin name="daydream">
+    <model scale="1">
+        <material>
+            <texture index="0">skin_nightmare.png</texture>
+        </material>
+    </model>
+</skin>

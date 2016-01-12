@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>boots_of_haste</itemID>
+        <name>Boots of Haste</name>
+        <itemRecipe gold="600" itemIDs="boots"/>
+        <isSellable>600</isSellable>
+        <!--stats-->
+        <bonusFlatWalkSpeed>0.5</bonusFlatWalkSpeed>
+    </entity>
+</template>

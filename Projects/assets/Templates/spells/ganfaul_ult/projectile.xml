@@ -1,0 +1,34 @@
+<template>
+    <entity id="projectile">
+        <model>Models/ganfaul_ult/skin.xml</model>
+        <hitbox>
+            <circle radius="2"/>
+        </hitbox>
+        <collisionGroup group="spells" collidesWith="units"/>
+        <hitboxActive/>
+        <intersectionRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </intersectionRules>
+        <removeOnMapLeave/>
+        <isProjectile/>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <collisionTrigger/>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/ganfaul_ult_hit.ogg</audio>
+                        <audioVolume>0.75</audioVolume>
+                    </entity>
+                </playAudio>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+</template>

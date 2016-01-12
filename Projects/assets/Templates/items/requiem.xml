@@ -1,0 +1,11 @@
+<template>
+    <entity>
+        <itemID>requiem</itemID>
+        <name>Reqiuem</name>
+        <itemRecipe gold="700" itemIDs="rod,enchanted_vesture"/>
+        <isSellable>1300</isSellable>
+        <!--stats-->
+        <bonusFlatAbilityPower>70</bonusFlatAbilityPower>
+        <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
+    </entity>
+</template>

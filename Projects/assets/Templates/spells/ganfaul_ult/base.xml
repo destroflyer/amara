@@ -1,0 +1,71 @@
+<template>
+    <value name="delay">0.9</value>
+    <entity id="spell">
+        <name>Galaxy Blast</name>
+        <description>After gathering energy for [delay] seconds, Ganfaul fires a global energy missile in the target direction, dealing damage to enemies it passes through.</description>
+        <spellVisualisation>ganfaul_ult</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./projectile</spawnTemplate>
+                                <spawnMovementSpeed>25</spawnMovementSpeed>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity id="audioStart">
+                                <audio>Sounds/sounds/spells/ganfaul_ult_cast_start.ogg</audio>
+                            </entity>
+                            <entity>
+                                <audio>Sounds/sounds/spells/ganfaul_ult_cast_end.ogg</audio>
+                                <audioSuccessor delay="[delay]">#audioStart</audioSuccessor>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>standing_2h_magic_area_attack_01</name>
+                <loopDuration>2</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>8</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>300 + (1 * source.abilityPower)</magicDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

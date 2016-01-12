@@ -1,0 +1,35 @@
+<template>
+    <value name="castDuration">2.5</value>
+    <entity id="spell">
+        <name>Milkyway Shot</name>
+        <description>Ganfaul channels for [castDuration] seconds and, after a small delay, shoots a laser in a straight line. Enemies in the lasers area will be damaged in small intervals.</description>
+        <spellVisualisation>ganfaul_laser</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn object-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>[castDuration]</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>standing_2h_magic_attack_03</name>
+                <loopDuration>3</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>4</baseCooldown>
+    </entity>
+</template>

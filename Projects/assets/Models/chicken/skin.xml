@@ -1,0 +1,12 @@
+<skin name="chicken">
+    <model normScale="0.5" scale="0.4">
+        <material>
+            <!--eyes-->
+            <texture index="0">diffuse.png</texture>
+            <!--body-->
+            <texture index="1">diffuse.png</texture>
+            <!--comb-->
+            <texture index="2">diffuse.png</texture>
+        </material>
+    </model>
+</skin>

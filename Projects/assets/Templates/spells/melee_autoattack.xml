@@ -1,0 +1,52 @@
+<template defaultParameters="Sounds/sounds/spells/melee_autoattack_cast.ogg">
+    <entity id="spell">
+        <name>Melee Autoattack</name>
+        <instantEffectTriggers>
+            <!--trigger spell effects, play audio-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                        <playAudio>
+                            <entity>
+                                <audio>[parameter0]</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castCancelAction/>
+        <castCancelable/>
+        <stopBeforeCasting/>
+        <castTurnToTarget/>
+        <range>2</range>
+        <spellTargetRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </spellTargetRules>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>1 * source.attackDamage</physicalDamage>
+                        <canCrit/>
+                        <drawTeamAggro>15</drawTeamAggro>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

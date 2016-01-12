@@ -1,0 +1,11 @@
+<template>
+    <entity>
+        <itemID>swift_bow</itemID>
+        <name>Swift Bow</name>
+        <itemRecipe gold="600" itemIDs="swift_dagger,bow"/>
+        <isSellable>1300</isSellable>
+        <!--stats-->
+        <bonusPercentageAttackSpeed>0.4</bonusPercentageAttackSpeed>
+        <bonusPercentageCriticalChance>0.25</bonusPercentageCriticalChance>
+    </entity>
+</template>

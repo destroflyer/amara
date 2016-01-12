@@ -1,0 +1,71 @@
+<template>
+    <entity id="spell">
+        <name>Spinning Slash</name>
+        <description>Trynda.</description>
+        <spellVisualisation>spinning_slash</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/spinning_slash_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castTurnToTarget/>
+        <baseCooldown>13</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <move>
+                            <entity>
+                                <targetedMovementDirection/>
+                                <movementSpeed>20</movementSpeed>
+                                <movementAnimation>
+                                    <entity>
+                                        <name>spin</name>
+                                        <loopDuration>0.3</loopDuration>
+                                    </entity>
+                                </movementAnimation>
+                                <distanceLimit>10</distanceLimit>
+                            </entity>
+                        </move>
+                        <deactivateHitbox/>
+                        <addEffectTriggers>
+                            <!--reactivate hitbox-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <activateHitbox/>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

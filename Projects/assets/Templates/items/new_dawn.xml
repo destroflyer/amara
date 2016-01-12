@@ -1,0 +1,11 @@
+<template>
+    <entity>
+        <itemID>new_dawn</itemID>
+        <name>New Dawn</name>
+        <itemRecipe gold="600" itemIDs="blinkstrike,greatsword"/>
+        <isSellable>2500</isSellable>
+        <!--stats-->
+        <bonusFlatAttackDamage>80</bonusFlatAttackDamage>
+        <bonusPercentageCriticalChance>0.3</bonusPercentageCriticalChance>
+    </entity>
+</template>

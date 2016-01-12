@@ -1,0 +1,91 @@
+<template>
+    <value name="delay">0.3</value>
+    <value name="stunDuration">1</value>
+    <entity id="spell">
+        <name>Splitshot</name>
+        <description>Erika shoots two arrows in a 90 degrees angle, each of them damaging the first enemy hit. If a target is marked by "Robin's Gift", it will be stunned for [stunDuration] seconds.</description>
+        <spellVisualisation>erika_splitshot</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn projectiles-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./projectile</spawnTemplate>
+                                <spawnRelativeDirection>-45</spawnRelativeDirection>
+                                <spawnMovementSpeed>15</spawnMovementSpeed>
+                                <spawnMovementRelativeDirection>-45</spawnMovementRelativeDirection>
+                            </entity>
+                            <entity>
+                                <spawnTemplate>./projectile</spawnTemplate>
+                                <spawnRelativeDirection>45</spawnRelativeDirection>
+                                <spawnMovementSpeed>15</spawnMovementSpeed>
+                                <spawnMovementRelativeDirection>45</spawnMovementRelativeDirection>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/erika_w_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>[delay]</castDuration>
+        <stopBeforeCasting/>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>shoot_arrow</name>
+                <loopDuration>0.5</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>4</baseCooldown>
+        <erikaPassiveEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addStun>[stunDuration]</addStun>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </erikaPassiveEffectTriggers>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>40 + (0.3 * source.attackDamage)</physicalDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

@@ -1,0 +1,28 @@
+<template>
+    <entity id="projectile">
+        <model>Models/fireball/skin.xml</model>
+        <isProjectile/>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <targetReachedTrigger/>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--remove projectile-->
+    <entity>
+        <targetReachedTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+</template>

@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>leather_armor</itemID>
+        <name>Leather Armor</name>
+        <itemRecipe gold="400"/>
+        <isSellable>250</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumHealth>120</bonusFlatMaximumHealth>
+    </entity>
+</template>
