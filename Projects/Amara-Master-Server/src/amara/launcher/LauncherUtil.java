@@ -6,10 +6,7 @@ package amara.launcher;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.UIManager;
-import com.jme3.animation.SkeletonControl;
 import amara.MultipleOutputStream;
 import amara.engine.files.FileAssets;
 import amara.engine.network.*;
@@ -22,9 +19,6 @@ import amara.game.entitysystem.CustomGameTemplates;
 public class LauncherUtil{
     
     public static void initProgramProperties(){
-        //ConsoleOutput
-        Logger.getLogger("").setLevel(Level.SEVERE);
-        Logger.getLogger(SkeletonControl.class.getName()).setLevel(Level.SEVERE);
         try{
             FileOutputStream logFileOutputStream = new FileOutputStream("./log.txt");
             System.setOut(new PrintStream(new MultipleOutputStream(System.out, logFileOutputStream)));

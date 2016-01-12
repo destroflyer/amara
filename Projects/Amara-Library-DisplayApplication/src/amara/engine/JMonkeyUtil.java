@@ -5,7 +5,10 @@
 package amara.engine;
 
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import com.jme3.animation.AnimChannel;
+import com.jme3.animation.SkeletonControl;
 import com.jme3.bounding.BoundingBox;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
@@ -20,6 +23,11 @@ import com.jme3.scene.Spatial;
  * @author Carl
  */
 public class JMonkeyUtil{
+    
+    public static void disableLogger(){
+        Logger.getLogger("").setLevel(Level.SEVERE);
+        Logger.getLogger(SkeletonControl.class.getName()).setLevel(Level.SEVERE);
+    }
     
     public static Vector3f getSpatialDimension(Spatial spatial){
         if(spatial.getWorldBound() instanceof BoundingBox){

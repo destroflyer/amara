@@ -4,8 +4,6 @@
  */
 package amara.engine.applications.masterserver.server.network.backends;
 
-import amara.game.games.GamePlayer;
-import amara.game.games.Game;
 import java.util.ArrayList;
 import com.jme3.network.Message;
 import amara.Util;
@@ -15,6 +13,7 @@ import amara.engine.applications.masterserver.server.appstates.*;
 import amara.engine.applications.masterserver.server.network.messages.*;
 import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.*;
+import amara.game.games.*;
 import amara.game.maps.*;
 
 /**
