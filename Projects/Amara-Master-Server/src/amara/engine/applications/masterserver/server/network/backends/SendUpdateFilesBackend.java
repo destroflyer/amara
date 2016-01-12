@@ -20,23 +20,44 @@ import amara.engine.network.*;
  */
 public class SendUpdateFilesBackend implements MessageBackend{
 
-    public SendUpdateFilesBackend(UpdateFile[] updateFiles){
-        this.updateFiles = updateFiles;
+    public SendUpdateFilesBackend(UpdatesAppState updatesAppState){
+        this.updatesAppState = updatesAppState;
+        generateSplittedUpdateFiles();
     }
-    private UpdateFile[] updateFiles;
+    private static final int FILES_PER_MESSAGE = 50;
+    private UpdatesAppState updatesAppState;
+    private UpdateFile[][] splittedUpdateFiles;
+    
+    private void generateSplittedUpdateFiles(){
+        UpdateFile[] updateFiles = updatesAppState.getUpdateFiles();
+        splittedUpdateFiles = new UpdateFile[(int) Math.ceil(((float) updateFiles.length) / FILES_PER_MESSAGE)][];
+        int remainingFiles = updateFiles.length;
+        for(int i=0;i<splittedUpdateFiles.length;i++){
+            int partSize = Math.min(remainingFiles, FILES_PER_MESSAGE);
+            splittedUpdateFiles[i] = new UpdateFile[partSize];
+            for(int r=0;r<partSize;r++){
+                splittedUpdateFiles[i][r] = updateFiles[(i * FILES_PER_MESSAGE) + r];
+            }
+            remainingFiles -= partSize;
+        }
+    }
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_GetUpdateFiles){
             Message_GetUpdateFiles message = (Message_GetUpdateFiles) receivedMessage;
-            messageResponse.addAnswerMessage(new Message_UpdateFiles(updateFiles));
+            for(int i=0;i<splittedUpdateFiles.length;i++){
+                boolean isEndReached = (i == (splittedUpdateFiles.length - 1));
+                messageResponse.addAnswerMessage(new Message_UpdateFiles(splittedUpdateFiles[i], isEndReached));
+            }
         }
         else if(receivedMessage instanceof Message_GetUpdateFile){
             Message_GetUpdateFile message = (Message_GetUpdateFile) receivedMessage;
+            UpdateFile[] updateFiles = updatesAppState.getUpdateFiles();
             if((message.getIndex() >= 0) && (message.getIndex() < updateFiles.length)){
                 UpdateFile updateFile = updateFiles[message.getIndex()];
                 try{
-                    String filePath = (UpdatesAppState.UPDATE_FILES_DIRECTORY + updateFile.getFilePath().substring(2));
+                    String filePath = (updatesAppState.getUpdateFilesDirectory() + updateFile.getFilePath().substring(2));
                     FileInputStream fileInputStream = new FileInputStream(filePath);
                     byte[] buffer = new byte[30000];
                     int readBytes = 0;

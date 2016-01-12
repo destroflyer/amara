@@ -19,12 +19,18 @@ public class Message_UpdateFiles extends AbstractMessage{
         
     }
     
-    public Message_UpdateFiles(UpdateFile[] updateFiles){
+    public Message_UpdateFiles(UpdateFile[] updateFiles, boolean isEndReached){
         this.updateFiles = updateFiles;
+        this.isEndReached = isEndReached;
     }
     private UpdateFile[] updateFiles;
+    private boolean isEndReached;
 
     public UpdateFile[] getUpdateFiles(){
         return updateFiles;
+    }
+
+    public boolean isEndReached(){
+        return isEndReached;
     }
 }

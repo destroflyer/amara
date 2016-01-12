@@ -22,20 +22,21 @@ public class UpdatesAppState extends ServerBaseAppState{
     public UpdatesAppState(){
         
     }
-    public final static String UPDATE_FILES_DIRECTORY = "./update/";
+    private String updateFilesDirectory;
     private UpdateFile[] updateFiles;
     
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
+        updateFilesDirectory = FileManager.getFileContent("./update.ini");
         initializeUpdateFiles();
         NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
-        networkServer.addMessageBackend(new SendUpdateFilesBackend(updateFiles));
+        networkServer.addMessageBackend(new SendUpdateFilesBackend(this));
     }
 
     private void initializeUpdateFiles(){
         LinkedList<UpdateFile> filesList = new LinkedList<UpdateFile>();
-        File parentDirectory = new File(UPDATE_FILES_DIRECTORY);
+        File parentDirectory = new File(updateFilesDirectory);
         addUpdateFiles(parentDirectory, parentDirectory, filesList);
         updateFiles = filesList.toArray(new UpdateFile[filesList.size()]);
     }
@@ -56,8 +57,16 @@ public class UpdatesAppState extends ServerBaseAppState{
     }
     
     private String prepareUpdateFilePath(File file){
-        String filePath = ("./" + file.getPath().substring(UPDATE_FILES_DIRECTORY.length()));
+        String filePath = ("./" + file.getPath().substring(updateFilesDirectory.length()));
         filePath = filePath.replace("\\", "/");
         return filePath;
+    }
+
+    public String getUpdateFilesDirectory(){
+        return updateFilesDirectory;
+    }
+
+    public UpdateFile[] getUpdateFiles(){
+        return updateFiles;
     }
 }

@@ -11,6 +11,7 @@ import java.awt.Toolkit;
 import java.awt.event.AWTEventListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.LinkedList;
 import javax.swing.JFrame;
 import amara.Util;
 import amara.engine.applications.launcher.startscreen.screens.*;
@@ -130,17 +131,18 @@ public class ClientLauncher extends JFrame{
         txtMasterserverPort.setEnabled(true);
     }
     
-    public void update(final UpdateFile[] updateFiles){
+    public void update(final LinkedList<UpdateFile> updateFiles){
         new Thread(new Runnable(){
 
             @Override
             public void run(){
-                pbrCompleteUpdate.setMaximum(updateFiles.length);
-                for(int i=0;i<updateFiles.length;i++){
-                    UpdateFile updateFile = updateFiles[i];
+                pbrCompleteUpdate.setMaximum(updateFiles.size());
+                int i = 0;
+                for(UpdateFile updateFile : updateFiles){
                     pbrCompleteUpdate.setString(updateFile.getFilePath());
-                    updateFile(updateFiles, i);
+                    updateFile(updateFile, i);
                     pbrCompleteUpdate.setValue(i + 1);
+                    i++;
                 }
                 pbrCompleteUpdate.setString("The game is up to date.");
                 pbrCurrentFile.setString("");
@@ -155,8 +157,7 @@ public class ClientLauncher extends JFrame{
         }).start();
     }
     
-    private void updateFile(UpdateFile[] updateFiles, int index){
-        UpdateFile updateFile = updateFiles[index];
+    private void updateFile(UpdateFile updateFile, int index){
         File file = new File(updateFile.getFilePath());
         if(FileManager.isDirectory(file)){
             FileManager.createDirectoryIfNotExists(file.getPath());
