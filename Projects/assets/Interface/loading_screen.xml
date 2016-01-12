@@ -8,6 +8,6 @@
             </control>
         </layer>
     </screen>
-    <screen id="ingame">
+    <screen id="ingame" controller="de.lessvoid.nifty.screen.DefaultScreenController">
     </screen>
 </nifty>

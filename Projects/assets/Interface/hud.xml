@@ -112,7 +112,7 @@
                                 </panel>
                             </panel>
                         </panel>
-                        <panel childLayout="horizontal" backgroundColor="#000D">
+                        <panel id="shop_button" childLayout="horizontal" backgroundColor="#000D">
                             <panel width="32px"/>
                             <panel childLayout="vertical" width="26px">
                                 <panel height="7px"/>
@@ -423,7 +423,7 @@
                 <panel childLayout="horizontal" height="200px">
                     <panel/>
                     <panel id="death_recap_container" childLayout="vertical" width="400px">
-                        <control name="button" width="100%" height="28px" label="Death Recap">
+                        <control id="toggle_death_recap_button" name="button" width="100%" height="28px" label="Death Recap">
                             <interact onClick="toggleDisplayDeathRecap()"/>
                         </control>
                         <!--Generated ScrollPanel "death_recap"-->
@@ -438,7 +438,7 @@
     </screen>
     <screen id="gameOver" controller="amara.engine.applications.ingame.client.gui.ScreenController_GameOver">
         <layer childLayout="center" backgroundColor="#0008">
-            <control name="button" x="35%" y="52%" width="40%" height="15%" label="Game Over">
+            <control id="exit_game_button" name="button" x="35%" y="52%" width="40%" height="15%" label="Game Over">
                 <effect>
                     <onStartScreen name="fade" length="1000"/>
                 </effect>

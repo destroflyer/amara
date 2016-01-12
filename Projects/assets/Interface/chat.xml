@@ -20,7 +20,7 @@
                         <panel height="2px"/>
                         <panel id="chat_input" childLayout="horizontal" height="21px">
                             <control id="chat_input_text" name="textfield" width="320px" height="100%" text="" maxLength="40"/>
-                            <control name="button" width="80px" height="100%" label="Ok">
+                            <control id="send_chat_message_button" name="button" width="80px" height="100%" label="Ok">
                                 <interact onClick="sendMessage()"/>
                             </control>
                         </panel>

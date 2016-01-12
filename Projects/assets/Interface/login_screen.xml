@@ -16,7 +16,7 @@
                         <text id="label_password" text="Password:" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
                         <control id="password" name="textfield" height="20px" text=""/>
                         <panel height="12px"/>
-                        <control name="button" width="100%" height="30px" label="Login">
+                        <control id="login_button" name="button" width="100%" height="30px" label="Login">
                             <interact onClick="login()"/>
                         </control>
                     </panel>
