@@ -13,7 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
-import amara.Util;
+import amara.engine.files.FileAssets;
 
 /**
  *
@@ -51,7 +51,7 @@ public class PanAvatarSelection extends javax.swing.JPanel{
         int buttonSize = 70;
         for(int i=0;i<AVATARS.length;i++){
             final String avatar = AVATARS[i];
-            final JButton btnAvatar = new JButton(Util.getResourceImageIcon(getAvatarResourcePath(avatar), buttonSize, buttonSize));
+            final JButton btnAvatar = new JButton(FileAssets.getImageIcon(getAvatarFilePath(avatar), buttonSize, buttonSize));
             btnAvatar.addActionListener(new ActionListener(){
 
                 @Override
@@ -85,8 +85,8 @@ public class PanAvatarSelection extends javax.swing.JPanel{
         }
     }
     
-    public static String getAvatarResourcePath(String avatar){
-        return ("/Interface/client/avatars/" + avatar + ".jpg");
+    public static String getAvatarFilePath(String avatar){
+        return ("Interface/client/avatars/" + avatar + ".jpg");
     }
 
     /** This method is called from within the constructor to

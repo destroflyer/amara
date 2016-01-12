@@ -4,7 +4,7 @@
  */
 
 /*
- * panPlay.java
+ * PanLobby.java
  *
  * Created on 02.08.2012, 23:56:34
  */
@@ -13,12 +13,12 @@ package amara.launcher.client.panels;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import com.jme3.network.Message;
-import amara.Util;
+import amara.engine.applications.masterserver.client.MasterserverClientUtil;
 import amara.engine.applications.masterserver.server.network.messages.*;
 import amara.engine.applications.masterserver.server.protocol.*;
+import amara.engine.files.FileAssets;
 import amara.engine.network.NetworkClient;
 import amara.launcher.FrameUtil;
-import amara.engine.applications.masterserver.client.MasterserverClientUtil;
 
 /**
  *
@@ -29,7 +29,7 @@ public class PanLobby extends javax.swing.JPanel{
     public PanLobby(PanPlay panPlay){
         initComponents();
         this.panPlay = panPlay;
-        lblMapIcon.setIcon(Util.getResourceImageIcon("/Interface/client/unknown.jpg", 120, 120));
+        lblMapIcon.setIcon(FileAssets.getImageIcon("Interface/client/unknown.jpg", 120, 120));
     }
     private PanPlay panPlay;
     private Lobby lobby;
@@ -42,7 +42,7 @@ public class PanLobby extends javax.swing.JPanel{
         btnStart.setEnabled(isOwner);
         cbxMapName.setEnabled(isOwner);
         cbxMapName.setSelectedItem(lobby.getLobbyData().getMapName());
-        lblMapIcon.setIcon(Util.getResourceImageIcon("/Maps/" + lobby.getLobbyData().getMapName() + "/icon.png", 120, 120));
+        lblMapIcon.setIcon(FileAssets.getImageIcon("Maps/" + lobby.getLobbyData().getMapName() + "/icon.png", 120, 120));
         updatePlayersList(lobby.getPlayers());
     }
     

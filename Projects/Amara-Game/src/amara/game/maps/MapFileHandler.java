@@ -13,7 +13,7 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.math.ColorRGBA;
 import amara.Util;
-import amara.engine.files.FileManager;
+import amara.engine.files.*;
 import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.maps.lights.*;
 import amara.game.maps.terrain.*;
@@ -152,18 +152,18 @@ public class MapFileHandler{
             root.addContent(elementVisuals);
             FileManager.putFileContent(file.getPath(), new XMLOutputter().outputString(document));
         }catch(Exception ex){
-            System.out.println("Error while saving the map: " + ex.toString());
+            System.err.println("Error while saving the map: " + ex.toString());
         }
     }
 
     public static Map load(String mapName){
         try{
-            InputStream inputStream = Util.getResourceInputStream("/Maps/" + mapName + "/map.xml");
+            InputStream inputStream = FileAssets.getInputStream("Maps/" + mapName + "/map.xml");
             Map map = load(new SAXBuilder().build(inputStream));
             map.setName(mapName);
             return map;
         }catch(Exception ex){
-            System.out.println("Error while loading the map: " + ex.toString());
+            System.err.println("Error while loading the map: " + ex.toString());
         }
         return null;
     }
@@ -262,7 +262,7 @@ public class MapFileHandler{
             }
             return map;
         }catch(Exception ex){
-            System.out.println("Error while loading the map: " + ex.toString());
+            System.err.println("Error while loading the map: " + ex.toString());
         }
         return null;
     }

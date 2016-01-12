@@ -1,6 +1,8 @@
 package amara.launcher.client;
 
 import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.sound.sampled.AudioFormat;
@@ -9,7 +11,6 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
-import amara.Util;
 import com.jcraft.jogg.Packet;
 import com.jcraft.jogg.Page;
 import com.jcraft.jogg.StreamState;
@@ -52,13 +53,17 @@ public class OggClip{
     private float oldGain;
 
     /**
-     * Create a new clip based on a reference into the class path
+     * Create a new clip based on a reference into the file path
      * 
-     * @param resourcePath The reference into the class path which the ogg can be read from
-     * @throws IOException Indicated a failure to find the resource
+     * @param filePath The reference into the file path which the ogg can be read from
+     * @throws IOException Indicated a failure to find the file
      */
-    public OggClip(String resourcePath){
-        init(Util.getResourceInputStream(resourcePath));
+    public OggClip(String filePath){
+        try{
+            init(new FileInputStream(filePath));
+        }catch(FileNotFoundException ex){
+            System.err.println("Error while loading audio '" + filePath + "'.");
+        }
     }
 
     /**

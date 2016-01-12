@@ -6,6 +6,7 @@ package amara.launcher.client.panels;
 
 import javax.swing.JPanel;
 import amara.engine.applications.masterserver.server.protocol.AuthentificationInformation;
+import amara.engine.files.FileAssets;
 import amara.launcher.client.*;
 
 /**
@@ -16,8 +17,8 @@ public abstract class PanLogin extends JPanel{
     
     private OggClip backgroundMusicClip;
     
-    protected void playBackgroundMusic(String musicResourcePath){
-        backgroundMusicClip = new OggClip(musicResourcePath);
+    protected void playBackgroundMusic(String musicFilePath){
+        backgroundMusicClip = new OggClip(FileAssets.ROOT + musicFilePath);
         backgroundMusicClip.setGain(0.75f);
         backgroundMusicClip.play();
     }

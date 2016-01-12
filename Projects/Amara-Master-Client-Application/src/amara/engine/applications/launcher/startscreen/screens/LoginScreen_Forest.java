@@ -39,10 +39,10 @@ public class LoginScreen_Forest extends LoginScreen{
 
     @Override
     public void initialize(LoginScreenApplication application){
-        ModelObject tree = new ModelObject(application, "/Models/cartoon_forest_tree_1/skin.xml");
+        ModelObject tree = new ModelObject(application, "Models/cartoon_forest_tree_1/skin.xml");
         tree.setLocalTranslation(0.3f, 0.2f, -0.2f);
         application.getRootNode().attachChild(tree);
-        ModelObject unit = new ModelObject(application, "/Models/minion/skin_default.xml");
+        ModelObject unit = new ModelObject(application, "Models/minion/skin_default.xml");
         unit.setLocalTranslation(-1.8f, 0.8f, -0.5f);
         JMonkeyUtil.setLocalRotation(unit, new Vector3f(0.25f, 0, 1));
         unit.setLocalScale(0.4f);

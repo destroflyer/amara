@@ -25,7 +25,7 @@ public class HealthBarStyle_Boss extends HealthBarStyle{
 
     @Override
     protected void drawMaximumHealth(PaintableImage paintableImage, float maximumHealth, boolean isAllied){
-        paintableImage.loadImage("/Interface/hud/healthbars/boss_150.png");
+        paintableImage.loadImage("Interface/hud/healthbars/boss_150.png");
         Color color = (isAllied?HealthBarStyle_Default.COLOR_ALLIES:HealthBarStyle_Default.COLOR_ENEMIES);
         for(int x=innerX;x<(innerX + innerWidth);x++){
             for(int y=innerY;y<(innerY + innerHeight);y++){

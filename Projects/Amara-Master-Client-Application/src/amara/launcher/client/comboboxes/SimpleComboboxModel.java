@@ -6,7 +6,6 @@ package amara.launcher.client.comboboxes;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.event.ListDataListener;
-import amara.engine.applications.masterserver.server.protocol.*;
 
 /**
  *
@@ -42,7 +41,10 @@ public abstract class SimpleComboboxModel<E> implements ComboBoxModel<String>{
 
     @Override
     public String getElementAt(int index){
-        return getItemTitle(objects[index]);
+        if((index >= 0) && (index < objects.length)){
+            return getItemTitle(objects[index]);
+        }
+        return null;
     }
     
     protected abstract String getItemTitle(E object);

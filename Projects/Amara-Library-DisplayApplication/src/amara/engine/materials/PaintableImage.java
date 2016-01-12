@@ -10,16 +10,16 @@ import java.nio.ByteBuffer;
 import com.jme3.texture.Image;
 import com.jme3.texture.Image.Format;
 import com.jme3.util.BufferUtils;
-import amara.Util;
+import amara.engine.files.FileAssets;
  
 public class PaintableImage{
     
-    public PaintableImage(String imageResourcePath){
-        this(imageResourcePath, false);
+    public PaintableImage(String imageFilePath){
+        this(imageFilePath, false);
     }
     
-    public PaintableImage(String imageResourcePath, boolean flipY){
-        BufferedImage loadedImage = Util.getResourceImage(imageResourcePath);
+    public PaintableImage(String imageFilePath, boolean flipY){
+        BufferedImage loadedImage = FileAssets.getImage(imageFilePath);
         setSize(loadedImage.getWidth(), loadedImage.getHeight());
         loadImage(loadedImage, flipY);
     }
@@ -49,12 +49,12 @@ public class PaintableImage{
         return image;
     }
     
-    public void loadImage(String imageResourcePath){
-        loadImage(imageResourcePath, false);
+    public void loadImage(String filePath){
+        loadImage(filePath, false);
     }
     
-    public void loadImage(String imageResourcePath, boolean flipY){
-        BufferedImage loadedImage = Util.getResourceImage(imageResourcePath);
+    public void loadImage(String filePath, boolean flipY){
+        BufferedImage loadedImage = FileAssets.getImage(filePath);
         loadImage(loadedImage, flipY);
     }
     

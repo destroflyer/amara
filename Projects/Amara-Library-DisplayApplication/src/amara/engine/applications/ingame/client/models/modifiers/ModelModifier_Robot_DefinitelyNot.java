@@ -21,7 +21,7 @@ public class ModelModifier_Robot_DefinitelyNot extends ModelModifier{
     public void modify(ModelObject modelObject){
         SkeletonControl skeletonControl = modelObject.getModelSpatial().getControl(SkeletonControl.class);
         Node headNode = skeletonControl.getAttachmentsNode("head");
-        Spatial funnyMoustache = new ModelSkin("/Models/funny_moustache/skin.xml").loadSpatial();
+        Spatial funnyMoustache = new ModelSkin("Models/funny_moustache/skin.xml").loadSpatial();
         funnyMoustache.setLocalTranslation(0, 0.05f, -0.55f);
         JMonkeyUtil.setLocalRotation(funnyMoustache, new Vector3f(0, 0, -1));
         headNode.attachChild(funnyMoustache);

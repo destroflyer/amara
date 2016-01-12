@@ -4,7 +4,7 @@
  */
 
 /*
- * panHeader.java
+ * PanError.java
  *
  * Created on 03.08.2012, 15:42:37
  */
@@ -14,7 +14,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import amara.*;
+import amara.engine.files.FileAssets;
 
 /**
  *
@@ -34,7 +34,7 @@ public class PanError extends javax.swing.JPanel{
     protected void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
         if(backgroundImage == null){
-            backgroundImage = Util.getResourceImage("/Interface/client/panels/error.jpg", -1, getHeight());
+            backgroundImage = FileAssets.getImage("Interface/client/panels/error.jpg", -1, getHeight());
         }
         graphics.drawImage(backgroundImage, 0, 0, this);
     }

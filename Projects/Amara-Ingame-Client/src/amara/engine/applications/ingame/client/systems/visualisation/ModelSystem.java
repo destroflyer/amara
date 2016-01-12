@@ -43,7 +43,7 @@ public class ModelSystem implements EntitySystem{
         Node node = entitySceneMap.requestNode(entity);
         node.detachChildNamed(NODE_NAME_MODEL);
         ModelComponent modelComponent = entityWorld.getComponent(entity, ModelComponent.class);
-        ModelObject modelObject = new ModelObject(mainApplication, "/" + modelComponent.getModelSkinPath());
+        ModelObject modelObject = new ModelObject(mainApplication, modelComponent.getModelSkinPath());
         modelObject.setName(NODE_NAME_MODEL);
         modelObject.setShadowMode(RenderQueue.ShadowMode.Cast);
         node.attachChild(modelObject);

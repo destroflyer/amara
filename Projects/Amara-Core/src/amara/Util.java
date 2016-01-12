@@ -22,8 +22,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 /**
@@ -32,7 +30,7 @@ import javax.swing.filechooser.FileFilter;
  */
 public class Util{
     
-    public static ImageIcon getResourceImageIcon(String imageResourcePath, int width, int height){
+    /*public static ImageIcon getResourceImageIcon(String imageResourcePath, int width, int height){
         return new ImageIcon(getResourceImage(imageResourcePath, width, height));
     }
     
@@ -59,7 +57,7 @@ public class Util{
     
     public static URL getResourceURL(String resourcePath){
         return Util.class.getResource(resourcePath);
-    }
+    }*/
     
     public static void browseURL(String url){
         try{

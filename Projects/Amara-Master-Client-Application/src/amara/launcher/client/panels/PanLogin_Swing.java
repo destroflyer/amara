@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 import amara.*;
+import amara.engine.files.FileAssets;
 import amara.launcher.client.buttons.*;
 
 /**
@@ -60,7 +61,7 @@ public class PanLogin_Swing extends PanLogin{
     protected void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
         if(backgroundImage == null){
-            backgroundImage = Util.getResourceImage("/Interface/client/panels/login.jpg", getWidth(), getHeight());
+            backgroundImage = FileAssets.getImage("Interface/client/panels/login.jpg", getWidth(), getHeight());
         }
         graphics.drawImage(backgroundImage, 0, 0, this);
     }
@@ -74,7 +75,7 @@ public class PanLogin_Swing extends PanLogin{
     @Override
     public void start(){
         super.start();
-        playBackgroundMusic("/Sounds/music/Lords of the Sky.ogg");
+        playBackgroundMusic("Sounds/music/Lords of the Sky.ogg");
     }
     
     @Override

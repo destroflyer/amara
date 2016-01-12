@@ -30,7 +30,7 @@ public class PanLogin_JME extends PanLogin{
     @Override
     public void start(){
         loginScreenApplication.startCanvas();
-        playBackgroundMusic("/" + loginScreen.getBackgroundMusicPath());
+        playBackgroundMusic(loginScreen.getBackgroundMusicPath());
     }
 
     @Override

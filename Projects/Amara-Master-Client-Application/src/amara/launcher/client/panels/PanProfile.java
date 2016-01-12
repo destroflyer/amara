@@ -14,14 +14,13 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.awt.event.ItemEvent;
-import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
-import amara.Util;
+import amara.engine.applications.masterserver.client.MasterserverClientUtil;
 import amara.engine.applications.masterserver.server.protocol.*;
+import amara.engine.files.FileAssets;
 import amara.engine.network.NetworkClient;
 import amara.engine.network.messages.protocol.*;
 import amara.launcher.FrameUtil;
-import amara.engine.applications.masterserver.client.MasterserverClientUtil;
 import amara.launcher.client.comboboxes.*;
 
 /**
@@ -32,8 +31,8 @@ public class PanProfile extends javax.swing.JPanel{
 
     public PanProfile(){
         initComponents();
-        btnAvatar.setIcon(Util.getResourceImageIcon("/Interface/client/unknown.jpg", 100, 100));
-        lblSearchLoader.setIcon(new ImageIcon(Util.getResourceURL("/Interface/client/loaders/user_search.gif")));
+        btnAvatar.setIcon(FileAssets.getImageIcon("Interface/client/unknown.jpg", 100, 100));
+        lblSearchLoader.setIcon(FileAssets.getImageIcon("Interface/client/loaders/user_search.gif"));
         lblSearchLoader.setVisible(false);
         cbxCharacters.setModel(new ComboboxModel_OwnedCharacters(MasterserverClientUtil.getOwnedCharacters()));
         updateSelectedCharacterSkins();
@@ -104,7 +103,7 @@ public class PanProfile extends javax.swing.JPanel{
     }
     
     private void setAvatarIcon(String avatar){
-        btnAvatar.setIcon(Util.getResourceImageIcon(PanAvatarSelection.getAvatarResourcePath(avatar), btnAvatar.getWidth(), btnAvatar.getHeight()));
+        btnAvatar.setIcon(FileAssets.getImageIcon(PanAvatarSelection.getAvatarFilePath(avatar), btnAvatar.getWidth(), btnAvatar.getHeight()));
     }
     
     private void updateSelectedCharacterSkins(){

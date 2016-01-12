@@ -12,7 +12,8 @@ package amara.launcher.client.panels;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import amara.*;
+import amara.GameInfo;
+import amara.engine.files.FileAssets;
 
 /**
  *
@@ -24,7 +25,7 @@ public class PanHeader extends javax.swing.JPanel{
     public PanHeader(){
         initComponents();
         lblTitle.setText(GameInfo.NAME);
-        backgroundImage = Util.getResourceImage("/Interface/client/panels/header.jpg");
+        backgroundImage = FileAssets.getImage("Interface/client/panels/header.jpg");
     }
     private Image backgroundImage;
 

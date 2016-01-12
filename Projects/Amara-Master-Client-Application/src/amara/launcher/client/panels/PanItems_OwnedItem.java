@@ -6,8 +6,8 @@ package amara.launcher.client.panels;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import amara.Util;
 import amara.engine.applications.masterserver.server.protocol.OwnedItem;
+import amara.engine.files.FileAssets;
 
 /**
  *
@@ -24,7 +24,7 @@ public class PanItems_OwnedItem extends javax.swing.JPanel{
     private boolean isAvailable;
     
     public void setOwnedItem(OwnedItem ownedItem){
-        lblIcon.setIcon(Util.getResourceImageIcon("/Interface/hud/items/" + ownedItem.getItem().getName() + ".png", 38, 38));
+        lblIcon.setIcon(FileAssets.getImageIcon("Interface/hud/items/" + ownedItem.getItem().getName() + ".png", 38, 38));
         lblTitle.setText(ownedItem.getItem().getTitle());
         lblAmount.setText(ownedItem.getAmount() + "x");
         isAvailable = (ownedItem.getAmount() > 0);

@@ -18,9 +18,9 @@ import amara.engine.settings.Settings;
  */
 public class ModelObject extends Node implements AnimEventListener{
 
-    public ModelObject(DisplayApplication mainApplication, String skinResourcePath){
+    public ModelObject(DisplayApplication mainApplication, String skinPath){
         this.mainApplication = mainApplication;
-        skin = new ModelSkin(skinResourcePath);
+        skin = new ModelSkin(skinPath);
         loadSkin();
     }
     private DisplayApplication mainApplication;

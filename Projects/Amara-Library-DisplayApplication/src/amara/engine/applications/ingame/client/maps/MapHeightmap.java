@@ -15,7 +15,7 @@ import amara.game.maps.MapPhysicsInformation;
 public class MapHeightmap{
 
     public MapHeightmap(String mapName, MapPhysicsInformation mapPhysicsInformation){
-        image = new PaintableImage("/Maps/" + mapName + "/heightmap.png");
+        image = new PaintableImage("Maps/" + mapName + "/heightmap.png");
         this.mapPhysicsInformation = mapPhysicsInformation;
     }
     private PaintableImage image;

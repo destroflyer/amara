@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import amara.Util;
+import amara.engine.files.FileAssets;
 
 /**
  *
@@ -29,48 +30,48 @@ public class PanThanks extends javax.swing.JPanel{
         addThanks();
     }
     private static final Thanks[] THANKS = new Thanks[]{
-        new Thanks("JMonkeyEngine", "Engine development, Starting help", "/Interface/client/thanks/jmonkeyengine.png", "http://jmonkeyengine.org"),
-        new Thanks("Mixamo", "Character models", "/Interface/client/thanks/mixamo.png", "http://mixamo.com"),
-        new Thanks("Blender", "Model editor", "/Interface/client/thanks/blender.png", "http://blender.org"),
-        new Thanks("YouTube", "Feedback", "/Interface/client/thanks/youtube.png", "http://youtube.com/destrostudios"),
+        new Thanks("JMonkeyEngine", "Engine development, Starting help", "Interface/client/thanks/jmonkeyengine.png", "http://jmonkeyengine.org"),
+        new Thanks("Mixamo", "Character models", "Interface/client/thanks/mixamo.png", "http://mixamo.com"),
+        new Thanks("Blender", "Model editor", "Interface/client/thanks/blender.png", "http://blender.org"),
+        new Thanks("YouTube", "Feedback", "Interface/client/thanks/youtube.png", "http://youtube.com/destrostudios"),
         //Persons
-        new Thanks("TeMMeZz", "Tester, Game logic advices", "/Interface/client/thanks/nidalee.jpg"),
-        new Thanks("egoVidiTe", "Tester", "/Interface/client/user.png"),
-        new Thanks("Icecold", "Tester", "/Interface/client/user.png"),
-        new Thanks("Yalee", "Tester", "/Interface/client/user.png"),
-        new Thanks("XBody", "Tester, Model advices", "/Interface/client/user.png"),
-        new Thanks("Kappa", "Inspiration", "/Interface/client/thanks/kappa.png"),
-        new Thanks("Marcel", "Code structure advices", "/Interface/client/thanks/enton.png"),
+        new Thanks("TeMMeZz", "Tester, Game logic advices", "Interface/client/thanks/nidalee.jpg"),
+        new Thanks("egoVidiTe", "Tester", "Interface/client/user.png"),
+        new Thanks("Icecold", "Tester", "Interface/client/user.png"),
+        new Thanks("Yalee", "Tester", "Interface/client/user.png"),
+        new Thanks("XBody", "Tester, Model advices", "Interface/client/user.png"),
+        new Thanks("Kappa", "Inspiration", "Interface/client/thanks/kappa.png"),
+        new Thanks("Marcel", "Code structure advices", "Interface/client/thanks/enton.png"),
         //Models
-        new Thanks("Arteria3d", "Model \"Female Druid\"", "/Interface/client/thanks/arteria3d.png", "http://arteria3d.myshopify.com"),
-        new Thanks("PigArt", "Model \"Cartoon Forest\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/PigArt"),
-        new Thanks("killyone", "Model \"Beetle Golem\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/killyone"),
-        new Thanks("faouzig1990", "Model \"Cartoon City\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/faouzig1990"),
-        new Thanks("Cestmir Dammer", "Model \"Chicken\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/CDmir230"),
-        new Thanks("xrg", "Model \"Column\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/xrg"),
-        new Thanks("Zoltan Miklosi", "Model \"Dragon\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/miklosizoltan"),
-        new Thanks("Gabriel Piacenti", "Model \"Earth Elemental\"", "/Interface/client/thanks/blender.png", "http://opengameart.org/users/piacenti"),
-        new Thanks("Blake Harris", "Model \"Futuristic Glass Wall\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/CopperStache"),
-        new Thanks("MutantGenepool", "Model \"Japanese Bridge\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/MutantGenepool"),
-        new Thanks("willymax-0", "Model \"Little Dragon\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/blends/author/willymax-0"),
-        new Thanks("derekwatts", "Model \"Mjolnir\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/DerekWatts"),
-        new Thanks("Julio Iglesias", "Model \"Pseudospider\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/Zafio"),
-        new Thanks("Jumah Safarty", "Model \"Soldier\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/jumahsafarty"),
-        new Thanks("minglepingle", "Model \"Steve\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/minglepingle"),
-        new Thanks("Sebastian Lague", "Model \"Treasure Chest\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/SebastL"),
-        new Thanks("serienreviewer", "Model \"Thousand Sunny\"", "/Interface/client/thanks/blender.png", "https://sketchfab.com/serienreviewer"),
-        new Thanks("silveralv", "Model \"Tower\"", "/Interface/client/thanks/blender.png", "http://silveralv.deviantart.com"),
-        new Thanks("xuroiux", "Model \"Tree\"", "/Interface/client/thanks/blender.png", "http://blendswap.com/user/xuroiux"),
+        new Thanks("Arteria3d", "Model \"Female Druid\"", "Interface/client/thanks/arteria3d.png", "http://arteria3d.myshopify.com"),
+        new Thanks("PigArt", "Model \"Cartoon Forest\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/PigArt"),
+        new Thanks("killyone", "Model \"Beetle Golem\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/killyone"),
+        new Thanks("faouzig1990", "Model \"Cartoon City\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/faouzig1990"),
+        new Thanks("Cestmir Dammer", "Model \"Chicken\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/CDmir230"),
+        new Thanks("xrg", "Model \"Column\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/xrg"),
+        new Thanks("Zoltan Miklosi", "Model \"Dragon\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/miklosizoltan"),
+        new Thanks("Gabriel Piacenti", "Model \"Earth Elemental\"", "Interface/client/thanks/blender.png", "http://opengameart.org/users/piacenti"),
+        new Thanks("Blake Harris", "Model \"Futuristic Glass Wall\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/CopperStache"),
+        new Thanks("MutantGenepool", "Model \"Japanese Bridge\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/MutantGenepool"),
+        new Thanks("willymax-0", "Model \"Little Dragon\"", "Interface/client/thanks/blender.png", "http://blendswap.com/blends/author/willymax-0"),
+        new Thanks("derekwatts", "Model \"Mjolnir\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/DerekWatts"),
+        new Thanks("Julio Iglesias", "Model \"Pseudospider\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/Zafio"),
+        new Thanks("Jumah Safarty", "Model \"Soldier\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/jumahsafarty"),
+        new Thanks("minglepingle", "Model \"Steve\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/minglepingle"),
+        new Thanks("Sebastian Lague", "Model \"Treasure Chest\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/SebastL"),
+        new Thanks("serienreviewer", "Model \"Thousand Sunny\"", "Interface/client/thanks/blender.png", "https://sketchfab.com/serienreviewer"),
+        new Thanks("silveralv", "Model \"Tower\"", "Interface/client/thanks/blender.png", "http://silveralv.deviantart.com"),
+        new Thanks("xuroiux", "Model \"Tree\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/xuroiux"),
         //Textures
-        new Thanks("Temporalcortex", "HUD Overlay \"Metal Tech\"", "/Interface/client/thanks/youtube.png", "http://youtube.com/Temporalcortex"),
-        new Thanks("RigzSoft", "Texture \"Frost\"", "/Textures/effects/frost_additive.png", "http://rigzsoft.co.uk"),
-        new Thanks("RigzSoft", "Texture \"Crosshair's Cutie Mark\"", "/Textures/effects/robins_gift_mark.png", "http://spartkle.deviantart.com"),
-        new Thanks("Twitch", "Reaction Emotes", "/Interface/client/thanks/twitch.png", "http://twitch.tv"),
-        new Thanks("Pixel Mixer", "Icon set \"Basic Icons\"", "/Interface/client/user.png", "http://iconarchive.com/artist/pixelmixer.html"),
-        new Thanks("Mahmoud Saleh", "Icon set \"Mini Icons\"", "/Interface/client/audio.png", "http://iconarchive.com/artist/salehhh.html"),
+        new Thanks("Temporalcortex", "HUD Overlay \"Metal Tech\"", "Interface/client/thanks/youtube.png", "http://youtube.com/Temporalcortex"),
+        new Thanks("RigzSoft", "Texture \"Frost\"", "Textures/effects/frost_additive.png", "http://rigzsoft.co.uk"),
+        new Thanks("RigzSoft", "Texture \"Crosshair's Cutie Mark\"", "Textures/effects/robins_gift_mark.png", "http://spartkle.deviantart.com"),
+        new Thanks("Twitch", "Reaction Emotes", "Interface/client/thanks/twitch.png", "http://twitch.tv"),
+        new Thanks("Pixel Mixer", "Icon set \"Basic Icons\"", "Interface/client/user.png", "http://iconarchive.com/artist/pixelmixer.html"),
+        new Thanks("Mahmoud Saleh", "Icon set \"Mini Icons\"", "Interface/client/audio.png", "http://iconarchive.com/artist/salehhh.html"),
         //Audio
-        new Thanks("Michikawa", "Music pack \"Celestial Aeon Project\"", "/Interface/client/audio.png", "http://mikseri.net/essence"),
-        new Thanks("Blastwave FX", "Sound pack \"Free Sound Effects Download Pack #1\"", "/Interface/client/audio.png", "http://blastwavefx.com"),
+        new Thanks("Michikawa", "Music pack \"Celestial Aeon Project\"", "Interface/client/audio.png", "http://mikseri.net/essence"),
+        new Thanks("Blastwave FX", "Sound pack \"Free Sound Effects Download Pack #1\"", "Interface/client/audio.png", "http://blastwavefx.com"),
     };
     
     private void addThanks(){
@@ -82,7 +83,7 @@ public class PanThanks extends javax.swing.JPanel{
         for(int i=0;i<THANKS.length;i++){
             final Thanks thanks = THANKS[i];
             x = padding;
-            ImageIcon icon = Util.getResourceImageIcon(thanks.getIconFilePath(), lineHeight, lineHeight);
+            ImageIcon icon = FileAssets.getImageIcon(thanks.getIconFilePath(), lineHeight, lineHeight);
             JLabel lblIcon = new JLabel(icon);
             lblIcon.setLocation(x, y);
             lblIcon.setSize(lineHeight, lineHeight);

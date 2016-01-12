@@ -147,7 +147,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
         for(MapVisual visual : visuals.getMapVisuals()){
             if(visual instanceof ModelVisual){
                 ModelVisual modelVisual = (ModelVisual) visual;
-                ModelObject modelObject = new ModelObject(mainApplication, "/" + modelVisual.getModelSkinPath());
+                ModelObject modelObject = new ModelObject(mainApplication, modelVisual.getModelSkinPath());
                 Vector3f translation = modelVisual.getPosition().clone();
                 translation.setY(mapHeightmap.getHeight(translation.getX(), translation.getZ()));
                 modelObject.setLocalTranslation(translation);

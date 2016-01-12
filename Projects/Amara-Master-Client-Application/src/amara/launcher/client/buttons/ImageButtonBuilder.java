@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import amara.Util;
+import amara.engine.files.FileAssets;
 
 /**
  *
@@ -16,9 +17,9 @@ import amara.Util;
 public class ImageButtonBuilder{
 
     public ImageButtonBuilder(String buttonName, String text){
-        this.imageNormal = Util.getResourceImage("/Interface/client/buttons/" + buttonName + "_normal.png");
-        this.imageHovered = Util.getResourceImage("/Interface/client/buttons/" + buttonName + "_hovered.png");
-        this.imagePressed = Util.getResourceImage("/Interface/client/buttons/" + buttonName + "_pressed.png");
+        this.imageNormal = FileAssets.getImage("Interface/client/buttons/" + buttonName + "_normal.png");
+        this.imageHovered = FileAssets.getImage("Interface/client/buttons/" + buttonName + "_hovered.png");
+        this.imagePressed = FileAssets.getImage("Interface/client/buttons/" + buttonName + "_pressed.png");
         this.text = text;
     }
     public enum ButtonActionType{

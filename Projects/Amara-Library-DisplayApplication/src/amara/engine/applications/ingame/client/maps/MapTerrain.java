@@ -72,7 +72,7 @@ public class MapTerrain{
     }
     
     private Texture2D loadAlphaMap(String imagePath){
-        PaintableImage paintableImage = new PaintableImage("/" + imagePath, true);
+        PaintableImage paintableImage = new PaintableImage(imagePath, true);
         paintableImage.setBackground_Alpha(0);
         Texture2D texture2D = new Texture2D();
         texture2D.setImage(paintableImage.getImage());

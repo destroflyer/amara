@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.UIManager;
 import com.jme3.animation.SkeletonControl;
 import amara.MultipleOutputStream;
+import amara.engine.files.FileAssets;
 import amara.engine.network.*;
 import amara.game.entitysystem.CustomGameTemplates;
 
@@ -30,13 +31,14 @@ public class LauncherUtil{
             System.setErr(new PrintStream(new MultipleOutputStream(System.err, logFileOutputStream)));
         }catch(Exception ex){
         }
+        FileAssets.readRootFile();
+        MessagesSerializer_Protocol.registerClasses();
+        MessagesSerializer_Game.registerClasses();
+        CustomGameTemplates.registerLoader();
         //LookAndFeel
         try{
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }catch(Exception ex){
         }
-        MessagesSerializer_Protocol.registerClasses();
-        MessagesSerializer_Game.registerClasses();
-        CustomGameTemplates.registerLoader();
     }
 }

@@ -5,7 +5,7 @@
 package amara.engine.applications.ingame.client.models;
 
 
-import java.net.URL;
+import java.io.File;
 import java.util.List;
 import java.util.LinkedList;
 import com.jme3.bullet.control.RigidBodyControl;
@@ -20,6 +20,7 @@ import com.jme3.scene.Spatial;
 import com.jme3.texture.Texture;
 import amara.Util;
 import amara.engine.JMonkeyUtil;
+import amara.engine.files.*;
 import amara.engine.materials.MaterialFactory;
 import amara.engine.settings.Settings;
 import org.jdom.Document;
@@ -34,12 +35,12 @@ import org.jdom.DataConversionException;
  */
 public class ModelSkin{
    
-    public ModelSkin(String fileResourcePath){
-        this.fileResourceURL = Util.getResourceURL(fileResourcePath);
+    public ModelSkin(String skinPath){
+        this.filePath = skinPath;
         loadFile();
     }
     private static final String[] FILE_EXTENSIONS = new String[]{"j3o", "mesh.xml", "blend"};
-    private URL fileResourceURL;
+    private String filePath;
     private Element rootElement;
     private Element modelElement;
     private Element positionElement;
@@ -53,7 +54,7 @@ public class ModelSkin{
    
     private void loadFile(){
         try{
-            Document document = new SAXBuilder().build(fileResourceURL);
+            Document document = new SAXBuilder().build(new File(FileAssets.ROOT + filePath));
             rootElement = document.getRootElement();
             name = rootElement.getAttributeValue("name");
             modelElement = rootElement.getChild("model");
@@ -64,7 +65,7 @@ public class ModelSkin{
             modelScale = getAttributeValue(modelElement, "scale", Vector3f.UNIT_XYZ);
             materialAmbient = getAttributeValue(materialElement, "ambient", 0.15f);
         }catch(Exception ex){
-            System.out.println("Error while loading object skin '" + fileResourceURL + "'");
+            System.out.println("Error while loading object skin '" + filePath + "'");
         }
     }
    
@@ -127,7 +128,7 @@ public class ModelSkin{
     private String getModelFilePath(){
         for(int i=0;i<FILE_EXTENSIONS.length;i++){
             String modelFilePath = getModelFilePath(FILE_EXTENSIONS[i]);
-            if(Util.existsResource("/" + modelFilePath)){
+            if(FileAssets.exists(modelFilePath)){
                 return modelFilePath;
             }
         }
@@ -243,7 +244,7 @@ public class ModelSkin{
    
     public String getIconFilePath(){
         String iconFilePath = "Models/" + name + "/icon.jpg";
-        if(!Util.existsResource("/" + iconFilePath)){
+        if(!FileAssets.exists(iconFilePath)){
             iconFilePath = "Interface/images/icon_unknown.jpg";
         }
         return iconFilePath;

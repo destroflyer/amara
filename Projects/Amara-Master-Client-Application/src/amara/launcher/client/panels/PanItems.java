@@ -22,12 +22,12 @@ import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import amara.Util;
+import amara.engine.applications.masterserver.client.MasterserverClientUtil;
 import amara.engine.applications.masterserver.server.protocol.*;
+import amara.engine.files.FileAssets;
 import amara.engine.network.messages.protocol.Message_EditCharacterInventory;
 import amara.launcher.FrameUtil;
 import amara.launcher.client.MainFrame;
-import amara.engine.applications.masterserver.client.MasterserverClientUtil;
 import amara.launcher.client.buttons.*;
 import amara.launcher.client.comboboxes.ComboboxModel_OwnedCharacters;
 
@@ -56,7 +56,7 @@ public class PanItems extends javax.swing.JPanel{
     private final int dragItemSize = 55;
     private PanItems_OwnedItem[] panOwnedItems;
     private HashMap<Item, ImageIcon> itemIcons;
-    private ImageIcon itemIcon_None = Util.getResourceImageIcon("/Interface/hud/items/none.png", dragItemSize, dragItemSize);
+    private ImageIcon itemIcon_None = FileAssets.getImageIcon("Interface/hud/items/none.png", dragItemSize, dragItemSize);
     private OwnedItem[] availableItems;
     private JLabel lblInvetoryItems[] = new JLabel[6];
     private int[] inventory = new int[6];
@@ -168,7 +168,7 @@ public class PanItems extends javax.swing.JPanel{
     private ImageIcon getItemIcon(Item item){
         ImageIcon icon = itemIcons.get(item);
         if(icon == null){
-            icon = Util.getResourceImageIcon("/Interface/hud/items/" + item.getName() + ".png", dragItemSize, dragItemSize);
+            icon = FileAssets.getImageIcon("Interface/hud/items/" + item.getName() + ".png", dragItemSize, dragItemSize);
         }
         return icon;
     }

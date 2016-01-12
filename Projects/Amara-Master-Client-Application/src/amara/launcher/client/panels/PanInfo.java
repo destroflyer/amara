@@ -4,13 +4,13 @@
  */
 
 /*
- * panPlay.java
+ * PanInfo.java
  *
  * Created on 02.08.2012, 23:56:34
  */
 package amara.launcher.client.panels;
 
-import amara.Util;
+import amara.engine.files.FileAssets;
 
 /**
  *
@@ -18,10 +18,9 @@ import amara.Util;
  */
 public class PanInfo extends javax.swing.JPanel{
 
-    /** Creates new form panPlay */
     public PanInfo(){
         initComponents();
-        lblImage.setIcon(Util.getResourceImageIcon("/Interface/client/units/golem.png", -1, 145));
+        lblImage.setIcon(FileAssets.getImageIcon("Interface/client/units/golem.png", -1, 145));
     }
 
     /** This method is called from within the constructor to

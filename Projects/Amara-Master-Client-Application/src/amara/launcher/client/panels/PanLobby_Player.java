@@ -6,10 +6,10 @@ package amara.launcher.client.panels;
 
 import java.awt.event.ItemEvent;
 import javax.swing.DefaultComboBoxModel;
-import amara.Util;
 import amara.engine.applications.masterserver.server.network.messages.*;
 import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.applications.masterserver.client.MasterserverClientUtil;
+import amara.engine.files.FileAssets;
 import amara.launcher.client.comboboxes.ComboboxModel_OwnedCharacters;
 
 /**
@@ -23,8 +23,8 @@ public class PanLobby_Player extends javax.swing.JPanel{
         this.panLobby = panLobby;
         this.lobbyPlayer = lobbyPlayer;
         PlayerProfileData playerProfileData = MasterserverClientUtil.getPlayerProfile(lobbyPlayer.getID());
-        String avatarResourcePath = PanAvatarSelection.getAvatarResourcePath(playerProfileData.getMeta("avatar"));
-        lblIcon.setIcon(Util.getResourceImageIcon(avatarResourcePath, 30, 30));
+        String avatarFilePath = PanAvatarSelection.getAvatarFilePath(playerProfileData.getMeta("avatar"));
+        lblIcon.setIcon(FileAssets.getImageIcon(avatarFilePath, 30, 30));
         lblName.setText(playerProfileData.getLogin());
         int characterID = lobbyPlayer.getPlayerData().getCharacterID();
         boolean isOwnPlayer = (MasterserverClientUtil.getPlayerID() == lobbyPlayer.getID());

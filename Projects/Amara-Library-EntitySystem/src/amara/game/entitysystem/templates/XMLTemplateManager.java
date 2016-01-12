@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Stack;
-import amara.Util;
+import amara.engine.files.*;
 import amara.game.entitysystem.*;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -23,16 +23,16 @@ public class XMLTemplateManager{
 
     public static XMLTemplateManager getInstance(){
         if(instance == null){
-            instance = new XMLTemplateManager("/Templates/");
+            instance = new XMLTemplateManager("Templates/");
         }
         return instance;
     }
     
-    private XMLTemplateManager(String resourcePath){
-        this.resourcePath = resourcePath;
+    private XMLTemplateManager(String filePath){
+        this.filePath = filePath;
     }
     private static XMLTemplateManager instance;
-    private String resourcePath;
+    private String filePath;
     private HashMap<String, XMLComponentConstructor> xmlComponentConstructors = new HashMap<String, XMLComponentConstructor>();
     private HashMap<String, Document> cachedDocuments = new HashMap<String, Document>();
     private String currentDirectory;
@@ -49,23 +49,23 @@ public class XMLTemplateManager{
         for(int i=0;i<(directories.length - 1);i++){
             currentDirectory += directories[i] + "/";
         }
-        String templateResourcePath = (resourcePath + templateName + ".xml");
-        Document document = getDocument(templateResourcePath);
+        String templateFilePath = (filePath + templateName + ".xml");
+        Document document = getDocument(templateFilePath);
         if(document != null){
             loadTemplate(entityWorld, entity, document, parameters);
         }
     }
     
-    private Document getDocument(String resourcePath){
-        Document document = cachedDocuments.get(resourcePath);
-        if((document == null) && Util.existsResource(resourcePath)){
+    private Document getDocument(String filePath){
+        Document document = cachedDocuments.get(filePath);
+        if((document == null) && FileAssets.exists(filePath)){
             try{
-                InputStream inputStream = Util.getResourceInputStream(resourcePath);
+                InputStream inputStream = FileAssets.getInputStream(filePath);
                 document = new SAXBuilder().build(inputStream);
             }catch(Exception ex){
-                System.err.println("Error while loading template resource '" + resourcePath + "'.");
+                System.err.println("Error while loading template file '" + filePath + "'.");
             }
-            cachedDocuments.put(resourcePath, document);
+            cachedDocuments.put(filePath, document);
         }
         return document;
     }

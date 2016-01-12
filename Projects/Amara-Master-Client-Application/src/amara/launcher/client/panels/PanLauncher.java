@@ -4,7 +4,7 @@
  */
 
 /*
- * panHeader.java
+ * PanLauncher.java
  *
  * Created on 03.08.2012, 15:42:37
  */
@@ -12,7 +12,7 @@ package amara.launcher.client.panels;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import amara.Util;
+import amara.engine.files.FileAssets;
 
 /**
  *
@@ -22,7 +22,7 @@ public class PanLauncher extends javax.swing.JPanel{
 
     public PanLauncher(){
         initComponents();
-        backgroundImage = Util.getResourceImage("/Interface/client/panels/launcher.jpg");
+        backgroundImage = FileAssets.getImage("Interface/client/panels/launcher.jpg");
     }
     private Image backgroundImage;
 

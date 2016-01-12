@@ -1,7 +1,0 @@
-<skin name="earth_elemental">
-    <model scale="2.5">
-        <material>
-            <texture index="0">diffuse.png</texture>
-        </material>
-    </model>
-</skin>

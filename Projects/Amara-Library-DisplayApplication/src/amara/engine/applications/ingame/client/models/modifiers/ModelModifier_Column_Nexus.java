@@ -22,7 +22,7 @@ public class ModelModifier_Column_Nexus extends ModelModifier{
 
     @Override
     public void modify(ModelObject modelObject){
-        Spatial statue = new ModelSkin("/Models/nidalee/skin.xml").loadSpatial();
+        Spatial statue = new ModelSkin("Models/nidalee/skin.xml").loadSpatial();
         Material material = MaterialFactory.getAssetManager().loadMaterial("Shaders/glass/materials/glass_3.j3m");
         for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(statue)){
             geometry.setMaterial(material);
