@@ -205,4 +205,21 @@ public class FileManager{
         File file = new File(filePath);
         return file.exists();
     }
+    
+    public static boolean deleteFile(String filePath){
+        return deleteFile(new File(filePath));
+    }
+    
+    public static boolean deleteFile(File file){
+        if(file.isDirectory()){
+            String[] files = file.list();
+            for (int i=0;i<files.length;i++){
+                boolean success = deleteFile(new File(file, files[i]));
+                if(!success){
+                    return false;
+                }
+            }
+        }
+        return file.delete();
+    }
 }
