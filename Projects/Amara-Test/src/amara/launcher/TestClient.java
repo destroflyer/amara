@@ -4,6 +4,7 @@
  */
 package amara.launcher;
 
+import amara.Launcher_Core;
 import amara.launcher.client.ClientLauncher;
 import amara.launcher.server.ServerLauncherFrame;
 
@@ -14,7 +15,8 @@ import amara.launcher.server.ServerLauncherFrame;
 public class TestClient{
     
     public static void main(String[] args){
-        LauncherUtil.initProgramProperties();
+        Launcher_Core.initialize();
+        Launcher_Game.initialize();
         new ServerLauncherFrame().setVisible(true);
         new ClientLauncher().setVisible(true);
     }

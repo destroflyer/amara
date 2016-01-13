@@ -8,7 +8,6 @@ package amara.engine.applications.ingame.client.models;
 import java.io.File;
 import java.util.List;
 import java.util.LinkedList;
-import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.material.RenderState.FaceCullMode;
@@ -234,10 +233,11 @@ public class ModelSkin{
             Material material = geometry.getMaterial();
             MaterialFactory.generateAmbientColor(material, materialAmbient);
             material.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
-            RigidBodyControl rigidBodyControl = geometry.getControl(RigidBodyControl.class);
+            //We don't need bullet physics in Amara yet
+            /*RigidBodyControl rigidBodyControl = geometry.getControl(RigidBodyControl.class);
             if(rigidBodyControl != null){
                 rigidBodyControl.getCollisionShape().setScale(scaleVector);
-            }
+            }*/
             geometry.setUserData("layer", 3);
         }
     }

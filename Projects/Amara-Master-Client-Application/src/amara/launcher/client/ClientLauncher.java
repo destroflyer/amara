@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.LinkedList;
 import javax.swing.JFrame;
+import amara.Launcher_Core;
 import amara.Util;
 import amara.engine.applications.launcher.startscreen.screens.*;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
@@ -23,7 +24,7 @@ import amara.engine.files.FileManager;
 import amara.engine.network.*;
 import amara.engine.network.exceptions.*;
 import amara.launcher.FrameUtil;
-import amara.launcher.LauncherUtil;
+import amara.launcher.Launcher_Game;
 import amara.launcher.client.api.objects.Masterserver;
 import amara.launcher.client.api.requests.GetMasterserversRequest;
 import amara.launcher.client.network.backends.*;
@@ -346,7 +347,8 @@ private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
      * @param args the command line arguments
      */
     public static void main(String args[]){
-        LauncherUtil.initProgramProperties();
+        Launcher_Core.initialize();
+        Launcher_Game.initialize();
         java.awt.EventQueue.invokeLater(new Runnable(){
 
             @Override

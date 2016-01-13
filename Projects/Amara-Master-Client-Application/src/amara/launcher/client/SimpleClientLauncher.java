@@ -4,6 +4,7 @@
  */
 package amara.launcher.client;
 
+import amara.Launcher_Core;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
 import amara.engine.applications.masterserver.server.network.messages.*;
 import amara.engine.applications.masterserver.server.protocol.*;
@@ -11,7 +12,7 @@ import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.*;
 import amara.engine.network.exceptions.*;
 import amara.engine.network.messages.protocol.*;
-import amara.launcher.LauncherUtil;
+import amara.launcher.Launcher_Game;
 
 /**
  *
@@ -203,7 +204,8 @@ public class SimpleClientLauncher extends javax.swing.JFrame{
     }//GEN-LAST:event_btnStartGameActionPerformed
 
     public static void main(String args[]){
-        LauncherUtil.initProgramProperties();
+        Launcher_Core.initialize();
+        Launcher_Game.initialize();
         java.awt.EventQueue.invokeLater(new Runnable(){
             
             @Override

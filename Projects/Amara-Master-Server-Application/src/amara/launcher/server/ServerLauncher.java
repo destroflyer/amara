@@ -4,8 +4,9 @@
  */
 package amara.launcher.server;
 
+import amara.Launcher_Core;
 import amara.engine.applications.masterserver.server.MasterserverServerApplication;
-import amara.launcher.LauncherUtil;
+import amara.launcher.Launcher_Game;
 import amara.launcher.client.api.requests.RegisterMasterserverRequest;
 
 /**
@@ -22,7 +23,8 @@ public class ServerLauncher{
     private MasterserverServerApplication masterServer;
     
     public static void main(String[] args){
-        LauncherUtil.initProgramProperties();
+        Launcher_Core.initialize();
+        Launcher_Game.initialize();
         new ServerLauncher(33900);
     }
 }

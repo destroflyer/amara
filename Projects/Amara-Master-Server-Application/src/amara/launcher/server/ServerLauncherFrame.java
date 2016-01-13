@@ -4,8 +4,9 @@
  */
 package amara.launcher.server;
 
+import amara.Launcher_Core;
 import amara.launcher.FrameUtil;
-import amara.launcher.LauncherUtil;
+import amara.launcher.Launcher_Game;
 
 /**
  *
@@ -58,7 +59,8 @@ public class ServerLauncherFrame extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     public static void main(String args[]){
-        LauncherUtil.initProgramProperties();
+        Launcher_Core.initialize();
+        Launcher_Game.initialize();
         java.awt.EventQueue.invokeLater(new Runnable(){
             
             @Override

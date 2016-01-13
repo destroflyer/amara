@@ -4,6 +4,7 @@
  */
 package amara.launcher;
 
+import amara.Launcher_Core;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
 import amara.engine.applications.masterserver.server.MasterserverServerApplication;
 import amara.engine.applications.masterserver.server.network.messages.*;
@@ -20,7 +21,8 @@ import amara.engine.network.messages.protocol.*;
 public class TestGame{
     
     public static void main(String[] args){
-        LauncherUtil.initProgramProperties();
+        Launcher_Core.initialize();
+        Launcher_Game.initialize();
         //Server
         MasterserverServerApplication masterServer = new MasterserverServerApplication(33900);
         masterServer.start();
