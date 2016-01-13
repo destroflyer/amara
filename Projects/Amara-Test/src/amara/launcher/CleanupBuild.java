@@ -17,7 +17,7 @@ public class CleanupBuild{
         File projectsDirectory = new File("../../");
         for(File projectDirectory : projectsDirectory.listFiles()){
             if((!projectDirectory.getName().equals("Amara-Master-Server-Application"))
-            || (!projectDirectory.getName().equals("Amara-Master-Client-Application"))){
+            && (!projectDirectory.getName().equals("Amara-Master-Client-Application"))){
                 File distDirectory = new File(projectDirectory.getPath() + "/dist");
                 if(distDirectory.exists()){
                     if(!FileManager.deleteFile(distDirectory)){
