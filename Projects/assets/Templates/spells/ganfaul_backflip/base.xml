@@ -18,7 +18,7 @@
         <castType>selfcast</castType>
         <castCancelAction/>
         <castDuration>0.5</castDuration>
-        <baseCooldown>2</baseCooldown>
+        <baseCooldown>9</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>

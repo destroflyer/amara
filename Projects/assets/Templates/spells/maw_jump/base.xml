@@ -54,7 +54,7 @@
         <castTurnToTarget/>
         <castAnimation>#animation</castAnimation>
         <range>25</range>
-        <baseCooldown>15</baseCooldown>
+        <baseCooldown>16</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>

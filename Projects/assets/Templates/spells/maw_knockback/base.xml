@@ -34,7 +34,7 @@
             </entity>
         </castAnimation>
         <range>6</range>
-        <baseCooldown>10</baseCooldown>
+        <baseCooldown>11</baseCooldown>
         <spellTargetRules>
             <entity>
                 <acceptEnemies/>

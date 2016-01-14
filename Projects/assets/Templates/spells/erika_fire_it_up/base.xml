@@ -46,7 +46,7 @@
             </entity>
         </castAnimation>
         <range>20</range>
-        <baseCooldown>10</baseCooldown>
+        <baseCooldown>11</baseCooldown>
         <erikaPassiveEffectTriggers>
             <!--target effect-->
             <entity>

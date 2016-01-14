@@ -2,7 +2,7 @@
     <value name="delay">1</value>
     <entity id="spell">
         <name>Ult</name>
-        <description>Maria channels all power inside her sword for [delay] second and then unleashes a global cut in the target direction, damaging and knockuping every enemy it passes through.</description>
+        <description>Maria channels all power inside her sword for [delay] second and then unleashes a long ranged cut in the target direction, damaging and knockuping every enemy it passes through.</description>
         <spellVisualisation>maria_ult</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn projectile-->
@@ -48,7 +48,7 @@
                 <loopDuration>2</loopDuration>
             </entity>
         </castAnimation>
-        <baseCooldown>15</baseCooldown>
+        <baseCooldown>120</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>

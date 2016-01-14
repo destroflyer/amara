@@ -1,5 +1,5 @@
 <skin name="wizard">
-    <model normScale="0.8" scale="1">
+    <model normScale="0.8" scale="0.75">
         <position>
             <location>0,0.91,0</location>
         </position>

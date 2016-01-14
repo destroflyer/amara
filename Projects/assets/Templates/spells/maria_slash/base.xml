@@ -59,7 +59,7 @@
         <castDuration>0.5</castDuration>
         <castCancelAction/>
         <castTurnToTarget/>
-        <baseCooldown>2</baseCooldown>
+        <baseCooldown>5</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>

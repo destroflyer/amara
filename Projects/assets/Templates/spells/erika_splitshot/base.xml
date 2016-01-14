@@ -58,7 +58,7 @@
                 <loopDuration>0.5</loopDuration>
             </entity>
         </castAnimation>
-        <baseCooldown>4</baseCooldown>
+        <baseCooldown>10</baseCooldown>
         <erikaPassiveEffectTriggers>
             <!--target effect-->
             <entity>

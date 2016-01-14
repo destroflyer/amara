@@ -6,6 +6,6 @@
         <isSellable>500</isSellable>
         <!--stats-->
         <bonusFlatWalkSpeed>0.4</bonusFlatWalkSpeed>
-        <bonusFlatArmor>0.15</bonusFlatArmor>
+        <bonusFlatArmor>15</bonusFlatArmor>
     </entity>
 </template>

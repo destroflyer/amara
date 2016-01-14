@@ -30,6 +30,6 @@
                 <loopDuration>3</loopDuration>
             </entity>
         </castAnimation>
-        <baseCooldown>4</baseCooldown>
+        <baseCooldown>12</baseCooldown>
     </entity>
 </template>
