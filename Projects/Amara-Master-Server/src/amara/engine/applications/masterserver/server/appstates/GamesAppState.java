@@ -62,6 +62,12 @@ public class GamesAppState extends ServerBaseAppState{
         closeGame(ingameServerApplication);
         NetworkServer ingameNetworkServer = ingameServerApplication.getStateManager().getState(NetworkServerAppState.class).getNetworkServer();
         ingameNetworkServer.broadcastMessage(new Message_GameOver());
+        //Wait to make sure the game over message is sent before shutting down the process
+        try{
+            Thread.sleep(3000);
+        }catch(InterruptedException ex){
+        }
+        ingameNetworkServer.close();
     }
     
     private void closeGame(IngameServerApplication ingameServerApplication){

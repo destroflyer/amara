@@ -124,6 +124,7 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new AutoAggroComponent(12));
                     entityWrapper.setComponent(new MaximumAggroRangeComponent(30));
                     entityWrapper.setComponent(new AggroResetTimerComponent(3));
+                    entityWrapper.setComponent(new AggroPriorityComponent(1));
 
                     int bountyEntity = entityWorld.createEntity();
                     entityWorld.setComponent(bountyEntity, new BountyGoldComponent(20 + (int) (spawnCounter * 0.5)));
@@ -167,7 +168,8 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
                     entityWrapper.setComponent(new AutoAggroComponent(12));
                     entityWrapper.setComponent(new MaximumAggroRangeComponent(30));
-                    entityWrapper.setComponent(new AggroResetTimerComponent(4));
+                    entityWrapper.setComponent(new AggroResetTimerComponent(3));
+                    entityWrapper.setComponent(new AggroPriorityComponent(1));
 
                     int bountyEntity = entityWorld.createEntity();
                     entityWorld.setComponent(bountyEntity, new BountyGoldComponent(15 + (int) (spawnCounter * 0.5)));

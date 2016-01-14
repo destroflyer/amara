@@ -2918,6 +2918,19 @@ public class ComponentsRegistrator{
             }
         });
         //units
+        bitstreamClassManager.register(amara.game.entitysystem.components.units.AggroPriorityComponent.class);
+        xmlTemplateManager.registerComponent(amara.game.entitysystem.components.units.AggroPriorityComponent.class, new XMLComponentConstructor<amara.game.entitysystem.components.units.AggroPriorityComponent>("aggroPriority"){
+
+            @Override
+            public amara.game.entitysystem.components.units.AggroPriorityComponent construct(){
+                int priority = 0;
+                String priorityText = element.getText();
+                if((priorityText != null) && (priorityText.length() > 0)){
+                    priority = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, priorityText));
+                }
+                return new amara.game.entitysystem.components.units.AggroPriorityComponent(priority);
+            }
+        });
         bitstreamClassManager.register(amara.game.entitysystem.components.units.AggroResetTimerComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.game.entitysystem.components.units.AggroResetTimerComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);

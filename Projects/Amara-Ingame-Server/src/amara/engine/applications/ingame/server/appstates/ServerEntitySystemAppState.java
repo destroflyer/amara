@@ -282,11 +282,11 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new SetIdleAnimationsSystem());
         addEntitySystem(new IntersectionPushSystem(intersectionObserver));
         addEntitySystem(new MapIntersectionSystem(polyMapManager));
-        addEntitySystem(new CheckMapObjectiveSystem(map, mainApplication));
         addEntitySystem(new PlayerDeathSystem(map));
         addEntitySystem(new PlayerRespawnSystem(game));
         
         addEntitySystem(new SendEntityChangesSystem(networkServer, new ClientComponentBlacklist()));
+        addEntitySystem(new CheckMapObjectiveSystem(map, mainApplication));
     }
 
     @Override

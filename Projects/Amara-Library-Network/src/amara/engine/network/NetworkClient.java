@@ -6,6 +6,8 @@ package amara.engine.network;
 
 import java.util.LinkedList;
 import com.jme3.network.Client;
+import com.jme3.network.ClientStateListener;
+import com.jme3.network.ErrorListener;
 import com.jme3.network.Message;
 import com.jme3.network.MessageConnection;
 import com.jme3.network.MessageListener;
@@ -26,31 +28,52 @@ public class NetworkClient extends NetworkListener{
     public static final int MAXIMUM_CONNECTION_TIME = 5000;
     private Client client;
     private LoadHistory uploadHistory;
+    private boolean isConnected;
     
     public void connectToServer(String host, int port) throws ServerConnectionException, ServerConnectionTimeoutException{
         try{
             client = Network.connectToServer(host, port);
+            client.addClientStateListener(new ClientStateListener(){
+
+                @Override
+                public void clientConnected(Client client){
+                    isConnected = true;
+                    System.out.println("Connected to server.");
+                }
+
+                @Override
+                public void clientDisconnected(Client client, ClientStateListener.DisconnectInfo info){
+                    onDisconnect();
+                }
+            });
+            client.addErrorListener(new ErrorListener<Client>(){
+
+                @Override
+                public void handleError(Client source, Throwable throwable){
+                    onDisconnect();
+                }
+            });
+            client.addMessageListener(new MessageListener<MessageConnection>(){
+
+                @Override
+                public void messageReceived(MessageConnection source, Message message){
+                    onMessageReceived(source, message);
+                }
+            });
+            client.start();
+            long connectionStart = System.currentTimeMillis();
+            while(!isConnected){
+                if(Util.isTimeElapsed(connectionStart, MAXIMUM_CONNECTION_TIME)){
+                    throw new ServerConnectionTimeoutException(host, port);
+                }
+                try{
+                    Thread.sleep(100);
+                }catch(Exception ex){
+                }
+            }
         }catch(Exception ex){
             throw new ServerConnectionException(host, port);
         }
-        client.start();
-        long connectionStart = System.currentTimeMillis();
-        while(!isConnected()){
-            if(Util.isTimeElapsed(connectionStart, MAXIMUM_CONNECTION_TIME)){
-                throw new ServerConnectionTimeoutException(host, port);
-            }
-            try{
-                Thread.sleep(100);
-            }catch(Exception ex){
-            }
-        }
-        client.addMessageListener(new MessageListener<MessageConnection>(){
-
-            @Override
-            public void messageReceived(MessageConnection source, Message message){
-                onMessageReceived(source, message);
-            }
-        });
     }
 
     @Override
@@ -62,23 +85,27 @@ public class NetworkClient extends NetworkListener{
     }
 
     public void sendMessage(Message message){
-        client.send(message);
-        if(uploadHistory != null){
-            uploadHistory.add(MessageSizeCalculator.getMessageSize(message));
+        if(isConnected){
+            client.send(message);
+            if(uploadHistory != null){
+                uploadHistory.add(MessageSizeCalculator.getMessageSize(message));
+            }
         }
     }
     
     public void disconnect(){
-        if(isConnected()){
+        if(isConnected){
             client.close();
         }
     }
+    
+    private void onDisconnect(){
+        isConnected = false;
+        System.out.println("Disconnected from server.");
+    }
 
     public boolean isConnected(){
-        if(client != null){
-            return client.isConnected();
-        }
-        return false;
+        return isConnected;
     }
 
     public int getID(){

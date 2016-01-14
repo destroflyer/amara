@@ -179,23 +179,25 @@ public class Map_Arama extends Map{
 
     @Override
     public void spawnPlayer(EntityWorld entityWorld, int playerEntity){
-        Vector2f position = new Vector2f();
-        Vector2f direction = new Vector2f();
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
-        switch(playerIndex){
-            case 0:
-                position = new Vector2f(405, laneCenterY);
-                direction = new Vector2f(-1, 0);
+        int teamEntity = ((playerIndex % 2) + 1);
+        int playerTeamIndex = (playerIndex / 2);
+        Vector2f position = new Vector2f(0, laneCenterY - (playerTeamIndex * 5));
+        Vector2f direction = new Vector2f();
+        switch(teamEntity){
+            case 1:
+                position.setX(405);
+                direction.setX(-1);
                 break;
             
-            case 1:
-                position = new Vector2f(120, laneCenterY);
-                direction = new Vector2f(1, 0);
+            case 2:
+                position.setX(120);
+                direction.setX(1);
                 break;
         }
         int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
         entityWorld.setComponent(unitEntity, new PositionComponent(position));
         entityWorld.setComponent(unitEntity, new DirectionComponent(direction));
-        entityWorld.setComponent(unitEntity, new TeamComponent(playerIndex + 1));
+        entityWorld.setComponent(unitEntity, new TeamComponent(teamEntity));
     }
 }

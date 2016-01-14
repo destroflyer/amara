@@ -87,5 +87,6 @@ public class NetworkServer extends NetworkListener{
 
     public void close(){
         server.close();
+        System.out.println("Server closed.");
     }
 }
