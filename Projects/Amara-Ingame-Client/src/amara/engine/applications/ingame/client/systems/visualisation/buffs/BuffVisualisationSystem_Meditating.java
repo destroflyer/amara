@@ -16,8 +16,8 @@ import amara.engine.JMonkeyUtil;
 import amara.engine.applications.ingame.client.systems.visualisation.EntitySceneMap;
 import amara.engine.materials.MaterialFactory;
 import amara.game.entitysystem.EntityWorld;
-import emitter.*;
-import emitter.influencers.*;
+import amara.libraries.emitter.*;
+import amara.libraries.emitter.influencers.*;
 
 /**
  *

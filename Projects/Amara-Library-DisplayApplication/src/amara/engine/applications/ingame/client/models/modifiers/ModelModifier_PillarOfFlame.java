@@ -7,14 +7,14 @@ package amara.engine.applications.ingame.client.models.modifiers;
 import amara.engine.JMonkeyUtil;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
 import amara.engine.applications.ingame.client.models.*;
 import amara.engine.materials.MaterialFactory;
-import com.jme3.renderer.queue.RenderQueue;
-import emitter.*;
-import emitter.influencers.*;
+import amara.libraries.emitter.*;
+import amara.libraries.emitter.influencers.*;
 
 /**
  *
