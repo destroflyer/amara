@@ -89,8 +89,10 @@ public class ModelObject extends Node implements AnimEventListener{
     
     public void setAnimationProperties(float loopDuration, boolean isLoop){
         for(AnimChannel animationChannel : animationChannels){
-            animationChannel.setSpeed(animationChannel.getAnimMaxTime() / loopDuration);
-            animationChannel.setLoopMode(isLoop?LoopMode.Loop:LoopMode.DontLoop);
+            if(animationChannel.getAnimationName() != null){
+                animationChannel.setSpeed(animationChannel.getAnimMaxTime() / loopDuration);
+                animationChannel.setLoopMode(isLoop?LoopMode.Loop:LoopMode.DontLoop);
+            }
         }
     }
     
