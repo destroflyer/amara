@@ -10,8 +10,8 @@ import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
-import amara.game.expressions.*;
-import amara.game.expressions.values.*;
+import amara.libraries.expressions.Values;
+import amara.libraries.expressions.values.*;
 
 /**
  *

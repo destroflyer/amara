@@ -6,8 +6,8 @@ package amara.game.entitysystem.systems.effects;
 
 import amara.game.entitysystem.EntityWorld;
 import amara.game.entitysystem.components.attributes.*;
-import amara.game.expressions.*;
-import amara.game.expressions.values.*;
+import amara.libraries.expressions.ExpressionSpace;
+import amara.libraries.expressions.values.*;
 
 /**
  *

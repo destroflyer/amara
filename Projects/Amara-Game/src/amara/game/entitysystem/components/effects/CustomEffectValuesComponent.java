@@ -5,7 +5,7 @@
 package amara.game.entitysystem.components.effects;
 
 import com.jme3.network.serializing.Serializable;
-import amara.game.expressions.Values;
+import amara.libraries.expressions.Values;
 
 /**
  *
