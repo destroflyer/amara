@@ -1,11 +1,11 @@
-package amara.engine.applications.modelviewer;
+package amara.tools.modelviewer;
 
 import com.jme3.math.Vector3f;
 import amara.core.Launcher_Core;
 import amara.engine.appstates.*;
 import amara.engine.applications.DisplayApplication;
-import amara.engine.applications.modelviewer.appstates.*;
 import amara.engine.materials.MaterialFactory;
+import amara.tools.modelviewer.appstates.*;
 
 /**
  * @author Carl

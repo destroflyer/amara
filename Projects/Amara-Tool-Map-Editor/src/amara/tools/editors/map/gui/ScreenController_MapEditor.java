@@ -2,19 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.engine.applications.ingame.editor.gui;
+package amara.tools.editors.map.gui;
 
 import java.io.File;
 import javax.swing.JOptionPane;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector2f;
-import de.lessvoid.nifty.elements.Element;
 import amara.core.Util;
 import amara.core.files.FileAssets;
-import amara.engine.applications.ingame.editor.appstates.MapEditorAppState;
 import amara.engine.appstates.*;
 import amara.engine.gui.GameScreenController;
 import amara.game.maps.*;
+import amara.tools.editors.map.appstates.MapEditorAppState;
+import de.lessvoid.nifty.elements.Element;
 
 /**
  *

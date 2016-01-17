@@ -1,11 +1,11 @@
-package amara.engine.applications.ingame.editor;
+package amara.tools.editors.map;
 
 import com.jme3.math.Vector3f;
 import amara.core.Launcher_Core;
 import amara.engine.applications.DisplayApplication;
-import amara.engine.applications.ingame.editor.appstates.*;
 import amara.engine.appstates.*;
 import amara.game.maps.*;
+import amara.tools.editors.map.appstates.*;
 
 /**
  * @author Carl

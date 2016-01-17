@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.engine.applications.ingame.editor.appstates;
+package amara.tools.editors.map.appstates;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -28,12 +28,12 @@ import amara.engine.JMonkeyUtil;
 import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.engine.applications.ingame.client.systems.debug.ConnectedPointsMesh;
-import amara.engine.applications.ingame.editor.MapEditorApplication;
-import amara.engine.applications.ingame.editor.gui.ScreenController_MapEditor;
 import amara.engine.appstates.*;
 import amara.game.maps.*;
 import amara.game.maps.visuals.*;
 import amara.libraries.physics.shapes.*;
+import amara.tools.editors.map.MapEditorApplication;
+import amara.tools.editors.map.gui.ScreenController_MapEditor;
 
 /**
  *
