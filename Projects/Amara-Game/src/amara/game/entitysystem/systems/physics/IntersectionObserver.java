@@ -4,10 +4,10 @@
  */
 package amara.game.entitysystem.systems.physics;
 
-import amara.game.entitysystem.*;
-import amara.game.entitysystem.systems.physics.intersection.*;
-import amara.game.entitysystem.systems.physics.intersectionHelper.*;
 import java.util.*;
+import amara.game.entitysystem.*;
+import amara.game.entitysystem.systems.physics.intersectionHelper.*;
+import amara.libraries.physics.intersection.*;
 
 /**
  *

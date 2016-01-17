@@ -22,9 +22,9 @@ import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.visuals.*;
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.PolygonBuilder;
-import amara.game.entitysystem.systems.physics.shapes.*;
-import amara.game.entitysystem.systems.physics.util2d.PointUtil;
+import amara.libraries.physics.util2d.PointUtil;
+import amara.libraries.physics.shapes.*;
+import amara.libraries.physics.shapes.PolygonMath.PolygonBuilder;
 import amara.game.entitysystem.templates.XMLTemplateManager;
 
 

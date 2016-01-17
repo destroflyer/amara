@@ -4,7 +4,7 @@ import java.nio.FloatBuffer;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
-import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.libraries.physics.shapes.Vector2D;
 
 public class ConnectedPointsMesh extends Mesh{
 

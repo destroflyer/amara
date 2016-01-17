@@ -18,9 +18,9 @@ import com.jme3.scene.Node;
 import amara.engine.applications.ingame.client.systems.debug.*;
 import amara.engine.applications.DisplayApplication;
 import amara.engine.materials.MaterialFactory;
-import amara.game.entitysystem.systems.physics.shapes.*;
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import amara.game.maps.Map;
+import amara.libraries.physics.shapes.*;
+import amara.libraries.physics.shapes.PolygonMath.Polygon;
 
 /**
  *

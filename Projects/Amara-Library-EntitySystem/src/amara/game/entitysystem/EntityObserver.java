@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem;
 
-import amara.game.entitysystem.systems.physics.intersection.IntersectionTracker;
 import java.util.*;
+import amara.libraries.physics.intersection.IntersectionTracker;
 
 /**
  *

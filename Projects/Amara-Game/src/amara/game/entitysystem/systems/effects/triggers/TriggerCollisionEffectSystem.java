@@ -8,9 +8,9 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
-import amara.game.entitysystem.systems.physics.intersection.*;
 import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionInformant;
 import amara.game.entitysystem.systems.targets.TargetUtil;
+import amara.libraries.physics.intersection.*;
 
 /**
  *

@@ -17,7 +17,7 @@ import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.systems.commands.ExecutePlayerCommandsSystem;
-import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.libraries.physics.shapes.*;
 
 /**
  *

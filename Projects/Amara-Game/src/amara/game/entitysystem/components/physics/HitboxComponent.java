@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem.components.physics;
 
-import amara.game.entitysystem.systems.physics.shapes.Shape;
 import com.jme3.network.serializing.Serializable;
+import amara.libraries.physics.shapes.Shape;
 
 /**
  *

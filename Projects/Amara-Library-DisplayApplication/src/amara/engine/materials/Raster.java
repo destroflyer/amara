@@ -4,7 +4,7 @@
  */
 package amara.engine.materials;
 
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.RasterMap;
+import amara.libraries.physics.shapes.PolygonMath.RasterMap;
 
 /**
  *

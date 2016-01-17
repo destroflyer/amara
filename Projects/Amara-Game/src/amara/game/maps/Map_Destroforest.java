@@ -23,8 +23,8 @@ import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
-import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.games.Game;
+import amara.libraries.physics.shapes.*;
 
 /**
  *
@@ -112,6 +112,8 @@ public class Map_Destroforest extends Map{
         campEnemies1.setComponent(new CampMaximumAggroDistanceComponent(15));
         campEnemies1.setComponent(new CampHealthResetComponent());
         EntityWrapper enemy1 = EntityTemplate.createFromTemplate(entityWorld, "units/jaime");
+        EntityWrapper enemy1Spell = EntityTemplate.createFromTemplate(entityWorld, "spells/sonic_wave,0");
+        enemy1.setComponent(new SpellsComponent(enemy1Spell.getId()));
         Vector2f positionEnemy1 = new Vector2f(98, 91);
         Vector2f directionEnemy1 = new Vector2f(0, -1);
         enemy1.setComponent(new PositionComponent(positionEnemy1));

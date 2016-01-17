@@ -10,10 +10,9 @@ import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.areas.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.casts.*;
-import amara.game.entitysystem.systems.physics.intersection.IntersectionTracker;
-import amara.game.entitysystem.systems.physics.intersection.Pair;
 import amara.game.entitysystem.systems.physics.intersectionHelper.IntersectionInformant;
 import amara.game.entitysystem.systems.targets.TargetUtil;
+import amara.libraries.physics.intersection.*;
 
 /**
  *

@@ -18,9 +18,9 @@ import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.SightRangeComponent;
 import amara.game.entitysystem.components.units.TeamComponent;
-import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
-import amara.game.entitysystem.systems.physics.shapes.Vector2D;
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
+import amara.libraries.physics.intersectionHelper.PolyMapManager;
+import amara.libraries.physics.shapes.Vector2D;
+import amara.libraries.physics.shapes.PolygonMath.Polygon;
 
 /**
  *

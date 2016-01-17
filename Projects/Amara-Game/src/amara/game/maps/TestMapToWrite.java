@@ -7,8 +7,8 @@ package amara.game.maps;
 import java.util.ArrayList;
 import com.jme3.math.Vector3f;
 import amara.game.entitysystem.*;
-import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.maps.visuals.*;
+import amara.libraries.physics.shapes.*;
 
 /**
  *

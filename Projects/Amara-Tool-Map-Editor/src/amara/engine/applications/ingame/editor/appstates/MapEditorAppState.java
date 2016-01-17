@@ -31,9 +31,9 @@ import amara.engine.applications.ingame.client.systems.debug.ConnectedPointsMesh
 import amara.engine.applications.ingame.editor.MapEditorApplication;
 import amara.engine.applications.ingame.editor.gui.ScreenController_MapEditor;
 import amara.engine.appstates.*;
-import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.maps.*;
 import amara.game.maps.visuals.*;
+import amara.libraries.physics.shapes.*;
 
 /**
  *

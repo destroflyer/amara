@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
-import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.libraries.physics.shapes.Vector2D;
 
 public class LinesMesh extends Mesh{
 

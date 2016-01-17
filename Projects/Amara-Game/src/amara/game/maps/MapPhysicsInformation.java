@@ -5,9 +5,9 @@
 package amara.game.maps;
 
 import java.util.ArrayList;
-import amara.game.entitysystem.systems.physics.PolyHelper;
-import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
-import amara.game.entitysystem.systems.physics.shapes.*;
+import amara.libraries.physics.PolyHelper;
+import amara.libraries.physics.intersectionHelper.PolyMapManager;
+import amara.libraries.physics.shapes.ConvexShape;
 
 /**
  *

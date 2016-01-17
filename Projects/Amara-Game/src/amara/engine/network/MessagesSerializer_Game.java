@@ -18,9 +18,9 @@ import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.synchronizing.*;
 import amara.game.entitysystem.synchronizing.fieldserializers.*;
-import amara.game.entitysystem.systems.physics.shapes.*;
-import amara.game.entitysystem.systems.physics.shapes.PolygonMath.*;
 import amara.game.entitysystem.templates.*;
+import amara.libraries.physics.shapes.*;
+import amara.libraries.physics.shapes.PolygonMath.*;
 import org.jdom.Element;
 
 /**

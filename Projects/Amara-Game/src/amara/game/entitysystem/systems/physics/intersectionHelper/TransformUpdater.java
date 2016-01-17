@@ -4,11 +4,10 @@
  */
 package amara.game.entitysystem.systems.physics.intersectionHelper;
 
+import java.util.HashSet;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
-import amara.game.entitysystem.systems.physics.shapes.Shape;
-import amara.game.entitysystem.systems.physics.shapes.Transform2D;
-import java.util.HashSet;
+import amara.libraries.physics.shapes.*;
 
 /**
  *

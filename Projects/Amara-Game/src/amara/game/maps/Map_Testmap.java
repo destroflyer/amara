@@ -23,8 +23,8 @@ import amara.game.entitysystem.components.units.animations.*;
 import amara.game.entitysystem.components.units.bounties.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
-import amara.game.entitysystem.systems.physics.shapes.*;
 import amara.game.entitysystem.systems.spells.SpellUtil;
+import amara.libraries.physics.shapes.*;
 
 /**
  *

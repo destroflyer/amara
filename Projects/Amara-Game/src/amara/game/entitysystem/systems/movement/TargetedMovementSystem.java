@@ -10,9 +10,8 @@ import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.systems.physics.IntersectionObserver;
-import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
-import amara.game.entitysystem.systems.physics.shapes.ConvexShape;
-import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import amara.libraries.physics.intersectionHelper.PolyMapManager;
+import amara.libraries.physics.shapes.*;
 
 /**
  *

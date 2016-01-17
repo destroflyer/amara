@@ -23,8 +23,8 @@ import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.appstates.*;
 import amara.engine.settings.Settings;
 import amara.game.entitysystem.components.units.IsHoveredComponent;
-import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
 import amara.game.maps.Map;
+import amara.libraries.physics.intersectionHelper.PolyMapManager;
 
 /**
  *

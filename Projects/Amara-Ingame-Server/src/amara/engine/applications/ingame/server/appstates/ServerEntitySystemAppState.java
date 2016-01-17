@@ -52,7 +52,6 @@ import amara.game.entitysystem.systems.movement.*;
 import amara.game.entitysystem.systems.network.*;
 import amara.game.entitysystem.systems.objectives.*;
 import amara.game.entitysystem.systems.physics.*;
-import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
 import amara.game.entitysystem.systems.players.*;
 import amara.game.entitysystem.systems.shop.*;
 import amara.game.entitysystem.systems.specials.erika.*;
@@ -62,6 +61,7 @@ import amara.game.entitysystem.systems.units.*;
 import amara.game.entitysystem.systems.visuals.*;
 import amara.game.maps.*;
 import amara.game.games.*;
+import amara.libraries.physics.intersectionHelper.PolyMapManager;
 
 /**
  *

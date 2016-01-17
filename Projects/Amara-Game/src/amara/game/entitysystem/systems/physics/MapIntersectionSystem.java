@@ -4,12 +4,11 @@
  */
 package amara.game.entitysystem.systems.physics;
 
-import amara.game.entitysystem.systems.physics.shapes.Vector2D;
+import com.jme3.math.Vector2f;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
-import amara.game.entitysystem.systems.physics.intersectionHelper.PolyMapManager;
-import amara.game.entitysystem.systems.physics.shapes.*;
-import com.jme3.math.Vector2f;
+import amara.libraries.physics.intersectionHelper.PolyMapManager;
+import amara.libraries.physics.shapes.*;
 
 /**
  *
