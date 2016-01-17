@@ -9,6 +9,7 @@ import amara.engine.gui.GameScreenController;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.input.NiftyInputEvent;
+import de.lessvoid.nifty.input.NiftyStandardInputEvent;
 import de.lessvoid.nifty.screen.KeyInputHandler;
 
 /**
@@ -35,12 +36,9 @@ public class ScreenController_Chat extends GameScreenController{
             
             @Override
             public boolean keyEvent(NiftyInputEvent inputEvent){
-                if(inputEvent != null){
-                    switch(inputEvent){
-                        case SubmitText:
-                            sendMessage();
-                            return true;
-                    }
+                if(inputEvent == NiftyStandardInputEvent.SubmitText){
+                    sendMessage();
+                    return true;
                 }
                 return false;
             }

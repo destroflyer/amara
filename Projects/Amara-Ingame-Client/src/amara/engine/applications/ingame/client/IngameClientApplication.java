@@ -1,6 +1,5 @@
 package amara.engine.applications.ingame.client;
 
-import amara.engine.appstates.NiftyAppState;
 import com.jme3.system.AppSettings;
 import amara.GameInfo;
 import amara.engine.applications.DisplayApplication;

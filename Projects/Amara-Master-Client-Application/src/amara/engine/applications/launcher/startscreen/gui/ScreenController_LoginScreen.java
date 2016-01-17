@@ -9,6 +9,7 @@ import amara.engine.applications.launcher.startscreen.screens.LoginScreen;
 import amara.engine.gui.GameScreenController;
 import amara.launcher.client.panels.PanLogin;
 import de.lessvoid.nifty.input.NiftyInputEvent;
+import de.lessvoid.nifty.input.NiftyStandardInputEvent;
 import de.lessvoid.nifty.screen.KeyInputHandler;
 
 /**
@@ -25,12 +26,9 @@ public class ScreenController_LoginScreen extends GameScreenController{
         
         @Override
         public boolean keyEvent(NiftyInputEvent inputEvent){
-            if(inputEvent != null){
-                switch(inputEvent){
-                    case SubmitText:
-                        login();
-                        return true;
-                }
+            if(inputEvent == NiftyStandardInputEvent.SubmitText){
+                login();
+                return true;
             }
             return false;
         }

@@ -79,7 +79,7 @@ public class ClientChatAppState extends BaseDisplayAppState<IngameClientApplicat
             screenController_Chat.setChatVisible_Output(false);
         }
         if((queuedMessages.size() > 0) && (!isHandlingMessage)){
-            displayMessages(queuedMessages.toArray(new Message_ChatMessage[0]));
+            displayMessages(queuedMessages.toArray(new Message_ChatMessage[queuedMessages.size()]));
             queuedMessages.clear();
         }
     }

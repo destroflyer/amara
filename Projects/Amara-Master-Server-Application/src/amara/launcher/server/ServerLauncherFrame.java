@@ -7,6 +7,7 @@ package amara.launcher.server;
 import amara.Launcher_Core;
 import amara.launcher.FrameUtil;
 import amara.launcher.Launcher_Game;
+import amara.launcher.tools.PanThreads;
 
 /**
  *
@@ -17,6 +18,7 @@ public class ServerLauncherFrame extends javax.swing.JFrame{
     public ServerLauncherFrame(){
         initComponents();
         FrameUtil.initFrameSpecials(this);
+        panThreadsContainer.add(new PanThreads());
         serverLauncher = new ServerLauncher(33900);
     }
     private ServerLauncher serverLauncher;
@@ -31,6 +33,7 @@ public class ServerLauncherFrame extends javax.swing.JFrame{
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        panThreadsContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Amara - Server");
@@ -38,21 +41,27 @@ public class ServerLauncherFrame extends javax.swing.JFrame{
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Masterserver");
 
+        panThreadsContainer.setLayout(new java.awt.GridLayout());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panThreadsContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panThreadsContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -71,5 +80,6 @@ public class ServerLauncherFrame extends javax.swing.JFrame{
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel panThreadsContainer;
     // End of variables declaration//GEN-END:variables
 }

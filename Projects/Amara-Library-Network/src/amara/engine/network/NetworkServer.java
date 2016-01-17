@@ -11,7 +11,6 @@ import com.jme3.network.HostedConnection;
 import com.jme3.network.Message;
 import com.jme3.network.MessageConnection;
 import com.jme3.network.MessageListener;
-import com.jme3.network.Network;
 import com.jme3.network.Server;
 import amara.engine.network.exceptions.*;
 import amara.engine.network.messages.*;
@@ -29,9 +28,9 @@ public class NetworkServer extends NetworkListener{
 
     public void createServer(int port) throws ServerCreationException{
         try{
-            server = Network.createServer(port);
-            server.start();
+            server = new ExtendedDefaultServer(port);
             addMessageListeners();
+            server.start();
         }catch(Exception ex){
             throw new ServerCreationException(port);
         }

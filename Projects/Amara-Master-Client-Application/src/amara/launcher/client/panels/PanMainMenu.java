@@ -4,6 +4,7 @@
  */
 package amara.launcher.client.panels;
 
+import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 /**
@@ -17,6 +18,8 @@ public class PanMainMenu extends javax.swing.JPanel{
         initializePanels();
     }
     private PanProfile panProfile;
+    private PanDebug panDebug;
+    private boolean isDebugPanelVisible;
     
     private void initializePanels(){
         panHeaderContainer.add(new PanHeader());
@@ -28,6 +31,7 @@ public class PanMainMenu extends javax.swing.JPanel{
         addPanelTab("Settings", new PanSettings());
         addPanelTab("Thanks", new PanThanks());
         addPanelTab("Info", new PanInfo());
+        panDebug = new PanDebug();
     }
     
     private void addPanelTab(String title, JPanel panel){
@@ -50,6 +54,11 @@ public class PanMainMenu extends javax.swing.JPanel{
         panHeaderContainer = new javax.swing.JPanel();
         tpaneContainer = new javax.swing.JTabbedPane();
 
+        panHeaderContainer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panHeaderContainerMousePressed(evt);
+            }
+        });
         panHeaderContainer.setLayout(new java.awt.GridLayout(1, 0));
 
         tpaneContainer.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -79,6 +88,18 @@ public class PanMainMenu extends javax.swing.JPanel{
             panProfile.resetToOwnProfile();
         }
     }//GEN-LAST:event_tpaneContainerStateChanged
+
+    private void panHeaderContainerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panHeaderContainerMousePressed
+        if(evt.getButton() == MouseEvent.BUTTON2){
+            isDebugPanelVisible = (!isDebugPanelVisible);
+            if(isDebugPanelVisible){
+                addPanelTab("Debug", panDebug);
+            }
+            else{
+                tpaneContainer.remove(panDebug);
+            }
+        }
+    }//GEN-LAST:event_panHeaderContainerMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel panHeaderContainer;

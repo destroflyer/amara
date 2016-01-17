@@ -77,6 +77,13 @@ public class JMonkeyUtil{
         }
     }
     
+    public static void setHardwareSkinningPreferred(Spatial spatial, boolean isPreferred){
+        SkeletonControl skeletonControl = spatial.getControl(SkeletonControl.class);
+        if(skeletonControl != null){
+            skeletonControl.setHardwareSkinningPreferred(isPreferred);
+        }
+    }
+    
     public static void setLocalRotation(Spatial spatial, Vector3f rotation){
         Vector3f lookAtLocation = spatial.getWorldTranslation().add(rotation);
         spatial.lookAt(lookAtLocation, Vector3f.UNIT_Y);

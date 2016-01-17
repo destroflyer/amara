@@ -296,7 +296,7 @@ public class ScreenController_Shop extends GameScreenController{
         NameComponent nameComponent = shopEntityWorld.getComponent(itemRecipe.getEntity(), NameComponent.class);
         getTextRenderer("shop_item_information_name").setText((nameComponent != null)?nameComponent.getName():"<Unnamed>");
         Element recipeContainer = getElementByID("shop_item_information_recipe");
-        for(Element childElement : recipeContainer.getElements()){
+        for(Element childElement : recipeContainer.getChildren()){
             childElement.markForRemoval();
         }
         createRecipeContainer(recipeContainer, itemRecipe, (recipeContainer.getWidth() / 2), recipeContainer.getWidth(), itemRecipe.getDepth(), itemRecipe.getDepth());

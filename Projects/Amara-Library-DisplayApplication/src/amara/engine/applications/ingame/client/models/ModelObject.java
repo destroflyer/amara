@@ -44,10 +44,7 @@ public class ModelObject extends Node implements AnimEventListener{
             AnimChannel animationChannel = copyAnimation(spatial);
             animationChannels.add(animationChannel);
         }
-        SkeletonControl skeletonControl = spatial.getControl(SkeletonControl.class);
-        if(skeletonControl != null){
-            skeletonControl.setHardwareSkinningPreferred(Settings.getBoolean("hardware_skinning"));
-        }
+        JMonkeyUtil.setHardwareSkinningPreferred(spatial, Settings.getBoolean("hardware_skinning"));
     }
 
     public AnimChannel copyAnimation(Spatial spatial){

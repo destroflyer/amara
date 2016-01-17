@@ -50,6 +50,7 @@ public class MarkHoveredUnitsSystem implements EntitySystem{
                     geometry.setMaterial(material);
                 }
                 modelObject.registerModel(clonedModel);
+                JMonkeyUtil.setHardwareSkinningPreferred(clonedModel, false);
                 attachmentNode.attachChild(clonedModel);
                 node.attachChild(attachmentNode);
             }

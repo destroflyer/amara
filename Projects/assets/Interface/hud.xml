@@ -184,7 +184,7 @@
                             <panel width="113px"/>
                             <panel childLayout="vertical" width="46px">
                                 <panel height="5px"/>
-                                <image id="passive_image" filename="Interface/hud/spells/none.png" width="100%" height="100%w">
+                                <image id="passive_image" filename="Interface/hud/spells/none.png" width="100%" height="100%w" visibleToMouse="true">
                                     <effect>
                                         <onStartHover name="nop" onStartEffect="showSpellInformation_Passive(0)" onEndEffect="hideSpellInformation()"/>
                                     </effect>
@@ -192,7 +192,7 @@
                             </panel>
                             <panel width="11px"/>
                             <panel childLayout="center" width="58px" height="100%w">
-                                <image id="spell_0_image" filename="Interface/hud/spells/none.png" width="100%" height="100%">
+                                <image id="spell_0_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
                                     <effect>
                                         <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(0)" onEndEffect="hideSpellInformation()"/>
                                     </effect>
@@ -203,7 +203,7 @@
                             </panel>
                             <panel width="2px"/>
                             <panel childLayout="center" width="58px" height="100%w">
-                                <image id="spell_1_image" filename="Interface/hud/spells/none.png" width="100%" height="100%">
+                                <image id="spell_1_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
                                     <effect>
                                         <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(1)" onEndEffect="hideSpellInformation()"/>
                                     </effect>
@@ -214,7 +214,7 @@
                             </panel>
                             <panel width="2px"/>
                             <panel childLayout="center" width="58px" height="100%w">
-                                <image id="spell_2_image" filename="Interface/hud/spells/none.png" width="100%" height="100%">
+                                <image id="spell_2_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
                                     <effect>
                                         <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(2)" onEndEffect="hideSpellInformation()"/>
                                     </effect>
@@ -225,7 +225,7 @@
                             </panel>
                             <panel width="2px"/>
                             <panel childLayout="center" width="58px" height="100%w">
-                                <image id="spell_3_image" filename="Interface/hud/spells/none.png" width="100%" height="100%">
+                                <image id="spell_3_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
                                     <effect>
                                         <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(3)" onEndEffect="hideSpellInformation()"/>
                                     </effect>

@@ -13,7 +13,7 @@ import java.io.File;
 public class DistributedAssets{
     
     public static void main(String[] args){
-        cleanup(new File("[root]/update/assets/"));
+        cleanup(new File("C:/Users/Carl/Desktop/Webspace/root/amara/update/assets/"));
     }
     
     private static final String[] REMOVED_DIRECTORY_NAMES = new String[]{

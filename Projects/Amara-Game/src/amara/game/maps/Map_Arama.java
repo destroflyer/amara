@@ -38,7 +38,7 @@ public class Map_Arama extends Map{
     }
     private final float laneCenterY = 260.25f;
     private final float timeUntilWaveStart = 3;
-    private final float waveInterval = 35;
+    private final float waveInterval = 40;
 
     @Override
     public void load(EntityWorld entityWorld){

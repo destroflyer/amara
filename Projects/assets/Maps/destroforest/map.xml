@@ -5,8 +5,8 @@
 		<zoom interval="5.0" maximumLevel="12" initialLevel="8" />
 	</camera>
 	<lights>
-		<ambient color="0.8,0.8,0.8" />
-		<directional direction="0.5,-0.9,1.0" color="1.0,1.0,1.0">
+		<ambient color="0.2,0.2,0.2" />
+		<directional direction="0.5,-0.9,1.0" color="1.2,1.2,1.2">
 			<shadows intensity="0.4" />
 		</directional>
 	</lights>

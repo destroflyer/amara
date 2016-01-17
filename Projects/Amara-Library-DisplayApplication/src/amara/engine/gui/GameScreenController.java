@@ -124,7 +124,7 @@ public class GameScreenController implements ScreenController{
     }
     
     protected void removeAllChildElements(Element element){
-        List<Element> children = element.getElements();
+        List<Element> children = element.getChildren();
         for(int i=0;i<children.size();i++){
             Element child = children.get(i);
             child.markForRemoval();
