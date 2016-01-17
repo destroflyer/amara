@@ -4,7 +4,7 @@
  */
 package amara.launcher.client;
 
-import amara.Launcher_Core;
+import amara.core.Launcher_Core;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
 import amara.engine.applications.masterserver.server.network.messages.*;
 import amara.engine.applications.masterserver.server.protocol.*;

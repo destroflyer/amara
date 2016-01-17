@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Stack;
-import amara.engine.files.*;
+import amara.core.files.FileAssets;
 import amara.game.entitysystem.*;
 import org.jdom.Document;
 import org.jdom.Element;

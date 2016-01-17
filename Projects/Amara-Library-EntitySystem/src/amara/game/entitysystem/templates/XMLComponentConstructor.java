@@ -7,7 +7,7 @@ package amara.game.entitysystem.templates;
 
 import java.util.LinkedList;
 import java.util.List;
-import amara.Util;
+import amara.core.Util;
 import amara.game.entitysystem.EntityWorld;
 import org.jdom.Element;
 

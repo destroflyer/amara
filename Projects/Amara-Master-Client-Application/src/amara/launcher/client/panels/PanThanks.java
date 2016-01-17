@@ -16,8 +16,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import amara.Util;
-import amara.engine.files.FileAssets;
+import amara.core.Util;
+import amara.core.files.FileAssets;
 
 /**
  *

@@ -10,9 +10,9 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Spatial;
 import com.jme3.system.AppSettings;
-import amara.GameInfo;
+import amara.core.GameInfo;
+import amara.core.files.FileAssets;
 import amara.engine.JMonkeyUtil;
-import amara.engine.files.FileAssets;
 import amara.engine.materials.MaterialFactory;
 import amara.engine.comparators.LayerGeometryComparator_Opaque;
 

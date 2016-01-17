@@ -4,9 +4,6 @@
  */
 package amara.engine.applications.ingame.client.appstates;
 
-import amara.engine.applications.ingame.client.IngameClientApplication;
-import amara.engine.appstates.BaseDisplayAppState;
-import amara.engine.appstates.NiftyAppState;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -14,11 +11,12 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.input.KeyInput;
 import com.jme3.network.Message;
+import amara.core.input.Event;
+import amara.core.input.events.KeyPressedEvent;
+import amara.engine.appstates.*;
+import amara.engine.applications.ingame.client.IngameClientApplication;
 import amara.engine.applications.ingame.client.gui.*;
 import amara.engine.applications.masterserver.server.protocol.*;
-import amara.engine.appstates.*;
-import amara.engine.input.Event;
-import amara.engine.input.events.KeyPressedEvent;
 import amara.engine.network.*;
 import amara.engine.network.debug.frame.NetworkLoadDisplay;
 import amara.engine.network.messages.*;

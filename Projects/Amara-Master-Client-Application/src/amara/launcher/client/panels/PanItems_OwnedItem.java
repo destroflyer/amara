@@ -6,8 +6,8 @@ package amara.launcher.client.panels;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import amara.core.files.FileAssets;
 import amara.engine.applications.masterserver.server.protocol.OwnedItem;
-import amara.engine.files.FileAssets;
 
 /**
  *

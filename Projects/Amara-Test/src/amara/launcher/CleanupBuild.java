@@ -5,7 +5,7 @@
 package amara.launcher;
 
 import java.io.File;
-import amara.engine.files.FileManager;
+import amara.core.files.FileManager;
 
 /**
  *

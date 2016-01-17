@@ -4,7 +4,7 @@
  */
 package amara.launcher.server;
 
-import amara.Launcher_Core;
+import amara.core.Launcher_Core;
 import amara.engine.applications.masterserver.server.MasterserverServerApplication;
 import amara.launcher.Launcher_Game;
 import amara.launcher.client.api.requests.RegisterMasterserverRequest;

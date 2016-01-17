@@ -4,7 +4,7 @@
  */
 package amara.game.entitysystem.systems.effects.spells;
 
-import amara.Util;
+import amara.core.Util;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.spells.*;

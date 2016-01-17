@@ -6,11 +6,9 @@ package amara.game.entitysystem.systems.commands;
 
 import java.util.Iterator;
 import com.jme3.math.Vector2f;
-import amara.Queue;
+import amara.core.Queue;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
-import static amara.engine.applications.ingame.client.commands.casting.SpellIndex.SpellSet.ITEMS;
-import static amara.engine.applications.ingame.client.commands.casting.SpellIndex.SpellSet.SPELLS;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.input.*;

@@ -11,8 +11,8 @@ import com.jme3.terrain.heightmap.HeightMap;
 import com.jme3.terrain.heightmap.ImageBasedHeightMap;
 import com.jme3.texture.Texture;
 import com.jme3.texture.Texture2D;
+import amara.core.settings.Settings;
 import amara.engine.materials.*;
-import amara.engine.settings.Settings;
 import amara.game.maps.*;
 import amara.game.maps.terrain.*;
 

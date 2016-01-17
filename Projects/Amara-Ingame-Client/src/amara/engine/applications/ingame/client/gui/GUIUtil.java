@@ -4,7 +4,7 @@
  */
 package amara.engine.applications.ingame.client.gui;
 
-import amara.Util;
+import amara.core.Util;
 
 /**
  *

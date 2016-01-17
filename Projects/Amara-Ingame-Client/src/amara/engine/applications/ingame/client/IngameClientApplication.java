@@ -1,7 +1,7 @@
 package amara.engine.applications.ingame.client;
 
 import com.jme3.system.AppSettings;
-import amara.GameInfo;
+import amara.core.GameInfo;
 import amara.engine.applications.DisplayApplication;
 import amara.engine.applications.ingame.client.appstates.*;
 import amara.engine.applications.ingame.client.interfaces.MasterserverClientInterface;
@@ -9,7 +9,7 @@ import amara.engine.applications.ingame.client.network.backends.*;
 import amara.engine.appstates.*;
 import amara.engine.network.*;
 import amara.engine.network.exceptions.*;
-import amara.engine.settings.Settings;
+import amara.core.settings.Settings;
 
 /**
  * @author Carl

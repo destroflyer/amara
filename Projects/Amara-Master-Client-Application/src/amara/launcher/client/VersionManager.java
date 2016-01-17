@@ -6,7 +6,7 @@ package amara.launcher.client;
 
 import java.io.File;
 import java.util.List;
-import amara.engine.files.FileManager;
+import amara.core.files.FileManager;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;

@@ -5,7 +5,7 @@
 package amara.libraries.expressions;
 
 import java.util.Iterator;
-import amara.Queue;
+import amara.core.Queue;
 import amara.libraries.expressions.exceptions.ExpressionException;
 
 /**

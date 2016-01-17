@@ -9,10 +9,10 @@ import javax.swing.JOptionPane;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector2f;
 import de.lessvoid.nifty.elements.Element;
-import amara.Util;
+import amara.core.Util;
+import amara.core.files.FileAssets;
 import amara.engine.applications.ingame.editor.appstates.MapEditorAppState;
 import amara.engine.appstates.*;
-import amara.engine.files.FileAssets;
 import amara.engine.gui.GameScreenController;
 import amara.game.maps.*;
 

@@ -14,8 +14,8 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
-import amara.Util;
-import amara.engine.settings.*;
+import amara.core.Util;
+import amara.core.settings.*;
 import amara.launcher.client.buttons.*;
 
 /**

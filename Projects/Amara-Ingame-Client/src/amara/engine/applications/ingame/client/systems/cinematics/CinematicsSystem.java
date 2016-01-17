@@ -4,7 +4,7 @@
  */
 package amara.engine.applications.ingame.client.systems.cinematics;
 
-import amara.Util;
+import amara.core.Util;
 import amara.engine.appstates.CinematicAppState;
 import amara.engine.cinematics.Cinematic;
 import amara.game.entitysystem.*;

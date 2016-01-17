@@ -8,7 +8,7 @@ import com.jme3.audio.AudioNode;
 import com.jme3.scene.Node;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
-import amara.engine.settings.Settings;
+import amara.core.settings.Settings;
 
 /**
  *

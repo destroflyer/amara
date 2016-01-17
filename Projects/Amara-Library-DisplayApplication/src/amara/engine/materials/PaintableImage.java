@@ -7,10 +7,10 @@ package amara.engine.materials;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
+import amara.core.files.FileAssets;
 import com.jme3.texture.Image;
 import com.jme3.texture.Image.Format;
 import com.jme3.util.BufferUtils;
-import amara.engine.files.FileAssets;
  
 public class PaintableImage{
     

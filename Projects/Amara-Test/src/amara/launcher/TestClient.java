@@ -4,7 +4,7 @@
  */
 package amara.launcher;
 
-import amara.Launcher_Core;
+import amara.core.Launcher_Core;
 import amara.launcher.client.ClientLauncher;
 import amara.launcher.server.ServerLauncherFrame;
 

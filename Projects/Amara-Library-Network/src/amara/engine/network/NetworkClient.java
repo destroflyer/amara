@@ -12,7 +12,7 @@ import com.jme3.network.Message;
 import com.jme3.network.MessageConnection;
 import com.jme3.network.MessageListener;
 import com.jme3.network.Network;
-import amara.Util;
+import amara.core.Util;
 import amara.engine.network.debug.*;
 import amara.engine.network.exceptions.*;
 

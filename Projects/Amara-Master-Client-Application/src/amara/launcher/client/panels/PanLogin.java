@@ -5,8 +5,8 @@
 package amara.launcher.client.panels;
 
 import javax.swing.JPanel;
+import amara.core.files.FileAssets;
 import amara.engine.applications.masterserver.server.protocol.AuthentificationInformation;
-import amara.engine.files.FileAssets;
 import amara.launcher.client.*;
 
 /**

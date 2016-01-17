@@ -4,9 +4,8 @@
  */
 package amara.game.entitysystem.systems.shop;
 
-import amara.game.entitysystem.CustomGameTemplates;
 import java.util.LinkedList;
-import amara.Util;
+import amara.core.Util;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.items.*;

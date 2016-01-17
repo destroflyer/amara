@@ -1,7 +1,7 @@
 package amara.engine.applications.modelviewer;
 
 import com.jme3.math.Vector3f;
-import amara.Launcher_Core;
+import amara.core.Launcher_Core;
 import amara.engine.appstates.*;
 import amara.engine.applications.DisplayApplication;
 import amara.engine.applications.modelviewer.appstates.*;

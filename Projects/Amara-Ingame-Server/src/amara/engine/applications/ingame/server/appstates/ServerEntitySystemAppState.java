@@ -6,7 +6,7 @@ package amara.engine.applications.ingame.server.appstates;
 
 import java.sql.ResultSet;
 import java.util.LinkedList;
-import amara.Util;
+import amara.core.Util;
 import amara.engine.applications.*;
 import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.engine.applications.ingame.server.network.backends.*;

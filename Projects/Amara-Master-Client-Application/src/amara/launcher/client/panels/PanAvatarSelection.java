@@ -13,7 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
-import amara.engine.files.FileAssets;
+import amara.core.files.FileAssets;
 
 /**
  *

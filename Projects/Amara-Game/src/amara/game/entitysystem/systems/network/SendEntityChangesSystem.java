@@ -7,7 +7,7 @@ package amara.game.entitysystem.systems.network;
 import java.util.Iterator;
 import java.util.LinkedList;
 import com.jme3.network.Message;
-import amara.Util;
+import amara.core.Util;
 import amara.engine.network.*;
 import amara.engine.network.messages.entitysystem.Message_EntityChanges;
 import amara.game.entitysystem.*;

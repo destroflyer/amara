@@ -6,7 +6,7 @@ package amara.game.entitysystem.systems.aggro;
 
 import java.util.LinkedList;
 import com.jme3.math.Vector2f;
-import amara.Util;
+import amara.core.Util;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spells.*;

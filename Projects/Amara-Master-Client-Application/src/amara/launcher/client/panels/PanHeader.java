@@ -12,8 +12,8 @@ package amara.launcher.client.panels;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import amara.GameInfo;
-import amara.engine.files.FileAssets;
+import amara.core.GameInfo;
+import amara.core.files.FileAssets;
 
 /**
  *

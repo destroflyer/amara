@@ -6,11 +6,11 @@ package amara.engine.applications.masterserver.server.appstates;
 
 import java.io.File;
 import java.util.LinkedList;
+import amara.core.files.FileManager;
 import amara.engine.applications.*;
 import amara.engine.applications.masterserver.server.network.backends.*;
 import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.appstates.NetworkServerAppState;
-import amara.engine.files.FileManager;
 import amara.engine.network.NetworkServer;
 
 /**

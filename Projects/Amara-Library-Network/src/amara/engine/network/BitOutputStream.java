@@ -7,7 +7,7 @@ package amara.engine.network;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import amara.Util;
+import amara.core.Util;
 
 /**
  *

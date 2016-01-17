@@ -4,7 +4,7 @@
  */
 package amara.engine.applications.ingame.client.gui;
 
-import amara.Util;
+import amara.core.Util;
 import amara.engine.applications.ingame.client.appstates.SendPlayerCommandsAppState;
 import amara.engine.applications.ingame.client.gui.objects.SpellInformation;
 import amara.engine.appstates.NiftyAppState;

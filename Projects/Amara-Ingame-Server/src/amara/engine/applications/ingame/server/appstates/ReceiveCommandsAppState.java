@@ -4,7 +4,7 @@
  */
 package amara.engine.applications.ingame.server.appstates;
 
-import amara.Queue;
+import amara.core.Queue;
 import amara.engine.applications.*;
 import amara.engine.applications.ingame.server.network.backends.ReceiveCommandsBackend;
 import amara.engine.appstates.NetworkServerAppState;

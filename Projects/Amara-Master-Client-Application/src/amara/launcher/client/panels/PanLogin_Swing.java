@@ -12,8 +12,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
-import amara.*;
-import amara.engine.files.FileAssets;
+import amara.core.GameInfo;
+import amara.core.files.FileAssets;
 import amara.launcher.client.buttons.*;
 
 /**

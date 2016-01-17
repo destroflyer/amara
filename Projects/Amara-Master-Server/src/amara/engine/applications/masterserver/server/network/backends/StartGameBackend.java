@@ -6,7 +6,7 @@ package amara.engine.applications.masterserver.server.network.backends;
 
 import java.util.ArrayList;
 import com.jme3.network.Message;
-import amara.Util;
+import amara.core.Util;
 import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.engine.applications.masterserver.server.MasterserverServerApplication;
 import amara.engine.applications.masterserver.server.appstates.*;

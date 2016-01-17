@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import com.jme3.animation.*;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import amara.core.settings.Settings;
 import amara.engine.JMonkeyUtil;
 import amara.engine.applications.DisplayApplication;
-import amara.engine.settings.Settings;
 
 /**
  *

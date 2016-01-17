@@ -10,7 +10,7 @@
  */
 package amara.launcher.client.panels;
 
-import amara.engine.files.FileAssets;
+import amara.core.files.FileAssets;
 
 /**
  *

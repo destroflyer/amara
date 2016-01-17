@@ -5,11 +5,11 @@
 package amara.engine.applications.ingame.client.gui;
 
 import java.util.HashMap;
+import amara.core.input.Keys;
+import amara.core.input.events.MouseClickEvent;
+import amara.core.settings.*;
+import amara.core.settings.types.*;
 import amara.engine.gui.GameScreenController;
-import amara.engine.input.Keys;
-import amara.engine.input.events.MouseClickEvent;
-import amara.engine.settings.*;
-import amara.engine.settings.types.*;
 import de.lessvoid.nifty.NiftyEvent;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.builder.*;

@@ -14,7 +14,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import amara.engine.files.FileAssets;
+import amara.core.files.FileAssets;
 
 /**
  *

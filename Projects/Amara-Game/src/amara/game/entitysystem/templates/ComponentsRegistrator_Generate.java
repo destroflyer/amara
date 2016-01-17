@@ -5,18 +5,15 @@
 
 package amara.game.entitysystem.templates;
 
-import amara.game.entitysystem.components.units.DamageHistoryComponent;
-import amara.game.entitysystem.components.physics.CollisionGroupComponent;
-import amara.game.entitysystem.components.spells.CastTypeComponent;
-import amara.game.entitysystem.components.effects.CustomEffectValuesComponent;
-import amara.game.entitysystem.components.effects.general.RemoveComponentsComponent;
-import amara.game.entitysystem.components.effects.general.AddComponentsComponent;
-import amara.game.entitysystem.components.physics.HitboxComponent;
-import amara.game.entitysystem.components.units.HealthBarStyleComponent;
-import amara.game.entitysystem.components.spawns.SpawnTemplateComponent;
 import java.io.File;
 import java.lang.reflect.Field;
-import amara.engine.files.FileManager;
+import amara.core.files.FileManager;
+import amara.game.entitysystem.components.effects.*;
+import amara.game.entitysystem.components.effects.general.*;
+import amara.game.entitysystem.components.physics.*;
+import amara.game.entitysystem.components.spawns.*;
+import amara.game.entitysystem.components.spells.*;
+import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.synchronizing.*;
 
 /**

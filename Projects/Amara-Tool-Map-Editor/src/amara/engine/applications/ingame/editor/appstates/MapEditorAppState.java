@@ -23,7 +23,7 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import amara.Util;
+import amara.core.Util;
 import amara.engine.JMonkeyUtil;
 import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.models.ModelObject;

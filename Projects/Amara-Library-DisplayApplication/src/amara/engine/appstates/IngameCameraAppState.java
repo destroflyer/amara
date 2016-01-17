@@ -17,8 +17,8 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
+import amara.core.settings.Settings;
 import amara.engine.applications.DisplayApplication;
-import amara.engine.settings.Settings;
 import org.lwjgl.opengl.Display;
 
 /**

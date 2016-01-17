@@ -6,10 +6,10 @@ package amara.launcher.client.panels;
 
 import java.awt.event.ItemEvent;
 import javax.swing.DefaultComboBoxModel;
+import amara.core.files.FileAssets;
 import amara.engine.applications.masterserver.server.network.messages.*;
 import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.applications.masterserver.client.MasterserverClientUtil;
-import amara.engine.files.FileAssets;
 import amara.launcher.client.comboboxes.ComboboxModel_OwnedCharacters;
 
 /**

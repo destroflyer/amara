@@ -1,7 +1,7 @@
 package amara.engine.applications.ingame.editor;
 
 import com.jme3.math.Vector3f;
-import amara.Launcher_Core;
+import amara.core.Launcher_Core;
 import amara.engine.applications.DisplayApplication;
 import amara.engine.applications.ingame.editor.appstates.*;
 import amara.engine.appstates.*;

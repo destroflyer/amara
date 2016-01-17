@@ -4,9 +4,9 @@
  */
 package amara.engine.appstates;
 
-import amara.Queue;
-import amara.engine.input.*;
-import amara.engine.input.events.*;
+import amara.core.Queue;
+import amara.core.input.*;
+import amara.core.input.events.*;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.input.*;

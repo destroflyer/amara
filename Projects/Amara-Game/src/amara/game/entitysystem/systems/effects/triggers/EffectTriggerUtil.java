@@ -5,7 +5,7 @@
 package amara.game.entitysystem.systems.effects.triggers;
 
 import java.util.LinkedList;
-import amara.Util;
+import amara.core.Util;
 import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
