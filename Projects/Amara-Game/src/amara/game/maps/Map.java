@@ -4,8 +4,8 @@
  */
 package amara.game.maps;
 
-import amara.game.entitysystem.EntityWorld;
 import amara.game.maps.terrain.TerrainSkin;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

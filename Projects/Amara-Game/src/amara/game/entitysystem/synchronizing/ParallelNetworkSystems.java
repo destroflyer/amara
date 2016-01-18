@@ -4,11 +4,11 @@
  */
 package amara.game.entitysystem.synchronizing;
 
-import amara.game.entitysystem.systems.players.CountdownPlayerRespawnSystem;
-import amara.game.entitysystem.systems.units.CountdownCastingSystem;
-import amara.game.entitysystem.systems.game.UpdateGameTimeSystem;
-import amara.game.entitysystem.EntitySystem;
-import amara.game.entitysystem.systems.physics.TransformUpdateSystem;
+import amara.game.entitysystem.systems.game.*;
+import amara.game.entitysystem.systems.physics.*;
+import amara.game.entitysystem.systems.players.*;
+import amara.game.entitysystem.systems.units.*;
+import amara.libraries.entitysystem.EntitySystem;
 
 /**
  *

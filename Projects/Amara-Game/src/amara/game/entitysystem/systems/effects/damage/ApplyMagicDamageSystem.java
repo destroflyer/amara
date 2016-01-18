@@ -4,11 +4,11 @@
  */
 package amara.game.entitysystem.systems.effects.damage;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.units.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

@@ -5,8 +5,8 @@
 package amara.game.entitysystem.systems.physics.intersectionHelper;
 
 import java.util.*;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
+import amara.libraries.entitysystem.*;
 import amara.libraries.physics.intersection.*;
 
 /**

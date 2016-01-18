@@ -10,9 +10,10 @@ import com.jme3.network.Message;
 import amara.core.Util;
 import amara.engine.network.*;
 import amara.engine.network.messages.entitysystem.Message_EntityChanges;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.visuals.animations.*;
-import amara.game.entitysystem.synchronizing.*;
+import amara.game.entitysystem.synchronizing.ClientComponentBlacklist;
+import amara.libraries.entitysystem.*;
+import amara.libraries.entitysystem.synchronizing.*;
 
 /**
  *

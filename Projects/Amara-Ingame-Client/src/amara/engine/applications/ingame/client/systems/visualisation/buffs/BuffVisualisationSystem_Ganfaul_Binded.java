@@ -7,7 +7,7 @@ package amara.engine.applications.ingame.client.systems.visualisation.buffs;
 import com.jme3.scene.Spatial;
 import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.engine.applications.ingame.client.systems.visualisation.EntitySceneMap;
-import amara.game.entitysystem.EntityWorld;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

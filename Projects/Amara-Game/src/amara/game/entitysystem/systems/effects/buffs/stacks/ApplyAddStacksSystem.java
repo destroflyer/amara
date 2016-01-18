@@ -4,10 +4,10 @@
  */
 package amara.game.entitysystem.systems.effects.buffs.stacks;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.buffs.stacks.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.buffs.stacks.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

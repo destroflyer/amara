@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.intersectionHelper;
 
-import amara.game.entitysystem.EntityWorld;
 import amara.game.entitysystem.components.physics.CollisionGroupComponent;
+import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.physics.intersection.Filter;
 
 /**

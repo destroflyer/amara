@@ -5,11 +5,11 @@
 package amara.engine.applications.ingame.client.gui.objects;
 
 import amara.engine.applications.ingame.client.gui.GUIUtil;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.spells.*;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

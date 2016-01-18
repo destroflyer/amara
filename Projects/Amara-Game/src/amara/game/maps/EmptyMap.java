@@ -4,7 +4,7 @@
  */
 package amara.game.maps;
 
-import amara.game.entitysystem.*;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

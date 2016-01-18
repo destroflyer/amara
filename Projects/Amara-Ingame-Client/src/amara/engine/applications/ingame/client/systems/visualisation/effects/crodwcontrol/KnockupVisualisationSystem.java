@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import com.jme3.scene.Node;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.knockup.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

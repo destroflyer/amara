@@ -5,7 +5,6 @@
 package amara.game.entitysystem.systems.camps;
 
 import java.util.LinkedList;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.camps.*;
 import amara.game.entitysystem.components.effects.general.*;
@@ -16,6 +15,7 @@ import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.systems.commands.ExecutePlayerCommandsSystem;
+import amara.libraries.entitysystem.*;
 
 /**
  *

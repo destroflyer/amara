@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem.systems.objectives;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.objectives.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

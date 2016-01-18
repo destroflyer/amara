@@ -4,9 +4,9 @@
  */
 package amara.game.entitysystem.systems.units;
 
-import amara.game.entitysystem.EntityWorld;
 import amara.game.entitysystem.components.units.passives.*;
 import amara.game.entitysystem.systems.effects.triggers.EffectTriggerUtil;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

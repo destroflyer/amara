@@ -4,7 +4,6 @@
  */
 package amara.game.entitysystem.systems.attributes;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.*;
 import amara.game.entitysystem.components.buffs.stacks.*;
@@ -14,6 +13,7 @@ import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.visuals.animations.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

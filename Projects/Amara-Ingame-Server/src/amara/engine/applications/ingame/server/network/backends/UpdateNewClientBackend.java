@@ -9,9 +9,9 @@ import java.util.LinkedList;
 import com.jme3.network.Message;
 import amara.engine.network.*;
 import amara.engine.network.messages.Message_ClientInitialized;
-import amara.game.entitysystem.EntityWorld;
-import amara.game.entitysystem.synchronizing.*;
 import amara.game.entitysystem.systems.network.SendEntityChangesSystem;
+import amara.libraries.entitysystem.EntityWorld;
+import amara.libraries.entitysystem.synchronizing.*;
 
 /**
  *

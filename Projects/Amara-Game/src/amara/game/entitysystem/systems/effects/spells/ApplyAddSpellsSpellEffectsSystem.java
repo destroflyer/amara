@@ -4,12 +4,12 @@
  */
 package amara.game.entitysystem.systems.effects.spells;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.spells.*;
 import amara.game.entitysystem.components.spells.triggers.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

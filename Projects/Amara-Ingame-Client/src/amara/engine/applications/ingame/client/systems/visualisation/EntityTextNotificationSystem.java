@@ -13,7 +13,7 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.engine.applications.ingame.client.systems.visualisation.controls.TextNotificationAttachmentControl;
 import amara.engine.materials.MaterialFactory;
-import amara.game.entitysystem.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

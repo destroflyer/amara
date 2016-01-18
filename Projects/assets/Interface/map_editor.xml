@@ -2,7 +2,7 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
     <useStyles filename="nifty-default-styles.xml"/>
     <useControls filename="nifty-default-controls.xml"/>
-    <screen id="start" controller="amara.engine.applications.ingame.editor.gui.ScreenController_MapEditor">
+    <screen id="start" controller="amara.tools.editors.map.gui.ScreenController_MapEditor">
         <layer childLayout="center">
             <panel childLayout="vertical">
                 <panel height="10px"/>

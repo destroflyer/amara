@@ -4,7 +4,6 @@
  */
 package amara.game.entitysystem.systems.players;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.*;
 import amara.game.entitysystem.components.buffs.status.*;
@@ -19,6 +18,7 @@ import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.buffs.RemoveBuffsSystem;
 import amara.game.entitysystem.systems.units.UnitUtil;
 import amara.game.maps.Map;
+import amara.libraries.entitysystem.*;
 
 /**
  *

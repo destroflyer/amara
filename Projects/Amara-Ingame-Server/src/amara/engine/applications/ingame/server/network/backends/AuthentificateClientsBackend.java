@@ -7,9 +7,9 @@ package amara.engine.applications.ingame.server.network.backends;
 import com.jme3.network.Message;
 import amara.engine.network.*;
 import amara.engine.network.messages.*;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.games.*;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

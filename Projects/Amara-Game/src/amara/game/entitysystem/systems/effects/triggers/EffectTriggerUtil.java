@@ -6,13 +6,13 @@ package amara.game.entitysystem.systems.effects.triggers;
 
 import java.util.LinkedList;
 import amara.core.Util;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.targets.*;
 import amara.game.entitysystem.systems.conditions.ConditionUtil;
+import amara.libraries.entitysystem.*;
 
 /**
  *

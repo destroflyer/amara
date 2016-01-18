@@ -8,13 +8,13 @@ import java.util.Iterator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Set;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.systems.game.UpdateGameTimeSystem;
+import amara.libraries.entitysystem.*;
 
 /**
  *

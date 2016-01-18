@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem.systems.effects;
 
-import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.effects.ApplyEffectImpactComponent;
+import amara.game.entitysystem.components.effects.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

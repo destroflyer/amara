@@ -14,8 +14,8 @@ import amara.engine.JMonkeyUtil;
 import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.engine.applications.ingame.client.systems.information.PlayerTeamSystem;
 import amara.engine.materials.MaterialFactory;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.units.IsHoveredComponent;
+import amara.libraries.entitysystem.*;
 
 /**
  *

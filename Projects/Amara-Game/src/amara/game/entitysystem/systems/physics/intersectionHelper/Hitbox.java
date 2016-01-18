@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem.systems.physics.intersectionHelper;
 
-import amara.game.entitysystem.EntityWrapper;
 import amara.game.entitysystem.components.physics.HitboxComponent;
+import amara.libraries.entitysystem.EntityWrapper;
 import amara.libraries.physics.intersection.BoundAabb;
 import amara.libraries.physics.shapes.Shape;
 

@@ -5,11 +5,11 @@
 package amara.game.entitysystem.systems.movement;
 
 import com.jme3.math.Vector2f;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.systems.physics.IntersectionObserver;
+import amara.libraries.entitysystem.*;
 import amara.libraries.physics.intersectionHelper.PolyMapManager;
 import amara.libraries.physics.shapes.*;
 

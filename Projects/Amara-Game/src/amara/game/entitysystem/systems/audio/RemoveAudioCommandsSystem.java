@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem.systems.audio;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.audio.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

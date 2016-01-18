@@ -8,8 +8,8 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.buffs.status.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

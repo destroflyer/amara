@@ -4,9 +4,9 @@
  */
 package amara.engine.applications.ingame.client.systems.information;
 
-import amara.game.entitysystem.*;
-import amara.game.entitysystem.components.players.SelectedUnitComponent;
-import amara.game.entitysystem.components.units.TeamComponent;
+import amara.game.entitysystem.components.players.*;
+import amara.game.entitysystem.components.units.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

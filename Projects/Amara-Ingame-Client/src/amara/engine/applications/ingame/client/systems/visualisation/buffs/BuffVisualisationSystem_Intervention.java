@@ -12,7 +12,7 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Sphere;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.materials.MaterialFactory;
-import amara.game.entitysystem.EntityWorld;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

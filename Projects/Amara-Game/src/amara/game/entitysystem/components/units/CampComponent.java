@@ -6,7 +6,7 @@ package amara.game.entitysystem.components.units;
 
 import com.jme3.math.Vector2f;
 import com.jme3.network.serializing.Serializable;
-import amara.game.entitysystem.synchronizing.ComponentField;
+import amara.libraries.entitysystem.synchronizing.ComponentField;
 
 /**
  *

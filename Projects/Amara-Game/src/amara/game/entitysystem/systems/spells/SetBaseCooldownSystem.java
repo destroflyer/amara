@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem.systems.spells;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.spells.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

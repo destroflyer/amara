@@ -6,7 +6,7 @@ package amara.engine.applications.ingame.client.systems.visualisation;
 
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import amara.game.entitysystem.*;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

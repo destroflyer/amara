@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem.systems.camps;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.camps.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

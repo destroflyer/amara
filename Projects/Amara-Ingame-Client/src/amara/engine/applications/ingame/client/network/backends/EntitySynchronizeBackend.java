@@ -8,8 +8,8 @@ import com.jme3.network.Message;
 import amara.engine.applications.DisplayApplication;
 import amara.engine.network.*;
 import amara.engine.network.messages.entitysystem.Message_EntityChanges;
-import amara.game.entitysystem.EntityWorld;
-import amara.game.entitysystem.synchronizing.*;
+import amara.libraries.entitysystem.*;
+import amara.libraries.entitysystem.synchronizing.*;
 
 /**
  *

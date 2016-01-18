@@ -6,8 +6,8 @@ package amara.game.maps;
 
 import java.util.ArrayList;
 import com.jme3.math.Vector3f;
-import amara.game.entitysystem.*;
 import amara.game.maps.visuals.*;
+import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.physics.shapes.*;
 
 /**

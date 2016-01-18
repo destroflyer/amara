@@ -5,10 +5,10 @@
 package amara.game.entitysystem.systems.effects.movement;
 
 import com.jme3.math.Vector2f;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.movement.*;
 import amara.game.entitysystem.components.physics.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

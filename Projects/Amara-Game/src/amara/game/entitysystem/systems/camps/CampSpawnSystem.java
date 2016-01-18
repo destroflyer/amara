@@ -4,13 +4,13 @@
  */
 package amara.game.entitysystem.systems.camps;
 
-import amara.game.entitysystem.CustomGameTemplates;
 import com.jme3.math.Vector2f;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.camps.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.units.*;
+import amara.libraries.entitysystem.*;
+import amara.libraries.entitysystem.templates.EntityTemplate;
 
 /**
  *

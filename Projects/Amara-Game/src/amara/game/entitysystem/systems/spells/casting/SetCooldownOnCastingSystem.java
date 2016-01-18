@@ -4,9 +4,9 @@
  */
 package amara.game.entitysystem.systems.spells.casting;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.spells.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

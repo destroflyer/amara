@@ -6,9 +6,9 @@ package amara.engine.applications.ingame.client.systems.filters;
 
 import amara.engine.appstates.PostFilterAppState;
 import amara.engine.filters.GrayScaleFilter;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.units.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

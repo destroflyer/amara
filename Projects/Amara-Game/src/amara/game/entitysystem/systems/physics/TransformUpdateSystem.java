@@ -1,8 +1,7 @@
 package amara.game.entitysystem.systems.physics;
 
-import amara.game.entitysystem.EntitySystem;
-import amara.game.entitysystem.EntityWorld;
 import amara.game.entitysystem.systems.physics.intersectionHelper.TransformUpdater;
+import amara.libraries.entitysystem.*;
 
 /**
  *

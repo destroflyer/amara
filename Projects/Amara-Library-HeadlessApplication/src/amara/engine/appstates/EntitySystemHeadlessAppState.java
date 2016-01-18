@@ -6,7 +6,7 @@ package amara.engine.appstates;
 
 import java.util.ArrayList;
 import amara.engine.applications.HeadlessApplication;
-import amara.game.entitysystem.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

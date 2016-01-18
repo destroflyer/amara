@@ -4,12 +4,12 @@
  */
 package amara.game.entitysystem.systems.effects.triggers;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.damage.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
 import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
+import amara.libraries.entitysystem.*;
 import amara.libraries.expressions.Values;
 import amara.libraries.expressions.values.*;
 

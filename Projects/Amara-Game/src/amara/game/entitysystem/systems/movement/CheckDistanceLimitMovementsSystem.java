@@ -4,9 +4,9 @@
  */
 package amara.game.entitysystem.systems.movement;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.units.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

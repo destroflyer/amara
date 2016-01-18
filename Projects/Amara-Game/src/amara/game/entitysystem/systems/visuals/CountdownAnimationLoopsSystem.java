@@ -4,9 +4,9 @@
  */
 package amara.game.entitysystem.systems.visuals;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

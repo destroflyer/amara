@@ -5,9 +5,9 @@
 package amara.engine.applications.ingame.client.systems.visualisation;
 
 import com.jme3.scene.Node;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.visuals.ModelComponent;
+import amara.libraries.entitysystem.*;
 
 /**
  *

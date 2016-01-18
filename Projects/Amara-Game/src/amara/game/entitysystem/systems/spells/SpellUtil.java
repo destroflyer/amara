@@ -4,10 +4,10 @@
  */
 package amara.game.entitysystem.systems.spells;
 
-import amara.game.entitysystem.EntityWorld;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

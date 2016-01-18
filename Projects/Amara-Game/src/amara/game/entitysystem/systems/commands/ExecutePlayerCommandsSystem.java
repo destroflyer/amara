@@ -9,7 +9,6 @@ import com.jme3.math.Vector2f;
 import amara.core.Queue;
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.commands.casting.*;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.general.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.items.InventoryComponent;
@@ -30,6 +29,7 @@ import amara.game.entitysystem.systems.spells.SpellUtil;
 import amara.game.entitysystem.systems.spells.casting.CastSpellSystem;
 import amara.game.entitysystem.systems.targets.TargetUtil;
 import amara.game.entitysystem.systems.units.UnitUtil;
+import amara.libraries.entitysystem.*;
 
 /**
  *

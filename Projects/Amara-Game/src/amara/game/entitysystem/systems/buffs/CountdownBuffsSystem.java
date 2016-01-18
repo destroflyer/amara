@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem.systems.buffs;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.buffs.status.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

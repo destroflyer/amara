@@ -4,9 +4,9 @@
  */
 package amara.game.entitysystem.systems.buffs.areas;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.buffs.areas.*;
 import amara.game.entitysystem.components.physics.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

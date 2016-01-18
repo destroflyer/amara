@@ -5,9 +5,9 @@
 package amara.engine.applications.ingame.client.systems.gui;
 
 import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

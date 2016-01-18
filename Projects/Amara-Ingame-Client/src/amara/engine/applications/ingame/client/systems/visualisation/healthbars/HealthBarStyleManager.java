@@ -15,9 +15,9 @@ import amara.engine.materials.MaterialFactory;
 import amara.engine.applications.ingame.client.systems.visualisation.healthbars.styles.*;
 import amara.engine.applications.ingame.client.systems.visualisation.meshes.RectangleMesh;
 import amara.engine.materials.PaintableImage;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.HealthComponent;
 import amara.game.entitysystem.components.units.HealthBarStyleComponent;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

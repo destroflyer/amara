@@ -4,11 +4,11 @@
  */
 package amara.game.entitysystem.systems.specials.erika;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.specials.erika.*;
 import amara.game.entitysystem.systems.effects.triggers.EffectTriggerUtil;
+import amara.libraries.entitysystem.*;
 
 /**
  *

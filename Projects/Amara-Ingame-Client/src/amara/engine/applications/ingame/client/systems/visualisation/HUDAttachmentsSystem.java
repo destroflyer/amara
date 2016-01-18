@@ -13,8 +13,8 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.systems.visualisation.healthbars.HealthBarStyleManager;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.PositionComponent;
+import amara.libraries.entitysystem.*;
 
 /**
  *

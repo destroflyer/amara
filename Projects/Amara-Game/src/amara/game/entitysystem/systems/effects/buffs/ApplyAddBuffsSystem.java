@@ -4,12 +4,12 @@
  */
 package amara.game.entitysystem.systems.effects.buffs;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.buffs.*;
 import amara.game.entitysystem.components.effects.casts.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

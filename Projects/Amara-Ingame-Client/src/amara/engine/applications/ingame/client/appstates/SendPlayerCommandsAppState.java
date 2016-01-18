@@ -20,7 +20,6 @@ import amara.engine.applications.ingame.client.systems.gui.DisplaySpellsImagesSy
 import amara.engine.appstates.*;
 import amara.engine.network.NetworkClient;
 import amara.engine.network.messages.Message_Command;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.shop.*;
@@ -28,6 +27,7 @@ import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.systems.commands.ExecutePlayerCommandsSystem;
 import amara.game.entitysystem.systems.shop.ShopUtil;
+import amara.libraries.entitysystem.*;
 
 /**
  *

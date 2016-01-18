@@ -5,8 +5,8 @@
 package amara.engine.applications.ingame.client.systems.visualisation;
 
 import com.jme3.math.ColorRGBA;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.units.LevelComponent;
+import amara.libraries.entitysystem.*;
 
 /**
  *

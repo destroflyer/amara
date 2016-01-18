@@ -14,7 +14,6 @@ import amara.engine.applications.masterserver.server.appstates.DatabaseAppState;
 import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.appstates.*;
 import amara.engine.network.NetworkServer;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.game.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.items.*;
@@ -61,6 +60,8 @@ import amara.game.entitysystem.systems.units.*;
 import amara.game.entitysystem.systems.visuals.*;
 import amara.game.maps.*;
 import amara.game.games.*;
+import amara.libraries.entitysystem.*;
+import amara.libraries.entitysystem.templates.EntityTemplate;
 import amara.libraries.physics.intersectionHelper.PolyMapManager;
 
 /**

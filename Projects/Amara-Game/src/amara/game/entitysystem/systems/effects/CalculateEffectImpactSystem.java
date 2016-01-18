@@ -5,7 +5,6 @@
 package amara.game.entitysystem.systems.effects;
 
 import com.jme3.math.Vector2f;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.aggro.*;
@@ -28,6 +27,8 @@ import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.specials.erika.*;
 import amara.game.entitysystem.components.spells.placeholders.*;
+import amara.libraries.entitysystem.*;
+import amara.libraries.entitysystem.templates.EntityTemplate;
 import amara.libraries.expressions.*;
 import amara.libraries.expressions.exceptions.ExpressionException;
 

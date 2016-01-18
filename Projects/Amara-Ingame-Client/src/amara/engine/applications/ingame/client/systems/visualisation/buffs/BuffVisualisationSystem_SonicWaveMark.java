@@ -13,7 +13,7 @@ import com.jme3.scene.shape.Quad;
 import amara.engine.JMonkeyUtil;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.materials.MaterialFactory;
-import amara.game.entitysystem.EntityWorld;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

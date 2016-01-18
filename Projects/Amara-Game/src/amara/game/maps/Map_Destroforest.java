@@ -5,7 +5,6 @@
 package amara.game.maps;
 
 import com.jme3.math.Vector2f;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.audio.*;
 import amara.game.entitysystem.components.camps.*;
@@ -24,6 +23,8 @@ import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.games.Game;
+import amara.libraries.entitysystem.*;
+import amara.libraries.entitysystem.templates.EntityTemplate;
 import amara.libraries.physics.shapes.*;
 
 /**

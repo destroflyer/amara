@@ -14,7 +14,7 @@ import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.units.*;
-import amara.game.entitysystem.synchronizing.*;
+import amara.libraries.entitysystem.synchronizing.ComponentField;
 
 /**
  *

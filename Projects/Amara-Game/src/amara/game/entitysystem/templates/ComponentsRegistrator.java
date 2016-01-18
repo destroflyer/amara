@@ -1,10 +1,13 @@
 package amara.game.entitysystem.templates;
 
+import amara.libraries.entitysystem.synchronizing.fieldserializers.FieldSerializer_Float;
+import amara.libraries.entitysystem.synchronizing.fieldserializers.FieldSerializer_Integer;
+import amara.libraries.entitysystem.templates.XMLComponentConstructor;
+import amara.libraries.entitysystem.templates.XMLTemplateManager;
 import com.jme3.math.Vector2f;
-import amara.game.entitysystem.synchronizing.BitstreamClassManager;
-import amara.game.entitysystem.synchronizing.ComponentSerializer;
-import amara.game.entitysystem.synchronizing.FieldSerializer;
-import amara.game.entitysystem.synchronizing.fieldserializers.*;
+import amara.libraries.entitysystem.synchronizing.BitstreamClassManager;
+import amara.libraries.entitysystem.synchronizing.ComponentSerializer;
+import amara.libraries.entitysystem.synchronizing.FieldSerializer;
 
 /**GENERATED**/
 public class ComponentsRegistrator{

@@ -6,12 +6,13 @@ package amara.game.entitysystem.systems.shop;
 
 import java.util.LinkedList;
 import amara.core.Util;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.shop.*;
 import amara.game.entitysystem.components.units.*;
+import amara.libraries.entitysystem.*;
+import amara.libraries.entitysystem.templates.EntityTemplate;
 
 /**
  *

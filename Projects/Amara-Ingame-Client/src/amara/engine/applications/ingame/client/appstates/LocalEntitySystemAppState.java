@@ -23,7 +23,7 @@ import amara.engine.applications.ingame.client.systems.visualisation.effects.rea
 import amara.engine.applications.ingame.client.systems.visualisation.healthbars.*;
 import amara.engine.appstates.*;
 import amara.engine.network.NetworkClient;
-import amara.game.entitysystem.EntitySystem;
+import amara.libraries.entitysystem.EntitySystem;
 import amara.game.entitysystem.synchronizing.ParallelNetworkSystems;
 
 /**

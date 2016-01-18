@@ -5,13 +5,13 @@
 package amara.game.entitysystem.systems.spells.casting;
 
 import com.jme3.math.Vector2f;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.input.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spells.*;
 import amara.game.entitysystem.components.spells.CastTypeComponent.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.systems.commands.ExecutePlayerCommandsSystem;
+import amara.libraries.entitysystem.*;
 
 /**
  *

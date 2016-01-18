@@ -4,10 +4,10 @@
  */
 package amara.game.entitysystem.systems.effects.audio;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.audio.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.audio.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

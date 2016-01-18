@@ -5,9 +5,9 @@
 package amara.engine.applications.ingame.client.systems.camera;
 
 import amara.engine.appstates.IngameCameraAppState;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

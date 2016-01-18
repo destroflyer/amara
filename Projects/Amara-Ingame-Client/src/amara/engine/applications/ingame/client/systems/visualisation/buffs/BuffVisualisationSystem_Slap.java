@@ -11,7 +11,7 @@ import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.engine.applications.ingame.client.systems.visualisation.EntitySceneMap;
 import amara.engine.applications.ingame.client.systems.visualisation.ModelSystem;
 import amara.engine.materials.MaterialFactory;
-import amara.game.entitysystem.EntityWorld;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

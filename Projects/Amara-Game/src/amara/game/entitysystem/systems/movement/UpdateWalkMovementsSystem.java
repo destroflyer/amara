@@ -4,12 +4,11 @@
  */
 package amara.game.entitysystem.systems.movement;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.units.*;
-import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

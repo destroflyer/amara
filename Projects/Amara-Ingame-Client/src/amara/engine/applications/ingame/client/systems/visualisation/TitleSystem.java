@@ -11,8 +11,8 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
 import amara.engine.materials.MaterialFactory;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.visuals.TitleComponent;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

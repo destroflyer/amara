@@ -11,10 +11,11 @@ import amara.engine.applications.ingame.client.appstates.SendPlayerCommandsAppSt
 import amara.engine.applications.ingame.client.commands.*;
 import amara.engine.applications.ingame.client.gui.objects.ItemRecipe;
 import amara.engine.gui.GameScreenController;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.general.*;
 import amara.game.entitysystem.components.items.*;
+import amara.libraries.entitysystem.*;
+import amara.libraries.entitysystem.templates.EntityTemplate;
 import de.lessvoid.nifty.NiftyEvent;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.builder.ImageBuilder;

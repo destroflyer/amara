@@ -5,9 +5,9 @@
 package amara.game.entitysystem.systems.shop;
 
 import java.util.HashMap;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.items.*;
 import amara.game.entitysystem.systems.units.PassiveUtil;
+import amara.libraries.entitysystem.*;
 
 /**
  *

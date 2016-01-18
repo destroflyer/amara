@@ -4,9 +4,9 @@
  */
 package amara.game.entitysystem.systems.units;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.systems.buffs.RemoveBuffsSystem;
+import amara.libraries.entitysystem.*;
 
 /**
  *

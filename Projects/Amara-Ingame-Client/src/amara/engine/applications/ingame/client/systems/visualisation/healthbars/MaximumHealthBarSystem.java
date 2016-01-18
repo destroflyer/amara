@@ -4,15 +4,15 @@
  */
 package amara.engine.applications.ingame.client.systems.visualisation.healthbars;
 
-import amara.engine.applications.ingame.client.systems.information.PlayerTeamSystem;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.texture.Texture;
+import amara.engine.applications.ingame.client.systems.information.PlayerTeamSystem;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.materials.PaintableImage;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
-import com.jme3.math.Vector3f;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

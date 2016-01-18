@@ -4,9 +4,7 @@
  */
 package amara.game.entitysystem.systems.effects.spawns;
 
-import amara.game.entitysystem.CustomGameTemplates;
 import com.jme3.math.Vector2f;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.casts.*;
 import amara.game.entitysystem.components.effects.spawns.*;
@@ -14,6 +12,8 @@ import amara.game.entitysystem.components.movements.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.spawns.*;
 import amara.game.entitysystem.components.units.*;
+import amara.libraries.entitysystem.*;
+import amara.libraries.entitysystem.templates.EntityTemplate;
 
 /**
  *

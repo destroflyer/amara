@@ -4,8 +4,8 @@
  */
 package amara.game.entitysystem.systems.general;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.units.LifetimeComponent;
+import amara.libraries.entitysystem.*;
 
 /**
  *

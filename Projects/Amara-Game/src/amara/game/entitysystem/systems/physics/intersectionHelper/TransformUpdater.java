@@ -5,9 +5,9 @@
 package amara.game.entitysystem.systems.physics.intersectionHelper;
 
 import java.util.HashSet;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.libraries.physics.shapes.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

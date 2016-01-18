@@ -4,11 +4,11 @@
  */
 package amara.game.entitysystem.systems.effects.crowdcontrol;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.crowdcontrol.*;
 import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.game.entitysystem.systems.units.UnitUtil;
+import amara.libraries.entitysystem.*;
 
 /**
  *

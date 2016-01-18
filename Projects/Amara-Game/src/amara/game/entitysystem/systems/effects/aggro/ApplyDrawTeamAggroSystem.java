@@ -5,7 +5,6 @@
 package amara.game.entitysystem.systems.effects.aggro;
 
 import com.jme3.math.Vector2f;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.aggro.*;
 import amara.game.entitysystem.components.effects.casts.*;
@@ -13,6 +12,7 @@ import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.systems.aggro.AggroUtil;
 import amara.game.entitysystem.systems.units.UnitUtil;
+import amara.libraries.entitysystem.*;
 
 /**
  *

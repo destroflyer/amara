@@ -4,13 +4,13 @@
  */
 package amara.game.entitysystem.systems.players;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.games.Game;
+import amara.libraries.entitysystem.*;
 
 /**
  *

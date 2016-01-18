@@ -4,10 +4,10 @@
  */
 package amara.game.entitysystem.systems.effects.physics;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.physics.*;
 import amara.game.entitysystem.components.physics.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

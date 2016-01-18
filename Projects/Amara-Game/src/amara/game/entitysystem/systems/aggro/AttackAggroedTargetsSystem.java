@@ -5,8 +5,8 @@
 package amara.game.entitysystem.systems.aggro;
 
 import java.util.LinkedList;
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.units.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

@@ -4,7 +4,6 @@
  */
 package amara.game.entitysystem.systems.units;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.units.*;
 import amara.game.entitysystem.components.units.effecttriggers.*;
@@ -12,6 +11,7 @@ import amara.game.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.systems.effects.triggers.EffectTriggerUtil;
 import amara.game.entitysystem.systems.movement.MovementSystem;
+import amara.libraries.entitysystem.*;
 
 /**
  *

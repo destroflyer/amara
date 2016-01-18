@@ -4,11 +4,10 @@
  */
 package amara.game.entitysystem.systems.conditions;
 
-import amara.game.entitysystem.EntityWorld;
-import amara.game.entitysystem.components.attributes.HealthComponent;
-import amara.game.entitysystem.components.attributes.MaximumHealthComponent;
-import amara.game.entitysystem.components.buffs.status.ActiveBuffComponent;
+import amara.game.entitysystem.components.attributes.*;
+import amara.game.entitysystem.components.buffs.status.*;
 import amara.game.entitysystem.components.conditions.*;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

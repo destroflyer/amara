@@ -5,7 +5,7 @@
 package amara.game.entitysystem.components.movements;
 
 import com.jme3.network.serializing.Serializable;
-import amara.game.entitysystem.synchronizing.ComponentField;
+import amara.libraries.entitysystem.synchronizing.ComponentField;
 
 /**
  *

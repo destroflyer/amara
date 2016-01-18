@@ -4,10 +4,10 @@
  */
 package amara.game.entitysystem.systems.effects.heal;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.attributes.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.heals.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *

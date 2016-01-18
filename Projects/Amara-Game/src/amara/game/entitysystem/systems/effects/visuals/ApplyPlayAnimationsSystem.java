@@ -4,10 +4,10 @@
  */
 package amara.game.entitysystem.systems.effects.visuals;
 
-import amara.game.entitysystem.*;
 import amara.game.entitysystem.components.effects.*;
 import amara.game.entitysystem.components.effects.visuals.*;
 import amara.game.entitysystem.components.visuals.*;
+import amara.libraries.entitysystem.*;
 
 /**
  *
