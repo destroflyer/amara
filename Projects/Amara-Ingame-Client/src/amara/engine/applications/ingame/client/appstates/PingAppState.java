@@ -9,9 +9,9 @@ import com.jme3.app.state.AppStateManager;
 import amara.engine.applications.ingame.client.IngameClientApplication;
 import amara.engine.applications.ingame.client.gui.*;
 import amara.engine.applications.ingame.client.network.backends.*;
-import amara.engine.appstates.*;
 import amara.engine.network.NetworkClient;
 import amara.engine.network.messages.*;
+import amara.libraries.applications.display.appstates.*;
 
 /**
  *

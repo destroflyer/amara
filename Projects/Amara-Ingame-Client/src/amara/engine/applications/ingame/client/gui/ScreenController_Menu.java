@@ -9,7 +9,7 @@ import amara.core.input.Keys;
 import amara.core.input.events.MouseClickEvent;
 import amara.core.settings.*;
 import amara.core.settings.types.*;
-import amara.engine.gui.GameScreenController;
+import amara.libraries.applications.display.gui.GameScreenController;
 import de.lessvoid.nifty.NiftyEvent;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.builder.*;

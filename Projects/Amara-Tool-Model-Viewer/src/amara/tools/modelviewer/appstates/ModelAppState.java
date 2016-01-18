@@ -15,9 +15,9 @@ import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
 import com.jme3.animation.AnimChannel;
-import amara.engine.JMonkeyUtil;
-import amara.engine.applications.ingame.client.models.ModelObject;
-import amara.engine.appstates.BaseDisplayAppState;
+import amara.libraries.applications.display.JMonkeyUtil;
+import amara.libraries.applications.display.appstates.BaseDisplayAppState;
+import amara.libraries.applications.display.models.ModelObject;
 import amara.tools.modelviewer.ModelViewerApplication;
 
 /**

@@ -20,7 +20,7 @@
             <texture index="13" alpha="1">dress.png</texture>
         </material>
         <modifiers>
-            <modifier>amara.engine.applications.ingame.client.models.modifiers.ModelModifier_Nathalya_Fire</modifier>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Nathalya_Fire</modifier>
         </modifiers>
     </model>
 </skin>

@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import amara.engine.applications.*;
 import amara.engine.applications.masterserver.client.network.backends.*;
-import amara.engine.appstates.*;
-import amara.engine.network.NetworkClient;
 import amara.engine.applications.masterserver.server.protocol.*;
+import amara.engine.appstates.NetworkClientHeadlessAppState;
+import amara.engine.network.NetworkClient;
 import amara.engine.network.messages.protocol.*;
 
 /**

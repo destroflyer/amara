@@ -12,12 +12,12 @@ import com.jme3.scene.Geometry;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import amara.engine.JMonkeyUtil;
 import amara.engine.applications.ingame.client.systems.visualisation.EntitySceneMap;
-import amara.engine.materials.MaterialFactory;
-import amara.libraries.entitysystem.EntityWorld;
+import amara.libraries.applications.display.JMonkeyUtil;
+import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.emitter.*;
 import amara.libraries.emitter.influencers.*;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

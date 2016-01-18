@@ -17,11 +17,11 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import amara.engine.JMonkeyUtil;
-import amara.engine.appstates.BaseDisplayAppState;
 import amara.engine.applications.ingame.client.IngameClientApplication;
-import amara.engine.appstates.MapAppState;
-import amara.engine.materials.MaterialFactory;
+import amara.libraries.applications.display.JMonkeyUtil;
+import amara.libraries.applications.display.appstates.BaseDisplayAppState;
+import amara.libraries.applications.display.ingame.appstates.MapAppState;
+import amara.libraries.applications.display.materials.MaterialFactory;
 
 /**
  *

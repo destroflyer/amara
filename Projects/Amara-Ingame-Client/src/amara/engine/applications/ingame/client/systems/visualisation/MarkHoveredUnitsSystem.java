@@ -10,11 +10,11 @@ import com.jme3.math.FastMath;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import amara.engine.JMonkeyUtil;
-import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.engine.applications.ingame.client.systems.information.PlayerTeamSystem;
-import amara.engine.materials.MaterialFactory;
 import amara.game.entitysystem.components.units.IsHoveredComponent;
+import amara.libraries.applications.display.JMonkeyUtil;
+import amara.libraries.applications.display.materials.MaterialFactory;
+import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.*;
 
 /**

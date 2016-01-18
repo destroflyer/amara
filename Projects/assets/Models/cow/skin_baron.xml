@@ -13,7 +13,7 @@
             <color index="4">0,0,0,1</color>
         </material>
         <modifiers>
-            <modifier>amara.engine.applications.ingame.client.models.modifiers.ModelModifier_Cow_Baron</modifier>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Cow_Baron</modifier>
         </modifiers>
     </model>
 </skin>

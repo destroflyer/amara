@@ -7,8 +7,8 @@ package amara.game.maps;
 import com.jme3.cinematic.MotionPath;
 import com.jme3.cinematic.events.MotionEvent;
 import com.jme3.math.Vector3f;
-import amara.engine.cinematics.*;
-import amara.engine.cinematics.actions.*;
+import amara.libraries.applications.display.cinematics.*;
+import amara.libraries.applications.display.cinematics.actions.*;
 
 /**
  *

@@ -6,8 +6,8 @@ package amara.engine.applications.launcher.startscreen.gui;
 
 import amara.engine.applications.launcher.startscreen.LoginScreenApplication;
 import amara.engine.applications.launcher.startscreen.screens.LoginScreen;
-import amara.engine.gui.GameScreenController;
 import amara.launcher.client.panels.PanLogin;
+import amara.libraries.applications.display.gui.GameScreenController;
 import de.lessvoid.nifty.input.NiftyInputEvent;
 import de.lessvoid.nifty.input.NiftyStandardInputEvent;
 import de.lessvoid.nifty.screen.KeyInputHandler;

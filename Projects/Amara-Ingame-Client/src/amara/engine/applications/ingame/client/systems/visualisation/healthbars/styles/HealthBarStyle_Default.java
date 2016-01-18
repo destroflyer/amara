@@ -6,7 +6,7 @@ package amara.engine.applications.ingame.client.systems.visualisation.healthbars
 
 import java.awt.Color;
 import amara.engine.applications.ingame.client.systems.visualisation.healthbars.HealthBarStyle;
-import amara.engine.materials.PaintableImage;
+import amara.libraries.applications.display.materials.PaintableImage;
 
 /**
  *

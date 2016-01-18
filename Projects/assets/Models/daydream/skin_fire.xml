@@ -4,7 +4,7 @@
             <texture index="0">skin_fire.png</texture>
         </material>
         <modifiers>
-            <modifier>amara.engine.applications.ingame.client.models.modifiers.ModelModifier_Daydream_Fire</modifier>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Daydream_Fire</modifier>
         </modifiers>
     </model>
 </skin>

@@ -9,7 +9,8 @@ import amara.engine.applications.ingame.client.IngameClientApplication;
 import amara.engine.applications.ingame.client.gui.*;
 import amara.engine.applications.ingame.client.systems.filters.FogOfWarSystem;
 import amara.engine.applications.ingame.client.systems.visualisation.HUDAttachmentsSystem;
-import amara.engine.appstates.*;
+import amara.libraries.applications.display.appstates.*;
+import amara.libraries.applications.display.ingame.appstates.*;
 import amara.libraries.entitysystem.EntitySystem;
 
 /**

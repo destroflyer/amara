@@ -8,8 +8,8 @@ import com.jme3.scene.Node;
 import com.jme3.math.Vector2f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
-import amara.engine.appstates.MapObstaclesAppState;
 import amara.game.entitysystem.components.physics.*;
+import amara.libraries.applications.display.ingame.appstates.MapObstaclesAppState;
 import amara.libraries.entitysystem.*;
 
 /**

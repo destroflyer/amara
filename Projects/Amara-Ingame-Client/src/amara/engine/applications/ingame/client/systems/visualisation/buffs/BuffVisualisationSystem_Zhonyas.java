@@ -10,10 +10,10 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.animation.AnimChannel;
 import com.jme3.renderer.queue.RenderQueue;
-import amara.engine.JMonkeyUtil;
-import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
-import amara.engine.materials.MaterialFactory;
+import amara.libraries.applications.display.JMonkeyUtil;
+import amara.libraries.applications.display.materials.MaterialFactory;
+import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.EntityWorld;
 
 /**

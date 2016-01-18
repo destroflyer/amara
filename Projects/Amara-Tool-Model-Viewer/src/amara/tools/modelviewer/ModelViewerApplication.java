@@ -2,9 +2,9 @@ package amara.tools.modelviewer;
 
 import com.jme3.math.Vector3f;
 import amara.core.Launcher_Core;
-import amara.engine.appstates.*;
-import amara.engine.applications.DisplayApplication;
-import amara.engine.materials.MaterialFactory;
+import amara.libraries.applications.display.DisplayApplication;
+import amara.libraries.applications.display.appstates.*;
+import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.tools.modelviewer.appstates.*;
 
 /**

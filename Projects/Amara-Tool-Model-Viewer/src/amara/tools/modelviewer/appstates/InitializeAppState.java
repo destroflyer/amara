@@ -10,7 +10,7 @@ import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
-import amara.engine.appstates.*;
+import amara.libraries.applications.display.appstates.*;
 import amara.tools.modelviewer.ModelViewerApplication;
 
 /**

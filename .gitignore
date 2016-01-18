@@ -58,7 +58,6 @@
 /Projects/assets/Models/kachujin/animations/
 /Projects/assets/Models/maria/animations/
 /Projects/assets/Models/maw/animations/
-/Projects/assets/Models/mutant/animations/
 /Projects/assets/Models/vampire_a_lusth/animations/
 /Projects/Amara-Master-Server-Application/workspace/
 /Projects/Amara-Master-Client-Application/workspace/
@@ -75,3 +74,9 @@
 /Projects/Amara-Library-EntitySystem-Templates/nbproject/private/
 /Projects/Amara-Library-EntitySystem-Templates/build/
 /Projects/Amara-Library-EntitySystem-Templates/dist/
+/Projects/Amara-Library-Applications-Display/nbproject/private/
+/Projects/Amara-Library-Applications-Display-Ingame/nbproject/private/
+/Projects/Amara-Library-Applications-Display/build/
+/Projects/Amara-Library-Applications-Display-Ingame/build/
+/Projects/Amara-Library-Applications-Display/dist/
+/Projects/Amara-Library-Applications-Display-Ingame/dist/

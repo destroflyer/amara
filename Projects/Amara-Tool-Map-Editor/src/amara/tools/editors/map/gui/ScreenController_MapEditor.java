@@ -10,9 +10,9 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector2f;
 import amara.core.Util;
 import amara.core.files.FileAssets;
-import amara.engine.appstates.*;
-import amara.engine.gui.GameScreenController;
 import amara.game.maps.*;
+import amara.libraries.applications.display.gui.GameScreenController;
+import amara.libraries.applications.display.ingame.appstates.*;
 import amara.tools.editors.map.appstates.MapEditorAppState;
 import de.lessvoid.nifty.elements.Element;
 

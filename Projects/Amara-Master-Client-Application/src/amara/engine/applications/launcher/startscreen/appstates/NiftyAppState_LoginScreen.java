@@ -6,8 +6,8 @@ package amara.engine.applications.launcher.startscreen.appstates;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
-import amara.engine.applications.DisplayApplication;
-import amara.engine.appstates.*;
+import amara.libraries.applications.display.DisplayApplication;
+import amara.libraries.applications.display.appstates.*;
 
 /**
  *

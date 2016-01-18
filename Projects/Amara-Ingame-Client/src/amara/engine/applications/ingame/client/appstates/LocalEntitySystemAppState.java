@@ -10,7 +10,6 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.engine.applications.ingame.client.IngameClientApplication;
-import amara.engine.applications.ingame.client.maps.MapHeightmap;
 import amara.engine.applications.ingame.client.network.backends.*;
 import amara.engine.applications.ingame.client.systems.audio.*;
 import amara.engine.applications.ingame.client.systems.cinematics.*;
@@ -21,10 +20,12 @@ import amara.engine.applications.ingame.client.systems.visualisation.buffs.*;
 import amara.engine.applications.ingame.client.systems.visualisation.effects.crodwcontrol.*;
 import amara.engine.applications.ingame.client.systems.visualisation.effects.reactions.*;
 import amara.engine.applications.ingame.client.systems.visualisation.healthbars.*;
-import amara.engine.appstates.*;
 import amara.engine.network.NetworkClient;
-import amara.libraries.entitysystem.EntitySystem;
 import amara.game.entitysystem.synchronizing.ParallelNetworkSystems;
+import amara.libraries.applications.display.appstates.*;
+import amara.libraries.applications.display.ingame.appstates.*;
+import amara.libraries.applications.display.ingame.maps.MapHeightmap;
+import amara.libraries.entitysystem.EntitySystem;
 
 /**
  *

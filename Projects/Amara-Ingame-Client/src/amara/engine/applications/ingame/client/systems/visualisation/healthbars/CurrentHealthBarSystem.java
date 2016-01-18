@@ -9,8 +9,8 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.texture.Texture;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
-import amara.engine.materials.PaintableImage;
 import amara.game.entitysystem.components.attributes.*;
+import amara.libraries.applications.display.materials.PaintableImage;
 import amara.libraries.entitysystem.*;
 
 /**

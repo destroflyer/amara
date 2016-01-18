@@ -7,7 +7,7 @@
             <texture index="0">diffuse.png</texture>
         </material>
         <modifiers>
-            <modifier>amara.engine.applications.ingame.client.models.modifiers.ModelModifier_Erika_FireItUp</modifier>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Erika_FireItUp</modifier>
         </modifiers>
     </model>
 </skin>

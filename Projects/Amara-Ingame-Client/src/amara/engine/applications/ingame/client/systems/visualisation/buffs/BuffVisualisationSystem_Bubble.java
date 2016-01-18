@@ -11,7 +11,7 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Sphere;
 import amara.engine.applications.ingame.client.systems.visualisation.EntitySceneMap;
-import amara.engine.materials.MaterialFactory;
+import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.entitysystem.EntityWorld;
 
 /**

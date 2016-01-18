@@ -4,14 +4,14 @@
  */
 package amara.engine.applications.ingame.client.network.backends;
 
-import amara.engine.appstates.NiftyAppState;
 import com.jme3.network.Message;
-import amara.engine.applications.DisplayApplication;
 import amara.engine.applications.ingame.client.appstates.*;
 import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
-import amara.engine.appstates.*;
 import amara.engine.network.*;
 import amara.engine.network.messages.Message_GameOver;
+import amara.libraries.applications.display.DisplayApplication;
+import amara.libraries.applications.display.appstates.*;
+import amara.libraries.applications.display.ingame.appstates.IngameCameraAppState;
 
 /**
  *

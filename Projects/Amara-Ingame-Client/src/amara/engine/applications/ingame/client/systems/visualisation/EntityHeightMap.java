@@ -6,8 +6,8 @@ package amara.engine.applications.ingame.client.systems.visualisation;
 
 import java.util.HashMap;
 import com.jme3.math.Vector3f;
-import amara.engine.JMonkeyUtil;
-import amara.engine.applications.ingame.client.models.ModelObject;
+import amara.libraries.applications.display.JMonkeyUtil;
+import amara.libraries.applications.display.models.ModelObject;
 
 /**
  *

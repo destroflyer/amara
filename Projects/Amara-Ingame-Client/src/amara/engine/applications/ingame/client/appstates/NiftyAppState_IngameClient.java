@@ -7,8 +7,7 @@ package amara.engine.applications.ingame.client.appstates;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import amara.engine.applications.ingame.client.IngameClientApplication;
-import amara.engine.appstates.BaseDisplayAppState;
-import amara.engine.appstates.NiftyAppState;
+import amara.libraries.applications.display.appstates.*;
 
 /**
  *

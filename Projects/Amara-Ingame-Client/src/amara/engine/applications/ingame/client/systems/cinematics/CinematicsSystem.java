@@ -5,10 +5,10 @@
 package amara.engine.applications.ingame.client.systems.cinematics;
 
 import amara.core.Util;
-import amara.engine.appstates.CinematicAppState;
-import amara.engine.cinematics.Cinematic;
 import amara.game.entitysystem.components.game.CinematicComponent;
 import amara.game.games.Game;
+import amara.libraries.applications.display.appstates.CinematicAppState;
+import amara.libraries.applications.display.cinematics.Cinematic;
 import amara.libraries.entitysystem.*;
 
 /**

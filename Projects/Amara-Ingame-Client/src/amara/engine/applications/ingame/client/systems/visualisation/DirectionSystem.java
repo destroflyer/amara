@@ -6,8 +6,8 @@ package amara.engine.applications.ingame.client.systems.visualisation;
 
 import com.jme3.scene.Node;
 import com.jme3.math.Vector3f;
-import amara.engine.JMonkeyUtil;
 import amara.game.entitysystem.components.physics.*;
+import amara.libraries.applications.display.JMonkeyUtil;
 import amara.libraries.entitysystem.*;
 
 /**

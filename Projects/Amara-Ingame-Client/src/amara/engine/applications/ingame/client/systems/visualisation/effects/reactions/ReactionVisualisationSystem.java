@@ -11,8 +11,8 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.applications.ingame.client.systems.visualisation.meshes.SpeechBubbleMesh;
-import amara.engine.materials.MaterialFactory;
 import amara.game.entitysystem.components.units.ReactionComponent;
+import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.entitysystem.*;
 
 /**

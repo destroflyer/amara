@@ -6,7 +6,7 @@ package amara.tools.editors.map.appstates;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
-import amara.engine.appstates.*;
+import amara.libraries.applications.display.appstates.*;
 import amara.tools.editors.map.MapEditorApplication;
 
 /**

@@ -4,7 +4,6 @@
  */
 package amara.engine.applications.ingame.client.appstates;
 
-import amara.engine.appstates.NiftyAppState;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.light.AmbientLight;
@@ -13,11 +12,12 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import amara.engine.JMonkeyUtil;
 import amara.engine.applications.ingame.client.IngameClientApplication;
 import amara.engine.applications.ingame.client.gui.ScreenController_LoadingScreen;
-import amara.engine.applications.ingame.client.models.ModelObject;
-import amara.engine.appstates.*;
+import amara.libraries.applications.display.JMonkeyUtil;
+import amara.libraries.applications.display.appstates.*;
+import amara.libraries.applications.display.models.ModelObject;
+import amara.libraries.applications.display.ingame.appstates.IngameCameraAppState;
 
 /**
  *

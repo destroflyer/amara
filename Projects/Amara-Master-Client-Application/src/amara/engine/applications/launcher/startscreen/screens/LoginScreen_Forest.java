@@ -20,11 +20,10 @@ import com.jme3.terrain.heightmap.AbstractHeightMap;
 import com.jme3.terrain.heightmap.HillHeightMap;
 import com.jme3.texture.Texture;
 import com.jme3.util.SkyFactory;
-import amara.engine.JMonkeyUtil;
-import amara.engine.applications.DisplayApplication;
-import amara.engine.applications.ingame.client.models.ModelObject;
 import amara.engine.applications.launcher.startscreen.LoginScreenApplication;
-import amara.engine.appstates.*;
+import amara.libraries.applications.display.*;
+import amara.libraries.applications.display.appstates.*;
+import amara.libraries.applications.display.models.ModelObject;
 
 /**
  *

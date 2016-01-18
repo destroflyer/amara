@@ -29,7 +29,15 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>Amara-Library-DisplayApplication</foreign-project>
+                <foreign-project>Amara-Library-Applications-Display</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
+                <foreign-project>Amara-Library-Applications-Display-Ingame</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>

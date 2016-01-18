@@ -5,7 +5,7 @@
 package amara.engine.applications.ingame.client.gui;
 
 import amara.engine.applications.ingame.client.appstates.ClientChatAppState;
-import amara.engine.gui.GameScreenController;
+import amara.libraries.applications.display.gui.GameScreenController;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.input.NiftyInputEvent;

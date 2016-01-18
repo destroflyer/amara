@@ -5,7 +5,7 @@
 package amara.engine.applications.ingame.client.systems.visualisation.healthbars.styles;
 
 import amara.engine.applications.ingame.client.systems.visualisation.healthbars.HealthBarStyle;
-import amara.engine.materials.PaintableImage;
+import amara.libraries.applications.display.materials.PaintableImage;
 
 /**
  *
