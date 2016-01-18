@@ -1,14 +1,14 @@
 package amara.engine.applications.masterserver.server;
 
-import amara.engine.applications.HeadlessAppState;
-import amara.engine.applications.HeadlessApplication;
+import amara.libraries.applications.headless.applications.HeadlessApplication;
 import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.engine.applications.ingame.server.interfaces.MasterserverServerApplicationInterface;
 import amara.engine.applications.masterserver.server.appstates.*;
 import amara.engine.applications.masterserver.server.network.PortProvider;
-import amara.engine.appstates.*;
 import amara.engine.network.exceptions.*;
 import amara.game.games.Game;
+import amara.libraries.applications.headless.applications.HeadlessAppState;
+import amara.libraries.applications.headless.appstates.*;
 
 /**
  * @author Carl

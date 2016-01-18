@@ -1,7 +1,5 @@
 /Projects/Amara-Master-Server/nbproject/private/
 /Projects/Amara-Core/nbproject/private/
-/Projects/Amara-Core-HeadlessApplication/nbproject/private/
-/Projects/Amara-Library-HeadlessApplication/nbproject/private/
 /Projects/Amara-Network/nbproject/private/
 /Projects/Amara-Master-Client/nbproject/private/
 /Projects/Amara-Library-Network/nbproject/private/
@@ -15,7 +13,6 @@
 /Projects/Amara-Core/build/
 /Projects/Amara-Master-Client/build/
 /Projects/Amara-Core/dist/
-/Projects/Amara-Library-HeadlessApplication/build/
 /Projects/Amara-Library-Network/build/
 /Projects/Amara-Library-Physics/nbproject/private/
 /Projects/Amara-Library-Cinematics/nbproject/private/
@@ -34,7 +31,6 @@
 /Projects/Amara-Library-Expressions/dist/
 /Projects/Amara-Ingame-Client/build/
 /Projects/Amara-Game/dist/
-/Projects/Amara-Library-HeadlessApplication/dist/
 /Projects/Amara-Ingame-Client/dist/
 /Projects/Amara-Ingame-Server/build/
 /Projects/Amara-Ingame-Server/dist/
@@ -77,3 +73,6 @@
 /Projects/Amara-Library-Applications-Windowed/nbproject/private/
 /Projects/Amara-Library-Applications-Windowed/dist/
 /Projects/Amara-Library-Applications-Windowed/build/
+/Projects/Amara-Library-Applications-Headless/nbproject/private/
+/Projects/Amara-Library-Applications-Headless/build/
+/Projects/Amara-Library-Applications-Headless/dist/

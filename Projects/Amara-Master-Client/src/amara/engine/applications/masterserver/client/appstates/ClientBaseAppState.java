@@ -4,8 +4,8 @@
  */
 package amara.engine.applications.masterserver.client.appstates;
 
-import amara.engine.appstates.BaseHeadlessAppState;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
+import amara.libraries.applications.headless.appstates.BaseHeadlessAppState;
 
 /**
  *

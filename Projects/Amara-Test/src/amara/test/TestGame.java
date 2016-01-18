@@ -9,11 +9,11 @@ import amara.engine.applications.masterserver.client.MasterserverClientApplicati
 import amara.engine.applications.masterserver.server.MasterserverServerApplication;
 import amara.engine.applications.masterserver.server.network.messages.*;
 import amara.engine.applications.masterserver.server.protocol.*;
-import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.*;
 import amara.engine.network.exceptions.*;
 import amara.engine.network.messages.protocol.*;
 import amara.launcher.Launcher_Game;
+import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 
 /**
  *

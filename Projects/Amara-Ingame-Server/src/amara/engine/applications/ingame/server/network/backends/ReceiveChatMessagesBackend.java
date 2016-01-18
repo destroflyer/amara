@@ -8,7 +8,6 @@ import com.jme3.math.Vector2f;
 import com.jme3.network.Message;
 import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.engine.applications.ingame.server.appstates.*;
-import amara.engine.appstates.NetworkServerAppState;
 import amara.engine.network.*;
 import amara.engine.network.messages.*;
 import amara.game.entitysystem.components.attributes.*;
@@ -24,6 +23,7 @@ import amara.game.entitysystem.components.visuals.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
 import amara.game.games.*;
+import amara.libraries.applications.headless.appstates.NetworkServerAppState;
 import amara.libraries.entitysystem.*;
 
 /**

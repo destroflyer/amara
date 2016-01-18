@@ -17,10 +17,10 @@ import amara.engine.applications.masterserver.client.MasterserverClientApplicati
 import amara.engine.applications.masterserver.client.appstates.*;
 import amara.engine.applications.masterserver.client.appstates.LoginAppState.LoginResult;
 import amara.engine.applications.masterserver.server.protocol.*;
-import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.NetworkClient;
 import amara.engine.network.messages.protocol.*;
 import amara.launcher.client.panels.*;
+import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.applications.windowed.FrameUtil;
 
 /**

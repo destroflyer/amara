@@ -45,10 +45,9 @@ public class ComponentsRegistrator_Generate{
         code = "package " + packageName + ";\n";
         code += "\n";
         code += "import com.jme3.math.Vector2f;\n";
-        code += "import amara.game.entitysystem.synchronizing.BitstreamClassManager;\n";
-        code += "import amara.game.entitysystem.synchronizing.ComponentSerializer;\n";
-        code += "import amara.game.entitysystem.synchronizing.FieldSerializer;\n";
-        code += "import amara.game.entitysystem.synchronizing.fieldserializers.*;\n";
+        code += "import amara.libraries.entitysystem.synchronizing.fieldserializers.*;\n";
+        code += "import amara.libraries.entitysystem.templates.*;\n";
+        code += "import amara.libraries.entitysystem.synchronizing.*;\n";
         code += "\n";
         code += "/**GENERATED**/\n";
         code += "public class ComponentsRegistrator{\n\n";

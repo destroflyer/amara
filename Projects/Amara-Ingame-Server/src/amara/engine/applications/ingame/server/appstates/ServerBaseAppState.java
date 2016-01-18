@@ -4,8 +4,8 @@
  */
 package amara.engine.applications.ingame.server.appstates;
 
-import amara.engine.appstates.BaseHeadlessAppState;
 import amara.engine.applications.ingame.server.IngameServerApplication;
+import amara.libraries.applications.headless.appstates.BaseHeadlessAppState;
 
 /**
  *

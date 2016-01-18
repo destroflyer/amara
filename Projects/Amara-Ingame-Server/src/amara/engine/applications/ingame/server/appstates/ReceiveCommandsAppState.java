@@ -5,11 +5,11 @@
 package amara.engine.applications.ingame.server.appstates;
 
 import amara.core.Queue;
-import amara.engine.applications.*;
 import amara.engine.applications.ingame.server.network.backends.ReceiveCommandsBackend;
-import amara.engine.appstates.NetworkServerAppState;
 import amara.engine.network.NetworkServer;
 import amara.game.entitysystem.systems.commands.PlayerCommand;
+import amara.libraries.applications.headless.applications.*;
+import amara.libraries.applications.headless.appstates.NetworkServerAppState;
 
 /**
  *

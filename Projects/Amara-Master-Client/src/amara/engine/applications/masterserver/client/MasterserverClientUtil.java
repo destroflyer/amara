@@ -4,11 +4,11 @@
  */
 package amara.engine.applications.masterserver.client;
 
-import amara.engine.applications.HeadlessAppState;
 import amara.engine.applications.masterserver.client.appstates.*;
 import amara.engine.applications.masterserver.server.protocol.*;
-import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.NetworkClient;
+import amara.libraries.applications.headless.applications.HeadlessAppState;
+import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 
 /**
  *

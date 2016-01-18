@@ -1,10 +1,10 @@
 package amara.engine.applications.masterserver.client;
 
-import amara.engine.applications.HeadlessApplication;
 import amara.engine.applications.masterserver.client.appstates.*;
-import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.*;
 import amara.engine.network.exceptions.*;
+import amara.libraries.applications.headless.applications.HeadlessApplication;
+import amara.libraries.applications.headless.appstates.*;
 
 /**
  * @author Carl

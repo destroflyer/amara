@@ -4,10 +4,10 @@
  */
 package amara.engine.applications.ingame.server.appstates;
 
-import amara.engine.applications.*;
 import amara.engine.applications.ingame.server.network.backends.*;
-import amara.engine.appstates.NetworkServerAppState;
 import amara.engine.network.NetworkServer;
+import amara.libraries.applications.headless.applications.*;
+import amara.libraries.applications.headless.appstates.NetworkServerAppState;
 
 /**
  *

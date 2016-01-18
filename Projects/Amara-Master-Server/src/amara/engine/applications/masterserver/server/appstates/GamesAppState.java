@@ -4,17 +4,15 @@
  */
 package amara.engine.applications.masterserver.server.appstates;
 
-import amara.game.games.GamePlayer;
-import amara.game.games.Game;
-import amara.engine.applications.*;
 import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.engine.applications.masterserver.server.network.PortProvider;
 import amara.engine.applications.masterserver.server.network.backends.StartGameBackend;
-import amara.engine.appstates.NetworkServerAppState;
 import amara.engine.network.NetworkServer;
 import amara.engine.network.messages.*;
 import amara.game.games.*;
 import amara.game.players.ConnectedPlayers;
+import amara.libraries.applications.headless.applications.*;
+import amara.libraries.applications.headless.appstates.NetworkServerAppState;
 
 /**
  *

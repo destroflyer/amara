@@ -4,11 +4,11 @@
  */
 package amara.engine.applications.masterserver.server.appstates;
 
-import amara.engine.applications.*;
 import amara.engine.applications.masterserver.server.network.backends.ReceiveLogoutsBackend;
-import amara.engine.appstates.*;
 import amara.engine.network.NetworkServer;
 import amara.game.players.ConnectedPlayers;
+import amara.libraries.applications.headless.applications.*;
+import amara.libraries.applications.headless.appstates.NetworkServerAppState;
 
 /**
  *

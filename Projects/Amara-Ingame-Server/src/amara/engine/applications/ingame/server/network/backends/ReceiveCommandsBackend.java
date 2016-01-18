@@ -4,8 +4,8 @@
  */
 package amara.engine.applications.ingame.server.network.backends;
 
-import amara.engine.applications.ingame.server.appstates.ReceiveCommandsAppState;
 import com.jme3.network.Message;
+import amara.engine.applications.ingame.server.appstates.ReceiveCommandsAppState;
 import amara.engine.network.*;
 import amara.engine.network.messages.Message_Command;
 import amara.game.entitysystem.systems.commands.PlayerCommand;

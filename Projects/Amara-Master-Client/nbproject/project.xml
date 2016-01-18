@@ -37,7 +37,7 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>Amara-Library-HeadlessApplication</foreign-project>
+                <foreign-project>Amara-Library-Applications-Headless</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>

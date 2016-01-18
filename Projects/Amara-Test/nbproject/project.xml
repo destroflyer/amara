@@ -61,6 +61,14 @@
                 <id>jar</id>
             </reference>
             <reference>
+                <foreign-project>Amara-Library-Applications-Headless</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
                 <foreign-project>Amara-Library-Applications-Windowed</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
@@ -86,14 +94,6 @@
             </reference>
             <reference>
                 <foreign-project>Amara-Library-Expressions</foreign-project>
-                <artifact-type>jar</artifact-type>
-                <script>build.xml</script>
-                <target>jar</target>
-                <clean-target>clean</clean-target>
-                <id>jar</id>
-            </reference>
-            <reference>
-                <foreign-project>Amara-Library-HeadlessApplication</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>
