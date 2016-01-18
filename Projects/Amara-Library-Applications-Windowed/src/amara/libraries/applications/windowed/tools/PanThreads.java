@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.launcher.tools;
+package amara.libraries.applications.windowed.tools;
 
 import java.util.Set;
 import javax.swing.DefaultListModel;

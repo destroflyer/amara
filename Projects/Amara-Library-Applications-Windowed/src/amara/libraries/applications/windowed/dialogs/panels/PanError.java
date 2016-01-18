@@ -8,7 +8,7 @@
  *
  * Created on 03.08.2012, 15:42:37
  */
-package amara.launcher.client.panels;
+package amara.libraries.applications.windowed.dialogs.panels;
 
 import java.awt.Color;
 import java.awt.Dimension;

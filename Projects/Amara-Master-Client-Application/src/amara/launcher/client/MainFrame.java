@@ -20,8 +20,8 @@ import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.NetworkClient;
 import amara.engine.network.messages.protocol.*;
-import amara.launcher.FrameUtil;
 import amara.launcher.client.panels.*;
+import amara.libraries.applications.windowed.FrameUtil;
 
 /**
  *

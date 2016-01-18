@@ -9,7 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
-import amara.launcher.FrameUtil;
+import amara.libraries.applications.windowed.FrameUtil;
 
 /**
  *

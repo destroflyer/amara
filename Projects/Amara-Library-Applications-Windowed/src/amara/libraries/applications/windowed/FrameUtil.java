@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.launcher;
+package amara.libraries.applications.windowed;
 
 import java.awt.Component;
 import java.awt.Container;

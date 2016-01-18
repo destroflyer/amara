@@ -12,7 +12,6 @@
 /Projects/Amara-Shared-Server/nbproject/private/
 /Projects/Amara-Library-Expressions/nbproject/private/
 /Projects/Amara-Ingame-Client/nbproject/private/
-/Projects/Amara-Library-DisplayApplication/nbproject/private/
 /Projects/Amara-Core/build/
 /Projects/Amara-Master-Client/build/
 /Projects/Amara-Core/dist/
@@ -21,11 +20,8 @@
 /Projects/Amara-Library-Physics/nbproject/private/
 /Projects/Amara-Library-Cinematics/nbproject/private/
 /Projects/Amara-Master-Client-Application/nbproject/private/
-/Projects/Amara-Library-WindowedApplication/nbproject/private/
-/Projects/Amara-Library-WindowApplication/nbproject/private/
 /Projects/Amara-Master-Client-Application-LoginScreens/nbproject/private/
 /Projects/Amara-Game/build/
-/Projects/Amara-Library-WindowApplication/build/
 /Projects/Amara-Master-Server-Application/nbproject/private/
 /Projects/Amara-Master-Server/build/
 /Projects/Amara-Master-Server-Application/build/
@@ -38,10 +34,7 @@
 /Projects/Amara-Library-Expressions/dist/
 /Projects/Amara-Ingame-Client/build/
 /Projects/Amara-Game/dist/
-/Projects/Amara-Library-DisplayApplication/build/
 /Projects/Amara-Library-HeadlessApplication/dist/
-/Projects/Amara-Library-DisplayApplication/dist/
-/Projects/Amara-Library-WindowApplication/dist/
 /Projects/Amara-Ingame-Client/dist/
 /Projects/Amara-Ingame-Server/build/
 /Projects/Amara-Ingame-Server/dist/
@@ -80,3 +73,6 @@
 /Projects/Amara-Library-Applications-Display-Ingame/build/
 /Projects/Amara-Library-Applications-Display/dist/
 /Projects/Amara-Library-Applications-Display-Ingame/dist/
+/Projects/Amara-Library-Applications-Windowed/nbproject/private/
+/Projects/Amara-Library-Applications-Windowed/dist/
+/Projects/Amara-Library-Applications-Windowed/build/

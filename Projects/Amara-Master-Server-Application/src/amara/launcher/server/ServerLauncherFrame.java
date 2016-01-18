@@ -5,9 +5,9 @@
 package amara.launcher.server;
 
 import amara.core.Launcher_Core;
-import amara.launcher.FrameUtil;
 import amara.launcher.Launcher_Game;
-import amara.launcher.tools.PanThreads;
+import amara.libraries.applications.windowed.FrameUtil;
+import amara.libraries.applications.windowed.tools.PanThreads;
 
 /**
  *

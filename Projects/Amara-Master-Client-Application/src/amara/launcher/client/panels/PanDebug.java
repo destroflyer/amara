@@ -10,7 +10,7 @@
  */
 package amara.launcher.client.panels;
 
-import amara.launcher.tools.PanThreads;
+import amara.libraries.applications.windowed.tools.PanThreads;
 
 /**
  *

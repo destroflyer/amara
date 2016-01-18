@@ -26,10 +26,10 @@ import amara.core.files.FileAssets;
 import amara.engine.applications.masterserver.client.MasterserverClientUtil;
 import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.messages.protocol.Message_EditCharacterInventory;
-import amara.launcher.FrameUtil;
 import amara.launcher.client.MainFrame;
 import amara.launcher.client.buttons.*;
 import amara.launcher.client.comboboxes.ComboboxModel_OwnedCharacters;
+import amara.libraries.applications.windowed.FrameUtil;
 
 /**
  *

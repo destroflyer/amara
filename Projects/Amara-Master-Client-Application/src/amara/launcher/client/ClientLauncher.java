@@ -23,12 +23,12 @@ import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.appstates.NetworkClientHeadlessAppState;
 import amara.engine.network.*;
 import amara.engine.network.exceptions.*;
-import amara.launcher.FrameUtil;
 import amara.launcher.Launcher_Game;
 import amara.launcher.client.api.objects.Masterserver;
 import amara.launcher.client.api.requests.GetMasterserversRequest;
 import amara.launcher.client.network.backends.*;
 import amara.launcher.client.panels.*;
+import amara.libraries.applications.windowed.FrameUtil;
 
 /**
  *

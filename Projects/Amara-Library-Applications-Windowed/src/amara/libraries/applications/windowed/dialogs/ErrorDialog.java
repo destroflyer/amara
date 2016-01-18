@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.launcher.client;
+package amara.libraries.applications.windowed.dialogs;
 
 import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
-import amara.launcher.FrameUtil;
-import amara.launcher.client.panels.PanError;
+import amara.libraries.applications.windowed.FrameUtil;
+import amara.libraries.applications.windowed.dialogs.panels.PanError;
 
 /**
  *
