@@ -6,6 +6,7 @@ package amara.applications.master.server.network.backends;
 
 import java.util.ArrayList;
 import com.jme3.network.Message;
+import amara.applications.ingame.server.IngameServerApplication;
 import amara.applications.ingame.shared.games.*;
 import amara.applications.ingame.shared.maps.*;
 import amara.applications.master.network.messages.Message_StartGame;
@@ -13,7 +14,6 @@ import amara.applications.master.network.messages.objects.*;
 import amara.applications.master.server.MasterserverServerApplication;
 import amara.applications.master.server.appstates.*;
 import amara.core.Util;
-import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.libraries.network.*;
 
 /**

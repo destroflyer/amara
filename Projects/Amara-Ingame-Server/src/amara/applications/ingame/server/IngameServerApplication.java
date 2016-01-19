@@ -1,8 +1,8 @@
-package amara.engine.applications.ingame.server;
+package amara.applications.ingame.server;
 
+import amara.applications.ingame.server.appstates.*;
+import amara.applications.ingame.server.interfaces.MasterserverServerApplicationInterface;
 import amara.applications.ingame.shared.games.Game;
-import amara.engine.applications.ingame.server.appstates.*;
-import amara.engine.applications.ingame.server.interfaces.*;
 import amara.libraries.applications.headless.applications.HeadlessApplication;
 import amara.libraries.applications.headless.appstates.*;
 import amara.libraries.network.exceptions.ServerCreationException;
