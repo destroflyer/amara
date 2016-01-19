@@ -2,7 +2,7 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
     <useStyles filename="nifty-default-styles.xml"/>
     <useControls filename="nifty-default-controls.xml"/>
-    <screen id="start" controller="amara.engine.applications.launcher.startscreen.gui.ScreenController_LoginScreen">
+    <screen id="start" controller="amara.applications.master.client.launcher.loginscreen.gui.ScreenController_LoginScreen">
         <layer childLayout="absolute">
             <panel x="10px" y="130px" width="200px" height="128px" childLayout="center">
                 <image id="box_background" filename="Interface/client/login/box.png"/>

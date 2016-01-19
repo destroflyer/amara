@@ -5,9 +5,9 @@
 package amara.test;
 
 import amara.core.Launcher_Core;
-import amara.launcher.Launcher_Game;
-import amara.launcher.client.ClientLauncher;
-import amara.launcher.server.ServerLauncherFrame;
+import amara.applications.master.client.launcher.ClientLauncher;
+import amara.applications.master.server.launcher.Launcher_Game;
+import amara.applications.master.server.launcher.ServerLauncherFrame;
 
 /**
  *
