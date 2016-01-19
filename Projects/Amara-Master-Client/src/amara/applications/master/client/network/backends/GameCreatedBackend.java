@@ -8,8 +8,8 @@ import com.jme3.network.Message;
 import amara.applications.master.client.MasterserverClientUtil;
 import amara.applications.master.network.messages.Message_GameCreated;
 import amara.applications.master.network.messages.objects.PlayerProfileData;
-import amara.engine.applications.ingame.client.IngameClientApplication;
-import amara.engine.applications.ingame.client.interfaces.MasterserverClientInterface;
+import amara.applications.ingame.client.IngameClientApplication;
+import amara.applications.ingame.client.interfaces.MasterserverClientInterface;
 import amara.libraries.network.*;
 
 /**

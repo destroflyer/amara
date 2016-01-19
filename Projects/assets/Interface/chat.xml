@@ -2,7 +2,7 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
     <useStyles filename="nifty-default-styles.xml"/>
     <useControls filename="nifty-default-controls.xml"/>
-    <screen id="start" controller="amara.engine.applications.ingame.client.gui.ScreenController_Chat">
+    <screen id="start" controller="amara.applications.ingame.client.gui.ScreenController_Chat">
         <layer id="character" childLayout="center">
             <panel childLayout="horizontal">
                 <panel width="25px"/>

@@ -2,7 +2,7 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
     <useStyles filename="nifty-default-styles.xml"/>
     <useControls filename="nifty-default-controls.xml"/>
-    <screen id="start" controller="amara.engine.applications.ingame.client.gui.ScreenController_HUD">
+    <screen id="start" controller="amara.applications.ingame.client.gui.ScreenController_HUD">
         <layer id="character" childLayout="center">
             <panel childLayout="vertical">
                 <panel/>
@@ -434,9 +434,9 @@
             </panel>
         </layer>
     </screen>
-    <screen id="cinematic" controller="amara.engine.applications.ingame.client.gui.ScreenController_Cinematic">
+    <screen id="cinematic" controller="amara.applications.ingame.client.gui.ScreenController_Cinematic">
     </screen>
-    <screen id="gameOver" controller="amara.engine.applications.ingame.client.gui.ScreenController_GameOver">
+    <screen id="gameOver" controller="amara.applications.ingame.client.gui.ScreenController_GameOver">
         <layer childLayout="center" backgroundColor="#0008">
             <control id="exit_game_button" name="button" x="35%" y="52%" width="40%" height="15%" label="Game Over">
                 <effect>
