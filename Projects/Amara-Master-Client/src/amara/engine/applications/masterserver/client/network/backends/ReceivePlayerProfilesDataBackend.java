@@ -5,9 +5,9 @@
 package amara.engine.applications.masterserver.client.network.backends;
 
 import com.jme3.network.Message;
+import amara.applications.master.network.messages.*;
 import amara.engine.applications.masterserver.client.appstates.PlayerProfilesAppState;
 import amara.engine.network.*;
-import amara.engine.network.messages.protocol.*;
 
 /**
  *

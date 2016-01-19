@@ -5,11 +5,11 @@
 package amara.engine.applications.masterserver.server.network.backends;
 
 import com.jme3.network.Message;
+import amara.applications.master.network.messages.*;
+import amara.applications.master.network.messages.objects.AuthentificationInformation;
 import amara.engine.applications.masterserver.server.appstates.DatabaseAppState;
 import amara.engine.applications.masterserver.server.appstates.*;
-import amara.engine.applications.masterserver.server.protocol.AuthentificationInformation;
 import amara.engine.network.*;
-import amara.engine.network.messages.protocol.*;
 import amara.game.players.*;
 
 /**

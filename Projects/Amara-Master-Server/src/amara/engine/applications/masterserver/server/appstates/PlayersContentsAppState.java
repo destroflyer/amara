@@ -7,8 +7,8 @@ package amara.engine.applications.masterserver.server.appstates;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import amara.applications.master.network.messages.objects.*;
 import amara.core.Util;
-import amara.engine.applications.masterserver.server.protocol.*;
 
 /**
  *

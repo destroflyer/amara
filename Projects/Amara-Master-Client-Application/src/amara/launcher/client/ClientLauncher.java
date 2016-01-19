@@ -5,6 +5,9 @@
 
 package amara.launcher.client;
 
+import amara.applications.master.network.messages.Message_GetUpdateFiles;
+import amara.applications.master.network.messages.Message_GetUpdateFile;
+import amara.applications.master.network.messages.objects.UpdateFile;
 import java.awt.AWTEvent;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -18,8 +21,6 @@ import amara.core.Util;
 import amara.core.files.FileManager;
 import amara.engine.applications.launcher.startscreen.screens.*;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
-import amara.engine.applications.masterserver.server.network.messages.*;
-import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.*;
 import amara.engine.network.exceptions.*;
 import amara.launcher.Launcher_Game;

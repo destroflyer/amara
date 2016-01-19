@@ -53,7 +53,7 @@
         <castDuration>[delay]</castDuration>
         <castTurnToTarget/>
         <castAnimation>#animation</castAnimation>
-        <range>25</range>
+        <range>24</range>
         <baseCooldown>16</baseCooldown>
     </entity>
     <!--spell effect-->

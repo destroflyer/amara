@@ -4,9 +4,9 @@
  */
 package amara.launcher.client.comboboxes;
 
-import amara.engine.applications.masterserver.server.protocol.*;
 import javax.swing.ComboBoxModel;
 import javax.swing.event.ListDataListener;
+import amara.applications.master.network.messages.objects.GameCharacterSkin;
 
 /**
  *

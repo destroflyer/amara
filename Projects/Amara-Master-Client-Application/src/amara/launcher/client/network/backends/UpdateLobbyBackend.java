@@ -6,8 +6,8 @@ package amara.launcher.client.network.backends;
 
 import java.awt.EventQueue;
 import com.jme3.network.Message;
-import amara.engine.applications.masterserver.server.network.messages.*;
-import amara.engine.applications.masterserver.server.protocol.Lobby;
+import amara.applications.master.network.messages.Message_LobbyUpdate;
+import amara.applications.master.network.messages.objects.Lobby;
 import amara.engine.network.*;
 import amara.launcher.client.panels.PanPlay;
 

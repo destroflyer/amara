@@ -4,10 +4,10 @@
  */
 package amara.engine.applications.masterserver.server.appstates;
 
+import amara.applications.master.network.messages.objects.PlayerStatus;
 import amara.core.encoding.*;
 import amara.core.files.FileManager;
 import amara.engine.applications.masterserver.server.network.backends.*;
-import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.NetworkServer;
 import amara.game.games.RunningGames;
 import amara.game.players.ConnectedPlayers;

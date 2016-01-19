@@ -1,7 +1,7 @@
 <template>
     <entity id="object">
         <hitbox>
-            <circle radius="7"/>
+            <circle radius="6"/>
         </hitbox>
         <collisionGroup group="spells" collidesWith="units"/>
         <hitboxActive/>

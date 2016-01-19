@@ -4,7 +4,7 @@
  */
 package amara.game.entitysystem.systems.commands;
 
-import amara.engine.applications.ingame.client.commands.Command;
+import amara.applications.ingame.network.messages.objects.commands.Command;
 
 /**
  *

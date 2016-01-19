@@ -4,7 +4,7 @@
  */
 package amara.engine.applications.ingame.client.interfaces;
 
-import amara.engine.applications.masterserver.server.protocol.PlayerProfileData;
+import amara.applications.master.network.messages.objects.PlayerProfileData;
 
 /**
  *

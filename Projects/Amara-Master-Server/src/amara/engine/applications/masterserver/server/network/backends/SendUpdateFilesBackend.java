@@ -9,9 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import com.jme3.network.Message;
+import amara.applications.master.network.messages.*;
+import amara.applications.master.network.messages.objects.UpdateFile;
 import amara.engine.applications.masterserver.server.appstates.UpdatesAppState;
-import amara.engine.applications.masterserver.server.network.messages.*;
-import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.*;
 
 /**

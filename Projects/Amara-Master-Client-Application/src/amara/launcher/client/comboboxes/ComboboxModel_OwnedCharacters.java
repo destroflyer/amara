@@ -4,7 +4,7 @@
  */
 package amara.launcher.client.comboboxes;
 
-import amara.engine.applications.masterserver.server.protocol.*;
+import amara.applications.master.network.messages.objects.*;
 
 /**
  *

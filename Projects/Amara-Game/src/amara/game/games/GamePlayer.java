@@ -4,7 +4,7 @@
  */
 package amara.game.games;
 
-import amara.engine.applications.masterserver.server.protocol.LobbyPlayer;
+import amara.applications.master.network.messages.objects.LobbyPlayer;
 
 /**
  *

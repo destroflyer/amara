@@ -6,10 +6,10 @@ package amara.engine.applications.masterserver.client.appstates;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import amara.applications.master.network.messages.Message_GetPlayerStatus;
+import amara.applications.master.network.messages.objects.PlayerStatus;
 import amara.engine.applications.masterserver.client.network.backends.*;
-import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.NetworkClient;
-import amara.engine.network.messages.protocol.*;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 

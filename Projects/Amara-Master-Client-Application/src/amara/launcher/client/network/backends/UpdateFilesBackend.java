@@ -6,8 +6,8 @@ package amara.launcher.client.network.backends;
 
 import java.util.LinkedList;
 import com.jme3.network.Message;
-import amara.engine.applications.masterserver.server.network.messages.*;
-import amara.engine.applications.masterserver.server.protocol.UpdateFile;
+import amara.applications.master.network.messages.Message_UpdateFiles;
+import amara.applications.master.network.messages.objects.UpdateFile;
 import amara.engine.network.*;
 import amara.launcher.client.ClientLauncher;
 

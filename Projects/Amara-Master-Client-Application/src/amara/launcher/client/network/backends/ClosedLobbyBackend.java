@@ -5,7 +5,7 @@
 package amara.launcher.client.network.backends;
 
 import com.jme3.network.Message;
-import amara.engine.applications.masterserver.server.network.messages.*;
+import amara.applications.master.network.messages.Message_LobbyClosed;
 import amara.engine.network.*;
 import amara.launcher.client.panels.PanPlay;
 

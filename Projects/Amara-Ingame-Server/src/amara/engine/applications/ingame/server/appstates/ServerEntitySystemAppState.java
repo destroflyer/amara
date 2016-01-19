@@ -6,11 +6,11 @@ package amara.engine.applications.ingame.server.appstates;
 
 import java.sql.ResultSet;
 import java.util.LinkedList;
+import amara.applications.master.network.messages.objects.LobbyPlayerData;
 import amara.core.Util;
 import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.engine.applications.ingame.server.network.backends.*;
 import amara.engine.applications.masterserver.server.appstates.DatabaseAppState;
-import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.NetworkServer;
 import amara.game.entitysystem.components.game.*;
 import amara.game.entitysystem.components.general.*;

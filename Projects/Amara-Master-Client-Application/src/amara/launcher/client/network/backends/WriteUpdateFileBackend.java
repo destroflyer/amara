@@ -8,8 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import com.jme3.network.Message;
-import amara.engine.applications.masterserver.server.network.messages.*;
-import amara.engine.applications.masterserver.server.protocol.*;
+import amara.applications.master.network.messages.Message_UpdateFilePart;
+import amara.applications.master.network.messages.objects.UpdateFile;
 import amara.engine.network.*;
 
 /**

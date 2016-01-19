@@ -37,6 +37,14 @@
                 <id>jar</id>
             </reference>
             <reference>
+                <foreign-project>Amara-Ingame-Network</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
                 <foreign-project>Amara-Ingame-Server</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
@@ -126,6 +134,14 @@
             </reference>
             <reference>
                 <foreign-project>Amara-Master-Client</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
+                <foreign-project>Amara-Master-Network</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>

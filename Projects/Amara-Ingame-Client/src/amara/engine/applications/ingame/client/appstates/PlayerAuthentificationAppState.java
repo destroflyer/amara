@@ -6,8 +6,8 @@ package amara.engine.applications.ingame.client.appstates;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import amara.applications.ingame.network.messages.Message_PlayerAuthentification;
 import amara.engine.applications.ingame.client.IngameClientApplication;
-import amara.engine.network.messages.Message_PlayerAuthentification;
 import amara.libraries.applications.display.appstates.*;
 
 /**

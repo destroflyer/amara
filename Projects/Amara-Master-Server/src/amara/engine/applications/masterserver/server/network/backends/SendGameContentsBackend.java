@@ -8,10 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import com.jme3.network.Message;
+import amara.applications.master.network.messages.*;
+import amara.applications.master.network.messages.objects.*;
 import amara.engine.applications.masterserver.server.appstates.*;
-import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.*;
-import amara.engine.network.messages.protocol.*;
 import amara.game.players.ConnectedPlayers;
 
 /**

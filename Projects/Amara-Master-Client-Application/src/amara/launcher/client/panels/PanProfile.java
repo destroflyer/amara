@@ -4,7 +4,7 @@
  */
 
 /*
- * panPlay.java
+ * PanProfile.java
  *
  * Created on 02.08.2012, 23:56:34
  */
@@ -15,11 +15,11 @@ import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.awt.event.ItemEvent;
 import javax.swing.border.LineBorder;
+import amara.applications.master.network.messages.*;
+import amara.applications.master.network.messages.objects.*;
 import amara.core.files.FileAssets;
 import amara.engine.applications.masterserver.client.MasterserverClientUtil;
-import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.NetworkClient;
-import amara.engine.network.messages.protocol.*;
 import amara.launcher.client.comboboxes.*;
 import amara.libraries.applications.windowed.FrameUtil;
 

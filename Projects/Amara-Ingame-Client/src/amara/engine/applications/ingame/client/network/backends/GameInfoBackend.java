@@ -6,10 +6,10 @@ package amara.engine.applications.ingame.client.network.backends;
 
 import com.jme3.app.state.AppStateManager;
 import com.jme3.network.Message;
+import amara.applications.ingame.network.messages.Message_GameInfo;
 import amara.engine.applications.ingame.client.appstates.*;
 import amara.engine.applications.ingame.client.gui.ScreenController_LoadingScreen;
 import amara.engine.network.*;
-import amara.engine.network.messages.Message_GameInfo;
 import amara.game.maps.*;
 import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.applications.display.appstates.NiftyAppState;

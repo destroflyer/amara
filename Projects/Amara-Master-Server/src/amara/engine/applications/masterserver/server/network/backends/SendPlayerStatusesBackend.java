@@ -5,10 +5,10 @@
 package amara.engine.applications.masterserver.server.network.backends;
 
 import com.jme3.network.Message;
+import amara.applications.master.network.messages.*;
+import amara.applications.master.network.messages.objects.PlayerStatus;
 import amara.engine.applications.masterserver.server.appstates.*;
 import amara.engine.network.*;
-import amara.engine.network.messages.protocol.*;
-import amara.engine.applications.masterserver.server.protocol.*;
 
 /**
  *

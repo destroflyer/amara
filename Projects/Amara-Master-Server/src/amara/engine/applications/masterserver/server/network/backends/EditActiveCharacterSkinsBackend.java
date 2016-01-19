@@ -4,10 +4,10 @@
  */
 package amara.engine.applications.masterserver.server.network.backends;
 
+import amara.applications.master.network.messages.Message_EditActiveCharacterSkin;
 import com.jme3.network.Message;
 import amara.engine.applications.masterserver.server.appstates.DatabaseAppState;
 import amara.engine.network.*;
-import amara.engine.network.messages.protocol.*;
 import amara.game.players.ConnectedPlayers;
 
 /**

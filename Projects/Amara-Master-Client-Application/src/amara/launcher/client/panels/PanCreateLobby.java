@@ -4,11 +4,11 @@
  */
 package amara.launcher.client.panels;
 
+import amara.applications.master.network.messages.objects.LobbyData;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
-import amara.engine.applications.masterserver.server.network.messages.Message_CreateLobby;
-import amara.engine.applications.masterserver.server.protocol.*;
+import amara.applications.master.network.messages.Message_CreateLobby;
 import amara.engine.network.NetworkClient;
 import amara.engine.applications.masterserver.client.MasterserverClientUtil;
 import amara.launcher.client.buttons.*;

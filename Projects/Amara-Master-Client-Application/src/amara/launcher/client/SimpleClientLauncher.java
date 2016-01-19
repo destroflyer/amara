@@ -4,13 +4,12 @@
  */
 package amara.launcher.client;
 
+import amara.applications.master.network.messages.*;
+import amara.applications.master.network.messages.objects.*;
 import amara.core.Launcher_Core;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
-import amara.engine.applications.masterserver.server.network.messages.*;
-import amara.engine.applications.masterserver.server.protocol.*;
 import amara.engine.network.*;
 import amara.engine.network.exceptions.*;
-import amara.engine.network.messages.protocol.*;
 import amara.launcher.Launcher_Game;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 

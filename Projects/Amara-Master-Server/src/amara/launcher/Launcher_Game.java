@@ -4,8 +4,10 @@
  */
 package amara.launcher;
 
-import amara.engine.network.*;
+import amara.applications.ingame.network.MessagesSerializer_Ingame;
+import amara.applications.master.network.MessagesSerializer_Master;
 import amara.game.entitysystem.CustomGameTemplates;
+import amara.game.entitysystem.templates.CustomSerializer_Ingame;
 
 /**
  *
@@ -14,8 +16,9 @@ import amara.game.entitysystem.CustomGameTemplates;
 public class Launcher_Game{
     
     public static void initialize(){
-        MessagesSerializer_Protocol.registerClasses();
-        MessagesSerializer_Game.registerClasses();
+        MessagesSerializer_Master.registerClasses();
+        MessagesSerializer_Ingame.registerClasses();
+        CustomSerializer_Ingame.registerClasses();
         CustomGameTemplates.registerLoader();
     }
 }
