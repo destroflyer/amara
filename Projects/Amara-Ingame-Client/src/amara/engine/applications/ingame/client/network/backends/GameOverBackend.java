@@ -8,10 +8,10 @@ import com.jme3.network.Message;
 import amara.applications.ingame.network.messages.Message_GameOver;
 import amara.engine.applications.ingame.client.appstates.*;
 import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
-import amara.engine.network.*;
 import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.IngameCameraAppState;
+import amara.libraries.network.*;
 
 /**
  *

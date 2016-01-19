@@ -7,7 +7,7 @@ package amara.engine.applications.masterserver.client.network.backends;
 import com.jme3.network.Message;
 import amara.applications.master.network.messages.Message_OwnedCharacters;
 import amara.engine.applications.masterserver.client.appstates.CharactersAppState;
-import amara.engine.network.*;
+import amara.libraries.network.*;
 
 /**
  *

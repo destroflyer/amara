@@ -7,9 +7,9 @@ package amara.engine.applications.masterserver.server.network.backends;
 import com.jme3.network.Message;
 import amara.applications.master.network.messages.Message_LeaveLobby;
 import amara.engine.applications.masterserver.server.appstates.*;
-import amara.engine.network.*;
-import amara.engine.network.messages.Message_ClientDisconnection;
 import amara.game.players.*;
+import amara.libraries.network.*;
+import amara.libraries.network.messages.Message_ClientDisconnection;
 
 /**
  *

@@ -4,8 +4,8 @@
  */
 package amara.engine.network.debug.frame;
 
-import amara.engine.network.debug.LoadHistory;
 import amara.libraries.applications.windowed.FrameUtil;
+import amara.libraries.network.debug.LoadHistory;
 
 /**
  *

@@ -11,8 +11,8 @@ import com.jme3.network.Message;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.*;
 import amara.engine.applications.masterserver.server.appstates.*;
-import amara.engine.network.*;
 import amara.game.players.ConnectedPlayers;
+import amara.libraries.network.*;
 
 /**
  *

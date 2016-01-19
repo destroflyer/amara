@@ -17,9 +17,9 @@ import amara.core.input.Event;
 import amara.core.input.events.KeyPressedEvent;
 import amara.engine.applications.ingame.client.IngameClientApplication;
 import amara.engine.applications.ingame.client.gui.*;
-import amara.engine.network.*;
 import amara.engine.network.debug.frame.NetworkLoadDisplay;
 import amara.libraries.applications.display.appstates.*;
+import amara.libraries.network.*;
 
 /**
  *

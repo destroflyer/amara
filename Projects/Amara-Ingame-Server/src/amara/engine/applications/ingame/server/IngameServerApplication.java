@@ -2,10 +2,10 @@ package amara.engine.applications.ingame.server;
 
 import amara.engine.applications.ingame.server.appstates.*;
 import amara.engine.applications.ingame.server.interfaces.*;
-import amara.engine.network.exceptions.*;
 import amara.game.games.Game;
 import amara.libraries.applications.headless.applications.HeadlessApplication;
 import amara.libraries.applications.headless.appstates.*;
+import amara.libraries.network.exceptions.ServerCreationException;
 
 /**
  * @author Carl

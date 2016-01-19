@@ -6,9 +6,9 @@ package amara.engine.applications.masterserver.client.appstates;
 
 import amara.applications.master.network.messages.objects.*;
 import amara.engine.applications.masterserver.client.network.backends.*;
-import amara.engine.network.NetworkClient;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
+import amara.libraries.network.NetworkClient;
 
 /**
  *

@@ -9,9 +9,9 @@ import java.util.LinkedList;
 import amara.applications.master.network.messages.objects.UpdateFile;
 import amara.core.files.FileManager;
 import amara.engine.applications.masterserver.server.network.backends.*;
-import amara.engine.network.NetworkServer;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.NetworkServerAppState;
+import amara.libraries.network.NetworkServer;
 
 /**
  *

@@ -4,10 +4,10 @@ import amara.engine.applications.ingame.server.IngameServerApplication;
 import amara.engine.applications.ingame.server.interfaces.MasterserverServerApplicationInterface;
 import amara.engine.applications.masterserver.server.appstates.*;
 import amara.engine.applications.masterserver.server.network.PortProvider;
-import amara.engine.network.exceptions.*;
 import amara.game.games.Game;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.*;
+import amara.libraries.network.exceptions.ServerCreationException;
 
 /**
  * @author Carl

@@ -5,7 +5,7 @@
 package amara.libraries.entitysystem.synchronizing;
 
 import java.io.IOException;
-import amara.engine.network.*;
+import amara.libraries.network.*;
 
 /**
  *

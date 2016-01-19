@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.engine.network;
+package amara.libraries.network;
 
 import java.io.IOException;
 import com.jme3.network.Network;

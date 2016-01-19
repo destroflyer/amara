@@ -4,8 +4,8 @@
  */
 package amara.libraries.applications.display.appstates;
 
-import amara.engine.network.NetworkClient;
-import amara.engine.network.exceptions.*;
+import amara.libraries.network.NetworkClient;
+import amara.libraries.network.exceptions.*;
 
 /**
  *

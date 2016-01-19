@@ -10,8 +10,8 @@ import amara.applications.ingame.network.messages.Message_Ping;
 import amara.engine.applications.ingame.client.IngameClientApplication;
 import amara.engine.applications.ingame.client.gui.*;
 import amara.engine.applications.ingame.client.network.backends.*;
-import amara.engine.network.NetworkClient;
 import amara.libraries.applications.display.appstates.*;
+import amara.libraries.network.NetworkClient;
 
 /**
  *

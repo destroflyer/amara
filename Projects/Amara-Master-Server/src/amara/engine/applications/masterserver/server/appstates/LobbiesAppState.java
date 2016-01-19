@@ -9,10 +9,10 @@ import com.jme3.network.Message;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.*;
 import amara.engine.applications.masterserver.server.network.backends.*;
-import amara.engine.network.NetworkServer;
 import amara.game.players.ConnectedPlayers;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.NetworkServerAppState;
+import amara.libraries.network.NetworkServer;
 
 /**
  *

@@ -5,9 +5,9 @@
 package amara.engine.applications.ingame.server.appstates;
 
 import amara.engine.applications.ingame.server.network.backends.*;
-import amara.engine.network.NetworkServer;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.NetworkServerAppState;
+import amara.libraries.network.NetworkServer;
 
 /**
  *

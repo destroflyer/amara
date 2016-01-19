@@ -9,11 +9,11 @@ import java.util.LinkedList;
 import com.jme3.network.Message;
 import amara.applications.ingame.network.messages.Message_EntityChanges;
 import amara.core.Util;
-import amara.engine.network.*;
 import amara.game.entitysystem.components.visuals.animations.*;
 import amara.game.entitysystem.synchronizing.ClientComponentBlacklist;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.synchronizing.*;
+import amara.libraries.network.*;
 
 /**
  *

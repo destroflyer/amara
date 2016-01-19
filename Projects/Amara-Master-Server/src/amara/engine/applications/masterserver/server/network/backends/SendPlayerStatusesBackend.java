@@ -8,7 +8,7 @@ import com.jme3.network.Message;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.PlayerStatus;
 import amara.engine.applications.masterserver.server.appstates.*;
-import amara.engine.network.*;
+import amara.libraries.network.*;
 
 /**
  *

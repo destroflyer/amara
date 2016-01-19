@@ -5,12 +5,12 @@
 package amara.engine.applications.masterserver.client.network.backends;
 
 import com.jme3.network.Message;
+import amara.applications.master.network.messages.Message_GameCreated;
 import amara.applications.master.network.messages.objects.PlayerProfileData;
 import amara.engine.applications.ingame.client.IngameClientApplication;
 import amara.engine.applications.ingame.client.interfaces.MasterserverClientInterface;
 import amara.engine.applications.masterserver.client.MasterserverClientUtil;
-import amara.engine.network.*;
-import amara.applications.master.network.messages.Message_GameCreated;
+import amara.libraries.network.*;
 
 /**
  *

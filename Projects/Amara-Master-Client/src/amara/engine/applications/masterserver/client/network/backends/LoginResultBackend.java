@@ -8,7 +8,7 @@ import com.jme3.network.Message;
 import amara.applications.master.network.messages.Message_LoginResult;
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
 import amara.engine.applications.masterserver.client.appstates.*;
-import amara.engine.network.*;
+import amara.libraries.network.*;
 
 /**
  *

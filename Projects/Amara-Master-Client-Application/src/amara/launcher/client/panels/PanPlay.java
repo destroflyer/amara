@@ -5,9 +5,9 @@
 package amara.launcher.client.panels;
 
 import javax.swing.JPanel;
-import amara.engine.network.NetworkClient;
 import amara.engine.applications.masterserver.client.MasterserverClientUtil;
 import amara.launcher.client.network.backends.*;
+import amara.libraries.network.NetworkClient;
 
 /**
  *

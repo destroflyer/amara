@@ -8,10 +8,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import com.jme3.network.Message;
 import amara.applications.ingame.network.messages.Message_ClientInitialized;
-import amara.engine.network.*;
 import amara.game.entitysystem.systems.network.SendEntityChangesSystem;
 import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.entitysystem.synchronizing.*;
+import amara.libraries.network.*;
 
 /**
  *

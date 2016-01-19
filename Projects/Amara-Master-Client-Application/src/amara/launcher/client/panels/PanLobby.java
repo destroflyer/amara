@@ -17,8 +17,8 @@ import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.*;
 import amara.core.files.FileAssets;
 import amara.engine.applications.masterserver.client.MasterserverClientUtil;
-import amara.engine.network.NetworkClient;
 import amara.libraries.applications.windowed.FrameUtil;
+import amara.libraries.network.NetworkClient;
 
 /**
  *

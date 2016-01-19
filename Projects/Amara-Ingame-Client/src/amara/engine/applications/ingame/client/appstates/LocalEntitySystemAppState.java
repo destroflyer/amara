@@ -20,12 +20,12 @@ import amara.engine.applications.ingame.client.systems.visualisation.buffs.*;
 import amara.engine.applications.ingame.client.systems.visualisation.effects.crodwcontrol.*;
 import amara.engine.applications.ingame.client.systems.visualisation.effects.reactions.*;
 import amara.engine.applications.ingame.client.systems.visualisation.healthbars.*;
-import amara.engine.network.NetworkClient;
 import amara.game.entitysystem.synchronizing.ParallelNetworkSystems;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.*;
 import amara.libraries.applications.display.ingame.maps.MapHeightmap;
 import amara.libraries.entitysystem.EntitySystem;
+import amara.libraries.network.NetworkClient;
 
 /**
  *

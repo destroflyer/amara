@@ -5,11 +5,11 @@
 package amara.engine.applications.ingame.client.network.backends;
 
 import com.jme3.network.Message;
-import amara.engine.network.*;
 import amara.applications.ingame.network.messages.Message_EntityChanges;
 import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.synchronizing.*;
+import amara.libraries.network.*;
 
 /**
  *

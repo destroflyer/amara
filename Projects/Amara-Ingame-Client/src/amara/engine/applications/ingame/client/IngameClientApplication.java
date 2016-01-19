@@ -2,15 +2,15 @@ package amara.engine.applications.ingame.client;
 
 import com.jme3.system.AppSettings;
 import amara.core.GameInfo;
+import amara.core.settings.Settings;
 import amara.engine.applications.ingame.client.appstates.*;
 import amara.engine.applications.ingame.client.interfaces.MasterserverClientInterface;
 import amara.engine.applications.ingame.client.network.backends.*;
-import amara.engine.network.*;
-import amara.engine.network.exceptions.*;
-import amara.core.settings.Settings;
 import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.*;
+import amara.libraries.network.HostInformation;
+import amara.libraries.network.exceptions.*;
 
 /**
  * @author Carl

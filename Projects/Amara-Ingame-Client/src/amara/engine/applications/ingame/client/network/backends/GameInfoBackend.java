@@ -9,11 +9,11 @@ import com.jme3.network.Message;
 import amara.applications.ingame.network.messages.Message_GameInfo;
 import amara.engine.applications.ingame.client.appstates.*;
 import amara.engine.applications.ingame.client.gui.ScreenController_LoadingScreen;
-import amara.engine.network.*;
 import amara.game.maps.*;
 import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.applications.display.appstates.NiftyAppState;
 import amara.libraries.applications.display.ingame.appstates.*;
+import amara.libraries.network.*;
 
 /**
  *

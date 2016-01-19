@@ -7,7 +7,7 @@ package amara.engine.network.debug.frame;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
-import amara.engine.network.debug.LoadHistory;
+import amara.libraries.network.debug.LoadHistory;
 
 /**
  *

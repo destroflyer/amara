@@ -6,10 +6,10 @@ package amara.engine.applications.ingame.server.network.backends;
 
 import com.jme3.network.Message;
 import amara.applications.ingame.network.messages.*;
-import amara.engine.network.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.games.*;
 import amara.libraries.entitysystem.EntityWorld;
+import amara.libraries.network.*;
 
 /**
  *

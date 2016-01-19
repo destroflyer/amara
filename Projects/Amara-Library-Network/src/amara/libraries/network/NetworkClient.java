@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.engine.network;
+package amara.libraries.network;
 
 import java.util.LinkedList;
 import com.jme3.network.Client;
@@ -13,8 +13,8 @@ import com.jme3.network.MessageConnection;
 import com.jme3.network.MessageListener;
 import com.jme3.network.Network;
 import amara.core.Util;
-import amara.engine.network.debug.*;
-import amara.engine.network.exceptions.*;
+import amara.libraries.network.debug.*;
+import amara.libraries.network.exceptions.*;
 
 /**
  *

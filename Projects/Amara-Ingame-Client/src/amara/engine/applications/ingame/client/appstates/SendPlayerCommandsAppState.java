@@ -18,7 +18,6 @@ import amara.core.settings.Settings;
 import amara.engine.applications.ingame.client.IngameClientApplication;
 import amara.engine.applications.ingame.client.gui.*;
 import amara.engine.applications.ingame.client.systems.gui.DisplaySpellsImagesSystem;
-import amara.engine.network.NetworkClient;
 import amara.game.entitysystem.components.physics.*;
 import amara.game.entitysystem.components.players.*;
 import amara.game.entitysystem.components.shop.*;
@@ -29,6 +28,7 @@ import amara.game.entitysystem.systems.shop.ShopUtil;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.MapAppState;
 import amara.libraries.entitysystem.*;
+import amara.libraries.network.NetworkClient;
 
 /**
  *

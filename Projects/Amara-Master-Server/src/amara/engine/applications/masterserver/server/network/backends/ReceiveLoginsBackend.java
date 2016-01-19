@@ -9,8 +9,8 @@ import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.AuthentificationInformation;
 import amara.engine.applications.masterserver.server.appstates.DatabaseAppState;
 import amara.engine.applications.masterserver.server.appstates.*;
-import amara.engine.network.*;
 import amara.game.players.*;
+import amara.libraries.network.*;
 
 /**
  *

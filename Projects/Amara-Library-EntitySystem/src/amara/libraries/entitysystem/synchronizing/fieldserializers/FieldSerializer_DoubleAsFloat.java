@@ -5,9 +5,8 @@
 package amara.libraries.entitysystem.synchronizing.fieldserializers;
 
 import java.io.IOException;
-import amara.engine.network.BitInputStream;
-import amara.engine.network.BitOutputStream;
 import amara.libraries.entitysystem.synchronizing.FieldSerializer;
+import amara.libraries.network.*;
 
 /**
  *

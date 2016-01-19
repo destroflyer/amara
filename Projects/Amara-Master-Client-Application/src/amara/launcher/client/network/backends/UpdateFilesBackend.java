@@ -8,8 +8,8 @@ import java.util.LinkedList;
 import com.jme3.network.Message;
 import amara.applications.master.network.messages.Message_UpdateFiles;
 import amara.applications.master.network.messages.objects.UpdateFile;
-import amara.engine.network.*;
 import amara.launcher.client.ClientLauncher;
+import amara.libraries.network.*;
 
 /**
  *

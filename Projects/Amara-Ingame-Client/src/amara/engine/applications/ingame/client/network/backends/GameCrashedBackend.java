@@ -5,11 +5,11 @@
 package amara.engine.applications.ingame.client.network.backends;
 
 import com.jme3.network.Message;
-import amara.engine.network.*;
 import amara.applications.ingame.network.messages.Message_GameCrashed;
 import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.applications.display.appstates.NetworkClientAppState;
 import amara.libraries.applications.windowed.dialogs.ErrorDialog;
+import amara.libraries.network.*;
 
 /**
  *

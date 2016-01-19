@@ -18,10 +18,10 @@ import amara.applications.master.network.messages.objects.AuthentificationInform
 import amara.engine.applications.masterserver.client.MasterserverClientApplication;
 import amara.engine.applications.masterserver.client.appstates.*;
 import amara.engine.applications.masterserver.client.appstates.LoginAppState.LoginResult;
-import amara.engine.network.NetworkClient;
 import amara.launcher.client.panels.*;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.applications.windowed.FrameUtil;
+import amara.libraries.network.NetworkClient;
 
 /**
  *
