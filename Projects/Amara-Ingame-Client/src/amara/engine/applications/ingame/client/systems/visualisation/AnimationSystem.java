@@ -7,12 +7,12 @@ package amara.engine.applications.ingame.client.systems.visualisation;
 import java.util.HashMap;
 import java.util.LinkedList;
 import com.jme3.scene.Node;
-import amara.game.entitysystem.components.game.*;
-import amara.game.entitysystem.components.general.*;
-import amara.game.entitysystem.components.visuals.*;
-import amara.game.entitysystem.components.visuals.animations.*;
-import amara.game.entitysystem.systems.network.SendEntityChangesSystem;
-import amara.game.games.Game;
+import amara.applications.ingame.entitysystem.components.game.*;
+import amara.applications.ingame.entitysystem.components.general.*;
+import amara.applications.ingame.entitysystem.components.visuals.*;
+import amara.applications.ingame.entitysystem.components.visuals.animations.*;
+import amara.applications.ingame.entitysystem.systems.network.SendEntityChangesSystem;
+import amara.applications.ingame.shared.games.Game;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.*;
 

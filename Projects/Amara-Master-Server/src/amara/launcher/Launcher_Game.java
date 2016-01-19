@@ -4,10 +4,10 @@
  */
 package amara.launcher;
 
+import amara.applications.ingame.entitysystem.CustomGameTemplates;
+import amara.applications.ingame.entitysystem.templates.CustomSerializer_Ingame;
 import amara.applications.ingame.network.MessagesSerializer_Ingame;
 import amara.applications.master.network.MessagesSerializer_Master;
-import amara.game.entitysystem.CustomGameTemplates;
-import amara.game.entitysystem.templates.CustomSerializer_Ingame;
 
 /**
  *

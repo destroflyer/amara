@@ -4,10 +4,10 @@
  */
 package amara.engine.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.entitysystem.components.general.*;
+import amara.applications.ingame.entitysystem.components.units.*;
 import amara.core.Util;
 import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
-import amara.game.entitysystem.components.general.*;
-import amara.game.entitysystem.components.units.*;
 import amara.libraries.entitysystem.*;
 
 /**

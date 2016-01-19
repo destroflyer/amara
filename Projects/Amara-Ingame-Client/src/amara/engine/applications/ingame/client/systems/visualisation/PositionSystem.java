@@ -6,7 +6,7 @@ package amara.engine.applications.ingame.client.systems.visualisation;
 
 import com.jme3.math.Vector2f;
 import com.jme3.scene.Node;
-import amara.game.entitysystem.components.physics.*;
+import amara.applications.ingame.entitysystem.components.physics.PositionComponent;
 import amara.libraries.applications.display.ingame.maps.MapHeightmap;
 import amara.libraries.entitysystem.*;
 

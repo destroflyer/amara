@@ -6,7 +6,7 @@ package amara.engine.applications.ingame.server.network.backends;
 
 import com.jme3.network.Message;
 import amara.applications.ingame.network.messages.*;
-import amara.game.games.*;
+import amara.applications.ingame.shared.games.*;
 import amara.libraries.network.*;
 
 /**

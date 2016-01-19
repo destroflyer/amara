@@ -5,7 +5,7 @@
 package amara.libraries.applications.display.ingame.maps;
 
 import com.jme3.math.Vector2f;
-import amara.game.maps.MapPhysicsInformation;
+import amara.applications.ingame.shared.maps.MapPhysicsInformation;
 import amara.libraries.applications.display.materials.PaintableImage;
 
 /**

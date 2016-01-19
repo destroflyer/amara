@@ -5,7 +5,7 @@
 package amara.engine.applications.ingame.client.systems.visualisation.effects.crodwcontrol;
 
 import com.jme3.math.FastMath;
-import amara.game.entitysystem.components.units.crowdcontrol.IsKnockupedComponent;
+import amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent;
 
 /**
  *

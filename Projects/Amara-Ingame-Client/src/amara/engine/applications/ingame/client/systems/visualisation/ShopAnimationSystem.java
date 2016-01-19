@@ -6,10 +6,10 @@ package amara.engine.applications.ingame.client.systems.visualisation;
 
 import java.util.Set;
 import com.jme3.scene.Node;
-import amara.game.entitysystem.components.players.*;
-import amara.game.entitysystem.components.shop.*;
-import amara.game.entitysystem.components.visuals.*;
-import amara.game.entitysystem.systems.shop.ShopUtil;
+import amara.applications.ingame.entitysystem.components.players.*;
+import amara.applications.ingame.entitysystem.components.visuals.*;
+import amara.applications.ingame.entitysystem.components.shop.*;
+import amara.applications.ingame.entitysystem.systems.shop.ShopUtil;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.*;
 

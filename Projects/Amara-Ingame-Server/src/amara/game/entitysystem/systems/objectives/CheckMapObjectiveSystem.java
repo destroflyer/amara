@@ -4,10 +4,10 @@
  */
 package amara.game.entitysystem.systems.objectives;
 
+import amara.applications.ingame.entitysystem.components.maps.*;
+import amara.applications.ingame.entitysystem.components.objectives.*;
+import amara.applications.ingame.shared.maps.Map;
 import amara.engine.applications.ingame.server.IngameServerApplication;
-import amara.game.entitysystem.components.maps.*;
-import amara.game.entitysystem.components.objectives.*;
-import amara.game.maps.Map;
 import amara.libraries.entitysystem.*;
 
 /**

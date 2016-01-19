@@ -4,9 +4,9 @@
  */
 package amara.engine.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.entitysystem.components.items.*;
+import amara.applications.ingame.entitysystem.components.players.*;
 import amara.engine.applications.ingame.client.gui.ScreenController_Shop;
-import amara.game.entitysystem.components.items.*;
-import amara.game.entitysystem.components.players.*;
 import amara.libraries.entitysystem.*;
 
 /**

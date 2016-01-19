@@ -4,8 +4,8 @@
  */
 package amara.engine.applications.ingame.server.interfaces;
 
+import amara.applications.ingame.shared.games.Game;
 import amara.engine.applications.ingame.server.IngameServerApplication;
-import amara.game.games.Game;
 import amara.libraries.applications.headless.applications.HeadlessAppState;
 
 /**

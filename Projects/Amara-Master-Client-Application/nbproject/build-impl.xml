@@ -906,16 +906,24 @@ is divided into following sections:
         </antcall>
         <antcall target="-maybe-call-dep">
             <param name="call.built.properties" value="${built-jar.properties}"/>
-            <param location="${project.Amara-Game}" name="call.subproject"/>
-            <param location="${project.Amara-Game}/build.xml" name="call.script"/>
+            <param location="${project.Amara-Ingame-Client}" name="call.subproject"/>
+            <param location="${project.Amara-Ingame-Client}/build.xml" name="call.script"/>
             <param name="call.target" value="jar"/>
             <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
             <param name="transfer.not.archive.disabled" value="true"/>
         </antcall>
         <antcall target="-maybe-call-dep">
             <param name="call.built.properties" value="${built-jar.properties}"/>
-            <param location="${project.Amara-Ingame-Client}" name="call.subproject"/>
-            <param location="${project.Amara-Ingame-Client}/build.xml" name="call.script"/>
+            <param location="${project.Amara-Ingame-EntitySystem}" name="call.subproject"/>
+            <param location="${project.Amara-Ingame-EntitySystem}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.Amara-Ingame-Maps}" name="call.subproject"/>
+            <param location="${project.Amara-Ingame-Maps}/build.xml" name="call.script"/>
             <param name="call.target" value="jar"/>
             <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
             <param name="transfer.not.archive.disabled" value="true"/>
@@ -932,6 +940,14 @@ is divided into following sections:
             <param name="call.built.properties" value="${built-jar.properties}"/>
             <param location="${project.Amara-Ingame-Server}" name="call.subproject"/>
             <param location="${project.Amara-Ingame-Server}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.Amara-Ingame-Shared}" name="call.subproject"/>
+            <param location="${project.Amara-Ingame-Shared}/build.xml" name="call.script"/>
             <param name="call.target" value="jar"/>
             <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
             <param name="transfer.not.archive.disabled" value="true"/>
@@ -1535,16 +1551,24 @@ is divided into following sections:
         </antcall>
         <antcall target="-maybe-call-dep">
             <param name="call.built.properties" value="${built-clean.properties}"/>
-            <param location="${project.Amara-Game}" name="call.subproject"/>
-            <param location="${project.Amara-Game}/build.xml" name="call.script"/>
+            <param location="${project.Amara-Ingame-Client}" name="call.subproject"/>
+            <param location="${project.Amara-Ingame-Client}/build.xml" name="call.script"/>
             <param name="call.target" value="clean"/>
             <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
             <param name="transfer.not.archive.disabled" value="true"/>
         </antcall>
         <antcall target="-maybe-call-dep">
             <param name="call.built.properties" value="${built-clean.properties}"/>
-            <param location="${project.Amara-Ingame-Client}" name="call.subproject"/>
-            <param location="${project.Amara-Ingame-Client}/build.xml" name="call.script"/>
+            <param location="${project.Amara-Ingame-EntitySystem}" name="call.subproject"/>
+            <param location="${project.Amara-Ingame-EntitySystem}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.Amara-Ingame-Maps}" name="call.subproject"/>
+            <param location="${project.Amara-Ingame-Maps}/build.xml" name="call.script"/>
             <param name="call.target" value="clean"/>
             <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
             <param name="transfer.not.archive.disabled" value="true"/>
@@ -1561,6 +1585,14 @@ is divided into following sections:
             <param name="call.built.properties" value="${built-clean.properties}"/>
             <param location="${project.Amara-Ingame-Server}" name="call.subproject"/>
             <param location="${project.Amara-Ingame-Server}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.Amara-Ingame-Shared}" name="call.subproject"/>
+            <param location="${project.Amara-Ingame-Shared}/build.xml" name="call.script"/>
             <param name="call.target" value="clean"/>
             <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
             <param name="transfer.not.archive.disabled" value="true"/>

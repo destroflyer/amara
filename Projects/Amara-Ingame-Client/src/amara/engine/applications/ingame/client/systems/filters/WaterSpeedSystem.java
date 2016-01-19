@@ -6,8 +6,8 @@ package amara.engine.applications.ingame.client.systems.filters;
 
 import com.jme3.post.Filter;
 import com.jme3.water.WaterFilter;
-import amara.game.entitysystem.components.game.*;
-import amara.game.games.Game;
+import amara.applications.ingame.entitysystem.components.game.*;
+import amara.applications.ingame.shared.games.Game;
 import amara.libraries.applications.display.appstates.WaterAppState;
 import amara.libraries.applications.display.ingame.appstates.MapAppState;
 import amara.libraries.entitysystem.*;

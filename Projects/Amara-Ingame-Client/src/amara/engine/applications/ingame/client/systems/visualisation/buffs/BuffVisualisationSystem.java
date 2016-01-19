@@ -6,8 +6,8 @@ package amara.engine.applications.ingame.client.systems.visualisation.buffs;
 
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
-import amara.game.entitysystem.components.buffs.status.*;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.*;
 

@@ -9,9 +9,9 @@ import com.jme3.material.RenderState;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
+import amara.applications.ingame.entitysystem.components.units.ReactionComponent;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
 import amara.engine.applications.ingame.client.systems.visualisation.meshes.SpeechBubbleMesh;
-import amara.game.entitysystem.components.units.ReactionComponent;
 import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.entitysystem.*;
 

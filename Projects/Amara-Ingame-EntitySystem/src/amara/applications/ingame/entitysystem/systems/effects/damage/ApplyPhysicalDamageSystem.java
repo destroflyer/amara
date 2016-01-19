@@ -1,0 +1,41 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package amara.applications.ingame.entitysystem.systems.effects.damage;
+
+import amara.applications.ingame.entitysystem.components.attributes.*;
+import amara.applications.ingame.entitysystem.components.effects.*;
+import amara.applications.ingame.entitysystem.components.effects.damage.*;
+import amara.applications.ingame.entitysystem.components.units.*;
+import amara.libraries.entitysystem.*;
+
+/**
+ *
+ * @author Carl
+ */
+public class ApplyPhysicalDamageSystem implements EntitySystem{
+    
+    @Override
+    public void update(EntityWorld entityWorld, float deltaSeconds){
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingPhysicalDamageComponent.class)))
+        {
+            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
+            boolean wasDamaged = false;
+            if(entityWorld.hasComponent(targetEntity, IsVulnerableComponent.class)){
+                HealthComponent healthComponent = entityWorld.getComponent(targetEntity, HealthComponent.class);
+                if(healthComponent != null){
+                    float damage = entityWrapper.getComponent(ResultingPhysicalDamageComponent.class).getValue();
+                    if(damage > 0){
+                        float health = (healthComponent.getValue() - damage);
+                        entityWorld.setComponent(targetEntity, new HealthComponent(health));
+                        wasDamaged = true;
+                    }
+                }
+            }
+            if(!wasDamaged){
+                entityWorld.removeEntity(entityWrapper.getId());
+            }
+        }
+    }
+}

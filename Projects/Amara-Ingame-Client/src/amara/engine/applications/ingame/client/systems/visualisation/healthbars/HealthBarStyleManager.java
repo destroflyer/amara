@@ -11,10 +11,10 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.texture.Texture;
 import com.jme3.texture.Texture2D;
+import amara.applications.ingame.entitysystem.components.attributes.*;
+import amara.applications.ingame.entitysystem.components.units.*;
 import amara.engine.applications.ingame.client.systems.visualisation.healthbars.styles.*;
 import amara.engine.applications.ingame.client.systems.visualisation.meshes.RectangleMesh;
-import amara.game.entitysystem.components.attributes.HealthComponent;
-import amara.game.entitysystem.components.units.HealthBarStyleComponent;
 import amara.libraries.applications.display.materials.*;
 import amara.libraries.entitysystem.EntityWorld;
 

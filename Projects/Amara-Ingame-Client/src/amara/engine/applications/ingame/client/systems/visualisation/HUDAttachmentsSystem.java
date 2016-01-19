@@ -11,8 +11,8 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.engine.applications.ingame.client.systems.visualisation.healthbars.HealthBarStyleManager;
-import amara.game.entitysystem.components.physics.PositionComponent;
 import amara.libraries.applications.display.ingame.maps.MapHeightmap;
 import amara.libraries.entitysystem.*;
 

@@ -4,10 +4,10 @@
  */
 package amara.engine.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.entitysystem.components.units.*;
+import amara.applications.ingame.entitysystem.components.spells.*;
+import amara.applications.ingame.entitysystem.systems.spells.SpellUtil;
 import amara.engine.applications.ingame.client.gui.ScreenController_HUD;
-import amara.game.entitysystem.components.spells.SpellUpgradesComponent;
-import amara.game.entitysystem.components.units.*;
-import amara.game.entitysystem.systems.spells.SpellUtil;
 import amara.libraries.entitysystem.*;
 
 /**

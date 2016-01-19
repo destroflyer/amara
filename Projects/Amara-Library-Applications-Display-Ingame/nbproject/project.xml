@@ -21,7 +21,7 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>Amara-Game</foreign-project>
+                <foreign-project>Amara-Ingame-Shared</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>

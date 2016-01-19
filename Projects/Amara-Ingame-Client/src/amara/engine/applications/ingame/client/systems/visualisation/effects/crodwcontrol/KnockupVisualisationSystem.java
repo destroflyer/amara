@@ -7,9 +7,9 @@ package amara.engine.applications.ingame.client.systems.visualisation.effects.cr
 import java.util.HashMap;
 import java.util.LinkedList;
 import com.jme3.scene.Node;
+import amara.applications.ingame.entitysystem.components.units.crowdcontrol.*;
+import amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.*;
 import amara.engine.applications.ingame.client.systems.visualisation.*;
-import amara.game.entitysystem.components.effects.crowdcontrol.knockup.*;
-import amara.game.entitysystem.components.units.crowdcontrol.*;
 import amara.libraries.entitysystem.*;
 
 /**

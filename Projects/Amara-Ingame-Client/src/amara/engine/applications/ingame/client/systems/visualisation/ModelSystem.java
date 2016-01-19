@@ -6,7 +6,7 @@ package amara.engine.applications.ingame.client.systems.visualisation;
 
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Node;
-import amara.game.entitysystem.components.visuals.*;
+import amara.applications.ingame.entitysystem.components.visuals.ModelComponent;
 import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.*;

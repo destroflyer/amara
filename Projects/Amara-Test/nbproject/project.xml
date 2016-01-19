@@ -21,7 +21,7 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>Amara-Game</foreign-project>
+                <foreign-project>Amara-Ingame-Client</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>
@@ -29,7 +29,15 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>Amara-Ingame-Client</foreign-project>
+                <foreign-project>Amara-Ingame-EntitySystem</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
+                <foreign-project>Amara-Ingame-Maps</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>
@@ -46,6 +54,14 @@
             </reference>
             <reference>
                 <foreign-project>Amara-Ingame-Server</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
+                <foreign-project>Amara-Ingame-Shared</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>
