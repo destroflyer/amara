@@ -7,9 +7,9 @@ package amara.launcher.client.panels;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
+import amara.applications.master.client.MasterserverClientUtil;
 import amara.applications.master.network.messages.Message_CreateLobby;
 import amara.applications.master.network.messages.objects.LobbyData;
-import amara.engine.applications.masterserver.client.MasterserverClientUtil;
 import amara.launcher.client.buttons.*;
 import amara.libraries.network.NetworkClient;
 

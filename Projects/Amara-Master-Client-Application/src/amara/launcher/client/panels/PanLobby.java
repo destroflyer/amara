@@ -13,10 +13,10 @@ package amara.launcher.client.panels;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import com.jme3.network.Message;
+import amara.applications.master.client.MasterserverClientUtil;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.*;
 import amara.core.files.FileAssets;
-import amara.engine.applications.masterserver.client.MasterserverClientUtil;
 import amara.libraries.applications.windowed.FrameUtil;
 import amara.libraries.network.NetworkClient;
 

@@ -4,11 +4,11 @@
  */
 package amara.test;
 
+import amara.applications.master.client.MasterserverClientApplication;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.*;
 import amara.applications.master.server.MasterserverServerApplication;
 import amara.core.Launcher_Core;
-import amara.engine.applications.masterserver.client.MasterserverClientApplication;
 import amara.launcher.Launcher_Game;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.network.*;

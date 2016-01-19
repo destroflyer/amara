@@ -1,6 +1,6 @@
-package amara.engine.applications.masterserver.client;
+package amara.applications.master.client;
 
-import amara.engine.applications.masterserver.client.appstates.*;
+import amara.applications.master.client.appstates.*;
 import amara.libraries.applications.headless.applications.HeadlessApplication;
 import amara.libraries.applications.headless.appstates.*;
 import amara.libraries.network.HostInformation;
