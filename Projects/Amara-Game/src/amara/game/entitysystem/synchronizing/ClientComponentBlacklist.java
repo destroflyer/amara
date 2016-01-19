@@ -220,6 +220,7 @@ public class ClientComponentBlacklist{
             CastedSpellComponent.class,
             //targets
             //units
+            AggroPriorityComponent.class,
             AggroResetTimerComponent.class,
             AutoAggroComponent.class,
             CampResetComponent.class,
