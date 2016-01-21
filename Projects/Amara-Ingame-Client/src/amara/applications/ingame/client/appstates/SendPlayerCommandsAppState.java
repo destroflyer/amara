@@ -115,6 +115,9 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
                         if(keyCode == Settings.getInteger("controls_navigation_stop")){
                             sendCommand(new StopCommand());
                         }
+                        else if(keyCode == Settings.getInteger("controls_interface_scoreboard")){
+                            screenController_HUD.toggleScoreboardVisible();
+                        }
                         else if(keyCode == Settings.getInteger("controls_interface_shop")){
                             screenController_Shop.toggleShopVisible();
                         }

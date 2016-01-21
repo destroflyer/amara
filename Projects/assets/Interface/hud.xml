@@ -393,6 +393,27 @@
                 <panel height="156px"/>
             </panel>
         </layer>
+        <layer id="scoreboard_layer" childLayout="center" visible="false">
+            <panel childLayout="vertical">
+                <panel height="*"/>
+                <panel childLayout="horizontal" height="350px">
+                    <panel width="*"/>
+                    <panel childLayout="horizontal" width="800px" backgroundColor="#000000DA">
+                        <panel width="10px"/>
+                        <panel childLayout="vertical">
+                            <panel height="10px"/>
+                            <panel id="scoreboard_content" childLayout="vertical">
+                                <!--Generated-->
+                            </panel>
+                            <panel height="10px"/>
+                        </panel>
+                        <panel width="10px"/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+                <panel height="*"/>
+            </panel>
+        </layer>
         <layer childLayout="center">
             <panel childLayout="vertical">
                 <panel height="21px"/>

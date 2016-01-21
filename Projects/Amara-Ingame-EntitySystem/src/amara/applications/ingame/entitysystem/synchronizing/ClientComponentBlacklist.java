@@ -188,7 +188,6 @@ public class ClientComponentBlacklist{
             RemoveOnMapLeaveComponent.class,
             //players
             ClientComponent.class,
-            PlayerIndexComponent.class,
             RespawnComponent.class,
             //shop
             //spawns

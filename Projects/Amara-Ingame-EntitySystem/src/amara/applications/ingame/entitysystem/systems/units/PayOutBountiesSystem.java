@@ -9,6 +9,7 @@ import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.bounties.*;
+import amara.applications.ingame.entitysystem.components.units.scores.*;
 import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
 import amara.libraries.entitysystem.*;
 
@@ -30,6 +31,49 @@ public class PayOutBountiesSystem implements EntitySystem{
             if((bountyComponent != null) && (damageHistoryComponent != null) && (damageHistoryComponent.getEntries().length > 0)){
                 DamageHistoryComponent.DamageHistoryEntry lastDamageHistoryEntry = damageHistoryComponent.getEntries()[damageHistoryComponent.getEntries().length - 1];
                 int killerEntity = lastDamageHistoryEntry.getSourceEntity();
+                //CharacterKill
+                BountyCharacterKillComponent bountyCharacterKillScoreComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyCharacterKillComponent.class);
+                if(bountyCharacterKillScoreComponent != null){
+                    //Assists
+                    for(int i=0;i<(damageHistoryComponent.getEntries().length - 1);i++){
+                        int assistingEntity = damageHistoryComponent.getEntries()[i].getSourceEntity();
+                        ScoreComponent scoreComponent = entityWorld.getComponent(assistingEntity, ScoreComponent.class);
+                        if(scoreComponent != null){
+                            int scoreEntity = scoreComponent.getScoreEntity();
+                            int assists = 1;
+                            CharacterAssistsComponent characterAssistsComponent = entityWorld.getComponent(scoreEntity, CharacterAssistsComponent.class);
+                            if(characterAssistsComponent != null){
+                                assists += characterAssistsComponent.getAssists();
+                            }
+                            entityWorld.setComponent(scoreEntity, new CharacterAssistsComponent(assists));
+                        }
+                    }
+                    //Kill
+                    ScoreComponent scoreComponent = entityWorld.getComponent(killerEntity, ScoreComponent.class);
+                    if(scoreComponent != null){
+                        int scoreEntity = scoreComponent.getScoreEntity();
+                        int kills = 1;
+                        CharacterKillsComponent characterKillsComponent = entityWorld.getComponent(scoreEntity, CharacterKillsComponent.class);
+                        if(characterKillsComponent != null){
+                            kills += characterKillsComponent.getKills();
+                        }
+                        entityWorld.setComponent(scoreEntity, new CharacterKillsComponent(kills));
+                    }
+                }
+                //CreepScore
+                BountyCreepScoreComponent bountyCreepScoreComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyCreepScoreComponent.class);
+                if(bountyCreepScoreComponent != null){
+                    ScoreComponent scoreComponent = entityWorld.getComponent(killerEntity, ScoreComponent.class);
+                    if(scoreComponent != null){
+                        int scoreEntity = scoreComponent.getScoreEntity();
+                        int kills = 1;
+                        CreepScoreComponent creepScoreComponent = entityWorld.getComponent(scoreEntity, CreepScoreComponent.class);
+                        if(creepScoreComponent != null){
+                            kills += creepScoreComponent.getKills();
+                        }
+                        entityWorld.setComponent(scoreEntity, new CreepScoreComponent(kills));
+                    }
+                }                
                 //Gold
                 BountyGoldComponent bountyGoldComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyGoldComponent.class);
                 if(bountyGoldComponent != null){

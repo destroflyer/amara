@@ -11,6 +11,7 @@ import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.components.units.*;
+import amara.applications.ingame.entitysystem.components.units.scores.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.synchronizing.*;
 import amara.applications.ingame.entitysystem.systems.aggro.*;
@@ -49,6 +50,7 @@ import amara.applications.ingame.entitysystem.systems.specials.erika.*;
 import amara.applications.ingame.entitysystem.systems.spells.*;
 import amara.applications.ingame.entitysystem.systems.spells.casting.*;
 import amara.applications.ingame.entitysystem.systems.units.*;
+import amara.applications.ingame.entitysystem.systems.units.scores.*;
 import amara.applications.ingame.entitysystem.systems.visuals.*;
 import amara.applications.ingame.server.IngameServerApplication;
 import amara.applications.ingame.server.entitysystem.systems.objectives.CheckMapObjectiveSystem;
@@ -128,6 +130,12 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
                 unit.setComponent(new LevelComponent(1));
                 unit.setComponent(new SpellsComponent(new int[0]));
                 unit.setComponent(new SpellsUpgradePointsComponent(1));
+                int scoreEntity = entityWorld.createEntity();
+                entityWorld.setComponent(scoreEntity, new CharacterKillsComponent(0));
+                entityWorld.setComponent(scoreEntity, new DeathsComponent(0));
+                entityWorld.setComponent(scoreEntity, new CharacterAssistsComponent(0));
+                entityWorld.setComponent(scoreEntity, new CreepScoreComponent());
+                unit.setComponent(new ScoreComponent(scoreEntity));
             }catch(Exception ex){
                 ex.printStackTrace();
             }
@@ -261,6 +269,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new MaximumHealthSystem());
         addEntitySystem(new MaximumStacksSystem());
         addEntitySystem(new PayOutBountiesSystem());
+        addEntitySystem(new UpdateDeathsScoreSystem());
         addEntitySystem(new RemoveDeadUnitsSystem());
         addEntitySystem(new RemoveCancelledMovementsEffectTriggersSystem());
         addEntitySystem(new PlayMovementAnimationsSystem());

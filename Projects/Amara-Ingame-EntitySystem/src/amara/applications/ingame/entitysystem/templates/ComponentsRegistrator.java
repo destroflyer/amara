@@ -3118,6 +3118,22 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyBuffComponent(buffEntity, duration);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent>("bountyCharacterKill"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent>("bountyCreepScore"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.bounties.BountyExperienceComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.bounties.BountyExperienceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyExperienceComponent>("bountyExperience"){
 
@@ -3921,6 +3937,73 @@ public class ComponentsRegistrator{
                     remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.RemainingAggroResetDurationComponent(remainingDuration);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.ScoreComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.ScoreComponent.class.getDeclaredField("scoreEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.ScoreComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ScoreComponent>("score"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.ScoreComponent construct(){
+                int scoreEntity = createChildEntity(0, "scoreEntity");
+                return new amara.applications.ingame.entitysystem.components.units.ScoreComponent(scoreEntity);
+            }
+        });
+        //scores
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent>("characterAssists"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent construct(){
+                int assists = 0;
+                String assistsText = element.getText();
+                if((assistsText != null) && (assistsText.length() > 0)){
+                    assists = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, assistsText));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent(assists);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent>("characterKills"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent construct(){
+                int kills = 0;
+                String killsText = element.getText();
+                if((killsText != null) && (killsText.length() > 0)){
+                    kills = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, killsText));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent(kills);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent>("creepScore"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent construct(){
+                int kills = 0;
+                String killsText = element.getText();
+                if((killsText != null) && (killsText.length() > 0)){
+                    kills = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, killsText));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent(kills);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent>("deaths"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent construct(){
+                int deaths = 0;
+                String deathsText = element.getText();
+                if((deathsText != null) && (deathsText.length() > 0)){
+                    deaths = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, deathsText));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent(deaths);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent.class);

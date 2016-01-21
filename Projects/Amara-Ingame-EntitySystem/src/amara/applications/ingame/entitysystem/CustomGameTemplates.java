@@ -128,6 +128,7 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new AggroPriorityComponent(1));
 
                     int bountyEntity = entityWorld.createEntity();
+                    entityWorld.setComponent(bountyEntity, new BountyCreepScoreComponent());
                     entityWorld.setComponent(bountyEntity, new BountyGoldComponent(20 + (int) (spawnCounter * 0.5)));
                     entityWorld.setComponent(bountyEntity, new BountyExperienceComponent(59));
                     entityWrapper.setComponent(new BountyComponent(bountyEntity));
@@ -173,6 +174,7 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new AggroPriorityComponent(1));
 
                     int bountyEntity = entityWorld.createEntity();
+                    entityWorld.setComponent(bountyEntity, new BountyCreepScoreComponent());
                     entityWorld.setComponent(bountyEntity, new BountyGoldComponent(15 + (int) (spawnCounter * 0.5)));
                     entityWorld.setComponent(bountyEntity, new BountyExperienceComponent(29));
                     entityWrapper.setComponent(new BountyComponent(bountyEntity));
@@ -207,6 +209,7 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new DirectionComponent(direction));
                     entityWrapper.setComponent(new TeamComponent(0));
                     EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
+                    bounty.setComponent(new BountyCreepScoreComponent());
                     bounty.setComponent(new BountyGoldComponent(30));
                     entityWrapper.setComponent(new BountyComponent(bounty.getId()));
                 }
@@ -223,6 +226,7 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new SetNewTargetSpellsOnCooldownComponent(new int[]{0}, new float[]{6}));
                     entityWrapper.setComponent(new TeamComponent(0));
                     EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
+                    bounty.setComponent(new BountyCreepScoreComponent());
                     bounty.setComponent(new BountyGoldComponent(60));
                     entityWrapper.setComponent(new BountyComponent(bounty.getId()));
                 }
@@ -263,6 +267,7 @@ public class CustomGameTemplates{
 
                     entityWrapper.setComponent(new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.BOSS));
                     EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
+                    bounty.setComponent(new BountyCreepScoreComponent());
                     bounty.setComponent(new BountyGoldComponent(150));
                     EntityWrapper bountyBuff = entityWorld.getWrapped(entityWorld.createEntity());
                     bountyBuff.setComponent(new BuffVisualisationComponent("baron_nashor"));

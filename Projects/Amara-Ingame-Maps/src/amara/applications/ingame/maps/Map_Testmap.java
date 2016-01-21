@@ -42,6 +42,7 @@ public class Map_Testmap extends Map{
     public void load(EntityWorld entityWorld){
         //Field of test units
         EntityWrapper testUnitBounty = entityWorld.getWrapped(entityWorld.createEntity());
+        testUnitBounty.setComponent(new BountyCreepScoreComponent());
         testUnitBounty.setComponent(new BountyGoldComponent(20));
         testUnitBounty.setComponent(new BountyExperienceComponent(100));
         EntityWrapper testUnitCamp = entityWorld.getWrapped(entityWorld.createEntity());
@@ -88,6 +89,7 @@ public class Map_Testmap extends Map{
         }
         //Test Camp
         EntityWrapper testCampUnitBounty = entityWorld.getWrapped(entityWorld.createEntity());
+        testCampUnitBounty.setComponent(new BountyCreepScoreComponent());
         testCampUnitBounty.setComponent(new BountyGoldComponent(10));
         EntityWrapper testBountyBuff = entityWorld.getWrapped(entityWorld.createEntity());
         testBountyBuff.setComponent(new BuffVisualisationComponent("turbo"));
@@ -168,6 +170,7 @@ public class Map_Testmap extends Map{
         super.initializePlayer(entityWorld, playerEntity);
         int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
         EntityWrapper characterBounty = entityWorld.getWrapped(entityWorld.createEntity());
+        characterBounty.setComponent(new BountyCharacterKillComponent());
         characterBounty.setComponent(new BountyGoldComponent(300));
         entityWorld.setComponent(unitEntity, new BountyComponent(characterBounty.getId()));
         entityWorld.setComponent(unitEntity, new LevelComponent(6));

@@ -48,6 +48,12 @@ public class ScreenController_HUD extends GameScreenController{
         setUpgradeSpellsLayerVisible(false);
         hideUpgradeSpell();
     }
+
+    @Override
+    protected void initialize(){
+        super.initialize();
+        generateScoreboard();
+    }
     
     public void setPlayerName(String name){
         getTextRenderer("player_name").setText(name);
@@ -305,5 +311,95 @@ public class ScreenController_HUD extends GameScreenController{
     private void hideUpgradeSpell(){
         getElementByID("upgrade_spell_layer_container").setVisible(false);
         getElementByID("upgrade_spell_layer_images").setVisible(false);
+    }
+    
+    private void generateScoreboard(){
+        new PanelBuilder(){{
+            childLayoutVertical();
+            
+            for(int i=0;i<10;i++){
+                final int playerIndex = i;
+                panel(new PanelBuilder("scoreboard_player_" + playerIndex){{
+                    childLayoutHorizontal();
+                    height("20px");
+                    
+                    text(new TextBuilder("scoreboard_player_" + playerIndex + "_name"){{
+                        width("200px");
+                        textHAlignLeft();
+                        font("Interface/fonts/Verdana_14.fnt");
+                        text("Player #" + (playerIndex + 1));
+                    }});
+                    text(new TextBuilder("scoreboard_player_" + playerIndex + "_character_kills"){{
+                        width("40px");
+                        textHAlignCenter();
+                        font("Interface/fonts/Verdana_14.fnt");
+                        text("K");
+                    }});
+                    text(new TextBuilder("scoreboard_player_" + playerIndex + "_deaths"){{
+                        width("40px");
+                        textHAlignCenter();
+                        font("Interface/fonts/Verdana_14.fnt");
+                        text("D");
+                    }});
+                    text(new TextBuilder("scoreboard_player_" + playerIndex + "_character_assists"){{
+                        width("40px");
+                        textHAlignCenter();
+                        font("Interface/fonts/Verdana_14.fnt");
+                        text("A");
+                    }});
+                    panel(new PanelBuilder(){{
+                        width("20px");
+                    }});
+                    text(new TextBuilder("scoreboard_player_" + playerIndex + "_creepscore"){{
+                        width("40px");
+                        textHAlignCenter();
+                        font("Interface/fonts/Verdana_14.fnt");
+                        text("CS");
+                    }});
+                    panel(new PanelBuilder(){{
+                        width("*");
+                    }});
+                }});
+                panel(new PanelBuilder(){{
+                    height("5px");
+                }});
+            }
+            panel(new PanelBuilder(){{
+                height("*");
+            }});
+        }}.build(nifty, nifty.getCurrentScreen(), getElementByID("scoreboard_content"));
+    }
+    
+    public void toggleScoreboardVisible(){
+        setScoreboardVisible(!getElementByID("scoreboard_layer").isVisible());
+    }
+    
+    public void setScoreboardVisible(boolean isVisible){
+        Element scoreboardLayer = getElementByID("scoreboard_layer");
+        scoreboardLayer.setVisible(isVisible);
+    }
+    
+    public void setPlayerScore_CharacterKills(int playerIndex, int kills){
+        setPlayerScore(playerIndex, "character_kills", kills);
+    }
+    
+    public void setPlayerScore_Deaths(int playerIndex, int deaths){
+        setPlayerScore(playerIndex, "deaths", deaths);
+    }
+    
+    public void setPlayerScore_CharacterAssists(int playerIndex, int assists){
+        setPlayerScore(playerIndex, "character_assists", assists);
+    }
+    
+    public void setPlayerScore_CreepScore(int playerIndex, int kills){
+        setPlayerScore(playerIndex, "creepscore", kills);
+    }
+    
+    private void setPlayerScore(int playerIndex, String suffix, float value){
+        getTextRenderer("scoreboard_player_" + playerIndex + "_" + suffix).setText(GUIUtil.getValueText(value));
+    }
+    
+    public void setPlayerName(int playerIndex, String name){
+        getTextRenderer("scoreboard_player_" + playerIndex + "_name").setText(name);
     }
 }

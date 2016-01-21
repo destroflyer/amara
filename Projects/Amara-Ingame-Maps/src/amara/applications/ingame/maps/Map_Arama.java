@@ -175,6 +175,7 @@ public class Map_Arama extends Map{
         super.initializePlayer(entityWorld, playerEntity);
         int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
         EntityWrapper characterBounty = entityWorld.getWrapped(entityWorld.createEntity());
+        characterBounty.setComponent(new BountyCharacterKillComponent());
         characterBounty.setComponent(new BountyGoldComponent(300));
         entityWorld.setComponent(unitEntity, new BountyComponent(characterBounty.getId()));
     }

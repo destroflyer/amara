@@ -55,6 +55,7 @@ public class IngameSettings extends SettingsCategory{
                 new CategorizedSettingsCategory(
                     "interface", "Interface",
                     new Setting[]{
+                        new CategorizedSetting("scoreboard", "Scoreboard", new KeyType(KeyInput.KEY_TAB)),
                         new CategorizedSetting("shop", "Shop", new KeyType(KeyInput.KEY_P)),
                         new CategorizedSetting("menu", "Menu", new KeyType(KeyInput.KEY_ESCAPE))
                     }
