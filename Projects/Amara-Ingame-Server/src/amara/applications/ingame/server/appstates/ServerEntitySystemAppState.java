@@ -134,7 +134,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
                 entityWorld.setComponent(scoreEntity, new CharacterKillsComponent(0));
                 entityWorld.setComponent(scoreEntity, new DeathsComponent(0));
                 entityWorld.setComponent(scoreEntity, new CharacterAssistsComponent(0));
-                entityWorld.setComponent(scoreEntity, new CreepScoreComponent());
+                entityWorld.setComponent(scoreEntity, new CreepScoreComponent(0));
                 unit.setComponent(new ScoreComponent(scoreEntity));
             }catch(Exception ex){
                 ex.printStackTrace();
