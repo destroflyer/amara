@@ -9,6 +9,7 @@ import amara.applications.ingame.client.gui.objects.SpellInformation;
 import amara.core.Util;
 import amara.libraries.applications.display.appstates.NiftyAppState;
 import amara.libraries.applications.display.gui.GameScreenController;
+import de.lessvoid.nifty.builder.ImageBuilder;
 import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.builder.TextBuilder;
 import de.lessvoid.nifty.controls.scrollpanel.builder.ScrollPanelBuilder;
@@ -329,23 +330,11 @@ public class ScreenController_HUD extends GameScreenController{
                         font("Interface/fonts/Verdana_14.fnt");
                         text("Player #" + (playerIndex + 1));
                     }});
-                    text(new TextBuilder("scoreboard_player_" + playerIndex + "_character_kills"){{
+                    text(new TextBuilder("scoreboard_player_" + playerIndex + "_kda"){{
                         width("40px");
                         textHAlignCenter();
                         font("Interface/fonts/Verdana_14.fnt");
-                        text("K");
-                    }});
-                    text(new TextBuilder("scoreboard_player_" + playerIndex + "_deaths"){{
-                        width("40px");
-                        textHAlignCenter();
-                        font("Interface/fonts/Verdana_14.fnt");
-                        text("D");
-                    }});
-                    text(new TextBuilder("scoreboard_player_" + playerIndex + "_character_assists"){{
-                        width("40px");
-                        textHAlignCenter();
-                        font("Interface/fonts/Verdana_14.fnt");
-                        text("A");
+                        text("K/D/A");
                     }});
                     panel(new PanelBuilder(){{
                         width("20px");
@@ -356,6 +345,16 @@ public class ScreenController_HUD extends GameScreenController{
                         font("Interface/fonts/Verdana_14.fnt");
                         text("CS");
                     }});
+                    panel(new PanelBuilder(){{
+                        width("20px");
+                    }});
+                    for(int i=0;i<6;i++){
+                        image(new ImageBuilder("scoreboard_player_" + playerIndex + "_item_" + i + "_image"){{
+                            width("20px");
+                            height("20px");
+                            filename("Interface/hud/items/unknown.png");
+                        }});
+                    }
                     panel(new PanelBuilder(){{
                         width("*");
                     }});
@@ -379,27 +378,27 @@ public class ScreenController_HUD extends GameScreenController{
         scoreboardLayer.setVisible(isVisible);
     }
     
-    public void setPlayerScore_CharacterKills(int playerIndex, int kills){
-        setPlayerScore(playerIndex, "character_kills", kills);
-    }
-    
-    public void setPlayerScore_Deaths(int playerIndex, int deaths){
-        setPlayerScore(playerIndex, "deaths", deaths);
-    }
-    
-    public void setPlayerScore_CharacterAssists(int playerIndex, int assists){
-        setPlayerScore(playerIndex, "character_assists", assists);
-    }
-    
-    public void setPlayerScore_CreepScore(int playerIndex, int kills){
-        setPlayerScore(playerIndex, "creepscore", kills);
-    }
-    
-    private void setPlayerScore(int playerIndex, String suffix, float value){
-        getTextRenderer("scoreboard_player_" + playerIndex + "_" + suffix).setText(GUIUtil.getValueText(value));
-    }
-    
-    public void setPlayerName(int playerIndex, String name){
+    public void setScoreboard_PlayerName(int playerIndex, String name){
         getTextRenderer("scoreboard_player_" + playerIndex + "_name").setText(name);
+    }
+    
+    public void setScoreboard_KDA(int playerIndex, int kills, int deaths, int assists){
+        setScoreboard_Score(playerIndex, "kda", (kills + "/" + deaths + "/" + assists));
+    }
+    
+    public void setScoreboard_CreepScore(int playerIndex, int kills){
+        setScoreboard_Score(playerIndex, "creepscore", kills);
+    }
+    
+    private void setScoreboard_Score(int playerIndex, String suffix, float value){
+        setScoreboard_Score(playerIndex, suffix, GUIUtil.getValueText(value));
+    }
+    
+    private void setScoreboard_Score(int playerIndex, String suffix, String text){
+        getTextRenderer("scoreboard_player_" + playerIndex + "_" + suffix).setText(text);
+    }
+    
+    public void setScoreboard_InventoryItemImage(int playerIndex, int itemIndex, String imagePath){
+        getImageRenderer("scoreboard_player_" + playerIndex + "_item_" + itemIndex + "_image").setImage(createImage(imagePath));
     }
 }

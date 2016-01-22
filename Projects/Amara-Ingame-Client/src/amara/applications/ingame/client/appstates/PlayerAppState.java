@@ -78,10 +78,11 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new DisplayItemsCooldownsSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new UpdateSpellInformationsSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new UpdateUpgradeSpellsPanelSystem(playerEntity, screenController_HUD));
-        localEntitySystemAppState.addEntitySystem(new DisplayScoresSystem(playerEntity, screenController_HUD));
-        localEntitySystemAppState.addEntitySystem(new DisplayPlayersNamesSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayGoldSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayDeathRecapSystem(playerEntity, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayScoreboardPlayersNamesSystem(screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayScoreboardScoresSystem(screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayScoreboardInventoriesSystem(screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new UpdateRecipeCostsSystem(playerEntity, screenController_Shop));
     }
 

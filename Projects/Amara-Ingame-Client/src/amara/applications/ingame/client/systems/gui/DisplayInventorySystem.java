@@ -28,19 +28,27 @@ public class DisplayInventorySystem extends GUIDisplaySystem{
     private void check(EntityWorld entityWorld, InventoryComponent inventoryComponent){
         if(inventoryComponent != null){
             for(int i=0;i<6;i++){
-                String itemImageName = "none";
-                int[] items = inventoryComponent.getItemEntities();
-                if((i < items.length) && (items[i] != -1)){
-                    ItemIDComponent itemIDComponent = entityWorld.getComponent(items[i], ItemIDComponent.class);
-                    if(itemIDComponent != null){
-                        itemImageName = itemIDComponent.getID();
-                    }
-                    else{
-                        itemImageName = "unknown";
-                    }
-                }
-                screenController_HUD.setInventoryItemImage(i, "Interface/hud/items/" + itemImageName + ".png");
+                String imageFilePath = getItemImageFilePath(entityWorld, inventoryComponent.getItemEntities(), i);
+                screenController_HUD.setInventoryItemImage(i, imageFilePath);
             }
         }
+    }
+    
+    public static String getItemImageFilePath(EntityWorld entityWorld, int[] items, int itemIndex){
+        String filePath = "Interface/hud/items/";
+        if((itemIndex < items.length) && (items[itemIndex] != -1)){
+            ItemIDComponent itemIDComponent = entityWorld.getComponent(items[itemIndex], ItemIDComponent.class);
+            if(itemIDComponent != null){
+                 filePath += itemIDComponent.getID();
+            }
+            else{
+                filePath += "unknown";
+            }
+        }
+        else{
+            filePath += "none";
+        }
+        filePath += ".png";
+        return filePath;
     }
 }

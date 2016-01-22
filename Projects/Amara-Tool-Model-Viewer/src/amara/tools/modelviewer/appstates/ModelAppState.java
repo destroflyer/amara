@@ -34,22 +34,19 @@ public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> i
         "/Models/ganfaul/skin_default.xml",
         "/Models/daydream/skin_default.xml",
         "/Models/daydream/skin_fire.xml",
-        "/Models/daydream/skin_nightmare.xml",
         "/Models/daydream/skin_envy.xml",
         "/Models/daydream/skin_inuyasha.xml",
         "/Models/daydream/skin_amazoness.xml",
-        "/Models/oz/skin_default.xml",
         "/Models/oz/skin_oz_junior.xml",
-        "/Models/minion/skin_default.xml",
         "/Models/minion/skin_gentleman.xml",
         "/Models/wizard/skin_default.xml",
-        "/Models/robot/skin_default.xml",
         "/Models/robot/skin_definitely_not.xml",
         "/Models/jaime/skin_default.xml",
         "/Models/soldier/skin_default.xml",
         "/Models/steve/skin_default.xml",
         "/Models/nathalya/skin_default.xml",
-        "/Models/vampire_a_lusth/skin_default.xml"
+        "/Models/vampire_a_lusth/skin_default.xml",
+        "/Models/forest_monster/skin.xml"
     };
     private ModelObject[] modelObjects;
     private String[][] animationNames;
