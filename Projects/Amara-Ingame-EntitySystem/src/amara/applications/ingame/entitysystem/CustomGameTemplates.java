@@ -187,6 +187,12 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new TeamComponent(0));
                     entityWrapper.setComponent(new BountyComponent(parameters[2]));
                 }
+                else if(templateName.equals("testmap_camp_forest_monster")){
+                    entityWrapper.setComponent(new PositionComponent(new Vector2f(57, 42)));
+                    entityWrapper.setComponent(new DirectionComponent(new Vector2f(-4, -1)));
+                    entityWrapper.setComponent(new TeamComponent(0));
+                    entityWrapper.setComponent(new BountyComponent(parameters[0]));
+                }
                 else if(templateName.equals("arama_camp_pseudospider")){
                     Vector2f position = null;
                     Vector2f direction = null;

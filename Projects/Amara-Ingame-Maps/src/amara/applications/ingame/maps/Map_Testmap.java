@@ -87,7 +87,7 @@ public class Map_Testmap extends Map{
                 unit.setComponent(new CampComponent(testUnitCamp.getId(), position, direction));
             }
         }
-        //Test Camp
+        //Test Camp 1
         EntityWrapper testCampUnitBounty = entityWorld.getWrapped(entityWorld.createEntity());
         testCampUnitBounty.setComponent(new BountyCreepScoreComponent());
         testCampUnitBounty.setComponent(new BountyGoldComponent(10));
@@ -112,6 +112,20 @@ public class Map_Testmap extends Map{
         testCamp.setComponent(new CampSpawnInformationComponent(campSpawnInformationEntities));
         testCamp.setComponent(new CampRespawnDurationComponent(5));
         testCamp.setComponent(new CampSpawnComponent());
+        //Test Camp 2
+        EntityWrapper forestMonsterBounty = entityWorld.getWrapped(entityWorld.createEntity());
+        forestMonsterBounty.setComponent(new BountyCreepScoreComponent());
+        forestMonsterBounty.setComponent(new BountyGoldComponent(20));
+        forestMonsterBounty.setComponent(new BountyExperienceComponent(200));
+        EntityWrapper forestMonsterCamp = entityWorld.getWrapped(entityWorld.createEntity());
+        forestMonsterCamp.setComponent(new CampUnionAggroComponent());
+        forestMonsterCamp.setComponent(new CampMaximumAggroDistanceComponent(10));
+        forestMonsterCamp.setComponent(new CampHealthResetComponent());
+        EntityWrapper forestMonsterCamp_SpawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
+        forestMonsterCamp_SpawnInformation.setComponent(new SpawnTemplateComponent("units/forest_monster", "testmap_camp_forest_monster," + forestMonsterBounty.getId()));
+        forestMonsterCamp.setComponent(new CampSpawnInformationComponent(forestMonsterCamp_SpawnInformation.getId()));
+        forestMonsterCamp.setComponent(new CampRespawnDurationComponent(5));
+        forestMonsterCamp.setComponent(new CampSpawnComponent());
         //Boss
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
         boss.setComponent(new NameComponent("Yalee"));

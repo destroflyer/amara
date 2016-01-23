@@ -1,0 +1,55 @@
+<template>
+    <entity>
+        <name>Pseudospider</name>
+        <!--model-->
+        <model>Models/forest_monster/skin.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>Idle</name>
+                <loopDuration>7.6</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>Walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>Attack</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>Dying</name>
+                <loopDuration>1.4</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup group="units" collidesWith="map|units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>1500</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>100</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.6</bonusFlatAttackSpeed>
+                <bonusFlatWalkSpeed>3</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <requestUpdateAttributes/>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/melee_autoattack"/>
+        </autoAttack>
+    </entity>
+</template>

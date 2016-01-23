@@ -318,20 +318,22 @@ public class ScreenController_HUD extends GameScreenController{
         new PanelBuilder(){{
             childLayoutVertical();
             
-            for(int i=0;i<10;i++){
+            for(int i=0;i<8;i++){
                 final int playerIndex = i;
                 panel(new PanelBuilder("scoreboard_player_" + playerIndex){{
                     childLayoutHorizontal();
-                    height("20px");
+                    height("30px");
                     
                     text(new TextBuilder("scoreboard_player_" + playerIndex + "_name"){{
                         width("200px");
+                        height("30px");
                         textHAlignLeft();
                         font("Interface/fonts/Verdana_14.fnt");
                         text("Player #" + (playerIndex + 1));
                     }});
                     text(new TextBuilder("scoreboard_player_" + playerIndex + "_kda"){{
                         width("40px");
+                        height("30px");
                         textHAlignCenter();
                         font("Interface/fonts/Verdana_14.fnt");
                         text("K/D/A");
@@ -341,6 +343,7 @@ public class ScreenController_HUD extends GameScreenController{
                     }});
                     text(new TextBuilder("scoreboard_player_" + playerIndex + "_creepscore"){{
                         width("40px");
+                        height("30px");
                         textHAlignCenter();
                         font("Interface/fonts/Verdana_14.fnt");
                         text("CS");
@@ -350,8 +353,8 @@ public class ScreenController_HUD extends GameScreenController{
                     }});
                     for(int i=0;i<6;i++){
                         image(new ImageBuilder("scoreboard_player_" + playerIndex + "_item_" + i + "_image"){{
-                            width("20px");
-                            height("20px");
+                            width("30px");
+                            height("30px");
                             filename("Interface/hud/items/unknown.png");
                         }});
                     }

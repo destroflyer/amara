@@ -7,9 +7,12 @@ package amara.applications.ingame.maps;
 import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.audio.*;
+import amara.applications.ingame.entitysystem.components.buffs.*;
+import amara.applications.ingame.entitysystem.components.buffs.areas.*;
 import amara.applications.ingame.entitysystem.components.camps.*;
 import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.effects.damage.*;
+import amara.applications.ingame.entitysystem.components.effects.heals.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.maps.*;
@@ -19,15 +22,18 @@ import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.components.shop.*;
 import amara.applications.ingame.entitysystem.components.spawns.*;
+import amara.applications.ingame.entitysystem.components.targets.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.bounties.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
+import amara.applications.ingame.shared.games.Game;
 import amara.applications.ingame.shared.maps.Map;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
+import amara.libraries.physics.shapes.*;
 
 /**
  *
@@ -51,8 +57,44 @@ public class Map_Arama extends Map{
         audioBackgroundMusic.setComponent(new StartPlayingAudioComponent());
         //Nexus
         EntityWrapper[] nexi = new EntityWrapper[2];
+        float[] fountainX = new float[]{408, 117};
         float[] nexiX = new float[]{378, 147};
         for(int i=0;i<2;i++){
+            //Fountain
+            EntityWrapper fountain = entityWorld.getWrapped(entityWorld.createEntity());
+            fountain.setComponent(new NameComponent("Fountain"));
+            fountain.setComponent(new TeamComponent(i + 1));
+            //Fountain Area (Allies)
+            EntityWrapper fountainBuffArea_Allies = entityWorld.getWrapped(entityWorld.createEntity());
+            fountainBuffArea_Allies.setComponent(new HitboxComponent(new Rectangle(24, 36)));
+            fountainBuffArea_Allies.setComponent(new HitboxActiveComponent());
+            fountainBuffArea_Allies.setComponent(new PositionComponent(new Vector2f(fountainX[i], 260)));
+            EntityWrapper fountainBuff_Allies = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper fountainBuffEffect_Allies = entityWorld.getWrapped(entityWorld.createEntity());
+            fountainBuffEffect_Allies.setComponent(new HealComponent("(0.021 * target.maximumHealth)"));
+            fountainBuff_Allies.setComponent(new RepeatingEffectComponent(fountainBuffEffect_Allies.getId(), 0.25f));
+            fountainBuffArea_Allies.setComponent(new AreaBuffComponent(fountainBuff_Allies.getId()));
+            EntityWrapper fountainAreaBuffTargetRules_Allies = entityWorld.getWrapped(entityWorld.createEntity());
+            fountainAreaBuffTargetRules_Allies.setComponent(new AcceptAlliesComponent());
+            fountainBuffArea_Allies.setComponent(new AreaBuffTargetRulesComponent(fountainAreaBuffTargetRules_Allies.getId()));
+            fountainBuffArea_Allies.setComponent(new AreaOriginComponent(Game.ENTITY));
+            fountainBuffArea_Allies.setComponent(new AreaSourceComponent(fountain.getId()));
+            //Fountain Area (Enemies)
+            EntityWrapper fountainBuffArea_Enemies = entityWorld.getWrapped(entityWorld.createEntity());
+            fountainBuffArea_Enemies.setComponent(new HitboxComponent(new Rectangle(24, 36)));
+            fountainBuffArea_Enemies.setComponent(new HitboxActiveComponent());
+            fountainBuffArea_Enemies.setComponent(new PositionComponent(new Vector2f(fountainX[i], 260)));
+            EntityWrapper fountainBuff_Enemies = entityWorld.getWrapped(entityWorld.createEntity());
+            EntityWrapper fountainBuffEffect__Enemies = entityWorld.getWrapped(entityWorld.createEntity());
+            fountainBuffEffect__Enemies.setComponent(new MagicDamageComponent("1000"));
+            fountainBuff_Enemies.setComponent(new RepeatingEffectComponent(fountainBuffEffect__Enemies.getId(), 0.5f));
+            fountainBuffArea_Enemies.setComponent(new AreaBuffComponent(fountainBuff_Enemies.getId()));
+            EntityWrapper fountainAreaBuffTargetRules__Enemies = entityWorld.getWrapped(entityWorld.createEntity());
+            fountainAreaBuffTargetRules__Enemies.setComponent(new AcceptEnemiesComponent());
+            fountainBuffArea_Enemies.setComponent(new AreaBuffTargetRulesComponent(fountainAreaBuffTargetRules__Enemies.getId()));
+            fountainBuffArea_Enemies.setComponent(new AreaOriginComponent(Game.ENTITY));
+            fountainBuffArea_Enemies.setComponent(new AreaSourceComponent(fountain.getId()));
+            //Nexus
             EntityWrapper nexus = entityWorld.getWrapped(entityWorld.createEntity());
             nexus.setComponent(new NameComponent("Nexus"));
             nexus.setComponent(new ModelComponent("Models/column/skin_nexus.xml"));
