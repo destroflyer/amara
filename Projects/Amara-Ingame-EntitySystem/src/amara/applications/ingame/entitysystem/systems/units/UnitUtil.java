@@ -48,6 +48,7 @@ public class UnitUtil{
             }
         }
         entityWorld.removeComponent(entity, IsCastingComponent.class);
+        triggerActionCancelledTriggers(entityWorld, entity);
         removeTemporaryTriggers(entityWorld, entity, CastingFinishedTriggerComponent.class);
     }
     
@@ -55,6 +56,15 @@ public class UnitUtil{
         entityWorld.removeComponent(entity, MovementComponent.class);
         removeTemporaryTriggers(entityWorld, entity, TargetReachedTriggerComponent.class);
         removeTemporaryTriggers(entityWorld, entity, CollisionTriggerComponent.class);
+    }
+    
+    private static void triggerActionCancelledTriggers(EntityWorld entityWorld, int entity){
+        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, ActionCancelledTriggerComponent.class)){
+            int triggerSourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
+            if(triggerSourceEntity == entity){
+                EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, -1);
+            }
+        }
     }
     
     private static void removeTemporaryTriggers(EntityWorld entityWorld, int sourceEntity, Class triggerComponentClass){

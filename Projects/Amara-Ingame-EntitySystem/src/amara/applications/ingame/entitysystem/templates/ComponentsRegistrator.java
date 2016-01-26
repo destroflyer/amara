@@ -1847,6 +1847,15 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.spells.TriggerSpellEffectsComponent(spellEntity);
             }
         });
+        //units
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent>("cancelAction"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent();
+            }
+        });
         //visuals
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.visuals.PlayAnimationComponent.class);
         try{
@@ -3510,6 +3519,14 @@ public class ComponentsRegistrator{
             }
         });
         //triggers
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent>("actionCancelledTrigger"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent>("castingFinishedTrigger"){
 

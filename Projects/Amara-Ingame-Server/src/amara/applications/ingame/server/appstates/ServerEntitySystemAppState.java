@@ -38,6 +38,7 @@ import amara.applications.ingame.entitysystem.systems.effects.physics.*;
 import amara.applications.ingame.entitysystem.systems.effects.spawns.*;
 import amara.applications.ingame.entitysystem.systems.effects.spells.*;
 import amara.applications.ingame.entitysystem.systems.effects.triggers.*;
+import amara.applications.ingame.entitysystem.systems.effects.units.*;
 import amara.applications.ingame.entitysystem.systems.effects.visuals.*;
 import amara.applications.ingame.entitysystem.systems.general.*;
 import amara.applications.ingame.entitysystem.systems.movement.*;
@@ -211,10 +212,10 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyDrawTeamAggroSystem());
         addEntitySystem(new ApplyPlayAudioSystem());
         addEntitySystem(new ApplyStopAudioSystem());
-        addEntitySystem(new ApplyAddBuffsSystem());
         addEntitySystem(new ApplyRemoveBuffsSystem());
-        addEntitySystem(new ApplyAddBuffAreasSystem());
         addEntitySystem(new ApplyRemoveBuffAreasSystem());
+        addEntitySystem(new ApplyAddBuffsSystem());
+        addEntitySystem(new ApplyAddBuffAreasSystem());
         addEntitySystem(new ApplyAddStacksSystem());
         addEntitySystem(new ApplyClearStacksSystem());
         addEntitySystem(new ApplyRemoveStacksSystem());
@@ -249,6 +250,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyReplaceSpellsWithExistingSpellsSystem());
         addEntitySystem(new ApplyReplaceSpellsWithNewSpellsSystem());
         addEntitySystem(new ApplyTriggerSpellEffectsSystem());
+        addEntitySystem(new ApplyCancelActionsSystem());
         addEntitySystem(new ApplyPlayAnimationsSystem());
         addEntitySystem(new ApplyStopAnimationsSystem());
         addEntitySystem(new ApplyAddComponentsSystem());

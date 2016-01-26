@@ -22,6 +22,7 @@ import amara.applications.ingame.entitysystem.components.effects.movement.*;
 import amara.applications.ingame.entitysystem.components.effects.physics.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.effects.spells.*;
+import amara.applications.ingame.entitysystem.components.effects.units.*;
 import amara.applications.ingame.entitysystem.components.effects.visuals.*;
 import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
@@ -217,6 +218,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         RemoveSpellEffectsComponent.class,
                         ReplaceSpellWithExistingSpellComponent.class,
                         TriggerSpellEffectsComponent.class,
+                        CancelActionComponent.class,
                         PlayAnimationComponent.class,
                         StopAnimationComponent.class,
                         //specials
