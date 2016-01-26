@@ -208,6 +208,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         RemoveVulnerabilityComponent.class,
                         PlayCinematicComponent.class,
                         StopComponent.class,
+                        TeleportComponent.class,
                         ActivateHitboxComponent.class,
                         DeactivateHitboxComponent.class,
                         SpawnComponent.class,

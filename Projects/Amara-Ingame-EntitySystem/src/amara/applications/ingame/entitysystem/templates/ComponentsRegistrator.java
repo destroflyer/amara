@@ -3827,6 +3827,20 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.LocalAvoidanceWalkComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.MapSpellsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.MapSpellsComponent.class.getDeclaredField("spellsEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.MapSpellsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.MapSpellsComponent>("mapSpells"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.MapSpellsComponent construct(){
+                int[] spellsEntities = createChildEntities(0, "spellsEntities");
+                return new amara.applications.ingame.entitysystem.components.units.MapSpellsComponent(spellsEntities);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.MaximumAggroRangeComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.MaximumAggroRangeComponent.class.getDeclaredField("range"), componentFieldSerializer_Distance);

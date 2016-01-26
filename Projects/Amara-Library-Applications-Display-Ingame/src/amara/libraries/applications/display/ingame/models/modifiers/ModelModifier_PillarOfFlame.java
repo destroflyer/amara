@@ -26,7 +26,7 @@ public class ModelModifier_PillarOfFlame extends ModelModifier{
     public void modify(ModelObject modelObject){
         //Pillar
         Emitter pillar = new Emitter();
-        pillar.setName("effectringpe");
+        pillar.setName("pillar");
         pillar.setMaxParticles(72);
         pillar.addInfluencers(
             new GravityInfluencer(),

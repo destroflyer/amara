@@ -1,0 +1,60 @@
+<template>
+    <value name="castDuration">6</value>
+    <entity id="spell">
+        <name>Backport</name>
+        <description>Teleports your character after [castDuration] seconds to your base.</description>
+        <spellVisualisation>backport</spellVisualisation>
+        <instantEffectTriggers>
+            <!--add buff, play audio-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="[castDuration]">
+                            <entity id="buff">
+                                <buffVisualisation>backporting</buffVisualisation>
+                                <onBuffRemoveEffectTriggers>
+                                    <entity>
+                                        <casterTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <triggerSpellEffects>#spell</triggerSpellEffects>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffRemoveEffectTriggers>
+                            </entity>
+                        </addBuff>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/backport_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castCancelAction/>
+        <castDuration>[castDuration]</castDuration>
+        <!--<baseCooldown>0</baseCooldown>-->
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--teleport-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <teleport>[parameter0]</teleport>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

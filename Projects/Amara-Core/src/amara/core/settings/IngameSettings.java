@@ -23,7 +23,8 @@ public class IngameSettings extends SettingsCategory{
                         new CategorizedSetting("0", "Spell #1", new KeyType(KeyInput.KEY_Q)),
                         new CategorizedSetting("1", "Spell #2", new KeyType(KeyInput.KEY_W)),
                         new CategorizedSetting("2", "Spell #3", new KeyType(KeyInput.KEY_E)),
-                        new CategorizedSetting("3", "Spell #4", new KeyType(KeyInput.KEY_R))
+                        new CategorizedSetting("3", "Spell #4", new KeyType(KeyInput.KEY_R)),
+                        new CategorizedSetting("backport", "Backport", new KeyType(KeyInput.KEY_B))
                     }
                 ),
                 new CategorizedSettingsCategory(

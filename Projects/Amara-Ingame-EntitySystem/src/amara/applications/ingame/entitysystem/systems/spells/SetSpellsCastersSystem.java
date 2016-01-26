@@ -17,7 +17,7 @@ public class SetSpellsCastersSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.requestObserver(this, AutoAttackComponent.class, PassivesComponent.class, SpellsComponent.class, InventoryComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, AutoAttackComponent.class, PassivesComponent.class, SpellsComponent.class, InventoryComponent.class, MapSpellsComponent.class);
         //AutoAttack
         for(int entity : observer.getNew().getEntitiesWithAll(AutoAttackComponent.class)){
             updateCaster(entityWorld, entity, observer.getNew().getComponent(entity, AutoAttackComponent.class).getAutoAttackEntity());
@@ -72,6 +72,18 @@ public class SetSpellsCastersSystem implements EntitySystem{
                         entityWorld.removeComponent(itemPassiveEntity, EffectCastSourceComponent.class);
                     }
                 }
+            }
+        }
+        //Map Spells
+        for(int entity : observer.getNew().getEntitiesWithAll(MapSpellsComponent.class)){
+            updateCaster_Spells(entityWorld, entity, observer.getNew().getComponent(entity, MapSpellsComponent.class).getSpellsEntities());
+        }
+        for(int entity : observer.getChanged().getEntitiesWithAll(MapSpellsComponent.class)){
+            updateCaster_Spells(entityWorld, entity, observer.getChanged().getComponent(entity, MapSpellsComponent.class).getSpellsEntities());
+        }
+        for(int entity : observer.getRemoved().getEntitiesWithAll(MapSpellsComponent.class)){
+            for(int spellEntity : observer.getRemoved().getComponent(entity, MapSpellsComponent.class).getSpellsEntities()){
+                entityWorld.removeComponent(spellEntity, EffectCastSourceComponent.class);
             }
         }
     }

@@ -30,7 +30,7 @@ import amara.applications.ingame.entitysystem.components.units.effecttriggers.ta
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.shared.games.Game;
-import amara.applications.ingame.shared.maps.Map;
+import amara.applications.ingame.shared.maps.*;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 import amara.libraries.physics.shapes.*;
@@ -47,6 +47,7 @@ public class Map_Arama extends Map{
     private final float laneCenterY = 260.25f;
     private final float timeUntilWaveStart = 3;
     private final float waveInterval = 40;
+    private int[] backportPositionEntities = new int[2];
 
     @Override
     public void load(EntityWorld entityWorld){
@@ -55,6 +56,11 @@ public class Map_Arama extends Map{
         audioBackgroundMusic.setComponent(new AudioVolumeComponent(1.25f));
         audioBackgroundMusic.setComponent(new AudioLoopComponent());
         audioBackgroundMusic.setComponent(new StartPlayingAudioComponent());
+        //Backports
+        backportPositionEntities[0] = entityWorld.createEntity();
+        backportPositionEntities[1] = entityWorld.createEntity();
+        entityWorld.setComponent(backportPositionEntities[0], new PositionComponent(new Vector2f(405, laneCenterY)));
+        entityWorld.setComponent(backportPositionEntities[1], new PositionComponent(new Vector2f(120, laneCenterY)));
         //Nexus
         EntityWrapper[] nexi = new EntityWrapper[2];
         float[] fountainX = new float[]{408, 117};
@@ -215,20 +221,39 @@ public class Map_Arama extends Map{
     @Override
     public void initializePlayer(EntityWorld entityWorld, int playerEntity){
         super.initializePlayer(entityWorld, playerEntity);
+        int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
         int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
+        int teamEntity = ((playerIndex % 2) + 1);
+        entityWorld.setComponent(unitEntity, new TeamComponent(teamEntity));
+        //MapSpells
+        MapSpells[] mapSpells = new MapSpells[]{
+            new MapSpells(new MapSpell("backport", "spells/backport/base," + backportPositionEntities[teamEntity - 1]))
+        };
+        int[] mapSpellsEntities = new int[mapSpells.length];
+        for(int i=0;i<mapSpells.length;i++){
+            MapSpell mapSpell = mapSpells[i].getMapSpells()[0];
+            int spellEntity = entityWorld.createEntity();
+            EntityTemplate.loadTemplate(entityWorld, spellEntity, mapSpell.getEntityTemplate());
+            mapSpellsEntities[i] = spellEntity;
+        }
+        entityWorld.setComponent(unitEntity, new MapSpellsComponent(mapSpellsEntities));
+        //Bounty
         EntityWrapper characterBounty = entityWorld.getWrapped(entityWorld.createEntity());
         characterBounty.setComponent(new BountyCharacterKillComponent());
         characterBounty.setComponent(new BountyGoldComponent(300));
         entityWorld.setComponent(unitEntity, new BountyComponent(characterBounty.getId()));
     }
+    
+    
 
     @Override
     public void spawnPlayer(EntityWorld entityWorld, int playerEntity){
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
-        int teamEntity = ((playerIndex % 2) + 1);
+        int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
         int playerTeamIndex = (playerIndex / 2);
         Vector2f position = new Vector2f(0, laneCenterY - (playerTeamIndex * 5));
         Vector2f direction = new Vector2f();
+        int teamEntity = entityWorld.getComponent(unitEntity, TeamComponent.class).getTeamEntity();
         switch(teamEntity){
             case 1:
                 position.setX(405);
@@ -240,9 +265,7 @@ public class Map_Arama extends Map{
                 direction.setX(1);
                 break;
         }
-        int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
         entityWorld.setComponent(unitEntity, new PositionComponent(position));
         entityWorld.setComponent(unitEntity, new DirectionComponent(direction));
-        entityWorld.setComponent(unitEntity, new TeamComponent(teamEntity));
     }
 }

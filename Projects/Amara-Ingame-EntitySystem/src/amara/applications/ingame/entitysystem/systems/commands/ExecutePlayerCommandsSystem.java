@@ -164,6 +164,16 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     }
                 }
                 break;
+            
+            case MAP:
+                MapSpellsComponent mapSpellsComponent = entityWorld.getComponent(casterEntity, MapSpellsComponent.class);
+                if(mapSpellsComponent != null){
+                    int[] mapSpells = mapSpellsComponent.getSpellsEntities();
+                    if(spellIndex.getIndex() < mapSpells.length){
+                        return mapSpells[spellIndex.getIndex()];
+                    }
+                }
+                break;
         }
         return -1;
     }

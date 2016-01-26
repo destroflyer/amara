@@ -102,6 +102,11 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
                             break;
                         }
                     }
+                    if(keyCode == Settings.getInteger("controls_spells_backport")){
+                        castSpell(new SpellIndex(SpellIndex.SpellSet.MAP, 0));
+                        searchKey = false;
+                        break;
+                    }
                     if(searchKey){
                         for(int i=0;i<6;i++){
                             if(keyCode == Settings.getInteger("controls_items_" + i)){

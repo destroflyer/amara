@@ -24,7 +24,8 @@ public class SpellIndex{
     }
     public enum SpellSet{
         SPELLS,
-        ITEMS
+        ITEMS,
+        MAP
     }
     private SpellSet spellSet;
     private int index;
