@@ -56,8 +56,10 @@ public class PanLobby extends javax.swing.JPanel{
         for(int i=0;i<players.size();i++){
             PanLobby_Player panPlay_Player = new PanLobby_Player(this, players.get(i));
             panPlay_Player.setLocation(0, y);
+            int panelHeight = (panPlay_Player.getSelectableMapSpellsIndices().isEmpty()?30:86);
+            panPlay_Player.setSize(300, panelHeight);
             panPlayers.add(panPlay_Player);
-            y += 30;
+            y += panelHeight;
         }
         panPlayers.updateUI();
     }

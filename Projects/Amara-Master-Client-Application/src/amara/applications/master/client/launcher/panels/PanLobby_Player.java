@@ -81,7 +81,6 @@ public class PanLobby_Player extends javax.swing.JPanel{
                 }
             }
         }
-        setSize(300, (selectableMapSpellsIndices.isEmpty()?30:86));
         if(sendUpdateAfterInitializing){
             sendLobbyPlayerUpdate();
         }
@@ -130,6 +129,10 @@ public class PanLobby_Player extends javax.swing.JPanel{
             mapSpellsIndices[selectableMapSpellsIndices.get(i)[0]][selectableMapSpellsIndices.get(i)[1]] = cbxMapSpells[i].getSelectedIndex();
         }
         return mapSpellsIndices;
+    }
+
+    public LinkedList<int[]> getSelectableMapSpellsIndices(){
+        return selectableMapSpellsIndices;
     }
 
     /**
