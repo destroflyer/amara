@@ -33,7 +33,7 @@ import amara.applications.ingame.shared.games.Game;
 import amara.applications.ingame.shared.maps.*;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
-import amara.libraries.physics.shapes.*;
+import amara.libraries.physics.shapes.Rectangle;
 
 /**
  *
@@ -42,7 +42,14 @@ import amara.libraries.physics.shapes.*;
 public class Map_Arama extends Map{
 
     public Map_Arama(){
-        
+        spells = new MapSpells[]{
+            new MapSpells("backport", new MapSpell( "spells/backport/base(-1)")),
+            new MapSpells(new String[]{"player_0", "player_1"},
+                new MapSpell("spells/battle_cry"),
+                new MapSpell("spells/empower"),
+                new MapSpell("spells/dragons_rage")
+            )
+        };
     }
     private final float laneCenterY = 260.25f;
     private final float timeUntilWaveStart = 3;
@@ -225,26 +232,13 @@ public class Map_Arama extends Map{
         int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
         int teamEntity = ((playerIndex % 2) + 1);
         entityWorld.setComponent(unitEntity, new TeamComponent(teamEntity));
-        //MapSpells
-        MapSpells[] mapSpells = new MapSpells[]{
-            new MapSpells(new MapSpell("backport", "spells/backport/base," + backportPositionEntities[teamEntity - 1]))
-        };
-        int[] mapSpellsEntities = new int[mapSpells.length];
-        for(int i=0;i<mapSpells.length;i++){
-            MapSpell mapSpell = mapSpells[i].getMapSpells()[0];
-            int spellEntity = entityWorld.createEntity();
-            EntityTemplate.loadTemplate(entityWorld, spellEntity, mapSpell.getEntityTemplate());
-            mapSpellsEntities[i] = spellEntity;
-        }
-        entityWorld.setComponent(unitEntity, new MapSpellsComponent(mapSpellsEntities));
+        spells[0].getMapSpells()[0] = new MapSpell("spells/backport/base(" + backportPositionEntities[teamEntity - 1] + ")");
         //Bounty
         EntityWrapper characterBounty = entityWorld.getWrapped(entityWorld.createEntity());
         characterBounty.setComponent(new BountyCharacterKillComponent());
         characterBounty.setComponent(new BountyGoldComponent(300));
         entityWorld.setComponent(unitEntity, new BountyComponent(characterBounty.getId()));
     }
-    
-    
 
     @Override
     public void spawnPlayer(EntityWorld entityWorld, int playerEntity){

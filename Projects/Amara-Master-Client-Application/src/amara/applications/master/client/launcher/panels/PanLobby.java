@@ -13,6 +13,7 @@ package amara.applications.master.client.launcher.panels;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import com.jme3.network.Message;
+import amara.applications.ingame.shared.maps.*;
 import amara.applications.master.client.MasterserverClientUtil;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.*;
@@ -34,6 +35,7 @@ public class PanLobby extends javax.swing.JPanel{
     private PanPlay panPlay;
     private Lobby lobby;
     private boolean isOwner;
+    private Map map;
     
     public void update(Lobby lobby){
         this.lobby = lobby;
@@ -41,8 +43,10 @@ public class PanLobby extends javax.swing.JPanel{
         btnInvite.setEnabled(isOwner);
         btnStart.setEnabled(isOwner);
         cbxMapName.setEnabled(isOwner);
-        cbxMapName.setSelectedItem(lobby.getLobbyData().getMapName());
-        lblMapIcon.setIcon(FileAssets.getImageIcon("Maps/" + lobby.getLobbyData().getMapName() + "/icon.png", 120, 120));
+        String mapName = lobby.getLobbyData().getMapName();
+        map = MapFileHandler.load(mapName, false);
+        cbxMapName.setSelectedItem(mapName);
+        lblMapIcon.setIcon(FileAssets.getImageIcon("Maps/" + mapName + "/icon.png", 120, 120));
         updatePlayersList(lobby.getPlayers());
     }
     
@@ -52,7 +56,6 @@ public class PanLobby extends javax.swing.JPanel{
         for(int i=0;i<players.size();i++){
             PanLobby_Player panPlay_Player = new PanLobby_Player(this, players.get(i));
             panPlay_Player.setLocation(0, y);
-            panPlay_Player.setSize(300, 30);
             panPlayers.add(panPlay_Player);
             y += 30;
         }
@@ -66,6 +69,10 @@ public class PanLobby extends javax.swing.JPanel{
 
     public boolean isOwner(){
         return isOwner;
+    }
+
+    public Map getMap(){
+        return map;
     }
 
     /** This method is called from within the constructor to

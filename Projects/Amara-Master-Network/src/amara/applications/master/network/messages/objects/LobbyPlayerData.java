@@ -16,13 +16,19 @@ public class LobbyPlayerData{
     public LobbyPlayerData(){
         
     }
-    
-    public LobbyPlayerData(int characterID){
+
+    public LobbyPlayerData(int characterID, int[][] mapSpellsIndices){
         this.characterID = characterID;
+        this.mapSpellsIndices = mapSpellsIndices;
     }
     private int characterID;
+    private int[][] mapSpellsIndices;
 
     public int getCharacterID(){
         return characterID;
+    }
+
+    public int[][] getMapSpellsIndices(){
+        return mapSpellsIndices;
     }
 }

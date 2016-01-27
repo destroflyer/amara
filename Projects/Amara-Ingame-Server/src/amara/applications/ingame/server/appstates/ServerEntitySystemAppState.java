@@ -142,6 +142,20 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
             }
             playerEntity.setComponent(new SelectedUnitComponent(unit.getId()));
             map.initializePlayer(entityWorld, playerEntity.getId());
+            //MapSpells
+            LinkedList<Integer> mapSpellsEntities = new LinkedList<Integer>();
+            for(int r=0;r<map.getSpells().length;r++){
+                MapSpells mapSpellsGroup = map.getSpells()[r];
+                int[][] mapSpellIndices = lobbyPlayerData.getMapSpellsIndices();
+                for(int z=0;z<mapSpellsGroup.getKeys().length;z++){
+                    int mapSpellIndex = ((mapSpellIndices != null)?mapSpellIndices[r][z]:0);
+                    MapSpell mapSpell = mapSpellsGroup.getMapSpells()[mapSpellIndex];
+                    int spellEntity = entityWorld.createEntity();
+                    EntityTemplate.loadTemplate(entityWorld, spellEntity, EntityTemplate.parseToOldTemplate(mapSpell.getEntityTemplate()));
+                    mapSpellsEntities.add(spellEntity);
+                }
+            }
+            unit.setComponent(new MapSpellsComponent(Util.convertToArray(mapSpellsEntities)));
             map.spawnPlayer(entityWorld, playerEntity.getId());
             player.setEntityID(playerEntity.getId());
         }

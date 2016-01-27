@@ -107,6 +107,13 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
                         searchKey = false;
                         break;
                     }
+                    for(int i=0;i<2;i++){
+                        if(keyCode == Settings.getInteger("controls_spells_player_" + i)){
+                            castSpell(new SpellIndex(SpellIndex.SpellSet.MAP, (i + 1)));
+                            searchKey = false;
+                            break;
+                        }
+                    }
                     if(searchKey){
                         for(int i=0;i<6;i++){
                             if(keyCode == Settings.getInteger("controls_items_" + i)){

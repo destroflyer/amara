@@ -157,10 +157,18 @@ public class MapFileHandler{
     }
 
     public static Map load(String mapName){
+        return load(mapName, true);
+    }
+
+    public static Map load(String mapName, boolean loadContents){
         try{
             InputStream inputStream = FileAssets.getInputStream("Maps/" + mapName + "/map.xml");
-            Map map = load(new SAXBuilder().build(inputStream));
-            map.setName(mapName);
+            Document document = new SAXBuilder().build(inputStream);
+            Element root = document.getRootElement();
+            Map map = createMapObject(root, mapName);
+            if(loadContents){
+                load(map, root);
+            }
             return map;
         }catch(Exception ex){
             System.err.println("Error while loading the map: " + ex.toString());
@@ -168,10 +176,8 @@ public class MapFileHandler{
         return null;
     }
 
-    private static Map load(Document document){
+    private static Map load(Map map, Element root){
         try{
-            Element root = document.getRootElement();
-            Map map = Util.createObjectByClassName(root.getAttributeValue("class"), Map.class);
             Element elementCamera = root.getChild("camera");
             Vector3f initialPosition = generateVector3f(elementCamera.getAttributeValue("initialPosition"));
             Vector3f initialDirection = generateVector3f(elementCamera.getAttributeValue("initialDirection"));
@@ -262,9 +268,15 @@ public class MapFileHandler{
             }
             return map;
         }catch(Exception ex){
-            System.err.println("Error while loading the map: " + ex.toString());
+            System.err.println("Error while loading the map contents: " + ex.toString());
         }
         return null;
+    }
+
+    private static Map createMapObject(Element root, String mapName){
+        Map map = Util.createObjectByClassName(root.getAttributeValue("class"), Map.class);
+        map.setName(mapName);
+        return map;
     }
     
     private static Vector2D generateVector2D(String text){

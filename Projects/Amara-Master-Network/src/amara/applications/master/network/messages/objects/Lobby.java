@@ -32,6 +32,12 @@ public class Lobby{
     }
 
     public void setLobbyData(LobbyData lobbyData){
+        //Reset map spells when the map changes
+        if(!lobbyData.getMapName().equals(this.lobbyData.getMapName())){
+            for(LobbyPlayer player : players){
+                player.setPlayerData(new LobbyPlayerData(player.getPlayerData().getCharacterID(), null));
+            }
+        }
         this.lobbyData = lobbyData;
     }
 
@@ -44,7 +50,7 @@ public class Lobby{
     }
     
     public void addPlayer(int playerID){
-        players.add(new LobbyPlayer(playerID, new LobbyPlayerData(11)));
+        players.add(new LobbyPlayer(playerID, new LobbyPlayerData(11, null)));
     }
     
     public void removePlayer(int playerID){

@@ -11,16 +11,10 @@ package amara.applications.ingame.shared.maps;
  */
 public class MapSpell{
 
-    public MapSpell(String key, String entityTemplate){
-        this.key = key;
+    public MapSpell(String entityTemplate){
         this.entityTemplate = entityTemplate;
     }
-    private String key;
     private String entityTemplate;
-
-    public String getKey(){
-        return key;
-    }
 
     public String getEntityTemplate(){
         return entityTemplate;

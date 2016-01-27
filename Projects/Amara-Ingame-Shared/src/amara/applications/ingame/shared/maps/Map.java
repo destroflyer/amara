@@ -19,6 +19,7 @@ public abstract class Map{
     protected TerrainSkin terrainSkin;
     protected MapPhysicsInformation physicsInformation;
     protected MapVisuals visuals = new MapVisuals();
+    protected MapSpells[] spells = new MapSpells[0];
     protected int entity;
     
     public abstract void load(EntityWorld entityWorld);
@@ -67,6 +68,10 @@ public abstract class Map{
 
     public MapVisuals getVisuals(){
         return visuals;
+    }
+
+    public MapSpells[] getSpells(){
+        return spells;
     }
 
     public void setEntity(int entity){

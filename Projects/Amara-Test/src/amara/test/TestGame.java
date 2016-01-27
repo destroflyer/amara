@@ -34,7 +34,7 @@ public class TestGame{
             NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
             networkClient.sendMessage(new Message_Login(new AuthentificationInformation("destroflyer", "test")));
             networkClient.sendMessage(new Message_CreateLobby(new LobbyData("testmap")));
-            networkClient.sendMessage(new Message_SetLobbyPlayerData(new LobbyPlayerData(11)));
+            networkClient.sendMessage(new Message_SetLobbyPlayerData(new LobbyPlayerData(11, null)));
             networkClient.sendMessage(new Message_StartGame());
         }catch(ServerConnectionException ex){
             ex.printStackTrace();

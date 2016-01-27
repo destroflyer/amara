@@ -11,7 +11,7 @@ import javax.swing.event.ListDataListener;
  *
  * @author Carl
  */
-public abstract class SimpleComboboxModel<E> implements ComboBoxModel<String>{
+public abstract class SimpleComboboxModel<E, T> implements ComboBoxModel<T>{
 
     public SimpleComboboxModel(E[] objects){
         this.objects = objects;
@@ -22,7 +22,7 @@ public abstract class SimpleComboboxModel<E> implements ComboBoxModel<String>{
     @Override
     public void setSelectedItem(Object anItem){
         for(int i=0;i<objects.length;i++){
-            if(getItemTitle(objects[i]).equals(anItem)){
+            if(getItem(objects[i]).equals(anItem)){
                 selectedIndex = i;
                 break;
             }
@@ -40,14 +40,14 @@ public abstract class SimpleComboboxModel<E> implements ComboBoxModel<String>{
     }
 
     @Override
-    public String getElementAt(int index){
+    public T getElementAt(int index){
         if((index >= 0) && (index < objects.length)){
-            return getItemTitle(objects[index]);
+            return getItem(objects[index]);
         }
         return null;
     }
     
-    protected abstract String getItemTitle(E object);
+    protected abstract T getItem(E object);
     
     @Override
     public void addListDataListener(ListDataListener l){

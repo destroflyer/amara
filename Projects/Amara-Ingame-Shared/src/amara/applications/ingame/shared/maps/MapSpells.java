@@ -11,10 +11,20 @@ package amara.applications.ingame.shared.maps;
  */
 public class MapSpells{
 
-    public MapSpells(MapSpell... mapSpells){
+    public MapSpells(String key, MapSpell mapSpell){
+        this(new String[]{key}, mapSpell);
+    }
+
+    public MapSpells(String[] keys, MapSpell... mapSpells){
+        this.keys = keys;
         this.mapSpells = mapSpells;
     }
+    private String[] keys;
     private MapSpell[] mapSpells;
+
+    public String[] getKeys(){
+        return keys;
+    }
 
     public MapSpell[] getMapSpells(){
         return mapSpells;

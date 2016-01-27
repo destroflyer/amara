@@ -10,14 +10,14 @@ import amara.applications.master.network.messages.objects.*;
  *
  * @author Carl
  */
-public class ComboboxModel_OwnedCharacters extends SimpleComboboxModel<OwnedGameCharacter>{
+public class ComboboxModel_OwnedCharacters extends SimpleComboboxModel<OwnedGameCharacter, String>{
 
     public ComboboxModel_OwnedCharacters(OwnedGameCharacter[] ownedCharacters){
         super(ownedCharacters);
     }
     
     @Override
-    protected String getItemTitle(OwnedGameCharacter ownedCharacter){
+    protected String getItem(OwnedGameCharacter ownedCharacter){
         return getItemTitle(ownedCharacter.getCharacter());
     }
 
