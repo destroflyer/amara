@@ -1,0 +1,89 @@
+<template>
+    <value name="delay">0.2</value>
+    <entity id="spell">
+        <name>Suplex</name>
+        <description>Kachujin kicks an enemy with her knee and flings him backwards behind her.</description>
+        <spellVisualisation>kachujin_fling</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/kachujin_fling_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castCancelAction/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>illegal_knee</name>
+                <loopDuration>0.65</loopDuration>
+            </entity>
+        </castAnimation>
+        <range>3</range>
+        <baseCooldown>10</baseCooldown>
+        <spellTargetRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </spellTargetRules>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--knockback target-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>80 + (0.6 * source.abilityPower)</physicalDamage>
+                        <deactivateHitbox/>
+                        <move>
+                            <entity>
+                                <displacement/>
+                                <sourceMovementDirection>180</sourceMovementDirection>
+                                <movementSpeed>28</movementSpeed>
+                                <distanceLimit>7</distanceLimit>
+                            </entity>
+                        </move>
+                        <addEffectTriggers>
+                            <!--reactivate hitbox-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <activateHitbox/>
+                                        <playAudio>
+                                            <entity>
+                                                <audio>Sounds/sounds/spells/kachujin_fling_land.ogg</audio>
+                                                <audioVolume>0.75</audioVolume>
+                                            </entity>
+                                        </playAudio>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

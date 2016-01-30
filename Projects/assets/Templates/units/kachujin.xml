@@ -65,6 +65,12 @@
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
+        <learnableSpells>
+            <entity template="spells/kachujin_mind_of_the_monk/base"/>
+            <entity template="spells/kachujin_fling/base"/>
+            <entity template="spells/kachujin_dash/base"/>
+            <entity template="spells/kachujin_ult/base"/>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>

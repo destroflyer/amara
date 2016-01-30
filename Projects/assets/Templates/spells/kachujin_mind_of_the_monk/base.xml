@@ -1,0 +1,101 @@
+<template>
+    <value name="delay">0.15</value>
+    <value name="markDuration">1</value>
+    <entity id="spell">
+        <name>Mind of the Monk</name>
+        <description>Shoots a (?) in a straight line - The first enemy hit is damaged and marked for [markDuration] seconds.</description>
+        <spellVisualisation>kachujin_mind_of_the_monk</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./projectile</spawnTemplate>
+                                <spawnMovementSpeed>17</spawnMovementSpeed>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/kachujin_mind_of_the_monk_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>spell_cast</name>
+                <loopDuration>0.5</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>8</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>90 + (0.6 * source.attackDamage)</physicalDamage>
+                        <addBuff duration="[markDuration]">
+                            <enity id="buff">
+                                <buffVisualisation>sonic_wave_mark</buffVisualisation>
+                                <!--<onBuffRemoveEffectTriggers>
+                                    <entity>
+                                        <casterTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <replaceSpellWithExistingSpell spellIndex="[parameter0]">#spell</replaceSpellWithExistingSpell>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffRemoveEffectTriggers>-->
+                            </enity>
+                        </addBuff>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/kachujin_mind_of_the_monk_hit.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--caster effect-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <!--<replaceSpellWithNewSpell spellIndex="[parameter0]" newSpellTemplate="./resonating_strike(#buff)"/>-->
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

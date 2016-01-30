@@ -1,0 +1,62 @@
+<template>
+    <value name="delay">0.2</value>
+    <value name="stunDuration">2</value>
+    <entity id="spell">
+        <name>Smash the Bricks</name>
+        <description>Kachujin takes a swing and smashes an enemy into the ground, dealing damage and stunning for [stunDuration] seconds.</description>
+        <spellVisualisation>kachujin_ult</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/kachujin_ult_hit.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castCancelAction/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>standing_melee_attack_downward</name>
+                <loopDuration>0.8</loopDuration>
+            </entity>
+        </castAnimation>
+        <range>3</range>
+        <baseCooldown>90</baseCooldown>
+        <spellTargetRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </spellTargetRules>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--knockback target-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>250 + (0.6 * source.attackDamage)</physicalDamage>
+                        <addStun>[stunDuration]</addStun>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>
