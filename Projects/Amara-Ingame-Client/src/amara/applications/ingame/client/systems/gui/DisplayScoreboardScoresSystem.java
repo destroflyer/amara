@@ -19,6 +19,13 @@ public class DisplayScoreboardScoresSystem extends PlayersDisplaySystem{
     public DisplayScoreboardScoresSystem(ScreenController_HUD screenController_HUD){
         super(screenController_HUD);
     }
+    private ComponentMapObserver observer;
+
+    @Override
+    protected void preUpdate(EntityWorld entityWorld, float deltaSeconds){
+        super.preUpdate(entityWorld, deltaSeconds);
+        observer = entityWorld.requestObserver(this, CharacterKillsComponent.class, DeathsComponent.class, CharacterAssistsComponent.class, CreepScoreComponent.class);
+    }
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int playerEntity){
@@ -27,7 +34,6 @@ public class DisplayScoreboardScoresSystem extends PlayersDisplaySystem{
         ScoreComponent scoreComponent = entityWorld.getComponent(selectedEntity, ScoreComponent.class);
         if(scoreComponent != null){
             int scoreEntity = scoreComponent.getScoreEntity();
-            ComponentMapObserver observer = entityWorld.requestObserver(this, CharacterKillsComponent.class, DeathsComponent.class, CharacterAssistsComponent.class, CreepScoreComponent.class);
             if(hasComponentChanged(observer, scoreEntity, CharacterKillsComponent.class, DeathsComponent.class, CharacterAssistsComponent.class)){
                 update_KDA(entityWorld, playerIndex, scoreEntity);
             }

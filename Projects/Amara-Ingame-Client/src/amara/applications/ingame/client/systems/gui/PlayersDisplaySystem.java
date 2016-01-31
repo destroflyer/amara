@@ -22,10 +22,15 @@ public abstract class PlayersDisplaySystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         if(screenController_HUD.isVisible()){
+            preUpdate(entityWorld, deltaSeconds);
             for(int playerEntity : entityWorld.getEntitiesWithAll(PlayerIndexComponent.class)){
                 update(entityWorld, deltaSeconds, playerEntity);
             }
         }
+    }
+    
+    protected void preUpdate(EntityWorld entityWorld, float deltaSeconds){
+        
     }
     
     protected abstract void update(EntityWorld entityWorld, float deltaSeconds, int playerEntity);

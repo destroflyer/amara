@@ -114,7 +114,7 @@ public class Map_Testmap extends Map{
         testCamp.setComponent(new CampSpawnComponent());
         //Test Camp 2
         EntityWrapper forestMonsterBounty = entityWorld.getWrapped(entityWorld.createEntity());
-        forestMonsterBounty.setComponent(new BountyCreepScoreComponent());
+        forestMonsterBounty.setComponent(new BountyCharacterKillComponent());
         forestMonsterBounty.setComponent(new BountyGoldComponent(20));
         forestMonsterBounty.setComponent(new BountyExperienceComponent(200));
         EntityWrapper forestMonsterCamp = entityWorld.getWrapped(entityWorld.createEntity());

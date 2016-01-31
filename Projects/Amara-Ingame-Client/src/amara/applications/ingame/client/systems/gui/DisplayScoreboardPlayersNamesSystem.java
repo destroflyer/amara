@@ -18,11 +18,17 @@ public class DisplayScoreboardPlayersNamesSystem extends PlayersDisplaySystem{
     public DisplayScoreboardPlayersNamesSystem(ScreenController_HUD screenController_HUD){
         super(screenController_HUD);
     }
+    private ComponentMapObserver observer;
+
+    @Override
+    protected void preUpdate(EntityWorld entityWorld, float deltaSeconds){
+        super.preUpdate(entityWorld, deltaSeconds);
+        observer = entityWorld.requestObserver(this, NameComponent.class);
+    }
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int playerEntity){
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
-        ComponentMapObserver observer = entityWorld.requestObserver(this, NameComponent.class);
         check(playerIndex, observer.getNew().getComponent(playerEntity, NameComponent.class));
         check(playerIndex, observer.getChanged().getComponent(playerEntity, NameComponent.class));
     }

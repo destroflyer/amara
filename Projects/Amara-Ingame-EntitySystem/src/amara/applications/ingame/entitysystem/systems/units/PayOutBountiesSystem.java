@@ -34,30 +34,35 @@ public class PayOutBountiesSystem implements EntitySystem{
                 //CharacterKill
                 BountyCharacterKillComponent bountyCharacterKillScoreComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyCharacterKillComponent.class);
                 if(bountyCharacterKillScoreComponent != null){
-                    //Assists
-                    for(int i=0;i<(damageHistoryComponent.getEntries().length - 1);i++){
-                        int assistingEntity = damageHistoryComponent.getEntries()[i].getSourceEntity();
-                        ScoreComponent scoreComponent = entityWorld.getComponent(assistingEntity, ScoreComponent.class);
-                        if(scoreComponent != null){
-                            int scoreEntity = scoreComponent.getScoreEntity();
-                            int assists = 1;
-                            CharacterAssistsComponent characterAssistsComponent = entityWorld.getComponent(scoreEntity, CharacterAssistsComponent.class);
-                            if(characterAssistsComponent != null){
-                                assists += characterAssistsComponent.getAssists();
-                            }
-                            entityWorld.setComponent(scoreEntity, new CharacterAssistsComponent(assists));
-                        }
-                    }
                     //Kill
-                    ScoreComponent scoreComponent = entityWorld.getComponent(killerEntity, ScoreComponent.class);
-                    if(scoreComponent != null){
-                        int scoreEntity = scoreComponent.getScoreEntity();
+                    ScoreComponent killerScoreComponent = entityWorld.getComponent(killerEntity, ScoreComponent.class);
+                    if(killerScoreComponent != null){
+                        int scoreEntity = killerScoreComponent.getScoreEntity();
                         int kills = 1;
                         CharacterKillsComponent characterKillsComponent = entityWorld.getComponent(scoreEntity, CharacterKillsComponent.class);
                         if(characterKillsComponent != null){
                             kills += characterKillsComponent.getKills();
                         }
                         entityWorld.setComponent(scoreEntity, new CharacterKillsComponent(kills));
+                    }
+                    tmpRewardedEntities.clear();
+                    tmpRewardedEntities.add(killerEntity);
+                    //Assists
+                    for(int i=0;i<(damageHistoryComponent.getEntries().length - 1);i++){
+                        int assistingEntity = damageHistoryComponent.getEntries()[i].getSourceEntity();
+                        if(!tmpRewardedEntities.contains(assistingEntity)){
+                            ScoreComponent scoreComponent = entityWorld.getComponent(assistingEntity, ScoreComponent.class);
+                            if(scoreComponent != null){
+                                int scoreEntity = scoreComponent.getScoreEntity();
+                                int assists = 1;
+                                CharacterAssistsComponent characterAssistsComponent = entityWorld.getComponent(scoreEntity, CharacterAssistsComponent.class);
+                                if(characterAssistsComponent != null){
+                                    assists += characterAssistsComponent.getAssists();
+                                }
+                                entityWorld.setComponent(scoreEntity, new CharacterAssistsComponent(assists));
+                            }
+                            tmpRewardedEntities.add(assistingEntity);
+                        }
                     }
                 }
                 //CreepScore

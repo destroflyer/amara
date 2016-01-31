@@ -18,12 +18,18 @@ public class DisplayScoreboardInventoriesSystem extends PlayersDisplaySystem{
     public DisplayScoreboardInventoriesSystem(ScreenController_HUD screenController_HUD){
         super(screenController_HUD);
     }
+    private ComponentMapObserver observer;
+
+    @Override
+    protected void preUpdate(EntityWorld entityWorld, float deltaSeconds){
+        super.preUpdate(entityWorld, deltaSeconds);
+        observer = entityWorld.requestObserver(this, InventoryComponent.class);
+    }
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int playerEntity){
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
         int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-        ComponentMapObserver observer = entityWorld.requestObserver(this, InventoryComponent.class);
         if(hasComponentChanged(observer, selectedEntity, InventoryComponent.class)){
             update_Inventory(entityWorld, playerIndex, selectedEntity);
         }
