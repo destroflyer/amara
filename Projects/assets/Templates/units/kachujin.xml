@@ -65,6 +65,9 @@
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
+        <passives>
+            <entity template="spells/kachujin_passive/passive"/>
+        </passives>
         <learnableSpells>
             <entity template="spells/kachujin_mind_of_the_monk/base"/>
             <entity template="spells/kachujin_fling/base"/>

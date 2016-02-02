@@ -31,6 +31,7 @@ public class ScreenController_HUD extends GameScreenController{
     private int currentUpgradeSpellIndex = -1;
     private SpellInformation[] spellInformations_Passives = new SpellInformation[0];
     private SpellInformation[] spellInformations_Spells = new SpellInformation[0];
+    private SpellInformation[] spellInformations_MapSpells = new SpellInformation[0];
     //Show/Hide the information by saving the actions and checking them in an update loop
     //(Since NiftyGUI sometimes seems to be ordering start/end effect methods wrong)
     private SpellInformation action_ShowSpellInformation;
@@ -45,6 +46,9 @@ public class ScreenController_HUD extends GameScreenController{
         }
         for(int i=0;i<6;i++){
             hideItemCooldown(i);
+        }
+        for(int i=0;i<2;i++){
+            hideMapSpellCooldown(i);
         }
         setUpgradeSpellsLayerVisible(false);
         hideUpgradeSpell();
@@ -145,6 +149,18 @@ public class ScreenController_HUD extends GameScreenController{
         hideCooldown("inventory_item", index);
     }
     
+    public void setMapSpellImage(int index, String imagePath){
+        getImageRenderer("map_spell_" + index + "_image").setImage(createImage(imagePath));
+    }
+    
+    public void showMapSpellCooldown(int index, float remainingTime){
+        showCooldown("map_spell", index, remainingTime);
+    }
+    
+    public void hideMapSpellCooldown(int index){
+        hideCooldown("map_spell", index);
+    }
+    
     private void showCooldown(String prefix, int index, float remainingTime){
         getElementByID(prefix + "_" + index + "_cooldown").show();
         getTextRenderer(prefix + "_" + index + "_cooldown_time").setText("" + Util.round(remainingTime, 1));
@@ -227,6 +243,10 @@ public class ScreenController_HUD extends GameScreenController{
     public void setSpellInformations_Spells(SpellInformation[] spellInformations_Spells){
         this.spellInformations_Spells = spellInformations_Spells;
     }
+
+    public void setSpellInformations_MapSpells(SpellInformation[] spellInformations_MapSpells){
+        this.spellInformations_MapSpells = spellInformations_MapSpells;
+    }
     
     public void showSpellInformation_Passive(String indexText){
         int index = Integer.parseInt(indexText);
@@ -239,6 +259,13 @@ public class ScreenController_HUD extends GameScreenController{
         int index = Integer.parseInt(indexText);
         if(index < spellInformations_Spells.length){
             action_ShowSpellInformation = spellInformations_Spells[index];
+        }
+    }
+    
+    public void showSpellInformation_MapSpell(String indexText){
+        int index = Integer.parseInt(indexText);
+        if(index < spellInformations_MapSpells.length){
+            action_ShowSpellInformation = spellInformations_MapSpells[index];
         }
     }
     

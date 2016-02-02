@@ -28,14 +28,8 @@ public class DisplayPassivesImagesSystem extends GUIDisplaySystem{
     private void checkChangedPassives(EntityWorld entityWorld, PassivesComponent passivesComponent){
         if(passivesComponent != null){
             int[] passives = passivesComponent.getPassiveEntities();
-            String imagePath;
-            if((passives.length > 0) && (passives[0] != -1)){
-                imagePath = DisplaySpellsImagesSystem.getSpellImagePath(entityWorld, passives[0]);
-            }
-            else{
-                imagePath = (DisplaySpellsImagesSystem.DIRECTORY + "none.png");
-            }
-            screenController_HUD.setPassiveImage(imagePath);
+            String imageFilePath = DisplaySpellsImagesSystem.getSpellImageFilePath(entityWorld, passives, 0);
+            screenController_HUD.setPassiveImage(imageFilePath);
         }
     }
 }

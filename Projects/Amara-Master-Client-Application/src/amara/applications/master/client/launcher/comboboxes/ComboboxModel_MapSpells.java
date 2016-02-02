@@ -23,6 +23,7 @@ public class ComboboxModel_MapSpells extends SimpleComboboxModel<MapSpell, Image
     }
     private static final EntityWorld mapSpellsEntityWorld = new EntityWorld();
     private static final HashMap<String, ImageIcon> loadedIcons = new HashMap<String, ImageIcon>();
+    private static final int[] tmpSpellEntities = new int[1];
     
     @Override
     protected ImageIcon getItem(MapSpell mapSpell){
@@ -30,7 +31,8 @@ public class ComboboxModel_MapSpells extends SimpleComboboxModel<MapSpell, Image
         if(icon == null){
             int spellEntity = mapSpellsEntityWorld.createEntity();
             EntityTemplate.loadTemplate(mapSpellsEntityWorld, spellEntity, EntityTemplate.parseToOldTemplate(mapSpell.getEntityTemplate()));
-            String imageFilePath = DisplaySpellsImagesSystem.getSpellImagePath(mapSpellsEntityWorld, spellEntity);
+            tmpSpellEntities[0] = spellEntity;
+            String imageFilePath = DisplaySpellsImagesSystem.getSpellImageFilePath(mapSpellsEntityWorld, tmpSpellEntities, 0);
             icon = FileAssets.getImageIcon(imageFilePath, 48, 48);
             loadedIcons.put(mapSpell.getEntityTemplate(), icon);
         }

@@ -23,11 +23,13 @@ public class UpdateSpellInformationsSystem extends GUIDisplaySystem{
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
-        ComponentMapObserver observer = entityWorld.requestObserver(this, PassivesComponent.class, SpellsComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, PassivesComponent.class, SpellsComponent.class, MapSpellsComponent.class);
         checkChangedPassives(entityWorld, observer.getNew().getComponent(selectedEntity, PassivesComponent.class));
         checkChangedPassives(entityWorld, observer.getChanged().getComponent(selectedEntity, PassivesComponent.class));
         checkChangedSpells(entityWorld, observer.getNew().getComponent(selectedEntity, SpellsComponent.class));
-        checkChangedSpells(entityWorld, observer.getChanged().getComponent(selectedEntity, SpellsComponent.class));
+        checkChangedSpells(entityWorld, observer.getChanged().getComponent(selectedEntity, SpellsComponent.class));;
+        checkChangedMapSpells(entityWorld, observer.getNew().getComponent(selectedEntity, MapSpellsComponent.class));
+        checkChangedMapSpells(entityWorld, observer.getChanged().getComponent(selectedEntity, MapSpellsComponent.class));
         screenController_HUD.checkAction_SpellInformation();
     }
     
@@ -42,6 +44,13 @@ public class UpdateSpellInformationsSystem extends GUIDisplaySystem{
         if(spellsComponent != null){
             int[] spells = spellsComponent.getSpellsEntities();
             screenController_HUD.setSpellInformations_Spells(createSpellInformations(entityWorld, spells));
+        }
+    }
+    
+    private void checkChangedMapSpells(EntityWorld entityWorld, MapSpellsComponent mapSpellsComponent){
+        if(mapSpellsComponent != null){
+            int[] spells = mapSpellsComponent.getSpellsEntities();
+            screenController_HUD.setSpellInformations_MapSpells(createSpellInformations(entityWorld, spells));
         }
     }
     

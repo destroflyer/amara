@@ -1,10 +1,11 @@
 <template>
-    <value name="duration">2</value>
-    <value name="maximumStacks">8</value>
+    <value name="duration">4</value>
+    <value name="maximumStacks">5</value>
     <entity id="passive">
-        <description>Your basic attacks grant a stack (+12% attack speed), up to a maximum of [maximumStacks] stacks. The stacks will get removed after [duration] seconds of not attacking.</description>
+        <name>Weakpoint Study</name>
+        <description>Kachujin studies an enemies weakpoints while attacking them - Each of your autoattacks adds a stack (-6 armor), up to a maximum of [maximumStacks] stacks. The stacks will get removed after [duration] seconds of not attacking.</description>
         <passiveAddedEffectTriggers>
-            <!--add buff and spelleffect-->
+            <!--add spell effect-->
             <entity>
                 <casterTarget/>
                 <triggeredEffect>
@@ -14,7 +15,7 @@
                                 <castedEffectTriggers>
                                     <!--add buff-->
                                     <entity>
-                                        <casterTarget/>
+                                        <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <addBuff duration="[duration]">
@@ -27,7 +28,7 @@
                                                         </buffStacks>
                                                         <continuousAttributesPerStack>
                                                             <entity>
-                                                                <bonusPercentageAttackSpeed>0.12</bonusPercentageAttackSpeed>
+                                                                <bonusFlatArmor>-6</bonusFlatArmor>
                                                             </entity>
                                                         </continuousAttributesPerStack>
                                                         <onBuffRemoveEffectTriggers>

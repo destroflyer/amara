@@ -102,17 +102,17 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
                             break;
                         }
                     }
-                    if(keyCode == Settings.getInteger("controls_spells_backport")){
-                        castSpell(new SpellIndex(SpellIndex.SpellSet.MAP, 0));
-                        searchKey = false;
-                        break;
-                    }
                     for(int i=0;i<2;i++){
                         if(keyCode == Settings.getInteger("controls_spells_player_" + i)){
-                            castSpell(new SpellIndex(SpellIndex.SpellSet.MAP, (i + 1)));
+                            castSpell(new SpellIndex(SpellIndex.SpellSet.MAP, i));
                             searchKey = false;
                             break;
                         }
+                    }
+                    if(keyCode == Settings.getInteger("controls_spells_backport")){
+                        castSpell(new SpellIndex(SpellIndex.SpellSet.MAP, 2));
+                        searchKey = false;
+                        break;
                     }
                     if(searchKey){
                         for(int i=0;i<6;i++){
@@ -165,7 +165,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
             if(spellUpgradesComponent != null){
                 int[] upgradedSpellEntities = spellUpgradesComponent.getSpellsEntities();
                 for(int i=0;i<upgradedSpellEntities.length;i++){
-                    screenController_HUD.setSpellUpgradeImage(i, DisplaySpellsImagesSystem.getSpellImagePath(entityWorld, upgradedSpellEntities[i]));
+                    screenController_HUD.setSpellUpgradeImage(i, DisplaySpellsImagesSystem.getSpellImageFilePath(entityWorld, upgradedSpellEntities, i));
                 }
                 screenController_HUD.showUpgradeSpell(spellIndex);
             }

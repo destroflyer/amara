@@ -3,7 +3,7 @@
     <value name="markDuration">1</value>
     <entity id="spell">
         <name>Mind of the Monk</name>
-        <description>Shoots a (?) in a straight line - The first enemy hit is damaged and marked for [markDuration] seconds.</description>
+        <description>Shoots a focsued wave of air in a straight line - The first enemy hit is damaged and marked for [markDuration] second.</description>
         <spellVisualisation>kachujin_mind_of_the_monk</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn projectile-->

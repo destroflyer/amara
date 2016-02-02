@@ -178,7 +178,7 @@
                 <panel/>
                 <panel childLayout="horizontal" height="160px">
                     <panel width="*"/>
-                    <panel childLayout="vertical" width="575px">
+                    <panel childLayout="vertical" width="627px">
                         <panel height="35px"/>
                         <panel childLayout="horizontal" height="58px">
                             <panel width="113px"/>
@@ -237,14 +237,37 @@
                             <panel width="14px"/>
                             <panel childLayout="vertical" width="39px">
                                 <panel height="10px"/>
-                                <image filename="Interface/hud/spells/none.png" width="100%" height="100%w"></image>
+                                <panel childLayout="center" width="100%" height="100%w">
+                                    <image id="map_spell_0_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
+                                        <effect>
+                                            <onStartHover name="nop" onStartEffect="showSpellInformation_MapSpell(0)" onEndEffect="hideSpellInformation()"/>
+                                        </effect>
+                                    </image>
+                                    <panel id="map_spell_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                        <text id="map_spell_0_cooldown_time" text="???" font="Interface/fonts/Verdana_14.fnt"/>
+                                    </panel>
+                                </panel>
+                            </panel>
+                            <panel width="14px"/>
+                            <panel childLayout="vertical" width="39px">
+                                <panel height="10px"/>
+                                <panel childLayout="center" width="100%" height="100%w">
+                                    <image id="map_spell_1_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
+                                        <effect>
+                                            <onStartHover name="nop" onStartEffect="showSpellInformation_MapSpell(0)" onEndEffect="hideSpellInformation()"/>
+                                        </effect>
+                                    </image>
+                                    <panel id="map_spell_1_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                        <text id="map_spell_1_cooldown_time" text="???" font="Interface/fonts/Verdana_14.fnt"/>
+                                    </panel>
+                                </panel>
                             </panel>
                             <panel/>
                         </panel>
                         <panel height="16px"/>
                         <panel childLayout="horizontal">
                             <panel width="108px"/>
-                            <panel childLayout="vertical" width="360px" height="44px">
+                            <panel childLayout="vertical" width="413px" height="44px">
                                 <image filename="Interface/hud/resource_bar_background.png" width="100%" height="50%"/>
                                 <image filename="Interface/hud/resource_bar_background.png" width="100%" height="50%"/>
                             </panel>
@@ -261,11 +284,11 @@
                 <panel/>
                 <panel childLayout="horizontal" height="160px">
                     <panel width="*"/>
-                    <panel childLayout="vertical" width="575px">
+                    <panel childLayout="vertical" width="627px">
                         <panel height="109px"/>
                         <panel childLayout="horizontal">
                             <panel width="108px"/>
-                            <panel childLayout="vertical" width="360px" height="44px">
+                            <panel childLayout="vertical" width="413px" height="44px">
                                 <panel id="resource_bar_health" width="100%" height="50%" backgroundColor="#4DE633AA"/>
                                 <panel width="100%" height="50%" backgroundColor="#0099CCAA"/>
                             </panel>
@@ -282,7 +305,7 @@
                 <panel/>
                 <panel childLayout="horizontal" height="150px">
                     <panel width="*"/>
-                    <panel childLayout="horizontal" width="376px" backgroundColor="#000D">
+                    <panel childLayout="horizontal" width="429px" backgroundColor="#000D">
                         <panel width="8px"/>
                         <panel childLayout="vertical">
                             <panel height="8px"/>
@@ -308,7 +331,7 @@
                 <panel/>
                 <panel childLayout="horizontal" height="160px">
                     <panel width="*"/>
-                    <image filename="Interface/hud/center.png" width="575px" height="100%"></image>
+                    <image filename="Interface/hud/center_2.png" width="627px" height="100%"></image>
                     <panel width="*"/>
                 </panel>
             </panel>
@@ -318,7 +341,7 @@
                 <panel/>
                 <panel childLayout="horizontal" height="45px">
                     <panel width="*"/>
-                    <panel childLayout="horizontal" width="575px">
+                    <panel childLayout="horizontal" width="627px">
                         <panel width="158px"/>
                         <image filename="Interface/hud/upgrade_spells_container.png" width="262px" height="100%"></image>
                         <panel width="*"/>
@@ -333,7 +356,7 @@
                 <panel/>
                 <panel childLayout="horizontal" height="32px">
                     <panel width="*"/>
-                    <panel childLayout="horizontal" width="575px">
+                    <panel childLayout="horizontal" width="627px">
                         <panel width="183px"/>
                         <image id="upgrade_spells_button_0" filename="Interface/hud/learn_spell_button.png" width="32px" height="32px">
                             <interact onClick="learnOrUpgradeSpell(0)"/>

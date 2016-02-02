@@ -43,12 +43,12 @@ public class Map_Arama extends Map{
 
     public Map_Arama(){
         spells = new MapSpells[]{
-            new MapSpells("backport", new MapSpell("spells/backport/base(-1)")),
             new MapSpells(new String[]{"player_0", "player_1"},
                 new MapSpell("spells/battle_cry"),
                 new MapSpell("spells/empower"),
                 new MapSpell("spells/dragons_rage")
-            )
+            ),
+            new MapSpells("backport", new MapSpell("spells/backport/base(-1)"))
         };
     }
     private final float laneCenterY = 260.25f;
@@ -232,7 +232,7 @@ public class Map_Arama extends Map{
         int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
         int teamEntity = ((playerIndex % 2) + 1);
         entityWorld.setComponent(unitEntity, new TeamComponent(teamEntity));
-        spells[0].getMapSpells()[0] = new MapSpell("spells/backport/base(" + backportPositionEntities[teamEntity - 1] + ")");
+        spells[1].getMapSpells()[0] = new MapSpell("spells/backport/base(" + backportPositionEntities[teamEntity - 1] + ")");
         //Bounty
         EntityWrapper characterBounty = entityWorld.getWrapped(entityWorld.createEntity());
         characterBounty.setComponent(new BountyCharacterKillComponent());

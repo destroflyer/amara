@@ -18,7 +18,6 @@ public class DisplaySpellsImagesSystem extends GUIDisplaySystem{
     public DisplaySpellsImagesSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
     }
-    public static final String DIRECTORY = "Interface/hud/spells/";
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
@@ -30,29 +29,28 @@ public class DisplaySpellsImagesSystem extends GUIDisplaySystem{
     private void checkChangedSpells(EntityWorld entityWorld, SpellsComponent spellsComponent){
         if(spellsComponent != null){
             int[] spells = spellsComponent.getSpellsEntities();
-            String imagePath;
             for(int i=0;i<4;i++){
-                if((i < spells.length) && (spells[i] != -1)){
-                    imagePath = getSpellImagePath(entityWorld, spells[i]);
-                }
-                else{
-                    imagePath = (DIRECTORY + "none.png");
-                }
-                screenController_HUD.setSpellImage(i, imagePath);
-                
+                String imageFilePath = getSpellImageFilePath(entityWorld, spells, i);
+                screenController_HUD.setSpellImage(i, imageFilePath);
             }
         }
     }
     
-    public static String getSpellImagePath(EntityWorld entityWorld, int entity){
-        String fileName;
-        SpellVisualisationComponent spellVisualisationComponent = entityWorld.getComponent(entity, SpellVisualisationComponent.class);
-        if(spellVisualisationComponent != null){
-            fileName = (spellVisualisationComponent.getName() + ".png");
+    public static String getSpellImageFilePath(EntityWorld entityWorld, int[] spells, int spellIndex){
+        String filePath = "Interface/hud/spells/";
+        if((spellIndex < spells.length) && (spells[spellIndex] != -1)){
+            SpellVisualisationComponent spellVisualisationComponent = entityWorld.getComponent(spells[spellIndex], SpellVisualisationComponent.class);
+            if(spellVisualisationComponent != null){
+                filePath += spellVisualisationComponent.getName();
+            }
+            else{
+                filePath += "unknown";
+            }
         }
         else{
-            fileName = "unknown.png";
+            filePath += "none";
         }
-        return (DIRECTORY + fileName);
+        filePath += ".png";
+        return filePath;
     }
 }
