@@ -1848,6 +1848,19 @@ public class ComponentsRegistrator{
             }
         });
         //units
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent>("addGold"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent construct(){
+                int gold = 0;
+                String goldText = element.getText();
+                if((goldText != null) && (goldText.length() > 0)){
+                    gold = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, goldText));
+                }
+                return new amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent(gold);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent>("cancelAction"){
 

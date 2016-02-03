@@ -264,6 +264,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyReplaceSpellsWithExistingSpellsSystem());
         addEntitySystem(new ApplyReplaceSpellsWithNewSpellsSystem());
         addEntitySystem(new ApplyTriggerSpellEffectsSystem());
+        addEntitySystem(new ApplyAddGoldSystem());
         addEntitySystem(new ApplyCancelActionsSystem());
         addEntitySystem(new ApplyPlayAnimationsSystem());
         addEntitySystem(new ApplyStopAnimationsSystem());

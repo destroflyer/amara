@@ -25,6 +25,7 @@ import amara.applications.ingame.entitysystem.components.effects.movement.*;
 import amara.applications.ingame.entitysystem.components.effects.physics.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.effects.spells.*;
+import amara.applications.ingame.entitysystem.components.effects.units.*;
 import amara.applications.ingame.entitysystem.components.effects.visuals.*;
 import amara.applications.ingame.entitysystem.components.game.*;
 import amara.applications.ingame.entitysystem.components.input.*;
@@ -152,6 +153,9 @@ public class ClientComponentBlacklist{
             ReplaceSpellWithExistingSpellComponent.class,
             ReplaceSpellWithNewSpellComponent.class,
             TriggerSpellEffectsComponent.class,
+            //effects/units
+            CancelActionComponent.class,
+            AddGoldComponent.class,
             //effects/visuals
             PlayAnimationComponent.class,
             StopAnimationComponent.class,

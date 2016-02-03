@@ -1,0 +1,46 @@
+<template>
+    <entity id="spell">
+        <name>Blessing of Might</name>
+        <description>Increases your cooldown speed by 1000000% permanently and grants 1000000 gold.</description>
+        <spellVisualisation>blessing_of_might</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="-1">
+                            <entity>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageCooldownSpeed>1000000</bonusPercentageCooldownSpeed>
+                                    </entity>
+                                </continuousAttributes>
+                                <keepOnDeath/>
+                            </entity>
+                        </addBuff>
+                        <addGold>1000000</addGold>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

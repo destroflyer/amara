@@ -23,7 +23,7 @@ import amara.applications.ingame.entitysystem.components.units.bounties.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
 import amara.applications.ingame.entitysystem.systems.spells.SpellUtil;
-import amara.applications.ingame.shared.maps.Map;
+import amara.applications.ingame.shared.maps.*;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 import amara.libraries.physics.shapes.*;
@@ -35,7 +35,9 @@ import amara.libraries.physics.shapes.*;
 public class Map_Testmap extends Map{
 
     public Map_Testmap(){
-        
+        spells = new MapSpells[]{
+            new MapSpells("backport", new MapSpell("spells/blessing_of_might/base"))
+        };
     }
 
     @Override
