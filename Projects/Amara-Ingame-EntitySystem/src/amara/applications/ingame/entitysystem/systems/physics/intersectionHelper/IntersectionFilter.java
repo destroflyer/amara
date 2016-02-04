@@ -21,20 +21,19 @@ public class IntersectionFilter extends Filter<Hitbox>
         this.entityWorld = entityWorld;
     }
 
-    private boolean pass(Integer a, Integer b)
+    @Override
+    public boolean pass(Hitbox a, Hitbox b)
     {
-        CollisionGroupComponent filterCompA = entityWorld.getComponent(a, CollisionGroupComponent.class);
+        return (areCollisionGroupsMatching(entityWorld, a.getId(), b.getId()) && a.getShape().intersects(b.getShape()));
+    }
+
+    public static boolean areCollisionGroupsMatching(EntityWorld entityWorld, int entity1, int entity2)
+    {
+        CollisionGroupComponent filterCompA = entityWorld.getComponent(entity1, CollisionGroupComponent.class);
         if(filterCompA == null) return true;
-        CollisionGroupComponent filterCompB = entityWorld.getComponent(b, CollisionGroupComponent.class);
+        CollisionGroupComponent filterCompB = entityWorld.getComponent(entity2, CollisionGroupComponent.class);
         if(filterCompB == null) return true;
         return ((filterCompA.getCollisionGroups() & filterCompB.getCollidesWithGroups())
               | (filterCompB.getCollisionGroups() & filterCompA.getCollidesWithGroups())) != 0;
     }
-
-    @Override
-    public boolean pass(Hitbox a, Hitbox b)
-    {
-        return pass(a.getId(), b.getId()) && a.getShape().intersects(b.getShape());
-    }
-    
 }
