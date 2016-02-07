@@ -30,7 +30,7 @@
                             <entity>
                                 <continuousAttributes>
                                     <entity>
-                                        <bonusPercentageCooldownSpeed>1000000</bonusPercentageCooldownSpeed>
+                                        <bonusPercentageCooldownSpeed>10000</bonusPercentageCooldownSpeed>
                                     </entity>
                                 </continuousAttributes>
                                 <keepOnDeath/>

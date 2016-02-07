@@ -186,7 +186,8 @@
                                 <panel height="5px"/>
                                 <image id="passive_image" filename="Interface/hud/spells/none.png" width="100%" height="100%w" visibleToMouse="true">
                                     <effect>
-                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Passive(0)" onEndEffect="hideSpellInformation()"/>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Passive(0)"/>
+                                        <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
                                     </effect>
                                 </image>
                             </panel>
@@ -194,7 +195,8 @@
                             <panel childLayout="center" width="58px" height="100%w">
                                 <image id="spell_0_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
                                     <effect>
-                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(0)" onEndEffect="hideSpellInformation()"/>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(0)"/>
+                                        <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
                                     </effect>
                                 </image>
                                 <panel id="spell_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
@@ -205,7 +207,8 @@
                             <panel childLayout="center" width="58px" height="100%w">
                                 <image id="spell_1_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
                                     <effect>
-                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(1)" onEndEffect="hideSpellInformation()"/>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(1)"/>
+                                        <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
                                     </effect>
                                 </image>
                                 <panel id="spell_1_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
@@ -216,7 +219,8 @@
                             <panel childLayout="center" width="58px" height="100%w">
                                 <image id="spell_2_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
                                     <effect>
-                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(2)" onEndEffect="hideSpellInformation()"/>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(2)"/>
+                                        <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
                                     </effect>
                                 </image>
                                 <panel id="spell_2_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
@@ -227,7 +231,8 @@
                             <panel childLayout="center" width="58px" height="100%w">
                                 <image id="spell_3_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
                                     <effect>
-                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(3)" onEndEffect="hideSpellInformation()"/>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(3)"/>
+                                        <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
                                     </effect>
                                 </image>
                                 <panel id="spell_3_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
@@ -240,7 +245,8 @@
                                 <panel childLayout="center" width="100%" height="100%w">
                                     <image id="map_spell_0_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
                                         <effect>
-                                            <onStartHover name="nop" onStartEffect="showSpellInformation_MapSpell(0)" onEndEffect="hideSpellInformation()"/>
+                                            <onStartHover name="nop" onStartEffect="showSpellInformation_MapSpell(0)"/>
+                                            <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
                                         </effect>
                                     </image>
                                     <panel id="map_spell_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
@@ -254,7 +260,8 @@
                                 <panel childLayout="center" width="100%" height="100%w">
                                     <image id="map_spell_1_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
                                         <effect>
-                                            <onStartHover name="nop" onStartEffect="showSpellInformation_MapSpell(0)" onEndEffect="hideSpellInformation()"/>
+                                            <onStartHover name="nop" onStartEffect="showSpellInformation_MapSpell(1)"/>
+                                            <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
                                         </effect>
                                     </image>
                                     <panel id="map_spell_1_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">

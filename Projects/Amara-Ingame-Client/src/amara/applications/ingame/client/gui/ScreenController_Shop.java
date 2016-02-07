@@ -63,6 +63,7 @@ public class ScreenController_Shop extends GameScreenController{
     private EntityWrapper[] shopItems;
     private EntityWrapper[] shopItems_Special;
     private HashMap<String, ItemRecipe> itemsRecipes = new HashMap<String, ItemRecipe>();
+    private int shopPageID;
     private String shopItemFilterText = "";
     private boolean[] shopItemFilters = new boolean[7];
     private boolean isUpdatingShopItemFilters;
@@ -190,10 +191,11 @@ public class ScreenController_Shop extends GameScreenController{
     
     private void updateShopAvailableItems(){
         Element shopContainer = getElementByID("shop_container");
-        Element itemsScrollPanel = getElementByID("shop_available_items");
+        Element itemsScrollPanel = getElementByID("shop_available_items_" + shopPageID);
         if(itemsScrollPanel != null){
             itemsScrollPanel.markForRemoval();
         }
+        shopPageID++;
         shopFilteredItems.clear();
         String itemFilterTextLowerCase = shopItemFilterText.toLowerCase();
         for(int i=0;i<shopItems.length;i++){
@@ -220,7 +222,7 @@ public class ScreenController_Shop extends GameScreenController{
                 shopFilteredItems.add(shopItem_Special);
             }
         }
-        new ScrollPanelBuilder("shop_available_items"){{
+        new ScrollPanelBuilder("shop_available_items_" + shopPageID){{
             set("height", "100%");
             set("horizontal", "false");
             set("style", "nifty-listbox");
@@ -250,7 +252,7 @@ public class ScreenController_Shop extends GameScreenController{
                                 childLayoutVertical();
                                 width("55px");
 
-                                image(new ImageBuilder("shop_item_" + itemIndex){{
+                                image(new ImageBuilder("shop_item_" + shopPageID + "_" + itemIndex){{
                                     filename("Interface/hud/items/" + itemID + ".png");
                                     width("45px");
                                     height("45px");

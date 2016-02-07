@@ -3,7 +3,7 @@
     <useStyles filename="nifty-default-styles.xml"/>
     <useControls filename="nifty-default-controls.xml"/>
     <screen id="start" controller="amara.applications.ingame.client.gui.ScreenController_Chat">
-        <layer id="character" childLayout="center">
+        <layer childLayout="center">
             <panel childLayout="horizontal">
                 <panel width="25px"/>
                 <panel childLayout="vertical" width="400px">

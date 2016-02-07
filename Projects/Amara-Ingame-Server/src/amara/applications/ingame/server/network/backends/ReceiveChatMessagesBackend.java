@@ -67,11 +67,11 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                                 int cinematicIndex = Integer.parseInt(message.getText().substring(11));
                                 switch(cinematicIndex){
                                     case 0:
-                                        entityWorld.setComponent(Game.ENTITY, new CinematicComponent("amara.game.maps.TestMap_TestCinematic"));
+                                        entityWorld.setComponent(Game.ENTITY, new CinematicComponent("amara.applications.ingame.maps.TestMap_TestCinematic"));
                                         break;
 
                                     case 1:
-                                        entityWorld.setComponent(Game.ENTITY, new CinematicComponent("amara.game.maps.Map_Destroforest_CinematicIntro"));
+                                        entityWorld.setComponent(Game.ENTITY, new CinematicComponent("amara.applications.ingame.maps.Map_Destroforest_CinematicIntro"));
                                         break;
                                 }
                             }catch(NumberFormatException ex){

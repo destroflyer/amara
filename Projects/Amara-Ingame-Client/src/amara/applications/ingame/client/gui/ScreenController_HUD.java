@@ -36,6 +36,7 @@ public class ScreenController_HUD extends GameScreenController{
     //(Since NiftyGUI sometimes seems to be ordering start/end effect methods wrong)
     private SpellInformation action_ShowSpellInformation;
     private boolean action_HideSpellInformation;
+    private int deathRecapPageID;
     
     @Override
     public void onStartup(){
@@ -197,20 +198,21 @@ public class ScreenController_HUD extends GameScreenController{
     }
     
     public void toggleDisplayDeathRecap(){
-        setDeathRecapVisible(!getElementByID("death_recap").isVisible());
+        setDeathRecapVisible(!getElementByID("death_recap_" + deathRecapPageID).isVisible());
     }
     
     public void setDeathRecapVisible(boolean isVisible){
-        getElementByID("death_recap").setVisible(isVisible);
+        getElementByID("death_recap_" + deathRecapPageID).setVisible(isVisible);
     }
     
     public void setDeathRecapText(final String text){
-        Element deathRecapScrollPanel = getElementByID("death_recap");
+        Element deathRecapScrollPanel = getElementByID("death_recap_" + deathRecapPageID);
         if(deathRecapScrollPanel != null){
             deathRecapScrollPanel.markForRemoval();
         }
+        deathRecapPageID++;
         Element deathRecapContainer = getElementByID("death_recap_container");
-        new ScrollPanelBuilder("death_recap"){{
+        new ScrollPanelBuilder("death_recap_" + deathRecapPageID){{
             set("width", "100%");
             set("height", "250px");
             set("horizontal", "false");

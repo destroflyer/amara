@@ -34,7 +34,7 @@ public class ScreenController_Menu extends GameScreenController{
     private IngameSettings ingameSettings = new IngameSettings();
     private int pageID;
     private int currentCategoryIndex = -1;
-    private HashMap<String, String[]> builtDropDownSettings = new HashMap<String, String[]>();
+    private HashMap<String, String[]> builtSettings_DropDown = new HashMap<String, String[]>();
     private HashMap<String, String> editedSettings = new HashMap<String, String>();
     private String currentEditingSettingKey;
     private boolean isReadingKeyInput;
@@ -42,8 +42,13 @@ public class ScreenController_Menu extends GameScreenController{
     @Override
     public void onStartup(){
         super.onStartup();
-        generateMenuNavigation();
         selectCategory(0);
+    }
+
+    @Override
+    protected void initialize(){
+        super.initialize();
+        generateMenuNavigation();
     }
     
     private void generateMenuNavigation(){
@@ -124,15 +129,15 @@ public class ScreenController_Menu extends GameScreenController{
     
     public void selectCategory(int index){
         if(currentCategoryIndex != -1){
-            getElementByID("menu_content_" + currentCategoryIndex).markForRemoval();
+            getElementByID("menu_content_" + pageID + "_" + currentCategoryIndex).markForRemoval();
         }
         pageID++;
         currentCategoryIndex = index;
         Element menuContainer = getElementByID("menu_container");
-        builtDropDownSettings.clear();
+        builtSettings_DropDown.clear();
         generateMenuContentBuilder(currentCategoryIndex).build(nifty, nifty.getCurrentScreen(), menuContainer);
-        for(String settingKey : builtDropDownSettings.keySet()){
-            String[] items = builtDropDownSettings.get(settingKey);
+        for(String settingKey : builtSettings_DropDown.keySet()){
+            String[] items = builtSettings_DropDown.get(settingKey);
             //Retrieve this before adding the items since the event listener updates the editedSettings hashmap
             int mouseButtonIndex = Settings.toInteger(getSettingValue(settingKey));
             DropDown dropDown = getDropDown(pageID + "_" + settingKey);
@@ -145,7 +150,7 @@ public class ScreenController_Menu extends GameScreenController{
     
     private ScrollPanelBuilder generateMenuContentBuilder(int categoryIndex){
         final SettingsCategory settingsCategory = ingameSettings.getSubCategories()[categoryIndex];
-        return new ScrollPanelBuilder("menu_content_" + categoryIndex){{
+        return new ScrollPanelBuilder("menu_content_" + pageID + "_" + categoryIndex){{
             set("width", "433px");
             set("height", "100%");
             set("horizontal", "false");
@@ -232,7 +237,7 @@ public class ScreenController_Menu extends GameScreenController{
                                 for(int i=0;i<items.length;i++){
                                     items[i] = getMouseButtonTitle(MouseClickEvent.Button.values()[i]);
                                 }
-                                builtDropDownSettings.put(settingKey, items);
+                                builtSettings_DropDown.put(settingKey, items);
                             }
                         }});
                     }

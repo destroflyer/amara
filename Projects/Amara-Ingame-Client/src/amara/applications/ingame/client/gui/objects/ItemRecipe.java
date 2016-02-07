@@ -101,7 +101,7 @@ public class ItemRecipe{
         BonusPercentageCooldownSpeedComponent bonusPercentageCooldownSpeedComponent = entityWorld.getComponent(entity, BonusPercentageCooldownSpeedComponent.class);
         if(bonusPercentageCooldownSpeedComponent != null){
             addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusPercentageCooldownSpeedComponent.getValue()) + " Cooldown Speed";
+            description += GUIUtil.getValueText_Signed(bonusPercentageCooldownSpeedComponent.getValue() * 100) + "% Cooldown Speed";
         }
         BonusFlatArmorComponent bonusFlatArmorComponent = entityWorld.getComponent(entity, BonusFlatArmorComponent.class);
         if(bonusFlatArmorComponent != null){
