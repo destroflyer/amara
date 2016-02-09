@@ -27,6 +27,7 @@ public class AttributeBonus{
     private float percentageCriticalChance = 0;
     private float percentageLifesteal = 0;
     private float percentageDamageReduction = 0;
+    private float flatGoldPerSecond = 0;
 
     public void addFlatMaximumHealth(float value){
         flatMaximumHealth += value;
@@ -138,5 +139,13 @@ public class AttributeBonus{
 
     public float getPercentageDamageReduction(){
         return percentageDamageReduction;
+    }
+    
+    public void addFlatGoldPerSecond(float value){
+        flatGoldPerSecond += value;
+    }
+
+    public float getFlatGoldPerSecond(){
+        return flatGoldPerSecond;
     }
 }

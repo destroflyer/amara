@@ -17,12 +17,12 @@ public class IsSellableComponent{
         
     }
 
-    public IsSellableComponent(int gold){
+    public IsSellableComponent(float gold){
         this.gold = gold;
     }
-    private int gold;
+    private float gold;
 
-    public int getGold(){
+    public float getGold(){
         return gold;
     }
 }

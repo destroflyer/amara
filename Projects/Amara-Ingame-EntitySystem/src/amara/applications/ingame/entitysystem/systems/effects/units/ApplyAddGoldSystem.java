@@ -22,7 +22,7 @@ public class ApplyAddGoldSystem implements EntitySystem{
             int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             GoldComponent goldComponent = entityWorld.getComponent(targetID, GoldComponent.class);
             if(goldComponent != null){
-                int bonusGold = entityWrapper.getComponent(AddGoldComponent.class).getGold();
+                float bonusGold = entityWrapper.getComponent(AddGoldComponent.class).getGold();
                 entityWorld.setComponent(targetID, new GoldComponent(goldComponent.getGold() + bonusGold));
             }
         }

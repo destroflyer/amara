@@ -161,6 +161,24 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackSpeedComponent(value);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent>("bonusFlatGoldPerSecond"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent(value);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
@@ -393,6 +411,24 @@ public class ComponentsRegistrator{
                     value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.DamageReductionComponent(value);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent>("goldPerSecond"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent(value);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.HealthComponent.class);
@@ -1853,10 +1889,10 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent construct(){
-                int gold = 0;
+                float gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, goldText));
+                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent(gold);
             }
@@ -1993,10 +2029,10 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.applications.ingame.entitysystem.components.items.IsSellableComponent construct(){
-                int gold = 0;
+                float gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, goldText));
+                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
                 }
                 return new amara.applications.ingame.entitysystem.components.items.IsSellableComponent(gold);
             }
@@ -2043,10 +2079,10 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent construct(){
-                int gold = 0;
+                float gold = 0;
                 String goldText = element.getAttributeValue("gold");
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, goldText));
+                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
                 }
                 String[] itemIDs = new String[0];
                 String itemIDsText = element.getAttributeValue("itemIDs");
@@ -3174,10 +3210,10 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent construct(){
-                int gold = 0;
+                float gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, goldText));
+                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent(gold);
             }
@@ -3710,10 +3746,10 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.applications.ingame.entitysystem.components.units.GoldComponent construct(){
-                int gold = 0;
+                float gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, goldText));
+                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.GoldComponent(gold);
             }

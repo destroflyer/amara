@@ -355,7 +355,7 @@ public class ScreenController_Shop extends GameScreenController{
         if(itemRecipe.getResolvedGold() != itemRecipe.getTotalGold()){
             text += "\\#00CE00#";
         }
-        text += itemRecipe.getResolvedGold();
+        text += GUIUtil.getValueText(itemRecipe.getResolvedGold());
         return text;
     }
     

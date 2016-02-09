@@ -29,6 +29,7 @@ import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
+import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
 import amara.applications.ingame.shared.games.Game;
 import amara.applications.ingame.shared.maps.*;
 import amara.libraries.entitysystem.*;
@@ -238,6 +239,13 @@ public class Map_Arama extends Map{
         characterBounty.setComponent(new BountyCharacterKillComponent());
         characterBounty.setComponent(new BountyGoldComponent(300));
         entityWorld.setComponent(unitEntity, new BountyComponent(characterBounty.getId()));
+        //GoldPerTime
+        /*int buffEntity = entityWorld.createEntity();
+        int buffAttributesEntity = entityWorld.createEntity();
+        entityWorld.setComponent(buffAttributesEntity, new BonusFlatGoldPerSecondComponent(2.4f));
+        entityWorld.setComponent(buffEntity, new ContinuousAttributesComponent(buffAttributesEntity));
+        entityWorld.setComponent(buffEntity, new KeepOnDeathComponent());
+        ApplyAddBuffsSystem.addBuff(entityWorld, unitEntity, buffEntity);*/
     }
 
     @Override

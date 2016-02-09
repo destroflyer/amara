@@ -17,14 +17,14 @@ public class ItemRecipeComponent{
         
     }
 
-    public ItemRecipeComponent(int gold, String... itemIDs){
+    public ItemRecipeComponent(float gold, String... itemIDs){
         this.gold = gold;
         this.itemIDs = itemIDs;
     }
-    private int gold;
+    private float gold;
     private String[] itemIDs;
 
-    public int getGold(){
+    public float getGold(){
         return gold;
     }
 

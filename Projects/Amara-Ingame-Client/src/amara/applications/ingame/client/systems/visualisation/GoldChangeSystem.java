@@ -6,6 +6,7 @@ package amara.applications.ingame.client.systems.visualisation;
 
 import java.util.HashMap;
 import com.jme3.math.ColorRGBA;
+import amara.applications.ingame.client.gui.GUIUtil;
 import amara.applications.ingame.entitysystem.components.units.GoldComponent;
 import amara.libraries.entitysystem.*;
 
@@ -19,7 +20,7 @@ public class GoldChangeSystem extends EntityTextNotificationSystem{
         super(hudAttachmentsSystem, entityHeightMap);
         hudOffset.set(0, 16, 0);
     }
-    private HashMap<Integer, Integer> cachedGold = new HashMap<Integer, Integer>();
+    private HashMap<Integer, Float> cachedGold = new HashMap<Integer, Float>();
     private final ColorRGBA color = new ColorRGBA(1, 1, 0, 1);
 
     @Override
@@ -32,18 +33,18 @@ public class GoldChangeSystem extends EntityTextNotificationSystem{
             onGoldChange(entityWorld, entity, entityWorld.getComponent(entity, GoldComponent.class).getGold());
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll()){
-            cachedGold.put(entity, 0);
+            cachedGold.put(entity, 0f);
         }
     }
     
-    private void onGoldChange(EntityWorld entityWorld, int entity, int currentGold){
-        Integer oldGold = cachedGold.get(entity);
+    private void onGoldChange(EntityWorld entityWorld, int entity, float currentGold){
+        Float oldGold = cachedGold.get(entity);
         if(oldGold == null){
-            oldGold = 0;
+            oldGold = 0f;
         }
-        int change = (currentGold - oldGold);
+        float change = (currentGold - oldGold);
         if(change != 0){
-            displayTextNotification(entityWorld, entity, ((change > 0)?"+":"") + change + " g", color);
+            displayTextNotification(entityWorld, entity, GUIUtil.getValueText_Signed(change) + " g", color);
         }
         cachedGold.put(entity, currentGold);
     }

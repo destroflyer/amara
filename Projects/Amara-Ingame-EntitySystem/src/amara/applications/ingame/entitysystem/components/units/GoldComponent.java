@@ -17,12 +17,12 @@ public class GoldComponent{
         
     }
     
-    public GoldComponent(int gold){
+    public GoldComponent(float gold){
         this.gold = gold;
     }
-    private int gold;
+    private float gold;
 
-    public int getGold(){
+    public float getGold(){
         return gold;
     }
 }

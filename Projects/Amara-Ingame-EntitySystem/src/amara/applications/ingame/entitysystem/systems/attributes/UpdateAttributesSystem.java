@@ -87,6 +87,7 @@ public class UpdateAttributesSystem implements EntitySystem{
             float criticalChance = attributeBonus.getPercentageCriticalChance();
             float lifesteal = attributeBonus.getPercentageLifesteal();
             float damageReduction = Math.min(attributeBonus.getPercentageDamageReduction(), 1);
+            float goldPerSecond = attributeBonus.getFlatGoldPerSecond();
             HealthComponent oldHealthComponent = entityWrapper.getComponent(HealthComponent.class);
             if(oldHealthComponent != null){
                 MaximumHealthComponent oldMaximumHealthComponent = entityWrapper.getComponent(MaximumHealthComponent.class);
@@ -140,6 +141,7 @@ public class UpdateAttributesSystem implements EntitySystem{
             entityWrapper.setComponent(new CriticalChanceComponent(criticalChance));
             entityWrapper.setComponent(new LifestealComponent(lifesteal));
             entityWrapper.setComponent(new DamageReductionComponent(damageReduction));
+            entityWrapper.setComponent(new GoldPerSecondComponent(goldPerSecond));
             entityWrapper.removeComponent(RequestUpdateAttributesComponent.class);
         }
     }
@@ -201,6 +203,10 @@ public class UpdateAttributesSystem implements EntitySystem{
         BonusPercentageDamageReductionComponent bonusPercentageDamageReductionComponent = bonusEntityWrapper.getComponent(BonusPercentageDamageReductionComponent.class);
         if(bonusPercentageDamageReductionComponent != null){
             attributeBonus.addPercentageDamageReduction(bonusPercentageDamageReductionComponent.getValue());
+        }
+        BonusFlatGoldPerSecondComponent bonusFlatGoldPerSecondComponent = bonusEntityWrapper.getComponent(BonusFlatGoldPerSecondComponent.class);
+        if(bonusFlatGoldPerSecondComponent != null){
+            attributeBonus.addFlatGoldPerSecond(bonusFlatGoldPerSecondComponent.getValue());
         }
     }
 }

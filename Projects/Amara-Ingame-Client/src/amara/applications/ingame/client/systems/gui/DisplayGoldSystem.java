@@ -20,7 +20,7 @@ public class DisplayGoldSystem extends GUIDisplaySystem{
     
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
-        int gold = 0;
+        float gold = 0;
         GoldComponent goldComponent = entityWorld.getComponent(selectedEntity, GoldComponent.class);
         if(goldComponent != null){
             gold = goldComponent.getGold();

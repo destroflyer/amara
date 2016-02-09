@@ -17,7 +17,7 @@ import amara.libraries.entitysystem.EntityWorld;
  */
 public class ItemRecipe{
 
-    public ItemRecipe(EntityWorld entityWorld, int entity, int gold, ItemRecipe[] ingredientsRecipes, int depth){
+    public ItemRecipe(EntityWorld entityWorld, int entity, float gold, ItemRecipe[] ingredientsRecipes, int depth){
         this.entityWorld = entityWorld;
         this.entity = entity;
         this.gold = gold;
@@ -28,18 +28,18 @@ public class ItemRecipe{
     }
     private EntityWorld entityWorld;
     private int entity;
-    private int gold;
+    private float gold;
     private ItemRecipe[] ingredientsRecipes;
     private int depth;
     private String description;
-    private int totalGold;
-    private int resolvedGold = -1;
+    private float totalGold;
+    private float resolvedGold = -1;
 
     public int getEntity(){
         return entity;
     }
 
-    public int getGold(){
+    public float getGold(){
         return gold;
     }
 
@@ -166,7 +166,7 @@ public class ItemRecipe{
         }
     }
 
-    public int getTotalGold(){
+    public float getTotalGold(){
         return totalGold;
     }
     
@@ -174,8 +174,8 @@ public class ItemRecipe{
         resolvedGold = resolveGold(inventoryItemsRecipes, new boolean[inventoryItemsRecipes.length]);
     }
     
-    private int resolveGold(ItemRecipe[] inventoryItemsRecipes, boolean[] usedInventoryIngredients){
-        int neededGold = gold;
+    private float resolveGold(ItemRecipe[] inventoryItemsRecipes, boolean[] usedInventoryIngredients){
+        float neededGold = gold;
         for(ItemRecipe ingredientRecipe : ingredientsRecipes){
             boolean ingrendientHasToBeBought = true;
             for(int r=0;r<inventoryItemsRecipes.length;r++){
@@ -192,7 +192,7 @@ public class ItemRecipe{
         return neededGold;
     }
 
-    public int getResolvedGold(){
+    public float getResolvedGold(){
         return resolvedGold;
     }
 }

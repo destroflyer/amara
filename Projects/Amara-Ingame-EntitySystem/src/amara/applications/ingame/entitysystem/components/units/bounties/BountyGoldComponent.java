@@ -17,12 +17,12 @@ public class BountyGoldComponent{
         
     }
     
-    public BountyGoldComponent(int gold){
+    public BountyGoldComponent(float gold){
         this.gold = gold;
     }
-    private int gold;
+    private float gold;
 
-    public int getGold(){
+    public float getGold(){
         return gold;
     }
 }
