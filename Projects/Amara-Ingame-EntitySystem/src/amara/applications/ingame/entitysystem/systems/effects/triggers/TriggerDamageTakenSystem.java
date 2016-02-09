@@ -34,18 +34,22 @@ public class TriggerDamageTakenSystem implements EntitySystem{
                         }
                         EntityWrapper effectCast = EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, castSourceEntity);
                         if(effectCast != null){
-                            Values values = new Values();
+                            float physicalDamage = 0;
+                            float magicDamage = 0;
                             float totalDamage = 0;
                             ResultingPhysicalDamageComponent resultingPhysicalDamageComponent = entityWorld.getComponent(effectImpactEntity, ResultingPhysicalDamageComponent.class);
                             if(resultingPhysicalDamageComponent != null){
-                                values.setVariable("physicalDamage", new NumericValue(resultingPhysicalDamageComponent.getValue()));
-                                totalDamage += resultingPhysicalDamageComponent.getValue();
+                                physicalDamage = resultingPhysicalDamageComponent.getValue();
+                                totalDamage += physicalDamage;
                             }
                             ResultingMagicDamageComponent resultingMagicDamageComponent = entityWorld.getComponent(effectImpactEntity, ResultingMagicDamageComponent.class);
                             if(resultingMagicDamageComponent != null){
-                                values.setVariable("magicDamage", new NumericValue(resultingMagicDamageComponent.getValue()));
-                                totalDamage += resultingMagicDamageComponent.getValue();
+                                magicDamage = resultingMagicDamageComponent.getValue();
+                                totalDamage += magicDamage;
                             }
+                            Values values = new Values();
+                            values.setVariable("physicalDamage", new NumericValue(physicalDamage));
+                            values.setVariable("magicDamage", new NumericValue(magicDamage));
                             values.setVariable("totalDamage", new NumericValue(totalDamage));
                             effectCast.setComponent(new CustomEffectValuesComponent(values));
                         }
