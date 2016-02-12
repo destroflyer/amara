@@ -1,5 +1,7 @@
 <template>
     <entity id="passive">
+        <unique/>
+        <name>Reflection</name>
         <description>Reflects 15% of the physical damage taken (+20% armor) back to its source as magic damage.</description>
         <passiveAddedEffectTriggers>
             <!--add trigger-->

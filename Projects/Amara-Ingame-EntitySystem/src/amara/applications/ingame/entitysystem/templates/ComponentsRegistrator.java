@@ -1988,6 +1988,15 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.general.NameComponent(name);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.general.UniqueComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.general.UniqueComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.UniqueComponent>("unique"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.general.UniqueComponent construct(){
+                String id = xmlTemplateManager.parseValue(entityWorld, element.getText());
+                return new amara.applications.ingame.entitysystem.components.general.UniqueComponent(id);
+            }
+        });
         //input
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.input.CastSpellComponent.class);
         try{
@@ -3438,6 +3447,20 @@ public class ComponentsRegistrator{
             public amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent construct(){
                 int[] effectCastEntities = createChildEntities(0, "effectCastEntities");
                 return new amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent(effectCastEntities);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent.class.getDeclaredField("passiveEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent>("currentPassives"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent construct(){
+                int[] passiveEntities = createChildEntities(0, "passiveEntities");
+                return new amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent(passiveEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.DamageHistoryComponent.class);

@@ -42,7 +42,8 @@ public class GoldChangeSystem extends EntityTextNotificationSystem{
         if(oldGold == null){
             oldGold = 0f;
         }
-        float change = (currentGold - oldGold);
+        //Don't judge me...
+        int change = Math.round(currentGold - oldGold);
         if(change != 0){
             displayTextNotification(entityWorld, entity, GUIUtil.getValueText_Signed(change) + " g", color);
         }

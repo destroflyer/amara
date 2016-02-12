@@ -1,5 +1,7 @@
 <template>
     <entity id="passive">
+        <unique/>
+        <name>Sunfire</name>
         <description>Deals 40 magic damage per second to nearby enemies.</description>
         <passiveAddedEffectTriggers>
             <!--add spelleffect-->

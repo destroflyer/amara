@@ -27,8 +27,7 @@ public class EntitySystemDisplayAppState<T extends DisplayApplication> extends B
     @Override
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
-        for(int i=0;i<entitySystems.size();i++){
-            EntitySystem entitySystem = entitySystems.get(i);
+        for(EntitySystem entitySystem : entitySystems){
             entitySystem.update(entityWorld, lastTimePerFrame);
         }
     }

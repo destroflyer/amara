@@ -28,7 +28,7 @@ public class TriggerItemPassivesSystem implements EntitySystem{
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll(InventoryComponent.class)){
             for(int itemEntity : observer.getRemoved().getComponent(entity, InventoryComponent.class).getItemEntities()){
-                onItemRemoved(entityWorld, itemEntity);
+                onItemRemoved(entityWorld, entity, itemEntity);
             }
         }
     }
@@ -48,7 +48,7 @@ public class TriggerItemPassivesSystem implements EntitySystem{
                 }
             }
             if(wasItemAdded){
-                onItemAdded(entityWorld, newItemEntity);
+                onItemAdded(entityWorld, entity, newItemEntity);
             }
         }
         if(oldItemEntities != null){
@@ -62,24 +62,24 @@ public class TriggerItemPassivesSystem implements EntitySystem{
                     }
                 }
                 if(wasItemRemoved){
-                    onItemRemoved(entityWorld, oldItemEntity);
+                    onItemRemoved(entityWorld, entity, oldItemEntity);
                 }
             }
         }
         cachedItems.put(entity, newItemEntities);
     }
     
-    private void onItemAdded(EntityWorld entityWorld, int itemEntity){
+    private void onItemAdded(EntityWorld entityWorld, int targetEntity, int itemEntity){
         ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(itemEntity, ItemPassivesComponent.class);
         if(itemPassivesComponent != null){
-            PassiveUtil.addPassives(entityWorld, itemPassivesComponent.getPassiveEntities());
+            PassiveUtil.addPassives(entityWorld, targetEntity, itemPassivesComponent.getPassiveEntities());
         }
     }
     
-    private void onItemRemoved(EntityWorld entityWorld, int itemEntity){
+    private void onItemRemoved(EntityWorld entityWorld, int targetEntity, int itemEntity){
         ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(itemEntity, ItemPassivesComponent.class);
         if(itemPassivesComponent != null){
-            PassiveUtil.removePassives(entityWorld, itemPassivesComponent.getPassiveEntities());
+            PassiveUtil.removePassives(entityWorld, targetEntity, itemPassivesComponent.getPassiveEntities());
         }
     }
 }

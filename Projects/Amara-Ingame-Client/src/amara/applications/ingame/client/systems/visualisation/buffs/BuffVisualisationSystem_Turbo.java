@@ -47,6 +47,8 @@ public class BuffVisualisationSystem_Turbo extends BuffVisualisationSystem{
         particleEmitter.setQueueBucket(RenderQueue.Bucket.Opaque);
         particleEmitter.getMaterial().getAdditionalRenderState().setDepthTest(false);
         particleEmitter.setUserData("layer", 1);
+        //[jME 3.1 Master] Can somehow throw a multithreading error otherwise
+        particleEmitter.updateLogicalState(10);
         return particleEmitter;
     }
 }

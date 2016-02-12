@@ -120,21 +120,38 @@ public class ItemRecipe{
         }
         ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(entity, ItemPassivesComponent.class);
         if(itemPassivesComponent != null){
-            for(int itemPassiveEntity : itemPassivesComponent.getPassiveEntities()){
-                DescriptionComponent descriptionComponent = entityWorld.getComponent(itemPassiveEntity, DescriptionComponent.class);
+            for(int passiveEntity : itemPassivesComponent.getPassiveEntities()){
+                DescriptionComponent descriptionComponent = entityWorld.getComponent(passiveEntity, DescriptionComponent.class);
                 if(descriptionComponent != null){
                     addDescription_NewLine();
-                    description += "Passive: " + descriptionComponent.getDescription();
+                    if(entityWorld.hasComponent(passiveEntity, UniqueComponent.class)){
+                        description += "UNIQUE ";
+                    }
+                    description += "Passive";
+                    NameComponent nameComponent = entityWorld.getComponent(passiveEntity, NameComponent.class);
+                    if(nameComponent !=  null){
+                        description += " - " + nameComponent.getName();
+                    }
+                    description += ": " + descriptionComponent.getDescription();
                 }
             }
         }
         ItemActiveComponent itemActiveComponent = entityWorld.getComponent(entity, ItemActiveComponent.class);
         if(itemActiveComponent != null){
-            DescriptionComponent descriptionComponent = entityWorld.getComponent(itemActiveComponent.getSpellEntity(), DescriptionComponent.class);
+            int spellEntity = itemActiveComponent.getSpellEntity();
+            DescriptionComponent descriptionComponent = entityWorld.getComponent(spellEntity, DescriptionComponent.class);
             if(descriptionComponent != null){
                 addDescription_NewLine();
-                description += "Active: " + descriptionComponent.getDescription();
-                BaseCooldownComponent baseCooldownComponent = entityWorld.getComponent(itemActiveComponent.getSpellEntity(), BaseCooldownComponent.class);
+                if(entityWorld.hasComponent(spellEntity, UniqueComponent.class)){
+                    description += "UNIQUE ";
+                }
+                description += "Active";
+                NameComponent nameComponent = entityWorld.getComponent(spellEntity, NameComponent.class);
+                if(nameComponent !=  null){
+                    description += " - " + nameComponent.getName();
+                }
+                description += ": " + descriptionComponent.getDescription();
+                BaseCooldownComponent baseCooldownComponent = entityWorld.getComponent(spellEntity, BaseCooldownComponent.class);
                 if(baseCooldownComponent != null){
                     description += " (" + GUIUtil.getValueText(baseCooldownComponent.getDuration()) + " seconds cooldown)";
                 }

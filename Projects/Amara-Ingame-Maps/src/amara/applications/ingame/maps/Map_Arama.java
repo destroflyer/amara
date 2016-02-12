@@ -240,12 +240,12 @@ public class Map_Arama extends Map{
         characterBounty.setComponent(new BountyGoldComponent(300));
         entityWorld.setComponent(unitEntity, new BountyComponent(characterBounty.getId()));
         //GoldPerTime
-        /*int buffEntity = entityWorld.createEntity();
+        int buffEntity = entityWorld.createEntity();
         int buffAttributesEntity = entityWorld.createEntity();
         entityWorld.setComponent(buffAttributesEntity, new BonusFlatGoldPerSecondComponent(2.4f));
         entityWorld.setComponent(buffEntity, new ContinuousAttributesComponent(buffAttributesEntity));
         entityWorld.setComponent(buffEntity, new KeepOnDeathComponent());
-        ApplyAddBuffsSystem.addBuff(entityWorld, unitEntity, buffEntity);*/
+        ApplyAddBuffsSystem.addBuff(entityWorld, unitEntity, buffEntity);
     }
 
     @Override
