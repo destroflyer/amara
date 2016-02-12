@@ -1,6 +1,8 @@
 <template>
     <value name="duration">2.5</value>
     <entity id="spell">
+        <unique/>
+        <name>Stasis</name>
         <description>Put yourself in stasis for [duration] seconds, rendering yourself untargetable and invulnerable.</description>
         <instantEffectTriggers>
             <!--trigger spell effects-->
