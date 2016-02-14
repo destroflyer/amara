@@ -1,0 +1,51 @@
+<template>
+    <value name="duration">2</value>
+    <value name="cooldown">8</value>
+    <entity id="passive">
+        <description>After taking damage, Ganfaul gains 20 ability power for [duration] seconds. ([cooldown] seconds cooldown)</description>
+        <passiveAddedEffectTriggers>
+            <!--add trigger-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addEffectTriggers>
+                            <!--gain ability power-->
+                            <entity id="damageTakenTrigger">
+                                <damageTakenTrigger physicalDamage="true" magicDamage="true" trueDamage="true"/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <addBuff duration="[duration]">
+                                            <entity>
+                                                <continuousAttributes>
+                                                    <entity>
+                                                        <bonusFlatAbilityPower>20</bonusFlatAbilityPower>
+                                                    </entity>
+                                                </continuousAttributes>
+                                            </entity>
+                                        </addBuff>
+                                    </entity>
+                                </triggeredEffect>
+                                <cooldown>[cooldown]</cooldown>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveAddedEffectTriggers>
+        <passiveRemovedEffectTriggers>
+            <!--remove trigger-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeEffectTriggers>#damageTakenTrigger</removeEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveRemovedEffectTriggers>
+    </entity>
+</template>

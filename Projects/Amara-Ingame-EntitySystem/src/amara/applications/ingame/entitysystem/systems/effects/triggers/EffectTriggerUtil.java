@@ -11,6 +11,7 @@ import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.systems.conditions.ConditionUtil;
+import amara.applications.ingame.entitysystem.systems.spells.casting.SetCooldownOnCastingSystem;
 import amara.core.Util;
 import amara.libraries.entitysystem.*;
 
@@ -55,6 +56,7 @@ public class EffectTriggerUtil{
             if(triggerDelayComponent != null){
                 effectCast.setComponent(new RemainingEffectDelayComponent(triggerDelayComponent.getDuration()));
             }
+            SetCooldownOnCastingSystem.setOnCooldown(entityWorld, effectTriggerEntity);
             return effectCast;
         }
         return null;

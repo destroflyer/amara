@@ -65,6 +65,9 @@
         <autoAttack>
             <entity template="spells/ranged_autoattack"/>
         </autoAttack>
+        <passives>
+            <entity template="spells/ganfaul_passive/passive"/>
+        </passives>
         <learnableSpells>
             <entity template="spells/ganfaul_binding/base"/>
             <entity template="spells/ganfaul_laser/base"/>

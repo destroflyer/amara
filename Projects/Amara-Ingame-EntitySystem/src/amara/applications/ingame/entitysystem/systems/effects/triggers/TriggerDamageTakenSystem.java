@@ -7,6 +7,7 @@ package amara.applications.ingame.entitysystem.systems.effects.triggers;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.effects.damage.*;
+import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.libraries.entitysystem.*;
@@ -25,7 +26,7 @@ public class TriggerDamageTakenSystem implements EntitySystem{
             int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
             for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, DamageTakenTriggerComponent.class)){
                 int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
-                if(sourceEntity == targetEntity){
+                if((sourceEntity == targetEntity) && (!entityWorld.hasComponent(effectTriggerEntity, RemainingCooldownComponent.class))){
                     if(isDamageAccepted(entityWorld, effectImpactEntity, entityWorld.getComponent(effectTriggerEntity, DamageTakenTriggerComponent.class))){
                         int castSourceEntity = -1;
                         EffectCastSourceComponent effectCastSourceComponent = entityWorld.getComponent(effectImpactEntity, EffectCastSourceComponent.class);

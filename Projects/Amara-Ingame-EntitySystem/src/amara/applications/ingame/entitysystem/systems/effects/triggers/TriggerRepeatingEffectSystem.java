@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.entitysystem.systems.effects.triggers;
 
+import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.libraries.entitysystem.*;
@@ -23,21 +24,22 @@ public class TriggerRepeatingEffectSystem implements EntitySystem{
         for(int entity : observer.getRemoved().getEntitiesWithAll(RepeatingTriggerComponent.class)){
             entityWorld.removeComponent(entity, RepeatingTriggerCounterComponent.class);
         }
-        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, RepeatingTriggerComponent.class))
-        {
-            float timeSinceLastRepeatTrigger = deltaSeconds;
-            TimeSinceLastRepeatTriggerComponent timeSinceLastRepeatTriggerComponent = entityWorld.getComponent(effectTriggerEntity, TimeSinceLastRepeatTriggerComponent.class);
-            if(timeSinceLastRepeatTriggerComponent != null){
-                timeSinceLastRepeatTrigger += timeSinceLastRepeatTriggerComponent.getDuration();
-            }
-            float intervalDuration = entityWorld.getComponent(effectTriggerEntity, RepeatingTriggerComponent.class).getIntervalDuration();
-            if(timeSinceLastRepeatTrigger > intervalDuration){
-                EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, -1);
-                entityWorld.removeComponent(effectTriggerEntity, TimeSinceLastRepeatTriggerComponent.class);
-                increaseRepeatingTriggerCounter(entityWorld, effectTriggerEntity);
-            }
-            else{
-                entityWorld.setComponent(effectTriggerEntity, new TimeSinceLastRepeatTriggerComponent(timeSinceLastRepeatTrigger));
+        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, RepeatingTriggerComponent.class)){
+            if(!entityWorld.hasComponent(effectTriggerEntity, RemainingCooldownComponent.class)){
+                float timeSinceLastRepeatTrigger = deltaSeconds;
+                TimeSinceLastRepeatTriggerComponent timeSinceLastRepeatTriggerComponent = entityWorld.getComponent(effectTriggerEntity, TimeSinceLastRepeatTriggerComponent.class);
+                if(timeSinceLastRepeatTriggerComponent != null){
+                    timeSinceLastRepeatTrigger += timeSinceLastRepeatTriggerComponent.getDuration();
+                }
+                float intervalDuration = entityWorld.getComponent(effectTriggerEntity, RepeatingTriggerComponent.class).getIntervalDuration();
+                if(timeSinceLastRepeatTrigger > intervalDuration){
+                    EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, -1);
+                    entityWorld.removeComponent(effectTriggerEntity, TimeSinceLastRepeatTriggerComponent.class);
+                    increaseRepeatingTriggerCounter(entityWorld, effectTriggerEntity);
+                }
+                else{
+                    entityWorld.setComponent(effectTriggerEntity, new TimeSinceLastRepeatTriggerComponent(timeSinceLastRepeatTrigger));
+                }
             }
         }
     }

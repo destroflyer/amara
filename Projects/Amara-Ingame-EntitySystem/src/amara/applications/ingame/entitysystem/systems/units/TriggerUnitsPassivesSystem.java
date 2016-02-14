@@ -27,7 +27,7 @@ public class TriggerUnitsPassivesSystem implements EntitySystem{
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll(PassivesComponent.class)){
             for(int passiveEntity : observer.getRemoved().getComponent(entity, PassivesComponent.class).getPassiveEntities()){
-                PassiveUtil.removePassives(entityWorld, passiveEntity);
+                PassiveUtil.removePassives(entityWorld, entity, passiveEntity);
             }
         }
     }
@@ -47,7 +47,7 @@ public class TriggerUnitsPassivesSystem implements EntitySystem{
                 }
             }
             if(wasPassiveAdded){
-                PassiveUtil.addPassives(entityWorld, newPassiveEntity);
+                PassiveUtil.addPassives(entityWorld, entity, newPassiveEntity);
             }
         }
         if(oldPassiveEntities != null){
@@ -61,7 +61,7 @@ public class TriggerUnitsPassivesSystem implements EntitySystem{
                     }
                 }
                 if(wasPassiveRemoved){
-                    PassiveUtil.removePassives(entityWorld, oldPassiveEntity);
+                    PassiveUtil.removePassives(entityWorld, entity, oldPassiveEntity);
                 }
             }
         }

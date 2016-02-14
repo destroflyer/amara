@@ -20,11 +20,11 @@ public class SetCooldownOnCastingSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(int casterEntity : entityWorld.getEntitiesWithAll(CastSpellComponent.class)){
             int spellEntity = entityWorld.getComponent(casterEntity, CastSpellComponent.class).getSpellEntity();
-            setOnCooldown(entityWorld, casterEntity, spellEntity);
+            setOnCooldown_Active(entityWorld, casterEntity, spellEntity);
         }
     }
     
-    public static void setOnCooldown(EntityWorld entityWorld, int casterEntity, int spellEntity){
+    public static void setOnCooldown_Active(EntityWorld entityWorld, int casterEntity, int spellEntity){
         setOnCooldown(entityWorld, spellEntity);
         //Unique Actives
         if(entityWorld.hasComponent(spellEntity, UniqueComponent.class)){
@@ -49,7 +49,7 @@ public class SetCooldownOnCastingSystem implements EntitySystem{
         }
     }
     
-    private static void setOnCooldown(EntityWorld entityWorld, int spellEntity){
+    public static void setOnCooldown(EntityWorld entityWorld, int spellEntity){
         CooldownComponent cooldownComponent = entityWorld.getComponent(spellEntity, CooldownComponent.class);
         if(cooldownComponent != null){
             entityWorld.setComponent(spellEntity, new RemainingCooldownComponent(cooldownComponent.getDuration()));

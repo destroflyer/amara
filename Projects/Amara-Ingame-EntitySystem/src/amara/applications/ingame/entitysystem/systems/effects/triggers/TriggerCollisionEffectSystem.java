@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.entitysystem.systems.effects.triggers;
 
+import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
@@ -35,16 +36,16 @@ public class TriggerCollisionEffectSystem implements EntitySystem{
     private void checkEffectTriggers(EntityWorld entityWorld, int effectingEntity, int targetEntity){
         for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class)){
             int triggerSourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
-            if(triggerSourceEntity == effectingEntity){
-                if(entityWorld.hasComponent(effectTriggerEntity, CollisionTriggerComponent.class)){
-                    boolean triggerEffect = true;
-                    IntersectionRulesComponent intersectionRulesComponent = entityWorld.getComponent(effectingEntity, IntersectionRulesComponent.class);
-                    if(intersectionRulesComponent != null){
-                        triggerEffect = TargetUtil.isValidTarget(entityWorld, effectingEntity, targetEntity, intersectionRulesComponent.getTargetRulesEntity());
-                    }
-                    if(triggerEffect){
-                        EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, targetEntity);
-                    }
+            if((triggerSourceEntity == effectingEntity)
+            && entityWorld.hasComponent(effectTriggerEntity, CollisionTriggerComponent.class)
+            && (!entityWorld.hasComponent(effectTriggerEntity, RemainingCooldownComponent.class))){
+                boolean triggerEffect = true;
+                IntersectionRulesComponent intersectionRulesComponent = entityWorld.getComponent(effectingEntity, IntersectionRulesComponent.class);
+                if(intersectionRulesComponent != null){
+                    triggerEffect = TargetUtil.isValidTarget(entityWorld, effectingEntity, targetEntity, intersectionRulesComponent.getTargetRulesEntity());
+                }
+                if(triggerEffect){
+                    EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, targetEntity);
                 }
             }
         }

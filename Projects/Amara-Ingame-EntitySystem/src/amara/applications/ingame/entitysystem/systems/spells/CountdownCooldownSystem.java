@@ -15,14 +15,14 @@ public class CountdownCooldownSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(RemainingCooldownComponent.class))){
-            RemainingCooldownComponent remainingCooldownComponent = entityWrapper.getComponent(RemainingCooldownComponent.class);
+        for(int entity : entityWorld.getEntitiesWithAll(RemainingCooldownComponent.class)){
+            RemainingCooldownComponent remainingCooldownComponent = entityWorld.getComponent(entity, RemainingCooldownComponent.class);
             float duration = (remainingCooldownComponent.getDuration() - deltaSeconds);
             if(duration > 0){
-                entityWrapper.setComponent(new RemainingCooldownComponent(duration));
+                entityWorld.setComponent(entity, new RemainingCooldownComponent(duration));
             }
             else{
-                entityWrapper.removeComponent(RemainingCooldownComponent.class);
+                entityWorld.removeComponent(entity, RemainingCooldownComponent.class);
             }
         }
     }
