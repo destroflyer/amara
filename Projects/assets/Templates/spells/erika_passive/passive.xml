@@ -3,6 +3,7 @@
     <entity id="passive">
         <name>Robin's Gift</name>
         <description>Your spells mark hit targets for [duration] seconds. Your basic abilities have an additional effect if they hit already marked targets.</description>
+        <spellVisualisation>erika_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
             <!--add spell effect-->
             <entity>

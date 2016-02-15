@@ -2,6 +2,7 @@
     <value name="duration">3</value>
     <entity id="passive">
         <description>After hitting an ability, your first autoattack in the next [duration] seconds deals bonus magical damage.</description>
+        <spellVisualisation>maria_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
             <!--add spell effect-->
             <entity>

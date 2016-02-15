@@ -2,6 +2,7 @@
     <value name="duration">3</value>
     <entity id="passive">
         <description>Gain 3% of all taken damage as armor and magic resistance for [duration] seconds.</description>
+        <spellVisualisation>maw_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
             <!--add trigger-->
             <entity>

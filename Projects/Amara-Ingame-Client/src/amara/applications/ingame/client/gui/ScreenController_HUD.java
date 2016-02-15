@@ -42,6 +42,7 @@ public class ScreenController_HUD extends GameScreenController{
     public void onStartup(){
         super.onStartup();
         setExperience(0);
+        hidePassiveCooldown();
         for(int i=0;i<4;i++){
             hideSpellCooldown(i);
         }
