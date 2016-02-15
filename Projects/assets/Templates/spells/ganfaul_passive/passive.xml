@@ -1,8 +1,7 @@
 <template>
     <value name="duration">2</value>
-    <value name="cooldown">8</value>
     <entity id="passive">
-        <description>After taking damage, Ganfaul gains 20 ability power for [duration] seconds. ([cooldown] seconds cooldown)</description>
+        <description>After taking damage, Ganfaul gains 20 ability power for [duration] seconds.</description>
         <passiveAddedEffectTriggers>
             <!--add trigger-->
             <entity>
@@ -27,7 +26,7 @@
                                         </addBuff>
                                     </entity>
                                 </triggeredEffect>
-                                <cooldown>[cooldown]</cooldown>
+                                <cooldown>8</cooldown>
                             </entity>
                         </addEffectTriggers>
                     </entity>
@@ -47,5 +46,6 @@
                 <triggerSource>#passive</triggerSource>
             </entity>
         </passiveRemovedEffectTriggers>
+        <linkedCooldown>#damageTakenTrigger</linkedCooldown>
     </entity>
 </template>

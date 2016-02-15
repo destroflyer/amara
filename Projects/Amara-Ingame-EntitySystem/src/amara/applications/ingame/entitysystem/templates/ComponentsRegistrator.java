@@ -2775,6 +2775,20 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent(effectTriggerEntities);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent.class.getDeclaredField("sourceEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent>("linkedCooldown"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent construct(){
+                int sourceEntity = createChildEntity(0, "sourceEntity");
+                return new amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent(sourceEntity);
+            }
+        });
         //placeholders
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent>("sourceMovementDirection"){

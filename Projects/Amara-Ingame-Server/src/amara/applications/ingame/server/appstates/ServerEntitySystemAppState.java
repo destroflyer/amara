@@ -175,6 +175,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new SetAutoAttacksCastAnimationsSystem());
         addEntitySystem(new SetSpellsCastersSystem());
         addEntitySystem(new SetBaseCooldownSystem());
+        addEntitySystem(new LinkedCooldownsSystem());
         addEntitySystem(new SetLevelExperienceSystem());
         addEntitySystem(new RemoveAudioCommandsSystem());
         for(EntitySystem entitySystem : ParallelNetworkSystems.generateSystems()){

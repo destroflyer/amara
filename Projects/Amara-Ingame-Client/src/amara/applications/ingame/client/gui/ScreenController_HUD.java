@@ -126,6 +126,14 @@ public class ScreenController_HUD extends GameScreenController{
         getImageRenderer("passive_image").setImage(createImage(imagePath));
     }
     
+    public void showPassiveCooldown(float remainingTime){
+        showCooldown("passive", 0, remainingTime);
+    }
+    
+    public void hidePassiveCooldown(){
+        hideCooldown("passive", 0);
+    }
+    
     public void setSpellImage(int index, String imagePath){
         getImageRenderer("spell_" + index + "_image").setImage(createImage(imagePath));
     }

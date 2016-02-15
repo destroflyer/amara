@@ -184,12 +184,17 @@
                             <panel width="113px"/>
                             <panel childLayout="vertical" width="46px">
                                 <panel height="5px"/>
-                                <image id="passive_image" filename="Interface/hud/spells/none.png" width="100%" height="100%w" visibleToMouse="true">
-                                    <effect>
-                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Passive(0)"/>
-                                        <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
-                                    </effect>
-                                </image>
+                                <panel childLayout="center" width="100%" height="100%w">
+                                    <image id="passive_image" filename="Interface/hud/spells/none.png" width="100%" height="100%w" visibleToMouse="true">
+                                        <effect>
+                                            <onStartHover name="nop" onStartEffect="showSpellInformation_Passive(0)"/>
+                                            <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                                        </effect>
+                                    </image>
+                                    <panel id="passive_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                        <text id="passive_0_cooldown_time" text="???" font="Interface/fonts/Verdana_14.fnt"/>
+                                    </panel>
+                                </panel>
                             </panel>
                             <panel width="11px"/>
                             <panel childLayout="center" width="58px" height="100%w">
