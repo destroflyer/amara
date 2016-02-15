@@ -1,6 +1,7 @@
 <template>
     <value name="duration">3</value>
     <entity id="passive">
+        <name>Stone Skin</name>
         <description>Gain 3% of all taken damage as armor and magic resistance for [duration] seconds.</description>
         <spellVisualisation>maw_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
