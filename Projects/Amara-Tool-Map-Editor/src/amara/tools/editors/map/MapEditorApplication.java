@@ -36,9 +36,4 @@ public class MapEditorApplication extends DisplayApplication{
         //Debug Camera
         cam.setLocation(new Vector3f(22, 34, -10));
     }
-
-    @Override
-    public void simpleUpdate(float lastTimePerFrame){
-        
-    }
 }

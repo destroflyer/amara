@@ -6,7 +6,7 @@
         <isSellable>1890</isSellable>
         <!--stats-->
         <bonusFlatAttackDamage>30</bonusFlatAttackDamage>
-        <itemActive>
+        <itemActive consumable="false">
             <entity template="./youmuus_ghostblade_active"/>
         </itemActive>
     </entity>

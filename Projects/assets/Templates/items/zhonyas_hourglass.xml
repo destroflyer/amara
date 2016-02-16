@@ -6,7 +6,7 @@
         <isSellable>2310</isSellable>
         <!--stats-->
         <bonusFlatAbilityPower>120</bonusFlatAbilityPower>
-        <itemActive>
+        <itemActive consumable="false">
             <entity template="./zhonyas_hourglass_active"/>
         </itemActive>
     </entity>

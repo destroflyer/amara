@@ -7,6 +7,7 @@ package amara.applications.ingame.entitysystem.systems.network;
 import java.util.Iterator;
 import java.util.LinkedList;
 import com.jme3.network.Message;
+import amara.applications.ingame.entitysystem.components.audio.*;
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
 import amara.applications.ingame.entitysystem.synchronizing.ClientComponentBlacklist;
 import amara.applications.ingame.network.messages.Message_EntityChanges;
@@ -31,7 +32,9 @@ public class SendEntityChangesSystem implements EntitySystem{
 
         @Override
         public boolean areComponentsEqual(Object oldComponent, Object newComponent){
-            if(newComponent instanceof RestartClientAnimationComponent){
+            if((newComponent instanceof RestartClientAnimationComponent)
+            || (newComponent instanceof StartPlayingAudioComponent)
+            || (newComponent instanceof StopPlayingAudioComponent)){
                 return false;
             }
             return super.areComponentsEqual(oldComponent, newComponent);

@@ -34,9 +34,4 @@ public class ModelViewerApplication extends DisplayApplication{
         cam.setLocation(new Vector3f(0, 3, 10));
         flyCam.setEnabled(false);
     }
-
-    @Override
-    public void simpleUpdate(float lastTimePerFrame){
-        
-    }
 }

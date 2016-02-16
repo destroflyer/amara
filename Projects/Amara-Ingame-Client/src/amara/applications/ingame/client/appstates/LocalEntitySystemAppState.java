@@ -105,6 +105,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new BuffVisualisationSystem_Empowered(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Frost(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Ganfaul_Binded(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_Healing(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Intervention(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Maria_Passive(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Meditating(entitySceneMap));

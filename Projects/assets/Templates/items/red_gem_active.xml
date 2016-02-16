@@ -1,0 +1,49 @@
+<template>
+    <value name="duration">15</value>
+    <entity id="spell">
+        <description>Regenerates 5 health every half-second for [duration] seconds, restoring a total of 150 health.</description>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="[duration]">
+                            <entity>
+                                <buffVisualisation>healing</buffVisualisation>
+                                <repeatingEffect interval="0.5">
+                                    <entity>
+                                        <heal>5</heal>
+                                    </entity>
+                                </repeatingEffect>
+                            </entity>
+                        </addBuff>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/red_gem_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

@@ -36,6 +36,7 @@ public class LoginScreenApplication extends DisplayApplication{
 
     @Override
     public void simpleUpdate(float lastTimePerFrame){
+        super.simpleUpdate(lastTimePerFrame);
         if(!isStarted){
             isStarted = true;
         }

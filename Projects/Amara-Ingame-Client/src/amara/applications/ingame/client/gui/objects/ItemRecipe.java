@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.gui.objects;
 
+import java.util.LinkedList;
 import amara.applications.ingame.client.gui.GUIUtil;
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.general.*;
@@ -145,7 +146,12 @@ public class ItemRecipe{
                 if(entityWorld.hasComponent(spellEntity, UniqueComponent.class)){
                     description += "UNIQUE ";
                 }
-                description += "Active";
+                if(itemActiveComponent.isConsumable()){
+                    description += "Consumable";
+                }
+                else{
+                    description += "Active";
+                }
                 NameComponent nameComponent = entityWorld.getComponent(spellEntity, NameComponent.class);
                 if(nameComponent !=  null){
                     description += " - " + nameComponent.getName();
@@ -187,20 +193,22 @@ public class ItemRecipe{
         return totalGold;
     }
     
-    public void updateResolvedGold(ItemRecipe[] inventoryItemsRecipes){
-        resolvedGold = resolveGold(inventoryItemsRecipes, new boolean[inventoryItemsRecipes.length]);
+    public void updateResolvedGold(LinkedList<ItemRecipe> inventoryItemsRecipes){
+        resolvedGold = resolveGold(inventoryItemsRecipes, new boolean[inventoryItemsRecipes.size()]);
     }
     
-    private float resolveGold(ItemRecipe[] inventoryItemsRecipes, boolean[] usedInventoryIngredients){
+    private float resolveGold(LinkedList<ItemRecipe> inventoryItemsRecipes, boolean[] usedInventoryIngredients){
         float neededGold = gold;
         for(ItemRecipe ingredientRecipe : ingredientsRecipes){
             boolean ingrendientHasToBeBought = true;
-            for(int r=0;r<inventoryItemsRecipes.length;r++){
-                if((!usedInventoryIngredients[r]) && (inventoryItemsRecipes[r] == ingredientRecipe)){
+            int i = 0;
+            for(ItemRecipe inventoryItemRecipe : inventoryItemsRecipes){
+                if((!usedInventoryIngredients[i]) && (inventoryItemRecipe == ingredientRecipe)){
                     ingrendientHasToBeBought = false;
-                    usedInventoryIngredients[r] = true;
+                    usedInventoryIngredients[i] = true;
                     break;
                 }
+                i++;
             }
             if(ingrendientHasToBeBought){
                 neededGold += ingredientRecipe.resolveGold(inventoryItemsRecipes, usedInventoryIngredients);

@@ -43,6 +43,7 @@ public class ScreenController_Shop extends GameScreenController{
     private EntityWorld shopEntityWorld = new EntityWorld();
     private String[] shopItemTemplateNames = new String[]{
         "egos_sword","egos_shield","egos_ring",
+        "red_gem",
         "boots","boots_of_haste","boots_of_ferocity","boots_of_sorcery","boots_of_intellect","boots_of_iron","boots_of_silence",
         "sword","reinforced_sword","greatsword","dagger","bow",
         "leather_armor","heavy_leather_armor","cotton_armor","iron_armor","arcane_vesture","enchanted_vesture",
@@ -63,6 +64,7 @@ public class ScreenController_Shop extends GameScreenController{
     private EntityWrapper[] shopItems;
     private EntityWrapper[] shopItems_Special;
     private HashMap<String, ItemRecipe> itemsRecipes = new HashMap<String, ItemRecipe>();
+    private LinkedList<ItemRecipe> tmpInventoryItemsRecipes = new LinkedList<ItemRecipe>();
     private int shopPageID;
     private String shopItemFilterText = "";
     private boolean[] shopItemFilters = new boolean[7];
@@ -121,13 +123,15 @@ public class ScreenController_Shop extends GameScreenController{
     }
     
     public void updateRecipeCosts(EntityWorld entityWorld, int[] inventoryItemEntities){
-        ItemRecipe[] inventoryItemsRecipes = new ItemRecipe[inventoryItemEntities.length];
-        for(int i=0;i<inventoryItemsRecipes.length;i++){
-            String itemID = entityWorld.getComponent(inventoryItemEntities[i], ItemIDComponent.class).getID();
-            inventoryItemsRecipes[i] = getItemRecipe(itemID);
+        tmpInventoryItemsRecipes.clear();
+        for(int i=0;i<inventoryItemEntities.length;i++){
+            if(inventoryItemEntities[i] != -1){
+                String itemID = entityWorld.getComponent(inventoryItemEntities[i], ItemIDComponent.class).getID();
+                tmpInventoryItemsRecipes.add(getItemRecipe(itemID));
+            }
         }
         for(ItemRecipe itemRecipe : itemsRecipes.values()){
-            itemRecipe.updateResolvedGold(inventoryItemsRecipes);
+            itemRecipe.updateResolvedGold(tmpInventoryItemsRecipes);
         }
         updateShopAvailableItems();
     }

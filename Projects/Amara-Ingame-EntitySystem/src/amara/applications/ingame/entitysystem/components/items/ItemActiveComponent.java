@@ -18,13 +18,19 @@ public class ItemActiveComponent{
         
     }
     
-    public ItemActiveComponent(int spellEntity){
+    public ItemActiveComponent(int spellEntity, boolean consumable){
         this.spellEntity = spellEntity;
+        this.consumable = consumable;
     }
     @ComponentField(type=ComponentField.Type.ENTITY)
     private int spellEntity;
+    private boolean consumable;
 
     public int getSpellEntity(){
         return spellEntity;
+    }
+
+    public boolean isConsumable(){
+        return consumable;
     }
 }

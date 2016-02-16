@@ -20,6 +20,8 @@ import amara.libraries.entitysystem.templates.EntityTemplate;
  */
 public class ShopUtil{
     
+    private static LinkedList<Integer> tmpItemEntities = new LinkedList<Integer>();
+    
     public static boolean isInShopRange(EntityWorld entityWorld, int entity){
         for(int shopEntity : entityWorld.getEntitiesWithAll(ShopRangeComponent.class, PositionComponent.class)){
             if(canUseShop(entityWorld, entity, shopEntity)){
@@ -44,25 +46,39 @@ public class ShopUtil{
     }
     
     public static boolean buy(EntityWorld entityWorld, int entity, String itemID){
-        LinkedList<Integer> inventoryItemEntities = new LinkedList<Integer>();
+        tmpItemEntities.clear();
+        int inventorySize = 0;
+        int newItemIndex = -1;
         InventoryComponent inventoryComponent = entityWorld.getComponent(entity, InventoryComponent.class);
         if(inventoryComponent != null){
-            for(int inventoryItemEntity : inventoryComponent.getItemEntities()){
-                inventoryItemEntities.add(inventoryItemEntity);
+            for(int i=0;i<inventoryComponent.getItemEntities().length;i++){
+                int itemEntity = inventoryComponent.getItemEntities()[i];
+                tmpItemEntities.add(itemEntity);
+                if(itemEntity != -1){
+                    inventorySize++;
+                }
+                else if(newItemIndex == -1){
+                    newItemIndex = i;
+                }
             }
         }
         int itemEntity = entityWorld.createEntity();
-        float goldCost = resolveItemRecipe(entityWorld, itemID, inventoryItemEntities, itemEntity);
+        float goldCost = resolveItemRecipe(entityWorld, itemID, tmpItemEntities, itemEntity);
         entityWorld.removeEntity(itemEntity);
-        if(inventoryItemEntities.size() <= 5){
+        if(inventorySize <= 5){
             GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
             if((goldCost == 0) || ((goldComponent != null) && (goldComponent.getGold() > goldCost))){
                 EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + itemID);
-                inventoryItemEntities.add(itemEntity);
+                if(newItemIndex != -1){
+                    tmpItemEntities.set(newItemIndex, itemEntity);
+                }
+                else{
+                    tmpItemEntities.add(itemEntity);
+                }
                 if(goldComponent != null){
                     entityWorld.setComponent(entity, new GoldComponent(goldComponent.getGold() - goldCost));
                 }
-                entityWorld.setComponent(entity, new InventoryComponent(Util.convertToArray(inventoryItemEntities)));
+                entityWorld.setComponent(entity, new InventoryComponent(Util.convertToArray(tmpItemEntities)));
                 entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
                 return true;
             }
@@ -78,11 +94,13 @@ public class ShopUtil{
         for(String ingredientID : itemRecipeComponent.getItemIDs()){
             boolean ingrendientHasToBeBought = true;
             for(Integer inventoryItemEntity : inventoryItemEntities){
-                String inventoryItemID = entityWorld.getComponent(inventoryItemEntity, ItemIDComponent.class).getID();
-                if(inventoryItemID.equals(ingredientID)){
-                    inventoryItemEntities.remove(inventoryItemEntity);
-                    ingrendientHasToBeBought = false;
-                    break;
+                if(inventoryItemEntity != -1){
+                    String inventoryItemID = entityWorld.getComponent(inventoryItemEntity, ItemIDComponent.class).getID();
+                    if(inventoryItemID.equals(ingredientID)){
+                        inventoryItemEntities.remove(inventoryItemEntity);
+                        ingrendientHasToBeBought = false;
+                        break;
+                    }
                 }
             }
             if(ingrendientHasToBeBought){

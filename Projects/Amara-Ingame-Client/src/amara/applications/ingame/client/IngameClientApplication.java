@@ -77,11 +77,6 @@ public class IngameClientApplication extends DisplayApplication{
         }
     }
 
-    @Override
-    public void simpleUpdate(float lastTimePerFrame){
-        
-    }
-
     public MasterserverClientInterface getMasterserverClient(){
         return masterserverClient;
     }

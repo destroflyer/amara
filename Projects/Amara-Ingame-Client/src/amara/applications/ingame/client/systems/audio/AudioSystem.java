@@ -11,6 +11,7 @@ import com.jme3.audio.AudioSource;
 import amara.applications.ingame.entitysystem.components.audio.*;
 import amara.applications.ingame.entitysystem.components.game.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
+import amara.applications.ingame.entitysystem.systems.network.SendEntityChangesSystem;
 import amara.applications.ingame.shared.games.Game;
 import amara.libraries.applications.display.appstates.AudioAppState;
 import amara.libraries.entitysystem.*;
@@ -31,13 +32,15 @@ public class AudioSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         increasePlayingAudioProgresses(deltaSeconds);
-        ComponentMapObserver observer = entityWorld.requestObserver(this, AudioComponent.class, AudioSourceComponent.class, PositionComponent.class, StartPlayingAudioComponent.class, StopPlayingAudioComponent.class, GameSpeedComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, SendEntityChangesSystem.COMPONENT_EQUALITY_DEFINTION, AudioComponent.class, AudioSourceComponent.class, PositionComponent.class, StartPlayingAudioComponent.class, StopPlayingAudioComponent.class, GameSpeedComponent.class);
+        //Data
         for(int entity : observer.getNew().getEntitiesWithAll(AudioComponent.class)){
             load(entityWorld, entity);
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll(AudioComponent.class)){
             remove(entity);
         }
+        //Source
         for(int entity : observer.getNew().getEntitiesWithAll(AudioSourceComponent.class)){
             AudioNode audioNode = audioNodes.get(entity);
             int audioSourceEntity = entityWorld.getComponent(entity, AudioSourceComponent.class).getEntity();
@@ -52,10 +55,18 @@ public class AudioSystem implements EntitySystem{
             audioNode.setUserData("audio_source_entity", null);
             audioNode.setPositional(false);
         }
+        //Start
         for(int entity : observer.getNew().getEntitiesWithAll(StartPlayingAudioComponent.class)){
             enqueuePlay(entity);
         }
+        for(int entity : observer.getChanged().getEntitiesWithAll(StartPlayingAudioComponent.class)){
+            enqueuePlay(entity);
+        }
+        //Stop
         for(int entity : observer.getNew().getEntitiesWithAll(StopPlayingAudioComponent.class)){
+            stop(entity);
+        }
+        for(int entity : observer.getChanged().getEntitiesWithAll(StopPlayingAudioComponent.class)){
             stop(entity);
         }
         updateAudioPositions(observer);

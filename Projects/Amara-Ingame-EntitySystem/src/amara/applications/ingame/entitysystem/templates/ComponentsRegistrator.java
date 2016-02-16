@@ -2057,7 +2057,12 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.items.ItemActiveComponent construct(){
                 int spellEntity = createChildEntity(0, "spellEntity");
-                return new amara.applications.ingame.entitysystem.components.items.ItemActiveComponent(spellEntity);
+                boolean consumable = false;
+                String consumableText = element.getAttributeValue("consumable");
+                if((consumableText != null) && (consumableText.length() > 0)){
+                    consumable = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, consumableText));
+                }
+                return new amara.applications.ingame.entitysystem.components.items.ItemActiveComponent(spellEntity, consumable);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.items.ItemIDComponent.class);
