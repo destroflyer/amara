@@ -29,7 +29,7 @@ public class EditCharacterInventoriesBackend implements MessageBackend{
             Message_EditCharacterInventory message = (Message_EditCharacterInventory) receivedMessage;
             if(message.getInventory().length <= 6){
                 int playerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
-                databaseAppState.executeQuery("UPDATE users_characters SET inventory = " + databaseAppState.prepare(message.getInventory()) + " WHERE (userid = " + playerID + ") AND (characterid = " + message.getCharacterID() + ")");
+                databaseAppState.executeQuery("UPDATE users_characters SET inventory = " + databaseAppState.prepareArray(message.getInventory()) + " WHERE (userid = " + playerID + ") AND (characterid = " + message.getCharacterID() + ")");
             }
         }
     }

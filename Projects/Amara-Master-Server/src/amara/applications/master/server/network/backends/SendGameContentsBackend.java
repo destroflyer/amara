@@ -4,8 +4,6 @@
  */
 package amara.applications.master.server.network.backends;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.LinkedList;
 import com.jme3.network.Message;
 import amara.applications.master.network.messages.*;
@@ -13,6 +11,7 @@ import amara.applications.master.network.messages.objects.*;
 import amara.applications.master.server.appstates.PlayersContentsAppState;
 import amara.applications.master.server.players.ConnectedPlayers;
 import amara.applications.master.server.appstates.DatabaseAppState;
+import amara.libraries.database.QueryResult;
 import amara.libraries.network.*;
 
 /**
@@ -31,6 +30,9 @@ public class SendGameContentsBackend implements MessageBackend{
     private PlayersContentsAppState playersContentsAppState;
     private GameCharacter[] characters;
     private Item[] items;
+    private LinkedList<GameCharacter> tmpCharacters = new LinkedList<GameCharacter>();
+    private LinkedList<GameCharacterSkin> tmpSkins = new LinkedList<GameCharacterSkin>();
+    private LinkedList<Item> tmpItems = new LinkedList<Item>();
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
@@ -45,48 +47,40 @@ public class SendGameContentsBackend implements MessageBackend{
     
     private GameCharacter[] getCharacters(){
         if(characters == null){
-            try{
-                ResultSet charactersResultSet = databaseAppState.getResultSet("SELECT id, name, title FROM characters");
-                LinkedList<GameCharacter> charactersList = new LinkedList<GameCharacter>();
-                while(charactersResultSet.next()){
-                    int characterID = charactersResultSet.getInt(1);
-                    String characterName = charactersResultSet.getString(2);
-                    String characterTitle = charactersResultSet.getString(3);
-                    LinkedList<GameCharacterSkin> skins = new LinkedList<GameCharacterSkin>();
-                    ResultSet skinsResultSet = databaseAppState.getResultSet("SELECT id, title FROM characters_skins WHERE characterid = " + characterID);
-                    while(skinsResultSet.next()){
-                        int skinID = skinsResultSet.getInt(1);
-                        String skinTitle = skinsResultSet.getString(2);
-                        skins.add(new GameCharacterSkin(skinID, skinTitle));
-                    }
-                    skinsResultSet.close();
-                    charactersList.add(new GameCharacter(characterID, characterName, characterTitle, skins.toArray(new GameCharacterSkin[0])));
+            QueryResult result_Characters = databaseAppState.getQueryResult("SELECT id, name, title FROM characters");
+            tmpCharacters.clear();
+            while(result_Characters.next()){
+                int characterID = result_Characters.getInteger("id");
+                String characterName = result_Characters.getString("name");
+                String characterTitle = result_Characters.getString("title");
+                QueryResult results_Skins = databaseAppState.getQueryResult("SELECT id, title FROM characters_skins WHERE characterid = " + characterID);
+                tmpSkins.clear();
+                while(results_Skins.next()){
+                    int skinID = results_Skins.getInteger("id");
+                    String skinTitle = results_Skins.getString("title");
+                    tmpSkins.add(new GameCharacterSkin(skinID, skinTitle));
                 }
-                charactersResultSet.close();
-                characters = charactersList.toArray(new GameCharacter[0]);
-            }catch(SQLException ex){
-                ex.printStackTrace();
+                results_Skins.close();
+                tmpCharacters.add(new GameCharacter(characterID, characterName, characterTitle, tmpSkins.toArray(new GameCharacterSkin[tmpSkins.size()])));
             }
+            result_Characters.close();
+            characters = tmpCharacters.toArray(new GameCharacter[tmpCharacters.size()]);
         }
         return characters;
     }
     
     private Item[] getItems(){
         if(items == null){
-            try{
-                ResultSet itemsResultSet = databaseAppState.getResultSet("SELECT id, name, title FROM items");
-                LinkedList<Item> itemsList = new LinkedList<Item>();
-                while(itemsResultSet.next()){
-                    int itemID = itemsResultSet.getInt(1);
-                    String itemName = itemsResultSet.getString(2);
-                    String itemTitle = itemsResultSet.getString(3);
-                    itemsList.add(new Item(itemID, itemName, itemTitle));
-                }
-                itemsResultSet.close();
-                items = itemsList.toArray(new Item[0]);
-            }catch(SQLException ex){
-                ex.printStackTrace();
+            QueryResult results_Items = databaseAppState.getQueryResult("SELECT id, name, title FROM items");
+            tmpItems.clear();
+            while(results_Items.next()){
+                int itemID = results_Items.getInteger("id");
+                String itemName = results_Items.getString("name");
+                String itemTitle = results_Items.getString("title");
+                tmpItems.add(new Item(itemID, itemName, itemTitle));
             }
+            results_Items.close();
+            items = tmpItems.toArray(new Item[tmpItems.size()]);
         }
         return items;
     }

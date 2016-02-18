@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import amara.applications.master.network.messages.objects.*;
 import amara.core.Util;
+import amara.libraries.database.QueryResult;
 
 /**
  *
@@ -16,40 +17,44 @@ import amara.core.Util;
  */
 public class PlayersContentsAppState extends ServerBaseAppState{
     
+    private LinkedList<GameCharacterSkin> tmpOwnedSkins = new LinkedList<GameCharacterSkin>();
+    private LinkedList<Integer> tmpInventory = new LinkedList<Integer>();
+    private LinkedList<OwnedItem> tmpOwnedItems = new LinkedList<OwnedItem>();
+    
     public OwnedGameCharacter[] getOwnedCharacters(int playerID){
         DatabaseAppState databaseAppState = getAppState(DatabaseAppState.class);
         try{
-            ResultSet charactersResultSet = databaseAppState.getResultSet("SELECT characterid, skinid, inventory FROM users_characters WHERE userid = " + playerID + " ORDER BY characterid");
+            QueryResult results_UserCharacters = databaseAppState.getQueryResult("SELECT characterid, skinid, inventory FROM users_characters WHERE userid = " + playerID + " ORDER BY characterid");
             LinkedList<OwnedGameCharacter> ownedCharacters = new LinkedList<OwnedGameCharacter>();
-            while(charactersResultSet.next()){
-                int characterID = charactersResultSet.getInt(1);
-                ResultSet characterInformationResultSet = databaseAppState.getResultSet("SELECT name, title FROM characters WHERE id = " + characterID + " LIMIT 1");
-                characterInformationResultSet.next();
-                String characterName = characterInformationResultSet.getString(1);
-                String characterTitle = characterInformationResultSet.getString(2);
-                characterInformationResultSet.close();
-                int activeSkinID = charactersResultSet.getInt(2);
-                LinkedList<GameCharacterSkin> skins = new LinkedList<GameCharacterSkin>();
-                ResultSet skinsResultSet = databaseAppState.getResultSet("SELECT id, title FROM characters_skins WHERE characterid = " + characterID);
-                while(skinsResultSet.next()){
-                    int skinID = skinsResultSet.getInt(1);
-                    int id = databaseAppState.getInteger("SELECT id FROM users_characters_skins WHERE (userid = " + playerID + ") AND (skinid = " + skinID + ") LIMIT 1");
+            while(results_UserCharacters.next()){
+                int characterID = results_UserCharacters.getInteger("characterid");
+                QueryResult results_Characters = databaseAppState.getQueryResult("SELECT name, title FROM characters WHERE id = " + characterID + " LIMIT 1");
+                results_Characters.next();
+                String characterName = results_Characters.getString("name");
+                String characterTitle = results_Characters.getString("title");
+                results_Characters.close();
+                int activeSkinID = results_UserCharacters.getInteger("skinid");
+                QueryResult results_Skins = databaseAppState.getQueryResult("SELECT id, title FROM characters_skins WHERE characterid = " + characterID);
+                tmpOwnedSkins.clear();
+                while(results_Skins.next()){
+                    int skinID = results_Skins.getInteger("id");
+                    int id = databaseAppState.getQueryResult("SELECT id FROM users_characters_skins WHERE (userid = " + playerID + ") AND (skinid = " + skinID + ") LIMIT 1").nextInteger_Close();
                     if(id != 0){
-                        String skinTitle = skinsResultSet.getString(2);
-                        skins.add(new GameCharacterSkin(skinID, skinTitle));
+                        String skinTitle = results_Skins.getString("title");
+                        tmpOwnedSkins.add(new GameCharacterSkin(skinID, skinTitle));
                     }
                 }
-                LinkedList<Integer> inventory = new LinkedList<Integer>();
-                ResultSet inventorySet = charactersResultSet.getArray(3).getResultSet();
-                while(inventorySet.next()){
-                    inventory.add(inventorySet.getInt(2));
+                results_Skins.close();
+                ResultSet results_Inventory = results_UserCharacters.getArray("inventory").getResultSet();
+                tmpInventory.clear();
+                while(results_Inventory.next()){
+                    tmpInventory.add(results_Inventory.getInt(2));
                 }
-                inventorySet.close();
-                skinsResultSet.close();
-                GameCharacter character = new GameCharacter(characterID, characterName, characterTitle, skins.toArray(new GameCharacterSkin[0]));
-                ownedCharacters.add(new OwnedGameCharacter(character, activeSkinID, Util.convertToArray(inventory)));
+                results_Inventory.close();
+                GameCharacter character = new GameCharacter(characterID, characterName, characterTitle, tmpOwnedSkins.toArray(new GameCharacterSkin[tmpOwnedItems.size()]));
+                ownedCharacters.add(new OwnedGameCharacter(character, activeSkinID, Util.convertToArray(tmpInventory)));
             }
-            charactersResultSet.close();
+            results_UserCharacters.close();
             return ownedCharacters.toArray(new OwnedGameCharacter[0]);
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -59,24 +64,19 @@ public class PlayersContentsAppState extends ServerBaseAppState{
     
     public OwnedItem[] getOwnedItems(int playerID){
         DatabaseAppState databaseAppState = getAppState(DatabaseAppState.class);
-        try{
-            ResultSet itemsResultSet = databaseAppState.getResultSet("SELECT itemid, amount FROM users_items WHERE userid = " + playerID);
-            LinkedList<OwnedItem> ownedItems = new LinkedList<OwnedItem>();
-            while(itemsResultSet.next()){
-                int itemID = itemsResultSet.getInt(1);
-                ResultSet itemInformationResultSet = databaseAppState.getResultSet("SELECT name, title FROM items WHERE id = " + itemID);
-                itemInformationResultSet.next();
-                String itemName = itemInformationResultSet.getString(1);
-                String itemTitle = itemInformationResultSet.getString(2);
-                itemInformationResultSet.close();
-                int amount = itemsResultSet.getInt(2);
-                ownedItems.add(new OwnedItem(new Item(itemID, itemName, itemTitle), amount));
-            }
-            itemsResultSet.close();
-            return ownedItems.toArray(new OwnedItem[0]);
-        }catch(SQLException ex){
-            ex.printStackTrace();
+        QueryResult results_UserItems = databaseAppState.getQueryResult("SELECT itemid, amount FROM users_items WHERE userid = " + playerID);
+        tmpOwnedItems.clear();
+        while(results_UserItems.next()){
+            int itemID = results_UserItems.getInteger("itemid");
+            QueryResult results_Items = databaseAppState.getQueryResult("SELECT name, title FROM items WHERE id = " + itemID);
+            results_Items.next();
+            String itemName = results_Items.getString("name");
+            String itemTitle = results_Items.getString("title");
+            int amount = results_UserItems.getInteger("amount");
+            tmpOwnedItems.add(new OwnedItem(new Item(itemID, itemName, itemTitle), amount));
+            results_Items.close();
         }
-        return null;
+        results_UserItems.close();
+        return tmpOwnedItems.toArray(new OwnedItem[tmpOwnedItems.size()]);
     }
 }

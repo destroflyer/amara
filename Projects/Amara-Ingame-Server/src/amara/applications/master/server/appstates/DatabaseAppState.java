@@ -4,13 +4,10 @@
  */
 package amara.applications.master.server.appstates;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.BaseHeadlessAppState;
+import amara.libraries.database.*;
+import amara.libraries.database.databases.*;
 
 /**
  *
@@ -18,117 +15,45 @@ import amara.libraries.applications.headless.appstates.BaseHeadlessAppState;
  */
 public class DatabaseAppState extends BaseHeadlessAppState{
 
-    private Connection connection = null;
+    private Database database;
     
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
-        try{
-            System.out.println("Connecting to database...");
-            connection = DriverManager.getConnection("jdbc:hsqldb:file:C:/Databases/Amara", "amara_admin", "");
-            System.out.println("Connected to database.");
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
+        //database = new HSQLDatabase("file:C:/Databases/Amara", "amara_admin", "");
+        database = new PostgreDatabase("//localhost/amaradb", "amara_admin", "test");
+        executeScript("create_tables");
+        //executeScript("testdata");
     }
 
     @Override
     public void cleanup(){
         super.cleanup();
-        try{
-            connection.close();
-            System.out.println("Connection to database closed.");
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
+        database.close();
     }
     
-    public int getInteger(String query){
-        try{
-            ResultSet resultSet = getResultSet(query);
-            if(resultSet.next()){
-                int value = resultSet.getInt(1);
-                resultSet.close();
-                return value;
-            }
-            else{
-                resultSet.close();
-            }
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
-        return 0;
+    public void executeScript(String scriptName){
+        System.out.println("Execute database script '" + scriptName + "'.");
+        database.executeResourceScript("/amara/applications/master/server/scripts/" + scriptName + ".sql");
     }
     
-    public long getLong(String query){
-        try{
-            ResultSet resultSet = getResultSet(query);
-            if(resultSet.next()){
-                long value = resultSet.getLong(1);
-                resultSet.close();
-                return value;
-            }
-            else{
-                resultSet.close();
-            }
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
-        return 0;
+    public boolean executeQuery(String query){
+        return database.executeQuery(query);
     }
     
-    public String getString(String query){
-        try{
-            ResultSet resultSet = getResultSet(query);
-            if(resultSet.next()){
-                String value = resultSet.getString(1);
-                resultSet.close();
-                return value;
-            }
-            else{
-                resultSet.close();
-            }
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
-        return null;
+    public QueryResult getQueryResult(String query){
+        return database.getQueryResult(query);
     }
     
-    public ResultSet getResultSet(String query){
-        try{
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            statement.close();
-            return resultSet;
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
-        return null;
+    public String escape(String text){
+        return database.escape(text);
     }
     
-    public void executeQuery(String query){
-        try{
-            Statement statement = connection.createStatement();
-            statement.execute(query);
-            statement.close();
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
+    public String prepareArray(int[] array){
+        return database.prepareArray(array);
     }
-    
-    public static String escape(String text){
-        return text.replaceAll("'", "\\'");
-    }
-    
-    public static String prepare(int[] array){
-        String text = "ARRAY[";
-        for(int i=0;i<array.length;i++){
-            if(i != 0){
-                text += ",";
-            }
-            text += array[i];
-        }
-        text += "]";
-        return text;
+
+    public Database getDatabase(){
+        return database;
     }
 }

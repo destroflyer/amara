@@ -7,9 +7,8 @@ package amara.applications.master.server.network.backends;
 import com.jme3.network.Message;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.AuthentificationInformation;
-import amara.applications.master.server.appstates.PlayersAppState;
+import amara.applications.master.server.appstates.*;
 import amara.applications.master.server.players.*;
-import amara.applications.master.server.appstates.DatabaseAppState;
 import amara.libraries.network.*;
 
 /**
@@ -31,12 +30,12 @@ public class ReceiveLoginsBackend implements MessageBackend{
             Message_Login message = (Message_Login) receivedMessage;
             AuthentificationInformation authentificationInformation = message.getAuthentificationInformation();
             int resultPlayerID = 0;
-            int playerID = databaseAppState.getInteger("SELECT id FROM users WHERE LCASE(login) = '" + DatabaseAppState.escape(authentificationInformation.getLogin().toLowerCase()) + "' LIMIT 1");
+            int playerID = databaseAppState.getQueryResult("SELECT id FROM users WHERE LOWER(login) = '" + databaseAppState.escape(authentificationInformation.getLogin().toLowerCase()) + "' LIMIT 1").nextInteger_Close();
             if(playerID != 0){
                 String encodedSentPassword = playersAppState.getPasswordEncoder().encode(authentificationInformation.getPassword());
-                String encodedPassword = databaseAppState.getString("SELECT password FROM users WHERE id = " + playerID + " LIMIT 1");
+                String encodedPassword = databaseAppState.getQueryResult("SELECT password FROM users WHERE id = " + playerID + " LIMIT 1").nextString_Close();
                 if(encodedSentPassword.equals(encodedPassword)){
-                    String login = databaseAppState.getString("SELECT login FROM users WHERE id = " + playerID + " LIMIT 1");
+                    String login = databaseAppState.getQueryResult("SELECT login FROM users WHERE id = " + playerID + " LIMIT 1").nextString_Close();
                     Player player = new Player(playerID, login);
                     ConnectedPlayers connectedPlayers = playersAppState.getConnectedPlayers();
                     connectedPlayers.login(messageResponse.getClientID(), player);

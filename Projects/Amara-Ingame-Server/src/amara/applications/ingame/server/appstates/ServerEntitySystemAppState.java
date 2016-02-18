@@ -62,6 +62,7 @@ import amara.applications.master.server.appstates.DatabaseAppState;
 import amara.core.Util;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.*;
+import amara.libraries.database.QueryResult;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 import amara.libraries.network.NetworkServer;
@@ -97,33 +98,33 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
             GamePlayer player = mainApplication.getGame().getPlayers()[i];
             EntityWrapper playerEntity = entityWorld.getWrapped(entityWorld.createEntity());
             playerEntity.setComponent(new PlayerIndexComponent(i));
-            String login = databaseAppState.getString("SELECT login FROM users WHERE id = " + player.getLobbyPlayer().getID() + " LIMIT 1");
+            String login = databaseAppState.getQueryResult("SELECT login FROM users WHERE id = " + player.getLobbyPlayer().getID() + " LIMIT 1").nextString_Close();
             playerEntity.setComponent(new NameComponent(login));
             LobbyPlayerData lobbyPlayerData = player.getLobbyPlayer().getPlayerData();
-            String characterName = databaseAppState.getString("SELECT name FROM characters WHERE id = " + lobbyPlayerData.getCharacterID());
+            String characterName = databaseAppState.getQueryResult("SELECT name FROM characters WHERE id = " + lobbyPlayerData.getCharacterID()).nextString_Close();
             EntityWrapper unit = EntityTemplate.createFromTemplate(entityWorld, "units/" + characterName);
             unit.setComponent(new TitleComponent(login));
             try{
-                ResultSet ownedCharacterResultSet = databaseAppState.getResultSet("SELECT skinid, inventory FROM users_characters WHERE (userid = " + player.getLobbyPlayer().getID() + ") AND (characterid = " + lobbyPlayerData.getCharacterID() + ")");
-                ownedCharacterResultSet.next();
+                QueryResult results_UserCharacters = databaseAppState.getQueryResult("SELECT skinid, inventory FROM users_characters WHERE (userid = " + player.getLobbyPlayer().getID() + ") AND (characterid = " + lobbyPlayerData.getCharacterID() + ")");
+                results_UserCharacters.next();
                 String skinName = "default";
-                int skinID = ownedCharacterResultSet.getInt(1);
+                int skinID = results_UserCharacters.getInteger("skinid");
                 if(skinID != 0){
-                    skinName = databaseAppState.getString("SELECT name FROM characters_skins WHERE id = " + skinID);
+                    skinName = databaseAppState.getQueryResult("SELECT name FROM characters_skins WHERE id = " + skinID).nextString_Close();
                 }
                 unit.setComponent(new ModelComponent("Models/" + characterName + "/skin_" + skinName + ".xml"));
-                ResultSet inventoryResultSet = ownedCharacterResultSet.getArray(2).getResultSet();
+                ResultSet inventoryResultSet = results_UserCharacters.getArray("inventory").getResultSet();
                 LinkedList<Integer> inventory = new LinkedList<Integer>();
                 while(inventoryResultSet.next()){
                     int itemID = inventoryResultSet.getInt(2);
                     if(itemID != 0){
-                        String itemName = databaseAppState.getString("SELECT name FROM items WHERE id = " + itemID);
+                        String itemName = databaseAppState.getQueryResult("SELECT name FROM items WHERE id = " + itemID).nextString_Close();
                         EntityWrapper item = EntityTemplate.createFromTemplate(entityWorld, "items/" + itemName);
                         inventory.add(item.getId());
                     }
                 }
                 inventoryResultSet.close();
-                ownedCharacterResultSet.close();
+                results_UserCharacters.close();
                 unit.setComponent(new SightRangeComponent(30));
                 unit.setComponent(new InventoryComponent(Util.convertToArray(inventory)));
                 unit.setComponent(new GoldComponent(475));
