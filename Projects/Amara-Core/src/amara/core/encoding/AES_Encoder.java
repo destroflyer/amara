@@ -6,9 +6,9 @@ package amara.core.encoding;
 
 import java.nio.ByteBuffer;
 import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -16,21 +16,29 @@ import sun.misc.BASE64Encoder;
  */
 public class AES_Encoder extends Encoder{
 
-    public AES_Encoder(long keyPart1, long keyPart2){
+    public AES_Encoder(long keyPart1, long keyPart2, long ivPart1, long ivPart2){
         byte[] keyBytes = ByteBuffer.allocate(16).putLong(keyPart1).putLong(keyPart2).array();
+        byte[] ivBytes = ByteBuffer.allocate(16).putLong(ivPart1).putLong(ivPart2).array();
         secretKeySpec = new SecretKeySpec(keyBytes, ALGORITHM_NAME);
+        ivParameterSpec = new IvParameterSpec(ivBytes);
+        try{
+            cipher = Cipher.getInstance(ALGORITHM_NAME + ALGORITHM_MODE);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
     private static final String ALGORITHM_NAME = "AES";
+    private static final String ALGORITHM_MODE = "/CBC/PKCS5Padding";
     private SecretKeySpec secretKeySpec;
+    private IvParameterSpec ivParameterSpec;
+    private Cipher cipher;
     
     @Override
     public String encode(String text){
         try{
-            Cipher cipher = Cipher.getInstance(ALGORITHM_NAME);
-            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);
             byte[] encrypted = cipher.doFinal(text.getBytes());
-            BASE64Encoder myEncoder = new BASE64Encoder();
-            return myEncoder.encode(encrypted);
+            return DatatypeConverter.printBase64Binary(encrypted);
         }catch(Exception ex){
             ex.printStackTrace();
         }
@@ -40,10 +48,8 @@ public class AES_Encoder extends Encoder{
     @Override
     public String decode(String text){
         try{
-            Cipher cipher = Cipher.getInstance(ALGORITHM_NAME);
-            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
-            BASE64Decoder myDecoder = new BASE64Decoder();
-            byte[] encrypted = myDecoder.decodeBuffer(text);
+            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, ivParameterSpec);
+            byte[] encrypted = DatatypeConverter.parseBase64Binary(text);
             byte[] textBytes = cipher.doFinal(encrypted);
             return new String(textBytes);
         }catch(Exception ex){
@@ -53,7 +59,7 @@ public class AES_Encoder extends Encoder{
     }
     
     public static void main(String[] args){
-        AES_Encoder encoder = new AES_Encoder(42, 999);
+        AES_Encoder encoder = new AES_Encoder(42, 999, 0, 0);
         String text = "this is a test";
         System.out.println("TEXT: " + text);
         String encodedText = encoder.encode(text);

@@ -22,6 +22,7 @@ public class DatabaseAppState extends BaseHeadlessAppState{
         super.initialize(stateManager, application);
         //database = new HSQLDatabase("file:C:/Databases/Amara", "amara_admin", "");
         database = new PostgreDatabase("//localhost/amaradb", "amara_admin", "test");
+        //executeScript("delete_tables");
         executeScript("create_tables");
         //executeScript("testdata");
     }

@@ -43,7 +43,7 @@ public class PlayersAppState extends ServerBaseAppState{
         String[] keyPartLines = FileManager.getFileLines("./key_to_the_city.ini");
         long keyPart1 = Long.parseLong(keyPartLines[0]);
         long keyPart2 = Long.parseLong(keyPartLines[1]);
-        passwordEncoder = new AES_Encoder(keyPart1, keyPart2);
+        passwordEncoder = new AES_Encoder(keyPart1, keyPart2, 0, 0);
     }
     
     public PlayerStatus getPlayerStatus(int playerID){
