@@ -14,7 +14,7 @@ import java.net.URL;
 public class WebserverInfo{
     
     public static final String CONNECTION_PROTOCOL = "http";
-    public static final String HOST = "destroflyer.mania-community.de";
+    public static final String HOST = "destrostudios.com";
     public static final String PATH = "/amara/";
     public static final String REQUEST_PATH = "request/";
     
