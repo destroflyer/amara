@@ -4332,6 +4332,15 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.visuals.ModelComponent(modelSkinPath);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent>("teamModel"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent construct(){
+                String modelSkinPath = xmlTemplateManager.parseValue(entityWorld, element.getText());
+                return new amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent(modelSkinPath);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.visuals.TitleComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.visuals.TitleComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.TitleComponent>("title"){
 

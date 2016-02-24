@@ -31,7 +31,7 @@ public class MapObstaclesAppState extends BaseDisplayAppState<DisplayApplication
 
     private Node node = new Node();
     private Node obstaclesNode = new Node();
-    private boolean displayObstacles = true;
+    private boolean displayObstacles;
     
     @Override
     public void initialize(AppStateManager stateManager, Application application){
@@ -44,6 +44,7 @@ public class MapObstaclesAppState extends BaseDisplayAppState<DisplayApplication
         node.attachChild(obstaclesNode);
         mainApplication.getRootNode().attachChild(node);
         update();
+        setDisplayObstacles(false);
     }
     
     public void update(){

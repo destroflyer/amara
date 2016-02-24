@@ -32,7 +32,10 @@ public class PlayerTeamSystem implements EntitySystem{
     }
     
     public boolean isAllied(EntityWorld entityWorld, int entity){
-        TeamComponent teamComponent = entityWorld.getComponent(entity, TeamComponent.class);
+        return isAllied(entityWorld.getComponent(entity, TeamComponent.class));
+    }
+    
+    public boolean isAllied(TeamComponent teamComponent){
         if(teamComponent != null){
             return (teamComponent.getTeamEntity() == playerTeamEntity);
         }
