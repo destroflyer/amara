@@ -81,8 +81,8 @@ public class IngameSettings extends SettingsCategory{
                         new Setting("resolution_height", "Resolution (Height)", new SliderType(720, 600, 1080, 1, 10)),
                         new Setting("frame_rate", "Frame Rate", new SliderType(60, 15, 120, 1, 1)),
                         new Setting("antialiasing", "Antialiasing", new SliderType(0, 0, 32, 1, 1)),
-                        new Setting("fullscreen", "Fullscreen", new BooleanType(false)),
-                        new Setting("vsync", "VSync", new BooleanType(false))
+                        new Setting("fullscreen", "Fullscreen", new BooleanType(true)),
+                        new Setting("vsync", "VSync", new BooleanType(true))
                     }
                 ),
                 new SettingsCategory(
