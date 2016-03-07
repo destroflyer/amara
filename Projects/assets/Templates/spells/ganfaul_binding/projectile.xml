@@ -13,6 +13,7 @@
         </intersectionRules>
         <removeOnMapLeave/>
         <isProjectile/>
+        <lifetime>1.5</lifetime>
     </entity>
     <!--trigger spell effects-->
     <entity>

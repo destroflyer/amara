@@ -203,6 +203,7 @@ public class Map_Arama extends Map{
         }
         //Boss
         EntityWrapper bossCamp = entityWorld.getWrapped(entityWorld.createEntity());
+        bossCamp.setComponent(new CampMaximumAggroDistanceComponent(20));
         bossCamp.setComponent(new CampHealthResetComponent());
         EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
         spawnInformation.setComponent(new SpawnTemplateComponent("arama_boss", "arama_camp_boss"));
