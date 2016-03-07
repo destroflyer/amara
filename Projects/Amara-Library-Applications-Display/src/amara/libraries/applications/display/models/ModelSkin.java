@@ -12,6 +12,7 @@ import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.material.RenderState.FaceCullMode;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
@@ -204,6 +205,11 @@ public class ModelSkin{
             if(directionElement != null){
                 float[] direction = Util.parseToFloatArray(directionElement.getText().split(","));
                 JMonkeyUtil.setLocalRotation(spatial, new Vector3f(direction[0], direction[1], direction[2]));
+            }
+            Element rotationElement = positionElement.getChild("rotation");
+            if(rotationElement != null){
+                float[] rotation = Util.parseToFloatArray(rotationElement.getText().split(","));
+                spatial.rotate(new Quaternion(rotation[0], rotation[1], rotation[2], rotation[3]));
             }
         }
     }

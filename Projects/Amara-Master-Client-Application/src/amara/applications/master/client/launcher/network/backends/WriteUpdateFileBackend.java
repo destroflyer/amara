@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import com.jme3.network.Message;
+import amara.applications.master.client.launcher.ClientLauncher;
 import amara.applications.master.network.messages.Message_UpdateFilePart;
 import amara.applications.master.network.messages.objects.UpdateFile;
 import amara.libraries.network.*;
@@ -18,7 +19,8 @@ import amara.libraries.network.*;
  */
 public class WriteUpdateFileBackend implements MessageBackend{
 
-    public WriteUpdateFileBackend(UpdateFile updateFile){
+    public WriteUpdateFileBackend(ClientLauncher clientLauncher, UpdateFile updateFile){
+        this.clientLauncher = clientLauncher;
         this.updateFile = updateFile;
         try{
             fileOutputStream = new FileOutputStream(updateFile.getFilePath());
@@ -26,6 +28,7 @@ public class WriteUpdateFileBackend implements MessageBackend{
             System.err.println("Error while initializing download '" + updateFile.getFilePath() + "'.");
         }
     }
+    private ClientLauncher clientLauncher;
     private UpdateFile updateFile;
     private FileOutputStream fileOutputStream;
     private int writtenBytes;
@@ -36,7 +39,9 @@ public class WriteUpdateFileBackend implements MessageBackend{
             Message_UpdateFilePart message = (Message_UpdateFilePart) receivedMessage;
             try{
                 fileOutputStream.write(message.getData());
-                writtenBytes += message.getData().length;
+                int downloadedBytes = message.getData().length;
+                writtenBytes += downloadedBytes;
+                clientLauncher.addDownloadedBytes(downloadedBytes);
                 if(isFinished()){
                     fileOutputStream.close();
                 }

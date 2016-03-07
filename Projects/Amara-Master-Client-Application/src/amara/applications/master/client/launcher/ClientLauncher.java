@@ -48,6 +48,7 @@ public class ClientLauncher extends JFrame{
         connectToMasterserver();
     }
     private MasterserverClientApplication masterClient;
+    private int totalChecked_KB;
     private boolean wasUpdateNeeded;
     private PanLogin forcedLoginPanel;
     private AWTEventListener keyListener = new AWTEventListener(){
@@ -136,12 +137,17 @@ public class ClientLauncher extends JFrame{
 
             @Override
             public void run(){
-                pbrCompleteUpdate.setMaximum(updateFiles.size());
+                int totalFizeSizes_KB = 0;
+                for(UpdateFile updateFile : updateFiles){
+                    totalFizeSizes_KB += (updateFile.getSize() / 1024);
+                }
+                pbrCompleteUpdate.setMaximum(totalFizeSizes_KB);
+                pbrCompleteUpdate.setString("Checking for changes... (" + updateFiles.size() + " files, " + (totalFizeSizes_KB / 1024) + " MB)");
+                totalChecked_KB = 0;
                 int i = 0;
                 for(UpdateFile updateFile : updateFiles){
-                    pbrCompleteUpdate.setString(updateFile.getFilePath());
+                    pbrCurrentFile.setString(updateFile.getFilePath());
                     updateFile(updateFile, i);
-                    pbrCompleteUpdate.setValue(i + 1);
                     i++;
                 }
                 pbrCompleteUpdate.setString("The game is up to date.");
@@ -170,9 +176,8 @@ public class ClientLauncher extends JFrame{
             }
             if(needsUpdate){
                 pbrCurrentFile.setMaximum((int) updateFile.getSize());
-                pbrCurrentFile.setString("Initializing download (" + (updateFile.getSize() / 100) + " kB)");
                 NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-                WriteUpdateFileBackend writeUpdateFileBackend = new WriteUpdateFileBackend(updateFile);
+                WriteUpdateFileBackend writeUpdateFileBackend = new WriteUpdateFileBackend(this, updateFile);
                 networkClient.addMessageBackend(writeUpdateFileBackend);
                 networkClient.sendMessage(new Message_GetUpdateFile(index));
                 while(!writeUpdateFileBackend.isFinished()){
@@ -180,9 +185,8 @@ public class ClientLauncher extends JFrame{
                         Thread.sleep(20);
                     }catch(InterruptedException ex){
                     }
-                    int downloadedBytes = (int) file.length();
-                    pbrCurrentFile.setString(Util.getPercentage_Rounded(pbrCurrentFile.getMaximum(), downloadedBytes) + "%");
-                    pbrCurrentFile.setValue(downloadedBytes);
+                    int currentFileSize = (int) file.length();
+                    pbrCurrentFile.setValue(currentFileSize);
                 }
                 networkClient.removeMessageBackend(writeUpdateFileBackend);
                 VersionManager.getInstance().onFileUpdated(updateFile.getFilePath());
@@ -190,9 +194,15 @@ public class ClientLauncher extends JFrame{
             }
             else{
                 pbrCurrentFile.setValue(pbrCurrentFile.getMaximum());
-                pbrCurrentFile.setString("File up to date");
+                addDownloadedBytes(updateFile.getSize());
             }
         }
+    }
+    
+    public void addDownloadedBytes(long bytes){
+        totalChecked_KB += (bytes / 1024);
+        pbrCompleteUpdate.setValue(totalChecked_KB);
+        pbrCompleteUpdate.setString(Util.getPercentage_Rounded(pbrCompleteUpdate.getMaximum(), totalChecked_KB) + "%");
     }
 
     /** This method is called from within the constructor to

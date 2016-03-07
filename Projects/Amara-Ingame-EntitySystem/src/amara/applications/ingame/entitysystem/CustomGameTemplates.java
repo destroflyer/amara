@@ -22,6 +22,7 @@ import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
+import amara.applications.ingame.entitysystem.components.visuals.animations.*;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.*;
 import amara.libraries.physics.shapes.*;
@@ -89,12 +90,16 @@ public class CustomGameTemplates{
                 }
                 else if(templateName.equals("etherdesert_creep_melee")){
                     entityWrapper.setComponent(new NameComponent("Melee Creep"));
-                    entityWrapper.setComponent(new TeamModelComponent("Models/minion/skin_team.xml"));
+                    entityWrapper.setComponent(new TeamModelComponent("Models/3dsa_medieval_knight/skin_team.xml"));
+                    EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+                    idleAnimation.setComponent(new NameComponent("idle"));
+                    idleAnimation.setComponent(new LoopDurationComponent(2));
+                    entityWrapper.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
                     EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
                     walkAnimation.setComponent(new NameComponent("walk"));
                     entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
                     EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
-                    autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
+                    autoAttackAnimation.setComponent(new NameComponent("attack_1"));
                     entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
 
                     entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
@@ -132,12 +137,16 @@ public class CustomGameTemplates{
                 }
                 else if(templateName.equals("etherdesert_creep_range")){
                     entityWrapper.setComponent(new NameComponent("Ranged Creep"));
-                    entityWrapper.setComponent(new TeamModelComponent("Models/wizard/skin_team.xml"));
+                    entityWrapper.setComponent(new TeamModelComponent("Models/3dsa_archer/skin_team.xml"));
+                    EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+                    idleAnimation.setComponent(new NameComponent("idle"));
+                    idleAnimation.setComponent(new LoopDurationComponent(2));
+                    entityWrapper.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
                     EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
                     walkAnimation.setComponent(new NameComponent("walk"));
                     entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
                     EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
-                    autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
+                    autoAttackAnimation.setComponent(new NameComponent("shoot_arrow"));
                     entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
 
                     entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
@@ -158,7 +167,7 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new IsTargetableComponent());
                     entityWrapper.setComponent(new IsVulnerableComponent());
 
-                    EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
+                    EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack,Models/3dsa_archer_arrow/skin.xml");
                     entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
                     entityWrapper.setComponent(new AutoAggroComponent(12));
                     entityWrapper.setComponent(new MaximumAggroRangeComponent(30));
