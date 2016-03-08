@@ -18,6 +18,7 @@
         </instantEffectTriggers>
         <castType>selfcast</castType>
         <baseCooldown>100</baseCooldown>
+        <spellRequiredLevel>6</spellRequiredLevel>
     </entity>
     <!--spell effect-->
     <entity>

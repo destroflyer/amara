@@ -40,7 +40,6 @@ public class MapObstaclesAppState extends BaseDisplayAppState<DisplayApplication
         mainApplication.getInputManager().addListener(this, new String[]{
             "toggle_hitboxes"
         });
-        node.setLocalTranslation(0, 1, 0);
         node.attachChild(obstaclesNode);
         mainApplication.getRootNode().attachChild(node);
         update();
@@ -48,8 +47,9 @@ public class MapObstaclesAppState extends BaseDisplayAppState<DisplayApplication
     }
     
     public void update(){
-        obstaclesNode.detachAllChildren();
         Map map = getAppState(MapAppState.class).getMap();
+        node.setLocalTranslation(0, map.getPhysicsInformation().getGroundHeight(), 0);
+        obstaclesNode.detachAllChildren();
         for(Shape shape : map.getPhysicsInformation().getObstacles()){
             Geometry collisionMeshGeometry = generateGeometry(shape);
             collisionMeshGeometry.setLocalTranslation((float) shape.getTransform().extractX(), 0, (float) shape.getTransform().extractY());

@@ -2881,6 +2881,19 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent(duration);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent>("spellRequiredLevel"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent construct(){
+                int level = 0;
+                String levelText = element.getText();
+                if((levelText != null) && (levelText.length() > 0)){
+                    level = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, levelText));
+                }
+                return new amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent(level);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent.class.getDeclaredField("targetRulesEntity"), componentFieldSerializer_Entity);

@@ -54,7 +54,7 @@ public class Map_Arama extends Map{
     }
     private final float laneCenterY = 260.25f;
     private final float timeUntilWaveStart = 5;
-    private final float waveInterval = 50;
+    private final float waveInterval = 55;
     private int[] backportPositionEntities = new int[2];
 
     @Override

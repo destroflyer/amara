@@ -50,7 +50,7 @@ public class Map_Destroforest extends Map{
         instantEffectTrigger.setComponent(new InstantTriggerComponent());
         instantEffectTrigger.setComponent(new SourceTargetComponent());
         EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
-        effect1.setComponent(new PlayCinematicComponent("amara.game.maps.Map_Destroforest_CinematicIntro"));
+        effect1.setComponent(new PlayCinematicComponent("amara.applications.ingame.maps.Map_Destroforest_CinematicIntro"));
         instantEffectTrigger.setComponent(new TriggeredEffectComponent(effect1.getId()));
         instantEffectTrigger.setComponent(new TriggerSourceComponent(Game.ENTITY));
         instantEffectTrigger.setComponent(new TriggerOnceComponent());

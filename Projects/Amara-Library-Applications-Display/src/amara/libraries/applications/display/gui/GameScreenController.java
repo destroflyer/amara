@@ -18,6 +18,9 @@ import de.lessvoid.nifty.controls.RadioButton;
 import de.lessvoid.nifty.controls.ScrollPanel;
 import de.lessvoid.nifty.controls.Slider;
 import de.lessvoid.nifty.controls.Window;
+import de.lessvoid.nifty.effects.Effect;
+import de.lessvoid.nifty.effects.EffectEventId;
+import de.lessvoid.nifty.effects.impl.Hint;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.*;
 import de.lessvoid.nifty.render.NiftyImage;
@@ -116,7 +119,7 @@ public class GameScreenController implements ScreenController{
     }
     
     protected Element getElementByID(String id){
-        return nifty.getScreen(screenID).findElementByName(id);
+        return nifty.getScreen(screenID).findElementById(id);
     }
     
     public void goToScreen(String screenID){
@@ -144,6 +147,21 @@ public class GameScreenController implements ScreenController{
         elementBuilder.onEndHoverEffect(endHoverEffect);
     }
     
+    protected void showHintText(String elementID, String description){
+        Effect hoverEffect = getHintEffect(elementID);
+        hoverEffect.enableHover(null);
+        hoverEffect.getParameters().setProperty("hintText", description);
+    }
+    
+    protected void hideHintText(String elementID){
+        Effect hoverEffect = getHintEffect(elementID);
+        hoverEffect.disableHover();
+    }
+    
+    protected Effect getHintEffect(String elementID){
+        return getElementByID(elementID).getEffects(EffectEventId.onHover, Hint.class).get(0);
+    }
+    
     //This method can be called to avoid the user interface to receive the event
     public void doNothing(){
         
@@ -151,14 +169,17 @@ public class GameScreenController implements ScreenController{
     
     //ScreenControllerInterface
 
+    @Override
     public void bind(Nifty nifty, Screen screen){
         
     }
 
+    @Override
     public void onStartScreen(){
         
     }
 
+    @Override
     public void onEndScreen(){
         
     }

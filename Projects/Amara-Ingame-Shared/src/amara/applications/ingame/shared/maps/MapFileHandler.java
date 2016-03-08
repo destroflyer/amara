@@ -235,13 +235,14 @@ public class MapFileHandler{
             int width = elementPhysics.getAttribute("width").getIntValue();
             int height = elementPhysics.getAttribute("height").getIntValue();
             float heightmapScale = elementPhysics.getAttribute("heightmapScale").getFloatValue();
+            float groundHeight = elementPhysics.getAttribute("groundHeight").getFloatValue();
             Element elementObstacles = elementPhysics.getChild("obstacles");
             ArrayList<ConvexShape> obstacles = new ArrayList<ConvexShape>();
             for(Object elementShapeObject : elementObstacles.getChildren()){
                 ConvexShape shape = generateShape((Element) elementShapeObject);
                 obstacles.add(shape);
             }
-            MapPhysicsInformation physicsInformation = new MapPhysicsInformation(width, height, heightmapScale, obstacles);
+            MapPhysicsInformation physicsInformation = new MapPhysicsInformation(width, height, heightmapScale, groundHeight, obstacles);
             map.setPhysicsInformation(physicsInformation);
             Element elementVisuals = root.getChild("visuals");
             for(Object elementVisualObject : elementVisuals.getChildren()){

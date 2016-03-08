@@ -25,7 +25,7 @@
 			<texture scale="1.0">Textures/terrain/blank.png</texture>
 		</textures>
 	</terrain>
-	<physics width="200" height="200" heightmapScale="0.0225">
+	<physics width="200" height="200" heightmapScale="0.0225" groundHeight="2">
 		<obstacles>
 			<simpleConvex>
 				<base>
@@ -34,7 +34,7 @@
 					<point>1.5,-1.5</point>
 					<point>1.5,1.5</point>
 				</base>
-				<transform x="96.0" y="87.75" direction="0.0" scale="1.0" />
+				<transform x="96.0" y="87.75" direction="0.0" scale="1.0" />z
 			</simpleConvex>
 			<simpleConvex>
 				<base>

@@ -5,6 +5,7 @@
 package amara.applications.ingame.client.systems.gui;
 
 import amara.applications.ingame.client.gui.ScreenController_HUD;
+import amara.applications.ingame.client.gui.objects.ItemDescription;
 import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.libraries.entitysystem.*;
@@ -39,7 +40,14 @@ public class DisplayScoreboardInventoriesSystem extends PlayersDisplaySystem{
         InventoryComponent inventoryComponent = entityWorld.getComponent(scoreEntity, InventoryComponent.class);
         for(int i=0;i<6;i++){
             String imageFilePath = DisplayInventorySystem.getItemImageFilePath(entityWorld, inventoryComponent.getItemEntities(), i);
-            screenController_HUD.setScoreboard_InventoryItemImage(playerIndex, i, imageFilePath);
+            screenController_HUD.setScoreboard_InventoryItem_Image(playerIndex, i, imageFilePath);
+            if((i < inventoryComponent.getItemEntities().length) && (inventoryComponent.getItemEntities()[i] != -1)){
+                String description = ItemDescription.generate_NameAndDescription(entityWorld, inventoryComponent.getItemEntities()[i]);
+                screenController_HUD.showScoreboard_InventoryItem_Description(playerIndex, i, description);
+            }
+            else{
+                screenController_HUD.hideScoreboard_InventoryItem_Description(playerIndex, i);
+            }
         }
     }
 }

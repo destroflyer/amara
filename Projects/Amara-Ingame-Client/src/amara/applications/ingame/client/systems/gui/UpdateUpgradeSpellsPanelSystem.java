@@ -6,7 +6,6 @@ package amara.applications.ingame.client.systems.gui;
 
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.units.*;
-import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.systems.spells.SpellUtil;
 import amara.libraries.entitysystem.*;
 
@@ -44,28 +43,18 @@ public class UpdateUpgradeSpellsPanelSystem extends GUIDisplaySystem{
         SpellsComponent spellsComponent = entityWorld.getComponent(selectedEntity, SpellsComponent.class);
         SpellsUpgradePointsComponent spellsUpgradePointsComponent = entityWorld.getComponent(selectedEntity, SpellsUpgradePointsComponent.class);
         if((spellsComponent != null) && (spellsUpgradePointsComponent != null)){
-            int[] spells = spellsComponent.getSpellsEntities();
-            int spellsUpgradePoints = spellsUpgradePointsComponent.getUpgradePoints();
-            LearnableSpellsComponent learnableSpellsComponent = entityWorld.getComponent(selectedEntity, LearnableSpellsComponent.class);
             boolean showLayer = false;
             boolean showButton;
             boolean learnOrUpgrade = false;
             for(int i=0;i<4;i++){
                 showButton = false;
-                if((i < spells.length) && (spells[i] != -1)){
-                    SpellUpgradesComponent spellUpgradesComponent = entityWorld.getComponent(spells[i], SpellUpgradesComponent.class);
-                    if((spellUpgradesComponent != null) && (spellsUpgradePoints >= SpellUtil.SPELL_POINTS_COST_UPGRADE)){
-                        showButton = true;
-                        learnOrUpgrade = false;
-                    }
+                if(SpellUtil.canUpgradeSpell(entityWorld, selectedEntity, i)){
+                    showButton = true;
+                    learnOrUpgrade = false;
                 }
-                else if(learnableSpellsComponent != null){
-                    if((i < learnableSpellsComponent.getSpellsEntities().length) && (learnableSpellsComponent.getSpellsEntities()[i] != -1)){
-                        if(spellsUpgradePoints >= SpellUtil.SPELL_POINTS_COST_LEARN){
-                            showButton = true;
-                            learnOrUpgrade = true;
-                        }
-                    }
+                else if(SpellUtil.canLearnSpell(entityWorld, selectedEntity, i)){
+                    showButton = true;
+                    learnOrUpgrade = true;
                 }
                 screenController_HUD.setUpgradeSpellsButtonVisible(i, showButton);
                 if(showButton){

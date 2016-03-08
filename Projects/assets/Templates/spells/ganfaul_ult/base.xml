@@ -51,6 +51,7 @@
             </entity>
         </castAnimation>
         <baseCooldown>90</baseCooldown>
+        <spellRequiredLevel>6</spellRequiredLevel>
     </entity>
     <!--spell effect-->
     <entity>

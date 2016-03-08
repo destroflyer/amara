@@ -41,6 +41,7 @@
                 <acceptEnemies/>
             </entity>
         </spellTargetRules>
+        <spellRequiredLevel>6</spellRequiredLevel>
     </entity>
     <!--spell effect-->
     <entity>

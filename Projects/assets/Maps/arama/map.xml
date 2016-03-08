@@ -23,7 +23,7 @@
 			<texture scale="1.0">Textures/terrain/blank.png</texture>
 		</textures>
 	</terrain>
-	<physics width="525" height="525" heightmapScale="0.075">
+	<physics width="525" height="525" heightmapScale="0.075" groundHeight="15">
 		<obstacles>
 			<circle radius="3.0">
 				<transform x="171.0" y="260.25" direction="0.0" scale="1.0" />

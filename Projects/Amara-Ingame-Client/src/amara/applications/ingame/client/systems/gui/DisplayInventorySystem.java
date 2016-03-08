@@ -5,6 +5,7 @@
 package amara.applications.ingame.client.systems.gui;
 
 import amara.applications.ingame.client.gui.ScreenController_HUD;
+import amara.applications.ingame.client.gui.objects.ItemDescription;
 import amara.applications.ingame.entitysystem.components.items.*;
 import amara.libraries.entitysystem.*;
 
@@ -29,7 +30,14 @@ public class DisplayInventorySystem extends GUIDisplaySystem{
         if(inventoryComponent != null){
             for(int i=0;i<6;i++){
                 String imageFilePath = getItemImageFilePath(entityWorld, inventoryComponent.getItemEntities(), i);
-                screenController_HUD.setInventoryItemImage(i, imageFilePath);
+                screenController_HUD.setInventoryItem_Image(i, imageFilePath);
+                if((i < inventoryComponent.getItemEntities().length) && (inventoryComponent.getItemEntities()[i] != -1)){
+                    String description = ItemDescription.generate_NameAndDescription(entityWorld, inventoryComponent.getItemEntities()[i]);
+                    screenController_HUD.showInventoryItem_Description(i, description);
+                }
+                else{
+                    screenController_HUD.hideInventoryItem_Description(i);
+                }
             }
         }
     }

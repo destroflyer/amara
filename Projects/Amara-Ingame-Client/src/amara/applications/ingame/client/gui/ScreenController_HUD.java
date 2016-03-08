@@ -9,6 +9,7 @@ import amara.applications.ingame.client.gui.objects.SpellInformation;
 import amara.core.Util;
 import amara.libraries.applications.display.appstates.NiftyAppState;
 import amara.libraries.applications.display.gui.GameScreenController;
+import de.lessvoid.nifty.builder.HoverEffectBuilder;
 import de.lessvoid.nifty.builder.ImageBuilder;
 import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.builder.TextBuilder;
@@ -47,6 +48,7 @@ public class ScreenController_HUD extends GameScreenController{
             hideSpellCooldown(i);
         }
         for(int i=0;i<6;i++){
+            hideInventoryItem_Description(i);
             hideItemCooldown(i);
         }
         for(int i=0;i<2;i++){
@@ -147,8 +149,16 @@ public class ScreenController_HUD extends GameScreenController{
         hideCooldown("spell", index);
     }
     
-    public void setInventoryItemImage(int index, String imagePath){
+    public void setInventoryItem_Image(int index, String imagePath){
         getImageRenderer("inventory_item_" + index + "_image").setImage(createImage(imagePath));
+    }
+    
+    public void showInventoryItem_Description(int index, String description){
+        showHintText("inventory_item_" + index + "_image", description);
+    }
+    
+    public void hideInventoryItem_Description(int index){
+        hideHintText("inventory_item_" + index + "_image");
     }
     
     public void showItemCooldown(int index, float remainingTime){
@@ -394,6 +404,10 @@ public class ScreenController_HUD extends GameScreenController{
                             width("30px");
                             height("30px");
                             filename("Interface/hud/items/unknown.png");
+                            
+                            onHoverEffect(new HoverEffectBuilder("hint"){{
+                                effectParameter("hintText", "?");
+                            }});
                         }});
                     }
                     panel(new PanelBuilder(){{
@@ -439,7 +453,15 @@ public class ScreenController_HUD extends GameScreenController{
         getTextRenderer("scoreboard_player_" + playerIndex + "_" + suffix).setText(text);
     }
     
-    public void setScoreboard_InventoryItemImage(int playerIndex, int itemIndex, String imagePath){
+    public void setScoreboard_InventoryItem_Image(int playerIndex, int itemIndex, String imagePath){
         getImageRenderer("scoreboard_player_" + playerIndex + "_item_" + itemIndex + "_image").setImage(createImage(imagePath));
+    }
+    
+    public void showScoreboard_InventoryItem_Description(int playerIndex, int itemIndex, String description){
+        showHintText("scoreboard_player_" + playerIndex + "_item_" + itemIndex + "_image", description);
+    }
+    
+    public void hideScoreboard_InventoryItem_Description(int playerIndex, int itemIndex){
+        hideHintText("scoreboard_player_" + playerIndex + "_item_" + itemIndex + "_image");
     }
 }

@@ -19,31 +19,58 @@ public class SpellUtil{
     public static final int SPELL_POINTS_COST_UPGRADE = 2;
     
     public static void learnSpell(EntityWorld entityWorld, int entity, int spellIndex){
-        int spellsUpgradePoints = entityWorld.getComponent(entity, SpellsUpgradePointsComponent.class).getUpgradePoints();
-        if(spellsUpgradePoints >= SPELL_POINTS_COST_LEARN){
-            LearnableSpellsComponent learnableSpellsComponent = entityWorld.getComponent(entity, LearnableSpellsComponent.class);
-            if((learnableSpellsComponent != null) && (spellIndex < learnableSpellsComponent.getSpellsEntities().length)){
-                int spellEntity = learnableSpellsComponent.getSpellsEntities()[spellIndex];
-                setSpell(entityWorld, entity, spellIndex, spellEntity);
-                entityWorld.setComponent(entity, new SpellsUpgradePointsComponent(spellsUpgradePoints - SPELL_POINTS_COST_LEARN));
+        if(canLearnSpell(entityWorld, entity, spellIndex)){
+            int spellEntity = entityWorld.getComponent(entity, LearnableSpellsComponent.class).getSpellsEntities()[spellIndex];
+            setSpell(entityWorld, entity, spellIndex, spellEntity);
+            int spellsUpgradePoints = entityWorld.getComponent(entity, SpellsUpgradePointsComponent.class).getUpgradePoints();
+            entityWorld.setComponent(entity, new SpellsUpgradePointsComponent(spellsUpgradePoints - SPELL_POINTS_COST_LEARN));
+        }
+    }
+    
+    public static boolean canLearnSpell(EntityWorld entityWorld, int entity, int spellIndex){
+        int[] spells = entityWorld.getComponent(entity, SpellsComponent.class).getSpellsEntities();
+        if((spellIndex >= spells.length) || (spells[spellIndex] == -1)){
+            int spellsUpgradePoints = entityWorld.getComponent(entity, SpellsUpgradePointsComponent.class).getUpgradePoints();
+            if(spellsUpgradePoints >= SPELL_POINTS_COST_LEARN){
+                LearnableSpellsComponent learnableSpellsComponent = entityWorld.getComponent(entity, LearnableSpellsComponent.class);
+                if((learnableSpellsComponent != null) && (spellIndex < learnableSpellsComponent.getSpellsEntities().length)){
+                    int spellEntity = learnableSpellsComponent.getSpellsEntities()[spellIndex];
+                    boolean isAllowed = true;
+                    SpellRequiredLevelComponent spellRequiredLevelComponent = entityWorld.getComponent(spellEntity, SpellRequiredLevelComponent.class);
+                    if(spellRequiredLevelComponent != null){
+                        int level = entityWorld.getComponent(entity, LevelComponent.class).getLevel();
+                        isAllowed = (level >= spellRequiredLevelComponent.getLevel());
+                    }
+                    return isAllowed;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public static void upgradeSpell(EntityWorld entityWorld, int entity, int spellIndex, int upgradeIndex){
+        if(canUpgradeSpell(entityWorld, entity, spellIndex)){
+            int[] spells = entityWorld.getComponent(entity, SpellsComponent.class).getSpellsEntities();
+            int[] upgradedSpells = entityWorld.getComponent(spells[spellIndex], SpellUpgradesComponent.class).getSpellsEntities();
+            if(upgradeIndex < upgradedSpells.length){
+                int upgradedSpellEntity = upgradedSpells[upgradeIndex];
+                transferRemainingCooldown(entityWorld, spells[spellIndex], upgradedSpellEntity);
+                setSpell(entityWorld, entity, spellIndex, upgradedSpellEntity);
+                int spellsUpgradePoints = entityWorld.getComponent(entity, SpellsUpgradePointsComponent.class).getUpgradePoints();
+                entityWorld.setComponent(entity, new SpellsUpgradePointsComponent(spellsUpgradePoints - SPELL_POINTS_COST_UPGRADE));
             }
         }
     }
     
-    public static void upgradeSpell(EntityWorld entityWorld, int entity, int spellIndex, int upgradeIndex){
+    public static boolean canUpgradeSpell(EntityWorld entityWorld, int entity, int spellIndex){
         int spellsUpgradePoints = entityWorld.getComponent(entity, SpellsUpgradePointsComponent.class).getUpgradePoints();
         if(spellsUpgradePoints >= SPELL_POINTS_COST_UPGRADE){
             int[] spells = entityWorld.getComponent(entity, SpellsComponent.class).getSpellsEntities();
             if(spellIndex < spells.length){
-                SpellUpgradesComponent spellUpgradesComponent = entityWorld.getComponent(spells[spellIndex], SpellUpgradesComponent.class);
-                if((spellUpgradesComponent != null) && (upgradeIndex < spellUpgradesComponent.getSpellsEntities().length)){
-                    int upgradedSpellEntity = spellUpgradesComponent.getSpellsEntities()[upgradeIndex];
-                    transferRemainingCooldown(entityWorld, spells[spellIndex], upgradedSpellEntity);
-                    setSpell(entityWorld, entity, spellIndex, upgradedSpellEntity);
-                    entityWorld.setComponent(entity, new SpellsUpgradePointsComponent(spellsUpgradePoints - SPELL_POINTS_COST_UPGRADE));
-                }
+                return entityWorld.hasComponent(spells[spellIndex], SpellUpgradesComponent.class);
             }
         }
+        return false;
     }
     
     public static void setSpell(EntityWorld entityWorld, int entity, int spellIndex, int spellEntity){

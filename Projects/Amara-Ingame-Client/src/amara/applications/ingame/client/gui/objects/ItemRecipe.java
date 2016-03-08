@@ -5,11 +5,6 @@
 package amara.applications.ingame.client.gui.objects;
 
 import java.util.LinkedList;
-import amara.applications.ingame.client.gui.GUIUtil;
-import amara.applications.ingame.entitysystem.components.attributes.*;
-import amara.applications.ingame.entitysystem.components.general.*;
-import amara.applications.ingame.entitysystem.components.items.*;
-import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.libraries.entitysystem.EntityWorld;
 
 /**
@@ -24,7 +19,7 @@ public class ItemRecipe{
         this.gold = gold;
         this.ingredientsRecipes = ingredientsRecipes;
         this.depth = depth;
-        generateDescription();
+        description = ItemDescription.generate_Description(entityWorld, entity);
         updateTotalGold();
     }
     private EntityWorld entityWorld;
@@ -50,131 +45,6 @@ public class ItemRecipe{
 
     public int getDepth(){
         return depth;
-    }
-    
-    private void generateDescription(){
-        description = "";
-        BonusFlatWalkSpeedComponent bonusFlatWalkSpeedComponent = entityWorld.getComponent(entity, BonusFlatWalkSpeedComponent.class);
-        if(bonusFlatWalkSpeedComponent != null){
-            addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusFlatWalkSpeedComponent.getValue()) + " Walk Speed";
-        }
-        BonusPercentageWalkSpeedComponent bonusPercentageWalkSpeedComponent = entityWorld.getComponent(entity, BonusPercentageWalkSpeedComponent.class);
-        if(bonusPercentageWalkSpeedComponent != null){
-            addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusPercentageWalkSpeedComponent.getValue() * 100) + "% Walk Speed";
-        }
-        BonusFlatMaximumHealthComponent bonusFlatMaximumHealthComponent = entityWorld.getComponent(entity, BonusFlatMaximumHealthComponent.class);
-        if(bonusFlatMaximumHealthComponent != null){
-            addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusFlatMaximumHealthComponent.getValue()) + " Health";
-        }
-        BonusFlatHealthRegenerationComponent bonusFlatHealthRegenerationComponent = entityWorld.getComponent(entity, BonusFlatHealthRegenerationComponent.class);
-        if(bonusFlatHealthRegenerationComponent != null){
-            addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusFlatHealthRegenerationComponent.getValue()) + " Health Regeneration (per Second)";
-        }
-        BonusFlatAttackDamageComponent bonusFlatAttackDamageComponent = entityWorld.getComponent(entity, BonusFlatAttackDamageComponent.class);
-        if(bonusFlatAttackDamageComponent != null){
-            addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusFlatAttackDamageComponent.getValue()) + " Attack Damage";
-        }
-        BonusPercentageAttackSpeedComponent bonusPercentageAttackSpeedComponent = entityWorld.getComponent(entity, BonusPercentageAttackSpeedComponent.class);
-        if(bonusPercentageAttackSpeedComponent != null){
-            addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusPercentageAttackSpeedComponent.getValue() * 100) + "% Attack Speed";
-        }
-        BonusPercentageCriticalChanceComponent bonusPercentageCriticalChanceComponent = entityWorld.getComponent(entity, BonusPercentageCriticalChanceComponent.class);
-        if(bonusPercentageCriticalChanceComponent != null){
-            addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusPercentageCriticalChanceComponent.getValue() * 100) + "% Critical Chance";
-        }
-        BonusPercentageLifestealComponent bonusPercentageLifestealComponent = entityWorld.getComponent(entity, BonusPercentageLifestealComponent.class);
-        if(bonusPercentageLifestealComponent != null){
-            addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusPercentageLifestealComponent.getValue() * 100) + "% Lifesteal";
-        }
-        BonusFlatAbilityPowerComponent bonusFlatAbilityPowerComponent = entityWorld.getComponent(entity, BonusFlatAbilityPowerComponent.class);
-        if(bonusFlatAbilityPowerComponent != null){
-            addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusFlatAbilityPowerComponent.getValue()) + " Ability Power";
-        }
-        BonusPercentageCooldownSpeedComponent bonusPercentageCooldownSpeedComponent = entityWorld.getComponent(entity, BonusPercentageCooldownSpeedComponent.class);
-        if(bonusPercentageCooldownSpeedComponent != null){
-            addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusPercentageCooldownSpeedComponent.getValue() * 100) + "% Cooldown Speed";
-        }
-        BonusFlatArmorComponent bonusFlatArmorComponent = entityWorld.getComponent(entity, BonusFlatArmorComponent.class);
-        if(bonusFlatArmorComponent != null){
-            addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusFlatArmorComponent.getValue()) + " Armor";
-        }
-        BonusFlatMagicResistanceComponent bonusFlatMagicResistanceComponent = entityWorld.getComponent(entity, BonusFlatMagicResistanceComponent.class);
-        if(bonusFlatMagicResistanceComponent != null){
-            addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusFlatMagicResistanceComponent.getValue()) + " Magic Resistance";
-        }
-        BonusPercentageDamageReductionComponent bonusPercentageDamageReductionComponent = entityWorld.getComponent(entity, BonusPercentageDamageReductionComponent.class);
-        if(bonusPercentageDamageReductionComponent != null){
-            addDescription_Seperator();
-            description += GUIUtil.getValueText_Signed(bonusPercentageDamageReductionComponent.getValue() * 100) + "% Damage Reduction";
-        }
-        ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(entity, ItemPassivesComponent.class);
-        if(itemPassivesComponent != null){
-            for(int passiveEntity : itemPassivesComponent.getPassiveEntities()){
-                DescriptionComponent descriptionComponent = entityWorld.getComponent(passiveEntity, DescriptionComponent.class);
-                if(descriptionComponent != null){
-                    addDescription_NewLine();
-                    if(entityWorld.hasComponent(passiveEntity, UniqueComponent.class)){
-                        description += "UNIQUE ";
-                    }
-                    description += "Passive";
-                    NameComponent nameComponent = entityWorld.getComponent(passiveEntity, NameComponent.class);
-                    if(nameComponent !=  null){
-                        description += " - " + nameComponent.getName();
-                    }
-                    description += ": " + descriptionComponent.getDescription();
-                }
-            }
-        }
-        ItemActiveComponent itemActiveComponent = entityWorld.getComponent(entity, ItemActiveComponent.class);
-        if(itemActiveComponent != null){
-            int spellEntity = itemActiveComponent.getSpellEntity();
-            DescriptionComponent descriptionComponent = entityWorld.getComponent(spellEntity, DescriptionComponent.class);
-            if(descriptionComponent != null){
-                addDescription_NewLine();
-                if(entityWorld.hasComponent(spellEntity, UniqueComponent.class)){
-                    description += "UNIQUE ";
-                }
-                if(itemActiveComponent.isConsumable()){
-                    description += "Consumable";
-                }
-                else{
-                    description += "Active";
-                }
-                NameComponent nameComponent = entityWorld.getComponent(spellEntity, NameComponent.class);
-                if(nameComponent !=  null){
-                    description += " - " + nameComponent.getName();
-                }
-                description += ": " + descriptionComponent.getDescription();
-                BaseCooldownComponent baseCooldownComponent = entityWorld.getComponent(spellEntity, BaseCooldownComponent.class);
-                if(baseCooldownComponent != null){
-                    description += " (" + GUIUtil.getValueText(baseCooldownComponent.getDuration()) + " seconds cooldown)";
-                }
-            }
-        }
-    }
-    
-    private void addDescription_Seperator(){
-        if(description.length() > 0){
-            description += ", ";
-        }
-    }
-    
-    private void addDescription_NewLine(){
-        if(description.length() > 0){
-            description += "\n";
-        }
     }
 
     public String getDescription(){
