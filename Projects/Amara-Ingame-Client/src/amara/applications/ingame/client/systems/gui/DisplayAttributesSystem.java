@@ -31,13 +31,11 @@ public class DisplayAttributesSystem extends GUIDisplaySystem{
         String magicResistanceText = NON_EXISTING_ATTRIBUTE_TEXT;
         String walkSpeedText = NON_EXISTING_ATTRIBUTE_TEXT;
         float healthPortion = 0;
-        if(entityWorld.hasComponent(selectedEntity, HealthComponent.class)){
+        if(entityWorld.hasComponent(selectedEntity, HealthComponent.class) && entityWorld.hasComponent(selectedEntity, MaximumHealthComponent.class)){
             float health = entityWorld.getComponent(selectedEntity, HealthComponent.class).getValue();
-            healthText = ("" + (int) health);
-            MaximumHealthComponent maximumHealthComponent = entityWorld.getComponent(selectedEntity, MaximumHealthComponent.class);
-            if(maximumHealthComponent != null){
-                healthPortion = (health / maximumHealthComponent.getValue());
-            }
+            float maximumHealth = entityWorld.getComponent(selectedEntity, MaximumHealthComponent.class).getValue();
+            healthText = (((int) health) + " / " + ((int) maximumHealth));
+            healthPortion = (health / maximumHealth);
         }
         if(entityWorld.hasComponent(selectedEntity, AttackDamageComponent.class)){
             attackDamageText = ("" + (int) entityWorld.getComponent(selectedEntity, AttackDamageComponent.class).getValue());
@@ -60,7 +58,6 @@ public class DisplayAttributesSystem extends GUIDisplaySystem{
         if(entityWorld.hasComponent(selectedEntity, WalkSpeedComponent.class)){
             walkSpeedText = ("" + Util.round(entityWorld.getComponent(selectedEntity, WalkSpeedComponent.class).getValue(), 2));
         }
-        screenController_HUD.setAttributeValue_Health(healthText);
         screenController_HUD.setAttributeValue_AttackDamage(attackDamageText);
         screenController_HUD.setAttributeValue_AbilityPower(abilityPowerText);
         screenController_HUD.setAttributeValue_AttackSpeed(attackSpeedText);
@@ -69,5 +66,6 @@ public class DisplayAttributesSystem extends GUIDisplaySystem{
         screenController_HUD.setAttributeValue_MagicResistance(magicResistanceText);
         screenController_HUD.setAttributeValue_WalkSpeed(walkSpeedText);
         screenController_HUD.setResourceBarWidth_Health(healthPortion);
+        screenController_HUD.setResourceBarText_Health(healthText);
     }
 }

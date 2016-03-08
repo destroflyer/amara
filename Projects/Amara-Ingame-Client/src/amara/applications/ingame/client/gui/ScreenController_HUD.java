@@ -125,6 +125,10 @@ public class ScreenController_HUD extends GameScreenController{
         resourceBar.getParent().layoutElements();
     }
     
+    public void setResourceBarText_Health(String text){
+        getTextRenderer("resource_bar_health_text").setText(text);
+    }
+    
     public void setPassiveImage(String imagePath){
         getImageRenderer("passive_image").setImage(createImage(imagePath));
     }

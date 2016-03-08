@@ -14,50 +14,76 @@
                         <panel childLayout="horizontal">
                             <panel width="10px"/>
                             <panel childLayout="vertical">
+                                <panel width="16px" height="10px"/>
                                 <panel childLayout="horizontal">
-                                    <image width="16px" height="16px" filename="Interface/hud/attributes/health_16.png"/>
-                                    <panel width="5px"/>
-                                    <text id="attribute_value_health" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
-                                </panel>
-                                <panel childLayout="horizontal">
-                                    <image width="16px" height="16px" filename="Interface/hud/attributes/walk_speed_16.png"/>
-                                    <panel width="5px"/>
-                                    <text id="attribute_value_walk_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
-                                </panel>
-                                <panel childLayout="horizontal">
-                                    <image width="16px" height="16px" filename="Interface/hud/attributes/attack_damage_16.png"/>
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/attack_damage_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Attack Damage"/>
+                                        </effect>
+                                    </image>
                                     <panel width="5px"/>
                                     <text id="attribute_value_attack_damage" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
                                 </panel>
                                 <panel childLayout="horizontal">
-                                    <image width="16px" height="16px" filename="Interface/hud/attributes/attack_speed_16.png"/>
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/attack_speed_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Attack Speed"/>
+                                        </effect>
+                                    </image>
                                     <panel width="5px"/>
                                     <text id="attribute_value_attack_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
                                 </panel>
                                 <panel childLayout="horizontal">
-                                    <image width="16px" height="16px" filename="Interface/hud/attributes/armor_16.png"/>
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/armor_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Armor"/>
+                                        </effect>
+                                    </image>
                                     <panel width="5px"/>
                                     <text id="attribute_value_armor" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
                                 </panel>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/walk_speed_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Walk Speed"/>
+                                        </effect>
+                                    </image>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_walk_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel width="16px" height="10px"/>
                             </panel>
                             <panel width="10px"/>
                             <panel childLayout="vertical">
-                                <panel height="40px"/>
+                                <panel width="16px" height="10px"/>
                                 <panel childLayout="horizontal">
-                                    <image width="16px" height="16px" filename="Interface/hud/attributes/ability_power_16.png"/>
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/ability_power_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Ability Power"/>
+                                        </effect>
+                                    </image>
                                     <panel width="5px"/>
                                     <text id="attribute_value_ability_power" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
                                 </panel>
                                 <panel childLayout="horizontal">
-                                    <image width="16px" height="16px" filename="Interface/hud/attributes/cooldown_speed_16.png"/>
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/cooldown_speed_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Cooldown Speed"/>
+                                        </effect>
+                                    </image>
                                     <panel width="5px"/>
-                                    <text id="attribute_value_cooldown_speed" text="150" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                    <text id="attribute_value_cooldown_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
                                 </panel>
                                 <panel childLayout="horizontal">
-                                    <image width="16px" height="16px" filename="Interface/hud/attributes/magic_resistance_16.png"/>
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/magic_resistance_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Magic Resistance"/>
+                                        </effect>
+                                    </image>
                                     <panel width="5px"/>
                                     <text id="attribute_value_magic_resistance" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
                                 </panel>
+                                <panel width="16px" height="30px"/>
                             </panel>
                         </panel>
                     </panel>
@@ -327,6 +353,31 @@
                             <panel childLayout="vertical" width="413px" height="44px">
                                 <panel id="resource_bar_health" width="100%" height="50%" backgroundColor="#4DE633AA"/>
                                 <panel width="100%" height="50%" backgroundColor="#0099CCAA"/>
+                            </panel>
+                            <panel/>
+                        </panel>
+                        <panel/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="160px">
+                    <panel width="*"/>
+                    <panel childLayout="vertical" width="627px">
+                        <panel height="109px"/>
+                        <panel childLayout="horizontal">
+                            <panel width="108px"/>
+                            <panel childLayout="vertical" width="413px" height="44px">
+                                <panel childLayout="center" width="100%" height="50%">
+                                    <text id="resource_bar_health_text" text="? / ?" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="center" width="100%" height="50%">
+                                    <text text="? / ?" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
                             </panel>
                             <panel/>
                         </panel>
