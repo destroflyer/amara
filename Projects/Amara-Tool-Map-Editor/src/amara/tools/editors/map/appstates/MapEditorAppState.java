@@ -114,6 +114,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         mainApplication.getInputManager().addListener(this, new String[]{
             "editor_mouse_click_left","editor_mouse_click_right","editor_mouse_wheel_up","editor_mouse_wheel_down","editor_1","editor_2","editor_3","editor_4","editor_x","editor_q","editor_w","editor_enter","editor_left_shift"
         });
+        getAppState(MapObstaclesAppState.class).setDisplayObstacles(true);
         setAction(Action.VIEW);
         changeCameraAngle();
     }
@@ -122,6 +123,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
     public void cleanup(){
         super.cleanup();
         mainApplication.getInputManager().removeListener(this);
+        getAppState(MapObstaclesAppState.class).setDisplayObstacles(false);
     }
 
     @Override

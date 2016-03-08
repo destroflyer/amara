@@ -2,7 +2,7 @@
     <model normScale="0.037">
         <material>
             <!--skin-->
-            <texture index="0">diffuse.png</texture>
+            <texture>diffuse.png</texture>
         </material>
     </model>
 </skin>

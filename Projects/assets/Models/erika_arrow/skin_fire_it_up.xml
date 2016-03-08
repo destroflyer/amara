@@ -4,7 +4,7 @@
             <direction>0,-1,0</direction>
         </position>
         <material>
-            <texture index="0">diffuse.png</texture>
+            <texture>diffuse.png</texture>
         </material>
         <modifiers>
             <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Erika_FireItUp</modifier>

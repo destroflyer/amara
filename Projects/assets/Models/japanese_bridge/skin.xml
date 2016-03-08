@@ -4,8 +4,8 @@
             <location>6.5,0,0</location>
         </position>
         <material>
-            <texture index="0">wood.jpg</texture>
-            <texture index="1">red.jpg</texture>
+            <texture>wood.jpg</texture>
+            <texture>red.jpg</texture>
         </material>
     </model>
 </skin>

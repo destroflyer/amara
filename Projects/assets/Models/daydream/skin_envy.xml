@@ -1,7 +1,7 @@
 <skin name="daydream">
     <model scale="1">
         <material>
-            <texture index="0">skin_default.png</texture>
+            <texture>skin_default.png</texture>
         </material>
         <modifiers>
             <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Daydream_Envy</modifier>

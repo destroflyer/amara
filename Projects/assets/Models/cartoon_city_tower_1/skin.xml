@@ -1,7 +1,7 @@
 <skin name="cartoon_city_tower_1">
     <model scale="1.7">
         <material>
-            <texture index="0">texture.png</texture>
+            <texture source="cartoon_city">diffuse.png</texture>
         </material>
     </model>
 </skin>

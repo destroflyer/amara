@@ -1,7 +1,7 @@
 <skin name="oz">
     <model normScale="1.7" scale="1.76">
         <material>
-            <texture index="0">skin_oz_junior.png</texture>
+            <texture>skin_oz_junior.png</texture>
         </material>
     </model>
 </skin>

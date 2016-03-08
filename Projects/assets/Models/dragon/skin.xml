@@ -5,8 +5,8 @@
             <direction>0,0.1,1</direction>
         </position>
         <material>
-            <texture index="0">diffuse.jpg</texture>
-            <texture index="1">diffuse.jpg</texture>
+            <texture>diffuse.jpg</texture>
+            <texture>diffuse.jpg</texture>
         </material>
     </model>
 </skin>

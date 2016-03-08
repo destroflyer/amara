@@ -1,7 +1,7 @@
 <skin name="vampire_a_lusth">
     <model normScale="0.028">
         <material>
-            <texture index="0" specularMap="specular.png" glowMap="glow.png">diffuse.png</texture>
+            <texture specularMap="specular.png" glowMap="glow.png">diffuse.png</texture>
         </material>
     </model>
 </skin>

@@ -144,6 +144,7 @@ public class ModelSkin{
             List<Element> materialElements = materialElement.getChildren();
             for(int i=0;i<materialElements.size();i++){
                 Element currentMaterialElement = materialElements.get(i);
+                String sourceName = currentMaterialElement.getAttributeValue("source", name);
                 String materialDefintion = currentMaterialElement.getText();
                 Material material = null;
                 if(currentMaterialElement.getName().equals("color")){
@@ -152,15 +153,15 @@ public class ModelSkin{
                     material = MaterialFactory.generateLightingMaterial(colorRGBA);
                 }
                 else if(currentMaterialElement.getName().equals("texture")){
-                    String textureFilePath = getResourcesFilePath() + currentMaterialElement.getText();
+                    String textureFilePath = (getResourcesFilePath(sourceName) + currentMaterialElement.getText());
                     material = MaterialFactory.generateLightingMaterial(textureFilePath);
-                    //[jME 3.0 Stable] Hardware skinning currently doesn't seem to support normal maps correctly
+                    //[jME 3.1 SNAPSHOT] Hardware skinning currently doesn't seem to support normal maps correctly
                     if(!Settings.getBoolean("hardware_skinning")){
-                        loadTexture(material, "NormalMap", currentMaterialElement.getAttributeValue("normalMap"));
+                        loadTexture(material, "NormalMap", currentMaterialElement.getAttributeValue("normalMap"), sourceName);
                     }
-                    loadTexture(material, "AlphaMap", currentMaterialElement.getAttributeValue("alphaMap"));
-                    loadTexture(material, "SpecularMap", currentMaterialElement.getAttributeValue("specularMap"));
-                    loadTexture(material, "GlowMap", currentMaterialElement.getAttributeValue("glowMap"));
+                    loadTexture(material, "AlphaMap", currentMaterialElement.getAttributeValue("alphaMap"), sourceName);
+                    loadTexture(material, "SpecularMap", currentMaterialElement.getAttributeValue("specularMap"), sourceName);
+                    loadTexture(material, "GlowMap", currentMaterialElement.getAttributeValue("glowMap"), sourceName);
                 }
                 if(material != null){
                     String filter = currentMaterialElement.getAttributeValue("filter", "bilinear");
@@ -168,8 +169,7 @@ public class ModelSkin{
                         MaterialFactory.setFilter_Nearest(material);
                     }
                     try{
-                        int childIndex = currentMaterialElement.getAttribute("index").getIntValue();
-                        Geometry child = (Geometry) JMonkeyUtil.getChild(spatial, childIndex);
+                        Geometry child = (Geometry) JMonkeyUtil.getChild(spatial, i);
                         if(getAttributeValue(currentMaterialElement, "alpha", false)){
                             child.setQueueBucket(RenderQueue.Bucket.Transparent);
                             material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
@@ -183,15 +183,15 @@ public class ModelSkin{
         }
     }
    
-    private void loadTexture(Material material, String materialParameter, String textureName){
+    private void loadTexture(Material material, String materialParameter, String textureName, String sourceName){
         if(textureName != null){
-            Texture texture = MaterialFactory.loadTexture(getResourcesFilePath() + textureName);
+            Texture texture = MaterialFactory.loadTexture(getResourcesFilePath(sourceName) + textureName);
             material.setTexture(materialParameter, texture);
         }
     }
    
-    private String getResourcesFilePath(){
-        return "Models/" + name + "/resources/";
+    private String getResourcesFilePath(String sourceName){
+        return "Models/" + sourceName + "/resources/";
     }
    
     private void loadPosition(Spatial spatial){

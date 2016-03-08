@@ -1,8 +1,8 @@
 <skin name="tree_2">
     <model scale="0.8">
         <material>
-            <texture index="0">bark.png</texture>
-            <texture index="1" alpha="1">leaf.png</texture>
+            <texture>bark.png</texture>
+            <texture alpha="1">leaf.png</texture>
         </material>
     </model>
 </skin>

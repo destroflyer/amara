@@ -2,15 +2,15 @@
     <model normScale="1.75" scale="0.85">
         <material>
             <!--eyebrows-->
-            <color index="0">0,0,0,1</color>
+            <color>0,0,0,1</color>
             <!--tongue-->
-            <color index="1">0.8,0,0,1</color>
+            <color>0.8,0,0,1</color>
             <!--iron-->
-            <color index="2">1,1,1,1</color>
+            <color>1,1,1,1</color>
             <!--boots-->
-            <color index="3">0,0,0,1</color>
+            <color>0,0,0,1</color>
             <!--skin-->
-            <color index="4">0.4,0.4,0.4,1</color>
+            <color>0.4,0.4,0.4,1</color>
         </material>
         <modifiers>
             <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Minion_LoadingScreen_2</modifier>

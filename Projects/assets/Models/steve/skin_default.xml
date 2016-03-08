@@ -6,7 +6,7 @@
         </position>
         <material>
             <!--body-->
-            <texture index="0" filter="nearest">dr_mundo.png</texture>
+            <texture filter="nearest">dr_mundo.png</texture>
         </material>
     </model>
 </skin>

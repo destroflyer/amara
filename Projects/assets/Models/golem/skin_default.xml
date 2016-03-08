@@ -2,13 +2,13 @@
     <model scale="2">
         <material>
             <!--gskin-->
-            <color index="0">0.25,0.25,0.25,1</color>
+            <color>0.25,0.25,0.25,1</color>
             <!--eyes-->
-            <color index="1">0,0,0,1</color>
+            <color>0,0,0,1</color>
             <!--teeth-->
-            <color index="2">0.75,0.75,0.58,1</color>
+            <color>0.75,0.75,0.58,1</color>
             <!--metal-->
-            <color index="3">0.8,0.8,0.8,1</color>
+            <color>0.8,0.8,0.8,1</color>
         </material>
     </model>
 </skin>

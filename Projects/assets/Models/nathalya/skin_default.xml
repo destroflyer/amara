@@ -4,20 +4,20 @@
             <direction>0,0,-1</direction>
         </position>
         <material>
-            <texture index="0">head.jpg</texture>
-            <texture index="1">hood.jpg</texture>
-            <texture index="2">legs.jpg</texture>
-            <texture index="3" alpha="1">boots_fur.png</texture>
-            <texture index="4">boots.jpg</texture>
-            <texture index="5">staff.jpg</texture>
-            <texture index="6">cape.jpg</texture>
-            <texture index="7">chest.jpg</texture>
-            <texture index="8">torso.jpg</texture>
-            <texture index="9" alpha="1">hair.png</texture>
-            <texture index="10">hands.jpg</texture>
-            <texture index="11">cape.jpg</texture>
-            <texture index="12">armguards.jpg</texture>
-            <texture index="13" alpha="1">dress.png</texture>
+            <texture>head.jpg</texture>
+            <texture>hood.jpg</texture>
+            <texture>legs.jpg</texture>
+            <texture alpha="1">boots_fur.png</texture>
+            <texture>boots.jpg</texture>
+            <texture>staff.jpg</texture>
+            <texture>cape.jpg</texture>
+            <texture>chest.jpg</texture>
+            <texture>torso.jpg</texture>
+            <texture alpha="1">hair.png</texture>
+            <texture>hands.jpg</texture>
+            <texture>cape.jpg</texture>
+            <texture>armguards.jpg</texture>
+            <texture alpha="1">dress.png</texture>
         </material>
         <modifiers>
             <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Nathalya_Fire</modifier>

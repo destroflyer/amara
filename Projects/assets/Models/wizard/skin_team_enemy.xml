@@ -5,15 +5,15 @@
         </position>
         <material>
             <!--skin-->
-            <color index="0">1,0.1,0,1</color>
+            <color>1,0.1,0,1</color>
             <!--eyes-->
-            <color index="1">0,0,0,1</color>
+            <color>0,0,0,1</color>
             <!--hat-->
-            <color index="2">0,0,0,1</color>
+            <color>0,0,0,1</color>
             <!--rod-->
-            <color index="3">0.67,0.02,0.02,1</color>
+            <color>0.67,0.02,0.02,1</color>
             <!--rod_top-->
-            <color index="4">1,1,1,1</color>
+            <color>1,1,1,1</color>
         </material>
     </model>
 </skin>
