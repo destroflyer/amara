@@ -23,25 +23,31 @@ public class QueryResult{
     private Statement statement;
     private ResultSet resultSet;
     
-    public int nextInteger_Close(){
-        next();
-        int value = getInteger(1);
-        close();
-        return value;
+    public Integer nextInteger_Close(){
+        if(next()){
+            int value = getInteger(1);
+            close();
+            return value;
+        }
+        return null;
     }
     
-    public long nextLong_Close(){
-        next();
-        long value = getLong(1);
-        close();
-        return value;
+    public Long nextLong_Close(){
+        if(next()){
+            long value = getLong(1);
+            close();
+            return value;
+        }
+        return null;
     }
     
     public String nextString_Close(){
-        next();
-        String value = getString(1);
-        close();
-        return value;
+        if(next()){
+            String value = getString(1);
+            close();
+            return value;
+        }
+        return null;
     }
     
     public boolean next(){

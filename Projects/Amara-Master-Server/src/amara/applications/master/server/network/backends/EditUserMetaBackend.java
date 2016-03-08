@@ -6,8 +6,7 @@ package amara.applications.master.server.network.backends;
 
 import com.jme3.network.Message;
 import amara.applications.master.network.messages.Message_EditUserMeta;
-import amara.applications.master.server.players.ConnectedPlayers;
-import amara.applications.master.server.appstates.DatabaseAppState;
+import amara.applications.master.server.appstates.*;
 import amara.libraries.network.*;
 
 /**
@@ -16,19 +15,34 @@ import amara.libraries.network.*;
  */
 public class EditUserMetaBackend implements MessageBackend{
 
-    public EditUserMetaBackend(DatabaseAppState databaseAppState, ConnectedPlayers connectedPlayers){
+    public EditUserMetaBackend(DatabaseAppState databaseAppState, PlayersAppState playersAppState){
         this.databaseAppState = databaseAppState;
-        this.connectedPlayers = connectedPlayers;
+        this.playersAppState = playersAppState;
     }
     private DatabaseAppState databaseAppState;
-    private ConnectedPlayers connectedPlayers;
+    private PlayersAppState playersAppState;
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_EditUserMeta){
             Message_EditUserMeta message = (Message_EditUserMeta) receivedMessage;
-            int playerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
-            databaseAppState.executeQuery("UPDATE users_meta SET value = '" + databaseAppState.escape(message.getValue()) + "' WHERE (userid = " + playerID + ") AND (key = '" + databaseAppState.escape(message.getKey()) + "')");
+            int playerID = playersAppState.getConnectedPlayers().getPlayer(messageResponse.getClientID()).getID();
+            boolean isDefaultValue = (message.getValue().equals(playersAppState.getUserDefaultMeta().get(message.getKey())));
+            String oldValue = databaseAppState.getQueryResult("SELECT value FROM users_meta WHERE (userid = " + playerID + ") AND (key = '" + databaseAppState.escape(message.getKey()) + "')").nextString_Close();
+            String whereClause = ("(userid = " + playerID + ") AND (key = '" + databaseAppState.escape(message.getKey()) + "')");
+            if(isDefaultValue){
+                if(oldValue != null){
+                    databaseAppState.executeQuery("DELETE FROM users_meta WHERE " + whereClause);
+                }
+            }
+            else{
+                if(oldValue == null){
+                    databaseAppState.executeQuery("INSERT INTO users_meta (userid, key, value) VALUES (" + playerID + ", '" + databaseAppState.escape(message.getKey()) + "', '" + databaseAppState.escape(message.getValue()) + "')");
+                }
+                else{
+                    databaseAppState.executeQuery("UPDATE users_meta SET value = '" + databaseAppState.escape(message.getValue()) + "' WHERE " + whereClause);
+                }
+            }
             databaseAppState.executeQuery("UPDATE users SET last_modification_date = " + System.currentTimeMillis() + " WHERE id = " + playerID);
         }
     }

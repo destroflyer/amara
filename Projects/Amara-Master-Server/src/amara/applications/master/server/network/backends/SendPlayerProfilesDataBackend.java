@@ -8,7 +8,7 @@ import java.util.HashMap;
 import com.jme3.network.Message;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.PlayerProfileData;
-import amara.applications.master.server.appstates.DatabaseAppState;
+import amara.applications.master.server.appstates.*;
 import amara.libraries.database.QueryResult;
 import amara.libraries.network.*;
 
@@ -18,10 +18,12 @@ import amara.libraries.network.*;
  */
 public class SendPlayerProfilesDataBackend implements MessageBackend{
 
-    public SendPlayerProfilesDataBackend(DatabaseAppState databaseAppState){
+    public SendPlayerProfilesDataBackend(DatabaseAppState databaseAppState, PlayersAppState playersAppState){
         this.databaseAppState = databaseAppState;
+        this.playersAppState = playersAppState;
     }
     private DatabaseAppState databaseAppState;
+    private PlayersAppState playersAppState;
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
@@ -39,8 +41,8 @@ public class SendPlayerProfilesDataBackend implements MessageBackend{
                 PlayerProfileData playerProfileData = null;
                 long lastModificationDate = databaseAppState.getQueryResult("SELECT last_modification_date FROM users WHERE id = " + id + " LIMIT 1").nextLong_Close();
                 if(lastModificationDate > message.getCachedTimestamp()){
+                    HashMap<String, String> meta = new HashMap<String, String>(playersAppState.getUserDefaultMeta());
                     QueryResult results_Meta = databaseAppState.getQueryResult("SELECT key, value FROM users_meta WHERE userid = " + id);
-                    HashMap<String, String> meta = new HashMap<String, String>();
                     while(results_Meta.next()){
                         meta.put(results_Meta.getString("key"), results_Meta.getString("value"));
                     }
