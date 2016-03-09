@@ -27,28 +27,27 @@ import amara.tools.modelviewer.ModelViewerApplication;
 public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> implements ActionListener{
     
     private final String[] modelSkinPaths = new String[]{
-        "/Models/kachujin/skin_default.xml",
-        "/Models/maw/skin_default.xml",
-        "/Models/maria/skin_default.xml",
-        "/Models/erika/skin_default.xml",
-        "/Models/ganfaul/skin_default.xml",
-        "/Models/daydream/skin_default.xml",
-        "/Models/daydream/skin_fire.xml",
-        "/Models/daydream/skin_envy.xml",
-        "/Models/daydream/skin_inuyasha.xml",
-        "/Models/daydream/skin_amazoness.xml",
-        "/Models/oz/skin_oz_junior.xml",
-        "/Models/minion/skin_gentleman.xml",
-        "/Models/wizard/skin_default.xml",
-        "/Models/robot/skin_definitely_not.xml",
-        "/Models/jaime/skin_default.xml",
-        "/Models/soldier/skin_default.xml",
-        "/Models/steve/skin_default.xml",
-        "/Models/nathalya/skin_default.xml",
-        "/Models/vampire_a_lusth/skin_default.xml",
-        "/Models/forest_monster/skin.xml",
-        "/Models/3dsa_medieval_knight/skin_team_enemy.xml",
-        "/Models/3dsa_archer/skin_team_enemy.xml"
+        "Models/kachujin/skin_default.xml",
+        "Models/maw/skin_default.xml",
+        "Models/maria/skin_default.xml",
+        "Models/erika/skin_default.xml",
+        "Models/ganfaul/skin_default.xml",
+        "Models/daydream/skin_default.xml",
+        "Models/daydream/skin_fire.xml",
+        "Models/daydream/skin_envy.xml",
+        "Models/daydream/skin_inuyasha.xml",
+        "Models/daydream/skin_amazoness.xml",
+        "Models/oz/skin_oz_junior.xml",
+        "Models/minion/skin_gentleman.xml",
+        "Models/wizard/skin_default.xml",
+        "Models/robot/skin_definitely_not.xml",
+        "Models/jaime/skin_default.xml",
+        "Models/soldier/skin_default.xml",
+        "Models/steve/skin_default.xml",
+        "Models/nathalya/skin_default.xml",
+        "Models/forest_monster/skin.xml",
+        "Models/3dsa_medieval_knight/skin_team_enemy.xml",
+        "Models/3dsa_archer/skin_team_enemy.xml"
     };
     private ModelObject[] modelObjects;
     private String[][] animationNames;
@@ -95,9 +94,13 @@ public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> i
             String[] pathParts1 = modelSkinPaths[modelIndex].split("/");
             String[] pathParts2 = modelSkinPaths[index].split("/");
             if(pathParts1[2].equals(pathParts2[2])){
-                AnimChannel animationChannel1 = modelObjects[modelIndex].getModelSpatial().getControl(AnimControl.class).getChannel(0);
-                AnimChannel animationChannel2 = modelObjects[index].getModelSpatial().getControl(AnimControl.class).getChannel(0);
-                JMonkeyUtil.copyAnimation(animationChannel1, animationChannel2);
+                AnimControl animationControl1 = modelObjects[modelIndex].getModelSpatial().getControl(AnimControl.class);
+                AnimControl animationControl2 = modelObjects[index].getModelSpatial().getControl(AnimControl.class);
+                if((animationControl1 != null) && (animationControl2 != null)){
+                    AnimChannel animationChannel1 = modelObjects[modelIndex].getModelSpatial().getControl(AnimControl.class).getChannel(0);
+                    AnimChannel animationChannel2 = modelObjects[index].getModelSpatial().getControl(AnimControl.class).getChannel(0);
+                    JMonkeyUtil.copyAnimation(animationChannel1, animationChannel2);
+                }
             }
             else{
                 animationIndex = -1;
