@@ -96,7 +96,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new DirectionSystem(entitySceneMap));
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
-        addEntitySystem(new MarkHoveredUnitsSystem(entitySceneMap, playerTeamSystem));
+        addEntitySystem(new MarkHoveredUnitsSystem(entitySceneMap, playerTeamSystem, getAppState(IngameMouseCursorAppState.class)));
         addEntitySystem(new KnockupVisualisationSystem(entitySceneMap, positionSystem));
         addEntitySystem(new BuffVisualisationSystem_Backporting(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_BaronNashor(entitySceneMap));
