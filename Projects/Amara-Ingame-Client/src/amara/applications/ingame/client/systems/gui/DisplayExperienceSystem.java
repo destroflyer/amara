@@ -20,12 +20,12 @@ public class DisplayExperienceSystem extends GUIDisplaySystem{
     }
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
-        LevelComponent levelComponent = entityWorld.getComponent(selectedEntity, LevelComponent.class);
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
+        LevelComponent levelComponent = entityWorld.getComponent(characterEntity, LevelComponent.class);
         if(levelComponent != null){
             ComponentMapObserver observer = entityWorld.requestObserver(this, ExperienceComponent.class);
-            check(levelComponent, observer.getNew().getComponent(selectedEntity, ExperienceComponent.class));
-            check(levelComponent, observer.getChanged().getComponent(selectedEntity, ExperienceComponent.class));
+            check(levelComponent, observer.getNew().getComponent(characterEntity, ExperienceComponent.class));
+            check(levelComponent, observer.getChanged().getComponent(characterEntity, ExperienceComponent.class));
         }
     }
     

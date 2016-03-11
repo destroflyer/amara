@@ -19,10 +19,10 @@ public class DisplayMapSpellsImagesSystem extends GUIDisplaySystem{
     }
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
         ComponentMapObserver observer = entityWorld.requestObserver(this, MapSpellsComponent.class);
-        checkChangedSpells(entityWorld, observer.getNew().getComponent(selectedEntity, MapSpellsComponent.class));
-        checkChangedSpells(entityWorld, observer.getChanged().getComponent(selectedEntity, MapSpellsComponent.class));
+        checkChangedSpells(entityWorld, observer.getNew().getComponent(characterEntity, MapSpellsComponent.class));
+        checkChangedSpells(entityWorld, observer.getChanged().getComponent(characterEntity, MapSpellsComponent.class));
     }
     
     private void checkChangedSpells(EntityWorld entityWorld, MapSpellsComponent mapSpellsComponent){

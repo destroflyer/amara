@@ -10,8 +10,8 @@ import amara.applications.ingame.entitysystem.components.effects.aggro.*;
 import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.units.*;
+import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.systems.aggro.AggroUtil;
-import amara.applications.ingame.entitysystem.systems.units.UnitUtil;
 import amara.libraries.entitysystem.*;
 
 /**
@@ -26,7 +26,7 @@ public class ApplyDrawTeamAggroSystem implements EntitySystem{
         {
             int targetEntity = effectImpact.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             EffectCastSourceComponent effectCastSourceComponent = effectImpact.getComponent(EffectCastSourceComponent.class);
-            if((effectCastSourceComponent != null) && UnitUtil.isPlayerUnit(entityWorld, targetEntity)){
+            if((effectCastSourceComponent != null) && entityWorld.hasComponent(targetEntity, IsCharacterComponent.class)){
                 int targetTeamEntity = entityWorld.getComponent(targetEntity, TeamComponent.class).getTeamEntity();
                 Vector2f aggroCenter = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
                 for(int entity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class)){

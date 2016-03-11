@@ -48,51 +48,51 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             PlayerCommand playerCommand = playerCommandsIterator.next();
             Command command = playerCommand.getCommand();
             int playerEntity = getPlayerEntity(entityWorld, playerCommand.getClientID());
-            int selectedUnit = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-            boolean isUnitAlive = entityWorld.hasComponent(selectedUnit, IsAliveComponent.class);
+            int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
+            boolean isUnitAlive = entityWorld.hasComponent(characterEntity, IsAliveComponent.class);
             if(command instanceof BuyItemCommand){
                 BuyItemCommand buyItemCommand = (BuyItemCommand) command;
-                if((!isUnitAlive) || ShopUtil.isInShopRange(entityWorld, selectedUnit)){
-                    ShopUtil.buy(entityWorld, selectedUnit, buyItemCommand.getItemID());
+                if((!isUnitAlive) || ShopUtil.isInShopRange(entityWorld, characterEntity)){
+                    ShopUtil.buy(entityWorld, characterEntity, buyItemCommand.getItemID());
                 }
             }
             else if(command instanceof SellItemCommand){
                 SellItemCommand sellItemCommand = (SellItemCommand) command;
-                if((!isUnitAlive) || ShopUtil.isInShopRange(entityWorld, selectedUnit)){
-                    ShopUtil.sell(entityWorld, selectedUnit, sellItemCommand.getInventoryIndex());
+                if((!isUnitAlive) || ShopUtil.isInShopRange(entityWorld, characterEntity)){
+                    ShopUtil.sell(entityWorld, characterEntity, sellItemCommand.getInventoryIndex());
                 }
             }
             else if(command instanceof LearnSpellCommand){
                 LearnSpellCommand learnSpellCommand = (LearnSpellCommand) command;
-                SpellUtil.learnSpell(entityWorld, selectedUnit, learnSpellCommand.getSpellIndex());
+                SpellUtil.learnSpell(entityWorld, characterEntity, learnSpellCommand.getSpellIndex());
             }
             else if(command instanceof UpgradeSpellCommand){
                 UpgradeSpellCommand upgradeSpellCommand = (UpgradeSpellCommand) command;
-                SpellUtil.upgradeSpell(entityWorld, selectedUnit, upgradeSpellCommand.getSpellIndex(), upgradeSpellCommand.getUpgradeIndex());
+                SpellUtil.upgradeSpell(entityWorld, characterEntity, upgradeSpellCommand.getSpellIndex(), upgradeSpellCommand.getUpgradeIndex());
             }
             else if(isUnitAlive){
                 if(command instanceof MoveCommand){
                     MoveCommand moveCommand = (MoveCommand) command;
                     int targetPositionEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetPositionEntity, new PositionComponent(moveCommand.getPosition()));
-                    boolean wasSuccessfull = tryWalk(entityWorld, selectedUnit, targetPositionEntity, -1);
+                    boolean wasSuccessfull = tryWalk(entityWorld, characterEntity, targetPositionEntity, -1);
                     if(!wasSuccessfull){
                         entityWorld.removeEntity(targetPositionEntity);
                     }
                 }
                 else if(command instanceof StopCommand){
                     StopCommand stopCommand = (StopCommand) command;
-                    UnitUtil.tryCancelAction(entityWorld, selectedUnit);
+                    UnitUtil.tryCancelAction(entityWorld, characterEntity);
                 }
                 else if(command instanceof AutoAttackCommand){
                     AutoAttackCommand autoAttackCommand = (AutoAttackCommand) command;
-                    AutoAttackComponent autoAttackComponent = entityWorld.getComponent(selectedUnit, AutoAttackComponent.class);
+                    AutoAttackComponent autoAttackComponent = entityWorld.getComponent(characterEntity, AutoAttackComponent.class);
                     if(autoAttackComponent != null){
-                        AggroTargetComponent aggroTargetComponent = entityWorld.getComponent(selectedUnit, AggroTargetComponent.class);
+                        AggroTargetComponent aggroTargetComponent = entityWorld.getComponent(characterEntity, AggroTargetComponent.class);
                         if((aggroTargetComponent == null) || (autoAttackCommand.getTargetEntity() != aggroTargetComponent.getTargetEntity())){
-                            if(CheckAggroTargetAttackibilitySystem.isAttackable(entityWorld, selectedUnit, autoAttackCommand.getTargetEntity())){
-                                if(UnitUtil.tryCancelAction(entityWorld, selectedUnit)){
-                                    entityWorld.setComponent(selectedUnit, new AggroTargetComponent(autoAttackCommand.getTargetEntity()));
+                            if(CheckAggroTargetAttackibilitySystem.isAttackable(entityWorld, characterEntity, autoAttackCommand.getTargetEntity())){
+                                if(UnitUtil.tryCancelAction(entityWorld, characterEntity)){
+                                    entityWorld.setComponent(characterEntity, new AggroTargetComponent(autoAttackCommand.getTargetEntity()));
                                 }
                             }
                         }
@@ -100,31 +100,31 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 }
                 else if(command instanceof CastSelfcastSpellCommand){
                     CastSelfcastSpellCommand castSelfcastSpellCommand = (CastSelfcastSpellCommand) command;
-                    int spellEntity = getSpellEntity(entityWorld, selectedUnit, castSelfcastSpellCommand.getSpellIndex());
-                    castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, -1));
+                    int spellEntity = getSpellEntity(entityWorld, characterEntity, castSelfcastSpellCommand.getSpellIndex());
+                    castSpell(entityWorld, characterEntity, new CastSpellComponent(spellEntity, -1));
                 }
                 else if(command instanceof CastSingleTargetSpellCommand){
                     CastSingleTargetSpellCommand castSingleTargetSpellCommand = (CastSingleTargetSpellCommand) command;
-                    int spellEntity = getSpellEntity(entityWorld, selectedUnit, castSingleTargetSpellCommand.getSpellIndex());
-                    castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, castSingleTargetSpellCommand.getTargetEntityID()));
+                    int spellEntity = getSpellEntity(entityWorld, characterEntity, castSingleTargetSpellCommand.getSpellIndex());
+                    castSpell(entityWorld, characterEntity, new CastSpellComponent(spellEntity, castSingleTargetSpellCommand.getTargetEntityID()));
                 }
                 else if(command instanceof CastLinearSkillshotSpellCommand){
                     CastLinearSkillshotSpellCommand castLinearSkillshotSpellCommand = (CastLinearSkillshotSpellCommand) command;
-                    int spellEntity = getSpellEntity(entityWorld, selectedUnit, castLinearSkillshotSpellCommand.getSpellIndex());
+                    int spellEntity = getSpellEntity(entityWorld, characterEntity, castLinearSkillshotSpellCommand.getSpellIndex());
                     int targetEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetEntity, new DirectionComponent(castLinearSkillshotSpellCommand.getDirection().clone()));
-                    castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, targetEntity));
+                    castSpell(entityWorld, characterEntity, new CastSpellComponent(spellEntity, targetEntity));
                 }
                 else if(command instanceof CastPositionalSkillshotSpellCommand){
                     CastPositionalSkillshotSpellCommand castPositionalSkillshotSpellCommand = (CastPositionalSkillshotSpellCommand) command;
-                    int spellEntity = getSpellEntity(entityWorld, selectedUnit, castPositionalSkillshotSpellCommand.getSpellIndex());
+                    int spellEntity = getSpellEntity(entityWorld, characterEntity, castPositionalSkillshotSpellCommand.getSpellIndex());
                     int targetEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetEntity, new PositionComponent(castPositionalSkillshotSpellCommand.getPosition().clone()));
-                    castSpell(entityWorld, selectedUnit, new CastSpellComponent(spellEntity, targetEntity));
+                    castSpell(entityWorld, characterEntity, new CastSpellComponent(spellEntity, targetEntity));
                 }
                 else if(command instanceof ShowReactionCommand){
                     ShowReactionCommand showReactionCommand = (ShowReactionCommand) command;
-                    entityWorld.setComponent(selectedUnit, new ReactionComponent(showReactionCommand.getReaction(), 2));
+                    entityWorld.setComponent(characterEntity, new ReactionComponent(showReactionCommand.getReaction(), 2));
                 }
             }
         }
@@ -247,38 +247,38 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
         }
     }
     
-    public static boolean tryWalk(EntityWorld entityWorld, int selectedUnit, int targetEntity, float sufficientDistance){
-        if(MovementSystem.canMove(entityWorld, selectedUnit)){
+    public static boolean tryWalk(EntityWorld entityWorld, int unitEntity, int targetEntity, float sufficientDistance){
+        if(MovementSystem.canMove(entityWorld, unitEntity)){
             boolean isAllowed = true;
-            MovementComponent movementComponent = entityWorld.getComponent(selectedUnit, MovementComponent.class);
+            MovementComponent movementComponent = entityWorld.getComponent(unitEntity, MovementComponent.class);
             if(movementComponent != null){
                 isAllowed = entityWorld.hasComponent(movementComponent.getMovementEntity(), MovementIsCancelableComponent.class);
             }
             if(isAllowed){
-                return walk(entityWorld, selectedUnit, targetEntity, sufficientDistance);
+                return walk(entityWorld, unitEntity, targetEntity, sufficientDistance);
             }
         }
         return false;
     }
     
-    public static boolean walk(EntityWorld entityWorld, int selectedUnit, int targetEntity, float sufficientDistance){
-        if(UnitUtil.tryCancelAction(entityWorld, selectedUnit)){
+    public static boolean walk(EntityWorld entityWorld, int unitEntity, int targetEntity, float sufficientDistance){
+        if(UnitUtil.tryCancelAction(entityWorld, unitEntity)){
             EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
             movement.setComponent(new MovementTargetComponent(targetEntity));
             if(sufficientDistance != -1){
                 movement.setComponent(new MovementTargetSufficientDistanceComponent(sufficientDistance));
             }
             movement.setComponent(new MovementPathfindingComponent());
-            if(entityWorld.hasComponent(selectedUnit, LocalAvoidanceWalkComponent.class)){
+            if(entityWorld.hasComponent(unitEntity, LocalAvoidanceWalkComponent.class)){
                 movement.setComponent(new MovementLocalAvoidanceComponent());
             }
             movement.setComponent(new WalkMovementComponent());
             movement.setComponent(new MovementIsCancelableComponent());
-            WalkAnimationComponent walkAnimationComponent = entityWorld.getComponent(selectedUnit, WalkAnimationComponent.class);
+            WalkAnimationComponent walkAnimationComponent = entityWorld.getComponent(unitEntity, WalkAnimationComponent.class);
             if(walkAnimationComponent != null){
                 movement.setComponent(new MovementAnimationComponent(walkAnimationComponent.getAnimationEntity()));
             }
-            entityWorld.setComponent(selectedUnit, new MovementComponent(movement.getId()));
+            entityWorld.setComponent(unitEntity, new MovementComponent(movement.getId()));
             return true;
         }
         return false;

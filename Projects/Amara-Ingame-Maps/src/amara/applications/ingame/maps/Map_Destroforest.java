@@ -244,9 +244,9 @@ public class Map_Destroforest extends Map{
                 direction = new Vector2f(1, 0);
                 break;
         }
-        int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-        entityWorld.setComponent(unitEntity, new PositionComponent(position));
-        entityWorld.setComponent(unitEntity, new DirectionComponent(direction));
-        entityWorld.setComponent(unitEntity, new TeamComponent(1));
+        int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
+        entityWorld.setComponent(characterEntity, new PositionComponent(position));
+        entityWorld.setComponent(characterEntity, new DirectionComponent(direction));
+        entityWorld.setComponent(characterEntity, new TeamComponent(1));
     }
 }

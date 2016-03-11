@@ -20,11 +20,11 @@ public class DisplayPassivesCooldownsSystem extends GUIDisplaySystem{
     }
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
         ComponentMapObserver observer = entityWorld.requestObserver(this, PassivesComponent.class, RemainingCooldownComponent.class);
-        checkChangedPassives(entityWorld, observer.getNew().getComponent(selectedEntity, PassivesComponent.class));
-        checkChangedPassives(entityWorld, observer.getChanged().getComponent(selectedEntity, PassivesComponent.class));
-        PassivesComponent passivesComponent = entityWorld.getComponent(selectedEntity, PassivesComponent.class);
+        checkChangedPassives(entityWorld, observer.getNew().getComponent(characterEntity, PassivesComponent.class));
+        checkChangedPassives(entityWorld, observer.getChanged().getComponent(characterEntity, PassivesComponent.class));
+        PassivesComponent passivesComponent = entityWorld.getComponent(characterEntity, PassivesComponent.class);
         if(passivesComponent != null){
             checkCurrentPassivesCooldowns(observer, passivesComponent.getPassiveEntities());
         }

@@ -3,6 +3,7 @@
     <useStyles filename="nifty-default-styles.xml"/>
     <useControls filename="nifty-default-controls.xml"/>
     <screen id="start" controller="amara.applications.ingame.client.gui.ScreenController_HUD">
+        <!--character info-->
         <layer id="character" childLayout="center">
             <panel childLayout="vertical">
                 <panel/>
@@ -223,6 +224,7 @@
                 <panel height="153px"/>
             </panel>
         </layer>
+        <!--spells, ressources-->
         <layer childLayout="center">
             <panel childLayout="vertical">
                 <panel/>
@@ -423,6 +425,7 @@
                 </panel>
             </panel>
         </layer>
+        <!--upgrade spells-->
         <layer id="upgrade_spells_layer" childLayout="center">
             <panel childLayout="vertical">
                 <panel/>
@@ -503,6 +506,7 @@
                 <panel height="156px"/>
             </panel>
         </layer>
+        <!--scoreboard-->
         <layer id="scoreboard_layer" childLayout="center" visible="false">
             <panel childLayout="vertical">
                 <panel height="*"/>
@@ -524,6 +528,59 @@
                 <panel height="*"/>
             </panel>
         </layer>
+        <!--stats-->
+        <layer childLayout="center">
+            <panel childLayout="horizontal">
+                <panel/>
+                <panel childLayout="vertical" width="95px">
+                    <panel height="5px"/>
+                    <panel childLayout="center" width="100%" height="28px" backgroundColor="#000D">
+                        <text id="stats_teams_score" text="? : ?" font="Interface/fonts/Verdana_12.fnt"/>
+                    </panel>
+                </panel>
+                <panel width="7px"/>
+                <panel childLayout="vertical" width="236px">
+                    <panel height="4px"/>
+                    <panel childLayout="horizontal" width="100%" height="30px" backgroundColor="#000D">
+                        <panel/>
+                        <text id="stats_player_score_kda" height="100%" text="? / ? / ?" font="Interface/fonts/Verdana_12.fnt" textVAlign="center"/>
+                        <panel/>
+                        <text id="stats_player_score_creepscore" height="100%" text="?" font="Interface/fonts/Verdana_12.fnt" textVAlign="center"/>
+                        <panel/>
+                    </panel>
+                </panel>
+                <panel width="6px"/>
+                <panel childLayout="vertical" width="77px">
+                    <panel height="5px"/>
+                    <panel childLayout="horizontal" width="100%" height="28px" backgroundColor="#000D">
+                        <panel/>
+                        <panel childLayout="vertical" width="11px">
+                            <panel/>
+                            <panel height="1px"/>
+                            <image filename="Interface/hud/time_11.png" width="11px" height="11px">
+                                <effect>
+                                    <onHover name="hint" hintText="Game Time"/>
+                                </effect>
+                            </image>
+                            <panel/>
+                        </panel>
+                        <panel width="5px"/>
+                        <text id="game_time" height="100%" text="??:??" font="Interface/fonts/Verdana_12.fnt" textVAlign="center"/>
+                        <panel/>
+                    </panel>
+                </panel>
+                <panel width="7px"/>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel childLayout="horizontal">
+                    <panel/>
+                    <image filename="Interface/hud/stats.png" width="470px" height="70px"/>
+                </panel>
+                <panel/>
+            </panel>
+        </layer>
         <layer childLayout="center">
             <panel childLayout="vertical">
                 <panel height="21px"/>
@@ -534,9 +591,10 @@
                 </panel>
             </panel>
         </layer>
+        <!--death recap-->
         <layer childLayout="center">
             <panel childLayout="vertical">
-                <panel height="20px"/>
+                <panel height="50px"/>
                 <panel childLayout="horizontal">
                     <panel/>
                     <image id="ping_container" filename="Interface/hud/ping_container.png" width="71px" height="16px">
@@ -544,7 +602,7 @@
                             <onHover name="hint" hintText="Ping: ? ms"/>
                         </effect>
                     </image>
-                    <panel width="20px"/>
+                    <panel width="31px"/>
                 </panel>
             </panel>
         </layer>

@@ -27,9 +27,9 @@ public class LockedCameraSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         if(isEnabled){
-            SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
-            if(selectedUnitComponent != null){
-                PositionComponent positionComponent = entityWorld.getComponent(selectedUnitComponent.getEntity(), PositionComponent.class);
+            PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
+            if(playerCharacterComponent != null){
+                PositionComponent positionComponent = entityWorld.getComponent(playerCharacterComponent.getEntity(), PositionComponent.class);
                 if(positionComponent != null){
                     ingameCameraAppState.lookAt(positionComponent.getPosition());
                 }

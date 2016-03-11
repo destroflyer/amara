@@ -15,6 +15,7 @@ import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.spawns.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
+import amara.applications.ingame.entitysystem.components.targets.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.animations.*;
 import amara.applications.ingame.entitysystem.components.units.bounties.*;
@@ -218,6 +219,10 @@ public class CustomGameTemplates{
                     EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
                     bounty.setComponent(new BountyCreepScoreComponent());
                     bounty.setComponent(new BountyGoldComponent(30));
+                    int bountyRulesEntity = entityWorld.createEntity();
+                    entityWorld.setComponent(bountyRulesEntity, new RequireCharacterComponent());
+                    entityWorld.setComponent(bountyRulesEntity, new AcceptEnemiesComponent());
+                    bounty.setComponent(new BountyRulesComponent(bountyRulesEntity));
                     entityWrapper.setComponent(new BountyComponent(bounty.getId()));
                 }
                 else if(templateName.equals("arama_camp_beetle_golem")){
@@ -235,6 +240,10 @@ public class CustomGameTemplates{
                     EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
                     bounty.setComponent(new BountyCreepScoreComponent());
                     bounty.setComponent(new BountyGoldComponent(60));
+                    int bountyRulesEntity = entityWorld.createEntity();
+                    entityWorld.setComponent(bountyRulesEntity, new RequireCharacterComponent());
+                    entityWorld.setComponent(bountyRulesEntity, new AcceptEnemiesComponent());
+                    bounty.setComponent(new BountyRulesComponent(bountyRulesEntity));
                     entityWrapper.setComponent(new BountyComponent(bounty.getId()));
                 }
                 else if(templateName.equals("arama_boss")){
@@ -284,6 +293,10 @@ public class CustomGameTemplates{
                     bountyBuffAttributes.setComponent(new BonusFlatWalkSpeedComponent(0.5f));
                     bountyBuff.setComponent(new ContinuousAttributesComponent(bountyBuffAttributes.getId()));
                     bounty.setComponent(new BountyBuffComponent(bountyBuff.getId(), 60));
+                    int bountyRulesEntity = entityWorld.createEntity();
+                    entityWorld.setComponent(bountyRulesEntity, new RequireCharacterComponent());
+                    entityWorld.setComponent(bountyRulesEntity, new AcceptEnemiesComponent());
+                    bounty.setComponent(new BountyRulesComponent(bountyRulesEntity));
                     entityWrapper.setComponent(new BountyComponent(bounty.getId()));
                 }
                 else if(templateName.equals("arama_camp_boss")){

@@ -17,6 +17,7 @@ import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.components.shop.*;
 import amara.applications.ingame.entitysystem.components.spawns.*;
+import amara.applications.ingame.entitysystem.components.targets.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.animations.*;
 import amara.applications.ingame.entitysystem.components.units.bounties.*;
@@ -119,6 +120,10 @@ public class Map_Testmap extends Map{
         forestMonsterBounty.setComponent(new BountyCharacterKillComponent());
         forestMonsterBounty.setComponent(new BountyGoldComponent(20));
         forestMonsterBounty.setComponent(new BountyExperienceComponent(200));
+        int forestMonsterBountyRulesEntity = entityWorld.createEntity();
+        entityWorld.setComponent(forestMonsterBountyRulesEntity, new RequireCharacterComponent());
+        entityWorld.setComponent(forestMonsterBountyRulesEntity, new AcceptEnemiesComponent());
+        forestMonsterBounty.setComponent(new BountyRulesComponent(forestMonsterBountyRulesEntity));
         EntityWrapper forestMonsterCamp = entityWorld.getWrapped(entityWorld.createEntity());
         forestMonsterCamp.setComponent(new CampUnionAggroComponent());
         forestMonsterCamp.setComponent(new CampMaximumAggroDistanceComponent(10));
@@ -184,15 +189,19 @@ public class Map_Testmap extends Map{
     @Override
     public void initializePlayer(EntityWorld entityWorld, int playerEntity){
         super.initializePlayer(entityWorld, playerEntity);
-        int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
+        int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
         EntityWrapper characterBounty = entityWorld.getWrapped(entityWorld.createEntity());
         characterBounty.setComponent(new BountyCharacterKillComponent());
         characterBounty.setComponent(new BountyGoldComponent(300));
-        entityWorld.setComponent(unitEntity, new BountyComponent(characterBounty.getId()));
-        entityWorld.setComponent(unitEntity, new LevelComponent(6));
-        entityWorld.setComponent(unitEntity, new SpellsUpgradePointsComponent(6));
+        int bountyRulesEntity = entityWorld.createEntity();
+        entityWorld.setComponent(bountyRulesEntity, new RequireCharacterComponent());
+        entityWorld.setComponent(bountyRulesEntity, new AcceptEnemiesComponent());
+        characterBounty.setComponent(new BountyRulesComponent(bountyRulesEntity));
+        entityWorld.setComponent(characterEntity, new BountyComponent(characterBounty.getId()));
+        entityWorld.setComponent(characterEntity, new LevelComponent(6));
+        entityWorld.setComponent(characterEntity, new SpellsUpgradePointsComponent(6));
         for(int i=0;i<4;i++){
-            SpellUtil.learnSpell(entityWorld, unitEntity, i);
+            SpellUtil.learnSpell(entityWorld, characterEntity, i);
         }
     }
 
@@ -222,9 +231,9 @@ public class Map_Testmap extends Map{
                 direction = new Vector2f(-1, -1);
                 break;
         }
-        int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-        entityWorld.setComponent(unitEntity, new PositionComponent(position));
-        entityWorld.setComponent(unitEntity, new DirectionComponent(direction));
-        entityWorld.setComponent(unitEntity, new TeamComponent(playerIndex + 1));
+        int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
+        entityWorld.setComponent(characterEntity, new PositionComponent(position));
+        entityWorld.setComponent(characterEntity, new DirectionComponent(direction));
+        entityWorld.setComponent(characterEntity, new TeamComponent(playerIndex + 1));
     }
 }

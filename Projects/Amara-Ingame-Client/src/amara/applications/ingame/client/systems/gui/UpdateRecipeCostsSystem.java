@@ -24,12 +24,12 @@ public class UpdateRecipeCostsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
-        if(selectedUnitComponent != null){
+        PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
+        if(playerCharacterComponent != null){
             ComponentMapObserver observer = entityWorld.requestObserver(this, InventoryComponent.class);
-            check(entityWorld, observer.getNew().getComponent(selectedUnitComponent.getEntity(), InventoryComponent.class));
-            check(entityWorld, observer.getChanged().getComponent(selectedUnitComponent.getEntity(), InventoryComponent.class));
-            check(entityWorld, observer.getRemoved().getComponent(selectedUnitComponent.getEntity(), InventoryComponent.class));
+            check(entityWorld, observer.getNew().getComponent(playerCharacterComponent.getEntity(), InventoryComponent.class));
+            check(entityWorld, observer.getChanged().getComponent(playerCharacterComponent.getEntity(), InventoryComponent.class));
+            check(entityWorld, observer.getRemoved().getComponent(playerCharacterComponent.getEntity(), InventoryComponent.class));
         }
     }
     

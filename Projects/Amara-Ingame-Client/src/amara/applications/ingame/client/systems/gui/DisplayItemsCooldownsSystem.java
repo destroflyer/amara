@@ -20,11 +20,11 @@ public class DisplayItemsCooldownsSystem extends GUIDisplaySystem{
     }
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
         ComponentMapObserver observer = entityWorld.requestObserver(this, InventoryComponent.class, RemainingCooldownComponent.class);
-        checkChangedItems(entityWorld, observer.getNew().getComponent(selectedEntity, InventoryComponent.class));
-        checkChangedItems(entityWorld, observer.getChanged().getComponent(selectedEntity, InventoryComponent.class));
-        InventoryComponent inventoryComponent = entityWorld.getComponent(selectedEntity, InventoryComponent.class);
+        checkChangedItems(entityWorld, observer.getNew().getComponent(characterEntity, InventoryComponent.class));
+        checkChangedItems(entityWorld, observer.getChanged().getComponent(characterEntity, InventoryComponent.class));
+        InventoryComponent inventoryComponent = entityWorld.getComponent(characterEntity, InventoryComponent.class);
         if(inventoryComponent != null){
             checkCurrentItemsCooldowns(entityWorld, observer, inventoryComponent.getItemEntities());
         }

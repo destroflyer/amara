@@ -30,9 +30,9 @@ public class DisplayScoreboardInventoriesSystem extends PlayersDisplaySystem{
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int playerEntity){
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
-        int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-        if(hasComponentChanged(observer, selectedEntity, InventoryComponent.class)){
-            update_Inventory(entityWorld, playerIndex, selectedEntity);
+        int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
+        if(hasComponentChanged(observer, characterEntity, InventoryComponent.class)){
+            update_Inventory(entityWorld, playerIndex, characterEntity);
         }
     }
     

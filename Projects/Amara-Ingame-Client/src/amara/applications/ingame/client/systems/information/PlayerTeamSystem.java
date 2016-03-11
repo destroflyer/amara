@@ -22,9 +22,9 @@ public class PlayerTeamSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
-        if(selectedUnitComponent != null){
-            TeamComponent teamComponent = entityWorld.getComponent(selectedUnitComponent.getEntity(), TeamComponent.class);
+        PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
+        if(playerCharacterComponent != null){
+            TeamComponent teamComponent = entityWorld.getComponent(playerCharacterComponent.getEntity(), TeamComponent.class);
             if(teamComponent != null){
                 playerTeamEntity = teamComponent.getTeamEntity();
             }

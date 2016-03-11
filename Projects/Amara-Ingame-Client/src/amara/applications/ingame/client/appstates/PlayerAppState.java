@@ -67,6 +67,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         }
         ScreenController_HUD screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
         ScreenController_Shop screenController_Shop = getAppState(NiftyAppState.class).getScreenController(ScreenController_Shop.class);
+        localEntitySystemAppState.addEntitySystem(new DisplayGameTimeSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayPlayerSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayLevelSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayExperienceSystem(playerEntity, screenController_HUD));
@@ -82,6 +83,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new UpdateSpellInformationsSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new UpdateUpgradeSpellsPanelSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayGoldSystem(playerEntity, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayStatsPlayerScoreSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayDeathRecapSystem(playerEntity, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardPlayersNamesSystem(screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardScoresSystem(screenController_HUD));

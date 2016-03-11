@@ -83,14 +83,4 @@ public class UnitUtil{
             }
         }
     }
-    
-    public static boolean isPlayerUnit(EntityWorld entityWorld, int entity){
-        for(int playerEntity : entityWorld.getEntitiesWithAll(SelectedUnitComponent.class)){
-            int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-            if(selectedEntity == entity){
-                return true;
-            }
-        }
-        return false;
-    }
 }

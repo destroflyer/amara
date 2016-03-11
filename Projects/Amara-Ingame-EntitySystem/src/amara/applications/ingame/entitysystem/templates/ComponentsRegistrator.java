@@ -2460,6 +2460,20 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.players.ClientComponent(clientID);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent.class.getDeclaredField("entity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent>("playerCharacter"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent construct(){
+                int entity = createChildEntity(0, "entity");
+                return new amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent(entity);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent>("playerIndex"){
 
@@ -2479,20 +2493,6 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.players.RespawnComponent construct(){
                 return new amara.applications.ingame.entitysystem.components.players.RespawnComponent();
-            }
-        });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.players.SelectedUnitComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.players.SelectedUnitComponent.class.getDeclaredField("entity"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.players.SelectedUnitComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.SelectedUnitComponent>("selectedUnit"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.players.SelectedUnitComponent construct(){
-                int entity = createChildEntity(0, "entity");
-                return new amara.applications.ingame.entitysystem.components.players.SelectedUnitComponent(entity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.players.WaitingToRespawnComponent.class);
@@ -3007,6 +3007,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent>("requireCharacter"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent>("requireProjectile"){
 
@@ -3257,6 +3265,20 @@ public class ComponentsRegistrator{
                     gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent(gold);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent.class.getDeclaredField("targetRulesEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent>("bountyRules"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent construct(){
+                int targetRulesEntity = createChildEntity(0, "targetRulesEntity");
+                return new amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent(targetRulesEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.BountyComponent.class);
@@ -3863,14 +3885,6 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.IsHoveredComponent();
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsProjectileComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsProjectileComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsProjectileComponent>("isProjectile"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.units.IsProjectileComponent construct(){
-                return new amara.applications.ingame.entitysystem.components.units.IsProjectileComponent();
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsTargetableComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsTargetableComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsTargetableComponent>("isTargetable"){
 
@@ -4235,6 +4249,23 @@ public class ComponentsRegistrator{
             public amara.applications.ingame.entitysystem.components.units.TeamComponent construct(){
                 int teamEntity = createChildEntity(0, "teamEntity");
                 return new amara.applications.ingame.entitysystem.components.units.TeamComponent(teamEntity);
+            }
+        });
+        //types
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent>("isCharacter"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent>("isProjectile"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.WalkStepDistanceComponent.class);

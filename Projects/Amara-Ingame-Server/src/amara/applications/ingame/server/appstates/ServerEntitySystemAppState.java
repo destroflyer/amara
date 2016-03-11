@@ -12,6 +12,7 @@ import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.scores.*;
+import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.synchronizing.*;
 import amara.applications.ingame.entitysystem.systems.aggro.*;
@@ -102,8 +103,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
             playerEntity.setComponent(new NameComponent(login));
             LobbyPlayerData lobbyPlayerData = player.getLobbyPlayer().getPlayerData();
             String characterName = databaseAppState.getQueryResult("SELECT name FROM characters WHERE id = " + lobbyPlayerData.getCharacterID()).nextString_Close();
-            EntityWrapper unit = EntityTemplate.createFromTemplate(entityWorld, "units/" + characterName);
-            unit.setComponent(new TitleComponent(login));
+            EntityWrapper character = EntityTemplate.createFromTemplate(entityWorld, "units/" + characterName);
+            character.setComponent(new TitleComponent(login));
             try{
                 QueryResult results_UserCharacters = databaseAppState.getQueryResult("SELECT skinid, inventory FROM users_characters WHERE (userid = " + player.getLobbyPlayer().getID() + ") AND (characterid = " + lobbyPlayerData.getCharacterID() + ")");
                 results_UserCharacters.next();
@@ -112,7 +113,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
                 if(skinID != 0){
                     skinName = databaseAppState.getQueryResult("SELECT name FROM characters_skins WHERE id = " + skinID).nextString_Close();
                 }
-                unit.setComponent(new ModelComponent("Models/" + characterName + "/skin_" + skinName + ".xml"));
+                character.setComponent(new ModelComponent("Models/" + characterName + "/skin_" + skinName + ".xml"));
                 ResultSet inventoryResultSet = results_UserCharacters.getArray("inventory").getResultSet();
                 LinkedList<Integer> inventory = new LinkedList<Integer>();
                 while(inventoryResultSet.next()){
@@ -125,22 +126,23 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
                 }
                 inventoryResultSet.close();
                 results_UserCharacters.close();
-                unit.setComponent(new SightRangeComponent(30));
-                unit.setComponent(new InventoryComponent(Util.convertToArray(inventory)));
-                unit.setComponent(new GoldComponent(475));
-                unit.setComponent(new LevelComponent(1));
-                unit.setComponent(new SpellsComponent(new int[0]));
-                unit.setComponent(new SpellsUpgradePointsComponent(1));
+                character.setComponent(new IsCharacterComponent());
+                character.setComponent(new SightRangeComponent(30));
+                character.setComponent(new InventoryComponent(Util.convertToArray(inventory)));
+                character.setComponent(new GoldComponent(475));
+                character.setComponent(new LevelComponent(1));
+                character.setComponent(new SpellsComponent(new int[0]));
+                character.setComponent(new SpellsUpgradePointsComponent(1));
                 int scoreEntity = entityWorld.createEntity();
                 entityWorld.setComponent(scoreEntity, new CharacterKillsComponent(0));
                 entityWorld.setComponent(scoreEntity, new DeathsComponent(0));
                 entityWorld.setComponent(scoreEntity, new CharacterAssistsComponent(0));
                 entityWorld.setComponent(scoreEntity, new CreepScoreComponent(0));
-                unit.setComponent(new ScoreComponent(scoreEntity));
+                character.setComponent(new ScoreComponent(scoreEntity));
             }catch(Exception ex){
                 ex.printStackTrace();
             }
-            playerEntity.setComponent(new SelectedUnitComponent(unit.getId()));
+            playerEntity.setComponent(new PlayerCharacterComponent(character.getId()));
             map.initializePlayer(entityWorld, playerEntity.getId());
             //MapSpells
             LinkedList<Integer> mapSpellsEntities = new LinkedList<Integer>();
@@ -155,7 +157,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
                     mapSpellsEntities.add(spellEntity);
                 }
             }
-            unit.setComponent(new MapSpellsComponent(Util.convertToArray(mapSpellsEntities)));
+            character.setComponent(new MapSpellsComponent(Util.convertToArray(mapSpellsEntities)));
             map.spawnPlayer(entityWorld, playerEntity.getId());
             player.setEntityID(playerEntity.getId());
         }

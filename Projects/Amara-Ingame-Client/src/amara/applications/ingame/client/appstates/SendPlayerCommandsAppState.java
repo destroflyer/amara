@@ -67,15 +67,15 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
                         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
                         if(entityWorld.hasComponent(hoveredEntity, ShopRangeComponent.class)){
                             int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
-                            int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-                            if(ShopUtil.canUseShop(entityWorld, selectedEntity, hoveredEntity)){
+                            int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
+                            if(ShopUtil.canUseShop(entityWorld, characterEntity, hoveredEntity)){
                                 screenController_Shop.setShopVisible(true);
                             }
                         }
                     }
                 }
                 else if(mouseButtonIndex == Settings.getInteger("controls_navigation_walk_attack")){
-                    if((hoveredEntity != -1) && (hoveredEntity != getPlayerSelectedUnitEntity())){
+                    if((hoveredEntity != -1) && (hoveredEntity != getPlayerCharacterEntity())){
                         sendCommand(new AutoAttackCommand(hoveredEntity));
                     }
                     else{
@@ -157,8 +157,8 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
     public void learnOrUpgradeSpell(int spellIndex){
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
         PlayerAppState playerAppState = getAppState(PlayerAppState.class);
-        int selectedEntity = entityWorld.getComponent(playerAppState.getPlayerEntity(), SelectedUnitComponent.class).getEntity();
-        int[] spells = entityWorld.getComponent(selectedEntity, SpellsComponent.class).getSpellsEntities();
+        int characterEntity = entityWorld.getComponent(playerAppState.getPlayerEntity(), PlayerCharacterComponent.class).getEntity();
+        int[] spells = entityWorld.getComponent(characterEntity, SpellsComponent.class).getSpellsEntities();
         if((spellIndex < spells.length) && (spells[spellIndex] != -1)){
             int spellEntity = spells[spellIndex];
             SpellUpgradesComponent spellUpgradesComponent = entityWorld.getComponent(spellEntity, SpellUpgradesComponent.class);
@@ -181,8 +181,8 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
     
     private void castSpell(SpellIndex spellIndex){
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
-        int selectedEntity = getPlayerSelectedUnitEntity();
-        int spellEntity = ExecutePlayerCommandsSystem.getSpellEntity(entityWorld, selectedEntity, spellIndex);
+        int characterEntity = getPlayerCharacterEntity();
+        int spellEntity = ExecutePlayerCommandsSystem.getSpellEntity(entityWorld, characterEntity, spellIndex);
         if(spellEntity != -1){
             Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
             CastTypeComponent.CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();
@@ -200,7 +200,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
 
                 case LINEAR_SKILLSHOT:
                     if(groundLocation != null){
-                        Vector2f casterPosition = entityWorld.getComponent(selectedEntity, PositionComponent.class).getPosition();
+                        Vector2f casterPosition = entityWorld.getComponent(characterEntity, PositionComponent.class).getPosition();
                         Vector2f direction = groundLocation.subtract(casterPosition);
                         sendCommand(new CastLinearSkillshotSpellCommand(spellIndex, direction));
                     }
@@ -215,10 +215,10 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
         }
     }
     
-    private int getPlayerSelectedUnitEntity(){
+    private int getPlayerCharacterEntity(){
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
         int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
-        return entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
+        return entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
     }
     
     private void showReaction(String reaction){

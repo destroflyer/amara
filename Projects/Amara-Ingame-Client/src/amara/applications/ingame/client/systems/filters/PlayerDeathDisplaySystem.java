@@ -26,14 +26,14 @@ public class PlayerDeathDisplaySystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
-        if(selectedUnitComponent != null){
-            int selectedEntity = selectedUnitComponent.getEntity();
+        PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
+        if(playerCharacterComponent != null){
+            int characterEntity = playerCharacterComponent.getEntity();
             ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
-            if(observer.getNew().hasComponent(selectedEntity, IsAliveComponent.class)){
+            if(observer.getNew().hasComponent(characterEntity, IsAliveComponent.class)){
                 postFilterAppState.removeFilter(grayscaleFilter);
             }
-            else if(observer.getRemoved().hasComponent(selectedEntity, IsAliveComponent.class)){
+            else if(observer.getRemoved().hasComponent(characterEntity, IsAliveComponent.class)){
                 postFilterAppState.addFilter(grayscaleFilter);
             }
         }

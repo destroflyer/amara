@@ -21,7 +21,7 @@ public class DisplayAttributesSystem extends GUIDisplaySystem{
     private final static String NON_EXISTING_ATTRIBUTE_TEXT = "-";
     
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
         String healthText = NON_EXISTING_ATTRIBUTE_TEXT;
         String attackDamageText = NON_EXISTING_ATTRIBUTE_TEXT;
         String abilityPowerText = NON_EXISTING_ATTRIBUTE_TEXT;
@@ -31,32 +31,32 @@ public class DisplayAttributesSystem extends GUIDisplaySystem{
         String magicResistanceText = NON_EXISTING_ATTRIBUTE_TEXT;
         String walkSpeedText = NON_EXISTING_ATTRIBUTE_TEXT;
         float healthPortion = 0;
-        if(entityWorld.hasComponent(selectedEntity, HealthComponent.class) && entityWorld.hasComponent(selectedEntity, MaximumHealthComponent.class)){
-            float health = entityWorld.getComponent(selectedEntity, HealthComponent.class).getValue();
-            float maximumHealth = entityWorld.getComponent(selectedEntity, MaximumHealthComponent.class).getValue();
+        if(entityWorld.hasComponent(characterEntity, HealthComponent.class) && entityWorld.hasComponent(characterEntity, MaximumHealthComponent.class)){
+            float health = entityWorld.getComponent(characterEntity, HealthComponent.class).getValue();
+            float maximumHealth = entityWorld.getComponent(characterEntity, MaximumHealthComponent.class).getValue();
             healthText = (((int) health) + " / " + ((int) maximumHealth));
             healthPortion = (health / maximumHealth);
         }
-        if(entityWorld.hasComponent(selectedEntity, AttackDamageComponent.class)){
-            attackDamageText = ("" + (int) entityWorld.getComponent(selectedEntity, AttackDamageComponent.class).getValue());
+        if(entityWorld.hasComponent(characterEntity, AttackDamageComponent.class)){
+            attackDamageText = ("" + (int) entityWorld.getComponent(characterEntity, AttackDamageComponent.class).getValue());
         }
-        if(entityWorld.hasComponent(selectedEntity, AbilityPowerComponent.class)){
-            abilityPowerText = ("" + (int) entityWorld.getComponent(selectedEntity, AbilityPowerComponent.class).getValue());
+        if(entityWorld.hasComponent(characterEntity, AbilityPowerComponent.class)){
+            abilityPowerText = ("" + (int) entityWorld.getComponent(characterEntity, AbilityPowerComponent.class).getValue());
         }
-        if(entityWorld.hasComponent(selectedEntity, AttackSpeedComponent.class)){
-            attackSpeedText = ("" + Util.round(entityWorld.getComponent(selectedEntity, AttackSpeedComponent.class).getValue(), 2));
+        if(entityWorld.hasComponent(characterEntity, AttackSpeedComponent.class)){
+            attackSpeedText = ("" + Util.round(entityWorld.getComponent(characterEntity, AttackSpeedComponent.class).getValue(), 2));
         }
-        if(entityWorld.hasComponent(selectedEntity, CooldownSpeedComponent.class)){
-            cooldownSpeedText = ("" + Util.round(entityWorld.getComponent(selectedEntity, CooldownSpeedComponent.class).getValue(), 2));
+        if(entityWorld.hasComponent(characterEntity, CooldownSpeedComponent.class)){
+            cooldownSpeedText = ("" + Util.round(entityWorld.getComponent(characterEntity, CooldownSpeedComponent.class).getValue(), 2));
         }
-        if(entityWorld.hasComponent(selectedEntity, ArmorComponent.class)){
-            armorText = ("" + (int) entityWorld.getComponent(selectedEntity, ArmorComponent.class).getValue());
+        if(entityWorld.hasComponent(characterEntity, ArmorComponent.class)){
+            armorText = ("" + (int) entityWorld.getComponent(characterEntity, ArmorComponent.class).getValue());
         }
-        if(entityWorld.hasComponent(selectedEntity, MagicResistanceComponent.class)){
-            magicResistanceText = ("" + (int) entityWorld.getComponent(selectedEntity, MagicResistanceComponent.class).getValue());
+        if(entityWorld.hasComponent(characterEntity, MagicResistanceComponent.class)){
+            magicResistanceText = ("" + (int) entityWorld.getComponent(characterEntity, MagicResistanceComponent.class).getValue());
         }
-        if(entityWorld.hasComponent(selectedEntity, WalkSpeedComponent.class)){
-            walkSpeedText = ("" + Util.round(entityWorld.getComponent(selectedEntity, WalkSpeedComponent.class).getValue(), 2));
+        if(entityWorld.hasComponent(characterEntity, WalkSpeedComponent.class)){
+            walkSpeedText = ("" + Util.round(entityWorld.getComponent(characterEntity, WalkSpeedComponent.class).getValue(), 2));
         }
         screenController_HUD.setAttributeValue_AttackDamage(attackDamageText);
         screenController_HUD.setAttributeValue_AbilityPower(abilityPowerText);

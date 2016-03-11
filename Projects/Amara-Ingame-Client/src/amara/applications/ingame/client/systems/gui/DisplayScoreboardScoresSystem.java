@@ -30,8 +30,8 @@ public class DisplayScoreboardScoresSystem extends PlayersDisplaySystem{
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int playerEntity){
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
-        int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-        ScoreComponent scoreComponent = entityWorld.getComponent(selectedEntity, ScoreComponent.class);
+        int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
+        ScoreComponent scoreComponent = entityWorld.getComponent(characterEntity, ScoreComponent.class);
         if(scoreComponent != null){
             int scoreEntity = scoreComponent.getScoreEntity();
             if(hasComponentChanged(observer, scoreEntity, CharacterKillsComponent.class, DeathsComponent.class, CharacterAssistsComponent.class)){

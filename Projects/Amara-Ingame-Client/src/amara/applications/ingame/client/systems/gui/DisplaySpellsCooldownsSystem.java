@@ -20,11 +20,11 @@ public class DisplaySpellsCooldownsSystem extends GUIDisplaySystem{
     }
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
         ComponentMapObserver observer = entityWorld.requestObserver(this, SpellsComponent.class, RemainingCooldownComponent.class);
-        checkChangedSpells(entityWorld, observer.getNew().getComponent(selectedEntity, SpellsComponent.class));
-        checkChangedSpells(entityWorld, observer.getChanged().getComponent(selectedEntity, SpellsComponent.class));
-        SpellsComponent spellsComponent = entityWorld.getComponent(selectedEntity, SpellsComponent.class);
+        checkChangedSpells(entityWorld, observer.getNew().getComponent(characterEntity, SpellsComponent.class));
+        checkChangedSpells(entityWorld, observer.getChanged().getComponent(characterEntity, SpellsComponent.class));
+        SpellsComponent spellsComponent = entityWorld.getComponent(characterEntity, SpellsComponent.class);
         if(spellsComponent != null){
             checkCurrentSpellsCooldowns(observer, spellsComponent.getSpellsEntities());
         }

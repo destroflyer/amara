@@ -20,11 +20,11 @@ public class DisplayMapSpellsCooldownsSystem extends GUIDisplaySystem{
     }
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
         ComponentMapObserver observer = entityWorld.requestObserver(this, MapSpellsComponent.class, RemainingCooldownComponent.class);
-        checkChangedSpells(entityWorld, observer.getNew().getComponent(selectedEntity, MapSpellsComponent.class));
-        checkChangedSpells(entityWorld, observer.getChanged().getComponent(selectedEntity, MapSpellsComponent.class));
-        MapSpellsComponent mapSpellsComponent = entityWorld.getComponent(selectedEntity, MapSpellsComponent.class);
+        checkChangedSpells(entityWorld, observer.getNew().getComponent(characterEntity, MapSpellsComponent.class));
+        checkChangedSpells(entityWorld, observer.getChanged().getComponent(characterEntity, MapSpellsComponent.class));
+        MapSpellsComponent mapSpellsComponent = entityWorld.getComponent(characterEntity, MapSpellsComponent.class);
         if(mapSpellsComponent != null){
             checkCurrentSpellsCooldowns(observer, mapSpellsComponent.getSpellsEntities());
         }

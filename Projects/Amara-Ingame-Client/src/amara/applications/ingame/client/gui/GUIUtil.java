@@ -30,4 +30,25 @@ public class GUIUtil{
             return ("" + value);
         }
     }
+    
+    public static String getFormattedTime(float time){
+        int seconds = (int) time;
+        int hours = (int) (seconds / (60 * 60));
+        seconds -= (hours * (60 * 60));
+        int minutes = (int) (seconds / 60);
+        seconds -= (minutes * 60);
+        String text = "";
+        if(hours > 0){
+            text += (hours + ":");
+        }
+        if(minutes < 10){
+            text += "0";
+        }
+        text += (minutes + ":");
+        if(seconds < 10){
+            text += "0";
+        }
+        text += seconds;
+        return text;
+    }
 }

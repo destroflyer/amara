@@ -20,10 +20,10 @@ public class DisplayInventorySystem extends GUIDisplaySystem{
     }
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
         ComponentMapObserver observer = entityWorld.requestObserver(this, InventoryComponent.class);
-        check(entityWorld, observer.getNew().getComponent(selectedEntity, InventoryComponent.class));
-        check(entityWorld, observer.getChanged().getComponent(selectedEntity, InventoryComponent.class));
+        check(entityWorld, observer.getNew().getComponent(characterEntity, InventoryComponent.class));
+        check(entityWorld, observer.getChanged().getComponent(characterEntity, InventoryComponent.class));
     }
     
     private void check(EntityWorld entityWorld, InventoryComponent inventoryComponent){

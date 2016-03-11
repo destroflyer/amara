@@ -131,17 +131,20 @@ public class Map_Arama extends Map{
             shop.setComponent(new ShopRangeComponent(10));
             shop.setComponent(new TeamComponent(i + 1));
             //Towers
+            Vector2f tower1Position = new Vector2f(((i == 0)?354:171), laneCenterY);
+            Vector2f tower2Position = new Vector2f(((i == 0)?321:204), laneCenterY);
+            Vector2f towerDirection = new Vector2f(((i == 0)?-1:1), 0);
             EntityWrapper tower1 = EntityTemplate.createFromTemplate(entityWorld, "structures/tower");
-            tower1.setComponent(new PositionComponent(new Vector2f(((i == 0)?354:171), laneCenterY)));
-            tower1.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));
+            tower1.setComponent(new PositionComponent(tower1Position));
+            tower1.setComponent(new DirectionComponent(towerDirection));
             tower1.setComponent(new TeamComponent(i + 1));
             tower1.removeComponent(IsTargetableComponent.class);
             tower1.removeComponent(IsVulnerableComponent.class);
             EntityWrapper tower2 = EntityTemplate.createFromTemplate(entityWorld, "structures/tower");
-            tower2.setComponent(new PositionComponent(new Vector2f(((i == 0)?321:204), laneCenterY)));
-            tower2.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));
+            tower2.setComponent(new PositionComponent(tower2Position));
+            tower2.setComponent(new DirectionComponent(towerDirection));
             tower2.setComponent(new TeamComponent(i + 1));
-            //Tower 1 death trigger
+            //Tower 1 death trigger / Nexus Vulnerability
             EntityWrapper tower1DeathTrigger = entityWorld.getWrapped(entityWorld.createEntity());
             tower1DeathTrigger.setComponent(new DeathTriggerComponent());
             tower1DeathTrigger.setComponent(new CustomTargetComponent(nexi[i].getId()));
@@ -150,15 +153,41 @@ public class Map_Arama extends Map{
             tower1DeathEffect.setComponent(new AddVulnerabilityComponent());
             tower1DeathTrigger.setComponent(new TriggeredEffectComponent(tower1DeathEffect.getId()));
             tower1DeathTrigger.setComponent(new TriggerSourceComponent(tower1.getId()));
-            //Tower 2 death trigger
-            EntityWrapper tower2DeathTrigger = entityWorld.getWrapped(entityWorld.createEntity());
-            tower2DeathTrigger.setComponent(new DeathTriggerComponent());
-            tower2DeathTrigger.setComponent(new CustomTargetComponent(tower1.getId()));
-            EntityWrapper tower2DeathEffect = entityWorld.getWrapped(entityWorld.createEntity());
-            tower2DeathEffect.setComponent(new AddTargetabilityComponent());
-            tower2DeathEffect.setComponent(new AddVulnerabilityComponent());
-            tower2DeathTrigger.setComponent(new TriggeredEffectComponent(tower2DeathEffect.getId()));
-            tower2DeathTrigger.setComponent(new TriggerSourceComponent(tower2.getId()));
+            //Tower 1 death trigger / Remains
+            EntityWrapper tower1DeathTrigger_2 = entityWorld.getWrapped(entityWorld.createEntity());
+            tower1DeathTrigger_2.setComponent(new DeathTriggerComponent());
+            int spawnTargetEntity_Tower1Remains = entityWorld.createEntity();
+            entityWorld.setComponent(spawnTargetEntity_Tower1Remains, new PositionComponent(tower1Position));
+            entityWorld.setComponent(spawnTargetEntity_Tower1Remains, new DirectionComponent(towerDirection));
+            tower1DeathTrigger_2.setComponent(new CustomTargetComponent(spawnTargetEntity_Tower1Remains));
+            EntityWrapper tower1DeathEffect_2 = entityWorld.getWrapped(entityWorld.createEntity());
+            int spawnInformationEntity_Tower1Remains = entityWorld.createEntity();
+            entityWorld.setComponent(spawnInformationEntity_Tower1Remains, new SpawnTemplateComponent("structures/tower_remains"));
+            tower1DeathEffect_2.setComponent(new SpawnComponent(spawnInformationEntity_Tower1Remains));
+            tower1DeathTrigger_2.setComponent(new TriggeredEffectComponent(tower1DeathEffect_2.getId()));
+            tower1DeathTrigger_2.setComponent(new TriggerSourceComponent(tower1.getId()));
+            //Tower 2 death trigger / Tower 1 Vulnerability
+            EntityWrapper tower2DeathTrigger_1 = entityWorld.getWrapped(entityWorld.createEntity());
+            tower2DeathTrigger_1.setComponent(new DeathTriggerComponent());
+            tower2DeathTrigger_1.setComponent(new CustomTargetComponent(tower1.getId()));
+            EntityWrapper tower2DeathEffect_1 = entityWorld.getWrapped(entityWorld.createEntity());
+            tower2DeathEffect_1.setComponent(new AddTargetabilityComponent());
+            tower2DeathEffect_1.setComponent(new AddVulnerabilityComponent());
+            tower2DeathTrigger_1.setComponent(new TriggeredEffectComponent(tower2DeathEffect_1.getId()));
+            tower2DeathTrigger_1.setComponent(new TriggerSourceComponent(tower2.getId()));
+            //Tower 2 death trigger / Remains
+            EntityWrapper tower2DeathTrigger_2 = entityWorld.getWrapped(entityWorld.createEntity());
+            tower2DeathTrigger_2.setComponent(new DeathTriggerComponent());
+            int spawnTargetEntity_Tower2Remains = entityWorld.createEntity();
+            entityWorld.setComponent(spawnTargetEntity_Tower2Remains, new PositionComponent(tower2Position));
+            entityWorld.setComponent(spawnTargetEntity_Tower2Remains, new DirectionComponent(towerDirection));
+            tower2DeathTrigger_2.setComponent(new CustomTargetComponent(spawnTargetEntity_Tower2Remains));
+            EntityWrapper tower2DeathEffect_2 = entityWorld.getWrapped(entityWorld.createEntity());
+            int spawnInformationEntity_Tower2Remains = entityWorld.createEntity();
+            entityWorld.setComponent(spawnInformationEntity_Tower2Remains, new SpawnTemplateComponent("structures/tower_remains"));
+            tower2DeathEffect_2.setComponent(new SpawnComponent(spawnInformationEntity_Tower2Remains));
+            tower2DeathTrigger_2.setComponent(new TriggeredEffectComponent(tower2DeathEffect_2.getId()));
+            tower2DeathTrigger_2.setComponent(new TriggerSourceComponent(tower2.getId()));
             //Waves
             int spawnCasterEntity = entityWorld.createEntity();
             entityWorld.setComponent(spawnCasterEntity, new PositionComponent(new Vector2f(nexiX[i] + (((i == 0)?-1:1) * 5), laneCenterY)));
@@ -223,7 +252,7 @@ public class Map_Arama extends Map{
         entityWorld.setComponent(entity, new MapObjectiveComponent(gameObjective.getId()));
         EntityWrapper playerDeathRules = entityWorld.getWrapped(entityWorld.createEntity());
         playerDeathRules.setComponent(new RespawnPlayersComponent());
-        playerDeathRules.setComponent(new RespawnTimerComponent(3, 0));
+        playerDeathRules.setComponent(new RespawnTimerComponent(5, 1));
         entityWorld.setComponent(entity, new PlayerDeathRulesComponent(playerDeathRules.getId()));
     }
 
@@ -231,32 +260,36 @@ public class Map_Arama extends Map{
     public void initializePlayer(EntityWorld entityWorld, int playerEntity){
         super.initializePlayer(entityWorld, playerEntity);
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
-        int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
+        int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
         int teamEntity = ((playerIndex % 2) + 1);
-        entityWorld.setComponent(unitEntity, new TeamComponent(teamEntity));
+        entityWorld.setComponent(characterEntity, new TeamComponent(teamEntity));
         spells[1].getMapSpells()[0] = new MapSpell("spells/backport/base(" + backportPositionEntities[teamEntity - 1] + ")");
         //Bounty
         EntityWrapper characterBounty = entityWorld.getWrapped(entityWorld.createEntity());
         characterBounty.setComponent(new BountyCharacterKillComponent());
         characterBounty.setComponent(new BountyGoldComponent(300));
-        entityWorld.setComponent(unitEntity, new BountyComponent(characterBounty.getId()));
+        int bountyRulesEntity = entityWorld.createEntity();
+        entityWorld.setComponent(bountyRulesEntity, new RequireCharacterComponent());
+        entityWorld.setComponent(bountyRulesEntity, new AcceptEnemiesComponent());
+        characterBounty.setComponent(new BountyRulesComponent(bountyRulesEntity));
+        entityWorld.setComponent(characterEntity, new BountyComponent(characterBounty.getId()));
         //GoldPerTime
         int buffEntity = entityWorld.createEntity();
         int buffAttributesEntity = entityWorld.createEntity();
         entityWorld.setComponent(buffAttributesEntity, new BonusFlatGoldPerSecondComponent(2.4f));
         entityWorld.setComponent(buffEntity, new ContinuousAttributesComponent(buffAttributesEntity));
         entityWorld.setComponent(buffEntity, new KeepOnDeathComponent());
-        ApplyAddBuffsSystem.addBuff(entityWorld, unitEntity, buffEntity);
+        ApplyAddBuffsSystem.addBuff(entityWorld, characterEntity, buffEntity);
     }
 
     @Override
     public void spawnPlayer(EntityWorld entityWorld, int playerEntity){
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
-        int unitEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
+        int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
         int playerTeamIndex = (playerIndex / 2);
         Vector2f position = new Vector2f(0, laneCenterY - (playerTeamIndex * 5));
         Vector2f direction = new Vector2f();
-        int teamEntity = entityWorld.getComponent(unitEntity, TeamComponent.class).getTeamEntity();
+        int teamEntity = entityWorld.getComponent(characterEntity, TeamComponent.class).getTeamEntity();
         switch(teamEntity){
             case 1:
                 position.setX(405);
@@ -268,7 +301,7 @@ public class Map_Arama extends Map{
                 direction.setX(1);
                 break;
         }
-        entityWorld.setComponent(unitEntity, new PositionComponent(position));
-        entityWorld.setComponent(unitEntity, new DirectionComponent(direction));
+        entityWorld.setComponent(characterEntity, new PositionComponent(position));
+        entityWorld.setComponent(characterEntity, new DirectionComponent(direction));
     }
 }

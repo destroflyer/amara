@@ -51,7 +51,7 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                     public void run(){
                         MessageResponse chatCommandResponse = new MessageResponse(messageResponse.getClientID());
                         EntityWorld entityWorld = ingameServerApplication.getStateManager().getState(ServerEntitySystemAppState.class).getEntityWorld();
-                        int selectedUnit = entityWorld.getComponent(gamePlayer.getEntityID(), SelectedUnitComponent.class).getEntity();
+                        int characterEntity = entityWorld.getComponent(gamePlayer.getEntityID(), PlayerCharacterComponent.class).getEntity();
                         if(message.getText().equals("such chat")){
                             chatCommandResponse.addAnswerMessage(new Message_ChatMessage("very responsive, wow"));
                         }
@@ -81,7 +81,7 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                             try{
                                 int gold = Integer.parseInt(message.getText().substring(6));
                                 if(gold >= 0){
-                                    entityWorld.setComponent(selectedUnit, new GoldComponent(gold));
+                                    entityWorld.setComponent(characterEntity, new GoldComponent(gold));
                                 }
                                 else{
                                     chatCommandResponse.addAnswerMessage(new Message_ChatMessage("No negative gold values allowed"));
@@ -91,13 +91,17 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                         }
                         else if(message.getText().startsWith("/deathtimer ")){
                             try{
-                                int initialDuration = Integer.parseInt(message.getText().substring(12));
-                                if(initialDuration >= 0){
-                                    int playerDeathRulesEntity = entityWorld.getComponent(game.getMap().getEntity(), PlayerDeathRulesComponent.class).getRulesEntity();
-                                    entityWorld.setComponent(playerDeathRulesEntity, new RespawnTimerComponent(initialDuration, 0));
-                                }
-                                else{
-                                    chatCommandResponse.addAnswerMessage(new Message_ChatMessage("No negative death timers allowed"));
+                                String[] parameters = message.getText().substring(12).split(" ");
+                                if(parameters.length == 2){
+                                    float initialDuration = Float.parseFloat(parameters[0]);
+                                    float deltaDurationPerTime = Float.parseFloat(parameters[1]);
+                                    if((initialDuration >= 0) && (deltaDurationPerTime >= 0)){
+                                        int playerDeathRulesEntity = entityWorld.getComponent(game.getMap().getEntity(), PlayerDeathRulesComponent.class).getRulesEntity();
+                                        entityWorld.setComponent(playerDeathRulesEntity, new RespawnTimerComponent(initialDuration, deltaDurationPerTime));
+                                    }
+                                    else{
+                                        chatCommandResponse.addAnswerMessage(new Message_ChatMessage("No negative death timers allowed"));
+                                    }
                                 }
                             }catch(NumberFormatException ex){
                             }
@@ -110,7 +114,7 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                                 buffAttributes.setComponent(new BonusPercentageCooldownSpeedComponent(cooldownSpeed));
                                 buff.setComponent(new ContinuousAttributesComponent(buffAttributes.getId()));
                                 buff.setComponent(new KeepOnDeathComponent());
-                                ApplyAddBuffsSystem.addBuff(entityWorld, selectedUnit, buff.getId());
+                                ApplyAddBuffsSystem.addBuff(entityWorld, characterEntity, buff.getId());
                             }catch(NumberFormatException ex){
                             }
                         }

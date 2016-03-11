@@ -27,14 +27,14 @@ public class PlayerRespawnSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(int playerEntity : entityWorld.getEntitiesWithAll(RespawnComponent.class)){
             entityWorld.removeComponent(playerEntity, RespawnComponent.class);
-            int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-            entityWorld.removeComponent(selectedEntity, AnimationComponent.class);
-            entityWorld.removeComponent(selectedEntity, DamageHistoryComponent.class);
-            entityWorld.setComponent(selectedEntity, new HitboxActiveComponent());
-            entityWorld.setComponent(selectedEntity, new IsAliveComponent());
-            entityWorld.setComponent(selectedEntity, new IsTargetableComponent());
-            entityWorld.setComponent(selectedEntity, new IsVulnerableComponent());
-            entityWorld.setComponent(selectedEntity, new RequestUpdateAttributesComponent());
+            int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
+            entityWorld.removeComponent(characterEntity, AnimationComponent.class);
+            entityWorld.removeComponent(characterEntity, DamageHistoryComponent.class);
+            entityWorld.setComponent(characterEntity, new HitboxActiveComponent());
+            entityWorld.setComponent(characterEntity, new IsAliveComponent());
+            entityWorld.setComponent(characterEntity, new IsTargetableComponent());
+            entityWorld.setComponent(characterEntity, new IsVulnerableComponent());
+            entityWorld.setComponent(characterEntity, new RequestUpdateAttributesComponent());
             game.getMap().spawnPlayer(entityWorld, playerEntity);
         }
     }

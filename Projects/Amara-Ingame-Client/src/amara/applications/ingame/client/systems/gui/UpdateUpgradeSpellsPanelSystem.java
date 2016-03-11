@@ -21,15 +21,15 @@ public class UpdateUpgradeSpellsPanelSystem extends GUIDisplaySystem{
     private boolean isUpdateRequired;
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
         isUpdateRequired = false;
         ComponentMapObserver observer = entityWorld.requestObserver(this, SpellsComponent.class, SpellsUpgradePointsComponent.class);
-        checkChangedComponent(observer.getNew().getComponent(selectedEntity, SpellsComponent.class));
-        checkChangedComponent(observer.getChanged().getComponent(selectedEntity, SpellsComponent.class));
-        checkChangedComponent(observer.getNew().getComponent(selectedEntity, SpellsUpgradePointsComponent.class));
-        checkChangedComponent(observer.getChanged().getComponent(selectedEntity, SpellsUpgradePointsComponent.class));
+        checkChangedComponent(observer.getNew().getComponent(characterEntity, SpellsComponent.class));
+        checkChangedComponent(observer.getChanged().getComponent(characterEntity, SpellsComponent.class));
+        checkChangedComponent(observer.getNew().getComponent(characterEntity, SpellsUpgradePointsComponent.class));
+        checkChangedComponent(observer.getChanged().getComponent(characterEntity, SpellsUpgradePointsComponent.class));
         if(isUpdateRequired){
-            updateUpgradeSpellsPanel(entityWorld, selectedEntity);
+            updateUpgradeSpellsPanel(entityWorld, characterEntity);
         }
     }
     
@@ -39,20 +39,20 @@ public class UpdateUpgradeSpellsPanelSystem extends GUIDisplaySystem{
         }
     }
     
-    private void updateUpgradeSpellsPanel(EntityWorld entityWorld, int selectedEntity){
-        SpellsComponent spellsComponent = entityWorld.getComponent(selectedEntity, SpellsComponent.class);
-        SpellsUpgradePointsComponent spellsUpgradePointsComponent = entityWorld.getComponent(selectedEntity, SpellsUpgradePointsComponent.class);
+    private void updateUpgradeSpellsPanel(EntityWorld entityWorld, int characterEntity){
+        SpellsComponent spellsComponent = entityWorld.getComponent(characterEntity, SpellsComponent.class);
+        SpellsUpgradePointsComponent spellsUpgradePointsComponent = entityWorld.getComponent(characterEntity, SpellsUpgradePointsComponent.class);
         if((spellsComponent != null) && (spellsUpgradePointsComponent != null)){
             boolean showLayer = false;
             boolean showButton;
             boolean learnOrUpgrade = false;
             for(int i=0;i<4;i++){
                 showButton = false;
-                if(SpellUtil.canUpgradeSpell(entityWorld, selectedEntity, i)){
+                if(SpellUtil.canUpgradeSpell(entityWorld, characterEntity, i)){
                     showButton = true;
                     learnOrUpgrade = false;
                 }
-                else if(SpellUtil.canLearnSpell(entityWorld, selectedEntity, i)){
+                else if(SpellUtil.canLearnSpell(entityWorld, characterEntity, i)){
                     showButton = true;
                     learnOrUpgrade = true;
                 }

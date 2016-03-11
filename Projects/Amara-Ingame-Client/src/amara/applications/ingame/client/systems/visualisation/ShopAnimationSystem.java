@@ -29,8 +29,8 @@ public class ShopAnimationSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        SelectedUnitComponent selectedUnitComponent = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class);
-        if(selectedUnitComponent != null){
+        PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
+        if(playerCharacterComponent != null){
             Set<Integer> shopEntities = entityWorld.getEntitiesWithAll(ShopRangeComponent.class);
             if(canUseShop == null){
                 canUseShop = new boolean[shopEntities.size()];
@@ -38,7 +38,7 @@ public class ShopAnimationSystem implements EntitySystem{
             int i = 0;
             for(int shopEntity : shopEntities){
                 boolean couldUseShop = canUseShop[i];
-                canUseShop[i] = ShopUtil.canUseShop(entityWorld, selectedUnitComponent.getEntity(), shopEntity);
+                canUseShop[i] = ShopUtil.canUseShop(entityWorld, playerCharacterComponent.getEntity(), shopEntity);
                 if(canUseShop[i] != couldUseShop){
                     ModelComponent modelComponent = entityWorld.getComponent(shopEntity, ModelComponent.class);
                     if(modelComponent.getModelSkinPath().equals("Models/chest/skin.xml")){

@@ -19,10 +19,10 @@ public class DisplayLevelSystem extends GUIDisplaySystem{
     }
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
         ComponentMapObserver observer = entityWorld.requestObserver(this, LevelComponent.class);
-        check(observer.getNew().getComponent(selectedEntity, LevelComponent.class));
-        check(observer.getChanged().getComponent(selectedEntity, LevelComponent.class));
+        check(observer.getNew().getComponent(characterEntity, LevelComponent.class));
+        check(observer.getChanged().getComponent(characterEntity, LevelComponent.class));
     }
     
     private void check(LevelComponent levelComponent){

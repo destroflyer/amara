@@ -8,6 +8,7 @@ import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.units.*;
+import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.systems.physics.IntersectionObserver;
 import amara.libraries.entitysystem.*;
 import amara.libraries.physics.intersectionHelper.PolyMapManager;

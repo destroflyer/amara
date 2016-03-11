@@ -468,4 +468,20 @@ public class ScreenController_HUD extends GameScreenController{
     public void hideScoreboard_InventoryItem_Description(int playerIndex, int itemIndex){
         hideHintText("scoreboard_player_" + playerIndex + "_item_" + itemIndex + "_image");
     }
+    
+    public void setStats_TeamsScore(int team1Kills, int team2Kills){
+        getTextRenderer("stats_teams_score").setText(team1Kills + " : " + team2Kills);
+    }
+    
+    public void setStats_PlayerScore_KDA(int kills, int deaths, int assists){
+        getTextRenderer("stats_player_score_kda").setText(kills + " / " + deaths + " / " + assists);
+    }
+    
+    public void setStats_PlayerScore_CreepScore(int kills){
+        getTextRenderer("stats_player_score_creepscore").setText("" + kills);
+    }
+    
+    public void setGameTime(float time){
+        getTextRenderer("game_time").setText(GUIUtil.getFormattedTime(time));
+    }
 }

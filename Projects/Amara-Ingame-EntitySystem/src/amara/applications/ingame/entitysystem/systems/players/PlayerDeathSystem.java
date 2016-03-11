@@ -14,8 +14,9 @@ import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.animations.*;
 import amara.applications.ingame.entitysystem.components.units.crowdcontrol.*;
-import amara.applications.ingame.entitysystem.components.visuals.AnimationComponent;
+import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.systems.buffs.RemoveBuffsSystem;
+import amara.applications.ingame.entitysystem.systems.game.UpdateGameTimeSystem;
 import amara.applications.ingame.entitysystem.systems.units.UnitUtil;
 import amara.applications.ingame.shared.maps.Map;
 import amara.libraries.entitysystem.*;
@@ -30,51 +31,51 @@ public class PlayerDeathSystem implements EntitySystem{
         this.map = map;
     }
     private Map map;
+    private Class[] componentClassesToReomve = new Class[]{
+        HitboxActiveComponent.class,
+        MaximumHealthComponent.class,
+        HealthComponent.class,
+        //General
+        IsTargetableComponent.class,
+        IsVulnerableComponent.class,
+        //Crowdcontrol
+        IsBindedComponent.class,
+        IsBindedImmuneComponent.class,
+        IsSilencedComponent.class,
+        IsSilencedImmuneComponent.class,
+        IsStunnedComponent.class,
+        IsStunnedImmuneComponent.class
+    };
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
-        for(int playerEntity : entityWorld.getEntitiesWithAll(SelectedUnitComponent.class)){
-            int selectedEntity = entityWorld.getComponent(playerEntity, SelectedUnitComponent.class).getEntity();
-            if(observer.getRemoved().hasComponent(selectedEntity, IsAliveComponent.class)){
-                onSelectedUnitDeath(entityWorld, selectedEntity);
+        for(int playerEntity : entityWorld.getEntitiesWithAll(PlayerCharacterComponent.class)){
+            int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
+            if(observer.getRemoved().hasComponent(characterEntity, IsAliveComponent.class)){
+                onCharacterDeath(entityWorld, characterEntity);
                 onPlayerDeath(entityWorld, playerEntity);
             }
         }
     }
     
-    private void onSelectedUnitDeath(EntityWorld entityWorld, int selectedEntity){
-        Class[] componentClassesToReomve = new Class[]{
-            HitboxActiveComponent.class,
-            MaximumHealthComponent.class,
-            HealthComponent.class,
-            //General
-            IsTargetableComponent.class,
-            IsVulnerableComponent.class,
-            //Crowdcontrol
-            IsBindedComponent.class,
-            IsBindedImmuneComponent.class,
-            IsSilencedComponent.class,
-            IsSilencedImmuneComponent.class,
-            IsStunnedComponent.class,
-            IsStunnedImmuneComponent.class
-        };
+    private void onCharacterDeath(EntityWorld entityWorld, int characterEntity){
         for(Class componentClass : componentClassesToReomve){
-            entityWorld.removeComponent(selectedEntity, componentClass);
+            entityWorld.removeComponent(characterEntity, componentClass);
         }
-        UnitUtil.cancelAction(entityWorld, selectedEntity);
+        UnitUtil.cancelAction(entityWorld, characterEntity);
         for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
             ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class);
-            if((activeBuffComponent.getTargetEntity() == selectedEntity) && (!entityWorld.hasComponent(activeBuffComponent.getBuffEntity(), KeepOnDeathComponent.class))){
+            if((activeBuffComponent.getTargetEntity() == characterEntity) && (!entityWorld.hasComponent(activeBuffComponent.getBuffEntity(), KeepOnDeathComponent.class))){
                 RemoveBuffsSystem.removeBuff(entityWorld, buffStatus);
             }
         }
-        DeathAnimationComponent deathAnimationComponent = entityWorld.getComponent(selectedEntity, DeathAnimationComponent.class);
+        DeathAnimationComponent deathAnimationComponent = entityWorld.getComponent(characterEntity, DeathAnimationComponent.class);
         if(deathAnimationComponent != null){
-            entityWorld.setComponent(selectedEntity, new AnimationComponent(deathAnimationComponent.getAnimationEntity()));
+            entityWorld.setComponent(characterEntity, new AnimationComponent(deathAnimationComponent.getAnimationEntity()));
         }
         else{
-            entityWorld.removeComponent(selectedEntity, AnimationComponent.class);
+            entityWorld.removeComponent(characterEntity, AnimationComponent.class);
         }
     }
     
@@ -83,7 +84,7 @@ public class PlayerDeathSystem implements EntitySystem{
         if(entityWorld.hasComponent(rulesEntity, RespawnPlayersComponent.class)){
             RespawnTimerComponent respawnTimerComponent = entityWorld.getComponent(rulesEntity, RespawnTimerComponent.class);
             if(respawnTimerComponent != null){
-                float remainingDuration = respawnTimerComponent.getInitialDuration();
+                float remainingDuration = (respawnTimerComponent.getInitialDuration() + (respawnTimerComponent.getDeltaDurationPerTime() * UpdateGameTimeSystem.getGameTime(entityWorld)));
                 entityWorld.setComponent(playerEntity, new WaitingToRespawnComponent(remainingDuration));
             }
             else{

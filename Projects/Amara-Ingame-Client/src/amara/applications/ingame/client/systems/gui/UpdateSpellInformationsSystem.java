@@ -22,14 +22,14 @@ public class UpdateSpellInformationsSystem extends GUIDisplaySystem{
     }
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int selectedEntity){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
         ComponentMapObserver observer = entityWorld.requestObserver(this, PassivesComponent.class, SpellsComponent.class, MapSpellsComponent.class);
-        checkChangedPassives(entityWorld, observer.getNew().getComponent(selectedEntity, PassivesComponent.class));
-        checkChangedPassives(entityWorld, observer.getChanged().getComponent(selectedEntity, PassivesComponent.class));
-        checkChangedSpells(entityWorld, observer.getNew().getComponent(selectedEntity, SpellsComponent.class));
-        checkChangedSpells(entityWorld, observer.getChanged().getComponent(selectedEntity, SpellsComponent.class));;
-        checkChangedMapSpells(entityWorld, observer.getNew().getComponent(selectedEntity, MapSpellsComponent.class));
-        checkChangedMapSpells(entityWorld, observer.getChanged().getComponent(selectedEntity, MapSpellsComponent.class));
+        checkChangedPassives(entityWorld, observer.getNew().getComponent(characterEntity, PassivesComponent.class));
+        checkChangedPassives(entityWorld, observer.getChanged().getComponent(characterEntity, PassivesComponent.class));
+        checkChangedSpells(entityWorld, observer.getNew().getComponent(characterEntity, SpellsComponent.class));
+        checkChangedSpells(entityWorld, observer.getChanged().getComponent(characterEntity, SpellsComponent.class));;
+        checkChangedMapSpells(entityWorld, observer.getNew().getComponent(characterEntity, MapSpellsComponent.class));
+        checkChangedMapSpells(entityWorld, observer.getChanged().getComponent(characterEntity, MapSpellsComponent.class));
         screenController_HUD.checkAction_SpellInformation();
     }
     
