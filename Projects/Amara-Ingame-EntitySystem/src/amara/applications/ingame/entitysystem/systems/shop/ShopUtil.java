@@ -65,7 +65,7 @@ public class ShopUtil{
         int itemEntity = entityWorld.createEntity();
         float goldCost = resolveItemRecipe(entityWorld, itemID, tmpItemEntities, itemEntity);
         entityWorld.removeEntity(itemEntity);
-        if(inventorySize <= 5){
+        if(tmpItemEntities.size() < 6){
             GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
             if((goldCost == 0) || ((goldComponent != null) && (goldComponent.getGold() > goldCost))){
                 EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + itemID);

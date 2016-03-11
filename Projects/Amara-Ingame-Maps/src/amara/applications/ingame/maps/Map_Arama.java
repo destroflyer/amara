@@ -252,7 +252,7 @@ public class Map_Arama extends Map{
         entityWorld.setComponent(entity, new MapObjectiveComponent(gameObjective.getId()));
         EntityWrapper playerDeathRules = entityWorld.getWrapped(entityWorld.createEntity());
         playerDeathRules.setComponent(new RespawnPlayersComponent());
-        playerDeathRules.setComponent(new RespawnTimerComponent(5, 1));
+        playerDeathRules.setComponent(new RespawnTimerComponent(5, (1f / 60)));
         entityWorld.setComponent(entity, new PlayerDeathRulesComponent(playerDeathRules.getId()));
     }
 

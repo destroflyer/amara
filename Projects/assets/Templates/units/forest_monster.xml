@@ -1,6 +1,6 @@
 <template>
     <entity>
-        <name>Pseudospider</name>
+        <name>Forest Monster</name>
         <!--model-->
         <model>Models/forest_monster/skin.xml</model>
         <idleAnimation>
