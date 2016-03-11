@@ -213,8 +213,8 @@ public class FileManager{
     public static boolean deleteFile(File file){
         if(file.isDirectory()){
             String[] files = file.list();
-            for (int i=0;i<files.length;i++){
-                boolean success = deleteFile(new File(file, files[i]));
+            for(String subFile : files){
+                boolean success = deleteFile(new File(file, subFile));
                 if(!success){
                     return false;
                 }
