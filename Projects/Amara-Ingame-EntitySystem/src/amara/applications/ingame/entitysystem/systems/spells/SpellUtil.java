@@ -35,13 +35,15 @@ public class SpellUtil{
                 LearnableSpellsComponent learnableSpellsComponent = entityWorld.getComponent(entity, LearnableSpellsComponent.class);
                 if((learnableSpellsComponent != null) && (spellIndex < learnableSpellsComponent.getSpellsEntities().length)){
                     int spellEntity = learnableSpellsComponent.getSpellsEntities()[spellIndex];
-                    boolean isAllowed = true;
-                    SpellRequiredLevelComponent spellRequiredLevelComponent = entityWorld.getComponent(spellEntity, SpellRequiredLevelComponent.class);
-                    if(spellRequiredLevelComponent != null){
-                        int level = entityWorld.getComponent(entity, LevelComponent.class).getLevel();
-                        isAllowed = (level >= spellRequiredLevelComponent.getLevel());
+                    if(spellEntity != -1){
+                        boolean isAllowed = true;
+                        SpellRequiredLevelComponent spellRequiredLevelComponent = entityWorld.getComponent(spellEntity, SpellRequiredLevelComponent.class);
+                        if(spellRequiredLevelComponent != null){
+                            int level = entityWorld.getComponent(entity, LevelComponent.class).getLevel();
+                            isAllowed = (level >= spellRequiredLevelComponent.getLevel());
+                        }
+                        return isAllowed;
                     }
-                    return isAllowed;
                 }
             }
         }

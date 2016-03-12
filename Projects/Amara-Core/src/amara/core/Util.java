@@ -77,8 +77,8 @@ public class Util{
         File file = null;
         JFileChooser fileChooser = new JFileChooser(new File(directory).getAbsolutePath());
         if((filters != null) && (filters.length > 0)){
-            for(int i=0;i<filters.length;i++) {
-                fileChooser.addChoosableFileFilter(filters[i]);
+            for(FileFilter filter : filters){
+                fileChooser.addChoosableFileFilter(filter);
             }
             fileChooser.setFileFilter(filters[0]);
         }
@@ -166,8 +166,8 @@ public class Util{
     }
     
     public static <T> boolean containsArrayElement(T[] array, T element){
-        for(int i=0;i<array.length;i++){
-            if(array[i] == element){
+        for(T arrayElement : array){
+            if(arrayElement == element){
                 return true;
             }
         }
@@ -175,8 +175,8 @@ public class Util{
     }
     
     public static <T> boolean containsListElement(List<T> list, T element){
-        for(int i=0;i<list.size();i++){
-            if(list.get(i) == element){
+        for(T listElement : list){
+            if(listElement == element){
                 return true;
             }
         }
@@ -289,8 +289,7 @@ public class Util{
     
     public static <T> T[] extractObjects(Object[] array, Class objectClass){
         LinkedList<T> extractedObjectsList = new LinkedList<T>();
-        for(int i=0;i<array.length;i++){
-            Object object = array[i];
+        for(Object object : array){
             if(objectClass.isAssignableFrom(object.getClass())){
                 extractedObjectsList.add((T) object);
             }
@@ -325,14 +324,14 @@ public class Util{
         return -1;
     }
     
-    public static float round(double value, int decimals){
-        return (float) new BigDecimal(value).setScale(decimals, RoundingMode.HALF_UP).doubleValue();
+    public static float round(float value, int decimals){
+        return new BigDecimal(value).setScale(decimals, RoundingMode.HALF_UP).floatValue();
     }
     
     public static float compensateFloatRoundingErrors(float number){
         final float MAX_FLOAT_ROUNDING_DIFFERENCE = 0.0001f;
         float remainder = (number % 1);
-        if ((remainder < MAX_FLOAT_ROUNDING_DIFFERENCE) || (remainder > (1 - MAX_FLOAT_ROUNDING_DIFFERENCE))) {
+        if((remainder < MAX_FLOAT_ROUNDING_DIFFERENCE) || (remainder > (1 - MAX_FLOAT_ROUNDING_DIFFERENCE))){
             number = Math.round(number);
         }
         return number;
@@ -354,8 +353,7 @@ public class Util{
     
     public static <T> ArrayList<T> getUniqueList(ArrayList<T> list){
         ArrayList<T> uniqueList = new ArrayList<T>();
-        for(int i=0;i<list.size();i++){
-            T element = list.get(i);
+        for(T element : list){
             if(!uniqueList.contains(element)){
                 uniqueList.add(element);
             }
@@ -366,9 +364,8 @@ public class Util{
     public static <T> T[] mergeArrays(T[]... arrays){
         Class arrayClass = null;
         LinkedList<T> mergedList = new LinkedList<T>();
-        for(int i=0;i<arrays.length;i++){
-            for(int r=0;r<arrays[i].length;r++){
-                T element = arrays[i][r];
+        for(T[] array : arrays){
+            for(T element : array){
                 mergedList.add(element);
                 if(arrayClass != null){
                     while(!arrayClass.isAssignableFrom(element.getClass())){

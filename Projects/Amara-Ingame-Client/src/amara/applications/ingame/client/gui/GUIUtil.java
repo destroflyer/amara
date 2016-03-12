@@ -13,7 +13,6 @@ import amara.core.Util;
 public class GUIUtil{
     
     public static String getValueText_Signed(float value){
-        value = Util.compensateFloatRoundingErrors(value);
         String signText = "";
         if(value >= 0){
             signText += "+";
@@ -27,7 +26,7 @@ public class GUIUtil{
             return ("" + valueInt);
         }
         else{
-            return ("" + value);
+            return ("" + Util.round(value, 4));
         }
     }
     
