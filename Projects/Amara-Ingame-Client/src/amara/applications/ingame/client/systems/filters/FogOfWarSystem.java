@@ -11,12 +11,12 @@ import com.jme3.texture.Texture2D;
 import amara.applications.ingame.client.systems.information.PlayerTeamSystem;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.units.*;
+import amara.applications.ingame.shared.maps.MapPhysicsInformation;
 import amara.core.settings.Settings;
 import amara.libraries.applications.display.appstates.PostFilterAppState;
 import amara.libraries.applications.display.filters.FogOfWarFilter;
 import amara.libraries.applications.display.materials.*;
 import amara.libraries.entitysystem.*;
-import amara.libraries.physics.intersectionHelper.PolyMapManager;
 import amara.libraries.physics.shapes.Vector2D;
 import amara.libraries.physics.shapes.PolygonMath.Polygon;
 
@@ -26,18 +26,18 @@ import amara.libraries.physics.shapes.PolygonMath.Polygon;
  */
 public class FogOfWarSystem implements EntitySystem{
 
-    public FogOfWarSystem(PlayerTeamSystem playerTeamSystem, PostFilterAppState postFilterAppState, final PolyMapManager polyMapManager){
+    public FogOfWarSystem(PlayerTeamSystem playerTeamSystem, PostFilterAppState postFilterAppState, final MapPhysicsInformation mapPhysicsInformation){
         this.playerTeamSystem = playerTeamSystem;
         this.postFilterAppState = postFilterAppState;
-        this.polyMapManager = polyMapManager;
-        fogImage = new PaintableImage((int) (polyMapManager.getWidth() * resolutionFactor), (int) (polyMapManager.getHeight() * resolutionFactor));
+        this.mapPhysicsInformation = mapPhysicsInformation;
+        fogImage = new PaintableImage((int) (mapPhysicsInformation.getWidth() * resolutionFactor), (int) (mapPhysicsInformation.getHeight() * resolutionFactor));
         fogRaster = new Raster(fogImage, resolutionFactor, 80, 255);
         fogOfWarFilter = new FogOfWarFilter(){
 
             @Override
             protected void initFilter(AssetManager manager, RenderManager renderManager, ViewPort viewPort, int width, int height){
                 super.initFilter(manager, renderManager, viewPort, width, height);
-                setMapSize((float) polyMapManager.getWidth(), (float) polyMapManager.getHeight());
+                setMapSize(mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight());
             }
         };
         postFilterAppState.addFilter(fogOfWarFilter);
@@ -46,7 +46,7 @@ public class FogOfWarSystem implements EntitySystem{
     private final float resolutionFactor = 1;
     private PlayerTeamSystem playerTeamSystem;
     private PostFilterAppState postFilterAppState;
-    private PolyMapManager polyMapManager;
+    private MapPhysicsInformation mapPhysicsInformation;
     private PaintableImage fogImage;
     private Texture2D fogTexture = new Texture2D();
     private Raster fogRaster;
@@ -103,7 +103,7 @@ public class FogOfWarSystem implements EntitySystem{
     
     private void updateFogTexture_MapSight(){
         resetFogTexture();
-        Polygon sightPolygon = polyMapManager.getNavigationPolygon(0);
+        Polygon sightPolygon = mapPhysicsInformation.getPolyMapManager().getNavigationPolygon(0);
         sightPolygon.rasterize(fogRaster);
         onFogImageUpdated();
     }
@@ -115,7 +115,7 @@ public class FogOfWarSystem implements EntitySystem{
                 PositionComponent positionComponent = entityWorld.getComponent(entity, PositionComponent.class);
                 Vector2D position = new Vector2D(positionComponent.getPosition().getX(), positionComponent.getPosition().getY());
                 double sightRange = entityWorld.getComponent(entity, SightRangeComponent.class).getRange();
-                Polygon sightPolygon = polyMapManager.sightPolygon(position, sightRange);
+                Polygon sightPolygon = mapPhysicsInformation.getPolyMapManager().sightPolygon(position, sightRange);
                 sightPolygon.rasterize(fogRaster, position, sightRange);
             }
         }

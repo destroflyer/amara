@@ -91,7 +91,8 @@ public class IngameSettings extends SettingsCategory{
                         new Setting("hardware_skinning", "Hardware Skinning", new BooleanType(true)),
                         new Setting("terrain_quality", "Terrain Quality", new SliderType(1, 0, 4, 1, 1)),
                         new Setting("shadow_quality", "Shadow Quality", new SliderType(2, 0, 4, 1, 1)),
-                        new Setting("fog_of_war_update_interval", "F.o.W. Update Interval", new SliderType(0.05f, 0, 1, 0.01f, 0.05f))
+                        new Setting("fog_of_war_update_interval", "F.o.W. Update Interval", new SliderType(0.05f, 0, 1, 0.01f, 0.05f)),
+                        new Setting("minimap_update_interval", "Minimap Update Interval", new SliderType(0.05f, 0, 1, 0.01f, 0.05f))
                     }
                 ),
             }),

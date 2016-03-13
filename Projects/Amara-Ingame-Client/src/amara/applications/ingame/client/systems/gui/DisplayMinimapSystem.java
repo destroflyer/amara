@@ -16,6 +16,7 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.shared.maps.Map;
 import amara.core.files.FileAssets;
+import amara.core.settings.Settings;
 import amara.libraries.applications.display.materials.PaintableImage;
 import amara.libraries.entitysystem.*;
 
@@ -32,8 +33,8 @@ public class DisplayMinimapSystem extends GUIDisplaySystem{
         this.fogOfWarSystem = fogOfWarSystem;
         scaleX_Map = (minimapImage.getWidth() / ((float) map.getMinimapInformation().getWidth()));
         scaleY_Map = (minimapImage.getHeight() / ((float) map.getMinimapInformation().getHeight()));
-        scaleX_Fog = (((float) fogOfWarSystem.getFogImage().getWidth()) / minimapImage.getWidth());
-        scaleY_Fog = (((float) fogOfWarSystem.getFogImage().getHeight()) / minimapImage.getHeight());
+        scaleX_Fog = (fogOfWarSystem.getFogImage().getWidth() / map.getPhysicsInformation().getWidth());
+        scaleY_Fog = (fogOfWarSystem.getFogImage().getHeight() / map.getPhysicsInformation().getHeight());
         backgroundImage = FileAssets.getImage("Maps/" + map.getName() + "/minimap.png", minimapImage.getWidth(), minimapImage.getHeight());
         towerImage = FileAssets.getImage("Interface/hud/minimap/tower.png");
     }
@@ -52,19 +53,24 @@ public class DisplayMinimapSystem extends GUIDisplaySystem{
     private float scaleY_Fog;
     private BufferedImage backgroundImage;
     private BufferedImage towerImage;
+    private float timeSinceLastUpdate;
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
-        ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class);
-        if((!observer.getNew().isEmpty()) || (!observer.getChanged().isEmpty()) || (!observer.getRemoved().isEmpty())){
-            minimapImage.loadImage(backgroundImage, false);
-            for(int entity : entityWorld.getEntitiesWithAll(PositionComponent.class)){
-                paintEntity(entityWorld, entity);
+        timeSinceLastUpdate += deltaSeconds;
+        if(timeSinceLastUpdate > Settings.getFloat("minimap_update_interval")){
+            ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class);
+            if((!observer.getNew().isEmpty()) || (!observer.getChanged().isEmpty()) || (!observer.getRemoved().isEmpty())){
+                minimapImage.loadImage(backgroundImage, false);
+                for(int entity : entityWorld.getEntitiesWithAll(PositionComponent.class)){
+                    paintEntity(entityWorld, entity);
+                }
+                paintFogOfWar();
+                minimapImage.flipY();
+                texture2D.setImage(minimapImage.getImage());
+                screenController_HUD.setMinimapImage(texture2D);
             }
-            paintFogOfWar();
-            minimapImage.flipY();
-            texture2D.setImage(minimapImage.getImage());
-            screenController_HUD.setMinimapImage(texture2D);
+            timeSinceLastUpdate = 0;
         }
     }
     
@@ -119,8 +125,11 @@ public class DisplayMinimapSystem extends GUIDisplaySystem{
     private void paintFogOfWar(){
         for(int x=0;x<minimapImage.getWidth();x++){
             for(int y=0;y<minimapImage.getHeight();y++){
-                int fogX = (int) (((minimapImage.getWidth() - 1) - x) * scaleX_Fog);
-                int fogY = (int) (((minimapImage.getHeight() - 1) - y) * scaleY_Fog);
+                float mapX = (map.getPhysicsInformation().getWidth() - (((x / scaleX_Map) + map.getMinimapInformation().getX())));
+                float mapY = (map.getPhysicsInformation().getHeight() - (((y / scaleY_Map) + map.getMinimapInformation().getY())));
+                //Check for the maximum boundary since the physiccal size of the map reaches 1 unit further than the images
+                int fogX = Math.min((int) (mapX * scaleX_Fog), (fogOfWarSystem.getFogImage().getWidth() - 1));
+                int fogY = Math.min((int) (mapY * scaleY_Fog), (fogOfWarSystem.getFogImage().getHeight() - 1));
                 int fogDensity = fogOfWarSystem.getFogImage().getPixel_Red(fogX, fogY);
                 int red = ((minimapImage.getPixel_Red(x, y) * fogDensity) / 255);
                 int green = ((minimapImage.getPixel_Green(x, y) * fogDensity) / 255);

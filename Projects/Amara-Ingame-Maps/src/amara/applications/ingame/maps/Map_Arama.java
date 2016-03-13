@@ -28,7 +28,7 @@ import amara.applications.ingame.entitysystem.components.units.bounties.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
-import amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent;
+import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
 import amara.applications.ingame.shared.games.Game;

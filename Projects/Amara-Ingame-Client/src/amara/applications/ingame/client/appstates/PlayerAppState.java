@@ -25,7 +25,6 @@ import amara.applications.ingame.shared.maps.Map;
 import amara.core.settings.Settings;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.*;
-import amara.libraries.physics.intersectionHelper.PolyMapManager;
 
 /**
  *
@@ -61,8 +60,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new PlayerDeathDisplaySystem(playerEntity, postFilterAppState));
         localEntitySystemAppState.addEntitySystem(new ShopAnimationSystem(playerEntity, localEntitySystemAppState.getEntitySceneMap()));
         if(Settings.getFloat("fog_of_war_update_interval") != -1){
-            PolyMapManager polyMapManager = map.getPhysicsInformation().getPolyMapManager();
-            fogOfWarSystem = new FogOfWarSystem(playerTeamSystem, postFilterAppState, polyMapManager);
+            fogOfWarSystem = new FogOfWarSystem(playerTeamSystem, postFilterAppState, map.getPhysicsInformation());
             localEntitySystemAppState.addEntitySystem(fogOfWarSystem);
         }
         ScreenController_HUD screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
