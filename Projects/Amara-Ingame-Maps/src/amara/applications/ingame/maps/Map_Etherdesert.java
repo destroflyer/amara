@@ -20,6 +20,7 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
+import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.shared.maps.Map;
 import amara.libraries.entitysystem.*;
@@ -43,15 +44,16 @@ public class Map_Etherdesert extends Map{
         audioBackgroundMusic.setComponent(new StartPlayingAudioComponent());
         //Nexus
         EntityWrapper nexus = entityWorld.getWrapped(entityWorld.createEntity());
+        nexus.setComponent(new IsStructureComponent());
         nexus.setComponent(new NameComponent("Nexus"));
         nexus.setComponent(new ModelComponent("Models/column/skin_nexus.xml"));
         nexus.setComponent(new PositionComponent(new Vector2f(96, 87.75f)));
         nexus.setComponent(new DirectionComponent(new Vector2f(0, -1)));
         nexus.setComponent(new IsAliveComponent());
-        int baseAttributesEntity = entityWorld.createEntity();
-        entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(1000));
-        entityWorld.setComponent(baseAttributesEntity, new BonusFlatHealthRegenerationComponent(2));
-        nexus.setComponent(new BaseAttributesComponent(baseAttributesEntity));
+        int nexusBaseAttributesEntity = entityWorld.createEntity();
+        entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatMaximumHealthComponent(1000));
+        entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatHealthRegenerationComponent(2));
+        nexus.setComponent(new BaseAttributesComponent(nexusBaseAttributesEntity));
         nexus.setComponent(new RequestUpdateAttributesComponent());
         nexus.setComponent(new IsTargetableComponent());
         nexus.setComponent(new IsVulnerableComponent());

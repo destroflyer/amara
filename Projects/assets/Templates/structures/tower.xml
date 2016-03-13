@@ -1,5 +1,6 @@
 <template>
     <entity>
+        <isStructure/>
         <name>Tower</name>
         <!--model-->
         <model>Models/tower/skin.xml</model>

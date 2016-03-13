@@ -20,6 +20,7 @@ import amara.applications.ingame.entitysystem.components.units.animations.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
+import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
 import amara.applications.ingame.shared.games.Game;
@@ -61,6 +62,7 @@ public class Map_Destroforest extends Map{
         campWizards.setComponent(new CampHealthResetComponent());
         for(int i=0;i<3;i++){
             EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
+            unit.setComponent(new IsMonsterComponent());
             unit.setComponent(new NameComponent("Wizard Creep"));
             unit.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));
             EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
@@ -184,6 +186,7 @@ public class Map_Destroforest extends Map{
         }
         //Boss
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
+        boss.setComponent(new IsMonsterComponent());
         boss.setComponent(new NameComponent("Dragon"));
         boss.setComponent(new ModelComponent("Models/dragon/skin.xml"));
         EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());

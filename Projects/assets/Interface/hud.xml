@@ -236,6 +236,35 @@
                 <panel height="153px"/>
             </panel>
         </layer>
+        <!--minimap-->
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="345px">
+                    <panel/>
+                    <panel childLayout="center" width="365px" height="100%">
+                        <panel childLayout="vertical">
+                            <panel height="36px"/>
+                            <panel childLayout="horizontal" height="26px">
+                                <panel width="109px"/>
+                                <panel width="26px" height="26px" backgroundColor="#000D"/>
+                                <panel width="12px"/>
+                                <panel width="26px" height="26px" backgroundColor="#000D"/>
+                                <panel/>
+                            </panel>
+                            <panel height="13px"/>
+                            <panel childLayout="horizontal">
+                                <panel width="96px"/>
+                                <image id="minimap" width="264px" height="264px">
+                                    <interact onClick="lookAtMinimapMouseLocation()" onClickMouseMove ="lookAtMinimapMouseLocation()"/>
+                                </image>
+                            </panel>
+                        </panel>
+                        <image filename="Interface/hud/minimap.png"/>
+                    </panel>
+                </panel>
+            </panel>
+        </layer>
         <!--spells, ressources-->
         <layer childLayout="center">
             <panel childLayout="vertical">

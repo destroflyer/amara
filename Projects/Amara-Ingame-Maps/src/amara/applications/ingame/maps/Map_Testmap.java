@@ -21,6 +21,7 @@ import amara.applications.ingame.entitysystem.components.targets.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.animations.*;
 import amara.applications.ingame.entitysystem.components.units.bounties.*;
+import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
 import amara.applications.ingame.entitysystem.systems.spells.SpellUtil;
@@ -54,6 +55,7 @@ public class Map_Testmap extends Map{
         for(int x=0;x<5;x++){
             for(int y=0;y<4;y++){
                 EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
+                unit.setComponent(new IsMonsterComponent());
                 unit.setComponent(new NameComponent("Test Wizard"));
                 unit.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));
                 EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
@@ -135,6 +137,7 @@ public class Map_Testmap extends Map{
         forestMonsterCamp.setComponent(new CampSpawnComponent());
         //Boss
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
+        boss.setComponent(new IsMonsterComponent());
         boss.setComponent(new NameComponent("Yalee"));
         boss.setComponent(new DescriptionComponent("Stupid."));
         boss.setComponent(new ModelComponent("Models/cow/skin_default.xml"));

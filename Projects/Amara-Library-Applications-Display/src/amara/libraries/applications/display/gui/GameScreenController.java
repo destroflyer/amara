@@ -7,6 +7,8 @@ package amara.libraries.applications.display.gui;
 import java.util.List;
 import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.applications.display.appstates.NiftyAppState;
+import com.jme3.niftygui.RenderImageJme;
+import com.jme3.texture.Texture2D;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.ElementBuilder;
 import de.lessvoid.nifty.builder.HoverEffectBuilder;
@@ -136,6 +138,10 @@ public class GameScreenController implements ScreenController{
     
     protected NiftyImage createImage(String filePath){
         return nifty.createImage(filePath, false);
+    }
+    
+    protected NiftyImage createImage(Texture2D texture2D){
+        return new NiftyImage(nifty.getRenderEngine(), new RenderImageJme(texture2D));
     }
     
     protected void setHoverEffect(ElementBuilder elementBuilder, String onStartHover, String onEndHover){

@@ -22,7 +22,7 @@
 			<texture scale="24.0">Textures/terrain/cartoon_forest/dirt.jpg</texture>
 			<texture scale="1.0">Textures/terrain/blank.png</texture>
 		</textures>
-	</terrain>
+	</terrain>	<minimap x="94" y="94" width="337" height="337"/>
 	<physics width="525" height="525" heightmapScale="0.075" groundHeight="15">
 		<obstacles>
 			<circle radius="3.0">

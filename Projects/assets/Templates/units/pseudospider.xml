@@ -1,5 +1,6 @@
 <template>
     <entity>
+        <isMonster/>
         <name>Pseudospider</name>
         <!--model-->
         <model>Models/pseudospider/skin.xml</model>

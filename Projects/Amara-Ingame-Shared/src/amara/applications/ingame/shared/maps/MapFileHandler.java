@@ -55,6 +55,7 @@ public class MapFileHandler{
             }
             root.setAttribute("class", mapClass.getName());
             Document document = new Document(root);
+            //Camera
             Element elementCamera = new Element("camera");
             elementCamera.setAttribute("initialPosition", "" + generateVectorText(map.getCamera().getInitialPosition()));
             elementCamera.setAttribute("initialDirection", "" + generateVectorText(map.getCamera().getInitialDirection()));
@@ -76,6 +77,7 @@ public class MapFileHandler{
                 elementCamera.addContent(elementZoom);
             }
             root.addContent(elementCamera);
+            //Lights
             Element elementLights = new Element("lights");
             for(MapLight mapLight : map.getLights().getMapLights()){
                 Element elementLight = null;
@@ -100,6 +102,7 @@ public class MapFileHandler{
                 }
             }
             root.addContent(elementLights);
+            //Terrain
             Element elementTerrain = new Element("terrain");
             TerrainSkin terrainSkin = map.getTerrainSkin();
             Element elementTerrainTextures = new Element("textures");
@@ -111,6 +114,14 @@ public class MapFileHandler{
             }
             elementTerrain.addContent(elementTerrainTextures);
             root.addContent(elementTerrain);
+            //Minimap
+            Element elementMinimap = new Element("minimap");
+            elementMinimap.setAttribute("x", "" + map.getMinimapInformation().getX());
+            elementMinimap.setAttribute("y", "" + map.getMinimapInformation().getY());
+            elementMinimap.setAttribute("width", "" + map.getMinimapInformation().getWidth());
+            elementMinimap.setAttribute("height", "" + map.getMinimapInformation().getHeight());
+            root.addContent(elementMinimap);
+            //Physics
             Element elementPhysics = new Element("physics");
             elementPhysics.setAttribute("width", "" + map.getPhysicsInformation().getWidth());
             elementPhysics.setAttribute("height", "" + map.getPhysicsInformation().getHeight());
@@ -124,6 +135,7 @@ public class MapFileHandler{
             }
             elementPhysics.addContent(elementObstacles);
             root.addContent(elementPhysics);
+            //Visuals
             Element elementVisuals = new Element("visuals");
             for(MapVisual mapVisual : map.getVisuals().getMapVisuals()){
                 Element elementVisual = null;
@@ -178,6 +190,7 @@ public class MapFileHandler{
 
     private static Map load(Map map, Element root){
         try{
+            //Camera
             Element elementCamera = root.getChild("camera");
             Vector3f initialPosition = generateVector3f(elementCamera.getAttributeValue("initialPosition"));
             Vector3f initialDirection = generateVector3f(elementCamera.getAttributeValue("initialDirection"));
@@ -196,18 +209,7 @@ public class MapFileHandler{
                 camera.setZoom(new MapCamera_Zoom(zoomInterval, zoomInitialLevel, zoomMaximumLevel));
             }
             map.setCamera(camera);
-            Element elementTerrain = root.getChild("terrain");
-            Element elementTerrainTextures = elementTerrain.getChild("textures");
-            List elementTerrainTexturesChildren = elementTerrainTextures.getChildren();
-            TerrainSkin_Texture[] terrainSkinTextures = new TerrainSkin_Texture[elementTerrainTexturesChildren.size()];
-            for(int i=0;i<terrainSkinTextures.length;i++){
-                Element elementTexture = (Element) elementTerrainTexturesChildren.get(i);
-                String filePath = elementTexture.getText();
-                float scale = elementTexture.getAttribute("scale").getFloatValue();
-                terrainSkinTextures[i] = new TerrainSkin_Texture(filePath, scale);
-            }
-            TerrainSkin terrainSkin = new TerrainSkin(terrainSkinTextures);
-            map.setTerrainSkin(terrainSkin);
+            //Lights
             Element elementLights = root.getChild("lights");
             for(Object elementLightObject : elementLights.getChildren()){
                 Element elemenLight = (Element) elementLightObject;
@@ -231,9 +233,31 @@ public class MapFileHandler{
                     map.getLights().addLight(mapLight);
                 }
             }
+            //Terrain
+            Element elementTerrain = root.getChild("terrain");
+            Element elementTerrainTextures = elementTerrain.getChild("textures");
+            List elementTerrainTexturesChildren = elementTerrainTextures.getChildren();
+            TerrainSkin_Texture[] terrainSkinTextures = new TerrainSkin_Texture[elementTerrainTexturesChildren.size()];
+            for(int i=0;i<terrainSkinTextures.length;i++){
+                Element elementTexture = (Element) elementTerrainTexturesChildren.get(i);
+                String filePath = elementTexture.getText();
+                float scale = elementTexture.getAttribute("scale").getFloatValue();
+                terrainSkinTextures[i] = new TerrainSkin_Texture(filePath, scale);
+            }
+            TerrainSkin terrainSkin = new TerrainSkin(terrainSkinTextures);
+            map.setTerrainSkin(terrainSkin);
+            //Minimap
+            Element elementMinimap = root.getChild("minimap");
+            float minimapX = elementMinimap.getAttribute("x").getFloatValue();
+            float minimapY = elementMinimap.getAttribute("y").getFloatValue();
+            float minimapWidth = elementMinimap.getAttribute("width").getFloatValue();
+            float minimumHeight = elementMinimap.getAttribute("height").getFloatValue();
+            MapMinimapInformation minimapInformation = new MapMinimapInformation(minimapX, minimapY, minimapWidth, minimumHeight);
+            map.setMinimapInformation(minimapInformation);
+            //Physics
             Element elementPhysics = root.getChild("physics");
-            int width = elementPhysics.getAttribute("width").getIntValue();
-            int height = elementPhysics.getAttribute("height").getIntValue();
+            float width = elementPhysics.getAttribute("width").getFloatValue();
+            float height = elementPhysics.getAttribute("height").getFloatValue();
             float heightmapScale = elementPhysics.getAttribute("heightmapScale").getFloatValue();
             float groundHeight = elementPhysics.getAttribute("groundHeight").getFloatValue();
             Element elementObstacles = elementPhysics.getChild("obstacles");
@@ -244,6 +268,7 @@ public class MapFileHandler{
             }
             MapPhysicsInformation physicsInformation = new MapPhysicsInformation(width, height, heightmapScale, groundHeight, obstacles);
             map.setPhysicsInformation(physicsInformation);
+            //Visuals
             Element elementVisuals = root.getChild("visuals");
             for(Object elementVisualObject : elementVisuals.getChildren()){
                 Element elementVisual = (Element) elementVisualObject;

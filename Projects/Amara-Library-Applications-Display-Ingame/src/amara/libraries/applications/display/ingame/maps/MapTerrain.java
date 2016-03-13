@@ -37,8 +37,8 @@ public class MapTerrain{
         heightmap.load();
         int scaledHeightmapSize = (int) (heightmap.getSize() / Math.pow(2, Settings.getFloat("terrain_quality")));
         terrain = new TerrainQuad("terrain", 150, scaledHeightmapSize + 1, scaleHeightmap(heightmap, scaledHeightmapSize));
-        float scaleX = (((float) physicsInformation.getWidth()) / terrain.getTotalSize());
-        float scaleZ = (((float) physicsInformation.getHeight()) / terrain.getTotalSize());
+        float scaleX = (physicsInformation.getWidth() / terrain.getTotalSize());
+        float scaleZ = (physicsInformation.getHeight() / terrain.getTotalSize());
         terrain.setLocalScale(scaleX, 1, scaleZ);
         terrain.setLocalTranslation((physicsInformation.getWidth() / 2), 0, (physicsInformation.getHeight() / 2));
         terrain.setShadowMode(RenderQueue.ShadowMode.Receive);

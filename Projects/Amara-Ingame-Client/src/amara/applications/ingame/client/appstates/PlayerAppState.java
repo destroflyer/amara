@@ -54,13 +54,13 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
             "lock_camera","display_map_sight"
         });
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
+        Map map = getAppState(MapAppState.class).getMap();
         lockedCameraSystem = new LockedCameraSystem(playerEntity, getAppState(IngameCameraAppState.class));
         localEntitySystemAppState.addEntitySystem(lockedCameraSystem);
         PostFilterAppState postFilterAppState = getAppState(PostFilterAppState.class);
         localEntitySystemAppState.addEntitySystem(new PlayerDeathDisplaySystem(playerEntity, postFilterAppState));
         localEntitySystemAppState.addEntitySystem(new ShopAnimationSystem(playerEntity, localEntitySystemAppState.getEntitySceneMap()));
         if(Settings.getFloat("fog_of_war_update_interval") != -1){
-            Map map = getAppState(MapAppState.class).getMap();
             PolyMapManager polyMapManager = map.getPhysicsInformation().getPolyMapManager();
             fogOfWarSystem = new FogOfWarSystem(playerTeamSystem, postFilterAppState, polyMapManager);
             localEntitySystemAppState.addEntitySystem(fogOfWarSystem);
@@ -88,6 +88,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardPlayersNamesSystem(screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardScoresSystem(screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardInventoriesSystem(screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayMinimapSystem(playerEntity, screenController_HUD, map, playerTeamSystem, fogOfWarSystem));
         localEntitySystemAppState.addEntitySystem(new UpdateRecipeCostsSystem(playerEntity, screenController_Shop));
     }
 

@@ -28,6 +28,7 @@ import amara.applications.ingame.entitysystem.components.units.bounties.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
+import amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
 import amara.applications.ingame.shared.games.Game;
@@ -110,6 +111,7 @@ public class Map_Arama extends Map{
             fountainBuffArea_Enemies.setComponent(new AreaSourceComponent(fountain.getId()));
             //Nexus
             EntityWrapper nexus = entityWorld.getWrapped(entityWorld.createEntity());
+            nexus.setComponent(new IsStructureComponent());
             nexus.setComponent(new NameComponent("Nexus"));
             nexus.setComponent(new ModelComponent("Models/column/skin_nexus.xml"));
             nexus.setComponent(new PositionComponent(new Vector2f(nexiX[i], laneCenterY)));

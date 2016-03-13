@@ -17,6 +17,7 @@ public abstract class Map{
     protected MapCamera camera;
     protected MapLights lights = new MapLights();
     protected TerrainSkin terrainSkin;
+    protected MapMinimapInformation minimapInformation;
     protected MapPhysicsInformation physicsInformation;
     protected MapVisuals visuals = new MapVisuals();
     protected MapSpells[] spells = new MapSpells[0];
@@ -56,6 +57,14 @@ public abstract class Map{
 
     public TerrainSkin getTerrainSkin(){
         return terrainSkin;
+    }
+
+    public void setMinimapInformation(MapMinimapInformation minimapInformation){
+        this.minimapInformation = minimapInformation;
+    }
+
+    public MapMinimapInformation getMinimapInformation(){
+        return minimapInformation;
     }
 
     public void setPhysicsInformation(MapPhysicsInformation physicsInformation){

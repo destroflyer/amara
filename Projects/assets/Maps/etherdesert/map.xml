@@ -24,7 +24,7 @@
 			<texture scale="16.0">Textures/terrain/cartoon_forest/dirt.jpg</texture>
 			<texture scale="1.0">Textures/terrain/blank.png</texture>
 		</textures>
-	</terrain>
+	</terrain>	<minimap x="0" y="0" width="200" height="200"/>
 	<physics width="200" height="200" heightmapScale="0.0225" groundHeight="2">
 		<obstacles>
 			<simpleConvex>

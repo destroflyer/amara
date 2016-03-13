@@ -13,6 +13,7 @@ import amara.applications.ingame.entitysystem.components.objectives.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.components.units.*;
+import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
 import amara.applications.ingame.entitysystem.systems.commands.ExecutePlayerCommandsSystem;
@@ -50,6 +51,7 @@ public class Map_Techtest extends Map{
             }
             for(int x=0;x<countX;x++){
                 EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
+                unit.setComponent(new IsMonsterComponent());
                 unit.setComponent(new NameComponent("TechTest Creep"));
                 unit.setComponent(new ModelComponent(modelSkinPath));
                 unit.setComponent(new ScaleComponent(scale));
@@ -77,6 +79,7 @@ public class Map_Techtest extends Map{
             }
         }
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
+        boss.setComponent(new IsMonsterComponent());
         boss.setComponent(new NameComponent("Cow"));
         boss.setComponent(new ModelComponent("Models/cow/skin_default.xml"));
         boss.setComponent(new ScaleComponent(1.5f));

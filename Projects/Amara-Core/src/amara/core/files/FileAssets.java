@@ -4,7 +4,8 @@
  */
 package amara.core.files;
 
-import java.awt.Image;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,8 +37,14 @@ public class FileAssets{
         return new ImageIcon(getImage(filePath, width, height));
     }
     
-    public static Image getImage(String filePath, int width, int height){
-        return getImage(filePath).getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    public static BufferedImage getImage(String filePath, int width, int height){
+        BufferedImage image = getImage(filePath);
+        BufferedImage resizedImage = new BufferedImage(width, height, image.getType());
+        Graphics2D graphics = resizedImage.createGraphics();
+        graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        graphics.drawImage(image, 0, 0, width, height, 0, 0, image.getWidth(), image.getHeight(), null);
+        graphics.dispose();
+        return resizedImage;
     }
     
     public static BufferedImage getImage(String filePath){

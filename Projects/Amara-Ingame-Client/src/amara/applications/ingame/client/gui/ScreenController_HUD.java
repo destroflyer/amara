@@ -4,11 +4,15 @@
  */
 package amara.applications.ingame.client.gui;
 
+import com.jme3.math.Vector2f;
+import com.jme3.texture.Texture2D;
 import amara.applications.ingame.client.appstates.SendPlayerCommandsAppState;
 import amara.applications.ingame.client.gui.objects.SpellInformation;
+import amara.applications.ingame.shared.maps.MapMinimapInformation;
 import amara.core.Util;
 import amara.libraries.applications.display.appstates.NiftyAppState;
 import amara.libraries.applications.display.gui.GameScreenController;
+import amara.libraries.applications.display.ingame.appstates.*;
 import de.lessvoid.nifty.builder.HoverEffectBuilder;
 import de.lessvoid.nifty.builder.ImageBuilder;
 import de.lessvoid.nifty.builder.PanelBuilder;
@@ -483,5 +487,20 @@ public class ScreenController_HUD extends GameScreenController{
     
     public void setGameTime(float time){
         getTextRenderer("game_time").setText(GUIUtil.getFormattedTime(time));
+    }
+    
+    public void setMinimapImage(Texture2D texture2D){
+        getImageRenderer("minimap").setImage(createImage(texture2D));
+    }
+    
+    private Vector2f tmpMapLocation = new Vector2f();
+    public void lookAtMinimapMouseLocation(int mouseX, int mouseY){
+        Element minimap = getElementByID("minimap");
+        float portionX  = Math.max(0, Math.min(1 - (((float) (mouseX - minimap.getX())) / minimap.getWidth()), 1));
+        float portionY  = Math.max(0, Math.min(1 - (((float) (mouseY - minimap.getY())) / minimap.getHeight()), 1));
+        MapMinimapInformation minimapInformation = mainApplication.getStateManager().getState(MapAppState.class).getMap().getMinimapInformation();
+        tmpMapLocation.setX(minimapInformation.getX() + (portionX * minimapInformation.getWidth()));
+        tmpMapLocation.setY(minimapInformation.getY() + (portionY * minimapInformation.getHeight()));
+        mainApplication.getStateManager().getState(IngameCameraAppState.class).lookAt(tmpMapLocation);
     }
 }

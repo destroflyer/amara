@@ -4260,12 +4260,36 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent>("isMinion"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent>("isMonster"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent>("isProjectile"){
 
             @Override
             public amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent construct(){
                 return new amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent>("isStructure"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.WalkStepDistanceComponent.class);

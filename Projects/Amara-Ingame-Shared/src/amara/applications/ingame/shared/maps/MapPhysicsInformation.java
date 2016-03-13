@@ -15,7 +15,7 @@ import amara.libraries.physics.shapes.ConvexShape;
  */
 public class MapPhysicsInformation{
 
-    public MapPhysicsInformation(int width, int height, float heightmapScale, float groundHeight, ArrayList<ConvexShape> obstacles){
+    public MapPhysicsInformation(float width, float height, float heightmapScale, float groundHeight, ArrayList<ConvexShape> obstacles){
         this.width = width;
         this.height = height;
         this.heightmapScale = heightmapScale;
@@ -23,18 +23,18 @@ public class MapPhysicsInformation{
         this.obstacles = obstacles;
         polyMapManager = new PolyMapManager(PolyHelper.fromConvexShapes(obstacles), width, height);
     }
-    private int width;
-    private int height;
+    private float width;
+    private float height;
     private float heightmapScale;
     private float groundHeight;
     private ArrayList<ConvexShape> obstacles;
     private PolyMapManager polyMapManager;
 
-    public int getWidth(){
+    public float getWidth(){
         return width;
     }
 
-    public int getHeight(){
+    public float getHeight(){
         return height;
     }
 

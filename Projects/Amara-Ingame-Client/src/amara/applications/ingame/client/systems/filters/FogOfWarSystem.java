@@ -134,4 +134,8 @@ public class FogOfWarSystem implements EntitySystem{
         fogTexture.setImage(fogImage.getImage());
         fogOfWarFilter.setFog(fogTexture);
     }
+
+    public PaintableImage getFogImage(){
+        return fogImage;
+    }
 }

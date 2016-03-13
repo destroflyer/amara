@@ -22,6 +22,7 @@ import amara.applications.ingame.entitysystem.components.units.bounties.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
+import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
 import amara.libraries.entitysystem.*;
@@ -90,7 +91,8 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new MovementComponent(movement.getId()));
                 }
                 else if(templateName.equals("etherdesert_creep_melee")){
-                    entityWrapper.setComponent(new NameComponent("Melee Creep"));
+                    entityWrapper.setComponent(new IsMinionComponent());
+                    entityWrapper.setComponent(new NameComponent("Melee Minion"));
                     entityWrapper.setComponent(new TeamModelComponent("Models/3dsa_medieval_knight/skin_team.xml"));
                     EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
                     idleAnimation.setComponent(new NameComponent("idle"));
@@ -137,7 +139,8 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new LocalAvoidanceWalkComponent());
                 }
                 else if(templateName.equals("etherdesert_creep_range")){
-                    entityWrapper.setComponent(new NameComponent("Ranged Creep"));
+                    entityWrapper.setComponent(new IsMinionComponent());
+                    entityWrapper.setComponent(new NameComponent("Ranged Minion"));
                     entityWrapper.setComponent(new TeamModelComponent("Models/3dsa_archer/skin_team.xml"));
                     EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
                     idleAnimation.setComponent(new NameComponent("idle"));
@@ -247,6 +250,7 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new BountyComponent(bounty.getId()));
                 }
                 else if(templateName.equals("arama_boss")){
+                    entityWrapper.setComponent(new IsMonsterComponent());
                     entityWrapper.setComponent(new NameComponent("Baron Nashor"));
                     entityWrapper.setComponent(new TitleComponent("Baron Nashor"));
                     entityWrapper.setComponent(new ModelComponent("Models/cow/skin_baron.xml"));
