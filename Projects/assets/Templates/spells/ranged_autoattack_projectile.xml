@@ -1,11 +1,11 @@
 <template>
     <entity id="projectile">
+        <isProjectile/>
         <model>[parameter0]</model>
         <hitbox>
             <point/>
         </hitbox>
         <hitboxActive/>
-        <isProjectile/>
     </entity>
     <!--trigger spell effects-->
     <entity>

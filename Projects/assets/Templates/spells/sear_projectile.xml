@@ -1,5 +1,6 @@
 <template>
     <entity id="projectile">
+        <isProjectile/>
         <model>Models/fireball/skin.xml</model>
         <hitbox>
             <circle radius="1"/>
@@ -12,7 +13,6 @@
             </entity>
         </intersectionRules>
         <removeOnMapLeave/>
-        <isProjectile/>
     </entity>
     <!--trigger spell effects-->
     <entity>

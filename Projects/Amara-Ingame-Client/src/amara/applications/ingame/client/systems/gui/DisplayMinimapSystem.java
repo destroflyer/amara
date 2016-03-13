@@ -130,10 +130,10 @@ public class DisplayMinimapSystem extends GUIDisplaySystem{
                 //Check for the maximum boundary since the physiccal size of the map reaches 1 unit further than the images
                 int fogX = Math.min((int) (mapX * scaleX_Fog), (fogOfWarSystem.getFogImage().getWidth() - 1));
                 int fogY = Math.min((int) (mapY * scaleY_Fog), (fogOfWarSystem.getFogImage().getHeight() - 1));
-                int fogDensity = fogOfWarSystem.getFogImage().getPixel_Red(fogX, fogY);
-                int red = ((minimapImage.getPixel_Red(x, y) * fogDensity) / 255);
-                int green = ((minimapImage.getPixel_Green(x, y) * fogDensity) / 255);
-                int blue = ((minimapImage.getPixel_Blue(x, y) * fogDensity) / 255);
+                int visibility = fogOfWarSystem.getFogImage().getPixel_Red(fogX, fogY);
+                int red = ((minimapImage.getPixel_Red(x, y) * visibility) / 255);
+                int green = ((minimapImage.getPixel_Green(x, y) * visibility) / 255);
+                int blue = ((minimapImage.getPixel_Blue(x, y) * visibility) / 255);
                 minimapImage.setPixel_Red(x, y, red);
                 minimapImage.setPixel_Green(x, y, green);
                 minimapImage.setPixel_Blue(x, y, blue);

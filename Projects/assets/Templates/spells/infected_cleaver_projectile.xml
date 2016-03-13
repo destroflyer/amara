@@ -1,5 +1,6 @@
 <template>
     <entity id="projectile">
+        <isProjectile/>
         <model>Models/cartoon_forest_stone_1/skin.xml</model>
         <scale>0.9</scale>
         <hitbox>
@@ -12,7 +13,6 @@
                 <acceptEnemies/>
             </entity>
         </intersectionRules>
-        <isProjectile/>
         <lifetime>0.6</lifetime>
     </entity>
     <!--trigger spell effects-->

@@ -1,5 +1,6 @@
 <template>
     <entity id="projectile">
+        <isProjectile/>
         <model>Models/erika_arrow/skin.xml</model>
         <hitbox>
             <circle radius="0.5"/>
@@ -11,7 +12,6 @@
                 <acceptEnemies/>
             </entity>
         </intersectionRules>
-        <isProjectile/>
         <lifetime>1</lifetime>
     </entity>
     <!--trigger spell effects-->

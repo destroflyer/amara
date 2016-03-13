@@ -1,5 +1,6 @@
 <template>
     <entity id="projectile">
+        <isProjectile/>
         <!--<model>Models/kachujin_mind_of_the_monk_projectile/skin.xml</model>-->
         <model>Models/cloud/skin.xml</model>
         <hitbox>
@@ -12,7 +13,6 @@
                 <acceptEnemies/>
             </entity>
         </intersectionRules>
-        <isProjectile/>
         <lifetime>0.9</lifetime>
     </entity>
     <!--trigger spell effects-->

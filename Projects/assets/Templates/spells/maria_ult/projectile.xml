@@ -1,5 +1,7 @@
 <template>
     <entity id="projectile">
+        <isProjectile/>
+        <model>Models/maria_ult/skin.xml</model>
         <hitbox>
             <rectangle width="3" height="6"/>
         </hitbox>
@@ -10,7 +12,6 @@
                 <acceptEnemies/>
             </entity>
         </intersectionRules>
-        <isProjectile/>
         <lifetime>1.05</lifetime>
     </entity>
     <!--trigger spell effects-->

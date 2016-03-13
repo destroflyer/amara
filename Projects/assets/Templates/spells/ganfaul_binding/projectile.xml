@@ -1,5 +1,6 @@
 <template>
     <entity id="projectile">
+        <isProjectile/>
         <model>Models/ganfaul_binding/skin.xml</model>
         <hitbox>
             <circle radius="1"/>
@@ -12,7 +13,6 @@
             </entity>
         </intersectionRules>
         <removeOnMapLeave/>
-        <isProjectile/>
         <lifetime>1.5</lifetime>
     </entity>
     <!--trigger spell effects-->

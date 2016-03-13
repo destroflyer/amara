@@ -1,7 +1,7 @@
 <template>
     <entity id="projectile">
-        <model>Models/cloud/skin.xml</model>
         <isProjectile/>
+        <model>Models/cloud/skin.xml</model>
     </entity>
     <!--trigger spell effects-->
     <entity>

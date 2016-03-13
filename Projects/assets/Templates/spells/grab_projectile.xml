@@ -1,5 +1,6 @@
 <template>
     <entity id="projectile">
+        <isProjectile/>
         <hitbox>
             <circle radius="0.6"/>
         </hitbox>
@@ -10,7 +11,6 @@
                 <acceptEnemies/>
             </entity>
         </intersectionRules>
-        <isProjectile/>
         <lifetime>0.75</lifetime>
     </entity>
     <!--trigger spell effects-->

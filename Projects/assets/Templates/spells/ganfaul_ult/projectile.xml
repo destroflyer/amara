@@ -1,5 +1,6 @@
 <template>
     <entity id="projectile">
+        <isProjectile/>
         <model>Models/ganfaul_ult/skin.xml</model>
         <hitbox>
             <circle radius="2"/>
@@ -12,7 +13,6 @@
             </entity>
         </intersectionRules>
         <removeOnMapLeave/>
-        <isProjectile/>
     </entity>
     <!--trigger spell effects-->
     <entity>

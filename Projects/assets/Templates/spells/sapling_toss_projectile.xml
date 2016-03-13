@@ -1,5 +1,6 @@
 <template>
     <entity id="projectile">
+        <isProjectile/>
         <!--model-->
         <model>Models/varus/skin_default.xml</model>
         <idleAnimation>
@@ -29,7 +30,6 @@
         <!--stats-->
         <isAlive/>
         <walkSpeed>5.5</walkSpeed>
-        <isProjectile/>
         <sightRange>9</sightRange>
         <!--spells-->
         <autoAttack>
