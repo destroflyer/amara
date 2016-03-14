@@ -177,10 +177,21 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
     }
     
     public void lookAt(Vector2f mapLocation){
-        float mapHeight = getAppState(MapAppState.class).getMapHeightmap().getHeight(mapLocation);
-        mainApplication.getCamera().setLocation(new Vector3f(mapLocation.getX(), mapHeight, mapLocation.getY()));
+        Vector3f location = getMapLocation(mapLocation);
         Vector3f distance = mainApplication.getCamera().getDirection().mult(-40);
-        mainApplication.getCamera().setLocation(mainApplication.getCamera().getLocation().add(distance));
+        location.addLocal(distance);
+        mainApplication.getCamera().setLocation(location);
+    }
+    
+    public boolean isVisible(Vector2f mapLocation, int screenExtenionSize){
+        Vector3f screenLocation = mainApplication.getCamera().getScreenCoordinates(getMapLocation(mapLocation));
+        return ((screenLocation.getX() >= (-1 * screenExtenionSize)) && (screenLocation.getX() < (Settings.getInteger("resolution_width") + screenExtenionSize))
+             && (screenLocation.getY() >= (-1 * screenExtenionSize)) && (screenLocation.getY() < (Settings.getInteger("resolution_height") + screenExtenionSize)));
+    }
+    
+    private Vector3f getMapLocation(Vector2f mapLocation){
+        float mapHeight = getAppState(MapAppState.class).getMapHeightmap().getHeight(mapLocation);
+        return new Vector3f(mapLocation.getX(), mapHeight, mapLocation.getY());
     }
     
     public void saveState(){

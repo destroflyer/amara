@@ -41,7 +41,8 @@ public class IngameSettings extends SettingsCategory{
                     "camera", "Camera",
                     new Setting[]{
                         new CategorizedSetting("movement_speed", "Movement Speed", new SliderType(50, 1, 100, 1, 5)),
-                        new CategorizedSetting("movement_cursor_border", "Cursor Border Size", new SliderType(5, 0, 150, 1, 5))
+                        new CategorizedSetting("movement_cursor_border", "Cursor Border Size", new SliderType(5, 0, 150, 1, 5)),
+                        new CategorizedSetting("move_to_player_screen_extension", "Move to Player Extension", new SliderType(100, 0, 1000, 10, 50))
                     }
                 ),
                 new CategorizedSettingsCategory(
