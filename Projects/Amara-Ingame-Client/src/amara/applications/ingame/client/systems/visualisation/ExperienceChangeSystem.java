@@ -31,7 +31,7 @@ public class ExperienceChangeSystem extends EntityTextNotificationSystem{
         for(int entity : observer.getChanged().getEntitiesWithAll()){
             int experience = entityWorld.getComponent(entity, ExperienceComponent.class).getExperience();
             if(!observer.getChanged().hasComponent(entity, LevelComponent.class)){
-                onExperienceChange(entityWorld, entity, experience);
+                onExperienceChange(entity, experience);
             }
             cachedExperience.put(entity, experience);
         }
@@ -40,14 +40,14 @@ public class ExperienceChangeSystem extends EntityTextNotificationSystem{
         }
     }
     
-    private void onExperienceChange(EntityWorld entityWorld, int entity, int currentExperience){
+    private void onExperienceChange(int entity, int currentExperience){
         Integer oldExperience = cachedExperience.get(entity);
         if(oldExperience == null){
             oldExperience = 0;
         }
         int change = (currentExperience - oldExperience);
         if(change != 0){
-            displayTextNotification(entityWorld, entity, ((change > 0)?"+":"") + change + " xp", color);
+            displayTextNotification(entity, ((change > 0)?"+":"") + change + " xp", color);
         }
     }
 }

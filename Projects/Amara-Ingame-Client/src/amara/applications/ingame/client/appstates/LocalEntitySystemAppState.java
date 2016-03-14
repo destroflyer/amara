@@ -14,7 +14,6 @@ import amara.applications.ingame.client.network.backends.*;
 import amara.applications.ingame.client.systems.audio.*;
 import amara.applications.ingame.client.systems.cinematics.*;
 import amara.applications.ingame.client.systems.filters.*;
-import amara.applications.ingame.client.systems.information.*;
 import amara.applications.ingame.client.systems.visualisation.*;
 import amara.applications.ingame.client.systems.visualisation.buffs.*;
 import amara.applications.ingame.client.systems.visualisation.effects.crodwcontrol.*;
@@ -83,20 +82,20 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         for(EntitySystem entitySystem : ParallelNetworkSystems.generateSystems()){
             addEntitySystem(entitySystem);
         }
-        PlayerTeamSystem playerTeamSystem = getAppState(PlayerAppState.class).getPlayerTeamSystem();
-        addEntitySystem(playerTeamSystem);
+        PlayerAppState playerAppState = getAppState(PlayerAppState.class);
+        addEntitySystem(playerAppState.getPlayerTeamSystem());
         addEntitySystem(new AudioSystem(getAppState(AudioAppState.class)));
         MapAppState mapAppState = getAppState(MapAppState.class);
         MapHeightmap mapHeightmap = mapAppState.getMapHeightmap();
         PositionSystem positionSystem = new PositionSystem(entitySceneMap, mapHeightmap);
         addEntitySystem(positionSystem);
         addEntitySystem(new CollisionDebugSystem(getAppState(MapObstaclesAppState.class).getObstaclesNode()));
-        addEntitySystem(new TeamModelSystem(playerTeamSystem));
+        addEntitySystem(new TeamModelSystem(playerAppState.getPlayerTeamSystem()));
         addEntitySystem(new ModelSystem(entitySceneMap, mainApplication));
         addEntitySystem(new DirectionSystem(entitySceneMap));
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
-        addEntitySystem(new MarkHoveredUnitsSystem(entitySceneMap, playerTeamSystem, getAppState(IngameMouseCursorAppState.class)));
+        addEntitySystem(new MarkHoveredUnitsSystem(entitySceneMap, playerAppState.getPlayerTeamSystem(), getAppState(IngameMouseCursorAppState.class)));
         addEntitySystem(new KnockupVisualisationSystem(entitySceneMap, positionSystem));
         addEntitySystem(new BuffVisualisationSystem_Backporting(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_BaronNashor(entitySceneMap));
@@ -120,7 +119,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         HUDAttachmentsSystem hudAttachmentsSystem = new HUDAttachmentsSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap, healthBarStyleManager);
         addEntitySystem(hudAttachmentsSystem);
         EntityHeightMap entityHeightMap = new EntityHeightMap(entitySceneMap);
-        addEntitySystem(new MaximumHealthBarSystem(hudAttachmentsSystem, entityHeightMap, healthBarStyleManager, playerTeamSystem));
+        addEntitySystem(new MaximumHealthBarSystem(hudAttachmentsSystem, entityHeightMap, healthBarStyleManager, playerAppState.getPlayerTeamSystem()));
         addEntitySystem(new CurrentHealthBarSystem(hudAttachmentsSystem, entityHeightMap, healthBarStyleManager));
         addEntitySystem(new StunVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new SilenceVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
@@ -128,6 +127,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new GoldChangeSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new ExperienceChangeSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new LevelUpNotificationSystem(hudAttachmentsSystem, entityHeightMap));
+        addEntitySystem(new MinionAggroIndicatorSystem(hudAttachmentsSystem, entityHeightMap, playerAppState.getPlayerEntity()));
         addEntitySystem(new ReactionVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new WaterSpeedSystem(mapAppState));
         addEntitySystem(new CinematicsSystem(getAppState(CinematicAppState.class)));

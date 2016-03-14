@@ -35,7 +35,7 @@ public class EntityTextNotificationSystem implements EntitySystem{
         
     }
     
-    protected void displayTextNotification(EntityWorld entityWorld, int entity, String text, ColorRGBA color){
+    protected void displayTextNotification(int entity, String text, ColorRGBA color){
         Vector3f worldOffset = entityHeightMap.getWorldOffset(entity);
         Spatial hudAttachment = createHUDAttachment(text, color);
         hudAttachmentsSystem.attach(new HUDAttachmentInfo(entity, "text_notification_" + hashCode() + "_" + nextChangeID, worldOffset, hudOffset, false), hudAttachment);

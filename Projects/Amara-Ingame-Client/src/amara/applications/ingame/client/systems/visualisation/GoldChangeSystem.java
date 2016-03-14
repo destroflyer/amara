@@ -30,14 +30,14 @@ public class GoldChangeSystem extends EntityTextNotificationSystem{
             cachedGold.put(entity, entityWorld.getComponent(entity, GoldComponent.class).getGold());
         }
         for(int entity : observer.getChanged().getEntitiesWithAll()){
-            onGoldChange(entityWorld, entity, entityWorld.getComponent(entity, GoldComponent.class).getGold());
+            onGoldChange(entity, entityWorld.getComponent(entity, GoldComponent.class).getGold());
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll()){
             cachedGold.put(entity, 0f);
         }
     }
     
-    private void onGoldChange(EntityWorld entityWorld, int entity, float currentGold){
+    private void onGoldChange(int entity, float currentGold){
         Float oldGold = cachedGold.get(entity);
         if(oldGold == null){
             oldGold = 0f;
@@ -45,7 +45,7 @@ public class GoldChangeSystem extends EntityTextNotificationSystem{
         //Don't judge me...
         int change = Math.round(currentGold - oldGold);
         if(change != 0){
-            displayTextNotification(entityWorld, entity, GUIUtil.getValueText_Signed(change) + " g", color);
+            displayTextNotification(entity, GUIUtil.getValueText_Signed(change) + " g", color);
         }
         cachedGold.put(entity, currentGold);
     }
