@@ -44,8 +44,6 @@ public class IngameClientApplication extends DisplayApplication{
         settings.setSamples(Settings.getInteger("antialiasing"));
         settings.setVSync(Settings.getBoolean("vsync"));
         setShowSettings(false);
-        setPauseOnLostFocus(false);
-        setDisplayStatView(false);
     }
 
     @Override

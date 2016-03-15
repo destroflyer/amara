@@ -22,24 +22,25 @@ public class GameCreatedBackend implements MessageBackend{
         this.masterserverInformation = masterserverInformation;
     }
     private HostInformation masterserverInformation;
+    private MasterserverClientInterface masterserverClientInterface = new MasterserverClientInterface(){
+
+        @Override
+        public int getPlayerID(){
+            return MasterserverClientUtil.getPlayerID();
+        }
+
+        @Override
+        public PlayerProfileData getPlayerProfile(int playerID){
+            return MasterserverClientUtil.getPlayerProfile(playerID);
+        }
+    };
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_GameCreated){
             Message_GameCreated message = (Message_GameCreated) receivedMessage;
             HostInformation ingameServerInformation = new HostInformation(masterserverInformation.getHost(), message.getPort());
-            IngameClientApplication clientApplication = new IngameClientApplication(ingameServerInformation, message.getAuthentificationKey(), new MasterserverClientInterface() {
-
-                @Override
-                public int getPlayerID(){
-                    return MasterserverClientUtil.getPlayerID();
-                }
-
-                @Override
-                public PlayerProfileData getPlayerProfile(int playerID){
-                    return MasterserverClientUtil.getPlayerProfile(playerID);
-                }
-            });
+            IngameClientApplication clientApplication = new IngameClientApplication(ingameServerInformation, message.getAuthentificationKey(), masterserverClientInterface);
             clientApplication.start();
         }
     }

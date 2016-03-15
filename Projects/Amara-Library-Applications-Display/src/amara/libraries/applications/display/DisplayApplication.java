@@ -43,6 +43,12 @@ public class DisplayApplication extends SimpleApplication{
     public void simpleUpdate(float lastTimePerFrame){
         
     }
+
+    @Override
+    public void stop(boolean waitFor){
+        MaterialFactory.setAssetManager(null);
+        super.stop(waitFor);
+    }
     
     public CollisionResults getRayCastingResults_Cursor(Spatial spatial){
         return getRayCastingResults_Screen(spatial, inputManager.getCursorPosition());

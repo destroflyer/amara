@@ -39,6 +39,12 @@ public class FileAssets{
     
     public static BufferedImage getImage(String filePath, int width, int height){
         BufferedImage image = getImage(filePath);
+        if(width == -1){
+            width = (int) ((((float) image.getWidth()) / image.getHeight()) * height);
+        }
+        else if(height == -1){
+            height = (int) ((((float) image.getHeight()) / image.getWidth()) * width);
+        }
         BufferedImage resizedImage = new BufferedImage(width, height, image.getType());
         Graphics2D graphics = resizedImage.createGraphics();
         graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
