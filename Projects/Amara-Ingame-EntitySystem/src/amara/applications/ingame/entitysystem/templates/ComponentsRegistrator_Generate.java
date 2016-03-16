@@ -9,6 +9,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.general.*;
+import amara.applications.ingame.entitysystem.components.effects.physics.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.spawns.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
@@ -29,6 +30,8 @@ public class ComponentsRegistrator_Generate{
         CustomEffectValuesComponent.class,
         AddComponentsComponent.class,
         RemoveComponentsComponent.class,
+        AddCollisionGroupsComponent.class,
+        RemoveCollisionGroupsComponent.class,
         HitboxComponent.class,
         SpawnTemplateComponent.class,
         CastTypeComponent.class,

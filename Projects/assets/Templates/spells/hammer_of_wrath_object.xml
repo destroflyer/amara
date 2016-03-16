@@ -12,7 +12,7 @@
         <hitbox>
             <rectangle width="1.2" height="2"/>
         </hitbox>
-        <collisionGroup group="spells" collidesWith="units"/>
+        <collisionGroup targetOf="spells" targets="spell_targets"/>
         <intersectionRules>
             <entity>
                 <acceptEnemies/>

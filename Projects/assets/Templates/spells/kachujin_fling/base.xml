@@ -51,7 +51,7 @@
                 <triggeredEffect>
                     <entity>
                         <physicalDamage>80 + (0.6 * source.abilityPower)</physicalDamage>
-                        <deactivateHitbox/>
+                        <removeCollisionGroups targetOf="map|units" targets="units"/>
                         <move>
                             <entity>
                                 <displacement/>
@@ -67,7 +67,7 @@
                                 <sourceTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <activateHitbox/>
+                                        <addCollisionGroups targetOf="map|units" targets="units"/>
                                         <playAudio>
                                             <entity>
                                                 <audio>Sounds/sounds/spells/kachujin_fling_land.ogg</audio>

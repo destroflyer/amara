@@ -4,7 +4,7 @@
         <hitbox>
             <circle radius="0.6"/>
         </hitbox>
-        <collisionGroup group="spells" collidesWith="units"/>
+        <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
         <intersectionRules>
             <entity>

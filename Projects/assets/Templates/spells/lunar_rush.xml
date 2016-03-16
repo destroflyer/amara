@@ -20,7 +20,7 @@
                                 </movementAnimation>
                             </entity>
                         </move>
-                        <deactivateHitbox/>
+                        <removeCollisionGroups targetOf="map|units" targets="units"/>
                         <addEffectTriggers>
                             <!--trigger spell effects-->
                             <entity>
@@ -39,7 +39,7 @@
                                 <sourceTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <activateHitbox/>
+                                        <addCollisionGroups targetOf="map|units" targets="units"/>
                                     </entity>
                                 </triggeredEffect>
                                 <triggerOnce/>

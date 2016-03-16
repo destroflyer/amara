@@ -28,7 +28,7 @@ public final class MapIntersectionSystem implements EntitySystem
         for (EntityWrapper entity : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(HitboxComponent.class, HitboxActiveComponent.class, CollisionGroupComponent.class, PositionComponent.class)))
         {
             CollisionGroupComponent filterComp = entity.getComponent(CollisionGroupComponent.class);
-            if(CollisionGroupComponent.groupsCollide(CollisionGroupComponent.COLLISION_GROUP_MAP, filterComp.getCollidesWithGroups()))
+            if(CollisionGroupComponent.isColliding(filterComp.getTargetOf(), CollisionGroupComponent.MAP))
             {
                 Shape shape = entity.getComponent(HitboxComponent.class).getShape();
                 if(shape instanceof ConvexShape)

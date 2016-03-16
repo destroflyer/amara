@@ -20,7 +20,7 @@
             <circle radius="1"/>
         </hitbox>
         <scale>0.6</scale>
-        <collisionGroup group="spells" collidesWith="map|units"/>
+        <collisionGroup targetOf="spells|map" targets="spell_targets"/>
         <intersectionRules>
             <entity>
                 <acceptEnemies/>

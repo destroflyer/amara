@@ -23,7 +23,7 @@
                                 <distanceLimit>4</distanceLimit>
                             </entity>
                         </move>
-                        <deactivateHitbox/>
+                        <removeCollisionGroups targetOf="map|units" targets="units"/>
                         <addEffectTriggers>
                             <!--reactivate hitbox-->
                             <entity>
@@ -31,7 +31,7 @@
                                 <sourceTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <activateHitbox/>
+                                        <addCollisionGroups targetOf="map|units" targets="units"/>
                                         <spawn>
                                             <entity>
                                                 <spawnTemplate>./object(#spell)</spawnTemplate>

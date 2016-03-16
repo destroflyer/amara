@@ -3,7 +3,7 @@
         <hitbox>
             <rectangle x="5.5" width="11" height="2"/>
         </hitbox>
-        <collisionGroup group="spells" collidesWith="units"/>
+        <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
         <intersectionRules>
             <entity>

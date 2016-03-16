@@ -1733,6 +1733,7 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.physics.ActivateHitboxComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.AddCollisionGroupsComponent.class);
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent>("deactivateHitbox"){
 
@@ -1741,6 +1742,7 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.RemoveCollisionGroupsComponent.class);
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent.class.getDeclaredField("effectEntity"), componentFieldSerializer_Entity);

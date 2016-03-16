@@ -108,7 +108,7 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
                     entityWrapper.setComponent(new ScaleComponent(0.75f));
                     entityWrapper.setComponent(new IntersectionPushComponent());
-                    entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+                    entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.MAP | CollisionGroupComponent.UNITS | CollisionGroupComponent.SPELL_TARGETS, CollisionGroupComponent.UNITS));
                     entityWrapper.setComponent(new HitboxActiveComponent());
 
                     entityWrapper.setComponent(new IsAliveComponent());
@@ -156,7 +156,7 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new HitboxComponent(new Circle(1)));
                     entityWrapper.setComponent(new ScaleComponent(0.75f));
                     entityWrapper.setComponent(new IntersectionPushComponent());
-                    entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+                    entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.MAP | CollisionGroupComponent.UNITS | CollisionGroupComponent.SPELL_TARGETS, CollisionGroupComponent.UNITS));
                     entityWrapper.setComponent(new HitboxActiveComponent());
 
                     entityWrapper.setComponent(new IsAliveComponent());
@@ -264,7 +264,7 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new ScaleComponent(2.25f));
                     entityWrapper.setComponent(new HitboxComponent(new Circle(2)));
                     entityWrapper.setComponent(new IntersectionPushComponent());
-                    entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+                    entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.MAP | CollisionGroupComponent.UNITS | CollisionGroupComponent.SPELL_TARGETS, CollisionGroupComponent.UNITS));
                     entityWrapper.setComponent(new HitboxActiveComponent());
 
                     entityWrapper.setComponent(new IsAliveComponent());

@@ -70,7 +70,7 @@ public class Map_Destroforest extends Map{
             unit.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
             unit.setComponent(new HitboxComponent(new Circle(1)));
             unit.setComponent(new IntersectionPushComponent());
-            unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+            unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.MAP | CollisionGroupComponent.UNITS | CollisionGroupComponent.SPELL_TARGETS, CollisionGroupComponent.UNITS));
             unit.setComponent(new HitboxActiveComponent());
             unit.setComponent(new IsAliveComponent());
             int baseAttributesEntity = entityWorld.createEntity();
@@ -199,7 +199,7 @@ public class Map_Destroforest extends Map{
         boss.setComponent(new ScaleComponent(1.5f));
         boss.setComponent(new HitboxComponent(new Circle(2.25f)));
         boss.setComponent(new IntersectionPushComponent());
-        boss.setComponent(new CollisionGroupComponent(CollisionGroupComponent.COLLISION_GROUP_UNITS, CollisionGroupComponent.COLLISION_GROUP_MAP | CollisionGroupComponent.COLLISION_GROUP_UNITS));
+        boss.setComponent(new CollisionGroupComponent(CollisionGroupComponent.MAP | CollisionGroupComponent.UNITS | CollisionGroupComponent.SPELL_TARGETS, CollisionGroupComponent.UNITS));
         boss.setComponent(new HitboxActiveComponent());
         boss.setComponent(new IsAliveComponent());
         int baseAttributesEntity = entityWorld.createEntity();

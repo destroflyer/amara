@@ -8,6 +8,7 @@ package amara.applications.ingame.entitysystem.templates;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import com.jme3.math.Vector2f;
+import amara.applications.ingame.entitysystem.components.effects.physics.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.spawns.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
@@ -66,6 +67,25 @@ public class CustomSerializer_Ingame{
             ex.printStackTrace();
         }
         XMLTemplateManager xmlTemplateManager = XMLTemplateManager.getInstance();
+        //effects/physics
+        xmlTemplateManager.registerComponent(AddCollisionGroupsComponent.class, new XMLComponentConstructor<AddCollisionGroupsComponent>("addCollisionGroups"){
+
+            @Override
+            public AddCollisionGroupsComponent construct(){
+                long targetOf = getCollisionGroupBitMask(element.getAttributeValue("targetOf"));
+                long targets = getCollisionGroupBitMask(element.getAttributeValue("targets"));
+                return new AddCollisionGroupsComponent(targetOf, targets);
+            }
+        });
+        xmlTemplateManager.registerComponent(RemoveCollisionGroupsComponent.class, new XMLComponentConstructor<RemoveCollisionGroupsComponent>("removeCollisionGroups"){
+
+            @Override
+            public RemoveCollisionGroupsComponent construct(){
+                long targetOf = getCollisionGroupBitMask(element.getAttributeValue("targetOf"));
+                long targets = getCollisionGroupBitMask(element.getAttributeValue("targets"));
+                return new RemoveCollisionGroupsComponent(targetOf, targets);
+            }
+        });
         //physics
         xmlTemplateManager.registerComponent(HitboxComponent.class, new XMLComponentConstructor<HitboxComponent>("hitbox"){
 
@@ -139,37 +159,9 @@ public class CustomSerializer_Ingame{
 
             @Override
             public CollisionGroupComponent construct(){
-                long collisionGroups = getCollisionBitMask(element.getAttributeValue("group"));
-                long collidesWithGroups = getCollisionBitMask(element.getAttributeValue("collidesWith"));
-                return new CollisionGroupComponent(collisionGroups, collidesWithGroups);
-            }
-            
-            private long getCollisionBitMask(String text){
-                long bitMask = 0;
-                String[] groupNames = text.split("\\|");
-                for(String groupName : groupNames){
-                    bitMask |= getCollisionGroup(groupName);
-                }
-                return bitMask;
-            }
-            
-            private long getCollisionGroup(String name){
-                if(name.equals("none")){
-                    return CollisionGroupComponent.COLLISION_GROUP_NONE;
-                }
-                else if(name.equals("map")){
-                    return CollisionGroupComponent.COLLISION_GROUP_MAP;
-                }
-                else if(name.equals("units")){
-                    return CollisionGroupComponent.COLLISION_GROUP_UNITS;
-                }
-                else if(name.equals("spells")){
-                    return CollisionGroupComponent.COLLISION_GROUP_SPELLS;
-                }
-                else if(name.equals("all")){
-                    return CollisionGroupComponent.COLLISION_GROUP_ALL;
-                }
-                throw new UnsupportedOperationException("Unsupported collision group name '" + name + "'.");
+                long targetOf = getCollisionGroupBitMask(element.getAttributeValue("targetOf"));
+                long targets = getCollisionGroupBitMask(element.getAttributeValue("targets"));
+                return new CollisionGroupComponent(targetOf, targets);
             }
         });
         xmlTemplateManager.registerComponent(HealthBarStyleComponent.class, new XMLComponentConstructor<HealthBarStyleComponent>("healthBarStyle"){
@@ -179,5 +171,33 @@ public class CustomSerializer_Ingame{
                 return new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.valueOf(element.getText().toUpperCase()));
             }
         });
+    }
+    
+    private static long getCollisionGroupBitMask(String text){
+        long bitMask = 0;
+        String[] groupNames = text.split("\\|");
+        for(String groupName : groupNames){
+            bitMask |= getCollisionGroup(groupName);
+        }
+        return bitMask;
+    }
+    
+    private static long getCollisionGroup(String name){
+        if(name.equals("none")){
+            return CollisionGroupComponent.NONE;
+        }
+        else if(name.equals("map")){
+            return CollisionGroupComponent.MAP;
+        }
+        else if(name.equals("units")){
+            return CollisionGroupComponent.UNITS;
+        }
+        else if(name.equals("spells")){
+            return CollisionGroupComponent.SPELLS;
+        }
+        else if(name.equals("spell_targets")){
+            return CollisionGroupComponent.SPELL_TARGETS;
+        }
+        throw new UnsupportedOperationException("Unsupported collision group name '" + name + "'.");
     }
 }

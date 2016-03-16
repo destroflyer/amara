@@ -47,15 +47,15 @@
                                 <distanceLimit>10</distanceLimit>
                             </entity>
                         </move>
-                        <deactivateHitbox/>
+                        <removeCollisionGroups targetOf="map|units" targets="units"/>
                         <addEffectTriggers>
-                            <!--reactivate hitbox-->
+                            <!--readd collisiongroups-->
                             <entity>
                                 <targetReachedTrigger/>
                                 <sourceTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <activateHitbox/>
+                                        <addCollisionGroups targetOf="map|units" targets="units"/>
                                     </entity>
                                 </triggeredEffect>
                                 <triggerOnce/>

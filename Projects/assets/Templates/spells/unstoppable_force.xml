@@ -14,7 +14,7 @@
                                 <movementSpeed>35</movementSpeed>
                             </entity>
                         </move>
-                        <deactivateHitbox/>
+                        <removeCollisionGroups targetOf="map|units" targets="units"/>
                         <playAudio>
                             <entity>
                                 <audio>Sounds/sounds/spells/unstoppable_force_cast.ogg</audio>
@@ -33,7 +33,7 @@
                                                 <spawnTemplate>./unstoppable_force_object(#spell)</spawnTemplate>
                                             </entity>
                                         </spawn>
-                                        <activateHitbox/>
+                                        <addCollisionGroups targetOf="map|units" targets="units"/>
                                     </entity>
                                 </triggeredEffect>
                                 <triggerSource>#spell</triggerSource>

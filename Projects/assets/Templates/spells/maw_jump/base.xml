@@ -22,7 +22,7 @@
                                 </movementAnimation>
                             </entity>
                         </move>
-                        <deactivateHitbox/>
+                        <removeCollisionGroups targetOf="map|units" targets="units"/>
                         <addEffectTriggers>
                             <!--spawn object-->
                             <entity>
@@ -35,7 +35,7 @@
                                                 <spawnTemplate>./object(#spell)</spawnTemplate>
                                             </entity>
                                         </spawn>
-                                        <activateHitbox/>
+                                        <addCollisionGroups targetOf="map|units" targets="units"/>
                                     </entity>
                                 </triggeredEffect>
                                 <triggerSource>#spell</triggerSource>

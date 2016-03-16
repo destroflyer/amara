@@ -32,7 +32,7 @@
         </hitbox>
         <scale>0.75</scale>
         <intersectionPush/>
-        <collisionGroup group="units" collidesWith="map|units"/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
         <!--stats-->
         <isAlive/>

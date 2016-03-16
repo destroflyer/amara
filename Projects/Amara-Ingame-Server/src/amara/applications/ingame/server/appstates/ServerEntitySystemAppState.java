@@ -259,7 +259,9 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyMoveSystem());
         addEntitySystem(new ApplyTeleportSystem());
         addEntitySystem(new ApplyActivateHitboxSystem());
+        addEntitySystem(new ApplyAddCollisiongGroupsSystem());
         addEntitySystem(new ApplyDeactivateHitboxSystem());
+        addEntitySystem(new ApplyRemoveCollisiongGroupsSystem());
         addEntitySystem(new ApplySpawnsSystems());
         addEntitySystem(new ApplyAddAutoAttackSpellEffectsSystem());
         addEntitySystem(new ApplyAddSpellsSpellEffectsSystem());
