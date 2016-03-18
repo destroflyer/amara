@@ -95,7 +95,7 @@ public class HUDAttachmentsSystem implements EntitySystem{
     }
     
     private void updateAttachmentVisibility(Spatial hudAttachment, boolean isVisible){
-        hudAttachment.setCullHint(isVisible?Spatial.CullHint.Inherit: Spatial.CullHint.Always);
+        hudAttachment.setCullHint(isVisible?Spatial.CullHint.Inherit:Spatial.CullHint.Always);
     }
 
     public boolean isEnabled(){

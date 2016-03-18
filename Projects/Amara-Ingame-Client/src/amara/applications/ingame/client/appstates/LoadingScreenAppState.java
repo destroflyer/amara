@@ -16,8 +16,8 @@ import amara.applications.ingame.client.IngameClientApplication;
 import amara.applications.ingame.client.gui.ScreenController_LoadingScreen;
 import amara.libraries.applications.display.JMonkeyUtil;
 import amara.libraries.applications.display.appstates.*;
+import amara.libraries.applications.display.ingame.appstates.*;
 import amara.libraries.applications.display.models.ModelObject;
-import amara.libraries.applications.display.ingame.appstates.IngameCameraAppState;
 
 /**
  *
@@ -30,6 +30,8 @@ public class LoadingScreenAppState extends OverlayViewportAppState<IngameClientA
     private ModelObject modelObject2;
     private float animationProgress;
     private float animationRadius = 10;
+    private boolean hasGameStarted;
+    private boolean hasInitialWorldLoaded;
     
     @Override
     public void initialize(AppStateManager stateManager, Application application){
@@ -57,6 +59,9 @@ public class LoadingScreenAppState extends OverlayViewportAppState<IngameClientA
     @Override
     public void cleanup(){
         super.cleanup();
+        mainApplication.getStateManager().attach(new FreeCameraAppState());
+        mainApplication.getStateManager().attach(new ClientChatAppState());
+        mainApplication.getStateManager().attach(new SendPlayerCommandsAppState());
         getAppState(IngameCameraAppState.class).setEnabled(true);
         getAppState(NiftyAppState.class).goToScreen(ScreenController_LoadingScreen.class, "ingame");
     }
@@ -67,10 +72,32 @@ public class LoadingScreenAppState extends OverlayViewportAppState<IngameClientA
         animationProgress += (1.1f * lastTimePerFrame);
         updateModelObject(modelObject1, animationProgress);
         updateModelObject(modelObject2, animationProgress - 0.5f);
+        if(hasGameStarted && hasInitialWorldLoaded){
+            mainApplication.enqueueTask(new Runnable(){
+
+                @Override
+                public void run(){
+                    mainApplication.getStateManager().detach(LoadingScreenAppState.this);
+                }
+            });
+        }
     }
     
     private void updateModelObject(ModelObject modelObject, float progress){
         modelObject.setLocalTranslation(FastMath.cos(progress) * animationRadius, 0, FastMath.sin(progress) * animationRadius);
         JMonkeyUtil.setLocalRotation(modelObject, MODEL_OBJECT_YAW.mult(modelObject.getLocalTranslation()));
+    }
+
+    public void onGameStarted(){
+        this.hasGameStarted = true;
+        setTitle("Receiving initial game data...");
+    }
+
+    public void onInitialWorldLoaded(){
+        this.hasInitialWorldLoaded = true;
+    }
+    
+    public void setTitle(String title){
+        getAppState(NiftyAppState.class).getScreenController(ScreenController_LoadingScreen.class).setTitle(title);
     }
 }

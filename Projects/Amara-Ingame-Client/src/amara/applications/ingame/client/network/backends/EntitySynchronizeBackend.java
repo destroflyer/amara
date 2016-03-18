@@ -5,9 +5,8 @@
 package amara.applications.ingame.client.network.backends;
 
 import com.jme3.network.Message;
-import amara.applications.ingame.network.messages.Message_EntityChanges;
-import amara.libraries.applications.display.DisplayApplication;
-import amara.libraries.entitysystem.*;
+import amara.applications.ingame.client.appstates.SynchronizeEntityWorldAppState;
+import amara.applications.ingame.network.messages.*;
 import amara.libraries.entitysystem.synchronizing.*;
 import amara.libraries.network.*;
 
@@ -17,39 +16,21 @@ import amara.libraries.network.*;
  */
 public class EntitySynchronizeBackend implements MessageBackend{
 
-    public EntitySynchronizeBackend(DisplayApplication displayApplication, EntityWorld entityWorld){
-        this.displayApplication = displayApplication;
-        this.entityWorld = entityWorld;
+    public EntitySynchronizeBackend(SynchronizeEntityWorldAppState synchronizeEntityWorldAppState){
+        this.synchronizeEntityWorldAppState = synchronizeEntityWorldAppState;
     }
-    private DisplayApplication displayApplication;
-    private EntityWorld entityWorld;
+    private SynchronizeEntityWorldAppState synchronizeEntityWorldAppState;
+    private EntityChanges entityChanges = new EntityChanges();
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_EntityChanges){
             Message_EntityChanges message = (Message_EntityChanges) receivedMessage;
-            final EntityChanges entityChanges = new EntityChanges();
             NetworkUtil.readFromBytes(entityChanges, message.getData());
-            displayApplication.enqueueTask(new Runnable(){
-
-                @Override
-                public void run(){
-                    for(EntityChange entityChange : entityChanges.getChanges()){
-                        if(entityChange instanceof RemovedEntityChange){
-                            RemovedEntityChange removedEntityChange = (RemovedEntityChange) entityChange;
-                            entityWorld.removeEntity(removedEntityChange.getEntity());
-                        }
-                        else if(entityChange instanceof NewComponentChange){
-                            NewComponentChange newComponentChange = (NewComponentChange) entityChange;
-                            entityWorld.setComponent(newComponentChange.getEntity(), newComponentChange.getComponent());
-                        }
-                        else if(entityChange instanceof RemovedComponentChange){
-                            RemovedComponentChange removedComponentChange = (RemovedComponentChange) entityChange;
-                            entityWorld.removeComponent(removedComponentChange.getEntity(), removedComponentChange.getComponentClass());
-                        }
-                    }
-                }
-            });
+            synchronizeEntityWorldAppState.enqueueEntityChanges(entityChanges);
+        }
+        else if(receivedMessage instanceof Message_InitialEntityWorldSent){
+            synchronizeEntityWorldAppState.onInitialEntityWorldReceived();
         }
     }
 }

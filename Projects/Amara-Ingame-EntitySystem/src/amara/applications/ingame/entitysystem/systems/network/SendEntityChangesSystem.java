@@ -10,7 +10,7 @@ import com.jme3.network.Message;
 import amara.applications.ingame.entitysystem.components.audio.*;
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
 import amara.applications.ingame.entitysystem.synchronizing.ClientComponentBlacklist;
-import amara.applications.ingame.network.messages.Message_EntityChanges;
+import amara.applications.ingame.network.messages.*;
 import amara.core.Util;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.synchronizing.*;
@@ -40,6 +40,7 @@ public class SendEntityChangesSystem implements EntitySystem{
             return super.areComponentsEqual(oldComponent, newComponent);
         }
     };
+    private boolean isInitialFrame = true;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -79,6 +80,10 @@ public class SendEntityChangesSystem implements EntitySystem{
         Message[] messages = getEntityChangesMessages(changes);
         for(Message message : messages){
             networkServer.broadcastMessage(message);
+        }
+        if(isInitialFrame){
+            networkServer.broadcastMessage(new Message_InitialEntityWorldSent());
+            isInitialFrame = false;
         }
     }
     

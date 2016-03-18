@@ -41,6 +41,7 @@ public class Map_Etherdesert extends Map{
         audioBackgroundMusic.setComponent(new AudioComponent("Sounds/music/desert_village.ogg"));
         audioBackgroundMusic.setComponent(new AudioVolumeComponent(1.75f));
         audioBackgroundMusic.setComponent(new AudioLoopComponent());
+        audioBackgroundMusic.setComponent(new AudioGlobalComponent());
         audioBackgroundMusic.setComponent(new StartPlayingAudioComponent());
         //Nexus
         EntityWrapper nexus = entityWorld.getWrapped(entityWorld.createEntity());

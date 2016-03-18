@@ -64,6 +64,7 @@ public class Map_Arama extends Map{
         audioBackgroundMusic.setComponent(new AudioComponent("Sounds/music/world_of_ice.ogg"));
         audioBackgroundMusic.setComponent(new AudioVolumeComponent(1.25f));
         audioBackgroundMusic.setComponent(new AudioLoopComponent());
+        audioBackgroundMusic.setComponent(new AudioGlobalComponent());
         audioBackgroundMusic.setComponent(new StartPlayingAudioComponent());
         //Backports
         backportPositionEntities[0] = entityWorld.createEntity();

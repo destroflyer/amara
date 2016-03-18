@@ -5,8 +5,6 @@
 package amara.applications.ingame.client.appstates;
 
 import java.util.HashMap;
-import com.jme3.app.Application;
-import com.jme3.app.state.AppStateManager;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
 import com.jme3.input.KeyInput;
@@ -43,10 +41,8 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
     private int cursorHoveredEntity = -1;
     private CollisionResults[] tmpEntitiesColisionResults = new CollisionResults[8];
     private HashMap<Integer, Integer> tmpHoveredEntitiesCount = new HashMap<Integer, Integer>();
-
-    @Override
-    public void initialize(AppStateManager stateManager, Application application){
-        super.initialize(stateManager, application);
+    
+    public void onInitialWorldLoaded(){
         mainApplication.getInputManager().addMapping("lock_camera", new KeyTrigger(KeyInput.KEY_Z));
         mainApplication.getInputManager().addMapping("display_map_sight", new KeyTrigger(KeyInput.KEY_U));
         mainApplication.getInputManager().addListener(this, new String[]{

@@ -170,6 +170,7 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new RequestUpdateAttributesComponent());
                     entityWrapper.setComponent(new IsTargetableComponent());
                     entityWrapper.setComponent(new IsVulnerableComponent());
+                    entityWrapper.setComponent(new SightRangeComponent(28));
 
                     EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack,Models/3dsa_archer_arrow/skin.xml");
                     entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));

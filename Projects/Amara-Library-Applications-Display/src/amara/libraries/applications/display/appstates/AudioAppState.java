@@ -8,6 +8,7 @@ import com.jme3.audio.AudioNode;
 import com.jme3.scene.Node;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.audio.Listener;
 import amara.core.settings.Settings;
 
 /**
@@ -17,11 +18,13 @@ import amara.core.settings.Settings;
 public class AudioAppState extends BaseDisplayAppState{
 
     private Node audioRootNode = new Node("audio_manager_node");
+    private Listener listener = new Listener();
 
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(audioRootNode);
+        mainApplication.getAudioRenderer().setListener(listener);
     }
     
     public AudioNode createAudioNode(String filePath){
@@ -34,5 +37,9 @@ public class AudioAppState extends BaseDisplayAppState{
     
     public void removeAudioNode(AudioNode audioNode){
         audioRootNode.detachChild(audioNode);
+    }
+
+    public Listener getListener(){
+        return listener;
     }
 }

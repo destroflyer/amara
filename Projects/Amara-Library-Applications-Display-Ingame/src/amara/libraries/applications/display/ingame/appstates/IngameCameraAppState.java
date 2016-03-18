@@ -45,6 +45,9 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
     private int currentZoomLevel;
     private int maximumZoomLevel = -1;
     private float zoomInterval = 2;
+    private Vector3f lastFrameCameraLocation = new Vector3f();
+    private Quaternion lastFrameCameraRotation = new Quaternion();
+    private boolean hasMoved;
     private Vector3f tmpCameraLocation = new Vector3f();
     private Quaternion tmpCameraRotation = new Quaternion();
     
@@ -101,6 +104,12 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
                     mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
                 }
             }
+        }
+        hasMoved = ((!mainApplication.getCamera().getLocation().equals(lastFrameCameraLocation))
+                               || (!mainApplication.getCamera().getRotation().equals(lastFrameCameraRotation)));
+        if(!hasMoved){
+            lastFrameCameraLocation.set(mainApplication.getCamera().getLocation());
+            lastFrameCameraRotation.set(mainApplication.getCamera().getRotation());
         }
     }
     
@@ -183,6 +192,10 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
         mainApplication.getCamera().setLocation(location);
     }
     
+    public boolean isVisible(Vector2f mapLocation){
+        return isVisible(mapLocation, 0);
+    }
+    
     public boolean isVisible(Vector2f mapLocation, int screenExtenionSize){
         Vector3f screenLocation = mainApplication.getCamera().getScreenCoordinates(getMapLocation(mapLocation));
         return ((screenLocation.getX() >= (-1 * screenExtenionSize)) && (screenLocation.getX() < (Settings.getInteger("resolution_width") + screenExtenionSize))
@@ -192,6 +205,10 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
     private Vector3f getMapLocation(Vector2f mapLocation){
         float mapHeight = getAppState(MapAppState.class).getMapHeightmap().getHeight(mapLocation);
         return new Vector3f(mapLocation.getX(), mapHeight, mapLocation.getY());
+    }
+    
+    public boolean hasMoved(){
+        return hasMoved;
     }
     
     public void saveState(){

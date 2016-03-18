@@ -557,6 +557,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.audio.AudioComponent(audioPath);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent>("audioGlobal"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent>("audioLoop"){
 

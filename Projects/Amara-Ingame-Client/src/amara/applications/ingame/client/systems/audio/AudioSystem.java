@@ -8,12 +8,15 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import com.jme3.audio.AudioNode;
 import com.jme3.audio.AudioSource;
+import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.audio.*;
 import amara.applications.ingame.entitysystem.components.game.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.systems.network.SendEntityChangesSystem;
 import amara.applications.ingame.shared.games.Game;
+import amara.core.settings.Settings;
 import amara.libraries.applications.display.appstates.AudioAppState;
+import amara.libraries.applications.display.ingame.appstates.IngameCameraAppState;
 import amara.libraries.entitysystem.*;
 
 /**
@@ -22,12 +25,15 @@ import amara.libraries.entitysystem.*;
  */
 public class AudioSystem implements EntitySystem{
     
-    public AudioSystem(AudioAppState audioAppState){
+    public AudioSystem(AudioAppState audioAppState, IngameCameraAppState ingameCameraAppState){
         this.audioAppState = audioAppState;
+        this.ingameCameraAppState = ingameCameraAppState;
     }
     private AudioAppState audioAppState;
+    private IngameCameraAppState ingameCameraAppState;
     private HashMap<Integer, AudioNode> audioNodes = new HashMap<Integer, AudioNode>();
     private LinkedList<Integer> queuedAudioEntities = new LinkedList<Integer>();
+    private Vector2f tmpAudioLocation = new Vector2f();
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -44,15 +50,13 @@ public class AudioSystem implements EntitySystem{
         for(int entity : observer.getNew().getEntitiesWithAll(AudioSourceComponent.class)){
             AudioNode audioNode = audioNodes.get(entity);
             int audioSourceEntity = entityWorld.getComponent(entity, AudioSourceComponent.class).getEntity();
-            audioNode.setUserData("audio_source_entity", audioSourceEntity);
-            tryUpdateAudioPosition(audioNode, entityWorld.getComponent(audioSourceEntity, PositionComponent.class));
-            //audioNode.setPositional(true);
-            audioNode.setRefDistance(50);
-            audioNode.setMaxDistance(100);
+            audioNode.setPositional(true);
+            audioNode.setRefDistance(9999999);
+            audioNode.setMaxDistance(9999999);
+            tryUpdateAudioPosition(entity, entityWorld.getComponent(audioSourceEntity, PositionComponent.class));
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll(AudioSourceComponent.class)){
             AudioNode audioNode = audioNodes.get(entity);
-            audioNode.setUserData("audio_source_entity", null);
             audioNode.setPositional(false);
         }
         //Start
@@ -69,7 +73,7 @@ public class AudioSystem implements EntitySystem{
         for(int entity : observer.getChanged().getEntitiesWithAll(StopPlayingAudioComponent.class)){
             stop(entity);
         }
-        updateAudioPositions(observer);
+        updateAudioPositions(entityWorld, observer);
         GameSpeedComponent gameSpeedComponent = observer.getChanged().getComponent(Game.ENTITY, GameSpeedComponent.class);
         if(gameSpeedComponent != null){
             for(AudioNode audioNode : audioNodes.values()){
@@ -106,11 +110,6 @@ public class AudioSystem implements EntitySystem{
         AudioNode audioNode = audioNodes.get(audioEntity);
         audioNode.stop();
         audioNode.play();
-    }
-    
-    private void pause(int audioEntity){
-        AudioNode audioNode = audioNodes.get(audioEntity);
-        audioNode.pause();
     }
     
     private void stop(int audioEntity){
@@ -151,20 +150,46 @@ public class AudioSystem implements EntitySystem{
         return ((progress != null)?progress:0);
     }
     
-    private void updateAudioPositions(ComponentMapObserver observer){
-        for(AudioNode audioNode : audioNodes.values()){
-            Integer audioSourceEntity = audioNode.getUserData("audio_source_entity");
-            if(audioSourceEntity != null){
-                tryUpdateAudioPosition(audioNode, observer.getNew().getComponent(audioSourceEntity, PositionComponent.class));
-                tryUpdateAudioPosition(audioNode, observer.getChanged().getComponent(audioSourceEntity, PositionComponent.class));
+    private void updateAudioPositions(EntityWorld entityWorld, ComponentMapObserver observer){
+        for(int audioEntity : audioNodes.keySet()){
+            boolean updateVolume = ingameCameraAppState.hasMoved();
+            AudioSourceComponent audioSourceComponent = entityWorld.getComponent(audioEntity, AudioSourceComponent.class);
+            if(audioSourceComponent != null){
+                if(tryUpdateAudioPosition(audioEntity, observer.getNew().getComponent(audioSourceComponent.getEntity(), PositionComponent.class))
+                || tryUpdateAudioPosition(audioEntity, observer.getChanged().getComponent(audioSourceComponent.getEntity(), PositionComponent.class))){
+                    updateVolume = true;
+                }
+            }
+            if(updateVolume){
+                updateAudioVolume(entityWorld, audioEntity);
             }
         }
     }
     
-    private void tryUpdateAudioPosition(AudioNode audioNode, PositionComponent positionComponent){
+    private boolean tryUpdateAudioPosition(int audioEntity, PositionComponent positionComponent){
         if(positionComponent != null){
-            audioNode.setLocalTranslation(positionComponent.getPosition().getX(), 0, positionComponent.getPosition().getY());
+            Vector2f position = positionComponent.getPosition();
+            AudioNode audioNode = audioNodes.get(audioEntity);
+            audioNode.setLocalTranslation(position.getX(), 0, position.getY());
+            return true;
         }
+        return false;
+    }
+    
+    private void updateAudioVolume(EntityWorld entityWorld, int audioEntity){
+        AudioNode audioNode = audioNodes.get(audioEntity);
+        float volume = Settings.getFloat("audio_volume");
+        AudioVolumeComponent audioVolumeComponent = entityWorld.getComponent(audioEntity, AudioVolumeComponent.class);
+        if(audioVolumeComponent != null){
+            volume *= audioVolumeComponent.getVolume();
+        }
+        if(!entityWorld.hasComponent(audioEntity, AudioGlobalComponent.class)){
+            tmpAudioLocation.set(audioNode.getLocalTranslation().getX(), audioNode.getLocalTranslation().getZ());
+            if(!ingameCameraAppState.isVisible(tmpAudioLocation)){
+                volume = 0;
+            }
+        }
+        audioNode.setVolume(volume);
     }
     
     private void updateAudioPitch(EntityWorld entityWorld, AudioNode audioNode){

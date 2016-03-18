@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.audio.Listener;
 import com.jme3.collision.CollisionResult;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
@@ -50,6 +51,8 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
     private Node visualsNode = new Node();
     private HashMap<ModelObject, MapVisual> modelObjectsVisuals = new HashMap<ModelObject, MapVisual>();
     private Node cameraNode = new Node();
+    private Vector2f screenCenterGroundLocation = new Vector2f();
+    private Vector3f tmpAudioListenerLocation = new Vector3f();
     private ArrayList<Filter> activeFilters = new ArrayList<Filter>();
 
     @Override
@@ -60,6 +63,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
         mainApplication.getRootNode().attachChild(cameraNode);
         new Thread(new Runnable(){
 
+            @Override
             public void run(){
                 initializeCamera();
                 initializeLights();
@@ -124,8 +128,22 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
     @Override
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
+        if(getAppState(IngameCameraAppState.class).hasMoved()){
+            onCameraMoved();
+        }
+    }
+    
+    private void onCameraMoved(){
         cameraNode.setLocalTranslation(mainApplication.getCamera().getLocation());
-        JMonkeyUtil.setLocalRotation(cameraNode, mainApplication.getCamera().getDirection());
+        cameraNode.setLocalRotation(mainApplication.getCamera().getRotation());
+        CollisionResult groundCollision = mainApplication.getRayCastingResults_ScreenCenter(mapTerrain.getTerrain()).getClosestCollision();
+        if(groundCollision != null){
+            screenCenterGroundLocation.set(groundCollision.getContactPoint().getX(), groundCollision.getContactPoint().getZ());
+            tmpAudioListenerLocation.setX(screenCenterGroundLocation.getX());
+            tmpAudioListenerLocation.setZ(screenCenterGroundLocation.getY());
+            Listener listener = getAppState(AudioAppState.class).getListener();
+            listener.setLocation(tmpAudioListenerLocation);
+        }
     }
 
     @Override
@@ -177,6 +195,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
         modelsNode.setShadowMode(RenderQueue.ShadowMode.Cast);
         mainApplication.enqueueTask(new Runnable(){
 
+            @Override
             public void run(){
                 visualsNode.attachChild(modelsNode);
                 visualsNode.attachChild(SkyFactory.createSky(mainApplication.getAssetManager(), "Textures/skies/default.jpg", true));

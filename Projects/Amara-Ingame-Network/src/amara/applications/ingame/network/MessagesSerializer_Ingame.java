@@ -42,6 +42,7 @@ public class MessagesSerializer_Ingame{
             Message_GameInfo.class,
             Message_GameStarted.class,
             Message_GameOver.class,
+            Message_InitialEntityWorldSent.class,
             Message_PlayerAuthentification.class
         );
     }

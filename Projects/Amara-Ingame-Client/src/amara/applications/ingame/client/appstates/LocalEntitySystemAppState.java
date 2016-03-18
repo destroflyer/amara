@@ -75,8 +75,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(entitiesNode);
         NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
-        networkClient.addMessageBackend(new EntitySynchronizeBackend(mainApplication, entityWorld));
-        networkClient.addMessageBackend(new GameStartedBackend(mainApplication));
+        networkClient.addMessageBackend(new GameStartedBackend(getAppState(LoadingScreenAppState.class)));
         networkClient.addMessageBackend(new GameCrashedBackend(mainApplication));
         networkClient.addMessageBackend(new GameOverBackend(mainApplication));
         for(EntitySystem entitySystem : ParallelNetworkSystems.generateSystems()){
@@ -84,7 +83,6 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         }
         PlayerAppState playerAppState = getAppState(PlayerAppState.class);
         addEntitySystem(playerAppState.getPlayerTeamSystem());
-        addEntitySystem(new AudioSystem(getAppState(AudioAppState.class)));
         MapAppState mapAppState = getAppState(MapAppState.class);
         MapHeightmap mapHeightmap = mapAppState.getMapHeightmap();
         PositionSystem positionSystem = new PositionSystem(entitySceneMap, mapHeightmap);
@@ -115,8 +113,14 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new BuffVisualisationSystem_Turbo(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Wither(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Zhonyas(entitySceneMap));
+    }
+    
+    public void onInitialWorldLoaded(){
+        addEntitySystem(new AudioSystem(getAppState(AudioAppState.class), getAppState(IngameCameraAppState.class)));
+        MapAppState mapAppState = getAppState(MapAppState.class);
+        PlayerAppState playerAppState = getAppState(PlayerAppState.class);
         HealthBarStyleManager healthBarStyleManager = new HealthBarStyleManager();
-        HUDAttachmentsSystem hudAttachmentsSystem = new HUDAttachmentsSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapHeightmap, healthBarStyleManager);
+        HUDAttachmentsSystem hudAttachmentsSystem = new HUDAttachmentsSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapAppState.getMapHeightmap(), healthBarStyleManager);
         addEntitySystem(hudAttachmentsSystem);
         EntityHeightMap entityHeightMap = new EntityHeightMap(entitySceneMap);
         addEntitySystem(new MaximumHealthBarSystem(hudAttachmentsSystem, entityHeightMap, healthBarStyleManager, playerAppState.getPlayerTeamSystem()));

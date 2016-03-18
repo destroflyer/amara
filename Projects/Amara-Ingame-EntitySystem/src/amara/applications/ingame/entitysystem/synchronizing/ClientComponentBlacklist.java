@@ -144,7 +144,9 @@ public class ClientComponentBlacklist{
             TeleportComponent.class,
             //effects/physics
             ActivateHitboxComponent.class,
+            AddCollisionGroupsComponent.class,
             DeactivateHitboxComponent.class,
+            RemoveCollisionGroupsComponent.class,
             //effects/spawns
             SpawnComponent.class,
             //effects/spells

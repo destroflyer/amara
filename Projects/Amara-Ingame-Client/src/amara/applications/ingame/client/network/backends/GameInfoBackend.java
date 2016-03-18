@@ -7,11 +7,9 @@ package amara.applications.ingame.client.network.backends;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.network.Message;
 import amara.applications.ingame.client.appstates.*;
-import amara.applications.ingame.client.gui.ScreenController_LoadingScreen;
 import amara.applications.ingame.network.messages.Message_GameInfo;
 import amara.applications.ingame.shared.maps.*;
 import amara.libraries.applications.display.DisplayApplication;
-import amara.libraries.applications.display.appstates.NiftyAppState;
 import amara.libraries.applications.display.ingame.appstates.*;
 import amara.libraries.network.*;
 
@@ -35,7 +33,7 @@ public class GameInfoBackend implements MessageBackend{
 
                 @Override
                 public void run(){
-                    stateManager.getState(NiftyAppState.class).getScreenController(ScreenController_LoadingScreen.class).setTitle("Loading map...");
+                    mainApplication.getStateManager().getState(LoadingScreenAppState.class).setTitle("Loading map...");
                     new Thread(new Runnable(){
 
                         @Override
@@ -45,12 +43,10 @@ public class GameInfoBackend implements MessageBackend{
                             stateManager.attach(new MapAppState(map));
                             stateManager.attach(new MapObstaclesAppState());
                             stateManager.attach(new LocalEntitySystemAppState());
+                            stateManager.attach(new SynchronizeEntityWorldAppState());
                             stateManager.attach(new PlayerAppState(message.getPlayerEntity()));
-                            stateManager.attach(new ClientChatAppState());
-                            stateManager.attach(new SendPlayerCommandsAppState());
-                            stateManager.attach(new FreeCameraAppState());
                             stateManager.attach(new ClientInitializedAppState());
-                            stateManager.getState(NiftyAppState.class).getScreenController(ScreenController_LoadingScreen.class).setTitle("Waiting for all players...");
+                            mainApplication.getStateManager().getState(LoadingScreenAppState.class).setTitle("Waiting for all players...");
                         }
                     }).start();
                 }
