@@ -30,8 +30,8 @@ public class ReceiveLoginsBackend implements MessageBackend{
             Message_Login message = (Message_Login) receivedMessage;
             AuthentificationInformation authentificationInformation = message.getAuthentificationInformation();
             int resultPlayerID = 0;
-            int playerID = databaseAppState.getQueryResult("SELECT id FROM users WHERE LOWER(login) = '" + databaseAppState.escape(authentificationInformation.getLogin().toLowerCase()) + "' LIMIT 1").nextInteger_Close();
-            if(playerID != 0){
+            Integer playerID = databaseAppState.getQueryResult("SELECT id FROM users WHERE LOWER(login) = '" + databaseAppState.escape(authentificationInformation.getLogin().toLowerCase()) + "' LIMIT 1").nextInteger_Close();
+            if(playerID != null){
                 String encodedSentPassword = playersAppState.getPasswordEncoder().encode(authentificationInformation.getPassword());
                 String encodedPassword = databaseAppState.getQueryResult("SELECT password FROM users WHERE id = " + playerID + " LIMIT 1").nextString_Close();
                 if(encodedSentPassword.equals(encodedPassword)){

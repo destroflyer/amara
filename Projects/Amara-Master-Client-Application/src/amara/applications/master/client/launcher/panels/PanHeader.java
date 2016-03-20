@@ -21,7 +21,6 @@ import amara.core.files.FileAssets;
  */
 public class PanHeader extends javax.swing.JPanel{
 
-    /** Creates new form panHeader */
     public PanHeader(){
         initComponents();
         lblTitle.setText(GameInfo.NAME);

@@ -45,12 +45,15 @@ public class FileAssets{
         else if(height == -1){
             height = (int) ((((float) image.getHeight()) / image.getWidth()) * width);
         }
-        BufferedImage resizedImage = new BufferedImage(width, height, image.getType());
-        Graphics2D graphics = resizedImage.createGraphics();
-        graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        graphics.drawImage(image, 0, 0, width, height, 0, 0, image.getWidth(), image.getHeight(), null);
-        graphics.dispose();
-        return resizedImage;
+        if((width != image.getWidth()) || (height != image.getHeight())){
+            BufferedImage resizedImage = new BufferedImage(width, height, image.getType());
+            Graphics2D graphics = resizedImage.createGraphics();
+            graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            graphics.drawImage(image, 0, 0, width, height, 0, 0, image.getWidth(), image.getHeight(), null);
+            graphics.dispose();
+            return resizedImage;
+        }
+        return image;
     }
     
     public static BufferedImage getImage(String filePath){

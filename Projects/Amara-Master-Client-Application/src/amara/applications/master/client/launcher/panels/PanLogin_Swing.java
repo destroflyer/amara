@@ -6,15 +6,17 @@ package amara.applications.master.client.launcher.panels;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
+import amara.applications.master.client.launcher.api.WebserverInfo;
 import amara.applications.master.client.launcher.buttons.*;
+import amara.applications.master.client.launcher.panels.loginscreens.SwingLoginScreen;
 import amara.core.GameInfo;
-import amara.core.files.FileAssets;
+import amara.core.Util;
 
 /**
  *
@@ -22,8 +24,10 @@ import amara.core.files.FileAssets;
  */
 public class PanLogin_Swing extends PanLogin{
 
-    public PanLogin_Swing(){
+    public PanLogin_Swing(SwingLoginScreen loginScreen){
         initComponents();
+        this.loginScreen = loginScreen;
+        loginScreen.setSize(644, 372);
         JComponent btnLogin = ButtonUtil.addImageBackgroundButton(panContainer_btnLogin, new DefaultButtonBuilder("default_176x30", "Login"));
         btnLogin.addMouseListener(new MouseAdapter(){
 
@@ -38,7 +42,25 @@ public class PanLogin_Swing extends PanLogin{
         addTextFieldListeners();
         showIsLoading(false);
     }
-    private Image backgroundImage;
+    private SwingLoginScreen loginScreen;
+    private Thread updateThread = new Thread(new Runnable(){
+
+        @Override
+        public void run(){
+            long lastTimestamp = System.currentTimeMillis();
+            float lastTimePerFrame;
+            while(!stopUpdateThread){
+                long currentTimestamp = System.currentTimeMillis();
+                lastTimePerFrame = ((currentTimestamp - lastTimestamp) / 1000f);
+                lastTimestamp = currentTimestamp;
+                loginScreen.update(lastTimePerFrame);
+                updateUI();
+                Util.sleep(1000 / 60);
+            }
+            loginScreen.close();
+        }
+    });
+    private boolean stopUpdateThread;
     
     private void addTextFieldListeners(){
         KeyAdapter loginTextFieldKeyListener = new KeyAdapter(){
@@ -58,12 +80,10 @@ public class PanLogin_Swing extends PanLogin{
     }
 
     @Override
-    protected void paintComponent(Graphics graphics){
-        super.paintComponent(graphics);
-        if(backgroundImage == null){
-            backgroundImage = FileAssets.getImage("Interface/client/panels/login.jpg", getWidth(), getHeight());
-        }
-        graphics.drawImage(backgroundImage, 0, 0, this);
+    public void paintComponent(Graphics _graphics){
+        super.paintComponent(_graphics);
+        Graphics2D graphics = (Graphics2D) _graphics;
+        loginScreen.paint(graphics);
     }
     
     private void login(){
@@ -71,16 +91,21 @@ public class PanLogin_Swing extends PanLogin{
         String password = new String(txtPassword.getPassword());
         login(login, password);
     }
-
+    
     @Override
     public void start(){
-        super.start();
-        playBackgroundMusic("Sounds/music/Lords of the Sky.ogg");
+        updateThread.start();
     }
     
     @Override
     public void showIsLoading(boolean isLoading){
         pbrLoading.setVisible(isLoading);
+    }
+
+    @Override
+    public void close(){
+        super.close();
+        stopUpdateThread = true;
     }
 
     /**
@@ -200,7 +225,7 @@ public class PanLogin_Swing extends PanLogin{
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterMouseClicked
-        //Util.browseURL(NetworkUtil.getMasterServerURL("register.php", null).toExternalForm());
+        Util.browseURL(WebserverInfo.getWebserverURL("register.php", null).toExternalForm());
     }//GEN-LAST:event_lblRegisterMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

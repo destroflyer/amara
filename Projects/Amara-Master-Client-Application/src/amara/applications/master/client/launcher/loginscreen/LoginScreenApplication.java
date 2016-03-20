@@ -1,7 +1,7 @@
 package amara.applications.master.client.launcher.loginscreen;
 
 import amara.applications.master.client.launcher.loginscreen.appstates.NiftyAppState_LoginScreen;
-import amara.applications.master.client.launcher.loginscreen.screens.LoginScreen;
+import amara.applications.master.client.launcher.loginscreen.screens.JMELoginScreen;
 import amara.applications.master.client.launcher.panels.PanLogin;
 import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.applications.display.appstates.*;
@@ -11,12 +11,12 @@ import amara.libraries.applications.display.appstates.*;
  */
 public class LoginScreenApplication extends DisplayApplication{
 
-    public LoginScreenApplication(PanLogin panLogin, LoginScreen loginScreen){
+    public LoginScreenApplication(PanLogin panLogin, JMELoginScreen loginScreen){
         this.panLogin= panLogin;
         this.loginScreen = loginScreen;
     }
     private PanLogin panLogin;
-    private LoginScreen loginScreen;
+    private JMELoginScreen loginScreen;
     private boolean isStarted;
     
     @Override
@@ -46,7 +46,7 @@ public class LoginScreenApplication extends DisplayApplication{
         return panLogin;
     }
 
-    public LoginScreen getLoginScreen(){
+    public JMELoginScreen getLoginScreen(){
         return loginScreen;
     }
 

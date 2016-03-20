@@ -29,7 +29,7 @@ import amara.libraries.applications.display.models.ModelObject;
  *
  * @author Carl
  */
-public class LoginScreen_Forest extends LoginScreen{
+public class LoginScreen_Forest extends JMELoginScreen{
 
     public LoginScreen_Forest(){
         backgroundMusicPath = "Sounds/music/Woods of Eremae.ogg";

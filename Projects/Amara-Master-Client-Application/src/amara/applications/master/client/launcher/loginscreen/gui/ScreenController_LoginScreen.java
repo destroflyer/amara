@@ -5,7 +5,7 @@
 package amara.applications.master.client.launcher.loginscreen.gui;
 
 import amara.applications.master.client.launcher.loginscreen.LoginScreenApplication;
-import amara.applications.master.client.launcher.loginscreen.screens.LoginScreen;
+import amara.applications.master.client.launcher.loginscreen.screens.JMELoginScreen;
 import amara.applications.master.client.launcher.panels.PanLogin;
 import amara.libraries.applications.display.gui.GameScreenController;
 import de.lessvoid.nifty.input.NiftyInputEvent;
@@ -37,7 +37,7 @@ public class ScreenController_LoginScreen extends GameScreenController{
     @Override
     public void onStartup(){
         super.onStartup();
-        LoginScreen loginScreen = ((LoginScreenApplication) mainApplication).getLoginScreen();
+        JMELoginScreen loginScreen = ((LoginScreenApplication) mainApplication).getLoginScreen();
         getImageRenderer("box_background").setImage(createImage(loginScreen.getLoginBoxImagePath()));
         getTextRenderer("label_login").setColor(loginScreen.getLoginBoxTextColor());
         getTextRenderer("label_password").setColor(loginScreen.getLoginBoxTextColor());

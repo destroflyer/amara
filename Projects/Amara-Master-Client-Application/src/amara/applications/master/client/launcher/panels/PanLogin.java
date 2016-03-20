@@ -27,11 +27,11 @@ public abstract class PanLogin extends JPanel{
         MainFrame.getInstance().login(new AuthentificationInformation(login, password));
     }
     
-    public abstract void showIsLoading(boolean isLoading);
-    
     public void start(){
         
     }
+    
+    public abstract void showIsLoading(boolean isLoading);
     
     public void close(){
         if(backgroundMusicClip != null){

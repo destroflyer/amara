@@ -16,9 +16,10 @@ import javax.swing.JFrame;
 import amara.applications.master.client.MasterserverClientApplication;
 import amara.applications.master.client.launcher.api.objects.Masterserver;
 import amara.applications.master.client.launcher.api.requests.GetMasterserversRequest;
-import amara.applications.master.client.launcher.loginscreen.screens.LoginScreen_Forest;
+import amara.applications.master.client.launcher.loginscreen.screens.*;
 import amara.applications.master.client.launcher.network.backends.*;
 import amara.applications.master.client.launcher.panels.*;
+import amara.applications.master.client.launcher.panels.loginscreens.*;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.UpdateFile;
 import amara.core.*;
@@ -59,6 +60,10 @@ public class ClientLauncher extends JFrame{
             if(keyEvent.getID() == KeyEvent.KEY_RELEASED){
                 switch(keyEvent.getKeyCode()){
                     case KeyEvent.VK_NUMPAD1:
+                        forcedLoginPanel = new PanLogin_Swing(new LoginScreen_Classic());
+                        break;
+                    
+                    case KeyEvent.VK_NUMPAD2:
                         forcedLoginPanel = new PanLogin_JME(new LoginScreen_Forest());
                         break;
                 }
@@ -335,7 +340,7 @@ private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }
     else{
         Toolkit.getDefaultToolkit().removeAWTEventListener(keyListener);
-        PanLogin panLogin = ((forcedLoginPanel != null)?forcedLoginPanel:new PanLogin_Swing());
+        PanLogin panLogin = ((forcedLoginPanel != null)?forcedLoginPanel:new PanLogin_Swing(new LoginScreen_Shina()));
         MainFrame mainFrame = new MainFrame(panLogin);
         setVisible(false);
         mainFrame.setVisible(true);
