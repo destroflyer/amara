@@ -11,6 +11,7 @@ import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.client.network.backends.ReceivePongsBackend;
 import amara.applications.ingame.network.messages.Message_Ping;
 import amara.libraries.applications.display.appstates.*;
+import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.network.NetworkClient;
 
 /**
@@ -30,7 +31,7 @@ public class PingAppState extends BaseDisplayAppState<IngameClientApplication>{
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
-        NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
+        NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
         networkClient.addMessageBackend(new ReceivePongsBackend(this));
         sendPing();
     }
@@ -45,7 +46,7 @@ public class PingAppState extends BaseDisplayAppState<IngameClientApplication>{
     }
     
     private void sendPing(){
-        NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
+        NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
         networkClient.sendMessage(new Message_Ping(System.currentTimeMillis()));
         timeSinceLastUpdate = 0;
     }

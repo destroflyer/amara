@@ -11,13 +11,13 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class LobbyPlayerData{
+public class GameSelectionPlayerData{
 
-    public LobbyPlayerData(){
+    public GameSelectionPlayerData(){
         
     }
 
-    public LobbyPlayerData(int characterID, int[][] mapSpellsIndices){
+    public GameSelectionPlayerData(int characterID, int[][] mapSpellsIndices){
         this.characterID = characterID;
         this.mapSpellsIndices = mapSpellsIndices;
     }

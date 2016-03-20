@@ -26,16 +26,7 @@
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="lblSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="lblName" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="cbxMapSpell1" min="-2" pref="52" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbxMapSpell2" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="cbxCharacter" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="lblName" min="-2" pref="225" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="btnKick" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -48,14 +39,9 @@
                   <Component id="lblIcon" min="-2" max="-2" attributes="0"/>
                   <Component id="lblSeparator1" min="-2" max="-2" attributes="0"/>
                   <Component id="lblName" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbxCharacter" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btnKick" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cbxMapSpell1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="cbxMapSpell2" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -89,16 +75,6 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbxCharacter">
-      <Properties>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[110, 30]"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbxCharacterItemStateChanged"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnKick">
       <Properties>
         <Property name="text" type="java.lang.String" value="X"/>
@@ -108,26 +84,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKickActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbxMapSpell1">
-      <Properties>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[110, 30]"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbxMapSpell1ItemStateChanged"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbxMapSpell2">
-      <Properties>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[110, 30]"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbxMapSpell2ItemStateChanged"/>
       </Events>
     </Component>
   </SubComponents>

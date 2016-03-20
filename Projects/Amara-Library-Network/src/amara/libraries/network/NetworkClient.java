@@ -12,6 +12,7 @@ import com.jme3.network.Message;
 import com.jme3.network.MessageConnection;
 import com.jme3.network.MessageListener;
 import com.jme3.network.Network;
+import com.jme3.network.base.DefaultClient;
 import amara.core.Util;
 import amara.libraries.network.debug.*;
 import amara.libraries.network.exceptions.*;
@@ -57,7 +58,9 @@ public class NetworkClient extends NetworkListener{
 
                 @Override
                 public void messageReceived(MessageConnection source, Message message){
-                    onMessageReceived(source, message);
+                    if(source instanceof DefaultClient){
+                        onMessageReceived(((DefaultClient) source).getId(), message);
+                    }
                 }
             });
             client.start();

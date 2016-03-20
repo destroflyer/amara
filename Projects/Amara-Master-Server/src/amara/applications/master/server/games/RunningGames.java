@@ -31,9 +31,11 @@ public class RunningGames{
     
     public Game getGame(int playerID){
         for(Game game : games){
-            for(GamePlayer player : game.getPlayers()){
-                if(player.getLobbyPlayer().getID() == playerID){
-                    return game;
+            for(GamePlayer[] team : game.getTeams()){
+                for(GamePlayer player : team){
+                    if(player.getGameSelectionPlayer().getID() == playerID){
+                        return game;
+                    }
                 }
             }
         }

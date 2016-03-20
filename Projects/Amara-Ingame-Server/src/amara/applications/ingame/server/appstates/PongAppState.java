@@ -6,8 +6,8 @@ package amara.applications.ingame.server.appstates;
 
 import amara.applications.ingame.server.network.backends.ReceivePingsBackend;
 import amara.libraries.applications.headless.applications.*;
-import amara.libraries.applications.headless.appstates.NetworkServerAppState;
-import amara.libraries.network.NetworkServer;
+import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
+import amara.libraries.network.SubNetworkServer;
 
 /**
  *
@@ -22,7 +22,7 @@ public class PongAppState extends ServerBaseAppState{
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
-        NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
-        networkServer.addMessageBackend(new ReceivePingsBackend());
+        SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();
+        subNetworkServer.addMessageBackend(new ReceivePingsBackend());
     }
 }

@@ -35,33 +35,63 @@ public class PanLobby extends javax.swing.JPanel{
     private PanPlay panPlay;
     private Lobby lobby;
     private boolean isOwner;
+    private boolean isQueueing;
     private Map map;
+    
+    public void reset(){
+        setIsQueueing(false);
+    }
     
     public void update(Lobby lobby){
         this.lobby = lobby;
         isOwner = (MasterserverClientUtil.getPlayerID() == lobby.getOwnerID());
-        btnInvite.setEnabled(isOwner);
-        btnStart.setEnabled(isOwner);
-        cbxMapName.setEnabled(isOwner);
         String mapName = lobby.getLobbyData().getMapName();
         map = MapFileHandler.load(mapName, false);
         cbxMapName.setSelectedItem(mapName);
         lblMapIcon.setIcon(FileAssets.getImageIcon("Maps/" + mapName + "/icon.png", 120, 120));
+        spnTeamFormatSize1.setValue(lobby.getLobbyData().getTeamFormat().getTeamSize(0));
+        spnTeamFormatSize2.setValue(lobby.getLobbyData().getTeamFormat().getTeamSize(1));
         updatePlayersList(lobby.getPlayers());
+        updateControls();
     }
     
-    private void updatePlayersList(ArrayList<LobbyPlayer> players){
+    private void updatePlayersList(ArrayList<Integer> players){
         panPlayers.removeAll();
         int y = 0;
+        int panelHeight = 30;
         for(int i=0;i<players.size();i++){
             PanLobby_Player panPlay_Player = new PanLobby_Player(this, players.get(i));
             panPlay_Player.setLocation(0, y);
-            int panelHeight = (panPlay_Player.getSelectableMapSpellsIndices().isEmpty()?30:92);
             panPlay_Player.setSize(300, panelHeight);
             panPlayers.add(panPlay_Player);
             y += panelHeight;
         }
         panPlayers.updateUI();
+    }
+    
+    public void setIsQueueing(boolean isQueueing){
+        this.isQueueing = isQueueing;
+        updateControls();
+    }
+    
+    private void updateControls(){
+        boolean canChangeLobby = (isOwner && (!isQueueing));
+        cbxMapName.setEnabled(canChangeLobby);
+        spnTeamFormatSize1.setEnabled(canChangeLobby);
+        spnTeamFormatSize2.setEnabled(canChangeLobby);
+        btnInvite.setEnabled(canChangeLobby);
+        btnLeave.setEnabled(!isQueueing);
+        btnPlay.setEnabled(isOwner || isQueueing);
+        btnPlay.setText(isQueueing?"Stop":"Play");
+        lblIsQueueing.setVisible(isQueueing);
+        pbrIsQueueing.setVisible(isQueueing);
+    }
+    
+    public void sendSetLobbyDataMessage(){
+        String mapName = cbxMapName.getSelectedItem().toString();
+        int teamSize1 = Integer.parseInt(spnTeamFormatSize1.getValue().toString());
+        int teamSize2 = Integer.parseInt(spnTeamFormatSize2.getValue().toString());
+        sendMessage(new Message_SetLobbyData(new LobbyData(mapName, new TeamFormat(teamSize1, teamSize2))));
     }
     
     public void sendMessage(Message message){
@@ -71,10 +101,6 @@ public class PanLobby extends javax.swing.JPanel{
 
     public boolean isOwner(){
         return isOwner;
-    }
-
-    public Map getMap(){
-        return map;
     }
 
     /** This method is called from within the constructor to
@@ -97,7 +123,13 @@ public class PanLobby extends javax.swing.JPanel{
         btnInvite = new javax.swing.JButton();
         cbxMapName = new javax.swing.JComboBox();
         btnLeave = new javax.swing.JButton();
-        btnStart = new javax.swing.JButton();
+        btnPlay = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        spnTeamFormatSize1 = new javax.swing.JSpinner();
+        spnTeamFormatSize2 = new javax.swing.JSpinner();
+        jLabel5 = new javax.swing.JLabel();
+        lblIsQueueing = new javax.swing.JLabel();
+        pbrIsQueueing = new javax.swing.JProgressBar();
 
         jButton1.setText("jButton1");
 
@@ -126,7 +158,7 @@ public class PanLobby extends javax.swing.JPanel{
         );
         panPlayersLayout.setVerticalGroup(
             panPlayersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 242, Short.MAX_VALUE)
+            .addGap(0, 253, Short.MAX_VALUE)
         );
 
         btnInvite.setText("Invite");
@@ -150,12 +182,38 @@ public class PanLobby extends javax.swing.JPanel{
             }
         });
 
-        btnStart.setText("Start");
-        btnStart.addActionListener(new java.awt.event.ActionListener() {
+        btnPlay.setText("Play");
+        btnPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStartActionPerformed(evt);
+                btnPlayActionPerformed(evt);
             }
         });
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Team Format:");
+
+        spnTeamFormatSize1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spnTeamFormatSize1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnTeamFormatSize1StateChanged(evt);
+            }
+        });
+
+        spnTeamFormatSize2.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spnTeamFormatSize2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnTeamFormatSize2StateChanged(evt);
+            }
+        });
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("vs");
+
+        lblIsQueueing.setForeground(new java.awt.Color(255, 255, 255));
+        lblIsQueueing.setText("In Queue:");
+
+        pbrIsQueueing.setIndeterminate(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -164,11 +222,21 @@ public class PanLobby extends javax.swing.JPanel{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(cbxMapName, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblMapIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cbxMapName, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblMapIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(spnTeamFormatSize1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spnTeamFormatSize2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 2, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -176,9 +244,11 @@ public class PanLobby extends javax.swing.JPanel{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnInvite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLeave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(78, Short.MAX_VALUE))
+                    .addComponent(btnPlay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(lblIsQueueing, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(pbrIsQueueing, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +262,11 @@ public class PanLobby extends javax.swing.JPanel{
                         .addGap(0, 0, 0)
                         .addComponent(btnLeave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(lblIsQueueing)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pbrIsQueueing, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -204,7 +278,15 @@ public class PanLobby extends javax.swing.JPanel{
                                 .addComponent(lblMapIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbxMapName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 96, Short.MAX_VALUE))
+                                .addGap(15, 15, 15)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(spnTeamFormatSize1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(spnTeamFormatSize2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE))
                             .addComponent(panPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -240,31 +322,56 @@ public class PanLobby extends javax.swing.JPanel{
         panPlay.displayCreatePanel();
     }//GEN-LAST:event_btnLeaveActionPerformed
 
-    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-        sendMessage(new Message_StartGame());
-    }//GEN-LAST:event_btnStartActionPerformed
+    private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
+        if(isQueueing){
+            sendMessage(new Message_CancelLobbyQueue());
+        }
+        else{
+            sendMessage(new Message_StartLobbyQueue());
+        }
+    }//GEN-LAST:event_btnPlayActionPerformed
 
     private void cbxMapNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMapNameItemStateChanged
         if(evt.getStateChange() == ItemEvent.SELECTED){
             String mapName = cbxMapName.getSelectedItem().toString();
             if(!mapName.equals(lobby.getLobbyData().getMapName())){
-                sendMessage(new Message_SetLobbyData(new LobbyData(mapName)));
+                sendSetLobbyDataMessage();
             }
         }
     }//GEN-LAST:event_cbxMapNameItemStateChanged
+
+    private void spnTeamFormatSize1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnTeamFormatSize1StateChanged
+        int teamSize1 = Integer.parseInt(spnTeamFormatSize1.getValue().toString());
+        if(teamSize1 != lobby.getLobbyData().getTeamFormat().getTeamSize(0)){
+            sendSetLobbyDataMessage();
+        }
+    }//GEN-LAST:event_spnTeamFormatSize1StateChanged
+
+    private void spnTeamFormatSize2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnTeamFormatSize2StateChanged
+        int teamSize2 = Integer.parseInt(spnTeamFormatSize2.getValue().toString());
+        if(teamSize2 != lobby.getLobbyData().getTeamFormat().getTeamSize(1)){
+            sendSetLobbyDataMessage();
+        }
+    }//GEN-LAST:event_spnTeamFormatSize2StateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgrHostOrConnect;
     private javax.swing.JButton btnInvite;
     private javax.swing.JButton btnLeave;
-    private javax.swing.JButton btnStart;
+    private javax.swing.JButton btnPlay;
     private javax.swing.JComboBox cbxMapName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblIsQueueing;
     private javax.swing.JLabel lblMapIcon;
     private javax.swing.JPanel panPlayers;
+    private javax.swing.JProgressBar pbrIsQueueing;
+    private javax.swing.JSpinner spnTeamFormatSize1;
+    private javax.swing.JSpinner spnTeamFormatSize2;
     // End of variables declaration//GEN-END:variables
 }

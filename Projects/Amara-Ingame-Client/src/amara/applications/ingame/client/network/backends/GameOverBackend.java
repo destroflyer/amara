@@ -4,11 +4,11 @@
  */
 package amara.applications.ingame.client.network.backends;
 
+import amara.applications.ingame.client.IngameClientApplication;
 import com.jme3.network.Message;
 import amara.applications.ingame.client.appstates.*;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.network.messages.Message_GameOver;
-import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.IngameCameraAppState;
 import amara.libraries.network.*;
@@ -19,28 +19,27 @@ import amara.libraries.network.*;
  */
 public class GameOverBackend implements MessageBackend{
 
-    public GameOverBackend(DisplayApplication mainApplication){
-        this.mainApplication = mainApplication;
+    public GameOverBackend(IngameClientApplication ingameClientApplication){
+        this.ingameClientApplication = ingameClientApplication;
     }
-    private DisplayApplication mainApplication;
+    private IngameClientApplication ingameClientApplication;
 
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_GameOver){
-            Message_GameOver message = (Message_GameOver) receivedMessage;
-            mainApplication.enqueueTask(new Runnable(){
+            ingameClientApplication.enqueueTask(new Runnable(){
 
                 @Override
                 public void run(){
-                    mainApplication.getStateManager().getState(NetworkClientAppState.class).getNetworkClient().disconnect();
-                    mainApplication.getStateManager().detach(mainApplication.getStateManager().getState(PingAppState.class));
-                    mainApplication.getStateManager().detach(mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class));
-                    mainApplication.getStateManager().detach(mainApplication.getStateManager().getState(LocalEntitySystemAppState.class));
-                    mainApplication.getStateManager().detach(mainApplication.getStateManager().getState(PlayerAppState.class));
-                    mainApplication.getStateManager().getState(IngameCameraAppState.class).setEnabled(false);
-                    NiftyAppState niftyAppState = mainApplication.getStateManager().getState(NiftyAppState.class);
+                    ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(PingAppState.class));
+                    ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(SendPlayerCommandsAppState.class));
+                    ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(LocalEntitySystemAppState.class));
+                    ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(SynchronizeEntityWorldAppState.class));
+                    ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(PlayerAppState.class));
+                    ingameClientApplication.getStateManager().getState(IngameCameraAppState.class).setEnabled(false);
+                    NiftyAppState niftyAppState = ingameClientApplication.getStateManager().getState(NiftyAppState.class);
                     niftyAppState.goToScreen(ScreenController_HUD.class, "gameOver");
-                    mainApplication.getStateManager().getState(AudioAppState.class).createAudioNode("Sounds/sounds/victory.ogg").play();
+                    ingameClientApplication.getStateManager().getState(AudioAppState.class).createAudioNode("Sounds/sounds/victory.ogg").play();
                 }
             });
         }

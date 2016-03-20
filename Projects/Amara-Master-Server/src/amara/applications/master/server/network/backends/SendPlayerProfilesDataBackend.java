@@ -29,15 +29,15 @@ public class SendPlayerProfilesDataBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_GetPlayerProfileData){
             Message_GetPlayerProfileData message = (Message_GetPlayerProfileData) receivedMessage;
-            int id = message.getPlayerID();
+            Integer id = message.getPlayerID();
             String login = message.getLogin();
             if(id != 0){
                 login = databaseAppState.getQueryResult("SELECT login FROM users WHERE id = " + id + " LIMIT 1").nextString_Close();
             }
             else{
-                id = databaseAppState.getQueryResult("SELECT id FROM users WHERE login = '" + databaseAppState.escape(message.getLogin()) + "' LIMIT 1").nextInteger_Close();
+                id = databaseAppState.getQueryResult("SELECT id FROM users WHERE LOWER(login) = '" + databaseAppState.escape(message.getLogin().toLowerCase()) + "' LIMIT 1").nextInteger_Close();
             }
-            if(id != 0){
+            if(id != null){
                 PlayerProfileData playerProfileData = null;
                 long lastModificationDate = databaseAppState.getQueryResult("SELECT last_modification_date FROM users WHERE id = " + id + " LIMIT 1").nextLong_Close();
                 if(lastModificationDate > message.getCachedTimestamp()){
@@ -52,7 +52,7 @@ public class SendPlayerProfilesDataBackend implements MessageBackend{
                 messageResponse.addAnswerMessage(new Message_PlayerProfileData(id, login, playerProfileData));
             }
             else{
-                messageResponse.addAnswerMessage(new Message_PlayerProfileDataNotExistant(id, login));
+                messageResponse.addAnswerMessage(new Message_PlayerProfileDataNotExistant(0, login));
             }
         }
     }

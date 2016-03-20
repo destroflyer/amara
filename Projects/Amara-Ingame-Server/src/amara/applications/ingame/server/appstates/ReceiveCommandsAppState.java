@@ -8,8 +8,8 @@ import amara.applications.ingame.network.messages.objects.commands.PlayerCommand
 import amara.applications.ingame.server.network.backends.ReceiveCommandsBackend;
 import amara.core.Queue;
 import amara.libraries.applications.headless.applications.*;
-import amara.libraries.applications.headless.appstates.NetworkServerAppState;
-import amara.libraries.network.NetworkServer;
+import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
+import amara.libraries.network.SubNetworkServer;
 
 /**
  *
@@ -25,8 +25,8 @@ public class ReceiveCommandsAppState extends ServerBaseAppState{
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
-        NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
-        networkServer.addMessageBackend(new ReceiveCommandsBackend(this));
+        SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();
+        subNetworkServer.addMessageBackend(new ReceiveCommandsBackend(this));
     }
     
     public void onCommandReceived(final PlayerCommand playerCommand){

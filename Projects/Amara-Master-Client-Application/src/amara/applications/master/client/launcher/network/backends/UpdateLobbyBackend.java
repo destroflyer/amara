@@ -31,8 +31,8 @@ public class UpdateLobbyBackend implements MessageBackend{
 
                 @Override
                 public void run(){
-                    panPlay.displayLobbyPanel();
                     panPlay.getPanLobby().update(lobby);
+                    panPlay.displayLobbyPanel();
                 }
             });
         }

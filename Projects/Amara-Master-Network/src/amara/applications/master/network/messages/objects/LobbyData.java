@@ -17,12 +17,18 @@ public class LobbyData{
         
     }
 
-    public LobbyData(String mapName){
+    public LobbyData(String mapName, TeamFormat teamFormat){
         this.mapName = mapName;
+        this.teamFormat = teamFormat;
     }
     private String mapName;
+    private TeamFormat teamFormat;
 
     public String getMapName(){
         return mapName;
+    }
+
+    public TeamFormat getTeamFormat(){
+        return teamFormat;
     }
 }

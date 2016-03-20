@@ -4,7 +4,7 @@
  */
 package amara.applications.ingame.shared.games;
 
-import amara.applications.master.network.messages.objects.LobbyPlayer;
+import amara.applications.master.network.messages.objects.GameSelectionPlayer;
 
 /**
  *
@@ -12,18 +12,18 @@ import amara.applications.master.network.messages.objects.LobbyPlayer;
  */
 public class GamePlayer{
 
-    public GamePlayer(LobbyPlayer lobbyPlayer, int authentificationKey){
-        this.lobbyPlayer = lobbyPlayer;
+    public GamePlayer(GameSelectionPlayer gameSelectionPlayer, int authentificationKey){
+        this.gameSelectionPlayer = gameSelectionPlayer;
         this.authentificationKey = authentificationKey;
     }
-    private LobbyPlayer lobbyPlayer;
+    private GameSelectionPlayer gameSelectionPlayer;
     private int authentificationKey;
     private int clientID = -1;
-    private int entityID;
+    private int entity;
     private boolean isInitialized;
 
-    public LobbyPlayer getLobbyPlayer(){
-        return lobbyPlayer;
+    public GameSelectionPlayer getGameSelectionPlayer(){
+        return gameSelectionPlayer;
     }
 
     public int getAuthentificationKey(){
@@ -38,12 +38,12 @@ public class GamePlayer{
         return clientID;
     }
 
-    public void setEntityID(int entityID){
-        this.entityID = entityID;
+    public void setEntity(int entity){
+        this.entity = entity;
     }
 
-    public int getEntityID(){
-        return entityID;
+    public int getEntity(){
+        return entity;
     }
 
     public void setInitialized(boolean isInitialized){

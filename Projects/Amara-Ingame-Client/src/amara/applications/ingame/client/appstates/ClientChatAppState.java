@@ -19,6 +19,7 @@ import amara.applications.master.network.messages.objects.PlayerProfileData;
 import amara.core.input.Event;
 import amara.core.input.events.KeyPressedEvent;
 import amara.libraries.applications.display.appstates.*;
+import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.network.*;
 
 /**
@@ -36,7 +37,7 @@ public class ClientChatAppState extends BaseDisplayAppState<IngameClientApplicat
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
-        NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
+        NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
         networkClient.addMessageBackend(new MessageBackend(){
 
             @Override
@@ -118,7 +119,7 @@ public class ClientChatAppState extends BaseDisplayAppState<IngameClientApplicat
     }
     
     public void sendMessage(String text){
-        NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
+        NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
         if(text.startsWith("/networklog down ")){
             try{
                 int interval = Integer.parseInt(text.substring(17));

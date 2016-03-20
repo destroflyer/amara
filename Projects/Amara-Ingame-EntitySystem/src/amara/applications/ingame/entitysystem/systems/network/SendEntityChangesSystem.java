@@ -22,11 +22,11 @@ import amara.libraries.network.*;
  */
 public class SendEntityChangesSystem implements EntitySystem{
 
-    public SendEntityChangesSystem(NetworkServer networkServer, ClientComponentBlacklist clientComponentBlacklist){
-        this.networkServer = networkServer;
+    public SendEntityChangesSystem(SubNetworkServer subNetworkServer, ClientComponentBlacklist clientComponentBlacklist){
+        this.subNetworkServer = subNetworkServer;
         this.clientComponentBlacklist = clientComponentBlacklist;
     }
-    private NetworkServer networkServer;
+    private SubNetworkServer subNetworkServer;
     private ClientComponentBlacklist clientComponentBlacklist;
     public static ComponentEqualityDefinition COMPONENT_EQUALITY_DEFINTION = new DefaultComponentEqualityDefinition(){
 
@@ -79,10 +79,10 @@ public class SendEntityChangesSystem implements EntitySystem{
         }
         Message[] messages = getEntityChangesMessages(changes);
         for(Message message : messages){
-            networkServer.broadcastMessage(message);
+            subNetworkServer.broadcastMessage(message);
         }
         if(isInitialFrame){
-            networkServer.broadcastMessage(new Message_InitialEntityWorldSent());
+            subNetworkServer.broadcastMessage(new Message_InitialEntityWorldSent());
             isInitialFrame = false;
         }
     }

@@ -18,16 +18,10 @@ public class Message_GameCreated extends AbstractMessage{
         
     }
     
-    public Message_GameCreated(int port, int authentificationKey){
-        this.port = port;
+    public Message_GameCreated(int authentificationKey){
         this.authentificationKey = authentificationKey;
     }
-    private int port;
     private int authentificationKey;
-
-    public int getPort(){
-        return port;
-    }
 
     public int getAuthentificationKey(){
         return authentificationKey;

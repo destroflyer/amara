@@ -10,7 +10,6 @@ import javax.swing.JComponent;
 import amara.applications.master.client.MasterserverClientUtil;
 import amara.applications.master.client.launcher.buttons.*;
 import amara.applications.master.network.messages.Message_CreateLobby;
-import amara.applications.master.network.messages.objects.LobbyData;
 import amara.libraries.network.NetworkClient;
 
 /**
@@ -34,7 +33,7 @@ public class PanCreateLobby extends javax.swing.JPanel{
     
     private void createLobby(){
         NetworkClient networkClient = MasterserverClientUtil.getNetworkClient();
-        networkClient.sendMessage(new Message_CreateLobby(new LobbyData("testmap")));
+        networkClient.sendMessage(new Message_CreateLobby());
     }
 
     /**

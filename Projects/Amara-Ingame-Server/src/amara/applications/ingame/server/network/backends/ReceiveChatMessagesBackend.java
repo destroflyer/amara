@@ -22,7 +22,7 @@ import amara.applications.ingame.network.messages.*;
 import amara.applications.ingame.server.IngameServerApplication;
 import amara.applications.ingame.server.appstates.ServerEntitySystemAppState;
 import amara.applications.ingame.shared.games.*;
-import amara.libraries.applications.headless.appstates.NetworkServerAppState;
+import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
 import amara.libraries.entitysystem.*;
 import amara.libraries.network.*;
 
@@ -44,14 +44,14 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
             final Game game = ingameServerApplication.getGame();
             final GamePlayer gamePlayer = game.getPlayer(messageResponse.getClientID());
             if(gamePlayer != null){
-                messageResponse.addBroadcastMessage(new Message_ChatMessage(gamePlayer.getLobbyPlayer().getID(), message.getText()));
+                messageResponse.addBroadcastMessage(new Message_ChatMessage(gamePlayer.getGameSelectionPlayer().getID(), message.getText()));
                 ingameServerApplication.enqueueTask(new Runnable(){
 
                     @Override
                     public void run(){
                         MessageResponse chatCommandResponse = new MessageResponse(messageResponse.getClientID());
                         EntityWorld entityWorld = ingameServerApplication.getStateManager().getState(ServerEntitySystemAppState.class).getEntityWorld();
-                        int characterEntity = entityWorld.getComponent(gamePlayer.getEntityID(), PlayerCharacterComponent.class).getEntity();
+                        int characterEntity = entityWorld.getComponent(gamePlayer.getEntity(), PlayerCharacterComponent.class).getEntity();
                         if(message.getText().equals("such chat")){
                             chatCommandResponse.addAnswerMessage(new Message_ChatMessage("very responsive, wow"));
                         }
@@ -153,8 +153,8 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                                 }
                             }
                         }
-                        NetworkServer networkServer = ingameServerApplication.getStateManager().getState(NetworkServerAppState.class).getNetworkServer();
-                        networkServer.sendMessageResponse(chatCommandResponse);
+                        SubNetworkServer subNetworkServer = ingameServerApplication.getStateManager().getState(SubNetworkServerAppState.class).getSubNetworkServer();
+                        subNetworkServer.sendMessageResponse(chatCommandResponse);
                     }
                 });
             }

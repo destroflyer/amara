@@ -27,6 +27,7 @@ import amara.core.input.events.*;
 import amara.core.settings.Settings;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.MapAppState;
+import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.entitysystem.*;
 import amara.libraries.network.NetworkClient;
 
@@ -226,7 +227,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
     }
     
     public void sendCommand(Command command){
-        NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
+        NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
         networkClient.sendMessage(new Message_Command(command));
     }
 }

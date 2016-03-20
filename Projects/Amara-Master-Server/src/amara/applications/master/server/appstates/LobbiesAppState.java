@@ -4,13 +4,11 @@
  */
 package amara.applications.master.server.appstates;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import com.jme3.network.Message;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.*;
-import amara.applications.master.server.network.backends.*;
 import amara.applications.master.server.players.ConnectedPlayers;
-import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.NetworkServerAppState;
 import amara.libraries.network.NetworkServer;
 
@@ -23,42 +21,23 @@ public class LobbiesAppState extends ServerBaseAppState{
     public LobbiesAppState(){
         
     }
-    private ArrayList<Lobby> lobbies = new ArrayList<Lobby>();
+    private LinkedList<Lobby> lobbies = new LinkedList<Lobby>();
     
-    @Override
-    public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
-        super.initialize(stateManager, application);
-        NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
-        ConnectedPlayers connectedPlayers = getAppState(PlayersAppState.class).getConnectedPlayers();
-        networkServer.addMessageBackend(new CreateLobbiesBackend(this, connectedPlayers));
-        networkServer.addMessageBackend(new SetLobbiesDataBackend(this, connectedPlayers));
-        networkServer.addMessageBackend(new SetLobbiesPlayerDataBackend(this, connectedPlayers));
-        networkServer.addMessageBackend(new InviteLobbyPlayersBackend(this, connectedPlayers));
-        networkServer.addMessageBackend(new LeaveLobbiesBackend(this, connectedPlayers));
-        networkServer.addMessageBackend(new KickLobbyPlayersBackend(this, connectedPlayers));
-    }
-    
-    public void createLobby(int ownerID, LobbyData lobbyData){
+    public boolean createLobby(int ownerID){
         Lobby lobby = getLobby(ownerID);
         if(lobby == null){
-            lobby = new Lobby(ownerID, lobbyData);
+            lobby = new Lobby(ownerID);
             lobbies.add(lobby);
             sendUpdateToLobbyPlayers(lobby);
+            return true;
         }
+        return false;
     }
     
-    public void setLobbyData(int ownerID, LobbyData lobbyData){
-        Lobby lobby = getLobby(ownerID);
-        if((lobby != null) && (ownerID == lobby.getOwnerID())){
-            lobby.setLobbyData(lobbyData);
-            sendUpdateToLobbyPlayers(lobby);
-        }
-    }
-    
-    public void setPlayerData(int playerID, LobbyPlayerData lobbyPlayerData){
+    public void setLobbyData(int playerID, LobbyData lobbyData){
         Lobby lobby = getLobby(playerID);
-        if(lobby != null){
-            lobby.setPlayerData(playerID, lobbyPlayerData);
+        if((lobby != null) && (playerID == lobby.getOwnerID())){
+            lobby.setLobbyData(lobbyData);
             sendUpdateToLobbyPlayers(lobby);
         }
     }
@@ -76,7 +55,7 @@ public class LobbiesAppState extends ServerBaseAppState{
         Lobby lobby = getLobby(playerID);
         if(lobby != null){
             if(playerID == lobby.getOwnerID()){
-                lobbies.remove(lobby);
+                removeLobby(lobby);
                 sendMessageToLobbyPlayers(lobby, new Message_LobbyClosed());
             }
             else{
@@ -84,6 +63,10 @@ public class LobbiesAppState extends ServerBaseAppState{
                 sendUpdateToLobbyPlayers(lobby);
             }
         }
+    }
+    
+    public void removeLobby(Lobby lobby){
+        lobbies.remove(lobby);
     }
     
     public void kickLobbyPlayer(int ownerID, int playerID){
@@ -108,9 +91,9 @@ public class LobbiesAppState extends ServerBaseAppState{
         sendMessageToLobbyPlayers(lobby, new Message_LobbyUpdate(lobby));
     }
     
-    private void sendMessageToLobbyPlayers(Lobby lobby, Message message){
-        for(LobbyPlayer lobbyPlayer : lobby.getPlayers()){
-            sendMessageToPlayer(lobbyPlayer.getID(), message);
+    public void sendMessageToLobbyPlayers(Lobby lobby, Message message){
+        for(int playerID : lobby.getPlayers()){
+            sendMessageToPlayer(playerID, message);
         }
     }
     

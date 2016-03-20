@@ -20,27 +20,52 @@ public class PanPlay extends javax.swing.JPanel{
         this.panMainMenu = panMainMenu;
         panCreateLobby = new PanCreateLobby();
         panLobby = new PanLobby(this);
+        panGameSelection = new PanGameSelection(this);
+        panIngame = new PanIngame();
         displayCreatePanel();
         NetworkClient networkClient = MasterserverClientUtil.getNetworkClient();
         networkClient.addMessageBackend(new UpdateLobbyBackend(this));
         networkClient.addMessageBackend(new ClosedLobbyBackend(this));
+        networkClient.addMessageBackend(new LobbyQueueStatusBackend(panLobby));
+        networkClient.addMessageBackend(new GameSelectionAcceptBackend(this));
+        networkClient.addMessageBackend(new UpdateGameSelectionBackend(this));
+        networkClient.addMessageBackend(new GameCreatedBackend(this));
+        networkClient.addMessageBackend(new GameOverOrCrashedBackend(this));
     }
     private PanMainMenu panMainMenu;
     private PanCreateLobby panCreateLobby;
     private PanLobby panLobby;
+    private PanGameSelection panGameSelection;
+    private PanIngame panIngame;
     
     public void displayCreatePanel(){
         setDisplayedPanel(panCreateLobby);
     }
     
     public void displayLobbyPanel(){
-        setDisplayedPanel(panLobby);
+        if(setDisplayedPanel(panLobby)){
+            panLobby.reset();
+        }
     }
     
-    private void setDisplayedPanel(JPanel panel){
-        removeAll();
-        add(panel);
-        updateUI();
+    public void displayGameSelectionPanel(){
+        if(setDisplayedPanel(panGameSelection)){
+            panGameSelection.reset();
+        }
+    }
+    
+    public void displayIngamePanel(){
+        setDisplayedPanel(panIngame);
+    }
+    
+    private boolean setDisplayedPanel(JPanel panel){
+        if((getComponentCount() == 0) || (panel != getComponent(0))){
+            removeAll();
+            add(panel);
+            updateUI();
+            return true;
+        }
+        return false;
     }
 
     public PanCreateLobby getPanCreateLobby(){
@@ -49,6 +74,10 @@ public class PanPlay extends javax.swing.JPanel{
 
     public PanLobby getPanLobby(){
         return panLobby;
+    }
+
+    public PanGameSelection getPanGameSelection(){
+        return panGameSelection;
     }
 
     /**

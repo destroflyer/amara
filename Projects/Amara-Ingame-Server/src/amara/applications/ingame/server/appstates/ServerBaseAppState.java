@@ -5,6 +5,7 @@
 package amara.applications.ingame.server.appstates;
 
 import amara.applications.ingame.server.IngameServerApplication;
+import amara.libraries.applications.headless.applications.HeadlessAppState;
 import amara.libraries.applications.headless.appstates.BaseHeadlessAppState;
 
 /**
@@ -15,5 +16,9 @@ public class ServerBaseAppState extends BaseHeadlessAppState<IngameServerApplica
 
     public ServerBaseAppState(){
         
+    }
+    
+    protected <T extends HeadlessAppState> T getMasterAppState(Class<T> appStateClass){
+        return mainApplication.getMasterServer().getState(appStateClass);
     }
 }

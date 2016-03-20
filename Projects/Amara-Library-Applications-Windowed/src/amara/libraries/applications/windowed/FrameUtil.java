@@ -96,4 +96,8 @@ public class FrameUtil{
     public static String showInputDialog(Component parent, String message){
         return JOptionPane.showInputDialog(parent, message, GameInfo.NAME, JOptionPane.QUESTION_MESSAGE);
     }
+    
+    public static boolean showYesNoDialog(Component parent, String message){
+        return (JOptionPane.showOptionDialog(parent, message, GameInfo.NAME, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null) == JOptionPane.YES_OPTION);
+    }
 }

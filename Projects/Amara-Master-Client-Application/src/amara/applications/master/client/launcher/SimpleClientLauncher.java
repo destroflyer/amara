@@ -196,10 +196,12 @@ public class SimpleClientLauncher extends javax.swing.JFrame{
 
     private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
         NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.sendMessage(new Message_CreateLobby(new LobbyData("testmap")));
-        networkClient.sendMessage(new Message_SetLobbyPlayerData(new LobbyPlayerData(1, null)));
-        networkClient.sendMessage(new Message_InviteLobbyPlayer(2));
-        networkClient.sendMessage(new Message_StartGame());
+        networkClient.sendMessage(new Message_CreateLobby());
+        networkClient.sendMessage(new Message_SetLobbyData(new LobbyData("testmap", new TeamFormat(1))));
+        networkClient.sendMessage(new Message_StartLobbyQueue());
+        networkClient.sendMessage(new Message_AcceptGameSelection(true));
+        networkClient.sendMessage(new Message_SetGameSelectionPlayerData(new GameSelectionPlayerData(1, null)));
+        networkClient.sendMessage(new Message_LockInGameSelection());
     }//GEN-LAST:event_btnStartGameActionPerformed
 
     public static void main(String args[]){

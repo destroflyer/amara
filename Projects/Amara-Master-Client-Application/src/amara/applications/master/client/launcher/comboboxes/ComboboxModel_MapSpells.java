@@ -18,23 +18,30 @@ import amara.libraries.entitysystem.templates.EntityTemplate;
  */
 public class ComboboxModel_MapSpells extends SimpleComboboxModel<MapSpell, ImageIcon>{
 
-    public ComboboxModel_MapSpells(MapSpell[] mapSpells){
+    public ComboboxModel_MapSpells(MapSpell[] mapSpells, int iconSize){
         super(mapSpells);
+        this.iconSize = iconSize;
     }
+    private int iconSize;
     private static final EntityWorld mapSpellsEntityWorld = new EntityWorld();
     private static final HashMap<String, ImageIcon> loadedIcons = new HashMap<String, ImageIcon>();
     private static final int[] tmpSpellEntities = new int[1];
     
     @Override
     protected ImageIcon getItem(MapSpell mapSpell){
-        ImageIcon icon = loadedIcons.get(mapSpell.getEntityTemplate());
+        return getMapSpellIcon(mapSpell, iconSize);
+    }
+    
+    public static ImageIcon getMapSpellIcon(MapSpell mapSpell, int iconSize){
+        String key = (mapSpell.getEntityTemplate() + "_" + iconSize);
+        ImageIcon icon = loadedIcons.get(key);
         if(icon == null){
             int spellEntity = mapSpellsEntityWorld.createEntity();
             EntityTemplate.loadTemplate(mapSpellsEntityWorld, spellEntity, EntityTemplate.parseToOldTemplate(mapSpell.getEntityTemplate()));
             tmpSpellEntities[0] = spellEntity;
             String imageFilePath = DisplaySpellsImagesSystem.getSpellImageFilePath(mapSpellsEntityWorld, tmpSpellEntities, 0);
-            icon = FileAssets.getImageIcon(imageFilePath, 48, 48);
-            loadedIcons.put(mapSpell.getEntityTemplate(), icon);
+            icon = FileAssets.getImageIcon(imageFilePath, iconSize, iconSize);
+            loadedIcons.put(key, icon);
         }
         return icon;
     }

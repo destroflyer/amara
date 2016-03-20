@@ -165,6 +165,19 @@ public class Util{
         return false;
     }
     
+    public static boolean containsArrayElement(int[][] array, int element){
+        if(array != null){
+            for(int i=0;i<array.length;i++){
+                for(int r=0;r<array[i].length;r++){
+                    if(array[i][r] == element){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
     public static <T> boolean containsArrayElement(T[] array, T element){
         for(T arrayElement : array){
             if(arrayElement == element){
@@ -426,5 +439,13 @@ public class Util{
     
     public static int getNeededBitsCount(int value){
         return (32 - Integer.numberOfLeadingZeros(value));
+    }
+    
+    public static void sleep(long millis){
+        try{
+            Thread.sleep(millis);
+        }catch(InterruptedException ex){
+            ex.printStackTrace();
+        }
     }
 }

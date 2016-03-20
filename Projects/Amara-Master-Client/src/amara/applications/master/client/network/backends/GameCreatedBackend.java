@@ -10,6 +10,8 @@ import amara.applications.master.network.messages.Message_GameCreated;
 import amara.applications.master.network.messages.objects.PlayerProfileData;
 import amara.applications.ingame.client.IngameClientApplication;
 import amara.applications.ingame.client.interfaces.MasterserverClientInterface;
+import amara.applications.master.client.MasterserverClientApplication;
+import amara.libraries.applications.headless.applications.HeadlessAppState;
 import amara.libraries.network.*;
 
 /**
@@ -18,11 +20,15 @@ import amara.libraries.network.*;
  */
 public class GameCreatedBackend implements MessageBackend{
 
-    public GameCreatedBackend(HostInformation masterserverInformation){
-        this.masterserverInformation = masterserverInformation;
+    public GameCreatedBackend(){
+        
     }
-    private HostInformation masterserverInformation;
     private MasterserverClientInterface masterserverClientInterface = new MasterserverClientInterface(){
+
+        @Override
+        public <T extends HeadlessAppState> T getState(Class<T> stateClass){
+            return MasterserverClientApplication.getInstance().getStateManager().getState(stateClass);
+        }
 
         @Override
         public int getPlayerID(){
@@ -39,9 +45,8 @@ public class GameCreatedBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_GameCreated){
             Message_GameCreated message = (Message_GameCreated) receivedMessage;
-            HostInformation ingameServerInformation = new HostInformation(masterserverInformation.getHost(), message.getPort());
-            IngameClientApplication clientApplication = new IngameClientApplication(ingameServerInformation, message.getAuthentificationKey(), masterserverClientInterface);
-            clientApplication.start();
+            IngameClientApplication ingameClientApplication = new IngameClientApplication(masterserverClientInterface, message.getAuthentificationKey());
+            ingameClientApplication.start();
         }
     }
 }

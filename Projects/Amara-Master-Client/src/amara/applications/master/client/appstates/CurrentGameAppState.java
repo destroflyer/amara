@@ -19,6 +19,6 @@ public class CurrentGameAppState extends ClientBaseAppState{
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
         NetworkClient networkClient = getAppState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.addMessageBackend(new GameCreatedBackend(mainApplication.getHostInformation()));
+        networkClient.addMessageBackend(new GameCreatedBackend());
     }
 }

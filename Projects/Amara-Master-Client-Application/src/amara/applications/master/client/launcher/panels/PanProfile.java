@@ -58,6 +58,7 @@ public class PanProfile extends javax.swing.JPanel{
     private void loadPlayerProfile(final int playerID, final String login){
         new Thread(new Runnable(){
 
+            @Override
             public void run(){
                 lblSearchLoader.setVisible(true);
                 PlayerProfileData player;

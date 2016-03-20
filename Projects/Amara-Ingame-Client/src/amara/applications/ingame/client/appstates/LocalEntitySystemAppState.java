@@ -23,6 +23,7 @@ import amara.applications.ingame.entitysystem.synchronizing.ParallelNetworkSyste
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.*;
 import amara.libraries.applications.display.ingame.maps.MapHeightmap;
+import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.entitysystem.EntitySystem;
 import amara.libraries.network.NetworkClient;
 
@@ -74,7 +75,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(entitiesNode);
-        NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
+        NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
         networkClient.addMessageBackend(new GameStartedBackend(getAppState(LoadingScreenAppState.class)));
         networkClient.addMessageBackend(new GameCrashedBackend(mainApplication));
         networkClient.addMessageBackend(new GameOverBackend(mainApplication));

@@ -24,10 +24,6 @@ public class MasterserverClientApplication extends HeadlessApplication{
     private static MasterserverClientApplication instance;
     private HostInformation hostInformation;
 
-    public HostInformation getHostInformation(){
-        return hostInformation;
-    }
-
     public static MasterserverClientApplication getInstance(){
         return instance;
     }

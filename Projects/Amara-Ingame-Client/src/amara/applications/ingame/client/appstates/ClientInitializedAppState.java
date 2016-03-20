@@ -9,6 +9,8 @@ import com.jme3.app.state.AppStateManager;
 import amara.applications.ingame.client.IngameClientApplication;
 import amara.applications.ingame.network.messages.Message_ClientInitialized;
 import amara.libraries.applications.display.appstates.*;
+import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
+import amara.libraries.network.NetworkClient;
 
 /**
  *
@@ -23,6 +25,7 @@ public class ClientInitializedAppState extends BaseDisplayAppState<IngameClientA
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
-        getAppState(NetworkClientAppState.class).getNetworkClient().sendMessage(new Message_ClientInitialized());
+        NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
+        networkClient.sendMessage(new Message_ClientInitialized());
     }
 }

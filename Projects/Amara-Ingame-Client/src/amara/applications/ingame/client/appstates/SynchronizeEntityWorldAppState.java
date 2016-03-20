@@ -10,6 +10,7 @@ import com.jme3.app.state.AppStateManager;
 import amara.applications.ingame.client.IngameClientApplication;
 import amara.applications.ingame.client.network.backends.EntitySynchronizeBackend;
 import amara.libraries.applications.display.appstates.*;
+import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.entitysystem.synchronizing.*;
 import amara.libraries.network.NetworkClient;
@@ -29,7 +30,7 @@ public class SynchronizeEntityWorldAppState extends BaseDisplayAppState<IngameCl
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
-        NetworkClient networkClient = getAppState(NetworkClientAppState.class).getNetworkClient();
+        NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
         networkClient.addMessageBackend(new EntitySynchronizeBackend(this));
     }
 
