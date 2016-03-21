@@ -81,7 +81,6 @@ public class MainFrame extends javax.swing.JFrame{
                         panLogin.setLoginState(PanLogin.LoginState.RECEIVING_DATA);
                         networkClient.sendMessage(new Message_GetGameContents());
                         ItemsAppState itemsAppState = masterClient.getStateManager().getState(ItemsAppState.class);
-                        Util.sleep(1000);
                         while(true){
                             if(itemsAppState.getOwnedItems() != null){
                                 break;
