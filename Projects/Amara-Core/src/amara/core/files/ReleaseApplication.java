@@ -25,12 +25,12 @@ public class ReleaseApplication{
     };
     
     public static void main(String[] args){
-        synchronize("Server Application [Executable]", "/Amara-Master-Server-Application/dist/Amara-Master-Server-Application.jar", "/Amara-Master-Server-Application.jar");
+        synchronize("Server Application [Executable]", "/Amara-Master-Server-Application/dist/Amara-Master-Server-Application.jar", "/server.jar");
         synchronize("Server Application [Libraries]", "/Amara-Master-Server-Application/dist/lib", "/lib");
         synchronize("Server Application [Key to the City]", "/Amara-Master-Server-Application/workspace/key_to_the_city.ini", "/key_to_the_city.ini");
-        synchronize("Client Application [Download] [Executable]", "/Amara-Master-Client-Application/dist/Amara-Master-Client-Application.jar", "/Amara/Amara-Master-Client-Application.jar");
+        synchronize("Client Application [Download] [Executable]", "/Amara-Master-Client-Application/dist/Amara-Master-Client-Application.jar", "/Amara/Amara.jar");
         synchronize("Client Application [Download] [Libraries]", "/Amara-Master-Client-Application/dist/lib", "/Amara/lib");
-        synchronize("Client Application [Update] [Executable]", "/Amara-Master-Client-Application/dist/Amara-Master-Client-Application.jar", "/update/Amara-Master-Client-Application.jar");
+        synchronize("Client Application [Update] [Executable]", "/Amara-Master-Client-Application/dist/Amara-Master-Client-Application.jar", "/update/Amara.jar");
         synchronize("Client Application [Update] [Libraries]", "/Amara-Master-Client-Application/dist/lib", "/update/lib");
         synchronize("Client Application [Assets]", "/assets", "/update/assets");
         synchronize("Client Application [Test]", "/Amara-Master-Server-Application/workspace/test", "/update/test");

@@ -72,6 +72,7 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("Mahmoud Saleh", "Icon set \"Mini Icons\"", "Interface/client/audio.png", "http://iconarchive.com/artist/salehhh.html"),
         //Audio
         new Thanks("Michikawa", "Music pack \"Celestial Aeon Project\"", "Interface/client/audio.png", "http://mikseri.net/essence"),
+        new Thanks("Dynamedion", "Music pack \"Music Demo Reel\"", "Interface/client/audio.png", "http://dynamedion.com"),
         new Thanks("Blastwave FX", "Sound pack \"Free Sound Effects Download Pack #1\"", "Interface/client/audio.png", "http://blastwavefx.com"),
     };
     
