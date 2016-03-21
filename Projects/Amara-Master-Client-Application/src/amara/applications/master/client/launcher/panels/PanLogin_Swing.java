@@ -11,7 +11,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JComponent;
 import amara.applications.master.client.launcher.api.WebserverInfo;
 import amara.applications.master.client.launcher.buttons.*;
 import amara.applications.master.client.launcher.panels.loginscreens.SwingLoginScreen;
@@ -28,21 +27,23 @@ public class PanLogin_Swing extends PanLogin{
         initComponents();
         this.loginScreen = loginScreen;
         loginScreen.setSize(644, 372);
-        JComponent btnLogin = ButtonUtil.addImageBackgroundButton(panContainer_btnLogin, new DefaultButtonBuilder("default_176x30", "Login"));
+        lblTitle.setText(GameInfo.NAME);
+        panBox.setBackground(new Color(255, 255, 255, 30));
+        btnLogin = ButtonUtil.addImageBackgroundButton(panContainer_btnLogin, new DefaultButtonBuilder("default_176x30", ""));
         btnLogin.addMouseListener(new MouseAdapter(){
 
             @Override
             public void mouseClicked(MouseEvent evt){
                 super.mouseClicked(evt);
-                login();
+                if(loginState == LoginState.INPUT){
+                    login();
+                }
             }
         });
-        lblTitle.setText(GameInfo.NAME);
-        panBox.setBackground(new Color(255, 255, 255, 30));
         addTextFieldListeners();
-        showIsLoading(false);
     }
     private SwingLoginScreen loginScreen;
+    private ImageButtonPanel btnLogin;
     private Thread updateThread = new Thread(new Runnable(){
 
         @Override
@@ -86,26 +87,40 @@ public class PanLogin_Swing extends PanLogin{
         loginScreen.paint(graphics);
     }
     
-    private void login(){
-        String login = txtLogin.getText();
-        String password = new String(txtPassword.getPassword());
-        login(login, password);
-    }
-    
     @Override
     public void start(){
+        super.start();
         updateThread.start();
     }
-    
+
     @Override
-    public void showIsLoading(boolean isLoading){
-        pbrLoading.setVisible(isLoading);
+    public void setLoginState(LoginState loginState){
+        super.setLoginState(loginState);
+        switch(loginState){
+            case INPUT:
+                btnLogin.setText("Login");
+                break;
+            
+            case AUTHENTIFICATION:
+                btnLogin.setText("Authentification...");
+                break;
+            
+            case RECEIVING_DATA:
+                btnLogin.setText("Receiving data...");
+                break;
+        }
     }
 
     @Override
     public void close(){
         super.close();
         stopUpdateThread = true;
+    }
+    
+    private void login(){
+        String login = txtLogin.getText();
+        String password = new String(txtPassword.getPassword());
+        login(login, password);
     }
 
     /**
@@ -125,7 +140,6 @@ public class PanLogin_Swing extends PanLogin{
         txtPassword = new javax.swing.JPasswordField();
         panContainer_btnLogin = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
-        pbrLoading = new javax.swing.JProgressBar();
 
         panBox.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panBox.setForeground(new java.awt.Color(255, 255, 255));
@@ -194,8 +208,6 @@ public class PanLogin_Swing extends PanLogin{
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        pbrLoading.setIndeterminate(true);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,9 +217,7 @@ public class PanLogin_Swing extends PanLogin{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pbrLoading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(panBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -218,9 +228,7 @@ public class PanLogin_Swing extends PanLogin{
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(panBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pbrLoading, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(42, 42, 42))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -235,7 +243,6 @@ public class PanLogin_Swing extends PanLogin{
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel panBox;
     private javax.swing.JPanel panContainer_btnLogin;
-    private javax.swing.JProgressBar pbrLoading;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables

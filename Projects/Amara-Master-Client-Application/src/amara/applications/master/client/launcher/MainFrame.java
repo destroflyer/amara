@@ -18,6 +18,7 @@ import amara.applications.master.client.appstates.*;
 import amara.applications.master.client.launcher.panels.*;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.AuthentificationInformation;
+import amara.core.Util;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.applications.windowed.FrameUtil;
 import amara.libraries.network.NetworkClient;
@@ -36,7 +37,7 @@ public class MainFrame extends javax.swing.JFrame{
         panLogin.start();
         FrameUtil.initFrameSpecials(this);
         FrameUtil.centerFrame(this);
-        UIManager.getDefaults().put("TabbedPane.contentBorderInsets", new Insets(-1, 0, 0, 0));
+        UIManager.put("TabbedPane.contentBorderInsets", new Insets(-1, 0, 0, 0));
         setSize(650, 400);
     }
     private static MainFrame instance;
@@ -53,7 +54,7 @@ public class MainFrame extends javax.swing.JFrame{
 
             @Override
             public void run(){
-                panLogin.showIsLoading(true);
+                panLogin.setLoginState(PanLogin.LoginState.AUTHENTIFICATION);
                 MasterserverClientApplication masterClient = MasterserverClientApplication.getInstance();
                 NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
                 networkClient.sendMessage(new Message_Login(authentificationInformation));
@@ -70,23 +71,22 @@ public class MainFrame extends javax.swing.JFrame{
                     }catch(Exception ex){
                     }
                 }
-                panLogin.showIsLoading(false);
                 switch(loginResult){
                     case FAILED:
+                        panLogin.setLoginState(PanLogin.LoginState.INPUT);
                         FrameUtil.showMessageDialog(MainFrame.this, "Login failed. Possible reasons:\n\n- Wrong login\n- Wrong password", FrameUtil.MessageType.ERROR);
                         break;
                     
                     case SUCCESSFUL:
+                        panLogin.setLoginState(PanLogin.LoginState.RECEIVING_DATA);
                         networkClient.sendMessage(new Message_GetGameContents());
                         ItemsAppState itemsAppState = masterClient.getStateManager().getState(ItemsAppState.class);
+                        Util.sleep(1000);
                         while(true){
                             if(itemsAppState.getOwnedItems() != null){
                                 break;
                             }
-                            try{
-                                Thread.sleep(100);
-                            }catch(Exception ex){
-                            }
+                            Util.sleep(100);
                         }
                         panLogin.close();
                         setDisplayedPanel(new PanMainMenu());

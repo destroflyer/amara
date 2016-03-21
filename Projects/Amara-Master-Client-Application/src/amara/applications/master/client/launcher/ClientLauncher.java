@@ -186,10 +186,7 @@ public class ClientLauncher extends JFrame{
                 networkClient.addMessageBackend(writeUpdateFileBackend);
                 networkClient.sendMessage(new Message_GetUpdateFile(index));
                 while(!writeUpdateFileBackend.isFinished()){
-                    try{
-                        Thread.sleep(20);
-                    }catch(InterruptedException ex){
-                    }
+                    Util.sleep(20);
                     int currentFileSize = (int) file.length();
                     pbrCurrentFile.setValue(currentFileSize);
                 }

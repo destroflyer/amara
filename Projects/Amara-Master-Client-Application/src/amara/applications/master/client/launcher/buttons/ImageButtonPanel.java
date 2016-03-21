@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import amara.libraries.applications.windowed.FrameUtil;
 
@@ -17,8 +18,9 @@ import amara.libraries.applications.windowed.FrameUtil;
  */
 public class ImageButtonPanel extends JPanel{
 
-    public ImageButtonPanel(ImageButtonBuilder imageButtonBuilder){
+    public ImageButtonPanel(ImageButtonBuilder imageButtonBuilder, JLabel lblText){
         this.imageButtonBuilder = imageButtonBuilder;
+        this.lblText = lblText;
         setLayout(new GridBagLayout());
         setOpaque(false);
         addMouseListener(new MouseAdapter(){
@@ -49,9 +51,11 @@ public class ImageButtonPanel extends JPanel{
                 }
             }
         });
+        add(lblText);
     }
     private ImageButtonBuilder imageButtonBuilder;
     private ImageButtonBuilder.ButtonActionType buttonActionType = ImageButtonBuilder.ButtonActionType.NORMAL;
+    private JLabel lblText;
             
     @Override
     protected void paintComponent(Graphics graphics){
@@ -62,5 +66,9 @@ public class ImageButtonPanel extends JPanel{
     private void setButtonActionType(ImageButtonBuilder.ButtonActionType buttonActionType){
         this.buttonActionType = buttonActionType;
         FrameUtil.getWindow(this).repaint();
+    }
+
+    public void setText(String text){
+        lblText.setText(text);
     }
 }
