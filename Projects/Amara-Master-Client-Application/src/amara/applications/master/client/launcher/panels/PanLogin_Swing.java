@@ -27,6 +27,7 @@ public class PanLogin_Swing extends PanLogin{
         initComponents();
         this.loginScreen = loginScreen;
         loginScreen.setSize(644, 372);
+        loginScreen.initialize();
         lblTitle.setText(GameInfo.NAME);
         panBox.setBackground(new Color(255, 255, 255, 30));
         btnLogin = ButtonUtil.addImageBackgroundButton(panContainer_btnLogin, new DefaultButtonBuilder("default_176x30", ""));
