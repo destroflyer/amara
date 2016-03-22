@@ -26,7 +26,7 @@ public class BuffVisualisationSystem_Maria_Passive extends BuffVisualisationSyst
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int buffStatusEntity, int targetEntity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
         ModelObject modelObject = getModelObject(entitySceneMap.requestNode(targetEntity));
         SkeletonControl skeletonControl = modelObject.getModelSpatial().getControl(SkeletonControl.class);
         Node node = new Node();
@@ -49,7 +49,7 @@ public class BuffVisualisationSystem_Maria_Passive extends BuffVisualisationSyst
         particleEmitter.setLocalScale(50);
         node.attachChild(particleEmitter);
         skeletonControl.getAttachmentsNode("sword_joint").attachChild(node);
-        prepareVisualAttachment(buffStatusEntity, targetEntity, node);
+        prepareVisualAttachment(targetEntity, node);
         return null;
     }
     

@@ -27,7 +27,7 @@ public class BuffVisualisationSystem_Electrified extends BuffVisualisationSystem
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int buffStatusEntity, int targetEntity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
         ModelObject modelObject = getModelObject(entitySceneMap.requestNode(targetEntity));
         Spatial clonedModel = modelObject.getModelSpatial().deepClone();
         Material material = MaterialFactory.getAssetManager().loadMaterial("Shaders/electricity/materials/electricity2.j3m");

@@ -27,7 +27,7 @@ public class BuffVisualisationSystem_Frost extends BuffVisualisationSystem{
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int buffStatusEntity, int targetEntity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
         ParticleEmitter particleEmitter = new ParticleEmitter("", ParticleMesh.Type.Triangle, 100);
         Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Misc/Particle.j3md");
         material.setTexture("Texture", MaterialFactory.getAssetManager().loadTexture("Textures/effects/frost_additive.png"));

@@ -20,7 +20,7 @@ public class BuffVisualisationSystem_Ganfaul_Binded extends BuffVisualisationSys
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int buffStatusEntity, int targetEntity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
         Spatial particles = new ModelObject(null, "Models/ganfaul_binding_particles/skin.xml");
         particles.setLocalTranslation(0, 3.7f, 0);
         return particles;

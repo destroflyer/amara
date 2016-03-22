@@ -47,17 +47,13 @@ public class ShopUtil{
     
     public static boolean buy(EntityWorld entityWorld, int entity, String itemID){
         tmpItemEntities.clear();
-        int inventorySize = 0;
         int newItemIndex = -1;
         InventoryComponent inventoryComponent = entityWorld.getComponent(entity, InventoryComponent.class);
         if(inventoryComponent != null){
             for(int i=0;i<inventoryComponent.getItemEntities().length;i++){
                 int itemEntity = inventoryComponent.getItemEntities()[i];
                 tmpItemEntities.add(itemEntity);
-                if(itemEntity != -1){
-                    inventorySize++;
-                }
-                else if(newItemIndex == -1){
+                if((itemEntity == -1) && (newItemIndex == -1)){
                     newItemIndex = i;
                 }
             }
@@ -65,16 +61,22 @@ public class ShopUtil{
         int itemEntity = entityWorld.createEntity();
         float goldCost = resolveItemRecipe(entityWorld, itemID, tmpItemEntities, itemEntity);
         entityWorld.removeEntity(itemEntity);
-        if(tmpItemEntities.size() < 6){
+        if(newItemIndex != -1){
+            tmpItemEntities.set(newItemIndex, itemEntity);
+        }
+        else{
+            tmpItemEntities.add(itemEntity);
+        }
+        int inventorySize = 0;
+        for(int tmpItemEntity : tmpItemEntities){
+            if(tmpItemEntity != -1){
+                inventorySize++;
+            }
+        }
+        if(inventorySize <= 6){
             GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
-            if((goldCost == 0) || ((goldComponent != null) && (goldComponent.getGold() > goldCost))){
+            if((goldCost == 0) || ((goldComponent != null) && (goldComponent.getGold() >= goldCost))){
                 EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + itemID);
-                if(newItemIndex != -1){
-                    tmpItemEntities.set(newItemIndex, itemEntity);
-                }
-                else{
-                    tmpItemEntities.add(itemEntity);
-                }
                 if(goldComponent != null){
                     entityWorld.setComponent(entity, new GoldComponent(goldComponent.getGold() - goldCost));
                 }

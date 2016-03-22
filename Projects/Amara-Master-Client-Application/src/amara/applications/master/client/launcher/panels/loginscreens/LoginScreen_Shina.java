@@ -42,7 +42,7 @@ public class LoginScreen_Shina extends SwingLoginScreen{
         super.initialize();
         backgroundImage = FileAssets.getImage("Interface/client/login/shina/background.png", width, height);
         backgroundMusic = new OggClip(FileAssets.ROOT + "Sounds/music/login/shina/background.ogg");
-        backgroundMusic.setGain(0.8f);
+        backgroundMusic.setGain(0.85f);
     }
 
     @Override

@@ -40,11 +40,13 @@ public class GameInfoBackend implements MessageBackend{
                         public void run(){
                             System.out.println("Loading map \"" + message.getMapName() + "\".");
                             Map map = MapFileHandler.load(message.getMapName());
+                            //This has to be created before attaching the LocalEntitySystemAppState, since it initializes the PlayerTeamSystem in the constructor
+                            PlayerAppState playerAppState = new PlayerAppState(message.getPlayerEntity());
                             stateManager.attach(new MapAppState(map));
                             stateManager.attach(new MapObstaclesAppState());
                             stateManager.attach(new LocalEntitySystemAppState());
                             stateManager.attach(new SynchronizeEntityWorldAppState());
-                            stateManager.attach(new PlayerAppState(message.getPlayerEntity()));
+                            stateManager.attach(playerAppState);
                             stateManager.attach(new ClientInitializedAppState());
                             mainApplication.getStateManager().getState(LoadingScreenAppState.class).setTitle("Waiting for all players...");
                         }

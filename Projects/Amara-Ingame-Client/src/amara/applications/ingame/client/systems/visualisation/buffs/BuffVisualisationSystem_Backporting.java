@@ -20,7 +20,7 @@ public class BuffVisualisationSystem_Backporting extends BuffVisualisationSystem
     }
     
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int buffStatusEntity, int targetEntity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
         return new ModelObject(null, "Models/backport_particles/skin.xml");
     }
 }
