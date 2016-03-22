@@ -43,7 +43,7 @@ public class UpdateGameSelectionBackend implements MessageBackend{
     private static void repair(GameSelection gameSelection){
         for(int i=0;i<gameSelection.getTeams().length;i++){
             GameSelectionPlayer[] team = gameSelection.getTeams()[i];
-            if((team.length == 1) && (team[0] == null)){
+            if((team.length > 0) && (team[0] == null)){
                 gameSelection.getTeams()[i] = new GameSelectionPlayer[0];
             }
         }
