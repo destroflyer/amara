@@ -22,12 +22,14 @@ public class TeamModelSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.requestObserver(this, TeamComponent.class);
-        for(int entity : entityWorld.getEntitiesWithAll(TeamModelComponent.class)){
-            if(!checkTeamComponent(entityWorld, entity, observer.getNew().getComponent(entity, TeamComponent.class))){
-                if(!checkTeamComponent(entityWorld, entity, observer.getChanged().getComponent(entity, TeamComponent.class))){
-                    if(observer.getRemoved().hasComponent(entity, TeamComponent.class)){
-                        entityWorld.removeComponent(entity, ModelComponent.class);
+        if(playerTeamSystem.isInitialized()){
+            ComponentMapObserver observer = entityWorld.requestObserver(this, TeamComponent.class);
+            for(int entity : entityWorld.getEntitiesWithAll(TeamModelComponent.class)){
+                if(!checkTeamComponent(entityWorld, entity, observer.getNew().getComponent(entity, TeamComponent.class))){
+                    if(!checkTeamComponent(entityWorld, entity, observer.getChanged().getComponent(entity, TeamComponent.class))){
+                        if(observer.getRemoved().hasComponent(entity, TeamComponent.class)){
+                            entityWorld.removeComponent(entity, ModelComponent.class);
+                        }
                     }
                 }
             }

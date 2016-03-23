@@ -1,7 +1,7 @@
 <skin name="3dsa_fantasy_forest_waypoint_crystal">
     <model scale="3">
         <material>
-            <texture source="3dsa_fantasy_forest_waypoint_base">diffuse.png</texture>
+            <texture source="3dsa_fantasy_forest_waypoint_base">diffuse_green.png</texture>
         </material>
     </model>
 </skin>

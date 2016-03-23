@@ -99,7 +99,6 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
         for(MapLight mapLight : map.getLights().getMapLights()){
             Light light = null;
             if(mapLight instanceof MapLight_Ambient){
-                MapLight_Ambient mapLight_Ambient = (MapLight_Ambient) mapLight;
                 light = new AmbientLight();
             }
             else if(mapLight instanceof MapLight_Directional){
@@ -186,12 +185,12 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
                 }
             }
             else if(visual instanceof SnowVisual){
-                SnowVisual snowVisual = (SnowVisual) visual;
                 SnowEmitter snowEmitter = new SnowEmitter();
                 cameraNode.attachChild(snowEmitter.getParticleEmitter());
             }
         }
         modelsNode.batch();
+        modelsNode.setQueueBucket(RenderQueue.Bucket.Transparent);
         modelsNode.setShadowMode(RenderQueue.ShadowMode.Cast);
         mainApplication.enqueueTask(new Runnable(){
 

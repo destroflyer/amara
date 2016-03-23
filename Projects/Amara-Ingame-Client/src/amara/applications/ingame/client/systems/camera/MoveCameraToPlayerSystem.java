@@ -35,7 +35,7 @@ public class MoveCameraToPlayerSystem implements EntitySystem{
             }
             else if(observer.getChanged().hasEntity(playerCharacterComponent.getEntity())){
                 if(!ingameCameraAppState.isVisible(positionComponent.getPosition(), Settings.getInteger("camera_move_to_player_screen_extension"))){
-                    ingameCameraAppState.lookAt(positionComponent.getPosition());
+                    //ingameCameraAppState.lookAt(positionComponent.getPosition());
                 }
             }
         }

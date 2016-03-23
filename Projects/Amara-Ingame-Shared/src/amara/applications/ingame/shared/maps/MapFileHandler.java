@@ -126,6 +126,7 @@ public class MapFileHandler{
             elementPhysics.setAttribute("width", "" + map.getPhysicsInformation().getWidth());
             elementPhysics.setAttribute("height", "" + map.getPhysicsInformation().getHeight());
             elementPhysics.setAttribute("heightmapScale", "" + map.getPhysicsInformation().getHeightmapScale());
+            elementPhysics.setAttribute("groundHeight", "" + map.getPhysicsInformation().getGroundHeight());
             Element elementObstacles = new Element("obstacles");
             for(ConvexShape shape : map.getPhysicsInformation().getObstacles()){
                 Element elementShape = generateElement(shape);

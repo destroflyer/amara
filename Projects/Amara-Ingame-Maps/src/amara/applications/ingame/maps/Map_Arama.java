@@ -35,7 +35,7 @@ import amara.applications.ingame.shared.games.Game;
 import amara.applications.ingame.shared.maps.*;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
-import amara.libraries.physics.shapes.Rectangle;
+import amara.libraries.physics.shapes.*;
 
 /**
  *
@@ -114,9 +114,10 @@ public class Map_Arama extends Map{
             EntityWrapper nexus = entityWorld.getWrapped(entityWorld.createEntity());
             nexus.setComponent(new IsStructureComponent());
             nexus.setComponent(new NameComponent("Nexus"));
-            nexus.setComponent(new ModelComponent("Models/column/skin_nexus.xml"));
+            nexus.setComponent(new TeamModelComponent("Models/3dsa_fantasy_forest_waypoint_base/skin_nexus.xml"));
             nexus.setComponent(new PositionComponent(new Vector2f(nexiX[i], laneCenterY)));
             nexus.setComponent(new DirectionComponent(new Vector2f(0, -1)));
+            nexus.setComponent(new HitboxComponent(new Circle(3.5f)));
             nexus.setComponent(new IsAliveComponent());
             int baseAttributesEntity = entityWorld.createEntity();
             entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(1000));

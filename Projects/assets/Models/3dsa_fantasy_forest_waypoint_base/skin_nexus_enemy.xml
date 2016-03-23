@@ -1,0 +1,10 @@
+<skin name="3dsa_fantasy_forest_waypoint_base">
+    <model scale="4">
+        <material>
+            <texture>diffuse_red.png</texture>
+        </material>
+        <modifiers>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_3DSA_Nexus</modifier>
+        </modifiers>
+    </model>
+</skin>

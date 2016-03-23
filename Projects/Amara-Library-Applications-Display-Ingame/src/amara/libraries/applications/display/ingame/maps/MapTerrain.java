@@ -73,7 +73,18 @@ public class MapTerrain{
     
     private Texture2D loadAlphaMap(String imagePath){
         PaintableImage paintableImage = new PaintableImage(imagePath, true);
-        paintableImage.setBackground_Alpha(0);
+        for(int x=0;x<paintableImage.getWidth();x++){
+            for(int y=0;y<paintableImage.getHeight();y++){
+                if(paintableImage.getPixel_Alpha(x, y) == 0){
+                    paintableImage.setPixel_Red(x, y, 0);
+                    paintableImage.setPixel_Green(x, y, 0);
+                    paintableImage.setPixel_Blue(x, y, 0);
+                }
+                else{
+                    paintableImage.setPixel_Alpha(x, y, 0);
+                }
+            }
+        }
         Texture2D texture2D = new Texture2D();
         texture2D.setImage(paintableImage.getImage());
         return texture2D;

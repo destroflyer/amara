@@ -41,8 +41,8 @@ public class PlayerTeamSystem implements EntitySystem{
         }
         return false;
     }
-
-    public int getTeamEntity(){
-        return playerTeamEntity;
+    
+    public boolean isInitialized(){
+        return (playerTeamEntity != -1);
     }
 }
