@@ -80,7 +80,6 @@ public class IngameSettings extends SettingsCategory{
                     new Setting[]{
                         new Setting("resolution_width", "Resolution (Width)", new SliderType(1280, 800, 1920, 1, 10)),
                         new Setting("resolution_height", "Resolution (Height)", new SliderType(720, 600, 1080, 1, 10)),
-                        new Setting("frame_rate", "Frame Rate", new SliderType(60, 15, 120, 1, 1)),
                         new Setting("antialiasing", "Antialiasing", new SliderType(0, 0, 32, 1, 1)),
                         new Setting("fullscreen", "Fullscreen", new BooleanType(true)),
                         new Setting("vsync", "VSync", new BooleanType(true))
@@ -91,9 +90,10 @@ public class IngameSettings extends SettingsCategory{
                     new Setting[]{
                         new Setting("hardware_skinning", "Hardware Skinning", new BooleanType(true)),
                         new Setting("terrain_quality", "Terrain Quality", new SliderType(1, 0, 4, 1, 1)),
+                        new Setting("terrain_triplanar_mapping", "Terrain Tri-Planar Mapping", new BooleanType(true)),
                         new Setting("shadow_quality", "Shadow Quality", new SliderType(2, 0, 4, 1, 1)),
-                        new Setting("fog_of_war_update_interval", "F.o.W. Update Interval", new SliderType(0.05f, 0, 1, 0.01f, 0.05f)),
-                        new Setting("minimap_update_interval", "Minimap Update Interval", new SliderType(0.05f, 0, 1, 0.01f, 0.05f))
+                        new Setting("fog_of_war_update_interval", "F.o.W. Update Interval", new SliderType(0.04f, 0, 1, 0.005f, 0.01f)),
+                        new Setting("minimap_update_interval", "Minimap Update Interval", new SliderType(0.04f, 0, 1, 0.005f, 0.01f))
                     }
                 ),
             }),

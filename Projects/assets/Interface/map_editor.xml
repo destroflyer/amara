@@ -32,22 +32,33 @@
                         <interact onClick="setAction_PlaceVisual()"/>
                     </image>
                     <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_paint.png" width="60px" height="100%w">
+                        <interact onClick="setAction_PaintTerrainAlphamap()"/>
+                    </image>
+                    <panel width="10px"/>
                     <image filename="Interface/hud/editor/button_camera.png" width="60px" height="100%w">
                         <interact onClick="changeCameraAngle()"/>
                     </image>
                     <panel width="10px"/>
                     <image filename="Interface/hud/editor/button_coordinates.png" width="60px" height="100%w">
-                        <interact onClick="showHoveredCoordinates()"/>
+                        <interact onClick="toggleHoveredCoordinates()"/>
                     </image>
                     <panel width="10px"/>
                     <image filename="Interface/hud/editor/button_cheesecake.png" width="60px" height="100%w">
                         <interact onClick="showCheesecakeMessage()"/>
                     </image>
                     <panel/>
+                    <text id="hovered_coordinates" text="?" textHAlign="left" font="Interface/fonts/Verdana_12.fnt" visible="false"/>
+                    <panel width="10px"/>
                 </panel>
                 <panel height="10px"/>
-                <panel childLayout="absolute" height="20px">
-                    <text id="hoveredCoordinates" x="10px" y="0px" text="?" textHAlign="left" font="Interface/fonts/Verdana_12.fnt" visible="false"/>
+                <panel childLayout="horizontal">
+                    <panel width="10px"/>
+                    <panel childLayout="vertical">
+                        <text id="tool_information" text="?" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                        <panel height="5px"/>
+                        <image id="tool_information_image" width="40px" height="100%w" visible="false"/>
+                    </panel>
                 </panel>
                 <panel/>
             </panel>

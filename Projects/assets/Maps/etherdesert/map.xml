@@ -14,15 +14,12 @@
 			<texture scale="20.0">Textures/terrain/cartoon_forest/sand.jpg</texture>
 			<texture scale="16.0">Textures/terrain/cartoon_forest/stone_bright_1.jpg</texture>
 			<texture scale="24.0">Textures/terrain/cartoon_forest/pebbles_1.jpg</texture>
-			<texture scale="1.0">Textures/terrain/blank.png</texture>
 			<texture scale="18.0">Textures/terrain/cartoon_forest/cracked_cliff.jpg</texture>
 			<texture scale="16.0">Textures/terrain/cartoon_forest/grass_2.jpg</texture>
 			<texture scale="24.0">Textures/terrain/cartoon_forest/sandstone.jpg</texture>
-			<texture scale="1.0">Textures/terrain/blank.png</texture>
 			<texture scale="24.0">Textures/terrain/cartoon_forest/cliff.jpg</texture>
 			<texture scale="16.0">Textures/terrain/cartoon_forest/bush.jpg</texture>
 			<texture scale="16.0">Textures/terrain/cartoon_forest/dirt.jpg</texture>
-			<texture scale="1.0">Textures/terrain/blank.png</texture>
 		</textures>
 	</terrain>	<minimap x="0" y="0" width="200" height="200"/>
 	<physics width="200" height="200" heightmapScale="0.0225" groundHeight="2">

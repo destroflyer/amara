@@ -26,7 +26,7 @@ public class DisplayApplication extends SimpleApplication{
         settings.setTitle(GameInfo.NAME);
         settings.setWidth(1280);
         settings.setHeight(720);
-        settings.setFrameRate(60);
+        settings.setVSync(true);
         setPauseOnLostFocus(false);
     }
 

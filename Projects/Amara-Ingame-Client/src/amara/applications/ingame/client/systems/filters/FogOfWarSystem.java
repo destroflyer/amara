@@ -110,7 +110,7 @@ public class FogOfWarSystem implements EntitySystem{
     
     private void updateFogTexture_PlayerSight(EntityWorld entityWorld){
         resetFogTexture();
-        for(int entity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class, SightRangeComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAll(PositionComponent.class, SightRangeComponent.class)){
             if(playerTeamSystem.isAllied(entityWorld, entity)){
                 PositionComponent positionComponent = entityWorld.getComponent(entity, PositionComponent.class);
                 Vector2D position = new Vector2D(positionComponent.getPosition().getX(), positionComponent.getPosition().getY());

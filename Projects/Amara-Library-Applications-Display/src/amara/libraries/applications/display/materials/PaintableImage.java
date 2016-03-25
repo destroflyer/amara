@@ -59,8 +59,8 @@ public class PaintableImage{
     }
  
     public void setBackground_Alpha(int colorValue){
-        for(int i=0;i<(width * height * 4);i += 4){
-            data[i + 3] = (byte) colorValue;
+        for(int i=3;i<(width * height * 4);i += 4){
+            data[i] = (byte) colorValue;
         }
     }
     
@@ -78,7 +78,7 @@ public class PaintableImage{
         for(int x=0;x<width;x++){
             for(int y=0;y<height;y++){
                 rgb = image.getRGB(x, y);
-                setPixel(x, (flipY?(height - y):y), ((rgb >> 16) & 0xFF), ((rgb >> 8) & 0xFF), (rgb & 0xFF), ((rgb >> 24) & 0xFF));
+                setPixel(x, (flipY?(height - 1 - y):y), ((rgb >> 16) & 0xFF), ((rgb >> 8) & 0xFF), (rgb & 0xFF), ((rgb >> 24) & 0xFF));
             }
         }
     }
@@ -147,23 +147,23 @@ public class PaintableImage{
     }
  
     public void setPixel_Red(int x, int y, int colorValue){
-        setPixel_ColorValue(x, y, colorValue, 0);
+        setPixel_Value(x, y, 0, colorValue);
     }
  
     public void setPixel_Green(int x, int y, int colorValue){
-        setPixel_ColorValue(x, y, colorValue, 1);
+        setPixel_Value(x, y, 1, colorValue);
     }
  
     public void setPixel_Blue(int x, int y, int colorValue){
-        setPixel_ColorValue(x, y, colorValue, 2);
+        setPixel_Value(x, y, 2, colorValue);
     }
  
     public void setPixel_Alpha(int x, int y, int colorValue){
-        setPixel_ColorValue(x, y, colorValue, 3);
+        setPixel_Value(x, y, 3, colorValue);
     }
  
-    private void setPixel_ColorValue(int x, int y, int colorValue, int bufferIndexOffset){
-        int index = (bufferIndexOffset + ((x + (y * width)) * 4));
+    public void setPixel_Value(int x, int y, int channelIndex, int colorValue){
+        int index = (((x + (y * width)) * 4) + channelIndex);
         if((index >= 0) && (index < data.length)){
             data[index] = (byte) colorValue;
         }
@@ -174,24 +174,24 @@ public class PaintableImage{
     }
  
     public int getPixel_Red(int x, int y){
-        return getPixel_ColorValue(x, y, 0);
+        return getPixel_Value(x, y, 0);
     }
  
     public int getPixel_Green(int x, int y){
-        return getPixel_ColorValue(x, y, 1);
+        return getPixel_Value(x, y, 1);
     }
  
     public int getPixel_Blue(int x, int y){
-        return getPixel_ColorValue(x, y, 2);
+        return getPixel_Value(x, y, 2);
     }
  
     public int getPixel_Alpha(int x, int y){
-        return getPixel_ColorValue(x, y, 3);
+        return getPixel_Value(x, y, 3);
     }
  
-    private int getPixel_ColorValue(int x, int y, int bufferIndexOffset){
-        int i = (x + y * width) * 4;
-        return (data[i + bufferIndexOffset] & 0xFF);
+    public int getPixel_Value(int x, int y, int channelIndex){
+        int index = (((x + (y * width)) * 4) + channelIndex);
+        return (data[index] & 0xFF);
     }
 
     public int getWidth(){

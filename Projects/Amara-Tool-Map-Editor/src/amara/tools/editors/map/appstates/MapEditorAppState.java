@@ -20,7 +20,6 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.queue.RenderQueue;
-import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.applications.ingame.shared.maps.*;
@@ -29,7 +28,8 @@ import amara.core.Util;
 import amara.libraries.applications.display.JMonkeyUtil;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.*;
-import amara.libraries.applications.display.ingame.maps.MapHeightmap;
+import amara.libraries.applications.display.ingame.maps.*;
+import amara.libraries.applications.display.materials.PaintableImage;
 import amara.libraries.applications.display.meshes.ConnectedPointsMesh;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.physics.shapes.*;
@@ -48,52 +48,72 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         PLACE_HITBOX_CIRCLE,
         PLACE_HITBOX_CUSTOM,
         PLACE_VISUAL,
-        REMOVE
+        REMOVE,
+        PAINT_TERRAIN_ALPHAMAP,
     }
     private Action currentAction = Action.NONE;
     private Action actionBeforeRemove;
     private Vector2f currentHoveredLocation = new Vector2f();
     private LinkedList<ConvexShape> shapesToPlace = new LinkedList<ConvexShape>();
-    private Geometry shapeToPlacePreviewGeometry;
+    private Spatial toolCursor;
     private double circleRadius = 3;
     private double circleRadiusStep = 0.2f;
     private LinkedList<Vector2D> customShapePoints = new LinkedList<Vector2D>();
     private String[] visualsModelSkinPaths = new String[]{
-        "Models/tree/skin.xml",
-        "Models/tree_2/skin.xml",
-        "Models/japanese_bridge/skin.xml",
-        "Models/cartoon_forest_grass/skin.xml",
-        "Models/cartoon_forest_tree_1/skin.xml",
-        "Models/cartoon_forest_tree_2/skin.xml",
-        "Models/cartoon_forest_tree_3/skin.xml",
-        "Models/cartoon_forest_tree_4/skin.xml",
-        "Models/cartoon_forest_tree_5/skin.xml",
-        "Models/cartoon_forest_stone_1/skin.xml",
-        "Models/cartoon_forest_stone_2/skin.xml",
-        "Models/cartoon_forest_stone_3/skin.xml",
-        "Models/cartoon_forest_stone_4/skin.xml",
-        "Models/cartoon_forest_stone_5/skin.xml",
-        "Models/cartoon_forest_stone_6/skin.xml",
-        "Models/cartoon_city_house_1/skin.xml",
-        "Models/cartoon_city_house_2/skin.xml",
-        "Models/cartoon_city_house_3/skin.xml",
-        "Models/cartoon_city_mill/skin.xml",
-        "Models/cartoon_city_tower_1/skin.xml",
-        "Models/cartoon_city_tower_2/skin.xml",
-        "Models/cartoon_city_stock_1/skin.xml",
-        "Models/cartoon_city_stock_2/skin.xml",
-        "Models/cartoon_city_stock_3/skin.xml",
-        "Models/cartoon_city_chop/skin.xml",
-        "Models/thousand_sunny/skin.xml"
+        "Models/3dsa_fantasy_forest_animal_bones/skin.xml",
+        "Models/3dsa_fantasy_forest_cave_entrance/skin.xml",
+        "Models/3dsa_fantasy_forest_dead_tree/skin.xml",
+        "Models/3dsa_fantasy_forest_fence_1/skin.xml",
+        "Models/3dsa_fantasy_forest_fence_2/skin.xml",
+        "Models/3dsa_fantasy_forest_grass_1/skin.xml",
+        "Models/3dsa_fantasy_forest_grass_2/skin.xml",
+        "Models/3dsa_fantasy_forest_grass_3/skin.xml",
+        "Models/3dsa_fantasy_forest_grass_4/skin.xml",
+        "Models/3dsa_fantasy_forest_grass_5/skin.xml",
+        "Models/3dsa_fantasy_forest_ladder/skin.xml",
+        "Models/3dsa_fantasy_forest_mushroom_1/skin.xml",
+        "Models/3dsa_fantasy_forest_mushroom_2/skin.xml",
+        "Models/3dsa_fantasy_forest_mushroom_3/skin.xml",
+        "Models/3dsa_fantasy_forest_mushroom_4/skin.xml",
+        "Models/3dsa_fantasy_forest_pillar/skin.xml",
+        "Models/3dsa_fantasy_forest_pillar_curved/skin.xml",
+        "Models/3dsa_fantasy_forest_pillar_door/skin.xml",
+        "Models/3dsa_fantasy_forest_pillar_door_broken/skin.xml",
+        "Models/3dsa_fantasy_forest_pillar_script/skin.xml",
+        "Models/3dsa_fantasy_forest_push_cart/skin.xml",
+        "Models/3dsa_fantasy_forest_rock_1/skin.xml",
+        "Models/3dsa_fantasy_forest_rock_2/skin.xml",
+        "Models/3dsa_fantasy_forest_rock_3/skin.xml",
+        "Models/3dsa_fantasy_forest_rock_4/skin.xml",
+        "Models/3dsa_fantasy_forest_rock_5/skin.xml",
+        "Models/3dsa_fantasy_forest_rock_6/skin.xml",
+        "Models/3dsa_fantasy_forest_rock_7/skin.xml",
+        "Models/3dsa_fantasy_forest_rock_8/skin.xml",
+        "Models/3dsa_fantasy_forest_sign_board/skin_left.xml",
+        "Models/3dsa_fantasy_forest_sign_board/skin_right.xml",
+        "Models/3dsa_fantasy_forest_tree_1/skin.xml",
+        "Models/3dsa_fantasy_forest_tree_2/skin.xml",
+        "Models/3dsa_fantasy_forest_tree_log_1/skin.xml",
+        "Models/3dsa_fantasy_forest_tree_log_2/skin.xml",
+        "Models/3dsa_fantasy_forest_tree_log_3/skin.xml",
+        "Models/3dsa_fantasy_forest_waypoint_base/skin.xml",
+        "Models/3dsa_fantasy_forest_waypoint_crystal/skin.xml",
+        "Models/3dsa_fantasy_forest_well/skin.xml"
     };
     private int visualModelSkinPathIndex = 0;
-    private ModelObject visualToPlaceModelObject;
     private boolean changeVisualDirectionOrScale = true;
     private Vector3f visualDirection = new Vector3f(0, 0, -1);
     private float visualDirectionStep = 5;
     private float visualScale = 1;
     private float visualScaleStep = 0.025f;
     private boolean sideOrTopDownView;
+    private int terrainTextureIndex = 0;
+    private int terrainTextureSize = 10;
+    private int terrainTextureSizeStep = 1;
+    private int terrainTexturePaintStrength = 255;
+    private int terrainTexturePaintStrengthStep = 10;
+    private boolean changeTerrainTextureSizeOrStrength = true;
+    private boolean isPaintingTerrainAlphamap;
     
     @Override
     public void initialize(AppStateManager stateManager, Application application){
@@ -106,13 +126,18 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         mainApplication.getInputManager().addMapping("editor_2", new KeyTrigger(KeyInput.KEY_2));
         mainApplication.getInputManager().addMapping("editor_3", new KeyTrigger(KeyInput.KEY_3));
         mainApplication.getInputManager().addMapping("editor_4", new KeyTrigger(KeyInput.KEY_4));
+        mainApplication.getInputManager().addMapping("editor_5", new KeyTrigger(KeyInput.KEY_5));
+        mainApplication.getInputManager().addMapping("editor_6", new KeyTrigger(KeyInput.KEY_6));
+        mainApplication.getInputManager().addMapping("editor_7", new KeyTrigger(KeyInput.KEY_7));
         mainApplication.getInputManager().addMapping("editor_x", new KeyTrigger(KeyInput.KEY_X));
         mainApplication.getInputManager().addMapping("editor_q", new KeyTrigger(KeyInput.KEY_Q));
         mainApplication.getInputManager().addMapping("editor_w", new KeyTrigger(KeyInput.KEY_W));
         mainApplication.getInputManager().addMapping("editor_enter", new KeyTrigger(KeyInput.KEY_RETURN));
         mainApplication.getInputManager().addMapping("editor_left_shift", new KeyTrigger(KeyInput.KEY_LSHIFT));
         mainApplication.getInputManager().addListener(this, new String[]{
-            "editor_mouse_click_left","editor_mouse_click_right","editor_mouse_wheel_up","editor_mouse_wheel_down","editor_1","editor_2","editor_3","editor_4","editor_x","editor_q","editor_w","editor_enter","editor_left_shift"
+            "editor_mouse_click_left","editor_mouse_click_right","editor_mouse_wheel_up","editor_mouse_wheel_down",
+            "editor_1","editor_2","editor_3","editor_4","editor_5","editor_6","editor_7",
+            "editor_x","editor_q","editor_w","editor_enter","editor_left_shift"
         });
         getAppState(MapObstaclesAppState.class).setDisplayObstacles(true);
         setAction(Action.VIEW);
@@ -130,17 +155,14 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
         Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
-        if(groundLocation != null){
+        if((groundLocation != null) && (!groundLocation.equals(currentHoveredLocation))){
             currentHoveredLocation.set(groundLocation);
+            updateToolCursorLocation();
             switch(currentAction){
-                case PLACE_HITBOX_CIRCLE:
-                    shapesToPlace.get(0).setTransform(new Transform2D(1, 0, groundLocation.getX(), groundLocation.getY()));
-                    shapeToPlacePreviewGeometry.setLocalTranslation(groundLocation.getX(), 0, groundLocation.getY());
-                    break;
-
-                case PLACE_VISUAL:
-                    MapHeightmap mapHeightmap = getAppState(MapAppState.class).getMapHeightmap();
-                    visualToPlaceModelObject.setLocalTranslation(currentHoveredLocation.getX(), mapHeightmap.getHeight(currentHoveredLocation), currentHoveredLocation.getY());
+                case PAINT_TERRAIN_ALPHAMAP:
+                    if(isPaintingTerrainAlphamap){
+                        paintAlphamap();
+                    }
                     break;
             }
             ScreenController_MapEditor screenController_MapEditor = getAppState(NiftyAppState.class).getScreenController(ScreenController_MapEditor.class);
@@ -154,16 +176,26 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         Map map = mapAppState.getMap();
         ArrayList<ConvexShape> obstacles = map.getPhysicsInformation().getObstacles();
         if(actionName.equals("editor_1") && value){
-            setAction(Action.PLACE_HITBOX_CIRCLE);
+            setAction(Action.VIEW);
         }
         else if(actionName.equals("editor_2") && value){
-            setAction(Action.PLACE_HITBOX_CUSTOM);
+            setAction(Action.PLACE_HITBOX_CIRCLE);
         }
         else if(actionName.equals("editor_3") && value){
-            setAction(Action.PLACE_VISUAL);
+            setAction(Action.PLACE_HITBOX_CUSTOM);
         }
         else if(actionName.equals("editor_4") && value){
+            setAction(Action.PLACE_VISUAL);
+        }
+        else if(actionName.equals("editor_5") && value){
+            setAction(Action.PAINT_TERRAIN_ALPHAMAP);
+        }
+        else if(actionName.equals("editor_6") && value){
             changeCameraAngle();
+        }
+        else if(actionName.equals("editor_7") && value){
+            ScreenController_MapEditor screenController_MapEditor = getAppState(NiftyAppState.class).getScreenController(ScreenController_MapEditor.class);
+            screenController_MapEditor.toggleHoveredCoordinates();
         }
         else if(actionName.equals("editor_x")){
             if(value){
@@ -178,18 +210,15 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                 case PLACE_HITBOX_CIRCLE:
                     if(actionName.equals("editor_mouse_click_left") && value){
                         addCurrentShapes();
-                        generateNewShape();
+                        generateNewToolCursor();
                     }
                     else if(actionName.equals("editor_mouse_wheel_up")){
                         circleRadius += circleRadiusStep;
-                        generateNewShape();
+                        generateNewToolCursor();
                     }
                     else if(actionName.equals("editor_mouse_wheel_down")){
-                        circleRadius -= circleRadiusStep;
-                        if(circleRadius <= 0){
-                            circleRadius = circleRadiusStep;
-                        }
-                        generateNewShape();
+                        circleRadius = Math.max(circleRadiusStep, circleRadius - circleRadiusStep);
+                        generateNewToolCursor();
                     }
                     break;
                 
@@ -197,7 +226,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                     if(actionName.equals("editor_mouse_click_left") && value){
                         customShapePoints.add(new Vector2D(currentHoveredLocation.getX(), currentHoveredLocation.getY()));
                         if(customShapePoints.size() > 1){
-                            generateNewShape();
+                            generateNewToolCursor();
                         }
                     }
                     else if(actionName.equals("editor_mouse_click_right") && value){
@@ -219,7 +248,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                         ModelVisual modelVisual = new ModelVisual(visualsModelSkinPaths[visualModelSkinPathIndex], position, visualDirection, visualScale);
                         map.getVisuals().addVisual(modelVisual);
                         mapAppState.updateVisuals();
-                        generateNewModelObject();
+                        generateNewToolCursor();
                     }
                     else if(actionName.equals("editor_q") && value){
                         changeVisualIndex(false);
@@ -271,6 +300,44 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                         }
                     }
                     break;
+                
+                case PAINT_TERRAIN_ALPHAMAP:
+                    if(actionName.equals("editor_mouse_click_left")){
+                        isPaintingTerrainAlphamap = value;
+                        if(isPaintingTerrainAlphamap){
+                            paintAlphamap();
+                        }
+                    }
+                    else if(actionName.equals("editor_mouse_wheel_up")){
+                        if(changeTerrainTextureSizeOrStrength){
+                            terrainTextureSize += terrainTextureSizeStep;
+                            generateNewToolCursor();
+                        }
+                        else{
+                            terrainTexturePaintStrength = Math.min(terrainTexturePaintStrength + terrainTexturePaintStrengthStep, 255);
+                            updateToolInformation();
+                        }
+                    }
+                    else if(actionName.equals("editor_mouse_wheel_down")){
+                        if(changeTerrainTextureSizeOrStrength){
+                            terrainTextureSize = Math.max(terrainTextureSizeStep, terrainTextureSize - terrainTextureSizeStep);
+                            generateNewToolCursor();
+                        }
+                        else{
+                            terrainTexturePaintStrength = Math.max(0, terrainTexturePaintStrength - terrainTexturePaintStrengthStep);
+                            updateToolInformation();
+                        }
+                    }
+                    else if(actionName.equals("editor_q") && value){
+                        changeTerrainTextureIndex(false);
+                    }
+                    else if(actionName.equals("editor_w") && value){
+                        changeTerrainTextureIndex(true);
+                    }
+                    else if(actionName.equals("editor_left_shift")){
+                        changeTerrainTextureSizeOrStrength = (!value);
+                    }
+                    break;
             }
         }
     }
@@ -286,7 +353,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                     break;
                 
                 case PLACE_HITBOX_CIRCLE:
-                    removeShapeToPlaceGeometry();
+                    removeToolPreviewShape();
                     break;
                 
                 case PLACE_HITBOX_CUSTOM:
@@ -294,7 +361,11 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                     break;
                 
                 case PLACE_VISUAL:
-                    removeVisualToPlaceModelObject();
+                    removeToolPreviewShape();
+                    break;
+                
+                case PAINT_TERRAIN_ALPHAMAP:
+                    removeToolPreviewShape();
                     break;
             }
             currentAction = action;
@@ -304,37 +375,92 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                     break;
                 
                 case PLACE_HITBOX_CIRCLE:
-                    generateNewShape();
+                    generateNewToolCursor();
                     break;
                 
                 case PLACE_HITBOX_CUSTOM:
                     break;
                 
                 case PLACE_VISUAL:
-                    generateNewModelObject();
+                    generateNewToolCursor();
+                    break;
+                
+                case PAINT_TERRAIN_ALPHAMAP:
+                    generateNewToolCursor();
                     break;
             }
+            updateToolInformation();
         }
     }
     
-    private void generateNewShape(){
-        shapesToPlace.clear();
-        removeShapeToPlaceGeometry();
+    private void generateNewToolCursor(){
+        removeToolPreviewShape();
+        Node parentNode = null;
         switch(currentAction){
             case PLACE_HITBOX_CIRCLE:
+                shapesToPlace.clear();
                 Circle circle = new Circle(circleRadius);
                 shapesToPlace.add(circle);
-                shapeToPlacePreviewGeometry = MapObstaclesAppState.generateGeometry(circle);
+                toolCursor = MapObstaclesAppState.generateGeometry(circle);
+                parentNode = getAppState(MapObstaclesAppState.class).getObstaclesNode();
                 break;
             
             case PLACE_HITBOX_CUSTOM:
+                shapesToPlace.clear();
                 Vector2D[] basePoints = Util.toArray(customShapePoints, Vector2D.class);
                 ConnectedPointsMesh connectedPointsMesh = new ConnectedPointsMesh(basePoints);
-                shapeToPlacePreviewGeometry = MapObstaclesAppState.generateGeometry(connectedPointsMesh, ColorRGBA.Blue);
+                toolCursor = MapObstaclesAppState.generateGeometry(connectedPointsMesh, ColorRGBA.Blue);
+                parentNode = getAppState(MapObstaclesAppState.class).getObstaclesNode();
+                break;
+            
+            case PLACE_VISUAL:
+                toolCursor = new ModelObject(mainApplication, "/" + visualsModelSkinPaths[visualModelSkinPathIndex]);
+                toolCursor.setShadowMode(RenderQueue.ShadowMode.Cast);
+                parentNode = getAppState(MapAppState.class).getVisualsNode();
+                updateVisualToPlaceTransformation();
+                break;
+            
+            case PAINT_TERRAIN_ALPHAMAP:
+                MapAppState mapAppState = getAppState(MapAppState.class);
+                TerrainAlphamap alphamap = mapAppState.getMapTerrain().getAlphamaps()[terrainTextureIndex / 3];
+                float rectangleSizeX = ((((float) terrainTextureSize) / alphamap.getPaintableImage().getWidth()) * mapAppState.getMap().getPhysicsInformation().getWidth());
+                float rectangleSizeY = ((((float) terrainTextureSize) / alphamap.getPaintableImage().getHeight()) * mapAppState.getMap().getPhysicsInformation().getHeight());
+                toolCursor = MapObstaclesAppState.generateGeometry(new Rectangle(rectangleSizeX, rectangleSizeY), ColorRGBA.White);
+                parentNode = getAppState(MapAppState.class).getVisualsNode();
                 break;
         }
-        Node obstaclesNode = getAppState(MapObstaclesAppState.class).getObstaclesNode();
-        obstaclesNode.attachChild(shapeToPlacePreviewGeometry);
+        parentNode.attachChild(toolCursor);
+        updateToolCursorLocation();
+    }
+    
+    private void removeToolPreviewShape(){
+        if(toolCursor != null){
+            if(toolCursor.getParent() != null){
+                toolCursor.getParent().detachChild(toolCursor);
+            }
+            toolCursor = null;
+        }
+    }
+    
+    private void updateToolCursorLocation(){
+        if((toolCursor != null) && (currentAction != Action.PLACE_HITBOX_CUSTOM)){
+            toolCursor.setLocalTranslation(currentHoveredLocation.getX(), 0, currentHoveredLocation.getY());
+        }
+        switch(currentAction){
+            case PLACE_HITBOX_CIRCLE:
+                shapesToPlace.get(0).setTransform(new Transform2D(1, 0, currentHoveredLocation.getX(), currentHoveredLocation.getY()));
+                break;
+
+            case PLACE_VISUAL:
+                float y1 = getAppState(MapAppState.class).getMapHeightmap().getHeight(currentHoveredLocation);
+                toolCursor.setLocalTranslation(toolCursor.getLocalTranslation().getX(), y1, toolCursor.getLocalTranslation().getZ());
+                break;
+
+            case PAINT_TERRAIN_ALPHAMAP:
+                float y2 = getAppState(MapAppState.class).getMapTerrain().getTerrain().getHeight(currentHoveredLocation);
+                toolCursor.setLocalTranslation(toolCursor.getLocalTranslation().getX(), y2, toolCursor.getLocalTranslation().getZ());
+                break;
+        }
     }
     
     private boolean generateCustomShapes(){
@@ -362,15 +488,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
     
     private void cancelCurrentCustomShape(){
         customShapePoints.clear();
-        removeShapeToPlaceGeometry();
-    }
-    
-    private void removeShapeToPlaceGeometry(){
-        if(shapeToPlacePreviewGeometry != null){
-            Node obstaclesNode = getAppState(MapObstaclesAppState.class).getObstaclesNode();
-            obstaclesNode.detachChild(shapeToPlacePreviewGeometry);
-            shapeToPlacePreviewGeometry = null;
-        }
+        removeToolPreviewShape();
     }
     
     private void changeVisualIndex(boolean increaseOrDecrease){
@@ -381,23 +499,8 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         else if(visualModelSkinPathIndex >= visualsModelSkinPaths.length){
             visualModelSkinPathIndex = 0;
         }
-        generateNewModelObject();
-    }
-    
-    private void generateNewModelObject(){
-        removeVisualToPlaceModelObject();
-        visualToPlaceModelObject = new ModelObject(mainApplication, "/" + visualsModelSkinPaths[visualModelSkinPathIndex]);
-        visualToPlaceModelObject.setShadowMode(RenderQueue.ShadowMode.Cast);
-        Node visualsNode = getAppState(MapAppState.class).getVisualsNode();
-        visualsNode.attachChild(visualToPlaceModelObject);
-        updateVisualToPlaceModelObject();
-    }
-    
-    private void removeVisualToPlaceModelObject(){
-        if(visualToPlaceModelObject != null){
-            Node visualsNode = getAppState(MapAppState.class).getVisualsNode();
-            visualsNode.detachChild(visualToPlaceModelObject);
-        }
+        generateNewToolCursor();
+        updateToolInformation();
     }
     
     private void changeVisualDirectionOrScale(boolean mouseWheelUpOrDown){
@@ -408,12 +511,43 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         else{
             visualScale += (factor * visualScaleStep);
         }
-        updateVisualToPlaceModelObject();
+        updateVisualToPlaceTransformation();
+        updateToolInformation();
     }
     
-    private void updateVisualToPlaceModelObject(){
-        JMonkeyUtil.setLocalRotation(visualToPlaceModelObject, visualDirection);
-        visualToPlaceModelObject.setLocalScale(visualScale);
+    private void updateVisualToPlaceTransformation(){
+        JMonkeyUtil.setLocalRotation(toolCursor, visualDirection);
+        toolCursor.setLocalScale(visualScale);
+    }
+    
+    private void paintAlphamap(){
+        MapAppState mapAppState = getAppState(MapAppState.class);
+        MapTerrain mapTerrain = mapAppState.getMapTerrain();
+        int alphamapIndex = (terrainTextureIndex / 3);
+        int channelIndex = (terrainTextureIndex % 3);
+        PaintableImage paintableImage = mapTerrain.getAlphamaps()[alphamapIndex].getPaintableImage();
+        float startX_Portion = (currentHoveredLocation.getX() / mapAppState.getMap().getPhysicsInformation().getWidth());
+        float startY_Portion = (1 - (currentHoveredLocation.getY() / mapAppState.getMap().getPhysicsInformation().getHeight()));
+        int startX = Math.round((startX_Portion * paintableImage.getWidth()) - (terrainTextureSize / 2f));
+        int startY = Math.round((startY_Portion * paintableImage.getHeight()) - (terrainTextureSize / 2f));
+        for(int x=startX;x<(startX + terrainTextureSize);x++){
+            for(int y=startY;y<(startY + terrainTextureSize);y++){
+                paintableImage.setPixel_Value(x, y, channelIndex, terrainTexturePaintStrength);
+            }
+        }
+        mapTerrain.updateAlphamap(alphamapIndex);
+    }
+    
+    private void changeTerrainTextureIndex(boolean increaseOrDecrease){
+        terrainTextureIndex += (increaseOrDecrease?1:-1);
+        int texturesCount = getAppState(MapAppState.class).getMap().getTerrainSkin().getTextures().length;
+        if(terrainTextureIndex < 0){
+            terrainTextureIndex = (texturesCount - 1);
+        }
+        else if(terrainTextureIndex >= texturesCount){
+            terrainTextureIndex = 0;
+        }
+        updateToolInformation();
     }
     
     public void changeCameraAngle(){
@@ -424,6 +558,31 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         }
         else{
             camera.lookAtDirection(new Vector3f(0, -1, 0), Vector3f.UNIT_Z);
+        }
+    }
+    
+    private void updateToolInformation(){
+        ScreenController_MapEditor screenController_MapEditor = getAppState(NiftyAppState.class).getScreenController(ScreenController_MapEditor.class);
+        String text = "Tool: " + currentAction.name();
+        String imagePath = null;
+        switch(currentAction){
+            case PLACE_VISUAL:
+                text += " [" + visualsModelSkinPaths[visualModelSkinPathIndex] + "]";
+                break;
+            
+            case PAINT_TERRAIN_ALPHAMAP:
+                int alphamapIndex = (terrainTextureIndex / 3);
+                int channelIndex = (terrainTextureIndex % 3);
+                text += " [AlphaMap #" + (alphamapIndex + 1) +", Texture #" + (channelIndex + 1) + ", Paint Strength " + (int) (terrainTexturePaintStrength / 2.55f) + "%]";
+                imagePath = getAppState(MapAppState.class).getMap().getTerrainSkin().getTextures()[terrainTextureIndex].getFilePath();
+                break;
+        }
+        screenController_MapEditor.setToolInformation(text);
+        if(imagePath != null){
+            screenController_MapEditor.showToolInformationImage(imagePath);
+        }
+        else{
+            screenController_MapEditor.hideToolInformationImage();
         }
     }
 }

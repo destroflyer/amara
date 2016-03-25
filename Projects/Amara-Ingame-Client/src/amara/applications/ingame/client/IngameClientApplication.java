@@ -35,7 +35,6 @@ public class IngameClientApplication extends DisplayApplication{
         }
         settings.setTitle(GameInfo.getClientTitle());
         settings.setIcons(GameInfo.ICONS);
-        settings.setFrameRate(Settings.getInteger("frame_rate"));
         settings.setSamples(Settings.getInteger("antialiasing"));
         settings.setVSync(Settings.getBoolean("vsync"));
         setShowSettings(false);

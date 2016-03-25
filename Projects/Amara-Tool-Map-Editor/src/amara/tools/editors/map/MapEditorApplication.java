@@ -1,6 +1,5 @@
 package amara.tools.editors.map;
 
-import com.jme3.math.Vector3f;
 import amara.applications.ingame.shared.maps.MapFileHandler;
 import amara.core.Launcher_Core;
 import amara.libraries.applications.display.DisplayApplication;
@@ -33,7 +32,5 @@ public class MapEditorApplication extends DisplayApplication{
         stateManager.attach(new MapAppState(MapFileHandler.load("empty")));
         stateManager.attach(new MapObstaclesAppState());
         stateManager.attach(new MapEditorAppState());
-        //Debug Camera
-        cam.setLocation(new Vector3f(22, 34, -10));
     }
 }

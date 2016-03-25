@@ -82,8 +82,11 @@ public class MapObstaclesAppState extends BaseDisplayAppState<DisplayApplication
     }
     
     public static Geometry generateGeometry(Shape shape, boolean isActive){
+        return generateGeometry(shape, (isActive?ColorRGBA.Blue:ColorRGBA.LightGray));
+    }
+    
+    public static Geometry generateGeometry(Shape shape, ColorRGBA color){
         Mesh collisionMesh;
-        ColorRGBA meshColor = (isActive?ColorRGBA.Blue:ColorRGBA.LightGray);
         if(shape instanceof Circle){
             Circle circle = (Circle) shape;
             Vector3f center = new Vector3f((float) circle.getLocalPosition().getX(), 0, (float) circle.getLocalPosition().getY());
@@ -101,12 +104,12 @@ public class MapObstaclesAppState extends BaseDisplayAppState<DisplayApplication
         else if(shape instanceof ConvexShape){
             ConvexShape convexShape = (ConvexShape) shape;
             collisionMesh = new CircleMesh((float) convexShape.getBoundCircle().getGlobalRadius(), 64);
-            meshColor = ColorRGBA.Red;
+            color = ColorRGBA.Red;
         }
         else{
             throw new UnsupportedOperationException();
         }
-        return generateGeometry(collisionMesh, meshColor);
+        return generateGeometry(collisionMesh, color);
     }
     
     public static Geometry generateGeometry(Mesh mesh, ColorRGBA color){
