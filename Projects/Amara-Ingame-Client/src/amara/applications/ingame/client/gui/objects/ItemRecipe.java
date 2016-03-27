@@ -5,7 +5,7 @@
 package amara.applications.ingame.client.gui.objects;
 
 import java.util.LinkedList;
-import amara.libraries.entitysystem.EntityWorld;
+import amara.libraries.entitysystem.templates.StaticEntityWorld;
 
 /**
  *
@@ -13,16 +13,14 @@ import amara.libraries.entitysystem.EntityWorld;
  */
 public class ItemRecipe{
 
-    public ItemRecipe(EntityWorld entityWorld, int entity, float gold, ItemRecipe[] ingredientsRecipes, int depth){
-        this.entityWorld = entityWorld;
+    public ItemRecipe(int entity, float gold, ItemRecipe[] ingredientsRecipes, int depth){
         this.entity = entity;
         this.gold = gold;
         this.ingredientsRecipes = ingredientsRecipes;
         this.depth = depth;
-        description = ItemDescription.generate_Description(entityWorld, entity);
+        description = ItemDescription.generate_Description(StaticEntityWorld.getEntityWorld(), entity);
         updateTotalGold();
     }
-    private EntityWorld entityWorld;
     private int entity;
     private float gold;
     private ItemRecipe[] ingredientsRecipes;

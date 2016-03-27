@@ -15,7 +15,7 @@ import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.network.messages.objects.commands.*;
 import amara.libraries.applications.display.gui.GameScreenController;
 import amara.libraries.entitysystem.*;
-import amara.libraries.entitysystem.templates.EntityTemplate;
+import amara.libraries.entitysystem.templates.StaticEntityWorld;
 import de.lessvoid.nifty.NiftyEvent;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.builder.ImageBuilder;
@@ -40,7 +40,6 @@ public class ScreenController_Shop extends GameScreenController{
     private final static int ITEMS_ROW_HEIGHT = 70;
     private static final int INGREDIENT_WIDTH = 45;
     private static final int INGREDIENT_HEIGHT = 60;
-    private EntityWorld shopEntityWorld = new EntityWorld();
     private String[] shopItemTemplateNames = new String[]{
         "egos_sword","egos_shield","egos_ring",
         "red_gem",
@@ -87,11 +86,11 @@ public class ScreenController_Shop extends GameScreenController{
     private void initializeShopEntities(){
         shopItems = new EntityWrapper[shopItemTemplateNames.length];
         for(int i=0;i<shopItems.length;i++){
-            shopItems[i] = EntityTemplate.createFromTemplate(shopEntityWorld, "items/" + shopItemTemplateNames[i]);
+            shopItems[i] = StaticEntityWorld.loadTemplateWrapped("items/" + shopItemTemplateNames[i]);
         }
         shopItems_Special = new EntityWrapper[shopItemTemplateNames_Special.length];
         for(int i=0;i<shopItems_Special.length;i++){
-            shopItems_Special[i] = EntityTemplate.createFromTemplate(shopEntityWorld, "items/" + shopItemTemplateNames_Special[i]);
+            shopItems_Special[i] = StaticEntityWorld.loadTemplateWrapped("items/" + shopItemTemplateNames_Special[i]);
         }
         //Preload recipes
         for(int i=0;i<shopItems.length;i++){
@@ -105,8 +104,8 @@ public class ScreenController_Shop extends GameScreenController{
     private ItemRecipe getItemRecipe(String itemID){
         ItemRecipe itemRecipe = itemsRecipes.get(itemID);
         if(itemRecipe == null){
-            EntityWrapper item = EntityTemplate.createFromTemplate(shopEntityWorld, "items/" + itemID);
-            ItemRecipeComponent itemRecipeComponent = item.getComponent(ItemRecipeComponent.class);
+            int itemEntity = StaticEntityWorld.loadTemplate("items/" + itemID);
+            ItemRecipeComponent itemRecipeComponent = StaticEntityWorld.getEntityWorld().getComponent(itemEntity, ItemRecipeComponent.class);
             ItemRecipe[] ingredientsRecipes = new ItemRecipe[itemRecipeComponent.getItemIDs().length];
             int previousDepth = -1;
             for(int i=0;i<ingredientsRecipes.length;i++){
@@ -116,7 +115,7 @@ public class ScreenController_Shop extends GameScreenController{
                 }
                 ingredientsRecipes[i] = ingredientRecipe;
             }
-            itemRecipe = new ItemRecipe(shopEntityWorld, item.getId(), itemRecipeComponent.getGold(), ingredientsRecipes, (previousDepth + 1));
+            itemRecipe = new ItemRecipe(itemEntity, itemRecipeComponent.getGold(), ingredientsRecipes, (previousDepth + 1));
             itemsRecipes.put(itemID, itemRecipe);
         }
         return itemRecipe;
@@ -300,7 +299,7 @@ public class ScreenController_Shop extends GameScreenController{
     
     public void showShopItemInformation(String itemID){
         ItemRecipe itemRecipe = getItemRecipe(itemID);
-        NameComponent nameComponent = shopEntityWorld.getComponent(itemRecipe.getEntity(), NameComponent.class);
+        NameComponent nameComponent = StaticEntityWorld.getEntityWorld().getComponent(itemRecipe.getEntity(), NameComponent.class);
         getTextRenderer("shop_item_information_name").setText((nameComponent != null)?nameComponent.getName():"<Unnamed>");
         Element recipeContainer = getElementByID("shop_item_information_recipe");
         for(Element childElement : recipeContainer.getChildren()){
@@ -312,7 +311,7 @@ public class ScreenController_Shop extends GameScreenController{
     }
     
     private void createRecipeContainer(final Element container, final ItemRecipe itemRecipe, final int x, int width, final int depth, final int maximumDepth){
-        final String itemID = shopEntityWorld.getComponent(itemRecipe.getEntity(), ItemIDComponent.class).getID();
+        final String itemID = StaticEntityWorld.getEntityWorld().getComponent(itemRecipe.getEntity(), ItemIDComponent.class).getID();
         final int recipeContainerPaddingY = ((maximumDepth > 1)?20:50);
         new PanelBuilder(){{
             childLayoutVertical();

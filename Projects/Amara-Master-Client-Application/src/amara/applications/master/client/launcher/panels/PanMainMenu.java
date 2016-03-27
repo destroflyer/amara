@@ -28,6 +28,7 @@ public class PanMainMenu extends javax.swing.JPanel{
         addPanelTab("Profile", panProfile);
         //addPanelTab("Items", new PanItems());
         addPanelTab("Play", new PanPlay(this));
+        addPanelTab("Characters", new PanCharacters());
         addPanelTab("Settings", new PanSettings());
         addPanelTab("Thanks", new PanThanks());
         addPanelTab("Info", new PanInfo());

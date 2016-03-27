@@ -27,9 +27,8 @@ public class TestGame{
         MasterserverServerApplication masterServer = new MasterserverServerApplication(33900);
         masterServer.start();
         //Client
-        HostInformation hostInformation = new HostInformation("localhost", masterServer.getPort());
         try{
-            MasterserverClientApplication masterClient = new MasterserverClientApplication(hostInformation);
+            MasterserverClientApplication masterClient = new MasterserverClientApplication(new HostInformation("localhost", masterServer.getPort()));
             masterClient.start();
             NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
             networkClient.sendMessage(new Message_Login(new AuthentificationInformation("destroflyer", "test")));
