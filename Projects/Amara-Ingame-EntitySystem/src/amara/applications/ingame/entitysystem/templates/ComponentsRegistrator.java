@@ -1998,6 +1998,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.general.NameComponent(name);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.general.TemporaryComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.general.TemporaryComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.TemporaryComponent>("temporary"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.general.TemporaryComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.general.TemporaryComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.general.UniqueComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.general.UniqueComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.UniqueComponent>("unique"){
 

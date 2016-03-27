@@ -19,8 +19,9 @@ public class ApplyMoveSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, MoveComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            entityWorld.setComponent(targetID, new MovementComponent(entityWrapper.getComponent(MoveComponent.class).getMovementEntity()));
+            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
+            int movementEntity = entityWrapper.getComponent(MoveComponent.class).getMovementEntity();
+            entityWorld.setComponent(targetEntity, new MovementComponent(movementEntity));
         }
     }
 }

@@ -17,7 +17,7 @@ public class PlayMovementAnimationsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.requestObserver(this, MovementComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, MovementComponent.class, MovementAnimationComponent.class);
         for(int entity : observer.getNew().getEntitiesWithAll(MovementComponent.class)){
             updateAnimation(entityWorld, entity);
         }
@@ -26,7 +26,7 @@ public class PlayMovementAnimationsSystem implements EntitySystem{
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll(MovementComponent.class)){
             int movementEntity = observer.getRemoved().getComponent(entity, MovementComponent.class).getMovementEntity();
-            MovementAnimationComponent movementAnimationComponent = entityWorld.getComponent(movementEntity, MovementAnimationComponent.class);
+            MovementAnimationComponent movementAnimationComponent = observer.getRemoved().getComponent(movementEntity, MovementAnimationComponent.class);
             AnimationComponent currentAnimationComponent = entityWorld.getComponent(entity, AnimationComponent.class);
             if((movementAnimationComponent != null) && (currentAnimationComponent != null) && (movementAnimationComponent.getAnimationEntity() == currentAnimationComponent.getAnimationEntity())){
                 entityWorld.removeComponent(entity, AnimationComponent.class);

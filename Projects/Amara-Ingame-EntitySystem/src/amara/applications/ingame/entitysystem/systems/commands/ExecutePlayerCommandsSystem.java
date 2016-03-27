@@ -8,6 +8,7 @@ import java.util.Iterator;
 import com.jme3.math.Vector2f;
 import amara.core.Queue;
 import amara.applications.ingame.entitysystem.components.effects.general.*;
+import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.input.*;
 import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.entitysystem.components.movements.*;
@@ -73,11 +74,12 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             else if(isUnitAlive){
                 if(command instanceof MoveCommand){
                     MoveCommand moveCommand = (MoveCommand) command;
-                    int targetPositionEntity = entityWorld.createEntity();
-                    entityWorld.setComponent(targetPositionEntity, new PositionComponent(moveCommand.getPosition()));
-                    boolean wasSuccessfull = tryWalk(entityWorld, characterEntity, targetPositionEntity, -1);
+                    int targetEntity = entityWorld.createEntity();
+                    entityWorld.setComponent(targetEntity, new TemporaryComponent());
+                    entityWorld.setComponent(targetEntity, new PositionComponent(moveCommand.getPosition()));
+                    boolean wasSuccessfull = tryWalk(entityWorld, characterEntity, targetEntity, -1);
                     if(!wasSuccessfull){
-                        entityWorld.removeEntity(targetPositionEntity);
+                        entityWorld.removeEntity(targetEntity);
                     }
                 }
                 else if(command instanceof StopCommand){
@@ -112,6 +114,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     CastLinearSkillshotSpellCommand castLinearSkillshotSpellCommand = (CastLinearSkillshotSpellCommand) command;
                     int spellEntity = getSpellEntity(entityWorld, characterEntity, castLinearSkillshotSpellCommand.getSpellIndex());
                     int targetEntity = entityWorld.createEntity();
+                    entityWorld.setComponent(targetEntity, new TemporaryComponent());
                     entityWorld.setComponent(targetEntity, new DirectionComponent(castLinearSkillshotSpellCommand.getDirection().clone()));
                     castSpell(entityWorld, characterEntity, new CastSpellComponent(spellEntity, targetEntity));
                 }
@@ -119,6 +122,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     CastPositionalSkillshotSpellCommand castPositionalSkillshotSpellCommand = (CastPositionalSkillshotSpellCommand) command;
                     int spellEntity = getSpellEntity(entityWorld, characterEntity, castPositionalSkillshotSpellCommand.getSpellIndex());
                     int targetEntity = entityWorld.createEntity();
+                    entityWorld.setComponent(targetEntity, new TemporaryComponent());
                     entityWorld.setComponent(targetEntity, new PositionComponent(castPositionalSkillshotSpellCommand.getPosition().clone()));
                     castSpell(entityWorld, characterEntity, new CastSpellComponent(spellEntity, targetEntity));
                 }
@@ -263,22 +267,22 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
     
     public static boolean walk(EntityWorld entityWorld, int unitEntity, int targetEntity, float sufficientDistance){
         if(UnitUtil.tryCancelAction(entityWorld, unitEntity)){
-            EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
-            movement.setComponent(new MovementTargetComponent(targetEntity));
+            int movementEntity = entityWorld.createEntity();
+            entityWorld.setComponent(movementEntity, new MovementTargetComponent(targetEntity));
             if(sufficientDistance != -1){
-                movement.setComponent(new MovementTargetSufficientDistanceComponent(sufficientDistance));
+                entityWorld.setComponent(movementEntity, new MovementTargetSufficientDistanceComponent(sufficientDistance));
             }
-            movement.setComponent(new MovementPathfindingComponent());
+            entityWorld.setComponent(movementEntity, new MovementPathfindingComponent());
             if(entityWorld.hasComponent(unitEntity, LocalAvoidanceWalkComponent.class)){
-                movement.setComponent(new MovementLocalAvoidanceComponent());
+                entityWorld.setComponent(movementEntity, new MovementLocalAvoidanceComponent());
             }
-            movement.setComponent(new WalkMovementComponent());
-            movement.setComponent(new MovementIsCancelableComponent());
+            entityWorld.setComponent(movementEntity, new WalkMovementComponent());
+            entityWorld.setComponent(movementEntity, new MovementIsCancelableComponent());
             WalkAnimationComponent walkAnimationComponent = entityWorld.getComponent(unitEntity, WalkAnimationComponent.class);
             if(walkAnimationComponent != null){
-                movement.setComponent(new MovementAnimationComponent(walkAnimationComponent.getAnimationEntity()));
+                entityWorld.setComponent(movementEntity, new MovementAnimationComponent(walkAnimationComponent.getAnimationEntity()));
             }
-            entityWorld.setComponent(unitEntity, new MovementComponent(movement.getId()));
+            entityWorld.setComponent(unitEntity, new MovementComponent(movementEntity));
             return true;
         }
         return false;

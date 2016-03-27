@@ -18,6 +18,7 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.texture.Texture;
+import com.jme3.util.TangentBinormalGenerator;
 import amara.core.Util;
 import amara.core.files.FileAssets;
 import amara.core.settings.Settings;
@@ -122,6 +123,9 @@ public class ModelSkin{
         String modelPath = getModelFilePath();
         Spatial spatial = MaterialFactory.getAssetManager().loadModel(modelPath);
         spatial.setLocalScale(modelScale.mult(modelNormScale));
+        if(getAttributeValue(modelElement, "generateTangents", false)){
+            TangentBinormalGenerator.generate(spatial);
+        }
         return spatial;
     }
    

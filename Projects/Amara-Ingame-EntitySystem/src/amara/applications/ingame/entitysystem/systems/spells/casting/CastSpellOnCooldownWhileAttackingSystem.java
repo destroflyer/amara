@@ -5,6 +5,7 @@
 package amara.applications.ingame.entitysystem.systems.spells.casting;
 
 import com.jme3.math.Vector2f;
+import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.input.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
@@ -37,11 +38,13 @@ public class CastSpellOnCooldownWhileAttackingSystem implements EntitySystem{
 
                             case POSITIONAL_SKILLSHOT:
                                 targetEntity = entityWorld.createEntity();
+                                entityWorld.setComponent(targetEntity, new TemporaryComponent());
                                 entityWorld.setComponent(targetEntity, new PositionComponent(aggroTargetPosition.clone()));
                                 break;
 
                             case LINEAR_SKILLSHOT:
                                 targetEntity = entityWorld.createEntity();
+                                entityWorld.setComponent(targetEntity, new TemporaryComponent());
                                 Vector2f casterPosition = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
                                 entityWorld.setComponent(targetEntity, new DirectionComponent(aggroTargetPosition.subtract(casterPosition)));
                                 break;

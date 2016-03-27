@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.camps.*;
 import amara.applications.ingame.entitysystem.components.effects.general.*;
+import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.units.*;
@@ -27,9 +28,10 @@ public class CampResetSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(int entity : entityWorld.getEntitiesWithAll(CampComponent.class, CampResetComponent.class)){
             CampComponent campComponent = entityWorld.getComponent(entity, CampComponent.class);
-            int targetPositionEntity = entityWorld.createEntity();
-            entityWorld.setComponent(targetPositionEntity, new PositionComponent(campComponent.getPosition()));
-            if(ExecutePlayerCommandsSystem.tryWalk(entityWorld, entity, targetPositionEntity, -1)){
+            int targetEntity = entityWorld.createEntity();
+            entityWorld.setComponent(targetEntity, new TemporaryComponent());
+            entityWorld.setComponent(targetEntity, new PositionComponent(campComponent.getPosition()));
+            if(ExecutePlayerCommandsSystem.tryWalk(entityWorld, entity, targetEntity, -1)){
                 int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
                 entityWorld.removeComponent(movementEntity, MovementIsCancelableComponent.class);
                 EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
@@ -50,7 +52,7 @@ public class CampResetSystem implements EntitySystem{
                 effectTrigger.setComponent(new TriggerOnceComponent());
             }
             else{
-                entityWorld.removeEntity(targetPositionEntity);
+                entityWorld.removeEntity(targetEntity);
             }
         }
     }

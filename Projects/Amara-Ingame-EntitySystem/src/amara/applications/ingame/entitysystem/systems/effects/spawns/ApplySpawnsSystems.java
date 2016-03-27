@@ -84,9 +84,9 @@ public class ApplySpawnsSystems implements EntitySystem{
                 }
                 SpawnMovementSpeedComponent spawnMovementSpeedComponent = spawnInformation.getComponent(SpawnMovementSpeedComponent.class);
                 if(spawnMovementSpeedComponent != null){
-                    EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
+                    int movementEntity = entityWorld.createEntity();
                     if(moveToTarget){
-                        movement.setComponent(new MovementTargetComponent(targetEntity));
+                        entityWorld.setComponent(movementEntity, new MovementTargetComponent(targetEntity));
                     }
                     else if(targetDirectionComponent != null){
                         Vector2f movementDirection = targetDirectionComponent.getVector().clone();
@@ -94,14 +94,14 @@ public class ApplySpawnsSystems implements EntitySystem{
                         if(spawnMovementRelativeDirectionComponent != null){
                             movementDirection.rotateAroundOrigin(spawnMovementRelativeDirectionComponent.getAngle_Radian(), false);
                         }
-                        movement.setComponent(new MovementDirectionComponent(movementDirection));
+                        entityWorld.setComponent(movementEntity, new MovementDirectionComponent(movementDirection));
                     }
-                    movement.setComponent(new MovementSpeedComponent(spawnMovementSpeedComponent.getSpeed()));
+                    entityWorld.setComponent(movementEntity, new MovementSpeedComponent(spawnMovementSpeedComponent.getSpeed()));
                     SpawnMovementAnimationComponent spawnMovementAnimationComponent = spawnInformation.getComponent(SpawnMovementAnimationComponent.class);
                     if(spawnMovementAnimationComponent != null){
-                        movement.setComponent(new MovementAnimationComponent(spawnMovementAnimationComponent.getAnimationEntity()));
+                        entityWorld.setComponent(movementEntity, new MovementAnimationComponent(spawnMovementAnimationComponent.getAnimationEntity()));
                     }
-                    spawnedObject.setComponent(new MovementComponent(movement.getId()));
+                    spawnedObject.setComponent(new MovementComponent(movementEntity));
                 }
                 if(spawnInformation.hasComponent(SpawnAttackMoveComponent.class)){
                     spawnedObject.setComponent(new AttackMoveComponent(targetEntity));
