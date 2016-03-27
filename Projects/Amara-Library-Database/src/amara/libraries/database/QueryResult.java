@@ -23,6 +23,15 @@ public class QueryResult{
     private Statement statement;
     private ResultSet resultSet;
     
+    public Boolean nextBoolean_Close(){
+        if(next()){
+            boolean value = getBoolean(1);
+            close();
+            return value;
+        }
+        return null;
+    }
+    
     public Integer nextInteger_Close(){
         if(next()){
             int value = getInteger(1);
@@ -60,6 +69,26 @@ public class QueryResult{
     }
     
     //Integer
+    
+    public boolean getBoolean(int columnIndex){
+        boolean value = false;
+        try{
+            value = resultSet.getBoolean(columnIndex);
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return value;
+    }
+    
+    public boolean getBoolean(String columnName){
+        boolean value = false;
+        try{
+            value = resultSet.getBoolean(columnName);
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return value;
+    }
     
     public int getInteger(int columnIndex){
         int value = 0;

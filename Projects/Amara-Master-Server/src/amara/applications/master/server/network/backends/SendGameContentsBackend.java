@@ -47,21 +47,22 @@ public class SendGameContentsBackend implements MessageBackend{
     
     private GameCharacter[] getCharacters(){
         if(characters == null){
-            QueryResult result_Characters = databaseAppState.getQueryResult("SELECT id, name, title FROM characters");
+            QueryResult result_Characters = databaseAppState.getQueryResult("SELECT id, name, title, is_public FROM characters");
             tmpCharacters.clear();
             while(result_Characters.next()){
                 int characterID = result_Characters.getInteger("id");
                 String characterName = result_Characters.getString("name");
                 String characterTitle = result_Characters.getString("title");
-                QueryResult results_Skins = databaseAppState.getQueryResult("SELECT id, title FROM characters_skins WHERE characterid = " + characterID);
+                boolean characterIsPublic = result_Characters.getBoolean("is_public");
+                QueryResult result_Skins = databaseAppState.getQueryResult("SELECT id, title FROM characters_skins WHERE characterid = " + characterID);
                 tmpSkins.clear();
-                while(results_Skins.next()){
-                    int skinID = results_Skins.getInteger("id");
-                    String skinTitle = results_Skins.getString("title");
+                while(result_Skins.next()){
+                    int skinID = result_Skins.getInteger("id");
+                    String skinTitle = result_Skins.getString("title");
                     tmpSkins.add(new GameCharacterSkin(skinID, skinTitle));
                 }
-                results_Skins.close();
-                tmpCharacters.add(new GameCharacter(characterID, characterName, characterTitle, tmpSkins.toArray(new GameCharacterSkin[tmpSkins.size()])));
+                result_Skins.close();
+                tmpCharacters.add(new GameCharacter(characterID, characterName, characterTitle, characterIsPublic, tmpSkins.toArray(new GameCharacterSkin[tmpSkins.size()])));
             }
             result_Characters.close();
             characters = tmpCharacters.toArray(new GameCharacter[tmpCharacters.size()]);
@@ -71,15 +72,15 @@ public class SendGameContentsBackend implements MessageBackend{
     
     private Item[] getItems(){
         if(items == null){
-            QueryResult results_Items = databaseAppState.getQueryResult("SELECT id, name, title FROM items");
+            QueryResult result_Items = databaseAppState.getQueryResult("SELECT id, name, title FROM items");
             tmpItems.clear();
-            while(results_Items.next()){
-                int itemID = results_Items.getInteger("id");
-                String itemName = results_Items.getString("name");
-                String itemTitle = results_Items.getString("title");
+            while(result_Items.next()){
+                int itemID = result_Items.getInteger("id");
+                String itemName = result_Items.getString("name");
+                String itemTitle = result_Items.getString("title");
                 tmpItems.add(new Item(itemID, itemName, itemTitle));
             }
-            results_Items.close();
+            result_Items.close();
             items = tmpItems.toArray(new Item[tmpItems.size()]);
         }
         return items;

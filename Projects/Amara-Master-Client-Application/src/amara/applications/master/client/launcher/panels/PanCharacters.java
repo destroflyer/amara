@@ -19,8 +19,8 @@ public class PanCharacters extends javax.swing.JPanel{
         initComponents();
         int panelHeight = 70;
         int y = 0;
-        GameCharacter[] characters = MasterserverClientUtil.getCharacters();
-        for(GameCharacter character : characters){
+        GameCharacter[] publicCharacters = MasterserverClientUtil.getPublicCharacters();
+        for(GameCharacter character : publicCharacters){
             PanCharacters_Character panCharacter = new PanCharacters_Character(this, character);
             panCharacter.setLocation(0, y);
             panCharacter.setSize(180, panelHeight);
@@ -33,7 +33,7 @@ public class PanCharacters extends javax.swing.JPanel{
         }
         y += 1;
         panCharactersList.setPreferredSize(new Dimension(180, y));
-        showCharacterInfo(characters[0]);
+        showCharacterInfo(publicCharacters[0]);
     }
     private HashMap<GameCharacter, PanCharacters_CharacterInfo> infoPanels = new HashMap<GameCharacter, PanCharacters_CharacterInfo>();
     

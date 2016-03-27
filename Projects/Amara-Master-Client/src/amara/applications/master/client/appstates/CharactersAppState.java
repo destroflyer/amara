@@ -4,8 +4,10 @@
  */
 package amara.applications.master.client.appstates;
 
+import java.util.LinkedList;
 import amara.applications.master.client.network.backends.*;
 import amara.applications.master.network.messages.objects.*;
+import amara.core.Util;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.network.NetworkClient;
@@ -24,10 +26,18 @@ public class CharactersAppState extends ClientBaseAppState{
         networkClient.addMessageBackend(new ReceiveOwnedCharactersBackend(this));
     }
     private GameCharacter[] characters;
+    private GameCharacter[] publicCharacters;
     private OwnedGameCharacter[] ownedCharacters;
 
     public void setCharacters(GameCharacter[] characters){
         this.characters = characters;
+        LinkedList<GameCharacter> publicCharactersList = new LinkedList<GameCharacter>();
+        for(GameCharacter character : characters){
+            if(character.isPublic()){
+                publicCharactersList.add(character);
+            }
+        }
+        publicCharacters = Util.toArray(publicCharactersList, GameCharacter.class);
     }
     
     public GameCharacter getCharacter(int characterID){
@@ -41,6 +51,10 @@ public class CharactersAppState extends ClientBaseAppState{
 
     public GameCharacter[] getCharacters(){
         return characters;
+    }
+
+    public GameCharacter[] getPublicCharacters(){
+        return publicCharacters;
     }
 
     public void setOwnedCharacters(OwnedGameCharacter[] ownedCharacters){

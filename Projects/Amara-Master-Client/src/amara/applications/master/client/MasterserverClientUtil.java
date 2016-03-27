@@ -44,6 +44,10 @@ public class MasterserverClientUtil{
         return getState(CharactersAppState.class).getCharacters();
     }
     
+    public static GameCharacter[] getPublicCharacters(){
+        return getState(CharactersAppState.class).getPublicCharacters();
+    }
+    
     public static OwnedGameCharacter[] getOwnedCharacters(){
         return getState(CharactersAppState.class).getOwnedCharacters();
     }
