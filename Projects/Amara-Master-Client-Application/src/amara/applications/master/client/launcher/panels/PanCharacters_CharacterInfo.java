@@ -8,6 +8,8 @@ import java.awt.Dimension;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.master.network.messages.objects.*;
 import amara.core.files.FileAssets;
+import amara.core.input.Keys;
+import amara.core.settings.Settings;
 import amara.libraries.entitysystem.templates.StaticEntityWorld;
 
 /**
@@ -50,7 +52,8 @@ public class PanCharacters_CharacterInfo extends javax.swing.JPanel{
             int spellsCount = 0;
             for(int i=0;i<spellEntities.length;i++){
                 if(spellEntities[i] != -1){
-                    PanCharacters_CharacterInfo_Spell panSpell = new PanCharacters_CharacterInfo_Spell(SPELLS_TITLE_PREFIXES[i], spellEntities[i]);
+                    String keyTitle = Keys.getTitle(Settings.getInteger("controls_spells_" + i));
+                    PanCharacters_CharacterInfo_Spell panSpell = new PanCharacters_CharacterInfo_Spell(keyTitle, spellEntities[i]);
                     panSpell.setLocation(0, y);
                     panSpell.setSize(384, panelHeight);
                     panSpells.add(panSpell);
@@ -70,7 +73,6 @@ public class PanCharacters_CharacterInfo extends javax.swing.JPanel{
         }
         panSpells.setPreferredSize(new Dimension(394, y));
     }
-    private static final String[] SPELLS_TITLE_PREFIXES = new String[]{"Q","W","E","R"};
 
     /**
      * This method is called from within the constructor to initialize the form.
