@@ -16,13 +16,11 @@
                                 <spawnTemplate>./projectile</spawnTemplate>
                                 <spawnRelativeDirection>-45</spawnRelativeDirection>
                                 <spawnMovementSpeed>15</spawnMovementSpeed>
-                                <spawnMovementRelativeDirection>-45</spawnMovementRelativeDirection>
                             </entity>
                             <entity>
                                 <spawnTemplate>./projectile</spawnTemplate>
                                 <spawnRelativeDirection>45</spawnRelativeDirection>
                                 <spawnMovementSpeed>15</spawnMovementSpeed>
-                                <spawnMovementRelativeDirection>45</spawnMovementRelativeDirection>
                             </entity>
                         </spawn>
                     </entity>

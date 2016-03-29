@@ -164,6 +164,7 @@ public class ClientComponentBlacklist{
             StopAnimationComponent.class,
             //game
             //general
+            CustomCleanupComponent.class,
             TemporaryComponent.class,
             //input
             CastSpellComponent.class,
