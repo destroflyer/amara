@@ -573,6 +573,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent>("audioRemoveAfterPlaying"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.audio.AudioSourceComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.audio.AudioSourceComponent.class.getDeclaredField("entity"), componentFieldSerializer_Entity);
@@ -1679,7 +1687,7 @@ public class ComponentsRegistrator{
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.heals.ResultingHealComponent.class);
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.heals.ResultingHealComponent.class.getDeclaredField("value"), componentFieldSerializer_Entity);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.heals.ResultingHealComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
@@ -1980,6 +1988,14 @@ public class ComponentsRegistrator{
             }
         });
         //general
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent>("customCleanup"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.general.DescriptionComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.general.DescriptionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.DescriptionComponent>("description"){
 

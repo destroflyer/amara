@@ -97,6 +97,9 @@ public class AudioSystem implements EntitySystem{
     
     private void remove(int audioEntity){
         AudioNode audioNode = audioNodes.get(audioEntity);
+        if(audioNode.isLooping()){
+            audioNode.stop();
+        }
         audioAppState.removeAudioNode(audioNode);
     }
     

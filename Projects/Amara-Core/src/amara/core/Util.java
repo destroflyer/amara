@@ -284,10 +284,13 @@ public class Util{
         return numbers;
     }
     
-    public static <T> T[] toArray(List list, Class objectClass){
-        T[] array = (T[]) Array.newInstance(objectClass, list.size());
-        for(int i=0;i<array.length;i++){
-            array[i] = (T) list.get(i);
+    public static <T> T[] toArray(Collection<T> collection, Class objectClass){
+        T[] array = (T[]) Array.newInstance(objectClass, collection.size());
+        Iterator<T> iterator = collection.iterator();
+        int i = 0;
+        while(iterator.hasNext()){
+            array[i] = iterator.next();
+            i++;
         }
         return array;
     }

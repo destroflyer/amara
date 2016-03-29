@@ -24,6 +24,7 @@ import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.effects.spells.*;
 import amara.applications.ingame.entitysystem.components.effects.units.*;
 import amara.applications.ingame.entitysystem.components.effects.visuals.*;
+import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.specials.erika.*;
@@ -48,6 +49,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 EffectCastSourceComponent effectCastSourceComponent = effectCast.getComponent(EffectCastSourceComponent.class);
                 EffectCastSourceSpellComponent effectCastSourceSpellComponent = effectCast.getComponent(EffectCastSourceSpellComponent.class);
                 EffectCastTargetComponent effectCastTargetComponent = effectCast.getComponent(EffectCastTargetComponent.class);
+                boolean removeTemporaryEffectCastTargets = false;
                 expressionSpace.clearValues();
                 int effectSourceEntity = ((effectCastSourceComponent != null)?effectCastSourceComponent.getSourceEntity():-1);
                 if(effectSourceEntity != -1){
@@ -132,8 +134,9 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     if(addNewBuffComponent != null){
                         try{
                             expressionSpace.parse(addNewBuffComponent.getTemplateExpression());
-                            EntityWrapper buff = EntityTemplate.createFromTemplate(entityWorld, EntityTemplate.parseToOldTemplate(expressionSpace.getResult_String()));
-                            effectImpact.setComponent(new AddBuffComponent(buff.getId(), addNewBuffComponent.getDuration()));
+                            int buffEntity = entityWorld.createEntity();
+                            EntityTemplate.loadTemplates(entityWorld, buffEntity, EntityTemplate.parseToOldTemplate(expressionSpace.getResult_String()));
+                            effectImpact.setComponent(new AddBuffComponent(buffEntity, addNewBuffComponent.getDuration()));
                         }catch(ExpressionException ex){
                         }
                     }
@@ -152,6 +155,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                                 Vector2f direction = entityWorld.getComponent(effectCastTargetComponent.getTargetEntity(), DirectionComponent.class).getVector().clone();
                                 direction.rotateAroundOrigin(targetedMovementDirectionComponent.getAngle_Radian(), true);
                                 entityWorld.setComponent(movementEntity, new MovementDirectionComponent(direction));
+                                removeTemporaryEffectCastTargets = true;
                             }
                             else if(component instanceof TargetedMovementTargetComponent){
                                 entityWorld.setComponent(movementEntity, new MovementTargetComponent(effectCastTargetComponent.getTargetEntity()));
@@ -230,6 +234,11 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     effectImpact.setComponent(new ApplyEffectImpactComponent(targetEntity));
                 }
                 entityWorld.removeEntity(effectCast.getId());
+                if(removeTemporaryEffectCastTargets){
+                    if(entityWorld.hasComponent(effectCastTargetComponent.getTargetEntity(), TemporaryComponent.class)){
+                        entityWorld.removeEntity(effectCastTargetComponent.getTargetEntity());
+                    }
+                }
             }
         }
     }

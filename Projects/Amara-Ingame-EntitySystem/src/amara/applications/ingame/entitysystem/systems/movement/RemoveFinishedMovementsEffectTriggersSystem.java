@@ -5,7 +5,6 @@
 package amara.applications.ingame.entitysystem.systems.movement;
 
 import java.util.HashMap;
-import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
@@ -39,18 +38,12 @@ public class RemoveFinishedMovementsEffectTriggersSystem implements EntitySystem
     }
     
     private void addNewMovement(EntityWorld entityWorld, int entity){
-        movementEntities.put(entity, entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity());
+        int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
+        movementEntities.put(entity, movementEntity);
     }
     
     private void removeOldMovement(EntityWorld entityWorld, int entity){
         int movementEntity = movementEntities.get(entity);
-        MovementTargetComponent movementTargetComponent = entityWorld.getComponent(movementEntity, MovementTargetComponent.class);
-        if(movementTargetComponent != null){
-            int targetEntity = movementTargetComponent.getTargetEntity();
-            if(entityWorld.hasComponent(targetEntity, TemporaryComponent.class)){
-                entityWorld.removeEntity(targetEntity);
-            }
-        }
         entityWorld.removeEntity(movementEntity);
     }
     

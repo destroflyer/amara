@@ -17,10 +17,12 @@ import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.synchronizing.*;
 import amara.applications.ingame.entitysystem.systems.aggro.*;
 import amara.applications.ingame.entitysystem.systems.attributes.*;
+import amara.applications.ingame.entitysystem.systems.audio.*;
 import amara.applications.ingame.entitysystem.systems.buffs.*;
 import amara.applications.ingame.entitysystem.systems.buffs.areas.*;
 import amara.applications.ingame.entitysystem.systems.buffs.stacks.*;
 import amara.applications.ingame.entitysystem.systems.camps.*;
+import amara.applications.ingame.entitysystem.systems.cleanup.*;
 import amara.applications.ingame.entitysystem.systems.commands.*;
 import amara.applications.ingame.entitysystem.systems.effects.*;
 import amara.applications.ingame.entitysystem.systems.effects.aggro.*;
@@ -182,6 +184,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new SetBaseCooldownSystem());
         addEntitySystem(new LinkedCooldownsSystem());
         addEntitySystem(new SetLevelExperienceSystem());
+        addEntitySystem(new RemoveAudiosAfterPlayingSystem());
         for(EntitySystem entitySystem : ParallelNetworkSystems.generateSystems()){
             addEntitySystem(entitySystem);
         }
@@ -209,15 +212,17 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new UpdateAttributesSystem());
         addEntitySystem(new TriggerUnitsPassivesSystem());
         addEntitySystem(new TriggerItemPassivesSystem());
-        addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue()));
+        CastSpellQueueSystem castSpellQueueSystem = new CastSpellQueueSystem();
+        addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue(), castSpellQueueSystem));
         addEntitySystem(new AttackMoveSystem());
         addEntitySystem(new AttackAggroedTargetsSystem());
         addEntitySystem(new StartAggroResetTimersSystem());
         addEntitySystem(new CheckCampUnionAggroSystem());
         addEntitySystem(new CheckLostAggroCampsSystem());
         addEntitySystem(new SetNewTargetSpellsOnCooldownSystem());
-        addEntitySystem(new CastSpellOnCooldownWhileAttackingSystem());
-        addEntitySystem(new PerformAutoAttacksSystem());
+        addEntitySystem(new CastSpellOnCooldownWhileAttackingSystem(castSpellQueueSystem));
+        addEntitySystem(new PerformAutoAttacksSystem(castSpellQueueSystem));
+        addEntitySystem(castSpellQueueSystem);
         addEntitySystem(new SetCastDurationOnCastingSystem());
         addEntitySystem(new SetCooldownOnCastingSystem());
         addEntitySystem(new ConsumeItemsOnCastingSystem());
@@ -321,6 +326,12 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new MapIntersectionSystem(polyMapManager));
         addEntitySystem(new PlayerDeathSystem(map));
         addEntitySystem(new PlayerRespawnSystem(game));
+        addEntitySystem(new CleanupUnitsSystem());
+        addEntitySystem(new CleanupMovementsSystem());
+        addEntitySystem(new CleanupBuffAreasSystem());
+        addEntitySystem(new CleanupBuffsSystem());
+        addEntitySystem(new CleanupEffectTriggersSystem());
+        addEntitySystem(new CleanupEffectsSystem());
         
         addEntitySystem(new SendEntityChangesSystem(subNetworkServer, new ClientComponentBlacklist()));
         addEntitySystem(new CheckMapObjectiveSystem(map, mainApplication));

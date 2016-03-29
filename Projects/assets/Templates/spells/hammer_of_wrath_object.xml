@@ -31,7 +31,6 @@
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
         <triggerDelay>0.9</triggerDelay>
-        <triggerOnce/>
     </entity>
     <!--trigger spell effects-->
     <entity>

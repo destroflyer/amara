@@ -8,6 +8,7 @@ import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
+import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.spawns.*;
@@ -26,6 +27,7 @@ public class ApplySpawnsSystems implements EntitySystem{
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, SpawnComponent.class)))
         {
             int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
+            boolean cleanupTemporaryTarget = true;
             PositionComponent targetPositionComponent = null;
             DirectionComponent targetDirectionComponent = null;
             if(targetEntity != -1){
@@ -87,9 +89,10 @@ public class ApplySpawnsSystems implements EntitySystem{
                     int movementEntity = entityWorld.createEntity();
                     if(moveToTarget){
                         entityWorld.setComponent(movementEntity, new MovementTargetComponent(targetEntity));
+                        cleanupTemporaryTarget = false;
                     }
-                    else if(targetDirectionComponent != null){
-                        Vector2f movementDirection = targetDirectionComponent.getVector().clone();
+                    else if(direction != null){
+                        Vector2f movementDirection = direction.clone();
                         SpawnMovementRelativeDirectionComponent spawnMovementRelativeDirectionComponent = spawnInformation.getComponent(SpawnMovementRelativeDirectionComponent.class);
                         if(spawnMovementRelativeDirectionComponent != null){
                             movementDirection.rotateAroundOrigin(spawnMovementRelativeDirectionComponent.getAngle_Radian(), false);
@@ -105,8 +108,12 @@ public class ApplySpawnsSystems implements EntitySystem{
                 }
                 if(spawnInformation.hasComponent(SpawnAttackMoveComponent.class)){
                     spawnedObject.setComponent(new AttackMoveComponent(targetEntity));
+                    cleanupTemporaryTarget = false;
                 }
                 EntityTemplate.loadTemplates(entityWorld, spawnedObject.getId(), spawnInformation.getComponent(SpawnTemplateComponent.class).getTemplateNames());
+            }
+            if(cleanupTemporaryTarget && entityWorld.hasComponent(targetEntity, TemporaryComponent.class)){
+                entityWorld.removeEntity(targetEntity);
             }
         }
     }

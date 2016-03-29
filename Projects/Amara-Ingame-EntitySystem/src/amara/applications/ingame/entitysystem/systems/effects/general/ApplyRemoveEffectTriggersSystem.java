@@ -19,7 +19,6 @@ public class ApplyRemoveEffectTriggersSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, RemoveEffectTriggersComponent.class)))
         {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             for(int effectTriggerEntity : entityWrapper.getComponent(RemoveEffectTriggersComponent.class).getEffectTriggerEntities()){
                 entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
             }

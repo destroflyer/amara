@@ -47,7 +47,6 @@
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
         <triggerDelay>0.7</triggerDelay>
-        <triggerOnce/>
     </entity>
     <!--remove buff area-->
     <entity>
@@ -62,6 +61,5 @@
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
         <triggerDelay>2.3</triggerDelay>
-        <triggerOnce/>
     </entity>
 </template>

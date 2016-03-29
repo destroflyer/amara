@@ -9,32 +9,6 @@
                 <casterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <triggerSpellEffects>#spell</triggerSpellEffects>
-                        <playAudio>
-                            <entity>
-                                <audio>Sounds/sounds/spells/kachujin_dash_cast.ogg</audio>
-                                <audioVolume>0.75</audioVolume>
-                            </entity>
-                        </playAudio>
-                    </entity>
-                </triggeredEffect>
-                <triggerSource>#spell</triggerSource>
-            </entity>
-        </instantEffectTriggers>
-        <castType>linear_skillshot</castType>
-        <castCancelAction/>
-        <castTurnToTarget/>
-        <baseCooldown>14</baseCooldown>
-    </entity>
-    <!--spell effect-->
-    <entity>
-        <castedSpell>#spell</castedSpell>
-        <castedEffectTriggers>
-            <!--target effect-->
-            <entity>
-                <targetTarget/>
-                <triggeredEffect>
-                    <entity>
                         <move>
                             <entity>
                                 <targetedMovementDirection/>
@@ -63,6 +37,32 @@
                                 <triggerOnCancel/>
                             </entity>
                         </addEffectTriggers>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/kachujin_dash_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castTurnToTarget/>
+        <baseCooldown>14</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <!--TODO-->
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

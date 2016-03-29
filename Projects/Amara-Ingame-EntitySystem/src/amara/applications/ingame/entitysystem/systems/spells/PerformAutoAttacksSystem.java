@@ -4,9 +4,8 @@
  */
 package amara.applications.ingame.entitysystem.systems.spells;
 
-import amara.applications.ingame.entitysystem.components.input.*;
 import amara.applications.ingame.entitysystem.components.units.*;
-import amara.applications.ingame.entitysystem.systems.commands.ExecutePlayerCommandsSystem;
+import amara.applications.ingame.entitysystem.systems.spells.casting.CastSpellQueueSystem;
 import amara.libraries.entitysystem.*;
 
 /**
@@ -14,14 +13,19 @@ import amara.libraries.entitysystem.*;
  * @author Carl
  */
 public class PerformAutoAttacksSystem implements EntitySystem{
+
+    public PerformAutoAttacksSystem(CastSpellQueueSystem castSpellQueueSystem){
+        this.castSpellQueueSystem = castSpellQueueSystem;
+    }
+    private CastSpellQueueSystem castSpellQueueSystem;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(AggroTargetComponent.class))){
-            int targetEntity = entityWrapper.getComponent(AggroTargetComponent.class).getTargetEntity();
-            if(!entityWrapper.hasComponent(IsWalkingToAggroTargetComponent.class)){
-                int autoAttackEntity = entityWrapper.getComponent(AutoAttackComponent.class).getAutoAttackEntity();
-                ExecutePlayerCommandsSystem.castSpell(entityWorld, entityWrapper.getId(), new CastSpellComponent(autoAttackEntity, targetEntity));
+        for(int entity : entityWorld.getEntitiesWithAll(AggroTargetComponent.class)){
+            int targetEntity = entityWorld.getComponent(entity, AggroTargetComponent.class).getTargetEntity();
+            if(!entityWorld.hasComponent(entity, IsWalkingToAggroTargetComponent.class)){
+                int autoAttackEntity = entityWorld.getComponent(entity, AutoAttackComponent.class).getAutoAttackEntity();
+                castSpellQueueSystem.enqueueSpellCast(entity, autoAttackEntity, targetEntity);
             }
         }
     }

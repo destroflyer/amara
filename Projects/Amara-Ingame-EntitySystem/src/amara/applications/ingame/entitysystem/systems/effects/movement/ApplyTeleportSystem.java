@@ -7,6 +7,7 @@ package amara.applications.ingame.entitysystem.systems.effects.movement;
 import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.movement.*;
+import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.libraries.entitysystem.*;
 
@@ -24,6 +25,9 @@ public class ApplyTeleportSystem implements EntitySystem{
             int targetPositionEntity = entityWrapper.getComponent(TeleportComponent.class).getTargetEntity();
             Vector2f targetPosition = entityWorld.getComponent(targetPositionEntity, PositionComponent.class).getPosition();
             entityWorld.setComponent(targetID, new PositionComponent(targetPosition.clone()));
+            if(entityWorld.hasComponent(targetPositionEntity, TemporaryComponent.class)){
+                entityWorld.removeEntity(targetPositionEntity);
+            }
         }
     }
 }

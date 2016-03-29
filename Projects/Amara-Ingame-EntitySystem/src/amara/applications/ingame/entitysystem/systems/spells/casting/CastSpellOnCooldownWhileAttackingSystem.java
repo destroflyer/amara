@@ -6,12 +6,10 @@ package amara.applications.ingame.entitysystem.systems.spells.casting;
 
 import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.general.*;
-import amara.applications.ingame.entitysystem.components.input.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.components.spells.CastTypeComponent.*;
 import amara.applications.ingame.entitysystem.components.units.*;
-import amara.applications.ingame.entitysystem.systems.commands.ExecutePlayerCommandsSystem;
 import amara.libraries.entitysystem.*;
 
 /**
@@ -19,6 +17,11 @@ import amara.libraries.entitysystem.*;
  * @author Carl
  */
 public class CastSpellOnCooldownWhileAttackingSystem implements EntitySystem{
+
+    public CastSpellOnCooldownWhileAttackingSystem(CastSpellQueueSystem castSpellQueueSystem){
+        this.castSpellQueueSystem = castSpellQueueSystem;
+    }
+    private CastSpellQueueSystem castSpellQueueSystem;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -50,7 +53,7 @@ public class CastSpellOnCooldownWhileAttackingSystem implements EntitySystem{
                                 break;
                         }
                     }
-                    ExecutePlayerCommandsSystem.castSpell(entityWorld, casterEntity, new CastSpellComponent(spellEntity, targetEntity));
+                    castSpellQueueSystem.enqueueSpellCast(casterEntity, spellEntity, targetEntity);
                 }
             }
         }

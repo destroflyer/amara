@@ -21,7 +21,6 @@ public class ApplyRemoveBuffAreasSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, RemoveBuffAreaComponent.class)))
         {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             int buffAreaEntity = entityWrapper.getComponent(RemoveBuffAreaComponent.class).getBuffAreaEntity();
             entityWorld.removeComponent(buffAreaEntity, AreaOriginComponent.class);
             entityWorld.removeComponent(buffAreaEntity, HitboxActiveComponent.class);

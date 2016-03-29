@@ -28,6 +28,7 @@ import amara.applications.ingame.entitysystem.components.effects.spells.*;
 import amara.applications.ingame.entitysystem.components.effects.units.*;
 import amara.applications.ingame.entitysystem.components.effects.visuals.*;
 import amara.applications.ingame.entitysystem.components.game.*;
+import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.input.*;
 import amara.applications.ingame.entitysystem.components.maps.*;
 import amara.applications.ingame.entitysystem.components.maps.playerdeathrules.*;
@@ -163,6 +164,7 @@ public class ClientComponentBlacklist{
             StopAnimationComponent.class,
             //game
             //general
+            TemporaryComponent.class,
             //input
             CastSpellComponent.class,
             //items

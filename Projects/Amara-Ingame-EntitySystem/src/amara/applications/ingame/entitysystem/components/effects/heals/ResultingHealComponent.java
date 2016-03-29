@@ -21,7 +21,7 @@ public class ResultingHealComponent{
     public ResultingHealComponent(float value){
         this.value = value;
     }
-    @ComponentField(type=ComponentField.Type.ENTITY)
+    @ComponentField(type=ComponentField.Type.ATTRIBUTE)
     private float value;
 
     public float getValue(){

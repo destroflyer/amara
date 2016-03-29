@@ -4,7 +4,6 @@
  */
 package amara.applications.ingame.entitysystem.systems.units;
 
-import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
@@ -53,7 +52,11 @@ public class UnitUtil{
     }
     
     public static void cancelMovement(EntityWorld entityWorld, int entity){
-        entityWorld.removeComponent(entity, MovementComponent.class);
+        MovementComponent movementComponent = entityWorld.getComponent(entity, MovementComponent.class);
+        if(movementComponent != null){
+            entityWorld.removeComponent(entity, MovementComponent.class);
+            entityWorld.removeEntity(movementComponent.getMovementEntity());
+        }
         removeTemporaryTriggers(entityWorld, entity, TargetReachedTriggerComponent.class);
         removeTemporaryTriggers(entityWorld, entity, CollisionTriggerComponent.class);
     }

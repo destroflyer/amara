@@ -6,7 +6,6 @@ package amara.applications.ingame.entitysystem.systems.spells.casting;
 
 import java.util.LinkedList;
 import com.jme3.math.Vector2f;
-import amara.core.Util;
 import amara.applications.ingame.entitysystem.components.effects.general.*;
 import amara.applications.ingame.entitysystem.components.effects.movement.*;
 import amara.applications.ingame.entitysystem.components.input.*;
@@ -21,6 +20,7 @@ import amara.applications.ingame.entitysystem.systems.effects.triggers.EffectTri
 import amara.applications.ingame.entitysystem.systems.movement.MovementSystem;
 import amara.applications.ingame.entitysystem.systems.movement.TargetedMovementSystem;
 import amara.applications.ingame.entitysystem.systems.units.UnitUtil;
+import amara.core.Util;
 import amara.libraries.entitysystem.*;
 
 /**
