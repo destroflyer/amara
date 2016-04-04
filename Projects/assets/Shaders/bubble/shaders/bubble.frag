@@ -1,4 +1,4 @@
-varying vec3 vNdotV;
+varying float vNdotV;
 varying vec2 vTexCoord;
 varying vec3 vNormal;
 
@@ -35,7 +35,7 @@ void main() {
     vec4 groundColor = vec4(0.5, 0.5, 0.5, 0.0);
 
     modulatedColor.rgb = clamp(vec3(2.0) * soapRefColor.xyz * groundColor.xyz, 0.0, 1.0); 
-    modulatedColor.a = ( 1.0 - vNdotV.x ) * 0.5 - 0.01;		
+    modulatedColor.a = ( 1.0 - vNdotV ) * 0.5 - 0.01;		
     float opacity =  clamp(4.0 * (groundColor.a * groundColor.a - 0.75), 0.0, 1.0);
 
     gl_FragColor.rgb = mix(modulatedColor.rgb, groundColor.rgb, opacity) + specularLightWeighting.rgb;

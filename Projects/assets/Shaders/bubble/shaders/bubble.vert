@@ -13,7 +13,7 @@ uniform float g_Time;
 uniform vec3 g_CameraPosition;
 
 
-varying vec3 vNdotV;
+varying float vNdotV;
 varying vec2 vTexCoord;
 
 varying vec4 vPosition;
