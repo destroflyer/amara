@@ -5,6 +5,7 @@
 package amara.libraries.applications.display.ingame.appstates;
 
 import java.awt.MouseInfo;
+import java.awt.PointerInfo;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.collision.CollisionResult;
@@ -250,16 +251,20 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
     }
     
     private static boolean isMouseInWindow(){
-        int mouseX = MouseInfo.getPointerInfo().getLocation().x;
-        int mouseY = MouseInfo.getPointerInfo().getLocation().y;
-        int minX = Display.getX();
-        int minY = Display.getY();
-        if(!Settings.getBoolean("fullscreen")){
-            minX += 2;
-            minY += 26;
+        PointerInfo pointerInfo = MouseInfo.getPointerInfo();
+        if(pointerInfo != null){
+            int mouseX = pointerInfo.getLocation().x;
+            int mouseY = pointerInfo.getLocation().y;
+            int minX = Display.getX();
+            int minY = Display.getY();
+            if(!Settings.getBoolean("fullscreen")){
+                minX += 2;
+                minY += 26;
+            }
+            int maxX = (minX + Display.getWidth());
+            int maxY = (minY + Display.getHeight());
+            return !((mouseX < minX) || (mouseX > maxX) || (mouseY < minY) || (mouseY > maxY));
         }
-        int maxX = (minX + Display.getWidth());
-        int maxY = (minY + Display.getHeight());
-        return !((mouseX < minX) || (mouseX > maxX) || (mouseY < minY) || (mouseY > maxY));
+        return false;
     }
 }

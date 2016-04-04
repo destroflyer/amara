@@ -60,6 +60,7 @@
                     <entity>
                         <audio>Sounds/sounds/spells/sapling_toss_hit.ogg</audio>
                         <audioVolume>1.25</audioVolume>
+                        <audioRemoveAfterPlaying/>
                     </entity>
                 </playAudio>
             </entity>

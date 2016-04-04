@@ -237,7 +237,7 @@ public class ModelSkin{
    
     private void applyGeometryInformation(Spatial spatial){
         LinkedList<Geometry> geometryChilds = JMonkeyUtil.getAllGeometryChilds(spatial);
-        Vector3f scaleVector = modelScale.mult(modelNormScale);
+        //Vector3f scaleVector = modelScale.mult(modelNormScale);
         for(int i=0;i<geometryChilds.size();i++){
             Geometry geometry = geometryChilds.get(i);
             Material material = geometry.getMaterial();

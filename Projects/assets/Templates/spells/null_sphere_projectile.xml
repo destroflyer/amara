@@ -13,6 +13,7 @@
                 <playAudio>
                     <entity>
                         <audio>Sounds/sounds/spells/thunder.ogg</audio>
+                        <audioRemoveAfterPlaying/>
                     </entity>
                 </playAudio>
             </entity>

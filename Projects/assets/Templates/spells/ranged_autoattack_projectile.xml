@@ -18,6 +18,7 @@
                     <entity>
                         <audio>[parameter1]</audio>
                         <audioVolume>0.5</audioVolume>
+                        <audioRemoveAfterPlaying/>
                     </entity>
                 </playAudio>
             </entity>

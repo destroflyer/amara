@@ -4,23 +4,13 @@
  */
 package amara.applications.ingame.server.network.backends;
 
-import com.jme3.math.Vector2f;
+import java.util.HashMap;
 import com.jme3.network.Message;
-import amara.applications.ingame.entitysystem.components.attributes.*;
-import amara.applications.ingame.entitysystem.components.buffs.*;
-import amara.applications.ingame.entitysystem.components.game.*;
-import amara.applications.ingame.entitysystem.components.general.*;
-import amara.applications.ingame.entitysystem.components.maps.*;
-import amara.applications.ingame.entitysystem.components.maps.playerdeathrules.*;
-import amara.applications.ingame.entitysystem.components.physics.*;
-import amara.applications.ingame.entitysystem.components.players.*;
-import amara.applications.ingame.entitysystem.components.units.*;
-import amara.applications.ingame.entitysystem.components.visuals.*;
-import amara.applications.ingame.entitysystem.components.visuals.animations.*;
-import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
 import amara.applications.ingame.network.messages.*;
 import amara.applications.ingame.server.IngameServerApplication;
 import amara.applications.ingame.server.appstates.ServerEntitySystemAppState;
+import amara.applications.ingame.server.chat.ChatCommand;
+import amara.applications.ingame.server.chat.commands.*;
 import amara.applications.ingame.shared.games.*;
 import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
 import amara.libraries.entitysystem.*;
@@ -34,8 +24,22 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
 
     public ReceiveChatMessagesBackend(IngameServerApplication ingameServerApplication){
         this.ingameServerApplication = ingameServerApplication;
+        addChatCommand("speed", new ChatCommand_Speed());
+        addChatCommand("cinematic", new ChatCommand_Cinematic());
+        addChatCommand("gold", new ChatCommand_Gold());
+        addChatCommand("deathtimer", new ChatCommand_Deathtimer());
+        addChatCommand("urf", new ChatCommand_Urf());
+        addChatCommand("chickens", new ChatCommand_Chickens());
+        addChatCommand("nochickens", new ChatCommand_NoChickens());
+        //addChatCommand("envies", new ChatCommand_Envies());
+        //addChatCommand("noenvies", new ChatCommand_NoEnvies());
     }
     private IngameServerApplication ingameServerApplication;
+    private HashMap<String, ChatCommand> chatCommands = new HashMap<String, ChatCommand>();
+    
+    private void addChatCommand(String name, ChatCommand command){
+        chatCommands.put(name, command);
+    }
 
     @Override
     public void onMessageReceived(Message receivedMessage, final MessageResponse messageResponse){
@@ -51,105 +55,22 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
                     public void run(){
                         MessageResponse chatCommandResponse = new MessageResponse(messageResponse.getClientID());
                         EntityWorld entityWorld = ingameServerApplication.getStateManager().getState(ServerEntitySystemAppState.class).getEntityWorld();
-                        int characterEntity = entityWorld.getComponent(gamePlayer.getEntity(), PlayerCharacterComponent.class).getEntity();
                         if(message.getText().equals("such chat")){
                             chatCommandResponse.addAnswerMessage(new Message_ChatMessage("very responsive, wow"));
                         }
-                        else if(message.getText().startsWith("/speed ")){
-                            try{
-                                float speed = Float.parseFloat(message.getText().substring(7));
-                                entityWorld.setComponent(Game.ENTITY, new GameSpeedComponent(speed));
-                            }catch(NumberFormatException ex){
-                            }
-                        }
-                        else if(message.getText().startsWith("/cinematic ")){
-                            try{
-                                int cinematicIndex = Integer.parseInt(message.getText().substring(11));
-                                switch(cinematicIndex){
-                                    case 0:
-                                        entityWorld.setComponent(Game.ENTITY, new CinematicComponent("amara.applications.ingame.maps.TestMap_TestCinematic"));
-                                        break;
-
-                                    case 1:
-                                        entityWorld.setComponent(Game.ENTITY, new CinematicComponent("amara.applications.ingame.maps.Map_Destroforest_CinematicIntro"));
-                                        break;
-                                }
-                            }catch(NumberFormatException ex){
-                            }
-                        }
-                        else if(message.getText().startsWith("/gold ")){
-                            try{
-                                int gold = Integer.parseInt(message.getText().substring(6));
-                                if(gold >= 0){
-                                    entityWorld.setComponent(characterEntity, new GoldComponent(gold));
-                                }
-                                else{
-                                    chatCommandResponse.addAnswerMessage(new Message_ChatMessage("No negative gold values allowed"));
-                                }
-                            }catch(NumberFormatException ex){
-                            }
-                        }
-                        else if(message.getText().startsWith("/deathtimer ")){
-                            try{
-                                String[] parameters = message.getText().substring(12).split(" ");
-                                if(parameters.length == 2){
-                                    float initialDuration = Float.parseFloat(parameters[0]);
-                                    float deltaDurationPerTime = Float.parseFloat(parameters[1]);
-                                    if((initialDuration >= 0) && (deltaDurationPerTime >= 0)){
-                                        int playerDeathRulesEntity = entityWorld.getComponent(game.getMap().getEntity(), PlayerDeathRulesComponent.class).getRulesEntity();
-                                        entityWorld.setComponent(playerDeathRulesEntity, new RespawnTimerComponent(initialDuration, deltaDurationPerTime));
+                        else{
+                            for(String commandName : chatCommands.keySet()){
+                                boolean isStandaloneCommand = message.getText().equals("/" + commandName);
+                                if(isStandaloneCommand || message.getText().startsWith("/" + commandName + " ")){
+                                    String optionsString = (isStandaloneCommand?null:message.getText().substring(commandName.length() + 2));
+                                    ChatCommand chatCommand = chatCommands.get(commandName);
+                                    chatCommand.setResponseMessage(null);
+                                    chatCommand.execute(optionsString, entityWorld, game, gamePlayer);
+                                    String responseMessage = chatCommand.getResponseMessage();
+                                    if(responseMessage != null){
+                                        chatCommandResponse.addAnswerMessage(new Message_ChatMessage(responseMessage));
                                     }
-                                    else{
-                                        chatCommandResponse.addAnswerMessage(new Message_ChatMessage("No negative death timers allowed"));
-                                    }
-                                }
-                            }catch(NumberFormatException ex){
-                            }
-                        }
-                        else if(message.getText().startsWith("/urf ")){
-                            try{
-                                float cooldownSpeed = Float.parseFloat(message.getText().substring(5));
-                                EntityWrapper buff = entityWorld.getWrapped(entityWorld.createEntity());
-                                EntityWrapper buffAttributes = entityWorld.getWrapped(entityWorld.createEntity());
-                                buffAttributes.setComponent(new BonusPercentageCooldownSpeedComponent(cooldownSpeed));
-                                buff.setComponent(new ContinuousAttributesComponent(buffAttributes.getId()));
-                                buff.setComponent(new KeepOnDeathComponent());
-                                ApplyAddBuffsSystem.addBuff(entityWorld, characterEntity, buff.getId());
-                            }catch(NumberFormatException ex){
-                            }
-                        }
-                        else if(message.getText().startsWith("/chickens ")){
-                            try{
-                                int chickenCount = Integer.parseInt(message.getText().substring(10));
-                                final int chickensMinimum = 1;
-                                final int chickensMaximum = 10000;
-                                if((chickenCount >= chickensMinimum) && (chickenCount <= chickensMaximum)){
-                                    EntityWrapper animation = entityWorld.getWrapped(entityWorld.createEntity());
-                                    animation.setComponent(new NameComponent("idle1"));
-                                    animation.setComponent(new LoopDurationComponent(45.6f));
-                                    for(int i=0;i<chickenCount;i++){
-                                        EntityWrapper chicken = entityWorld.getWrapped(entityWorld.createEntity());
-                                        chicken.setComponent(new NameComponent("Chicken"));
-                                        chicken.setComponent(new ModelComponent("Models/chicken/skin.xml"));
-                                        float x = (float) (Math.random() * game.getMap().getPhysicsInformation().getWidth());
-                                        float y = (float) (Math.random() * game.getMap().getPhysicsInformation().getHeight());
-                                        chicken.setComponent(new PositionComponent(new Vector2f(x, y)));
-                                        chicken.setComponent(new DirectionComponent((float) (Math.random() * (2 * Math.PI))));
-                                        chicken.setComponent(new AnimationComponent(animation.getId()));
-                                    }
-                                }
-                                else{
-                                    chatCommandResponse.addAnswerMessage(new Message_ChatMessage("Chicken count has to be between " + chickensMinimum + " and " + chickensMaximum));
-                                }
-                            }catch(NumberFormatException ex){
-                            }
-                        }
-                        else if(message.getText().startsWith("/nochickens")){
-                            for(int entity : entityWorld.getEntitiesWithAll(NameComponent.class, ModelComponent.class)){
-                                String name = entityWorld.getComponent(entity, NameComponent.class).getName();
-                                if(name.equals("Chicken")){
-                                    entityWorld.removeEntity(entityWorld.getComponent(entity, AnimationComponent.class).getAnimationEntity());
-                                    entityWorld.removeEntity(entity);
+                                    break;
                                 }
                             }
                         }

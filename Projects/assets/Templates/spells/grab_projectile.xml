@@ -23,6 +23,7 @@
                 <playAudio>
                     <entity>
                         <audio>Sounds/sounds/spells/grab_hit.ogg</audio>
+                        <audioRemoveAfterPlaying/>
                     </entity>
                 </playAudio>
             </entity>

@@ -25,6 +25,7 @@
                 <playAudio>
                     <entity>
                         <audio>Sounds/sounds/spells/infected_cleaver_hit.ogg</audio>
+                        <audioRemoveAfterPlaying/>
                     </entity>
                 </playAudio>
             </entity>
