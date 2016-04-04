@@ -96,7 +96,9 @@ public class SetSpellsCastersSystem implements EntitySystem{
     
     private void updateCaster_Spells(EntityWorld entityWorld, int casterEntity, int[] spellEntities){
         for(int spellEntity : spellEntities){
-            updateCaster(entityWorld, casterEntity, spellEntity);
+            if(spellEntity != -1){
+                updateCaster(entityWorld, casterEntity, spellEntity);
+            }
         }
     }
     

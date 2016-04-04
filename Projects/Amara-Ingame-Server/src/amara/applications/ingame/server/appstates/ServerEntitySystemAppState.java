@@ -327,6 +327,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new PlayerDeathSystem(map));
         addEntitySystem(new PlayerRespawnSystem(game));
         addEntitySystem(new CleanupUnitsSystem());
+        addEntitySystem(new CleanupSpellsSystem());
         addEntitySystem(new CleanupMovementsSystem());
         addEntitySystem(new CleanupBuffAreasSystem());
         addEntitySystem(new CleanupBuffsSystem());

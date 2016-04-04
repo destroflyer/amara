@@ -9,31 +9,6 @@
                 <casterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <triggerSpellEffects>#spell</triggerSpellEffects>
-                        <playAudio>
-                            <entity>
-                                <audio>Sounds/sounds/spells/spinning_slash_cast.ogg</audio>
-                            </entity>
-                        </playAudio>
-                    </entity>
-                </triggeredEffect>
-                <triggerSource>#spell</triggerSource>
-            </entity>
-        </instantEffectTriggers>
-        <castType>linear_skillshot</castType>
-        <castCancelAction/>
-        <castTurnToTarget/>
-        <baseCooldown>13</baseCooldown>
-    </entity>
-    <!--spell effect-->
-    <entity>
-        <castedSpell>#spell</castedSpell>
-        <castedEffectTriggers>
-            <!--target effect-->
-            <entity>
-                <targetTarget/>
-                <triggeredEffect>
-                    <entity>
                         <move>
                             <entity>
                                 <targetedMovementDirection/>
@@ -62,6 +37,31 @@
                                 <triggerOnCancel/>
                             </entity>
                         </addEffectTriggers>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/spinning_slash_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castTurnToTarget/>
+        <baseCooldown>13</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <!--TODO-->
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
