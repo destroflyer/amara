@@ -23,5 +23,6 @@ public class SetIdleAnimationsSystem implements EntitySystem{
                 entityWorld.setComponent(entity, new AnimationComponent(idleAnimationComponent.getAnimationEntity()));
             }
         }
+        observer.refresh();
     }
 }

@@ -25,7 +25,7 @@ public class ComponentMapObserver {
         this.componentEquality = componentEquality;
     }
 
-    void refresh() {
+    public void refresh() {
         refreshAdded();
         refreshChangedAndRemoved();
         clearPreviousValues();
