@@ -15,7 +15,7 @@ import amara.libraries.entitysystem.EntityWorld;
  */
 public class CleanupUtil{
     
-    public static void tryCleanupEntity(EntityWorld entityWorld, int entity){
+    public static boolean tryCleanupEntity(EntityWorld entityWorld, int entity){
         boolean removeEntity = (!entityWorld.hasComponent(entity, CustomCleanupComponent.class));
         if(removeEntity){
             //These audio entities will be kept so they are sent to the client and finally removed by the RemoveAudiosAfterPlayingSystem
@@ -27,5 +27,6 @@ public class CleanupUtil{
         if(removeEntity){
             entityWorld.removeEntity(entity);
         }
+        return removeEntity;
     }
 }

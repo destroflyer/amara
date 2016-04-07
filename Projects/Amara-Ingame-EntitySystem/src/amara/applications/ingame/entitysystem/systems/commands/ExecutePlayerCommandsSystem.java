@@ -177,14 +177,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
     
     public static boolean tryWalk(EntityWorld entityWorld, int unitEntity, int targetEntity, float sufficientDistance){
         if(MovementSystem.canMove(entityWorld, unitEntity)){
-            boolean isAllowed = true;
-            MovementComponent movementComponent = entityWorld.getComponent(unitEntity, MovementComponent.class);
-            if(movementComponent != null){
-                isAllowed = entityWorld.hasComponent(movementComponent.getMovementEntity(), MovementIsCancelableComponent.class);
-            }
-            if(isAllowed){
-                return walk(entityWorld, unitEntity, targetEntity, sufficientDistance);
-            }
+            return walk(entityWorld, unitEntity, targetEntity, sufficientDistance);
         }
         return false;
     }

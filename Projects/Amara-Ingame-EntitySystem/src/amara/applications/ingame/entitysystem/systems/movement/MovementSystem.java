@@ -21,7 +21,7 @@ public class MovementSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
-            if(isDisplaced(entityWorld, entity) || canMove(entityWorld, entity)){
+            if(canMove(entityWorld, entity) || isDisplaced(entityWorld, entity)){
                 int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
                 if(entityWorld.hasAllComponents(movementEntity, MovementDirectionComponent.class, MovementSpeedComponent.class)){
                     Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
@@ -42,6 +42,14 @@ public class MovementSystem implements EntitySystem{
     
     public static boolean canMove(EntityWorld entityWorld, int entity){
         return (CastSpellSystem.isAbleToPerformAction(entityWorld, entity) && (!entityWorld.hasComponent(entity, IsBindedComponent.class)));
+    }
+    
+    public static boolean hasUncancelableMovement(EntityWorld entityWorld, int entity){
+        MovementComponent movementComponent = entityWorld.getComponent(entity, MovementComponent.class);
+        if(movementComponent != null){
+            return ((!entityWorld.hasComponent(movementComponent.getMovementEntity(), MovementIsCancelableComponent.class)) || isDisplaced(entityWorld, entity));
+        }
+        return false;
     }
     
     public static boolean isDisplaced(EntityWorld entityWorld, int entity){

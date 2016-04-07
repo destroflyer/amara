@@ -302,7 +302,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new PayOutBountiesSystem());
         addEntitySystem(new UpdateDeathsScoreSystem());
         addEntitySystem(new RemoveDeadUnitsSystem());
-        addEntitySystem(new RemoveFinishedMovementsEffectTriggersSystem());
+        addEntitySystem(new RemoveFinishedMovementsSystem());
         addEntitySystem(new PlayMovementAnimationsSystem());
         addEntitySystem(new UpdateWalkMovementsSystem());
         addEntitySystem(new TargetedMovementSystem(intersectionObserver, polyMapManager));

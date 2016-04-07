@@ -25,7 +25,7 @@ public class UnitUtil{
             isAllowed = false;
         }
         if(isAllowed){
-            if(MovementSystem.isDisplaced(entityWorld, entity)){
+            if(MovementSystem.hasUncancelableMovement(entityWorld, entity)){
                 isAllowed = false;
             }
             else{

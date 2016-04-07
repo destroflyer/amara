@@ -33,7 +33,7 @@
                                 </triggeredEffect>
                                 <triggerOnce/>
                             </entity>
-                            <!--reactivate hitbox-->
+                            <!--readd collisiongroups-->
                             <entity>
                                 <targetReachedTrigger/>
                                 <sourceTarget/>

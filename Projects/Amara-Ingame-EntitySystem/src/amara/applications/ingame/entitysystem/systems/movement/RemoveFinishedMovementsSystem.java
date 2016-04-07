@@ -15,7 +15,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class RemoveFinishedMovementsEffectTriggersSystem implements EntitySystem{
+public class RemoveFinishedMovementsSystem implements EntitySystem{
     
     private HashMap<Integer, Integer> movementEntities = new HashMap<Integer, Integer>();
     

@@ -46,6 +46,7 @@
                                 <movementSpeed>30</movementSpeed>
                             </entity>
                         </move>
+                        <removeCollisionGroups targetOf="map|units" targets="units"/>
                         <addEffectTriggers>
                             <!--target effect, play hit audio-->
                             <entity>
@@ -72,13 +73,13 @@
                                 </triggeredEffect>
                                 <triggerOnce/>
                             </entity>
-                            <!--reactivate hitbox-->
+                            <!--readd collisiongroups-->
                             <entity>
                                 <targetReachedTrigger/>
                                 <sourceTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <activateHitbox/>
+                                        <addCollisionGroups targetOf="map|units" targets="units"/>
                                     </entity>
                                 </triggeredEffect>
                                 <triggerOnce/>

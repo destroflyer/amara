@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.effects.general.*;
-import amara.applications.ingame.entitysystem.components.general.TemporaryComponent;
+import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.input.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
@@ -85,20 +85,17 @@ public class CastSpellQueueSystem implements EntitySystem{
             Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
             float distanceSquared = targetPosition.distanceSquared(casterPosition);
             if(distanceSquared > (minimumCastRange * minimumCastRange)){
-                if(ExecutePlayerCommandsSystem.tryWalk(entityWorld, casterEntity, targetEntity, minimumCastRange)){
-                    if(isAutoAttack){
-                        entityWorld.setComponent(casterEntity, new AggroTargetComponent(targetEntity));
-                        entityWorld.setComponent(casterEntity, new IsWalkingToAggroTargetComponent());
-                        EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
-                        effectTrigger.setComponent(new TriggerTemporaryComponent());
-                        effectTrigger.setComponent(new TargetReachedTriggerComponent());
-                        effectTrigger.setComponent(new SourceTargetComponent());
-                        EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
-                        effect.setComponent(new RemoveComponentsComponent(IsWalkingToAggroTargetComponent.class));
-                        effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
-                        effectTrigger.setComponent(new TriggerSourceComponent(casterEntity));
-                        effectTrigger.setComponent(new TriggerOnCancelComponent());
-                    }
+                int walkTargetEntity;
+                //Clone temporary target to prevent the original from getting cleanuped
+                if(entityWorld.hasComponent(targetEntity, TemporaryComponent.class)){
+                    walkTargetEntity = entityWorld.createEntity();
+                    entityWorld.setComponent(walkTargetEntity, new TemporaryComponent());
+                    entityWorld.setComponent(walkTargetEntity, new PositionComponent(targetPosition.clone()));
+                }
+                else{
+                    walkTargetEntity = targetEntity;
+                }
+                if(ExecutePlayerCommandsSystem.tryWalk(entityWorld, casterEntity, walkTargetEntity, minimumCastRange)){
                     //Cast Spell
                     EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
                     effectTrigger.setComponent(new TriggerTemporaryComponent());
@@ -108,6 +105,20 @@ public class CastSpellQueueSystem implements EntitySystem{
                     effect.setComponent(new AddComponentsComponent(new CastSpellComponent(spellEntity, targetEntity)));
                     effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
                     effectTrigger.setComponent(new TriggerSourceComponent(casterEntity));
+                    //Manage IsWalkingToAggroTargetComponent
+                    if(isAutoAttack){
+                        entityWorld.setComponent(casterEntity, new AggroTargetComponent(targetEntity));
+                        entityWorld.setComponent(casterEntity, new IsWalkingToAggroTargetComponent());
+                        EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
+                        effectTrigger3.setComponent(new TriggerTemporaryComponent());
+                        effectTrigger3.setComponent(new TargetReachedTriggerComponent());
+                        effectTrigger3.setComponent(new SourceTargetComponent());
+                        EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
+                        effect3.setComponent(new RemoveComponentsComponent(IsWalkingToAggroTargetComponent.class));
+                        effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
+                        effectTrigger3.setComponent(new TriggerSourceComponent(casterEntity));
+                        effectTrigger3.setComponent(new TriggerOnCancelComponent());
+                    }
                     isCasted = true;
                 }
                 castInstant = false;

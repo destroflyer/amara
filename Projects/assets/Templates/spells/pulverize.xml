@@ -25,8 +25,7 @@
         </instantEffectTriggers>
         <castType>selfcast</castType>
         <castDuration>0.8</castDuration>
-        <stopBeforeCasting/>
-        <stopAfterCasting/>
+        <castCancelAction/>
         <castAnimation>
             <entity>
                 <name>attack1</name>
