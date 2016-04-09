@@ -10,6 +10,8 @@ import com.jme3.scene.Node;
 import amara.applications.ingame.client.systems.visualisation.*;
 import amara.applications.ingame.entitysystem.components.units.crowdcontrol.*;
 import amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.*;
+import amara.applications.ingame.entitysystem.components.game.*;
+import amara.applications.ingame.shared.games.Game;
 import amara.libraries.entitysystem.*;
 
 /**
@@ -30,7 +32,7 @@ public class KnockupVisualisationSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        updateCurves(deltaSeconds);
+        updateCurves(entityWorld, deltaSeconds);
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsKnockupedComponent.class);
         for(int entity : observer.getNew().getEntitiesWithAll(IsKnockupedComponent.class)){
             addCurve(entityWorld, entity);
@@ -44,9 +46,12 @@ public class KnockupVisualisationSystem implements EntitySystem{
         updatePositions(entityWorld);
     }
     
-    private void updateCurves(float deltaSeconds){
+    private void updateCurves(EntityWorld entityWorld, float deltaSeconds){
+        GameSpeedComponent gameSpeedComponent = entityWorld.getComponent(Game.ENTITY, GameSpeedComponent.class);
+        float gameSpeed = ((gameSpeedComponent != null)?gameSpeedComponent.getSpeed():1);
+        float passedTime = (deltaSeconds * gameSpeed);
         for(KnockupCurve knockupCurve : knockupCurves.values()){
-            knockupCurve.onTimePassed(deltaSeconds);
+            knockupCurve.onTimePassed(passedTime);
         }
     }
     

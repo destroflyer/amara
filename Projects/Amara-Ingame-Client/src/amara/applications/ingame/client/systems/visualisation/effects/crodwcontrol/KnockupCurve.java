@@ -36,8 +36,8 @@ public class KnockupCurve{
         return (1 - (remainingDuration / duration));
     }
     
-    public void onTimePassed(float deltaSeconds){
-        remainingDuration -= deltaSeconds;
+    public void onTimePassed(float passedTime){
+        remainingDuration -= passedTime;
     }
     
     public boolean isFinished(){
