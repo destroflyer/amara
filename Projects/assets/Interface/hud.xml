@@ -624,11 +624,11 @@
         </layer>
         <layer childLayout="center">
             <panel childLayout="vertical">
-                <panel height="21px"/>
+                <panel height="50px"/>
                 <panel childLayout="horizontal">
                     <panel/>
-                    <image id="ping_bar" filename="Interface/hud/ping_bar.png" width="69px" height="14px"></image>
-                    <panel width="21px"/>
+                    <image id="ping_bar" filename="Interface/hud/ping_bar.png" width="69px" height="14px"/>
+                    <panel id="ping_bar_margin_right" width="32px"/>
                 </panel>
             </panel>
         </layer>

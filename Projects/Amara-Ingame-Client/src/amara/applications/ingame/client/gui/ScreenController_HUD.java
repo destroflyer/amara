@@ -202,12 +202,12 @@ public class ScreenController_HUD extends GameScreenController{
         getTextRenderer("gold").setText("" + ((int) gold));
     }
     
+    private final int maximumPingBarWidth = 69;
+    private final int maximumDisplayedPing = 400;
     public void setPing(int ping){
-        int maximumWidth = 69;
-        int maximumDisplayedPing = 400;
-        int width = (int) ((((float) ping) / maximumDisplayedPing) * maximumWidth);
-        if(width > maximumWidth){
-            width = maximumWidth;
+        int width = (int) ((((float) ping) / maximumDisplayedPing) * maximumPingBarWidth);
+        if(width > maximumPingBarWidth){
+            width = maximumPingBarWidth;
         }
         Element pingBar = getElementByID("ping_bar");
         boolean shouldBeVisible = (width > 0);
@@ -215,6 +215,7 @@ public class ScreenController_HUD extends GameScreenController{
             pingBar.setVisible(shouldBeVisible);
         }
         pingBar.setConstraintWidth(new SizeValue(width + "px"));
+        getElementByID("ping_bar_margin_right").setConstraintWidth(new SizeValue(((maximumPingBarWidth - width) + 32) + "px"));
         pingBar.getParent().layoutElements();
         Effect hoverEffect = getElementByID("ping_container").getEffects(EffectEventId.onHover, Hint.class).get(0);
         hoverEffect.getParameters().setProperty("hintText", "Ping: " + ping + " ms");
