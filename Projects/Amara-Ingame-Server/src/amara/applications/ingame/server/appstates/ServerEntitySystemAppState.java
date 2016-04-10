@@ -86,8 +86,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         super.initialize(stateManager, application);
         SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();
         subNetworkServer.addMessageBackend(new AuthentificateClientsBackend(mainApplication.getGame(), entityWorld));
-        //networkServer.addMessageBackend(new UpdateNewClientBackend(entityWorld));
-        subNetworkServer.addMessageBackend(new InitializeClientBackend(mainApplication.getGame()));
+        subNetworkServer.addMessageBackend(new SendInitialEntityWorldBackend(entityWorld));
+        subNetworkServer.addMessageBackend(new StartGameBackend(mainApplication.getGame()));
         
         Game game = mainApplication.getGame();
         EntityWrapper gameEntity = entityWorld.getWrapped(entityWorld.createEntity());
@@ -336,6 +336,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         
         addEntitySystem(new SendEntityChangesSystem(subNetworkServer, new ClientComponentBlacklist()));
         addEntitySystem(new CheckMapObjectiveSystem(map, mainApplication));
+        //Precalculate first frame, so automatic entity processes will be done for the initial world
+        super.update(0);
     }
 
     @Override

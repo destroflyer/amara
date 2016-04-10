@@ -40,7 +40,6 @@ public class SendEntityChangesSystem implements EntitySystem{
             return super.areComponentsEqual(oldComponent, newComponent);
         }
     };
-    private boolean isInitialFrame = true;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -80,10 +79,6 @@ public class SendEntityChangesSystem implements EntitySystem{
         Message[] messages = getEntityChangesMessages(changes);
         for(Message message : messages){
             subNetworkServer.broadcastMessage(message);
-        }
-        if(isInitialFrame){
-            subNetworkServer.broadcastMessage(new Message_InitialEntityWorldSent());
-            isInitialFrame = false;
         }
     }
     

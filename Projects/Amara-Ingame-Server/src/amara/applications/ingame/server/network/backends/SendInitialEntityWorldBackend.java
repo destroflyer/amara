@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import com.jme3.network.Message;
 import amara.applications.ingame.entitysystem.systems.network.SendEntityChangesSystem;
-import amara.applications.ingame.network.messages.Message_ClientInitialized;
+import amara.applications.ingame.network.messages.*;
 import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.entitysystem.synchronizing.*;
 import amara.libraries.network.*;
@@ -17,9 +17,9 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class UpdateNewClientBackend implements MessageBackend{
+public class SendInitialEntityWorldBackend implements MessageBackend{
 
-    public UpdateNewClientBackend(EntityWorld entityWorld){
+    public SendInitialEntityWorldBackend(EntityWorld entityWorld){
         this.entityWorld = entityWorld;
     }
     private EntityWorld entityWorld;
@@ -27,7 +27,6 @@ public class UpdateNewClientBackend implements MessageBackend{
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_ClientInitialized){
-            Message_ClientInitialized message = (Message_ClientInitialized) receivedMessage;
             LinkedList<EntityChange> entityChanges = new LinkedList<EntityChange>();
             Iterator<Integer> entitiesIterator = entityWorld.getEntitiesWithAll().iterator();
             while(entitiesIterator.hasNext()){
@@ -42,6 +41,7 @@ public class UpdateNewClientBackend implements MessageBackend{
             for(Message entityChangeMessage : entityChangeMessages){
                 messageResponse.addAnswerMessage(entityChangeMessage);
             }
+            messageResponse.addBroadcastMessage(new Message_InitialEntityWorldSent());
         }
     }
 }

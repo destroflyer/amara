@@ -57,10 +57,10 @@ public class Game{
         return null;
     }
     
-    public boolean areAllPlayersInitialized(){
+    public boolean areAllPlayersReady(){
         for(GamePlayer[] team : teams){
             for(GamePlayer player : team){
-                if(!player.isInitialized()){
+                if(!player.isReady()){
                     return false;
                 }
             }

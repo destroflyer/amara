@@ -9,6 +9,7 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import amara.applications.ingame.client.IngameClientApplication;
 import amara.applications.ingame.client.network.backends.EntitySynchronizeBackend;
+import amara.applications.ingame.network.messages.Message_ClientReady;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.entitysystem.EntityWorld;
@@ -58,11 +59,13 @@ public class SynchronizeEntityWorldAppState extends BaseDisplayAppState<IngameCl
                 RemovedComponentChange removedComponentChange = (RemovedComponentChange) entityChange;
                 entityWorld.removeComponent(removedComponentChange.getEntity(), removedComponentChange.getComponentClass());
             }
-            else if(entityChange instanceof InitialEntityWorldChange){
+            else if(entityChange instanceof InitialEntityWorldLoadedChange){
                 getAppState(LocalEntitySystemAppState.class).onInitialWorldLoaded();
                 getAppState(PlayerAppState.class).onInitialWorldLoaded();
                 getAppState(LoadingScreenAppState.class).onInitialWorldLoaded();
                 initialChangesCount = -1;
+                NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
+                networkClient.sendMessage(new Message_ClientReady());
             }
         }
     }
@@ -75,10 +78,10 @@ public class SynchronizeEntityWorldAppState extends BaseDisplayAppState<IngameCl
     
     public void onInitialEntityWorldReceived(){
         initialChangesCount = pendingEntityChanges.size();
-        pendingEntityChanges.add(new InitialEntityWorldChange());
+        pendingEntityChanges.add(new InitialEntityWorldLoadedChange());
     }
     
-    private class InitialEntityWorldChange extends EntityChange{
+    private class InitialEntityWorldLoadedChange extends EntityChange{
         
     }
 }

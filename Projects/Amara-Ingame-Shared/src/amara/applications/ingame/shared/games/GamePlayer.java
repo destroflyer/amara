@@ -20,7 +20,7 @@ public class GamePlayer{
     private int authentificationKey;
     private int clientID = -1;
     private int entity;
-    private boolean isInitialized;
+    private boolean isReady;
 
     public GameSelectionPlayer getGameSelectionPlayer(){
         return gameSelectionPlayer;
@@ -46,11 +46,11 @@ public class GamePlayer{
         return entity;
     }
 
-    public void setInitialized(boolean isInitialized){
-        this.isInitialized = isInitialized;
+    public void setReady(boolean isReady){
+        this.isReady = isReady;
     }
 
-    public boolean isInitialized(){
-        return isInitialized;
+    public boolean isReady(){
+        return isReady;
     }
 }

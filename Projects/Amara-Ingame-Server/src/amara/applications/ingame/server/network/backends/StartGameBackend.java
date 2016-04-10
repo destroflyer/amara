@@ -13,23 +13,22 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class InitializeClientBackend implements MessageBackend{
+public class StartGameBackend implements MessageBackend{
 
-    public InitializeClientBackend(Game game){
+    public StartGameBackend(Game game){
         this.game = game;
     }
     private Game game;
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_ClientInitialized){
-            Message_ClientInitialized message = (Message_ClientInitialized) receivedMessage;
+        if(receivedMessage instanceof Message_ClientReady){
             GamePlayer player = game.getPlayer(messageResponse.getClientID());
-            player.setInitialized(true);
-            if(game.areAllPlayersInitialized()){
+            player.setReady(true);
+            if(game.areAllPlayersReady()){
                 game.start();
                 messageResponse.addBroadcastMessage(new Message_GameStarted());
-                System.out.println("All players connected, game started.");
+                System.out.println("All players ready, game started.");
             }
         }
     }

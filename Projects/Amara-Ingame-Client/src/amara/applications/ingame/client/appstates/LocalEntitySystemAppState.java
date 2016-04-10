@@ -76,7 +76,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(entitiesNode);
         NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.addMessageBackend(new GameStartedBackend(getAppState(LoadingScreenAppState.class)));
+        networkClient.addMessageBackend(new GameStartedBackend(entityWorld, getAppState(LoadingScreenAppState.class)));
         networkClient.addMessageBackend(new GameCrashedBackend(mainApplication));
         networkClient.addMessageBackend(new GameOverBackend(mainApplication));
         for(EntitySystem entitySystem : ParallelNetworkSystems.generateSystems()){

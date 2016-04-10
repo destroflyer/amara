@@ -37,6 +37,7 @@ public class MessagesSerializer_Ingame{
                     SpellIndex.class,
                 UpgradeSpellCommand.class,
             Message_ClientInitialized.class,
+            Message_ClientReady.class,
             Message_EntityChanges.class,
             Message_GameCrashed.class,
             Message_GameInfo.class,
