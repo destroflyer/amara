@@ -302,6 +302,9 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new PayOutBountiesSystem());
         addEntitySystem(new UpdateDeathsScoreSystem());
         addEntitySystem(new RemoveDeadUnitsSystem());
+        addEntitySystem(new CampResetSystem());
+        addEntitySystem(new CheckDeadCampsRespawnSystem());
+        addEntitySystem(new CampSpawnSystem());
         addEntitySystem(new RemoveFinishedMovementsSystem());
         addEntitySystem(new PlayMovementAnimationsSystem());
         addEntitySystem(new UpdateWalkMovementsSystem());
@@ -318,9 +321,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new TriggerInstantEffectSystem());
         addEntitySystem(new AggroSystem());
         addEntitySystem(new CheckCampMaximumAggroDistanceSystem());
-        addEntitySystem(new CampResetSystem());
-        addEntitySystem(new CheckDeadCampsRespawnSystem());
-        addEntitySystem(new CampSpawnSystem());
         addEntitySystem(new SetIdleAnimationsSystem());
         addEntitySystem(new IntersectionPushSystem(intersectionObserver));
         addEntitySystem(new MapIntersectionSystem(polyMapManager));

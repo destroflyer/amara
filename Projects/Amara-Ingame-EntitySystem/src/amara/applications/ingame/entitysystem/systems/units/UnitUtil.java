@@ -56,9 +56,9 @@ public class UnitUtil{
         if(movementComponent != null){
             entityWorld.removeComponent(entity, MovementComponent.class);
             entityWorld.removeEntity(movementComponent.getMovementEntity());
+            removeTemporaryTriggers(entityWorld, entity, TargetReachedTriggerComponent.class);
+            removeTemporaryTriggers(entityWorld, entity, CollisionTriggerComponent.class);
         }
-        removeTemporaryTriggers(entityWorld, entity, TargetReachedTriggerComponent.class);
-        removeTemporaryTriggers(entityWorld, entity, CollisionTriggerComponent.class);
     }
     
     private static void triggerActionCancelledTriggers(EntityWorld entityWorld, int entity){

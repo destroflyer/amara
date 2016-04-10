@@ -34,22 +34,21 @@ public class CampResetSystem implements EntitySystem{
             if(ExecutePlayerCommandsSystem.tryWalk(entityWorld, entity, targetEntity, -1)){
                 int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
                 entityWorld.removeComponent(movementEntity, MovementIsCancelableComponent.class);
-                EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
-                effectTrigger.setComponent(new TriggerTemporaryComponent());
-                effectTrigger.setComponent(new TargetReachedTriggerComponent());
-                effectTrigger.setComponent(new SourceTargetComponent());
-                EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
+                int effectTriggerEntity = entityWorld.createEntity();
+                entityWorld.setComponent(effectTriggerEntity, new TriggerTemporaryComponent());
+                entityWorld.setComponent(effectTriggerEntity, new TargetReachedTriggerComponent());
+                entityWorld.setComponent(effectTriggerEntity, new SourceTargetComponent());
+                int effectEntity = entityWorld.createEntity();
                 LinkedList<Object> componentsToAdd = new LinkedList<Object>();
                 componentsToAdd.add(new DirectionComponent(campComponent.getDirection()));
                 if(entityWorld.hasComponent(campComponent.getCampEntity(), CampHealthResetComponent.class)){
                     float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();
                     componentsToAdd.add(new HealthComponent(maximumHealth));
                 }
-                effect.setComponent(new AddComponentsComponent(componentsToAdd.toArray(new Object[componentsToAdd.size()])));
-                effect.setComponent(new RemoveComponentsComponent(CampResetComponent.class));
-                effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
-                effectTrigger.setComponent(new TriggerSourceComponent(entity));
-                effectTrigger.setComponent(new TriggerOnceComponent());
+                entityWorld.setComponent(effectEntity, new AddComponentsComponent(componentsToAdd.toArray(new Object[componentsToAdd.size()])));
+                entityWorld.setComponent(effectEntity, new RemoveComponentsComponent(CampResetComponent.class));
+                entityWorld.setComponent(effectTriggerEntity, new TriggeredEffectComponent(effectEntity));
+                entityWorld.setComponent(effectTriggerEntity, new TriggerSourceComponent(entity));
             }
             else{
                 entityWorld.removeEntity(targetEntity);
