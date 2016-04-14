@@ -1,32 +1,35 @@
 <template>
-    <value name="duration">1.5</value>
     <entity id="spell">
-        <name>Block</name>
-        <description>Maria takes a blocking pose for [duration] seconds, being unable to move, attack or cast spells. Any incoming damage during that time is reduced by 90%.</description>
-        <spellVisualisation>maria_block</spellVisualisation>
+        <name>Fatique</name>
+        <description>Slows an enemy character by 30% and reduces his damage dealt by 40% for 3 seconds.</description>
+        <spellVisualisation>fatique</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
-                <casterTarget/>
+                <targetTarget/>
                 <triggeredEffect>
                     <entity>
                         <triggerSpellEffects>#spell</triggerSpellEffects>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/fatique_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
             </entity>
         </instantEffectTriggers>
-        <castType>selfcast</castType>
-        <castCancelAction/>
-        <castDuration>[duration]</castDuration>
-        <stopBeforeCasting/>
-        <castAnimation>
+        <castType>single_target</castType>
+        <castTurnToTarget/>
+        <range>10</range>
+        <baseCooldown>210</baseCooldown>
+        <spellTargetRules>
             <entity>
-                <name>great_sword_crouching</name>
-                <loopDuration>[duration]</loopDuration>
+                <requireCharacter/>
+                <acceptEnemies/>
             </entity>
-        </castAnimation>
-        <baseCooldown>12</baseCooldown>
+        </spellTargetRules>
     </entity>
     <!--spell effect-->
     <entity>
@@ -37,11 +40,13 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <addBuff duration="[duration]">
+                        <addBuff duration="3">
                             <entity>
+                                <buffVisualisation>withered</buffVisualisation>
                                 <continuousAttributes>
                                     <entity>
-                                        <bonusPercentageIncomingDamageAmplification>-0.9</bonusPercentageIncomingDamageAmplification>
+                                        <bonusPercentageWalkSpeed>-0.3</bonusPercentageWalkSpeed>
+                                        <bonusPercentageOutgoingDamageAmplification>-0.4</bonusPercentageOutgoingDamageAmplification>
                                     </entity>
                                 </continuousAttributes>
                             </entity>

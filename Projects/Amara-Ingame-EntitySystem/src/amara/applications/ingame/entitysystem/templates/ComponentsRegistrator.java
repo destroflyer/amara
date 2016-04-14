@@ -305,22 +305,22 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent(value);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageDamageReductionComponent.class);
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent.class);
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageDamageReductionComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageDamageReductionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageDamageReductionComponent>("bonusPercentageDamageReduction"){
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent>("bonusPercentageIncomingDamageAmplification"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageDamageReductionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent construct(){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
                     value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
-                return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageDamageReductionComponent(value);
+                return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent(value);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageLifestealComponent.class);
@@ -339,6 +339,24 @@ public class ComponentsRegistrator{
                     value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageLifestealComponent(value);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent>("bonusPercentageOutgoingDamageAmplification"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent(value);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent.class);
@@ -395,24 +413,6 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.attributes.CriticalChanceComponent(value);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.DamageReductionComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.DamageReductionComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.DamageReductionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.DamageReductionComponent>("damageReduction"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.attributes.DamageReductionComponent construct(){
-                float value = 0;
-                String valueText = element.getText();
-                if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
-                }
-                return new amara.applications.ingame.entitysystem.components.attributes.DamageReductionComponent(value);
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
@@ -467,6 +467,24 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.attributes.HealthRegenerationComponent(value);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent>("incomingDamageAmplification"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent(value);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.LifestealComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.LifestealComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
@@ -519,6 +537,24 @@ public class ComponentsRegistrator{
                     value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent(value);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent>("outgoingDamageAmplification"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent construct(){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent(value);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent.class);

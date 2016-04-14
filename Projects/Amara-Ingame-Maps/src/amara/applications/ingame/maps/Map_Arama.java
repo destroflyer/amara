@@ -46,9 +46,11 @@ public class Map_Arama extends Map{
     public Map_Arama(){
         spells = new MapSpells[]{
             new MapSpells(new String[]{"player_0", "player_1"},
-                new MapSpell("spells/battle_cry"),
-                new MapSpell("spells/empower"),
-                new MapSpell("spells/dragons_rage")
+                new MapSpell("spells/instant_transmission/base"),
+                new MapSpell("spells/bleed_out/base"),
+                new MapSpell("spells/x_defense/base"),
+                new MapSpell("spells/fatique/base"),
+                new MapSpell("spells/recovery/base")
             ),
             new MapSpells("backport", new MapSpell("spells/backport/base(-1)"))
         };

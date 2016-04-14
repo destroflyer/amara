@@ -102,28 +102,32 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         effectImpact.setComponent(effectCastSourceComponent);
                     }
                     if(physicalDamage != 0){
-                        float armor = 0;
                         ArmorComponent armorComponent = entityWorld.getComponent(targetEntity, ArmorComponent.class);
                         if(armorComponent != null){
-                            armor = armorComponent.getValue();
+                            physicalDamage *= getResistanceDamageFactor(armorComponent.getValue());
                         }
-                        physicalDamage *= getResistanceDamageFactor(armor);
-                        DamageReductionComponent damageReductionComponent = entityWorld.getComponent(targetEntity, DamageReductionComponent.class);
-                        if(damageReductionComponent != null){
-                            physicalDamage *= (1 - damageReductionComponent.getValue());
+                        IncomingDamageAmplificationComponent incomingDamageAmplificationComponent = entityWorld.getComponent(targetEntity, IncomingDamageAmplificationComponent.class);
+                        if(incomingDamageAmplificationComponent != null){
+                            physicalDamage *= (1 + incomingDamageAmplificationComponent.getValue());
+                        }
+                        OutgoingDamageAmplificationComponent outgoingDamageAmplificationComponent = entityWorld.getComponent(effectSourceEntity, OutgoingDamageAmplificationComponent.class);
+                        if(outgoingDamageAmplificationComponent != null){
+                            physicalDamage *= (1 + outgoingDamageAmplificationComponent.getValue());
                         }
                         effectImpact.setComponent(new ResultingPhysicalDamageComponent(physicalDamage));
                     }
                     if(magicDamage != 0){
-                        float magicResistance = 0;
                         MagicResistanceComponent magicResistanceComponent = entityWorld.getComponent(targetEntity, MagicResistanceComponent.class);
                         if(magicResistanceComponent != null){
-                            magicResistance = magicResistanceComponent.getValue();
+                            magicDamage *= getResistanceDamageFactor(magicResistanceComponent.getValue());
                         }
-                        magicDamage *= getResistanceDamageFactor(magicResistance);
-                        DamageReductionComponent damageReductionComponent = entityWorld.getComponent(targetEntity, DamageReductionComponent.class);
-                        if(damageReductionComponent != null){
-                            magicDamage *= (1 - damageReductionComponent.getValue());
+                        IncomingDamageAmplificationComponent incomingDamageAmplificationComponent = entityWorld.getComponent(targetEntity, IncomingDamageAmplificationComponent.class);
+                        if(incomingDamageAmplificationComponent != null){
+                            magicDamage *= (1 + incomingDamageAmplificationComponent.getValue());
+                        }
+                        OutgoingDamageAmplificationComponent outgoingDamageAmplificationComponent = entityWorld.getComponent(effectSourceEntity, OutgoingDamageAmplificationComponent.class);
+                        if(outgoingDamageAmplificationComponent != null){
+                            magicDamage *= (1 + outgoingDamageAmplificationComponent.getValue());
                         }
                         effectImpact.setComponent(new ResultingMagicDamageComponent(magicDamage));
                     }

@@ -19,9 +19,8 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 import com.jme3.network.Message;
 import amara.applications.ingame.shared.maps.*;
 import amara.applications.master.client.MasterserverClientUtil;
-import amara.applications.master.client.launcher.comboboxes.ComboboxModel_MapSpells;
-import amara.applications.master.network.messages.Message_LockInGameSelection;
-import amara.applications.master.network.messages.Message_SetGameSelectionPlayerData;
+import amara.applications.master.client.launcher.comboboxes.*;
+import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.*;
 import amara.libraries.network.NetworkClient;
 
@@ -97,6 +96,7 @@ public class PanGameSelection extends javax.swing.JPanel{
     private void initializeMapSpellsCombobox(int mapSpellsIndex, MapSpell[] mapSpells){
         cbxMapSpells[mapSpellsIndex].setEnabled(true);
         cbxMapSpells[mapSpellsIndex].setModel(new ComboboxModel_MapSpells(mapSpells, 40));
+        cbxMapSpells[mapSpellsIndex].setRenderer(new ComboboxRenderer_MapSpells(mapSpells));
         GameSelectionPlayer gameSelectionPlayer = gameSelection.getPlayer(MasterserverClientUtil.getPlayerID());
         int[][] mapSpellsIndices = gameSelectionPlayer.getPlayerData().getMapSpellsIndices();
         if(mapSpellsIndices != null){

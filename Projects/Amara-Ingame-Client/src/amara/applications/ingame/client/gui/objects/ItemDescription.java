@@ -90,10 +90,15 @@ public class ItemDescription{
             description = addSeperator(description);
             description += GUIUtil.getValueText_Signed(bonusFlatMagicResistanceComponent.getValue()) + " Magic Resistance";
         }
-        BonusPercentageDamageReductionComponent bonusPercentageDamageReductionComponent = entityWorld.getComponent(itemEntity, BonusPercentageDamageReductionComponent.class);
-        if(bonusPercentageDamageReductionComponent != null){
+        BonusPercentageIncomingDamageAmplificationComponent bonusPercentageIncomingDamageAmplificationComponent = entityWorld.getComponent(itemEntity, BonusPercentageIncomingDamageAmplificationComponent.class);
+        if(bonusPercentageIncomingDamageAmplificationComponent != null){
             description = addSeperator(description);
-            description += GUIUtil.getValueText_Signed(bonusPercentageDamageReductionComponent.getValue() * 100) + "% Damage Reduction";
+            description += GUIUtil.getValueText_Signed(bonusPercentageIncomingDamageAmplificationComponent.getValue() * 100) + "% Incoming Damage Amplification";
+        }
+        BonusPercentageOutgoingDamageAmplificationComponent bonusPercentageOutgoingDamageAmplificationComponent = entityWorld.getComponent(itemEntity, BonusPercentageOutgoingDamageAmplificationComponent.class);
+        if(bonusPercentageOutgoingDamageAmplificationComponent != null){
+            description = addSeperator(description);
+            description += GUIUtil.getValueText_Signed(bonusPercentageOutgoingDamageAmplificationComponent.getValue() * 100) + "% Outgoing Damage Amplification";
         }
         ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(itemEntity, ItemPassivesComponent.class);
         if(itemPassivesComponent != null){

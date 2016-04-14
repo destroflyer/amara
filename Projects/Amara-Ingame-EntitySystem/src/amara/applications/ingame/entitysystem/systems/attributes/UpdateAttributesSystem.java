@@ -86,7 +86,8 @@ public class UpdateAttributesSystem implements EntitySystem{
             walkSpeed *= attributeBonus.getPercentageWalkSpeed();
             float criticalChance = attributeBonus.getPercentageCriticalChance();
             float lifesteal = attributeBonus.getPercentageLifesteal();
-            float damageReduction = Math.min(attributeBonus.getPercentageDamageReduction(), 1);
+            float incomingDamageAmplification = Math.max(-1, attributeBonus.getPercentageIncomingDamageAmplification());
+            float outgoingDamageAmplification = Math.max(-1, attributeBonus.getPercentageOutgoingDamageAmplification());
             float goldPerSecond = attributeBonus.getFlatGoldPerSecond();
             HealthComponent oldHealthComponent = entityWrapper.getComponent(HealthComponent.class);
             if(oldHealthComponent != null){
@@ -140,7 +141,8 @@ public class UpdateAttributesSystem implements EntitySystem{
             entityWrapper.setComponent(new WalkSpeedComponent(walkSpeed));
             entityWrapper.setComponent(new CriticalChanceComponent(criticalChance));
             entityWrapper.setComponent(new LifestealComponent(lifesteal));
-            entityWrapper.setComponent(new DamageReductionComponent(damageReduction));
+            entityWrapper.setComponent(new IncomingDamageAmplificationComponent(incomingDamageAmplification));
+            entityWrapper.setComponent(new OutgoingDamageAmplificationComponent(outgoingDamageAmplification));
             entityWrapper.setComponent(new GoldPerSecondComponent(goldPerSecond));
             entityWrapper.removeComponent(RequestUpdateAttributesComponent.class);
         }
@@ -200,9 +202,13 @@ public class UpdateAttributesSystem implements EntitySystem{
         if(bonusPercentageLifestealComponent != null){
             attributeBonus.addPercentageLifesteal(bonusPercentageLifestealComponent.getValue());
         }
-        BonusPercentageDamageReductionComponent bonusPercentageDamageReductionComponent = bonusEntityWrapper.getComponent(BonusPercentageDamageReductionComponent.class);
-        if(bonusPercentageDamageReductionComponent != null){
-            attributeBonus.addPercentageDamageReduction(bonusPercentageDamageReductionComponent.getValue());
+        BonusPercentageIncomingDamageAmplificationComponent bonusPercentageIncomingDamageAmplificationComponent = bonusEntityWrapper.getComponent(BonusPercentageIncomingDamageAmplificationComponent.class);
+        if(bonusPercentageIncomingDamageAmplificationComponent != null){
+            attributeBonus.addPercentageIncomingDamageAmplification(bonusPercentageIncomingDamageAmplificationComponent.getValue());
+        }
+        BonusPercentageOutgoingDamageAmplificationComponent bonusPercentageOutgoingDamageAmplificationComponent = bonusEntityWrapper.getComponent(BonusPercentageOutgoingDamageAmplificationComponent.class);
+        if(bonusPercentageOutgoingDamageAmplificationComponent != null){
+            attributeBonus.addPercentageOutgoingDamageAmplification(bonusPercentageOutgoingDamageAmplificationComponent.getValue());
         }
         BonusFlatGoldPerSecondComponent bonusFlatGoldPerSecondComponent = bonusEntityWrapper.getComponent(BonusFlatGoldPerSecondComponent.class);
         if(bonusFlatGoldPerSecondComponent != null){
