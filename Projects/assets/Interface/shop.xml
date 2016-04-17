@@ -4,7 +4,7 @@
     <useControls filename="nifty-default-controls.xml"/>
     <screen id="start" controller="amara.applications.ingame.client.gui.ScreenController_Shop">
         <layer childLayout="absolute">
-            <control id="shop_window" name="window" title="Shop" x="100px" y="100px" width="525px" height="400px" hideOnClose="true" visible="false">
+            <control id="shop_window" name="window" title="Shop" x="80px" y="80px" width="800px" height="600px" hideOnClose="true" visible="false">
                 <panel childLayout="horizontal" width="100%" height="100%">
                     <panel id="shop_container" childLayout="horizontal" width="100%" height="100%">
                         <panel childLayout="vertical" width="200px" height="100%" padding="10px" backgroundColor="#000D">
@@ -83,7 +83,7 @@
                                 <text id="shop_item_information_name" height="100%" text="???" font="Interface/fonts/Verdana_14.fnt" textHAlign="left"/>
                             </panel>
                             <panel id="shop_item_information_recipe" childLayout="absolute" width="100%" backgroundColor="#666F"/>
-                            <panel childLayout="horizontal" width="100%" height="80px" backgroundColor="#000A">
+                            <panel childLayout="horizontal" width="100%" height="108px" backgroundColor="#000A">
                                 <panel width="10px"/>
                                 <panel childLayout="vertical">
                                     <panel height="10px"/>

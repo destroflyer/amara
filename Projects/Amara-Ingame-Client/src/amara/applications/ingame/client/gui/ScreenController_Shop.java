@@ -36,7 +36,7 @@ public class ScreenController_Shop extends GameScreenController{
         super("start");
     }
     private final static String ITEM_FILTER_CHECKBOX_ID_PREFIX = "shop_item_filter_checkbox_";
-    private final static int ITEMS_PER_ROW = 5;
+    private final static int ITEMS_PER_ROW = 10;
     private final static int ITEMS_ROW_HEIGHT = 70;
     private static final int INGREDIENT_WIDTH = 45;
     private static final int INGREDIENT_HEIGHT = 60;
