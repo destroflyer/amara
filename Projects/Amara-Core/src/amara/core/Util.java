@@ -466,10 +466,6 @@ public class Util{
         return result;
     }
     
-    public static void main(String[] args){
-        System.out.println(lineBreakText("Aus sprachwissenschaftlicher Sicht ist ein Text die sprachliche Form einer kommunikativen Handlung. Texte werden einerseits durch pragmatische, also situationsbezogene, „textexterne“ Merkmale, andererseits durch sprachliche, „textinterne“ Merkmale bestimmt.[1] In der Sprach- und Kommunikationswissenschaft existieren viele verschiedene Textdefinitionen nebeneinander, die anhand verschiedener Textualitäts­kriterien Texte und „Nicht-Texte“ voneinander trennen. Weiter gefasste Textbegriffe schließen auch Illustrationen oder Elemente der nonverbalen Kommunikation (etwa Mimik und Gestik) in den Text ein.[2] Unter Umständen kann sogar eine reine Bildsequenz als Text gelten, wenn damit erkennbar eine kommunikative Funktion erfüllt wird.", 30));
-    }
-    
     public static int getNeededBitsCount(int value){
         return (32 - Integer.numberOfLeadingZeros(value));
     }
