@@ -18,6 +18,7 @@ public class DisplayInventorySystem extends GUIDisplaySystem{
     public DisplayInventorySystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
     }
+    public static final int ITEM_DESCRIPTION_LINE_LENGTH = 40;
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
@@ -32,7 +33,7 @@ public class DisplayInventorySystem extends GUIDisplaySystem{
                 String imageFilePath = getItemImageFilePath(entityWorld, inventoryComponent.getItemEntities(), i);
                 screenController_HUD.setInventoryItem_Image(i, imageFilePath);
                 if((i < inventoryComponent.getItemEntities().length) && (inventoryComponent.getItemEntities()[i] != -1)){
-                    String description = ItemDescription.generate_NameAndDescription(entityWorld, inventoryComponent.getItemEntities()[i]);
+                    String description = ItemDescription.generate_NameAndDescription(entityWorld, inventoryComponent.getItemEntities()[i], ITEM_DESCRIPTION_LINE_LENGTH);
                     screenController_HUD.showInventoryItem_Description(i, description);
                 }
                 else{

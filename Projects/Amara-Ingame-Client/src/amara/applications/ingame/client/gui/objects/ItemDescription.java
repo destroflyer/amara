@@ -9,6 +9,7 @@ import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
+import amara.core.Util;
 import amara.libraries.entitysystem.EntityWorld;
 
 /**
@@ -18,17 +19,25 @@ import amara.libraries.entitysystem.EntityWorld;
 public class ItemDescription{
     
     public static String generate_NameAndDescription(EntityWorld entityWorld, int itemEntity){
+        return generate_NameAndDescription(entityWorld, itemEntity, -1);
+    }
+    
+    public static String generate_NameAndDescription(EntityWorld entityWorld, int itemEntity, int lineBreakLength){
         String description = "";
         NameComponent nameComponent = entityWorld.getComponent(itemEntity, NameComponent.class);
         if(nameComponent != null){
             description += nameComponent.getName();
             description = addNewLine(description);
         }
-        description += generate_Description(entityWorld, itemEntity);
+        description += generate_Description(entityWorld, itemEntity, lineBreakLength);
         return description;
     }
     
     public static String generate_Description(EntityWorld entityWorld, int itemEntity){
+        return generate_Description(entityWorld, itemEntity, -1);
+    }
+    
+    public static String generate_Description(EntityWorld entityWorld, int itemEntity, int lineBreakLength){
         String description = "";
         BonusFlatWalkSpeedComponent bonusFlatWalkSpeedComponent = entityWorld.getComponent(itemEntity, BonusFlatWalkSpeedComponent.class);
         if(bonusFlatWalkSpeedComponent != null){
@@ -143,6 +152,9 @@ public class ItemDescription{
                     description += " (" + GUIUtil.getValueText(baseCooldownComponent.getDuration()) + " seconds cooldown)";
                 }
             }
+        }
+        if(lineBreakLength != -1){
+            description = Util.lineBreakText(description, lineBreakLength);
         }
         return description;
     }

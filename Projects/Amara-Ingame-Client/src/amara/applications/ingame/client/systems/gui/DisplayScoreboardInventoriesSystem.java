@@ -42,7 +42,7 @@ public class DisplayScoreboardInventoriesSystem extends PlayersDisplaySystem{
             String imageFilePath = DisplayInventorySystem.getItemImageFilePath(entityWorld, inventoryComponent.getItemEntities(), i);
             screenController_HUD.setScoreboard_InventoryItem_Image(playerIndex, i, imageFilePath);
             if((i < inventoryComponent.getItemEntities().length) && (inventoryComponent.getItemEntities()[i] != -1)){
-                String description = ItemDescription.generate_NameAndDescription(entityWorld, inventoryComponent.getItemEntities()[i]);
+                String description = ItemDescription.generate_NameAndDescription(entityWorld, inventoryComponent.getItemEntities()[i], DisplayInventorySystem.ITEM_DESCRIPTION_LINE_LENGTH);
                 screenController_HUD.showScoreboard_InventoryItem_Description(playerIndex, i, description);
             }
             else{
