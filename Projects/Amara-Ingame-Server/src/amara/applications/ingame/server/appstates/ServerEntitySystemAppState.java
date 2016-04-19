@@ -293,6 +293,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new TriggerDamageTakenSystem());
         addEntitySystem(new LifestealSystem());
         addEntitySystem(new RemoveAppliedEffectsSystem());
+        addEntitySystem(new CleanupEffectTriggersSystem());
+        addEntitySystem(new CleanupEffectsSystem());
         addEntitySystem(new HealthRegenerationSystem());
         addEntitySystem(new DeathSystem());
         addEntitySystem(new TriggerDeathEffectSystem());
@@ -331,8 +333,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CleanupMovementsSystem());
         addEntitySystem(new CleanupBuffAreasSystem());
         addEntitySystem(new CleanupBuffsSystem());
-        addEntitySystem(new CleanupEffectTriggersSystem());
-        addEntitySystem(new CleanupEffectsSystem());
         
         addEntitySystem(new SendEntityChangesSystem(subNetworkServer, new ClientComponentBlacklist()));
         addEntitySystem(new CheckMapObjectiveSystem(map, mainApplication));
