@@ -31,26 +31,24 @@ public abstract class SimpleVisualAttachmentSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, componentClassesToObserve);
-        observeEntities(entityWorld, observer);
-    }
-    
-    protected void observeEntities(EntityWorld entityWorld, ComponentMapObserver observer){
         for(int entity : observer.getNew().getEntitiesWithAll(componentClass)){
-            Spatial visualAttachment = createVisualAttachment(entityWorld, entity);
-            if(visualAttachment != null){
-                visualAttachment.setName(getVisualAttachmentID(entity));
-                updateVisualAttachment(entityWorld, entity, visualAttachment);
-                attach(entity, visualAttachment);
-            }
+            createAndAttachVisualAttachment(entityWorld, entity);
         }
         for(int entity : observer.getChanged().getEntitiesWithAll(componentClass)){
             Spatial visualAttachment = getVisualAttachment(entity);
-            if(visualAttachment != null){
-                updateVisualAttachment(entityWorld, entity, visualAttachment);
-            }
+            updateVisualAttachment(entityWorld, entity, visualAttachment);
         }
         for(int entity : observer.getRemoved().getEntitiesWithAll(componentClass)){
             detach(entity);
+        }
+    }
+    
+    protected void createAndAttachVisualAttachment(EntityWorld entityWorld, int entity){
+        Spatial visualAttachment = createVisualAttachment(entityWorld, entity);
+        if(visualAttachment != null){
+            visualAttachment.setName(getVisualAttachmentID(entity));
+            updateVisualAttachment(entityWorld, entity, visualAttachment);
+            attach(entity, visualAttachment);
         }
     }
     

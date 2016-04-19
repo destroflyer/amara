@@ -35,29 +35,33 @@ public class EffectTriggerUtil{
     public static EntityWrapper triggerEffect(EntityWorld entityWorld, int effectTriggerEntity, int targetEntity){
         if(areTriggerConditionsMet(entityWorld, effectTriggerEntity, targetEntity)){
             EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
-            int effectEntity = entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class).getEffectEntity();
-            effectCast.setComponent(new PrepareEffectComponent(effectEntity));
-            TriggerSourceComponent triggerSourceComponent = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class);
-            if(triggerSourceComponent != null){
-                EntityUtil.transferComponents(entityWorld, triggerSourceComponent.getSourceEntity(), effectCast.getId(), new Class[]{
-                    EffectCastSourceComponent.class,
-                    EffectCastSourceSpellComponent.class
-                });
+            TriggeredEffectComponent triggeredEffectComponent = entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class);
+            //Check if this trigger and his effect have already been cleanuped
+            if(triggeredEffectComponent != null){
+                int effectEntity = triggeredEffectComponent.getEffectEntity();
+                effectCast.setComponent(new PrepareEffectComponent(effectEntity));
+                TriggerSourceComponent triggerSourceComponent = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class);
+                if(triggerSourceComponent != null){
+                    EntityUtil.transferComponents(entityWorld, triggerSourceComponent.getSourceEntity(), effectCast.getId(), new Class[]{
+                        EffectCastSourceComponent.class,
+                        EffectCastSourceSpellComponent.class
+                    });
+                }
+                if(targetEntity != -1){
+                    effectCast.setComponent(new EffectCastTargetComponent(targetEntity));
+                }
+                int[] targetEntities = getTargetEntities(entityWorld, effectTriggerEntity, targetEntity);
+                effectCast.setComponent(new AffectedTargetsComponent(targetEntities));
+                if(entityWorld.hasComponent(effectTriggerEntity, TriggerOnceComponent.class)){
+                    entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
+                }
+                TriggerDelayComponent triggerDelayComponent = entityWorld.getComponent(effectTriggerEntity, TriggerDelayComponent.class);
+                if(triggerDelayComponent != null){
+                    effectCast.setComponent(new RemainingEffectDelayComponent(triggerDelayComponent.getDuration()));
+                }
+                SetCooldownOnCastingSystem.setOnCooldown(entityWorld, effectTriggerEntity);
+                return effectCast;
             }
-            if(targetEntity != -1){
-                effectCast.setComponent(new EffectCastTargetComponent(targetEntity));
-            }
-            int[] targetEntities = getTargetEntities(entityWorld, effectTriggerEntity, targetEntity);
-            effectCast.setComponent(new AffectedTargetsComponent(targetEntities));
-            if(entityWorld.hasComponent(effectTriggerEntity, TriggerOnceComponent.class)){
-                entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
-            }
-            TriggerDelayComponent triggerDelayComponent = entityWorld.getComponent(effectTriggerEntity, TriggerDelayComponent.class);
-            if(triggerDelayComponent != null){
-                effectCast.setComponent(new RemainingEffectDelayComponent(triggerDelayComponent.getDuration()));
-            }
-            SetCooldownOnCastingSystem.setOnCooldown(entityWorld, effectTriggerEntity);
-            return effectCast;
         }
         return null;
     }

@@ -42,7 +42,12 @@ public class MinionAggroIndicatorSystem extends TopHUDAttachmentSystem{
 
     @Override
     protected void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment){
-        if(!isTargetingPlayerCharacter(entityWorld, entity)){
+        if(isTargetingPlayerCharacter(entityWorld, entity)){
+            if(visualAttachment == null){
+                createAndAttachVisualAttachment(entityWorld, entity);
+            }
+        }
+        else{
             detach(entity);
         }
     }
