@@ -61,11 +61,11 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
         mainApplication.getRootNode().attachChild(mapTerrain.getTerrain());
         mainApplication.getRootNode().attachChild(visualsNode);
         mainApplication.getRootNode().attachChild(cameraNode);
+        initializeCamera();
         new Thread(new Runnable(){
 
             @Override
             public void run(){
-                initializeCamera();
                 initializeLights();
                 updateVisuals();
             }
