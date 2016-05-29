@@ -64,8 +64,8 @@ public class Map_Arama extends Map{
     @Override
     public void load(EntityWorld entityWorld){
         EntityWrapper audioBackgroundMusic = entityWorld.getWrapped(entityWorld.createEntity());
-        audioBackgroundMusic.setComponent(new AudioComponent("Sounds/music/world_of_ice.ogg"));
-        audioBackgroundMusic.setComponent(new AudioVolumeComponent(1.25f));
+        audioBackgroundMusic.setComponent(new AudioComponent("Sounds/music/minds_eye.ogg"));
+        audioBackgroundMusic.setComponent(new AudioVolumeComponent(2));
         audioBackgroundMusic.setComponent(new AudioLoopComponent());
         audioBackgroundMusic.setComponent(new AudioGlobalComponent());
         audioBackgroundMusic.setComponent(new StartPlayingAudioComponent());
