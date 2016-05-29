@@ -6,7 +6,7 @@ package amara.applications.ingame.client.gui;
 
 import com.jme3.math.Vector2f;
 import com.jme3.texture.Texture2D;
-import amara.applications.ingame.client.appstates.SendPlayerCommandsAppState;
+import amara.applications.ingame.client.appstates.*;
 import amara.applications.ingame.client.gui.objects.SpellInformation;
 import amara.applications.ingame.shared.maps.MapMinimapInformation;
 import amara.core.Util;
@@ -35,6 +35,7 @@ public class ScreenController_HUD extends GameScreenController{
     }
     private int currentUpgradeSpellIndex = -1;
     private SpellInformation[] spellInformations_Passives = new SpellInformation[0];
+    private SpellInformation[] spellInformations_LearnableSpells = new SpellInformation[0];
     private SpellInformation[] spellInformations_Spells = new SpellInformation[0];
     private SpellInformation[] spellInformations_MapSpells = new SpellInformation[0];
     //Show/Hide the information by saving the actions and checking them in an update loop
@@ -270,6 +271,10 @@ public class ScreenController_HUD extends GameScreenController{
         this.spellInformations_Passives = spellInformations_Passives;
     }
 
+    public void setSpellInformations_LearnableSpells(SpellInformation[] spellInformations_LearnableSpells){
+        this.spellInformations_LearnableSpells = spellInformations_LearnableSpells;
+    }
+
     public void setSpellInformations_Spells(SpellInformation[] spellInformations_Spells){
         this.spellInformations_Spells = spellInformations_Spells;
     }
@@ -282,6 +287,13 @@ public class ScreenController_HUD extends GameScreenController{
         int index = Integer.parseInt(indexText);
         if(index < spellInformations_Passives.length){
             action_ShowSpellInformation = spellInformations_Passives[index];
+        }
+    }
+    
+    public void showSpellInformation_LearnableSpell(String indexText){
+        int index = Integer.parseInt(indexText);
+        if(index < spellInformations_LearnableSpells.length){
+            action_ShowSpellInformation = spellInformations_LearnableSpells[index];
         }
     }
     
@@ -311,6 +323,8 @@ public class ScreenController_HUD extends GameScreenController{
         }
         else if(action_HideSpellInformation){
             getElementByID("spell_information_layer").setVisible(false);
+            PlayerAppState playerAppState = mainApplication.getStateManager().getState(PlayerAppState.class);
+            playerAppState.getSpellIndicatorSystem().hideIndicator();
             action_HideSpellInformation = false;
         }
     }
@@ -324,6 +338,8 @@ public class ScreenController_HUD extends GameScreenController{
         if(hasCooldown){
             getTextRenderer("spell_information_cooldown").setText(GUIUtil.getValueText(spellInformation.getCooldown()) + "s");
         }
+        PlayerAppState playerAppState = mainApplication.getStateManager().getState(PlayerAppState.class);
+        playerAppState.getSpellIndicatorSystem().showIndicator(spellInformation.getEntity());
     }
     
     public void setUpgradeSpellsLayerVisible(boolean isVisible){
@@ -339,6 +355,7 @@ public class ScreenController_HUD extends GameScreenController{
     }
     
     public void learnOrUpgradeSpell(String spellIndexString){
+        hideSpellInformation();
         int spellIndex = Integer.parseInt(spellIndexString);
         SendPlayerCommandsAppState sendPlayerCommandsAppState = mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class);
         sendPlayerCommandsAppState.learnOrUpgradeSpell(spellIndex);

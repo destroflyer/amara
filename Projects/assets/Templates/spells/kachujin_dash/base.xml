@@ -3,6 +3,11 @@
         <name>Flying Highkick</name>
         <description>Dashes a fixed distance in the target direction. (TODO: If an enemy is marked by "Mind of the Monk", "Flying Highkick" gains additional range up to the marked target)</description>
         <spellVisualisation>kachujin_dash</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <rectangleIndicator width="2" height="8"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>

@@ -4,6 +4,11 @@
         <name>Milkyway Shot</name>
         <description>Ganfaul channels for [castDuration] seconds and, after a small delay, shoots a laser in a straight line. Enemies in the lasers area will be damaged in small intervals.</description>
         <spellVisualisation>ganfaul_laser</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <rectangleIndicator width="2.5" height="25"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--spawn object-->
             <entity>

@@ -4,6 +4,11 @@
         <name>Fire it up</name>
         <description>Shoots an arrow to the target location, damaging all enemies hit. If the target is marked by "Robin's Gift", its armor will be reduced for [buffDuration] seconds.</description>
         <spellVisualisation>erika_fire_it_up</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <circleIndicator radius="20"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--spawn object-->
             <entity>

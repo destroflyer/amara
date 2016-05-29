@@ -3,6 +3,12 @@
         <name>Slash</name>
         <description>Maria dashes towards the target location, damaging all enemies in front of her.</description>
         <spellVisualisation>maria_slash</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <rectangleIndicator width="2" height="4"/>
+                <circleIndicator y="5" radius="2.5"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>

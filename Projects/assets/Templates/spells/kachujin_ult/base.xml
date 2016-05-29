@@ -5,6 +5,11 @@
         <name>Smash the Bricks</name>
         <description>Kachujin takes a swing and smashes an enemy into the ground, dealing damage and stunning for [stunDuration] seconds.</description>
         <spellVisualisation>kachujin_ult</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <circleIndicator radius="3"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>

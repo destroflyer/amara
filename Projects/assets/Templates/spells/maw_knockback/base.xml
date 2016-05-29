@@ -4,6 +4,11 @@
         <name>Knockback</name>
         <description>Maw takes a swing and knockbacks an enemy with a punch.</description>
         <spellVisualisation>maw_knockback</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <circleIndicator radius="6"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>

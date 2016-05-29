@@ -51,6 +51,7 @@
                         <addBuff duration="-1">
                             <entity id="visualisationBuff">
                                 <buffVisualisation>burning</buffVisualisation>
+                                <keepOnDeath/>
                             </entity>
                         </addBuff>
                         <replaceSpellWithExistingSpell spellIndex="[parameter0]">

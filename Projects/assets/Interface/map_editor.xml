@@ -48,7 +48,7 @@
                         <interact onClick="showCheesecakeMessage()"/>
                     </image>
                     <panel/>
-                    <text id="hovered_coordinates" text="?" textHAlign="left" font="Interface/fonts/Verdana_12.fnt" visible="false"/>
+                    <text id="hovered_coordinates" text="?" width="200px" textHAlign="right" font="Interface/fonts/Verdana_12.fnt" visible="false"/>
                     <panel width="10px"/>
                 </panel>
                 <panel height="10px"/>

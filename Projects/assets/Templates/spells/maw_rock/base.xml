@@ -5,6 +5,11 @@
         <name>Rock</name>
         <description>Throws a rock in the target direction. The first enemy hit is damaged and slowed for [slowDuration] seconds.</description>
         <spellVisualisation>maw_rock</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <rectangleIndicator width="2" height="13.6"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--spawn projectile-->
             <entity>

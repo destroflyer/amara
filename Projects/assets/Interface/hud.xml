@@ -490,18 +490,34 @@
                     <panel childLayout="horizontal" width="627px">
                         <panel width="183px"/>
                         <image id="upgrade_spells_button_0" filename="Interface/hud/learn_spell_button.png" width="32px" height="32px">
+                            <effect>
+                                <onStartHover name="nop" onStartEffect="showSpellInformation_LearnableSpell(0)"/>
+                                <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                            </effect>
                             <interact onClick="learnOrUpgradeSpell(0)"/>
                         </image>
                         <panel width="28px"/>
                         <image id="upgrade_spells_button_1" filename="Interface/hud/learn_spell_button.png" width="32px" height="32px">
+                            <effect>
+                                <onStartHover name="nop" onStartEffect="showSpellInformation_LearnableSpell(1)"/>
+                                <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                            </effect>
                             <interact onClick="learnOrUpgradeSpell(1)"/>
                         </image>
                         <panel width="28px"/>
                         <image id="upgrade_spells_button_2" filename="Interface/hud/learn_spell_button.png" width="32px" height="32px">
+                            <effect>
+                                <onStartHover name="nop" onStartEffect="showSpellInformation_LearnableSpell(2)"/>
+                                <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                            </effect>
                             <interact onClick="learnOrUpgradeSpell(2)"/>
                         </image>
                         <panel width="28px"/>
                         <image id="upgrade_spells_button_3" filename="Interface/hud/learn_spell_button.png" width="32px" height="32px">
+                            <effect>
+                                <onStartHover name="nop" onStartEffect="showSpellInformation_LearnableSpell(3)"/>
+                                <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                            </effect>
                             <interact onClick="learnOrUpgradeSpell(3)"/>
                         </image>
                         <panel width="*"/>

@@ -4,6 +4,11 @@
         <name>Jump</name>
         <description>After [delay] second, Maw jumps to the target location, damaging and knockuping all enemies around.</description>
         <spellVisualisation>maw_jump</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <circleIndicator radius="24"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--move to target-->
             <entity>

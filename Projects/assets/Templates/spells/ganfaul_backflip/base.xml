@@ -3,6 +3,11 @@
         <name>Moon Jump</name>
         <description>Ganfaul makes a backflip, jumping a short distance in the opposite direction, that he is facing.</description>
         <spellVisualisation>ganfaul_backflip</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <rectangleIndicator y="-8" width="2" height="8"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>

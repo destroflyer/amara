@@ -5,6 +5,11 @@
         <name>Mind of the Monk</name>
         <description>Shoots a focsued wave of air in a straight line - The first enemy hit is damaged and marked for [markDuration] second.</description>
         <spellVisualisation>kachujin_mind_of_the_monk</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <rectangleIndicator width="1.8" height="15.3"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--spawn projectile-->
             <entity>

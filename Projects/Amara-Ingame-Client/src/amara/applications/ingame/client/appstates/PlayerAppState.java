@@ -36,6 +36,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
     }
     private int playerEntity;
     private PlayerTeamSystem playerTeamSystem;
+    private SpellIndicatorSystem spellIndicatorSystem;
     private LockedCameraSystem lockedCameraSystem;
     private FogOfWarSystem fogOfWarSystem;
     private int cursorHoveredEntity = -1;
@@ -49,6 +50,8 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
             "lock_camera","display_map_sight"
         });
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
+        spellIndicatorSystem = new SpellIndicatorSystem(playerEntity, localEntitySystemAppState.getEntitySceneMap());
+        localEntitySystemAppState.addEntitySystem(spellIndicatorSystem);
         IngameCameraAppState ingameCameraAppState = getAppState(IngameCameraAppState.class);
         Map map = getAppState(MapAppState.class).getMap();
         lockedCameraSystem = new LockedCameraSystem(playerEntity, ingameCameraAppState);
@@ -173,6 +176,10 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
 
     public PlayerTeamSystem getPlayerTeamSystem(){
         return playerTeamSystem;
+    }
+
+    public SpellIndicatorSystem getSpellIndicatorSystem(){
+        return spellIndicatorSystem;
     }
 
     public LockedCameraSystem getLockedCameraSystem(){

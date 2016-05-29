@@ -5,6 +5,11 @@
         <name>Planetary Binding</name>
         <description>Shoots an energetic projectile. The first enemy hit is damaged and binded for [bindDuration] second.</description>
         <spellVisualisation>ganfaul_binding</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <rectangleIndicator width="2" height="19.5"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--spawn projectile-->
             <entity>

@@ -4,6 +4,11 @@
         <name>Galaxy Blast</name>
         <description>After gathering energy for [delay] seconds, Ganfaul fires a global energy missile in the target direction, dealing damage to enemies it passes through.</description>
         <spellVisualisation>ganfaul_ult</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <rectangleIndicator width="4" height="40"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--spawn projectile-->
             <entity>

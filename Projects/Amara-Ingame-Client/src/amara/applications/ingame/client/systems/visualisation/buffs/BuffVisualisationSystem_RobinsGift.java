@@ -6,7 +6,7 @@ package amara.applications.ingame.client.systems.visualisation.buffs;
 
 import com.jme3.scene.Spatial;
 import com.jme3.scene.Node;
-import amara.applications.ingame.client.systems.visualisation.EntitySceneMap;
+import amara.applications.ingame.client.systems.visualisation.*;
 import amara.libraries.entitysystem.EntityWorld;
 
 /**
@@ -22,7 +22,7 @@ public class BuffVisualisationSystem_RobinsGift extends BuffVisualisationSystem{
     @Override
     protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
         Node node = new Node();
-        Spatial texture = BuffVisualisationSystem_SonicWaveMark.createGroundTexture("Textures/effects/robins_gift_mark.png", 3.5f, 3.5f);
+        Spatial texture = SpellIndicatorSystem.createGroundTexture("Textures/effects/robins_gift_mark.png", 3.5f, 3.5f);
         node.attachChild(texture);
         return node;
     }

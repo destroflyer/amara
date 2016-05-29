@@ -56,6 +56,7 @@ public class Map_Arama extends Map{
         };
     }
     private final float laneCenterY = 260.25f;
+    private final float towerOffsetY = 6;
     private final float timeUntilWaveStart = 5;
     private final float waveInterval = 55;
     private int[] backportPositionEntities = new int[2];
@@ -137,8 +138,8 @@ public class Map_Arama extends Map{
             shop.setComponent(new ShopRangeComponent(10));
             shop.setComponent(new TeamComponent(i + 1));
             //Towers
-            Vector2f tower1Position = new Vector2f(((i == 0)?354:171), laneCenterY);
-            Vector2f tower2Position = new Vector2f(((i == 0)?321:204), laneCenterY);
+            Vector2f tower1Position = new Vector2f(((i == 0)?354:171), laneCenterY + towerOffsetY);
+            Vector2f tower2Position = new Vector2f(((i == 0)?321:204), laneCenterY - towerOffsetY);
             Vector2f towerDirection = new Vector2f(((i == 0)?-1:1), 0);
             EntityWrapper tower1 = EntityTemplate.createFromTemplate(entityWorld, "structures/tower");
             tower1.setComponent(new PositionComponent(tower1Position));

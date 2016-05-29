@@ -5,6 +5,11 @@
         <name>Stab</name>
         <description>Afer [delay] seconds, Maria stabs her sword in a straight line. The first enemy hit will be damaged and slowed for [slowDuration] seconds.</description>
         <spellVisualisation>maria_stab</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <rectangleIndicator width="2" height="11"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--spawn object-->
             <entity>

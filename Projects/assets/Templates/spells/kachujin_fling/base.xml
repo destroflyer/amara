@@ -4,6 +4,11 @@
         <name>Suplex</name>
         <description>Kachujin kicks an enemy with her knee and flings him backwards behind her.</description>
         <spellVisualisation>kachujin_fling</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <circleIndicator radius="3"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>

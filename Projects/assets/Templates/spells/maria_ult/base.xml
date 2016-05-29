@@ -4,6 +4,11 @@
         <name>Ult</name>
         <description>Maria channels all power inside her sword for [delay] second and then unleashes a long ranged cut in the target direction, damaging and knockuping every enemy it passes through.</description>
         <spellVisualisation>maria_ult</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <rectangleIndicator width="6" height="31.5"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--spawn projectile-->
             <entity>
