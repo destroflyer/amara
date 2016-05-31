@@ -4003,6 +4003,24 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.HealthBarStyleComponent.class);
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.InCombatComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.InCombatComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.InCombatComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.InCombatComponent>("inCombat"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.InCombatComponent construct(){
+                float remainingDuration = 0;
+                String remainingDurationText = element.getText();
+                if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.InCombatComponent(remainingDuration);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent.class.getDeclaredField("targetRulesEntity"), componentFieldSerializer_Entity);
@@ -4326,16 +4344,16 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent(deaths);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent.class);
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.SetNewCombatSpellsOnCooldownComponent.class);
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent.class.getDeclaredField("cooldowns"), componentFieldSerializer_Timer);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.SetNewCombatSpellsOnCooldownComponent.class.getDeclaredField("cooldowns"), componentFieldSerializer_Timer);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent>("setNewTargetSpellsOnCooldown"){
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.SetNewCombatSpellsOnCooldownComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SetNewCombatSpellsOnCooldownComponent>("setNewCombatSpellsOnCooldown"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.SetNewCombatSpellsOnCooldownComponent construct(){
                 String[] spellIndicesParts = element.getAttributeValue("spellIndices").split(",");
                 int[] spellIndices = new int[spellIndicesParts.length];
                 for(int i=0;i<spellIndices.length;i++){
@@ -4346,7 +4364,7 @@ public class ComponentsRegistrator{
                 for(int i=0;i<cooldowns.length;i++){
                     cooldowns[i] = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("cooldowns")));
                 }
-                return new amara.applications.ingame.entitysystem.components.units.SetNewTargetSpellsOnCooldownComponent(spellIndices, cooldowns);
+                return new amara.applications.ingame.entitysystem.components.units.SetNewCombatSpellsOnCooldownComponent(spellIndices, cooldowns);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.SightRangeComponent.class);

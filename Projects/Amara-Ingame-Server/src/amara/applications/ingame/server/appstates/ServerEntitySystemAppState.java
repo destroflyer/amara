@@ -204,6 +204,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownCampRespawnSystem());
         addEntitySystem(new CountdownAnimationLoopsSystem());
         addEntitySystem(new CountdownAggroResetTimersSystem());
+        addEntitySystem(new CountdownInCombatSystem());
         addEntitySystem(new CheckOpenObjectivesSystem());
         addEntitySystem(new CheckAggroTargetAttackibilitySystem());
         addEntitySystem(new CheckMaximumAggroRangeSystem());
@@ -219,7 +220,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new StartAggroResetTimersSystem());
         addEntitySystem(new CheckCampUnionAggroSystem());
         addEntitySystem(new CheckLostAggroCampsSystem());
-        addEntitySystem(new SetNewTargetSpellsOnCooldownSystem());
+        addEntitySystem(new SetNewCombatSpellsOnCooldownSystem());
         addEntitySystem(new CastSpellOnCooldownWhileAttackingSystem(castSpellQueueSystem));
         addEntitySystem(new PerformAutoAttacksSystem(castSpellQueueSystem));
         addEntitySystem(castSpellQueueSystem);
@@ -287,6 +288,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyRemoveEffectTriggersSystem());
         addEntitySystem(new ApplyRemoveEntitySystem());
         addEntitySystem(new ApplyTriggerErikaPassivesSystem());
+        addEntitySystem(new SetInCombatSystem());
         addEntitySystem(new DrawAggroOnDamageSystem());
         addEntitySystem(new ResetAggroTimerOnDamageSystem());
         addEntitySystem(new UpdateDamageHistorySystem());
