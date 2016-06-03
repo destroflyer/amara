@@ -240,7 +240,7 @@ public class ClientComponentBlacklist{
             LocalAvoidanceWalkComponent.class,
             MaximumAggroRangeComponent.class,
             RemainingAggroResetDurationComponent.class,
-            SetNewCombatSpellsOnCooldownComponent.class,
+            SetNewCampCombatSpellsOnCooldownComponent.class,
             TargetsInAggroRangeComponent.class,
             WalkStepDistanceComponent.class,
             //units/animations

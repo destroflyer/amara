@@ -15,7 +15,11 @@ public class CleanupSpellsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.requestObserver(this, SpellTargetRulesComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, SpellIndicatorComponent.class, SpellTargetRulesComponent.class);
+        for(int entity : observer.getRemoved().getEntitiesWithAll(SpellIndicatorComponent.class)){
+            int indicatorEntity = observer.getRemoved().getComponent(entity, SpellIndicatorComponent.class).getIndicatorEntity();
+            CleanupUtil.tryCleanupEntity(entityWorld, indicatorEntity);
+        }
         for(int entity : observer.getRemoved().getEntitiesWithAll(SpellTargetRulesComponent.class)){
             int targetRulesEntity = observer.getRemoved().getComponent(entity, SpellTargetRulesComponent.class).getTargetRulesEntity();
             CleanupUtil.tryCleanupEntity(entityWorld, targetRulesEntity);

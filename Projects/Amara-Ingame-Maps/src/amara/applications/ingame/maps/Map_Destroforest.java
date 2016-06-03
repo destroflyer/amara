@@ -154,7 +154,7 @@ public class Map_Destroforest extends Map{
             enemy.setComponent(new DirectionComponent(direction));
             enemy.setComponent(new AutoAggroComponent(15));
             enemy.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
-            enemy.setComponent(new SetNewCombatSpellsOnCooldownComponent(new int[]{0}, new float[]{6}));
+            enemy.setComponent(new SetNewCampCombatSpellsOnCooldownComponent(new int[]{0}, new float[]{6}));
             enemy.setComponent(new TeamComponent(0));
             enemy.setComponent(new CampComponent(campEnemies2.getId(), position, direction));
         }

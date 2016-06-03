@@ -12,13 +12,13 @@ import amara.libraries.entitysystem.synchronizing.ComponentField;
  * @author Carl
  */
 @Serializable
-public class SetNewCombatSpellsOnCooldownComponent{
+public class SetNewCampCombatSpellsOnCooldownComponent{
 
-    public SetNewCombatSpellsOnCooldownComponent(){
+    public SetNewCampCombatSpellsOnCooldownComponent(){
         
     }
     
-    public SetNewCombatSpellsOnCooldownComponent(int[] spellIndices, float[] cooldowns){
+    public SetNewCampCombatSpellsOnCooldownComponent(int[] spellIndices, float[] cooldowns){
         this.spellIndices = spellIndices;
         this.cooldowns = cooldowns;
     }

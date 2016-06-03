@@ -968,6 +968,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.camps.CampHealthResetComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent>("campInCombat"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.camps.CampMaximumAggroDistanceComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.camps.CampMaximumAggroDistanceComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);
@@ -4344,16 +4352,16 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent(deaths);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.SetNewCombatSpellsOnCooldownComponent.class);
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent.class);
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.SetNewCombatSpellsOnCooldownComponent.class.getDeclaredField("cooldowns"), componentFieldSerializer_Timer);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent.class.getDeclaredField("cooldowns"), componentFieldSerializer_Timer);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.SetNewCombatSpellsOnCooldownComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SetNewCombatSpellsOnCooldownComponent>("setNewCombatSpellsOnCooldown"){
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent>("setNewCampCombatSpellsOnCooldown"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.SetNewCombatSpellsOnCooldownComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent construct(){
                 String[] spellIndicesParts = element.getAttributeValue("spellIndices").split(",");
                 int[] spellIndices = new int[spellIndicesParts.length];
                 for(int i=0;i<spellIndices.length;i++){
@@ -4364,7 +4372,7 @@ public class ComponentsRegistrator{
                 for(int i=0;i<cooldowns.length;i++){
                     cooldowns[i] = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("cooldowns")));
                 }
-                return new amara.applications.ingame.entitysystem.components.units.SetNewCombatSpellsOnCooldownComponent(spellIndices, cooldowns);
+                return new amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent(spellIndices, cooldowns);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.SightRangeComponent.class);

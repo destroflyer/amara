@@ -5,6 +5,7 @@
 package amara.applications.ingame.entitysystem.systems.units;
 
 import amara.applications.ingame.entitysystem.components.effects.*;
+import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.effects.damage.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.libraries.entitysystem.*;
@@ -28,6 +29,11 @@ public class SetInCombatSystem implements EntitySystem{
     }
     
     private void setInCombat(EntityWorld entityWorld, int effectImpactEntity){
+        EffectCastSourceComponent effectCastSourceComponent = entityWorld.getComponent(effectImpactEntity, EffectCastSourceComponent.class);
+        if(effectCastSourceComponent != null){
+            int sourceEntity = effectCastSourceComponent.getSourceEntity();
+            entityWorld.setComponent(sourceEntity, new InCombatComponent(RESET_DURATION));
+        }
         int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
         entityWorld.setComponent(targetEntity, new InCombatComponent(RESET_DURATION));
     }
