@@ -226,6 +226,10 @@ public class ScreenController_HUD extends GameScreenController{
         getElementByID("death_recap_layer").setVisible(isVisible);
     }
     
+    public void setDeathTimer(float deathTimer){
+        getButton("toggle_death_recap_button").setText("Death Recap (Respawn: " + Util.round(deathTimer, 1) + ")");
+    }
+    
     public void toggleDisplayDeathRecap(){
         setDeathRecapVisible(!getElementByID("death_recap_" + deathRecapPageID).isVisible());
     }
