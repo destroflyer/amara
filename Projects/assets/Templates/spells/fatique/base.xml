@@ -3,6 +3,11 @@
         <name>Fatique</name>
         <description>Slows an enemy character by 30% and reduces his damage dealt by 40% for 3 seconds.</description>
         <spellVisualisation>fatique</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <circleIndicator radius="10"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>

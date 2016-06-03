@@ -3,6 +3,11 @@
         <name>Instant Transmission</name>
         <description>Instantly teleports the character to the target location.</description>
         <spellVisualisation>instant_transmission</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <circleIndicator radius="8"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>

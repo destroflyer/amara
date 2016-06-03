@@ -51,6 +51,7 @@ public class FogOfWarSystem implements EntitySystem{
     private Texture2D fogTexture = new Texture2D();
     private Raster fogRaster;
     private FogOfWarFilter fogOfWarFilter;
+    private boolean isInitialized;
     private float timeSinceLastUpdate;
     private boolean isUpdateNeeded;
     private boolean displayMapSight;
@@ -58,23 +59,33 @@ public class FogOfWarSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        if(!displayMapSight){
-            timeSinceLastUpdate += deltaSeconds;
-            if(timeSinceLastUpdate > Settings.getFloat("fog_of_war_update_interval")){
-                ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class);
-                for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
-                    checkChangedPositionComponent(entityWorld, entity);
+        if(isInitialized){
+            if(!displayMapSight){
+                timeSinceLastUpdate += deltaSeconds;
+                if(timeSinceLastUpdate > Settings.getFloat("fog_of_war_update_interval")){
+                    updateFogOfWar(entityWorld);
                 }
-                for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
-                    checkChangedPositionComponent(entityWorld, entity);
-                }
-                if(isUpdateNeeded){
-                    updateFogTexture_PlayerSight(entityWorld);
-                    isUpdateNeeded = false;
-                }
-                timeSinceLastUpdate = 0;
             }
         }
+        else{
+            updateFogOfWar(entityWorld);
+            isInitialized = true;
+        }
+    }
+    
+    private void updateFogOfWar(EntityWorld entityWorld){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class);
+        for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
+            checkChangedPositionComponent(entityWorld, entity);
+        }
+        for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
+            checkChangedPositionComponent(entityWorld, entity);
+        }
+        if(isUpdateNeeded){
+            updateFogTexture_PlayerSight(entityWorld);
+            isUpdateNeeded = false;
+        }
+        timeSinceLastUpdate = 0;
     }
     
     private void checkChangedPositionComponent(EntityWorld entityWorld, int entity){

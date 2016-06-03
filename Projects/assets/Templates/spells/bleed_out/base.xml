@@ -3,6 +3,11 @@
         <name>Bleed Out</name>
         <description>Deals 200 damage over 5 seconds to the target.</description>
         <spellVisualisation>bleed_out</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <circleIndicator radius="10"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>

@@ -53,25 +53,36 @@ public class DisplayMinimapSystem extends GUIDisplaySystem{
     private float scaleY_Fog;
     private BufferedImage backgroundImage;
     private BufferedImage towerImage;
+    private boolean isInitialized;
     private float timeSinceLastUpdate;
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
-        timeSinceLastUpdate += deltaSeconds;
-        if(timeSinceLastUpdate > Settings.getFloat("minimap_update_interval")){
-            ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class);
-            if((!observer.getNew().isEmpty()) || (!observer.getChanged().isEmpty()) || (!observer.getRemoved().isEmpty())){
-                minimapImage.loadImage(backgroundImage, false);
-                for(int entity : entityWorld.getEntitiesWithAll(PositionComponent.class)){
-                    paintEntity(entityWorld, entity);
-                }
-                paintFogOfWar();
-                minimapImage.flipY();
-                texture2D.setImage(minimapImage.getImage());
-                screenController_HUD.setMinimapImage(texture2D);
+        if(isInitialized){
+            timeSinceLastUpdate += deltaSeconds;
+            if(timeSinceLastUpdate > Settings.getFloat("minimap_update_interval")){
+                updateMinimap(entityWorld);
             }
-            timeSinceLastUpdate = 0;
         }
+        else{
+            updateMinimap(entityWorld);
+            isInitialized = true;
+        }
+    }
+    
+    private void updateMinimap(EntityWorld entityWorld){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class);
+        if((!observer.getNew().isEmpty()) || (!observer.getChanged().isEmpty()) || (!observer.getRemoved().isEmpty())){
+            minimapImage.loadImage(backgroundImage, false);
+            for(int entity : entityWorld.getEntitiesWithAll(PositionComponent.class)){
+                paintEntity(entityWorld, entity);
+            }
+            paintFogOfWar();
+            minimapImage.flipY();
+            texture2D.setImage(minimapImage.getImage());
+            screenController_HUD.setMinimapImage(texture2D);
+        }
+        timeSinceLastUpdate = 0;
     }
     
     private void paintEntity(EntityWorld entityWorld, int entity){
