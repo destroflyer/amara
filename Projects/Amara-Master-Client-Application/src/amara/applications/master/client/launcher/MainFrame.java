@@ -33,12 +33,12 @@ public class MainFrame extends javax.swing.JFrame{
         initComponents();
         instance = this;
         this.panLogin = panLogin;
+        setSize(1000, 600);
         setDisplayedPanel(panLogin);
         panLogin.start();
         FrameUtil.initFrameSpecials(this);
         FrameUtil.centerFrame(this);
         UIManager.put("TabbedPane.contentBorderInsets", new Insets(-1, 0, 0, 0));
-        setSize(650, 400);
     }
     private static MainFrame instance;
     private PanLogin panLogin;

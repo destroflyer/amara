@@ -26,7 +26,7 @@ public class PanLogin_Swing extends PanLogin{
     public PanLogin_Swing(SwingLoginScreen loginScreen){
         initComponents();
         this.loginScreen = loginScreen;
-        loginScreen.setSize(644, 372);
+        loginScreen.setSize(994, 572);
         loginScreen.initialize();
         lblTitle.setText(GameInfo.NAME);
         panBox.setBackground(new Color(255, 255, 255, 30));
@@ -216,7 +216,7 @@ public class PanLogin_Swing extends PanLogin{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -227,9 +227,9 @@ public class PanLogin_Swing extends PanLogin{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(panBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addGap(200, 200, 200))
         );
     }// </editor-fold>//GEN-END:initComponents
 

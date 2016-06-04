@@ -4,6 +4,7 @@
  */
 package amara.applications.master.server.launcher;
 
+import java.awt.Color;
 import amara.core.Launcher_Core;
 import amara.libraries.applications.windowed.FrameUtil;
 import amara.libraries.applications.windowed.tools.PanThreads;
@@ -17,6 +18,7 @@ public class ServerLauncherFrame extends javax.swing.JFrame{
     public ServerLauncherFrame(){
         initComponents();
         FrameUtil.initFrameSpecials(this);
+        getContentPane().setBackground(new Color(55, 55, 55));
         panThreadsContainer.add(new PanThreads());
         serverLauncher = new ServerLauncher(33900);
     }
@@ -38,6 +40,7 @@ public class ServerLauncherFrame extends javax.swing.JFrame{
         setTitle("Amara - Server");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Masterserver");
 
         panThreadsContainer.setLayout(new java.awt.GridLayout(1, 0));

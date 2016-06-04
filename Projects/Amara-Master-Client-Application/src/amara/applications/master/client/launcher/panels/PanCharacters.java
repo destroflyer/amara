@@ -26,7 +26,7 @@ public class PanCharacters extends javax.swing.JPanel{
             panCharacter.setSize(180, panelHeight);
             panCharactersList.add(panCharacter);
             PanCharacters_CharacterInfo panInfo = new PanCharacters_CharacterInfo(character);
-            panInfo.setSize(396, (int) panInfo.getPreferredSize().getHeight());
+            panInfo.setSize(746, (int) panInfo.getPreferredSize().getHeight());
             infoPanels.put(character, panInfo);
             //Subtract 1 to avoid double borders
             y += (panelHeight - 1);
@@ -65,6 +65,8 @@ public class PanCharacters extends javax.swing.JPanel{
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        panCharactersList.setBackground(new java.awt.Color(55, 55, 55));
+
         javax.swing.GroupLayout panCharactersListLayout = new javax.swing.GroupLayout(panCharactersList);
         panCharactersList.setLayout(panCharactersListLayout);
         panCharactersListLayout.setHorizontalGroup(
@@ -73,7 +75,7 @@ public class PanCharacters extends javax.swing.JPanel{
         );
         panCharactersListLayout.setVerticalGroup(
             panCharactersListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 262, Short.MAX_VALUE)
+            .addGap(0, 462, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(panCharactersList);
@@ -85,11 +87,11 @@ public class PanCharacters extends javax.swing.JPanel{
         panCharacterInfo.setLayout(panCharacterInfoLayout);
         panCharacterInfoLayout.setHorizontalGroup(
             panCharacterInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 396, Short.MAX_VALUE)
+            .addGap(0, 746, Short.MAX_VALUE)
         );
         panCharacterInfoLayout.setVerticalGroup(
             panCharacterInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 262, Short.MAX_VALUE)
+            .addGap(0, 462, Short.MAX_VALUE)
         );
 
         scrCharacterInfo.setViewportView(panCharacterInfo);
@@ -102,7 +104,7 @@ public class PanCharacters extends javax.swing.JPanel{
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrCharacterInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                .addComponent(scrCharacterInfo)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

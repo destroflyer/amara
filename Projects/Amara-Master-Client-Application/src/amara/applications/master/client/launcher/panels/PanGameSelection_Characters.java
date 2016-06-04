@@ -19,7 +19,7 @@ public class PanGameSelection_Characters extends javax.swing.JPanel{
         this.panGameSelection = panGameSelection;
         int panelSize = 58;
         int padding = 5;
-        int containerWidth = 225;
+        int containerWidth = 575;
         int x = padding;
         int y = padding;
         OwnedGameCharacter[] ownedCharacters = MasterserverClientUtil.getOwnedCharacters();

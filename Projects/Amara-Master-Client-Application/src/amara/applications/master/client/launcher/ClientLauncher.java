@@ -10,12 +10,15 @@ import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.AWTEventListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.LinkedList;
 import javax.swing.JFrame;
 import amara.applications.master.client.MasterserverClientApplication;
 import amara.applications.master.client.launcher.api.objects.Masterserver;
 import amara.applications.master.client.launcher.api.requests.GetMasterserversRequest;
+import amara.applications.master.client.launcher.buttons.*;
 import amara.applications.master.client.launcher.loginscreen.screens.*;
 import amara.applications.master.client.launcher.network.backends.*;
 import amara.applications.master.client.launcher.panels.*;
@@ -41,6 +44,26 @@ public class ClientLauncher extends JFrame{
         PanLauncher panLauncher = new PanLauncher();
         panLauncher.setSize(panImage.getSize());
         panImage.add(panLauncher);
+        btnPlay = ButtonUtil.addImageBackgroundButton(panContainer_btnPlay, new DefaultButtonBuilder("default_113x66", "Updating..."));
+        btnPlay.addMouseListener(new MouseAdapter(){
+
+            @Override
+            public void mouseClicked(MouseEvent evt){
+                super.mouseClicked(evt);
+                if(btnPlay.isEnabled()){
+                    if(wasUpdateNeeded){
+                        System.exit(0);
+                    }
+                    else{
+                        Toolkit.getDefaultToolkit().removeAWTEventListener(keyListener);
+                        PanLogin panLogin = ((forcedLoginPanel != null)?forcedLoginPanel:new PanLogin_Swing(new LoginScreen_Shina()));
+                        MainFrame mainFrame = new MainFrame(panLogin);
+                        setVisible(false);
+                        mainFrame.setVisible(true);
+                    }
+                }
+            }
+        });
         Toolkit.getDefaultToolkit().addAWTEventListener(keyListener, AWTEvent.KEY_EVENT_MASK);
         getContentPane().requestFocus();
         FrameUtil.initFrameSpecials(this);
@@ -48,6 +71,7 @@ public class ClientLauncher extends JFrame{
         loadMasterservers();
         connectToMasterserver();
     }
+    private ImageButtonPanel btnPlay;
     private MasterserverClientApplication masterClient;
     private int totalChecked_KB;
     private boolean wasUpdateNeeded;
@@ -161,6 +185,9 @@ public class ClientLauncher extends JFrame{
                     pbrCompleteUpdate.setString("To activate the update, please restart the game.");
                     btnPlay.setText("Close");
                 }
+                else{
+                    btnPlay.setText("Play");
+                }
                 btnPlay.setEnabled(true);
                 cbxMasterserverHost.setEnabled(true);
                 txtMasterserverPort.setEnabled(true);
@@ -216,25 +243,13 @@ public class ClientLauncher extends JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         panImage = new javax.swing.JPanel();
         cbxMasterserverHost = new javax.swing.JComboBox();
         txtMasterserverPort = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         pbrCompleteUpdate = new javax.swing.JProgressBar();
-        btnPlay = new javax.swing.JButton();
         pbrCurrentFile = new javax.swing.JProgressBar();
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        panContainer_btnPlay = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -261,7 +276,7 @@ public class ClientLauncher extends JFrame{
                 .addGroup(panImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cbxMasterserverHost, 0, 146, Short.MAX_VALUE)
                     .addComponent(txtMasterserverPort))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(344, Short.MAX_VALUE))
         );
         panImageLayout.setVerticalGroup(
             panImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,19 +288,24 @@ public class ClientLauncher extends JFrame{
                 .addGap(7, 7, 7))
         );
 
+        jPanel2.setBackground(new java.awt.Color(55, 55, 55));
+
         pbrCompleteUpdate.setString("");
         pbrCompleteUpdate.setStringPainted(true);
 
-        btnPlay.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnPlay.setText("Play");
-        btnPlay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPlayActionPerformed(evt);
-            }
-        });
-
         pbrCurrentFile.setString("");
         pbrCurrentFile.setStringPainted(true);
+
+        javax.swing.GroupLayout panContainer_btnPlayLayout = new javax.swing.GroupLayout(panContainer_btnPlay);
+        panContainer_btnPlay.setLayout(panContainer_btnPlayLayout);
+        panContainer_btnPlayLayout.setHorizontalGroup(
+            panContainer_btnPlayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 113, Short.MAX_VALUE)
+        );
+        panContainer_btnPlayLayout.setVerticalGroup(
+            panContainer_btnPlayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -297,7 +317,7 @@ public class ClientLauncher extends JFrame{
                     .addComponent(pbrCompleteUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                     .addComponent(pbrCurrentFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panContainer_btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -305,12 +325,13 @@ public class ClientLauncher extends JFrame{
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panContainer_btnPlay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(pbrCompleteUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pbrCurrentFile, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(pbrCurrentFile, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -330,19 +351,6 @@ public class ClientLauncher extends JFrame{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
-    if(wasUpdateNeeded){
-        System.exit(0);
-    }
-    else{
-        Toolkit.getDefaultToolkit().removeAWTEventListener(keyListener);
-        PanLogin panLogin = ((forcedLoginPanel != null)?forcedLoginPanel:new PanLogin_Swing(new LoginScreen_Shina()));
-        MainFrame mainFrame = new MainFrame(panLogin);
-        setVisible(false);
-        mainFrame.setVisible(true);
-    }
-}//GEN-LAST:event_btnPlayActionPerformed
 
     private void cbxMasterserverHostItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMasterserverHostItemStateChanged
         connectToMasterserver();
@@ -369,10 +377,10 @@ private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPlay;
     private javax.swing.JComboBox cbxMasterserverHost;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel panContainer_btnPlay;
     private javax.swing.JPanel panImage;
     private javax.swing.JProgressBar pbrCompleteUpdate;
     private javax.swing.JProgressBar pbrCurrentFile;

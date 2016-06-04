@@ -31,7 +31,7 @@ public class PanCharacters_CharacterInfo extends javax.swing.JPanel{
             for(int passiveEntity : passivesComponent.getPassiveEntities()){
                 PanCharacters_CharacterInfo_Spell panPassive = new PanCharacters_CharacterInfo_Spell("Passive", passiveEntity);
                 panPassive.setLocation(0, y);
-                panPassive.setSize(384, panelHeight);
+                panPassive.setSize(734, panelHeight);
                 panPassives.add(panPassive);
                 //Subtract 1 to avoid double borders
                 y += (panelHeight - 1);
@@ -40,7 +40,7 @@ public class PanCharacters_CharacterInfo extends javax.swing.JPanel{
         }
         else{
             PanCharacters_CharacterInfo_NotExisting panNotExisting = new PanCharacters_CharacterInfo_NotExisting();
-            panNotExisting.setSize(384, panelHeight);
+            panNotExisting.setSize(734, panelHeight);
             panPassives.add(panNotExisting);
             y += panelHeight;
         }
@@ -55,7 +55,7 @@ public class PanCharacters_CharacterInfo extends javax.swing.JPanel{
                     String keyTitle = Keys.getTitle(Settings.getInteger("controls_spells_" + i));
                     PanCharacters_CharacterInfo_Spell panSpell = new PanCharacters_CharacterInfo_Spell(keyTitle, spellEntities[i]);
                     panSpell.setLocation(0, y);
-                    panSpell.setSize(384, panelHeight);
+                    panSpell.setSize(734, panelHeight);
                     panSpells.add(panSpell);
                     //Subtract 1 to avoid double borders
                     y += (panelHeight - 1);
@@ -67,7 +67,7 @@ public class PanCharacters_CharacterInfo extends javax.swing.JPanel{
         }
         else{
             PanCharacters_CharacterInfo_NotExisting panNotExisting = new PanCharacters_CharacterInfo_NotExisting();
-            panNotExisting.setSize(384, panelHeight);
+            panNotExisting.setSize(734, panelHeight);
             panSpells.add(panNotExisting);
             y += panelHeight;
         }
@@ -228,7 +228,7 @@ public class PanCharacters_CharacterInfo extends javax.swing.JPanel{
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                        .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panPassives, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

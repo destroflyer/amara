@@ -32,9 +32,10 @@ public class PanThreads extends javax.swing.JPanel{
         jScrollPane1 = new javax.swing.JScrollPane();
         lstThreads = new javax.swing.JList();
 
-        setBackground(new java.awt.Color(230, 230, 230));
+        setBackground(new java.awt.Color(30, 30, 30));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
+        lblThreads.setForeground(new java.awt.Color(255, 255, 255));
         lblThreads.setText("Threads:");
 
         btnRefrehThreads.setText("Refresh");

@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import amara.core.Util;
 import amara.core.files.FileAssets;
+import java.awt.Color;
 
 /**
  *
@@ -94,17 +95,20 @@ public class PanThanks extends javax.swing.JPanel{
             JLabel lblReceiver = new JLabel(thanks.getReceiver());
             lblReceiver.setLocation(x, y);
             lblReceiver.setSize(130, lineHeight);
+            lblReceiver.setForeground(Color.WHITE);
             panThanksList.add(lblReceiver);
             x += 135;
             JLabel lblDescription = new JLabel(thanks.getDescription());
             lblDescription.setLocation(x, y);
             lblDescription.setSize(240, lineHeight);
+            lblDescription.setForeground(Color.WHITE);
             panThanksList.add(lblDescription);
             x += 245;
             if(thanks.hasURL()){
-                JLabel lblURL = new JLabel("<html><a href=\"" + thanks.getURL()+ "\">" + thanks.getURL() + "</a></html>");
+                JLabel lblURL = new JLabel("<html><u>" + thanks.getURL() + "</u></html>");
                 lblURL.setLocation(x, y);
                 lblURL.setSize(200, lineHeight);
+                lblURL.setForeground(Color.WHITE);
                 lblURL.setCursor(new Cursor(Cursor.HAND_CURSOR));
                 lblURL.addMouseListener(new MouseAdapter(){
 
@@ -135,19 +139,24 @@ public class PanThanks extends javax.swing.JPanel{
         jScrollPane1 = new javax.swing.JScrollPane();
         panThanksList = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(30, 30, 30));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("A big \"Thank you\" goes to:");
 
         jScrollPane1.setBorder(null);
+
+        panThanksList.setBackground(new java.awt.Color(30, 30, 30));
 
         javax.swing.GroupLayout panThanksListLayout = new javax.swing.GroupLayout(panThanksList);
         panThanksList.setLayout(panThanksListLayout);
         panThanksListLayout.setHorizontalGroup(
             panThanksListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 624, Short.MAX_VALUE)
+            .addGap(0, 974, Short.MAX_VALUE)
         );
         panThanksListLayout.setVerticalGroup(
             panThanksListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 242, Short.MAX_VALUE)
+            .addGap(0, 442, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(panThanksList);

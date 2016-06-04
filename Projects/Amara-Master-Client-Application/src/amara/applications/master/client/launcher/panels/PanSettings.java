@@ -119,29 +119,45 @@ public class PanSettings extends javax.swing.JPanel{
         jLabel9 = new javax.swing.JLabel();
         panContainer_btnSave = new javax.swing.JPanel();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Graphics"));
+        setBackground(new java.awt.Color(30, 30, 30));
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Graphics", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+        jPanel1.setOpaque(false);
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Resolution:");
 
+        cbxFullscreen.setForeground(new java.awt.Color(255, 255, 255));
         cbxFullscreen.setText("Activated");
+        cbxFullscreen.setOpaque(false);
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Antialiasing:");
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Fullscreen");
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("VSync");
 
+        cbxVSync.setForeground(new java.awt.Color(255, 255, 255));
         cbxVSync.setText("Activated");
+        cbxVSync.setOpaque(false);
 
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Shadow quality:");
 
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Hardware skinning:");
 
+        cbxHardwareSkinning.setForeground(new java.awt.Color(255, 255, 255));
         cbxHardwareSkinning.setText("Activated");
+        cbxHardwareSkinning.setOpaque(false);
 
         sldShadowQuality.setMaximum(4);
         sldShadowQuality.setMinorTickSpacing(1);
         sldShadowQuality.setPaintTicks(true);
+        sldShadowQuality.setOpaque(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -196,31 +212,42 @@ public class PanSettings extends javax.swing.JPanel{
                 .addGap(4, 4, 4))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("System information"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "System information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+        jPanel2.setOpaque(false);
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("OS:");
 
         lblOperatingSystem.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lblOperatingSystem.setForeground(new java.awt.Color(255, 255, 255));
         lblOperatingSystem.setText("?");
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("OS version:");
 
         lblOperatingSystemVersion.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lblOperatingSystemVersion.setForeground(new java.awt.Color(255, 255, 255));
         lblOperatingSystemVersion.setText("?");
 
         lblJavaVersion.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lblJavaVersion.setForeground(new java.awt.Color(255, 255, 255));
         lblJavaVersion.setText("?");
 
         lblUser.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lblUser.setForeground(new java.awt.Color(255, 255, 255));
         lblUser.setText("?");
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("User:");
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Java version");
 
         lblSystemResolution.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lblSystemResolution.setForeground(new java.awt.Color(255, 255, 255));
         lblSystemResolution.setText("?");
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Resolution:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -237,11 +264,11 @@ public class PanSettings extends javax.swing.JPanel{
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblSystemResolution, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                    .addComponent(lblJavaVersion, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                    .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                    .addComponent(lblOperatingSystem, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                    .addComponent(lblOperatingSystemVersion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+                    .addComponent(lblSystemResolution, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                    .addComponent(lblJavaVersion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblOperatingSystem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblOperatingSystemVersion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -290,10 +317,12 @@ public class PanSettings extends javax.swing.JPanel{
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(panContainer_btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 530, Short.MAX_VALUE)
+                        .addComponent(panContainer_btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -303,7 +332,7 @@ public class PanSettings extends javax.swing.JPanel{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 246, Short.MAX_VALUE)
                         .addComponent(panContainer_btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
