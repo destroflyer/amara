@@ -71,6 +71,7 @@ public class PanCharacters_CharacterInfo extends javax.swing.JPanel{
             panSpells.add(panNotExisting);
             y += panelHeight;
         }
+        txtLore.setText(character.getLore().isEmpty()?"No lore available.":character.getLore());
         panSpells.setPreferredSize(new Dimension(394, y));
     }
 
@@ -257,8 +258,8 @@ public class PanCharacters_CharacterInfo extends javax.swing.JPanel{
                 .addGap(5, 5, 5)
                 .addComponent(lblLore)
                 .addGap(5, 5, 5)
-                .addComponent(scrLore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
+                .addComponent(scrLore, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

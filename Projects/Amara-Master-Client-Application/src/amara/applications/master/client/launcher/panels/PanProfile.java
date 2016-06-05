@@ -41,9 +41,13 @@ public class PanProfile extends javax.swing.JPanel{
     private boolean isSearchLoginFieldEmpty = true;
     private PanAvatarSelection panAvatarSelection;
     
-    public void resetToOwnProfile(){
+    public void onTabSelected(){
         txtSearchLogin.setText("");
         txtSearchLoginFocusLost(null);
+        resetToOwnProfile();
+    }
+    
+    public void resetToOwnProfile(){
         loadPlayerProfile(MasterserverClientUtil.getPlayerID());
     }
     
@@ -81,6 +85,8 @@ public class PanProfile extends javax.swing.JPanel{
     
     private void showPlayerProfile(PlayerProfileData player){
         lblProfileTitle.setText("Profile of " + player.getLogin());
+        String profileText = player.getMeta("profile_text");
+        lblProfileText.setText(profileText.isEmpty()?"<html><i>No profile text existing.</i></html>":profileText);
         setAvatarIcon(player.getMeta("avatar"));
         lblUserData_ID.setText("" + player.getID());
         //lblUserData_RegistrationDate.setText(Util.getFormattedDate(player.getRegistrationDate()));
@@ -134,7 +140,7 @@ public class PanProfile extends javax.swing.JPanel{
 
         btnAvatar = new javax.swing.JButton();
         lblProfileTitle = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblProfileText = new javax.swing.JLabel();
         panUserData = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lblUserData_ID = new javax.swing.JLabel();
@@ -170,10 +176,10 @@ public class PanProfile extends javax.swing.JPanel{
         lblProfileTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblProfileTitle.setText("Profile of ?");
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("<html>Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage.</html>");
-        jLabel1.setToolTipText("");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        lblProfileText.setForeground(new java.awt.Color(255, 255, 255));
+        lblProfileText.setText("<html>Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage, Sausage.</html>");
+        lblProfileText.setToolTipText("");
+        lblProfileText.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         panUserData.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User data", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
         panUserData.setOpaque(false);
@@ -277,7 +283,7 @@ public class PanProfile extends javax.swing.JPanel{
                         .addComponent(btnAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(lblProfileText, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(lblProfileTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 399, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,13 +308,11 @@ public class PanProfile extends javax.swing.JPanel{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(btnAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblProfileTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblProfileText, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblProfileTitle1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -344,7 +348,12 @@ public class PanProfile extends javax.swing.JPanel{
     private void txtSearchLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchLoginKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             String login = txtSearchLogin.getText();
-            loadPlayerProfile(login);
+            if(login.isEmpty()){
+                resetToOwnProfile();
+            }
+            else{
+                loadPlayerProfile(login);
+            }
         }
     }//GEN-LAST:event_txtSearchLoginKeyPressed
 
@@ -396,10 +405,10 @@ public class PanProfile extends javax.swing.JPanel{
     private javax.swing.JButton btnAvatar;
     private javax.swing.JComboBox cbxCharacters;
     private javax.swing.JComboBox cbxSkins;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblProfileText;
     private javax.swing.JLabel lblProfileTitle;
     private javax.swing.JLabel lblProfileTitle1;
     private javax.swing.JLabel lblSearchLoader;

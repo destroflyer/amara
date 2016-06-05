@@ -28,10 +28,11 @@ public class PlayersContentsAppState extends ServerBaseAppState{
             LinkedList<OwnedGameCharacter> ownedCharacters = new LinkedList<OwnedGameCharacter>();
             while(result_UserCharacters.next()){
                 int characterID = result_UserCharacters.getInteger("characterid");
-                QueryResult result_Characters = databaseAppState.getQueryResult("SELECT name, title, is_public FROM characters WHERE id = " + characterID + " LIMIT 1");
+                QueryResult result_Characters = databaseAppState.getQueryResult("SELECT name, title, lore, is_public FROM characters WHERE id = " + characterID + " LIMIT 1");
                 result_Characters.next();
                 String characterName = result_Characters.getString("name");
                 String characterTitle = result_Characters.getString("title");
+                String characterLore = result_Characters.getString("lore");
                 boolean characterIsPublic = result_Characters.getBoolean("is_public");
                 result_Characters.close();
                 int activeSkinID = result_UserCharacters.getInteger("skinid");
@@ -52,7 +53,7 @@ public class PlayersContentsAppState extends ServerBaseAppState{
                     tmpInventory.add(result_Inventory.getInt(2));
                 }
                 result_Inventory.close();
-                GameCharacter character = new GameCharacter(characterID, characterName, characterTitle, characterIsPublic, tmpOwnedSkins.toArray(new GameCharacterSkin[tmpOwnedItems.size()]));
+                GameCharacter character = new GameCharacter(characterID, characterName, characterTitle, characterLore, characterIsPublic, tmpOwnedSkins.toArray(new GameCharacterSkin[tmpOwnedItems.size()]));
                 ownedCharacters.add(new OwnedGameCharacter(character, activeSkinID, Util.convertToArray(tmpInventory)));
             }
             result_UserCharacters.close();

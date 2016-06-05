@@ -88,7 +88,7 @@ public class PanMainMenu extends javax.swing.JPanel{
 
     private void tpaneContainerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tpaneContainerStateChanged
         if(tpaneContainer.getSelectedComponent() == panProfile){
-            panProfile.resetToOwnProfile();
+            panProfile.onTabSelected();
         }
     }//GEN-LAST:event_tpaneContainerStateChanged
 

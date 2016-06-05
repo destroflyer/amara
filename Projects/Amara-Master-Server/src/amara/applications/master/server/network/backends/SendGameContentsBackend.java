@@ -47,12 +47,13 @@ public class SendGameContentsBackend implements MessageBackend{
     
     private GameCharacter[] getCharacters(){
         if(characters == null){
-            QueryResult result_Characters = databaseAppState.getQueryResult("SELECT id, name, title, is_public FROM characters");
+            QueryResult result_Characters = databaseAppState.getQueryResult("SELECT id, name, title, lore, is_public FROM characters");
             tmpCharacters.clear();
             while(result_Characters.next()){
                 int characterID = result_Characters.getInteger("id");
                 String characterName = result_Characters.getString("name");
                 String characterTitle = result_Characters.getString("title");
+                String characterLore = result_Characters.getString("lore");
                 boolean characterIsPublic = result_Characters.getBoolean("is_public");
                 QueryResult result_Skins = databaseAppState.getQueryResult("SELECT id, title FROM characters_skins WHERE characterid = " + characterID);
                 tmpSkins.clear();
@@ -62,7 +63,7 @@ public class SendGameContentsBackend implements MessageBackend{
                     tmpSkins.add(new GameCharacterSkin(skinID, skinTitle));
                 }
                 result_Skins.close();
-                tmpCharacters.add(new GameCharacter(characterID, characterName, characterTitle, characterIsPublic, tmpSkins.toArray(new GameCharacterSkin[tmpSkins.size()])));
+                tmpCharacters.add(new GameCharacter(characterID, characterName, characterTitle, characterLore, characterIsPublic, tmpSkins.toArray(new GameCharacterSkin[tmpSkins.size()])));
             }
             result_Characters.close();
             characters = tmpCharacters.toArray(new GameCharacter[tmpCharacters.size()]);
