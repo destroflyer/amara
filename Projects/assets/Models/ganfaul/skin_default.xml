@@ -1,5 +1,5 @@
 <skin name="ganfaul">
-    <model normScale="0.028">
+    <model normScale="0.028" rigType="mixamo">
         <material>
             <texture normalMap="normal.png" specularMap="specular.png" glowMap="glow.png">diffuse.png</texture>
         </material>

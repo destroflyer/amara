@@ -1,5 +1,5 @@
 <skin name="maw">
-    <model normScale="0.028" scale="1.5">
+    <model normScale="0.028" scale="1.5" rigType="mixamo">
         <material>
             <texture normalMap="normal.png" specularMap="specular.png" glowMap="glow.png">diffuse.png</texture>
         </material>

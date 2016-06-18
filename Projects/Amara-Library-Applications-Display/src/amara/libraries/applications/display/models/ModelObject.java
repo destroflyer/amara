@@ -44,7 +44,15 @@ public class ModelObject extends Node implements AnimEventListener{
             AnimChannel animationChannel = copyAnimation(spatial);
             animationChannels.add(animationChannel);
         }
-        JMonkeyUtil.setHardwareSkinningPreferred(spatial, Settings.getBoolean("hardware_skinning"));
+        boolean isHardwareSkinningPreferred = Settings.getBoolean("hardware_skinning");
+        String rigType = skin.getRigType();
+        if(rigType != null){
+            String forceHardwareSkinningValue = Settings.get("hardware_skinning_rig_type_" + rigType);
+            if(forceHardwareSkinningValue != null){
+                isHardwareSkinningPreferred = Settings.toBoolean(forceHardwareSkinningValue);
+            }
+        }
+        JMonkeyUtil.setHardwareSkinningPreferred(spatial, isHardwareSkinningPreferred);
     }
 
     public AnimChannel copyAnimation(Spatial spatial){

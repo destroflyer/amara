@@ -50,6 +50,7 @@ public class ModelSkin{
     private String name;
     private float modelNormScale;
     private Vector3f modelScale;
+    private String rigType;
     private float materialAmbient;
     private LinkedList<ModelModifier> modelModifiers = new LinkedList<ModelModifier>();
    
@@ -64,6 +65,7 @@ public class ModelSkin{
             modifiersElement = modelElement.getChild("modifiers");
             modelNormScale = getAttributeValue(modelElement, "normScale", 1);
             modelScale = getAttributeValue(modelElement, "scale", Vector3f.UNIT_XYZ);
+            rigType = modelElement.getAttributeValue("rigType");
             materialAmbient = getAttributeValue(materialElement, "ambient", 0.15f);
         }catch(Exception ex){
             System.out.println("Error while loading object skin '" + filePath + "'");
@@ -270,6 +272,10 @@ public class ModelSkin{
 
     public float getModelNormScale(){
         return modelNormScale;
+    }
+
+    public String getRigType(){
+        return rigType;
     }
    
     public float getMaterialAmbient(){
