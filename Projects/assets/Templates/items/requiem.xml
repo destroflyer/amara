@@ -2,7 +2,7 @@
     <entity>
         <itemID>requiem</itemID>
         <name>Reqiuem</name>
-        <itemRecipe gold="700" itemIDs="rod,enchanted_vesture"/>
+        <itemRecipe gold="700" itemIDs="apprentice_rod,enchanted_vesture"/>
         <isSellable>1300</isSellable>
         <!--stats-->
         <bonusFlatAbilityPower>70</bonusFlatAbilityPower>

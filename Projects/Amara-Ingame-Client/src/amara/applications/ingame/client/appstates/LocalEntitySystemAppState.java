@@ -113,7 +113,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new BuffVisualisationSystem_SonicWaveMark(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Turbo(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Wither(entitySceneMap));
-        addEntitySystem(new BuffVisualisationSystem_Zhonyas(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_Golden_Eagle(entitySceneMap));
     }
     
     public void onInitialWorldLoaded(){

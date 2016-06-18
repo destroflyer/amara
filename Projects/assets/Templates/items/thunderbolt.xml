@@ -2,7 +2,7 @@
     <entity>
         <itemID>thunderbolt</itemID>
         <name>Thunderbolt</name>
-        <itemRecipe gold="500" itemIDs="dagger,bow,dagger"/>
+        <itemRecipe gold="500" itemIDs="dagger,wooden_bow,dagger"/>
         <isSellable>1000</isSellable>
         <!--stats-->
         <bonusPercentageAttackSpeed>0.55</bonusPercentageAttackSpeed>

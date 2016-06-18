@@ -2,10 +2,10 @@
     <entity>
         <itemID>soulblade</itemID>
         <name>Soulblade</name>
-        <itemRecipe gold="400" itemIDs="sword,arcane_vesture"/>
-        <isSellable>600</isSellable>
+        <itemRecipe gold="600" itemIDs="arcaneblade,greatsword"/>
+        <isSellable>1200</isSellable>
         <!--stats-->
-        <bonusFlatAttackDamage>15</bonusFlatAttackDamage>
-        <bonusFlatMagicResistance>15</bonusFlatMagicResistance>
+        <bonusFlatAttackDamage>60</bonusFlatAttackDamage>
+        <bonusFlatMagicResistance>20</bonusFlatMagicResistance>
     </entity>
 </template>

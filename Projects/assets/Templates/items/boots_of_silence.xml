@@ -2,7 +2,7 @@
     <entity>
         <itemID>boots_of_silence</itemID>
         <name>Boots of Silence</name>
-        <itemRecipe gold="500" itemIDs="boots"/>
+        <itemRecipe gold="500" itemIDs="wanderers_treads"/>
         <isSellable>500</isSellable>
         <!--stats-->
         <bonusFlatWalkSpeed>0.4</bonusFlatWalkSpeed>

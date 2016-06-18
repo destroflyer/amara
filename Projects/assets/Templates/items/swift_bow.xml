@@ -2,7 +2,7 @@
     <entity>
         <itemID>swift_bow</itemID>
         <name>Swift Bow</name>
-        <itemRecipe gold="600" itemIDs="swift_dagger,bow"/>
+        <itemRecipe gold="600" itemIDs="swift_dagger,wooden_bow"/>
         <isSellable>1300</isSellable>
         <!--stats-->
         <bonusPercentageAttackSpeed>0.4</bonusPercentageAttackSpeed>

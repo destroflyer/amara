@@ -43,22 +43,22 @@ public class ScreenController_Shop extends GameScreenController{
     private String[] shopItemTemplateNames = new String[]{
         "egos_sword","egos_shield","egos_ring",
         "red_gem",
-        "boots","boots_of_haste","boots_of_ferocity","boots_of_sorcery","boots_of_intellect","boots_of_iron","boots_of_silence",
-        "sword","reinforced_sword","greatsword","dagger","bow",
+        "wanderers_treads","boots_of_haste","boots_of_ferocity","boots_of_sorcery","boots_of_intellect","boots_of_iron","boots_of_silence",
+        "rusty_sword","reinforced_sword","greatsword","dagger","wooden_bow",
         "leather_armor","heavy_leather_armor","cotton_armor","iron_armor","arcane_vesture","enchanted_vesture",
         "book_of_vampirism","doomblade","hells_scream",
         "cataclysm","icecold","spike_dagger","thunderbolt",
         "book_of_precision","book_of_extreme_precision","blinkstrike","new_dawn",
         "swift_dagger","swift_bow",
-        "scepter","rod","the_untamed",
+        "tiny_scepter","apprentice_rod","the_untamed",
         "book_of_wisdom","moonlight","nightkiss","requiem",
         "book_of_vitality","ethers_armor",
-        "iron_shield","natures_protector",
-        "burning_armor","reflective_armor",
-        "reaper","soulblade","misty_arcaneblade"
+        "iron_bulwark","natures_protector",
+        "burning_armor","mirror_coat",
+        "reaper","arcaneblade","soulblade"
     };
     private String[] shopItemTemplateNames_Special = new String[]{
-        "zhonyas_hourglass","youmuus_ghostblade","lifebinder"
+        "golden_eagle","youmuus_ghostblade","lifebinder"
     };
     private EntityWrapper[] shopItems;
     private EntityWrapper[] shopItems_Special;
@@ -66,7 +66,7 @@ public class ScreenController_Shop extends GameScreenController{
     private LinkedList<ItemRecipe> tmpInventoryItemsRecipes = new LinkedList<ItemRecipe>();
     private int shopPageID;
     private String shopItemFilterText = "";
-    private boolean[] shopItemFilters = new boolean[7];
+    private boolean[] shopItemFilters = new boolean[11];
     private boolean isUpdatingShopItemFilters;
     private LinkedList<EntityWrapper> shopFilteredItems = new LinkedList<EntityWrapper>();
     
@@ -210,10 +210,14 @@ public class ScreenController_Shop extends GameScreenController{
             }
             else if((shopItemFilters[1] && (!item.hasComponent(BonusFlatMaximumHealthComponent.class)))
             || (shopItemFilters[2] && (!item.hasComponent(BonusFlatAttackDamageComponent.class)))
-            || (shopItemFilters[3] && (!item.hasComponent(BonusFlatAbilityPowerComponent.class)))
-            || (shopItemFilters[4] && (!item.hasComponent(BonusFlatArmorComponent.class)))
-            || (shopItemFilters[5] && (!item.hasComponent(BonusFlatMagicResistanceComponent.class)))
-            || (shopItemFilters[6] && (!item.hasComponent(BonusFlatWalkSpeedComponent.class)))){
+            || (shopItemFilters[3] && (!item.hasComponent(BonusPercentageAttackSpeedComponent.class)))
+            || (shopItemFilters[4] && (!item.hasComponent(BonusPercentageCriticalChanceComponent.class)))
+            || (shopItemFilters[5] && (!item.hasComponent(BonusPercentageLifestealComponent.class)))
+            || (shopItemFilters[6] && (!item.hasComponent(BonusFlatAbilityPowerComponent.class)))
+            || (shopItemFilters[7] && (!item.hasComponent(BonusPercentageCooldownSpeedComponent.class)))
+            || (shopItemFilters[8] && (!item.hasComponent(BonusFlatArmorComponent.class)))
+            || (shopItemFilters[9] && (!item.hasComponent(BonusFlatMagicResistanceComponent.class)))
+            || (shopItemFilters[10] && (!item.hasComponent(BonusFlatWalkSpeedComponent.class)))){
                 isFiltered = false;
             }
             if(isFiltered){

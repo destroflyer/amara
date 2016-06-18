@@ -20,10 +20,10 @@ import amara.libraries.entitysystem.EntityWorld;
  *
  * @author Carl
  */
-public class BuffVisualisationSystem_Zhonyas extends BuffVisualisationSystem{
+public class BuffVisualisationSystem_Golden_Eagle extends BuffVisualisationSystem{
 
-    public BuffVisualisationSystem_Zhonyas(EntitySceneMap entitySceneMap){
-        super(entitySceneMap, "zhonyas");
+    public BuffVisualisationSystem_Golden_Eagle(EntitySceneMap entitySceneMap){
+        super(entitySceneMap, "golden_eagle");
         scaleVisualisation = false;
     }
     

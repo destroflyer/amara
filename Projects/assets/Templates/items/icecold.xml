@@ -2,7 +2,7 @@
     <entity>
         <itemID>icecold</itemID>
         <name>Icecold</name>
-        <itemRecipe gold="800" itemIDs="greatsword,sword"/>
+        <itemRecipe gold="800" itemIDs="greatsword,rusty_sword"/>
         <isSellable>1500</isSellable>
         <!--stats-->
         <bonusFlatAttackDamage>60</bonusFlatAttackDamage>

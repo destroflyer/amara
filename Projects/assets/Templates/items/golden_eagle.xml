@@ -1,13 +1,13 @@
 <template>
     <entity>
-        <itemID>zhonyas_hourglass</itemID>
-        <name>Zhonya's Hourglass</name>
+        <itemID>golden_eagle</itemID>
+        <name>Golden Eagle</name>
         <itemRecipe gold="2700"/>
         <isSellable>2310</isSellable>
         <!--stats-->
         <bonusFlatAbilityPower>120</bonusFlatAbilityPower>
         <itemActive consumable="false">
-            <entity template="./zhonyas_hourglass_active"/>
+            <entity template="./golden_eagle_active"/>
         </itemActive>
     </entity>
 </template>

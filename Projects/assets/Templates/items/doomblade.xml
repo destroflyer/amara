@@ -2,7 +2,7 @@
     <entity>
         <itemID>doomblade</itemID>
         <name>Doomblade</name>
-        <itemRecipe gold="500" itemIDs="sword,book_of_vampirism"/>
+        <itemRecipe gold="500" itemIDs="rusty_sword,book_of_vampirism"/>
         <isSellable>900</isSellable>
         <!--stats-->
         <bonusFlatAttackDamage>25</bonusFlatAttackDamage>

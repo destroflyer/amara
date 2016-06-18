@@ -16,11 +16,8 @@
                                 <panel width="6px"/>
                                 <text text="All Items" font="Interface/fonts/Verdana_14.fnt" height="23px" checked="true"/>
                             </panel>
-                            <panel childLayout="horizontal" height="32px">
-                                <control id="shop_item_filter_checkbox_1" name="checkbox"/>
-                                <panel width="6px"/>
-                                <text text="Health" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
-                            </panel>
+                            <panel childLayout="horizontal" height="2px" backgroundColor="#666F"/>
+                            <panel childLayout="horizontal" height="9px"/>
                             <panel childLayout="horizontal" height="32px">
                                 <control id="shop_item_filter_checkbox_2" name="checkbox"/>
                                 <panel width="6px"/>
@@ -29,20 +26,51 @@
                             <panel childLayout="horizontal" height="32px">
                                 <control id="shop_item_filter_checkbox_3" name="checkbox"/>
                                 <panel width="6px"/>
-                                <text text="Ability Power" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                                <text text="Attack Speed" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
                             </panel>
                             <panel childLayout="horizontal" height="32px">
                                 <control id="shop_item_filter_checkbox_4" name="checkbox"/>
                                 <panel width="6px"/>
-                                <text text="Armor" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                                <text text="Critical Chance" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
                             </panel>
                             <panel childLayout="horizontal" height="32px">
                                 <control id="shop_item_filter_checkbox_5" name="checkbox"/>
                                 <panel width="6px"/>
-                                <text text="Magic Resistance" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                                <text text="Lifesteal" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
                             </panel>
+                            <panel childLayout="horizontal" height="2px" backgroundColor="#666F"/>
+                            <panel childLayout="horizontal" height="9px"/>
                             <panel childLayout="horizontal" height="32px">
                                 <control id="shop_item_filter_checkbox_6" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="Ability Power" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_7" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="Cooldown Speed" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="2px" backgroundColor="#666F"/>
+                            <panel childLayout="horizontal" height="9px"/>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_1" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="Health" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_8" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="Armor" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_9" name="checkbox"/>
+                                <panel width="6px"/>
+                                <text text="Magic Resistance" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
+                            </panel>
+                            <panel childLayout="horizontal" height="2px" backgroundColor="#666F"/>
+                            <panel childLayout="horizontal" height="9px"/>
+                            <panel childLayout="horizontal" height="32px">
+                                <control id="shop_item_filter_checkbox_10" name="checkbox"/>
                                 <panel width="6px"/>
                                 <text text="Walk Speed" font="Interface/fonts/Verdana_14.fnt" height="23px"/>
                             </panel>

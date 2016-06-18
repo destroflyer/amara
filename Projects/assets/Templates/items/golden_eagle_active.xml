@@ -32,17 +32,17 @@
                         <removeVulnerability/>
                         <playAudio>
                             <entity id="audioStart">
-                                <audio>Sounds/sounds/spells/zhonyas_start.ogg</audio>
+                                <audio>Sounds/sounds/spells/golden_eagle_start.ogg</audio>
                             </entity>
                             <entity id="audioLoop">
-                                <audio>Sounds/sounds/spells/zhonyas_loop.ogg</audio>
+                                <audio>Sounds/sounds/spells/golden_eagle_loop.ogg</audio>
                                 <audioLoop/>
                                 <audioSuccessor delay="0.05">#audioStart</audioSuccessor>
                             </entity>
                         </playAudio>
                         <addBuff duration="[duration]">
                             <entity>
-                                <buffVisualisation>zhonyas</buffVisualisation>
+                                <buffVisualisation>golden_eagle</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
                                         <casterTarget/>
@@ -53,7 +53,7 @@
                                                 <stopAudio>#audioLoop</stopAudio>
                                                 <playAudio>
                                                     <entity>
-                                                        <audio>Sounds/sounds/spells/zhonyas_end.ogg</audio>
+                                                        <audio>Sounds/sounds/spells/golden_eagle_end.ogg</audio>
                                                     </entity>
                                                 </playAudio>
                                             </entity>
