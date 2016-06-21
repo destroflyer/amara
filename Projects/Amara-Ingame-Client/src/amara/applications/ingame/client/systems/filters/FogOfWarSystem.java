@@ -144,7 +144,7 @@ public class FogOfWarSystem implements EntitySystem{
                 //Fast way using shapes
                 if(true){
                     visionEdges.clear();
-                    addPointEdges(visionEdges, mapBorderPoints);
+                    addPointEdges(visionEdges, mapBorderPoints, false);
                     Circle visionCircleShape = getVisionCircleShape(sightRange);
                     visionCircleShape.setTransform(new Transform2D(1, 0, position.getX(), position.getY()));
                     ArrayList<Vector2D> visionCircleOutline = PolyHelper.fromShape(visionCircleShape).edges();
@@ -155,11 +155,13 @@ public class FogOfWarSystem implements EntitySystem{
                         if(obstacle.intersects(visionCircleShape)){
                             if(obstacle instanceof SimpleConvexPolygon){
                                 SimpleConvexPolygon simpleConvexPolygon = (SimpleConvexPolygon) obstacle;
-                                addPointEdges(visionEdges, simpleConvexPolygon.getGlobalPoints());
+                                addPointEdges(visionEdges, simpleConvexPolygon.getGlobalPoints(), true);
                             }
                             else if(obstacle instanceof Circle){
                                 ArrayList<Vector2D> circleOutline = PolyHelper.fromShape(obstacle).edges();
-                                visionEdges.addAll(circleOutline);
+                                for(int i=(circleOutline.size() - 1);i>=0;i--){
+                                    visionEdges.add(circleOutline.get(i));
+                                }
                             }
                         }
                     }
@@ -175,12 +177,22 @@ public class FogOfWarSystem implements EntitySystem{
         onFogImageUpdated();
     }
     
-    private static void addPointEdges(List<Vector2D> edges, Vector2D[] points){
-        Vector2D lastPoint = points[points.length - 1];
-        for(Vector2D point : points){
-            edges.add(lastPoint);
-            edges.add(point);
-            lastPoint = point;
+    private static void addPointEdges(List<Vector2D> edges, Vector2D[] points, boolean reversed){
+        if(reversed){
+            Vector2D lastPoint = points[0];
+            for(int i=(points.length - 1);i>=0;i--){
+                edges.add(lastPoint);
+                edges.add(points[i]);
+                lastPoint = points[i];
+            }
+        }
+        else{
+            Vector2D lastPoint = points[points.length - 1];
+            for(Vector2D point : points){
+                edges.add(lastPoint);
+                edges.add(point);
+                lastPoint = point;
+            }
         }
     }
     
