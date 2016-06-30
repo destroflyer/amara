@@ -54,6 +54,7 @@ public class IngameClientApplication extends DisplayApplication{
         stateManager.attach(new WaterAppState());
         stateManager.attach(new PostFilterAppState());
         stateManager.attach(new WireframeAppState());
+        stateManager.attach(new PreloadAssetsAppState());
         stateManager.attach(new IngameCinematicAppState());
         stateManager.attach(new IngameCameraAppState(true));
         stateManager.attach(new IngameFeedbackAppState());
