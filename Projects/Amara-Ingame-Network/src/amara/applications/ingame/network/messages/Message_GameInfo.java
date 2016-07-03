@@ -6,6 +6,7 @@ package amara.applications.ingame.network.messages;
 
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
+import amara.applications.master.network.messages.objects.GameSelection;
 
 /**
  *
@@ -18,15 +19,15 @@ public class Message_GameInfo extends AbstractMessage{
         
     }
     
-    public Message_GameInfo(String mapName, int playerEntity){
-        this.mapName = mapName;
+    public Message_GameInfo(GameSelection gameSelection, int playerEntity){
+        this.gameSelection = gameSelection;
         this.playerEntity = playerEntity;
     }
-    private String mapName;
+    private GameSelection gameSelection;
     private int playerEntity;
 
-    public String getMapName(){
-        return mapName;
+    public GameSelection getGameSelection(){
+        return gameSelection;
     }
 
     public int getPlayerEntity(){
