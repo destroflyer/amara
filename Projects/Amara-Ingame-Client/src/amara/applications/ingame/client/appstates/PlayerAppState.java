@@ -5,6 +5,8 @@
 package amara.applications.ingame.client.appstates;
 
 import java.util.HashMap;
+import com.jme3.app.Application;
+import com.jme3.app.state.AppStateManager;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
 import com.jme3.input.KeyInput;
@@ -20,6 +22,7 @@ import amara.applications.ingame.client.systems.information.*;
 import amara.applications.ingame.client.systems.visualisation.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.shared.maps.Map;
+import amara.applications.master.network.messages.objects.GameSelection;
 import amara.core.settings.Settings;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.*;
@@ -30,10 +33,12 @@ import amara.libraries.applications.display.ingame.appstates.*;
  */
 public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication> implements ActionListener{
 
-    public PlayerAppState(int playerEntity){
+    public PlayerAppState(GameSelection gameSelection, int playerEntity){
+        this.gameSelection = gameSelection;
         this.playerEntity = playerEntity;
         playerTeamSystem = new PlayerTeamSystem(playerEntity);
     }
+    private GameSelection gameSelection;
     private int playerEntity;
     private PlayerTeamSystem playerTeamSystem;
     private SpellIndicatorSystem spellIndicatorSystem;
@@ -42,6 +47,12 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
     private int cursorHoveredEntity = -1;
     private CollisionResults[] tmpEntitiesColisionResults = new CollisionResults[8];
     private HashMap<Integer, Integer> tmpHoveredEntitiesCount = new HashMap<Integer, Integer>();
+
+    @Override
+    public void initialize(AppStateManager stateManager, Application application){
+        super.initialize(stateManager, application);
+        getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class).generateScoreboard();
+    }
     
     public void onInitialWorldLoaded(){
         mainApplication.getInputManager().addMapping("lock_camera", new KeyTrigger(KeyInput.KEY_Z));
@@ -169,6 +180,10 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
                 fogOfWarSystem.setDisplayMapSight(!fogOfWarSystem.isDisplayMapSight());
             }
         }
+    }
+
+    public GameSelection getGameSelection(){
+        return gameSelection;
     }
 
     public int getPlayerEntity(){

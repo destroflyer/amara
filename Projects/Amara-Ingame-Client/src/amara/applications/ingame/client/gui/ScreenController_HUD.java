@@ -9,6 +9,7 @@ import com.jme3.texture.Texture2D;
 import amara.applications.ingame.client.appstates.*;
 import amara.applications.ingame.client.gui.objects.SpellInformation;
 import amara.applications.ingame.shared.maps.MapMinimapInformation;
+import amara.applications.master.network.messages.objects.GameSelectionPlayer;
 import amara.core.Util;
 import amara.libraries.applications.display.appstates.NiftyAppState;
 import amara.libraries.applications.display.gui.GameScreenController;
@@ -61,12 +62,6 @@ public class ScreenController_HUD extends GameScreenController{
         }
         setUpgradeSpellsLayerVisible(false);
         hideUpgradeSpell();
-    }
-
-    @Override
-    protected void initialize(){
-        super.initialize();
-        generateScoreboard();
     }
     
     public void setPlayerName(String name){
@@ -392,61 +387,75 @@ public class ScreenController_HUD extends GameScreenController{
         getElementByID("upgrade_spell_layer_images").setVisible(false);
     }
     
-    private void generateScoreboard(){
+    public void generateScoreboard(){
         new PanelBuilder(){{
             childLayoutVertical();
             
-            for(int i=0;i<8;i++){
-                final int playerIndex = i;
-                panel(new PanelBuilder("scoreboard_player_" + playerIndex){{
-                    childLayoutHorizontal();
-                    height("30px");
-                    
-                    text(new TextBuilder("scoreboard_player_" + playerIndex + "_name"){{
-                        width("200px");
+            PlayerAppState playerAppState = mainApplication.getStateManager().getState(PlayerAppState.class);
+            GameSelectionPlayer[][] teams = playerAppState.getGameSelection().getTeams();
+        
+            int _playerIndex = 0;
+            for(int i=0;i<teams.length;i++){
+                final int teamIndex = i;
+                for(int r=0;r<teams[i].length;r++){
+                    final int playerIndex = _playerIndex;
+                    text(new TextBuilder(){{
                         height("30px");
                         textHAlignLeft();
                         font("Interface/fonts/Verdana_14.fnt");
-                        text("Player #" + (playerIndex + 1));
+                        text("Team #" + (teamIndex + 1));
                     }});
-                    text(new TextBuilder("scoreboard_player_" + playerIndex + "_kda"){{
-                        width("40px");
+                    panel(new PanelBuilder("scoreboard_player_" + playerIndex){{
+                        childLayoutHorizontal();
                         height("30px");
-                        textHAlignCenter();
-                        font("Interface/fonts/Verdana_14.fnt");
-                        text("K/D/A");
-                    }});
-                    panel(new PanelBuilder(){{
-                        width("20px");
-                    }});
-                    text(new TextBuilder("scoreboard_player_" + playerIndex + "_creepscore"){{
-                        width("40px");
-                        height("30px");
-                        textHAlignCenter();
-                        font("Interface/fonts/Verdana_14.fnt");
-                        text("CS");
-                    }});
-                    panel(new PanelBuilder(){{
-                        width("20px");
-                    }});
-                    for(int i=0;i<6;i++){
-                        image(new ImageBuilder("scoreboard_player_" + playerIndex + "_item_" + i + "_image"){{
-                            width("30px");
+
+                        text(new TextBuilder("scoreboard_player_" + playerIndex + "_name"){{
+                            width("200px");
                             height("30px");
-                            filename("Interface/hud/items/unknown.png");
-                            
-                            onHoverEffect(new HoverEffectBuilder("hint"){{
-                                effectParameter("hintText", "?");
-                            }});
+                            textHAlignLeft();
+                            font("Interface/fonts/Verdana_14.fnt");
+                            text("Player #" + (playerIndex + 1));
                         }});
-                    }
-                    panel(new PanelBuilder(){{
-                        width("*");
+                        text(new TextBuilder("scoreboard_player_" + playerIndex + "_kda"){{
+                            width("40px");
+                            height("30px");
+                            textHAlignCenter();
+                            font("Interface/fonts/Verdana_14.fnt");
+                            text("K/D/A");
+                        }});
+                        panel(new PanelBuilder(){{
+                            width("20px");
+                        }});
+                        text(new TextBuilder("scoreboard_player_" + playerIndex + "_creepscore"){{
+                            width("40px");
+                            height("30px");
+                            textHAlignCenter();
+                            font("Interface/fonts/Verdana_14.fnt");
+                            text("CS");
+                        }});
+                        panel(new PanelBuilder(){{
+                            width("20px");
+                        }});
+                        for(int i=0;i<6;i++){
+                            image(new ImageBuilder("scoreboard_player_" + playerIndex + "_item_" + i + "_image"){{
+                                width("30px");
+                                height("30px");
+                                filename("Interface/hud/items/unknown.png");
+
+                                onHoverEffect(new HoverEffectBuilder("hint"){{
+                                    effectParameter("hintText", "?");
+                                }});
+                            }});
+                        }
+                        panel(new PanelBuilder(){{
+                            width("*");
+                        }});
                     }});
-                }});
-                panel(new PanelBuilder(){{
-                    height("5px");
-                }});
+                    panel(new PanelBuilder(){{
+                        height("5px");
+                    }});
+                    _playerIndex++;
+                }
             }
             panel(new PanelBuilder(){{
                 height("*");
