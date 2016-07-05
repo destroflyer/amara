@@ -121,4 +121,14 @@ public class GameSelection{
         }
         return playersCount;
     }
+    
+    //[jME 3.1 SNAPSHOT] A nested array with length 0 isn't sent correctly
+    public void repairOnUnserialize(){
+        for(int i=0;i<teams.length;i++){
+            GameSelectionPlayer[] team = teams[i];
+            if((team.length > 0) && (team[0] == null)){
+                teams[i] = new GameSelectionPlayer[0];
+            }
+        }
+    }
 }

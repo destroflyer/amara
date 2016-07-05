@@ -397,14 +397,14 @@ public class ScreenController_HUD extends GameScreenController{
             int _playerIndex = 0;
             for(int i=0;i<teams.length;i++){
                 final int teamIndex = i;
+                text(new TextBuilder(){{
+                    height("30px");
+                    textHAlignLeft();
+                    font("Interface/fonts/Verdana_14.fnt");
+                    text("Team #" + (teamIndex + 1));
+                }});
                 for(int r=0;r<teams[i].length;r++){
                     final int playerIndex = _playerIndex;
-                    text(new TextBuilder(){{
-                        height("30px");
-                        textHAlignLeft();
-                        font("Interface/fonts/Verdana_14.fnt");
-                        text("Team #" + (teamIndex + 1));
-                    }});
                     panel(new PanelBuilder("scoreboard_player_" + playerIndex){{
                         childLayoutHorizontal();
                         height("30px");

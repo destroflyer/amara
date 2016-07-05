@@ -28,6 +28,7 @@ public class GameInfoBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_GameInfo){
             final Message_GameInfo message = (Message_GameInfo) receivedMessage;
+            message.getGameSelection().repairOnUnserialize();
             final AppStateManager stateManager = mainApplication.getStateManager();
             mainApplication.enqueueTask(new Runnable(){
 

@@ -44,7 +44,7 @@ public class ClientLauncher extends JFrame{
         PanLauncher panLauncher = new PanLauncher();
         panLauncher.setSize(panImage.getSize());
         panImage.add(panLauncher);
-        btnPlay = ButtonUtil.addImageBackgroundButton(panContainer_btnPlay, new DefaultButtonBuilder("default_113x66", "Updating..."));
+        btnPlay = ButtonUtil.addImageBackgroundButton(panContainer_btnPlay, new DefaultButtonBuilder("default_113x66", ""));
         btnPlay.addMouseListener(new MouseAdapter(){
 
             @Override
@@ -107,6 +107,7 @@ public class ClientLauncher extends JFrame{
     }
     
     private void connectToMasterserver(){
+        btnPlay.setText("Connecting...");
         btnPlay.setEnabled(false);
         if((cbxMasterserverHost.getSelectedItem() != null) && (!txtMasterserverPort.getText().isEmpty())){
             new Thread(new Runnable(){
@@ -156,12 +157,14 @@ public class ClientLauncher extends JFrame{
     }
     
     private void onMasterserverOffline(){
+        btnPlay.setText("Offline");
         pbrCompleteUpdate.setString("Couldn't connect to masterserver");
         cbxMasterserverHost.setEnabled(true);
         txtMasterserverPort.setEnabled(true);
     }
     
     public void update(final LinkedList<UpdateFile> updateFiles){
+        btnPlay.setText("Updating...");
         new Thread(new Runnable(){
 
             @Override

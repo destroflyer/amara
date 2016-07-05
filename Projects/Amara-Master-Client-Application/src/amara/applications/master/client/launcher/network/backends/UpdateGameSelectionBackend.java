@@ -27,7 +27,7 @@ public class UpdateGameSelectionBackend implements MessageBackend{
         if(receivedMessage instanceof Message_GameSelectionUpdate){
             Message_GameSelectionUpdate message = (Message_GameSelectionUpdate) receivedMessage;
             final GameSelection gameSelection = message.getGameSelection();
-            repair(gameSelection);
+            gameSelection.repairOnUnserialize();
             EventQueue.invokeLater(new Runnable(){
 
                 @Override
@@ -36,16 +36,6 @@ public class UpdateGameSelectionBackend implements MessageBackend{
                     panPlay.displayGameSelectionPanel();
                 }
             });
-        }
-    }
-    
-    //[jME 3.1 SNAPSHOT] A nested array with length 0 isn't sent correctly
-    private static void repair(GameSelection gameSelection){
-        for(int i=0;i<gameSelection.getTeams().length;i++){
-            GameSelectionPlayer[] team = gameSelection.getTeams()[i];
-            if((team.length > 0) && (team[0] == null)){
-                gameSelection.getTeams()[i] = new GameSelectionPlayer[0];
-            }
         }
     }
 }
