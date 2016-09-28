@@ -4,7 +4,7 @@
     <useControls filename="nifty-default-controls.xml"/>
     <screen id="start" controller="amara.applications.master.client.launcher.loginscreen.gui.ScreenController_LoginScreen">
         <layer childLayout="absolute">
-            <panel x="10px" y="130px" width="200px" height="128px" childLayout="center">
+            <panel x="10px" y="215px" width="200px" height="128px" childLayout="center">
                 <image id="box_background" filename="Interface/client/login/box.png"/>
                 <panel childLayout="horizontal">
                     <panel width="5px"/>

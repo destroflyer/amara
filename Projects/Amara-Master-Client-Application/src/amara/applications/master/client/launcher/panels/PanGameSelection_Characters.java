@@ -25,7 +25,7 @@ public class PanGameSelection_Characters extends javax.swing.JPanel{
         OwnedGameCharacter[] ownedCharacters = MasterserverClientUtil.getOwnedCharacters();
         panCharacters = new PanGameSelection_Character[ownedCharacters.length];
         for(int i=0;i<ownedCharacters.length;i++){
-            if((x + panelSize + padding) >= containerWidth){
+            if((x + panelSize + padding) > containerWidth){
                 x = padding;
                 y += (panelSize + padding);
             }

@@ -13,7 +13,6 @@ package amara.applications.master.client.launcher.panels;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import java.awt.event.ItemEvent;
 import javax.swing.border.LineBorder;
 import amara.applications.master.client.MasterserverClientUtil;
 import amara.applications.master.client.launcher.comboboxes.*;
@@ -389,7 +388,8 @@ public class PanProfile extends javax.swing.JPanel{
     }//GEN-LAST:event_cbxCharactersItemStateChanged
 
     private void cbxSkinsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSkinsItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED){
+        //Deactivated for now, since changing the active character skin is possible in the game selection
+        /*if(evt.getStateChange() == ItemEvent.SELECTED){
             OwnedGameCharacter ownedCharacter = getSelectedOwnedCharacter();
             GameCharacter character = ownedCharacter.getCharacter();
             int skinID = 0;
@@ -398,7 +398,7 @@ public class PanProfile extends javax.swing.JPanel{
             }
             MasterserverClientUtil.getNetworkClient().sendMessage(new Message_EditActiveCharacterSkin(character.getID(), skinID));
             ownedCharacter.setActiveSkinID(skinID);
-        }
+        }*/
     }//GEN-LAST:event_cbxSkinsItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

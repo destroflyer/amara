@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicComboBoxUI;
+import java.util.HashMap;
 import com.jme3.network.Message;
 import amara.applications.ingame.shared.maps.*;
 import amara.applications.master.client.MasterserverClientUtil;
@@ -40,6 +41,7 @@ public class PanGameSelection extends javax.swing.JPanel{
     }
     private PanPlay panPlay;
     private PanGameSelection_Characters panCharacters;
+    private HashMap<OwnedGameCharacter, PanGameSelection_CharacterSkins> panCharactersSkins = new HashMap<OwnedGameCharacter, PanGameSelection_CharacterSkins>();
     private GameSelection gameSelection;
     private Map map;
     private JComboBox[] cbxMapSpells;
@@ -160,6 +162,17 @@ public class PanGameSelection extends javax.swing.JPanel{
         this.selectedCharacterID = ownedGameCharacter.getCharacter().getID();
         lblCharacterTitle.setText(ownedGameCharacter.getCharacter().getTitle());
         panCharacters.updateCharacterPanels();
+        tpaneCharacters.setComponentAt(1, getCharacterSkinsPanel(ownedGameCharacter));
+        tpaneCharacters.setEnabledAt(1, true);
+    }
+    
+    private PanGameSelection_CharacterSkins getCharacterSkinsPanel(OwnedGameCharacter ownedGameCharacter){
+        PanGameSelection_CharacterSkins panCharacterSkins = panCharactersSkins.get(ownedGameCharacter);
+        if(panCharacterSkins == null){
+            panCharacterSkins = new PanGameSelection_CharacterSkins(this, ownedGameCharacter);
+            panCharactersSkins.put(ownedGameCharacter, panCharacterSkins);
+        }
+        return panCharacterSkins;
     }
 
     public int getSelectedCharacterID(){
