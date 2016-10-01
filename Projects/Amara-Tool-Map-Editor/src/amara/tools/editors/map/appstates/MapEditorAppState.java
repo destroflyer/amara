@@ -154,7 +154,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
     @Override
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
-        Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
+        Vector2f groundLocation = getAppState(MapAppState.class).getGroundLocation_Cursor();
         if((groundLocation != null) && (!groundLocation.equals(currentHoveredLocation))){
             currentHoveredLocation.set(groundLocation);
             updateToolCursorLocation();

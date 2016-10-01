@@ -22,7 +22,6 @@ public class LockedCameraSystem implements EntitySystem{
     private int playerEntity;
     private IngameCameraAppState ingameCameraAppState;
     private boolean isEnabled;
-    private boolean wasZoomEnabled;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -41,15 +40,6 @@ public class LockedCameraSystem implements EntitySystem{
         if(isEnabled != this.isEnabled){
             this.isEnabled = isEnabled;
             ingameCameraAppState.setMovementEnabled(!isEnabled);
-            if(isEnabled){
-                ingameCameraAppState.saveState();
-                wasZoomEnabled = ingameCameraAppState.isZoomEnabled();
-                ingameCameraAppState.setZoomEnabled(false);
-            }
-            else{
-                //ingameCameraAppState.restoreState();
-                ingameCameraAppState.setZoomEnabled(wasZoomEnabled);
-            }
         }
     }
 

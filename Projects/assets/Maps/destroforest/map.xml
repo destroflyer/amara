@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map author="Carl" date="1412356843373" class="amara.applications.ingame.maps.Map_Destroforest">
 	<camera initialPosition="160.0,70.0,-5.0" initialDirection="0.0,-1.0,0.6745">
-		<limit minX="42.0" minY="15.0" maxX="320.0" maxY="260.0" />
-		<zoom interval="5.0" maximumLevel="12" initialLevel="8" />
+		<limit minX="42.0" minY="15.0" maxX="320.0" maxY="260.0" />		<zoom interval="1.0" minimumDistance="10.0" maximumDistance="300.0" initialDistance="40.0" />
 	</camera>
 	<lights>
 		<ambient color="0.2,0.2,0.2" />

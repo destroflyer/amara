@@ -80,7 +80,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
                         sendCommand(new AutoAttackCommand(hoveredEntity));
                     }
                     else{
-                        Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
+                        Vector2f groundLocation = getAppState(MapAppState.class).getGroundLocation_Cursor();
                         if(groundLocation != null){
                             sendCommand(new MoveCommand(groundLocation));
                             getAppState(IngameFeedbackAppState.class).displayMovementTarget(groundLocation);
@@ -185,7 +185,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
         int characterEntity = getPlayerCharacterEntity();
         int spellEntity = ExecutePlayerCommandsSystem.getSpellEntity(entityWorld, characterEntity, spellIndex);
         if(spellEntity != -1){
-            Vector2f groundLocation = getAppState(MapAppState.class).getCursorHoveredGroundLocation();
+            Vector2f groundLocation = getAppState(MapAppState.class).getGroundLocation_Cursor();
             CastTypeComponent.CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();
             switch(castType){
                 case SELFCAST:

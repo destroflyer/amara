@@ -10,6 +10,7 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.audio.Listener;
 import com.jme3.collision.CollisionResult;
+import com.jme3.collision.CollisionResults;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.light.Light;
@@ -80,7 +81,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
         MapCamera_Zoom zoom = map.getCamera().getZoom();
         if(zoom != null){
             ingameCameraAppState.setZoomInterval(zoom.getInterval());
-            ingameCameraAppState.zoom(zoom.getInitialLevel());
+            ingameCameraAppState.initializeZoom(zoom.getInitialDistance(), getGroundLocation_ScreenCenter());
         }
         if(ingameCameraAppState.shouldBeLimited()){
             MapCamera_Limit limit = map.getCamera().getLimit();
@@ -88,7 +89,8 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
                 ingameCameraAppState.setLimit(limit.getMinimum(), limit.getMaximum(), mapTerrain.getTerrain());
             }
             if(zoom != null){
-                ingameCameraAppState.setMaximumZoomLevel(zoom.getMaximumLevel());
+                ingameCameraAppState.setZoomMinimumDistance(zoom.getMinimumDistance());
+                ingameCameraAppState.setZoomMaximumDistance(zoom.getMaximumDistance());
             }
         }
     }
@@ -214,8 +216,16 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
         activeFilters.clear();
     }
     
-    public Vector2f getCursorHoveredGroundLocation(){
-        CollisionResult groundCollision = mainApplication.getRayCastingResults_Cursor(mapTerrain.getTerrain()).getClosestCollision();
+    public Vector2f getGroundLocation_Cursor(){
+        return getGroundLocation(mainApplication.getRayCastingResults_Cursor(mapTerrain.getTerrain()));
+    }
+    
+    public Vector2f getGroundLocation_ScreenCenter(){
+        return getGroundLocation(mainApplication.getRayCastingResults_ScreenCenter(mapTerrain.getTerrain()));
+    }
+    
+    private Vector2f getGroundLocation(CollisionResults groundCollisionResults){
+        CollisionResult groundCollision = groundCollisionResults.getClosestCollision();
         if(groundCollision != null){
             return new Vector2f(groundCollision.getContactPoint().getX(), groundCollision.getContactPoint().getZ());
         }

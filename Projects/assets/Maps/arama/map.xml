@@ -1,2 +1,992 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map author="Carl" date="1463961361566" class="amara.applications.ingame.maps.Map_Arama"><camera initialPosition="262.2,56.0,226.5" initialDirection="0.0,-1.0,0.6745" /><lights><ambient color="0.2,0.2,0.2" /><directional direction="-0.5,-1.75,1.0" color="1.2,1.2,1.2"><shadows intensity="0.4" /></directional></lights><terrain><textures><texture scale="18.0">Textures/terrain/cartoon_forest/stone_bright_1.jpg</texture><texture scale="22.0">Textures/terrain/cartoon_forest/bush.jpg</texture><texture scale="22.0">Textures/terrain/cartoon_forest/stone_bright_1_dark.jpg</texture><texture scale="60.0">Textures/terrain/cartoon_forest/dark_stone_color.jpg</texture><texture scale="27.0">Textures/terrain/cartoon_forest/cracked_cliff.jpg</texture><texture scale="70.0">Textures/terrain/cartoon_forest/grass_3.jpg</texture><texture scale="72.0">Textures/terrain/cartoon_forest/wall.jpg</texture><texture scale="72.0">Textures/terrain/cartoon_forest/pebbles_2.jpg</texture><texture scale="72.0">Textures/terrain/cartoon_forest/dark_dirt.jpg</texture></textures></terrain><minimap x="94.0" y="94.0" width="337.0" height="337.0" /><physics width="525.0" height="525.0" heightmapScale="0.075" groundHeight="15.0"><obstacles><circle radius="3.5"><transform x="147.0" y="260.25" direction="0.0" scale="1.0" /></circle><circle radius="3.0"><transform x="171.0" y="266.25" direction="0.0" scale="1.0" /></circle><circle radius="3.0"><transform x="204.0" y="254.25" direction="0.0" scale="1.0" /></circle><circle radius="3.0"><transform x="321.0" y="254.25" direction="0.0" scale="1.0" /></circle><circle radius="3.0"><transform x="354.0" y="266.25" direction="0.0" scale="1.0" /></circle><circle radius="3.5"><transform x="378.001" y="260.25" direction="0.0" scale="1.0" /></circle><simpleConvex><base><point>298.7645263671875,290.6398010253906</point><point>296.9356689453125,297.1602783203125</point><point>290.4064025878906,302.644287109375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>234.631103515625,302.86859130859375</point><point>227.5333251953125,296.45355224609375</point><point>225.15460205078125,288.8118591308594</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>225.15460205078125,288.8118591308594</point><point>220.81558227539062,281.9539794921875</point><point>301.3127136230469,285.27728271484375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>307.404541015625,277.5543518066406</point><point>301.3127136230469,285.27728271484375</point><point>220.81558227539062,281.9539794921875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>220.81558227539062,281.9539794921875</point><point>217.5195770263672,277.4345703125</point><point>307.404541015625,277.5543518066406</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>225.15460205078125,288.8118591308594</point><point>301.3127136230469,285.27728271484375</point><point>298.7645263671875,290.6398010253906</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>234.631103515625,302.86859130859375</point><point>225.15460205078125,288.8118591308594</point><point>298.7645263671875,290.6398010253906</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>298.7645263671875,290.6398010253906</point><point>290.4064025878906,302.644287109375</point><point>234.631103515625,302.86859130859375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>215.32769775390625,289.7513427734375</point><point>215.2985076904297,299.29833984375</point><point>207.5963897705078,294.4579162597656</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>193.7661895751953,309.40838623046875</point><point>196.866455078125,313.5399475097656</point><point>184.12034606933594,312.5419006347656</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>193.4426727294922,304.79107666015625</point><point>193.7661895751953,309.40838623046875</point><point>184.12034606933594,312.5419006347656</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>193.4426727294922,304.79107666015625</point><point>184.12034606933594,312.5419006347656</point><point>174.17869567871094,309.735595703125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>174.17869567871094,309.735595703125</point><point>196.03970336914062,297.8960266113281</point><point>193.4426727294922,304.79107666015625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>211.3096923828125,282.3816833496094</point><point>215.32769775390625,289.7513427734375</point><point>207.5963897705078,294.4579162597656</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>204.1036834716797,277.0950927734375</point><point>200.6443634033203,294.66021728515625</point><point>196.03970336914062,297.8960266113281</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>196.03970336914062,297.8960266113281</point><point>165.51547241210938,277.1822814941406</point><point>204.1036834716797,277.0950927734375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>200.6443634033203,294.66021728515625</point><point>204.1036834716797,277.0950927734375</point><point>211.3096923828125,282.3816833496094</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>211.3096923828125,282.3816833496094</point><point>207.5963897705078,294.4579162597656</point><point>200.6443634033203,294.66021728515625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>165.51547241210938,277.1822814941406</point><point>196.03970336914062,297.8960266113281</point><point>174.17869567871094,309.735595703125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>159.1578826904297,282.50830078125</point><point>163.13290405273438,304.65643310546875</point><point>156.40145874023438,299.693115234375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>163.13290405273438,304.65643310546875</point><point>159.1578826904297,282.50830078125</point><point>165.51547241210938,277.1822814941406</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>165.51547241210938,277.1822814941406</point><point>174.17869567871094,309.735595703125</point><point>163.13290405273438,304.65643310546875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>152.29928588867188,292.02569580078125</point><point>152.82974243164062,284.6549377441406</point><point>159.1578826904297,282.50830078125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>159.1578826904297,282.50830078125</point><point>156.40145874023438,299.693115234375</point><point>152.29928588867188,292.02569580078125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>314.59320068359375,294.40130615234375</point><point>309.1476745605469,300.014404296875</point><point>308.8581237792969,291.01068115234375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>314.59320068359375,294.40130615234375</point><point>308.8581237792969,291.01068115234375</point><point>311.2332458496094,285.088623046875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>317.1064453125,279.43035888671875</point><point>320.48297119140625,277.75848388671875</point><point>319.1678771972656,293.8910217285156</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>311.2332458496094,285.088623046875</point><point>317.1064453125,279.43035888671875</point><point>319.1678771972656,293.8910217285156</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>319.1678771972656,293.8910217285156</point><point>314.59320068359375,294.40130615234375</point><point>311.2332458496094,285.088623046875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>320.48297119140625,277.75848388671875</point><point>359.5441589355469,277.2911071777344</point><point>325.507568359375,294.9639892578125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>325.507568359375,294.9639892578125</point><point>319.1678771972656,293.8910217285156</point><point>320.48297119140625,277.75848388671875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>330.52911376953125,314.24847412109375</point><point>327.1354675292969,314.12554931640625</point><point>330.39471435546875,308.72650146484375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>337.1812438964844,314.037109375</point><point>330.52911376953125,314.24847412109375</point><point>330.39471435546875,308.72650146484375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>330.96453857421875,303.6766357421875</point><point>344.1422119140625,311.762451171875</point><point>337.1812438964844,314.037109375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>337.1812438964844,314.037109375</point><point>330.39471435546875,308.72650146484375</point><point>330.96453857421875,303.6766357421875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>350.52142333984375,310.68212890625</point><point>344.1422119140625,311.762451171875</point><point>330.96453857421875,303.6766357421875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>372.5975646972656,294.08160400390625</point><point>369.0308837890625,299.6498107910156</point><point>367.2310791015625,283.2852783203125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>367.2310791015625,283.2852783203125</point><point>372.34039306640625,284.51611328125</point><point>372.5975646972656,294.08160400390625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>328.771484375,298.7913818359375</point><point>325.507568359375,294.9639892578125</point><point>359.5441589355469,277.2911071777344</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>355.002685546875,308.5132751464844</point><point>350.52142333984375,310.68212890625</point><point>330.96453857421875,303.6766357421875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>330.96453857421875,303.6766357421875</point><point>328.771484375,298.7913818359375</point><point>355.002685546875,308.5132751464844</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>361.8421936035156,305.38482666015625</point><point>355.002685546875,308.5132751464844</point><point>363.31414794921875,281.5378723144531</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>369.0308837890625,299.6498107910156</point><point>361.8421936035156,305.38482666015625</point><point>363.31414794921875,281.5378723144531</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>363.31414794921875,281.5378723144531</point><point>367.2310791015625,283.2852783203125</point><point>369.0308837890625,299.6498107910156</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>359.5441589355469,277.2911071777344</point><point>363.31414794921875,281.5378723144531</point><point>355.002685546875,308.5132751464844</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>355.002685546875,308.5132751464844</point><point>328.771484375,298.7913818359375</point><point>359.5441589355469,277.2911071777344</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>276.79071044921875,323.1864318847656</point><point>277.1179504394531,321.3597412109375</point><point>290.853759765625,321.0989990234375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>290.853759765625,321.0989990234375</point><point>292.06536865234375,323.73193359375</point><point>276.79071044921875,323.1864318847656</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>292.06536865234375,323.73193359375</point><point>290.853759765625,321.0989990234375</point><point>297.1765441894531,322.3326416015625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>297.1765441894531,322.3326416015625</point><point>296.59246826171875,325.03759765625</point><point>292.06536865234375,323.73193359375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>302.2247619628906,325.2030944824219</point><point>304.33001708984375,331.4890441894531</point><point>300.5653381347656,327.0440368652344</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>304.33001708984375,331.4890441894531</point><point>302.2247619628906,325.2030944824219</point><point>306.6383361816406,330.4159240722656</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>306.32720947265625,338.01373291015625</point><point>304.33001708984375,331.4890441894531</point><point>306.6383361816406,330.4159240722656</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>306.6383361816406,330.4159240722656</point><point>309.0758972167969,338.25042724609375</point><point>306.32720947265625,338.01373291015625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>296.59246826171875,325.03759765625</point><point>297.1765441894531,322.3326416015625</point><point>302.2247619628906,325.2030944824219</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>302.2247619628906,325.2030944824219</point><point>300.5653381347656,327.0440368652344</point><point>296.59246826171875,325.03759765625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>218.41329956054688,334.8501892089844</point><point>218.21607971191406,338.9478454589844</point><point>215.91380310058594,338.17779541015625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>218.41329956054688,334.8501892089844</point><point>215.91380310058594,338.17779541015625</point><point>217.39559936523438,332.2604064941406</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>217.39559936523438,332.2604064941406</point><point>219.54232788085938,332.07037353515625</point><point>218.41329956054688,334.8501892089844</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>220.1815643310547,327.9132080078125</point><point>224.59913635253906,326.6943054199219</point><point>221.89585876464844,329.0329284667969</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>219.54232788085938,332.07037353515625</point><point>217.39559936523438,332.2604064941406</point><point>220.1815643310547,327.9132080078125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>220.1815643310547,327.9132080078125</point><point>221.89585876464844,329.0329284667969</point><point>219.54232788085938,332.07037353515625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>224.59913635253906,326.6943054199219</point><point>220.1815643310547,327.9132080078125</point><point>223.98587036132812,324.281494140625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>223.98587036132812,324.281494140625</point><point>228.0847625732422,324.7944030761719</point><point>224.59913635253906,326.6943054199219</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>228.0847625732422,324.7944030761719</point><point>223.98587036132812,324.281494140625</point><point>231.4410858154297,320.9533996582031</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>231.4410858154297,320.9533996582031</point><point>231.76654052734375,323.352783203125</point><point>228.0847625732422,324.7944030761719</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>231.76654052734375,323.352783203125</point><point>231.4410858154297,320.9533996582031</point><point>248.0174102783203,321.375244140625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>248.0174102783203,321.375244140625</point><point>247.8436737060547,323.1160888671875</point><point>231.76654052734375,323.352783203125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>319.7059326171875,278.1585388183594</point><point>327.22210693359375,269.5287780761719</point><point>332.02984619140625,268.78802490234375</point><point>336.09405517578125,270.7554931640625</point><point>340.87420654296875,274.1242370605469</point><point>344.8101806640625,277.04632568359375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>306.4219055175781,277.30206298828125</point><point>291.8548889160156,275.4845886230469</point><point>299.7769470214844,271.63482666015625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>306.4219055175781,277.30206298828125</point><point>299.7769470214844,271.63482666015625</point><point>304.8013610839844,271.79595947265625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>284.18316650390625,277.3473815917969</point><point>285.3707580566406,276.6510009765625</point><point>291.8548889160156,275.4845886230469</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>291.8548889160156,275.4845886230469</point><point>306.4219055175781,277.30206298828125</point><point>284.18316650390625,277.3473815917969</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>304.8013610839844,271.79595947265625</point><point>306.9361267089844,272.8478698730469</point><point>307.2480773925781,275.9034423828125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>307.2480773925781,275.9034423828125</point><point>306.4219055175781,277.30206298828125</point><point>304.8013610839844,271.79595947265625</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>231.99160766601562,274.7340393066406</point><point>236.53976440429688,275.6847229003906</point><point>238.9528045654297,277.49847412109375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>231.99160766601562,274.7340393066406</point><point>238.9528045654297,277.49847412109375</point><point>217.99362182617188,277.4975280761719</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>228.59713745117188,271.9512939453125</point><point>231.99160766601562,274.7340393066406</point><point>217.99362182617188,277.4975280761719</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>217.99362182617188,277.4975280761719</point><point>222.41995239257812,271.2041320800781</point><point>228.59713745117188,271.9512939453125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>216.85682678222656,275.15283203125</point><point>217.260498046875,272.901123046875</point><point>222.41995239257812,271.2041320800781</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>222.41995239257812,271.2041320800781</point><point>217.99362182617188,277.4975280761719</point><point>216.85682678222656,275.15283203125</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>203.1413116455078,277.0527648925781</point><point>178.77793884277344,277.1802062988281</point><point>180.55677795410156,275.9075622558594</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>203.1413116455078,277.0527648925781</point><point>180.55677795410156,275.9075622558594</point><point>184.26455688476562,273.30169677734375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>188.97100830078125,268.6736755371094</point><point>192.11514282226562,267.40313720703125</point><point>197.95399475097656,268.93115234375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>188.97100830078125,268.6736755371094</point><point>197.95399475097656,268.93115234375</point><point>200.6020050048828,272.98388671875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>184.26455688476562,273.30169677734375</point><point>188.97100830078125,268.6736755371094</point><point>200.6020050048828,272.98388671875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>200.6020050048828,272.98388671875</point><point>203.1413116455078,277.0527648925781</point><point>184.26455688476562,273.30169677734375</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>189.80917358398438,244.79689025878906</point><point>184.4801025390625,250.2558135986328</point><point>180.7540740966797,251.16162109375</point><point>176.09042358398438,250.5616455078125</point><point>171.07211303710938,248.0345916748047</point><point>166.57777404785156,245.11648559570312</point><point>162.79656982421875,241.40090942382812</point><point>162.1846160888672,240.1922149658203</point><point>189.32632446289062,242.41464233398438</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>345.48828125,250.9704132080078</point><point>339.6015625,250.59634399414062</point><point>336.0790710449219,246.70506286621094</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>336.0790710449219,246.70506286621094</point><point>332.2365417480469,244.16531372070312</point><point>332.9385681152344,241.4972686767578</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>336.0790710449219,246.70506286621094</point><point>332.9385681152344,241.4972686767578</point><point>357.2082824707031,241.20870971679688</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>357.2082824707031,241.20870971679688</point><point>358.37884521484375,242.99478149414062</point><point>356.4191589355469,246.49627685546875</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>356.4191589355469,246.49627685546875</point><point>350.4095764160156,250.3660888671875</point><point>357.2082824707031,241.20870971679688</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>345.48828125,250.9704132080078</point><point>336.0790710449219,246.70506286621094</point><point>357.2082824707031,241.20870971679688</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex><simpleConvex><base><point>357.2082824707031,241.20870971679688</point><point>350.4095764160156,250.3660888671875</point><point>345.48828125,250.9704132080078</point></base><transform x="0.0" y="0.0" direction="0.0" scale="1.0" /></simpleConvex></obstacles></physics><visuals><water position="0.0,12.0,0.0" size="525.0,525.0" /><snow /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="310.12256,0.0,331.8446" direction="-0.2588191,0.0,-0.9659262" scale="1.9499992" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="217.60622,0.0,325.97546" direction="-0.8660264,0.0,0.5000008" scale="1.9749992" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="212.32272,0.0,334.00677" direction="-0.76604563,0.0,-0.64278847" scale="1.7749994" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="178.54428,0.0,334.4857" direction="-0.9848093,0.0,0.17364857" scale="2.0499992" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="337.0801,0.0,316.30814" direction="-0.5735775,0.0,-0.8191534" scale="1.5999995" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="361.96548,0.0,327.74948" direction="0.7071089,0.0,0.70710844" scale="1.5499996" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="366.7788,0.0,323.8155" direction="0.9396957,0.0,0.34202093" scale="1.4499997" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_2/skin.xml" position="304.0018,0.0,324.51816" direction="0.76604736,0.0,0.6427898" scale="1.8249993" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="362.57562,0.0,323.69745" direction="-0.64278996,0.0,0.76604736" scale="1.4249997" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="332.28513,0.0,317.42987" direction="-0.96592957,0.0,-0.2588201" scale="1.4249997" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="172.88411,0.0,333.0534" direction="0.9961989,0.0,0.08715643" scale="1.4499997" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_1/skin.xml" position="212.09938,0.0,327.46783" direction="0.70710963,0.0,0.7071101" scale="1.4499997" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_1/skin.xml" position="358.41745,0.0,329.50482" direction="0.42261988,0.0,0.9063122" scale="1.4499997" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="315.9608,0.0,335.57797" direction="-0.99619967,0.0,0.08715563" scale="1.7999994" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="314.27673,0.0,330.47736" direction="-0.99619967,0.0,0.08715563" scale="1.7999994" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="358.72867,0.0,325.3068" direction="0.08715692,0.0,-0.9961999" scale="1.6999995" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="170.04356,0.0,333.89948" direction="0.08715692,0.0,-0.9961999" scale="1.6999995" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="180.61768,0.0,332.08566" direction="0.34202263,0.0,-0.9396976" scale="1.4499997" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_5/skin.xml" position="210.10529,0.0,330.11005" direction="-0.25882003,0.0,-0.9659315" scale="0.75000036" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="208.2198,0.0,332.42212" direction="0.7660494,0.0,-0.64279103" scale="1.15" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="299.84717,0.0,322.8746" direction="0.7660494,0.0,-0.64279103" scale="1.175" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="309.8495,0.0,326.3683" direction="0.7660494,0.0,-0.64279103" scale="1.175" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="308.80084,0.0,327.2716" direction="0.9659316,0.0,0.25882125" scale="1.4749997" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="308.748,0.0,326.23984" direction="-0.70711166,0.0,0.7071107" scale="1.2249999" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="364.8885,0.0,324.34784" direction="-0.70711166,0.0,0.7071107" scale="1.2249999" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="364.6061,0.0,325.72998" direction="-0.70711166,0.0,0.7071107" scale="1.4999996" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="366.2888,0.0,321.6735" direction="-0.9063137,0.0,0.42262027" scale="1.6249995" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_1/skin.xml" position="368.55142,0.0,321.6735" direction="-6.1671017E-7,0.0,1.0000066" scale="1.2999998" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_6/skin.xml" position="177.6284,0.0,331.46344" direction="0.50000286,0.0,0.86603177" scale="1.3749998" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="221.58401,0.0,323.03787" direction="0.96593255,0.0,0.25882155" scale="1.3749998" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="218.32425,0.0,322.81857" direction="0.9396991,0.0,0.34202322" scale="1.4499997" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_1/skin.xml" position="213.94402,0.0,325.7267" direction="0.64279175,0.0,0.76605034" scale="1.3749998" /><model modelSkinPath="Models/3dsa_fantasy_forest_pillar_curved/skin.xml" position="278.8561,0.0,321.8284" direction="4.543399E-7,0.0,-1.0000077" scale="2.0999994" /><model modelSkinPath="Models/3dsa_fantasy_forest_pillar_curved/skin.xml" position="246.32993,0.0,321.25476" direction="0.08715626,0.0,0.99620306" scale="2.0999994" /><model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="298.10992,0.0,342.55402" direction="-0.7660508,0.0,-0.6427933" scale="2.1999998" /><model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="287.5785,0.0,346.7802" direction="-0.42262167,0.0,-0.9063156" scale="2.1999998" /><model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="275.24698,0.0,348.07712" direction="2.3139E-7,0.0,-1.0000086" scale="2.1999998" /><model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="228.28693,0.0,343.40173" direction="0.9962034,0.0,0.08715674" scale="2.1999998" /><model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="238.9442,0.0,347.8161" direction="0.9659344,0.0,-0.25882113" scale="2.1999998" /><model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="252.19579,0.0,348.7359" direction="0.81915927,0.0,-0.57358134" scale="2.1999998" /><model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="263.31668,0.0,348.60327" direction="0.81915927,0.0,-0.57358134" scale="2.1999998" /><model modelSkinPath="Models/3dsa_fantasy_forest_animal_bones/skin.xml" position="275.56976,0.0,326.0365" direction="0.98480797,0.0,0.17364839" scale="0.9000001" /><model modelSkinPath="Models/3dsa_fantasy_forest_animal_bones/skin.xml" position="260.96515,0.0,345.98624" direction="0.86602575,0.0,-0.5" scale="0.8000002" /><model modelSkinPath="Models/3dsa_fantasy_forest_animal_bones/skin.xml" position="260.2553,0.0,348.60272" direction="0.96592605,0.0,0.25881937" scale="0.40000045" /><model modelSkinPath="Models/3dsa_fantasy_forest_animal_bones/skin.xml" position="276.71942,0.0,344.97827" direction="0.9396928,0.0,0.34202048" scale="0.52500045" /><model modelSkinPath="Models/3dsa_fantasy_forest_animal_bones/skin.xml" position="241.79343,0.0,325.1933" direction="-0.9848087,0.0,0.1736479" scale="0.6750003" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="276.45654,0.0,318.67047" direction="-0.9396932,0.0,-0.34202087" scale="0.30000043" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_1/skin.xml" position="275.21246,0.0,319.44308" direction="-0.9396932,0.0,-0.34202087" scale="0.40000045" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="275.5606,0.0,318.44025" direction="-0.9396932,0.0,-0.34202087" scale="0.32500044" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="249.80846,0.0,319.2879" direction="-0.8191525,0.0,-0.57357734" scale="0.52500045" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="247.85727,0.0,317.6837" direction="-0.76604486,0.0,-0.6427886" scale="0.52500045" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_5/skin.xml" position="249.37018,0.0,318.36465" direction="-0.76604486,0.0,-0.6427886" scale="0.6000004" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_5/skin.xml" position="249.22906,0.0,320.30875" direction="-0.76604486,0.0,-0.6427886" scale="0.6000004" /><model modelSkinPath="Models/3dsa_fantasy_forest_dead_tree/skin.xml" position="220.54007,0.0,334.7362" direction="-0.08715531,0.0,-0.99619585" scale="1.2749997" /><model modelSkinPath="Models/3dsa_fantasy_forest_dead_tree/skin.xml" position="224.98381,0.0,328.2222" direction="-0.5000003,0.0,-0.86602676" scale="1.3999996" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="223.90538,0.0,333.89838" direction="-0.5000003,0.0,-0.86602676" scale="1.3249997" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_1/skin.xml" position="225.93797,0.0,331.90543" direction="0.50000113,0.0,-0.8660265" scale="0.75000024" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="226.85449,0.0,326.598" direction="-0.50000083,0.0,-0.8660273" scale="0.7000003" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="227.86362,0.0,326.99927" direction="0.0871562,0.0,-0.9961968" scale="0.47500047" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="227.90524,0.0,326.12076" direction="-0.34202066,0.0,-0.93969476" scale="0.32500044" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="222.58339,0.0,336.7442" direction="-0.6427889,0.0,-0.7660464" scale="0.35000044" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="295.70322,0.0,343.37683" direction="-0.6427889,0.0,-0.7660464" scale="0.5750004" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="295.52396,0.0,342.29477" direction="-0.34202063,0.0,-0.939695" scale="0.42500046" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_5/skin.xml" position="294.96457,0.0,342.94186" direction="-0.34202063,0.0,-0.939695" scale="0.37500045" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_6/skin.xml" position="295.8931,0.0,341.55023" direction="-0.34202063,0.0,-0.939695" scale="0.5500004" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_6/skin.xml" position="285.2011,0.0,346.84442" direction="-0.34202063,0.0,-0.939695" scale="0.5500004" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_6/skin.xml" position="285.41867,0.0,345.95306" direction="-0.34202063,0.0,-0.939695" scale="0.5750004" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_7/skin.xml" position="278.61386,0.0,349.3979" direction="-0.34202063,0.0,-0.939695" scale="0.52500045" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="278.04672,0.0,348.01144" direction="-0.34202063,0.0,-0.939695" scale="0.37500045" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="271.37744,0.0,347.90598" direction="-0.34202063,0.0,-0.939695" scale="0.27500042" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="272.94904,0.0,349.18182" direction="-0.34202063,0.0,-0.939695" scale="0.40000045" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="253.73518,0.0,346.7419" direction="-0.93969506,0.0,-0.34202144" scale="0.40000045" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_7/skin.xml" position="249.4676,0.0,347.86575" direction="-0.6427897,0.0,0.7660466" scale="0.72500026" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_6/skin.xml" position="250.50592,0.0,347.1139" direction="-0.93969554,0.0,0.34202102" scale="0.65000033" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_6/skin.xml" position="240.4568,0.0,345.94843" direction="-0.93969554,0.0,0.34202102" scale="0.85000014" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="239.19734,0.0,345.75717" direction="-0.5000017,0.0,0.86602813" scale="0.7000003" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="235.6181,0.0,348.30524" direction="-0.9063111,0.0,0.42261964" scale="0.9250001" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="229.75891,0.0,346.0448" direction="-0.9063111,0.0,0.42261964" scale="0.62500036" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="225.49178,0.0,343.6925" direction="-0.50000197,0.0,0.8660287" scale="0.5500004" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="225.62552,0.0,342.59906" direction="-0.50000197,0.0,0.8660287" scale="0.45000046" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="299.4492,0.0,340.78714" direction="-0.50000197,0.0,0.8660287" scale="0.52500045" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="298.65604,0.0,340.56042" direction="-0.50000197,0.0,0.8660287" scale="0.5000005" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="290.48672,0.0,347.75504" direction="-0.50000197,0.0,0.8660287" scale="0.5500004" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="220.59923,0.0,338.78036" direction="-0.96592987,0.0,-0.25882033" scale="0.65000033" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_1/skin.xml" position="301.1129,0.0,331.10156" direction="-0.8191556,0.0,-0.5735792" scale="1.3249997" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_1/skin.xml" position="302.11618,0.0,340.1007" direction="-0.939697,0.0,0.34202155" scale="1.0749999" /><model modelSkinPath="Models/3dsa_fantasy_forest_dead_tree/skin.xml" position="304.07492,0.0,336.26157" direction="0.17364945,0.0,-0.9848126" scale="1.3249997" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="301.95544,0.0,335.10754" direction="0.76604855,0.0,-0.6427906" scale="0.6000004" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="301.95276,0.0,338.14392" direction="0.76604855,0.0,-0.6427906" scale="0.6000004" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="226.45447,0.0,330.17245" direction="0.76604855,0.0,-0.6427906" scale="0.75000024" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="301.16528,0.0,338.40536" direction="0.76604855,0.0,-0.6427906" scale="0.75000024" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="303.08792,0.0,334.56183" direction="-0.25882018,0.0,-0.965931" scale="0.6000004" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="312.7049,0.0,331.64978" direction="-0.3420218,0.0,-0.9396979" scale="0.45000046" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="277.47794,0.0,318.60846" direction="-0.3420218,0.0,-0.9396979" scale="0.45000046" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="285.16544,0.0,348.29132" direction="-0.3420218,0.0,-0.9396979" scale="0.975" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="284.66257,0.0,349.1391" direction="-0.25882024,0.0,-0.96593136" scale="0.5500004" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="285.43976,0.0,347.29474" direction="-0.25882024,0.0,-0.96593136" scale="0.5500004" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="254.06285,0.0,350.17694" direction="-0.25882024,0.0,-0.96593136" scale="0.85000014" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="227.22519,0.0,328.6894" direction="-0.25882024,0.0,-0.96593136" scale="0.7000003" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="227.71732,0.0,327.79486" direction="-0.96593136,0.0,-0.2588208" scale="0.5750004" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="225.88577,0.0,344.9261" direction="-0.96593136,0.0,-0.2588208" scale="0.7750002" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_4/skin.xml" position="174.76256,0.0,332.77875" direction="-0.86603034,0.0,-0.50000316" scale="0.9000001" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="242.36636,0.0,320.09387" direction="-0.9962008,0.0,0.08715601" scale="1.0" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="242.36636,0.0,320.09387" direction="-0.9962008,0.0,0.08715601" scale="1.0" /><model modelSkinPath="Models/3dsa_fantasy_forest_push_cart/skin.xml" position="294.0746,0.0,345.68674" direction="0.99620134,0.0,0.08715686" scale="0.975" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_2/skin.xml" position="182.4507,0.0,336.70688" direction="0.9962025,0.0,-0.08715601" scale="0.975" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="182.84653,0.0,335.1593" direction="0.9397001,0.0,-0.34202245" scale="0.975" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="219.23848,0.0,332.88446" direction="0.9397001,0.0,-0.34202245" scale="0.8000002" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="301.32437,0.0,328.73978" direction="-0.4226217,0.0,-0.90631557" scale="0.5000005" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="339.50504,0.0,317.32605" direction="0.9659343,0.0,0.25882155" scale="1.2749997" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_1/skin.xml" position="340.9971,0.0,315.28558" direction="0.9659344,0.0,-0.25882116" scale="1.1249999" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="343.687,0.0,314.2012" direction="0.9659344,0.0,-0.25882116" scale="0.8750001" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_7/skin.xml" position="340.4219,0.0,318.1635" direction="0.9659344,0.0,0.25882158" scale="0.42500046" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_5/skin.xml" position="341.46155,0.0,317.77377" direction="0.9659344,0.0,0.25882158" scale="0.65000033" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="342.70285,0.0,317.1576" direction="0.906316,0.0,-0.4226219" scale="0.65000033" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="342.23944,0.0,313.3323" direction="0.5000043,0.0,0.8660336" scale="0.6750003" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="343.74997,0.0,315.94434" direction="0.5000043,0.0,0.8660336" scale="0.6750003" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="331.8267,0.0,315.50275" direction="0.2588211,0.0,0.9659349" scale="1.025" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="334.85083,0.0,318.14886" direction="0.5000043,0.0,0.8660336" scale="1.1249999" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="319.66327,0.0,337.02582" direction="0.25882116,0.0,0.96593523" scale="0.75000024" /><model modelSkinPath="Models/3dsa_fantasy_forest_well/skin.xml" position="195.50237,0.0,307.9845" direction="-0.906317,0.0,0.422622" scale="1.1499999" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="198.00333,0.0,313.72165" direction="-0.906317,0.0,0.422622" scale="0.8750001" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="194.82907,0.0,316.65625" direction="-0.6427943,0.0,0.76605177" scale="1.3749996" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="188.48238,0.0,316.0747" direction="0.9397018,0.0,0.34202456" scale="1.2499998" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="184.615,0.0,315.66116" direction="-0.86603445,0.0,-0.5000063" scale="1.05" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="182.8817,0.0,316.2297" direction="-0.17364897,0.0,-0.9848189" scale="1.2749997" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="197.14816,0.0,316.7232" direction="-0.5000046,0.0,-0.8660356" scale="1.2249998" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_1/skin.xml" position="197.36491,0.0,315.4198" direction="0.17365123,0.0,-0.9848185" scale="0.7750002" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_5/skin.xml" position="198.51064,0.0,315.58023" direction="0.17365123,0.0,-0.9848185" scale="0.40000045" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_5/skin.xml" position="182.87897,0.0,314.35052" direction="0.17365123,0.0,-0.9848185" scale="0.42500046" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_1/skin.xml" position="186.67325,0.0,316.82123" direction="0.17365123,0.0,-0.9848185" scale="0.82500017" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="191.29599,0.0,317.6146" direction="0.17365123,0.0,-0.9848185" scale="0.82500017" /><model modelSkinPath="Models/3dsa_fantasy_forest_pillar_script/skin.xml" position="327.15186,0.0,310.36978" direction="-0.5000069,0.0,0.8660355" scale="1.5999994" /><model modelSkinPath="Models/3dsa_fantasy_forest_pillar_script/skin.xml" position="328.92035,0.0,306.37976" direction="0.08715597,0.0,0.99620706" scale="1.1999998" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="326.80466,0.0,307.00818" direction="0.08715597,0.0,0.99620706" scale="0.75000024" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="325.74918,0.0,307.56497" direction="0.08715597,0.0,0.99620706" scale="0.42500046" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="327.20554,0.0,306.1457" direction="0.08715597,0.0,0.99620706" scale="0.27500042" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_7/skin.xml" position="329.97424,0.0,304.3949" direction="-0.1736512,0.0,0.9848198" scale="0.27500042" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="329.4988,0.0,304.76917" direction="-0.1736512,0.0,0.9848198" scale="0.2000004" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_5/skin.xml" position="327.02557,0.0,313.1422" direction="-0.1736512,0.0,0.9848198" scale="0.30000043" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="312.15543,0.0,300.03076" direction="-0.4226244,0.0,0.9063188" scale="1.5499995" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="315.0159,0.0,297.98483" direction="-0.25882316,0.0,0.96593773" scale="0.85000014" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_5/skin.xml" position="309.6823,0.0,302.23038" direction="-0.42262438,0.0,0.90631884" scale="0.65000033" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="314.78174,0.0,299.77475" direction="-0.5000056,0.0,-0.86603725" scale="0.65000033" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="312.98785,0.0,297.44385" direction="-0.64279526,0.0,-0.76605505" scale="0.7000003" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="310.13416,0.0,301.78226" direction="-0.64279526,0.0,-0.76605505" scale="0.82500017" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="318.28064,0.0,334.21716" direction="8.865609E-7,0.0,-1.0000132" scale="0.7000003" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="316.049,0.0,332.54462" direction="-0.3420239,0.0,-0.93970543" scale="0.9000001" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="315.5737,0.0,330.72623" direction="0.64279705,0.0,-0.7660543" scale="0.8000002" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_5/skin.xml" position="317.76428,0.0,333.34412" direction="0.64279705,0.0,-0.7660543" scale="0.8000002" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="318.51425,0.0,333.6444" direction="0.8191638,0.0,-0.5735835" scale="0.40000045" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_5/skin.xml" position="317.33627,0.0,332.45282" direction="0.6427971,0.0,-0.7660543" scale="0.40000045" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="319.46918,0.0,335.6095" direction="0.6427971,0.0,-0.7660543" scale="1.1249999" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="212.85443,0.0,300.1521" direction="0.70711696,0.0,0.7071172" scale="1.7999992" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_1/skin.xml" position="208.69562,0.0,298.24182" direction="0.64279675,0.0,0.76605576" scale="1.4499996" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="210.37708,0.0,301.88528" direction="0.64279675,0.0,0.76605576" scale="0.9000001" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="208.861,0.0,301.3648" direction="0.50000703,0.0,0.86603814" scale="0.45000046" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="208.11423,0.0,296.06924" direction="0.3420249,0.0,0.9397064" scale="0.30000043" /><model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="207.6866,0.0,296.53375" direction="0.3420249,0.0,0.9397064" scale="0.40000045" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="206.9427,0.0,296.8459" direction="0.42262417,0.0,0.9063211" scale="0.62500036" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="210.3356,0.0,297.0767" direction="-0.99620914,0.0,-0.0871575" scale="0.8750001" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="210.70334,0.0,300.5608" direction="-0.99620914,0.0,-0.0871575" scale="0.8750001" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="216.38927,0.0,299.58884" direction="-0.7071167,0.0,-0.70711756" scale="0.6000004" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="215.48419,0.0,302.57092" direction="-0.7071167,0.0,-0.70711756" scale="0.6000004" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="194.27174,0.0,305.34628" direction="-0.7071167,0.0,-0.70711756" scale="0.6000004" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="194.66724,0.0,304.00943" direction="0.42262506,0.0,-0.9063208" scale="0.45000046" /><model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_1/skin.xml" position="198.08725,0.0,311.00906" direction="0.8660385,0.0,-0.50000674" scale="0.8750001" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="197.66472,0.0,309.4853" direction="0.8660385,0.0,-0.50000674" scale="0.8750001" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="199.46104,0.0,312.82745" direction="0.42262357,0.0,0.9063215" scale="0.8750001" /><model modelSkinPath="Models/3dsa_fantasy_forest_grass_1/skin.xml" position="308.05957,0.0,299.78903" direction="0.9848221,0.0,0.17365164" scale="1.2249998" /><model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="309.24686,0.0,301.4922" direction="-0.81916463,0.0,0.5735839" scale="0.65000033" /></visuals></map>
+<map author="Carl" date="1475361006412" class="amara.applications.ingame.maps.Map_Arama">
+	<camera initialPosition="262.2,56.0,226.5" initialDirection="0.0,-1.0,0.6745">
+		<zoom interval="1.0" minimumDistance="10.0" maximumDistance="200.0" initialDistance="40.0" />
+	</camera>
+	<lights>
+		<ambient color="0.2,0.2,0.2" />
+		<directional direction="-0.5,-1.75,1.0" color="1.2,1.2,1.2">
+			<shadows intensity="0.4" />
+		</directional>
+	</lights>
+	<terrain>
+		<textures>
+			<texture scale="18.0">Textures/terrain/cartoon_forest/stone_bright_1.jpg</texture>
+			<texture scale="22.0">Textures/terrain/cartoon_forest/bush.jpg</texture>
+			<texture scale="22.0">Textures/terrain/cartoon_forest/stone_bright_1_dark.jpg</texture>
+			<texture scale="60.0">Textures/terrain/cartoon_forest/dark_stone_color.jpg</texture>
+			<texture scale="27.0">Textures/terrain/cartoon_forest/cracked_cliff.jpg</texture>
+			<texture scale="70.0">Textures/terrain/cartoon_forest/grass_3.jpg</texture>
+			<texture scale="72.0">Textures/terrain/cartoon_forest/wall.jpg</texture>
+			<texture scale="72.0">Textures/terrain/cartoon_forest/pebbles_2.jpg</texture>
+			<texture scale="72.0">Textures/terrain/cartoon_forest/dark_dirt.jpg</texture>
+		</textures>
+	</terrain>
+	<minimap x="94.0" y="94.0" width="337.0" height="337.0" />
+	<physics width="525.0" height="525.0" heightmapScale="0.075" groundHeight="15.0">
+		<obstacles>
+			<circle radius="3.5">
+				<transform x="147.0" y="260.25" direction="0.0" scale="1.0" />
+			</circle>
+			<circle radius="3.0">
+				<transform x="171.0" y="266.25" direction="0.0" scale="1.0" />
+			</circle>
+			<circle radius="3.0">
+				<transform x="204.0" y="254.25" direction="0.0" scale="1.0" />
+			</circle>
+			<circle radius="3.0">
+				<transform x="321.0" y="254.25" direction="0.0" scale="1.0" />
+			</circle>
+			<circle radius="3.0">
+				<transform x="354.0" y="266.25" direction="0.0" scale="1.0" />
+			</circle>
+			<circle radius="3.5">
+				<transform x="378.001" y="260.25" direction="0.0" scale="1.0" />
+			</circle>
+			<simpleConvex>
+				<base>
+					<point>298.7645263671875,290.6398010253906</point>
+					<point>296.9356689453125,297.1602783203125</point>
+					<point>290.4064025878906,302.644287109375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>234.631103515625,302.86859130859375</point>
+					<point>227.5333251953125,296.45355224609375</point>
+					<point>225.15460205078125,288.8118591308594</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>225.15460205078125,288.8118591308594</point>
+					<point>220.81558227539062,281.9539794921875</point>
+					<point>301.3127136230469,285.27728271484375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>307.404541015625,277.5543518066406</point>
+					<point>301.3127136230469,285.27728271484375</point>
+					<point>220.81558227539062,281.9539794921875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>220.81558227539062,281.9539794921875</point>
+					<point>217.5195770263672,277.4345703125</point>
+					<point>307.404541015625,277.5543518066406</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>225.15460205078125,288.8118591308594</point>
+					<point>301.3127136230469,285.27728271484375</point>
+					<point>298.7645263671875,290.6398010253906</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>234.631103515625,302.86859130859375</point>
+					<point>225.15460205078125,288.8118591308594</point>
+					<point>298.7645263671875,290.6398010253906</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>298.7645263671875,290.6398010253906</point>
+					<point>290.4064025878906,302.644287109375</point>
+					<point>234.631103515625,302.86859130859375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>215.32769775390625,289.7513427734375</point>
+					<point>215.2985076904297,299.29833984375</point>
+					<point>207.5963897705078,294.4579162597656</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>193.7661895751953,309.40838623046875</point>
+					<point>196.866455078125,313.5399475097656</point>
+					<point>184.12034606933594,312.5419006347656</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>193.4426727294922,304.79107666015625</point>
+					<point>193.7661895751953,309.40838623046875</point>
+					<point>184.12034606933594,312.5419006347656</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>193.4426727294922,304.79107666015625</point>
+					<point>184.12034606933594,312.5419006347656</point>
+					<point>174.17869567871094,309.735595703125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>174.17869567871094,309.735595703125</point>
+					<point>196.03970336914062,297.8960266113281</point>
+					<point>193.4426727294922,304.79107666015625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>211.3096923828125,282.3816833496094</point>
+					<point>215.32769775390625,289.7513427734375</point>
+					<point>207.5963897705078,294.4579162597656</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>204.1036834716797,277.0950927734375</point>
+					<point>200.6443634033203,294.66021728515625</point>
+					<point>196.03970336914062,297.8960266113281</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>196.03970336914062,297.8960266113281</point>
+					<point>165.51547241210938,277.1822814941406</point>
+					<point>204.1036834716797,277.0950927734375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>200.6443634033203,294.66021728515625</point>
+					<point>204.1036834716797,277.0950927734375</point>
+					<point>211.3096923828125,282.3816833496094</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>211.3096923828125,282.3816833496094</point>
+					<point>207.5963897705078,294.4579162597656</point>
+					<point>200.6443634033203,294.66021728515625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>165.51547241210938,277.1822814941406</point>
+					<point>196.03970336914062,297.8960266113281</point>
+					<point>174.17869567871094,309.735595703125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>159.1578826904297,282.50830078125</point>
+					<point>163.13290405273438,304.65643310546875</point>
+					<point>156.40145874023438,299.693115234375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>163.13290405273438,304.65643310546875</point>
+					<point>159.1578826904297,282.50830078125</point>
+					<point>165.51547241210938,277.1822814941406</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>165.51547241210938,277.1822814941406</point>
+					<point>174.17869567871094,309.735595703125</point>
+					<point>163.13290405273438,304.65643310546875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>152.29928588867188,292.02569580078125</point>
+					<point>152.82974243164062,284.6549377441406</point>
+					<point>159.1578826904297,282.50830078125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>159.1578826904297,282.50830078125</point>
+					<point>156.40145874023438,299.693115234375</point>
+					<point>152.29928588867188,292.02569580078125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>314.59320068359375,294.40130615234375</point>
+					<point>309.1476745605469,300.014404296875</point>
+					<point>308.8581237792969,291.01068115234375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>314.59320068359375,294.40130615234375</point>
+					<point>308.8581237792969,291.01068115234375</point>
+					<point>311.2332458496094,285.088623046875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>317.1064453125,279.43035888671875</point>
+					<point>320.48297119140625,277.75848388671875</point>
+					<point>319.1678771972656,293.8910217285156</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>311.2332458496094,285.088623046875</point>
+					<point>317.1064453125,279.43035888671875</point>
+					<point>319.1678771972656,293.8910217285156</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>319.1678771972656,293.8910217285156</point>
+					<point>314.59320068359375,294.40130615234375</point>
+					<point>311.2332458496094,285.088623046875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>320.48297119140625,277.75848388671875</point>
+					<point>359.5441589355469,277.2911071777344</point>
+					<point>325.507568359375,294.9639892578125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>325.507568359375,294.9639892578125</point>
+					<point>319.1678771972656,293.8910217285156</point>
+					<point>320.48297119140625,277.75848388671875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>330.52911376953125,314.24847412109375</point>
+					<point>327.1354675292969,314.12554931640625</point>
+					<point>330.39471435546875,308.72650146484375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>337.1812438964844,314.037109375</point>
+					<point>330.52911376953125,314.24847412109375</point>
+					<point>330.39471435546875,308.72650146484375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>330.96453857421875,303.6766357421875</point>
+					<point>344.1422119140625,311.762451171875</point>
+					<point>337.1812438964844,314.037109375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>337.1812438964844,314.037109375</point>
+					<point>330.39471435546875,308.72650146484375</point>
+					<point>330.96453857421875,303.6766357421875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>350.52142333984375,310.68212890625</point>
+					<point>344.1422119140625,311.762451171875</point>
+					<point>330.96453857421875,303.6766357421875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>372.5975646972656,294.08160400390625</point>
+					<point>369.0308837890625,299.6498107910156</point>
+					<point>367.2310791015625,283.2852783203125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>367.2310791015625,283.2852783203125</point>
+					<point>372.34039306640625,284.51611328125</point>
+					<point>372.5975646972656,294.08160400390625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>328.771484375,298.7913818359375</point>
+					<point>325.507568359375,294.9639892578125</point>
+					<point>359.5441589355469,277.2911071777344</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>355.002685546875,308.5132751464844</point>
+					<point>350.52142333984375,310.68212890625</point>
+					<point>330.96453857421875,303.6766357421875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>330.96453857421875,303.6766357421875</point>
+					<point>328.771484375,298.7913818359375</point>
+					<point>355.002685546875,308.5132751464844</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>361.8421936035156,305.38482666015625</point>
+					<point>355.002685546875,308.5132751464844</point>
+					<point>363.31414794921875,281.5378723144531</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>369.0308837890625,299.6498107910156</point>
+					<point>361.8421936035156,305.38482666015625</point>
+					<point>363.31414794921875,281.5378723144531</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>363.31414794921875,281.5378723144531</point>
+					<point>367.2310791015625,283.2852783203125</point>
+					<point>369.0308837890625,299.6498107910156</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>359.5441589355469,277.2911071777344</point>
+					<point>363.31414794921875,281.5378723144531</point>
+					<point>355.002685546875,308.5132751464844</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>355.002685546875,308.5132751464844</point>
+					<point>328.771484375,298.7913818359375</point>
+					<point>359.5441589355469,277.2911071777344</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>276.79071044921875,323.1864318847656</point>
+					<point>277.1179504394531,321.3597412109375</point>
+					<point>290.853759765625,321.0989990234375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>290.853759765625,321.0989990234375</point>
+					<point>292.06536865234375,323.73193359375</point>
+					<point>276.79071044921875,323.1864318847656</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>292.06536865234375,323.73193359375</point>
+					<point>290.853759765625,321.0989990234375</point>
+					<point>297.1765441894531,322.3326416015625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>297.1765441894531,322.3326416015625</point>
+					<point>296.59246826171875,325.03759765625</point>
+					<point>292.06536865234375,323.73193359375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>302.2247619628906,325.2030944824219</point>
+					<point>304.33001708984375,331.4890441894531</point>
+					<point>300.5653381347656,327.0440368652344</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>304.33001708984375,331.4890441894531</point>
+					<point>302.2247619628906,325.2030944824219</point>
+					<point>306.6383361816406,330.4159240722656</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>306.32720947265625,338.01373291015625</point>
+					<point>304.33001708984375,331.4890441894531</point>
+					<point>306.6383361816406,330.4159240722656</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>306.6383361816406,330.4159240722656</point>
+					<point>309.0758972167969,338.25042724609375</point>
+					<point>306.32720947265625,338.01373291015625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>296.59246826171875,325.03759765625</point>
+					<point>297.1765441894531,322.3326416015625</point>
+					<point>302.2247619628906,325.2030944824219</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>302.2247619628906,325.2030944824219</point>
+					<point>300.5653381347656,327.0440368652344</point>
+					<point>296.59246826171875,325.03759765625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>218.41329956054688,334.8501892089844</point>
+					<point>218.21607971191406,338.9478454589844</point>
+					<point>215.91380310058594,338.17779541015625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>218.41329956054688,334.8501892089844</point>
+					<point>215.91380310058594,338.17779541015625</point>
+					<point>217.39559936523438,332.2604064941406</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>217.39559936523438,332.2604064941406</point>
+					<point>219.54232788085938,332.07037353515625</point>
+					<point>218.41329956054688,334.8501892089844</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>220.1815643310547,327.9132080078125</point>
+					<point>224.59913635253906,326.6943054199219</point>
+					<point>221.89585876464844,329.0329284667969</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>219.54232788085938,332.07037353515625</point>
+					<point>217.39559936523438,332.2604064941406</point>
+					<point>220.1815643310547,327.9132080078125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>220.1815643310547,327.9132080078125</point>
+					<point>221.89585876464844,329.0329284667969</point>
+					<point>219.54232788085938,332.07037353515625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>224.59913635253906,326.6943054199219</point>
+					<point>220.1815643310547,327.9132080078125</point>
+					<point>223.98587036132812,324.281494140625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>223.98587036132812,324.281494140625</point>
+					<point>228.0847625732422,324.7944030761719</point>
+					<point>224.59913635253906,326.6943054199219</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>228.0847625732422,324.7944030761719</point>
+					<point>223.98587036132812,324.281494140625</point>
+					<point>231.4410858154297,320.9533996582031</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>231.4410858154297,320.9533996582031</point>
+					<point>231.76654052734375,323.352783203125</point>
+					<point>228.0847625732422,324.7944030761719</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>231.76654052734375,323.352783203125</point>
+					<point>231.4410858154297,320.9533996582031</point>
+					<point>248.0174102783203,321.375244140625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>248.0174102783203,321.375244140625</point>
+					<point>247.8436737060547,323.1160888671875</point>
+					<point>231.76654052734375,323.352783203125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>319.7059326171875,278.1585388183594</point>
+					<point>327.22210693359375,269.5287780761719</point>
+					<point>332.02984619140625,268.78802490234375</point>
+					<point>336.09405517578125,270.7554931640625</point>
+					<point>340.87420654296875,274.1242370605469</point>
+					<point>344.8101806640625,277.04632568359375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>306.4219055175781,277.30206298828125</point>
+					<point>291.8548889160156,275.4845886230469</point>
+					<point>299.7769470214844,271.63482666015625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>306.4219055175781,277.30206298828125</point>
+					<point>299.7769470214844,271.63482666015625</point>
+					<point>304.8013610839844,271.79595947265625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>284.18316650390625,277.3473815917969</point>
+					<point>285.3707580566406,276.6510009765625</point>
+					<point>291.8548889160156,275.4845886230469</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>291.8548889160156,275.4845886230469</point>
+					<point>306.4219055175781,277.30206298828125</point>
+					<point>284.18316650390625,277.3473815917969</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>304.8013610839844,271.79595947265625</point>
+					<point>306.9361267089844,272.8478698730469</point>
+					<point>307.2480773925781,275.9034423828125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>307.2480773925781,275.9034423828125</point>
+					<point>306.4219055175781,277.30206298828125</point>
+					<point>304.8013610839844,271.79595947265625</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>231.99160766601562,274.7340393066406</point>
+					<point>236.53976440429688,275.6847229003906</point>
+					<point>238.9528045654297,277.49847412109375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>231.99160766601562,274.7340393066406</point>
+					<point>238.9528045654297,277.49847412109375</point>
+					<point>217.99362182617188,277.4975280761719</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>228.59713745117188,271.9512939453125</point>
+					<point>231.99160766601562,274.7340393066406</point>
+					<point>217.99362182617188,277.4975280761719</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>217.99362182617188,277.4975280761719</point>
+					<point>222.41995239257812,271.2041320800781</point>
+					<point>228.59713745117188,271.9512939453125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>216.85682678222656,275.15283203125</point>
+					<point>217.260498046875,272.901123046875</point>
+					<point>222.41995239257812,271.2041320800781</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>222.41995239257812,271.2041320800781</point>
+					<point>217.99362182617188,277.4975280761719</point>
+					<point>216.85682678222656,275.15283203125</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>203.1413116455078,277.0527648925781</point>
+					<point>178.77793884277344,277.1802062988281</point>
+					<point>180.55677795410156,275.9075622558594</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>203.1413116455078,277.0527648925781</point>
+					<point>180.55677795410156,275.9075622558594</point>
+					<point>184.26455688476562,273.30169677734375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>188.97100830078125,268.6736755371094</point>
+					<point>192.11514282226562,267.40313720703125</point>
+					<point>197.95399475097656,268.93115234375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>188.97100830078125,268.6736755371094</point>
+					<point>197.95399475097656,268.93115234375</point>
+					<point>200.6020050048828,272.98388671875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>184.26455688476562,273.30169677734375</point>
+					<point>188.97100830078125,268.6736755371094</point>
+					<point>200.6020050048828,272.98388671875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>200.6020050048828,272.98388671875</point>
+					<point>203.1413116455078,277.0527648925781</point>
+					<point>184.26455688476562,273.30169677734375</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>189.80917358398438,244.79689025878906</point>
+					<point>184.4801025390625,250.2558135986328</point>
+					<point>180.7540740966797,251.16162109375</point>
+					<point>176.09042358398438,250.5616455078125</point>
+					<point>171.07211303710938,248.0345916748047</point>
+					<point>166.57777404785156,245.11648559570312</point>
+					<point>162.79656982421875,241.40090942382812</point>
+					<point>162.1846160888672,240.1922149658203</point>
+					<point>189.32632446289062,242.41464233398438</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>345.48828125,250.9704132080078</point>
+					<point>339.6015625,250.59634399414062</point>
+					<point>336.0790710449219,246.70506286621094</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>336.0790710449219,246.70506286621094</point>
+					<point>332.2365417480469,244.16531372070312</point>
+					<point>332.9385681152344,241.4972686767578</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>336.0790710449219,246.70506286621094</point>
+					<point>332.9385681152344,241.4972686767578</point>
+					<point>357.2082824707031,241.20870971679688</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>357.2082824707031,241.20870971679688</point>
+					<point>358.37884521484375,242.99478149414062</point>
+					<point>356.4191589355469,246.49627685546875</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>356.4191589355469,246.49627685546875</point>
+					<point>350.4095764160156,250.3660888671875</point>
+					<point>357.2082824707031,241.20870971679688</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>345.48828125,250.9704132080078</point>
+					<point>336.0790710449219,246.70506286621094</point>
+					<point>357.2082824707031,241.20870971679688</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+			<simpleConvex>
+				<base>
+					<point>357.2082824707031,241.20870971679688</point>
+					<point>350.4095764160156,250.3660888671875</point>
+					<point>345.48828125,250.9704132080078</point>
+				</base>
+				<transform x="0.0" y="0.0" direction="0.0" scale="1.0" />
+			</simpleConvex>
+		</obstacles>
+	</physics>
+	<visuals>
+		<water position="0.0,12.0,0.0" size="525.0,525.0" />
+		<snow />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="310.12256,0.0,331.8446" direction="-0.2588191,0.0,-0.9659262" scale="1.9499992" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="217.60622,0.0,325.97546" direction="-0.8660264,0.0,0.5000008" scale="1.9749992" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="212.32272,0.0,334.00677" direction="-0.76604563,0.0,-0.64278847" scale="1.7749994" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="178.54428,0.0,334.4857" direction="-0.9848093,0.0,0.17364857" scale="2.0499992" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="337.0801,0.0,316.30814" direction="-0.5735775,0.0,-0.8191534" scale="1.5999995" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="361.96548,0.0,327.74948" direction="0.7071089,0.0,0.70710844" scale="1.5499996" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="366.7788,0.0,323.8155" direction="0.9396957,0.0,0.34202093" scale="1.4499997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_2/skin.xml" position="304.0018,0.0,324.51816" direction="0.76604736,0.0,0.6427898" scale="1.8249993" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="362.57562,0.0,323.69745" direction="-0.64278996,0.0,0.76604736" scale="1.4249997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="332.28513,0.0,317.42987" direction="-0.96592957,0.0,-0.2588201" scale="1.4249997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="172.88411,0.0,333.0534" direction="0.9961989,0.0,0.08715643" scale="1.4499997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_1/skin.xml" position="212.09938,0.0,327.46783" direction="0.70710963,0.0,0.7071101" scale="1.4499997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_1/skin.xml" position="358.41745,0.0,329.50482" direction="0.42261988,0.0,0.9063122" scale="1.4499997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="315.9608,0.0,335.57797" direction="-0.99619967,0.0,0.08715563" scale="1.7999994" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="314.27673,0.0,330.47736" direction="-0.99619967,0.0,0.08715563" scale="1.7999994" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="358.72867,0.0,325.3068" direction="0.08715692,0.0,-0.9961999" scale="1.6999995" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="170.04356,0.0,333.89948" direction="0.08715692,0.0,-0.9961999" scale="1.6999995" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="180.61768,0.0,332.08566" direction="0.34202263,0.0,-0.9396976" scale="1.4499997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_5/skin.xml" position="210.10529,0.0,330.11005" direction="-0.25882003,0.0,-0.9659315" scale="0.75000036" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="208.2198,0.0,332.42212" direction="0.7660494,0.0,-0.64279103" scale="1.15" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="299.84717,0.0,322.8746" direction="0.7660494,0.0,-0.64279103" scale="1.175" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="309.8495,0.0,326.3683" direction="0.7660494,0.0,-0.64279103" scale="1.175" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="308.80084,0.0,327.2716" direction="0.9659316,0.0,0.25882125" scale="1.4749997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="308.748,0.0,326.23984" direction="-0.70711166,0.0,0.7071107" scale="1.2249999" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="364.8885,0.0,324.34784" direction="-0.70711166,0.0,0.7071107" scale="1.2249999" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="364.6061,0.0,325.72998" direction="-0.70711166,0.0,0.7071107" scale="1.4999996" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="366.2888,0.0,321.6735" direction="-0.9063137,0.0,0.42262027" scale="1.6249995" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_1/skin.xml" position="368.55142,0.0,321.6735" direction="-6.1671017E-7,0.0,1.0000066" scale="1.2999998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_6/skin.xml" position="177.6284,0.0,331.46344" direction="0.50000286,0.0,0.86603177" scale="1.3749998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="221.58401,0.0,323.03787" direction="0.96593255,0.0,0.25882155" scale="1.3749998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="218.32425,0.0,322.81857" direction="0.9396991,0.0,0.34202322" scale="1.4499997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_1/skin.xml" position="213.94402,0.0,325.7267" direction="0.64279175,0.0,0.76605034" scale="1.3749998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_pillar_curved/skin.xml" position="278.8561,0.0,321.8284" direction="4.543399E-7,0.0,-1.0000077" scale="2.0999994" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_pillar_curved/skin.xml" position="246.32993,0.0,321.25476" direction="0.08715626,0.0,0.99620306" scale="2.0999994" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="298.10992,0.0,342.55402" direction="-0.7660508,0.0,-0.6427933" scale="2.1999998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="287.5785,0.0,346.7802" direction="-0.42262167,0.0,-0.9063156" scale="2.1999998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="275.24698,0.0,348.07712" direction="2.3139E-7,0.0,-1.0000086" scale="2.1999998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="228.28693,0.0,343.40173" direction="0.9962034,0.0,0.08715674" scale="2.1999998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="238.9442,0.0,347.8161" direction="0.9659344,0.0,-0.25882113" scale="2.1999998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="252.19579,0.0,348.7359" direction="0.81915927,0.0,-0.57358134" scale="2.1999998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_pillar/skin.xml" position="263.31668,0.0,348.60327" direction="0.81915927,0.0,-0.57358134" scale="2.1999998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_animal_bones/skin.xml" position="275.56976,0.0,326.0365" direction="0.98480797,0.0,0.17364839" scale="0.9000001" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_animal_bones/skin.xml" position="260.96515,0.0,345.98624" direction="0.86602575,0.0,-0.5" scale="0.8000002" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_animal_bones/skin.xml" position="260.2553,0.0,348.60272" direction="0.96592605,0.0,0.25881937" scale="0.40000045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_animal_bones/skin.xml" position="276.71942,0.0,344.97827" direction="0.9396928,0.0,0.34202048" scale="0.52500045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_animal_bones/skin.xml" position="241.79343,0.0,325.1933" direction="-0.9848087,0.0,0.1736479" scale="0.6750003" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="276.45654,0.0,318.67047" direction="-0.9396932,0.0,-0.34202087" scale="0.30000043" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_1/skin.xml" position="275.21246,0.0,319.44308" direction="-0.9396932,0.0,-0.34202087" scale="0.40000045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="275.5606,0.0,318.44025" direction="-0.9396932,0.0,-0.34202087" scale="0.32500044" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="249.80846,0.0,319.2879" direction="-0.8191525,0.0,-0.57357734" scale="0.52500045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="247.85727,0.0,317.6837" direction="-0.76604486,0.0,-0.6427886" scale="0.52500045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_5/skin.xml" position="249.37018,0.0,318.36465" direction="-0.76604486,0.0,-0.6427886" scale="0.6000004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_5/skin.xml" position="249.22906,0.0,320.30875" direction="-0.76604486,0.0,-0.6427886" scale="0.6000004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_dead_tree/skin.xml" position="220.54007,0.0,334.7362" direction="-0.08715531,0.0,-0.99619585" scale="1.2749997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_dead_tree/skin.xml" position="224.98381,0.0,328.2222" direction="-0.5000003,0.0,-0.86602676" scale="1.3999996" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="223.90538,0.0,333.89838" direction="-0.5000003,0.0,-0.86602676" scale="1.3249997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_1/skin.xml" position="225.93797,0.0,331.90543" direction="0.50000113,0.0,-0.8660265" scale="0.75000024" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="226.85449,0.0,326.598" direction="-0.50000083,0.0,-0.8660273" scale="0.7000003" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="227.86362,0.0,326.99927" direction="0.0871562,0.0,-0.9961968" scale="0.47500047" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="227.90524,0.0,326.12076" direction="-0.34202066,0.0,-0.93969476" scale="0.32500044" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="222.58339,0.0,336.7442" direction="-0.6427889,0.0,-0.7660464" scale="0.35000044" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="295.70322,0.0,343.37683" direction="-0.6427889,0.0,-0.7660464" scale="0.5750004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="295.52396,0.0,342.29477" direction="-0.34202063,0.0,-0.939695" scale="0.42500046" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_5/skin.xml" position="294.96457,0.0,342.94186" direction="-0.34202063,0.0,-0.939695" scale="0.37500045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_6/skin.xml" position="295.8931,0.0,341.55023" direction="-0.34202063,0.0,-0.939695" scale="0.5500004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_6/skin.xml" position="285.2011,0.0,346.84442" direction="-0.34202063,0.0,-0.939695" scale="0.5500004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_6/skin.xml" position="285.41867,0.0,345.95306" direction="-0.34202063,0.0,-0.939695" scale="0.5750004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_7/skin.xml" position="278.61386,0.0,349.3979" direction="-0.34202063,0.0,-0.939695" scale="0.52500045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="278.04672,0.0,348.01144" direction="-0.34202063,0.0,-0.939695" scale="0.37500045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="271.37744,0.0,347.90598" direction="-0.34202063,0.0,-0.939695" scale="0.27500042" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="272.94904,0.0,349.18182" direction="-0.34202063,0.0,-0.939695" scale="0.40000045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="253.73518,0.0,346.7419" direction="-0.93969506,0.0,-0.34202144" scale="0.40000045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_7/skin.xml" position="249.4676,0.0,347.86575" direction="-0.6427897,0.0,0.7660466" scale="0.72500026" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_6/skin.xml" position="250.50592,0.0,347.1139" direction="-0.93969554,0.0,0.34202102" scale="0.65000033" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_6/skin.xml" position="240.4568,0.0,345.94843" direction="-0.93969554,0.0,0.34202102" scale="0.85000014" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="239.19734,0.0,345.75717" direction="-0.5000017,0.0,0.86602813" scale="0.7000003" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="235.6181,0.0,348.30524" direction="-0.9063111,0.0,0.42261964" scale="0.9250001" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="229.75891,0.0,346.0448" direction="-0.9063111,0.0,0.42261964" scale="0.62500036" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="225.49178,0.0,343.6925" direction="-0.50000197,0.0,0.8660287" scale="0.5500004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="225.62552,0.0,342.59906" direction="-0.50000197,0.0,0.8660287" scale="0.45000046" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="299.4492,0.0,340.78714" direction="-0.50000197,0.0,0.8660287" scale="0.52500045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="298.65604,0.0,340.56042" direction="-0.50000197,0.0,0.8660287" scale="0.5000005" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="290.48672,0.0,347.75504" direction="-0.50000197,0.0,0.8660287" scale="0.5500004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="220.59923,0.0,338.78036" direction="-0.96592987,0.0,-0.25882033" scale="0.65000033" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_1/skin.xml" position="301.1129,0.0,331.10156" direction="-0.8191556,0.0,-0.5735792" scale="1.3249997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_1/skin.xml" position="302.11618,0.0,340.1007" direction="-0.939697,0.0,0.34202155" scale="1.0749999" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_dead_tree/skin.xml" position="304.07492,0.0,336.26157" direction="0.17364945,0.0,-0.9848126" scale="1.3249997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="301.95544,0.0,335.10754" direction="0.76604855,0.0,-0.6427906" scale="0.6000004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="301.95276,0.0,338.14392" direction="0.76604855,0.0,-0.6427906" scale="0.6000004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="226.45447,0.0,330.17245" direction="0.76604855,0.0,-0.6427906" scale="0.75000024" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="301.16528,0.0,338.40536" direction="0.76604855,0.0,-0.6427906" scale="0.75000024" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="303.08792,0.0,334.56183" direction="-0.25882018,0.0,-0.965931" scale="0.6000004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="312.7049,0.0,331.64978" direction="-0.3420218,0.0,-0.9396979" scale="0.45000046" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="277.47794,0.0,318.60846" direction="-0.3420218,0.0,-0.9396979" scale="0.45000046" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="285.16544,0.0,348.29132" direction="-0.3420218,0.0,-0.9396979" scale="0.975" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="284.66257,0.0,349.1391" direction="-0.25882024,0.0,-0.96593136" scale="0.5500004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="285.43976,0.0,347.29474" direction="-0.25882024,0.0,-0.96593136" scale="0.5500004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="254.06285,0.0,350.17694" direction="-0.25882024,0.0,-0.96593136" scale="0.85000014" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="227.22519,0.0,328.6894" direction="-0.25882024,0.0,-0.96593136" scale="0.7000003" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="227.71732,0.0,327.79486" direction="-0.96593136,0.0,-0.2588208" scale="0.5750004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_2/skin.xml" position="225.88577,0.0,344.9261" direction="-0.96593136,0.0,-0.2588208" scale="0.7750002" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_4/skin.xml" position="174.76256,0.0,332.77875" direction="-0.86603034,0.0,-0.50000316" scale="0.9000001" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="242.36636,0.0,320.09387" direction="-0.9962008,0.0,0.08715601" scale="1.0" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="242.36636,0.0,320.09387" direction="-0.9962008,0.0,0.08715601" scale="1.0" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_push_cart/skin.xml" position="294.0746,0.0,345.68674" direction="0.99620134,0.0,0.08715686" scale="0.975" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_2/skin.xml" position="182.4507,0.0,336.70688" direction="0.9962025,0.0,-0.08715601" scale="0.975" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="182.84653,0.0,335.1593" direction="0.9397001,0.0,-0.34202245" scale="0.975" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="219.23848,0.0,332.88446" direction="0.9397001,0.0,-0.34202245" scale="0.8000002" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="301.32437,0.0,328.73978" direction="-0.4226217,0.0,-0.90631557" scale="0.5000005" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="339.50504,0.0,317.32605" direction="0.9659343,0.0,0.25882155" scale="1.2749997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_1/skin.xml" position="340.9971,0.0,315.28558" direction="0.9659344,0.0,-0.25882116" scale="1.1249999" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="343.687,0.0,314.2012" direction="0.9659344,0.0,-0.25882116" scale="0.8750001" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_7/skin.xml" position="340.4219,0.0,318.1635" direction="0.9659344,0.0,0.25882158" scale="0.42500046" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_5/skin.xml" position="341.46155,0.0,317.77377" direction="0.9659344,0.0,0.25882158" scale="0.65000033" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="342.70285,0.0,317.1576" direction="0.906316,0.0,-0.4226219" scale="0.65000033" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="342.23944,0.0,313.3323" direction="0.5000043,0.0,0.8660336" scale="0.6750003" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="343.74997,0.0,315.94434" direction="0.5000043,0.0,0.8660336" scale="0.6750003" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="331.8267,0.0,315.50275" direction="0.2588211,0.0,0.9659349" scale="1.025" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="334.85083,0.0,318.14886" direction="0.5000043,0.0,0.8660336" scale="1.1249999" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="319.66327,0.0,337.02582" direction="0.25882116,0.0,0.96593523" scale="0.75000024" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_well/skin.xml" position="195.50237,0.0,307.9845" direction="-0.906317,0.0,0.422622" scale="1.1499999" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="198.00333,0.0,313.72165" direction="-0.906317,0.0,0.422622" scale="0.8750001" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="194.82907,0.0,316.65625" direction="-0.6427943,0.0,0.76605177" scale="1.3749996" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="188.48238,0.0,316.0747" direction="0.9397018,0.0,0.34202456" scale="1.2499998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="184.615,0.0,315.66116" direction="-0.86603445,0.0,-0.5000063" scale="1.05" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="182.8817,0.0,316.2297" direction="-0.17364897,0.0,-0.9848189" scale="1.2749997" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="197.14816,0.0,316.7232" direction="-0.5000046,0.0,-0.8660356" scale="1.2249998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_1/skin.xml" position="197.36491,0.0,315.4198" direction="0.17365123,0.0,-0.9848185" scale="0.7750002" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_5/skin.xml" position="198.51064,0.0,315.58023" direction="0.17365123,0.0,-0.9848185" scale="0.40000045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_5/skin.xml" position="182.87897,0.0,314.35052" direction="0.17365123,0.0,-0.9848185" scale="0.42500046" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_1/skin.xml" position="186.67325,0.0,316.82123" direction="0.17365123,0.0,-0.9848185" scale="0.82500017" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="191.29599,0.0,317.6146" direction="0.17365123,0.0,-0.9848185" scale="0.82500017" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_pillar_script/skin.xml" position="327.15186,0.0,310.36978" direction="-0.5000069,0.0,0.8660355" scale="1.5999994" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_pillar_script/skin.xml" position="328.92035,0.0,306.37976" direction="0.08715597,0.0,0.99620706" scale="1.1999998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="326.80466,0.0,307.00818" direction="0.08715597,0.0,0.99620706" scale="0.75000024" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="325.74918,0.0,307.56497" direction="0.08715597,0.0,0.99620706" scale="0.42500046" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="327.20554,0.0,306.1457" direction="0.08715597,0.0,0.99620706" scale="0.27500042" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_7/skin.xml" position="329.97424,0.0,304.3949" direction="-0.1736512,0.0,0.9848198" scale="0.27500042" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_8/skin.xml" position="329.4988,0.0,304.76917" direction="-0.1736512,0.0,0.9848198" scale="0.2000004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_5/skin.xml" position="327.02557,0.0,313.1422" direction="-0.1736512,0.0,0.9848198" scale="0.30000043" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="312.15543,0.0,300.03076" direction="-0.4226244,0.0,0.9063188" scale="1.5499995" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="315.0159,0.0,297.98483" direction="-0.25882316,0.0,0.96593773" scale="0.85000014" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_5/skin.xml" position="309.6823,0.0,302.23038" direction="-0.42262438,0.0,0.90631884" scale="0.65000033" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="314.78174,0.0,299.77475" direction="-0.5000056,0.0,-0.86603725" scale="0.65000033" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="312.98785,0.0,297.44385" direction="-0.64279526,0.0,-0.76605505" scale="0.7000003" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="310.13416,0.0,301.78226" direction="-0.64279526,0.0,-0.76605505" scale="0.82500017" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="318.28064,0.0,334.21716" direction="8.865609E-7,0.0,-1.0000132" scale="0.7000003" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="316.049,0.0,332.54462" direction="-0.3420239,0.0,-0.93970543" scale="0.9000001" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="315.5737,0.0,330.72623" direction="0.64279705,0.0,-0.7660543" scale="0.8000002" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_5/skin.xml" position="317.76428,0.0,333.34412" direction="0.64279705,0.0,-0.7660543" scale="0.8000002" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="318.51425,0.0,333.6444" direction="0.8191638,0.0,-0.5735835" scale="0.40000045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_5/skin.xml" position="317.33627,0.0,332.45282" direction="0.6427971,0.0,-0.7660543" scale="0.40000045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="319.46918,0.0,335.6095" direction="0.6427971,0.0,-0.7660543" scale="1.1249999" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_1/skin.xml" position="212.85443,0.0,300.1521" direction="0.70711696,0.0,0.7071172" scale="1.7999992" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_1/skin.xml" position="208.69562,0.0,298.24182" direction="0.64279675,0.0,0.76605576" scale="1.4499996" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_2/skin.xml" position="210.37708,0.0,301.88528" direction="0.64279675,0.0,0.76605576" scale="0.9000001" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="208.861,0.0,301.3648" direction="0.50000703,0.0,0.86603814" scale="0.45000046" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_3/skin.xml" position="208.11423,0.0,296.06924" direction="0.3420249,0.0,0.9397064" scale="0.30000043" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_rock_4/skin.xml" position="207.6866,0.0,296.53375" direction="0.3420249,0.0,0.9397064" scale="0.40000045" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="206.9427,0.0,296.8459" direction="0.42262417,0.0,0.9063211" scale="0.62500036" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="210.3356,0.0,297.0767" direction="-0.99620914,0.0,-0.0871575" scale="0.8750001" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="210.70334,0.0,300.5608" direction="-0.99620914,0.0,-0.0871575" scale="0.8750001" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="216.38927,0.0,299.58884" direction="-0.7071167,0.0,-0.70711756" scale="0.6000004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="215.48419,0.0,302.57092" direction="-0.7071167,0.0,-0.70711756" scale="0.6000004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_3/skin.xml" position="194.27174,0.0,305.34628" direction="-0.7071167,0.0,-0.70711756" scale="0.6000004" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_4/skin.xml" position="194.66724,0.0,304.00943" direction="0.42262506,0.0,-0.9063208" scale="0.45000046" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_tree_log_1/skin.xml" position="198.08725,0.0,311.00906" direction="0.8660385,0.0,-0.50000674" scale="0.8750001" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_3/skin.xml" position="197.66472,0.0,309.4853" direction="0.8660385,0.0,-0.50000674" scale="0.8750001" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_2/skin.xml" position="199.46104,0.0,312.82745" direction="0.42262357,0.0,0.9063215" scale="0.8750001" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_grass_1/skin.xml" position="308.05957,0.0,299.78903" direction="0.9848221,0.0,0.17365164" scale="1.2249998" />
+		<model modelSkinPath="Models/3dsa_fantasy_forest_mushroom_3/skin.xml" position="309.24686,0.0,301.4922" direction="-0.81916463,0.0,0.5735839" scale="0.65000033" />
+	</visuals>
+</map>

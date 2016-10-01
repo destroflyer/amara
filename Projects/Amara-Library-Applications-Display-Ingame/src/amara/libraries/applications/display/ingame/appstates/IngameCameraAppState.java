@@ -43,9 +43,10 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
     private boolean shouldBeLimited;
     private boolean isMovementEnabled = true;
     private boolean isZoomEnabled = true;
-    private int currentZoomLevel;
-    private int maximumZoomLevel = -1;
     private float zoomInterval = 2;
+    private float currentZoomDistance;
+    private float zoomMinimumDistance = -1;
+    private float zoomMaximumDistance = -1;
     private Vector3f lastFrameCameraLocation = new Vector3f();
     private Quaternion lastFrameCameraRotation = new Quaternion();
     private boolean hasMoved;
@@ -160,12 +161,12 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
         else if(isEnabled()){
             if(actionName.equals("camera_zoom_out")){
                 if(isZoomEnabled){
-                    zoom(-1);
+                    zoom(zoomInterval);
                 }
             }
             else if(actionName.equals("camera_zoom_in")){
                 if(isZoomEnabled){
-                    zoom(1);
+                    zoom(-1 * zoomInterval);
                 }
             }
         }
@@ -177,18 +178,24 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
         limitSurfaceSpatial = surfaceSpatial;
     }
 
-    public void zoom(int zoomLevelChange){
-        int newZoomLevel = (currentZoomLevel + zoomLevelChange);
-        if((maximumZoomLevel == -1) || ((newZoomLevel >= 0) && (newZoomLevel <= maximumZoomLevel))){
-            Vector3f distance = mainApplication.getCamera().getDirection().mult(zoomInterval * zoomLevelChange);
-            mainApplication.getCamera().setLocation(mainApplication.getCamera().getLocation().add(distance));
-            currentZoomLevel = newZoomLevel;
+    public void zoom(float distance){
+        float newZoomDistance = (currentZoomDistance + distance);
+        if(((zoomMinimumDistance == -1) || (newZoomDistance >= zoomMinimumDistance))
+        && ((zoomMinimumDistance == -1) || (newZoomDistance <= zoomMaximumDistance))){
+            Vector3f movedDistance = mainApplication.getCamera().getDirection().mult(-1 * distance);
+            mainApplication.getCamera().setLocation(mainApplication.getCamera().getLocation().add(movedDistance));
+            currentZoomDistance = newZoomDistance;
         }
+    }
+
+    public void initializeZoom(float distance, Vector2f mapLocation){
+        currentZoomDistance = distance;
+        lookAt(mapLocation);
     }
     
     public void lookAt(Vector2f mapLocation){
         Vector3f location = getMapLocation(mapLocation);
-        Vector3f distance = mainApplication.getCamera().getDirection().mult(-40);
+        Vector3f distance = mainApplication.getCamera().getDirection().mult(-1 * currentZoomDistance);
         location.addLocal(distance);
         mainApplication.getCamera().setLocation(location);
     }
@@ -242,12 +249,16 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
         return isZoomEnabled;
     }
 
-    public void setMaximumZoomLevel(int maximumZoomLevel){
-        this.maximumZoomLevel = maximumZoomLevel;
-    }
-
     public void setZoomInterval(float zoomInterval){
         this.zoomInterval = zoomInterval;
+    }
+
+    public void setZoomMinimumDistance(float zoomMinimumDistance){
+        this.zoomMinimumDistance = zoomMinimumDistance;
+    }
+
+    public void setZoomMaximumDistance(float zoomMaximumDistance){
+        this.zoomMaximumDistance = zoomMaximumDistance;
     }
     
     private static boolean isMouseInWindow(){
