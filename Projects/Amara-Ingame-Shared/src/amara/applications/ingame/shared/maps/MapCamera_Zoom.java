@@ -10,19 +10,23 @@ package amara.applications.ingame.shared.maps;
  */
 public class MapCamera_Zoom{
 
-    public MapCamera_Zoom(float interval, float minimumDistance, float maximumDistance, float initialDistance){
+    public MapCamera_Zoom(float interval, float initialDistance, float minimumDistance, float maximumDistance){
         this.interval = interval;
+        this.initialDistance = initialDistance;
         this.minimumDistance = minimumDistance;
         this.maximumDistance = maximumDistance;
-        this.initialDistance = initialDistance;
     }
     private float interval;
+    private float initialDistance;
     private float minimumDistance;
     private float maximumDistance;
-    private float initialDistance;
 
     public float getInterval(){
         return interval;
+    }
+
+    public float getInitialDistance(){
+        return initialDistance;
     }
 
     public float getMinimumDistance(){
@@ -31,9 +35,5 @@ public class MapCamera_Zoom{
 
     public float getMaximumDistance(){
         return maximumDistance;
-    }
-
-    public float getInitialDistance(){
-        return initialDistance;
     }
 }

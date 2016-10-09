@@ -46,7 +46,6 @@
         <castType>linear_skillshot</castType>
         <castCancelAction/>
         <castDuration>[delay]</castDuration>
-        <stopBeforeCasting/>
         <castTurnToTarget/>
         <castAnimation>
             <entity>

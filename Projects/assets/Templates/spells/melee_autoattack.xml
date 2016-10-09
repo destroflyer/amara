@@ -22,7 +22,6 @@
         <castType>single_target</castType>
         <castCancelAction/>
         <castCancelable/>
-        <stopBeforeCasting/>
         <castTurnToTarget/>
         <range>2</range>
         <spellTargetRules>

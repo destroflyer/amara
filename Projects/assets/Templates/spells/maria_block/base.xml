@@ -19,7 +19,6 @@
         <castType>selfcast</castType>
         <castCancelAction/>
         <castDuration>[duration]</castDuration>
-        <stopBeforeCasting/>
         <castAnimation>
             <entity>
                 <name>great_sword_crouching</name>

@@ -215,8 +215,6 @@ public class ClientComponentBlacklist{
             CastCancelableComponent.class,
             CastTurnToTargetComponent.class,
             InstantEffectTriggersComponent.class,
-            StopAfterCastingComponent.class,
-            StopBeforeCastingComponent.class,
             //spells/placeholders
             SourceMovementDirectionComponent.class,
             TargetedMovementDirectionComponent.class,

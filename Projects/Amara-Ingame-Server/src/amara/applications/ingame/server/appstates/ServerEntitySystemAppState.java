@@ -37,6 +37,7 @@ import amara.applications.ingame.entitysystem.systems.effects.general.*;
 import amara.applications.ingame.entitysystem.systems.effects.heal.*;
 import amara.applications.ingame.entitysystem.systems.effects.movement.*;
 import amara.applications.ingame.entitysystem.systems.effects.physics.*;
+import amara.applications.ingame.entitysystem.systems.effects.popups.*;
 import amara.applications.ingame.entitysystem.systems.effects.spawns.*;
 import amara.applications.ingame.entitysystem.systems.effects.spells.*;
 import amara.applications.ingame.entitysystem.systems.effects.triggers.*;
@@ -234,7 +235,11 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CheckAreaBuffsSystem(intersectionObserver));
         addEntitySystem(new RemoveBuffsSystem());
         addEntitySystem(new RepeatingBuffEffectsSystem());
+        //Cleanup effects here, so effect impact entities aren't observed
+        addEntitySystem(new CleanupEffectsSystem());
         addEntitySystem(new CalculateEffectImpactSystem());
+        //Cleanup effect triggers here, so they have been triggered before being removed
+        addEntitySystem(new CleanupEffectTriggersSystem());
         addEntitySystem(new ApplyPlayCinematicSystem());
         addEntitySystem(new ApplyDrawTeamAggroSystem());
         addEntitySystem(new ApplyPlayAudioSystem());
@@ -272,6 +277,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyAddCollisiongGroupsSystem());
         addEntitySystem(new ApplyDeactivateHitboxSystem());
         addEntitySystem(new ApplyRemoveCollisiongGroupsSystem());
+        addEntitySystem(new ApplyAddPopupsSystem());
+        addEntitySystem(new ApplyRemovePopupsSystem());
         addEntitySystem(new ApplySpawnsSystems());
         addEntitySystem(new ApplyAddAutoAttackSpellEffectsSystem());
         addEntitySystem(new ApplyAddSpellsSpellEffectsSystem());
@@ -296,8 +303,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new TriggerDamageTakenSystem());
         addEntitySystem(new LifestealSystem());
         addEntitySystem(new RemoveAppliedEffectsSystem());
-        addEntitySystem(new CleanupEffectTriggersSystem());
-        addEntitySystem(new CleanupEffectsSystem());
         addEntitySystem(new HealthRegenerationSystem());
         addEntitySystem(new DeathSystem());
         addEntitySystem(new TriggerDeathEffectSystem());

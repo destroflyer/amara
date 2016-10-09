@@ -42,7 +42,6 @@
         </instantEffectTriggers>
         <castType>linear_skillshot</castType>
         <castCancelAction/>
-        <stopBeforeCasting/>
         <castTurnToTarget/>
         <castAnimation>
             <entity>

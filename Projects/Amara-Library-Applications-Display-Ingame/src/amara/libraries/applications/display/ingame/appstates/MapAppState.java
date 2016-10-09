@@ -79,18 +79,14 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
         camera.lookAtDirection(map.getCamera().getInitialDirection(), Vector3f.UNIT_Y);
         IngameCameraAppState ingameCameraAppState = getAppState(IngameCameraAppState.class);
         MapCamera_Zoom zoom = map.getCamera().getZoom();
-        if(zoom != null){
-            ingameCameraAppState.setZoomInterval(zoom.getInterval());
-            ingameCameraAppState.initializeZoom(zoom.getInitialDistance(), getGroundLocation_ScreenCenter());
-        }
+        ingameCameraAppState.setZoomInterval(zoom.getInterval());
+        ingameCameraAppState.initializeZoom(zoom.getInitialDistance(), getGroundLocation_ScreenCenter());
+        ingameCameraAppState.setZoomMinimumDistance(zoom.getMinimumDistance());
+        ingameCameraAppState.setZoomMaximumDistance(zoom.getMaximumDistance());
         if(ingameCameraAppState.shouldBeLimited()){
             MapCamera_Limit limit = map.getCamera().getLimit();
             if(limit != null){
                 ingameCameraAppState.setLimit(limit.getMinimum(), limit.getMaximum(), mapTerrain.getTerrain());
-            }
-            if(zoom != null){
-                ingameCameraAppState.setZoomMinimumDistance(zoom.getMinimumDistance());
-                ingameCameraAppState.setZoomMaximumDistance(zoom.getMaximumDistance());
             }
         }
     }

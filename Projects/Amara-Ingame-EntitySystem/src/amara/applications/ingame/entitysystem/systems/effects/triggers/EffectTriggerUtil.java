@@ -52,14 +52,20 @@ public class EffectTriggerUtil{
                 }
                 int[] targetEntities = getTargetEntities(entityWorld, effectTriggerEntity, targetEntity);
                 effectCast.setComponent(new AffectedTargetsComponent(targetEntities));
-                if(entityWorld.hasComponent(effectTriggerEntity, TriggerOnceComponent.class)){
-                    entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
-                }
                 TriggerDelayComponent triggerDelayComponent = entityWorld.getComponent(effectTriggerEntity, TriggerDelayComponent.class);
                 if(triggerDelayComponent != null){
                     effectCast.setComponent(new RemainingEffectDelayComponent(triggerDelayComponent.getDuration()));
                 }
                 SetCooldownOnCastingSystem.setOnCooldown(entityWorld, effectTriggerEntity);
+                TriggerOnceComponent triggerOnceComponent = entityWorld.getComponent(effectTriggerEntity, TriggerOnceComponent.class);
+                if(triggerOnceComponent != null){
+                    if(triggerOnceComponent.isRemoveEntity()){
+                        entityWorld.removeEntity(effectTriggerEntity);
+                    }
+                    else{
+                        entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
+                    }
+                }
                 return effectCast;
             }
         }

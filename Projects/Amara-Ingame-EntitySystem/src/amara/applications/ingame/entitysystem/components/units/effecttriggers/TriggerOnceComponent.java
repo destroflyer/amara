@@ -16,4 +16,13 @@ public class TriggerOnceComponent{
     public TriggerOnceComponent(){
         
     }
+
+    public TriggerOnceComponent(boolean removeEntity){
+        this.removeEntity = removeEntity;
+    }
+    private boolean removeEntity;
+
+    public boolean isRemoveEntity(){
+        return removeEntity;
+    }
 }

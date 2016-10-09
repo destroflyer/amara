@@ -41,7 +41,6 @@
         <castType>single_target</castType>
         <castCancelAction/>
         <castDuration>0.6</castDuration>
-        <stopBeforeCasting/>
         <castTurnToTarget/>
         <castAnimation>
             <entity>

@@ -32,14 +32,6 @@ public abstract class SimpleHUDAttachmentSystem extends SimpleVisualAttachmentSy
     protected void attach(int entity, Spatial visualAttachment){
         hudAttachmentsSystem.attach(new HUDAttachmentInfo(entity, getVisualAttachmentID(entity), getWorldOffset(entityWorld, entity), getPreparedHUDOffset(), true), visualAttachment);
     }
-    
-    protected Vector3f getPreparedHUDOffset(){
-        return hudOffset.clone();
-    }
-    
-    protected Vector3f getWorldOffset(EntityWorld entityWorld, int entity){
-        return Vector3f.ZERO;
-    }
 
     @Override
     protected void detach(int entity){
@@ -49,6 +41,14 @@ public abstract class SimpleHUDAttachmentSystem extends SimpleVisualAttachmentSy
     @Override
     protected Spatial getVisualAttachment(int entity){
         return hudAttachmentsSystem.getHUDAttachment(getVisualAttachmentID(entity));
+    }
+    
+    protected Vector3f getPreparedHUDOffset(){
+        return hudOffset.clone();
+    }
+    
+    protected Vector3f getWorldOffset(EntityWorld entityWorld, int entity){
+        return Vector3f.ZERO;
     }
     
     protected abstract Spatial createVisualAttachment(EntityWorld entityWorld, int entity);

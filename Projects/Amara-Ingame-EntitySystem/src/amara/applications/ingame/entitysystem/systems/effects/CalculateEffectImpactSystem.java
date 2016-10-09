@@ -20,6 +20,7 @@ import amara.applications.ingame.entitysystem.components.effects.general.*;
 import amara.applications.ingame.entitysystem.components.effects.heals.*;
 import amara.applications.ingame.entitysystem.components.effects.movement.*;
 import amara.applications.ingame.entitysystem.components.effects.physics.*;
+import amara.applications.ingame.entitysystem.components.effects.popups.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.effects.spells.*;
 import amara.applications.ingame.entitysystem.components.effects.units.*;
@@ -222,6 +223,8 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         AddCollisionGroupsComponent.class,
                         DeactivateHitboxComponent.class,
                         RemoveCollisionGroupsComponent.class,
+                        AddPopupComponent.class,
+                        RemovePopupComponent.class,
                         SpawnComponent.class,
                         AddAutoAttackSpellEffectsComponent.class,
                         AddSpellsSpellEffectsComponent.class,

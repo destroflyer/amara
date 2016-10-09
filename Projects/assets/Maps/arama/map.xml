@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map author="Carl" date="1475361006412" class="amara.applications.ingame.maps.Map_Arama">
 	<camera initialPosition="262.2,56.0,226.5" initialDirection="0.0,-1.0,0.6745">
-		<zoom interval="1.0" minimumDistance="10.0" maximumDistance="200.0" initialDistance="40.0" />
+		<zoom interval="1.0" initialDistance="40.0" minimumDistance="10.0" maximumDistance="200.0" />
 	</camera>
 	<lights>
 		<ambient color="0.2,0.2,0.2" />

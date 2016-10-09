@@ -39,6 +39,7 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("TeMMeZz", "Tester, Game logic advices", "Interface/client/thanks/nidalee.jpg"),
         new Thanks("egoVidiTe", "Tester", "Interface/client/user.png"),
         new Thanks("Icecold", "Tester", "Interface/client/user.png"),
+        new Thanks("Golden Eagle", "Tester", "Interface/client/user.png"),
         new Thanks("Yalee", "Tester", "Interface/client/user.png"),
         new Thanks("XBody", "Tester, Model advices", "Interface/client/user.png"),
         new Thanks("Kappa", "Inspiration", "Interface/client/thanks/kappa.png"),
@@ -54,7 +55,7 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("Gabriel Piacenti", "Model \"Earth Elemental\"", "Interface/client/thanks/blender.png", "http://opengameart.org/users/piacenti"),
         new Thanks("Blake Harris", "Model \"Futuristic Glass Wall\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/CopperStache"),
         new Thanks("MutantGenepool", "Model \"Japanese Bridge\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/MutantGenepool"),
-        new Thanks("willymax-0", "Model \"Little Dragon\"", "Interface/client/thanks/blender.png", "http://blendswap.com/blends/author/willymax-0"),
+        new Thanks("willymax-0", "Model \"Little Dragon\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/willymax-0"),
         new Thanks("derekwatts", "Model \"Mjolnir\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/DerekWatts"),
         new Thanks("Julio Iglesias", "Model \"Pseudospider\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/Zafio"),
         new Thanks("Jumah Safarty", "Model \"Soldier\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/jumahsafarty"),
@@ -107,7 +108,7 @@ public class PanThanks extends javax.swing.JPanel{
             if(thanks.hasURL()){
                 JLabel lblURL = new JLabel("<html><u>" + thanks.getURL() + "</u></html>");
                 lblURL.setLocation(x, y);
-                lblURL.setSize(200, lineHeight);
+                lblURL.setSize(300, lineHeight);
                 lblURL.setForeground(Color.WHITE);
                 lblURL.setCursor(new Cursor(Cursor.HAND_CURSOR));
                 lblURL.addMouseListener(new MouseAdapter(){

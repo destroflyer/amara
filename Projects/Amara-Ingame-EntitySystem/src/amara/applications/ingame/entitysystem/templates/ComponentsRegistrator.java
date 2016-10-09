@@ -1803,6 +1803,29 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.RemoveCollisionGroupsComponent.class);
+        //popups
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent.class.getDeclaredField("popupEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent>("addPopup"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent construct(){
+                int popupEntity = createChildEntity(0, "popupEntity");
+                return new amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent(popupEntity);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent>("removePopup"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent.class.getDeclaredField("effectEntity"), componentFieldSerializer_Entity);
@@ -2591,6 +2614,16 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.players.WaitingToRespawnComponent(remainingDuration);
             }
         });
+        //popups
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.popups.PopupTextComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.popups.PopupTextComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.popups.PopupTextComponent>("popupText"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.popups.PopupTextComponent construct(){
+                String text = xmlTemplateManager.parseValue(entityWorld, element.getText());
+                return new amara.applications.ingame.entitysystem.components.popups.PopupTextComponent(text);
+            }
+        });
         //shop
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.shop.ShopRangeComponent.class);
         try{
@@ -3108,22 +3141,6 @@ public class ComponentsRegistrator{
             public amara.applications.ingame.entitysystem.components.spells.SpellVisualisationComponent construct(){
                 String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.spells.SpellVisualisationComponent(name);
-            }
-        });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.StopAfterCastingComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.StopAfterCastingComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.StopAfterCastingComponent>("stopAfterCasting"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.spells.StopAfterCastingComponent construct(){
-                return new amara.applications.ingame.entitysystem.components.spells.StopAfterCastingComponent();
-            }
-        });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.StopBeforeCastingComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.StopBeforeCastingComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.StopBeforeCastingComponent>("stopBeforeCasting"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.spells.StopBeforeCastingComponent construct(){
-                return new amara.applications.ingame.entitysystem.components.spells.StopBeforeCastingComponent();
             }
         });
         //triggers
@@ -3820,7 +3837,12 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent construct(){
-                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent();
+                boolean removeEntity = false;
+                String removeEntityText = element.getText();
+                if((removeEntityText != null) && (removeEntityText.length() > 0)){
+                    removeEntity = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, removeEntityText));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent(removeEntity);
             }
         });
         //triggers
@@ -4246,6 +4268,20 @@ public class ComponentsRegistrator{
             public amara.applications.ingame.entitysystem.components.units.PassivesComponent construct(){
                 int[] passiveEntities = createChildEntities(0, "passiveEntities");
                 return new amara.applications.ingame.entitysystem.components.units.PassivesComponent(passiveEntities);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.PopupComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.PopupComponent.class.getDeclaredField("popupEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.PopupComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.PopupComponent>("popup"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.PopupComponent construct(){
+                int popupEntity = createChildEntity(0, "popupEntity");
+                return new amara.applications.ingame.entitysystem.components.units.PopupComponent(popupEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.ReactionComponent.class);

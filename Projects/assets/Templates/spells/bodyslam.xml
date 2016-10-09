@@ -19,8 +19,8 @@
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
+        <castCancelAction/>
         <castDuration>2</castDuration>
-        <stopBeforeCasting/>
         <castAnimation>
             <entity>
                 <name>bodyslam</name>

@@ -37,7 +37,6 @@
         <castType>single_target</castType>
         <castCancelAction/>
         <castCancelable/>
-        <stopBeforeCasting/>
         <castTurnToTarget/>
         <range>9</range>
         <spellTargetRules>

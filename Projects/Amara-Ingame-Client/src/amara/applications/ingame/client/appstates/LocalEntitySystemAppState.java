@@ -134,6 +134,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new LevelUpNotificationSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new MinionAggroIndicatorSystem(hudAttachmentsSystem, entityHeightMap, playerAppState.getPlayerEntity()));
         addEntitySystem(new ReactionVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
+        addEntitySystem(new PopupSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new WaterSpeedSystem(mapAppState));
         addEntitySystem(new CinematicsSystem(getAppState(CinematicAppState.class)));
     }

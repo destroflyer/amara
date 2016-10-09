@@ -43,7 +43,7 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
     private boolean shouldBeLimited;
     private boolean isMovementEnabled = true;
     private boolean isZoomEnabled = true;
-    private float zoomInterval = 2;
+    private float zoomInterval = 1;
     private float currentZoomDistance;
     private float zoomMinimumDistance = -1;
     private float zoomMaximumDistance = -1;
@@ -181,7 +181,7 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
     public void zoom(float distance){
         float newZoomDistance = (currentZoomDistance + distance);
         if(((zoomMinimumDistance == -1) || (newZoomDistance >= zoomMinimumDistance))
-        && ((zoomMinimumDistance == -1) || (newZoomDistance <= zoomMaximumDistance))){
+        && ((zoomMaximumDistance == -1) || (newZoomDistance <= zoomMaximumDistance))){
             Vector3f movedDistance = mainApplication.getCamera().getDirection().mult(-1 * distance);
             mainApplication.getCamera().setLocation(mainApplication.getCamera().getLocation().add(movedDistance));
             currentZoomDistance = newZoomDistance;

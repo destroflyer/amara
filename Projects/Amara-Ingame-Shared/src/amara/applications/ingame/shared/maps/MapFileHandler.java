@@ -18,6 +18,7 @@ import amara.applications.ingame.shared.maps.visuals.*;
 import amara.core.Util;
 import amara.core.files.*;
 import amara.libraries.physics.shapes.*;
+import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -69,14 +70,16 @@ public class MapFileHandler{
                 elementCamera.addContent(elementLimit);
             }
             MapCamera_Zoom cameraZoom = map.getCamera().getZoom();
-            if(cameraZoom != null){
-                Element elementZoom = new Element("zoom");
-                elementZoom.setAttribute("interval", "" + cameraZoom.getInterval());
+            Element elementZoom = new Element("zoom");
+            elementZoom.setAttribute("interval", "" + cameraZoom.getInterval());
+            elementZoom.setAttribute("initialDistance", "" + cameraZoom.getInitialDistance());
+            if(cameraZoom.getMinimumDistance() != -1){
                 elementZoom.setAttribute("minimumDistance", "" + cameraZoom.getMinimumDistance());
-                elementZoom.setAttribute("maximumDistance", "" + cameraZoom.getMaximumDistance());
-                elementZoom.setAttribute("initialDistance", "" + cameraZoom.getInitialDistance());
-                elementCamera.addContent(elementZoom);
             }
+            if(cameraZoom.getMaximumDistance() != -1){
+                elementZoom.setAttribute("maximumDistance", "" + cameraZoom.getMaximumDistance());
+            }
+            elementCamera.addContent(elementZoom);
             root.addContent(elementCamera);
             //Lights
             Element elementLights = new Element("lights");
@@ -204,13 +207,19 @@ public class MapFileHandler{
                 camera.setLimit(new MapCamera_Limit(limitMinimum, limitMaximum));
             }
             Element elementZoom = elementCamera.getChild("zoom");
-            if(elementZoom != null){
-                float zoomInterval = elementZoom.getAttribute("interval").getFloatValue();
-                float zoomMinimumDistance = elementZoom.getAttribute("minimumDistance").getFloatValue();
-                float zoomMaximumDistance = elementZoom.getAttribute("maximumDistance").getFloatValue();
-                float zoomInitialDistance = elementZoom.getAttribute("initialDistance").getFloatValue();
-                camera.setZoom(new MapCamera_Zoom(zoomInterval, zoomMinimumDistance, zoomMaximumDistance, zoomInitialDistance));
+            float zoomInterval = elementZoom.getAttribute("interval").getFloatValue();
+            float zoomInitialDistance = elementZoom.getAttribute("initialDistance").getFloatValue();
+            float zoomMinimumDistance = -1;
+            Attribute attributeZoomMinimumDistance = elementZoom.getAttribute("minimumDistance");
+            if(attributeZoomMinimumDistance != null){
+                zoomMinimumDistance = attributeZoomMinimumDistance.getFloatValue();
             }
+            float zoomMaximumDistance = -1;
+            Attribute attributeZoomMaximumDistance = elementZoom.getAttribute("maximumDistance");
+            if(attributeZoomMaximumDistance != null){
+                zoomMaximumDistance = attributeZoomMaximumDistance.getFloatValue();
+            }
+            camera.setZoom(new MapCamera_Zoom(zoomInterval, zoomInitialDistance, zoomMinimumDistance, zoomMaximumDistance));
             map.setCamera(camera);
             //Lights
             Element elementLights = root.getChild("lights");

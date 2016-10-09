@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map author="Carl" date="1402054147616" class="amara.applications.ingame.maps.Map_Testmap">
-	<camera initialPosition="30.6,34.0,-7.7" initialDirection="0.0,-1.0,0.6745" />
+	<camera initialPosition="30.6,34.0,-7.7" initialDirection="0.0,-1.0,0.6745">		<zoom interval="1.0" initialDistance="40.0" />	</camera>
 	<lights>
 		<ambient color="0.2,0.2,0.2" />
 		<directional color="1.2,1.2,1.2" direction="-0.5,-1.75,1.0">
