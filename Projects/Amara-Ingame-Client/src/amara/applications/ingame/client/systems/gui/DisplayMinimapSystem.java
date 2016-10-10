@@ -11,6 +11,7 @@ import com.jme3.texture.Texture2D;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.client.systems.filters.FogOfWarSystem;
 import amara.applications.ingame.client.systems.information.PlayerTeamSystem;
+import amara.applications.ingame.client.systems.visualisation.OwnTeamVisionSystem;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.types.*;
@@ -26,10 +27,11 @@ import amara.libraries.entitysystem.*;
  */
 public class DisplayMinimapSystem extends GUIDisplaySystem{
 
-    public DisplayMinimapSystem(int playerEntity, ScreenController_HUD screenController_HUD, Map map, PlayerTeamSystem playerTeamSystem, FogOfWarSystem fogOfWarSystem){
+    public DisplayMinimapSystem(int playerEntity, ScreenController_HUD screenController_HUD, Map map, PlayerTeamSystem playerTeamSystem, OwnTeamVisionSystem ownTeamVisionSystem, FogOfWarSystem fogOfWarSystem){
         super(playerEntity, screenController_HUD);
         this.map = map;
         this.playerTeamSystem = playerTeamSystem;
+        this.ownTeamVisionSystem = ownTeamVisionSystem;
         this.fogOfWarSystem = fogOfWarSystem;
         scaleX_Map = (minimapImage.getWidth() / ((float) map.getMinimapInformation().getWidth()));
         scaleY_Map = (minimapImage.getHeight() / ((float) map.getMinimapInformation().getHeight()));
@@ -44,6 +46,7 @@ public class DisplayMinimapSystem extends GUIDisplaySystem{
     private static final Color COLOR_TEAM_OTHER = new Color(100, 50, 0);
     private Map map;
     private PlayerTeamSystem playerTeamSystem;
+    private OwnTeamVisionSystem ownTeamVisionSystem;
     private FogOfWarSystem fogOfWarSystem;
     private PaintableImage minimapImage = new PaintableImage(264, 264);
     private Texture2D texture2D = new Texture2D();
@@ -75,7 +78,9 @@ public class DisplayMinimapSystem extends GUIDisplaySystem{
         if((!observer.getNew().isEmpty()) || (!observer.getChanged().isEmpty()) || (!observer.getRemoved().isEmpty())){
             minimapImage.loadImage(backgroundImage, false);
             for(int entity : entityWorld.getEntitiesWithAll(PositionComponent.class)){
-                paintEntity(entityWorld, entity);
+                if(ownTeamVisionSystem.isVisible(entityWorld, entity)){
+                    paintEntity(entityWorld, entity);
+                }
             }
             paintFogOfWar();
             minimapImage.flipY();

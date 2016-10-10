@@ -41,6 +41,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
     private GameSelection gameSelection;
     private int playerEntity;
     private PlayerTeamSystem playerTeamSystem;
+    private OwnTeamVisionSystem ownTeamVisionSystem;
     private SpellIndicatorSystem spellIndicatorSystem;
     private LockedCameraSystem lockedCameraSystem;
     private FogOfWarSystem fogOfWarSystem;
@@ -51,6 +52,8 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
+        EntitySceneMap entitySceneMap = getAppState(LocalEntitySystemAppState.class).getEntitySceneMap();
+        ownTeamVisionSystem = new OwnTeamVisionSystem(entitySceneMap, playerTeamSystem);
         getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class).generateScoreboard();
     }
     
@@ -61,6 +64,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
             "lock_camera","display_map_sight"
         });
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
+        localEntitySystemAppState.addEntitySystem(ownTeamVisionSystem);
         spellIndicatorSystem = new SpellIndicatorSystem(playerEntity, localEntitySystemAppState.getEntitySceneMap());
         localEntitySystemAppState.addEntitySystem(spellIndicatorSystem);
         IngameCameraAppState ingameCameraAppState = getAppState(IngameCameraAppState.class);
@@ -99,7 +103,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardPlayersNamesSystem(screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardScoresSystem(screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardInventoriesSystem(screenController_HUD));
-        localEntitySystemAppState.addEntitySystem(new DisplayMinimapSystem(playerEntity, screenController_HUD, map, playerTeamSystem, fogOfWarSystem));
+        localEntitySystemAppState.addEntitySystem(new DisplayMinimapSystem(playerEntity, screenController_HUD, map, playerTeamSystem, ownTeamVisionSystem, fogOfWarSystem));
         localEntitySystemAppState.addEntitySystem(new UpdateRecipeCostsSystem(playerEntity, screenController_Shop));
     }
 
@@ -192,6 +196,10 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
 
     public PlayerTeamSystem getPlayerTeamSystem(){
         return playerTeamSystem;
+    }
+
+    public OwnTeamVisionSystem getOwnTeamVisionSystem(){
+        return ownTeamVisionSystem;
     }
 
     public SpellIndicatorSystem getSpellIndicatorSystem(){
