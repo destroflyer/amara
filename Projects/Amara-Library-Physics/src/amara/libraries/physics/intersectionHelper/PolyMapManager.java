@@ -8,6 +8,7 @@ import java.util.*;
 import amara.libraries.physics.*;
 import amara.libraries.physics.shapes.*;
 import amara.libraries.physics.shapes.PolygonMath.*;
+import amara.libraries.physics.shapes.vision.Vision;
 
 /**
  *

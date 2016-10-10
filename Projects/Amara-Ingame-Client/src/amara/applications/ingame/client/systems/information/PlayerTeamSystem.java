@@ -31,6 +31,14 @@ public class PlayerTeamSystem implements EntitySystem{
         }
     }
     
+    public boolean isInitialized(){
+        return (playerTeamEntity != -1);
+    }
+
+    public int getPlayerTeamEntity(){
+        return playerTeamEntity;
+    }
+    
     public boolean isAllied(EntityWorld entityWorld, int entity){
         return isAllied(entityWorld.getComponent(entity, TeamComponent.class));
     }
@@ -40,9 +48,5 @@ public class PlayerTeamSystem implements EntitySystem{
             return (teamComponent.getTeamEntity() == playerTeamEntity);
         }
         return false;
-    }
-    
-    public boolean isInitialized(){
-        return (playerTeamEntity != -1);
     }
 }

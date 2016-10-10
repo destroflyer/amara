@@ -5,8 +5,6 @@
 package amara.applications.ingame.client.systems.filters;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import com.jme3.asset.AssetManager;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
@@ -23,6 +21,7 @@ import amara.libraries.entitysystem.*;
 import amara.libraries.physics.PolyHelper;
 import amara.libraries.physics.shapes.*;
 import amara.libraries.physics.shapes.PolygonMath.*;
+import amara.libraries.physics.shapes.vision.MergedVision;
 
 /**
  *
@@ -34,12 +33,13 @@ public class FogOfWarSystem implements EntitySystem{
         this.playerTeamSystem = playerTeamSystem;
         this.postFilterAppState = postFilterAppState;
         this.mapPhysicsInformation = mapPhysicsInformation;
-        mapBorderPoints = new Vector2D[]{
+        Vector2D[] mapBorderPoints = new Vector2D[]{
             new Vector2D(0, 0),
             new Vector2D(0, mapPhysicsInformation.getHeight()),
             new Vector2D(mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight()),
             new Vector2D(mapPhysicsInformation.getWidth(), 0)
         };
+        teamVision = new MergedVision(mapBorderPoints, mapPhysicsInformation.getObstacles());
         float resolutionFactor = Settings.getFloat("fog_of_war_resolution");
         fogImage = new PaintableImage((int) (mapPhysicsInformation.getWidth() * resolutionFactor), (int) (mapPhysicsInformation.getHeight() * resolutionFactor));
         fogRaster = new Raster(fogImage, resolutionFactor, 80, 255);
@@ -57,10 +57,7 @@ public class FogOfWarSystem implements EntitySystem{
     private PlayerTeamSystem playerTeamSystem;
     private PostFilterAppState postFilterAppState;
     private MapPhysicsInformation mapPhysicsInformation;
-    private Vision vision = new Vision();
-    private ArrayList<Vector2D> visionEdges = new ArrayList<Vector2D>();
-    private Vector2D[] mapBorderPoints;
-    private HashMap<Double, Circle> visionCircleShapes = new HashMap<Double, Circle>();
+    private MergedVision teamVision;
     private PaintableImage fogImage;
     private Texture2D fogTexture = new Texture2D();
     private Raster fogRaster;
@@ -139,33 +136,12 @@ public class FogOfWarSystem implements EntitySystem{
             if(playerTeamSystem.isAllied(entityWorld, entity)){
                 PositionComponent positionComponent = entityWorld.getComponent(entity, PositionComponent.class);
                 Vector2D position = new Vector2D(positionComponent.getPosition().getX(), positionComponent.getPosition().getY());
-                double sightRange = entityWorld.getComponent(entity, SightRangeComponent.class).getRange();
+                float sightRange = entityWorld.getComponent(entity, SightRangeComponent.class).getRange();
                 Polygon sightPolygon;
                 //Fast way using shapes
                 if(true){
-                    visionEdges.clear();
-                    addPointEdges(visionEdges, mapBorderPoints, false);
-                    Circle visionCircleShape = getVisionCircleShape(sightRange);
-                    visionCircleShape.setTransform(new Transform2D(1, 0, position.getX(), position.getY()));
-                    ArrayList<Vector2D> visionCircleOutline = PolyHelper.fromShape(visionCircleShape).edges();
-                    for(int i=(visionCircleOutline.size() - 1);i>=0;i--){
-                        visionEdges.add(visionCircleOutline.get(i));
-                    }
-                    for(ConvexShape obstacle : mapPhysicsInformation.getObstacles()){
-                        if(obstacle.intersects(visionCircleShape)){
-                            if(obstacle instanceof SimpleConvexPolygon){
-                                SimpleConvexPolygon simpleConvexPolygon = (SimpleConvexPolygon) obstacle;
-                                addPointEdges(visionEdges, simpleConvexPolygon.getGlobalPoints(), true);
-                            }
-                            else if(obstacle instanceof Circle){
-                                ArrayList<Vector2D> circleOutline = PolyHelper.fromShape(obstacle).edges();
-                                for(int i=(circleOutline.size() - 1);i>=0;i--){
-                                    visionEdges.add(circleOutline.get(i));
-                                }
-                            }
-                        }
-                    }
-                    sightPolygon = PolyHelper.fromOutline(vision.sightPolyOutline(position, visionEdges));
+                    ArrayList<Vector2D> sightOutline = teamVision.getSightOutline(position, sightRange);
+                    sightPolygon = PolyHelper.fromOutline(sightOutline);
                 }
                 //Slow way using polygons
                 else{
@@ -175,34 +151,6 @@ public class FogOfWarSystem implements EntitySystem{
             }
         }
         onFogImageUpdated();
-    }
-    
-    private static void addPointEdges(List<Vector2D> edges, Vector2D[] points, boolean reversed){
-        if(reversed){
-            Vector2D lastPoint = points[0];
-            for(int i=(points.length - 1);i>=0;i--){
-                edges.add(lastPoint);
-                edges.add(points[i]);
-                lastPoint = points[i];
-            }
-        }
-        else{
-            Vector2D lastPoint = points[points.length - 1];
-            for(Vector2D point : points){
-                edges.add(lastPoint);
-                edges.add(point);
-                lastPoint = point;
-            }
-        }
-    }
-    
-    private Circle getVisionCircleShape(double radius){
-        Circle circle = visionCircleShapes.get(radius);
-        if(circle == null){
-            circle = new Circle(radius);
-            visionCircleShapes.put(radius, circle);
-        }
-        return circle;
     }
     
     private void resetFogTexture(){

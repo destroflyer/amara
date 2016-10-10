@@ -121,7 +121,9 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         MapAppState mapAppState = getAppState(MapAppState.class);
         PlayerAppState playerAppState = getAppState(PlayerAppState.class);
         HealthBarStyleManager healthBarStyleManager = new HealthBarStyleManager();
-        HUDAttachmentsSystem hudAttachmentsSystem = new HUDAttachmentsSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapAppState.getMapHeightmap(), healthBarStyleManager);
+        OwnTeamVisionSystem ownTeamVisionSystem = new OwnTeamVisionSystem(entitySceneMap, playerAppState.getPlayerTeamSystem());
+        addEntitySystem(ownTeamVisionSystem);
+        HUDAttachmentsSystem hudAttachmentsSystem = new HUDAttachmentsSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapAppState.getMapHeightmap(), healthBarStyleManager, ownTeamVisionSystem);
         addEntitySystem(hudAttachmentsSystem);
         EntityHeightMap entityHeightMap = new EntityHeightMap(entitySceneMap);
         addEntitySystem(new MaximumHealthBarSystem(hudAttachmentsSystem, entityHeightMap, healthBarStyleManager, playerAppState.getPlayerTeamSystem()));

@@ -85,12 +85,12 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
-        SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();
-        subNetworkServer.addMessageBackend(new AuthentificateClientsBackend(mainApplication.getGame(), entityWorld));
-        subNetworkServer.addMessageBackend(new SendInitialEntityWorldBackend(entityWorld));
-        subNetworkServer.addMessageBackend(new StartGameBackend(mainApplication.getGame()));
-        
         Game game = mainApplication.getGame();
+        SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();
+        subNetworkServer.addMessageBackend(new AuthentificateClientsBackend(game, entityWorld));
+        subNetworkServer.addMessageBackend(new SendInitialEntityWorldBackend(entityWorld));
+        subNetworkServer.addMessageBackend(new StartGameBackend(game));
+        
         EntityWrapper gameEntity = entityWorld.getWrapped(entityWorld.createEntity());
         gameEntity.setComponent(new GameSpeedComponent(1));
         Map map = game.getMap();
@@ -99,7 +99,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         map.load(entityWorld);
         DatabaseAppState databaseAppState = mainApplication.getMasterServer().getState(DatabaseAppState.class);
         int playerIndex = 0;
-        for(GamePlayer[] team : mainApplication.getGame().getTeams()){
+        for(GamePlayer[] team : game.getTeams()){
             for(GamePlayer player : team){
                 EntityWrapper playerEntity = entityWorld.getWrapped(entityWorld.createEntity());
                 playerEntity.setComponent(new PlayerIndexComponent(playerIndex));
@@ -324,6 +324,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CheckDistanceLimitMovementsSystem());
         addEntitySystem(new TriggerTargetReachedEffectSystem());
         addEntitySystem(new FinishTargetedMovementsSystem());
+        //Add 1 for the neutral team
+        addEntitySystem(new TeamVisionSystem(game.getTeams().length + 1, mapPhysicsInformation.getObstacles()));
         addEntitySystem(new TriggerCollisionEffectSystem(intersectionObserver));
         addEntitySystem(new TriggerCastingFinishedEffectSystem());
         addEntitySystem(new TriggerStacksReachedEffectSystem());

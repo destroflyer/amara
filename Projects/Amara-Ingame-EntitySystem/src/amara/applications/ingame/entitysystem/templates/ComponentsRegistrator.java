@@ -4112,6 +4112,19 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.IsTargetableComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent>("isVisibleForTeams"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent construct(){
+                String[] teamVisionsParts = element.getText().split(",");
+                boolean[] teamVisions = new boolean[teamVisionsParts.length];
+                for(int i=0;i<teamVisions.length;i++){
+                    teamVisions[i] = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, element.getText()));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent(teamVisions);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent>("isVulnerable"){
 
