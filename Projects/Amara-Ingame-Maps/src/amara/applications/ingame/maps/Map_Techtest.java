@@ -51,8 +51,8 @@ public class Map_Techtest extends Map{
             }
             for(int x=0;x<countX;x++){
                 EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
-                unit.setComponent(new IsMonsterComponent());
                 unit.setComponent(new NameComponent("TechTest Creep"));
+                unit.setComponent(new IsMonsterComponent());
                 unit.setComponent(new ModelComponent(modelSkinPath));
                 unit.setComponent(new ScaleComponent(scale));
                 EntityWrapper animation = entityWorld.getWrapped(entityWorld.createEntity());
@@ -79,8 +79,8 @@ public class Map_Techtest extends Map{
             }
         }
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
-        boss.setComponent(new IsMonsterComponent());
         boss.setComponent(new NameComponent("Cow"));
+        boss.setComponent(new IsMonsterComponent());
         boss.setComponent(new ModelComponent("Models/cow/skin_default.xml"));
         boss.setComponent(new ScaleComponent(1.5f));
         boss.setComponent(new PositionComponent(new Vector2f(40, 5)));

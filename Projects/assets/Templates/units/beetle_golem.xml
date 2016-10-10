@@ -1,7 +1,7 @@
 <template>
     <entity>
-        <isMonster/>
         <name>Beetle Golem</name>
+        <isMonster/>
         <!--model-->
         <model>Models/beetle_golem/skin_dark.xml</model>
         <idleAnimation>

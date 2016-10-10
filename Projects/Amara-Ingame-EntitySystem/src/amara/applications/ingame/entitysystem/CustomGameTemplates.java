@@ -251,8 +251,8 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new BountyComponent(bounty.getId()));
                 }
                 else if(templateName.equals("arama_boss")){
-                    entityWrapper.setComponent(new IsMonsterComponent());
                     entityWrapper.setComponent(new NameComponent("Baron Nashor"));
+                    entityWrapper.setComponent(new IsMonsterComponent());
                     entityWrapper.setComponent(new TitleComponent("Baron Nashor"));
                     entityWrapper.setComponent(new ModelComponent("Models/cow/skin_baron.xml"));
                     EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());

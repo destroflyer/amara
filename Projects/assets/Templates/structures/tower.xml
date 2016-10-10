@@ -1,7 +1,8 @@
 <template>
     <entity>
-        <isStructure/>
         <name>Tower</name>
+        <isStructure/>
+        <isAlwaysVisible/>
         <!--model-->
         <model>Models/tower/skin.xml</model>
         <!--physics-->

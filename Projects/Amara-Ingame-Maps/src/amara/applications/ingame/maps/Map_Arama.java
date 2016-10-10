@@ -115,8 +115,9 @@ public class Map_Arama extends Map{
             fountainBuffArea_Enemies.setComponent(new AreaSourceComponent(fountain.getId()));
             //Nexus
             EntityWrapper nexus = entityWorld.getWrapped(entityWorld.createEntity());
-            nexus.setComponent(new IsStructureComponent());
             nexus.setComponent(new NameComponent("Nexus"));
+            nexus.setComponent(new IsStructureComponent());
+            nexus.setComponent(new IsAlwaysVisibleComponent());
             nexus.setComponent(new TeamModelComponent("Models/3dsa_fantasy_forest_waypoint_base/skin_nexus.xml"));
             nexus.setComponent(new PositionComponent(new Vector2f(nexiX[i], laneCenterY)));
             nexus.setComponent(new DirectionComponent(new Vector2f(0, -1)));
@@ -132,6 +133,7 @@ public class Map_Arama extends Map{
         }
         for(int i=0;i<2;i++){
             EntityWrapper shop = entityWorld.getWrapped(entityWorld.createEntity());
+            shop.setComponent(new IsAlwaysVisibleComponent());
             shop.setComponent(new ModelComponent("Models/chest/skin.xml"));
             shop.setComponent(new PositionComponent(new Vector2f(((i == 0)?410:115), laneCenterY)));
             shop.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));

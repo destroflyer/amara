@@ -1,7 +1,7 @@
 <template>
     <entity>
-        <isMonster/>
         <name>Forest Monster</name>
+        <isMonster/>
         <!--model-->
         <model>Models/forest_monster/skin.xml</model>
         <idleAnimation>

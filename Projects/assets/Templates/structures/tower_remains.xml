@@ -1,5 +1,6 @@
 <template>
     <entity>
+        <isAlwaysVisible/>
         <model>Models/tower_remains/skin.xml</model>
     </entity>
 </template>

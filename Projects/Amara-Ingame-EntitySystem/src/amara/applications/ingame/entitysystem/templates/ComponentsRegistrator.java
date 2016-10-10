@@ -4073,6 +4073,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.IsAliveComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent>("isAlwaysVisible"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsCastingComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.IsCastingComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);

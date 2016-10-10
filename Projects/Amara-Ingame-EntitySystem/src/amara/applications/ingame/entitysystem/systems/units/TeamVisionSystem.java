@@ -37,7 +37,7 @@ public class TeamVisionSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         changedVisionTeams.clear();
         changedVisionEntites.clear();
-        ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class, SightRangeComponent.class, TeamComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class, SightRangeComponent.class, TeamComponent.class, IsAlwaysVisibleComponent.class);
         //New
         for(int entity : observer.getNew().getEntitiesWithAny(PositionComponent.class, SightRangeComponent.class)){
             updateTeamVision(entityWorld, entity);
@@ -47,6 +47,9 @@ public class TeamVisionSystem implements EntitySystem{
             int teamEntity = entityWorld.getComponent(entity, TeamComponent.class).getTeamEntity();
             currentTeams.put(entity, teamEntity);
             updateTeamVision(entityWorld, entity);
+            changedVisionEntites.add(entity);
+        }
+        for(int entity : observer.getNew().getEntitiesWithAny(IsAlwaysVisibleComponent.class)){
             changedVisionEntites.add(entity);
         }
         //Changed
@@ -65,6 +68,9 @@ public class TeamVisionSystem implements EntitySystem{
         for(int entity : observer.getRemoved().getEntitiesWithAll(PositionComponent.class, SightRangeComponent.class, TeamComponent.class)){
             removeOldTeamVision(entity);
             entityWorld.removeComponent(entity, IsVisibleForTeamsComponent.class);
+        }
+        for(int entity : observer.getRemoved().getEntitiesWithAny(IsAlwaysVisibleComponent.class)){
+            changedVisionEntites.add(entity);
         }
         //Update IsVisibleForTeamsComponent
         for(int entity : entityWorld.getEntitiesWithAll(PositionComponent.class)){
@@ -94,24 +100,31 @@ public class TeamVisionSystem implements EntitySystem{
     
     private void updateIsVisibleForTeams(EntityWorld entityWorld, int entity){
         boolean[] isVisibleForTeams = new boolean[teamsCount];
-        Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
-        TeamComponent teamComponent = entityWorld.getComponent(entity, TeamComponent.class);
-        if(changedVisionEntites.contains(entity)){
+        if(entityWorld.hasComponent(entity, IsAlwaysVisibleComponent.class)){
             for(int i=0;i<isVisibleForTeams.length;i++){
-                int teamEntity = i;
-                isVisibleForTeams[i] = isVisibleForTeam(teamEntity, teamComponent, position);
+                isVisibleForTeams[i] = true;
             }
         }
         else{
-            IsVisibleForTeamsComponent isVisibleForTeamsComponent = entityWorld.getComponent(entity, IsVisibleForTeamsComponent.class);
-            if(isVisibleForTeamsComponent != null){
-                for(int i=0;i<isVisibleForTeamsComponent.isVisibleForTeams().length;i++){
-                    isVisibleForTeams[i] = isVisibleForTeamsComponent.isVisibleForTeams()[i];
+            Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
+            TeamComponent teamComponent = entityWorld.getComponent(entity, TeamComponent.class);
+            if(changedVisionEntites.contains(entity)){
+                for(int i=0;i<isVisibleForTeams.length;i++){
+                    int teamEntity = i;
+                    isVisibleForTeams[i] = isVisibleForTeam(teamEntity, teamComponent, position);
                 }
             }
-            for(int teamEntity : changedVisionTeams){
-                int teamIndex = teamEntity;
-                isVisibleForTeams[teamIndex] = isVisibleForTeam(teamEntity, teamComponent, position);
+            else{
+                IsVisibleForTeamsComponent isVisibleForTeamsComponent = entityWorld.getComponent(entity, IsVisibleForTeamsComponent.class);
+                if(isVisibleForTeamsComponent != null){
+                    for(int i=0;i<isVisibleForTeamsComponent.isVisibleForTeams().length;i++){
+                        isVisibleForTeams[i] = isVisibleForTeamsComponent.isVisibleForTeams()[i];
+                    }
+                }
+                for(int teamEntity : changedVisionTeams){
+                    int teamIndex = teamEntity;
+                    isVisibleForTeams[teamIndex] = isVisibleForTeam(teamEntity, teamComponent, position);
+                }
             }
         }
         entityWorld.setComponent(entity, new IsVisibleForTeamsComponent(isVisibleForTeams));

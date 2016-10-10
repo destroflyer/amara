@@ -45,8 +45,9 @@ public class Map_Etherdesert extends Map{
         audioBackgroundMusic.setComponent(new StartPlayingAudioComponent());
         //Nexus
         EntityWrapper nexus = entityWorld.getWrapped(entityWorld.createEntity());
-        nexus.setComponent(new IsStructureComponent());
         nexus.setComponent(new NameComponent("Nexus"));
+        nexus.setComponent(new IsStructureComponent());
+        nexus.setComponent(new IsAlwaysVisibleComponent());
         nexus.setComponent(new ModelComponent("Models/column/skin_nexus.xml"));
         nexus.setComponent(new PositionComponent(new Vector2f(96, 87.75f)));
         nexus.setComponent(new DirectionComponent(new Vector2f(0, -1)));

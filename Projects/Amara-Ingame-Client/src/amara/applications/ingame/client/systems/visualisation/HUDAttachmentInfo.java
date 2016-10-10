@@ -26,7 +26,6 @@ public class HUDAttachmentInfo{
     private Vector3f hudOffset;
     private boolean followEntity;
     private Vector2f fixedGameLocation;
-    private boolean isVisible;
 
     public int getEntity(){
         return entity;
@@ -54,13 +53,5 @@ public class HUDAttachmentInfo{
 
     public Vector2f getFixedGameLocation(){
         return fixedGameLocation;
-    }
-
-    public void setIsVisible(boolean isVisible){
-        this.isVisible = isVisible;
-    }
-
-    public boolean isVisible(){
-        return isVisible;
     }
 }
