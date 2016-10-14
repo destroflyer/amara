@@ -137,12 +137,12 @@ public class Map_Testmap extends Map{
         forestMonsterCamp.setComponent(new CampSpawnComponent());
         //Bush
         EntityWrapper bush = entityWorld.getWrapped(entityWorld.createEntity());
+        bush.setComponent(new IsHiddenAreaComponent());
+        bush.setComponent(new IsAlwaysVisibleComponent());
         bush.setComponent(new PositionComponent(new Vector2f(47, 8.5f)));
-        bush.setComponent(new HitboxComponent(new Rectangle(12, 15)));
         bush.setComponent(new HitboxComponent(new RegularCyclic(6, 6)));
         bush.setComponent(new HitboxActiveComponent());
         bush.setComponent(new CollisionGroupComponent(CollisionGroupComponent.NONE, CollisionGroupComponent.UNITS));
-        bush.setComponent(new IsHiddenAreaComponent());
         //Boss
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
         boss.setComponent(new NameComponent("Yalee"));

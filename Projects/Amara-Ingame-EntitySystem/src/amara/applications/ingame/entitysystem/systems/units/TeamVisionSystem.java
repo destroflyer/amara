@@ -83,7 +83,7 @@ public class TeamVisionSystem implements EntitySystem{
         }
         //Update IsVisibleForTeamsComponent
         if((changedVisionEntities.size() > 0) || haveHiddenAreasChanged){
-            for(int entity : entityWorld.getEntitiesWithAll(ModelComponent.class, PositionComponent.class)){
+            for(int entity : entityWorld.getEntitiesWithAll(PositionComponent.class)){
                 updateIsVisibleForTeams(entityWorld, entity);
             }
         }
