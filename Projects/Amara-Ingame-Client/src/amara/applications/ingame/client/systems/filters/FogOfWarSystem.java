@@ -21,7 +21,7 @@ import amara.libraries.entitysystem.*;
 import amara.libraries.physics.PolyHelper;
 import amara.libraries.physics.shapes.*;
 import amara.libraries.physics.shapes.PolygonMath.*;
-import amara.libraries.physics.shapes.vision.MergedVision;
+import amara.libraries.physics.shapes.vision.*;
 
 /**
  *
@@ -39,7 +39,7 @@ public class FogOfWarSystem implements EntitySystem{
             new Vector2D(mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight()),
             new Vector2D(mapPhysicsInformation.getWidth(), 0)
         };
-        teamVision = new MergedVision(mapBorderPoints, mapPhysicsInformation.getObstacles());
+        teamVision = new MergedVision(mapBorderPoints, VisionObstacle.generateDefaultObstacles(mapPhysicsInformation.getObstacles()));
         float resolutionFactor = Settings.getFloat("fog_of_war_resolution");
         fogImage = new PaintableImage((int) (mapPhysicsInformation.getWidth() * resolutionFactor), (int) (mapPhysicsInformation.getHeight() * resolutionFactor));
         fogRaster = new Raster(fogImage, resolutionFactor, 80, 255);
@@ -85,12 +85,25 @@ public class FogOfWarSystem implements EntitySystem{
     }
     
     private void updateFogOfWar(EntityWorld entityWorld){
-        ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, IsHiddenAreaComponent.class, PositionComponent.class);
+        //Hidden areas
+        for(int entity : observer.getNew().getEntitiesWithAll(IsHiddenAreaComponent.class)){
+            HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
+            if(hitboxComponent != null){
+                teamVision.setObstacle(entity, new VisionObstacle((ConvexShape) hitboxComponent.getShape(), false));
+                isUpdateNeeded = true;
+            }
+        }
+        for(int entity : observer.getRemoved().getEntitiesWithAll(IsHiddenAreaComponent.class)){
+            teamVision.removeObstacle(entity);
+            isUpdateNeeded = true;
+        }
+        //Moved units
         for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
-            checkChangedPositionComponent(entityWorld, entity);
+            checkChangedPosition(entityWorld, entity);
         }
         for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
-            checkChangedPositionComponent(entityWorld, entity);
+            checkChangedPosition(entityWorld, entity);
         }
         if(isUpdateNeeded){
             updateFogTexture_PlayerSight(entityWorld);
@@ -99,7 +112,7 @@ public class FogOfWarSystem implements EntitySystem{
         timeSinceLastUpdate = 0;
     }
     
-    private void checkChangedPositionComponent(EntityWorld entityWorld, int entity){
+    private void checkChangedPosition(EntityWorld entityWorld, int entity){
         if(entityWorld.hasComponent(entity, SightRangeComponent.class) && playerTeamSystem.isAllied(entityWorld, entity)){
             isUpdateNeeded = true;
         }

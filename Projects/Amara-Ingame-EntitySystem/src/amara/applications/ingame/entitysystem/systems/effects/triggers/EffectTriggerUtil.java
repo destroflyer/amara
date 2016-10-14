@@ -120,6 +120,6 @@ public class EffectTriggerUtil{
                 tmpTargetEntities.add(customTargetEntity);
             }
         }
-        return Util.convertToArray(tmpTargetEntities);
+        return Util.convertToArray_Integer(tmpTargetEntities);
     }
 }

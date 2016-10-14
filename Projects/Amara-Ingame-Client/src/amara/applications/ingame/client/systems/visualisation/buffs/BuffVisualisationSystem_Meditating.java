@@ -298,7 +298,7 @@ public class BuffVisualisationSystem_Meditating extends BuffVisualisationSystem{
             emitter.setEnabled(true);
             for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(emitter.getParticleNode())){
                 geometry.getMaterial().getAdditionalRenderState().setDepthTest(false);
-                geometry.setUserData("layer", 1);
+                geometry.setUserData("layer", VISUALISATION_LAYER);
             }
         }
     

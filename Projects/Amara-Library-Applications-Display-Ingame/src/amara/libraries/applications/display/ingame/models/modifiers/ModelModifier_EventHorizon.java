@@ -48,7 +48,7 @@ public class ModelModifier_EventHorizon extends ModelModifier{
             particleEmitter.setFacingVelocity(true);
             particleEmitter.setQueueBucket(RenderQueue.Bucket.Opaque);
             particleEmitter.getMaterial().getAdditionalRenderState().setDepthTest(false);
-            particleEmitter.setUserData("layer", 1);
+            particleEmitter.setUserData("layer", 5);
             particleEmitter.updateLogicalState(10);
             float progress = ((i + 0.5f) * (FastMath.TWO_PI / 5));
             float x = (FastMath.sin(progress) * radius);

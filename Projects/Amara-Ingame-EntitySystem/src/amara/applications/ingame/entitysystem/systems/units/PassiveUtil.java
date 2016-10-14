@@ -73,7 +73,7 @@ public class PassiveUtil{
                 tmpPassiveEntities_Changed.add(uniquePassiveEntity);
             }
         }
-        entityWorld.setComponent(targetEntity, new CurrentPassivesComponent(Util.convertToArray(tmpPassiveEntities_Current)));
+        entityWorld.setComponent(targetEntity, new CurrentPassivesComponent(Util.convertToArray_Integer(tmpPassiveEntities_Current)));
         for(int passiveEntity : tmpPassiveEntities_Changed){
             int[] effectTriggersEntities;
             if(addedOrRemoved){

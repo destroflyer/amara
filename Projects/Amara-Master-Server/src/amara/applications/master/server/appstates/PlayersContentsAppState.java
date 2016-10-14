@@ -54,7 +54,7 @@ public class PlayersContentsAppState extends ServerBaseAppState{
                 }
                 result_Inventory.close();
                 GameCharacter character = new GameCharacter(characterID, characterName, characterTitle, characterLore, characterIsPublic, tmpOwnedSkins.toArray(new GameCharacterSkin[tmpOwnedItems.size()]));
-                ownedCharacters.add(new OwnedGameCharacter(character, activeSkinID, Util.convertToArray(tmpInventory)));
+                ownedCharacters.add(new OwnedGameCharacter(character, activeSkinID, Util.convertToArray_Integer(tmpInventory)));
             }
             result_UserCharacters.close();
             return ownedCharacters.toArray(new OwnedGameCharacter[0]);

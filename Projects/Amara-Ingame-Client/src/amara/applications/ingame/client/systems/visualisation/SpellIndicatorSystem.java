@@ -94,7 +94,7 @@ public class SpellIndicatorSystem implements EntitySystem{
         material.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
         material.getAdditionalRenderState().setDepthTest(false);
         texture.setMaterial(material);
-        texture.setUserData("layer", 1);
+        texture.setUserData("layer", 2);
         return texture;
     }
 }

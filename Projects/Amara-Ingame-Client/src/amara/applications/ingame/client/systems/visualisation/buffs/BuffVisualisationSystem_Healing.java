@@ -36,7 +36,7 @@ public class BuffVisualisationSystem_Healing extends BuffVisualisationSystem{
         particleEmitter.getParticleInfluencer().setInitialVelocity(new Vector3f(0, 0, 0));
         particleEmitter.setQueueBucket(RenderQueue.Bucket.Opaque);
         particleEmitter.getMaterial().getAdditionalRenderState().setDepthTest(false);
-        particleEmitter.setUserData("layer", 1);
+        particleEmitter.setUserData("layer", VISUALISATION_LAYER);
         //[jME 3.1 Master] Can somehow throw a multithreading error otherwise
         particleEmitter.updateLogicalState(10);
         return simpleParticleEmitter;

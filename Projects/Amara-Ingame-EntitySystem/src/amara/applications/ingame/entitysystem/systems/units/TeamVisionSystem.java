@@ -9,11 +9,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import com.jme3.math.Vector2f;
-import amara.applications.ingame.entitysystem.components.physics.PositionComponent;
+import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.units.*;
+import amara.applications.ingame.entitysystem.components.visuals.ModelComponent;
 import amara.libraries.entitysystem.*;
 import amara.libraries.physics.shapes.*;
-import amara.libraries.physics.shapes.vision.MergedVision;
+import amara.libraries.physics.shapes.vision.*;
 
 /**
  *
@@ -21,60 +22,70 @@ import amara.libraries.physics.shapes.vision.MergedVision;
  */
 public class TeamVisionSystem implements EntitySystem{
 
-    public TeamVisionSystem(int teamsCount, List<ConvexShape> obstacles){
-        this.teamsCount = teamsCount;
-        this.obstacles = obstacles;
+    public TeamVisionSystem(int teamsCount, List<ConvexShape> mapObstacles){
         teamVisions = new MergedVision[teamsCount];
+        LinkedList<VisionObstacle> visionObstacles = VisionObstacle.generateDefaultObstacles(mapObstacles);
+        for(int i=0;i<teamVisions.length;i++){
+            teamVisions[i] = new MergedVision(visionObstacles);
+        }
     }
-    private int teamsCount;
-    private List<ConvexShape> obstacles;
     private MergedVision[] teamVisions;
     private HashMap<Integer, Integer> currentTeams = new HashMap<Integer, Integer>();
+    private LinkedList<Integer> changedVisionEntities = new LinkedList<Integer>();
     private LinkedList<Integer> changedVisionTeams = new LinkedList<Integer>();
-    private LinkedList<Integer> changedVisionEntites = new LinkedList<Integer>();
+    private boolean haveHiddenAreasChanged;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
+        changedVisionEntities.clear();
         changedVisionTeams.clear();
-        changedVisionEntites.clear();
-        ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class, SightRangeComponent.class, TeamComponent.class, IsAlwaysVisibleComponent.class);
+        haveHiddenAreasChanged = false;
+        ComponentMapObserver observer = entityWorld.requestObserver(this, IsHiddenAreaComponent.class, PositionComponent.class, SightRangeComponent.class, TeamComponent.class, IsAlwaysVisibleComponent.class);
+        //Update hidden areas
+        for(int entity : observer.getNew().getEntitiesWithAll(IsHiddenAreaComponent.class)){
+            updateHiddenAreaObstacle(entityWorld, entity);
+        }
+        for(int entity : observer.getRemoved().getEntitiesWithAny(IsHiddenAreaComponent.class)){
+            for(MergedVision teamVision : teamVisions){
+                teamVision.removeObstacle(entity);
+            }
+            haveHiddenAreasChanged = true;
+        }        
         //New
         for(int entity : observer.getNew().getEntitiesWithAny(PositionComponent.class, SightRangeComponent.class)){
             updateTeamVision(entityWorld, entity);
-            changedVisionEntites.add(entity);
         }
         for(int entity : observer.getNew().getEntitiesWithAny(TeamComponent.class)){
             int teamEntity = entityWorld.getComponent(entity, TeamComponent.class).getTeamEntity();
             currentTeams.put(entity, teamEntity);
             updateTeamVision(entityWorld, entity);
-            changedVisionEntites.add(entity);
         }
         for(int entity : observer.getNew().getEntitiesWithAny(IsAlwaysVisibleComponent.class)){
-            changedVisionEntites.add(entity);
+            changedVisionEntities.add(entity);
         }
         //Changed
         for(int entity : observer.getChanged().getEntitiesWithAny(PositionComponent.class, SightRangeComponent.class)){
             updateTeamVision(entityWorld, entity);
-            changedVisionEntites.add(entity);
         }
         for(int entity : observer.getChanged().getEntitiesWithAny(TeamComponent.class)){
             removeOldTeamVision(entity);
             int teamEntity = entityWorld.getComponent(entity, TeamComponent.class).getTeamEntity();
             currentTeams.put(entity, teamEntity);
             updateTeamVision(entityWorld, entity);
-            changedVisionEntites.add(entity);
         }
         //Removed
-        for(int entity : observer.getRemoved().getEntitiesWithAll(PositionComponent.class, SightRangeComponent.class, TeamComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(PositionComponent.class, SightRangeComponent.class, TeamComponent.class)){
             removeOldTeamVision(entity);
             entityWorld.removeComponent(entity, IsVisibleForTeamsComponent.class);
         }
         for(int entity : observer.getRemoved().getEntitiesWithAny(IsAlwaysVisibleComponent.class)){
-            changedVisionEntites.add(entity);
+            changedVisionEntities.add(entity);
         }
         //Update IsVisibleForTeamsComponent
-        for(int entity : entityWorld.getEntitiesWithAll(PositionComponent.class)){
-            updateIsVisibleForTeams(entityWorld, entity);
+        if((changedVisionEntities.size() > 0) || haveHiddenAreasChanged){
+            for(int entity : entityWorld.getEntitiesWithAll(ModelComponent.class, PositionComponent.class)){
+                updateIsVisibleForTeams(entityWorld, entity);
+            }
         }
     }
     
@@ -84,22 +95,35 @@ public class TeamVisionSystem implements EntitySystem{
             SightRangeComponent sightRangeComponent = entityWorld.getComponent(entity, SightRangeComponent.class);
             if(sightRangeComponent != null){
                 Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
-                MergedVision teamVision = requestTeamVision(teamComponent.getTeamEntity());
+                MergedVision teamVision = getTeamVision(teamComponent.getTeamEntity());
                 teamVision.setVision(entity, new Vector2D(position.getX(), position.getY()), sightRangeComponent.getRange());
                 changedVisionTeams.add(teamComponent.getTeamEntity());
             }
         }
+        changedVisionEntities.add(entity);
     }
     
     private void removeOldTeamVision(int entity){
-        int oldTeamEntity = currentTeams.get(entity);
-        MergedVision oldTeamVision = requestTeamVision(oldTeamEntity);
-        oldTeamVision.removeVision(entity);
-        changedVisionTeams.add(oldTeamEntity);
+        Integer oldTeamEntity = currentTeams.get(entity);
+        if(oldTeamEntity != null){
+            MergedVision oldTeamVision = getTeamVision(oldTeamEntity);
+            oldTeamVision.removeVision(entity);
+            changedVisionTeams.add(oldTeamEntity);
+        }
+    }
+    
+    private void updateHiddenAreaObstacle(EntityWorld entityWorld, int entity){
+        HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
+        if(hitboxComponent != null){
+            for(MergedVision teamVision : teamVisions){
+                teamVision.setObstacle(entity, new VisionObstacle((ConvexShape) hitboxComponent.getShape(), false));
+            }
+            haveHiddenAreasChanged = true;
+        }
     }
     
     private void updateIsVisibleForTeams(EntityWorld entityWorld, int entity){
-        boolean[] isVisibleForTeams = new boolean[teamsCount];
+        boolean[] isVisibleForTeams = new boolean[teamVisions.length];
         if(entityWorld.hasComponent(entity, IsAlwaysVisibleComponent.class)){
             for(int i=0;i<isVisibleForTeams.length;i++){
                 isVisibleForTeams[i] = true;
@@ -108,13 +132,16 @@ public class TeamVisionSystem implements EntitySystem{
         else{
             Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
             TeamComponent teamComponent = entityWorld.getComponent(entity, TeamComponent.class);
-            if(changedVisionEntites.contains(entity)){
+            if(changedVisionEntities.contains(entity)){
                 for(int i=0;i<isVisibleForTeams.length;i++){
                     int teamEntity = i;
                     isVisibleForTeams[i] = isVisibleForTeam(teamEntity, teamComponent, position);
                 }
             }
             else{
+                if(changedVisionTeams.isEmpty()){
+                    return;
+                }
                 IsVisibleForTeamsComponent isVisibleForTeamsComponent = entityWorld.getComponent(entity, IsVisibleForTeamsComponent.class);
                 if(isVisibleForTeamsComponent != null){
                     for(int i=0;i<isVisibleForTeamsComponent.isVisibleForTeams().length;i++){
@@ -135,18 +162,25 @@ public class TeamVisionSystem implements EntitySystem{
             return true;
         }
         else{
-            MergedVision teamVision = requestTeamVision(teamEntity);
+            MergedVision teamVision = getTeamVision(teamEntity);
             return teamVision.isVisible(new Vector2D(position.getX(), position.getY()));
         }
     }
     
-    private MergedVision requestTeamVision(int teamEntity){
+    private MergedVision getTeamVision(int teamEntity){
         int teamIndex = teamEntity;
-        MergedVision teamVision = teamVisions[teamIndex];
-        if(teamVision == null){
-            teamVision = new MergedVision(obstacles);
-            teamVisions[teamIndex] = teamVision;
+        return teamVisions[teamIndex];
+    }
+    
+    public static boolean hasTeamSight(EntityWorld entityWorld, int entity, int targetEntity){
+        TeamComponent teamComponent = entityWorld.getComponent(entity, TeamComponent.class);
+        if(teamComponent != null){
+            IsVisibleForTeamsComponent isVisibleForTeamsComponent = entityWorld.getComponent(targetEntity, IsVisibleForTeamsComponent.class);
+            if(isVisibleForTeamsComponent != null){
+                int teamIndex = teamComponent.getTeamEntity();
+                return isVisibleForTeamsComponent.isVisibleForTeams()[teamIndex];
+            }
         }
-        return teamVision;
+        return false;
     }
 }

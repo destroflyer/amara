@@ -44,8 +44,12 @@ public class OwnTeamVisionSystem implements EntitySystem{
     }
     
     public boolean isVisible(EntityWorld entityWorld, int entity){
-        boolean[] isVisibleForTeams = entityWorld.getComponent(entity, IsVisibleForTeamsComponent.class).isVisibleForTeams();
-        return isVisibleForTeams[playerTeamSystem.getPlayerTeamEntity()];
+        IsVisibleForTeamsComponent isVisibleForTeamsComponent = entityWorld.getComponent(entity, IsVisibleForTeamsComponent.class);
+        if(isVisibleForTeamsComponent != null){
+            boolean[] isVisibleForTeams = isVisibleForTeamsComponent.isVisibleForTeams();
+            return isVisibleForTeams[playerTeamSystem.getPlayerTeamEntity()];
+        }
+        return false;
     }
     
     private void updateNode(int entity, boolean isVisible){

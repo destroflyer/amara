@@ -30,7 +30,6 @@ public class PopupSystem extends TopHUDAttachmentSystem{
         super(hudAttachmentsSystem, entityHeightMap, PopupComponent.class);
         hudOffset = new Vector3f(0, 18, 2);
     }
-    private static final String NAME_TEXT = "popup_text";
     private final float textSize = 15;
     private final float width = 1000;
     
@@ -47,7 +46,6 @@ public class PopupSystem extends TopHUDAttachmentSystem{
         node.attachChild(geometry);
         BitmapFont font = MaterialFactory.getAssetManager().loadFont("Interface/fonts/Verdana_18.fnt");
         BitmapText bitmapText = new BitmapText(font);
-        bitmapText.setName(NAME_TEXT);
         bitmapText.setSize(textSize);
         bitmapText.setColor(ColorRGBA.Black);
         bitmapText.setBox(new Rectangle((-1 * (width / 2)), 0, width, 1));

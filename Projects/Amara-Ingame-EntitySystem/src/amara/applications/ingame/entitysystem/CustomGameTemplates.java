@@ -120,9 +120,9 @@ public class CustomGameTemplates{
                     entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(3));
                     entityWrapper.setComponent(new BaseAttributesComponent(baseAttributesEntity));
                     entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+                    entityWrapper.setComponent(new SightRangeComponent(28));
                     entityWrapper.setComponent(new IsTargetableComponent());
                     entityWrapper.setComponent(new IsVulnerableComponent());
-                    entityWrapper.setComponent(new SightRangeComponent(28));
 
                     EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/melee_autoattack");
                     entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
@@ -168,9 +168,9 @@ public class CustomGameTemplates{
                     entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(3));
                     entityWrapper.setComponent(new BaseAttributesComponent(baseAttributesEntity));
                     entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+                    entityWrapper.setComponent(new SightRangeComponent(28));
                     entityWrapper.setComponent(new IsTargetableComponent());
                     entityWrapper.setComponent(new IsVulnerableComponent());
-                    entityWrapper.setComponent(new SightRangeComponent(28));
 
                     EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack,Models/3dsa_archer_arrow/skin.xml");
                     entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));

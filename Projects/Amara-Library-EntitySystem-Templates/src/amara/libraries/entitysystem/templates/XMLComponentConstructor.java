@@ -53,7 +53,7 @@ public abstract class XMLComponentConstructor<T>{
             childEntities.add(parseEntity(attributeValue));
             parameterIndex++;
         }
-        return Util.convertToArray(childEntities);
+        return Util.convertToArray_Integer(childEntities);
     }
 
     protected int createChildEntity(int index, String parameterName){

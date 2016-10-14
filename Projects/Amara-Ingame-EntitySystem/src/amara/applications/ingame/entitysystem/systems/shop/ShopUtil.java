@@ -80,7 +80,7 @@ public class ShopUtil{
                 if(goldComponent != null){
                     entityWorld.setComponent(entity, new GoldComponent(goldComponent.getGold() - goldCost));
                 }
-                entityWorld.setComponent(entity, new InventoryComponent(Util.convertToArray(tmpItemEntities)));
+                entityWorld.setComponent(entity, new InventoryComponent(Util.convertToArray_Integer(tmpItemEntities)));
                 entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
                 return true;
             }

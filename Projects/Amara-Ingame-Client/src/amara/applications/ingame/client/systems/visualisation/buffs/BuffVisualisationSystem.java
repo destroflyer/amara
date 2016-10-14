@@ -22,6 +22,7 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
         this.entitySceneMap = entitySceneMap;
         this.visualisationName = visualisationName;
     }
+    protected final static int VISUALISATION_LAYER = 5;
     protected EntitySceneMap entitySceneMap;
     private String visualisationName;
     protected boolean scaleVisualisation = true;

@@ -55,8 +55,8 @@ public class Map_Testmap extends Map{
         for(int x=0;x<5;x++){
             for(int y=0;y<4;y++){
                 EntityWrapper unit = entityWorld.getWrapped(entityWorld.createEntity());
-                unit.setComponent(new IsMonsterComponent());
                 unit.setComponent(new NameComponent("Test Wizard"));
+                unit.setComponent(new IsMonsterComponent());
                 unit.setComponent(new ModelComponent("Models/wizard/skin_default.xml"));
                 EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
                 idleAnimation.setComponent(new NameComponent("idle"));
@@ -135,11 +135,20 @@ public class Map_Testmap extends Map{
         forestMonsterCamp.setComponent(new CampSpawnInformationComponent(forestMonsterCamp_SpawnInformation.getId()));
         forestMonsterCamp.setComponent(new CampRespawnDurationComponent(5));
         forestMonsterCamp.setComponent(new CampSpawnComponent());
+        //Bush
+        EntityWrapper bush = entityWorld.getWrapped(entityWorld.createEntity());
+        bush.setComponent(new PositionComponent(new Vector2f(47, 8.5f)));
+        bush.setComponent(new HitboxComponent(new Rectangle(12, 15)));
+        bush.setComponent(new HitboxComponent(new RegularCyclic(6, 6)));
+        bush.setComponent(new HitboxActiveComponent());
+        bush.setComponent(new CollisionGroupComponent(CollisionGroupComponent.NONE, CollisionGroupComponent.UNITS));
+        bush.setComponent(new IsHiddenAreaComponent());
         //Boss
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
-        boss.setComponent(new IsMonsterComponent());
         boss.setComponent(new NameComponent("Yalee"));
         boss.setComponent(new DescriptionComponent("Stupid."));
+        boss.setComponent(new IsMonsterComponent());
+        boss.setComponent(new IsAlwaysVisibleComponent());
         boss.setComponent(new ModelComponent("Models/cow/skin_default.xml"));
         EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
         walkAnimation.setComponent(new NameComponent("walk"));

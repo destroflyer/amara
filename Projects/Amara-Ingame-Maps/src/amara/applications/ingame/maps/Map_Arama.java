@@ -122,12 +122,13 @@ public class Map_Arama extends Map{
             nexus.setComponent(new PositionComponent(new Vector2f(nexiX[i], laneCenterY)));
             nexus.setComponent(new DirectionComponent(new Vector2f(0, -1)));
             nexus.setComponent(new HitboxComponent(new Circle(3.5f)));
-            nexus.setComponent(new IsAliveComponent());
             int baseAttributesEntity = entityWorld.createEntity();
             entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(1000));
             entityWorld.setComponent(baseAttributesEntity, new BonusFlatHealthRegenerationComponent(2));
             nexus.setComponent(new BaseAttributesComponent(baseAttributesEntity));
             nexus.setComponent(new RequestUpdateAttributesComponent());
+            nexus.setComponent(new SightRangeComponent(28));
+            nexus.setComponent(new IsAliveComponent());
             nexus.setComponent(new TeamComponent(i + 1));
             nexi[i] = nexus;
         }

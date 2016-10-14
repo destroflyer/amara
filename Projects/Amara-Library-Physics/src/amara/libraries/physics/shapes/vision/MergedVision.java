@@ -16,18 +16,20 @@ import amara.libraries.physics.shapes.*;
  */
 public class MergedVision{
 
-    public MergedVision(List<ConvexShape> obstacles){
-        this(new Vector2D[0], obstacles);
+    public MergedVision(List<VisionObstacle> fixedObstacles){
+        this(new Vector2D[0], fixedObstacles);
     }
 
-    public MergedVision(Vector2D[] borderPoints, List<ConvexShape> obstacles){
+    public MergedVision(Vector2D[] borderPoints, List<VisionObstacle> fixedObstacles){
         this.borderPoints = borderPoints;
-        this.obstacles = obstacles;
+        this.fixedObstacles = fixedObstacles;
     }
     private static final int VISION_CIRCLE_EDGES = 10;
-    private static final Transform2D circleNextPointTransform = new Transform2D(1, ((Math.PI * -2) / VISION_CIRCLE_EDGES), 0, 0);
+    private static final Transform2D circleNextPointTransform_Inside = new Transform2D(1, ((Math.PI * -2) / VISION_CIRCLE_EDGES), 0, 0);
+    private static final Transform2D circleNextPointTransform_Outside = new Transform2D(1, ((Math.PI * 2) / VISION_CIRCLE_EDGES), 0, 0);
     private Vector2D[] borderPoints;
-    private List<ConvexShape> obstacles;
+    private List<VisionObstacle> fixedObstacles;
+    private HashMap<Integer, VisionObstacle> dynamicObstacles = new HashMap<Integer, VisionObstacle>();
     private Vision vision = new Vision();
     private ArrayList<Vector2D> visionEdges = new ArrayList<Vector2D>();
     private HashMap<Double, Circle> visionCircleShapes = new HashMap<Double, Circle>();
@@ -42,13 +44,17 @@ public class MergedVision{
         return false;
     }
     
+    public void setObstacle(int id, VisionObstacle visionObstacle){
+        dynamicObstacles.put(id, visionObstacle);
+    }
+    
+    public void removeObstacle(int id){
+        dynamicObstacles.remove(id);
+    }
+    
     public void setVision(int id, Vector2D position, double sightRange){
         ArrayList<Vector2D> sightOutline = getSightOutline(position, sightRange);
         sightResults.put(id, new SightResult(position, sightOutline));
-    }
-    
-    public SightResult getVision(int id){
-        return sightResults.get(id);
     }
     
     public void removeVision(int id){
@@ -58,22 +64,28 @@ public class MergedVision{
     public ArrayList<Vector2D> getSightOutline(Vector2D position, double sightRange){
         visionEdges.clear();
         addPointEdges(visionEdges, borderPoints, false);
-        addCircleEdges(visionEdges, position, sightRange);
+        addCircleEdges(visionEdges, position, sightRange, true);
         Circle visionCircleShape = getVisionCircleShape(sightRange);
         visionCircleShape.setTransform(new Transform2D(1, 0, position.getX(), position.getY()));
-        for(ConvexShape obstacle : obstacles){
-            if(obstacle.intersects(visionCircleShape)){
-                if(obstacle instanceof SimpleConvexPolygon){
-                    SimpleConvexPolygon simpleConvexPolygon = (SimpleConvexPolygon) obstacle;
-                    addPointEdges(visionEdges, simpleConvexPolygon.getGlobalPoints(), true);
+        addObstacles(visionEdges, visionCircleShape, fixedObstacles);
+        addObstacles(visionEdges, visionCircleShape, dynamicObstacles.values());
+        return vision.sightPolyOutline(position, visionEdges);
+    }
+    
+    private static void addObstacles(List<Vector2D> edges, Circle visionCircleShape, Iterable<VisionObstacle> obstacles){
+        for(VisionObstacle obstacle : obstacles){
+            ConvexShape shape = obstacle.getShape();
+            if(shape.intersects(visionCircleShape)){
+                if(shape instanceof SimpleConvexPolygon){
+                    SimpleConvexPolygon simpleConvexPolygon = (SimpleConvexPolygon) shape;
+                    addPointEdges(edges, simpleConvexPolygon.getGlobalPoints(), obstacle.isBlockingInsideOrOutside());
                 }
-                else if(obstacle instanceof Circle){
-                    Circle circle = (Circle) obstacle;
-                    addCircleEdges(visionEdges, circle.getGlobalPosition(), circle.getGlobalRadius());
+                else if(shape instanceof Circle){
+                    Circle circle = (Circle) shape;
+                    addCircleEdges(edges, circle.getGlobalPosition(), circle.getGlobalRadius(), obstacle.isBlockingInsideOrOutside());
                 }
             }
         }
-        return vision.sightPolyOutline(position, visionEdges);
     }
     
     private static void addPointEdges(List<Vector2D> edges, Vector2D[] points, boolean reversed){
@@ -97,9 +109,10 @@ public class MergedVision{
         }
     }
     
-    private static void addCircleEdges(List<Vector2D> edges, Vector2D position, double radius){
+    private static void addCircleEdges(List<Vector2D> edges, Vector2D position, double radius, boolean reversed){
         Vector2D relativePosition = new Vector2D(0, radius);
         Vector2D firstPoint = null;
+        Transform2D circleNextPointTransform = (reversed?circleNextPointTransform_Inside:circleNextPointTransform_Outside);
         for(int i=0;i<VISION_CIRCLE_EDGES;i++){
             relativePosition = circleNextPointTransform.transform(relativePosition);
             Vector2D point = position.add(relativePosition);

@@ -89,6 +89,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         PositionSystem positionSystem = new PositionSystem(entitySceneMap, mapHeightmap);
         addEntitySystem(positionSystem);
         addEntitySystem(new CollisionDebugSystem(getAppState(MapObstaclesAppState.class).getObstaclesNode()));
+        addEntitySystem(new BushesSystem(entitySceneMap, playerAppState.getPlayerEntity()));
         addEntitySystem(new TeamModelSystem(playerAppState.getPlayerTeamSystem()));
         addEntitySystem(new ModelSystem(entitySceneMap, mainApplication));
         addEntitySystem(new DirectionSystem(entitySceneMap));

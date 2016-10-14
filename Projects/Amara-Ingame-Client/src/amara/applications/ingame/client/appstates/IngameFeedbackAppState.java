@@ -60,7 +60,7 @@ public class IngameFeedbackAppState extends BaseDisplayAppState<IngameClientAppl
             particleEmitter.setFacingVelocity(true);
             particleEmitter.setQueueBucket(RenderQueue.Bucket.Opaque);
             particleEmitter.getMaterial().getAdditionalRenderState().setDepthTest(false);
-            particleEmitter.setUserData("layer", 1);
+            particleEmitter.setUserData("layer", 4);
             Vector3f angleVector = new Vector3f(currentArrowAngle.getX(), 0, currentArrowAngle.getY());
             particleEmitter.setLocalTranslation(angleVector.mult(1.1f));
             JMonkeyUtil.setLocalRotation(particleEmitter, angleVector);

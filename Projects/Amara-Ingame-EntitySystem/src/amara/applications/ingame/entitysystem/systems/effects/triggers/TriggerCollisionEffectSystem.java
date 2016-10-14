@@ -19,15 +19,15 @@ import amara.libraries.physics.intersection.*;
  */
 public class TriggerCollisionEffectSystem implements EntitySystem{
 
-    public TriggerCollisionEffectSystem(IntersectionInformant info){
-        this.info = info;
+    public TriggerCollisionEffectSystem(IntersectionInformant intersectionInformant){
+        this.intersectionInformant = intersectionInformant;
     }
-    private IntersectionInformant info;
+    private IntersectionInformant intersectionInformant;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        IntersectionTracker<Pair<Integer>> tracker = info.getTracker(entityWorld, this);
-        for(Pair<Integer> pair: tracker.getEntries()){
+        IntersectionTracker<Pair<Integer>> tracker = intersectionInformant.getTracker(entityWorld, this);
+        for(Pair<Integer> pair : tracker.getEntries()){
             checkEffectTriggers(entityWorld, pair.getA(), pair.getB());
             checkEffectTriggers(entityWorld, pair.getB(), pair.getA());
         }

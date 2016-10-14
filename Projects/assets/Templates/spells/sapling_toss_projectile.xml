@@ -28,9 +28,9 @@
         </intersectionRules>
         <removeOnMapLeave/>
         <!--stats-->
-        <isAlive/>
         <walkSpeed>5.5</walkSpeed>
         <sightRange>9</sightRange>
+        <isAlive/>
         <!--spells-->
         <autoAttack>
             <entity template="spells/empty_autoattack"/>

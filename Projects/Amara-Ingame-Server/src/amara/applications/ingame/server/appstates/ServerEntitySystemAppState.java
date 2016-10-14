@@ -132,7 +132,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
                     results_UserCharacters.close();
                     character.setComponent(new IsCharacterComponent());
                     character.setComponent(new SightRangeComponent(30));
-                    character.setComponent(new InventoryComponent(Util.convertToArray(inventory)));
+                    character.setComponent(new InventoryComponent(Util.convertToArray_Integer(inventory)));
                     character.setComponent(new GoldComponent(475));
                     character.setComponent(new LevelComponent(1));
                     character.setComponent(new SpellsComponent(new int[0]));
@@ -161,7 +161,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
                         mapSpellsEntities.add(spellEntity);
                     }
                 }
-                character.setComponent(new MapSpellsComponent(Util.convertToArray(mapSpellsEntities)));
+                character.setComponent(new MapSpellsComponent(Util.convertToArray_Integer(mapSpellsEntities)));
                 map.spawnPlayer(entityWorld, playerEntity.getId());
                 player.setEntity(playerEntity.getId());
                 playerIndex++;
@@ -208,6 +208,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownInCombatSystem());
         addEntitySystem(new CheckOpenObjectivesSystem());
         addEntitySystem(new CheckAggroTargetAttackibilitySystem());
+        addEntitySystem(new CheckAggroTargetSightSystem());
         addEntitySystem(new CheckMaximumAggroRangeSystem());
         addEntitySystem(new CheckBuffStacksUpdateAttributesSystem());
         addEntitySystem(new LevelUpSystem());
@@ -324,6 +325,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CheckDistanceLimitMovementsSystem());
         addEntitySystem(new TriggerTargetReachedEffectSystem());
         addEntitySystem(new FinishTargetedMovementsSystem());
+        addEntitySystem(new CheckHiddenAreasSystem(intersectionObserver));
         //Add 1 for the neutral team
         addEntitySystem(new TeamVisionSystem(game.getTeams().length + 1, mapPhysicsInformation.getObstacles()));
         addEntitySystem(new TriggerCollisionEffectSystem(intersectionObserver));

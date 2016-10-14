@@ -196,9 +196,27 @@ public class Util{
         return false;
     }
     
-    public static int[] convertToArray(Collection<Integer> collection){
+    public static short[] convertToArray_Short(Collection<Short> collection){
+        short[] array = new short[collection.size()];
+        Iterator<Short> iterator = collection.iterator();
+        for(int i=0;i<array.length;i++){
+            array[i] = iterator.next();
+        }
+        return array;
+    }
+    
+    public static int[] convertToArray_Integer(Collection<Integer> collection){
         int[] array = new int[collection.size()];
         Iterator<Integer> iterator = collection.iterator();
+        for(int i=0;i<array.length;i++){
+            array[i] = iterator.next();
+        }
+        return array;
+    }
+    
+    public static float[] convertToArray_Float(Collection<Float> collection){
+        float[] array = new float[collection.size()];
+        Iterator<Float> iterator = collection.iterator();
         for(int i=0;i<array.length;i++){
             array[i] = iterator.next();
         }
