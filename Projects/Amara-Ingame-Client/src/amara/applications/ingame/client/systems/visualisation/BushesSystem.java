@@ -69,7 +69,6 @@ public class BushesSystem implements EntitySystem{
         Geometry geometry = new Geometry(null, new BushMesh((SimpleConvexPolygon) shape, 1, 2, 7));
         geometry.setName(GEOMETRY_NAME_BUSH);
         Material material = MaterialFactory.generateLightingMaterial(new ColorRGBA());
-        material.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
         geometry.setMaterial(material);
         node.attachChild(geometry);
         setBushTransparency(entity, false);
@@ -86,13 +85,15 @@ public class BushesSystem implements EntitySystem{
         Material material = geometry.getMaterial();
         if(isTransparent){
             material.setColor("Diffuse", new ColorRGBA(0, 0.3f, 0, 0.5f));
+            material.setColor("Ambient",  new ColorRGBA(0.8f, 1, 0.8f, 1));
             material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
             material.getAdditionalRenderState().setDepthTest(false);
             geometry.setUserData("layer", 1);
             geometry.setShadowMode(RenderQueue.ShadowMode.Receive);
         }
         else{
-            material.setColor("Diffuse", new ColorRGBA(0, 0.3f, 0, 1));
+            material.setColor("Diffuse", new ColorRGBA(0.05f, 0.2f, 0.05f, 1));
+            material.setColor("Ambient",  new ColorRGBA(0.5f, 1f, 0.5f, 1));
             material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Off);
             material.getAdditionalRenderState().setDepthTest(true);
             geometry.setUserData("layer", null);

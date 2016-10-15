@@ -24,6 +24,7 @@ import amara.applications.ingame.entitysystem.components.effects.popups.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.effects.spells.*;
 import amara.applications.ingame.entitysystem.components.effects.units.*;
+import amara.applications.ingame.entitysystem.components.effects.vision.*;
 import amara.applications.ingame.entitysystem.components.effects.visuals.*;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.movements.*;
@@ -233,6 +234,8 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         TriggerSpellEffectsComponent.class,
                         AddGoldComponent.class,
                         CancelActionComponent.class,
+                        AddStealthComponent.class,
+                        RemoveStealthComponent.class,
                         PlayAnimationComponent.class,
                         StopAnimationComponent.class,
                         //specials

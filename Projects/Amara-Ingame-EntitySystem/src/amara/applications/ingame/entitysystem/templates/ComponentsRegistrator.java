@@ -1990,6 +1990,23 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent();
             }
         });
+        //vision
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent>("addStealth"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent>("removeStealth"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent();
+            }
+        });
         //visuals
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.visuals.PlayAnimationComponent.class);
         try{
@@ -4132,6 +4149,14 @@ public class ComponentsRegistrator{
             public amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent construct(){
                 int hiddenAreaEntity = createChildEntity(0, "hiddenAreaEntity");
                 return new amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent(hiddenAreaEntity);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsStealthedComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsStealthedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsStealthedComponent>("isStealthed"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.IsStealthedComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.units.IsStealthedComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsTargetableComponent.class);

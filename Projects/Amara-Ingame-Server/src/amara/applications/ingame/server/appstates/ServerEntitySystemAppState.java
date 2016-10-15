@@ -42,6 +42,7 @@ import amara.applications.ingame.entitysystem.systems.effects.spawns.*;
 import amara.applications.ingame.entitysystem.systems.effects.spells.*;
 import amara.applications.ingame.entitysystem.systems.effects.triggers.*;
 import amara.applications.ingame.entitysystem.systems.effects.units.*;
+import amara.applications.ingame.entitysystem.systems.effects.vision.*;
 import amara.applications.ingame.entitysystem.systems.effects.visuals.*;
 import amara.applications.ingame.entitysystem.systems.general.*;
 import amara.applications.ingame.entitysystem.systems.movement.*;
@@ -289,6 +290,8 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyTriggerSpellEffectsSystem());
         addEntitySystem(new ApplyAddGoldSystem());
         addEntitySystem(new ApplyCancelActionsSystem());
+        addEntitySystem(new ApplyAddStealthSystem());
+        addEntitySystem(new ApplyRemoveStealthSystem());
         addEntitySystem(new ApplyPlayAnimationsSystem());
         addEntitySystem(new ApplyStopAnimationsSystem());
         addEntitySystem(new ApplyAddComponentsSystem());

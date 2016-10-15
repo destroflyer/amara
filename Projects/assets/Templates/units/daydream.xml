@@ -67,7 +67,7 @@
         </autoAttack>
         <learnableSpells>
             <empty/>
-            <empty/>
+            <entity template="spells/camouflage"/>
             <empty/>
             <entity template="spells/hammer_of_wrath"/>
         </learnableSpells>

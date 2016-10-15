@@ -81,23 +81,57 @@ public class BushMesh extends Mesh{
     
     private void addBlade(float x, float y){
         bladePositions.add(new Vector2f(x, y));
-        indices.add((short) (currentIndex + 1));
-        indices.add(currentIndex);
-        indices.add((short) (currentIndex + 2));
-        currentIndex += 3;
-        positions.add(x - (bladeWidth / 2));
+        for(int i=0;i<3;i++){
+            indices.add((short) (currentIndex + 1));
+            indices.add(currentIndex);
+            indices.add((short) (currentIndex + 2));
+            currentIndex += 3;
+        }
+        float distanceToPoints = ((FastMath.sqrt(3) / 3) * bladeWidth);
+        //Side 1
+        positions.add(x - distanceToPoints);
         positions.add(0f);
-        positions.add(y);
-        positions.add(x + (bladeWidth / 2));
+        positions.add(y + distanceToPoints);
+        positions.add(x);
         positions.add(0f);
+        positions.add(y - distanceToPoints);
+        positions.add(x);
+        positions.add(bladeHeight);
         positions.add(y);
+        for(int i=0;i<3;i++){
+            normals.add(1f);
+            normals.add(0f);
+            normals.add(-1f);
+        }
+        //Side 2
+        positions.add(x);
+        positions.add(0f);
+        positions.add(y - distanceToPoints);
+        positions.add(x + distanceToPoints);
+        positions.add(0f);
+        positions.add(y + distanceToPoints);
+        positions.add(x);
+        positions.add(bladeHeight);
+        positions.add(y);
+        for(int i=0;i<3;i++){
+            normals.add(-1f);
+            normals.add(0f);
+            normals.add(-1f);
+        }
+        //Side 3
+        positions.add(x + distanceToPoints);
+        positions.add(0f);
+        positions.add(y + distanceToPoints);
+        positions.add(x - distanceToPoints);
+        positions.add(0f);
+        positions.add(y + distanceToPoints);
         positions.add(x);
         positions.add(bladeHeight);
         positions.add(y);
         for(int i=0;i<3;i++){
             normals.add(0f);
             normals.add(0f);
-            normals.add(-1f);
+            normals.add(1f);
         }
     }
     
