@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <name>Bush</name>
+        <isHiddenArea/>
+        <isAlwaysVisible/>
+        <!--physics-->
+        <collisionGroup targetOf="none" targets="units"/>
+        <hitboxActive/>
+    </entity>
+</template>

@@ -40,6 +40,7 @@ public class FogOfWarSystem implements EntitySystem{
             new Vector2D(mapPhysicsInformation.getWidth(), 0)
         };
         teamVision = new MergedVision(mapBorderPoints, VisionObstacle.generateDefaultObstacles(mapPhysicsInformation.getObstacles()));
+        teamVision.setEnableSightInSolidObstacles(true);
         float resolutionFactor = Settings.getFloat("fog_of_war_resolution");
         fogImage = new PaintableImage((int) (mapPhysicsInformation.getWidth() * resolutionFactor), (int) (mapPhysicsInformation.getHeight() * resolutionFactor));
         fogRaster = new Raster(fogImage, resolutionFactor, 80, 255);

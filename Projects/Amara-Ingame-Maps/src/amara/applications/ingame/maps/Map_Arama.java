@@ -221,6 +221,56 @@ public class Map_Arama extends Map{
                 spawnTrigger.setComponent(new TriggerDelayComponent(1.25f * r));
             }
         }
+        //Bushes
+        float mapHalfWidth = (getPhysicsInformation().getWidth() / 2);
+        for(int i=0;i<2;i++){
+            float factorX = ((i == 0)?1:-1);
+            //Bush Jungle Outer
+            EntityWrapper bush1 = EntityTemplate.createFromTemplate(entityWorld, "other/bush");
+            bush1.setComponent(new PositionComponent(new Vector2f(mapHalfWidth, 0)));
+            bush1.setComponent(new HitboxComponent(new SimpleConvexPolygon(new Vector2D[]{
+                new Vector2D(factorX * (358 - mapHalfWidth), 333),
+                new Vector2D(factorX * (356 - mapHalfWidth), 328),
+                new Vector2D(factorX * (344 - mapHalfWidth), 331),
+                new Vector2D(factorX * (344 - mapHalfWidth), 337)
+            })));
+            //Bush Jungle Inner
+            EntityWrapper bush2 = EntityTemplate.createFromTemplate(entityWorld, "other/bush");
+            bush2.setComponent(new PositionComponent(new Vector2f(mapHalfWidth, 0)));
+            bush2.setComponent(new HitboxComponent(new SimpleConvexPolygon(new Vector2D[]{
+                new Vector2D(factorX * (321 - mapHalfWidth), 337),
+                new Vector2D(factorX * (331 - mapHalfWidth), 338),
+                new Vector2D(factorX * (330 - mapHalfWidth), 332),
+                new Vector2D(factorX * (318 - mapHalfWidth), 331)
+            })));
+            //Bush Lane Outer
+            EntityWrapper bush3 = EntityTemplate.createFromTemplate(entityWorld, "other/bush");
+            bush3.setComponent(new PositionComponent(new Vector2f(mapHalfWidth, 0)));
+            bush3.setComponent(new HitboxComponent(new SimpleConvexPolygon(new Vector2D[]{
+                new Vector2D(factorX * (296 - mapHalfWidth), 244.4),
+                new Vector2D(factorX * (292 - mapHalfWidth), 248.4),
+                new Vector2D(factorX * (284 - mapHalfWidth), 248.4),
+                new Vector2D(factorX * (280 - mapHalfWidth), 244.4)
+            })));
+        }
+        //Bush Boss
+        EntityWrapper bushBoss = EntityTemplate.createFromTemplate(entityWorld, "other/bush");
+        bushBoss.setComponent(new PositionComponent(new Vector2f(mapHalfWidth, 0)));
+        bushBoss.setComponent(new HitboxComponent(new SimpleConvexPolygon(new Vector2D[]{
+            new Vector2D(1 * (271.5 - mapHalfWidth), 304.5),
+            new Vector2D(-1 * (271.5 - mapHalfWidth), 304.5),
+            new Vector2D(-1 * (267.25 - mapHalfWidth), 308),
+            new Vector2D(1 * (267.25 - mapHalfWidth), 308)
+        })));
+        //Bush Lane Inner
+        EntityWrapper bushLaneInner = EntityTemplate.createFromTemplate(entityWorld, "other/bush");
+        bushLaneInner.setComponent(new PositionComponent(new Vector2f(mapHalfWidth, 0)));
+        bushLaneInner.setComponent(new HitboxComponent(new SimpleConvexPolygon(new Vector2D[]{
+            new Vector2D(1 * (275 - mapHalfWidth), 275.5),
+            new Vector2D(-1 * (275 - mapHalfWidth), 275.5),
+            new Vector2D(-1 * (271 - mapHalfWidth), 271.5),
+            new Vector2D(1 * (271 - mapHalfWidth), 271.5)
+        })));
         //Camps
         for(int i=0;i<2;i++){
             EntityWrapper camp = entityWorld.getWrapped(entityWorld.createEntity());

@@ -26,6 +26,7 @@ import amara.applications.master.network.messages.objects.GameSelection;
 import amara.core.settings.Settings;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.*;
+import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *
@@ -117,7 +118,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
         Vector2f cursorPosition = mainApplication.getInputManager().getCursorPosition();
         int tmpCursorHoveredEntity = cursorHoveredEntity;
-        cursorHoveredEntity = getCollisionResultEntity(mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getEntitiesNode(), cursorPosition));
+        cursorHoveredEntity = getHoveredCollisionResults(mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getEntitiesNode(), cursorPosition));
         if(cursorHoveredEntity == -1){
             float alternativeRange = 17;
             Vector2f alternativePosition = new Vector2f();
@@ -131,7 +132,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
                     }
                 }
             }
-            cursorHoveredEntity = getCollisionResultEntity(tmpEntitiesColisionResults);
+            cursorHoveredEntity = getHoveredCollisionResults(tmpEntitiesColisionResults);
         }
         if(cursorHoveredEntity != tmpCursorHoveredEntity){
             if(tmpCursorHoveredEntity != -1){
@@ -143,7 +144,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         }
     }
     
-    private int getCollisionResultEntity(CollisionResults... entitiesColisionResults){
+    private int getHoveredCollisionResults(CollisionResults... entitiesColisionResults){
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
         tmpHoveredEntitiesCount.clear();
         int resultEntity = -1;
@@ -152,26 +153,32 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         for(CollisionResults collisionResults : entitiesColisionResults){
             for(CollisionResult collision : collisionResults){
                 int entity = localEntitySystemAppState.getEntity(collision.getGeometry());
-                /*if((entity != -1) && (collision.getDistance() < minimumDistance)){
-                    resultEntity = entity;
-                    minimumDistance = collision.getDistance();
-                    break;
-                }*/
-                if(entity != -1){
-                    Integer count = tmpHoveredEntitiesCount.get(entity);
-                    if(count == null){
-                        count = 0;
-                    }
-                    count++;
-                    tmpHoveredEntitiesCount.put(entity, count);
-                    if(count > maximumCount){
+                if(canEntityBeHovered(localEntitySystemAppState.getEntityWorld(), entity)){
+                    /*if((entity != -1) && (collision.getDistance() < minimumDistance)){
                         resultEntity = entity;
+                        minimumDistance = collision.getDistance();
+                        break;
+                    }*/
+                    if(entity != -1){
+                        Integer count = tmpHoveredEntitiesCount.get(entity);
+                        if(count == null){
+                            count = 0;
+                        }
+                        count++;
+                        tmpHoveredEntitiesCount.put(entity, count);
+                        if(count > maximumCount){
+                            resultEntity = entity;
+                        }
+                        break;
                     }
-                    break;
                 }
             }
         }
         return resultEntity;
+    }
+    
+    private boolean canEntityBeHovered(EntityWorld entityWorld, int entity){
+        return (entityWorld.getComponent(entity, IsHiddenAreaComponent.class) == null);
     }
 
     @Override

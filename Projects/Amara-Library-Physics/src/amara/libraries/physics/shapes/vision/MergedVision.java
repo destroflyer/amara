@@ -34,6 +34,7 @@ public class MergedVision{
     private ArrayList<Vector2D> visionEdges = new ArrayList<Vector2D>();
     private HashMap<Double, Circle> visionCircleShapes = new HashMap<Double, Circle>();
     private HashMap<Integer, SightResult> sightResults = new HashMap<Integer, SightResult>();
+    private boolean enableSightInSolidObstacles;
     
     public boolean isVisible(Vector2D position){
         for(SightResult sightResult : sightResults.values()){
@@ -67,22 +68,24 @@ public class MergedVision{
         addCircleEdges(visionEdges, position, sightRange, true);
         Circle visionCircleShape = getVisionCircleShape(sightRange);
         visionCircleShape.setTransform(new Transform2D(1, 0, position.getX(), position.getY()));
-        addObstacles(visionEdges, visionCircleShape, fixedObstacles);
-        addObstacles(visionEdges, visionCircleShape, dynamicObstacles.values());
+        addObstacles(visionEdges, position, visionCircleShape, fixedObstacles);
+        addObstacles(visionEdges, position, visionCircleShape, dynamicObstacles.values());
         return vision.sightPolyOutline(position, visionEdges);
     }
     
-    private static void addObstacles(List<Vector2D> edges, Circle visionCircleShape, Iterable<VisionObstacle> obstacles){
+    private void addObstacles(List<Vector2D> edges, Vector2D position, Circle visionCircleShape, Iterable<VisionObstacle> obstacles){
         for(VisionObstacle obstacle : obstacles){
             ConvexShape shape = obstacle.getShape();
-            if(shape.intersects(visionCircleShape)){
-                if(shape instanceof SimpleConvexPolygon){
-                    SimpleConvexPolygon simpleConvexPolygon = (SimpleConvexPolygon) shape;
-                    addPointEdges(edges, simpleConvexPolygon.getGlobalPoints(), obstacle.isBlockingInsideOrOutside());
-                }
-                else if(shape instanceof Circle){
-                    Circle circle = (Circle) shape;
-                    addCircleEdges(edges, circle.getGlobalPosition(), circle.getGlobalRadius(), obstacle.isBlockingInsideOrOutside());
+            if(!(enableSightInSolidObstacles && obstacle.isBlockingInsideOrOutside() && shape.contains(position))){
+                if(shape.intersects(visionCircleShape)){
+                    if(shape instanceof SimpleConvexPolygon){
+                        SimpleConvexPolygon simpleConvexPolygon = (SimpleConvexPolygon) shape;
+                        addPointEdges(edges, simpleConvexPolygon.getGlobalPoints(), obstacle.isBlockingInsideOrOutside());
+                    }
+                    else if(shape instanceof Circle){
+                        Circle circle = (Circle) shape;
+                        addCircleEdges(edges, circle.getGlobalPosition(), circle.getGlobalRadius(), obstacle.isBlockingInsideOrOutside());
+                    }
                 }
             }
         }
@@ -134,5 +137,13 @@ public class MergedVision{
             visionCircleShapes.put(radius, circle);
         }
         return circle;
+    }
+
+    public void setEnableSightInSolidObstacles(boolean enableSightInSolidObstacles){
+        this.enableSightInSolidObstacles = enableSightInSolidObstacles;
+    }
+
+    public boolean isEnableSightInSolidObstacles(){
+        return enableSightInSolidObstacles;
     }
 }

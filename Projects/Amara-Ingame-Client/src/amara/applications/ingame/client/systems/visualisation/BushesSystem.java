@@ -6,7 +6,6 @@ package amara.applications.ingame.client.systems.visualisation;
 
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
-import com.jme3.math.ColorRGBA;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
@@ -68,7 +67,9 @@ public class BushesSystem implements EntitySystem{
         Node node = entitySceneMap.requestNode(entity);
         Geometry geometry = new Geometry(null, new BushMesh((SimpleConvexPolygon) shape, 1, 2, 7));
         geometry.setName(GEOMETRY_NAME_BUSH);
-        Material material = MaterialFactory.generateLightingMaterial(new ColorRGBA());
+        Material material = MaterialFactory.generateUnshadedMaterial("Textures/plants/bush.png");
+        material.setFloat("AlphaDiscardThreshold", 0.05f);
+        material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         geometry.setMaterial(material);
         node.attachChild(geometry);
         setBushTransparency(entity, false);
@@ -84,20 +85,14 @@ public class BushesSystem implements EntitySystem{
         Geometry geometry = (Geometry) node.getChild(GEOMETRY_NAME_BUSH);
         Material material = geometry.getMaterial();
         if(isTransparent){
-            material.setColor("Diffuse", new ColorRGBA(0, 0.3f, 0, 0.5f));
-            material.setColor("Ambient",  new ColorRGBA(0.8f, 1, 0.8f, 1));
-            material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+            geometry.setQueueBucket(RenderQueue.Bucket.Opaque);
             material.getAdditionalRenderState().setDepthTest(false);
             geometry.setUserData("layer", 1);
-            geometry.setShadowMode(RenderQueue.ShadowMode.Receive);
         }
         else{
-            material.setColor("Diffuse", new ColorRGBA(0.05f, 0.2f, 0.05f, 1));
-            material.setColor("Ambient",  new ColorRGBA(0.5f, 1f, 0.5f, 1));
-            material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Off);
+            geometry.setQueueBucket(RenderQueue.Bucket.Transparent);
             material.getAdditionalRenderState().setDepthTest(true);
             geometry.setUserData("layer", null);
-            geometry.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
         }
     }
 }

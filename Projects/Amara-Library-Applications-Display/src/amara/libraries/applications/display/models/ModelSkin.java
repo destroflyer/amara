@@ -179,6 +179,7 @@ public class ModelSkin{
                         if(getAttributeValue(currentMaterialElement, "alpha", false)){
                             child.setQueueBucket(RenderQueue.Bucket.Transparent);
                             material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+                            material.setFloat("AlphaDiscardThreshold", 0.05f);
                         }
                         child.setMaterial(material);
                     }catch(Exception ex){

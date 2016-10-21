@@ -25,7 +25,9 @@ public class TeamVisionSystem implements EntitySystem{
         teamVisions = new MergedVision[teamsCount];
         LinkedList<VisionObstacle> visionObstacles = VisionObstacle.generateDefaultObstacles(mapObstacles);
         for(int i=0;i<teamVisions.length;i++){
-            teamVisions[i] = new MergedVision(visionObstacles);
+            MergedVision teamVision = new MergedVision(visionObstacles);
+            teamVision.setEnableSightInSolidObstacles(true);
+            teamVisions[i] = teamVision;
         }
     }
     private MergedVision[] teamVisions;

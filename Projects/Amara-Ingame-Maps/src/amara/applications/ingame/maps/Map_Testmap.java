@@ -136,13 +136,9 @@ public class Map_Testmap extends Map{
         forestMonsterCamp.setComponent(new CampRespawnDurationComponent(5));
         forestMonsterCamp.setComponent(new CampSpawnComponent());
         //Bush
-        EntityWrapper bush = entityWorld.getWrapped(entityWorld.createEntity());
-        bush.setComponent(new IsHiddenAreaComponent());
-        bush.setComponent(new IsAlwaysVisibleComponent());
+        EntityWrapper bush = EntityTemplate.createFromTemplate(entityWorld, "other/bush");
         bush.setComponent(new PositionComponent(new Vector2f(47, 8.5f)));
         bush.setComponent(new HitboxComponent(new RegularCyclic(6, 6)));
-        bush.setComponent(new HitboxActiveComponent());
-        bush.setComponent(new CollisionGroupComponent(CollisionGroupComponent.NONE, CollisionGroupComponent.UNITS));
         //Boss
         EntityWrapper boss = entityWorld.getWrapped(entityWorld.createEntity());
         boss.setComponent(new NameComponent("Yalee"));

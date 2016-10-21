@@ -68,6 +68,7 @@ public class BushMesh extends Mesh{
         setBuffer(Type.Index, 3, Util.convertToArray_Short(indices));
         setBuffer(Type.Position, 3, Util.convertToArray_Float(positions));
         setBuffer(Type.Normal, 3, Util.convertToArray_Float(normals));
+        setBuffer(Type.TexCoord, 2, Util.convertToArray_Float(textureCoordinates));
         updateBound();
     }
     private float bladeInterval;
@@ -78,6 +79,7 @@ public class BushMesh extends Mesh{
     private LinkedList<Short> indices = new LinkedList<Short>();
     private LinkedList<Float> positions = new LinkedList<Float>();
     private LinkedList<Float> normals = new LinkedList<Float>();
+    private LinkedList<Float> textureCoordinates = new LinkedList<Float>();
     
     private void addBlade(float x, float y){
         bladePositions.add(new Vector2f(x, y));
@@ -86,6 +88,12 @@ public class BushMesh extends Mesh{
             indices.add(currentIndex);
             indices.add((short) (currentIndex + 2));
             currentIndex += 3;
+            textureCoordinates.add(0f);
+            textureCoordinates.add(1f);
+            textureCoordinates.add(1f);
+            textureCoordinates.add(1f);
+            textureCoordinates.add(0.5f);
+            textureCoordinates.add(0f);
         }
         float distanceToPoints = ((FastMath.sqrt(3) / 3) * bladeWidth);
         //Side 1
