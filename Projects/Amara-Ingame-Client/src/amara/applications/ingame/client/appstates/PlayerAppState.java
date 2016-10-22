@@ -178,7 +178,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
     }
     
     private boolean canEntityBeHovered(EntityWorld entityWorld, int entity){
-        return (entityWorld.getComponent(entity, IsHiddenAreaComponent.class) == null);
+        return ((entityWorld.getComponent(entity, IsHiddenAreaComponent.class) == null) && ownTeamVisionSystem.isVisible(entityWorld, entity));
     }
 
     @Override

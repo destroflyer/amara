@@ -47,7 +47,8 @@ public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> i
         "Models/nathalya/skin_default.xml",
         "Models/forest_monster/skin.xml",
         "Models/3dsa_medieval_knight/skin_team_enemy.xml",
-        "Models/3dsa_archer/skin_team_enemy.xml"
+        "Models/3dsa_archer/skin_team_enemy.xml",
+        "Models/3dsa_fire_dragon/skin.xml"
     };
     private ModelObject[] modelObjects;
     private String[][] animationNames;

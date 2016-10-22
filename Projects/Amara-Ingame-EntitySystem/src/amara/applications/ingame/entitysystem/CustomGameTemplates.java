@@ -251,19 +251,24 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new BountyComponent(bounty.getId()));
                 }
                 else if(templateName.equals("arama_boss")){
-                    entityWrapper.setComponent(new NameComponent("Baron Nashor"));
+                    entityWrapper.setComponent(new NameComponent("Wragarak"));
                     entityWrapper.setComponent(new IsMonsterComponent());
-                    entityWrapper.setComponent(new TitleComponent("Baron Nashor"));
-                    entityWrapper.setComponent(new ModelComponent("Models/cow/skin_baron.xml"));
+                    entityWrapper.setComponent(new TitleComponent("Wragarak"));
+                    entityWrapper.setComponent(new ModelComponent("Models/3dsa_fire_dragon/skin.xml"));
+                    EntityWrapper idleAnimation = entityWorld.getWrapped(entityWorld.createEntity());
+                    idleAnimation.setComponent(new NameComponent("idle"));
+                    idleAnimation.setComponent(new LoopDurationComponent(4));
+                    entityWrapper.setComponent(new IdleAnimationComponent(idleAnimation.getId()));
                     EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
                     walkAnimation.setComponent(new NameComponent("walk"));
                     entityWrapper.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
+                    entityWrapper.setComponent(new WalkStepDistanceComponent(6.5f));
                     EntityWrapper autoAttackAnimation = entityWorld.getWrapped(entityWorld.createEntity());
-                    autoAttackAnimation.setComponent(new NameComponent("auto_attack"));
+                    autoAttackAnimation.setComponent(new NameComponent("projectile_attack"));
                     entityWrapper.setComponent(new AutoAttackAnimationComponent(autoAttackAnimation.getId()));
+                    entityWrapper.setComponent(new AnimationComponent(idleAnimation.getId()));
 
-                    entityWrapper.setComponent(new ScaleComponent(2.25f));
-                    entityWrapper.setComponent(new HitboxComponent(new Circle(2)));
+                    entityWrapper.setComponent(new HitboxComponent(new Circle(4.75f)));
                     entityWrapper.setComponent(new IntersectionPushComponent());
                     entityWrapper.setComponent(new CollisionGroupComponent(CollisionGroupComponent.MAP | CollisionGroupComponent.UNITS | CollisionGroupComponent.SPELL_TARGETS, CollisionGroupComponent.UNITS));
                     entityWrapper.setComponent(new HitboxActiveComponent());
@@ -280,11 +285,11 @@ public class CustomGameTemplates{
                     entityWrapper.setComponent(new IsTargetableComponent());
                     entityWrapper.setComponent(new IsVulnerableComponent());
 
-                    EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
+                    EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack,Models/3dsa_fire_dragon_fireball/skin.xml");
                     entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
 
-                    EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "spells/bodyslam");
-                    entityWrapper.setComponent(new SpellsComponent(bodyslam.getId()));
+                    //EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "spells/bodyslam");
+                    //entityWrapper.setComponent(new SpellsComponent(bodyslam.getId()));
 
                     entityWrapper.setComponent(new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.BOSS));
                     EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
@@ -307,7 +312,7 @@ public class CustomGameTemplates{
                 else if(templateName.equals("arama_camp_boss")){
                     entityWrapper.setComponent(new PositionComponent(new Vector2f(262.5f, 339)));
                     entityWrapper.setComponent(new DirectionComponent(new Vector2f(0, -1)));
-                    entityWrapper.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
+                    //entityWrapper.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
                     entityWrapper.setComponent(new TeamComponent(0));
                 }
             }

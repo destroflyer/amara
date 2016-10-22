@@ -1,0 +1,9 @@
+Material My Material : Common/MatDefs/Misc/Particle.j3md {
+     MaterialParameters {
+        Texture : Models/3dsa_fire_dragon_fireball/resources/fire.png
+     }
+    AdditionalRenderState {
+      FaceCull Off
+      Blend AlphaAdditive
+    }
+}
