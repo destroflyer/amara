@@ -1,6 +1,7 @@
 <template>
     <entity>
         <isAlwaysVisible/>
-        <model>Models/tower_remains/skin.xml</model>
+        <teamModel>Models/pabong_tower_1/skin_team.xml</teamModel>
+        <team>[parameter0]</team>
     </entity>
 </template>

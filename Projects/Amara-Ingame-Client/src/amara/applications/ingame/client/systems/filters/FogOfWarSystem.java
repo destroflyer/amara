@@ -112,7 +112,7 @@ public class FogOfWarSystem implements EntitySystem{
     }
     
     private void checkChangedPosition(EntityWorld entityWorld, int entity){
-        if(entityWorld.hasComponent(entity, SightRangeComponent.class) && playerTeamSystem.isAllied(entityWorld, entity)){
+        if(entityWorld.hasComponent(entity, SightRangeComponent.class) && isEntitySightIncluded(entityWorld, entity)){
             isUpdateNeeded = true;
         }
     }
@@ -127,7 +127,7 @@ public class FogOfWarSystem implements EntitySystem{
     private void updateFogTexture_PlayerSight(EntityWorld entityWorld){
         resetFogTexture();
         for(int entity : entityWorld.getEntitiesWithAll(PositionComponent.class, SightRangeComponent.class)){
-            if(displayAllSight || playerTeamSystem.isAllied(entityWorld, entity)){
+            if(isEntitySightIncluded(entityWorld, entity)){
                 PositionComponent positionComponent = entityWorld.getComponent(entity, PositionComponent.class);
                 Vector2D position = new Vector2D(positionComponent.getPosition().getX(), positionComponent.getPosition().getY());
                 float sightRange = entityWorld.getComponent(entity, SightRangeComponent.class).getRange();
@@ -146,6 +146,10 @@ public class FogOfWarSystem implements EntitySystem{
         }
         fogTexture.setImage(fogImage.getImage());
         fogOfWarFilter.setFog(fogTexture);
+    }
+    
+    private boolean isEntitySightIncluded(EntityWorld entityWorld, int entity){
+        return (displayAllSight || playerTeamSystem.isAllied(entityWorld, entity));
     }
     
     private void resetFogTexture(){

@@ -58,6 +58,7 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("willymax-0", "Model \"Little Dragon\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/willymax-0"),
         new Thanks("derekwatts", "Model \"Mjolnir\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/DerekWatts"),
         new Thanks("Julio Iglesias", "Model \"Pseudospider\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/Zafio"),
+        new Thanks("Pabong", "Model \"Tower Defense\"", "Interface/client/thanks/blender.png", "http://www.turbosquid.com/Search/Artists/Pabong"),
         new Thanks("Jumah Safarty", "Model \"Soldier\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/jumahsafarty"),
         new Thanks("minglepingle", "Model \"Steve\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/minglepingle"),
         new Thanks("Sebastian Lague", "Model \"Treasure Chest\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/SebastL"),

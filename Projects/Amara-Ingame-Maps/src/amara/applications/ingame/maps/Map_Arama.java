@@ -172,7 +172,7 @@ public class Map_Arama extends Map{
             tower1DeathTrigger_2.setComponent(new CustomTargetComponent(spawnTargetEntity_Tower1Remains));
             EntityWrapper tower1DeathEffect_2 = entityWorld.getWrapped(entityWorld.createEntity());
             int spawnInformationEntity_Tower1Remains = entityWorld.createEntity();
-            entityWorld.setComponent(spawnInformationEntity_Tower1Remains, new SpawnTemplateComponent("structures/tower_remains"));
+            entityWorld.setComponent(spawnInformationEntity_Tower1Remains, new SpawnTemplateComponent("structures/tower_remains," + (i + 1)));
             tower1DeathEffect_2.setComponent(new SpawnComponent(spawnInformationEntity_Tower1Remains));
             tower1DeathTrigger_2.setComponent(new TriggeredEffectComponent(tower1DeathEffect_2.getId()));
             tower1DeathTrigger_2.setComponent(new TriggerSourceComponent(tower1.getId()));
@@ -194,7 +194,7 @@ public class Map_Arama extends Map{
             tower2DeathTrigger_2.setComponent(new CustomTargetComponent(spawnTargetEntity_Tower2Remains));
             EntityWrapper tower2DeathEffect_2 = entityWorld.getWrapped(entityWorld.createEntity());
             int spawnInformationEntity_Tower2Remains = entityWorld.createEntity();
-            entityWorld.setComponent(spawnInformationEntity_Tower2Remains, new SpawnTemplateComponent("structures/tower_remains"));
+            entityWorld.setComponent(spawnInformationEntity_Tower2Remains, new SpawnTemplateComponent("structures/tower_remains," + (i + 1)));
             tower2DeathEffect_2.setComponent(new SpawnComponent(spawnInformationEntity_Tower2Remains));
             tower2DeathTrigger_2.setComponent(new TriggeredEffectComponent(tower2DeathEffect_2.getId()));
             tower2DeathTrigger_2.setComponent(new TriggerSourceComponent(tower2.getId()));
