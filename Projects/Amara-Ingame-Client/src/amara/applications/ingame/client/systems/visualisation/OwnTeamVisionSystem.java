@@ -22,20 +22,44 @@ public class OwnTeamVisionSystem implements EntitySystem{
     }
     private EntitySceneMap entitySceneMap;
     private PlayerTeamSystem playerTeamSystem;
+    private boolean isEnabled;
+    private boolean updateAll;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         if(playerTeamSystem.isInitialized()){
-            ComponentMapObserver observer = entityWorld.requestObserver(this, IsVisibleForTeamsComponent.class);
-            for(int entity : observer.getNew().getEntitiesWithAll(IsVisibleForTeamsComponent.class)){
-                updateNode(entityWorld, entity);
+            if(updateAll){
+                if(isEnabled){
+                    for(int entity : entityWorld.getEntitiesWithAll(IsVisibleForTeamsComponent.class)){
+                        updateNode(entityWorld, entity);
+                    }
+                }
+                else{
+                    for(int entity : entityWorld.getEntitiesWithAll(IsVisibleForTeamsComponent.class)){
+                        updateNode(entity, true);
+                    }
+                }
+                updateAll = false;
             }
-            for(int entity : observer.getChanged().getEntitiesWithAll(IsVisibleForTeamsComponent.class)){
-                updateNode(entityWorld, entity);
+            if(isEnabled){
+                ComponentMapObserver observer = entityWorld.requestObserver(this, IsVisibleForTeamsComponent.class);
+                for(int entity : observer.getNew().getEntitiesWithAll(IsVisibleForTeamsComponent.class)){
+                    updateNode(entityWorld, entity);
+                }
+                for(int entity : observer.getChanged().getEntitiesWithAll(IsVisibleForTeamsComponent.class)){
+                    updateNode(entityWorld, entity);
+                }
+                for(int entity : observer.getRemoved().getEntitiesWithAll(IsVisibleForTeamsComponent.class)){
+                    updateNode(entity, true);
+                }
             }
-            for(int entity : observer.getRemoved().getEntitiesWithAll(IsVisibleForTeamsComponent.class)){
-                updateNode(entity, true);
-            }
+        }
+    }
+    
+    public void setEnabled(boolean enabled){
+        if(enabled != isEnabled){
+            this.isEnabled = enabled;
+            updateAll = true;
         }
     }
     
@@ -44,18 +68,25 @@ public class OwnTeamVisionSystem implements EntitySystem{
     }
     
     public boolean isVisible(EntityWorld entityWorld, int entity){
-        if(playerTeamSystem.isInitialized()){
-            IsVisibleForTeamsComponent isVisibleForTeamsComponent = entityWorld.getComponent(entity, IsVisibleForTeamsComponent.class);
-            if(isVisibleForTeamsComponent != null){
-                boolean[] isVisibleForTeams = isVisibleForTeamsComponent.isVisibleForTeams();
-                return isVisibleForTeams[playerTeamSystem.getPlayerTeamEntity()];
+        if(isEnabled){
+            if(playerTeamSystem.isInitialized()){
+                IsVisibleForTeamsComponent isVisibleForTeamsComponent = entityWorld.getComponent(entity, IsVisibleForTeamsComponent.class);
+                if(isVisibleForTeamsComponent != null){
+                    boolean[] isVisibleForTeams = isVisibleForTeamsComponent.isVisibleForTeams();
+                    return isVisibleForTeams[playerTeamSystem.getPlayerTeamEntity()];
+                }
             }
+            return false;
         }
-        return false;
+        return true;
     }
     
     private void updateNode(int entity, boolean isVisible){
         Node node = entitySceneMap.requestNode(entity);
         node.setCullHint(isVisible?Spatial.CullHint.Inherit:Spatial.CullHint.Always);
+    }
+    
+    public boolean isEnabled(){
+        return isEnabled;
     }
 }

@@ -24,7 +24,8 @@ public class IngameCinematicAppState extends CinematicAppState<IngameClientAppli
     }
     private boolean tmpAreObstaclesDisplayed;
     private boolean tmpWasLockedCameraEnabled;
-    private boolean tmpWasDisplayMapSight;
+    private boolean tmpWasFogOfWarEnabled;
+    private boolean tmpWasDisplayAllSight;
     
     @Override
     public void setCinematicModeEnabled(boolean isEnabled){
@@ -40,8 +41,10 @@ public class IngameCinematicAppState extends CinematicAppState<IngameClientAppli
             tmpWasLockedCameraEnabled = getAppState(PlayerAppState.class).getLockedCameraSystem().isEnabled();
             getAppState(PlayerAppState.class).getLockedCameraSystem().setEnabled(false);
             if(fogOfWarSystem != null){
-                tmpWasDisplayMapSight = fogOfWarSystem.isDisplayMapSight();
-                fogOfWarSystem.setDisplayMapSight(true);
+                tmpWasFogOfWarEnabled = fogOfWarSystem.isEnabled();
+                tmpWasDisplayAllSight = fogOfWarSystem.isDisplayAllSight();
+                fogOfWarSystem.setEnabled(true);
+                fogOfWarSystem.setDisplayAllSight(true);
             }
             getAppState(NiftyAppState.class).goToScreen(ScreenController_HUD.class, "cinematic");
             getAppState(NiftyAppState.class).goToScreen(ScreenController_Shop.class, "cinematic");
@@ -51,7 +54,8 @@ public class IngameCinematicAppState extends CinematicAppState<IngameClientAppli
             getAppState(MapObstaclesAppState.class).setDisplayObstacles(tmpAreObstaclesDisplayed);
             getAppState(PlayerAppState.class).getLockedCameraSystem().setEnabled(tmpWasLockedCameraEnabled);
             if(fogOfWarSystem != null){
-                fogOfWarSystem.setDisplayMapSight(tmpWasDisplayMapSight);
+                fogOfWarSystem.setEnabled(tmpWasFogOfWarEnabled);
+                fogOfWarSystem.setDisplayAllSight(tmpWasDisplayAllSight);
             }
             getAppState(NiftyAppState.class).goToScreen(ScreenController_Cinematic.class, "start");
         }

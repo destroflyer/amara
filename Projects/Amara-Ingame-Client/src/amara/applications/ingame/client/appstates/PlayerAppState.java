@@ -60,9 +60,9 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
     
     public void onInitialWorldLoaded(){
         mainApplication.getInputManager().addMapping("lock_camera", new KeyTrigger(KeyInput.KEY_Z));
-        mainApplication.getInputManager().addMapping("display_map_sight", new KeyTrigger(KeyInput.KEY_U));
+        mainApplication.getInputManager().addMapping("change_sight", new KeyTrigger(KeyInput.KEY_U));
         mainApplication.getInputManager().addListener(this, new String[]{
-            "lock_camera","display_map_sight"
+            "lock_camera","change_sight"
         });
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
         localEntitySystemAppState.addEntitySystem(ownTeamVisionSystem);
@@ -186,9 +186,23 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         if(actionName.equals("lock_camera") && value){
             lockedCameraSystem.setEnabled(!lockedCameraSystem.isEnabled());
         }
-        else if(actionName.equals("display_map_sight") && value){
+        else if(actionName.equals("change_sight") && value){
             if(fogOfWarSystem != null){
-                fogOfWarSystem.setDisplayMapSight(!fogOfWarSystem.isDisplayMapSight());
+                //Switch between the three possible states
+                if(fogOfWarSystem.isEnabled()){
+                    if(fogOfWarSystem.isDisplayAllSight()){
+                        fogOfWarSystem.setEnabled(false);
+                    }
+                    else{
+                        fogOfWarSystem.setDisplayAllSight(true);
+                        ownTeamVisionSystem.setEnabled(false);
+                    }
+                }
+                else{
+                    fogOfWarSystem.setDisplayAllSight(false);
+                    fogOfWarSystem.setEnabled(true);
+                    ownTeamVisionSystem.setEnabled(true);
+                }
             }
         }
     }

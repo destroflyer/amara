@@ -82,7 +82,9 @@ public class DisplayMinimapSystem extends GUIDisplaySystem{
                     paintEntity(entityWorld, entity);
                 }
             }
-            paintFogOfWar();
+            if(fogOfWarSystem.isEnabled()){
+                paintFogOfWar();
+            }
             minimapImage.flipY();
             texture2D.setImage(minimapImage.getImage());
             screenController_HUD.setMinimapImage(texture2D);

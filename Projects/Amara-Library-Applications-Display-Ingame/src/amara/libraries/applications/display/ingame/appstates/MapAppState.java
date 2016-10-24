@@ -21,9 +21,10 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.post.Filter;
 import com.jme3.scene.BatchNode;
 import com.jme3.scene.Geometry;
-import com.jme3.shadow.DirectionalLightShadowFilter;
-import com.jme3.util.SkyFactory;
 import com.jme3.scene.Node;
+import com.jme3.shadow.DirectionalLightShadowFilter;
+import com.jme3.texture.Texture;
+import com.jme3.util.SkyFactory;
 import com.jme3.water.WaterFilter;
 import amara.applications.ingame.shared.maps.*;
 import amara.applications.ingame.shared.maps.lights.*;
@@ -195,9 +196,19 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
             @Override
             public void run(){
                 visualsNode.attachChild(modelsNode);
-                visualsNode.attachChild(SkyFactory.createSky(mainApplication.getAssetManager(), "Textures/skies/default.jpg", true));
+                addSky("miramar");
             }
         });
+    }
+    
+    private void addSky(String skyName){
+        Texture textureWest = mainApplication.getAssetManager().loadTexture("Textures/skies/" + skyName + "/left.png");
+        Texture textureEast = mainApplication.getAssetManager().loadTexture("Textures/skies/" + skyName + "/right.png");
+        Texture textureNorth = mainApplication.getAssetManager().loadTexture("Textures/skies/" + skyName + "/front.png");
+        Texture textureSouth = mainApplication.getAssetManager().loadTexture("Textures/skies/" + skyName + "/back.png");
+        Texture textureUp = mainApplication.getAssetManager().loadTexture("Textures/skies/" + skyName + "/up.png");
+        Texture textureDown = mainApplication.getAssetManager().loadTexture("Textures/skies/" + skyName + "/down.png");
+        visualsNode.attachChild(SkyFactory.createSky(mainApplication.getAssetManager(), textureWest, textureEast, textureNorth, textureSouth, textureUp, textureDown));
     }
     
     private void addFilter(Filter filter){

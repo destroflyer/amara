@@ -72,6 +72,7 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("Twitch", "Reaction Emotes", "Interface/client/thanks/twitch.png", "http://twitch.tv"),
         new Thanks("Pixel Mixer", "Icon set \"Basic Icons\"", "Interface/client/user.png", "http://iconarchive.com/artist/pixelmixer.html"),
         new Thanks("Mahmoud Saleh", "Icon set \"Mini Icons\"", "Interface/client/audio.png", "http://iconarchive.com/artist/salehhh.html"),
+        new Thanks("Jockum Skoglund", "Sky map \"Miramar\"", "Textures/skies/miramar/front.png", "http://hipshot.deviantart.com"),
         //Audio
         new Thanks("Michikawa", "Music pack \"Celestial Aeon Project\"", "Interface/client/audio.png", "http://mikseri.net/essence"),
         new Thanks("Dynamedion", "Music pack \"Music Demo Reel\"", "Interface/client/audio.png", "http://dynamedion.com"),
