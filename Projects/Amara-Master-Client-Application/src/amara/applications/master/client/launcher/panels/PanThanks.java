@@ -58,7 +58,7 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("willymax-0", "Model \"Little Dragon\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/willymax-0"),
         new Thanks("derekwatts", "Model \"Mjolnir\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/DerekWatts"),
         new Thanks("Julio Iglesias", "Model \"Pseudospider\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/Zafio"),
-        new Thanks("Pabong", "Model \"Tower Defense\"", "Interface/client/thanks/blender.png", "http://www.turbosquid.com/Search/Artists/Pabong"),
+        new Thanks("Pabong", "Model \"Tower Defense\"", "Interface/client/thanks/blender.png", "http://turbosquid.com/Search/Artists/Pabong"),
         new Thanks("Jumah Safarty", "Model \"Soldier\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/jumahsafarty"),
         new Thanks("minglepingle", "Model \"Steve\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/minglepingle"),
         new Thanks("Sebastian Lague", "Model \"Treasure Chest\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/SebastL"),
@@ -67,7 +67,7 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("xuroiux", "Model \"Tree\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/xuroiux"),
         //Textures
         new Thanks("Temporalcortex", "HUD Overlay \"Metal Tech\"", "Interface/client/thanks/youtube.png", "http://youtube.com/Temporalcortex"),
-        new Thanks("juanello", "Cursors \"Warrior Gloves\"", "Interface/client/thanks/realworld_graphics.png", "http://www.rw-designer.com/user-art/19010"),
+        new Thanks("juanello", "Cursors \"Warrior Gloves\"", "Interface/client/thanks/realworld_graphics.png", "http://rw-designer.com/user-art/19010"),
         new Thanks("RigzSoft", "Texture \"Frost\"", "Textures/effects/frost_additive.png", "http://rigzsoft.co.uk"),
         new Thanks("RigzSoft", "Texture \"Crosshair's Cutie Mark\"", "Textures/effects/robins_gift_mark.png", "http://spartkle.deviantart.com"),
         new Thanks("Twitch", "Reaction Emotes", "Interface/client/thanks/twitch.png", "http://twitch.tv"),
