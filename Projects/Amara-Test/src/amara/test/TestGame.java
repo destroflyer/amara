@@ -38,9 +38,7 @@ public class TestGame{
             networkClient.sendMessage(new Message_AcceptGameSelection(true));
             networkClient.sendMessage(new Message_SetGameSelectionPlayerData(new GameSelectionPlayerData(11, null)));
             networkClient.sendMessage(new Message_LockInGameSelection());
-        }catch(ServerConnectionException ex){
-            ex.printStackTrace();
-        }catch(ServerConnectionTimeoutException ex){
+        }catch(ServerConnectionException | ServerConnectionTimeoutException ex){
             ex.printStackTrace();
         }
     }
