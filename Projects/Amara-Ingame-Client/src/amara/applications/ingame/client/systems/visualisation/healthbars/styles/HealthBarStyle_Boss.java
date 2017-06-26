@@ -4,18 +4,16 @@
  */
 package amara.applications.ingame.client.systems.visualisation.healthbars.styles;
 
-import java.awt.Color;
-import amara.applications.ingame.client.systems.visualisation.healthbars.HealthBarStyle;
 import amara.libraries.applications.display.materials.PaintableImage;
 
 /**
  *
  * @author Carl
  */
-public class HealthBarStyle_Boss extends HealthBarStyle{
+public class HealthBarStyle_Boss extends SimpleHealthBarStyle{
 
     public HealthBarStyle_Boss(){
-        super(150, 25, 150, 25);
+        super(150, 25);
     }
     private int subBarWidth = 100;
     private final int innerX = 10;
@@ -25,11 +23,18 @@ public class HealthBarStyle_Boss extends HealthBarStyle{
 
     @Override
     protected void drawMaximumHealth(PaintableImage paintableImage, float maximumHealth, boolean isAllied){
+        super.drawMaximumHealth(paintableImage, maximumHealth, isAllied);
         paintableImage.loadImage("Interface/hud/healthbars/boss_150.png");
-        Color color = (isAllied?HealthBarStyle_Default.COLOR_ALLIES:HealthBarStyle_Default.COLOR_ENEMIES);
+        int y;
         for(int x=innerX;x<(innerX + innerWidth);x++){
-            for(int y=innerY;y<(innerY + innerHeight);y++){
-                paintableImage.setPixel(x, y, color);
+            for(y=innerY;y<(innerY + 2);y++){
+                paintableImage.setPixel(x, y, backgroundColor_Brighter);
+            }
+            for(;y<(innerY + 4);y++){
+                paintableImage.setPixel(x, y, backgroundColor);
+            }
+            for(;y<(innerY + innerHeight);y++){
+                paintableImage.setPixel(x, y, backgroundColor_Darker);
             }
         }
         float partWidth = (innerWidth / (maximumHealth / subBarWidth));
@@ -37,7 +42,7 @@ public class HealthBarStyle_Boss extends HealthBarStyle{
         for(int x=innerX;x<(innerX + innerWidth);x++){
             int subBarIndex = (int) ((x - innerX) / partWidth);
             if(subBarIndex > finishedSubBars){
-                for(int y=innerY;y<(innerY + innerHeight);y++){
+                for(y=innerY;y<(innerY + innerHeight);y++){
                     paintableImage.setPixel(x - 1, y, 0, 0, 0, 255);
                 }
                 finishedSubBars++;

@@ -5,7 +5,7 @@
         <spellVisualisation>fatique</spellVisualisation>
         <spellIndicator>
             <entity>
-                <circleIndicator radius="10"/>
+                <circularIndicator radius="10"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>

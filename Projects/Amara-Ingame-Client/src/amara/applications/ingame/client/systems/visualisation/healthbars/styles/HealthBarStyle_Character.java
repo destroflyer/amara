@@ -4,23 +4,31 @@
  */
 package amara.applications.ingame.client.systems.visualisation.healthbars.styles;
 
-import amara.applications.ingame.client.systems.visualisation.healthbars.HealthBarStyle;
 import amara.libraries.applications.display.materials.PaintableImage;
 
 /**
  *
  * @author Carl
  */
-public class HealthBarStyle_Character extends HealthBarStyle{
+public class HealthBarStyle_Character extends SimpleHealthBarStyle{
 
     public HealthBarStyle_Character(){
-        super(70, 8, 70, 8);
+        super(70, 8);
     }
     private int subBarWidth = 100;
 
     @Override
     protected void drawMaximumHealth(PaintableImage paintableImage, float maximumHealth, boolean isAllied){
-        paintableImage.setBackground(isAllied?HealthBarStyle_Default.COLOR_ALLIES:HealthBarStyle_Default.COLOR_ENEMIES);
+        super.drawMaximumHealth(paintableImage, maximumHealth, isAllied);
+        for(int x=1;x<(imageWidth - 1);x++){
+            for(int y=1;y<3;y++){
+                paintableImage.setPixel(x, y, backgroundColor_Brighter);
+            }
+            paintableImage.setPixel(x, 3, backgroundColor);
+            for(int y=4;y<(imageHeight - 1);y++){
+                paintableImage.setPixel(x, y, backgroundColor_Darker);
+            }
+        }
         float partWidth = (imageWidth / (maximumHealth / subBarWidth));
         int finishedSubBars = 0;
         for(int x=1;x<(imageWidth - 1);x++){
@@ -36,7 +44,7 @@ public class HealthBarStyle_Character extends HealthBarStyle{
             paintableImage.setPixel(x, 0, 0, 0, 0, 255);
             paintableImage.setPixel(x, (imageHeight - 1), 0, 0, 0, 255);
         }
-        for(int y=0;y<imageHeight;y++){
+        for(int y=1;y<(imageHeight - 1);y++){
             paintableImage.setPixel(0, y, 0, 0, 0, 255);
             paintableImage.setPixel((imageWidth - 1), y, 0, 0, 0, 255);
         }

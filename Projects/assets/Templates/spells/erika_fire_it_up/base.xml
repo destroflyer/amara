@@ -6,7 +6,7 @@
         <spellVisualisation>erika_fire_it_up</spellVisualisation>
         <spellIndicator>
             <entity>
-                <circleIndicator radius="20"/>
+                <circularIndicator radius="20"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>

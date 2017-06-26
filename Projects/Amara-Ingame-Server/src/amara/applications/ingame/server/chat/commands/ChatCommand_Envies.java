@@ -33,14 +33,14 @@ public class ChatCommand_Envies extends ChatCommand{
                 entityWorld.setComponent(animationEntity, new NameComponent("stand"));
                 entityWorld.setComponent(animationEntity, new LoopDurationComponent(8));
                 for(int i=0;i<count;i++){
-                    int chickenEntity = entityWorld.createEntity();
-                    entityWorld.setComponent(chickenEntity, new NameComponent("Envy"));
-                    entityWorld.setComponent(chickenEntity, new ModelComponent("Models/daydream/skin_envy.xml"));
+                    int envieEntity = entityWorld.createEntity();
+                    entityWorld.setComponent(envieEntity, new NameComponent("Envy"));
+                    entityWorld.setComponent(envieEntity, new ModelComponent("Models/daydream/skin_envy.xml"));
                     float x = (float) (Math.random() * game.getMap().getPhysicsInformation().getWidth());
                     float y = (float) (Math.random() * game.getMap().getPhysicsInformation().getHeight());
-                    entityWorld.setComponent(chickenEntity, new PositionComponent(new Vector2f(x, y)));
-                    entityWorld.setComponent(chickenEntity, new DirectionComponent((float) (Math.random() * (2 * Math.PI))));
-                    entityWorld.setComponent(chickenEntity, new AnimationComponent(animationEntity));
+                    entityWorld.setComponent(envieEntity, new PositionComponent(new Vector2f(x, y)));
+                    entityWorld.setComponent(envieEntity, new DirectionComponent((float) (Math.random() * (2 * Math.PI))));
+                    entityWorld.setComponent(envieEntity, new AnimationComponent(animationEntity));
                 }
             }
             else{

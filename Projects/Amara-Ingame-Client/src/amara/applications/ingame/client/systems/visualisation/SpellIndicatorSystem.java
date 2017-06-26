@@ -35,26 +35,35 @@ public class SpellIndicatorSystem implements EntitySystem{
     private LinkedList<Spatial> currentIndicators = new LinkedList<Spatial>();;
     private boolean updateIndicator;
     
+    @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         if(updateIndicator){
             SpellIndicatorComponent spellIndicatorComponent = entityWorld.getComponent(currentSpellEntity, SpellIndicatorComponent.class);
             PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
             if((spellIndicatorComponent != null) && (playerCharacterComponent != null)){
                 Node node = entitySceneMap.requestNode(playerCharacterComponent.getEntity());
-                CircleIndicatorComponent circleIndicatorComponent = entityWorld.getComponent(spellIndicatorComponent.getIndicatorEntity(), CircleIndicatorComponent.class);
-                if(circleIndicatorComponent != null){
-                    float diameter = (2 * circleIndicatorComponent.getRadius());
-                    float x = (circleIndicatorComponent.getX() - circleIndicatorComponent.getRadius());
-                    float y = (circleIndicatorComponent.getY() + circleIndicatorComponent.getRadius());
-                    currentIndicators.add(createGroundTexture("Textures/spell_indicators/circle.png", x, y, diameter, diameter));
+                CircularIndicatorComponent circularIndicatorComponent = entityWorld.getComponent(spellIndicatorComponent.getIndicatorEntity(), CircularIndicatorComponent.class);
+                if(circularIndicatorComponent != null){
+                    float diameter = (2 * circularIndicatorComponent.getRadius());
+                    float x = (circularIndicatorComponent.getX() - circularIndicatorComponent.getRadius());
+                    float y = (circularIndicatorComponent.getY() + circularIndicatorComponent.getRadius());
+                    currentIndicators.add(createGroundTexture("Textures/spell_indicators/circular.png", x, y, diameter, diameter, RenderState.BlendMode.AlphaAdditive));
                 }
-                RectangleIndicatorComponent rectangleIndicatorComponent = entityWorld.getComponent(spellIndicatorComponent.getIndicatorEntity(), RectangleIndicatorComponent.class);
-                if(rectangleIndicatorComponent != null){
-                    float width = rectangleIndicatorComponent.getWidth();
-                    float height = rectangleIndicatorComponent.getHeight();
-                    float x = (rectangleIndicatorComponent.getX() - (rectangleIndicatorComponent.getWidth() / 2));
-                    float y = (rectangleIndicatorComponent.getY() + rectangleIndicatorComponent.getHeight());
-                    currentIndicators.add(createGroundTexture("Textures/spell_indicators/square.png", x, y, width, height));
+                LinearIndicatorComponent linearIndicatorComponent = entityWorld.getComponent(spellIndicatorComponent.getIndicatorEntity(), LinearIndicatorComponent.class);
+                if(linearIndicatorComponent != null){
+                    float width = linearIndicatorComponent.getWidth();
+                    float heightTarget = Math.min(5, linearIndicatorComponent.getHeight());
+                    float heightBase = (linearIndicatorComponent.getHeight() - heightTarget);
+                    float x = (linearIndicatorComponent.getX() - (linearIndicatorComponent.getWidth() / 2));
+                    float yBase = (linearIndicatorComponent.getY() + heightBase);
+                    float yTarget = (linearIndicatorComponent.getY() + heightBase + heightTarget);
+                    Geometry indicatorBase = createGroundTexture("Textures/spell_indicators/linear_base.png", x, yBase, width, heightBase, RenderState.BlendMode.AlphaAdditive);
+                    Geometry indicatorTarget = createGroundTexture("Textures/spell_indicators/linear_target.png", x, yTarget, width, heightTarget, RenderState.BlendMode.AlphaAdditive);
+                    // Ensure that the textures connect seamless (The textures have a high enough resolution that it still looks ok)
+                    MaterialFactory.setFilter_Nearest(indicatorBase.getMaterial());
+                    MaterialFactory.setFilter_Nearest(indicatorTarget.getMaterial());
+                    currentIndicators.add(indicatorBase);
+                    currentIndicators.add(indicatorTarget);
                 }
                 for(Spatial indicator : currentIndicators){
                     node.attachChild(indicator);
@@ -86,15 +95,19 @@ public class SpellIndicatorSystem implements EntitySystem{
     }
     
     public static Spatial createGroundTexture(String textureFilePath, float x, float y, float width, float height){
-        Spatial texture = new Geometry(null, new Quad(width, height));
-        texture.setLocalTranslation(x, 0, y);
-        texture.rotate(JMonkeyUtil.getQuaternion_X(-90));
+        return createGroundTexture(textureFilePath, x, y, width, height, RenderState.BlendMode.Alpha);
+    }
+    
+    public static Geometry createGroundTexture(String textureFilePath, float x, float y, float width, float height, RenderState.BlendMode blendMode){
+        Geometry geometry = new Geometry(null, new Quad(width, height));
+        geometry.setLocalTranslation(x, 0, y);
+        geometry.rotate(JMonkeyUtil.getQuaternion_X(-90));
         Material material = MaterialFactory.generateLightingMaterial(textureFilePath);
-        material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        material.getAdditionalRenderState().setBlendMode(blendMode);
         material.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
         material.getAdditionalRenderState().setDepthTest(false);
-        texture.setMaterial(material);
-        texture.setUserData("layer", 2);
-        return texture;
+        geometry.setMaterial(material);
+        geometry.setUserData("layer", 2);
+        return geometry;
     }
 }

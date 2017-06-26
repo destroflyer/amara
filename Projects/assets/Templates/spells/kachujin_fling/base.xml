@@ -6,7 +6,7 @@
         <spellVisualisation>kachujin_fling</spellVisualisation>
         <spellIndicator>
             <entity>
-                <circleIndicator radius="3"/>
+                <circularIndicator radius="3"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>

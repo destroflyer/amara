@@ -12,26 +12,23 @@ import amara.libraries.entitysystem.synchronizing.ComponentField;
  * @author Carl
  */
 @Serializable
-public class RectangleIndicatorComponent{
+public class CircularIndicatorComponent{
 
-    public RectangleIndicatorComponent(){
+    public CircularIndicatorComponent(){
         
     }
 
-    public RectangleIndicatorComponent(float x, float y, float width, float height){
+    public CircularIndicatorComponent(float x, float y, float radius){
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.radius = radius;
     }
     @ComponentField(type=ComponentField.Type.DISTANCE)
     private float x;
     @ComponentField(type=ComponentField.Type.DISTANCE)
     private float y;
     @ComponentField(type=ComponentField.Type.DISTANCE)
-    private float width;
-    @ComponentField(type=ComponentField.Type.DISTANCE)
-    private float height;
+    private float radius;
 
     public float getX(){
         return x;
@@ -40,12 +37,8 @@ public class RectangleIndicatorComponent{
     public float getY(){
         return y;
     }
-
-    public float getWidth(){
-        return width;
-    }
-
-    public float getHeight(){
-        return height;
+    
+    public float getRadius(){
+        return radius;
     }
 }

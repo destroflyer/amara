@@ -7,7 +7,7 @@
         <spellVisualisation>kachujin_mind_of_the_monk</spellVisualisation>
         <spellIndicator>
             <entity>
-                <rectangleIndicator width="1.8" height="15.3"/>
+                <linearIndicator width="1.8" height="15.3"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>

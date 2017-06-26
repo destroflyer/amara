@@ -5,7 +5,7 @@
         <spellVisualisation>ganfaul_backflip</spellVisualisation>
         <spellIndicator>
             <entity>
-                <rectangleIndicator y="-8" width="2" height="8"/>
+                <linearIndicator y="-8" width="2" height="8"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>

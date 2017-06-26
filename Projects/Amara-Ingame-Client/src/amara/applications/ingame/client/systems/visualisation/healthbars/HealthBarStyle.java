@@ -12,6 +12,10 @@ import amara.libraries.applications.display.materials.PaintableImage;
  */
 public abstract class HealthBarStyle{
 
+    public HealthBarStyle(int barWidth, int barHeight){
+        this(barWidth, barHeight, barWidth, barHeight);
+    }
+
     public HealthBarStyle(int barWidth, int barHeight, int imageWidth, int imageHeight){
         this.barWidth = barWidth;
         this.barHeight = barHeight;

@@ -4,30 +4,31 @@
  */
 package amara.applications.ingame.client.systems.visualisation.healthbars.styles;
 
-import java.awt.Color;
-import amara.applications.ingame.client.systems.visualisation.healthbars.HealthBarStyle;
 import amara.libraries.applications.display.materials.PaintableImage;
 
 /**
  *
  * @author Carl
  */
-public class HealthBarStyle_Default extends HealthBarStyle{
+public class HealthBarStyle_Default extends SimpleHealthBarStyle{
 
     public HealthBarStyle_Default(){
-        super(50, 5, 50, 5);
+        super(50, 5);
     }
-    public static final Color COLOR_ALLIES = new Color(0.3f, 0.9f, 0.2f);
-    public static final Color COLOR_ENEMIES = new Color(0.95f, 0.2f, 0.2f);
 
     @Override
     protected void drawMaximumHealth(PaintableImage paintableImage, float maximumHealth, boolean isAllied){
-        paintableImage.setBackground(isAllied?COLOR_ALLIES:COLOR_ENEMIES);
+        super.drawMaximumHealth(paintableImage, maximumHealth, isAllied);
+        for(int x=1;x<(imageWidth - 1);x++){
+            paintableImage.setPixel(x, 1, backgroundColor_Brighter);
+            paintableImage.setPixel(x, 2, backgroundColor);
+            paintableImage.setPixel(x, 3, backgroundColor_Darker);
+        }
         for(int x=0;x<imageWidth;x++){
             paintableImage.setPixel(x, 0, 0, 0, 0, 255);
             paintableImage.setPixel(x, (imageHeight - 1), 0, 0, 0, 255);
         }
-        for(int y=0;y<imageHeight;y++){
+        for(int y=1;y<(imageHeight - 1);y++){
             paintableImage.setPixel(0, y, 0, 0, 0, 255);
             paintableImage.setPixel((imageWidth - 1), y, 0, 0, 0, 255);
         }

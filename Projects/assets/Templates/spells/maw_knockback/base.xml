@@ -6,7 +6,7 @@
         <spellVisualisation>maw_knockback</spellVisualisation>
         <spellIndicator>
             <entity>
-                <circleIndicator radius="6"/>
+                <circularIndicator radius="6"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>

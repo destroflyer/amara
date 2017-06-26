@@ -5,7 +5,7 @@
         <spellVisualisation>instant_transmission</spellVisualisation>
         <spellIndicator>
             <entity>
-                <circleIndicator radius="8"/>
+                <circularIndicator radius="8"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>

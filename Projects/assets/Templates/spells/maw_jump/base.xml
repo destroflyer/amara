@@ -6,7 +6,7 @@
         <spellVisualisation>maw_jump</spellVisualisation>
         <spellIndicator>
             <entity>
-                <circleIndicator radius="24"/>
+                <circularIndicator radius="24"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>

@@ -6,7 +6,7 @@
         <spellVisualisation>maria_ult</spellVisualisation>
         <spellIndicator>
             <entity>
-                <rectangleIndicator width="6" height="31.5"/>
+                <linearIndicator width="6" height="31.5"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>

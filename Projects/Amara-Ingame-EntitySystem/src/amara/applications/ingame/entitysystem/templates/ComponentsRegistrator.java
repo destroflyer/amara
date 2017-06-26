@@ -2895,26 +2895,26 @@ public class ComponentsRegistrator{
             }
         });
         //indicators
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.indicators.CircleIndicatorComponent.class);
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent.class);
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.CircleIndicatorComponent.class.getDeclaredField("x"), componentFieldSerializer_Distance);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent.class.getDeclaredField("x"), componentFieldSerializer_Distance);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.CircleIndicatorComponent.class.getDeclaredField("y"), componentFieldSerializer_Distance);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent.class.getDeclaredField("y"), componentFieldSerializer_Distance);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.CircleIndicatorComponent.class.getDeclaredField("radius"), componentFieldSerializer_Distance);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent.class.getDeclaredField("radius"), componentFieldSerializer_Distance);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.indicators.CircleIndicatorComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.indicators.CircleIndicatorComponent>("circleIndicator"){
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent>("circularIndicator"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.indicators.CircleIndicatorComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent construct(){
                 float x = 0;
                 String xText = element.getAttributeValue("x");
                 if((xText != null) && (xText.length() > 0)){
@@ -2930,34 +2930,34 @@ public class ComponentsRegistrator{
                 if((radiusText != null) && (radiusText.length() > 0)){
                     radius = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, radiusText));
                 }
-                return new amara.applications.ingame.entitysystem.components.spells.indicators.CircleIndicatorComponent(x, y, radius);
+                return new amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent(x, y, radius);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.indicators.RectangleIndicatorComponent.class);
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent.class);
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.RectangleIndicatorComponent.class.getDeclaredField("x"), componentFieldSerializer_Distance);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent.class.getDeclaredField("x"), componentFieldSerializer_Distance);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.RectangleIndicatorComponent.class.getDeclaredField("y"), componentFieldSerializer_Distance);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent.class.getDeclaredField("y"), componentFieldSerializer_Distance);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.RectangleIndicatorComponent.class.getDeclaredField("width"), componentFieldSerializer_Distance);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent.class.getDeclaredField("width"), componentFieldSerializer_Distance);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.RectangleIndicatorComponent.class.getDeclaredField("height"), componentFieldSerializer_Distance);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent.class.getDeclaredField("height"), componentFieldSerializer_Distance);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.indicators.RectangleIndicatorComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.indicators.RectangleIndicatorComponent>("rectangleIndicator"){
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent>("linearIndicator"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.indicators.RectangleIndicatorComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent construct(){
                 float x = 0;
                 String xText = element.getAttributeValue("x");
                 if((xText != null) && (xText.length() > 0)){
@@ -2978,7 +2978,7 @@ public class ComponentsRegistrator{
                 if((heightText != null) && (heightText.length() > 0)){
                     height = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, heightText));
                 }
-                return new amara.applications.ingame.entitysystem.components.spells.indicators.RectangleIndicatorComponent(x, y, width, height);
+                return new amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent(x, y, width, height);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent.class);

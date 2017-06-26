@@ -6,7 +6,7 @@
         <spellVisualisation>ganfaul_ult</spellVisualisation>
         <spellIndicator>
             <entity>
-                <rectangleIndicator width="4" height="40"/>
+                <linearIndicator width="4" height="40"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>

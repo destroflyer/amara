@@ -5,8 +5,8 @@
         <spellVisualisation>maria_slash</spellVisualisation>
         <spellIndicator>
             <entity>
-                <rectangleIndicator width="2" height="4"/>
-                <circleIndicator y="5" radius="2.5"/>
+                <linearIndicator width="2" height="4"/>
+                <circularIndicator y="5" radius="2.5"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>

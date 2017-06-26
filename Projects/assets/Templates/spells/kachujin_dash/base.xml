@@ -5,7 +5,7 @@
         <spellVisualisation>kachujin_dash</spellVisualisation>
         <spellIndicator>
             <entity>
-                <rectangleIndicator width="2" height="8"/>
+                <linearIndicator width="2" height="8"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>

@@ -6,7 +6,7 @@
         <spellVisualisation>ganfaul_laser</spellVisualisation>
         <spellIndicator>
             <entity>
-                <rectangleIndicator width="2.5" height="25"/>
+                <linearIndicator width="2.5" height="25"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>
