@@ -58,9 +58,9 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("willymax-0", "Model \"Little Dragon\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/willymax-0"),
         new Thanks("derekwatts", "Model \"Mjolnir\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/DerekWatts"),
         new Thanks("Julio Iglesias", "Model \"Pseudospider\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/Zafio"),
-        new Thanks("Pabong", "Model \"Tower Defense\"", "Interface/client/thanks/blender.png", "http://turbosquid.com/Search/Artists/Pabong"),
         new Thanks("Jumah Safarty", "Model \"Soldier\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/jumahsafarty"),
         new Thanks("minglepingle", "Model \"Steve\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/minglepingle"),
+        new Thanks("Pabong", "Model \"Tower Defense\"", "Interface/client/thanks/blender.png", "http://turbosquid.com/Search/Artists/Pabong"),
         new Thanks("Sebastian Lague", "Model \"Treasure Chest\"", "Interface/client/thanks/blender.png", "http://blendswap.com/user/SebastL"),
         new Thanks("serienreviewer", "Model \"Thousand Sunny\"", "Interface/client/thanks/blender.png", "https://sketchfab.com/serienreviewer"),
         new Thanks("silveralv", "Model \"Tower\"", "Interface/client/thanks/blender.png", "http://silveralv.deviantart.com"),
@@ -74,6 +74,7 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("Pixel Mixer", "Icon set \"Basic Icons\"", "Interface/client/user.png", "http://iconarchive.com/artist/pixelmixer.html"),
         new Thanks("Mahmoud Saleh", "Icon set \"Mini Icons\"", "Interface/client/audio.png", "http://iconarchive.com/artist/salehhh.html"),
         new Thanks("Jockum Skoglund", "Sky map \"Miramar\"", "Textures/skies/miramar/front.png", "http://hipshot.deviantart.com"),
+        new Thanks("Icons8", "Icon \"Bot\"", "Interface/client/avatars/bot.jpg", "https://icons8.com/icon/37410/bot"),
         //Audio
         new Thanks("Michikawa", "Music pack \"Celestial Aeon Project\"", "Interface/client/audio.png", "http://mikseri.net/essence"),
         new Thanks("Dynamedion", "Music pack \"Music Demo Reel\"", "Interface/client/audio.png", "http://dynamedion.com"),

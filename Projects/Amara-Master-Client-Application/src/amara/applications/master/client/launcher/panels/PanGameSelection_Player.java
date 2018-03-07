@@ -22,7 +22,7 @@ public class PanGameSelection_Player extends javax.swing.JPanel{
     public PanGameSelection_Player(PanGameSelection panGameSelection, GameSelectionPlayer player){
         initComponents();
         this.panGameSelection = panGameSelection;
-        PlayerProfileData playerProfileData = MasterserverClientUtil.getPlayerProfile(player.getID());
+        PlayerProfileData playerProfileData = PanLobby_Player.getLobbyPlayerProfile(player.getLobbyPlayer());
         lblPlayerName.setText(playerProfileData.getLogin());
         GameCharacter selectedCharacter = MasterserverClientUtil.getCharacter(player.getPlayerData().getCharacterID());
         if(selectedCharacter != null){

@@ -17,16 +17,16 @@ public class GameSelectionPlayer{
         
     }
     
-    public GameSelectionPlayer(int id, GameSelectionPlayerData playerData){
-        this.id = id;
+    public GameSelectionPlayer(LobbyPlayer lobbyPlayer, GameSelectionPlayerData playerData){
+        this.lobbyPlayer= lobbyPlayer;
         this.playerData = playerData;
     }
-    private int id;
+    private LobbyPlayer lobbyPlayer;
     private GameSelectionPlayerData playerData;
     private boolean isLockedIn;
 
-    public int getID(){
-        return id;
+    public LobbyPlayer getLobbyPlayer() {
+        return lobbyPlayer;
     }
 
     public void setPlayerData(GameSelectionPlayerData playerData){

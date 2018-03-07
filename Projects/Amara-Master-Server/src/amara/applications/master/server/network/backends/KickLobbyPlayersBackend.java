@@ -28,7 +28,7 @@ public class KickLobbyPlayersBackend implements MessageBackend{
         if(receivedMessage instanceof Message_KickLobbyPlayer){
             Message_KickLobbyPlayer message = (Message_KickLobbyPlayer) receivedMessage;
             int ownerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
-            lobbiesAppState.kickLobbyPlayer(ownerID, message.getPlayerID());
+            lobbiesAppState.kickLobbyPlayer(ownerID, message.getLobbyPlayerID());
         }
     }
 }

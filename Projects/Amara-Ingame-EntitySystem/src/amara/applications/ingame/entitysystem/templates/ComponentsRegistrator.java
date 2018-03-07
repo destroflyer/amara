@@ -2578,6 +2578,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.players.ClientComponent(clientID);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.players.IsBotComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.players.IsBotComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.IsBotComponent>("isBot"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.players.IsBotComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.players.IsBotComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent.class.getDeclaredField("entity"), componentFieldSerializer_Entity);

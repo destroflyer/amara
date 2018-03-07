@@ -19,18 +19,24 @@ public class Message_ChatMessage extends AbstractMessage{
     }
     
     public Message_ChatMessage(String text){
-        this(0, text);
+        this(0, null, text);
     }
     
-    public Message_ChatMessage(int playerID, String text){
+    public Message_ChatMessage(int playerID, String sender, String text){
         this.playerID = playerID;
+        this.sender = sender;
         this.text = text;
     }
     private int playerID;
+    private String sender;
     private String text;
 
     public int getPlayerID(){
         return playerID;
+    }
+
+    public String getSender(){
+        return sender;
     }
 
     public String getText(){

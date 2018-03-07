@@ -33,7 +33,7 @@ public class EditActiveCharacterSkinsBackend implements MessageBackend{
                 isAllowed = true;
             }
             else{
-                int id = databaseAppState.getQueryResult("SELECT id FROM users_characters_skins WHERE (userid = " + playerID + ") AND (skinid = " + message.getSkinID() + ")").nextInteger_Close();
+                int id = databaseAppState.getQueryResult("SELECT id FROM users_characters_skins WHERE (userid = " + playerID + ") AND (skinid = " + message.getSkinID() + ") LIMIT 1").nextInteger_Close();
                 isAllowed = (id != 0);
             }
             if(isAllowed){

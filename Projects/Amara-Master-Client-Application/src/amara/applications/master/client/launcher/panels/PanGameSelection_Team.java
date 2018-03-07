@@ -4,7 +4,6 @@
  */
 package amara.applications.master.client.launcher.panels;
 
-import amara.applications.master.client.MasterserverClientUtil;
 import amara.applications.master.network.messages.objects.*;
 
 /**
@@ -19,7 +18,7 @@ public class PanGameSelection_Team extends javax.swing.JPanel{
         int y = 0;
         int panelHeight = 70;
         for(GameSelectionPlayer player : team){
-            if(player.getID() == MasterserverClientUtil.getPlayerID()){
+            if(PanLobby_Player.isOwnPlayer(player.getLobbyPlayer())){
                 isOwnTeam = true;
             }
             PanGameSelection_Player panPlayer = new PanGameSelection_Player(panGameSelection, player);

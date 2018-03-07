@@ -45,8 +45,8 @@ public class GameSelection{
         for(int i=0;i<teams[teamIndex].length;i++){
             GameSelectionPlayer player = teams[teamIndex][i];
             if(player == null){
-                int playerID = lobby.getPlayers().get(lobbyPlayerIndex);
-                teams[teamIndex][i] = new GameSelectionPlayer(playerID, new GameSelectionPlayerData(-1, null));
+                LobbyPlayer lobbyPlayer = lobby.getPlayers().get(lobbyPlayerIndex);
+                teams[teamIndex][i] = new GameSelectionPlayer(lobbyPlayer, new GameSelectionPlayerData(-1, null));
                 lobbyPlayerIndex++;
                 if(lobbyPlayerIndex >= lobby.getPlayers().size()){
                     break;
@@ -63,15 +63,15 @@ public class GameSelection{
         }
     }
     
-    public boolean containsPlayer(int playerID){
-        return (getPlayer(playerID) != null);
-    }
-    
     public GameSelectionPlayer getPlayer(int playerID){
         for(GameSelectionPlayer[] team : teams){
             for(GameSelectionPlayer player : team){
-                if(player.getID() == playerID){
-                    return player;
+                LobbyPlayer lobbyPlayer = player.getLobbyPlayer();
+                if(lobbyPlayer instanceof LobbyPlayer_Human){
+                    LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
+                    if(lobbyPlayer_Human.getPlayerID() == playerID){
+                        return player;
+                    }
                 }
             }
         }

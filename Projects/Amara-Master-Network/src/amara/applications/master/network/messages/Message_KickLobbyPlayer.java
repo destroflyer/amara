@@ -18,12 +18,12 @@ public class Message_KickLobbyPlayer extends AbstractMessage{
         
     }
     
-    public Message_KickLobbyPlayer(int playerID){
-        this.playerID = playerID;
+    public Message_KickLobbyPlayer(int lobbyPlayerID){
+        this.lobbyPlayerID = lobbyPlayerID;
     }
-    private int playerID;
+    private int lobbyPlayerID;
 
-    public int getPlayerID(){
-        return playerID;
+    public int getLobbyPlayerID() {
+        return lobbyPlayerID;
     }
 }

@@ -19,6 +19,8 @@ public class IngameServerApplication extends HeadlessApplication{
         stateManager.attach(new SubNetworkServerAppState(subNetworkServer));
         stateManager.attach(new PongAppState());
         stateManager.attach(new ReceiveCommandsAppState());
+        stateManager.attach(new BotsAppState());
+        stateManager.attach(new PlayerEntitiesAppState());
         stateManager.attach(new ServerEntitySystemAppState());
         stateManager.attach(new ServerChatAppState());
         stateManager.attach(new IngameServerInitializedAppState());

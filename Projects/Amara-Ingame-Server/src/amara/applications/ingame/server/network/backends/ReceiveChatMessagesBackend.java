@@ -12,6 +12,7 @@ import amara.applications.ingame.server.appstates.ServerEntitySystemAppState;
 import amara.applications.ingame.server.chat.ChatCommand;
 import amara.applications.ingame.server.chat.commands.*;
 import amara.applications.ingame.shared.games.*;
+import amara.applications.master.network.messages.objects.*;
 import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
 import amara.libraries.entitysystem.*;
 import amara.libraries.network.*;
@@ -35,7 +36,7 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
         //addChatCommand("noenvies", new ChatCommand_NoEnvies());
     }
     private IngameServerApplication ingameServerApplication;
-    private HashMap<String, ChatCommand> chatCommands = new HashMap<String, ChatCommand>();
+    private HashMap<String, ChatCommand> chatCommands = new HashMap<>();
     
     private void addChatCommand(String name, ChatCommand command){
         chatCommands.put(name, command);
@@ -45,40 +46,50 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, final MessageResponse messageResponse){
         if(receivedMessage instanceof Message_SendChatMessage){
             final Message_SendChatMessage message = (Message_SendChatMessage) receivedMessage;
-            final Game game = ingameServerApplication.getGame();
-            final GamePlayer gamePlayer = game.getPlayer(messageResponse.getClientID());
+            Game game = ingameServerApplication.getGame();
+            GamePlayer gamePlayer = game.getPlayer(messageResponse.getClientID());
             if(gamePlayer != null){
-                messageResponse.addBroadcastMessage(new Message_ChatMessage(gamePlayer.getGameSelectionPlayer().getID(), message.getText()));
-                ingameServerApplication.enqueueTask(new Runnable(){
-
-                    @Override
-                    public void run(){
-                        MessageResponse chatCommandResponse = new MessageResponse(messageResponse.getClientID());
-                        EntityWorld entityWorld = ingameServerApplication.getStateManager().getState(ServerEntitySystemAppState.class).getEntityWorld();
-                        if(message.getText().equals("such chat")){
-                            chatCommandResponse.addAnswerMessage(new Message_ChatMessage("very responsive, wow"));
-                        }
-                        else{
-                            for(String commandName : chatCommands.keySet()){
-                                boolean isStandaloneCommand = message.getText().equals("/" + commandName);
-                                if(isStandaloneCommand || message.getText().startsWith("/" + commandName + " ")){
-                                    String optionsString = (isStandaloneCommand?null:message.getText().substring(commandName.length() + 2));
-                                    ChatCommand chatCommand = chatCommands.get(commandName);
-                                    chatCommand.setResponseMessage(null);
-                                    chatCommand.execute(optionsString, entityWorld, game, gamePlayer);
-                                    String responseMessage = chatCommand.getResponseMessage();
-                                    if(responseMessage != null){
-                                        chatCommandResponse.addAnswerMessage(new Message_ChatMessage(responseMessage));
-                                    }
-                                    break;
+                EntityWorld entityWorld = ingameServerApplication.getStateManager().getState(ServerEntitySystemAppState.class).getEntityWorld();
+                Message_ChatMessage chatMessage = createChatMessage(gamePlayer, entityWorld, message.getText());
+                messageResponse.addBroadcastMessage(chatMessage);
+                ingameServerApplication.enqueueTask(() -> {
+                    MessageResponse chatCommandResponse = new MessageResponse(messageResponse.getClientID());
+                    if(message.getText().equals("such chat")){
+                        chatCommandResponse.addAnswerMessage(new Message_ChatMessage("very responsive, wow"));
+                    }
+                    else{
+                        for(String commandName : chatCommands.keySet()){
+                            boolean isStandaloneCommand = message.getText().equals("/" + commandName);
+                            if(isStandaloneCommand || message.getText().startsWith("/" + commandName + " ")){
+                                String optionsString = (isStandaloneCommand?null:message.getText().substring(commandName.length() + 2));
+                                ChatCommand chatCommand = chatCommands.get(commandName);
+                                chatCommand.setResponseMessage(null);
+                                chatCommand.execute(optionsString, entityWorld, game, gamePlayer);
+                                String responseMessage = chatCommand.getResponseMessage();
+                                if(responseMessage != null){
+                                    chatCommandResponse.addAnswerMessage(new Message_ChatMessage(responseMessage));
                                 }
+                                break;
                             }
                         }
-                        SubNetworkServer subNetworkServer = ingameServerApplication.getStateManager().getState(SubNetworkServerAppState.class).getSubNetworkServer();
-                        subNetworkServer.sendMessageResponse(chatCommandResponse);
                     }
+                    SubNetworkServer subNetworkServer = ingameServerApplication.getStateManager().getState(SubNetworkServerAppState.class).getSubNetworkServer();
+                    subNetworkServer.sendMessageResponse(chatCommandResponse);
                 });
             }
         }
+    }
+    
+    private Message_ChatMessage createChatMessage(GamePlayer gamePlayer, EntityWorld entityWorld, String text){
+        LobbyPlayer lobbyPlayer = gamePlayer.getGameSelectionPlayer().getLobbyPlayer();
+        if(lobbyPlayer instanceof LobbyPlayer_Human){
+            LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
+            return new Message_ChatMessage(lobbyPlayer_Human.getPlayerID(), null, text);
+        }
+        else if(lobbyPlayer instanceof LobbyPlayer_Bot){
+            LobbyPlayer_Bot lobbyPlayer_Bot = (LobbyPlayer_Bot) lobbyPlayer;
+            return new Message_ChatMessage(0, lobbyPlayer_Bot.getName(), text);
+        }
+        return null;
     }
 }

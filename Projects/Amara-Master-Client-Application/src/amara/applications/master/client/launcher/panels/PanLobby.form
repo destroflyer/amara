@@ -223,6 +223,7 @@
               <Component id="lblIsQueueing" alignment="0" max="32767" attributes="0"/>
               <Component id="pbrIsQueueing" alignment="0" pref="0" max="32767" attributes="0"/>
               <Component id="btnInvite" alignment="0" max="32767" attributes="0"/>
+              <Component id="btnAddBot" alignment="0" pref="120" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -231,6 +232,8 @@
                   <Component id="btnInvite" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="btnLeave" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="btnAddBot" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="btnPlay" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -278,6 +281,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInviteActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnAddBot">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Add Bot"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddBotActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

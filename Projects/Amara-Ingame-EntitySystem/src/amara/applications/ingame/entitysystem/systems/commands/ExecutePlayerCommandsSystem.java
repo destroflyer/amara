@@ -71,8 +71,8 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                     int targetEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetEntity, new TemporaryComponent());
                     entityWorld.setComponent(targetEntity, new PositionComponent(moveCommand.getPosition()));
-                    boolean wasSuccessfull = tryWalk(entityWorld, characterEntity, targetEntity, -1);
-                    if(!wasSuccessfull){
+                    boolean wasSuccessful = tryWalk(entityWorld, characterEntity, targetEntity, -1);
+                    if(!wasSuccessful){
                         entityWorld.removeEntity(targetEntity);
                     }
                 }
@@ -81,17 +81,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 }
                 else if(command instanceof AutoAttackCommand){
                     AutoAttackCommand autoAttackCommand = (AutoAttackCommand) command;
-                    AutoAttackComponent autoAttackComponent = entityWorld.getComponent(characterEntity, AutoAttackComponent.class);
-                    if(autoAttackComponent != null){
-                        AggroTargetComponent aggroTargetComponent = entityWorld.getComponent(characterEntity, AggroTargetComponent.class);
-                        if((aggroTargetComponent == null) || (autoAttackCommand.getTargetEntity() != aggroTargetComponent.getTargetEntity())){
-                            if(CheckAggroTargetAttackibilitySystem.isAttackable(entityWorld, characterEntity, autoAttackCommand.getTargetEntity())){
-                                if(UnitUtil.tryCancelAction(entityWorld, characterEntity)){
-                                    entityWorld.setComponent(characterEntity, new AggroTargetComponent(autoAttackCommand.getTargetEntity()));
-                                }
-                            }
-                        }
-                    }
+                    tryAutoAttack(entityWorld, characterEntity, autoAttackCommand.getTargetEntity());
                 }
                 else if(command instanceof CastSelfcastSpellCommand){
                     CastSelfcastSpellCommand castSelfcastSpellCommand = (CastSelfcastSpellCommand) command;
@@ -173,6 +163,22 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
                 break;
         }
         return -1;
+    }
+    
+    public static boolean tryAutoAttack(EntityWorld entityWorld, int unitEntity, int targetEntity) {
+        AutoAttackComponent autoAttackComponent = entityWorld.getComponent(unitEntity, AutoAttackComponent.class);
+        if(autoAttackComponent != null){
+            AggroTargetComponent aggroTargetComponent = entityWorld.getComponent(unitEntity, AggroTargetComponent.class);
+            if((aggroTargetComponent == null) || (targetEntity != aggroTargetComponent.getTargetEntity())){
+                if(CheckAggroTargetAttackibilitySystem.isAttackable(entityWorld, unitEntity, targetEntity)){
+                    if(UnitUtil.tryCancelAction(entityWorld, unitEntity)){
+                        entityWorld.setComponent(unitEntity, new AggroTargetComponent(targetEntity));
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
     
     public static boolean tryWalk(EntityWorld entityWorld, int unitEntity, int targetEntity, float sufficientDistance){

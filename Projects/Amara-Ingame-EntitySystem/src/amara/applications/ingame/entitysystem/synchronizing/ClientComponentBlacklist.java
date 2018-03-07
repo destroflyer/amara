@@ -201,6 +201,7 @@ public class ClientComponentBlacklist{
             RemoveOnMapLeaveComponent.class,
             //players
             ClientComponent.class,
+            IsBotComponent.class,
             RespawnComponent.class,
             //shop
             //spawns

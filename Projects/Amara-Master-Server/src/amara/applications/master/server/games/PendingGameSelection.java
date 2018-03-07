@@ -6,7 +6,7 @@
 package amara.applications.master.server.games;
 
 import java.util.LinkedList;
-import amara.applications.master.network.messages.objects.GameSelection;
+import amara.applications.master.network.messages.objects.*;
 
 /**
  *
@@ -17,11 +17,24 @@ public class PendingGameSelection{
     public PendingGameSelection(GameSelection gameSelection, float remainingAcceptTime){
         this.gameSelection = gameSelection;
         this.remainingAcceptTime = remainingAcceptTime;
+        handleBotSelections();
     }
     private GameSelection gameSelection;
     private float remainingAcceptTime;
-    private LinkedList<Integer> acceptingPlayers = new LinkedList<Integer>();
-    private LinkedList<Integer> lockedInPlayers = new LinkedList<Integer>();
+    private LinkedList<GameSelectionPlayer> acceptingPlayers = new LinkedList<GameSelectionPlayer>();
+    
+    private void handleBotSelections() {
+        for (GameSelectionPlayer[] team : gameSelection.getTeams()) {
+            for (GameSelectionPlayer player : team) {
+                if (player.getLobbyPlayer() instanceof LobbyPlayer_Bot) {
+                    LobbyPlayer_Bot lobbyPlayer_Bot = (LobbyPlayer_Bot) player.getLobbyPlayer();
+                    accept(player);
+                    player.setPlayerData(lobbyPlayer_Bot.getGameSelectionPlayerData());
+                    player.lockIn();
+                }
+            }
+        }
+    }
 
     public void onTimePassed(float time){
         remainingAcceptTime -= time;
@@ -30,15 +43,9 @@ public class PendingGameSelection{
         }
     }
     
-    public void accept(int playerID){
-        if(!acceptingPlayers.contains(playerID)){
-            acceptingPlayers.add(playerID);
-        }
-    }
-    
-    public void lockIn(int playerID){
-        if(!lockedInPlayers.contains(playerID)){
-            lockedInPlayers.add(playerID);
+    public void accept(GameSelectionPlayer player){
+        if(!acceptingPlayers.contains(player)){
+            acceptingPlayers.add(player);
         }
     }
 
@@ -54,11 +61,12 @@ public class PendingGameSelection{
         return (acceptingPlayers.size() == gameSelection.getPlayersCount());
     }
     
-    public boolean hasAccepted(int playerID){
-        return acceptingPlayers.contains(playerID);
-    }
-    
-    public boolean isLockedIn(){
-        return (lockedInPlayers.size() == gameSelection.getPlayersCount());
+    public boolean hasAccepted(LobbyPlayer lobbyPlayer){
+        for(GameSelectionPlayer player : acceptingPlayers){
+            if(player.getLobbyPlayer() == lobbyPlayer){
+                return true;
+            }
+        }
+        return false;
     }
 }

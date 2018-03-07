@@ -106,7 +106,7 @@ public class PanGameSelection_CharacterSkin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconMouseClicked
-        MasterserverClientUtil.getNetworkClient().sendMessage(new Message_EditActiveCharacterSkin(ownedCharacter.getActiveSkinID(), characterSkinID));
+        MasterserverClientUtil.getNetworkClient().sendMessage(new Message_EditActiveCharacterSkin(ownedCharacter.getCharacter().getID(), characterSkinID));
         ownedCharacter.setActiveSkinID(characterSkinID);
         panCharacterSkins.updateCharacterSkinsPanels();
     }//GEN-LAST:event_lblIconMouseClicked

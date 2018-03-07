@@ -4,6 +4,7 @@
  */
 package amara.applications.master.server.appstates;
 
+import java.util.LinkedList;
 import amara.applications.ingame.network.messages.*;
 import amara.applications.ingame.server.IngameServerApplication;
 import amara.applications.ingame.shared.games.*;
@@ -12,6 +13,7 @@ import amara.applications.master.network.messages.objects.*;
 import amara.applications.master.server.games.RunningGames;
 import amara.applications.master.server.network.PortProvider;
 import amara.applications.master.server.players.ConnectedPlayers;
+import amara.core.Util;
 import amara.libraries.applications.headless.appstates.NetworkServerAppState;
 import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
 import amara.libraries.network.NetworkServer;
@@ -30,12 +32,8 @@ public class GamesAppState extends ServerBaseAppState{
     
     public void sendGameSelectionAcceptRequest(GameSelection gameSelection){
         NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
-        ConnectedPlayers connectedPlayers = getAppState(PlayersAppState.class).getConnectedPlayers();
-        for(GameSelectionPlayer[] team : gameSelection.getTeams()){
-            for(GameSelectionPlayer player : team){
-                int clientID = connectedPlayers.getClientID(player.getID());
-                networkServer.sendMessageToClient(clientID, new Message_GameSelectionAcceptRequest());
-            }
+        for(int clientID : getClientIDs(gameSelection)){
+            networkServer.sendMessageToClient(clientID, new Message_GameSelectionAcceptRequest());
         }
     }
     
@@ -61,15 +59,17 @@ public class GamesAppState extends ServerBaseAppState{
     
     private int[] getClientIDs(GameSelection gameSelection){
         ConnectedPlayers connectedPlayers = getAppState(PlayersAppState.class).getConnectedPlayers();
-        int[] clientIDs = new int[gameSelection.getPlayersCount()];
-        int i = 0;
+        LinkedList<Integer> clientIDs = new LinkedList<>();
         for(GameSelectionPlayer[] team : gameSelection.getTeams()){
             for(GameSelectionPlayer player : team){
-                clientIDs[i] = connectedPlayers.getClientID(player.getID());
-                i++;
+                LobbyPlayer lobbyPlayer = player.getLobbyPlayer();
+                if (lobbyPlayer instanceof LobbyPlayer_Human) {
+                    LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
+                    clientIDs.push(connectedPlayers.getClientID(lobbyPlayer_Human.getPlayerID()));
+                }
             }
         }
-        return clientIDs;
+        return Util.convertToArray_Integer(clientIDs);
     }
     
     public void onGameServerInitialized(Game game){
@@ -77,8 +77,12 @@ public class GamesAppState extends ServerBaseAppState{
         ConnectedPlayers connectedPlayers = mainApplication.getStateManager().getState(PlayersAppState.class).getConnectedPlayers();
         for(GamePlayer[] team : game.getTeams()){
             for(GamePlayer player : team){
-                int clientID = connectedPlayers.getClientID(player.getGameSelectionPlayer().getID());
-                networkServer.sendMessageToClient(clientID, new Message_GameCreated(player.getAuthentificationKey()));
+                LobbyPlayer lobbyPlayer = player.getGameSelectionPlayer().getLobbyPlayer();
+                if (lobbyPlayer instanceof LobbyPlayer_Human) {
+                    LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
+                    int clientID = connectedPlayers.getClientID(lobbyPlayer_Human.getPlayerID());
+                    networkServer.sendMessageToClient(clientID, new Message_GameCreated(player.getAuthentificationKey()));
+                }
             }
         }
     }

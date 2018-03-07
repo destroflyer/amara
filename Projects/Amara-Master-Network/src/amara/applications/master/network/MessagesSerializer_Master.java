@@ -47,6 +47,7 @@ public class MessagesSerializer_Master{
             Message_PlayerStatus.class,
             
             Message_AcceptGameSelection.class,
+            Message_AddLobbyBot.class,
             Message_CancelLobbyQueue.class,
             Message_CreateLobby.class,
             Message_GameSelectionAcceptRequest.class,
@@ -58,6 +59,9 @@ public class MessagesSerializer_Master{
                         GameSelectionPlayerData.class,
                     Lobby.class,
                         LobbyData.class,
+                        LobbyPlayer_Human.class,
+                        LobbyPlayer_Bot.class,
+            Message_GenericInformation.class,
             Message_InviteLobbyPlayer.class,
             Message_LeaveLobby.class,
             Message_LobbyClosed.class,

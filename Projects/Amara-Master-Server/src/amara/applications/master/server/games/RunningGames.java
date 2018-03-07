@@ -6,6 +6,7 @@ package amara.applications.master.server.games;
 
 import java.util.ArrayList;
 import amara.applications.ingame.shared.games.*;
+import amara.applications.master.network.messages.objects.*;
 import amara.applications.master.server.network.PortProvider;
 
 /**
@@ -33,8 +34,12 @@ public class RunningGames{
         for(Game game : games){
             for(GamePlayer[] team : game.getTeams()){
                 for(GamePlayer player : team){
-                    if(player.getGameSelectionPlayer().getID() == playerID){
-                        return game;
+                    LobbyPlayer lobbyPlayer = player.getGameSelectionPlayer().getLobbyPlayer();
+                    if(lobbyPlayer instanceof LobbyPlayer_Human){
+                        LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
+                        if(((LobbyPlayer_Human) lobbyPlayer).getPlayerID() == playerID){
+                            return game;
+                        }
                     }
                 }
             }

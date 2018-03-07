@@ -24,6 +24,7 @@ public class PanPlay extends javax.swing.JPanel{
         panIngame = new PanIngame();
         displayCreatePanel();
         NetworkClient networkClient = MasterserverClientUtil.getNetworkClient();
+        networkClient.addMessageBackend(new GenericInformationBackend(panMainMenu));
         networkClient.addMessageBackend(new UpdateLobbyBackend(this));
         networkClient.addMessageBackend(new ClosedLobbyBackend(this));
         networkClient.addMessageBackend(new LobbyQueueStatusBackend(panLobby));

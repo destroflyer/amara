@@ -25,9 +25,9 @@ public class GamesQueueAppState extends ServerBaseAppState{
         
     }
     private static final float ACCEPT_TIMER = 10;
-    private ArrayList<GameSelection> queueingGameSelections = new ArrayList<GameSelection>();
-    private ArrayList<PendingGameSelection> pendingGameSelections = new ArrayList<PendingGameSelection>();
-    private ArrayList<GameSelection> runningGameSelections = new ArrayList<GameSelection>();
+    private ArrayList<GameSelection> queueingGameSelections = new ArrayList<>();
+    private ArrayList<PendingGameSelection> pendingGameSelections = new ArrayList<>();
+    private ArrayList<GameSelection> runningGameSelections = new ArrayList<>();
     
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
@@ -38,6 +38,7 @@ public class GamesQueueAppState extends ServerBaseAppState{
         networkServer.addMessageBackend(new CreateLobbiesBackend(lobbiesAppState, connectedPlayers));
         networkServer.addMessageBackend(new SetLobbiesDataBackend(lobbiesAppState, connectedPlayers));
         networkServer.addMessageBackend(new InviteLobbyPlayersBackend(lobbiesAppState, connectedPlayers));
+        networkServer.addMessageBackend(new AddLobbyBotsBackend(lobbiesAppState, connectedPlayers));
         networkServer.addMessageBackend(new LeaveLobbiesBackend(lobbiesAppState, connectedPlayers));
         networkServer.addMessageBackend(new KickLobbyPlayersBackend(lobbiesAppState, connectedPlayers));
         networkServer.addMessageBackend(new StartLobbyQueuesBackend(lobbiesAppState, this, connectedPlayers));
@@ -61,8 +62,8 @@ public class GamesQueueAppState extends ServerBaseAppState{
                 boolean requeueLobby;
                 for(Lobby lobby : gameSelection.getLobbies()){
                     requeueLobby = true;
-                    for(int playerID : lobby.getPlayers()){
-                        if(!pendingGameSelection.hasAccepted(playerID)){
+                    for(LobbyPlayer lobbyPlayer : lobby.getPlayers()){
+                        if(!pendingGameSelection.hasAccepted(lobbyPlayer)){
                             requeueLobby = false;
                             break;
                         }
@@ -88,6 +89,7 @@ public class GamesQueueAppState extends ServerBaseAppState{
     }
     
     public void startLobbyQueue(Lobby lobby){
+        // Try to add lobby to an existing matching gameSelection
         boolean createGameSelection = true;
         for(GameSelection gameSelection : queueingGameSelections){
             if(gameSelection.getLobbies().contains(lobby)){
@@ -100,14 +102,21 @@ public class GamesQueueAppState extends ServerBaseAppState{
                 }
             }
         }
+        // Try to create a new gameSelection for the lobby since none matched so far
+        boolean wasLobbyQueued = true;
         if(createGameSelection){
             LobbyData lobbyData = lobby.getLobbyData();
             GameSelection gameSelection = new GameSelection(new GameSelectionData(lobbyData.getMapName(), lobbyData.getTeamFormat()));
             queueingGameSelections.add(gameSelection);
-            tryAddingLobby(gameSelection, lobby);
+            wasLobbyQueued = (tryAddingLobby(gameSelection, lobby) != -1);
         }
         LobbiesAppState lobbiesAppState = getAppState(LobbiesAppState.class);
-        lobbiesAppState.sendMessageToLobbyPlayers(lobby, new Message_LobbyQueueStatus(true));
+        if(wasLobbyQueued){
+            lobbiesAppState.sendMessageToLobbyPlayers(lobby, new Message_LobbyQueueStatus(true));
+        }
+        else {
+            lobbiesAppState.sendMessageToLobbyOwner(lobby, new Message_GenericInformation(true, "Your lobby couldn't be queued. Please ensure that the team format supports your players count."));
+        }
     }
     
     private int tryAddingLobby(GameSelection gameSelection, Lobby lobby){
@@ -150,9 +159,10 @@ public class GamesQueueAppState extends ServerBaseAppState{
         for(int i=0;i<pendingGameSelections.size();i++){
             PendingGameSelection pendingGameSelection = pendingGameSelections.get(i);
             GameSelection gameSelection = pendingGameSelection.getGameSelection();
-            if(gameSelection.containsPlayer(playerID)){
+            GameSelectionPlayer player = gameSelection.getPlayer(playerID);
+            if(player != null){
                 if(isAccepted){
-                    pendingGameSelection.accept(playerID);
+                    pendingGameSelection.accept(player);
                     if(pendingGameSelection.isAccepted()){
                         pendingGameSelections.remove(i);
                         i--;
@@ -164,7 +174,7 @@ public class GamesQueueAppState extends ServerBaseAppState{
                     pendingGameSelections.remove(i);
                     LobbiesAppState lobbiesAppState = getAppState(LobbiesAppState.class);
                     for(Lobby lobby : gameSelection.getLobbies()){
-                        if(lobby.containsPlayer(playerID)){
+                        if(lobby.containsHumanPlayer(playerID)){
                             lobbiesAppState.sendMessageToLobbyPlayers(lobby, new Message_LobbyQueueStatus(false));
                         }
                         else{
@@ -203,8 +213,12 @@ public class GamesQueueAppState extends ServerBaseAppState{
         ConnectedPlayers connectedPlayers = getAppState(PlayersAppState.class).getConnectedPlayers();
         for(GameSelectionPlayer[] team : gameSelection.getTeams()){
             for(GameSelectionPlayer player : team){
-                int clientID = connectedPlayers.getClientID(player.getID());
-                networkServer.sendMessageToClient(clientID, message);
+                LobbyPlayer lobbyPlayer = player.getLobbyPlayer();
+                if (lobbyPlayer instanceof LobbyPlayer_Human) {
+                    LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
+                    int clientID = connectedPlayers.getClientID(lobbyPlayer_Human.getPlayerID());
+                    networkServer.sendMessageToClient(clientID, message);
+                }
             }
         }
     }

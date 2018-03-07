@@ -20,12 +20,12 @@ import amara.libraries.network.NetworkClient;
  */
 public class PlayerProfilesAppState extends ClientBaseAppState{
 
-    private LinkedList<Integer> updatingIDs = new LinkedList<Integer>();
-    private LinkedList<String> updatingLogins = new LinkedList<String>();
-    private ArrayList<Integer> notExistingIDs = new ArrayList<Integer>();
-    private ArrayList<String> notExistingLogins = new ArrayList<String>();
-    private HashMap<Integer, PlayerProfileData> profilesByIDs = new HashMap<Integer, PlayerProfileData>();
-    private HashMap<String, PlayerProfileData> profilesByLogins = new HashMap<String, PlayerProfileData>();
+    private LinkedList<Integer> updatingIDs = new LinkedList<>();
+    private LinkedList<String> updatingLogins = new LinkedList<>();
+    private ArrayList<Integer> notExistingIDs = new ArrayList<>();
+    private ArrayList<String> notExistingLogins = new ArrayList<>();
+    private HashMap<Integer, PlayerProfileData> profilesByIDs = new HashMap<>();
+    private HashMap<String, PlayerProfileData> profilesByLogins = new HashMap<>();
     
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){

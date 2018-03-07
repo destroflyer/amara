@@ -30,28 +30,20 @@ public class ClientChatAppState extends BaseDisplayAppState<IngameClientApplicat
     
     private static final float HIDE_CHAT_DELAY = 10;
     private float timeSinceLastReceivedMessage;
-    private LinkedList<Message_ChatMessage> queuedMessages = new LinkedList<Message_ChatMessage>();
+    private LinkedList<Message_ChatMessage> queuedMessages = new LinkedList<>();
     private boolean isHandlingMessage;
-    private HashMap<Integer, String> playerLogins = new HashMap<Integer, String>();
+    private HashMap<Integer, String> playerLogins = new HashMap<>();
     
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.addMessageBackend(new MessageBackend(){
-
-            @Override
-            public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-                if(receivedMessage instanceof Message_ChatMessage){
-                    final Message_ChatMessage message = (Message_ChatMessage) receivedMessage;
-                    mainApplication.enqueueTask(new Runnable(){
-
-                        @Override
-                        public void run(){
-                            queuedMessages.add(message);
-                        }
-                    });
-                }
+        networkClient.addMessageBackend((Message receivedMessage, MessageResponse messageResponse) -> {
+            if(receivedMessage instanceof Message_ChatMessage){
+                final Message_ChatMessage message = (Message_ChatMessage) receivedMessage;
+                mainApplication.enqueueTask(() -> {
+                    queuedMessages.add(message);
+                });
             }
         });
     }
@@ -84,33 +76,32 @@ public class ClientChatAppState extends BaseDisplayAppState<IngameClientApplicat
     }
     
     private void displayMessages(final Message_ChatMessage[] messages){
-        new Thread(new Runnable(){
-
-            @Override
-            public void run(){
-                isHandlingMessage = true;
-                for(Message_ChatMessage message : messages){
-                    ScreenController_Chat screenController_Chat = getScreenController_Chat();
-                    String chatLine = "";
-                    if(message.getPlayerID() != 0){
-                        String login = playerLogins.get(message.getPlayerID());
-                        if(login == null){
-                            PlayerProfileData playerProfileData = mainApplication.getMasterserverClient().getPlayerProfile(message.getPlayerID());
-                            login = playerProfileData.getLogin();
-                            playerLogins.put(message.getPlayerID(), login);
-                        }
-                        chatLine += "\\#" + ((message.getPlayerID() == mainApplication.getMasterserverClient().getPlayerID())?"00CE00":"E72D33") + "#" + login + ":\\#FFFFFF# ";
-                    }
-                    else{
-                        chatLine += "\\#FFCC00#";
-                    }
-                    chatLine += message.getText();
-                    screenController_Chat.addChatLine(chatLine);
-                    screenController_Chat.setChatVisible_Output(true);
-                    timeSinceLastReceivedMessage = 0;
+        new Thread(() -> {
+            isHandlingMessage = true;
+            for(Message_ChatMessage message : messages){
+                ScreenController_Chat screenController_Chat = getScreenController_Chat();
+                String chatLine = "";
+                String name = message.getSender();
+                if((name == null) && (message.getPlayerID() != 0)){
+                    PlayerProfileData playerProfileData = mainApplication.getMasterserverClient().getPlayerProfile(message.getPlayerID());
+                    String login = playerProfileData.getLogin();
+                    playerLogins.put(message.getPlayerID(), login);
+                    // TODO: Add " (characterName)"
+                    name = login;
                 }
-                isHandlingMessage = false;
+                if(name != null){
+                    boolean isOwnMessage = (message.getPlayerID() == mainApplication.getMasterserverClient().getPlayerID());
+                    chatLine += "\\#" + (isOwnMessage?"00CE00":"E72D33") + "#" + name + ":\\#FFFFFF# ";
+                }
+                else{
+                    chatLine += "\\#FFCC00#";
+                }
+                chatLine += message.getText();
+                screenController_Chat.addChatLine(chatLine);
+                screenController_Chat.setChatVisible_Output(true);
+                timeSinceLastReceivedMessage = 0;
             }
+            isHandlingMessage = false;
         }).start();
     }
     

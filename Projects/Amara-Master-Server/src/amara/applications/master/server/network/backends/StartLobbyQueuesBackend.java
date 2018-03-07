@@ -31,7 +31,7 @@ public class StartLobbyQueuesBackend implements MessageBackend{
         if(receivedMessage instanceof Message_StartLobbyQueue){
             int playerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
             Lobby lobby = lobbiesAppState.getLobby(playerID);
-            if((lobby != null) && (playerID == lobby.getOwnerID())){
+            if((lobby != null) && (playerID == lobby.getOwner().getPlayerID())){
                 gamesQueueAppState.startLobbyQueue(lobby);
             }
         }

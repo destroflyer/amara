@@ -17,15 +17,7 @@ public class Game{
     public Game(GameSelection gameSelection){
         this.map = MapFileHandler.load(gameSelection.getGameSelectionData().getMapName());
         this.gameSelection = gameSelection;
-        TeamFormat teamFormat = gameSelection.getGameSelectionData().getTeamFormat();
-        teams = new GamePlayer[teamFormat.getTeamsCount()][];
-        int[][] authentificationKeys = generateAuthentificationKeys(teamFormat.getTeamSizes());
-        for(int i=0;i<teams.length;i++){
-            teams[i] = new GamePlayer[teamFormat.getTeamSize(i)];
-            for(int r=0;r<teams[i].length;r++){
-                teams[i][r] = new GamePlayer(gameSelection.getTeams()[i][r], authentificationKeys[i][r]);
-            }
-        }
+        createTeams();
     }
     public static int ENTITY = 0;
     private Map map;
@@ -33,6 +25,23 @@ public class Game{
     private GamePlayer[][] teams;
     private int port;
     private boolean isStarted;
+    
+    private void createTeams(){
+        TeamFormat teamFormat = gameSelection.getGameSelectionData().getTeamFormat();
+        teams = new GamePlayer[teamFormat.getTeamsCount()][];
+        int[][] authentificationKeys = generateAuthentificationKeys(teamFormat.getTeamSizes());
+        for(int i=0;i<teams.length;i++){
+            teams[i] = new GamePlayer[teamFormat.getTeamSize(i)];
+            for(int r=0;r<teams[i].length;r++){
+                GameSelectionPlayer gameSelectionPlayer = gameSelection.getTeams()[i][r];
+                GamePlayer gamePlayer = new GamePlayer(gameSelectionPlayer, authentificationKeys[i][r]);
+                if(gameSelectionPlayer.getLobbyPlayer() instanceof LobbyPlayer_Bot){
+                    gamePlayer.setReady(true);
+                }
+                teams[i][r] = gamePlayer;
+            }
+        }
+    }
     
     public GamePlayer onClientConnected(int clientID, int authentificationKey){
         for(GamePlayer[] team : teams){

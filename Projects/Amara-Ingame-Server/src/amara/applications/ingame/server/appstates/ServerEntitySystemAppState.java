@@ -4,18 +4,10 @@
  */
 package amara.applications.ingame.server.appstates;
 
-import java.sql.ResultSet;
-import java.util.LinkedList;
 import amara.applications.ingame.entitysystem.components.game.*;
-import amara.applications.ingame.entitysystem.components.general.*;
-import amara.applications.ingame.entitysystem.components.items.*;
-import amara.applications.ingame.entitysystem.components.players.*;
-import amara.applications.ingame.entitysystem.components.units.*;
-import amara.applications.ingame.entitysystem.components.units.scores.*;
-import amara.applications.ingame.entitysystem.components.units.types.*;
-import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.synchronizing.*;
 import amara.applications.ingame.entitysystem.systems.aggro.*;
+import amara.applications.ingame.entitysystem.systems.ai.*;
 import amara.applications.ingame.entitysystem.systems.attributes.*;
 import amara.applications.ingame.entitysystem.systems.audio.*;
 import amara.applications.ingame.entitysystem.systems.buffs.*;
@@ -62,14 +54,9 @@ import amara.applications.ingame.server.entitysystem.systems.objectives.CheckMap
 import amara.applications.ingame.server.network.backends.*;
 import amara.applications.ingame.shared.games.*;
 import amara.applications.ingame.shared.maps.*;
-import amara.applications.master.network.messages.objects.GameSelectionPlayerData;
-import amara.applications.master.server.appstates.DatabaseAppState;
-import amara.core.Util;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.*;
-import amara.libraries.database.QueryResult;
 import amara.libraries.entitysystem.*;
-import amara.libraries.entitysystem.templates.EntityTemplate;
 import amara.libraries.network.SubNetworkServer;
 import amara.libraries.physics.intersectionHelper.PolyMapManager;
 
@@ -91,80 +78,18 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         subNetworkServer.addMessageBackend(new AuthentificateClientsBackend(game, entityWorld));
         subNetworkServer.addMessageBackend(new SendInitialEntityWorldBackend(entityWorld));
         subNetworkServer.addMessageBackend(new StartGameBackend(game));
-        
+
         EntityWrapper gameEntity = entityWorld.getWrapped(entityWorld.createEntity());
         gameEntity.setComponent(new GameSpeedComponent(1));
         Map map = game.getMap();
         EntityWrapper mapEntity = entityWorld.getWrapped(entityWorld.createEntity());
         map.setEntity(mapEntity.getId());
         map.load(entityWorld);
-        DatabaseAppState databaseAppState = mainApplication.getMasterServer().getState(DatabaseAppState.class);
+        PlayerEntitiesAppState playerEntitiesAppState = getAppState(PlayerEntitiesAppState.class);
         int playerIndex = 0;
         for(GamePlayer[] team : game.getTeams()){
             for(GamePlayer player : team){
-                EntityWrapper playerEntity = entityWorld.getWrapped(entityWorld.createEntity());
-                playerEntity.setComponent(new PlayerIndexComponent(playerIndex));
-                String login = databaseAppState.getQueryResult("SELECT login FROM users WHERE id = " + player.getGameSelectionPlayer().getID() + " LIMIT 1").nextString_Close();
-                playerEntity.setComponent(new NameComponent(login));
-                GameSelectionPlayerData gameSelectionPlayerData = player.getGameSelectionPlayer().getPlayerData();
-                String characterName = databaseAppState.getQueryResult("SELECT name FROM characters WHERE id = " + gameSelectionPlayerData.getCharacterID()).nextString_Close();
-                EntityWrapper character = EntityTemplate.createFromTemplate(entityWorld, "units/" + characterName);
-                character.setComponent(new TitleComponent(login));
-                try{
-                    QueryResult results_UserCharacters = databaseAppState.getQueryResult("SELECT skinid, inventory FROM users_characters WHERE (userid = " + player.getGameSelectionPlayer().getID() + ") AND (characterid = " + gameSelectionPlayerData.getCharacterID() + ")");
-                    results_UserCharacters.next();
-                    String skinName = "default";
-                    int skinID = results_UserCharacters.getInteger("skinid");
-                    if(skinID != 0){
-                        skinName = databaseAppState.getQueryResult("SELECT name FROM characters_skins WHERE id = " + skinID).nextString_Close();
-                    }
-                    character.setComponent(new ModelComponent("Models/" + characterName + "/skin_" + skinName + ".xml"));
-                    ResultSet inventoryResultSet = results_UserCharacters.getArray("inventory").getResultSet();
-                    LinkedList<Integer> inventory = new LinkedList<Integer>();
-                    while(inventoryResultSet.next()){
-                        int itemID = inventoryResultSet.getInt(2);
-                        if(itemID != 0){
-                            String itemName = databaseAppState.getQueryResult("SELECT name FROM items WHERE id = " + itemID).nextString_Close();
-                            EntityWrapper item = EntityTemplate.createFromTemplate(entityWorld, "items/" + itemName);
-                            inventory.add(item.getId());
-                        }
-                    }
-                    inventoryResultSet.close();
-                    results_UserCharacters.close();
-                    character.setComponent(new IsCharacterComponent());
-                    character.setComponent(new SightRangeComponent(30));
-                    character.setComponent(new InventoryComponent(Util.convertToArray_Integer(inventory)));
-                    character.setComponent(new GoldComponent(475));
-                    character.setComponent(new LevelComponent(1));
-                    character.setComponent(new SpellsComponent(new int[0]));
-                    character.setComponent(new SpellsUpgradePointsComponent(1));
-                    int scoreEntity = entityWorld.createEntity();
-                    entityWorld.setComponent(scoreEntity, new CharacterKillsComponent(0));
-                    entityWorld.setComponent(scoreEntity, new DeathsComponent(0));
-                    entityWorld.setComponent(scoreEntity, new CharacterAssistsComponent(0));
-                    entityWorld.setComponent(scoreEntity, new CreepScoreComponent(0));
-                    character.setComponent(new ScoreComponent(scoreEntity));
-                }catch(Exception ex){
-                    ex.printStackTrace();
-                }
-                playerEntity.setComponent(new PlayerCharacterComponent(character.getId()));
-                map.initializePlayer(entityWorld, playerEntity.getId());
-                //MapSpells
-                LinkedList<Integer> mapSpellsEntities = new LinkedList<Integer>();
-                int[][] mapSpellIndices = gameSelectionPlayerData.getMapSpellsIndices();
-                for(int r=0;r<map.getSpells().length;r++){
-                    MapSpells mapSpellsGroup = map.getSpells()[r];
-                    for(int z=0;z<mapSpellsGroup.getKeys().length;z++){
-                        int mapSpellIndex = ((mapSpellIndices != null)?mapSpellIndices[r][z]:0);
-                        MapSpell mapSpell = mapSpellsGroup.getMapSpells()[mapSpellIndex];
-                        int spellEntity = entityWorld.createEntity();
-                        EntityTemplate.loadTemplate(entityWorld, spellEntity, EntityTemplate.parseToOldTemplate(mapSpell.getEntityTemplate()));
-                        mapSpellsEntities.add(spellEntity);
-                    }
-                }
-                character.setComponent(new MapSpellsComponent(Util.convertToArray_Integer(mapSpellsEntities)));
-                map.spawnPlayer(entityWorld, playerEntity.getId());
-                player.setEntity(playerEntity.getId());
+                playerEntitiesAppState.createPlayerEntity(entityWorld, map, player, playerIndex);
                 playerIndex++;
             }
         }
@@ -218,6 +143,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new TriggerItemPassivesSystem());
         CastSpellQueueSystem castSpellQueueSystem = new CastSpellQueueSystem();
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue(), castSpellQueueSystem));
+        addEntitySystem(new ExecuteAIActionsSystem((playerEntity) -> getAppState(BotsAppState.class).getBot(playerEntity)));
         addEntitySystem(new AttackMoveSystem());
         addEntitySystem(new AttackAggroedTargetsSystem());
         addEntitySystem(new StartAggroResetTimersSystem());

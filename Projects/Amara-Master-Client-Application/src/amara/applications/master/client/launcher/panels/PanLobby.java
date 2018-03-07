@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import com.jme3.network.Message;
 import amara.applications.ingame.shared.maps.*;
 import amara.applications.master.client.MasterserverClientUtil;
+import amara.applications.master.client.launcher.panels.helpers.GameCharacterInputOption;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.*;
 import amara.core.files.FileAssets;
@@ -44,7 +45,7 @@ public class PanLobby extends javax.swing.JPanel{
     
     public void update(Lobby lobby){
         this.lobby = lobby;
-        isOwner = (MasterserverClientUtil.getPlayerID() == lobby.getOwnerID());
+        isOwner = (MasterserverClientUtil.getPlayerID() == lobby.getOwner().getPlayerID());
         String mapName = lobby.getLobbyData().getMapName();
         map = MapFileHandler.load(mapName, false);
         cbxMapName.setSelectedItem(mapName);
@@ -55,12 +56,12 @@ public class PanLobby extends javax.swing.JPanel{
         updateControls();
     }
     
-    private void updatePlayersList(ArrayList<Integer> players){
+    private void updatePlayersList(ArrayList<LobbyPlayer> lobbyPlayers){
         panPlayers.removeAll();
         int y = 0;
         int panelHeight = 30;
-        for(int i=0;i<players.size();i++){
-            PanLobby_Player panPlay_Player = new PanLobby_Player(this, players.get(i));
+        for(int i=0;i<lobbyPlayers.size();i++){
+            PanLobby_Player panPlay_Player = new PanLobby_Player(this, lobbyPlayers.get(i));
             panPlay_Player.setLocation(0, y);
             panPlay_Player.setSize(300, panelHeight);
             panPlayers.add(panPlay_Player);
@@ -81,6 +82,7 @@ public class PanLobby extends javax.swing.JPanel{
         spnTeamFormatSize2.setEnabled(canChangeLobby);
         btnInvite.setEnabled(canChangeLobby);
         btnLeave.setEnabled(!isQueueing);
+        btnAddBot.setEnabled(canChangeLobby);
         btnPlay.setEnabled(isOwner || isQueueing);
         btnPlay.setText(isQueueing?"Stop":"Play");
         lblIsQueueing.setVisible(isQueueing);
@@ -131,6 +133,7 @@ public class PanLobby extends javax.swing.JPanel{
         btnPlay = new javax.swing.JButton();
         btnLeave = new javax.swing.JButton();
         btnInvite = new javax.swing.JButton();
+        btnAddBot = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -172,14 +175,14 @@ public class PanLobby extends javax.swing.JPanel{
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Team Format:");
 
-        spnTeamFormatSize1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spnTeamFormatSize1.setModel(new javax.swing.SpinnerNumberModel(1, 0, null, 1));
         spnTeamFormatSize1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spnTeamFormatSize1StateChanged(evt);
             }
         });
 
-        spnTeamFormatSize2.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spnTeamFormatSize2.setModel(new javax.swing.SpinnerNumberModel(1, 0, null, 1));
         spnTeamFormatSize2.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spnTeamFormatSize2StateChanged(evt);
@@ -218,6 +221,13 @@ public class PanLobby extends javax.swing.JPanel{
             }
         });
 
+        btnAddBot.setText("Add Bot");
+        btnAddBot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddBotActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -227,6 +237,7 @@ public class PanLobby extends javax.swing.JPanel{
             .addComponent(lblIsQueueing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pbrIsQueueing, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(btnInvite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnAddBot, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,6 +245,8 @@ public class PanLobby extends javax.swing.JPanel{
                 .addComponent(btnInvite, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnLeave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(btnAddBot, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
@@ -306,7 +319,7 @@ public class PanLobby extends javax.swing.JPanel{
             PlayerProfileData playerProfileData = MasterserverClientUtil.getPlayerProfile(login);
             if(playerProfileData != null){
                 int playerID = playerProfileData.getID();
-                if(!lobby.containsPlayer(playerID)){
+                if(!lobby.containsHumanPlayer(playerID)){
                     PlayerStatus playerStatus = MasterserverClientUtil.getPlayerStatus(playerProfileData.getID());
                     if(playerStatus == PlayerStatus.ONLINE){
                         sendMessage(new Message_InviteLobbyPlayer(playerID));
@@ -362,8 +375,19 @@ public class PanLobby extends javax.swing.JPanel{
         }
     }//GEN-LAST:event_spnTeamFormatSize2StateChanged
 
+    private void btnAddBotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBotActionPerformed
+        GameCharacterInputOption[] gameCharacterOptions = GameCharacterInputOption.createOptions(MasterserverClientUtil.getPublicCharacters());
+        GameCharacterInputOption gameCharacterInputOption = FrameUtil.showInputDialog(this, "Choose bot character:", gameCharacterOptions);
+        if(gameCharacterInputOption != null){
+            GameCharacter gameCharacter = gameCharacterInputOption.getGameCharacter();
+            LobbyPlayer_Bot lobbyPlayer_Bot = new LobbyPlayer_Bot(BotType.EASY, "Bot (" + gameCharacter.getTitle() + ")", new GameSelectionPlayerData(gameCharacter.getID(), null));
+            sendMessage(new Message_AddLobbyBot(lobbyPlayer_Bot));
+        }
+    }//GEN-LAST:event_btnAddBotActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgrHostOrConnect;
+    private javax.swing.JButton btnAddBot;
     private javax.swing.JButton btnInvite;
     private javax.swing.JButton btnLeave;
     private javax.swing.JButton btnPlay;

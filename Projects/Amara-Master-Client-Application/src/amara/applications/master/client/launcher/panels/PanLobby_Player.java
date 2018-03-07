@@ -4,6 +4,7 @@
  */
 package amara.applications.master.client.launcher.panels;
 
+import java.util.HashMap;
 import amara.applications.master.client.MasterserverClientUtil;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.*;
@@ -15,18 +16,41 @@ import amara.core.files.FileAssets;
  */
 public class PanLobby_Player extends javax.swing.JPanel{
 
-    public PanLobby_Player(PanLobby panLobby, int playerID){
+    public PanLobby_Player(PanLobby panLobby, LobbyPlayer lobbyPlayer){
         initComponents();
         this.panLobby = panLobby;
-        PlayerProfileData playerProfileData = MasterserverClientUtil.getPlayerProfile(playerID);
+        this.lobbyPlayer = lobbyPlayer;
+        PlayerProfileData playerProfileData = getLobbyPlayerProfile(lobbyPlayer);
         String avatarFilePath = PanAvatarSelection.getAvatarFilePath(playerProfileData.getMeta("avatar"));
         lblIcon.setIcon(FileAssets.getImageIcon(avatarFilePath, 30, 30));
         lblName.setText(playerProfileData.getLogin());
-        boolean isOwnPlayer = (MasterserverClientUtil.getPlayerID() == playerID);
+        boolean isOwnPlayer = isOwnPlayer(lobbyPlayer);
         btnKick.setEnabled(panLobby.isOwner() && (!isOwnPlayer));
     }
     private PanLobby panLobby;
-    private int playerID;
+    private LobbyPlayer lobbyPlayer;
+    
+    public static PlayerProfileData getLobbyPlayerProfile(LobbyPlayer lobbyPlayer){
+        if(lobbyPlayer instanceof LobbyPlayer_Human){
+            LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
+            return MasterserverClientUtil.getPlayerProfile(lobbyPlayer_Human.getPlayerID());
+        }
+        else if (lobbyPlayer instanceof LobbyPlayer_Bot) {
+            LobbyPlayer_Bot lobbyPlayer_Bot = (LobbyPlayer_Bot) lobbyPlayer;
+            HashMap<String, String> botMeta = new HashMap<>();
+            botMeta.put("avatar", "bot");
+            return new PlayerProfileData(-1, lobbyPlayer_Bot.getName(), botMeta, System.currentTimeMillis());
+        }
+        return null;
+    }
+    
+    public static boolean isOwnPlayer(LobbyPlayer lobbyPlayer){
+        if(lobbyPlayer instanceof LobbyPlayer_Human){
+            LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
+            return (MasterserverClientUtil.getPlayerID() == lobbyPlayer_Human.getPlayerID());
+        }
+        return false;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,7 +111,7 @@ public class PanLobby_Player extends javax.swing.JPanel{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKickActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKickActionPerformed
-        panLobby.sendMessage(new Message_KickLobbyPlayer(playerID));
+        panLobby.sendMessage(new Message_KickLobbyPlayer(lobbyPlayer.getLobbyPlayerID()));
     }//GEN-LAST:event_btnKickActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
