@@ -1,0 +1,89 @@
+<template>
+    <entity id="spell">
+        <name>BubbleGun</name>
+        <description>Bubbledubblebubbleblubb.</description>
+        <spellVisualisation>bubble</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <baseCooldown>15</baseCooldown>
+    </entity>
+    <entity id="buff"/>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--add spelleffect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addAutoAttackSpellEffects>
+                            <entity id="newSpellEffect">
+                                <castedEffectTriggers>
+                                    <!--target effect-->
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <addKnockup>
+                                                    <entity>
+                                                        <knockupDuration>4</knockupDuration>
+                                                        <knockupHeight>5</knockupHeight>
+                                                    </entity>
+                                                </addKnockup>
+                                                <addBuff duration="5">
+                                                    <entity>
+                                                        <buffVisualisation>bubble</buffVisualisation>
+                                                    </entity>
+                                                </addBuff>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                    <!--remove buff-->
+                                    <entity>
+                                        <casterTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <removeBuff>#buff</removeBuff>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </castedEffectTriggers>
+                            </entity>
+                        </addAutoAttackSpellEffects>
+                        <addBuff duration="5">
+                            <entity id="buff">
+                                <buffVisualisation>bubble</buffVisualisation>
+                                <onBuffRemoveEffectTriggers>
+                                    <entity>
+                                        <casterTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <removeSpellEffects>#newSpellEffect</removeSpellEffects>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffRemoveEffectTriggers>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

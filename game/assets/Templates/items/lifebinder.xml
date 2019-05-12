@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>lifebinder</itemID>
+        <name>Lifebinder</name>
+        <itemRecipe gold="5000"/>
+        <isSellable>3000</isSellable>
+        <!--stats-->
+        <bonusPercentageIncomingDamageAmplification>-0.2</bonusPercentageIncomingDamageAmplification>
+    </entity>
+</template>

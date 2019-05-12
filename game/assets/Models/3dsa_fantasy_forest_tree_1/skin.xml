@@ -1,0 +1,7 @@
+<skin name="3dsa_fantasy_forest_tree_1">
+    <model scale="3">
+        <material>
+            <texture alpha="1">diffuse_1.png</texture>
+        </material>
+    </model>
+</skin>

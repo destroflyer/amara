@@ -1,0 +1,7 @@
+<skin name="3dsa_medieval_knight">
+    <model normScale="0.04" scale="0.55">
+        <material>
+            <texture alpha="1">diffuse_red.png</texture>
+        </material>
+    </model>
+</skin>

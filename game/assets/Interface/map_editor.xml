@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
+    <useStyles filename="nifty-default-styles.xml"/>
+    <useControls filename="nifty-default-controls.xml"/>
+    <screen id="start" controller="amara.tools.editors.map.gui.ScreenController_MapEditor">
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel height="10px"/>
+                <panel childLayout="horizontal" height="60px">
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_open.png" width="60px" height="100%w">
+                        <interact onClick="openMap()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_save.png" width="60px" height="100%w">
+                        <interact onClick="saveMap()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_view.png" width="60px" height="100%w">
+                        <interact onClick="setAction_View()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_shape_circle.png" width="60px" height="100%w">
+                        <interact onClick="setAction_PlaceHitboxCircle()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_shape_custom.png" width="60px" height="100%w">
+                        <interact onClick="setAction_PlaceHitboxCustom()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_visual.png" width="60px" height="100%w">
+                        <interact onClick="setAction_PlaceVisual()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_paint.png" width="60px" height="100%w">
+                        <interact onClick="setAction_PaintTerrainAlphamap()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_camera.png" width="60px" height="100%w">
+                        <interact onClick="changeCameraAngle()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_coordinates.png" width="60px" height="100%w">
+                        <interact onClick="toggleHoveredCoordinates()"/>
+                    </image>
+                    <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_cheesecake.png" width="60px" height="100%w">
+                        <interact onClick="showCheesecakeMessage()"/>
+                    </image>
+                    <panel/>
+                    <text id="hovered_coordinates" text="?" width="200px" textHAlign="right" font="Interface/fonts/Verdana_12.fnt" visible="false"/>
+                    <panel width="10px"/>
+                </panel>
+                <panel height="10px"/>
+                <panel childLayout="horizontal">
+                    <panel width="10px"/>
+                    <panel childLayout="vertical">
+                        <text id="tool_information" text="?" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                        <panel height="5px"/>
+                        <image id="tool_information_image" width="40px" height="100%w" visible="false"/>
+                    </panel>
+                </panel>
+                <panel/>
+            </panel>
+        </layer>
+    </screen>
+</nifty>

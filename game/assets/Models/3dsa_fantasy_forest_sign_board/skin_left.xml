@@ -1,0 +1,7 @@
+<skin name="3dsa_fantasy_forest_sign_board">
+    <model scale="3">
+        <material>
+            <texture>diffuse_left.png</texture>
+        </material>
+    </model>
+</skin>

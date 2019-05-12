@@ -1,0 +1,10 @@
+<skin name="pseudospider">
+    <model normScale="0.78" scale="0.9">
+        <position>
+            <location>0,1,0</location>
+        </position>
+        <material>
+            <texture>diffuse.png</texture>
+        </material>
+    </model>
+</skin>

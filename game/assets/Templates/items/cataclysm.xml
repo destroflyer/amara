@@ -1,0 +1,13 @@
+<template>
+    <entity>
+        <itemID>cataclysm</itemID>
+        <name>Cataclysm</name>
+        <itemRecipe gold="800" itemIDs="greatsword,rusty_sword"/>
+        <isSellable>1500</isSellable>
+        <!--stats-->
+        <bonusFlatAttackDamage>60</bonusFlatAttackDamage>
+        <itemPassives>
+            <entity template="./cataclysm_passive"/>
+        </itemPassives>
+    </entity>
+</template>

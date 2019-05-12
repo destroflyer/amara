@@ -1,0 +1,69 @@
+<template>
+    <entity>
+        <name>Soldier</name>
+        <!--model-->
+        <model>Models/soldier/skin_default.xml</model>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>auto_attack</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>death</name>
+                <loopDuration>0.9</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>550</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>1.25</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>57</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.7</bonusFlatAttackSpeed>
+                <bonusFlatArmor>25</bonusFlatArmor>
+                <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>6</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <attributesPerLevel>
+            <entity>
+                <bonusFlatMaximumHealth>80</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>0.25</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>4</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.03</bonusFlatAttackSpeed>
+                <bonusFlatArmor>3</bonusFlatArmor>
+                <bonusFlatMagicResistance>0</bonusFlatMagicResistance>
+            </entity>
+        </attributesPerLevel>
+        <requestUpdateAttributes/>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/melee_autoattack"/>
+        </autoAttack>
+        <learnableSpells>
+            <entity template="spells/leap_strike"/>
+            <entity template="spells/empower"/>
+            <entity template="spells/spinning_slash"/>
+            <entity template="spells/bear_stance"/>
+        </learnableSpells>
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
+    </entity>
+</template>

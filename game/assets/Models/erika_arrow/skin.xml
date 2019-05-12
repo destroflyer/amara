@@ -1,0 +1,10 @@
+<skin name="erika_arrow">
+    <model normScale="2.5" scale="5,5,1">
+        <position>
+            <location>0,4.7,0</location>
+        </position>
+        <material>
+            <texture>diffuse.png</texture>
+        </material>
+    </model>
+</skin>

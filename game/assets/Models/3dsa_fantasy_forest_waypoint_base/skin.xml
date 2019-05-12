@@ -1,0 +1,7 @@
+<skin name="3dsa_fantasy_forest_waypoint_base">
+    <model scale="3">
+        <material>
+            <texture>diffuse_green.png</texture>
+        </material>
+    </model>
+</skin>

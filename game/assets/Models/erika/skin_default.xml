@@ -1,0 +1,11 @@
+<skin name="erika">
+    <model normScale="0.028" scale="1.15" rigType="mixamo">
+        <material>
+            <texture normalMap="body_normal.png">body_diffuse.png</texture>
+            <texture normalMap="body_normal.png">body_diffuse.png</texture>
+            <texture normalMap="body_normal.png">body_diffuse.png</texture>
+            <texture normalMap="bow_normal.jpg">bow_diffuse.jpg</texture>
+            <texture normalMap="clothes_normal.png">clothes_diffuse.png</texture>
+        </material>
+    </model>
+</skin>

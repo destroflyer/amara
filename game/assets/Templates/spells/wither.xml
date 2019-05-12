@@ -1,0 +1,72 @@
+<template>
+    <entity id="spell">
+        <name>Wither</name>
+        <spellVisualisation>wither</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/wither_start.ogg</audio>
+                            </entity>
+                            <entity id="audioLoop">
+                                <audio>Sounds/sounds/spells/wither_loop.ogg</audio>
+                                <audioLoop/>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castTurnToTarget/>
+        <range>14</range>
+        <baseCooldown>15</baseCooldown>
+        <spellTargetRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </spellTargetRules>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="4">
+                            <entity>
+                                <buffVisualisation>withered</buffVisualisation>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageWalkSpeed>-0.6</bonusPercentageWalkSpeed>
+                                    </entity>
+                                </continuousAttributes>
+                                <onBuffRemoveEffectTriggers>
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <stopAudio>#audioLoop</stopAudio>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffRemoveEffectTriggers>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

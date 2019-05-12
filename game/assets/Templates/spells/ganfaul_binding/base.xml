@@ -1,0 +1,81 @@
+<template>
+    <value name="delay">0.18</value>
+    <value name="bindDuration">1</value>
+    <entity id="spell">
+        <name>Planetary Binding</name>
+        <description>Shoots an energetic projectile. The first enemy hit is damaged and binded for [bindDuration] second.</description>
+        <spellVisualisation>ganfaul_binding</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="2" height="19.5"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./projectile</spawnTemplate>
+                                <spawnMovementSpeed>13</spawnMovementSpeed>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/ganfaul_binding_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>standing_1h_magic_attack_01</name>
+                <loopDuration>0.5</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>7</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>90 + (0.5 * source.abilityPower)</magicDamage>
+                        <addBinding>[bindDuration]</addBinding>
+                        <addBuff duration="[bindDuration]">
+                            <entity>
+                                <buffVisualisation>ganfaul_binded</buffVisualisation>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

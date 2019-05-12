@@ -1,0 +1,7 @@
+<skin name="little_dragon">
+    <model scale="1.1">
+        <material>
+            <texture>diffuse.png</texture>
+        </material>
+    </model>
+</skin>

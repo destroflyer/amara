@@ -1,0 +1,11 @@
+<template>
+    <entity>
+        <itemID>boots_of_intellect</itemID>
+        <name>Boots of Intellect</name>
+        <itemRecipe gold="600" itemIDs="wanderers_treads"/>
+        <isSellable>600</isSellable>
+        <!--stats-->
+        <bonusFlatWalkSpeed>0.4</bonusFlatWalkSpeed>
+        <bonusPercentageCooldownSpeed>0.6</bonusPercentageCooldownSpeed>
+    </entity>
+</template>

@@ -1,0 +1,7 @@
+<skin name="cartoon_forest_stone_2">
+    <model scale="1.8">
+        <material>
+            <color>0.3,0.3,0.3,1</color>
+        </material>
+    </model>
+</skin>

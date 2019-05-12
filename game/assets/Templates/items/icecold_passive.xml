@@ -1,0 +1,54 @@
+<template>
+    <value name="duration">1</value>
+    <entity id="passive">
+        <description>Your basic attacks slow the target by 40% for [duration] second.</description>
+        <passiveAddedEffectTriggers>
+            <!--add spelleffect-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addAutoAttackSpellEffects>
+                            <entity id="newSpellEffect">
+                                <castedEffectTriggers>
+                                    <!--target effect-->
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <addBuff duration="[duration]">
+                                                    <entity>
+                                                        <buffVisualisation>frost</buffVisualisation>
+                                                        <continuousAttributes>
+                                                            <entity>
+                                                                <bonusPercentageWalkSpeed>-0.4</bonusPercentageWalkSpeed>
+                                                            </entity>
+                                                        </continuousAttributes>
+                                                    </entity>
+                                                </addBuff>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#passive</triggerSource>
+                                    </entity>
+                                </castedEffectTriggers>
+                            </entity>
+                        </addAutoAttackSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveAddedEffectTriggers>
+        <passiveRemovedEffectTriggers>
+            <!--remove spelleffect-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeSpellEffects>#newSpellEffect</removeSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveRemovedEffectTriggers>
+    </entity>
+</template>

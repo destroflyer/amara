@@ -1,0 +1,10 @@
+<skin name="funny_moustache">
+    <model scale="1">
+        <material>
+            <!--black-->
+            <color>0,0,0,1</color>
+            <!--nose-->
+            <color>0.8,0.64,0.37,1</color>
+        </material>
+    </model>
+</skin>

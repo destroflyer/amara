@@ -1,0 +1,16 @@
+<skin name="robot">
+    <model normScale="1.11" scale="0.9">
+        <material>
+            <!--metal_gold-->
+            <color>0.8,0.66,0.1,1</color>
+            <!--metal_silver-->
+            <color>0.7,0.7,0.7,1</color>
+            <!--visor-->
+            <color>0,0,0,1</color>
+            <!--vehicle-->
+            <color>0.2,0.2,0.2,1</color>
+            <!--spoke-->
+            <color>0,0,0,1</color>
+        </material>
+    </model>
+</skin>

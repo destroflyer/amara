@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
+    <useStyles filename="nifty-default-styles.xml"/>
+    <useControls filename="nifty-default-controls.xml"/>
+    <screen id="start" controller="amara.applications.ingame.client.gui.ScreenController_HUD">
+        <!--character info-->
+        <layer id="character" childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="122px">
+                    <panel width="4px"/>
+                    <panel width="166px" childLayout="vertical" backgroundColor="#000D">
+                        <panel height="5px"/>
+                        <text id="player_name" text="???" width="100%" textHAlign="center" font="Interface/fonts/Verdana_12.fnt"/>
+                        <panel childLayout="horizontal">
+                            <panel width="10px"/>
+                            <panel childLayout="vertical">
+                                <panel width="16px" height="10px"/>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/attack_damage_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Attack Damage"/>
+                                        </effect>
+                                    </image>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_attack_damage" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/attack_speed_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Attack Speed"/>
+                                        </effect>
+                                    </image>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_attack_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/armor_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Armor"/>
+                                        </effect>
+                                    </image>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_armor" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/walk_speed_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Walk Speed"/>
+                                        </effect>
+                                    </image>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_walk_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel width="16px" height="10px"/>
+                            </panel>
+                            <panel width="10px"/>
+                            <panel childLayout="vertical">
+                                <panel width="16px" height="10px"/>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/ability_power_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Ability Power"/>
+                                        </effect>
+                                    </image>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_ability_power" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/cooldown_speed_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Cooldown Speed"/>
+                                        </effect>
+                                    </image>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_cooldown_speed" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="horizontal">
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/magic_resistance_16.png">
+                                        <effect>
+                                            <onHover name="hint" hintText="Magic Resistance"/>
+                                        </effect>
+                                    </image>
+                                    <panel width="5px"/>
+                                    <text id="attribute_value_magic_resistance" text="???" textHAlign="left" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel width="16px" height="30px"/>
+                            </panel>
+                        </panel>
+                    </panel>
+                    <panel/>
+                </panel>
+                <panel height="7px"/>
+            </panel>
+        </layer>
+        <layer id="inventory" childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="130px">
+                    <panel width="174px"/>
+                    <panel childLayout="vertical" width="132px">
+                        <panel childLayout="horizontal" height="43px">
+                            <panel childLayout="center" width="43px" height="43px">
+                                <image id="inventory_item_0_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
+                                    <effect>
+                                        <onHover name="hint" hintText="?"/>
+                                    </effect>
+                                </image>
+                                <panel id="inventory_item_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="inventory_item_0_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel width="1px" backgroundColor="#999F"/>
+                            <panel childLayout="center" width="43px" height="43px">
+                                <image id="inventory_item_1_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
+                                    <effect>
+                                        <onHover name="hint" hintText="?"/>
+                                    </effect>
+                                </image>
+                                <panel id="inventory_item_1_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="inventory_item_1_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel width="1px" backgroundColor="#999F"/>
+                            <panel childLayout="center" width="43px" height="43px">
+                                <image id="inventory_item_2_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
+                                    <effect>
+                                        <onHover name="hint" hintText="?"/>
+                                    </effect>
+                                </image>
+                                <panel id="inventory_item_2_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="inventory_item_2_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
+                        </panel>
+                        <panel height="1px" backgroundColor="#999F"/>
+                        <panel childLayout="horizontal" height="43px">
+                            <panel childLayout="center" width="43px" height="43px">
+                                <image id="inventory_item_3_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
+                                    <effect>
+                                        <onHover name="hint" hintText="?"/>
+                                    </effect>
+                                </image>
+                                <panel id="inventory_item_3_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="inventory_item_3_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel width="1px" backgroundColor="#999F"/>
+                            <panel childLayout="center" width="43px" height="43px">
+                                <image id="inventory_item_4_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
+                                    <effect>
+                                        <onHover name="hint" hintText="?"/>
+                                    </effect>
+                                </image>
+                                <panel id="inventory_item_4_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="inventory_item_4_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel width="1px" backgroundColor="#999F"/>
+                            <panel childLayout="center" width="43px" height="43px">
+                                <image id="inventory_item_5_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
+                                    <effect>
+                                        <onHover name="hint" hintText="?"/>
+                                    </effect>
+                                </image>
+                                <panel id="inventory_item_5_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="inventory_item_5_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
+                        </panel>
+                        <panel id="shop_button" childLayout="center" backgroundColor="#000D" width="131px">
+                            <image filename="Interface/hud/shop_button.png" width="100%" height="100%">
+                                <effect>
+                                    <onHover name="hint" hintText="Shop"/>
+                                </effect>
+                            </image>
+                            <panel childLayout="horizontal" width="100%" height="100%">
+                                <panel width="32px"/>
+                                <panel childLayout="vertical" width="26px">
+                                    <panel height="5px"/>
+                                    <panel childLayout="horizontal">
+                                        <image filename="Interface/hud/gold.png" width="26px" height="26px"/>
+                                    </panel>
+                                </panel>
+                                <panel width="7px"/>
+                                <panel childLayout="vertical">
+                                    <panel height="9px"/>
+                                    <text id="gold" text="????" textHAlign="left" font="Interface/fonts/Verdana_14.fnt"/>
+                                </panel>
+                                <interact onClick="toggleShopVisible()"/>
+                            </panel>
+                        </panel>
+                        <panel height="6px"/>
+                    </panel>
+                    <panel/>
+                </panel>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="10px">
+                    <panel width="59px"/>
+                    <panel width="257px" height="100%" backgroundColor="#000F"/>
+                </panel>
+                <panel height="140px"/>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="10px">
+                    <panel width="59px"/>
+                    <panel id="experience_bar" width="257px" height="100%" backgroundColor="#09FF"/>
+                </panel>
+                <panel height="140px"/>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="200px">
+                    <image filename="Interface/hud/unit.png" width="400px" height="100%"></image>
+                    <panel/>
+                </panel>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="17px">
+                    <panel width="14px"/>
+                    <text id="level" text="?" width="40px" textHAlign="center" font="Interface/fonts/Verdana_12.fnt"/>
+                    <panel/>
+                </panel>
+                <panel height="153px"/>
+            </panel>
+        </layer>
+        <!--minimap-->
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="345px">
+                    <panel/>
+                    <panel childLayout="center" width="365px" height="100%">
+                        <panel childLayout="vertical">
+                            <panel height="36px"/>
+                            <panel childLayout="horizontal" height="26px">
+                                <panel width="109px"/>
+                                <panel width="26px" height="26px" backgroundColor="#000D"/>
+                                <panel width="12px"/>
+                                <panel width="26px" height="26px" backgroundColor="#000D"/>
+                                <panel/>
+                            </panel>
+                            <panel height="13px"/>
+                            <panel childLayout="horizontal">
+                                <panel width="96px"/>
+                                <image id="minimap" width="264px" height="264px">
+                                    <interact onClick="lookAtMinimapMouseLocation()" onClickMouseMove ="lookAtMinimapMouseLocation()"/>
+                                </image>
+                            </panel>
+                        </panel>
+                        <image filename="Interface/hud/minimap.png"/>
+                    </panel>
+                </panel>
+            </panel>
+        </layer>
+        <!--spells, ressources-->
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="160px">
+                    <panel width="*"/>
+                    <panel childLayout="vertical" width="627px">
+                        <panel height="35px"/>
+                        <panel childLayout="horizontal" height="58px">
+                            <panel width="113px"/>
+                            <panel childLayout="vertical" width="46px">
+                                <panel height="5px"/>
+                                <panel childLayout="center" width="100%" height="100%w">
+                                    <image id="passive_image" filename="Interface/hud/spells/none.png" width="100%" height="100%w" visibleToMouse="true">
+                                        <effect>
+                                            <onStartHover name="nop" onStartEffect="showSpellInformation_Passive(0)"/>
+                                            <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                                        </effect>
+                                    </image>
+                                    <panel id="passive_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                        <text id="passive_0_cooldown_time" text="???" font="Interface/fonts/Verdana_14.fnt"/>
+                                    </panel>
+                                </panel>
+                            </panel>
+                            <panel width="11px"/>
+                            <panel childLayout="center" width="58px" height="100%w">
+                                <image id="spell_0_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
+                                    <effect>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(0)"/>
+                                        <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                                    </effect>
+                                </image>
+                                <panel id="spell_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="spell_0_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel width="2px"/>
+                            <panel childLayout="center" width="58px" height="100%w">
+                                <image id="spell_1_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
+                                    <effect>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(1)"/>
+                                        <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                                    </effect>
+                                </image>
+                                <panel id="spell_1_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="spell_1_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel width="2px"/>
+                            <panel childLayout="center" width="58px" height="100%w">
+                                <image id="spell_2_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
+                                    <effect>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(2)"/>
+                                        <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                                    </effect>
+                                </image>
+                                <panel id="spell_2_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="spell_2_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel width="2px"/>
+                            <panel childLayout="center" width="58px" height="100%w">
+                                <image id="spell_3_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
+                                    <effect>
+                                        <onStartHover name="nop" onStartEffect="showSpellInformation_Spell(3)"/>
+                                        <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                                    </effect>
+                                </image>
+                                <panel id="spell_3_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="spell_3_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel width="14px"/>
+                            <panel childLayout="vertical" width="39px">
+                                <panel height="10px"/>
+                                <panel childLayout="center" width="100%" height="100%w">
+                                    <image id="map_spell_0_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
+                                        <effect>
+                                            <onStartHover name="nop" onStartEffect="showSpellInformation_MapSpell(0)"/>
+                                            <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                                        </effect>
+                                    </image>
+                                    <panel id="map_spell_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                        <text id="map_spell_0_cooldown_time" text="???" font="Interface/fonts/Verdana_14.fnt"/>
+                                    </panel>
+                                </panel>
+                            </panel>
+                            <panel width="14px"/>
+                            <panel childLayout="vertical" width="39px">
+                                <panel height="10px"/>
+                                <panel childLayout="center" width="100%" height="100%w">
+                                    <image id="map_spell_1_image" filename="Interface/hud/spells/none.png" width="100%" height="100%" visibleToMouse="true">
+                                        <effect>
+                                            <onStartHover name="nop" onStartEffect="showSpellInformation_MapSpell(1)"/>
+                                            <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                                        </effect>
+                                    </image>
+                                    <panel id="map_spell_1_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                        <text id="map_spell_1_cooldown_time" text="???" font="Interface/fonts/Verdana_14.fnt"/>
+                                    </panel>
+                                </panel>
+                            </panel>
+                            <panel/>
+                        </panel>
+                        <panel height="16px"/>
+                        <panel childLayout="horizontal">
+                            <panel width="108px"/>
+                            <panel childLayout="vertical" width="413px" height="44px">
+                                <image filename="Interface/hud/resource_bar_background.png" width="100%" height="50%"/>
+                                <image filename="Interface/hud/resource_bar_background.png" width="100%" height="50%"/>
+                            </panel>
+                            <panel/>
+                        </panel>
+                        <panel/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="160px">
+                    <panel width="*"/>
+                    <panel childLayout="vertical" width="627px">
+                        <panel height="109px"/>
+                        <panel childLayout="horizontal">
+                            <panel width="108px"/>
+                            <panel childLayout="vertical" width="413px" height="44px">
+                                <panel id="resource_bar_health" width="100%" height="50%" backgroundColor="#4DE633AA"/>
+                                <panel width="100%" height="50%" backgroundColor="#0099CCAA"/>
+                            </panel>
+                            <panel/>
+                        </panel>
+                        <panel/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="160px">
+                    <panel width="*"/>
+                    <panel childLayout="vertical" width="627px">
+                        <panel height="109px"/>
+                        <panel childLayout="horizontal">
+                            <panel width="108px"/>
+                            <panel childLayout="vertical" width="413px" height="44px">
+                                <panel childLayout="center" width="100%" height="50%">
+                                    <text id="resource_bar_health_text" text="? / ?" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                                <panel childLayout="center" width="100%" height="50%">
+                                    <text text="? / ?" font="Interface/fonts/Verdana_12.fnt"/>
+                                </panel>
+                            </panel>
+                            <panel/>
+                        </panel>
+                        <panel/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+            </panel>
+        </layer>
+        <layer id="spell_information_layer" childLayout="center" visible="false">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="150px">
+                    <panel width="*"/>
+                    <panel childLayout="horizontal" width="429px" backgroundColor="#000D">
+                        <panel width="8px"/>
+                        <panel childLayout="vertical">
+                            <panel height="8px"/>
+                            <panel childLayout="horizontal" height="20px">
+                                <text id="spell_information_name" text="?" font="Interface/fonts/Verdana_18.fnt" textHAlign="left"/>
+                                <panel width="*"/>
+                                <text id="spell_information_cooldown" text="?" font="Interface/fonts/Verdana_18.fnt" textHAlign="right"/>
+                            </panel>
+                            <panel height="8px"/>
+                            <text id="spell_information_description" text="???" font="Interface/fonts/Verdana_14.fnt" textHAlign="left" textVAlign="top" wrap="true" width="100%"/>
+                            <panel height="*"/>
+                            <panel height="8px"/>
+                        </panel>
+                        <panel width="8px"/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+                <panel height="150px"/>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="160px">
+                    <panel width="*"/>
+                    <image filename="Interface/hud/center_2.png" width="627px" height="100%"></image>
+                    <panel width="*"/>
+                </panel>
+            </panel>
+        </layer>
+        <!--upgrade spells-->
+        <layer id="upgrade_spells_layer" childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="45px">
+                    <panel width="*"/>
+                    <panel childLayout="horizontal" width="627px">
+                        <panel width="158px"/>
+                        <image filename="Interface/hud/upgrade_spells_container.png" width="262px" height="100%"></image>
+                        <panel width="*"/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+                <panel height="150px"/>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="32px">
+                    <panel width="*"/>
+                    <panel childLayout="horizontal" width="627px">
+                        <panel width="183px"/>
+                        <image id="upgrade_spells_button_0" filename="Interface/hud/learn_spell_button.png" width="32px" height="32px">
+                            <effect>
+                                <onStartHover name="nop" onStartEffect="showSpellInformation_LearnableSpell(0)"/>
+                                <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                            </effect>
+                            <interact onClick="learnOrUpgradeSpell(0)"/>
+                        </image>
+                        <panel width="28px"/>
+                        <image id="upgrade_spells_button_1" filename="Interface/hud/learn_spell_button.png" width="32px" height="32px">
+                            <effect>
+                                <onStartHover name="nop" onStartEffect="showSpellInformation_LearnableSpell(1)"/>
+                                <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                            </effect>
+                            <interact onClick="learnOrUpgradeSpell(1)"/>
+                        </image>
+                        <panel width="28px"/>
+                        <image id="upgrade_spells_button_2" filename="Interface/hud/learn_spell_button.png" width="32px" height="32px">
+                            <effect>
+                                <onStartHover name="nop" onStartEffect="showSpellInformation_LearnableSpell(2)"/>
+                                <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                            </effect>
+                            <interact onClick="learnOrUpgradeSpell(2)"/>
+                        </image>
+                        <panel width="28px"/>
+                        <image id="upgrade_spells_button_3" filename="Interface/hud/learn_spell_button.png" width="32px" height="32px">
+                            <effect>
+                                <onStartHover name="nop" onStartEffect="showSpellInformation_LearnableSpell(3)"/>
+                                <onEndHover name="nop" onStartEffect="hideSpellInformation()"/>
+                            </effect>
+                            <interact onClick="learnOrUpgradeSpell(3)"/>
+                        </image>
+                        <panel width="*"/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+                <panel height="150px"/>
+            </panel>
+        </layer>
+        <layer id="upgrade_spell_layer_container" childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="68px">
+                    <panel width="*"/>
+                    <panel childLayout="horizontal" width="312px">
+                        <panel id="upgrade_spell_offset_container" width="0px"/>
+                        <image filename="Interface/hud/upgrade_spell_container.png" width="132px" height="100%"></image>
+                        <panel width="*"/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+                <panel height="150px"/>
+            </panel>
+        </layer>
+        <layer id="upgrade_spell_layer_images" childLayout="center">
+            <panel childLayout="vertical">
+                <panel/>
+                <panel childLayout="horizontal" height="55px">
+                    <panel width="*"/>
+                    <panel childLayout="horizontal" width="312px">
+                        <panel id="upgrade_spell_offset_images" width="7px"/>
+                        <image id="upgrade_spell_image_0" filename="Interface/hud/spells/ignite.png" width="55px" height="55px">
+                            <interact onClick="upgradeSpell(0)"/>
+                        </image>
+                        <panel width="8px"/>
+                        <image id="upgrade_spell_image_1" filename="Interface/hud/spells/ignite.png" width="55px" height="55px">
+                            <interact onClick="upgradeSpell(1)"/>
+                        </image>
+                        <panel width="*"/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+                <panel height="156px"/>
+            </panel>
+        </layer>
+        <!--scoreboard-->
+        <layer id="scoreboard_layer" childLayout="center" visible="false">
+            <panel childLayout="vertical">
+                <panel height="*"/>
+                <panel childLayout="horizontal" height="350px">
+                    <panel width="*"/>
+                    <panel childLayout="horizontal" width="800px" backgroundColor="#000000DA">
+                        <panel width="10px"/>
+                        <panel childLayout="vertical">
+                            <panel height="10px"/>
+                            <panel id="scoreboard_content" childLayout="vertical">
+                                <!--Generated-->
+                            </panel>
+                            <panel height="10px"/>
+                        </panel>
+                        <panel width="10px"/>
+                    </panel>
+                    <panel width="*"/>
+                </panel>
+                <panel height="*"/>
+            </panel>
+        </layer>
+        <!--stats-->
+        <layer childLayout="center">
+            <panel childLayout="horizontal">
+                <panel/>
+                <panel childLayout="vertical" width="95px">
+                    <panel height="5px"/>
+                    <panel childLayout="center" width="100%" height="28px" backgroundColor="#000D">
+                        <text id="stats_teams_score" text="? : ?" font="Interface/fonts/Verdana_12.fnt"/>
+                    </panel>
+                </panel>
+                <panel width="7px"/>
+                <panel childLayout="vertical" width="236px">
+                    <panel height="4px"/>
+                    <panel childLayout="horizontal" width="100%" height="30px" backgroundColor="#000D">
+                        <panel/>
+                        <text id="stats_player_score_kda" height="100%" text="? / ? / ?" font="Interface/fonts/Verdana_12.fnt" textVAlign="center"/>
+                        <panel/>
+                        <text id="stats_player_score_creepscore" height="100%" text="?" font="Interface/fonts/Verdana_12.fnt" textVAlign="center"/>
+                        <panel/>
+                    </panel>
+                </panel>
+                <panel width="6px"/>
+                <panel childLayout="vertical" width="77px">
+                    <panel height="5px"/>
+                    <panel childLayout="horizontal" width="100%" height="28px" backgroundColor="#000D">
+                        <panel/>
+                        <panel childLayout="vertical" width="11px">
+                            <panel/>
+                            <panel height="1px"/>
+                            <image filename="Interface/hud/time_11.png" width="11px" height="11px">
+                                <effect>
+                                    <onHover name="hint" hintText="Game Time"/>
+                                </effect>
+                            </image>
+                            <panel/>
+                        </panel>
+                        <panel width="5px"/>
+                        <text id="game_time" height="100%" text="??:??" font="Interface/fonts/Verdana_12.fnt" textVAlign="center"/>
+                        <panel/>
+                    </panel>
+                </panel>
+                <panel width="7px"/>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel childLayout="horizontal">
+                    <panel/>
+                    <image filename="Interface/hud/stats.png" width="470px" height="70px"/>
+                </panel>
+                <panel/>
+            </panel>
+        </layer>
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel height="50px"/>
+                <panel childLayout="horizontal">
+                    <panel/>
+                    <image id="ping_bar" filename="Interface/hud/ping_bar.png" width="69px" height="14px"/>
+                    <panel id="ping_bar_margin_right" width="32px"/>
+                </panel>
+            </panel>
+        </layer>
+        <!--death recap-->
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <panel height="50px"/>
+                <panel childLayout="horizontal">
+                    <panel/>
+                    <image id="ping_container" filename="Interface/hud/ping_container.png" width="71px" height="16px">
+                        <effect>
+                            <onHover name="hint" hintText="Ping: ? ms"/>
+                        </effect>
+                    </image>
+                    <panel width="31px"/>
+                </panel>
+            </panel>
+        </layer>
+        <layer id="death_recap_layer" childLayout="center" visible="false">
+            <panel childLayout="vertical">
+                <panel height="120px"/>
+                <panel childLayout="horizontal" height="200px">
+                    <panel/>
+                    <panel id="death_recap_container" childLayout="vertical" width="400px">
+                        <control id="toggle_death_recap_button" name="button" width="100%" height="28px" label="Death Recap">
+                            <interact onClick="toggleDisplayDeathRecap()"/>
+                        </control>
+                        <!--Generated ScrollPanel "death_recap"-->
+                    </panel>
+                    <panel/>
+                </panel>
+                <panel/>
+            </panel>
+        </layer>
+    </screen>
+    <screen id="cinematic" controller="amara.applications.ingame.client.gui.ScreenController_Cinematic">
+    </screen>
+    <screen id="gameOver" controller="amara.applications.ingame.client.gui.ScreenController_GameOver">
+        <layer childLayout="center" backgroundColor="#0008">
+            <control id="exit_game_button" name="button" x="35%" y="52%" width="40%" height="15%" label="Game Over">
+                <effect>
+                    <onStartScreen name="fade" length="1000"/>
+                </effect>
+                <interact onClick="exit()"/>
+            </control>
+        </layer>
+    </screen>
+</nifty>

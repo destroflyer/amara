@@ -1,0 +1,34 @@
+<template>
+    <entity id="projectile">
+        <isProjectile/>
+        <model>Models/cloud/skin.xml</model>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <targetReachedTrigger/>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/thunder.ogg</audio>
+                        <audioRemoveAfterPlaying/>
+                    </entity>
+                </playAudio>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--remove projectile-->
+    <entity>
+        <targetReachedTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+</template>

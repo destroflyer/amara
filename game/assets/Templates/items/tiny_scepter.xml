@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>tiny_scepter</itemID>
+        <name>Tiny Scepter</name>
+        <itemRecipe gold="400"/>
+        <isSellable>250</isSellable>
+        <!--stats-->
+        <bonusFlatAbilityPower>20</bonusFlatAbilityPower>
+    </entity>
+</template>

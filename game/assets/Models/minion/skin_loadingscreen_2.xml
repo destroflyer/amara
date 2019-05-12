@@ -1,0 +1,19 @@
+<skin name="minion">
+    <model normScale="1.75" scale="0.85">
+        <material>
+            <!--eyebrows-->
+            <color>0,0,0,1</color>
+            <!--tongue-->
+            <color>0.8,0,0,1</color>
+            <!--iron-->
+            <color>1,1,1,1</color>
+            <!--boots-->
+            <color>0,0,0,1</color>
+            <!--skin-->
+            <color>0.4,0.4,0.4,1</color>
+        </material>
+        <modifiers>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Minion_LoadingScreen_2</modifier>
+        </modifiers>
+    </model>
+</skin>

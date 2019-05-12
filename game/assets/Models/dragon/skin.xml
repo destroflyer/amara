@@ -1,0 +1,12 @@
+<skin name="dragon">
+    <model scale="0.4f">
+        <position>
+            <location>0,4,0</location>
+            <direction>0,0.1,1</direction>
+        </position>
+        <material>
+            <texture>diffuse.jpg</texture>
+            <texture>diffuse.jpg</texture>
+        </material>
+    </model>
+</skin>

@@ -1,0 +1,7 @@
+<skin name="kachujin">
+    <model normScale="0.028" rigType="mixamo">
+        <material>
+            <texture normalMap="normal.png" specularMap="specular.png">diffuse.png</texture>
+        </material>
+    </model>
+</skin>

@@ -1,0 +1,10 @@
+<template>
+    <entity>
+        <itemID>wanderers_treads</itemID>
+        <name>Wanderer's Treads</name>
+        <itemRecipe gold="350"/>
+        <isSellable>250</isSellable>
+        <!--stats-->
+        <bonusFlatWalkSpeed>0.35</bonusFlatWalkSpeed>
+    </entity>
+</template>

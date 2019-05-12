@@ -1,0 +1,1 @@
+start javaw -jar -XX:MaxDirectMemorySize=512M Amara.jar

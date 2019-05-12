@@ -1,0 +1,13 @@
+<template>
+    <entity>
+        <itemID>spike_dagger</itemID>
+        <name>Spike Dagger</name>
+        <itemRecipe gold="500" itemIDs="dagger,wooden_bow,dagger"/>
+        <isSellable>1000</isSellable>
+        <!--stats-->
+        <bonusPercentageAttackSpeed>0.55</bonusPercentageAttackSpeed>
+        <itemPassives>
+            <entity template="./spike_dagger_passive"/>
+        </itemPassives>
+    </entity>
+</template>

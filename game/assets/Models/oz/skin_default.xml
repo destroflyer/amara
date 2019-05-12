@@ -1,0 +1,7 @@
+<skin name="oz">
+    <model normScale="1.7" scale="1.76">
+        <material>
+            <texture>skin_default.png</texture>
+        </material>
+    </model>
+</skin>

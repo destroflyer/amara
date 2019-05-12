@@ -1,0 +1,71 @@
+<template>
+    <entity id="spell">
+        <name>Spinning Slash</name>
+        <description>Trynda.</description>
+        <spellVisualisation>spinning_slash</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <move>
+                            <entity>
+                                <targetedMovementDirection/>
+                                <movementSpeed>20</movementSpeed>
+                                <movementAnimation>
+                                    <entity>
+                                        <name>spin</name>
+                                        <loopDuration>0.3</loopDuration>
+                                    </entity>
+                                </movementAnimation>
+                                <distanceLimit>10</distanceLimit>
+                            </entity>
+                        </move>
+                        <removeCollisionGroups targetOf="map|units" targets="units"/>
+                        <addEffectTriggers>
+                            <!--readd collisiongroups-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <addCollisionGroups targetOf="map|units" targets="units"/>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                        </addEffectTriggers>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/spinning_slash_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castTurnToTarget/>
+        <baseCooldown>13</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <!--TODO-->
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

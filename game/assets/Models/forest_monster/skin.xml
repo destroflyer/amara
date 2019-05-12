@@ -1,0 +1,8 @@
+<skin name="forest_monster">
+    <model normScale="0.2" scale="1">
+        <material>
+            <texture normalMap="monster_normal.png" specularMap="monster_specular.png">monster_diffuse_1.png</texture>
+            <texture normalMap="tree_normal.png" specularMap="tree_specular.png" alpha="1">tree_diffuse.png</texture>
+        </material>
+    </model>
+</skin>

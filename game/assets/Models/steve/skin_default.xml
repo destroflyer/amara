@@ -1,0 +1,12 @@
+<skin name="steve">
+    <model normScale="0.59" scale="0.85">
+        <position>
+            <location>0,0,0</location>
+            <direction>-1,0,0</direction>
+        </position>
+        <material>
+            <!--body-->
+            <texture filter="nearest">dr_mundo.png</texture>
+        </material>
+    </model>
+</skin>

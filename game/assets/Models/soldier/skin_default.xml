@@ -1,0 +1,22 @@
+<skin name="soldier">
+    <model normScale="1.33" scale="0.9">
+        <material>
+            <!--zipper-->
+            <color>0.8,0.8,0.8,1</color>
+            <!--pants-->
+            <color>0,0,0.2,1</color>
+            <!--shoes-->
+            <color>0.03,0.02,0.01,1</color>
+            <!--hair-->
+            <color>0.11,0.11,0.07,1</color>
+            <!--jacket-->
+            <color>0.4,0.4,0.4,1</color>
+            <!--leather-->
+            <color>0.2,0.05,0.05,1</color>
+            <!--skin-->
+            <texture>skin.png</texture>
+            <!--mask-->
+            <color>0.7,0.8,0.7,1</color>
+        </material>
+    </model>
+</skin>

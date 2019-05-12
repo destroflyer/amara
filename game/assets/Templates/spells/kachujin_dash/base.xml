@@ -1,0 +1,77 @@
+<template>
+    <entity id="spell">
+        <name>Flying Highkick</name>
+        <description>Dashes a fixed distance in the target direction. (TODO: If an enemy is marked by "Mind of the Monk", "Flying Highkick" gains additional range up to the marked target)</description>
+        <spellVisualisation>kachujin_dash</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="2" height="8"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <move>
+                            <entity>
+                                <targetedMovementDirection/>
+                                <movementSpeed>20</movementSpeed>
+                                <movementAnimation>
+                                    <entity>
+                                        <name>hurricane_kick</name>
+                                        <loopDuration>1.56</loopDuration>
+                                    </entity>
+                                </movementAnimation>
+                                <distanceLimit>8</distanceLimit>
+                            </entity>
+                        </move>
+                        <removeCollisionGroups targetOf="map|units" targets="units"/>
+                        <addEffectTriggers>
+                            <!--reactivate hitbox-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <addCollisionGroups targetOf="map|units" targets="units"/>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                        </addEffectTriggers>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/kachujin_dash_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castTurnToTarget/>
+        <baseCooldown>14</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <!--TODO-->
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

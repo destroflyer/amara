@@ -67,4 +67,10 @@ lwjgl64.dll
 OpenAL64.dll
 
 # Amara specific #
+*.pdn
+*.dae
+*.fbx
+*.blend
+*.mesh.xml
+*.skeleton.xml
 workspace

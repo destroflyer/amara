@@ -1,0 +1,107 @@
+<template>
+    <value name="castDuration">6</value>
+    <entity id="spell">
+        <name>Backport</name>
+        <description>Teleports your character after [castDuration] seconds to your base. Taking damage during that time will cancel the teleport.</description>
+        <spellVisualisation>backport</spellVisualisation>
+        <instantEffectTriggers>
+            <!--add buff-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="-1">
+                            <entity id="buff">
+                                <buffVisualisation>backporting</buffVisualisation>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <!--delay by 1 frame to make sure, the buff isn't removed when recasting-->
+                <triggerDelay>0</triggerDelay>
+            </entity>
+            <!--play audio, add triggers-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity id="castAudio">
+                                <audio>Sounds/sounds/spells/backport_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
+                        <addEffectTriggers>
+                            <!--cancel on damage-->
+                            <entity id="damageTakenTrigger">
+                                <damageTakenTrigger physicalDamage="true" magicalDamage="true" trueDamage="true"/>
+                                <casterTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <cancelAction/>
+                                    </entity>
+                                </triggeredEffect>
+                            </entity>
+                            <!--action cancelled-->
+                            <entity id="actionCancelledTrigger">
+                                <actionCancelledTrigger/>
+                                <casterTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <stopAudio>#castAudio</stopAudio>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                            </entity>
+                            <!--cleanup-->
+                            <entity>
+                                <castingFinishedTrigger/>
+                                <casterTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <removeBuff>#buff</removeBuff>
+                                        <removeEffectTriggers>#damageTakenTrigger,#actionCancelledTrigger</removeEffectTriggers>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                            <!--teleport-->
+                            <entity>
+                                <castingFinishedTrigger/>
+                                <casterTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castCancelAction/>
+        <castCancelable/>
+        <castDuration>[castDuration]</castDuration>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--teleport-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <teleport>[parameter0]</teleport>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

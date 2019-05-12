@@ -1,0 +1,83 @@
+<template>
+    <entity id="spell">
+        <name>Empower</name>
+        <spellVisualisation>empower</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <baseCooldown>7</baseCooldown>
+    </entity>
+    <entity id="buff"/>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--add spelleffect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addAutoAttackSpellEffects>
+                            <entity id="newSpellEffect">
+                                <castedEffectTriggers>
+                                    <!--target effect-->
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <magicDamage>75 + (0.6 + source.abilityPower)</magicDamage>
+                                                <playAudio>
+                                                    <entity>
+                                                        <audio>Sounds/sounds/spells/empower_hit.ogg</audio>
+                                                    </entity>
+                                                </playAudio>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                    <!--remove buff-->
+                                    <entity>
+                                        <casterTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <removeBuff>#buff</removeBuff>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </castedEffectTriggers>
+                            </entity>
+                        </addAutoAttackSpellEffects>
+                        <addBuff duration="5">
+                            <entity id="buff">
+                                <buffVisualisation>empowered</buffVisualisation>
+                                <onBuffRemoveEffectTriggers>
+                                    <entity>
+                                        <casterTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <removeSpellEffects>#newSpellEffect</removeSpellEffects>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffRemoveEffectTriggers>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

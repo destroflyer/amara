@@ -1,0 +1,11 @@
+<template>
+    <entity>
+        <itemID>arcaneblade</itemID>
+        <name>Arcaneblade</name>
+        <itemRecipe gold="400" itemIDs="rusty_sword,arcane_vesture"/>
+        <isSellable>600</isSellable>
+        <!--stats-->
+        <bonusFlatAttackDamage>15</bonusFlatAttackDamage>
+        <bonusFlatMagicResistance>15</bonusFlatMagicResistance>
+    </entity>
+</template>

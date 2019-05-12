@@ -1,0 +1,7 @@
+<skin name="3dsa_fire_dragon">
+    <model normScale="0.025" scale="1.5">
+        <material>
+            <texture>diffuse_black.png</texture>
+        </material>
+    </model>
+</skin>

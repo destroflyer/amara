@@ -1,0 +1,7 @@
+<skin name="vampire_a_lusth">
+    <model normScale="0.028" rigType="mixamo">
+        <material>
+            <texture specularMap="specular.png" glowMap="glow.png">diffuse.png</texture>
+        </material>
+    </model>
+</skin>

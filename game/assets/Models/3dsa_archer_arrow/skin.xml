@@ -1,0 +1,10 @@
+<skin name="3dsa_archer_arrow">
+    <model scale="1,1,0.5">
+        <position>
+            <location>0,1.5,0</location>
+        </position>
+        <material>
+            <texture source="3dsa_archer">diffuse_red.png</texture>
+        </material>
+    </model>
+</skin>

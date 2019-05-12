@@ -1,0 +1,76 @@
+<template>
+    <entity id="spell">
+        <name>Unstoppable Force</name>
+        <spellVisualisation>unstoppable_force</spellVisualisation>
+        <instantEffectTriggers>
+            <!--move to target-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <move>
+                            <entity>
+                                <targetedMovementTarget/>
+                                <movementSpeed>35</movementSpeed>
+                            </entity>
+                        </move>
+                        <removeCollisionGroups targetOf="map|units" targets="units"/>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/unstoppable_force_cast.ogg</audio>
+                                <audioVolume>1.5</audioVolume>
+                            </entity>
+                        </playAudio>
+                        <addEffectTriggers>
+                            <!--spawn object-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <casterTarget/>
+                                <triggeredEffect>
+                                    <entity>                
+                                        <spawn>
+                                            <entity>
+                                                <spawnTemplate>./unstoppable_force_object(#spell)</spawnTemplate>
+                                            </entity>
+                                        </spawn>
+                                        <addCollisionGroups targetOf="map|units" targets="units"/>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerSource>#spell</triggerSource>
+                                <triggerOnce/>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>positional_skillshot</castType>
+        <castCancelAction/>
+        <castTurnToTarget/>
+        <range>16</range>
+        <baseCooldown>16</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>200 + (1 * source.abilityPower)</magicDamage>
+                        <addKnockup>
+                            <entity>
+                                <knockupDuration>1.5</knockupDuration>
+                                <knockupHeight>7</knockupHeight>
+                            </entity>
+                        </addKnockup>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

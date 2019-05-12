@@ -1,0 +1,10 @@
+<skin name="maria_ult">
+    <model scale="0.55">
+        <position>
+            <location>0,2,0</location>
+        </position>
+        <modifiers>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Maria_Ult</modifier>
+        </modifiers>
+    </model>
+</skin>

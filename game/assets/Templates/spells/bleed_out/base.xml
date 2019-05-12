@@ -1,0 +1,64 @@
+<template>
+    <entity id="spell">
+        <name>Bleed Out</name>
+        <description>Deals 200 damage over 5 seconds to the target.</description>
+        <spellVisualisation>bleed_out</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <circularIndicator radius="10"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/bleed_out_hit.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castTurnToTarget/>
+        <range>10</range>
+        <baseCooldown>210</baseCooldown>
+        <spellTargetRules>
+            <entity>
+                <requireCharacter/>
+                <acceptEnemies/>
+            </entity>
+        </spellTargetRules>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="5">
+                            <entity>
+                                <buffVisualisation>burning</buffVisualisation>
+                                <repeatingEffect interval="0.5">
+                                    <entity>
+                                        <magicDamage>20</magicDamage>
+                                    </entity>
+                                </repeatingEffect>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

@@ -1,0 +1,71 @@
+<template>
+    <entity id="spell">
+        <name>Moon Jump</name>
+        <description>Ganfaul makes a backflip, jumping a short distance in the opposite direction, that he is facing.</description>
+        <spellVisualisation>ganfaul_backflip</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <linearIndicator y="-8" width="2" height="8"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castCancelAction/>
+        <castDuration>0.5</castDuration>
+        <baseCooldown>9</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <move>
+                            <entity>
+                                <targetedMovementDirection>180</targetedMovementDirection>
+                                <movementSpeed>16</movementSpeed>
+                                <movementAnimation>
+                                    <entity>
+                                        <name>backflip</name>
+                                        <loopDuration>1</loopDuration>
+                                    </entity>
+                                </movementAnimation>
+                                <distanceLimit>8</distanceLimit>
+                            </entity>
+                        </move>
+                        <removeCollisionGroups targetOf="map|units" targets="units"/>
+                        <addEffectTriggers>
+                            <!--readd collisiongroups-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <addCollisionGroups targetOf="map|units" targets="units"/>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

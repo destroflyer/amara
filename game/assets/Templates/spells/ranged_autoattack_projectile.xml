@@ -1,0 +1,39 @@
+<template>
+    <entity id="projectile">
+        <isProjectile/>
+        <model>[parameter0]</model>
+        <hitbox>
+            <point/>
+        </hitbox>
+        <hitboxActive/>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <targetReachedTrigger/>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+                <playAudio>
+                    <entity>
+                        <audio>[parameter1]</audio>
+                        <audioVolume>0.5</audioVolume>
+                        <audioRemoveAfterPlaying/>
+                    </entity>
+                </playAudio>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--remove projectile-->
+    <entity>
+        <targetReachedTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+</template>

@@ -1,0 +1,9 @@
+<skin name="chest">
+    <model normScale="1.34" scale="1.8">
+        <material>
+            <texture>diffuse.png</texture>
+            <texture>diffuse.png</texture>
+            <texture>diffuse.png</texture>
+        </material>
+    </model>
+</skin>

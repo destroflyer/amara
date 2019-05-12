@@ -1,0 +1,7 @@
+<skin name="3dsa_fantasy_forest_ladder">
+    <model scale="3">
+        <material>
+            <texture source="3dsa_fantasy_forest_fence_1">diffuse.png</texture>
+        </material>
+    </model>
+</skin>

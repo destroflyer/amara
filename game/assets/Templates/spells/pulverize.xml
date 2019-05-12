@@ -1,0 +1,59 @@
+<template>
+    <entity id="spell">
+        <name>Pulverize</name>
+        <spellVisualisation>pulverize</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn object, play audio-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./pulverize_object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/pulverize_hit.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castDuration>0.8</castDuration>
+        <castCancelAction/>
+        <castAnimation>
+            <entity>
+                <name>attack1</name>
+                <loopDuration>0.5</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>17</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>80 + (0.5 * source.abilityPower)</magicDamage>
+                        <addKnockup>
+                            <entity>
+                                <knockupDuration>1</knockupDuration>
+                                <knockupHeight>5</knockupHeight>
+                            </entity>
+                        </addKnockup>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

@@ -1,0 +1,11 @@
+<template>
+    <entity>
+        <itemID>nightkiss</itemID>
+        <name>Nightkiss</name>
+        <itemRecipe gold="500" itemIDs="moonlight,apprentice_rod"/>
+        <isSellable>1500</isSellable>
+        <!--stats-->
+        <bonusFlatAbilityPower>100</bonusFlatAbilityPower>
+        <bonusPercentageCooldownSpeed>0.2</bonusPercentageCooldownSpeed>
+    </entity>
+</template>

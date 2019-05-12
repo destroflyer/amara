@@ -1,0 +1,66 @@
+<template defaultParameters="Models/energy_projectile/skin.xml,Sounds/sounds/spells/ranged_autoattack_cast.ogg,Sounds/sounds/spells/ranged_autoattack_hit.ogg">
+    <entity id="spell">
+        <name>Ranged Autoattack</name>
+        <instantEffectTriggers>
+            <!--spawn projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./ranged_autoattack_projectile([parameter0],[parameter2])</spawnTemplate>
+                                <spawnMoveToTarget/>
+                                <spawnMovementSpeed>25</spawnMovementSpeed>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>[parameter1]</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castCancelAction/>
+        <castCancelable/>
+        <castTurnToTarget/>
+        <range>9</range>
+        <spellTargetRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </spellTargetRules>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>1 * source.attackDamage</physicalDamage>
+                        <canCrit/>
+                        <drawTeamAggro>15</drawTeamAggro>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>
