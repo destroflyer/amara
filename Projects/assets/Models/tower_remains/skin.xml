@@ -1,9 +1,0 @@
-<skin name="tower_remains">
-    <model scale="0.9">
-        <material>
-            <texture source="tower">stone_wall.png</texture>
-            <texture source="tower">medieval_door.png</texture>
-            <color>0,0,0,1</color>
-        </material>
-    </model>
-</skin>

@@ -1,8 +1,0 @@
-<skin name="cartoon_forest_tree_3">
-    <model scale="2">
-        <material>
-            <color>0.2,0.1,0.05,1</color>
-            <color>1,1,1,1</color>
-        </material>
-    </model>
-</skin>

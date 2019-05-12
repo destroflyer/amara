@@ -1,8 +1,0 @@
-<skin name="shyvana">
-    <model normScale="0.037">
-        <material>
-            <!--skin-->
-            <texture>diffuse.png</texture>
-        </material>
-    </model>
-</skin>

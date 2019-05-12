@@ -1,8 +1,0 @@
-<skin name="gentleman_hat">
-    <model scale="2">
-        <material>
-            <!--black-->
-            <color>0,0,0,1</color>
-        </material>
-    </model>
-</skin>

@@ -1,7 +1,0 @@
-<skin name="pillar_of_flame">
-    <model scale="1">
-        <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_PillarOfFlame</modifier>
-        </modifiers>
-    </model>
-</skin>

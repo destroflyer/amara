@@ -1,7 +1,0 @@
-<skin name="pabong_tower_4">
-    <model normScale="1" scale="1">
-        <material>
-            <texture>diffuse_green.png</texture>
-        </material>
-    </model>
-</skin>

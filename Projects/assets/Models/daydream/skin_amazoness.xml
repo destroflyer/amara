@@ -1,7 +1,0 @@
-<skin name="daydream">
-    <model scale="1">
-        <material>
-            <texture>skin_amazoness.png</texture>
-        </material>
-    </model>
-</skin>

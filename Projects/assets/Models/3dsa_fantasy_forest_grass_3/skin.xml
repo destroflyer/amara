@@ -1,7 +1,0 @@
-<skin name="3dsa_fantasy_forest_grass_3">
-    <model scale="3">
-        <material>
-            <texture source="3dsa_fantasy_forest_grass_1">diffuse.png</texture>
-        </material>
-    </model>
-</skin>

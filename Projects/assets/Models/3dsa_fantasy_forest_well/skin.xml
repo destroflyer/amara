@@ -1,7 +1,0 @@
-<skin name="3dsa_fantasy_forest_well">
-    <model scale="3">
-        <material>
-            <texture>diffuse_water.png</texture>
-        </material>
-    </model>
-</skin>

@@ -1,7 +1,0 @@
-<skin name="3dsa_fantasy_forest_rock_6">
-    <model scale="3">
-        <material>
-            <texture source="3dsa_fantasy_forest_rock_4">diffuse.png</texture>
-        </material>
-    </model>
-</skin>

@@ -1,7 +1,0 @@
-<skin name="ganfaul_binding_particles">
-    <model scale="1">
-        <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Ganfaul_Binding_Particles</modifier>
-        </modifiers>
-    </model>
-</skin>

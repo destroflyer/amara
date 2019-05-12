@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.destrostudios.amara</groupId>
+        <artifactId>main</artifactId>
+        <version>0.5</version>
+    </parent>
+    <artifactId>shared</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>ai</module>
+        <module>applications-windowed</module>
+        <module>core</module>
+        <module>entitysystem</module>
+        <module>entitysystem-template</module>
+        <module>expressions</module>
+        <module>ingame-entitysystem</module>
+        <module>ingame-maps</module>
+        <module>ingame-network</module>
+        <module>ingame-shared</module>
+        <module>network</module>
+        <module>physics</module>
+    </modules>
+</project>

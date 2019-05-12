@@ -1,7 +1,0 @@
-<skin name="daydream">
-    <model scale="1">
-        <material>
-            <texture alpha="1">skin_inuyasha.png</texture>
-        </material>
-    </model>
-</skin>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.destrostudios.amara</groupId>
+        <artifactId>main</artifactId>
+        <version>0.5</version>
+    </parent>
+    <artifactId>master-server</artifactId>
+    <packaging>pom</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>com.destrostudios.amara</groupId>
+            <artifactId>applications-headless</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.destrostudios.amara</groupId>
+            <artifactId>ingame-entitysystem</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.destrostudios.amara</groupId>
+            <artifactId>ingame-network</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.destrostudios.amara</groupId>
+            <artifactId>ingame-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.destrostudios.amara</groupId>
+            <artifactId>ingame-shared</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.destrostudios.amara</groupId>
+            <artifactId>master-network</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.destrostudios.amara</groupId>
+            <artifactId>network</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jmonkeyengine</groupId>
+            <artifactId>jme3-networking</artifactId>
+        </dependency>
+    </dependencies>
+</project>

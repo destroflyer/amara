@@ -1,7 +1,0 @@
-<template>
-    <entity>
-        <isAlwaysVisible/>
-        <teamModel>Models/pabong_tower_1/skin_team.xml</teamModel>
-        <team>[parameter0]</team>
-    </entity>
-</template>

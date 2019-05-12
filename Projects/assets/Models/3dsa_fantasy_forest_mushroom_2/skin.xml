@@ -1,7 +1,0 @@
-<skin name="3dsa_fantasy_forest_mushroom_2">
-    <model scale="3">
-        <material>
-            <texture>diffuse.png</texture>
-        </material>
-    </model>
-</skin>
