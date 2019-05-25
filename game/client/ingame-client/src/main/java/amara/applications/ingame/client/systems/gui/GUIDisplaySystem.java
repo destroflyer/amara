@@ -4,28 +4,28 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
-import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.players.*;
+import amara.libraries.applications.display.gui.GameScreenController;
 import amara.libraries.entitysystem.*;
 
 /**
  *
  * @author Carl
  */
-public abstract class GUIDisplaySystem implements EntitySystem{
+public abstract class GUIDisplaySystem<ScreenControllerType extends GameScreenController> implements EntitySystem {
 
-    public GUIDisplaySystem(int playerEntity, ScreenController_HUD screenController_HUD){
+    public GUIDisplaySystem(int playerEntity, ScreenControllerType screenController) {
         this.playerEntity = playerEntity;
-        this.screenController_HUD = screenController_HUD;
+        this.screenController = screenController;
     }
     protected int playerEntity;
-    protected ScreenController_HUD screenController_HUD;
+    protected ScreenControllerType screenController;
     
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        if(screenController_HUD.isVisible()){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        if (screenController.isVisible()) {
             PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
-            if(playerCharacterComponent != null){
+            if (playerCharacterComponent != null) {
                 update(entityWorld, deltaSeconds, playerCharacterComponent.getEntity());
             }
         }
@@ -33,10 +33,10 @@ public abstract class GUIDisplaySystem implements EntitySystem{
     
     protected abstract void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity);
     
-    protected boolean hasComponentChanged(ComponentMapObserver observer, int entity, Class... componentClasses){
-        for(Class componentClass : componentClasses){
-            if(observer.getNew().hasComponent(entity, componentClass)
-            || observer.getChanged().hasComponent(entity, componentClass)){
+    protected boolean hasComponentChanged(ComponentMapObserver observer, int entity, Class... componentClasses) {
+        for (Class componentClass : componentClasses) {
+            if (observer.getNew().hasComponent(entity, componentClass)
+             || observer.getChanged().hasComponent(entity, componentClass)) {
                 return true;
             }
         }

@@ -23,7 +23,7 @@ import amara.libraries.entitysystem.synchronizing.ComponentField;
  */
 public class ComponentsRegistrator_Generate{
     
-    private static final String SOURCE_DIRECTORY = "./src/";
+    private static final String SOURCE_DIRECTORY = "../shared/ingame-entitysystem/src/main/java/";
     private static final String PACKAGE_COMPONENTS = "amara.applications.ingame.entitysystem.components.";
     private static final String LIST_SEPERATOR = ",";
     private static final Class[] notXMLSupportedComponentClasses = new Class[]{

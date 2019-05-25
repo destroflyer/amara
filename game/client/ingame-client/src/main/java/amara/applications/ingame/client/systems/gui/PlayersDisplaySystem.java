@@ -12,7 +12,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public abstract class PlayersDisplaySystem implements EntitySystem{
+public abstract class PlayersDisplaySystem implements EntitySystem {
 
     public PlayersDisplaySystem(ScreenController_HUD screenController_HUD){
         this.screenController_HUD = screenController_HUD;

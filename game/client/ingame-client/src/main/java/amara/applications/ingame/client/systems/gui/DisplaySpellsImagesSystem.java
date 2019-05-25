@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplaySpellsImagesSystem extends GUIDisplaySystem{
+public class DisplaySpellsImagesSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplaySpellsImagesSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -31,7 +31,7 @@ public class DisplaySpellsImagesSystem extends GUIDisplaySystem{
             int[] spells = spellsComponent.getSpellsEntities();
             for(int i=0;i<4;i++){
                 String imageFilePath = getSpellImageFilePath(entityWorld, spells, i);
-                screenController_HUD.setSpellImage(i, imageFilePath);
+                screenController.setSpellImage(i, imageFilePath);
             }
         }
     }

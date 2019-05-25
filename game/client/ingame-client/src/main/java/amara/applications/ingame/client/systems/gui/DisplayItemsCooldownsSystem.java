@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayItemsCooldownsSystem extends GUIDisplaySystem{
+public class DisplayItemsCooldownsSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayItemsCooldownsSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -39,15 +39,15 @@ public class DisplayItemsCooldownsSystem extends GUIDisplaySystem{
                     if(itemActiveComponent != null){
                         RemainingCooldownComponent remainingCooldownComponent = entityWorld.getComponent(itemActiveComponent.getSpellEntity(), RemainingCooldownComponent.class);
                         if(remainingCooldownComponent != null){
-                            screenController_HUD.showItemCooldown(i, remainingCooldownComponent.getDuration());
+                            screenController.showItemCooldown(i, remainingCooldownComponent.getDuration());
                         }
                         else{
-                            screenController_HUD.hideItemCooldown(i);
+                            screenController.hideItemCooldown(i);
                         }
                     }
                 }
                 else{
-                    screenController_HUD.hideItemCooldown(i);
+                    screenController.hideItemCooldown(i);
                 }
             }
         }
@@ -68,13 +68,13 @@ public class DisplayItemsCooldownsSystem extends GUIDisplaySystem{
     
     private void checkCooldownChanged(RemainingCooldownComponent remainingCooldownComponent, int itemIndex){
         if(remainingCooldownComponent != null){
-            screenController_HUD.showItemCooldown(itemIndex, remainingCooldownComponent.getDuration());
+            screenController.showItemCooldown(itemIndex, remainingCooldownComponent.getDuration());
         }
     }
     
     private void checkCooldownRemoved(RemainingCooldownComponent remainingCooldownComponent, int itemIndex){
         if(remainingCooldownComponent != null){
-            screenController_HUD.hideItemCooldown(itemIndex);
+            screenController.hideItemCooldown(itemIndex);
         }
     }
 }

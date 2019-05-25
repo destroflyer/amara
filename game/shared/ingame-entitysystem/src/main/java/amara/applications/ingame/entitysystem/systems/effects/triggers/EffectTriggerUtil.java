@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.casts.*;
+import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.systems.conditions.ConditionUtil;
@@ -58,11 +59,10 @@ public class EffectTriggerUtil{
                 }
                 SetCooldownOnCastingSystem.setOnCooldown(entityWorld, effectTriggerEntity);
                 TriggerOnceComponent triggerOnceComponent = entityWorld.getComponent(effectTriggerEntity, TriggerOnceComponent.class);
-                if(triggerOnceComponent != null){
-                    if(triggerOnceComponent.isRemoveEntity()){
+                if (triggerOnceComponent != null) {
+                    if (triggerOnceComponent.isRemoveEntity()) {
                         entityWorld.removeEntity(effectTriggerEntity);
-                    }
-                    else{
+                    } else {
                         entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
                     }
                 }
@@ -118,6 +118,15 @@ public class EffectTriggerUtil{
         if(customTargetComponent != null){
             for(int customTargetEntity : customTargetComponent.getTargetEntities()){
                 tmpTargetEntities.add(customTargetEntity);
+            }
+        }
+        TeamTargetComponent teamTargetComponent = entityWorld.getComponent(entity, TeamTargetComponent.class);
+        if (teamTargetComponent != null) {
+            for (int entityInTeam : entityWorld.getEntitiesWithAll(TeamComponent.class)) {
+                int teamEntity = entityWorld.getComponent(entityInTeam, TeamComponent.class).getTeamEntity();
+                if (teamEntity == teamTargetComponent.getTeamEntity()) {
+                    tmpTargetEntities.add(entityInTeam);
+                }
             }
         }
         return Util.convertToArray_Integer(tmpTargetEntities);

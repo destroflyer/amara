@@ -12,7 +12,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayLevelSystem extends GUIDisplaySystem{
+public class DisplayLevelSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayLevelSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -27,7 +27,7 @@ public class DisplayLevelSystem extends GUIDisplaySystem{
     
     private void check(LevelComponent levelComponent){
         if(levelComponent != null){
-            screenController_HUD.setLevel(levelComponent.getLevel());
+            screenController.setLevel(levelComponent.getLevel());
         }
     }
 }

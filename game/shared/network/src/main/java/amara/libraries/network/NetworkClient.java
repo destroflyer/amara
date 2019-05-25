@@ -51,6 +51,7 @@ public class NetworkClient extends NetworkListener{
 
                 @Override
                 public void handleError(Client source, Throwable throwable){
+                    throwable.printStackTrace();
                     onDisconnect();
                 }
             });

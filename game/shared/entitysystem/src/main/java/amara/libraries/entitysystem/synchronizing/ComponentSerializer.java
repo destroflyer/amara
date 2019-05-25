@@ -21,7 +21,7 @@ import amara.libraries.network.*;
  */
 public class ComponentSerializer{
     
-    private static HashMap<Field, FieldSerializer> fieldSerializers = new HashMap<Field, FieldSerializer>();
+    private static HashMap<Field, FieldSerializer> fieldSerializers = new HashMap<>();
     
     public static void registerFieldSerializer(Field[] fields, FieldSerializer fieldSerializer){
         for(Field field : fields){
@@ -48,7 +48,7 @@ public class ComponentSerializer{
         int neededBits = Util.getNeededBitsCount(componentManager.getCount());
         outputStream.writeBits(componentClassID, neededBits);
     }
-    
+
     public static void writeObject(BitOutputStream outputStream, Class type, Object value){
         writeObject(outputStream, type, value, null);
     }

@@ -6,6 +6,7 @@ package amara.applications.ingame.entitysystem.systems.effects;
 
 import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.attributes.*;
+import amara.applications.ingame.entitysystem.components.buffs.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.aggro.*;
 import amara.applications.ingame.entitysystem.components.effects.audio.*;
@@ -31,19 +32,25 @@ import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.specials.erika.*;
 import amara.applications.ingame.entitysystem.components.spells.placeholders.*;
+import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 import amara.libraries.expressions.*;
 import amara.libraries.expressions.exceptions.ExpressionException;
+
+import java.util.LinkedList;
 
 /**
  *
  * @author Carl
  */
 public class CalculateEffectImpactSystem implements EntitySystem{
-    
+
+    private LinkedList<Integer> appliedEffectEntities = new LinkedList<>();
+
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
+        appliedEffectEntities.clear();
         ExpressionSpace expressionSpace = GlobalExpressionSpace.getInstance();
         for(EntityWrapper effectCast : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(PrepareEffectComponent.class))){
             if(!effectCast.hasComponent(RemainingEffectDelayComponent.class)){
@@ -53,7 +60,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 EffectCastTargetComponent effectCastTargetComponent = effectCast.getComponent(EffectCastTargetComponent.class);
                 boolean removeTemporaryEffectCastTargets = false;
                 expressionSpace.clearValues();
-                int effectSourceEntity = ((effectCastSourceComponent != null)?effectCastSourceComponent.getSourceEntity():-1);
+                int effectSourceEntity = ((effectCastSourceComponent != null) ? effectCastSourceComponent.getSourceEntity() : -1);
                 if(effectSourceEntity != -1){
                     ExpressionUtil.setEntityValues(entityWorld, expressionSpace, "source", effectSourceEntity);
                 }
@@ -188,6 +195,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     EntityUtil.transferComponents(effect, effectImpact, new Class[]{
                         AddComponentsComponent.class,
                         RemoveComponentsComponent.class,
+                        FinishObjectiveComponent.class,
                         AddEffectTriggersComponent.class,
                         RemoveEffectTriggersComponent.class,
                         RemoveEntityComponent.class,
@@ -234,6 +242,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         TriggerSpellEffectsComponent.class,
                         AddGoldComponent.class,
                         CancelActionComponent.class,
+                        RespawnComponent.class,
                         AddStealthComponent.class,
                         RemoveStealthComponent.class,
                         PlayAnimationComponent.class,
@@ -249,16 +258,34 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         entityWorld.removeEntity(effectCastTargetComponent.getTargetEntity());
                     }
                 }
+                appliedEffectEntities.add(effect.getId());
             }
         }
+        cleanupUnreferencedAppliedEffects(entityWorld);
     }
-    
-    public static float getResistanceDamageFactor(float resistance){
-        if(resistance >= 0){
+
+    public static float getResistanceDamageFactor(float resistance) {
+        if (resistance >= 0) {
             return (100 / (100 + resistance));
-        }
-        else{
+        } else{
             return (2 - (100 / (100 - resistance)));
+        }
+    }
+
+    private void cleanupUnreferencedAppliedEffects(EntityWorld entityWorld) {
+        // Remove effects that are no longer referenced, e.g. when an instant once effecttrigger was already removed, but had a delay for the effect cast
+        for (int appliedEffectEntity : appliedEffectEntities) {
+            boolean isReferencedInEffectTrigger = entityWorld.getEntitiesWithAll(TriggeredEffectComponent.class).stream()
+                    .map(effectTriggerEntity -> entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class).getEffectEntity())
+                    .anyMatch(effectEntity -> effectEntity == appliedEffectEntity);
+            if (!isReferencedInEffectTrigger) {
+                boolean isReferencedInRepeatingEffect = entityWorld.getEntitiesWithAll(RepeatingEffectComponent.class).stream()
+                        .map(buffEntity -> entityWorld.getComponent(buffEntity, RepeatingEffectComponent.class).getEffectEntity())
+                        .anyMatch(effectEntity -> effectEntity == appliedEffectEntity);
+                if (!isReferencedInRepeatingEffect) {
+                    entityWorld.removeEntity(appliedEffectEntity);
+                }
+            }
         }
     }
 }

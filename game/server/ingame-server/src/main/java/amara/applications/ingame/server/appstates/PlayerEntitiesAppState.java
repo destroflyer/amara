@@ -75,6 +75,7 @@ public class PlayerEntitiesAppState extends ServerBaseAppState{
         entityWorld.setComponent(characterEntity, new TitleComponent(playerName));
         createModelAndInventory(entityWorld, characterEntity, player, characterName);
         entityWorld.setComponent(characterEntity, new IsCharacterComponent());
+        entityWorld.setComponent(characterEntity, new IsRespawnableComponent());
         entityWorld.setComponent(characterEntity, new SightRangeComponent(30));
         entityWorld.setComponent(characterEntity, new GoldComponent(475));
         entityWorld.setComponent(characterEntity, new LevelComponent(1));

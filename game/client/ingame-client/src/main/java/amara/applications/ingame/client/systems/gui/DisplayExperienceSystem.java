@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayExperienceSystem extends GUIDisplaySystem{
+public class DisplayExperienceSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayExperienceSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -32,7 +32,7 @@ public class DisplayExperienceSystem extends GUIDisplaySystem{
     private void check(LevelComponent levelComponent, ExperienceComponent experienceComponent){
         if(experienceComponent != null){
             float portion = (((float) experienceComponent.getExperience()) / LevelUpSystem.getNeededLevelUpExperience(levelComponent.getLevel()));
-            screenController_HUD.setExperience(portion);
+            screenController.setExperience(portion);
         }
     }
 }

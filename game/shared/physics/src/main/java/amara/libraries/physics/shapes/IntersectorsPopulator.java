@@ -39,9 +39,13 @@ public class IntersectorsPopulator {
             private Vector2D intersectionResolverHelper(Vector2D delta, double distance) {
                 assert delta.length() <= distance: delta.length() + " / " + distance;
                 double len = delta.length();
-                return delta.mult((len - distance) / len);
+                if (len > 0) {
+                    return delta.mult((len - distance) / len);
+                } else {
+                    return new Vector2D(distance, 0);
+                }
             }
-            
+
             @Override
             public boolean intersect(Circle a, Circle b) {
                 return a.getGlobalPosition().squaredDistance(b.getGlobalPosition()) < Util.squared(a.getGlobalRadius() + b.getGlobalRadius());

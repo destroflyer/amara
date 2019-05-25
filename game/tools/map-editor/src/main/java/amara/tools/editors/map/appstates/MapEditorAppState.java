@@ -54,11 +54,11 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
     private Action currentAction = Action.NONE;
     private Action actionBeforeRemove;
     private Vector2f currentHoveredLocation = new Vector2f();
-    private LinkedList<ConvexShape> shapesToPlace = new LinkedList<ConvexShape>();
+    private LinkedList<ConvexShape> shapesToPlace = new LinkedList<>();
     private Spatial toolCursor;
     private double circleRadius = 3;
     private double circleRadiusStep = 0.2f;
-    private LinkedList<Vector2D> customShapePoints = new LinkedList<Vector2D>();
+    private LinkedList<Vector2D> customShapePoints = new LinkedList<>();
     private String[] visualsModelSkinPaths = new String[]{
         "Models/3dsa_fantasy_forest_animal_bones/skin.xml",
         "Models/3dsa_fantasy_forest_cave_entrance/skin.xml",

@@ -1,0 +1,61 @@
+<template>
+    <entity>
+        <name>Varus Tower</name>
+        <isMinion/>
+        <!--model-->
+        <model>Models/varus/skin_default.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>idle</name>
+                <loopDuration>3</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>auto_attack</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>death</name>
+                <loopDuration>1.5</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1.5"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <isRespawnable/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>700</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>50</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>1.3</bonusFlatAttackSpeed>
+                <bonusFlatArmor>20</bonusFlatArmor>
+                <bonusFlatMagicResistance>20</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>6.25</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <requestUpdateAttributes/>
+        <sightRange>28</sightRange>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/ranged_autoattack,Models/3dsa_archer_arrow/skin.xml"/>
+        </autoAttack>
+        <autoAggro>12</autoAggro>
+    </entity>
+</template>

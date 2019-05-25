@@ -14,7 +14,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayDeathRecapSystem extends GUIDisplaySystem{
+public class DisplayDeathRecapSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayDeathRecapSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -64,12 +64,12 @@ public class DisplayDeathRecapSystem extends GUIDisplaySystem{
                     text += ((int) entry.getDamage()) + " " + entry.getDamageType().name().toLowerCase();
                 }
             }
-            screenController_HUD.setDeathLayersVisible(true);
-            screenController_HUD.setDeathRecapText(text);
-            screenController_HUD.setDeathRecapVisible(false);
+            screenController.setDeathLayersVisible(true);
+            screenController.setDeathRecapText(text);
+            screenController.setDeathRecapVisible(false);
         }
         else if(observer.getNew().hasComponent(characterEntity, IsAliveComponent.class)){
-            screenController_HUD.setDeathLayersVisible(false);
+            screenController.setDeathLayersVisible(false);
         }
     }
 }

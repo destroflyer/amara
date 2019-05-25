@@ -40,35 +40,18 @@ public class ScreenController_Shop extends GameScreenController{
     private final static int ITEMS_ROW_HEIGHT = 70;
     private static final int INGREDIENT_WIDTH = 45;
     private static final int INGREDIENT_HEIGHT = 60;
-    private String[] shopItemTemplateNames = new String[]{
-        "egos_sword","egos_shield","egos_ring",
-        "red_gem",
-        "wanderers_treads","boots_of_haste","boots_of_ferocity","boots_of_sorcery","boots_of_intellect","boots_of_iron","boots_of_silence",
-        "rusty_sword","reinforced_sword","greatsword","dagger","wooden_bow",
-        "leather_armor","heavy_leather_armor","cotton_armor","iron_armor","arcane_vesture","enchanted_vesture",
-        "book_of_vampirism","doomblade","hells_scream",
-        "cataclysm","icecold","spike_dagger","thunderbolt",
-        "book_of_precision","book_of_extreme_precision","blinkstrike","new_dawn",
-        "swift_dagger","swift_bow",
-        "tiny_scepter","apprentice_rod","the_untamed",
-        "book_of_wisdom","moonlight","nightkiss","requiem",
-        "book_of_vitality","ethers_armor",
-        "iron_bulwark","natures_protector",
-        "burning_armor","mirror_coat",
-        "reaper","arcaneblade","soulblade"
-    };
-    private String[] shopItemTemplateNames_Special = new String[]{
+    private String[] shopItemNames_Special = new String[] {
         "golden_eagle","youmuus_ghostblade","lifebinder"
     };
-    private EntityWrapper[] shopItems;
-    private EntityWrapper[] shopItems_Special;
-    private HashMap<String, ItemRecipe> itemsRecipes = new HashMap<String, ItemRecipe>();
-    private LinkedList<ItemRecipe> tmpInventoryItemsRecipes = new LinkedList<ItemRecipe>();
+    private EntityWrapper[] shopItems = new EntityWrapper[0];
+    private EntityWrapper[] shopItems_Special = new EntityWrapper[0];
+    private HashMap<String, ItemRecipe> itemsRecipes = new HashMap<>();
+    private LinkedList<ItemRecipe> tmpInventoryItemsRecipes = new LinkedList<>();
     private int shopPageID;
     private String shopItemFilterText = "";
     private boolean[] shopItemFilters = new boolean[11];
     private boolean isUpdatingShopItemFilters;
-    private LinkedList<EntityWrapper> shopFilteredItems = new LinkedList<EntityWrapper>();
+    private LinkedList<EntityWrapper> shopFilteredItems = new LinkedList<>();
     
     @Override
     public void onStartup(){
@@ -79,28 +62,35 @@ public class ScreenController_Shop extends GameScreenController{
     @Override
     protected void initialize(){
         super.initialize();
+        shopItems_Special = new EntityWrapper[shopItemNames_Special.length];
+        for(int i=0;i<shopItems_Special.length;i++){
+            shopItems_Special[i] = StaticEntityWorld.loadTemplateWrapped("items/" + shopItemNames_Special[i]);
+        }
+        // Preload recipes
+        for (EntityWrapper shopItem_Special : shopItems_Special) {
+            String itemID = shopItem_Special.getComponent(ItemIDComponent.class).getID();
+            getItemRecipe(itemID);
+        }
         shopItemFilters[0] = true;
-        initializeShopEntities();
     }
-    
-    private void initializeShopEntities(){
-        shopItems = new EntityWrapper[shopItemTemplateNames.length];
+
+    public void setShopItems(String[] itemTemplateNames) {
+        // Cleanup old item entities
+        for (EntityWrapper shopItem : shopItems) {
+            StaticEntityWorld.getEntityWorld().removeEntity(shopItem.getId());
+        }
+        // Load new item entities
+        shopItems = new EntityWrapper[itemTemplateNames.length];
         for(int i=0;i<shopItems.length;i++){
-            shopItems[i] = StaticEntityWorld.loadTemplateWrapped("items/" + shopItemTemplateNames[i]);
+            shopItems[i] = StaticEntityWorld.loadTemplateWrapped(itemTemplateNames[i]);
         }
-        shopItems_Special = new EntityWrapper[shopItemTemplateNames_Special.length];
-        for(int i=0;i<shopItems_Special.length;i++){
-            shopItems_Special[i] = StaticEntityWorld.loadTemplateWrapped("items/" + shopItemTemplateNames_Special[i]);
-        }
-        //Preload recipes
-        for(int i=0;i<shopItems.length;i++){
-            getItemRecipe(shopItemTemplateNames[i]);
-        }
-        for(int i=0;i<shopItems_Special.length;i++){
-            getItemRecipe(shopItemTemplateNames_Special[i]);
+        // Preload recipes
+        for (EntityWrapper shopItem : shopItems) {
+            String itemID = shopItem.getComponent(ItemIDComponent.class).getID();
+            getItemRecipe(itemID);
         }
     }
-    
+
     private ItemRecipe getItemRecipe(String itemID){
         ItemRecipe itemRecipe = itemsRecipes.get(itemID);
         if(itemRecipe == null){
@@ -123,9 +113,9 @@ public class ScreenController_Shop extends GameScreenController{
     
     public void updateRecipeCosts(EntityWorld entityWorld, int[] inventoryItemEntities){
         tmpInventoryItemsRecipes.clear();
-        for(int i=0;i<inventoryItemEntities.length;i++){
-            if(inventoryItemEntities[i] != -1){
-                String itemID = entityWorld.getComponent(inventoryItemEntities[i], ItemIDComponent.class).getID();
+        for (int inventoryItemEntity : inventoryItemEntities) {
+            if (inventoryItemEntity != -1) {
+                String itemID = entityWorld.getComponent(inventoryItemEntity, ItemIDComponent.class).getID();
                 tmpInventoryItemsRecipes.add(getItemRecipe(itemID));
             }
         }
@@ -201,26 +191,24 @@ public class ScreenController_Shop extends GameScreenController{
         shopPageID++;
         shopFilteredItems.clear();
         String itemFilterTextLowerCase = shopItemFilterText.toLowerCase();
-        for(int i=0;i<shopItems.length;i++){
-            EntityWrapper item = shopItems[i];
+        for (EntityWrapper item : shopItems) {
             boolean isFiltered = true;
             String itemName = item.getComponent(NameComponent.class).getName();
-            if(!itemName.toLowerCase().contains(itemFilterTextLowerCase)){
+            if (!itemName.toLowerCase().contains(itemFilterTextLowerCase)) {
+                isFiltered = false;
+            } else if ((shopItemFilters[1] && (!item.hasComponent(BonusFlatMaximumHealthComponent.class)))
+                    || (shopItemFilters[2] && (!item.hasComponent(BonusFlatAttackDamageComponent.class)))
+                    || (shopItemFilters[3] && (!item.hasComponent(BonusPercentageAttackSpeedComponent.class)))
+                    || (shopItemFilters[4] && (!item.hasComponent(BonusPercentageCriticalChanceComponent.class)))
+                    || (shopItemFilters[5] && (!item.hasComponent(BonusPercentageLifestealComponent.class)))
+                    || (shopItemFilters[6] && (!item.hasComponent(BonusFlatAbilityPowerComponent.class)))
+                    || (shopItemFilters[7] && (!item.hasComponent(BonusPercentageCooldownSpeedComponent.class)))
+                    || (shopItemFilters[8] && (!item.hasComponent(BonusFlatArmorComponent.class)))
+                    || (shopItemFilters[9] && (!item.hasComponent(BonusFlatMagicResistanceComponent.class)))
+                    || (shopItemFilters[10] && (!item.hasComponent(BonusFlatWalkSpeedComponent.class)))) {
                 isFiltered = false;
             }
-            else if((shopItemFilters[1] && (!item.hasComponent(BonusFlatMaximumHealthComponent.class)))
-            || (shopItemFilters[2] && (!item.hasComponent(BonusFlatAttackDamageComponent.class)))
-            || (shopItemFilters[3] && (!item.hasComponent(BonusPercentageAttackSpeedComponent.class)))
-            || (shopItemFilters[4] && (!item.hasComponent(BonusPercentageCriticalChanceComponent.class)))
-            || (shopItemFilters[5] && (!item.hasComponent(BonusPercentageLifestealComponent.class)))
-            || (shopItemFilters[6] && (!item.hasComponent(BonusFlatAbilityPowerComponent.class)))
-            || (shopItemFilters[7] && (!item.hasComponent(BonusPercentageCooldownSpeedComponent.class)))
-            || (shopItemFilters[8] && (!item.hasComponent(BonusFlatArmorComponent.class)))
-            || (shopItemFilters[9] && (!item.hasComponent(BonusFlatMagicResistanceComponent.class)))
-            || (shopItemFilters[10] && (!item.hasComponent(BonusFlatWalkSpeedComponent.class)))){
-                isFiltered = false;
-            }
-            if(isFiltered){
+            if (isFiltered) {
                 shopFilteredItems.add(item);
             }
         }

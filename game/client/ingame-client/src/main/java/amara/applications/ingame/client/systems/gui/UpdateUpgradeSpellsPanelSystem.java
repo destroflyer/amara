@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class UpdateUpgradeSpellsPanelSystem extends GUIDisplaySystem{
+public class UpdateUpgradeSpellsPanelSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public UpdateUpgradeSpellsPanelSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -56,13 +56,13 @@ public class UpdateUpgradeSpellsPanelSystem extends GUIDisplaySystem{
                     showButton = true;
                     learnOrUpgrade = true;
                 }
-                screenController_HUD.setUpgradeSpellsButtonVisible(i, showButton);
+                screenController.setUpgradeSpellsButtonVisible(i, showButton);
                 if(showButton){
-                    screenController_HUD.setUpgradeSpellsButtonImage(i, "Interface/hud/" + (learnOrUpgrade?"learn":"upgrade") + "_spell_button.png");
+                    screenController.setUpgradeSpellsButtonImage(i, "Interface/hud/" + (learnOrUpgrade?"learn":"upgrade") + "_spell_button.png");
                     showLayer = true;
                 }
             }
-            screenController_HUD.setUpgradeSpellsLayerVisible(showLayer);
+            screenController.setUpgradeSpellsLayerVisible(showLayer);
         }
     }
 }

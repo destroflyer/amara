@@ -43,7 +43,7 @@ public class SendEntityChangesSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        LinkedList<EntityChange> changes = new LinkedList<EntityChange>();
+        LinkedList<EntityChange> changes = new LinkedList<>();
         ComponentMapObserver componentsObserver = entityWorld.requestObserver(this, COMPONENT_EQUALITY_DEFINTION);
         for(int entity : componentsObserver.getNew().getEntitiesWithAll()){
             for(Object component : componentsObserver.getNew().getComponents(entity)){

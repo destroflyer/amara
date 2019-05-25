@@ -12,7 +12,7 @@ import amara.libraries.entitysystem.EntityWorld;
  *
  * @author Carl
  */
-public class DisplayGoldSystem extends GUIDisplaySystem{
+public class DisplayGoldSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayGoldSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -25,6 +25,6 @@ public class DisplayGoldSystem extends GUIDisplaySystem{
         if(goldComponent != null){
             gold = goldComponent.getGold();
         }
-        screenController_HUD.setGold(gold);
+        screenController.setGold(gold);
     }
 }

@@ -1,0 +1,62 @@
+<template>
+    <entity>
+        <name>Wragarak</name>
+        <isMinion/>
+        <!--model-->
+        <model>Models/3dsa_fire_dragon/skin.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>idle</name>
+                <loopDuration>4</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <walkStepDistance>6.5</walkStepDistance>
+        <autoAttackAnimation>
+            <entity>
+                <name>melee_attack</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>death</name>
+                <loopDuration>1</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <scale>2</scale>
+        <intersectionPush/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>1200</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>80</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>1.0</bonusFlatAttackSpeed>
+                <bonusFlatArmor>60</bonusFlatArmor>
+                <bonusFlatMagicResistance>60</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <requestUpdateAttributes/>
+        <sightRange>28</sightRange>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/ranged_autoattack,Models/3dsa_fire_dragon_fireball/skin.xml"/>
+        </autoAttack>
+        <autoAggro>12</autoAggro>
+    </entity>
+</template>

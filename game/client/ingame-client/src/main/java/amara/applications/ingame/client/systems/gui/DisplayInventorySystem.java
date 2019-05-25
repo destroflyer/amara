@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayInventorySystem extends GUIDisplaySystem{
+public class DisplayInventorySystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayInventorySystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -31,13 +31,13 @@ public class DisplayInventorySystem extends GUIDisplaySystem{
         if(inventoryComponent != null){
             for(int i=0;i<6;i++){
                 String imageFilePath = getItemImageFilePath(entityWorld, inventoryComponent.getItemEntities(), i);
-                screenController_HUD.setInventoryItem_Image(i, imageFilePath);
+                screenController.setInventoryItem_Image(i, imageFilePath);
                 if((i < inventoryComponent.getItemEntities().length) && (inventoryComponent.getItemEntities()[i] != -1)){
                     String description = ItemDescription.generate_NameAndDescription(entityWorld, inventoryComponent.getItemEntities()[i], ITEM_DESCRIPTION_LINE_LENGTH);
-                    screenController_HUD.showInventoryItem_Description(i, description);
+                    screenController.showInventoryItem_Description(i, description);
                 }
                 else{
-                    screenController_HUD.hideInventoryItem_Description(i);
+                    screenController.hideInventoryItem_Description(i);
                 }
             }
         }

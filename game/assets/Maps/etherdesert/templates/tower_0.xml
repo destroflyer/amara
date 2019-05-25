@@ -1,0 +1,55 @@
+<template>
+    <entity>
+        <name>Melee Soldier Tower</name>
+        <isMinion/>
+        <!--model-->
+        <model>Models/3dsa_medieval_knight/skin_team_allied.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>idle</name>
+                <loopDuration>2</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>attack_1</name>
+            </entity>
+        </autoAttackAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <scale>0.75</scale>
+        <intersectionPush/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <isRespawnable/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>420</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>15</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.7</bonusFlatAttackSpeed>
+                <bonusFlatArmor>10</bonusFlatArmor>
+                <bonusFlatMagicResistance>10</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>3</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <requestUpdateAttributes/>
+        <sightRange>28</sightRange>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/melee_autoattack"/>
+        </autoAttack>
+        <autoAggro>12</autoAggro>
+    </entity>
+</template>

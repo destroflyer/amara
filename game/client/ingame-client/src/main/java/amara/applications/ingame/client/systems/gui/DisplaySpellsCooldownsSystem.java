@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplaySpellsCooldownsSystem extends GUIDisplaySystem{
+public class DisplaySpellsCooldownsSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplaySpellsCooldownsSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -37,14 +37,14 @@ public class DisplaySpellsCooldownsSystem extends GUIDisplaySystem{
                 if(i < spells.length){
                     RemainingCooldownComponent remainingCooldownComponent = entityWorld.getComponent(spells[i], RemainingCooldownComponent.class);
                     if(remainingCooldownComponent != null){
-                        screenController_HUD.showSpellCooldown(i, remainingCooldownComponent.getDuration());
+                        screenController.showSpellCooldown(i, remainingCooldownComponent.getDuration());
                     }
                     else{
-                        screenController_HUD.hideSpellCooldown(i);
+                        screenController.hideSpellCooldown(i);
                     }
                 }
                 else{
-                    screenController_HUD.hideSpellCooldown(i);
+                    screenController.hideSpellCooldown(i);
                 }
             }
         }
@@ -62,13 +62,13 @@ public class DisplaySpellsCooldownsSystem extends GUIDisplaySystem{
     
     private void checkCooldownChanged(RemainingCooldownComponent remainingCooldownComponent, int spellIndex){
         if(remainingCooldownComponent != null){
-            screenController_HUD.showSpellCooldown(spellIndex, remainingCooldownComponent.getDuration());
+            screenController.showSpellCooldown(spellIndex, remainingCooldownComponent.getDuration());
         }
     }
     
     private void checkCooldownRemoved(RemainingCooldownComponent remainingCooldownComponent, int spellIndex){
         if(remainingCooldownComponent != null){
-            screenController_HUD.hideSpellCooldown(spellIndex);
+            screenController.hideSpellCooldown(spellIndex);
         }
     }
 }

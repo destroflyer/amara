@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class UpdateRecipeCostsSystem implements EntitySystem{
+public class UpdateRecipeCostsSystem implements EntitySystem {
 
     public UpdateRecipeCostsSystem(int playerEntity, ScreenController_Shop screenController_Shop){
         this.playerEntity = playerEntity;

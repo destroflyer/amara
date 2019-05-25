@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.EntityWorld;
  *
  * @author Carl
  */
-public class DisplayAttributesSystem extends GUIDisplaySystem{
+public class DisplayAttributesSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayAttributesSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -58,14 +58,14 @@ public class DisplayAttributesSystem extends GUIDisplaySystem{
         if(entityWorld.hasComponent(characterEntity, WalkSpeedComponent.class)){
             walkSpeedText = ("" + Util.round(entityWorld.getComponent(characterEntity, WalkSpeedComponent.class).getValue(), 2));
         }
-        screenController_HUD.setAttributeValue_AttackDamage(attackDamageText);
-        screenController_HUD.setAttributeValue_AbilityPower(abilityPowerText);
-        screenController_HUD.setAttributeValue_AttackSpeed(attackSpeedText);
-        screenController_HUD.setAttributeValue_CooldownSpeed(cooldownSpeedText);
-        screenController_HUD.setAttributeValue_Armor(armorText);
-        screenController_HUD.setAttributeValue_MagicResistance(magicResistanceText);
-        screenController_HUD.setAttributeValue_WalkSpeed(walkSpeedText);
-        screenController_HUD.setResourceBarWidth_Health(healthPortion);
-        screenController_HUD.setResourceBarText_Health(healthText);
+        screenController.setAttributeValue_AttackDamage(attackDamageText);
+        screenController.setAttributeValue_AbilityPower(abilityPowerText);
+        screenController.setAttributeValue_AttackSpeed(attackSpeedText);
+        screenController.setAttributeValue_CooldownSpeed(cooldownSpeedText);
+        screenController.setAttributeValue_Armor(armorText);
+        screenController.setAttributeValue_MagicResistance(magicResistanceText);
+        screenController.setAttributeValue_WalkSpeed(walkSpeedText);
+        screenController.setResourceBarWidth_Health(healthPortion);
+        screenController.setResourceBarText_Health(healthText);
     }
 }

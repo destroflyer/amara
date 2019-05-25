@@ -134,6 +134,7 @@ public class ClientComponentBlacklist{
             //effects/general
             AddComponentsComponent.class,
             AddEffectTriggersComponent.class,
+            FinishObjectiveComponent.class,
             RemoveComponentsComponent.class,
             RemoveEffectTriggersComponent.class,
             RemoveEntityComponent.class,
@@ -160,6 +161,7 @@ public class ClientComponentBlacklist{
             //effects/units
             CancelActionComponent.class,
             AddGoldComponent.class,
+            RespawnComponent.class,
             //effects/vision
             AddStealthComponent.class,
             RemoveStealthComponent.class,
@@ -266,11 +268,13 @@ public class ClientComponentBlacklist{
             CustomTargetComponent.class,
             SourceTargetComponent.class,
             TargetTargetComponent.class,
+            TeamTargetComponent.class,
             //units/effecttriggers/triggers
             CastingFinishedTriggerComponent.class,
             CollisionTriggerComponent.class,
             DeathTriggerComponent.class,
             InstantTriggerComponent.class,
+            ObjectiveFinishedTriggerComponent.class,
             RepeatingTriggerComponent.class,
             RepeatingTriggerCounterComponent.class,
             TargetReachedTriggerComponent.class,
@@ -285,8 +289,6 @@ public class ClientComponentBlacklist{
             GameTimeComponent.class,
             //physics
             HitboxComponent.class,
-            //players
-            WaitingToRespawnComponent.class,
             //units
             IsCastingComponent.class
         );

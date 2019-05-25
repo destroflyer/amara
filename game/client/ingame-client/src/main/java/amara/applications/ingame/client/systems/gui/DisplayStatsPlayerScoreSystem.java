@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayStatsPlayerScoreSystem extends GUIDisplaySystem{
+public class DisplayStatsPlayerScoreSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayStatsPlayerScoreSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -38,11 +38,11 @@ public class DisplayStatsPlayerScoreSystem extends GUIDisplaySystem{
         int kills = entityWorld.getComponent(scoreEntity, CharacterKillsComponent.class).getKills();
         int deaths = entityWorld.getComponent(scoreEntity, DeathsComponent.class).getDeaths();
         int assists = entityWorld.getComponent(scoreEntity, CharacterAssistsComponent.class).getAssists();
-        screenController_HUD.setStats_PlayerScore_KDA(kills, deaths, assists);
+        screenController.setStats_PlayerScore_KDA(kills, deaths, assists);
     }
     
     private void update_CreepScore(EntityWorld entityWorld, int scoreEntity){
         int kills = entityWorld.getComponent(scoreEntity, CreepScoreComponent.class).getKills();
-        screenController_HUD.setStats_PlayerScore_CreepScore(kills);
+        screenController.setStats_PlayerScore_CreepScore(kills);
     }
 }

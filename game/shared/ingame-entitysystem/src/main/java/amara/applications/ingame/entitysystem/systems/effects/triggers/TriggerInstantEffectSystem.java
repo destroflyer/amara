@@ -18,7 +18,6 @@ public class TriggerInstantEffectSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(InstantTriggerComponent.class, TriggerSourceComponent.class)){
             EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, -1);
-            entityWorld.removeComponent(effectTriggerEntity, InstantTriggerComponent.class);
         }
     }
 }

@@ -23,8 +23,8 @@ public class BitstreamClassManager{
         
     }
     private static BitstreamClassManager instance;
-    private HashMap<Class, Integer> ids = new HashMap<Class, Integer>();
-    private HashMap<Integer, Class> classes = new HashMap<Integer, Class>();
+    private HashMap<Class, Integer> ids = new HashMap<>();
+    private HashMap<Integer, Class> classes = new HashMap<>();
     private int nextID;
     
     public void register(Class... serializedClasses){

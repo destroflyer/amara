@@ -17,7 +17,7 @@ public abstract class NetworkListener{
     public NetworkListener(){
         
     }
-    private ArrayList<MessageBackend> messageBackends = new ArrayList<MessageBackend>();
+    private ArrayList<MessageBackend> messageBackends = new ArrayList<>();
     private LoadHistory downloadHistory;
 
     public void onMessageReceived(int sourceID, Message message){

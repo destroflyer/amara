@@ -24,7 +24,7 @@ public class RepeatingBuffEffectsSystem implements EntitySystem{
             RepeatingEffectComponent repeatingEffectComponent = entityWorld.getComponent(activeBuffComponent.getBuffEntity(), RepeatingEffectComponent.class);
             if(repeatingEffectComponent != null){
                 TimeSinceLastRepeatingEffectComponent timeSinceLastRepeatingEffectComponent = buffStatus.getComponent(TimeSinceLastRepeatingEffectComponent.class);
-                float timeSinceLastRepeatingEffect = (((timeSinceLastRepeatingEffectComponent != null)?timeSinceLastRepeatingEffectComponent.getDuration():0) + deltaSeconds);
+                float timeSinceLastRepeatingEffect = (((timeSinceLastRepeatingEffectComponent != null) ? timeSinceLastRepeatingEffectComponent.getDuration() : 0) + deltaSeconds);
                 if(timeSinceLastRepeatingEffect >= repeatingEffectComponent.getInterval()){
                     EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
                     effectCast.setComponent(new PrepareEffectComponent(repeatingEffectComponent.getEffectEntity()));
@@ -32,7 +32,7 @@ public class RepeatingBuffEffectsSystem implements EntitySystem{
                         EffectCastSourceComponent.class,
                         EffectCastSourceSpellComponent.class
                     });
-                    effectCast.setComponent(new AffectedTargetsComponent(new int[]{activeBuffComponent.getTargetEntity()}));
+                    effectCast.setComponent(new AffectedTargetsComponent(activeBuffComponent.getTargetEntity()));
                     timeSinceLastRepeatingEffect = 0;
                 }
                 buffStatus.setComponent(new TimeSinceLastRepeatingEffectComponent(timeSinceLastRepeatingEffect));

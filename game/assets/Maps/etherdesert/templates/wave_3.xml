@@ -1,0 +1,53 @@
+<template>
+    <entity>
+        <name>Little Dragon</name>
+        <isMinion/>
+        <!--model-->
+        <model>Models/little_dragon/skin_default.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>default</name>
+                <loopDuration>7.542</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>auto_attack</name>
+            </entity>
+        </autoAttackAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>450</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>50</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.8</bonusFlatAttackSpeed>
+                <bonusFlatArmor>15</bonusFlatArmor>
+                <bonusFlatMagicResistance>15</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>5</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <requestUpdateAttributes/>
+        <sightRange>28</sightRange>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/ranged_autoattack,Models/3dsa_fire_dragon_fireball/skin.xml"/>
+        </autoAttack>
+        <autoAggro>12</autoAggro>
+    </entity>
+</template>

@@ -25,7 +25,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayMinimapSystem extends GUIDisplaySystem{
+public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayMinimapSystem(int playerEntity, ScreenController_HUD screenController_HUD, Map map, PlayerTeamSystem playerTeamSystem, OwnTeamVisionSystem ownTeamVisionSystem, FogOfWarSystem fogOfWarSystem){
         super(playerEntity, screenController_HUD);
@@ -87,7 +87,7 @@ public class DisplayMinimapSystem extends GUIDisplaySystem{
             }
             minimapImage.flipY();
             texture2D.setImage(minimapImage.getImage());
-            screenController_HUD.setMinimapImage(texture2D);
+            screenController.setMinimapImage(texture2D);
         }
         timeSinceLastUpdate = 0;
     }

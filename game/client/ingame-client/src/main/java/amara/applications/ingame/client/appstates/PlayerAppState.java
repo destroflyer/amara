@@ -61,9 +61,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
     public void onInitialWorldLoaded(){
         mainApplication.getInputManager().addMapping("lock_camera", new KeyTrigger(KeyInput.KEY_Z));
         mainApplication.getInputManager().addMapping("change_sight", new KeyTrigger(KeyInput.KEY_U));
-        mainApplication.getInputManager().addListener(this, new String[]{
-            "lock_camera","change_sight"
-        });
+        mainApplication.getInputManager().addListener(this, "lock_camera","change_sight");
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
         localEntitySystemAppState.addEntitySystem(ownTeamVisionSystem);
         spellIndicatorSystem = new SpellIndicatorSystem(playerEntity, localEntitySystemAppState.getEntitySceneMap());
@@ -105,6 +103,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardScoresSystem(screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardInventoriesSystem(screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayMinimapSystem(playerEntity, screenController_HUD, map, playerTeamSystem, ownTeamVisionSystem, fogOfWarSystem));
+        localEntitySystemAppState.addEntitySystem(new DisplayShopItemsSystem(playerEntity, screenController_Shop));
         localEntitySystemAppState.addEntitySystem(new UpdateRecipeCostsSystem(playerEntity, screenController_Shop));
     }
 

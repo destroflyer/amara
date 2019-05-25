@@ -110,6 +110,10 @@ public class ApplySpawnsSystems implements EntitySystem{
                     spawnedObject.setComponent(new AttackMoveComponent(targetEntity));
                     cleanupTemporaryTarget = false;
                 }
+                if(spawnInformation.hasComponent(SpawnApplyAsRespawnTransformComponent.class)){
+                    spawnedObject.setComponent(new RespawnPositionComponent(position));
+                    spawnedObject.setComponent(new RespawnDirectionComponent(direction));
+                }
                 EntityTemplate.loadTemplates(entityWorld, spawnedObject.getId(), spawnInformation.getComponent(SpawnTemplateComponent.class).getTemplateNames());
             }
             if(cleanupTemporaryTarget && entityWorld.hasComponent(targetEntity, TemporaryComponent.class)){

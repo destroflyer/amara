@@ -1,0 +1,54 @@
+<template>
+    <entity>
+        <name>Melee Solider</name>
+        <isMinion/>
+        <!--model-->
+        <model>Models/3dsa_medieval_knight/skin_team_enemy.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>idle</name>
+                <loopDuration>2</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>attack_1</name>
+            </entity>
+        </autoAttackAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="0.75"/>
+        </hitbox>
+        <scale>2</scale>
+        <intersectionPush/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>650</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>35</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.6</bonusFlatAttackSpeed>
+                <bonusFlatArmor>20</bonusFlatArmor>
+                <bonusFlatMagicResistance>15</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>3</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <requestUpdateAttributes/>
+        <sightRange>28</sightRange>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/melee_autoattack"/>
+        </autoAttack>
+        <autoAggro>12</autoAggro>
+    </entity>
+</template>

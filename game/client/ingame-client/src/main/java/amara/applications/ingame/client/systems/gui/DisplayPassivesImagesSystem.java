@@ -12,7 +12,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayPassivesImagesSystem extends GUIDisplaySystem{
+public class DisplayPassivesImagesSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayPassivesImagesSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -29,7 +29,7 @@ public class DisplayPassivesImagesSystem extends GUIDisplaySystem{
         if(passivesComponent != null){
             int[] passives = passivesComponent.getPassiveEntities();
             String imageFilePath = DisplaySpellsImagesSystem.getSpellImageFilePath(entityWorld, passives, 0);
-            screenController_HUD.setPassiveImage(imageFilePath);
+            screenController.setPassiveImage(imageFilePath);
         }
     }
 }

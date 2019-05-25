@@ -1,0 +1,62 @@
+<template>
+    <entity>
+        <name>Oz Tower</name>
+        <isMinion/>
+        <!--model-->
+        <model>Models/oz/skin_oz_junior.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>stand</name>
+                <loopDuration>8</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <walkStepDistance>8</walkStepDistance>
+        <autoAttackAnimation>
+            <entity>
+                <name>attack1</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>die</name>
+                <loopDuration>4</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="2"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <isRespawnable/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>2800</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>80</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.9</bonusFlatAttackSpeed>
+                <bonusFlatArmor>60</bonusFlatArmor>
+                <bonusFlatMagicResistance>80</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>5.75</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <requestUpdateAttributes/>
+        <sightRange>28</sightRange>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/melee_autoattack"/>
+        </autoAttack>
+        <autoAggro>12</autoAggro>
+    </entity>
+</template>

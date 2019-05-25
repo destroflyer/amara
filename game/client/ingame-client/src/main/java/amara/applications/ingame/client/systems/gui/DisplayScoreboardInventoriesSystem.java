@@ -14,7 +14,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayScoreboardInventoriesSystem extends PlayersDisplaySystem{
+public class DisplayScoreboardInventoriesSystem extends PlayersDisplaySystem {
 
     public DisplayScoreboardInventoriesSystem(ScreenController_HUD screenController_HUD){
         super(screenController_HUD);

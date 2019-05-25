@@ -1,0 +1,61 @@
+<template>
+    <entity>
+        <name>Beetle Golem Tower</name>
+        <isMinion/>
+        <!--model-->
+        <model>Models/beetle_golem/skin_dark.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>Idle_Normal</name>
+                <loopDuration>2.5</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>Walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>Attack1</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>Death</name>
+                <loopDuration>2</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <isRespawnable/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>1200</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>35</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.62</bonusFlatAttackSpeed>
+                <bonusFlatArmor>20</bonusFlatArmor>
+                <bonusFlatMagicResistance>15</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <requestUpdateAttributes/>
+        <sightRange>28</sightRange>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/melee_autoattack"/>
+        </autoAttack>
+        <autoAggro>12</autoAggro>
+    </entity>
+</template>

@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayMapSpellsCooldownsSystem extends GUIDisplaySystem{
+public class DisplayMapSpellsCooldownsSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayMapSpellsCooldownsSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -37,14 +37,14 @@ public class DisplayMapSpellsCooldownsSystem extends GUIDisplaySystem{
                 if(i < spells.length){
                     RemainingCooldownComponent remainingCooldownComponent = entityWorld.getComponent(spells[i], RemainingCooldownComponent.class);
                     if(remainingCooldownComponent != null){
-                        screenController_HUD.showMapSpellCooldown(i, remainingCooldownComponent.getDuration());
+                        screenController.showMapSpellCooldown(i, remainingCooldownComponent.getDuration());
                     }
                     else{
-                        screenController_HUD.hideMapSpellCooldown(i);
+                        screenController.hideMapSpellCooldown(i);
                     }
                 }
                 else{
-                    screenController_HUD.hideMapSpellCooldown(i);
+                    screenController.hideMapSpellCooldown(i);
                 }
             }
         }
@@ -62,13 +62,13 @@ public class DisplayMapSpellsCooldownsSystem extends GUIDisplaySystem{
     
     private void checkCooldownChanged(RemainingCooldownComponent remainingCooldownComponent, int spellIndex){
         if(remainingCooldownComponent != null){
-            screenController_HUD.showMapSpellCooldown(spellIndex, remainingCooldownComponent.getDuration());
+            screenController.showMapSpellCooldown(spellIndex, remainingCooldownComponent.getDuration());
         }
     }
     
     private void checkCooldownRemoved(RemainingCooldownComponent remainingCooldownComponent, int spellIndex){
         if(remainingCooldownComponent != null){
-            screenController_HUD.hideMapSpellCooldown(spellIndex);
+            screenController.hideMapSpellCooldown(spellIndex);
         }
     }
 }

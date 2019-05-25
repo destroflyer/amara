@@ -11,7 +11,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class RemoveAppliedEffectsSystem implements EntitySystem{
+public class RemoveAppliedEffectImpactsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){

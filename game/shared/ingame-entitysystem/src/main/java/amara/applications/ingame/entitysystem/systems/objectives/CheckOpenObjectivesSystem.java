@@ -38,9 +38,13 @@ public class CheckOpenObjectivesSystem implements EntitySystem{
                 }
             }
             if(isFinished){
-                entityWorld.removeComponent(entity, OpenObjectiveComponent.class);
-                entityWorld.setComponent(entity, new FinishedObjectiveComponent());
+                finishObjective(entityWorld, entity);
             }
         }
+    }
+
+    public static void finishObjective(EntityWorld entityWorld, int objectiveEntity) {
+        entityWorld.removeComponent(objectiveEntity, OpenObjectiveComponent.class);
+        entityWorld.setComponent(objectiveEntity, new FinishedObjectiveComponent());
     }
 }

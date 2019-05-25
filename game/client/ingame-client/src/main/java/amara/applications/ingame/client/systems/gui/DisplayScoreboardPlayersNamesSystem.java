@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayScoreboardPlayersNamesSystem extends PlayersDisplaySystem{
+public class DisplayScoreboardPlayersNamesSystem extends PlayersDisplaySystem {
 
     public DisplayScoreboardPlayersNamesSystem(ScreenController_HUD screenController_HUD){
         super(screenController_HUD);

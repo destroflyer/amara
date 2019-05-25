@@ -12,7 +12,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayPlayerSystem extends GUIDisplaySystem{
+public class DisplayPlayerSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayPlayerSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -27,7 +27,7 @@ public class DisplayPlayerSystem extends GUIDisplaySystem{
     
     private void check(NameComponent nameComponent){
         if(nameComponent != null){
-            screenController_HUD.setPlayerName(nameComponent.getName());
+            screenController.setPlayerName(nameComponent.getName());
         }
     }
 }

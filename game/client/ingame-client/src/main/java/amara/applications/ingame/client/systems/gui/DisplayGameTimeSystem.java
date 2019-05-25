@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayGameTimeSystem extends GUIDisplaySystem{
+public class DisplayGameTimeSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayGameTimeSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -22,6 +22,6 @@ public class DisplayGameTimeSystem extends GUIDisplaySystem{
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
         float time = entityWorld.getComponent(Game.ENTITY, GameTimeComponent.class).getTime();
-        screenController_HUD.setGameTime(time);
+        screenController.setGameTime(time);
     }
 }

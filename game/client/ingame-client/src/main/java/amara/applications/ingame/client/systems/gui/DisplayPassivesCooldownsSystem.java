@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class DisplayPassivesCooldownsSystem extends GUIDisplaySystem{
+public class DisplayPassivesCooldownsSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayPassivesCooldownsSystem(int playerEntity, ScreenController_HUD screenController_HUD){
         super(playerEntity, screenController_HUD);
@@ -36,14 +36,13 @@ public class DisplayPassivesCooldownsSystem extends GUIDisplaySystem{
             if(passives.length > 0){
                 RemainingCooldownComponent remainingCooldownComponent = entityWorld.getComponent(passives[0], RemainingCooldownComponent.class);
                 if(remainingCooldownComponent != null){
-                    screenController_HUD.showPassiveCooldown(remainingCooldownComponent.getDuration());
+                    screenController.showPassiveCooldown(remainingCooldownComponent.getDuration());
                 }
                 else{
-                    screenController_HUD.hidePassiveCooldown();
+                    screenController.hidePassiveCooldown();
                 }
-            }
-            else{
-                screenController_HUD.hidePassiveCooldown();
+            } else {
+                screenController.hidePassiveCooldown();
             }
         }
     }
@@ -58,13 +57,13 @@ public class DisplayPassivesCooldownsSystem extends GUIDisplaySystem{
     
     private void checkCooldownChanged(RemainingCooldownComponent remainingCooldownComponent){
         if(remainingCooldownComponent != null){
-            screenController_HUD.showPassiveCooldown(remainingCooldownComponent.getDuration());
+            screenController.showPassiveCooldown(remainingCooldownComponent.getDuration());
         }
     }
     
     private void checkCooldownRemoved(RemainingCooldownComponent remainingCooldownComponent){
         if(remainingCooldownComponent != null){
-            screenController_HUD.hidePassiveCooldown();
+            screenController.hidePassiveCooldown();
         }
     }
 }

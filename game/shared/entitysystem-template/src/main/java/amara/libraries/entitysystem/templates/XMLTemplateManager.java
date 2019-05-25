@@ -152,7 +152,7 @@ public class XMLTemplateManager{
     }
     
     public String parseTemplate(EntityWorld entityWorld, String templateXMLText){
-        String template = templateXMLText.replaceAll("\\./", currentDirectory);
+        String template = templateXMLText.replaceFirst("\\./", currentDirectory);
         if(template.matches("(.*)\\((.*)\\)")){
             int bracketStart = template.indexOf("(");
             int bracketEnd = template.indexOf(")");

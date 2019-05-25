@@ -15,14 +15,12 @@ public class CountdownEffectDelaySystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(RemainingEffectDelayComponent.class)))
-        {
+        for (EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(RemainingEffectDelayComponent.class))) {
             RemainingEffectDelayComponent remainingEffectDelayComponent = entityWrapper.getComponent(RemainingEffectDelayComponent.class);
             float duration = (remainingEffectDelayComponent.getDuration() - deltaSeconds);
-            if(duration > 0){
+            if (duration > 0) {
                 entityWrapper.setComponent(new RemainingEffectDelayComponent(duration));
-            }
-            else{
+            } else{
                 entityWrapper.removeComponent(RemainingEffectDelayComponent.class);
             }
         }
