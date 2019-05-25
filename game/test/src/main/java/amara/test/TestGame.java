@@ -19,7 +19,7 @@ import amara.libraries.network.exceptions.*;
  * @author Carl
  */
 public class TestGame{
-    
+
     public static void main(String[] args){
         Launcher_Core.initialize();
         Launcher_Game.initialize();
@@ -33,8 +33,8 @@ public class TestGame{
             NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
             networkClient.sendMessage(new Message_Login(new AuthentificationInformation("destroflyer", "test")));
             networkClient.sendMessage(new Message_CreateLobby());
-            networkClient.sendMessage(new Message_SetLobbyData(new LobbyData("etherdesert", new TeamFormat(1, 0))));
-            // networkClient.sendMessage(new Message_AddLobbyBot(new LobbyPlayer_Bot(BotType.EASY, "Bot", new GameSelectionPlayerData(11, null))));
+            networkClient.sendMessage(new Message_SetLobbyData(new LobbyData("arama", new TeamFormat(2, 0))));
+            networkClient.sendMessage(new Message_AddLobbyBot(new LobbyPlayer_Bot(BotType.EASY, "Bot", new GameSelectionPlayerData(11, null))));
             networkClient.sendMessage(new Message_StartLobbyQueue());
             networkClient.sendMessage(new Message_AcceptGameSelection(true));
             networkClient.sendMessage(new Message_SetGameSelectionPlayerData(new GameSelectionPlayerData(11, null)));
