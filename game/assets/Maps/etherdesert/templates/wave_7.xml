@@ -18,7 +18,7 @@
         <walkStepDistance>6.5</walkStepDistance>
         <autoAttackAnimation>
             <entity>
-                <name>melee_attack</name>
+                <name>projectile_attack</name>
             </entity>
         </autoAttackAnimation>
         <deathAnimation>
@@ -41,11 +41,11 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>1200</bonusFlatMaximumHealth>
+                <bonusFlatMaximumHealth>2100</bonusFlatMaximumHealth>
                 <bonusFlatAttackDamage>80</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>1.0</bonusFlatAttackSpeed>
-                <bonusFlatArmor>60</bonusFlatArmor>
-                <bonusFlatMagicResistance>60</bonusFlatMagicResistance>
+                <bonusFlatAttackSpeed>1.2</bonusFlatAttackSpeed>
+                <bonusFlatArmor>65</bonusFlatArmor>
+                <bonusFlatMagicResistance>65</bonusFlatMagicResistance>
                 <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>

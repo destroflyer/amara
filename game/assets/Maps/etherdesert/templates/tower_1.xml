@@ -56,6 +56,6 @@
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
-        <autoAggro>12</autoAggro>
+        <autoAggro>20</autoAggro>
     </entity>
 </template>

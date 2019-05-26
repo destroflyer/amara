@@ -34,22 +34,24 @@ public class ApplyRespawnSystem implements EntitySystem {
     public void update(EntityWorld entityWorld, float deltaSeconds) {
         for (int entity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, RespawnComponent.class)) {
             int targetEntity = entityWorld.getComponent(entity, ApplyEffectImpactComponent.class).getTargetEntity();
-            entityWorld.removeComponent(targetEntity, AnimationComponent.class);
-            entityWorld.removeComponent(targetEntity, DamageHistoryComponent.class);
-            entityWorld.setComponent(targetEntity, new HitboxActiveComponent());
-            entityWorld.setComponent(targetEntity, new IsAliveComponent());
-            entityWorld.setComponent(targetEntity, new IsTargetableComponent());
-            entityWorld.setComponent(targetEntity, new IsVulnerableComponent());
-            entityWorld.setComponent(targetEntity, new RequestUpdateAttributesComponent());
-            RespawnPositionComponent respawnPositionComponent = entityWorld.getComponent(targetEntity, RespawnPositionComponent.class);
-            if (respawnPositionComponent != null) {
-                entityWorld.setComponent(targetEntity, new PositionComponent(respawnPositionComponent.getPosition()));
+            if (entityWorld.hasComponent(targetEntity, IsRespawnableComponent.class)) {
+                entityWorld.removeComponent(targetEntity, AnimationComponent.class);
+                entityWorld.removeComponent(targetEntity, DamageHistoryComponent.class);
+                entityWorld.setComponent(targetEntity, new HitboxActiveComponent());
+                entityWorld.setComponent(targetEntity, new IsAliveComponent());
+                entityWorld.setComponent(targetEntity, new IsTargetableComponent());
+                entityWorld.setComponent(targetEntity, new IsVulnerableComponent());
+                entityWorld.setComponent(targetEntity, new RequestUpdateAttributesComponent());
+                RespawnPositionComponent respawnPositionComponent = entityWorld.getComponent(targetEntity, RespawnPositionComponent.class);
+                if (respawnPositionComponent != null) {
+                    entityWorld.setComponent(targetEntity, new PositionComponent(respawnPositionComponent.getPosition()));
+                }
+                RespawnDirectionComponent respawnDirectionComponent = entityWorld.getComponent(targetEntity, RespawnDirectionComponent.class);
+                if (respawnDirectionComponent != null) {
+                    entityWorld.setComponent(targetEntity, new DirectionComponent(respawnDirectionComponent.getDirection()));
+                }
+                getPlayerEntity(entityWorld, targetEntity).ifPresent(playerEntity -> map.spawnPlayer(entityWorld, playerEntity));
             }
-            RespawnDirectionComponent respawnDirectionComponent = entityWorld.getComponent(targetEntity, RespawnDirectionComponent.class);
-            if (respawnDirectionComponent != null) {
-                entityWorld.setComponent(targetEntity, new DirectionComponent(respawnDirectionComponent.getDirection()));
-            }
-            getPlayerEntity(entityWorld, targetEntity).ifPresent(playerEntity -> map.spawnPlayer(entityWorld, playerEntity));
         }
     }
 

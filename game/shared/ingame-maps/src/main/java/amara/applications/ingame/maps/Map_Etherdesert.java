@@ -58,7 +58,7 @@ public class Map_Etherdesert extends Map {
         shop.setComponent(new ModelComponent("Models/chest/skin.xml"));
         shop.setComponent(new PositionComponent(new Vector2f(100, 20)));
         shop.setComponent(new DirectionComponent(new Vector2f(0, 1)));
-        String[] shopItemTemplateNames = new String[4];
+        String[] shopItemTemplateNames = new String[5];
         for (int i = 0; i < shopItemTemplateNames.length; i++) {
             shopItemTemplateNames[i] = "items/etherdesert_tower_" + i;
         }
