@@ -17,7 +17,7 @@ import amara.libraries.entitysystem.*;
  */
 public class RemoveFinishedMovementsSystem implements EntitySystem{
     
-    private HashMap<Integer, Integer> movementEntities = new HashMap<Integer, Integer>();
+    private HashMap<Integer, Integer> movementEntities = new HashMap<>();
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){

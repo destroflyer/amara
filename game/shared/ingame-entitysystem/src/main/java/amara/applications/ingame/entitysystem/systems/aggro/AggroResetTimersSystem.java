@@ -11,7 +11,7 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class StartAggroResetTimersSystem implements EntitySystem{
+public class AggroResetTimersSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){

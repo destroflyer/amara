@@ -38,7 +38,6 @@ public class UnitUtil{
     public static void cancelAction(EntityWorld entityWorld, int entity){
         cancelMovement(entityWorld, entity);
         entityWorld.removeComponent(entity, AggroTargetComponent.class);
-        entityWorld.removeComponent(entity, IsWalkingToAggroTargetComponent.class);
         entityWorld.removeComponent(entity, AnimationComponent.class);
         CurrentActionEffectCastsComponent currentActionEffectCastsComponent = entityWorld.getComponent(entity, CurrentActionEffectCastsComponent.class);
         if(currentActionEffectCastsComponent != null){

@@ -31,7 +31,7 @@ public class ResetAggroTimerOnDamageSystem implements EntitySystem{
         if(effectCastSourceComponent != null){
             int damagingEntity = effectCastSourceComponent.getSourceEntity();
             if(entityWorld.hasComponent(damagingEntity, RemainingAggroResetDurationComponent.class)){
-                StartAggroResetTimersSystem.resetAggroTimer(entityWorld, damagingEntity);
+                AggroResetTimersSystem.resetAggroTimer(entityWorld, damagingEntity);
             }
         }
     }

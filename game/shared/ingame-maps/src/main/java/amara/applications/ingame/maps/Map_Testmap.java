@@ -183,6 +183,7 @@ public class Map_Testmap extends Map{
         shop.setComponent(new ModelComponent("Models/chest/skin.xml"));
         shop.setComponent(new PositionComponent(new Vector2f(52, 25)));
         shop.setComponent(new DirectionComponent(new Vector2f(-1, -1)));
+        shop.setComponent(new ShopItemsComponent(MapDefaults.getShopItemTemplateNames()));
         shop.setComponent(new ShopRangeComponent(15));
         EntityWrapper gameObjective = entityWorld.getWrapped(entityWorld.createEntity());
         gameObjective.setComponent(new MissingEntitiesComponent(new int[]{boss.getId()}));

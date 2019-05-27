@@ -19,7 +19,7 @@ import amara.libraries.entitysystem.*;
  */
 public class AggroSystem implements EntitySystem{
     
-    private LinkedList<Integer> tmpTargets = new LinkedList<Integer>();
+    private LinkedList<Integer> tmpTargets = new LinkedList<>();
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){

@@ -240,7 +240,6 @@ public class ClientComponentBlacklist{
             CastSpellOnCooldownWhileAttackingComponent.class,
             CurrentActionEffectCastsComponent.class,
             IntersectionRulesComponent.class,
-            IsWalkingToAggroTargetComponent.class,
             LifetimeComponent.class,
             LocalAvoidanceWalkComponent.class,
             MaximumAggroRangeComponent.class,

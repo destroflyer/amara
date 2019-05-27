@@ -47,7 +47,7 @@ public class CastSpellQueueSystem implements EntitySystem{
     public void enqueueSpellCast(int casterEntity, int spellEntity, int targetEntity){
         LinkedList<int[]> castSpellQueue = entitiesCastQueues.get(casterEntity);
         if(castSpellQueue == null){
-            castSpellQueue = new LinkedList<int[]>();
+            castSpellQueue = new LinkedList<>();
             entitiesCastQueues.put(casterEntity, castSpellQueue);
         }
         castSpellQueue.add(new int[]{spellEntity, targetEntity});
@@ -105,19 +105,8 @@ public class CastSpellQueueSystem implements EntitySystem{
                     effect.setComponent(new AddComponentsComponent(new CastSpellComponent(spellEntity, targetEntity)));
                     effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
                     effectTrigger.setComponent(new TriggerSourceComponent(casterEntity));
-                    //Manage IsWalkingToAggroTargetComponent
                     if(isAutoAttack){
                         entityWorld.setComponent(casterEntity, new AggroTargetComponent(targetEntity));
-                        entityWorld.setComponent(casterEntity, new IsWalkingToAggroTargetComponent());
-                        EntityWrapper effectTrigger3 = entityWorld.getWrapped(entityWorld.createEntity());
-                        effectTrigger3.setComponent(new TriggerTemporaryComponent());
-                        effectTrigger3.setComponent(new TargetReachedTriggerComponent());
-                        effectTrigger3.setComponent(new SourceTargetComponent());
-                        EntityWrapper effect3 = entityWorld.getWrapped(entityWorld.createEntity());
-                        effect3.setComponent(new RemoveComponentsComponent(IsWalkingToAggroTargetComponent.class));
-                        effectTrigger3.setComponent(new TriggeredEffectComponent(effect3.getId()));
-                        effectTrigger3.setComponent(new TriggerSourceComponent(casterEntity));
-                        effectTrigger3.setComponent(new TriggerOnCancelComponent());
                     }
                     isCasted = true;
                 }

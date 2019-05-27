@@ -4248,14 +4248,6 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent();
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsWalkingToAggroTargetComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsWalkingToAggroTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsWalkingToAggroTargetComponent>("isWalkingToAggroTarget"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.units.IsWalkingToAggroTargetComponent construct(){
-                return new amara.applications.ingame.entitysystem.components.units.IsWalkingToAggroTargetComponent();
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.LearnableSpellsComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.LearnableSpellsComponent.class.getDeclaredField("spellsEntities"), componentFieldSerializer_Entity);
