@@ -6,6 +6,7 @@ package amara.applications.ingame.maps;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.audio.*;
+import amara.applications.ingame.entitysystem.components.buffs.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.effects.general.*;
@@ -26,6 +27,7 @@ import amara.applications.ingame.entitysystem.components.units.effecttriggers.ta
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
+import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
 import amara.applications.ingame.shared.maps.Map;
 import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.entitysystem.EntityWrapper;
@@ -230,6 +232,13 @@ public class Map_Etherdesert extends Map {
         entityWorld.removeComponent(characterEntity, AutoAttackComponent.class);
         entityWorld.setComponent(characterEntity, new GoldComponent(200));
         entityWorld.setComponent(characterEntity, new IsBindedComponent(Float.MAX_VALUE));
+        // GoldPerTime Buff
+        int goldPerTimeBuffEntity = entityWorld.createEntity();
+        int goldPerTimeBuffAttributesEntity = entityWorld.createEntity();
+        entityWorld.setComponent(goldPerTimeBuffAttributesEntity, new BonusFlatGoldPerSecondComponent(0.25f));
+        entityWorld.setComponent(goldPerTimeBuffEntity, new ContinuousAttributesComponent(goldPerTimeBuffAttributesEntity));
+        entityWorld.setComponent(goldPerTimeBuffEntity, new KeepOnDeathComponent());
+        ApplyAddBuffsSystem.addBuff(entityWorld, characterEntity, goldPerTimeBuffEntity);
     }
 
     @Override

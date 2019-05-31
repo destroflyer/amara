@@ -32,11 +32,11 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>900</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>70</bonusFlatAttackDamage>
+                <bonusFlatMaximumHealth>650</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>58</bonusFlatAttackDamage>
                 <bonusFlatAttackSpeed>0.4</bonusFlatAttackSpeed>
-                <bonusFlatArmor>45</bonusFlatArmor>
-                <bonusFlatMagicResistance>10</bonusFlatMagicResistance>
+                <bonusFlatArmor>80</bonusFlatArmor>
+                <bonusFlatMagicResistance>80</bonusFlatMagicResistance>
                 <bonusFlatWalkSpeed>3</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
@@ -47,7 +47,7 @@
         <bounty>
             <entity>
                 <bountyCreepScore></bountyCreepScore>
-                <bountyGold>20</bountyGold>
+                <bountyGold>25</bountyGold>
             </entity>
         </bounty>
         <!--spells-->

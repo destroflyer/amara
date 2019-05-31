@@ -316,7 +316,7 @@ public class CustomGameTemplates{
                 int towerIndex = Integer.parseInt(templateName.substring("items/etherdesert_tower_".length()));
                 entityWrapper.setComponent(new ItemIDComponent("etherdesert_tower_" + towerIndex));
                 entityWrapper.setComponent(new NameComponent("Tower #" + towerIndex));
-                int[] costs = new int[]{50, 150, 250, 350, 450, 80};
+                int[] costs = new int[]{50, 120, 240, 330, 450, 80};
                 entityWrapper.setComponent(new ItemRecipeComponent(costs[towerIndex]));
                 entityWrapper.setComponent(new IsSellableComponent(costs[towerIndex]));
                 int itemActiveEntity = entityWorld.createEntity();
