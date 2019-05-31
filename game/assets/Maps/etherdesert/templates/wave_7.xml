@@ -55,8 +55,7 @@
         <isVulnerable/>
         <bounty>
             <entity>
-                <bountyCreepScore></bountyCreepScore>
-                <bountyGold>100</bountyGold>
+                <bountyCharacterKill></bountyCharacterKill>
             </entity>
         </bounty>
         <!--spells-->

@@ -40,8 +40,8 @@
         <isRespawnable/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>700</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>50</bonusFlatAttackDamage>
+                <bonusFlatMaximumHealth>750</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>55</bonusFlatAttackDamage>
                 <bonusFlatAttackSpeed>1.3</bonusFlatAttackSpeed>
                 <bonusFlatArmor>20</bonusFlatArmor>
                 <bonusFlatMagicResistance>20</bonusFlatMagicResistance>
@@ -56,6 +56,6 @@
         <autoAttack>
             <entity template="spells/ranged_autoattack,Models/3dsa_archer_arrow/skin.xml"/>
         </autoAttack>
-        <autoAggro>28</autoAggro>
+        <autoAggro>-1</autoAggro>
     </entity>
 </template>

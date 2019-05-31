@@ -32,17 +32,20 @@ public class AggroSystem implements EntitySystem {
                 for (int otherEntity : entityWorld.getEntitiesWithAll(PositionComponent.class)) {
                     Vector2f otherPosition = entityWorld.getComponent(otherEntity, PositionComponent.class).getPosition();
                     float distanceSquared = position.distanceSquared(otherPosition);
-                    AggroPriorityComponent aggroPriorityComponent = entityWorld.getComponent(otherEntity, AggroPriorityComponent.class);
-                    int aggroPriority = ((aggroPriorityComponent != null) ? aggroPriorityComponent.getPriority() : 0);
-                    // Valid target in range
-                    if ((distanceSquared <= (autoAggroRange * autoAggroRange)) && TargetUtil.isValidTarget(entityWorld, entity, otherEntity, targetRulesEntity)) {
-                        // Check if best target
-                        if ((targetEntity == -1)
-                        || (aggroPriority > targetAggroPriority)
-                        || ((aggroPriority == targetAggroPriority) && (distanceSquared < targetDistanceSquared))) {
-                            targetEntity = otherEntity;
-                            targetAggroPriority = aggroPriority;
-                            targetDistanceSquared = distanceSquared;
+                    // Target in range
+                    if (((autoAggroRange == -1) || (distanceSquared <= (autoAggroRange * autoAggroRange)))) {
+                        AggroPriorityComponent aggroPriorityComponent = entityWorld.getComponent(otherEntity, AggroPriorityComponent.class);
+                        int aggroPriority = ((aggroPriorityComponent != null) ? aggroPriorityComponent.getPriority() : 0);
+                        // Target valid
+                        if (TargetUtil.isValidTarget(entityWorld, entity, otherEntity, targetRulesEntity)) {
+                            // Target prioritization
+                            if ((targetEntity == -1)
+                            || (aggroPriority > targetAggroPriority)
+                            || ((aggroPriority == targetAggroPriority) && (distanceSquared < targetDistanceSquared))) {
+                                targetEntity = otherEntity;
+                                targetAggroPriority = aggroPriority;
+                                targetDistanceSquared = distanceSquared;
+                            }
                         }
                     }
                 }

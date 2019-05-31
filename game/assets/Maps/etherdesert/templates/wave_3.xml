@@ -47,7 +47,7 @@
         <bounty>
             <entity>
                 <bountyCreepScore></bountyCreepScore>
-                <bountyGold>15</bountyGold>
+                <bountyGold>20</bountyGold>
             </entity>
         </bounty>
         <!--spells-->

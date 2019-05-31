@@ -1,0 +1,10 @@
+<skin name="3dsa_fantasy_forest_tree_log_1">
+    <model scale="3">
+        <material>
+            <texture>diffuse.png</texture>
+        </material>
+        <modifiers>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Tree_Log_Burning</modifier>
+        </modifiers>
+    </model>
+</skin>

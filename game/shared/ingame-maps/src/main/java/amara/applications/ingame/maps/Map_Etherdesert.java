@@ -6,7 +6,6 @@ package amara.applications.ingame.maps;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.audio.*;
-import amara.applications.ingame.entitysystem.components.buffs.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.effects.general.*;
@@ -27,7 +26,6 @@ import amara.applications.ingame.entitysystem.components.units.effecttriggers.ta
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
-import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
 import amara.applications.ingame.shared.maps.Map;
 import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.entitysystem.EntityWrapper;
@@ -58,11 +56,15 @@ public class Map_Etherdesert extends Map {
         shop.setComponent(new ModelComponent("Models/chest/skin.xml"));
         shop.setComponent(new PositionComponent(new Vector2f(100, 20)));
         shop.setComponent(new DirectionComponent(new Vector2f(0, 1)));
-        String[] shopItemTemplateNames = new String[5];
-        for (int i = 0; i < shopItemTemplateNames.length; i++) {
-            shopItemTemplateNames[i] = "items/etherdesert_tower_" + i;
-        }
-        shop.setComponent(new ShopItemsComponent(shopItemTemplateNames));
+        shop.setComponent(new ShopItemsComponent(
+            "items/etherdesert_income",
+            "items/etherdesert_tower_0",
+            "items/etherdesert_tower_1",
+            "items/etherdesert_tower_2",
+            "items/etherdesert_tower_3",
+            "items/etherdesert_tower_4",
+            "items/etherdesert_tower_5"
+        ));
         shop.setComponent(new ShopRangeComponent(20));
         shop.setComponent(new TeamComponent(0));
         // Nexus
@@ -92,6 +94,39 @@ public class Map_Etherdesert extends Map {
         nexus.setComponent(new IsTargetableComponent());
         nexus.setComponent(new IsVulnerableComponent());
         nexus.setComponent(new TeamComponent(0));
+        // Campfires
+        Vector2f[] campfirePositions = new Vector2f[]{
+                new Vector2f(175.62367f, 145.24966f),
+                new Vector2f(113.570404f, 140.61807f),
+                new Vector2f(154.77113f, 106.40196f),
+                new Vector2f(120.59867f, 98.81795f),
+                new Vector2f(110.84865f, 68.97857f),
+                new Vector2f(26.024944f, 138.34921f),
+                new Vector2f(84.90381f, 138.57642f),
+                new Vector2f(45.01973f, 104.95874f),
+                new Vector2f(88.50022f, 69.143105f),
+                new Vector2f(81.168564f, 97.66634f)
+        };
+        Vector2f[] campfireDirections = new Vector2f[]{
+                new Vector2f(-0.6427891f, -0.7660469f),
+                new Vector2f(0.6427901f, -0.76604664f),
+                new Vector2f(0.42261922f, 0.90631133f),
+                new Vector2f(0.64279f, 0.76604795f),
+                new Vector2f(0.5735785f, 0.81915575f),
+                new Vector2f(-0.5735804f, 0.8191566f),
+                new Vector2f(0.6427914f, 0.7660497f),
+                new Vector2f(-0.3420229f, 0.93969864f),
+                new Vector2f(-0.50000393f, 0.8660311f),
+                new Vector2f(-0.6427925f, 0.7660494f)
+        };
+        for (int i = 0; i < campfirePositions.length; i++) {
+            int campfireEntitty = entityWorld.createEntity();
+            entityWorld.setComponent(campfireEntitty, new ModelComponent("Models/3dsa_fantasy_forest_tree_log_1/skin_burning.xml"));
+            entityWorld.setComponent(campfireEntitty, new PositionComponent(campfirePositions[i]));
+            entityWorld.setComponent(campfireEntitty, new DirectionComponent(campfireDirections[i]));
+            entityWorld.setComponent(campfireEntitty, new SightRangeComponent(30));
+            entityWorld.setComponent(campfireEntitty, new TeamComponent(0));
+        }
         // Waves
         int respawnTeamTrigger = entityWorld.createEntity();
         entityWorld.setComponent(respawnTeamTrigger, new InstantTriggerComponent());
@@ -195,13 +230,6 @@ public class Map_Etherdesert extends Map {
         entityWorld.removeComponent(characterEntity, AutoAttackComponent.class);
         entityWorld.setComponent(characterEntity, new GoldComponent(200));
         entityWorld.setComponent(characterEntity, new IsBindedComponent(Float.MAX_VALUE));
-        // GoldPerTime Buff
-        int goldPerTimeBuffEntity = entityWorld.createEntity();
-        int goldPerTimeBuffAttributesEntity = entityWorld.createEntity();
-        entityWorld.setComponent(goldPerTimeBuffAttributesEntity, new BonusFlatGoldPerSecondComponent(1));
-        entityWorld.setComponent(goldPerTimeBuffEntity, new ContinuousAttributesComponent(goldPerTimeBuffAttributesEntity));
-        entityWorld.setComponent(goldPerTimeBuffEntity, new KeepOnDeathComponent());
-        ApplyAddBuffsSystem.addBuff(entityWorld, characterEntity, goldPerTimeBuffEntity);
     }
 
     @Override

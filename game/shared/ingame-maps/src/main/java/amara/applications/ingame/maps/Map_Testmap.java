@@ -145,7 +145,7 @@ public class Map_Testmap extends Map{
         boss.setComponent(new DescriptionComponent("Stupid."));
         boss.setComponent(new IsMonsterComponent());
         boss.setComponent(new IsAlwaysVisibleComponent());
-        boss.setComponent(new ModelComponent("Models/cow/skin_default.xml"));
+        boss.setComponent(new ModelComponent("Models/cow/skin_baron.xml"));
         EntityWrapper walkAnimation = entityWorld.getWrapped(entityWorld.createEntity());
         walkAnimation.setComponent(new NameComponent("walk"));
         boss.setComponent(new WalkAnimationComponent(walkAnimation.getId()));
@@ -175,7 +175,7 @@ public class Map_Testmap extends Map{
         EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
         boss.setComponent(new AutoAttackComponent(autoAttack.getId()));
         EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "spells/bodyslam");
-        boss.setComponent(new SpellsComponent(new int[]{bodyslam.getId()}));
+        boss.setComponent(new SpellsComponent(bodyslam.getId()));
         boss.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
         boss.setComponent(new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.BOSS));
         boss.setComponent(new TeamComponent(0));
