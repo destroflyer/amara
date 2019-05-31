@@ -1,0 +1,87 @@
+<template>
+    <entity id="entity">
+        <name>Steve Tower</name>
+        <isMinion/>
+        <!--model-->
+        <model>Models/steve/skin_default.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>stand</name>
+                <loopDuration>8</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <walkStepDistance>5</walkStepDistance>
+        <autoAttackAnimation>
+            <entity>
+                <name>punch</name>
+            </entity>
+        </autoAttackAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <intersectionPush/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <isRespawnable/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>1800</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>4</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.5</bonusFlatAttackSpeed>
+                <bonusFlatArmor>25</bonusFlatArmor>
+                <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>3</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <requestUpdateAttributes/>
+        <sightRange>28</sightRange>
+        <isTargetable/>
+        <isVulnerable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/melee_autoattack"/>
+        </autoAttack>
+        <autoAggro>-1</autoAggro>
+    </entity>
+    <!--buff area-->
+    <entity>
+        <hitbox>
+            <circle radius="3"/>
+        </hitbox>
+        <areaBuff>
+            <entity>
+                <buffVisualisation>burning</buffVisualisation>
+                <repeatingEffect interval="0.5">
+                    <entity>
+                        <magicDamage>2</magicDamage>
+                    </entity>
+                </repeatingEffect>
+            </entity>
+        </areaBuff>
+        <areaBuffTargetRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </areaBuffTargetRules>
+        <areaOrigin>#entity</areaOrigin>
+        <areaSource>#entity</areaSource>
+        <hitboxActive/>
+    </entity>
+    <!--visual buff-->
+    <entity id="visualBuff">
+        <buffVisualisation>burning</buffVisualisation>
+        <keepOnDeath/>
+    </entity>
+    <entity>
+        <activeBuff targetEntity="#entity" buffEntity="#visualBuff"/>
+    </entity>
+</template>

@@ -61,11 +61,12 @@ public class Map_Etherdesert extends Map {
         shop.setComponent(new ShopItemsComponent(
             "items/etherdesert_income",
             "items/etherdesert_tower_0",
+            "items/etherdesert_tower_5",
             "items/etherdesert_tower_1",
+            "items/etherdesert_tower_6",
             "items/etherdesert_tower_2",
             "items/etherdesert_tower_3",
-            "items/etherdesert_tower_4",
-            "items/etherdesert_tower_5"
+            "items/etherdesert_tower_4"
         ));
         shop.setComponent(new ShopRangeComponent(20));
         shop.setComponent(new TeamComponent(0));
@@ -180,7 +181,7 @@ public class Map_Etherdesert extends Map {
                     spawnInformation.setComponent(new SpawnAttackMoveComponent());
                     spawnEffect.setComponent(new SpawnComponent(spawnInformation.getId()));
                     spawnTrigger.setComponent(new TriggeredEffectComponent(spawnEffect.getId()));
-                    spawnTrigger.setComponent(new TriggerDelayComponent(10 + (1.25f * r)));
+                    spawnTrigger.setComponent(new TriggerDelayComponent(11 + (1.25f * r)));
                     spawnTrigger.setComponent(new TriggerOnceComponent(true));
                     waveSpawnTriggers[r] = spawnTrigger.getId();
                 }

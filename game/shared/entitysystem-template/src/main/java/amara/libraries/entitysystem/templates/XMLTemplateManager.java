@@ -33,11 +33,11 @@ public class XMLTemplateManager{
     }
     private static XMLTemplateManager instance;
     private String filePath;
-    private HashMap<String, XMLComponentConstructor> xmlComponentConstructors = new HashMap<String, XMLComponentConstructor>();
-    private HashMap<String, Document> cachedDocuments = new HashMap<String, Document>();
+    private HashMap<String, XMLComponentConstructor> xmlComponentConstructors = new HashMap<>();
+    private HashMap<String, Document> cachedDocuments = new HashMap<>();
     private String currentDirectory;
-    private Stack<HashMap<String, Integer>> cachedEntities = new Stack<HashMap<String, Integer>>();
-    private Stack<HashMap<String, String>> cachedValues = new Stack<HashMap<String, String>>();
+    private Stack<HashMap<String, Integer>> cachedEntities = new Stack<>();
+    private Stack<HashMap<String, String>> cachedValues = new Stack<>();
     
     public <T> void registerComponent(Class<T> componentClass, XMLComponentConstructor<T> xmlComponentConstructor){
         xmlComponentConstructors.put(xmlComponentConstructor.getElementName(), xmlComponentConstructor);
@@ -72,8 +72,8 @@ public class XMLTemplateManager{
     
     public void loadTemplate(EntityWorld entityWorld, int entity, Document document, String[] parameters){
         Element templateElement = document.getRootElement();
-        cachedEntities.push(new HashMap<String, Integer>(10));
-        HashMap<String, String> values = new HashMap<String, String>();
+        cachedEntities.push(new HashMap<>(10));
+        HashMap<String, String> values = new HashMap<>();
         String defaultParameterText = templateElement.getAttributeValue("defaultParameters");
         if(defaultParameterText != null){
             String[] defaultParameters = defaultParameterText.split(",");
