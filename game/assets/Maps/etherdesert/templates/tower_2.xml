@@ -56,6 +56,6 @@
         <autoAttack>
             <entity template="spells/ranged_autoattack,Models/3dsa_archer_arrow/skin.xml"/>
         </autoAttack>
-        <autoAggro>20</autoAggro>
+        <autoAggro>28</autoAggro>
     </entity>
 </template>

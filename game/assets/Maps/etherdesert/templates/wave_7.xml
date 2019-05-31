@@ -41,11 +41,11 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>2100</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>80</bonusFlatAttackDamage>
+                <bonusFlatMaximumHealth>5000</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>120</bonusFlatAttackDamage>
                 <bonusFlatAttackSpeed>1.2</bonusFlatAttackSpeed>
-                <bonusFlatArmor>65</bonusFlatArmor>
-                <bonusFlatMagicResistance>65</bonusFlatMagicResistance>
+                <bonusFlatArmor>100</bonusFlatArmor>
+                <bonusFlatMagicResistance>100</bonusFlatMagicResistance>
                 <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
@@ -53,10 +53,16 @@
         <sightRange>28</sightRange>
         <isTargetable/>
         <isVulnerable/>
+        <bounty>
+            <entity>
+                <bountyCreepScore></bountyCreepScore>
+                <bountyGold>100</bountyGold>
+            </entity>
+        </bounty>
         <!--spells-->
         <autoAttack>
             <entity template="spells/ranged_autoattack,Models/3dsa_fire_dragon_fireball/skin.xml"/>
         </autoAttack>
-        <autoAggro>12</autoAggro>
+        <autoAggro>20</autoAggro>
     </entity>
 </template>

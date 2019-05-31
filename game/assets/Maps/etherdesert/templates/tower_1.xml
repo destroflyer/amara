@@ -40,9 +40,9 @@
         <isRespawnable/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>1200</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>35</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>0.62</bonusFlatAttackSpeed>
+                <bonusFlatMaximumHealth>1500</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>28</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.65</bonusFlatAttackSpeed>
                 <bonusFlatArmor>20</bonusFlatArmor>
                 <bonusFlatMagicResistance>15</bonusFlatMagicResistance>
                 <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
@@ -56,6 +56,6 @@
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
-        <autoAggro>20</autoAggro>
+        <autoAggro>28</autoAggro>
     </entity>
 </template>

@@ -44,10 +44,16 @@
         <sightRange>28</sightRange>
         <isTargetable/>
         <isVulnerable/>
+        <bounty>
+            <entity>
+                <bountyCreepScore></bountyCreepScore>
+                <bountyGold>22</bountyGold>
+            </entity>
+        </bounty>
         <!--spells-->
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
-        <autoAggro>12</autoAggro>
+        <autoAggro>20</autoAggro>
     </entity>
 </template>

@@ -216,7 +216,7 @@ public class Map_Arama extends Map{
                 spawnInformation.setComponent(new SpawnTemplateComponent(unitTemplate + "," + spawnTrigger.getId()));
                 spawnInformation.setComponent(new SpawnMoveToTargetComponent());
                 spawnInformation.setComponent(new SpawnAttackMoveComponent());
-                spawnEffect.setComponent(new SpawnComponent(new int[]{spawnInformation.getId()}));
+                spawnEffect.setComponent(new SpawnComponent(spawnInformation.getId()));
                 spawnTrigger.setComponent(new TriggeredEffectComponent(spawnEffect.getId()));
                 spawnTrigger.setComponent(new TriggerSourceComponent(spawnSourceEntity));
                 spawnTrigger.setComponent(new TriggerDelayComponent(1.25f * r));

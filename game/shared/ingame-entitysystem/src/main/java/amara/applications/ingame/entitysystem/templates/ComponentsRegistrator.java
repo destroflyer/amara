@@ -2744,6 +2744,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnMoveToTargetComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent>("spawnRedirectReceivedBounties"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spawns.SpawnRelativeDirectionComponent.class);
         xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spawns.SpawnRelativeDirectionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnRelativeDirectionComponent>("spawnRelativeDirection"){
 
@@ -3514,6 +3522,20 @@ public class ComponentsRegistrator{
             public amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent construct(){
                 int targetRulesEntity = createChildEntity(0, "targetRulesEntity");
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent(targetRulesEntity);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent.class.getDeclaredField("receiverEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent>("redirectReceivedBounties"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent construct(){
+                int receiverEntity = createChildEntity(0, "receiverEntity");
+                return new amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent(receiverEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.BountyComponent.class);
@@ -4598,20 +4620,6 @@ public class ComponentsRegistrator{
                     upgradePoints = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, upgradePointsText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.SpellsUpgradePointsComponent(upgradePoints);
-            }
-        });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.TargetsInAggroRangeComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.TargetsInAggroRangeComponent.class.getDeclaredField("targetEntities"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.TargetsInAggroRangeComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.TargetsInAggroRangeComponent>("targetsInAggroRange"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.units.TargetsInAggroRangeComponent construct(){
-                int[] targetEntities = createChildEntities(0, "targetEntities");
-                return new amara.applications.ingame.entitysystem.components.units.TargetsInAggroRangeComponent(targetEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.TeamComponent.class);

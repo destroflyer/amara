@@ -77,15 +77,16 @@ public class Map_Etherdesert extends Map {
         nexus.setComponent(new IsAliveComponent());
         int nexusBaseAttributesEntity = entityWorld.createEntity();
         entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatMaximumHealthComponent(2500));
-        entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatArmorComponent(500));
-        entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatMagicResistanceComponent(500));
-        entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatHealthRegenerationComponent(10));
-        entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatAttackDamageComponent(1000));
-        entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatAttackSpeedComponent(50));
+        entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatArmorComponent(300));
+        entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatMagicResistanceComponent(300));
+        entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatHealthRegenerationComponent(4));
+        entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatAttackDamageComponent(100));
+        entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatAttackSpeedComponent(2));
         nexus.setComponent(new BaseAttributesComponent(nexusBaseAttributesEntity));
-        EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
-        autoAttack.setComponent(new RangeComponent(1000));
-        nexus.setComponent(new AutoAttackComponent(autoAttack.getId()));
+        EntityWrapper nexusAutoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
+        nexusAutoAttack.removeComponent(CastTurnToTargetComponent.class);
+        nexusAutoAttack.setComponent(new RangeComponent(1000));
+        nexus.setComponent(new AutoAttackComponent(nexusAutoAttack.getId()));
         nexus.setComponent(new AutoAggroComponent(24));
         nexus.setComponent(new RequestUpdateAttributesComponent());
         nexus.setComponent(new IsTargetableComponent());
@@ -142,7 +143,7 @@ public class Map_Etherdesert extends Map {
                     spawnInformation.setComponent(new SpawnAttackMoveComponent());
                     spawnEffect.setComponent(new SpawnComponent(spawnInformation.getId()));
                     spawnTrigger.setComponent(new TriggeredEffectComponent(spawnEffect.getId()));
-                    spawnTrigger.setComponent(new TriggerDelayComponent(5 + (1.25f * r)));
+                    spawnTrigger.setComponent(new TriggerDelayComponent(10 + (1.25f * r)));
                     spawnTrigger.setComponent(new TriggerOnceComponent(true));
                     waveSpawnTriggers[r] = spawnTrigger.getId();
                 }
@@ -197,7 +198,7 @@ public class Map_Etherdesert extends Map {
         // GoldPerTime Buff
         int goldPerTimeBuffEntity = entityWorld.createEntity();
         int goldPerTimeBuffAttributesEntity = entityWorld.createEntity();
-        entityWorld.setComponent(goldPerTimeBuffAttributesEntity, new BonusFlatGoldPerSecondComponent(3));
+        entityWorld.setComponent(goldPerTimeBuffAttributesEntity, new BonusFlatGoldPerSecondComponent(1));
         entityWorld.setComponent(goldPerTimeBuffEntity, new ContinuousAttributesComponent(goldPerTimeBuffAttributesEntity));
         entityWorld.setComponent(goldPerTimeBuffEntity, new KeepOnDeathComponent());
         ApplyAddBuffsSystem.addBuff(entityWorld, characterEntity, goldPerTimeBuffEntity);

@@ -33,10 +33,10 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>650</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>35</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>0.6</bonusFlatAttackSpeed>
-                <bonusFlatArmor>20</bonusFlatArmor>
+                <bonusFlatMaximumHealth>550</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>40</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.7</bonusFlatAttackSpeed>
+                <bonusFlatArmor>25</bonusFlatArmor>
                 <bonusFlatMagicResistance>15</bonusFlatMagicResistance>
                 <bonusFlatWalkSpeed>3</bonusFlatWalkSpeed>
             </entity>
@@ -45,10 +45,16 @@
         <sightRange>28</sightRange>
         <isTargetable/>
         <isVulnerable/>
+        <bounty>
+            <entity>
+                <bountyCreepScore></bountyCreepScore>
+                <bountyGold>11</bountyGold>
+            </entity>
+        </bounty>
         <!--spells-->
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
-        <autoAggro>12</autoAggro>
+        <autoAggro>20</autoAggro>
     </entity>
 </template>

@@ -13,6 +13,7 @@ import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.spawns.*;
 import amara.applications.ingame.entitysystem.components.units.*;
+import amara.applications.ingame.entitysystem.components.units.bounties.*;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 
@@ -113,6 +114,10 @@ public class ApplySpawnsSystems implements EntitySystem{
                 if(spawnInformation.hasComponent(SpawnApplyAsRespawnTransformComponent.class)){
                     spawnedObject.setComponent(new RespawnPositionComponent(position));
                     spawnedObject.setComponent(new RespawnDirectionComponent(direction));
+                }
+                SpawnRedirectReceivedBountiesComponent spawnRedirectReceivedBountiesComponent = spawnInformation.getComponent(SpawnRedirectReceivedBountiesComponent.class);
+                if(spawnRedirectReceivedBountiesComponent != null){
+                    spawnedObject.setComponent(new RedirectReceivedBountiesComponent(casterEntity));
                 }
                 EntityTemplate.loadTemplates(entityWorld, spawnedObject.getId(), spawnInformation.getComponent(SpawnTemplateComponent.class).getTemplateNames());
             }

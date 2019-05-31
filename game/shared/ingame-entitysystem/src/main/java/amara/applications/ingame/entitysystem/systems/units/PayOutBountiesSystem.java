@@ -20,11 +20,11 @@ import amara.libraries.entitysystem.*;
  * @author Carl
  */
 public class PayOutBountiesSystem implements EntitySystem{
-    
+
     private final float experienceRange = 20;
     private int defaultBountyRulesEntity = -1;
-    private LinkedList<Integer> tmpRewardedEntities = new LinkedList<Integer>();
-    
+    private LinkedList<Integer> tmpRewardedEntities = new LinkedList<>();
+
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         if(defaultBountyRulesEntity == -1){
@@ -49,12 +49,13 @@ public class PayOutBountiesSystem implements EntitySystem{
                         break;
                     }
                 }
-                if(killerEntity != -1){
+                if (killerEntity != -1) {
+                    int killReceiverEntity = getBountyReceiverEntity(entityWorld, killerEntity);
                     //CharacterKill
                     BountyCharacterKillComponent bountyCharacterKillScoreComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyCharacterKillComponent.class);
                     if(bountyCharacterKillScoreComponent != null){
                         //Kill
-                        ScoreComponent killerScoreComponent = entityWorld.getComponent(killerEntity, ScoreComponent.class);
+                        ScoreComponent killerScoreComponent = entityWorld.getComponent(killReceiverEntity, ScoreComponent.class);
                         if(killerScoreComponent != null){
                             int scoreEntity = killerScoreComponent.getScoreEntity();
                             int kills = 1;
@@ -65,12 +66,13 @@ public class PayOutBountiesSystem implements EntitySystem{
                             entityWorld.setComponent(scoreEntity, new CharacterKillsComponent(kills));
                         }
                         tmpRewardedEntities.clear();
-                        tmpRewardedEntities.add(killerEntity);
+                        tmpRewardedEntities.add(killReceiverEntity);
                         //Assists
                         for(int i=0;i<(damageHistoryComponent.getEntries().length - 1);i++){
                             int assistingEntity = damageHistoryComponent.getEntries()[i].getSourceEntity();
-                            if(!tmpRewardedEntities.contains(assistingEntity)){
-                                ScoreComponent scoreComponent = entityWorld.getComponent(assistingEntity, ScoreComponent.class);
+                            int assistReceiverEntity = getBountyReceiverEntity(entityWorld, assistingEntity);
+                            if(!tmpRewardedEntities.contains(assistReceiverEntity)){
+                                ScoreComponent scoreComponent = entityWorld.getComponent(assistReceiverEntity, ScoreComponent.class);
                                 if(scoreComponent != null){
                                     int scoreEntity = scoreComponent.getScoreEntity();
                                     int assists = 1;
@@ -80,14 +82,14 @@ public class PayOutBountiesSystem implements EntitySystem{
                                     }
                                     entityWorld.setComponent(scoreEntity, new CharacterAssistsComponent(assists));
                                 }
-                                tmpRewardedEntities.add(assistingEntity);
+                                tmpRewardedEntities.add(assistReceiverEntity);
                             }
                         }
                     }
                     //CreepScore
                     BountyCreepScoreComponent bountyCreepScoreComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyCreepScoreComponent.class);
                     if(bountyCreepScoreComponent != null){
-                        ScoreComponent scoreComponent = entityWorld.getComponent(killerEntity, ScoreComponent.class);
+                        ScoreComponent scoreComponent = entityWorld.getComponent(killReceiverEntity, ScoreComponent.class);
                         if(scoreComponent != null){
                             int scoreEntity = scoreComponent.getScoreEntity();
                             int kills = 1;
@@ -97,23 +99,23 @@ public class PayOutBountiesSystem implements EntitySystem{
                             }
                             entityWorld.setComponent(scoreEntity, new CreepScoreComponent(kills));
                         }
-                    }                
+                    }
                     //Gold
                     BountyGoldComponent bountyGoldComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyGoldComponent.class);
                     if(bountyGoldComponent != null){
-                        GoldComponent goldComponent = entityWorld.getComponent(killerEntity, GoldComponent.class);
+                        GoldComponent goldComponent = entityWorld.getComponent(killReceiverEntity, GoldComponent.class);
                         if(goldComponent != null){
-                            entityWorld.setComponent(killerEntity, new GoldComponent(goldComponent.getGold() + bountyGoldComponent.getGold()));
+                            entityWorld.setComponent(killReceiverEntity, new GoldComponent(goldComponent.getGold() + bountyGoldComponent.getGold()));
                         }
                     }
                     //Experience
                     BountyExperienceComponent bountyExperienceComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyExperienceComponent.class);
                     if(bountyExperienceComponent != null){
                         tmpRewardedEntities.clear();
-                        int killerTeamEntity = entityWorld.getComponent(killerEntity, TeamComponent.class).getTeamEntity();
+                        int killerTeamEntity = entityWorld.getComponent(killReceiverEntity, TeamComponent.class).getTeamEntity();
                         Vector2f deathPosition = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
                         for(int rewardedEntity : entityWorld.getEntitiesWithAll(TeamComponent.class, PositionComponent.class, ExperienceComponent.class)){
-                            if(rewardedEntity != killerEntity){
+                            if(rewardedEntity != killReceiverEntity){
                                 int teamEntity = entityWorld.getComponent(rewardedEntity, TeamComponent.class).getTeamEntity();
                                 Vector2f position = entityWorld.getComponent(rewardedEntity, PositionComponent.class).getPosition();
                                 if((teamEntity == killerTeamEntity) && (position.distanceSquared(deathPosition) <= (experienceRange * experienceRange))){
@@ -121,8 +123,8 @@ public class PayOutBountiesSystem implements EntitySystem{
                                 }
                             }
                         }
-                        if((!tmpRewardedEntities.contains(killerEntity)) && entityWorld.hasComponent(killerEntity, ExperienceComponent.class)){
-                            tmpRewardedEntities.add(killerEntity);
+                        if((!tmpRewardedEntities.contains(killReceiverEntity)) && entityWorld.hasComponent(killReceiverEntity, ExperienceComponent.class)){
+                            tmpRewardedEntities.add(killReceiverEntity);
                         }
                         if(tmpRewardedEntities.size() > 0){
                             int experienceShare = (bountyExperienceComponent.getExperience() / tmpRewardedEntities.size());
@@ -135,10 +137,19 @@ public class PayOutBountiesSystem implements EntitySystem{
                     //Buff
                     BountyBuffComponent bountyBuffComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyBuffComponent.class);
                     if(bountyBuffComponent != null){
-                        ApplyAddBuffsSystem.addBuff(entityWorld, killerEntity, bountyBuffComponent.getBuffEntity(), bountyBuffComponent.getDuration());
+                        ApplyAddBuffsSystem.addBuff(entityWorld, killReceiverEntity, bountyBuffComponent.getBuffEntity(), bountyBuffComponent.getDuration());
                     }
                 }
             }
         }
+    }
+
+    private int getBountyReceiverEntity(EntityWorld entityWorld, int receiverEntity) {
+        RedirectReceivedBountiesComponent receivedBountiesRedirectComponent = entityWorld.getComponent(receiverEntity, RedirectReceivedBountiesComponent.class);
+        if (receivedBountiesRedirectComponent != null) {
+            int newReceiverEntity = receivedBountiesRedirectComponent.getReceivedEntity();
+            return getBountyReceiverEntity(entityWorld, newReceiverEntity);
+        }
+        return receiverEntity;
     }
 }

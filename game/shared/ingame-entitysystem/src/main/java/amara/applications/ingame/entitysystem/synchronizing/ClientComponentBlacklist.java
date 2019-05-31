@@ -43,6 +43,7 @@ import amara.applications.ingame.entitysystem.components.spells.placeholders.*;
 import amara.applications.ingame.entitysystem.components.spells.triggers.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.animations.*;
+import amara.applications.ingame.entitysystem.components.units.bounties.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
@@ -212,6 +213,7 @@ public class ClientComponentBlacklist{
             SpawnMovementAnimationComponent.class,
             SpawnMovementRelativeDirectionComponent.class,
             SpawnMovementSpeedComponent.class,
+            SpawnRedirectReceivedBountiesComponent.class,
             SpawnRelativeDirectionComponent.class,
             SpawnRelativePositionComponent.class,
             SpawnTemplateComponent.class,
@@ -243,9 +245,9 @@ public class ClientComponentBlacklist{
             LifetimeComponent.class,
             LocalAvoidanceWalkComponent.class,
             MaximumAggroRangeComponent.class,
+            RedirectReceivedBountiesComponent.class,
             RemainingAggroResetDurationComponent.class,
             SetNewCampCombatSpellsOnCooldownComponent.class,
-            TargetsInAggroRangeComponent.class,
             WalkStepDistanceComponent.class,
             //units/animations
             AutoAttackAnimationComponent.class,

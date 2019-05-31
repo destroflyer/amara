@@ -44,6 +44,7 @@ public class NetworkClient extends NetworkListener{
 
                 @Override
                 public void clientDisconnected(Client client, ClientStateListener.DisconnectInfo info){
+                    System.err.println(info);
                     onDisconnect();
                 }
             });

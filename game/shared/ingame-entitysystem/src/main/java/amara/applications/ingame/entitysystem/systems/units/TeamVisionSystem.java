@@ -31,9 +31,9 @@ public class TeamVisionSystem implements EntitySystem{
         }
     }
     private MergedVision[] teamVisions;
-    private HashMap<Integer, Integer> currentTeams = new HashMap<Integer, Integer>();
-    private LinkedList<Integer> changedVisionEntities = new LinkedList<Integer>();
-    private LinkedList<Integer> changedVisionTeams = new LinkedList<Integer>();
+    private HashMap<Integer, Integer> currentTeams = new HashMap<>();
+    private LinkedList<Integer> changedVisionEntities = new LinkedList<>();
+    private LinkedList<Integer> changedVisionTeams = new LinkedList<>();
     private boolean haveHiddenAreasChanged;
     
     @Override

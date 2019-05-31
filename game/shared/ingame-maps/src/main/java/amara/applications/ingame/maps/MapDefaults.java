@@ -20,7 +20,7 @@ class MapDefaults {
         "reaper","arcaneblade","soulblade"
     };
 
-    public static String[] getShopItemTemplateNames() {
+    static String[] getShopItemTemplateNames() {
         String[] shopItemTemplateNames = new String[shopItemNames.length];
         for (int i = 0; i < shopItemTemplateNames.length; i++) {
             shopItemTemplateNames[i] = "items/" + shopItemNames[i];

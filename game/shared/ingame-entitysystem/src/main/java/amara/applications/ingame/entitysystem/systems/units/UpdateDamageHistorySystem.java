@@ -74,7 +74,7 @@ public class UpdateDamageHistorySystem implements EntitySystem{
         }
         LinkedList<DamageHistoryComponent.DamageHistoryEntry> damageEntries = damageEntriesMap.get(targetEntity);
         if(damageEntries == null){
-            damageEntries = new LinkedList<DamageHistoryComponent.DamageHistoryEntry>();
+            damageEntries = new LinkedList<>();
             damageEntriesMap.put(targetEntity, damageEntries);
         }
         Iterator<DamageHistoryComponent.DamageHistoryEntry> iterator = damageEntries.iterator();
@@ -102,7 +102,7 @@ public class UpdateDamageHistorySystem implements EntitySystem{
         LinkedList<DamageHistoryComponent.DamageHistoryEntry> appliedEntries = damageEntries;
         float health = entityWorld.getComponent(targetEntity, HealthComponent.class).getValue();
         if(health < 1){
-            appliedEntries = new LinkedList<DamageHistoryComponent.DamageHistoryEntry>();
+            appliedEntries = new LinkedList<>();
             while(health < 1){
                 DamageHistoryComponent.DamageHistoryEntry entry = damageEntries.pop();
                 health += entry.getDamage();

@@ -326,6 +326,7 @@ public class CustomGameTemplates{
                 EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper spawnInformationEntity = entityWorld.getWrapped(entityWorld.createEntity());
                 spawnInformationEntity.setComponent(new SpawnTemplateComponent("../maps/etherdesert/templates/tower_" + towerIndex));
+                spawnInformationEntity.setComponent(new SpawnRedirectReceivedBountiesComponent());
                 spawnInformationEntity.setComponent(new SpawnApplyAsRespawnTransformComponent());
                 effect.setComponent(new SpawnComponent(spawnInformationEntity.getId()));
                 effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));

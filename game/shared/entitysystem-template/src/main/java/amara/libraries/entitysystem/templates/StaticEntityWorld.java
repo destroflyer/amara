@@ -16,7 +16,7 @@ import amara.libraries.entitysystem.EntityWrapper;
 public class StaticEntityWorld{
     
     private static EntityWorld entityWorld = new EntityWorld();
-    private static HashMap<String, Integer> cachedEntities = new HashMap<String, Integer>();
+    private static HashMap<String, Integer> cachedEntities = new HashMap<>();
     
     public static EntityWrapper loadTemplateWrapped(String template){
         return entityWorld.getWrapped(loadTemplate(template));

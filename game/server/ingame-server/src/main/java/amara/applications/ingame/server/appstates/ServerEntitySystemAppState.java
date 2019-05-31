@@ -145,7 +145,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue(), castSpellQueueSystem));
         addEntitySystem(new ExecuteAIActionsSystem((playerEntity) -> getAppState(BotsAppState.class).getBot(playerEntity)));
         addEntitySystem(new AttackMoveSystem());
-        addEntitySystem(new AttackAggroedTargetsSystem());
         addEntitySystem(new AggroResetTimersSystem());
         addEntitySystem(new CheckCampUnionAggroSystem());
         addEntitySystem(new CheckCampInCombatSystem());

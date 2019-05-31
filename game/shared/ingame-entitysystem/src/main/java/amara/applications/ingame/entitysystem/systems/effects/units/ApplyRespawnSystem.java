@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.entitysystem.systems.effects.units;
 
+import amara.applications.ingame.entitysystem.components.attributes.HealthComponent;
 import amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent;
 import amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent;
 import amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent;
@@ -36,6 +37,7 @@ public class ApplyRespawnSystem implements EntitySystem {
             int targetEntity = entityWorld.getComponent(entity, ApplyEffectImpactComponent.class).getTargetEntity();
             if (entityWorld.hasComponent(targetEntity, IsRespawnableComponent.class)) {
                 entityWorld.removeComponent(targetEntity, AnimationComponent.class);
+                entityWorld.removeComponent(targetEntity, HealthComponent.class);
                 entityWorld.removeComponent(targetEntity, DamageHistoryComponent.class);
                 entityWorld.setComponent(targetEntity, new HitboxActiveComponent());
                 entityWorld.setComponent(targetEntity, new IsAliveComponent());

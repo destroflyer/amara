@@ -75,10 +75,6 @@ public class ScreenController_Shop extends GameScreenController{
     }
 
     public void setShopItems(String[] itemTemplateNames) {
-        // Cleanup old item entities
-        for (EntityWrapper shopItem : shopItems) {
-            StaticEntityWorld.getEntityWorld().removeEntity(shopItem.getId());
-        }
         // Load new item entities
         shopItems = new EntityWrapper[itemTemplateNames.length];
         for(int i=0;i<shopItems.length;i++){
