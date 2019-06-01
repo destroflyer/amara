@@ -1,15 +1,9 @@
 <template>
     <entity>
-        <name>Melee Solider</name>
+        <name>Flying Minion</name>
         <isMinion/>
         <!--model-->
-        <model>Models/3dsa_medieval_knight/skin_team_enemy.xml</model>
-        <idleAnimation>
-            <entity id="idleAnimation">
-                <name>idle</name>
-                <loopDuration>2</loopDuration>
-            </entity>
-        </idleAnimation>
+        <model>Models/flying_minion/skin_default.xml</model>
         <walkAnimation>
             <entity>
                 <name>walk</name>
@@ -17,15 +11,13 @@
         </walkAnimation>
         <autoAttackAnimation>
             <entity>
-                <name>attack_1</name>
+                <name>auto_attack</name>
             </entity>
         </autoAttackAnimation>
-        <animation>#idleAnimation</animation>
         <!--physics-->
         <hitbox>
-            <circle radius="0.75"/>
+            <circle radius="1"/>
         </hitbox>
-        <scale>2</scale>
         <intersectionPush/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
@@ -33,12 +25,12 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>600</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>33</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>0.6</bonusFlatAttackSpeed>
-                <bonusFlatArmor>25</bonusFlatArmor>
-                <bonusFlatMagicResistance>20</bonusFlatMagicResistance>
-                <bonusFlatWalkSpeed>3</bonusFlatWalkSpeed>
+                <bonusFlatMaximumHealth>2100</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>130</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>1.5</bonusFlatAttackSpeed>
+                <bonusFlatArmor>80</bonusFlatArmor>
+                <bonusFlatMagicResistance>80</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>5</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
         <requestUpdateAttributes/>
@@ -48,12 +40,12 @@
         <bounty>
             <entity>
                 <bountyCreepScore></bountyCreepScore>
-                <bountyGold>15</bountyGold>
+                <bountyGold>28</bountyGold>
             </entity>
         </bounty>
         <!--spells-->
         <autoAttack>
-            <entity template="spells/melee_autoattack"/>
+            <entity template="spells/ranged_autoattack"/>
         </autoAttack>
         <autoAggro>20</autoAggro>
     </entity>

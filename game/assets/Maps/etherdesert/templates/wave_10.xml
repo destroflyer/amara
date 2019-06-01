@@ -1,13 +1,13 @@
 <template>
     <entity>
-        <name>Wragarak</name>
+        <name>Shyvana</name>
         <isMinion/>
         <!--model-->
-        <model>Models/3dsa_fire_dragon/skin.xml</model>
+        <model>Models/shyvana/skin_default.xml</model>
         <idleAnimation>
             <entity id="idleAnimation">
                 <name>idle</name>
-                <loopDuration>4</loopDuration>
+                <loopDuration>5.42</loopDuration>
             </entity>
         </idleAnimation>
         <walkAnimation>
@@ -15,25 +15,17 @@
                 <name>walk</name>
             </entity>
         </walkAnimation>
-        <walkStepDistance>6.5</walkStepDistance>
         <autoAttackAnimation>
             <entity>
-                <name>projectile_attack</name>
+                <name>auto_attack</name>
             </entity>
         </autoAttackAnimation>
-        <deathAnimation>
-            <entity>
-                <name>death</name>
-                <loopDuration>1</loopDuration>
-                <freezeAfterPlaying/>
-            </entity>
-        </deathAnimation>
         <animation>#idleAnimation</animation>
         <!--physics-->
         <hitbox>
             <circle radius="1"/>
         </hitbox>
-        <scale>2</scale>
+        <scale>3</scale>
         <intersectionPush/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
@@ -41,12 +33,12 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>10000</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>150</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>1.7</bonusFlatAttackSpeed>
-                <bonusFlatArmor>120</bonusFlatArmor>
-                <bonusFlatMagicResistance>120</bonusFlatMagicResistance>
-                <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
+                <bonusFlatMaximumHealth>5000</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>110</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>1.75</bonusFlatAttackSpeed>
+                <bonusFlatArmor>110</bonusFlatArmor>
+                <bonusFlatMagicResistance>110</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>5</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
         <requestUpdateAttributes/>
@@ -55,13 +47,13 @@
         <isVulnerable/>
         <bounty>
             <entity>
-                <bountyCharacterKill></bountyCharacterKill>
-                <bountyGold>200</bountyGold>
+                <bountyCreepScore></bountyCreepScore>
+                <bountyGold>28</bountyGold>
             </entity>
         </bounty>
         <!--spells-->
         <autoAttack>
-            <entity template="spells/ranged_autoattack,Models/3dsa_fire_dragon_fireball/skin.xml"/>
+            <entity template="spells/melee_autoattack"/>
         </autoAttack>
         <autoAggro>20</autoAggro>
     </entity>

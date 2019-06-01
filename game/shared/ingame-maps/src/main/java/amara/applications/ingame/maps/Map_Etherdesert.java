@@ -43,6 +43,9 @@ public class Map_Etherdesert extends Map {
     public Map_Etherdesert() {
         
     }
+    private int nexus;
+    private int respawnTeamTrigger;
+    private int winMapObjectiveTrigger;
 
     @Override
     public void load(EntityWorld entityWorld) {
@@ -71,15 +74,15 @@ public class Map_Etherdesert extends Map {
         shop.setComponent(new ShopRangeComponent(20));
         shop.setComponent(new TeamComponent(0));
         // Nexus
-        EntityWrapper nexus = entityWorld.getWrapped(entityWorld.createEntity());
-        nexus.setComponent(new NameComponent("Nexus"));
-        nexus.setComponent(new IsStructureComponent());
-        nexus.setComponent(new IsAlwaysVisibleComponent());
-        nexus.setComponent(new ModelComponent("Models/column/skin_nexus.xml"));
-        nexus.setComponent(new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.BOSS));
-        nexus.setComponent(new PositionComponent(new Vector2f(100, 39)));
-        nexus.setComponent(new DirectionComponent(new Vector2f(0, -1)));
-        nexus.setComponent(new IsAliveComponent());
+        nexus = entityWorld.createEntity();
+        entityWorld.setComponent(nexus, new NameComponent("Nexus"));
+        entityWorld.setComponent(nexus, new IsStructureComponent());
+        entityWorld.setComponent(nexus, new IsAlwaysVisibleComponent());
+        entityWorld.setComponent(nexus, new ModelComponent("Models/column/skin_nexus.xml"));
+        entityWorld.setComponent(nexus, new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.BOSS));
+        entityWorld.setComponent(nexus, new PositionComponent(new Vector2f(100, 39)));
+        entityWorld.setComponent(nexus, new DirectionComponent(new Vector2f(0, -1)));
+        entityWorld.setComponent(nexus, new IsAliveComponent());
         int nexusBaseAttributesEntity = entityWorld.createEntity();
         entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatMaximumHealthComponent(2500));
         entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatArmorComponent(300));
@@ -87,16 +90,16 @@ public class Map_Etherdesert extends Map {
         entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatHealthRegenerationComponent(4));
         entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatAttackDamageComponent(100));
         entityWorld.setComponent(nexusBaseAttributesEntity, new BonusFlatAttackSpeedComponent(2));
-        nexus.setComponent(new BaseAttributesComponent(nexusBaseAttributesEntity));
+        entityWorld.setComponent(nexus, new BaseAttributesComponent(nexusBaseAttributesEntity));
         EntityWrapper nexusAutoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
         nexusAutoAttack.removeComponent(CastTurnToTargetComponent.class);
         nexusAutoAttack.setComponent(new RangeComponent(1000));
-        nexus.setComponent(new AutoAttackComponent(nexusAutoAttack.getId()));
-        nexus.setComponent(new AutoAggroComponent(24));
-        nexus.setComponent(new RequestUpdateAttributesComponent());
-        nexus.setComponent(new IsTargetableComponent());
-        nexus.setComponent(new IsVulnerableComponent());
-        nexus.setComponent(new TeamComponent(0));
+        entityWorld.setComponent(nexus, new AutoAttackComponent(nexusAutoAttack.getId()));
+        entityWorld.setComponent(nexus, new AutoAggroComponent(24));
+        entityWorld.setComponent(nexus, new RequestUpdateAttributesComponent());
+        entityWorld.setComponent(nexus, new IsTargetableComponent());
+        entityWorld.setComponent(nexus, new IsVulnerableComponent());
+        entityWorld.setComponent(nexus, new TeamComponent(0));
         // Campfires
         Vector2f[] campfirePositions = new Vector2f[]{
                 new Vector2f(175.62367f, 145.24966f),
@@ -131,7 +134,7 @@ public class Map_Etherdesert extends Map {
             entityWorld.setComponent(campfireEntitty, new TeamComponent(0));
         }
         // Waves
-        int respawnTeamTrigger = entityWorld.createEntity();
+        respawnTeamTrigger = entityWorld.createEntity();
         entityWorld.setComponent(respawnTeamTrigger, new InstantTriggerComponent());
         entityWorld.setComponent(respawnTeamTrigger, new TeamTargetComponent(0));
         int respawnTeamEffect = entityWorld.createEntity();
@@ -140,87 +143,17 @@ public class Map_Etherdesert extends Map {
         entityWorld.setComponent(respawnTeamTrigger, new TriggerOnceComponent());
         // MapObjective
         int mapObjective = entityWorld.createEntity();
-        entityWorld.setComponent(mapObjective, new MissingEntitiesComponent(nexus.getId()));
+        entityWorld.setComponent(mapObjective, new MissingEntitiesComponent(nexus));
         entityWorld.setComponent(mapObjective, new OpenObjectiveComponent());
         entityWorld.setComponent(entity, new MapObjectiveComponent(mapObjective));
         // MapObjective - Win Trigger
-        int winMapObjectiveTrigger = entityWorld.createEntity();
+        winMapObjectiveTrigger = entityWorld.createEntity();
         entityWorld.setComponent(winMapObjectiveTrigger, new InstantTriggerComponent());
         entityWorld.setComponent(winMapObjectiveTrigger, new CustomTargetComponent(mapObjective));
         int winMapObjectiveEffect = entityWorld.createEntity();
         entityWorld.setComponent(winMapObjectiveEffect, new FinishObjectiveComponent());
         entityWorld.setComponent(winMapObjectiveTrigger, new TriggeredEffectComponent(winMapObjectiveEffect));
         entityWorld.setComponent(winMapObjectiveTrigger, new TriggerOnceComponent(true));
-
-        Vector2f[] spawnPositions = new Vector2f[]{
-            new Vector2f(33, 180),
-            new Vector2f(87, 180),
-            new Vector2f(122, 180),
-            new Vector2f(167, 180)
-        };
-        int[] creepsPerWave = new int[]{ 6, 6, 4, 6, 6, 6, 20, 1 };
-        for (Vector2f spawnPosition : spawnPositions) {
-            int spawnCasterEntity = entityWorld.createEntity();
-            entityWorld.setComponent(spawnCasterEntity, new PositionComponent(spawnPosition));
-            entityWorld.setComponent(spawnCasterEntity, new TeamComponent(1));
-            int spawnSourceEntity = entityWorld.createEntity();
-            entityWorld.setComponent(spawnSourceEntity, new EffectCastSourceComponent(spawnCasterEntity));
-
-            int waves = 8;
-            int[][] spawnTriggers = new int[waves][];
-            for (int i = 0; i < waves; i++) {
-                int[] waveSpawnTriggers = new int[creepsPerWave[i]];
-                for (int r = 0; r < waveSpawnTriggers.length; r++) {
-                    EntityWrapper spawnTrigger = entityWorld.getWrapped(entityWorld.createEntity());
-                    spawnTrigger.setComponent(new InstantTriggerComponent());
-                    spawnTrigger.setComponent(new CustomTargetComponent(nexus.getId()));
-                    EntityWrapper spawnEffect = entityWorld.getWrapped(entityWorld.createEntity());
-                    EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-                    spawnInformation.setComponent(new SpawnTemplateComponent("../maps/etherdesert/templates/wave_" + i));
-                    spawnInformation.setComponent(new SpawnMoveToTargetComponent());
-                    spawnInformation.setComponent(new SpawnAttackMoveComponent());
-                    spawnEffect.setComponent(new SpawnComponent(spawnInformation.getId()));
-                    spawnTrigger.setComponent(new TriggeredEffectComponent(spawnEffect.getId()));
-                    spawnTrigger.setComponent(new TriggerDelayComponent(11 + (1.25f * r)));
-                    spawnTrigger.setComponent(new TriggerOnceComponent(true));
-                    waveSpawnTriggers[r] = spawnTrigger.getId();
-                }
-                spawnTriggers[i] = waveSpawnTriggers;
-            }
-            int[] activateSpawnsTriggers = new int[waves];
-            int[] activateNextWaveTriggers = new int[waves];
-            for (int i = 0; i < waves; i++) {
-                EntityWrapper activateSpawnsTriggger = entityWorld.getWrapped(entityWorld.createEntity());
-                activateSpawnsTriggger.setComponent(new InstantTriggerComponent());
-                activateSpawnsTriggger.setComponent(new CustomTargetComponent(spawnSourceEntity));
-                EntityWrapper activateSpawnEffect = entityWorld.getWrapped(entityWorld.createEntity());
-                activateSpawnEffect.setComponent(new AddEffectTriggersComponent(spawnTriggers[i]));
-                activateSpawnsTriggger.setComponent(new TriggeredEffectComponent(activateSpawnEffect.getId()));
-                activateSpawnsTriggger.setComponent(new TriggerOnceComponent(true));
-                activateSpawnsTriggers[i] = activateSpawnsTriggger.getId();
-
-                EntityWrapper activateNextWaveTrigger = entityWorld.getWrapped(entityWorld.createEntity());
-                activateNextWaveTrigger.setComponent(new TeamDeathTriggerComponent());
-                activateNextWaveTrigger.setComponent(new CustomTargetComponent(spawnCasterEntity));
-                activateNextWaveTrigger.setComponent(new TriggerOnceComponent(true));
-                activateNextWaveTriggers[i] = activateNextWaveTrigger.getId();
-
-                if (i == 0) {
-                    activateSpawnsTriggger.setComponent(new TriggerSourceComponent(entity));
-                    activateNextWaveTrigger.setComponent(new TriggerSourceComponent(spawnCasterEntity));
-                }
-            }
-            for (int i = 0; i < waves; i++) {
-                int activateNextWaveTrigger = activateNextWaveTriggers[i];
-                EntityWrapper activateNextWaveEffect = entityWorld.getWrapped(entityWorld.createEntity());
-                if (i < (waves - 1)){
-                    activateNextWaveEffect.setComponent(new AddEffectTriggersComponent(activateSpawnsTriggers[i + 1], activateNextWaveTriggers[i + 1], respawnTeamTrigger));
-                } else {
-                    activateNextWaveEffect.setComponent(new AddEffectTriggersComponent(winMapObjectiveTrigger));
-                }
-                entityWorld.setComponent(activateNextWaveTrigger, new TriggeredEffectComponent(activateNextWaveEffect.getId()));
-            }
-        }
 
         EntityWrapper playerDeathRules = entityWorld.getWrapped(entityWorld.createEntity());
         entityWorld.setComponent(entity, new PlayerDeathRulesComponent(playerDeathRules.getId()));
@@ -240,6 +173,75 @@ public class Map_Etherdesert extends Map {
         entityWorld.setComponent(goldPerTimeBuffEntity, new ContinuousAttributesComponent(goldPerTimeBuffAttributesEntity));
         entityWorld.setComponent(goldPerTimeBuffEntity, new KeepOnDeathComponent());
         ApplyAddBuffsSystem.addBuff(entityWorld, characterEntity, goldPerTimeBuffEntity);
+        // Waves
+        int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
+        int spawnCasterEntity = entityWorld.createEntity();
+        Vector2f[] spawnPositions = new Vector2f[]{
+                new Vector2f(167, 180),
+                new Vector2f(122, 180),
+                new Vector2f(87, 180),
+                new Vector2f(33, 180)
+        };
+        entityWorld.setComponent(spawnCasterEntity, new PositionComponent(spawnPositions[playerIndex]));
+        entityWorld.setComponent(spawnCasterEntity, new TeamComponent(1));
+        int spawnSourceEntity = entityWorld.createEntity();
+        entityWorld.setComponent(spawnSourceEntity, new EffectCastSourceComponent(spawnCasterEntity));
+        int waves = 12;
+        int[] creepsPerWave = new int[]{ 6, 6, 4, 6, 6, 7, 28, 1, 6, 6, 2, 1 };
+        int[][] spawnTriggers = new int[waves][];
+        for (int i = 0; i < waves; i++) {
+            int[] waveSpawnTriggers = new int[creepsPerWave[i]];
+            for (int r = 0; r < waveSpawnTriggers.length; r++) {
+                EntityWrapper spawnTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+                spawnTrigger.setComponent(new InstantTriggerComponent());
+                spawnTrigger.setComponent(new CustomTargetComponent(nexus));
+                EntityWrapper spawnEffect = entityWorld.getWrapped(entityWorld.createEntity());
+                EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
+                spawnInformation.setComponent(new SpawnTemplateComponent("../maps/etherdesert/templates/wave_" + i));
+                spawnInformation.setComponent(new SpawnMoveToTargetComponent());
+                spawnInformation.setComponent(new SpawnAttackMoveComponent());
+                spawnEffect.setComponent(new SpawnComponent(spawnInformation.getId()));
+                spawnTrigger.setComponent(new TriggeredEffectComponent(spawnEffect.getId()));
+                float spawnDelay = ((i == 6) ? 0.5f : 1.25f);
+                spawnTrigger.setComponent(new TriggerDelayComponent(11 + (spawnDelay * r)));
+                spawnTrigger.setComponent(new TriggerOnceComponent(true));
+                waveSpawnTriggers[r] = spawnTrigger.getId();
+            }
+            spawnTriggers[i] = waveSpawnTriggers;
+        }
+        int[] activateSpawnsTriggers = new int[waves];
+        int[] activateNextWaveTriggers = new int[waves];
+        for (int i = 0; i < waves; i++) {
+            EntityWrapper activateSpawnsTriggger = entityWorld.getWrapped(entityWorld.createEntity());
+            activateSpawnsTriggger.setComponent(new InstantTriggerComponent());
+            activateSpawnsTriggger.setComponent(new CustomTargetComponent(spawnSourceEntity));
+            EntityWrapper activateSpawnEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            activateSpawnEffect.setComponent(new AddEffectTriggersComponent(spawnTriggers[i]));
+            activateSpawnsTriggger.setComponent(new TriggeredEffectComponent(activateSpawnEffect.getId()));
+            activateSpawnsTriggger.setComponent(new TriggerOnceComponent(true));
+            activateSpawnsTriggers[i] = activateSpawnsTriggger.getId();
+
+            EntityWrapper activateNextWaveTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+            activateNextWaveTrigger.setComponent(new TeamDeathTriggerComponent());
+            activateNextWaveTrigger.setComponent(new CustomTargetComponent(spawnCasterEntity));
+            activateNextWaveTrigger.setComponent(new TriggerOnceComponent(true));
+            activateNextWaveTriggers[i] = activateNextWaveTrigger.getId();
+
+            if (i == 0) {
+                activateSpawnsTriggger.setComponent(new TriggerSourceComponent(entity));
+                activateNextWaveTrigger.setComponent(new TriggerSourceComponent(spawnCasterEntity));
+            }
+        }
+        for (int i = 0; i < waves; i++) {
+            int activateNextWaveTrigger = activateNextWaveTriggers[i];
+            EntityWrapper activateNextWaveEffect = entityWorld.getWrapped(entityWorld.createEntity());
+            if (i < (waves - 1)){
+                activateNextWaveEffect.setComponent(new AddEffectTriggersComponent(activateSpawnsTriggers[i + 1], activateNextWaveTriggers[i + 1], respawnTeamTrigger));
+            } else {
+                activateNextWaveEffect.setComponent(new AddEffectTriggersComponent(winMapObjectiveTrigger));
+            }
+            entityWorld.setComponent(activateNextWaveTrigger, new TriggeredEffectComponent(activateNextWaveEffect.getId()));
+        }
     }
 
     @Override

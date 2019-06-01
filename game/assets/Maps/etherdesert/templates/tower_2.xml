@@ -45,7 +45,7 @@
                 <bonusFlatAttackSpeed>1.5</bonusFlatAttackSpeed>
                 <bonusFlatArmor>20</bonusFlatArmor>
                 <bonusFlatMagicResistance>20</bonusFlatMagicResistance>
-                <bonusFlatWalkSpeed>5</bonusFlatWalkSpeed>
+                <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
         <requestUpdateAttributes/>

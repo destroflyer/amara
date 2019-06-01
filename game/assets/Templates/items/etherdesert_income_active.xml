@@ -1,6 +1,6 @@
 <template>
     <entity id="spell">
-        <description>Adds 0.2 permanent gold per second income.</description>
+        <description>Adds 0.25 permanent gold per second income.</description>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
@@ -28,7 +28,7 @@
                             <entity>
                                 <continuousAttributes>
                                     <entity>
-                                        <bonusFlatGoldPerSecond>0.2</bonusFlatGoldPerSecond>
+                                        <bonusFlatGoldPerSecond>0.25</bonusFlatGoldPerSecond>
                                         <keepOnDeath/>
                                     </entity>
                                 </continuousAttributes>
