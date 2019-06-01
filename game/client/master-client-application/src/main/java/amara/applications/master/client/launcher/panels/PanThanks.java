@@ -37,8 +37,8 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("YouTube", "Feedback", "Interface/client/thanks/youtube.png", "http://youtube.com/destrostudios"),
         //Persons
         new Thanks("TeMMeZz", "Tester, Game logic advices", "Interface/client/thanks/nidalee.jpg"),
+        new Thanks("Icecold", "Tester, Game balance advices", "Interface/client/thanks/renekton.png"),
         new Thanks("egoVidiTe", "Tester", "Interface/client/user.png"),
-        new Thanks("Icecold", "Tester", "Interface/client/user.png"),
         new Thanks("Golden Eagle", "Tester", "Interface/client/user.png"),
         new Thanks("Yalee", "Tester", "Interface/client/user.png"),
         new Thanks("XBody", "Tester, Model advices", "Interface/client/user.png"),

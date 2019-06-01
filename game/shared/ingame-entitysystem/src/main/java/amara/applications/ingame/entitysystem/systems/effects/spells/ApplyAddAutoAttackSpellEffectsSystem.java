@@ -18,12 +18,13 @@ public class ApplyAddAutoAttackSpellEffectsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddAutoAttackSpellEffectsComponent.class)))
-        {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            int autoAttackEntity = entityWorld.getComponent(targetEntity, AutoAttackComponent.class).getAutoAttackEntity();
-            for(int spellEffect : entityWrapper.getComponent(AddAutoAttackSpellEffectsComponent.class).getSpellEffectEntities()){
-                entityWorld.setComponent(spellEffect, new CastedSpellComponent(autoAttackEntity));
+        for (int entity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddAutoAttackSpellEffectsComponent.class)) {
+            int targetEntity = entityWorld.getComponent(entity, ApplyEffectImpactComponent.class).getTargetEntity();
+            AutoAttackComponent autoAttackComponent = entityWorld.getComponent(targetEntity, AutoAttackComponent.class);
+            if (autoAttackComponent != null) {
+                for (int spellEffect : entityWorld.getComponent(entity, AddAutoAttackSpellEffectsComponent.class).getSpellEffectEntities()) {
+                    entityWorld.setComponent(spellEffect, new CastedSpellComponent(autoAttackComponent.getAutoAttackEntity()));
+                }
             }
         }
     }

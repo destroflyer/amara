@@ -163,6 +163,7 @@ public class Map_Etherdesert extends Map {
     public void initializePlayer(EntityWorld entityWorld, int playerEntity) {
         super.initializePlayer(entityWorld, playerEntity);
         int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
+        entityWorld.removeComponent(characterEntity, PassivesComponent.class);
         entityWorld.removeComponent(characterEntity, AutoAttackComponent.class);
         entityWorld.setComponent(characterEntity, new GoldComponent(200));
         entityWorld.setComponent(characterEntity, new IsBindedComponent(Float.MAX_VALUE));
