@@ -9,6 +9,7 @@ import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.systems.targets.TargetUtil;
+import amara.applications.ingame.entitysystem.systems.units.TeamVisionSystem;
 import amara.libraries.entitysystem.*;
 
 /**
@@ -30,21 +31,24 @@ public class AggroSystem implements EntitySystem {
                 int targetAggroPriority = Integer.MIN_VALUE;
                 float targetDistanceSquared = Float.MAX_VALUE;
                 for (int otherEntity : entityWorld.getEntitiesWithAll(PositionComponent.class)) {
-                    Vector2f otherPosition = entityWorld.getComponent(otherEntity, PositionComponent.class).getPosition();
-                    float distanceSquared = position.distanceSquared(otherPosition);
-                    // Target in range
-                    if (((autoAggroRange == -1) || (distanceSquared <= (autoAggroRange * autoAggroRange)))) {
-                        AggroPriorityComponent aggroPriorityComponent = entityWorld.getComponent(otherEntity, AggroPriorityComponent.class);
-                        int aggroPriority = ((aggroPriorityComponent != null) ? aggroPriorityComponent.getPriority() : 0);
-                        // Target valid
-                        if (TargetUtil.isValidTarget(entityWorld, entity, otherEntity, targetRulesEntity)) {
-                            // Target prioritization
-                            if ((targetEntity == -1)
-                            || (aggroPriority > targetAggroPriority)
-                            || ((aggroPriority == targetAggroPriority) && (distanceSquared < targetDistanceSquared))) {
-                                targetEntity = otherEntity;
-                                targetAggroPriority = aggroPriority;
-                                targetDistanceSquared = distanceSquared;
+                    // Target visible
+                    if(TeamVisionSystem.hasTeamSight(entityWorld, entity, otherEntity)) {
+                        Vector2f otherPosition = entityWorld.getComponent(otherEntity, PositionComponent.class).getPosition();
+                        float distanceSquared = position.distanceSquared(otherPosition);
+                        // Target in range
+                        if (((autoAggroRange == -1) || (distanceSquared <= (autoAggroRange * autoAggroRange)))) {
+                            AggroPriorityComponent aggroPriorityComponent = entityWorld.getComponent(otherEntity, AggroPriorityComponent.class);
+                            int aggroPriority = ((aggroPriorityComponent != null) ? aggroPriorityComponent.getPriority() : 0);
+                            // Target valid
+                            if (TargetUtil.isValidTarget(entityWorld, entity, otherEntity, targetRulesEntity)) {
+                                // Target prioritization
+                                if ((targetEntity == -1)
+                                        || (aggroPriority > targetAggroPriority)
+                                        || ((aggroPriority == targetAggroPriority) && (distanceSquared < targetDistanceSquared))) {
+                                    targetEntity = otherEntity;
+                                    targetAggroPriority = aggroPriority;
+                                    targetDistanceSquared = distanceSquared;
+                                }
                             }
                         }
                     }

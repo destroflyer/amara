@@ -144,8 +144,9 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         CastSpellQueueSystem castSpellQueueSystem = new CastSpellQueueSystem();
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue(), castSpellQueueSystem));
         addEntitySystem(new ExecuteAIActionsSystem((playerEntity) -> getAppState(BotsAppState.class).getBot(playerEntity)));
-        addEntitySystem(new AttackMoveSystem());
         addEntitySystem(new AggroResetTimersSystem());
+        addEntitySystem(new AggroSystem());
+        addEntitySystem(new AttackMoveSystem());
         addEntitySystem(new CheckCampUnionAggroSystem());
         addEntitySystem(new CheckCampInCombatSystem());
         addEntitySystem(new ResetOutOfCombatCampsSystem());
@@ -265,7 +266,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new TriggerStacksReachedEffectSystem());
         addEntitySystem(new TriggerRepeatingEffectSystem());
         addEntitySystem(new TriggerInstantEffectSystem());
-        addEntitySystem(new AggroSystem());
         addEntitySystem(new CheckCampMaximumAggroDistanceSystem());
         addEntitySystem(new SetIdleAnimationsSystem());
         addEntitySystem(new IntersectionPushSystem(intersectionObserver));
