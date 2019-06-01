@@ -37,7 +37,7 @@
                 <bonusFlatAttackSpeed>0.7</bonusFlatAttackSpeed>
                 <bonusFlatArmor>25</bonusFlatArmor>
                 <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
-                <bonusFlatWalkSpeed>6</bonusFlatWalkSpeed>
+                <bonusFlatWalkSpeed>6.75</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
         <attributesPerLevel>

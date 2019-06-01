@@ -131,7 +131,7 @@ public class CustomGameTemplates{
                 int bountyEntity = entityWorld.createEntity();
                 entityWorld.setComponent(bountyEntity, new BountyCreepScoreComponent());
                 entityWorld.setComponent(bountyEntity, new BountyGoldComponent(20 + (int) (spawnCounter * 0.5)));
-                entityWorld.setComponent(bountyEntity, new BountyExperienceComponent(59));
+                entityWorld.setComponent(bountyEntity, new BountyExperienceComponent(25 + (spawnCounter * 5)));
                 entityWrapper.setComponent(new BountyComponent(bountyEntity));
                 entityWrapper.setComponent(new LocalAvoidanceWalkComponent());
             }
@@ -179,7 +179,7 @@ public class CustomGameTemplates{
                 int bountyEntity = entityWorld.createEntity();
                 entityWorld.setComponent(bountyEntity, new BountyCreepScoreComponent());
                 entityWorld.setComponent(bountyEntity, new BountyGoldComponent(15 + (int) (spawnCounter * 0.5)));
-                entityWorld.setComponent(bountyEntity, new BountyExperienceComponent(29));
+                entityWorld.setComponent(bountyEntity, new BountyExperienceComponent(15 + (spawnCounter * 3)));
                 entityWrapper.setComponent(new BountyComponent(bountyEntity));
                 entityWrapper.setComponent(new LocalAvoidanceWalkComponent());
             }

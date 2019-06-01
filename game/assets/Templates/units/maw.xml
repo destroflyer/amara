@@ -42,10 +42,10 @@
                 <bonusFlatMaximumHealth>600</bonusFlatMaximumHealth>
                 <bonusFlatHealthRegeneration>1.5</bonusFlatHealthRegeneration>
                 <bonusFlatAttackDamage>60</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>0.6</bonusFlatAttackSpeed>
+                <bonusFlatAttackSpeed>0.65</bonusFlatAttackSpeed>
                 <bonusFlatArmor>30</bonusFlatArmor>
                 <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
-                <bonusFlatWalkSpeed>5.75</bonusFlatWalkSpeed>
+                <bonusFlatWalkSpeed>6.5</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
         <attributesPerLevel>

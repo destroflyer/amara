@@ -21,7 +21,7 @@ import amara.libraries.entitysystem.*;
  */
 public class PayOutBountiesSystem implements EntitySystem{
 
-    private final float experienceRange = 20;
+    private final float experienceRange = 28;
     private int defaultBountyRulesEntity = -1;
     private LinkedList<Integer> tmpRewardedEntities = new LinkedList<>();
 
