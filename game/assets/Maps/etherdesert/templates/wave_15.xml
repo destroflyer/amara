@@ -1,15 +1,9 @@
 <template>
     <entity>
-        <name>Shyvana</name>
+        <name>Soldier</name>
         <isMinion/>
         <!--model-->
-        <model>Models/shyvana/skin_default.xml</model>
-        <idleAnimation>
-            <entity id="idleAnimation">
-                <name>idle</name>
-                <loopDuration>5.42</loopDuration>
-            </entity>
-        </idleAnimation>
+        <model>Models/soldier/skin_default.xml</model>
         <walkAnimation>
             <entity>
                 <name>walk</name>
@@ -20,12 +14,17 @@
                 <name>auto_attack</name>
             </entity>
         </autoAttackAnimation>
-        <animation>#idleAnimation</animation>
+        <deathAnimation>
+            <entity>
+                <name>death</name>
+                <loopDuration>0.9</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
         <!--physics-->
         <hitbox>
-            <circle radius="0.5"/>
+            <circle radius="1"/>
         </hitbox>
-        <scale>3</scale>
         <intersectionPush/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
@@ -33,11 +32,11 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>7200</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>130</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>1.8</bonusFlatAttackSpeed>
-                <bonusFlatArmor>135</bonusFlatArmor>
-                <bonusFlatMagicResistance>135</bonusFlatMagicResistance>
+                <bonusFlatMaximumHealth>6000</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>550</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>2</bonusFlatAttackSpeed>
+                <bonusFlatArmor>220</bonusFlatArmor>
+                <bonusFlatMagicResistance>220</bonusFlatMagicResistance>
                 <bonusFlatWalkSpeed>5</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>

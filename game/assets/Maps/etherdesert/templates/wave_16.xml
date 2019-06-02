@@ -1,23 +1,24 @@
 <template>
     <entity>
-        <name>Shyvana</name>
+        <name>Jaime</name>
         <isMinion/>
         <!--model-->
-        <model>Models/shyvana/skin_default.xml</model>
+        <model>Models/jaime/skin_default.xml</model>
         <idleAnimation>
             <entity id="idleAnimation">
-                <name>idle</name>
-                <loopDuration>5.42</loopDuration>
+                <name>Idle</name>
+                <loopDuration>8</loopDuration>
             </entity>
         </idleAnimation>
         <walkAnimation>
             <entity>
-                <name>walk</name>
+                <name>Walk</name>
             </entity>
         </walkAnimation>
+        <walkStepDistance>4.5</walkStepDistance>
         <autoAttackAnimation>
             <entity>
-                <name>auto_attack</name>
+                <name>Punches</name>
             </entity>
         </autoAttackAnimation>
         <animation>#idleAnimation</animation>
@@ -33,11 +34,11 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>7200</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>130</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>1.8</bonusFlatAttackSpeed>
-                <bonusFlatArmor>135</bonusFlatArmor>
-                <bonusFlatMagicResistance>135</bonusFlatMagicResistance>
+                <bonusFlatMaximumHealth>12000</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>800</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>2.5</bonusFlatAttackSpeed>
+                <bonusFlatArmor>250</bonusFlatArmor>
+                <bonusFlatMagicResistance>250</bonusFlatMagicResistance>
                 <bonusFlatWalkSpeed>5</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
@@ -48,7 +49,7 @@
         <bounty>
             <entity>
                 <bountyCreepScore></bountyCreepScore>
-                <bountyGold>80</bountyGold>
+                <bountyGold>100</bountyGold>
             </entity>
         </bounty>
         <!--spells-->

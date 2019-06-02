@@ -1,13 +1,13 @@
 <template>
     <entity>
-        <name>Shyvana</name>
+        <name>Pseudospider Tower</name>
         <isMinion/>
         <!--model-->
-        <model>Models/shyvana/skin_default.xml</model>
+        <model>Models/pseudospider/skin.xml</model>
         <idleAnimation>
             <entity id="idleAnimation">
                 <name>idle</name>
-                <loopDuration>5.42</loopDuration>
+                <loopDuration>1.5</loopDuration>
             </entity>
         </idleAnimation>
         <walkAnimation>
@@ -17,44 +17,46 @@
         </walkAnimation>
         <autoAttackAnimation>
             <entity>
-                <name>auto_attack</name>
+                <name>melee_attack</name>
             </entity>
         </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>death</name>
+                <loopDuration>1</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
         <animation>#idleAnimation</animation>
         <!--physics-->
         <hitbox>
             <circle radius="0.5"/>
         </hitbox>
-        <scale>3</scale>
+        <scale>1.5</scale>
         <intersectionPush/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
         <!--stats-->
         <isAlive/>
+        <isRespawnable/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>7200</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>130</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>1.8</bonusFlatAttackSpeed>
-                <bonusFlatArmor>135</bonusFlatArmor>
-                <bonusFlatMagicResistance>135</bonusFlatMagicResistance>
-                <bonusFlatWalkSpeed>5</bonusFlatWalkSpeed>
+                <bonusFlatMaximumHealth>2000</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>31</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>1.3</bonusFlatAttackSpeed>
+                <bonusFlatArmor>40</bonusFlatArmor>
+                <bonusFlatMagicResistance>40</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>6</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
         <requestUpdateAttributes/>
         <sightRange>28</sightRange>
         <isTargetable/>
         <isVulnerable/>
-        <bounty>
-            <entity>
-                <bountyCreepScore></bountyCreepScore>
-                <bountyGold>80</bountyGold>
-            </entity>
-        </bounty>
         <!--spells-->
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
-        <autoAggro>20</autoAggro>
+        <autoAggro>-1</autoAggro>
     </entity>
 </template>

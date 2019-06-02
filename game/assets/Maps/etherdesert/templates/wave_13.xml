@@ -1,15 +1,9 @@
 <template>
     <entity>
-        <name>Shyvana</name>
+        <name>Minion</name>
         <isMinion/>
         <!--model-->
-        <model>Models/shyvana/skin_default.xml</model>
-        <idleAnimation>
-            <entity id="idleAnimation">
-                <name>idle</name>
-                <loopDuration>5.42</loopDuration>
-            </entity>
-        </idleAnimation>
+        <model>Models/minion/skin_gentleman.xml</model>
         <walkAnimation>
             <entity>
                 <name>walk</name>
@@ -20,12 +14,10 @@
                 <name>auto_attack</name>
             </entity>
         </autoAttackAnimation>
-        <animation>#idleAnimation</animation>
         <!--physics-->
         <hitbox>
-            <circle radius="0.5"/>
+            <circle radius="1"/>
         </hitbox>
-        <scale>3</scale>
         <intersectionPush/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
@@ -33,12 +25,12 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>7200</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>130</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>1.8</bonusFlatAttackSpeed>
-                <bonusFlatArmor>135</bonusFlatArmor>
-                <bonusFlatMagicResistance>135</bonusFlatMagicResistance>
-                <bonusFlatWalkSpeed>5</bonusFlatWalkSpeed>
+                <bonusFlatMaximumHealth>4000</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>180</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>2</bonusFlatAttackSpeed>
+                <bonusFlatArmor>180</bonusFlatArmor>
+                <bonusFlatMagicResistance>180</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
         <requestUpdateAttributes/>
@@ -48,7 +40,7 @@
         <bounty>
             <entity>
                 <bountyCreepScore></bountyCreepScore>
-                <bountyGold>80</bountyGold>
+                <bountyGold>55</bountyGold>
             </entity>
         </bounty>
         <!--spells-->

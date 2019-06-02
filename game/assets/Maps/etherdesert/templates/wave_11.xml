@@ -23,7 +23,7 @@
         <animation>#idleAnimation</animation>
         <!--physics-->
         <hitbox>
-            <circle radius="1"/>
+            <circle radius="0.2"/>
         </hitbox>
         <scale>8</scale>
         <intersectionPush/>
@@ -33,7 +33,7 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>20000</bonusFlatMaximumHealth>
+                <bonusFlatMaximumHealth>15000</bonusFlatMaximumHealth>
                 <bonusFlatAttackDamage>200</bonusFlatAttackDamage>
                 <bonusFlatAttackSpeed>2.5</bonusFlatAttackSpeed>
                 <bonusFlatArmor>200</bonusFlatArmor>

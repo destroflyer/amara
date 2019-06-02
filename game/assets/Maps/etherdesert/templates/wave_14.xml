@@ -1,31 +1,31 @@
 <template>
     <entity>
-        <name>Shyvana</name>
+        <name>Forest Monster</name>
         <isMinion/>
         <!--model-->
-        <model>Models/shyvana/skin_default.xml</model>
+        <model>Models/forest_monster/skin.xml</model>
         <idleAnimation>
             <entity id="idleAnimation">
-                <name>idle</name>
-                <loopDuration>5.42</loopDuration>
+                <name>Idle</name>
+                <loopDuration>8</loopDuration>
             </entity>
         </idleAnimation>
         <walkAnimation>
             <entity>
-                <name>walk</name>
+                <name>Walk</name>
             </entity>
         </walkAnimation>
         <autoAttackAnimation>
             <entity>
-                <name>auto_attack</name>
+                <name>Attack</name>
             </entity>
         </autoAttackAnimation>
         <animation>#idleAnimation</animation>
         <!--physics-->
         <hitbox>
-            <circle radius="0.5"/>
+            <circle radius="0.2"/>
         </hitbox>
-        <scale>3</scale>
+        <scale>5</scale>
         <intersectionPush/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
@@ -33,12 +33,12 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>7200</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>130</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>1.8</bonusFlatAttackSpeed>
-                <bonusFlatArmor>135</bonusFlatArmor>
-                <bonusFlatMagicResistance>135</bonusFlatMagicResistance>
-                <bonusFlatWalkSpeed>5</bonusFlatWalkSpeed>
+                <bonusFlatMaximumHealth>9000</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>800</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.5</bonusFlatAttackSpeed>
+                <bonusFlatArmor>250</bonusFlatArmor>
+                <bonusFlatMagicResistance>250</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>3</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
         <requestUpdateAttributes/>
@@ -48,7 +48,7 @@
         <bounty>
             <entity>
                 <bountyCreepScore></bountyCreepScore>
-                <bountyGold>80</bountyGold>
+                <bountyGold>65</bountyGold>
             </entity>
         </bounty>
         <!--spells-->

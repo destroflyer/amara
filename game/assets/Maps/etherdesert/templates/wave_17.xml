@@ -1,15 +1,9 @@
 <template>
     <entity>
-        <name>Shyvana</name>
+        <name>Baron Nashor</name>
         <isMinion/>
         <!--model-->
-        <model>Models/shyvana/skin_default.xml</model>
-        <idleAnimation>
-            <entity id="idleAnimation">
-                <name>idle</name>
-                <loopDuration>5.42</loopDuration>
-            </entity>
-        </idleAnimation>
+        <model>Models/cow/skin_baron.xml</model>
         <walkAnimation>
             <entity>
                 <name>walk</name>
@@ -20,12 +14,11 @@
                 <name>auto_attack</name>
             </entity>
         </autoAttackAnimation>
-        <animation>#idleAnimation</animation>
         <!--physics-->
         <hitbox>
-            <circle radius="0.5"/>
+            <circle radius="0.25"/>
         </hitbox>
-        <scale>3</scale>
+        <scale>4</scale>
         <intersectionPush/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
@@ -33,12 +26,12 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>7200</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>130</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>1.8</bonusFlatAttackSpeed>
-                <bonusFlatArmor>135</bonusFlatArmor>
-                <bonusFlatMagicResistance>135</bonusFlatMagicResistance>
-                <bonusFlatWalkSpeed>5</bonusFlatWalkSpeed>
+                <bonusFlatMaximumHealth>35000</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>1000</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>2.5</bonusFlatAttackSpeed>
+                <bonusFlatArmor>300</bonusFlatArmor>
+                <bonusFlatMagicResistance>300</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
         <requestUpdateAttributes/>
@@ -47,8 +40,8 @@
         <isVulnerable/>
         <bounty>
             <entity>
-                <bountyCreepScore></bountyCreepScore>
-                <bountyGold>80</bountyGold>
+                <bountyCharacterKill></bountyCharacterKill>
+                <bountyGold>300</bountyGold>
             </entity>
         </bounty>
         <!--spells-->

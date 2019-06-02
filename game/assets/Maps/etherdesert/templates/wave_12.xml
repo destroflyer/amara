@@ -1,15 +1,9 @@
 <template>
     <entity>
-        <name>Shyvana</name>
+        <name>Swimming Minion</name>
         <isMinion/>
         <!--model-->
-        <model>Models/shyvana/skin_default.xml</model>
-        <idleAnimation>
-            <entity id="idleAnimation">
-                <name>idle</name>
-                <loopDuration>5.42</loopDuration>
-            </entity>
-        </idleAnimation>
+        <model>Models/swimming_minion/skin_default.xml</model>
         <walkAnimation>
             <entity>
                 <name>walk</name>
@@ -17,15 +11,13 @@
         </walkAnimation>
         <autoAttackAnimation>
             <entity>
-                <name>auto_attack</name>
+                <name>walk</name>
             </entity>
         </autoAttackAnimation>
-        <animation>#idleAnimation</animation>
         <!--physics-->
         <hitbox>
-            <circle radius="0.5"/>
+            <circle radius="1"/>
         </hitbox>
-        <scale>3</scale>
         <intersectionPush/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
@@ -33,12 +25,12 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>7200</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>130</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>1.8</bonusFlatAttackSpeed>
-                <bonusFlatArmor>135</bonusFlatArmor>
-                <bonusFlatMagicResistance>135</bonusFlatMagicResistance>
-                <bonusFlatWalkSpeed>5</bonusFlatWalkSpeed>
+                <bonusFlatMaximumHealth>2800</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>145</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>1.5</bonusFlatAttackSpeed>
+                <bonusFlatArmor>155</bonusFlatArmor>
+                <bonusFlatMagicResistance>155</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
         <requestUpdateAttributes/>
@@ -48,12 +40,12 @@
         <bounty>
             <entity>
                 <bountyCreepScore></bountyCreepScore>
-                <bountyGold>80</bountyGold>
+                <bountyGold>50</bountyGold>
             </entity>
         </bounty>
         <!--spells-->
         <autoAttack>
-            <entity template="spells/melee_autoattack"/>
+            <entity template="spells/ranged_autoattack"/>
         </autoAttack>
         <autoAggro>20</autoAggro>
     </entity>
