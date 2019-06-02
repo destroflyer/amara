@@ -5,7 +5,7 @@
         <spellVisualisation>erika_hit_the_mark</spellVisualisation>
         <spellIndicator>
             <entity>
-                <linearIndicator width="2" height="14"/>
+                <linearIndicator width="2" height="16"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>

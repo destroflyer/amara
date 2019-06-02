@@ -8,6 +8,7 @@ import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.audio.*;
 import amara.applications.ingame.entitysystem.components.buffs.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
+import amara.applications.ingame.entitysystem.components.effects.buffs.*;
 import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.effects.general.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
@@ -133,7 +134,7 @@ public class Map_Etherdesert extends Map {
             entityWorld.setComponent(campfireEntitty, new SightRangeComponent(30));
             entityWorld.setComponent(campfireEntitty, new TeamComponent(0));
         }
-        // Waves
+        // Respawn towers trigger
         respawnTeamTrigger = entityWorld.createEntity();
         entityWorld.setComponent(respawnTeamTrigger, new InstantTriggerComponent());
         entityWorld.setComponent(respawnTeamTrigger, new TeamTargetComponent(0));
@@ -167,13 +168,28 @@ public class Map_Etherdesert extends Map {
         entityWorld.removeComponent(characterEntity, AutoAttackComponent.class);
         entityWorld.setComponent(characterEntity, new GoldComponent(200));
         entityWorld.setComponent(characterEntity, new IsBindedComponent(Float.MAX_VALUE));
-        // GoldPerTime Buff
-        int goldPerTimeBuffEntity = entityWorld.createEntity();
-        int goldPerTimeBuffAttributesEntity = entityWorld.createEntity();
-        entityWorld.setComponent(goldPerTimeBuffAttributesEntity, new BonusFlatGoldPerSecondComponent(0.25f));
-        entityWorld.setComponent(goldPerTimeBuffEntity, new ContinuousAttributesComponent(goldPerTimeBuffAttributesEntity));
-        entityWorld.setComponent(goldPerTimeBuffEntity, new KeepOnDeathComponent());
-        ApplyAddBuffsSystem.addBuff(entityWorld, characterEntity, goldPerTimeBuffEntity);
+        // Disable income trigger
+        int disableIncomeTrigger = entityWorld.createEntity();
+        entityWorld.setComponent(disableIncomeTrigger, new InstantTriggerComponent());
+        entityWorld.setComponent(disableIncomeTrigger, new CustomTargetComponent(characterEntity));
+        int disableIncomeEffect = entityWorld.createEntity();
+        int disableIncomeBuff = entityWorld.createEntity();
+        int disableIncomeBuffContinuousAttributes = entityWorld.createEntity();
+        entityWorld.setComponent(disableIncomeBuffContinuousAttributes, new DisableGoldPerSecondComponent());
+        entityWorld.setComponent(disableIncomeBuff, new ContinuousAttributesComponent(disableIncomeBuffContinuousAttributes));
+        entityWorld.setComponent(disableIncomeEffect, new AddBuffComponent(disableIncomeBuff, -1));
+        entityWorld.setComponent(disableIncomeTrigger, new TriggeredEffectComponent(disableIncomeEffect));
+        entityWorld.setComponent(disableIncomeTrigger, new TriggerOnceComponent());
+        entityWorld.setComponent(disableIncomeTrigger, new TriggerDelayComponent(1));
+        ApplyAddBuffsSystem.addBuff(entityWorld, characterEntity, disableIncomeBuff, -1);
+        // Enable income trigger
+        int enableIncomeTrigger = entityWorld.createEntity();
+        entityWorld.setComponent(enableIncomeTrigger, new InstantTriggerComponent());
+        entityWorld.setComponent(enableIncomeTrigger, new CustomTargetComponent(characterEntity));
+        int enableIncomeEffect = entityWorld.createEntity();
+        entityWorld.setComponent(enableIncomeEffect, new RemoveBuffComponent(disableIncomeBuff));
+        entityWorld.setComponent(enableIncomeTrigger, new TriggeredEffectComponent(enableIncomeEffect));
+        entityWorld.setComponent(enableIncomeTrigger, new TriggerOnceComponent());
         // Waves
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
         int spawnCasterEntity = entityWorld.createEntity();
@@ -204,7 +220,7 @@ public class Map_Etherdesert extends Map {
                 spawnEffect.setComponent(new SpawnComponent(spawnInformation.getId()));
                 spawnTrigger.setComponent(new TriggeredEffectComponent(spawnEffect.getId()));
                 float spawnDelay = ((i == 6) ? 0.5f : 1.25f);
-                spawnTrigger.setComponent(new TriggerDelayComponent(11 + (spawnDelay * r)));
+                spawnTrigger.setComponent(new TriggerDelayComponent(10 + (spawnDelay * r)));
                 spawnTrigger.setComponent(new TriggerOnceComponent(true));
                 waveSpawnTriggers[r] = spawnTrigger.getId();
             }
@@ -237,7 +253,7 @@ public class Map_Etherdesert extends Map {
             int activateNextWaveTrigger = activateNextWaveTriggers[i];
             EntityWrapper activateNextWaveEffect = entityWorld.getWrapped(entityWorld.createEntity());
             if (i < (waves - 1)){
-                activateNextWaveEffect.setComponent(new AddEffectTriggersComponent(activateSpawnsTriggers[i + 1], activateNextWaveTriggers[i + 1], respawnTeamTrigger));
+                activateNextWaveEffect.setComponent(new AddEffectTriggersComponent(enableIncomeTrigger, disableIncomeTrigger, respawnTeamTrigger, activateSpawnsTriggers[i + 1], activateNextWaveTriggers[i + 1]));
             } else {
                 activateNextWaveEffect.setComponent(new AddEffectTriggersComponent(winMapObjectiveTrigger));
             }

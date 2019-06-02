@@ -32,8 +32,8 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>800</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>60</bonusFlatAttackDamage>
+                <bonusFlatMaximumHealth>750</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>55</bonusFlatAttackDamage>
                 <bonusFlatAttackSpeed>0.4</bonusFlatAttackSpeed>
                 <bonusFlatArmor>80</bonusFlatArmor>
                 <bonusFlatMagicResistance>80</bonusFlatMagicResistance>

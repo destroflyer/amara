@@ -28,6 +28,7 @@ public class AttributeBonus{
     private float percentageLifesteal = 0;
     private float percentageIncomingDamageAmplification = 0;
     private float percentageOutgoingDamageAmplification = 0;
+    private boolean isGoldPerSecondDisabled = false;
     private float flatGoldPerSecond = 0;
 
     public void addFlatMaximumHealth(float value){
@@ -149,12 +150,16 @@ public class AttributeBonus{
     public float getPercentageOutgoingDamageAmplification(){
         return percentageOutgoingDamageAmplification;
     }
+
+    public void setGoldPerSecondDisabled(boolean goldPerSecondDisabled) {
+        isGoldPerSecondDisabled = goldPerSecondDisabled;
+    }
     
     public void addFlatGoldPerSecond(float value){
         flatGoldPerSecond += value;
     }
 
     public float getFlatGoldPerSecond(){
-        return flatGoldPerSecond;
+        return (isGoldPerSecondDisabled ? 0 : flatGoldPerSecond);
     }
 }

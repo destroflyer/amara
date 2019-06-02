@@ -41,8 +41,8 @@ public class UpdateAttributesSystem implements EntitySystem{
             InventoryComponent inventoryComponent = entityWrapper.getComponent(InventoryComponent.class);
             if(inventoryComponent != null){
                 int[] itemEntities = inventoryComponent.getItemEntities();
-                for(int i=0;i<itemEntities.length;i++){
-                    addAttributeBonus(entityWorld, attributeBonus, itemEntities[i]);
+                for (int itemEntity : itemEntities) {
+                    addAttributeBonus(entityWorld, attributeBonus, itemEntity);
                 }
             }
             for(EntityWrapper buffStatus : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ActiveBuffComponent.class))){
@@ -213,6 +213,9 @@ public class UpdateAttributesSystem implements EntitySystem{
         BonusFlatGoldPerSecondComponent bonusFlatGoldPerSecondComponent = bonusEntityWrapper.getComponent(BonusFlatGoldPerSecondComponent.class);
         if(bonusFlatGoldPerSecondComponent != null){
             attributeBonus.addFlatGoldPerSecond(bonusFlatGoldPerSecondComponent.getValue());
+        }
+        if(bonusEntityWrapper.hasComponent(DisableGoldPerSecondComponent.class)){
+            attributeBonus.setGoldPerSecondDisabled(true);
         }
     }
 }

@@ -413,6 +413,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.attributes.CriticalChanceComponent(value);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent.class);
+        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent>("disableGoldPerSecond"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent construct(){
+                return new amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);

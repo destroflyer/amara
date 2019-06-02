@@ -288,7 +288,10 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
     public void update(float lastTimePerFrame){
         if(mainApplication.getGame().isStarted()){
             float gameSpeed = entityWorld.getComponent(Game.ENTITY, GameSpeedComponent.class).getSpeed();
-            super.update(lastTimePerFrame * gameSpeed);
+            for (float i = gameSpeed; i > 0; i--) {
+                float simulatedTimePerFrame = Math.min(i, 1) * lastTimePerFrame;
+                super.update(simulatedTimePerFrame);
+            }
         }
     }
 }

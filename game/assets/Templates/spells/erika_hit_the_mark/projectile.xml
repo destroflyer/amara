@@ -12,7 +12,7 @@
                 <acceptEnemies/>
             </entity>
         </intersectionRules>
-        <lifetime>0.7</lifetime>
+        <lifetime>0.8</lifetime>
     </entity>
     <!--trigger spell effects-->
     <entity>

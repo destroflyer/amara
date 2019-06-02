@@ -12,14 +12,13 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class ApplyAddComponentsSystem implements EntitySystem{
+public class ApplyAddComponentsSystem implements EntitySystem {
     
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddComponentsComponent.class)))
-        {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            for(Object component : entityWrapper.getComponent(AddComponentsComponent.class).getComponents()){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddComponentsComponent.class)) {
+            int targetID = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
+            for (Object component : entityWorld.getComponent(effectImpactEntity, AddComponentsComponent.class).getComponents()) {
                 entityWorld.setComponent(targetID, component);
             }
         }

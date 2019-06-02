@@ -192,7 +192,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     if(replaceSpellWithNewSpellComponent != null){
                         effectImpact.setComponent(new ReplaceSpellWithNewSpellComponent(replaceSpellWithNewSpellComponent.getSpellIndex(), replaceSpellWithNewSpellComponent.getNewSpellTemplate() + "," + effectCastTargetComponent.getTargetEntity()));
                     }
-                    EntityUtil.transferComponents(effect, effectImpact, new Class[]{
+                    EntityUtil.transferComponents(effect, effectImpact, new Class[] {
                         AddComponentsComponent.class,
                         RemoveComponentsComponent.class,
                         FinishObjectiveComponent.class,
@@ -264,10 +264,10 @@ public class CalculateEffectImpactSystem implements EntitySystem{
         cleanupUnreferencedAppliedEffects(entityWorld);
     }
 
-    public static float getResistanceDamageFactor(float resistance) {
+    private static float getResistanceDamageFactor(float resistance) {
         if (resistance >= 0) {
             return (100 / (100 + resistance));
-        } else{
+        } else {
             return (2 - (100 / (100 - resistance)));
         }
     }
