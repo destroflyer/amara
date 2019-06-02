@@ -1,0 +1,12 @@
+<template>
+    <entity>
+        <itemID>etherdesert_income_big</itemID>
+        <name>Income (Big)</name>
+        <itemRecipe gold="50"/>
+        <isSellable>50</isSellable>
+        <!--stats-->
+        <itemActive consumable="true">
+            <entity template="./etherdesert_income_active,18"/>
+        </itemActive>
+    </entity>
+</template>

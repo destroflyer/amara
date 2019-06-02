@@ -63,12 +63,14 @@ public class Map_Etherdesert extends Map {
         shop.setComponent(new PositionComponent(new Vector2f(100, 20)));
         shop.setComponent(new DirectionComponent(new Vector2f(0, 1)));
         shop.setComponent(new ShopItemsComponent(
-            "items/etherdesert_income",
+            "items/etherdesert_income_small",
+            "items/etherdesert_income_big",
             "items/etherdesert_tower_0",
             "items/etherdesert_tower_7",
             "items/etherdesert_tower_5",
             "items/etherdesert_tower_1",
             "items/etherdesert_tower_6",
+            "items/etherdesert_tower_9",
             "items/etherdesert_tower_8",
             "items/etherdesert_tower_2",
             "items/etherdesert_tower_3",

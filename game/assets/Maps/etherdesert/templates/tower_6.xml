@@ -1,6 +1,6 @@
 <template>
     <entity id="entity">
-        <name>Steve Tower</name>
+        <name>Dr. Mundo Tower</name>
         <isMinion/>
         <!--model-->
         <model>Models/steve/skin_default.xml</model>
@@ -35,7 +35,7 @@
         <baseAttributes>
             <entity>
                 <bonusFlatMaximumHealth>1700</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>8</bonusFlatAttackDamage>
+                <bonusFlatAttackDamage>9</bonusFlatAttackDamage>
                 <bonusFlatAttackSpeed>0.6</bonusFlatAttackSpeed>
                 <bonusFlatArmor>25</bonusFlatArmor>
                 <bonusFlatMagicResistance>30</bonusFlatMagicResistance>

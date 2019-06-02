@@ -25,7 +25,7 @@
         <hitbox>
             <circle radius="0.2"/>
         </hitbox>
-        <scale>5</scale>
+        <scale>4</scale>
         <intersectionPush/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
@@ -33,9 +33,9 @@
         <isAlive/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>9000</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>800</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>0.5</bonusFlatAttackSpeed>
+                <bonusFlatMaximumHealth>7000</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>550</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.8</bonusFlatAttackSpeed>
                 <bonusFlatArmor>250</bonusFlatArmor>
                 <bonusFlatMagicResistance>250</bonusFlatMagicResistance>
                 <bonusFlatWalkSpeed>3</bonusFlatWalkSpeed>

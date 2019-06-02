@@ -1,6 +1,6 @@
 <template>
     <entity id="spell">
-        <description>Adds 20 gold income per round.</description>
+        <description>Adds [parameter0] gold income per round.</description>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
@@ -28,7 +28,7 @@
                             <entity>
                                 <continuousAttributes>
                                     <entity>
-                                        <bonusFlatGoldPerSecond>20</bonusFlatGoldPerSecond>
+                                        <bonusFlatGoldPerSecond>[parameter0]</bonusFlatGoldPerSecond>
                                         <keepOnDeath/>
                                     </entity>
                                 </continuousAttributes>

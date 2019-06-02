@@ -1,44 +1,45 @@
 <template>
     <entity>
-        <name>Jaime</name>
+        <name>Son Goku Tower</name>
         <isMinion/>
         <!--model-->
-        <model>Models/jaime/skin_default.xml</model>
+        <model>Models/steve/skin_songoku.xml</model>
         <idleAnimation>
             <entity id="idleAnimation">
-                <name>Idle</name>
+                <name>stand</name>
                 <loopDuration>8</loopDuration>
             </entity>
         </idleAnimation>
         <walkAnimation>
             <entity>
-                <name>Walk</name>
+                <name>walk</name>
             </entity>
         </walkAnimation>
-        <walkStepDistance>4.5</walkStepDistance>
+        <walkStepDistance>5</walkStepDistance>
         <autoAttackAnimation>
             <entity>
-                <name>Punches</name>
+                <name>punch</name>
             </entity>
         </autoAttackAnimation>
         <animation>#idleAnimation</animation>
         <!--physics-->
         <hitbox>
-            <circle radius="0.5"/>
+            <circle radius="1"/>
         </hitbox>
-        <scale>3</scale>
+        <scale>1</scale>
         <intersectionPush/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
         <!--stats-->
         <isAlive/>
+        <isRespawnable/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>8000</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>480</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>2.5</bonusFlatAttackSpeed>
-                <bonusFlatArmor>250</bonusFlatArmor>
-                <bonusFlatMagicResistance>250</bonusFlatMagicResistance>
+                <bonusFlatMaximumHealth>1000</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>46</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>2</bonusFlatAttackSpeed>
+                <bonusFlatArmor>25</bonusFlatArmor>
+                <bonusFlatMagicResistance>25</bonusFlatMagicResistance>
                 <bonusFlatWalkSpeed>5</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
@@ -46,16 +47,10 @@
         <sightRange>28</sightRange>
         <isTargetable/>
         <isVulnerable/>
-        <bounty>
-            <entity>
-                <bountyCreepScore></bountyCreepScore>
-                <bountyGold>100</bountyGold>
-            </entity>
-        </bounty>
         <!--spells-->
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
-        <autoAggro>20</autoAggro>
+        <autoAggro>-1</autoAggro>
     </entity>
 </template>
