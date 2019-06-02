@@ -220,7 +220,7 @@ public class Map_Etherdesert extends Map {
                 spawnEffect.setComponent(new SpawnComponent(spawnInformation.getId()));
                 spawnTrigger.setComponent(new TriggeredEffectComponent(spawnEffect.getId()));
                 float spawnDelay = ((i == 6) ? 0.5f : 1.25f);
-                spawnTrigger.setComponent(new TriggerDelayComponent(10 + (spawnDelay * r)));
+                spawnTrigger.setComponent(new TriggerDelayComponent(13 + (spawnDelay * r)));
                 spawnTrigger.setComponent(new TriggerOnceComponent(true));
                 waveSpawnTriggers[r] = spawnTrigger.getId();
             }

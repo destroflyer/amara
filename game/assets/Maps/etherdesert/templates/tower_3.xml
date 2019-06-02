@@ -41,7 +41,7 @@
         <isRespawnable/>
         <baseAttributes>
             <entity>
-                <bonusFlatMaximumHealth>2800</bonusFlatMaximumHealth>
+                <bonusFlatMaximumHealth>3000</bonusFlatMaximumHealth>
                 <bonusFlatAttackDamage>120</bonusFlatAttackDamage>
                 <bonusFlatAttackSpeed>0.9</bonusFlatAttackSpeed>
                 <bonusFlatArmor>70</bonusFlatArmor>
