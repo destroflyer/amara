@@ -1,9 +1,11 @@
 package amara.applications.ingame.entitysystem.templates;
 
 import com.jme3.math.Vector2f;
+import amara.libraries.entitysystem.EntityWorld;
+import amara.libraries.entitysystem.synchronizing.*;
 import amara.libraries.entitysystem.synchronizing.fieldserializers.*;
 import amara.libraries.entitysystem.templates.*;
-import amara.libraries.entitysystem.synchronizing.*;
+import org.jdom2.Element;
 
 /**GENERATED**/
 public class ComponentsRegistrator{
@@ -23,10 +25,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.AbilityPowerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.AbilityPowerComponent>("abilityPower"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.AbilityPowerComponent>("abilityPower"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.AbilityPowerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.AbilityPowerComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -41,10 +43,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.ArmorComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.ArmorComponent>("armor"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.ArmorComponent>("armor"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.ArmorComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.ArmorComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -59,10 +61,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.AttackDamageComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.AttackDamageComponent>("attackDamage"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.AttackDamageComponent>("attackDamage"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.AttackDamageComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.AttackDamageComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -77,10 +79,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.AttackSpeedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.AttackSpeedComponent>("attackSpeed"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.AttackSpeedComponent>("attackSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.AttackSpeedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.AttackSpeedComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -95,10 +97,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusFlatAbilityPowerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatAbilityPowerComponent>("bonusFlatAbilityPower"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatAbilityPowerComponent>("bonusFlatAbilityPower"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatAbilityPowerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatAbilityPowerComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -113,10 +115,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusFlatArmorComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatArmorComponent>("bonusFlatArmor"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatArmorComponent>("bonusFlatArmor"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatArmorComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatArmorComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -131,10 +133,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackDamageComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackDamageComponent>("bonusFlatAttackDamage"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackDamageComponent>("bonusFlatAttackDamage"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackDamageComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackDamageComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -149,10 +151,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackSpeedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackSpeedComponent>("bonusFlatAttackSpeed"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackSpeedComponent>("bonusFlatAttackSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackSpeedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackSpeedComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -167,10 +169,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent>("bonusFlatGoldPerSecond"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent>("bonusFlatGoldPerSecond"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -185,10 +187,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent>("bonusFlatHealthRegeneration"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent>("bonusFlatHealthRegeneration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -203,10 +205,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusFlatMagicResistanceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatMagicResistanceComponent>("bonusFlatMagicResistance"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatMagicResistanceComponent>("bonusFlatMagicResistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatMagicResistanceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatMagicResistanceComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -221,10 +223,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumHealthComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumHealthComponent>("bonusFlatMaximumHealth"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumHealthComponent>("bonusFlatMaximumHealth"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumHealthComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumHealthComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -239,10 +241,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusFlatWalkSpeedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatWalkSpeedComponent>("bonusFlatWalkSpeed"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatWalkSpeedComponent>("bonusFlatWalkSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatWalkSpeedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatWalkSpeedComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -257,10 +259,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent>("bonusPercentageAttackSpeed"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent>("bonusPercentageAttackSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -275,10 +277,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent>("bonusPercentageCooldownSpeed"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent>("bonusPercentageCooldownSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -293,10 +295,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent>("bonusPercentageCriticalChance"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent>("bonusPercentageCriticalChance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -311,10 +313,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent>("bonusPercentageIncomingDamageAmplification"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent>("bonusPercentageIncomingDamageAmplification"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -329,10 +331,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageLifestealComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageLifestealComponent>("bonusPercentageLifesteal"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageLifestealComponent>("bonusPercentageLifesteal"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageLifestealComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageLifestealComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -347,10 +349,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent>("bonusPercentageOutgoingDamageAmplification"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent>("bonusPercentageOutgoingDamageAmplification"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -365,10 +367,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent>("bonusPercentageWalkSpeed"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent>("bonusPercentageWalkSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -383,10 +385,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.CooldownSpeedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.CooldownSpeedComponent>("cooldownSpeed"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.CooldownSpeedComponent>("cooldownSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.CooldownSpeedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.CooldownSpeedComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -401,10 +403,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.CriticalChanceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.CriticalChanceComponent>("criticalChance"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.CriticalChanceComponent>("criticalChance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.CriticalChanceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.CriticalChanceComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -414,10 +416,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent>("disableGoldPerSecond"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent>("disableGoldPerSecond"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent();
             }
         });
@@ -427,10 +429,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent>("goldPerSecond"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent>("goldPerSecond"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -445,10 +447,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.HealthComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.HealthComponent>("health"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.HealthComponent>("health"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.HealthComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.HealthComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -463,10 +465,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.HealthRegenerationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.HealthRegenerationComponent>("healthRegeneration"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.HealthRegenerationComponent>("healthRegeneration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.HealthRegenerationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.HealthRegenerationComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -481,10 +483,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent>("incomingDamageAmplification"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent>("incomingDamageAmplification"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -499,10 +501,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.LifestealComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.LifestealComponent>("lifesteal"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.LifestealComponent>("lifesteal"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.LifestealComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.LifestealComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -517,10 +519,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.MagicResistanceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.MagicResistanceComponent>("magicResistance"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.MagicResistanceComponent>("magicResistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.MagicResistanceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.MagicResistanceComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -535,10 +537,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent>("maximumHealth"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent>("maximumHealth"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -553,10 +555,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent>("outgoingDamageAmplification"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent>("outgoingDamageAmplification"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -566,10 +568,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent>("requestUpdateAttributes"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent>("requestUpdateAttributes"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent();
             }
         });
@@ -579,10 +581,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.attributes.WalkSpeedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.WalkSpeedComponent>("walkSpeed"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.WalkSpeedComponent>("walkSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.WalkSpeedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.attributes.WalkSpeedComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -593,35 +595,35 @@ public class ComponentsRegistrator{
         });
         //audio
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.audio.AudioComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.audio.AudioComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioComponent>("audio"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioComponent>("audio"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioComponent construct(){
+            public amara.applications.ingame.entitysystem.components.audio.AudioComponent construct(EntityWorld entityWorld, Element element){
                 String audioPath = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.audio.AudioComponent(audioPath);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent>("audioGlobal"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent>("audioGlobal"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent construct(){
+            public amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent>("audioLoop"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent>("audioLoop"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent construct(){
+            public amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent>("audioRemoveAfterPlaying"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent>("audioRemoveAfterPlaying"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent construct(){
+            public amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent();
             }
         });
@@ -631,11 +633,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.audio.AudioSourceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioSourceComponent>("audioSource"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioSourceComponent>("audioSource"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioSourceComponent construct(){
-                int entity = createChildEntity(0, "entity");
+            public amara.applications.ingame.entitysystem.components.audio.AudioSourceComponent construct(EntityWorld entityWorld, Element element){
+                int entity = createChildEntity(entityWorld, element, 0, "entity");
                 return new amara.applications.ingame.entitysystem.components.audio.AudioSourceComponent(entity);
             }
         });
@@ -650,11 +652,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.audio.AudioSuccessorComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioSuccessorComponent>("audioSuccessor"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioSuccessorComponent>("audioSuccessor"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioSuccessorComponent construct(){
-                int audioEntity = createChildEntity(0, "audioEntity");
+            public amara.applications.ingame.entitysystem.components.audio.AudioSuccessorComponent construct(EntityWorld entityWorld, Element element){
+                int audioEntity = createChildEntity(entityWorld, element, 0, "audioEntity");
                 float delay = 0;
                 String delayText = element.getAttributeValue("delay");
                 if((delayText != null) && (delayText.length() > 0)){
@@ -664,10 +666,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.audio.AudioVolumeComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.audio.AudioVolumeComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioVolumeComponent>("audioVolume"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioVolumeComponent>("audioVolume"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioVolumeComponent construct(){
+            public amara.applications.ingame.entitysystem.components.audio.AudioVolumeComponent construct(EntityWorld entityWorld, Element element){
                 float volume = 0;
                 String volumeText = element.getText();
                 if((volumeText != null) && (volumeText.length() > 0)){
@@ -677,18 +679,18 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.audio.StartPlayingAudioComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.audio.StartPlayingAudioComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.StartPlayingAudioComponent>("startPlayingAudio"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.StartPlayingAudioComponent>("startPlayingAudio"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.StartPlayingAudioComponent construct(){
+            public amara.applications.ingame.entitysystem.components.audio.StartPlayingAudioComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.audio.StartPlayingAudioComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.audio.StopPlayingAudioComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.audio.StopPlayingAudioComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.StopPlayingAudioComponent>("stopPlayingAudio"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.StopPlayingAudioComponent>("stopPlayingAudio"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.StopPlayingAudioComponent construct(){
+            public amara.applications.ingame.entitysystem.components.audio.StopPlayingAudioComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.audio.StopPlayingAudioComponent();
             }
         });
@@ -700,11 +702,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffComponent>("areaBuff"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffComponent>("areaBuff"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffComponent construct(){
-                int buffEntity = createChildEntity(0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffComponent construct(EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffComponent(buffEntity);
             }
         });
@@ -714,11 +716,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent>("areaBuffTargetRules"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent>("areaBuffTargetRules"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent construct(){
-                int targetRulesEntity = createChildEntity(0, "targetRulesEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent construct(EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent(targetRulesEntity);
             }
         });
@@ -728,11 +730,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.areas.AreaOriginComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.areas.AreaOriginComponent>("areaOrigin"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.areas.AreaOriginComponent>("areaOrigin"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaOriginComponent construct(){
-                int originEntity = createChildEntity(0, "originEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaOriginComponent construct(EntityWorld entityWorld, Element element){
+                int originEntity = createChildEntity(entityWorld, element, 0, "originEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.areas.AreaOriginComponent(originEntity);
             }
         });
@@ -742,11 +744,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.areas.AreaSourceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.areas.AreaSourceComponent>("areaSource"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.areas.AreaSourceComponent>("areaSource"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaSourceComponent construct(){
-                int sourceEntity = createChildEntity(0, "sourceEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaSourceComponent construct(EntityWorld entityWorld, Element element){
+                int sourceEntity = createChildEntity(entityWorld, element, 0, "sourceEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.areas.AreaSourceComponent(sourceEntity);
             }
         });
@@ -756,11 +758,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.BuffStacksComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.BuffStacksComponent>("buffStacks"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.BuffStacksComponent>("buffStacks"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.BuffStacksComponent construct(){
-                int stacksEntity = createChildEntity(0, "stacksEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.BuffStacksComponent construct(EntityWorld entityWorld, Element element){
+                int stacksEntity = createChildEntity(entityWorld, element, 0, "stacksEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.BuffStacksComponent(stacksEntity);
             }
         });
@@ -770,11 +772,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesComponent>("continuousAttributes"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesComponent>("continuousAttributes"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesComponent construct(){
-                int bonusAttributesEntity = createChildEntity(0, "bonusAttributesEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesComponent construct(EntityWorld entityWorld, Element element){
+                int bonusAttributesEntity = createChildEntity(entityWorld, element, 0, "bonusAttributesEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesComponent(bonusAttributesEntity);
             }
         });
@@ -784,19 +786,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesPerStackComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesPerStackComponent>("continuousAttributesPerStack"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesPerStackComponent>("continuousAttributesPerStack"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesPerStackComponent construct(){
-                int bonusAttributesEntity = createChildEntity(0, "bonusAttributesEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesPerStackComponent construct(EntityWorld entityWorld, Element element){
+                int bonusAttributesEntity = createChildEntity(entityWorld, element, 0, "bonusAttributesEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesPerStackComponent(bonusAttributesEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.buffs.KeepOnDeathComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.KeepOnDeathComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.KeepOnDeathComponent>("keepOnDeath"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.KeepOnDeathComponent>("keepOnDeath"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.KeepOnDeathComponent construct(){
+            public amara.applications.ingame.entitysystem.components.buffs.KeepOnDeathComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.buffs.KeepOnDeathComponent();
             }
         });
@@ -806,11 +808,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent>("onBuffRemoveEffectTriggers"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent>("onBuffRemoveEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -825,11 +827,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.RepeatingEffectComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.RepeatingEffectComponent>("repeatingEffect"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.RepeatingEffectComponent>("repeatingEffect"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.RepeatingEffectComponent construct(){
-                int effectEntity = createChildEntity(0, "effectEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.RepeatingEffectComponent construct(EntityWorld entityWorld, Element element){
+                int effectEntity = createChildEntity(entityWorld, element, 0, "effectEntity");
                 float interval = 0;
                 String intervalText = element.getAttributeValue("interval");
                 if((intervalText != null) && (intervalText.length() > 0)){
@@ -845,10 +847,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.stacks.MaximumStacksComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.stacks.MaximumStacksComponent>("maximumStacks"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.stacks.MaximumStacksComponent>("maximumStacks"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.stacks.MaximumStacksComponent construct(){
+            public amara.applications.ingame.entitysystem.components.buffs.stacks.MaximumStacksComponent construct(EntityWorld entityWorld, Element element){
                 int stacks = 0;
                 String stacksText = element.getText();
                 if((stacksText != null) && (stacksText.length() > 0)){
@@ -863,10 +865,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.stacks.StacksComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.stacks.StacksComponent>("stacks"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.stacks.StacksComponent>("stacks"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.stacks.StacksComponent construct(){
+            public amara.applications.ingame.entitysystem.components.buffs.stacks.StacksComponent construct(EntityWorld entityWorld, Element element){
                 int stacks = 0;
                 String stacksText = element.getText();
                 if((stacksText != null) && (stacksText.length() > 0)){
@@ -881,10 +883,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.stacks.StacksRefreshmentComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.stacks.StacksRefreshmentComponent>("stacksRefreshment"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.stacks.StacksRefreshmentComponent>("stacksRefreshment"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.stacks.StacksRefreshmentComponent construct(){
+            public amara.applications.ingame.entitysystem.components.buffs.stacks.StacksRefreshmentComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -905,20 +907,20 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent>("activeBuff"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent>("activeBuff"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent construct(){
-                int targetEntity = createChildEntity(0, "targetEntity");
-                int buffEntity = createChildEntity(0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent construct(EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent(targetEntity, buffEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.buffs.status.BuffVisualisationComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.status.BuffVisualisationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.BuffVisualisationComponent>("buffVisualisation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.BuffVisualisationComponent>("buffVisualisation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.status.BuffVisualisationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.buffs.status.BuffVisualisationComponent construct(EntityWorld entityWorld, Element element){
                 String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.buffs.status.BuffVisualisationComponent(name);
             }
@@ -929,10 +931,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.status.RemainingBuffDurationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.RemainingBuffDurationComponent>("remainingBuffDuration"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.RemainingBuffDurationComponent>("remainingBuffDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.status.RemainingBuffDurationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.buffs.status.RemainingBuffDurationComponent construct(EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
@@ -942,10 +944,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.buffs.status.RemoveFromTargetComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.status.RemoveFromTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.RemoveFromTargetComponent>("removeFromTarget"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.RemoveFromTargetComponent>("removeFromTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.status.RemoveFromTargetComponent construct(){
+            public amara.applications.ingame.entitysystem.components.buffs.status.RemoveFromTargetComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.buffs.status.RemoveFromTargetComponent();
             }
         });
@@ -955,10 +957,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent>("timeSinceLastRepeatingEffect"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent>("timeSinceLastRepeatingEffect"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent construct(){
+            public amara.applications.ingame.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -969,18 +971,18 @@ public class ComponentsRegistrator{
         });
         //camps
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.camps.CampHealthResetComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.camps.CampHealthResetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampHealthResetComponent>("campHealthReset"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampHealthResetComponent>("campHealthReset"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampHealthResetComponent construct(){
+            public amara.applications.ingame.entitysystem.components.camps.CampHealthResetComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.camps.CampHealthResetComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent>("campInCombat"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent>("campInCombat"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent construct(){
+            public amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent();
             }
         });
@@ -990,10 +992,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.camps.CampMaximumAggroDistanceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampMaximumAggroDistanceComponent>("campMaximumAggroDistance"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampMaximumAggroDistanceComponent>("campMaximumAggroDistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampMaximumAggroDistanceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.camps.CampMaximumAggroDistanceComponent construct(EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
@@ -1008,10 +1010,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.camps.CampRemainingRespawnDurationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampRemainingRespawnDurationComponent>("campRemainingRespawnDuration"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampRemainingRespawnDurationComponent>("campRemainingRespawnDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampRemainingRespawnDurationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.camps.CampRemainingRespawnDurationComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -1026,10 +1028,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.camps.CampRespawnDurationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampRespawnDurationComponent>("campRespawnDuration"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampRespawnDurationComponent>("campRespawnDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampRespawnDurationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.camps.CampRespawnDurationComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -1039,10 +1041,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.camps.CampSpawnComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.camps.CampSpawnComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampSpawnComponent>("campSpawn"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampSpawnComponent>("campSpawn"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampSpawnComponent construct(){
+            public amara.applications.ingame.entitysystem.components.camps.CampSpawnComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.camps.CampSpawnComponent();
             }
         });
@@ -1052,19 +1054,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.camps.CampSpawnInformationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampSpawnInformationComponent>("campSpawnInformation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampSpawnInformationComponent>("campSpawnInformation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampSpawnInformationComponent construct(){
-                int[] spawnInformationEntities = createChildEntities(0, "spawnInformationEntities");
+            public amara.applications.ingame.entitysystem.components.camps.CampSpawnInformationComponent construct(EntityWorld entityWorld, Element element){
+                int[] spawnInformationEntities = createChildEntities(entityWorld, element, 0, "spawnInformationEntities");
                 return new amara.applications.ingame.entitysystem.components.camps.CampSpawnInformationComponent(spawnInformationEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.camps.CampUnionAggroComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.camps.CampUnionAggroComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampUnionAggroComponent>("campUnionAggro"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampUnionAggroComponent>("campUnionAggro"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampUnionAggroComponent construct(){
+            public amara.applications.ingame.entitysystem.components.camps.CampUnionAggroComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.camps.CampUnionAggroComponent();
             }
         });
@@ -1075,19 +1077,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent>("hasBuffCondition"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent>("hasBuffCondition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent construct(){
-                int[] buffEntities = createChildEntities(0, "buffEntities");
+            public amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent construct(EntityWorld entityWorld, Element element){
+                int[] buffEntities = createChildEntities(entityWorld, element, 0, "buffEntities");
                 return new amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent(buffEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent>("hasHealthPortionCondition"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent>("hasHealthPortionCondition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent construct(EntityWorld entityWorld, Element element){
                 float portion = 0;
                 String portionText = element.getAttributeValue("portion");
                 if((portionText != null) && (portionText.length() > 0)){
@@ -1112,11 +1114,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.conditions.OrConditionsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.OrConditionsComponent>("orConditions"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.OrConditionsComponent>("orConditions"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.conditions.OrConditionsComponent construct(){
-                int[] conditionEntities = createChildEntities(0, "conditionEntities");
+            public amara.applications.ingame.entitysystem.components.conditions.OrConditionsComponent construct(EntityWorld entityWorld, Element element){
+                int[] conditionEntities = createChildEntities(entityWorld, element, 0, "conditionEntities");
                 return new amara.applications.ingame.entitysystem.components.conditions.OrConditionsComponent(conditionEntities);
             }
         });
@@ -1127,11 +1129,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.AffectedTargetsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.AffectedTargetsComponent>("affectedTargets"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.AffectedTargetsComponent>("affectedTargets"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.AffectedTargetsComponent construct(){
-                int[] targetEntities = createChildEntities(0, "targetEntities");
+            public amara.applications.ingame.entitysystem.components.effects.AffectedTargetsComponent construct(EntityWorld entityWorld, Element element){
+                int[] targetEntities = createChildEntities(entityWorld, element, 0, "targetEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.AffectedTargetsComponent(targetEntities);
             }
         });
@@ -1142,10 +1144,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.aggro.DrawTeamAggroComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.aggro.DrawTeamAggroComponent>("drawTeamAggro"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.aggro.DrawTeamAggroComponent>("drawTeamAggro"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.aggro.DrawTeamAggroComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.aggro.DrawTeamAggroComponent construct(EntityWorld entityWorld, Element element){
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
@@ -1160,11 +1162,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent>("applyEffectImpact"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent>("applyEffectImpact"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent construct(){
-                int targetEntity = createChildEntity(0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent construct(EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent(targetEntity);
             }
         });
@@ -1175,11 +1177,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.audio.PlayAudioComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.audio.PlayAudioComponent>("playAudio"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.audio.PlayAudioComponent>("playAudio"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.audio.PlayAudioComponent construct(){
-                int[] audioEntities = createChildEntities(0, "audioEntities");
+            public amara.applications.ingame.entitysystem.components.effects.audio.PlayAudioComponent construct(EntityWorld entityWorld, Element element){
+                int[] audioEntities = createChildEntities(entityWorld, element, 0, "audioEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.audio.PlayAudioComponent(audioEntities);
             }
         });
@@ -1189,11 +1191,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.audio.StopAudioComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.audio.StopAudioComponent>("stopAudio"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.audio.StopAudioComponent>("stopAudio"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.audio.StopAudioComponent construct(){
-                int[] audioEntities = createChildEntities(0, "audioEntities");
+            public amara.applications.ingame.entitysystem.components.effects.audio.StopAudioComponent construct(EntityWorld entityWorld, Element element){
+                int[] audioEntities = createChildEntities(entityWorld, element, 0, "audioEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.audio.StopAudioComponent(audioEntities);
             }
         });
@@ -1209,11 +1211,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.buffs.AddBuffComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.AddBuffComponent>("addBuff"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.AddBuffComponent>("addBuff"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.AddBuffComponent construct(){
-                int buffEntity = createChildEntity(0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.effects.buffs.AddBuffComponent construct(EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
                 float duration = 0;
                 String durationText = element.getAttributeValue("duration");
                 if((durationText != null) && (durationText.length() > 0)){
@@ -1228,10 +1230,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.buffs.AddNewBuffComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.AddNewBuffComponent>("addNewBuff"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.AddNewBuffComponent>("addNewBuff"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.AddNewBuffComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.buffs.AddNewBuffComponent construct(EntityWorld entityWorld, Element element){
                 String templateExpression = xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("templateExpression"));
                 float duration = 0;
                 String durationText = element.getAttributeValue("duration");
@@ -1248,11 +1250,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent>("addBuffArea"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent>("addBuffArea"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent construct(){
-                int buffAreaEntity = createChildEntity(0, "buffAreaEntity");
+            public amara.applications.ingame.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent construct(EntityWorld entityWorld, Element element){
+                int buffAreaEntity = createChildEntity(entityWorld, element, 0, "buffAreaEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent(buffAreaEntity);
             }
         });
@@ -1262,11 +1264,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent>("removeBuffArea"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent>("removeBuffArea"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent construct(){
-                int buffAreaEntity = createChildEntity(0, "buffAreaEntity");
+            public amara.applications.ingame.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent construct(EntityWorld entityWorld, Element element){
+                int buffAreaEntity = createChildEntity(entityWorld, element, 0, "buffAreaEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent(buffAreaEntity);
             }
         });
@@ -1276,11 +1278,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.buffs.RemoveBuffComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.RemoveBuffComponent>("removeBuff"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.RemoveBuffComponent>("removeBuff"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.RemoveBuffComponent construct(){
-                int buffEntity = createChildEntity(0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.effects.buffs.RemoveBuffComponent construct(EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.buffs.RemoveBuffComponent(buffEntity);
             }
         });
@@ -1291,10 +1293,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.buffs.stacks.AddStacksComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.stacks.AddStacksComponent>("addStacks"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.stacks.AddStacksComponent>("addStacks"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.stacks.AddStacksComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.buffs.stacks.AddStacksComponent construct(EntityWorld entityWorld, Element element){
                 int stacks = 0;
                 String stacksText = element.getText();
                 if((stacksText != null) && (stacksText.length() > 0)){
@@ -1304,10 +1306,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.buffs.stacks.ClearStacksComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.buffs.stacks.ClearStacksComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.stacks.ClearStacksComponent>("clearStacks"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.stacks.ClearStacksComponent>("clearStacks"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.stacks.ClearStacksComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.buffs.stacks.ClearStacksComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.buffs.stacks.ClearStacksComponent();
             }
         });
@@ -1317,10 +1319,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.buffs.stacks.RemoveStacksComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.stacks.RemoveStacksComponent>("removeStacks"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.stacks.RemoveStacksComponent>("removeStacks"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.stacks.RemoveStacksComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.buffs.stacks.RemoveStacksComponent construct(EntityWorld entityWorld, Element element){
                 int stacks = 0;
                 String stacksText = element.getText();
                 if((stacksText != null) && (stacksText.length() > 0)){
@@ -1336,11 +1338,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceComponent>("effectCastSource"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceComponent>("effectCastSource"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceComponent construct(){
-                int sourceEntity = createChildEntity(0, "sourceEntity");
+            public amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceComponent construct(EntityWorld entityWorld, Element element){
+                int sourceEntity = createChildEntity(entityWorld, element, 0, "sourceEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceComponent(sourceEntity);
             }
         });
@@ -1350,11 +1352,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceSpellComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceSpellComponent>("effectCastSourceSpell"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceSpellComponent>("effectCastSourceSpell"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceSpellComponent construct(){
-                int spellEntity = createChildEntity(0, "spellEntity");
+            public amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceSpellComponent construct(EntityWorld entityWorld, Element element){
+                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceSpellComponent(spellEntity);
             }
         });
@@ -1364,11 +1366,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.casts.EffectCastTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.casts.EffectCastTargetComponent>("effectCastTarget"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.casts.EffectCastTargetComponent>("effectCastTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.casts.EffectCastTargetComponent construct(){
-                int targetEntity = createChildEntity(0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.effects.casts.EffectCastTargetComponent construct(EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.casts.EffectCastTargetComponent(targetEntity);
             }
         });
@@ -1379,10 +1381,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingComponent>("addBinding"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingComponent>("addBinding"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -1397,10 +1399,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent>("addBindingImmune"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent>("addBindingImmune"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -1415,11 +1417,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupComponent>("addKnockup"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupComponent>("addKnockup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupComponent construct(){
-                int knockupEntity = createChildEntity(0, "knockupEntity");
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupComponent construct(EntityWorld entityWorld, Element element){
+                int knockupEntity = createChildEntity(entityWorld, element, 0, "knockupEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupComponent(knockupEntity);
             }
         });
@@ -1429,10 +1431,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent>("addKnockupImmune"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent>("addKnockupImmune"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -1447,10 +1449,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceComponent>("addSilence"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceComponent>("addSilence"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -1465,10 +1467,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent>("addSilenceImmune"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent>("addSilenceImmune"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -1483,10 +1485,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunComponent>("addStun"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunComponent>("addStun"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -1501,10 +1503,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent>("addStunImmune"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent>("addStunImmune"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -1520,10 +1522,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent>("knockupDuration"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent>("knockupDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -1538,10 +1540,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent>("knockupHeight"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent>("knockupHeight"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent construct(EntityWorld entityWorld, Element element){
                 float height = 0;
                 String heightText = element.getText();
                 if((heightText != null) && (heightText.length() > 0)){
@@ -1551,94 +1553,94 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent>("removeBinding"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent>("removeBinding"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent>("removeKnockup"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent>("removeKnockup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent>("removeSilence"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent>("removeSilence"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunComponent>("removeStun"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunComponent>("removeStun"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.CustomEffectValuesComponent.class);
         //damage
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.damage.AddTargetabilityComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.damage.AddTargetabilityComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.AddTargetabilityComponent>("addTargetability"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.AddTargetabilityComponent>("addTargetability"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.AddTargetabilityComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.damage.AddTargetabilityComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.damage.AddTargetabilityComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.damage.AddVulnerabilityComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.damage.AddVulnerabilityComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.AddVulnerabilityComponent>("addVulnerability"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.AddVulnerabilityComponent>("addVulnerability"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.AddVulnerabilityComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.damage.AddVulnerabilityComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.damage.AddVulnerabilityComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.damage.CanCritComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.damage.CanCritComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.CanCritComponent>("canCrit"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.CanCritComponent>("canCrit"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.CanCritComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.damage.CanCritComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.damage.CanCritComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.damage.MagicDamageComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.damage.MagicDamageComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.MagicDamageComponent>("magicDamage"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.MagicDamageComponent>("magicDamage"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.MagicDamageComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.damage.MagicDamageComponent construct(EntityWorld entityWorld, Element element){
                 String expression = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.effects.damage.MagicDamageComponent(expression);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.damage.PhysicalDamageComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.damage.PhysicalDamageComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.PhysicalDamageComponent>("physicalDamage"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.PhysicalDamageComponent>("physicalDamage"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.PhysicalDamageComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.damage.PhysicalDamageComponent construct(EntityWorld entityWorld, Element element){
                 String expression = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.effects.damage.PhysicalDamageComponent(expression);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.damage.RemoveTargetabilityComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.damage.RemoveTargetabilityComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.RemoveTargetabilityComponent>("removeTargetability"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.RemoveTargetabilityComponent>("removeTargetability"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.RemoveTargetabilityComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.damage.RemoveTargetabilityComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.damage.RemoveTargetabilityComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.damage.RemoveVulnerabilityComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.damage.RemoveVulnerabilityComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.RemoveVulnerabilityComponent>("removeVulnerability"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.RemoveVulnerabilityComponent>("removeVulnerability"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.RemoveVulnerabilityComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.damage.RemoveVulnerabilityComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.damage.RemoveVulnerabilityComponent();
             }
         });
@@ -1648,10 +1650,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.damage.ResultingMagicDamageComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.ResultingMagicDamageComponent>("resultingMagicDamage"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.ResultingMagicDamageComponent>("resultingMagicDamage"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.ResultingMagicDamageComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.damage.ResultingMagicDamageComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -1666,10 +1668,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent>("resultingPhysicalDamage"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent>("resultingPhysicalDamage"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -1679,19 +1681,19 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.FinishObjectiveComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.FinishObjectiveComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.FinishObjectiveComponent>("finishObjective"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.FinishObjectiveComponent>("finishObjective"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.FinishObjectiveComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.FinishObjectiveComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.FinishObjectiveComponent();
             }
         });
         //game
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.game.PlayCinematicComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.game.PlayCinematicComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.game.PlayCinematicComponent>("playCinematic"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.game.PlayCinematicComponent>("playCinematic"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.game.PlayCinematicComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.game.PlayCinematicComponent construct(EntityWorld entityWorld, Element element){
                 String cinematicClassName = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.effects.game.PlayCinematicComponent(cinematicClassName);
             }
@@ -1704,11 +1706,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.general.AddEffectTriggersComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.general.AddEffectTriggersComponent>("addEffectTriggers"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.general.AddEffectTriggersComponent>("addEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.general.AddEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.effects.general.AddEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.general.AddEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -1719,28 +1721,28 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent>("removeEffectTriggers"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent>("removeEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent(effectTriggerEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.general.RemoveEntityComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.general.RemoveEntityComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.general.RemoveEntityComponent>("removeEntity"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.general.RemoveEntityComponent>("removeEntity"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.general.RemoveEntityComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.general.RemoveEntityComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.general.RemoveEntityComponent();
             }
         });
         //heals
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.heals.HealComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.heals.HealComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.heals.HealComponent>("heal"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.heals.HealComponent>("heal"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.heals.HealComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.heals.HealComponent construct(EntityWorld entityWorld, Element element){
                 String expression = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.effects.heals.HealComponent(expression);
             }
@@ -1751,10 +1753,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.heals.ResultingHealComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.heals.ResultingHealComponent>("resultingHeal"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.heals.ResultingHealComponent>("resultingHeal"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.heals.ResultingHealComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.heals.ResultingHealComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
@@ -1770,19 +1772,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.movement.MoveComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.movement.MoveComponent>("move"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.movement.MoveComponent>("move"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.movement.MoveComponent construct(){
-                int movementEntity = createChildEntity(0, "movementEntity");
+            public amara.applications.ingame.entitysystem.components.effects.movement.MoveComponent construct(EntityWorld entityWorld, Element element){
+                int movementEntity = createChildEntity(entityWorld, element, 0, "movementEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.movement.MoveComponent(movementEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.movement.StopComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.movement.StopComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.movement.StopComponent>("stop"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.movement.StopComponent>("stop"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.movement.StopComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.movement.StopComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.movement.StopComponent();
             }
         });
@@ -1792,29 +1794,29 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.movement.TeleportComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.movement.TeleportComponent>("teleport"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.movement.TeleportComponent>("teleport"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.movement.TeleportComponent construct(){
-                int targetEntity = createChildEntity(0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.effects.movement.TeleportComponent construct(EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.movement.TeleportComponent(targetEntity);
             }
         });
         //physics
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.ActivateHitboxComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.physics.ActivateHitboxComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.ActivateHitboxComponent>("activateHitbox"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.ActivateHitboxComponent>("activateHitbox"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.physics.ActivateHitboxComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.physics.ActivateHitboxComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.physics.ActivateHitboxComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.AddCollisionGroupsComponent.class);
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent>("deactivateHitbox"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent>("deactivateHitbox"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent();
             }
         });
@@ -1826,19 +1828,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent>("addPopup"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent>("addPopup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent construct(){
-                int popupEntity = createChildEntity(0, "popupEntity");
+            public amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent construct(EntityWorld entityWorld, Element element){
+                int popupEntity = createChildEntity(entityWorld, element, 0, "popupEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent(popupEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent>("removePopup"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent>("removePopup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent();
             }
         });
@@ -1848,11 +1850,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent>("prepareEffect"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent>("prepareEffect"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent construct(){
-                int effectEntity = createChildEntity(0, "effectEntity");
+            public amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent construct(EntityWorld entityWorld, Element element){
+                int effectEntity = createChildEntity(entityWorld, element, 0, "effectEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent(effectEntity);
             }
         });
@@ -1862,10 +1864,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.RemainingEffectDelayComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.RemainingEffectDelayComponent>("remainingEffectDelay"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.RemainingEffectDelayComponent>("remainingEffectDelay"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.RemainingEffectDelayComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.RemainingEffectDelayComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -1881,11 +1883,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.spawns.SpawnComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spawns.SpawnComponent>("spawn"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spawns.SpawnComponent>("spawn"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spawns.SpawnComponent construct(){
-                int[] spawnInformationEntities = createChildEntities(0, "spawnInformationEntities");
+            public amara.applications.ingame.entitysystem.components.effects.spawns.SpawnComponent construct(EntityWorld entityWorld, Element element){
+                int[] spawnInformationEntities = createChildEntities(entityWorld, element, 0, "spawnInformationEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.spawns.SpawnComponent(spawnInformationEntities);
             }
         });
@@ -1896,11 +1898,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent>("addAutoAttackSpellEffects"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent>("addAutoAttackSpellEffects"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent construct(){
-                int[] spellEffectEntities = createChildEntities(0, "spellEffectEntities");
+            public amara.applications.ingame.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent construct(EntityWorld entityWorld, Element element){
+                int[] spellEffectEntities = createChildEntities(entityWorld, element, 0, "spellEffectEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent(spellEffectEntities);
             }
         });
@@ -1910,11 +1912,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent>("addSpellsSpellEffects"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent>("addSpellsSpellEffects"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent construct(){
-                int[] spellEffectEntities = createChildEntities(0, "spellEffectEntities");
+            public amara.applications.ingame.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent construct(EntityWorld entityWorld, Element element){
+                int[] spellEffectEntities = createChildEntities(entityWorld, element, 0, "spellEffectEntities");
                 boolean setSourcesToSpells = false;
                 String setSourcesToSpellsText = element.getAttributeValue("setSourcesToSpells");
                 if((setSourcesToSpellsText != null) && (setSourcesToSpellsText.length() > 0)){
@@ -1929,11 +1931,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent>("removeSpellEffects"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent>("removeSpellEffects"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent construct(){
-                int[] spellEffectEntities = createChildEntities(0, "spellEffectEntities");
+            public amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent construct(EntityWorld entityWorld, Element element){
+                int[] spellEffectEntities = createChildEntities(entityWorld, element, 0, "spellEffectEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent(spellEffectEntities);
             }
         });
@@ -1943,24 +1945,24 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent>("replaceSpellWithExistingSpell"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent>("replaceSpellWithExistingSpell"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent construct(EntityWorld entityWorld, Element element){
                 int spellIndex = 0;
                 String spellIndexText = element.getAttributeValue("spellIndex");
                 if((spellIndexText != null) && (spellIndexText.length() > 0)){
                     spellIndex = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, spellIndexText));
                 }
-                int spellEntity = createChildEntity(0, "spellEntity");
+                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent(spellIndex, spellEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent>("replaceSpellWithNewSpell"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent>("replaceSpellWithNewSpell"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent construct(EntityWorld entityWorld, Element element){
                 int spellIndex = 0;
                 String spellIndexText = element.getAttributeValue("spellIndex");
                 if((spellIndexText != null) && (spellIndexText.length() > 0)){
@@ -1976,20 +1978,20 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.spells.TriggerSpellEffectsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.TriggerSpellEffectsComponent>("triggerSpellEffects"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.TriggerSpellEffectsComponent>("triggerSpellEffects"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.TriggerSpellEffectsComponent construct(){
-                int spellEntity = createChildEntity(0, "spellEntity");
+            public amara.applications.ingame.entitysystem.components.effects.spells.TriggerSpellEffectsComponent construct(EntityWorld entityWorld, Element element){
+                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.spells.TriggerSpellEffectsComponent(spellEntity);
             }
         });
         //units
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent>("addGold"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent>("addGold"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent construct(EntityWorld entityWorld, Element element){
                 float gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
@@ -1999,35 +2001,35 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent>("cancelAction"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent>("cancelAction"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent>("respawn"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent>("respawn"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent();
             }
         });
         //vision
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent>("addStealth"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent>("addStealth"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent>("removeStealth"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent>("removeStealth"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent();
             }
         });
@@ -2038,37 +2040,37 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.visuals.PlayAnimationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.visuals.PlayAnimationComponent>("playAnimation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.visuals.PlayAnimationComponent>("playAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.visuals.PlayAnimationComponent construct(){
-                int animationEntity = createChildEntity(0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.effects.visuals.PlayAnimationComponent construct(EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.visuals.PlayAnimationComponent(animationEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.visuals.StopAnimationComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.effects.visuals.StopAnimationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.visuals.StopAnimationComponent>("stopAnimation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.visuals.StopAnimationComponent>("stopAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.visuals.StopAnimationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.effects.visuals.StopAnimationComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.visuals.StopAnimationComponent();
             }
         });
         //game
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.game.CinematicComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.game.CinematicComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.game.CinematicComponent>("cinematic"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.game.CinematicComponent>("cinematic"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.game.CinematicComponent construct(){
+            public amara.applications.ingame.entitysystem.components.game.CinematicComponent construct(EntityWorld entityWorld, Element element){
                 String cinematicClassName = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.game.CinematicComponent(cinematicClassName);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.game.GameSpeedComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.game.GameSpeedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.game.GameSpeedComponent>("gameSpeed"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.game.GameSpeedComponent>("gameSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.game.GameSpeedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.game.GameSpeedComponent construct(EntityWorld entityWorld, Element element){
                 float speed = 0;
                 String speedText = element.getText();
                 if((speedText != null) && (speedText.length() > 0)){
@@ -2083,10 +2085,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.game.GameTimeComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.game.GameTimeComponent>("gameTime"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.game.GameTimeComponent>("gameTime"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.game.GameTimeComponent construct(){
+            public amara.applications.ingame.entitysystem.components.game.GameTimeComponent construct(EntityWorld entityWorld, Element element){
                 float time = 0;
                 String timeText = element.getText();
                 if((timeText != null) && (timeText.length() > 0)){
@@ -2097,44 +2099,44 @@ public class ComponentsRegistrator{
         });
         //general
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent>("customCleanup"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent>("customCleanup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent construct(){
+            public amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.general.DescriptionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.general.DescriptionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.DescriptionComponent>("description"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.DescriptionComponent>("description"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.general.DescriptionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.general.DescriptionComponent construct(EntityWorld entityWorld, Element element){
                 String description = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.general.DescriptionComponent(description);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.general.NameComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.general.NameComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.NameComponent>("name"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.NameComponent>("name"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.general.NameComponent construct(){
+            public amara.applications.ingame.entitysystem.components.general.NameComponent construct(EntityWorld entityWorld, Element element){
                 String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.general.NameComponent(name);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.general.TemporaryComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.general.TemporaryComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.TemporaryComponent>("temporary"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.TemporaryComponent>("temporary"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.general.TemporaryComponent construct(){
+            public amara.applications.ingame.entitysystem.components.general.TemporaryComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.general.TemporaryComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.general.UniqueComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.general.UniqueComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.UniqueComponent>("unique"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.UniqueComponent>("unique"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.general.UniqueComponent construct(){
+            public amara.applications.ingame.entitysystem.components.general.UniqueComponent construct(EntityWorld entityWorld, Element element){
                 String id = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.general.UniqueComponent(id);
             }
@@ -2151,12 +2153,12 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.input.CastSpellComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.input.CastSpellComponent>("castSpell"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.input.CastSpellComponent>("castSpell"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.input.CastSpellComponent construct(){
-                int spellEntity = createChildEntity(0, "spellEntity");
-                int targetEntity = createChildEntity(0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.input.CastSpellComponent construct(EntityWorld entityWorld, Element element){
+                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
+                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.input.CastSpellComponent(spellEntity, targetEntity);
             }
         });
@@ -2167,19 +2169,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.items.InventoryComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.InventoryComponent>("inventory"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.InventoryComponent>("inventory"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.InventoryComponent construct(){
-                int[] itemEntities = createChildEntities(0, "itemEntities");
+            public amara.applications.ingame.entitysystem.components.items.InventoryComponent construct(EntityWorld entityWorld, Element element){
+                int[] itemEntities = createChildEntities(entityWorld, element, 0, "itemEntities");
                 return new amara.applications.ingame.entitysystem.components.items.InventoryComponent(itemEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.items.IsSellableComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.items.IsSellableComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.IsSellableComponent>("isSellable"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.IsSellableComponent>("isSellable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.IsSellableComponent construct(){
+            public amara.applications.ingame.entitysystem.components.items.IsSellableComponent construct(EntityWorld entityWorld, Element element){
                 float gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
@@ -2194,11 +2196,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.items.ItemActiveComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemActiveComponent>("itemActive"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemActiveComponent>("itemActive"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.ItemActiveComponent construct(){
-                int spellEntity = createChildEntity(0, "spellEntity");
+            public amara.applications.ingame.entitysystem.components.items.ItemActiveComponent construct(EntityWorld entityWorld, Element element){
+                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
                 boolean consumable = false;
                 String consumableText = element.getAttributeValue("consumable");
                 if((consumableText != null) && (consumableText.length() > 0)){
@@ -2208,10 +2210,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.items.ItemIDComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.items.ItemIDComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemIDComponent>("itemID"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemIDComponent>("itemID"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.ItemIDComponent construct(){
+            public amara.applications.ingame.entitysystem.components.items.ItemIDComponent construct(EntityWorld entityWorld, Element element){
                 String id = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.items.ItemIDComponent(id);
             }
@@ -2222,19 +2224,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.items.ItemPassivesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemPassivesComponent>("itemPassives"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemPassivesComponent>("itemPassives"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.ItemPassivesComponent construct(){
-                int[] passiveEntities = createChildEntities(0, "passiveEntities");
+            public amara.applications.ingame.entitysystem.components.items.ItemPassivesComponent construct(EntityWorld entityWorld, Element element){
+                int[] passiveEntities = createChildEntities(entityWorld, element, 0, "passiveEntities");
                 return new amara.applications.ingame.entitysystem.components.items.ItemPassivesComponent(passiveEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent>("itemRecipe"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent>("itemRecipe"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent construct(){
+            public amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent construct(EntityWorld entityWorld, Element element){
                 float gold = 0;
                 String goldText = element.getAttributeValue("gold");
                 if((goldText != null) && (goldText.length() > 0)){
@@ -2258,20 +2260,20 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.maps.MapObjectiveComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.maps.MapObjectiveComponent>("mapObjective"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.maps.MapObjectiveComponent>("mapObjective"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.maps.MapObjectiveComponent construct(){
-                int objectiveEntity = createChildEntity(0, "objectiveEntity");
+            public amara.applications.ingame.entitysystem.components.maps.MapObjectiveComponent construct(EntityWorld entityWorld, Element element){
+                int objectiveEntity = createChildEntity(entityWorld, element, 0, "objectiveEntity");
                 return new amara.applications.ingame.entitysystem.components.maps.MapObjectiveComponent(objectiveEntity);
             }
         });
         //playerdeathrules
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent>("respawnPlayers"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent>("respawnPlayers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent construct(){
+            public amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent();
             }
         });
@@ -2286,10 +2288,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent>("respawnTimer"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent>("respawnTimer"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent construct(EntityWorld entityWorld, Element element){
                 float initialDuration = 0;
                 String initialDurationText = element.getAttributeValue("initialDuration");
                 if((initialDurationText != null) && (initialDurationText.length() > 0)){
@@ -2309,20 +2311,20 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.maps.PlayerDeathRulesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.maps.PlayerDeathRulesComponent>("playerDeathRules"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.maps.PlayerDeathRulesComponent>("playerDeathRules"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.maps.PlayerDeathRulesComponent construct(){
-                int rulesEntity = createChildEntity(0, "rulesEntity");
+            public amara.applications.ingame.entitysystem.components.maps.PlayerDeathRulesComponent construct(EntityWorld entityWorld, Element element){
+                int rulesEntity = createChildEntity(entityWorld, element, 0, "rulesEntity");
                 return new amara.applications.ingame.entitysystem.components.maps.PlayerDeathRulesComponent(rulesEntity);
             }
         });
         //movements
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.movements.DisplacementComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.movements.DisplacementComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.DisplacementComponent>("displacement"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.DisplacementComponent>("displacement"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.DisplacementComponent construct(){
+            public amara.applications.ingame.entitysystem.components.movements.DisplacementComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.movements.DisplacementComponent();
             }
         });
@@ -2332,10 +2334,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.movements.DistanceLimitComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.DistanceLimitComponent>("distanceLimit"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.DistanceLimitComponent>("distanceLimit"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.DistanceLimitComponent construct(){
+            public amara.applications.ingame.entitysystem.components.movements.DistanceLimitComponent construct(EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
@@ -2350,10 +2352,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.movements.MovedDistanceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovedDistanceComponent>("movedDistance"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovedDistanceComponent>("movedDistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovedDistanceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.movements.MovedDistanceComponent construct(EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
@@ -2368,19 +2370,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.movements.MovementAnimationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementAnimationComponent>("movementAnimation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementAnimationComponent>("movementAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementAnimationComponent construct(){
-                int animationEntity = createChildEntity(0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.movements.MovementAnimationComponent construct(EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.movements.MovementAnimationComponent(animationEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.movements.MovementDirectionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.movements.MovementDirectionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementDirectionComponent>("movementDirection"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementDirectionComponent>("movementDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementDirectionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.movements.MovementDirectionComponent construct(EntityWorld entityWorld, Element element){
                 String[] directionCoordinates = element.getText().split(",");
                 float directionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[0]));
                 float directionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[1]));
@@ -2389,26 +2391,26 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.movements.MovementIsCancelableComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.movements.MovementIsCancelableComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementIsCancelableComponent>("movementIsCancelable"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementIsCancelableComponent>("movementIsCancelable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementIsCancelableComponent construct(){
+            public amara.applications.ingame.entitysystem.components.movements.MovementIsCancelableComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.movements.MovementIsCancelableComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.movements.MovementLocalAvoidanceComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.movements.MovementLocalAvoidanceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementLocalAvoidanceComponent>("movementLocalAvoidance"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementLocalAvoidanceComponent>("movementLocalAvoidance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementLocalAvoidanceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.movements.MovementLocalAvoidanceComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.movements.MovementLocalAvoidanceComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.movements.MovementPathfindingComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.movements.MovementPathfindingComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementPathfindingComponent>("movementPathfinding"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementPathfindingComponent>("movementPathfinding"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementPathfindingComponent construct(){
+            public amara.applications.ingame.entitysystem.components.movements.MovementPathfindingComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.movements.MovementPathfindingComponent();
             }
         });
@@ -2418,10 +2420,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.movements.MovementSpeedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementSpeedComponent>("movementSpeed"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementSpeedComponent>("movementSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementSpeedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.movements.MovementSpeedComponent construct(EntityWorld entityWorld, Element element){
                 float speed = 0;
                 String speedText = element.getText();
                 if((speedText != null) && (speedText.length() > 0)){
@@ -2436,19 +2438,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.movements.MovementTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementTargetComponent>("movementTarget"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementTargetComponent>("movementTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementTargetComponent construct(){
-                int targetEntity = createChildEntity(0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.movements.MovementTargetComponent construct(EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.movements.MovementTargetComponent(targetEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.movements.MovementTargetReachedComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.movements.MovementTargetReachedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementTargetReachedComponent>("movementTargetReached"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementTargetReachedComponent>("movementTargetReached"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementTargetReachedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.movements.MovementTargetReachedComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.movements.MovementTargetReachedComponent();
             }
         });
@@ -2458,10 +2460,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.movements.MovementTargetSufficientDistanceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementTargetSufficientDistanceComponent>("movementTargetSufficientDistance"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementTargetSufficientDistanceComponent>("movementTargetSufficientDistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementTargetSufficientDistanceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.movements.MovementTargetSufficientDistanceComponent construct(EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
@@ -2471,19 +2473,19 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.movements.WalkMovementComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.movements.WalkMovementComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.WalkMovementComponent>("walkMovement"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.WalkMovementComponent>("walkMovement"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.WalkMovementComponent construct(){
+            public amara.applications.ingame.entitysystem.components.movements.WalkMovementComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.movements.WalkMovementComponent();
             }
         });
         //objectives
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.objectives.FinishedObjectiveComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.objectives.FinishedObjectiveComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.objectives.FinishedObjectiveComponent>("finishedObjective"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.objectives.FinishedObjectiveComponent>("finishedObjective"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.objectives.FinishedObjectiveComponent construct(){
+            public amara.applications.ingame.entitysystem.components.objectives.FinishedObjectiveComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.objectives.FinishedObjectiveComponent();
             }
         });
@@ -2493,19 +2495,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.objectives.MissingEntitiesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.objectives.MissingEntitiesComponent>("missingEntities"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.objectives.MissingEntitiesComponent>("missingEntities"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.objectives.MissingEntitiesComponent construct(){
-                int[] entities = createChildEntities(0, "entities");
+            public amara.applications.ingame.entitysystem.components.objectives.MissingEntitiesComponent construct(EntityWorld entityWorld, Element element){
+                int[] entities = createChildEntities(entityWorld, element, 0, "entities");
                 return new amara.applications.ingame.entitysystem.components.objectives.MissingEntitiesComponent(entities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.objectives.OpenObjectiveComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.objectives.OpenObjectiveComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.objectives.OpenObjectiveComponent>("openObjective"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.objectives.OpenObjectiveComponent>("openObjective"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.objectives.OpenObjectiveComponent construct(){
+            public amara.applications.ingame.entitysystem.components.objectives.OpenObjectiveComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.objectives.OpenObjectiveComponent();
             }
         });
@@ -2515,21 +2517,21 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.objectives.OrObjectivesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.objectives.OrObjectivesComponent>("orObjectives"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.objectives.OrObjectivesComponent>("orObjectives"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.objectives.OrObjectivesComponent construct(){
-                int[] objectiveEntities = createChildEntities(0, "objectiveEntities");
+            public amara.applications.ingame.entitysystem.components.objectives.OrObjectivesComponent construct(EntityWorld entityWorld, Element element){
+                int[] objectiveEntities = createChildEntities(entityWorld, element, 0, "objectiveEntities");
                 return new amara.applications.ingame.entitysystem.components.objectives.OrObjectivesComponent(objectiveEntities);
             }
         });
         //physics
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.CollisionGroupComponent.class);
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.DirectionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.physics.DirectionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.DirectionComponent>("direction"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.DirectionComponent>("direction"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.DirectionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.physics.DirectionComponent construct(EntityWorld entityWorld, Element element){
                 float radian = 0;
                 String radianText = element.getText();
                 if((radianText != null) && (radianText.length() > 0)){
@@ -2539,27 +2541,27 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.HitboxActiveComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.physics.HitboxActiveComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.HitboxActiveComponent>("hitboxActive"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.HitboxActiveComponent>("hitboxActive"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.HitboxActiveComponent construct(){
+            public amara.applications.ingame.entitysystem.components.physics.HitboxActiveComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.physics.HitboxActiveComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.HitboxComponent.class);
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.IntersectionPushComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.physics.IntersectionPushComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.IntersectionPushComponent>("intersectionPush"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.IntersectionPushComponent>("intersectionPush"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.IntersectionPushComponent construct(){
+            public amara.applications.ingame.entitysystem.components.physics.IntersectionPushComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.physics.IntersectionPushComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.PositionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.physics.PositionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.PositionComponent>("position"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.PositionComponent>("position"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.PositionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.physics.PositionComponent construct(EntityWorld entityWorld, Element element){
                 String[] positionCoordinates = element.getText().split(",");
                 float positionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[0]));
                 float positionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[1]));
@@ -2568,18 +2570,18 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.RemoveOnMapLeaveComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.physics.RemoveOnMapLeaveComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.RemoveOnMapLeaveComponent>("removeOnMapLeave"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.RemoveOnMapLeaveComponent>("removeOnMapLeave"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.RemoveOnMapLeaveComponent construct(){
+            public amara.applications.ingame.entitysystem.components.physics.RemoveOnMapLeaveComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.physics.RemoveOnMapLeaveComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.ScaleComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.physics.ScaleComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.ScaleComponent>("scale"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.ScaleComponent>("scale"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.ScaleComponent construct(){
+            public amara.applications.ingame.entitysystem.components.physics.ScaleComponent construct(EntityWorld entityWorld, Element element){
                 float scale = 0;
                 String scaleText = element.getText();
                 if((scaleText != null) && (scaleText.length() > 0)){
@@ -2590,10 +2592,10 @@ public class ComponentsRegistrator{
         });
         //players
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.players.ClientComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.players.ClientComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.ClientComponent>("client"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.ClientComponent>("client"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.players.ClientComponent construct(){
+            public amara.applications.ingame.entitysystem.components.players.ClientComponent construct(EntityWorld entityWorld, Element element){
                 int clientID = 0;
                 String clientIDText = element.getText();
                 if((clientIDText != null) && (clientIDText.length() > 0)){
@@ -2603,10 +2605,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.players.IsBotComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.players.IsBotComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.IsBotComponent>("isBot"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.IsBotComponent>("isBot"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.players.IsBotComponent construct(){
+            public amara.applications.ingame.entitysystem.components.players.IsBotComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.players.IsBotComponent();
             }
         });
@@ -2616,19 +2618,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent>("playerCharacter"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent>("playerCharacter"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent construct(){
-                int entity = createChildEntity(0, "entity");
+            public amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent construct(EntityWorld entityWorld, Element element){
+                int entity = createChildEntity(entityWorld, element, 0, "entity");
                 return new amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent(entity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent>("playerIndex"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent>("playerIndex"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent construct(){
+            public amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent construct(EntityWorld entityWorld, Element element){
                 int index = 0;
                 String indexText = element.getText();
                 if((indexText != null) && (indexText.length() > 0)){
@@ -2639,20 +2641,20 @@ public class ComponentsRegistrator{
         });
         //popups
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.popups.PopupTextComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.popups.PopupTextComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.popups.PopupTextComponent>("popupText"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.popups.PopupTextComponent>("popupText"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.popups.PopupTextComponent construct(){
+            public amara.applications.ingame.entitysystem.components.popups.PopupTextComponent construct(EntityWorld entityWorld, Element element){
                 String text = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.popups.PopupTextComponent(text);
             }
         });
         //shop
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent>("shopItems"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent>("shopItems"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent construct(){
+            public amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent construct(EntityWorld entityWorld, Element element){
                 String[] itemTemplateNames = new String[0];
                 String itemTemplateNamesText = element.getText();
                 if(itemTemplateNamesText != null){
@@ -2670,10 +2672,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.shop.ShopRangeComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.shop.ShopRangeComponent>("shopRange"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.shop.ShopRangeComponent>("shopRange"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.shop.ShopRangeComponent construct(){
+            public amara.applications.ingame.entitysystem.components.shop.ShopRangeComponent construct(EntityWorld entityWorld, Element element){
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
@@ -2684,18 +2686,18 @@ public class ComponentsRegistrator{
         });
         //spawns
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spawns.SpawnApplyAsRespawnTransformComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spawns.SpawnApplyAsRespawnTransformComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnApplyAsRespawnTransformComponent>("spawnApplyAsRespawnTransform"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnApplyAsRespawnTransformComponent>("spawnApplyAsRespawnTransform"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnApplyAsRespawnTransformComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnApplyAsRespawnTransformComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnApplyAsRespawnTransformComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spawns.SpawnAttackMoveComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spawns.SpawnAttackMoveComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnAttackMoveComponent>("spawnAttackMove"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnAttackMoveComponent>("spawnAttackMove"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnAttackMoveComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnAttackMoveComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnAttackMoveComponent();
             }
         });
@@ -2705,19 +2707,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spawns.SpawnMovementAnimationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMovementAnimationComponent>("spawnMovementAnimation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMovementAnimationComponent>("spawnMovementAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementAnimationComponent construct(){
-                int animationEntity = createChildEntity(0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementAnimationComponent construct(EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnMovementAnimationComponent(animationEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent>("spawnMovementRelativeDirection"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent>("spawnMovementRelativeDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent construct(EntityWorld entityWorld, Element element){
                 float angle_Degrees = 0;
                 String angle_DegreesText = element.getText();
                 if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
@@ -2732,10 +2734,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spawns.SpawnMovementSpeedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMovementSpeedComponent>("spawnMovementSpeed"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMovementSpeedComponent>("spawnMovementSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementSpeedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementSpeedComponent construct(EntityWorld entityWorld, Element element){
                 float speed = 0;
                 String speedText = element.getText();
                 if((speedText != null) && (speedText.length() > 0)){
@@ -2745,26 +2747,26 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spawns.SpawnMoveToTargetComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spawns.SpawnMoveToTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMoveToTargetComponent>("spawnMoveToTarget"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMoveToTargetComponent>("spawnMoveToTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnMoveToTargetComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnMoveToTargetComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnMoveToTargetComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent>("spawnRedirectReceivedBounties"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent>("spawnRedirectReceivedBounties"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spawns.SpawnRelativeDirectionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spawns.SpawnRelativeDirectionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnRelativeDirectionComponent>("spawnRelativeDirection"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnRelativeDirectionComponent>("spawnRelativeDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnRelativeDirectionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnRelativeDirectionComponent construct(EntityWorld entityWorld, Element element){
                 float angle_Degrees = 0;
                 String angle_DegreesText = element.getText();
                 if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
@@ -2774,10 +2776,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spawns.SpawnRelativePositionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spawns.SpawnRelativePositionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnRelativePositionComponent>("spawnRelativePosition"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnRelativePositionComponent>("spawnRelativePosition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnRelativePositionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnRelativePositionComponent construct(EntityWorld entityWorld, Element element){
                 String[] positionCoordinates = element.getText().split(",");
                 float positionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[0]));
                 float positionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[1]));
@@ -2794,19 +2796,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent>("erikaPassiveEffectTriggers"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent>("erikaPassiveEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent(effectTriggerEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.specials.erika.TriggerErikaPassiveComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.specials.erika.TriggerErikaPassiveComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.specials.erika.TriggerErikaPassiveComponent>("triggerErikaPassive"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.specials.erika.TriggerErikaPassiveComponent>("triggerErikaPassive"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.specials.erika.TriggerErikaPassiveComponent construct(){
+            public amara.applications.ingame.entitysystem.components.specials.erika.TriggerErikaPassiveComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.specials.erika.TriggerErikaPassiveComponent();
             }
         });
@@ -2822,10 +2824,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.ApplyCastedSpellComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.ApplyCastedSpellComponent>("applyCastedSpell"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.ApplyCastedSpellComponent>("applyCastedSpell"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.ApplyCastedSpellComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.ApplyCastedSpellComponent construct(EntityWorld entityWorld, Element element){
                 int casterEntityID = 0;
                 String casterEntityIDText = element.getAttributeValue("casterEntityID");
                 if((casterEntityIDText != null) && (casterEntityIDText.length() > 0)){
@@ -2845,10 +2847,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.BaseCooldownComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.BaseCooldownComponent>("baseCooldown"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.BaseCooldownComponent>("baseCooldown"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.BaseCooldownComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.BaseCooldownComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -2863,27 +2865,27 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent>("castAnimation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent>("castAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent construct(){
-                int animationEntity = createChildEntity(0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent construct(EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent(animationEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent>("castCancelable"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent>("castCancelable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.CastCancelActionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.CastCancelActionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastCancelActionComponent>("castCancelAction"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastCancelActionComponent>("castCancelAction"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastCancelActionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.CastCancelActionComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.CastCancelActionComponent();
             }
         });
@@ -2893,10 +2895,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.CastDurationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastDurationComponent>("castDuration"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastDurationComponent>("castDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastDurationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.CastDurationComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -2906,10 +2908,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.CastTurnToTargetComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.CastTurnToTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastTurnToTargetComponent>("castTurnToTarget"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastTurnToTargetComponent>("castTurnToTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastTurnToTargetComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.CastTurnToTargetComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.CastTurnToTargetComponent();
             }
         });
@@ -2920,10 +2922,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.CooldownComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CooldownComponent>("cooldown"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CooldownComponent>("cooldown"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CooldownComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.CooldownComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -2949,10 +2951,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent>("circularIndicator"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent>("circularIndicator"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent construct(EntityWorld entityWorld, Element element){
                 float x = 0;
                 String xText = element.getAttributeValue("x");
                 if((xText != null) && (xText.length() > 0)){
@@ -2992,10 +2994,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent>("linearIndicator"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent>("linearIndicator"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent construct(EntityWorld entityWorld, Element element){
                 float x = 0;
                 String xText = element.getAttributeValue("x");
                 if((xText != null) && (xText.length() > 0)){
@@ -3025,11 +3027,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent>("instantEffectTriggers"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent>("instantEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -3039,20 +3041,20 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent>("linkedCooldown"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent>("linkedCooldown"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent construct(){
-                int sourceEntity = createChildEntity(0, "sourceEntity");
+            public amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent construct(EntityWorld entityWorld, Element element){
+                int sourceEntity = createChildEntity(entityWorld, element, 0, "sourceEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent(sourceEntity);
             }
         });
         //placeholders
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent>("sourceMovementDirection"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent>("sourceMovementDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent construct(EntityWorld entityWorld, Element element){
                 float angle_Degrees = 0;
                 String angle_DegreesText = element.getText();
                 if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
@@ -3062,10 +3064,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent>("targetedMovementDirection"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent>("targetedMovementDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent construct(EntityWorld entityWorld, Element element){
                 float angle_Degrees = 0;
                 String angle_DegreesText = element.getText();
                 if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
@@ -3075,26 +3077,26 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent>("targetedMovementTarget"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent>("targetedMovementTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent>("teleportToTargetPosition"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent>("teleportToTargetPosition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent>("triggerCastedSpellEffects"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent>("triggerCastedSpellEffects"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent();
             }
         });
@@ -3104,10 +3106,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.RangeComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.RangeComponent>("range"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.RangeComponent>("range"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.RangeComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.RangeComponent construct(EntityWorld entityWorld, Element element){
                 float distange = 0;
                 String distangeText = element.getText();
                 if((distangeText != null) && (distangeText.length() > 0)){
@@ -3122,10 +3124,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent>("remainingCooldown"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent>("remainingCooldown"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -3140,19 +3142,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.SpellIndicatorComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellIndicatorComponent>("spellIndicator"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellIndicatorComponent>("spellIndicator"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.SpellIndicatorComponent construct(){
-                int indicatorEntity = createChildEntity(0, "indicatorEntity");
+            public amara.applications.ingame.entitysystem.components.spells.SpellIndicatorComponent construct(EntityWorld entityWorld, Element element){
+                int indicatorEntity = createChildEntity(entityWorld, element, 0, "indicatorEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.SpellIndicatorComponent(indicatorEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent>("spellRequiredLevel"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent>("spellRequiredLevel"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent construct(EntityWorld entityWorld, Element element){
                 int level = 0;
                 String levelText = element.getText();
                 if((levelText != null) && (levelText.length() > 0)){
@@ -3167,11 +3169,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent>("spellTargetRules"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent>("spellTargetRules"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent construct(){
-                int targetRulesEntity = createChildEntity(0, "targetRulesEntity");
+            public amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent construct(EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent(targetRulesEntity);
             }
         });
@@ -3181,19 +3183,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent>("spellUpgrades"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent>("spellUpgrades"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent construct(){
-                int[] spellsEntities = createChildEntities(0, "spellsEntities");
+            public amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent construct(EntityWorld entityWorld, Element element){
+                int[] spellsEntities = createChildEntities(entityWorld, element, 0, "spellsEntities");
                 return new amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent(spellsEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.SpellVisualisationComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.SpellVisualisationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellVisualisationComponent>("spellVisualisation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellVisualisationComponent>("spellVisualisation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.SpellVisualisationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.spells.SpellVisualisationComponent construct(EntityWorld entityWorld, Element element){
                 String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.spells.SpellVisualisationComponent(name);
             }
@@ -3205,11 +3207,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.triggers.CastedEffectTriggersComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.triggers.CastedEffectTriggersComponent>("castedEffectTriggers"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.triggers.CastedEffectTriggersComponent>("castedEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.triggers.CastedEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.spells.triggers.CastedEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.spells.triggers.CastedEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -3219,11 +3221,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.triggers.CastedSpellComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.triggers.CastedSpellComponent>("castedSpell"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.triggers.CastedSpellComponent>("castedSpell"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.triggers.CastedSpellComponent construct(){
-                int spellEntity = createChildEntity(0, "spellEntity");
+            public amara.applications.ingame.entitysystem.components.spells.triggers.CastedSpellComponent construct(EntityWorld entityWorld, Element element){
+                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.triggers.CastedSpellComponent(spellEntity);
             }
         });
@@ -3233,53 +3235,53 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.spells.triggers.SpellEffectParentComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.triggers.SpellEffectParentComponent>("spellEffectParent"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.triggers.SpellEffectParentComponent>("spellEffectParent"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.triggers.SpellEffectParentComponent construct(){
-                int spellEffectEntity = createChildEntity(0, "spellEffectEntity");
+            public amara.applications.ingame.entitysystem.components.spells.triggers.SpellEffectParentComponent construct(EntityWorld entityWorld, Element element){
+                int spellEffectEntity = createChildEntity(entityWorld, element, 0, "spellEffectEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.triggers.SpellEffectParentComponent(spellEffectEntity);
             }
         });
         //targets
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent>("acceptAllies"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent>("acceptAllies"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent construct(){
+            public amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent>("acceptEnemies"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent>("acceptEnemies"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent construct(){
+            public amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent>("requireCharacter"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent>("requireCharacter"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent construct(){
+            public amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent>("requireProjectile"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent>("requireProjectile"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent construct(){
+            public amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent();
             }
         });
         //units
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.AggroPriorityComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.AggroPriorityComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AggroPriorityComponent>("aggroPriority"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AggroPriorityComponent>("aggroPriority"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AggroPriorityComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.AggroPriorityComponent construct(EntityWorld entityWorld, Element element){
                 int priority = 0;
                 String priorityText = element.getText();
                 if((priorityText != null) && (priorityText.length() > 0)){
@@ -3294,10 +3296,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.AggroResetTimerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AggroResetTimerComponent>("aggroResetTimer"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AggroResetTimerComponent>("aggroResetTimer"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AggroResetTimerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.AggroResetTimerComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -3312,11 +3314,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.AggroTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AggroTargetComponent>("aggroTarget"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AggroTargetComponent>("aggroTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AggroTargetComponent construct(){
-                int targetEntity = createChildEntity(0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.units.AggroTargetComponent construct(EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.units.AggroTargetComponent(targetEntity);
             }
         });
@@ -3327,11 +3329,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.animations.AutoAttackAnimationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.AutoAttackAnimationComponent>("autoAttackAnimation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.AutoAttackAnimationComponent>("autoAttackAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.animations.AutoAttackAnimationComponent construct(){
-                int animationEntity = createChildEntity(0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.units.animations.AutoAttackAnimationComponent construct(EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.units.animations.AutoAttackAnimationComponent(animationEntity);
             }
         });
@@ -3341,11 +3343,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.animations.DeathAnimationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.DeathAnimationComponent>("deathAnimation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.DeathAnimationComponent>("deathAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.animations.DeathAnimationComponent construct(){
-                int animationEntity = createChildEntity(0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.units.animations.DeathAnimationComponent construct(EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.units.animations.DeathAnimationComponent(animationEntity);
             }
         });
@@ -3355,11 +3357,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.animations.IdleAnimationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.IdleAnimationComponent>("idleAnimation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.IdleAnimationComponent>("idleAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.animations.IdleAnimationComponent construct(){
-                int animationEntity = createChildEntity(0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.units.animations.IdleAnimationComponent construct(EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.units.animations.IdleAnimationComponent(animationEntity);
             }
         });
@@ -3369,11 +3371,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.animations.WalkAnimationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.WalkAnimationComponent>("walkAnimation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.WalkAnimationComponent>("walkAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.animations.WalkAnimationComponent construct(){
-                int animationEntity = createChildEntity(0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.units.animations.WalkAnimationComponent construct(EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.units.animations.WalkAnimationComponent(animationEntity);
             }
         });
@@ -3383,11 +3385,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.AttackMoveComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AttackMoveComponent>("attackMove"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AttackMoveComponent>("attackMove"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AttackMoveComponent construct(){
-                int targetEntity = createChildEntity(0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.units.AttackMoveComponent construct(EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.units.AttackMoveComponent(targetEntity);
             }
         });
@@ -3397,11 +3399,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.AttributesPerLevelComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AttributesPerLevelComponent>("attributesPerLevel"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AttributesPerLevelComponent>("attributesPerLevel"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AttributesPerLevelComponent construct(){
-                int bonusAttributesEntity = createChildEntity(0, "bonusAttributesEntity");
+            public amara.applications.ingame.entitysystem.components.units.AttributesPerLevelComponent construct(EntityWorld entityWorld, Element element){
+                int bonusAttributesEntity = createChildEntity(entityWorld, element, 0, "bonusAttributesEntity");
                 return new amara.applications.ingame.entitysystem.components.units.AttributesPerLevelComponent(bonusAttributesEntity);
             }
         });
@@ -3411,10 +3413,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.AutoAggroComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AutoAggroComponent>("autoAggro"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AutoAggroComponent>("autoAggro"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AutoAggroComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.AutoAggroComponent construct(EntityWorld entityWorld, Element element){
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
@@ -3429,11 +3431,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.AutoAttackComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AutoAttackComponent>("autoAttack"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AutoAttackComponent>("autoAttack"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AutoAttackComponent construct(){
-                int autoAttackEntity = createChildEntity(0, "autoAttackEntity");
+            public amara.applications.ingame.entitysystem.components.units.AutoAttackComponent construct(EntityWorld entityWorld, Element element){
+                int autoAttackEntity = createChildEntity(entityWorld, element, 0, "autoAttackEntity");
                 return new amara.applications.ingame.entitysystem.components.units.AutoAttackComponent(autoAttackEntity);
             }
         });
@@ -3443,11 +3445,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.BaseAttributesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.BaseAttributesComponent>("baseAttributes"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.BaseAttributesComponent>("baseAttributes"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.BaseAttributesComponent construct(){
-                int bonusAttributesEntity = createChildEntity(0, "bonusAttributesEntity");
+            public amara.applications.ingame.entitysystem.components.units.BaseAttributesComponent construct(EntityWorld entityWorld, Element element){
+                int bonusAttributesEntity = createChildEntity(entityWorld, element, 0, "bonusAttributesEntity");
                 return new amara.applications.ingame.entitysystem.components.units.BaseAttributesComponent(bonusAttributesEntity);
             }
         });
@@ -3463,11 +3465,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.bounties.BountyBuffComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyBuffComponent>("bountyBuff"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyBuffComponent>("bountyBuff"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.BountyBuffComponent construct(){
-                int buffEntity = createChildEntity(0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyBuffComponent construct(EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
                 float duration = 0;
                 String durationText = element.getAttributeValue("duration");
                 if((durationText != null) && (durationText.length() > 0)){
@@ -3477,26 +3479,26 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent>("bountyCharacterKill"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent>("bountyCharacterKill"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent>("bountyCreepScore"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent>("bountyCreepScore"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.bounties.BountyExperienceComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.bounties.BountyExperienceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyExperienceComponent>("bountyExperience"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyExperienceComponent>("bountyExperience"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.BountyExperienceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyExperienceComponent construct(EntityWorld entityWorld, Element element){
                 int experience = 0;
                 String experienceText = element.getText();
                 if((experienceText != null) && (experienceText.length() > 0)){
@@ -3506,10 +3508,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent>("bountyGold"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent>("bountyGold"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent construct(EntityWorld entityWorld, Element element){
                 float gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
@@ -3524,11 +3526,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent>("bountyRules"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent>("bountyRules"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent construct(){
-                int targetRulesEntity = createChildEntity(0, "targetRulesEntity");
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent construct(EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent(targetRulesEntity);
             }
         });
@@ -3538,11 +3540,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent>("redirectReceivedBounties"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent>("redirectReceivedBounties"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent construct(){
-                int receiverEntity = createChildEntity(0, "receiverEntity");
+            public amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent construct(EntityWorld entityWorld, Element element){
+                int receiverEntity = createChildEntity(entityWorld, element, 0, "receiverEntity");
                 return new amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent(receiverEntity);
             }
         });
@@ -3552,11 +3554,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.BountyComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.BountyComponent>("bounty"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.BountyComponent>("bounty"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.BountyComponent construct(){
-                int bountyEntity = createChildEntity(0, "bountyEntity");
+            public amara.applications.ingame.entitysystem.components.units.BountyComponent construct(EntityWorld entityWorld, Element element){
+                int bountyEntity = createChildEntity(entityWorld, element, 0, "bountyEntity");
                 return new amara.applications.ingame.entitysystem.components.units.BountyComponent(bountyEntity);
             }
         });
@@ -3566,11 +3568,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.CampComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CampComponent>("camp"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CampComponent>("camp"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.CampComponent construct(){
-                int campEntity = createChildEntity(0, "campEntity");
+            public amara.applications.ingame.entitysystem.components.units.CampComponent construct(EntityWorld entityWorld, Element element){
+                int campEntity = createChildEntity(entityWorld, element, 0, "campEntity");
                 String[] positionCoordinates = element.getAttributeValue("position").split(",");
                 float positionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[0]));
                 float positionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[1]));
@@ -3583,18 +3585,18 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.CampResetComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.CampResetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CampResetComponent>("campReset"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CampResetComponent>("campReset"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.CampResetComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.CampResetComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.CampResetComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent>("castSpellOnCooldownWhileAttacking"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent>("castSpellOnCooldownWhileAttacking"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent construct(EntityWorld entityWorld, Element element){
                 String[] spellIndicesParts = element.getText().split(",");
                 int[] spellIndices = new int[spellIndicesParts.length];
                 for(int i=0;i<spellIndices.length;i++){
@@ -3610,10 +3612,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent>("isBinded"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent>("isBinded"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent construct(EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
@@ -3628,10 +3630,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent>("isBindedImmune"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent>("isBindedImmune"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent construct(EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
@@ -3651,11 +3653,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent>("isKnockuped"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent>("isKnockuped"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent construct(){
-                int knockupEntity = createChildEntity(0, "knockupEntity");
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent construct(EntityWorld entityWorld, Element element){
+                int knockupEntity = createChildEntity(entityWorld, element, 0, "knockupEntity");
                 float remainingDuration = 0;
                 String remainingDurationText = element.getAttributeValue("remainingDuration");
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
@@ -3670,10 +3672,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent>("isKnockupedImmune"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent>("isKnockupedImmune"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent construct(EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
@@ -3688,10 +3690,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedComponent>("isSilenced"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedComponent>("isSilenced"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedComponent construct(EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
@@ -3706,10 +3708,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent>("isSilencedImmune"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent>("isSilencedImmune"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent construct(EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
@@ -3724,10 +3726,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent>("isStunned"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent>("isStunned"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent construct(EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
@@ -3742,10 +3744,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent>("isStunnedImmune"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent>("isStunnedImmune"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent construct(EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
@@ -3760,11 +3762,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent>("currentActionEffectCasts"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent>("currentActionEffectCasts"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent construct(){
-                int[] effectCastEntities = createChildEntities(0, "effectCastEntities");
+            public amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent construct(EntityWorld entityWorld, Element element){
+                int[] effectCastEntities = createChildEntities(entityWorld, element, 0, "effectCastEntities");
                 return new amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent(effectCastEntities);
             }
         });
@@ -3774,11 +3776,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent>("currentPassives"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent>("currentPassives"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent construct(){
-                int[] passiveEntities = createChildEntities(0, "passiveEntities");
+            public amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent construct(EntityWorld entityWorld, Element element){
+                int[] passiveEntities = createChildEntities(entityWorld, element, 0, "passiveEntities");
                 return new amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent(passiveEntities);
             }
         });
@@ -3801,19 +3803,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent>("buffTargetsTarget"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent>("buffTargetsTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent construct(){
-                int buffEntity = createChildEntity(0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent construct(EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent(buffEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent>("casterTarget"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent>("casterTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent();
             }
         });
@@ -3823,27 +3825,27 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent>("customTarget"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent>("customTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent construct(){
-                int[] targetEntities = createChildEntities(0, "targetEntities");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent construct(EntityWorld entityWorld, Element element){
+                int[] targetEntities = createChildEntities(entityWorld, element, 0, "targetEntities");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent(targetEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent>("sourceTarget"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent>("sourceTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent>("targetTarget"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent>("targetTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent();
             }
         });
@@ -3853,11 +3855,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TeamTargetComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TeamTargetComponent>("teamTarget"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TeamTargetComponent>("teamTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TeamTargetComponent construct(){
-                int teamEntity = createChildEntity(0, "teamEntity");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TeamTargetComponent construct(EntityWorld entityWorld, Element element){
+                int teamEntity = createChildEntity(entityWorld, element, 0, "teamEntity");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TeamTargetComponent(teamEntity);
             }
         });
@@ -3867,11 +3869,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerConditionsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerConditionsComponent>("triggerConditions"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerConditionsComponent>("triggerConditions"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerConditionsComponent construct(){
-                int[] conditionEntities = createChildEntities(0, "conditionEntities");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerConditionsComponent construct(EntityWorld entityWorld, Element element){
+                int[] conditionEntities = createChildEntities(entityWorld, element, 0, "conditionEntities");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerConditionsComponent(conditionEntities);
             }
         });
@@ -3881,10 +3883,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerDelayComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerDelayComponent>("triggerDelay"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerDelayComponent>("triggerDelay"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerDelayComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerDelayComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -3899,27 +3901,27 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggeredEffectComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggeredEffectComponent>("triggeredEffect"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggeredEffectComponent>("triggeredEffect"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggeredEffectComponent construct(){
-                int effectEntity = createChildEntity(0, "effectEntity");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggeredEffectComponent construct(EntityWorld entityWorld, Element element){
+                int effectEntity = createChildEntity(entityWorld, element, 0, "effectEntity");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggeredEffectComponent(effectEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent>("triggerOnCancel"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent>("triggerOnCancel"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent>("triggerOnce"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent>("triggerOnce"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent construct(EntityWorld entityWorld, Element element){
                 boolean removeEntity = false;
                 String removeEntityText = element.getText();
                 if((removeEntityText != null) && (removeEntityText.length() > 0)){
@@ -3930,34 +3932,34 @@ public class ComponentsRegistrator{
         });
         //triggers
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent>("actionCancelledTrigger"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent>("actionCancelledTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent>("castingFinishedTrigger"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent>("castingFinishedTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent>("collisionTrigger"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent>("collisionTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent>("damageTakenTrigger"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent>("damageTakenTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent construct(EntityWorld entityWorld, Element element){
                 boolean physicalDamage = false;
                 String physicalDamageText = element.getAttributeValue("physicalDamage");
                 if((physicalDamageText != null) && (physicalDamageText.length() > 0)){
@@ -3977,26 +3979,26 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent>("deathTrigger"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent>("deathTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent>("instantTrigger"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent>("instantTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ObjectiveFinishedTriggerComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ObjectiveFinishedTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ObjectiveFinishedTriggerComponent>("objectiveFinishedTrigger"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ObjectiveFinishedTriggerComponent>("objectiveFinishedTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ObjectiveFinishedTriggerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ObjectiveFinishedTriggerComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ObjectiveFinishedTriggerComponent();
             }
         });
@@ -4006,10 +4008,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent>("repeatingTrigger"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent>("repeatingTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent construct(EntityWorld entityWorld, Element element){
                 float intervalDuration = 0;
                 String intervalDurationText = element.getText();
                 if((intervalDurationText != null) && (intervalDurationText.length() > 0)){
@@ -4019,10 +4021,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent>("repeatingTriggerCounter"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent>("repeatingTriggerCounter"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent construct(EntityWorld entityWorld, Element element){
                 int counter = 0;
                 String counterText = element.getText();
                 if((counterText != null) && (counterText.length() > 0)){
@@ -4037,10 +4039,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent>("stacksReachedTrigger"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent>("stacksReachedTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent construct(EntityWorld entityWorld, Element element){
                 int stacks = 0;
                 String stacksText = element.getText();
                 if((stacksText != null) && (stacksText.length() > 0)){
@@ -4050,18 +4052,18 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent>("targetReachedTrigger"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent>("targetReachedTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TeamDeathTriggerComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TeamDeathTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TeamDeathTriggerComponent>("teamDeathTrigger"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TeamDeathTriggerComponent>("teamDeathTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TeamDeathTriggerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TeamDeathTriggerComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TeamDeathTriggerComponent();
             }
         });
@@ -4071,10 +4073,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent>("timeSinceLastRepeatTrigger"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent>("timeSinceLastRepeatTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -4089,27 +4091,27 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerSourceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerSourceComponent>("triggerSource"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerSourceComponent>("triggerSource"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerSourceComponent construct(){
-                int sourceEntity = createChildEntity(0, "sourceEntity");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerSourceComponent construct(EntityWorld entityWorld, Element element){
+                int sourceEntity = createChildEntity(entityWorld, element, 0, "sourceEntity");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerSourceComponent(sourceEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent>("triggerTemporary"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent>("triggerTemporary"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.ExperienceComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.ExperienceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ExperienceComponent>("experience"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ExperienceComponent>("experience"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.ExperienceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.ExperienceComponent construct(EntityWorld entityWorld, Element element){
                 int experience = 0;
                 String experienceText = element.getText();
                 if((experienceText != null) && (experienceText.length() > 0)){
@@ -4119,10 +4121,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.GoldComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.GoldComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.GoldComponent>("gold"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.GoldComponent>("gold"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.GoldComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.GoldComponent construct(EntityWorld entityWorld, Element element){
                 float gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
@@ -4138,10 +4140,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.InCombatComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.InCombatComponent>("inCombat"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.InCombatComponent>("inCombat"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.InCombatComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.InCombatComponent construct(EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
@@ -4156,27 +4158,27 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent>("intersectionRules"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent>("intersectionRules"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent construct(){
-                int targetRulesEntity = createChildEntity(0, "targetRulesEntity");
+            public amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent construct(EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
                 return new amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent(targetRulesEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsAliveComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsAliveComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsAliveComponent>("isAlive"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsAliveComponent>("isAlive"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsAliveComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.IsAliveComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsAliveComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent>("isAlwaysVisible"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent>("isAlwaysVisible"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent();
             }
         });
@@ -4186,10 +4188,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsCastingComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsCastingComponent>("isCasting"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsCastingComponent>("isCasting"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsCastingComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.IsCastingComponent construct(EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getAttributeValue("remainingDuration");
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
@@ -4204,18 +4206,18 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsHiddenAreaComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsHiddenAreaComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsHiddenAreaComponent>("isHiddenArea"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsHiddenAreaComponent>("isHiddenArea"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsHiddenAreaComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.IsHiddenAreaComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsHiddenAreaComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsHoveredComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsHoveredComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsHoveredComponent>("isHovered"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsHoveredComponent>("isHovered"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsHoveredComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.IsHoveredComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsHoveredComponent();
             }
         });
@@ -4225,43 +4227,43 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent>("isInHiddenArea"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent>("isInHiddenArea"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent construct(){
-                int hiddenAreaEntity = createChildEntity(0, "hiddenAreaEntity");
+            public amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent construct(EntityWorld entityWorld, Element element){
+                int hiddenAreaEntity = createChildEntity(entityWorld, element, 0, "hiddenAreaEntity");
                 return new amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent(hiddenAreaEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent>("isRespawnable"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent>("isRespawnable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsStealthedComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsStealthedComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsStealthedComponent>("isStealthed"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsStealthedComponent>("isStealthed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsStealthedComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.IsStealthedComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsStealthedComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsTargetableComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsTargetableComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsTargetableComponent>("isTargetable"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsTargetableComponent>("isTargetable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsTargetableComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.IsTargetableComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsTargetableComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent>("isVisibleForTeams"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent>("isVisibleForTeams"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent construct(EntityWorld entityWorld, Element element){
                 String[] teamVisionsParts = element.getText().split(",");
                 boolean[] teamVisions = new boolean[teamVisionsParts.length];
                 for(int i=0;i<teamVisions.length;i++){
@@ -4271,10 +4273,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent>("isVulnerable"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent>("isVulnerable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent();
             }
         });
@@ -4284,19 +4286,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.LearnableSpellsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.LearnableSpellsComponent>("learnableSpells"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.LearnableSpellsComponent>("learnableSpells"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.LearnableSpellsComponent construct(){
-                int[] spellsEntities = createChildEntities(0, "spellsEntities");
+            public amara.applications.ingame.entitysystem.components.units.LearnableSpellsComponent construct(EntityWorld entityWorld, Element element){
+                int[] spellsEntities = createChildEntities(entityWorld, element, 0, "spellsEntities");
                 return new amara.applications.ingame.entitysystem.components.units.LearnableSpellsComponent(spellsEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.LevelComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.LevelComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.LevelComponent>("level"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.LevelComponent>("level"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.LevelComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.LevelComponent construct(EntityWorld entityWorld, Element element){
                 int level = 0;
                 String levelText = element.getText();
                 if((levelText != null) && (levelText.length() > 0)){
@@ -4311,10 +4313,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.LifetimeComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.LifetimeComponent>("lifetime"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.LifetimeComponent>("lifetime"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.LifetimeComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.LifetimeComponent construct(EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
@@ -4324,10 +4326,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.LocalAvoidanceWalkComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.LocalAvoidanceWalkComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.LocalAvoidanceWalkComponent>("localAvoidanceWalk"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.LocalAvoidanceWalkComponent>("localAvoidanceWalk"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.LocalAvoidanceWalkComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.LocalAvoidanceWalkComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.LocalAvoidanceWalkComponent();
             }
         });
@@ -4337,11 +4339,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.MapSpellsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.MapSpellsComponent>("mapSpells"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.MapSpellsComponent>("mapSpells"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.MapSpellsComponent construct(){
-                int[] spellsEntities = createChildEntities(0, "spellsEntities");
+            public amara.applications.ingame.entitysystem.components.units.MapSpellsComponent construct(EntityWorld entityWorld, Element element){
+                int[] spellsEntities = createChildEntities(entityWorld, element, 0, "spellsEntities");
                 return new amara.applications.ingame.entitysystem.components.units.MapSpellsComponent(spellsEntities);
             }
         });
@@ -4351,10 +4353,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.MaximumAggroRangeComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.MaximumAggroRangeComponent>("maximumAggroRange"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.MaximumAggroRangeComponent>("maximumAggroRange"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.MaximumAggroRangeComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.MaximumAggroRangeComponent construct(EntityWorld entityWorld, Element element){
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
@@ -4369,11 +4371,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.MovementComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.MovementComponent>("movement"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.MovementComponent>("movement"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.MovementComponent construct(){
-                int movementEntity = createChildEntity(0, "movementEntity");
+            public amara.applications.ingame.entitysystem.components.units.MovementComponent construct(EntityWorld entityWorld, Element element){
+                int movementEntity = createChildEntity(entityWorld, element, 0, "movementEntity");
                 return new amara.applications.ingame.entitysystem.components.units.MovementComponent(movementEntity);
             }
         });
@@ -4384,11 +4386,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent>("passiveAddedEffectTriggers"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent>("passiveAddedEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -4398,11 +4400,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent>("passiveRemovedEffectTriggers"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent>("passiveRemovedEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent construct(){
-                int[] effectTriggerEntities = createChildEntities(0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -4412,11 +4414,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.PassivesComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.PassivesComponent>("passives"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.PassivesComponent>("passives"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.PassivesComponent construct(){
-                int[] passiveEntities = createChildEntities(0, "passiveEntities");
+            public amara.applications.ingame.entitysystem.components.units.PassivesComponent construct(EntityWorld entityWorld, Element element){
+                int[] passiveEntities = createChildEntities(entityWorld, element, 0, "passiveEntities");
                 return new amara.applications.ingame.entitysystem.components.units.PassivesComponent(passiveEntities);
             }
         });
@@ -4426,11 +4428,11 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.PopupComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.PopupComponent>("popup"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.PopupComponent>("popup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.PopupComponent construct(){
-                int popupEntity = createChildEntity(0, "popupEntity");
+            public amara.applications.ingame.entitysystem.components.units.PopupComponent construct(EntityWorld entityWorld, Element element){
+                int popupEntity = createChildEntity(entityWorld, element, 0, "popupEntity");
                 return new amara.applications.ingame.entitysystem.components.units.PopupComponent(popupEntity);
             }
         });
@@ -4440,10 +4442,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.ReactionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ReactionComponent>("reaction"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ReactionComponent>("reaction"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.ReactionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.ReactionComponent construct(EntityWorld entityWorld, Element element){
                 String reaction = xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("reaction"));
                 float remainingDuration = 0;
                 String remainingDurationText = element.getAttributeValue("remainingDuration");
@@ -4459,10 +4461,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.RemainingAggroResetDurationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.RemainingAggroResetDurationComponent>("remainingAggroResetDuration"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.RemainingAggroResetDurationComponent>("remainingAggroResetDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.RemainingAggroResetDurationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.RemainingAggroResetDurationComponent construct(EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
@@ -4472,10 +4474,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.RespawnDirectionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.RespawnDirectionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.RespawnDirectionComponent>("respawnDirection"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.RespawnDirectionComponent>("respawnDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.RespawnDirectionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.RespawnDirectionComponent construct(EntityWorld entityWorld, Element element){
                 String[] directionCoordinates = element.getText().split(",");
                 float directionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[0]));
                 float directionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[1]));
@@ -4484,10 +4486,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.RespawnPositionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.RespawnPositionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.RespawnPositionComponent>("respawnPosition"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.RespawnPositionComponent>("respawnPosition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.RespawnPositionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.RespawnPositionComponent construct(EntityWorld entityWorld, Element element){
                 String[] positionCoordinates = element.getText().split(",");
                 float positionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[0]));
                 float positionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[1]));
@@ -4501,20 +4503,20 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.ScoreComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ScoreComponent>("score"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ScoreComponent>("score"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.ScoreComponent construct(){
-                int scoreEntity = createChildEntity(0, "scoreEntity");
+            public amara.applications.ingame.entitysystem.components.units.ScoreComponent construct(EntityWorld entityWorld, Element element){
+                int scoreEntity = createChildEntity(entityWorld, element, 0, "scoreEntity");
                 return new amara.applications.ingame.entitysystem.components.units.ScoreComponent(scoreEntity);
             }
         });
         //scores
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent>("characterAssists"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent>("characterAssists"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent construct(EntityWorld entityWorld, Element element){
                 int assists = 0;
                 String assistsText = element.getText();
                 if((assistsText != null) && (assistsText.length() > 0)){
@@ -4524,10 +4526,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent>("characterKills"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent>("characterKills"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent construct(EntityWorld entityWorld, Element element){
                 int kills = 0;
                 String killsText = element.getText();
                 if((killsText != null) && (killsText.length() > 0)){
@@ -4537,10 +4539,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent>("creepScore"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent>("creepScore"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent construct(EntityWorld entityWorld, Element element){
                 int kills = 0;
                 String killsText = element.getText();
                 if((killsText != null) && (killsText.length() > 0)){
@@ -4550,10 +4552,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent>("deaths"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent>("deaths"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent construct(EntityWorld entityWorld, Element element){
                 int deaths = 0;
                 String deathsText = element.getText();
                 if((deathsText != null) && (deathsText.length() > 0)){
@@ -4568,10 +4570,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent>("setNewCampCombatSpellsOnCooldown"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent>("setNewCampCombatSpellsOnCooldown"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent construct(EntityWorld entityWorld, Element element){
                 String[] spellIndicesParts = element.getAttributeValue("spellIndices").split(",");
                 int[] spellIndices = new int[spellIndicesParts.length];
                 for(int i=0;i<spellIndices.length;i++){
@@ -4591,10 +4593,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.SightRangeComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SightRangeComponent>("sightRange"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SightRangeComponent>("sightRange"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.SightRangeComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.SightRangeComponent construct(EntityWorld entityWorld, Element element){
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
@@ -4609,19 +4611,19 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.SpellsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SpellsComponent>("spells"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SpellsComponent>("spells"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.SpellsComponent construct(){
-                int[] spellsEntities = createChildEntities(0, "spellsEntities");
+            public amara.applications.ingame.entitysystem.components.units.SpellsComponent construct(EntityWorld entityWorld, Element element){
+                int[] spellsEntities = createChildEntities(entityWorld, element, 0, "spellsEntities");
                 return new amara.applications.ingame.entitysystem.components.units.SpellsComponent(spellsEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.SpellsUpgradePointsComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.SpellsUpgradePointsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SpellsUpgradePointsComponent>("spellsUpgradePoints"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SpellsUpgradePointsComponent>("spellsUpgradePoints"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.SpellsUpgradePointsComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.SpellsUpgradePointsComponent construct(EntityWorld entityWorld, Element element){
                 int upgradePoints = 0;
                 String upgradePointsText = element.getText();
                 if((upgradePointsText != null) && (upgradePointsText.length() > 0)){
@@ -4636,52 +4638,52 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.TeamComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.TeamComponent>("team"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.TeamComponent>("team"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.TeamComponent construct(){
-                int teamEntity = createChildEntity(0, "teamEntity");
+            public amara.applications.ingame.entitysystem.components.units.TeamComponent construct(EntityWorld entityWorld, Element element){
+                int teamEntity = createChildEntity(entityWorld, element, 0, "teamEntity");
                 return new amara.applications.ingame.entitysystem.components.units.TeamComponent(teamEntity);
             }
         });
         //types
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent>("isCharacter"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent>("isCharacter"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent>("isMinion"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent>("isMinion"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent>("isMonster"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent>("isMonster"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent>("isProjectile"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent>("isProjectile"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent>("isStructure"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent>("isStructure"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent();
             }
         });
@@ -4691,10 +4693,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.units.WalkStepDistanceComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.WalkStepDistanceComponent>("walkStepDistance"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.WalkStepDistanceComponent>("walkStepDistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.WalkStepDistanceComponent construct(){
+            public amara.applications.ingame.entitysystem.components.units.WalkStepDistanceComponent construct(EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
@@ -4710,20 +4712,20 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.visuals.AnimationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.AnimationComponent>("animation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.AnimationComponent>("animation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.AnimationComponent construct(){
-                int animationEntity = createChildEntity(0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.visuals.AnimationComponent construct(EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.visuals.AnimationComponent(animationEntity);
             }
         });
         //animations
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent>("freezeAfterPlaying"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent>("freezeAfterPlaying"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent construct(){
+            public amara.applications.ingame.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent();
             }
         });
@@ -4733,10 +4735,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.visuals.animations.LoopDurationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.LoopDurationComponent>("loopDuration"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.LoopDurationComponent>("loopDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.animations.LoopDurationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.visuals.animations.LoopDurationComponent construct(EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
@@ -4751,10 +4753,10 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.visuals.animations.PassedLoopTimeComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.PassedLoopTimeComponent>("passedLoopTime"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.PassedLoopTimeComponent>("passedLoopTime"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.animations.PassedLoopTimeComponent construct(){
+            public amara.applications.ingame.entitysystem.components.visuals.animations.PassedLoopTimeComponent construct(EntityWorld entityWorld, Element element){
                 float passedTime = 0;
                 String passedTimeText = element.getText();
                 if((passedTimeText != null) && (passedTimeText.length() > 0)){
@@ -4764,10 +4766,10 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.visuals.animations.RemainingLoopsComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.visuals.animations.RemainingLoopsComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.RemainingLoopsComponent>("remainingLoops"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.RemainingLoopsComponent>("remainingLoops"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.animations.RemainingLoopsComponent construct(){
+            public amara.applications.ingame.entitysystem.components.visuals.animations.RemainingLoopsComponent construct(EntityWorld entityWorld, Element element){
                 int loopsCount = 0;
                 String loopsCountText = element.getText();
                 if((loopsCountText != null) && (loopsCountText.length() > 0)){
@@ -4777,36 +4779,36 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.visuals.animations.RestartClientAnimationComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.visuals.animations.RestartClientAnimationComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.RestartClientAnimationComponent>("restartClientAnimation"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.RestartClientAnimationComponent>("restartClientAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.animations.RestartClientAnimationComponent construct(){
+            public amara.applications.ingame.entitysystem.components.visuals.animations.RestartClientAnimationComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.visuals.animations.RestartClientAnimationComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.visuals.ModelComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.visuals.ModelComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.ModelComponent>("model"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.ModelComponent>("model"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.ModelComponent construct(){
+            public amara.applications.ingame.entitysystem.components.visuals.ModelComponent construct(EntityWorld entityWorld, Element element){
                 String modelSkinPath = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.visuals.ModelComponent(modelSkinPath);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent>("teamModel"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent>("teamModel"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent construct(){
+            public amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent construct(EntityWorld entityWorld, Element element){
                 String modelSkinPath = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent(modelSkinPath);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.visuals.TitleComponent.class);
-        xmlTemplateManager.registerComponent(amara.applications.ingame.entitysystem.components.visuals.TitleComponent.class, new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.TitleComponent>("title"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.TitleComponent>("title"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.TitleComponent construct(){
+            public amara.applications.ingame.entitysystem.components.visuals.TitleComponent construct(EntityWorld entityWorld, Element element){
                 String title = xmlTemplateManager.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.visuals.TitleComponent(title);
             }

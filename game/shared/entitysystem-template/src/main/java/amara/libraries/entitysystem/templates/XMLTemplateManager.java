@@ -38,11 +38,12 @@ public class XMLTemplateManager{
     private String currentDirectory;
     private Stack<HashMap<String, Integer>> cachedEntities = new Stack<>();
     private Stack<HashMap<String, String>> cachedValues = new Stack<>();
-    
-    public <T> void registerComponent(Class<T> componentClass, XMLComponentConstructor<T> xmlComponentConstructor){
+
+    public <T> void registerComponent(XMLComponentConstructor<T> xmlComponentConstructor){
+        xmlComponentConstructor.setXmlTemplateManager(this);
         xmlComponentConstructors.put(xmlComponentConstructor.getElementName(), xmlComponentConstructor);
     }
-    
+
     public void loadTemplate(EntityWorld entityWorld, int entity, String templateName, String[] parameters){
         currentDirectory = "";
         String[] directories = templateName.split("/");
@@ -191,8 +192,7 @@ public class XMLTemplateManager{
     private <T> T constructComponent(EntityWorld entityWorld, Element element){
         XMLComponentConstructor<T> xmlComponentConstructor = xmlComponentConstructors.get(element.getName());
         if(xmlComponentConstructor != null){
-            xmlComponentConstructor.prepare(this, entityWorld, element);
-            return xmlComponentConstructor.construct();
+            return xmlComponentConstructor.construct(entityWorld, element);
         }
         System.err.println("Unregistered component '" + element.getName() + "'");
         return null;

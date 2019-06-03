@@ -22,19 +22,15 @@ public abstract class XMLComponentConstructor<T>{
     }
     private String elementName;
     protected XMLTemplateManager xmlTemplateManager;
-    protected EntityWorld entityWorld;
-    protected Element element;
-    
-    public void prepare(XMLTemplateManager xmlTemplateManager, EntityWorld entityWorld, Element element){
-        this.xmlTemplateManager = xmlTemplateManager;
-        this.entityWorld = entityWorld;
-        this.element = element;
-    }
-    
-    public abstract T construct();
 
-    protected int[] createChildEntities(int offset, String parameterName){
-        LinkedList<Integer> childEntities = new LinkedList<Integer>();
+    public void setXmlTemplateManager(XMLTemplateManager xmlTemplateManager) {
+        this.xmlTemplateManager = xmlTemplateManager;
+    }
+
+    public abstract T construct(EntityWorld entityWorld, Element element);
+
+    protected int[] createChildEntities(EntityWorld entityWorld, Element element, int offset, String parameterName){
+        LinkedList<Integer> childEntities = new LinkedList<>();
         List children = element.getChildren();
         if(children.size() > 0){
             for(int i=0;i<children.size();i++){
@@ -44,19 +40,19 @@ public abstract class XMLComponentConstructor<T>{
         else if(element.getText().length() > 0){
             String[] textParts = element.getText().split(",");
             for(String textPart : textParts){
-                childEntities.add(parseEntity(textPart));
+                childEntities.add(parseEntity(entityWorld, textPart));
             }
         }
         int parameterIndex = 0;
         String attributeValue;
         while((attributeValue = element.getAttributeValue(parameterName + parameterIndex)) != null){
-            childEntities.add(parseEntity(attributeValue));
+            childEntities.add(parseEntity(entityWorld, attributeValue));
             parameterIndex++;
         }
         return Util.convertToArray_Integer(childEntities);
     }
 
-    protected int createChildEntity(int index, String parameterName){
+    protected int createChildEntity(EntityWorld entityWorld, Element element, int index, String parameterName){
         List children = element.getChildren();
         if(children.size() > 0){
             if(index < children.size()){
@@ -64,15 +60,15 @@ public abstract class XMLComponentConstructor<T>{
             }
         }
         else if((index == 0) && (element.getText().length() > 0)){
-            return parseEntity(element.getText());
+            return parseEntity(entityWorld, element.getText());
         }
-        return parseEntity(element.getAttributeValue(parameterName));
+        return parseEntity(entityWorld, element.getAttributeValue(parameterName));
     }
-    
-    private int parseEntity(String text){
+
+    private int parseEntity(EntityWorld entityWorld, String text){
         return Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, text));
     }
-    
+
     public String getElementName(){
         return elementName;
     }

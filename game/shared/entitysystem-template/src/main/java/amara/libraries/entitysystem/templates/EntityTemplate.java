@@ -13,7 +13,7 @@ import amara.libraries.entitysystem.*;
  */
 public class EntityTemplate{
     
-    private static ArrayList<EntityTemplate_Loader> loaders = new ArrayList<EntityTemplate_Loader>();
+    private static ArrayList<EntityTemplate_Loader> loaders = new ArrayList<>();
     
     public static void addLoader(EntityTemplate_Loader loader){
         loaders.add(loader);

@@ -13,5 +13,5 @@ import amara.libraries.entitysystem.EntityWorld;
  */
 public interface EntityTemplate_Loader{
     
-    public abstract void loadTemplate(EntityWorld entityWorld, int entity, String templateName, String[] parametersText);
+    void loadTemplate(EntityWorld entityWorld, int entity, String templateName, String[] parametersText);
 }

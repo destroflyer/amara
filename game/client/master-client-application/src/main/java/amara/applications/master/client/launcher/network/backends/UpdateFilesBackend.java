@@ -21,17 +21,18 @@ public class UpdateFilesBackend implements MessageBackend{
         this.clientLauncher = clientLauncher;
     }
     private ClientLauncher clientLauncher;
-    private LinkedList<UpdateFile> updateFiles = new LinkedList<UpdateFile>();
+    private LinkedList<UpdateFile> tmpUpdateFiles = new LinkedList<>();
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_UpdateFiles){
             Message_UpdateFiles message = (Message_UpdateFiles) receivedMessage;
             for(UpdateFile updateFile : message.getUpdateFiles()){
-                updateFiles.add(updateFile);
+                tmpUpdateFiles.add(updateFile);
             }
             if(message.isEndReached()){
-                clientLauncher.update(updateFiles);
+                clientLauncher.update(new LinkedList<>(tmpUpdateFiles));
+                tmpUpdateFiles.clear();
             }
         }
     }

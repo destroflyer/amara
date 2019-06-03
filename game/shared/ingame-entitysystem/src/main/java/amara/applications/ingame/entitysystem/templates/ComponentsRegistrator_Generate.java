@@ -48,9 +48,11 @@ public class ComponentsRegistrator_Generate{
         code = "package " + packageName + ";\n";
         code += "\n";
         code += "import com.jme3.math.Vector2f;\n";
+        code += "import amara.libraries.entitysystem.EntityWorld;\n";
+        code += "import amara.libraries.entitysystem.synchronizing.*;\n";
         code += "import amara.libraries.entitysystem.synchronizing.fieldserializers.*;\n";
         code += "import amara.libraries.entitysystem.templates.*;\n";
-        code += "import amara.libraries.entitysystem.synchronizing.*;\n";
+        code += "import org.jdom2.Element;\n";
         code += "\n";
         code += "/**GENERATED**/\n";
         code += "public class ComponentsRegistrator{\n\n";
@@ -114,9 +116,9 @@ public class ComponentsRegistrator_Generate{
                     }
                     if(isComponentClassXMLSupported(componentClass)){
                         String elementName = componentClassName.substring(0, 1).toLowerCase() + componentClassName.substring(1, componentClassName.length() - 9);
-                        code += "        xmlTemplateManager.registerComponent(" + componentClass.getName() + ".class, new XMLComponentConstructor<" + componentClass.getName() + ">(\"" + elementName + "\"){\n\n";
+                        code += "        xmlTemplateManager.registerComponent(new XMLComponentConstructor<" + componentClass.getName() + ">(\"" + elementName + "\"){\n\n";
                         code += "            @Override\n";
-                        code += "            public " + componentClass.getName() + " construct(){\n";
+                        code += "            public " + componentClass.getName() + " construct(EntityWorld entityWorld, Element element){\n";
                         //Check constructor
                         String resultingConstructorCode = "";
                         String fileContent = FileManager.getFileContent(directory + fileName);
@@ -138,11 +140,11 @@ public class ComponentsRegistrator_Generate{
                                 String parameterName = parameterParts[1];
                                 String textAccessCode = ((parameters.length == 1)?"element.getText()":"element.getAttributeValue(\"" + parameterName + "\")");
                                 if(parameterType.equals("int") && parameterName.toLowerCase().endsWith("entity")){
-                                    code += "                int " + parameterName + " = createChildEntity(" + childIndex + ", \"" + parameterName + "\");\n";
+                                    code += "                int " + parameterName + " = createChildEntity(entityWorld, element, " + childIndex + ", \"" + parameterName + "\");\n";
                                     wasHandled = true;
                                 }
                                 else if((parameterType.equals("int[]") || parameterType.equals("int...")) && parameterName.toLowerCase().endsWith("entities")){
-                                    code += "                int[] " + parameterName + " = createChildEntities(" + childIndex + ", \"" + parameterName + "\");\n";
+                                    code += "                int[] " + parameterName + " = createChildEntities(entityWorld, element, " + childIndex + ", \"" + parameterName + "\");\n";
                                     wasHandled = true;
                                 }
                                 else if(parameterType.equals("String")){

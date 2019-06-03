@@ -7,12 +7,14 @@ package amara.applications.ingame.entitysystem.templates;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+
 import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.effects.physics.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.spawns.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.components.units.*;
+import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.entitysystem.synchronizing.*;
 import amara.libraries.entitysystem.synchronizing.fieldserializers.*;
 import amara.libraries.entitysystem.templates.*;
@@ -68,29 +70,29 @@ public class CustomSerializer_Ingame{
         }
         XMLTemplateManager xmlTemplateManager = XMLTemplateManager.getInstance();
         //effects/physics
-        xmlTemplateManager.registerComponent(AddCollisionGroupsComponent.class, new XMLComponentConstructor<AddCollisionGroupsComponent>("addCollisionGroups"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<AddCollisionGroupsComponent>("addCollisionGroups"){
 
             @Override
-            public AddCollisionGroupsComponent construct(){
+            public AddCollisionGroupsComponent construct(EntityWorld entityWorld, Element element){
                 long targetOf = getCollisionGroupBitMask(element.getAttributeValue("targetOf"));
                 long targets = getCollisionGroupBitMask(element.getAttributeValue("targets"));
                 return new AddCollisionGroupsComponent(targetOf, targets);
             }
         });
-        xmlTemplateManager.registerComponent(RemoveCollisionGroupsComponent.class, new XMLComponentConstructor<RemoveCollisionGroupsComponent>("removeCollisionGroups"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<RemoveCollisionGroupsComponent>("removeCollisionGroups"){
 
             @Override
-            public RemoveCollisionGroupsComponent construct(){
+            public RemoveCollisionGroupsComponent construct(EntityWorld entityWorld, Element element){
                 long targetOf = getCollisionGroupBitMask(element.getAttributeValue("targetOf"));
                 long targets = getCollisionGroupBitMask(element.getAttributeValue("targets"));
                 return new RemoveCollisionGroupsComponent(targetOf, targets);
             }
         });
         //physics
-        xmlTemplateManager.registerComponent(HitboxComponent.class, new XMLComponentConstructor<HitboxComponent>("hitbox"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<HitboxComponent>("hitbox"){
 
             @Override
-            public HitboxComponent construct(){
+            public HitboxComponent construct(EntityWorld entityWorld, Element element){
                 Shape shape = null;
                 Element childElement = (Element) element.getChildren().get(0);
                 String shapeType = childElement.getName();
@@ -135,10 +137,10 @@ public class CustomSerializer_Ingame{
             }
         });
         //spawns
-        xmlTemplateManager.registerComponent(SpawnTemplateComponent.class, new XMLComponentConstructor<SpawnTemplateComponent>("spawnTemplate"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<SpawnTemplateComponent>("spawnTemplate"){
 
             @Override
-            public SpawnTemplateComponent construct(){
+            public SpawnTemplateComponent construct(EntityWorld entityWorld, Element element){
                 String[] templates = element.getText().split("\\|");
                 for(int i=0;i<templates.length;i++){
                     templates[i] = xmlTemplateManager.parseTemplate(entityWorld, templates[i]);
@@ -147,27 +149,27 @@ public class CustomSerializer_Ingame{
             }
         });
         //spells
-        xmlTemplateManager.registerComponent(CastTypeComponent.class, new XMLComponentConstructor<CastTypeComponent>("castType"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<CastTypeComponent>("castType"){
 
             @Override
-            public CastTypeComponent construct(){
+            public CastTypeComponent construct(EntityWorld entityWorld, Element element){
                 return new CastTypeComponent(CastTypeComponent.CastType.valueOf(element.getText().toUpperCase()));
             }
         });
         //units
-        xmlTemplateManager.registerComponent(CollisionGroupComponent.class, new XMLComponentConstructor<CollisionGroupComponent>("collisionGroup"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<CollisionGroupComponent>("collisionGroup"){
 
             @Override
-            public CollisionGroupComponent construct(){
+            public CollisionGroupComponent construct(EntityWorld entityWorld, Element element){
                 long targetOf = getCollisionGroupBitMask(element.getAttributeValue("targetOf"));
                 long targets = getCollisionGroupBitMask(element.getAttributeValue("targets"));
                 return new CollisionGroupComponent(targetOf, targets);
             }
         });
-        xmlTemplateManager.registerComponent(HealthBarStyleComponent.class, new XMLComponentConstructor<HealthBarStyleComponent>("healthBarStyle"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<HealthBarStyleComponent>("healthBarStyle"){
 
             @Override
-            public HealthBarStyleComponent construct(){
+            public HealthBarStyleComponent construct(EntityWorld entityWorld, Element element){
                 return new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.valueOf(element.getText().toUpperCase()));
             }
         });
