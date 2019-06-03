@@ -27,7 +27,7 @@
             <entity>
                 <bonusFlatMaximumHealth>1800</bonusFlatMaximumHealth>
                 <bonusFlatAttackDamage>100</bonusFlatAttackDamage>
-                <bonusFlatAttackSpeed>1.4</bonusFlatAttackSpeed>
+                <bonusFlatAttackSpeed>1.3</bonusFlatAttackSpeed>
                 <bonusFlatArmor>80</bonusFlatArmor>
                 <bonusFlatMagicResistance>80</bonusFlatMagicResistance>
                 <bonusFlatWalkSpeed>5</bonusFlatWalkSpeed>
