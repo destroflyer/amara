@@ -10,8 +10,6 @@ import amara.applications.ingame.client.IngameClientApplication;
 import amara.applications.ingame.client.network.backends.GameInfoBackend;
 import amara.applications.ingame.network.messages.Message_PlayerAuthentification;
 import amara.libraries.applications.display.appstates.*;
-import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
-import amara.libraries.network.NetworkClient;
 
 /**
  *
@@ -27,8 +25,8 @@ public class PlayerAuthentificationAppState extends BaseDisplayAppState<IngameCl
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
-        NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.addMessageBackend(new GameInfoBackend(mainApplication));
-        networkClient.sendMessage(new Message_PlayerAuthentification(authentificationKey));
+        IngameNetworkAppState ingameNetworkAppState = getAppState(IngameNetworkAppState.class);
+        ingameNetworkAppState.addMessageBackend(new GameInfoBackend(mainApplication));
+        ingameNetworkAppState.sendMessage(new Message_PlayerAuthentification(authentificationKey));
     }
 }

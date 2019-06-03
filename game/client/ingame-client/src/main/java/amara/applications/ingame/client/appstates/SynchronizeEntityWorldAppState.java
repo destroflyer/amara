@@ -31,8 +31,8 @@ public class SynchronizeEntityWorldAppState extends BaseDisplayAppState<IngameCl
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
-        NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.addMessageBackend(new EntitySynchronizeBackend(this));
+        IngameNetworkAppState ingameNetworkAppState = getAppState(IngameNetworkAppState.class);
+        ingameNetworkAppState.addMessageBackend(new EntitySynchronizeBackend(this));
     }
 
     @Override

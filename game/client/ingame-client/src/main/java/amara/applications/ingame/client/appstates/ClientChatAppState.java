@@ -37,8 +37,8 @@ public class ClientChatAppState extends BaseDisplayAppState<IngameClientApplicat
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
-        NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.addMessageBackend((Message receivedMessage, MessageResponse messageResponse) -> {
+        IngameNetworkAppState ingameNetworkAppState = getAppState(IngameNetworkAppState.class);
+        ingameNetworkAppState.addMessageBackend((Message receivedMessage, MessageResponse messageResponse) -> {
             if(receivedMessage instanceof Message_ChatMessage){
                 final Message_ChatMessage message = (Message_ChatMessage) receivedMessage;
                 mainApplication.enqueueTask(() -> {

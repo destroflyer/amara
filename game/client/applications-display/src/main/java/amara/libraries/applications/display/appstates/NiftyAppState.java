@@ -93,4 +93,13 @@ public class NiftyAppState extends BaseDisplayAppState{
         }
         return null;
     }
+
+    @Override
+    public void cleanup() {
+        super.cleanup();
+        // Unsubscribe leftover element styleListeners to prevent memory leak (https://github.com/nifty-gui/nifty-gui/issues/461)
+        for (Nifty nifty : runningNifties) {
+            nifty.getEventService().clearAllSubscribers();
+        }
+    }
 }

@@ -31,8 +31,8 @@ public class PingAppState extends BaseDisplayAppState<IngameClientApplication>{
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
-        NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.addMessageBackend(new ReceivePongsBackend(this));
+        IngameNetworkAppState ingameNetworkAppState = getAppState(IngameNetworkAppState.class);
+        ingameNetworkAppState.addMessageBackend(new ReceivePongsBackend(this));
         sendPing();
     }
 

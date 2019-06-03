@@ -4,11 +4,6 @@
  */
 package amara.applications.ingame.client.appstates;
 
-import java.util.Iterator;
-import com.jme3.app.Application;
-import com.jme3.app.state.AppStateManager;
-import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
 import amara.applications.ingame.client.IngameClientApplication;
 import amara.applications.ingame.client.network.backends.*;
 import amara.applications.ingame.client.systems.audio.*;
@@ -23,9 +18,13 @@ import amara.applications.ingame.entitysystem.synchronizing.ParallelNetworkSyste
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.*;
 import amara.libraries.applications.display.ingame.maps.MapHeightmap;
-import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.entitysystem.EntitySystem;
-import amara.libraries.network.NetworkClient;
+import com.jme3.app.Application;
+import com.jme3.app.state.AppStateManager;
+import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
+
+import java.util.Iterator;
 
 /**
  *
@@ -75,10 +74,10 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(entitiesNode);
-        NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.addMessageBackend(new GameStartedBackend(entityWorld, getAppState(LoadingScreenAppState.class)));
-        networkClient.addMessageBackend(new GameCrashedBackend(mainApplication));
-        networkClient.addMessageBackend(new GameOverBackend(mainApplication));
+        IngameNetworkAppState ingameNetworkAppState = getAppState(IngameNetworkAppState.class);
+        ingameNetworkAppState.addMessageBackend(new GameStartedBackend(entityWorld, getAppState(LoadingScreenAppState.class)));
+        ingameNetworkAppState.addMessageBackend(new GameCrashedBackend(mainApplication));
+        ingameNetworkAppState.addMessageBackend(new GameOverBackend(mainApplication));
         for(EntitySystem entitySystem : ParallelNetworkSystems.generateSystems()){
             addEntitySystem(entitySystem);
         }

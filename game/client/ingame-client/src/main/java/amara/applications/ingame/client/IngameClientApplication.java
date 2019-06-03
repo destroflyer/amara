@@ -47,6 +47,7 @@ public class IngameClientApplication extends DisplayApplication{
         stateManager.attach(new NiftyAppState_IngameClient());
         stateManager.attach(new MouseCursorAppState());
         stateManager.attach(new IngameMouseCursorAppState());
+        stateManager.attach(new IngameNetworkAppState());
         stateManager.attach(new PingAppState());
         stateManager.attach(new EventManagerAppState());
         stateManager.attach(new AudioAppState());
