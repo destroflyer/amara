@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.systems.spells.SpellUtil;
@@ -15,8 +16,8 @@ import amara.libraries.entitysystem.*;
  */
 public class UpdateUpgradeSpellsPanelSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public UpdateUpgradeSpellsPanelSystem(int playerEntity, ScreenController_HUD screenController_HUD){
-        super(playerEntity, screenController_HUD);
+    public UpdateUpgradeSpellsPanelSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
+        super(playerAppState, screenController_HUD);
     }
     private boolean isUpdateRequired;
 
@@ -56,13 +57,13 @@ public class UpdateUpgradeSpellsPanelSystem extends GUIDisplaySystem<ScreenContr
                     showButton = true;
                     learnOrUpgrade = true;
                 }
-                screenController.setUpgradeSpellsButtonVisible(i, showButton);
+                screenController.setPlayer_UpgradeSpellsButtonVisible(i, showButton);
                 if(showButton){
-                    screenController.setUpgradeSpellsButtonImage(i, "Interface/hud/" + (learnOrUpgrade?"learn":"upgrade") + "_spell_button.png");
+                    screenController.setPlayer_UpgradeSpellsButtonImage(i, "Interface/hud/" + (learnOrUpgrade?"learn":"upgrade") + "_spell_button.png");
                     showLayer = true;
                 }
             }
-            screenController.setUpgradeSpellsLayerVisible(showLayer);
+            screenController.setPlayer_UpgradeSpellsLayerVisible(showLayer);
         }
     }
 }

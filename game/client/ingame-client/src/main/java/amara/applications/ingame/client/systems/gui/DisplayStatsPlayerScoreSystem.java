@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.scores.*;
@@ -15,8 +16,8 @@ import amara.libraries.entitysystem.*;
  */
 public class DisplayStatsPlayerScoreSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public DisplayStatsPlayerScoreSystem(int playerEntity, ScreenController_HUD screenController_HUD){
-        super(playerEntity, screenController_HUD);
+    public DisplayStatsPlayerScoreSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
+        super(playerAppState, screenController_HUD);
     }
     
     @Override

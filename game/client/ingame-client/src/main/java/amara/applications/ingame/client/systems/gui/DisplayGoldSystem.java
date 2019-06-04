@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.libraries.entitysystem.EntityWorld;
@@ -14,8 +15,8 @@ import amara.libraries.entitysystem.EntityWorld;
  */
 public class DisplayGoldSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public DisplayGoldSystem(int playerEntity, ScreenController_HUD screenController_HUD){
-        super(playerEntity, screenController_HUD);
+    public DisplayGoldSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
+        super(playerAppState, screenController_HUD);
     }
     
     @Override
@@ -25,6 +26,6 @@ public class DisplayGoldSystem extends GUIDisplaySystem<ScreenController_HUD> {
         if(goldComponent != null){
             gold = goldComponent.getGold();
         }
-        screenController.setGold(gold);
+        screenController.setPlayer_Gold(gold);
     }
 }

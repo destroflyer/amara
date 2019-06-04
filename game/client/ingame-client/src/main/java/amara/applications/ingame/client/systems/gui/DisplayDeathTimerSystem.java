@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.effects.AffectedTargetsComponent;
 import amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent;
@@ -18,8 +19,8 @@ import amara.libraries.entitysystem.*;
  */
 public class DisplayDeathTimerSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public DisplayDeathTimerSystem(int playerEntity, ScreenController_HUD screenController_HUD) {
-        super(playerEntity, screenController_HUD);
+    public DisplayDeathTimerSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
+        super(playerAppState, screenController_HUD);
     }
 
     @Override
@@ -46,7 +47,7 @@ public class DisplayDeathTimerSystem extends GUIDisplaySystem<ScreenController_H
     }
 
     private boolean isPlayerCharacterAffected(EntityWorld entityWorld, int effectCastEntity) {
-        int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
+        int characterEntity = entityWorld.getComponent(getPlayerEntity(), PlayerCharacterComponent.class).getEntity();
         int[] affectedTargetEntities = entityWorld.getComponent(effectCastEntity, AffectedTargetsComponent.class).getTargetEntities();
         for (int affectedTargetEntity : affectedTargetEntities) {
             if (affectedTargetEntity == characterEntity) {

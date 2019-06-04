@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.components.units.*;
@@ -15,8 +16,8 @@ import amara.libraries.entitysystem.*;
  */
 public class DisplaySpellsImagesSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public DisplaySpellsImagesSystem(int playerEntity, ScreenController_HUD screenController_HUD){
-        super(playerEntity, screenController_HUD);
+    public DisplaySpellsImagesSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
+        super(playerAppState, screenController_HUD);
     }
 
     @Override
@@ -31,7 +32,7 @@ public class DisplaySpellsImagesSystem extends GUIDisplaySystem<ScreenController
             int[] spells = spellsComponent.getSpellsEntities();
             for(int i=0;i<4;i++){
                 String imageFilePath = getSpellImageFilePath(entityWorld, spells, i);
-                screenController.setSpellImage(i, imageFilePath);
+                screenController.setPlayer_SpellImage(i, imageFilePath);
             }
         }
     }

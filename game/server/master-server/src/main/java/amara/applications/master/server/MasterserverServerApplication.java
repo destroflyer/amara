@@ -13,11 +13,11 @@ import amara.libraries.network.exceptions.ServerCreationException;
 /**
  * @author Carl
  */
-public class MasterserverServerApplication extends HeadlessApplication implements MasterserverServerApplicationInterface{
+public class MasterserverServerApplication extends HeadlessApplication implements MasterserverServerApplicationInterface {
 
-    public MasterserverServerApplication(int port){
+    public MasterserverServerApplication(int port) {
         this.port = port;
-        try{
+        try {
             stateManager.attach(new LogsAppState());
             stateManager.attach(new DatabaseAppState());
             stateManager.attach(new NetworkServerAppState(port));
@@ -28,35 +28,36 @@ public class MasterserverServerApplication extends HeadlessApplication implement
             stateManager.attach(new GamesQueueAppState());
             stateManager.attach(new GamesAppState(new PortProvider(port + 1)));
             stateManager.attach(new MasterServerInitializedAppState());
-        }catch(ServerCreationException ex){
-            System.out.println(ex.getMessage());
+        } catch(ServerCreationException ex) {
+            ex.printStackTrace();
             System.exit(0);
         }
     }
     private int port;
 
-    public int getPort(){
+    public int getPort() {
         return port;
     }
     
     //Interface
+
     @Override
-    public <T extends HeadlessAppState> T getState(Class<T> stateClass){
+    public <T extends HeadlessAppState> T getState(Class<T> stateClass) {
         return stateManager.getState(stateClass);
     }
 
     @Override
-    public void onGameServerInitialized(Game game){
+    public void onGameServerInitialized(Game game) {
         stateManager.getState(GamesAppState.class).onGameServerInitialized(game);
     }
 
     @Override
-    public void onGameCrashed(IngameServerApplication ingameServerApplication, Exception exception){
+    public void onGameCrashed(IngameServerApplication ingameServerApplication, Exception exception) {
         stateManager.getState(GamesAppState.class).onGameCrashed(ingameServerApplication, exception);
     }
 
     @Override
-    public void onGameOver(IngameServerApplication ingameServerApplication){
+    public void onGameOver(IngameServerApplication ingameServerApplication) {
         stateManager.getState(GamesAppState.class).onGameOver(ingameServerApplication);
     }
 }

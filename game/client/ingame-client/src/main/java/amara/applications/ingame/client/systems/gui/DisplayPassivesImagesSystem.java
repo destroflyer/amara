@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.units.PassivesComponent;
 import amara.libraries.entitysystem.*;
@@ -14,8 +15,8 @@ import amara.libraries.entitysystem.*;
  */
 public class DisplayPassivesImagesSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public DisplayPassivesImagesSystem(int playerEntity, ScreenController_HUD screenController_HUD){
-        super(playerEntity, screenController_HUD);
+    public DisplayPassivesImagesSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
+        super(playerAppState, screenController_HUD);
     }
 
     @Override
@@ -29,7 +30,7 @@ public class DisplayPassivesImagesSystem extends GUIDisplaySystem<ScreenControll
         if(passivesComponent != null){
             int[] passives = passivesComponent.getPassiveEntities();
             String imageFilePath = DisplaySpellsImagesSystem.getSpellImageFilePath(entityWorld, passives, 0);
-            screenController.setPassiveImage(imageFilePath);
+            screenController.setPlayer_PassiveImage(imageFilePath);
         }
     }
 }

@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.systems.units.LevelUpSystem;
@@ -15,8 +16,8 @@ import amara.libraries.entitysystem.*;
  */
 public class DisplayExperienceSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public DisplayExperienceSystem(int playerEntity, ScreenController_HUD screenController_HUD){
-        super(playerEntity, screenController_HUD);
+    public DisplayExperienceSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
+        super(playerAppState, screenController_HUD);
     }
 
     @Override

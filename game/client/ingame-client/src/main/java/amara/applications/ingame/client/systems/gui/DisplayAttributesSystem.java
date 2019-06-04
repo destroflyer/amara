@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.core.Util;
@@ -15,13 +16,18 @@ import amara.libraries.entitysystem.EntityWorld;
  */
 public class DisplayAttributesSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public DisplayAttributesSystem(int playerEntity, ScreenController_HUD screenController_HUD){
-        super(playerEntity, screenController_HUD);
+    public DisplayAttributesSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD){
+        super(playerAppState, screenController_HUD);
     }
     private final static String NON_EXISTING_ATTRIBUTE_TEXT = "-";
     
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity) {
+        updateAttributes(entityWorld, "player", characterEntity);
+        updateAttributes(entityWorld, "inspection", getInspectedEntity());
+    }
+
+    private void updateAttributes(EntityWorld entityWorld, String uiPrefix, int entity) {
         String healthText = NON_EXISTING_ATTRIBUTE_TEXT;
         String attackDamageText = NON_EXISTING_ATTRIBUTE_TEXT;
         String abilityPowerText = NON_EXISTING_ATTRIBUTE_TEXT;
@@ -31,41 +37,43 @@ public class DisplayAttributesSystem extends GUIDisplaySystem<ScreenController_H
         String magicResistanceText = NON_EXISTING_ATTRIBUTE_TEXT;
         String walkSpeedText = NON_EXISTING_ATTRIBUTE_TEXT;
         float healthPortion = 0;
-        if(entityWorld.hasComponent(characterEntity, HealthComponent.class) && entityWorld.hasComponent(characterEntity, MaximumHealthComponent.class)){
-            float health = entityWorld.getComponent(characterEntity, HealthComponent.class).getValue();
-            float maximumHealth = entityWorld.getComponent(characterEntity, MaximumHealthComponent.class).getValue();
+        if (entityWorld.hasComponent(entity, HealthComponent.class) && entityWorld.hasComponent(entity, MaximumHealthComponent.class)) {
+            float health = entityWorld.getComponent(entity, HealthComponent.class).getValue();
+            float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();
             healthText = (((int) health) + " / " + ((int) maximumHealth));
             healthPortion = (health / maximumHealth);
         }
-        if(entityWorld.hasComponent(characterEntity, AttackDamageComponent.class)){
-            attackDamageText = ("" + (int) entityWorld.getComponent(characterEntity, AttackDamageComponent.class).getValue());
+        if (entityWorld.hasComponent(entity, AttackDamageComponent.class) ){
+            attackDamageText = ("" + (int) entityWorld.getComponent(entity, AttackDamageComponent.class).getValue());
         }
-        if(entityWorld.hasComponent(characterEntity, AbilityPowerComponent.class)){
-            abilityPowerText = ("" + (int) entityWorld.getComponent(characterEntity, AbilityPowerComponent.class).getValue());
+        if (entityWorld.hasComponent(entity, AbilityPowerComponent.class)) {
+            abilityPowerText = ("" + (int) entityWorld.getComponent(entity, AbilityPowerComponent.class).getValue());
         }
-        if(entityWorld.hasComponent(characterEntity, AttackSpeedComponent.class)){
-            attackSpeedText = ("" + Util.round(entityWorld.getComponent(characterEntity, AttackSpeedComponent.class).getValue(), 2));
+        if (entityWorld.hasComponent(entity, AttackSpeedComponent.class)) {
+            attackSpeedText = ("" + Util.round(entityWorld.getComponent(entity, AttackSpeedComponent.class).getValue(), 2));
         }
-        if(entityWorld.hasComponent(characterEntity, CooldownSpeedComponent.class)){
-            cooldownSpeedText = ("" + Util.round(entityWorld.getComponent(characterEntity, CooldownSpeedComponent.class).getValue(), 2));
+        if (entityWorld.hasComponent(entity, CooldownSpeedComponent.class)) {
+            cooldownSpeedText = ("" + Util.round(entityWorld.getComponent(entity, CooldownSpeedComponent.class).getValue(), 2));
         }
-        if(entityWorld.hasComponent(characterEntity, ArmorComponent.class)){
-            armorText = ("" + (int) entityWorld.getComponent(characterEntity, ArmorComponent.class).getValue());
+        if (entityWorld.hasComponent(entity, ArmorComponent.class)) {
+            armorText = ("" + (int) entityWorld.getComponent(entity, ArmorComponent.class).getValue());
         }
-        if(entityWorld.hasComponent(characterEntity, MagicResistanceComponent.class)){
-            magicResistanceText = ("" + (int) entityWorld.getComponent(characterEntity, MagicResistanceComponent.class).getValue());
+        if (entityWorld.hasComponent(entity, MagicResistanceComponent.class)) {
+            magicResistanceText = ("" + (int) entityWorld.getComponent(entity, MagicResistanceComponent.class).getValue());
         }
-        if(entityWorld.hasComponent(characterEntity, WalkSpeedComponent.class)){
-            walkSpeedText = ("" + Util.round(entityWorld.getComponent(characterEntity, WalkSpeedComponent.class).getValue(), 2));
+        if (entityWorld.hasComponent(entity, WalkSpeedComponent.class)) {
+            walkSpeedText = ("" + Util.round(entityWorld.getComponent(entity, WalkSpeedComponent.class).getValue(), 2));
         }
-        screenController.setAttributeValue_AttackDamage(attackDamageText);
-        screenController.setAttributeValue_AbilityPower(abilityPowerText);
-        screenController.setAttributeValue_AttackSpeed(attackSpeedText);
-        screenController.setAttributeValue_CooldownSpeed(cooldownSpeedText);
-        screenController.setAttributeValue_Armor(armorText);
-        screenController.setAttributeValue_MagicResistance(magicResistanceText);
-        screenController.setAttributeValue_WalkSpeed(walkSpeedText);
-        screenController.setResourceBarWidth_Health(healthPortion);
-        screenController.setResourceBarText_Health(healthText);
+        screenController.setAttributeValue_AttackDamage(uiPrefix, attackDamageText);
+        screenController.setAttributeValue_AbilityPower(uiPrefix, abilityPowerText);
+        screenController.setAttributeValue_AttackSpeed(uiPrefix, attackSpeedText);
+        screenController.setAttributeValue_CooldownSpeed(uiPrefix, cooldownSpeedText);
+        screenController.setAttributeValue_Armor(uiPrefix, armorText);
+        screenController.setAttributeValue_MagicResistance(uiPrefix, magicResistanceText);
+        screenController.setAttributeValue_WalkSpeed(uiPrefix, walkSpeedText);
+        if ("player".equals(uiPrefix)) {
+            screenController.setPlayer_ResourceBarWidth_Health(healthPortion);
+            screenController.setPlayer_ResourceBarText_Health(healthText);
+        }
     }
 }

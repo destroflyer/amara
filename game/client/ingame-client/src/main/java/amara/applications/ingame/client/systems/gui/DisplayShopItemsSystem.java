@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_Shop;
 import amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent;
 import amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent;
@@ -17,8 +18,8 @@ import amara.libraries.entitysystem.EntityWorld;
  */
 public class DisplayShopItemsSystem extends GUIDisplaySystem<ScreenController_Shop> {
 
-    public DisplayShopItemsSystem(int playerEntity, ScreenController_Shop screenController_shop){
-        super(playerEntity, screenController_shop);
+    public DisplayShopItemsSystem(PlayerAppState playerAppState, ScreenController_Shop screenController_Shop) {
+        super(playerAppState, screenController_Shop);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class DisplayShopItemsSystem extends GUIDisplaySystem<ScreenController_Sh
     }
 
     private int getPlayerTeamEntity(EntityWorld entityWorld) {
-        int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
+        int characterEntity = entityWorld.getComponent(getPlayerEntity(), PlayerCharacterComponent.class).getEntity();
         return entityWorld.getComponent(characterEntity, TeamComponent.class).getTeamEntity();
     }
 }

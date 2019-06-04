@@ -29,7 +29,7 @@ import de.lessvoid.nifty.tools.SizeValue;
  *
  * @author Carl
  */
-public class ScreenController_HUD extends GameScreenController{
+public class ScreenController_HUD extends GameScreenController {
 
     public ScreenController_HUD(){
         super("start");
@@ -44,145 +44,163 @@ public class ScreenController_HUD extends GameScreenController{
     private SpellInformation action_ShowSpellInformation;
     private boolean action_HideSpellInformation;
     private int deathRecapPageID;
-    
+
     @Override
-    public void onStartup(){
+    public void onStartup() {
         super.onStartup();
+        setInspectionVisible(false);
+        hideLevel("player");
         setExperience(0);
-        hidePassiveCooldown();
-        for(int i=0;i<4;i++){
-            hideSpellCooldown(i);
+        hidePlayer_PassiveCooldown();
+        for (int i = 0; i < 4; i++) {
+            hidePlayer_SpellCooldown(i);
         }
-        for(int i=0;i<6;i++){
-            hideInventoryItem_Description(i);
-            hideItemCooldown(i);
+        for (int i = 0; i < 6; i++) {
+            hideInventoryItem_Description("player", i);
+            hidePlayer_ItemCooldown(i);
         }
-        for(int i=0;i<2;i++){
-            hideMapSpellCooldown(i);
+        for (int i = 0; i < 2; i++) {
+            hidePlayer_MapSpellCooldown(i);
         }
-        setUpgradeSpellsLayerVisible(false);
-        hideUpgradeSpell();
+        setPlayer_UpgradeSpellsLayerVisible(false);
+        hidePlayer_UpgradeSpell();
     }
-    
-    public void setPlayerName(String name){
-        getTextRenderer("player_name").setText(name);
+
+    public void setInspectionVisible(boolean isVisible) {
+        getElementByID("inspection_attributes").setVisible(isVisible);
+        getElementByID("inspection_inventory").setVisible(isVisible);
+        getElementByID("inspection_inventory_background").setVisible(isVisible);
+        getElementByID("inspection_background").setVisible(isVisible);
+        getElementByID("inspection_level_layer").setVisible(isVisible);
     }
-    
-    public void setLevel(int level){
-        getTextRenderer("level").setText("" + level);
+
+    public void setName(String prefix, String name){
+        getTextRenderer(prefix + "_name").setText(name);
     }
-    
+
+    public void hideLevel(String prefix){
+        setLevel(prefix, "");
+    }
+
+    public void setLevel(String prefix, int level){
+        setLevel(prefix, "" + level);
+    }
+
+    private void setLevel(String prefix, String text){
+        getTextRenderer(prefix + "_level").setText(text);
+    }
+
     public void setExperience(float portion){
         int width = (int) (portion * 257);
-        Element experienceBar = getElementByID("experience_bar");
+        Element experienceBar = getElementByID("player_experience_bar");
         experienceBar.setConstraintWidth(new SizeValue(width + "px"));
         experienceBar.getParent().layoutElements();
     }
-    
-    public void setAttributeValue_Health(String text){
-        setAttributeValue("health", text);
+
+    public void setAttributeValue_Health(String prefix, String text){
+        setAttributeValue(prefix, "health", text);
     }
     
-    public void setAttributeValue_AttackDamage(String text){
-        setAttributeValue("attack_damage", text);
+    public void setAttributeValue_AttackDamage(String prefix, String text){
+        setAttributeValue(prefix, "attack_damage", text);
+    }
+
+    public void setAttributeValue_AbilityPower(String prefix, String text){
+        setAttributeValue(prefix, "ability_power", text);
+    }
+
+    public void setAttributeValue_AttackSpeed(String prefix, String text){
+        setAttributeValue(prefix, "attack_speed", text);
+    }
+
+    public void setAttributeValue_CooldownSpeed(String prefix, String text){
+        setAttributeValue(prefix, "cooldown_speed", text);
+    }
+
+    public void setAttributeValue_Armor(String prefix, String text){
+        setAttributeValue(prefix, "armor", text);
+    }
+
+    public void setAttributeValue_MagicResistance(String prefix, String text){
+        setAttributeValue(prefix, "magic_resistance", text);
+    }
+
+    public void setAttributeValue_WalkSpeed(String prefix, String text){
+        setAttributeValue(prefix, "walk_speed", text);
+    }
+
+    private void setAttributeValue(String prefix, String attributeName, String text){
+        getTextRenderer(prefix + "_attribute_value_" + attributeName).setText(text);
+    }
+
+    public void setPlayer_ResourceBarWidth_Health(float portion){
+        setPlayer_ResourceBarWidth("health", portion);
     }
     
-    public void setAttributeValue_AbilityPower(String text){
-        setAttributeValue("ability_power", text);
-    }
-    
-    public void setAttributeValue_AttackSpeed(String text){
-        setAttributeValue("attack_speed", text);
-    }
-    
-    public void setAttributeValue_CooldownSpeed(String text){
-        setAttributeValue("cooldown_speed", text);
-    }
-    
-    public void setAttributeValue_Armor(String text){
-        setAttributeValue("armor", text);
-    }
-    
-    public void setAttributeValue_MagicResistance(String text){
-        setAttributeValue("magic_resistance", text);
-    }
-    
-    public void setAttributeValue_WalkSpeed(String text){
-        setAttributeValue("walk_speed", text);
-    }
-    
-    private void setAttributeValue(String attributeName, String text){
-        getTextRenderer("attribute_value_" + attributeName).setText(text);
-    }
-    
-    public void setResourceBarWidth_Health(float portion){
-        setResourceBarWidth("health", portion);
-    }
-    
-    private void setResourceBarWidth(String resourceName, float portion){
-        Element resourceBar = getElementByID("resource_bar_" + resourceName);
+    private void setPlayer_ResourceBarWidth(String resourceName, float portion){
+        Element resourceBar = getElementByID("player_resource_bar_" + resourceName);
         resourceBar.setConstraintWidth(new SizeValue((portion * 100) + "%"));
         resourceBar.getParent().layoutElements();
     }
     
-    public void setResourceBarText_Health(String text){
-        getTextRenderer("resource_bar_health_text").setText(text);
+    public void setPlayer_ResourceBarText_Health(String text){
+        getTextRenderer("player_resource_bar_health_text").setText(text);
     }
     
-    public void setPassiveImage(String imagePath){
-        getImageRenderer("passive_image").setImage(createImage(imagePath));
+    public void setPlayer_PassiveImage(String imagePath){
+        getImageRenderer("player_passive_image").setImage(createImage(imagePath));
     }
     
-    public void showPassiveCooldown(float remainingTime){
-        showCooldown("passive", 0, remainingTime);
+    public void showPlayer_PassiveCooldown(float remainingTime){
+        showCooldown("player_passive", 0, remainingTime);
+    }
+
+    public void hidePlayer_PassiveCooldown(){
+        hideCooldown("player_passive", 0);
     }
     
-    public void hidePassiveCooldown(){
-        hideCooldown("passive", 0);
+    public void setPlayer_SpellImage(int index, String imagePath){
+        getImageRenderer("player_spell_" + index + "_image").setImage(createImage(imagePath));
     }
     
-    public void setSpellImage(int index, String imagePath){
-        getImageRenderer("spell_" + index + "_image").setImage(createImage(imagePath));
+    public void showPlayer_SpellCooldown(int index, float remainingTime){
+        showCooldown("player_spell", index, remainingTime);
     }
     
-    public void showSpellCooldown(int index, float remainingTime){
-        showCooldown("spell", index, remainingTime);
+    public void hidePlayer_SpellCooldown(int index){
+        hideCooldown("player_spell", index);
+    }
+
+    public void setInventoryItem_Image(String prefix, int index, String imagePath){
+        getImageRenderer(prefix + "_inventory_item_" + index + "_image").setImage(createImage(imagePath));
+    }
+
+    public void showInventoryItem_Description(String prefix, int index, String description){
+        showHintText(prefix + "_inventory_item_" + index + "_image", description);
+    }
+
+    public void hideInventoryItem_Description(String prefix, int index){
+        hideHintText(prefix + "_inventory_item_" + index + "_image");
     }
     
-    public void hideSpellCooldown(int index){
-        hideCooldown("spell", index);
+    public void showPlayer_ItemCooldown(int index, float remainingTime){
+        showCooldown("player_inventory_item", index, remainingTime);
     }
     
-    public void setInventoryItem_Image(int index, String imagePath){
-        getImageRenderer("inventory_item_" + index + "_image").setImage(createImage(imagePath));
+    public void hidePlayer_ItemCooldown(int index){
+        hideCooldown("player_inventory_item", index);
     }
     
-    public void showInventoryItem_Description(int index, String description){
-        showHintText("inventory_item_" + index + "_image", description);
+    public void setPlayer_MapSpellImage(int index, String imagePath){
+        getImageRenderer("player_map_spell_" + index + "_image").setImage(createImage(imagePath));
     }
     
-    public void hideInventoryItem_Description(int index){
-        hideHintText("inventory_item_" + index + "_image");
+    public void showPlayer_MapSpellCooldown(int index, float remainingTime){
+        showCooldown("player_map_spell", index, remainingTime);
     }
     
-    public void showItemCooldown(int index, float remainingTime){
-        showCooldown("inventory_item", index, remainingTime);
-    }
-    
-    public void hideItemCooldown(int index){
-        hideCooldown("inventory_item", index);
-    }
-    
-    public void setMapSpellImage(int index, String imagePath){
-        getImageRenderer("map_spell_" + index + "_image").setImage(createImage(imagePath));
-    }
-    
-    public void showMapSpellCooldown(int index, float remainingTime){
-        showCooldown("map_spell", index, remainingTime);
-    }
-    
-    public void hideMapSpellCooldown(int index){
-        hideCooldown("map_spell", index);
+    public void hidePlayer_MapSpellCooldown(int index){
+        hideCooldown("player_map_spell", index);
     }
     
     private void showCooldown(String prefix, int index, float remainingTime){
@@ -194,8 +212,8 @@ public class ScreenController_HUD extends GameScreenController{
         getElementByID(prefix + "_" + index + "_cooldown").hide();
     }
     
-    public void setGold(float gold){
-        getTextRenderer("gold").setText("" + ((int) gold));
+    public void setPlayer_Gold(float gold){
+        getTextRenderer("player_gold").setText("" + ((int) gold));
     }
     
     private final int maximumPingBarWidth = 69;
@@ -266,101 +284,101 @@ public class ScreenController_HUD extends GameScreenController{
         niftyAppState.getScreenController(ScreenController_Shop.class).toggleShopVisible();
     }
 
-    public void setSpellInformations_Passives(SpellInformation[] spellInformations_Passives){
+    public void setPlayer_SpellInformations_Passives(SpellInformation[] spellInformations_Passives){
         this.spellInformations_Passives = spellInformations_Passives;
     }
 
-    public void setSpellInformations_LearnableSpells(SpellInformation[] spellInformations_LearnableSpells){
+    public void setPlayer_SpellInformations_LearnableSpells(SpellInformation[] spellInformations_LearnableSpells){
         this.spellInformations_LearnableSpells = spellInformations_LearnableSpells;
     }
 
-    public void setSpellInformations_Spells(SpellInformation[] spellInformations_Spells){
+    public void setPlayer_SpellInformations_Spells(SpellInformation[] spellInformations_Spells){
         this.spellInformations_Spells = spellInformations_Spells;
     }
 
-    public void setSpellInformations_MapSpells(SpellInformation[] spellInformations_MapSpells){
+    public void setPlayer_SpellInformations_MapSpells(SpellInformation[] spellInformations_MapSpells){
         this.spellInformations_MapSpells = spellInformations_MapSpells;
     }
     
-    public void showSpellInformation_Passive(String indexText){
+    public void showPlayer_SpellInformation_Passive(String indexText){
         int index = Integer.parseInt(indexText);
         if(index < spellInformations_Passives.length){
             action_ShowSpellInformation = spellInformations_Passives[index];
         }
     }
     
-    public void showSpellInformation_LearnableSpell(String indexText){
+    public void showPlayer_SpellInformation_LearnableSpell(String indexText){
         int index = Integer.parseInt(indexText);
         if(index < spellInformations_LearnableSpells.length){
             action_ShowSpellInformation = spellInformations_LearnableSpells[index];
         }
     }
     
-    public void showSpellInformation_Spell(String indexText){
+    public void showPlayer_SpellInformation_Spell(String indexText){
         int index = Integer.parseInt(indexText);
         if(index < spellInformations_Spells.length){
             action_ShowSpellInformation = spellInformations_Spells[index];
         }
     }
     
-    public void showSpellInformation_MapSpell(String indexText){
+    public void showPlayer_SpellInformation_MapSpell(String indexText){
         int index = Integer.parseInt(indexText);
         if(index < spellInformations_MapSpells.length){
             action_ShowSpellInformation = spellInformations_MapSpells[index];
         }
     }
     
-    public void hideSpellInformation(){
+    public void hidePlayer_SpellInformation(){
         action_HideSpellInformation = true;
     }
     
     public void checkAction_SpellInformation(){
         if(action_ShowSpellInformation != null){
-            showSpellInformation(action_ShowSpellInformation);
+            showPlayer_SpellInformation(action_ShowSpellInformation);
             action_ShowSpellInformation = null;
             action_HideSpellInformation = false;
         }
         else if(action_HideSpellInformation){
-            getElementByID("spell_information_layer").setVisible(false);
+            getElementByID("player_spell_information_layer").setVisible(false);
             PlayerAppState playerAppState = mainApplication.getStateManager().getState(PlayerAppState.class);
             playerAppState.getSpellIndicatorSystem().hideIndicator();
             action_HideSpellInformation = false;
         }
     }
     
-    private void showSpellInformation(SpellInformation spellInformation){
-        getElementByID("spell_information_layer").setVisible(true);
-        getTextRenderer("spell_information_name").setText(spellInformation.getName());
-        getTextRenderer("spell_information_description").setText(spellInformation.getDescription());
+    private void showPlayer_SpellInformation(SpellInformation spellInformation){
+        getElementByID("player_spell_information_layer").setVisible(true);
+        getTextRenderer("player_spell_information_name").setText(spellInformation.getName());
+        getTextRenderer("player_spell_information_description").setText(spellInformation.getDescription());
         boolean hasCooldown = (spellInformation.getCooldown() != -1);
-        getElementByID("spell_information_cooldown").setVisible(hasCooldown);
+        getElementByID("player_spell_information_cooldown").setVisible(hasCooldown);
         if(hasCooldown){
-            getTextRenderer("spell_information_cooldown").setText(GUIUtil.getValueText(spellInformation.getCooldown()) + "s");
+            getTextRenderer("player_spell_information_cooldown").setText(GUIUtil.getValueText(spellInformation.getCooldown()) + "s");
         }
         PlayerAppState playerAppState = mainApplication.getStateManager().getState(PlayerAppState.class);
         playerAppState.getSpellIndicatorSystem().showIndicator(spellInformation.getEntity());
     }
     
-    public void setUpgradeSpellsLayerVisible(boolean isVisible){
+    public void setPlayer_UpgradeSpellsLayerVisible(boolean isVisible){
         getElementByID("upgrade_spells_layer").setVisible(isVisible);
     }
     
-    public void setUpgradeSpellsButtonVisible(int spellIndex, boolean isVisible){
+    public void setPlayer_UpgradeSpellsButtonVisible(int spellIndex, boolean isVisible){
         getElementByID("upgrade_spells_button_" + spellIndex).setVisible(isVisible);
     }
     
-    public void setUpgradeSpellsButtonImage(int spellIndex, String imagePath){
+    public void setPlayer_UpgradeSpellsButtonImage(int spellIndex, String imagePath){
         getImageRenderer("upgrade_spells_button_" + spellIndex).setImage(createImage(imagePath));
     }
     
     public void learnOrUpgradeSpell(String spellIndexString){
-        hideSpellInformation();
+        hidePlayer_SpellInformation();
         int spellIndex = Integer.parseInt(spellIndexString);
         SendPlayerCommandsAppState sendPlayerCommandsAppState = mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class);
         sendPlayerCommandsAppState.learnOrUpgradeSpell(spellIndex);
     }
     
-    public void showUpgradeSpell(int spellIndex){
+    public void showPlayer_UpgradeSpell(int spellIndex){
         currentUpgradeSpellIndex = spellIndex;
         getElementByID("upgrade_spell_layer_container").setVisible(true);
         getElementByID("upgrade_spell_layer_images").setVisible(true);
@@ -371,7 +389,7 @@ public class ScreenController_HUD extends GameScreenController{
         getElementByID("upgrade_spell_offset_images").getParent().layoutElements();
     }
     
-    public void setSpellUpgradeImage(int upgradeIndex, String imagePath){
+    public void setPlayer_SpellUpgradeImage(int upgradeIndex, String imagePath){
         getImageRenderer("upgrade_spell_image_" + upgradeIndex).setImage(createImage(imagePath));
     }
     
@@ -379,10 +397,10 @@ public class ScreenController_HUD extends GameScreenController{
         int upgradeIndex = Integer.parseInt(upgradeIndexString);
         SendPlayerCommandsAppState sendPlayerCommandsAppState = mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class);
         sendPlayerCommandsAppState.upgradeSpell(currentUpgradeSpellIndex, upgradeIndex);
-        hideUpgradeSpell();
+        hidePlayer_UpgradeSpell();
     }
     
-    private void hideUpgradeSpell(){
+    private void hidePlayer_UpgradeSpell(){
         getElementByID("upgrade_spell_layer_container").setVisible(false);
         getElementByID("upgrade_spell_layer_images").setVisible(false);
     }

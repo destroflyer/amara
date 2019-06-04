@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.components.units.*;
@@ -15,8 +16,8 @@ import amara.libraries.entitysystem.*;
  */
 public class DisplayPassivesCooldownsSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public DisplayPassivesCooldownsSystem(int playerEntity, ScreenController_HUD screenController_HUD){
-        super(playerEntity, screenController_HUD);
+    public DisplayPassivesCooldownsSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
+        super(playerAppState, screenController_HUD);
     }
 
     @Override
@@ -36,13 +37,13 @@ public class DisplayPassivesCooldownsSystem extends GUIDisplaySystem<ScreenContr
             if(passives.length > 0){
                 RemainingCooldownComponent remainingCooldownComponent = entityWorld.getComponent(passives[0], RemainingCooldownComponent.class);
                 if(remainingCooldownComponent != null){
-                    screenController.showPassiveCooldown(remainingCooldownComponent.getDuration());
+                    screenController.showPlayer_PassiveCooldown(remainingCooldownComponent.getDuration());
                 }
                 else{
-                    screenController.hidePassiveCooldown();
+                    screenController.hidePlayer_PassiveCooldown();
                 }
             } else {
-                screenController.hidePassiveCooldown();
+                screenController.hidePlayer_PassiveCooldown();
             }
         }
     }
@@ -57,13 +58,13 @@ public class DisplayPassivesCooldownsSystem extends GUIDisplaySystem<ScreenContr
     
     private void checkCooldownChanged(RemainingCooldownComponent remainingCooldownComponent){
         if(remainingCooldownComponent != null){
-            screenController.showPassiveCooldown(remainingCooldownComponent.getDuration());
+            screenController.showPlayer_PassiveCooldown(remainingCooldownComponent.getDuration());
         }
     }
     
     private void checkCooldownRemoved(RemainingCooldownComponent remainingCooldownComponent){
         if(remainingCooldownComponent != null){
-            screenController.hidePassiveCooldown();
+            screenController.hidePlayer_PassiveCooldown();
         }
     }
 }

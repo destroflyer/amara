@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
@@ -15,8 +16,8 @@ import amara.libraries.entitysystem.*;
  */
 public class DisplayItemsCooldownsSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public DisplayItemsCooldownsSystem(int playerEntity, ScreenController_HUD screenController_HUD){
-        super(playerEntity, screenController_HUD);
+    public DisplayItemsCooldownsSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
+        super(playerAppState, screenController_HUD);
     }
 
     @Override
@@ -39,15 +40,15 @@ public class DisplayItemsCooldownsSystem extends GUIDisplaySystem<ScreenControll
                     if(itemActiveComponent != null){
                         RemainingCooldownComponent remainingCooldownComponent = entityWorld.getComponent(itemActiveComponent.getSpellEntity(), RemainingCooldownComponent.class);
                         if(remainingCooldownComponent != null){
-                            screenController.showItemCooldown(i, remainingCooldownComponent.getDuration());
+                            screenController.showPlayer_ItemCooldown(i, remainingCooldownComponent.getDuration());
                         }
                         else{
-                            screenController.hideItemCooldown(i);
+                            screenController.hidePlayer_ItemCooldown(i);
                         }
                     }
                 }
                 else{
-                    screenController.hideItemCooldown(i);
+                    screenController.hidePlayer_ItemCooldown(i);
                 }
             }
         }
@@ -68,13 +69,13 @@ public class DisplayItemsCooldownsSystem extends GUIDisplaySystem<ScreenControll
     
     private void checkCooldownChanged(RemainingCooldownComponent remainingCooldownComponent, int itemIndex){
         if(remainingCooldownComponent != null){
-            screenController.showItemCooldown(itemIndex, remainingCooldownComponent.getDuration());
+            screenController.showPlayer_ItemCooldown(itemIndex, remainingCooldownComponent.getDuration());
         }
     }
     
     private void checkCooldownRemoved(RemainingCooldownComponent remainingCooldownComponent, int itemIndex){
         if(remainingCooldownComponent != null){
-            screenController.hideItemCooldown(itemIndex);
+            screenController.hidePlayer_ItemCooldown(itemIndex);
         }
     }
 }

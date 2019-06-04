@@ -16,7 +16,7 @@ import amara.libraries.entitysystem.*;
  */
 public class DisplayScoreboardInventoriesSystem extends PlayersDisplaySystem {
 
-    public DisplayScoreboardInventoriesSystem(ScreenController_HUD screenController_HUD){
+    public DisplayScoreboardInventoriesSystem(ScreenController_HUD screenController_HUD) {
         super(screenController_HUD);
     }
     private ComponentMapObserver observer;
@@ -28,24 +28,23 @@ public class DisplayScoreboardInventoriesSystem extends PlayersDisplaySystem {
     }
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int playerEntity){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int playerEntity) {
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
         int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
-        if(hasComponentChanged(observer, characterEntity, InventoryComponent.class)){
+        if (hasComponentChanged(observer, characterEntity, InventoryComponent.class)) {
             update_Inventory(entityWorld, playerIndex, characterEntity);
         }
     }
-    
-    private void update_Inventory(EntityWorld entityWorld, int playerIndex,int scoreEntity){
+
+    private void update_Inventory(EntityWorld entityWorld, int playerIndex,int scoreEntity) {
         InventoryComponent inventoryComponent = entityWorld.getComponent(scoreEntity, InventoryComponent.class);
-        for(int i=0;i<6;i++){
-            String imageFilePath = DisplayInventorySystem.getItemImageFilePath(entityWorld, inventoryComponent.getItemEntities(), i);
+        for (int i = 0; i < 6; i++) {
+            String imageFilePath = DisplayInventoriesSystem.getItemImageFilePath(entityWorld, inventoryComponent, i);
             screenController_HUD.setScoreboard_InventoryItem_Image(playerIndex, i, imageFilePath);
-            if((i < inventoryComponent.getItemEntities().length) && (inventoryComponent.getItemEntities()[i] != -1)){
-                String description = ItemDescription.generate_NameAndDescription(entityWorld, inventoryComponent.getItemEntities()[i], DisplayInventorySystem.ITEM_DESCRIPTION_LINE_LENGTH);
+            if ((i < inventoryComponent.getItemEntities().length) && (inventoryComponent.getItemEntities()[i] != -1) ){
+                String description = ItemDescription.generate_NameAndDescription(entityWorld, inventoryComponent.getItemEntities()[i], DisplayInventoriesSystem.ITEM_DESCRIPTION_LINE_LENGTH);
                 screenController_HUD.showScoreboard_InventoryItem_Description(playerIndex, i, description);
-            }
-            else{
+            } else{
                 screenController_HUD.hideScoreboard_InventoryItem_Description(playerIndex, i);
             }
         }

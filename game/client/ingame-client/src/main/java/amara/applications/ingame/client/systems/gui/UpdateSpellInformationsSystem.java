@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.client.gui.objects.SpellInformation;
 import amara.applications.ingame.entitysystem.components.general.*;
@@ -17,8 +18,8 @@ import amara.libraries.entitysystem.*;
  */
 public class UpdateSpellInformationsSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public UpdateSpellInformationsSystem(int playerEntity, ScreenController_HUD screenController_HUD){
-        super(playerEntity, screenController_HUD);
+    public UpdateSpellInformationsSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
+        super(playerAppState, screenController_HUD);
     }
 
     @Override
@@ -38,28 +39,28 @@ public class UpdateSpellInformationsSystem extends GUIDisplaySystem<ScreenContro
     private void checkChangedPassives(EntityWorld entityWorld, PassivesComponent passivesComponent){
         if(passivesComponent != null){
             int[] passives = passivesComponent.getPassiveEntities();
-            screenController.setSpellInformations_Passives(createSpellInformations(entityWorld, passives));
+            screenController.setPlayer_SpellInformations_Passives(createSpellInformations(entityWorld, passives));
         }
     }
     
     private void checkChangedLearnableSpells(EntityWorld entityWorld, LearnableSpellsComponent learnableSpellsComponent){
         if(learnableSpellsComponent != null){
             int[] spells = learnableSpellsComponent.getSpellsEntities();
-            screenController.setSpellInformations_LearnableSpells(createSpellInformations(entityWorld, spells));
+            screenController.setPlayer_SpellInformations_LearnableSpells(createSpellInformations(entityWorld, spells));
         }
     }
     
     private void checkChangedSpells(EntityWorld entityWorld, SpellsComponent spellsComponent){
         if(spellsComponent != null){
             int[] spells = spellsComponent.getSpellsEntities();
-            screenController.setSpellInformations_Spells(createSpellInformations(entityWorld, spells));
+            screenController.setPlayer_SpellInformations_Spells(createSpellInformations(entityWorld, spells));
         }
     }
     
     private void checkChangedMapSpells(EntityWorld entityWorld, MapSpellsComponent mapSpellsComponent){
         if(mapSpellsComponent != null){
             int[] spells = mapSpellsComponent.getSpellsEntities();
-            screenController.setSpellInformations_MapSpells(createSpellInformations(entityWorld, spells));
+            screenController.setPlayer_SpellInformations_MapSpells(createSpellInformations(entityWorld, spells));
         }
     }
     

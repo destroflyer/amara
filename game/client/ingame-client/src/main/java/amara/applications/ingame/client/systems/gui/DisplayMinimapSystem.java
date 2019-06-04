@@ -6,6 +6,8 @@ package amara.applications.ingame.client.systems.gui;
 
 import java.awt.image.BufferedImage;
 import java.awt.Color;
+
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import com.jme3.math.Vector2f;
 import com.jme3.texture.Texture2D;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
@@ -27,14 +29,14 @@ import amara.libraries.entitysystem.*;
  */
 public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public DisplayMinimapSystem(int playerEntity, ScreenController_HUD screenController_HUD, Map map, PlayerTeamSystem playerTeamSystem, OwnTeamVisionSystem ownTeamVisionSystem, FogOfWarSystem fogOfWarSystem){
-        super(playerEntity, screenController_HUD);
+    public DisplayMinimapSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD, Map map, PlayerTeamSystem playerTeamSystem, OwnTeamVisionSystem ownTeamVisionSystem, FogOfWarSystem fogOfWarSystem){
+        super(playerAppState, screenController_HUD);
         this.map = map;
         this.playerTeamSystem = playerTeamSystem;
         this.ownTeamVisionSystem = ownTeamVisionSystem;
         this.fogOfWarSystem = fogOfWarSystem;
-        scaleX_Map = (minimapImage.getWidth() / ((float) map.getMinimapInformation().getWidth()));
-        scaleY_Map = (minimapImage.getHeight() / ((float) map.getMinimapInformation().getHeight()));
+        scaleX_Map = (minimapImage.getWidth() / map.getMinimapInformation().getWidth());
+        scaleY_Map = (minimapImage.getHeight() / map.getMinimapInformation().getHeight());
         scaleX_Fog = (fogOfWarSystem.getFogImage().getWidth() / map.getPhysicsInformation().getWidth());
         scaleY_Fog = (fogOfWarSystem.getFogImage().getHeight() / map.getPhysicsInformation().getHeight());
         backgroundImage = FileAssets.getImage("Maps/" + map.getName() + "/minimap.png", minimapImage.getWidth(), minimapImage.getHeight());
@@ -60,29 +62,28 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
     private float timeSinceLastUpdate;
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
-        if(isInitialized){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity) {
+        if (isInitialized) {
             timeSinceLastUpdate += deltaSeconds;
-            if(timeSinceLastUpdate > Settings.getFloat("minimap_update_interval")){
+            if (timeSinceLastUpdate > Settings.getFloat("minimap_update_interval")) {
                 updateMinimap(entityWorld);
             }
-        }
-        else{
+        } else {
             updateMinimap(entityWorld);
             isInitialized = true;
         }
     }
-    
-    private void updateMinimap(EntityWorld entityWorld){
+
+    private void updateMinimap(EntityWorld entityWorld) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class);
-        if((!observer.getNew().isEmpty()) || (!observer.getChanged().isEmpty()) || (!observer.getRemoved().isEmpty())){
+        if ((!observer.getNew().isEmpty()) || (!observer.getChanged().isEmpty()) || (!observer.getRemoved().isEmpty())) {
             minimapImage.loadImage(backgroundImage, false);
-            for(int entity : entityWorld.getEntitiesWithAll(PositionComponent.class)){
-                if(ownTeamVisionSystem.isVisible(entityWorld, entity)){
+            for (int entity : entityWorld.getEntitiesWithAll(PositionComponent.class)) {
+                if (ownTeamVisionSystem.isVisible(entityWorld, entity)) {
                     paintEntity(entityWorld, entity);
                 }
             }
-            if(fogOfWarSystem.isEnabled()){
+            if (fogOfWarSystem.isEnabled()) {
                 paintFogOfWar();
             }
             minimapImage.flipY();
@@ -91,8 +92,8 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
         }
         timeSinceLastUpdate = 0;
     }
-    
-    private void paintEntity(EntityWorld entityWorld, int entity){
+
+    private void paintEntity(EntityWorld entityWorld, int entity) {
         Color color;
         Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
         int x = Math.round(((map.getPhysicsInformation().getWidth() - position.getX()) - map.getMinimapInformation().getX()) * scaleX_Map);
@@ -100,8 +101,7 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
         TeamComponent teamComponent = entityWorld.getComponent(entity, TeamComponent.class);
         if((teamComponent != null) && (teamComponent.getTeamEntity() != 0)){
             color = (playerTeamSystem.isAllied(teamComponent)?COLOR_TEAM_ALLIED:COLOR_TEAM_ENEMY);
-        }
-        else{
+        } else{
             color = COLOR_TEAM_OTHER;
         }
         if(entityWorld.hasComponent(entity, IsMinionComponent.class)){
@@ -111,24 +111,21 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
                     minimapImage.setPixel(x + i, y + r, (((Math.abs(i) == size) || (Math.abs(r) == size))?COLOR_BORDER:color));
                 }
             }
-        }
-        else if(entityWorld.hasComponent(entity, IsCharacterComponent.class)){
+        } else if (entityWorld.hasComponent(entity, IsCharacterComponent.class)) {
             int size = 3;
             for(int i=(-1 * size);i<(size + 1);i++){
                 for(int r=(-1 * size);r<(size + 1);r++){
                     minimapImage.setPixel(x + i, y + r, (((Math.abs(i) == size) || (Math.abs(r) == size))?COLOR_BORDER:color));
                 }
             }
-        }
-        else if(entityWorld.hasComponent(entity, IsMonsterComponent.class)){
+        } else if (entityWorld.hasComponent(entity, IsMonsterComponent.class)) {
             int size = 2;
             for(int i=(-1 * size);i<(size + 1);i++){
                 for(int r=(-1 * size);r<(size + 1);r++){
                     minimapImage.setPixel(x + i, y + r, (((Math.abs(i) == size) || (Math.abs(r) == size))?COLOR_BORDER:color));
                 }
             }
-        }
-        else if(entityWorld.hasComponent(entity, IsStructureComponent.class)){
+        } else if (entityWorld.hasComponent(entity, IsStructureComponent.class)) {
             int towerX = (x - (towerImage.getWidth() / 2));
             int towerY = (y - (towerImage.getHeight() / 2));
             for(int i=1;i<(towerImage.getWidth() - 1);i++){

@@ -23,9 +23,9 @@ public class UpdateRecipeCostsSystem implements EntitySystem {
     protected ScreenController_Shop screenController_Shop;
     
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
         PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
-        if(playerCharacterComponent != null){
+        if (playerCharacterComponent != null) {
             ComponentMapObserver observer = entityWorld.requestObserver(this, InventoryComponent.class);
             check(entityWorld, observer.getNew().getComponent(playerCharacterComponent.getEntity(), InventoryComponent.class));
             check(entityWorld, observer.getChanged().getComponent(playerCharacterComponent.getEntity(), InventoryComponent.class));
@@ -33,8 +33,8 @@ public class UpdateRecipeCostsSystem implements EntitySystem {
         }
     }
     
-    private void check(EntityWorld entityWorld, InventoryComponent inventoryComponent){
-        if(inventoryComponent != null){
+    private void check(EntityWorld entityWorld, InventoryComponent inventoryComponent) {
+        if (inventoryComponent != null) {
             screenController_Shop.updateRecipeCosts(entityWorld, inventoryComponent.getItemEntities());
         }
     }

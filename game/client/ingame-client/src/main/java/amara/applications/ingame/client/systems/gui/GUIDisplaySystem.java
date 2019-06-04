@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.libraries.applications.display.gui.GameScreenController;
 import amara.libraries.entitysystem.*;
@@ -14,25 +15,35 @@ import amara.libraries.entitysystem.*;
  */
 public abstract class GUIDisplaySystem<ScreenControllerType extends GameScreenController> implements EntitySystem {
 
-    public GUIDisplaySystem(int playerEntity, ScreenControllerType screenController) {
-        this.playerEntity = playerEntity;
+    public GUIDisplaySystem(PlayerAppState playerAppState, ScreenControllerType screenController) {
+        this.playerAppState = playerAppState;
         this.screenController = screenController;
     }
-    protected int playerEntity;
+    protected PlayerAppState playerAppState;
     protected ScreenControllerType screenController;
-    
+    private int lastUpdatedInspectedEntity;
+
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
         if (screenController.isVisible()) {
-            PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
+            int inspectedEntity = getInspectedEntity();
+            if (inspectedEntity != lastUpdatedInspectedEntity) {
+                onInspectionUpdated(entityWorld, inspectedEntity);
+                lastUpdatedInspectedEntity = inspectedEntity;
+            }
+            PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(getPlayerEntity(), PlayerCharacterComponent.class);
             if (playerCharacterComponent != null) {
                 update(entityWorld, deltaSeconds, playerCharacterComponent.getEntity());
             }
         }
     }
-    
+
     protected abstract void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity);
-    
+
+    protected void onInspectionUpdated(EntityWorld entityWorld, int inspectedEntity) {
+
+    }
+
     protected boolean hasComponentChanged(ComponentMapObserver observer, int entity, Class... componentClasses) {
         for (Class componentClass : componentClasses) {
             if (observer.getNew().hasComponent(entity, componentClass)
@@ -41,5 +52,13 @@ public abstract class GUIDisplaySystem<ScreenControllerType extends GameScreenCo
             }
         }
         return false;
+    }
+
+    protected int getPlayerEntity() {
+        return playerAppState.getPlayerEntity();
+    }
+
+    protected int getInspectedEntity() {
+        return playerAppState.getInspectedEntity();
     }
 }

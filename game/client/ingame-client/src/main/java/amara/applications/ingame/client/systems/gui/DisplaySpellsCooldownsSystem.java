@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.components.units.*;
@@ -15,8 +16,8 @@ import amara.libraries.entitysystem.*;
  */
 public class DisplaySpellsCooldownsSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public DisplaySpellsCooldownsSystem(int playerEntity, ScreenController_HUD screenController_HUD){
-        super(playerEntity, screenController_HUD);
+    public DisplaySpellsCooldownsSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
+        super(playerAppState, screenController_HUD);
     }
 
     @Override
@@ -37,14 +38,14 @@ public class DisplaySpellsCooldownsSystem extends GUIDisplaySystem<ScreenControl
                 if(i < spells.length){
                     RemainingCooldownComponent remainingCooldownComponent = entityWorld.getComponent(spells[i], RemainingCooldownComponent.class);
                     if(remainingCooldownComponent != null){
-                        screenController.showSpellCooldown(i, remainingCooldownComponent.getDuration());
+                        screenController.showPlayer_SpellCooldown(i, remainingCooldownComponent.getDuration());
                     }
                     else{
-                        screenController.hideSpellCooldown(i);
+                        screenController.hidePlayer_SpellCooldown(i);
                     }
                 }
                 else{
-                    screenController.hideSpellCooldown(i);
+                    screenController.hidePlayer_SpellCooldown(i);
                 }
             }
         }
@@ -62,13 +63,13 @@ public class DisplaySpellsCooldownsSystem extends GUIDisplaySystem<ScreenControl
     
     private void checkCooldownChanged(RemainingCooldownComponent remainingCooldownComponent, int spellIndex){
         if(remainingCooldownComponent != null){
-            screenController.showSpellCooldown(spellIndex, remainingCooldownComponent.getDuration());
+            screenController.showPlayer_SpellCooldown(spellIndex, remainingCooldownComponent.getDuration());
         }
     }
     
     private void checkCooldownRemoved(RemainingCooldownComponent remainingCooldownComponent, int spellIndex){
         if(remainingCooldownComponent != null){
-            screenController.hideSpellCooldown(spellIndex);
+            screenController.hidePlayer_SpellCooldown(spellIndex);
         }
     }
 }

@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.units.*;
@@ -16,8 +17,8 @@ import amara.libraries.entitysystem.*;
  */
 public class DisplayDeathRecapSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public DisplayDeathRecapSystem(int playerEntity, ScreenController_HUD screenController_HUD){
-        super(playerEntity, screenController_HUD);
+    public DisplayDeathRecapSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD){
+        super(playerAppState, screenController_HUD);
     }
     
     @Override

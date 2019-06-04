@@ -17,43 +17,35 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class GameInfoBackend implements MessageBackend{
+public class GameInfoBackend implements MessageBackend {
 
-    public GameInfoBackend(DisplayApplication mainApplication){
+    public GameInfoBackend(DisplayApplication mainApplication) {
         this.mainApplication = mainApplication;
     }
     private DisplayApplication mainApplication;
 
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_GameInfo){
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_GameInfo) {
             final Message_GameInfo message = (Message_GameInfo) receivedMessage;
             message.getGameSelection().repairOnUnserialize();
             final AppStateManager stateManager = mainApplication.getStateManager();
-            mainApplication.enqueueTask(new Runnable(){
-
-                @Override
-                public void run(){
-                    mainApplication.getStateManager().getState(LoadingScreenAppState.class).setTitle("Loading map...");
-                    new Thread(new Runnable(){
-
-                        @Override
-                        public void run(){
-                            String mapName = message.getGameSelection().getGameSelectionData().getMapName();
-                            System.out.println("Loading map \"" + mapName + "\".");
-                            Map map = MapFileHandler.load(mapName);
-                            //This has to be created before attaching the LocalEntitySystemAppState, since it initializes the PlayerTeamSystem in the constructor
-                            PlayerAppState playerAppState = new PlayerAppState(message.getGameSelection(), message.getPlayerEntity());
-                            stateManager.attach(new MapAppState(map));
-                            stateManager.attach(new MapObstaclesAppState());
-                            stateManager.attach(new LocalEntitySystemAppState());
-                            stateManager.attach(new SynchronizeEntityWorldAppState());
-                            stateManager.attach(playerAppState);
-                            mainApplication.getStateManager().getState(LoadingScreenAppState.class).setTitle("Waiting for all players...");
-                            stateManager.attach(new ClientInitializedAppState());
-                        }
-                    }).start();
-                }
+            mainApplication.enqueueTask(() -> {
+                mainApplication.getStateManager().getState(LoadingScreenAppState.class).setTitle("Loading map...");
+                new Thread(() -> {
+                    String mapName = message.getGameSelection().getGameSelectionData().getMapName();
+                    System.out.println("Loading map \"" + mapName + "\".");
+                    Map map = MapFileHandler.load(mapName);
+                    //This has to be created before attaching the LocalEntitySystemAppState, since it initializes the PlayerTeamSystem in the constructor
+                    PlayerAppState playerAppState = new PlayerAppState(message.getGameSelection(), message.getPlayerEntity());
+                    stateManager.attach(new MapAppState(map));
+                    stateManager.attach(new MapObstaclesAppState());
+                    stateManager.attach(new LocalEntitySystemAppState());
+                    stateManager.attach(new SynchronizeEntityWorldAppState());
+                    stateManager.attach(playerAppState);
+                    mainApplication.getStateManager().getState(LoadingScreenAppState.class).setTitle("Waiting for all players...");
+                    stateManager.attach(new ClientInitializedAppState());
+                }).start();
             });
         }
     }
