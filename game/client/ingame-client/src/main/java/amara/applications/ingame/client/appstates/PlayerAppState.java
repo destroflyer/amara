@@ -15,6 +15,7 @@ import amara.applications.ingame.client.systems.gui.*;
 import amara.applications.ingame.client.systems.information.*;
 import amara.applications.ingame.client.systems.visualisation.*;
 import amara.applications.ingame.entitysystem.components.units.*;
+import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.shared.maps.Map;
 import amara.applications.master.network.messages.objects.GameSelection;
 import amara.core.Queue;
@@ -189,6 +190,8 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
     }
 
     private void updateInspectedEntity() {
+        LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
+        EntityWorld entityWorld = localEntitySystemAppState.getEntityWorld();
         // Inspect hovered entity when selected
         Queue<Event> eventQueue = getAppState(EventManagerAppState.class).getEventQueue();
         Iterator<Event> eventsIterator = eventQueue.getIterator();
@@ -198,17 +201,22 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
                 MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
                 int mouseButtonIndex = mouseClickEvent.getButton().ordinal();
                 if (mouseButtonIndex == Settings.getInteger("controls_navigation_select")) {
-                    inspectedEntity = cursorHoveredEntity;
+                    if ((cursorHoveredEntity != -1) && isInspectable(entityWorld, cursorHoveredEntity)) {
+                        inspectedEntity = cursorHoveredEntity;
+                    } else {
+                        inspectedEntity = -1;
+                    }
                 }
             }
         }
         // Reset inspection when entity gets removed
-        if (inspectedEntity != -1) {
-            LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
-            if (!localEntitySystemAppState.getEntityWorld().hasEntity(inspectedEntity)) {
-                inspectedEntity = -1;
-            }
+        if ((inspectedEntity != -1) && (!entityWorld.hasEntity(inspectedEntity))) {
+            inspectedEntity = -1;
         }
+    }
+
+    private static boolean isInspectable(EntityWorld entityWorld, int entity) {
+        return entityWorld.hasAnyComponent(entity, IsCharacterComponent.class, IsMinionComponent.class, IsMonsterComponent.class, IsStructureComponent.class);
     }
 
     @Override
