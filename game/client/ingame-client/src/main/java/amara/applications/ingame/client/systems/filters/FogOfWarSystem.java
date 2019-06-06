@@ -27,11 +27,10 @@ import amara.libraries.physics.shapes.vision.*;
  *
  * @author Carl
  */
-public class FogOfWarSystem implements EntitySystem{
+public class FogOfWarSystem implements EntitySystem {
 
-    public FogOfWarSystem(PlayerTeamSystem playerTeamSystem, PostFilterAppState postFilterAppState, final MapPhysicsInformation mapPhysicsInformation){
+    public FogOfWarSystem(PlayerTeamSystem playerTeamSystem, PostFilterAppState postFilterAppState, final MapPhysicsInformation mapPhysicsInformation) {
         this.playerTeamSystem = playerTeamSystem;
-        this.postFilterAppState = postFilterAppState;
         this.mapPhysicsInformation = mapPhysicsInformation;
         Vector2D[] mapBorderPoints = new Vector2D[]{
             new Vector2D(0, 0),
@@ -44,10 +43,10 @@ public class FogOfWarSystem implements EntitySystem{
         float resolutionFactor = Settings.getFloat("fog_of_war_resolution");
         fogImage = new PaintableImage((int) (mapPhysicsInformation.getWidth() * resolutionFactor), (int) (mapPhysicsInformation.getHeight() * resolutionFactor));
         fogRaster = new Raster(fogImage, resolutionFactor, 80, 255);
-        fogOfWarFilter = new FogOfWarFilter(){
+        fogOfWarFilter = new FogOfWarFilter() {
 
             @Override
-            protected void initFilter(AssetManager manager, RenderManager renderManager, ViewPort viewPort, int width, int height){
+            protected void initFilter(AssetManager manager, RenderManager renderManager, ViewPort viewPort, int width, int height) {
                 super.initFilter(manager, renderManager, viewPort, width, height);
                 setMapSize(mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight());
             }
@@ -55,7 +54,6 @@ public class FogOfWarSystem implements EntitySystem{
         postFilterAppState.addFilter(fogOfWarFilter);
     }
     private PlayerTeamSystem playerTeamSystem;
-    private PostFilterAppState postFilterAppState;
     private MapPhysicsInformation mapPhysicsInformation;
     private MergedVision teamVision;
     private PaintableImage fogImage;
@@ -66,79 +64,77 @@ public class FogOfWarSystem implements EntitySystem{
     private float timeSinceLastUpdate;
     private boolean isUpdateNeeded;
     private boolean displayAllSight;
-    
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        if(isInitialized){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        if (isInitialized) {
             timeSinceLastUpdate += deltaSeconds;
-            if(isUpdateNeeded || (timeSinceLastUpdate > Settings.getFloat("fog_of_war_update_interval"))){
+            if (isUpdateNeeded || (timeSinceLastUpdate > Settings.getFloat("fog_of_war_update_interval"))) {
                 updateFogOfWar(entityWorld);
             }
-        }
-        else{
+        } else {
             updateFogOfWar(entityWorld);
             isInitialized = true;
         }
     }
-    
+
     private void updateFogOfWar(EntityWorld entityWorld){
         if(!isUpdateNeeded){
             ComponentMapObserver observer = entityWorld.requestObserver(this, IsHiddenAreaComponent.class, PositionComponent.class);
             //Hidden areas
-            for(int entity : observer.getNew().getEntitiesWithAll(IsHiddenAreaComponent.class)){
+            for (int entity : observer.getNew().getEntitiesWithAll(IsHiddenAreaComponent.class)) {
                 HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
                 if(hitboxComponent != null){
                     teamVision.setObstacle(entity, new VisionObstacle((ConvexShape) hitboxComponent.getShape(), false));
                     isUpdateNeeded = true;
                 }
             }
-            for(int entity : observer.getRemoved().getEntitiesWithAll(IsHiddenAreaComponent.class)){
+            for (int entity : observer.getRemoved().getEntitiesWithAll(IsHiddenAreaComponent.class)) {
                 teamVision.removeObstacle(entity);
                 isUpdateNeeded = true;
             }
             //Moved units
-            for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
+            for (int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)) {
                 checkChangedPosition(entityWorld, entity);
             }
-            for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
+            for (int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)) {
                 checkChangedPosition(entityWorld, entity);
             }
         }
-        if(isUpdateNeeded){
+        if (isUpdateNeeded) {
             updateFogTexture_PlayerSight(entityWorld);
             isUpdateNeeded = false;
         }
         timeSinceLastUpdate = 0;
     }
-    
-    private void checkChangedPosition(EntityWorld entityWorld, int entity){
-        if(entityWorld.hasComponent(entity, SightRangeComponent.class) && isEntitySightIncluded(entityWorld, entity)){
+
+    private void checkChangedPosition(EntityWorld entityWorld, int entity) {
+        if (entityWorld.hasComponent(entity, SightRangeComponent.class) && isEntitySightIncluded(entityWorld, entity)) {
             isUpdateNeeded = true;
         }
     }
-    
-    public void setDisplayAllSight(boolean displayAllSight){
-        if(displayAllSight != this.displayAllSight){
+
+    public void setDisplayAllSight(boolean displayAllSight) {
+        if (displayAllSight != this.displayAllSight) {
             this.displayAllSight = displayAllSight;
             isUpdateNeeded = true;
         }
     }
-    
-    private void updateFogTexture_PlayerSight(EntityWorld entityWorld){
+
+    private void updateFogTexture_PlayerSight(EntityWorld entityWorld) {
         resetFogTexture();
-        for(int entity : entityWorld.getEntitiesWithAll(PositionComponent.class, SightRangeComponent.class)){
-            if(isEntitySightIncluded(entityWorld, entity)){
+        for (int entity : entityWorld.getEntitiesWithAll(PositionComponent.class, SightRangeComponent.class)) {
+            if (isEntitySightIncluded(entityWorld, entity)) {
                 PositionComponent positionComponent = entityWorld.getComponent(entity, PositionComponent.class);
                 Vector2D position = new Vector2D(positionComponent.getPosition().getX(), positionComponent.getPosition().getY());
                 float sightRange = entityWorld.getComponent(entity, SightRangeComponent.class).getRange();
                 Polygon sightPolygon;
-                //Fast way using shapes
-                if(true){
+                if (true) {
+                    //Fast way using shapes
                     ArrayList<Vector2D> sightOutline = teamVision.getSightOutline(position, sightRange);
                     sightPolygon = PolyHelper.fromOutline(sightOutline);
-                }
-                //Slow way using polygons
-                else{
+                } else {
+                    //Slow way using polygons
                     sightPolygon = mapPhysicsInformation.getPolyMapManager().sightPolygon(position, sightRange);
                 }
                 sightPolygon.rasterize(fogRaster, position, sightRange);
@@ -147,32 +143,32 @@ public class FogOfWarSystem implements EntitySystem{
         fogTexture.setImage(fogImage.getImage());
         fogOfWarFilter.setFog(fogTexture);
     }
-    
-    private boolean isEntitySightIncluded(EntityWorld entityWorld, int entity){
+
+    private boolean isEntitySightIncluded(EntityWorld entityWorld, int entity) {
         return (displayAllSight || playerTeamSystem.isAllied(entityWorld, entity));
     }
-    
-    private void resetFogTexture(){
-        for(int x=0;x<fogImage.getWidth();x++){
-            for(int y=0;y<fogImage.getHeight();y++){
+
+    private void resetFogTexture() {
+        for (int x=0;x<fogImage.getWidth();x++) {
+            for (int y=0;y<fogImage.getHeight();y++) {
                 fogImage.setPixel_Red(x, y, 80);
             }
         }
     }
-    
-    public void setEnabled(boolean enabled){
+
+    public void setEnabled(boolean enabled) {
         fogOfWarFilter.setEnabled(enabled);
     }
-    
-    public boolean isEnabled(){
+
+    public boolean isEnabled() {
         return fogOfWarFilter.isEnabled();
     }
 
-    public PaintableImage getFogImage(){
+    public PaintableImage getFogImage() {
         return fogImage;
     }
 
-    public boolean isDisplayAllSight(){
+    public boolean isDisplayAllSight() {
         return displayAllSight;
     }
 }

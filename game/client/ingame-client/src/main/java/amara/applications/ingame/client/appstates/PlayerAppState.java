@@ -224,17 +224,16 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         if (actionName.equals("lock_camera") && value) {
             lockedCameraSystem.setEnabled(!lockedCameraSystem.isEnabled());
         } else if (actionName.equals("change_sight") && value) {
-            if (fogOfWarSystem != null){
+            if (fogOfWarSystem != null) {
                 //Switch between the three possible states
                 if (fogOfWarSystem.isEnabled()) {
                     if (fogOfWarSystem.isDisplayAllSight()) {
                         fogOfWarSystem.setEnabled(false);
-                    } else{
+                    } else {
                         fogOfWarSystem.setDisplayAllSight(true);
                         ownTeamVisionSystem.setEnabled(false);
                     }
-                }
-                else{
+                } else {
                     fogOfWarSystem.setDisplayAllSight(false);
                     fogOfWarSystem.setEnabled(true);
                     ownTeamVisionSystem.setEnabled(true);
