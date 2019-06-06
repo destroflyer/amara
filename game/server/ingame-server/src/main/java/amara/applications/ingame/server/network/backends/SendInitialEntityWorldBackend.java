@@ -4,7 +4,6 @@
  */
 package amara.applications.ingame.server.network.backends;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import com.jme3.network.Message;
 import amara.applications.ingame.entitysystem.systems.network.SendEntityChangesSystem;
@@ -17,31 +16,27 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class SendInitialEntityWorldBackend implements MessageBackend{
+public class SendInitialEntityWorldBackend implements MessageBackend {
 
-    public SendInitialEntityWorldBackend(EntityWorld entityWorld){
+    public SendInitialEntityWorldBackend(EntityWorld entityWorld) {
         this.entityWorld = entityWorld;
     }
     private EntityWorld entityWorld;
-    
+
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_ClientInitialized){
-            LinkedList<EntityChange> entityChanges = new LinkedList<EntityChange>();
-            Iterator<Integer> entitiesIterator = entityWorld.getEntitiesWithAll().iterator();
-            while(entitiesIterator.hasNext()){
-                int entity = entitiesIterator.next();
-                Iterator<Object> componentsIterator = entityWorld.getComponents(entity).iterator();
-                while(componentsIterator.hasNext()){
-                    Object component = componentsIterator.next();
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_ClientInitialized) {
+            LinkedList<EntityChange> entityChanges = new LinkedList<>();
+            for (Integer entity : entityWorld.getEntitiesWithAll()) {
+                for (Object component : entityWorld.getComponents(entity)) {
                     entityChanges.add(new NewComponentChange(entity, component));
                 }
             }
             Message[] entityChangeMessages = SendEntityChangesSystem.getEntityChangesMessages(entityChanges);
-            for(Message entityChangeMessage : entityChangeMessages){
+            for (Message entityChangeMessage : entityChangeMessages) {
                 messageResponse.addAnswerMessage(entityChangeMessage);
             }
-            messageResponse.addBroadcastMessage(new Message_InitialEntityWorldSent());
+            messageResponse.addAnswerMessage(new Message_InitialEntityWorldSent());
         }
     }
 }
