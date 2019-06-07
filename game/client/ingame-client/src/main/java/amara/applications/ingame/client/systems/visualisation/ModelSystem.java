@@ -15,9 +15,9 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class ModelSystem implements EntitySystem{
+public class ModelSystem implements EntitySystem {
     
-    public ModelSystem(EntitySceneMap entitySceneMap, DisplayApplication mainApplication){
+    public ModelSystem(EntitySceneMap entitySceneMap, DisplayApplication mainApplication) {
         this.entitySceneMap = entitySceneMap;
         this.mainApplication = mainApplication;
     }
@@ -26,20 +26,17 @@ public class ModelSystem implements EntitySystem{
     private DisplayApplication mainApplication;
 
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, ModelComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(ModelComponent.class)){
+        for (int entity : observer.getNew().getEntitiesWithAll(ModelComponent.class)) {
             updateModel(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(ModelComponent.class)){
+        for (int entity : observer.getChanged().getEntitiesWithAll(ModelComponent.class)) {
             updateModel(entityWorld, entity);
-        }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(ModelComponent.class)){
-            entitySceneMap.removeNode(entity);
         }
     }
-    
-    private void updateModel(EntityWorld entityWorld, int entity){
+
+    private void updateModel(EntityWorld entityWorld, int entity) {
         Node node = entitySceneMap.requestNode(entity);
         node.detachChildNamed(NODE_NAME_MODEL);
         ModelComponent modelComponent = entityWorld.getComponent(entity, ModelComponent.class);

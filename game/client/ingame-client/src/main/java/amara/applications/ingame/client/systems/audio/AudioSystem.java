@@ -31,8 +31,8 @@ public class AudioSystem implements EntitySystem{
     }
     private AudioAppState audioAppState;
     private IngameCameraAppState ingameCameraAppState;
-    private HashMap<Integer, AudioNode> audioNodes = new HashMap<Integer, AudioNode>();
-    private LinkedList<Integer> queuedAudioEntities = new LinkedList<Integer>();
+    private HashMap<Integer, AudioNode> audioNodes = new HashMap<>();
+    private LinkedList<Integer> queuedAudioEntities = new LinkedList<>();
     private Vector2f tmpAudioLocation = new Vector2f();
 
     @Override

@@ -24,22 +24,20 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
-import java.util.Iterator;
-
 /**
  *
  * @author Carl
  */
-public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<IngameClientApplication>{
+public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<IngameClientApplication> {
 
-    public LocalEntitySystemAppState(){
+    public LocalEntitySystemAppState() {
         
     }
     private Node entitiesNode = new Node();
-    private EntitySceneMap entitySceneMap = new EntitySceneMap(){
+    private EntitySceneMap entitySceneMap = new EntitySceneMap() {
 
         @Override
-        public Node requestNode(int entity){
+        public Node requestNode(int entity) {
             Node node = getNode(entity);
             if(node == null){
                 node = new Node();
@@ -50,19 +48,17 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         }
 
         @Override
-        public Node removeNode(int entity){
+        public Node removeNode(int entity) {
             Node node = getNode(entity);
             if(node != null){
                 entitiesNode.detachChild(node);
             }
             return node;
         }
-        
-        private Node getNode(int entity){
-            Iterator<Spatial> childrenIterator = entitiesNode.getChildren().iterator();
-            while(childrenIterator.hasNext()){
-                Spatial child = childrenIterator.next();
-                if(((Integer) child.getUserData("entity")) == entity){
+
+        private Node getNode(int entity) {
+            for (Spatial child : entitiesNode.getChildren()) {
+                if (((Integer) child.getUserData("entity")) == entity) {
                     return (Node) child;
                 }
             }
@@ -71,14 +67,14 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
     };
 
     @Override
-    public void initialize(AppStateManager stateManager, Application application){
+    public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(entitiesNode);
         IngameNetworkAppState ingameNetworkAppState = getAppState(IngameNetworkAppState.class);
         ingameNetworkAppState.addMessageBackend(new GameStartedBackend(entityWorld, getAppState(LoadingScreenAppState.class)));
         ingameNetworkAppState.addMessageBackend(new GameCrashedBackend(mainApplication));
         ingameNetworkAppState.addMessageBackend(new GameOverBackend(mainApplication));
-        for(EntitySystem entitySystem : ParallelNetworkSystems.generateSystems()){
+        for (EntitySystem entitySystem : ParallelNetworkSystems.generateSystems()) {
             addEntitySystem(entitySystem);
         }
         PlayerAppState playerAppState = getAppState(PlayerAppState.class);
@@ -115,8 +111,8 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new BuffVisualisationSystem_Wither(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Golden_Eagle(entitySceneMap));
     }
-    
-    public void onInitialWorldLoaded(){
+
+    public void onInitialWorldLoaded() {
         addEntitySystem(new AudioSystem(getAppState(AudioAppState.class), getAppState(IngameCameraAppState.class)));
         MapAppState mapAppState = getAppState(MapAppState.class);
         PlayerAppState playerAppState = getAppState(PlayerAppState.class);
@@ -139,22 +135,22 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new CinematicsSystem(getAppState(CinematicAppState.class)));
     }
 
-    public int getEntity(Spatial spatial){
-        while(spatial != null){
+    public int getEntity(Spatial spatial) {
+        while (spatial != null) {
             Integer entity = spatial.getUserData("entity");
-            if(entity != null){
+            if (entity != null) {
                 return entity;
             }
             spatial = spatial.getParent();
         }
         return -1;
     }
-    
-    public Node getEntitiesNode(){
+
+    public Node getEntitiesNode() {
         return entitiesNode;
     }
 
-    public EntitySceneMap getEntitySceneMap(){
+    public EntitySceneMap getEntitySceneMap() {
         return entitySceneMap;
     }
 }

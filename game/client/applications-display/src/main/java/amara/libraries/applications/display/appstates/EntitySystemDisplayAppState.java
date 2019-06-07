@@ -12,31 +12,31 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class EntitySystemDisplayAppState<T extends DisplayApplication> extends BaseDisplayAppState<T>{
+public class EntitySystemDisplayAppState<T extends DisplayApplication> extends BaseDisplayAppState<T> {
 
-    public EntitySystemDisplayAppState(){
+    public EntitySystemDisplayAppState() {
         
     }
     protected EntityWorld entityWorld = new EntityWorld();
-    private ArrayList<EntitySystem> entitySystems = new ArrayList<EntitySystem>();
-    
+    private ArrayList<EntitySystem> entitySystems = new ArrayList<>();
+
     public void addEntitySystem(EntitySystem entitySystem){
         entitySystems.add(entitySystem);
     }
 
     @Override
-    public void update(float lastTimePerFrame){
+    public void update(float lastTimePerFrame) {
         super.update(lastTimePerFrame);
-        for(EntitySystem entitySystem : entitySystems){
+        for (EntitySystem entitySystem : entitySystems) {
             entitySystem.update(entityWorld, lastTimePerFrame);
         }
     }
 
-    public EntityWorld getEntityWorld(){
+    public EntityWorld getEntityWorld() {
         return entityWorld;
     }
 
-    public ArrayList<EntitySystem> getEntitySystems(){
+    public ArrayList<EntitySystem> getEntitySystems() {
         return entitySystems;
     }
 }
