@@ -21,11 +21,11 @@ public class ModelModifier_Minion_Gentleman extends ModelModifier{
     public void modify(ModelObject modelObject){
         SkeletonControl skeletonControl = modelObject.getModelSpatial().getControl(SkeletonControl.class);
         Node headNode = skeletonControl.getAttachmentsNode("head");
-        Spatial funnyMoustache = new ModelSkin("Models/funny_moustache/skin.xml").loadSpatial();
+        Spatial funnyMoustache = ModelSkin.get("Models/funny_moustache/skin.xml").loadSpatial();
         funnyMoustache.setLocalTranslation(0, 0.05f, -0.65f);
         JMonkeyUtil.setLocalRotation(funnyMoustache, new Vector3f(0, 0, -1));
         headNode.attachChild(funnyMoustache);
-        Spatial gentlemanHat = new ModelSkin("Models/gentleman_hat/skin.xml").loadSpatial();
+        Spatial gentlemanHat = ModelSkin.get("Models/gentleman_hat/skin.xml").loadSpatial();
         gentlemanHat.setLocalTranslation(0.2f, 0.95f, 0.3f);
         JMonkeyUtil.setLocalRotation(gentlemanHat, new Vector3f(-1, 1, -1));
         headNode.attachChild(gentlemanHat);

@@ -22,7 +22,7 @@ public class ModelModifier_3DSA_Nexus extends ModelModifier{
 
     @Override
     public void modify(ModelObject modelObject){
-        Spatial crystal = new ModelSkin("Models/3dsa_fantasy_forest_waypoint_crystal/skin.xml").loadSpatial();
+        Spatial crystal = ModelSkin.get("Models/3dsa_fantasy_forest_waypoint_crystal/skin.xml").loadSpatial();
         Material material = ((Geometry) ((Node) modelObject.getModelSpatial()).getChild(0)).getMaterial();
         for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(crystal)){
             geometry.setMaterial(material);

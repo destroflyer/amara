@@ -39,12 +39,9 @@ public class AudioSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         increasePlayingAudioProgresses(deltaSeconds);
         ComponentMapObserver observer = entityWorld.requestObserver(this, SendEntityChangesSystem.COMPONENT_EQUALITY_DEFINTION, AudioComponent.class, AudioSourceComponent.class, PositionComponent.class, StartPlayingAudioComponent.class, StopPlayingAudioComponent.class, GameSpeedComponent.class);
-        //Data
+        //Create
         for(int entity : observer.getNew().getEntitiesWithAll(AudioComponent.class)){
             load(entityWorld, entity);
-        }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(AudioComponent.class)){
-            remove(entity);
         }
         //Source
         for(int entity : observer.getNew().getEntitiesWithAll(AudioSourceComponent.class)){
@@ -81,6 +78,10 @@ public class AudioSystem implements EntitySystem{
             }
         }
         playQueuedAudioEntities(entityWorld);
+        //Remove
+        for(int entity : observer.getRemoved().getEntitiesWithAll(AudioComponent.class)){
+            remove(entity);
+        }
     }
     
     private void load(EntityWorld entityWorld, int audioEntity){
@@ -96,7 +97,7 @@ public class AudioSystem implements EntitySystem{
     }
     
     private void remove(int audioEntity){
-        AudioNode audioNode = audioNodes.get(audioEntity);
+        AudioNode audioNode = audioNodes.remove(audioEntity);
         if(audioNode.isLooping()){
             audioNode.stop();
         }

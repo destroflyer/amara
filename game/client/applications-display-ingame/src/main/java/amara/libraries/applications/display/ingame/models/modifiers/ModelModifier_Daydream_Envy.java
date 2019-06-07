@@ -29,7 +29,7 @@ public class ModelModifier_Daydream_Envy extends ModelModifier{
     private SkeletonControl skeletonControl;
     
     private void addAttachment(Bone bone){
-        Spatial minion = new ModelSkin("Models/minion/skin_default.xml").loadSpatial();
+        Spatial minion = ModelSkin.get("Models/minion/skin_default.xml").loadSpatial();
         minion.setLocalScale(0.6f);
         Node node = skeletonControl.getAttachmentsNode(bone.getName());
         node.attachChild(minion);

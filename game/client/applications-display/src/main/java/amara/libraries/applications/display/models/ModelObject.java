@@ -20,13 +20,13 @@ public class ModelObject extends Node implements AnimEventListener{
 
     public ModelObject(DisplayApplication mainApplication, String skinPath){
         this.mainApplication = mainApplication;
-        skin = new ModelSkin(skinPath);
+        skin = ModelSkin.get(skinPath);
         loadSkin();
     }
     private DisplayApplication mainApplication;
     private ModelSkin skin;
     private Spatial modelSpatial;
-    private ArrayList<AnimChannel> animationChannels = new ArrayList<AnimChannel>();
+    private ArrayList<AnimChannel> animationChannels = new ArrayList<>();
     
     private void loadSkin(){
         modelSpatial = skin.loadSpatial();
