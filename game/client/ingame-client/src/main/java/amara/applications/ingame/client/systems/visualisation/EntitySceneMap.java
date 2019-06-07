@@ -6,13 +6,32 @@ package amara.applications.ingame.client.systems.visualisation;
 
 import com.jme3.scene.Node;
 
+import java.util.HashMap;
+
 /**
  *
  * @author Carl
  */
-public interface EntitySceneMap {
-    
-    Node requestNode(int entity);
-    
-    Node removeNode(int entity);
+public class EntitySceneMap {
+
+    public EntitySceneMap(Node parentNode) {
+        this.parentNode = parentNode;
+    }
+    private Node parentNode;
+    private HashMap<Integer, Node> nodes = new HashMap<>();
+
+    public Node requestNode(int entity) {
+        return nodes.computeIfAbsent(entity, e -> {
+            Node node = new Node();
+            parentNode.attachChild(node);
+            return node;
+        });
+    }
+
+    public void removeNode(int entity) {
+        Node node = nodes.remove(entity);
+        if (node != null) {
+            parentNode.detachChild(node);
+        }
+    }
 }

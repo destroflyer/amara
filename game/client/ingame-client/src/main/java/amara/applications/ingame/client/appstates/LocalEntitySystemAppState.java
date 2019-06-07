@@ -34,37 +34,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         
     }
     private Node entitiesNode = new Node();
-    private EntitySceneMap entitySceneMap = new EntitySceneMap() {
-
-        @Override
-        public Node requestNode(int entity) {
-            Node node = getNode(entity);
-            if(node == null){
-                node = new Node();
-                node.setUserData("entity", entity);
-                entitiesNode.attachChild(node);
-            }
-            return node;
-        }
-
-        @Override
-        public Node removeNode(int entity) {
-            Node node = getNode(entity);
-            if(node != null){
-                entitiesNode.detachChild(node);
-            }
-            return node;
-        }
-
-        private Node getNode(int entity) {
-            for (Spatial child : entitiesNode.getChildren()) {
-                if (((Integer) child.getUserData("entity")) == entity) {
-                    return (Node) child;
-                }
-            }
-            return null;
-        }
-    };
+    private EntitySceneMap entitySceneMap = new EntitySceneMap(entitiesNode);
 
     @Override
     public void initialize(AppStateManager stateManager, Application application) {
