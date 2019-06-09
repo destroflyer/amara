@@ -25,9 +25,6 @@ import com.jme3.texture.FrameBuffer;
  */
 public class WireframeAppState extends BaseDisplayAppState implements ActionListener{
 
-    public WireframeAppState(){
-        
-    }
     private WireframeProcessor wireframeProcessor;
 
     @Override
@@ -35,9 +32,7 @@ public class WireframeAppState extends BaseDisplayAppState implements ActionList
         super.initialize(stateManager, application);
         setColor(ColorRGBA.Blue);
         mainApplication.getInputManager().addMapping("toggle_wireframe_processor", new KeyTrigger(KeyInput.KEY_I));
-        mainApplication.getInputManager().addListener(this, new String[]{
-            "toggle_wireframe_processor"
-        });
+        mainApplication.getInputManager().addListener(this, "toggle_wireframe_processor");
     }
 
     @Override

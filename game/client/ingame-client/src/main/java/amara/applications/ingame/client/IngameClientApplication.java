@@ -12,24 +12,23 @@ import amara.libraries.applications.display.ingame.appstates.*;
 /**
  * @author Carl
  */
-public class IngameClientApplication extends DisplayApplication{
+public class IngameClientApplication extends DisplayApplication {
 
-    public IngameClientApplication(MasterserverClientInterface masterserverClient, int authentificationKey){
+    public IngameClientApplication(MasterserverClientInterface masterserverClient, int authentificationKey) {
         this.masterserverClient = masterserverClient;
         this.authentificationKey = authentificationKey;
         loadSettings();
     }
     private MasterserverClientInterface masterserverClient;
     private int authentificationKey;
-    
-    private void loadSettings(){
+
+    private void loadSettings() {
         settings = new AppSettings(true);
-        if(Settings.getBoolean("fullscreen")){
+        if (Settings.getBoolean("fullscreen")) {
             settings.setWidth(-1);
             settings.setHeight(-1);
             settings.setFullscreen(true);
-        }
-        else{
+        } else {
             settings.setWidth(Settings.getInteger("resolution_width"));
             settings.setHeight(Settings.getInteger("resolution_height"));
         }
@@ -41,7 +40,7 @@ public class IngameClientApplication extends DisplayApplication{
     }
 
     @Override
-    public void simpleInitApp(){
+    public void simpleInitApp() {
         super.simpleInitApp();
         stateManager.attach(new NiftyAppState());
         stateManager.attach(new NiftyAppState_IngameClient());
@@ -63,7 +62,7 @@ public class IngameClientApplication extends DisplayApplication{
         stateManager.attach(new PlayerAuthentificationAppState(authentificationKey));
     }
 
-    public MasterserverClientInterface getMasterserverClient(){
+    public MasterserverClientInterface getMasterserverClient() {
         return masterserverClient;
     }
 }
