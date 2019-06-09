@@ -10,19 +10,21 @@ import amara.libraries.physics.shapes.PolygonMath.RasterMap;
  *
  * @author Philipp
  */
-public class Raster implements RasterMap
-{
-    private PaintableImage image;
-    private float scale;
-    private int lower, upper;
+public class ImageChannelRaster implements RasterMap {
 
-    public Raster(PaintableImage image, float scale, int lower, int upper) {
+    public ImageChannelRaster(PaintableImage image, float scale, int lower, int upper, int channelIndex) {
         this.image = image;
         this.scale = scale;
         this.lower = lower;
         this.upper = upper;
+        this.channelIndex = channelIndex;
     }
-    
+    private PaintableImage image;
+    private float scale;
+    private int lower;
+    private int upper;
+    private int channelIndex;
+
     public int getWidth() {
         return image.getWidth();
     }
@@ -31,16 +33,15 @@ public class Raster implements RasterMap
         return image.getHeight();
     }
 
-    public void setValue(int x, int y, float value)
-    {
+    public void setValue(int x, int y, float value) {
         int pixelValue = (int) ((upper * value) + (lower * (1 - value)));
-        if(image.getPixel_Red(x, y) < pixelValue){
-            image.setPixel_Red(x, y, pixelValue);
+        int index = image.getIndex(x, y, channelIndex);
+        if (image.getPixel(index) < pixelValue) {
+            image.setPixel(index, pixelValue);
         }
     }
 
     public float getScale() {
         return scale;
     }
-    
 }

@@ -42,7 +42,7 @@ public class FogOfWarSystem implements EntitySystem {
         teamVision.setEnableSightInSolidObstacles(true);
         float resolutionFactor = Settings.getFloat("fog_of_war_resolution");
         fogImage = new PaintableImage((int) (mapPhysicsInformation.getWidth() * resolutionFactor), (int) (mapPhysicsInformation.getHeight() * resolutionFactor));
-        fogRaster = new Raster(fogImage, resolutionFactor, 80, 255);
+        fogRaster = new ImageChannelRaster(fogImage, resolutionFactor, 80, 255, 0);
         fogOfWarFilter = new FogOfWarFilter() {
 
             @Override
@@ -58,7 +58,7 @@ public class FogOfWarSystem implements EntitySystem {
     private MergedVision teamVision;
     private PaintableImage fogImage;
     private Texture2D fogTexture = new Texture2D();
-    private Raster fogRaster;
+    private ImageChannelRaster fogRaster;
     private FogOfWarFilter fogOfWarFilter;
     private boolean isInitialized;
     private float timeSinceLastUpdate;
@@ -149,10 +149,9 @@ public class FogOfWarSystem implements EntitySystem {
     }
 
     private void resetFogTexture() {
-        for (int x=0;x<fogImage.getWidth();x++) {
-            for (int y=0;y<fogImage.getHeight();y++) {
-                fogImage.setPixel_Red(x, y, 80);
-            }
+        int bytesCount = (4 * fogImage.getWidth() * fogImage.getHeight());
+        for (int i = 0; i < bytesCount; i += 4) {
+            fogImage.setPixel(i, 80);
         }
     }
 

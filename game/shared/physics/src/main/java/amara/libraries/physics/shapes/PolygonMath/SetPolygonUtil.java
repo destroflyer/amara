@@ -598,7 +598,9 @@ class SetPolygonUtil
                     a = b;
                     b = tmp;
                 }
-                for (int y = (int)b.getY(); y > (int)a.getY(); y--)
+                int inBoundsY_A = Math.max(0, Math.min((int) a.getY(), raster.getHeight() - 1));
+                int inBoundsY_B = Math.max(0, Math.min((int) b.getY(), raster.getHeight() - 1));
+                for (int y = inBoundsY_B; y > inBoundsY_A; y--)
                 {
                     float x = (float)(Vector2DUtil.lineAxisIntersectionX(a, b, y));
                     x = Math.max(0, x);
@@ -654,7 +656,9 @@ class SetPolygonUtil
                     a = b;
                     b = tmp;
                 }
-                for (int y = (int)b.getY(); y > (int)a.getY(); y--)
+                int inBoundsY_A = Math.max(0, Math.min((int) a.getY(), raster.getHeight() - 1));
+                int inBoundsY_B = Math.max(0, Math.min((int) b.getY(), raster.getHeight() - 1));
+                for (int y = inBoundsY_B; y > inBoundsY_A; y--)
                 {
                     float x = (float)(Vector2DUtil.lineAxisIntersectionX(a, b, y));
                     x = Math.max(0, x);

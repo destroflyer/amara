@@ -519,8 +519,8 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         JMonkeyUtil.setLocalRotation(toolCursor, visualDirection);
         toolCursor.setLocalScale(visualScale);
     }
-    
-    private void paintAlphamap(){
+
+    private void paintAlphamap() {
         MapAppState mapAppState = getAppState(MapAppState.class);
         MapTerrain mapTerrain = mapAppState.getMapTerrain();
         int alphamapIndex = (terrainTextureIndex / 3);
@@ -528,16 +528,19 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         PaintableImage paintableImage = mapTerrain.getAlphamaps()[alphamapIndex].getPaintableImage();
         float startX_Portion = (currentHoveredLocation.getX() / mapAppState.getMap().getPhysicsInformation().getWidth());
         float startY_Portion = (1 - (currentHoveredLocation.getY() / mapAppState.getMap().getPhysicsInformation().getHeight()));
-        int startX = Math.round((startX_Portion * paintableImage.getWidth()) - (terrainTextureSize / 2f));
-        int startY = Math.round((startY_Portion * paintableImage.getHeight()) - (terrainTextureSize / 2f));
-        for(int x=startX;x<(startX + terrainTextureSize);x++){
-            for(int y=startY;y<(startY + terrainTextureSize);y++){
-                paintableImage.setPixel_Value(x, y, channelIndex, terrainTexturePaintStrength);
+        int startX = Math.max(0, Math.round((startX_Portion * paintableImage.getWidth()) - (terrainTextureSize / 2f)));
+        int startY = Math.max(0, Math.round((startY_Portion * paintableImage.getHeight()) - (terrainTextureSize / 2f)));
+        int endX = Math.min((startX + terrainTextureSize), paintableImage.getWidth() - 1);
+        int endY = Math.min((startY + terrainTextureSize), paintableImage.getHeight() - 1);
+        for (int x = startX; x < endX; x++) {
+            for (int y = startY; y < endY; y++) {
+                int index = paintableImage.getIndex(x, y, channelIndex);
+                paintableImage.setPixel(index, terrainTexturePaintStrength);
             }
         }
         mapTerrain.updateAlphamap(alphamapIndex);
     }
-    
+
     private void changeTerrainTextureIndex(boolean increaseOrDecrease){
         terrainTextureIndex += (increaseOrDecrease?1:-1);
         int texturesCount = getAppState(MapAppState.class).getMap().getTerrainSkin().getTextures().length;
@@ -549,7 +552,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         }
         updateToolInformation();
     }
-    
+
     public void changeCameraAngle(){
         sideOrTopDownView = (!sideOrTopDownView);
         Camera camera = mainApplication.getCamera();

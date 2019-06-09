@@ -39,7 +39,9 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
         scaleY_Map = (minimapImage.getHeight() / map.getMinimapInformation().getHeight());
         scaleX_Fog = (fogOfWarSystem.getFogImage().getWidth() / map.getPhysicsInformation().getWidth());
         scaleY_Fog = (fogOfWarSystem.getFogImage().getHeight() / map.getPhysicsInformation().getHeight());
-        backgroundImage = FileAssets.getImage("Maps/" + map.getName() + "/minimap.png", minimapImage.getWidth(), minimapImage.getHeight());
+        BufferedImage backgroundImage = FileAssets.getImage("Maps/" + map.getName() + "/minimap.png", minimapImage.getWidth(), minimapImage.getHeight());
+        minimapImage.loadImage(backgroundImage, false);
+        backgroundImageData = minimapImage.getData().clone();
         towerImage = FileAssets.getImage("Interface/hud/minimap/tower.png");
     }
     private static final Color COLOR_BORDER = new Color(34, 34, 34);
@@ -56,7 +58,7 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
     private float scaleY_Map;
     private float scaleX_Fog;
     private float scaleY_Fog;
-    private BufferedImage backgroundImage;
+    private byte[] backgroundImageData;
     private BufferedImage towerImage;
     private boolean isInitialized;
     private float timeSinceLastUpdate;
@@ -77,7 +79,7 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
     private void updateMinimap(EntityWorld entityWorld) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class);
         if ((!observer.getNew().isEmpty()) || (!observer.getChanged().isEmpty()) || (!observer.getRemoved().isEmpty())) {
-            minimapImage.loadImage(backgroundImage, false);
+            minimapImage.setData(backgroundImageData);
             for (int entity : entityWorld.getEntitiesWithAll(PositionComponent.class)) {
                 if (ownTeamVisionSystem.isVisible(entityWorld, entity)) {
                     paintEntity(entityWorld, entity);
@@ -104,54 +106,53 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
         } else{
             color = COLOR_TEAM_OTHER;
         }
-        if(entityWorld.hasComponent(entity, IsMinionComponent.class)){
-            int size = 2;
-            for(int i=(-1 * size);i<(size + 1);i++){
-                for(int r=(-1 * size);r<(size + 1);r++){
-                    minimapImage.setPixel(x + i, y + r, (((Math.abs(i) == size) || (Math.abs(r) == size))?COLOR_BORDER:color));
-                }
-            }
+        if (entityWorld.hasComponent(entity, IsMinionComponent.class)){
+            paintSquare(x, y, color, 2);
         } else if (entityWorld.hasComponent(entity, IsCharacterComponent.class)) {
-            int size = 3;
-            for(int i=(-1 * size);i<(size + 1);i++){
-                for(int r=(-1 * size);r<(size + 1);r++){
-                    minimapImage.setPixel(x + i, y + r, (((Math.abs(i) == size) || (Math.abs(r) == size))?COLOR_BORDER:color));
-                }
-            }
+            paintSquare(x, y, color, 3);
         } else if (entityWorld.hasComponent(entity, IsMonsterComponent.class)) {
-            int size = 2;
-            for(int i=(-1 * size);i<(size + 1);i++){
-                for(int r=(-1 * size);r<(size + 1);r++){
-                    minimapImage.setPixel(x + i, y + r, (((Math.abs(i) == size) || (Math.abs(r) == size))?COLOR_BORDER:color));
-                }
-            }
+            paintSquare(x, y, color, 2);
         } else if (entityWorld.hasComponent(entity, IsStructureComponent.class)) {
             int towerX = (x - (towerImage.getWidth() / 2));
             int towerY = (y - (towerImage.getHeight() / 2));
-            for(int i=1;i<(towerImage.getWidth() - 1);i++){
-                for(int r=1;r<(towerImage.getHeight() - 1);r++){
+            for (int i = 1; i < (towerImage.getWidth() - 1); i++) {
+                for (int r = 1; r < (towerImage.getHeight() - 1); r++) {
                     minimapImage.setPixel(towerX + i, towerY + r, color);
                 }
             }
             minimapImage.paintImage(towerImage, towerX, towerY);
         }
     }
-    
+
+    private void paintSquare(int centerX, int centerY, Color color, int halfExtent) {
+        int startX = Math.max(0, centerX - halfExtent);
+        int startY = Math.max(0, centerY - halfExtent);
+        int endX = Math.min(centerX + halfExtent, minimapImage.getWidth() - 1);
+        int endY = Math.min(centerY + halfExtent, minimapImage.getHeight() - 1);
+        for (int x = startX; x <= endX; x++) {
+            for (int y = startY; y <= endY; y++) {
+                boolean isBorder = ((x == startX) || (x == endX) || (y == startY) || (y == endY));
+                minimapImage.setPixel(x, y, (isBorder ? COLOR_BORDER : color));
+            }
+        }
+    }
+
     private void paintFogOfWar(){
         for(int x=0;x<minimapImage.getWidth();x++){
             for(int y=0;y<minimapImage.getHeight();y++){
                 float mapX = (map.getPhysicsInformation().getWidth() - (((x / scaleX_Map) + map.getMinimapInformation().getX())));
                 float mapY = (map.getPhysicsInformation().getHeight() - (((y / scaleY_Map) + map.getMinimapInformation().getY())));
-                //Check for the maximum boundary since the physiccal size of the map reaches 1 unit further than the images
+                // Check for the maximum boundary since the physical size of the map reaches 1 unit further than the images
                 int fogX = Math.min((int) (mapX * scaleX_Fog), (fogOfWarSystem.getFogImage().getWidth() - 1));
                 int fogY = Math.min((int) (mapY * scaleY_Fog), (fogOfWarSystem.getFogImage().getHeight() - 1));
                 int visibility = fogOfWarSystem.getFogImage().getPixel_Red(fogX, fogY);
-                int red = ((minimapImage.getPixel_Red(x, y) * visibility) / 255);
-                int green = ((minimapImage.getPixel_Green(x, y) * visibility) / 255);
-                int blue = ((minimapImage.getPixel_Blue(x, y) * visibility) / 255);
-                minimapImage.setPixel_Red(x, y, red);
-                minimapImage.setPixel_Green(x, y, green);
-                minimapImage.setPixel_Blue(x, y, blue);
+                int indexRed = minimapImage.getIndex(x, y, 0);
+                int red = ((minimapImage.getPixel(indexRed) * visibility) / 255);
+                int green = ((minimapImage.getPixel(indexRed + 1) * visibility) / 255);
+                int blue = ((minimapImage.getPixel(indexRed +2) * visibility) / 255);
+                minimapImage.setPixel(indexRed, red);
+                minimapImage.setPixel(indexRed + 1, green);
+                minimapImage.setPixel(indexRed + 2, blue);
             }
         }
     }
