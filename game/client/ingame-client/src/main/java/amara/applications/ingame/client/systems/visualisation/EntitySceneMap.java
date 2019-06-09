@@ -23,6 +23,7 @@ public class EntitySceneMap {
     public Node requestNode(int entity) {
         return nodes.computeIfAbsent(entity, e -> {
             Node node = new Node();
+            node.setUserData("entity", entity);
             parentNode.attachChild(node);
             return node;
         });
