@@ -23,8 +23,9 @@
         </deathAnimation>
         <!--physics-->
         <hitbox>
-            <circle radius="1"/>
+            <circle radius="0.25"/>
         </hitbox>
+        <scale>3</scale>
         <intersectionPush/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>

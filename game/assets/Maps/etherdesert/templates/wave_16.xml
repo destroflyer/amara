@@ -24,9 +24,9 @@
         <animation>#idleAnimation</animation>
         <!--physics-->
         <hitbox>
-            <circle radius="0.5"/>
+            <circle radius="0.2"/>
         </hitbox>
-        <scale>3</scale>
+        <scale>5</scale>
         <intersectionPush/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>

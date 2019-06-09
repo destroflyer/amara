@@ -16,9 +16,9 @@
         </autoAttackAnimation>
         <!--physics-->
         <hitbox>
-            <circle radius="0.25"/>
+            <circle radius="0.15"/>
         </hitbox>
-        <scale>4</scale>
+        <scale>6</scale>
         <intersectionPush/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
