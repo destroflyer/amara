@@ -23,7 +23,7 @@ import amara.libraries.applications.display.models.ModelObject;
  *
  * @author Carl
  */
-public class LoadingScreenAppState extends OverlayViewportAppState<IngameClientApplication>{
+public class LoadingScreenAppState extends OverlayViewportAppState<IngameClientApplication> {
 
     private static final Quaternion MODEL_OBJECT_YAW = JMonkeyUtil.getQuaternion_Y(-90);
     private ModelObject modelObject1;
@@ -32,32 +32,32 @@ public class LoadingScreenAppState extends OverlayViewportAppState<IngameClientA
     private float animationRadius = 10;
     private boolean hasGameStarted;
     private boolean hasInitialWorldLoaded;
-    
+
     @Override
-    public void initialize(AppStateManager stateManager, Application application){
+    public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
         getAppState(IngameCameraAppState.class).setEnabled(false);
-        //Lights
+        // Lights
         AmbientLight ambientLight = new AmbientLight();
         ambientLight.setColor(new ColorRGBA(1.5f, 1.5f, 1.5f, 1));
         DirectionalLight directionalLight = new DirectionalLight();
         directionalLight.setColor(new ColorRGBA(1, 1, 1, 1));
         directionalLight.setDirection(new Vector3f(-0.5f, -1.75f, 1));
         rootNode.addLight(directionalLight);
-        //Models
+        // Models
         modelObject1 = new ModelObject(mainApplication, "Models/minion/skin_loadingscreen_1.xml");
         modelObject1.playAnimation("walk", 0.38f);
         modelObject2 = new ModelObject(mainApplication, "Models/minion/skin_loadingscreen_2.xml");
         modelObject2.playAnimation("walk", 0.38f);
         rootNode.attachChild(modelObject1);
         rootNode.attachChild(modelObject2);
-        //Camera
+        // Camera
         viewPort.getCamera().setLocation(new Vector3f(0, 10, -26));
         viewPort.getCamera().lookAtDirection(new Vector3f(0, -0.5f, 1), Vector3f.UNIT_Y);
     }
 
     @Override
-    public void cleanup(){
+    public void cleanup() {
         super.cleanup();
         mainApplication.getStateManager().attach(new FreeCameraAppState());
         mainApplication.getStateManager().attach(new ClientChatAppState());
@@ -67,37 +67,32 @@ public class LoadingScreenAppState extends OverlayViewportAppState<IngameClientA
     }
 
     @Override
-    public void update(float lastTimePerFrame){
+    public void update(float lastTimePerFrame) {
         super.update(lastTimePerFrame);
         animationProgress += (1.1f * lastTimePerFrame);
         updateModelObject(modelObject1, animationProgress);
         updateModelObject(modelObject2, animationProgress - 0.5f);
-        if(hasGameStarted && hasInitialWorldLoaded){
-            mainApplication.enqueueTask(new Runnable(){
-
-                @Override
-                public void run(){
-                    mainApplication.getStateManager().detach(LoadingScreenAppState.this);
-                }
-            });
+        if (hasGameStarted && hasInitialWorldLoaded) {
+            mainApplication.enqueueTask(() -> mainApplication.getStateManager().detach(LoadingScreenAppState.this));
         }
     }
-    
-    private void updateModelObject(ModelObject modelObject, float progress){
+
+    private void updateModelObject(ModelObject modelObject, float progress) {
         modelObject.setLocalTranslation(FastMath.cos(progress) * animationRadius, 0, FastMath.sin(progress) * animationRadius);
         JMonkeyUtil.setLocalRotation(modelObject, MODEL_OBJECT_YAW.mult(modelObject.getLocalTranslation()));
     }
 
-    public void onGameStarted(){
+    public void onGameStarted() {
         this.hasGameStarted = true;
         setTitle("Receiving initial game data...");
     }
 
-    public void onInitialWorldLoaded(){
+    public void onInitialWorldLoaded() {
         this.hasInitialWorldLoaded = true;
+        setTitle("Waiting for all players to be ready...");
     }
-    
-    public void setTitle(String title){
+
+    public void setTitle(String title) {
         getAppState(NiftyAppState.class).getScreenController(ScreenController_LoadingScreen.class).setTitle(title);
     }
 }

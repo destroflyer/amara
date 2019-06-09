@@ -20,46 +20,40 @@ import amara.libraries.network.NetworkClient;
  *
  * @author Carl
  */
-public class SynchronizeEntityWorldAppState extends BaseDisplayAppState<IngameClientApplication>{
+public class SynchronizeEntityWorldAppState extends BaseDisplayAppState<IngameClientApplication> {
 
-    public SynchronizeEntityWorldAppState(){
-        
-    }
-    private ConcurrentLinkedQueue<EntityChange> pendingEntityChanges = new ConcurrentLinkedQueue<EntityChange>();
+    private ConcurrentLinkedQueue<EntityChange> pendingEntityChanges = new ConcurrentLinkedQueue<>();
     private int initialChangesCount = -1;
 
     @Override
-    public void initialize(AppStateManager stateManager, Application application){
+    public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
         IngameNetworkAppState ingameNetworkAppState = getAppState(IngameNetworkAppState.class);
         ingameNetworkAppState.addMessageBackend(new EntitySynchronizeBackend(this));
     }
 
     @Override
-    public void update(float lastTimePerFrame){
+    public void update(float lastTimePerFrame) {
         super.update(lastTimePerFrame);
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
         int changesToApply = pendingEntityChanges.size();
-        if(initialChangesCount != -1){
+        if (initialChangesCount != -1) {
             changesToApply = Math.min(changesToApply, 100);
-            int percentProgress = Math.max(0, (int) ((1 - (((float) pendingEntityChanges.size()) / initialChangesCount)) * 100));
+            int percentProgress = (int) ((1 - (((float) pendingEntityChanges.size()) / initialChangesCount)) * 100);
             getAppState(LoadingScreenAppState.class).setTitle("Loading game data... (" + percentProgress + "%)");
         }
-        for(int i=0;i<changesToApply;i++){
+        for (int i=0;i<changesToApply;i++) {
             EntityChange entityChange = pendingEntityChanges.poll();
-            if(entityChange instanceof RemovedEntityChange){
+            if (entityChange instanceof RemovedEntityChange) {
                 RemovedEntityChange removedEntityChange = (RemovedEntityChange) entityChange;
                 entityWorld.removeEntity(removedEntityChange.getEntity());
-            }
-            else if(entityChange instanceof NewComponentChange){
+            } else if (entityChange instanceof NewComponentChange) {
                 NewComponentChange newComponentChange = (NewComponentChange) entityChange;
                 entityWorld.setComponent(newComponentChange.getEntity(), newComponentChange.getComponent());
-            }
-            else if(entityChange instanceof RemovedComponentChange){
+            } else if (entityChange instanceof RemovedComponentChange) {
                 RemovedComponentChange removedComponentChange = (RemovedComponentChange) entityChange;
                 entityWorld.removeComponent(removedComponentChange.getEntity(), removedComponentChange.getComponentClass());
-            }
-            else if(entityChange instanceof InitialEntityWorldLoadedChange){
+            } else if(entityChange instanceof InitialEntityWorldLoadedChange) {
                 getAppState(LocalEntitySystemAppState.class).onInitialWorldLoaded();
                 getAppState(PlayerAppState.class).onInitialWorldLoaded();
                 getAppState(LoadingScreenAppState.class).onInitialWorldLoaded();
@@ -69,19 +63,19 @@ public class SynchronizeEntityWorldAppState extends BaseDisplayAppState<IngameCl
             }
         }
     }
-    
-    public void enqueueEntityChanges(EntityChanges entityChanges){
+
+    public void enqueueEntityChanges(EntityChanges entityChanges) {
         for(EntityChange entityChange : entityChanges.getChanges()){
             pendingEntityChanges.add(entityChange);
         }
     }
-    
-    public void onInitialEntityWorldReceived(){
+
+    public void onInitialEntityWorldReceived() {
         initialChangesCount = pendingEntityChanges.size();
         pendingEntityChanges.add(new InitialEntityWorldLoadedChange());
     }
-    
-    private class InitialEntityWorldLoadedChange extends EntityChange{
-        
+
+    private class InitialEntityWorldLoadedChange extends EntityChange {
+
     }
 }

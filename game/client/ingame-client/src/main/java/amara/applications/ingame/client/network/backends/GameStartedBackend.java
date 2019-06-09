@@ -16,9 +16,9 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class GameStartedBackend implements MessageBackend{
+public class GameStartedBackend implements MessageBackend {
 
-    public GameStartedBackend(EntityWorld entityWorld, LoadingScreenAppState loadingScreenAppState){
+    public GameStartedBackend(EntityWorld entityWorld, LoadingScreenAppState loadingScreenAppState) {
         this.entityWorld = entityWorld;
         this.loadingScreenAppState = loadingScreenAppState;
     }
@@ -26,8 +26,8 @@ public class GameStartedBackend implements MessageBackend{
     private LoadingScreenAppState loadingScreenAppState;
 
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_GameStarted){
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_GameStarted) {
             entityWorld.setComponent(Game.ENTITY, new GameTimeComponent(0));
             loadingScreenAppState.onGameStarted();
         }

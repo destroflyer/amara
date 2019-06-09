@@ -43,7 +43,7 @@ public class GameInfoBackend implements MessageBackend {
                     stateManager.attach(new LocalEntitySystemAppState());
                     stateManager.attach(new SynchronizeEntityWorldAppState());
                     stateManager.attach(playerAppState);
-                    mainApplication.getStateManager().getState(LoadingScreenAppState.class).setTitle("Waiting for all players...");
+                    mainApplication.getStateManager().getState(LoadingScreenAppState.class).setTitle("Waiting for all players to connect...");
                     stateManager.attach(new ClientInitializedAppState());
                 }).start();
             });
