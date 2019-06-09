@@ -114,6 +114,6 @@ public class Map_Techtest extends Map{
         int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
         entityWorld.setComponent(characterEntity, new PositionComponent(new Vector2f(((playerIndex + 1) * 5), 5)));
         entityWorld.setComponent(characterEntity, new DirectionComponent(new Vector2f(0, -1)));
-        entityWorld.setComponent(characterEntity, new TeamComponent(playerIndex + 1));
+        entityWorld.setComponent(characterEntity, new TeamComponent(1));
     }
 }

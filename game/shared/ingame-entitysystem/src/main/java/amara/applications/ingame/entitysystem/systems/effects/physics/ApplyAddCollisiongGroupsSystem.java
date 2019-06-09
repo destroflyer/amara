@@ -13,17 +13,25 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class ApplyAddCollisiongGroupsSystem implements EntitySystem{
-    
+public class ApplyAddCollisiongGroupsSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddCollisionGroupsComponent.class)))
-        {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddCollisionGroupsComponent.class)) {
+            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
             CollisionGroupComponent oldCollisionGroupComponent = entityWorld.getComponent(targetEntity, CollisionGroupComponent.class);
-            AddCollisionGroupsComponent addCollisionGroupsComponent = entityWrapper.getComponent(AddCollisionGroupsComponent.class);
-            long targetOf = (oldCollisionGroupComponent.getTargetOf() | addCollisionGroupsComponent.getTargetOf());
-            long targets = (oldCollisionGroupComponent.getTargets() | addCollisionGroupsComponent.getTargets());
+            long targetOf;
+            long targets;
+            if (oldCollisionGroupComponent != null) {
+                targetOf = oldCollisionGroupComponent.getTargetOf();
+                targets = oldCollisionGroupComponent.getTargets();
+            } else {
+                targetOf = 0;
+                targets = 0;
+            }
+            AddCollisionGroupsComponent addCollisionGroupsComponent = entityWorld.getComponent(effectImpactEntity, AddCollisionGroupsComponent.class);
+            targetOf |= addCollisionGroupsComponent.getTargetOf();
+            targets |= addCollisionGroupsComponent.getTargets();
             entityWorld.setComponent(targetEntity, new CollisionGroupComponent(targetOf, targets));
         }
     }

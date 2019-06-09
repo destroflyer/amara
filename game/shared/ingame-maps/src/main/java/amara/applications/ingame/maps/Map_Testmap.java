@@ -243,6 +243,6 @@ public class Map_Testmap extends Map{
         int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
         entityWorld.setComponent(characterEntity, new PositionComponent(position));
         entityWorld.setComponent(characterEntity, new DirectionComponent(direction));
-        entityWorld.setComponent(characterEntity, new TeamComponent(playerIndex + 1));
+        entityWorld.setComponent(characterEntity, new TeamComponent((playerIndex % 2) + 1));
     }
 }
