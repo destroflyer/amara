@@ -42,6 +42,7 @@ public class IngameClientApplication extends DisplayApplication {
     @Override
     public void simpleInitApp() {
         super.simpleInitApp();
+        stateManager.attach(new ProfilerAppState());
         stateManager.attach(new NiftyAppState());
         stateManager.attach(new NiftyAppState_IngameClient());
         stateManager.attach(new MouseCursorAppState());
