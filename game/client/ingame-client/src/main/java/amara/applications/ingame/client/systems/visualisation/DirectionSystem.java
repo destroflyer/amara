@@ -24,10 +24,10 @@ public class DirectionSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, DirectionComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(DirectionComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(DirectionComponent.class)){
             updateDirection(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(DirectionComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(DirectionComponent.class)){
             updateDirection(entityWorld, entity);
         }
     }

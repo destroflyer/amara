@@ -29,7 +29,7 @@ public class ExecuteAIActionsSystem implements EntitySystem{
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int playerEntity : entityWorld.getEntitiesWithAll(IsBotComponent.class)){
+        for(int playerEntity : entityWorld.getEntitiesWithAny(IsBotComponent.class)){
             Bot bot = entityBotsMap.getBot(playerEntity);
             if(checkBotDecisionInterval(bot, deltaSeconds)){
                 int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();

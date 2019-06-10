@@ -30,7 +30,7 @@ public class AggroSystem implements EntitySystem {
                 int targetEntity = -1;
                 int targetAggroPriority = Integer.MIN_VALUE;
                 float targetDistanceSquared = Float.MAX_VALUE;
-                for (int otherEntity : entityWorld.getEntitiesWithAll(PositionComponent.class)) {
+                for (int otherEntity : entityWorld.getEntitiesWithAny(PositionComponent.class)) {
                     // Target visible
                     if(TeamVisionSystem.hasTeamSight(entityWorld, entity, otherEntity)) {
                         Vector2f otherPosition = entityWorld.getComponent(otherEntity, PositionComponent.class).getPosition();

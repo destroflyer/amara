@@ -24,7 +24,7 @@ public class RemoveBuffsSystem implements EntitySystem{
     }
     
     public static void removeAllBuffs(EntityWorld entityWorld, int entity){
-        for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
+        for(int buffStatus : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)){
             int targetEntity = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class).getTargetEntity();
             if(targetEntity == entity){
                 removeBuff(entityWorld, buffStatus);

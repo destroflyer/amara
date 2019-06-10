@@ -80,7 +80,7 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
         ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class);
         if ((!observer.getNew().isEmpty()) || (!observer.getChanged().isEmpty()) || (!observer.getRemoved().isEmpty())) {
             minimapImage.setData(backgroundImageData);
-            for (int entity : entityWorld.getEntitiesWithAll(PositionComponent.class)) {
+            for (int entity : entityWorld.getEntitiesWithAny(PositionComponent.class)) {
                 if (ownTeamVisionSystem.isVisible(entityWorld, entity)) {
                     paintEntity(entityWorld, entity);
                 }

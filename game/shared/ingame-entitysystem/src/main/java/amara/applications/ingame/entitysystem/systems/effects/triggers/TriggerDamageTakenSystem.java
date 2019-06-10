@@ -22,7 +22,7 @@ public class TriggerDamageTakenSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class)){
+        for(int effectImpactEntity : entityWorld.getEntitiesWithAny(ApplyEffectImpactComponent.class)){
             int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
             for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, DamageTakenTriggerComponent.class)){
                 int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();

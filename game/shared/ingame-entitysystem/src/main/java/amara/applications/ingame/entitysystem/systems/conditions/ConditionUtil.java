@@ -33,7 +33,7 @@ public class ConditionUtil{
         if(hasBuffConditionComponent != null){
             for(int buffEntity : hasBuffConditionComponent.getBuffEntities()){
                 boolean hasBuff = false;
-                for(int buffStatusEntity : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
+                for(int buffStatusEntity : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)){
                     ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
                     if((activeBuffComponent.getTargetEntity() == targetEntity) && (activeBuffComponent.getBuffEntity() == buffEntity)){
                         hasBuff = true;

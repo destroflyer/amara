@@ -40,7 +40,7 @@ public class RespawnableDeathSystem implements EntitySystem {
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
-        for (int entity : entityWorld.getEntitiesWithAll(IsRespawnableComponent.class)) {
+        for (int entity : entityWorld.getEntitiesWithAny(IsRespawnableComponent.class)) {
             if (observer.getRemoved().hasComponent(entity, IsAliveComponent.class)){
                 onRespawnableDeath(entityWorld, entity);
             }
@@ -52,7 +52,7 @@ public class RespawnableDeathSystem implements EntitySystem {
             entityWorld.removeComponent(entity, componentClass);
         }
         UnitUtil.cancelAction(entityWorld, entity);
-        for (int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)) {
+        for (int buffStatus : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)) {
             ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class);
             if ((activeBuffComponent.getTargetEntity() == entity) && (!entityWorld.hasComponent(activeBuffComponent.getBuffEntity(), KeepOnDeathComponent.class))) {
                 RemoveBuffsSystem.removeBuff(entityWorld, buffStatus);

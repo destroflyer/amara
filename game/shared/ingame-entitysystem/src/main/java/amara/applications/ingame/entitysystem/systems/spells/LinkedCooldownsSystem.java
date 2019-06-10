@@ -16,7 +16,7 @@ public class LinkedCooldownsSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, CooldownComponent.class, RemainingCooldownComponent.class);
-        for(int targetEntity : entityWorld.getEntitiesWithAll(LinkedCooldownComponent.class)){
+        for(int targetEntity : entityWorld.getEntitiesWithAny(LinkedCooldownComponent.class)){
             int sourceEntity = entityWorld.getComponent(targetEntity, LinkedCooldownComponent.class).getSourceEntity();
             copyChangedComponent(entityWorld, observer, sourceEntity, targetEntity, CooldownComponent.class);
             copyChangedComponent(entityWorld, observer, sourceEntity, targetEntity, RemainingCooldownComponent.class);

@@ -30,11 +30,11 @@ public class OwnTeamVisionSystem implements EntitySystem {
         if (playerTeamSystem.isInitialized()) {
             if (updateAll) {
                 if (isEnabled) {
-                    for(int entity : entityWorld.getEntitiesWithAll(IsVisibleForTeamsComponent.class)){
+                    for(int entity : entityWorld.getEntitiesWithAny(IsVisibleForTeamsComponent.class)){
                         updateNode(entityWorld, entity);
                     }
                 } else {
-                    for(int entity : entityWorld.getEntitiesWithAll(IsVisibleForTeamsComponent.class)){
+                    for(int entity : entityWorld.getEntitiesWithAny(IsVisibleForTeamsComponent.class)){
                         updateNode(entity, true);
                     }
                 }
@@ -42,13 +42,13 @@ public class OwnTeamVisionSystem implements EntitySystem {
             }
             if (isEnabled) {
                 ComponentMapObserver observer = entityWorld.requestObserver(this, IsVisibleForTeamsComponent.class);
-                for (int entity : observer.getNew().getEntitiesWithAll(IsVisibleForTeamsComponent.class)) {
+                for (int entity : observer.getNew().getEntitiesWithAny(IsVisibleForTeamsComponent.class)) {
                     updateNode(entityWorld, entity);
                 }
-                for (int entity : observer.getChanged().getEntitiesWithAll(IsVisibleForTeamsComponent.class)) {
+                for (int entity : observer.getChanged().getEntitiesWithAny(IsVisibleForTeamsComponent.class)) {
                     updateNode(entityWorld, entity);
                 }
-                for (int entity : observer.getRemoved().getEntitiesWithAll(IsVisibleForTeamsComponent.class)) {
+                for (int entity : observer.getRemoved().getEntitiesWithAny(IsVisibleForTeamsComponent.class)) {
                     updateNode(entity, true);
                 }
             }

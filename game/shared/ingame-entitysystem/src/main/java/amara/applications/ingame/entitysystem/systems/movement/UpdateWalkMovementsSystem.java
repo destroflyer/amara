@@ -19,7 +19,7 @@ public class UpdateWalkMovementsSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, WalkSpeedComponent.class);
-        for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAny(MovementComponent.class)){
             int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
             if(entityWorld.hasComponent(movementEntity, WalkMovementComponent.class)){
                 if(entityWorld.hasComponent(movementEntity, MovementSpeedComponent.class)){

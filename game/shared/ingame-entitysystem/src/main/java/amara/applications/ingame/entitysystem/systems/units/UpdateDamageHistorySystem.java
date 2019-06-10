@@ -28,7 +28,7 @@ public class UpdateDamageHistorySystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        entitiesWithInactiveDamageHistory = entityWorld.getEntitiesWithAll(DamageHistoryComponent.class);
+        entitiesWithInactiveDamageHistory = entityWorld.getEntitiesWithAny(DamageHistoryComponent.class);
         damageEntriesMap.clear();
         for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingPhysicalDamageComponent.class)){
             onDamageTaken(entityWorld, effectImpactEntity, DamageHistoryComponent.DamageType.PHYSICAL);

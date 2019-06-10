@@ -17,8 +17,8 @@ public class ResetOutOfCombatCampsSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, CampInCombatComponent.class);
-        for(int campEntity : observer.getRemoved().getEntitiesWithAll(CampInCombatComponent.class)){
-            for(int entity : entityWorld.getEntitiesWithAll(CampComponent.class)){
+        for(int campEntity : observer.getRemoved().getEntitiesWithAny(CampInCombatComponent.class)){
+            for(int entity : entityWorld.getEntitiesWithAny(CampComponent.class)){
                 CampComponent campComponent = entityWorld.getComponent(entity, CampComponent.class);
                 if(campComponent.getCampEntity() == campEntity){
                     entityWorld.setComponent(entity, new CampResetComponent());

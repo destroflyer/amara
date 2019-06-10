@@ -43,7 +43,7 @@ public class LastHitGoal extends Goal{
         autoAttackRange = entityWorld.getComponent(autoAttackEntity, RangeComponent.class).getDistance();
         int ownTeamEntity = entityWorld.getComponent(entity, TeamComponent.class).getTeamEntity();
         enemyMinionEntities.clear();
-        for(int minionEntity : entityWorld.getEntitiesWithAll(IsMinionComponent.class)){
+        for(int minionEntity : entityWorld.getEntitiesWithAny(IsMinionComponent.class)){
             int minionTeamEntity = entityWorld.getComponent(minionEntity, TeamComponent.class).getTeamEntity();
             if (minionTeamEntity != ownTeamEntity) {
                 Vector2f minionPosition = entityWorld.getComponent(minionEntity, PositionComponent.class).getPosition();
@@ -53,7 +53,7 @@ public class LastHitGoal extends Goal{
             }
         }
         float minimumStructureDistance = Float.MAX_VALUE;
-        for(int structureEntity : entityWorld.getEntitiesWithAll(IsStructureComponent.class)){
+        for(int structureEntity : entityWorld.getEntitiesWithAny(IsStructureComponent.class)){
             int structureTeamEntity = entityWorld.getComponent(structureEntity, TeamComponent.class).getTeamEntity();
             if (structureTeamEntity != ownTeamEntity) {
                 Vector2f structurePosition = entityWorld.getComponent(structureEntity, PositionComponent.class).getPosition();

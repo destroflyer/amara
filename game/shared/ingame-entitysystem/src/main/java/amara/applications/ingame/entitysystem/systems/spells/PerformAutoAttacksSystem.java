@@ -22,7 +22,7 @@ public class PerformAutoAttacksSystem implements EntitySystem {
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
-        for (int entity : entityWorld.getEntitiesWithAll(AggroTargetComponent.class)){
+        for (int entity : entityWorld.getEntitiesWithAny(AggroTargetComponent.class)){
             int targetEntity = entityWorld.getComponent(entity, AggroTargetComponent.class).getTargetEntity();
             if (!isWalkingToEntity(entityWorld, entity, targetEntity)) {
                 int autoAttackEntity = entityWorld.getComponent(entity, AutoAttackComponent.class).getAutoAttackEntity();

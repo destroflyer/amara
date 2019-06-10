@@ -21,7 +21,7 @@ public class ApplyRemoveSpellEffectsSystem implements EntitySystem{
         {
             for(int spellEffectEntity : entityWrapper.getComponent(RemoveSpellEffectsComponent.class).getSpellEffectEntities()){
                 entityWorld.removeComponent(spellEffectEntity, CastedSpellComponent.class);
-                for(int childSpellEffectEntity : entityWorld.getEntitiesWithAll(SpellEffectParentComponent.class)){
+                for(int childSpellEffectEntity : entityWorld.getEntitiesWithAny(SpellEffectParentComponent.class)){
                     int parentSpellEffectEntity = entityWorld.getComponent(childSpellEffectEntity, SpellEffectParentComponent.class).getSpellEffectEntity();
                     if(parentSpellEffectEntity == spellEffectEntity){
                         for(int castedEffectTriggerEntity : entityWorld.getComponent(spellEffectEntity, CastedEffectTriggersComponent.class).getEffectTriggerEntities()){

@@ -18,8 +18,8 @@ public class SetNewCampCombatSpellsOnCooldownSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, CampInCombatComponent.class);
-        for(int campEntity : observer.getNew().getEntitiesWithAll(CampInCombatComponent.class)){
-            for(int entity : entityWorld.getEntitiesWithAll(CampComponent.class)){
+        for(int campEntity : observer.getNew().getEntitiesWithAny(CampInCombatComponent.class)){
+            for(int entity : entityWorld.getEntitiesWithAny(CampComponent.class)){
                 CampComponent campComponent = entityWorld.getComponent(entity, CampComponent.class);
                 if(campComponent.getCampEntity() == campEntity){
                     checkSetSpellOnCooldown(entityWorld, entity);

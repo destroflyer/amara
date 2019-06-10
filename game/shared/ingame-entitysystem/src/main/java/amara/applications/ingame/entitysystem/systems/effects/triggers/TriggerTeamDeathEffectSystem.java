@@ -27,7 +27,7 @@ public class TriggerTeamDeathEffectSystem implements EntitySystem{
                 int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
                 int teamEntity = entityWorld.getComponent(sourceEntity, TeamComponent.class).getTeamEntity();
                 boolean didEntityOfTeamDie = false;
-                for (int deadEntity : observer.getRemoved().getEntitiesWithAll(IsAliveComponent.class)) {
+                for (int deadEntity : observer.getRemoved().getEntitiesWithAny(IsAliveComponent.class)) {
                     TeamComponent teamComponent = entityWorld.getComponent(deadEntity, TeamComponent.class);
                     if ((teamComponent != null) && (teamComponent.getTeamEntity() == teamEntity)) {
                         didEntityOfTeamDie = true;
@@ -42,7 +42,7 @@ public class TriggerTeamDeathEffectSystem implements EntitySystem{
     }
 
     private boolean isTeamDead(EntityWorld entityWorld, int teamEntity) {
-        return entityWorld.getEntitiesWithAll(TeamComponent.class).stream()
+        return entityWorld.getEntitiesWithAny(TeamComponent.class).stream()
                 .filter(entityInATeam -> entityWorld.getComponent(entityInATeam, TeamComponent.class).getTeamEntity() == teamEntity)
                 .noneMatch(alliedEntity -> entityWorld.hasComponent(alliedEntity, IsAliveComponent.class));
     }

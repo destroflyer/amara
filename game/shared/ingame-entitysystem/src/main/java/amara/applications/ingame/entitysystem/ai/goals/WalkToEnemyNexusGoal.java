@@ -31,7 +31,7 @@ public class WalkToEnemyNexusGoal extends Goal{
     @Override
     public void initialize(EntityWorld entityWorld, int entity){
         int ownTeamEntity = entityWorld.getComponent(entity, TeamComponent.class).getTeamEntity();
-        for(int nexusEntity : entityWorld.getEntitiesWithAll(NameComponent.class)){
+        for(int nexusEntity : entityWorld.getEntitiesWithAny(NameComponent.class)){
             String name = entityWorld.getComponent(nexusEntity, NameComponent.class).getName();
             if("Nexus".equals(name)){
                 int nexusTeamEntity = entityWorld.getComponent(nexusEntity, TeamComponent.class).getTeamEntity();

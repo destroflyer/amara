@@ -15,7 +15,7 @@ public class CountdownInCombatSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(InCombatComponent.class))){
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(InCombatComponent.class))){
             InCombatComponent inCombatComponent = entityWrapper.getComponent(InCombatComponent.class);
             float duration = (inCombatComponent.getRemainingDuration() - deltaSeconds);
             if(duration > 0){

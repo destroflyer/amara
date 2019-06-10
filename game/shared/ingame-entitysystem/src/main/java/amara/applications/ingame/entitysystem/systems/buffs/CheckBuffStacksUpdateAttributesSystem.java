@@ -19,8 +19,8 @@ public class CheckBuffStacksUpdateAttributesSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, StacksComponent.class);
-        for(int stacksEntity : observer.getChanged().getEntitiesWithAll(StacksComponent.class)){
-            for(int buffStatusEntity : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
+        for(int stacksEntity : observer.getChanged().getEntitiesWithAny(StacksComponent.class)){
+            for(int buffStatusEntity : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)){
                 ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
                 BuffStacksComponent buffStacksComponent = entityWorld.getComponent(activeBuffComponent.getBuffEntity(), BuffStacksComponent.class);
                 if((buffStacksComponent != null) && (buffStacksComponent.getStacksEntity() == stacksEntity)){

@@ -40,11 +40,11 @@ public class AudioSystem implements EntitySystem{
         increasePlayingAudioProgresses(deltaSeconds);
         ComponentMapObserver observer = entityWorld.requestObserver(this, SendEntityChangesSystem.COMPONENT_EQUALITY_DEFINTION, AudioComponent.class, AudioSourceComponent.class, PositionComponent.class, StartPlayingAudioComponent.class, StopPlayingAudioComponent.class, GameSpeedComponent.class);
         //Create
-        for(int entity : observer.getNew().getEntitiesWithAll(AudioComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(AudioComponent.class)){
             load(entityWorld, entity);
         }
         //Source
-        for(int entity : observer.getNew().getEntitiesWithAll(AudioSourceComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(AudioSourceComponent.class)){
             AudioNode audioNode = audioNodes.get(entity);
             int audioSourceEntity = entityWorld.getComponent(entity, AudioSourceComponent.class).getEntity();
             audioNode.setPositional(true);
@@ -52,22 +52,22 @@ public class AudioSystem implements EntitySystem{
             audioNode.setMaxDistance(9999999);
             tryUpdateAudioPosition(entity, entityWorld.getComponent(audioSourceEntity, PositionComponent.class));
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(AudioSourceComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(AudioSourceComponent.class)){
             AudioNode audioNode = audioNodes.get(entity);
             audioNode.setPositional(false);
         }
         //Start
-        for(int entity : observer.getNew().getEntitiesWithAll(StartPlayingAudioComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(StartPlayingAudioComponent.class)){
             enqueuePlay(entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(StartPlayingAudioComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(StartPlayingAudioComponent.class)){
             enqueuePlay(entity);
         }
         //Stop
-        for(int entity : observer.getNew().getEntitiesWithAll(StopPlayingAudioComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(StopPlayingAudioComponent.class)){
             stop(entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(StopPlayingAudioComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(StopPlayingAudioComponent.class)){
             stop(entity);
         }
         updateAudioPositions(entityWorld, observer);
@@ -79,7 +79,7 @@ public class AudioSystem implements EntitySystem{
         }
         playQueuedAudioEntities(entityWorld);
         //Remove
-        for(int entity : observer.getRemoved().getEntitiesWithAll(AudioComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(AudioComponent.class)){
             remove(entity);
         }
     }

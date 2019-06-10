@@ -15,7 +15,7 @@ public class CountdownKnockupImmuneSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(IsKnockupedImmuneComponent.class)))
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(IsKnockupedImmuneComponent.class)))
         {
             IsKnockupedImmuneComponent isKnockupedImmuneComponent = entityWrapper.getComponent(IsKnockupedImmuneComponent.class);
             float duration = (isKnockupedImmuneComponent.getRemainingDuration() - deltaSeconds);

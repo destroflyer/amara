@@ -21,7 +21,7 @@ public class ApplyRemoveBuffsSystem implements EntitySystem{
         {
             int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             int buffEntity = entityWrapper.getComponent(RemoveBuffComponent.class).getBuffEntity();
-            for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
+            for(int buffStatus : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)){
                 ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class);
                 if((activeBuffComponent.getTargetEntity() == targetEntity) && (activeBuffComponent.getBuffEntity() == buffEntity)){
                     entityWorld.setComponent(buffStatus, new RemoveFromTargetComponent());

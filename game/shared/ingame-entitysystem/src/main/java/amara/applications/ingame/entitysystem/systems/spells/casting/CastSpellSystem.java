@@ -24,7 +24,7 @@ public class CastSpellSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int casterEntity : entityWorld.getEntitiesWithAll(CastSpellComponent.class)){
+        for(int casterEntity : entityWorld.getEntitiesWithAny(CastSpellComponent.class)){
             CastSpellComponent castSpellComponent = entityWorld.getComponent(casterEntity, CastSpellComponent.class);
             int spellEntity = castSpellComponent.getSpellEntity();
             int targetEntity = castSpellComponent.getTargetEntity();

@@ -23,13 +23,13 @@ public class ScaleSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, ScaleComponent.class, ModelComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(ScaleComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(ScaleComponent.class)){
             updateScale(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(ScaleComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(ScaleComponent.class)){
             updateScale(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(ScaleComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(ScaleComponent.class)){
             updateScale(entity, 1);
         }
     }

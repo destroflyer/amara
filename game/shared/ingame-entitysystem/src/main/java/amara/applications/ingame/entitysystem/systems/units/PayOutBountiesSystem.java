@@ -32,7 +32,7 @@ public class PayOutBountiesSystem implements EntitySystem{
             entityWorld.setComponent(defaultBountyRulesEntity, new AcceptEnemiesComponent());
         }
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
-        for(int entity : observer.getRemoved().getEntitiesWithAll(IsAliveComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(IsAliveComponent.class)){
             BountyComponent bountyComponent = entityWorld.getComponent(entity, BountyComponent.class);
             DamageHistoryComponent damageHistoryComponent = entityWorld.getComponent(entity, DamageHistoryComponent.class);
             if((bountyComponent != null) && (damageHistoryComponent != null) && (damageHistoryComponent.getEntries().length > 0)){

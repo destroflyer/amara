@@ -30,7 +30,7 @@ public class CheckAreaBuffsSystem implements EntitySystem{
         IntersectionTracker<Pair<Integer>> tracker = intersectionInformant.getTracker(entityWorld, this);
         Set<Pair<Integer>> intersectionEntries = tracker.getEntries();
         Set<Pair<Integer>> intersectionLeavers = tracker.getLeavers();
-        for(int buffAreaEntity : entityWorld.getEntitiesWithAll(AreaOriginComponent.class)){
+        for(int buffAreaEntity : entityWorld.getEntitiesWithAny(AreaOriginComponent.class)){
             int buffEntity = entityWorld.getComponent(buffAreaEntity, AreaBuffComponent.class).getBuffEntity();
             for(Pair<Integer> pair : intersectionEntries){
                 if(pair.getA() == buffAreaEntity){
@@ -69,7 +69,7 @@ public class CheckAreaBuffsSystem implements EntitySystem{
     }
     
     private void removeBuff(EntityWorld entityWorld, int targetEntity, int buffEntity){
-        for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
+        for(int buffStatus : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)){
             ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class);
             if((activeBuffComponent.getTargetEntity() == targetEntity) && (activeBuffComponent.getBuffEntity() == buffEntity)){
                 entityWorld.setComponent(buffStatus, new RemoveFromTargetComponent());

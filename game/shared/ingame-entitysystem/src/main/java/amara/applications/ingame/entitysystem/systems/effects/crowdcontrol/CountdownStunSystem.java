@@ -15,7 +15,7 @@ public class CountdownStunSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(IsStunnedComponent.class)))
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(IsStunnedComponent.class)))
         {
             IsStunnedComponent isStunnedComponent = entityWrapper.getComponent(IsStunnedComponent.class);
             float duration = (isStunnedComponent.getRemainingDuration() - deltaSeconds);

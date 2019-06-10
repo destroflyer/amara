@@ -26,10 +26,10 @@ public class DisplayDeathTimerSystem extends GUIDisplaySystem<ScreenController_H
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
         ComponentMapObserver observer = entityWorld.requestObserver(this, RemainingEffectDelayComponent.class);
-        for (int effectCastEntity : observer.getNew().getEntitiesWithAll(RemainingEffectDelayComponent.class)) {
+        for (int effectCastEntity : observer.getNew().getEntitiesWithAny(RemainingEffectDelayComponent.class)) {
             check(entityWorld, effectCastEntity);
         }
-        for (int effectCastEntity : observer.getChanged().getEntitiesWithAll(RemainingEffectDelayComponent.class)) {
+        for (int effectCastEntity : observer.getChanged().getEntitiesWithAny(RemainingEffectDelayComponent.class)) {
             check(entityWorld, effectCastEntity);
         }
     }

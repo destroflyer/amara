@@ -19,48 +19,48 @@ public class SetSpellsCastersSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, AutoAttackComponent.class, PassivesComponent.class, SpellsComponent.class, InventoryComponent.class, MapSpellsComponent.class);
         //AutoAttack
-        for(int entity : observer.getNew().getEntitiesWithAll(AutoAttackComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(AutoAttackComponent.class)){
             updateCaster(entityWorld, entity, observer.getNew().getComponent(entity, AutoAttackComponent.class).getAutoAttackEntity());
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(AutoAttackComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(AutoAttackComponent.class)){
             updateCaster(entityWorld, entity, observer.getChanged().getComponent(entity, AutoAttackComponent.class).getAutoAttackEntity());
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(AutoAttackComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(AutoAttackComponent.class)){
             int autoAttackEntity = observer.getRemoved().getComponent(entity, AutoAttackComponent.class).getAutoAttackEntity();
             entityWorld.removeComponent(autoAttackEntity, EffectCastSourceComponent.class);
         }
         //Passives
-        for(int entity : observer.getNew().getEntitiesWithAll(PassivesComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(PassivesComponent.class)){
             updateCaster_Passives(entityWorld, entity, observer.getNew().getComponent(entity, PassivesComponent.class).getPassiveEntities());
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(PassivesComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(PassivesComponent.class)){
             updateCaster_Passives(entityWorld, entity, observer.getChanged().getComponent(entity, PassivesComponent.class).getPassiveEntities());
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(PassivesComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(PassivesComponent.class)){
             for(int passiveEntity : observer.getRemoved().getComponent(entity, PassivesComponent.class).getPassiveEntities()){
                 entityWorld.removeComponent(passiveEntity, EffectCastSourceComponent.class);
             }
         }
         //Spells
-        for(int entity : observer.getNew().getEntitiesWithAll(SpellsComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(SpellsComponent.class)){
             updateCaster_Spells(entityWorld, entity, observer.getNew().getComponent(entity, SpellsComponent.class).getSpellsEntities());
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(SpellsComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(SpellsComponent.class)){
             updateCaster_Spells(entityWorld, entity, observer.getChanged().getComponent(entity, SpellsComponent.class).getSpellsEntities());
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(SpellsComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(SpellsComponent.class)){
             for(int spellEntity : observer.getRemoved().getComponent(entity, SpellsComponent.class).getSpellsEntities()){
                 entityWorld.removeComponent(spellEntity, EffectCastSourceComponent.class);
             }
         }
         //Items
-        for(int entity : observer.getNew().getEntitiesWithAll(InventoryComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(InventoryComponent.class)){
             updateCaster_Inventory(entityWorld, entity, observer.getNew().getComponent(entity, InventoryComponent.class).getItemEntities());
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(InventoryComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(InventoryComponent.class)){
             updateCaster_Inventory(entityWorld, entity, observer.getChanged().getComponent(entity, InventoryComponent.class).getItemEntities());
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(InventoryComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(InventoryComponent.class)){
             for(int itemEntity : observer.getRemoved().getComponent(entity, InventoryComponent.class).getItemEntities()){
                 ItemActiveComponent itemActiveComponent = entityWorld.getComponent(itemEntity, ItemActiveComponent.class);
                 if(itemActiveComponent != null){
@@ -75,13 +75,13 @@ public class SetSpellsCastersSystem implements EntitySystem{
             }
         }
         //Map Spells
-        for(int entity : observer.getNew().getEntitiesWithAll(MapSpellsComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(MapSpellsComponent.class)){
             updateCaster_Spells(entityWorld, entity, observer.getNew().getComponent(entity, MapSpellsComponent.class).getSpellsEntities());
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(MapSpellsComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(MapSpellsComponent.class)){
             updateCaster_Spells(entityWorld, entity, observer.getChanged().getComponent(entity, MapSpellsComponent.class).getSpellsEntities());
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(MapSpellsComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(MapSpellsComponent.class)){
             for(int spellEntity : observer.getRemoved().getComponent(entity, MapSpellsComponent.class).getSpellsEntities()){
                 entityWorld.removeComponent(spellEntity, EffectCastSourceComponent.class);
             }

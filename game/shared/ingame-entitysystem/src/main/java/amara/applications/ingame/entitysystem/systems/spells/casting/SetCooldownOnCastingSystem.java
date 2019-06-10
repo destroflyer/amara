@@ -18,7 +18,7 @@ public class SetCooldownOnCastingSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int casterEntity : entityWorld.getEntitiesWithAll(CastSpellComponent.class)){
+        for(int casterEntity : entityWorld.getEntitiesWithAny(CastSpellComponent.class)){
             int spellEntity = entityWorld.getComponent(casterEntity, CastSpellComponent.class).getSpellEntity();
             setOnCooldown_Active(entityWorld, casterEntity, spellEntity);
         }

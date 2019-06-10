@@ -82,22 +82,22 @@ public class FogOfWarSystem implements EntitySystem {
         if(!isUpdateNeeded){
             ComponentMapObserver observer = entityWorld.requestObserver(this, IsHiddenAreaComponent.class, PositionComponent.class);
             //Hidden areas
-            for (int entity : observer.getNew().getEntitiesWithAll(IsHiddenAreaComponent.class)) {
+            for (int entity : observer.getNew().getEntitiesWithAny(IsHiddenAreaComponent.class)) {
                 HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
                 if(hitboxComponent != null){
                     teamVision.setObstacle(entity, new VisionObstacle((ConvexShape) hitboxComponent.getShape(), false));
                     isUpdateNeeded = true;
                 }
             }
-            for (int entity : observer.getRemoved().getEntitiesWithAll(IsHiddenAreaComponent.class)) {
+            for (int entity : observer.getRemoved().getEntitiesWithAny(IsHiddenAreaComponent.class)) {
                 teamVision.removeObstacle(entity);
                 isUpdateNeeded = true;
             }
             //Moved units
-            for (int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)) {
+            for (int entity : observer.getNew().getEntitiesWithAny(PositionComponent.class)) {
                 checkChangedPosition(entityWorld, entity);
             }
-            for (int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)) {
+            for (int entity : observer.getChanged().getEntitiesWithAny(PositionComponent.class)) {
                 checkChangedPosition(entityWorld, entity);
             }
         }

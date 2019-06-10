@@ -23,7 +23,7 @@ public class UpdateAttributesSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(RequestUpdateAttributesComponent.class))){
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(RequestUpdateAttributesComponent.class))){
             AttributeBonus attributeBonus = new AttributeBonus();
             BaseAttributesComponent baseAttributesComponent = entityWrapper.getComponent(BaseAttributesComponent.class);
             if(baseAttributesComponent != null){
@@ -45,7 +45,7 @@ public class UpdateAttributesSystem implements EntitySystem{
                     addAttributeBonus(entityWorld, attributeBonus, itemEntity);
                 }
             }
-            for(EntityWrapper buffStatus : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ActiveBuffComponent.class))){
+            for(EntityWrapper buffStatus : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(ActiveBuffComponent.class))){
                 ActiveBuffComponent activeBuffComponent = buffStatus.getComponent(ActiveBuffComponent.class);
                 if(activeBuffComponent.getTargetEntity() == entityWrapper.getId()){
                     int buffEntity = activeBuffComponent.getBuffEntity();

@@ -20,13 +20,13 @@ public class TriggerItemPassivesSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, InventoryComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(InventoryComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(InventoryComponent.class)){
             checkInventory(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(InventoryComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(InventoryComponent.class)){
             checkInventory(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(InventoryComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(InventoryComponent.class)){
             for(int itemEntity : observer.getRemoved().getComponent(entity, InventoryComponent.class).getItemEntities()){
                 onItemRemoved(entityWorld, entity, itemEntity);
             }

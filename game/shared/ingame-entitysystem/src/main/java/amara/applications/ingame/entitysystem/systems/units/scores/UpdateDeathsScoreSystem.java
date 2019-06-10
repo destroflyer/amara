@@ -17,7 +17,7 @@ public class UpdateDeathsScoreSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
-        for(int entity : observer.getRemoved().getEntitiesWithAll(IsAliveComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(IsAliveComponent.class)){
             ScoreComponent scoreComponent = entityWorld.getComponent(entity, ScoreComponent.class);
             if(scoreComponent != null){
                 int scoreEntity = scoreComponent.getScoreEntity();

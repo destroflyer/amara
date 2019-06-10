@@ -19,11 +19,11 @@ public class UpdateAreaTransformsSystem implements EntitySystem{
         ComponentMapObserver observer = entityWorld.requestObserver(this, AreaOriginComponent.class, PositionComponent.class);
         EntityComponentMapReadonly observerNew = observer.getNew();
         EntityComponentMapReadonly observerChanged = observer.getChanged();
-        for(int buffAreaEntity : observerNew.getEntitiesWithAll(AreaOriginComponent.class)){
+        for(int buffAreaEntity : observerNew.getEntitiesWithAny(AreaOriginComponent.class)){
             int originEntity = entityWorld.getComponent(buffAreaEntity, AreaOriginComponent.class).getOriginEntity();
             tryTransformUpdate(entityWorld, buffAreaEntity, originEntity, entityWorld);
         }
-        for(int buffAreaEntity : entityWorld.getEntitiesWithAll(AreaOriginComponent.class)){
+        for(int buffAreaEntity : entityWorld.getEntitiesWithAny(AreaOriginComponent.class)){
             int originEntity = entityWorld.getComponent(buffAreaEntity, AreaOriginComponent.class).getOriginEntity();
             tryTransformUpdate(entityWorld, buffAreaEntity, originEntity, observerNew);
             tryTransformUpdate(entityWorld, buffAreaEntity, originEntity, observerChanged);

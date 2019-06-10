@@ -15,7 +15,7 @@ public class CountdownBindingImmuneSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(IsBindedImmuneComponent.class)))
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(IsBindedImmuneComponent.class)))
         {
             IsBindedImmuneComponent isBindedImmuneComponent = entityWrapper.getComponent(IsBindedImmuneComponent.class);
             float duration = (isBindedImmuneComponent.getRemainingDuration() - deltaSeconds);

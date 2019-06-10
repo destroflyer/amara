@@ -107,7 +107,7 @@ public class EffectTriggerUtil{
         }
         BuffTargetsTargetComponent buffTargetTargetComponent = entityWorld.getComponent(entity, BuffTargetsTargetComponent.class);
         if(buffTargetTargetComponent != null){
-            for(int buffStatusEntity : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
+            for(int buffStatusEntity : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)){
                 ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
                 if(activeBuffComponent.getBuffEntity() == buffTargetTargetComponent.getBuffEntity()){
                     tmpTargetEntities.add(activeBuffComponent.getTargetEntity());
@@ -122,7 +122,7 @@ public class EffectTriggerUtil{
         }
         TeamTargetComponent teamTargetComponent = entityWorld.getComponent(entity, TeamTargetComponent.class);
         if (teamTargetComponent != null) {
-            for (int entityInTeam : entityWorld.getEntitiesWithAll(TeamComponent.class)) {
+            for (int entityInTeam : entityWorld.getEntitiesWithAny(TeamComponent.class)) {
                 int teamEntity = entityWorld.getComponent(entityInTeam, TeamComponent.class).getTeamEntity();
                 if (teamEntity == teamTargetComponent.getTeamEntity()) {
                     tmpTargetEntities.add(entityInTeam);

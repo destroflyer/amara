@@ -31,7 +31,7 @@ public class ShopAnimationSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
         if(playerCharacterComponent != null){
-            Set<Integer> shopEntities = entityWorld.getEntitiesWithAll(ShopRangeComponent.class);
+            Set<Integer> shopEntities = entityWorld.getEntitiesWithAny(ShopRangeComponent.class);
             if(canUseShop == null){
                 canUseShop = new boolean[shopEntities.size()];
             }

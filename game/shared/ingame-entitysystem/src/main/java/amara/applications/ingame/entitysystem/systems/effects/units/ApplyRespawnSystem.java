@@ -58,7 +58,7 @@ public class ApplyRespawnSystem implements EntitySystem {
     }
 
     private Optional<Integer> getPlayerEntity(EntityWorld entityWorld, int characterEntity) {
-        return entityWorld.getEntitiesWithAll(PlayerCharacterComponent.class).stream()
+        return entityWorld.getEntitiesWithAny(PlayerCharacterComponent.class).stream()
                 .filter(entity -> entityWorld.getComponent(entity, PlayerCharacterComponent.class).getEntity() == characterEntity)
                 .findFirst();
     }

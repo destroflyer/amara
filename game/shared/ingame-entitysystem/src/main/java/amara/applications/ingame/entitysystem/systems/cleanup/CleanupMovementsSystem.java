@@ -17,7 +17,7 @@ public class CleanupMovementsSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, MovementTargetComponent.class);
-        for(int entity : observer.getRemoved().getEntitiesWithAll(MovementTargetComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(MovementTargetComponent.class)){
             int targetEntity = observer.getRemoved().getComponent(entity, MovementTargetComponent.class).getTargetEntity();
             if(entityWorld.hasComponent(targetEntity, TemporaryComponent.class)){
                 CleanupUtil.tryCleanupEntity(entityWorld, targetEntity);

@@ -16,7 +16,7 @@ public class FinishTargetedMovementsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAny(MovementComponent.class)){
             int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
             if(entityWorld.hasComponent(movementEntity, MovementTargetReachedComponent.class)){
                 entityWorld.removeComponent(entity, MovementComponent.class);

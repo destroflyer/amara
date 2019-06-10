@@ -26,25 +26,25 @@ public class CollisionDebugSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, HitboxComponent.class, HitboxActiveComponent.class, PositionComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(HitboxComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(HitboxComponent.class)){
             updateGeometry(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(HitboxComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(HitboxComponent.class)){
             updateGeometry(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(HitboxComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(HitboxComponent.class)){
             removeGeometry(entity);
         }
-        for(int entity : observer.getNew().getEntitiesWithAll(HitboxActiveComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(HitboxActiveComponent.class)){
             updateGeometry(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(HitboxActiveComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(HitboxActiveComponent.class)){
             updateGeometry(entityWorld, entity);
         }
-        for(int entity : observer.getNew().getEntitiesWithAll(PositionComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(PositionComponent.class)){
             updateGeometryLocation(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(PositionComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(PositionComponent.class)){
             updateGeometryLocation(entityWorld, entity);
         }
     }

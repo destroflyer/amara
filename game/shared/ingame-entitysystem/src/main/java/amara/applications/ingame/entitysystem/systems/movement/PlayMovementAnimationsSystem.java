@@ -18,13 +18,13 @@ public class PlayMovementAnimationsSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, MovementComponent.class, MovementAnimationComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(MovementComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(MovementComponent.class)){
             updateAnimation(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(MovementComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(MovementComponent.class)){
             updateAnimation(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(MovementComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(MovementComponent.class)){
             int movementEntity = observer.getRemoved().getComponent(entity, MovementComponent.class).getMovementEntity();
             MovementAnimationComponent movementAnimationComponent = observer.getRemoved().getComponent(movementEntity, MovementAnimationComponent.class);
             AnimationComponent currentAnimationComponent = entityWorld.getComponent(entity, AnimationComponent.class);

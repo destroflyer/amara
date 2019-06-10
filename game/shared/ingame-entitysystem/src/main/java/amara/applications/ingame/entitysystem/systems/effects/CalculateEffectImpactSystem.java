@@ -52,7 +52,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         appliedEffectEntities.clear();
         ExpressionSpace expressionSpace = GlobalExpressionSpace.getInstance();
-        for(EntityWrapper effectCast : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(PrepareEffectComponent.class))){
+        for(EntityWrapper effectCast : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(PrepareEffectComponent.class))){
             if(!effectCast.hasComponent(RemainingEffectDelayComponent.class)){
                 EntityWrapper effect = entityWorld.getWrapped(effectCast.getComponent(PrepareEffectComponent.class).getEffectEntity());
                 EffectCastSourceComponent effectCastSourceComponent = effectCast.getComponent(EffectCastSourceComponent.class);
@@ -275,11 +275,11 @@ public class CalculateEffectImpactSystem implements EntitySystem{
     private void cleanupUnreferencedAppliedEffects(EntityWorld entityWorld) {
         // Remove effects that are no longer referenced, e.g. when an instant once effecttrigger was already removed, but had a delay for the effect cast
         for (int appliedEffectEntity : appliedEffectEntities) {
-            boolean isReferencedInEffectTrigger = entityWorld.getEntitiesWithAll(TriggeredEffectComponent.class).stream()
+            boolean isReferencedInEffectTrigger = entityWorld.getEntitiesWithAny(TriggeredEffectComponent.class).stream()
                     .map(effectTriggerEntity -> entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class).getEffectEntity())
                     .anyMatch(effectEntity -> effectEntity == appliedEffectEntity);
             if (!isReferencedInEffectTrigger) {
-                boolean isReferencedInRepeatingEffect = entityWorld.getEntitiesWithAll(RepeatingEffectComponent.class).stream()
+                boolean isReferencedInRepeatingEffect = entityWorld.getEntitiesWithAny(RepeatingEffectComponent.class).stream()
                         .map(buffEntity -> entityWorld.getComponent(buffEntity, RepeatingEffectComponent.class).getEffectEntity())
                         .anyMatch(effectEntity -> effectEntity == appliedEffectEntity);
                 if (!isReferencedInRepeatingEffect) {

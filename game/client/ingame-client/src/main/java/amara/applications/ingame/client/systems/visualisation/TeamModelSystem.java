@@ -33,12 +33,12 @@ public class TeamModelSystem implements EntitySystem {
             for (int entity : observer.getRemoved().getEntitiesWithAny(TeamComponent.class, TeamModelComponent.class)) {
                 updateModel(entityWorld, entity);
             }
-            for (int entity : observer.getRemoved().getEntitiesWithAll(TeamComponent.class)) {
+            for (int entity : observer.getRemoved().getEntitiesWithAny(TeamComponent.class)) {
                 if (!entityWorld.hasComponent(entity, TeamModelComponent.class)) {
                     entityWorld.removeComponent(entity, ModelComponent.class);
                 }
             }
-            for (int entity : observer.getRemoved().getEntitiesWithAll(TeamModelComponent.class)) {
+            for (int entity : observer.getRemoved().getEntitiesWithAny(TeamModelComponent.class)) {
                 entityWorld.removeComponent(entity, ModelComponent.class);
             }
         }

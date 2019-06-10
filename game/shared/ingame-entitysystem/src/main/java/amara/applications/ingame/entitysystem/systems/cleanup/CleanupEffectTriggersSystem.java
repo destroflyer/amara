@@ -17,18 +17,18 @@ public class CleanupEffectTriggersSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, TriggeredEffectComponent.class);
-        for (int entity : observer.getRemoved().getEntitiesWithAll(TriggeredEffectComponent.class)) {
+        for (int entity : observer.getRemoved().getEntitiesWithAny(TriggeredEffectComponent.class)) {
             int effectEntity = observer.getRemoved().getComponent(entity, TriggeredEffectComponent.class).getEffectEntity();
             // Only remove the effect entity, if it's not referenced in an ongoing effect cast
             // If it is, it will be cleanuped when the effect impact is calculated
-            boolean canEffectBeCleanuped = entityWorld.getEntitiesWithAll(PrepareEffectComponent.class).stream()
+            boolean canEffectBeCleanuped = entityWorld.getEntitiesWithAny(PrepareEffectComponent.class).stream()
                     .map(effectCastEntity -> entityWorld.getComponent(effectCastEntity, PrepareEffectComponent.class).getEffectEntity())
                     .noneMatch(castingEffectEntity -> castingEffectEntity == effectEntity);
             if (canEffectBeCleanuped) {
                 CleanupUtil.tryCleanupEntity(entityWorld, effectEntity);
             }
         }
-        for (int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class)) {
+        for (int effectTriggerEntity : entityWorld.getEntitiesWithAny(TriggerSourceComponent.class)) {
             int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
             if(!entityWorld.hasEntity(sourceEntity)){
                 int effectEntity = entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class).getEffectEntity();

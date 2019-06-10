@@ -43,7 +43,7 @@ public class TeamVisionSystem implements EntitySystem{
         haveHiddenAreasChanged = false;
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsHiddenAreaComponent.class, PositionComponent.class, SightRangeComponent.class, TeamComponent.class, IsAlwaysVisibleComponent.class, IsStealthedComponent.class);
         //Update hidden areas
-        for(int entity : observer.getNew().getEntitiesWithAll(IsHiddenAreaComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(IsHiddenAreaComponent.class)){
             updateHiddenAreaObstacle(entityWorld, entity);
         }
         for(int entity : observer.getRemoved().getEntitiesWithAny(IsHiddenAreaComponent.class)){
@@ -84,7 +84,7 @@ public class TeamVisionSystem implements EntitySystem{
         }
         //Update IsVisibleForTeamsComponent
         if((changedVisionEntities.size() > 0) || haveHiddenAreasChanged){
-            for(int entity : entityWorld.getEntitiesWithAll(PositionComponent.class)){
+            for(int entity : entityWorld.getEntitiesWithAny(PositionComponent.class)){
                 updateIsVisibleForTeams(entityWorld, entity);
             }
         }

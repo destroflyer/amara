@@ -15,7 +15,7 @@ public class CountdownCampRespawnSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(CampRemainingRespawnDurationComponent.class))){
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(CampRemainingRespawnDurationComponent.class))){
             CampRemainingRespawnDurationComponent remainingRespawnDurationComponent = entityWrapper.getComponent(CampRemainingRespawnDurationComponent.class);
             float duration = (remainingRespawnDurationComponent.getDuration() - deltaSeconds);
             if(duration > 0){

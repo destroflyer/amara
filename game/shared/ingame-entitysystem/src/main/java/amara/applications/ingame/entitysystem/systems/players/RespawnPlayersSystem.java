@@ -37,7 +37,7 @@ public class RespawnPlayersSystem implements EntitySystem {
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
-        for (int playerEntity : entityWorld.getEntitiesWithAll(PlayerCharacterComponent.class)) {
+        for (int playerEntity : entityWorld.getEntitiesWithAny(PlayerCharacterComponent.class)) {
             int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
             if (observer.getRemoved().hasComponent(characterEntity, IsAliveComponent.class)) {
                 onPlayerDeath(entityWorld, characterEntity);

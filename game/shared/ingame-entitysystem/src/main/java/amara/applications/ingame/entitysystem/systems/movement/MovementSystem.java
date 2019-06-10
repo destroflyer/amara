@@ -20,7 +20,7 @@ public class MovementSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAny(MovementComponent.class)){
             if(canMove(entityWorld, entity) || isDisplaced(entityWorld, entity)){
                 int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
                 if(entityWorld.hasAllComponents(movementEntity, MovementDirectionComponent.class, MovementSpeedComponent.class)){

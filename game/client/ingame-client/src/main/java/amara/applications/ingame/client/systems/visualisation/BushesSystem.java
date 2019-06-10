@@ -36,13 +36,13 @@ public class BushesSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsHiddenAreaComponent.class, IsInHiddenAreaComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(IsHiddenAreaComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(IsHiddenAreaComponent.class)){
             HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
             if(hitboxComponent != null){
                 addBush(entity, hitboxComponent.getShape());
             }
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(IsHiddenAreaComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(IsHiddenAreaComponent.class)){
             removeBush(entity);
         }
         //Adapt bush transparency

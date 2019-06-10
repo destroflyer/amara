@@ -17,13 +17,13 @@ public class CountdownAnimationLoopsSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, AnimationComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(AnimationComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(AnimationComponent.class)){
             prepareAnimation(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(AnimationComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(AnimationComponent.class)){
             prepareAnimation(entityWorld, entity);
         }
-        for(int entity : entityWorld.getEntitiesWithAll(AnimationComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAny(AnimationComponent.class)){
             int animationEntity = entityWorld.getComponent(entity, AnimationComponent.class).getAnimationEntity();
             RemainingLoopsComponent remainingLoopsComponent = entityWorld.getComponent(animationEntity, RemainingLoopsComponent.class);
             if(remainingLoopsComponent != null){

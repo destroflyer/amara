@@ -25,10 +25,10 @@ public class DisplayShopItemsSystem extends GUIDisplaySystem<ScreenController_Sh
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
         ComponentMapObserver observer = entityWorld.requestObserver(this, ShopItemsComponent.class);
-        for (int shopEntity : observer.getNew().getEntitiesWithAll(ShopItemsComponent.class)) {
+        for (int shopEntity : observer.getNew().getEntitiesWithAny(ShopItemsComponent.class)) {
             onShopItemsUpdated(entityWorld, shopEntity);
         }
-        for (int shopEntity : observer.getChanged().getEntitiesWithAll(ShopItemsComponent.class)) {
+        for (int shopEntity : observer.getChanged().getEntitiesWithAny(ShopItemsComponent.class)) {
             onShopItemsUpdated(entityWorld, shopEntity);
         }
     }

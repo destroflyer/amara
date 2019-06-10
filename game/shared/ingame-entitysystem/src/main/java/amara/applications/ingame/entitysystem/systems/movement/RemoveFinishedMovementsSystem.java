@@ -22,15 +22,15 @@ public class RemoveFinishedMovementsSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, MovementComponent.class, MovementTargetComponent.class, TriggerSourceComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(MovementComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(MovementComponent.class)){
             addNewMovement(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(MovementComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(MovementComponent.class)){
             removeOldMovement(entityWorld, entity);
             removeMovementEffectTriggers(entityWorld, observer, entity);
             addNewMovement(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(MovementComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(MovementComponent.class)){
             removeOldMovement(entityWorld, entity);
             removeMovementEffectTriggers(entityWorld, observer, entity);
             movementEntities.remove(entity);

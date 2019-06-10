@@ -34,13 +34,13 @@ public class KnockupVisualisationSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         updateCurves(entityWorld, deltaSeconds);
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsKnockupedComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(IsKnockupedComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(IsKnockupedComponent.class)){
             addCurve(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(IsKnockupedComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(IsKnockupedComponent.class)){
             addCurve(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(IsKnockupedComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(IsKnockupedComponent.class)){
             knockupCurves.remove(entity);
         }
         updatePositions(entityWorld);

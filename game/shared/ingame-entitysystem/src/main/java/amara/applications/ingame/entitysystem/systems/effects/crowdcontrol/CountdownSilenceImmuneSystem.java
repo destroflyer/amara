@@ -15,7 +15,7 @@ public class CountdownSilenceImmuneSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(IsSilencedImmuneComponent.class)))
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(IsSilencedImmuneComponent.class)))
         {
             IsSilencedImmuneComponent isSilencedImmuneComponent = entityWrapper.getComponent(IsSilencedImmuneComponent.class);
             float duration = (isSilencedImmuneComponent.getRemainingDuration() - deltaSeconds);

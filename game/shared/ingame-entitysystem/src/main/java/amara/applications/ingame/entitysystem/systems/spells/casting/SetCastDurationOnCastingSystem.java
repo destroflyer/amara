@@ -17,7 +17,7 @@ public class SetCastDurationOnCastingSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int casterEntity : entityWorld.getEntitiesWithAll(CastSpellComponent.class)){
+        for(int casterEntity : entityWorld.getEntitiesWithAny(CastSpellComponent.class)){
             int spellEntity = entityWorld.getComponent(casterEntity, CastSpellComponent.class).getSpellEntity();
             CastDurationComponent castDurationComponent = entityWorld.getComponent(spellEntity, CastDurationComponent.class);
             if(castDurationComponent != null){

@@ -35,38 +35,38 @@ public class AnimationSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, SendEntityChangesSystem.COMPONENT_EQUALITY_DEFINTION, AnimationComponent.class, ModelComponent.class, NameComponent.class, LoopDurationComponent.class, RestartClientAnimationComponent.class, GameSpeedComponent.class);
         //Animation
-        for(int entity : observer.getNew().getEntitiesWithAll(AnimationComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(AnimationComponent.class)){
             addAnimation(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(AnimationComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(AnimationComponent.class)){
             addAnimation(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(AnimationComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(AnimationComponent.class)){
             removeAnimation(entity, observer.getRemoved().getComponent(entity, AnimationComponent.class).getAnimationEntity());
         }
         //Model
-        for(int entity : observer.getNew().getEntitiesWithAll(ModelComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(ModelComponent.class)){
             addAnimation(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(ModelComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(ModelComponent.class)){
             addAnimation(entityWorld, entity);
         }
         //Name
-        for(int animationEntity : observer.getNew().getEntitiesWithAll(NameComponent.class)){
+        for(int animationEntity : observer.getNew().getEntitiesWithAny(NameComponent.class)){
             updateAnimation(entityWorld, animationEntity, true, false);
         }
-        for(int animationEntity : observer.getChanged().getEntitiesWithAll(NameComponent.class)){
+        for(int animationEntity : observer.getChanged().getEntitiesWithAny(NameComponent.class)){
             updateAnimation(entityWorld, animationEntity, true, false);
         }
         //LoopDuration
-        for(int animationEntity : observer.getNew().getEntitiesWithAll(LoopDurationComponent.class)){
+        for(int animationEntity : observer.getNew().getEntitiesWithAny(LoopDurationComponent.class)){
             updateAnimation(entityWorld, animationEntity, false, true);
         }
-        for(int animationEntity : observer.getChanged().getEntitiesWithAll(LoopDurationComponent.class)){
+        for(int animationEntity : observer.getChanged().getEntitiesWithAny(LoopDurationComponent.class)){
             updateAnimation(entityWorld, animationEntity, false, true);
         }
         //AssignedAnimation
-        for(int animationEntity : observer.getChanged().getEntitiesWithAll(RestartClientAnimationComponent.class)){
+        for(int animationEntity : observer.getChanged().getEntitiesWithAny(RestartClientAnimationComponent.class)){
             updateAnimation(entityWorld, animationEntity, true, true);
         }
         //GameSpeed

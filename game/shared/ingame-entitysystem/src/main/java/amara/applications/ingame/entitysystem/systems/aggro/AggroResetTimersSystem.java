@@ -16,13 +16,13 @@ public class AggroResetTimersSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, AggroTargetComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(AggroTargetComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(AggroTargetComponent.class)){
             resetAggroTimer(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(AggroTargetComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(AggroTargetComponent.class)){
             resetAggroTimer(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(AggroTargetComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(AggroTargetComponent.class)){
             entityWorld.removeComponent(entity, RemainingAggroResetDurationComponent.class);
         }
     }

@@ -23,7 +23,7 @@ public class RemoveModelsSystem implements EntitySystem {
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, ModelComponent.class);
-        for (int entity : observer.getRemoved().getEntitiesWithAll(ModelComponent.class)) {
+        for (int entity : observer.getRemoved().getEntitiesWithAny(ModelComponent.class)) {
             entitySceneMap.removeNode(entity);
         }
     }

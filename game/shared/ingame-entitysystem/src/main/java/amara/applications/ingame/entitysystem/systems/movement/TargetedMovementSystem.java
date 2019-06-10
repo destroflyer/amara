@@ -30,7 +30,7 @@ public class TargetedMovementSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         intersectionObserver.updateHitboxes(entityWorld);
-        for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAny(MovementComponent.class)){
             int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
             MovementTargetComponent movementTargetComponent = entityWorld.getComponent(movementEntity, MovementTargetComponent.class);
             if(movementTargetComponent != null){

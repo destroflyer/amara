@@ -14,18 +14,18 @@ import amara.libraries.entitysystem.*;
  */
 public class TriggerUnitsPassivesSystem implements EntitySystem{
     
-    private HashMap<Integer, int[]> cachedPassives = new HashMap<Integer, int[]>();
+    private HashMap<Integer, int[]> cachedPassives = new HashMap<>();
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, PassivesComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(PassivesComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(PassivesComponent.class)){
             checkPassives(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(PassivesComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(PassivesComponent.class)){
             checkPassives(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(PassivesComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(PassivesComponent.class)){
             for(int passiveEntity : observer.getRemoved().getComponent(entity, PassivesComponent.class).getPassiveEntities()){
                 PassiveUtil.removePassives(entityWorld, entity, passiveEntity);
             }

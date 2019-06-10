@@ -15,7 +15,7 @@ public class CountdownCooldownSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(RemainingCooldownComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAny(RemainingCooldownComponent.class)){
             RemainingCooldownComponent remainingCooldownComponent = entityWorld.getComponent(entity, RemainingCooldownComponent.class);
             float duration = (remainingCooldownComponent.getDuration() - deltaSeconds);
             if(duration > 0){

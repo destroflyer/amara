@@ -18,7 +18,7 @@ public class RepeatingBuffEffectsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper buffStatus : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)))
+        for(EntityWrapper buffStatus : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)))
         {
             ActiveBuffComponent activeBuffComponent = buffStatus.getComponent(ActiveBuffComponent.class);
             RepeatingEffectComponent repeatingEffectComponent = entityWorld.getComponent(activeBuffComponent.getBuffEntity(), RepeatingEffectComponent.class);

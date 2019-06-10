@@ -26,7 +26,7 @@ public class ApplyRemoveBuffAreasSystem implements EntitySystem{
             entityWorld.removeComponent(buffAreaEntity, HitboxActiveComponent.class);
             entityWorld.removeComponent(buffAreaEntity, PositionComponent.class);
             int buffEntity = entityWorld.getComponent(buffAreaEntity, AreaBuffComponent.class).getBuffEntity();
-            for(int buffStatus : entityWorld.getEntitiesWithAll(ActiveBuffComponent.class)){
+            for(int buffStatus : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)){
                 ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class);
                 if(activeBuffComponent.getBuffEntity() == buffEntity){
                     entityWorld.setComponent(buffStatus, new RemoveFromTargetComponent());

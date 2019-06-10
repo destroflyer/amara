@@ -15,7 +15,7 @@ public class CountdownStunImmuneSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(IsStunnedImmuneComponent.class)))
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(IsStunnedImmuneComponent.class)))
         {
             IsStunnedImmuneComponent isStunnedImmuneComponent = entityWrapper.getComponent(IsStunnedImmuneComponent.class);
             float duration = (isStunnedImmuneComponent.getRemainingDuration() - deltaSeconds);

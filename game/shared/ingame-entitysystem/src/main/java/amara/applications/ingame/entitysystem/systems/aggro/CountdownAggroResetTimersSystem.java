@@ -15,7 +15,7 @@ public class CountdownAggroResetTimersSystem implements EntitySystem {
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
-        for (int entity : entityWorld.getEntitiesWithAll(RemainingAggroResetDurationComponent.class)) {
+        for (int entity : entityWorld.getEntitiesWithAny(RemainingAggroResetDurationComponent.class)) {
             RemainingAggroResetDurationComponent aggroResetTimerComponent = entityWorld.getComponent(entity, RemainingAggroResetDurationComponent.class);
             float duration = (aggroResetTimerComponent.getRemainingDuration() - deltaSeconds);
             if (duration > 0) {

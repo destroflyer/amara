@@ -18,10 +18,10 @@ public class TriggerRepeatingEffectSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, RepeatingTriggerComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(RepeatingTriggerComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(RepeatingTriggerComponent.class)){
             entityWorld.setComponent(entity, new RepeatingTriggerCounterComponent(0));
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(RepeatingTriggerComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(RepeatingTriggerComponent.class)){
             entityWorld.removeComponent(entity, RepeatingTriggerCounterComponent.class);
         }
         for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, RepeatingTriggerComponent.class)){

@@ -31,13 +31,13 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, ActiveBuffComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll(ActiveBuffComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(ActiveBuffComponent.class)){
             onBuffAdded(entityWorld, entity);
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll(ActiveBuffComponent.class)){
+        for(int entity : observer.getChanged().getEntitiesWithAny(ActiveBuffComponent.class)){
             onBuffAdded(entityWorld, entity);
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll(ActiveBuffComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(ActiveBuffComponent.class)){
             ActiveBuffComponent activeBuffComponent = observer.getRemoved().getComponent(entity, ActiveBuffComponent.class);
             if(shouldBeVisualized(entityWorld, activeBuffComponent)){
                 int targetEntity = observer.getRemoved().getComponent(entity, ActiveBuffComponent.class).getTargetEntity();

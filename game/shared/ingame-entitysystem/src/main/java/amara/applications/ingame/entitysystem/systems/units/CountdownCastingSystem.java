@@ -15,7 +15,7 @@ public class CountdownCastingSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(IsCastingComponent.class))){
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(IsCastingComponent.class))){
             IsCastingComponent isCastingComponent = entityWrapper.getComponent(IsCastingComponent.class);
             float duration = (isCastingComponent.getRemainingDuration() - deltaSeconds);
             if(duration > 0){

@@ -15,7 +15,7 @@ public class CountdownReactionsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ReactionComponent.class))){
+        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(ReactionComponent.class))){
             ReactionComponent reactionComponent = entityWrapper.getComponent(ReactionComponent.class);
             float duration = (reactionComponent.getRemainingDuration() - deltaSeconds);
             if(duration > 0){

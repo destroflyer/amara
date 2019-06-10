@@ -15,7 +15,7 @@ public class CountdownBuffsSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int buffStatus : entityWorld.getEntitiesWithAll(RemainingBuffDurationComponent.class))
+        for(int buffStatus : entityWorld.getEntitiesWithAny(RemainingBuffDurationComponent.class))
         {
             RemainingBuffDurationComponent remainingBuffDurationComponent = entityWorld.getComponent(buffStatus, RemainingBuffDurationComponent.class);
             float duration = (remainingBuffDurationComponent.getRemainingDuration() - deltaSeconds);

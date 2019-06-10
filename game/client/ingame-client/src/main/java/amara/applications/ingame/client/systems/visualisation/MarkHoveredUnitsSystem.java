@@ -40,7 +40,7 @@ public class MarkHoveredUnitsSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds){
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsHoveredComponent.class);
         //Check removed first to keep a potential hover cursor at the end
-        for(int entity : observer.getRemoved().getEntitiesWithAll(IsHoveredComponent.class)){
+        for(int entity : observer.getRemoved().getEntitiesWithAny(IsHoveredComponent.class)){
             ingameMouseCursorAppState.setCursor_Default();
             Node node = entitySceneMap.requestNode(entity);
             Node attachmentNode = (Node) node.getChild(NODE_NAME_MARKER);
@@ -50,7 +50,7 @@ public class MarkHoveredUnitsSystem implements EntitySystem{
                 node.detachChild(attachmentNode);
             }
         }
-        for(int entity : observer.getNew().getEntitiesWithAll(IsHoveredComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(IsHoveredComponent.class)){
             boolean isAllied = playerTeamSystem.isAllied(entityWorld, entity);
             if(isAllied){
                 ingameMouseCursorAppState.setCursor_Default();
