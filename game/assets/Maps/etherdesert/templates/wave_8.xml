@@ -33,7 +33,7 @@
         <baseAttributes>
             <entity>
                 <bonusFlatMaximumHealth>1800</bonusFlatMaximumHealth>
-                <bonusFlatAttackDamage>84</bonusFlatAttackDamage>
+                <bonusFlatAttackDamage>82</bonusFlatAttackDamage>
                 <bonusFlatAttackSpeed>1</bonusFlatAttackSpeed>
                 <bonusFlatArmor>85</bonusFlatArmor>
                 <bonusFlatMagicResistance>85</bonusFlatMagicResistance>
