@@ -13,14 +13,27 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class ApplyPlayAudioSystem implements EntitySystem{
-    
+public class ApplyPlayAudioSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, PlayAudioComponent.class)))
-        {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            for(int audioEntity : entityWrapper.getComponent(PlayAudioComponent.class).getAudioEntities()){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, PlayAudioComponent.class)) {
+            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
+            PlayAudioComponent playAudioComponent = entityWorld.getComponent(effectImpactEntity, PlayAudioComponent.class);
+            for (int referencedAudioEntity : playAudioComponent.getAudioEntities()) {
+                int audioEntity;
+                if (playAudioComponent.isClone()) {
+                    audioEntity = entityWorld.createEntity();
+                    EntityUtil.transferComponents(entityWorld, referencedAudioEntity, audioEntity, new Class[] {
+                        AudioComponent.class,
+                        AudioGlobalComponent.class,
+                        AudioLoopComponent.class,
+                        AudioRemoveAfterPlayingComponent.class,
+                        AudioVolumeComponent.class,
+                    });
+                } else {
+                    audioEntity = referencedAudioEntity;
+                }
                 entityWorld.setComponent(audioEntity, new AudioSourceComponent(targetEntity));
                 entityWorld.setComponent(audioEntity, new StartPlayingAudioComponent());
             }

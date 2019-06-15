@@ -1,0 +1,10 @@
+<skin name="3dsa_fantasy_forest_rock_3">
+    <model scale="3">
+        <material>
+            <texture source="3dsa_fantasy_forest_rock_1">diffuse.png</texture>
+        </material>
+        <modifiers>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Maw_Rock</modifier>
+        </modifiers>
+    </model>
+</skin>

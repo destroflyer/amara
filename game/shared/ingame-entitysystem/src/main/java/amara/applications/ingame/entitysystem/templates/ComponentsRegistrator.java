@@ -1181,8 +1181,13 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.applications.ingame.entitysystem.components.effects.audio.PlayAudioComponent construct(EntityWorld entityWorld, Element element){
+                boolean clone = false;
+                String cloneText = element.getAttributeValue("clone");
+                if((cloneText != null) && (cloneText.length() > 0)){
+                    clone = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, cloneText));
+                }
                 int[] audioEntities = createChildEntities(entityWorld, element, 0, "audioEntities");
-                return new amara.applications.ingame.entitysystem.components.effects.audio.PlayAudioComponent(audioEntities);
+                return new amara.applications.ingame.entitysystem.components.effects.audio.PlayAudioComponent(clone, audioEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.audio.StopAudioComponent.class);

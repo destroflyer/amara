@@ -28,7 +28,7 @@ public class RepeatingBuffEffectsSystem implements EntitySystem{
                 if(timeSinceLastRepeatingEffect >= repeatingEffectComponent.getInterval()){
                     EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
                     effectCast.setComponent(new PrepareEffectComponent(repeatingEffectComponent.getEffectEntity()));
-                    EntityUtil.transferComponents(buffStatus, effectCast, new Class[]{
+                    EntityUtil.transferComponents(entityWorld, buffStatus.getId(), effectCast.getId(), new Class[]{
                         EffectCastSourceComponent.class,
                         EffectCastSourceSpellComponent.class
                     });

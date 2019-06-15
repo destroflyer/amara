@@ -34,10 +34,10 @@
                                 <buffVisualisation>baron_nashor</buffVisualisation>
                                 <continuousAttributes>
                                     <entity>
-                                        <bonusFlatMaximumHealth>350</bonusFlatMaximumHealth>
-                                        <bonusFlatAttackDamage>20</bonusFlatAttackDamage>
-                                        <bonusFlatArmor>20</bonusFlatArmor>
-                                        <bonusFlatMagicResistance>20</bonusFlatMagicResistance>
+                                        <bonusFlatMaximumHealth>400</bonusFlatMaximumHealth>
+                                        <bonusFlatAttackDamage>30</bonusFlatAttackDamage>
+                                        <bonusFlatArmor>30</bonusFlatArmor>
+                                        <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
                                     </entity>
                                 </continuousAttributes>
                             </entity>

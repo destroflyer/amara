@@ -24,7 +24,7 @@
                             <entity>
                                 <repeatingEffect interval="0.25">
                                     <entity>
-                                        <magicDamage>50 + (0.15 * source.abilityPower)</magicDamage>
+                                        <magicDamage>60 + (0.25 * source.abilityPower)</magicDamage>
                                     </entity>
                                 </repeatingEffect>
                             </entity>
@@ -46,7 +46,6 @@
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
-        <triggerDelay>0.7</triggerDelay>
         <triggerOnce/>
     </entity>
     <!--remove buff area-->
@@ -61,7 +60,7 @@
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
-        <triggerDelay>2.3</triggerDelay>
+        <triggerDelay>1.6</triggerDelay>
         <triggerOnce/>
     </entity>
 </template>

@@ -1,7 +1,7 @@
 <template>
     <entity id="object">
         <hitbox>
-            <circle radius="6"/>
+            <circle radius="5.5"/>
         </hitbox>
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>

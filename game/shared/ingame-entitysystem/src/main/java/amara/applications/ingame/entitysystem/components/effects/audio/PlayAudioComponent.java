@@ -12,19 +12,25 @@ import amara.libraries.entitysystem.synchronizing.ComponentField;
  * @author Carl
  */
 @Serializable
-public class PlayAudioComponent{
+public class PlayAudioComponent {
 
-    public PlayAudioComponent(){
+    public PlayAudioComponent() {
         
     }
-    
-    public PlayAudioComponent(int... audioEntities){
+
+    public PlayAudioComponent(boolean clone, int... audioEntities) {
+        this.clone = clone;
         this.audioEntities = audioEntities;
     }
+    private boolean clone;
     @ComponentField(type=ComponentField.Type.ENTITY)
     private int[] audioEntities;
 
-    public int[] getAudioEntities(){
+    public boolean isClone() {
+        return clone;
+    }
+
+    public int[] getAudioEntities() {
         return audioEntities;
     }
 }

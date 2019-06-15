@@ -57,7 +57,7 @@ public class Map_Arama extends Map{
     }
     private final float laneCenterY = 260.25f;
     private final float towerOffsetY = 6;
-    private final float timeUntilWaveStart = 5;
+    private final float timeUntilWaveStart = 8;
     private final float waveInterval = 52;
     private int[] backportPositionEntities = new int[2];
 
@@ -219,7 +219,7 @@ public class Map_Arama extends Map{
                 spawnEffect.setComponent(new SpawnComponent(spawnInformation.getId()));
                 spawnTrigger.setComponent(new TriggeredEffectComponent(spawnEffect.getId()));
                 spawnTrigger.setComponent(new TriggerSourceComponent(spawnSourceEntity));
-                spawnTrigger.setComponent(new TriggerDelayComponent(1.25f * r));
+                spawnTrigger.setComponent(new TriggerDelayComponent(0.95f * r));
             }
         }
         //Bushes

@@ -5,8 +5,8 @@
         <spellVisualisation>maria_slash</spellVisualisation>
         <spellIndicator>
             <entity>
-                <linearIndicator width="2" height="4"/>
-                <circularIndicator y="5" radius="2.5"/>
+                <linearIndicator width="2" height="6"/>
+                <circularIndicator y="7" radius="2"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>
@@ -18,7 +18,7 @@
                         <move>
                             <entity>
                                 <targetedMovementDirection/>
-                                <movementSpeed>10</movementSpeed>
+                                <movementSpeed>15</movementSpeed>
                                 <movementAnimation>
                                     <entity>
                                         <name>standing_melee_attack_360_low</name>
@@ -26,7 +26,7 @@
                                         <freezeAfterPlaying/>
                                     </entity>
                                 </movementAnimation>
-                                <distanceLimit>4</distanceLimit>
+                                <distanceLimit>6</distanceLimit>
                             </entity>
                         </move>
                         <removeCollisionGroups targetOf="map|units" targets="units"/>

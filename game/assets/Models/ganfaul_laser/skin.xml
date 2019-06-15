@@ -3,5 +3,8 @@
         <position>
             <location>0,3.7,3.5</location>
         </position>
+        <modifiers>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Ganfaul_Laser</modifier>
+        </modifiers>
     </model>
 </skin>

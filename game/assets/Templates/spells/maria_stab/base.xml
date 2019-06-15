@@ -1,9 +1,9 @@
 <template>
-    <value name="delay">0.5</value>
+    <value name="delay">0.3</value>
     <value name="slowDuration">2</value>
     <entity id="spell">
         <name>Stab</name>
-        <description>Afer [delay] seconds, Maria stabs her sword in a straight line. The first enemy hit will be damaged and slowed for [slowDuration] seconds.</description>
+        <description>After [delay] seconds, Maria stabs her sword in a straight line. The first enemy hit will be damaged and slowed for [slowDuration] seconds.</description>
         <spellVisualisation>maria_stab</spellVisualisation>
         <spellIndicator>
             <entity>
@@ -40,7 +40,7 @@
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
-                <triggerDelay>0.2</triggerDelay>
+                <triggerDelay>0.15</triggerDelay>
             </entity>
         </instantEffectTriggers>
         <castType>linear_skillshot</castType>
@@ -50,7 +50,7 @@
         <castAnimation>
             <entity>
                 <name>upward_thrust</name>
-                <loopDuration>1</loopDuration>
+                <loopDuration>0.7</loopDuration>
             </entity>
         </castAnimation>
         <baseCooldown>9</baseCooldown>

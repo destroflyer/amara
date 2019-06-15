@@ -114,7 +114,7 @@ public class CustomGameTemplates{
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(420 + (spawnCounter * 3)));
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackDamageComponent(15 + (spawnCounter * 0.3f)));
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackSpeedComponent(0.7f));
-                entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(3));
+                entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(4));
                 entityWrapper.setComponent(new BaseAttributesComponent(baseAttributesEntity));
                 entityWrapper.setComponent(new RequestUpdateAttributesComponent());
                 entityWrapper.setComponent(new SightRangeComponent(28));
@@ -162,7 +162,7 @@ public class CustomGameTemplates{
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(320 + (spawnCounter * 3)));
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackDamageComponent(22 + (spawnCounter * 1)));
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackSpeedComponent(0.7f));
-                entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(3));
+                entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(4));
                 entityWrapper.setComponent(new BaseAttributesComponent(baseAttributesEntity));
                 entityWrapper.setComponent(new RequestUpdateAttributesComponent());
                 entityWrapper.setComponent(new SightRangeComponent(28));

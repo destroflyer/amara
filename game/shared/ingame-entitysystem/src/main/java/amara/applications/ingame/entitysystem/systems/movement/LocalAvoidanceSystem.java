@@ -41,7 +41,8 @@ public class LocalAvoidanceSystem implements EntitySystem{
         float movementSpeedPerFrame = (movementSpeed * deltaSeconds);
         Vector2f movementPerFrame = movementDirectionNormalized.mult(movementSpeedPerFrame);
         Vector2f resultingVector = new Vector2f();
-        float minimumDistance = (1.25f * movementSpeed);
+        // Fine adjusted by testing, is adaptable if need arises
+        float minimumDistance = (1f * movementSpeed);
         float squaredMinimumDistance = (minimumDistance * minimumDistance);
         for(int targetEntity : entityWorld.getEntitiesWithAll(PositionComponent.class, HitboxComponent.class, HitboxActiveComponent.class, IntersectionPushComponent.class)){
             if((targetEntity != entity) && IntersectionFilter.areCollisionGroupsMatching(entityWorld, entity, targetEntity)){

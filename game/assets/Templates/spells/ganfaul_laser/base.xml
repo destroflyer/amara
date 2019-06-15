@@ -23,6 +23,7 @@
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
+                <triggerDelay>0.7</triggerDelay>
             </entity>
         </instantEffectTriggers>
         <castType>linear_skillshot</castType>

@@ -40,7 +40,7 @@ public class ApplySpawnsSystems implements EntitySystem{
             for(int spawnInformationEntity : entityWrapper.getComponent(SpawnComponent.class).getSpawnInformationEntites()){
                 EntityWrapper spawnedObject = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper spawnInformation = entityWorld.getWrapped(spawnInformationEntity);
-                EntityUtil.transferComponents(entityWrapper, spawnedObject, new Class[]{
+                EntityUtil.transferComponents(entityWorld, entityWrapper.getId(), spawnedObject.getId(), new Class[]{
                     EffectCastSourceComponent.class,
                     EffectCastSourceSpellComponent.class
                 });

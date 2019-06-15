@@ -2,7 +2,7 @@
     <entity id="object">
         <model>Models/erika_arrow/skin_fire_it_up.xml</model>
         <hitbox>
-            <circle radius="1.2"/>
+            <circle radius="1.5"/>
         </hitbox>
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <intersectionRules>

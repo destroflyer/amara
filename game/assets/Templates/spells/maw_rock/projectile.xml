@@ -1,10 +1,10 @@
 <template>
     <entity id="projectile">
         <isProjectile/>
-        <model>Models/cartoon_forest_stone_1/skin.xml</model>
-        <scale>2</scale>
+        <model>Models/3dsa_fantasy_forest_rock_3/skin_maw_rock.xml</model>
+        <scale>2.75</scale>
         <hitbox>
-            <circle radius="0.5"/>
+            <circle radius="0.8"/>
         </hitbox>
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
@@ -13,7 +13,7 @@
                 <acceptEnemies/>
             </entity>
         </intersectionRules>
-        <lifetime>0.8</lifetime>
+        <lifetime>1</lifetime>
     </entity>
     <!--trigger spell effects-->
     <entity>

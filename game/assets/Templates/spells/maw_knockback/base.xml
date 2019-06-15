@@ -60,8 +60,8 @@
                             <entity>
                                 <displacement/>
                                 <sourceMovementDirection/>
-                                <movementSpeed>13</movementSpeed>
-                                <distanceLimit>6</distanceLimit>
+                                <movementSpeed>14</movementSpeed>
+                                <distanceLimit>7</distanceLimit>
                             </entity>
                         </move>
                     </entity>

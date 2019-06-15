@@ -3,11 +3,11 @@
     <value name="slowDuration">2</value>
     <entity id="spell">
         <name>Rock</name>
-        <description>Throws a rock in the target direction. The first enemy hit is damaged and slowed for [slowDuration] seconds.</description>
+        <description>Throws a rock in the target direction. The first enemy hit is damaged and heavily slowed for [slowDuration] seconds.</description>
         <spellVisualisation>maw_rock</spellVisualisation>
         <spellIndicator>
             <entity>
-                <linearIndicator width="2" height="13.6"/>
+                <linearIndicator width="2" height="15"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>
@@ -19,7 +19,7 @@
                         <spawn>
                             <entity>
                                 <spawnTemplate>./projectile</spawnTemplate>
-                                <spawnMovementSpeed>17</spawnMovementSpeed>
+                                <spawnMovementSpeed>15</spawnMovementSpeed>
                             </entity>
                         </spawn>
                     </entity>
@@ -64,12 +64,12 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <magicDamage>100</magicDamage>
+                        <magicDamage>90</magicDamage>
                         <addBuff duration="[slowDuration]">
                             <entity>
                                 <continuousAttributes>
                                     <entity>
-                                        <bonusPercentageWalkSpeed>-0.4</bonusPercentageWalkSpeed>
+                                        <bonusPercentageWalkSpeed>-0.7</bonusPercentageWalkSpeed>
                                     </entity>
                                 </continuousAttributes>
                             </entity>

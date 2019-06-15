@@ -21,7 +21,7 @@
         <triggeredEffect>
             <entity>
                 <triggerCastedSpellEffects/>
-                <playAudio>
+                <playAudio clone="true">
                     <entity>
                         <audio>Sounds/sounds/spells/ganfaul_ult_hit.ogg</audio>
                         <audioVolume>0.75</audioVolume>

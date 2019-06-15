@@ -8,17 +8,13 @@ package amara.libraries.entitysystem;
  *
  * @author Carl
  */
-public class EntityUtil{
-    
+public class EntityUtil {
+
     public static void transferComponents(EntityWorld entityWorld, int sourceEntity, int targetEntity, Class[] componentClasses){
-        transferComponents(entityWorld.getWrapped(sourceEntity), entityWorld.getWrapped(targetEntity), componentClasses);
-    }
-    
-    public static void transferComponents(EntityWrapper source, EntityWrapper targetEntity, Class[] componentClasses){
-        for(Class componentClass : componentClasses){
-            Object component = source.getComponent(componentClass);
-            if(component != null){
-                targetEntity.setComponent(component);
+        for (Class componentClass : componentClasses) {
+            Object component = entityWorld.getComponent(sourceEntity, componentClass);
+            if (component != null) {
+                entityWorld.setComponent(targetEntity, component);
             }
         }
     }
