@@ -170,6 +170,7 @@ public class MapFileHandler{
             FileManager.putFileContent(file.getPath(), new XMLOutputter().outputString(document));
         }catch(Exception ex){
             System.err.println("Error while saving the map: " + ex.toString());
+            ex.printStackTrace();
         }
     }
 
@@ -189,6 +190,7 @@ public class MapFileHandler{
             return map;
         }catch(Exception ex){
             System.err.println("Error while loading the map: " + ex.toString());
+            ex.printStackTrace();
         }
         return null;
     }
@@ -307,6 +309,7 @@ public class MapFileHandler{
             return map;
         }catch(Exception ex){
             System.err.println("Error while loading the map contents: " + ex.toString());
+            ex.printStackTrace();
         }
         return null;
     }

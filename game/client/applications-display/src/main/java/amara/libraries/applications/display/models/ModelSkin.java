@@ -6,9 +6,10 @@ package amara.libraries.applications.display.models;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.concurrent.ConcurrentHashMap;
+
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.material.RenderState.FaceCullMode;
@@ -37,7 +38,7 @@ public class ModelSkin{
     private ModelSkin(String filePath){
         loadFile(filePath);
     }
-    private static HashMap<String, ModelSkin> cachedSkins = new HashMap<>();
+    private static ConcurrentHashMap<String, ModelSkin> cachedSkins = new ConcurrentHashMap<>();
     private static final String[] FILE_EXTENSIONS = new String[]{"j3o", "mesh.xml", "blend"};
     private Element modelElement;
     private Element positionElement;

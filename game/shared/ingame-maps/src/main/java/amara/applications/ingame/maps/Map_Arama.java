@@ -85,7 +85,7 @@ public class Map_Arama extends Map{
             fountain.setComponent(new TeamComponent(i + 1));
             //Fountain Area (Allies)
             EntityWrapper fountainBuffArea_Allies = entityWorld.getWrapped(entityWorld.createEntity());
-            fountainBuffArea_Allies.setComponent(new HitboxComponent(new Rectangle(24, 36)));
+            fountainBuffArea_Allies.setComponent(new HitboxComponent(new Rectangle(20, 36)));
             fountainBuffArea_Allies.setComponent(new HitboxActiveComponent());
             fountainBuffArea_Allies.setComponent(new PositionComponent(new Vector2f(fountainX[i], 260)));
             EntityWrapper fountainBuff_Allies = entityWorld.getWrapped(entityWorld.createEntity());
@@ -100,7 +100,7 @@ public class Map_Arama extends Map{
             fountainBuffArea_Allies.setComponent(new AreaSourceComponent(fountain.getId()));
             //Fountain Area (Enemies)
             EntityWrapper fountainBuffArea_Enemies = entityWorld.getWrapped(entityWorld.createEntity());
-            fountainBuffArea_Enemies.setComponent(new HitboxComponent(new Rectangle(24, 36)));
+            fountainBuffArea_Enemies.setComponent(new HitboxComponent(new Rectangle(20, 36)));
             fountainBuffArea_Enemies.setComponent(new HitboxActiveComponent());
             fountainBuffArea_Enemies.setComponent(new PositionComponent(new Vector2f(fountainX[i], 260)));
             EntityWrapper fountainBuff_Enemies = entityWorld.getWrapped(entityWorld.createEntity());
@@ -122,6 +122,7 @@ public class Map_Arama extends Map{
             nexus.setComponent(new PositionComponent(new Vector2f(nexiX[i], laneCenterY)));
             nexus.setComponent(new DirectionComponent(new Vector2f(0, -1)));
             nexus.setComponent(new HitboxComponent(new Circle(3.5f)));
+            nexus.setComponent(new ScaleComponent(2));
             int baseAttributesEntity = entityWorld.createEntity();
             entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(1000));
             entityWorld.setComponent(baseAttributesEntity, new BonusFlatHealthRegenerationComponent(2));
@@ -136,15 +137,15 @@ public class Map_Arama extends Map{
             EntityWrapper shop = entityWorld.getWrapped(entityWorld.createEntity());
             shop.setComponent(new IsAlwaysVisibleComponent());
             shop.setComponent(new ModelComponent("Models/chest/skin.xml"));
-            shop.setComponent(new PositionComponent(new Vector2f(((i == 0)?410:115), laneCenterY)));
-            shop.setComponent(new DirectionComponent(new Vector2f(((i == 0)?-1:1), 0)));
+            shop.setComponent(new PositionComponent(new Vector2f(((i == 0) ? 416.5f : 108.5f), laneCenterY)));
+            shop.setComponent(new DirectionComponent(new Vector2f(((i == 0) ? -1 : 1), 0)));
             shop.setComponent(new ShopItemsComponent(MapDefaults.getShopItemTemplateNames()));
-            shop.setComponent(new ShopRangeComponent(10));
+            shop.setComponent(new ShopRangeComponent(18));
             shop.setComponent(new TeamComponent(i + 1));
             //Towers
-            Vector2f tower1Position = new Vector2f(((i == 0)?354:171), laneCenterY + towerOffsetY);
-            Vector2f tower2Position = new Vector2f(((i == 0)?321:204), laneCenterY - towerOffsetY);
-            Vector2f towerDirection = new Vector2f(((i == 0)?-1:1), 0);
+            Vector2f tower1Position = new Vector2f(((i == 0)? 354 : 171), laneCenterY + towerOffsetY);
+            Vector2f tower2Position = new Vector2f(((i == 0)? 321 : 204), laneCenterY - towerOffsetY);
+            Vector2f towerDirection = new Vector2f(((i == 0)? -1 : 1), 0);
             EntityWrapper tower1 = EntityTemplate.createFromTemplate(entityWorld, "structures/tower");
             tower1.setComponent(new PositionComponent(tower1Position));
             tower1.setComponent(new DirectionComponent(towerDirection));
@@ -201,7 +202,7 @@ public class Map_Arama extends Map{
             tower2DeathTrigger_2.setComponent(new TriggerSourceComponent(tower2.getId()));
             //Waves
             int spawnCasterEntity = entityWorld.createEntity();
-            entityWorld.setComponent(spawnCasterEntity, new PositionComponent(new Vector2f(nexiX[i] + (((i == 0)?-1:1) * 5), laneCenterY)));
+            entityWorld.setComponent(spawnCasterEntity, new PositionComponent(new Vector2f(nexiX[i] + (((i == 0)? -1 : 1) * 9), laneCenterY)));
             entityWorld.setComponent(spawnCasterEntity, new TeamComponent(i + 1));
             int spawnSourceEntity = entityWorld.createEntity();
             entityWorld.setComponent(spawnSourceEntity, new EffectCastSourceComponent(spawnCasterEntity));
@@ -209,10 +210,10 @@ public class Map_Arama extends Map{
                 EntityWrapper spawnTrigger = entityWorld.getWrapped(entityWorld.createEntity());
                 spawnTrigger.setComponent(new RepeatingTriggerComponent(waveInterval));
                 spawnTrigger.setComponent(new TimeSinceLastRepeatTriggerComponent(waveInterval - timeUntilWaveStart));
-                spawnTrigger.setComponent(new CustomTargetComponent(nexi[(i == 0)?1:0].getId()));
+                spawnTrigger.setComponent(new CustomTargetComponent(nexi[(i == 0) ? 1 : 0].getId()));
                 EntityWrapper spawnEffect = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-                String unitTemplate = ((r < 3)?"etherdesert_creep_melee":"etherdesert_creep_range");
+                String unitTemplate = ((r < 3) ? "etherdesert_creep_melee" : "etherdesert_creep_range");
                 spawnInformation.setComponent(new SpawnTemplateComponent(unitTemplate + "," + spawnTrigger.getId()));
                 spawnInformation.setComponent(new SpawnMoveToTargetComponent());
                 spawnInformation.setComponent(new SpawnAttackMoveComponent());

@@ -37,9 +37,7 @@ public class MapObstaclesAppState extends BaseDisplayAppState<DisplayApplication
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
         mainApplication.getInputManager().addMapping("toggle_hitboxes", new KeyTrigger(KeyInput.KEY_H));
-        mainApplication.getInputManager().addListener(this, new String[]{
-            "toggle_hitboxes"
-        });
+        mainApplication.getInputManager().addListener(this, "toggle_hitboxes");
         node.attachChild(obstaclesNode);
         mainApplication.getRootNode().attachChild(node);
         update();

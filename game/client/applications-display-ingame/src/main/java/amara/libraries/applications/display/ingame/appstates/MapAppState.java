@@ -51,11 +51,11 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
     private MapHeightmap mapHeightmap;
     private MapTerrain mapTerrain;
     private Node visualsNode = new Node();
-    private HashMap<ModelObject, MapVisual> modelObjectsVisuals = new HashMap<ModelObject, MapVisual>();
+    private HashMap<ModelObject, MapVisual> modelObjectsVisuals = new HashMap<>();
     private Node cameraNode = new Node();
     private Vector2f screenCenterGroundLocation = new Vector2f();
     private Vector3f tmpAudioListenerLocation = new Vector3f();
-    private ArrayList<Filter> activeFilters = new ArrayList<Filter>();
+    private ArrayList<Filter> activeFilters = new ArrayList<>();
 
     @Override
     public void initialize(AppStateManager stateManager, Application application){
@@ -64,16 +64,12 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
         mainApplication.getRootNode().attachChild(visualsNode);
         mainApplication.getRootNode().attachChild(cameraNode);
         initializeCamera();
-        new Thread(new Runnable(){
-
-            @Override
-            public void run(){
-                initializeLights();
-                updateVisuals();
-            }
+        new Thread(() -> {
+            initializeLights();
+            updateVisuals();
         }).start();
     }
-    
+
     public void initializeCamera(){
         Camera camera = mainApplication.getCamera();
         camera.setLocation(map.getCamera().getInitialPosition());
@@ -191,13 +187,9 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
         modelsNode.batch();
         modelsNode.setQueueBucket(RenderQueue.Bucket.Transparent);
         modelsNode.setShadowMode(RenderQueue.ShadowMode.Cast);
-        mainApplication.enqueueTask(new Runnable(){
-
-            @Override
-            public void run(){
-                visualsNode.attachChild(modelsNode);
-                addSky("miramar");
-            }
+        mainApplication.enqueueTask(() -> {
+            visualsNode.attachChild(modelsNode);
+            addSky("miramar");
         });
     }
     
