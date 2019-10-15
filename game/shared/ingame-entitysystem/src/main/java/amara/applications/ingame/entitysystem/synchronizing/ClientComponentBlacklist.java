@@ -23,6 +23,7 @@ import amara.applications.ingame.entitysystem.components.effects.general.*;
 import amara.applications.ingame.entitysystem.components.effects.heals.*;
 import amara.applications.ingame.entitysystem.components.effects.movement.*;
 import amara.applications.ingame.entitysystem.components.effects.physics.*;
+import amara.applications.ingame.entitysystem.components.effects.players.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.effects.spells.*;
 import amara.applications.ingame.entitysystem.components.effects.units.*;
@@ -87,6 +88,8 @@ public class ClientComponentBlacklist{
             AffectedTargetsComponent.class,
             ApplyEffectImpactComponent.class,
             CustomEffectValuesComponent.class,
+            EffectSourceComponent.class,
+            EffectSourceSpellComponent.class,
             PrepareEffectComponent.class,
             RemainingEffectDelayComponent.class,
             //effects/aggro
@@ -104,9 +107,7 @@ public class ClientComponentBlacklist{
             AddStacksComponent.class,
             ClearStacksComponent.class,
             RemoveStacksComponent.class,
-            //effects/ccasts
-            EffectCastSourceComponent.class,
-            EffectCastSourceSpellComponent.class,
+            //effects/casts
             EffectCastTargetComponent.class,
             //effects/crowdcontrol
             AddBindingComponent.class,
@@ -151,6 +152,9 @@ public class ClientComponentBlacklist{
             AddCollisionGroupsComponent.class,
             DeactivateHitboxComponent.class,
             RemoveCollisionGroupsComponent.class,
+            //effects/players
+            DisplayPlayerAnnouncementComponent.class,
+            ResultingPlayerAnnouncementComponent.class,
             //effects/spawns
             SpawnComponent.class,
             //effects/spells
@@ -205,6 +209,7 @@ public class ClientComponentBlacklist{
             //players
             ClientComponent.class,
             IsBotComponent.class,
+            PlayerAnnouncementRemainingDurationComponent.class,
             RespawnComponent.class,
             //shop
             //spawns
@@ -278,6 +283,7 @@ public class ClientComponentBlacklist{
             ObjectiveFinishedTriggerComponent.class,
             RepeatingTriggerComponent.class,
             RepeatingTriggerCounterComponent.class,
+            ShopUsageTriggerComponent.class,
             TargetReachedTriggerComponent.class,
             TimeSinceLastRepeatTriggerComponent.class,
             //visuals

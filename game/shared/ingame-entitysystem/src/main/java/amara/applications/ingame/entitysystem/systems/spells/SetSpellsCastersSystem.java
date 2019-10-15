@@ -4,7 +4,7 @@
  */
 package amara.applications.ingame.entitysystem.systems.spells;
 
-import amara.applications.ingame.entitysystem.components.effects.casts.*;
+import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.libraries.entitysystem.*;
@@ -27,7 +27,7 @@ public class SetSpellsCastersSystem implements EntitySystem{
         }
         for(int entity : observer.getRemoved().getEntitiesWithAny(AutoAttackComponent.class)){
             int autoAttackEntity = observer.getRemoved().getComponent(entity, AutoAttackComponent.class).getAutoAttackEntity();
-            entityWorld.removeComponent(autoAttackEntity, EffectCastSourceComponent.class);
+            entityWorld.removeComponent(autoAttackEntity, EffectSourceComponent.class);
         }
         //Passives
         for(int entity : observer.getNew().getEntitiesWithAny(PassivesComponent.class)){
@@ -38,7 +38,7 @@ public class SetSpellsCastersSystem implements EntitySystem{
         }
         for(int entity : observer.getRemoved().getEntitiesWithAny(PassivesComponent.class)){
             for(int passiveEntity : observer.getRemoved().getComponent(entity, PassivesComponent.class).getPassiveEntities()){
-                entityWorld.removeComponent(passiveEntity, EffectCastSourceComponent.class);
+                entityWorld.removeComponent(passiveEntity, EffectSourceComponent.class);
             }
         }
         //Spells
@@ -50,7 +50,7 @@ public class SetSpellsCastersSystem implements EntitySystem{
         }
         for(int entity : observer.getRemoved().getEntitiesWithAny(SpellsComponent.class)){
             for(int spellEntity : observer.getRemoved().getComponent(entity, SpellsComponent.class).getSpellsEntities()){
-                entityWorld.removeComponent(spellEntity, EffectCastSourceComponent.class);
+                entityWorld.removeComponent(spellEntity, EffectSourceComponent.class);
             }
         }
         //Items
@@ -64,12 +64,12 @@ public class SetSpellsCastersSystem implements EntitySystem{
             for(int itemEntity : observer.getRemoved().getComponent(entity, InventoryComponent.class).getItemEntities()){
                 ItemActiveComponent itemActiveComponent = entityWorld.getComponent(itemEntity, ItemActiveComponent.class);
                 if(itemActiveComponent != null){
-                    entityWorld.removeComponent(itemActiveComponent.getSpellEntity(), EffectCastSourceComponent.class);
+                    entityWorld.removeComponent(itemActiveComponent.getSpellEntity(), EffectSourceComponent.class);
                 }
                 ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(itemEntity, ItemPassivesComponent.class);
                 if(itemPassivesComponent != null){
                     for(int itemPassiveEntity : itemPassivesComponent.getPassiveEntities()){
-                        entityWorld.removeComponent(itemPassiveEntity, EffectCastSourceComponent.class);
+                        entityWorld.removeComponent(itemPassiveEntity, EffectSourceComponent.class);
                     }
                 }
             }
@@ -83,7 +83,7 @@ public class SetSpellsCastersSystem implements EntitySystem{
         }
         for(int entity : observer.getRemoved().getEntitiesWithAny(MapSpellsComponent.class)){
             for(int spellEntity : observer.getRemoved().getComponent(entity, MapSpellsComponent.class).getSpellsEntities()){
-                entityWorld.removeComponent(spellEntity, EffectCastSourceComponent.class);
+                entityWorld.removeComponent(spellEntity, EffectSourceComponent.class);
             }
         }
     }
@@ -116,8 +116,8 @@ public class SetSpellsCastersSystem implements EntitySystem{
     }
     
     private void updateCaster(EntityWorld entityWorld, int casterEntity, int targetEntity){
-        entityWorld.setComponent(casterEntity, new EffectCastSourceComponent(casterEntity));
-        entityWorld.setComponent(targetEntity, new EffectCastSourceComponent(casterEntity));
-        entityWorld.setComponent(targetEntity, new EffectCastSourceSpellComponent(targetEntity));
+        entityWorld.setComponent(casterEntity, new EffectSourceComponent(casterEntity));
+        entityWorld.setComponent(targetEntity, new EffectSourceComponent(casterEntity));
+        entityWorld.setComponent(targetEntity, new EffectSourceSpellComponent(targetEntity));
     }
 }

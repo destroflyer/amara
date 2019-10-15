@@ -29,6 +29,7 @@ import amara.applications.ingame.entitysystem.systems.effects.general.*;
 import amara.applications.ingame.entitysystem.systems.effects.heal.*;
 import amara.applications.ingame.entitysystem.systems.effects.movement.*;
 import amara.applications.ingame.entitysystem.systems.effects.physics.*;
+import amara.applications.ingame.entitysystem.systems.effects.players.*;
 import amara.applications.ingame.entitysystem.systems.effects.popups.*;
 import amara.applications.ingame.entitysystem.systems.effects.spawns.*;
 import amara.applications.ingame.entitysystem.systems.effects.spells.*;
@@ -133,7 +134,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new CountdownAggroResetTimersSystem());
         addEntitySystem(new CountdownInCombatSystem());
         addEntitySystem(new CheckOpenObjectivesSystem());
-        addEntitySystem(new CheckAggroTargetAttackibilitySystem());
+        addEntitySystem(new CheckAggroTargetAttackabilitySystem());
         addEntitySystem(new CheckAggroTargetSightSystem());
         addEntitySystem(new CheckMaximumAggroRangeSystem());
         addEntitySystem(new CheckBuffStacksUpdateAttributesSystem());
@@ -145,7 +146,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ExecutePlayerCommandsSystem(getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue(), castSpellQueueSystem));
         addEntitySystem(new ExecuteAIActionsSystem((playerEntity) -> getAppState(BotsAppState.class).getBot(playerEntity)));
         addEntitySystem(new AggroResetTimersSystem());
-        addEntitySystem(new AggroSystem());
+        addEntitySystem(new AutoAggroSystem());
         addEntitySystem(new AttackMoveSystem());
         addEntitySystem(new CheckCampUnionAggroSystem());
         addEntitySystem(new CheckCampInCombatSystem());
@@ -205,6 +206,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         addEntitySystem(new ApplyAddCollisiongGroupsSystem());
         addEntitySystem(new ApplyDeactivateHitboxSystem());
         addEntitySystem(new ApplyRemoveCollisiongGroupsSystem());
+        addEntitySystem(new ApplyDisplayPlayerAnnouncementsSystem());
         addEntitySystem(new ApplyAddPopupsSystem());
         addEntitySystem(new ApplyRemovePopupsSystem());
         addEntitySystem(new ApplySpawnsSystems());

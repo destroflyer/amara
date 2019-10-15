@@ -21,6 +21,7 @@ import amara.applications.ingame.entitysystem.components.effects.general.*;
 import amara.applications.ingame.entitysystem.components.effects.heals.*;
 import amara.applications.ingame.entitysystem.components.effects.movement.*;
 import amara.applications.ingame.entitysystem.components.effects.physics.*;
+import amara.applications.ingame.entitysystem.components.effects.players.*;
 import amara.applications.ingame.entitysystem.components.effects.popups.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.effects.spells.*;
@@ -55,12 +56,12 @@ public class CalculateEffectImpactSystem implements EntitySystem{
         for(EntityWrapper effectCast : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(PrepareEffectComponent.class))){
             if(!effectCast.hasComponent(RemainingEffectDelayComponent.class)){
                 EntityWrapper effect = entityWorld.getWrapped(effectCast.getComponent(PrepareEffectComponent.class).getEffectEntity());
-                EffectCastSourceComponent effectCastSourceComponent = effectCast.getComponent(EffectCastSourceComponent.class);
-                EffectCastSourceSpellComponent effectCastSourceSpellComponent = effectCast.getComponent(EffectCastSourceSpellComponent.class);
+                EffectSourceComponent effectSourceComponent = effectCast.getComponent(EffectSourceComponent.class);
+                EffectSourceSpellComponent effectSourceSpellComponent = effectCast.getComponent(EffectSourceSpellComponent.class);
                 EffectCastTargetComponent effectCastTargetComponent = effectCast.getComponent(EffectCastTargetComponent.class);
                 boolean removeTemporaryEffectCastTargets = false;
                 expressionSpace.clearValues();
-                int effectSourceEntity = ((effectCastSourceComponent != null) ? effectCastSourceComponent.getSourceEntity() : -1);
+                int effectSourceEntity = ((effectSourceComponent != null) ? effectSourceComponent.getSourceEntity() : -1);
                 if(effectSourceEntity != -1){
                     ExpressionUtil.setEntityValues(entityWorld, expressionSpace, "source", effectSourceEntity);
                 }
@@ -108,7 +109,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                                 magicDamage *= 2;
                             }
                         }
-                        effectImpact.setComponent(effectCastSourceComponent);
+                        effectImpact.setComponent(effectSourceComponent);
                     }
                     if(physicalDamage != 0){
                         ArmorComponent armorComponent = entityWorld.getComponent(targetEntity, ArmorComponent.class);
@@ -159,7 +160,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         for(Object component : entityWorld.getComponents(moveComponent.getMovementEntity())){
                             if(component instanceof SourceMovementDirectionComponent){
                                 SourceMovementDirectionComponent sourceMovementDirectionComponent = (SourceMovementDirectionComponent) component;
-                                Vector2f direction = entityWorld.getComponent(effectCastSourceComponent.getSourceEntity(), DirectionComponent.class).getVector().clone();
+                                Vector2f direction = entityWorld.getComponent(effectSourceEntity, DirectionComponent.class).getVector().clone();
                                 direction.rotateAroundOrigin(sourceMovementDirectionComponent.getAngle_Radian(), true);
                                 entityWorld.setComponent(movementEntity, new MovementDirectionComponent(direction));
                             }
@@ -182,15 +183,23 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                     if(effect.hasComponent(TeleportToTargetPositionComponent.class)){
                         effectImpact.setComponent(new TeleportComponent(effectCastTargetComponent.getTargetEntity()));
                     }
-                    if(effectCastSourceSpellComponent != null){
+                    if(effectSourceSpellComponent != null){
                         if(effect.hasComponent(TriggerCastedSpellEffectsComponent.class)){
-                            effect.setComponent(new TriggerSpellEffectsComponent(effectCastSourceSpellComponent.getSpellEntity()));
+                            effect.setComponent(new TriggerSpellEffectsComponent(effectSourceSpellComponent.getSpellEntity()));
                         }
-                        effectImpact.setComponent(effectCastSourceSpellComponent);
+                        effectImpact.setComponent(effectSourceSpellComponent);
                     }
                     ReplaceSpellWithNewSpellComponent replaceSpellWithNewSpellComponent = effect.getComponent(ReplaceSpellWithNewSpellComponent.class);
                     if(replaceSpellWithNewSpellComponent != null){
                         effectImpact.setComponent(new ReplaceSpellWithNewSpellComponent(replaceSpellWithNewSpellComponent.getSpellIndex(), replaceSpellWithNewSpellComponent.getNewSpellTemplate() + "," + effectCastTargetComponent.getTargetEntity()));
+                    }
+                    DisplayPlayerAnnouncementComponent displayPlayerAnnouncementComponent = effect.getComponent(DisplayPlayerAnnouncementComponent.class);
+                    if(displayPlayerAnnouncementComponent != null){
+                        try {
+                            expressionSpace.parse(displayPlayerAnnouncementComponent.getExpression());
+                            effectImpact.setComponent(new ResultingPlayerAnnouncementComponent(expressionSpace.getResult_String(), displayPlayerAnnouncementComponent.getRemainingDuration()));
+                        }catch(ExpressionException ex){
+                        }
                     }
                     EntityUtil.transferComponents(entityWorld, effect.getId(), effectImpact.getId(), new Class[] {
                         AddComponentsComponent.class,

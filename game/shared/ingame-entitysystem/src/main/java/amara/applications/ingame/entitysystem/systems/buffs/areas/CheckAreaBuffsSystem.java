@@ -8,7 +8,7 @@ import java.util.Set;
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.buffs.areas.*;
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
-import amara.applications.ingame.entitysystem.components.effects.casts.*;
+import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.systems.physics.intersectionHelper.IntersectionInformant;
 import amara.applications.ingame.entitysystem.systems.targets.TargetUtil;
 import amara.libraries.entitysystem.*;
@@ -62,7 +62,7 @@ public class CheckAreaBuffsSystem implements EntitySystem{
             int buffStatusEntity = entityWorld.createEntity();
             entityWorld.setComponent(buffStatusEntity, new ActiveBuffComponent(targetEntity, buffEntity));
             if(areaSourceComponent != null){
-                entityWorld.setComponent(buffStatusEntity, new EffectCastSourceComponent(areaSourceComponent.getSourceEntity()));
+                entityWorld.setComponent(buffStatusEntity, new EffectSourceComponent(areaSourceComponent.getSourceEntity()));
             }
             entityWorld.setComponent(targetEntity, new RequestUpdateAttributesComponent());
         }

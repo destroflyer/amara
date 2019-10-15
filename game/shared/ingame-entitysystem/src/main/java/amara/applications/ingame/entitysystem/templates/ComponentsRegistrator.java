@@ -1337,34 +1337,6 @@ public class ComponentsRegistrator{
             }
         });
         //casts
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceComponent.class.getDeclaredField("sourceEntity"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceComponent>("effectCastSource"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceComponent construct(EntityWorld entityWorld, Element element){
-                int sourceEntity = createChildEntity(entityWorld, element, 0, "sourceEntity");
-                return new amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceComponent(sourceEntity);
-            }
-        });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceSpellComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceSpellComponent.class.getDeclaredField("spellEntity"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceSpellComponent>("effectCastSourceSpell"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceSpellComponent construct(EntityWorld entityWorld, Element element){
-                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
-                return new amara.applications.ingame.entitysystem.components.effects.casts.EffectCastSourceSpellComponent(spellEntity);
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.casts.EffectCastTargetComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.casts.EffectCastTargetComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
@@ -1685,6 +1657,34 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent(value);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.EffectSourceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.EffectSourceComponent.class.getDeclaredField("sourceEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.EffectSourceComponent>("effectSource"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.EffectSourceComponent construct(EntityWorld entityWorld, Element element){
+                int sourceEntity = createChildEntity(entityWorld, element, 0, "sourceEntity");
+                return new amara.applications.ingame.entitysystem.components.effects.EffectSourceComponent(sourceEntity);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.EffectSourceSpellComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.EffectSourceSpellComponent.class.getDeclaredField("spellEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.EffectSourceSpellComponent>("effectSourceSpell"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.EffectSourceSpellComponent construct(EntityWorld entityWorld, Element element){
+                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
+                return new amara.applications.ingame.entitysystem.components.effects.EffectSourceSpellComponent(spellEntity);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.FinishObjectiveComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.FinishObjectiveComponent>("finishObjective"){
 
@@ -1826,6 +1826,45 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.RemoveCollisionGroupsComponent.class);
+        //players
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.players.DisplayPlayerAnnouncementComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.players.DisplayPlayerAnnouncementComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.players.DisplayPlayerAnnouncementComponent>("displayPlayerAnnouncement"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.players.DisplayPlayerAnnouncementComponent construct(EntityWorld entityWorld, Element element){
+                String expression = xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("expression"));
+                float remainingDuration = 0;
+                String remainingDurationText = element.getAttributeValue("remainingDuration");
+                if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                }
+                return new amara.applications.ingame.entitysystem.components.effects.players.DisplayPlayerAnnouncementComponent(expression, remainingDuration);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.players.ResultingPlayerAnnouncementComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.players.ResultingPlayerAnnouncementComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.players.ResultingPlayerAnnouncementComponent>("resultingPlayerAnnouncement"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.players.ResultingPlayerAnnouncementComponent construct(EntityWorld entityWorld, Element element){
+                String text = xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("text"));
+                float remainingDuration = 0;
+                String remainingDurationText = element.getAttributeValue("remainingDuration");
+                if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                }
+                return new amara.applications.ingame.entitysystem.components.effects.players.ResultingPlayerAnnouncementComponent(text, remainingDuration);
+            }
+        });
         //popups
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent.class);
         try{
@@ -2615,6 +2654,33 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.players.IsBotComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.players.IsBotComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementComponent>("playerAnnouncement"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementComponent construct(EntityWorld entityWorld, Element element){
+                String text = xmlTemplateManager.parseValue(entityWorld, element.getText());
+                return new amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementComponent(text);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementRemainingDurationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementRemainingDurationComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementRemainingDurationComponent>("playerAnnouncementRemainingDuration"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementRemainingDurationComponent construct(EntityWorld entityWorld, Element element){
+                float remainingDuration = 0;
+                String remainingDurationText = element.getText();
+                if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                }
+                return new amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementRemainingDurationComponent(remainingDuration);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent.class);
@@ -4038,6 +4104,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent(counter);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ShopUsageTriggerComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ShopUsageTriggerComponent>("shopUsageTrigger"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ShopUsageTriggerComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ShopUsageTriggerComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent.class.getDeclaredField("stacks"), componentFieldSerializer_Stacks);
@@ -4590,6 +4664,19 @@ public class ComponentsRegistrator{
                     cooldowns[i] = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("cooldowns")));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent(spellIndices, cooldowns);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.ShopGoldExpensesComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ShopGoldExpensesComponent>("shopGoldExpenses"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.ShopGoldExpensesComponent construct(EntityWorld entityWorld, Element element){
+                float gold = 0;
+                String goldText = element.getText();
+                if((goldText != null) && (goldText.length() > 0)){
+                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.ShopGoldExpensesComponent(gold);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.SightRangeComponent.class);

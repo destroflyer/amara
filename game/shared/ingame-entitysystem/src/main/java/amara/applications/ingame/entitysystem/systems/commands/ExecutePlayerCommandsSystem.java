@@ -5,6 +5,7 @@
 package amara.applications.ingame.entitysystem.systems.commands;
 
 import java.util.Iterator;
+
 import amara.core.Queue;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.items.*;
@@ -13,7 +14,7 @@ import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.animations.*;
-import amara.applications.ingame.entitysystem.systems.aggro.CheckAggroTargetAttackibilitySystem;
+import amara.applications.ingame.entitysystem.systems.aggro.AggroUtil;
 import amara.applications.ingame.entitysystem.systems.movement.MovementSystem;
 import amara.applications.ingame.entitysystem.systems.shop.ShopUtil;
 import amara.applications.ingame.entitysystem.systems.spells.SpellUtil;
@@ -170,7 +171,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
         if(autoAttackComponent != null){
             AggroTargetComponent aggroTargetComponent = entityWorld.getComponent(unitEntity, AggroTargetComponent.class);
             if((aggroTargetComponent == null) || (targetEntity != aggroTargetComponent.getTargetEntity())){
-                if(CheckAggroTargetAttackibilitySystem.isAttackable(entityWorld, unitEntity, targetEntity)){
+                if(AggroUtil.isAttackable(entityWorld, unitEntity, targetEntity)){
                     if(UnitUtil.tryCancelAction(entityWorld, unitEntity)){
                         entityWorld.setComponent(unitEntity, new AggroTargetComponent(targetEntity));
                         return true;

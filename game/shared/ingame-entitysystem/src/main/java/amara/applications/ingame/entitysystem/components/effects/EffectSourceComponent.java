@@ -2,23 +2,23 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.applications.ingame.entitysystem.components.effects.casts;
+package amara.applications.ingame.entitysystem.components.effects;
 
-import com.jme3.network.serializing.Serializable;
 import amara.libraries.entitysystem.synchronizing.ComponentField;
+import com.jme3.network.serializing.Serializable;
 
 /**
  *
  * @author Carl
  */
 @Serializable
-public class EffectCastSourceComponent{
+public class EffectSourceComponent {
 
-    public EffectCastSourceComponent(){
-        
+    public EffectSourceComponent(){
+
     }
-    
-    public EffectCastSourceComponent(int sourceEntity){
+
+    public EffectSourceComponent(int sourceEntity){
         this.sourceEntity = sourceEntity;
     }
     @ComponentField(type=ComponentField.Type.ENTITY)

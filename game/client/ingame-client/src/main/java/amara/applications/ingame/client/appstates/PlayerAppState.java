@@ -88,6 +88,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         ScreenController_HUD screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
         ScreenController_Shop screenController_Shop = getAppState(NiftyAppState.class).getScreenController(ScreenController_Shop.class);
         localEntitySystemAppState.addEntitySystem(new DisplayGameTimeSystem(this, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayPlayerAnnouncementSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayInspectionSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayHudNameSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayLevelSystem(this, screenController_HUD));

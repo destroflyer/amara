@@ -10,7 +10,7 @@ import amara.applications.ingame.entitysystem.components.audio.*;
 import amara.applications.ingame.entitysystem.components.buffs.*;
 import amara.applications.ingame.entitysystem.components.buffs.areas.*;
 import amara.applications.ingame.entitysystem.components.camps.*;
-import amara.applications.ingame.entitysystem.components.effects.casts.*;
+import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.damage.*;
 import amara.applications.ingame.entitysystem.components.effects.heals.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
@@ -205,7 +205,7 @@ public class Map_Arama extends Map{
             entityWorld.setComponent(spawnCasterEntity, new PositionComponent(new Vector2f(nexiX[i] + (((i == 0)? -1 : 1) * 9), laneCenterY)));
             entityWorld.setComponent(spawnCasterEntity, new TeamComponent(i + 1));
             int spawnSourceEntity = entityWorld.createEntity();
-            entityWorld.setComponent(spawnSourceEntity, new EffectCastSourceComponent(spawnCasterEntity));
+            entityWorld.setComponent(spawnSourceEntity, new EffectSourceComponent(spawnCasterEntity));
             for(int r=0;r<6;r++){
                 EntityWrapper spawnTrigger = entityWorld.getWrapped(entityWorld.createEntity());
                 spawnTrigger.setComponent(new RepeatingTriggerComponent(waveInterval));

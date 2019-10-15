@@ -23,7 +23,7 @@ import amara.libraries.entitysystem.*;
 public class EffectTriggerUtil{
     
     public static LinkedList<EntityWrapper> triggerEffects(EntityWorld entityWorld, int[] effectTriggerEntities, int targetEntity){
-        LinkedList<EntityWrapper> effectCasts = new LinkedList<EntityWrapper>();
+        LinkedList<EntityWrapper> effectCasts = new LinkedList<>();
         for(int effectTriggerEntity : effectTriggerEntities){
             EntityWrapper effectCast = triggerEffect(entityWorld, effectTriggerEntity, targetEntity);
             if(effectCast != null){
@@ -43,9 +43,13 @@ public class EffectTriggerUtil{
                 effectCast.setComponent(new PrepareEffectComponent(effectEntity));
                 TriggerSourceComponent triggerSourceComponent = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class);
                 if(triggerSourceComponent != null){
-                    EntityUtil.transferComponents(entityWorld, triggerSourceComponent.getSourceEntity(), effectCast.getId(), new Class[]{
-                        EffectCastSourceComponent.class,
-                        EffectCastSourceSpellComponent.class
+                    // EffectSource
+                    EffectSourceComponent effectSourceComponent = entityWorld.getComponent(triggerSourceComponent.getSourceEntity(), EffectSourceComponent.class);
+                    int effectSourceEntity = ((effectSourceComponent != null) ? effectSourceComponent.getSourceEntity() : triggerSourceComponent.getSourceEntity());
+                    effectCast.setComponent(new EffectSourceComponent(effectSourceEntity));
+                    // EffectSourceSpell
+                    EntityUtil.transferComponents(entityWorld, triggerSourceComponent.getSourceEntity(), effectCast.getId(), new Class[] {
+                        EffectSourceSpellComponent.class
                     });
                 }
                 if(targetEntity != -1){
@@ -87,7 +91,7 @@ public class EffectTriggerUtil{
         return true;
     }
     
-    private static LinkedList<Integer> tmpTargetEntities = new LinkedList<Integer>();
+    private static LinkedList<Integer> tmpTargetEntities = new LinkedList<>();
     private static int[] getTargetEntities(EntityWorld entityWorld, int entity, int targetEntity){
         tmpTargetEntities.clear();
         TriggerSourceComponent triggerSourceComponent = entityWorld.getComponent(entity, TriggerSourceComponent.class);
@@ -96,9 +100,9 @@ public class EffectTriggerUtil{
                 tmpTargetEntities.add(triggerSourceComponent.getSourceEntity());
             }
             if(entityWorld.hasComponent(entity, CasterTargetComponent.class)){
-                EffectCastSourceComponent castSourceComponent = entityWorld.getComponent(triggerSourceComponent.getSourceEntity(), EffectCastSourceComponent.class);
-                if(castSourceComponent != null){
-                    tmpTargetEntities.add(castSourceComponent.getSourceEntity());
+                EffectSourceComponent effectSourceComponent = entityWorld.getComponent(triggerSourceComponent.getSourceEntity(), EffectSourceComponent.class);
+                if(effectSourceComponent != null){
+                    tmpTargetEntities.add(effectSourceComponent.getSourceEntity());
                 }
             }
         }

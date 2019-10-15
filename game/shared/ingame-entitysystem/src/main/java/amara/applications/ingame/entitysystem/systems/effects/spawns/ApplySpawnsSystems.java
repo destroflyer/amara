@@ -6,7 +6,6 @@ package amara.applications.ingame.entitysystem.systems.effects.spawns;
 
 import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.effects.*;
-import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.movements.*;
@@ -35,14 +34,14 @@ public class ApplySpawnsSystems implements EntitySystem{
                 targetPositionComponent = entityWorld.getComponent(targetEntity, PositionComponent.class);
                 targetDirectionComponent = entityWorld.getComponent(targetEntity, DirectionComponent.class);
             }
-            int casterEntity = entityWrapper.getComponent(EffectCastSourceComponent.class).getSourceEntity();
+            int casterEntity = entityWrapper.getComponent(EffectSourceComponent.class).getSourceEntity();
             TeamComponent teamComponent = entityWorld.getComponent(casterEntity, TeamComponent.class);
             for(int spawnInformationEntity : entityWrapper.getComponent(SpawnComponent.class).getSpawnInformationEntites()){
                 EntityWrapper spawnedObject = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper spawnInformation = entityWorld.getWrapped(spawnInformationEntity);
                 EntityUtil.transferComponents(entityWorld, entityWrapper.getId(), spawnedObject.getId(), new Class[]{
-                    EffectCastSourceComponent.class,
-                    EffectCastSourceSpellComponent.class
+                    EffectSourceComponent.class,
+                    EffectSourceSpellComponent.class
                 });
                 if(teamComponent != null){
                     spawnedObject.setComponent(new TeamComponent(teamComponent.getTeamEntity()));

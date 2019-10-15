@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import java.util.Set;
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
-import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.effects.damage.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.systems.game.UpdateGameTimeSystem;
@@ -63,20 +62,16 @@ public class UpdateDamageHistorySystem implements EntitySystem{
                 break;
         }
         int sourceEntity = -1;
-        EffectCastSourceComponent effectCastSourceComponent = entityWorld.getComponent(effectImpactEntity, EffectCastSourceComponent.class);
-        if(effectCastSourceComponent != null){
-            sourceEntity = effectCastSourceComponent.getSourceEntity();
+        EffectSourceComponent effectSourceComponent = entityWorld.getComponent(effectImpactEntity, EffectSourceComponent.class);
+        if(effectSourceComponent != null){
+            sourceEntity = effectSourceComponent.getSourceEntity();
         }
         int sourceSpellEntity = -1;
-        EffectCastSourceSpellComponent effectCastSourceSpellComponent = entityWorld.getComponent(effectImpactEntity, EffectCastSourceSpellComponent.class);
-        if(effectCastSourceSpellComponent != null){
-            sourceSpellEntity = effectCastSourceSpellComponent.getSpellEntity();
+        EffectSourceSpellComponent effectSourceSpellComponent = entityWorld.getComponent(effectImpactEntity, EffectSourceSpellComponent.class);
+        if(effectSourceSpellComponent != null){
+            sourceSpellEntity = effectSourceSpellComponent.getSpellEntity();
         }
-        LinkedList<DamageHistoryComponent.DamageHistoryEntry> damageEntries = damageEntriesMap.get(targetEntity);
-        if(damageEntries == null){
-            damageEntries = new LinkedList<>();
-            damageEntriesMap.put(targetEntity, damageEntries);
-        }
+        LinkedList<DamageHistoryComponent.DamageHistoryEntry> damageEntries = damageEntriesMap.computeIfAbsent(targetEntity, t -> new LinkedList<>());
         Iterator<DamageHistoryComponent.DamageHistoryEntry> iterator = damageEntries.iterator();
         int index = 0;
         while(iterator.hasNext()){

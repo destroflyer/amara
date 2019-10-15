@@ -3,6 +3,18 @@
     <useStyles filename="nifty-default-styles.xml"/>
     <useControls filename="nifty-default-controls.xml"/>
     <screen id="start" controller="amara.applications.ingame.client.gui.ScreenController_HUD">
+        <!--player announcement-->
+        <layer id="player_announcement" childLayout="center">
+            <panel childLayout="vertical">
+                <panel height="30px"/>
+                <panel childLayout="horizontal">
+                    <panel/>
+                    <text id="player_announcement_text" text="???" width="100%" textHAlign="center" font="Interface/fonts/Verdana_18.fnt"/>
+                    <panel/>
+                </panel>
+                <panel/>
+            </panel>
+        </layer>
         <!--selected unit info-->
         <layer id="inspection_attributes" childLayout="center">
             <panel childLayout="vertical">

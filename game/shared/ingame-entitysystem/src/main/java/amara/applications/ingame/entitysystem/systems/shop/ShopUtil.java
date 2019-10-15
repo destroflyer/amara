@@ -5,12 +5,16 @@
 package amara.applications.ingame.entitysystem.systems.shop;
 
 import java.util.LinkedList;
-import amara.core.Util;
+
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.shop.*;
 import amara.applications.ingame.entitysystem.components.units.*;
+import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
+import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
+import amara.applications.ingame.entitysystem.systems.effects.triggers.EffectTriggerUtil;
+import amara.core.Util;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 
@@ -77,11 +81,10 @@ public class ShopUtil{
             GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
             if((goldCost == 0) || ((goldComponent != null) && (goldComponent.getGold() >= goldCost))){
                 EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + itemID);
-                if(goldComponent != null){
-                    entityWorld.setComponent(entity, new GoldComponent(goldComponent.getGold() - goldCost));
-                }
+                addGoldViaShop(entityWorld, entity, -1 * goldCost);
                 entityWorld.setComponent(entity, new InventoryComponent(Util.convertToArray_Integer(tmpItemEntities)));
                 entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
+                triggerShopUsageEffects(entityWorld, entity);
                 return true;
             }
         }
@@ -94,24 +97,24 @@ public class ShopUtil{
         ItemRecipeComponent itemRecipeComponent = entityWorld.getComponent(tmpItemEntity, ItemRecipeComponent.class);
         float goldCost = itemRecipeComponent.getGold();
         for(String ingredientID : itemRecipeComponent.getItemIDs()){
-            boolean ingrendientHasToBeBought = true;
+            boolean ingredientHasToBeBought = true;
             for(Integer inventoryItemEntity : inventoryItemEntities){
                 if(inventoryItemEntity != -1){
                     String inventoryItemID = entityWorld.getComponent(inventoryItemEntity, ItemIDComponent.class).getID();
                     if(inventoryItemID.equals(ingredientID)){
                         inventoryItemEntities.remove(inventoryItemEntity);
-                        ingrendientHasToBeBought = false;
+                        ingredientHasToBeBought = false;
                         break;
                     }
                 }
             }
-            if(ingrendientHasToBeBought){
+            if(ingredientHasToBeBought){
                 goldCost += resolveItemRecipe(entityWorld, ingredientID, inventoryItemEntities, tmpItemEntity);
             }
         }
         return goldCost;
     }
-    
+
     public static void sell(EntityWorld entityWorld, int entity, int inventoryIndex){
         InventoryComponent inventoryComponent = entityWorld.getComponent(entity, InventoryComponent.class);
         if(inventoryComponent != null){
@@ -130,11 +133,31 @@ public class ShopUtil{
                     }
                     GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
                     if(goldComponent != null){
-                        entityWorld.setComponent(entity, new GoldComponent(goldComponent.getGold() + isSellableComponent.getGold()));
+                        addGoldViaShop(entityWorld, entity, isSellableComponent.getGold());
                     }
                     entityWorld.setComponent(entity, new InventoryComponent(newItemEntities));
                     entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
+                    triggerShopUsageEffects(entityWorld, entity);
                 }
+            }
+        }
+    }
+
+    private static void addGoldViaShop(EntityWorld entityWorld, int entity, float gold) {
+        GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
+        if (goldComponent != null) {
+            entityWorld.setComponent(entity, new GoldComponent(goldComponent.getGold() + gold));
+            ShopGoldExpensesComponent shopGoldExpensesComponent = entityWorld.getComponent(entity, ShopGoldExpensesComponent.class);
+            float currentGoldExpenses = ((shopGoldExpensesComponent != null) ? shopGoldExpensesComponent.getGold() : 0);
+            entityWorld.setComponent(entity, new ShopGoldExpensesComponent(currentGoldExpenses - gold));
+        }
+    }
+
+    private static void triggerShopUsageEffects(EntityWorld entityWorld, int shopUserEntity) {
+        for (int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, ShopUsageTriggerComponent.class)) {
+            int triggerSourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
+            if (triggerSourceEntity == shopUserEntity) {
+                EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, shopUserEntity);
             }
         }
     }

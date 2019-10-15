@@ -5,7 +5,6 @@
 package amara.applications.ingame.entitysystem.systems.effects.triggers;
 
 import amara.applications.ingame.entitysystem.components.effects.*;
-import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.effects.damage.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
@@ -25,15 +24,15 @@ public class TriggerDamageTakenSystem implements EntitySystem{
         for(int effectImpactEntity : entityWorld.getEntitiesWithAny(ApplyEffectImpactComponent.class)){
             int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
             for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, DamageTakenTriggerComponent.class)){
-                int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
-                if((sourceEntity == targetEntity) && (!entityWorld.hasComponent(effectTriggerEntity, RemainingCooldownComponent.class))){
+                int triggerSourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
+                if((triggerSourceEntity == targetEntity) && (!entityWorld.hasComponent(effectTriggerEntity, RemainingCooldownComponent.class))){
                     if(isDamageAccepted(entityWorld, effectImpactEntity, entityWorld.getComponent(effectTriggerEntity, DamageTakenTriggerComponent.class))){
-                        int castSourceEntity = -1;
-                        EffectCastSourceComponent effectCastSourceComponent = entityWorld.getComponent(effectImpactEntity, EffectCastSourceComponent.class);
-                        if(effectCastSourceComponent != null){
-                            castSourceEntity = effectCastSourceComponent.getSourceEntity();
+                        int damageSourceEntity = -1;
+                        EffectSourceComponent effectSourceComponent = entityWorld.getComponent(effectImpactEntity, EffectSourceComponent.class);
+                        if(effectSourceComponent != null){
+                            damageSourceEntity = effectSourceComponent.getSourceEntity();
                         }
-                        EntityWrapper effectCast = EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, castSourceEntity);
+                        EntityWrapper effectCast = EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, damageSourceEntity);
                         if(effectCast != null){
                             float physicalDamage = 0;
                             float magicDamage = 0;

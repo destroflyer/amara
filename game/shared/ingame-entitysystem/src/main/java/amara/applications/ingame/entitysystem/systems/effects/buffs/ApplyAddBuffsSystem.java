@@ -8,50 +8,47 @@ import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.buffs.*;
-import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.libraries.entitysystem.*;
 
 /**
  *
  * @author Carl
  */
-public class ApplyAddBuffsSystem implements EntitySystem{
-    
+public class ApplyAddBuffsSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddBuffComponent.class)))
-        {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            AddBuffComponent addBuffComponent = entityWrapper.getComponent(AddBuffComponent.class);
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddBuffComponent.class)) {
+            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
+            AddBuffComponent addBuffComponent = entityWorld.getComponent(effectImpactEntity, AddBuffComponent.class);
             int buffStatusEntity = addBuff(entityWorld, targetEntity, addBuffComponent.getBuffEntity(), addBuffComponent.getDuration());
-            EntityUtil.transferComponents(entityWorld, entityWrapper.getId(), buffStatusEntity, new Class[]{
-                EffectCastSourceComponent.class,
-                EffectCastSourceSpellComponent.class
+            EntityUtil.transferComponents(entityWorld, effectImpactEntity, buffStatusEntity, new Class[] {
+                EffectSourceComponent.class,
+                EffectSourceSpellComponent.class
             });
         }
     }
-    
-    public static int addBuff(EntityWorld entityWorld, int targetEntity, int buffEntity){
+
+    public static int addBuff(EntityWorld entityWorld, int targetEntity, int buffEntity) {
         return addBuff(entityWorld, targetEntity, buffEntity, -1);
     }
-    
-    public static int addBuff(EntityWorld entityWorld, int targetEntity, int buffEntity, float duration){
+
+    public static int addBuff(EntityWorld entityWorld, int targetEntity, int buffEntity, float duration) {
         int buffStatusEntity = -1;
-        for(int entity : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)){
+        for (int entity : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)) {
             ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(entity, ActiveBuffComponent.class);
             if((activeBuffComponent.getTargetEntity() == targetEntity) && (activeBuffComponent.getBuffEntity() == buffEntity)){
                 buffStatusEntity = entity;
                 break;
             }
         }
-        if(buffStatusEntity == -1){
+        if (buffStatusEntity == -1) {
             buffStatusEntity = entityWorld.createEntity();
             entityWorld.setComponent(buffStatusEntity, new ActiveBuffComponent(targetEntity, buffEntity));
         }
-        if(duration != -1){
+        if (duration != -1) {
             entityWorld.setComponent(buffStatusEntity, new RemainingBuffDurationComponent(duration));
-        }
-        else{
+        } else {
             entityWorld.removeComponent(buffStatusEntity, RemainingBuffDurationComponent.class);
         }
         entityWorld.setComponent(targetEntity, new RequestUpdateAttributesComponent());

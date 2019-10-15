@@ -7,7 +7,6 @@ package amara.applications.ingame.entitysystem.systems.buffs;
 import amara.applications.ingame.entitysystem.components.buffs.*;
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
-import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.libraries.entitysystem.*;
 
 /**
@@ -29,8 +28,8 @@ public class RepeatingBuffEffectsSystem implements EntitySystem{
                     EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
                     effectCast.setComponent(new PrepareEffectComponent(repeatingEffectComponent.getEffectEntity()));
                     EntityUtil.transferComponents(entityWorld, buffStatus.getId(), effectCast.getId(), new Class[]{
-                        EffectCastSourceComponent.class,
-                        EffectCastSourceSpellComponent.class
+                        EffectSourceComponent.class,
+                        EffectSourceSpellComponent.class
                     });
                     effectCast.setComponent(new AffectedTargetsComponent(activeBuffComponent.getTargetEntity()));
                     timeSinceLastRepeatingEffect = 0;

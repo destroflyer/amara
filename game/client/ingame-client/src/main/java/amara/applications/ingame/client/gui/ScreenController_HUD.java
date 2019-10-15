@@ -48,6 +48,7 @@ public class ScreenController_HUD extends GameScreenController {
     @Override
     public void onStartup() {
         super.onStartup();
+        hidePlayerAnnouncement();
         setInspectionVisible(false);
         hideLevel("player");
         setExperience(0);
@@ -64,6 +65,15 @@ public class ScreenController_HUD extends GameScreenController {
         }
         setPlayer_UpgradeSpellsLayerVisible(false);
         hidePlayer_UpgradeSpell();
+    }
+
+    public void hidePlayerAnnouncement(){
+        getElementByID("player_announcement").hide();
+    }
+
+    public void showPlayerAnnouncement(String text){
+        getElementByID("player_announcement").show();
+        getTextRenderer("player_announcement_text").setText(text);
     }
 
     public void setInspectionVisible(boolean isVisible) {
