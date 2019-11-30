@@ -37,12 +37,16 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         subNetworkServer.addMessageBackend(new AuthentificateClientsBackend(game, entityWorld));
         subNetworkServer.addMessageBackend(new SendInitialEntityWorldBackend(entityWorld));
         subNetworkServer.addMessageBackend(new StartGameBackend(game));
-
-        int gameEntity = entityWorld.createEntity();
-        entityWorld.setComponent(gameEntity, new GameSpeedComponent(1));
+        // Initialize game logic
+        GameLogic gameLogic = new GameLogic(
+            entityWorld,
+            game,
+            getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue(),
+            playerEntity -> getAppState(BotsAppState.class).getBot(playerEntity)
+        );
+        gameLogic.initialize();
+        // Initialize game content
         Map map = game.getMap();
-        int mapEntity = entityWorld.createEntity();
-        map.setEntity(mapEntity);
         map.load(entityWorld);
         PlayerEntitiesAppState playerEntitiesAppState = getAppState(PlayerEntitiesAppState.class);
         int playerIndex = 0;
@@ -52,19 +56,10 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
                 playerIndex++;
             }
         }
-        System.out.println("Calculating navigation meshes...");
-        System.out.println("Finished calculating navigation meshes.");
-
-        GameLogic gameLogic = new GameLogic(
-            map,
-            game.getTeams().length + 1,
-            getAppState(ReceiveCommandsAppState.class).getPlayerCommandsQueue(),
-            playerEntity -> getAppState(BotsAppState.class).getBot(playerEntity)
-        );
-        for (EntitySystem entitySystem : gameLogic.createEntitySystems()) {
+        // Register the entity systems
+        for (EntitySystem entitySystem : gameLogic.getEntitySystems()) {
             addEntitySystem(entitySystem);
         }
-
         addEntitySystem(new SendEntityChangesSystem(subNetworkServer, new ClientComponentBlacklist()));
         addEntitySystem(new CheckMapObjectiveSystem(map, mainApplication));
         // Precalculate first frame, so automatic entity processes will be done for the initial world

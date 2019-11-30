@@ -16,45 +16,47 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class MovementSystem implements EntitySystem{
-    
+public class MovementSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAny(MovementComponent.class)){
-            if(canMove(entityWorld, entity) || isDisplaced(entityWorld, entity)){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int entity : entityWorld.getEntitiesWithAny(MovementComponent.class)) {
+            if (canMove(entityWorld, entity) || isDisplaced(entityWorld, entity)) {
                 int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
-                if(entityWorld.hasAllComponents(movementEntity, MovementDirectionComponent.class, MovementSpeedComponent.class)){
+                if (entityWorld.hasAllComponents(movementEntity, MovementDirectionComponent.class, MovementSpeedComponent.class)) {
                     Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
                     Vector2f direction = entityWorld.getComponent(movementEntity, MovementDirectionComponent.class).getDirection();
                     float speed = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class).getSpeed();
-                    Vector2f movedDistance = direction.normalize().multLocal(speed * deltaSeconds);
-                    entityWorld.setComponent(entity, new PositionComponent(position.add(movedDistance)));
-                    float totalMovedDistance = movedDistance.length();
+                    float movedDistance = (speed * deltaSeconds);
                     MovedDistanceComponent movedDistanceComponent = entityWorld.getComponent(movementEntity, MovedDistanceComponent.class);
-                    if(movedDistanceComponent != null){
-                        totalMovedDistance += movedDistanceComponent.getDistance();
+                    float totalMovedDistance = (((movedDistanceComponent != null) ? movedDistanceComponent.getDistance() : 0) + movedDistance);
+                    DistanceLimitComponent distanceLimitComponent = entityWorld.getComponent(movementEntity, DistanceLimitComponent.class);
+                    if ((distanceLimitComponent != null) && (totalMovedDistance > distanceLimitComponent.getDistance())) {
+                        movedDistance -= (totalMovedDistance - distanceLimitComponent.getDistance());
                     }
+                    Vector2f newPosition = position.add(direction.normalize().multLocal(movedDistance));
+                    entityWorld.setComponent(entity, new PositionComponent(newPosition));
                     entityWorld.setComponent(movementEntity, new MovedDistanceComponent(totalMovedDistance));
                 }
             }
         }
     }
-    
-    public static boolean canMove(EntityWorld entityWorld, int entity){
+
+    public static boolean canMove(EntityWorld entityWorld, int entity) {
         return (CastSpellSystem.isAbleToPerformAction(entityWorld, entity) && (!entityWorld.hasComponent(entity, IsBindedComponent.class)));
     }
-    
-    public static boolean hasUncancelableMovement(EntityWorld entityWorld, int entity){
+
+    public static boolean hasUncancelableMovement(EntityWorld entityWorld, int entity) {
         MovementComponent movementComponent = entityWorld.getComponent(entity, MovementComponent.class);
-        if(movementComponent != null){
+        if (movementComponent != null) {
             return ((!entityWorld.hasComponent(movementComponent.getMovementEntity(), MovementIsCancelableComponent.class)) || isDisplaced(entityWorld, entity));
         }
         return false;
     }
-    
-    public static boolean isDisplaced(EntityWorld entityWorld, int entity){
+
+    public static boolean isDisplaced(EntityWorld entityWorld, int entity) {
         MovementComponent movementComponent = entityWorld.getComponent(entity, MovementComponent.class);
-        if(movementComponent != null){
+        if (movementComponent != null) {
             return entityWorld.hasComponent(movementComponent.getMovementEntity(), DisplacementComponent.class);
         }
         return false;

@@ -5,6 +5,7 @@
         <groupId>com.destrostudios.amara</groupId>
         <artifactId>main</artifactId>
         <version>0.5</version>
+        <relativePath>../../</relativePath>
     </parent>
     <artifactId>ingame-shared</artifactId>
     <packaging>pom</packaging>

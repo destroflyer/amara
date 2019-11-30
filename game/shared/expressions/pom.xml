@@ -5,6 +5,7 @@
         <groupId>com.destrostudios.amara</groupId>
         <artifactId>main</artifactId>
         <version>0.5</version>
+        <relativePath>../../</relativePath>
     </parent>
     <artifactId>expressions</artifactId>
     <packaging>pom</packaging>

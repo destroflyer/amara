@@ -3,7 +3,7 @@
         <model>Models/ganfaul_laser/skin.xml</model>
     </entity>
     <!--add buff area-->
-    <entity>
+    <entity id="addBuffAreaTrigger">
         <instantTrigger/>
         <sourceTarget/>
         <triggeredEffect>
@@ -61,6 +61,19 @@
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
         <triggerDelay>1.6</triggerDelay>
-        <triggerOnce/>
+        <triggerOnce>true</triggerOnce>
+    </entity>
+    <!--remove addBuffAreaTrigger-->
+    <entity>
+        <instantTrigger/>
+        <customTarget>#addBuffAreaTrigger</customTarget>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+        <triggerDelay>1.6</triggerDelay>
+        <triggerOnce>true</triggerOnce>
     </entity>
 </template>

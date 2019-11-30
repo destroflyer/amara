@@ -111,7 +111,7 @@ public class UpdateAttributesSystem implements EntitySystem{
             if(autoAttackComponent != null){
                 float autoAttackInterval = (1 / attackSpeed);
                 entityWorld.setComponent(autoAttackComponent.getAutoAttackEntity(), new CooldownComponent(autoAttackInterval));
-                float autoAttackDuration = (float) (Math.min(attackSpeed / 1.2f, 1) * autoAttackInterval);
+                float autoAttackDuration = Math.min(attackSpeed / 1.2f, 1) * autoAttackInterval;
                 CastAnimationComponent autoAttackCastAnimationComponent = entityWorld.getComponent(autoAttackComponent.getAutoAttackEntity(), CastAnimationComponent.class);
                 if(autoAttackCastAnimationComponent != null){
                     entityWorld.setComponent(autoAttackCastAnimationComponent.getAnimationEntity(), new LoopDurationComponent(autoAttackDuration));

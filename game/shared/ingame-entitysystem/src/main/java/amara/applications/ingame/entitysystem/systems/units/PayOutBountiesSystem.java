@@ -19,25 +19,21 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class PayOutBountiesSystem implements EntitySystem{
+public class PayOutBountiesSystem implements EntitySystem {
 
     private final float experienceRange = 28;
     private int defaultBountyRulesEntity = -1;
     private LinkedList<Integer> tmpRewardedEntities = new LinkedList<>();
 
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        if(defaultBountyRulesEntity == -1){
-            defaultBountyRulesEntity = entityWorld.createEntity();
-            entityWorld.setComponent(defaultBountyRulesEntity, new AcceptEnemiesComponent());
-        }
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
         for(int entity : observer.getRemoved().getEntitiesWithAny(IsAliveComponent.class)){
             BountyComponent bountyComponent = entityWorld.getComponent(entity, BountyComponent.class);
             DamageHistoryComponent damageHistoryComponent = entityWorld.getComponent(entity, DamageHistoryComponent.class);
             if((bountyComponent != null) && (damageHistoryComponent != null) && (damageHistoryComponent.getEntries().length > 0)){
                 int killerEntity = -1;
-                int bountyRulesEntity = defaultBountyRulesEntity;
+                int bountyRulesEntity = getOrCreateDefaultBountyRulesEntity(entityWorld);
                 BountyRulesComponent bountyRulesComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyRulesComponent.class);
                 if(bountyRulesComponent != null){
                     bountyRulesEntity = bountyRulesComponent.getTargetRulesEntity();
@@ -142,6 +138,14 @@ public class PayOutBountiesSystem implements EntitySystem{
                 }
             }
         }
+    }
+
+    private int getOrCreateDefaultBountyRulesEntity(EntityWorld entityWorld) {
+        if (defaultBountyRulesEntity == -1){
+            defaultBountyRulesEntity = entityWorld.createEntity();
+            entityWorld.setComponent(defaultBountyRulesEntity, new AcceptEnemiesComponent());
+        }
+        return defaultBountyRulesEntity;
     }
 
     private int getBountyReceiverEntity(EntityWorld entityWorld, int receiverEntity) {

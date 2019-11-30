@@ -186,7 +186,7 @@ public class Map_Testmap extends Map{
         shop.setComponent(new ShopItemsComponent(MapDefaults.getShopItemTemplateNames()));
         shop.setComponent(new ShopRangeComponent(15));
         EntityWrapper gameObjective = entityWorld.getWrapped(entityWorld.createEntity());
-        gameObjective.setComponent(new MissingEntitiesComponent(new int[]{boss.getId()}));
+        gameObjective.setComponent(new MissingEntitiesComponent(boss.getId()));
         gameObjective.setComponent(new OpenObjectiveComponent());
         entityWorld.setComponent(entity, new MapObjectiveComponent(gameObjective.getId()));
         EntityWrapper playerDeathRules = entityWorld.getWrapped(entityWorld.createEntity());

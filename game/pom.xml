@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.destrostudios.amara</groupId>
     <artifactId>main</artifactId>
-    <version>${version.amara}</version>
+    <version>0.5</version>
     <packaging>pom</packaging>
     <modules>
         <module>client</module>
@@ -22,6 +22,8 @@
         <version.jme3>3.2.1-stable</version.jme3>
         <version.jorbis>0.0.17.4</version.jorbis>
         <version.jsch>0.1.55</version.jsch>
+        <version.junit>4.11</version.junit>
+        <version.mockito>1.9.5</version.mockito>
         <version.postgresql>9.1-901-1.jdbc4</version.postgresql>
     </properties>
     <repositories>
@@ -232,6 +234,20 @@
                 <groupId>com.jcraft</groupId>
                 <artifactId>jsch</artifactId>
                 <version>${version.jsch}</version>
+            </dependency>
+            <!--JUnit-->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${version.junit}</version>
+                <scope>test</scope>
+            </dependency>
+            <!--Mockito-->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${version.mockito}</version>
+                <scope>test</scope>
             </dependency>
             <!--PostgreSQL-->
             <dependency>

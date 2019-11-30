@@ -28,7 +28,7 @@ import amara.libraries.entitysystem.*;
  */
 public class CastSpellQueueSystem implements EntitySystem{
     
-    private HashMap<Integer, LinkedList<int[]>> entitiesCastQueues = new HashMap<Integer, LinkedList<int[]>>();
+    private HashMap<Integer, LinkedList<int[]>> entitiesCastQueues = new HashMap<>();
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -45,11 +45,7 @@ public class CastSpellQueueSystem implements EntitySystem{
     }
     
     public void enqueueSpellCast(int casterEntity, int spellEntity, int targetEntity){
-        LinkedList<int[]> castSpellQueue = entitiesCastQueues.get(casterEntity);
-        if(castSpellQueue == null){
-            castSpellQueue = new LinkedList<>();
-            entitiesCastQueues.put(casterEntity, castSpellQueue);
-        }
+        LinkedList<int[]> castSpellQueue = entitiesCastQueues.computeIfAbsent(casterEntity, ce -> new LinkedList<>());
         castSpellQueue.add(new int[]{spellEntity, targetEntity});
     }
     

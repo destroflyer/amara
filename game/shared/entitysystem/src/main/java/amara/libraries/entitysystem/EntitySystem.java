@@ -8,7 +8,6 @@ package amara.libraries.entitysystem;
  *
  * @author Philipp
  */
-public interface EntitySystem
-{
-    public void update(EntityWorld entityWorld, float deltaSeconds);
+public interface EntitySystem {
+    void update(EntityWorld entityWorld, float deltaSeconds);
 }

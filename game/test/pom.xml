@@ -5,6 +5,7 @@
         <groupId>com.destrostudios.amara</groupId>
         <artifactId>main</artifactId>
         <version>0.5</version>
+        <relativePath>../</relativePath>
     </parent>
     <artifactId>test</artifactId>
     <packaging>pom</packaging>
@@ -20,6 +21,14 @@
         <dependency>
             <groupId>com.destrostudios.amara</groupId>
             <artifactId>master-server-application</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
         </dependency>
     </dependencies>
 </project>

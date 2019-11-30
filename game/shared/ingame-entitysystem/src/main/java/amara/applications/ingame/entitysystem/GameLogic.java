@@ -1,5 +1,6 @@
 package amara.applications.ingame.entitysystem;
 
+import amara.applications.ingame.entitysystem.components.game.GameSpeedComponent;
 import amara.applications.ingame.entitysystem.synchronizing.ParallelNetworkSystems;
 import amara.applications.ingame.entitysystem.systems.aggro.*;
 import amara.applications.ingame.entitysystem.systems.ai.*;
@@ -45,9 +46,11 @@ import amara.applications.ingame.entitysystem.systems.units.*;
 import amara.applications.ingame.entitysystem.systems.units.scores.*;
 import amara.applications.ingame.entitysystem.systems.visuals.*;
 import amara.applications.ingame.network.messages.objects.commands.PlayerCommand;
+import amara.applications.ingame.shared.games.Game;
 import amara.applications.ingame.shared.maps.Map;
 import amara.core.Queue;
 import amara.libraries.entitysystem.EntitySystem;
+import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.physics.intersectionHelper.PolyMapManager;
 
 import java.util.Collections;
@@ -55,23 +58,32 @@ import java.util.LinkedList;
 
 public class GameLogic {
 
-    public GameLogic(Map map, int teamsCount, Queue<PlayerCommand> playerCommandsQueue, ExecuteAIActionsSystem.EntityBotsMap entityBotsMap) {
-        this.map = map;
-        this.teamsCount = teamsCount;
+    public GameLogic(EntityWorld entityWorld, Game game, Queue<PlayerCommand> playerCommandsQueue, ExecuteAIActionsSystem.EntityBotsMap entityBotsMap) {
+        this.entityWorld = entityWorld;
+        this.game = game;
         this.playerCommandsQueue = playerCommandsQueue;
         this.entityBotsMap = entityBotsMap;
     }
-    private Map map;
-    private int teamsCount;
+    private EntityWorld entityWorld;
+    private Game game;
     private Queue<PlayerCommand> playerCommandsQueue;
     private ExecuteAIActionsSystem.EntityBotsMap entityBotsMap;
+    private LinkedList<EntitySystem> entitySystems;
 
-    public LinkedList<EntitySystem> createEntitySystems() {
+    public void initialize() {
+        int gameEntity = entityWorld.createEntity();
+        entityWorld.setComponent(gameEntity, new GameSpeedComponent(1));
+        Map map = game.getMap();
+        int mapEntity = entityWorld.createEntity();
+        map.setEntity(mapEntity);
+
         IntersectionObserver intersectionObserver = new IntersectionObserver();
-        PolyMapManager polyMapManager = map.getPhysicsInformation().getPolyMapManager();
+        PolyMapManager polyMapManager = game.getMap().getPhysicsInformation().getPolyMapManager();
+        System.out.println("Calculating navigation meshes...");
         polyMapManager.calcNavigationMap(1.5);
+        System.out.println("Finished calculating navigation meshes.");
 
-        LinkedList<EntitySystem> entitySystems = new LinkedList<>();
+        entitySystems = new LinkedList<>();
         entitySystems.add(new SetAutoAttacksCastAnimationsSystem());
         entitySystems.add(new SetSpellsCastersSystem());
         entitySystems.add(new SetBaseCooldownSystem());
@@ -181,7 +193,7 @@ public class GameLogic {
         entitySystems.add(new ApplyTriggerSpellEffectsSystem());
         entitySystems.add(new ApplyAddGoldSystem());
         entitySystems.add(new ApplyCancelActionsSystem());
-        entitySystems.add(new ApplyRespawnSystem(map));
+        entitySystems.add(new ApplyRespawnSystem(game.getMap()));
         entitySystems.add(new ApplyAddStealthSystem());
         entitySystems.add(new ApplyRemoveStealthSystem());
         entitySystems.add(new ApplyPlayAnimationsSystem());
@@ -224,7 +236,7 @@ public class GameLogic {
         entitySystems.add(new FinishTargetedMovementsSystem());
         entitySystems.add(new CheckHiddenAreasSystem(intersectionObserver));
         // Add 1 for the neutral team
-        entitySystems.add(new TeamVisionSystem(teamsCount + 1, map.getPhysicsInformation().getObstacles()));
+        entitySystems.add(new TeamVisionSystem(game.getTeams().length + 1, game.getMap().getPhysicsInformation().getObstacles()));
         entitySystems.add(new TriggerCollisionEffectSystem(intersectionObserver));
         entitySystems.add(new TriggerCastingFinishedEffectSystem());
         entitySystems.add(new TriggerFinishedObjectivesEffctSystem());
@@ -236,12 +248,15 @@ public class GameLogic {
         entitySystems.add(new IntersectionPushSystem(intersectionObserver));
         entitySystems.add(new MapIntersectionSystem(polyMapManager));
         entitySystems.add(new RespawnableDeathSystem());
-        entitySystems.add(new RespawnPlayersSystem(map));
+        entitySystems.add(new RespawnPlayersSystem(game.getMap()));
         entitySystems.add(new CleanupUnitsSystem());
         entitySystems.add(new CleanupSpellsSystem());
         entitySystems.add(new CleanupMovementsSystem());
         entitySystems.add(new CleanupBuffAreasSystem());
         entitySystems.add(new CleanupBuffsSystem());
+    }
+
+    public LinkedList<EntitySystem> getEntitySystems() {
         return entitySystems;
     }
 }
