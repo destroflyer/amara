@@ -8,7 +8,6 @@
         <relativePath>../../</relativePath>
     </parent>
     <artifactId>ingame-maps</artifactId>
-    <packaging>pom</packaging>
     <dependencies>
         <dependency>
             <groupId>com.destrostudios.amara</groupId>

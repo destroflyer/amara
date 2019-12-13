@@ -8,7 +8,6 @@
         <relativePath>../../</relativePath>
     </parent>
     <artifactId>core</artifactId>
-    <packaging>pom</packaging>
     <dependencies>
         <dependency>
             <groupId>org.jmonkeyengine</groupId>
