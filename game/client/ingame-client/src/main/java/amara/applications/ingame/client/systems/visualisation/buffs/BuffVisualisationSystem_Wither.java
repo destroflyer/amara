@@ -44,7 +44,7 @@ public class BuffVisualisationSystem_Wither extends BuffVisualisationSystem{
         particleEmitter.setHighLife(4);
         particleEmitter.setStartSize(2);
         particleEmitter.setEndSize(2);
-        particleEmitter.setStartColor(new ColorRGBA(0, 0, 0, 1));
+        particleEmitter.setStartColor(new ColorRGBA(0, 0, 0, 0.5f));
         particleEmitter.setEndColor(new ColorRGBA(0.2f, 0.2f, 0.2f, 0));
         particleEmitter.setRotateSpeed(2);
         particleEmitter.setInWorldSpace(false);

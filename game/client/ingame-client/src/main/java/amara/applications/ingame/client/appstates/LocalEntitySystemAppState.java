@@ -80,6 +80,9 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new BuffVisualisationSystem_Turbo(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Wither(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Golden_Eagle(entitySceneMap));
+        ColorizerSystem colorizerSystem = new ColorizerSystem(entitySceneMap);
+        addEntitySystem(new StealthSystem(colorizerSystem));
+        addEntitySystem(colorizerSystem);
     }
 
     public void onInitialWorldLoaded() {

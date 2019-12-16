@@ -177,8 +177,7 @@ public class ModelSkin{
                         Geometry child = (Geometry) JMonkeyUtil.getChild(spatial, i);
                         if (getAttributeValue(currentMaterialElement, "alpha", false)) {
                             child.setQueueBucket(RenderQueue.Bucket.Transparent);
-                            material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-                            material.setFloat("AlphaDiscardThreshold", 0.05f);
+                            MaterialFactory.setTransparent(material, true);
                         }
                         child.setMaterial(material);
                     } catch (Exception ex) {
