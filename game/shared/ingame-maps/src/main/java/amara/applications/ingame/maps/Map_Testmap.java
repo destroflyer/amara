@@ -85,6 +85,7 @@ public class Map_Testmap extends Map{
                 unit.setComponent(new RequestUpdateAttributesComponent());
                 unit.setComponent(new IsTargetableComponent());
                 unit.setComponent(new IsVulnerableComponent());
+                unit.setComponent(new SightRangeComponent(30));
                 EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
                 unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
                 unit.setComponent(new TeamComponent(0));
@@ -170,6 +171,7 @@ public class Map_Testmap extends Map{
         entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(2.5f));
         boss.setComponent(new BaseAttributesComponent(baseAttributesEntity));
         boss.setComponent(new RequestUpdateAttributesComponent());
+        boss.setComponent(new SightRangeComponent(30));
         boss.setComponent(new IsTargetableComponent());
         boss.setComponent(new IsVulnerableComponent());
         EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");

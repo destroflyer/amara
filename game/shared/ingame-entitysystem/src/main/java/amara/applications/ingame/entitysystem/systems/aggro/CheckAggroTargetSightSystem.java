@@ -13,13 +13,13 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class CheckAggroTargetSightSystem implements EntitySystem{
-    
+public class CheckAggroTargetSightSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(AggroTargetComponent.class, SightRangeComponent.class)){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int entity : entityWorld.getEntitiesWithAll(AggroTargetComponent.class)) {
             int targetEntity = entityWorld.getComponent(entity, AggroTargetComponent.class).getTargetEntity();
-            if(!TeamVisionSystem.hasTeamSight(entityWorld, entity, targetEntity)){
+            if (!TeamVisionSystem.hasTeamSight(entityWorld, entity, targetEntity)) {
                 entityWorld.removeComponent(entity, AggroTargetComponent.class);
                 UnitUtil.cancelMovement(entityWorld, entity);
             }

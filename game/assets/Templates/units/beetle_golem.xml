@@ -47,6 +47,7 @@
             </entity>
         </baseAttributes>
         <requestUpdateAttributes/>
+        <sightRange>30</sightRange>
         <isTargetable/>
         <isVulnerable/>
         <!--spells-->
