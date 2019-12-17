@@ -37,7 +37,8 @@ public class ComponentsRegistrator_Generate{
         CastTypeComponent.class,
         CollisionGroupComponent.class,
         DamageHistoryComponent.class,
-        HealthBarStyleComponent.class
+        HealthBarStyleComponent.class,
+        ShopGoldExpensesComponent.class
     };
     private static final String[] nativeDataTypes = new String[]{"boolean","int","long","float","double"};
     private static final String[] nativeDataTypes_Defaults = new String[]{"false","0","0","0","0"};

@@ -6,6 +6,8 @@ package amara.applications.ingame.entitysystem.components.units;
 
 import com.jme3.network.serializing.Serializable;
 
+import java.util.HashMap;
+
 /**
  *
  * @author Carl
@@ -13,16 +15,16 @@ import com.jme3.network.serializing.Serializable;
 @Serializable
 public class ShopGoldExpensesComponent {
 
-    public ShopGoldExpensesComponent(){
+    public ShopGoldExpensesComponent() {
 
     }
 
-    public ShopGoldExpensesComponent(float gold){
-        this.gold = gold;
+    public ShopGoldExpensesComponent(HashMap<String, Float> goldPerCategory) {
+        this.goldPerCategory = goldPerCategory;
     }
-    private float gold;
+    private HashMap<String, Float> goldPerCategory;
 
-    public float getGold(){
-        return gold;
+    public HashMap<String, Float> getGoldPerCategory() {
+        return goldPerCategory;
     }
 }

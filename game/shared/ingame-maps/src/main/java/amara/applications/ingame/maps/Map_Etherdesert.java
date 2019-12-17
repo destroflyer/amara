@@ -177,7 +177,7 @@ public class Map_Etherdesert extends Map {
         entityWorld.setComponent(displayValuesOnBuyTrigger, new ShopUsageTriggerComponent());
         entityWorld.setComponent(displayValuesOnBuyTrigger, new CustomTargetComponent(playerEntity));
         int displayValuesEffect = entityWorld.createEntity();
-        entityWorld.setComponent(displayValuesEffect, new DisplayPlayerAnnouncementComponent("\"Your gold expenses: \" + source.shopGoldExpenses", -1));
+        entityWorld.setComponent(displayValuesEffect, new DisplayPlayerAnnouncementComponent("\"Your gold expenses: \" + source.shopGoldExpenses_total", -1));
         entityWorld.setComponent(displayValuesOnBuyTrigger, new TriggeredEffectComponent(displayValuesEffect));
         entityWorld.setComponent(displayValuesOnBuyTrigger, new TriggerSourceComponent(characterEntity));
         // Disable income trigger

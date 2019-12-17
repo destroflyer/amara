@@ -2253,6 +2253,22 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.items.ItemActiveComponent(spellEntity, consumable);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.items.ItemCategoriesComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemCategoriesComponent>("itemCategories"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.items.ItemCategoriesComponent construct(EntityWorld entityWorld, Element element){
+                String[] categories = new String[0];
+                String categoriesText = element.getText();
+                if(categoriesText != null){
+                    categories = categoriesText.split(",");
+                    for(int i=0;i<categories.length;i++){
+                        categories[i] = xmlTemplateManager.parseValue(entityWorld, categories[i]);
+                    }
+                }
+                return new amara.applications.ingame.entitysystem.components.items.ItemCategoriesComponent(categories);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.items.ItemIDComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemIDComponent>("itemID"){
 
@@ -4667,18 +4683,6 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.ShopGoldExpensesComponent.class);
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ShopGoldExpensesComponent>("shopGoldExpenses"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.units.ShopGoldExpensesComponent construct(EntityWorld entityWorld, Element element){
-                float gold = 0;
-                String goldText = element.getText();
-                if((goldText != null) && (goldText.length() > 0)){
-                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
-                }
-                return new amara.applications.ingame.entitysystem.components.units.ShopGoldExpensesComponent(gold);
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.SightRangeComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.SightRangeComponent.class.getDeclaredField("range"), componentFieldSerializer_Distance);

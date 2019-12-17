@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.entitysystem.systems.shop;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
@@ -23,9 +24,10 @@ import amara.libraries.entitysystem.templates.EntityTemplate;
  * @author Carl
  */
 public class ShopUtil{
-    
-    private static LinkedList<Integer> tmpItemEntities = new LinkedList<Integer>();
-    
+
+    public static final String CATEGORY_TOTAL = "total";
+    private static LinkedList<Integer> tmpItemEntities = new LinkedList<>();
+
     public static boolean isInShopRange(EntityWorld entityWorld, int entity){
         for(int shopEntity : entityWorld.getEntitiesWithAll(ShopRangeComponent.class, PositionComponent.class)){
             if(canUseShop(entityWorld, entity, shopEntity)){
@@ -81,7 +83,7 @@ public class ShopUtil{
             GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
             if((goldCost == 0) || ((goldComponent != null) && (goldComponent.getGold() >= goldCost))){
                 EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + itemID);
-                addGoldViaShop(entityWorld, entity, -1 * goldCost);
+                addItemGoldViaShop(entityWorld, entity, itemEntity, -1 * goldCost);
                 entityWorld.setComponent(entity, new InventoryComponent(Util.convertToArray_Integer(tmpItemEntities)));
                 entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
                 triggerShopUsageEffects(entityWorld, entity);
@@ -133,7 +135,7 @@ public class ShopUtil{
                     }
                     GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
                     if(goldComponent != null){
-                        addGoldViaShop(entityWorld, entity, isSellableComponent.getGold());
+                        addItemGoldViaShop(entityWorld, entity, itemEntity, isSellableComponent.getGold());
                     }
                     entityWorld.setComponent(entity, new InventoryComponent(newItemEntities));
                     entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
@@ -143,14 +145,29 @@ public class ShopUtil{
         }
     }
 
-    private static void addGoldViaShop(EntityWorld entityWorld, int entity, float gold) {
-        GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
-        if (goldComponent != null) {
-            entityWorld.setComponent(entity, new GoldComponent(goldComponent.getGold() + gold));
-            ShopGoldExpensesComponent shopGoldExpensesComponent = entityWorld.getComponent(entity, ShopGoldExpensesComponent.class);
-            float currentGoldExpenses = ((shopGoldExpensesComponent != null) ? shopGoldExpensesComponent.getGold() : 0);
-            entityWorld.setComponent(entity, new ShopGoldExpensesComponent(currentGoldExpenses - gold));
+    private static void addItemGoldViaShop(EntityWorld entityWorld, int shopperEntity, int itemEntity, float goldAmount) {
+        GoldComponent goldComponent = entityWorld.getComponent(shopperEntity, GoldComponent.class);
+        entityWorld.setComponent(shopperEntity, new GoldComponent(goldComponent.getGold() + goldAmount));
+        addToShopGoldExpenses(entityWorld, shopperEntity, itemEntity, -1 * goldAmount);
+    }
+
+    private static void addToShopGoldExpenses(EntityWorld entityWorld, int shopperEntity, int itemEntity, float goldAmount) {
+        // Collect categories
+        LinkedList<String> categories = new LinkedList<>();
+        categories.add(CATEGORY_TOTAL);
+        ItemCategoriesComponent itemCategoriesComponent = entityWorld.getComponent(itemEntity, ItemCategoriesComponent.class);
+        if (itemCategoriesComponent != null) {
+            for (String category : itemCategoriesComponent.getCategories()) {
+                categories.add(category);
+            }
         }
+        // Update component
+        ShopGoldExpensesComponent shopGoldExpensesComponent = entityWorld.getComponent(shopperEntity, ShopGoldExpensesComponent.class);
+        HashMap<String, Float> goldPerCategory = ((shopGoldExpensesComponent != null) ? shopGoldExpensesComponent.getGoldPerCategory() : new HashMap<>());
+        for (String category : categories) {
+            goldPerCategory.put(category, goldPerCategory.getOrDefault(category, 0f) + goldAmount);
+        }
+        entityWorld.setComponent(shopperEntity, new ShopGoldExpensesComponent(goldPerCategory));
     }
 
     private static void triggerShopUsageEffects(EntityWorld entityWorld, int shopUserEntity) {

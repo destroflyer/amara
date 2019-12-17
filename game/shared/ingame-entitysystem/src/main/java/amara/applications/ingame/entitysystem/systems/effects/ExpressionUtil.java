@@ -10,6 +10,8 @@ import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.expressions.ExpressionSpace;
 import amara.libraries.expressions.values.*;
 
+import java.util.Map;
+
 /**
  *
  * @author Carl
@@ -88,7 +90,11 @@ public class ExpressionUtil{
         ShopGoldExpensesComponent shopGoldExpensesComponent = entityWorld.getComponent(entity, ShopGoldExpensesComponent.class);
         fieldName = (name + SEPARATOR + "shopGoldExpenses");
         if(shopGoldExpensesComponent != null){
-            expressionSpace.setValue(fieldName, new NumericValue(shopGoldExpensesComponent.getGold()));
+            for (Map.Entry<String, Float> entry : shopGoldExpensesComponent.getGoldPerCategory().entrySet()) {
+                String category = entry.getKey();
+                Float gold = entry.getValue();
+                expressionSpace.setValue(fieldName + "_" + category, new NumericValue(gold));
+            }
         } else{
             expressionSpace.unsetValue(fieldName);
         }
