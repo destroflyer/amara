@@ -319,6 +319,7 @@ public class CustomGameTemplates{
                 int[] costs = new int[]{40, 120, 200, 330, 550, 85, 120, 40, 180, 150};
                 entityWrapper.setComponent(new ItemRecipeComponent(costs[towerIndex]));
                 entityWrapper.setComponent(new IsSellableComponent(costs[towerIndex]));
+                entityWrapper.setComponent(new ItemCategoriesComponent("military"));
                 int itemActiveEntity = entityWorld.createEntity();
                 entityWorld.setComponent(itemActiveEntity, new DescriptionComponent("Builds tower #" + towerIndex));
                 EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());

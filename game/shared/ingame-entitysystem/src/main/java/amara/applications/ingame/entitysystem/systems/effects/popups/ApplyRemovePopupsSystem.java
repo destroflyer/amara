@@ -13,13 +13,12 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class ApplyRemovePopupsSystem implements EntitySystem{
-    
+public class ApplyRemovePopupsSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, RemovePopupComponent.class)))
-        {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, RemovePopupComponent.class)) {
+            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
             entityWorld.removeComponent(targetEntity, PopupComponent.class);
         }
     }

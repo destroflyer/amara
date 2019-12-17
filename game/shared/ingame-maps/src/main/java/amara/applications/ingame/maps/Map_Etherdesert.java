@@ -11,6 +11,7 @@ import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.buffs.*;
 import amara.applications.ingame.entitysystem.components.effects.general.*;
 import amara.applications.ingame.entitysystem.components.effects.players.*;
+import amara.applications.ingame.entitysystem.components.effects.popups.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.effects.units.*;
 import amara.applications.ingame.entitysystem.components.general.*;
@@ -172,14 +173,6 @@ public class Map_Etherdesert extends Map {
         entityWorld.removeComponent(characterEntity, AutoAttackComponent.class);
         entityWorld.setComponent(characterEntity, new GoldComponent(200));
         entityWorld.setComponent(characterEntity, new IsBindedComponent(Float.MAX_VALUE));
-        // Display values on shop usage
-        int displayValuesOnBuyTrigger = entityWorld.createEntity();
-        entityWorld.setComponent(displayValuesOnBuyTrigger, new ShopUsageTriggerComponent());
-        entityWorld.setComponent(displayValuesOnBuyTrigger, new CustomTargetComponent(playerEntity));
-        int displayValuesEffect = entityWorld.createEntity();
-        entityWorld.setComponent(displayValuesEffect, new DisplayPlayerAnnouncementComponent("\"Your gold expenses: \" + source.shopGoldExpenses_total", -1));
-        entityWorld.setComponent(displayValuesOnBuyTrigger, new TriggeredEffectComponent(displayValuesEffect));
-        entityWorld.setComponent(displayValuesOnBuyTrigger, new TriggerSourceComponent(characterEntity));
         // Disable income trigger
         int disableIncomeTrigger = entityWorld.createEntity();
         entityWorld.setComponent(disableIncomeTrigger, new InstantTriggerComponent());
@@ -208,7 +201,7 @@ public class Map_Etherdesert extends Map {
         Vector2f[] spawnPositions = new Vector2f[]{
                 new Vector2f(167, 180),
                 new Vector2f(122, 180),
-                new Vector2f(87, 180),
+                new Vector2f(78, 180),
                 new Vector2f(33, 180)
         };
         entityWorld.setComponent(spawnCasterEntity, new PositionComponent(spawnPositions[playerIndex]));
@@ -217,6 +210,7 @@ public class Map_Etherdesert extends Map {
         entityWorld.setComponent(spawnSourceEntity, new EffectSourceComponent(spawnCasterEntity));
         int waves = 18;
         int[] creepsPerWave = new int[]{ 6, 6, 4, 6, 6, 7, 28, 1, 6, 6, 2, 1, 6, 6, 3, 6, 3, 1 };
+        int[] recommendedMilitaryValues = new int[]{ 100, 150, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000 };
         int[][] spawnTriggers = new int[waves][];
         for (int i = 0; i < waves; i++) {
             int[] waveSpawnTriggers = new int[creepsPerWave[i]];
@@ -240,6 +234,7 @@ public class Map_Etherdesert extends Map {
         }
         int[] activateSpawnsTriggers = new int[waves];
         int[] activateNextWaveTriggers = new int[waves];
+        int[] displayRecommendedMilitaryValueTriggers = new int[waves];
         for (int i = 0; i < waves; i++) {
             EntityWrapper activateSpawnsTriggger = entityWorld.getWrapped(entityWorld.createEntity());
             activateSpawnsTriggger.setComponent(new InstantTriggerComponent());
@@ -256,21 +251,56 @@ public class Map_Etherdesert extends Map {
             activateNextWaveTrigger.setComponent(new TriggerOnceComponent(true));
             activateNextWaveTriggers[i] = activateNextWaveTrigger.getId();
 
+            EntityWrapper displayRecommendedMilitaryValueTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+            displayRecommendedMilitaryValueTrigger.setComponent(new InstantTriggerComponent());
+            displayRecommendedMilitaryValueTrigger.setComponent(new CustomTargetComponent(playerEntity));
+            int displayRecommendedMilitaryValueEffect = entityWorld.createEntity();
+            entityWorld.setComponent(displayRecommendedMilitaryValueEffect, new DisplayPlayerAnnouncementComponent("\"Next wave: " + ((i + 1) + "/" + waves) + " - Recommended military value: " + recommendedMilitaryValues[i] + "\"", -1));
+            displayRecommendedMilitaryValueTrigger.setComponent(new TriggeredEffectComponent(displayRecommendedMilitaryValueEffect));
+            displayRecommendedMilitaryValueTrigger.setComponent(new TriggerOnceComponent(true));
+            displayRecommendedMilitaryValueTriggers[i] = displayRecommendedMilitaryValueTrigger.getId();
+
             if (i == 0) {
                 activateSpawnsTriggger.setComponent(new TriggerSourceComponent(entity));
                 activateNextWaveTrigger.setComponent(new TriggerSourceComponent(spawnCasterEntity));
+                displayRecommendedMilitaryValueTrigger.setComponent(new TriggerSourceComponent(entity));
             }
         }
         for (int i = 0; i < waves; i++) {
             int activateNextWaveTrigger = activateNextWaveTriggers[i];
             EntityWrapper activateNextWaveEffect = entityWorld.getWrapped(entityWorld.createEntity());
             if (i < (waves - 1)){
-                activateNextWaveEffect.setComponent(new AddEffectTriggersComponent(enableIncomeTrigger, disableIncomeTrigger, respawnTeamTrigger, activateSpawnsTriggers[i + 1], activateNextWaveTriggers[i + 1]));
+                activateNextWaveEffect.setComponent(new AddEffectTriggersComponent(enableIncomeTrigger, disableIncomeTrigger, respawnTeamTrigger, activateSpawnsTriggers[i + 1], activateNextWaveTriggers[i + 1], displayRecommendedMilitaryValueTriggers[i + 1]));
             } else {
                 activateNextWaveEffect.setComponent(new AddEffectTriggersComponent(winMapObjectiveTrigger));
             }
             entityWorld.setComponent(activateNextWaveTrigger, new TriggeredEffectComponent(activateNextWaveEffect.getId()));
         }
+        // Value signs
+        addValueSignEntity(entityWorld, playerIndex, characterEntity, spawnPositions, 0, "\"Military Value: \" + source.shopGoldExpenses_military");
+        addValueSignEntity(entityWorld, playerIndex, characterEntity, spawnPositions, 1, "\"Economy Value: \" + source.shopGoldExpenses_economy");
+    }
+
+    private void addValueSignEntity(EntityWorld entityWorld, int playerIndex, int characterEntity, Vector2f[] spawnPositions, int signIndex, String textExpression) {
+        boolean isSignLeftOrRight = (playerIndex < 2);
+        float signX = spawnPositions[playerIndex].getX() + ((isSignLeftOrRight ? 1 : -1) * 22);
+        float signY = spawnPositions[playerIndex].getY() - (20 + (signIndex * 9));
+        // Sign entity
+        int signEntity = entityWorld.createEntity();
+        entityWorld.setComponent(signEntity, new ModelComponent("Models/3dsa_fantasy_forest_sign_board/skin_" + (isSignLeftOrRight ? "right" : "left") + ".xml"));
+        entityWorld.setComponent(signEntity, new PositionComponent(new Vector2f(signX, signY)));
+        entityWorld.setComponent(signEntity, new DirectionComponent(new Vector2f(0, -1)));
+        entityWorld.setComponent(signEntity, new ScaleComponent(2));
+        entityWorld.setComponent(signEntity, new SightRangeComponent(5));
+        entityWorld.setComponent(signEntity, new TeamComponent(0));
+        // Sign update trigger
+        int displayValueOnBuyTrigger = entityWorld.createEntity();
+        entityWorld.setComponent(displayValueOnBuyTrigger, new ShopUsageTriggerComponent());
+        entityWorld.setComponent(displayValueOnBuyTrigger, new CustomTargetComponent(signEntity));
+        int displayValueEffect_Military = entityWorld.createEntity();
+        entityWorld.setComponent(displayValueEffect_Military, new AddPopupComponent(textExpression));
+        entityWorld.setComponent(displayValueOnBuyTrigger, new TriggeredEffectComponent(displayValueEffect_Military));
+        entityWorld.setComponent(displayValueOnBuyTrigger, new TriggerSourceComponent(characterEntity));
     }
 
     @Override

@@ -12,19 +12,19 @@ import amara.libraries.entitysystem.synchronizing.ComponentField;
  * @author Carl
  */
 @Serializable
-public class AddPopupComponent{
+public class AddPopupComponent {
 
-    public AddPopupComponent(){
-        
-    }
-    
-    public AddPopupComponent(int popupEntity){
-        this.popupEntity = popupEntity;
-    }
-    @ComponentField(type=ComponentField.Type.ENTITY)
-    private int popupEntity;
+    public AddPopupComponent() {
 
-    public int getPopupEntity(){
-        return popupEntity;
+    }
+
+    public AddPopupComponent(String expression) {
+        this.expression = expression;
+    }
+    @ComponentField(type=ComponentField.Type.EXPRESSION)
+    private String expression;
+
+    public String getExpression() {
+        return expression;
     }
 }

@@ -4,6 +4,7 @@
         <name>Income (Small)</name>
         <itemRecipe gold="25"/>
         <isSellable>25</isSellable>
+        <itemCategories>economy</itemCategories>
         <!--stats-->
         <itemActive consumable="true">
             <entity template="./etherdesert_income_active,7"/>

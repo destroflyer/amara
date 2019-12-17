@@ -201,6 +201,14 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         }catch(ExpressionException ex){
                         }
                     }
+                    AddPopupComponent addPopupComponent = effect.getComponent(AddPopupComponent.class);
+                    if(addPopupComponent != null){
+                        try {
+                            expressionSpace.parse(addPopupComponent.getExpression());
+                            effectImpact.setComponent(new ResultingPopupComponent(expressionSpace.getResult_String()));
+                        }catch(ExpressionException ex){
+                        }
+                    }
                     EntityUtil.transferComponents(entityWorld, effect.getId(), effectImpact.getId(), new Class[] {
                         AddComponentsComponent.class,
                         RemoveComponentsComponent.class,
@@ -241,7 +249,6 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         AddCollisionGroupsComponent.class,
                         DeactivateHitboxComponent.class,
                         RemoveCollisionGroupsComponent.class,
-                        AddPopupComponent.class,
                         RemovePopupComponent.class,
                         SpawnComponent.class,
                         AddAutoAttackSpellEffectsComponent.class,

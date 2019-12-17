@@ -1867,17 +1867,12 @@ public class ComponentsRegistrator{
         });
         //popups
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent.class.getDeclaredField("popupEntity"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent>("addPopup"){
 
             @Override
             public amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent construct(EntityWorld entityWorld, Element element){
-                int popupEntity = createChildEntity(entityWorld, element, 0, "popupEntity");
-                return new amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent(popupEntity);
+                String expression = xmlTemplateManager.parseValue(entityWorld, element.getText());
+                return new amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent(expression);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent.class);
@@ -1886,6 +1881,15 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.popups.ResultingPopupComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.popups.ResultingPopupComponent>("resultingPopup"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.popups.ResultingPopupComponent construct(EntityWorld entityWorld, Element element){
+                String text = xmlTemplateManager.parseValue(entityWorld, element.getText());
+                return new amara.applications.ingame.entitysystem.components.effects.popups.ResultingPopupComponent(text);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent.class);
@@ -2724,16 +2728,6 @@ public class ComponentsRegistrator{
                     index = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, indexText));
                 }
                 return new amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent(index);
-            }
-        });
-        //popups
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.popups.PopupTextComponent.class);
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.popups.PopupTextComponent>("popupText"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.popups.PopupTextComponent construct(EntityWorld entityWorld, Element element){
-                String text = xmlTemplateManager.parseValue(entityWorld, element.getText());
-                return new amara.applications.ingame.entitysystem.components.popups.PopupTextComponent(text);
             }
         });
         //shop
@@ -4518,17 +4512,12 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.PopupComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.PopupComponent.class.getDeclaredField("popupEntity"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.PopupComponent>("popup"){
 
             @Override
             public amara.applications.ingame.entitysystem.components.units.PopupComponent construct(EntityWorld entityWorld, Element element){
-                int popupEntity = createChildEntity(entityWorld, element, 0, "popupEntity");
-                return new amara.applications.ingame.entitysystem.components.units.PopupComponent(popupEntity);
+                String text = xmlTemplateManager.parseValue(entityWorld, element.getText());
+                return new amara.applications.ingame.entitysystem.components.units.PopupComponent(text);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.ReactionComponent.class);

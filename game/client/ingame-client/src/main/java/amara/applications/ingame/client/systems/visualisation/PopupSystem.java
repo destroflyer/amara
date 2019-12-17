@@ -15,7 +15,6 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.applications.ingame.client.systems.visualisation.meshes.PopupMesh;
-import amara.applications.ingame.entitysystem.components.popups.PopupTextComponent;
 import amara.applications.ingame.entitysystem.components.units.PopupComponent;
 import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.entitysystem.EntityWorld;
@@ -24,19 +23,19 @@ import amara.libraries.entitysystem.EntityWorld;
  *
  * @author Carl
  */
-public class PopupSystem extends TopHUDAttachmentSystem{
+public class PopupSystem extends TopHUDAttachmentSystem {
 
-    public PopupSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
+    public PopupSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap) {
         super(hudAttachmentsSystem, entityHeightMap, PopupComponent.class);
-        hudOffset = new Vector3f(0, 18, 2);
+        hudOffset = new Vector3f(0, 0, 2);
     }
+    private final static String TEXT_NAME = "text";
     private final float textSize = 15;
     private final float width = 1000;
-    
+
     @Override
-    protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
-        int popupEntity = entityWorld.getComponent(entity, PopupComponent.class).getPopupEntity();
-        String text = entityWorld.getComponent(popupEntity, PopupTextComponent.class).getText();
+    protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity) {
+        String text = entityWorld.getComponent(entity, PopupComponent.class).getText();
         int rows = text.split("\n").length;
         Node node = new Node();
         Geometry geometry = new Geometry("", new PopupMesh(rows));
@@ -46,6 +45,7 @@ public class PopupSystem extends TopHUDAttachmentSystem{
         node.attachChild(geometry);
         BitmapFont font = MaterialFactory.getAssetManager().loadFont("Interface/fonts/Verdana_18.fnt");
         BitmapText bitmapText = new BitmapText(font);
+        bitmapText.setName(TEXT_NAME);
         bitmapText.setSize(textSize);
         bitmapText.setColor(ColorRGBA.Black);
         bitmapText.setBox(new Rectangle((-1 * (width / 2)), 0, width, 1));
@@ -57,7 +57,10 @@ public class PopupSystem extends TopHUDAttachmentSystem{
     }
 
     @Override
-    protected void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment){
-        
+    protected void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment) {
+        String text = entityWorld.getComponent(entity, PopupComponent.class).getText();
+        Node node = (Node) visualAttachment;
+        BitmapText bitmapText = (BitmapText) node.getChild(TEXT_NAME);
+        bitmapText.setText(text);
     }
 }
