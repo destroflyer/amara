@@ -210,7 +210,7 @@ public class Map_Etherdesert extends Map {
         entityWorld.setComponent(spawnSourceEntity, new EffectSourceComponent(spawnCasterEntity));
         int waves = 18;
         int[] creepsPerWave = new int[]{ 6, 6, 4, 6, 6, 7, 28, 1, 6, 6, 2, 1, 6, 6, 3, 6, 3, 1 };
-        int[] recommendedMilitaryValues = new int[]{ 100, 150, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000 };
+        int[] recommendedMilitaryValues = new int[]{ 100, 150, 250, 350, 500, 670, 750, 1000, 1250, 1500, 1800, 2600, 3000, 3500, 4000, 5000, 7000, 10000 };
         int[][] spawnTriggers = new int[waves][];
         for (int i = 0; i < waves; i++) {
             int[] waveSpawnTriggers = new int[creepsPerWave[i]];
