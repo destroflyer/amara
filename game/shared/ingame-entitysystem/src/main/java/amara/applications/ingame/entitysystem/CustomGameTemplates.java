@@ -279,6 +279,7 @@ public class CustomGameTemplates{
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(2.5f));
                 entityWrapper.setComponent(new BaseAttributesComponent(baseAttributesEntity));
                 entityWrapper.setComponent(new RequestUpdateAttributesComponent());
+                entityWrapper.setComponent(new SightRangeComponent(30));
                 entityWrapper.setComponent(new IsTargetableComponent());
                 entityWrapper.setComponent(new IsVulnerableComponent());
 

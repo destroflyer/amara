@@ -13,7 +13,7 @@ import amara.libraries.applications.display.models.*;
 public class ModelModifier_EnergyProjectile extends ModelModifier{
 
     @Override
-    public void modify(ModelObject modelObject){
-        modelObject.getModelSpatial().updateLogicalState(10);
+    public void modify(RegisteredModel registeredModel){
+        registeredModel.getNode().updateLogicalState(10);
     }
 }

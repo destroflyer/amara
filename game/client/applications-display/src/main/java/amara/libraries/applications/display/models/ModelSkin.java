@@ -10,14 +10,16 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.jme3.animation.AnimControl;
+import com.jme3.animation.SkeletonControl;
 import com.jme3.material.Material;
-import com.jme3.material.RenderState;
 import com.jme3.material.RenderState.FaceCullMode;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.texture.Texture;
 import com.jme3.util.TangentBinormalGenerator;
@@ -44,12 +46,14 @@ public class ModelSkin{
     private Element positionElement;
     private Element materialElement;
     private Element modifiersElement;
+    private Element customSkeletonElement;
     private String name;
     private float modelNormScale;
     private Vector3f modelScale;
     private String rigType;
     private float materialAmbient;
     private LinkedList<ModelModifier> modelModifiers = new LinkedList<>();
+    private LinkedList<ModelSkeleton> modelSkeletons = new LinkedList<>();
 
     public static ModelSkin get(String filePath) {
         return cachedSkins.computeIfAbsent(filePath, fp -> new ModelSkin(filePath));
@@ -64,6 +68,7 @@ public class ModelSkin{
             positionElement = modelElement.getChild("position");
             materialElement = modelElement.getChild("material");
             modifiersElement = modelElement.getChild("modifiers");
+            customSkeletonElement = modelElement.getChild("customSkeletons");
             modelNormScale = getAttributeValue(modelElement, "normScale", 1);
             modelScale = getAttributeValue(modelElement, "scale", Vector3f.UNIT_XYZ);
             rigType = modelElement.getAttributeValue("rigType");
@@ -74,7 +79,7 @@ public class ModelSkin{
     }
 
     private boolean getAttributeValue(Element element, String attributeName, boolean defaultValue) {
-        return (getAttributeValue(element, attributeName, (defaultValue?1:0)) == 1);
+        return (getAttributeValue(element, attributeName, (defaultValue ? 1 : 0)) == 1);
     }
 
     private float getAttributeValue(Element element, String attributeName, float defaultValue) {
@@ -112,28 +117,29 @@ public class ModelSkin{
         return defaultValue;
     }
 
-    public Spatial loadSpatial() {
-        Spatial spatial = loadModel();
-        loadMaterial(spatial);
-        loadPosition(spatial);
+    public Node load() {
+        Node node = loadModel();
+        loadMaterial(node);
+        loadPosition(node);
         loadModifiers();
-        applyGeometryInformation(spatial);
-        return spatial;
+        loadSkeletons(node);
+        applyGeometryInformation(node);
+        return node;
     }
 
-    private Spatial loadModel() {
-        String modelPath = getModelFilePath();
-        Spatial spatial = MaterialFactory.getAssetManager().loadModel(modelPath);
-        spatial.setLocalScale(modelScale.mult(modelNormScale));
+    private Node loadModel() {
+        String modelPath = getModelFilePath(name, name);
+        Node node = (Node) MaterialFactory.getAssetManager().loadModel(modelPath);
+        node.setLocalScale(modelScale.mult(modelNormScale));
         if (getAttributeValue(modelElement, "generateTangents", false)) {
-            TangentBinormalGenerator.generate(spatial);
+            TangentBinormalGenerator.generate(node);
         }
-        return spatial;
+        return node;
     }
 
-    private String getModelFilePath() {
+    private String getModelFilePath(String modelName, String fileName) {
         for (String FILE_EXTENSION : FILE_EXTENSIONS) {
-            String modelFilePath = getModelFilePath(FILE_EXTENSION);
+            String modelFilePath = getModelFilePath(modelName, fileName, FILE_EXTENSION);
             if (FileAssets.exists(modelFilePath)) {
                 return modelFilePath;
             }
@@ -141,11 +147,11 @@ public class ModelSkin{
         return null;
     }
 
-    private String getModelFilePath(String fileExtension) {
-        return "Models/" + name + "/" + name + "." + fileExtension;
+    private String getModelFilePath(String modelName, String fileName, String fileExtension) {
+        return "Models/" + modelName + "/" + fileName + "." + fileExtension;
     }
 
-    private void loadMaterial(Spatial spatial) {
+    private void loadMaterial(Node node) {
         if (materialElement != null) {
             List<Element> materialElements = materialElement.getChildren();
             for (int i = 0; i < materialElements.size(); i++){
@@ -174,7 +180,7 @@ public class ModelSkin{
                         MaterialFactory.setFilter_Nearest(material);
                     }
                     try {
-                        Geometry child = (Geometry) JMonkeyUtil.getChild(spatial, i);
+                        Geometry child = (Geometry) JMonkeyUtil.getChild(node, i);
                         if (getAttributeValue(currentMaterialElement, "alpha", false)) {
                             child.setQueueBucket(RenderQueue.Bucket.Transparent);
                             MaterialFactory.setTransparent(material, true);
@@ -199,22 +205,22 @@ public class ModelSkin{
         return "Models/" + sourceName + "/resources/";
     }
 
-    private void loadPosition(Spatial spatial) {
+    private void loadPosition(Node node) {
         if (positionElement != null) {
             Element locationElement = positionElement.getChild("location");
             if (locationElement != null) {
                 float[] location = Util.parseToFloatArray(locationElement.getText().split(","));
-                spatial.setLocalTranslation(location[0], location[1], location[2]);
+                node.setLocalTranslation(location[0], location[1], location[2]);
             }
             Element directionElement = positionElement.getChild("direction");
             if (directionElement != null) {
                 float[] direction = Util.parseToFloatArray(directionElement.getText().split(","));
-                JMonkeyUtil.setLocalRotation(spatial, new Vector3f(direction[0], direction[1], direction[2]));
+                JMonkeyUtil.setLocalRotation(node, new Vector3f(direction[0], direction[1], direction[2]));
             }
             Element rotationElement = positionElement.getChild("rotation");
             if (rotationElement != null) {
                 float[] rotation = Util.parseToFloatArray(rotationElement.getText().split(","));
-                spatial.rotate(new Quaternion(rotation[0], rotation[1], rotation[2], rotation[3]));
+                node.rotate(new Quaternion(rotation[0], rotation[1], rotation[2], rotation[3]));
             }
         }
     }
@@ -236,8 +242,35 @@ public class ModelSkin{
         return modelModifiers;
     }
 
-    private void applyGeometryInformation(Spatial spatial) {
-        LinkedList<Geometry> geometryChilds = JMonkeyUtil.getAllGeometryChilds(spatial);
+    private void loadSkeletons(Node node) {
+        modelSkeletons.clear();
+        tryAddSkeleton(node);
+        if (customSkeletonElement != null){
+            for (Object childObject : customSkeletonElement.getChildren("model")) {
+                Element modelElement = (Element) childObject;
+                String modelFilePath = getModelFilePath(name, modelElement.getText());
+                Spatial customSpatial = MaterialFactory.getAssetManager().loadModel(modelFilePath);
+                tryAddSkeleton(customSpatial);
+            }
+        }
+    }
+
+    private void tryAddSkeleton(Spatial spatial) {
+        SkeletonControl skeletonControl = spatial.getControl(SkeletonControl.class);
+        AnimControl animControl = spatial.getControl(AnimControl.class);
+        if ((skeletonControl != null) && (animControl != null)) {
+            spatial.removeControl(SkeletonControl.class);
+            spatial.removeControl(AnimControl.class);
+            modelSkeletons.add(new ModelSkeleton(skeletonControl, animControl));
+        }
+    }
+
+    public LinkedList<ModelSkeleton> getModelSkeletons() {
+        return modelSkeletons;
+    }
+
+    private void applyGeometryInformation(Node node) {
+        LinkedList<Geometry> geometryChilds = JMonkeyUtil.getAllGeometryChilds(node);
         for (Geometry geometry : geometryChilds) {
             Material material = geometry.getMaterial();
             MaterialFactory.generateAmbientColor(material, materialAmbient);

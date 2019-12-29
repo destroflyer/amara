@@ -6,10 +6,9 @@ package amara.libraries.applications.display.ingame.models.modifiers;
 
 import amara.libraries.applications.display.JMonkeyUtil;
 import amara.libraries.applications.display.models.ModelModifier;
-import amara.libraries.applications.display.models.ModelObject;
+import amara.libraries.applications.display.models.RegisteredModel;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
-import com.jme3.scene.Spatial;
 import com.jme3.scene.control.AbstractControl;
 
 /**
@@ -19,9 +18,8 @@ import com.jme3.scene.control.AbstractControl;
 public class ModelModifier_Maw_Rock extends ModelModifier {
 
     @Override
-    public void modify(ModelObject modelObject) {
-        Spatial model = modelObject.getModelSpatial();
-        model.addControl(new AbstractControl() {
+    public void modify(RegisteredModel registeredModel) {
+        registeredModel.getNode().addControl(new AbstractControl() {
 
             @Override
             protected void controlUpdate(float lastTimePerFrame) {

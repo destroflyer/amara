@@ -126,19 +126,19 @@ public class AnimationSystem implements EntitySystem{
     private void updateModel(EntityWorld entityWorld, int entity, int animationEntity, boolean updateName, boolean updateProperties){
         ModelObject modelObject = getModelObject(entity);
         if(modelObject != null){
-            if(updateName){
-                NameComponent nameComponent = entityWorld.getComponent(animationEntity, NameComponent.class);
-                if(nameComponent != null){
+            NameComponent nameComponent = entityWorld.getComponent(animationEntity, NameComponent.class);
+            if (nameComponent != null) {
+                if(updateName){
                     modelObject.setAnimationName(nameComponent.getName());
                 }
-            }
-            if(updateProperties){
-                LoopDurationComponent loopDurationComponent = entityWorld.getComponent(animationEntity, LoopDurationComponent.class);
-                if(loopDurationComponent != null){
-                    float gameSpeed = entityWorld.getComponent(Game.ENTITY, GameSpeedComponent.class).getSpeed();
-                    float loopDuration = (loopDurationComponent.getDuration() / gameSpeed);
-                    boolean isLoop = (!entityWorld.hasComponent(animationEntity, FreezeAfterPlayingComponent.class));
-                    modelObject.setAnimationProperties(loopDuration, isLoop);
+                if(updateProperties){
+                    LoopDurationComponent loopDurationComponent = entityWorld.getComponent(animationEntity, LoopDurationComponent.class);
+                    if(loopDurationComponent != null){
+                        float gameSpeed = entityWorld.getComponent(Game.ENTITY, GameSpeedComponent.class).getSpeed();
+                        float loopDuration = (loopDurationComponent.getDuration() / gameSpeed);
+                        boolean isLoop = (!entityWorld.hasComponent(animationEntity, FreezeAfterPlayingComponent.class));
+                        modelObject.setAnimationProperties(loopDuration, isLoop);
+                    }
                 }
             }
         }

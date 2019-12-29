@@ -13,40 +13,43 @@ import amara.applications.ingame.client.systems.visualisation.*;
 import amara.libraries.applications.display.JMonkeyUtil;
 import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.applications.display.models.ModelObject;
+import amara.libraries.applications.display.models.RegisteredModel;
 import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *
  * @author Carl
  */
-public class BuffVisualisationSystem_Electrified extends BuffVisualisationSystem{
+public class BuffVisualisationSystem_Electrified extends BuffVisualisationSystem {
 
-    public BuffVisualisationSystem_Electrified(EntitySceneMap entitySceneMap){
+    public BuffVisualisationSystem_Electrified(EntitySceneMap entitySceneMap) {
         super(entitySceneMap, "electrified");
         scaleVisualisation = false;
     }
-    
+    private final static String NODE_NAME_CLONED_MODEL = "electrifiedModel";
+
     @Override
     protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
-        ModelObject modelObject = getModelObject(entitySceneMap.requestNode(targetEntity));
-        Spatial clonedModel = modelObject.getModelSpatial().deepClone();
+        ModelObject modelObject = getModelObject(targetEntity);
+        RegisteredModel clonedModel = modelObject.loadAndRegisterModel();
+        clonedModel.getNode().setName(NODE_NAME_CLONED_MODEL);
         Material material = MaterialFactory.getAssetManager().loadMaterial("Shaders/electricity/materials/electricity2.j3m");
-        for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel)){
+        for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel.getNode())) {
             geometry.setMaterial(material);
             geometry.setQueueBucket(RenderQueue.Bucket.Transparent);
         }
-        modelObject.registerModel(clonedModel);
-        return clonedModel;
+        return null;
     }
 
     @Override
-    protected void removeVisualAttachment(int entity, Node entityNode, Spatial visualAttachment){
-        super.removeVisualAttachment(entity, entityNode, visualAttachment);
-        ModelObject modelObject = getModelObject(entityNode);
-        modelObject.unregisterModel(visualAttachment);
+    protected void removeVisualAttachment(int entity) {
+        ModelObject modelObject = getModelObject(entity);
+        Spatial clonedModel = modelObject.getChild(NODE_NAME_CLONED_MODEL);
+        modelObject.unregisterModel(clonedModel);
     }
-    
-    private ModelObject getModelObject(Node node){
+
+    private ModelObject getModelObject(int entity) {
+        Node node = entitySceneMap.requestNode(entity);
         return (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
     }
 }

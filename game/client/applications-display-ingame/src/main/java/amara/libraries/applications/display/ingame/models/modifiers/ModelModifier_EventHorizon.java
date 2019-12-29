@@ -24,7 +24,7 @@ import amara.libraries.applications.display.models.*;
 public class ModelModifier_EventHorizon extends ModelModifier{
 
     @Override
-    public void modify(ModelObject modelObject){
+    public void modify(RegisteredModel registeredModel){
         float radius = 4.5f;
         for(int i=0;i<5;i++){
             ParticleEmitter particleEmitter = new ParticleEmitter("", ParticleMesh.Type.Triangle, 40);
@@ -58,7 +58,7 @@ public class ModelModifier_EventHorizon extends ModelModifier{
             Vector3f direction3f = new Vector3f(direction2f.getX(), 0, direction2f.getY());
             particleEmitter.setLocalTranslation(new Vector3f(x, 0, z).subtractLocal(direction3f.mult(radius / 2)));
             JMonkeyUtil.setLocalRotation(particleEmitter, direction3f);
-            modelObject.attachChild(particleEmitter);
+            registeredModel.getNode().attachChild(particleEmitter);
         }
     }
 }

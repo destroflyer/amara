@@ -25,7 +25,7 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
     private final float scale = 2.5f;
     
     @Override
-    public void modify(ModelObject modelObject){
+    public void modify(RegisteredModel registeredModel){
         //Ring
         Emitter ring = new Emitter();
         ring.setName("ring");
@@ -62,7 +62,7 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
         ring.getInfluencer(RotationInfluencer.class).setUseRandomDirection(true);
         ring.setLocalTranslation(0, 0.01f, 0);
         ring.setLocalScale(0.5f);
-        addEmitter(modelObject, ring);
+        addEmitter(registeredModel, ring);
         //Emitter 1
         Emitter emitter1 = new Emitter();
         emitter1.setName("emitter1");
@@ -94,7 +94,7 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
         emitter1.getInfluencer(SizeInfluencer.class).addSize(new Vector3f(0.05f, 0.05f, 0.05f).multLocal(scale));
         emitter1.getInfluencer(SizeInfluencer.class).addSize(new Vector3f(2, 2, 0.5f).multLocal(scale));
         emitter1.getInfluencer(SizeInfluencer.class).setEnabled(true);
-        addEmitter(modelObject, emitter1);
+        addEmitter(registeredModel, emitter1);
         //Emitter 2
         Emitter emitter2 = new Emitter();
         emitter2.setName("emitter2");
@@ -129,7 +129,7 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
         emitter2.getInfluencer(SizeInfluencer.class).addSize(new Vector3f(0.015f, 0.015f, 0.015f).multLocal(scale));
         emitter2.getInfluencer(SizeInfluencer.class).addSize(new Vector3f(0.015f, 0.015f, 0.015f).multLocal(scale));
         emitter2.getInfluencer(SizeInfluencer.class).setEnabled(true);
-        addEmitter(modelObject, emitter2);
+        addEmitter(registeredModel, emitter2);
         //Water Spout
         Emitter waterSpout = new Emitter();
         waterSpout.setName("waterSpout");
@@ -173,7 +173,7 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
         waterSpout.getInfluencer(RotationInfluencer.class).setUseRandomStartRotation(false, false, true);
         waterSpout.setLocalTranslation(0, 6, 0);
         waterSpout.setLocalScale(0.015f);
-        addEmitter(modelObject, waterSpout);
+        addEmitter(registeredModel, waterSpout);
         //Emitter 3
         Emitter emitter3 = new Emitter();
         emitter3.setName("emitter3");
@@ -214,7 +214,7 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
         emitter3.getInfluencer(SpriteInfluencer.class).setUseRandomStartImage(true);
         emitter3.getInfluencer(SpriteInfluencer.class).setAnimate(false);
         emitter3.setLocalScale(0.05f);
-        addEmitter(modelObject, emitter3);
+        addEmitter(registeredModel, emitter3);
         //Emitter 4
         Emitter emitter4 = new Emitter();
         emitter4.setName("emitter4");
@@ -258,12 +258,12 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
         emitter4.getInfluencer(RotationInfluencer.class).setEnabled(false);
         emitter4.setLocalTranslation(0, 0, 0);
         emitter4.setLocalScale(0.05f);
-        addEmitter(modelObject, emitter4);
+        addEmitter(registeredModel, emitter4);
     }
     
-    private void addEmitter(ModelObject modelObject, Emitter emitter){
+    private void addEmitter(RegisteredModel registeredModel, Emitter emitter){
         emitter.initialize(MaterialFactory.getAssetManager());
-        modelObject.addControl(emitter);
+        registeredModel.getNode().addControl(emitter);
         emitter.getParticleNode().setShadowMode(RenderQueue.ShadowMode.Off);
         emitter.setEnabled(true);
         for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(emitter.getParticleNode())){

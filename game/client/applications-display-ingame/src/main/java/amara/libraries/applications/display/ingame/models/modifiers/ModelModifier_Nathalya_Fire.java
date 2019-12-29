@@ -4,7 +4,6 @@
  */
 package amara.libraries.applications.display.ingame.models.modifiers;
 
-import com.jme3.animation.SkeletonControl;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -19,9 +18,8 @@ import amara.libraries.applications.display.models.*;
 public class ModelModifier_Nathalya_Fire extends ModelModifier{
 
     @Override
-    public void modify(ModelObject modelObject){
-        SkeletonControl skeletonControl = modelObject.getModelSpatial().getControl(SkeletonControl.class);
-        Node swordNode = skeletonControl.getAttachmentsNode("Bip01_R_Hand");
+    public void modify(RegisteredModel registeredModel){
+        Node swordNode = registeredModel.requestBoneAttachmentsNode("Bip01_R_Hand");
         Spatial fire = MaterialFactory.getAssetManager().loadModel("Models/fireball/fireball.j3o");
         fire.setLocalTranslation(12, 2, 87);
         fire.setLocalScale(10, 10, 16);

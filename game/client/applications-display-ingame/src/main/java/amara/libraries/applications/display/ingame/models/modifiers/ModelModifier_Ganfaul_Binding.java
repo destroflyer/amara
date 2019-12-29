@@ -16,8 +16,8 @@ import amara.libraries.applications.display.models.*;
 public class ModelModifier_Ganfaul_Binding extends ModelModifier{
 
     @Override
-    public void modify(ModelObject modelObject){
-        Node node = (Node) modelObject.getModelSpatial();
+    public void modify(RegisteredModel registeredModel){
+        Node node = registeredModel.getNode();
         Spatial particles = new ModelObject(null, "Models/ganfaul_binding_particles/skin.xml");
         node.attachChild(particles);
         ParticleEmitter particleEmitter = (ParticleEmitter) node.getChild(0);

@@ -20,8 +20,8 @@ import amara.libraries.applications.display.models.*;
 public class ModelModifier_Ganfaul_Binding_Particles extends ModelModifier{
 
     @Override
-    public void modify(ModelObject modelObject){
-        Node node = (Node) modelObject.getModelSpatial();
+    public void modify(RegisteredModel registeredModel){
+        Node node = registeredModel.getNode();
         int spheresCount = 3;
         for(int i=0;i<spheresCount;i++){
             Spatial particle = MaterialFactory.getAssetManager().loadModel("Models/ganfaul_binding/ganfaul_binding.j3o");

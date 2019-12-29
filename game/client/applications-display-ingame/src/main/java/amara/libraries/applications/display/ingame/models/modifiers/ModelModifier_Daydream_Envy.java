@@ -16,25 +16,25 @@ import amara.libraries.applications.display.models.*;
  *
  * @author Carl
  */
-public class ModelModifier_Daydream_Envy extends ModelModifier{
+public class ModelModifier_Daydream_Envy extends ModelModifier {
 
     @Override
-    public void modify(ModelObject modelObject){
-        for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(modelObject.getModelSpatial())){
+    public void modify(RegisteredModel registeredModel) {
+        for (Geometry geometry : JMonkeyUtil.getAllGeometryChilds(registeredModel.getNode())) {
             geometry.setCullHint(Spatial.CullHint.Always);
         }
-        skeletonControl = modelObject.getModelSpatial().getControl(SkeletonControl.class);
-        addAttachment(skeletonControl.getSkeleton().getBone("root"));
+        SkeletonControl skeletonControl = registeredModel.getNode().getControl(SkeletonControl.class);
+        Bone rootBone = skeletonControl.getSkeleton().getBone("root");
+        addAttachment(registeredModel, rootBone);
     }
-    private SkeletonControl skeletonControl;
-    
-    private void addAttachment(Bone bone){
-        Spatial minion = ModelSkin.get("Models/minion/skin_default.xml").loadSpatial();
+
+    private void addAttachment(RegisteredModel registeredModel, Bone bone) {
+        Spatial minion = ModelSkin.get("Models/minion/skin_default.xml").load();
         minion.setLocalScale(0.6f);
-        Node node = skeletonControl.getAttachmentsNode(bone.getName());
+        Node node = registeredModel.requestBoneAttachmentsNode(bone.getName());
         node.attachChild(minion);
-        for(Bone childBone : bone.getChildren()){
-            addAttachment(childBone);
+        for (Bone childBone : bone.getChildren()) {
+            addAttachment(registeredModel, childBone);
         }
     }
 }

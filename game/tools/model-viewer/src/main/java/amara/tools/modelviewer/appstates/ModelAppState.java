@@ -18,7 +18,11 @@ import com.jme3.animation.AnimChannel;
 import amara.libraries.applications.display.JMonkeyUtil;
 import amara.libraries.applications.display.appstates.BaseDisplayAppState;
 import amara.libraries.applications.display.models.ModelObject;
+import amara.libraries.applications.display.models.ModelSkeleton;
 import amara.tools.modelviewer.ModelViewerApplication;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -27,6 +31,7 @@ import amara.tools.modelviewer.ModelViewerApplication;
 public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> implements ActionListener{
     
     private final String[] modelSkinPaths = new String[]{
+        "Models/scarlet/skin_default.xml",
         "Models/kachujin/skin_default.xml",
         "Models/maw/skin_default.xml",
         "Models/maria/skin_default.xml",
@@ -64,13 +69,12 @@ public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> i
         animationNames = new String[modelSkinPaths.length][];
         for(int i=0;i<modelObjects.length;i++){
             modelObjects[i] = new ModelObject(mainApplication, modelSkinPaths[i]);
-            AnimControl animationControl = modelObjects[i].getModelSpatial().getControl(AnimControl.class);
-            if(animationControl != null){
-                animationNames[i] = animationControl.getAnimationNames().toArray(new String[0]);
+            List<String> modelAnimationNames = new LinkedList<>();
+            for (ModelSkeleton skeleton : modelObjects[i].getSkeletons()) {
+                AnimControl animationControl = skeleton.getAnimationControl();
+                modelAnimationNames.addAll(animationControl.getAnimationNames());
             }
-            else{
-                animationNames[i] = new String[0];
-            }
+            animationNames[i] = modelAnimationNames.toArray(new String[0]);
         }
         mainApplication.getInputManager().addMapping("mouse_click_left", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
         mainApplication.getInputManager().addMapping("refresh", new KeyTrigger(KeyInput.KEY_F5));
@@ -95,11 +99,11 @@ public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> i
             String[] pathParts1 = modelSkinPaths[modelIndex].split("/");
             String[] pathParts2 = modelSkinPaths[index].split("/");
             if(pathParts1[1].equals(pathParts2[1])){
-                AnimControl animationControl1 = modelObjects[modelIndex].getModelSpatial().getControl(AnimControl.class);
-                AnimControl animationControl2 = modelObjects[index].getModelSpatial().getControl(AnimControl.class);
+                AnimControl animationControl1 = modelObjects[modelIndex].getModelNode().getControl(AnimControl.class);
+                AnimControl animationControl2 = modelObjects[index].getModelNode().getControl(AnimControl.class);
                 if((animationControl1 != null) && (animationControl2 != null)){
-                    AnimChannel animationChannel1 = modelObjects[modelIndex].getModelSpatial().getControl(AnimControl.class).getChannel(0);
-                    AnimChannel animationChannel2 = modelObjects[index].getModelSpatial().getControl(AnimControl.class).getChannel(0);
+                    AnimChannel animationChannel1 = modelObjects[modelIndex].getModelNode().getControl(AnimControl.class).getChannel(0);
+                    AnimChannel animationChannel2 = modelObjects[index].getModelNode().getControl(AnimControl.class).getChannel(0);
                     JMonkeyUtil.copyAnimation(animationChannel1, animationChannel2);
                 }
             }

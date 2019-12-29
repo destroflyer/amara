@@ -14,42 +14,51 @@ import amara.applications.ingame.client.systems.visualisation.*;
 import amara.libraries.applications.display.JMonkeyUtil;
 import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.applications.display.models.ModelObject;
+import amara.libraries.applications.display.models.RegisteredModel;
 import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *
  * @author Carl
  */
-public class BuffVisualisationSystem_Golden_Eagle extends BuffVisualisationSystem{
+public class BuffVisualisationSystem_Golden_Eagle extends BuffVisualisationSystem {
 
-    public BuffVisualisationSystem_Golden_Eagle(EntitySceneMap entitySceneMap){
+    public BuffVisualisationSystem_Golden_Eagle(EntitySceneMap entitySceneMap) {
         super(entitySceneMap, "golden_eagle");
         scaleVisualisation = false;
     }
-    
+    private final static String NODE_NAME_CLONED_MODEL = "goldenEagledModel";
+
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
-        ModelObject modelObject = getModelObject(entitySceneMap.requestNode(targetEntity));
-        Spatial clonedModel = modelObject.getModelSpatial().deepClone();
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity) {
+        ModelObject modelObject = getModelObject(targetEntity);
+        modelObject.getModelNode().setCullHint(Spatial.CullHint.Always);
+        RegisteredModel clonedModel = modelObject.loadAndRegisterModel();
+        clonedModel.getNode().setName(NODE_NAME_CLONED_MODEL);
         Material material = MaterialFactory.getAssetManager().loadMaterial("Shaders/glass/materials/glass_3.j3m");
-        for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel)){
+        for (Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel.getNode())) {
             geometry.setMaterial(material);
             geometry.setQueueBucket(RenderQueue.Bucket.Transparent);
         }
-        AnimChannel animationChannel = modelObject.copyAnimation(clonedModel);
-        animationChannel.setSpeed(0);
-        modelObject.setCullHint(Spatial.CullHint.Always);
-        return clonedModel;
+        AnimChannel animationChannel = clonedModel.getActiveAnimationChannel();
+        if (animationChannel != null) {
+            AnimChannel originalAnimationChannel = modelObject.getOriginalRegisteredModel().getActiveAnimationChannel();
+            JMonkeyUtil.copyAnimation(originalAnimationChannel, animationChannel);
+            animationChannel.setSpeed(0);
+        }
+        return null;
     }
 
     @Override
-    protected void removeVisualAttachment(int entity, Node entityNode, Spatial visualAttachment){
-        super.removeVisualAttachment(entity, entityNode, visualAttachment);
-        ModelObject modelObject = getModelObject(entityNode);
-        modelObject.setCullHint(Spatial.CullHint.Inherit);
+    protected void removeVisualAttachment(int entity) {
+        ModelObject modelObject = getModelObject(entity);
+        modelObject.getModelNode().setCullHint(Spatial.CullHint.Inherit);
+        Spatial clonedModel = modelObject.getChild(NODE_NAME_CLONED_MODEL);
+        modelObject.unregisterModel(clonedModel);
     }
-    
-    private ModelObject getModelObject(Node entityNode){
-        return (ModelObject) entityNode.getChild(ModelSystem.NODE_NAME_MODEL);
+
+    private ModelObject getModelObject(int entity) {
+        Node node = entitySceneMap.requestNode(entity);
+        return (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
     }
 }

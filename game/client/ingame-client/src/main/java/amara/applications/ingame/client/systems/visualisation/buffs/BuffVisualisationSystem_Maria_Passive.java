@@ -4,7 +4,6 @@
  */
 package amara.applications.ingame.client.systems.visualisation.buffs;
 
-import com.jme3.animation.SkeletonControl;
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
@@ -19,18 +18,17 @@ import amara.libraries.entitysystem.EntityWorld;
  *
  * @author Carl
  */
-public class BuffVisualisationSystem_Maria_Passive extends BuffVisualisationSystem{
+public class BuffVisualisationSystem_Maria_Passive extends BuffVisualisationSystem {
 
-    public BuffVisualisationSystem_Maria_Passive(EntitySceneMap entitySceneMap){
+    public BuffVisualisationSystem_Maria_Passive(EntitySceneMap entitySceneMap) {
         super(entitySceneMap, "maria_passive");
     }
-    
+    private final static String NODE_NAME_ATTACHMENT = "mariaPassiveEffect";
+
     @Override
     protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
-        ModelObject modelObject = getModelObject(entitySceneMap.requestNode(targetEntity));
-        SkeletonControl skeletonControl = modelObject.getModelSpatial().getControl(SkeletonControl.class);
-        Node node = new Node();
         SimpleParticleEmitter simpleParticleEmitter = new SimpleParticleEmitter();
+        simpleParticleEmitter.setName(NODE_NAME_ATTACHMENT);
         ParticleEmitter particleEmitter = simpleParticleEmitter.getParticleEmitter();
         particleEmitter.setNumParticles(80);
         particleEmitter.setParticlesPerSec(25);
@@ -47,13 +45,22 @@ public class BuffVisualisationSystem_Maria_Passive extends BuffVisualisationSyst
         particleEmitter.setUserData("layer", VISUALISATION_LAYER);
         particleEmitter.updateLogicalState(10);
         particleEmitter.setLocalScale(50);
-        node.attachChild(particleEmitter);
-        skeletonControl.getAttachmentsNode("sword_joint").attachChild(node);
-        prepareVisualAttachment(targetEntity, node);
+        requestBoneAttachmentsNode(targetEntity).attachChild(simpleParticleEmitter);
         return null;
     }
-    
-    private ModelObject getModelObject(Node node){
+
+    @Override
+    protected void removeVisualAttachment(int targetEntity) {
+        requestBoneAttachmentsNode(targetEntity).detachChildNamed(NODE_NAME_ATTACHMENT);
+    }
+
+    private Node requestBoneAttachmentsNode(int entity) {
+        ModelObject modelObject = getModelObject(entity);
+        return modelObject.getOriginalRegisteredModel().requestBoneAttachmentsNode("sword_joint");
+    }
+
+    private ModelObject getModelObject(int entity) {
+        Node node = entitySceneMap.requestNode(entity);
         return (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
     }
 }

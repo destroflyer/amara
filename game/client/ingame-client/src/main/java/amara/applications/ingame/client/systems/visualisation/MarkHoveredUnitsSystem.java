@@ -16,15 +16,16 @@ import amara.libraries.applications.display.JMonkeyUtil;
 import amara.libraries.applications.display.ingame.appstates.IngameMouseCursorAppState;
 import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.applications.display.models.ModelObject;
+import amara.libraries.applications.display.models.RegisteredModel;
 import amara.libraries.entitysystem.*;
 
 /**
  *
  * @author Carl
  */
-public class MarkHoveredUnitsSystem implements EntitySystem{
+public class MarkHoveredUnitsSystem implements EntitySystem {
     
-    public MarkHoveredUnitsSystem(EntitySceneMap entitySceneMap, PlayerTeamSystem playerTeamSystem, IngameMouseCursorAppState ingameMouseCursorAppState){
+    public MarkHoveredUnitsSystem(EntitySceneMap entitySceneMap, PlayerTeamSystem playerTeamSystem, IngameMouseCursorAppState ingameMouseCursorAppState) {
         this.entitySceneMap = entitySceneMap;
         this.playerTeamSystem = playerTeamSystem;
         this.ingameMouseCursorAppState = ingameMouseCursorAppState;
@@ -37,44 +38,34 @@ public class MarkHoveredUnitsSystem implements EntitySystem{
     private ColorRGBA colorEnemies = new ColorRGBA(1, 0.1f, 0.1f, 1);
 
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsHoveredComponent.class);
-        //Check removed first to keep a potential hover cursor at the end
-        for(int entity : observer.getRemoved().getEntitiesWithAny(IsHoveredComponent.class)){
+        //Check removed first to keep a potential hover mouse cursor at the end
+        for(int entity : observer.getRemoved().getEntitiesWithAny(IsHoveredComponent.class)) {
             ingameMouseCursorAppState.setCursor_Default();
             Node node = entitySceneMap.requestNode(entity);
-            Node attachmentNode = (Node) node.getChild(NODE_NAME_MARKER);
-            if(attachmentNode != null){
-                ModelObject modelObject = (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
-                modelObject.unregisterModel(attachmentNode.getChild(0));
-                node.detachChild(attachmentNode);
-            }
+            ModelObject modelObject = (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
+            Spatial marker = modelObject.getChild(NODE_NAME_MARKER);
+            modelObject.unregisterModel(marker);
         }
-        for(int entity : observer.getNew().getEntitiesWithAny(IsHoveredComponent.class)){
+        for(int entity : observer.getNew().getEntitiesWithAny(IsHoveredComponent.class)) {
             boolean isAllied = playerTeamSystem.isAllied(entityWorld, entity);
-            if(isAllied){
+            if (isAllied) {
                 ingameMouseCursorAppState.setCursor_Default();
-            }
-            else{
+            } else {
                 ingameMouseCursorAppState.setCursor_Enemy();
             }
             Node node = entitySceneMap.requestNode(entity);
-            Node attachmentNode = new Node();
-            attachmentNode.setName(NODE_NAME_MARKER);
             ModelObject modelObject = (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
-            if(modelObject != null){
-                Spatial clonedModel = modelObject.getModelSpatial().deepClone();
-                Material material = new Material(MaterialFactory.getAssetManager(), "Shaders/cartoonedge/matdefs/cartoonedge.j3md");
-                material.setColor("EdgesColor", (isAllied?colorAllies:colorEnemies));
-                material.setFloat("EdgeSize", (0.1f / FastMath.pow(modelObject.getSkin().getModelScale().getY(), 2.5f)));
-                for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel)){
-                    geometry.setMaterial(material);
-                }
-                modelObject.registerModel(clonedModel);
-                JMonkeyUtil.setHardwareSkinningPreferred(clonedModel, false);
-                attachmentNode.attachChild(clonedModel);
-                node.attachChild(attachmentNode);
+            RegisteredModel clonedModel = modelObject.loadAndRegisterModel();
+            clonedModel.getNode().setName(NODE_NAME_MARKER);
+            Material material = new Material(MaterialFactory.getAssetManager(), "Shaders/cartoonedge/matdefs/cartoonedge.j3md");
+            material.setColor("EdgesColor", (isAllied?colorAllies:colorEnemies));
+            material.setFloat("EdgeSize", (0.1f / FastMath.pow(modelObject.getSkin().getModelScale().getY(), 2.5f)));
+            for (Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel.getNode())) {
+                geometry.setMaterial(material);
             }
+            JMonkeyUtil.setHardwareSkinningPreferred(clonedModel.getNode(), false);
         }
     }
 }

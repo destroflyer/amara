@@ -21,8 +21,8 @@ import amara.libraries.applications.display.models.*;
 public class ModelModifier_Column_Nexus extends ModelModifier{
 
     @Override
-    public void modify(ModelObject modelObject){
-        Spatial statue = ModelSkin.get("Models/nidalee/skin.xml").loadSpatial();
+    public void modify(RegisteredModel registeredModel){
+        Spatial statue = ModelSkin.get("Models/nidalee/skin.xml").load();
         Material material = MaterialFactory.getAssetManager().loadMaterial("Shaders/glass/materials/glass_3.j3m");
         for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(statue)){
             geometry.setMaterial(material);
@@ -40,6 +40,6 @@ public class ModelModifier_Column_Nexus extends ModelModifier{
                 
             }
         });
-        modelObject.attachChild(statue);
+        registeredModel.getNode().attachChild(statue);
     }
 }

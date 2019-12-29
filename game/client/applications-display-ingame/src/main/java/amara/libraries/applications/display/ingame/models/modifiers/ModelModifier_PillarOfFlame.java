@@ -23,7 +23,7 @@ import amara.libraries.emitter.influencers.*;
 public class ModelModifier_PillarOfFlame extends ModelModifier{
 
     @Override
-    public void modify(ModelObject modelObject){
+    public void modify(RegisteredModel registeredModel){
         //Pillar
         Emitter pillar = new Emitter();
         pillar.setName("pillar");
@@ -62,7 +62,7 @@ public class ModelModifier_PillarOfFlame extends ModelModifier{
         pillar.getInfluencer(RadialVelocityInfluencer.class).setUseRandomDirection(true);
         pillar.setLocalTranslation(0,.2f,0);
         pillar.setLocalScale(0.5f);
-        addEmitter(modelObject, pillar);
+        addEmitter(registeredModel, pillar);
         //Base
         Emitter base = new Emitter();
         base.setName("base");
@@ -94,7 +94,7 @@ public class ModelModifier_PillarOfFlame extends ModelModifier{
         base.getInfluencer(RadialVelocityInfluencer.class).setRadialPull(-3);
         base.setLocalTranslation(0,0,0);
         base.getParticleNode().setLocalScale(0.5f);
-        addEmitter(modelObject, base);
+        addEmitter(registeredModel, base);
         //Rocks
         Emitter rocks = new Emitter();
         rocks.setName("rocks");
@@ -138,7 +138,7 @@ public class ModelModifier_PillarOfFlame extends ModelModifier{
         rocks.getInfluencer(RadialVelocityInfluencer.class).setTangentForce(3);
         rocks.getInfluencer(RadialVelocityInfluencer.class).setRadialPull(1);
         rocks.setLocalScale(0.5f,0.5f,0.5f);
-        addEmitter(modelObject, rocks);
+        addEmitter(registeredModel, rocks);
         //Flares
         Emitter flares = new Emitter();
         flares.setName("flares");
@@ -168,12 +168,12 @@ public class ModelModifier_PillarOfFlame extends ModelModifier{
         flares.getInfluencer(SizeInfluencer.class).addSize(new Vector3f(.1f,.1f,.1f));
         flares.getInfluencer(SizeInfluencer.class).addSize(new Vector3f(.065f,.065f,.065f));
         flares.setLocalScale(0.5f);
-        addEmitter(modelObject, flares);
+        addEmitter(registeredModel, flares);
     }
     
-    private void addEmitter(ModelObject modelObject, Emitter emitter){
+    private void addEmitter(RegisteredModel registeredModel, Emitter emitter){
         emitter.initialize(MaterialFactory.getAssetManager());
-        modelObject.addControl(emitter);
+        registeredModel.getNode().addControl(emitter);
         emitter.getParticleNode().setShadowMode(RenderQueue.ShadowMode.Off);
         emitter.setEnabled(true);
         for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(emitter.getParticleNode())){

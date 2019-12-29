@@ -21,14 +21,14 @@ import amara.libraries.applications.display.models.*;
 public class ModelModifier_Firecomet extends ModelModifier{
 
     @Override
-    public void modify(ModelObject modelObject){
-        Node node = (Node) modelObject.getModelSpatial();
+    public void modify(RegisteredModel registeredModel){
+        Node node = registeredModel.getNode();
         Geometry rock = new Geometry(null, new Sphere(20, 20, 0.58f));
         rock.setMaterial(MaterialFactory.generateUnshadedMaterial("Textures/terrain/rock.jpg"));
         node.attachChild(rock);
         ParticleEmitter particleEmitter = (ParticleEmitter) node.getChild(0);
         particleEmitter.updateLogicalState(10);
-        modelObject.addControl(new AbstractControl(){
+        node.addControl(new AbstractControl(){
             
             private float time;
             private float y = 5;

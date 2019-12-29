@@ -20,30 +20,30 @@ import amara.libraries.applications.display.models.*;
 public class ModelModifier_Erika_FireItUp extends ModelModifier{
 
     @Override
-    public void modify(ModelObject modelObject){
+    public void modify(RegisteredModel registeredModel){
         Node arrowHead = (Node) MaterialFactory.getAssetManager().loadModel("Models/erika_arrow/head_fire.j3o");
-        arrowHead.setLocalTranslation(0, -1.7f, 0);
-        arrowHead.setLocalScale(0.3f, 0.5f, 0.3f);
+        arrowHead.setLocalTranslation(0, 0, 0.75f);
+        arrowHead.setLocalScale(0.015f, 0.015f, 0.015f);
         ParticleEmitter particleEmitter = (ParticleEmitter) arrowHead.getChild(0);
         particleEmitter.updateLogicalState(10);
-        modelObject.attachChild(arrowHead);
-        modelObject.addControl(new AbstractControl(){
+        registeredModel.getNode().attachChild(arrowHead);
+        registeredModel.getNode().addControl(new AbstractControl(){
             
             private float y = 20;
             private float speed;
-            private boolean isFinished;
+            private boolean isFallingFinished;
 
             @Override
             protected void controlUpdate(float lastTimePerFrame){
                 speed += (lastTimePerFrame * 7);
                 y -= (lastTimePerFrame * speed * speed);
-                isFinished = (y <= 0);
-                if(isFinished){
+                isFallingFinished = (y <= 0);
+                if(isFallingFinished){
                     y = 0;
                 }
                 spatial.setLocalTranslation(0, y, 0);
-                spatial.rotate(0, lastTimePerFrame * FastMath.PI, 0);
-                if(isFinished){
+                spatial.rotate(0, 0, lastTimePerFrame * FastMath.PI);
+                if(isFallingFinished){
                     spatial.removeControl(this);
                 }
             }

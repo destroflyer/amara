@@ -26,7 +26,7 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
     protected EntitySceneMap entitySceneMap;
     private String visualisationName;
     protected boolean scaleVisualisation = true;
-    private HashMap<Integer, Integer> activeBuffCounts = new HashMap<Integer, Integer>();
+    private HashMap<Integer, Integer> activeBuffCounts = new HashMap<>();
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
@@ -38,16 +38,10 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
             onBuffAdded(entityWorld, entity);
         }
         for(int entity : observer.getRemoved().getEntitiesWithAny(ActiveBuffComponent.class)){
-            ActiveBuffComponent activeBuffComponent = observer.getRemoved().getComponent(entity, ActiveBuffComponent.class);
-            if(shouldBeVisualized(entityWorld, activeBuffComponent)){
-                int targetEntity = observer.getRemoved().getComponent(entity, ActiveBuffComponent.class).getTargetEntity();
-                if(decreaseBuffCount(targetEntity) == 0){
-                    removeVisualAttachment(targetEntity);
-                }
-            }
+            onBuffRemoved(entityWorld, observer.getRemoved().getComponent(entity, ActiveBuffComponent.class));
         }
     }
-    
+
     private void onBuffAdded(EntityWorld entityWorld, int buffStatusEntity){
         ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
         if(shouldBeVisualized(entityWorld, activeBuffComponent)){
@@ -59,6 +53,17 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
                     Node entityNode = entitySceneMap.requestNode(targetEntity);
                     entityNode.attachChild(visualAttachment);
                 }
+            }
+        }
+    }
+
+    protected abstract Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity);
+
+    private void onBuffRemoved(EntityWorld entityWorld, ActiveBuffComponent activeBuffComponent){
+        if(shouldBeVisualized(entityWorld, activeBuffComponent)){
+            int targetEntity = activeBuffComponent.getTargetEntity();
+            if(decreaseBuffCount(targetEntity) == 0){
+                removeVisualAttachment(targetEntity);
             }
         }
     }
@@ -94,8 +99,8 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
             }
         }
     }
-    
-    private void removeVisualAttachment(int targetEntity){
+
+    protected void removeVisualAttachment(int targetEntity){
         Node entityNode = entitySceneMap.requestNode(targetEntity);
         Spatial visualAttachment;
         do{
@@ -104,7 +109,6 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
                 removeVisualAttachment(targetEntity, entityNode, visualAttachment);
             }
         }while(visualAttachment != null);
-        
     }
     
     protected void removeVisualAttachment(int targetEntity, Node entityNode, Spatial visualAttachment){
@@ -114,6 +118,4 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
     private String getVisualAttachmentID(){
         return ("buffVisualisation_" + visualisationName);
     }
-    
-    protected abstract Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity);
 }

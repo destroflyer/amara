@@ -8,7 +8,7 @@ package amara.libraries.applications.display.models;
  *
  * @author Carl
  */
-public abstract class ModelModifier{
+public abstract class ModelModifier {
     
-    public abstract void modify(ModelObject modelObject);
+    public abstract void modify(RegisteredModel registeredModel);
 }

@@ -15,8 +15,8 @@ import amara.libraries.applications.display.models.*;
 public class ModelModifier_Ganfaul_Ult extends ModelModifier{
 
     @Override
-    public void modify(ModelObject modelObject){
-        Node node = (Node) modelObject.getModelSpatial();
+    public void modify(RegisteredModel registeredModel){
+        Node node = registeredModel.getNode();
         ParticleEmitter particleEmitter1 = (ParticleEmitter) node.getChild(0);
         ParticleEmitter particleEmitter2 = (ParticleEmitter) node.getChild(1);
         particleEmitter1.updateLogicalState(10);

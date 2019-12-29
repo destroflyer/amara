@@ -4,7 +4,6 @@
  */
 package amara.libraries.applications.display.ingame.models.modifiers;
 
-import com.jme3.animation.SkeletonControl;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -23,9 +22,8 @@ import amara.libraries.applications.display.models.*;
 public class ModelModifier_Cow_Baron extends ModelModifier{
 
     @Override
-    public void modify(ModelObject modelObject){
-        SkeletonControl skeletonControl = modelObject.getModelSpatial().getControl(SkeletonControl.class);
-        Node headNode = skeletonControl.getAttachmentsNode("head");
+    public void modify(RegisteredModel registeredModel){
+        Node headNode = registeredModel.requestBoneAttachmentsNode("head");
         float width = 1.6f;
         float height = (width * (4f / 5));
         Quad quad = new Quad(width, height, true);

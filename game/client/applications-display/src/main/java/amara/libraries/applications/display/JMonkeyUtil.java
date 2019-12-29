@@ -69,7 +69,7 @@ public class JMonkeyUtil{
     
     public static void copyAnimation(AnimChannel sourceAnimationChannel, AnimChannel targetAnimationChannel){
         if(sourceAnimationChannel.getAnimationName() != null){
-            targetAnimationChannel.setAnim(sourceAnimationChannel.getAnimationName());
+            targetAnimationChannel.setAnim(sourceAnimationChannel.getAnimationName(), 0);
             targetAnimationChannel.setSpeed(sourceAnimationChannel.getSpeed());
             targetAnimationChannel.setTime(sourceAnimationChannel.getTime());
             targetAnimationChannel.setLoopMode(sourceAnimationChannel.getLoopMode());
