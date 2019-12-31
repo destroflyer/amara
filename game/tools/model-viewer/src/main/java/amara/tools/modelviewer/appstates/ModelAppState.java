@@ -18,11 +18,7 @@ import com.jme3.animation.AnimChannel;
 import amara.libraries.applications.display.JMonkeyUtil;
 import amara.libraries.applications.display.appstates.BaseDisplayAppState;
 import amara.libraries.applications.display.models.ModelObject;
-import amara.libraries.applications.display.models.ModelSkeleton;
 import amara.tools.modelviewer.ModelViewerApplication;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  *
@@ -69,12 +65,13 @@ public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> i
         animationNames = new String[modelSkinPaths.length][];
         for(int i=0;i<modelObjects.length;i++){
             modelObjects[i] = new ModelObject(mainApplication, modelSkinPaths[i]);
-            List<String> modelAnimationNames = new LinkedList<>();
-            for (ModelSkeleton skeleton : modelObjects[i].getSkeletons()) {
-                AnimControl animationControl = skeleton.getAnimationControl();
-                modelAnimationNames.addAll(animationControl.getAnimationNames());
+            AnimControl animationControl = modelObjects[i].getModelNode().getControl(AnimControl.class);
+            if(animationControl != null){
+                animationNames[i] = animationControl.getAnimationNames().toArray(new String[0]);
             }
-            animationNames[i] = modelAnimationNames.toArray(new String[0]);
+            else{
+                animationNames[i] = new String[0];
+            }
         }
         mainApplication.getInputManager().addMapping("mouse_click_left", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
         mainApplication.getInputManager().addMapping("refresh", new KeyTrigger(KeyInput.KEY_F5));

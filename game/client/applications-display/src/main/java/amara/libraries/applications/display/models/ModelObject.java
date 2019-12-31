@@ -5,7 +5,6 @@
 package amara.libraries.applications.display.models;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -20,21 +19,15 @@ public class ModelObject extends Node {
     public ModelObject(DisplayApplication mainApplication, String skinPath) {
         this.mainApplication = mainApplication;
         skin = ModelSkin.get(skinPath);
-        initialize();
+        loadAndRegisterModel();
     }
     private DisplayApplication mainApplication;
     private ModelSkin skin;
-    private LinkedList<ModelSkeleton> skeletons;
     private ArrayList<RegisteredModel> registeredModels = new ArrayList<>();
-
-    private void initialize() {
-        skeletons = skin.getModelSkeletons();
-        loadAndRegisterModel();
-    }
 
     public RegisteredModel loadAndRegisterModel() {
         Node node = skin.load();
-        RegisteredModel registeredModel = new RegisteredModel(node, cloneSkeletons());
+        RegisteredModel registeredModel = new RegisteredModel(node);
         registeredModels.add(registeredModel);
         registeredModel.initialize(this);
         attachChild(node);
@@ -42,12 +35,6 @@ public class ModelObject extends Node {
             modelModifier.modify(registeredModel);
         }
         return registeredModel;
-    }
-
-    private List<ModelSkeleton> cloneSkeletons() {
-        return skeletons.stream()
-                .map(ModelSkeleton::clone)
-                .collect(Collectors.toList());
     }
 
     public void unregisterModel(Spatial spatial) {
@@ -84,10 +71,6 @@ public class ModelObject extends Node {
 
     public ModelSkin getSkin() {
         return skin;
-    }
-
-    public LinkedList<ModelSkeleton> getSkeletons() {
-        return skeletons;
     }
 
     public RegisteredModel getOriginalRegisteredModel() {

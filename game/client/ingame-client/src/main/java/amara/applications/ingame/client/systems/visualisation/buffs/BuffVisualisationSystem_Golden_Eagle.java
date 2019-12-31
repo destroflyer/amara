@@ -40,9 +40,9 @@ public class BuffVisualisationSystem_Golden_Eagle extends BuffVisualisationSyste
             geometry.setMaterial(material);
             geometry.setQueueBucket(RenderQueue.Bucket.Transparent);
         }
-        AnimChannel animationChannel = clonedModel.getActiveAnimationChannel();
+        AnimChannel animationChannel = clonedModel.getAnimationChannel();
         if (animationChannel != null) {
-            AnimChannel originalAnimationChannel = modelObject.getOriginalRegisteredModel().getActiveAnimationChannel();
+            AnimChannel originalAnimationChannel = modelObject.getOriginalRegisteredModel().getAnimationChannel();
             JMonkeyUtil.copyAnimation(originalAnimationChannel, animationChannel);
             animationChannel.setSpeed(0);
         }

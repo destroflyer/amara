@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.jme3.animation.AnimControl;
-import com.jme3.animation.SkeletonControl;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState.FaceCullMode;
 import com.jme3.math.ColorRGBA;
@@ -20,7 +18,6 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
 import com.jme3.texture.Texture;
 import com.jme3.util.TangentBinormalGenerator;
 import amara.core.Util;
@@ -46,14 +43,12 @@ public class ModelSkin{
     private Element positionElement;
     private Element materialElement;
     private Element modifiersElement;
-    private Element customSkeletonElement;
     private String name;
     private float modelNormScale;
     private Vector3f modelScale;
     private String rigType;
     private float materialAmbient;
     private LinkedList<ModelModifier> modelModifiers = new LinkedList<>();
-    private LinkedList<ModelSkeleton> modelSkeletons = new LinkedList<>();
 
     public static ModelSkin get(String filePath) {
         return cachedSkins.computeIfAbsent(filePath, fp -> new ModelSkin(filePath));
@@ -68,7 +63,6 @@ public class ModelSkin{
             positionElement = modelElement.getChild("position");
             materialElement = modelElement.getChild("material");
             modifiersElement = modelElement.getChild("modifiers");
-            customSkeletonElement = modelElement.getChild("customSkeletons");
             modelNormScale = getAttributeValue(modelElement, "normScale", 1);
             modelScale = getAttributeValue(modelElement, "scale", Vector3f.UNIT_XYZ);
             rigType = modelElement.getAttributeValue("rigType");
@@ -122,7 +116,6 @@ public class ModelSkin{
         loadMaterial(node);
         loadPosition(node);
         loadModifiers();
-        loadSkeletons(node);
         applyGeometryInformation(node);
         return node;
     }
@@ -245,33 +238,6 @@ public class ModelSkin{
 
     public LinkedList<ModelModifier> getModelModifiers() {
         return modelModifiers;
-    }
-
-    private void loadSkeletons(Node node) {
-        modelSkeletons.clear();
-        tryAddSkeleton(node);
-        if (customSkeletonElement != null){
-            for (Object childObject : customSkeletonElement.getChildren("model")) {
-                Element modelElement = (Element) childObject;
-                String modelFilePath = getModelFilePath(name, modelElement.getText());
-                Spatial customSpatial = MaterialFactory.getAssetManager().loadModel(modelFilePath);
-                tryAddSkeleton(customSpatial);
-            }
-        }
-    }
-
-    private void tryAddSkeleton(Spatial spatial) {
-        SkeletonControl skeletonControl = spatial.getControl(SkeletonControl.class);
-        AnimControl animControl = spatial.getControl(AnimControl.class);
-        if ((skeletonControl != null) && (animControl != null)) {
-            spatial.removeControl(SkeletonControl.class);
-            spatial.removeControl(AnimControl.class);
-            modelSkeletons.add(new ModelSkeleton(skeletonControl, animControl));
-        }
-    }
-
-    public LinkedList<ModelSkeleton> getModelSkeletons() {
-        return modelSkeletons;
     }
 
     private void applyGeometryInformation(Node node) {

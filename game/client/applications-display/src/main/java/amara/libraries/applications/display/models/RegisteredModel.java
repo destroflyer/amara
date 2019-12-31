@@ -9,51 +9,29 @@ import amara.libraries.applications.display.JMonkeyUtil;
 import com.jme3.animation.*;
 import com.jme3.scene.Node;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  *
  * @author Carl
  */
 public class RegisteredModel {
 
-    public RegisteredModel(Node node, List<ModelSkeleton> skeletons) {
+    public RegisteredModel(Node node) {
         this.node = node;
-        this.skeletons = skeletons;
     }
     private Node node;
-    private List<ModelSkeleton> skeletons;
-    private HashMap<String, Node> boneAttachmentsNodes = new HashMap<>();
 
     public void initialize(ModelObject modelObject) {
         // Animation
-        for (ModelSkeleton skeleton : skeletons) {
-            AnimControl skeletonAnimationControl = skeleton.getAnimationControl();
-            // Clone animations since they are shared otherwise, which e.g. restarts all when starting one
-            HashMap<String, Animation> clonedAnimations = new HashMap<>();
-            for (String animationName : skeletonAnimationControl.getAnimationNames()) {
-                Animation animation = skeletonAnimationControl.getAnim(animationName);
-                clonedAnimations.put(animationName, animation.clone());
-            }
-            skeletonAnimationControl.setAnimations(clonedAnimations);
-            skeletonAnimationControl.createChannel();
-        }
-        if (skeletons.size() > 0) {
-            boolean isPlayingAnimation = false;
+        AnimControl animationControl = node.getControl(AnimControl.class);
+        if (animationControl != null) {
+            AnimChannel animationChannel = animationControl.createChannel();
             // Copy the animation of the original model for the others
             if (this != modelObject.getOriginalRegisteredModel()) {
-                AnimChannel activeOriginalAnimationChannel = modelObject.getOriginalRegisteredModel().getActiveAnimationChannel();
+                AnimChannel activeOriginalAnimationChannel = modelObject.getOriginalRegisteredModel().getAnimationChannel();
                 if (activeOriginalAnimationChannel.getAnimationName() != null) {
                     setAnimationName(activeOriginalAnimationChannel.getAnimationName());
-                    JMonkeyUtil.copyAnimation(activeOriginalAnimationChannel, getActiveAnimationChannel());
-                    isPlayingAnimation = true;
+                    JMonkeyUtil.copyAnimation(activeOriginalAnimationChannel, animationChannel);
                 }
-            }
-            // Default the first skeleton (for controls, attachments etc.) if no animation is immediately played
-            if (!isPlayingAnimation) {
-                setSkeleton(skeletons.get(0));
             }
         }
         // HardwareSkinning
@@ -68,49 +46,22 @@ public class RegisteredModel {
         JMonkeyUtil.setHardwareSkinningPreferred(node, isHardwareSkinningPreferred);
     }
 
-    public void setAnimationName(String animationName) {
-        for (ModelSkeleton skeleton : skeletons) {
-            AnimControl animationControl = skeleton.getAnimationControl();
-            if (animationControl.getAnimationNames().contains(animationName)) {
-                if (animationControl != node.getControl(AnimControl.class)) {
-                    setSkeleton(skeleton);
-                }
-                AnimChannel animationChannel = animationControl.getChannel(0);
-                try {
-                    animationChannel.setAnim(animationName);
-                } catch(IllegalArgumentException ex) {
-                    stopAndRewindAnimation();
-                }
-                break;
-            }
-        }
-    }
-
-    private void setSkeleton(ModelSkeleton skeleton) {
-        node.removeControl(SkeletonControl.class);
-        node.removeControl(AnimControl.class);
-        node.addControl(skeleton.getSkeletonControl());
-        node.addControl(skeleton.getAnimationControl());
-        updateBoneAttachmentNodes();
-    }
-
     public Node requestBoneAttachmentsNode(String boneName) {
-        Node node = boneAttachmentsNodes.computeIfAbsent(boneName, bn -> new Node());
-        updateBoneAttachmentNodes();
-        return node;
+        SkeletonControl skeletonControl = node.getControl(SkeletonControl.class);
+        return skeletonControl.getAttachmentsNode(boneName);
     }
 
-    private void updateBoneAttachmentNodes() {
-        SkeletonControl skeletonControl = node.getControl(SkeletonControl.class);
-        for (Map.Entry<String, Node> entry : boneAttachmentsNodes.entrySet()) {
-            String boneName = entry.getKey();
-            Node attachmentNode = entry.getValue();
-            skeletonControl.getAttachmentsNode(boneName).attachChild(attachmentNode);
+    public void setAnimationName(String animationName) {
+        AnimChannel animationChannel = getAnimationChannel();
+        try {
+            animationChannel.setAnim(animationName);
+        } catch(IllegalArgumentException ex) {
+            stopAndRewindAnimation();
         }
     }
 
     public void setAnimationProperties(float loopDuration, boolean isLoop) {
-        AnimChannel animationChannel = getActiveAnimationChannel();
+        AnimChannel animationChannel = getAnimationChannel();
         if (animationChannel.getAnimationName() != null) {
             animationChannel.setSpeed(animationChannel.getAnimMaxTime() / loopDuration);
             animationChannel.setLoopMode(isLoop ? LoopMode.Loop : LoopMode.DontLoop);
@@ -118,13 +69,13 @@ public class RegisteredModel {
     }
 
     public void stopAndRewindAnimation() {
-        AnimChannel animationChannel = getActiveAnimationChannel();
+        AnimChannel animationChannel = getAnimationChannel();
         if (animationChannel != null) {
             animationChannel.reset(true);
         }
     }
 
-    public AnimChannel getActiveAnimationChannel() {
+    public AnimChannel getAnimationChannel() {
         AnimControl animationControl = node.getControl(AnimControl.class);
         return ((animationControl != null) ? animationControl.getChannel(0) : null);
     }
