@@ -1,0 +1,35 @@
+<template>
+    <entity id="object">
+        <model>Models/scarlet_barrier/skin.xml</model>
+        <transformOrigin>[parameter0]</transformOrigin>
+        <hitbox>
+            <circle radius="2.5"/>
+        </hitbox>
+        <collisionGroup targetOf="spells" targets="spell_targets"/>
+        <hitboxActive/>
+        <intersectionRules>
+            <entity>
+                <requireProjectile/>
+                <acceptEnemies/>
+            </entity>
+        </intersectionRules>
+        <lifetime>2</lifetime>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <collisionTrigger/>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/glass_wall_block.ogg</audio>
+                        <audioVolume>0.75</audioVolume>
+                    </entity>
+                </playAudio>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+    </entity>
+</template>

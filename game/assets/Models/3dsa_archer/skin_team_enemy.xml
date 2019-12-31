@@ -1,5 +1,5 @@
 <skin name="3dsa_archer">
-    <model normScale="0.04" scale="0.55">
+    <model normScale="0.04" scale="0.5">
         <material>
             <texture>diffuse_red.png</texture>
         </material>

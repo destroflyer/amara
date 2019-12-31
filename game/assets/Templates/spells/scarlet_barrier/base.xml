@@ -1,0 +1,47 @@
+<template>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <!--<spellVisualisation></spellVisualisation>-->
+        <instantEffectTriggers>
+            <!--spawn object, play audio-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object([parameter0])</spawnTemplate>
+                            </entity>
+                        </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/pillar_of_flame_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--remove projectiles-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeEntity/>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

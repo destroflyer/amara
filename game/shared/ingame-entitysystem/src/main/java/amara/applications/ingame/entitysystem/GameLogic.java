@@ -135,7 +135,6 @@ public class GameLogic {
         entitySystems.add(new ConsumeItemsOnCastingSystem());
         entitySystems.add(new PlayCastAnimationSystem());
         entitySystems.add(new CastSpellSystem());
-        entitySystems.add(new UpdateAreaTransformsSystem());
         entitySystems.add(new CheckAreaBuffsSystem(intersectionObserver));
         entitySystems.add(new RemoveBuffsSystem());
         entitySystems.add(new RepeatingBuffEffectsSystem());
@@ -232,6 +231,7 @@ public class GameLogic {
         entitySystems.add(new LocalAvoidanceSystem());
         entitySystems.add(new MovementSystem());
         entitySystems.add(new CheckDistanceLimitMovementsSystem());
+        entitySystems.add(new TransformOriginsSystem());
         entitySystems.add(new TriggerTargetReachedEffectSystem());
         entitySystems.add(new FinishTargetedMovementsSystem());
         entitySystems.add(new CheckHiddenAreasSystem(intersectionObserver));

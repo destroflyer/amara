@@ -1,0 +1,71 @@
+<template>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <!--<spellVisualisation></spellVisualisation>-->
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <move>
+                            <entity>
+                                <targetedMovementDirection/>
+                                <movementSpeed>50</movementSpeed>
+                                <movementAnimation>
+                                    <entity>
+                                        <name>ninja_run</name>
+                                        <loopDuration>999</loopDuration>
+                                    </entity>
+                                </movementAnimation>
+                                <distanceLimit>11</distanceLimit>
+                            </entity>
+                        </move>
+                        <removeCollisionGroups targetOf="map|units" targets="units"/>
+                        <addEffectTriggers>
+                            <!--readd collisiongroups-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <addCollisionGroups targetOf="map|units" targets="units"/>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                        </addEffectTriggers>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/spinning_slash_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castTurnToTarget/>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <!--TODO-->
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

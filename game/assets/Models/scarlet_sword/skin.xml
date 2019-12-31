@@ -1,0 +1,10 @@
+<skin name="scarlet_kunai">
+    <model normScale="50" scale="0.14">
+        <position>
+            <location>0,3.5,0</location>
+        </position>
+        <material>
+            <texture source="scarlet">diffuse_blue.png</texture>
+        </material>
+    </model>
+</skin>

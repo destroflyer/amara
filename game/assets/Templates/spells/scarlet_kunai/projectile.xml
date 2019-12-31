@@ -1,0 +1,47 @@
+<template>
+    <entity id="projectile">
+        <isProjectile/>
+        <model>Models/scarlet_kunai/skin.xml</model>
+        <hitbox>
+            <circle radius="0.5"/>
+        </hitbox>
+        <collisionGroup targetOf="spells" targets="spell_targets"/>
+        <hitboxActive/>
+        <intersectionRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </intersectionRules>
+        <removeOnMapLeave/>
+        <lifetime>0.6</lifetime>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <collisionTrigger/>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/ganfaul_binding_hit.ogg</audio>
+                        <audioVolume>0.75</audioVolume>
+                        <audioRemoveAfterPlaying/>
+                    </entity>
+                </playAudio>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--remove projectile-->
+    <entity>
+        <collisionTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+</template>

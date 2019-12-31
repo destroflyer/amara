@@ -21,7 +21,7 @@ public class ApplyAddBuffAreasSystem implements EntitySystem {
         for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddBuffAreaComponent.class)) {
             int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
             int buffAreaEntity = entityWorld.getComponent(effectImpactEntity, AddBuffAreaComponent.class).getBuffAreaEntity();
-            entityWorld.setComponent(buffAreaEntity, new AreaOriginComponent(targetEntity));
+            entityWorld.setComponent(buffAreaEntity, new TransformOriginComponent(targetEntity));
             entityWorld.setComponent(buffAreaEntity, new HitboxActiveComponent());
             EffectSourceComponent effectSourceComponent = entityWorld.getComponent(effectImpactEntity, EffectSourceComponent.class);
             if(effectSourceComponent != null){

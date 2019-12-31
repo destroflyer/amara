@@ -724,20 +724,6 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent(targetRulesEntity);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.buffs.areas.AreaOriginComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.buffs.areas.AreaOriginComponent.class.getDeclaredField("originEntity"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.areas.AreaOriginComponent>("areaOrigin"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaOriginComponent construct(EntityWorld entityWorld, Element element){
-                int originEntity = createChildEntity(entityWorld, element, 0, "originEntity");
-                return new amara.applications.ingame.entitysystem.components.buffs.areas.AreaOriginComponent(originEntity);
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.buffs.areas.AreaSourceComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.buffs.areas.AreaSourceComponent.class.getDeclaredField("sourceEntity"), componentFieldSerializer_Entity);
@@ -2652,6 +2638,20 @@ public class ComponentsRegistrator{
                     scale = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, scaleText));
                 }
                 return new amara.applications.ingame.entitysystem.components.physics.ScaleComponent(scale);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.TransformOriginComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.physics.TransformOriginComponent.class.getDeclaredField("originEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.TransformOriginComponent>("transformOrigin"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.physics.TransformOriginComponent construct(EntityWorld entityWorld, Element element){
+                int originEntity = createChildEntity(entityWorld, element, 0, "originEntity");
+                return new amara.applications.ingame.entitysystem.components.physics.TransformOriginComponent(originEntity);
             }
         });
         //players

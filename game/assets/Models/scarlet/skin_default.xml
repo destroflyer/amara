@@ -1,17 +1,7 @@
 <skin name="scarlet">
-    <model normScale="0.028" scale="1.5" rigType="mixamo">
+    <model normScale="0.028" scale="1.25" rigType="mixamo">
         <material>
             <texture>diffuse_blue.png</texture>
         </material>
-        <customSkeletons>
-            <model>death</model>
-            <model>down_hit</model>
-            <model>ninja_run</model>
-            <model>run1</model>
-            <model>run2</model>
-            <model>run3</model>
-            <model>stab</model>
-            <model>throw</model>
-        </customSkeletons>
     </model>
 </skin>

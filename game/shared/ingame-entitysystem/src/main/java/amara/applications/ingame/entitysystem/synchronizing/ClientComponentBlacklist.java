@@ -71,7 +71,6 @@ public class ClientComponentBlacklist{
             //buffs/areas
             AreaBuffComponent.class,
             AreaBuffTargetRulesComponent.class,
-            AreaOriginComponent.class,
             AreaSourceComponent.class,
             //buffs/status
             RemoveFromTargetComponent.class,
@@ -206,6 +205,7 @@ public class ClientComponentBlacklist{
             CollisionGroupComponent.class,
             IntersectionPushComponent.class,
             RemoveOnMapLeaveComponent.class,
+            TransformOriginComponent.class,
             //players
             ClientComponent.class,
             IsBotComponent.class,

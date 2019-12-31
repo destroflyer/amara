@@ -22,7 +22,7 @@ public class ApplyRemoveBuffAreasSystem implements EntitySystem{
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, RemoveBuffAreaComponent.class)))
         {
             int buffAreaEntity = entityWrapper.getComponent(RemoveBuffAreaComponent.class).getBuffAreaEntity();
-            entityWorld.removeComponent(buffAreaEntity, AreaOriginComponent.class);
+            entityWorld.removeComponent(buffAreaEntity, TransformOriginComponent.class);
             entityWorld.removeComponent(buffAreaEntity, HitboxActiveComponent.class);
             entityWorld.removeComponent(buffAreaEntity, PositionComponent.class);
             int buffEntity = entityWorld.getComponent(buffAreaEntity, AreaBuffComponent.class).getBuffEntity();

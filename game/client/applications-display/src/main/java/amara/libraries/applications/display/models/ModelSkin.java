@@ -128,8 +128,13 @@ public class ModelSkin{
     }
 
     private Node loadModel() {
-        String modelPath = getModelFilePath(name, name);
-        Node node = (Node) MaterialFactory.getAssetManager().loadModel(modelPath);
+        Node node;
+        if (name != null) {
+            String modelPath = getModelFilePath(name, name);
+            node = (Node) MaterialFactory.getAssetManager().loadModel(modelPath);
+        } else {
+            node = new Node();
+        }
         node.setLocalScale(modelScale.mult(modelNormScale));
         if (getAttributeValue(modelElement, "generateTangents", false)) {
             TangentBinormalGenerator.generate(node);
