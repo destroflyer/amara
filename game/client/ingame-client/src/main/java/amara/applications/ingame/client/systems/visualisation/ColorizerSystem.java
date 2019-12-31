@@ -108,14 +108,17 @@ public class ColorizerSystem implements EntitySystem {
     }
 
     public void removeColorizer(int entity, Class<? extends MaterialColorizer> colorizerClass) {
-        LinkedList<MaterialColorizer> colorizers = getColorizingInfo(entity).getColorizers();
-        colorizers.stream()
-            .filter(colorizer -> colorizerClass.isAssignableFrom(colorizerClass))
-            .findAny()
-            .ifPresent(colorizer -> {
-                colorizers.remove(colorizer);
-                changedEntities.add(entity);
-            });
+        ColorizingInfo colorizingInfo = getColorizingInfo(entity);
+        if (colorizingInfo != null) {
+            LinkedList<MaterialColorizer> colorizers = colorizingInfo.getColorizers();
+            colorizers.stream()
+                    .filter(colorizer -> colorizerClass.isAssignableFrom(colorizerClass))
+                    .findAny()
+                    .ifPresent(colorizer -> {
+                        colorizers.remove(colorizer);
+                        changedEntities.add(entity);
+                    });
+        }
     }
 
     private ColorizingInfo getColorizingInfo(int entity) {
