@@ -1,0 +1,7 @@
+<skin name="dwarf_warrior">
+    <model normScale="0.028" scale="1.25" rigType="mixamo">
+        <material>
+            <texture>diffuse_orange.png</texture>
+        </material>
+    </model>
+</skin>
