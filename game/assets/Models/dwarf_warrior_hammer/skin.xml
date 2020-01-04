@@ -1,0 +1,10 @@
+<skin name="dwarf_warrior_hammer">
+    <model normScale="10" scale="0.5">
+        <position>
+            <location>0,3.5,0</location>
+        </position>
+        <material>
+            <texture source="dwarf_warrior">diffuse_orange.png</texture>
+        </material>
+    </model>
+</skin>

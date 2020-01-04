@@ -15,7 +15,7 @@ import amara.libraries.entitysystem.*;
  */
 public class TriggerItemPassivesSystem implements EntitySystem{
     
-    private HashMap<Integer, int[]> cachedItems = new HashMap<Integer, int[]>();
+    private HashMap<Integer, int[]> cachedItems = new HashMap<>();
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){

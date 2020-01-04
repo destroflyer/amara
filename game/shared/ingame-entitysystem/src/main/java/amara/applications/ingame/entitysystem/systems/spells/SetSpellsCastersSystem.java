@@ -6,6 +6,7 @@ package amara.applications.ingame.entitysystem.systems.spells;
 
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.items.*;
+import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.libraries.entitysystem.*;
 
@@ -31,10 +32,10 @@ public class SetSpellsCastersSystem implements EntitySystem{
         }
         //Passives
         for(int entity : observer.getNew().getEntitiesWithAny(PassivesComponent.class)){
-            updateCaster_Passives(entityWorld, entity, observer.getNew().getComponent(entity, PassivesComponent.class).getPassiveEntities());
+            updateCaster(entityWorld, entity, observer.getNew().getComponent(entity, PassivesComponent.class).getPassiveEntities());
         }
         for(int entity : observer.getChanged().getEntitiesWithAny(PassivesComponent.class)){
-            updateCaster_Passives(entityWorld, entity, observer.getChanged().getComponent(entity, PassivesComponent.class).getPassiveEntities());
+            updateCaster(entityWorld, entity, observer.getChanged().getComponent(entity, PassivesComponent.class).getPassiveEntities());
         }
         for(int entity : observer.getRemoved().getEntitiesWithAny(PassivesComponent.class)){
             for(int passiveEntity : observer.getRemoved().getComponent(entity, PassivesComponent.class).getPassiveEntities()){
@@ -88,16 +89,14 @@ public class SetSpellsCastersSystem implements EntitySystem{
         }
     }
     
-    private void updateCaster_Passives(EntityWorld entityWorld, int casterEntity, int[] passivesEntities){
-        for(int passiveEntity : passivesEntities){
-            updateCaster(entityWorld, casterEntity, passiveEntity);
-        }
-    }
-    
     private void updateCaster_Spells(EntityWorld entityWorld, int casterEntity, int[] spellEntities){
         for(int spellEntity : spellEntities){
             if(spellEntity != -1){
                 updateCaster(entityWorld, casterEntity, spellEntity);
+                SpellPassivesComponent spellPassivesComponent = entityWorld.getComponent(spellEntity, SpellPassivesComponent.class);
+                if(spellPassivesComponent != null){
+                    updateCaster(entityWorld, casterEntity, spellPassivesComponent.getPassiveEntities());
+                }
             }
         }
     }
@@ -110,8 +109,14 @@ public class SetSpellsCastersSystem implements EntitySystem{
             }
             ItemPassivesComponent itemPassivesComponent = entityWorld.getComponent(itemEntity, ItemPassivesComponent.class);
             if(itemPassivesComponent != null){
-                updateCaster_Passives(entityWorld, casterEntity, itemPassivesComponent.getPassiveEntities());
+                updateCaster(entityWorld, casterEntity, itemPassivesComponent.getPassiveEntities());
             }
+        }
+    }
+
+    private void updateCaster(EntityWorld entityWorld, int casterEntity, int[] targetEntities){
+        for(int targetEntity : targetEntities){
+            updateCaster(entityWorld, casterEntity, targetEntity);
         }
     }
     

@@ -6,7 +6,7 @@
         <instantEffectTriggers>
             <!--spawn object, play audio-->
             <entity>
-                <targetTarget/>
+                <casterTarget/>
                 <triggeredEffect>
                     <entity>
                         <spawn>
@@ -16,7 +16,7 @@
                         </spawn>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/pillar_of_flame_cast.ogg</audio>
+                                <audio>Sounds/sounds/spells/scarlet_barrier_cast.ogg</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>

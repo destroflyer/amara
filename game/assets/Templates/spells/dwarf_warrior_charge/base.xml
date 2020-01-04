@@ -1,0 +1,124 @@
+<template>
+    <value name="delay">0.75</value>
+    <entity id="spell">
+        <name>TODO</name>
+        <!--<spellVisualisation></spellVisualisation>-->
+        <spellIndicator>
+            <entity>
+                <circularIndicator radius="35"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--play audio-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/dwarf_warrior_charge_cast.ogg</audio>
+                                <audioVolume>2</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--move to target-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeIntersectionPush/>
+                        <move>
+                            <entity>
+                                <targetedMovementTarget/>
+                                <movementSpeed>25</movementSpeed>
+                                <movementAnimation>
+                                    <entity>
+                                        <name>run1</name>
+                                        <loopDuration>0.15</loopDuration>
+                                    </entity>
+                                </movementAnimation>
+                            </entity>
+                        </move>
+                        <playAudio>
+                            <entity id="audioRun">
+                                <audio>Sounds/sounds/spells/dwarf_warrior_charge_run.ogg</audio>
+                                <audioVolume>1.5</audioVolume>
+                            </entity>
+                        </playAudio>
+                        <addEffectTriggers>
+                            <!--trigger spell effects-->
+                            <entity id="collisionTrigger">
+                                <collisionTrigger/>
+                                <targetTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                                        <playAudio>
+                                            <entity>
+                                                <audio>Sounds/sounds/spells/dwarf_warrior_charge_hit.ogg</audio>
+                                                <audioVolume>3.5</audioVolume>
+                                            </entity>
+                                        </playAudio>
+                                    </entity>
+                                </triggeredEffect>
+                            </entity>
+                            <!--cleanup-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <addIntersectionPush/>
+                                        <stopAudio>#audioRun</stopAudio>
+                                        <removeEffectTriggers>#collisionTrigger</removeEffectTriggers>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>positional_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>battlecry</name>
+                <loopDuration>2</loopDuration>
+            </entity>
+        </castAnimation>
+        <range>35</range>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>100 + (0.8 * source.abilityPower)</magicDamage>
+                        <addKnockup>
+                            <entity>
+                                <knockupDuration>1</knockupDuration>
+                                <knockupHeight>5</knockupHeight>
+                            </entity>
+                        </addKnockup>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

@@ -3,5 +3,8 @@
         <material>
             <texture>diffuse_orange.png</texture>
         </material>
+        <modifiers>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_DwarfWarrior_Weapons</modifier>
+        </modifiers>
     </model>
 </skin>

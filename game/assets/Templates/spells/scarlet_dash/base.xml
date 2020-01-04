@@ -39,7 +39,8 @@
                         </addEffectTriggers>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/spinning_slash_cast.ogg</audio>
+                                <audio>Sounds/sounds/spells/scarlet_dash_cast.ogg</audio>
+                                <audioVolume>1.5</audioVolume>
                             </entity>
                         </playAudio>
                     </entity>

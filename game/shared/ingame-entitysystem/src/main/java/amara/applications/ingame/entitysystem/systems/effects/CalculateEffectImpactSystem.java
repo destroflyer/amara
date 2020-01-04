@@ -171,6 +171,14 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                                 entityWorld.setComponent(movementEntity, new MovementDirectionComponent(direction));
                                 removeTemporaryEffectCastTargets = true;
                             }
+                            else if(component instanceof TowardsSourceMovementDirectionComponent){
+                                TowardsSourceMovementDirectionComponent towardsSourceMovementDirectionComponent = (TowardsSourceMovementDirectionComponent) component;
+                                Vector2f sourcePosition = entityWorld.getComponent(effectSourceEntity, PositionComponent.class).getPosition();
+                                Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
+                                Vector2f direction = sourcePosition.subtract(targetPosition).normalizeLocal();
+                                direction.rotateAroundOrigin(towardsSourceMovementDirectionComponent.getAngle_Radian(), true);
+                                entityWorld.setComponent(movementEntity, new MovementDirectionComponent(direction));
+                            }
                             else if(component instanceof TargetedMovementTargetComponent){
                                 entityWorld.setComponent(movementEntity, new MovementTargetComponent(effectCastTargetComponent.getTargetEntity()));
                             }
@@ -247,8 +255,10 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                         TeleportComponent.class,
                         ActivateHitboxComponent.class,
                         AddCollisionGroupsComponent.class,
+                        AddIntersectionPushComponent.class,
                         DeactivateHitboxComponent.class,
                         RemoveCollisionGroupsComponent.class,
+                        RemoveIntersectionPushComponent.class,
                         RemovePopupComponent.class,
                         SpawnComponent.class,
                         AddAutoAttackSpellEffectsComponent.class,

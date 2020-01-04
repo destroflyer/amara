@@ -1803,6 +1803,14 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.AddCollisionGroupsComponent.class);
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushComponent>("addIntersectionPush"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent>("deactivateHitbox"){
 
@@ -1812,6 +1820,14 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.RemoveCollisionGroupsComponent.class);
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushComponent>("removeIntersectionPush"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushComponent();
+            }
+        });
         //players
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.players.DisplayPlayerAnnouncementComponent.class);
         try{
@@ -3173,6 +3189,19 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.placeholders.TowardsSourceMovementDirectionComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TowardsSourceMovementDirectionComponent>("towardsSourceMovementDirection"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.TowardsSourceMovementDirectionComponent construct(EntityWorld entityWorld, Element element){
+                float angle_Degrees = 0;
+                String angle_DegreesText = element.getText();
+                if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
+                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, angle_DegreesText));
+                }
+                return new amara.applications.ingame.entitysystem.components.spells.placeholders.TowardsSourceMovementDirectionComponent(angle_Degrees);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent>("triggerCastedSpellEffects"){
 
@@ -3229,6 +3258,20 @@ public class ComponentsRegistrator{
             public amara.applications.ingame.entitysystem.components.spells.SpellIndicatorComponent construct(EntityWorld entityWorld, Element element){
                 int indicatorEntity = createChildEntity(entityWorld, element, 0, "indicatorEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.SpellIndicatorComponent(indicatorEntity);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.SpellPassivesComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.SpellPassivesComponent.class.getDeclaredField("passiveEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellPassivesComponent>("spellPassives"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spells.SpellPassivesComponent construct(EntityWorld entityWorld, Element element){
+                int[] passiveEntities = createChildEntities(entityWorld, element, 0, "passiveEntities");
+                return new amara.applications.ingame.entitysystem.components.spells.SpellPassivesComponent(passiveEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent.class);

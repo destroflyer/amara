@@ -1,0 +1,56 @@
+<template>
+    <entity id="spell">
+        <!--<name>TODO</name>
+        <description>TODO</description>
+        <spellVisualisation></spellVisualisation>-->
+        <spellPassives>
+            <entity template="./passive"/>
+        </spellPassives>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <heal>100</heal>
+                        <addBuff duration="1">
+                            <entity>
+                                <buffVisualisation>turbo</buffVisualisation>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageWalkSpeed>0.35</bonusPercentageWalkSpeed>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/dwarf_warrior_heal_cast.ogg</audio>
+                                <audioVolume>1</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

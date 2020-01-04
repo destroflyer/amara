@@ -1,40 +1,25 @@
 <template>
-    <value name="delay">0.15</value>
+    <value name="delay">0.3</value>
     <entity id="spell">
         <name>TODO</name>
         <description>TODO</description>
         <!--<spellVisualisation></spellVisualisation>-->
         <spellIndicator>
             <entity>
-                <linearIndicator width="2" height="19.5"/>
+                <circularIndicator radius="4"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>
-            <!--spawn projectile-->
+            <!--trigger spell effects-->
             <entity>
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <spawn>
-                            <entity>
-                                <spawnTemplate>./projectile</spawnTemplate>
-                                <spawnMovementSpeed>28</spawnMovementSpeed>
-                            </entity>
-                        </spawn>
-                    </entity>
-                </triggeredEffect>
-                <triggerSource>#spell</triggerSource>
-                <triggerDelay>[delay]</triggerDelay>
-            </entity>
-            <!--play audio-->
-            <entity>
-                <casterTarget/>
-                <triggeredEffect>
-                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/scarlet_kunai_cast.ogg</audio>
-                                <audioVolume>1.5</audioVolume>
+                                <audio>Sounds/sounds/spells/dwarf_warrior_knockback_hit.ogg</audio>
+                                <audioVolume>1</audioVolume>
                             </entity>
                         </playAudio>
                     </entity>
@@ -43,28 +28,42 @@
                 <triggerDelay>[delay]</triggerDelay>
             </entity>
         </instantEffectTriggers>
-        <castType>linear_skillshot</castType>
+        <castType>single_target</castType>
         <castCancelAction/>
         <castDuration>[delay]</castDuration>
         <castTurnToTarget/>
         <castAnimation>
             <entity>
-                <name>throw</name>
-                <loopDuration>0.75</loopDuration>
+                <name>attack_upwards</name>
+                <loopDuration>1</loopDuration>
             </entity>
         </castAnimation>
+        <range>4</range>
         <baseCooldown>1</baseCooldown>
+        <spellTargetRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </spellTargetRules>
     </entity>
     <!--spell effect-->
     <entity>
         <castedSpell>#spell</castedSpell>
         <castedEffectTriggers>
-            <!--target effect-->
+            <!--knockback target-->
             <entity>
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <magicDamage>90 + (0.5 * source.abilityPower)</magicDamage>
+                        <physicalDamage>250 + (0.6 * source.attackDamage)</physicalDamage>
+                        <move>
+                            <entity>
+                                <displacement/>
+                                <sourceMovementDirection/>
+                                <movementSpeed>30</movementSpeed>
+                                <distanceLimit>10</distanceLimit>
+                            </entity>
+                        </move>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

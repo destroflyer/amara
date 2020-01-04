@@ -52,7 +52,7 @@
     <entity>
         <castedSpell>#spell</castedSpell>
         <castedEffectTriggers>
-            <!--knockback target-->
+            <!--stun target-->
             <entity>
                 <targetTarget/>
                 <triggeredEffect>

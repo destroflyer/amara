@@ -33,8 +33,8 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/maria_stab_cast.ogg</audio>
-                                <audioVolume>0.75</audioVolume>
+                                <audio>Sounds/sounds/spells/scarlet_ult_cast.ogg</audio>
+                                <audioVolume>2.5</audioVolume>
                             </entity>
                         </playAudio>
                     </entity>

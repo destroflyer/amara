@@ -24,8 +24,8 @@
                 <triggerCastedSpellEffects/>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/ganfaul_binding_hit.ogg</audio>
-                        <audioVolume>0.75</audioVolume>
+                        <audio>Sounds/sounds/spells/scarlet_kunai_hit.ogg</audio>
+                        <audioVolume>1.5</audioVolume>
                         <audioRemoveAfterPlaying/>
                     </entity>
                 </playAudio>

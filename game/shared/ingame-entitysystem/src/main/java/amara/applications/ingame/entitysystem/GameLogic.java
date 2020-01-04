@@ -116,6 +116,7 @@ public class GameLogic {
         entitySystems.add(new LevelUpSystem());
         entitySystems.add(new UpdateAttributesSystem());
         entitySystems.add(new TriggerUnitsPassivesSystem());
+        entitySystems.add(new TriggerSpellsPassivesSystem());
         entitySystems.add(new TriggerItemPassivesSystem());
         CastSpellQueueSystem castSpellQueueSystem = new CastSpellQueueSystem();
         entitySystems.add(new ExecutePlayerCommandsSystem(playerCommandsQueue, castSpellQueueSystem));
@@ -178,8 +179,10 @@ public class GameLogic {
         entitySystems.add(new ApplyTeleportSystem());
         entitySystems.add(new ApplyActivateHitboxSystem());
         entitySystems.add(new ApplyAddCollisiongGroupsSystem());
+        entitySystems.add(new ApplyAddIntersectionPushSystem());
         entitySystems.add(new ApplyDeactivateHitboxSystem());
         entitySystems.add(new ApplyRemoveCollisiongGroupsSystem());
+        entitySystems.add(new ApplyRemoveIntersectionPushSystem());
         entitySystems.add(new ApplyDisplayPlayerAnnouncementsSystem());
         entitySystems.add(new ApplyAddPopupsSystem());
         entitySystems.add(new ApplyRemovePopupsSystem());
