@@ -8,7 +8,6 @@ package amara.applications.ingame.entitysystem.ai.goals;
 import java.util.LinkedList;
 import amara.applications.ingame.entitysystem.ai.actions.*;
 import amara.applications.ingame.entitysystem.components.attributes.*;
-import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.components.units.*;
@@ -25,7 +24,6 @@ import com.jme3.math.Vector2f;
 public class LastHitGoal extends Goal{
     
     private LinkedList<Integer> enemyMinionEntities = new LinkedList<>();
-    private Vector2f position;
     private float attackDamage;
     private float autoAttackRange;
     private int nearestAlliedStructureEntity;
@@ -37,7 +35,7 @@ public class LastHitGoal extends Goal{
     
     @Override
     public void initialize(EntityWorld entityWorld, int entity){
-        position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
+        Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
         attackDamage = entityWorld.getComponent(entity, AttackDamageComponent.class).getValue();
         int autoAttackEntity = entityWorld.getComponent(entity, AutoAttackComponent.class).getAutoAttackEntity();
         autoAttackRange = entityWorld.getComponent(autoAttackEntity, RangeComponent.class).getDistance();
@@ -47,7 +45,7 @@ public class LastHitGoal extends Goal{
             int minionTeamEntity = entityWorld.getComponent(minionEntity, TeamComponent.class).getTeamEntity();
             if (minionTeamEntity != ownTeamEntity) {
                 Vector2f minionPosition = entityWorld.getComponent(minionEntity, PositionComponent.class).getPosition();
-                if (minionPosition.distance(position) < 35) {
+                if (minionPosition.distance(position) < 40) {
                     enemyMinionEntities.add(minionEntity);
                 }
             }
@@ -55,7 +53,7 @@ public class LastHitGoal extends Goal{
         float minimumStructureDistance = Float.MAX_VALUE;
         for(int structureEntity : entityWorld.getEntitiesWithAny(IsStructureComponent.class)){
             int structureTeamEntity = entityWorld.getComponent(structureEntity, TeamComponent.class).getTeamEntity();
-            if (structureTeamEntity != ownTeamEntity) {
+            if (structureTeamEntity == ownTeamEntity) {
                 Vector2f structurePosition = entityWorld.getComponent(structureEntity, PositionComponent.class).getPosition();
                 float structureDistance = structurePosition.distance(position);
                 if (structureDistance < minimumStructureDistance) {
@@ -68,7 +66,7 @@ public class LastHitGoal extends Goal{
 
     @Override
     public double getValue(EntityWorld entityWorld, int entity) {
-        return enemyMinionEntities.size() - 2;
+        return enemyMinionEntities.size();
     }
 
     @Override
@@ -79,7 +77,7 @@ public class LastHitGoal extends Goal{
                 actions.add(new AutoAttackAction(lasthittableMinionEntity));
             }
             else{
-                Vector2f bestPosition = getBestPosition(entityWorld, entity);
+                Vector2f bestPosition = getBestPosition(entityWorld);
                 if(bestPosition != null){
                     actions.add(new WalkAction(bestPosition));
                 }
@@ -97,37 +95,24 @@ public class LastHitGoal extends Goal{
         return -1;
     }
     
-    private Vector2f getBestPosition(EntityWorld entityWorld, int entity){
+    private Vector2f getBestPosition(EntityWorld entityWorld){
         Vector2f alliedStructurePosition = entityWorld.getComponent(nearestAlliedStructureEntity, PositionComponent.class).getPosition();
         float totalMinionWeightings = 0;
         Vector2f result = null;
         for(int minionEntity : enemyMinionEntities){
             Vector2f minionPosition = entityWorld.getComponent(minionEntity, PositionComponent.class).getPosition();
-            boolean isMovingToEntity = false;
-            MovementComponent movementComponent = entityWorld.getComponent(minionEntity, MovementComponent.class);
-            if(movementComponent != null){
-                float movementSpeed = entityWorld.getComponent(movementComponent.getMovementEntity(), MovementSpeedComponent.class).getSpeed();
-                if(movementSpeed > 0){
-                    Vector2f movementDirection = entityWorld.getComponent(movementComponent.getMovementEntity(), MovementDirectionComponent.class).getDirection();
-                    Vector2f distanceToEntity = position.subtract(minionPosition);
-                    float absoluteAngle = Math.abs(movementDirection.angleBetween(distanceToEntity));
-                    isMovingToEntity = (absoluteAngle < FastMath.HALF_PI);
-                }
+            Vector2f directionToAlliedStructure = alliedStructurePosition.subtract(minionPosition).normalizeLocal();
+            Vector2f lasthittablePosition = minionPosition.add(directionToAlliedStructure.mult(autoAttackRange + 10));
+
+            float maximumHealth = entityWorld.getComponent(minionEntity, MaximumHealthComponent.class).getValue();
+            float health = entityWorld.getComponent(minionEntity, HealthComponent.class).getValue();
+            float weighting = FastMath.pow((maximumHealth / health), 2);
+
+            if(result == null){
+                result = new Vector2f();
             }
-            if(!isMovingToEntity){
-                float maximumHealth = entityWorld.getComponent(minionEntity, MaximumHealthComponent.class).getValue();
-                float health = entityWorld.getComponent(minionEntity, HealthComponent.class).getValue();
-                float weighting = FastMath.pow((maximumHealth / health), 2);
-                
-                Vector2f directionToStructure = minionPosition.subtract(alliedStructurePosition).normalizeLocal();
-                Vector2f lasthittablePosition = minionPosition.add(directionToStructure.mult(autoAttackRange + 4));
-                
-                if(result == null){
-                    result = new Vector2f();
-                }
-                result.addLocal(lasthittablePosition.mult(weighting));
-                totalMinionWeightings += weighting;
-            }
+            result.addLocal(lasthittablePosition.mult(weighting));
+            totalMinionWeightings += weighting;
         }
         if(result != null){
             result.divideLocal(totalMinionWeightings);
