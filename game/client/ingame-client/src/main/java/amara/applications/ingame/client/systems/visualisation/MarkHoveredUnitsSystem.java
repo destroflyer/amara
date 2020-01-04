@@ -4,9 +4,9 @@
  */
 package amara.applications.ingame.client.systems.visualisation;
 
+import amara.core.settings.Settings;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.FastMath;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -24,7 +24,7 @@ import amara.libraries.entitysystem.*;
  * @author Carl
  */
 public class MarkHoveredUnitsSystem implements EntitySystem {
-    
+
     public MarkHoveredUnitsSystem(EntitySceneMap entitySceneMap, PlayerTeamSystem playerTeamSystem, IngameMouseCursorAppState ingameMouseCursorAppState) {
         this.entitySceneMap = entitySceneMap;
         this.playerTeamSystem = playerTeamSystem;
@@ -40,32 +40,35 @@ public class MarkHoveredUnitsSystem implements EntitySystem {
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsHoveredComponent.class);
-        //Check removed first to keep a potential hover mouse cursor at the end
-        for(int entity : observer.getRemoved().getEntitiesWithAny(IsHoveredComponent.class)) {
+        // Check removed first to keep a potential hover mouse cursor at the end
+        for (int entity : observer.getRemoved().getEntitiesWithAny(IsHoveredComponent.class)) {
             ingameMouseCursorAppState.setCursor_Default();
             Node node = entitySceneMap.requestNode(entity);
             ModelObject modelObject = (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
             Spatial marker = modelObject.getChild(NODE_NAME_MARKER);
             modelObject.unregisterModel(marker);
         }
-        for(int entity : observer.getNew().getEntitiesWithAny(IsHoveredComponent.class)) {
+        for (int entity : observer.getNew().getEntitiesWithAny(IsHoveredComponent.class)) {
             boolean isAllied = playerTeamSystem.isAllied(entityWorld, entity);
             if (isAllied) {
                 ingameMouseCursorAppState.setCursor_Default();
             } else {
                 ingameMouseCursorAppState.setCursor_Enemy();
             }
-            Node node = entitySceneMap.requestNode(entity);
-            ModelObject modelObject = (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
-            RegisteredModel clonedModel = modelObject.loadAndRegisterModel();
-            clonedModel.getNode().setName(NODE_NAME_MARKER);
-            Material material = new Material(MaterialFactory.getAssetManager(), "Shaders/cartoonedge/matdefs/cartoonedge.j3md");
-            material.setColor("EdgesColor", (isAllied?colorAllies:colorEnemies));
-            material.setFloat("EdgeSize", (0.1f / FastMath.pow(modelObject.getSkin().getModelScale().getY(), 2.5f)));
-            for (Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel.getNode())) {
-                geometry.setMaterial(material);
+            float hoverOutlineThickness = Settings.getFloat("hover_outline_thickness");
+            if (hoverOutlineThickness > 0) {
+                Node node = entitySceneMap.requestNode(entity);
+                ModelObject modelObject = (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
+                RegisteredModel clonedModel = modelObject.loadAndRegisterModel();
+                clonedModel.getNode().setName(NODE_NAME_MARKER);
+                for (Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel.getNode())) {
+                    Material material = new Material(MaterialFactory.getAssetManager(), "Shaders/cartoonedge/matdefs/cartoonedge.j3md");
+                    material.setColor("EdgesColor", (isAllied ? colorAllies : colorEnemies));
+                    material.setFloat("EdgeSize", hoverOutlineThickness / geometry.getWorldScale().getY());
+                    geometry.setMaterial(material);
+                }
+                JMonkeyUtil.setHardwareSkinningPreferred(clonedModel.getNode(), false);
             }
-            JMonkeyUtil.setHardwareSkinningPreferred(clonedModel.getNode(), false);
         }
     }
 }
