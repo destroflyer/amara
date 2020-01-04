@@ -12,19 +12,19 @@ import amara.libraries.entitysystem.synchronizing.ComponentField;
  * @author Carl
  */
 @Serializable
-public class AddSilenceComponent{
+public class AddSilenceComponent {
 
-    public AddSilenceComponent(){
+    public AddSilenceComponent() {
         
     }
     
-    public AddSilenceComponent(float duration){
+    public AddSilenceComponent(float duration) {
         this.duration = duration;
     }
     @ComponentField(type=ComponentField.Type.TIMER)
     private float duration;
 
-    public float getDuration(){
+    public float getDuration() {
         return duration;
     }
 }

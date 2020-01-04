@@ -12,19 +12,19 @@ import amara.libraries.entitysystem.synchronizing.ComponentField;
  * @author Carl
  */
 @Serializable
-public class KnockupHeightComponent{
+public class KnockupHeightComponent {
 
-    public KnockupHeightComponent(){
+    public KnockupHeightComponent() {
         
     }
 
-    public KnockupHeightComponent(float height){
+    public KnockupHeightComponent(float height) {
         this.height = height;
     }
     @ComponentField(type=ComponentField.Type.DISTANCE)
     private float height;
 
-    public float getHeight(){
+    public float getHeight() {
         return height;
     }
 }

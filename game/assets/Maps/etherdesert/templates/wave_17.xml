@@ -38,6 +38,10 @@
         <sightRange>28</sightRange>
         <isTargetable/>
         <isVulnerable/>
+        <isBindable/>
+        <isKnockupable/>
+        <isSilencable/>
+        <isStunnable/>
         <bounty>
             <entity>
                 <bountyCharacterKill></bountyCharacterKill>

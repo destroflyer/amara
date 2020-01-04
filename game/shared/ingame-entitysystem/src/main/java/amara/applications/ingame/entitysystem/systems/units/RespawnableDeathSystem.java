@@ -21,7 +21,7 @@ import amara.libraries.entitysystem.*;
  */
 public class RespawnableDeathSystem implements EntitySystem {
 
-    private Class[] componentClassesToReomve = new Class[]{
+    private Class[] componentClassesToRemove = new Class[]{
         HitboxActiveComponent.class,
         MaximumHealthComponent.class,
         HealthComponent.class,
@@ -30,11 +30,8 @@ public class RespawnableDeathSystem implements EntitySystem {
         IsVulnerableComponent.class,
         // Crowdcontrol
         IsBindedComponent.class,
-        IsBindedImmuneComponent.class,
         IsSilencedComponent.class,
-        IsSilencedImmuneComponent.class,
         IsStunnedComponent.class,
-        IsStunnedImmuneComponent.class
     };
 
     @Override
@@ -48,7 +45,7 @@ public class RespawnableDeathSystem implements EntitySystem {
     }
 
     private void onRespawnableDeath(EntityWorld entityWorld, int entity){
-        for (Class componentClass : componentClassesToReomve) {
+        for (Class componentClass : componentClassesToRemove) {
             entityWorld.removeComponent(entity, componentClass);
         }
         UnitUtil.cancelAction(entityWorld, entity);

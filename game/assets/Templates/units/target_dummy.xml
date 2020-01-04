@@ -43,6 +43,10 @@
         <sightRange>30</sightRange>
         <isTargetable/>
         <isVulnerable/>
+        <isBindable/>
+        <isKnockupable/>
+        <isSilencable/>
+        <isStunnable/>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>

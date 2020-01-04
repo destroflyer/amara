@@ -14,19 +14,18 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class ApplyAddBindingSystem implements EntitySystem{
-    
+public class ApplyAddBindingSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddBindingComponent.class)))
-        {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            if(!entityWorld.hasComponent(targetID, IsBindedImmuneComponent.class)){
-                AddBindingComponent addBindingComponent = entityWrapper.getComponent(AddBindingComponent.class);
-                IsBindedComponent isBindedComponent = entityWorld.getComponent(targetID, IsBindedComponent.class);
-                if((isBindedComponent == null) || (addBindingComponent.getDuration() > isBindedComponent.getRemainingDuration())){
-                    entityWorld.setComponent(targetID, new IsBindedComponent(addBindingComponent.getDuration()));
-                    UnitUtil.cancelMovement(entityWorld, targetID);
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddBindingComponent.class)) {
+            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
+            if (entityWorld.hasComponent(targetEntity, IsBindableComponent.class)) {
+                AddBindingComponent addBindingComponent = entityWorld.getComponent(effectImpactEntity, AddBindingComponent.class);
+                IsBindedComponent isBindedComponent = entityWorld.getComponent(targetEntity, IsBindedComponent.class);
+                if ((isBindedComponent == null) || (addBindingComponent.getDuration() > isBindedComponent.getRemainingDuration())) {
+                    entityWorld.setComponent(targetEntity, new IsBindedComponent(addBindingComponent.getDuration()));
+                    UnitUtil.cancelMovement(entityWorld, targetEntity);
                 }
             }
         }

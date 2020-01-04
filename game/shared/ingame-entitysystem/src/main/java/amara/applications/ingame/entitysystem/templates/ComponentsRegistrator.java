@@ -1338,6 +1338,14 @@ public class ComponentsRegistrator{
             }
         });
         //crowdcontrol
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindableComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindableComponent>("addBindable"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindableComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindableComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
@@ -1356,22 +1364,12 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingComponent(duration);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent>("addBindingImmune"){
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupableComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupableComponent>("addKnockupable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent construct(EntityWorld entityWorld, Element element){
-                float duration = 0;
-                String durationText = element.getText();
-                if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
-                }
-                return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingImmuneComponent(duration);
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupableComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupableComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupComponent.class);
@@ -1388,22 +1386,12 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupComponent(knockupEntity);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent>("addKnockupImmune"){
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilencableComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilencableComponent>("addSilencable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent construct(EntityWorld entityWorld, Element element){
-                float duration = 0;
-                String durationText = element.getText();
-                if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
-                }
-                return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupImmuneComponent(duration);
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilencableComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilencableComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceComponent.class);
@@ -1424,24 +1412,6 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceComponent(duration);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent>("addSilenceImmune"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent construct(EntityWorld entityWorld, Element element){
-                float duration = 0;
-                String durationText = element.getText();
-                if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
-                }
-                return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceImmuneComponent(duration);
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
@@ -1460,22 +1430,12 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunComponent(duration);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent>("addStunImmune"){
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunnableComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunnableComponent>("addStunnable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent construct(EntityWorld entityWorld, Element element){
-                float duration = 0;
-                String durationText = element.getText();
-                if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
-                }
-                return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunImmuneComponent(duration);
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunnableComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunnableComponent();
             }
         });
         //knockup
@@ -1515,6 +1475,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent(height);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindableComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindableComponent>("removeBindable"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindableComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindableComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent>("removeBinding"){
 
@@ -1523,12 +1491,28 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupableComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupableComponent>("removeKnockupable"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupableComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupableComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent>("removeKnockup"){
 
             @Override
             public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilencableComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilencableComponent>("removeSilencable"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilencableComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilencableComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent.class);
@@ -1545,6 +1529,14 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunnableComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunnableComponent>("removeStunnable"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunnableComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunnableComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.CustomEffectValuesComponent.class);
@@ -3730,6 +3722,14 @@ public class ComponentsRegistrator{
             }
         });
         //crowdcontrol
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindableComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindableComponent>("isBindable"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindableComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindableComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
@@ -3748,22 +3748,12 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent(remainingDuration);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent>("isBindedImmune"){
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupableComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupableComponent>("isKnockupable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent construct(EntityWorld entityWorld, Element element){
-                float remainingDuration = 0;
-                String remainingDurationText = element.getText();
-                if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
-                }
-                return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedImmuneComponent(remainingDuration);
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupableComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupableComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent.class);
@@ -3790,22 +3780,12 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent(knockupEntity, remainingDuration);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent>("isKnockupedImmune"){
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencableComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencableComponent>("isSilencable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent construct(EntityWorld entityWorld, Element element){
-                float remainingDuration = 0;
-                String remainingDurationText = element.getText();
-                if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
-                }
-                return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedImmuneComponent(remainingDuration);
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencableComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencableComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedComponent.class);
@@ -3826,22 +3806,12 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedComponent(remainingDuration);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent>("isSilencedImmune"){
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnableComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnableComponent>("isStunnable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent construct(EntityWorld entityWorld, Element element){
-                float remainingDuration = 0;
-                String remainingDurationText = element.getText();
-                if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
-                }
-                return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedImmuneComponent(remainingDuration);
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnableComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnableComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent.class);
@@ -3860,24 +3830,6 @@ public class ComponentsRegistrator{
                     remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent(remainingDuration);
-            }
-        });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent>("isStunnedImmune"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent construct(EntityWorld entityWorld, Element element){
-                float remainingDuration = 0;
-                String remainingDurationText = element.getText();
-                if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
-                }
-                return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedImmuneComponent(remainingDuration);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent.class);

@@ -52,6 +52,10 @@
         <sightRange>28</sightRange>
         <isTargetable/>
         <isVulnerable/>
+        <isBindable/>
+        <isKnockupable/>
+        <isSilencable/>
+        <isStunnable/>
         <!--spells-->
         <autoAttack>
             <entity template="spells/ranged_autoattack,Models/3dsa_archer_arrow/skin.xml"/>

@@ -13,14 +13,13 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class ApplyRemoveSilenceSystem implements EntitySystem{
-    
+public class ApplyRemoveSilenceSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, RemoveSilenceComponent.class)))
-        {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            entityWorld.removeComponent(targetID, IsSilencedComponent.class);
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, RemoveSilenceComponent.class)) {
+            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
+            entityWorld.removeComponent(targetEntity, IsSilencedComponent.class);
         }
     }
 }

@@ -20,6 +20,7 @@ import amara.applications.ingame.entitysystem.components.targets.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.animations.*;
 import amara.applications.ingame.entitysystem.components.units.bounties.*;
+import amara.applications.ingame.entitysystem.components.units.crowdcontrol.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
@@ -120,6 +121,10 @@ public class CustomGameTemplates{
                 entityWrapper.setComponent(new SightRangeComponent(28));
                 entityWrapper.setComponent(new IsTargetableComponent());
                 entityWrapper.setComponent(new IsVulnerableComponent());
+                entityWrapper.setComponent(new IsBindableComponent());
+                entityWrapper.setComponent(new IsKnockupableComponent());
+                entityWrapper.setComponent(new IsSilencableComponent());
+                entityWrapper.setComponent(new IsStunnableComponent());
 
                 EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/melee_autoattack");
                 entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
@@ -168,6 +173,10 @@ public class CustomGameTemplates{
                 entityWrapper.setComponent(new SightRangeComponent(28));
                 entityWrapper.setComponent(new IsTargetableComponent());
                 entityWrapper.setComponent(new IsVulnerableComponent());
+                entityWrapper.setComponent(new IsBindableComponent());
+                entityWrapper.setComponent(new IsKnockupableComponent());
+                entityWrapper.setComponent(new IsSilencableComponent());
+                entityWrapper.setComponent(new IsStunnableComponent());
 
                 EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack,Models/3dsa_archer_arrow/skin.xml");
                 entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
@@ -282,6 +291,10 @@ public class CustomGameTemplates{
                 entityWrapper.setComponent(new SightRangeComponent(30));
                 entityWrapper.setComponent(new IsTargetableComponent());
                 entityWrapper.setComponent(new IsVulnerableComponent());
+                entityWrapper.setComponent(new IsBindableComponent());
+                entityWrapper.setComponent(new IsKnockupableComponent());
+                entityWrapper.setComponent(new IsSilencableComponent());
+                entityWrapper.setComponent(new IsStunnableComponent());
 
                 EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack,Models/3dsa_fire_dragon_fireball/skin.xml");
                 entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));

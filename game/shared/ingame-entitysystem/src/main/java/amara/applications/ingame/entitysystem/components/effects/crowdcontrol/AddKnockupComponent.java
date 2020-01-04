@@ -12,19 +12,19 @@ import amara.libraries.entitysystem.synchronizing.ComponentField;
  * @author Carl
  */
 @Serializable
-public class AddKnockupComponent{
+public class AddKnockupComponent {
 
-    public AddKnockupComponent(){
+    public AddKnockupComponent() {
         
     }
     
-    public AddKnockupComponent(int knockupEntity){
+    public AddKnockupComponent(int knockupEntity) {
         this.knockupEntity = knockupEntity;
     }
     @ComponentField(type=ComponentField.Type.ENTITY)
     private int knockupEntity;
 
-    public int getKnockupEntity(){
+    public int getKnockupEntity() {
         return knockupEntity;
     }
 }

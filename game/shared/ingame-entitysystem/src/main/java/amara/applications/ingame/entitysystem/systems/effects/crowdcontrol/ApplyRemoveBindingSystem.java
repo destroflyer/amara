@@ -13,14 +13,13 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class ApplyRemoveBindingSystem implements EntitySystem{
-    
+public class ApplyRemoveBindingSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, RemoveBindingComponent.class)))
-        {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            entityWorld.removeComponent(targetID, IsBindedComponent.class);
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, RemoveBindingComponent.class)) {
+            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
+            entityWorld.removeComponent(targetEntity, IsBindedComponent.class);
         }
     }
 }

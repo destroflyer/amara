@@ -13,18 +13,17 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class ApplyAddSilenceSystem implements EntitySystem{
-    
+public class ApplyAddSilenceSystem implements EntitySystem {
+
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddSilenceComponent.class)))
-        {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            if(!entityWorld.hasComponent(targetID, IsSilencedImmuneComponent.class)){
-                AddSilenceComponent addSilenceComponent = entityWrapper.getComponent(AddSilenceComponent.class);
-                IsSilencedComponent isSilencedComponent = entityWorld.getComponent(targetID, IsSilencedComponent.class);
-                if((isSilencedComponent == null) || (addSilenceComponent.getDuration() > isSilencedComponent.getRemainingDuration())){
-                    entityWorld.setComponent(targetID, new IsSilencedComponent(addSilenceComponent.getDuration()));
+        for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddSilenceComponent.class)) {
+            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
+            if (entityWorld.hasComponent(targetEntity, IsSilencableComponent.class)) {
+                AddSilenceComponent addSilenceComponent = entityWorld.getComponent(effectImpactEntity, AddSilenceComponent.class);
+                IsSilencedComponent isSilencedComponent = entityWorld.getComponent(targetEntity, IsSilencedComponent.class);
+                if ((isSilencedComponent == null) || (addSilenceComponent.getDuration() > isSilencedComponent.getRemainingDuration())) {
+                    entityWorld.setComponent(targetEntity, new IsSilencedComponent(addSilenceComponent.getDuration()));
                 }
             }
         }

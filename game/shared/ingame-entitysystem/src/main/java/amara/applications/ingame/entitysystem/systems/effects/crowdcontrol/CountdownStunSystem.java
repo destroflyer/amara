@@ -11,19 +11,17 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class CountdownStunSystem implements EntitySystem{
-    
+public class CountdownStunSystem implements EntitySystem {
+
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(IsStunnedComponent.class)))
-        {
-            IsStunnedComponent isStunnedComponent = entityWrapper.getComponent(IsStunnedComponent.class);
+        for (int entity : entityWorld.getEntitiesWithAny(IsStunnedComponent.class)) {
+            IsStunnedComponent isStunnedComponent = entityWorld.getComponent(entity, IsStunnedComponent.class);
             float duration = (isStunnedComponent.getRemainingDuration() - deltaSeconds);
-            if(duration > 0){
-                entityWrapper.setComponent(new IsStunnedComponent(duration));
-            }
-            else{
-                entityWrapper.removeComponent(IsStunnedComponent.class);
+            if (duration > 0) {
+                entityWorld.setComponent(entity, new IsStunnedComponent(duration));
+            } else {
+                entityWorld.removeComponent(entity, IsStunnedComponent.class);
             }
         }
     }

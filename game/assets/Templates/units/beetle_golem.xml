@@ -50,6 +50,10 @@
         <sightRange>30</sightRange>
         <isTargetable/>
         <isVulnerable/>
+        <isBindable/>
+        <isKnockupable/>
+        <isSilencable/>
+        <isStunnable/>
         <!--spells-->
         <autoAttack>
             <entity template="spells/melee_autoattack"/>

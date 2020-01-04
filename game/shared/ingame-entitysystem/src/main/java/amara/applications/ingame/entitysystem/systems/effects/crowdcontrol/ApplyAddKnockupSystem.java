@@ -15,20 +15,19 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class ApplyAddKnockupSystem implements EntitySystem{
-    
+public class ApplyAddKnockupSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddKnockupComponent.class)))
-        {
-            int targetID = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            if(!entityWorld.hasComponent(targetID, IsKnockupedImmuneComponent.class)){
-                AddKnockupComponent addKnockupComponent = entityWrapper.getComponent(AddKnockupComponent.class);
-                IsKnockupedComponent isKnockupedComponent = entityWorld.getComponent(targetID, IsKnockupedComponent.class);
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddKnockupComponent.class)) {
+            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
+            if (entityWorld.hasComponent(targetEntity, IsKnockupableComponent.class)) {
+                AddKnockupComponent addKnockupComponent = entityWorld.getComponent(effectImpactEntity, AddKnockupComponent.class);
+                IsKnockupedComponent isKnockupedComponent = entityWorld.getComponent(targetEntity, IsKnockupedComponent.class);
                 float duration = entityWorld.getComponent(addKnockupComponent.getKnockupEntity(), KnockupDurationComponent.class).getDuration();
-                if((isKnockupedComponent == null) || (duration > isKnockupedComponent.getRemainingDuration())){
-                    entityWorld.setComponent(targetID, new IsKnockupedComponent(addKnockupComponent.getKnockupEntity(), duration));
-                    UnitUtil.cancelAction(entityWorld, targetID);
+                if ((isKnockupedComponent == null) || (duration > isKnockupedComponent.getRemainingDuration())) {
+                    entityWorld.setComponent(targetEntity, new IsKnockupedComponent(addKnockupComponent.getKnockupEntity(), duration));
+                    UnitUtil.cancelAction(entityWorld, targetEntity);
                 }
             }
         }

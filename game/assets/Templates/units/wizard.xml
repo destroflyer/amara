@@ -53,6 +53,10 @@
         <requestUpdateAttributes/>
         <isTargetable/>
         <isVulnerable/>
+        <isBindable/>
+        <isKnockupable/>
+        <isSilencable/>
+        <isStunnable/>
         <!--spells-->
         <autoAttack>
             <entity template="spells/ranged_autoattack"/>

@@ -11,19 +11,17 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class CountdownKnockupSystem implements EntitySystem{
-    
+public class CountdownKnockupSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(IsKnockupedComponent.class)))
-        {
-            IsKnockupedComponent isKnockupedComponent = entityWrapper.getComponent(IsKnockupedComponent.class);
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int entity : entityWorld.getEntitiesWithAny(IsKnockupedComponent.class)) {
+            IsKnockupedComponent isKnockupedComponent = entityWorld.getComponent(entity, IsKnockupedComponent.class);
             float duration = (isKnockupedComponent.getRemainingDuration() - deltaSeconds);
-            if(duration > 0){
-                entityWrapper.setComponent(new IsKnockupedComponent(isKnockupedComponent.getKnockupEntity(), duration));
-            }
-            else{
-                entityWrapper.removeComponent(IsKnockupedComponent.class);
+            if (duration > 0) {
+                entityWorld.setComponent(entity, new IsKnockupedComponent(isKnockupedComponent.getKnockupEntity(), duration));
+            } else {
+                entityWorld.removeComponent(entity, IsKnockupedComponent.class);
             }
         }
     }

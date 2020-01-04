@@ -11,19 +11,17 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class CountdownSilenceSystem implements EntitySystem{
-    
+public class CountdownSilenceSystem implements EntitySystem {
+
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(IsSilencedComponent.class)))
-        {
-            IsSilencedComponent isSilencedComponent = entityWrapper.getComponent(IsSilencedComponent.class);
+        for (int entity : entityWorld.getEntitiesWithAny(IsSilencedComponent.class)) {
+            IsSilencedComponent isSilencedComponent = entityWorld.getComponent(entity, IsSilencedComponent.class);
             float duration = (isSilencedComponent.getRemainingDuration() - deltaSeconds);
-            if(duration > 0){
-                entityWrapper.setComponent(new IsSilencedComponent(duration));
-            }
-            else{
-                entityWrapper.removeComponent(IsSilencedComponent.class);
+            if (duration > 0) {
+                entityWorld.setComponent(entity, new IsSilencedComponent(duration));
+            } else {
+                entityWorld.removeComponent(entity, IsSilencedComponent.class);
             }
         }
     }
