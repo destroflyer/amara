@@ -19,7 +19,8 @@ public class ModelModifier_Tree_Log_Burning extends ModelModifier{
     @Override
     public void modify(RegisteredModel registeredModel){
         Spatial fire = MaterialFactory.getAssetManager().loadModel("Models/fireball/fireball.j3o");
-        fire.setLocalTranslation(new Vector3f(0, 1, 0));
+        fire.setLocalTranslation(new Vector3f(0, 0.33f, 0));
+        fire.setLocalScale(0.33f);
         registeredModel.getNode().attachChild(fire);
     }
 }
