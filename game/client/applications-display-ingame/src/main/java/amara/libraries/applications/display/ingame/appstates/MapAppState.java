@@ -176,12 +176,16 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
                 }
                 else{
                     Geometry waterPlane = getAppState(WaterAppState.class).createWaterPlane(waterVisual.getPosition(), waterVisual.getSize());
-                    visualsNode.attachChild(waterPlane);
+                    mainApplication.enqueueTask(() -> {
+                        visualsNode.attachChild(waterPlane);
+                    });
                 }
             }
             else if(visual instanceof SnowVisual){
                 SnowEmitter snowEmitter = new SnowEmitter();
-                cameraNode.attachChild(snowEmitter.getParticleEmitter());
+                mainApplication.enqueueTask(() -> {
+                    cameraNode.attachChild(snowEmitter.getParticleEmitter());
+                });
             }
         }
         modelsNode.batch();
