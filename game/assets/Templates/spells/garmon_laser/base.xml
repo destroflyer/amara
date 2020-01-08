@@ -1,0 +1,41 @@
+<template>
+    <value name="castDuration">2.5</value>
+    <entity id="spell">
+        <name>Milkyway Shot</name>
+        <description>Garmon channels for [castDuration] seconds and, after a small delay, shoots a laser in a straight line. Enemies in the lasers area will be damaged in small intervals.</description>
+        <spellVisualisation>ganfaul_laser</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="2.5" height="25"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn object-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>0.7</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>[castDuration]</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>spell11</name>
+                <loopDuration>2.5</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>12</baseCooldown>
+    </entity>
+</template>

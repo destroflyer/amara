@@ -5,19 +5,19 @@
         <model>Models/garmon/skin_default.xml</model>
         <idleAnimation>
             <entity id="idleAnimation">
-                <name>idle</name>
-                <loopDuration>1.875</loopDuration>
+                <name>idle2</name>
+                <loopDuration>10</loopDuration>
             </entity>
         </idleAnimation>
         <walkAnimation>
             <entity>
-                <name>run</name>
+                <name>walk2</name>
             </entity>
         </walkAnimation>
-        <walkStepDistance>8</walkStepDistance>
+        <walkStepDistance>6</walkStepDistance>
         <autoAttackAnimation>
             <entity>
-                <name>spell2</name>
+                <name>attack_right</name>
             </entity>
         </autoAttackAnimation>
         <deathAnimation>
@@ -69,10 +69,15 @@
         <autoAttack>
             <entity template="spells/ranged_autoattack"/>
         </autoAttack>
-        <!--<passives>
-        </passives>-->
-        <!--<learnableSpells>
-        </learnableSpells>-->
+        <passives>
+            <entity template="spells/garmon_passive/passive"/>
+        </passives>
+        <learnableSpells>
+            <entity template="spells/garmon_binding/base"/>
+            <entity template="spells/garmon_laser/base"/>
+            <entity template="spells/garmon_backflip/base"/>
+            <entity template="spells/garmon_ult/base"/>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>

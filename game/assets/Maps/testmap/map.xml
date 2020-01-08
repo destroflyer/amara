@@ -1,12 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <map author="Carl" date="1402054147616" class="amara.applications.ingame.maps.Map_Testmap">
-	<camera initialPosition="30.6,34.0,-7.7" initialDirection="0.0,-1.0,0.6745">		<zoom interval="1.0" initialDistance="40.0" />	</camera>
+	<camera initialPosition="30.6,34.0,-7.7" initialDirection="0.0,-1.0,0.6745">
+		<zoom interval="1.0" initialDistance="40.0" />
+	</camera>
 	<lights>
 		<ambient color="0.2,0.2,0.2" />
 		<directional color="1.2,1.2,1.2" direction="-0.5,-1.75,1.0">
 			<shadows intensity="0.4" />
 		</directional>
-	</lights>	<terrain>		<textures>			<texture scale="10">Textures/terrain/cartoon_forest/grass_1.jpg</texture>			<texture scale="16">Textures/terrain/cartoon_forest/stone_bright_1.jpg</texture>			<texture scale="16">Textures/terrain/cartoon_forest/wood_1.jpg</texture>			<texture scale="24">Textures/terrain/cartoon_forest/cliff.jpg</texture>			<texture scale="24">Textures/terrain/cartoon_forest/sandstone.jpg</texture>			<texture scale="24">Textures/terrain/cartoon_forest/pebbles_1.jpg</texture>			<texture scale="18">Textures/terrain/cartoon_forest/cracked_cliff.jpg</texture>			<texture scale="16">Textures/terrain/cartoon_forest/bush.jpg</texture>			<texture scale="16">Textures/terrain/cartoon_forest/dirt.jpg</texture>		</textures>	</terrain>	<minimap x="0" y="0" width="100" height="100"/>
+	</lights>
+	<filters>
+		<ssao sampleRadius="3" intensity="25" scale="6" bias="0.1"/>
+	</filters>
+	<terrain>
+		<textures>
+			<texture scale="10">Textures/terrain/cartoon_forest/grass_1.jpg</texture>
+			<texture scale="16">Textures/terrain/cartoon_forest/stone_bright_1.jpg</texture>
+			<texture scale="16">Textures/terrain/cartoon_forest/wood_1.jpg</texture>
+			<texture scale="24">Textures/terrain/cartoon_forest/cliff.jpg</texture>
+			<texture scale="24">Textures/terrain/cartoon_forest/sandstone.jpg</texture>
+			<texture scale="24">Textures/terrain/cartoon_forest/pebbles_1.jpg</texture>
+			<texture scale="18">Textures/terrain/cartoon_forest/cracked_cliff.jpg</texture>
+			<texture scale="16">Textures/terrain/cartoon_forest/bush.jpg</texture>
+			<texture scale="16">Textures/terrain/cartoon_forest/dirt.jpg</texture>
+		</textures>
+	</terrain>
+	<minimap x="0" y="0" width="100" height="100"/>
 	<physics width="100" height="100" heightmapScale="0.0225" groundHeight="1">
 		<obstacles>
 			<simpleConvex>
@@ -319,7 +339,8 @@
 			</simpleConvex>
 		</obstacles>
 	</physics>
-	<visuals>		<water position="5,0.5,32" size="16,10" />
+	<visuals>
+		<water position="5,0.5,32" size="16,10" />
 		<model modelSkinPath="Models/cartoon_city_house_1/skin.xml" position="54.119766,0.0,29.898973" direction="-0.76604474,0.0,-0.6427877" scale="1.0999999" />
 		<model modelSkinPath="Models/cartoon_city_house_2/skin.xml" position="34.90455,0.0,40.730797" direction="0.8191524,0.0,-0.5735767" scale="1.0999999" />
 		<model modelSkinPath="Models/cartoon_city_house_3/skin.xml" position="24.903442,0.0,54.16413" direction="0.34202024,0.0,-0.9396932" scale="1.0999999" />
@@ -379,4 +400,4 @@
 		<model modelSkinPath="Models/cartoon_forest_tree_1/skin.xml" position="65.68924,0.0,22.485626" direction="-0.8191613,0.0,0.57358193" scale="0.9000001" />
 		<model modelSkinPath="Models/cartoon_forest_stone_2/skin.xml" position="59.323402,0.0,28.396885" direction="-0.90631723,0.0,-0.42262357" scale="0.8750001" />
 	</visuals>
-</map>
+</map>

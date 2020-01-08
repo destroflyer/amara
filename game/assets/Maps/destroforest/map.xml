@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <map author="Carl" date="1412356843373" class="amara.applications.ingame.maps.Map_Destroforest">
 	<camera initialPosition="160.0,70.0,-5.0" initialDirection="0.0,-1.0,0.6745">
-		<limit minX="42.0" minY="15.0" maxX="320.0" maxY="260.0" />		<zoom interval="1.0" initialDistance="40.0" minimumDistance="10.0" maximumDistance="300.0" />
+		<limit minX="42.0" minY="15.0" maxX="320.0" maxY="260.0" />
+		<zoom interval="1.0" initialDistance="40.0" minimumDistance="10.0" maximumDistance="300.0" />
 	</camera>
 	<lights>
 		<ambient color="0.2,0.2,0.2" />
@@ -9,6 +11,9 @@
 			<shadows intensity="0.4" />
 		</directional>
 	</lights>
+	<filters>
+		<ssao sampleRadius="3" intensity="25" scale="6" bias="0.1"/>
+	</filters>
 	<terrain>
 		<textures>
 			<texture scale="20.0">Textures/terrain/cartoon_forest/grass_2.jpg</texture>
@@ -21,7 +26,8 @@
 			<texture scale="16.0">Textures/terrain/cartoon_forest/bush.jpg</texture>
 			<texture scale="16.0">Textures/terrain/cartoon_forest/dirt.jpg</texture>
 		</textures>
-	</terrain>	<minimap x="0" y="0" width="330" height="270"/>
+	</terrain>
+	<minimap x="0" y="0" width="330" height="270"/>
 	<physics width="330" height="270" heightmapScale="0.0225" groundHeight="3">
 		<obstacles>
 			<circle radius="5.849999986588955">
@@ -3296,4 +3302,4 @@
 		<model modelSkinPath="Models/cartoon_city_stock_2/skin.xml" position="156.26077,0.0,160.31715" direction="0.8191544,0.0,-0.5735774" scale="1.2375009" />
 		<model modelSkinPath="Models/cartoon_city_tower_1/skin.xml" position="79.602646,0.0,181.103" direction="0.8191544,0.0,-0.5735774" scale="1.9687502" />
 	</visuals>
-</map>
+</map>

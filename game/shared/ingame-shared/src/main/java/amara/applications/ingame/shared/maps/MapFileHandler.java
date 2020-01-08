@@ -9,9 +9,11 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.filechooser.FileFilter;
+
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.math.ColorRGBA;
+import amara.applications.ingame.shared.maps.filters.*;
 import amara.applications.ingame.shared.maps.lights.*;
 import amara.applications.ingame.shared.maps.terrain.*;
 import amara.applications.ingame.shared.maps.visuals.*;
@@ -106,6 +108,23 @@ public class MapFileHandler{
                 }
             }
             root.addContent(elementLights);
+            //Filters
+            Element elementFilters = new Element("filters");
+            for(MapFilter mapFilter : map.getFilters()){
+                Element elementFilter = null;
+                if(mapFilter instanceof MapFilter_SSAO){
+                    MapFilter_SSAO mapFilter_SSAO = (MapFilter_SSAO) mapFilter;
+                    elementFilter = new Element("ssao");
+                    elementFilter.setAttribute("sampleRadius", "" + mapFilter_SSAO.getSampleRadius());
+                    elementFilter.setAttribute("intensity", "" + mapFilter_SSAO.getIntensity());
+                    elementFilter.setAttribute("scale", "" + mapFilter_SSAO.getScale());
+                    elementFilter.setAttribute("bias", "" + mapFilter_SSAO.getBias());
+                }
+                if(elementFilter != null){
+                    elementFilters.addContent(elementFilter);
+                }
+            }
+            root.addContent(elementFilters);
             //Terrain
             Element elementTerrain = new Element("terrain");
             TerrainSkin terrainSkin = map.getTerrainSkin();
@@ -245,6 +264,22 @@ public class MapFileHandler{
                 }
                 if(mapLight != null){
                     map.getLights().addLight(mapLight);
+                }
+            }
+            //Filters
+            Element elementFilters = root.getChild("filters");
+            for(Object elementFilterObject : elementFilters.getChildren()){
+                Element elemenFilter = (Element) elementFilterObject;
+                MapFilter mapFilter = null;
+                if(elemenFilter.getName().equals("ssao")){
+                    float sampleRadius = elemenFilter.getAttribute("sampleRadius").getFloatValue();
+                    float intensity = elemenFilter.getAttribute("intensity").getFloatValue();
+                    float scale = elemenFilter.getAttribute("scale").getFloatValue();
+                    float bias = elemenFilter.getAttribute("bias").getFloatValue();
+                    mapFilter = new MapFilter_SSAO(sampleRadius, intensity, scale, bias);
+                }
+                if(mapFilter != null){
+                    map.addFilter(mapFilter);
                 }
             }
             //Terrain

@@ -1,0 +1,53 @@
+<template>
+    <value name="duration">2</value>
+    <entity id="passive">
+        <name>Star Channeling</name>
+        <description>After taking damage, Garmon gains 20 ability power for [duration] seconds.</description>
+        <spellVisualisation>ganfaul_passive</spellVisualisation>
+        <passiveAddedEffectTriggers>
+            <!--add trigger-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addEffectTriggers>
+                            <!--gain ability power-->
+                            <entity id="damageTakenTrigger">
+                                <damageTakenTrigger physicalDamage="true" magicDamage="true" trueDamage="true"/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <addBuff duration="[duration]">
+                                            <entity>
+                                                <continuousAttributes>
+                                                    <entity>
+                                                        <bonusFlatAbilityPower>20</bonusFlatAbilityPower>
+                                                    </entity>
+                                                </continuousAttributes>
+                                            </entity>
+                                        </addBuff>
+                                    </entity>
+                                </triggeredEffect>
+                                <cooldown>8</cooldown>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveAddedEffectTriggers>
+        <passiveRemovedEffectTriggers>
+            <!--remove trigger-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeEffectTriggers>#damageTakenTrigger</removeEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveRemovedEffectTriggers>
+        <linkedCooldown>#damageTakenTrigger</linkedCooldown>
+    </entity>
+</template>

@@ -6,6 +6,7 @@ package amara.libraries.applications.display.ingame.appstates;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.audio.Listener;
@@ -16,6 +17,7 @@ import com.jme3.light.DirectionalLight;
 import com.jme3.light.Light;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import com.jme3.post.ssao.SSAOFilter;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.post.Filter;
@@ -27,6 +29,7 @@ import com.jme3.texture.Texture;
 import com.jme3.util.SkyFactory;
 import com.jme3.water.WaterFilter;
 import amara.applications.ingame.shared.maps.*;
+import amara.applications.ingame.shared.maps.filters.*;
 import amara.applications.ingame.shared.maps.lights.*;
 import amara.applications.ingame.shared.maps.visuals.*;
 import amara.core.settings.Settings;
@@ -65,7 +68,9 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
         mainApplication.getRootNode().attachChild(cameraNode);
         initializeCamera();
         new Thread(() -> {
+            removeFilters();
             initializeLights();
+            initializeFilters();
             updateVisuals();
         }).start();
     }
@@ -119,6 +124,17 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
         }
     }
 
+    private void initializeFilters() {
+        for (MapFilter mapFilter : map.getFilters()) {
+            if (mapFilter instanceof MapFilter_SSAO) {
+                MapFilter_SSAO mapFilter_SSAO = (MapFilter_SSAO) mapFilter;
+                SSAOFilter ssaoFilter = new SSAOFilter(mapFilter_SSAO.getSampleRadius(), mapFilter_SSAO.getIntensity(), mapFilter_SSAO.getScale(), mapFilter_SSAO.getBias());
+                ssaoFilter.setApproximateNormals(true);
+                addFilter(ssaoFilter);
+            }
+        }
+    }
+
     @Override
     public void update(float lastTimePerFrame){
         super.update(lastTimePerFrame);
@@ -153,7 +169,6 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
         visualsNode.detachAllChildren();
         modelObjectsVisuals.clear();
         cameraNode.detachAllChildren();
-        removeFilters();
         final BatchNode modelsNode = new BatchNode();
         MapVisuals visuals = map.getVisuals();
         for(MapVisual visual : visuals.getMapVisuals()){

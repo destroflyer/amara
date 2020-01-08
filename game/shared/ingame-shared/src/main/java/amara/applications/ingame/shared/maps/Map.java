@@ -7,6 +7,9 @@ package amara.applications.ingame.shared.maps;
 import amara.applications.ingame.shared.maps.terrain.TerrainSkin;
 import amara.libraries.entitysystem.EntityWorld;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author Carl
@@ -16,6 +19,7 @@ public abstract class Map{
     private String name;
     protected MapCamera camera;
     protected MapLights lights = new MapLights();
+    protected List<MapFilter> filters = new LinkedList<>();
     protected TerrainSkin terrainSkin;
     protected MapMinimapInformation minimapInformation;
     protected MapPhysicsInformation physicsInformation;
@@ -49,6 +53,14 @@ public abstract class Map{
 
     public MapLights getLights(){
         return lights;
+    }
+
+    public void addFilter(MapFilter filter){
+        filters.add(filter);
+    }
+
+    public List<MapFilter> getFilters(){
+        return filters;
     }
 
     public void setTerrainSkin(TerrainSkin terrainSkin){
