@@ -35,8 +35,8 @@ public class MapTerrain{
         Texture heightMapImage = MaterialFactory.getAssetManager().loadTexture("Maps/" + map.getName() + "/terrain_heightmap.png");
         ImageBasedHeightMap heightmap = new ImageBasedHeightMap(heightMapImage.getImage());
         heightmap.load();
-        int scaledHeightmapSize = (int) (heightmap.getSize() / Math.pow(2, Settings.getFloat("terrain_quality")));
-        terrain = new TerrainQuad("terrain", 150, scaledHeightmapSize + 1, scaleHeightmap(heightmap, scaledHeightmapSize));
+        int scaledHeightmapSize = (int) ((heightmap.getSize() / Math.pow(2, Settings.getFloat("terrain_quality"))) + 1);
+        terrain = new TerrainQuad("terrain", 129, scaledHeightmapSize, scaleHeightmap(heightmap, scaledHeightmapSize));
         float scaleX = (physicsInformation.getWidth() / terrain.getTotalSize());
         float scaleZ = (physicsInformation.getHeight() / terrain.getTotalSize());
         terrain.setLocalScale(scaleX, 1, scaleZ);

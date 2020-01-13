@@ -89,7 +89,7 @@ public class IngameSettings extends SettingsCategory{
                     "effects", "Effects",
                     new Setting[]{
                         new Setting("hardware_skinning", "Hardware Skinning", new BooleanType(true)),
-                        new Setting("terrain_quality", "Terrain Quality", new SliderType(1, 0, 4, 1, 1)),
+                        new Setting("terrain_quality", "Terrain Quality", new SliderType(0, 0, 4, 1, 1)),
                         new Setting("terrain_triplanar_mapping", "Terrain Tri-Planar Mapping", new BooleanType(true)),
                         new Setting("shadow_quality", "Shadow Quality", new SliderType(2, 0, 4, 1, 1)),
                         new Setting("fog_of_war_resolution", "F.o.W. Resolution", new SliderType(1, 0.5f, 10, 0.1f, 0.5f)),
