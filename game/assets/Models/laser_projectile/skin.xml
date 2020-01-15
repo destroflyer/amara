@@ -1,0 +1,10 @@
+<skin name="laser_projectile">
+    <model scale="1">
+        <position>
+            <location>0,3,0</location>
+        </position>
+        <modifiers>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_LaserProjectile</modifier>
+        </modifiers>
+    </model>
+</skin>

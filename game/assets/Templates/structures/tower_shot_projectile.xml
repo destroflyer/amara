@@ -1,6 +1,6 @@
 <template>
     <entity id="projectile">
-        <model>Models/fireball/skin.xml</model>
+        <model>Models/laser_projectile/skin.xml</model>
         <isProjectile/>
     </entity>
     <!--trigger spell effects-->

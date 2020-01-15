@@ -4,14 +4,15 @@
  */
 package amara.libraries.applications.display.ingame.models.modifiers;
 
-import amara.libraries.applications.display.models.*;
+import amara.libraries.applications.display.models.ModelModifier;
+import amara.libraries.applications.display.models.RegisteredModel;
 import com.jme3.effect.ParticleEmitter;
 
 /**
  *
  * @author Carl
  */
-public class ModelModifier_EnergyProjectile extends ModelModifier{
+public class ModelModifier_LaserProjectile extends ModelModifier{
 
     @Override
     public void modify(RegisteredModel registeredModel){
