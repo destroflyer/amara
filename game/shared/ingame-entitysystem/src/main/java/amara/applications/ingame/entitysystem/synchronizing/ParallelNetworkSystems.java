@@ -14,13 +14,14 @@ import amara.libraries.entitysystem.EntitySystem;
  *
  * @author Carl
  */
-public class ParallelNetworkSystems{
-    
-    public static EntitySystem[] generateSystems(){
-        return new EntitySystem[]{
+public class ParallelNetworkSystems {
+
+    public static EntitySystem[] generateSystems() {
+        return new EntitySystem[] {
             new UpdateGameTimeSystem(),
             new CountdownPlayerAnnouncementsSystem(),
             new CountdownCastingSystem(),
+            new CountdownRespawnSystem(),
             new TransformUpdateSystem()
         };
     }

@@ -4,19 +4,10 @@
  */
 package amara.applications.ingame.entitysystem.systems.players;
 
-import amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent;
-import amara.applications.ingame.entitysystem.components.maps.PlayerDeathRulesComponent;
-import amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent;
-import amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent;
-import amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent;
-import amara.applications.ingame.entitysystem.components.units.IsAliveComponent;
-import amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent;
-import amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerDelayComponent;
-import amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent;
-import amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerSourceComponent;
-import amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggeredEffectComponent;
-import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent;
-import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent;
+import amara.applications.ingame.entitysystem.components.maps.*;
+import amara.applications.ingame.entitysystem.components.maps.playerdeathrules.*;
+import amara.applications.ingame.entitysystem.components.players.*;
+import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.systems.game.UpdateGameTimeSystem;
 import amara.applications.ingame.shared.maps.Map;
 import amara.libraries.entitysystem.ComponentMapObserver;
@@ -45,25 +36,20 @@ public class RespawnPlayersSystem implements EntitySystem {
         }
     }
 
-    private void onPlayerDeath(EntityWorld entityWorld, int characterEntity){
-        if (entityWorld.hasComponent(characterEntity, IsRespawnableComponent.class)) {
-            int rulesEntity = entityWorld.getComponent(map.getEntity(), PlayerDeathRulesComponent.class).getRulesEntity();
-            if (entityWorld.hasComponent(rulesEntity, RespawnPlayersComponent.class)) {
-                int respawnTrigger = entityWorld.createEntity();
-                entityWorld.setComponent(respawnTrigger, new InstantTriggerComponent());
-                entityWorld.setComponent(respawnTrigger, new CustomTargetComponent(characterEntity));
-                int respawnEffect = entityWorld.createEntity();
-                entityWorld.setComponent(respawnEffect, new RespawnComponent());
-                entityWorld.setComponent(respawnTrigger, new TriggeredEffectComponent(respawnEffect));
-                entityWorld.setComponent(respawnTrigger, new TriggerSourceComponent(map.getEntity()));
-                entityWorld.setComponent(respawnTrigger, new TriggerOnceComponent(true));
-
-                RespawnTimerComponent respawnTimerComponent = entityWorld.getComponent(rulesEntity, RespawnTimerComponent.class);
-                if (respawnTimerComponent != null) {
-                    float remainingDuration = (respawnTimerComponent.getInitialDuration() + (respawnTimerComponent.getDeltaDurationPerTime() * UpdateGameTimeSystem.getGameTime(entityWorld)));
-                    entityWorld.setComponent(respawnTrigger, new TriggerDelayComponent(remainingDuration));
-                }
-            }
+    private void onPlayerDeath(EntityWorld entityWorld, int characterEntity) {
+        int rulesEntity = entityWorld.getComponent(map.getEntity(), PlayerDeathRulesComponent.class).getRulesEntity();
+        if (entityWorld.hasComponent(rulesEntity, RespawnPlayersComponent.class)) {
+            float remainingDuration = getRespawnDuration(entityWorld, rulesEntity);
+            // Use WaitingToRespawnComponent instead of a delayed trigger, because effecttriggers aren't sent to the client (Deathtimer is needed in UI)
+            entityWorld.setComponent(characterEntity, new WaitingToRespawnComponent(remainingDuration));
         }
+    }
+
+    private float getRespawnDuration(EntityWorld entityWorld, int rulesEntity) {
+        RespawnTimerComponent respawnTimerComponent = entityWorld.getComponent(rulesEntity, RespawnTimerComponent.class);
+        if (respawnTimerComponent != null) {
+            return (respawnTimerComponent.getInitialDuration() + (respawnTimerComponent.getDeltaDurationPerTime() * UpdateGameTimeSystem.getGameTime(entityWorld)));
+        }
+        return 0;
     }
 }

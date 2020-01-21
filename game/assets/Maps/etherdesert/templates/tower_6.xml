@@ -58,6 +58,7 @@
     </entity>
     <!--buff area-->
     <entity>
+        <transformOrigin>#entity</transformOrigin>
         <hitbox>
             <circle radius="3"/>
         </hitbox>
@@ -76,7 +77,6 @@
                 <acceptEnemies/>
             </entity>
         </areaBuffTargetRules>
-        <areaOrigin>#entity</areaOrigin>
         <areaSource>#entity</areaSource>
         <hitboxActive/>
     </entity>

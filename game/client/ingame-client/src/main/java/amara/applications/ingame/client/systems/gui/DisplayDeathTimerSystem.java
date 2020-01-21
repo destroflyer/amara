@@ -6,11 +6,7 @@ package amara.applications.ingame.client.systems.gui;
 
 import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
-import amara.applications.ingame.entitysystem.components.effects.AffectedTargetsComponent;
-import amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent;
-import amara.applications.ingame.entitysystem.components.effects.RemainingEffectDelayComponent;
-import amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent;
-import amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent;
+import amara.applications.ingame.entitysystem.components.units.*;
 import amara.libraries.entitysystem.*;
 
 /**
@@ -24,36 +20,15 @@ public class DisplayDeathTimerSystem extends GUIDisplaySystem<ScreenController_H
     }
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
-        ComponentMapObserver observer = entityWorld.requestObserver(this, RemainingEffectDelayComponent.class);
-        for (int effectCastEntity : observer.getNew().getEntitiesWithAny(RemainingEffectDelayComponent.class)) {
-            check(entityWorld, effectCastEntity);
-        }
-        for (int effectCastEntity : observer.getChanged().getEntitiesWithAny(RemainingEffectDelayComponent.class)) {
-            check(entityWorld, effectCastEntity);
-        }
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity) {
+        ComponentMapObserver observer = entityWorld.requestObserver(this, WaitingToRespawnComponent.class);
+        check(observer.getNew().getComponent(characterEntity, WaitingToRespawnComponent.class));
+        check(observer.getChanged().getComponent(characterEntity, WaitingToRespawnComponent.class));
     }
 
-    private void check(EntityWorld entityWorld, int effectCastEntity){
-        if (isRespawnEffectCast(entityWorld, effectCastEntity) && isPlayerCharacterAffected(entityWorld, effectCastEntity)) {
-            float remainingDuration = entityWorld.getComponent(effectCastEntity, RemainingEffectDelayComponent.class).getDuration();
-            screenController.setDeathTimer(remainingDuration);
+    private void check(WaitingToRespawnComponent waitingToRespawnComponent) {
+        if(waitingToRespawnComponent != null){
+            screenController.setDeathTimer(waitingToRespawnComponent.getRemainingDuration());
         }
-    }
-
-    private boolean isRespawnEffectCast(EntityWorld entityWorld, int effectCastEntity) {
-        int effectEntity = entityWorld.getComponent(effectCastEntity, PrepareEffectComponent.class).getEffectEntity();
-        return entityWorld.hasComponent(effectEntity, RespawnComponent.class);
-    }
-
-    private boolean isPlayerCharacterAffected(EntityWorld entityWorld, int effectCastEntity) {
-        int characterEntity = entityWorld.getComponent(getPlayerEntity(), PlayerCharacterComponent.class).getEntity();
-        int[] affectedTargetEntities = entityWorld.getComponent(effectCastEntity, AffectedTargetsComponent.class).getTargetEntities();
-        for (int affectedTargetEntity : affectedTargetEntities) {
-            if (affectedTargetEntity == characterEntity) {
-                return true;
-            }
-        }
-        return false;
     }
 }

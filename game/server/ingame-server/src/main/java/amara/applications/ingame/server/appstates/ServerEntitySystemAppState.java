@@ -5,8 +5,8 @@
 package amara.applications.ingame.server.appstates;
 
 import amara.applications.ingame.entitysystem.GameLogic;
-import amara.applications.ingame.entitysystem.components.game.GameSpeedComponent;
 import amara.applications.ingame.entitysystem.synchronizing.ClientComponentBlacklist;
+import amara.applications.ingame.entitysystem.synchronizing.GameSynchronizingUtil;
 import amara.applications.ingame.entitysystem.systems.network.SendEntityChangesSystem;
 import amara.applications.ingame.server.IngameServerApplication;
 import amara.applications.ingame.server.entitysystem.systems.objectives.CheckMapObjectiveSystem;
@@ -69,11 +69,9 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
     @Override
     public void update(float lastTimePerFrame) {
         if (mainApplication.getGame().isStarted()) {
-            float gameSpeed = entityWorld.getComponent(Game.ENTITY, GameSpeedComponent.class).getSpeed();
-            for (float i = gameSpeed; i > 0; i--) {
-                float simulatedTimePerFrame = Math.min(i, 1) * lastTimePerFrame;
+            GameSynchronizingUtil.simulateSecondFrames(entityWorld, lastTimePerFrame, simulatedTimePerFrame -> {
                 super.update(simulatedTimePerFrame);
-            }
+            });
         }
     }
 }

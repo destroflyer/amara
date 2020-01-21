@@ -4767,6 +4767,24 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.WaitingToRespawnComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.WaitingToRespawnComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.WaitingToRespawnComponent>("waitingToRespawn"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.WaitingToRespawnComponent construct(EntityWorld entityWorld, Element element){
+                float remainingDuration = 0;
+                String remainingDurationText = element.getText();
+                if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
+                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.WaitingToRespawnComponent(remainingDuration);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.WalkStepDistanceComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.WalkStepDistanceComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);

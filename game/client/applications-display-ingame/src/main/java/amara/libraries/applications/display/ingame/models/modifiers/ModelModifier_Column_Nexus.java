@@ -23,11 +23,13 @@ public class ModelModifier_Column_Nexus extends ModelModifier{
     @Override
     public void modify(RegisteredModel registeredModel){
         Spatial statue = ModelSkin.get("Models/nidalee/skin.xml").load();
+        // Divide by 1.5, since the nexus model already has scale 1.5
+        statue.setLocalScale(statue.getLocalScale().divide(1.5f));
         Material material = MaterialFactory.getAssetManager().loadMaterial("Shaders/glass/materials/glass_3.j3m");
         for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(statue)){
             geometry.setMaterial(material);
         }
-        statue.setLocalTranslation(0, 6, 0);
+        statue.setLocalTranslation(0, 4, 0);
         statue.addControl(new AbstractControl(){
 
             @Override

@@ -301,7 +301,8 @@ public class ClientComponentBlacklist{
             //physics
             HitboxComponent.class,
             //units
-            IsCastingComponent.class
+            IsCastingComponent.class,
+            WaitingToRespawnComponent.class
         );
     }
     public enum ChangeType{

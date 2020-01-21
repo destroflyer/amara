@@ -105,6 +105,7 @@ public class GameLogic {
         entitySystems.add(new CountdownAggroResetTimersSystem());
         entitySystems.add(new CountdownInCombatSystem());
         entitySystems.add(new CheckOpenObjectivesSystem());
+        entitySystems.add(new CheckWaitingToRespawnSystem());
         entitySystems.add(new CheckAggroTargetAttackabilitySystem());
         entitySystems.add(new CheckAggroTargetSightSystem());
         entitySystems.add(new CheckMaximumAggroRangeSystem());

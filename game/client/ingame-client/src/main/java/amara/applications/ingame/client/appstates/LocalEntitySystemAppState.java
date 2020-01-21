@@ -14,7 +14,7 @@ import amara.applications.ingame.client.systems.visualisation.buffs.*;
 import amara.applications.ingame.client.systems.visualisation.effects.crodwcontrol.*;
 import amara.applications.ingame.client.systems.visualisation.effects.reactions.*;
 import amara.applications.ingame.client.systems.visualisation.healthbars.*;
-import amara.applications.ingame.entitysystem.synchronizing.ParallelNetworkSystems;
+import amara.applications.ingame.entitysystem.synchronizing.*;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.*;
 import amara.libraries.applications.display.ingame.maps.MapHeightmap;
@@ -35,6 +35,8 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
     }
     private Node entitiesNode = new Node();
     private EntitySceneMap entitySceneMap = new EntitySceneMap(entitiesNode);
+    private EntitySystem[] parallelNetworkSystems = ParallelNetworkSystems.generateSystems();
+    private boolean isInitialWorldLoaded;
 
     @Override
     public void initialize(AppStateManager stateManager, Application application) {
@@ -44,9 +46,6 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         ingameNetworkAppState.addMessageBackend(new GameStartedBackend(entityWorld, getAppState(LoadingScreenAppState.class)));
         ingameNetworkAppState.addMessageBackend(new GameCrashedBackend(mainApplication));
         ingameNetworkAppState.addMessageBackend(new GameOverBackend(mainApplication));
-        for (EntitySystem entitySystem : ParallelNetworkSystems.generateSystems()) {
-            addEntitySystem(entitySystem);
-        }
         PlayerAppState playerAppState = getAppState(PlayerAppState.class);
         addEntitySystem(playerAppState.getPlayerTeamSystem());
         MapAppState mapAppState = getAppState(MapAppState.class);
@@ -107,6 +106,19 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new PopupSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new WaterSpeedSystem(mapAppState));
         addEntitySystem(new CinematicsSystem(getAppState(CinematicAppState.class)));
+        isInitialWorldLoaded = true;
+    }
+
+    @Override
+    public void update(float lastTimePerFrame) {
+        super.update(lastTimePerFrame);
+        if (isInitialWorldLoaded) {
+            GameSynchronizingUtil.simulateSecondFrames(entityWorld, lastTimePerFrame, simulatedTimePerFrame -> {
+                for (EntitySystem parallelNetworkSystem : parallelNetworkSystems) {
+                    parallelNetworkSystem.update(entityWorld, simulatedTimePerFrame);
+                }
+            });
+        }
     }
 
     public int getEntity(Spatial spatial) {
