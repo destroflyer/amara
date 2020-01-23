@@ -8,9 +8,9 @@ package amara.applications.ingame.client.systems.visualisation.healthbars.styles
  *
  * @author Carl
  */
-public class HealthBarStyle_Boss extends HealthBarStyle_Texture {
+public class HealthBarStyle_Large extends HealthBarStyle_Texture {
 
-    public HealthBarStyle_Boss() {
-        super("Interface/hud/healthbars/boss_150.png", 150, 25, 10, 6, 130, 8, 100);
+    public HealthBarStyle_Large() {
+        super("Interface/hud/healthbars/large_267.png", 267, 34, 15, 7, 237, 13, 100);
     }
 }

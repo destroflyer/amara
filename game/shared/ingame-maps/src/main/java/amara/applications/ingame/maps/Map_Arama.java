@@ -129,6 +129,7 @@ public class Map_Arama extends Map{
             nexus.setComponent(new BaseAttributesComponent(baseAttributesEntity));
             nexus.setComponent(new RequestUpdateAttributesComponent());
             nexus.setComponent(new SightRangeComponent(28));
+            nexus.setComponent(new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.LARGE));
             nexus.setComponent(new IsAliveComponent());
             nexus.setComponent(new TeamComponent(i + 1));
             nexi[i] = nexus;

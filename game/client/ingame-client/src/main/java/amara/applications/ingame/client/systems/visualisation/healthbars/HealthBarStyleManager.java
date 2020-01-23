@@ -27,7 +27,9 @@ public class HealthBarStyleManager{
     private HashMap<Integer, PaintableImage[]> paintableImages = new HashMap<Integer, PaintableImage[]>();
     //The order of these objects maps them to the according HealthBarStyleComponent.HealthBarStyle
     private HealthBarStyle[] styles = new HealthBarStyle[]{
-        new HealthBarStyle_Default(),
+        new HealthBarStyle_Small(),
+        new HealthBarStyle_Medium(),
+        new HealthBarStyle_Large(),
         new HealthBarStyle_Character(),
         new HealthBarStyle_Boss()
     };
@@ -72,7 +74,7 @@ public class HealthBarStyleManager{
     }
     
     public HealthBarStyle getStyle(EntityWorld entityWorld, int entity){
-        HealthBarStyleComponent.HealthBarStyle style = HealthBarStyleComponent.HealthBarStyle.DEFAULT;
+        HealthBarStyleComponent.HealthBarStyle style = HealthBarStyleComponent.HealthBarStyle.SMALL;
         HealthBarStyleComponent healthBarStyleComponent = entityWorld.getComponent(entity, HealthBarStyleComponent.class);
         if(healthBarStyleComponent != null){
             style = healthBarStyleComponent.getStyle();

@@ -11,23 +11,25 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class HealthBarStyleComponent{
+public class HealthBarStyleComponent {
 
-    public HealthBarStyleComponent(){
-        
+    public HealthBarStyleComponent() {
+
     }
-    
-    public HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle style){
+
+    public HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle style) {
         this.style = style;
     }
-    public enum HealthBarStyle{
-        DEFAULT,
+    public enum HealthBarStyle {
+        SMALL,
+        MEDIUM,
+        LARGE,
         CHARACTER,
         BOSS
     }
     private HealthBarStyleComponent.HealthBarStyle style;
 
-    public HealthBarStyle getStyle(){
+    public HealthBarStyle getStyle() {
         return style;
     }
 }
