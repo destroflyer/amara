@@ -5,10 +5,10 @@
 package amara.core.encoding;
 
 import java.nio.ByteBuffer;
+import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -38,7 +38,7 @@ public class AES_Encoder extends Encoder{
         try{
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);
             byte[] encrypted = cipher.doFinal(text.getBytes());
-            return DatatypeConverter.printBase64Binary(encrypted);
+            return Base64.getEncoder().encodeToString(encrypted);
         }catch(Exception ex){
             ex.printStackTrace();
         }
@@ -49,7 +49,7 @@ public class AES_Encoder extends Encoder{
     public String decode(String text){
         try{
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, ivParameterSpec);
-            byte[] encrypted = DatatypeConverter.parseBase64Binary(text);
+            byte[] encrypted = Base64.getDecoder().decode(text);
             byte[] textBytes = cipher.doFinal(encrypted);
             return new String(textBytes);
         }catch(Exception ex){

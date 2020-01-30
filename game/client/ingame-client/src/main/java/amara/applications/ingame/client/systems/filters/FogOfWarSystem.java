@@ -32,13 +32,12 @@ public class FogOfWarSystem implements EntitySystem {
     public FogOfWarSystem(PlayerTeamSystem playerTeamSystem, PostFilterAppState postFilterAppState, final MapPhysicsInformation mapPhysicsInformation) {
         this.playerTeamSystem = playerTeamSystem;
         this.mapPhysicsInformation = mapPhysicsInformation;
-        Vector2D[] mapBorderPoints = new Vector2D[]{
-            new Vector2D(0, 0),
-            new Vector2D(0, mapPhysicsInformation.getHeight()),
-            new Vector2D(mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight()),
-            new Vector2D(mapPhysicsInformation.getWidth(), 0)
-        };
-        teamVision = new MergedVision(mapBorderPoints, VisionObstacle.generateDefaultObstacles(mapPhysicsInformation.getObstacles()));
+        ArrayList<Vector2D> mapBorderCcwOutline = new ArrayList<>();
+        mapBorderCcwOutline.add(new Vector2D(mapPhysicsInformation.getWidth(), 0));
+        mapBorderCcwOutline.add(new Vector2D(mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight()));
+        mapBorderCcwOutline.add(new Vector2D(0, mapPhysicsInformation.getHeight()));
+        mapBorderCcwOutline.add(new Vector2D(0, 0));
+        teamVision = new MergedVision(mapBorderCcwOutline, mapPhysicsInformation.generateVisionObstacles());
         teamVision.setEnableSightInSolidObstacles(true);
         float resolutionFactor = Settings.getFloat("fog_of_war_resolution");
         fogImage = new PaintableImage((int) (mapPhysicsInformation.getWidth() * resolutionFactor), (int) (mapPhysicsInformation.getHeight() * resolutionFactor));
@@ -85,7 +84,9 @@ public class FogOfWarSystem implements EntitySystem {
             for (int entity : observer.getNew().getEntitiesWithAny(IsHiddenAreaComponent.class)) {
                 HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
                 if(hitboxComponent != null){
-                    teamVision.setObstacle(entity, new VisionObstacle((ConvexShape) hitboxComponent.getShape(), false));
+                    SimpleConvexPolygon simpleConvexPolygon = (SimpleConvexPolygon) hitboxComponent.getShape();
+                    ConvexedOutline convexedOutline = new ConvexedOutline(simpleConvexPolygon);
+                    teamVision.setObstacle(entity, new VisionObstacle(convexedOutline, false));
                     isUpdateNeeded = true;
                 }
             }

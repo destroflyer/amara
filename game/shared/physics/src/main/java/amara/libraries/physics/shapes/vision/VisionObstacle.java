@@ -5,35 +5,26 @@
  */
 package amara.libraries.physics.shapes.vision;
 
-import java.util.LinkedList;
-import amara.libraries.physics.shapes.ConvexShape;
+import amara.libraries.physics.shapes.ConvexedOutline;
 
 /**
  *
  * @author Carl
  */
-public class VisionObstacle{
+public class VisionObstacle {
 
-    public VisionObstacle(ConvexShape shape, boolean isBlockingInsideOrOutside){
-        this.shape = shape;
-        this.isBlockingInsideOrOutside = isBlockingInsideOrOutside;
+    public VisionObstacle(ConvexedOutline convexedOutline, boolean isBlockingInside) {
+        this.convexedOutline = convexedOutline;
+        this.isBlockingInside = isBlockingInside;
     }
-    private ConvexShape shape;
-    private boolean isBlockingInsideOrOutside;
+    private ConvexedOutline convexedOutline;
+    private boolean isBlockingInside;
 
-    public ConvexShape getShape(){
-        return shape;
+    public ConvexedOutline getConvexedOutline() {
+        return convexedOutline;
     }
 
-    public boolean isBlockingInsideOrOutside(){
-        return isBlockingInsideOrOutside;
-    }
-    
-    public static LinkedList<VisionObstacle> generateDefaultObstacles(Iterable<ConvexShape> shapse){
-        LinkedList<VisionObstacle> visionObstacles = new LinkedList<VisionObstacle>();
-        for(ConvexShape shape : shapse){
-            visionObstacles.add(new VisionObstacle(shape, true));
-        }
-        return visionObstacles;
+    public boolean isBlockingInside() {
+        return isBlockingInside;
     }
 }

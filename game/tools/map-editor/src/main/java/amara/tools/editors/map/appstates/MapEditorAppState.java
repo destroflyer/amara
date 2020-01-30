@@ -5,7 +5,7 @@
 package amara.tools.editors.map.appstates;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.collision.CollisionResult;
@@ -23,6 +23,7 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.applications.ingame.shared.maps.*;
+import amara.applications.ingame.shared.maps.obstacles.*;
 import amara.applications.ingame.shared.maps.visuals.ModelVisual;
 import amara.core.Util;
 import amara.libraries.applications.display.JMonkeyUtil;
@@ -54,11 +55,11 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
     private Action currentAction = Action.NONE;
     private Action actionBeforeRemove;
     private Vector2f currentHoveredLocation = new Vector2f();
-    private LinkedList<ConvexShape> shapesToPlace = new LinkedList<>();
+    private MapObstacle obstacleToPlace;
     private Spatial toolCursor;
     private double circleRadius = 3;
     private double circleRadiusStep = 0.2f;
-    private LinkedList<Vector2D> customShapePoints = new LinkedList<>();
+    private ArrayList<Vector2D> customShapePoints = new ArrayList<>();
     private String[] visualsModelSkinPaths = new String[]{
         "Models/3dsa_fantasy_forest_animal_bones/skin.xml",
         "Models/3dsa_fantasy_forest_cave_entrance/skin.xml",
@@ -174,7 +175,6 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
     public void onAction(String actionName, boolean value, float lastTimePerFrame){
         MapAppState mapAppState = getAppState(MapAppState.class);
         Map map = mapAppState.getMap();
-        ArrayList<ConvexShape> obstacles = map.getPhysicsInformation().getObstacles();
         if(actionName.equals("editor_1") && value){
             setAction(Action.VIEW);
         }
@@ -209,7 +209,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
             switch(currentAction){
                 case PLACE_HITBOX_CIRCLE:
                     if(actionName.equals("editor_mouse_click_left") && value){
-                        addCurrentShapes();
+                        addCurrentObstacle();
                         generateNewToolCursor();
                     }
                     else if(actionName.equals("editor_mouse_wheel_up")){
@@ -233,12 +233,8 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                         cancelCurrentCustomShape();
                     }
                     else if(actionName.equals("editor_enter") && value){
-                        if(generateCustomShapes()){
-                            addCurrentShapes();
-                        }
-                        else{
-                            cancelCurrentCustomShape();
-                        }
+                        obstacleToPlace = new MapObstacle_Polygon(customShapePoints);
+                        addCurrentObstacle();
                     }
                     break;
                 
@@ -272,9 +268,10 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                         switch(actionBeforeRemove){
                             case PLACE_HITBOX_CIRCLE:
                             case PLACE_HITBOX_CUSTOM:
+                                ArrayList<MapObstacle> obstacles = map.getPhysicsInformation().getObstacles();
+                                Vector2D currentHoveredLocation2D = new Vector2D(currentHoveredLocation.getX(), currentHoveredLocation.getY());
                                 for(int i=0;i<obstacles.size();i++){
-                                    Shape shape = obstacles.get(i);
-                                    if(shape.contains(new Vector2D(currentHoveredLocation.getX(), currentHoveredLocation.getY()))){
+                                    if(obstacles.get(i).getConvexedOutline().contains(currentHoveredLocation2D)){
                                         obstacles.remove(i);
                                         getAppState(MapObstaclesAppState.class).update();
                                         break;
@@ -398,15 +395,13 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         Node parentNode = null;
         switch(currentAction){
             case PLACE_HITBOX_CIRCLE:
-                shapesToPlace.clear();
-                Circle circle = new Circle(circleRadius);
-                shapesToPlace.add(circle);
-                toolCursor = MapObstaclesAppState.generateGeometry(circle);
+                obstacleToPlace = new MapObstacle_Circle(new Vector2D(), circleRadius);
+                toolCursor = MapObstaclesAppState.generateGeometry(obstacleToPlace.getConvexedOutline().getConvexShapes().get(0));
                 parentNode = getAppState(MapObstaclesAppState.class).getObstaclesNode();
                 break;
             
             case PLACE_HITBOX_CUSTOM:
-                shapesToPlace.clear();
+                obstacleToPlace = null;
                 Vector2D[] basePoints = Util.toArray(customShapePoints, Vector2D.class);
                 ConnectedPointsMesh connectedPointsMesh = new ConnectedPointsMesh(basePoints);
                 toolCursor = MapObstaclesAppState.generateGeometry(connectedPointsMesh, ColorRGBA.Blue);
@@ -448,7 +443,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         }
         switch(currentAction){
             case PLACE_HITBOX_CIRCLE:
-                shapesToPlace.get(0).setTransform(new Transform2D(1, 0, currentHoveredLocation.getX(), currentHoveredLocation.getY()));
+                obstacleToPlace.getConvexedOutline().getConvexShapes().get(0).setTransform(new Transform2D(1, 0, currentHoveredLocation.getX(), currentHoveredLocation.getY()));
                 break;
 
             case PLACE_VISUAL:
@@ -463,25 +458,9 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         }
     }
     
-    private boolean generateCustomShapes(){
-        Triangulator triangulator = new Triangulator();
-        if((!triangulator.isConvex(customShapePoints)) && triangulator.canTriangulate(customShapePoints)){
-            shapesToPlace.addAll(triangulator.createDelaunayTrisFromPoly(customShapePoints));
-        }
-        else{
-            try{
-                Vector2D[] basePoints = Util.toArray(customShapePoints, Vector2D.class);
-                shapesToPlace.add(new SimpleConvexPolygon(basePoints));
-            }catch(Error error){
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    private void addCurrentShapes(){
-        ArrayList<ConvexShape> obstacles = getAppState(MapAppState.class).getMap().getPhysicsInformation().getObstacles();
-        obstacles.addAll(shapesToPlace);
+    private void addCurrentObstacle(){
+        ArrayList<MapObstacle> obstacles = getAppState(MapAppState.class).getMap().getPhysicsInformation().getObstacles();
+        obstacles.add(obstacleToPlace);
         getAppState(MapObstaclesAppState.class).update();
         cancelCurrentCustomShape();
     }

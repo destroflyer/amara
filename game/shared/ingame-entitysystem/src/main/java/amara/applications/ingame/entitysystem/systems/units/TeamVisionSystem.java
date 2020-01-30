@@ -21,9 +21,8 @@ import amara.libraries.physics.shapes.vision.*;
  */
 public class TeamVisionSystem implements EntitySystem{
 
-    public TeamVisionSystem(int teamsCount, List<ConvexShape> mapObstacles){
+    public TeamVisionSystem(int teamsCount, List<VisionObstacle> visionObstacles){
         teamVisions = new MergedVision[teamsCount];
-        LinkedList<VisionObstacle> visionObstacles = VisionObstacle.generateDefaultObstacles(mapObstacles);
         for(int i=0;i<teamVisions.length;i++){
             MergedVision teamVision = new MergedVision(visionObstacles);
             teamVision.setEnableSightInSolidObstacles(true);
@@ -117,7 +116,9 @@ public class TeamVisionSystem implements EntitySystem{
         HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
         if(hitboxComponent != null){
             for(MergedVision teamVision : teamVisions){
-                teamVision.setObstacle(entity, new VisionObstacle((ConvexShape) hitboxComponent.getShape(), false));
+                SimpleConvexPolygon simpleConvexPolygon = (SimpleConvexPolygon) hitboxComponent.getShape();
+                ConvexedOutline convexedOutline = new ConvexedOutline(simpleConvexPolygon);
+                teamVision.setObstacle(entity, new VisionObstacle(convexedOutline, false));
             }
             haveHiddenAreasChanged = true;
         }

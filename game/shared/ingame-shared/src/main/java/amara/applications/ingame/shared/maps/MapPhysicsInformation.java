@@ -4,53 +4,74 @@
  */
 package amara.applications.ingame.shared.maps;
 
-import java.util.ArrayList;
 import amara.libraries.physics.PolyHelper;
 import amara.libraries.physics.intersectionHelper.PolyMapManager;
 import amara.libraries.physics.shapes.ConvexShape;
+import amara.libraries.physics.shapes.PolygonMath.Polygon;
+import amara.libraries.physics.shapes.vision.VisionObstacle;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author Carl
  */
-public class MapPhysicsInformation{
+public class MapPhysicsInformation {
 
-    public MapPhysicsInformation(float width, float height, float heightmapScale, float groundHeight, ArrayList<ConvexShape> obstacles){
+    public MapPhysicsInformation(float width, float height, float heightmapScale, float groundHeight, ArrayList<MapObstacle> obstacles) {
         this.width = width;
         this.height = height;
         this.heightmapScale = heightmapScale;
         this.groundHeight = groundHeight;
         this.obstacles = obstacles;
-        polyMapManager = new PolyMapManager(PolyHelper.fromConvexShapes(obstacles), width, height);
+        polyMapManager = createPolyMapManager();
     }
     private float width;
     private float height;
     private float heightmapScale;
     private float groundHeight;
-    private ArrayList<ConvexShape> obstacles;
+    private ArrayList<MapObstacle> obstacles;
     private PolyMapManager polyMapManager;
 
-    public float getWidth(){
+    private PolyMapManager createPolyMapManager(){
+        ArrayList<ConvexShape> convexShapes = new ArrayList<>();
+        for (MapObstacle obstacle : obstacles) {
+            convexShapes.addAll(obstacle.getConvexedOutline().getConvexShapes());
+        }
+        Polygon polygon = PolyHelper.fromConvexShapes(convexShapes);
+        return new PolyMapManager(polygon, width, height);
+    }
+
+    public List<VisionObstacle> generateVisionObstacles() {
+        return obstacles.stream()
+                .map(MapObstacle::getConvexedOutline)
+                .map(convexedOutline -> new VisionObstacle(convexedOutline, false))
+                .collect(Collectors.toList());
+    }
+
+    public float getWidth() {
         return width;
     }
 
-    public float getHeight(){
+    public float getHeight() {
         return height;
     }
 
-    public float getGroundHeight(){
+    public float getGroundHeight() {
         return groundHeight;
     }
 
-    public float getHeightmapScale(){
+    public float getHeightmapScale() {
         return heightmapScale;
     }
 
-    public ArrayList<ConvexShape> getObstacles(){
+    public ArrayList<MapObstacle> getObstacles() {
         return obstacles;
     }
 
-    public PolyMapManager getPolyMapManager(){
+    public PolyMapManager getPolyMapManager() {
         return polyMapManager;
     }
 }

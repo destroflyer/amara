@@ -116,13 +116,13 @@ public class Triangulator
     
     private ArrayList<Integer> counterClockwiseIndices(List<Vector2D> vertices)
     {
-        if(isClockwise(vertices)) return reverseIndices(vertices);
+        if(Util.isClockwise(vertices)) return reverseIndices(vertices);
         return indices(vertices);
     }
     
     private ArrayList<Integer> clockwiseIndices(List<Vector2D> vertices)
     {
-        if(isClockwise(vertices)) return indices(vertices);
+        if(Util.isClockwise(vertices)) return indices(vertices);
         return reverseIndices(vertices);
     }
     
@@ -259,18 +259,5 @@ public class Triangulator
             if(Vector2DUtil.lineSegmentIntersectionPointWithoutCorners(a, b, c, d) != null) return true;
         }
         return false;
-    }
-    
-    private static boolean isClockwise(List<Vector2D> vertices) {
-        return getArea(vertices) < 0;
-    }
-    private static double getArea(List<Vector2D> points) {
-        double doubledArea = 0;
-        int j;
-        for(int i = 0; i < points.size(); i++) {
-            j = (i + 1) % points.size();
-            doubledArea += (points.get(i).getX() - points.get(j).getX()) * (points.get(i).getY() + points.get(j).getY());
-        }
-        return doubledArea / 2;
     }
 }

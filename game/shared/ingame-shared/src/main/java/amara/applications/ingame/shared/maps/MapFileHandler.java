@@ -15,6 +15,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.math.ColorRGBA;
 import amara.applications.ingame.shared.maps.filters.*;
 import amara.applications.ingame.shared.maps.lights.*;
+import amara.applications.ingame.shared.maps.obstacles.*;
 import amara.applications.ingame.shared.maps.terrain.*;
 import amara.applications.ingame.shared.maps.visuals.*;
 import amara.core.Util;
@@ -52,11 +53,7 @@ public class MapFileHandler{
             Element root = new Element("map");
             root.setAttribute("author", System.getProperty("user.name"));
             root.setAttribute("date", "" + System.currentTimeMillis());
-            Class mapClass = map.getClass();
-            if(mapClass == TestMapToWrite.class){
-                mapClass = Class.forName("amara.applications.ingame.maps.Map_Testmap");
-            }
-            root.setAttribute("class", mapClass.getName());
+            root.setAttribute("class", map.getClass().getName());
             Document document = new Document(root);
             //Camera
             Element elementCamera = new Element("camera");
@@ -151,10 +148,10 @@ public class MapFileHandler{
             elementPhysics.setAttribute("heightmapScale", "" + map.getPhysicsInformation().getHeightmapScale());
             elementPhysics.setAttribute("groundHeight", "" + map.getPhysicsInformation().getGroundHeight());
             Element elementObstacles = new Element("obstacles");
-            for(ConvexShape shape : map.getPhysicsInformation().getObstacles()){
-                Element elementShape = generateElement(shape);
-                if(elementShape != null){
-                    elementObstacles.addContent(elementShape);
+            for(MapObstacle mapObstacle : map.getPhysicsInformation().getObstacles()){
+                Element elementObstacle = generateElement(mapObstacle);
+                if(elementObstacle != null){
+                    elementObstacles.addContent(elementObstacle);
                 }
             }
             elementPhysics.addContent(elementObstacles);
@@ -310,10 +307,10 @@ public class MapFileHandler{
             float heightmapScale = elementPhysics.getAttribute("heightmapScale").getFloatValue();
             float groundHeight = elementPhysics.getAttribute("groundHeight").getFloatValue();
             Element elementObstacles = elementPhysics.getChild("obstacles");
-            ArrayList<ConvexShape> obstacles = new ArrayList<ConvexShape>();
-            for(Object elementShapeObject : elementObstacles.getChildren()){
-                ConvexShape shape = generateShape((Element) elementShapeObject);
-                obstacles.add(shape);
+            ArrayList<MapObstacle> obstacles = new ArrayList<>();
+            for(Element elementObstacle : elementObstacles.getChildren()){
+                MapObstacle obstacle = generateObstacle(elementObstacle);
+                obstacles.add(obstacle);
             }
             MapPhysicsInformation physicsInformation = new MapPhysicsInformation(width, height, heightmapScale, groundHeight, obstacles);
             map.setPhysicsInformation(physicsInformation);
@@ -355,63 +352,48 @@ public class MapFileHandler{
         return map;
     }
     
-    private static Vector2D generateVector2D(String text){
-        float[] coordinates = Util.parseToFloatArray(text.split(VECTOR_COORDINATES_SEPARATOR));
-        return new Vector2D(coordinates[0], coordinates[1]);
-    }
-    
-    private static Element generateElement(ConvexShape shape){
+    private static Element generateElement(MapObstacle mapObstacle){
         Element element = null;
-        if(shape instanceof Circle){
-            Circle circle = (Circle) shape;
+        if(mapObstacle instanceof MapObstacle_Circle){
+            MapObstacle_Circle mapObstacle_Circle = (MapObstacle_Circle) mapObstacle;
+            Circle circle = (Circle) mapObstacle_Circle.getConvexedOutline().getConvexShapes().get(0);
             element = new Element("circle");
+            element.setAttribute("x", "" + circle.getTransform().extractX());
+            element.setAttribute("y", "" + circle.getTransform().extractY());
             element.setAttribute("radius", "" + circle.getGlobalRadius());
         }
-        else if(shape instanceof SimpleConvexPolygon){
-            SimpleConvexPolygon simpleConvex = (SimpleConvexPolygon) shape;
-            element = new Element("simpleConvex");
-            Element elementBase = new Element("base");
-            for(Vector2D point : simpleConvex.getLocalPoints()){
+        else if(mapObstacle instanceof MapObstacle_Polygon){
+            MapObstacle_Polygon mapObstacle_Polygon = (MapObstacle_Polygon) mapObstacle;
+            ArrayList<Vector2D> outline = mapObstacle_Polygon.getConvexedOutline().getCcwOutline();
+            element = new Element("polygon");
+            for(Vector2D point : outline){
                 Element elementPoint = new Element("point");
-                elementPoint.setText(generateVectorText(point));
-                elementBase.addContent(elementPoint);
+                elementPoint.setAttribute("x", "" + point.getX());
+                elementPoint.setAttribute("y", "" + point.getY());
+                element.addContent(elementPoint);
             }
-            element.addContent(elementBase);
         }
-        Element elementTransform = new Element("transform");
-        elementTransform.setAttribute("x", "" + shape.getTransform().extractX());
-        elementTransform.setAttribute("y", "" + shape.getTransform().extractY());
-        elementTransform.setAttribute("direction", "" + shape.getTransform().extractRadians());
-        elementTransform.setAttribute("scale", "" + shape.getTransform().extractScale());
-        element.addContent(elementTransform);
         return element;
     }
     
-    private static ConvexShape generateShape(Element element){
-        ConvexShape shape = null;
+    private static MapObstacle generateObstacle(Element element){
         if(element.getName().equals("circle")){
+            double x = Double.parseDouble(element.getAttributeValue("x"));
+            double y = Double.parseDouble(element.getAttributeValue("y"));
             double radius = Double.parseDouble(element.getAttributeValue("radius"));
-            shape = new Circle(radius);
+            return new MapObstacle_Circle(new Vector2D(x, y), radius);
         }
-        else if(element.getName().equals("simpleConvex")){
-            Element elementBase = element.getChild("base");
-            List elementBaseChildren = elementBase.getChildren();
-            Vector2D[] base = new Vector2D[elementBaseChildren.size()];
-            for(int i=0;i<elementBaseChildren.size();i++){
-                Element elementPoint = (Element) elementBaseChildren.get(i);
-                base[i] = generateVector2D(elementPoint.getText());
+        else if(element.getName().equals("polygon")){
+            List<Element> elementChildren = element.getChildren();
+            ArrayList<Vector2D> outline = new ArrayList<>(elementChildren.size());
+            for(Element elementPoint : elementChildren){
+                double x = Double.parseDouble(elementPoint.getAttributeValue("x"));
+                double y = Double.parseDouble(elementPoint.getAttributeValue("y"));
+                outline.add(new Vector2D(x, y));
             }
-            shape = new SimpleConvexPolygon(base);
+            return new MapObstacle_Polygon(outline);
         }
-        else throw new UnsupportedOperationException();
-        Element elementTransform = element.getChild("transform");
-        shape.setTransform(new Transform2D(
-            Double.parseDouble(elementTransform.getAttributeValue("scale")),
-            Double.parseDouble(elementTransform.getAttributeValue("direction")),
-            Double.parseDouble(elementTransform.getAttributeValue("x")),
-            Double.parseDouble(elementTransform.getAttributeValue("y"))
-        ));
-        return shape;
+        throw new UnsupportedOperationException();
     }
     
     private static String generateVectorText(Vector2f vector2f){
@@ -420,10 +402,6 @@ public class MapFileHandler{
     
     private static String generateVectorText(Vector3f vector3f){
         return (vector3f.getX() + VECTOR_COORDINATES_SEPARATOR + vector3f.getY() + VECTOR_COORDINATES_SEPARATOR + vector3f.getZ());
-    }
-    
-    private static String generateVectorText(Vector2D vector2D){
-        return (vector2D.getX() + VECTOR_COORDINATES_SEPARATOR + vector2D.getY());
     }
     
     private static Vector2f generateVector2f(String text){

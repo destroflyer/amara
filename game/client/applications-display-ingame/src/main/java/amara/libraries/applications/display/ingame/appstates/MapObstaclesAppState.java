@@ -16,6 +16,7 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
 import amara.applications.ingame.shared.maps.Map;
+import amara.applications.ingame.shared.maps.MapObstacle;
 import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.applications.display.appstates.BaseDisplayAppState;
 import amara.libraries.applications.display.materials.MaterialFactory;
@@ -48,10 +49,12 @@ public class MapObstaclesAppState extends BaseDisplayAppState<DisplayApplication
         Map map = getAppState(MapAppState.class).getMap();
         node.setLocalTranslation(0, map.getPhysicsInformation().getGroundHeight(), 0);
         obstaclesNode.detachAllChildren();
-        for(Shape shape : map.getPhysicsInformation().getObstacles()){
-            Geometry collisionMeshGeometry = generateGeometry(shape);
-            collisionMeshGeometry.setLocalTranslation((float) shape.getTransform().extractX(), 0, (float) shape.getTransform().extractY());
-            obstaclesNode.attachChild(collisionMeshGeometry);
+        for(MapObstacle obstacle : map.getPhysicsInformation().getObstacles()){
+            for(ConvexShape convexShape : obstacle.getConvexedOutline().getConvexShapes()){
+                Geometry collisionMeshGeometry = generateGeometry(convexShape);
+                collisionMeshGeometry.setLocalTranslation((float) convexShape.getTransform().extractX(), 0, (float) convexShape.getTransform().extractY());
+                obstaclesNode.attachChild(collisionMeshGeometry);
+            }
         }
     }
 
