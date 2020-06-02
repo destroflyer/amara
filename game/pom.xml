@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.destrostudios.amara</groupId>
     <artifactId>main</artifactId>
-    <version>0.5</version>
+    <version>0.7</version>
     <packaging>pom</packaging>
     <modules>
         <module>client</module>
@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <version.amara>0.5</version.amara>
+        <version.amara>0.7</version.amara>
         <version.bouncycastle>1.46</version.bouncycastle>
         <version.java-jwt>3.10.3</version.java-jwt>
         <version.javax.activation>1.1.1</version.javax.activation>
@@ -25,6 +25,7 @@
         <version.jorbis>0.0.17.4</version.jorbis>
         <version.jsch>0.1.55</version.jsch>
         <version.junit>4.11</version.junit>
+        <version.maven-assembly-plugin>3.1.1</version.maven-assembly-plugin>
         <version.mockito>1.9.5</version.mockito>
         <version.postgresql>9.1-901-1.jdbc4</version.postgresql>
     </properties>
@@ -36,6 +37,12 @@
     </repositories>
     <dependencyManagement>
         <dependencies>
+            <!--Maven-->
+            <dependency>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${version.maven-assembly-plugin}</version>
+            </dependency>
             <!--Amara-->
             <dependency>
                 <groupId>com.destrostudios.amara</groupId>

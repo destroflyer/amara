@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.destrostudios.amara</groupId>
         <artifactId>main</artifactId>
-        <version>0.5</version>
+        <version>0.7</version>
         <relativePath>../../</relativePath>
     </parent>
     <artifactId>master-server-application</artifactId>
@@ -26,4 +26,32 @@
             <artifactId>master-server</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>amara.applications.master.server.launcher.ServerLauncher</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

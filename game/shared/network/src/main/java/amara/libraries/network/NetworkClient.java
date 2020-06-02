@@ -7,7 +7,6 @@ package amara.libraries.network;
 import java.util.LinkedList;
 import com.jme3.network.Client;
 import com.jme3.network.ClientStateListener;
-import com.jme3.network.ErrorListener;
 import com.jme3.network.Message;
 import com.jme3.network.MessageConnection;
 import com.jme3.network.MessageListener;
@@ -31,7 +30,7 @@ public class NetworkClient extends NetworkListener{
     private LoadHistory uploadHistory;
     private boolean isConnected;
     
-    public void connectToServer(String host, int port) throws ServerConnectionException, ServerConnectionTimeoutException{
+    public void connectToServer(String host, int port) throws ServerConnectionException {
         try{
             client = Network.connectToServer(host, port);
             client.addClientStateListener(new ClientStateListener(){
@@ -48,21 +47,13 @@ public class NetworkClient extends NetworkListener{
                     onDisconnect();
                 }
             });
-            client.addErrorListener(new ErrorListener<Client>(){
-
-                @Override
-                public void handleError(Client source, Throwable throwable){
-                    throwable.printStackTrace();
-                    onDisconnect();
-                }
+            client.addErrorListener((source, throwable) -> {
+                throwable.printStackTrace();
+                onDisconnect();
             });
-            client.addMessageListener(new MessageListener<MessageConnection>(){
-
-                @Override
-                public void messageReceived(MessageConnection source, Message message){
-                    if(source instanceof DefaultClient){
-                        onMessageReceived(((DefaultClient) source).getId(), message);
-                    }
+            client.addMessageListener((MessageListener<MessageConnection>) (source, message) -> {
+                if(source instanceof DefaultClient){
+                    onMessageReceived(((DefaultClient) source).getId(), message);
                 }
             });
             client.start();
@@ -77,6 +68,7 @@ public class NetworkClient extends NetworkListener{
                 }
             }
         }catch(Exception ex){
+            ex.printStackTrace();
             throw new ServerConnectionException(host, port);
         }
     }

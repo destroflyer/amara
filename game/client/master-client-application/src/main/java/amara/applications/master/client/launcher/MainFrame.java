@@ -108,7 +108,6 @@ public class MainFrame extends JFrame {
                         break;
                 }
             } catch (ServerConnectionException | ServerConnectionTimeoutException ex) {
-                ex.printStackTrace();
                 panConnect.setInfoLabel("Seems like there is a problem with our servers :(");
             }
         }).start();

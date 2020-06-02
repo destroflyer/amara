@@ -69,7 +69,7 @@ public class SFTPClient {
     }
 
     public void upload(String localFilePath, String targetFilePath) throws IOException, JSchException, SftpException {
-        upload( new File(localFilePath), targetFilePath);
+        upload(new File(localFilePath), targetFilePath);
     }
 
     private void upload(File localFile, String targetFilePath) throws IOException, JSchException, SftpException {
