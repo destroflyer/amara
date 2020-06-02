@@ -78,7 +78,7 @@ public class FileManager{
     }
 
     public static String[] getFileLines(String filePath){
-        LinkedList<String> linesList = new LinkedList<String>();
+        LinkedList<String> linesList = new LinkedList<>();
         try{
             BufferedReader reader;
             if(filePath.startsWith("http:")){

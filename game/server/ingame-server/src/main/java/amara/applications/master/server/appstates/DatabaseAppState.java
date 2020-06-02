@@ -24,7 +24,7 @@ public class DatabaseAppState extends BaseHeadlessAppState {
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application) {
         super.initialize(stateManager, application);
         String[] credentials = FileManager.getFileLines("./db_key_to_the_city.ini");
-        database = new MySQLDatabase("//localhost:3306/amara", credentials[0], credentials[1]);
+        database = new MySQLDatabase("//localhost:3306/amara", credentials[0], ((credentials.length > 1) ? credentials[1] : ""));
     }
 
     @Override
