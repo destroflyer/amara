@@ -4,6 +4,7 @@
  */
 package amara.applications.master.server.appstates;
 
+import amara.core.files.FileManager;
 import amara.libraries.applications.headless.applications.HeadlessAppStateManager;
 import amara.libraries.applications.headless.applications.HeadlessApplication;
 import amara.libraries.applications.headless.appstates.BaseHeadlessAppState;
@@ -22,7 +23,8 @@ public class DatabaseAppState extends BaseHeadlessAppState {
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application) {
         super.initialize(stateManager, application);
-        database = new MySQLDatabase("//localhost:3306/amara", "your-db-user", "your-db-password");
+        String[] credentials = FileManager.getFileLines("./db_key_to_the_city.ini");
+        database = new MySQLDatabase("//localhost:3306/amara", credentials[0], credentials[1]);
     }
 
     @Override
