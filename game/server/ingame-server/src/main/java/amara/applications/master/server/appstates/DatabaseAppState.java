@@ -22,7 +22,7 @@ public class DatabaseAppState extends BaseHeadlessAppState {
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application) {
         super.initialize(stateManager, application);
-        database = new MySQLDatabase("//localhost:3306/amara", "root", "");
+        database = new MySQLDatabase("//localhost:3306/amara", "your-db-user", "your-db-password");
     }
 
     @Override
