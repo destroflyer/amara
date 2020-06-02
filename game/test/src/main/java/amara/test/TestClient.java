@@ -4,8 +4,8 @@
  */
 package amara.test;
 
+import amara.applications.master.client.launcher.MainFrame;
 import amara.core.Launcher_Core;
-import amara.applications.master.client.launcher.ClientLauncher;
 import amara.applications.master.server.launcher.Launcher_Game;
 import amara.applications.master.server.launcher.ServerLauncherFrame;
 
@@ -19,6 +19,6 @@ public class TestClient{
         Launcher_Core.initialize();
         Launcher_Game.initialize();
         new ServerLauncherFrame().setVisible(true);
-        new ClientLauncher().setVisible(true);
+        new MainFrame("myAuthToken").setVisible(true);
     }
 }

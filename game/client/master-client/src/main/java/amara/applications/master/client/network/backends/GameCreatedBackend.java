@@ -31,8 +31,8 @@ public class GameCreatedBackend implements MessageBackend{
         }
 
         @Override
-        public int getPlayerID(){
-            return MasterserverClientUtil.getPlayerID();
+        public int getPlayerId(){
+            return MasterserverClientUtil.getPlayerId();
         }
 
         @Override

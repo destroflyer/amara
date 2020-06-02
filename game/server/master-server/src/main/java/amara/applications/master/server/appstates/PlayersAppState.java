@@ -9,8 +9,6 @@ import amara.applications.master.network.messages.objects.PlayerStatus;
 import amara.applications.master.server.games.RunningGames;
 import amara.applications.master.server.network.backends.*;
 import amara.applications.master.server.players.ConnectedPlayers;
-import amara.core.encoding.*;
-import amara.core.files.FileManager;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.NetworkServerAppState;
 import amara.libraries.database.QueryResult;
@@ -22,14 +20,12 @@ import amara.libraries.network.NetworkServer;
  */
 public class PlayersAppState extends ServerBaseAppState{
 
-    private Encoder passwordEncoder;
     private ConnectedPlayers connectedPlayers = new ConnectedPlayers();
-    private HashMap<String, String> userDefaultMeta = new HashMap<String, String>();
+    private HashMap<String, String> userDefaultMeta = new HashMap<>();
     
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
         super.initialize(stateManager, application);
-        initializePasswordEncoder();
         loadUserDefaultMeta();
         NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
         DatabaseAppState databaseAppState = getAppState(DatabaseAppState.class);
@@ -41,13 +37,6 @@ public class PlayersAppState extends ServerBaseAppState{
         networkServer.addMessageBackend(new SendGameContentsBackend(databaseAppState, connectedPlayers, playersContentsAppState));
         networkServer.addMessageBackend(new EditActiveCharacterSkinsBackend(databaseAppState, connectedPlayers));
         networkServer.addMessageBackend(new EditCharacterInventoriesBackend(databaseAppState, connectedPlayers));
-    }
-    
-    private void initializePasswordEncoder(){
-        String[] keyPartLines = FileManager.getFileLines("./key_to_the_city.ini");
-        long keyPart1 = Long.parseLong(keyPartLines[0]);
-        long keyPart2 = Long.parseLong(keyPartLines[1]);
-        passwordEncoder = new AES_Encoder(keyPart1, keyPart2, 0, 0);
     }
     
     private void loadUserDefaultMeta(){
@@ -68,10 +57,6 @@ public class PlayersAppState extends ServerBaseAppState{
             return PlayerStatus.ONLINE;
         }
         return PlayerStatus.OFFLINE;
-    }
-
-    public Encoder getPasswordEncoder(){
-        return passwordEncoder;
     }
 
     public ConnectedPlayers getConnectedPlayers(){

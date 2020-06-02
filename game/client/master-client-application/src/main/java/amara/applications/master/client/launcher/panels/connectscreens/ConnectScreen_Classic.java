@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.applications.master.client.launcher.panels.loginscreens;
+package amara.applications.master.client.launcher.panels.connectscreens;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -14,7 +14,7 @@ import amara.core.files.FileAssets;
  *
  * @author Carl
  */
-public class LoginScreen_Classic extends SwingLoginScreen{
+public class ConnectScreen_Classic extends ConnectScreen {
 
     private BufferedImage backgroundImage;
     private OggClip backgroundMusic;

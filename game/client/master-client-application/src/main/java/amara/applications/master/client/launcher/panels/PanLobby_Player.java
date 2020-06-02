@@ -47,7 +47,7 @@ public class PanLobby_Player extends javax.swing.JPanel{
     public static boolean isOwnPlayer(LobbyPlayer lobbyPlayer){
         if(lobbyPlayer instanceof LobbyPlayer_Human){
             LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-            return (MasterserverClientUtil.getPlayerID() == lobbyPlayer_Human.getPlayerID());
+            return (MasterserverClientUtil.getPlayerId() == lobbyPlayer_Human.getPlayerID());
         }
         return false;
     }

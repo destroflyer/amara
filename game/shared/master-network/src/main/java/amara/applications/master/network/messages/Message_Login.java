@@ -6,7 +6,6 @@ package amara.applications.master.network.messages;
 
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
-import amara.applications.master.network.messages.objects.AuthentificationInformation;
 
 /**
  *
@@ -19,12 +18,12 @@ public class Message_Login extends AbstractMessage{
         
     }
     
-    public Message_Login(AuthentificationInformation authentificationInformation){
-        this.authentificationInformation = authentificationInformation;
+    public Message_Login(String authToken){
+        this.authToken = authToken;
     }
-    private AuthentificationInformation authentificationInformation;
+    private String authToken;
 
-    public AuthentificationInformation getAuthentificationInformation(){
-        return authentificationInformation;
+    public String getAuthToken() {
+        return authToken;
     }
 }

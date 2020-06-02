@@ -7,7 +7,6 @@ package amara.applications.master.server.games;
 import java.util.ArrayList;
 import amara.applications.ingame.shared.games.*;
 import amara.applications.master.network.messages.objects.*;
-import amara.applications.master.server.network.PortProvider;
 
 /**
  *
@@ -15,14 +14,9 @@ import amara.applications.master.server.network.PortProvider;
  */
 public class RunningGames{
 
-    public RunningGames(PortProvider portProvider){
-        this.portProvider = portProvider;
-    }
-    private PortProvider portProvider;
-    private ArrayList<Game> games = new ArrayList<Game>();
+    private ArrayList<Game> games = new ArrayList<>();
     
     public void registerGame(Game game){
-        game.setPort(portProvider.requestPort());
         games.add(game);
     }
     

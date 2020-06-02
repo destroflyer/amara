@@ -20,8 +20,10 @@ public class Settings{
     public static final String FILE__SEPERATOR_KEY_VALUE = "=";
     public static final String FILE__BOOLEAN_TRUE = "true";
     public static final String FILE__BOOLEAN_FALSE = "false";
-    private static HashMap<String, String> values = new HashMap<String, String>();
+    private static HashMap<String, String> values = new HashMap<>();
     static{
+        set("server_game_url", "https://destrostudios.com");
+        set("server_game_port", 33900);
         DefaultSettings.setDefaults(new IngameSettings());
         reloadFile();
     }
@@ -29,9 +31,9 @@ public class Settings{
     public static void reloadFile(){
         if(FileManager.existsFile(FILE__PATH)){
             String[] lines = FileManager.getFileLines(FILE__PATH);
-            for(int i=0;i<lines.length;i++){
-                String[] keyValuePair = getKeyValuePair(lines[i]);
-                if(keyValuePair != null){
+            for (String line : lines) {
+                String[] keyValuePair = getKeyValuePair(line);
+                if (keyValuePair != null) {
                     set(keyValuePair[0], keyValuePair[1]);
                 }
             }

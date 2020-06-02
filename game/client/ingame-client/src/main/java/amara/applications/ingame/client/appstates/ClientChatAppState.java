@@ -90,7 +90,7 @@ public class ClientChatAppState extends BaseDisplayAppState<IngameClientApplicat
                     name = login;
                 }
                 if(name != null){
-                    boolean isOwnMessage = (message.getPlayerID() == mainApplication.getMasterserverClient().getPlayerID());
+                    boolean isOwnMessage = (message.getPlayerID() == mainApplication.getMasterserverClient().getPlayerId());
                     chatLine += "\\#" + (isOwnMessage?"00CE00":"E72D33") + "#" + name + ":\\#FFFFFF# ";
                 }
                 else{

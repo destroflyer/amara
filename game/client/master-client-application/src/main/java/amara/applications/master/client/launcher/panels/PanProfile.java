@@ -47,7 +47,7 @@ public class PanProfile extends javax.swing.JPanel{
     }
     
     public void resetToOwnProfile(){
-        loadPlayerProfile(MasterserverClientUtil.getPlayerID());
+        loadPlayerProfile(MasterserverClientUtil.getPlayerId());
     }
     
     private void loadPlayerProfile(int playerID){
@@ -89,7 +89,7 @@ public class PanProfile extends javax.swing.JPanel{
         setAvatarIcon(player.getMeta("avatar"));
         lblUserData_ID.setText("" + player.getID());
         //lblUserData_RegistrationDate.setText(Util.getFormattedDate(player.getRegistrationDate()));
-        isOwnProfile = (player.getID() == MasterserverClientUtil.getPlayerID());
+        isOwnProfile = (player.getID() == MasterserverClientUtil.getPlayerId());
         if(isOwnProfile){
             btnAvatar.setCursor(new Cursor(Cursor.HAND_CURSOR));
             //lblUserData_EMail.setText(player.getEMail());

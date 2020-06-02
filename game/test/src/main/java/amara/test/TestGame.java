@@ -31,7 +31,7 @@ public class TestGame{
             MasterserverClientApplication masterClient = new MasterserverClientApplication(new HostInformation("localhost", masterServer.getPort()));
             masterClient.start();
             NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-            networkClient.sendMessage(new Message_Login(new AuthentificationInformation("destroflyer", "test")));
+            networkClient.sendMessage(new Message_Login("myAuthToken"));
             networkClient.sendMessage(new Message_CreateLobby());
             networkClient.sendMessage(new Message_SetLobbyData(new LobbyData("arama", new TeamFormat(2, 0))));
             networkClient.sendMessage(new Message_AddLobbyBot(new LobbyPlayer_Bot(BotType.EASY, "Bot", new GameSelectionPlayerData(11, null))));

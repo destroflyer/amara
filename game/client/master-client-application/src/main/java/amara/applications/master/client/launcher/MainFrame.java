@@ -10,88 +10,116 @@
  */
 package amara.applications.master.client.launcher;
 
-import java.awt.Insets;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
+import java.awt.*;
+import javax.swing.*;
+
 import amara.applications.master.client.MasterserverClientApplication;
-import amara.applications.master.client.appstates.*;
+import amara.applications.master.client.appstates.ItemsAppState;
+import amara.applications.master.client.appstates.LoginAppState;
 import amara.applications.master.client.launcher.panels.*;
-import amara.applications.master.network.messages.*;
-import amara.applications.master.network.messages.objects.AuthentificationInformation;
+import amara.applications.master.client.launcher.panels.connectscreens.ConnectScreen_Shina;
+import amara.applications.master.network.messages.Message_GetGameContents;
+import amara.applications.master.network.messages.Message_Login;
+import amara.applications.master.server.launcher.Launcher_Game;
+import amara.core.Launcher_Core;
 import amara.core.Util;
+import amara.core.settings.Settings;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.applications.windowed.FrameUtil;
+import amara.libraries.network.HostInformation;
 import amara.libraries.network.NetworkClient;
+import amara.libraries.network.exceptions.ServerConnectionException;
+import amara.libraries.network.exceptions.ServerConnectionTimeoutException;
 
 /**
  *
  * @author Carl
  */
-public class MainFrame extends javax.swing.JFrame{
+public class MainFrame extends JFrame {
 
-    public MainFrame(PanLogin panLogin){
+    public static void main(String[] args) {
+        String authToken = args[0];
+        Launcher_Core.initialize();
+        Launcher_Game.initialize();
+        EventQueue.invokeLater(() -> new MainFrame(authToken).setVisible(true));
+    }
+
+    public MainFrame(String authToken) {
+        this.authToken = authToken;
         initComponents();
         instance = this;
-        this.panLogin = panLogin;
+        panConnect = new PanConnect(this, new ConnectScreen_Shina());
         setSize(1000, 600);
-        setDisplayedPanel(panLogin);
-        panLogin.start();
+        setDisplayedPanel(panConnect);
+        panConnect.start();
         FrameUtil.initFrameSpecials(this);
         FrameUtil.centerFrame(this);
         UIManager.put("TabbedPane.contentBorderInsets", new Insets(-1, 0, 0, 0));
+        connect();
     }
     private static MainFrame instance;
-    private PanLogin panLogin;
-    
+    private String authToken;
+    private PanConnect panConnect;
+    private MasterserverClientApplication masterClient;
+
     public void setDisplayedPanel(JPanel panel){
         panContainer.removeAll();
         panContainer.add(panel);
         panContainer.updateUI();
     }
-    
-    public void login(final AuthentificationInformation authentificationInformation){
-        new Thread(() -> {
-            panLogin.setLoginState(PanLogin.LoginState.AUTHENTIFICATION);
-            MasterserverClientApplication masterClient = MasterserverClientApplication.getInstance();
-            NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
-            networkClient.sendMessage(new Message_Login(authentificationInformation));
-            LoginAppState loginAppState = masterClient.getStateManager().getState(LoginAppState.class);
-            loginAppState.onLoginPending();
-            LoginAppState.LoginResult loginResult;
-            while(true){
-                if(loginAppState.getResult() != LoginAppState.LoginResult.PENDING){
-                    loginResult = loginAppState.getResult();
-                    break;
-                }
-                try{
-                    Thread.sleep(100);
-                }catch(Exception ex){
-                }
-            }
-            switch(loginResult){
-                case FAILED:
-                    panLogin.setLoginState(PanLogin.LoginState.INPUT);
-                    FrameUtil.showMessageDialog(MainFrame.this, "Login failed. Possible reasons:\n\n- Wrong login\n- Wrong password", FrameUtil.MessageType.ERROR);
-                    break;
 
-                case SUCCESSFUL:
-                    panLogin.setLoginState(PanLogin.LoginState.RECEIVING_DATA);
-                    networkClient.sendMessage(new Message_GetGameContents());
-                    ItemsAppState itemsAppState = masterClient.getStateManager().getState(ItemsAppState.class);
-                    while(true){
-                        if(itemsAppState.getOwnedItems() != null){
-                            break;
-                        }
-                        Util.sleep(100);
+    private void connect() {
+        new Thread(() -> {
+            try {
+                masterClient = new MasterserverClientApplication(new HostInformation(Settings.get("server_game_url"), Settings.getInteger("server_game_port")));
+                masterClient.start();
+                NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
+                networkClient.sendMessage(new Message_Login(authToken));
+                LoginAppState loginAppState = masterClient.getStateManager().getState(LoginAppState.class);
+                loginAppState.onLoginPending();
+                LoginAppState.LoginResult loginResult;
+                while (true) {
+                    if (loginAppState.getResult() != LoginAppState.LoginResult.PENDING) {
+                        loginResult = loginAppState.getResult();
+                        break;
                     }
-                    panLogin.close();
-                    setDisplayedPanel(new PanMainMenu());
-                    break;
+                    try {
+                        Thread.sleep(100);
+                    } catch(Exception ex) {
+                    }
+                }
+                switch(loginResult){
+                    case FAILED:
+                        panConnect.setInfoLabel("Authentication failed.");
+                        break;
+
+                    case SUCCESSFUL:
+                        panConnect.setInfoLabel("Retrieving ingame content...");
+                        networkClient.sendMessage(new Message_GetGameContents());
+                        ItemsAppState itemsAppState = masterClient.getStateManager().getState(ItemsAppState.class);
+                        while (true) {
+                            if (itemsAppState.getOwnedItems() != null) {
+                                break;
+                            }
+                            Util.sleep(100);
+                        }
+                        panConnect.setInfoLabel("");
+                        panConnect.onConnected();
+                        break;
+                }
+            } catch (ServerConnectionException | ServerConnectionTimeoutException ex) {
+                ex.printStackTrace();
+                panConnect.setInfoLabel("Seems like there is a problem with our servers :(");
             }
         }).start();
     }
 
-    public static MainFrame getInstance(){
+    public void openMainMenu() {
+        panConnect.close();
+        setDisplayedPanel(new PanMainMenu());
+    }
+
+    public static MainFrame getInstance() {
         return instance;
     }
 

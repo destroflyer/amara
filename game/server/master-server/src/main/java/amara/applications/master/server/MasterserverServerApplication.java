@@ -4,7 +4,6 @@ import amara.applications.ingame.server.IngameServerApplication;
 import amara.applications.ingame.server.interfaces.MasterserverServerApplicationInterface;
 import amara.applications.ingame.shared.games.Game;
 import amara.applications.master.server.appstates.*;
-import amara.applications.master.server.network.PortProvider;
 import amara.applications.master.server.appstates.DatabaseAppState;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.*;
@@ -21,12 +20,11 @@ public class MasterserverServerApplication extends HeadlessApplication implement
             stateManager.attach(new LogsAppState());
             stateManager.attach(new DatabaseAppState());
             stateManager.attach(new NetworkServerAppState(port));
-            stateManager.attach(new UpdatesAppState());
             stateManager.attach(new PlayersContentsAppState());
             stateManager.attach(new PlayersAppState());
             stateManager.attach(new LobbiesAppState());
             stateManager.attach(new GamesQueueAppState());
-            stateManager.attach(new GamesAppState(new PortProvider(port + 1)));
+            stateManager.attach(new GamesAppState());
             stateManager.attach(new MasterServerInitializedAppState());
         } catch(ServerCreationException ex) {
             ex.printStackTrace();

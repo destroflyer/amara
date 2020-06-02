@@ -13,9 +13,9 @@ import amara.libraries.applications.headless.applications.HeadlessAppState;
  */
 public interface MasterserverClientInterface{
     
-    public abstract <T extends HeadlessAppState> T getState(Class<T> stateClass);
+    <T extends HeadlessAppState> T getState(Class<T> stateClass);
     
-    public abstract int getPlayerID();
+    int getPlayerId();
     
-    public abstract PlayerProfileData getPlayerProfile(int playerID);
+    PlayerProfileData getPlayerProfile(int playerID);
 }

@@ -99,7 +99,7 @@ public class PanGameSelection extends javax.swing.JPanel{
         cbxMapSpells[mapSpellsIndex].setEnabled(true);
         cbxMapSpells[mapSpellsIndex].setModel(new ComboboxModel_MapSpells(mapSpells, 40));
         cbxMapSpells[mapSpellsIndex].setRenderer(new ComboboxRenderer_MapSpells(mapSpells));
-        GameSelectionPlayer gameSelectionPlayer = gameSelection.getPlayer(MasterserverClientUtil.getPlayerID());
+        GameSelectionPlayer gameSelectionPlayer = gameSelection.getPlayer(MasterserverClientUtil.getPlayerId());
         int[][] mapSpellsIndices = gameSelectionPlayer.getPlayerData().getMapSpellsIndices();
         if(mapSpellsIndices != null){
             int mapSpellIndex = mapSpellsIndices[selectableMapSpellsIndices.get(mapSpellsIndex)[0]][selectableMapSpellsIndices.get(mapSpellsIndex)[1]];

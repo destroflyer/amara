@@ -11,7 +11,6 @@ import amara.applications.ingame.shared.games.*;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.*;
 import amara.applications.master.server.games.RunningGames;
-import amara.applications.master.server.network.PortProvider;
 import amara.applications.master.server.players.ConnectedPlayers;
 import amara.core.Util;
 import amara.libraries.applications.headless.appstates.NetworkServerAppState;
@@ -25,17 +24,10 @@ import amara.libraries.network.SubNetworkServer;
  */
 public class GamesAppState extends ServerBaseAppState{
 
-    public GamesAppState(PortProvider portProvider){
-        runningGames = new RunningGames(portProvider);
+    public GamesAppState(){
+        runningGames = new RunningGames();
     }
     private RunningGames runningGames;
-    
-    public void sendGameSelectionAcceptRequest(GameSelection gameSelection){
-        NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
-        for(int clientID : getClientIDs(gameSelection)){
-            networkServer.sendMessageToClient(clientID, new Message_GameSelectionAcceptRequest());
-        }
-    }
     
     public void startGame(GameSelection gameSelection){
         LobbiesAppState lobbiesAppState = getAppState(LobbiesAppState.class);

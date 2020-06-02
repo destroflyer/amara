@@ -20,8 +20,8 @@ public class MasterserverClientUtil{
         return getState(NetworkClientHeadlessAppState.class).getNetworkClient();
     }
     
-    public static int getPlayerID(){
-        return getState(LoginAppState.class).getPlayerID();
+    public static int getPlayerId(){
+        return getState(LoginAppState.class).getPlayerId();
     }
     
     public static PlayerProfileData getPlayerProfile(int playerID){

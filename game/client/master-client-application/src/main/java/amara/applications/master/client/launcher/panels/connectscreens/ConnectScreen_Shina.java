@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.applications.master.client.launcher.panels.loginscreens;
+package amara.applications.master.client.launcher.panels.connectscreens;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -15,9 +15,9 @@ import amara.core.files.FileAssets;
  *
  * @author Carl
  */
-public class LoginScreen_Shina extends SwingLoginScreen{
+public class ConnectScreen_Shina extends ConnectScreen {
 
-    public LoginScreen_Shina(){
+    public ConnectScreen_Shina(){
         loopDuration = 40;
     }
     private BufferedImage backgroundImage;

@@ -23,7 +23,6 @@ public class Game{
     private Map map;
     private GameSelection gameSelection;
     private GamePlayer[][] teams;
-    private int port;
     private boolean isStarted;
     
     private void createTeams(){
@@ -87,14 +86,6 @@ public class Game{
 
     public GamePlayer[][] getTeams(){
         return teams;
-    }
-
-    public void setPort(int port){
-        this.port = port;
-    }
-
-    public int getPort(){
-        return port;
     }
     
     public void start(){

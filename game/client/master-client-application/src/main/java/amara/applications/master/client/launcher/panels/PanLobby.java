@@ -45,7 +45,7 @@ public class PanLobby extends javax.swing.JPanel{
     
     public void update(Lobby lobby){
         this.lobby = lobby;
-        isOwner = (MasterserverClientUtil.getPlayerID() == lobby.getOwner().getPlayerID());
+        isOwner = (MasterserverClientUtil.getPlayerId() == lobby.getOwner().getPlayerID());
         String mapName = lobby.getLobbyData().getMapName();
         map = MapFileHandler.load(mapName, false);
         cbxMapName.setSelectedItem(mapName);

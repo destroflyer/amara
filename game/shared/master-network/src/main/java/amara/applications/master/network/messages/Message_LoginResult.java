@@ -18,12 +18,12 @@ public class Message_LoginResult extends AbstractMessage{
         
     }
     
-    public Message_LoginResult(int playerID){
-        this.playerID = playerID;
+    public Message_LoginResult(int playerId){
+        this.playerId = playerId;
     }
-    private int playerID;
+    private int playerId;
 
-    public int getPlayerID(){
-        return playerID;
+    public int getPlayerId(){
+        return playerId;
     }
 }

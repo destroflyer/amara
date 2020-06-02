@@ -24,7 +24,7 @@ public class LoginAppState extends ClientBaseAppState{
         SUCCESSFUL
     }
     private LoginResult result;
-    private int playerID;
+    private int playerId;
     
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
@@ -37,8 +37,8 @@ public class LoginAppState extends ClientBaseAppState{
         result = LoginResult.PENDING;
     }
 
-    public void onLoginSuccessful(int playerID){
-        this.playerID = playerID;
+    public void onLoginSuccessful(int playerId){
+        this.playerId = playerId;
         result = LoginResult.SUCCESSFUL;
     }
 
@@ -50,7 +50,7 @@ public class LoginAppState extends ClientBaseAppState{
         return result;
     }
 
-    public int getPlayerID(){
-        return playerID;
+    public int getPlayerId(){
+        return playerId;
     }
 }

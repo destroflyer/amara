@@ -16,13 +16,6 @@ public class MessagesSerializer_Master{
     
     public static void registerClasses(){
         Serializer.registerClasses(
-            //These update classes have to be always registered first to keep the updater backwards compatible
-            Message_GetUpdateFiles.class,
-            Message_GetUpdateFile.class,
-            Message_UpdateFilePart.class,
-            Message_UpdateFiles.class,
-                UpdateFile.class,
-                
             Message_EditActiveCharacterSkin.class,
             Message_EditCharacterInventory.class,
             Message_EditUserMeta.class,
@@ -34,7 +27,6 @@ public class MessagesSerializer_Master{
             Message_GetPlayerProfileData.class,
             Message_GetPlayerStatus.class,
             Message_Login.class,
-                AuthentificationInformation.class,
             Message_LoginResult.class,
             Message_Logout.class,
             Message_OwnedCharacters.class,
