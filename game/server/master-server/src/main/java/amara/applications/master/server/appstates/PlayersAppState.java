@@ -18,40 +18,40 @@ import amara.libraries.network.NetworkServer;
  *
  * @author Carl
  */
-public class PlayersAppState extends ServerBaseAppState{
+public class PlayersAppState extends ServerBaseAppState {
 
     private ConnectedPlayers connectedPlayers = new ConnectedPlayers();
     private HashMap<String, String> userDefaultMeta = new HashMap<>();
-    
+
     @Override
-    public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
+    public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application) {
         super.initialize(stateManager, application);
         loadUserDefaultMeta();
         NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
         DatabaseAppState databaseAppState = getAppState(DatabaseAppState.class);
+        DestrostudiosAppState destrostudiosAppState = getAppState(DestrostudiosAppState.class);
         PlayersContentsAppState playersContentsAppState = getAppState(PlayersContentsAppState.class);
-        networkServer.addMessageBackend(new ReceiveLoginsBackend(databaseAppState, this));
-        networkServer.addMessageBackend(new SendPlayerProfilesDataBackend(databaseAppState, this));
+        networkServer.addMessageBackend(new ReceiveLoginsBackend(this));
+        networkServer.addMessageBackend(new SendPlayerProfilesDataBackend(databaseAppState, this, destrostudiosAppState));
         networkServer.addMessageBackend(new SendPlayerStatusesBackend(this));
         networkServer.addMessageBackend(new EditUserMetaBackend(databaseAppState, this));
         networkServer.addMessageBackend(new SendGameContentsBackend(databaseAppState, connectedPlayers, playersContentsAppState));
         networkServer.addMessageBackend(new EditActiveCharacterSkinsBackend(databaseAppState, connectedPlayers));
-        networkServer.addMessageBackend(new EditCharacterInventoriesBackend(databaseAppState, connectedPlayers));
     }
-    
-    private void loadUserDefaultMeta(){
+
+    private void loadUserDefaultMeta() {
         userDefaultMeta.clear();
-        QueryResult results_MetaDefaults = getAppState(DatabaseAppState.class).getQueryResult("SELECT key, value FROM users_meta_defaults");
+        QueryResult results_MetaDefaults = getAppState(DatabaseAppState.class).getQueryResult("SELECT name, value FROM users_meta_defaults");
         while(results_MetaDefaults.next()){
-            userDefaultMeta.put(results_MetaDefaults.getString("key"), results_MetaDefaults.getString("value"));
+            userDefaultMeta.put(results_MetaDefaults.getString("name"), results_MetaDefaults.getString("value"));
         }
         results_MetaDefaults.close();
     }
-    
-    public PlayerStatus getPlayerStatus(int playerID){
-        if(connectedPlayers.getClientID(playerID) != -1){
+
+    public PlayerStatus getPlayerStatus(int playerId) {
+        if (connectedPlayers.getClientID(playerId) != -1){
             RunningGames runningGames = getAppState(GamesAppState.class).getRunningGames();
-            if(runningGames.getGame(playerID) != null){
+            if (runningGames.getGame(playerId) != null) {
                 return PlayerStatus.INGAME;
             }
             return PlayerStatus.ONLINE;
@@ -59,11 +59,11 @@ public class PlayersAppState extends ServerBaseAppState{
         return PlayerStatus.OFFLINE;
     }
 
-    public ConnectedPlayers getConnectedPlayers(){
+    public ConnectedPlayers getConnectedPlayers() {
         return connectedPlayers;
     }
 
-    public HashMap<String, String> getUserDefaultMeta(){
+    public HashMap<String, String> getUserDefaultMeta() {
         return userDefaultMeta;
     }
 }

@@ -33,13 +33,13 @@ public class PanLobby_Player extends javax.swing.JPanel{
     public static PlayerProfileData getLobbyPlayerProfile(LobbyPlayer lobbyPlayer){
         if(lobbyPlayer instanceof LobbyPlayer_Human){
             LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-            return MasterserverClientUtil.getPlayerProfile(lobbyPlayer_Human.getPlayerID());
+            return MasterserverClientUtil.getPlayerProfile(lobbyPlayer_Human.getPlayerId());
         }
         else if (lobbyPlayer instanceof LobbyPlayer_Bot) {
             LobbyPlayer_Bot lobbyPlayer_Bot = (LobbyPlayer_Bot) lobbyPlayer;
             HashMap<String, String> botMeta = new HashMap<>();
             botMeta.put("avatar", "bot");
-            return new PlayerProfileData(-1, lobbyPlayer_Bot.getName(), botMeta, System.currentTimeMillis());
+            return new PlayerProfileData(-1, lobbyPlayer_Bot.getName(), botMeta);
         }
         return null;
     }
@@ -47,7 +47,7 @@ public class PanLobby_Player extends javax.swing.JPanel{
     public static boolean isOwnPlayer(LobbyPlayer lobbyPlayer){
         if(lobbyPlayer instanceof LobbyPlayer_Human){
             LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-            return (MasterserverClientUtil.getPlayerId() == lobbyPlayer_Human.getPlayerID());
+            return (MasterserverClientUtil.getPlayerId() == lobbyPlayer_Human.getPlayerId());
         }
         return false;
     }

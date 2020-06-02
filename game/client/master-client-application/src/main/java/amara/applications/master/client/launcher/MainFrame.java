@@ -14,7 +14,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import amara.applications.master.client.MasterserverClientApplication;
-import amara.applications.master.client.appstates.ItemsAppState;
+import amara.applications.master.client.appstates.CharactersAppState;
 import amara.applications.master.client.appstates.LoginAppState;
 import amara.applications.master.client.launcher.panels.*;
 import amara.applications.master.client.launcher.panels.connectscreens.ConnectScreen_Shina;
@@ -71,7 +71,7 @@ public class MainFrame extends JFrame {
     private void connect() {
         new Thread(() -> {
             try {
-                masterClient = new MasterserverClientApplication(new HostInformation(Settings.get("server_game_url"), Settings.getInteger("server_game_port")));
+                masterClient = new MasterserverClientApplication(new HostInformation(Settings.get("server_game_host"), Settings.getInteger("server_game_port")));
                 masterClient.start();
                 NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
                 networkClient.sendMessage(new Message_Login(authToken));
@@ -96,9 +96,9 @@ public class MainFrame extends JFrame {
                     case SUCCESSFUL:
                         panConnect.setInfoLabel("Retrieving ingame content...");
                         networkClient.sendMessage(new Message_GetGameContents());
-                        ItemsAppState itemsAppState = masterClient.getStateManager().getState(ItemsAppState.class);
+                        CharactersAppState charactersAppState = masterClient.getStateManager().getState(CharactersAppState.class);
                         while (true) {
-                            if (itemsAppState.getOwnedItems() != null) {
+                            if (charactersAppState.getCharacters() != null) {
                                 break;
                             }
                             Util.sleep(100);

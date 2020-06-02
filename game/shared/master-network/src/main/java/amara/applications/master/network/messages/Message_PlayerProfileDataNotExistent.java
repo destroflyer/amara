@@ -12,18 +12,18 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class Message_GetPlayerStatus extends AbstractMessage{
-    
-    public Message_GetPlayerStatus(){
+public class Message_PlayerProfileDataNotExistent extends AbstractMessage {
+
+    public Message_PlayerProfileDataNotExistent() {
         
     }
-    
-    public Message_GetPlayerStatus(int playerID){
-        this.playerID = playerID;
-    }
-    private int playerID;
 
-    public int getPlayerId(){
-        return playerID;
+    public Message_PlayerProfileDataNotExistent(String login) {
+        this.login = login;
+    }
+    private String login;
+
+    public String getLogin(){
+        return login;
     }
 }

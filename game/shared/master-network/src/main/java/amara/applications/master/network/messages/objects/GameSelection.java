@@ -69,7 +69,7 @@ public class GameSelection{
                 LobbyPlayer lobbyPlayer = player.getLobbyPlayer();
                 if(lobbyPlayer instanceof LobbyPlayer_Human){
                     LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-                    if(lobbyPlayer_Human.getPlayerID() == playerID){
+                    if(lobbyPlayer_Human.getPlayerId() == playerID){
                         return player;
                     }
                 }

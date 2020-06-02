@@ -4,6 +4,7 @@
  */
 package amara.applications.master.client.network.backends;
 
+import amara.applications.master.network.messages.objects.PlayerProfileData;
 import com.jme3.network.Message;
 import amara.applications.master.client.appstates.PlayerProfilesAppState;
 import amara.applications.master.network.messages.*;
@@ -13,33 +14,22 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class ReceivePlayerProfilesDataBackend implements MessageBackend{
+public class ReceivePlayerProfilesDataBackend implements MessageBackend {
 
-    public ReceivePlayerProfilesDataBackend(PlayerProfilesAppState playerProfilesAppState){
+    public ReceivePlayerProfilesDataBackend(PlayerProfilesAppState playerProfilesAppState) {
         this.playerProfilesAppState = playerProfilesAppState;
     }
     private PlayerProfilesAppState playerProfilesAppState;
-    
+
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_PlayerProfileData){
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_PlayerProfileData) {
             Message_PlayerProfileData message = (Message_PlayerProfileData) receivedMessage;
-            if(message.getPlayerProfileData() != null){
-                playerProfilesAppState.setProfile(message.getPlayerProfileData());
-            }
-            playerProfilesAppState.onUpdateFinished(message.getPlayerID());
-            playerProfilesAppState.onUpdateFinished(message.getLogin());
-        }
-        else if(receivedMessage instanceof Message_PlayerProfileDataNotExistant){
-            Message_PlayerProfileDataNotExistant message = (Message_PlayerProfileDataNotExistant) receivedMessage;
-            if(message.getPlayerID() != 0){
-                playerProfilesAppState.setProfileNotExistant(message.getPlayerID());
-                playerProfilesAppState.onUpdateFinished(message.getPlayerID());
-            }
-            else{
-                playerProfilesAppState.setProfileNotExistant(message.getLogin());
-                playerProfilesAppState.onUpdateFinished(message.getLogin());
-            }
+            PlayerProfileData playerProfileData = message.getPlayerProfileData();
+            playerProfilesAppState.saveProfile(playerProfileData);
+        } else if (receivedMessage instanceof Message_PlayerProfileDataNotExistent) {
+            Message_PlayerProfileDataNotExistent message = (Message_PlayerProfileDataNotExistent) receivedMessage;
+            playerProfilesAppState.onProfileNotExistent(message.getLogin());
         }
     }
 }

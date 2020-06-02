@@ -5,7 +5,7 @@
 package amara.applications.master.client.network.backends;
 
 import com.jme3.network.Message;
-import amara.applications.master.client.appstates.PlayerStatusesAppState;
+import amara.applications.master.client.appstates.PlayerStatiAppState;
 import amara.applications.master.network.messages.Message_PlayerStatus;
 import amara.libraries.network.*;
 
@@ -15,16 +15,16 @@ import amara.libraries.network.*;
  */
 public class ReceivePlayerStatusesBackend implements MessageBackend{
 
-    public ReceivePlayerStatusesBackend(PlayerStatusesAppState playerStatusesAppState){
-        this.playerStatusesAppState = playerStatusesAppState;
+    public ReceivePlayerStatusesBackend(PlayerStatiAppState playerStatiAppState){
+        this.playerStatiAppState = playerStatiAppState;
     }
-    private PlayerStatusesAppState playerStatusesAppState;
+    private PlayerStatiAppState playerStatiAppState;
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_PlayerStatus){
             Message_PlayerStatus message = (Message_PlayerStatus) receivedMessage;
-            playerStatusesAppState.setStatus(message.getPlayerID(), message.getPlayerStatus());
+            playerStatiAppState.setStatus(message.getPlayerId(), message.getPlayerStatus());
         }
     }
 }

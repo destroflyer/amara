@@ -57,7 +57,7 @@ public class GamesAppState extends ServerBaseAppState{
                 LobbyPlayer lobbyPlayer = player.getLobbyPlayer();
                 if (lobbyPlayer instanceof LobbyPlayer_Human) {
                     LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-                    clientIDs.push(connectedPlayers.getClientID(lobbyPlayer_Human.getPlayerID()));
+                    clientIDs.push(connectedPlayers.getClientID(lobbyPlayer_Human.getPlayerId()));
                 }
             }
         }
@@ -72,7 +72,7 @@ public class GamesAppState extends ServerBaseAppState{
                 LobbyPlayer lobbyPlayer = player.getGameSelectionPlayer().getLobbyPlayer();
                 if (lobbyPlayer instanceof LobbyPlayer_Human) {
                     LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-                    int clientID = connectedPlayers.getClientID(lobbyPlayer_Human.getPlayerID());
+                    int clientID = connectedPlayers.getClientID(lobbyPlayer_Human.getPlayerId());
                     networkServer.sendMessageToClient(clientID, new Message_GameCreated(player.getAuthentificationKey()));
                 }
             }

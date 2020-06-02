@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  *
  * @author Carl
  */
-public class PanMainMenu extends javax.swing.JPanel{
+public class PanMainMenu extends JPanel{
 
     public PanMainMenu(){
         initComponents();
@@ -26,7 +26,6 @@ public class PanMainMenu extends javax.swing.JPanel{
         addPanelTab("Home", new PanHomeScreen());
         panProfile = new PanProfile();
         addPanelTab("Profile", panProfile);
-        //addPanelTab("Items", new PanItems());
         addPanelTab("Play", new PanPlay(this));
         addPanelTab("Characters", new PanCharacters());
         addPanelTab("Settings", new PanSettings());
@@ -37,10 +36,6 @@ public class PanMainMenu extends javax.swing.JPanel{
     
     private void addPanelTab(String title, JPanel panel){
         tpaneContainer.add(title, panel);
-    }
-    
-    public void setSelectedTab(int tabIndex){
-        tpaneContainer.setSelectedIndex(tabIndex);
     }
 
     /**

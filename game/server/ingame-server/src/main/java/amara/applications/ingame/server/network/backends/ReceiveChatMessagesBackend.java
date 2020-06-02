@@ -84,7 +84,7 @@ public class ReceiveChatMessagesBackend implements MessageBackend{
         LobbyPlayer lobbyPlayer = gamePlayer.getGameSelectionPlayer().getLobbyPlayer();
         if(lobbyPlayer instanceof LobbyPlayer_Human){
             LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-            return new Message_ChatMessage(lobbyPlayer_Human.getPlayerID(), null, text);
+            return new Message_ChatMessage(lobbyPlayer_Human.getPlayerId(), null, text);
         }
         else if(lobbyPlayer instanceof LobbyPlayer_Bot){
             LobbyPlayer_Bot lobbyPlayer_Bot = (LobbyPlayer_Bot) lobbyPlayer;

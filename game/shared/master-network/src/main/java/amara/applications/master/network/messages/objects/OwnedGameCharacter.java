@@ -17,14 +17,12 @@ public class OwnedGameCharacter{
         
     }
     
-    public OwnedGameCharacter(GameCharacter character, int activeSkinID, int[] inventory){
+    public OwnedGameCharacter(GameCharacter character, int activeSkinID){
         this.character = character;
         this.activeSkinID = activeSkinID;
-        this.inventory = inventory;
     }
     private GameCharacter character;
     private int activeSkinID;
-    private int[] inventory;
 
     public GameCharacter getCharacter(){
         return character;
@@ -36,13 +34,5 @@ public class OwnedGameCharacter{
 
     public int getActiveSkinID(){
         return activeSkinID;
-    }
-
-    public void setInventory(int[] inventory){
-        this.inventory = inventory;
-    }
-
-    public int[] getInventory(){
-        return inventory;
     }
 }

@@ -13,37 +13,34 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class EditUserMetaBackend implements MessageBackend{
+public class EditUserMetaBackend implements MessageBackend {
 
-    public EditUserMetaBackend(DatabaseAppState databaseAppState, PlayersAppState playersAppState){
+    public EditUserMetaBackend(DatabaseAppState databaseAppState, PlayersAppState playersAppState) {
         this.databaseAppState = databaseAppState;
         this.playersAppState = playersAppState;
     }
     private DatabaseAppState databaseAppState;
     private PlayersAppState playersAppState;
-    
+
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_EditUserMeta){
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_EditUserMeta) {
             Message_EditUserMeta message = (Message_EditUserMeta) receivedMessage;
             int playerID = playersAppState.getConnectedPlayers().getPlayer(messageResponse.getClientID()).getID();
-            boolean isDefaultValue = (message.getValue().equals(playersAppState.getUserDefaultMeta().get(message.getKey())));
-            String oldValue = databaseAppState.getQueryResult("SELECT value FROM users_meta WHERE (userid = " + playerID + ") AND (key = '" + databaseAppState.escape(message.getKey()) + "')").nextString_Close();
-            String whereClause = ("(userid = " + playerID + ") AND (key = '" + databaseAppState.escape(message.getKey()) + "')");
-            if(isDefaultValue){
-                if(oldValue != null){
+            boolean isDefaultValue = (message.getValue().equals(playersAppState.getUserDefaultMeta().get(message.getName())));
+            String oldValue = databaseAppState.getQueryResult("SELECT value FROM users_meta WHERE (user_id = " + playerID + ") AND (name = '" + databaseAppState.escape(message.getName()) + "')").nextString_Close();
+            String whereClause = ("(user_id = " + playerID + ") AND (name = '" + databaseAppState.escape(message.getName()) + "')");
+            if (isDefaultValue) {
+                if (oldValue != null) {
                     databaseAppState.executeQuery("DELETE FROM users_meta WHERE " + whereClause);
                 }
-            }
-            else{
-                if(oldValue == null){
-                    databaseAppState.executeQuery("INSERT INTO users_meta (userid, key, value) VALUES (" + playerID + ", '" + databaseAppState.escape(message.getKey()) + "', '" + databaseAppState.escape(message.getValue()) + "')");
-                }
-                else{
+            } else {
+                if (oldValue == null) {
+                    databaseAppState.executeQuery("INSERT INTO users_meta (user_id, name, value) VALUES (" + playerID + ", '" + databaseAppState.escape(message.getName()) + "', '" + databaseAppState.escape(message.getValue()) + "')");
+                } else {
                     databaseAppState.executeQuery("UPDATE users_meta SET value = '" + databaseAppState.escape(message.getValue()) + "' WHERE " + whereClause);
                 }
             }
-            databaseAppState.executeQuery("UPDATE users SET last_modification_date = " + System.currentTimeMillis() + " WHERE id = " + playerID);
         }
     }
 }

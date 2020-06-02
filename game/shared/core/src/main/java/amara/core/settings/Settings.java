@@ -22,7 +22,7 @@ public class Settings{
     public static final String FILE__BOOLEAN_FALSE = "false";
     private static HashMap<String, String> values = new HashMap<>();
     static{
-        set("server_game_url", "destrostudios.com");
+        set("server_game_host", "destrostudios.com");
         set("server_game_port", 33900);
         DefaultSettings.setDefaults(new IngameSettings());
         reloadFile();

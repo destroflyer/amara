@@ -18,15 +18,15 @@ public class Message_EditUserMeta extends AbstractMessage{
         
     }
     
-    public Message_EditUserMeta(String key, String value){
-        this.key = key;
+    public Message_EditUserMeta(String name, String value){
+        this.name = name;
         this.value = value;
     }
-    private String key;
+    private String name;
     private String value;
 
-    public String getKey(){
-        return key;
+    public String getName(){
+        return name;
     }
 
     public String getValue(){

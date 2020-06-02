@@ -12,22 +12,16 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class Message_PlayerProfileDataNotExistant extends AbstractMessage{
-    
-    public Message_PlayerProfileDataNotExistant(){
-        
+public class Message_GetPlayerProfileData_ByLogin extends AbstractMessage{
+
+    public Message_GetPlayerProfileData_ByLogin(){
+
     }
-    
-    public Message_PlayerProfileDataNotExistant(int playerID, String login){
-        this.playerID = playerID;
+
+    public Message_GetPlayerProfileData_ByLogin(String login){
         this.login = login;
     }
-    private int playerID;
     private String login;
-
-    public int getPlayerID(){
-        return playerID;
-    }
 
     public String getLogin(){
         return login;

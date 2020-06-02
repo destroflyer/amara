@@ -13,7 +13,7 @@ import java.util.Iterator;
  */
 public class ConnectedPlayers{
     
-    private HashMap<Integer, Player> players = new HashMap<Integer, Player>();
+    private HashMap<Integer, Player> players = new HashMap<>();
     
     public void login(int clientID, Player player){
         players.put(clientID, player);

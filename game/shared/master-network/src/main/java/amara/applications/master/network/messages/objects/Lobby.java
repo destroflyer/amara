@@ -82,7 +82,7 @@ public class Lobby{
         for (LobbyPlayer lobbyPlayer : players) {
             if (lobbyPlayer instanceof LobbyPlayer_Human) {
                 LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-                if (lobbyPlayer_Human.getPlayerID() == playerID) {
+                if (lobbyPlayer_Human.getPlayerId() == playerID) {
                     return lobbyPlayer_Human;
                 }
             }

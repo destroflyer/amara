@@ -19,22 +19,10 @@ public class Message_PlayerProfileData extends AbstractMessage{
         
     }
     
-    public Message_PlayerProfileData(int playerID, String login, PlayerProfileData playerProfileData){
-        this.playerID = playerID;
-        this.login = login;
+    public Message_PlayerProfileData(PlayerProfileData playerProfileData){
         this.playerProfileData = playerProfileData;
     }
-    private int playerID;
-    private String login;
     private PlayerProfileData playerProfileData;
-
-    public int getPlayerID(){
-        return playerID;
-    }
-
-    public String getLogin(){
-        return login;
-    }
 
     public PlayerProfileData getPlayerProfileData(){
         return playerProfileData;

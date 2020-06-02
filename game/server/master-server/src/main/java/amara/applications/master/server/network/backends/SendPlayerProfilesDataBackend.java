@@ -5,6 +5,8 @@
 package amara.applications.master.server.network.backends;
 
 import java.util.HashMap;
+
+import amara.applications.master.server.appstates.model.DestrostudiosUser;
 import com.jme3.network.Message;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.PlayerProfileData;
@@ -16,44 +18,45 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class SendPlayerProfilesDataBackend implements MessageBackend{
+public class SendPlayerProfilesDataBackend implements MessageBackend {
 
-    public SendPlayerProfilesDataBackend(DatabaseAppState databaseAppState, PlayersAppState playersAppState){
+    public SendPlayerProfilesDataBackend(DatabaseAppState databaseAppState, PlayersAppState playersAppState, DestrostudiosAppState destrostudiosAppState) {
         this.databaseAppState = databaseAppState;
         this.playersAppState = playersAppState;
+        this.destrostudiosAppState = destrostudiosAppState;
     }
     private DatabaseAppState databaseAppState;
     private PlayersAppState playersAppState;
-    
+    private DestrostudiosAppState destrostudiosAppState;
+
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_GetPlayerProfileData){
-            Message_GetPlayerProfileData message = (Message_GetPlayerProfileData) receivedMessage;
-            Integer id = message.getPlayerID();
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_GetPlayerProfileData_ById) {
+            Message_GetPlayerProfileData_ById message = (Message_GetPlayerProfileData_ById) receivedMessage;
+            int playerId = message.getPlayerId();
+            String login = destrostudiosAppState.getLoginByPlayerId(playerId);
+            sendResponse(playerId, login, messageResponse);
+        } else if (receivedMessage instanceof Message_GetPlayerProfileData_ByLogin) {
+            Message_GetPlayerProfileData_ByLogin message = (Message_GetPlayerProfileData_ByLogin) receivedMessage;
             String login = message.getLogin();
-            if(id != 0){
-                login = databaseAppState.getQueryResult("SELECT login FROM users WHERE id = " + id + " LIMIT 1").nextString_Close();
+            DestrostudiosUser user = destrostudiosAppState.getUserByLogin(login);
+            Integer playerId = ((user != null) ? user.getId() : null);
+            sendResponse(playerId, login, messageResponse);
+        }
+    }
+
+    private void sendResponse(Integer playerId, String login, MessageResponse messageResponse) {
+        if (playerId != null) {
+            HashMap<String, String> meta = new HashMap<>(playersAppState.getUserDefaultMeta());
+            QueryResult results_Meta = databaseAppState.getQueryResult("SELECT name, value FROM users_meta WHERE user_id = " + playerId);
+            while (results_Meta.next()) {
+                meta.put(results_Meta.getString("name"), results_Meta.getString("value"));
             }
-            else{
-                id = databaseAppState.getQueryResult("SELECT id FROM users WHERE LOWER(login) = '" + databaseAppState.escape(message.getLogin().toLowerCase()) + "' LIMIT 1").nextInteger_Close();
-            }
-            if(id != null){
-                PlayerProfileData playerProfileData = null;
-                long lastModificationDate = databaseAppState.getQueryResult("SELECT last_modification_date FROM users WHERE id = " + id + " LIMIT 1").nextLong_Close();
-                if(lastModificationDate > message.getCachedTimestamp()){
-                    HashMap<String, String> meta = new HashMap<String, String>(playersAppState.getUserDefaultMeta());
-                    QueryResult results_Meta = databaseAppState.getQueryResult("SELECT key, value FROM users_meta WHERE userid = " + id);
-                    while(results_Meta.next()){
-                        meta.put(results_Meta.getString("key"), results_Meta.getString("value"));
-                    }
-                    results_Meta.close();
-                    playerProfileData = new PlayerProfileData(id, login, meta, System.currentTimeMillis());
-                }
-                messageResponse.addAnswerMessage(new Message_PlayerProfileData(id, login, playerProfileData));
-            }
-            else{
-                messageResponse.addAnswerMessage(new Message_PlayerProfileDataNotExistant(0, login));
-            }
+            results_Meta.close();
+            PlayerProfileData playerProfileData = new PlayerProfileData(playerId, login, meta);
+            messageResponse.addAnswerMessage(new Message_PlayerProfileData(playerProfileData));
+        } else {
+            messageResponse.addAnswerMessage(new Message_PlayerProfileDataNotExistent(login));
         }
     }
 }

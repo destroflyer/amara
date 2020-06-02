@@ -25,6 +25,7 @@ import java.security.PublicKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Map;
 
 /**
  *
@@ -32,12 +33,10 @@ import java.security.spec.X509EncodedKeySpec;
  */
 public class ReceiveLoginsBackend implements MessageBackend {
 
-    public ReceiveLoginsBackend(DatabaseAppState databaseAppState, PlayersAppState playersAppState) {
-        this.databaseAppState = databaseAppState;
+    public ReceiveLoginsBackend(PlayersAppState playersAppState) {
         this.playersAppState = playersAppState;
         authTokenVerifier = createAuthTokenVerifier();
     }
-    private DatabaseAppState databaseAppState;
     private PlayersAppState playersAppState;
     private JWTVerifier authTokenVerifier;
 
@@ -45,27 +44,24 @@ public class ReceiveLoginsBackend implements MessageBackend {
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
         if (receivedMessage instanceof Message_Login) {
             Message_Login message = (Message_Login) receivedMessage;
-            int resultPlayerId = 0;
+            int playerId = 0;
             try {
                 DecodedJWT decodedJWT = authTokenVerifier.verify(message.getAuthToken());
-                String login = (String) decodedJWT.getClaim("user").asMap().get("login");
-                Integer playerId = databaseAppState.getQueryResult("SELECT id FROM users WHERE login = '" + databaseAppState.escape(login) + "' LIMIT 1").nextInteger_Close();
-                if (playerId != null) {
-                    Player player = new Player(playerId, login);
-                    ConnectedPlayers connectedPlayers = playersAppState.getConnectedPlayers();
-                    connectedPlayers.login(messageResponse.getClientID(), player);
-                    System.out.println("Login '" + player.getLogin() + "' (#" + player.getID() + ")");
-                    resultPlayerId = playerId;
-                }
+                Map<String, Object> user = decodedJWT.getClaim("user").asMap();
+                playerId = (int) user.get("id");
+                String login = (String) user.get("login");
+                ConnectedPlayers connectedPlayers = playersAppState.getConnectedPlayers();
+                connectedPlayers.login(messageResponse.getClientID(), new Player(playerId, login));
+                System.out.println("Login '" + login + "' (#" + playerId + ")");
             } catch (JWTVerificationException ex) {
                 // Token should not be trusted
             }
-            messageResponse.addAnswerMessage(new Message_LoginResult(resultPlayerId));
+            messageResponse.addAnswerMessage(new Message_LoginResult(playerId));
         }
     }
 
     private JWTVerifier createAuthTokenVerifier() {
-        Algorithm algorithm = Algorithm.RSA256((RSAPublicKey) readPublicKey("./key_to_the_city.ini"), null);
+        Algorithm algorithm = Algorithm.RSA256((RSAPublicKey) readPublicKey("./public_auth_key_to_the_city.ini"), null);
         return JWT.require(algorithm).build();
     }
 

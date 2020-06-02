@@ -31,7 +31,7 @@ public class RunningGames{
                     LobbyPlayer lobbyPlayer = player.getGameSelectionPlayer().getLobbyPlayer();
                     if(lobbyPlayer instanceof LobbyPlayer_Human){
                         LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-                        if(((LobbyPlayer_Human) lobbyPlayer).getPlayerID() == playerID){
+                        if(((LobbyPlayer_Human) lobbyPlayer).getPlayerId() == playerID){
                             return game;
                         }
                     }

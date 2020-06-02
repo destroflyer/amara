@@ -13,12 +13,13 @@ import amara.applications.master.server.launcher.ServerLauncherFrame;
  *
  * @author Carl
  */
-public class TestClient{
-    
-    public static void main(String[] args){
+public class TestClient {
+
+    public static void main(String[] args) {
+        String authToken = args[0];
         Launcher_Core.initialize();
         Launcher_Game.initialize();
         new ServerLauncherFrame().setVisible(true);
-        new MainFrame("myAuthToken").setVisible(true);
+        new MainFrame(authToken).setVisible(true);
     }
 }

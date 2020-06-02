@@ -12,32 +12,29 @@ import amara.applications.master.network.messages.objects.*;
  *
  * @author Carl
  */
-public class MessagesSerializer_Master{
-    
-    public static void registerClasses(){
+public class MessagesSerializer_Master {
+
+    public static void registerClasses() {
         Serializer.registerClasses(
             Message_EditActiveCharacterSkin.class,
-            Message_EditCharacterInventory.class,
             Message_EditUserMeta.class,
             Message_GameContents.class,
                 GameCharacter.class,
                     GameCharacterSkin.class,
-                Item.class,
             Message_GetGameContents.class,
-            Message_GetPlayerProfileData.class,
+            Message_GetPlayerProfileData_ById.class,
+            Message_GetPlayerProfileData_ByLogin.class,
             Message_GetPlayerStatus.class,
             Message_Login.class,
             Message_LoginResult.class,
             Message_Logout.class,
             Message_OwnedCharacters.class,
                 OwnedGameCharacter.class,
-            Message_OwnedItems.class,
-                OwnedItem.class,
             Message_PlayerProfileData.class,
                 PlayerProfileData.class,
-            Message_PlayerProfileDataNotExistant.class,
+            Message_PlayerProfileDataNotExistent.class,
             Message_PlayerStatus.class,
-            
+
             Message_AcceptGameSelection.class,
             Message_AddLobbyBot.class,
             Message_CancelLobbyQueue.class,

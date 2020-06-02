@@ -87,9 +87,9 @@ public class PanProfile extends javax.swing.JPanel{
         String profileText = player.getMeta("profile_text");
         lblProfileText.setText(profileText.isEmpty()?"<html><i>No profile text existing.</i></html>":profileText);
         setAvatarIcon(player.getMeta("avatar"));
-        lblUserData_ID.setText("" + player.getID());
+        lblUserData_ID.setText("" + player.getId());
         //lblUserData_RegistrationDate.setText(Util.getFormattedDate(player.getRegistrationDate()));
-        isOwnProfile = (player.getID() == MasterserverClientUtil.getPlayerId());
+        isOwnProfile = (player.getId() == MasterserverClientUtil.getPlayerId());
         if(isOwnProfile){
             btnAvatar.setCursor(new Cursor(Cursor.HAND_CURSOR));
             //lblUserData_EMail.setText(player.getEMail());

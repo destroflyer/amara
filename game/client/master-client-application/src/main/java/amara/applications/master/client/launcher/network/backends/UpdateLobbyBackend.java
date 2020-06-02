@@ -15,25 +15,21 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class UpdateLobbyBackend implements MessageBackend{
+public class UpdateLobbyBackend implements MessageBackend {
 
     public UpdateLobbyBackend(PanPlay panPlay){
         this.panPlay = panPlay;
     }
     private PanPlay panPlay;
-    
+
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_LobbyUpdate){
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_LobbyUpdate) {
             Message_LobbyUpdate message = (Message_LobbyUpdate) receivedMessage;
             final Lobby lobby = message.getLobby();
-            EventQueue.invokeLater(new Runnable(){
-
-                @Override
-                public void run(){
-                    panPlay.getPanLobby().update(lobby);
-                    panPlay.displayLobbyPanel();
-                }
+            EventQueue.invokeLater(() -> {
+                panPlay.getPanLobby().update(lobby);
+                panPlay.displayLobbyPanel();
             });
         }
     }

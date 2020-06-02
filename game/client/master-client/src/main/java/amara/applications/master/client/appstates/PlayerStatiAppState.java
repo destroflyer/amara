@@ -17,35 +17,35 @@ import amara.libraries.network.NetworkClient;
  *
  * @author Carl
  */
-public class PlayerStatusesAppState extends ClientBaseAppState{
+public class PlayerStatiAppState extends ClientBaseAppState {
 
-    private LinkedList<Integer> updatingStatuses = new LinkedList<Integer>();
-    private HashMap<Integer, PlayerStatus> statuses = new HashMap<Integer, PlayerStatus>();
-    
+    private LinkedList<Integer> updatingStatuses = new LinkedList<>();
+    private HashMap<Integer, PlayerStatus> statuses = new HashMap<>();
+
     @Override
-    public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
+    public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application) {
         super.initialize(stateManager, application);
         NetworkClient networkClient = getAppState(NetworkClientHeadlessAppState.class).getNetworkClient();
         networkClient.addMessageBackend(new ReceivePlayerStatusesBackend(this));
     }
-    
-    public PlayerStatus getPlayerStatus(int playerID){
-        updatingStatuses.add(playerID);
+
+    public PlayerStatus getPlayerStatus(int playerId) {
+        updatingStatuses.add(playerId);
         NetworkClient networkClient = getAppState(NetworkClientHeadlessAppState.class).getNetworkClient();
-        networkClient.sendMessage(new Message_GetPlayerStatus(playerID));
-        while(true){
-            if(!updatingStatuses.contains(playerID)){
-                return statuses.get(playerID);
+        networkClient.sendMessage(new Message_GetPlayerStatus(playerId));
+        while (true) {
+            if (!updatingStatuses.contains(playerId)) {
+                return statuses.get(playerId);
             }
-            try{
+            try {
                 Thread.sleep(100);
-            }catch(Exception ex){
+            } catch(Exception ex) {
             }
         }
     }
-    
-    public void setStatus(int playerID, PlayerStatus playerStatus){
-        statuses.put(playerID, playerStatus);
-        updatingStatuses.remove((Integer) playerID);
+
+    public void setStatus(int playerId, PlayerStatus playerStatus) {
+        statuses.put(playerId, playerStatus);
+        updatingStatuses.remove((Integer) playerId);
     }
 }

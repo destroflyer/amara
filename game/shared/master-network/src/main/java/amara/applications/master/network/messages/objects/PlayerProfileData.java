@@ -18,18 +18,16 @@ public class PlayerProfileData{
         
     }
 
-    public PlayerProfileData(int id, String login, HashMap<String, String> meta, long timestamp){
+    public PlayerProfileData(int id, String login, HashMap<String, String> meta){
         this.id = id;
         this.login = login;
         this.meta = meta;
-        this.timestamp = timestamp;
     }
     private int id;
     private String login;
     private HashMap<String, String> meta;
-    private long timestamp;
 
-    public int getID(){
+    public int getId(){
         return id;
     }
 
@@ -39,9 +37,5 @@ public class PlayerProfileData{
 
     public String getMeta(String key){
         return meta.get(key);
-    }
-
-    public long getTimestamp(){
-        return timestamp;
     }
 }

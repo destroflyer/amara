@@ -18,9 +18,9 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class SendGameContentsBackend implements MessageBackend{
+public class SendGameContentsBackend implements MessageBackend {
 
-    public SendGameContentsBackend(DatabaseAppState databaseAppState, ConnectedPlayers connectedPlayers, PlayersContentsAppState playersContentsAppState){
+    public SendGameContentsBackend(DatabaseAppState databaseAppState, ConnectedPlayers connectedPlayers, PlayersContentsAppState playersContentsAppState) {
         this.databaseAppState = databaseAppState;
         this.connectedPlayers = connectedPlayers;
         this.playersContentsAppState = playersContentsAppState;
@@ -29,61 +29,40 @@ public class SendGameContentsBackend implements MessageBackend{
     private ConnectedPlayers connectedPlayers;
     private PlayersContentsAppState playersContentsAppState;
     private GameCharacter[] characters;
-    private Item[] items;
-    private LinkedList<GameCharacter> tmpCharacters = new LinkedList<GameCharacter>();
-    private LinkedList<GameCharacterSkin> tmpSkins = new LinkedList<GameCharacterSkin>();
-    private LinkedList<Item> tmpItems = new LinkedList<Item>();
-    
+
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_GetGameContents){
-            Message_GetGameContents message = (Message_GetGameContents) receivedMessage;
-            messageResponse.addAnswerMessage(new Message_GameContents(getCharacters(), getItems()));
-            int playerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
-            messageResponse.addAnswerMessage(new Message_OwnedCharacters(playersContentsAppState.getOwnedCharacters(playerID)));
-            messageResponse.addAnswerMessage(new Message_OwnedItems(playersContentsAppState.getOwnedItems(playerID)));
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_GetGameContents) {
+            messageResponse.addAnswerMessage(new Message_GameContents(getCharacters()));
+            int playerId = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
+            messageResponse.addAnswerMessage(new Message_OwnedCharacters(playersContentsAppState.getOwnedCharacters(playerId)));
         }
     }
-    
-    private GameCharacter[] getCharacters(){
-        if(characters == null){
+
+    private GameCharacter[] getCharacters() {
+        if (characters == null) {
+            LinkedList<GameCharacter> tmpCharacters = new LinkedList<>();
+            LinkedList<GameCharacterSkin> tmpSkins = new LinkedList<>();
             QueryResult result_Characters = databaseAppState.getQueryResult("SELECT id, name, title, lore, is_public FROM characters");
-            tmpCharacters.clear();
-            while(result_Characters.next()){
-                int characterID = result_Characters.getInteger("id");
+            while (result_Characters.next()) {
+                int characterId = result_Characters.getInteger("id");
                 String characterName = result_Characters.getString("name");
                 String characterTitle = result_Characters.getString("title");
                 String characterLore = result_Characters.getString("lore");
                 boolean characterIsPublic = result_Characters.getBoolean("is_public");
-                QueryResult result_Skins = databaseAppState.getQueryResult("SELECT id, title FROM characters_skins WHERE characterid = " + characterID);
+                QueryResult result_Skins = databaseAppState.getQueryResult("SELECT id, title FROM characters_skins WHERE character_id = " + characterId);
                 tmpSkins.clear();
-                while(result_Skins.next()){
+                while (result_Skins.next()) {
                     int skinID = result_Skins.getInteger("id");
                     String skinTitle = result_Skins.getString("title");
                     tmpSkins.add(new GameCharacterSkin(skinID, skinTitle));
                 }
                 result_Skins.close();
-                tmpCharacters.add(new GameCharacter(characterID, characterName, characterTitle, characterLore, characterIsPublic, tmpSkins.toArray(new GameCharacterSkin[tmpSkins.size()])));
+                tmpCharacters.add(new GameCharacter(characterId, characterName, characterTitle, characterLore, characterIsPublic, tmpSkins.toArray(new GameCharacterSkin[tmpSkins.size()])));
             }
             result_Characters.close();
             characters = tmpCharacters.toArray(new GameCharacter[tmpCharacters.size()]);
         }
         return characters;
-    }
-    
-    private Item[] getItems(){
-        if(items == null){
-            QueryResult result_Items = databaseAppState.getQueryResult("SELECT id, name, title FROM items");
-            tmpItems.clear();
-            while(result_Items.next()){
-                int itemID = result_Items.getInteger("id");
-                String itemName = result_Items.getString("name");
-                String itemTitle = result_Items.getString("title");
-                tmpItems.add(new Item(itemID, itemName, itemTitle));
-            }
-            result_Items.close();
-            items = tmpItems.toArray(new Item[tmpItems.size()]);
-        }
-        return items;
     }
 }

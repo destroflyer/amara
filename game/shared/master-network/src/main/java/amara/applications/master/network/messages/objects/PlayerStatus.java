@@ -8,7 +8,7 @@ package amara.applications.master.network.messages.objects;
  *
  * @author Carl
  */
-public enum PlayerStatus{
+public enum PlayerStatus {
     OFFLINE,
     ONLINE,
     INGAME

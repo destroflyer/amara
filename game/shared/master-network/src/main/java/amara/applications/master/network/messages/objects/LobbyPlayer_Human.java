@@ -17,12 +17,12 @@ public class LobbyPlayer_Human extends LobbyPlayer{
         
     }
 
-    public LobbyPlayer_Human(int playerID) {
-        this.playerID = playerID;
+    public LobbyPlayer_Human(int playerId) {
+        this.playerId = playerId;
     }
-    private int playerID;
+    private int playerId;
 
-    public int getPlayerID() {
-        return playerID;
+    public int getPlayerId() {
+        return playerId;
     }
 }

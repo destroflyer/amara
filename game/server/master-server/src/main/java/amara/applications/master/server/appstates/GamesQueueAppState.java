@@ -216,7 +216,7 @@ public class GamesQueueAppState extends ServerBaseAppState{
                 LobbyPlayer lobbyPlayer = player.getLobbyPlayer();
                 if (lobbyPlayer instanceof LobbyPlayer_Human) {
                     LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-                    int clientID = connectedPlayers.getClientID(lobbyPlayer_Human.getPlayerID());
+                    int clientID = connectedPlayers.getClientID(lobbyPlayer_Human.getPlayerId());
                     networkServer.sendMessageToClient(clientID, message);
                 }
             }

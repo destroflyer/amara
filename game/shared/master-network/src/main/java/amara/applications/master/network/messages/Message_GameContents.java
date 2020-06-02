@@ -19,18 +19,12 @@ public class Message_GameContents extends AbstractMessage{
         
     }
     
-    public Message_GameContents(GameCharacter[] characters, Item[] items){
+    public Message_GameContents(GameCharacter[] characters){
         this.characters = characters;
-        this.items = items;
     }
     private GameCharacter[] characters;
-    private Item[] items;
 
     public GameCharacter[] getCharacters(){
         return characters;
-    }
-
-    public Item[] getItems(){
-        return items;
     }
 }

@@ -45,7 +45,7 @@ public class PanLobby extends javax.swing.JPanel{
     
     public void update(Lobby lobby){
         this.lobby = lobby;
-        isOwner = (MasterserverClientUtil.getPlayerId() == lobby.getOwner().getPlayerID());
+        isOwner = (MasterserverClientUtil.getPlayerId() == lobby.getOwner().getPlayerId());
         String mapName = lobby.getLobbyData().getMapName();
         map = MapFileHandler.load(mapName, false);
         cbxMapName.setSelectedItem(mapName);
@@ -318,9 +318,9 @@ public class PanLobby extends javax.swing.JPanel{
         if((login != null) && (!login.isEmpty())){
             PlayerProfileData playerProfileData = MasterserverClientUtil.getPlayerProfile(login);
             if(playerProfileData != null){
-                int playerID = playerProfileData.getID();
+                int playerID = playerProfileData.getId();
                 if(!lobby.containsHumanPlayer(playerID)){
-                    PlayerStatus playerStatus = MasterserverClientUtil.getPlayerStatus(playerProfileData.getID());
+                    PlayerStatus playerStatus = MasterserverClientUtil.getPlayerStatus(playerProfileData.getId());
                     if(playerStatus == PlayerStatus.ONLINE){
                         sendMessage(new Message_InviteLobbyPlayer(playerID));
                     }

@@ -36,7 +36,7 @@ public class LobbiesAppState extends ServerBaseAppState{
     
     public void setLobbyData(int playerID, LobbyData lobbyData){
         Lobby lobby = getLobby(playerID);
-        if((lobby != null) && (playerID == lobby.getOwner().getPlayerID())){
+        if((lobby != null) && (playerID == lobby.getOwner().getPlayerId())){
             lobby.setLobbyData(lobbyData);
             sendUpdateToLobbyPlayers(lobby);
         }
@@ -62,7 +62,7 @@ public class LobbiesAppState extends ServerBaseAppState{
     public void leaveLobby(int playerID){
         Lobby lobby = getLobby(playerID);
         if(lobby != null){
-            if(playerID == lobby.getOwner().getPlayerID()){
+            if(playerID == lobby.getOwner().getPlayerId()){
                 removeLobby(lobby);
                 sendMessageToLobbyPlayers(lobby, new Message_LobbyClosed());
             }
@@ -84,7 +84,7 @@ public class LobbiesAppState extends ServerBaseAppState{
             sendUpdateToLobbyPlayers(lobby);
             if(lobbyPlayer instanceof LobbyPlayer_Human){
                 LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-                sendMessageToPlayer(lobbyPlayer_Human.getPlayerID(), new Message_LobbyClosed());
+                sendMessageToPlayer(lobbyPlayer_Human.getPlayerId(), new Message_LobbyClosed());
             }
         }
     }
@@ -106,13 +106,13 @@ public class LobbiesAppState extends ServerBaseAppState{
         for(LobbyPlayer lobbyPlayer : lobby.getPlayers()){
             if (lobbyPlayer instanceof LobbyPlayer_Human) {
                 LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-                sendMessageToPlayer(lobbyPlayer_Human.getPlayerID(), message);
+                sendMessageToPlayer(lobbyPlayer_Human.getPlayerId(), message);
             }
         }
     }
     
     public void sendMessageToLobbyOwner(Lobby lobby, Message message){
-        sendMessageToPlayer(lobby.getOwner().getPlayerID(), message);
+        sendMessageToPlayer(lobby.getOwner().getPlayerId(), message);
     }
     
     private void sendMessageToPlayer(int playerID, Message message){
