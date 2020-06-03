@@ -31,7 +31,7 @@ public class CharactersAppState extends ClientBaseAppState{
 
     public void setCharacters(GameCharacter[] characters){
         this.characters = characters;
-        LinkedList<GameCharacter> publicCharactersList = new LinkedList<GameCharacter>();
+        LinkedList<GameCharacter> publicCharactersList = new LinkedList<>();
         for(GameCharacter character : characters){
             if(character.isPublic()){
                 publicCharactersList.add(character);

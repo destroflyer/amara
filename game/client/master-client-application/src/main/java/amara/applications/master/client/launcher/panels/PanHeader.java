@@ -24,7 +24,7 @@ public class PanHeader extends javax.swing.JPanel{
     public PanHeader(){
         initComponents();
         lblTitle.setText(GameInfo.NAME);
-        backgroundImage = FileAssets.getImage("Interface/client/panels/header.jpg");
+        backgroundImage = FileAssets.getImage("Interface/client/panels/header.png");
     }
     private Image backgroundImage;
 

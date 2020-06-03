@@ -28,14 +28,14 @@ public class PanCharacters extends javax.swing.JPanel{
             PanCharacters_CharacterInfo panInfo = new PanCharacters_CharacterInfo(character);
             panInfo.setSize(746, (int) panInfo.getPreferredSize().getHeight());
             infoPanels.put(character, panInfo);
-            //Subtract 1 to avoid double borders
+            // Subtract 1 to avoid double borders
             y += (panelHeight - 1);
         }
         y += 1;
         panCharactersList.setPreferredSize(new Dimension(180, y));
         showCharacterInfo(publicCharacters[0]);
     }
-    private HashMap<GameCharacter, PanCharacters_CharacterInfo> infoPanels = new HashMap<GameCharacter, PanCharacters_CharacterInfo>();
+    private HashMap<GameCharacter, PanCharacters_CharacterInfo> infoPanels = new HashMap<>();
     
     public void showCharacterInfo(GameCharacter gameCharacter){
         PanCharacters_CharacterInfo panInfo = infoPanels.get(gameCharacter);

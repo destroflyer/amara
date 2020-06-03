@@ -27,16 +27,18 @@ public class EditActiveCharacterSkinsBackend implements MessageBackend {
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
         if (receivedMessage instanceof Message_EditActiveCharacterSkin) {
             Message_EditActiveCharacterSkin message = (Message_EditActiveCharacterSkin) receivedMessage;
-            int playerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
+            int playerId = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
             boolean isAllowed;
-            if (message.getSkinID() == 0) {
+            if (message.getSkinId() == 0) {
                 isAllowed = true;
             } else {
-                int id = databaseAppState.getQueryResult("SELECT id FROM users_characters_skins WHERE (user_id = " + playerID + ") AND (skin_id = " + message.getSkinID() + ") LIMIT 1").nextInteger_Close();
-                isAllowed = (id != 0);
+                isAllowed = (databaseAppState.getQueryResult("SELECT skin_id FROM users_characters_skins WHERE (user_id = " + playerId + ") AND (skin_id = " + message.getSkinId() + ") LIMIT 1").nextInteger_Close() != null);
             }
             if (isAllowed) {
-                databaseAppState.executeQuery("UPDATE users_characters SET skin_id = " + message.getSkinID() + " WHERE (user_id = " + playerID + ") AND (character_id = " + message.getCharacterID() + ")");
+                databaseAppState.executeQuery("DELETE FROM users_characters_active_skins WHERE (user_id = " + playerId + ") AND (character_id = " + message.getCharacterId() + ") LIMIT 1");
+                if (message.getSkinId() != 0) {
+                    databaseAppState.executeQuery("INSERT INTO users_characters_active_skins (user_id, character_id, skin_id) VALUES (" + playerId + ", '" + message.getCharacterId() + "', '" + message.getSkinId() + "')");
+                }
             }
         }
     }

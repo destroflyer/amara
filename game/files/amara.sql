@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 02. Jun 2020 um 21:58
+-- Erstellungszeit: 04. Jun 2020 um 01:10
 -- Server-Version: 10.4.8-MariaDB
 -- PHP-Version: 7.3.11
 
@@ -91,86 +91,24 @@ INSERT INTO `characters_skins` (`id`, `character_id`, `name`, `title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `users_characters`
+-- Tabellenstruktur für Tabelle `users_characters_active_skins`
 --
 
-CREATE TABLE `users_characters` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE `users_characters_active_skins` (
   `user_id` int(10) UNSIGNED NOT NULL,
   `character_id` int(10) UNSIGNED NOT NULL,
   `skin_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Daten für Tabelle `users_characters`
+-- Daten für Tabelle `users_characters_active_skins`
 --
 
-INSERT INTO `users_characters` (`id`, `user_id`, `character_id`, `skin_id`) VALUES
-(1, 1, 1, 5),
-(2, 1, 2, 0),
-(3, 1, 3, 4),
-(4, 1, 4, 0),
-(5, 1, 5, 0),
-(6, 1, 6, 0),
-(7, 1, 7, 1),
-(8, 1, 8, 6),
-(9, 1, 9, 0),
-(10, 1, 10, 0),
-(11, 1, 11, 0),
-(12, 1, 12, 0),
-(13, 1, 13, 0),
-(14, 1, 14, 0),
-(15, 1, 15, 0),
-(16, 1, 16, 0),
-(17, 1, 17, 0),
-(18, 1, 18, 0),
-(19, 1, 19, 0),
-(20, 2, 1, 5),
-(21, 2, 2, 0),
-(22, 2, 3, 4),
-(23, 2, 4, 0),
-(24, 2, 5, 0),
-(25, 2, 6, 0),
-(26, 2, 7, 7),
-(27, 2, 8, 6),
-(28, 2, 9, 0),
-(29, 2, 10, 0),
-(30, 2, 11, 0),
-(31, 2, 12, 0),
-(32, 2, 13, 0),
-(33, 2, 14, 0),
-(34, 2, 15, 0),
-(35, 2, 16, 0),
-(36, 2, 17, 0),
-(37, 2, 18, 0),
-(38, 2, 19, 0),
-(39, 3, 11, 0),
-(40, 3, 12, 0),
-(41, 3, 13, 0),
-(42, 3, 14, 0),
-(43, 3, 15, 0),
-(44, 3, 16, 0),
-(45, 3, 17, 0),
-(46, 3, 18, 0),
-(47, 3, 19, 0),
-(48, 4, 11, 0),
-(49, 4, 12, 0),
-(50, 4, 13, 0),
-(51, 4, 14, 0),
-(52, 4, 15, 0),
-(53, 4, 16, 0),
-(54, 4, 17, 0),
-(55, 4, 18, 0),
-(56, 4, 19, 0),
-(57, 5, 11, 0),
-(58, 5, 12, 0),
-(59, 5, 13, 0),
-(60, 5, 14, 0),
-(61, 5, 15, 0),
-(62, 5, 16, 0),
-(63, 5, 17, 0),
-(64, 5, 18, 0),
-(65, 5, 19, 0);
+INSERT INTO `users_characters_active_skins` (`user_id`, `character_id`, `skin_id`) VALUES
+(1, 3, 4),
+(1, 1, 5),
+(1, 7, 1),
+(1, 8, 6);
 
 -- --------------------------------------------------------
 
@@ -179,7 +117,6 @@ INSERT INTO `users_characters` (`id`, `user_id`, `character_id`, `skin_id`) VALU
 --
 
 CREATE TABLE `users_characters_skins` (
-  `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `skin_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -188,23 +125,23 @@ CREATE TABLE `users_characters_skins` (
 -- Daten für Tabelle `users_characters_skins`
 --
 
-INSERT INTO `users_characters_skins` (`id`, `user_id`, `skin_id`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(4, 1, 4),
-(5, 1, 5),
-(6, 1, 6),
-(7, 1, 7),
-(8, 1, 8),
-(9, 2, 1),
-(10, 2, 2),
-(11, 2, 3),
-(12, 2, 4),
-(13, 2, 5),
-(14, 2, 6),
-(15, 2, 7),
-(16, 2, 8);
+INSERT INTO `users_characters_skins` (`user_id`, `skin_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4),
+(2, 5),
+(2, 6),
+(2, 7),
+(2, 8);
 
 -- --------------------------------------------------------
 
@@ -213,7 +150,6 @@ INSERT INTO `users_characters_skins` (`id`, `user_id`, `skin_id`) VALUES
 --
 
 CREATE TABLE `users_meta` (
-  `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `name` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `value` varchar(1000) COLLATE utf8_unicode_ci NOT NULL
@@ -223,10 +159,10 @@ CREATE TABLE `users_meta` (
 -- Daten für Tabelle `users_meta`
 --
 
-INSERT INTO `users_meta` (`id`, `user_id`, `name`, `value`) VALUES
-(1, 1, 'avatar', 'ether_anna'),
-(2, 2, 'avatar', 'ether_amara'),
-(3, 1, 'profile_text', 'Woof.');
+INSERT INTO `users_meta` (`user_id`, `name`, `value`) VALUES
+(2, 'avatar', 'ether_amara'),
+(1, 'profile_text', 'Woof.'),
+(1, 'avatar', 'ether_anna');
 
 -- --------------------------------------------------------
 
@@ -235,7 +171,6 @@ INSERT INTO `users_meta` (`id`, `user_id`, `name`, `value`) VALUES
 --
 
 CREATE TABLE `users_meta_defaults` (
-  `id` int(11) NOT NULL,
   `name` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `value` varchar(1000) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -244,9 +179,9 @@ CREATE TABLE `users_meta_defaults` (
 -- Daten für Tabelle `users_meta_defaults`
 --
 
-INSERT INTO `users_meta_defaults` (`id`, `name`, `value`) VALUES
-(1, 'avatar', 'jmonkeyengine'),
-(2, 'profile_text', '');
+INSERT INTO `users_meta_defaults` (`name`, `value`) VALUES
+('avatar', 'jmonkeyengine'),
+('profile_text', '');
 
 -- --------------------------------------------------------
 
@@ -277,30 +212,6 @@ ALTER TABLE `characters_skins`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indizes für die Tabelle `users_characters`
---
-ALTER TABLE `users_characters`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indizes für die Tabelle `users_characters_skins`
---
-ALTER TABLE `users_characters_skins`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indizes für die Tabelle `users_meta`
---
-ALTER TABLE `users_meta`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indizes für die Tabelle `users_meta_defaults`
---
-ALTER TABLE `users_meta_defaults`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indizes für die Tabelle `website_sessions`
 --
 ALTER TABLE `website_sessions`
@@ -321,30 +232,6 @@ ALTER TABLE `characters`
 --
 ALTER TABLE `characters_skins`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT für Tabelle `users_characters`
---
-ALTER TABLE `users_characters`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
-
---
--- AUTO_INCREMENT für Tabelle `users_characters_skins`
---
-ALTER TABLE `users_characters_skins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT für Tabelle `users_meta`
---
-ALTER TABLE `users_meta`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT für Tabelle `users_meta_defaults`
---
-ALTER TABLE `users_meta_defaults`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

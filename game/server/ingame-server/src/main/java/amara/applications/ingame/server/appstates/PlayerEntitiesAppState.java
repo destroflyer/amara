@@ -70,7 +70,7 @@ public class PlayerEntitiesAppState extends ServerBaseAppState {
         String characterName = databaseAppState.getQueryResult("SELECT name FROM characters WHERE id = " + gameSelectionPlayerData.getCharacterID() + " LIMIT 1").nextString_Close();
         int characterEntity = EntityTemplate.createFromTemplate(entityWorld, "units/" + characterName).getId();
         entityWorld.setComponent(characterEntity, new TitleComponent(playerName));
-        createModelAndInventory(entityWorld, characterEntity, player, characterName);
+        createModel(entityWorld, characterEntity, player, characterName);
         entityWorld.setComponent(characterEntity, new IsCharacterComponent());
         entityWorld.setComponent(characterEntity, new IsRespawnableComponent());
         entityWorld.setComponent(characterEntity, new SightRangeComponent(30));
@@ -78,6 +78,7 @@ public class PlayerEntitiesAppState extends ServerBaseAppState {
         entityWorld.setComponent(characterEntity, new LevelComponent(1));
         entityWorld.setComponent(characterEntity, new SpellsComponent(new int[0]));
         entityWorld.setComponent(characterEntity, new SpellsUpgradePointsComponent(1));
+        entityWorld.setComponent(characterEntity, new InventoryComponent(new int[0]));
         int scoreEntity = entityWorld.createEntity();
         entityWorld.setComponent(scoreEntity, new CharacterKillsComponent(0));
         entityWorld.setComponent(scoreEntity, new DeathsComponent(0));
@@ -87,15 +88,15 @@ public class PlayerEntitiesAppState extends ServerBaseAppState {
         return characterEntity;
     }
 
-    private void createModelAndInventory(EntityWorld entityWorld, int characterEntity, GamePlayer player, String characterName) {
+    private void createModel(EntityWorld entityWorld, int characterEntity, GamePlayer player, String characterName) {
         DatabaseAppState databaseAppState = mainApplication.getMasterServer().getState(DatabaseAppState.class);
         int characterID = player.getGameSelectionPlayer().getPlayerData().getCharacterID();
         int skinId = 0;
-        LinkedList<Integer> inventory = new LinkedList<>();
         LobbyPlayer lobbyPlayer = player.getGameSelectionPlayer().getLobbyPlayer();
         if (lobbyPlayer instanceof LobbyPlayer_Human) {
             LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-            skinId = databaseAppState.getQueryResult("SELECT skin_id FROM users_characters WHERE (user_id = " + lobbyPlayer_Human.getPlayerId() + ") AND (character_id = " + characterID + ") LIMIT 1").nextInteger_Close();
+            Integer skinIdResult = databaseAppState.getQueryResult("SELECT skin_id FROM users_characters_active_skins WHERE (user_id = " + lobbyPlayer_Human.getPlayerId() + ") AND (character_id = " + characterID + ") LIMIT 1").nextInteger_Close();
+            skinId = ((skinIdResult != null) ? skinIdResult : 0);
         } else {
             QueryResult results_CharactersSkins = databaseAppState.getQueryResult("SELECT id FROM characters_skins WHERE (character_id = " + characterID + ") ORDER BY RANDOM() LIMIT 1");
             if (results_CharactersSkins.next()) {
@@ -107,7 +108,6 @@ public class PlayerEntitiesAppState extends ServerBaseAppState {
             skinName = databaseAppState.getQueryResult("SELECT name FROM characters_skins WHERE id = " + skinId + " LIMIT 1").nextString_Close();
         }
         entityWorld.setComponent(characterEntity, new ModelComponent("Models/" + characterName + "/skin_" + skinName + ".xml"));
-        entityWorld.setComponent(characterEntity, new InventoryComponent(Util.convertToArray_Integer(inventory)));
     }
 
     private void createMapSpells(EntityWorld entityWorld, int characterEntity, Map map, int[][] mapSpellsIndices) {
