@@ -16,16 +16,18 @@ import java.sql.Statement;
  */
 public abstract class Database {
 
-    public Database(String subProtocolName, String path, String user, String password) {
+    public Database(String path, String user, String password) {
         try {
             System.out.println("Connecting to database...");
-            connection = DriverManager.getConnection("jdbc:" + subProtocolName + ":" + path, user, password);
+            connection = DriverManager.getConnection(getConnectionUrl(path), user, password);
             System.out.println("Connected to database.");
         } catch(SQLException ex) {
             ex.printStackTrace();
         }
     }
     private Connection connection;
+
+    protected abstract String getConnectionUrl(String path);
 
     public boolean executeQuery(String query) {
         boolean result = false;
