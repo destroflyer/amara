@@ -56,10 +56,10 @@ INSERT INTO `characters` (`id`, `name`, `title`, `lore`, `is_public`) VALUES
 (13, 'maw', 'Maw', '', 1),
 (14, 'erika', 'Erika', 'When talking about Eastcliff, people usually think of the majestic city, its great walls, bright streets and wealth. But where there is light, there is also shadow: The cities slums, far in the south. Gloomy streets, filled with dirt, sewage and criminals. A place, where only the toughest people could make a living… or those who already gave up. Only looking from day to day, life in Eastcliff’s dark corners isn’t easy. This was revealed to Erika Pinefall in a young age - Her parents abandoned her after the birth, knowing they could not afford to raise a child or offer her anything else besides hunger and pain. Growing up in an orphanage, Erika had no one to connect with… and no one to trust - The house’s rules were clear: The more orphans, the less to eat for everyone. It wasn’t uncommon for the children to expel newcomers. But the young girl managed to fight, survive and grow - Knowing she could never physically compete with the older boys or lurking thieves in the streets, she resorted to cunning, intelligent maneuvers and outranging her opponents. She mastered to defeat aggressors with arrow and bow before they could even reach her.\n\nAfter leaving the orphanage at the age of 19, Erika tried to escape her old life and to find work in the upper part of Eastcliff, but wherever she went, she was rejected harshly. No one wanted to deal with a dirty hiker from the slums. Although she never wanted to harm people again, Erika’s rough childhood and the steady rejection since her birth formed her into a criminal. In order to survive, she had no choice but to rob other thieves and finally even passers, mostly wealthy citizens at the borders of Eastcliff. Becoming known as the „Orphan Bandit“, Erika single-handedly managed to double the cities street patrols, but never got caught. Remaining in the shadows, she’s aiming her arrow to any nearby aggressor and doing everything necessary to survive.', 1),
 (15, 'maria', 'Maria', '', 1),
-(16, 'scarlet', 'Scarlet', '', 1),
-(17, 'dwarf_warrior', 'Dwarf Warrior', '', 1),
-(18, 'garmon', 'Garmon', '', 1),
-(19, 'dosaz', 'Dosaz', '', 1);
+(16, 'scarlet', 'Scarlet', '', 0),
+(17, 'dwarf_warrior', 'Dwarf Warrior', '', 0),
+(18, 'garmon', 'Garmon', '', 0),
+(19, 'dosaz', 'Dosaz', '', 0);
 
 -- --------------------------------------------------------
 

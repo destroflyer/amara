@@ -17,21 +17,19 @@ import java.sql.Statement;
 public abstract class Database {
 
     public Database(String path, String user, String password) {
-        try {
-            System.out.println("Connecting to database...");
-            connection = DriverManager.getConnection(getConnectionUrl(path), user, password);
-            System.out.println("Connected to database.");
-        } catch(SQLException ex) {
-            ex.printStackTrace();
-        }
+        this.path = path;
+        this.user = user;
+        this.password = password;
     }
+    private String path;
+    private String user;
+    private String password;
     private Connection connection;
-
-    protected abstract String getConnectionUrl(String path);
 
     public boolean executeQuery(String query) {
         boolean result = false;
         try {
+            ensureConnection();
             Statement statement = connection.createStatement();
             result = statement.execute(query);
             statement.close();
@@ -43,6 +41,7 @@ public abstract class Database {
 
     public QueryResult getQueryResult(String query) {
         try {
+            ensureConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             return new QueryResult(statement, resultSet);
@@ -52,9 +51,19 @@ public abstract class Database {
         return null;
     }
 
-    public String escape(String text) {
-        return text.replaceAll("'", "\\'");
+    private void ensureConnection() throws SQLException {
+        if ((connection != null) && connection.isClosed()) {
+            System.out.println("Connection closed, trying to reconnect.");
+            connection = null;
+        }
+        if (connection == null) {
+            System.out.println("Connecting to database...");
+            connection = DriverManager.getConnection(getConnectionUrl(path), user, password);
+            System.out.println("Connected to database.");
+        }
     }
+
+    protected abstract String getConnectionUrl(String path);
 
     public void close() {
         try {
@@ -63,5 +72,9 @@ public abstract class Database {
         } catch(SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public String escape(String text) {
+        return text.replaceAll("'", "\\'");
     }
 }
