@@ -27,7 +27,7 @@ public class AcceptGameSelectionsBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_AcceptGameSelection){
             Message_AcceptGameSelection message = (Message_AcceptGameSelection) receivedMessage;
-            int playerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
+            int playerID = connectedPlayers.getPlayer(messageResponse.getClientId()).getID();
             gamesQueueAppState.acceptGameSelection(playerID, message.isAccepted());
         }
     }

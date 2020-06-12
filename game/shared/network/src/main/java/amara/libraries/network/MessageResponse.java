@@ -11,27 +11,27 @@ import com.jme3.network.Message;
  *
  * @author Carl
  */
-public class MessageResponse{
+public class MessageResponse {
 
-    public MessageResponse(int clientID){
-        this.clientID = clientID;
+    public MessageResponse(int clientId) {
+        this.clientId = clientId;
     }
-    private int clientID;
-    private LinkedList<MessageResponse_Entry> entries = new LinkedList<MessageResponse_Entry>();
+    private int clientId;
+    private LinkedList<MessageResponse_Entry> entries = new LinkedList<>();
 
-    public void addBroadcastMessage(Message message){
+    public void addBroadcastMessage(Message message) {
         entries.add(new MessageResponse_Entry(MessageResponse_Entry.Type.BROADCAST, message));
     }
 
-    public void addAnswerMessage(Message message){
+    public void addAnswerMessage(Message message) {
         entries.add(new MessageResponse_Entry(MessageResponse_Entry.Type.ANSWER, message));
     }
 
-    public int getClientID(){
-        return clientID;
+    public int getClientId() {
+        return clientId;
     }
 
-    public LinkedList<MessageResponse_Entry> getEntries(){
+    public LinkedList<MessageResponse_Entry> getEntries() {
         return entries;
     }
 }

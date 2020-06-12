@@ -6,69 +6,81 @@ package amara.applications.ingame.shared.games;
 
 import amara.applications.ingame.shared.maps.*;
 import amara.applications.master.network.messages.objects.*;
-import amara.core.Util;
+
+import java.util.LinkedList;
+import java.util.function.Predicate;
 
 /**
  *
  * @author Carl
  */
-public class Game{
+public class Game {
 
-    public Game(GameSelection gameSelection){
+    public Game(GameSelection gameSelection) {
         this.map = MapFileHandler.load(gameSelection.getGameSelectionData().getMapName());
         this.gameSelection = gameSelection;
-        createTeams();
+        addPlayersFromGameSelection();
     }
     public static int ENTITY = 0;
     private Map map;
+    private LinkedList<GamePlayer> players = new LinkedList<>();
     private GameSelection gameSelection;
-    private GamePlayer[][] teams;
     private boolean isStarted;
-    
-    private void createTeams(){
+
+    private void addPlayersFromGameSelection() {
         TeamFormat teamFormat = gameSelection.getGameSelectionData().getTeamFormat();
-        teams = new GamePlayer[teamFormat.getTeamsCount()][];
-        int[][] authentificationKeys = generateAuthentificationKeys(teamFormat.getTeamSizes());
-        for(int i=0;i<teams.length;i++){
-            teams[i] = new GamePlayer[teamFormat.getTeamSize(i)];
-            for(int r=0;r<teams[i].length;r++){
+        for (int i = 0; i < teamFormat.getTeamsCount(); i++) {
+            for (int r = 0; r < teamFormat.getTeamSize(i); r++) {
                 GameSelectionPlayer gameSelectionPlayer = gameSelection.getTeams()[i][r];
-                GamePlayer gamePlayer = new GamePlayer(gameSelectionPlayer, authentificationKeys[i][r]);
-                if(gameSelectionPlayer.getLobbyPlayer() instanceof LobbyPlayer_Bot){
-                    gamePlayer.setReady(true);
+                LobbyPlayer lobbyPlayer = gameSelectionPlayer.getLobbyPlayer();
+                GamePlayerInfo gamePlayerInfo = null;
+                if (lobbyPlayer instanceof LobbyPlayer_Human) {
+                    LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
+                    gamePlayerInfo = new GamePlayerInfo_Human(lobbyPlayer_Human.getPlayerId());
+                } else if (lobbyPlayer instanceof LobbyPlayer_Bot) {
+                    LobbyPlayer_Bot lobbyPlayer_Bot = (LobbyPlayer_Bot) lobbyPlayer;
+                    gamePlayerInfo = new GamePlayerInfo_Bot(lobbyPlayer_Bot.getBotType(), lobbyPlayer_Bot.getName());
                 }
-                teams[i][r] = gamePlayer;
+                addPlayer(new GamePlayer(gamePlayerInfo, gameSelectionPlayer.getPlayerData()));
             }
         }
     }
-    
-    public GamePlayer onClientConnected(int clientID, int authentificationKey){
-        for(GamePlayer[] team : teams){
-            for(GamePlayer player : team){
-                if(player.getAuthentificationKey() == authentificationKey){
-                    player.setClientID(clientID);
+
+    public void addPlayer(GamePlayer player) {
+        players.add(player);
+    }
+
+    public void removePlayer(GamePlayer player) {
+        players.remove(player);
+    }
+
+    public GamePlayer getPlayerByClientId(int clientId) {
+        return getHumanPlayerBy(gamePlayerInfo_Human -> gamePlayerInfo_Human.getClientId() == clientId);
+    }
+
+    public GamePlayer getPlayerByPlayerId(int playerId) {
+        return getHumanPlayerBy(gamePlayerInfo_Human -> gamePlayerInfo_Human.getPlayerId() == playerId);
+    }
+
+    private GamePlayer getHumanPlayerBy(Predicate<GamePlayerInfo_Human> predicate) {
+        for (GamePlayer player : players) {
+            GamePlayerInfo gamePlayerInfo = player.getGamePlayerInfo();
+            if (gamePlayerInfo instanceof GamePlayerInfo_Human) {
+                GamePlayerInfo_Human gamePlayerInfo_Human = (GamePlayerInfo_Human) gamePlayerInfo;
+                if (predicate.test(gamePlayerInfo_Human)) {
                     return player;
                 }
             }
         }
         return null;
     }
-    
-    public GamePlayer getPlayer(int clientID){
-        for(GamePlayer[] team : teams){
-            for(GamePlayer player : team){
-                if(player.getClientID() == clientID){
-                    return player;
-                }
-            }
-        }
-        return null;
-    }
-    
-    public boolean areAllPlayersReady(){
-        for(GamePlayer[] team : teams){
-            for(GamePlayer player : team){
-                if(!player.isReady()){
+
+    public boolean areAllPlayersReady() {
+        for (GamePlayer player : players) {
+            GamePlayerInfo gamePlayerInfo = player.getGamePlayerInfo();
+            if (gamePlayerInfo instanceof GamePlayerInfo_Human) {
+                GamePlayerInfo_Human gamePlayerInfo_Human = (GamePlayerInfo_Human) gamePlayerInfo;
+                if (!gamePlayerInfo_Human.isReady()) {
                     return false;
                 }
             }
@@ -76,40 +88,23 @@ public class Game{
         return true;
     }
 
-    public Map getMap(){
+    public Map getMap() {
         return map;
     }
 
-    public GameSelection getGameSelection(){
+    public GameSelection getGameSelection() {
         return gameSelection;
     }
 
-    public GamePlayer[][] getTeams(){
-        return teams;
+    public LinkedList<GamePlayer> getPlayers() {
+        return players;
     }
     
-    public void start(){
+    public void start() {
         isStarted = true;
     }
 
-    public boolean isStarted(){
+    public boolean isStarted() {
         return isStarted;
-    }
-    
-    private static int[][] generateAuthentificationKeys(int[] counts){
-        int[][] keys = new int[counts.length][];
-        for(int i=0;i<keys.length;i++){
-            keys[i] = new int[counts[i]];
-        }
-        for(int i=0;i<keys.length;i++){
-            for(int r=0;r<keys[i].length;r++){
-                int key;
-                do{
-                    key = (int) (Math.random() * 1000000000);
-                }while(Util.containsArrayElement(keys, key));
-                keys[i][r] = key;
-            }
-        }
-        return keys;
     }
 }

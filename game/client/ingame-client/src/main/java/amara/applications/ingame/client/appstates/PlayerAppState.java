@@ -40,10 +40,9 @@ import com.jme3.math.Vector2f;
  */
 public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication> implements ActionListener {
 
-    public PlayerAppState(GameSelection gameSelection, int playerEntity) {
+    public PlayerAppState(GameSelection gameSelection) {
         this.gameSelection = gameSelection;
-        this.playerEntity = playerEntity;
-        playerTeamSystem = new PlayerTeamSystem(playerEntity);
+        playerTeamSystem = new PlayerTeamSystem(this::getPlayerEntity);
     }
     private GameSelection gameSelection;
     private int playerEntity;
@@ -71,16 +70,16 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         mainApplication.getInputManager().addListener(this, "lock_camera","change_sight");
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
         localEntitySystemAppState.addEntitySystem(ownTeamVisionSystem);
-        spellIndicatorSystem = new SpellIndicatorSystem(playerEntity, localEntitySystemAppState.getEntitySceneMap());
+        spellIndicatorSystem = new SpellIndicatorSystem(this::getPlayerEntity, localEntitySystemAppState.getEntitySceneMap());
         localEntitySystemAppState.addEntitySystem(spellIndicatorSystem);
         IngameCameraAppState ingameCameraAppState = getAppState(IngameCameraAppState.class);
         Map map = getAppState(MapAppState.class).getMap();
-        lockedCameraSystem = new LockedCameraSystem(playerEntity, ingameCameraAppState);
+        lockedCameraSystem = new LockedCameraSystem(this::getPlayerEntity, ingameCameraAppState);
         localEntitySystemAppState.addEntitySystem(lockedCameraSystem);
-        localEntitySystemAppState.addEntitySystem(new MoveCameraToPlayerSystem(playerEntity, ingameCameraAppState));
+        localEntitySystemAppState.addEntitySystem(new MoveCameraToPlayerSystem(this::getPlayerEntity, ingameCameraAppState));
         PostFilterAppState postFilterAppState = getAppState(PostFilterAppState.class);
-        localEntitySystemAppState.addEntitySystem(new PlayerDeathDisplaySystem(playerEntity, postFilterAppState));
-        localEntitySystemAppState.addEntitySystem(new ShopAnimationSystem(playerEntity, localEntitySystemAppState.getEntitySceneMap()));
+        localEntitySystemAppState.addEntitySystem(new PlayerDeathDisplaySystem(this::getPlayerEntity, postFilterAppState));
+        localEntitySystemAppState.addEntitySystem(new ShopAnimationSystem(this::getPlayerEntity, localEntitySystemAppState.getEntitySceneMap()));
         if (Settings.getFloat("fog_of_war_update_interval") != -1) {
             fogOfWarSystem = new FogOfWarSystem(playerTeamSystem, postFilterAppState, map.getPhysicsInformation());
             localEntitySystemAppState.addEntitySystem(fogOfWarSystem);
@@ -113,7 +112,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardInventoriesSystem(screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayMinimapSystem(this, screenController_HUD, map, playerTeamSystem, ownTeamVisionSystem, fogOfWarSystem));
         localEntitySystemAppState.addEntitySystem(new DisplayShopItemsSystem(this, screenController_Shop));
-        localEntitySystemAppState.addEntitySystem(new UpdateRecipeCostsSystem(playerEntity, screenController_Shop));
+        localEntitySystemAppState.addEntitySystem(new UpdateRecipeCostsSystem(this::getPlayerEntity, screenController_Shop));
 
         // Needs to best be the very last client system, so no nodes for removed entities are leaked when they would be requested again after being removed
         localEntitySystemAppState.addEntitySystem(new RemoveModelsSystem(localEntitySystemAppState.getEntitySceneMap()));
@@ -248,6 +247,10 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
 
     public GameSelection getGameSelection() {
         return gameSelection;
+    }
+
+    public void setPlayerEntity(int playerEntity) {
+        this.playerEntity = playerEntity;
     }
 
     public int getPlayerEntity() {

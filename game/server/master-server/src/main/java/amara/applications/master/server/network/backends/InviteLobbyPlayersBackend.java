@@ -27,7 +27,7 @@ public class InviteLobbyPlayersBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_InviteLobbyPlayer){
             Message_InviteLobbyPlayer message = (Message_InviteLobbyPlayer) receivedMessage;
-            int lobbyPlayerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
+            int lobbyPlayerID = connectedPlayers.getPlayer(messageResponse.getClientId()).getID();
             lobbiesAppState.addLobbyPlayer(lobbyPlayerID, message.getPlayerID());
         }
     }

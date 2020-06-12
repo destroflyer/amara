@@ -6,6 +6,8 @@
 package amara.applications.ingame.client.systems.visualisation;
 
 import java.util.LinkedList;
+import java.util.function.Supplier;
+
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -25,21 +27,21 @@ import amara.libraries.entitysystem.*;
  */
 public class SpellIndicatorSystem implements EntitySystem{
 
-    public SpellIndicatorSystem(int playerEntity, EntitySceneMap entitySceneMap){
+    public SpellIndicatorSystem(Supplier<Integer> playerEntity, EntitySceneMap entitySceneMap){
         this.playerEntity = playerEntity;
         this.entitySceneMap = entitySceneMap;
     }
-    private int playerEntity;
+    private Supplier<Integer> playerEntity;
     private EntitySceneMap entitySceneMap;
     private int currentSpellEntity = -1;
-    private LinkedList<Spatial> currentIndicators = new LinkedList<Spatial>();;
+    private LinkedList<Spatial> currentIndicators = new LinkedList<>();
     private boolean updateIndicator;
-    
+
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         if(updateIndicator){
             SpellIndicatorComponent spellIndicatorComponent = entityWorld.getComponent(currentSpellEntity, SpellIndicatorComponent.class);
-            PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
+            PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity.get(), PlayerCharacterComponent.class);
             if((spellIndicatorComponent != null) && (playerCharacterComponent != null)){
                 Node node = entitySceneMap.requestNode(playerCharacterComponent.getEntity());
                 CircularIndicatorComponent circularIndicatorComponent = entityWorld.getComponent(spellIndicatorComponent.getIndicatorEntity(), CircularIndicatorComponent.class);

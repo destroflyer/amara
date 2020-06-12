@@ -45,7 +45,7 @@ public abstract class BuffVisualisationSystem implements EntitySystem{
     private void onBuffAdded(EntityWorld entityWorld, int buffStatusEntity){
         ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
         if(shouldBeVisualized(entityWorld, activeBuffComponent)){
-            int targetEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getTargetEntity();
+            int targetEntity = activeBuffComponent.getTargetEntity();
             if(increaseBuffCount(targetEntity) == 1){
                 Spatial visualAttachment = createBuffVisualisation(entityWorld, targetEntity);
                 if(visualAttachment != null){

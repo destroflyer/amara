@@ -26,8 +26,8 @@ public class LockInGameSelectionsBackend implements MessageBackend{
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_LockInGameSelection){
-            int playerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
-            gamesQueueAppState.lockInGameSelection(playerID);
+            int playerId = connectedPlayers.getPlayer(messageResponse.getClientId()).getID();
+            gamesQueueAppState.lockInGameSelection(playerId);
         }
     }
 }

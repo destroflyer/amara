@@ -3,6 +3,7 @@ package amara.applications.ingame.client;
 import com.jme3.system.AppSettings;
 import amara.applications.ingame.client.appstates.*;
 import amara.applications.ingame.client.interfaces.MasterserverClientInterface;
+import amara.applications.ingame.network.messages.Message_LeaveGame;
 import amara.core.GameInfo;
 import amara.core.settings.Settings;
 import amara.libraries.applications.display.DisplayApplication;
@@ -14,13 +15,11 @@ import amara.libraries.applications.display.ingame.appstates.*;
  */
 public class IngameClientApplication extends DisplayApplication {
 
-    public IngameClientApplication(MasterserverClientInterface masterserverClient, int authentificationKey) {
+    public IngameClientApplication(MasterserverClientInterface masterserverClient) {
         this.masterserverClient = masterserverClient;
-        this.authentificationKey = authentificationKey;
         loadSettings();
     }
     private MasterserverClientInterface masterserverClient;
-    private int authentificationKey;
 
     private void loadSettings() {
         settings = new AppSettings(true);
@@ -60,7 +59,13 @@ public class IngameClientApplication extends DisplayApplication {
         stateManager.attach(new IngameCameraAppState(true));
         stateManager.attach(new IngameFeedbackAppState());
         stateManager.attach(new LoadingScreenAppState());
-        stateManager.attach(new PlayerAuthentificationAppState(authentificationKey));
+        stateManager.attach(new JoinGameInfoAppState());
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        stateManager.getState(IngameNetworkAppState.class).sendMessage(new Message_LeaveGame());
     }
 
     public MasterserverClientInterface getMasterserverClient() {

@@ -9,22 +9,24 @@ import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.libraries.entitysystem.*;
 
+import java.util.function.Supplier;
+
 /**
  *
  * @author Carl
  */
 public class UpdateRecipeCostsSystem implements EntitySystem {
 
-    public UpdateRecipeCostsSystem(int playerEntity, ScreenController_Shop screenController_Shop){
+    public UpdateRecipeCostsSystem(Supplier<Integer> playerEntity, ScreenController_Shop screenController_Shop){
         this.playerEntity = playerEntity;
         this.screenController_Shop = screenController_Shop;
     }
-    protected int playerEntity;
+    protected Supplier<Integer> playerEntity;
     protected ScreenController_Shop screenController_Shop;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
-        PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
+        PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity.get(), PlayerCharacterComponent.class);
         if (playerCharacterComponent != null) {
             ComponentMapObserver observer = entityWorld.requestObserver(this, InventoryComponent.class);
             check(entityWorld, observer.getNew().getComponent(playerCharacterComponent.getEntity(), InventoryComponent.class));

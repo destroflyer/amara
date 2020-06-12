@@ -12,13 +12,15 @@ import amara.libraries.applications.headless.applications.HeadlessAppState;
  *
  * @author Carl
  */
-public interface MasterserverServerApplicationInterface{
-    
-    public abstract <T extends HeadlessAppState> T getState(Class<T> stateClass);
-    
-    public abstract void onGameServerInitialized(Game game);
-    
-    public abstract void onGameCrashed(IngameServerApplication ingameServerApplication, Exception exception);
-    
-    public abstract void onGameOver(IngameServerApplication ingameServerApplication);
+public interface MasterserverServerApplicationInterface {
+
+    Integer getPlayerId(int clientId);
+
+    <T extends HeadlessAppState> T getState(Class<T> stateClass);
+
+    void onGameServerInitialized(Game game);
+
+    void onGameCrashed(IngameServerApplication ingameServerApplication, Exception exception);
+
+    void onGameOver(IngameServerApplication ingameServerApplication);
 }

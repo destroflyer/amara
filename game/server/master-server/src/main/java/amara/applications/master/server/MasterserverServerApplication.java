@@ -5,6 +5,8 @@ import amara.applications.ingame.server.interfaces.MasterserverServerApplication
 import amara.applications.ingame.shared.games.Game;
 import amara.applications.master.server.appstates.*;
 import amara.applications.master.server.appstates.DatabaseAppState;
+import amara.applications.master.server.players.ConnectedPlayers;
+import amara.applications.master.server.players.Player;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.*;
 import amara.libraries.network.exceptions.ServerCreationException;
@@ -39,6 +41,13 @@ public class MasterserverServerApplication extends HeadlessApplication implement
     }
     
     //Interface
+
+    @Override
+    public Integer getPlayerId(int clientId) {
+        ConnectedPlayers connectedPlayers = stateManager.getState(PlayersAppState.class).getConnectedPlayers();
+        Player player = connectedPlayers.getPlayer(clientId);
+        return ((player != null) ? player.getID() : null);
+    }
 
     @Override
     public <T extends HeadlessAppState> T getState(Class<T> stateClass) {

@@ -34,7 +34,7 @@ public class SendGameContentsBackend implements MessageBackend {
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
         if (receivedMessage instanceof Message_GetGameContents) {
             messageResponse.addAnswerMessage(new Message_GameContents(getCharacters()));
-            int playerId = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
+            int playerId = connectedPlayers.getPlayer(messageResponse.getClientId()).getID();
             messageResponse.addAnswerMessage(new Message_OwnedCharacters(playersContentsAppState.getOwnedCharacters(playerId)));
         }
     }

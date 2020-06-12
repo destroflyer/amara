@@ -17,9 +17,9 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class GameInfoBackend implements MessageBackend {
+public class ReceiveGameInfoBackend implements MessageBackend {
 
-    public GameInfoBackend(DisplayApplication mainApplication) {
+    public ReceiveGameInfoBackend(DisplayApplication mainApplication) {
         this.mainApplication = mainApplication;
     }
     private DisplayApplication mainApplication;
@@ -37,7 +37,7 @@ public class GameInfoBackend implements MessageBackend {
                     System.out.println("Loading map \"" + mapName + "\".");
                     Map map = MapFileHandler.load(mapName);
                     //This has to be created before attaching the LocalEntitySystemAppState, since it initializes the PlayerTeamSystem in the constructor
-                    PlayerAppState playerAppState = new PlayerAppState(message.getGameSelection(), message.getPlayerEntity());
+                    PlayerAppState playerAppState = new PlayerAppState(message.getGameSelection());
                     stateManager.attach(new MapAppState(map));
                     stateManager.attach(new MapObstaclesAppState());
                     stateManager.attach(new LocalEntitySystemAppState());

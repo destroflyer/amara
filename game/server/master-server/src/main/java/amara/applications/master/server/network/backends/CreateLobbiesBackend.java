@@ -26,7 +26,7 @@ public class CreateLobbiesBackend implements MessageBackend{
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_CreateLobby){
-            int ownerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
+            int ownerID = connectedPlayers.getPlayer(messageResponse.getClientId()).getID();
             lobbiesAppState.createLobby(ownerID);
         }
     }

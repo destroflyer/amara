@@ -12,9 +12,10 @@ import amara.applications.ingame.entitysystem.templates.CustomSerializer_Ingame;
 import amara.applications.ingame.network.messages.objects.commands.Command;
 import amara.applications.ingame.network.messages.objects.commands.PlayerCommand;
 import amara.applications.ingame.shared.games.Game;
-import amara.applications.ingame.shared.games.GamePlayer;
 import amara.applications.ingame.shared.maps.Map;
 import amara.applications.ingame.shared.maps.MapPhysicsInformation;
+import amara.applications.master.network.messages.objects.GameSelection;
+import amara.applications.master.network.messages.objects.GameSelectionPlayer;
 import amara.core.Queue;
 import amara.core.files.FileAssets;
 import amara.libraries.entitysystem.EntitySystem;
@@ -47,6 +48,8 @@ public class GameLogicTest {
     private Game gameMock;
     @Mock
     private Map mapMock;
+    @Mock
+    private GameSelection gameSelectionMock;
     private Queue<PlayerCommand> playerCommandsQueue = new Queue<>();
     @Mock
     private ExecuteAIActionsSystem.EntityBotsMap entityBotsMapMock;
@@ -69,7 +72,8 @@ public class GameLogicTest {
     public void initializeGameLogic() {
         when(gameMock.getMap()).thenReturn(mapMock);
         when(mapMock.getPhysicsInformation()).thenReturn(new MapPhysicsInformation(100, 100, 0.1f, 1, new ArrayList<>()));
-        when(gameMock.getTeams()).thenReturn(new GamePlayer[][]{ null, null });
+        when(gameMock.getGameSelection()).thenReturn(gameSelectionMock);
+        when(gameSelectionMock.getTeams()).thenReturn(new GameSelectionPlayer[][]{ null, null });
 
         gameLogic = new GameLogic(entityWorld, gameMock, playerCommandsQueue, entityBotsMapMock);
 

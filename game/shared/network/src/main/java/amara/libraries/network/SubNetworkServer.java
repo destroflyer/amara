@@ -40,8 +40,8 @@ public class SubNetworkServer extends BaseServer{
     }
     
     @Override
-    public void sendMessageToClient(int clientID, Message message){
-        networkServer.sendMessageToClient(clientID, message);
+    public void sendMessageToClient(int clientId, Message message){
+        networkServer.sendMessageToClient(clientId, message);
     }
 
     @Override

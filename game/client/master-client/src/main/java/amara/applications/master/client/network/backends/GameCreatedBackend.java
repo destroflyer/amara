@@ -4,49 +4,27 @@
  */
 package amara.applications.master.client.network.backends;
 
-import com.jme3.network.Message;
-import amara.applications.master.client.MasterserverClientUtil;
+import amara.applications.master.client.appstates.CurrentGameAppState;
 import amara.applications.master.network.messages.Message_GameCreated;
-import amara.applications.master.network.messages.objects.PlayerProfileData;
-import amara.applications.ingame.client.IngameClientApplication;
-import amara.applications.ingame.client.interfaces.MasterserverClientInterface;
-import amara.applications.master.client.MasterserverClientApplication;
-import amara.libraries.applications.headless.applications.HeadlessAppState;
-import amara.libraries.network.*;
+import amara.libraries.network.MessageBackend;
+import amara.libraries.network.MessageResponse;
+import com.jme3.network.Message;
 
 /**
  *
  * @author Carl
  */
-public class GameCreatedBackend implements MessageBackend{
+public class GameCreatedBackend implements MessageBackend {
 
-    public GameCreatedBackend(){
-        
+    public GameCreatedBackend(CurrentGameAppState currentGameAppState) {
+        this.currentGameAppState = currentGameAppState;
     }
-    private MasterserverClientInterface masterserverClientInterface = new MasterserverClientInterface(){
+    private CurrentGameAppState currentGameAppState;
 
-        @Override
-        public <T extends HeadlessAppState> T getState(Class<T> stateClass){
-            return MasterserverClientApplication.getInstance().getStateManager().getState(stateClass);
-        }
-
-        @Override
-        public int getPlayerId(){
-            return MasterserverClientUtil.getPlayerId();
-        }
-
-        @Override
-        public PlayerProfileData getPlayerProfile(int playerID){
-            return MasterserverClientUtil.getPlayerProfile(playerID);
-        }
-    };
-    
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_GameCreated){
-            Message_GameCreated message = (Message_GameCreated) receivedMessage;
-            IngameClientApplication ingameClientApplication = new IngameClientApplication(masterserverClientInterface, message.getAuthentificationKey());
-            ingameClientApplication.start();
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_GameCreated) {
+            currentGameAppState.startIngameClient();
         }
     }
 }

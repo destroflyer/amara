@@ -4,33 +4,27 @@
  */
 package amara.applications.ingame.network.messages;
 
+import amara.applications.master.network.messages.objects.GameSelection;
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
-import amara.applications.master.network.messages.objects.GameSelection;
 
 /**
  *
  * @author Carl
  */
 @Serializable
-public class Message_GameInfo extends AbstractMessage{
-    
-    public Message_GameInfo(){
+public class Message_GameInfo extends AbstractMessage {
+
+    public Message_GameInfo() {
         
     }
-    
-    public Message_GameInfo(GameSelection gameSelection, int playerEntity){
+
+    public Message_GameInfo(GameSelection gameSelection) {
         this.gameSelection = gameSelection;
-        this.playerEntity = playerEntity;
     }
     private GameSelection gameSelection;
-    private int playerEntity;
 
-    public GameSelection getGameSelection(){
+    public GameSelection getGameSelection() {
         return gameSelection;
-    }
-
-    public int getPlayerEntity(){
-        return playerEntity;
     }
 }

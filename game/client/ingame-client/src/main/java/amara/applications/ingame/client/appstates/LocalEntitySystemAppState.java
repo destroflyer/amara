@@ -111,8 +111,10 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
 
     @Override
     public void update(float lastTimePerFrame) {
-        super.update(lastTimePerFrame);
         if (isInitialWorldLoaded) {
+            // Has to start AFTER the whole initial entity world has been loaded, because otherwise entities referencing each other might not be ready yet
+            // This is especially important when reconnecting
+            super.update(lastTimePerFrame);
             GameSynchronizingUtil.simulateSecondFrames(entityWorld, lastTimePerFrame, simulatedTimePerFrame -> {
                 for (EntitySystem parallelNetworkSystem : parallelNetworkSystems) {
                     parallelNetworkSystem.update(entityWorld, simulatedTimePerFrame);

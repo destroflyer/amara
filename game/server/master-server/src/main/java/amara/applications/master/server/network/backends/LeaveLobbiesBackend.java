@@ -15,30 +15,27 @@ import amara.libraries.network.messages.Message_ClientDisconnection;
  *
  * @author Carl
  */
-public class LeaveLobbiesBackend implements MessageBackend{
+public class LeaveLobbiesBackend implements MessageBackend {
 
-    public LeaveLobbiesBackend(LobbiesAppState lobbiesAppState, ConnectedPlayers connectedPlayers){
+    public LeaveLobbiesBackend(LobbiesAppState lobbiesAppState, ConnectedPlayers connectedPlayers) {
         this.lobbiesAppState = lobbiesAppState;
         this.connectedPlayers = connectedPlayers;
     }
     private LobbiesAppState lobbiesAppState;
     private ConnectedPlayers connectedPlayers;
-    
+
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_LeaveLobby){
-            Message_LeaveLobby message = (Message_LeaveLobby) receivedMessage;
-            leaveLobby(messageResponse.getClientID());
-        }
-        else if(receivedMessage instanceof Message_ClientDisconnection){
-            Message_ClientDisconnection message = (Message_ClientDisconnection) receivedMessage;
-            leaveLobby(messageResponse.getClientID());
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_LeaveLobby) {
+            leaveLobby(messageResponse.getClientId());
+        } else if (receivedMessage instanceof Message_ClientDisconnection) {
+            leaveLobby(messageResponse.getClientId());
         }
     }
-    
-    private void leaveLobby(int clientID){
-        Player player = connectedPlayers.getPlayer(clientID);
-        if(player != null){
+
+    private void leaveLobby(int clientId) {
+        Player player = connectedPlayers.getPlayer(clientId);
+        if (player != null) {
             lobbiesAppState.leaveLobby(player.getID());
         }
     }

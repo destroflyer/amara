@@ -63,18 +63,16 @@ public class GamesAppState extends ServerBaseAppState{
         }
         return Util.convertToArray_Integer(clientIDs);
     }
-    
-    public void onGameServerInitialized(Game game){
+
+    public void onGameServerInitialized(Game game) {
         NetworkServer networkServer = mainApplication.getStateManager().getState(NetworkServerAppState.class).getNetworkServer();
         ConnectedPlayers connectedPlayers = mainApplication.getStateManager().getState(PlayersAppState.class).getConnectedPlayers();
-        for(GamePlayer[] team : game.getTeams()){
-            for(GamePlayer player : team){
-                LobbyPlayer lobbyPlayer = player.getGameSelectionPlayer().getLobbyPlayer();
-                if (lobbyPlayer instanceof LobbyPlayer_Human) {
-                    LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-                    int clientID = connectedPlayers.getClientID(lobbyPlayer_Human.getPlayerId());
-                    networkServer.sendMessageToClient(clientID, new Message_GameCreated(player.getAuthentificationKey()));
-                }
+        for (GamePlayer player : game.getPlayers()) {
+            GamePlayerInfo gamePlayerInfo = player.getGamePlayerInfo();
+            if (gamePlayerInfo instanceof GamePlayerInfo_Human) {
+                GamePlayerInfo_Human gamePlayerInfo_Human = (GamePlayerInfo_Human) gamePlayerInfo;
+                int clientId = connectedPlayers.getClientID(gamePlayerInfo_Human.getPlayerId());
+                networkServer.sendMessageToClient(clientId, new Message_GameCreated());
             }
         }
     }

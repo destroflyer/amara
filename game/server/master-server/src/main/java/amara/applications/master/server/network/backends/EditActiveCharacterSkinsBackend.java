@@ -27,7 +27,7 @@ public class EditActiveCharacterSkinsBackend implements MessageBackend {
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
         if (receivedMessage instanceof Message_EditActiveCharacterSkin) {
             Message_EditActiveCharacterSkin message = (Message_EditActiveCharacterSkin) receivedMessage;
-            int playerId = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
+            int playerId = connectedPlayers.getPlayer(messageResponse.getClientId()).getID();
             boolean isAllowed;
             if (message.getSkinId() == 0) {
                 isAllowed = true;

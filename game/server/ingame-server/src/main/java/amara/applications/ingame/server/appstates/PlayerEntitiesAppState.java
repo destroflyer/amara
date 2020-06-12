@@ -13,14 +13,15 @@ import amara.applications.ingame.entitysystem.components.units.scores.*;
 import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.shared.games.GamePlayer;
+import amara.applications.ingame.shared.games.GamePlayerInfo;
+import amara.applications.ingame.shared.games.GamePlayerInfo_Bot;
+import amara.applications.ingame.shared.games.GamePlayerInfo_Human;
 import amara.applications.ingame.shared.maps.Map;
 import amara.applications.ingame.shared.maps.MapSpell;
 import amara.applications.ingame.shared.maps.MapSpells;
-import amara.applications.master.network.messages.objects.*;
 import amara.applications.master.server.appstates.DatabaseAppState;
 import amara.applications.master.server.appstates.DestrostudiosAppState;
 import amara.core.Util;
-import amara.libraries.database.QueryResult;
 import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 
@@ -30,47 +31,61 @@ import amara.libraries.entitysystem.templates.EntityTemplate;
  */
 public class PlayerEntitiesAppState extends ServerBaseAppState {
 
-    public PlayerEntitiesAppState() {
-        
-    }
+    public void createPlayerEntity(EntityWorld entityWorld, Map map, GamePlayer player, Integer playerIndex) {
+        DatabaseAppState databaseAppState = mainApplication.getMasterServer().getState(DatabaseAppState.class);
 
-    public int createPlayerEntity(EntityWorld entityWorld, Map map, GamePlayer player, int playerIndex) {
-        BotsAppState botsAppState = getAppState(BotsAppState.class);
         int playerEntity = entityWorld.createEntity();
-        entityWorld.setComponent(playerEntity, new PlayerIndexComponent(playerIndex));
-        LobbyPlayer lobbyPlayer = player.getGameSelectionPlayer().getLobbyPlayer();
-        String playerName = null;
-        if (lobbyPlayer instanceof LobbyPlayer_Human) {
-            LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-            DestrostudiosAppState destrostudiosAppState = mainApplication.getMasterServer().getState(DestrostudiosAppState.class);
-            playerName = destrostudiosAppState.getLoginByPlayerId(lobbyPlayer_Human.getPlayerId());
-        } else if (lobbyPlayer instanceof LobbyPlayer_Bot) {
-            LobbyPlayer_Bot lobbyPlayer_Bot = (LobbyPlayer_Bot) lobbyPlayer;
-            playerName = lobbyPlayer_Bot.getName();
-            entityWorld.setComponent(playerEntity, new IsBotComponent());
-            botsAppState.createAndRegisterBot(playerEntity, lobbyPlayer_Bot.getBotType());
+        if (playerIndex != null) {
+            entityWorld.setComponent(playerEntity, new PlayerIndexComponent(playerIndex));
         }
+
+        String playerName = null;
+        int characterId = player.getGameSelectionPlayerData().getCharacterID();
+        int skinId = 0;
+
+        GamePlayerInfo gamePlayerInfo = player.getGamePlayerInfo();
+        if (gamePlayerInfo instanceof GamePlayerInfo_Human) {
+            GamePlayerInfo_Human gamePlayerInfo_Human = (GamePlayerInfo_Human) gamePlayerInfo;
+            // Login
+            DestrostudiosAppState destrostudiosAppState = mainApplication.getMasterServer().getState(DestrostudiosAppState.class);
+            playerName = destrostudiosAppState.getLoginByPlayerId(gamePlayerInfo_Human.getPlayerId());
+            // Skin
+            Integer skinIdResult = databaseAppState.getQueryResult("SELECT skin_id FROM users_characters_active_skins WHERE (user_id = " + gamePlayerInfo_Human.getPlayerId() + ") AND (character_id = " + characterId + ") LIMIT 1").nextInteger_Close();
+            if (skinIdResult != null) {
+                skinId = skinIdResult;
+            }
+        } else if (gamePlayerInfo instanceof GamePlayerInfo_Bot) {
+            GamePlayerInfo_Bot gamePlayerInfo_Bot = (GamePlayerInfo_Bot) gamePlayerInfo;
+            BotsAppState botsAppState = getAppState(BotsAppState.class);
+            botsAppState.createAndRegisterBot(playerEntity, gamePlayerInfo_Bot.getBotType());
+            // Name
+            playerName = gamePlayerInfo_Bot.getName();
+            entityWorld.setComponent(playerEntity, new IsBotComponent());
+            // Skin
+            Integer skinIdResult = databaseAppState.getQueryResult("SELECT id FROM characters_skins WHERE (character_id = " + characterId + ") ORDER BY RANDOM() LIMIT 1").nextInteger_Close();
+            if (skinIdResult != null) {
+                skinId = skinIdResult;
+            }
+        }
+
         entityWorld.setComponent(playerEntity, new NameComponent(playerName));
-        int characterEntity = createCharacterEntity(entityWorld, player, playerName);
+        int characterEntity = createCharacterEntity(entityWorld, playerName, characterId, skinId);
+        int[][] mapSpellsIndices = player.getGameSelectionPlayerData().getMapSpellsIndices();
+        entityWorld.setComponent(characterEntity, createMapSpells(entityWorld, map, mapSpellsIndices));
         entityWorld.setComponent(playerEntity, new PlayerCharacterComponent(characterEntity));
         map.initializePlayer(entityWorld, playerEntity);
-
-        // Has to happen here since player-specific map spells have to be ugly modified by the map currently
-        GameSelectionPlayerData gameSelectionPlayerData = player.getGameSelectionPlayer().getPlayerData();
-        createMapSpells(entityWorld, characterEntity, map, gameSelectionPlayerData.getMapSpellsIndices());
-
         map.spawnPlayer(entityWorld, playerEntity);
+
         player.setEntity(playerEntity);
-        return playerEntity;
     }
 
-    public int createCharacterEntity(EntityWorld entityWorld, GamePlayer player, String playerName) {
+    private int createCharacterEntity(EntityWorld entityWorld, String playerName, int characterId, int skinId) {
         DatabaseAppState databaseAppState = mainApplication.getMasterServer().getState(DatabaseAppState.class);
-        GameSelectionPlayerData gameSelectionPlayerData = player.getGameSelectionPlayer().getPlayerData();
-        String characterName = databaseAppState.getQueryResult("SELECT name FROM characters WHERE id = " + gameSelectionPlayerData.getCharacterID() + " LIMIT 1").nextString_Close();
+        String characterName = databaseAppState.getQueryResult("SELECT name FROM characters WHERE id = " + characterId + " LIMIT 1").nextString_Close();
         int characterEntity = EntityTemplate.createFromTemplate(entityWorld, "units/" + characterName).getId();
+        String skinName = ((skinId == 0) ? "default" : databaseAppState.getQueryResult("SELECT name FROM characters_skins WHERE id = " + skinId + " LIMIT 1").nextString_Close());
         entityWorld.setComponent(characterEntity, new TitleComponent(playerName));
-        createModel(entityWorld, characterEntity, player, characterName);
+        entityWorld.setComponent(characterEntity, new ModelComponent("Models/" + characterName + "/skin_" + skinName + ".xml"));
         entityWorld.setComponent(characterEntity, new IsCharacterComponent());
         entityWorld.setComponent(characterEntity, new IsRespawnableComponent());
         entityWorld.setComponent(characterEntity, new SightRangeComponent(30));
@@ -88,29 +103,7 @@ public class PlayerEntitiesAppState extends ServerBaseAppState {
         return characterEntity;
     }
 
-    private void createModel(EntityWorld entityWorld, int characterEntity, GamePlayer player, String characterName) {
-        DatabaseAppState databaseAppState = mainApplication.getMasterServer().getState(DatabaseAppState.class);
-        int characterID = player.getGameSelectionPlayer().getPlayerData().getCharacterID();
-        int skinId = 0;
-        LobbyPlayer lobbyPlayer = player.getGameSelectionPlayer().getLobbyPlayer();
-        if (lobbyPlayer instanceof LobbyPlayer_Human) {
-            LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-            Integer skinIdResult = databaseAppState.getQueryResult("SELECT skin_id FROM users_characters_active_skins WHERE (user_id = " + lobbyPlayer_Human.getPlayerId() + ") AND (character_id = " + characterID + ") LIMIT 1").nextInteger_Close();
-            skinId = ((skinIdResult != null) ? skinIdResult : 0);
-        } else {
-            QueryResult results_CharactersSkins = databaseAppState.getQueryResult("SELECT id FROM characters_skins WHERE (character_id = " + characterID + ") ORDER BY RANDOM() LIMIT 1");
-            if (results_CharactersSkins.next()) {
-                skinId = results_CharactersSkins.getInteger("id");
-            }
-        }
-        String skinName = "default";
-        if (skinId != 0) {
-            skinName = databaseAppState.getQueryResult("SELECT name FROM characters_skins WHERE id = " + skinId + " LIMIT 1").nextString_Close();
-        }
-        entityWorld.setComponent(characterEntity, new ModelComponent("Models/" + characterName + "/skin_" + skinName + ".xml"));
-    }
-
-    private void createMapSpells(EntityWorld entityWorld, int characterEntity, Map map, int[][] mapSpellsIndices) {
+    private MapSpellsComponent createMapSpells(EntityWorld entityWorld, Map map, int[][] mapSpellsIndices) {
         LinkedList<Integer> mapSpellsEntities = new LinkedList<>();
         for (int i=0;i<map.getSpells().length;i++) {
             MapSpells mapSpellsGroup = map.getSpells()[i];
@@ -122,6 +115,6 @@ public class PlayerEntitiesAppState extends ServerBaseAppState {
                 mapSpellsEntities.add(spellEntity);
             }
         }
-        entityWorld.setComponent(characterEntity, new MapSpellsComponent(Util.convertToArray_Integer(mapSpellsEntities)));
+        return new MapSpellsComponent(Util.convertToArray_Integer(mapSpellsEntities));
     }
 }

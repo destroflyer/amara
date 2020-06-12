@@ -11,18 +11,18 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class ClientComponent{
+public class ClientComponent {
 
-    public ClientComponent(){
+    public ClientComponent() {
         
     }
 
-    public ClientComponent(int clientID){
-        this.clientID = clientID;
+    public ClientComponent(int clientId) {
+        this.clientId = clientId;
     }
-    private int clientID;
+    private int clientId;
 
-    public int getClientID(){
-        return clientID;
+    public int getClientId() {
+        return clientId;
     }
 }

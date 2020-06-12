@@ -8,21 +8,23 @@ import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.libraries.entitysystem.*;
 
+import java.util.function.Supplier;
+
 /**
  *
  * @author Carl
  */
 public class PlayerTeamSystem implements EntitySystem{
     
-    public PlayerTeamSystem(int playerEntity){
+    public PlayerTeamSystem(Supplier<Integer> playerEntity){
         this.playerEntity = playerEntity;
     }
-    private int playerEntity;
+    private Supplier<Integer> playerEntity;
     private int playerTeamEntity = -1;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
+        PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity.get(), PlayerCharacterComponent.class);
         if(playerCharacterComponent != null){
             TeamComponent teamComponent = entityWorld.getComponent(playerCharacterComponent.getEntity(), TeamComponent.class);
             if(teamComponent != null){

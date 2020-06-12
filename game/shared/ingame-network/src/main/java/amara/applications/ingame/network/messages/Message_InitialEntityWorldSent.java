@@ -12,6 +12,18 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class Message_InitialEntityWorldSent extends AbstractMessage{
-    
+public class Message_InitialEntityWorldSent extends AbstractMessage {
+
+    public Message_InitialEntityWorldSent() {
+
+    }
+
+    public Message_InitialEntityWorldSent(int playerEntity) {
+        this.playerEntity = playerEntity;
+    }
+    private int playerEntity;
+
+    public int getPlayerEntity() {
+        return playerEntity;
+    }
 }

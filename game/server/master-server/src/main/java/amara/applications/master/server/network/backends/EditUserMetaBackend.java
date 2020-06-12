@@ -26,7 +26,7 @@ public class EditUserMetaBackend implements MessageBackend {
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
         if (receivedMessage instanceof Message_EditUserMeta) {
             Message_EditUserMeta message = (Message_EditUserMeta) receivedMessage;
-            int playerID = playersAppState.getConnectedPlayers().getPlayer(messageResponse.getClientID()).getID();
+            int playerID = playersAppState.getConnectedPlayers().getPlayer(messageResponse.getClientId()).getID();
             boolean isDefaultValue = (message.getValue().equals(playersAppState.getUserDefaultMeta().get(message.getName())));
             String oldValue = databaseAppState.getQueryResult("SELECT value FROM users_meta WHERE (user_id = " + playerID + ") AND (name = '" + databaseAppState.escape(message.getName()) + "')").nextString_Close();
             String whereClause = ("(user_id = " + playerID + ") AND (name = '" + databaseAppState.escape(message.getName()) + "')");

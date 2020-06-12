@@ -4,53 +4,35 @@
  */
 package amara.applications.ingame.shared.games;
 
-import amara.applications.master.network.messages.objects.GameSelectionPlayer;
+import amara.applications.master.network.messages.objects.GameSelectionPlayerData;
 
 /**
  *
  * @author Carl
  */
-public class GamePlayer{
+public class GamePlayer {
 
-    public GamePlayer(GameSelectionPlayer gameSelectionPlayer, int authentificationKey){
-        this.gameSelectionPlayer = gameSelectionPlayer;
-        this.authentificationKey = authentificationKey;
+    public GamePlayer(GamePlayerInfo gamePlayerInfo, GameSelectionPlayerData gameSelectionPlayerData) {
+        this.gamePlayerInfo = gamePlayerInfo;
+        this.gameSelectionPlayerData = gameSelectionPlayerData;
     }
-    private GameSelectionPlayer gameSelectionPlayer;
-    private int authentificationKey;
-    private int clientID = -1;
-    private int entity;
-    private boolean isReady;
+    private GamePlayerInfo gamePlayerInfo;
+    private GameSelectionPlayerData gameSelectionPlayerData;
+    private int entity = -1;
 
-    public GameSelectionPlayer getGameSelectionPlayer(){
-        return gameSelectionPlayer;
+    public GamePlayerInfo getGamePlayerInfo() {
+        return gamePlayerInfo;
     }
 
-    public int getAuthentificationKey(){
-        return authentificationKey;
+    public GameSelectionPlayerData getGameSelectionPlayerData() {
+        return gameSelectionPlayerData;
     }
 
-    public void setClientID(int clientID){
-        this.clientID = clientID;
-    }
-
-    public int getClientID(){
-        return clientID;
-    }
-
-    public void setEntity(int entity){
+    public void setEntity(int entity) {
         this.entity = entity;
     }
 
-    public int getEntity(){
+    public int getEntity() {
         return entity;
-    }
-
-    public void setReady(boolean isReady){
-        this.isReady = isReady;
-    }
-
-    public boolean isReady(){
-        return isReady;
     }
 }

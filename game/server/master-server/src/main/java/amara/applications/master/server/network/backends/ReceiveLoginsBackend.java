@@ -51,7 +51,7 @@ public class ReceiveLoginsBackend implements MessageBackend {
                 playerId = (int) user.get("id");
                 String login = (String) user.get("login");
                 ConnectedPlayers connectedPlayers = playersAppState.getConnectedPlayers();
-                connectedPlayers.login(messageResponse.getClientID(), new Player(playerId, login));
+                connectedPlayers.login(messageResponse.getClientId(), new Player(playerId, login));
                 System.out.println("Login '" + login + "' (#" + playerId + ")");
             } catch (JWTVerificationException ex) {
                 // Token should not be trusted

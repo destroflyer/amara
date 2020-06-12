@@ -13,16 +13,16 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class GameCreatedBackend implements MessageBackend{
+public class GameCreatedBackend implements MessageBackend {
 
-    public GameCreatedBackend(PanPlay panPlay){
+    public GameCreatedBackend(PanPlay panPlay) {
         this.panPlay = panPlay;
     }
     private PanPlay panPlay;
-    
+
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_GameCreated){
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_GameCreated) {
             panPlay.displayIngamePanel();
         }
     }

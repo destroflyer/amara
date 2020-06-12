@@ -121,7 +121,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
     
     private int getPlayerEntity(EntityWorld entityWorld, int clientID){
         for(int entity : entityWorld.getEntitiesWithAny(ClientComponent.class)){
-            if(entityWorld.getComponent(entity, ClientComponent.class).getClientID() == clientID){
+            if(entityWorld.getComponent(entity, ClientComponent.class).getClientId() == clientID){
                 return entity;
             }
         }

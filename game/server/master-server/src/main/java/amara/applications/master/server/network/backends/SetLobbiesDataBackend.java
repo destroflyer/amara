@@ -27,8 +27,8 @@ public class SetLobbiesDataBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_SetLobbyData){
             Message_SetLobbyData message = (Message_SetLobbyData) receivedMessage;
-            int playerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
-            lobbiesAppState.setLobbyData(playerID, message.getLobbyData());
+            int playerId = connectedPlayers.getPlayer(messageResponse.getClientId()).getID();
+            lobbiesAppState.setLobbyData(playerId, message.getLobbyData());
         }
     }
 }

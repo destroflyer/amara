@@ -10,7 +10,6 @@ import com.jme3.network.ConnectionListener;
 import com.jme3.network.Filters;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Message;
-import com.jme3.network.MessageListener;
 import com.jme3.network.Server;
 import amara.libraries.network.exceptions.ServerCreationException;
 
@@ -24,7 +23,7 @@ public class NetworkServer extends BaseServer{
         
     }
     private Server server;
-    private HashMap<Integer, LinkedList<SubNetworkServer>> subServers = new HashMap<Integer, LinkedList<SubNetworkServer>>();
+    private HashMap<Integer, LinkedList<SubNetworkServer>> subServers = new HashMap<>();
 
     public void createServer(int port) throws ServerCreationException{
         try{
@@ -49,18 +48,12 @@ public class NetworkServer extends BaseServer{
                 onClientDisconnected(connection.getId());
             }
         });
-        server.addMessageListener(new MessageListener<HostedConnection>(){
-
-            @Override
-            public void messageReceived(HostedConnection source, Message message){
-                onMessageReceived(source.getId(), message);
-            }
-        });
+        server.addMessageListener((source, message) -> onMessageReceived(source.getId(), message));
     }
 
     @Override
     public void onClientConnected(int clientID){
-        subServers.put(clientID, new LinkedList<SubNetworkServer>());
+        subServers.put(clientID, new LinkedList<>());
         super.onClientConnected(clientID);
         System.out.println("Client #" + clientID + " connected.");
     }
@@ -104,10 +97,10 @@ public class NetworkServer extends BaseServer{
     public void broadcastMessage(Message message){
         server.broadcast(message);
     }
-    
+
     @Override
-    public void sendMessageToClient(int clientID, Message message){
-        server.broadcast(Filters.equalTo(server.getConnection(clientID)), message);
+    public void sendMessageToClient(int clientId, Message message){
+        server.broadcast(Filters.equalTo(server.getConnection(clientId)), message);
     }
 
     @Override

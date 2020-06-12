@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.appstates;
 
+import java.util.Collections;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
@@ -22,28 +23,40 @@ import amara.libraries.network.NetworkClient;
  */
 public class SynchronizeEntityWorldAppState extends BaseDisplayAppState<IngameClientApplication> {
 
+    private ConcurrentLinkedQueue<EntityChange> pendingInitialEntityChanges = new ConcurrentLinkedQueue<>();
     private ConcurrentLinkedQueue<EntityChange> pendingEntityChanges = new ConcurrentLinkedQueue<>();
+    private boolean isInitialWorldLoaded;
     private int initialChangesCount = -1;
 
     @Override
     public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
         IngameNetworkAppState ingameNetworkAppState = getAppState(IngameNetworkAppState.class);
-        ingameNetworkAppState.addMessageBackend(new EntitySynchronizeBackend(this));
+        PlayerAppState playerAppState = getAppState(PlayerAppState.class);
+        ingameNetworkAppState.addMessageBackend(new EntitySynchronizeBackend(this, playerAppState));
     }
 
     @Override
     public void update(float lastTimePerFrame) {
         super.update(lastTimePerFrame);
-        EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
-        int changesToApply = pendingEntityChanges.size();
-        if (initialChangesCount != -1) {
-            changesToApply = Math.min(changesToApply, 100);
-            int percentProgress = (int) ((1 - (((float) pendingEntityChanges.size()) / initialChangesCount)) * 100);
+        ConcurrentLinkedQueue<EntityChange> entityChangesQueue;
+        int changesToApply;
+        if (isInitialWorldLoaded) {
+            entityChangesQueue = pendingEntityChanges;
+            changesToApply = pendingEntityChanges.size();
+        } else {
+            entityChangesQueue = pendingInitialEntityChanges;
+            changesToApply = Math.min(pendingInitialEntityChanges.size(), 100);
+            // Update loading screen
+            int percentProgress = 0;
+            if (initialChangesCount != -1) {
+                percentProgress = (int) ((1 - (((float) pendingInitialEntityChanges.size()) / initialChangesCount)) * 100);
+            }
             getAppState(LoadingScreenAppState.class).setTitle("Loading game data... (" + percentProgress + "%)");
         }
-        for (int i=0;i<changesToApply;i++) {
-            EntityChange entityChange = pendingEntityChanges.poll();
+        EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
+        for (int i = 0; i < changesToApply; i++) {
+            EntityChange entityChange = entityChangesQueue.poll();
             if (entityChange instanceof RemovedEntityChange) {
                 RemovedEntityChange removedEntityChange = (RemovedEntityChange) entityChange;
                 entityWorld.removeEntity(removedEntityChange.getEntity());
@@ -57,7 +70,7 @@ public class SynchronizeEntityWorldAppState extends BaseDisplayAppState<IngameCl
                 getAppState(LocalEntitySystemAppState.class).onInitialWorldLoaded();
                 getAppState(PlayerAppState.class).onInitialWorldLoaded();
                 getAppState(LoadingScreenAppState.class).onInitialWorldLoaded();
-                initialChangesCount = -1;
+                isInitialWorldLoaded = true;
                 NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
                 networkClient.sendMessage(new Message_ClientReady());
             }
@@ -65,14 +78,13 @@ public class SynchronizeEntityWorldAppState extends BaseDisplayAppState<IngameCl
     }
 
     public void enqueueEntityChanges(EntityChanges entityChanges) {
-        for(EntityChange entityChange : entityChanges.getChanges()){
-            pendingEntityChanges.add(entityChange);
-        }
+        ConcurrentLinkedQueue<EntityChange> entityChangesQueue = ((initialChangesCount == -1) ? pendingInitialEntityChanges : pendingEntityChanges);
+        Collections.addAll(entityChangesQueue, entityChanges.getChanges());
     }
 
     public void onInitialEntityWorldReceived() {
-        initialChangesCount = pendingEntityChanges.size();
-        pendingEntityChanges.add(new InitialEntityWorldLoadedChange());
+        initialChangesCount = pendingInitialEntityChanges.size();
+        pendingInitialEntityChanges.add(new InitialEntityWorldLoadedChange());
     }
 
     private class InitialEntityWorldLoadedChange extends EntityChange {

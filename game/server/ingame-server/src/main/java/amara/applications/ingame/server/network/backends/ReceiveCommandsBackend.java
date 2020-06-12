@@ -25,7 +25,7 @@ public class ReceiveCommandsBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_Command){
             Message_Command message = (Message_Command) receivedMessage;
-            receiveCommandsAppState.onCommandReceived(new PlayerCommand(messageResponse.getClientID(), message.getCommand()));
+            receiveCommandsAppState.onCommandReceived(new PlayerCommand(messageResponse.getClientId(), message.getCommand()));
         }
     }
 }

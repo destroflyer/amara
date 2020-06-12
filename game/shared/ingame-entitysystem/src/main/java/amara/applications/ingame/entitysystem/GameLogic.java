@@ -240,7 +240,7 @@ public class GameLogic {
         entitySystems.add(new FinishTargetedMovementsSystem());
         entitySystems.add(new CheckHiddenAreasSystem(intersectionObserver));
         // Add 1 for the neutral team
-        entitySystems.add(new TeamVisionSystem(game.getTeams().length + 1, game.getMap().getPhysicsInformation().generateVisionObstacles()));
+        entitySystems.add(new TeamVisionSystem(game.getGameSelection().getTeams().length + 1, game.getMap().getPhysicsInformation().generateVisionObstacles()));
         entitySystems.add(new TriggerCollisionEffectSystem(intersectionObserver));
         entitySystems.add(new TriggerCastingFinishedEffectSystem());
         entitySystems.add(new TriggerFinishedObjectivesEffctSystem());

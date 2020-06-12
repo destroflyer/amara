@@ -9,24 +9,26 @@ import amara.applications.ingame.entitysystem.components.players.*;
 import amara.libraries.applications.display.ingame.appstates.IngameCameraAppState;
 import amara.libraries.entitysystem.*;
 
+import java.util.function.Supplier;
+
 /**
  *
  * @author Carl
  */
 public class LockedCameraSystem implements EntitySystem{
 
-    public LockedCameraSystem(int playerEntity, IngameCameraAppState ingameCameraAppState){
+    public LockedCameraSystem(Supplier<Integer> playerEntity, IngameCameraAppState ingameCameraAppState){
         this.playerEntity = playerEntity;
         this.ingameCameraAppState = ingameCameraAppState;
     }
-    private int playerEntity;
+    private Supplier<Integer> playerEntity;
     private IngameCameraAppState ingameCameraAppState;
     private boolean isEnabled;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         if(isEnabled){
-            PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
+            PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity.get(), PlayerCharacterComponent.class);
             if(playerCharacterComponent != null){
                 PositionComponent positionComponent = entityWorld.getComponent(playerCharacterComponent.getEntity(), PositionComponent.class);
                 if(positionComponent != null){

@@ -38,7 +38,7 @@ public class AudioSystem implements EntitySystem{
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
         increasePlayingAudioProgresses(deltaSeconds);
-        ComponentMapObserver observer = entityWorld.requestObserver(this, SendEntityChangesSystem.COMPONENT_EQUALITY_DEFINTION, AudioComponent.class, AudioSourceComponent.class, PositionComponent.class, StartPlayingAudioComponent.class, StopPlayingAudioComponent.class, GameSpeedComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, SendEntityChangesSystem.COMPONENT_EQUALITY_DEFINITION, AudioComponent.class, AudioSourceComponent.class, PositionComponent.class, StartPlayingAudioComponent.class, StopPlayingAudioComponent.class, GameSpeedComponent.class);
         //Create
         for(int entity : observer.getNew().getEntitiesWithAny(AudioComponent.class)){
             load(entityWorld, entity);

@@ -29,7 +29,7 @@ public class CancelLobbyQueuesBackend implements MessageBackend{
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_CancelLobbyQueue){
-            int playerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
+            int playerID = connectedPlayers.getPlayer(messageResponse.getClientId()).getID();
             Lobby lobby = lobbiesAppState.getLobby(playerID);
             if(lobby != null){
                 gamesQueueAppState.cancelLobbyQueue(lobby);

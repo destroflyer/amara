@@ -14,29 +14,26 @@ import amara.libraries.network.messages.Message_ClientDisconnection;
  *
  * @author Carl
  */
-public class ReceiveLogoutsBackend implements MessageBackend{
+public class ReceiveLogoutsBackend implements MessageBackend {
 
-    public ReceiveLogoutsBackend(ConnectedPlayers connectedPlayers){
+    public ReceiveLogoutsBackend(ConnectedPlayers connectedPlayers) {
         this.connectedPlayers = connectedPlayers;
     }
     private ConnectedPlayers connectedPlayers;
-    
+
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_Logout){
-            Message_Logout message = (Message_Logout) receivedMessage;
-            logout(messageResponse.getClientID());
-        }
-        else if(receivedMessage instanceof Message_ClientDisconnection){
-            Message_ClientDisconnection message = (Message_ClientDisconnection) receivedMessage;
-            logout(messageResponse.getClientID());
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_Logout) {
+            logout(messageResponse.getClientId());
+        } else if (receivedMessage instanceof Message_ClientDisconnection) {
+            logout(messageResponse.getClientId());
         }
     }
-    
-    private void logout(int clientID){
-        Player player = connectedPlayers.getPlayer(clientID);
-        if(player != null){
-            connectedPlayers.logout(clientID);
+
+    private void logout(int clientId) {
+        Player player = connectedPlayers.getPlayer(clientId);
+        if (player != null) {
+            connectedPlayers.logout(clientId);
             System.out.println("Logout '" + player.getLogin() + "' (#" + player.getID() + ")");
         }
     }

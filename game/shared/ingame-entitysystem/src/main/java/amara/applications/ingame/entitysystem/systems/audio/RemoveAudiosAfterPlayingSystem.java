@@ -16,7 +16,7 @@ public class RemoveAudiosAfterPlayingSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.requestObserver(this, SendEntityChangesSystem.COMPONENT_EQUALITY_DEFINTION, StartPlayingAudioComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, SendEntityChangesSystem.COMPONENT_EQUALITY_DEFINITION, StartPlayingAudioComponent.class);
         for(int entity : observer.getNew().getEntitiesWithAny(StartPlayingAudioComponent.class)){
             removeAudioAfterPlaying(entityWorld, entity);
         }

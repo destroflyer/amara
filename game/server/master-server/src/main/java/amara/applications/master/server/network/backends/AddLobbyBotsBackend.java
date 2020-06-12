@@ -27,7 +27,7 @@ public class AddLobbyBotsBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_AddLobbyBot){
             Message_AddLobbyBot message = (Message_AddLobbyBot) receivedMessage;
-            int lobbyPlayerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
+            int lobbyPlayerID = connectedPlayers.getPlayer(messageResponse.getClientId()).getID();
             lobbiesAppState.addLobbyBot(lobbyPlayerID, message.getLobbyPlayer_Bot());
         }
     }

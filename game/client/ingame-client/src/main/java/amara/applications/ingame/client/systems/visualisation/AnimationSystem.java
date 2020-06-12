@@ -33,7 +33,7 @@ public class AnimationSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.requestObserver(this, SendEntityChangesSystem.COMPONENT_EQUALITY_DEFINTION, AnimationComponent.class, ModelComponent.class, NameComponent.class, LoopDurationComponent.class, RestartClientAnimationComponent.class, GameSpeedComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, SendEntityChangesSystem.COMPONENT_EQUALITY_DEFINITION, AnimationComponent.class, ModelComponent.class, NameComponent.class, LoopDurationComponent.class, RestartClientAnimationComponent.class, GameSpeedComponent.class);
         //Animation
         for(int entity : observer.getNew().getEntitiesWithAny(AnimationComponent.class)){
             addAnimation(entityWorld, entity);

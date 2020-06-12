@@ -5,6 +5,8 @@
 package amara.applications.ingame.client.systems.visualisation;
 
 import java.util.Set;
+import java.util.function.Supplier;
+
 import com.jme3.scene.Node;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.components.shop.*;
@@ -19,17 +21,17 @@ import amara.libraries.entitysystem.*;
  */
 public class ShopAnimationSystem implements EntitySystem{
     
-    public ShopAnimationSystem(int playerEntity, EntitySceneMap entitySceneMap){
+    public ShopAnimationSystem(Supplier<Integer> playerEntity, EntitySceneMap entitySceneMap){
         this.playerEntity = playerEntity;
         this.entitySceneMap = entitySceneMap;
     }
-    private int playerEntity;
+    private Supplier<Integer> playerEntity;
     private EntitySceneMap entitySceneMap;
     private boolean[] canUseShop;
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
+        PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity.get(), PlayerCharacterComponent.class);
         if(playerCharacterComponent != null){
             Set<Integer> shopEntities = entityWorld.getEntitiesWithAny(ShopRangeComponent.class);
             if(canUseShop == null){

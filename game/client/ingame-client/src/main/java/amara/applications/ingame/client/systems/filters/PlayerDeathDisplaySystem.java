@@ -10,23 +10,25 @@ import amara.libraries.applications.display.appstates.PostFilterAppState;
 import amara.libraries.applications.display.filters.GrayScaleFilter;
 import amara.libraries.entitysystem.*;
 
+import java.util.function.Supplier;
+
 /**
  *
  * @author Carl
  */
 public class PlayerDeathDisplaySystem implements EntitySystem{
 
-    public PlayerDeathDisplaySystem(int playerEntity, PostFilterAppState postFilterAppState){
+    public PlayerDeathDisplaySystem(Supplier<Integer> playerEntity, PostFilterAppState postFilterAppState){
         this.playerEntity = playerEntity;
         this.postFilterAppState = postFilterAppState;
     }
-    private int playerEntity;
+    private Supplier<Integer> playerEntity;
     private PostFilterAppState postFilterAppState;
     private GrayScaleFilter grayscaleFilter = new GrayScaleFilter();
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class);
+        PlayerCharacterComponent playerCharacterComponent = entityWorld.getComponent(playerEntity.get(), PlayerCharacterComponent.class);
         if(playerCharacterComponent != null){
             int characterEntity = playerCharacterComponent.getEntity();
             ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);

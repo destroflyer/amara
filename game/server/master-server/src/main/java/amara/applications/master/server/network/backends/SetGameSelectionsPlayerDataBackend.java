@@ -27,8 +27,8 @@ public class SetGameSelectionsPlayerDataBackend implements MessageBackend{
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
         if(receivedMessage instanceof Message_SetGameSelectionPlayerData){
             Message_SetGameSelectionPlayerData message = (Message_SetGameSelectionPlayerData) receivedMessage;
-            int playerID = connectedPlayers.getPlayer(messageResponse.getClientID()).getID();
-            gamesQueueAppState.setGameSelectionPlayerData(playerID, message.getGameSelectionPlayerData());
+            int playerId = connectedPlayers.getPlayer(messageResponse.getClientId()).getID();
+            gamesQueueAppState.setGameSelectionPlayerData(playerId, message.getGameSelectionPlayerData());
         }
     }
 }
