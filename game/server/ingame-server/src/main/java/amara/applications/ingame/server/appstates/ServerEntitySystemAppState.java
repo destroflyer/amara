@@ -134,7 +134,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
     }
 
     public void removeInitializedClient(int clientId) {
-        initializedClientIds.remove(clientId);
+        initializedClientIds.remove((Integer) clientId);
         Game game = mainApplication.getGame();
         GamePlayer player = game.getPlayerByClientId(clientId);
         // TODO: If MMO Map
