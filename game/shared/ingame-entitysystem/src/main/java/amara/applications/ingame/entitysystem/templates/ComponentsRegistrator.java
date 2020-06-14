@@ -1094,6 +1094,19 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent(portion, lessOrMore, allowEqual);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.NameAmountConditionComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.NameAmountConditionComponent>("nameAmountCondition"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.conditions.NameAmountConditionComponent construct(EntityWorld entityWorld, Element element){
+                int maximum = 0;
+                String maximumText = element.getText();
+                if((maximumText != null) && (maximumText.length() > 0)){
+                    maximum = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, maximumText));
+                }
+                return new amara.applications.ingame.entitysystem.components.conditions.NameAmountConditionComponent(maximum);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.OrConditionsComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.conditions.OrConditionsComponent.class.getDeclaredField("conditionEntities"), componentFieldSerializer_Entity);
@@ -2668,12 +2681,12 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.applications.ingame.entitysystem.components.players.ClientComponent construct(EntityWorld entityWorld, Element element){
-                int clientID = 0;
-                String clientIDText = element.getText();
-                if((clientIDText != null) && (clientIDText.length() > 0)){
-                    clientID = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, clientIDText));
+                int clientId = 0;
+                String clientIdText = element.getText();
+                if((clientIdText != null) && (clientIdText.length() > 0)){
+                    clientId = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, clientIdText));
                 }
-                return new amara.applications.ingame.entitysystem.components.players.ClientComponent(clientID);
+                return new amara.applications.ingame.entitysystem.components.players.ClientComponent(clientId);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.players.IsBotComponent.class);

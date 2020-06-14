@@ -5,14 +5,17 @@
 package amara.test;
 
 import amara.applications.master.client.MasterserverClientApplication;
-import amara.applications.master.network.messages.*;
-import amara.applications.master.network.messages.objects.*;
+import amara.applications.master.network.messages.Message_Login;
 import amara.applications.master.server.MasterserverServerApplication;
 import amara.applications.master.server.launcher.Launcher_Game;
 import amara.core.Launcher_Core;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
-import amara.libraries.network.*;
-import amara.libraries.network.exceptions.*;
+import amara.libraries.network.HostInformation;
+import amara.libraries.network.NetworkClient;
+import amara.libraries.network.exceptions.ServerConnectionException;
+import amara.libraries.network.exceptions.ServerConnectionTimeoutException;
+
+import java.util.function.Consumer;
 
 /**
  *
@@ -20,8 +23,7 @@ import amara.libraries.network.exceptions.*;
  */
 public class TestGame {
 
-    public static void main(String[] args) {
-        String authToken = args[0];
+    protected static void startServerAndLogin(String authToken, Consumer<NetworkClient> callback) {
         Launcher_Core.initialize();
         Launcher_Game.initialize();
         // Server
@@ -33,14 +35,8 @@ public class TestGame {
             masterClient.start();
             NetworkClient networkClient = masterClient.getStateManager().getState(NetworkClientHeadlessAppState.class).getNetworkClient();
             networkClient.sendMessage(new Message_Login(authToken));
-            networkClient.sendMessage(new Message_CreateLobby());
-            networkClient.sendMessage(new Message_SetLobbyData(new LobbyData("arama", new TeamFormat(2, 0))));
-            networkClient.sendMessage(new Message_AddLobbyBot(new LobbyPlayer_Bot(BotType.EASY, "Bot", new GameSelectionPlayerData(11, null))));
-            networkClient.sendMessage(new Message_StartLobbyQueue());
-            networkClient.sendMessage(new Message_AcceptGameSelection(true));
-            networkClient.sendMessage(new Message_SetGameSelectionPlayerData(new GameSelectionPlayerData(11, null)));
-            networkClient.sendMessage(new Message_LockInGameSelection());
-        } catch(ServerConnectionException | ServerConnectionTimeoutException ex) {
+            callback.accept(networkClient);
+        } catch (ServerConnectionException | ServerConnectionTimeoutException ex) {
             ex.printStackTrace();
         }
     }

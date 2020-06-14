@@ -7,59 +7,86 @@ package amara.applications.ingame.entitysystem.systems.conditions;
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.conditions.*;
+import amara.applications.ingame.entitysystem.components.general.NameComponent;
 import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *
  * @author Carl
  */
-public class ConditionUtil{
-    
-    public static boolean isConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity){
+public class ConditionUtil {
+
+    public static boolean isConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
+        return (isOrConditionMet(entityWorld, conditionEntity, targetEntity)
+             && isHasBuffConditionMet(entityWorld, conditionEntity, targetEntity)
+             && isHasHealthPortionConditionMet(entityWorld, conditionEntity, targetEntity)
+             && isNameAmountConditionMet(entityWorld, conditionEntity, targetEntity));
+    }
+
+    private static boolean isOrConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
         OrConditionsComponent orConditionComponent = entityWorld.getComponent(conditionEntity, OrConditionsComponent.class);
-        if(orConditionComponent != null){
+        if (orConditionComponent != null) {
             boolean isAtLeastOneConditionMet = false;
-            for(int orConditionEntity : orConditionComponent.getConditionEntities()){
-                if(isConditionMet(entityWorld, orConditionEntity, targetEntity)){
+            for (int orConditionEntity : orConditionComponent.getConditionEntities()) {
+                if (isConditionMet(entityWorld, orConditionEntity, targetEntity)){
                     isAtLeastOneConditionMet = true;
                     break;
                 }
             }
-            if(!isAtLeastOneConditionMet){
-                return false;
-            }
+            return isAtLeastOneConditionMet;
         }
+        return true;
+    }
+
+    private static boolean isHasBuffConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
         HasBuffConditionComponent hasBuffConditionComponent = entityWorld.getComponent(conditionEntity, HasBuffConditionComponent.class);
-        if(hasBuffConditionComponent != null){
-            for(int buffEntity : hasBuffConditionComponent.getBuffEntities()){
+        if (hasBuffConditionComponent != null) {
+            for (int buffEntity : hasBuffConditionComponent.getBuffEntities()) {
                 boolean hasBuff = false;
-                for(int buffStatusEntity : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)){
+                for (int buffStatusEntity : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)) {
                     ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
-                    if((activeBuffComponent.getTargetEntity() == targetEntity) && (activeBuffComponent.getBuffEntity() == buffEntity)){
+                    if ((activeBuffComponent.getTargetEntity() == targetEntity) && (activeBuffComponent.getBuffEntity() == buffEntity)) {
                         hasBuff = true;
                         break;
                     }
                 }
-                if(!hasBuff){
+                if (!hasBuff) {
                     return false;
                 }
             }
         }
+        return true;
+    }
+
+    private static boolean isHasHealthPortionConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
         HasHealthPortionConditionComponent hasHealthPortionConditionComponent = entityWorld.getComponent(conditionEntity, HasHealthPortionConditionComponent.class);
-        if(hasHealthPortionConditionComponent != null){
+        if (hasHealthPortionConditionComponent != null) {
             HealthComponent healthComponent = entityWorld.getComponent(targetEntity, HealthComponent.class);
             MaximumHealthComponent maximumHealthComponent = entityWorld.getComponent(targetEntity, MaximumHealthComponent.class);
-            if((healthComponent != null) && (maximumHealthComponent != null)){
+            if ((healthComponent != null) && (maximumHealthComponent != null)) {
                 float healthPortion = (healthComponent.getValue() / maximumHealthComponent.getValue());
-                if(healthPortion == hasHealthPortionConditionComponent.getPortion()){
-                    if(!hasHealthPortionConditionComponent.isAllowEqual()){
-                        return false;
-                    }
-                }
-                else if((healthPortion > hasHealthPortionConditionComponent.getPortion()) == hasHealthPortionConditionComponent.isLessOrMore()){
-                    return false;
+                if (healthPortion == hasHealthPortionConditionComponent.getPortion()) {
+                    return hasHealthPortionConditionComponent.isAllowEqual();
+                } else {
+                    return (healthPortion > hasHealthPortionConditionComponent.getPortion()) != hasHealthPortionConditionComponent.isLessOrMore();
                 }
             }
+        }
+        return true;
+    }
+
+    private static boolean isNameAmountConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
+        NameAmountConditionComponent nameAmountConditionComponent = entityWorld.getComponent(conditionEntity, NameAmountConditionComponent.class);
+        if (nameAmountConditionComponent != null) {
+            int amount = 0;
+            String targetName = entityWorld.getComponent(targetEntity, NameComponent.class).getName();
+            for (int entity : entityWorld.getEntitiesWithAny(NameComponent.class)) {
+                String name = entityWorld.getComponent(entity, NameComponent.class).getName();
+                if (name.equals(targetName)) {
+                    amount++;
+                }
+            }
+            return (amount <= nameAmountConditionComponent.getMaximum());
         }
         return true;
     }

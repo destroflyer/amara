@@ -97,7 +97,7 @@ public class Map_Arama extends Map {
             EntityWrapper fountainAreaBuffTargetRules_Allies = entityWorld.getWrapped(entityWorld.createEntity());
             fountainAreaBuffTargetRules_Allies.setComponent(new AcceptAlliesComponent());
             fountainBuffArea_Allies.setComponent(new AreaBuffTargetRulesComponent(fountainAreaBuffTargetRules_Allies.getId()));
-            fountainBuffArea_Allies.setComponent(new TransformOriginComponent(Map.GAME_ENTITY));
+            fountainBuffArea_Allies.setComponent(new TransformOriginComponent(GAME_ENTITY));
             fountainBuffArea_Allies.setComponent(new AreaSourceComponent(fountain.getId()));
             //Fountain Area (Enemies)
             EntityWrapper fountainBuffArea_Enemies = entityWorld.getWrapped(entityWorld.createEntity());
@@ -112,7 +112,7 @@ public class Map_Arama extends Map {
             EntityWrapper fountainAreaBuffTargetRules__Enemies = entityWorld.getWrapped(entityWorld.createEntity());
             fountainAreaBuffTargetRules__Enemies.setComponent(new AcceptEnemiesComponent());
             fountainBuffArea_Enemies.setComponent(new AreaBuffTargetRulesComponent(fountainAreaBuffTargetRules__Enemies.getId()));
-            fountainBuffArea_Enemies.setComponent(new TransformOriginComponent(Map.GAME_ENTITY));
+            fountainBuffArea_Enemies.setComponent(new TransformOriginComponent(GAME_ENTITY));
             fountainBuffArea_Enemies.setComponent(new AreaSourceComponent(fountain.getId()));
             //Nexus
             EntityWrapper nexus = entityWorld.getWrapped(entityWorld.createEntity());
