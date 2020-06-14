@@ -5,6 +5,7 @@
 package amara.applications.ingame.entitysystem.systems.units;
 
 import java.util.LinkedList;
+
 import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.targets.*;
@@ -12,6 +13,7 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.bounties.*;
 import amara.applications.ingame.entitysystem.components.units.scores.*;
 import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
+import amara.applications.ingame.entitysystem.systems.items.ItemUtil;
 import amara.applications.ingame.entitysystem.systems.targets.TargetUtil;
 import amara.libraries.entitysystem.*;
 
@@ -134,6 +136,11 @@ public class PayOutBountiesSystem implements EntitySystem {
                     BountyBuffComponent bountyBuffComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyBuffComponent.class);
                     if(bountyBuffComponent != null){
                         ApplyAddBuffsSystem.addBuff(entityWorld, killReceiverEntity, bountyBuffComponent.getBuffEntity(), bountyBuffComponent.getDuration());
+                    }
+                    // Items
+                    BountyItemsComponent bountyItemsComponent = entityWorld.getComponent(bountyComponent.getBountyEntity(), BountyItemsComponent.class);
+                    if (bountyItemsComponent != null) {
+                        ItemUtil.addItems(entityWorld, killReceiverEntity, bountyItemsComponent.getItemEntities());
                     }
                 }
             }

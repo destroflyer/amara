@@ -2218,6 +2218,20 @@ public class ComponentsRegistrator{
             }
         });
         //items
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.items.BagComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.items.BagComponent.class.getDeclaredField("itemEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.BagComponent>("bag"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.items.BagComponent construct(EntityWorld entityWorld, Element element){
+                int[] itemEntities = createChildEntities(entityWorld, element, 0, "itemEntities");
+                return new amara.applications.ingame.entitysystem.components.items.BagComponent(itemEntities);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.items.InventoryComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.items.InventoryComponent.class.getDeclaredField("itemEntities"), componentFieldSerializer_Entity);
@@ -3647,6 +3661,20 @@ public class ComponentsRegistrator{
                     gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent(gold);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.bounties.BountyItemsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.bounties.BountyItemsComponent.class.getDeclaredField("itemEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyItemsComponent>("bountyItems"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyItemsComponent construct(EntityWorld entityWorld, Element element){
+                int[] itemEntities = createChildEntities(entityWorld, element, 0, "itemEntities");
+                return new amara.applications.ingame.entitysystem.components.units.bounties.BountyItemsComponent(itemEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent.class);

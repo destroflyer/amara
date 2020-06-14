@@ -112,6 +112,7 @@ public class IngamePlayersAppState extends ServerBaseAppState {
         entityWorld.setComponent(characterEntity, new SpellsComponent(new int[0]));
         entityWorld.setComponent(characterEntity, new SpellsUpgradePointsComponent(1));
         entityWorld.setComponent(characterEntity, new InventoryComponent(new int[0]));
+        entityWorld.setComponent(characterEntity, new BagComponent(new int[0]));
         int scoreEntity = entityWorld.createEntity();
         entityWorld.setComponent(scoreEntity, new CharacterKillsComponent(0));
         entityWorld.setComponent(scoreEntity, new DeathsComponent(0));

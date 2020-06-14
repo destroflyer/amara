@@ -27,6 +27,7 @@ import amara.applications.ingame.entitysystem.components.units.effecttriggers.tr
 import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
+import amara.applications.ingame.entitysystem.templates.EntityContentGenerator;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.*;
 import amara.libraries.physics.shapes.*;
@@ -349,6 +350,15 @@ public class CustomGameTemplates{
                 entityWorld.setComponent(itemActiveEntity, new InstantEffectTriggersComponent(effectTrigger.getId()));
                 entityWorld.setComponent(itemActiveEntity, new CastTypeComponent(CastTypeComponent.CastType.POSITIONAL_SKILLSHOT));
                 entityWrapper.setComponent(new ItemActiveComponent(itemActiveEntity, true));
+            } else if (templateName.startsWith("units/astrudan_creep")) {
+                EntityTemplate.loadTemplate(entityWorld, entity, "units/pseudospider");
+                entityWorld.setComponent(entity, new NameComponent("Astrudan Spider"));
+                int bounty = entityWorld.createEntity();
+                int bountyGold = EntityContentGenerator.generateWeightedValue(0.9f);
+                entityWorld.setComponent(bounty, new BountyGoldComponent(bountyGold));
+                int bountyItem = EntityContentGenerator.generateRandomItem(entityWorld);
+                entityWorld.setComponent(bounty, new BountyItemsComponent(bountyItem));
+                entityWorld.setComponent(entity, new BountyComponent(bounty));
             }
         });
     }

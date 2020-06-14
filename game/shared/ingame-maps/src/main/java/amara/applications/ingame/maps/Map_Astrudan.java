@@ -47,13 +47,13 @@ public class Map_Astrudan extends Map {
         entityWorld.setComponent(spawnMobsTrigger, new CustomTargetComponent(spawnMobsTarget));
         int spawnMobsCondition = entityWorld.createEntity();
         int spawnMobsConditionTarget = entityWorld.createEntity();
-        entityWorld.setComponent(spawnMobsConditionTarget, new NameComponent("Pseudospider"));
+        entityWorld.setComponent(spawnMobsConditionTarget, new NameComponent("Astrudan Spider"));
         entityWorld.setComponent(spawnMobsCondition, new CustomTargetComponent(spawnMobsConditionTarget));
         entityWorld.setComponent(spawnMobsCondition, new NameAmountConditionComponent(5));
         entityWorld.setComponent(spawnMobsTrigger, new TriggerConditionsComponent(spawnMobsCondition));
         int spawnMobsEffect = entityWorld.createEntity();
         int spawnInformation = entityWorld.createEntity();
-        entityWorld.setComponent(spawnInformation, new SpawnTemplateComponent("units/pseudospider"));
+        entityWorld.setComponent(spawnInformation, new SpawnTemplateComponent("units/astrudan_creep"));
         entityWorld.setComponent(spawnMobsEffect, new SpawnComponent(spawnInformation));
         entityWorld.setComponent(spawnMobsTrigger, new TriggeredEffectComponent(spawnMobsEffect));
         entityWorld.setComponent(spawnMobsTrigger, new TriggerSourceComponent(GAME_ENTITY));

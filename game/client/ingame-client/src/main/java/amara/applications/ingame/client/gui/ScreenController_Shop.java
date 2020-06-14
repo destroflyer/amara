@@ -111,8 +111,10 @@ public class ScreenController_Shop extends GameScreenController{
         tmpInventoryItemsRecipes.clear();
         for (int inventoryItemEntity : inventoryItemEntities) {
             if (inventoryItemEntity != -1) {
-                String itemID = entityWorld.getComponent(inventoryItemEntity, ItemIDComponent.class).getID();
-                tmpInventoryItemsRecipes.add(getItemRecipe(itemID));
+                ItemIDComponent itemIDComponent = entityWorld.getComponent(inventoryItemEntity, ItemIDComponent.class);
+                if (itemIDComponent != null) {
+                    tmpInventoryItemsRecipes.add(getItemRecipe(itemIDComponent.getID()));
+                }
             }
         }
         for(ItemRecipe itemRecipe : itemsRecipes.values()){

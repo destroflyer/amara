@@ -15,6 +15,7 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.applications.ingame.entitysystem.systems.effects.triggers.EffectTriggerUtil;
+import amara.applications.ingame.entitysystem.systems.items.ItemUtil;
 import amara.core.Util;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
@@ -50,7 +51,7 @@ public class ShopUtil{
         }
         return false;
     }
-    
+
     public static boolean buy(EntityWorld entityWorld, int entity, String itemID){
         tmpItemEntities.clear();
         int newItemIndex = -1;
@@ -79,7 +80,7 @@ public class ShopUtil{
                 inventorySize++;
             }
         }
-        if(inventorySize <= 6){
+        if(inventorySize <= ItemUtil.MAX_INVENTORY_SIZE){
             GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
             if((goldCost == 0) || ((goldComponent != null) && (goldComponent.getGold() >= goldCost))){
                 EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + itemID);
@@ -102,11 +103,13 @@ public class ShopUtil{
             boolean ingredientHasToBeBought = true;
             for(Integer inventoryItemEntity : inventoryItemEntities){
                 if(inventoryItemEntity != -1){
-                    String inventoryItemID = entityWorld.getComponent(inventoryItemEntity, ItemIDComponent.class).getID();
-                    if(inventoryItemID.equals(ingredientID)){
-                        inventoryItemEntities.remove(inventoryItemEntity);
-                        ingredientHasToBeBought = false;
-                        break;
+                    ItemIDComponent itemIDComponent = entityWorld.getComponent(inventoryItemEntity, ItemIDComponent.class);
+                    if (itemIDComponent != null) {
+                        if (itemIDComponent.getID().equals(ingredientID)) {
+                            inventoryItemEntities.remove(inventoryItemEntity);
+                            ingredientHasToBeBought = false;
+                            break;
+                        }
                     }
                 }
             }
