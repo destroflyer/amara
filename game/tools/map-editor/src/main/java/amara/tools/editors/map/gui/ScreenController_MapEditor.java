@@ -6,9 +6,11 @@ package amara.tools.editors.map.gui;
 
 import java.io.File;
 import javax.swing.JOptionPane;
+
 import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector2f;
-import amara.applications.ingame.shared.maps.*;
+import amara.applications.ingame.shared.maps.Map;
+import amara.applications.ingame.shared.maps.MapFileHandler;
 import amara.core.Util;
 import amara.core.files.FileAssets;
 import amara.libraries.applications.display.gui.GameScreenController;

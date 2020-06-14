@@ -6,13 +6,14 @@ package amara.applications.ingame.client.systems.visualisation;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+
 import com.jme3.scene.Node;
 import amara.applications.ingame.entitysystem.components.game.*;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
 import amara.applications.ingame.entitysystem.systems.network.SendEntityChangesSystem;
-import amara.applications.ingame.shared.games.Game;
+import amara.applications.ingame.shared.maps.Map;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.*;
 
@@ -70,7 +71,7 @@ public class AnimationSystem implements EntitySystem{
             updateAnimation(entityWorld, animationEntity, true, true);
         }
         //GameSpeed
-        GameSpeedComponent gameSpeedComponent = observer.getChanged().getComponent(Game.ENTITY, GameSpeedComponent.class);
+        GameSpeedComponent gameSpeedComponent = observer.getChanged().getComponent(Map.GAME_ENTITY, GameSpeedComponent.class);
         if(gameSpeedComponent != null){
             for(int animationEntity : animatedEntitiesMap.keySet()){
                 updateAnimation(entityWorld, animationEntity, false, true);
@@ -134,7 +135,7 @@ public class AnimationSystem implements EntitySystem{
                 if(updateProperties){
                     LoopDurationComponent loopDurationComponent = entityWorld.getComponent(animationEntity, LoopDurationComponent.class);
                     if(loopDurationComponent != null){
-                        float gameSpeed = entityWorld.getComponent(Game.ENTITY, GameSpeedComponent.class).getSpeed();
+                        float gameSpeed = entityWorld.getComponent(Map.GAME_ENTITY, GameSpeedComponent.class).getSpeed();
                         float loopDuration = (loopDurationComponent.getDuration() / gameSpeed);
                         boolean isLoop = (!entityWorld.hasComponent(animationEntity, FreezeAfterPlayingComponent.class));
                         modelObject.setAnimationProperties(loopDuration, isLoop);

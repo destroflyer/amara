@@ -14,18 +14,18 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class LockInGameSelectionsBackend implements MessageBackend{
+public class LockInGameSelectionsBackend implements MessageBackend {
 
-    public LockInGameSelectionsBackend(GamesQueueAppState gamesQueueAppState, ConnectedPlayers connectedPlayers){
+    public LockInGameSelectionsBackend(GamesQueueAppState gamesQueueAppState, ConnectedPlayers connectedPlayers) {
         this.gamesQueueAppState = gamesQueueAppState;
         this.connectedPlayers = connectedPlayers;
     }
     private GamesQueueAppState gamesQueueAppState;
     private ConnectedPlayers connectedPlayers;
-    
+
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_LockInGameSelection){
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_LockInGameSelection) {
             int playerId = connectedPlayers.getPlayer(messageResponse.getClientId()).getID();
             gamesQueueAppState.lockInGameSelection(playerId);
         }

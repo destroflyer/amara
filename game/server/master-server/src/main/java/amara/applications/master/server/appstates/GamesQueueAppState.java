@@ -83,7 +83,7 @@ public class GamesQueueAppState extends ServerBaseAppState{
             if(gameSelection.areTeamsLockedIn()){
                 runningGameSelections.remove(i);
                 i--;
-                gamesAppState.startGame(gameSelection);
+                gamesAppState.startTeamGame(gameSelection);
             }
         }
     }

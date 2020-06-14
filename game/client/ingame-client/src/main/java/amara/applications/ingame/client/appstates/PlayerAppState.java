@@ -17,7 +17,7 @@ import amara.applications.ingame.client.systems.visualisation.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.shared.maps.Map;
-import amara.applications.master.network.messages.objects.GameSelection;
+import amara.applications.master.network.messages.objects.GameSelectionPlayer;
 import amara.core.Queue;
 import amara.core.input.Event;
 import amara.core.input.events.MouseClickEvent;
@@ -40,11 +40,11 @@ import com.jme3.math.Vector2f;
  */
 public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication> implements ActionListener {
 
-    public PlayerAppState(GameSelection gameSelection) {
-        this.gameSelection = gameSelection;
+    public PlayerAppState(GameSelectionPlayer[][] teams) {
+        this.teams = teams;
         playerTeamSystem = new PlayerTeamSystem(this::getPlayerEntity);
     }
-    private GameSelection gameSelection;
+    private GameSelectionPlayer[][] teams;
     private int playerEntity;
     private PlayerTeamSystem playerTeamSystem;
     private OwnTeamVisionSystem ownTeamVisionSystem;
@@ -245,8 +245,8 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         }
     }
 
-    public GameSelection getGameSelection() {
-        return gameSelection;
+    public GameSelectionPlayer[][] getTeams() {
+        return teams;
     }
 
     public void setPlayerEntity(int playerEntity) {

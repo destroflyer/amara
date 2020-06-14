@@ -4,23 +4,25 @@
  */
 package amara.applications.ingame.server.appstates;
 
-import amara.applications.ingame.entitysystem.GameLogic;
 import amara.applications.ingame.entitysystem.components.players.ClientComponent;
 import amara.applications.ingame.entitysystem.synchronizing.ClientComponentBlacklist;
 import amara.applications.ingame.entitysystem.synchronizing.GameSynchronizingUtil;
 import amara.applications.ingame.entitysystem.systems.network.SendEntityChangesSystem;
 import amara.applications.ingame.network.messages.Message_EntityChanges;
+import amara.applications.ingame.network.messages.Message_GameOver;
 import amara.applications.ingame.network.messages.Message_InitialEntityWorldSent;
 import amara.applications.ingame.server.IngameServerApplication;
+import amara.applications.ingame.server.entitysystem.GameLogic;
 import amara.applications.ingame.server.entitysystem.systems.objectives.CheckMapObjectiveSystem;
 import amara.applications.ingame.server.network.backends.SendGameInfoBackend;
 import amara.applications.ingame.server.network.backends.AddNewClientsBackend;
 import amara.applications.ingame.server.network.backends.RemoveLeavingClientsBackend;
 import amara.applications.ingame.server.network.backends.StartGameBackend;
-import amara.applications.ingame.shared.games.Game;
-import amara.applications.ingame.shared.games.GamePlayer;
-import amara.applications.ingame.shared.games.GamePlayerInfo_Human;
 import amara.applications.ingame.shared.maps.Map;
+import amara.applications.master.server.games.Game;
+import amara.applications.master.server.games.GamePlayer;
+import amara.applications.master.server.games.GamePlayerInfo_Human;
+import amara.applications.master.server.games.MMOGame;
 import amara.libraries.applications.headless.applications.HeadlessAppStateManager;
 import amara.libraries.applications.headless.applications.HeadlessApplication;
 import amara.libraries.applications.headless.appstates.EntitySystemHeadlessAppState;
@@ -47,7 +49,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         super.initialize(stateManager, application);
         Game game = mainApplication.getGame();
         SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();
-        subNetworkServer.addMessageBackend(new SendGameInfoBackend(game, clientId -> mainApplication.getMasterServer().getPlayerId(clientId)));
+        subNetworkServer.addMessageBackend(new SendGameInfoBackend(game));
         subNetworkServer.addMessageBackend(new AddNewClientsBackend(this));
         subNetworkServer.addMessageBackend(new RemoveLeavingClientsBackend(this));
         subNetworkServer.addMessageBackend(new StartGameBackend(game));
@@ -62,10 +64,10 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         // Initialize game content
         Map map = game.getMap();
         map.load(entityWorld);
-        PlayerEntitiesAppState playerEntitiesAppState = getAppState(PlayerEntitiesAppState.class);
+        IngamePlayersAppState ingamePlayersAppState = getAppState(IngamePlayersAppState.class);
         int playerIndex = 0;
-        for (GamePlayer player : game.getPlayers()) {
-            playerEntitiesAppState.createPlayerEntity(entityWorld, map, player, playerIndex);
+        for (GamePlayer<?> player : game.getPlayers()) {
+            ingamePlayersAppState.createPlayerEntity(entityWorld, map, player, playerIndex);
             playerIndex++;
         }
         // Register the entity systems
@@ -116,34 +118,32 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
 
     private int getOrCreatePlayerEntity(int clientId) {
         Game game = mainApplication.getGame();
-        GamePlayer gamePlayer = game.getPlayerByClientId(clientId);
+        GamePlayer<GamePlayerInfo_Human> gamePlayer = game.getPlayerByClientId(clientId);
         if (gamePlayer.getEntity() == -1) {
-            PlayerEntitiesAppState playerEntitiesAppState = getAppState(PlayerEntitiesAppState.class);
-            playerEntitiesAppState.createPlayerEntity(entityWorld, game.getMap(), gamePlayer, null);
+            IngamePlayersAppState ingamePlayersAppState = getAppState(IngamePlayersAppState.class);
+            ingamePlayersAppState.createPlayerEntity(entityWorld, game.getMap(), gamePlayer, null);
         }
         return gamePlayer.getEntity();
     }
 
     public void addNewClient(int clientId) {
         newClientIds.add(clientId);
-        // TODO: If MMO Map
-        if (false) {
-            // TODO: Add player correctly
-            mainApplication.getGame().addPlayer(null);
-        }
     }
 
     public void removeInitializedClient(int clientId) {
         initializedClientIds.remove((Integer) clientId);
         Game game = mainApplication.getGame();
-        GamePlayer player = game.getPlayerByClientId(clientId);
-        // TODO: If MMO Map
-        if (false) {
+        GamePlayer<GamePlayerInfo_Human> player = game.getPlayerByClientId(clientId);
+        GamePlayerInfo_Human gamePlayerInfo = player.getGamePlayerInfo();
+        System.out.println("Player #" + gamePlayerInfo.getPlayerId() + " (Client #" + clientId + ") left the game.");
+        if (game instanceof MMOGame) {
             game.removePlayer(player);
+            entityWorld.removeEntity(player.getEntity());
+            SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();
+            subNetworkServer.sendMessageToClient(clientId, new Message_GameOver());
+            subNetworkServer.remove(clientId);
         } else {
-            GamePlayerInfo_Human gamePlayerInfo_Human = (GamePlayerInfo_Human) player.getGamePlayerInfo();
-            gamePlayerInfo_Human.setClientId(null);
-            gamePlayerInfo_Human.setReady(false);
+            gamePlayerInfo.setReady(false);
         }
     }
 }

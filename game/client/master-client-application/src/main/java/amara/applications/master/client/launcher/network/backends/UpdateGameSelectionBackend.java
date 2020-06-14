@@ -15,26 +15,22 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class UpdateGameSelectionBackend implements MessageBackend{
+public class UpdateGameSelectionBackend implements MessageBackend {
 
-    public UpdateGameSelectionBackend(PanPlay panPlay){
+    public UpdateGameSelectionBackend(PanPlay panPlay) {
         this.panPlay = panPlay;
     }
     private PanPlay panPlay;
-    
+
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_GameSelectionUpdate){
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_GameSelectionUpdate) {
             Message_GameSelectionUpdate message = (Message_GameSelectionUpdate) receivedMessage;
             final GameSelection gameSelection = message.getGameSelection();
             gameSelection.repairOnUnserialize();
-            EventQueue.invokeLater(new Runnable(){
-
-                @Override
-                public void run(){
-                    panPlay.getPanGameSelection().update(gameSelection);
-                    panPlay.displayGameSelectionPanel();
-                }
+            EventQueue.invokeLater(() -> {
+                panPlay.getPanGameSelection().update(gameSelection);
+                panPlay.displayGameSelectionPanel();
             });
         }
     }

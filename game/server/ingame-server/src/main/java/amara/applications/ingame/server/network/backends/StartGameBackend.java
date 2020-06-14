@@ -6,7 +6,9 @@ package amara.applications.ingame.server.network.backends;
 
 import com.jme3.network.Message;
 import amara.applications.ingame.network.messages.*;
-import amara.applications.ingame.shared.games.*;
+import amara.applications.master.server.games.Game;
+import amara.applications.master.server.games.GamePlayer;
+import amara.applications.master.server.games.GamePlayerInfo_Human;
 import amara.libraries.network.*;
 
 /**
@@ -23,13 +25,13 @@ public class StartGameBackend implements MessageBackend {
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
         if (receivedMessage instanceof Message_ClientReady) {
-            GamePlayer player = game.getPlayerByClientId(messageResponse.getClientId());
+            GamePlayer<GamePlayerInfo_Human> player = game.getPlayerByClientId(messageResponse.getClientId());
             if (player != null) {
-                GamePlayerInfo_Human gamePlayerInfo_Human = (GamePlayerInfo_Human) player.getGamePlayerInfo();
-                gamePlayerInfo_Human.setReady(true);
-                System.out.println("Player #" + gamePlayerInfo_Human.getPlayerId() + " (Client #" + gamePlayerInfo_Human.getClientId() + ") is ready.");
+                GamePlayerInfo_Human gamePlayerInfo = player.getGamePlayerInfo();
+                gamePlayerInfo.setReady(true);
+                System.out.println("Player #" + gamePlayerInfo.getPlayerId() + " (Client #" + gamePlayerInfo.getClientId() + ") is ready.");
                 if (game.isStarted()) {
-                    System.out.println("Game is already started, sending info to player #" + gamePlayerInfo_Human.getPlayerId() + " (Client #" + gamePlayerInfo_Human.getClientId() + ").");
+                    System.out.println("Game is already started, sending info to player #" + gamePlayerInfo.getPlayerId() + " (Client #" + gamePlayerInfo.getClientId() + ").");
                     messageResponse.addBroadcastMessage(new Message_GameStarted(player.getEntity()));
                 } else if (game.areAllPlayersReady()) {
                     System.out.println("All players ready, start game.");

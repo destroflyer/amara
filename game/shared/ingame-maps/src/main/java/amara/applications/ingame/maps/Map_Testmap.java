@@ -35,7 +35,7 @@ import amara.libraries.physics.shapes.*;
  *
  * @author Carl
  */
-public class Map_Testmap extends Map{
+public class Map_Testmap extends Map {
 
     public Map_Testmap(){
         spells = new MapSpells[]{

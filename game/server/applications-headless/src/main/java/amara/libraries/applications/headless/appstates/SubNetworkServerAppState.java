@@ -5,20 +5,19 @@
 package amara.libraries.applications.headless.appstates;
 
 import amara.libraries.network.SubNetworkServer;
-import amara.libraries.network.exceptions.ServerCreationException;
 
 /**
  *
  * @author Carl
  */
-public class SubNetworkServerAppState extends BaseHeadlessAppState{
+public class SubNetworkServerAppState extends BaseHeadlessAppState {
 
-    public SubNetworkServerAppState(SubNetworkServer subNetworkServer) throws ServerCreationException{
+    public SubNetworkServerAppState(SubNetworkServer subNetworkServer) {
         this.subNetworkServer = subNetworkServer;
     }
     private SubNetworkServer subNetworkServer;
 
-    public SubNetworkServer getSubNetworkServer(){
+    public SubNetworkServer getSubNetworkServer() {
         return subNetworkServer;
     }
 }

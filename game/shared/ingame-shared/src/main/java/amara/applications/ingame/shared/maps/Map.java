@@ -14,8 +14,10 @@ import java.util.List;
  *
  * @author Carl
  */
-public abstract class Map{
-    
+public abstract class Map {
+
+    public static int GAME_ENTITY = 0;
+
     private String name;
     protected MapCamera camera;
     protected MapLights lights = new MapLights();

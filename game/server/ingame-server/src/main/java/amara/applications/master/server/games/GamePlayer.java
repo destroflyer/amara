@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.applications.ingame.shared.games;
+package amara.applications.master.server.games;
 
 import amara.applications.master.network.messages.objects.GameSelectionPlayerData;
 
@@ -10,17 +10,17 @@ import amara.applications.master.network.messages.objects.GameSelectionPlayerDat
  *
  * @author Carl
  */
-public class GamePlayer {
+public class GamePlayer<T extends GamePlayerInfo> {
 
-    public GamePlayer(GamePlayerInfo gamePlayerInfo, GameSelectionPlayerData gameSelectionPlayerData) {
+    public GamePlayer(T gamePlayerInfo, GameSelectionPlayerData gameSelectionPlayerData) {
         this.gamePlayerInfo = gamePlayerInfo;
         this.gameSelectionPlayerData = gameSelectionPlayerData;
     }
-    private GamePlayerInfo gamePlayerInfo;
+    private T gamePlayerInfo;
     private GameSelectionPlayerData gameSelectionPlayerData;
     private int entity = -1;
 
-    public GamePlayerInfo getGamePlayerInfo() {
+    public T getGamePlayerInfo() {
         return gamePlayerInfo;
     }
 

@@ -420,70 +420,73 @@ public class ScreenController_HUD extends GameScreenController {
             childLayoutVertical();
             
             PlayerAppState playerAppState = mainApplication.getStateManager().getState(PlayerAppState.class);
-            GameSelectionPlayer[][] teams = playerAppState.getGameSelection().getTeams();
-        
-            int _playerIndex = 0;
-            for(int i=0;i<teams.length;i++){
-                final int teamIndex = i;
-                text(new TextBuilder(){{
-                    height("30px");
-                    textHAlignLeft();
-                    font("Interface/fonts/Verdana_14.fnt");
-                    text("Team #" + (teamIndex + 1));
-                }});
-                for(int r=0;r<teams[i].length;r++){
-                    final int playerIndex = _playerIndex;
-                    panel(new PanelBuilder("scoreboard_player_" + playerIndex){{
-                        childLayoutHorizontal();
+            GameSelectionPlayer[][] teams = playerAppState.getTeams();
+            if (teams != null) {
+                int _playerIndex = 0;
+                for (int i = 0; i < teams.length; i++) {
+                    final int teamIndex = i;
+                    text(new TextBuilder() {{
                         height("30px");
+                        textHAlignLeft();
+                        font("Interface/fonts/Verdana_14.fnt");
+                        text("Team #" + (teamIndex + 1));
+                    }});
+                    for (int r = 0; r < teams[i].length; r++) {
+                        final int playerIndex = _playerIndex;
+                        panel(new PanelBuilder("scoreboard_player_" + playerIndex) {{
+                            childLayoutHorizontal();
+                            height("30px");
 
-                        text(new TextBuilder("scoreboard_player_" + playerIndex + "_name"){{
-                            width("200px");
-                            height("30px");
-                            textHAlignLeft();
-                            font("Interface/fonts/Verdana_14.fnt");
-                            text("Player #" + (playerIndex + 1));
-                        }});
-                        text(new TextBuilder("scoreboard_player_" + playerIndex + "_kda"){{
-                            width("40px");
-                            height("30px");
-                            textHAlignCenter();
-                            font("Interface/fonts/Verdana_14.fnt");
-                            text("K/D/A");
-                        }});
-                        panel(new PanelBuilder(){{
-                            width("20px");
-                        }});
-                        text(new TextBuilder("scoreboard_player_" + playerIndex + "_creepscore"){{
-                            width("40px");
-                            height("30px");
-                            textHAlignCenter();
-                            font("Interface/fonts/Verdana_14.fnt");
-                            text("CS");
-                        }});
-                        panel(new PanelBuilder(){{
-                            width("20px");
-                        }});
-                        for(int i=0;i<6;i++){
-                            image(new ImageBuilder("scoreboard_player_" + playerIndex + "_item_" + i + "_image"){{
-                                width("30px");
+                            text(new TextBuilder("scoreboard_player_" + playerIndex + "_name") {{
+                                width("200px");
                                 height("30px");
-                                filename("Interface/hud/items/unknown.png");
-
-                                onHoverEffect(new HoverEffectBuilder("hint"){{
-                                    effectParameter("hintText", "?");
-                                }});
+                                textHAlignLeft();
+                                font("Interface/fonts/Verdana_14.fnt");
+                                text("Player #" + (playerIndex + 1));
                             }});
-                        }
-                        panel(new PanelBuilder(){{
-                            width("*");
+                            text(new TextBuilder("scoreboard_player_" + playerIndex + "_kda") {{
+                                width("40px");
+                                height("30px");
+                                textHAlignCenter();
+                                font("Interface/fonts/Verdana_14.fnt");
+                                text("K/D/A");
+                            }});
+                            panel(new PanelBuilder() {{
+                                width("20px");
+                            }});
+                            text(new TextBuilder("scoreboard_player_" + playerIndex + "_creepscore") {{
+                                width("40px");
+                                height("30px");
+                                textHAlignCenter();
+                                font("Interface/fonts/Verdana_14.fnt");
+                                text("CS");
+                            }});
+                            panel(new PanelBuilder() {{
+                                width("20px");
+                            }});
+                            for (int i = 0; i < 6; i++) {
+                                image(new ImageBuilder("scoreboard_player_" + playerIndex + "_item_" + i + "_image") {{
+                                    width("30px");
+                                    height("30px");
+                                    filename("Interface/hud/items/unknown.png");
+
+                                    onHoverEffect(new HoverEffectBuilder("hint") {{
+                                        effectParameter("hintText", "?");
+                                    }});
+                                }});
+                            }
+                            panel(new PanelBuilder() {{
+                                width("*");
+                            }});
                         }});
-                    }});
-                    panel(new PanelBuilder(){{
-                        height("5px");
-                    }});
-                    _playerIndex++;
+                        panel(new PanelBuilder() {{
+                            height("5px");
+                        }});
+                        _playerIndex++;
+                    }
                 }
+            } else {
+                // TODO: Scoreboard for MMO maps
             }
             panel(new PanelBuilder(){{
                 height("*");

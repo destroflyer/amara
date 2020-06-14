@@ -12,10 +12,10 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class CleanupEffectTriggersSystem implements EntitySystem{
-    
+public class CleanupEffectTriggersSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, TriggeredEffectComponent.class);
         for (int entity : observer.getRemoved().getEntitiesWithAny(TriggeredEffectComponent.class)) {
             int effectEntity = observer.getRemoved().getComponent(entity, TriggeredEffectComponent.class).getEffectEntity();
@@ -30,7 +30,7 @@ public class CleanupEffectTriggersSystem implements EntitySystem{
         }
         for (int effectTriggerEntity : entityWorld.getEntitiesWithAny(TriggerSourceComponent.class)) {
             int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
-            if(!entityWorld.hasEntity(sourceEntity)){
+            if (!entityWorld.hasEntity(sourceEntity)) {
                 int effectEntity = entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class).getEffectEntity();
                 CleanupUtil.tryCleanupEntity(entityWorld, effectEntity);
                 entityWorld.removeEntity(effectTriggerEntity);

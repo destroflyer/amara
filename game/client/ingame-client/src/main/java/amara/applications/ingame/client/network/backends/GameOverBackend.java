@@ -17,30 +17,26 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class GameOverBackend implements MessageBackend{
+public class GameOverBackend implements MessageBackend {
 
-    public GameOverBackend(IngameClientApplication ingameClientApplication){
+    public GameOverBackend(IngameClientApplication ingameClientApplication) {
         this.ingameClientApplication = ingameClientApplication;
     }
     private IngameClientApplication ingameClientApplication;
 
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_GameOver){
-            ingameClientApplication.enqueueTask(new Runnable(){
-
-                @Override
-                public void run(){
-                    ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(PingAppState.class));
-                    ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(SendPlayerCommandsAppState.class));
-                    ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(LocalEntitySystemAppState.class));
-                    ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(SynchronizeEntityWorldAppState.class));
-                    ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(PlayerAppState.class));
-                    ingameClientApplication.getStateManager().getState(IngameCameraAppState.class).setEnabled(false);
-                    NiftyAppState niftyAppState = ingameClientApplication.getStateManager().getState(NiftyAppState.class);
-                    niftyAppState.goToScreen(ScreenController_HUD.class, "gameOver");
-                    ingameClientApplication.getStateManager().getState(AudioAppState.class).createAudioNode("Sounds/sounds/victory.ogg").play();
-                }
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_GameOver) {
+            ingameClientApplication.enqueueTask(() -> {
+                ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(PingAppState.class));
+                ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(SendPlayerCommandsAppState.class));
+                ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(LocalEntitySystemAppState.class));
+                ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(SynchronizeEntityWorldAppState.class));
+                ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(PlayerAppState.class));
+                ingameClientApplication.getStateManager().getState(IngameCameraAppState.class).setEnabled(false);
+                NiftyAppState niftyAppState = ingameClientApplication.getStateManager().getState(NiftyAppState.class);
+                niftyAppState.goToScreen(ScreenController_HUD.class, "gameOver");
+                ingameClientApplication.getStateManager().getState(AudioAppState.class).createAudioNode("Sounds/sounds/victory.ogg").play();
             });
         }
     }

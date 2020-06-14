@@ -10,7 +10,7 @@ import com.jme3.network.Message;
  *
  * @author Carl
  */
-public interface MessageBackend{
-    
-    public abstract void onMessageReceived(Message receivedMessage, MessageResponse messageResponse);
+public interface MessageBackend {
+
+    void onMessageReceived(Message receivedMessage, MessageResponse messageResponse);
 }

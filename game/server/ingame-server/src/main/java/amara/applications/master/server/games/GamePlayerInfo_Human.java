@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package amara.applications.ingame.shared.games;
+package amara.applications.master.server.games;
 
 /**
  *
@@ -10,22 +10,19 @@ package amara.applications.ingame.shared.games;
  */
 public class GamePlayerInfo_Human extends GamePlayerInfo {
 
-    public GamePlayerInfo_Human(int playerId) {
+    public GamePlayerInfo_Human(int playerId, int clientId) {
         this.playerId = playerId;
+        this.clientId = clientId;
     }
     private int playerId;
-    private Integer clientId;
+    private int clientId;
     private boolean isReady;
 
     public int getPlayerId() {
         return playerId;
     }
 
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
-    }
-
-    public Integer getClientId() {
+    public int getClientId() {
         return clientId;
     }
 

@@ -5,13 +5,14 @@
 package amara.applications.ingame.server.network.backends;
 
 import java.util.HashMap;
+
 import com.jme3.network.Message;
 import amara.applications.ingame.network.messages.*;
 import amara.applications.ingame.server.IngameServerApplication;
 import amara.applications.ingame.server.appstates.ServerEntitySystemAppState;
 import amara.applications.ingame.server.chat.ChatCommand;
 import amara.applications.ingame.server.chat.commands.*;
-import amara.applications.ingame.shared.games.*;
+import amara.applications.master.server.games.*;
 import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
 import amara.libraries.entitysystem.*;
 import amara.libraries.network.*;
@@ -31,8 +32,8 @@ public class ReceiveChatMessagesBackend implements MessageBackend {
         addChatCommand("urf", new ChatCommand_Urf());
         addChatCommand("chickens", new ChatCommand_Chickens());
         addChatCommand("nochickens", new ChatCommand_NoChickens());
-        //addChatCommand("envies", new ChatCommand_Envies());
-        //addChatCommand("noenvies", new ChatCommand_NoEnvies());
+        // addChatCommand("envies", new ChatCommand_Envies());
+        // addChatCommand("noenvies", new ChatCommand_NoEnvies());
     }
     private IngameServerApplication ingameServerApplication;
     private HashMap<String, ChatCommand> chatCommands = new HashMap<>();
@@ -46,9 +47,9 @@ public class ReceiveChatMessagesBackend implements MessageBackend {
         if (receivedMessage instanceof Message_SendChatMessage) {
             final Message_SendChatMessage message = (Message_SendChatMessage) receivedMessage;
             Game game = ingameServerApplication.getGame();
-            GamePlayer gamePlayer = game.getPlayerByClientId(messageResponse.getClientId());
+            GamePlayer<GamePlayerInfo_Human> gamePlayer = game.getPlayerByClientId(messageResponse.getClientId());
             if (gamePlayer != null) {
-                Message_ChatMessage chatMessage = createChatMessage(gamePlayer, message.getText());
+                Message_ChatMessage chatMessage = new Message_ChatMessage(gamePlayer.getGamePlayerInfo().getPlayerId(), null, message.getText());
                 messageResponse.addBroadcastMessage(chatMessage);
                 ingameServerApplication.enqueueTask(() -> {
                     MessageResponse chatCommandResponse = new MessageResponse(messageResponse.getClientId());
@@ -76,17 +77,5 @@ public class ReceiveChatMessagesBackend implements MessageBackend {
                 });
             }
         }
-    }
-
-    private Message_ChatMessage createChatMessage(GamePlayer gamePlayer, String text) {
-        GamePlayerInfo gamePlayerInfo = gamePlayer.getGamePlayerInfo();
-        if (gamePlayerInfo instanceof GamePlayerInfo_Human) {
-            GamePlayerInfo_Human gamePlayerInfo_Human = (GamePlayerInfo_Human) gamePlayerInfo;
-            return new Message_ChatMessage(gamePlayerInfo_Human.getPlayerId(), null, text);
-        } else if (gamePlayerInfo instanceof GamePlayerInfo_Bot) {
-            GamePlayerInfo_Bot gamePlayerInfo_Bot = (GamePlayerInfo_Bot) gamePlayerInfo;
-            return new Message_ChatMessage(0, gamePlayerInfo_Bot.getName(), text);
-        }
-        return null;
     }
 }

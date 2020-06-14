@@ -4,15 +4,15 @@
  */
 package amara.applications.ingame.shared.maps.visuals;
 
+import amara.applications.ingame.shared.maps.MapVisual;
 import com.jme3.math.Vector3f;
 import com.jme3.math.Vector2f;
-import amara.applications.ingame.shared.maps.MapVisual;
 
 /**
  *
  * @author Carl
  */
-public class WaterVisual extends MapVisual{
+public class WaterVisual extends MapVisual {
 
     public WaterVisual(Vector3f position, Vector2f size){
         this.position = position;

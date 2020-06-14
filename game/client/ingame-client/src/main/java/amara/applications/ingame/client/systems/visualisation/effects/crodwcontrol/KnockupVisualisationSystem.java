@@ -6,12 +6,13 @@ package amara.applications.ingame.client.systems.visualisation.effects.crodwcont
 
 import java.util.HashMap;
 import java.util.LinkedList;
+
 import com.jme3.scene.Node;
 import amara.applications.ingame.client.systems.visualisation.*;
 import amara.applications.ingame.entitysystem.components.units.crowdcontrol.*;
 import amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.*;
 import amara.applications.ingame.entitysystem.components.game.*;
-import amara.applications.ingame.shared.games.Game;
+import amara.applications.ingame.shared.maps.Map;
 import amara.libraries.entitysystem.*;
 
 /**
@@ -47,7 +48,7 @@ public class KnockupVisualisationSystem implements EntitySystem{
     }
     
     private void updateCurves(EntityWorld entityWorld, float deltaSeconds){
-        GameSpeedComponent gameSpeedComponent = entityWorld.getComponent(Game.ENTITY, GameSpeedComponent.class);
+        GameSpeedComponent gameSpeedComponent = entityWorld.getComponent(Map.GAME_ENTITY, GameSpeedComponent.class);
         float gameSpeed = ((gameSpeedComponent != null)?gameSpeedComponent.getSpeed():1);
         float passedTime = (deltaSeconds * gameSpeed);
         for(KnockupCurve knockupCurve : knockupCurves.values()){

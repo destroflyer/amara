@@ -4,15 +4,13 @@
  */
 package amara.applications.master.server.appstates;
 
-import java.util.LinkedList;
-import amara.applications.ingame.network.messages.*;
+import amara.applications.ingame.network.messages.Message_GameCrashed;
+import amara.applications.ingame.network.messages.Message_GameOver;
 import amara.applications.ingame.server.IngameServerApplication;
-import amara.applications.ingame.shared.games.*;
-import amara.applications.master.network.messages.*;
-import amara.applications.master.network.messages.objects.*;
-import amara.applications.master.server.games.RunningGames;
+import amara.applications.master.network.messages.objects.GameSelection;
+import amara.applications.master.network.messages.objects.Lobby;
+import amara.applications.master.server.games.*;
 import amara.applications.master.server.players.ConnectedPlayers;
-import amara.core.Util;
 import amara.libraries.applications.headless.appstates.NetworkServerAppState;
 import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
 import amara.libraries.network.NetworkServer;
@@ -22,65 +20,40 @@ import amara.libraries.network.SubNetworkServer;
  *
  * @author Carl
  */
-public class GamesAppState extends ServerBaseAppState{
+public class GamesAppState extends ServerBaseAppState {
 
-    public GamesAppState(){
+    public GamesAppState() {
         runningGames = new RunningGames();
     }
     private RunningGames runningGames;
-    
-    public void startGame(GameSelection gameSelection){
+
+    public void startTeamGame(GameSelection gameSelection) {
         LobbiesAppState lobbiesAppState = getAppState(LobbiesAppState.class);
-        for(Lobby lobby : gameSelection.getLobbies()){
+        for (Lobby lobby : gameSelection.getLobbies()) {
             lobbiesAppState.removeLobby(lobby);
         }
-        NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
-        int[] clientIDs = getClientIDs(gameSelection);
-        SubNetworkServer subNetworkServer = networkServer.addSubServer(clientIDs);
-        System.out.println("Ingame server started.");
-        Game game = new Game(gameSelection);
+        ConnectedPlayers connectedPlayers = getAppState(PlayersAppState.class).getConnectedPlayers();
+        startGame(new TeamGame(gameSelection, connectedPlayers::getClientID));
+    }
+
+    public void startGame(Game game) {
         IngameServerApplication ingameServerApplication = null;
-        try{
-            ingameServerApplication = new IngameServerApplication(mainApplication, subNetworkServer, game);
+        try {
+            NetworkServer networkServer = getAppState(NetworkServerAppState.class).getNetworkServer();
+            ingameServerApplication = new IngameServerApplication(mainApplication, networkServer.createSubServer(), game);
+            game.setIngameServerApplication(ingameServerApplication);
             ingameServerApplication.start();
-            runningGames.registerGame(game);
-        }catch(Exception ex){
+            System.out.println("Ingame server of map '" + game.getMap().getName() + "' started.");
+            runningGames.addGame(game);
+        } catch (Exception ex) {
             onGameCrashed(ingameServerApplication, ex);
         }
     }
-    
-    private int[] getClientIDs(GameSelection gameSelection){
-        ConnectedPlayers connectedPlayers = getAppState(PlayersAppState.class).getConnectedPlayers();
-        LinkedList<Integer> clientIDs = new LinkedList<>();
-        for(GameSelectionPlayer[] team : gameSelection.getTeams()){
-            for(GameSelectionPlayer player : team){
-                LobbyPlayer lobbyPlayer = player.getLobbyPlayer();
-                if (lobbyPlayer instanceof LobbyPlayer_Human) {
-                    LobbyPlayer_Human lobbyPlayer_Human = (LobbyPlayer_Human) lobbyPlayer;
-                    clientIDs.push(connectedPlayers.getClientID(lobbyPlayer_Human.getPlayerId()));
-                }
-            }
-        }
-        return Util.convertToArray_Integer(clientIDs);
-    }
 
-    public void onGameServerInitialized(Game game) {
-        NetworkServer networkServer = mainApplication.getStateManager().getState(NetworkServerAppState.class).getNetworkServer();
-        ConnectedPlayers connectedPlayers = mainApplication.getStateManager().getState(PlayersAppState.class).getConnectedPlayers();
-        for (GamePlayer player : game.getPlayers()) {
-            GamePlayerInfo gamePlayerInfo = player.getGamePlayerInfo();
-            if (gamePlayerInfo instanceof GamePlayerInfo_Human) {
-                GamePlayerInfo_Human gamePlayerInfo_Human = (GamePlayerInfo_Human) gamePlayerInfo;
-                int clientId = connectedPlayers.getClientID(gamePlayerInfo_Human.getPlayerId());
-                networkServer.sendMessageToClient(clientId, new Message_GameCreated());
-            }
-        }
-    }
-    
-    public void onGameCrashed(IngameServerApplication ingameServerApplication, Exception exception){
+    public void onGameCrashed(IngameServerApplication ingameServerApplication, Exception exception) {
         LogsAppState logsAppState = mainApplication.getStateManager().getState(LogsAppState.class);
         logsAppState.writeLog(LogsAppState.Type.Crash, "The game server crashed. (" + LogsAppState.printStackTrace(exception) + ")");
-        if(ingameServerApplication != null){
+        if (ingameServerApplication != null) {
             closeGame(ingameServerApplication);
             SubNetworkServer subNetworkServer = ingameServerApplication.getStateManager().getState(SubNetworkServerAppState.class).getSubNetworkServer();
             subNetworkServer.broadcastMessage(new Message_GameCrashed(exception.getClass().getSimpleName()));
@@ -88,30 +61,30 @@ public class GamesAppState extends ServerBaseAppState{
         }
         System.out.println("Game crashed.");
     }
-    
-    public void onGameOver(IngameServerApplication ingameServerApplication){
+
+    public void onGameOver(IngameServerApplication ingameServerApplication) {
         closeGame(ingameServerApplication);
         SubNetworkServer subNetworkServer = ingameServerApplication.getStateManager().getState(SubNetworkServerAppState.class).getSubNetworkServer();
         subNetworkServer.broadcastMessage(new Message_GameOver());
         safelyCloseSubNetworkServer(subNetworkServer);
     }
-    
-    private void safelyCloseSubNetworkServer(SubNetworkServer subNetworkServer){
-        //Wait to make sure all messages (e.g. game over) are sent
-        try{
+
+    private void safelyCloseSubNetworkServer(SubNetworkServer subNetworkServer) {
+        // Wait to make sure all messages (e.g. game over) are sent
+        try {
             Thread.sleep(3000);
-        }catch(InterruptedException ex){
+        } catch (InterruptedException ex) {
         }
         subNetworkServer.close();
         System.out.println("Ingame server closed.");
     }
-    
-    private void closeGame(IngameServerApplication ingameServerApplication){
+
+    private void closeGame(IngameServerApplication ingameServerApplication) {
         runningGames.removeGame(ingameServerApplication.getGame());
         ingameServerApplication.stop();
     }
 
-    public RunningGames getRunningGames(){
+    public RunningGames getRunningGames() {
         return runningGames;
     }
 }

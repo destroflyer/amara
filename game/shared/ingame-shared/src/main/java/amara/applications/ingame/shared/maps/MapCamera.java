@@ -10,9 +10,9 @@ import com.jme3.math.Vector3f;
  *
  * @author Carl
  */
-public class MapCamera{
+public class MapCamera {
 
-    public MapCamera(Vector3f initialPosition, Vector3f initialDirection){
+    public MapCamera(Vector3f initialPosition, Vector3f initialDirection) {
         this.initialPosition = initialPosition;
         this.initialDirection = initialDirection;
     }

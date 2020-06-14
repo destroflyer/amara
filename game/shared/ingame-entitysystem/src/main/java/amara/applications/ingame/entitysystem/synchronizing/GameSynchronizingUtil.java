@@ -5,7 +5,7 @@
 package amara.applications.ingame.entitysystem.synchronizing;
 
 import amara.applications.ingame.entitysystem.components.game.GameSpeedComponent;
-import amara.applications.ingame.shared.games.Game;
+import amara.applications.ingame.shared.maps.Map;
 import amara.libraries.entitysystem.EntityWorld;
 
 import java.util.function.Consumer;
@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 public class GameSynchronizingUtil {
 
     public static void simulateSecondFrames(EntityWorld entityWorld, float lastTimePerFrame, Consumer<Float> consumer) {
-        float gameSpeed = entityWorld.getComponent(Game.ENTITY, GameSpeedComponent.class).getSpeed();
+        float gameSpeed = entityWorld.getComponent(Map.GAME_ENTITY, GameSpeedComponent.class).getSpeed();
         for (float i = gameSpeed; i > 0; i--) {
             float simulatedTimePerFrame = Math.min(i, 1) * lastTimePerFrame;
             consumer.accept(simulatedTimePerFrame);

@@ -29,17 +29,15 @@ import amara.libraries.network.NetworkClient;
  *
  * @author Carl
  */
-public class PanGameSelection extends javax.swing.JPanel{
+public class PanGameSelection extends javax.swing.JPanel {
 
-    public PanGameSelection(PanPlay panPlay){
+    public PanGameSelection() {
         initComponents();
-        this.panPlay = panPlay;
         panCharacters = new PanGameSelection_Characters(this);
         tpaneCharacters.add("Characters", panCharacters);
         tpaneCharacters.add("Skins", new JPanel());
         tpaneCharacters.setEnabledAt(1, false);
     }
-    private PanPlay panPlay;
     private PanGameSelection_Characters panCharacters;
     private HashMap<OwnedGameCharacter, PanGameSelection_CharacterSkins> panCharactersSkins = new HashMap<OwnedGameCharacter, PanGameSelection_CharacterSkins>();
     private GameSelection gameSelection;

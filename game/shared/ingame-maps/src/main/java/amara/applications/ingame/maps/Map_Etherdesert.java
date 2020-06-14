@@ -42,9 +42,6 @@ import com.jme3.math.Vector2f;
  */
 public class Map_Etherdesert extends Map {
 
-    public Map_Etherdesert() {
-        
-    }
     private int nexus;
     private int respawnTeamTrigger;
     private int winMapObjectiveTrigger;

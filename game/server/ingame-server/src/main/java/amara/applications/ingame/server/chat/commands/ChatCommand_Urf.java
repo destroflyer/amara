@@ -10,18 +10,19 @@ import amara.applications.ingame.entitysystem.components.buffs.*;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
 import amara.applications.ingame.server.chat.ChatCommand;
-import amara.applications.ingame.shared.games.*;
+import amara.applications.master.server.games.Game;
+import amara.applications.master.server.games.GamePlayer;
 import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *
  * @author Carl
  */
-public class ChatCommand_Urf extends ChatCommand{
+public class ChatCommand_Urf extends ChatCommand {
 
     @Override
-    public void execute(String optionString, EntityWorld entityWorld, Game game, GamePlayer gamePlayer){
-        try{
+    public void execute(String optionString, EntityWorld entityWorld, Game game, GamePlayer gamePlayer) {
+        try {
             float cooldownSpeed = Float.parseFloat(optionString);
             int buffEntity = entityWorld.createEntity();
             int buffAttributesEntity = entityWorld.createEntity();
@@ -30,7 +31,7 @@ public class ChatCommand_Urf extends ChatCommand{
             entityWorld.setComponent(buffEntity, new KeepOnDeathComponent());
             int characterEntity = entityWorld.getComponent(gamePlayer.getEntity(), PlayerCharacterComponent.class).getEntity();
             ApplyAddBuffsSystem.addBuff(entityWorld, characterEntity, buffEntity);
-        }catch(NumberFormatException ex){
+        } catch (NumberFormatException ex) {
         }
     }
 }

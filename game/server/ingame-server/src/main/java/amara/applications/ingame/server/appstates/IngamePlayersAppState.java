@@ -12,26 +12,44 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.scores.*;
 import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
-import amara.applications.ingame.shared.games.GamePlayer;
-import amara.applications.ingame.shared.games.GamePlayerInfo;
-import amara.applications.ingame.shared.games.GamePlayerInfo_Bot;
-import amara.applications.ingame.shared.games.GamePlayerInfo_Human;
 import amara.applications.ingame.shared.maps.Map;
 import amara.applications.ingame.shared.maps.MapSpell;
 import amara.applications.ingame.shared.maps.MapSpells;
 import amara.applications.master.server.appstates.DatabaseAppState;
 import amara.applications.master.server.appstates.DestrostudiosAppState;
+import amara.applications.master.server.games.*;
 import amara.core.Util;
+import amara.libraries.applications.headless.applications.HeadlessAppStateManager;
+import amara.libraries.applications.headless.applications.HeadlessApplication;
+import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
 import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.entitysystem.templates.EntityTemplate;
+import amara.libraries.network.SubNetworkServer;
 
 /**
  *
  * @author Carl
  */
-public class PlayerEntitiesAppState extends ServerBaseAppState {
+public class IngamePlayersAppState extends ServerBaseAppState {
 
-    public void createPlayerEntity(EntityWorld entityWorld, Map map, GamePlayer player, Integer playerIndex) {
+    @Override
+    public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application) {
+        super.initialize(stateManager, application);
+        addInitialPlayersToSubNetworkServer();
+    }
+
+    private void addInitialPlayersToSubNetworkServer() {
+        SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();
+        for (GamePlayer<?> player : mainApplication.getGame().getPlayers()) {
+            GamePlayerInfo gamePlayerInfo = player.getGamePlayerInfo();
+            if (gamePlayerInfo instanceof GamePlayerInfo_Human) {
+                GamePlayerInfo_Human gamePlayerInfo_Human = (GamePlayerInfo_Human) gamePlayerInfo;
+                subNetworkServer.add(gamePlayerInfo_Human.getClientId());
+            }
+        }
+    }
+
+    public void createPlayerEntity(EntityWorld entityWorld, Map map, GamePlayer<?> player, Integer playerIndex) {
         DatabaseAppState databaseAppState = mainApplication.getMasterServer().getState(DatabaseAppState.class);
 
         int playerEntity = entityWorld.createEntity();
@@ -105,10 +123,10 @@ public class PlayerEntitiesAppState extends ServerBaseAppState {
 
     private MapSpellsComponent createMapSpells(EntityWorld entityWorld, Map map, int[][] mapSpellsIndices) {
         LinkedList<Integer> mapSpellsEntities = new LinkedList<>();
-        for (int i=0;i<map.getSpells().length;i++) {
+        for (int i = 0; i < map.getSpells().length; i++) {
             MapSpells mapSpellsGroup = map.getSpells()[i];
-            for (int r=0;r<mapSpellsGroup.getKeys().length;r++) {
-                int mapSpellIndex = ((mapSpellsIndices != null)?mapSpellsIndices[i][r]:0);
+            for (int r = 0; r < mapSpellsGroup.getKeys().length; r++) {
+                int mapSpellIndex = ((mapSpellsIndices != null) ? mapSpellsIndices[i][r] : 0);
                 MapSpell mapSpell = mapSpellsGroup.getMapSpells()[mapSpellIndex];
                 int spellEntity = entityWorld.createEntity();
                 EntityTemplate.loadTemplate(entityWorld, spellEntity, EntityTemplate.parseToOldTemplate(mapSpell.getEntityTemplate()));

@@ -12,8 +12,8 @@ package amara.applications.master.client.launcher.panels;
 
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
+
 import com.jme3.network.Message;
-import amara.applications.ingame.shared.maps.*;
 import amara.applications.master.client.MasterserverClientUtil;
 import amara.applications.master.client.launcher.panels.helpers.GameCharacterInputOption;
 import amara.applications.master.network.messages.*;
@@ -28,26 +28,22 @@ import amara.libraries.network.NetworkClient;
  */
 public class PanLobby extends javax.swing.JPanel{
 
-    public PanLobby(PanPlay panPlay){
+    public PanLobby(){
         initComponents();
-        this.panPlay = panPlay;
         lblMapIcon.setIcon(FileAssets.getImageIcon("Interface/client/unknown.jpg", 120, 120));
     }
-    private PanPlay panPlay;
     private Lobby lobby;
     private boolean isOwner;
     private boolean isQueueing;
-    private Map map;
-    
+
     public void reset(){
         setIsQueueing(false);
     }
-    
+
     public void update(Lobby lobby){
         this.lobby = lobby;
         isOwner = (MasterserverClientUtil.getPlayerId() == lobby.getOwner().getPlayerId());
         String mapName = lobby.getLobbyData().getMapName();
-        map = MapFileHandler.load(mapName, false);
         cbxMapName.setSelectedItem(mapName);
         lblMapIcon.setIcon(FileAssets.getImageIcon("Maps/" + mapName + "/icon.png", 120, 120));
         spnTeamFormatSize1.setValue(lobby.getLobbyData().getTeamFormat().getTeamSize(0));
@@ -340,7 +336,6 @@ public class PanLobby extends javax.swing.JPanel{
 
     private void btnLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaveActionPerformed
         sendMessage(new Message_LeaveLobby());
-        panPlay.displayCreatePanel();
     }//GEN-LAST:event_btnLeaveActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed

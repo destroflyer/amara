@@ -61,7 +61,8 @@ public class MessagesSerializer_Master {
             Message_SetGameSelectionPlayerData.class,
             Message_SetLobbyData.class,
             Message_StartLobbyQueue.class,
-            Message_GameCreated.class
+            Message_GameCreated.class,
+            Message_JoinMMOMap.class
         );
     }
 }

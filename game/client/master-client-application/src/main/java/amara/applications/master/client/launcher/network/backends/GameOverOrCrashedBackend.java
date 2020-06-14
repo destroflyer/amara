@@ -13,18 +13,18 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class GameOverOrCrashedBackend implements MessageBackend{
+public class GameOverOrCrashedBackend implements MessageBackend {
 
-    public GameOverOrCrashedBackend(PanPlay panPlay){
+    public GameOverOrCrashedBackend(PanPlay panPlay) {
         this.panPlay = panPlay;
     }
     private PanPlay panPlay;
-    
+
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if((receivedMessage instanceof Message_GameOver)
-        || (receivedMessage instanceof Message_GameCrashed)){
-            panPlay.displayCreatePanel();
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if ((receivedMessage instanceof Message_GameOver)
+         || (receivedMessage instanceof Message_GameCrashed)) {
+            panPlay.displaySelectGameModelPanel();
         }
     }
 }

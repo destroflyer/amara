@@ -12,9 +12,6 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class Message_LockInGameSelection extends AbstractMessage{
-    
-    public Message_LockInGameSelection(){
-        
-    }
+public class Message_LockInGameSelection extends AbstractMessage {
+
 }

@@ -13,18 +13,17 @@ import amara.libraries.network.*;
  *
  * @author Carl
  */
-public class ClosedLobbyBackend implements MessageBackend{
+public class ClosedLobbyBackend implements MessageBackend {
 
-    public ClosedLobbyBackend(PanPlay panPlay){
+    public ClosedLobbyBackend(PanPlay panPlay) {
         this.panPlay = panPlay;
     }
     private PanPlay panPlay;
-    
+
     @Override
-    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse){
-        if(receivedMessage instanceof Message_LobbyClosed){
-            Message_LobbyClosed message = (Message_LobbyClosed) receivedMessage;
-            panPlay.displayCreatePanel();
+    public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
+        if (receivedMessage instanceof Message_LobbyClosed) {
+            panPlay.displaySelectGameModelPanel();
         }
     }
 }

@@ -14,23 +14,25 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class CheckMapObjectiveSystem implements EntitySystem{
+public class CheckMapObjectiveSystem implements EntitySystem {
 
-    public CheckMapObjectiveSystem(Map map, IngameServerApplication mainApplication){
+    public CheckMapObjectiveSystem(Map map, IngameServerApplication mainApplication) {
         this.map = map;
         this.mainApplication = mainApplication;
     }
     private Map map;
     private IngameServerApplication mainApplication;
     private boolean isFinished = false;
-    
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        if(!isFinished){
-            int objectiveEntity = entityWorld.getComponent(map.getEntity(), MapObjectiveComponent.class).getObjectiveEntity();
-            if(entityWorld.hasComponent(objectiveEntity, FinishedObjectiveComponent.class)){
-                isFinished = true;
-                mainApplication.getMasterServer().onGameOver(mainApplication);
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        if (!isFinished) {
+            MapObjectiveComponent mapObjectiveComponent = entityWorld.getComponent(map.getEntity(), MapObjectiveComponent.class);
+            if (mapObjectiveComponent != null) {
+                if (entityWorld.hasComponent(mapObjectiveComponent.getObjectiveEntity(), FinishedObjectiveComponent.class)) {
+                    isFinished = true;
+                    mainApplication.getMasterServer().onGameOver(mainApplication);
+                }
             }
         }
     }

@@ -24,7 +24,6 @@ import amara.applications.ingame.entitysystem.components.units.effecttriggers.tr
 import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
-import amara.applications.ingame.shared.games.Game;
 import amara.applications.ingame.shared.maps.Map;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
@@ -34,11 +33,7 @@ import amara.libraries.physics.shapes.*;
  *
  * @author Carl
  */
-public class Map_Destroforest extends Map{
-
-    public Map_Destroforest(){
-        
-    }
+public class Map_Destroforest extends Map {
 
     @Override
     public void load(EntityWorld entityWorld){
@@ -55,7 +50,7 @@ public class Map_Destroforest extends Map{
         EntityWrapper effect1 = entityWorld.getWrapped(entityWorld.createEntity());
         effect1.setComponent(new PlayCinematicComponent("amara.applications.ingame.maps.Map_Destroforest_CinematicIntro"));
         instantEffectTrigger.setComponent(new TriggeredEffectComponent(effect1.getId()));
-        instantEffectTrigger.setComponent(new TriggerSourceComponent(Game.ENTITY));
+        instantEffectTrigger.setComponent(new TriggerSourceComponent(Map.GAME_ENTITY));
         
         EntityWrapper campWizards = entityWorld.getWrapped(entityWorld.createEntity());
         campWizards.setComponent(new CampUnionAggroComponent());

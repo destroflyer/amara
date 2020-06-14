@@ -2,11 +2,8 @@ package amara.applications.master.server;
 
 import amara.applications.ingame.server.IngameServerApplication;
 import amara.applications.ingame.server.interfaces.MasterserverServerApplicationInterface;
-import amara.applications.ingame.shared.games.Game;
 import amara.applications.master.server.appstates.*;
 import amara.applications.master.server.appstates.DatabaseAppState;
-import amara.applications.master.server.players.ConnectedPlayers;
-import amara.applications.master.server.players.Player;
 import amara.libraries.applications.headless.applications.*;
 import amara.libraries.applications.headless.appstates.*;
 import amara.libraries.network.exceptions.ServerCreationException;
@@ -28,6 +25,7 @@ public class MasterserverServerApplication extends HeadlessApplication implement
             stateManager.attach(new LobbiesAppState());
             stateManager.attach(new GamesQueueAppState());
             stateManager.attach(new GamesAppState());
+            stateManager.attach(new MMOAppState());
             stateManager.attach(new MasterServerInitializedAppState());
         } catch(ServerCreationException ex) {
             ex.printStackTrace();
@@ -39,24 +37,12 @@ public class MasterserverServerApplication extends HeadlessApplication implement
     public int getPort() {
         return port;
     }
-    
-    //Interface
 
-    @Override
-    public Integer getPlayerId(int clientId) {
-        ConnectedPlayers connectedPlayers = stateManager.getState(PlayersAppState.class).getConnectedPlayers();
-        Player player = connectedPlayers.getPlayer(clientId);
-        return ((player != null) ? player.getID() : null);
-    }
+    // Interface
 
     @Override
     public <T extends HeadlessAppState> T getState(Class<T> stateClass) {
         return stateManager.getState(stateClass);
-    }
-
-    @Override
-    public void onGameServerInitialized(Game game) {
-        stateManager.getState(GamesAppState.class).onGameServerInitialized(game);
     }
 
     @Override

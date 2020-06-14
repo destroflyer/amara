@@ -4,7 +4,6 @@
  */
 package amara.applications.ingame.server.interfaces;
 
-import amara.applications.ingame.shared.games.Game;
 import amara.applications.ingame.server.IngameServerApplication;
 import amara.libraries.applications.headless.applications.HeadlessAppState;
 
@@ -14,11 +13,7 @@ import amara.libraries.applications.headless.applications.HeadlessAppState;
  */
 public interface MasterserverServerApplicationInterface {
 
-    Integer getPlayerId(int clientId);
-
     <T extends HeadlessAppState> T getState(Class<T> stateClass);
-
-    void onGameServerInitialized(Game game);
 
     void onGameCrashed(IngameServerApplication ingameServerApplication, Exception exception);
 

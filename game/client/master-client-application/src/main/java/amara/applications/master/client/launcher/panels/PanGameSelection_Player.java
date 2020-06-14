@@ -7,10 +7,12 @@ package amara.applications.master.client.launcher.panels;
 import java.util.LinkedList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import amara.applications.ingame.shared.maps.*;
+
 import amara.applications.master.client.MasterserverClientUtil;
 import amara.applications.master.client.launcher.comboboxes.ComboboxModel_MapSpells;
 import amara.applications.master.network.messages.objects.*;
+import amara.applications.ingame.shared.maps.MapSpell;
+import amara.applications.ingame.shared.maps.MapSpells;
 import amara.core.files.FileAssets;
 
 /**

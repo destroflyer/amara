@@ -4,7 +4,6 @@
  */
 package amara.libraries.network;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import com.jme3.network.ConnectionListener;
 import com.jme3.network.Filters;
@@ -17,34 +16,31 @@ import amara.libraries.network.exceptions.ServerCreationException;
  *
  * @author Carl
  */
-public class NetworkServer extends BaseServer{
-    
-    public NetworkServer(){
-        
-    }
-    private Server server;
-    private HashMap<Integer, LinkedList<SubNetworkServer>> subServers = new HashMap<>();
+public class NetworkServer extends BaseServer {
 
-    public void createServer(int port) throws ServerCreationException{
-        try{
+    private Server server;
+    private LinkedList<SubNetworkServer> subServers = new LinkedList<>();
+
+    public void createServer(int port) throws ServerCreationException {
+        try {
             server = new ExtendedDefaultServer(port);
             addMessageListeners();
             server.start();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServerCreationException(port);
         }
     }
-    
-    private void addMessageListeners(){
-        server.addConnectionListener(new ConnectionListener(){
+
+    private void addMessageListeners() {
+        server.addConnectionListener(new ConnectionListener() {
 
             @Override
-            public void connectionAdded(Server server, HostedConnection connection){
+            public void connectionAdded(Server server, HostedConnection connection) {
                 onClientConnected(connection.getId());
             }
 
             @Override
-            public void connectionRemoved(Server server, HostedConnection connection){
+            public void connectionRemoved(Server server, HostedConnection connection) {
                 onClientDisconnected(connection.getId());
             }
         });
@@ -52,59 +48,49 @@ public class NetworkServer extends BaseServer{
     }
 
     @Override
-    public void onClientConnected(int clientID){
-        subServers.put(clientID, new LinkedList<>());
-        super.onClientConnected(clientID);
-        System.out.println("Client #" + clientID + " connected.");
+    public void onClientConnected(int clientId) {
+        super.onClientConnected(clientId);
+        System.out.println("Client #" + clientId + " connected.");
     }
 
     @Override
-    public void onClientDisconnected(int clientID){
-        super.onClientDisconnected(clientID);
-        subServers.remove(clientID);
-        System.out.println("Client #" + clientID + " disconnected.");
+    public void onClientDisconnected(int clientId) {
+        super.onClientDisconnected(clientId);
+        System.out.println("Client #" + clientId + " disconnected.");
+    }
+
+    public SubNetworkServer createSubServer() {
+        SubNetworkServer subNetworkServer = new SubNetworkServer(this);
+        subServers.add(subNetworkServer);
+        return subNetworkServer;
+    }
+
+    public void removeSubServer(SubNetworkServer subNetworkServer) {
+        subServers.remove(subNetworkServer);
     }
 
     @Override
-    public void onMessageReceived(int sourceID, Message message){
-        super.onMessageReceived(sourceID, message);
-        LinkedList<SubNetworkServer> clientSubServers = subServers.get(sourceID);
-        for(SubNetworkServer subServer : clientSubServers){
-            subServer.onMessageReceived(sourceID, message);
-        }
-    }
-    
-    public SubNetworkServer addSubServer(int... clientIDs){
-        SubNetworkServer subServer = new SubNetworkServer(this);
-        for(int clientID : clientIDs){
-            LinkedList<SubNetworkServer> clientSubServers = subServers.get(clientID);
-            clientSubServers.add(subServer);
-            subServer.onClientConnected(clientID);
-        }
-        return subServer;
-    }
-    
-    public void removeSubServer(SubNetworkServer subServer){
-        for(int clientID : subServer.getClientIDs()){
-            LinkedList<SubNetworkServer> clientSubServers = subServers.get(clientID);
-            if(clientSubServers != null){
-                clientSubServers.remove(subServer);
+    public void onMessageReceived(int sourceId, Message message) {
+        super.onMessageReceived(sourceId, message);
+        for (SubNetworkServer subServer : subServers) {
+            if (subServer.contains(sourceId)) {
+                subServer.onMessageReceived(sourceId, message);
             }
         }
     }
-    
+
     @Override
-    public void broadcastMessage(Message message){
+    public void broadcastMessage(Message message) {
         server.broadcast(message);
     }
 
     @Override
-    public void sendMessageToClient(int clientId, Message message){
+    public void sendMessageToClient(int clientId, Message message) {
         server.broadcast(Filters.equalTo(server.getConnection(clientId)), message);
     }
 
     @Override
-    public void close(){
+    public void close() {
         server.close();
         System.out.println("Server closed.");
     }

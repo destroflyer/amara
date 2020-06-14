@@ -4,14 +4,14 @@
  */
 package amara.applications.ingame.shared.maps.visuals;
 
-import com.jme3.math.Vector3f;
 import amara.applications.ingame.shared.maps.MapVisual;
+import com.jme3.math.Vector3f;
 
 /**
  *
  * @author Carl
  */
-public class ModelVisual extends MapVisual{
+public class ModelVisual extends MapVisual {
 
     public ModelVisual(String modelSkinPath, Vector3f position, Vector3f direction, float scale){
         this.modelSkinPath = modelSkinPath;

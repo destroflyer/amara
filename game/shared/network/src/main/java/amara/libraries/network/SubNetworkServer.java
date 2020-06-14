@@ -12,44 +12,52 @@ import com.jme3.network.Message;
  *
  * @author Carl
  */
-public class SubNetworkServer extends BaseServer{
+public class SubNetworkServer extends BaseServer {
 
-    public SubNetworkServer(NetworkServer networkServer){
+    SubNetworkServer(NetworkServer networkServer) {
         this.networkServer = networkServer;
     }
     private NetworkServer networkServer;
-    private LinkedList<Integer> clientIDs = new LinkedList<Integer>();
+    private LinkedList<Integer> clientIds = new LinkedList<>();
 
     @Override
-    public void onClientConnected(int clientID){
-        super.onClientConnected(clientID);
-        clientIDs.add(clientID);
+    public void onClientConnected(int clientId) {
+        super.onClientConnected(clientId);
+        clientIds.add(clientId);
     }
 
     @Override
-    public void onClientDisconnected(int clientID){
-        super.onClientDisconnected(clientID);
-        clientIDs.remove(clientID);
+    public void onClientDisconnected(int clientId) {
+        super.onClientDisconnected(clientId);
+        clientIds.remove(clientId);
     }
 
     @Override
-    public void broadcastMessage(Message message){
-        for(int clientID : clientIDs){
-            sendMessageToClient(clientID, message);
+    public void broadcastMessage(Message message) {
+        for (int clientId : clientIds) {
+            sendMessageToClient(clientId, message);
         }
     }
-    
+
     @Override
-    public void sendMessageToClient(int clientId, Message message){
+    public void sendMessageToClient(int clientId, Message message) {
         networkServer.sendMessageToClient(clientId, message);
     }
 
     @Override
-    public void close(){
+    public void close() {
         networkServer.removeSubServer(this);
     }
 
-    public LinkedList<Integer> getClientIDs(){
-        return clientIDs;
+    public void add(int clientId) {
+        clientIds.add(clientId);
+    }
+
+    public void remove(int clientId) {
+        clientIds.remove(clientId);
+    }
+
+    public boolean contains(int clientId) {
+        return clientIds.contains(clientId);
     }
 }

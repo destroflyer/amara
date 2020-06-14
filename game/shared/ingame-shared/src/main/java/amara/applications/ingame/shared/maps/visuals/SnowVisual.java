@@ -10,9 +10,6 @@ import amara.applications.ingame.shared.maps.MapVisual;
  *
  * @author Carl
  */
-public class SnowVisual extends MapVisual{
+public class SnowVisual extends MapVisual {
 
-    public SnowVisual(){
-        
-    }
 }

@@ -17,12 +17,11 @@ public class PanPlay extends javax.swing.JPanel{
 
     public PanPlay(PanMainMenu panMainMenu){
         initComponents();
-        this.panMainMenu = panMainMenu;
-        panCreateLobby = new PanCreateLobby();
-        panLobby = new PanLobby(this);
-        panGameSelection = new PanGameSelection(this);
+        panSelectGameMode = new PanSelectGameMode();
+        panLobby = new PanLobby();
+        panGameSelection = new PanGameSelection();
         panIngame = new PanIngame();
-        displayCreatePanel();
+        displaySelectGameModelPanel();
         NetworkClient networkClient = MasterserverClientUtil.getNetworkClient();
         networkClient.addMessageBackend(new GenericInformationBackend(panMainMenu));
         networkClient.addMessageBackend(new UpdateLobbyBackend(this));
@@ -33,14 +32,13 @@ public class PanPlay extends javax.swing.JPanel{
         networkClient.addMessageBackend(new GameCreatedBackend(this));
         networkClient.addMessageBackend(new GameOverOrCrashedBackend(this));
     }
-    private PanMainMenu panMainMenu;
-    private PanCreateLobby panCreateLobby;
+    private PanSelectGameMode panSelectGameMode;
     private PanLobby panLobby;
     private PanGameSelection panGameSelection;
     private PanIngame panIngame;
     
-    public void displayCreatePanel(){
-        setDisplayedPanel(panCreateLobby);
+    public void displaySelectGameModelPanel(){
+        setDisplayedPanel(panSelectGameMode);
     }
     
     public void displayLobbyPanel(){
@@ -67,10 +65,6 @@ public class PanPlay extends javax.swing.JPanel{
             return true;
         }
         return false;
-    }
-
-    public PanCreateLobby getPanCreateLobby(){
-        return panCreateLobby;
     }
 
     public PanLobby getPanLobby(){

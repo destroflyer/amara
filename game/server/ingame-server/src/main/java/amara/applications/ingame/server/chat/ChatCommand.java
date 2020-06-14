@@ -5,24 +5,25 @@
  */
 package amara.applications.ingame.server.chat;
 
-import amara.applications.ingame.shared.games.*;
+import amara.applications.master.server.games.Game;
+import amara.applications.master.server.games.GamePlayer;
 import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *
  * @author Carl
  */
-public abstract class ChatCommand{
+public abstract class ChatCommand {
     
     private String responseMessage;
     
     public abstract void execute(String optionString, EntityWorld entityWorld, Game game, GamePlayer gamePlayer);
 
-    public void setResponseMessage(String responseMessage){
+    public void setResponseMessage(String responseMessage) {
         this.responseMessage = responseMessage;
     }
 
-    public String getResponseMessage(){
+    public String getResponseMessage() {
         return responseMessage;
     }
 }

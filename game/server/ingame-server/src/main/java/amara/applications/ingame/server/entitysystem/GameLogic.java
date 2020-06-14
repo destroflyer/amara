@@ -1,4 +1,4 @@
-package amara.applications.ingame.entitysystem;
+package amara.applications.ingame.server.entitysystem;
 
 import amara.applications.ingame.entitysystem.components.game.GameSpeedComponent;
 import amara.applications.ingame.entitysystem.synchronizing.ParallelNetworkSystems;
@@ -46,8 +46,8 @@ import amara.applications.ingame.entitysystem.systems.units.*;
 import amara.applications.ingame.entitysystem.systems.units.scores.*;
 import amara.applications.ingame.entitysystem.systems.visuals.*;
 import amara.applications.ingame.network.messages.objects.commands.PlayerCommand;
-import amara.applications.ingame.shared.games.Game;
 import amara.applications.ingame.shared.maps.Map;
+import amara.applications.master.server.games.Game;
 import amara.core.Queue;
 import amara.libraries.entitysystem.EntitySystem;
 import amara.libraries.entitysystem.EntityWorld;
@@ -240,7 +240,7 @@ public class GameLogic {
         entitySystems.add(new FinishTargetedMovementsSystem());
         entitySystems.add(new CheckHiddenAreasSystem(intersectionObserver));
         // Add 1 for the neutral team
-        entitySystems.add(new TeamVisionSystem(game.getGameSelection().getTeams().length + 1, game.getMap().getPhysicsInformation().generateVisionObstacles()));
+        entitySystems.add(new TeamVisionSystem(game.getTeamsCount() + 1, game.getMap().getPhysicsInformation().generateVisionObstacles()));
         entitySystems.add(new TriggerCollisionEffectSystem(intersectionObserver));
         entitySystems.add(new TriggerCastingFinishedEffectSystem());
         entitySystems.add(new TriggerFinishedObjectivesEffctSystem());
@@ -253,8 +253,10 @@ public class GameLogic {
         entitySystems.add(new MapIntersectionSystem(polyMapManager));
         entitySystems.add(new RespawnableDeathSystem());
         entitySystems.add(new RespawnPlayersSystem(game.getMap()));
+        entitySystems.add(new CleanupPlayersSystem());
         entitySystems.add(new CleanupUnitsSystem());
         entitySystems.add(new CleanupSpellsSystem());
+        entitySystems.add(new CleanupPassivesSystem());
         entitySystems.add(new CleanupMovementsSystem());
         entitySystems.add(new CleanupBuffAreasSystem());
         entitySystems.add(new CleanupBuffsSystem());

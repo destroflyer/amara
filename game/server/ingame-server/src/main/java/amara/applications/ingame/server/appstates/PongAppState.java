@@ -13,14 +13,10 @@ import amara.libraries.network.SubNetworkServer;
  *
  * @author Carl
  */
-public class PongAppState extends ServerBaseAppState{
-
-    public PongAppState(){
-        
-    }
+public class PongAppState extends ServerBaseAppState {
     
     @Override
-    public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
+    public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application) {
         super.initialize(stateManager, application);
         SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();
         subNetworkServer.addMessageBackend(new ReceivePingsBackend());

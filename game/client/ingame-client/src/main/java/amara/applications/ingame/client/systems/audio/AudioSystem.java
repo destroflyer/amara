@@ -6,6 +6,7 @@ package amara.applications.ingame.client.systems.audio;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+
 import com.jme3.audio.AudioNode;
 import com.jme3.audio.AudioSource;
 import com.jme3.math.Vector2f;
@@ -13,7 +14,7 @@ import amara.applications.ingame.entitysystem.components.audio.*;
 import amara.applications.ingame.entitysystem.components.game.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.systems.network.SendEntityChangesSystem;
-import amara.applications.ingame.shared.games.Game;
+import amara.applications.ingame.shared.maps.Map;
 import amara.core.settings.Settings;
 import amara.libraries.applications.display.appstates.AudioAppState;
 import amara.libraries.applications.display.ingame.appstates.IngameCameraAppState;
@@ -71,7 +72,7 @@ public class AudioSystem implements EntitySystem{
             stop(entity);
         }
         updateAudioPositions(entityWorld, observer);
-        GameSpeedComponent gameSpeedComponent = observer.getChanged().getComponent(Game.ENTITY, GameSpeedComponent.class);
+        GameSpeedComponent gameSpeedComponent = observer.getChanged().getComponent(Map.GAME_ENTITY, GameSpeedComponent.class);
         if(gameSpeedComponent != null){
             for(AudioNode audioNode : audioNodes.values()){
                 updateAudioPitch(entityWorld, audioNode);
@@ -197,7 +198,7 @@ public class AudioSystem implements EntitySystem{
     }
     
     private void updateAudioPitch(EntityWorld entityWorld, AudioNode audioNode){
-        float gameSpeed = entityWorld.getComponent(Game.ENTITY, GameSpeedComponent.class).getSpeed();
+        float gameSpeed = entityWorld.getComponent(Map.GAME_ENTITY, GameSpeedComponent.class).getSpeed();
         float audioSpeed = Math.max(0.5f, Math.min(gameSpeed, 2));
         audioNode.setPitch(audioSpeed);
     }
