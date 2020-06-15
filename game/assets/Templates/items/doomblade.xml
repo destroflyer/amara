@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>doomblade</itemID>
+        <itemVisualisation>doomblade</itemVisualisation>
         <name>Doomblade</name>
         <itemRecipe gold="500" itemIDs="rusty_sword,book_of_vampirism"/>
         <isSellable>900</isSellable>

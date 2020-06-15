@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>blinkstrike</itemID>
+        <itemVisualisation>blinkstrike</itemVisualisation>
         <name>Blinkstrike</name>
         <itemRecipe gold="200" itemIDs="reinforced_sword,book_of_extreme_precision"/>
         <isSellable>1000</isSellable>

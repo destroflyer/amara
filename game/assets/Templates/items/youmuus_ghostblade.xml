@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>youmuus_ghostblade</itemID>
+        <itemVisualisation>youmuus_ghostblade</itemVisualisation>
         <name>Youmuu's Ghostblade</name>
         <itemRecipe gold="2700"/>
         <isSellable>1890</isSellable>

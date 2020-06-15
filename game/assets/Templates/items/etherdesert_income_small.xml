@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>etherdesert_income_small</itemID>
+        <itemVisualisation>etherdesert_income_small</itemVisualisation>
         <name>Income (Small)</name>
         <itemRecipe gold="25"/>
         <isSellable>25</isSellable>

@@ -63,9 +63,9 @@ public class DisplayInventoriesSystem extends GUIDisplaySystem<ScreenController_
         if (inventoryComponent != null) {
             int[] items = inventoryComponent.getItemEntities();
             if ((itemIndex < items.length) && (items[itemIndex] != -1)) {
-                ItemIDComponent itemIDComponent = entityWorld.getComponent(items[itemIndex], ItemIDComponent.class);
-                if (itemIDComponent != null) {
-                    fileName = itemIDComponent.getID();
+                ItemVisualisationComponent itemVisualisationComponent = entityWorld.getComponent(items[itemIndex], ItemVisualisationComponent.class);
+                if (itemVisualisationComponent != null) {
+                    fileName = itemVisualisationComponent.getName();
                 } else {
                     fileName = "unknown";
                 }

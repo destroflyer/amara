@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>new_dawn</itemID>
+        <itemVisualisation>new_dawn</itemVisualisation>
         <name>New Dawn</name>
         <itemRecipe gold="600" itemIDs="blinkstrike,greatsword"/>
         <isSellable>2500</isSellable>

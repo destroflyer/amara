@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>egos_shield</itemID>
+        <itemVisualisation>egos_shield</itemVisualisation>
         <name>Ego's Shield</name>
         <itemRecipe gold="400"/>
         <isSellable>250</isSellable>

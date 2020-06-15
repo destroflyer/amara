@@ -2338,6 +2338,15 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent(gold, itemIDs);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.items.ItemVisualisationComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemVisualisationComponent>("itemVisualisation"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.items.ItemVisualisationComponent construct(EntityWorld entityWorld, Element element){
+                String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
+                return new amara.applications.ingame.entitysystem.components.items.ItemVisualisationComponent(name);
+            }
+        });
         //maps
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.maps.MapObjectiveComponent.class);
         try{

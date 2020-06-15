@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>thunderbolt</itemID>
+        <itemVisualisation>thunderbolt</itemVisualisation>
         <name>Thunderbolt</name>
         <itemRecipe gold="500" itemIDs="dagger,wooden_bow,dagger"/>
         <isSellable>1000</isSellable>

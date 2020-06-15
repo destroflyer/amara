@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>egos_sword</itemID>
+        <itemVisualisation>egos_sword</itemVisualisation>
         <name>Ego's Sword</name>
         <itemRecipe gold="400"/>
         <isSellable>250</isSellable>

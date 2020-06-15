@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>boots_of_silence</itemID>
+        <itemVisualisation>boots_of_silence</itemVisualisation>
         <name>Boots of Silence</name>
         <itemRecipe gold="500" itemIDs="wanderers_treads"/>
         <isSellable>500</isSellable>

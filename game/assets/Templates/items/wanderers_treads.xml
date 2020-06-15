@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>wanderers_treads</itemID>
+        <itemVisualisation>wanderers_treads</itemVisualisation>
         <name>Wanderer's Treads</name>
         <itemRecipe gold="350"/>
         <isSellable>250</isSellable>

@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>red_gem</itemID>
+        <itemVisualisation>red_gem</itemVisualisation>
         <name>Red Gem</name>
         <itemRecipe gold="50"/>
         <isSellable>20</isSellable>

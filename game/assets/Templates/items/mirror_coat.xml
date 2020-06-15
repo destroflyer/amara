@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>mirror_coat</itemID>
+        <itemVisualisation>mirror_coat</itemVisualisation>
         <name>Mirror Coat</name>
         <itemRecipe gold="700" itemIDs="cotton_armor,iron_armor"/>
         <isSellable>900</isSellable>

@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>nightkiss</itemID>
+        <itemVisualisation>nightkiss</itemVisualisation>
         <name>Nightkiss</name>
         <itemRecipe gold="500" itemIDs="moonlight,apprentice_rod"/>
         <isSellable>1500</isSellable>

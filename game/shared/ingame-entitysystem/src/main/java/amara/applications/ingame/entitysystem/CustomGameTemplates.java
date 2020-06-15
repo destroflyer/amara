@@ -330,6 +330,7 @@ public class CustomGameTemplates{
             else if(templateName.startsWith("items/etherdesert_tower_")){
                 int towerIndex = Integer.parseInt(templateName.substring("items/etherdesert_tower_".length()));
                 entityWrapper.setComponent(new ItemIDComponent("etherdesert_tower_" + towerIndex));
+                entityWrapper.setComponent(new ItemVisualisationComponent("etherdesert_tower_" + towerIndex));
                 entityWrapper.setComponent(new NameComponent("Tower #" + towerIndex));
                 int[] costs = new int[]{40, 120, 200, 330, 550, 90, 120, 40, 180, 150};
                 entityWrapper.setComponent(new ItemRecipeComponent(costs[towerIndex]));

@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>tiny_scepter</itemID>
+        <itemVisualisation>tiny_scepter</itemVisualisation>
         <name>Tiny Scepter</name>
         <itemRecipe gold="400"/>
         <isSellable>250</isSellable>

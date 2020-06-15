@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>book_of_vitality</itemID>
+        <itemVisualisation>book_of_vitality</itemVisualisation>
         <name>Book of Vitality</name>
         <itemRecipe gold="800"/>
         <isSellable>500</isSellable>

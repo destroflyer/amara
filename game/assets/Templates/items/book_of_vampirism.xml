@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>book_of_vampirism</itemID>
+        <itemVisualisation>book_of_vampirism</itemVisualisation>
         <name>Book of Vampirism</name>
         <itemRecipe gold="400"/>
         <isSellable>250</isSellable>

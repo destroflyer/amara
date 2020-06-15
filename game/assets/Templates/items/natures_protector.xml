@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>natures_protector</itemID>
+        <itemVisualisation>natures_protector</itemVisualisation>
         <name>Nature's Protector</name>
         <itemRecipe gold="400" itemIDs="heavy_leather_armor,enchanted_vesture"/>
         <isSellable>1100</isSellable>

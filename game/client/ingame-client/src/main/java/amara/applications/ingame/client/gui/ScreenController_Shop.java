@@ -240,13 +240,14 @@ public class ScreenController_Shop extends GameScreenController{
                             }
                             final EntityWrapper item = shopFilteredItems.get(itemIndex);
                             final String itemID = item.getComponent(ItemIDComponent.class).getID();
+                            final String itemVisualisation = item.getComponent(ItemVisualisationComponent.class).getName();
                             final ItemRecipe itemRecipe = getItemRecipe(itemID);
                             panel(new PanelBuilder(){{
                                 childLayoutVertical();
                                 width("55px");
 
                                 image(new ImageBuilder("shop_item_" + shopPageID + "_" + itemIndex){{
-                                    filename("Interface/hud/items/" + itemID + ".png");
+                                    filename("Interface/hud/items/" + itemVisualisation + ".png");
                                     width("45px");
                                     height("45px");
                                     
@@ -301,7 +302,7 @@ public class ScreenController_Shop extends GameScreenController{
     }
     
     private void createRecipeContainer(final Element container, final ItemRecipe itemRecipe, final int x, int width, final int depth, final int maximumDepth){
-        final String itemID = StaticEntityWorld.getEntityWorld().getComponent(itemRecipe.getEntity(), ItemIDComponent.class).getID();
+        final String itemVisualisation = StaticEntityWorld.getEntityWorld().getComponent(itemRecipe.getEntity(), ItemVisualisationComponent.class).getName();
         final int recipeContainerPaddingY = ((maximumDepth > 1)?20:50);
         new PanelBuilder(){{
             childLayoutVertical();
@@ -311,7 +312,7 @@ public class ScreenController_Shop extends GameScreenController{
             height(INGREDIENT_HEIGHT + "px");
             
             image(new ImageBuilder(){{
-                filename("Interface/hud/items/" + itemID + ".png");
+                filename("Interface/hud/items/" + itemVisualisation + ".png");
                 width("45px");
                 height("45px");
             }});

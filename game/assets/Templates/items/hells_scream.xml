@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>hells_scream</itemID>
+        <itemVisualisation>hells_scream</itemVisualisation>
         <name>Hell's Scream</name>
         <itemRecipe gold="800" itemIDs="greatsword,doomblade"/>
         <isSellable>2000</isSellable>

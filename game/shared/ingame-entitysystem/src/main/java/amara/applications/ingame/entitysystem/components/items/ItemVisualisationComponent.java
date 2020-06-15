@@ -11,18 +11,18 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class ItemIDComponent {
+public class ItemVisualisationComponent {
 
-    public ItemIDComponent() {
-        
+    public ItemVisualisationComponent() {
+
     }
 
-    public ItemIDComponent(String id) {
-        this.id = id;
+    public ItemVisualisationComponent(String name) {
+        this.name = name;
     }
-    private String id;
+    private String name;
 
-    public String getID() {
-        return id;
+    public String getName() {
+        return name;
     }
 }

@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>arcaneblade</itemID>
+        <itemVisualisation>arcaneblade</itemVisualisation>
         <name>Arcaneblade</name>
         <itemRecipe gold="400" itemIDs="rusty_sword,arcane_vesture"/>
         <isSellable>600</isSellable>

@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>heavy_leather_armor</itemID>
+        <itemVisualisation>heavy_leather_armor</itemVisualisation>
         <name>Heavy Leather Armor</name>
         <itemRecipe gold="600" itemIDs="leather_armor"/>
         <isSellable>750</isSellable>

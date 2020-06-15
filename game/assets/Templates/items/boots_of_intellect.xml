@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>boots_of_intellect</itemID>
+        <itemVisualisation>boots_of_intellect</itemVisualisation>
         <name>Boots of Intellect</name>
         <itemRecipe gold="600" itemIDs="wanderers_treads"/>
         <isSellable>600</isSellable>

@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>moonlight</itemID>
+        <itemVisualisation>moonlight</itemVisualisation>
         <name>Moonlight</name>
         <itemRecipe gold="300" itemIDs="tiny_scepter,book_of_wisdom"/>
         <isSellable>750</isSellable>

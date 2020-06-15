@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>requiem</itemID>
+        <itemVisualisation>requiem</itemVisualisation>
         <name>Reqiuem</name>
         <itemRecipe gold="700" itemIDs="apprentice_rod,enchanted_vesture"/>
         <isSellable>1300</isSellable>

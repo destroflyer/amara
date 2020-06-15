@@ -1,6 +1,10 @@
 package amara.applications.ingame.entitysystem.templates;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
+import amara.applications.ingame.entitysystem.components.general.NameComponent;
+import amara.applications.ingame.entitysystem.components.items.IsSellableComponent;
+import amara.applications.ingame.entitysystem.components.items.ItemVisualisationComponent;
+import amara.applications.ingame.entitysystem.templates.items.RandomItemVisualisation;
 import amara.libraries.entitysystem.EntityWorld;
 
 import java.util.HashMap;
@@ -52,6 +56,9 @@ public class EntityContentGenerator {
 
     private static int createItemEntity(EntityWorld entityWorld, HashMap<Integer, Integer> attributeStats) {
         int itemEntity = entityWorld.createEntity();
+        int totalStats = 0;
+        int highestAttributeIndex = -1;
+        int highestAttributeStat = -1;
         for (Map.Entry<Integer, Integer> entry : attributeStats.entrySet()) {
             int attributeIndex = entry.getKey();
             int attributeStat = entry.getValue();
@@ -69,7 +76,17 @@ public class EntityContentGenerator {
                 case 9: bonusAttributeComponent = new BonusPercentageWalkSpeedComponent(0.01f * attributeStat); break;
             }
             entityWorld.setComponent(itemEntity, bonusAttributeComponent);
+            totalStats += attributeStat;
+            if (attributeStat > highestAttributeStat) {
+                highestAttributeIndex = attributeIndex;
+                highestAttributeStat = attributeStat;
+            }
         }
+        String itemVisualisation = RandomItemVisualisation.getRandomItemVisualisation(highestAttributeIndex);
+        String itemName = RandomItemVisualisation.getRandomItemName(itemVisualisation);
+        entityWorld.setComponent(itemEntity, new ItemVisualisationComponent(itemVisualisation));
+        entityWorld.setComponent(itemEntity, new NameComponent(itemName));
+        entityWorld.setComponent(itemEntity, new IsSellableComponent(totalStats));
         return itemEntity;
     }
 

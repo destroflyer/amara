@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>cotton_armor</itemID>
+        <itemVisualisation>cotton_armor</itemVisualisation>
         <name>Cotton Armor</name>
         <itemRecipe gold="300"/>
         <isSellable>200</isSellable>

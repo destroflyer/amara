@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>greatsword</itemID>
+        <itemVisualisation>greatsword</itemVisualisation>
         <name>Greatsword</name>
         <itemRecipe gold="1100"/>
         <isSellable>800</isSellable>

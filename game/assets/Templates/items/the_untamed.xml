@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>the_untamed</itemID>
+        <itemVisualisation>the_untamed</itemVisualisation>
         <name>The Untamed</name>
         <itemRecipe gold="800" itemIDs="apprentice_rod,tiny_scepter,tiny_scepter"/>
         <isSellable>1500</isSellable>

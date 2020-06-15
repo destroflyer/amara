@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>dagger</itemID>
+        <itemVisualisation>dagger</itemVisualisation>
         <name>Dagger</name>
         <itemRecipe gold="400"/>
         <isSellable>250</isSellable>

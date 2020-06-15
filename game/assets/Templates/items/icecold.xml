@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>icecold</itemID>
+        <itemVisualisation>icecold</itemVisualisation>
         <name>Icecold</name>
         <itemRecipe gold="800" itemIDs="greatsword,rusty_sword"/>
         <isSellable>1500</isSellable>

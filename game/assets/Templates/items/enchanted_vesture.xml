@@ -1,6 +1,7 @@
 <template>
     <entity>
         <itemID>enchanted_vesture</itemID>
+        <itemVisualisation>enchanted_vesture</itemVisualisation>
         <name>Enchanted Vesture</name>
         <itemRecipe gold="300" itemIDs="arcane_vesture"/>
         <isSellable>400</isSellable>
