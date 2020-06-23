@@ -6,6 +6,7 @@ package amara.applications.master.client.launcher.panels;
 
 import java.awt.Dimension;
 import amara.applications.ingame.entitysystem.components.units.*;
+import amara.applications.ingame.shared.maps.cameras.MapCamera_3rdPerson;
 import amara.applications.master.network.messages.objects.*;
 import amara.core.files.FileAssets;
 import amara.core.input.Keys;
@@ -52,7 +53,7 @@ public class PanCharacters_CharacterInfo extends javax.swing.JPanel{
             int spellsCount = 0;
             for(int i=0;i<spellEntities.length;i++){
                 if(spellEntities[i] != -1){
-                    String keyTitle = Keys.getTitle(Settings.getInteger("controls_spells_" + i));
+                    String keyTitle = Keys.getTitle(Settings.getInteger("controls_" + MapCamera_3rdPerson.TYPE + "_spells_" + i));
                     PanCharacters_CharacterInfo_Spell panSpell = new PanCharacters_CharacterInfo_Spell(keyTitle, spellEntities[i]);
                     panSpell.setLocation(0, y);
                     panSpell.setSize(734, panelHeight);

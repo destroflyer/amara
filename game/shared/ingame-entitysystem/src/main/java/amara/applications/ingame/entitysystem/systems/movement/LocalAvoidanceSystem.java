@@ -26,7 +26,6 @@ public class LocalAvoidanceSystem implements EntitySystem{
                 Vector2f correctedDirection = correctMovementDirection(entityWorld, entity, direction, deltaSeconds);
                 if(correctedDirection.lengthSquared() > 0){
                     entityWorld.setComponent(movementEntity, new MovementDirectionComponent(correctedDirection));
-                    entityWorld.setComponent(entity, new DirectionComponent(correctedDirection));
                 }
             }
         }

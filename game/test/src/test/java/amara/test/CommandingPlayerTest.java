@@ -27,8 +27,8 @@ public class CommandingPlayerTest extends GameLogicTest {
     public void initializePlayer() {
         player = entityWorld.createEntity();
         character = createEntity(characterTemplate);
-        entityWorld.setComponent(character, new ClientComponent(0));
-        entityWorld.setComponent(character, new PlayerCharacterComponent(character));
+        entityWorld.setComponent(player, new ClientComponent(0));
+        entityWorld.setComponent(player, new PlayerCharacterComponent(character));
         entityWorld.setComponent(character, new PositionComponent(new Vector2f(10, 10)));
         entityWorld.setComponent(character, new DirectionComponent(new Vector2f(0, 1)));
         entityWorld.setComponent(character, new TeamComponent(1));
@@ -42,10 +42,6 @@ public class CommandingPlayerTest extends GameLogicTest {
         return targetDummy;
     }
 
-    protected int getHealth(int entity) {
-        return (int) entityWorld.getComponent(entity, HealthComponent.class).getValue();
-    }
-
     protected float getX(int entity) {
         return getPosition(entity).getX();
     }
@@ -56,5 +52,9 @@ public class CommandingPlayerTest extends GameLogicTest {
 
     private Vector2f getPosition(int entity) {
         return entityWorld.getComponent(entity, PositionComponent.class).getPosition();
+    }
+
+    protected int getHealth(int entity) {
+        return (int) entityWorld.getComponent(entity, HealthComponent.class).getValue();
     }
 }

@@ -12,26 +12,26 @@ import amara.core.settings.types.*;
  *
  * @author Carl
  */
-public class IngameSettings extends SettingsCategory{
+public class IngameSettings extends SettingsCategory {
 
     public IngameSettings(){
-        super(null, "Ingame Settings", new SettingsCategory[]{
-            new SettingsCategory("controls", "Controls", new SettingsCategory[]{
+        super(null, "Ingame Settings", new SettingsCategory[] {
+            new SettingsCategory("controls_topdown", "Controls (top-down)", new SettingsCategory[] {
                 new CategorizedSettingsCategory(
                     "spells", "Spells",
-                    new Setting[]{
+                    new Setting[] {
                         new CategorizedSetting("0", "Spell #1", new KeyType(KeyInput.KEY_Q)),
                         new CategorizedSetting("1", "Spell #2", new KeyType(KeyInput.KEY_W)),
                         new CategorizedSetting("2", "Spell #3", new KeyType(KeyInput.KEY_E)),
                         new CategorizedSetting("3", "Spell #4", new KeyType(KeyInput.KEY_R)),
-                        new CategorizedSetting("backport", "Backport", new KeyType(KeyInput.KEY_B)),
-                        new CategorizedSetting("player_0", "PlayerSpell #1", new KeyType(KeyInput.KEY_D)),
-                        new CategorizedSetting("player_1", "PlayerSpell #2", new KeyType(KeyInput.KEY_F))
+                        new CategorizedSetting("map_0", "MapSpell #1", new KeyType(KeyInput.KEY_D)),
+                        new CategorizedSetting("map_1", "MapSpell #2", new KeyType(KeyInput.KEY_F)),
+                        new CategorizedSetting("map_2", "MapSpell #3", new KeyType(KeyInput.KEY_B))
                     }
                 ),
                 new CategorizedSettingsCategory(
                     "navigation", "Navigation",
-                    new Setting[]{
+                    new Setting[] {
                         new CategorizedSetting("select", "Select", new MouseButtonType(MouseClickEvent.Button.Left)),
                         new CategorizedSetting("walk_attack", "Walk / Attack", new MouseButtonType(MouseClickEvent.Button.Right)),
                         new CategorizedSetting("stop", "Stop", new KeyType(KeyInput.KEY_S))
@@ -54,6 +54,59 @@ public class IngameSettings extends SettingsCategory{
                         new CategorizedSetting("3", "Item #4", new KeyType(KeyInput.KEY_4)),
                         new CategorizedSetting("4", "Item #5", new KeyType(KeyInput.KEY_5)),
                         new CategorizedSetting("5", "Item #6", new KeyType(KeyInput.KEY_6))
+                    }
+                ),
+                new CategorizedSettingsCategory(
+                    "interface", "Interface",
+                    new Setting[]{
+                        new CategorizedSetting("scoreboard", "Scoreboard", new KeyType(KeyInput.KEY_TAB)),
+                        new CategorizedSetting("shop", "Shop", new KeyType(KeyInput.KEY_P)),
+                        new CategorizedSetting("menu", "Menu", new KeyType(KeyInput.KEY_ESCAPE))
+                    }
+                ),
+                new CategorizedSettingsCategory(
+                    "reactions", "Reactions",
+                    new Setting[]{
+                        new CategorizedSetting("0", "Kappa", new KeyType(KeyInput.KEY_F1)),
+                        new CategorizedSetting("1", "PogChamp", new KeyType(KeyInput.KEY_F2)),
+                        new CategorizedSetting("2", "Kreygasm", new KeyType(KeyInput.KEY_F3)),
+                        new CategorizedSetting("3", "BibleThump", new KeyType(KeyInput.KEY_F4))
+                    }
+                )
+            }),
+            new SettingsCategory("controls_3rdperson", "Controls (3rd person)", new SettingsCategory[] {
+                new CategorizedSettingsCategory(
+                    "spells", "Spells",
+                    new Setting[] {
+                        new CategorizedSetting("0", "Spell #1", new KeyType(KeyInput.KEY_1)),
+                        new CategorizedSetting("1", "Spell #2", new KeyType(KeyInput.KEY_2)),
+                        new CategorizedSetting("2", "Spell #3", new KeyType(KeyInput.KEY_3)),
+                        new CategorizedSetting("3", "Spell #4", new KeyType(KeyInput.KEY_4)),
+                        new CategorizedSetting("map_0", "MapSpell #1", new KeyType(KeyInput.KEY_F)),
+                        new CategorizedSetting("map_1", "MapSpell #2", new KeyType(KeyInput.KEY_G)),
+                        new CategorizedSetting("map_2", "MapSpell #3", new KeyType(KeyInput.KEY_H))
+                    }
+                ),
+                new CategorizedSettingsCategory(
+                    "navigation", "Navigation",
+                    new Setting[] {
+                        new CategorizedSetting("forward", "Forward", new KeyType(KeyInput.KEY_W)),
+                        new CategorizedSetting("left", "Left", new KeyType(KeyInput.KEY_A)),
+                        new CategorizedSetting("backward", "Backward", new KeyType(KeyInput.KEY_S)),
+                        new CategorizedSetting("right", "Right", new KeyType(KeyInput.KEY_D)),
+                        new CategorizedSetting("select", "Select", new MouseButtonType(MouseClickEvent.Button.Left)),
+                        new CategorizedSetting("attack", "Attack", new MouseButtonType(MouseClickEvent.Button.Right))
+                    }
+                ),
+                new CategorizedSettingsCategory(
+                    "items", "Items",
+                    new Setting[]{
+                        new CategorizedSetting("0", "Item #1", new KeyType(KeyInput.KEY_Y)),
+                        new CategorizedSetting("1", "Item #2", new KeyType(KeyInput.KEY_X)),
+                        new CategorizedSetting("2", "Item #3", new KeyType(KeyInput.KEY_C)),
+                        new CategorizedSetting("3", "Item #4", new KeyType(KeyInput.KEY_V)),
+                        new CategorizedSetting("4", "Item #5", new KeyType(KeyInput.KEY_B)),
+                        new CategorizedSetting("5", "Item #6", new KeyType(KeyInput.KEY_N))
                     }
                 ),
                 new CategorizedSettingsCategory(

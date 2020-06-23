@@ -71,7 +71,6 @@ public class TargetedMovementSystem implements EntitySystem{
                             }
                             else{
                                 entityWorld.setComponent(movementEntity, new MovementDirectionComponent(movedDistance));
-                                entityWorld.setComponent(entity, new DirectionComponent(movedDistance));
                             }
                         }
                     }

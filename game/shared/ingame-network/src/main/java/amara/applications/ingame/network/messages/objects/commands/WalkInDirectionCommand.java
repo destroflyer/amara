@@ -12,18 +12,18 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class MoveCommand extends Command{
+public class WalkInDirectionCommand extends Command {
 
-    public MoveCommand(){
-        
-    }
-    
-    public MoveCommand(Vector2f position){
-        this.position = position;
-    }
-    private Vector2f position;
+    public WalkInDirectionCommand() {
 
-    public Vector2f getPosition(){
-        return position;
+    }
+
+    public WalkInDirectionCommand(Vector2f direction) {
+        this.direction = direction;
+    }
+    private Vector2f direction;
+
+    public Vector2f getDirection() {
+        return direction;
     }
 }

@@ -17,7 +17,7 @@ import amara.applications.ingame.client.network.debug.frame.NetworkLoadDisplay;
 import amara.applications.ingame.network.messages.*;
 import amara.applications.master.network.messages.objects.PlayerProfileData;
 import amara.core.input.Event;
-import amara.core.input.events.KeyPressedEvent;
+import amara.core.input.events.KeyEvent;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.network.*;
@@ -55,9 +55,9 @@ public class ClientChatAppState extends BaseDisplayAppState<IngameClientApplicat
         Iterator<Event> eventsIterator = getAppState(EventManagerAppState.class).getEventQueue().getIterator();
         while(eventsIterator.hasNext()){
             Event event = eventsIterator.next();
-            if(event instanceof KeyPressedEvent){
-                KeyPressedEvent keyPressedEvent = (KeyPressedEvent) event;
-                switch(keyPressedEvent.getKeyCode()){
+            if(event instanceof KeyEvent){
+                KeyEvent keyEvent = (KeyEvent) event;
+                switch(keyEvent.getKeyCode()){
                     case KeyInput.KEY_RETURN:
                         screenController_Chat.setChatVisible_Input(true);
                         screenController_Chat.setChatVisible_Output(true);

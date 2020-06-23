@@ -23,7 +23,7 @@ public class MovementSystem implements EntitySystem {
         for (int entity : entityWorld.getEntitiesWithAny(MovementComponent.class)) {
             if (canMove(entityWorld, entity) || isDisplaced(entityWorld, entity)) {
                 int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
-                if (entityWorld.hasAllComponents(movementEntity, MovementDirectionComponent.class, MovementSpeedComponent.class)) {
+                if (isMovementReadyToProceed(entityWorld, movementEntity)) {
                     Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
                     Vector2f direction = entityWorld.getComponent(movementEntity, MovementDirectionComponent.class).getDirection();
                     float speed = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class).getSpeed();
@@ -42,6 +42,11 @@ public class MovementSystem implements EntitySystem {
         }
     }
 
+    private boolean isMovementReadyToProceed(EntityWorld entityWorld, int movementEntity) {
+        return entityWorld.hasAllComponents(movementEntity, MovementDirectionComponent.class, MovementSpeedComponent.class)
+          && (!entityWorld.hasComponent(movementEntity, MovementTargetReachedComponent.class));
+    }
+
     public static boolean canMove(EntityWorld entityWorld, int entity) {
         return (CastSpellSystem.isAbleToPerformAction(entityWorld, entity) && (!entityWorld.hasComponent(entity, IsBindedComponent.class)));
     }
@@ -49,16 +54,24 @@ public class MovementSystem implements EntitySystem {
     public static boolean hasUncancelableMovement(EntityWorld entityWorld, int entity) {
         MovementComponent movementComponent = entityWorld.getComponent(entity, MovementComponent.class);
         if (movementComponent != null) {
-            return ((!entityWorld.hasComponent(movementComponent.getMovementEntity(), MovementIsCancelableComponent.class)) || isDisplaced(entityWorld, entity));
+            return isMovementUncancelable(entityWorld, movementComponent.getMovementEntity());
         }
         return false;
+    }
+
+    public static boolean isMovementUncancelable(EntityWorld entityWorld, int movementEntity) {
+        return ((!entityWorld.hasComponent(movementEntity, MovementIsCancelableComponent.class)) || isMovementDisplacement(entityWorld, movementEntity));
     }
 
     public static boolean isDisplaced(EntityWorld entityWorld, int entity) {
         MovementComponent movementComponent = entityWorld.getComponent(entity, MovementComponent.class);
         if (movementComponent != null) {
-            return entityWorld.hasComponent(movementComponent.getMovementEntity(), DisplacementComponent.class);
+            return isMovementDisplacement(entityWorld, movementComponent.getMovementEntity());
         }
         return false;
+    }
+
+    private static boolean isMovementDisplacement(EntityWorld entityWorld, int movementEtity) {
+        return entityWorld.hasComponent(movementEtity, DisplacementComponent.class);
     }
 }

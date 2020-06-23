@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <map author="Carl" date="1394285890116" class="amara.applications.ingame.shared.maps.EmptyMap">
-	<camera initialPosition="22,34,-10" initialDirection="0.0,-1.0,0.6745">
+	<camera type="topdown" initialPosition="22,34,-10" initialDirection="0.0,-1.0,0.6745">
 		<zoom interval="1.0" initialDistance="40.0" />
 	</camera>
 	<lights>

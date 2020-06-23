@@ -15,9 +15,9 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ComponentField{
-    
-    public enum Type{
+public @interface ComponentField {
+
+    enum Type {
         ENTITY,
         TIMER,
         DISTANCE,

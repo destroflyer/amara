@@ -49,10 +49,19 @@ public class UnitUtil{
         triggerActionCancelledTriggers(entityWorld, entity);
         removeTemporaryTriggers(entityWorld, entity, CastingFinishedTriggerComponent.class);
     }
-    
-    public static void cancelMovement(EntityWorld entityWorld, int entity){
+
+    public static void tryStopMovement(EntityWorld entityWorld, int entity) {
         MovementComponent movementComponent = entityWorld.getComponent(entity, MovementComponent.class);
-        if(movementComponent != null){
+        if (movementComponent != null) {
+            if (!MovementSystem.isMovementUncancelable(entityWorld, movementComponent.getMovementEntity())) {
+                cancelMovement(entityWorld, entity);
+            }
+        }
+    }
+
+    public static void cancelMovement(EntityWorld entityWorld, int entity) {
+        MovementComponent movementComponent = entityWorld.getComponent(entity, MovementComponent.class);
+        if (movementComponent != null) {
             entityWorld.removeComponent(entity, MovementComponent.class);
             entityWorld.removeEntity(movementComponent.getMovementEntity());
             removeTemporaryTriggers(entityWorld, entity, TargetReachedTriggerComponent.class);

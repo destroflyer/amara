@@ -64,9 +64,9 @@ public class EventManagerAppState extends BaseDisplayAppState implements ActionL
             eventQueue.add(new MouseClickEvent(MouseClickEvent.Button.Middle, getMousePosition()));
         } else if (actionName.equals("mouse_click_right") && value) {
             eventQueue.add(new MouseClickEvent(MouseClickEvent.Button.Right, getMousePosition()));
-        } else if (actionName.startsWith(ACTION_NAME_PREFIX_KEY_PRESSED) && value) {
+        } else if (actionName.startsWith(ACTION_NAME_PREFIX_KEY_PRESSED)) {
             int keyCode = Integer.parseInt(actionName.substring(ACTION_NAME_PREFIX_KEY_PRESSED.length()));
-            eventQueue.add(new KeyPressedEvent(keyCode));
+            eventQueue.add(new KeyEvent(keyCode, value));
         }
     }
     

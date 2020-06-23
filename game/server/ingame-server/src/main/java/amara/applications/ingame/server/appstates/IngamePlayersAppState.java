@@ -88,10 +88,13 @@ public class IngamePlayersAppState extends ServerBaseAppState {
 
         entityWorld.setComponent(playerEntity, new NameComponent(playerName));
         int characterEntity = createCharacterEntity(entityWorld, playerName, characterId, skinId);
-        int[][] mapSpellsIndices = player.getGameSelectionPlayerData().getMapSpellsIndices();
-        entityWorld.setComponent(characterEntity, createMapSpells(entityWorld, map, mapSpellsIndices));
         entityWorld.setComponent(playerEntity, new PlayerCharacterComponent(characterEntity));
         map.initializePlayer(entityWorld, playerEntity);
+
+        // Has to happen after initializePlayer as player-specific map spells have to be ugly modified there
+        int[][] mapSpellsIndices = player.getGameSelectionPlayerData().getMapSpellsIndices();
+        entityWorld.setComponent(characterEntity, createMapSpells(entityWorld, map, mapSpellsIndices));
+
         map.spawnPlayer(entityWorld, playerEntity);
 
         player.setEntity(playerEntity);

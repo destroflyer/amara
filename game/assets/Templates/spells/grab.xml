@@ -60,6 +60,7 @@
                             <entity>
                                 <movementTarget>[parameter0]</movementTarget>
                                 <movementSpeed>9</movementSpeed>
+                                <movementTurnInDirection/>
                             </entity>
                         </move>
                     </entity>

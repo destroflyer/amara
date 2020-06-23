@@ -229,10 +229,12 @@ public class GameLogic {
         entitySystems.add(new CheckDeadCampsRespawnSystem());
         entitySystems.add(new CampSpawnSystem());
         entitySystems.add(new RemoveFinishedMovementsSystem());
+        entitySystems.add(new InnateWalkSystem());
         entitySystems.add(new PlayMovementAnimationsSystem());
         entitySystems.add(new UpdateWalkMovementsSystem());
         entitySystems.add(new TargetedMovementSystem(intersectionObserver, polyMapManager));
         entitySystems.add(new LocalAvoidanceSystem());
+        entitySystems.add(new TurnInMovementDirectionSystem());
         entitySystems.add(new MovementSystem());
         entitySystems.add(new CheckDistanceLimitMovementsSystem());
         entitySystems.add(new TransformOriginsSystem());

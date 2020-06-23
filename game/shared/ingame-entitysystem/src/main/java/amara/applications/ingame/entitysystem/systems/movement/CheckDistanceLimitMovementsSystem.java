@@ -12,16 +12,16 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class CheckDistanceLimitMovementsSystem implements EntitySystem{
-    
+public class CheckDistanceLimitMovementsSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAny(MovementComponent.class)){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int entity : entityWorld.getEntitiesWithAny(MovementComponent.class)) {
             int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
             DistanceLimitComponent distanceLimitComponent = entityWorld.getComponent(movementEntity, DistanceLimitComponent.class);
-            if(distanceLimitComponent != null){
+            if (distanceLimitComponent != null) {
                 MovedDistanceComponent movedDistanceComponent = entityWorld.getComponent(movementEntity, MovedDistanceComponent.class);
-                if((movedDistanceComponent != null) && (movedDistanceComponent.getDistance() >= distanceLimitComponent.getDistance())){
+                if ((movedDistanceComponent != null) && (movedDistanceComponent.getDistance() >= distanceLimitComponent.getDistance())) {
                     entityWorld.setComponent(movementEntity, new MovementTargetReachedComponent());
                 }
             }

@@ -2566,6 +2566,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.movements.MovementTargetSufficientDistanceComponent(distance);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.movements.MovementTurnInDirectionComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementTurnInDirectionComponent>("movementTurnInDirection"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.movements.MovementTurnInDirectionComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.movements.MovementTurnInDirectionComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.movements.WalkMovementComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.WalkMovementComponent>("walkMovement"){
 
@@ -4284,6 +4292,18 @@ public class ComponentsRegistrator{
                     remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.InCombatComponent(remainingDuration);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.InnateWalkDirectionComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.InnateWalkDirectionComponent>("innateWalkDirection"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.InnateWalkDirectionComponent construct(EntityWorld entityWorld, Element element){
+                String[] directionCoordinates = element.getText().split(",");
+                float directionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[0]));
+                float directionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[1]));
+                Vector2f direction = new Vector2f(directionX, directionY);
+                return new amara.applications.ingame.entitysystem.components.units.InnateWalkDirectionComponent(direction);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent.class);

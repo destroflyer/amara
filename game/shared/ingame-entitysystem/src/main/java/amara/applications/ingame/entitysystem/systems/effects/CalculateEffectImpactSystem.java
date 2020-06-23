@@ -181,6 +181,7 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                             }
                             else if(component instanceof TargetedMovementTargetComponent){
                                 entityWorld.setComponent(movementEntity, new MovementTargetComponent(effectCastTargetComponent.getTargetEntity()));
+                                entityWorld.setComponent(movementEntity, new MovementTurnInDirectionComponent());
                             }
                             else{
                                 entityWorld.setComponent(movementEntity, component);

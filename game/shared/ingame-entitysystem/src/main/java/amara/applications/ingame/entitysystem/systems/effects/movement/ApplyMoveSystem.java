@@ -13,14 +13,13 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class ApplyMoveSystem implements EntitySystem{
-    
+public class ApplyMoveSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, MoveComponent.class)))
-        {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            int movementEntity = entityWrapper.getComponent(MoveComponent.class).getMovementEntity();
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, MoveComponent.class)) {
+            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
+            int movementEntity = entityWorld.getComponent(effectImpactEntity, MoveComponent.class).getMovementEntity();
             entityWorld.setComponent(targetEntity, new MovementComponent(movementEntity));
         }
     }

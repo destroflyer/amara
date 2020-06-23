@@ -89,6 +89,7 @@ public class ApplySpawnsSystems implements EntitySystem{
                     int movementEntity = entityWorld.createEntity();
                     if(moveToTarget){
                         entityWorld.setComponent(movementEntity, new MovementTargetComponent(targetEntity));
+                        entityWorld.setComponent(movementEntity, new MovementTurnInDirectionComponent());
                         cleanupTemporaryTarget = false;
                     }
                     else if(direction != null){

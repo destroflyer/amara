@@ -13,9 +13,9 @@ import amara.applications.ingame.network.messages.objects.commands.casting.*;
  *
  * @author Carl
  */
-public class MessagesSerializer_Ingame{
-    
-    public static void registerClasses(){
+public class MessagesSerializer_Ingame {
+
+    public static void registerClasses() {
         Serializer.registerClasses(
             Message_Ping.class,
             Message_Pong.class,
@@ -26,16 +26,18 @@ public class MessagesSerializer_Ingame{
                 BuyItemCommand.class,
                 Command.class,
                 LearnSpellCommand.class,
-                MoveCommand.class,
                 SellItemCommand.class,
                 ShowReactionCommand.class,
                 StopCommand.class,
+                StopWalkInDirectionCommand.class,
+                UpgradeSpellCommand.class,
+                WalkInDirectionCommand.class,
+                WalkToTargetCommand.class,
                     CastLinearSkillshotSpellCommand.class,
                     CastPositionalSkillshotSpellCommand.class,
                     CastSelfcastSpellCommand.class,
                     CastSingleTargetSpellCommand.class,
                     SpellIndex.class,
-                UpgradeSpellCommand.class,
             Message_ClientInitialized.class,
             Message_ClientReady.class,
             Message_EntityChanges.class,

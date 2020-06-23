@@ -37,7 +37,7 @@ import static org.mockito.Mockito.when;
 public class GameLogicTest {
 
     private final float TICK_LENGTH = (1f / 60);
-    protected final float EPSILON = 0.0001f;
+    protected final float EPSILON = 0.001f;
 
     private static boolean wasSetupDone = false;
 

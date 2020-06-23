@@ -10,14 +10,20 @@ import amara.core.input.Event;
  *
  * @author Carl
  */
-public class KeyPressedEvent extends Event{
+public class KeyEvent extends Event {
 
-    public KeyPressedEvent(int keyCode){
+    public KeyEvent(int keyCode, boolean pressed) {
         this.keyCode = keyCode;
+        this.pressed = pressed;
     }
     private int keyCode;
+    private boolean pressed;
 
-    public int getKeyCode(){
+    public int getKeyCode() {
         return keyCode;
+    }
+
+    public boolean isPressed() {
+        return pressed;
     }
 }

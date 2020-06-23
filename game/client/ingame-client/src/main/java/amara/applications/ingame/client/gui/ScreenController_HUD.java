@@ -563,6 +563,7 @@ public class ScreenController_HUD extends GameScreenController {
         MapMinimapInformation minimapInformation = mainApplication.getStateManager().getState(MapAppState.class).getMap().getMinimapInformation();
         tmpMapLocation.setX(minimapInformation.getX() + (portionX * minimapInformation.getWidth()));
         tmpMapLocation.setY(minimapInformation.getY() + (portionY * minimapInformation.getHeight()));
+        // TODO: Look in given direction when in 3rd person camera
         mainApplication.getStateManager().getState(IngameCameraAppState.class).lookAt(tmpMapLocation);
     }
 }

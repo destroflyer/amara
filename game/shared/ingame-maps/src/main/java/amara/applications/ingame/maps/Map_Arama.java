@@ -44,8 +44,8 @@ import amara.libraries.physics.shapes.*;
  */
 public class Map_Arama extends Map {
 
-    public Map_Arama(){
-        spells = new MapSpells[]{
+    public Map_Arama() {
+        spells = new MapSpells[] {
             new MapSpells(new String[]{"player_0", "player_1"},
                 new MapSpell("spells/instant_transmission/base"),
                 new MapSpell("spells/bleed_out/base"),

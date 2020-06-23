@@ -16,7 +16,6 @@ import amara.applications.ingame.client.systems.information.*;
 import amara.applications.ingame.client.systems.visualisation.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.types.*;
-import amara.applications.ingame.shared.maps.Map;
 import amara.applications.master.network.messages.objects.GameSelectionPlayer;
 import amara.core.Queue;
 import amara.core.input.Event;
@@ -73,15 +72,18 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         spellIndicatorSystem = new SpellIndicatorSystem(this::getPlayerEntity, localEntitySystemAppState.getEntitySceneMap());
         localEntitySystemAppState.addEntitySystem(spellIndicatorSystem);
         IngameCameraAppState ingameCameraAppState = getAppState(IngameCameraAppState.class);
-        Map map = getAppState(MapAppState.class).getMap();
+        MapAppState mapAppState = getAppState(MapAppState.class);
         lockedCameraSystem = new LockedCameraSystem(this::getPlayerEntity, ingameCameraAppState);
         localEntitySystemAppState.addEntitySystem(lockedCameraSystem);
         localEntitySystemAppState.addEntitySystem(new MoveCameraToPlayerSystem(this::getPlayerEntity, ingameCameraAppState));
+        if (mapAppState.getChaseCamera() != null) {
+            localEntitySystemAppState.addEntitySystem(new ChaseCameraSystem(this::getPlayerEntity, mapAppState.getChaseCamera(), localEntitySystemAppState.getEntitySceneMap()));
+        }
         PostFilterAppState postFilterAppState = getAppState(PostFilterAppState.class);
         localEntitySystemAppState.addEntitySystem(new PlayerDeathDisplaySystem(this::getPlayerEntity, postFilterAppState));
         localEntitySystemAppState.addEntitySystem(new ShopAnimationSystem(this::getPlayerEntity, localEntitySystemAppState.getEntitySceneMap()));
         if (Settings.getFloat("fog_of_war_update_interval") != -1) {
-            fogOfWarSystem = new FogOfWarSystem(playerTeamSystem, postFilterAppState, map.getPhysicsInformation());
+            fogOfWarSystem = new FogOfWarSystem(playerTeamSystem, postFilterAppState, mapAppState.getMap().getPhysicsInformation());
             localEntitySystemAppState.addEntitySystem(fogOfWarSystem);
         }
         ScreenController_HUD screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
@@ -110,7 +112,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardPlayersNamesSystem(screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardScoresSystem(screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardInventoriesSystem(screenController_HUD));
-        localEntitySystemAppState.addEntitySystem(new DisplayMinimapSystem(this, screenController_HUD, map, playerTeamSystem, ownTeamVisionSystem, fogOfWarSystem));
+        localEntitySystemAppState.addEntitySystem(new DisplayMinimapSystem(this, screenController_HUD, mapAppState.getMap(), playerTeamSystem, ownTeamVisionSystem, fogOfWarSystem));
         localEntitySystemAppState.addEntitySystem(new DisplayShopItemsSystem(this, screenController_Shop));
         localEntitySystemAppState.addEntitySystem(new UpdateRecipeCostsSystem(this::getPlayerEntity, screenController_Shop));
 
@@ -203,7 +205,8 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
             if (event instanceof MouseClickEvent) {
                 MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
                 int mouseButtonIndex = mouseClickEvent.getButton().ordinal();
-                if (mouseButtonIndex == Settings.getInteger("controls_navigation_select")) {
+                String mapCameraType = getAppState(MapAppState.class).getMap().getCamera().getType();
+                if (mouseButtonIndex == Settings.getInteger("controls_" + mapCameraType + "_navigation_select")) {
                     if ((cursorHoveredEntity != -1) && isInspectable(entityWorld, cursorHoveredEntity)) {
                         inspectedEntity = cursorHoveredEntity;
                     } else {

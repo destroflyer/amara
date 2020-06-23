@@ -71,50 +71,53 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
     }
 
     @Override
-    public void update(float lastTimePerFrame){
+    public void update(float lastTimePerFrame) {
         super.update(lastTimePerFrame);
-        if(isMovementEnabled){
+        hasMoved = false;
+        if (isMovementEnabled) {
             checkCursorCameraMovement();
             Vector3f movedDistance = new Vector3f();
-            if(moveDirections_Keys[0] || moveDirections_Cursor[0]){
+            if (moveDirections_Keys[0] || moveDirections_Cursor[0]) {
                 movedDistance.addLocal(0, 0, 1);
             }
-            if(moveDirections_Keys[1] || moveDirections_Cursor[1]){
+            if (moveDirections_Keys[1] || moveDirections_Cursor[1]) {
                 movedDistance.addLocal(-1, 0, 0);
             }
-            if(moveDirections_Keys[2] || moveDirections_Cursor[2]){
+            if (moveDirections_Keys[2] || moveDirections_Cursor[2]) {
                 movedDistance.addLocal(0, 0, -1);
             }
-            if(moveDirections_Keys[3] || moveDirections_Cursor[3]){
+            if (moveDirections_Keys[3] || moveDirections_Cursor[3]) {
                 movedDistance.addLocal(1, 0, 0);
             }
-            movedDistance.multLocal(Settings.getFloat("camera_movement_speed") * lastTimePerFrame);
-            Vector3f oldLocation = mainApplication.getCamera().getLocation().clone();
-            mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
-            if(limitMinimum != null){
-                CollisionResult minimumCornerCollisionResult = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, rightBottomCornerScreenLocation).getClosestCollision();
-                CollisionResult maximumCornerCollisionResult = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, leftTopCornerScreenLocation).getClosestCollision();
-                if((minimumCornerCollisionResult != null) && (maximumCornerCollisionResult != null)){
-                    if(((movedDistance.getX() < 0) && (minimumCornerCollisionResult.getContactPoint().getX() < limitMinimum.getX()))
-                    || ((movedDistance.getX() > 0) && (maximumCornerCollisionResult.getContactPoint().getX() > limitMaximum.getX()))){
-                        movedDistance.setX(0);
+            if (movedDistance.length() > 0) {
+                movedDistance.multLocal(Settings.getFloat("camera_movement_speed") * lastTimePerFrame);
+                Vector3f oldLocation = mainApplication.getCamera().getLocation().clone();
+                mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
+                if (limitMinimum != null) {
+                    CollisionResult minimumCornerCollisionResult = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, rightBottomCornerScreenLocation).getClosestCollision();
+                    CollisionResult maximumCornerCollisionResult = mainApplication.getRayCastingResults_Screen(limitSurfaceSpatial, leftTopCornerScreenLocation).getClosestCollision();
+                    if ((minimumCornerCollisionResult != null) && (maximumCornerCollisionResult != null)) {
+                        if (((movedDistance.getX() < 0) && (minimumCornerCollisionResult.getContactPoint().getX() < limitMinimum.getX()))
+                         || ((movedDistance.getX() > 0) && (maximumCornerCollisionResult.getContactPoint().getX() > limitMaximum.getX()))) {
+                            movedDistance.setX(0);
+                        }
+                        if (((movedDistance.getZ() < 0) && (minimumCornerCollisionResult.getContactPoint().getZ() < limitMinimum.getY()))
+                         || ((movedDistance.getZ() > 0) && (maximumCornerCollisionResult.getContactPoint().getZ() > limitMaximum.getY()))) {
+                            movedDistance.setZ(0);
+                        }
+                        mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
                     }
-                    if(((movedDistance.getZ() < 0) && (minimumCornerCollisionResult.getContactPoint().getZ() < limitMinimum.getY()))
-                    || ((movedDistance.getZ() > 0) && (maximumCornerCollisionResult.getContactPoint().getZ() > limitMaximum.getY()))){
-                        movedDistance.setZ(0);
-                    }
-                    mainApplication.getCamera().setLocation(oldLocation.add(movedDistance));
                 }
+                hasMoved = ((!mainApplication.getCamera().getLocation().equals(lastFrameCameraLocation))
+                         || (!mainApplication.getCamera().getRotation().equals(lastFrameCameraRotation)));
             }
         }
-        hasMoved = ((!mainApplication.getCamera().getLocation().equals(lastFrameCameraLocation))
-                               || (!mainApplication.getCamera().getRotation().equals(lastFrameCameraRotation)));
-        if(!hasMoved){
+        if (!hasMoved) {
             lastFrameCameraLocation.set(mainApplication.getCamera().getLocation());
             lastFrameCameraRotation.set(mainApplication.getCamera().getRotation());
         }
     }
-    
+
     private void checkCursorCameraMovement(){
         for(int i=0;i<moveDirections_Cursor.length;i++){
             moveDirections_Cursor[i] = false;
@@ -178,7 +181,7 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
         limitSurfaceSpatial = surfaceSpatial;
     }
 
-    public void zoom(float distance){
+    private void zoom(float distance){
         float newZoomDistance = (currentZoomDistance + distance);
         if(((zoomMinimumDistance == -1) || (newZoomDistance >= zoomMinimumDistance))
         && ((zoomMaximumDistance == -1) || (newZoomDistance <= zoomMaximumDistance))){
@@ -204,10 +207,10 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
         return isVisible(mapLocation, 0);
     }
     
-    public boolean isVisible(Vector2f mapLocation, int screenExtenionSize){
+    public boolean isVisible(Vector2f mapLocation, int screenExtensionSize){
         Vector3f screenLocation = mainApplication.getCamera().getScreenCoordinates(getMapLocation(mapLocation));
-        return ((screenLocation.getX() >= (-1 * screenExtenionSize)) && (screenLocation.getX() < (Settings.getInteger("resolution_width") + screenExtenionSize))
-             && (screenLocation.getY() >= (-1 * screenExtenionSize)) && (screenLocation.getY() < (Settings.getInteger("resolution_height") + screenExtenionSize)));
+        return ((screenLocation.getX() >= (-1 * screenExtensionSize)) && (screenLocation.getX() < (Settings.getInteger("resolution_width") + screenExtensionSize))
+             && (screenLocation.getY() >= (-1 * screenExtensionSize)) && (screenLocation.getY() < (Settings.getInteger("resolution_height") + screenExtensionSize)));
     }
     
     private Vector3f getMapLocation(Vector2f mapLocation){

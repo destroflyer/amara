@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.swing.filechooser.FileFilter;
 
-import com.jme3.math.Vector2f;
-import com.jme3.math.Vector3f;
-import com.jme3.math.ColorRGBA;
+import amara.applications.ingame.shared.maps.cameras.*;
 import amara.applications.ingame.shared.maps.filters.*;
 import amara.applications.ingame.shared.maps.lights.*;
 import amara.applications.ingame.shared.maps.obstacles.*;
@@ -21,6 +19,9 @@ import amara.applications.ingame.shared.maps.visuals.*;
 import amara.core.Util;
 import amara.core.files.*;
 import amara.libraries.physics.shapes.*;
+import com.jme3.math.Vector2f;
+import com.jme3.math.Vector3f;
+import com.jme3.math.ColorRGBA;
 import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -47,38 +48,47 @@ public class MapFileHandler{
             return "Amara map file (*." + FILE_EXTENSION + ")";
         }
     };
-    
-    public static void saveFile(Map map, File file){
-        try{
+
+    public static void saveFile(Map map, File file) {
+        try {
             Element root = new Element("map");
             root.setAttribute("author", System.getProperty("user.name"));
             root.setAttribute("date", "" + System.currentTimeMillis());
             root.setAttribute("class", map.getClass().getName());
             Document document = new Document(root);
-            //Camera
+            // Camera
             Element elementCamera = new Element("camera");
-            elementCamera.setAttribute("initialPosition", "" + generateVectorText(map.getCamera().getInitialPosition()));
-            elementCamera.setAttribute("initialDirection", "" + generateVectorText(map.getCamera().getInitialDirection()));
-            Element elementLimit = new Element("limit");
-            MapCamera_Limit cameraLimit = map.getCamera().getLimit();
-            if(cameraLimit != null){
-                elementLimit.setAttribute("minX", "" + cameraLimit.getMinimum().getX());
-                elementLimit.setAttribute("minY", "" + cameraLimit.getMinimum().getY());
-                elementLimit.setAttribute("maxX", "" + cameraLimit.getMaximum().getX());
-                elementLimit.setAttribute("maxY", "" + cameraLimit.getMaximum().getY());
-                elementCamera.addContent(elementLimit);
-            }
-            MapCamera_Zoom cameraZoom = map.getCamera().getZoom();
+            MapCamera camera = map.getCamera();
+            elementCamera.setAttribute("type", camera.getType());
+            MapCamera_Zoom cameraZoom = camera.getZoom();
             Element elementZoom = new Element("zoom");
             elementZoom.setAttribute("interval", "" + cameraZoom.getInterval());
             elementZoom.setAttribute("initialDistance", "" + cameraZoom.getInitialDistance());
-            if(cameraZoom.getMinimumDistance() != -1){
+            if (cameraZoom.getMinimumDistance() != -1) {
                 elementZoom.setAttribute("minimumDistance", "" + cameraZoom.getMinimumDistance());
             }
-            if(cameraZoom.getMaximumDistance() != -1){
+            if (cameraZoom.getMaximumDistance() != -1) {
                 elementZoom.setAttribute("maximumDistance", "" + cameraZoom.getMaximumDistance());
             }
             elementCamera.addContent(elementZoom);
+            if (camera instanceof MapCamera_TopDown) {
+                MapCamera_TopDown camera_TopDown = (MapCamera_TopDown) camera;
+                elementCamera.setAttribute("initialPosition", "" + generateVectorText(camera_TopDown.getInitialPosition()));
+                elementCamera.setAttribute("initialDirection", "" + generateVectorText(camera_TopDown.getInitialDirection()));
+                Element elementLimit = new Element("limit");
+                MapCamera_Limit cameraLimit = camera_TopDown.getLimit();
+                if (cameraLimit != null) {
+                    elementLimit.setAttribute("minX", "" + cameraLimit.getMinimum().getX());
+                    elementLimit.setAttribute("minY", "" + cameraLimit.getMinimum().getY());
+                    elementLimit.setAttribute("maxX", "" + cameraLimit.getMaximum().getX());
+                    elementLimit.setAttribute("maxY", "" + cameraLimit.getMaximum().getY());
+                    elementCamera.addContent(elementLimit);
+                }
+            } else if (camera instanceof MapCamera_3rdPerson) {
+                MapCamera_3rdPerson camera_3rdPerson = (MapCamera_3rdPerson) camera;
+                elementCamera.setAttribute("initialRotationHorizontal", "" + camera_3rdPerson.getInitialRotationHorizontal());
+                elementCamera.setAttribute("initialRotationVertical", "" + camera_3rdPerson.getInitialRotationVertical());
+            }
             root.addContent(elementCamera);
             //Lights
             Element elementLights = new Element("lights");
@@ -184,7 +194,7 @@ public class MapFileHandler{
             }
             root.addContent(elementVisuals);
             FileManager.putFileContent(file.getPath(), new XMLOutputter().outputString(document));
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.err.println("Error while saving the map: " + ex.toString());
             ex.printStackTrace();
         }
@@ -211,19 +221,12 @@ public class MapFileHandler{
         return null;
     }
 
-    private static Map load(Map map, Element root){
-        try{
-            //Camera
+    private static Map load(Map map, Element root) {
+        try {
+            // Camera
+            MapCamera camera = null;
             Element elementCamera = root.getChild("camera");
-            Vector3f initialPosition = generateVector3f(elementCamera.getAttributeValue("initialPosition"));
-            Vector3f initialDirection = generateVector3f(elementCamera.getAttributeValue("initialDirection"));
-            MapCamera camera = new MapCamera(initialPosition, initialDirection);
-            Element elementLimit = elementCamera.getChild("limit");
-            if(elementLimit != null){
-                Vector2f limitMinimum = new Vector2f(elementLimit.getAttribute("minX").getFloatValue(), elementLimit.getAttribute("minY").getFloatValue());
-                Vector2f limitMaximum = new Vector2f(elementLimit.getAttribute("maxX").getFloatValue(), elementLimit.getAttribute("maxY").getFloatValue());
-                camera.setLimit(new MapCamera_Limit(limitMinimum, limitMaximum));
-            }
+
             Element elementZoom = elementCamera.getChild("zoom");
             float zoomInterval = elementZoom.getAttribute("interval").getFloatValue();
             float zoomInitialDistance = elementZoom.getAttribute("initialDistance").getFloatValue();
@@ -237,8 +240,31 @@ public class MapFileHandler{
             if(attributeZoomMaximumDistance != null){
                 zoomMaximumDistance = attributeZoomMaximumDistance.getFloatValue();
             }
-            camera.setZoom(new MapCamera_Zoom(zoomInterval, zoomInitialDistance, zoomMinimumDistance, zoomMaximumDistance));
+            MapCamera_Zoom zoom = new MapCamera_Zoom(zoomInterval, zoomInitialDistance, zoomMinimumDistance, zoomMaximumDistance);
+
+            String cameraType = elementCamera.getAttributeValue("type");
+            switch (cameraType) {
+                case MapCamera_TopDown.TYPE:
+                    Vector3f initialPosition = generateVector3f(elementCamera.getAttributeValue("initialPosition"));
+                    Vector3f initialDirection = generateVector3f(elementCamera.getAttributeValue("initialDirection"));
+                    MapCamera_Limit limit = null;
+                    Element elementLimit = elementCamera.getChild("limit");
+                    if (elementLimit != null) {
+                        Vector2f limitMinimum = new Vector2f(elementLimit.getAttribute("minX").getFloatValue(), elementLimit.getAttribute("minY").getFloatValue());
+                        Vector2f limitMaximum = new Vector2f(elementLimit.getAttribute("maxX").getFloatValue(), elementLimit.getAttribute("maxY").getFloatValue());
+                        limit = new MapCamera_Limit(limitMinimum, limitMaximum);
+                    }
+                    camera = new MapCamera_TopDown(zoom, initialPosition, initialDirection, limit);
+                    break;
+
+                case MapCamera_3rdPerson.TYPE:
+                    float initialRotationHorizontal = elementCamera.getAttribute("initialRotationHorizontal").getFloatValue();
+                    float initialRotationVertical = elementCamera.getAttribute("initialRotationVertical").getFloatValue();
+                    camera = new MapCamera_3rdPerson(zoom, initialRotationHorizontal, initialRotationVertical);
+                    break;
+            }
             map.setCamera(camera);
+
             //Lights
             Element elementLights = root.getChild("lights");
             for(Object elementLightObject : elementLights.getChildren()){
@@ -339,7 +365,7 @@ public class MapFileHandler{
                 }
             }
             return map;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.err.println("Error while loading the map contents: " + ex.toString());
             ex.printStackTrace();
         }

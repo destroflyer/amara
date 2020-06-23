@@ -15,17 +15,16 @@ import amara.libraries.entitysystem.*;
  *
  * @author Carl
  */
-public class ApplyTeleportSystem implements EntitySystem{
-    
+public class ApplyTeleportSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, TeleportComponent.class)))
-        {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            int targetPositionEntity = entityWrapper.getComponent(TeleportComponent.class).getTargetEntity();
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, TeleportComponent.class)) {
+            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
+            int targetPositionEntity = entityWorld.getComponent(effectImpactEntity, TeleportComponent.class).getTargetEntity();
             Vector2f targetPosition = entityWorld.getComponent(targetPositionEntity, PositionComponent.class).getPosition();
             entityWorld.setComponent(targetEntity, new PositionComponent(targetPosition.clone()));
-            if(entityWorld.hasComponent(targetPositionEntity, TemporaryComponent.class)){
+            if (entityWorld.hasComponent(targetPositionEntity, TemporaryComponent.class)) {
                 entityWorld.removeEntity(targetPositionEntity);
             }
         }

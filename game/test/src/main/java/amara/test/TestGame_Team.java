@@ -17,7 +17,7 @@ public class TestGame_Team extends TestGame {
         String authToken = args[0];
         startServerAndLogin(authToken, networkClient -> {
             networkClient.sendMessage(new Message_CreateLobby());
-            networkClient.sendMessage(new Message_SetLobbyData(new LobbyData("testmap", new TeamFormat(1, 0))));
+            networkClient.sendMessage(new Message_SetLobbyData(new LobbyData("testmap                                                                                                                                                                                                                                                                                                               ", new TeamFormat(1, 0))));
             // networkClient.sendMessage(new Message_AddLobbyBot(new LobbyPlayer_Bot(BotType.EASY, "Bot", new GameSelectionPlayerData(11, null))));
             networkClient.sendMessage(new Message_StartLobbyQueue());
             networkClient.sendMessage(new Message_AcceptGameSelection(true));

@@ -12,6 +12,7 @@
                             <entity>
                                 <movementTarget>[parameter1]</movementTarget>
                                 <movementSpeed>18</movementSpeed>
+                                <movementTurnInDirection/>
                             </entity>
                         </move>
                         <addEffectTriggers>
