@@ -61,7 +61,8 @@ public class IngameSettings extends SettingsCategory {
                     new Setting[]{
                         new CategorizedSetting("scoreboard", "Scoreboard", new KeyType(KeyInput.KEY_TAB)),
                         new CategorizedSetting("shop", "Shop", new KeyType(KeyInput.KEY_P)),
-                        new CategorizedSetting("menu", "Menu", new KeyType(KeyInput.KEY_ESCAPE))
+                        new CategorizedSetting("bag", "Bag", new KeyType(KeyInput.KEY_I)),
+                        new CategorizedSetting("menu", "Menu", new KeyType(KeyInput.KEY_ESCAPE)),
                     }
                 ),
                 new CategorizedSettingsCategory(
@@ -114,6 +115,7 @@ public class IngameSettings extends SettingsCategory {
                     new Setting[]{
                         new CategorizedSetting("scoreboard", "Scoreboard", new KeyType(KeyInput.KEY_TAB)),
                         new CategorizedSetting("shop", "Shop", new KeyType(KeyInput.KEY_P)),
+                        new CategorizedSetting("bag", "Bag", new KeyType(KeyInput.KEY_I)),
                         new CategorizedSetting("menu", "Menu", new KeyType(KeyInput.KEY_ESCAPE))
                     }
                 ),

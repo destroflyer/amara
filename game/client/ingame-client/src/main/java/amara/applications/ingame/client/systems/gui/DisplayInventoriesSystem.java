@@ -5,6 +5,7 @@
 package amara.applications.ingame.client.systems.gui;
 
 import amara.applications.ingame.client.appstates.PlayerAppState;
+import amara.applications.ingame.client.gui.GUIItems;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.client.gui.objects.ItemDescription;
 import amara.applications.ingame.entitysystem.components.items.*;
@@ -19,7 +20,6 @@ public class DisplayInventoriesSystem extends GUIDisplaySystem<ScreenController_
     public DisplayInventoriesSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
         super(playerAppState, screenController_HUD);
     }
-    public static final int ITEM_DESCRIPTION_LINE_LENGTH = 40;
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
@@ -46,31 +46,16 @@ public class DisplayInventoriesSystem extends GUIDisplaySystem<ScreenController_
     }
 
     private void check(EntityWorld entityWorld, String uiPrefix, InventoryComponent inventoryComponent) {
+        int[] itemEntities = ((inventoryComponent != null) ? inventoryComponent.getItemEntities() : null);
         for(int i = 0; i < 6; i++) {
-            String imageFilePath = getItemImageFilePath(entityWorld, inventoryComponent, i);
+            String imageFilePath = GUIItems.getImageFilePath(entityWorld, itemEntities, i);
             screenController.setInventoryItem_Image(uiPrefix, i, imageFilePath);
             if ((inventoryComponent != null) && (i < inventoryComponent.getItemEntities().length) && (inventoryComponent.getItemEntities()[i] != -1)) {
-                String description = ItemDescription.generate_NameAndDescription(entityWorld, inventoryComponent.getItemEntities()[i], ITEM_DESCRIPTION_LINE_LENGTH);
+                String description = ItemDescription.generate_NameAndDescription(entityWorld, inventoryComponent.getItemEntities()[i], GUIItems.DESCRIPTION_LINE_LENGTH);
                 screenController.showInventoryItem_Description(uiPrefix, i, description);
             } else {
                 screenController.hideInventoryItem_Description(uiPrefix, i);
             }
         }
-    }
-
-    public static String getItemImageFilePath(EntityWorld entityWorld, InventoryComponent inventoryComponent, int itemIndex) {
-        String fileName = "none";
-        if (inventoryComponent != null) {
-            int[] items = inventoryComponent.getItemEntities();
-            if ((itemIndex < items.length) && (items[itemIndex] != -1)) {
-                ItemVisualisationComponent itemVisualisationComponent = entityWorld.getComponent(items[itemIndex], ItemVisualisationComponent.class);
-                if (itemVisualisationComponent != null) {
-                    fileName = itemVisualisationComponent.getName();
-                } else {
-                    fileName = "unknown";
-                }
-            }
-        }
-        return "Interface/hud/items/" + fileName + ".png";
     }
 }

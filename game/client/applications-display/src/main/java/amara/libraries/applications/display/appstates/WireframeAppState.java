@@ -23,45 +23,44 @@ import com.jme3.texture.FrameBuffer;
  *
  * @author Carl
  */
-public class WireframeAppState extends BaseDisplayAppState implements ActionListener{
+public class WireframeAppState extends BaseDisplayAppState implements ActionListener {
 
     private WireframeProcessor wireframeProcessor;
 
     @Override
-    public void initialize(AppStateManager stateManager, Application application){
+    public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
         setColor(ColorRGBA.Blue);
-        mainApplication.getInputManager().addMapping("toggle_wireframe_processor", new KeyTrigger(KeyInput.KEY_I));
+        mainApplication.getInputManager().addMapping("toggle_wireframe_processor", new KeyTrigger(KeyInput.KEY_Z));
         mainApplication.getInputManager().addListener(this, "toggle_wireframe_processor");
     }
 
     @Override
-    public void cleanup(){
+    public void cleanup() {
         super.cleanup();
         mainApplication.getInputManager().removeListener(this);
     }
-    
-    public void setColor(ColorRGBA color){
+
+    public void setColor(ColorRGBA color) {
         wireframeProcessor = new WireframeProcessor(color);
     }
 
     @Override
-    public void onAction(String name, boolean isPressed, float lastTimePerFrame){
-        if(name.equals("toggle_wireframe_processor") && isPressed){
+    public void onAction(String name, boolean isPressed, float lastTimePerFrame) {
+        if (name.equals("toggle_wireframe_processor") && isPressed) {
             boolean deactivateWireframe = mainApplication.getViewPort().getProcessors().contains(wireframeProcessor);
-            if(deactivateWireframe){
+            if (deactivateWireframe) {
                 mainApplication.getViewPort().removeProcessor(wireframeProcessor);
-            }
-            else{
+            } else{
                 mainApplication.getViewPort().addProcessor(wireframeProcessor);
             }
             getAppState(PostFilterAppState.class).setEnabled(deactivateWireframe);
         }
     }
-    
-    private class WireframeProcessor implements SceneProcessor{    
+
+    private class WireframeProcessor implements SceneProcessor {
  
-        public WireframeProcessor(ColorRGBA color){
+        public WireframeProcessor(ColorRGBA color) {
             AssetManager assetManager = WireframeAppState.this.mainApplication.getAssetManager();
             wireMaterial = new Material(assetManager, "/Common/MatDefs/Misc/Unshaded.j3md");
             wireMaterial.setColor("Color", color);
@@ -71,37 +70,37 @@ public class WireframeAppState extends BaseDisplayAppState implements ActionList
         private Material wireMaterial;
 
         @Override
-        public void initialize(RenderManager rm, ViewPort vp){
+        public void initialize(RenderManager rm, ViewPort vp) {
             renderManager = rm;
         }
 
         @Override
-        public void reshape(ViewPort vp, int w, int h){
+        public void reshape(ViewPort vp, int w, int h) {
             throw new UnsupportedOperationException("Not supported yet.");
         }
 
         @Override
-        public boolean isInitialized(){
+        public boolean isInitialized() {
             return (renderManager != null);
         }
 
         @Override
-        public void preFrame(float tpf){   
+        public void preFrame(float tpf) {
 
         }
 
         @Override
-        public void postQueue(RenderQueue rq){
+        public void postQueue(RenderQueue rq) {
             renderManager.setForcedMaterial(wireMaterial);
         }
 
         @Override
-        public void postFrame(FrameBuffer out){
+        public void postFrame(FrameBuffer out) {
             renderManager.setForcedMaterial(null);
         }
 
         @Override
-        public void cleanup(){
+        public void cleanup() {
             renderManager.setForcedMaterial(null);
         }
 

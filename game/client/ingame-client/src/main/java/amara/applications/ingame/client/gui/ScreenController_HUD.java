@@ -7,6 +7,7 @@ package amara.applications.ingame.client.gui;
 import com.jme3.math.Vector2f;
 import com.jme3.texture.Texture2D;
 import amara.applications.ingame.client.appstates.*;
+import amara.applications.ingame.client.gui.generators.*;
 import amara.applications.ingame.client.gui.objects.SpellInformation;
 import amara.applications.ingame.shared.maps.MapMinimapInformation;
 import amara.applications.master.network.messages.objects.GameSelectionPlayer;
@@ -14,11 +15,7 @@ import amara.core.Util;
 import amara.libraries.applications.display.appstates.NiftyAppState;
 import amara.libraries.applications.display.gui.GameScreenController;
 import amara.libraries.applications.display.ingame.appstates.*;
-import de.lessvoid.nifty.builder.HoverEffectBuilder;
-import de.lessvoid.nifty.builder.ImageBuilder;
-import de.lessvoid.nifty.builder.PanelBuilder;
-import de.lessvoid.nifty.builder.TextBuilder;
-import de.lessvoid.nifty.controls.scrollpanel.builder.ScrollPanelBuilder;
+import amara.libraries.entitysystem.EntityWorld;
 import de.lessvoid.nifty.effects.Effect;
 import de.lessvoid.nifty.effects.EffectEventId;
 import de.lessvoid.nifty.effects.impl.Hint;
@@ -43,7 +40,9 @@ public class ScreenController_HUD extends GameScreenController {
     //(Since NiftyGUI sometimes seems to be ordering start/end effect methods wrong)
     private SpellInformation action_ShowSpellInformation;
     private boolean action_HideSpellInformation;
-    private int deathRecapPageID;
+    private BagPanelGenerator bagPanelGenerator = new BagPanelGenerator();
+    private ScoreboardGenerator scoreboardGenerator = new ScoreboardGenerator();
+    private DeathRecapGenerator deathRecapGenerator = new DeathRecapGenerator();
 
     @Override
     public void onStartup() {
@@ -254,39 +253,16 @@ public class ScreenController_HUD extends GameScreenController {
     }
     
     public void toggleDisplayDeathRecap(){
-        setDeathRecapVisible(!getElementByID("death_recap_" + deathRecapPageID).isVisible());
+        setDeathRecapVisible(!getElementByID("death_recap_container").isVisible());
     }
     
     public void setDeathRecapVisible(boolean isVisible){
-        getElementByID("death_recap_" + deathRecapPageID).setVisible(isVisible);
+        getElementByID("death_recap_container").setVisible(isVisible);
     }
-    
-    public void setDeathRecapText(final String text){
-        Element deathRecapScrollPanel = getElementByID("death_recap_" + deathRecapPageID);
-        if(deathRecapScrollPanel != null){
-            deathRecapScrollPanel.markForRemoval();
-        }
-        deathRecapPageID++;
-        Element deathRecapContainer = getElementByID("death_recap_container");
-        new ScrollPanelBuilder("death_recap_" + deathRecapPageID){{
-            set("width", "100%");
-            set("height", "250px");
-            set("horizontal", "false");
-            set("style", "nifty-listbox");
-            set("visible","true");
-            
-            panel(new PanelBuilder(){{
-                childLayoutCenter();
-                padding("10px");
-                
-                text(new TextBuilder("death_recap_text"){{
-                    width("100%");
-                    text(text);
-                    textHAlignLeft();
-                    font("Interface/fonts/Verdana_14.fnt");
-                }});
-            }});
-        }}.build(nifty, nifty.getCurrentScreen(), deathRecapContainer);
+
+    public void setDeathRecapText(String text){
+        deathRecapGenerator.setData(text);
+        deathRecapGenerator.update(nifty, "death_recap", "death_recap_container");
     }
     
     public void toggleShopVisible(){
@@ -414,86 +390,25 @@ public class ScreenController_HUD extends GameScreenController {
         getElementByID("upgrade_spell_layer_container").setVisible(false);
         getElementByID("upgrade_spell_layer_images").setVisible(false);
     }
-    
-    public void generateScoreboard(){
-        new PanelBuilder(){{
-            childLayoutVertical();
-            
-            PlayerAppState playerAppState = mainApplication.getStateManager().getState(PlayerAppState.class);
-            GameSelectionPlayer[][] teams = playerAppState.getTeams();
-            if (teams != null) {
-                int _playerIndex = 0;
-                for (int i = 0; i < teams.length; i++) {
-                    final int teamIndex = i;
-                    text(new TextBuilder() {{
-                        height("30px");
-                        textHAlignLeft();
-                        font("Interface/fonts/Verdana_14.fnt");
-                        text("Team #" + (teamIndex + 1));
-                    }});
-                    for (int r = 0; r < teams[i].length; r++) {
-                        final int playerIndex = _playerIndex;
-                        panel(new PanelBuilder("scoreboard_player_" + playerIndex) {{
-                            childLayoutHorizontal();
-                            height("30px");
 
-                            text(new TextBuilder("scoreboard_player_" + playerIndex + "_name") {{
-                                width("200px");
-                                height("30px");
-                                textHAlignLeft();
-                                font("Interface/fonts/Verdana_14.fnt");
-                                text("Player #" + (playerIndex + 1));
-                            }});
-                            text(new TextBuilder("scoreboard_player_" + playerIndex + "_kda") {{
-                                width("40px");
-                                height("30px");
-                                textHAlignCenter();
-                                font("Interface/fonts/Verdana_14.fnt");
-                                text("K/D/A");
-                            }});
-                            panel(new PanelBuilder() {{
-                                width("20px");
-                            }});
-                            text(new TextBuilder("scoreboard_player_" + playerIndex + "_creepscore") {{
-                                width("40px");
-                                height("30px");
-                                textHAlignCenter();
-                                font("Interface/fonts/Verdana_14.fnt");
-                                text("CS");
-                            }});
-                            panel(new PanelBuilder() {{
-                                width("20px");
-                            }});
-                            for (int i = 0; i < 6; i++) {
-                                image(new ImageBuilder("scoreboard_player_" + playerIndex + "_item_" + i + "_image") {{
-                                    width("30px");
-                                    height("30px");
-                                    filename("Interface/hud/items/unknown.png");
-
-                                    onHoverEffect(new HoverEffectBuilder("hint") {{
-                                        effectParameter("hintText", "?");
-                                    }});
-                                }});
-                            }
-                            panel(new PanelBuilder() {{
-                                width("*");
-                            }});
-                        }});
-                        panel(new PanelBuilder() {{
-                            height("5px");
-                        }});
-                        _playerIndex++;
-                    }
-                }
-            } else {
-                // TODO: Scoreboard for MMO maps
-            }
-            panel(new PanelBuilder(){{
-                height("*");
-            }});
-        }}.build(nifty, nifty.getCurrentScreen(), getElementByID("scoreboard_content"));
+    public void setBagItems(EntityWorld entityWorld, int[] bagItemEntities) {
+        bagPanelGenerator.setData(entityWorld, bagItemEntities);
+        bagPanelGenerator.update(nifty, "bag_items", "bag_items_container");
     }
-    
+
+    public void toggleBagVisible(){
+        setBagVisible(!getElementByID("bag_window").isVisible());
+    }
+
+    public void setBagVisible(boolean isVisible){
+        getElementByID("bag_window").setVisible(isVisible);
+    }
+
+    public void generateScoreboard(GameSelectionPlayer[][] teams) {
+        scoreboardGenerator.setData(teams);
+        scoreboardGenerator.update(nifty, "scoreboard", "scoreboard_container");
+    }
+
     public void toggleScoreboardVisible(){
         setScoreboardVisible(!getElementByID("scoreboard_layer").isVisible());
     }

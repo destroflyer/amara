@@ -34,8 +34,8 @@ public class ScreenController_Menu extends GameScreenController{
     private IngameSettings ingameSettings = new IngameSettings();
     private int pageID;
     private int currentCategoryIndex = -1;
-    private HashMap<String, String[]> builtSettings_DropDown = new HashMap<String, String[]>();
-    private HashMap<String, String> editedSettings = new HashMap<String, String>();
+    private HashMap<String, String[]> builtSettings_DropDown = new HashMap<>();
+    private HashMap<String, String> editedSettings = new HashMap<>();
     private String currentEditingSettingKey;
     private boolean isReadingKeyInput;
 
@@ -154,7 +154,7 @@ public class ScreenController_Menu extends GameScreenController{
             set("width", "433px");
             set("height", "100%");
             set("horizontal", "false");
-            set("style", "nifty-listbox");
+            set("style", "nifty-scrollpanel");
 
             panel(new PanelBuilder(){{
                 childLayoutVertical();

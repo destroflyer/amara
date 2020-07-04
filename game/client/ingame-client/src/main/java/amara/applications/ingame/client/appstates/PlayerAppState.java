@@ -60,7 +60,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         super.initialize(stateManager, application);
         EntitySceneMap entitySceneMap = getAppState(LocalEntitySystemAppState.class).getEntitySceneMap();
         ownTeamVisionSystem = new OwnTeamVisionSystem(entitySceneMap, playerTeamSystem);
-        getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class).generateScoreboard();
+        getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class).generateScoreboard(teams);
     }
 
     public void onInitialWorldLoaded() {
@@ -96,6 +96,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new DisplayExperienceSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayAttributesSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayInventoriesSystem(this, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayBagSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayPassivesImagesSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplaySpellsImagesSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayMapSpellsImagesSystem(this, screenController_HUD));

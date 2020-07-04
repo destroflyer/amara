@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
     <useStyles filename="nifty-default-styles.xml"/>
+    <useStyles filename="Interface/styles.xml"/>
     <useControls filename="nifty-default-controls.xml"/>
     <screen id="start" controller="amara.applications.ingame.client.gui.ScreenController_HUD">
         <!--player announcement-->
@@ -763,6 +764,14 @@
                 <panel height="156px"/>
             </panel>
         </layer>
+        <!--bag-->
+        <layer childLayout="absolute">
+            <control id="bag_window" name="window" title="Bag" x="910px" y="180px" width="600px" height="400px" hideOnClose="true" visible="false">
+                <panel id="bag_items_container" childLayout="horizontal" width="100%" height="100%">
+                    <!--Generated ScrollPanel "bag_items"-->
+                </panel>
+            </control>
+        </layer>
         <!--scoreboard-->
         <layer id="scoreboard_layer" childLayout="center" visible="false">
             <panel childLayout="vertical">
@@ -773,7 +782,7 @@
                         <panel width="10px"/>
                         <panel childLayout="vertical">
                             <panel height="10px"/>
-                            <panel id="scoreboard_content" childLayout="vertical">
+                            <panel id="scoreboard_container" childLayout="vertical">
                                 <!--Generated-->
                             </panel>
                             <panel height="10px"/>
@@ -848,7 +857,6 @@
                 </panel>
             </panel>
         </layer>
-        <!--death recap-->
         <layer childLayout="center">
             <panel childLayout="vertical">
                 <panel height="50px"/>
@@ -866,13 +874,15 @@
         <layer id="death_recap_layer" childLayout="center" visible="false">
             <panel childLayout="vertical">
                 <panel height="120px"/>
-                <panel childLayout="horizontal" height="200px">
+                <panel childLayout="horizontal">
                     <panel/>
-                    <panel id="death_recap_container" childLayout="vertical" width="400px">
+                    <panel id="death_recap_wrapper" childLayout="vertical" width="400px" height="278px">
                         <control id="toggle_death_recap_button" name="button" width="100%" height="28px" label="Death Recap">
                             <interact onClick="toggleDisplayDeathRecap()"/>
                         </control>
-                        <!--Generated ScrollPanel "death_recap"-->
+                        <panel id="death_recap_container" childLayout="center" width="100%" height="250px" backgroundColor="#000C">
+                            <!--Generated ScrollPanel "death_recap"-->
+                        </panel>
                     </panel>
                     <panel/>
                 </panel>

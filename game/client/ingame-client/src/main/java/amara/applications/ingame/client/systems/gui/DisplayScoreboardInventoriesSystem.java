@@ -4,6 +4,7 @@
  */
 package amara.applications.ingame.client.systems.gui;
 
+import amara.applications.ingame.client.gui.GUIItems;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.client.gui.objects.ItemDescription;
 import amara.applications.ingame.entitysystem.components.items.*;
@@ -38,11 +39,12 @@ public class DisplayScoreboardInventoriesSystem extends PlayersDisplaySystem {
 
     private void update_Inventory(EntityWorld entityWorld, int playerIndex,int scoreEntity) {
         InventoryComponent inventoryComponent = entityWorld.getComponent(scoreEntity, InventoryComponent.class);
+        int[] itemEntities = ((inventoryComponent != null) ? inventoryComponent.getItemEntities() : null);
         for (int i = 0; i < 6; i++) {
-            String imageFilePath = DisplayInventoriesSystem.getItemImageFilePath(entityWorld, inventoryComponent, i);
+            String imageFilePath = GUIItems.getImageFilePath(entityWorld, itemEntities, i);
             screenController_HUD.setScoreboard_InventoryItem_Image(playerIndex, i, imageFilePath);
             if ((i < inventoryComponent.getItemEntities().length) && (inventoryComponent.getItemEntities()[i] != -1) ){
-                String description = ItemDescription.generate_NameAndDescription(entityWorld, inventoryComponent.getItemEntities()[i], DisplayInventoriesSystem.ITEM_DESCRIPTION_LINE_LENGTH);
+                String description = ItemDescription.generate_NameAndDescription(entityWorld, inventoryComponent.getItemEntities()[i], GUIItems.DESCRIPTION_LINE_LENGTH);
                 screenController_HUD.showScoreboard_InventoryItem_Description(playerIndex, i, description);
             } else{
                 screenController_HUD.hideScoreboard_InventoryItem_Description(playerIndex, i);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
     <useStyles filename="nifty-default-styles.xml"/>
+    <useStyles filename="Interface/styles.xml"/>
     <useControls filename="nifty-default-controls.xml"/>
     <screen id="start" controller="amara.applications.ingame.client.gui.ScreenController_Shop">
         <layer childLayout="absolute">
@@ -110,7 +111,7 @@
                                 <panel width="10px"/>
                                 <text id="shop_item_information_name" height="100%" text="???" font="Interface/fonts/Verdana_14.fnt" textHAlign="left"/>
                             </panel>
-                            <panel id="shop_item_information_recipe" childLayout="absolute" width="100%" backgroundColor="#666F"/>
+                            <panel id="shop_item_information_recipe" childLayout="absolute" width="100%" backgroundColor="#000C"/>
                             <panel childLayout="horizontal" width="100%" height="108px" backgroundColor="#000A">
                                 <panel width="10px"/>
                                 <panel childLayout="vertical">

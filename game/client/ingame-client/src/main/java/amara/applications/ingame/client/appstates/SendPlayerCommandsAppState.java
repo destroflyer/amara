@@ -144,6 +144,9 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
                             } else if (keyCode == Settings.getInteger(controlsCameraPrefix + "interface_shop")) {
                                 screenController_Shop.toggleShopVisible();
                                 keyWasNotFound = false;
+                            } else if (keyCode == Settings.getInteger(controlsCameraPrefix + "interface_bag")) {
+                                screenController_HUD.toggleBagVisible();
+                                keyWasNotFound = false;
                             } else if (keyCode == Settings.getInteger(controlsCameraPrefix + "interface_menu")) {
                                 screenController_Menu.toggleMenuVisible();
                                 keyWasNotFound = false;

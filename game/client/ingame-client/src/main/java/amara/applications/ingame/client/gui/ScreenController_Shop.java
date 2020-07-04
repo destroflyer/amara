@@ -6,6 +6,7 @@ package amara.applications.ingame.client.gui;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+
 import com.jme3.math.FastMath;
 import amara.applications.ingame.client.appstates.SendPlayerCommandsAppState;
 import amara.applications.ingame.client.gui.objects.ItemRecipe;
@@ -218,7 +219,7 @@ public class ScreenController_Shop extends GameScreenController{
         new ScrollPanelBuilder("shop_available_items_" + shopPageID){{
             set("height", "100%");
             set("horizontal", "false");
-            set("style", "nifty-listbox");
+            set("style", "nifty-scrollpanel");
             
             final int rows = (int) FastMath.ceil(((float) shopFilteredItems.size()) / ITEMS_PER_ROW);
             panel(new PanelBuilder(){{
@@ -240,17 +241,17 @@ public class ScreenController_Shop extends GameScreenController{
                             }
                             final EntityWrapper item = shopFilteredItems.get(itemIndex);
                             final String itemID = item.getComponent(ItemIDComponent.class).getID();
-                            final String itemVisualisation = item.getComponent(ItemVisualisationComponent.class).getName();
                             final ItemRecipe itemRecipe = getItemRecipe(itemID);
                             panel(new PanelBuilder(){{
                                 childLayoutVertical();
                                 width("55px");
 
                                 image(new ImageBuilder("shop_item_" + shopPageID + "_" + itemIndex){{
-                                    filename("Interface/hud/items/" + itemVisualisation + ".png");
+                                    String imageFilePath = GUIItems.getImageFilePath(StaticEntityWorld.getEntityWorld(), item.getId());
+                                    filename(imageFilePath);
                                     width("45px");
                                     height("45px");
-                                    
+
                                     interactOnClick("buyItem(" + itemID + ")");
                                     setHoverEffect(this, "showShopItemInformation(" + itemID + ")", "hideShopItemInformation()");
                                 }});
@@ -273,7 +274,7 @@ public class ScreenController_Shop extends GameScreenController{
                                         width("1px");
                                     }});
                                     text(new TextBuilder(){{
-                                        text("" + getRecipeGoldText(itemRecipe));
+                                        text(getRecipeGoldText(itemRecipe));
                                         font("Interface/fonts/Verdana_12.fnt");
                                     }});
                                     panel(new PanelBuilder());
@@ -302,7 +303,6 @@ public class ScreenController_Shop extends GameScreenController{
     }
     
     private void createRecipeContainer(final Element container, final ItemRecipe itemRecipe, final int x, int width, final int depth, final int maximumDepth){
-        final String itemVisualisation = StaticEntityWorld.getEntityWorld().getComponent(itemRecipe.getEntity(), ItemVisualisationComponent.class).getName();
         final int recipeContainerPaddingY = ((maximumDepth > 1)?20:50);
         new PanelBuilder(){{
             childLayoutVertical();
@@ -312,7 +312,8 @@ public class ScreenController_Shop extends GameScreenController{
             height(INGREDIENT_HEIGHT + "px");
             
             image(new ImageBuilder(){{
-                filename("Interface/hud/items/" + itemVisualisation + ".png");
+                String imageFilePath = GUIItems.getImageFilePath(StaticEntityWorld.getEntityWorld(), itemRecipe.getEntity());
+                filename(imageFilePath);
                 width("45px");
                 height("45px");
             }});
