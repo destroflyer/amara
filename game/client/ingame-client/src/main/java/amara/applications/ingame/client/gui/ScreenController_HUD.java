@@ -4,11 +4,11 @@
  */
 package amara.applications.ingame.client.gui;
 
-import com.jme3.math.Vector2f;
-import com.jme3.texture.Texture2D;
 import amara.applications.ingame.client.appstates.*;
 import amara.applications.ingame.client.gui.generators.*;
 import amara.applications.ingame.client.gui.objects.SpellInformation;
+import amara.applications.ingame.network.messages.objects.commands.ItemIndex;
+import amara.applications.ingame.network.messages.objects.commands.SwapItemsCommand;
 import amara.applications.ingame.shared.maps.MapMinimapInformation;
 import amara.applications.master.network.messages.objects.GameSelectionPlayer;
 import amara.core.Util;
@@ -16,6 +16,10 @@ import amara.libraries.applications.display.appstates.NiftyAppState;
 import amara.libraries.applications.display.gui.GameScreenController;
 import amara.libraries.applications.display.ingame.appstates.*;
 import amara.libraries.entitysystem.EntityWorld;
+import com.jme3.math.Vector2f;
+import com.jme3.texture.Texture2D;
+import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.DroppableDroppedEvent;
 import de.lessvoid.nifty.effects.Effect;
 import de.lessvoid.nifty.effects.EffectEventId;
 import de.lessvoid.nifty.effects.impl.Hint;
@@ -480,5 +484,17 @@ public class ScreenController_HUD extends GameScreenController {
         tmpMapLocation.setY(minimapInformation.getY() + (portionY * minimapInformation.getHeight()));
         // TODO: Look in given direction when in 3rd person camera
         mainApplication.getStateManager().getState(IngameCameraAppState.class).lookAt(tmpMapLocation);
+    }
+
+    @NiftyEventSubscriber(pattern=".*")
+    public void onDrop(String id, DroppableDroppedEvent event) {
+        if (id.startsWith("bag_items")) {
+            int bagItemIndex1 = bagPanelGenerator.getItemIndex(event.getSource());
+            int bagItemIndex2 = bagPanelGenerator.getItemIndex(event.getTarget());
+            ItemIndex itemIndex1 = new ItemIndex(ItemIndex.ItemSet.BAG, bagItemIndex1);
+            ItemIndex itemIndex2 = new ItemIndex(ItemIndex.ItemSet.BAG, bagItemIndex2);
+            SendPlayerCommandsAppState sendPlayerCommandsAppState = mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class);
+            sendPlayerCommandsAppState.sendCommand(new SwapItemsCommand(itemIndex1, itemIndex2));
+        }
     }
 }

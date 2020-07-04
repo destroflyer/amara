@@ -7,6 +7,9 @@ import amara.applications.ingame.entitysystem.components.items.IsSellableCompone
 import amara.libraries.entitysystem.EntityWorld;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.*;
+import de.lessvoid.nifty.controls.Droppable;
+import de.lessvoid.nifty.controls.dragndrop.builder.DraggableBuilder;
+import de.lessvoid.nifty.controls.dragndrop.builder.DroppableBuilder;
 import de.lessvoid.nifty.controls.scrollpanel.builder.ScrollPanelBuilder;
 
 public class BagPanelGenerator extends ElementGenerator {
@@ -32,7 +35,7 @@ public class BagPanelGenerator extends ElementGenerator {
 
             panel(new PanelBuilder(){{
                 childLayoutVertical();
-                height(((BAG_ITEMS_ROWS * BAG_ITEMS_ROW_HEIGHT) + 10) + "px");
+                height((BAG_ITEMS_ROWS * BAG_ITEMS_ROW_HEIGHT) + "px");
                 padding("10px");
 
                 for (int i = 0; i < BAG_ITEMS_ROWS; i++) {
@@ -49,20 +52,44 @@ public class BagPanelGenerator extends ElementGenerator {
                             }
                             int itemEntity = _itemEntity;
                             panel(new PanelBuilder(){{
-                                childLayoutVertical();
                                 width("55px");
+                                childLayoutVertical();
+                                if (itemEntity != -1) {
+                                    String description = ItemDescription.generate_NameAndDescription(entityWorld, itemEntity, GUIItems.DESCRIPTION_LINE_LENGTH);
+                                    onHoverEffect(new HoverEffectBuilder("hint").effectParameter("hintText", description));
+                                }
 
-                                image(new ImageBuilder(){{
-                                    String imageFilePath = GUIItems.getImageFilePath(entityWorld, bagItemEntities, itemIndex);
-                                    filename(imageFilePath);
+                                control(new DroppableBuilder(id + "_droppable_" + itemIndex){{
                                     width("45px");
                                     height("45px");
+                                    backgroundImage(GUIItems.getImageFilePath(entityWorld, -1));
+                                    childLayoutCenter();
 
-                                    if (itemEntity != -1) {
-                                        String description = ItemDescription.generate_NameAndDescription(entityWorld, itemEntity, GUIItems.DESCRIPTION_LINE_LENGTH);
-                                        onHoverEffect(new HoverEffectBuilder("hint").effectParameter("hintText", description));
+                                    // Item image
+                                    int itemEntity = GUIItems.getItemEntity(bagItemEntities, itemIndex);
+                                    String imageFilePath = GUIItems.getImageFilePath(entityWorld, itemEntity);
+                                    if (itemEntity == -1) {
+                                        image(new ImageBuilder(){{
+                                            width("100%");
+                                            height("100%");
+                                            filename(imageFilePath);
+                                        }});
+                                    } else {
+                                        control(new DraggableBuilder(id + "_draggable_" + itemIndex){{
+                                            width("45px");
+                                            height("45px");
+                                            childLayoutCenter();
+
+                                            image(new ImageBuilder(){{
+                                                width("100%");
+                                                height("100%");
+                                                filename(imageFilePath);
+                                            }});
+                                        }});
                                     }
                                 }});
+
+                                // Gold
                                 IsSellableComponent isSellableComponent = entityWorld.getComponent(itemEntity, IsSellableComponent.class);
                                 if (isSellableComponent != null) {
                                     panel(new PanelBuilder(){{
@@ -97,5 +124,10 @@ public class BagPanelGenerator extends ElementGenerator {
                 panel(new PanelBuilder());
             }});
         }};
+    }
+
+    public int getItemIndex(Droppable droppable) {
+        String[] parts = droppable.getId().split("_");
+        return Integer.parseInt(parts[parts.length - 1]);
     }
 }

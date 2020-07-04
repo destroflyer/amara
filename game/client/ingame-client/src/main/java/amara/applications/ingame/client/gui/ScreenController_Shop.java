@@ -362,10 +362,11 @@ public class ScreenController_Shop extends GameScreenController{
         SendPlayerCommandsAppState sendPlayerCommandsAppState = mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class);
         sendPlayerCommandsAppState.sendCommand(new BuyItemCommand(itemID));
     }
-    
-    public void sellItem(String inventoryIndexString){
+
+    public void sellItem(String inventoryIndexString) {
         int inventoryIndex = Integer.parseInt(inventoryIndexString);
+        ItemIndex itemIndex = new ItemIndex(ItemIndex.ItemSet.INVENTORY, inventoryIndex);
         SendPlayerCommandsAppState sendPlayerCommandsAppState = mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class);
-        sendPlayerCommandsAppState.sendCommand(new SellItemCommand(inventoryIndex));
+        sendPlayerCommandsAppState.sendCommand(new SellItemCommand(itemIndex));
     }
 }

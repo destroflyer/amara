@@ -16,6 +16,7 @@ import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.applications.ingame.entitysystem.systems.effects.triggers.EffectTriggerUtil;
 import amara.applications.ingame.entitysystem.systems.items.ItemUtil;
+import amara.applications.ingame.network.messages.objects.commands.ItemIndex;
 import amara.core.Util;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
@@ -120,30 +121,19 @@ public class ShopUtil{
         return goldCost;
     }
 
-    public static void sell(EntityWorld entityWorld, int entity, int inventoryIndex){
-        InventoryComponent inventoryComponent = entityWorld.getComponent(entity, InventoryComponent.class);
-        if(inventoryComponent != null){
-            int[] oldItemsEntities = inventoryComponent.getItemEntities();
-            if((inventoryIndex >= 0) && (inventoryIndex < oldItemsEntities.length)){
-                int itemEntity = oldItemsEntities[inventoryIndex];
-                IsSellableComponent isSellableComponent = entityWorld.getComponent(itemEntity, IsSellableComponent.class);
-                if(isSellableComponent != null){
-                    int[] newItemEntities = new int[oldItemsEntities.length - 1];
-                    int currentIndex = 0;
-                    for(int i=0;i<oldItemsEntities.length;i++){
-                        if(i != inventoryIndex){
-                            newItemEntities[currentIndex] = oldItemsEntities[i];
-                            currentIndex++;
-                        }
-                    }
-                    GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
-                    if(goldComponent != null){
-                        addItemGoldViaShop(entityWorld, entity, itemEntity, isSellableComponent.getGold());
-                    }
-                    entityWorld.setComponent(entity, new InventoryComponent(newItemEntities));
-                    entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
-                    triggerShopUsageEffects(entityWorld, entity);
+    public static void sell(EntityWorld entityWorld, int entity, ItemIndex itemIndex) {
+        int itemEntity = ItemUtil.getItemEntity(entityWorld, entity, itemIndex);
+        if (itemEntity != -1) {
+            IsSellableComponent isSellableComponent = entityWorld.getComponent(itemEntity, IsSellableComponent.class);
+            if (isSellableComponent != null) {
+                // Remove item
+                ItemUtil.removeItem(entityWorld, entity, itemIndex, false);
+                // Add gold
+                GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
+                if (goldComponent != null) {
+                    addItemGoldViaShop(entityWorld, entity, itemEntity, isSellableComponent.getGold());
                 }
+                triggerShopUsageEffects(entityWorld, entity);
             }
         }
     }

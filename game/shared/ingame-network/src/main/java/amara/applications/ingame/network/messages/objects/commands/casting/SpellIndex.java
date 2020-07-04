@@ -6,19 +6,14 @@ package amara.applications.ingame.network.messages.objects.commands.casting;
 
 import com.jme3.network.serializing.Serializable;
 
-/**
- *
- * @author Carl
- */
 @Serializable
-public class SpellIndex{
+public class SpellIndex {
 
-    public SpellIndex(){
+    public SpellIndex() {
         
     }
 
-    
-    public SpellIndex(SpellSet spellSet, int index){
+    public SpellIndex(SpellSet spellSet, int index) {
         this.spellSet = spellSet;
         this.index = index;
     }
@@ -30,11 +25,11 @@ public class SpellIndex{
     private SpellSet spellSet;
     private int index;
 
-    public SpellSet getSpellSet(){
+    public SpellSet getSpellSet() {
         return spellSet;
     }
 
-    public int getIndex(){
+    public int getIndex() {
         return index;
     }
 }

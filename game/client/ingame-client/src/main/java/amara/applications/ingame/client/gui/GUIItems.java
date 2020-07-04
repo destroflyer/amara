@@ -8,13 +8,17 @@ public class GUIItems {
     public static final int DESCRIPTION_LINE_LENGTH = 40;
 
     public static String getImageFilePath(EntityWorld entityWorld, int[] itemEntities, int itemIndex) {
-        int itemEntity = -1;
+        int itemEntity = getItemEntity(itemEntities, itemIndex);
+        return getImageFilePath(entityWorld, itemEntity);
+    }
+
+    public static int getItemEntity(int[] itemEntities, int itemIndex) {
         if (itemEntities != null) {
             if (itemIndex < itemEntities.length) {
-                itemEntity = itemEntities[itemIndex];
+                return itemEntities[itemIndex];
             }
         }
-        return getImageFilePath(entityWorld, itemEntity);
+        return -1;
     }
 
     public static String getImageFilePath(EntityWorld entityWorld, int itemEntity) {

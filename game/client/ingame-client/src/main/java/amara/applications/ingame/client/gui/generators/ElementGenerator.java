@@ -10,13 +10,17 @@ public abstract class ElementGenerator {
 
     public void update(Nifty nifty, String idPrefix, String parentId) {
         Element parentElement = getElementById(nifty, parentId);
-        Element existingElement = getElementById(nifty, idPrefix + index);
+        Element existingElement = getElementById(nifty, getId(idPrefix));
         if (existingElement != null) {
             existingElement.markForRemoval();
         }
         index++;
-        ElementBuilder elementBuilder = generate(nifty, idPrefix + index);
+        ElementBuilder elementBuilder = generate(nifty, getId(idPrefix));
         elementBuilder.build(nifty, nifty.getCurrentScreen(), parentElement);
+    }
+
+    private String getId(String idPrefix) {
+        return idPrefix + "_" + index;
     }
 
     public abstract ElementBuilder generate(Nifty nifty, String id);

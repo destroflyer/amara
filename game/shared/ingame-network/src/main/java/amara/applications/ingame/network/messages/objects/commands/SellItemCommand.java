@@ -11,18 +11,18 @@ import com.jme3.network.serializing.Serializable;
  * @author Carl
  */
 @Serializable
-public class SellItemCommand extends Command{
+public class SellItemCommand extends Command {
 
-    public SellItemCommand(){
+    public SellItemCommand() {
         
     }
 
-    public SellItemCommand(int inventoryIndex){
-        this.inventoryIndex = inventoryIndex;
+    public SellItemCommand(ItemIndex itemIndex) {
+        this.itemIndex = itemIndex;
     }
-    private int inventoryIndex;
+    private ItemIndex itemIndex;
 
-    public int getInventoryIndex(){
-        return inventoryIndex;
+    public ItemIndex getItemIndex() {
+        return itemIndex;
     }
 }

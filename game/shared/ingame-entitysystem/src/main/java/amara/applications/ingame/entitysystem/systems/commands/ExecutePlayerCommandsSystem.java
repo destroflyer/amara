@@ -6,7 +6,6 @@ package amara.applications.ingame.entitysystem.systems.commands;
 
 import java.util.Iterator;
 
-import amara.applications.ingame.entitysystem.systems.movement.WalkUtil;
 import amara.core.Queue;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.items.*;
@@ -15,7 +14,9 @@ import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.systems.aggro.AggroUtil;
+import amara.applications.ingame.entitysystem.systems.items.ItemUtil;
 import amara.applications.ingame.entitysystem.systems.movement.MovementSystem;
+import amara.applications.ingame.entitysystem.systems.movement.WalkUtil;
 import amara.applications.ingame.entitysystem.systems.shop.ShopUtil;
 import amara.applications.ingame.entitysystem.systems.spells.SpellUtil;
 import amara.applications.ingame.entitysystem.systems.spells.casting.CastSpellQueueSystem;
@@ -55,7 +56,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             } else if (command instanceof SellItemCommand) {
                 SellItemCommand sellItemCommand = (SellItemCommand) command;
                 if ((!isUnitAlive) || ShopUtil.isInShopRange(entityWorld, characterEntity)){
-                    ShopUtil.sell(entityWorld, characterEntity, sellItemCommand.getInventoryIndex());
+                    ShopUtil.sell(entityWorld, characterEntity, sellItemCommand.getItemIndex());
                 }
             } else if (command instanceof LearnSpellCommand) {
                 LearnSpellCommand learnSpellCommand = (LearnSpellCommand) command;
@@ -63,6 +64,9 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             } else if (command instanceof UpgradeSpellCommand) {
                 UpgradeSpellCommand upgradeSpellCommand = (UpgradeSpellCommand) command;
                 SpellUtil.upgradeSpell(entityWorld, characterEntity, upgradeSpellCommand.getSpellIndex(), upgradeSpellCommand.getUpgradeIndex());
+            } else if (command instanceof SwapItemsCommand) {
+                SwapItemsCommand swapItemsCommand = (SwapItemsCommand) command;
+                ItemUtil.swapItems(entityWorld, characterEntity, swapItemsCommand.getItemIndex1(), swapItemsCommand.getItemIndex2());
             } else if (isUnitAlive) {
                 if (command instanceof WalkToTargetCommand) {
                     WalkToTargetCommand walkToTargetCommand = (WalkToTargetCommand) command;
