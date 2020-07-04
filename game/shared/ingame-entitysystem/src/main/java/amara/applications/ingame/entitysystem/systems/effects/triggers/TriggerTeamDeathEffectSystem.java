@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.effects.triggers;
 
 import amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent;
@@ -13,17 +9,13 @@ import amara.libraries.entitysystem.ComponentMapObserver;
 import amara.libraries.entitysystem.EntitySystem;
 import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Philipp
- */
-public class TriggerTeamDeathEffectSystem implements EntitySystem{
+public class TriggerTeamDeathEffectSystem implements EntitySystem {
 
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
-        for(int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, TeamDeathTriggerComponent.class)){
-            if(!entityWorld.hasComponent(effectTriggerEntity, RemainingCooldownComponent.class)){
+        for (int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, TeamDeathTriggerComponent.class)){
+            if (!entityWorld.hasComponent(effectTriggerEntity, RemainingCooldownComponent.class)) {
                 int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
                 int teamEntity = entityWorld.getComponent(sourceEntity, TeamComponent.class).getTeamEntity();
                 boolean didEntityOfTeamDie = false;

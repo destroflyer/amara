@@ -1,16 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.test;
 
 import amara.applications.master.network.messages.*;
 import amara.applications.master.network.messages.objects.*;
 
-/**
- *
- * @author Carl
- */
 public class TestGame_Team extends TestGame {
 
     public static void main(String[] args) {

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.maps;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
@@ -36,10 +32,6 @@ import amara.libraries.entitysystem.EntityWrapper;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 import com.jme3.math.Vector2f;
 
-/**
- *
- * @author Carl
- */
 public class Map_Etherdesert extends Map {
 
     private int nexus;
@@ -105,28 +97,28 @@ public class Map_Etherdesert extends Map {
         entityWorld.setComponent(nexus, new TeamComponent(0));
         // Campfires
         Vector2f[] campfirePositions = new Vector2f[]{
-                new Vector2f(175.62367f, 145.24966f),
-                new Vector2f(113.570404f, 140.61807f),
-                new Vector2f(154.77113f, 106.40196f),
-                new Vector2f(120.59867f, 98.81795f),
-                new Vector2f(110.84865f, 68.97857f),
-                new Vector2f(26.024944f, 138.34921f),
-                new Vector2f(84.90381f, 138.57642f),
-                new Vector2f(45.01973f, 104.95874f),
-                new Vector2f(88.50022f, 69.143105f),
-                new Vector2f(81.168564f, 97.66634f)
+            new Vector2f(175.62367f, 145.24966f),
+            new Vector2f(113.570404f, 140.61807f),
+            new Vector2f(154.77113f, 106.40196f),
+            new Vector2f(120.59867f, 98.81795f),
+            new Vector2f(110.84865f, 68.97857f),
+            new Vector2f(26.024944f, 138.34921f),
+            new Vector2f(84.90381f, 138.57642f),
+            new Vector2f(45.01973f, 104.95874f),
+            new Vector2f(88.50022f, 69.143105f),
+            new Vector2f(81.168564f, 97.66634f)
         };
         Vector2f[] campfireDirections = new Vector2f[]{
-                new Vector2f(-0.6427891f, -0.7660469f),
-                new Vector2f(0.6427901f, -0.76604664f),
-                new Vector2f(0.42261922f, 0.90631133f),
-                new Vector2f(0.64279f, 0.76604795f),
-                new Vector2f(0.5735785f, 0.81915575f),
-                new Vector2f(-0.5735804f, 0.8191566f),
-                new Vector2f(0.6427914f, 0.7660497f),
-                new Vector2f(-0.3420229f, 0.93969864f),
-                new Vector2f(-0.50000393f, 0.8660311f),
-                new Vector2f(-0.6427925f, 0.7660494f)
+            new Vector2f(-0.6427891f, -0.7660469f),
+            new Vector2f(0.6427901f, -0.76604664f),
+            new Vector2f(0.42261922f, 0.90631133f),
+            new Vector2f(0.64279f, 0.76604795f),
+            new Vector2f(0.5735785f, 0.81915575f),
+            new Vector2f(-0.5735804f, 0.8191566f),
+            new Vector2f(0.6427914f, 0.7660497f),
+            new Vector2f(-0.3420229f, 0.93969864f),
+            new Vector2f(-0.50000393f, 0.8660311f),
+            new Vector2f(-0.6427925f, 0.7660494f)
         };
         for (int i = 0; i < campfirePositions.length; i++) {
             int campfireEntity = entityWorld.createEntity();
@@ -144,6 +136,7 @@ public class Map_Etherdesert extends Map {
         entityWorld.setComponent(respawnTeamEffect, new RespawnComponent());
         entityWorld.setComponent(respawnTeamTrigger, new TriggeredEffectComponent(respawnTeamEffect));
         entityWorld.setComponent(respawnTeamTrigger, new TriggerOnceComponent());
+        entityWorld.setComponent(respawnTeamTrigger, new CustomCleanupComponent());
         // MapObjective
         int mapObjective = entityWorld.createEntity();
         entityWorld.setComponent(mapObjective, new MissingEntitiesComponent(nexus));
@@ -157,6 +150,7 @@ public class Map_Etherdesert extends Map {
         entityWorld.setComponent(winMapObjectiveEffect, new FinishObjectiveComponent());
         entityWorld.setComponent(winMapObjectiveTrigger, new TriggeredEffectComponent(winMapObjectiveEffect));
         entityWorld.setComponent(winMapObjectiveTrigger, new TriggerOnceComponent(true));
+        entityWorld.setComponent(winMapObjectiveTrigger, new CustomCleanupComponent());
 
         EntityWrapper playerDeathRules = entityWorld.getWrapped(entityWorld.createEntity());
         entityWorld.setComponent(entity, new PlayerDeathRulesComponent(playerDeathRules.getId()));
@@ -183,6 +177,7 @@ public class Map_Etherdesert extends Map {
         entityWorld.setComponent(disableIncomeTrigger, new TriggeredEffectComponent(disableIncomeEffect));
         entityWorld.setComponent(disableIncomeTrigger, new TriggerOnceComponent());
         entityWorld.setComponent(disableIncomeTrigger, new TriggerDelayComponent(1));
+        entityWorld.setComponent(disableIncomeTrigger, new CustomCleanupComponent());
         ApplyAddBuffsSystem.addBuff(entityWorld, characterEntity, disableIncomeBuff, -1);
         // Enable income trigger
         int enableIncomeTrigger = entityWorld.createEntity();
@@ -192,6 +187,7 @@ public class Map_Etherdesert extends Map {
         entityWorld.setComponent(enableIncomeEffect, new RemoveBuffComponent(disableIncomeBuff));
         entityWorld.setComponent(enableIncomeTrigger, new TriggeredEffectComponent(enableIncomeEffect));
         entityWorld.setComponent(enableIncomeTrigger, new TriggerOnceComponent());
+        entityWorld.setComponent(enableIncomeTrigger, new CustomCleanupComponent());
         // Waves
         int playerIndex = entityWorld.getComponent(playerEntity, PlayerIndexComponent.class).getIndex();
         int spawnCasterEntity = entityWorld.createEntity();
@@ -233,19 +229,21 @@ public class Map_Etherdesert extends Map {
         int[] activateNextWaveTriggers = new int[waves];
         int[] displayRecommendedMilitaryValueTriggers = new int[waves];
         for (int i = 0; i < waves; i++) {
-            EntityWrapper activateSpawnsTriggger = entityWorld.getWrapped(entityWorld.createEntity());
-            activateSpawnsTriggger.setComponent(new InstantTriggerComponent());
-            activateSpawnsTriggger.setComponent(new CustomTargetComponent(spawnSourceEntity));
+            EntityWrapper activateSpawnsTrigger = entityWorld.getWrapped(entityWorld.createEntity());
+            activateSpawnsTrigger.setComponent(new InstantTriggerComponent());
+            activateSpawnsTrigger.setComponent(new CustomTargetComponent(spawnSourceEntity));
             EntityWrapper activateSpawnEffect = entityWorld.getWrapped(entityWorld.createEntity());
             activateSpawnEffect.setComponent(new AddEffectTriggersComponent(spawnTriggers[i]));
-            activateSpawnsTriggger.setComponent(new TriggeredEffectComponent(activateSpawnEffect.getId()));
-            activateSpawnsTriggger.setComponent(new TriggerOnceComponent(true));
-            activateSpawnsTriggers[i] = activateSpawnsTriggger.getId();
+            activateSpawnsTrigger.setComponent(new TriggeredEffectComponent(activateSpawnEffect.getId()));
+            activateSpawnsTrigger.setComponent(new TriggerOnceComponent(true));
+            activateSpawnsTrigger.setComponent(new CustomCleanupComponent());
+            activateSpawnsTriggers[i] = activateSpawnsTrigger.getId();
 
             EntityWrapper activateNextWaveTrigger = entityWorld.getWrapped(entityWorld.createEntity());
             activateNextWaveTrigger.setComponent(new TeamDeathTriggerComponent());
             activateNextWaveTrigger.setComponent(new CustomTargetComponent(spawnCasterEntity));
             activateNextWaveTrigger.setComponent(new TriggerOnceComponent(true));
+            activateNextWaveTrigger.setComponent(new CustomCleanupComponent());
             activateNextWaveTriggers[i] = activateNextWaveTrigger.getId();
 
             EntityWrapper displayRecommendedMilitaryValueTrigger = entityWorld.getWrapped(entityWorld.createEntity());
@@ -255,10 +253,11 @@ public class Map_Etherdesert extends Map {
             entityWorld.setComponent(displayRecommendedMilitaryValueEffect, new DisplayPlayerAnnouncementComponent("\"Next wave: " + ((i + 1) + "/" + waves) + " - Recommended military value: " + recommendedMilitaryValues[i] + "\"", -1));
             displayRecommendedMilitaryValueTrigger.setComponent(new TriggeredEffectComponent(displayRecommendedMilitaryValueEffect));
             displayRecommendedMilitaryValueTrigger.setComponent(new TriggerOnceComponent(true));
+            displayRecommendedMilitaryValueTrigger.setComponent(new CustomCleanupComponent());
             displayRecommendedMilitaryValueTriggers[i] = displayRecommendedMilitaryValueTrigger.getId();
 
             if (i == 0) {
-                activateSpawnsTriggger.setComponent(new TriggerSourceComponent(entity));
+                activateSpawnsTrigger.setComponent(new TriggerSourceComponent(entity));
                 activateNextWaveTrigger.setComponent(new TriggerSourceComponent(spawnCasterEntity));
                 displayRecommendedMilitaryValueTrigger.setComponent(new TriggerSourceComponent(entity));
             }
