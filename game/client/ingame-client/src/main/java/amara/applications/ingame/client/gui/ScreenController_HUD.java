@@ -215,7 +215,7 @@ public class ScreenController_HUD extends GameScreenController {
     }
     
     public void setPlayer_Gold(float gold){
-        getTextRenderer("player_gold").setText("" + ((int) gold));
+        getTextRenderer(playerInventoryPanelGenerator.getId() + "_player_gold").setText("" + ((int) gold));
     }
     
     private final int maximumPingBarWidth = 69;

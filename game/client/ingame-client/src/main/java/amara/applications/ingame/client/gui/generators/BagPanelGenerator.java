@@ -55,10 +55,6 @@ public class BagPanelGenerator extends ElementGenerator {
                             panel(new PanelBuilder(){{
                                 width("55px");
                                 childLayoutVertical();
-                                if (itemEntity != -1) {
-                                    String description = ItemDescription.generate_NameAndDescription(entityWorld, itemEntity, GUIItems.DESCRIPTION_LINE_LENGTH);
-                                    onHoverEffect(new HoverEffectBuilder("hint").effectParameter("hintText", description));
-                                }
 
                                 control(new DroppableBuilder(id + "_droppable_" + itemIndex){{
                                     width("45px");
@@ -75,6 +71,9 @@ public class BagPanelGenerator extends ElementGenerator {
                                             height("45px");
                                             childLayoutCenter();
 
+                                            String description = ItemDescription.generate_NameAndDescription(entityWorld, itemEntity, GUIItems.DESCRIPTION_LINE_LENGTH);
+                                            onHoverEffect(new HoverEffectBuilder("hint").effectParameter("hintText", description));
+
                                             image(new ImageBuilder(){{
                                                 width("100%");
                                                 height("100%");
@@ -84,33 +83,35 @@ public class BagPanelGenerator extends ElementGenerator {
                                     }
                                 }});
 
-                                // Gold
-                                IsSellableComponent isSellableComponent = entityWorld.getComponent(itemEntity, IsSellableComponent.class);
-                                if (isSellableComponent != null) {
-                                    panel(new PanelBuilder(){{
-                                        height("2px");
-                                    }});
-                                    panel(new PanelBuilder(){{
-                                        childLayoutHorizontal();
-                                        height("32px");
+                                if (itemEntity != -1) {
+                                    // Gold
+                                    IsSellableComponent isSellableComponent = entityWorld.getComponent(itemEntity, IsSellableComponent.class);
+                                    if (isSellableComponent != null) {
+                                        panel(new PanelBuilder() {{
+                                            height("2px");
+                                        }});
+                                        panel(new PanelBuilder() {{
+                                            childLayoutHorizontal();
+                                            height("32px");
 
-                                        panel(new PanelBuilder(){{
-                                            width("2px");
+                                            panel(new PanelBuilder() {{
+                                                width("2px");
+                                            }});
+                                            image(new ImageBuilder() {{
+                                                filename("Interface/hud/gold.png");
+                                                width("15px");
+                                                height("15px");
+                                            }});
+                                            panel(new PanelBuilder() {{
+                                                width("1px");
+                                            }});
+                                            text(new TextBuilder() {{
+                                                text(GUIUtil.getValueText(isSellableComponent.getGold()));
+                                                font("Interface/fonts/Verdana_12.fnt");
+                                            }});
+                                            panel(new PanelBuilder());
                                         }});
-                                        image(new ImageBuilder(){{
-                                            filename("Interface/hud/gold.png");
-                                            width("15px");
-                                            height("15px");
-                                        }});
-                                        panel(new PanelBuilder(){{
-                                            width("1px");
-                                        }});
-                                        text(new TextBuilder(){{
-                                            text(GUIUtil.getValueText(isSellableComponent.getGold()));
-                                            font("Interface/fonts/Verdana_12.fnt");
-                                        }});
-                                        panel(new PanelBuilder());
-                                    }});
+                                    }
                                 }
                             }});
                         }

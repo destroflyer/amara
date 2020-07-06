@@ -121,7 +121,7 @@ public class PlayerInventoryPanelGenerator extends ElementGenerator {
                                 panel(new PanelBuilder(){{
                                     height("9px");
                                 }});
-                                text(new TextBuilder("player_gold"){{
+                                text(new TextBuilder(id + "_player_gold"){{
                                     text("????");
                                     textHAlignLeft();
                                     font("Interface/fonts/Verdana_14.fnt");
@@ -146,13 +146,13 @@ public class PlayerInventoryPanelGenerator extends ElementGenerator {
             backgroundImage(GUIItems.getImageFilePath(entityWorld, -1));
 
             if (itemEntity != -1) {
-                String description = ItemDescription.generate_NameAndDescription(entityWorld, itemEntity, GUIItems.DESCRIPTION_LINE_LENGTH);
-                onHoverEffect(new HoverEffectBuilder("hint").effectParameter("hintText", description));
-
                 control(new DraggableBuilder(id + "_item_draggable_" + itemIndex){{
                     width("43px");
                     height("43px");
                     childLayoutCenter();
+
+                    String description = ItemDescription.generate_NameAndDescription(entityWorld, itemEntity, GUIItems.DESCRIPTION_LINE_LENGTH);
+                    onHoverEffect(new HoverEffectBuilder("hint").effectParameter("hintText", description));
 
                     image(new ImageBuilder(id + "_item_image_" + itemIndex){{
                         String imageFilePath = GUIItems.getImageFilePath(entityWorld, itemEntity);
