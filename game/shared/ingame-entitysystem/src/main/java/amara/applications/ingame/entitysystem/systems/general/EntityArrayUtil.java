@@ -5,6 +5,13 @@ import java.util.Arrays;
 public class EntityArrayUtil {
 
     public static int[] add(int[] entities, int entity) {
+        for (int i = 0; i < entities.length; i++) {
+            if (entities[i] == -1) {
+                int[] newEntities = Arrays.copyOf(entities, entities.length);
+                newEntities[i] = entity;
+                return newEntities;
+            }
+        }
         int[] newEntities = new int[entities.length + 1];
         System.arraycopy(entities, 0, newEntities, 0, entities.length);
         newEntities[entities.length] = entity;
@@ -41,10 +48,14 @@ public class EntityArrayUtil {
         } else {
             newEntities = new int[index + 1];
             for (int i = 0; i < index; i++) {
-                newEntities[i] = ((i < entities.length) ? entities[i] : -1);
+                newEntities[i] = get(entities, i);
             }
         }
         newEntities[index] = entity;
         return newEntities;
+    }
+
+    public static int get(int[] entities, int index) {
+        return ((index < entities.length) ? entities[index] : -1);
     }
 }

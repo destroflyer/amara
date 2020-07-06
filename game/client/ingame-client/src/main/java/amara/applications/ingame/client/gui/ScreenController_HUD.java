@@ -19,6 +19,7 @@ import amara.libraries.entitysystem.EntityWorld;
 import com.jme3.math.Vector2f;
 import com.jme3.texture.Texture2D;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.Droppable;
 import de.lessvoid.nifty.controls.DroppableDroppedEvent;
 import de.lessvoid.nifty.effects.Effect;
 import de.lessvoid.nifty.effects.EffectEventId;
@@ -26,10 +27,6 @@ import de.lessvoid.nifty.effects.impl.Hint;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.tools.SizeValue;
 
-/**
- *
- * @author Carl
- */
 public class ScreenController_HUD extends GameScreenController {
 
     public ScreenController_HUD(){
@@ -40,10 +37,12 @@ public class ScreenController_HUD extends GameScreenController {
     private SpellInformation[] spellInformations_LearnableSpells = new SpellInformation[0];
     private SpellInformation[] spellInformations_Spells = new SpellInformation[0];
     private SpellInformation[] spellInformations_MapSpells = new SpellInformation[0];
-    //Show/Hide the information by saving the actions and checking them in an update loop
-    //(Since NiftyGUI sometimes seems to be ordering start/end effect methods wrong)
+    // Show/Hide the information by saving the actions and checking them in an update loop
+    // (Since NiftyGUI sometimes seems to be ordering start/end effect methods wrong)
     private SpellInformation action_ShowSpellInformation;
     private boolean action_HideSpellInformation;
+    private PlayerInventoryPanelGenerator playerInventoryPanelGenerator = new PlayerInventoryPanelGenerator();
+    private InspectionInventoryPanelGenerator inspectionPlayerInventoryPanelGenerator = new InspectionInventoryPanelGenerator();
     private BagPanelGenerator bagPanelGenerator = new BagPanelGenerator();
     private ScoreboardGenerator scoreboardGenerator = new ScoreboardGenerator();
     private DeathRecapGenerator deathRecapGenerator = new DeathRecapGenerator();
@@ -58,10 +57,6 @@ public class ScreenController_HUD extends GameScreenController {
         hidePlayer_PassiveCooldown();
         for (int i = 0; i < 4; i++) {
             hidePlayer_SpellCooldown(i);
-        }
-        for (int i = 0; i < 6; i++) {
-            hideInventoryItem_Description("player", i);
-            hidePlayer_ItemCooldown(i);
         }
         for (int i = 0; i < 2; i++) {
             hidePlayer_MapSpellCooldown(i);
@@ -81,7 +76,7 @@ public class ScreenController_HUD extends GameScreenController {
 
     public void setInspectionVisible(boolean isVisible) {
         getElementByID("inspection_attributes").setVisible(isVisible);
-        getElementByID("inspection_inventory").setVisible(isVisible);
+        getElementByID("inspection_inventory_items_wrapper").setVisible(isVisible);
         getElementByID("inspection_inventory_background").setVisible(isVisible);
         getElementByID("inspection_background").setVisible(isVisible);
         getElementByID("inspection_level_layer").setVisible(isVisible);
@@ -108,10 +103,6 @@ public class ScreenController_HUD extends GameScreenController {
         Element experienceBar = getElementByID("player_experience_bar");
         experienceBar.setConstraintWidth(new SizeValue(width + "px"));
         experienceBar.getParent().layoutElements();
-    }
-
-    public void setAttributeValue_Health(String prefix, String text){
-        setAttributeValue(prefix, "health", text);
     }
     
     public void setAttributeValue_AttackDamage(String prefix, String text){
@@ -184,24 +175,22 @@ public class ScreenController_HUD extends GameScreenController {
         hideCooldown("player_spell", index);
     }
 
-    public void setInventoryItem_Image(String prefix, int index, String imagePath){
-        getImageRenderer(prefix + "_inventory_item_" + index + "_image").setImage(createImage(imagePath));
+    public void generatePlayerInventory(EntityWorld entityWorlds, int[] itemEntities) {
+        playerInventoryPanelGenerator.setData(entityWorlds, itemEntities);
+        playerInventoryPanelGenerator.update(nifty, "player_inventory_items_layer");
     }
 
-    public void showInventoryItem_Description(String prefix, int index, String description){
-        showHintText(prefix + "_inventory_item_" + index + "_image", description);
+    public void generateInspectionInventory(EntityWorld entityWorlds, int[] itemEntities) {
+        inspectionPlayerInventoryPanelGenerator.setData(entityWorlds, itemEntities);
+        inspectionPlayerInventoryPanelGenerator.update(nifty, "inspection_inventory_items_wrapper");
     }
 
-    public void hideInventoryItem_Description(String prefix, int index){
-        hideHintText(prefix + "_inventory_item_" + index + "_image");
-    }
-    
     public void showPlayer_ItemCooldown(int index, float remainingTime){
-        showCooldown("player_inventory_item", index, remainingTime);
+        showCooldown(playerInventoryPanelGenerator.getId() + "_item", index, remainingTime);
     }
     
     public void hidePlayer_ItemCooldown(int index){
-        hideCooldown("player_inventory_item", index);
+        hideCooldown(playerInventoryPanelGenerator.getId() + "_item", index);
     }
     
     public void setPlayer_MapSpellImage(int index, String imagePath){
@@ -217,12 +206,12 @@ public class ScreenController_HUD extends GameScreenController {
     }
     
     private void showCooldown(String prefix, int index, float remainingTime){
-        getElementByID(prefix + "_" + index + "_cooldown").show();
-        getTextRenderer(prefix + "_" + index + "_cooldown_time").setText("" + Util.round(remainingTime, 1));
+        getElementByID(prefix + "_cooldown_" + index).show();
+        getTextRenderer(prefix + "_cooldown_time_" + index).setText("" + Util.round(remainingTime, 1));
     }
     
     private void hideCooldown(String prefix, int index){
-        getElementByID(prefix + "_" + index + "_cooldown").hide();
+        getElementByID(prefix + "_cooldown_" + index).hide();
     }
     
     public void setPlayer_Gold(float gold){
@@ -266,7 +255,7 @@ public class ScreenController_HUD extends GameScreenController {
 
     public void setDeathRecapText(String text){
         deathRecapGenerator.setData(text);
-        deathRecapGenerator.update(nifty, "death_recap", "death_recap_container");
+        deathRecapGenerator.update(nifty, "death_recap_container");
     }
     
     public void toggleShopVisible(){
@@ -395,22 +384,22 @@ public class ScreenController_HUD extends GameScreenController {
         getElementByID("upgrade_spell_layer_images").setVisible(false);
     }
 
-    public void setBagItems(EntityWorld entityWorld, int[] bagItemEntities) {
+    public void setPlayerBagItems(EntityWorld entityWorld, int[] bagItemEntities) {
         bagPanelGenerator.setData(entityWorld, bagItemEntities);
-        bagPanelGenerator.update(nifty, "bag_items", "bag_items_container");
+        bagPanelGenerator.update(nifty, "player_bag_items_container");
     }
 
-    public void toggleBagVisible(){
-        setBagVisible(!getElementByID("bag_window").isVisible());
+    public void togglePlayerBagVisible(){
+        setPlayerBagVisible(!getElementByID("player_bag_window").isVisible());
     }
 
-    public void setBagVisible(boolean isVisible){
-        getElementByID("bag_window").setVisible(isVisible);
+    public void setPlayerBagVisible(boolean isVisible){
+        getElementByID("player_bag_window").setVisible(isVisible);
     }
 
     public void generateScoreboard(GameSelectionPlayer[][] teams) {
         scoreboardGenerator.setData(teams);
-        scoreboardGenerator.update(nifty, "scoreboard", "scoreboard_container");
+        scoreboardGenerator.update(nifty, "scoreboard_container");
     }
 
     public void toggleScoreboardVisible(){
@@ -488,13 +477,22 @@ public class ScreenController_HUD extends GameScreenController {
 
     @NiftyEventSubscriber(pattern=".*")
     public void onDrop(String id, DroppableDroppedEvent event) {
-        if (id.startsWith("bag_items")) {
-            int bagItemIndex1 = bagPanelGenerator.getItemIndex(event.getSource());
-            int bagItemIndex2 = bagPanelGenerator.getItemIndex(event.getTarget());
-            ItemIndex itemIndex1 = new ItemIndex(ItemIndex.ItemSet.BAG, bagItemIndex1);
-            ItemIndex itemIndex2 = new ItemIndex(ItemIndex.ItemSet.BAG, bagItemIndex2);
-            SendPlayerCommandsAppState sendPlayerCommandsAppState = mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class);
-            sendPlayerCommandsAppState.sendCommand(new SwapItemsCommand(itemIndex1, itemIndex2));
+        ItemIndex itemIndex1 = getItemIndex(event.getSource());
+        ItemIndex itemIndex2 = getItemIndex(event.getTarget());
+        SendPlayerCommandsAppState sendPlayerCommandsAppState = mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class);
+        sendPlayerCommandsAppState.sendCommand(new SwapItemsCommand(itemIndex1, itemIndex2));
+    }
+
+    private ItemIndex getItemIndex(Droppable droppable) {
+        String id = droppable.getId();
+        ItemIndex.ItemSet itemSet = null;
+        if (id.startsWith(playerInventoryPanelGenerator.getId())) {
+            itemSet = ItemIndex.ItemSet.INVENTORY;
+        } else if (id.startsWith(bagPanelGenerator.getId())) {
+            itemSet = ItemIndex.ItemSet.BAG;
         }
+        String[] parts = droppable.getId().split("_");
+        int index = Integer.parseInt(parts[parts.length - 1]);
+        return new ItemIndex(itemSet, index);
     }
 }

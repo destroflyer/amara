@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.shop;
 
 import java.util.HashMap;
@@ -21,10 +17,6 @@ import amara.core.Util;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 
-/**
- *
- * @author Carl
- */
 public class ShopUtil{
 
     public static final String CATEGORY_TOTAL = "total";
@@ -53,38 +45,34 @@ public class ShopUtil{
         return false;
     }
 
-    public static boolean buy(EntityWorld entityWorld, int entity, String itemID){
+    public static boolean buy(EntityWorld entityWorld, int entity, String itemId) {
         tmpItemEntities.clear();
-        int newItemIndex = -1;
         InventoryComponent inventoryComponent = entityWorld.getComponent(entity, InventoryComponent.class);
-        if(inventoryComponent != null){
-            for(int i=0;i<inventoryComponent.getItemEntities().length;i++){
-                int itemEntity = inventoryComponent.getItemEntities()[i];
+        if (inventoryComponent != null) {
+            for (int itemEntity : inventoryComponent.getItemEntities()) {
                 tmpItemEntities.add(itemEntity);
-                if((itemEntity == -1) && (newItemIndex == -1)){
-                    newItemIndex = i;
-                }
             }
         }
         int itemEntity = entityWorld.createEntity();
-        float goldCost = resolveItemRecipe(entityWorld, itemID, tmpItemEntities, itemEntity);
+        float goldCost = resolveItemRecipe(entityWorld, itemId, tmpItemEntities, itemEntity);
         entityWorld.removeEntity(itemEntity);
-        if(newItemIndex != -1){
-            tmpItemEntities.set(newItemIndex, itemEntity);
-        }
-        else{
-            tmpItemEntities.add(itemEntity);
-        }
-        int inventorySize = 0;
-        for(int tmpItemEntity : tmpItemEntities){
-            if(tmpItemEntity != -1){
-                inventorySize++;
+        int newItemIndex = 0;
+        for (int tmpItemEntity : tmpItemEntities) {
+            if (tmpItemEntity != -1) {
+                newItemIndex++;
+            } else {
+                break;
             }
         }
-        if(inventorySize <= ItemUtil.MAX_INVENTORY_SIZE){
+        if (newItemIndex < tmpItemEntities.size()) {
+            tmpItemEntities.set(newItemIndex, itemEntity);
+        }  else {
+            tmpItemEntities.add(itemEntity);
+        }
+        if (tmpItemEntities.size() <= ItemUtil.MAX_INVENTORY_SIZE) {
             GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
-            if((goldCost == 0) || ((goldComponent != null) && (goldComponent.getGold() >= goldCost))){
-                EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + itemID);
+            if ((goldCost == 0) || ((goldComponent != null) && (goldComponent.getGold() >= goldCost))) {
+                EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + itemId);
                 addItemGoldViaShop(entityWorld, entity, itemEntity, -1 * goldCost);
                 entityWorld.setComponent(entity, new InventoryComponent(Util.convertToArray_Integer(tmpItemEntities)));
                 entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());
@@ -94,7 +82,7 @@ public class ShopUtil{
         }
         return false;
     }
-    
+
     private static float resolveItemRecipe(EntityWorld entityWorld, String itemID, LinkedList<Integer> inventoryItemEntities, int tmpItemEntity){
         entityWorld.removeEntity(tmpItemEntity);
         EntityTemplate.loadTemplate(entityWorld, tmpItemEntity, "items/" + itemID);

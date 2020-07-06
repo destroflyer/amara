@@ -6,6 +6,9 @@ import de.lessvoid.nifty.builder.*;
 
 public class ScoreboardGenerator extends ElementGenerator {
 
+    public ScoreboardGenerator() {
+        super("scoreboard");
+    }
     private GameSelectionPlayer[][] teams;
 
     public void setData(GameSelectionPlayer[][] teams) {

@@ -6,10 +6,6 @@ import amara.applications.ingame.entitysystem.components.items.BagComponent;
 import amara.libraries.entitysystem.ComponentMapObserver;
 import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Carl
- */
 public class DisplayBagSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayBagSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
@@ -17,7 +13,7 @@ public class DisplayBagSystem extends GUIDisplaySystem<ScreenController_HUD> {
     }
 
     @Override
-    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity){
+    protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, BagComponent.class);
         checkChange(entityWorld, observer.getNew().getComponent(characterEntity, BagComponent.class));
         checkChange(entityWorld, observer.getChanged().getComponent(characterEntity, BagComponent.class));
@@ -25,7 +21,7 @@ public class DisplayBagSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     private void checkChange(EntityWorld entityWorld, BagComponent bagComponent) {
         if (bagComponent != null) {
-            screenController.setBagItems(entityWorld, bagComponent.getItemEntities());
+            screenController.setPlayerBagItems(entityWorld, bagComponent.getItemEntities());
         }
     }
 }

@@ -106,72 +106,9 @@
                 <panel/>
             </panel>
         </layer>
-        <layer id="inspection_inventory" childLayout="center">
-            <panel childLayout="vertical">
-                <panel height="6px"/>
-                <panel childLayout="horizontal" height="130px">
-                    <panel width="174px"/>
-                    <panel childLayout="vertical" width="132px">
-                        <panel childLayout="horizontal" height="43px">
-                            <panel childLayout="center" width="43px" height="43px">
-                                <image id="inspection_inventory_item_0_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
-                                    <effect>
-                                        <onHover name="hint" hintText="?"/>
-                                    </effect>
-                                </image>
-                            </panel>
-                            <panel width="1px" backgroundColor="#999F"/>
-                            <panel childLayout="center" width="43px" height="43px">
-                                <image id="inspection_inventory_item_1_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
-                                    <effect>
-                                        <onHover name="hint" hintText="?"/>
-                                    </effect>
-                                </image>
-                            </panel>
-                            <panel width="1px" backgroundColor="#999F"/>
-                            <panel childLayout="center" width="43px" height="43px">
-                                <image id="inspection_inventory_item_2_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
-                                    <effect>
-                                        <onHover name="hint" hintText="?"/>
-                                    </effect>
-                                </image>
-                            </panel>
-                        </panel>
-                        <panel height="1px" backgroundColor="#999F"/>
-                        <panel childLayout="horizontal" height="43px">
-                            <panel childLayout="center" width="43px" height="43px">
-                                <image id="inspection_inventory_item_3_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
-                                    <effect>
-                                        <onHover name="hint" hintText="?"/>
-                                    </effect>
-                                </image>
-                            </panel>
-                            <panel width="1px" backgroundColor="#999F"/>
-                            <panel childLayout="center" width="43px" height="43px">
-                                <image id="inspection_inventory_item_4_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
-                                    <effect>
-                                        <onHover name="hint" hintText="?"/>
-                                    </effect>
-                                </image>
-                            </panel>
-                            <panel width="1px" backgroundColor="#999F"/>
-                            <panel childLayout="center" width="43px" height="43px">
-                                <image id="inspection_inventory_item_5_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
-                                    <effect>
-                                        <onHover name="hint" hintText="?"/>
-                                    </effect>
-                                </image>
-                            </panel>
-                        </panel>
-                        <panel childLayout="center" backgroundColor="#000D" width="131px">
-                            <image filename="Interface/hud/shop_button.png" width="100%" height="100%"></image>
-                            <text text="TODO" textHAlign="center" font="Interface/fonts/Verdana_14.fnt"/>
-                        </panel>
-                        <panel height="6px"/>
-                    </panel>
-                    <panel/>
-                </panel>
-                <panel/>
+        <layer childLayout="center">
+            <panel id="inspection_inventory_items_wrapper" childLayout="center">
+                <!--Generated panel "inspection_inventory_items"-->
             </panel>
         </layer>
         <layer id="inspection_inventory_background" childLayout="center">
@@ -294,108 +231,8 @@
                 <panel height="7px"/>
             </panel>
         </layer>
-        <layer childLayout="center">
-            <panel childLayout="vertical">
-                <panel/>
-                <panel childLayout="horizontal" height="130px">
-                    <panel width="174px"/>
-                    <panel childLayout="vertical" width="132px">
-                        <panel childLayout="horizontal" height="43px">
-                            <panel childLayout="center" width="43px" height="43px">
-                                <image id="player_inventory_item_0_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
-                                    <effect>
-                                        <onHover name="hint" hintText="?"/>
-                                    </effect>
-                                </image>
-                                <panel id="player_inventory_item_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
-                                    <text id="player_inventory_item_0_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
-                                </panel>
-                            </panel>
-                            <panel width="1px" backgroundColor="#999F"/>
-                            <panel childLayout="center" width="43px" height="43px">
-                                <image id="player_inventory_item_1_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
-                                    <effect>
-                                        <onHover name="hint" hintText="?"/>
-                                    </effect>
-                                </image>
-                                <panel id="player_inventory_item_1_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
-                                    <text id="player_inventory_item_1_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
-                                </panel>
-                            </panel>
-                            <panel width="1px" backgroundColor="#999F"/>
-                            <panel childLayout="center" width="43px" height="43px">
-                                <image id="player_inventory_item_2_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
-                                    <effect>
-                                        <onHover name="hint" hintText="?"/>
-                                    </effect>
-                                </image>
-                                <panel id="player_inventory_item_2_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
-                                    <text id="player_inventory_item_2_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
-                                </panel>
-                            </panel>
-                        </panel>
-                        <panel height="1px" backgroundColor="#999F"/>
-                        <panel childLayout="horizontal" height="43px">
-                            <panel childLayout="center" width="43px" height="43px">
-                                <image id="player_inventory_item_3_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
-                                    <effect>
-                                        <onHover name="hint" hintText="?"/>
-                                    </effect>
-                                </image>
-                                <panel id="player_inventory_item_3_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
-                                    <text id="player_inventory_item_3_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
-                                </panel>
-                            </panel>
-                            <panel width="1px" backgroundColor="#999F"/>
-                            <panel childLayout="center" width="43px" height="43px">
-                                <image id="player_inventory_item_4_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
-                                    <effect>
-                                        <onHover name="hint" hintText="?"/>
-                                    </effect>
-                                </image>
-                                <panel id="player_inventory_item_4_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
-                                    <text id="player_inventory_item_4_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
-                                </panel>
-                            </panel>
-                            <panel width="1px" backgroundColor="#999F"/>
-                            <panel childLayout="center" width="43px" height="43px">
-                                <image id="player_inventory_item_5_image" filename="Interface/hud/items/none.png" width="100%" height="100%">
-                                    <effect>
-                                        <onHover name="hint" hintText="?"/>
-                                    </effect>
-                                </image>
-                                <panel id="player_inventory_item_5_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
-                                    <text id="player_inventory_item_5_cooldown_time" text="???" font="Interface/fonts/Verdana_12.fnt"/>
-                                </panel>
-                            </panel>
-                        </panel>
-                        <panel id="shop_button" childLayout="center" backgroundColor="#000D" width="131px">
-                            <image filename="Interface/hud/shop_button.png" width="100%" height="100%">
-                                <effect>
-                                    <onHover name="hint" hintText="Shop"/>
-                                </effect>
-                            </image>
-                            <panel childLayout="horizontal" width="100%" height="100%">
-                                <panel width="32px"/>
-                                <panel childLayout="vertical" width="26px">
-                                    <panel height="5px"/>
-                                    <panel childLayout="horizontal">
-                                        <image filename="Interface/hud/gold.png" width="26px" height="26px"/>
-                                    </panel>
-                                </panel>
-                                <panel width="7px"/>
-                                <panel childLayout="vertical">
-                                    <panel height="9px"/>
-                                    <text id="player_gold" text="????" textHAlign="left" font="Interface/fonts/Verdana_14.fnt"/>
-                                </panel>
-                                <interact onClick="toggleShopVisible()"/>
-                            </panel>
-                        </panel>
-                        <panel height="6px"/>
-                    </panel>
-                    <panel/>
-                </panel>
-            </panel>
+        <layer id="player_inventory_items_layer" childLayout="center">
+            <!--Generated panel "player_inventory_items"-->
         </layer>
         <layer childLayout="center">
             <panel childLayout="vertical">
@@ -485,8 +322,8 @@
                                             <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                         </effect>
                                     </image>
-                                    <panel id="player_passive_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
-                                        <text id="player_passive_0_cooldown_time" text="???" font="Interface/fonts/Verdana_14.fnt"/>
+                                    <panel id="player_passive_cooldown_0" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                        <text id="player_passive_cooldown_time_0" text="???" font="Interface/fonts/Verdana_14.fnt"/>
                                     </panel>
                                 </panel>
                             </panel>
@@ -498,8 +335,8 @@
                                         <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                     </effect>
                                 </image>
-                                <panel id="player_spell_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
-                                    <text id="player_spell_0_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
+                                <panel id="player_spell_cooldown_0" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="player_spell_cooldown_time_0" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
                             </panel>
                             <panel width="2px"/>
@@ -510,8 +347,8 @@
                                         <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                     </effect>
                                 </image>
-                                <panel id="player_spell_1_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
-                                    <text id="player_spell_1_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
+                                <panel id="player_spell_cooldown_1" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="player_spell_cooldown_time_1" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
                             </panel>
                             <panel width="2px"/>
@@ -522,8 +359,8 @@
                                         <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                     </effect>
                                 </image>
-                                <panel id="player_spell_2_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
-                                    <text id="player_spell_2_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
+                                <panel id="player_spell_cooldown_2" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="player_spell_cooldown_time_2" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
                             </panel>
                             <panel width="2px"/>
@@ -534,8 +371,8 @@
                                         <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                     </effect>
                                 </image>
-                                <panel id="player_spell_3_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
-                                    <text id="player_spell_3_cooldown_time" text="???" font="Interface/fonts/Verdana_18.fnt"/>
+                                <panel id="player_spell_cooldown_3" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <text id="player_spell_cooldown_time_3" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
                             </panel>
                             <panel width="14px"/>
@@ -548,8 +385,8 @@
                                             <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                         </effect>
                                     </image>
-                                    <panel id="player_map_spell_0_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
-                                        <text id="player_map_spell_0_cooldown_time" text="???" font="Interface/fonts/Verdana_14.fnt"/>
+                                    <panel id="player_map_spell_cooldown_0" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                        <text id="player_map_spell_cooldown_time_0" text="???" font="Interface/fonts/Verdana_14.fnt"/>
                                     </panel>
                                 </panel>
                             </panel>
@@ -563,8 +400,8 @@
                                             <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                         </effect>
                                     </image>
-                                    <panel id="player_map_spell_1_cooldown" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
-                                        <text id="player_map_spell_1_cooldown_time" text="???" font="Interface/fonts/Verdana_14.fnt"/>
+                                    <panel id="player_map_spell_cooldown_1" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                        <text id="player_map_spell_cooldown_time_1" text="???" font="Interface/fonts/Verdana_14.fnt"/>
                                     </panel>
                                 </panel>
                             </panel>
@@ -766,9 +603,9 @@
         </layer>
         <!--bag-->
         <layer childLayout="absolute">
-            <control id="bag_window" name="window" title="Bag" x="910px" y="180px" width="600px" height="400px" hideOnClose="true" visible="false">
-                <panel id="bag_items_container" childLayout="horizontal" width="100%" height="100%">
-                    <!--Generated ScrollPanel "bag_items"-->
+            <control id="player_bag_window" name="window" title="Bag" x="910px" y="180px" width="600px" height="400px" hideOnClose="true" visible="false">
+                <panel id="player_bag_items_container" childLayout="horizontal" width="100%" height="100%">
+                    <!--Generated ScrollPanel "player_bag_items"-->
                 </panel>
             </control>
         </layer>

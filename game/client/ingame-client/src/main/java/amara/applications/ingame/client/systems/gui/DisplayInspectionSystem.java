@@ -1,17 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.gui;
 
 import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Carl
- */
 public class DisplayInspectionSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
     public DisplayInspectionSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD) {
@@ -20,6 +12,12 @@ public class DisplayInspectionSystem extends GUIDisplaySystem<ScreenController_H
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity) {
+        // Nothing to do here
+    }
+
+    @Override
+    protected void onInspectionUpdated(EntityWorld entityWorld, int inspectedEntity) {
+        super.onInspectionUpdated(entityWorld, inspectedEntity);
         screenController.setInspectionVisible(getInspectedEntity() != -1);
     }
 }

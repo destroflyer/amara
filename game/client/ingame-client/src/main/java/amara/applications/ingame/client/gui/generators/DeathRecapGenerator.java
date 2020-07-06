@@ -6,6 +6,9 @@ import de.lessvoid.nifty.controls.scrollpanel.builder.ScrollPanelBuilder;
 
 public class DeathRecapGenerator extends ElementGenerator {
 
+    public DeathRecapGenerator() {
+        super("death_recap");
+    }
     private String text;
 
     public void setData(String text) {
