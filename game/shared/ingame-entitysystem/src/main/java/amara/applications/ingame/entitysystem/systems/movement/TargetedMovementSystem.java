@@ -53,7 +53,8 @@ public class TargetedMovementSystem implements EntitySystem{
                             }
                         }
                         if(!isTargetReached){
-                            float speed = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class).getSpeed();
+                            MovementSpeedComponent movementSpeedComponent = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class);
+                            float speed = ((movementSpeedComponent != null) ? movementSpeedComponent.getSpeed() : 0);
                             Vector2f movedDistance;
                             if(entityWorld.hasComponent(movementEntity, MovementPathfindingComponent.class)){
                                 Vector2D pathfindingFrom = new Vector2D(position.getX(), position.getY());
