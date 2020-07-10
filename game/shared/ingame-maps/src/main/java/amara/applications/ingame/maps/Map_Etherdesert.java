@@ -213,7 +213,7 @@ public class Map_Etherdesert extends Map {
                 spawnTrigger.setComponent(new CustomTargetComponent(nexus));
                 EntityWrapper spawnEffect = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-                spawnInformation.setComponent(new SpawnTemplateComponent("../maps/etherdesert/templates/wave_" + i));
+                spawnInformation.setComponent(new SpawnTemplateComponent("../Maps/etherdesert/templates/wave_" + i));
                 spawnInformation.setComponent(new SpawnMoveToTargetComponent());
                 spawnInformation.setComponent(new SpawnAttackMoveComponent());
                 spawnEffect.setComponent(new SpawnComponent(spawnInformation.getId()));
