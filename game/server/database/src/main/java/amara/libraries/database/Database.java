@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.database;
 
 import java.sql.Connection;
@@ -10,10 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author Carl
- */
 public abstract class Database {
 
     public Database(String path, String user, String password) {
@@ -75,6 +67,10 @@ public abstract class Database {
     }
 
     public String escape(String text) {
-        return text.replaceAll("'", "\\'");
+        return text
+                // Replace single backslash with double backslash;
+                .replaceAll("\\\\", "\\\\")
+                // Escape single quote
+                .replaceAll("'", "\\\\'");
     }
 }

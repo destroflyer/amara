@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 04. Jun 2020 um 01:10
+-- Erstellungszeit: 11. Jul 2020 um 02:51
 -- Server-Version: 10.4.8-MariaDB
 -- PHP-Version: 7.3.11
 
@@ -91,6 +91,18 @@ INSERT INTO `characters_skins` (`id`, `character_id`, `name`, `title`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `mmo_players`
+--
+
+CREATE TABLE `mmo_players` (
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `map_name` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `data` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `users_characters_active_skins`
 --
 
@@ -105,10 +117,8 @@ CREATE TABLE `users_characters_active_skins` (
 --
 
 INSERT INTO `users_characters_active_skins` (`user_id`, `character_id`, `skin_id`) VALUES
-(1, 3, 4),
 (1, 1, 5),
-(1, 7, 1),
-(1, 8, 6);
+(1, 3, 4);
 
 -- --------------------------------------------------------
 

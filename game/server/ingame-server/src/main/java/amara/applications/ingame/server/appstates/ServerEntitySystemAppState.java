@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.server.appstates;
 
 import amara.applications.ingame.entitysystem.components.players.ClientComponent;
@@ -13,12 +9,14 @@ import amara.applications.ingame.network.messages.Message_GameOver;
 import amara.applications.ingame.network.messages.Message_InitialEntityWorldSent;
 import amara.applications.ingame.server.IngameServerApplication;
 import amara.applications.ingame.server.entitysystem.GameLogic;
+import amara.applications.ingame.server.entitysystem.systems.mmo.MMOPersistenceSystem;
 import amara.applications.ingame.server.entitysystem.systems.objectives.CheckMapObjectiveSystem;
 import amara.applications.ingame.server.network.backends.SendGameInfoBackend;
 import amara.applications.ingame.server.network.backends.AddNewClientsBackend;
 import amara.applications.ingame.server.network.backends.RemoveLeavingClientsBackend;
 import amara.applications.ingame.server.network.backends.StartGameBackend;
 import amara.applications.ingame.shared.maps.Map;
+import amara.applications.master.server.appstates.DatabaseAppState;
 import amara.applications.master.server.games.Game;
 import amara.applications.master.server.games.GamePlayer;
 import amara.applications.master.server.games.GamePlayerInfo_Human;
@@ -34,15 +32,12 @@ import amara.libraries.network.SubNetworkServer;
 
 import java.util.LinkedList;
 
-/**
- *
- * @author Carl
- */
 public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<IngameServerApplication> {
 
     private LinkedList<Integer> newClientIds = new LinkedList<>();
     private LinkedList<Integer> initializedClientIds = new LinkedList<>();
     private ClientComponentBlacklist clientComponentBlacklist = new ClientComponentBlacklist();
+    private MMOPersistenceSystem mmoPersistenceSystem;
 
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application) {
@@ -76,6 +71,11 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         }
         addEntitySystem(new SendEntityChangesSystem(subNetworkServer, initializedClientIds, clientComponentBlacklist));
         addEntitySystem(new CheckMapObjectiveSystem(map, mainApplication));
+        if (game instanceof MMOGame) {
+            DatabaseAppState databaseAppState = mainApplication.getMasterServer().getState(DatabaseAppState.class);
+            mmoPersistenceSystem = new MMOPersistenceSystem(databaseAppState, game);
+            addEntitySystem(mmoPersistenceSystem);
+        }
         // Precalculate first frame, so automatic entity processes will be done for the initial world
         super.update(0);
     }
@@ -137,6 +137,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         GamePlayerInfo_Human gamePlayerInfo = player.getGamePlayerInfo();
         System.out.println("Player #" + gamePlayerInfo.getPlayerId() + " (Client #" + clientId + ") left the game.");
         if (game instanceof MMOGame) {
+            mmoPersistenceSystem.updateDatabasePlayer(entityWorld, player);
             game.removePlayer(player);
             entityWorld.removeEntity(player.getEntity());
             SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();

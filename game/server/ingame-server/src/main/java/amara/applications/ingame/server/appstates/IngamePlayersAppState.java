@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.server.appstates;
 
 import java.util.LinkedList;
@@ -12,6 +8,8 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.scores.*;
 import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
+import amara.applications.ingame.server.entitysystem.systems.mmo.MMOPersistenceUtil;
+import amara.applications.ingame.server.entitysystem.systems.mmo.state.MMOPlayerState;
 import amara.applications.ingame.shared.maps.Map;
 import amara.applications.ingame.shared.maps.MapSpell;
 import amara.applications.ingame.shared.maps.MapSpells;
@@ -25,12 +23,12 @@ import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
 import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 import amara.libraries.network.SubNetworkServer;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-/**
- *
- * @author Carl
- */
 public class IngamePlayersAppState extends ServerBaseAppState {
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application) {
@@ -97,6 +95,11 @@ public class IngamePlayersAppState extends ServerBaseAppState {
 
         map.spawnPlayer(entityWorld, playerEntity);
 
+        if (gamePlayerInfo instanceof GamePlayerInfo_Human) {
+            GamePlayerInfo_Human gamePlayerInfo_Human = (GamePlayerInfo_Human) gamePlayerInfo;
+            loadMMOPlayerData(entityWorld, playerEntity, gamePlayerInfo_Human.getPlayerId(), map);
+        }
+
         player.setEntity(playerEntity);
     }
 
@@ -123,6 +126,19 @@ public class IngamePlayersAppState extends ServerBaseAppState {
         entityWorld.setComponent(scoreEntity, new CreepScoreComponent(0));
         entityWorld.setComponent(characterEntity, new ScoreComponent(scoreEntity));
         return characterEntity;
+    }
+
+    private void loadMMOPlayerData(EntityWorld entityWorld, int playerEntity, int playerId, Map map) {
+        DatabaseAppState databaseAppState = mainApplication.getMasterServer().getState(DatabaseAppState.class);
+        String data = databaseAppState.getQueryResult("SELECT data FROM mmo_players WHERE (user_id = " + playerId + ") AND (map_name = '" + databaseAppState.escape(map.getName()) + "')").nextString_Close();
+        if (data != null) {
+            try {
+                MMOPlayerState mmoPlayerState = objectMapper.readValue(data, MMOPlayerState.class);
+                MMOPersistenceUtil.loadPlayerState(entityWorld, playerEntity, mmoPlayerState);
+            } catch (JsonProcessingException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     private MapSpellsComponent createMapSpells(EntityWorld entityWorld, Map map, int[][] mapSpellsIndices) {
