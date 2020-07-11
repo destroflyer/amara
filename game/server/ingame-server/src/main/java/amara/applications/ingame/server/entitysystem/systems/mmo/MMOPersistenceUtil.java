@@ -105,6 +105,10 @@ public class MMOPersistenceUtil {
                 if (bonusPercentageLifestealComponent != null) {
                     mmoItemState.setPercentageLifesteal(bonusPercentageLifestealComponent.getValue());
                 }
+                BonusPercentageWalkSpeedComponent bonusPercentageWalkSpeedComponent = entityWorld.getComponent(itemEntity, BonusPercentageWalkSpeedComponent.class);
+                if (bonusPercentageWalkSpeedComponent != null) {
+                    mmoItemState.setPercentageWalkSpeed(bonusPercentageWalkSpeedComponent.getValue());
+                }
                 IsSellableComponent isSellableComponent = entityWorld.getComponent(itemEntity, IsSellableComponent.class);
                 if (isSellableComponent != null) {
                     mmoItemState.setSellableGold(isSellableComponent.getGold());
