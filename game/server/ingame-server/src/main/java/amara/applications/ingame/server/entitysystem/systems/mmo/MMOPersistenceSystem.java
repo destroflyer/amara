@@ -46,19 +46,23 @@ public class MMOPersistenceSystem implements EntitySystem {
     }
 
     public void updateDatabasePlayer(EntityWorld entityWorld, GamePlayer<GamePlayerInfo_Human> gamePlayer) {
-        GamePlayerInfo_Human gamePlayerInfo_Human = gamePlayer.getGamePlayerInfo();
-        MMOPlayerState mmoPlayerState = MMOPersistenceUtil.getPlayerState(entityWorld, gamePlayer.getEntity());
-        try {
-            String newData = objectMapper.writeValueAsString(mmoPlayerState);
-            String whereLimitClause = "(user_id = " + gamePlayerInfo_Human.getPlayerId() + ") AND (map_name = '" + databaseAppState.escape(game.getMap().getName()) + "') LIMIT 1";
-            String oldData = databaseAppState.getQueryResult("SELECT data FROM mmo_players WHERE " + whereLimitClause).nextString_Close();
-            if (oldData == null) {
-                databaseAppState.executeQuery("INSERT INTO mmo_players (user_id, map_name, data) VALUES (" + gamePlayerInfo_Human.getPlayerId() + ", '" + databaseAppState.escape(game.getMap().getName()) + "', '" + databaseAppState.escape(newData) + "')");
-            } else {
-                databaseAppState.executeQuery("UPDATE mmo_players SET data = '" + databaseAppState.escape(newData) + "' WHERE " + whereLimitClause);
+        int playerEntity = gamePlayer.getEntity();
+        // Player entity might not have been initialized yet as the gamePlayer itself is already added in the parallel message backend thread
+        if (playerEntity != -1) {
+            GamePlayerInfo_Human gamePlayerInfo_Human = gamePlayer.getGamePlayerInfo();
+            MMOPlayerState mmoPlayerState = MMOPersistenceUtil.getPlayerState(entityWorld, playerEntity);
+            try {
+                String newData = objectMapper.writeValueAsString(mmoPlayerState);
+                String whereLimitClause = "(user_id = " + gamePlayerInfo_Human.getPlayerId() + ") AND (map_name = '" + databaseAppState.escape(game.getMap().getName()) + "') LIMIT 1";
+                String oldData = databaseAppState.getQueryResult("SELECT data FROM mmo_players WHERE " + whereLimitClause).nextString_Close();
+                if (oldData == null) {
+                    databaseAppState.executeQuery("INSERT INTO mmo_players (user_id, map_name, data) VALUES (" + gamePlayerInfo_Human.getPlayerId() + ", '" + databaseAppState.escape(game.getMap().getName()) + "', '" + databaseAppState.escape(newData) + "')");
+                } else {
+                    databaseAppState.executeQuery("UPDATE mmo_players SET data = '" + databaseAppState.escape(newData) + "' WHERE " + whereLimitClause);
+                }
+            } catch (JsonProcessingException ex) {
+                ex.printStackTrace();
             }
-        } catch (JsonProcessingException ex) {
-            ex.printStackTrace();
         }
     }
 }
