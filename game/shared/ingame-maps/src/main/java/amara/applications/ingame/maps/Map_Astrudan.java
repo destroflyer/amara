@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.maps;
 
 import amara.applications.ingame.entitysystem.components.conditions.NameAmountConditionComponent;
@@ -31,10 +27,6 @@ import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.entitysystem.EntityWrapper;
 import com.jme3.math.Vector2f;
 
-/**
- *
- * @author Carl
- */
 public class Map_Astrudan extends Map {
 
     @Override
@@ -56,7 +48,9 @@ public class Map_Astrudan extends Map {
         entityWorld.setComponent(spawnInformation, new SpawnTemplateComponent("units/astrudan_creep"));
         entityWorld.setComponent(spawnMobsEffect, new SpawnComponent(spawnInformation));
         entityWorld.setComponent(spawnMobsTrigger, new TriggeredEffectComponent(spawnMobsEffect));
-        entityWorld.setComponent(spawnMobsTrigger, new TriggerSourceComponent(GAME_ENTITY));
+        int spawnMobsSource = entityWorld.createEntity();
+        entityWorld.setComponent(spawnMobsSource, new TeamComponent(0));
+        entityWorld.setComponent(spawnMobsTrigger, new TriggerSourceComponent(spawnMobsSource));
         // Shop
         EntityWrapper shop = entityWorld.getWrapped(entityWorld.createEntity());
         shop.setComponent(new ModelComponent("Models/chest/skin.xml"));
