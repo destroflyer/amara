@@ -8,6 +8,7 @@ import amara.applications.master.server.games.GamePlayerInfo;
 import amara.applications.master.server.games.GamePlayerInfo_Human;
 import amara.libraries.entitysystem.EntitySystem;
 import amara.libraries.entitysystem.EntityWorld;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -16,11 +17,14 @@ public class MMOPersistenceSystem implements EntitySystem {
     public MMOPersistenceSystem(DatabaseAppState databaseAppState, Game game) {
         this.databaseAppState = databaseAppState;
         this.game = game;
+
+        objectMapper = new ObjectMapper();
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
     private static final float UPDATE_INTERVAL = 10;
     private DatabaseAppState databaseAppState;
     private Game game;
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private ObjectMapper objectMapper;
     private float timeSinceLastUpdate;
 
     @Override

@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MMOItemState {
+    private String id;
     private String name;
     private String visualisation;
     private Float flatAbilityPower;

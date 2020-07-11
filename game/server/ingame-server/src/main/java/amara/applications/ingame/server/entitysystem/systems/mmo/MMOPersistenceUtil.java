@@ -2,10 +2,7 @@ package amara.applications.ingame.server.entitysystem.systems.mmo;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.general.NameComponent;
-import amara.applications.ingame.entitysystem.components.items.BagComponent;
-import amara.applications.ingame.entitysystem.components.items.InventoryComponent;
-import amara.applications.ingame.entitysystem.components.items.IsSellableComponent;
-import amara.applications.ingame.entitysystem.components.items.ItemVisualisationComponent;
+import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.entitysystem.components.physics.DirectionComponent;
 import amara.applications.ingame.entitysystem.components.physics.PositionComponent;
 import amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent;
@@ -14,6 +11,7 @@ import amara.applications.ingame.server.entitysystem.systems.mmo.state.MMOItemSt
 import amara.applications.ingame.server.entitysystem.systems.mmo.state.MMOPlayerState;
 import amara.applications.ingame.server.entitysystem.systems.mmo.state.MMOVectorState2f;
 import amara.libraries.entitysystem.EntityWorld;
+import amara.libraries.entitysystem.templates.EntityTemplate;
 import com.jme3.math.Vector2f;
 
 public class MMOPersistenceUtil {
@@ -59,53 +57,58 @@ public class MMOPersistenceUtil {
     private static MMOItemState getItemState(EntityWorld entityWorld, int itemEntity) {
         if (itemEntity != -1) {
             MMOItemState mmoItemState = new MMOItemState();
-            NameComponent nameComponent = entityWorld.getComponent(itemEntity, NameComponent.class);
-            if (nameComponent != null) {
-                mmoItemState.setName(nameComponent.getName());
-            }
-            ItemVisualisationComponent itemVisualisationComponent = entityWorld.getComponent(itemEntity, ItemVisualisationComponent.class);
-            if (itemVisualisationComponent != null) {
-                mmoItemState.setVisualisation(itemVisualisationComponent.getName());
-            }
-            BonusFlatAbilityPowerComponent bonusFlatAbilityPowerComponent = entityWorld.getComponent(itemEntity, BonusFlatAbilityPowerComponent.class);
-            if (bonusFlatAbilityPowerComponent != null) {
-                mmoItemState.setFlatAbilityPower(bonusFlatAbilityPowerComponent.getValue());
-            }
-            BonusFlatAttackDamageComponent bonusFlatAttackDamageComponent = entityWorld.getComponent(itemEntity, BonusFlatAttackDamageComponent.class);
-            if (bonusFlatAttackDamageComponent != null) {
-                mmoItemState.setFlatAttackDamage(bonusFlatAttackDamageComponent.getValue());
-            }
-            BonusFlatArmorComponent bonusFlatArmorComponent = entityWorld.getComponent(itemEntity, BonusFlatArmorComponent.class);
-            if (bonusFlatArmorComponent != null) {
-                mmoItemState.setFlatArmor(bonusFlatArmorComponent.getValue());
-            }
-            BonusFlatMagicResistanceComponent bonusFlatMagicResistanceComponent = entityWorld.getComponent(itemEntity, BonusFlatMagicResistanceComponent.class);
-            if (bonusFlatMagicResistanceComponent != null) {
-                mmoItemState.setFlatMagicResistance(bonusFlatMagicResistanceComponent.getValue());
-            }
-            BonusFlatMaximumHealthComponent bonusFlatMaximumHealthComponent = entityWorld.getComponent(itemEntity, BonusFlatMaximumHealthComponent.class);
-            if (bonusFlatMaximumHealthComponent != null) {
-                mmoItemState.setFlatMaximumHealth(bonusFlatMaximumHealthComponent.getValue());
-            }
-            BonusPercentageAttackSpeedComponent bonusPercentageAttackSpeedComponent = entityWorld.getComponent(itemEntity, BonusPercentageAttackSpeedComponent.class);
-            if (bonusPercentageAttackSpeedComponent != null) {
-                mmoItemState.setPercentageAttackSpeed(bonusPercentageAttackSpeedComponent.getValue());
-            }
-            BonusPercentageCooldownSpeedComponent bonusPercentageCooldownSpeedComponent = entityWorld.getComponent(itemEntity, BonusPercentageCooldownSpeedComponent.class);
-            if (bonusPercentageCooldownSpeedComponent != null) {
-                mmoItemState.setPercentageCooldownSpeed(bonusPercentageCooldownSpeedComponent.getValue());
-            }
-            BonusPercentageCriticalChanceComponent bonusPercentageCriticalChanceComponent = entityWorld.getComponent(itemEntity, BonusPercentageCriticalChanceComponent.class);
-            if (bonusPercentageCriticalChanceComponent != null) {
-                mmoItemState.setPercentageCriticalChance(bonusPercentageCriticalChanceComponent.getValue());
-            }
-            BonusPercentageLifestealComponent bonusPercentageLifestealComponent = entityWorld.getComponent(itemEntity, BonusPercentageLifestealComponent.class);
-            if (bonusPercentageLifestealComponent != null) {
-                mmoItemState.setPercentageLifesteal(bonusPercentageLifestealComponent.getValue());
-            }
-            IsSellableComponent isSellableComponent = entityWorld.getComponent(itemEntity, IsSellableComponent.class);
-            if (isSellableComponent != null) {
-                mmoItemState.setSellableGold(isSellableComponent.getGold());
+            ItemIDComponent itemIDComponent = entityWorld.getComponent(itemEntity, ItemIDComponent.class);
+            if (itemIDComponent != null) {
+                mmoItemState.setId(itemIDComponent.getID());
+            } else {
+                NameComponent nameComponent = entityWorld.getComponent(itemEntity, NameComponent.class);
+                if (nameComponent != null) {
+                    mmoItemState.setName(nameComponent.getName());
+                }
+                ItemVisualisationComponent itemVisualisationComponent = entityWorld.getComponent(itemEntity, ItemVisualisationComponent.class);
+                if (itemVisualisationComponent != null) {
+                    mmoItemState.setVisualisation(itemVisualisationComponent.getName());
+                }
+                BonusFlatAbilityPowerComponent bonusFlatAbilityPowerComponent = entityWorld.getComponent(itemEntity, BonusFlatAbilityPowerComponent.class);
+                if (bonusFlatAbilityPowerComponent != null) {
+                    mmoItemState.setFlatAbilityPower(bonusFlatAbilityPowerComponent.getValue());
+                }
+                BonusFlatAttackDamageComponent bonusFlatAttackDamageComponent = entityWorld.getComponent(itemEntity, BonusFlatAttackDamageComponent.class);
+                if (bonusFlatAttackDamageComponent != null) {
+                    mmoItemState.setFlatAttackDamage(bonusFlatAttackDamageComponent.getValue());
+                }
+                BonusFlatArmorComponent bonusFlatArmorComponent = entityWorld.getComponent(itemEntity, BonusFlatArmorComponent.class);
+                if (bonusFlatArmorComponent != null) {
+                    mmoItemState.setFlatArmor(bonusFlatArmorComponent.getValue());
+                }
+                BonusFlatMagicResistanceComponent bonusFlatMagicResistanceComponent = entityWorld.getComponent(itemEntity, BonusFlatMagicResistanceComponent.class);
+                if (bonusFlatMagicResistanceComponent != null) {
+                    mmoItemState.setFlatMagicResistance(bonusFlatMagicResistanceComponent.getValue());
+                }
+                BonusFlatMaximumHealthComponent bonusFlatMaximumHealthComponent = entityWorld.getComponent(itemEntity, BonusFlatMaximumHealthComponent.class);
+                if (bonusFlatMaximumHealthComponent != null) {
+                    mmoItemState.setFlatMaximumHealth(bonusFlatMaximumHealthComponent.getValue());
+                }
+                BonusPercentageAttackSpeedComponent bonusPercentageAttackSpeedComponent = entityWorld.getComponent(itemEntity, BonusPercentageAttackSpeedComponent.class);
+                if (bonusPercentageAttackSpeedComponent != null) {
+                    mmoItemState.setPercentageAttackSpeed(bonusPercentageAttackSpeedComponent.getValue());
+                }
+                BonusPercentageCooldownSpeedComponent bonusPercentageCooldownSpeedComponent = entityWorld.getComponent(itemEntity, BonusPercentageCooldownSpeedComponent.class);
+                if (bonusPercentageCooldownSpeedComponent != null) {
+                    mmoItemState.setPercentageCooldownSpeed(bonusPercentageCooldownSpeedComponent.getValue());
+                }
+                BonusPercentageCriticalChanceComponent bonusPercentageCriticalChanceComponent = entityWorld.getComponent(itemEntity, BonusPercentageCriticalChanceComponent.class);
+                if (bonusPercentageCriticalChanceComponent != null) {
+                    mmoItemState.setPercentageCriticalChance(bonusPercentageCriticalChanceComponent.getValue());
+                }
+                BonusPercentageLifestealComponent bonusPercentageLifestealComponent = entityWorld.getComponent(itemEntity, BonusPercentageLifestealComponent.class);
+                if (bonusPercentageLifestealComponent != null) {
+                    mmoItemState.setPercentageLifesteal(bonusPercentageLifestealComponent.getValue());
+                }
+                IsSellableComponent isSellableComponent = entityWorld.getComponent(itemEntity, IsSellableComponent.class);
+                if (isSellableComponent != null) {
+                    mmoItemState.setSellableGold(isSellableComponent.getGold());
+                }
             }
             return mmoItemState;
         }
@@ -152,57 +155,62 @@ public class MMOPersistenceUtil {
 
     private static int loadItemState(EntityWorld entityWorld, MMOItemState mmoItemState) {
         int itemEntity = entityWorld.createEntity();
-        String name = mmoItemState.getName();
-        if (name != null) {
-            entityWorld.setComponent(itemEntity, new NameComponent(name));
-        }
-        String visualisation = mmoItemState.getVisualisation();
-        if (visualisation != null) {
-            entityWorld.setComponent(itemEntity, new ItemVisualisationComponent(visualisation));
-        }
-        Float flatAbilityPower = mmoItemState.getFlatAbilityPower();
-        if (flatAbilityPower != null) {
-            entityWorld.setComponent(itemEntity, new BonusFlatAbilityPowerComponent(flatAbilityPower));
-        }
-        Float flatAttackDamage = mmoItemState.getFlatAttackDamage();
-        if (flatAttackDamage != null) {
-            entityWorld.setComponent(itemEntity, new BonusFlatAttackDamageComponent(flatAttackDamage));
-        }
-        Float flatArmor = mmoItemState.getFlatArmor();
-        if (flatArmor != null) {
-            entityWorld.setComponent(itemEntity, new BonusFlatArmorComponent(flatArmor));
-        }
-        Float flatMagicResistance = mmoItemState.getFlatMagicResistance();
-        if (flatMagicResistance != null) {
-            entityWorld.setComponent(itemEntity, new BonusFlatMagicResistanceComponent(flatMagicResistance));
-        }
-        Float flatMaximumHealth = mmoItemState.getFlatMaximumHealth();
-        if (flatMaximumHealth != null) {
-            entityWorld.setComponent(itemEntity, new BonusFlatMaximumHealthComponent(flatMaximumHealth));
-        }
-        Float percentageAttackSpeed = mmoItemState.getPercentageAttackSpeed();
-        if (percentageAttackSpeed != null) {
-            entityWorld.setComponent(itemEntity, new BonusPercentageAttackSpeedComponent(percentageAttackSpeed));
-        }
-        Float percentageCooldownSpeed = mmoItemState.getPercentageCooldownSpeed();
-        if (percentageCooldownSpeed != null) {
-            entityWorld.setComponent(itemEntity, new BonusPercentageCooldownSpeedComponent(percentageCooldownSpeed));
-        }
-        Float percentageCriticalChance = mmoItemState.getPercentageCriticalChance();
-        if (percentageCriticalChance != null) {
-            entityWorld.setComponent(itemEntity, new BonusPercentageCriticalChanceComponent(percentageCriticalChance));
-        }
-        Float percentageLifesteal = mmoItemState.getPercentageLifesteal();
-        if (percentageLifesteal != null) {
-            entityWorld.setComponent(itemEntity, new BonusPercentageLifestealComponent(percentageLifesteal));
-        }
-        Float percentageWalkSpeed = mmoItemState.getPercentageWalkSpeed();
-        if (percentageWalkSpeed != null) {
-            entityWorld.setComponent(itemEntity, new BonusPercentageWalkSpeedComponent(percentageWalkSpeed));
-        }
-        Float sellableGold = mmoItemState.getSellableGold();
-        if (sellableGold != null) {
-            entityWorld.setComponent(itemEntity, new IsSellableComponent(sellableGold));
+        String id = mmoItemState.getId();
+        if (id != null) {
+            EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + id);
+        } else {
+            String name = mmoItemState.getName();
+            if (name != null) {
+                entityWorld.setComponent(itemEntity, new NameComponent(name));
+            }
+            String visualisation = mmoItemState.getVisualisation();
+            if (visualisation != null) {
+                entityWorld.setComponent(itemEntity, new ItemVisualisationComponent(visualisation));
+            }
+            Float flatAbilityPower = mmoItemState.getFlatAbilityPower();
+            if (flatAbilityPower != null) {
+                entityWorld.setComponent(itemEntity, new BonusFlatAbilityPowerComponent(flatAbilityPower));
+            }
+            Float flatAttackDamage = mmoItemState.getFlatAttackDamage();
+            if (flatAttackDamage != null) {
+                entityWorld.setComponent(itemEntity, new BonusFlatAttackDamageComponent(flatAttackDamage));
+            }
+            Float flatArmor = mmoItemState.getFlatArmor();
+            if (flatArmor != null) {
+                entityWorld.setComponent(itemEntity, new BonusFlatArmorComponent(flatArmor));
+            }
+            Float flatMagicResistance = mmoItemState.getFlatMagicResistance();
+            if (flatMagicResistance != null) {
+                entityWorld.setComponent(itemEntity, new BonusFlatMagicResistanceComponent(flatMagicResistance));
+            }
+            Float flatMaximumHealth = mmoItemState.getFlatMaximumHealth();
+            if (flatMaximumHealth != null) {
+                entityWorld.setComponent(itemEntity, new BonusFlatMaximumHealthComponent(flatMaximumHealth));
+            }
+            Float percentageAttackSpeed = mmoItemState.getPercentageAttackSpeed();
+            if (percentageAttackSpeed != null) {
+                entityWorld.setComponent(itemEntity, new BonusPercentageAttackSpeedComponent(percentageAttackSpeed));
+            }
+            Float percentageCooldownSpeed = mmoItemState.getPercentageCooldownSpeed();
+            if (percentageCooldownSpeed != null) {
+                entityWorld.setComponent(itemEntity, new BonusPercentageCooldownSpeedComponent(percentageCooldownSpeed));
+            }
+            Float percentageCriticalChance = mmoItemState.getPercentageCriticalChance();
+            if (percentageCriticalChance != null) {
+                entityWorld.setComponent(itemEntity, new BonusPercentageCriticalChanceComponent(percentageCriticalChance));
+            }
+            Float percentageLifesteal = mmoItemState.getPercentageLifesteal();
+            if (percentageLifesteal != null) {
+                entityWorld.setComponent(itemEntity, new BonusPercentageLifestealComponent(percentageLifesteal));
+            }
+            Float percentageWalkSpeed = mmoItemState.getPercentageWalkSpeed();
+            if (percentageWalkSpeed != null) {
+                entityWorld.setComponent(itemEntity, new BonusPercentageWalkSpeedComponent(percentageWalkSpeed));
+            }
+            Float sellableGold = mmoItemState.getSellableGold();
+            if (sellableGold != null) {
+                entityWorld.setComponent(itemEntity, new IsSellableComponent(sellableGold));
+            }
         }
         return itemEntity;
     }
