@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.tools.editors.map.appstates;
 
 import java.util.ArrayList;
@@ -37,10 +33,6 @@ import amara.libraries.physics.shapes.*;
 import amara.tools.editors.map.MapEditorApplication;
 import amara.tools.editors.map.gui.ScreenController_MapEditor;
 
-/**
- *
- * @author Carl
- */
 public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication> implements ActionListener{
 
     public enum Action{
@@ -130,6 +122,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         mainApplication.getInputManager().addMapping("editor_5", new KeyTrigger(KeyInput.KEY_5));
         mainApplication.getInputManager().addMapping("editor_6", new KeyTrigger(KeyInput.KEY_6));
         mainApplication.getInputManager().addMapping("editor_7", new KeyTrigger(KeyInput.KEY_7));
+        mainApplication.getInputManager().addMapping("editor_8", new KeyTrigger(KeyInput.KEY_8));
         mainApplication.getInputManager().addMapping("editor_x", new KeyTrigger(KeyInput.KEY_X));
         mainApplication.getInputManager().addMapping("editor_q", new KeyTrigger(KeyInput.KEY_Q));
         mainApplication.getInputManager().addMapping("editor_w", new KeyTrigger(KeyInput.KEY_W));
@@ -137,7 +130,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         mainApplication.getInputManager().addMapping("editor_left_shift", new KeyTrigger(KeyInput.KEY_LSHIFT));
         mainApplication.getInputManager().addListener(this, new String[]{
             "editor_mouse_click_left","editor_mouse_click_right","editor_mouse_wheel_up","editor_mouse_wheel_down",
-            "editor_1","editor_2","editor_3","editor_4","editor_5","editor_6","editor_7",
+            "editor_1","editor_2","editor_3","editor_4","editor_5","editor_6","editor_7","editor_8",
             "editor_x","editor_q","editor_w","editor_enter","editor_left_shift"
         });
         getAppState(MapObstaclesAppState.class).setDisplayObstacles(true);
@@ -196,6 +189,9 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         else if(actionName.equals("editor_7") && value){
             ScreenController_MapEditor screenController_MapEditor = getAppState(NiftyAppState.class).getScreenController(ScreenController_MapEditor.class);
             screenController_MapEditor.toggleHoveredCoordinates();
+        }
+        else if(actionName.equals("editor_8") && value){
+            mirrorObstacles();
         }
         else if(actionName.equals("editor_x")){
             if(value){
@@ -542,7 +538,34 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
             camera.lookAtDirection(new Vector3f(0, -1, 0), Vector3f.UNIT_Z);
         }
     }
-    
+
+    public void mirrorObstacles() {
+        MapPhysicsInformation mapPhysicsInformation = getAppState(MapAppState.class).getMap().getPhysicsInformation();
+        ArrayList<MapObstacle> obstacles = mapPhysicsInformation.getObstacles();
+        for (MapObstacle obstacle : new ArrayList<>(obstacles)) {
+            MapObstacle mirroredObstacle = null;
+            if (obstacle instanceof MapObstacle_Polygon) {
+                ArrayList<Vector2D> mirroredOutline = new ArrayList<>();
+                for (Vector2D outlinePoint : obstacle.getConvexedOutline().getCcwOutline()) {
+                    mirroredOutline.add(mirrorPositionX(outlinePoint, mapPhysicsInformation.getWidth()));
+                }
+                mirroredObstacle = new MapObstacle_Polygon(mirroredOutline);
+            } else if (obstacle instanceof MapObstacle_Circle) {
+                MapObstacle_Circle obstacle_Circle = (MapObstacle_Circle) obstacle;
+                Circle circle = (Circle) obstacle_Circle.getConvexedOutline().getConvexShapes().get(0);
+                Vector2D mirroredPosition = mirrorPositionX(circle.getGlobalPosition(), mapPhysicsInformation.getWidth());
+                mirroredObstacle = new MapObstacle_Circle(mirroredPosition, circle.getLocalRadius());
+            }
+            obstacles.add(mirroredObstacle);
+        }
+        getAppState(MapObstaclesAppState.class).update();
+    }
+
+    private Vector2D mirrorPositionX(Vector2D position, float mapWidth) {
+        double mirroredX = ((1 - (position.getX() / mapWidth)) * mapWidth);
+        return new Vector2D(mirroredX, position.getY());
+    }
+
     private void updateToolInformation(){
         ScreenController_MapEditor screenController_MapEditor = getAppState(NiftyAppState.class).getScreenController(ScreenController_MapEditor.class);
         String text = "Tool: " + currentAction.name();

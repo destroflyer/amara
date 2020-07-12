@@ -69,9 +69,17 @@ public final class PolyMapManager
         addNavigationMap(poly, radius);
         return poly;
     }
+
     public void addNavigationMap(Polygon poly, double radius)
     {
-        NavigationMap navi = new NavigationMap(poly);
+        ArrayList<Vector2D> tris = poly.triangles();
+        tris = new Triangulator().delaunayTris(tris);
+        addNavigationMap(poly, tris, radius);
+    }
+
+    public void addNavigationMap(Polygon poly, ArrayList<Vector2D> tris, double radius)
+    {
+        NavigationMap navi = new NavigationMap(poly, tris);
         navis.put(radius, navi);
     }
     

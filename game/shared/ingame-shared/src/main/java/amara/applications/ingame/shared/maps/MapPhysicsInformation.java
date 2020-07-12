@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.shared.maps;
 
 import amara.libraries.physics.PolyHelper;
@@ -14,10 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- *
- * @author Carl
- */
 public class MapPhysicsInformation {
 
     public MapPhysicsInformation(float width, float height, float heightmapScale, float groundHeight, ArrayList<MapObstacle> obstacles) {
@@ -26,7 +18,9 @@ public class MapPhysicsInformation {
         this.heightmapScale = heightmapScale;
         this.groundHeight = groundHeight;
         this.obstacles = obstacles;
+        System.out.println("Creating poly map manager... (" + width + "x" + height + " with " + obstacles.size() + " obstacles)");
         polyMapManager = createPolyMapManager();
+        System.out.println("Finished creating poly map manager.");
     }
     private float width;
     private float height;

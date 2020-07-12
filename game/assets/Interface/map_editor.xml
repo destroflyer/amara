@@ -45,6 +45,10 @@
                         <interact onClick="toggleHoveredCoordinates()"/>
                     </image>
                     <panel width="10px"/>
+                    <image filename="Interface/hud/editor/button_mirror.png" width="60px" height="100%w">
+                        <interact onClick="mirrorObstacles()"/>
+                    </image>
+                    <panel width="10px"/>
                     <image filename="Interface/hud/editor/button_cheesecake.png" width="60px" height="100%w">
                         <interact onClick="showCheesecakeMessage()"/>
                     </image>

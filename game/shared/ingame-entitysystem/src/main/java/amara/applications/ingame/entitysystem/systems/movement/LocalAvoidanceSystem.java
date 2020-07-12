@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.movement;
 
 import com.jme3.math.Vector2f;
@@ -11,10 +7,6 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.systems.physics.intersectionHelper.IntersectionFilter;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
 public class LocalAvoidanceSystem implements EntitySystem{
     
     @Override
@@ -37,11 +29,9 @@ public class LocalAvoidanceSystem implements EntitySystem{
         int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
         Vector2f movementDirectionNormalized = movementDirection.normalize();
         float movementSpeed = entityWorld.getComponent(movementEntity, MovementSpeedComponent.class).getSpeed();
-        float movementSpeedPerFrame = (movementSpeed * deltaSeconds);
-        Vector2f movementPerFrame = movementDirectionNormalized.mult(movementSpeedPerFrame);
         Vector2f resultingVector = new Vector2f();
-        // Fine adjusted by testing, is adaptable if need arises
-        float minimumDistance = (1f * movementSpeed);
+        // Factor adjusted by testing, is adaptable if need arises
+        float minimumDistance = (0.75f * movementSpeed);
         float squaredMinimumDistance = (minimumDistance * minimumDistance);
         for(int targetEntity : entityWorld.getEntitiesWithAll(PositionComponent.class, HitboxComponent.class, HitboxActiveComponent.class, IntersectionPushComponent.class)){
             if((targetEntity != entity) && IntersectionFilter.areCollisionGroupsMatching(entityWorld, entity, targetEntity)){
@@ -50,13 +40,14 @@ public class LocalAvoidanceSystem implements EntitySystem{
                 Vector2f distanceNormalized = distance.normalize();
                 float distanceLengthSquared = distance.lengthSquared();
                 if(distanceLengthSquared <= squaredMinimumDistance){
+                    // Scalar product is positive if angle is acute, i.e. if the target is "in the way" of the moving entity
                     float angle = movementDirectionNormalized.dot(distanceNormalized);
                     if(angle > 0){
                         float targetHitboxRadius = TargetedMovementSystem.getHitboxRadius(entityWorld, targetEntity);
-                        float scale = ((minimumDistance - distance.length() + targetHitboxRadius + hitboxRadius) / minimumDistance);
-                        scale *= angle;
-                        Vector2f avoidanceVector = distanceNormalized.mult(-1 * movementSpeedPerFrame * scale);
-                        avoidanceVector.addLocal(movementPerFrame);
+                        // Factor adjusted by testing, is adaptable if need arises
+                        float scale = (0.5f * ((minimumDistance - distance.length() + targetHitboxRadius + hitboxRadius) / minimumDistance));
+                        Vector2f orthogonalAvoidance = new Vector2f(-1 * distanceNormalized.getY(), distanceNormalized.getX()).multLocal(scale);
+                        Vector2f avoidanceVector = movementDirectionNormalized.add(orthogonalAvoidance);
                         resultingVector.addLocal(avoidanceVector);
                     }
                 }

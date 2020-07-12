@@ -19,11 +19,9 @@ public class NavigationMap
     private TriangleStar star;
 //    private AbstractTriangleStar aStar;
 
-    public NavigationMap(Polygon poly)
+    public NavigationMap(Polygon poly, ArrayList<Vector2D> tris)
     {
         this.poly = poly;
-        ArrayList<Vector2D> tris = poly.triangles();
-        tris = new Triangulator().delaunayTris(tris);
 //        graph = new TriangleGraph(tris, 2, 3);
         star = new TriangleStar(tris);
 //        aStar = new AbstractTriangleStar(tris);

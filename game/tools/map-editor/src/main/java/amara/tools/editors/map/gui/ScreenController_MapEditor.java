@@ -80,11 +80,15 @@ public class ScreenController_MapEditor extends GameScreenController{
     public void setAction_PaintTerrainAlphamap(){
         getMapEditorAppState().setAction(MapEditorAppState.Action.PAINT_TERRAIN_ALPHAMAP);
     }
-    
+
     public void changeCameraAngle(){
         getMapEditorAppState().changeCameraAngle();
     }
-    
+
+    public void mirrorObstacles() {
+        getMapEditorAppState().mirrorObstacles();
+    }
+
     private MapEditorAppState getMapEditorAppState(){
         return mainApplication.getStateManager().getState(MapEditorAppState.class);
     }
