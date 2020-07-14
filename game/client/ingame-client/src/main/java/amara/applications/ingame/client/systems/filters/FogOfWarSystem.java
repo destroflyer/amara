@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.filters;
 
 import java.util.ArrayList;
@@ -23,10 +19,6 @@ import amara.libraries.physics.shapes.*;
 import amara.libraries.physics.shapes.PolygonMath.*;
 import amara.libraries.physics.shapes.vision.*;
 
-/**
- *
- * @author Carl
- */
 public class FogOfWarSystem implements EntitySystem {
 
     public FogOfWarSystem(PlayerTeamSystem playerTeamSystem, PostFilterAppState postFilterAppState, final MapPhysicsInformation mapPhysicsInformation) {
@@ -129,15 +121,8 @@ public class FogOfWarSystem implements EntitySystem {
                 PositionComponent positionComponent = entityWorld.getComponent(entity, PositionComponent.class);
                 Vector2D position = new Vector2D(positionComponent.getPosition().getX(), positionComponent.getPosition().getY());
                 float sightRange = entityWorld.getComponent(entity, SightRangeComponent.class).getRange();
-                Polygon sightPolygon;
-                if (true) {
-                    //Fast way using shapes
-                    ArrayList<Vector2D> sightOutline = teamVision.getSightOutline(position, sightRange);
-                    sightPolygon = PolyHelper.fromOutline(sightOutline);
-                } else {
-                    //Slow way using polygons
-                    sightPolygon = mapPhysicsInformation.getPolyMapManager().sightPolygon(position, sightRange);
-                }
+                ArrayList<Vector2D> sightOutline = teamVision.getSightOutline(position, sightRange);
+                Polygon sightPolygon = PolyHelper.fromOutline(sightOutline);
                 sightPolygon.rasterize(fogRaster, position, sightRange);
             }
         }

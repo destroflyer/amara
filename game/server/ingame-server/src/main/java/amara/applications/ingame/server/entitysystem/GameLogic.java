@@ -46,6 +46,7 @@ import amara.applications.ingame.entitysystem.systems.units.*;
 import amara.applications.ingame.entitysystem.systems.units.scores.*;
 import amara.applications.ingame.entitysystem.systems.visuals.*;
 import amara.applications.ingame.network.messages.objects.commands.PlayerCommand;
+import amara.applications.ingame.server.maps.PolyMapLoader;
 import amara.applications.ingame.shared.maps.Map;
 import amara.applications.master.server.games.Game;
 import amara.core.Queue;
@@ -78,10 +79,7 @@ public class GameLogic {
         map.setEntity(mapEntity);
 
         IntersectionObserver intersectionObserver = new IntersectionObserver();
-        PolyMapManager polyMapManager = game.getMap().getPhysicsInformation().getPolyMapManager();
-        System.out.println("Calculating navigation meshes...");
-        polyMapManager.calcNavigationMap(1.5);
-        System.out.println("Finished calculating navigation meshes.");
+        PolyMapManager polyMapManager = PolyMapLoader.createPolyMapManager(game.getMap());
 
         entitySystems = new LinkedList<>();
         entitySystems.add(new SetAutoAttacksCastAnimationsSystem());

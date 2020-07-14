@@ -1,9 +1,5 @@
 package amara.applications.ingame.shared.maps;
 
-import amara.libraries.physics.PolyHelper;
-import amara.libraries.physics.intersectionHelper.PolyMapManager;
-import amara.libraries.physics.shapes.ConvexShape;
-import amara.libraries.physics.shapes.PolygonMath.Polygon;
 import amara.libraries.physics.shapes.vision.VisionObstacle;
 
 import java.util.ArrayList;
@@ -18,25 +14,12 @@ public class MapPhysicsInformation {
         this.heightmapScale = heightmapScale;
         this.groundHeight = groundHeight;
         this.obstacles = obstacles;
-        System.out.println("Creating poly map manager... (" + width + "x" + height + " with " + obstacles.size() + " obstacles)");
-        polyMapManager = createPolyMapManager();
-        System.out.println("Finished creating poly map manager.");
     }
     private float width;
     private float height;
     private float heightmapScale;
     private float groundHeight;
     private ArrayList<MapObstacle> obstacles;
-    private PolyMapManager polyMapManager;
-
-    private PolyMapManager createPolyMapManager(){
-        ArrayList<ConvexShape> convexShapes = new ArrayList<>();
-        for (MapObstacle obstacle : obstacles) {
-            convexShapes.addAll(obstacle.getConvexedOutline().getConvexShapes());
-        }
-        Polygon polygon = PolyHelper.fromConvexShapes(convexShapes);
-        return new PolyMapManager(polygon, width, height);
-    }
 
     public List<VisionObstacle> generateVisionObstacles() {
         return obstacles.stream()
@@ -63,9 +46,5 @@ public class MapPhysicsInformation {
 
     public ArrayList<MapObstacle> getObstacles() {
         return obstacles;
-    }
-
-    public PolyMapManager getPolyMapManager() {
-        return polyMapManager;
     }
 }

@@ -26,12 +26,11 @@ public final class PolyMapManager
     
     private HashMap<Integer, TrianglePath> triPaths = new HashMap<Integer, TrianglePath>();
 
-    public PolyMapManager(Polygon map, double width, double height)
+    public PolyMapManager(Polygon boundedMapPolygon, double width, double height)
     {
         this.width = width;
         this.height = height;
-        this.map = map.union(PolyHelper.rectangle(0, 0, width, height).inverse());
-        addNavigationMap(this.map.inverse(), 0);
+        this.map = boundedMapPolygon;
     }
     
     public Polygon getMapPolygon()
@@ -59,22 +58,6 @@ public final class PolyMapManager
         if(pos.getX() + radius <= 0 || width <= pos.getX() - radius) return true;
         if(pos.getY() + radius <= 0 || height <= pos.getY() - radius) return true;
         return false;
-    }
-    
-    public Polygon calcNavigationMap(double radius)
-    {
-        int edges = 8;
-        Polygon poly = PolyHelper.regularCyclic(0, 0, radius, edges);
-        poly = map.minkowskiAdd(poly).inverse();
-        addNavigationMap(poly, radius);
-        return poly;
-    }
-
-    public void addNavigationMap(Polygon poly, double radius)
-    {
-        ArrayList<Vector2D> tris = poly.triangles();
-        tris = new Triangulator().delaunayTris(tris);
-        addNavigationMap(poly, tris, radius);
     }
 
     public void addNavigationMap(Polygon poly, ArrayList<Vector2D> tris, double radius)

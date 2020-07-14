@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.test;
 
 import amara.applications.ingame.entitysystem.CustomGameTemplates;
@@ -11,9 +7,9 @@ import amara.applications.ingame.entitysystem.templates.CustomSerializer_Ingame;
 import amara.applications.ingame.network.messages.objects.commands.Command;
 import amara.applications.ingame.network.messages.objects.commands.PlayerCommand;
 import amara.applications.ingame.server.entitysystem.GameLogic;
+import amara.applications.ingame.shared.maps.MapFileHandler;
 import amara.applications.master.server.games.Game;
 import amara.applications.ingame.shared.maps.Map;
-import amara.applications.ingame.shared.maps.MapPhysicsInformation;
 import amara.core.Queue;
 import amara.core.files.FileAssets;
 import amara.libraries.entitysystem.EntitySystem;
@@ -24,16 +20,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.mockito.Mock;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
-/**
- *
- * @author Carl
- */
 public class GameLogicTest {
 
     private final float TICK_LENGTH = (1f / 60);
@@ -44,8 +35,6 @@ public class GameLogicTest {
     protected EntityWorld entityWorld = new EntityWorld();
     @Mock
     private Game gameMock;
-    @Mock
-    private Map mapMock;
     private Queue<PlayerCommand> playerCommandsQueue = new Queue<>();
     @Mock
     private ExecuteAIActionsSystem.EntityBotsMap entityBotsMapMock;
@@ -66,8 +55,8 @@ public class GameLogicTest {
 
     @Before
     public void initializeGameLogic() {
-        when(gameMock.getMap()).thenReturn(mapMock);
-        when(mapMock.getPhysicsInformation()).thenReturn(new MapPhysicsInformation(100, 100, 0.1f, 1, new ArrayList<>()));
+        Map map = MapFileHandler.load("empty");
+        when(gameMock.getMap()).thenReturn(map);
         when(gameMock.getTeamsCount()).thenReturn(2);
 
         gameLogic = new GameLogic(entityWorld, gameMock, playerCommandsQueue, entityBotsMapMock);
