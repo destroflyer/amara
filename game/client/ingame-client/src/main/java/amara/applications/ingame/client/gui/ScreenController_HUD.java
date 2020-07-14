@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.gui;
 
 import amara.applications.ingame.client.appstates.*;
@@ -46,24 +42,6 @@ public class ScreenController_HUD extends GameScreenController {
     private BagPanelGenerator bagPanelGenerator = new BagPanelGenerator();
     private ScoreboardGenerator scoreboardGenerator = new ScoreboardGenerator();
     private DeathRecapGenerator deathRecapGenerator = new DeathRecapGenerator();
-
-    @Override
-    public void onStartup() {
-        super.onStartup();
-        hidePlayerAnnouncement();
-        setInspectionVisible(false);
-        hideLevel("player");
-        setExperience(0);
-        hidePlayer_PassiveCooldown();
-        for (int i = 0; i < 4; i++) {
-            hidePlayer_SpellCooldown(i);
-        }
-        for (int i = 0; i < 2; i++) {
-            hidePlayer_MapSpellCooldown(i);
-        }
-        setPlayer_UpgradeSpellsLayerVisible(false);
-        hidePlayer_UpgradeSpell();
-    }
 
     public void hidePlayerAnnouncement(){
         getElementByID("player_announcement").hide();

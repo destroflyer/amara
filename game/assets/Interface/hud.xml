@@ -5,7 +5,7 @@
     <useControls filename="nifty-default-controls.xml"/>
     <screen id="start" controller="amara.applications.ingame.client.gui.ScreenController_HUD">
         <!--player announcement-->
-        <layer id="player_announcement" childLayout="center">
+        <layer id="player_announcement" childLayout="center" visible="false">
             <panel childLayout="vertical">
                 <panel height="30px"/>
                 <panel childLayout="horizontal">
@@ -17,7 +17,7 @@
             </panel>
         </layer>
         <!--selected unit info-->
-        <layer id="inspection_attributes" childLayout="center">
+        <layer id="inspection_attributes" childLayout="center" visible="false">
             <panel childLayout="vertical">
                 <panel height="7px"/>
                 <panel childLayout="horizontal" height="122px">
@@ -107,11 +107,11 @@
             </panel>
         </layer>
         <layer childLayout="center">
-            <panel id="inspection_inventory_items_wrapper" childLayout="center">
+            <panel id="inspection_inventory_items_wrapper" childLayout="center" visible="false">
                 <!--Generated panel "inspection_inventory_items"-->
             </panel>
         </layer>
-        <layer id="inspection_inventory_background" childLayout="center">
+        <layer id="inspection_inventory_background" childLayout="center" visible="false">
             <panel childLayout="vertical">
                 <panel height="140px"/>
                 <panel childLayout="horizontal" height="10px">
@@ -121,7 +121,7 @@
                 <panel/>
             </panel>
         </layer>
-        <layer id="inspection_background" childLayout="center">
+        <layer id="inspection_background" childLayout="center" visible="false">
             <panel childLayout="vertical">
                 <panel childLayout="horizontal" height="200px">
                     <image filename="Interface/hud/unit_top_left.png" width="400px" height="100%"></image>
@@ -130,7 +130,7 @@
                 <panel/>
             </panel>
         </layer>
-        <layer id="inspection_level_layer" childLayout="center">
+        <layer id="inspection_level_layer" childLayout="center" visible="false">
             <panel childLayout="vertical">
                 <panel height="142px"/>
                 <panel childLayout="horizontal" height="17px">
@@ -249,7 +249,7 @@
                 <panel/>
                 <panel childLayout="horizontal" height="10px">
                     <panel width="59px"/>
-                    <panel id="player_experience_bar" width="257px" height="100%" backgroundColor="#09FF"/>
+                    <panel id="player_experience_bar" width="0px" height="100%" backgroundColor="#09FF"/>
                 </panel>
                 <panel height="140px"/>
             </panel>
@@ -268,7 +268,7 @@
                 <panel/>
                 <panel childLayout="horizontal" height="17px">
                     <panel width="14px"/>
-                    <text id="player_level" text="?" width="40px" textHAlign="center" font="Interface/fonts/Verdana_12.fnt"/>
+                    <text id="player_level" text="" width="40px" textHAlign="center" font="Interface/fonts/Verdana_12.fnt"/>
                     <panel/>
                 </panel>
                 <panel height="153px"/>
@@ -322,7 +322,7 @@
                                             <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                         </effect>
                                     </image>
-                                    <panel id="player_passive_cooldown_0" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <panel id="player_passive_cooldown_0" childLayout="center" width="100%" height="100%" backgroundColor="#000C" visible="false">
                                         <text id="player_passive_cooldown_time_0" text="???" font="Interface/fonts/Verdana_14.fnt"/>
                                     </panel>
                                 </panel>
@@ -335,7 +335,7 @@
                                         <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                     </effect>
                                 </image>
-                                <panel id="player_spell_cooldown_0" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                <panel id="player_spell_cooldown_0" childLayout="center" width="100%" height="100%" backgroundColor="#000C" visible="false">
                                     <text id="player_spell_cooldown_time_0" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
                             </panel>
@@ -347,7 +347,7 @@
                                         <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                     </effect>
                                 </image>
-                                <panel id="player_spell_cooldown_1" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                <panel id="player_spell_cooldown_1" childLayout="center" width="100%" height="100%" backgroundColor="#000C" visible="false">
                                     <text id="player_spell_cooldown_time_1" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
                             </panel>
@@ -359,7 +359,7 @@
                                         <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                     </effect>
                                 </image>
-                                <panel id="player_spell_cooldown_2" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                <panel id="player_spell_cooldown_2" childLayout="center" width="100%" height="100%" backgroundColor="#000C" visible="false">
                                     <text id="player_spell_cooldown_time_2" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
                             </panel>
@@ -371,7 +371,7 @@
                                         <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                     </effect>
                                 </image>
-                                <panel id="player_spell_cooldown_3" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                <panel id="player_spell_cooldown_3" childLayout="center" width="100%" height="100%" backgroundColor="#000C" visible="false">
                                     <text id="player_spell_cooldown_time_3" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
                             </panel>
@@ -385,7 +385,7 @@
                                             <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                         </effect>
                                     </image>
-                                    <panel id="player_map_spell_cooldown_0" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <panel id="player_map_spell_cooldown_0" childLayout="center" width="100%" height="100%" backgroundColor="#000C" visible="false">
                                         <text id="player_map_spell_cooldown_time_0" text="???" font="Interface/fonts/Verdana_14.fnt"/>
                                     </panel>
                                 </panel>
@@ -400,7 +400,7 @@
                                             <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                         </effect>
                                     </image>
-                                    <panel id="player_map_spell_cooldown_1" childLayout="center" width="100%" height="100%" backgroundColor="#000C">
+                                    <panel id="player_map_spell_cooldown_1" childLayout="center" width="100%" height="100%" backgroundColor="#000C" visible="false">
                                         <text id="player_map_spell_cooldown_time_1" text="???" font="Interface/fonts/Verdana_14.fnt"/>
                                     </panel>
                                 </panel>
@@ -505,7 +505,7 @@
             </panel>
         </layer>
         <!--upgrade spells-->
-        <layer id="upgrade_spells_layer" childLayout="center">
+        <layer id="upgrade_spells_layer" childLayout="center" visible="false">
             <panel childLayout="vertical">
                 <panel/>
                 <panel childLayout="horizontal" height="45px">
@@ -565,7 +565,7 @@
                 <panel height="150px"/>
             </panel>
         </layer>
-        <layer id="upgrade_spell_layer_container" childLayout="center">
+        <layer id="upgrade_spell_layer_container" childLayout="center" visible="false">
             <panel childLayout="vertical">
                 <panel/>
                 <panel childLayout="horizontal" height="68px">
@@ -580,7 +580,7 @@
                 <panel height="150px"/>
             </panel>
         </layer>
-        <layer id="upgrade_spell_layer_images" childLayout="center">
+        <layer id="upgrade_spell_layer_images" childLayout="center" visible="false">
             <panel childLayout="vertical">
                 <panel/>
                 <panel childLayout="horizontal" height="55px">
