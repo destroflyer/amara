@@ -57,11 +57,9 @@ public class ClientChatAppState extends BaseDisplayAppState<IngameClientApplicat
             Event event = eventsIterator.next();
             if(event instanceof KeyEvent){
                 KeyEvent keyEvent = (KeyEvent) event;
-                switch(keyEvent.getKeyCode()){
-                    case KeyInput.KEY_RETURN:
-                        screenController_Chat.setChatVisible_Input(true);
-                        screenController_Chat.setChatVisible_Output(true);
-                        break;
+                if ((keyEvent.getKeyCode() == KeyInput.KEY_RETURN) && keyEvent.isPressed()) {
+                    screenController_Chat.setChatVisible_Input(true);
+                    screenController_Chat.setChatVisible_Output(true);
                 }
             }
         }
