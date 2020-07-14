@@ -31,7 +31,7 @@ public class WireframeAppState extends BaseDisplayAppState implements ActionList
     public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
         setColor(ColorRGBA.Blue);
-        mainApplication.getInputManager().addMapping("toggle_wireframe_processor", new KeyTrigger(KeyInput.KEY_Z));
+        mainApplication.getInputManager().addMapping("toggle_wireframe_processor", new KeyTrigger(KeyInput.KEY_K));
         mainApplication.getInputManager().addListener(this, "toggle_wireframe_processor");
     }
 
