@@ -132,7 +132,6 @@ public class GameLogic {
         entitySystems.add(new PlayCastAnimationSystem());
         entitySystems.add(new CastSpellSystem());
         entitySystems.add(new CheckAreaBuffsSystem(intersectionObserver));
-        entitySystems.add(new RemoveBuffsSystem());
         entitySystems.add(new RepeatingBuffEffectsSystem());
         // Cleanup effects here, so effect impact entities aren't observed
         entitySystems.add(new CleanupEffectsSystem());

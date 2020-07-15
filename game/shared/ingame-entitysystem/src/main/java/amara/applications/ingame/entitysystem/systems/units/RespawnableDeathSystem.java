@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.units;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
@@ -12,16 +8,12 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.animations.*;
 import amara.applications.ingame.entitysystem.components.units.crowdcontrol.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
-import amara.applications.ingame.entitysystem.systems.buffs.RemoveBuffsSystem;
+import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyRemoveBuffsSystem;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
 public class RespawnableDeathSystem implements EntitySystem {
 
-    private Class[] componentClassesToRemove = new Class[]{
+    private Class[] componentClassesToRemove = new Class[] {
         HitboxActiveComponent.class,
         MaximumHealthComponent.class,
         HealthComponent.class,
@@ -44,15 +36,18 @@ public class RespawnableDeathSystem implements EntitySystem {
         }
     }
 
-    private void onRespawnableDeath(EntityWorld entityWorld, int entity){
+    private void onRespawnableDeath(EntityWorld entityWorld, int entity) {
         for (Class componentClass : componentClassesToRemove) {
             entityWorld.removeComponent(entity, componentClass);
         }
         UnitUtil.cancelAction(entityWorld, entity);
-        for (int buffStatus : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)) {
-            ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatus, ActiveBuffComponent.class);
-            if ((activeBuffComponent.getTargetEntity() == entity) && (!entityWorld.hasComponent(activeBuffComponent.getBuffEntity(), KeepOnDeathComponent.class))) {
-                RemoveBuffsSystem.removeBuff(entityWorld, buffStatus);
+        BuffsComponent buffsComponent = entityWorld.getComponent(entity, BuffsComponent.class);
+        if (buffsComponent != null) {
+            for (int buffStatusEntity : buffsComponent.getBuffStatusEntities()) {
+                int buffEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getBuffEntity();
+                if (!entityWorld.hasComponent(buffEntity, KeepOnDeathComponent.class)) {
+                    ApplyRemoveBuffsSystem.removeBuff(entityWorld, entity, buffEntity);
+                }
             }
         }
         DeathAnimationComponent deathAnimationComponent = entityWorld.getComponent(entity, DeathAnimationComponent.class);

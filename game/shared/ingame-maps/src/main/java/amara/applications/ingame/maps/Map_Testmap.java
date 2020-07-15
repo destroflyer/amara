@@ -1,13 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.maps;
 
 import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.buffs.*;
-import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.camps.*;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.maps.*;
@@ -31,10 +26,6 @@ import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 import amara.libraries.physics.shapes.*;
 
-/**
- *
- * @author Carl
- */
 public class Map_Testmap extends Map {
 
     public Map_Testmap(){

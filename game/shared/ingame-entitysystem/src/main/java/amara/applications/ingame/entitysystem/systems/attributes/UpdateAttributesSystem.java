@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.attributes;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
@@ -15,10 +11,6 @@ import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
 public class UpdateAttributesSystem implements EntitySystem{
     
     @Override
@@ -45,21 +37,21 @@ public class UpdateAttributesSystem implements EntitySystem{
                     addAttributeBonus(entityWorld, attributeBonus, itemEntity);
                 }
             }
-            for(EntityWrapper buffStatus : entityWorld.getWrapped(entityWorld.getEntitiesWithAny(ActiveBuffComponent.class))){
-                ActiveBuffComponent activeBuffComponent = buffStatus.getComponent(ActiveBuffComponent.class);
-                if(activeBuffComponent.getTargetEntity() == entityWrapper.getId()){
-                    int buffEntity = activeBuffComponent.getBuffEntity();
+            BuffsComponent buffsComponent = entityWrapper.getComponent(BuffsComponent.class);
+            if (buffsComponent != null) {
+                for (int buffStatusEntity : buffsComponent.getBuffStatusEntities()) {
+                    int buffEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getBuffEntity();
                     ContinuousAttributesComponent continuousAttributesComponent = entityWorld.getComponent(buffEntity, ContinuousAttributesComponent.class);
-                    if(continuousAttributesComponent != null){
+                    if (continuousAttributesComponent != null) {
                         addAttributeBonus(entityWorld, attributeBonus, continuousAttributesComponent.getBonusAttributesEntity());
                     }
                     ContinuousAttributesPerStackComponent continuousAttributesPerStackComponent = entityWorld.getComponent(buffEntity, ContinuousAttributesPerStackComponent.class);
-                    if(continuousAttributesPerStackComponent != null){
+                    if (continuousAttributesPerStackComponent != null) {
                         BuffStacksComponent buffStacksComponent = entityWorld.getComponent(buffEntity, BuffStacksComponent.class);
-                        if(buffStacksComponent != null){
+                        if (buffStacksComponent != null) {
                             StacksComponent stacksComponent = entityWorld.getComponent(buffStacksComponent.getStacksEntity(), StacksComponent.class);
-                            if((stacksComponent != null) && (stacksComponent.getStacks() > 0)){
-                                for(int i=0;i<stacksComponent.getStacks();i++){
+                            if ((stacksComponent != null) && (stacksComponent.getStacks() > 0)) {
+                                for (int i = 0; i < stacksComponent.getStacks(); i++) {
                                     addAttributeBonus(entityWorld, attributeBonus, continuousAttributesPerStackComponent.getBonusAttributesEntity());
                                 }
                             }

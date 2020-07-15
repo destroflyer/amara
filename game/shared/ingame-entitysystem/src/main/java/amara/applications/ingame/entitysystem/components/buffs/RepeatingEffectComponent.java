@@ -1,24 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.components.buffs;
 
 import com.jme3.network.serializing.Serializable;
 import amara.libraries.entitysystem.synchronizing.ComponentField;
 
-/**
- *
- * @author Carl
- */
 @Serializable
-public class RepeatingEffectComponent{
+public class RepeatingEffectComponent {
 
-    public RepeatingEffectComponent(){
-        
+    public RepeatingEffectComponent() {
+
     }
-    
-    public RepeatingEffectComponent(int effectEntity, float interval){
+
+    public RepeatingEffectComponent(int effectEntity, float interval) {
         this.effectEntity = effectEntity;
         this.interval = interval;
     }
@@ -27,11 +19,11 @@ public class RepeatingEffectComponent{
     @ComponentField(type=ComponentField.Type.TIMER)
     private float interval;
 
-    public int getEffectEntity(){
+    public int getEffectEntity() {
         return effectEntity;
     }
 
-    public float getInterval(){
+    public float getInterval() {
         return interval;
     }
 }

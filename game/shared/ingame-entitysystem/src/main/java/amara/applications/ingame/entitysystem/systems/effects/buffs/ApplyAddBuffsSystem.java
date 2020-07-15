@@ -1,19 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.effects.buffs;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.buffs.*;
+import amara.applications.ingame.entitysystem.components.units.BuffsComponent;
+import amara.applications.ingame.entitysystem.systems.general.EntityArrayUtil;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
 public class ApplyAddBuffsSystem implements EntitySystem {
 
     @Override
@@ -34,17 +28,26 @@ public class ApplyAddBuffsSystem implements EntitySystem {
     }
 
     public static int addBuff(EntityWorld entityWorld, int targetEntity, int buffEntity, float duration) {
+        int[] buffStatusEntities;
+        BuffsComponent buffsComponent = entityWorld.getComponent(targetEntity, BuffsComponent.class);
+        if (buffsComponent != null) {
+            buffStatusEntities = buffsComponent.getBuffStatusEntities();
+        } else {
+            buffStatusEntities = new int[0];
+        }
         int buffStatusEntity = -1;
-        for (int entity : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)) {
-            ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(entity, ActiveBuffComponent.class);
-            if((activeBuffComponent.getTargetEntity() == targetEntity) && (activeBuffComponent.getBuffEntity() == buffEntity)){
-                buffStatusEntity = entity;
+        for (int currentBuffStatusEntity : buffStatusEntities) {
+            ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(currentBuffStatusEntity, ActiveBuffComponent.class);
+            if (activeBuffComponent.getBuffEntity() == buffEntity) {
+                buffStatusEntity = currentBuffStatusEntity;
                 break;
             }
         }
         if (buffStatusEntity == -1) {
             buffStatusEntity = entityWorld.createEntity();
             entityWorld.setComponent(buffStatusEntity, new ActiveBuffComponent(targetEntity, buffEntity));
+            int[] newBuffStatusEntities = EntityArrayUtil.add(buffStatusEntities, buffStatusEntity);
+            entityWorld.setComponent(targetEntity, new BuffsComponent(newBuffStatusEntities));
         }
         if (duration != -1) {
             entityWorld.setComponent(buffStatusEntity, new RemainingBuffDurationComponent(duration));

@@ -1,19 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.conditions;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.conditions.*;
 import amara.applications.ingame.entitysystem.components.general.NameComponent;
+import amara.applications.ingame.entitysystem.components.units.BuffsComponent;
 import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Carl
- */
 public class ConditionUtil {
 
     public static boolean isConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
@@ -43,11 +36,14 @@ public class ConditionUtil {
         if (hasBuffConditionComponent != null) {
             for (int buffEntity : hasBuffConditionComponent.getBuffEntities()) {
                 boolean hasBuff = false;
-                for (int buffStatusEntity : entityWorld.getEntitiesWithAny(ActiveBuffComponent.class)) {
-                    ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
-                    if ((activeBuffComponent.getTargetEntity() == targetEntity) && (activeBuffComponent.getBuffEntity() == buffEntity)) {
-                        hasBuff = true;
-                        break;
+                BuffsComponent buffsComponent = entityWorld.getComponent(targetEntity, BuffsComponent.class);
+                if (buffsComponent != null) {
+                    for (int buffStatusEntity : buffsComponent.getBuffStatusEntities()) {
+                        int currentBuffEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getBuffEntity();
+                        if (currentBuffEntity == buffEntity) {
+                            hasBuff = true;
+                            break;
+                        }
                     }
                 }
                 if (!hasBuff) {

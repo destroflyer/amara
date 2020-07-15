@@ -8,7 +8,6 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.buffs.*;
-import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.items.*;

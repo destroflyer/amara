@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.synchronizing;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
@@ -51,31 +47,26 @@ import amara.applications.ingame.entitysystem.components.units.effecttriggers.tr
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
 import amara.libraries.entitysystem.synchronizing.ComponentClassSet;
 
-/**
- *
- * @author Carl
- */
-public class ClientComponentBlacklist{
+public class ClientComponentBlacklist {
 
-    public ClientComponentBlacklist(){
-        add(new ChangeType[]{ChangeType.NEW, ChangeType.CHANGED, ChangeType.REMOVED},
-            //attributes
+    public ClientComponentBlacklist() {
+        add(new ChangeType[] { ChangeType.NEW, ChangeType.CHANGED, ChangeType.REMOVED },
+            // attributes
             RequestUpdateAttributesComponent.class,
-            //audio
-            //buffs
+            // audio
+            // buffs
             ContinuousAttributesComponent.class,
             ContinuousAttributesPerStackComponent.class,
             KeepOnDeathComponent.class,
             OnBuffRemoveEffectTriggersComponent.class,
             RepeatingEffectComponent.class,
-            //buffs/areas
+            // buffs/areas
             AreaBuffComponent.class,
             AreaBuffTargetRulesComponent.class,
             AreaSourceComponent.class,
-            //buffs/status
-            RemoveFromTargetComponent.class,
+            // buffs/status
             TimeSinceLastRepeatingEffectComponent.class,
-            //camps
+            // camps
             CampHealthResetComponent.class,
             CampMaximumAggroDistanceComponent.class,
             CampRemainingRespawnDurationComponent.class,
@@ -83,7 +74,7 @@ public class ClientComponentBlacklist{
             CampSpawnComponent.class,
             CampSpawnInformationComponent.class,
             CampUnionAggroComponent.class,
-            //effects
+            // effects
             AffectedTargetsComponent.class,
             ApplyEffectImpactComponent.class,
             CustomEffectValuesComponent.class,
@@ -91,24 +82,24 @@ public class ClientComponentBlacklist{
             EffectSourceSpellComponent.class,
             PrepareEffectComponent.class,
             RemainingEffectDelayComponent.class,
-            //effects/aggro
+            // effects/aggro
             DrawTeamAggroComponent.class,
-            //effects/audio
+            // effects/audio
             PlayAudioComponent.class,
             StopAudioComponent.class,
-            //effects/buffs
+            // effects/buffs
             AddBuffComponent.class,
             RemoveBuffComponent.class,
-            //effects/buffs/areas
+            // effects/buffs/areas
             AddBuffAreaComponent.class,
             RemoveBuffAreaComponent.class,
-            //effects/buffs/stacks
+            // effects/buffs/stacks
             AddStacksComponent.class,
             ClearStacksComponent.class,
             RemoveStacksComponent.class,
-            //effects/casts
+            // effects/casts
             EffectCastTargetComponent.class,
-            //effects/crowdcontrol
+            // effects/crowdcontrol
             AddBindableComponent.class,
             AddBindingComponent.class,
             AddKnockupableComponent.class,
@@ -125,7 +116,7 @@ public class ClientComponentBlacklist{
             RemoveSilenceComponent.class,
             RemoveStunComponent.class,
             RemoveStunnableComponent.class,
-            //effects/damage
+            // effects/damage
             AddTargetabilityComponent.class,
             AddVulnerabilityComponent.class,
             MagicDamageComponent.class,
@@ -134,62 +125,62 @@ public class ClientComponentBlacklist{
             RemoveVulnerabilityComponent.class,
             ResultingMagicDamageComponent.class,
             ResultingPhysicalDamageComponent.class,
-            //effects/game
+            // effects/game
             PlayCinematicComponent.class,
-            //effects/general
+            // effects/general
             AddComponentsComponent.class,
             AddEffectTriggersComponent.class,
             FinishObjectiveComponent.class,
             RemoveComponentsComponent.class,
             RemoveEffectTriggersComponent.class,
             RemoveEntityComponent.class,
-            //effects/heals
+            // effects/heals
             HealComponent.class,
             ResultingHealComponent.class,
-            //effects/movement
+            // effects/movement
             MoveComponent.class,
             StopComponent.class,
             TeleportComponent.class,
-            //effects/physics
+            // effects/physics
             ActivateHitboxComponent.class,
             AddCollisionGroupsComponent.class,
             DeactivateHitboxComponent.class,
             RemoveCollisionGroupsComponent.class,
-            //effects/players
+            // effects/players
             DisplayPlayerAnnouncementComponent.class,
             ResultingPlayerAnnouncementComponent.class,
-            //effects/spawns
+            // effects/spawns
             SpawnComponent.class,
-            //effects/spells
+            // effects/spells
             AddAutoAttackSpellEffectsComponent.class,
             RemoveSpellEffectsComponent.class,
             ReplaceSpellWithExistingSpellComponent.class,
             ReplaceSpellWithNewSpellComponent.class,
             TriggerSpellEffectsComponent.class,
-            //effects/units
+            // effects/units
             CancelActionComponent.class,
             AddGoldComponent.class,
             RespawnComponent.class,
-            //effects/vision
+            // effects/vision
             AddStealthComponent.class,
             RemoveStealthComponent.class,
-            //effects/visuals
+            // effects/visuals
             PlayAnimationComponent.class,
             StopAnimationComponent.class,
-            //game
-            //general
+            // game
+            // general
             CustomCleanupComponent.class,
             TemporaryComponent.class,
-            //input
+            // input
             CastSpellComponent.class,
-            //items
-            //maps
+            // items
+            // maps
             MapObjectiveComponent.class,
             PlayerDeathRulesComponent.class,
-            //maps/playerdeathrules
+            // maps/playerdeathrules
             RespawnPlayersComponent.class,
             RespawnTimerComponent.class,
-            //movements
+            // movements
             DistanceLimitComponent.class,
             MovedDistanceComponent.class,
             MovementAnimationComponent.class,
@@ -200,23 +191,23 @@ public class ClientComponentBlacklist{
             MovementTargetReachedComponent.class,
             MovementTargetSufficientDistanceComponent.class,
             WalkMovementComponent.class,
-            //objectives
+            // objectives
             FinishedObjectiveComponent.class,
             MissingEntitiesComponent.class,
             OpenObjectiveComponent.class,
             OrObjectivesComponent.class,
-            //physics
+            // physics
             CollisionGroupComponent.class,
             IntersectionPushComponent.class,
             RemoveOnMapLeaveComponent.class,
             TransformOriginComponent.class,
-            //players
+            // players
             ClientComponent.class,
             IsBotComponent.class,
             PlayerAnnouncementRemainingDurationComponent.class,
             RespawnComponent.class,
-            //shop
-            //spawns
+            // shop
+            // spawns
             SpawnAttackMoveComponent.class,
             SpawnMoveToTargetComponent.class,
             SpawnMovementAnimationComponent.class,
@@ -226,24 +217,24 @@ public class ClientComponentBlacklist{
             SpawnRelativeDirectionComponent.class,
             SpawnRelativePositionComponent.class,
             SpawnTemplateComponent.class,
-            //spells
+            // spells
             ApplyCastedSpellComponent.class,
             CastAnimationComponent.class,
             CastCancelActionComponent.class,
             CastCancelableComponent.class,
             CastTurnToTargetComponent.class,
             InstantEffectTriggersComponent.class,
-            //spells/placeholders
+            // spells/placeholders
             SourceMovementDirectionComponent.class,
             TargetedMovementDirectionComponent.class,
             TargetedMovementTargetComponent.class,
             TeleportToTargetPositionComponent.class,
             TriggerCastedSpellEffectsComponent.class,
-            //spells/triggers
+            // spells/triggers
             CastedEffectTriggersComponent.class,
             CastedSpellComponent.class,
-            //targets
-            //units
+            // targets
+            // units
             AggroPriorityComponent.class,
             AggroResetTimerComponent.class,
             AutoAggroComponent.class,
@@ -258,28 +249,28 @@ public class ClientComponentBlacklist{
             RemainingAggroResetDurationComponent.class,
             SetNewCampCombatSpellsOnCooldownComponent.class,
             WalkStepDistanceComponent.class,
-            //units/animations
+            // units/animations
             AutoAttackAnimationComponent.class,
             DeathAnimationComponent.class,
             IdleAnimationComponent.class,
             WalkAnimationComponent.class,
-            //units/bounties
-            //units/crowdcontrol
-            //units/effecttriggers
+            // units/bounties
+            // units/crowdcontrol
+            // units/effecttriggers
             TriggerDelayComponent.class,
             TriggerOnCancelComponent.class,
             TriggerOnceComponent.class,
             TriggerSourceComponent.class,
             TriggerTemporaryComponent.class,
             TriggeredEffectComponent.class,
-            //units/effecttriggers/targets
+            // units/effecttriggers/targets
             BuffTargetsTargetComponent.class,
             CasterTargetComponent.class,
             CustomTargetComponent.class,
             SourceTargetComponent.class,
             TargetTargetComponent.class,
             TeamTargetComponent.class,
-            //units/effecttriggers/triggers
+            // units/effecttriggers/triggers
             CastingFinishedTriggerComponent.class,
             CollisionTriggerComponent.class,
             DeathTriggerComponent.class,
@@ -290,22 +281,22 @@ public class ClientComponentBlacklist{
             ShopUsageTriggerComponent.class,
             TargetReachedTriggerComponent.class,
             TimeSinceLastRepeatTriggerComponent.class,
-            //visuals
-            //visuals/animations
+            // visuals
+            // visuals/animations
             PassedLoopTimeComponent.class,
             RemainingLoopsComponent.class
         );
-        add(new ChangeType[]{ChangeType.CHANGED},
-            //game
+        add(new ChangeType[] { ChangeType.CHANGED },
+            // game
             GameTimeComponent.class,
-            //physics
+            // physics
             HitboxComponent.class,
-            //units
+            // units
             IsCastingComponent.class,
             WaitingToRespawnComponent.class
         );
     }
-    public enum ChangeType{
+    public enum ChangeType {
         NEW,
         CHANGED,
         REMOVED
@@ -313,31 +304,29 @@ public class ClientComponentBlacklist{
     private ComponentClassSet componentClasses_New = new ComponentClassSet();
     private ComponentClassSet componentClasses_Changed = new ComponentClassSet();
     private ComponentClassSet componentClasses_Removed = new ComponentClassSet();
-    
-    public void add(ChangeType[] changeTypes, Class... componentClasses){
-        for(ChangeType changeType : changeTypes){
+
+    public void add(ChangeType[] changeTypes, Class... componentClasses) {
+        for (ChangeType changeType : changeTypes) {
             add(changeType, componentClasses);
         }
     }
-    
-    public void add(ChangeType changeType, Class... componentClasses){
+
+    public void add(ChangeType changeType, Class... componentClasses) {
         ComponentClassSet componentClassSet = getComponentClassSet(changeType);
         componentClassSet.add(componentClasses);
     }
-    
-    public boolean contains(ChangeType changeType, Class componentClass){
+
+    public boolean contains(ChangeType changeType, Class componentClass) {
         ComponentClassSet componentClassSet = getComponentClassSet(changeType);
         return componentClassSet.contains(componentClass);
     }
-    
-    private ComponentClassSet getComponentClassSet(ChangeType changeType){
-        switch(changeType){
+
+    private ComponentClassSet getComponentClassSet(ChangeType changeType) {
+        switch (changeType) {
             case NEW:
                 return componentClasses_New;
-            
             case CHANGED:
                 return componentClasses_Changed;
-            
             case REMOVED:
                 return componentClasses_Removed;
         }
