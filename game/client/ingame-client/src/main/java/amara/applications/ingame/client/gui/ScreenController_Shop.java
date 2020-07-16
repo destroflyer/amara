@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.gui;
 
 import java.util.HashMap;
@@ -27,10 +23,6 @@ import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.controls.scrollpanel.builder.ScrollPanelBuilder;
 import de.lessvoid.nifty.elements.Element;
 
-/**
- *
- * @author Carl
- */
 public class ScreenController_Shop extends GameScreenController{
 
     public ScreenController_Shop(){
@@ -53,12 +45,6 @@ public class ScreenController_Shop extends GameScreenController{
     private boolean[] shopItemFilters = new boolean[11];
     private boolean isUpdatingShopItemFilters;
     private LinkedList<EntityWrapper> shopFilteredItems = new LinkedList<>();
-    
-    @Override
-    public void onStartup(){
-        super.onStartup();
-        onShopItemFilter(0, true);
-    }
 
     @Override
     protected void initialize(){
@@ -72,7 +58,7 @@ public class ScreenController_Shop extends GameScreenController{
             String itemID = shopItem_Special.getComponent(ItemIDComponent.class).getID();
             getItemRecipe(itemID);
         }
-        shopItemFilters[0] = true;
+        onShopItemFilter(0, true);
     }
 
     public void setShopItems(String[] itemTemplateNames) {
@@ -154,7 +140,7 @@ public class ScreenController_Shop extends GameScreenController{
         hideShopItemInformation();
     }
     
-    public void onShopItemFilter(int filterIndex, boolean isSelected){
+    private void onShopItemFilter(int filterIndex, boolean isSelected){
         shopItemFilters[filterIndex] = isSelected;
         boolean enableAllItems = true;
         if(filterIndex != 0){
