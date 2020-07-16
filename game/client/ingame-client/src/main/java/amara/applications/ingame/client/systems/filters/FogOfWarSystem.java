@@ -23,7 +23,6 @@ public class FogOfWarSystem implements EntitySystem {
 
     public FogOfWarSystem(PlayerTeamSystem playerTeamSystem, PostFilterAppState postFilterAppState, final MapPhysicsInformation mapPhysicsInformation) {
         this.playerTeamSystem = playerTeamSystem;
-        this.mapPhysicsInformation = mapPhysicsInformation;
         ArrayList<Vector2D> mapBorderCcwOutline = new ArrayList<>();
         mapBorderCcwOutline.add(new Vector2D(mapPhysicsInformation.getWidth(), 0));
         mapBorderCcwOutline.add(new Vector2D(mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight()));
@@ -40,12 +39,12 @@ public class FogOfWarSystem implements EntitySystem {
             protected void initFilter(AssetManager manager, RenderManager renderManager, ViewPort viewPort, int width, int height) {
                 super.initFilter(manager, renderManager, viewPort, width, height);
                 setMapSize(mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight());
+                isUpdateNeeded = true;
             }
         };
         postFilterAppState.addFilter(fogOfWarFilter);
     }
     private PlayerTeamSystem playerTeamSystem;
-    private MapPhysicsInformation mapPhysicsInformation;
     private MergedVision teamVision;
     private PaintableImage fogImage;
     private Texture2D fogTexture = new Texture2D();

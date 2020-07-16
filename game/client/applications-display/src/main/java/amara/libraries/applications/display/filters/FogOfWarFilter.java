@@ -9,44 +9,40 @@ import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.texture.Texture;
 
-/**
- *
- * @author Carl
- */
-public class FogOfWarFilter extends Filter{
+public class FogOfWarFilter extends Filter {
 
-    public FogOfWarFilter(){
+    public FogOfWarFilter() {
         super("FogOfWar");
     }
     private Camera camera;
-                
+
     @Override
-    protected void initFilter(AssetManager manager, RenderManager renderManager, ViewPort viewPort, int width, int height){
+    protected void initFilter(AssetManager manager, RenderManager renderManager, ViewPort viewPort, int width, int height) {
         camera = viewPort.getCamera();
         material = new Material(manager, "Shaders/filters/fog_of_war/matdefs/fog_of_war.j3md");
     }
-    
-    public void setMapSize(float width, float height){
+
+    public void setMapSize(float width, float height) {
         material.setVector2("MapSize", new Vector2f(width, height));
     }
-    
-    public void setFog(Texture texture){
+
+    public void setFog(Texture texture) {
         material.setTexture("Fog", texture);
     }
 
     @Override
-    protected void preFrame(float lastTimePerFrame){
+    protected void preFrame(float lastTimePerFrame) {
         super.preFrame(lastTimePerFrame);
         material.setMatrix4("ViewProjectionMatrixInverse", camera.getViewProjectionMatrix().invert());
     }
 
     @Override
-    protected Material getMaterial(){
+    protected Material getMaterial() {
         return material;
     }
 
     @Override
-    protected boolean isRequiresDepthTexture(){
+    protected boolean isRequiresDepthTexture() {
         return true;
     }
 }
