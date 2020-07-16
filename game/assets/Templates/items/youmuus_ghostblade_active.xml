@@ -1,7 +1,7 @@
 <template>
     <value name="duration">6</value>
     <entity id="spell">
-        <description>Gain +100% attack speed and +35% movement speed for [duration] seconds.</description>
+        <description>Gain +100% attack speed and +35% walk speed for [duration] seconds.</description>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
@@ -28,6 +28,9 @@
                     <entity>
                         <addBuff duration="[duration]">
                             <entity>
+                                <name>Ghosty</name>
+                                <description>This unit has increased attack speed and walk speed.</description>
+                                <buffIcon>items/youmuus_ghostblade</buffIcon>
                                 <continuousAttributes>
                                     <entity>
                                         <bonusPercentageAttackSpeed>1</bonusPercentageAttackSpeed>

@@ -19,6 +19,9 @@
                                     <entity>
                                         <addBuff duration="[duration]">
                                             <entity>
+                                                <name>Stargazer</name>
+                                                <description>This unit has increased ability power.</description>
+                                                <buffIcon>spells/ganfaul_passive</buffIcon>
                                                 <continuousAttributes>
                                                     <entity>
                                                         <bonusFlatAbilityPower>20</bonusFlatAbilityPower>

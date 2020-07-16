@@ -44,6 +44,9 @@
                                                 </addKnockup>
                                                 <addBuff duration="5">
                                                     <entity>
+                                                        <name>Bubbly</name>
+                                                        <description>This unit is in a bubble.</description>
+                                                        <buffIcon>spells/bubble</buffIcon>
                                                         <buffVisualisation>bubble</buffVisualisation>
                                                     </entity>
                                                 </addBuff>
@@ -66,6 +69,9 @@
                         </addAutoAttackSpellEffects>
                         <addBuff duration="5">
                             <entity id="buff">
+                                <name>Bubble Gunner</name>
+                                <description>This units next basic attack will bubble the target.</description>
+                                <buffIcon>spells/bubble</buffIcon>
                                 <buffVisualisation>bubble</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>

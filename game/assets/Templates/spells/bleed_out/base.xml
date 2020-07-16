@@ -47,6 +47,9 @@
                     <entity>
                         <addBuff duration="5">
                             <entity>
+                                <name>Bleeding</name>
+                                <description>This unit receives magic damage over time.</description>
+                                <buffIcon>spells/bleed_out</buffIcon>
                                 <buffVisualisation>burning</buffVisualisation>
                                 <repeatingEffect interval="0.5">
                                     <entity>

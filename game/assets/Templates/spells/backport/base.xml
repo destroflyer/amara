@@ -12,6 +12,9 @@
                     <entity>
                         <addBuff duration="-1">
                             <entity id="buff">
+                                <name>Backporting</name>
+                                <description>This unit is backporting to the base.</description>
+                                <buffIcon>spells/backport</buffIcon>
                                 <buffVisualisation>backporting</buffVisualisation>
                             </entity>
                         </addBuff>

@@ -37,6 +37,8 @@ public class ScreenController_HUD extends GameScreenController {
     // (Since NiftyGUI sometimes seems to be ordering start/end effect methods wrong)
     private SpellInformation action_ShowSpellInformation;
     private boolean action_HideSpellInformation;
+    private BuffsPanelGenerator playerBuffsPanelGenerator = new BuffsPanelGenerator("player_buffs");
+    private BuffsPanelGenerator inspectionBuffsPanelGenerator = new BuffsPanelGenerator("inspection_buffs");
     private PlayerInventoryPanelGenerator playerInventoryPanelGenerator = new PlayerInventoryPanelGenerator();
     private InspectionInventoryPanelGenerator inspectionPlayerInventoryPanelGenerator = new InspectionInventoryPanelGenerator();
     private BagPanelGenerator bagPanelGenerator = new BagPanelGenerator();
@@ -58,6 +60,7 @@ public class ScreenController_HUD extends GameScreenController {
         getElementByID("inspection_inventory_background").setVisible(isVisible);
         getElementByID("inspection_background").setVisible(isVisible);
         getElementByID("inspection_level_layer").setVisible(isVisible);
+        getElementByID("inspection_buffs_layer").setVisible(isVisible);
     }
 
     public void setName(String prefix, String name){
@@ -315,11 +318,15 @@ public class ScreenController_HUD extends GameScreenController {
         PlayerAppState playerAppState = mainApplication.getStateManager().getState(PlayerAppState.class);
         playerAppState.getSpellIndicatorSystem().showIndicator(spellInformation.getEntity());
     }
-    
-    public void setPlayer_UpgradeSpellsLayerVisible(boolean isVisible){
-        getElementByID("upgrade_spells_layer").setVisible(isVisible);
+
+    public void setPlayer_UpgradeSpellsContainerVisible(boolean isVisible) {
+        Element upgradeSpellsContainer = getElementByID("upgrade_spells_container");
+        upgradeSpellsContainer.setVisible(isVisible);
+        // Set height to 0 and relayout the according vertical-layout parent to adjust the buffs container correctly
+        upgradeSpellsContainer.setConstraintHeight(new SizeValue((isVisible ? 45 : 0) + "px"));
+        upgradeSpellsContainer.getParent().getParent().layoutElements();
     }
-    
+
     public void setPlayer_UpgradeSpellsButtonVisible(int spellIndex, boolean isVisible){
         getElementByID("upgrade_spells_button_" + spellIndex).setVisible(isVisible);
     }
@@ -360,6 +367,16 @@ public class ScreenController_HUD extends GameScreenController {
     private void hidePlayer_UpgradeSpell(){
         getElementByID("upgrade_spell_layer_container").setVisible(false);
         getElementByID("upgrade_spell_layer_images").setVisible(false);
+    }
+
+    public void setPlayerBuffs(EntityWorld entityWorld, int[] buffStatusEntities) {
+        playerBuffsPanelGenerator.setData(entityWorld, buffStatusEntities);
+        playerBuffsPanelGenerator.update(nifty, "player_buffs_container");
+    }
+
+    public void setInspectionBuffs(EntityWorld entityWorld, int[] buffStatusEntities) {
+        inspectionBuffsPanelGenerator.setData(entityWorld, buffStatusEntities);
+        inspectionBuffsPanelGenerator.update(nifty, "inspection_buffs_container");
     }
 
     public void setPlayerBagItems(EntityWorld entityWorld, int[] bagItemEntities) {

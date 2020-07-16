@@ -45,6 +45,9 @@
                     <entity>
                         <addBuff duration="5">
                             <entity>
+                                <name>Ignited</name>
+                                <description>This unit receives magic damage over time.</description>
+                                <buffIcon>spells/ignite</buffIcon>
                                 <buffVisualisation>burning</buffVisualisation>
                                 <repeatingEffect interval="0.5">
                                     <entity>

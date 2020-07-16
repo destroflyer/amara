@@ -38,6 +38,9 @@
                     <entity>
                         <addBuff duration="[duration]">
                             <entity>
+                                <name>Defensive Stance</name>
+                                <description>This unit receives massively decreased damage.</description>
+                                <buffIcon>spells/maria_block</buffIcon>
                                 <continuousAttributes>
                                     <entity>
                                         <bonusPercentageIncomingDamageAmplification>-0.9</bonusPercentageIncomingDamageAmplification>

@@ -22,6 +22,9 @@
                         </intersectionRules>
                         <areaBuff>
                             <entity>
+                                <name>Lasered</name>
+                                <description>This unit receives magic damage over time.</description>
+                                <buffIcon>spells/ganfaul_laser</buffIcon>
                                 <repeatingEffect interval="0.25">
                                     <entity>
                                         <magicDamage>60 + (0.25 * source.abilityPower)</magicDamage>

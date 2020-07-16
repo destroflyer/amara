@@ -27,6 +27,9 @@
                     <entity>
                         <addBuff duration="[duration]">
                             <entity>
+                                <name>Healthy Jewel</name>
+                                <description>This unit has increased health regeneration.</description>
+                                <buffIcon>items/red_gem</buffIcon>
                                 <buffVisualisation>healing</buffVisualisation>
                                 <repeatingEffect interval="0.5">
                                     <entity>

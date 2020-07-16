@@ -31,6 +31,9 @@
                         <addStealth/>
                         <addBuff duration="[duration]">
                             <entity>
+                                <name>Very Stealthy</name>
+                                <description>This unit cannot be seen by enemies.</description>
+                                <buffIcon>spells/camouflage</buffIcon>
                                 <buffVisualisation>withered</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>

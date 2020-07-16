@@ -44,6 +44,9 @@
                     <entity>
                         <addBuff duration="4">
                             <entity>
+                                <name>Withered</name>
+                                <description>This unit has decreased attack speed and walk speed.</description>
+                                <buffIcon>spells/wither</buffIcon>
                                 <buffVisualisation>withered</buffVisualisation>
                                 <continuousAttributes>
                                     <entity>

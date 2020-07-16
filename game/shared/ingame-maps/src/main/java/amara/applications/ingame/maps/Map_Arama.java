@@ -90,6 +90,8 @@ public class Map_Arama extends Map {
             fountainBuffArea_Allies.setComponent(new HitboxActiveComponent());
             fountainBuffArea_Allies.setComponent(new PositionComponent(new Vector2f(fountainX[i], 260)));
             EntityWrapper fountainBuff_Allies = entityWorld.getWrapped(entityWorld.createEntity());
+            fountainBuff_Allies.setComponent(new NameComponent("Allied Fountain"));
+            fountainBuff_Allies.setComponent(new DescriptionComponent("This unit has massively increased health regeneration."));
             EntityWrapper fountainBuffEffect_Allies = entityWorld.getWrapped(entityWorld.createEntity());
             fountainBuffEffect_Allies.setComponent(new HealComponent("(0.021 * target.maximumHealth)"));
             fountainBuff_Allies.setComponent(new RepeatingEffectComponent(fountainBuffEffect_Allies.getId(), 0.25f));
@@ -105,6 +107,8 @@ public class Map_Arama extends Map {
             fountainBuffArea_Enemies.setComponent(new HitboxActiveComponent());
             fountainBuffArea_Enemies.setComponent(new PositionComponent(new Vector2f(fountainX[i], 260)));
             EntityWrapper fountainBuff_Enemies = entityWorld.getWrapped(entityWorld.createEntity());
+            fountainBuff_Enemies.setComponent(new NameComponent("Enemy Fountain"));
+            fountainBuff_Enemies.setComponent(new DescriptionComponent("This unit receives massive magic damage over time."));
             EntityWrapper fountainBuffEffect__Enemies = entityWorld.getWrapped(entityWorld.createEntity());
             fountainBuffEffect__Enemies.setComponent(new MagicDamageComponent("1000"));
             fountainBuff_Enemies.setComponent(new RepeatingEffectComponent(fountainBuffEffect__Enemies.getId(), 0.5f));

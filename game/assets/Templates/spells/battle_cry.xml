@@ -29,6 +29,9 @@
                     <entity>
                         <addBuff duration="5">
                             <entity>
+                                <name>Cry of the Battle</name>
+                                <description>This unit has increased attack speed.</description>
+                                <buffIcon>spells/battle_cry</buffIcon>
                                 <continuousAttributes>
                                     <entity>
                                         <bonusPercentageAttackSpeed>0.8</bonusPercentageAttackSpeed>

@@ -48,6 +48,8 @@
                     <entity>
                         <addBuff duration="[sleepTime]">
                             <entity>
+                                <name>Meditating</name>
+                                <description>This unit has increased health regeneration.</description>
                                 <buffVisualisation>meditating</buffVisualisation>
                                 <continuousAttributes>
                                     <entity>

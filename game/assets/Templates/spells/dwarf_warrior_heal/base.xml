@@ -33,6 +33,9 @@
                         <heal>100</heal>
                         <addBuff duration="1">
                             <entity>
+                                <name>Full Stomach</name>
+                                <description>This unit has increased walk speed.</description>
+                                <!--<buffIcon>TODO</buffIcon>-->
                                 <buffVisualisation>turbo</buffVisualisation>
                                 <continuousAttributes>
                                     <entity>

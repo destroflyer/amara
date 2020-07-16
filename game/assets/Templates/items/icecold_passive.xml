@@ -18,6 +18,9 @@
                                             <entity>
                                                 <addBuff duration="[duration]">
                                                     <entity>
+                                                        <name>Icy Feet</name>
+                                                        <description>This unit has decreased walk speed.</description>
+                                                        <buffIcon>items/icecold</buffIcon>
                                                         <buffVisualisation>frost</buffVisualisation>
                                                         <continuousAttributes>
                                                             <entity>

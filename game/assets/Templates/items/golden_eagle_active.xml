@@ -42,6 +42,9 @@
                         </playAudio>
                         <addBuff duration="[duration]">
                             <entity>
+                                <name>Golden</name>
+                                <description>This unit is untargetable and invulnerable.</description>
+                                <buffIcon>items/golden_eagle</buffIcon>
                                 <buffVisualisation>golden_eagle</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>

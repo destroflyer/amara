@@ -31,6 +31,9 @@
                     <entity>
                         <addBuff duration="[duration]">
                             <entity>
+                                <name>Giant</name>
+                                <description>This unit has increased health, attack damage, armor and magic resistance.</description>
+                                <buffIcon>spells/maw_ult</buffIcon>
                                 <buffVisualisation>baron_nashor</buffVisualisation>
                                 <continuousAttributes>
                                     <entity>

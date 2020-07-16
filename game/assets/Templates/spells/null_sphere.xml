@@ -69,6 +69,9 @@
                         <addSilence>2</addSilence>
                         <addBuff duration="2">
                             <entity>
+                                <name>Quiet</name>
+                                <description>This unit is silenced.</description>
+                                <buffIcon>spells/null_sphere</buffIcon>
                                 <buffVisualisation>electrified</buffVisualisation>
                             </entity>
                         </addBuff>

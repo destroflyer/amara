@@ -47,6 +47,9 @@
                     <entity>
                         <addBuff duration="3">
                             <entity>
+                                <name>Fatiqued</name>
+                                <description>This unit has decreased damage and walk speed.</description>
+                                <buffIcon>spells/fatique</buffIcon>
                                 <buffVisualisation>withered</buffVisualisation>
                                 <continuousAttributes>
                                     <entity>

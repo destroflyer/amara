@@ -67,6 +67,9 @@
                         <magicDamage>90</magicDamage>
                         <addBuff duration="[slowDuration]">
                             <entity>
+                                <name>Caught by a Rock</name>
+                                <description>This unit has decreased walk speed.</description>
+                                <buffIcon>spells/maw_rock</buffIcon>
                                 <continuousAttributes>
                                     <entity>
                                         <bonusPercentageWalkSpeed>-0.7</bonusPercentageWalkSpeed>

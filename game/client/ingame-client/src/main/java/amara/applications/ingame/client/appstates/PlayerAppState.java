@@ -95,6 +95,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new DisplayLevelSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayExperienceSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayAttributesSystem(this, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayBuffsSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayInventoriesSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayBagSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayPassivesImagesSystem(this, screenController_HUD));

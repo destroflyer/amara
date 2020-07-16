@@ -46,6 +46,9 @@
                                                 </addAutoAttackSpellEffects>
                                                 <addBuff duration="[duration]">
                                                     <entity id="buff">
+                                                        <name>Holy Sword</name>
+                                                        <description>This units next basic attack will deal bonus magic damage.</description>
+                                                        <buffIcon>spells/maria_passive</buffIcon>
                                                         <buffVisualisation>maria_passive</buffVisualisation>
                                                         <onBuffRemoveEffectTriggers>
                                                             <entity>

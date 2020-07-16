@@ -20,6 +20,9 @@
                                             <entity>
                                                 <addBuff duration="[duration]">
                                                     <entity id="buff">
+                                                        <name>Potential Gift</name>
+                                                        <description>This unit will receive bonus damage when hit by another Erika spell.</description>
+                                                        <buffIcon>spells/erika_passive</buffIcon>
                                                         <buffVisualisation>robins_gift</buffVisualisation>
                                                     </entity>
                                                 </addBuff>

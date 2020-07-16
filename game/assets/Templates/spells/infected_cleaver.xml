@@ -57,6 +57,9 @@
                         <magicDamage>100</magicDamage>
                         <addBuff duration="2">
                             <entity>
+                                <name>Infected</name>
+                                <description>This unit has decreased walk speed.</description>
+                                <buffIcon>spells/infected_cleaver</buffIcon>
                                 <continuousAttributes>
                                     <entity>
                                         <bonusPercentageWalkSpeed>-0.4</bonusPercentageWalkSpeed>

@@ -33,6 +33,9 @@
                     <entity>
                         <addBuff duration="-1">
                             <entity id="buff">
+                                <name>Recovering</name>
+                                <description>This unit has increased health regeneration.</description>
+                                <buffIcon>spells/recovery</buffIcon>
                                 <buffVisualisation>meditating</buffVisualisation>
                                 <continuousAttributes>
                                     <entity>

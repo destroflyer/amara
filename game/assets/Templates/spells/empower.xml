@@ -60,6 +60,9 @@
                         </addAutoAttackSpellEffects>
                         <addBuff duration="5">
                             <entity id="buff">
+                                <name>Empowered</name>
+                                <description>This units next basic attack will deal bonus magic damage.</description>
+                                <buffIcon>spells/empower</buffIcon>
                                 <buffVisualisation>empowered</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>

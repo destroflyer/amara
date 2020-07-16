@@ -34,6 +34,9 @@
                     <entity>
                         <addBuff duration="10">
                             <entity>
+                                <name>Sadist</name>
+                                <description>This unit has massively increased health regeneration.</description>
+                                <buffIcon>spells/sadism</buffIcon>
                                 <buffVisualisation>turbo</buffVisualisation>
                                 <continuousAttributes>
                                     <entity>

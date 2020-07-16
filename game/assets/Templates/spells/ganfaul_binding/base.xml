@@ -69,6 +69,9 @@
                         <addBinding>[bindDuration]</addBinding>
                         <addBuff duration="[bindDuration]">
                             <entity>
+                                <name>Planetary Binded</name>
+                                <description>This unit can't walk.</description>
+                                <buffIcon>spells/ganfaul_binding</buffIcon>
                                 <buffVisualisation>ganfaul_binded</buffVisualisation>
                             </entity>
                         </addBuff>

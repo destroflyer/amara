@@ -60,6 +60,9 @@
                     <entity>
                         <addBuff duration="[buffDuration]">
                             <entity>
+                                <name>Arrow to the Knee</name>
+                                <description>This unit has decreased armor.</description>
+                                <buffIcon>spells/erika_fire_it_up</buffIcon>
                                 <continuousAttributes>
                                     <entity>
                                         <bonusFlatArmor>-10</bonusFlatArmor>

@@ -68,6 +68,9 @@
                         <physicalDamage>90 + (0.6 * source.attackDamage)</physicalDamage>
                         <addBuff duration="[markDuration]">
                             <enity id="buff">
+                                <name>Mind Mark</name>
+                                <description>This unit is marked and can be dashed to.</description>
+                                <buffIcon>spells/kachujin_mind_of_the_monk</buffIcon>
                                 <buffVisualisation>sonic_wave_mark</buffVisualisation>
                                 <!--<onBuffRemoveEffectTriggers>
                                     <entity>

@@ -18,6 +18,9 @@
                                             <entity>
                                                 <addBuff duration="[duration]">
                                                     <entity>
+                                                        <name>Cataclysmd</name>
+                                                        <description>This unit receives magic damage over time.</description>
+                                                        <buffIcon>items/cataclysm</buffIcon>
                                                         <buffVisualisation>burning</buffVisualisation>
                                                         <repeatingEffect interval="0.25">
                                                             <entity>

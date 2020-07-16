@@ -21,6 +21,9 @@
                                             <entity>
                                                 <addBuff duration="[duration]">
                                                     <entity id="buff">
+                                                        <name>Rage Spikes</name>
+                                                        <description>This unit gains attack speed with each basic attack, up to [maximumStacks] times.</description>
+                                                        <buffIcon>items/spike_dagger</buffIcon>
                                                         <buffStacks>
                                                             <entity id="buffStacks">
                                                                 <stacks>0</stacks>

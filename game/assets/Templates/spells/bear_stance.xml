@@ -28,6 +28,9 @@
                     <entity>
                         <addBuff duration="3">
                             <entity>
+                                <name>Like a Bear</name>
+                                <description>This unit has increased walk speed.</description>
+                                <buffIcon>spells/bear_stance</buffIcon>
                                 <continuousAttributes>
                                     <entity>
                                         <bonusPercentageWalkSpeed>0.55</bonusPercentageWalkSpeed>

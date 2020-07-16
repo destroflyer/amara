@@ -59,6 +59,9 @@
                         <magicDamage>120 + (0.4 * source.abilityPower)</magicDamage>
                         <addBuff duration="1">
                             <entity>
+                                <name>Sapling Tossed</name>
+                                <description>This unit has decreased walk speed.</description>
+                                <buffIcon>spells/sapling_toss</buffIcon>
                                 <continuousAttributes>
                                     <bonusPercentageWalkSpeed>-0.5</bonusPercentageWalkSpeed>
                                 </continuousAttributes>

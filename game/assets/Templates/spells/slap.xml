@@ -68,6 +68,9 @@
                         </addAutoAttackSpellEffects>
                         <addBuff duration="5">
                             <entity id="buff">
+                                <name>Slapper</name>
+                                <description>This units next basic attack will knockback the target.</description>
+                                <buffIcon>spells/slap</buffIcon>
                                 <buffVisualisation>slap</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>

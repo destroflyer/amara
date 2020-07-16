@@ -67,6 +67,9 @@
                         <physicalDamage>100 + (0.3 * source.attackDamage)</physicalDamage>
                         <addBuff duration="[slowDuration]">
                             <entity>
+                                <name>Stabbed</name>
+                                <description>This unit has decreased walk speed.</description>
+                                <buffIcon>spells/maria_stab</buffIcon>
                                 <continuousAttributes>
                                     <entity>
                                         <bonusPercentageWalkSpeed>-0.3</bonusPercentageWalkSpeed>

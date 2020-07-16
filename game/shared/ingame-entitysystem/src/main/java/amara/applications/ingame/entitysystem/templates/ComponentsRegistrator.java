@@ -2689,6 +2689,15 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.buffs.stacks.MaximumStacksComponent(stacks);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.buffs.BuffIconComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.BuffIconComponent>("buffIcon"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.buffs.BuffIconComponent construct(EntityWorld entityWorld, Element element){
+                String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
+                return new amara.applications.ingame.entitysystem.components.buffs.BuffIconComponent(name);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesPerStackComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesPerStackComponent.class.getDeclaredField("bonusAttributesEntity"), componentFieldSerializer_Entity);

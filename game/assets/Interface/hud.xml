@@ -141,6 +141,15 @@
                 <panel/>
             </panel>
         </layer>
+        <layer id="inspection_buffs_layer" childLayout="center" visible="false">
+            <panel childLayout="vertical">
+                <panel height="171px"/>
+                <panel id="inspection_buffs_container" childLayout="horizontal" height="32px">
+                    <!--Generated panel "inspection_buffs"-->
+                </panel>
+                <panel/>
+            </panel>
+        </layer>
         <!--character info-->
         <layer id="character" childLayout="center">
             <panel childLayout="vertical">
@@ -504,16 +513,22 @@
                 </panel>
             </panel>
         </layer>
-        <!--upgrade spells-->
-        <layer id="upgrade_spells_layer" childLayout="center" visible="false">
+        <!--player buffs, upgrade spells-->
+        <layer childLayout="center">
             <panel childLayout="vertical">
                 <panel/>
-                <panel childLayout="horizontal" height="45px">
+                <panel childLayout="horizontal" height="77px">
                     <panel width="*"/>
-                    <panel childLayout="horizontal" width="627px">
-                        <panel width="158px"/>
-                        <image filename="Interface/hud/upgrade_spells_container.png" width="262px" height="100%"></image>
-                        <panel width="*"/>
+                    <panel childLayout="vertical" width="627px" valign="bottom">
+                        <panel id="player_buffs_container" childLayout="horizontal" height="32px">
+                            <panel width="99px"/>
+                            <!--Generated panel "player_buffs"-->
+                        </panel>
+                        <panel id="upgrade_spells_container" childLayout="horizontal" height="0px" visible="false">
+                            <panel width="158px"/>
+                            <image filename="Interface/hud/upgrade_spells_container.png" width="262px" height="45px"></image>
+                            <panel width="*"/>
+                        </panel>
                     </panel>
                     <panel width="*"/>
                 </panel>

@@ -16,6 +16,9 @@
                                 </hitbox>
                                 <areaBuff>
                                     <entity>
+                                        <name>Burned</name>
+                                        <description>This unit received magic damage over time.</description>
+                                        <buffIcon>items/burning_armor</buffIcon>
                                         <buffVisualisation>burning</buffVisualisation>
                                         <repeatingEffect interval="0.5">
                                             <entity>
@@ -33,6 +36,9 @@
                         </addBuffArea>
                         <addBuff duration="-1">
                             <entity id="visualisationBuff">
+                                <name>Burner</name>
+                                <description>This unit deals magic damage over time to nearby enemies.</description>
+                                <buffIcon>items/burning_armor</buffIcon>
                                 <buffVisualisation>burning</buffVisualisation>
                                 <keepOnDeath/>
                             </entity>

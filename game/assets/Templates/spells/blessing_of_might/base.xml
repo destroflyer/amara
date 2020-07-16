@@ -28,6 +28,9 @@
                     <entity>
                         <addBuff duration="-1">
                             <entity>
+                                <name>Blessed</name>
+                                <description>This unit is op.</description>
+                                <buffIcon>spells/blessing_of_might</buffIcon>
                                 <continuousAttributes>
                                     <entity>
                                         <bonusPercentageCooldownSpeed>10000</bonusPercentageCooldownSpeed>

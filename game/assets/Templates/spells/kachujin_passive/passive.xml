@@ -3,7 +3,7 @@
     <value name="maximumStacks">5</value>
     <entity id="passive">
         <name>Weakpoint Study</name>
-        <description>Kachujin studies an enemies weakpoints while attacking them - Each of your autoattacks adds a stack (-6 armor), up to a maximum of [maximumStacks] stacks. The stacks will get removed after [duration] seconds of not attacking.</description>
+        <description>Kachujin studies an enemies weakpoints while attacking them - Each of your basic attacks adds a stack (-6 armor), up to a maximum of [maximumStacks] stacks. The stacks will get removed after [duration] seconds of not attacking.</description>
         <spellVisualisation>kachujin_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
             <!--add spell effect-->
@@ -21,6 +21,9 @@
                                             <entity>
                                                 <addBuff duration="[duration]">
                                                     <entity id="buff">
+                                                        <name>Weakpoint</name>
+                                                        <description>This unit has decreased armor.</description>
+                                                        <buffIcon>spells/kachujin_passive</buffIcon>
                                                         <buffStacks>
                                                             <entity id="buffStacks">
                                                                 <stacks>0</stacks>

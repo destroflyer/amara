@@ -33,6 +33,9 @@
                                 </hitbox>
                                 <areaBuff>
                                     <entity>
+                                        <name>Burned by Agony</name>
+                                        <description>This unit receives magic damage over time.</description>
+                                        <buffIcon>spells/burning_agony_deactivate</buffIcon>
                                         <buffVisualisation>burning</buffVisualisation>
                                         <repeatingEffect interval="0.5">
                                             <entity>
@@ -50,6 +53,9 @@
                         </addBuffArea>
                         <addBuff duration="-1">
                             <entity id="visualisationBuff">
+                                <name>Agonic Burner</name>
+                                <description>This unit deals magic damage over time to nearby enemies.</description>
+                                <buffIcon>spells/burning_agony_deactivate</buffIcon>
                                 <buffVisualisation>burning</buffVisualisation>
                                 <keepOnDeath/>
                             </entity>

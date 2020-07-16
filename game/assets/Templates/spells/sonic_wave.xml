@@ -35,6 +35,9 @@
                     <entity>
                         <addBuff duration="3">
                             <enity id="buff">
+                                <name>Sonic Mark</name>
+                                <description>This unit is marked and can be dashed to.</description>
+                                <buffIcon>spells/sonic_wave</buffIcon>
                                 <buffVisualisation>sonic_wave_mark</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>

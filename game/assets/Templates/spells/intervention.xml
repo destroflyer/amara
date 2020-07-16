@@ -29,6 +29,9 @@
                         <removeVulnerability/>
                         <addBuff duration="3">
                             <entity>
+                                <name>Intervented</name>
+                                <description>This unit is invulnerable.</description>
+                                <buffIcon>spells/intervention</buffIcon>
                                 <buffVisualisation>intervention</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>

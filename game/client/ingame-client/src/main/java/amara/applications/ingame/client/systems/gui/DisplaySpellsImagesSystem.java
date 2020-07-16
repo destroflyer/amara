@@ -36,7 +36,7 @@ public class DisplaySpellsImagesSystem extends GUIDisplaySystem<ScreenController
             }
         }
     }
-    
+
     public static String getSpellImageFilePath(EntityWorld entityWorld, int[] spells, int spellIndex){
         String filePath = "Interface/hud/spells/";
         if((spellIndex < spells.length) && (spells[spellIndex] != -1)){
