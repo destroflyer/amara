@@ -1,67 +1,44 @@
 <template>
     <entity id="spell">
         <name>TODO</name>
-        <!--<spellVisualisation></spellVisualisation>-->
+        <!--<spellVisualisation>TODO</spellVisualisation>-->
         <instantEffectTriggers>
-            <!--trigger spell effects-->
+            <!--add reward buff-->
             <entity>
                 <casterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                        <addBuff duration="-1">
+                            <entity id="rewardBuff">
+                                <!--<name>TODO</name>-->
+                                <description>This unit has increased resistances.</description>
+                                <!--<buffIcon>TODO</buffIcon>-->
+                                <buffStacks>
+                                    <entity id="rewardBuffStacks">
+                                        <stacks>0</stacks>
+                                    </entity>
+                                </buffStacks>
+                                <continuousAttributesPerStack>
+                                    <entity>
+                                        <bonusFlatArmor>1</bonusFlatArmor>
+                                        <bonusFlatMagicResistance>1</bonusFlatMagicResistance>
+                                    </entity>
+                                </continuousAttributesPerStack>
+                                <keepOnDeath/>
+                            </entity>
+                        </addBuff>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
             </entity>
-        </instantEffectTriggers>
-        <castType>selfcast</castType>
-        <baseCooldown>7</baseCooldown>
-    </entity>
-    <entity id="buff"/>
-    <!--spell effect-->
-    <entity>
-        <castedSpell>#spell</castedSpell>
-        <castedEffectTriggers>
-            <!--add spelleffect-->
+            <!--add attack buff-->
             <entity>
-                <targetTarget/>
+                <casterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <addAutoAttackSpellEffects>
-                            <entity id="newSpellEffect">
-                                <castedEffectTriggers>
-                                    <!--target effect-->
-                                    <entity>
-                                        <targetTarget/>
-                                        <triggeredEffect>
-                                            <entity>
-                                                <magicDamage>75 + (0.6 + source.abilityPower)</magicDamage>
-                                                <playAudio>
-                                                    <entity>
-                                                        <audio>Sounds/sounds/spells/dwarf_warrior_attack_buff_hit.ogg</audio>
-                                                        <audioVolume>8</audioVolume>
-                                                    </entity>
-                                                </playAudio>
-                                            </entity>
-                                        </triggeredEffect>
-                                        <triggerSource>#spell</triggerSource>
-                                    </entity>
-                                    <!--remove buff-->
-                                    <entity>
-                                        <casterTarget/>
-                                        <triggeredEffect>
-                                            <entity>
-                                                <removeBuff>#buff</removeBuff>
-                                            </entity>
-                                        </triggeredEffect>
-                                        <triggerSource>#spell</triggerSource>
-                                    </entity>
-                                </castedEffectTriggers>
-                            </entity>
-                        </addAutoAttackSpellEffects>
                         <addBuff duration="5">
-                            <entity id="buff">
-                                <name>Offensive Defensive</name>
+                            <entity id="attackBuff">
+                                <!--<name>TODO</name>-->
                                 <description>This units next basic attack will increase its resistances.</description>
                                 <!--<buffIcon>TODO</buffIcon>-->
                                 <buffVisualisation>dwarf_warrior_empowered</buffVisualisation>
@@ -70,7 +47,32 @@
                                         <casterTarget/>
                                         <triggeredEffect>
                                             <entity>
-                                                <removeSpellEffects>#newSpellEffect</removeSpellEffects>
+                                                <removeSpellEffects>
+                                                    <entity id="newSpellEffect">
+                                                        <castedEffectTriggers>
+                                                            <!--trigger spell effects-->
+                                                            <entity>
+                                                                <targetTarget/>
+                                                                <triggeredEffect>
+                                                                    <entity>
+                                                                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                                                                    </entity>
+                                                                </triggeredEffect>
+                                                                <triggerSource>#spell</triggerSource>
+                                                            </entity>
+                                                            <!--remove buff-->
+                                                            <entity>
+                                                                <casterTarget/>
+                                                                <triggeredEffect>
+                                                                    <entity>
+                                                                        <removeBuff>#attackBuff</removeBuff>
+                                                                    </entity>
+                                                                </triggeredEffect>
+                                                                <triggerSource>#spell</triggerSource>
+                                                            </entity>
+                                                        </castedEffectTriggers>
+                                                    </entity>
+                                                </removeSpellEffects>
                                             </entity>
                                         </triggeredEffect>
                                         <triggerSource>#spell</triggerSource>
@@ -78,6 +80,44 @@
                                 </onBuffRemoveEffectTriggers>
                             </entity>
                         </addBuff>
+                        <addAutoAttackSpellEffects>
+                            <entity id="newSpellEffect"/>
+                        </addAutoAttackSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <baseCooldown>7</baseCooldown>
+    </entity>
+    <!--add stack on kill trigger-->
+    <entity>
+        <killTrigger/>
+        <customTarget>#rewardBuffStacks</customTarget>
+        <triggeredEffect>
+            <entity>
+                <addStacks>1</addStacks>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#spell</triggerSource>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>75 + (0.6 + source.abilityPower)</magicDamage>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/dwarf_warrior_attack_buff_hit.ogg</audio>
+                                <audioVolume>8</audioVolume>
+                            </entity>
+                        </playAudio>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

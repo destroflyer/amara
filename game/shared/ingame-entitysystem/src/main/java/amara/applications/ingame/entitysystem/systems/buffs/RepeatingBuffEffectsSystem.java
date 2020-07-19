@@ -3,6 +3,7 @@ package amara.applications.ingame.entitysystem.systems.buffs;
 import amara.applications.ingame.entitysystem.components.buffs.*;
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
+import amara.applications.ingame.entitysystem.systems.effects.triggers.EffectTriggerUtil;
 import amara.libraries.entitysystem.*;
 
 public class RepeatingBuffEffectsSystem implements EntitySystem {
@@ -18,6 +19,8 @@ public class RepeatingBuffEffectsSystem implements EntitySystem {
                 if (timeSinceLastRepeatingEffect >= repeatingEffectComponent.getInterval()) {
                     int effectCastEntity = entityWorld.createEntity();
                     entityWorld.setComponent(effectCastEntity, new PrepareEffectComponent(repeatingEffectComponent.getEffectEntity()));
+                    int effectActionIndex = EffectTriggerUtil.getAndIncreaseNextEffectActionIndex(entityWorld);
+                    entityWorld.setComponent(effectCastEntity, new EffectSourceActionIndexComponent(effectActionIndex));
                     EntityUtil.transferComponents(entityWorld, buffStatusEntity, effectCastEntity, new Class[] {
                             EffectSourceComponent.class,
                             EffectSourceSpellComponent.class

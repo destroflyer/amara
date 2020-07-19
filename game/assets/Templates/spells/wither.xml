@@ -50,6 +50,7 @@
                                 <buffVisualisation>withered</buffVisualisation>
                                 <continuousAttributes>
                                     <entity>
+                                        <bonusPercentageAttackSpeed>-0.6</bonusPercentageAttackSpeed>
                                         <bonusPercentageWalkSpeed>-0.6</bonusPercentageWalkSpeed>
                                     </entity>
                                 </continuousAttributes>

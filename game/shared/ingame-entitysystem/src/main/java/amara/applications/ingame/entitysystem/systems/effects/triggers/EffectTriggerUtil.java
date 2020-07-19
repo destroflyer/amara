@@ -4,28 +4,39 @@ import java.util.LinkedList;
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.casts.*;
+import amara.applications.ingame.entitysystem.components.game.NextEffectActionIndexComponent;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.systems.conditions.ConditionUtil;
 import amara.applications.ingame.entitysystem.systems.spells.casting.SetCooldownOnCastingSystem;
+import amara.applications.ingame.shared.maps.Map;
 import amara.core.Util;
 import amara.libraries.entitysystem.*;
 
 public class EffectTriggerUtil {
 
     public static LinkedList<EntityWrapper> triggerEffects(EntityWorld entityWorld, int[] effectTriggerEntities, int targetEntity) {
+        return triggerEffects(entityWorld, effectTriggerEntities, targetEntity, -1);
+    }
+
+    public static LinkedList<EntityWrapper> triggerEffects(EntityWorld entityWorld, int[] effectTriggerEntities, int targetEntity, int effectActionIndex) {
         LinkedList<EntityWrapper> effectCasts = new LinkedList<>();
         for (int effectTriggerEntity : effectTriggerEntities) {
-            EntityWrapper effectCast = triggerEffect(entityWorld, effectTriggerEntity, targetEntity);
+            EntityWrapper effectCast = triggerEffect(entityWorld, effectTriggerEntity, targetEntity, effectActionIndex);
             if (effectCast != null) {
                 effectCasts.add(effectCast);
+                effectActionIndex = effectCast.getComponent(EffectSourceActionIndexComponent.class).getIndex();
             }
         }
         return effectCasts;
     }
 
     public static EntityWrapper triggerEffect(EntityWorld entityWorld, int effectTriggerEntity, int targetEntity) {
+        return triggerEffect(entityWorld, effectTriggerEntity, targetEntity, -1);
+    }
+
+    private static EntityWrapper triggerEffect(EntityWorld entityWorld, int effectTriggerEntity, int targetEntity, int effectActionIndex) {
         if (areTriggerConditionsMet(entityWorld, effectTriggerEntity, targetEntity)) {
             EntityWrapper effectCast = entityWorld.getWrapped(entityWorld.createEntity());
             TriggeredEffectComponent triggeredEffectComponent = entityWorld.getComponent(effectTriggerEntity, TriggeredEffectComponent.class);
@@ -33,6 +44,10 @@ public class EffectTriggerUtil {
             if (triggeredEffectComponent != null) {
                 int effectEntity = triggeredEffectComponent.getEffectEntity();
                 effectCast.setComponent(new PrepareEffectComponent(effectEntity));
+                if (effectActionIndex == -1) {
+                    effectActionIndex = getAndIncreaseNextEffectActionIndex(entityWorld);
+                }
+                effectCast.setComponent(new EffectSourceActionIndexComponent(effectActionIndex));
                 TriggerSourceComponent triggerSourceComponent = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class);
                 if (triggerSourceComponent != null) {
                     // EffectSource
@@ -81,6 +96,12 @@ public class EffectTriggerUtil {
             }
         }
         return true;
+    }
+
+    public static int getAndIncreaseNextEffectActionIndex(EntityWorld entityWorld) {
+        int nextEffectActionIndex = entityWorld.getComponent(Map.GAME_ENTITY, NextEffectActionIndexComponent.class).getIndex();
+        entityWorld.setComponent(Map.GAME_ENTITY, new NextEffectActionIndexComponent(nextEffectActionIndex + 1));
+        return nextEffectActionIndex;
     }
 
     private static LinkedList<Integer> tmpTargetEntities = new LinkedList<>();

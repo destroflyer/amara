@@ -61,6 +61,7 @@ public class UpdateDamageHistorySystem implements EntitySystem{
                 damage = entityWorld.getComponent(effectImpactEntity, ResultingMagicDamageComponent.class).getValue();
                 break;
         }
+        int sourceActionIndex = entityWorld.getComponent(effectImpactEntity, EffectSourceActionIndexComponent.class).getIndex();
         int sourceEntity = -1;
         EffectSourceComponent effectSourceComponent = entityWorld.getComponent(effectImpactEntity, EffectSourceComponent.class);
         if(effectSourceComponent != null){
@@ -81,7 +82,7 @@ public class UpdateDamageHistorySystem implements EntitySystem{
             }
             index++;
         }
-        damageEntries.add(index, new DamageHistoryComponent.DamageHistoryEntry(damageType, damage, sourceEntity, sourceSpellEntity));
+        damageEntries.add(index, new DamageHistoryComponent.DamageHistoryEntry(damageType, damage, sourceActionIndex, sourceEntity, sourceSpellEntity));
     }
     
     private void updateDamageHistory(EntityWorld entityWorld, int targetEntity){
@@ -98,7 +99,8 @@ public class UpdateDamageHistorySystem implements EntitySystem{
         float health = entityWorld.getComponent(targetEntity, HealthComponent.class).getValue();
         if(health < 1){
             appliedEntries = new LinkedList<>();
-            while(health < 1){
+            // If an entity had exactly 1 health, the parts can add up to 0.999999 due to floating point errors, so damageEntries can be empty when popping
+            while ((health < 1) && (damageEntries.size() > 0)) {
                 DamageHistoryComponent.DamageHistoryEntry entry = damageEntries.pop();
                 health += entry.getDamage();
                 appliedEntries.add(entry);
