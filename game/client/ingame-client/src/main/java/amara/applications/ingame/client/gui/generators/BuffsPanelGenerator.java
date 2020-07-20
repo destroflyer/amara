@@ -7,6 +7,8 @@ import amara.applications.ingame.entitysystem.components.general.NameComponent;
 import amara.libraries.entitysystem.EntityWorld;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.*;
+import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.elements.render.TextRenderer;
 
 public class BuffsPanelGenerator extends ElementGenerator {
 
@@ -80,10 +82,18 @@ public class BuffsPanelGenerator extends ElementGenerator {
     }
 
     public void setBuffStacks(Nifty nifty, int buffStatusEntity, int stacks) {
-        getTextRenderer(nifty, getId() + "_" + buffStatusEntity + "_stacks").setText("" + stacks);
+        TextRenderer textRenderer = getTextRenderer(nifty, getId() + "_" + buffStatusEntity + "_stacks");
+        // Element can be null if buff should not be shown
+        if (textRenderer != null) {
+            textRenderer.setText("" + stacks);
+        }
     }
 
     public void setBuffStacksVisible(Nifty nifty, int buffStatusEntity, boolean visible) {
-        getElementById(nifty, getId() + "_" + buffStatusEntity + "_stacks").setVisible(visible);
+        Element element = getElementById(nifty, getId() + "_" + buffStatusEntity + "_stacks");
+        // Element can be null if buff should not be shown
+        if (element != null) {
+            element.setVisible(visible);
+        }
     }
 }
