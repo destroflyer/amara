@@ -379,6 +379,22 @@ public class ScreenController_HUD extends GameScreenController {
         inspectionBuffsPanelGenerator.update(nifty, "inspection_buffs_container");
     }
 
+    public void setPlayerBuffStacks(int buffStatusEntity, int stacks) {
+        playerBuffsPanelGenerator.setBuffStacks(nifty, buffStatusEntity, stacks);
+    }
+
+    public void setInspectionBuffStacks(int buffStatusEntity, int stacks) {
+        inspectionBuffsPanelGenerator.setBuffStacks(nifty, buffStatusEntity, stacks);
+    }
+
+    public void setPlayerBuffStacksVisible(int buffStatusEntity, boolean visible) {
+        playerBuffsPanelGenerator.setBuffStacksVisible(nifty, buffStatusEntity, visible);
+    }
+
+    public void setInspectionBuffStacksVisible(int buffStatusEntity, boolean visible) {
+        inspectionBuffsPanelGenerator.setBuffStacksVisible(nifty, buffStatusEntity, visible);
+    }
+
     public void setPlayerBagItems(EntityWorld entityWorld, int[] bagItemEntities) {
         bagPanelGenerator.setData(entityWorld, bagItemEntities);
         bagPanelGenerator.update(nifty, "player_bag_items_container");

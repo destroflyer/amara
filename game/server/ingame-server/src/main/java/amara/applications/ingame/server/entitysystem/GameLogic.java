@@ -118,7 +118,7 @@ public class GameLogic {
         entitySystems.add(new RepeatingBuffEffectsSystem());
         // Cleanup effects here, so effect impact entities aren't observed
         entitySystems.add(new CleanupEffectsSystem());
-        entitySystems.add(new ApplyEffectsLoopSystem(game.getMap()));
+        entitySystems.add(new ApplyEffectsLoopSystem(game.getMap(), castSpellQueueSystem));
         // Cleanup effect triggers here, so they have been triggered before being removed
         entitySystems.add(new CleanupEffectTriggersSystem());
         entitySystems.add(new HealthRegenerationSystem());

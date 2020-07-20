@@ -3,6 +3,7 @@ package amara.applications.ingame.client.gui.generators;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.ElementBuilder;
 import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.elements.render.TextRenderer;
 
 public abstract class ElementGenerator {
 
@@ -28,6 +29,10 @@ public abstract class ElementGenerator {
     }
 
     public abstract ElementBuilder generate(Nifty nifty, String id);
+
+    protected TextRenderer getTextRenderer(Nifty nifty, String id) {
+        return getElementById(nifty, id).getRenderer(TextRenderer.class);
+    }
 
     protected Element getElementById(Nifty nifty, String id) {
         return nifty.getCurrentScreen().findElementById(id);

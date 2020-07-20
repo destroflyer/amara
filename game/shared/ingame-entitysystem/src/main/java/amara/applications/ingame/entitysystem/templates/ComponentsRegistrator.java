@@ -1976,6 +1976,26 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent(spellEffectEntities, setSourcesToSpells);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.spells.EnqueueSpellCastComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.spells.EnqueueSpellCastComponent.class.getDeclaredField("spellEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.spells.EnqueueSpellCastComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.EnqueueSpellCastComponent>("enqueueSpellCast"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.spells.EnqueueSpellCastComponent construct(EntityWorld entityWorld, Element element){
+                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
+                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+                return new amara.applications.ingame.entitysystem.components.effects.spells.EnqueueSpellCastComponent(spellEntity, targetEntity);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent.class.getDeclaredField("spellEffectEntities"), componentFieldSerializer_Entity);

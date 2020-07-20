@@ -1,7 +1,6 @@
 package amara.applications.ingame.server.entitysystem.systems.effects;
 
 import amara.applications.ingame.entitysystem.systems.aggro.*;
-import amara.applications.ingame.entitysystem.systems.cleanup.*;
 import amara.applications.ingame.entitysystem.systems.effects.*;
 import amara.applications.ingame.entitysystem.systems.effects.aggro.*;
 import amara.applications.ingame.entitysystem.systems.effects.audio.*;
@@ -24,6 +23,7 @@ import amara.applications.ingame.entitysystem.systems.effects.units.*;
 import amara.applications.ingame.entitysystem.systems.effects.vision.*;
 import amara.applications.ingame.entitysystem.systems.effects.visuals.*;
 import amara.applications.ingame.entitysystem.systems.specials.erika.*;
+import amara.applications.ingame.entitysystem.systems.spells.casting.CastSpellQueueSystem;
 import amara.applications.ingame.entitysystem.systems.units.*;
 import amara.applications.ingame.server.entitysystem.systems.general.LoopSystem;
 import amara.applications.ingame.shared.maps.Map;
@@ -31,7 +31,7 @@ import amara.libraries.entitysystem.EntityWorld;
 
 public class ApplyEffectsLoopSystem extends LoopSystem {
 
-    public ApplyEffectsLoopSystem(Map map) {
+    public ApplyEffectsLoopSystem(Map map, CastSpellQueueSystem castSpellQueueSystem) {
         calculateEffectImpactSystem = new CalculateEffectImpactSystem();
         add(calculateEffectImpactSystem);
         add(new ApplyPlayCinematicSystem());
@@ -83,6 +83,7 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplySpawnsSystems());
         add(new ApplyAddAutoAttackSpellEffectsSystem());
         add(new ApplyAddSpellsSpellEffectsSystem());
+        add(new ApplyEnqueueSpellCastSystem(castSpellQueueSystem));
         add(new ApplyRemoveSpellEffectsSystem());
         add(new ApplyReplaceSpellsWithExistingSpellsSystem());
         add(new ApplyReplaceSpellsWithNewSpellsSystem());

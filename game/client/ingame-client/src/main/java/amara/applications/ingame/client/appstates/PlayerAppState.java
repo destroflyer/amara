@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.appstates;
 
 import java.util.HashMap;
@@ -33,10 +29,6 @@ import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.math.Vector2f;
 
-/**
- *
- * @author Carl
- */
 public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication> implements ActionListener {
 
     public PlayerAppState(GameSelectionPlayer[][] teams) {
@@ -96,6 +88,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new DisplayExperienceSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayAttributesSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayBuffsSystem(this, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayBuffStacksSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayInventoriesSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayBagSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayPassivesImagesSystem(this, screenController_HUD));

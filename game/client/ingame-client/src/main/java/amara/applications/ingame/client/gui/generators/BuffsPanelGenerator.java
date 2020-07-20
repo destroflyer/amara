@@ -6,10 +6,7 @@ import amara.applications.ingame.entitysystem.components.general.DescriptionComp
 import amara.applications.ingame.entitysystem.components.general.NameComponent;
 import amara.libraries.entitysystem.EntityWorld;
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.builder.ElementBuilder;
-import de.lessvoid.nifty.builder.HoverEffectBuilder;
-import de.lessvoid.nifty.builder.ImageBuilder;
-import de.lessvoid.nifty.builder.PanelBuilder;
+import de.lessvoid.nifty.builder.*;
 
 public class BuffsPanelGenerator extends ElementGenerator {
 
@@ -29,17 +26,29 @@ public class BuffsPanelGenerator extends ElementGenerator {
         return new PanelBuilder(id){{
             childLayoutHorizontal();
 
-            for (int buffStatusEntity : buffStatusEntities) {
+            for (int _buffStatusEntity : buffStatusEntities) {
+                final int buffStatusEntity = _buffStatusEntity;
                 int buffEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getBuffEntity();
 
                 String description = getBuffDescription(entityWorld, buffEntity);
                 if (description != null) {
-                    image(new ImageBuilder() {{
+                    panel(new PanelBuilder() {{
                         width("32px");
                         height("32px");
-                        filename(getBuffImageFilePath(entityWorld, buffEntity));
+                        childLayoutOverlay();
 
-                        onHoverEffect(new HoverEffectBuilder("hint").effectParameter("hintText", description));
+                        image(new ImageBuilder() {{
+                            filename(getBuffImageFilePath(entityWorld, buffEntity));
+
+                            onHoverEffect(new HoverEffectBuilder("hint").effectParameter("hintText", description));
+                        }});
+
+                        text(new TextBuilder(id + "_" + buffStatusEntity + "_stacks") {{
+                            textHAlignRight();
+                            textVAlignBottom();
+                            font("Interface/fonts/Verdana_14.fnt");
+                            visible(false);
+                        }});
                     }});
                 }
             }
@@ -68,5 +77,13 @@ public class BuffsPanelGenerator extends ElementGenerator {
             description += descriptionComponent.getDescription();
         }
         return description;
+    }
+
+    public void setBuffStacks(Nifty nifty, int buffStatusEntity, int stacks) {
+        getTextRenderer(nifty, getId() + "_" + buffStatusEntity + "_stacks").setText("" + stacks);
+    }
+
+    public void setBuffStacksVisible(Nifty nifty, int buffStatusEntity, boolean visible) {
+        getElementById(nifty, getId() + "_" + buffStatusEntity + "_stacks").setVisible(visible);
     }
 }
