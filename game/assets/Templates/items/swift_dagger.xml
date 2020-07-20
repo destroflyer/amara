@@ -3,7 +3,11 @@
         <itemID>swift_dagger</itemID>
         <itemVisualisation>swift_dagger</itemVisualisation>
         <name>Swift Dagger</name>
-        <itemRecipe gold="300" itemIDs="dagger,book_of_precision"/>
+        <itemRecipe itemIDs="dagger,book_of_precision">
+            <entity>
+                <goldCost>300</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>800</isSellable>
         <!--stats-->
         <bonusPercentageAttackSpeed>0.15</bonusPercentageAttackSpeed>

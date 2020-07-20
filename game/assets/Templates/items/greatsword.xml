@@ -3,7 +3,11 @@
         <itemID>greatsword</itemID>
         <itemVisualisation>greatsword</itemVisualisation>
         <name>Greatsword</name>
-        <itemRecipe gold="1100"/>
+        <itemRecipe>
+            <entity>
+                <goldCost>1100</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>800</isSellable>
         <!--stats-->
         <bonusFlatAttackDamage>40</bonusFlatAttackDamage>

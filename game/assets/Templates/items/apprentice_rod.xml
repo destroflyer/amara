@@ -3,7 +3,11 @@
         <itemID>apprentice_rod</itemID>
         <itemVisualisation>apprentice_rod</itemVisualisation>
         <name>Apprentice Rod</name>
-        <itemRecipe gold="1100"/>
+        <itemRecipe>
+            <entity>
+                <goldCost>1100</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>800</isSellable>
         <!--stats-->
         <bonusFlatAbilityPower>60</bonusFlatAbilityPower>

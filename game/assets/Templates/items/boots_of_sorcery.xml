@@ -3,7 +3,11 @@
         <itemID>boots_of_sorcery</itemID>
         <itemVisualisation>boots_of_sorcery</itemVisualisation>
         <name>Boots of Sorcery</name>
-        <itemRecipe gold="700" itemIDs="wanderers_treads"/>
+        <itemRecipe itemIDs="wanderers_treads">
+            <entity>
+                <goldCost>700</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>650</isSellable>
         <!--stats-->
         <bonusFlatWalkSpeed>0.4</bonusFlatWalkSpeed>

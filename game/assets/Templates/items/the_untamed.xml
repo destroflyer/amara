@@ -3,7 +3,11 @@
         <itemID>the_untamed</itemID>
         <itemVisualisation>the_untamed</itemVisualisation>
         <name>The Untamed</name>
-        <itemRecipe gold="800" itemIDs="apprentice_rod,tiny_scepter,tiny_scepter"/>
+        <itemRecipe itemIDs="apprentice_rod,tiny_scepter,tiny_scepter">
+            <entity>
+                <goldCost>800</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>1500</isSellable>
         <!--stats-->
         <bonusFlatAbilityPower>120</bonusFlatAbilityPower>

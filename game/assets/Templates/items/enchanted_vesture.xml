@@ -3,7 +3,11 @@
         <itemID>enchanted_vesture</itemID>
         <itemVisualisation>enchanted_vesture</itemVisualisation>
         <name>Enchanted Vesture</name>
-        <itemRecipe gold="300" itemIDs="arcane_vesture"/>
+        <itemRecipe itemIDs="arcane_vesture">
+            <entity>
+                <goldCost>300</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>400</isSellable>
         <!--stats-->
         <bonusFlatMagicResistance>25</bonusFlatMagicResistance>

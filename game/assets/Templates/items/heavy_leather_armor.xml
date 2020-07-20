@@ -3,7 +3,11 @@
         <itemID>heavy_leather_armor</itemID>
         <itemVisualisation>heavy_leather_armor</itemVisualisation>
         <name>Heavy Leather Armor</name>
-        <itemRecipe gold="600" itemIDs="leather_armor"/>
+        <itemRecipe itemIDs="leather_armor">
+            <entity>
+                <goldCost>600</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>750</isSellable>
         <!--stats-->
         <bonusFlatMaximumHealth>360</bonusFlatMaximumHealth>

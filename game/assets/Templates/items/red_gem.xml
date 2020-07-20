@@ -3,7 +3,11 @@
         <itemID>red_gem</itemID>
         <itemVisualisation>red_gem</itemVisualisation>
         <name>Red Gem</name>
-        <itemRecipe gold="50"/>
+        <itemRecipe>
+            <entity>
+                <goldCost>50</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>20</isSellable>
         <!--stats-->
         <itemActive consumable="true">

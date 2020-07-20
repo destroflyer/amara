@@ -3,7 +3,11 @@
         <itemID>etherdesert_income_small</itemID>
         <itemVisualisation>etherdesert_income_small</itemVisualisation>
         <name>Income (Small)</name>
-        <itemRecipe gold="25"/>
+        <itemRecipe>
+            <entity>
+                <goldCost>25</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>25</isSellable>
         <itemCategories>economy</itemCategories>
         <!--stats-->

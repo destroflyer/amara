@@ -3,7 +3,11 @@
         <itemID>iron_bulwark</itemID>
         <itemVisualisation>iron_bulwark</itemVisualisation>
         <name>Iron Bulwark</name>
-        <itemRecipe gold="600" itemIDs="heavy_leather_armor,iron_armor"/>
+        <itemRecipe itemIDs="heavy_leather_armor,iron_armor">
+            <entity>
+                <goldCost>600</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>1200</isSellable>
         <!--stats-->
         <bonusFlatMaximumHealth>450</bonusFlatMaximumHealth>

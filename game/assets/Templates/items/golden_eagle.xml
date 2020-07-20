@@ -3,7 +3,11 @@
         <itemID>golden_eagle</itemID>
         <itemVisualisation>golden_eagle</itemVisualisation>
         <name>Golden Eagle</name>
-        <itemRecipe gold="2700"/>
+        <itemRecipe>
+            <entity>
+                <goldCost>2700</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>2310</isSellable>
         <!--stats-->
         <bonusFlatAbilityPower>120</bonusFlatAbilityPower>

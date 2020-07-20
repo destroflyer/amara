@@ -3,7 +3,11 @@
         <itemID>reaper</itemID>
         <itemVisualisation>reaper</itemVisualisation>
         <name>Reaper</name>
-        <itemRecipe gold="500" itemIDs="heavy_leather_armor,reinforced_sword"/>
+        <itemRecipe itemIDs="heavy_leather_armor,reinforced_sword">
+            <entity>
+                <goldCost>500</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>1300</isSellable>
         <!--stats-->
         <bonusFlatMaximumHealth>400</bonusFlatMaximumHealth>

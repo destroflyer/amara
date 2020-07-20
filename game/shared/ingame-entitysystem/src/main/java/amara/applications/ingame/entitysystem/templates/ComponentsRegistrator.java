@@ -1104,6 +1104,44 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.conditions.OrConditionsComponent(conditionEntities);
             }
         });
+        //costs
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent.class.getDeclaredField("buffEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent.class.getDeclaredField("stacks"), componentFieldSerializer_Stacks);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent>("buffStacksCost"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent construct(EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
+                int stacks = 0;
+                String stacksText = element.getAttributeValue("stacks");
+                if((stacksText != null) && (stacksText.length() > 0)){
+                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, stacksText));
+                }
+                return new amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent(buffEntity, stacks);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.costs.GoldCostComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.costs.GoldCostComponent>("goldCost"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.costs.GoldCostComponent construct(EntityWorld entityWorld, Element element){
+                float gold = 0;
+                String goldText = element.getText();
+                if((goldText != null) && (goldText.length() > 0)){
+                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
+                }
+                return new amara.applications.ingame.entitysystem.components.costs.GoldCostComponent(gold);
+            }
+        });
         //effects
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.AffectedTargetsComponent.class);
         try{
@@ -2351,11 +2389,7 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent construct(EntityWorld entityWorld, Element element){
-                float gold = 0;
-                String goldText = element.getAttributeValue("gold");
-                if((goldText != null) && (goldText.length() > 0)){
-                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
-                }
+                int combineCostEntity = createChildEntity(entityWorld, element, 0, "combineCostEntity");
                 String[] itemIDs = new String[0];
                 String itemIDsText = element.getAttributeValue("itemIDs");
                 if(itemIDsText != null){
@@ -2364,7 +2398,7 @@ public class ComponentsRegistrator{
                         itemIDs[i] = xmlTemplateManager.parseValue(entityWorld, itemIDs[i]);
                     }
                 }
-                return new amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent(gold, itemIDs);
+                return new amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent(combineCostEntity, itemIDs);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.items.ItemVisualisationComponent.class);

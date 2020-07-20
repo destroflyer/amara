@@ -3,7 +3,11 @@
         <itemID>lifebinder</itemID>
         <itemVisualisation>lifebinder</itemVisualisation>
         <name>Lifebinder</name>
-        <itemRecipe gold="5000"/>
+        <itemRecipe>
+            <entity>
+                <goldCost>5000</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>3000</isSellable>
         <!--stats-->
         <bonusPercentageIncomingDamageAmplification>-0.2</bonusPercentageIncomingDamageAmplification>

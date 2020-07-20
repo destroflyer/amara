@@ -3,16 +3,17 @@ package amara.applications.ingame.client.gui;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import com.jme3.math.FastMath;
 import amara.applications.ingame.client.appstates.SendPlayerCommandsAppState;
 import amara.applications.ingame.client.gui.objects.ItemRecipe;
 import amara.applications.ingame.entitysystem.components.attributes.*;
+import amara.applications.ingame.entitysystem.components.costs.GoldCostComponent;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.network.messages.objects.commands.*;
 import amara.libraries.applications.display.gui.GameScreenController;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.StaticEntityWorld;
+import com.jme3.math.FastMath;
 import de.lessvoid.nifty.NiftyEvent;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.builder.ImageBuilder;
@@ -88,7 +89,9 @@ public class ScreenController_Shop extends GameScreenController{
                 }
                 ingredientsRecipes[i] = ingredientRecipe;
             }
-            itemRecipe = new ItemRecipe(itemEntity, itemRecipeComponent.getGold(), ingredientsRecipes, (previousDepth + 1));
+            GoldCostComponent goldCostComponent = StaticEntityWorld.getEntityWorld().getComponent(itemRecipeComponent.getCombineCostEntity(), GoldCostComponent.class);
+            float gold = ((goldCostComponent != null) ? goldCostComponent.getGold() : 0);
+            itemRecipe = new ItemRecipe(itemEntity, gold, ingredientsRecipes, (previousDepth + 1));
             itemsRecipes.put(itemID, itemRecipe);
         }
         return itemRecipe;

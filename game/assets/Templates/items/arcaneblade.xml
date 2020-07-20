@@ -3,7 +3,11 @@
         <itemID>arcaneblade</itemID>
         <itemVisualisation>arcaneblade</itemVisualisation>
         <name>Arcaneblade</name>
-        <itemRecipe gold="400" itemIDs="rusty_sword,arcane_vesture"/>
+        <itemRecipe itemIDs="rusty_sword,arcane_vesture">
+            <entity>
+                <goldCost>400</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>600</isSellable>
         <!--stats-->
         <bonusFlatAttackDamage>15</bonusFlatAttackDamage>

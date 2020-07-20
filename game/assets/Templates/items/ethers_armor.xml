@@ -3,7 +3,11 @@
         <itemID>ethers_armor</itemID>
         <itemVisualisation>ethers_armor</itemVisualisation>
         <name>Ether's Armor</name>
-        <itemRecipe gold="600" itemIDs="heavy_leather_armor,book_of_vitality,book_of_vitality"/>
+        <itemRecipe itemIDs="heavy_leather_armor,book_of_vitality,book_of_vitality">
+            <entity>
+                <goldCost>600</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>1800</isSellable>
         <!--stats-->
         <bonusFlatMaximumHealth>850</bonusFlatMaximumHealth>

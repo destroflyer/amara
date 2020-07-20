@@ -3,8 +3,12 @@
         <itemID>boots_of_silence</itemID>
         <itemVisualisation>boots_of_silence</itemVisualisation>
         <name>Boots of Silence</name>
-        <itemRecipe gold="500" itemIDs="wanderers_treads"/>
-        <isSellable>500</isSellable>
+        <itemRecipe itemIDs="wanderers_treads">
+            <entity>
+                <goldCost>500</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>450</isSellable>
         <!--stats-->
         <bonusFlatWalkSpeed>0.4</bonusFlatWalkSpeed>
         <bonusFlatMagicResistance>0.15</bonusFlatMagicResistance>

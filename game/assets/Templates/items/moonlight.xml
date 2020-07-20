@@ -3,7 +3,11 @@
         <itemID>moonlight</itemID>
         <itemVisualisation>moonlight</itemVisualisation>
         <name>Moonlight</name>
-        <itemRecipe gold="300" itemIDs="tiny_scepter,book_of_wisdom"/>
+        <itemRecipe itemIDs="tiny_scepter,book_of_wisdom">
+            <entity>
+                <goldCost>300</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>750</isSellable>
         <!--stats-->
         <bonusFlatAbilityPower>25</bonusFlatAbilityPower>

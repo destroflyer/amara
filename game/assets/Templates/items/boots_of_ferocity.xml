@@ -3,7 +3,11 @@
         <itemID>boots_of_ferocity</itemID>
         <itemVisualisation>boots_of_ferocity</itemVisualisation>
         <name>Boots of Ferocity</name>
-        <itemRecipe gold="700" itemIDs="wanderers_treads"/>
+        <itemRecipe itemIDs="wanderers_treads">
+            <entity>
+                <goldCost>700</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>650</isSellable>
         <!--stats-->
         <bonusFlatWalkSpeed>0.4</bonusFlatWalkSpeed>

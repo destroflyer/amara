@@ -3,7 +3,11 @@
         <itemID>book_of_vitality</itemID>
         <itemVisualisation>book_of_vitality</itemVisualisation>
         <name>Book of Vitality</name>
-        <itemRecipe gold="800"/>
+        <itemRecipe>
+            <entity>
+                <goldCost>800</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>500</isSellable>
         <!--stats-->
         <bonusFlatHealthRegeneration>4</bonusFlatHealthRegeneration>

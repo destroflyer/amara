@@ -3,7 +3,11 @@
         <itemID>book_of_precision</itemID>
         <itemVisualisation>book_of_precision</itemVisualisation>
         <name>Book of Precision</name>
-        <itemRecipe gold="500"/>
+        <itemRecipe>
+            <entity>
+                <goldCost>500</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>300</isSellable>
         <!--stats-->
         <bonusPercentageCriticalChance>0.1</bonusPercentageCriticalChance>

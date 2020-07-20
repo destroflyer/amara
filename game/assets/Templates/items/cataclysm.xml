@@ -3,7 +3,11 @@
         <itemID>cataclysm</itemID>
         <itemVisualisation>cataclysm</itemVisualisation>
         <name>Cataclysm</name>
-        <itemRecipe gold="800" itemIDs="greatsword,rusty_sword"/>
+        <itemRecipe itemIDs="greatsword,rusty_sword">
+            <entity>
+                <goldCost>800</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>1500</isSellable>
         <!--stats-->
         <bonusFlatAttackDamage>60</bonusFlatAttackDamage>

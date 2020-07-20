@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem;
 
-import com.jme3.math.FastMath;
-import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.attributes.*;
+import amara.applications.ingame.entitysystem.components.costs.*;
 import amara.applications.ingame.entitysystem.components.buffs.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.general.*;
@@ -32,11 +27,9 @@ import amara.libraries.entitysystem.templates.*;
 import amara.libraries.physics.shapes.*;
 import amara.libraries.physics.shapes.PolygonMath.PolygonBuilder;
 import amara.libraries.physics.util2d.PointUtil;
+import com.jme3.math.FastMath;
+import com.jme3.math.Vector2f;
 
-/**
- *
- * @author Carl
- */
 public class CustomGameTemplates{
     
     public static void registerLoader(){
@@ -332,7 +325,9 @@ public class CustomGameTemplates{
                 entityWrapper.setComponent(new ItemVisualisationComponent("etherdesert_tower_" + towerIndex));
                 entityWrapper.setComponent(new NameComponent("Tower #" + towerIndex));
                 int[] costs = new int[]{40, 120, 200, 330, 550, 90, 120, 40, 180, 150};
-                entityWrapper.setComponent(new ItemRecipeComponent(costs[towerIndex]));
+                int combineCostEntity = entityWorld.createEntity();
+                entityWorld.setComponent(combineCostEntity, new GoldCostComponent(costs[towerIndex]));
+                entityWrapper.setComponent(new ItemRecipeComponent(combineCostEntity));
                 entityWrapper.setComponent(new IsSellableComponent(costs[towerIndex]));
                 entityWrapper.setComponent(new ItemCategoriesComponent("military"));
                 int itemActiveEntity = entityWorld.createEntity();

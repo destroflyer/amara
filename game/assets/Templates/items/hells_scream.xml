@@ -3,7 +3,11 @@
         <itemID>hells_scream</itemID>
         <itemVisualisation>hells_scream</itemVisualisation>
         <name>Hell's Scream</name>
-        <itemRecipe gold="800" itemIDs="greatsword,doomblade"/>
+        <itemRecipe itemIDs="greatsword,doomblade">
+            <entity>
+                <goldCost>800</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>2000</isSellable>
         <!--stats-->
         <bonusFlatAttackDamage>80</bonusFlatAttackDamage>

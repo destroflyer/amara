@@ -3,7 +3,11 @@
         <itemID>etherdesert_income</itemID>
         <itemVisualisation>etherdesert_income</itemVisualisation>
         <name>Income</name>
-        <itemRecipe gold="50"/>
+        <itemRecipe>
+            <entity>
+                <goldCost>50</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>50</isSellable>
         <!--stats-->
         <itemActive consumable="true">

@@ -3,7 +3,11 @@
         <itemID>natures_protector</itemID>
         <itemVisualisation>natures_protector</itemVisualisation>
         <name>Nature's Protector</name>
-        <itemRecipe gold="400" itemIDs="heavy_leather_armor,enchanted_vesture"/>
+        <itemRecipe itemIDs="heavy_leather_armor,enchanted_vesture">
+            <entity>
+                <goldCost>400</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>1100</isSellable>
         <!--stats-->
         <bonusFlatMaximumHealth>420</bonusFlatMaximumHealth>

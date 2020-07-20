@@ -3,7 +3,11 @@
         <itemID>soulblade</itemID>
         <itemVisualisation>soulblade</itemVisualisation>
         <name>Soulblade</name>
-        <itemRecipe gold="600" itemIDs="arcaneblade,greatsword"/>
+        <itemRecipe itemIDs="arcaneblade,greatsword">
+            <entity>
+                <goldCost>600</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>1200</isSellable>
         <!--stats-->
         <bonusFlatAttackDamage>60</bonusFlatAttackDamage>

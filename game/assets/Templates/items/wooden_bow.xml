@@ -3,7 +3,11 @@
         <itemID>wooden_bow</itemID>
         <itemVisualisation>wooden_bow</itemVisualisation>
         <name>Wooden Bow</name>
-        <itemRecipe gold="300" itemIDs="dagger,dagger"/>
+        <itemRecipe itemIDs="dagger,dagger">
+            <entity>
+                <goldCost>300</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>800</isSellable>
         <!--stats-->
         <bonusPercentageAttackSpeed>0.25</bonusPercentageAttackSpeed>

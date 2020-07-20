@@ -3,7 +3,11 @@
         <itemID>iron_armor</itemID>
         <itemVisualisation>iron_armor</itemVisualisation>
         <name>Iron Armor</name>
-        <itemRecipe gold="300" itemIDs="cotton_armor"/>
+        <itemRecipe itemIDs="cotton_armor">
+            <entity>
+                <goldCost>300</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>400</isSellable>
         <!--stats-->
         <bonusFlatArmor>25</bonusFlatArmor>

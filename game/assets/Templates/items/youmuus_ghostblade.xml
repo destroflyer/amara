@@ -3,7 +3,11 @@
         <itemID>youmuus_ghostblade</itemID>
         <itemVisualisation>youmuus_ghostblade</itemVisualisation>
         <name>Youmuu's Ghostblade</name>
-        <itemRecipe gold="2700"/>
+        <itemRecipe>
+            <entity>
+                <goldCost>2700</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>1890</isSellable>
         <!--stats-->
         <bonusFlatAttackDamage>30</bonusFlatAttackDamage>

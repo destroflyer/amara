@@ -3,7 +3,11 @@
         <itemID>wanderers_treads</itemID>
         <itemVisualisation>wanderers_treads</itemVisualisation>
         <name>Wanderer's Treads</name>
-        <itemRecipe gold="350"/>
+        <itemRecipe>
+            <entity>
+                <goldCost>350</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>250</isSellable>
         <!--stats-->
         <bonusFlatWalkSpeed>0.35</bonusFlatWalkSpeed>

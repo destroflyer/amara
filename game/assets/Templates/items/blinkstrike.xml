@@ -3,7 +3,11 @@
         <itemID>blinkstrike</itemID>
         <itemVisualisation>blinkstrike</itemVisualisation>
         <name>Blinkstrike</name>
-        <itemRecipe gold="200" itemIDs="reinforced_sword,book_of_extreme_precision"/>
+        <itemRecipe itemIDs="reinforced_sword,book_of_extreme_precision">
+            <entity>
+                <goldCost>200</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>1000</isSellable>
         <!--stats-->
         <bonusFlatAttackDamage>30</bonusFlatAttackDamage>

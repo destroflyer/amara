@@ -3,7 +3,11 @@
         <itemID>nightkiss</itemID>
         <itemVisualisation>nightkiss</itemVisualisation>
         <name>Nightkiss</name>
-        <itemRecipe gold="500" itemIDs="moonlight,apprentice_rod"/>
+        <itemRecipe itemIDs="moonlight,apprentice_rod">
+            <entity>
+                <goldCost>500</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>1500</isSellable>
         <!--stats-->
         <bonusFlatAbilityPower>100</bonusFlatAbilityPower>

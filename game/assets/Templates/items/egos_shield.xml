@@ -3,7 +3,11 @@
         <itemID>egos_shield</itemID>
         <itemVisualisation>egos_shield</itemVisualisation>
         <name>Ego's Shield</name>
-        <itemRecipe gold="400"/>
+        <itemRecipe>
+            <entity>
+                <goldCost>400</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>250</isSellable>
         <!--stats-->
         <bonusFlatMaximumHealth>80</bonusFlatMaximumHealth>

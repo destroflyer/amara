@@ -3,7 +3,11 @@
         <itemID>reinforced_sword</itemID>
         <itemVisualisation>reinforced_sword</itemVisualisation>
         <name>Reinforced Sword</name>
-        <itemRecipe gold="200" itemIDs="rusty_sword,rusty_sword"/>
+        <itemRecipe itemIDs="rusty_sword,rusty_sword">
+            <entity>
+                <goldCost>200</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>600</isSellable>
         <!--stats-->
         <bonusFlatAttackDamage>25</bonusFlatAttackDamage>

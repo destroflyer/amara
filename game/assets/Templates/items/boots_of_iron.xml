@@ -3,8 +3,12 @@
         <itemID>boots_of_iron</itemID>
         <itemVisualisation>boots_of_iron</itemVisualisation>
         <name>Boots of Iron</name>
-        <itemRecipe gold="500" itemIDs="wanderers_treads"/>
-        <isSellable>500</isSellable>
+        <itemRecipe itemIDs="wanderers_treads">
+            <entity>
+                <goldCost>500</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>450</isSellable>
         <!--stats-->
         <bonusFlatWalkSpeed>0.4</bonusFlatWalkSpeed>
         <bonusFlatArmor>15</bonusFlatArmor>

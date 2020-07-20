@@ -3,7 +3,11 @@
         <itemID>spike_dagger</itemID>
         <itemVisualisation>spike_dagger</itemVisualisation>
         <name>Spike Dagger</name>
-        <itemRecipe gold="500" itemIDs="dagger,wooden_bow,dagger"/>
+        <itemRecipe itemIDs="dagger,wooden_bow,dagger">
+            <entity>
+                <goldCost>500</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>1000</isSellable>
         <!--stats-->
         <bonusPercentageAttackSpeed>0.55</bonusPercentageAttackSpeed>

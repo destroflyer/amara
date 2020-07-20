@@ -3,7 +3,11 @@
         <itemID>mirror_coat</itemID>
         <itemVisualisation>mirror_coat</itemVisualisation>
         <name>Mirror Coat</name>
-        <itemRecipe gold="700" itemIDs="cotton_armor,iron_armor"/>
+        <itemRecipe itemIDs="cotton_armor,iron_armor">
+            <entity>
+                <goldCost>700</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>900</isSellable>
         <!--stats-->
         <bonusFlatArmor>45</bonusFlatArmor>

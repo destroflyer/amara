@@ -3,7 +3,11 @@
         <itemID>book_of_vampirism</itemID>
         <itemVisualisation>book_of_vampirism</itemVisualisation>
         <name>Book of Vampirism</name>
-        <itemRecipe gold="400"/>
+        <itemRecipe>
+            <entity>
+                <goldCost>400</goldCost>
+            </entity>
+        </itemRecipe>
         <isSellable>250</isSellable>
         <!--stats-->
         <bonusPercentageLifesteal>0.1</bonusPercentageLifesteal>
