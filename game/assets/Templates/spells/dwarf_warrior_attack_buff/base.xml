@@ -2,7 +2,7 @@
     <entity id="spell">
         <name>TODO</name>
         <!--<spellVisualisation>TODO</spellVisualisation>-->
-        <instantEffectTriggers>
+        <learnEffectTriggers>
             <!--add reward buff-->
             <entity>
                 <casterTarget/>
@@ -31,6 +31,8 @@
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
             </entity>
+        </learnEffectTriggers>
+        <instantEffectTriggers>
             <!--add attack buff-->
             <entity>
                 <casterTarget/>

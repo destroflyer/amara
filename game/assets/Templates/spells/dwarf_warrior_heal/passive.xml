@@ -10,13 +10,13 @@
                 <triggeredEffect>
                     <entity>
                         <addEffectTriggers>
-                            <!--reflect damage-->
+                            <!--add stack on damage-->
                             <entity id="damageTakenTrigger">
-                                <damageTakenTrigger physicalDamage="true"/>
-                                <targetTarget/>
+                                <damageTakenTrigger physicalDamage="true" magicDamage="true" trueDamage="true"/>
+                                <customTarget>[parameter0]</customTarget>
                                 <triggeredEffect>
                                     <entity>
-                                        <magicDamage>(0.15 * physicalDamage) + (0.2 * source.armor)</magicDamage>
+                                        <addStacks>1</addStacks>
                                     </entity>
                                 </triggeredEffect>
                             </entity>

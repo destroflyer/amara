@@ -3085,6 +3085,15 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.spells.CastCancelActionComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.CastCostComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastCostComponent>("castCost"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spells.CastCostComponent construct(EntityWorld entityWorld, Element element){
+                int costEntity = createChildEntity(entityWorld, element, 0, "costEntity");
+                return new amara.applications.ingame.entitysystem.components.spells.CastCostComponent(costEntity);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.CastDurationComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.CastDurationComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
@@ -3229,6 +3238,20 @@ public class ComponentsRegistrator{
             public amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
                 int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent(effectTriggerEntities);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.LearnEffectTriggersComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.LearnEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.LearnEffectTriggersComponent>("learnEffectTriggers"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spells.LearnEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
+                return new amara.applications.ingame.entitysystem.components.spells.LearnEffectTriggersComponent(effectTriggerEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent.class);

@@ -1,11 +1,34 @@
 <template>
+    <value name="maximumStacks">10</value>
     <entity id="spell">
         <!--<name>TODO</name>
         <description>TODO</description>
         <spellVisualisation></spellVisualisation>-->
-        <spellPassives>
-            <entity template="./passive"/>
-        </spellPassives>
+        <learnEffectTriggers>
+            <!--add buff-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="-1">
+                            <entity id="buff">
+                                <!--<name>TODO</name>-->
+                                <description>TODO</description>
+                                <!--<buffIcon>TODO</buffIcon>-->
+                                <buffStacks>
+                                    <entity id="buffStacks">
+                                        <stacks>0</stacks>
+                                        <maximumStacks>[maximumStacks]</maximumStacks>
+                                    </entity>
+                                </buffStacks>
+                                <keepOnDeath/>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </learnEffectTriggers>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
@@ -18,7 +41,15 @@
                 <triggerSource>#spell</triggerSource>
             </entity>
         </instantEffectTriggers>
+        <spellPassives>
+            <entity template="./passive(#buffStacks)"/>
+        </spellPassives>
         <castType>selfcast</castType>
+        <castCost>
+            <entity>
+                <buffStacksCost buffEntity="#buff" stacks="5"/>
+            </entity>
+        </castCost>
         <baseCooldown>1</baseCooldown>
     </entity>
     <!--spell effect-->
