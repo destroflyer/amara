@@ -33,6 +33,7 @@
                         <move>
                             <entity>
                                 <targetedMovementTarget/>
+                                <movementPathfinding/>
                                 <movementSpeed>25</movementSpeed>
                                 <movementAnimation>
                                     <entity>
