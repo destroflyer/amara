@@ -1,7 +1,10 @@
 <template>
+    <value name="duration">10</value>
+    <value name="resistancePerStack">1</value>
     <entity id="spell">
-        <name>TODO</name>
-        <!--<spellVisualisation>TODO</spellVisualisation>-->
+        <name>Hammer Time</name>
+        <description>Your next basic attack within [duration] seconds deals bonus magic damage. If the attack kills its target, you permanently gain 1 stack, with each stack granting [resistancePerStack] bonus armor and magic resistance.</description>
+        <spellVisualisation>dwarf_warrior_attack_buff</spellVisualisation>
         <learnEffectTriggers>
             <!--add reward buff-->
             <entity>
@@ -10,9 +13,9 @@
                     <entity>
                         <addBuff duration="-1">
                             <entity id="rewardBuff">
-                                <!--<name>TODO</name>-->
+                                <name>TODO</name>
                                 <description>This unit has increased resistances.</description>
-                                <!--<buffIcon>TODO</buffIcon>-->
+                                <buffIcon>spells/dwarf_warrior_attack_buff</buffIcon>
                                 <buffStacks>
                                     <entity id="rewardBuffStacks">
                                         <stacks>0</stacks>
@@ -20,8 +23,8 @@
                                 </buffStacks>
                                 <continuousAttributesPerStack>
                                     <entity>
-                                        <bonusFlatArmor>1</bonusFlatArmor>
-                                        <bonusFlatMagicResistance>1</bonusFlatMagicResistance>
+                                        <bonusFlatArmor>[resistancePerStack]</bonusFlatArmor>
+                                        <bonusFlatMagicResistance>[resistancePerStack]</bonusFlatMagicResistance>
                                     </entity>
                                 </continuousAttributesPerStack>
                                 <keepOnDeath/>
@@ -38,11 +41,11 @@
                 <casterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <addBuff duration="5">
+                        <addBuff duration="[duration]">
                             <entity id="attackBuff">
-                                <!--<name>TODO</name>-->
-                                <description>This units next basic attack will increase its resistances.</description>
-                                <!--<buffIcon>TODO</buffIcon>-->
+                                <name>TODO</name>
+                                <description>This units next basic attack will deal bonus damage.</description>
+                                <buffIcon>spells/dwarf_warrior_attack_buff</buffIcon>
                                 <buffVisualisation>dwarf_warrior_empowered</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>

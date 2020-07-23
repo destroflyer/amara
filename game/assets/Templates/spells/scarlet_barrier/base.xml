@@ -2,7 +2,7 @@
     <entity id="spell">
         <name>TODO</name>
         <description>TODO</description>
-        <!--<spellVisualisation></spellVisualisation>-->
+        <spellVisualisation>scarlet_barrier</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn object, play audio-->
             <entity>

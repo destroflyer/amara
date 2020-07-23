@@ -1176,6 +1176,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.aggro.DrawTeamAggroComponent(range);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.aggro.SetAggroTargetComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.aggro.SetAggroTargetComponent>("setAggroTarget"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.aggro.SetAggroTargetComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.aggro.SetAggroTargetComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
@@ -1865,6 +1873,20 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.SwapPositionsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.physics.SwapPositionsComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.SwapPositionsComponent>("swapPositions"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.physics.SwapPositionsComponent construct(EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+                return new amara.applications.ingame.entitysystem.components.effects.physics.SwapPositionsComponent(targetEntity);
             }
         });
         //players
@@ -2897,6 +2919,20 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnAttackMoveComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spawns.SpawnBuffsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spawns.SpawnBuffsComponent.class.getDeclaredField("buffEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnBuffsComponent>("spawnBuffs"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnBuffsComponent construct(EntityWorld entityWorld, Element element){
+                int[] buffEntities = createChildEntities(entityWorld, element, 0, "buffEntities");
+                return new amara.applications.ingame.entitysystem.components.spawns.SpawnBuffsComponent(buffEntities);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spawns.SpawnMovementAnimationComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spawns.SpawnMovementAnimationComponent.class.getDeclaredField("animationEntity"), componentFieldSerializer_Entity);
@@ -3506,12 +3542,40 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequireBuffsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.targets.RequireBuffsComponent.class.getDeclaredField("buffEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireBuffsComponent>("requireBuffs"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.targets.RequireBuffsComponent construct(EntityWorld entityWorld, Element element){
+                int[] buffEntities = createChildEntities(entityWorld, element, 0, "buffEntities");
+                return new amara.applications.ingame.entitysystem.components.targets.RequireBuffsComponent(buffEntities);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent>("requireCharacter"){
 
             @Override
             public amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequireEntityComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.targets.RequireEntityComponent.class.getDeclaredField("entity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireEntityComponent>("requireEntity"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.targets.RequireEntityComponent construct(EntityWorld entityWorld, Element element){
+                int entity = createChildEntity(entityWorld, element, 0, "entity");
+                return new amara.applications.ingame.entitysystem.components.targets.RequireEntityComponent(entity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent.class);
@@ -4299,6 +4363,24 @@ public class ComponentsRegistrator{
                     stacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, stacksText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent(stacks);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent.class.getDeclaredField("maximumDistance"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent>("surroundingDeathTrigger"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent construct(EntityWorld entityWorld, Element element){
+                float maximumDistance = 0;
+                String maximumDistanceText = element.getText();
+                if((maximumDistanceText != null) && (maximumDistanceText.length() > 0)){
+                    maximumDistance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, maximumDistanceText));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent(maximumDistance);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent.class);

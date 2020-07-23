@@ -124,6 +124,7 @@ public class GameLogic {
         entitySystems.add(new HealthRegenerationSystem());
         entitySystems.add(new DeathSystem());
         entitySystems.add(new TriggerDeathEffectSystem());
+        entitySystems.add(new TriggerSurroundingDeathEffectSystem());
         entitySystems.add(new TriggerTeamDeathEffectSystem());
         entitySystems.add(new MaximumHealthSystem());
         entitySystems.add(new MaximumStacksSystem());

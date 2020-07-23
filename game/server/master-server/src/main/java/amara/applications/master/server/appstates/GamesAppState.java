@@ -59,7 +59,8 @@ public class GamesAppState extends ServerBaseAppState {
             subNetworkServer.broadcastMessage(new Message_GameCrashed(exception.getClass().getSimpleName()));
             safelyCloseSubNetworkServer(subNetworkServer);
         }
-        System.out.println("Game crashed.");
+        System.out.println("Game crashed:");
+        exception.printStackTrace();
     }
 
     public void onGameOver(IngameServerApplication ingameServerApplication) {

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.effects.aggro;
 
 import com.jme3.math.Vector2f;
@@ -13,10 +9,6 @@ import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.systems.aggro.AggroUtil;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
 public class ApplyDrawTeamAggroSystem implements EntitySystem {
 
     @Override
@@ -35,7 +27,7 @@ public class ApplyDrawTeamAggroSystem implements EntitySystem {
                                 Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
                                 float range = entityWorld.getComponent(effectImpactEntity, DrawTeamAggroComponent.class).getRange();
                                 if (position.distanceSquared(aggroCenter) <= (range * range)) {
-                                    AggroUtil.drawAggro(entityWorld, entity, effectSourceComponent.getSourceEntity());
+                                    AggroUtil.tryCancelActionAndSetAggro(entityWorld, entity, effectSourceComponent.getSourceEntity());
                                 }
                             }
                         }

@@ -3,7 +3,7 @@
     <entity id="spell">
         <name>Galaxy Blast</name>
         <description>After gathering energy for [delay] seconds, Garmon fires a global energy missile in the target direction, dealing damage to enemies it passes through.</description>
-        <spellVisualisation>ganfaul_ult</spellVisualisation>
+        <spellVisualisation>garmon_ult</spellVisualisation>
         <spellIndicator>
             <entity>
                 <linearIndicator width="4" height="40"/>

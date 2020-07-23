@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.camps;
 
 import amara.applications.ingame.entitysystem.components.camps.*;
@@ -9,10 +5,6 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.systems.aggro.AggroUtil;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
 public class CheckCampUnionAggroSystem implements EntitySystem {
 
     @Override
@@ -33,7 +25,7 @@ public class CheckCampUnionAggroSystem implements EntitySystem {
             for (int otherEntity : entityWorld.getEntitiesWithAny(CampComponent.class)) {
                 int otherCampEntity = entityWorld.getComponent(otherEntity, CampComponent.class).getCampEntity();
                 if (otherCampEntity == campComponent.getCampEntity()) {
-                    AggroUtil.tryDrawAggro(entityWorld, otherEntity, targetEntity);
+                    AggroUtil.trySetAggroIfStill(entityWorld, otherEntity, targetEntity);
                 }
             }
         }

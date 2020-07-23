@@ -1,0 +1,46 @@
+<template>
+    <entity id="passive">
+        <name>TODO</name>
+        <description>TODO</description>
+        <spellVisualisation>dosaz_passive</spellVisualisation>
+        <passiveAddedEffectTriggers>
+            <!--add spawn trigger-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addEffectTriggers>
+                            <!--spawn trigger-->
+                            <entity id="spawnTrigger">
+                                <surroundingDeathTrigger>20</surroundingDeathTrigger>
+                                <targetTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <spawn>
+                                            <entity>
+                                                <spawnTemplate>./object([parameter0],[parameter1])</spawnTemplate>
+                                            </entity>
+                                        </spawn>
+                                    </entity>
+                                </triggeredEffect>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveAddedEffectTriggers>
+        <passiveRemovedEffectTriggers>
+            <!--remove trigger-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeEffectTriggers>#spawnTrigger,#collisionTrigger</removeEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveRemovedEffectTriggers>
+    </entity>
+</template>

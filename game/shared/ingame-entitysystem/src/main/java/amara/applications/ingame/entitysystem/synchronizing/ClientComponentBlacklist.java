@@ -84,6 +84,7 @@ public class ClientComponentBlacklist {
             RemainingEffectDelayComponent.class,
             // effects/aggro
             DrawTeamAggroComponent.class,
+            SetAggroTargetComponent.class,
             // effects/audio
             PlayAudioComponent.class,
             StopAudioComponent.class,
@@ -146,6 +147,7 @@ public class ClientComponentBlacklist {
             AddCollisionGroupsComponent.class,
             DeactivateHitboxComponent.class,
             RemoveCollisionGroupsComponent.class,
+            SwapPositionsComponent.class,
             // effects/players
             DisplayPlayerAnnouncementComponent.class,
             ResultingPlayerAnnouncementComponent.class,
@@ -279,7 +281,9 @@ public class ClientComponentBlacklist {
             RepeatingTriggerComponent.class,
             RepeatingTriggerCounterComponent.class,
             ShopUsageTriggerComponent.class,
+            SurroundingDeathTriggerComponent.class,
             TargetReachedTriggerComponent.class,
+            TeamDeathTriggerComponent.class,
             TimeSinceLastRepeatTriggerComponent.class,
             // visuals
             // visuals/animations

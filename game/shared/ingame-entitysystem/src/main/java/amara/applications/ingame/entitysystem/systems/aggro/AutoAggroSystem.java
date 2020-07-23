@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.aggro;
 
 import com.jme3.math.Vector2f;
@@ -10,10 +6,6 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.systems.units.TeamVisionSystem;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Philipp
- */
 public class AutoAggroSystem implements EntitySystem {
 
     @Override
@@ -50,7 +42,7 @@ public class AutoAggroSystem implements EntitySystem {
                     }
                 }
                 if (targetEntity != -1) {
-                    AggroUtil.drawAggro(entityWorld, entity, targetEntity);
+                    AggroUtil.setAggroIfStill(entityWorld, entity, targetEntity);
                 }
             }
         }

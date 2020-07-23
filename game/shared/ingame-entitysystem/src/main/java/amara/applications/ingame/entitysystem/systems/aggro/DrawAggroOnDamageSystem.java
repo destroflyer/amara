@@ -1,17 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.aggro;
 
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.damage.*;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
 public class DrawAggroOnDamageSystem implements EntitySystem {
 
     @Override
@@ -28,7 +20,7 @@ public class DrawAggroOnDamageSystem implements EntitySystem {
         int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
         EffectSourceComponent effectSourceComponent = entityWorld.getComponent(effectImpactEntity, EffectSourceComponent.class);
         if (effectSourceComponent != null) {
-            AggroUtil.tryDrawAggro(entityWorld, targetEntity, effectSourceComponent.getSourceEntity());
+            AggroUtil.trySetAggroIfStill(entityWorld, targetEntity, effectSourceComponent.getSourceEntity());
         }
     }
 }

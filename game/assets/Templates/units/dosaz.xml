@@ -69,11 +69,21 @@
         <autoAttack>
             <entity template="spells/ranged_autoattack"/>
         </autoAttack>
-        <!--<passives>
-        </passives>-->
-        <!--<learnableSpells>
-        </learnableSpells>-->
+        <passives>
+            <entity template="spells/dosaz_passive/passive(#unit,#zombiesBuff)"/>
+        </passives>
+        <learnableSpells>
+            <entity template="spells/dosaz_spawn/base(#zombiesBuff)"/>
+            <entity template="spells/dosaz_teleport/base(#unit,#zombiesBuff)"/>
+            <entity template="spells/dosaz_buff/base(#zombiesBuff)"/>
+            <entity template="spells/dosaz_ult/base"/>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
+    </entity>
+    <!--zombies buff-->
+    <entity id="zombiesBuff">
+        <name>TODO</name>
+        <description>TODO</description>
     </entity>
 </template>

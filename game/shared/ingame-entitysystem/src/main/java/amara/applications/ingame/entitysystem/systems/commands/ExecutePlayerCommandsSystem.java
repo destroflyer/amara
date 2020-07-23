@@ -177,19 +177,11 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
         }
         return -1;
     }
-    
+
     public static boolean tryAutoAttack(EntityWorld entityWorld, int unitEntity, int targetEntity) {
-        AutoAttackComponent autoAttackComponent = entityWorld.getComponent(unitEntity, AutoAttackComponent.class);
-        if(autoAttackComponent != null){
-            AggroTargetComponent aggroTargetComponent = entityWorld.getComponent(unitEntity, AggroTargetComponent.class);
-            if((aggroTargetComponent == null) || (targetEntity != aggroTargetComponent.getTargetEntity())){
-                if(AggroUtil.isAttackable(entityWorld, unitEntity, targetEntity)){
-                    if(UnitUtil.tryCancelAction(entityWorld, unitEntity)){
-                        entityWorld.setComponent(unitEntity, new AggroTargetComponent(targetEntity));
-                        return true;
-                    }
-                }
-            }
+        AggroTargetComponent aggroTargetComponent = entityWorld.getComponent(unitEntity, AggroTargetComponent.class);
+        if ((aggroTargetComponent == null) || (targetEntity != aggroTargetComponent.getTargetEntity())) {
+            return AggroUtil.tryCancelActionAndSetAggro(entityWorld, unitEntity, targetEntity);
         }
         return false;
     }

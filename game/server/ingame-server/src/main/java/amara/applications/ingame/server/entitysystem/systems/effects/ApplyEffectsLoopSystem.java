@@ -36,6 +36,7 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(calculateEffectImpactSystem);
         add(new ApplyPlayCinematicSystem());
         add(new ApplyDrawTeamAggroSystem());
+        add(new ApplySetAggroTargetSystem());
         add(new ApplyPlayAudioSystem());
         add(new ApplyStopAudioSystem());
         add(new ApplyRemoveBuffsSystem());
@@ -77,6 +78,7 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyDeactivateHitboxSystem());
         add(new ApplyRemoveCollisiongGroupsSystem());
         add(new ApplyRemoveIntersectionPushSystem());
+        add(new ApplySwapPositionsSystem());
         add(new ApplyDisplayPlayerAnnouncementsSystem());
         add(new ApplyAddPopupsSystem());
         add(new ApplyRemovePopupsSystem());

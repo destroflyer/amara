@@ -1,0 +1,38 @@
+<template>
+    <entity id="object">
+        <name>TODO</name>
+        <!--model-->
+        <model>Models/3dsa_fantasy_forest_rock_1/skin.xml</model>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <collisionGroup targetOf="units" targets="units"/>
+        <hitboxActive/>
+        <intersectionRules>
+            <entity>
+                <acceptAllies/>
+                <requireEntity>[parameter0]</requireEntity>
+            </entity>
+        </intersectionRules>
+        <lifetime>30</lifetime>
+    </entity>
+    <!--spawn and remove on collision trigger-->
+    <entity>
+        <collisionTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <spawn>
+                    <entity>
+                        <spawnTemplate>./unit</spawnTemplate>
+                        <spawnBuffs>[parameter1]</spawnBuffs>
+                    </entity>
+                </spawn>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+        <triggerOnce>true</triggerOnce>
+    </entity>
+</template>

@@ -1,0 +1,53 @@
+<template>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <spellVisualisation>dosaz_teleport</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>0.25</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castCancelAction/>
+        <castDuration>0.5</castDuration>
+        <castTurnToTarget/>
+        <!--<castAnimation>
+            <entity>
+                <name>pop</name>
+                <loopDuration>0.5</loopDuration>
+            </entity>
+        </castAnimation>-->
+        <baseCooldown>1</baseCooldown>
+        <spellTargetRules>
+            <entity>
+                <acceptAllies/>
+                <requireBuffs>[parameter1]</requireBuffs>
+            </entity>
+        </spellTargetRules>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--swap positions-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <swapPositions>[parameter0]</swapPositions>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

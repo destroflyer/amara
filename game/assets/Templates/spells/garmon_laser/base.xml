@@ -3,7 +3,7 @@
     <entity id="spell">
         <name>Milkyway Shot</name>
         <description>Garmon channels for [castDuration] seconds and, after a small delay, shoots a laser in a straight line. Enemies in the lasers area will be damaged in small intervals.</description>
-        <spellVisualisation>ganfaul_laser</spellVisualisation>
+        <spellVisualisation>garmon_laser</spellVisualisation>
         <spellIndicator>
             <entity>
                 <linearIndicator width="2.5" height="25"/>

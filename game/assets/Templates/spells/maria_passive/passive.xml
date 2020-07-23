@@ -36,7 +36,7 @@
                                                                 <casterTarget/>
                                                                 <triggeredEffect>
                                                                     <entity>
-                                                                        <removeBuff>##buff</removeBuff>
+                                                                        <removeBuff>#buff</removeBuff>
                                                                     </entity>
                                                                 </triggeredEffect>
                                                                 <triggerSource>#passive</triggerSource>

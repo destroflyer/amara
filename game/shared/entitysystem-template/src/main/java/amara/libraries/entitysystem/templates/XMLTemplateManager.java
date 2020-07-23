@@ -169,16 +169,9 @@ public class XMLTemplateManager{
     public String parseValue(EntityWorld entityWorld, String text){
         if(text.startsWith("#")){
             String entityID = text.substring(1);
-            Integer entity;
-            if(entityID.startsWith("#")){
-                entityID = entityID.substring(1);
+            Integer entity = cachedEntities.lastElement().get(entityID);
+            if(entity == null){
                 entity = createEntity(entityWorld, entityID);
-            }
-            else{
-                entity = cachedEntities.lastElement().get(entityID);
-                if(entity == null){
-                    System.err.println("Undefined entity id '" + entityID + "'.");
-                }
             }
             return entity.toString();
         }

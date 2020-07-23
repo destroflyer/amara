@@ -4,7 +4,7 @@
     <entity id="spell">
         <name>TODO</name>
         <description>TODO</description>
-        <!--<spellVisualisation></spellVisualisation>-->
+        <spellVisualisation>scarlet_ult</spellVisualisation>
         <spellIndicator>
             <entity>
                 <linearIndicator width="2" height="11"/>

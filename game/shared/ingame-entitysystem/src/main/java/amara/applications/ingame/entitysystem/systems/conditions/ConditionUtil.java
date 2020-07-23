@@ -1,10 +1,9 @@
 package amara.applications.ingame.entitysystem.systems.conditions;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
-import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.conditions.*;
 import amara.applications.ingame.entitysystem.components.general.NameComponent;
-import amara.applications.ingame.entitysystem.components.units.BuffsComponent;
+import amara.applications.ingame.entitysystem.systems.buffs.BuffUtil;
 import amara.libraries.entitysystem.EntityWorld;
 
 public class ConditionUtil {
@@ -34,22 +33,7 @@ public class ConditionUtil {
     private static boolean isHasBuffConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
         HasBuffConditionComponent hasBuffConditionComponent = entityWorld.getComponent(conditionEntity, HasBuffConditionComponent.class);
         if (hasBuffConditionComponent != null) {
-            for (int buffEntity : hasBuffConditionComponent.getBuffEntities()) {
-                boolean hasBuff = false;
-                BuffsComponent buffsComponent = entityWorld.getComponent(targetEntity, BuffsComponent.class);
-                if (buffsComponent != null) {
-                    for (int buffStatusEntity : buffsComponent.getBuffStatusEntities()) {
-                        int currentBuffEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getBuffEntity();
-                        if (currentBuffEntity == buffEntity) {
-                            hasBuff = true;
-                            break;
-                        }
-                    }
-                }
-                if (!hasBuff) {
-                    return false;
-                }
-            }
+            return BuffUtil.hasBuffs(entityWorld, targetEntity, hasBuffConditionComponent.getBuffEntities());
         }
         return true;
     }

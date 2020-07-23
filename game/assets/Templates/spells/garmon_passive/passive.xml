@@ -3,7 +3,7 @@
     <entity id="passive">
         <name>Star Channeling</name>
         <description>After taking damage, Garmon gains 20 ability power for [duration] seconds.</description>
-        <spellVisualisation>ganfaul_passive</spellVisualisation>
+        <spellVisualisation>garmon_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
             <!--add trigger-->
             <entity>

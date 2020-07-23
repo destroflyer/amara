@@ -1,8 +1,9 @@
 <template>
     <value name="delay">0.75</value>
     <entity id="spell">
-        <name>TODO</name>
-        <!--<spellVisualisation></spellVisualisation>-->
+        <name>Bronze Crusade</name>
+        <description>Charge forward to the target location, ignoring unit collision and knockuping and damaging all colliding enemies.</description>
+        <spellVisualisation>dwarf_warrior_charge</spellVisualisation>
         <spellIndicator>
             <entity>
                 <circularIndicator radius="35"/>

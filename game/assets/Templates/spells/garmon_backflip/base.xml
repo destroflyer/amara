@@ -2,7 +2,7 @@
     <entity id="spell">
         <name>Moon Jump</name>
         <description>Garmon makes a backflip, jumping a short distance in the opposite direction, that he is facing.</description>
-        <spellVisualisation>ganfaul_backflip</spellVisualisation>
+        <spellVisualisation>garmon_backflip</spellVisualisation>
         <spellIndicator>
             <entity>
                 <linearIndicator y="-8" width="2" height="8"/>

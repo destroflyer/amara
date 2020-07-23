@@ -1,0 +1,21 @@
+<template>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <spellVisualisation>dosaz_ult</spellVisualisation>
+        <instantEffectTriggers/>
+        <castType>selfcast</castType>
+        <!--<castAnimation>
+            <entity>
+                <name>shoot_arrow</name>
+                <loopDuration>1</loopDuration>
+            </entity>
+        </castAnimation>-->
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers/>
+    </entity>
+</template>

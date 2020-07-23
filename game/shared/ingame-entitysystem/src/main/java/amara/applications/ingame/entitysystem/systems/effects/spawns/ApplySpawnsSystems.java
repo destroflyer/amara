@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.effects.spawns;
 
-import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.general.*;
@@ -13,26 +8,34 @@ import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.spawns.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.bounties.*;
+import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
+import com.jme3.math.Vector2f;
 
-/**
- *
- * @author Carl
- */
-public class ApplySpawnsSystems implements EntitySystem{
-    
+public class ApplySpawnsSystems implements EntitySystem {
+
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
+        ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class, PositionComponent.class, DirectionComponent.class);
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, SpawnComponent.class)))
         {
             int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
             boolean cleanupTemporaryTarget = true;
             PositionComponent targetPositionComponent = null;
             DirectionComponent targetDirectionComponent = null;
-            if(targetEntity != -1){
+            if (targetEntity != -1) {
                 targetPositionComponent = entityWorld.getComponent(targetEntity, PositionComponent.class);
                 targetDirectionComponent = entityWorld.getComponent(targetEntity, DirectionComponent.class);
+                // Support specifying entities as targets, which transformations were just removed via dying
+                if (observer.getRemoved().hasComponent(targetEntity, IsAliveComponent.class)) {
+                    if (targetPositionComponent == null) {
+                        targetPositionComponent = observer.getRemoved().getComponent(targetEntity, PositionComponent.class);
+                    }
+                    if (targetDirectionComponent == null) {
+                        targetDirectionComponent = observer.getRemoved().getComponent(targetEntity, DirectionComponent.class);
+                    }
+                }
             }
             int casterEntity = entityWrapper.getComponent(EffectSourceComponent.class).getSourceEntity();
             TeamComponent teamComponent = entityWorld.getComponent(casterEntity, TeamComponent.class);
@@ -120,6 +123,13 @@ public class ApplySpawnsSystems implements EntitySystem{
                     spawnedObject.setComponent(new RedirectReceivedBountiesComponent(casterEntity));
                 }
                 EntityTemplate.loadTemplates(entityWorld, spawnedObject.getId(), spawnInformation.getComponent(SpawnTemplateComponent.class).getTemplateNames());
+                // Buffs
+                SpawnBuffsComponent spawnBuffsComponent = spawnInformation.getComponent(SpawnBuffsComponent.class);
+                if (spawnBuffsComponent != null) {
+                    for (int buffEntity : spawnBuffsComponent.getBuffEntities()) {
+                        ApplyAddBuffsSystem.addBuff(entityWorld, spawnedObject.getId(), buffEntity);
+                    }
+                }
             }
             if(cleanupTemporaryTarget && entityWorld.hasComponent(targetEntity, TemporaryComponent.class)){
                 entityWorld.removeEntity(targetEntity);

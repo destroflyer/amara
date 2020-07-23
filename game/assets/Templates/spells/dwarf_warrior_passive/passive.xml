@@ -1,0 +1,9 @@
+<template>
+    <entity id="passive">
+        <name>Dwarfen Armor</name>
+        <description>TODO</description>
+        <spellVisualisation>dwarf_warrior_passive</spellVisualisation>
+        <passiveAddedEffectTriggers/>
+        <passiveRemovedEffectTriggers/>
+    </entity>
+</template>

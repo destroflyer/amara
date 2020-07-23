@@ -1,9 +1,9 @@
 <template>
     <value name="delay">0.3</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
-        <!--<spellVisualisation></spellVisualisation>-->
+        <name>Devastating Strike</name>
+        <description>Deal physical damage to an enemy and knockback it.</description>
+        <spellVisualisation>dwarf_warrior_knockback</spellVisualisation>
         <spellIndicator>
             <entity>
                 <circularIndicator radius="4"/>
