@@ -5,7 +5,7 @@ import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyRemoveB
 import amara.libraries.entitysystem.*;
 
 public class CountdownBuffsSystem implements EntitySystem {
-    
+
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
         for (int buffStatusEntity : entityWorld.getEntitiesWithAny(RemainingBuffDurationComponent.class)) {

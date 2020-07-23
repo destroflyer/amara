@@ -11,10 +11,14 @@ public class CompleteDeathSystem implements EntitySystem {
         ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class);
         for (int entity : observer.getRemoved().getEntitiesWithAny(IsAliveComponent.class)) {
             if (!entityWorld.hasComponent(entity, IsRespawnableComponent.class)) {
-                UnitUtil.cancelAction(entityWorld, entity);
-                ApplyRemoveBuffsSystem.removeAllBuffs(entityWorld, entity);
-                entityWorld.removeEntity(entity);
+                killCompletely(entityWorld, entity);
             }
         }
+    }
+
+    public static void killCompletely(EntityWorld entityWorld, int entity) {
+        UnitUtil.cancelAction(entityWorld, entity);
+        ApplyRemoveBuffsSystem.removeAllBuffs(entityWorld, entity);
+        entityWorld.removeEntity(entity);
     }
 }
