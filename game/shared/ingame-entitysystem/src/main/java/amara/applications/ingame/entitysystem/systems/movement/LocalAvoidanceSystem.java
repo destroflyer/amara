@@ -11,7 +11,7 @@ public class LocalAvoidanceSystem implements EntitySystem{
     
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class, IntersectionPushComponent.class)){
+        for(int entity : entityWorld.getEntitiesWithAll(MovementComponent.class, IntersectionPushesComponent.class)){
             int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
             if(entityWorld.hasAllComponents(movementEntity, MovementLocalAvoidanceComponent.class, MovementDirectionComponent.class)){
                 Vector2f direction = entityWorld.getComponent(movementEntity, MovementDirectionComponent.class).getDirection();
@@ -33,7 +33,7 @@ public class LocalAvoidanceSystem implements EntitySystem{
         // Factor adjusted by testing, is adaptable if need arises
         float minimumDistance = (0.75f * movementSpeed);
         float squaredMinimumDistance = (minimumDistance * minimumDistance);
-        for(int targetEntity : entityWorld.getEntitiesWithAll(PositionComponent.class, HitboxComponent.class, HitboxActiveComponent.class, IntersectionPushComponent.class)){
+        for(int targetEntity : entityWorld.getEntitiesWithAll(PositionComponent.class, HitboxComponent.class, HitboxActiveComponent.class, IntersectionPushedComponent.class)){
             if((targetEntity != entity) && IntersectionFilter.areCollisionGroupsMatching(entityWorld, entity, targetEntity)){
                 Vector2f targetPosition = entityWorld.getComponent(targetEntity, PositionComponent.class).getPosition();
                 Vector2f distance = targetPosition.subtract(position);

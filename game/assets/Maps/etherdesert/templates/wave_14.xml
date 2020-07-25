@@ -26,7 +26,8 @@
             <circle radius="0.2"/>
         </hitbox>
         <scale>4</scale>
-        <intersectionPush/>
+        <intersectionPushes/>
+        <intersectionPushed/>
         <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
         <!--stats-->

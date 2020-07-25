@@ -1,7 +1,7 @@
 <template>
     <entity id="object">
         <!--hitbox is generated via code-->
-        <intersectionPush/>
+        <intersectionPushes/>
         <collisionGroup targetOf="map|spell_targets" targets="spell_targets"/>
         <hitboxActive/>
         <lifetime>6</lifetime>

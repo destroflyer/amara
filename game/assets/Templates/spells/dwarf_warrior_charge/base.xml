@@ -30,7 +30,8 @@
                 <casterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <removeIntersectionPush/>
+                        <removeIntersectionPushes/>
+                        <removeIntersectionPushed/>
                         <move>
                             <entity>
                                 <targetedMovementTarget/>
@@ -77,7 +78,8 @@
                                 <sourceTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <addIntersectionPush/>
+                                        <addIntersectionPushes/>
+                                        <addIntersectionPushed/>
                                         <stopAudio>#audioRun</stopAudio>
                                         <removeEffectTriggers>#collisionTrigger</removeEffectTriggers>
                                     </entity>

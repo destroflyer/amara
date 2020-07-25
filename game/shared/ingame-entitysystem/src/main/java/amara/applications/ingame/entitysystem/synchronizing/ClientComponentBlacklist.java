@@ -145,8 +145,12 @@ public class ClientComponentBlacklist {
             // effects/physics
             ActivateHitboxComponent.class,
             AddCollisionGroupsComponent.class,
+            AddIntersectionPushedComponent.class,
+            AddIntersectionPushesComponent.class,
             DeactivateHitboxComponent.class,
             RemoveCollisionGroupsComponent.class,
+            RemoveIntersectionPushedComponent.class,
+            RemoveIntersectionPushesComponent.class,
             SwapPositionsComponent.class,
             // effects/players
             DisplayPlayerAnnouncementComponent.class,
@@ -200,7 +204,8 @@ public class ClientComponentBlacklist {
             OrObjectivesComponent.class,
             // physics
             CollisionGroupComponent.class,
-            IntersectionPushComponent.class,
+            IntersectionPushesComponent.class,
+            IntersectionPushedComponent.class,
             RemoveOnMapLeaveComponent.class,
             TransformOriginComponent.class,
             // players

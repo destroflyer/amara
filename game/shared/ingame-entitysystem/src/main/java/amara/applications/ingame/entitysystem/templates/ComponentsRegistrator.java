@@ -1850,12 +1850,20 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.AddCollisionGroupsComponent.class);
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushComponent.class);
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushComponent>("addIntersectionPush"){
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushedComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushedComponent>("addIntersectionPushed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushComponent construct(EntityWorld entityWorld, Element element){
-                return new amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushComponent();
+            public amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushedComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushedComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushesComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushesComponent>("addIntersectionPushes"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushesComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushesComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent.class);
@@ -1867,12 +1875,20 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.RemoveCollisionGroupsComponent.class);
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushComponent.class);
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushComponent>("removeIntersectionPush"){
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushedComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushedComponent>("removeIntersectionPushed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushComponent construct(EntityWorld entityWorld, Element element){
-                return new amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushComponent();
+            public amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushedComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushedComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushesComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushesComponent>("removeIntersectionPushes"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushesComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushesComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.physics.SwapPositionsComponent.class);
@@ -2736,12 +2752,20 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.HitboxComponent.class);
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.IntersectionPushComponent.class);
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.IntersectionPushComponent>("intersectionPush"){
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.IntersectionPushedComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.IntersectionPushedComponent>("intersectionPushed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.IntersectionPushComponent construct(EntityWorld entityWorld, Element element){
-                return new amara.applications.ingame.entitysystem.components.physics.IntersectionPushComponent();
+            public amara.applications.ingame.entitysystem.components.physics.IntersectionPushedComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.physics.IntersectionPushedComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.IntersectionPushesComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.IntersectionPushesComponent>("intersectionPushes"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.physics.IntersectionPushesComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.physics.IntersectionPushesComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.physics.PositionComponent.class);

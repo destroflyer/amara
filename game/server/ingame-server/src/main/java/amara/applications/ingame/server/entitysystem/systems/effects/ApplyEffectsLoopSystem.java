@@ -74,10 +74,12 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyTeleportSystem());
         add(new ApplyActivateHitboxSystem());
         add(new ApplyAddCollisiongGroupsSystem());
-        add(new ApplyAddIntersectionPushSystem());
+        add(new ApplyAddIntersectionPushedSystem());
+        add(new ApplyAddIntersectionPushesSystem());
         add(new ApplyDeactivateHitboxSystem());
         add(new ApplyRemoveCollisiongGroupsSystem());
-        add(new ApplyRemoveIntersectionPushSystem());
+        add(new ApplyRemoveIntersectionPushedSystem());
+        add(new ApplyRemoveIntersectionPushesSystem());
         add(new ApplySwapPositionsSystem());
         add(new ApplyDisplayPlayerAnnouncementsSystem());
         add(new ApplyAddPopupsSystem());

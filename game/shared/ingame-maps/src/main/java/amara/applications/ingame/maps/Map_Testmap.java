@@ -63,7 +63,8 @@ public class Map_Testmap extends Map {
                 unit.setComponent(new PositionComponent(position));
                 unit.setComponent(new DirectionComponent(direction));
                 unit.setComponent(new HitboxComponent(new Circle(1)));
-                unit.setComponent(new IntersectionPushComponent());
+                unit.setComponent(new IntersectionPushesComponent());
+                unit.setComponent(new IntersectionPushedComponent());
                 unit.setComponent(new CollisionGroupComponent(CollisionGroupComponent.MAP | CollisionGroupComponent.UNITS | CollisionGroupComponent.SPELL_TARGETS, CollisionGroupComponent.UNITS));
                 unit.setComponent(new HitboxActiveComponent());
                 unit.setComponent(new IsAliveComponent());
@@ -153,7 +154,8 @@ public class Map_Testmap extends Map {
         boss.setComponent(new PositionComponent(new Vector2f(35, 12)));
         boss.setComponent(new DirectionComponent(new Vector2f(-0.5f, -1)));
         boss.setComponent(new HitboxComponent(new Circle(2.25f)));
-        boss.setComponent(new IntersectionPushComponent());
+        boss.setComponent(new IntersectionPushesComponent());
+        boss.setComponent(new IntersectionPushedComponent());
         boss.setComponent(new CollisionGroupComponent(CollisionGroupComponent.MAP | CollisionGroupComponent.UNITS | CollisionGroupComponent.SPELL_TARGETS, CollisionGroupComponent.UNITS));
         boss.setComponent(new HitboxActiveComponent());
         boss.setComponent(new IsAliveComponent());
