@@ -243,7 +243,6 @@ public class ClientComponentBlacklist {
             CampResetComponent.class,
             CastSpellOnCooldownWhileAttackingComponent.class,
             CurrentActionEffectCastsComponent.class,
-            IntersectionRulesComponent.class,
             LifetimeComponent.class,
             LocalAvoidanceWalkComponent.class,
             MaximumAggroRangeComponent.class,

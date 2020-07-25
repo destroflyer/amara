@@ -1,19 +1,18 @@
 <template>
     <entity id="projectile">
         <isProjectile/>
-        <model>Models/scarlet_kunai/skin.xml</model>
+        <model>Models/ganfaul_binding/skin.xml</model>
         <hitbox>
-            <circle radius="0.5"/>
+            <circle radius="1"/>
         </hitbox>
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
         <removeOnMapLeave/>
-        <lifetime>0.6</lifetime>
     </entity>
-    <!--trigger spell effects-->
+    <!--enemy collision - trigger spell effects-->
     <entity>
         <collisionTrigger>
-            <entity id="collisionRules">
+            <entity id="enemyCollisionRules">
                 <acceptEnemies/>
             </entity>
         </collisionTrigger>
@@ -23,8 +22,8 @@
                 <triggerCastedSpellEffects/>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/scarlet_kunai_hit.ogg</audio>
-                        <audioVolume>1.5</audioVolume>
+                        <audio>Sounds/sounds/spells/ganfaul_binding_hit.ogg</audio>
+                        <audioVolume>0.75</audioVolume>
                         <audioRemoveAfterPlaying/>
                     </entity>
                 </playAudio>
@@ -32,12 +31,29 @@
         </triggeredEffect>
         <triggerSource>#projectile</triggerSource>
     </entity>
-    <!--remove projectile-->
+    <!--enemy collision - remove projectile-->
     <entity>
-        <collisionTrigger>#collisionRules</collisionTrigger>
+        <collisionTrigger>#enemyCollisionRules</collisionTrigger>
         <sourceTarget/>
         <triggeredEffect>
             <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--no enemy collision - spawn unit-->
+    <entity>
+        <targetReachedTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <spawn>
+                    <entity>
+                        <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
+                        <spawnBuffs>[parameter0]</spawnBuffs>
+                    </entity>
+                </spawn>
                 <removeEntity/>
             </entity>
         </triggeredEffect>

@@ -354,7 +354,24 @@ public class CustomGameTemplates{
                 int bountyItem = EntityContentGenerator.generateRandomItem(entityWorld);
                 entityWorld.setComponent(bounty, new BountyItemsComponent(bountyItem));
                 entityWorld.setComponent(entity, new BountyComponent(bounty));
+            } else if (templateName.equals("spells/dosaz_wall/object_wall")) {
+                int circlePointsCount = 32;
+                Vector2f[] circlePointsBig = PointUtil.getCirclePoints(7, circlePointsCount);
+                Vector2f[] circlePointsSmall = PointUtil.getCirclePoints(5, circlePointsCount);
+                int wallPart = parameters[0];
+                int circlePointStartIndex = (2 + wallPart);
+                Vector2D[] outline = new Vector2D[4];
+                outline[0] = getVector2D(circlePointsBig[circlePointStartIndex]);
+                outline[1] = getVector2D(circlePointsBig[circlePointStartIndex + 1]);
+                outline[2] = getVector2D(circlePointsSmall[circlePointStartIndex + 1]);
+                outline[3] = getVector2D(circlePointsSmall[circlePointStartIndex]);
+                ConvexShape convexShape = new SimpleConvexPolygon(outline);
+                entityWrapper.setComponent(new HitboxComponent(convexShape));
             }
         });
+    }
+
+    private static Vector2D getVector2D(Vector2f vector2f) {
+        return new Vector2D(vector2f.getX(), vector2f.getY());
     }
 }

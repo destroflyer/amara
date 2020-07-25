@@ -104,6 +104,10 @@ public class ApplySpawnsSystems implements EntitySystem {
                         entityWorld.setComponent(movementEntity, new MovementDirectionComponent(movementDirection));
                     }
                     entityWorld.setComponent(movementEntity, new MovementSpeedComponent(spawnMovementSpeedComponent.getSpeed()));
+                    SpawnMovementDistanceComponent spawnMovementDistanceComponent = spawnInformation.getComponent(SpawnMovementDistanceComponent.class);
+                    if(spawnMovementDistanceComponent != null){
+                        entityWorld.setComponent(movementEntity, new DistanceLimitComponent(spawnMovementDistanceComponent.getDistance()));
+                    }
                     SpawnMovementAnimationComponent spawnMovementAnimationComponent = spawnInformation.getComponent(SpawnMovementAnimationComponent.class);
                     if(spawnMovementAnimationComponent != null){
                         entityWorld.setComponent(movementEntity, new MovementAnimationComponent(spawnMovementAnimationComponent.getAnimationEntity()));

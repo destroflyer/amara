@@ -70,16 +70,21 @@
             <entity template="spells/ranged_autoattack"/>
         </autoAttack>
         <passives>
-            <entity template="spells/dosaz_passive/passive(#unit,#zombiesBuff)"/>
+            <entity template="spells/dosaz_passive/passive(#triggerTombstonesBuff,#zombiesBuff)"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/dosaz_spawn/base(#zombiesBuff)"/>
+            <entity template="spells/dosaz_skull/base(#triggerTombstonesBuff,#zombiesBuff)"/>
             <entity template="spells/dosaz_teleport/base(#unit,#zombiesBuff)"/>
-            <entity template="spells/dosaz_buff/base(#zombiesBuff)"/>
+            <entity template="spells/dosaz_wall/base(#triggerTombstonesBuff)"/>
             <entity template="spells/dosaz_ult/base"/>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
+    </entity>
+    <!--trigger tombstones buff-->
+    <entity id="triggerTombstonesBuff">
+        <name>TODO</name>
+        <description>TODO</description>
     </entity>
     <!--zombies buff-->
     <entity id="zombiesBuff">

@@ -1,23 +1,21 @@
 <template>
     <entity id="projectile">
         <isProjectile/>
-        <!--<model>Models/kachujin_mind_of_the_monk_projectile/skin.xml</model>-->
         <model>Models/cloud/skin.xml</model>
         <hitbox>
             <circle radius="0.9"/>
         </hitbox>
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
-        <intersectionRules>
-            <entity>
-                <acceptEnemies/>
-            </entity>
-        </intersectionRules>
         <lifetime>0.9</lifetime>
     </entity>
     <!--trigger spell effects-->
     <entity>
-        <collisionTrigger/>
+        <collisionTrigger>
+            <entity id="collisionRules">
+                <acceptEnemies/>
+            </entity>
+        </collisionTrigger>
         <targetTarget/>
         <triggeredEffect>
             <entity>
@@ -28,7 +26,7 @@
     </entity>
     <!--remove projectile-->
     <entity>
-        <collisionTrigger/>
+        <collisionTrigger>#collisionRules</collisionTrigger>
         <sourceTarget/>
         <triggeredEffect>
             <entity>

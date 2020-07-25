@@ -17,7 +17,11 @@
     </entity>
     <!--trigger spell effects-->
     <entity>
-        <collisionTrigger/>
+        <collisionTrigger>
+            <entity id="collisionRules">
+                <acceptEnemies/>
+            </entity>
+        </collisionTrigger>
         <targetTarget/>
         <triggeredEffect>
             <entity>
@@ -34,7 +38,7 @@
     </entity>
     <!--remove projectile-->
     <entity>
-        <collisionTrigger/>
+        <collisionTrigger>#collisionRules</collisionTrigger>
         <sourceTarget/>
         <triggeredEffect>
             <entity>

@@ -1,0 +1,123 @@
+<template>
+    <value name="delay">0.18</value>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <spellVisualisation>dosaz_skull</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="2" height="19.5"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./projectile([parameter1])</spawnTemplate>
+                                <spawnMovementSpeed>18</spawnMovementSpeed>
+                                <spawnMovementDistance>27</spawnMovementDistance>
+                                <spawnBuffs>[parameter0]</spawnBuffs>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/ganfaul_binding_cast.ogg</audio>
+                                <audioVolume>0.75</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <!--<castAnimation>
+            <entity>
+                <name>spell5</name>
+                <loopDuration>1</loopDuration>
+            </entity>
+        </castAnimation>-->
+        <baseCooldown>7</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>90 + (0.5 * source.abilityPower)</magicDamage>
+                        <addBuff duration="3">
+                            <entity>
+                                <name>TODO</name>
+                                <description>TODO</description>
+                                <buffIcon>spells/dosaz_skull</buffIcon>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageIncomingDamageAmplification>0.2</bonusPercentageIncomingDamageAmplification>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                        <addEffectTriggers>
+                            <!--draw aggro instantly-->
+                            <entity>
+                                <instantTrigger/>
+                                <buffTargetsTarget>[parameter1]</buffTargetsTarget>
+                                <triggeredEffect>
+                                    <entity>
+                                        <setAggroTarget/>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--add buff-->
+            <entity>
+                <buffTargetsTarget>[parameter1]</buffTargetsTarget>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="4">
+                            <entity>
+                                <name>TODO</name>
+                                <description>TODO</description>
+                                <buffIcon>spells/dosaz_skull</buffIcon>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageAttackSpeed>0.9</bonusPercentageAttackSpeed>
+                                        <bonusPercentageWalkSpeed>0.9</bonusPercentageWalkSpeed>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

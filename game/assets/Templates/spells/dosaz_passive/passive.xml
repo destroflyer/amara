@@ -4,11 +4,12 @@
         <description>TODO</description>
         <spellVisualisation>dosaz_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
-            <!--add spawn trigger-->
+            <!--add buff and spawn trigger-->
             <entity>
                 <casterTarget/>
                 <triggeredEffect>
                     <entity>
+                        <addBuff duration="-1">[parameter0]</addBuff>
                         <addEffectTriggers>
                             <!--spawn trigger-->
                             <entity id="spawnTrigger">
@@ -31,11 +32,12 @@
             </entity>
         </passiveAddedEffectTriggers>
         <passiveRemovedEffectTriggers>
-            <!--remove trigger-->
+            <!--remove buff and spawn trigger-->
             <entity>
                 <casterTarget/>
                 <triggeredEffect>
                     <entity>
+                        <removeBuff>[parameter0]</removeBuff>
                         <removeEffectTriggers>#spawnTrigger,#collisionTrigger</removeEffectTriggers>
                     </entity>
                 </triggeredEffect>

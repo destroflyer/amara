@@ -13,11 +13,6 @@
             <rectangle width="1.2" height="2"/>
         </hitbox>
         <collisionGroup targetOf="spells" targets="spell_targets"/>
-        <intersectionRules>
-            <entity>
-                <acceptEnemies/>
-            </entity>
-        </intersectionRules>
         <lifetime>1.2</lifetime>
     </entity>
     <!--activate hitbox-->
@@ -35,7 +30,11 @@
     </entity>
     <!--trigger spell effects-->
     <entity>
-        <collisionTrigger/>
+        <collisionTrigger>
+            <entity id="collisionRules">
+                <acceptEnemies/>
+            </entity>
+        </collisionTrigger>
         <targetTarget/>
         <triggeredEffect>
             <entity>
@@ -46,7 +45,7 @@
     </entity>
     <!--remove object-->
     <entity>
-        <collisionTrigger/>
+        <collisionTrigger>#collisionRules</collisionTrigger>
         <sourceTarget/>
         <triggeredEffect>
             <entity>

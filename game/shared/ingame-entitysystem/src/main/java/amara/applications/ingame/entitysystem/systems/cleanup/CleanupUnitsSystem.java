@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.cleanup;
 
 import amara.applications.ingame.entitysystem.components.items.InventoryComponent;
@@ -10,10 +6,6 @@ import amara.applications.ingame.entitysystem.components.units.animations.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
 public class CleanupUnitsSystem implements EntitySystem {
 
     @Override
@@ -25,7 +17,6 @@ public class CleanupUnitsSystem implements EntitySystem {
             AutoAttackAnimationComponent.class,
             DeathAnimationComponent.class,
             AnimationComponent.class,
-            IntersectionRulesComponent.class,
             BaseAttributesComponent.class,
             AttributesPerLevelComponent.class,
             AutoAttackComponent.class,
@@ -55,10 +46,6 @@ public class CleanupUnitsSystem implements EntitySystem {
                 int animationEntity = observer.getRemoved().getComponent(entity, AnimationComponent.class).getAnimationEntity();
                 CleanupUtil.tryCleanupEntity(entityWorld, animationEntity);
             }
-        }
-        for (int entity : observer.getRemoved().getEntitiesWithAny(IntersectionRulesComponent.class)) {
-            int targetRulesEntity = observer.getRemoved().getComponent(entity, IntersectionRulesComponent.class).getTargetRulesEntity();
-            CleanupUtil.tryCleanupEntity(entityWorld, targetRulesEntity);
         }
         for (int entity : observer.getRemoved().getEntitiesWithAny(BaseAttributesComponent.class)) {
             int bonusAttributesEntity = observer.getRemoved().getComponent(entity, BaseAttributesComponent.class).getBonusAttributesEntity();

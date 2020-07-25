@@ -2947,6 +2947,24 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnMovementAnimationComponent(animationEntity);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spawns.SpawnMovementDistanceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spawns.SpawnMovementDistanceComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMovementDistanceComponent>("spawnMovementDistance"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementDistanceComponent construct(EntityWorld entityWorld, Element element){
+                float distance = 0;
+                String distanceText = element.getText();
+                if((distanceText != null) && (distanceText.length() > 0)){
+                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                }
+                return new amara.applications.ingame.entitysystem.components.spawns.SpawnMovementDistanceComponent(distance);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent>("spawnMovementRelativeDirection"){
 
@@ -3540,6 +3558,14 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.AcceptUntargetableComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.AcceptUntargetableComponent>("acceptUntargetable"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.targets.AcceptUntargetableComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.targets.AcceptUntargetableComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequireBuffsComponent.class);
@@ -4246,11 +4272,17 @@ public class ComponentsRegistrator{
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent.class.getDeclaredField("targetRulesEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent>("collisionTrigger"){
 
             @Override
             public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent construct(EntityWorld entityWorld, Element element){
-                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent();
+                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent(targetRulesEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent.class);
@@ -4494,20 +4526,6 @@ public class ComponentsRegistrator{
                 float directionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[1]));
                 Vector2f direction = new Vector2f(directionX, directionY);
                 return new amara.applications.ingame.entitysystem.components.units.InnateWalkDirectionComponent(direction);
-            }
-        });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent.class.getDeclaredField("targetRulesEntity"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent>("intersectionRules"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent construct(EntityWorld entityWorld, Element element){
-                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
-                return new amara.applications.ingame.entitysystem.components.units.IntersectionRulesComponent(targetRulesEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsAliveComponent.class);

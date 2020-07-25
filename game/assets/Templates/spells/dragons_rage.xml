@@ -57,7 +57,11 @@
                         <addEffectTriggers>
                             <!--knockup targets-->
                             <entity id="knockupTrigger">
-                                <collisionTrigger/>
+                                <collisionTrigger>
+                                    <entity>
+                                        <acceptAllies/>
+                                    </entity>
+                                </collisionTrigger>
                                 <targetTarget/>
                                 <triggeredEffect>
                                     <entity>

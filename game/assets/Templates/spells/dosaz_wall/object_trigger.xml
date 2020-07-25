@@ -1,0 +1,21 @@
+<template>
+    <entity id="object">
+        <hitbox>
+            <circle radius="5"/>
+        </hitbox>
+        <collisionGroup targetOf="spells" targets="spell_targets"/>
+        <hitboxActive/>
+        <lifetime>0.2</lifetime>
+    </entity>
+    <!--remove object-->
+    <entity>
+        <collisionTrigger>-1</collisionTrigger>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+    </entity>
+</template>

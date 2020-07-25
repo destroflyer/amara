@@ -16,7 +16,11 @@
     </entity>
     <!--trigger spell effects-->
     <entity>
-        <collisionTrigger/>
+        <collisionTrigger>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </collisionTrigger>
         <targetTarget/>
         <triggeredEffect>
             <entity>

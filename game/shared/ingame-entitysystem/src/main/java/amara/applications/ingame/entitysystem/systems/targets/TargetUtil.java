@@ -12,6 +12,8 @@ public class TargetUtil {
         boolean isValid;
         if (entityWorld.hasComponent(targetRulesEntity, RequireProjectileComponent.class)) {
             isValid = entityWorld.hasComponent(targetEntity, IsProjectileComponent.class);
+        } else if (entityWorld.hasComponent(targetRulesEntity, AcceptUntargetableComponent.class)) {
+            isValid = true;
         } else {
             isValid = entityWorld.hasComponent(targetEntity, IsTargetableComponent.class);
         }

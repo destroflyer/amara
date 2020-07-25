@@ -21,11 +21,6 @@
         </hitbox>
         <scale>0.6</scale>
         <collisionGroup targetOf="spells|map" targets="spell_targets"/>
-        <intersectionRules>
-            <entity>
-                <acceptEnemies/>
-            </entity>
-        </intersectionRules>
         <removeOnMapLeave/>
         <!--stats-->
         <walkSpeed>5.5</walkSpeed>
@@ -51,7 +46,11 @@
     </entity>
     <!--trigger spell effects-->
     <entity>
-        <collisionTrigger/>
+        <collisionTrigger>
+            <entity id="collisionRules">
+                <acceptEnemies/>
+            </entity>
+        </collisionTrigger>
         <targetTarget/>
         <triggeredEffect>
             <entity>
@@ -69,7 +68,7 @@
     </entity>
     <!--remove projectile-->
     <entity>
-        <collisionTrigger/>
+        <collisionTrigger>#collisionRules</collisionTrigger>
         <sourceTarget/>
         <triggeredEffect>
             <entity>

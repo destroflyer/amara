@@ -7,19 +7,19 @@
         <hitbox>
             <circle radius="1"/>
         </hitbox>
-        <collisionGroup targetOf="units" targets="units"/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
-        <intersectionRules>
-            <entity>
-                <acceptAllies/>
-                <requireEntity>[parameter0]</requireEntity>
-            </entity>
-        </intersectionRules>
         <lifetime>30</lifetime>
     </entity>
     <!--spawn and remove on collision trigger-->
     <entity>
-        <collisionTrigger/>
+        <collisionTrigger>
+            <entity>
+                <acceptUntargetable/>
+                <acceptAllies/>
+                <requireBuffs>[parameter0]</requireBuffs>
+            </entity>
+        </collisionTrigger>
         <sourceTarget/>
         <triggeredEffect>
             <entity>

@@ -1,22 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.cleanup;
 
 import amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
+import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
 public class CleanupEffectTriggersSystem implements EntitySystem {
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
-        ComponentMapObserver observer = entityWorld.requestObserver(this, TriggeredEffectComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, TriggeredEffectComponent.class, CollisionTriggerComponent.class);
         for (int entity : observer.getRemoved().getEntitiesWithAny(TriggeredEffectComponent.class)) {
             int effectEntity = observer.getRemoved().getComponent(entity, TriggeredEffectComponent.class).getEffectEntity();
             // Only remove the effect entity, if it's not referenced in an ongoing effect cast
@@ -27,6 +20,10 @@ public class CleanupEffectTriggersSystem implements EntitySystem {
             if (canEffectBeCleanuped) {
                 CleanupUtil.tryCleanupEntity(entityWorld, effectEntity);
             }
+        }
+        for (int entity : observer.getRemoved().getEntitiesWithAny(CollisionTriggerComponent.class)) {
+            int targetRulesEntity = observer.getRemoved().getComponent(entity, CollisionTriggerComponent.class).getTargetRulesEntity();
+            CleanupUtil.tryCleanupEntity(entityWorld, targetRulesEntity);
         }
         for (int effectTriggerEntity : entityWorld.getEntitiesWithAny(TriggerSourceComponent.class)) {
             int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
