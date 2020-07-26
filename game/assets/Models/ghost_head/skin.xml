@@ -1,0 +1,10 @@
+<skin name="ghost_head">
+    <model normScale="10" scale="0.2">
+        <position>
+            <location>0,3.5,0</location>
+        </position>
+        <material>
+            <texture source="ghost">diffuse_cyan.png</texture>
+        </material>
+    </model>
+</skin>
