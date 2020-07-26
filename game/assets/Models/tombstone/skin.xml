@@ -1,5 +1,5 @@
 <skin name="tombstone">
-    <model scale="1">
+    <model scale="0.9">
         <material>
             <texture>diffuse_grey.png</texture>
         </material>
