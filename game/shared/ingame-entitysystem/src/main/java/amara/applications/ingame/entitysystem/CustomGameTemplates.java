@@ -357,7 +357,7 @@ public class CustomGameTemplates{
                 int bountyItem = EntityContentGenerator.generateRandomItem(entityWorld);
                 entityWorld.setComponent(bounty, new BountyItemsComponent(bountyItem));
                 entityWorld.setComponent(entity, new BountyComponent(bounty));
-            } else if (templateName.equals("spells/dosaz_wall/object_wall")) {
+            } else if (templateName.equals("spells/dosaz_wall/object_wall_part")) {
                 int circlePointsCount = 32;
                 Vector2f[] circlePointsBig = PointUtil.getCirclePoints(7, circlePointsCount);
                 Vector2f[] circlePointsSmall = PointUtil.getCirclePoints(5, circlePointsCount);

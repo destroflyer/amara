@@ -36,43 +36,46 @@
                                 <spawnBuffs>[parameter0]</spawnBuffs>
                             </entity>
                             <entity>
-                                <spawnTemplate>./object_wall(0)</spawnTemplate>
+                                <spawnTemplate>./object_visual</spawnTemplate>
                             </entity>
                             <entity>
-                                <spawnTemplate>./object_wall(1)</spawnTemplate>
+                                <spawnTemplate>./object_wall_part(0)</spawnTemplate>
                             </entity>
                             <entity>
-                                <spawnTemplate>./object_wall(2)</spawnTemplate>
+                                <spawnTemplate>./object_wall_part(1)</spawnTemplate>
                             </entity>
                             <entity>
-                                <spawnTemplate>./object_wall(3)</spawnTemplate>
+                                <spawnTemplate>./object_wall_part(2)</spawnTemplate>
                             </entity>
                             <entity>
-                                <spawnTemplate>./object_wall(4)</spawnTemplate>
+                                <spawnTemplate>./object_wall_part(3)</spawnTemplate>
                             </entity>
                             <entity>
-                                <spawnTemplate>./object_wall(5)</spawnTemplate>
+                                <spawnTemplate>./object_wall_part(4)</spawnTemplate>
                             </entity>
                             <entity>
-                                <spawnTemplate>./object_wall(6)</spawnTemplate>
+                                <spawnTemplate>./object_wall_part(5)</spawnTemplate>
                             </entity>
                             <entity>
-                                <spawnTemplate>./object_wall(7)</spawnTemplate>
+                                <spawnTemplate>./object_wall_part(6)</spawnTemplate>
                             </entity>
                             <entity>
-                                <spawnTemplate>./object_wall(8)</spawnTemplate>
+                                <spawnTemplate>./object_wall_part(7)</spawnTemplate>
                             </entity>
                             <entity>
-                                <spawnTemplate>./object_wall(9)</spawnTemplate>
+                                <spawnTemplate>./object_wall_part(8)</spawnTemplate>
                             </entity>
                             <entity>
-                                <spawnTemplate>./object_wall(10)</spawnTemplate>
+                                <spawnTemplate>./object_wall_part(9)</spawnTemplate>
                             </entity>
                             <entity>
-                                <spawnTemplate>./object_wall(11)</spawnTemplate>
+                                <spawnTemplate>./object_wall_part(10)</spawnTemplate>
                             </entity>
                             <entity>
-                                <spawnTemplate>./object_wall(12)</spawnTemplate>
+                                <spawnTemplate>./object_wall_part(11)</spawnTemplate>
+                            </entity>
+                            <entity>
+                                <spawnTemplate>./object_wall_part(12)</spawnTemplate>
                             </entity>
                         </spawn>
                     </entity>

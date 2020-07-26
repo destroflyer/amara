@@ -77,7 +77,7 @@
             <entity template="spells/dosaz_skull/base(#triggerTombstonesBuff,#zombiesBuff)"/>
             <entity template="spells/dosaz_teleport/base(#unit,#zombiesBuff)"/>
             <entity template="spells/dosaz_wall/base(#triggerTombstonesBuff)"/>
-            <entity template="spells/dosaz_ult/base"/>
+            <entity template="spells/dosaz_ult/base(#zombiesBuff)"/>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

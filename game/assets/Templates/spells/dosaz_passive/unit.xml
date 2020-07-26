@@ -3,35 +3,35 @@
         <name>TODO</name>
         <isMinion/>
         <!--model-->
-        <model>Models/dwarf_warrior/skin_default.xml</model>
+        <model>Models/ghost/skin.xml</model>
         <idleAnimation>
             <entity id="idleAnimation">
-                <name>idle1</name>
-                <loopDuration>7.875</loopDuration>
+                <name>idle</name>
+                <loopDuration>1.5</loopDuration>
             </entity>
         </idleAnimation>
         <walkAnimation>
             <entity>
-                <name>run2</name>
+                <name>fly_forward</name>
             </entity>
         </walkAnimation>
         <walkStepDistance>6</walkStepDistance>
         <autoAttackAnimation>
             <entity>
-                <name>attack_downwards</name>
+                <name>melee_attack</name>
             </entity>
         </autoAttackAnimation>
         <deathAnimation>
             <entity>
-                <name>death</name>
-                <loopDuration>2.667</loopDuration>
+                <name>die</name>
+                <loopDuration>1.667</loopDuration>
                 <freezeAfterPlaying/>
             </entity>
         </deathAnimation>
         <animation>#idleAnimation</animation>
         <!--physics-->
         <hitbox>
-            <circle radius="1"/>
+            <circle radius="0.5"/>
         </hitbox>
         <intersectionPushes/>
         <intersectionPushed/>
@@ -42,11 +42,10 @@
         <baseAttributes>
             <entity>
                 <bonusFlatMaximumHealth>100</bonusFlatMaximumHealth>
-                <bonusFlatHealthRegeneration>1</bonusFlatHealthRegeneration>
                 <bonusFlatAttackDamage>50</bonusFlatAttackDamage>
                 <bonusFlatAttackSpeed>0.75</bonusFlatAttackSpeed>
-                <bonusFlatArmor>25</bonusFlatArmor>
-                <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
+                <bonusFlatArmor>20</bonusFlatArmor>
+                <bonusFlatMagicResistance>20</bonusFlatMagicResistance>
                 <bonusFlatWalkSpeed>8</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
@@ -62,6 +61,6 @@
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
         <autoAggro>12</autoAggro>
-        <lifetime>30</lifetime>
+        <lifetime>20</lifetime>
     </entity>
 </template>

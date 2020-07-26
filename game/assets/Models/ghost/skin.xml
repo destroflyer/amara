@@ -1,0 +1,7 @@
+<skin name="ghost">
+    <model normScale="0.028" scale="1">
+        <material>
+            <texture>diffuse_cyan.png</texture>
+        </material>
+    </model>
+</skin>

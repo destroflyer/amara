@@ -1,9 +1,21 @@
 <template>
+    <value name="duration">15</value>
     <entity id="spell">
         <name>TODO</name>
         <description>TODO</description>
         <spellVisualisation>dosaz_ult</spellVisualisation>
-        <instantEffectTriggers/>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
         <castType>selfcast</castType>
         <!--<castAnimation>
             <entity>
@@ -16,6 +28,96 @@
     <!--spell effect-->
     <entity>
         <castedSpell>#spell</castedSpell>
-        <castedEffectTriggers/>
+        <castedEffectTriggers>
+            <!--add buff, add buff area, spawn units-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="[duration]">
+                            <entity id="visualisationBuff">
+                                <name>TODO</name>
+                                <description>TODO</description>
+                                <buffIcon>spells/dosaz_ult</buffIcon>
+                                <buffVisualisation>dosaz_ult</buffVisualisation>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageLifesteal>0.2</bonusPercentageLifesteal>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                        <addBuffArea>
+                            <entity id="buffArea">
+                                <hitbox>
+                                    <circle radius="7.5"/>
+                                </hitbox>
+                                <areaBuff>
+                                    <entity>
+                                        <name>TODO</name>
+                                        <description>This unit has decreased walk speed and receives magic damage over time.</description>
+                                        <buffIcon>spells/dosaz_ult</buffIcon>
+                                        <continuousAttributes>
+                                            <entity>
+                                                <bonusPercentageWalkSpeed>-0.3</bonusPercentageWalkSpeed>
+                                            </entity>
+                                        </continuousAttributes>
+                                        <repeatingEffect interval="0.5">
+                                            <entity>
+                                                <magicDamage>50</magicDamage>
+                                            </entity>
+                                        </repeatingEffect>
+                                    </entity>
+                                </areaBuff>
+                                <areaBuffTargetRules>
+                                    <entity>
+                                        <acceptEnemies/>
+                                    </entity>
+                                </areaBuffTargetRules>
+                            </entity>
+                        </addBuffArea>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
+                                <spawnBuffs>[parameter0]</spawnBuffs>
+                                <spawnRelativePosition>0,6.5</spawnRelativePosition>
+                            </entity>
+                            <entity>
+                                <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
+                                <spawnBuffs>[parameter0]</spawnBuffs>
+                                <spawnRelativePosition>6.1819,2.0086</spawnRelativePosition>
+                            </entity>
+                            <entity>
+                                <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
+                                <spawnBuffs>[parameter0]</spawnBuffs>
+                                <spawnRelativePosition>3.8206,-5.2586</spawnRelativePosition>
+                            </entity>
+                            <entity>
+                                <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
+                                <spawnBuffs>[parameter0]</spawnBuffs>
+                                <spawnRelativePosition>-3.8206,-5.2586</spawnRelativePosition>
+                            </entity>
+                            <entity>
+                                <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
+                                <spawnBuffs>[parameter0]</spawnBuffs>
+                                <spawnRelativePosition>-6.1819,2.0086</spawnRelativePosition>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--remove buff area-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeBuffArea>#buffArea</removeBuffArea>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[duration]</triggerDelay>
+            </entity>
+        </castedEffectTriggers>
     </entity>
 </template>

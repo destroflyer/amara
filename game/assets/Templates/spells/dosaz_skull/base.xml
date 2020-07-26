@@ -6,7 +6,7 @@
         <spellVisualisation>dosaz_skull</spellVisualisation>
         <spellIndicator>
             <entity>
-                <linearIndicator width="2" height="19.5"/>
+                <circularIndicator radius="27"/>
             </entity>
         </spellIndicator>
         <instantEffectTriggers>
@@ -18,8 +18,8 @@
                         <spawn>
                             <entity>
                                 <spawnTemplate>./projectile([parameter1])</spawnTemplate>
+                                <spawnMoveToTarget/>
                                 <spawnMovementSpeed>18</spawnMovementSpeed>
-                                <spawnMovementDistance>27</spawnMovementDistance>
                                 <spawnBuffs>[parameter0]</spawnBuffs>
                             </entity>
                         </spawn>
@@ -45,7 +45,7 @@
                 <triggerDelay>[delay]</triggerDelay>
             </entity>
         </instantEffectTriggers>
-        <castType>linear_skillshot</castType>
+        <castType>positional_skillshot</castType>
         <castCancelAction/>
         <castDuration>[delay]</castDuration>
         <castTurnToTarget/>
@@ -55,7 +55,8 @@
                 <loopDuration>1</loopDuration>
             </entity>
         </castAnimation>-->
-        <baseCooldown>7</baseCooldown>
+        <range>27</range>
+        <baseCooldown>1</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>
