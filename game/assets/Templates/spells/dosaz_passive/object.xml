@@ -2,7 +2,7 @@
     <entity id="object">
         <name>TODO</name>
         <!--model-->
-        <model>Models/3dsa_fantasy_forest_rock_1/skin.xml</model>
+        <model>Models/tombstone/skin.xml</model>
         <!--physics-->
         <hitbox>
             <circle radius="1"/>

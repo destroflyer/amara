@@ -1,0 +1,7 @@
+<skin name="tombstone">
+    <model scale="1">
+        <material>
+            <texture>diffuse_grey.png</texture>
+        </material>
+    </model>
+</skin>
