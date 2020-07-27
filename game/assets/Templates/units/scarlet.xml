@@ -70,9 +70,9 @@
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
-        <!--<passives>
-            <entity template="spells/ganfaul_passive/passive"/>
-        </passives>-->
+        <passives>
+            <entity template="spells/scarlet_passive/passive"/>
+        </passives>
         <learnableSpells>
             <entity template="spells/scarlet_kunai/base"/>
             <entity template="spells/scarlet_barrier/base(#unit)"/>
