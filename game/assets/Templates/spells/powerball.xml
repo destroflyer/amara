@@ -17,7 +17,7 @@
         <castType>single_target</castType>
         <castCancelAction/>
         <castTurnToTarget/>
-        <range>20</range>
+        <range type="center_to_center" distance="20"/>
         <baseCooldown>25</baseCooldown>
         <spellTargetRules>
             <entity>

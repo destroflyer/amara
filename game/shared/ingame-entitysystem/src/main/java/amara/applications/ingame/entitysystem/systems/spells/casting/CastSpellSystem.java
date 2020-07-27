@@ -80,9 +80,9 @@ public class CastSpellSystem implements EntitySystem {
     }
 
     public static float getMinimumCastRange(EntityWorld entityWorld, int casterEntity, int spellEntity, int targetEntity) {
-        float minimumCastRange = entityWorld.getComponent(spellEntity, RangeComponent.class).getDistance();
-        AutoAttackComponent autoAttackComponent = entityWorld.getComponent(casterEntity, AutoAttackComponent.class);
-        if ((autoAttackComponent != null) && (spellEntity == autoAttackComponent.getAutoAttackEntity())) {
+        RangeComponent rangeComponent = entityWorld.getComponent(spellEntity, RangeComponent.class);
+        float minimumCastRange = rangeComponent.getDistance();
+        if (rangeComponent.getType() == RangeComponent.RangeType.EDGE_TO_EDGE) {
             float casterHitboxRadius = TargetedMovementSystem.getHitboxRadius(entityWorld, casterEntity);
             float targetHitboxRadius = TargetedMovementSystem.getHitboxRadius(entityWorld, targetEntity);
             minimumCastRange += (casterHitboxRadius + targetHitboxRadius);

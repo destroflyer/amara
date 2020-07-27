@@ -35,6 +35,7 @@ public class ComponentsRegistrator_Generate{
         HitboxComponent.class,
         SpawnTemplateComponent.class,
         CastTypeComponent.class,
+        RangeComponent.class,
         CollisionGroupComponent.class,
         DamageHistoryComponent.class,
         HealthBarStyleComponent.class,

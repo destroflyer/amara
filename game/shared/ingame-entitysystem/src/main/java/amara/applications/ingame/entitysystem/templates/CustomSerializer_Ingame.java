@@ -156,6 +156,15 @@ public class CustomSerializer_Ingame{
                 return new CastTypeComponent(CastTypeComponent.CastType.valueOf(element.getText().toUpperCase()));
             }
         });
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<RangeComponent>("range"){
+
+            @Override
+            public RangeComponent construct(EntityWorld entityWorld, Element element){
+                RangeComponent.RangeType type = RangeComponent.RangeType.valueOf(element.getAttributeValue("type").toUpperCase());
+                float distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("distance")));
+                return new RangeComponent(type, distance);
+            }
+        });
         //units
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<CollisionGroupComponent>("collisionGroup"){
 

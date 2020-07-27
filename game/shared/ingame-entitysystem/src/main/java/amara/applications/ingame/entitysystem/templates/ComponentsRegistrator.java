@@ -3416,18 +3416,6 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.RangeComponent>("range"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.spells.RangeComponent construct(EntityWorld entityWorld, Element element){
-                float distange = 0;
-                String distangeText = element.getText();
-                if((distangeText != null) && (distangeText.length() > 0)){
-                    distange = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distangeText));
-                }
-                return new amara.applications.ingame.entitysystem.components.spells.RangeComponent(distange);
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);

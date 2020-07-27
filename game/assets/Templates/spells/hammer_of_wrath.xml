@@ -20,7 +20,7 @@
         </instantEffectTriggers>
         <castType>positional_skillshot</castType>
         <castTurnToTarget/>
-        <range>20</range>
+        <range type="center_to_center" distance="20"/>
         <baseCooldown>80</baseCooldown>
     </entity>
     <!--spell effect-->

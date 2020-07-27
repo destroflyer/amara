@@ -38,7 +38,7 @@
                 <loopDuration>1</loopDuration>
             </entity>
         </castAnimation>
-        <range>6</range>
+        <range type="edge_to_edge" distance="4"/>
         <baseCooldown>11</baseCooldown>
         <spellTargetRules>
             <entity>

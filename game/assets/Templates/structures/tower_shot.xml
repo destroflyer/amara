@@ -36,7 +36,7 @@
         </instantEffectTriggers>
         <castCancelAction/>
         <castCancelable/>
-        <range>19</range>
+        <range type="edge_to_edge" distance="19"/>
         <spellTargetRules>
             <entity>
                 <acceptEnemies/>

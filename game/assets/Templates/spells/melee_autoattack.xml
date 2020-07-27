@@ -23,7 +23,7 @@
         <castCancelAction/>
         <castCancelable/>
         <castTurnToTarget/>
-        <range>2</range>
+        <range type="edge_to_edge" distance="2"/>
         <spellTargetRules>
             <entity>
                 <acceptEnemies/>

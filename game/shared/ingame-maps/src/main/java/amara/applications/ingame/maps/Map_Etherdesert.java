@@ -88,7 +88,7 @@ public class Map_Etherdesert extends Map {
         entityWorld.setComponent(nexus, new BaseAttributesComponent(nexusBaseAttributesEntity));
         EntityWrapper nexusAutoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
         nexusAutoAttack.removeComponent(CastTurnToTargetComponent.class);
-        nexusAutoAttack.setComponent(new RangeComponent(1000));
+        nexusAutoAttack.setComponent(new RangeComponent(RangeComponent.RangeType.EDGE_TO_EDGE, 1000));
         entityWorld.setComponent(nexus, new AutoAttackComponent(nexusAutoAttack.getId()));
         entityWorld.setComponent(nexus, new AutoAggroComponent(24));
         entityWorld.setComponent(nexus, new RequestUpdateAttributesComponent());

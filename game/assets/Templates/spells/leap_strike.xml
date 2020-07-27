@@ -35,7 +35,7 @@
         <castType>single_target</castType>
         <castCancelAction/>
         <castTurnToTarget/>
-        <range>9</range>
+        <range type="center_to_center" distance="9"/>
         <baseCooldown>16</baseCooldown>
     </entity>
     <!--spell effect-->

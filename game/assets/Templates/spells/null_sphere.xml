@@ -48,7 +48,7 @@
                 <loopDuration>0.6</loopDuration>
             </entity>
         </castAnimation>
-        <range>14</range>
+        <range type="center_to_center" distance="14"/>
         <baseCooldown>9</baseCooldown>
         <spellTargetRules>
             <entity>

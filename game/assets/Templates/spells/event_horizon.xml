@@ -21,7 +21,7 @@
         <castType>positional_skillshot</castType>
         <castCancelAction/>
         <castTurnToTarget/>
-        <range>12</range>
+        <range type="center_to_center" distance="12"/>
         <baseCooldown>18</baseCooldown>
     </entity>
     <!--spell effect-->

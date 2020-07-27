@@ -1,30 +1,32 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.components.spells;
 
 import com.jme3.network.serializing.Serializable;
 import amara.libraries.entitysystem.synchronizing.ComponentField;
 
-/**
- *
- * @author Carl
- */
 @Serializable
-public class RangeComponent{
+public class RangeComponent {
 
-    public RangeComponent(){
-        
+    public RangeComponent() {
+
     }
-    
-    public RangeComponent(float distange){
-        this.distance = distange;
+
+    public RangeComponent(RangeType type, float distance) {
+        this.type = type;
+        this.distance = distance;
     }
+    public enum RangeType {
+        CENTER_TO_CENTER,
+        EDGE_TO_EDGE
+    }
+    private RangeType type;
     @ComponentField(type=ComponentField.Type.DISTANCE)
     private float distance;
 
-    public float getDistance(){
+    public RangeType getType() {
+        return type;
+    }
+
+    public float getDistance() {
         return distance;
     }
 }

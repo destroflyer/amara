@@ -58,7 +58,7 @@
         <castDuration>[delay]</castDuration>
         <castTurnToTarget/>
         <castAnimation>#animation</castAnimation>
-        <range>24</range>
+        <range type="center_to_center" distance="24"/>
         <baseCooldown>16</baseCooldown>
     </entity>
     <!--spell effect-->

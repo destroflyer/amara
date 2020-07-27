@@ -28,7 +28,7 @@
                 <loopDuration>2</loopDuration>
             </entity>
         </castAnimation>
-        <range>20</range>
+        <range type="center_to_center" distance="20"/>
         <baseCooldown>10</baseCooldown>
     </entity>
     <!--spell effect-->

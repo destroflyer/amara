@@ -25,7 +25,7 @@
         </instantEffectTriggers>
         <castType>single_target</castType>
         <castTurnToTarget/>
-        <range>14</range>
+        <range type="center_to_center" distance="14"/>
         <baseCooldown>15</baseCooldown>
         <spellTargetRules>
             <entity>

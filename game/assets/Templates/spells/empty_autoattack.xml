@@ -1,6 +1,6 @@
 <template>
     <entity>
-        <range>0</range>
+        <range type="edge_to_edge" distance="0"/>
         <spellTargetRules>
             <entity>
                 <acceptEnemies/>
