@@ -1,0 +1,10 @@
+<skin name="tristan_shield">
+    <model normScale="10" scale="0.5">
+        <position>
+            <location>0,3.5,0</location>
+        </position>
+        <material>
+            <texture source="tristan">diffuse_blue.png</texture>
+        </material>
+    </model>
+</skin>

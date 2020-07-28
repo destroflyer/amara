@@ -27,6 +27,7 @@ import amara.tools.modelviewer.ModelViewerApplication;
 public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> implements ActionListener{
     
     private final String[] modelSkinPaths = new String[]{
+        "Models/tristan/skin_default.xml",
         "Models/dosaz/skin_default.xml",
         "Models/ghost/skin.xml",
         "Models/garmon/skin_default.xml",
