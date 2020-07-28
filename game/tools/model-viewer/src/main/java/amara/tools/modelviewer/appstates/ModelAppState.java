@@ -28,6 +28,9 @@ public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> i
     
     private final String[] modelSkinPaths = new String[]{
         "Models/tristan/skin_default.xml",
+        "Models/elven_archer/skin_default.xml",
+        "Models/alice/skin_default.xml",
+        "Models/aland/skin_default.xml",
         "Models/dosaz/skin_default.xml",
         "Models/ghost/skin.xml",
         "Models/garmon/skin_default.xml",

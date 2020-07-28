@@ -1,0 +1,10 @@
+<skin name="elven_archer">
+    <model normScale="0.028" scale="1.25" rigType="mixamo">
+        <material>
+            <texture>diffuse_green.png</texture>
+        </material>
+        <modifiers>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_ElvenArcher_Weapons</modifier>
+        </modifiers>
+    </model>
+</skin>

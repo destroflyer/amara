@@ -1,0 +1,10 @@
+<skin name="elven_archer_quiver">
+    <model normScale="10" scale="0.5">
+        <position>
+            <location>0,3.5,0</location>
+        </position>
+        <material>
+            <texture source="elven_archer">diffuse_green.png</texture>
+        </material>
+    </model>
+</skin>

@@ -13,7 +13,7 @@ public class ModelModifier_Tristan_Weapons extends ModelModifier {
 
     @Override
     public void modify(RegisteredModel registeredModel) {
-        // Axe
+        // Shield
         Node leftPalmNode = registeredModel.requestBoneAttachmentsNode("RigLPalm");
         Node shield = ModelSkin.get("Models/tristan_shield/skin.xml").load();
         shield.setLocalTranslation(8, 3, 2);
@@ -21,7 +21,7 @@ public class ModelModifier_Tristan_Weapons extends ModelModifier {
         shield.rotate(new Quaternion().fromAngleAxis(0.3f, Vector3f.UNIT_Z));
         shield.setLocalScale(100);
         leftPalmNode.attachChild(shield);
-        // Hammer
+        // Sword
         Node rightPalmNode = registeredModel.requestBoneAttachmentsNode("RigRPalm");
         Node sword = ModelSkin.get("Models/tristan_sword/skin.xml").load();
         sword.setLocalTranslation(8, -8, 2);

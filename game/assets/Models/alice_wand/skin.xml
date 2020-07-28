@@ -1,0 +1,10 @@
+<skin name="alice_wand">
+    <model normScale="10" scale="0.5">
+        <position>
+            <location>0,3.5,0</location>
+        </position>
+        <material>
+            <texture source="alice">diffuse_purple.png</texture>
+        </material>
+    </model>
+</skin>
