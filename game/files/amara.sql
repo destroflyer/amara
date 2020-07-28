@@ -59,7 +59,11 @@ INSERT INTO `characters` (`id`, `name`, `title`, `lore`, `is_public`) VALUES
 (16, 'scarlet', 'Scarlet', '', 0),
 (17, 'dwarf_warrior', 'Dwarf Warrior', '', 0),
 (18, 'garmon', 'Garmon', '', 0),
-(19, 'dosaz', 'Dosaz', '', 0);
+(19, 'dosaz', 'Dosaz', '', 0),
+(20, 'tristan', 'Tristan', '', 0),
+(21, 'elven_archer', 'Elven Archer', '', 0),
+(22, 'alice', 'Alice', '', 0),
+(23, 'aland', 'Aland', '', 0);
 
 -- --------------------------------------------------------
 

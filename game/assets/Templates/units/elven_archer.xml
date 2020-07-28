@@ -1,0 +1,80 @@
+<template>
+    <entity id="unit">
+        <name>Elven Archer</name>
+        <!--model-->
+        <model>Models/elven_archer/skin_default.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>idle1</name>
+                <loopDuration>5.1</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>run1</name>
+            </entity>
+        </walkAnimation>
+        <walkStepDistance>6</walkStepDistance>
+        <autoAttackAnimation>
+            <entity>
+                <name>shoot_arrow</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>death1</name>
+                <loopDuration>2.567</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <intersectionPushes/>
+        <intersectionPushed/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>500</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>1</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>50</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.75</bonusFlatAttackSpeed>
+                <bonusFlatArmor>25</bonusFlatArmor>
+                <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>8</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <attributesPerLevel>
+            <entity>
+                <bonusFlatMaximumHealth>75</bonusFlatMaximumHealth>
+                <bonusFlatHealthRegeneration>0.15</bonusFlatHealthRegeneration>
+                <bonusFlatAttackDamage>3</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.02</bonusFlatAttackSpeed>
+                <bonusFlatArmor>3</bonusFlatArmor>
+                <bonusFlatMagicResistance>0</bonusFlatMagicResistance>
+            </entity>
+        </attributesPerLevel>
+        <requestUpdateAttributes/>
+        <isTargetable/>
+        <isVulnerable/>
+        <isBindable/>
+        <isKnockupable/>
+        <isSilencable/>
+        <isStunnable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/ranged_autoattack,Models/elven_archer_arrow/skin.xml"/>
+        </autoAttack>
+        <!--<passives>
+            <entity template="spells/elven_archer_passive/passive"/>
+        </passives>-->
+        <!--<learnableSpells></learnableSpells>-->
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
+    </entity>
+</template>
