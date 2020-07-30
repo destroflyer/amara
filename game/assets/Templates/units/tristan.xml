@@ -14,7 +14,7 @@
                 <name>run1</name>
             </entity>
         </walkAnimation>
-        <walkStepDistance>6.5</walkStepDistance>
+        <walkStepDistance>7.8</walkStepDistance>
         <autoAttackAnimation>
             <entity>
                 <name>slash1</name>
@@ -70,10 +70,15 @@
         <autoAttack>
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
-        <!--<passives>
+        <passives>
             <entity template="spells/tristan_passive/passive"/>
-        </passives>-->
-        <!--<learnableSpells></learnableSpells>-->
+        </passives>
+        <learnableSpells>
+            <entity template="spells/tristan_spin/base"/>
+            <entity template="spells/tristan_attack_buff/base"/>
+            <entity template="spells/tristan_stun/base"/>
+            <entity template="spells/tristan_ult/base"/>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>

@@ -1,0 +1,93 @@
+<template>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <spellVisualisation>tristan_attack_buff</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--add spelleffect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addAutoAttackSpellEffects>
+                            <entity id="newSpellEffect">
+                                <castedEffectTriggers>
+                                    <!--target effect-->
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <magicDamage>75 + (0.6 + source.abilityPower)</magicDamage>
+                                                <addBuff duration="2">
+                                                    <entity>
+                                                        <name>TODO</name>
+                                                        <description>TODO</description>
+                                                        <buffVisualisation>frost</buffVisualisation>
+                                                        <continuousAttributes>
+                                                            <entity>
+                                                                <bonusPercentageWalkSpeed>-0.5</bonusPercentageWalkSpeed>
+                                                            </entity>
+                                                        </continuousAttributes>
+                                                    </entity>
+                                                </addBuff>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                    <!--remove buff-->
+                                    <entity>
+                                        <casterTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <removeBuff>#buff</removeBuff>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </castedEffectTriggers>
+                            </entity>
+                        </addAutoAttackSpellEffects>
+                        <addBuff duration="5">
+                            <entity id="buff">
+                                <name>Empowered</name>
+                                <description>This units next basic attack will deal bonus magic damage.</description>
+                                <buffIcon>spells/empower</buffIcon>
+                                <buffVisualisation>empowered</buffVisualisation>
+                                <onBuffRemoveEffectTriggers>
+                                    <entity>
+                                        <casterTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <removeSpellEffects>#newSpellEffect</removeSpellEffects>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffRemoveEffectTriggers>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

@@ -1,5 +1,5 @@
 <skin>
-    <model scale="1">
+    <model>
         <modifiers>
             <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Scarlet_Ult_Blades</modifier>
         </modifiers>

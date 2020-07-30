@@ -1,30 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package amara.applications.ingame.client.systems.visualisation;
+
+import amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent;
+import amara.applications.ingame.entitysystem.components.spells.SpellIndicatorComponent;
+import amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent;
+import amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent;
+import amara.libraries.applications.display.ingame.models.util.GroundTextures;
+import amara.libraries.applications.display.materials.MaterialFactory;
+import amara.libraries.entitysystem.EntitySystem;
+import amara.libraries.entitysystem.EntityWorld;
+import com.jme3.material.RenderState;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 
 import java.util.LinkedList;
 import java.util.function.Supplier;
 
-import com.jme3.scene.Geometry;
-import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
-import com.jme3.scene.shape.Quad;
-import com.jme3.material.Material;
-import com.jme3.material.RenderState;
-import amara.applications.ingame.entitysystem.components.players.*;
-import amara.applications.ingame.entitysystem.components.spells.*;
-import amara.applications.ingame.entitysystem.components.spells.indicators.*;
-import amara.libraries.applications.display.JMonkeyUtil;
-import amara.libraries.applications.display.materials.MaterialFactory;
-import amara.libraries.entitysystem.*;
-
-/**
- *
- * @author Carl
- */
 public class SpellIndicatorSystem implements EntitySystem{
 
     public SpellIndicatorSystem(Supplier<Integer> playerEntity, EntitySceneMap entitySceneMap){
@@ -49,7 +41,7 @@ public class SpellIndicatorSystem implements EntitySystem{
                     float diameter = (2 * circularIndicatorComponent.getRadius());
                     float x = (circularIndicatorComponent.getX() - circularIndicatorComponent.getRadius());
                     float y = (circularIndicatorComponent.getY() + circularIndicatorComponent.getRadius());
-                    currentIndicators.add(createGroundTexture("Textures/spell_indicators/circular.png", x, y, diameter, diameter, RenderState.BlendMode.AlphaAdditive));
+                    currentIndicators.add(GroundTextures.create("Textures/spell_indicators/circular.png", x, y, diameter, diameter, RenderState.BlendMode.AlphaAdditive));
                 }
                 LinearIndicatorComponent linearIndicatorComponent = entityWorld.getComponent(spellIndicatorComponent.getIndicatorEntity(), LinearIndicatorComponent.class);
                 if(linearIndicatorComponent != null){
@@ -59,8 +51,8 @@ public class SpellIndicatorSystem implements EntitySystem{
                     float x = (linearIndicatorComponent.getX() - (linearIndicatorComponent.getWidth() / 2));
                     float yBase = (linearIndicatorComponent.getY() + heightBase);
                     float yTarget = (linearIndicatorComponent.getY() + heightBase + heightTarget);
-                    Geometry indicatorBase = createGroundTexture("Textures/spell_indicators/linear_base.png", x, yBase, width, heightBase, RenderState.BlendMode.AlphaAdditive);
-                    Geometry indicatorTarget = createGroundTexture("Textures/spell_indicators/linear_target.png", x, yTarget, width, heightTarget, RenderState.BlendMode.AlphaAdditive);
+                    Geometry indicatorBase = GroundTextures.create("Textures/spell_indicators/linear_base.png", x, yBase, width, heightBase, RenderState.BlendMode.AlphaAdditive);
+                    Geometry indicatorTarget = GroundTextures.create("Textures/spell_indicators/linear_target.png", x, yTarget, width, heightTarget, RenderState.BlendMode.AlphaAdditive);
                     // Ensure that the textures connect seamless (The textures have a high enough resolution that it still looks ok)
                     MaterialFactory.setFilter_Nearest(indicatorBase.getMaterial());
                     MaterialFactory.setFilter_Nearest(indicatorTarget.getMaterial());
@@ -90,26 +82,5 @@ public class SpellIndicatorSystem implements EntitySystem{
             currentIndicators.clear();
             updateIndicator = false;
         }
-    }
-    
-    public static Spatial createGroundTexture(String textureFilePath, float width, float height){
-        return createGroundTexture(textureFilePath, (width / -2), (height / 2), width, height);
-    }
-    
-    public static Spatial createGroundTexture(String textureFilePath, float x, float y, float width, float height){
-        return createGroundTexture(textureFilePath, x, y, width, height, RenderState.BlendMode.Alpha);
-    }
-    
-    public static Geometry createGroundTexture(String textureFilePath, float x, float y, float width, float height, RenderState.BlendMode blendMode){
-        Geometry geometry = new Geometry(null, new Quad(width, height));
-        geometry.setLocalTranslation(x, 0, y);
-        geometry.rotate(JMonkeyUtil.getQuaternion_X(-90));
-        Material material = MaterialFactory.generateLightingMaterial(textureFilePath);
-        material.getAdditionalRenderState().setBlendMode(blendMode);
-        material.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
-        material.getAdditionalRenderState().setDepthTest(false);
-        geometry.setMaterial(material);
-        geometry.setUserData("layer", 2);
-        return geometry;
     }
 }

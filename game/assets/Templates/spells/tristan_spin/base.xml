@@ -1,0 +1,60 @@
+<template>
+    <value name="duration">0.4</value>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <spellVisualisation>tristan_spin</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn object, add visual buff-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castDuration>[duration]</castDuration>
+        <castCancelAction/>
+        <castAnimation>
+            <entity>
+                <name>spin</name>
+                <loopDuration>[duration]</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>80 + (0.5 * source.abilityPower)</magicDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--target effect-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <heal>100</heal>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

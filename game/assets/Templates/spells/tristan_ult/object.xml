@@ -1,17 +1,16 @@
 <template>
     <entity id="object">
-        <model>Models/pillar_of_flame/skin.xml</model>
         <hitbox>
-            <circle radius="2"/>
+            <rectangle x="3" width="6" height="5"/>
         </hitbox>
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
-        <lifetime>1.5</lifetime>
+        <lifetime>0.2</lifetime>
     </entity>
     <!--trigger spell effects-->
     <entity>
         <collisionTrigger>
-            <entity id="collisionRules">
+            <entity>
                 <acceptEnemies/>
             </entity>
         </collisionTrigger>
@@ -19,17 +18,24 @@
         <triggeredEffect>
             <entity>
                 <triggerCastedSpellEffects/>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/maria_stab_hit.ogg</audio>
+                        <audioVolume>0.75</audioVolume>
+                        <audioRemoveAfterPlaying/>
+                    </entity>
+                </playAudio>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
     </entity>
-    <!--deactivate hitbox-->
+    <!--remove object-->
     <entity>
         <collisionTrigger>#collisionRules</collisionTrigger>
         <sourceTarget/>
         <triggeredEffect>
             <entity>
-                <deactivateHitbox/>
+                <removeEntity/>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>

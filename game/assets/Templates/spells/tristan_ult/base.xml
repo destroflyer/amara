@@ -1,0 +1,65 @@
+<template>
+    <value name="delay">0.2</value>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <spellVisualisation>tristan_ult</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="2" height="11"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn object-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>slash4</name>
+                <loopDuration>0.352</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>100 + (0.3 * source.attackDamage)</physicalDamage>
+                        <move>
+                            <entity>
+                                <displacement/>
+                                <sourceMovementDirection/>
+                                <movementSpeed>30</movementSpeed>
+                                <distanceLimit>10</distanceLimit>
+                            </entity>
+                        </move>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>
