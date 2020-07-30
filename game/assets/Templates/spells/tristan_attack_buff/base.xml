@@ -67,10 +67,10 @@
                         </addAutoAttackSpellEffects>
                         <addBuff duration="5">
                             <entity id="buff">
-                                <name>Empowered</name>
-                                <description>This units next basic attack will deal bonus magic damage.</description>
-                                <buffIcon>spells/empower</buffIcon>
-                                <buffVisualisation>empowered</buffVisualisation>
+                                <name>TODO</name>
+                                <description>TODO</description>
+                                <buffIcon>spells/tristan_attack_buff</buffIcon>
+                                <buffVisualisation>tristan_empowered</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
                                         <casterTarget/>

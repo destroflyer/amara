@@ -1,5 +1,4 @@
 <template>
-    <value name="delay">0.5</value>
     <entity id="spell">
         <name>TODO</name>
         <description>TODO</description>
@@ -23,28 +22,11 @@
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
-                <triggerDelay>[delay]</triggerDelay>
-            </entity>
-            <!--play audio-->
-            <entity>
-                <casterTarget/>
-                <triggeredEffect>
-                    <entity>
-                        <playAudio>
-                            <entity>
-                                <audio>Sounds/sounds/spells/maria_stab_cast.ogg</audio>
-                                <audioVolume>0.75</audioVolume>
-                            </entity>
-                        </playAudio>
-                    </entity>
-                </triggeredEffect>
-                <triggerSource>#spell</triggerSource>
-                <triggerDelay>0.15</triggerDelay>
             </entity>
         </instantEffectTriggers>
         <castType>linear_skillshot</castType>
         <castCancelAction/>
-        <castDuration>[delay]</castDuration>
+        <castDuration>0.5</castDuration>
         <castTurnToTarget/>
         <castAnimation>
             <entity>

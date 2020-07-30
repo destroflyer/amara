@@ -11,6 +11,8 @@ import com.jme3.scene.Node;
 
 public class ModelModifier_Tristan_Weapons extends ModelModifier {
 
+    public static final String NODE_NAME_SWORD = "tristanSword";
+
     @Override
     public void modify(RegisteredModel registeredModel) {
         // Shield
@@ -24,6 +26,7 @@ public class ModelModifier_Tristan_Weapons extends ModelModifier {
         // Sword
         Node rightPalmNode = registeredModel.requestBoneAttachmentsNode("RigRPalm");
         Node sword = ModelSkin.get("Models/tristan_sword/skin.xml").load();
+        sword.setName(NODE_NAME_SWORD);
         sword.setLocalTranslation(8, -8, 2);
         JMonkeyUtil.setLocalRotation(sword, new Vector3f(0, 0, 1));
         sword.setLocalScale(100);
