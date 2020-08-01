@@ -370,6 +370,15 @@ public class CustomGameTemplates{
                 outline[3] = getVector2D(circlePointsSmall[circlePointStartIndex]);
                 ConvexShape convexShape = new SimpleConvexPolygon(outline);
                 entityWrapper.setComponent(new HitboxComponent(convexShape));
+            } else if (templateName.equals("spells/tristan_ult/object")) {
+                int circlePointsCount = 32;
+                Vector2f[] circlePoints = PointUtil.getCirclePoints(6, circlePointsCount);
+                Vector2D[] outline = new Vector2D[17];
+                for (int i = 0; i < outline.length; i++) {
+                    outline[i] = getVector2D(circlePoints[i]);
+                }
+                ConvexShape convexShape = new SimpleConvexPolygon(outline);
+                entityWrapper.setComponent(new HitboxComponent(convexShape));
             }
         });
     }

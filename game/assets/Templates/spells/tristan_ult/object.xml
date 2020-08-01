@@ -1,8 +1,6 @@
 <template>
     <entity id="object">
-        <hitbox>
-            <rectangle x="3" width="6" height="5"/>
-        </hitbox>
+        <!--hitbox is generated via code-->
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
         <lifetime>0.2</lifetime>
