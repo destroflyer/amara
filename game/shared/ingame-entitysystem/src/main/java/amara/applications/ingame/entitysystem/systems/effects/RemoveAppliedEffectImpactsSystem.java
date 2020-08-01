@@ -1,22 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.effects;
 
-import amara.applications.ingame.entitysystem.components.effects.*;
+import amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent;
+import amara.applications.ingame.entitysystem.systems.cleanup.CleanupTemporaryTargetsUtil;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
-public class RemoveAppliedEffectImpactsSystem implements EntitySystem{
-    
+public class RemoveAppliedEffectImpactsSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAny(ApplyEffectImpactComponent.class)){
-            entityWorld.removeEntity(entity);
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int effectImpactEntity : entityWorld.getEntitiesWithAny(ApplyEffectImpactComponent.class)) {
+            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
+            entityWorld.removeEntity(effectImpactEntity);
+            CleanupTemporaryTargetsUtil.tryRemoveTemporaryTargetEntity(entityWorld, targetEntity);
         }
     }
 }

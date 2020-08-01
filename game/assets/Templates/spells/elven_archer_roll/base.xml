@@ -1,0 +1,72 @@
+<template>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <spellVisualisation>elven_archer_roll</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="2" height="6"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelAction/>
+        <castTurnToTarget/>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--move-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <move>
+                            <entity>
+                                <targetedMovementDirection/>
+                                <movementSpeed>20</movementSpeed>
+                                <movementAnimation>
+                                    <entity>
+                                        <name>dive</name>
+                                        <loopDuration>0.3</loopDuration>
+                                        <freezeAfterPlaying/>
+                                    </entity>
+                                </movementAnimation>
+                                <distanceLimit>6</distanceLimit>
+                            </entity>
+                        </move>
+                        <removeCollisionGroups targetOf="units" targets="units"/>
+                        <addEffectTriggers>
+                            <!--reactivate hitbox-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <addCollisionGroups targetOf="units" targets="units"/>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

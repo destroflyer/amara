@@ -1,0 +1,84 @@
+<template>
+    <value name="duration">5</value>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <spellVisualisation>elven_archer_attack_buff</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--add spelleffect and buff-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addAutoAttackSpellEffects>
+                            <entity id="newSpellEffect">
+                                <castedEffectTriggers>
+                                    <!--target effect-->
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <magicDamage>50 + (0.1 + source.abilityPower)</magicDamage>
+                                                <addBuff duration="2">
+                                                    <entity>
+                                                        <name>TODO</name>
+                                                        <description>TODO</description>
+                                                        <buffIcon>spells/elven_archer_attack_buff</buffIcon>
+                                                        <buffVisualisation>frost</buffVisualisation>
+                                                        <continuousAttributes>
+                                                            <entity>
+                                                                <bonusPercentageWalkSpeed>-0.3</bonusPercentageWalkSpeed>
+                                                            </entity>
+                                                        </continuousAttributes>
+                                                    </entity>
+                                                </addBuff>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </castedEffectTriggers>
+                            </entity>
+                        </addAutoAttackSpellEffects>
+                        <addBuff duration="[duration]">
+                            <entity id="buff">
+                                <name>TODO</name>
+                                <description>TODO</description>
+                                <buffIcon>spells/elven_archer_attack_buff</buffIcon>
+                                <onBuffRemoveEffectTriggers>
+                                    <entity>
+                                        <casterTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <removeSpellEffects>#newSpellEffect</removeSpellEffects>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffRemoveEffectTriggers>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

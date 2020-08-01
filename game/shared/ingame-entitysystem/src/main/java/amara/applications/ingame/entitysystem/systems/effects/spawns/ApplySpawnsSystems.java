@@ -2,7 +2,6 @@ package amara.applications.ingame.entitysystem.systems.effects.spawns;
 
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
-import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.spawns.*;
@@ -21,7 +20,6 @@ public class ApplySpawnsSystems implements EntitySystem {
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, SpawnComponent.class)))
         {
             int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            boolean cleanupTemporaryTarget = true;
             PositionComponent targetPositionComponent = null;
             DirectionComponent targetDirectionComponent = null;
             if (targetEntity != -1) {
@@ -93,7 +91,6 @@ public class ApplySpawnsSystems implements EntitySystem {
                     if(moveToTarget){
                         entityWorld.setComponent(movementEntity, new MovementTargetComponent(targetEntity));
                         entityWorld.setComponent(movementEntity, new MovementTurnInDirectionComponent());
-                        cleanupTemporaryTarget = false;
                     }
                     else if(direction != null){
                         Vector2f movementDirection = direction.clone();
@@ -116,7 +113,6 @@ public class ApplySpawnsSystems implements EntitySystem {
                 }
                 if(spawnInformation.hasComponent(SpawnAttackMoveComponent.class)){
                     spawnedObject.setComponent(new AttackMoveComponent(targetEntity));
-                    cleanupTemporaryTarget = false;
                 }
                 if(spawnInformation.hasComponent(SpawnApplyAsRespawnTransformComponent.class)){
                     spawnedObject.setComponent(new RespawnPositionComponent(position));
@@ -134,9 +130,6 @@ public class ApplySpawnsSystems implements EntitySystem {
                         ApplyAddBuffsSystem.addBuff(entityWorld, spawnedObject.getId(), buffEntity);
                     }
                 }
-            }
-            if(cleanupTemporaryTarget && entityWorld.hasComponent(targetEntity, TemporaryComponent.class)){
-                entityWorld.removeEntity(targetEntity);
             }
         }
     }

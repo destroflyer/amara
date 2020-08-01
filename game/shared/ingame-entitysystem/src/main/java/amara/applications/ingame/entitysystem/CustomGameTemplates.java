@@ -379,6 +379,34 @@ public class CustomGameTemplates{
                 }
                 ConvexShape convexShape = new SimpleConvexPolygon(outline);
                 entityWrapper.setComponent(new HitboxComponent(convexShape));
+            } else if (templateName.equals("spells/elven_archer_ult/base")) {
+                int waves = 15;
+                int arrowsPerWave = 5;
+                int[] newInstantEffectTriggers = new int[waves * arrowsPerWave];
+                int i = 0;
+                for (int wave = 0; wave < waves; wave++) {
+                    for (int arrowInWave = 0; arrowInWave < arrowsPerWave; arrowInWave++) {
+                        int effectTrigger = entityWorld.createEntity();
+                        entityWorld.setComponent(effectTrigger, new TargetTargetComponent());
+                        int effect = entityWorld.createEntity();
+                        int spawnInformation = entityWorld.createEntity();
+                        entityWorld.setComponent(spawnInformation, new SpawnTemplateComponent("spells/elven_archer_ult/projectile"));
+                        entityWorld.setComponent(spawnInformation, new SpawnMovementSpeedComponent(20));
+                        // -22.5 to +22.5
+                        entityWorld.setComponent(spawnInformation, new SpawnRelativeDirectionComponent((-0.5f + (((float) arrowInWave) / (arrowsPerWave - 1))) * 45));
+                        entityWorld.setComponent(effect, new SpawnComponent(spawnInformation));
+                        entityWorld.setComponent(effectTrigger, new TriggeredEffectComponent(effect));
+                        entityWorld.setComponent(effectTrigger, new TriggerSourceComponent(entity));
+                        entityWorld.setComponent(effectTrigger, new TriggerDelayComponent(wave * 0.2f));
+                        newInstantEffectTriggers[i] = effectTrigger;
+                        i++;
+                    }
+                }
+                int[] oldInstantEffectTriggers = entityWrapper.getComponent(InstantEffectTriggersComponent.class).getEffectTriggerEntities();
+                int[] effectTriggers = new int[oldInstantEffectTriggers.length + newInstantEffectTriggers.length];
+                System.arraycopy(oldInstantEffectTriggers, 0, effectTriggers, 0, oldInstantEffectTriggers.length);
+                System.arraycopy(newInstantEffectTriggers, 0, effectTriggers, oldInstantEffectTriggers.length, newInstantEffectTriggers.length);
+                entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTriggers));
             }
         });
     }

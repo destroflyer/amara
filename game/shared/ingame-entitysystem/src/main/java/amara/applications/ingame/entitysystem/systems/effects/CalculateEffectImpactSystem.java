@@ -24,12 +24,12 @@ import amara.applications.ingame.entitysystem.components.effects.spells.*;
 import amara.applications.ingame.entitysystem.components.effects.units.*;
 import amara.applications.ingame.entitysystem.components.effects.vision.*;
 import amara.applications.ingame.entitysystem.components.effects.visuals.*;
-import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.specials.erika.*;
 import amara.applications.ingame.entitysystem.components.spells.placeholders.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
+import amara.applications.ingame.entitysystem.systems.cleanup.CleanupTemporaryTargetsUtil;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 import amara.libraries.expressions.*;
@@ -54,7 +54,6 @@ public class CalculateEffectImpactSystem implements EntitySystem{
             EffectSourceComponent effectSourceComponent = effectCast.getComponent(EffectSourceComponent.class);
             EffectSourceSpellComponent effectSourceSpellComponent = effectCast.getComponent(EffectSourceSpellComponent.class);
             EffectCastTargetComponent effectCastTargetComponent = effectCast.getComponent(EffectCastTargetComponent.class);
-            boolean removeTemporaryEffectCastTargets = false;
             expressionSpace.clearValues();
             int effectSourceEntity = ((effectSourceComponent != null) ? effectSourceComponent.getSourceEntity() : -1);
             if(effectSourceEntity != -1){
@@ -165,7 +164,6 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                             Vector2f direction = entityWorld.getComponent(effectCastTargetComponent.getTargetEntity(), DirectionComponent.class).getVector().clone();
                             direction.rotateAroundOrigin(targetedMovementDirectionComponent.getAngle_Radian(), true);
                             entityWorld.setComponent(movementEntity, new MovementDirectionComponent(direction));
-                            removeTemporaryEffectCastTargets = true;
                         }
                         else if(component instanceof TowardsSourceMovementDirectionComponent){
                             TowardsSourceMovementDirectionComponent towardsSourceMovementDirectionComponent = (TowardsSourceMovementDirectionComponent) component;
@@ -285,10 +283,8 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                 effectImpact.setComponent(new ApplyEffectImpactComponent(targetEntity));
             }
             entityWorld.removeEntity(effectCast.getId());
-            if(removeTemporaryEffectCastTargets){
-                if(entityWorld.hasComponent(effectCastTargetComponent.getTargetEntity(), TemporaryComponent.class)){
-                    entityWorld.removeEntity(effectCastTargetComponent.getTargetEntity());
-                }
+            if (effectCastTargetComponent != null) {
+                CleanupTemporaryTargetsUtil.tryRemoveTemporaryTargetEntity(entityWorld, effectCastTargetComponent.getTargetEntity());
             }
             appliedEffectEntities.add(effect.getId());
         }
