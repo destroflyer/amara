@@ -70,9 +70,9 @@
         <autoAttack>
             <entity template="spells/ranged_autoattack,Models/aland_sword/skin_autoattack.xml"/>
         </autoAttack>
-        <!--<passives>
+        <passives>
             <entity template="spells/aland_passive/passive"/>
-        </passives>-->
+        </passives>
         <learnableSpells>
             <entity template="spells/aland_stealth/base"/>
             <entity template="spells/aland_knockback/base"/>

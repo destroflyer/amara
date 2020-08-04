@@ -41,5 +41,9 @@
             <groupId>org.jmonkeyengine</groupId>
             <artifactId>jme3-jogg</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.destroflyer.jme3-effekseer</groupId>
+            <artifactId>jme3-effekseer</artifactId>
+        </dependency>
     </dependencies>
 </project>

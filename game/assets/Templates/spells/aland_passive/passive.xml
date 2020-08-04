@@ -1,0 +1,9 @@
+<template>
+    <entity id="passive">
+        <name>TODO</name>
+        <description>TODO</description>
+        <!--<spellVisualisation>aland_passive</spellVisualisation>-->
+        <passiveAddedEffectTriggers/>
+        <passiveRemovedEffectTriggers/>
+    </entity>
+</template>

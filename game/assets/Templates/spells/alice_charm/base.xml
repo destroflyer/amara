@@ -21,6 +21,7 @@
                                 <spawnTemplate>./projectile</spawnTemplate>
                                 <spawnMoveToTarget/>
                                 <spawnMovementSpeed>20</spawnMovementSpeed>
+                                <spawnBuffs>[parameter0]</spawnBuffs>
                             </entity>
                         </spawn>
                     </entity>

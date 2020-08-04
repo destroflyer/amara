@@ -1,11 +1,11 @@
 <template>
     <entity id="object">
-        <model>Models/ganfaul_binding/skin.xml</model>
+        <model>Models/lightning_strike/skin.xml</model>
         <hitbox>
             <circle radius="2"/>
         </hitbox>
-        <collisionGroup targetOf="spells" targets="spell_targets"/>
-        <lifetime>1.2</lifetime>
+        <collisionGroup targetOf="spells" targets="spells|spell_targets"/>
+        <lifetime>1.25</lifetime>
     </entity>
     <!--activate hitbox-->
     <entity>
@@ -17,13 +17,30 @@
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
-        <triggerDelay>1</triggerDelay>
+        <triggerDelay>0.5</triggerDelay>
         <triggerOnce/>
+    </entity>
+    <!--pop bubbles-->
+    <entity>
+        <collisionTrigger>
+            <entity>
+                <acceptUntargetable/>
+                <acceptAllies/>
+                <requireBuffs>[parameter0]</requireBuffs>
+            </entity>
+        </collisionTrigger>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
     </entity>
     <!--trigger spell effects-->
     <entity>
         <collisionTrigger>
-            <entity id="collisionRules">
+            <entity id="enemyCollisionRules">
                 <acceptEnemies/>
             </entity>
         </collisionTrigger>
@@ -35,13 +52,13 @@
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
     </entity>
-    <!--remove object-->
+    <!--deactivate hitbox-->
     <entity>
-        <collisionTrigger>#collisionRules</collisionTrigger>
+        <collisionTrigger>#enemyCollisionRules</collisionTrigger>
         <sourceTarget/>
         <triggeredEffect>
             <entity>
-                <removeEntity/>
+                <deactivateHitbox/>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>

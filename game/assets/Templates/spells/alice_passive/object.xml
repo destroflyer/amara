@@ -1,5 +1,6 @@
 <template>
     <entity id="object">
+        <model>Models/bubble_glitter/skin.xml</model>
         <hitbox>
             <circle radius="3"/>
         </hitbox>

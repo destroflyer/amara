@@ -70,16 +70,21 @@
         <autoAttack>
             <entity template="spells/ranged_autoattack"/>
         </autoAttack>
-        <!--<passives>
+        <passives>
             <entity template="spells/alice_passive/passive"/>
-        </passives>-->
+        </passives>
         <learnableSpells>
-            <entity template="spells/alice_bubble/base"/>
-            <entity template="spells/alice_thunder/base"/>
-            <entity template="spells/alice_charm/base"/>
+            <entity template="spells/alice_bubble/base(#thunderPoppableBuff)"/>
+            <entity template="spells/alice_thunder/base(#thunderPoppableBuff)"/>
+            <entity template="spells/alice_charm/base(#thunderPoppableBuff)"/>
             <entity template="spells/alice_ult/base"/>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
+    </entity>
+    <!--thunder poppable buff-->
+    <entity id="thunderPoppableBuff">
+        <name>TODO</name>
+        <description>TODO</description>
     </entity>
 </template>

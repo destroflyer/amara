@@ -1,4 +1,5 @@
 <template>
+    <value name="duration">1.5</value>
     <entity id="spell">
         <name>TODO</name>
         <description>TODO</description>
@@ -16,7 +17,7 @@
                     <entity>
                         <spawn>
                             <entity>
-                                <spawnTemplate>./object</spawnTemplate>
+                                <spawnTemplate>./object([parameter0])</spawnTemplate>
                             </entity>
                         </spawn>
                     </entity>
@@ -26,7 +27,7 @@
         </instantEffectTriggers>
         <castType>positional_skillshot</castType>
         <castCancelAction/>
-        <castDuration>0.3</castDuration>
+        <castDuration>0.25</castDuration>
         <castTurnToTarget/>
         <!--<castAnimation>
             <entity>
@@ -46,7 +47,19 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <magicDamage>150 + (0.6 * source.abilityPower)</magicDamage>
+                        <magicDamage>150 + (0.5 * source.abilityPower)</magicDamage>
+                        <addBuff duration="[duration]">
+                            <entity>
+                                <name>TODO</name>
+                                <description>This unit has decreased walk speed.</description>
+                                <!--<buffIcon>spells/alice_thunder</buffIcon>-->
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageWalkSpeed>-0.3</bonusPercentageWalkSpeed>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
