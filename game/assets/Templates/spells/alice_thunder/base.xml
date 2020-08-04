@@ -3,7 +3,7 @@
     <entity id="spell">
         <name>TODO</name>
         <description>TODO</description>
-        <!--<spellVisualisation>alice_thunder</spellVisualisation>-->
+        <spellVisualisation>alice_thunder</spellVisualisation>
         <spellIndicator>
             <entity>
                 <circularIndicator radius="20"/>
@@ -27,14 +27,14 @@
         </instantEffectTriggers>
         <castType>positional_skillshot</castType>
         <castCancelAction/>
-        <castDuration>0.25</castDuration>
+        <castDuration>0.5</castDuration>
         <castTurnToTarget/>
-        <!--<castAnimation>
+        <castAnimation>
             <entity>
-                <name>shoot_arrow</name>
-                <loopDuration>1</loopDuration>
+                <name>spell8</name>
+                <loopDuration>0.836</loopDuration>
             </entity>
-        </castAnimation>-->
+        </castAnimation>
         <range type="center_to_center" distance="20"/>
         <baseCooldown>1</baseCooldown>
     </entity>
@@ -52,7 +52,7 @@
                             <entity>
                                 <name>TODO</name>
                                 <description>This unit has decreased walk speed.</description>
-                                <!--<buffIcon>spells/alice_thunder</buffIcon>-->
+                                <buffIcon>spells/alice_thunder</buffIcon>
                                 <continuousAttributes>
                                     <entity>
                                         <bonusPercentageWalkSpeed>-0.3</bonusPercentageWalkSpeed>

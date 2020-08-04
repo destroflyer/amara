@@ -1,10 +1,10 @@
 <template>
-    <value name="delay">0.5</value>
+    <value name="delay">1</value>
     <value name="duration">3</value>
     <entity id="spell">
         <name>TODO</name>
         <description>TODO</description>
-        <!--<spellVisualisation>alice_ult</spellVisualisation>-->
+        <spellVisualisation>alice_ult</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
@@ -19,6 +19,14 @@
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
+        <castCancelAction/>
+        <castDuration>[delay]</castDuration>
+        <castAnimation>
+            <entity>
+                <name>spell1</name>
+                <loopDuration>2.833</loopDuration>
+            </entity>
+        </castAnimation>
         <baseCooldown>1</baseCooldown>
     </entity>
     <!--spell effect-->
@@ -41,7 +49,7 @@
                             <entity>
                                 <name>TODO</name>
                                 <description>TODO</description>
-                                <!--<buffIcon>spells/alice_ult</buffIcon>-->
+                                <buffIcon>spells/alice_ult</buffIcon>
                                 <buffVisualisation>bubble_blue</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>

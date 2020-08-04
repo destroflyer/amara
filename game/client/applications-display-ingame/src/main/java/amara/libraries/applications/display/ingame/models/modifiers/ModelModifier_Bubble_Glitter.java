@@ -35,7 +35,7 @@ public class ModelModifier_Bubble_Glitter extends ModelModifier {
         // Glitter
         Node particleNodeGlitter = new Node();
         particleNodeGlitter.setLocalTranslation(0, 2, 0);
-        particleNodeGlitter.setLocalScale(0.5f, 0.1f, 0.5f);
+        particleNodeGlitter.setLocalScale(0.5f, 0.05f, 0.5f);
         particleNodeGlitter.setShadowMode(RenderQueue.ShadowMode.Off);
         particleNodeGlitter.addControl(new AbstractControl() {
 

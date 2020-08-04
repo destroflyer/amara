@@ -2,7 +2,7 @@
     <entity id="passive">
         <name>TODO</name>
         <description>TODO</description>
-        <!--<spellVisualisation>alice_passive</spellVisualisation>-->
+        <spellVisualisation>alice_passive</spellVisualisation>
         <passiveAddedEffectTriggers/>
         <passiveRemovedEffectTriggers/>
     </entity>
