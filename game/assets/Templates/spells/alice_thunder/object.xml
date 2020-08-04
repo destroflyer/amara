@@ -1,0 +1,49 @@
+<template>
+    <entity id="object">
+        <model>Models/ganfaul_binding/skin.xml</model>
+        <hitbox>
+            <circle radius="2"/>
+        </hitbox>
+        <collisionGroup targetOf="spells" targets="spell_targets"/>
+        <lifetime>1.2</lifetime>
+    </entity>
+    <!--activate hitbox-->
+    <entity>
+        <instantTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <activateHitbox/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+        <triggerDelay>1</triggerDelay>
+        <triggerOnce/>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <collisionTrigger>
+            <entity id="collisionRules">
+                <acceptEnemies/>
+            </entity>
+        </collisionTrigger>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+    </entity>
+    <!--remove object-->
+    <entity>
+        <collisionTrigger>#collisionRules</collisionTrigger>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+    </entity>
+</template>

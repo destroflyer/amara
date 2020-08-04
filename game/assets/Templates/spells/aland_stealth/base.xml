@@ -1,7 +1,9 @@
 <template>
+    <value name="duration">3</value>
     <entity id="spell">
-        <name>Intervention</name>
-        <spellVisualisation>intervention</spellVisualisation>
+        <name>TODO</name>
+        <description>TODO</description>
+        <!--<spellVisualisation>aland_stealth</spellVisualisation>-->
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
@@ -15,30 +17,34 @@
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
-        <baseCooldown>90</baseCooldown>
+        <baseCooldown>1</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>
         <castedSpell>#spell</castedSpell>
         <castedEffectTriggers>
-            <!--remove vulnerability-->
+            <!--target effect-->
             <entity>
-                <casterTarget/>
+                <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <removeVulnerability/>
-                        <addBuff duration="3">
+                        <addStealth/>
+                        <addBuff duration="[duration]">
                             <entity>
-                                <name>Intervented</name>
-                                <description>This unit is invulnerable.</description>
-                                <buffIcon>spells/intervention</buffIcon>
-                                <buffVisualisation>intervention</buffVisualisation>
+                                <name>TODO</name>
+                                <description>TODO</description>
+                                <!--<buffIcon>spells/aland_stealth</buffIcon>-->
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageWalkSpeed>0.3</bonusPercentageWalkSpeed>
+                                    </entity>
+                                </continuousAttributes>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
-                                        <customTarget>[parameter0]</customTarget>
+                                        <casterTarget/>
                                         <triggeredEffect>
                                             <entity>
-                                                <addVulnerability/>
+                                                <removeStealth/>
                                             </entity>
                                         </triggeredEffect>
                                         <triggerSource>#spell</triggerSource>

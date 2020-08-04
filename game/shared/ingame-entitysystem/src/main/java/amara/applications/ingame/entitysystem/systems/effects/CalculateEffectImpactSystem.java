@@ -173,6 +173,10 @@ public class CalculateEffectImpactSystem implements EntitySystem{
                             direction.rotateAroundOrigin(towardsSourceMovementDirectionComponent.getAngle_Radian(), true);
                             entityWorld.setComponent(movementEntity, new MovementDirectionComponent(direction));
                         }
+                        else if(component instanceof SourceMovementTargetComponent){
+                            entityWorld.setComponent(movementEntity, new MovementTargetComponent(effectSourceEntity));
+                            entityWorld.setComponent(movementEntity, new MovementTurnInDirectionComponent());
+                        }
                         else if(component instanceof TargetedMovementTargetComponent){
                             entityWorld.setComponent(movementEntity, new MovementTargetComponent(effectCastTargetComponent.getTargetEntity()));
                             entityWorld.setComponent(movementEntity, new MovementTurnInDirectionComponent());

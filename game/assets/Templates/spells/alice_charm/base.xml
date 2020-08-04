@@ -1,0 +1,85 @@
+<template>
+    <value name="delay">0.18</value>
+    <value name="duration">1.5</value>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <!--<spellVisualisation>alice_charm</spellVisualisation>-->
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="2" height="19.5"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./projectile</spawnTemplate>
+                                <spawnMoveToTarget/>
+                                <spawnMovementSpeed>20</spawnMovementSpeed>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>positional_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <!--<castAnimation>
+            <entity>
+                <name>spell5</name>
+                <loopDuration>1</loopDuration>
+            </entity>
+        </castAnimation>-->
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>80 + (0.3 * source.abilityPower)</magicDamage>
+                        <move>
+                            <entity>
+                                <displacement/>
+                                <sourceMovementTarget/>
+                                <movementSpeed>1.5</movementSpeed>
+                            </entity>
+                        </move>
+                        <addBuff duration="[duration]">
+                            <entity>
+                                <name>TODO</name>
+                                <description>TODO</description>
+                                <!--<buffIcon>spells/alice_bubble</buffIcon>-->
+                                <onBuffRemoveEffectTriggers>
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>p
+                                                <stop/>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffRemoveEffectTriggers>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

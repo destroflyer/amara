@@ -8,7 +8,7 @@ import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.control.AbstractControl;
 
-public class ModelModifier_AlandSowrd_E extends ModelModifier {
+public class ModelModifier_AlandSword_Slow extends ModelModifier {
 
     @Override
     public void modify(RegisteredModel registeredModel){

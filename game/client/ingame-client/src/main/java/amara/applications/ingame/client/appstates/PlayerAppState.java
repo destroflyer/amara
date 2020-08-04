@@ -44,7 +44,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
     private FogOfWarSystem fogOfWarSystem;
     private int cursorHoveredEntity = -1;
     private int inspectedEntity = -1;
-    private CollisionResults[] tmpEntitiesColisionResults = new CollisionResults[8];
+    private CollisionResults[] tmpEntitiesCollisionResults = new CollisionResults[8];
     private HashMap<Integer, Integer> tmpHoveredEntitiesCount = new HashMap<>();
 
     @Override
@@ -135,12 +135,12 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
                 for (int y = -1; y < 2; y++){
                     if ((x != 0) || (y != 0)) {
                         alternativePosition.set(cursorPosition.getX() + (x * alternativeRange), cursorPosition.getY() + (y * alternativeRange));
-                        tmpEntitiesColisionResults[i] = mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getEntitiesNode(), alternativePosition);
+                        tmpEntitiesCollisionResults[i] = mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getEntitiesNode(), alternativePosition);
                         i++;
                     }
                 }
             }
-            cursorHoveredEntity = getHoveredCollisionResults(tmpEntitiesColisionResults);
+            cursorHoveredEntity = getHoveredCollisionResults(tmpEntitiesCollisionResults);
         }
         if (cursorHoveredEntity != tmpCursorHoveredEntity) {
             if (tmpCursorHoveredEntity != -1) {
@@ -161,7 +161,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         for (CollisionResults collisionResults : entitiesColisionResults) {
             for (CollisionResult collision : collisionResults) {
                 int entity = localEntitySystemAppState.getEntity(collision.getGeometry());
-                if(canEntityBeHovered(localEntitySystemAppState.getEntityWorld(), entity)){
+                if(isInspectable(localEntitySystemAppState.getEntityWorld(), entity)){
                     /*if((entity != -1) && (collision.getDistance() < minimumDistance)){
                         resultEntity = entity;
                         minimumDistance = collision.getDistance();
@@ -183,10 +183,6 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
             }
         }
         return resultEntity;
-    }
-
-    private boolean canEntityBeHovered(EntityWorld entityWorld, int entity){
-        return ((entityWorld.getComponent(entity, IsHiddenAreaComponent.class) == null) && ownTeamVisionSystem.isVisible(entityWorld, entity));
     }
 
     private void updateInspectedEntity() {

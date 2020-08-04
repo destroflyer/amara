@@ -10,6 +10,7 @@ import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.systems.conditions.ConditionUtil;
 import amara.applications.ingame.entitysystem.systems.spells.casting.SetCooldownOnCastingSystem;
+import amara.applications.ingame.entitysystem.systems.targets.TargetUtil;
 import amara.applications.ingame.shared.maps.Map;
 import amara.core.Util;
 import amara.libraries.entitysystem.*;
@@ -109,13 +110,23 @@ public class EffectTriggerUtil {
         tmpTargetEntities.clear();
         TriggerSourceComponent triggerSourceComponent = entityWorld.getComponent(entity, TriggerSourceComponent.class);
         if (triggerSourceComponent != null) {
+            int triggerSourceEntity = triggerSourceComponent.getSourceEntity();
             if (entityWorld.hasComponent(entity, SourceTargetComponent.class)){
-                tmpTargetEntities.add(triggerSourceComponent.getSourceEntity());
+                tmpTargetEntities.add(triggerSourceEntity);
             }
-            if (entityWorld.hasComponent(entity, CasterTargetComponent.class)) {
-                EffectSourceComponent effectSourceComponent = entityWorld.getComponent(triggerSourceComponent.getSourceEntity(), EffectSourceComponent.class);
-                if (effectSourceComponent != null) {
-                    tmpTargetEntities.add(effectSourceComponent.getSourceEntity());
+            EffectSourceComponent effectSourceComponent = entityWorld.getComponent(triggerSourceEntity, EffectSourceComponent.class);
+            if (effectSourceComponent != null) {
+                int effectSourceEntity = effectSourceComponent.getSourceEntity();
+                if (entityWorld.hasComponent(entity, CasterTargetComponent.class)) {
+                    tmpTargetEntities.add(effectSourceEntity);
+                }
+                RuleTargetComponent ruleTargetComponent = entityWorld.getComponent(entity, RuleTargetComponent.class);
+                if (ruleTargetComponent != null) {
+                    for (int otherEntity : entityWorld.getEntitiesWithAll()) {
+                        if (TargetUtil.isValidTarget(entityWorld, effectSourceEntity, otherEntity, ruleTargetComponent.getTargetRulesEntity())) {
+                            tmpTargetEntities.add(otherEntity);
+                        }
+                    }
                 }
             }
         }

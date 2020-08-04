@@ -1,0 +1,32 @@
+<template>
+    <entity id="projectile">
+        <isProjectile/>
+        <model>Models/aland_sword/skin_slow.xml</model>
+        <hitbox>
+            <point/>
+        </hitbox>
+        <hitboxActive/>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <targetReachedTrigger/>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--remove projectile-->
+    <entity>
+        <targetReachedTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+</template>

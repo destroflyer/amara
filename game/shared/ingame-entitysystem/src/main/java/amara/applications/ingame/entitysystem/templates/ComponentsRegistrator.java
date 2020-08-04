@@ -3360,6 +3360,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent(angle_Degrees);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementTargetComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementTargetComponent>("sourceMovementTarget"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementTargetComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementTargetComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent>("targetedMovementDirection"){
 
@@ -4169,6 +4177,20 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent(targetEntities);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.RuleTargetComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.RuleTargetComponent.class.getDeclaredField("targetRulesEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.RuleTargetComponent>("ruleTarget"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.RuleTargetComponent construct(EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.RuleTargetComponent(targetRulesEntity);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent>("sourceTarget"){
 
@@ -4350,6 +4372,14 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ObjectiveFinishedTriggerComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ObjectiveFinishedTriggerComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RemoveTriggerComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RemoveTriggerComponent>("removeTrigger"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RemoveTriggerComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RemoveTriggerComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent.class);

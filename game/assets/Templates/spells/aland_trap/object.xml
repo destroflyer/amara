@@ -1,0 +1,38 @@
+<template>
+    <entity id="object">
+        <model>Models/3dsa_fantasy_forest_rock_1/skin.xml</model>
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <collisionGroup targetOf="spells" targets="spell_targets"/>
+        <hitboxActive/>
+        <isStealthed/>
+        <lifetime>180</lifetime>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <collisionTrigger>
+            <entity id="collisionRules">
+                <acceptEnemies/>
+            </entity>
+        </collisionTrigger>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <triggerCastedSpellEffects/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+    </entity>
+    <!--remove object-->
+    <entity>
+        <collisionTrigger>#collisionRules</collisionTrigger>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+    </entity>
+</template>

@@ -34,6 +34,9 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
     public ApplyEffectsLoopSystem(Map map, CastSpellQueueSystem castSpellQueueSystem) {
         calculateEffectImpactSystem = new CalculateEffectImpactSystem();
         add(calculateEffectImpactSystem);
+        // Apply adding and removing effect triggers first, so they are directly considered at the other effect impacts
+        add(new ApplyAddEffectTriggersSystem());
+        add(new ApplyRemoveEffectTriggersSystem());
         add(new ApplyPlayCinematicSystem());
         add(new ApplyDrawTeamAggroSystem());
         add(new ApplySetAggroTargetSystem());
@@ -100,10 +103,8 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyPlayAnimationsSystem());
         add(new ApplyStopAnimationsSystem());
         add(new ApplyAddComponentsSystem());
-        add(new ApplyAddEffectTriggersSystem());
         add(new ApplyFinishObjectivesSystem());
         add(new ApplyRemoveComponentsSystem());
-        add(new ApplyRemoveEffectTriggersSystem());
         add(new ApplyRemoveEntitySystem());
         add(new ApplyTriggerErikaPassivesSystem());
         add(new SetInCombatSystem());

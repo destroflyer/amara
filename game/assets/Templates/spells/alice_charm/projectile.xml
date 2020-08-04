@@ -1,0 +1,58 @@
+<template>
+    <entity id="projectile">
+        <isProjectile/>
+        <model>Models/bubble/skin_pink.xml</model>
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <collisionGroup targetOf="spells" targets="spell_targets"/>
+        <hitboxActive/>
+        <removeOnMapLeave/>
+        <lifetime>7</lifetime>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <collisionTrigger>
+            <entity id="collisionRules">
+                <acceptEnemies/>
+            </entity>
+        </collisionTrigger>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <spawn>
+                    <entity>
+                        <spawnTemplate>./object</spawnTemplate>
+                    </entity>
+                </spawn>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--remove projectile-->
+    <entity>
+        <collisionTrigger>#collisionRules</collisionTrigger>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--trigger passive on remove-->
+    <entity>
+        <removeTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <spawn>
+                    <entity>
+                        <spawnTemplate>spells/alice_passive/object</spawnTemplate>
+                    </entity>
+                </spawn>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+</template>

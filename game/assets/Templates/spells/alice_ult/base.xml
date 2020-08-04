@@ -1,7 +1,10 @@
 <template>
+    <value name="delay">0.5</value>
+    <value name="duration">3</value>
     <entity id="spell">
-        <name>Intervention</name>
-        <spellVisualisation>intervention</spellVisualisation>
+        <name>TODO</name>
+        <description>TODO</description>
+        <!--<spellVisualisation>alice_ult</spellVisualisation>-->
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
@@ -12,33 +15,46 @@
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
-        <baseCooldown>90</baseCooldown>
+        <baseCooldown>1</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>
         <castedSpell>#spell</castedSpell>
         <castedEffectTriggers>
-            <!--remove vulnerability-->
+            <!--remove vulnerability and targetability-->
             <entity>
-                <casterTarget/>
+                <ruleTarget>
+                    <entity>
+                        <requireCharacter/>
+                        <acceptAllies/>
+                    </entity>
+                </ruleTarget>
                 <triggeredEffect>
                     <entity>
                         <removeVulnerability/>
-                        <addBuff duration="3">
+                        <removeTargetability/>
+                        <addBuff duration="[duration]">
                             <entity>
-                                <name>Intervented</name>
-                                <description>This unit is invulnerable.</description>
-                                <buffIcon>spells/intervention</buffIcon>
-                                <buffVisualisation>intervention</buffVisualisation>
+                                <name>TODO</name>
+                                <description>TODO</description>
+                                <!--<buffIcon>spells/alice_ult</buffIcon>-->
+                                <buffVisualisation>bubble_blue</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
-                                        <customTarget>[parameter0]</customTarget>
+                                        <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <addVulnerability/>
+                                                <addTargetability/>
+                                                <spawn>
+                                                    <entity>
+                                                        <spawnTemplate>spells/alice_passive/object</spawnTemplate>
+                                                    </entity>
+                                                </spawn>
                                             </entity>
                                         </triggeredEffect>
                                         <triggerSource>#spell</triggerSource>

@@ -1,0 +1,37 @@
+<template>
+    <entity id="object">
+        <hitbox>
+            <circle radius="3"/>
+        </hitbox>
+        <collisionGroup targetOf="spells" targets="spell_targets"/>
+        <hitboxActive/>
+        <sightRange>10</sightRange>
+        <lifetime>5</lifetime>
+    </entity>
+    <!--trigger spell effects-->
+    <entity>
+        <collisionTrigger>
+            <entity id="collisionRules">
+                <acceptEnemies/>
+            </entity>
+        </collisionTrigger>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <magicDamage>100 + (0.3 * source.abilityPower)</magicDamage>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+    </entity>
+    <!--deactivate hitbox-->
+    <entity>
+        <collisionTrigger>#collisionRules</collisionTrigger>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <deactivateHitbox/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+    </entity>
+</template>

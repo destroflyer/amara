@@ -1,33 +1,25 @@
 MaterialDef BubbleMatDef {
-
     MaterialParameters {
         Texture2D ColorMap
         Float Shininess : 1.0
         Color SpecularColor
         Boolean UseSpecularNormal : false
+        Float Time : 0.0
     }
-
     Technique {
         VertexShader GLSL100:   Shaders/bubble/shaders/bubble.vert
         FragmentShader GLSL100: Shaders/bubble/shaders/bubble.frag
-
         WorldParameters {
             WorldViewProjectionMatrix
-            Time
             CameraPosition
             WorldMatrix
             NormalMatrix
         }
-
         RenderState {
-                Blend Alpha
+            Blend Alpha
         }
-
         Defines {
             SPECULARCOLOR : SpecularColor
         }
     }
-
-    
-
 }

@@ -1,0 +1,58 @@
+<template>
+    <value name="duration">0.4</value>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <!--<spellVisualisation>aland_knockback</spellVisualisation>-->
+        <instantEffectTriggers>
+            <!--spawn object, add visual buff-->
+            <entity>
+                <casterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castDuration>[duration]</castDuration>
+        <castCancelAction/>
+        <castAnimation>
+            <entity>
+                <name>smash</name>
+                <loopDuration>[duration]</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>70 + (0.3 * source.abilityPower)</magicDamage>
+                        <move>
+                            <entity>
+                                <displacement/>
+                                <towardsSourceMovementDirection>180</towardsSourceMovementDirection>
+                                <movementSpeed>30</movementSpeed>
+                                <distanceLimit>5</distanceLimit>
+                            </entity>
+                        </move>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

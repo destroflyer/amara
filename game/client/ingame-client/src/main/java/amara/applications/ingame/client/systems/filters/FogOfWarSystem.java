@@ -68,13 +68,13 @@ public class FogOfWarSystem implements EntitySystem {
         }
     }
 
-    private void updateFogOfWar(EntityWorld entityWorld){
-        if(!isUpdateNeeded){
-            ComponentMapObserver observer = entityWorld.requestObserver(this, IsHiddenAreaComponent.class, PositionComponent.class);
-            //Hidden areas
+    private void updateFogOfWar(EntityWorld entityWorld) {
+        if (!isUpdateNeeded) {
+            ComponentMapObserver observer = entityWorld.requestObserver(this, IsHiddenAreaComponent.class, PositionComponent.class, SightRangeComponent.class, TeamComponent.class);
+            // Hidden areas
             for (int entity : observer.getNew().getEntitiesWithAny(IsHiddenAreaComponent.class)) {
                 HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
-                if(hitboxComponent != null){
+                if (hitboxComponent != null) {
                     SimpleConvexPolygon simpleConvexPolygon = (SimpleConvexPolygon) hitboxComponent.getShape();
                     ConvexedOutline convexedOutline = new ConvexedOutline(simpleConvexPolygon);
                     teamVision.setObstacle(entity, new VisionObstacle(convexedOutline, false));
@@ -85,12 +85,15 @@ public class FogOfWarSystem implements EntitySystem {
                 teamVision.removeObstacle(entity);
                 isUpdateNeeded = true;
             }
-            //Moved units
-            for (int entity : observer.getNew().getEntitiesWithAny(PositionComponent.class)) {
-                checkChangedPosition(entityWorld, entity);
+            // Units
+            for (int entity : observer.getNew().getEntitiesWithAny(PositionComponent.class, SightRangeComponent.class, TeamComponent.class)) {
+                requireUpdateIfRelevant(entityWorld, entity);
             }
-            for (int entity : observer.getChanged().getEntitiesWithAny(PositionComponent.class)) {
-                checkChangedPosition(entityWorld, entity);
+            for (int entity : observer.getChanged().getEntitiesWithAny(PositionComponent.class, SightRangeComponent.class, TeamComponent.class)) {
+                requireUpdateIfRelevant(entityWorld, entity);
+            }
+            for (int entity : observer.getRemoved().getEntitiesWithAny(PositionComponent.class, SightRangeComponent.class, TeamComponent.class)) {
+                requireUpdateIfIsOrWasRelevant(entityWorld, observer, entity);
             }
         }
         if (isUpdateNeeded) {
@@ -100,9 +103,23 @@ public class FogOfWarSystem implements EntitySystem {
         timeSinceLastUpdate = 0;
     }
 
-    private void checkChangedPosition(EntityWorld entityWorld, int entity) {
-        if (entityWorld.hasComponent(entity, SightRangeComponent.class) && isEntitySightIncluded(entityWorld, entity)) {
-            isUpdateNeeded = true;
+    private void requireUpdateIfRelevant(EntityWorld entityWorld, int entity) {
+        if (entityWorld.hasComponent(entity, SightRangeComponent.class)) {
+            if (isEntitySightIncluded(entityWorld, entity)) {
+                isUpdateNeeded = true;
+            }
+        }
+    }
+
+    private void requireUpdateIfIsOrWasRelevant(EntityWorld entityWorld, ComponentMapObserver observer, int entity) {
+        if (entityWorld.hasComponent(entity, SightRangeComponent.class) || observer.getRemoved().hasComponent(entity, SightRangeComponent.class)) {
+            TeamComponent teamComponent = entityWorld.getComponent(entity, TeamComponent.class);
+            if (teamComponent == null) {
+                teamComponent = observer.getRemoved().getComponent(entity, TeamComponent.class);
+            }
+            if (isEntitySightIncluded(teamComponent)) {
+                isUpdateNeeded = true;
+            }
         }
     }
 
@@ -130,7 +147,12 @@ public class FogOfWarSystem implements EntitySystem {
     }
 
     private boolean isEntitySightIncluded(EntityWorld entityWorld, int entity) {
-        return (displayAllSight || playerTeamSystem.isAllied(entityWorld, entity));
+        TeamComponent teamComponent = entityWorld.getComponent(entity, TeamComponent.class);
+        return isEntitySightIncluded(teamComponent);
+    }
+
+    private boolean isEntitySightIncluded(TeamComponent teamComponent) {
+        return (displayAllSight || playerTeamSystem.isAllied(teamComponent));
     }
 
     private void resetFogTexture() {

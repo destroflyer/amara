@@ -1,0 +1,56 @@
+<template>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <!--<spellVisualisation>alice_thunder</spellVisualisation>-->
+        <spellIndicator>
+            <entity>
+                <circularIndicator radius="20"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn object-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>positional_skillshot</castType>
+        <castCancelAction/>
+        <castDuration>0.3</castDuration>
+        <castTurnToTarget/>
+        <!--<castAnimation>
+            <entity>
+                <name>shoot_arrow</name>
+                <loopDuration>1</loopDuration>
+            </entity>
+        </castAnimation>-->
+        <range type="center_to_center" distance="20"/>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>150 + (0.6 * source.abilityPower)</magicDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

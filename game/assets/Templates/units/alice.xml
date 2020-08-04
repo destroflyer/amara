@@ -73,7 +73,12 @@
         <!--<passives>
             <entity template="spells/alice_passive/passive"/>
         </passives>-->
-        <!--<learnableSpells></learnableSpells>-->
+        <learnableSpells>
+            <entity template="spells/alice_bubble/base"/>
+            <entity template="spells/alice_thunder/base"/>
+            <entity template="spells/alice_charm/base"/>
+            <entity template="spells/alice_ult/base"/>
+        </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>

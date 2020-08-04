@@ -16,7 +16,7 @@ public class ApplySpawnsSystems implements EntitySystem {
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.requestObserver(this, IsAliveComponent.class, PositionComponent.class, DirectionComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class, DirectionComponent.class);
         for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, SpawnComponent.class)))
         {
             int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
@@ -26,13 +26,11 @@ public class ApplySpawnsSystems implements EntitySystem {
                 targetPositionComponent = entityWorld.getComponent(targetEntity, PositionComponent.class);
                 targetDirectionComponent = entityWorld.getComponent(targetEntity, DirectionComponent.class);
                 // Support specifying entities as targets, which transformations were just removed via dying
-                if (observer.getRemoved().hasComponent(targetEntity, IsAliveComponent.class)) {
-                    if (targetPositionComponent == null) {
-                        targetPositionComponent = observer.getRemoved().getComponent(targetEntity, PositionComponent.class);
-                    }
-                    if (targetDirectionComponent == null) {
-                        targetDirectionComponent = observer.getRemoved().getComponent(targetEntity, DirectionComponent.class);
-                    }
+                if (targetPositionComponent == null) {
+                    targetPositionComponent = observer.getRemoved().getComponent(targetEntity, PositionComponent.class);
+                }
+                if (targetDirectionComponent == null) {
+                    targetDirectionComponent = observer.getRemoved().getComponent(targetEntity, DirectionComponent.class);
                 }
             }
             int casterEntity = entityWrapper.getComponent(EffectSourceComponent.class).getSourceEntity();

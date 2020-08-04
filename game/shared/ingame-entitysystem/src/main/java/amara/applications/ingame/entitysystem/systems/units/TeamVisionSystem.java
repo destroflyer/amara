@@ -110,6 +110,7 @@ public class TeamVisionSystem implements EntitySystem{
             oldTeamVision.removeVision(entity);
             changedVisionTeams.add(oldTeamEntity);
         }
+        changedVisionEntities.add(entity);
     }
     
     private void updateHiddenAreaObstacle(EntityWorld entityWorld, int entity){

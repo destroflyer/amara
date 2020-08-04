@@ -1,0 +1,76 @@
+<template>
+    <value name="delay">0.25</value>
+    <entity id="spell">
+        <name>TODO</name>
+        <description>TODO</description>
+        <!--<spellVisualisation>aland_sword</spellVisualisation>-->
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="2" height="19.5"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./projectile</spawnTemplate>
+                                <spawnMoveToTarget/>
+                                <spawnMovementSpeed>25</spawnMovementSpeed>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castCancelAction/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>throw2</name>
+                <loopDuration>0.5</loopDuration>
+            </entity>
+        </castAnimation>
+        <range type="center_to_center" distance="16"/>
+        <spellTargetRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </spellTargetRules>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>100 + (0.8 + source.abilityPower)</magicDamage>
+                        <addBuff duration="2">
+                            <entity>
+                                <name>TODO</name>
+                                <description>This unit has decreased walk speed.</description>
+                                <!--<buffIcon>spells/aland_slow</buffIcon>-->
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageWalkSpeed>-0.3</bonusPercentageWalkSpeed>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>
