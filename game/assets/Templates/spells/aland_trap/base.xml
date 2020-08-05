@@ -2,7 +2,7 @@
     <entity id="spell">
         <name>TODO</name>
         <description>TODO</description>
-        <!--<spellVisualisation>aland_trap</spellVisualisation>-->
+        <spellVisualisation>aland_trap</spellVisualisation>
         <spellIndicator>
             <entity>
                 <circularIndicator radius="10"/>
@@ -51,7 +51,7 @@
                             <entity>
                                 <name>TODO</name>
                                 <description>TODO</description>
-                                <!--<buffIcon>spells/aland_trap</buffIcon>-->
+                                <buffIcon>spells/aland_trap</buffIcon>
                                 <continuousAttributes>
                                     <entity>
                                         <bonusPercentageWalkSpeed>-0.7</bonusPercentageWalkSpeed>

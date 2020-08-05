@@ -3,7 +3,7 @@
     <entity id="spell">
         <name>TODO</name>
         <description>TODO</description>
-        <!--<spellVisualisation>aland_sword</spellVisualisation>-->
+        <spellVisualisation>aland_sword</spellVisualisation>
         <spellIndicator>
             <entity>
                 <linearIndicator width="2" height="19.5"/>
@@ -55,18 +55,6 @@
                 <triggeredEffect>
                     <entity>
                         <magicDamage>100 + (0.8 + source.abilityPower)</magicDamage>
-                        <addBuff duration="2">
-                            <entity>
-                                <name>TODO</name>
-                                <description>This unit has decreased walk speed.</description>
-                                <!--<buffIcon>spells/aland_slow</buffIcon>-->
-                                <continuousAttributes>
-                                    <entity>
-                                        <bonusPercentageWalkSpeed>-0.3</bonusPercentageWalkSpeed>
-                                    </entity>
-                                </continuousAttributes>
-                            </entity>
-                        </addBuff>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

@@ -76,7 +76,7 @@
         <learnableSpells>
             <entity template="spells/aland_stealth/base"/>
             <entity template="spells/aland_knockback/base"/>
-            <entity template="spells/aland_slow/base"/>
+            <entity template="spells/aland_sword/base"/>
             <entity template="spells/aland_trap/base"/>
         </learnableSpells>
         <!--other-->

@@ -3,7 +3,7 @@
     <entity id="spell">
         <name>TODO</name>
         <description>TODO</description>
-        <!--<spellVisualisation>aland_stealth</spellVisualisation>-->
+        <spellVisualisation>aland_stealth</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
@@ -33,7 +33,7 @@
                             <entity>
                                 <name>TODO</name>
                                 <description>TODO</description>
-                                <!--<buffIcon>spells/aland_stealth</buffIcon>-->
+                                <buffIcon>spells/aland_stealth</buffIcon>
                                 <continuousAttributes>
                                     <entity>
                                         <bonusPercentageWalkSpeed>0.3</bonusPercentageWalkSpeed>
