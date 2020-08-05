@@ -97,7 +97,6 @@ public class ClientComponentBlacklist {
             // effects/buffs/stacks
             AddStacksComponent.class,
             ClearStacksComponent.class,
-            RemoveStacksComponent.class,
             // effects/casts
             EffectCastTargetComponent.class,
             // effects/crowdcontrol

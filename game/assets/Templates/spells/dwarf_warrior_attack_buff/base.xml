@@ -16,11 +16,6 @@
                                 <name>TODO</name>
                                 <description>This unit has increased resistances.</description>
                                 <buffIcon>spells/dwarf_warrior_attack_buff</buffIcon>
-                                <buffStacks>
-                                    <entity id="rewardBuffStacks">
-                                        <stacks>0</stacks>
-                                    </entity>
-                                </buffStacks>
                                 <continuousAttributesPerStack>
                                     <entity>
                                         <bonusFlatArmor>[resistancePerStack]</bonusFlatArmor>
@@ -49,7 +44,7 @@
                                 <buffVisualisation>dwarf_warrior_empowered</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
-                                        <casterTarget/>
+                                        <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <removeSpellEffects>
@@ -99,10 +94,10 @@
     <!--add stack on kill trigger-->
     <entity>
         <killTrigger/>
-        <customTarget>#rewardBuffStacks</customTarget>
+        <casterTarget/>
         <triggeredEffect>
             <entity>
-                <addStacks>1</addStacks>
+                <addStacks stacks="1">#rewardBuff</addStacks>
             </entity>
         </triggeredEffect>
         <triggerSource>#spell</triggerSource>

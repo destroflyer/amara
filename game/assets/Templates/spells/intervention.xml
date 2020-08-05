@@ -35,7 +35,7 @@
                                 <buffVisualisation>intervention</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
-                                        <customTarget>[parameter0]</customTarget>
+                                        <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <addVulnerability/>

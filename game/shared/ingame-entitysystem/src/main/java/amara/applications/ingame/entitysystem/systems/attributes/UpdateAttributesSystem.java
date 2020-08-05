@@ -2,7 +2,6 @@ package amara.applications.ingame.entitysystem.systems.attributes;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.buffs.*;
-import amara.applications.ingame.entitysystem.components.buffs.stacks.*;
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
@@ -47,13 +46,10 @@ public class UpdateAttributesSystem implements EntitySystem{
                     }
                     ContinuousAttributesPerStackComponent continuousAttributesPerStackComponent = entityWorld.getComponent(buffEntity, ContinuousAttributesPerStackComponent.class);
                     if (continuousAttributesPerStackComponent != null) {
-                        BuffStacksComponent buffStacksComponent = entityWorld.getComponent(buffEntity, BuffStacksComponent.class);
-                        if (buffStacksComponent != null) {
-                            StacksComponent stacksComponent = entityWorld.getComponent(buffStacksComponent.getStacksEntity(), StacksComponent.class);
-                            if ((stacksComponent != null) && (stacksComponent.getStacks() > 0)) {
-                                for (int i = 0; i < stacksComponent.getStacks(); i++) {
-                                    addAttributeBonus(entityWorld, attributeBonus, continuousAttributesPerStackComponent.getBonusAttributesEntity());
-                                }
+                        StacksComponent stacksComponent = entityWorld.getComponent(buffStatusEntity, StacksComponent.class);
+                        if ((stacksComponent != null) && (stacksComponent.getStacks() > 0)) {
+                            for (int i = 0; i < stacksComponent.getStacks(); i++) {
+                                addAttributeBonus(entityWorld, attributeBonus, continuousAttributesPerStackComponent.getBonusAttributesEntity());
                             }
                         }
                     }

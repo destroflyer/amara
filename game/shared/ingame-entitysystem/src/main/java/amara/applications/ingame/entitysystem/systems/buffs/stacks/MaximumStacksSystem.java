@@ -1,25 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.buffs.stacks;
 
-import amara.applications.ingame.entitysystem.components.buffs.stacks.*;
-import amara.libraries.entitysystem.*;
+import amara.applications.ingame.entitysystem.components.buffs.MaximumStacksComponent;
+import amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent;
+import amara.applications.ingame.entitysystem.components.buffs.status.StacksComponent;
+import amara.libraries.entitysystem.EntitySystem;
+import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Carl
- */
-public class MaximumStacksSystem implements EntitySystem{
-    
+public class MaximumStacksSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int entity : entityWorld.getEntitiesWithAll(MaximumStacksComponent.class, StacksComponent.class)){
-            int stacks = entityWorld.getComponent(entity, StacksComponent.class).getStacks();
-            int maximumStacks = entityWorld.getComponent(entity, MaximumStacksComponent.class).getStacks();
-            if(stacks > maximumStacks){
-                entityWorld.setComponent(entity, new StacksComponent(maximumStacks));
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int buffStatusEntity : entityWorld.getEntitiesWithAny(StacksComponent.class)) {
+            int buffEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getBuffEntity();
+            MaximumStacksComponent maximumStacksComponent = entityWorld.getComponent(buffEntity, MaximumStacksComponent.class);
+            if (maximumStacksComponent != null) {
+                int stacks = entityWorld.getComponent(buffStatusEntity, StacksComponent.class).getStacks();
+                int maximumStacks = maximumStacksComponent.getStacks();
+                if (stacks > maximumStacks) {
+                    entityWorld.setComponent(buffStatusEntity, new StacksComponent(maximumStacks));
+                }
             }
         }
     }

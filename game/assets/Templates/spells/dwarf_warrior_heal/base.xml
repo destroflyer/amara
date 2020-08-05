@@ -16,12 +16,7 @@
                                 <name>TODO</name>
                                 <description>TODO</description>
                                 <buffIcon>spells/dwarf_warrior_heal</buffIcon>
-                                <buffStacks>
-                                    <entity id="buffStacks">
-                                        <stacks>0</stacks>
-                                        <maximumStacks>[maximumStacks]</maximumStacks>
-                                    </entity>
-                                </buffStacks>
+                                <maximumStacks>[maximumStacks]</maximumStacks>
                                 <keepOnDeath/>
                             </entity>
                         </addBuff>
@@ -43,7 +38,7 @@
             </entity>
         </instantEffectTriggers>
         <spellPassives>
-            <entity template="./passive(#buffStacks)"/>
+            <entity template="./passive(#buff)"/>
         </spellPassives>
         <castType>selfcast</castType>
         <castCost>

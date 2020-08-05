@@ -47,7 +47,7 @@
                                 <onBuffRemoveEffectTriggers>
                                     <!--end audio-->
                                     <entity>
-                                        <casterTarget/>
+                                        <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <stopAudio>#audio</stopAudio>

@@ -13,10 +13,10 @@
                             <!--add stack on damage-->
                             <entity id="damageTakenTrigger">
                                 <damageTakenTrigger physicalDamage="true" magicDamage="true" trueDamage="true"/>
-                                <customTarget>[parameter0]</customTarget>
+                                <casterTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <addStacks>1</addStacks>
+                                        <addStacks stacks="1">[parameter0]</addStacks>
                                     </entity>
                                 </triggeredEffect>
                             </entity>

@@ -48,7 +48,7 @@
                                 <buffVisualisation>golden_eagle</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
-                                        <casterTarget/>
+                                        <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <addTargetability/>

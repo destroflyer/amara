@@ -64,7 +64,7 @@
                                 <buffIcon>spells/elven_archer_attack_buff</buffIcon>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
-                                        <casterTarget/>
+                                        <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <removeSpellEffects>#newSpellEffect</removeSpellEffects>

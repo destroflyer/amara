@@ -13,12 +13,7 @@
                                 <name>Thunder Attacks</name>
                                 <description>Deal bonus magic damage every [maximumStacks] basic attacks.</description>
                                 <buffIcon>items/thunderbolt</buffIcon>
-                                <buffStacks>
-                                    <entity id="buffStacks">
-                                        <stacks>0</stacks>
-                                        <maximumStacks>[maximumStacks]</maximumStacks>
-                                    </entity>
-                                </buffStacks>
+                                <maximumStacks>[maximumStacks]</maximumStacks>
                                 <keepOnDeath/>
                             </entity>
                         </addBuff>
@@ -27,10 +22,10 @@
                                 <castedEffectTriggers>
                                     <!--add stacks-->
                                     <entity>
-                                        <customTarget>#buffStacks</customTarget>
+                                        <casterTarget/>
                                         <triggeredEffect>
                                             <entity>
-                                                <addStacks>1</addStacks>
+                                                <addStacks stacks="1">#buff</addStacks>
                                             </entity>
                                         </triggeredEffect>
                                         <triggerSource>#passive</triggerSource>
@@ -42,28 +37,19 @@
                 </triggeredEffect>
                 <triggerSource>#passive</triggerSource>
             </entity>
-            <!--add full stacks triggers-->
+            <!--add stacks reached trigger-->
             <entity>
-                <customTarget>#buffStacks</customTarget>
+                <customTarget>#buff</customTarget>
                 <triggeredEffect>
                     <entity>
                         <addEffectTriggers>
-                            <!--clear stacks-->
+                            <!--clear stacks and add spelleffect-->
                             <entity>
                                 <stacksReachedTrigger>[maximumStacks]</stacksReachedTrigger>
-                                <sourceTarget/>
+                                <targetTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <clearStacks/>
-                                    </entity>
-                                </triggeredEffect>
-                            </entity>
-                            <!--add spelleffect-->
-                            <entity>
-                                <stacksReachedTrigger>[maximumStacks]</stacksReachedTrigger>
-                                <buffTargetsTarget>#buff</buffTargetsTarget>
-                                <triggeredEffect>
-                                    <entity>
+                                        <clearStacks>#buff</clearStacks>
                                         <addAutoAttackSpellEffects>
                                             <entity id="newSpellEffect2">
                                                 <castedEffectTriggers>

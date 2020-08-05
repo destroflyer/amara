@@ -1,10 +1,10 @@
 package amara.applications.ingame.entitysystem.systems.units;
 
-import amara.applications.ingame.entitysystem.components.buffs.BuffStacksComponent;
-import amara.applications.ingame.entitysystem.components.buffs.stacks.StacksComponent;
+import amara.applications.ingame.entitysystem.components.buffs.status.StacksComponent;
 import amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent;
 import amara.applications.ingame.entitysystem.components.costs.GoldCostComponent;
 import amara.applications.ingame.entitysystem.components.units.GoldComponent;
+import amara.applications.ingame.entitysystem.systems.buffs.BuffUtil;
 import amara.libraries.entitysystem.EntityWorld;
 
 import java.util.List;
@@ -27,11 +27,11 @@ public class CostUtil {
         // BuffStacks
         BuffStacksCostComponent buffStacksCostComponent = entityWorld.getComponent(costEntity, BuffStacksCostComponent.class);
         if (buffStacksCostComponent != null) {
-            BuffStacksComponent buffStacksComponent = entityWorld.getComponent(buffStacksCostComponent.getBuffEntity(), BuffStacksComponent.class);
-            if (buffStacksComponent == null) {
+            int buffStatusEntity = BuffUtil.getBuffStatusEntity(entityWorld, entity, buffStacksCostComponent.getBuffEntity());
+            if (buffStatusEntity == -1) {
                 return false;
             }
-            StacksComponent stacksComponent = entityWorld.getComponent(buffStacksComponent.getStacksEntity(), StacksComponent.class);
+            StacksComponent stacksComponent = entityWorld.getComponent(buffStatusEntity, StacksComponent.class);
             if ((stacksComponent == null) || (stacksComponent.getStacks() < buffStacksCostComponent.getStacks())) {
                 return false;
             }
@@ -55,10 +55,10 @@ public class CostUtil {
         // BuffStacks
         BuffStacksCostComponent buffStacksCostComponent = entityWorld.getComponent(costEntity, BuffStacksCostComponent.class);
         if (buffStacksCostComponent != null) {
-            BuffStacksComponent buffStacksComponent = entityWorld.getComponent(buffStacksCostComponent.getBuffEntity(), BuffStacksComponent.class);
-            int oldStacks = entityWorld.getComponent(buffStacksComponent.getStacksEntity(), StacksComponent.class).getStacks();
+            int buffStatusEntity = BuffUtil.getBuffStatusEntity(entityWorld, entity, buffStacksCostComponent.getBuffEntity());
+            int oldStacks = entityWorld.getComponent(buffStatusEntity, StacksComponent.class).getStacks();
             int newStacks = oldStacks - buffStacksCostComponent.getStacks();
-            entityWorld.setComponent(buffStacksComponent.getStacksEntity(), new StacksComponent(newStacks));
+            entityWorld.setComponent(buffStatusEntity, new StacksComponent(newStacks));
         }
     }
 }

@@ -52,7 +52,7 @@
                                                         <buffVisualisation>maria_passive</buffVisualisation>
                                                         <onBuffRemoveEffectTriggers>
                                                             <entity>
-                                                                <casterTarget/>
+                                                                <targetTarget/>
                                                                 <triggeredEffect>
                                                                     <entity>
                                                                         <removeSpellEffects>#newSpellEffect2</removeSpellEffects>

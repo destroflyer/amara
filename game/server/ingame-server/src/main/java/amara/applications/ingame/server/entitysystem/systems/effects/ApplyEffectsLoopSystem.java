@@ -48,7 +48,6 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyAddBuffAreasSystem());
         add(new ApplyAddStacksSystem());
         add(new ApplyClearStacksSystem());
-        add(new ApplyRemoveStacksSystem());
         add(new ApplyAddBindableSystem());
         add(new ApplyAddBindingSystem());
         add(new ApplyAddKnockupableSystem());

@@ -73,7 +73,7 @@
                                 <buffVisualisation>tristan_empowered</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
-                                        <casterTarget/>
+                                        <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <removeSpellEffects>#newSpellEffect</removeSpellEffects>

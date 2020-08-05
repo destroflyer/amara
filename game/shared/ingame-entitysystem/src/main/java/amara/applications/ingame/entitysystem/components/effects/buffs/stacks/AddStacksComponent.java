@@ -1,30 +1,29 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.components.effects.buffs.stacks;
 
 import com.jme3.network.serializing.Serializable;
 import amara.libraries.entitysystem.synchronizing.ComponentField;
 
-/**
- *
- * @author Carl
- */
 @Serializable
-public class AddStacksComponent{
+public class AddStacksComponent {
 
-    public AddStacksComponent(){
-        
+    public AddStacksComponent() {
+
     }
-    
-    public AddStacksComponent(int stacks){
+
+    public AddStacksComponent(int buffEntity, int stacks) {
+        this.buffEntity = buffEntity;
         this.stacks = stacks;
     }
+    @ComponentField(type=ComponentField.Type.ENTITY)
+    private int buffEntity;
     @ComponentField(type=ComponentField.Type.STACKS)
     private int stacks;
 
-    public int getStacks(){
+    public int getBuffEntity() {
+        return buffEntity;
+    }
+
+    public int getStacks() {
         return stacks;
     }
 }

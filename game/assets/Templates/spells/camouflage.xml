@@ -37,7 +37,7 @@
                                 <buffVisualisation>withered</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
-                                        <casterTarget/>
+                                        <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <removeStealth/>

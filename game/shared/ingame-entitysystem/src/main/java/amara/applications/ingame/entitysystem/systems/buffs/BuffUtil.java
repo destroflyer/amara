@@ -18,13 +18,21 @@ public class BuffUtil {
     public static boolean hasBuff(EntityWorld entityWorld, int entity, int buffEntity) {
         BuffsComponent buffsComponent = entityWorld.getComponent(entity, BuffsComponent.class);
         if (buffsComponent != null) {
+            return (getBuffStatusEntity(entityWorld, entity, buffEntity) != -1);
+        }
+        return false;
+    }
+
+    public static int getBuffStatusEntity(EntityWorld entityWorld, int entity, int buffEntity) {
+        BuffsComponent buffsComponent = entityWorld.getComponent(entity, BuffsComponent.class);
+        if (buffsComponent != null) {
             for (int buffStatusEntity : buffsComponent.getBuffStatusEntities()) {
                 int currentBuffEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getBuffEntity();
                 if (currentBuffEntity == buffEntity) {
-                    return true;
+                    return buffStatusEntity;
                 }
             }
         }
-        return false;
+        return -1;
     }
 }

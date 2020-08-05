@@ -15,11 +15,6 @@
                             <rectangle x="12.5" width="25" height="2.5"/>
                         </hitbox>
                         <collisionGroup targetOf="spells" targets="spell_targets"/>
-                        <intersectionRules>
-                            <entity>
-                                <acceptEnemies/>
-                            </entity>
-                        </intersectionRules>
                         <areaBuff>
                             <entity>
                                 <name>Lasered</name>

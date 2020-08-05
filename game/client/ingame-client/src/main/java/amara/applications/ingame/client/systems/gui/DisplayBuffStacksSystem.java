@@ -2,9 +2,7 @@ package amara.applications.ingame.client.systems.gui;
 
 import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
-import amara.applications.ingame.entitysystem.components.buffs.BuffStacksComponent;
-import amara.applications.ingame.entitysystem.components.buffs.stacks.StacksComponent;
-import amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent;
+import amara.applications.ingame.entitysystem.components.buffs.status.StacksComponent;
 import amara.applications.ingame.entitysystem.components.units.BuffsComponent;
 import amara.libraries.entitysystem.EntityWorld;
 
@@ -25,19 +23,15 @@ public class DisplayBuffStacksSystem extends GUIDisplaySystem<ScreenController_H
         BuffsComponent buffsComponent = entityWorld.getComponent(entity, BuffsComponent.class);
         if (buffsComponent != null) {
             for (int buffStatusEntity : buffsComponent.getBuffStatusEntities()) {
-                int buffEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getBuffEntity();
-                BuffStacksComponent buffStacksComponent = entityWorld.getComponent(buffEntity, BuffStacksComponent.class);
+                StacksComponent stacksComponent = entityWorld.getComponent(buffStatusEntity, StacksComponent.class);
                 boolean hasStacks = false;
-                if (buffStacksComponent != null) {
-                    StacksComponent stacksComponent = entityWorld.getComponent(buffStacksComponent.getStacksEntity(), StacksComponent.class);
-                    if (stacksComponent != null) {
-                        if (playerOrInspection) {
-                            screenController.setPlayerBuffStacks(buffStatusEntity, stacksComponent.getStacks());
-                        } else {
-                            screenController.setInspectionBuffStacks(buffStatusEntity, stacksComponent.getStacks());
-                        }
-                        hasStacks = true;
+                if (stacksComponent != null) {
+                    if (playerOrInspection) {
+                        screenController.setPlayerBuffStacks(buffStatusEntity, stacksComponent.getStacks());
+                    } else {
+                        screenController.setInspectionBuffStacks(buffStatusEntity, stacksComponent.getStacks());
                     }
+                    hasStacks = true;
                 }
                 if (playerOrInspection) {
                     screenController.setPlayerBuffStacksVisible(buffStatusEntity, hasStacks);

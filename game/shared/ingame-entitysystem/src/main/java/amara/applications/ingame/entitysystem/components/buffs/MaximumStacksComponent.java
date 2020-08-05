@@ -1,4 +1,4 @@
-package amara.applications.ingame.entitysystem.components.buffs.stacks;
+package amara.applications.ingame.entitysystem.components.buffs;
 
 import com.jme3.network.serializing.Serializable;
 import amara.libraries.entitysystem.synchronizing.ComponentField;

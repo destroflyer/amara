@@ -74,7 +74,7 @@
                                 <buffVisualisation>slap</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
-                                        <casterTarget/>
+                                        <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <removeSpellEffects>#newSpellEffect</removeSpellEffects>

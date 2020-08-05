@@ -65,7 +65,7 @@
         </autoAttack>
         <learnableSpells>
             <entity template="spells/sonic_wave(0)"/>
-            <entity template="spells/intervention(#unit)"/>
+            <entity template="spells/intervention"/>
             <entity template="spells/lunar_rush"/>
             <entity template="spells/dragons_rage"/>
         </learnableSpells>

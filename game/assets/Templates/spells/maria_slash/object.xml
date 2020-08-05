@@ -5,11 +5,6 @@
         </hitbox>
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
-        <intersectionRules>
-            <entity>
-                <acceptEnemies/>
-            </entity>
-        </intersectionRules>
         <lifetime>0.2</lifetime>
     </entity>
     <!--trigger spell effects-->
