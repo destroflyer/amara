@@ -1,5 +1,4 @@
 <template>
-    <value name="delay">0.5</value>
     <entity id="spell">
         <name>TODO</name>
         <description>TODO</description>
@@ -23,12 +22,11 @@
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
-                <triggerDelay>[delay]</triggerDelay>
             </entity>
         </instantEffectTriggers>
         <castType>positional_skillshot</castType>
         <castCancelAction/>
-        <castDuration>[delay]</castDuration>
+        <castDuration>0.5</castDuration>
         <castTurnToTarget/>
         <castAnimation>
             <entity>

@@ -1,0 +1,7 @@
+<skin name="bear_trap">
+    <model normScale="0.5">
+        <material>
+            <texture>diffuse.png</texture>
+        </material>
+    </model>
+</skin>

@@ -1,13 +1,33 @@
 <template>
     <entity id="object">
-        <model>Models/3dsa_fantasy_forest_rock_1/skin.xml</model>
+        <model>Models/bear_trap/skin.xml</model>
+        <animation>
+            <entity>
+                <name>open</name>
+                <loopDuration>0.5</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </animation>
         <hitbox>
             <circle radius="1"/>
         </hitbox>
         <collisionGroup targetOf="spells" targets="spell_targets"/>
-        <hitboxActive/>
-        <isStealthed/>
+        <sightRange>3</sightRange>
         <lifetime>180</lifetime>
+    </entity>
+    <!--activate hitbox-->
+    <entity>
+        <instantTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <activateHitbox/>
+                <addStealth/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+        <triggerDelay>0.5</triggerDelay>
+        <triggerOnce/>
     </entity>
     <!--trigger spell effects-->
     <entity>
@@ -24,6 +44,25 @@
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
     </entity>
+    <!--deactivate hitbox-->
+    <entity>
+        <collisionTrigger>#collisionRules</collisionTrigger>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <deactivateHitbox/>
+                <removeStealth/>
+                <playAnimation>
+                    <entity>
+                        <name>close</name>
+                        <loopDuration>0.25</loopDuration>
+                        <freezeAfterPlaying/>
+                    </entity>
+                </playAnimation>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+    </entity>
     <!--remove object-->
     <entity>
         <collisionTrigger>#collisionRules</collisionTrigger>
@@ -34,5 +73,6 @@
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
+        <triggerDelay>0.5</triggerDelay>
     </entity>
 </template>
