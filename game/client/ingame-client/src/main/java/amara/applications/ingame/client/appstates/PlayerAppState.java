@@ -10,6 +10,7 @@ import amara.applications.ingame.client.systems.filters.*;
 import amara.applications.ingame.client.systems.gui.*;
 import amara.applications.ingame.client.systems.information.*;
 import amara.applications.ingame.client.systems.visualisation.*;
+import amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.master.network.messages.objects.GameSelectionPlayer;
@@ -152,16 +153,16 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         }
     }
 
-    private int getHoveredCollisionResults(CollisionResults... entitiesColisionResults) {
+    private int getHoveredCollisionResults(CollisionResults... entitiesCollisionResults) {
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
         tmpHoveredEntitiesCount.clear();
         int resultEntity = -1;
         //float minimumDistance = Float.MAX_VALUE;
         int maximumCount = 0;
-        for (CollisionResults collisionResults : entitiesColisionResults) {
+        for (CollisionResults collisionResults : entitiesCollisionResults) {
             for (CollisionResult collision : collisionResults) {
                 int entity = localEntitySystemAppState.getEntity(collision.getGeometry());
-                if(isInspectable(localEntitySystemAppState.getEntityWorld(), entity)){
+                if(isHoverable(localEntitySystemAppState.getEntityWorld(), entity)){
                     /*if((entity != -1) && (collision.getDistance() < minimumDistance)){
                         resultEntity = entity;
                         minimumDistance = collision.getDistance();
@@ -210,6 +211,10 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         if ((inspectedEntity != -1) && (!entityWorld.hasEntity(inspectedEntity))) {
             inspectedEntity = -1;
         }
+    }
+
+    private static boolean isHoverable(EntityWorld entityWorld, int entity) {
+        return isInspectable(entityWorld, entity) || entityWorld.hasComponent(entity, ShopItemsComponent.class);
     }
 
     private static boolean isInspectable(EntityWorld entityWorld, int entity) {
