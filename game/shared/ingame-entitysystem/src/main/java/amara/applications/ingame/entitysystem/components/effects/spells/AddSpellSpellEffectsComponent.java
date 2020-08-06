@@ -1,24 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.components.effects.spells;
 
 import com.jme3.network.serializing.Serializable;
 import amara.libraries.entitysystem.synchronizing.ComponentField;
 
-/**
- *
- * @author Carl
- */
 @Serializable
-public class AddSpellsSpellEffectsComponent{
+public class AddSpellSpellEffectsComponent {
 
-    public AddSpellsSpellEffectsComponent(){
-        
+    public AddSpellSpellEffectsComponent() {
+
     }
-    
-    public AddSpellsSpellEffectsComponent(int[] spellEffectEntities, boolean setSourcesToSpells){
+
+    public AddSpellSpellEffectsComponent(int[] spellEffectEntities, boolean setSourcesToSpells) {
         this.spellEffectEntities = spellEffectEntities;
         this.setSourcesToSpells = setSourcesToSpells;
     }
@@ -26,11 +18,11 @@ public class AddSpellsSpellEffectsComponent{
     private int[] spellEffectEntities;
     private boolean setSourcesToSpells;
 
-    public int[] getSpellEffectEntities(){
+    public int[] getSpellEffectEntities() {
         return spellEffectEntities;
     }
 
-    public boolean isSetSourcesToSpells(){
+    public boolean isSetSourcesToSpells() {
         return setSourcesToSpells;
     }
 }

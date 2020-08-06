@@ -33,7 +33,7 @@ public class CleanupEffectsSystem implements EntitySystem {
             MoveComponent.class,
             SpawnComponent.class,
             AddAutoAttackSpellEffectsComponent.class,
-            AddSpellsSpellEffectsComponent.class,
+            AddSpellSpellEffectsComponent.class,
             PlayAnimationComponent.class
         );
         //audio
@@ -77,13 +77,13 @@ public class CleanupEffectsSystem implements EntitySystem {
         // spells
         for (int entity : observer.getRemoved().getEntitiesWithAny(AddAutoAttackSpellEffectsComponent.class)){
             int[] spellEffectEntities = observer.getRemoved().getComponent(entity, AddAutoAttackSpellEffectsComponent.class).getSpellEffectEntities();
-            for(int spellEffectEntity : spellEffectEntities){
+            for (int spellEffectEntity : spellEffectEntities) {
                 CleanupUtil.tryCleanupEntity(entityWorld, spellEffectEntity);
             }
         }
-        for (int entity : observer.getRemoved().getEntitiesWithAny(AddSpellsSpellEffectsComponent.class)) {
-            int[] spellEffectEntities = observer.getRemoved().getComponent(entity, AddSpellsSpellEffectsComponent.class).getSpellEffectEntities();
-            for(int spellEffectEntity : spellEffectEntities){
+        for (int entity : observer.getRemoved().getEntitiesWithAny(AddSpellSpellEffectsComponent.class)) {
+            int[] spellEffectEntities = observer.getRemoved().getComponent(entity, AddSpellSpellEffectsComponent.class).getSpellEffectEntities();
+            for (int spellEffectEntity : spellEffectEntities) {
                 CleanupUtil.tryCleanupEntity(entityWorld, spellEffectEntity);
             }
         }

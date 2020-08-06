@@ -38,7 +38,7 @@
                 <loopDuration>0.5</loopDuration>
             </entity>
         </castAnimation>
-        <range type="center_to_center" distance="16"/>
+        <range type="center_to_center" distance="14"/>
         <spellTargetRules>
             <entity>
                 <acceptEnemies/>

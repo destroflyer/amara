@@ -5,12 +5,12 @@
         <description>Your spells mark hit targets for [duration] seconds. Your basic abilities have an additional effect if they hit already marked targets.</description>
         <spellVisualisation>erika_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
-            <!--add spell effect-->
+            <!--add spell effects-->
             <entity>
-                <casterTarget/>
+                <customTarget>[parameter0],[parameter1],[parameter2],[parameter3]</customTarget>
                 <triggeredEffect>
                     <entity>
-                        <addSpellsSpellEffects setSourcesToSpells="true">
+                        <addSpellSpellEffects setSourcesToSpells="true">
                             <entity id="newSpellEffect">
                                 <castedEffectTriggers>
                                     <!--add buff-->
@@ -52,16 +52,16 @@
                                     </entity>
                                 </castedEffectTriggers>
                             </entity>
-                        </addSpellsSpellEffects>
+                        </addSpellSpellEffects>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#passive</triggerSource>
             </entity>
         </passiveAddedEffectTriggers>
         <passiveRemovedEffectTriggers>
-            <!--remove spell effect-->
+            <!--remove spell effects-->
             <entity>
-                <casterTarget/>
+                <customTarget>[parameter0],[parameter1],[parameter2],[parameter3]</customTarget>
                 <triggeredEffect>
                     <entity>
                         <removeSpellEffects>#newSpellEffect</removeSpellEffects>

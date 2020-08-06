@@ -24,13 +24,19 @@ public abstract class BuffVisualisationSystem implements EntitySystem {
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
-        ComponentMapObserver observer = entityWorld.requestObserver(this, ActiveBuffComponent.class);
+        ComponentMapObserver observer = entityWorld.requestObserver(this, ActiveBuffComponent.class, StacksComponent.class);
+        // Add visualisations
         for (int entity : observer.getNew().getEntitiesWithAny(ActiveBuffComponent.class)) {
             onBuffAdded(entityWorld, entity);
         }
-        for (int entity : observer.getChanged().getEntitiesWithAny(ActiveBuffComponent.class)) {
-            onBuffAdded(entityWorld, entity);
+        // Update visualisations
+        for (int buffStatusEntity : observer.getNew().getEntitiesWithAny(StacksComponent.class)) {
+            onStacksChanged(entityWorld, buffStatusEntity);
         }
+        for (int buffStatusEntity : observer.getChanged().getEntitiesWithAny(StacksComponent.class)) {
+            onStacksChanged(entityWorld, buffStatusEntity);
+        }
+        // Remove visualisations
         for (int entity : observer.getRemoved().getEntitiesWithAny(ActiveBuffComponent.class)) {
             onBuffRemoved(entityWorld, observer.getRemoved().getComponent(entity, ActiveBuffComponent.class));
         }
@@ -107,6 +113,18 @@ public abstract class BuffVisualisationSystem implements EntitySystem {
 
     protected void removeVisualAttachment(int targetEntity, Node entityNode, Spatial visualAttachment) {
         visualAttachment.getParent().detachChild(visualAttachment);
+    }
+
+    private void onStacksChanged(EntityWorld entityWorld, int buffStatusEntity) {
+        int targetEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getTargetEntity();
+        int stacks = entityWorld.getComponent(buffStatusEntity, StacksComponent.class).getStacks();
+        Node entityNode = entitySceneMap.requestNode(targetEntity);
+        Spatial visualAttachment = entityNode.getChild(getVisualAttachmentID());
+        updateBuffVisualisationStacks(visualAttachment, stacks);
+    }
+
+    protected void updateBuffVisualisationStacks(Spatial visualAttachment, int stacks) {
+
     }
 
     private String getVisualAttachmentID() {

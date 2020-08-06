@@ -2012,23 +2012,23 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent(spellEffectEntities);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent.class);
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.spells.AddSpellSpellEffectsComponent.class);
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent.class.getDeclaredField("spellEffectEntities"), componentFieldSerializer_Entity);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.spells.AddSpellSpellEffectsComponent.class.getDeclaredField("spellEffectEntities"), componentFieldSerializer_Entity);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent>("addSpellsSpellEffects"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.AddSpellSpellEffectsComponent>("addSpellSpellEffects"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.spells.AddSpellSpellEffectsComponent construct(EntityWorld entityWorld, Element element){
                 int[] spellEffectEntities = createChildEntities(entityWorld, element, 0, "spellEffectEntities");
                 boolean setSourcesToSpells = false;
                 String setSourcesToSpellsText = element.getAttributeValue("setSourcesToSpells");
                 if((setSourcesToSpellsText != null) && (setSourcesToSpellsText.length() > 0)){
                     setSourcesToSpells = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, setSourcesToSpellsText));
                 }
-                return new amara.applications.ingame.entitysystem.components.effects.spells.AddSpellsSpellEffectsComponent(spellEffectEntities, setSourcesToSpells);
+                return new amara.applications.ingame.entitysystem.components.effects.spells.AddSpellSpellEffectsComponent(spellEffectEntities, setSourcesToSpells);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.spells.EnqueueSpellCastComponent.class);

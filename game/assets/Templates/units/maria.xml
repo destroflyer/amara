@@ -71,13 +71,13 @@
             <entity template="spells/melee_autoattack(Sounds/sounds/spells/maria_autoattack_cast.ogg)"/>
         </autoAttack>
         <passives>
-            <entity template="spells/maria_passive/passive"/>
+            <entity template="spells/maria_passive/passive(#spell1,#spell2,#spell3,#spell4)"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/maria_slash/base"/>
-            <entity template="spells/maria_block/base"/>
-            <entity template="spells/maria_stab/base"/>
-            <entity template="spells/maria_ult/base"/>
+            <entity id="spell1" template="spells/maria_slash/base"/>
+            <entity id="spell2" template="spells/maria_block/base"/>
+            <entity id="spell3" template="spells/maria_stab/base"/>
+            <entity id="spell4" template="spells/maria_ult/base"/>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

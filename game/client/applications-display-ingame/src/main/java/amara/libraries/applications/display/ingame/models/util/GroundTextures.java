@@ -6,16 +6,15 @@ import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Quad;
 
 public class GroundTextures {
 
-    public static Spatial create(String textureFilePath, float width, float height) {
+    public static Geometry create(String textureFilePath, float width, float height) {
         return create(textureFilePath, (width / -2), (height / 2), width, height);
     }
 
-    public static Spatial create(String textureFilePath, float x, float y, float width, float height) {
+    public static Geometry create(String textureFilePath, float x, float y, float width, float height) {
         return create(textureFilePath, x, y, width, height, RenderState.BlendMode.Alpha);
     }
 

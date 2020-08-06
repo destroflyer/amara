@@ -7,13 +7,13 @@
         <description>TODO</description>
         <spellVisualisation>aland_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
-            <!--add spell effect-->
+            <!--add spell effects-->
             <entity>
-                <casterTarget/>
+                <customTarget>[parameter0],[parameter1],[parameter2]</customTarget>
                 <triggeredEffect>
                     <entity>
                         <!--add spell effects-->
-                        <addSpellsSpellEffects setSourcesToSpells="true">
+                        <addSpellSpellEffects setSourcesToSpells="true">
                             <entity id="newSpellEffect">
                                 <castedEffectTriggers>
                                     <!--add buff-->
@@ -26,6 +26,7 @@
                                                         <name>TODO</name>
                                                         <description>TODO</description>
                                                         <buffIcon>spells/aland_passive</buffIcon>
+                                                        <buffVisualisation>aland_passive</buffVisualisation>
                                                         <maximumStacks>[maximumStacks]</maximumStacks>
                                                     </entity>
                                                 </addBuff>
@@ -36,7 +37,7 @@
                                     </entity>
                                 </castedEffectTriggers>
                             </entity>
-                        </addSpellsSpellEffects>
+                        </addSpellSpellEffects>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#passive</triggerSource>
@@ -45,7 +46,7 @@
         <passiveRemovedEffectTriggers>
             <!--remove spell effects-->
             <entity>
-                <casterTarget/>
+                <customTarget>[parameter0],[parameter1],[parameter2]</customTarget>
                 <triggeredEffect>
                     <entity>
                         <removeSpellEffects>#newSpellEffect</removeSpellEffects>

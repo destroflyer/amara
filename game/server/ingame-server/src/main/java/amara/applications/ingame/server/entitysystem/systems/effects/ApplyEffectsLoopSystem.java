@@ -88,7 +88,7 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyRemovePopupsSystem());
         add(new ApplySpawnsSystems());
         add(new ApplyAddAutoAttackSpellEffectsSystem());
-        add(new ApplyAddSpellsSpellEffectsSystem());
+        add(new ApplyAddSpellSpellEffectsSystem());
         add(new ApplyEnqueueSpellCastSystem(castSpellQueueSystem));
         add(new ApplyRemoveSpellEffectsSystem());
         add(new ApplyReplaceSpellsWithExistingSpellsSystem());

@@ -23,7 +23,7 @@
         <deathAnimation>
             <entity>
                 <name>death</name>
-                <loopDuration>3.033</loopDuration>
+                <loopDuration>2.6</loopDuration>
                 <freezeAfterPlaying/>
             </entity>
         </deathAnimation>
@@ -71,13 +71,13 @@
             <entity template="spells/ranged_autoattack,Models/aland_sword/skin_autoattack.xml"/>
         </autoAttack>
         <passives>
-            <entity template="spells/aland_passive/passive"/>
+            <entity template="spells/aland_passive/passive(#spell2,#spell3,#spell4)"/>
         </passives>
         <learnableSpells>
             <entity template="spells/aland_stealth/base"/>
-            <entity template="spells/aland_knockback/base"/>
-            <entity template="spells/aland_sword/base"/>
-            <entity template="spells/aland_trap/base"/>
+            <entity id="spell2" template="spells/aland_knockback/base"/>
+            <entity id="spell3" template="spells/aland_sword/base"/>
+            <entity id="spell4" template="spells/aland_trap/base"/>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

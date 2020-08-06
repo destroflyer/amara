@@ -16,7 +16,7 @@ public class ApplyClearStacksSystem implements EntitySystem {
             int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
             int buffEntity = entityWorld.getComponent(effectImpactEntity, ClearStacksComponent.class).getBuffEntity();
             int buffStatusEntity = BuffUtil.getBuffStatusEntity(entityWorld, targetEntity, buffEntity);
-            entityWorld.removeComponent(buffStatusEntity, StacksComponent.class);
+            entityWorld.setComponent(buffStatusEntity, new StacksComponent(0));
         }
     }
 }
