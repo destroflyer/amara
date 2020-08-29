@@ -30,7 +30,7 @@
         <spellTargetRules>
             <entity>
                 <acceptAllies/>
-                <requireBuffs>[parameter1]</requireBuffs>
+                <requireAllBuffs>[parameter1]</requireAllBuffs>
             </entity>
         </spellTargetRules>
     </entity>

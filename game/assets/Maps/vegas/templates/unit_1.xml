@@ -1,0 +1,68 @@
+<template>
+    <entity>
+        <name>Ranged Soldier</name>
+        <isMinion/>
+        <!--model-->
+        <model>Models/3dsa_archer/skin_team_allied.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>idle</name>
+                <loopDuration>2</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>shoot_arrow</name>
+            </entity>
+        </autoAttackAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <intersectionPushes/>
+        <intersectionPushed/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <isRespawnable/>
+        <level>1</level>
+        <experience>0</experience>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>500</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>50</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>1</bonusFlatAttackSpeed>
+                <bonusFlatArmor>20</bonusFlatArmor>
+                <bonusFlatMagicResistance>20</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <attributesPerLevel exponentialBase="2">
+            <entity>
+                <bonusFlatMaximumHealth>400</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>40</bonusFlatAttackDamage>
+            </entity>
+        </attributesPerLevel>
+        <requestUpdateAttributes/>
+        <sightRange>999</sightRange>
+        <isTargetable/>
+        <isVulnerable/>
+        <isBindable/>
+        <isKnockupable/>
+        <isSilencable/>
+        <isStunnable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/ranged_autoattack,Models/3dsa_archer_arrow/skin.xml"/>
+        </autoAttack>
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
+    </entity>
+</template>

@@ -28,14 +28,18 @@ public abstract class Map {
     protected MapVisuals visuals = new MapVisuals();
     protected MapSpells[] spells = new MapSpells[0];
     protected int entity;
-    
-    public abstract void load(EntityWorld entityWorld);
-    
+
+    public abstract void load(EntityWorld entityWorld, int playersCount);
+
     public void initializePlayer(EntityWorld entityWorld, int playerEntity){
-        
+
     }
     
     public abstract void spawnPlayer(EntityWorld entityWorld, int playerEntity);
+
+    public void initializeItem(EntityWorld entityWorld, int itemEntity, int buyerEntity) {
+
+    }
 
     public void setName(String name){
         this.name = name;

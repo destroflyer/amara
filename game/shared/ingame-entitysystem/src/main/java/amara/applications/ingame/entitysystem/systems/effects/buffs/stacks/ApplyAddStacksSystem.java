@@ -14,13 +14,17 @@ public class ApplyAddStacksSystem implements EntitySystem {
         for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddStacksComponent.class)) {
             int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
             AddStacksComponent addStacksComponent = entityWorld.getComponent(effectImpactEntity, AddStacksComponent.class);
-            int buffStatusEntity = BuffUtil.getBuffStatusEntity(entityWorld, targetEntity, addStacksComponent.getBuffEntity());
-            if (buffStatusEntity != -1) {
-                StacksComponent stacksComponent = entityWorld.getComponent(buffStatusEntity, StacksComponent.class);
-                int oldStacks = ((stacksComponent != null) ? stacksComponent.getStacks() : 0);
-                int newStacks = (oldStacks + addStacksComponent.getStacks());
-                entityWorld.setComponent(buffStatusEntity, new StacksComponent(newStacks));
-            }
+            addStacks(entityWorld, targetEntity, addStacksComponent.getBuffEntity(), addStacksComponent.getStacks());
+        }
+    }
+
+    public static void addStacks(EntityWorld entityWorld, int entity, int buffEntity, int stacks) {
+        int buffStatusEntity = BuffUtil.getBuffStatusEntity(entityWorld, entity, buffEntity);
+        if (buffStatusEntity != -1) {
+            StacksComponent stacksComponent = entityWorld.getComponent(buffStatusEntity, StacksComponent.class);
+            int oldStacks = ((stacksComponent != null) ? stacksComponent.getStacks() : 0);
+            int newStacks = (oldStacks + stacks);
+            entityWorld.setComponent(buffStatusEntity, new StacksComponent(newStacks));
         }
     }
 }

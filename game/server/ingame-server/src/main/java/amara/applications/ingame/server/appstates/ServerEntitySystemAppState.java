@@ -58,7 +58,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         gameLogic.initialize();
         // Initialize game content
         Map map = game.getMap();
-        map.load(entityWorld);
+        map.load(entityWorld, game.getPlayers().size());
         IngamePlayersAppState ingamePlayersAppState = getAppState(IngamePlayersAppState.class);
         int playerIndex = 0;
         for (GamePlayer<?> player : game.getPlayers()) {

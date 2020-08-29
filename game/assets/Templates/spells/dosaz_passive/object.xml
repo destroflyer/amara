@@ -17,7 +17,7 @@
             <entity>
                 <acceptUntargetable/>
                 <acceptAllies/>
-                <requireBuffs>[parameter0]</requireBuffs>
+                <requireAllBuffs>[parameter0]</requireAllBuffs>
             </entity>
         </collisionTrigger>
         <sourceTarget/>

@@ -16,8 +16,10 @@ public class ApplyRemoveBuffsSystem implements EntitySystem{
     public void update(EntityWorld entityWorld, float deltaSeconds) {
         for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, RemoveBuffComponent.class)) {
             int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
-            int buffEntity = entityWorld.getComponent(effectImpactEntity, RemoveBuffComponent.class).getBuffEntity();
-            removeBuff(entityWorld, targetEntity, buffEntity);
+            int[] buffEntities = entityWorld.getComponent(effectImpactEntity, RemoveBuffComponent.class).getBuffEntities();
+            for (int buffEntity : buffEntities) {
+                removeBuff(entityWorld, targetEntity, buffEntity);
+            }
         }
     }
 

@@ -25,7 +25,7 @@ public class CastSpellSystem implements EntitySystem {
             if ((targetEntity != -1) && entityWorld.hasComponent(spellEntity, CastTurnToTargetComponent.class)) {
                 PositionComponent targetPositionComponent = entityWorld.getComponent(targetEntity, PositionComponent.class);
                 DirectionComponent targetDirectionComponent = entityWorld.getComponent(targetEntity, DirectionComponent.class);
-                //Turn into cast direction
+                // Turn into cast direction
                 Vector2f turnDirection = null;
                 if (targetPositionComponent != null) {
                     Vector2f casterPosition = entityWorld.getComponent(casterEntity, PositionComponent.class).getPosition();
@@ -57,12 +57,14 @@ public class CastSpellSystem implements EntitySystem {
     }
 
     public static boolean canCast(EntityWorld entityWorld, int casterEntity, int spellEntity) {
-        if (isAbleToPerformAction(entityWorld, casterEntity) && canPayCastCost(entityWorld, casterEntity, spellEntity)) {
-            AutoAttackComponent autoAttackComponent = entityWorld.getComponent(casterEntity, AutoAttackComponent.class);
-            if ((autoAttackComponent != null) && (spellEntity == autoAttackComponent.getAutoAttackEntity())) {
-                return true;
+        if (!entityWorld.hasComponent(spellEntity, RemainingCooldownComponent.class)) {
+            if (isAbleToPerformAction(entityWorld, casterEntity) && canPayCastCost(entityWorld, casterEntity, spellEntity)) {
+                AutoAttackComponent autoAttackComponent = entityWorld.getComponent(casterEntity, AutoAttackComponent.class);
+                if ((autoAttackComponent != null) && (spellEntity == autoAttackComponent.getAutoAttackEntity())) {
+                    return true;
+                }
+                return (!entityWorld.hasComponent(casterEntity, IsSilencedComponent.class));
             }
-            return (!entityWorld.hasComponent(casterEntity, IsSilencedComponent.class));
         }
         return false;
     }

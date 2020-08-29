@@ -9,9 +9,13 @@ public class RemoveAppliedEffectImpactsSystem implements EntitySystem {
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
         for (int effectImpactEntity : entityWorld.getEntitiesWithAny(ApplyEffectImpactComponent.class)) {
-            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
-            entityWorld.removeEntity(effectImpactEntity);
-            CleanupTemporaryTargetsUtil.tryRemoveTemporaryTargetEntity(entityWorld, targetEntity);
+            removeEffectImpact(entityWorld, effectImpactEntity);
         }
+    }
+
+    public static void removeEffectImpact(EntityWorld entityWorld, int effectImpactEntity) {
+        int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
+        entityWorld.removeEntity(effectImpactEntity);
+        CleanupTemporaryTargetsUtil.tryRemoveTemporaryTargetEntity(entityWorld, targetEntity);
     }
 }

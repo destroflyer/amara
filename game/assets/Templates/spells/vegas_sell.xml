@@ -1,0 +1,42 @@
+<template>
+    <entity id="spell">
+        <name>Sell</name>
+        <!--<spellVisualisation>TODO</spellVisualisation>-->
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castTurnToTarget/>
+        <spellTargetRules>
+            <entity>
+                <acceptAllies/>
+                <requireAnyBuffs>[parameter4],[parameter8]</requireAnyBuffs>
+            </entity>
+        </spellTargetRules>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--remove unit-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeEntity/>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

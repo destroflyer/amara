@@ -32,7 +32,7 @@ public class Map_Techtest extends Map{
     }
 
     @Override
-    public void load(EntityWorld entityWorld){
+    public void load(EntityWorld entityWorld, int teamPlayersCount){
         int targetPositionEntity = entityWorld.createEntity();
         entityWorld.setComponent(targetPositionEntity, new PositionComponent(new Vector2f(50, 50)));
         for(int y=0;y<10;y++){

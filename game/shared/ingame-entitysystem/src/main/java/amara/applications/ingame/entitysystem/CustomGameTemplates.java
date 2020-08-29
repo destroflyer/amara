@@ -30,9 +30,11 @@ import amara.libraries.physics.util2d.PointUtil;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 
-public class CustomGameTemplates{
-    
-    public static void registerLoader(){
+public class CustomGameTemplates {
+
+    public static int[] MAP_VEGAS_UNIT_COSTS = new int[]{ 1, 1, 1 };
+
+    public static void registerLoader() {
         EntityTemplate.addLoader((entityWorld, entity, templateName, parametersText) -> {
             EntityWrapper entityWrapper = entityWorld.getWrapped(entity);
             XMLTemplateManager.getInstance().loadTemplate(entityWorld, entity, templateName, parametersText);
@@ -341,7 +343,7 @@ public class CustomGameTemplates{
                 EntityWrapper spawnInformationEntity = entityWorld.getWrapped(entityWorld.createEntity());
                 spawnInformationEntity.setComponent(new SpawnTemplateComponent("../Maps/etherdesert/templates/tower_" + towerIndex));
                 spawnInformationEntity.setComponent(new SpawnRedirectReceivedBountiesComponent());
-                spawnInformationEntity.setComponent(new SpawnApplyAsRespawnTransformComponent());
+                spawnInformationEntity.setComponent(new SpawnSetAsRespawnTransformComponent());
                 effect.setComponent(new SpawnComponent(spawnInformationEntity.getId()));
                 effectTrigger.setComponent(new TriggeredEffectComponent(effect.getId()));
                 effectTrigger.setComponent(new TriggerSourceComponent(itemActiveEntity));
@@ -407,6 +409,31 @@ public class CustomGameTemplates{
                 System.arraycopy(oldInstantEffectTriggers, 0, effectTriggers, 0, oldInstantEffectTriggers.length);
                 System.arraycopy(newInstantEffectTriggers, 0, effectTriggers, oldInstantEffectTriggers.length, newInstantEffectTriggers.length);
                 entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTriggers));
+            } else if (templateName.startsWith("items/vegas_unit_")){
+                int unitIndex = Integer.parseInt(templateName.substring("items/vegas_unit_".length()));
+                entityWrapper.setComponent(new ItemIDComponent("vegas_unit_" + unitIndex));
+                entityWrapper.setComponent(new ItemVisualisationComponent("vegas_unit_" + unitIndex));
+                entityWrapper.setComponent(new NameComponent("Unit #" + unitIndex));
+                int combineCostEntity = entityWorld.createEntity();
+                entityWorld.setComponent(combineCostEntity, new GoldCostComponent(MAP_VEGAS_UNIT_COSTS[unitIndex]));
+                entityWrapper.setComponent(new ItemRecipeComponent(combineCostEntity));
+                entityWrapper.setComponent(new IsSellableComponent(MAP_VEGAS_UNIT_COSTS[unitIndex]));
+                int itemActiveEntity = entityWorld.createEntity();
+                entityWorld.setComponent(itemActiveEntity, new DescriptionComponent("Puts unit #" + unitIndex + " on your bench"));
+                int effectTriggerEntity = entityWorld.createEntity();
+                // BuffTargetsTargetComponent will be created by map
+                entityWorld.setComponent(effectTriggerEntity, new MaximumTargetsComponent(1));
+                int effectEntity = entityWorld.createEntity();
+                int spawnInformationEntity = entityWorld.createEntity();
+                entityWorld.setComponent(spawnInformationEntity, new SpawnTemplateComponent("../Maps/vegas/templates/unit_" + unitIndex));
+                // SpawnBuffsComponent will be created by map
+                entityWorld.setComponent(effectEntity, new SpawnComponent(spawnInformationEntity));
+                entityWorld.setComponent(effectTriggerEntity, new TriggeredEffectComponent(effectEntity));
+                entityWorld.setComponent(effectTriggerEntity, new TriggerSourceComponent(itemActiveEntity));
+                entityWorld.setComponent(itemActiveEntity, new InstantEffectTriggersComponent(effectTriggerEntity));
+                entityWorld.setComponent(itemActiveEntity, new CastTypeComponent(CastTypeComponent.CastType.SELFCAST));
+                // CastCostComponent will be created by map
+                entityWrapper.setComponent(new ItemActiveComponent(itemActiveEntity, true));
             }
         });
     }

@@ -30,7 +30,7 @@ import com.jme3.math.Vector2f;
 public class Map_Astrudan extends Map {
 
     @Override
-    public void load(EntityWorld entityWorld) {
+    public void load(EntityWorld entityWorld, int teamPlayersCount) {
         // Spawn mobs trigger
         int spawnMobsTrigger = entityWorld.createEntity();
         entityWorld.setComponent(spawnMobsTrigger, new RepeatingTriggerComponent(5));

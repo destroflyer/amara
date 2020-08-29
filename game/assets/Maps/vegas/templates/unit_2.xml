@@ -1,0 +1,75 @@
+<template>
+    <entity>
+        <name>Pseudospider</name>
+        <isMinion/>
+        <!--model-->
+        <model>Models/pseudospider/skin.xml</model>
+        <idleAnimation>
+            <entity id="idleAnimation">
+                <name>idle</name>
+                <loopDuration>1.5</loopDuration>
+            </entity>
+        </idleAnimation>
+        <walkAnimation>
+            <entity>
+                <name>walk</name>
+            </entity>
+        </walkAnimation>
+        <autoAttackAnimation>
+            <entity>
+                <name>melee_attack</name>
+            </entity>
+        </autoAttackAnimation>
+        <deathAnimation>
+            <entity>
+                <name>death</name>
+                <loopDuration>1</loopDuration>
+                <freezeAfterPlaying/>
+            </entity>
+        </deathAnimation>
+        <animation>#idleAnimation</animation>
+        <!--physics-->
+        <hitbox>
+            <circle radius="1"/>
+        </hitbox>
+        <intersectionPushes/>
+        <intersectionPushed/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
+        <hitboxActive/>
+        <!--stats-->
+        <isAlive/>
+        <isRespawnable/>
+        <level>1</level>
+        <experience>0</experience>
+        <baseAttributes>
+            <entity>
+                <bonusFlatMaximumHealth>700</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>60</bonusFlatAttackDamage>
+                <bonusFlatAttackSpeed>0.5</bonusFlatAttackSpeed>
+                <bonusFlatArmor>35</bonusFlatArmor>
+                <bonusFlatMagicResistance>30</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>4</bonusFlatWalkSpeed>
+            </entity>
+        </baseAttributes>
+        <attributesPerLevel exponentialBase="2">
+            <entity>
+                <bonusFlatMaximumHealth>550</bonusFlatMaximumHealth>
+                <bonusFlatAttackDamage>55</bonusFlatAttackDamage>
+            </entity>
+        </attributesPerLevel>
+        <requestUpdateAttributes/>
+        <sightRange>999</sightRange>
+        <isTargetable/>
+        <isVulnerable/>
+        <isBindable/>
+        <isKnockupable/>
+        <isSilencable/>
+        <isStunnable/>
+        <!--spells-->
+        <autoAttack>
+            <entity template="spells/melee_autoattack"/>
+        </autoAttack>
+        <!--other-->
+        <healthBarStyle>character</healthBarStyle>
+    </entity>
+</template>

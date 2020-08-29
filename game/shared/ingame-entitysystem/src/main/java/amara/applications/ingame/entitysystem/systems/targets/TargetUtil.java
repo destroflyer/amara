@@ -35,8 +35,16 @@ public class TargetUtil {
                 }
             }
             if (isValid) {
-                RequireBuffsComponent requireBuffsComponent = entityWorld.getComponent(targetRulesEntity, RequireBuffsComponent.class);
-                if ((requireBuffsComponent != null) && (!BuffUtil.hasBuffs(entityWorld, targetEntity, requireBuffsComponent.getBuffEntities()))) {
+                RequireAllBuffsComponent requireAllBuffsComponent = entityWorld.getComponent(targetRulesEntity, RequireAllBuffsComponent.class);
+                if ((requireAllBuffsComponent != null) && (!BuffUtil.hasAllBuffs(entityWorld, targetEntity, requireAllBuffsComponent.getBuffEntities()))) {
+                    return false;
+                }
+                RequireAnyBuffsComponent requireAnyBuffsComponent = entityWorld.getComponent(targetRulesEntity, RequireAnyBuffsComponent.class);
+                if ((requireAnyBuffsComponent != null) && (!BuffUtil.hasAnyBuffs(entityWorld, targetEntity, requireAnyBuffsComponent.getBuffEntities()))) {
+                    return false;
+                }
+                RequireNoBuffsComponent requireNoBuffsComponent = entityWorld.getComponent(targetRulesEntity, RequireNoBuffsComponent.class);
+                if ((requireNoBuffsComponent != null) && BuffUtil.hasAnyBuffs(entityWorld, targetEntity, requireNoBuffsComponent.getBuffEntities())) {
                     return false;
                 }
                 RequireEntityComponent requireEntityComponent = entityWorld.getComponent(targetRulesEntity, RequireEntityComponent.class);

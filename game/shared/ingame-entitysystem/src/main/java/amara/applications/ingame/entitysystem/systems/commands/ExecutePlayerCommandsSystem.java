@@ -1,11 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.commands;
 
 import java.util.Iterator;
 
+import amara.applications.ingame.shared.maps.Map;
 import amara.core.Queue;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.items.*;
@@ -26,18 +23,16 @@ import amara.applications.ingame.network.messages.objects.commands.casting.*;
 import amara.libraries.entitysystem.*;
 import com.jme3.math.Vector2f;
 
-/**
- *
- * @author Carl
- */
-public class ExecutePlayerCommandsSystem implements EntitySystem{
-    
-    public ExecutePlayerCommandsSystem(Queue<PlayerCommand> playerCommandsQueue, CastSpellQueueSystem castSpellQueueSystem){
+public class ExecutePlayerCommandsSystem implements EntitySystem {
+
+    public ExecutePlayerCommandsSystem(Queue<PlayerCommand> playerCommandsQueue, CastSpellQueueSystem castSpellQueueSystem, Map map) {
         this.playerCommandsQueue = playerCommandsQueue;
         this.castSpellQueueSystem = castSpellQueueSystem;
+        this.map = map;
     }
     private Queue<PlayerCommand> playerCommandsQueue;
     private CastSpellQueueSystem castSpellQueueSystem;
+    private Map map;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
@@ -51,7 +46,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem{
             if (command instanceof BuyItemCommand) {
                 BuyItemCommand buyItemCommand = (BuyItemCommand) command;
                 if ((!isUnitAlive) || ShopUtil.isInShopRange(entityWorld, characterEntity)) {
-                    ShopUtil.buy(entityWorld, characterEntity, buyItemCommand.getItemID());
+                    ShopUtil.buy(entityWorld, characterEntity, buyItemCommand.getItemID(), map);
                 }
             } else if (command instanceof SellItemCommand) {
                 SellItemCommand sellItemCommand = (SellItemCommand) command;

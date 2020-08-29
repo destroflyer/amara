@@ -78,7 +78,7 @@ public class IngamePlayersAppState extends ServerBaseAppState {
             playerName = gamePlayerInfo_Bot.getName();
             entityWorld.setComponent(playerEntity, new IsBotComponent());
             // Skin
-            Integer skinIdResult = databaseAppState.getQueryResult("SELECT id FROM characters_skins WHERE (character_id = " + characterId + ") ORDER BY RANDOM() LIMIT 1").nextInteger_Close();
+            Integer skinIdResult = databaseAppState.getQueryResult("SELECT id FROM characters_skins WHERE (character_id = " + characterId + ") ORDER BY RAND() LIMIT 1").nextInteger_Close();
             if (skinIdResult != null) {
                 skinId = skinIdResult;
             }

@@ -15,6 +15,7 @@
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
+        <customCleanup/>
     </entity>
     <!--spell effect-->
     <entity>

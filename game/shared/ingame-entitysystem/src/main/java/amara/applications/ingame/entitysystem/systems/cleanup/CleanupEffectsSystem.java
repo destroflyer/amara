@@ -45,8 +45,10 @@ public class CleanupEffectsSystem implements EntitySystem {
         }
         //buffs
         for (int entity : observer.getRemoved().getEntitiesWithAny(AddBuffComponent.class)) {
-            int buffEntity = observer.getRemoved().getComponent(entity, AddBuffComponent.class).getBuffEntity();
-            CleanupUtil.tryCleanupEntity(entityWorld, buffEntity);
+            int[] buffEntities = observer.getRemoved().getComponent(entity, AddBuffComponent.class).getBuffEntities();
+            for (int buffEntity : buffEntities) {
+                CleanupUtil.tryCleanupEntity(entityWorld, buffEntity);
+            }
         }
         for (int entity : observer.getRemoved().getEntitiesWithAny(AddBuffAreaComponent.class)) {
             int buffAreaEntity = observer.getRemoved().getComponent(entity, AddBuffAreaComponent.class).getBuffAreaEntity();

@@ -26,8 +26,8 @@ public abstract class BuffVisualisationSystem implements EntitySystem {
     public void update(EntityWorld entityWorld, float deltaSeconds) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, ActiveBuffComponent.class, StacksComponent.class);
         // Add visualisations
-        for (int entity : observer.getNew().getEntitiesWithAny(ActiveBuffComponent.class)) {
-            onBuffAdded(entityWorld, entity);
+        for (int buffStatusEntity : observer.getNew().getEntitiesWithAny(ActiveBuffComponent.class)) {
+            onBuffAdded(entityWorld, buffStatusEntity);
         }
         // Update visualisations
         for (int buffStatusEntity : observer.getNew().getEntitiesWithAny(StacksComponent.class)) {
@@ -37,8 +37,8 @@ public abstract class BuffVisualisationSystem implements EntitySystem {
             onStacksChanged(entityWorld, buffStatusEntity);
         }
         // Remove visualisations
-        for (int entity : observer.getRemoved().getEntitiesWithAny(ActiveBuffComponent.class)) {
-            onBuffRemoved(entityWorld, observer.getRemoved().getComponent(entity, ActiveBuffComponent.class));
+        for (int buffStatusEntity : observer.getRemoved().getEntitiesWithAny(ActiveBuffComponent.class)) {
+            onBuffRemoved(entityWorld, observer.getRemoved().getComponent(buffStatusEntity, ActiveBuffComponent.class));
         }
     }
 
@@ -116,11 +116,13 @@ public abstract class BuffVisualisationSystem implements EntitySystem {
     }
 
     private void onStacksChanged(EntityWorld entityWorld, int buffStatusEntity) {
-        int targetEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getTargetEntity();
-        int stacks = entityWorld.getComponent(buffStatusEntity, StacksComponent.class).getStacks();
-        Node entityNode = entitySceneMap.requestNode(targetEntity);
-        Spatial visualAttachment = entityNode.getChild(getVisualAttachmentID());
-        updateBuffVisualisationStacks(visualAttachment, stacks);
+        ActiveBuffComponent activeBuffComponent = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class);
+        if (shouldBeVisualized(entityWorld, activeBuffComponent)) {
+            int stacks = entityWorld.getComponent(buffStatusEntity, StacksComponent.class).getStacks();
+            Node entityNode = entitySceneMap.requestNode(activeBuffComponent.getTargetEntity());
+            Spatial visualAttachment = entityNode.getChild(getVisualAttachmentID());
+            updateBuffVisualisationStacks(visualAttachment, stacks);
+        }
     }
 
     protected void updateBuffVisualisationStacks(Spatial visualAttachment, int stacks) {

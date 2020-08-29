@@ -23,6 +23,7 @@
         <castCancelAction/>
         <castTurnToTarget/>
         <baseCooldown>11</baseCooldown>
+        <customCleanup/>
     </entity>
     <!--spell effect-->
     <entity>

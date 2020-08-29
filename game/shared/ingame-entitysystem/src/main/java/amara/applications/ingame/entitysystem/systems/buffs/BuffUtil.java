@@ -6,13 +6,22 @@ import amara.libraries.entitysystem.EntityWorld;
 
 public class BuffUtil {
 
-    public static boolean hasBuffs(EntityWorld entityWorld, int entity, int[] buffEntities) {
+    public static boolean hasAllBuffs(EntityWorld entityWorld, int entity, int[] buffEntities) {
         for (int buffEntity : buffEntities) {
             if (!hasBuff(entityWorld, entity, buffEntity)) {
                 return false;
             }
         }
         return true;
+    }
+
+    public static boolean hasAnyBuffs(EntityWorld entityWorld, int entity, int[] buffEntities) {
+        for (int buffEntity : buffEntities) {
+            if (hasBuff(entityWorld, entity, buffEntity)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean hasBuff(EntityWorld entityWorld, int entity, int buffEntity) {

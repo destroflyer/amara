@@ -4,13 +4,13 @@ import amara.libraries.entitysystem.synchronizing.ComponentField;
 import com.jme3.network.serializing.Serializable;
 
 @Serializable
-public class RequireBuffsComponent {
+public class RequireAllBuffsComponent {
 
-    public RequireBuffsComponent() {
+    public RequireAllBuffsComponent() {
 
     }
 
-    public RequireBuffsComponent(int[] buffEntities) {
+    public RequireAllBuffsComponent(int... buffEntities) {
         this.buffEntities = buffEntities;
     }
     @ComponentField(type=ComponentField.Type.ENTITY)

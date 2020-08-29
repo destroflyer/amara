@@ -1,10 +1,12 @@
 package amara.applications.ingame.entitysystem.systems.effects.buffs;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
+import amara.applications.ingame.entitysystem.components.buffs.OnBuffAddEffectTriggersComponent;
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.buffs.*;
 import amara.applications.ingame.entitysystem.components.units.BuffsComponent;
+import amara.applications.ingame.entitysystem.systems.effects.triggers.EffectTriggerUtil;
 import amara.applications.ingame.entitysystem.systems.general.EntityArrayUtil;
 import amara.libraries.entitysystem.*;
 
@@ -15,11 +17,13 @@ public class ApplyAddBuffsSystem implements EntitySystem {
         for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddBuffComponent.class)) {
             int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
             AddBuffComponent addBuffComponent = entityWorld.getComponent(effectImpactEntity, AddBuffComponent.class);
-            int buffStatusEntity = addBuff(entityWorld, targetEntity, addBuffComponent.getBuffEntity(), addBuffComponent.getDuration());
-            EntityUtil.transferComponents(entityWorld, effectImpactEntity, buffStatusEntity, new Class[] {
-                EffectSourceComponent.class,
-                EffectSourceSpellComponent.class
-            });
+            for (int buffEntity : addBuffComponent.getBuffEntities()) {
+                int buffStatusEntity = addBuff(entityWorld, targetEntity, buffEntity, addBuffComponent.getDuration());
+                EntityUtil.transferComponents(entityWorld, effectImpactEntity, buffStatusEntity, new Class[] {
+                        EffectSourceComponent.class,
+                        EffectSourceSpellComponent.class
+                });
+            }
         }
     }
 
@@ -55,6 +59,10 @@ public class ApplyAddBuffsSystem implements EntitySystem {
             entityWorld.removeComponent(buffStatusEntity, RemainingBuffDurationComponent.class);
         }
         entityWorld.setComponent(targetEntity, new RequestUpdateAttributesComponent());
+        OnBuffAddEffectTriggersComponent onBuffAddEffectTriggersComponent = entityWorld.getComponent(buffEntity, OnBuffAddEffectTriggersComponent.class);
+        if (onBuffAddEffectTriggersComponent != null) {
+            EffectTriggerUtil.triggerEffects(entityWorld, onBuffAddEffectTriggersComponent.getEffectTriggerEntities(), targetEntity);
+        }
         return buffStatusEntity;
     }
 }

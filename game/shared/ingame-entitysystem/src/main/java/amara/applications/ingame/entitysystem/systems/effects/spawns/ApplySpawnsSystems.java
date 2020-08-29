@@ -112,7 +112,7 @@ public class ApplySpawnsSystems implements EntitySystem {
                 if(spawnInformation.hasComponent(SpawnAttackMoveComponent.class)){
                     spawnedObject.setComponent(new AttackMoveComponent(targetEntity));
                 }
-                if(spawnInformation.hasComponent(SpawnApplyAsRespawnTransformComponent.class)){
+                if(spawnInformation.hasComponent(SpawnSetAsRespawnTransformComponent.class)){
                     spawnedObject.setComponent(new RespawnPositionComponent(position));
                     spawnedObject.setComponent(new RespawnDirectionComponent(direction));
                 }

@@ -15,6 +15,7 @@ import amara.applications.ingame.entitysystem.systems.effects.triggers.EffectTri
 import amara.applications.ingame.entitysystem.systems.items.ItemUtil;
 import amara.applications.ingame.entitysystem.systems.units.CostUtil;
 import amara.applications.ingame.network.messages.objects.commands.ItemIndex;
+import amara.applications.ingame.shared.maps.Map;
 import amara.core.Util;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
@@ -47,7 +48,7 @@ public class ShopUtil {
         return false;
     }
 
-    public static boolean buy(EntityWorld entityWorld, int entity, String itemId) {
+    public static boolean buy(EntityWorld entityWorld, int entity, String itemId, Map map) {
         tmpItemEntities.clear();
         InventoryComponent inventoryComponent = entityWorld.getComponent(entity, InventoryComponent.class);
         if (inventoryComponent != null) {
@@ -74,6 +75,7 @@ public class ShopUtil {
         if ((tmpItemEntities.size() <= ItemUtil.MAX_INVENTORY_SIZE) && CostUtil.isPayable(entityWorld, entity, costEntities)) {
             CostUtil.pay(entityWorld, entity, costEntities);
             EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + itemId);
+            map.initializeItem(entityWorld, itemEntity, entity);
             addToShopGoldExpenses(entityWorld, entity, itemEntity, costEntities);
             entityWorld.setComponent(entity, new InventoryComponent(Util.convertToArray_Integer(tmpItemEntities)));
             entityWorld.setComponent(entity, new RequestUpdateAttributesComponent());

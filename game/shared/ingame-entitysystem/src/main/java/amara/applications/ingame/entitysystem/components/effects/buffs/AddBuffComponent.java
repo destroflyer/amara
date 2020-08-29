@@ -1,37 +1,29 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.components.effects.buffs;
 
 import com.jme3.network.serializing.Serializable;
 import amara.libraries.entitysystem.synchronizing.ComponentField;
 
-/**
- *
- * @author Carl
- */
 @Serializable
-public class AddBuffComponent{
+public class AddBuffComponent {
 
-    public AddBuffComponent(){
-        
+    public AddBuffComponent() {
+
     }
-    
-    public AddBuffComponent(int buffEntity, float duration){
-        this.buffEntity = buffEntity;
+
+    public AddBuffComponent(int[] buffEntities, float duration) {
+        this.buffEntities = buffEntities;
         this.duration = duration;
     }
     @ComponentField(type=ComponentField.Type.ENTITY)
-    private int buffEntity;
+    private int[] buffEntities;
     @ComponentField(type=ComponentField.Type.TIMER)
     private float duration;
 
-    public int getBuffEntity(){
-        return buffEntity;
+    public int[] getBuffEntities() {
+        return buffEntities;
     }
 
-    public float getDuration(){
+    public float getDuration() {
         return duration;
     }
 }

@@ -10,7 +10,7 @@ public class SpawnBuffsComponent {
 
     }
 
-    public SpawnBuffsComponent(int[] buffEntities) {
+    public SpawnBuffsComponent(int... buffEntities) {
         this.buffEntities = buffEntities;
     }
     @ComponentField(type=ComponentField.Type.ENTITY)

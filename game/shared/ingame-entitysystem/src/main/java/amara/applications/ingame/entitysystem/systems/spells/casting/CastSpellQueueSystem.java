@@ -44,18 +44,16 @@ public class CastSpellQueueSystem implements EntitySystem {
 
     private static void tryCastSpell(EntityWorld entityWorld, int casterEntity, int spellEntity, int targetEntity) {
         boolean isCasted = false;
-        if(!entityWorld.hasComponent(spellEntity, RemainingCooldownComponent.class)){
-            if(CastSpellSystem.canCast(entityWorld, casterEntity, spellEntity)){
-                isCasted = true;
-                if (targetEntity != -1) {
-                    SpellTargetRulesComponent spellTargetRulesComponent = entityWorld.getComponent(spellEntity, SpellTargetRulesComponent.class);
-                    if (spellTargetRulesComponent != null) {
-                        isCasted = TargetUtil.isValidTarget(entityWorld, casterEntity, targetEntity, spellTargetRulesComponent.getTargetRulesEntity());
-                    }
+        if (CastSpellSystem.canCast(entityWorld, casterEntity, spellEntity)) {
+            isCasted = true;
+            if (targetEntity != -1) {
+                SpellTargetRulesComponent spellTargetRulesComponent = entityWorld.getComponent(spellEntity, SpellTargetRulesComponent.class);
+                if (spellTargetRulesComponent != null) {
+                    isCasted = TargetUtil.isValidTarget(entityWorld, casterEntity, targetEntity, spellTargetRulesComponent.getTargetRulesEntity());
                 }
-                if (isCasted) {
-                    isCasted = addSpellCastComponents(entityWorld, casterEntity, spellEntity, targetEntity);
-                }
+            }
+            if (isCasted) {
+                isCasted = addSpellCastComponents(entityWorld, casterEntity, spellEntity, targetEntity);
             }
         }
         if ((!isCasted) && entityWorld.hasComponent(targetEntity, TemporaryComponent.class)) {

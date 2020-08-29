@@ -74,6 +74,7 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyStopSystem());
         add(new ApplyMoveSystem());
         add(new ApplyTeleportSystem());
+        add(new ApplyRelativeTeleportSystem());
         add(new ApplyActivateHitboxSystem());
         add(new ApplyAddCollisiongGroupsSystem());
         add(new ApplyAddIntersectionPushedSystem());
@@ -82,6 +83,7 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyRemoveCollisiongGroupsSystem());
         add(new ApplyRemoveIntersectionPushedSystem());
         add(new ApplyRemoveIntersectionPushesSystem());
+        add(new ApplySetScaleSystem());
         add(new ApplySwapPositionsSystem());
         add(new ApplyDisplayPlayerAnnouncementsSystem());
         add(new ApplyAddPopupsSystem());
@@ -96,7 +98,11 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyTriggerSpellEffectsSystem());
         add(new ApplyAddGoldSystem());
         add(new ApplyCancelActionsSystem());
+        add(new ApplyLevelUpSystem());
+        add(new ApplyRemoveAutoAggroSystem());
         add(new ApplyRespawnSystem(map));
+        add(new ApplySetAsRespawnTransformSystem());
+        add(new ApplySetAutoAggroSystem());
         add(new ApplyAddStealthSystem());
         add(new ApplyRemoveStealthSystem());
         add(new ApplyPlayAnimationsSystem());

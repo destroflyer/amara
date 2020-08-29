@@ -1,10 +1,15 @@
 package amara.applications.ingame.entitysystem.systems.effects.triggers;
 
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.game.NextEffectActionIndexComponent;
+import amara.applications.ingame.entitysystem.components.physics.PositionComponent;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
@@ -14,6 +19,7 @@ import amara.applications.ingame.entitysystem.systems.targets.TargetUtil;
 import amara.applications.ingame.shared.maps.Map;
 import amara.core.Util;
 import amara.libraries.entitysystem.*;
+import com.jme3.math.Vector2f;
 
 public class EffectTriggerUtil {
 
@@ -105,7 +111,7 @@ public class EffectTriggerUtil {
         return nextEffectActionIndex;
     }
 
-    private static LinkedList<Integer> tmpTargetEntities = new LinkedList<>();
+    private static List<Integer> tmpTargetEntities = new LinkedList<>();
     private static int[] getTargetEntities(EntityWorld entityWorld, int entity, int targetEntity) {
         tmpTargetEntities.clear();
         TriggerSourceComponent triggerSourceComponent = entityWorld.getComponent(entity, TriggerSourceComponent.class);
@@ -156,6 +162,34 @@ public class EffectTriggerUtil {
                     tmpTargetEntities.add(entityInTeam);
                 }
             }
+        }
+        if (entityWorld.hasComponent(entity, ExcludeTargetTargetComponent.class)) {
+            tmpTargetEntities.remove((Integer) targetEntity);
+        }
+        MaximumTargetsComponent maximumTargetsComponent = entityWorld.getComponent(entity, MaximumTargetsComponent.class);
+        if ((maximumTargetsComponent != null) && (tmpTargetEntities.size() > maximumTargetsComponent.getMaximum())) {
+            Stream<Integer> targetStream = tmpTargetEntities.stream();
+            if (triggerSourceComponent != null) {
+                // Decide priority by distance if existing
+                PositionComponent relevantPositionComponent = entityWorld.getComponent(triggerSourceComponent.getSourceEntity(), PositionComponent.class);
+                if (relevantPositionComponent == null) {
+                    relevantPositionComponent = entityWorld.getComponent(targetEntity, PositionComponent.class);;
+                }
+                if (relevantPositionComponent != null) {
+                    Vector2f relevantPosition = relevantPositionComponent.getPosition();
+                    targetStream = targetStream.sorted((target1, target2) -> {
+                        PositionComponent positionComponentTarget1 = entityWorld.getComponent(target1, PositionComponent.class);
+                        PositionComponent positionComponentTarget2 = entityWorld.getComponent(target2, PositionComponent.class);
+                        if ((positionComponentTarget1 != null) && (positionComponentTarget2 != null)) {
+                            float distanceSquaredTarget1 = relevantPosition.distanceSquared(positionComponentTarget1.getPosition());
+                            float distanceSquaredTarget2 = relevantPosition.distanceSquared(positionComponentTarget2.getPosition());
+                            return Float.compare(distanceSquaredTarget1, distanceSquaredTarget2);
+                        }
+                        return 0;
+                    });
+                }
+            }
+            tmpTargetEntities = targetStream.limit(maximumTargetsComponent.getMaximum()).collect(Collectors.toList());
         }
         return Util.convertToArray_Integer(tmpTargetEntities);
     }

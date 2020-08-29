@@ -35,7 +35,7 @@ public class Map_Testmap extends Map {
     }
 
     @Override
-    public void load(EntityWorld entityWorld){
+    public void load(EntityWorld entityWorld, int teamPlayersCount){
         //Field of test units
         EntityWrapper testUnitBounty = entityWorld.getWrapped(entityWorld.createEntity());
         testUnitBounty.setComponent(new BountyCreepScoreComponent());

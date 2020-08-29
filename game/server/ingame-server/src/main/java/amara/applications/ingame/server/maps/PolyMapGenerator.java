@@ -38,7 +38,7 @@ public class PolyMapGenerator {
     public static void main(String[] args) {
         FileAssets.readRootFile();
         PolyMapGenerator polyMapGenerator = new PolyMapGenerator(0, 1.5);
-        String[] mapNames = { "arama", "astrudan", "destroforest", "empty", "etherdesert", "techtest", "testmap" };
+        String[] mapNames = { "arama", "astrudan", "destroforest", "empty", "etherdesert", "techtest", "testmap", "vegas" };
         for (String mapName : mapNames) {
             System.out.println("Calculating navigation triangles for '" + mapName + "'...");
             Map map = MapFileHandler.load(mapName);

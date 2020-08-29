@@ -56,8 +56,7 @@ public class ScreenController_Shop extends GameScreenController{
         }
         // Preload recipes
         for (EntityWrapper shopItem_Special : shopItems_Special) {
-            String itemID = shopItem_Special.getComponent(ItemIDComponent.class).getID();
-            getItemRecipe(itemID);
+            loadItemRecipe(shopItem_Special);
         }
         onShopItemFilter(0, true);
     }
@@ -70,19 +69,29 @@ public class ScreenController_Shop extends GameScreenController{
         }
         // Preload recipes
         for (EntityWrapper shopItem : shopItems) {
-            String itemID = shopItem.getComponent(ItemIDComponent.class).getID();
-            getItemRecipe(itemID);
+            loadItemRecipe(shopItem);
         }
     }
 
-    private ItemRecipe getItemRecipe(String itemID){
+    private void loadItemRecipe(EntityWrapper item) {
+        String itemID = item.getComponent(ItemIDComponent.class).getID();
+        getItemRecipe(itemID, item.getId());
+    }
+
+    private ItemRecipe getItemRecipe(String itemID) {
+        return getItemRecipe(itemID, -1);
+    }
+
+    private ItemRecipe getItemRecipe(String itemID, int itemEntity) {
         ItemRecipe itemRecipe = itemsRecipes.get(itemID);
-        if(itemRecipe == null){
-            int itemEntity = StaticEntityWorld.loadTemplate("items/" + itemID);
+        if (itemRecipe == null) {
+            if (itemEntity == -1) {
+                itemEntity = StaticEntityWorld.loadTemplate("items/" + itemID);
+            }
             ItemRecipeComponent itemRecipeComponent = StaticEntityWorld.getEntityWorld().getComponent(itemEntity, ItemRecipeComponent.class);
             ItemRecipe[] ingredientsRecipes = new ItemRecipe[itemRecipeComponent.getItemIDs().length];
             int previousDepth = -1;
-            for(int i=0;i<ingredientsRecipes.length;i++){
+            for (int i = 0 ; i < ingredientsRecipes.length; i++) {
                 ItemRecipe ingredientRecipe = getItemRecipe(itemRecipeComponent.getItemIDs()[i]);
                 if(ingredientRecipe.getDepth() > previousDepth){
                     previousDepth = ingredientRecipe.getDepth();
@@ -96,7 +105,7 @@ public class ScreenController_Shop extends GameScreenController{
         }
         return itemRecipe;
     }
-    
+
     public void updateRecipeCosts(EntityWorld entityWorld, int[] inventoryItemEntities){
         tmpInventoryItemsRecipes.clear();
         for (int inventoryItemEntity : inventoryItemEntities) {

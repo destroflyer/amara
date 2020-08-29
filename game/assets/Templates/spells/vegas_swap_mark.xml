@@ -1,0 +1,90 @@
+<template>
+    <entity id="spell">
+        <name>Move (Mark)</name>
+        <!--<spellVisualisation>TODO</spellVisualisation>-->
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castTurnToTarget/>
+        <spellTargetRules>
+            <entity>
+                <acceptAllies/>
+                <requireAnyBuffs>[parameter5],[parameter9]</requireAnyBuffs>
+            </entity>
+        </spellTargetRules>
+        <customCleanup/>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--add buff-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="-1">
+                            <entity id="buff">
+                                <buffVisualisation>intervention</buffVisualisation>
+                                <onBuffRemoveEffectTriggers>
+                                    <entity>
+                                        <casterTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <replaceSpellWithExistingSpell spellIndex="[parameter0]">#spell</replaceSpellWithExistingSpell>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffRemoveEffectTriggers>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--unit on bench -> replace with put in spell-->
+            <entity>
+                <casterTarget/>
+                <triggerConditions>
+                    <entity>
+                        <targetTarget/>
+                        <hasBuffCondition>[parameter5]</hasBuffCondition>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <replaceSpellWithNewSpell spellIndex="[parameter0]" newSpellTemplate="./vegas_swap_apply([parameter1],[parameter2],[parameter3],[parameter4],[parameter5],[parameter6],[parameter7],[parameter8],[parameter9],#buff)"/>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--unit on board -> replace with put out spell-->
+            <entity>
+                <casterTarget/>
+                <triggerConditions>
+                    <entity>
+                        <targetTarget/>
+                        <hasBuffCondition>[parameter9]</hasBuffCondition>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <replaceSpellWithNewSpell spellIndex="[parameter0]" newSpellTemplate="./vegas_swap_apply([parameter1],[parameter6],[parameter7],[parameter8],[parameter9],[parameter2],[parameter3],[parameter4],[parameter5],#buff)"/>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

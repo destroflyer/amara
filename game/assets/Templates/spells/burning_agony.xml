@@ -16,6 +16,7 @@
         </instantEffectTriggers>
         <castType>selfcast</castType>
         <baseCooldown>4</baseCooldown>
+        <customCleanup/>
     </entity>
     <!--spell effect-->
     <entity>

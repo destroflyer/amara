@@ -97,8 +97,8 @@ public class GameLogic {
         entitySystems.add(new TriggerSpellsPassivesSystem());
         entitySystems.add(new TriggerItemPassivesSystem());
         CastSpellQueueSystem castSpellQueueSystem = new CastSpellQueueSystem();
-        entitySystems.add(new ExecutePlayerCommandsSystem(playerCommandsQueue, castSpellQueueSystem));
-        entitySystems.add(new ExecuteAIActionsSystem(entityBotsMap));
+        entitySystems.add(new ExecutePlayerCommandsSystem(playerCommandsQueue, castSpellQueueSystem, game.getMap()));
+        entitySystems.add(new ExecuteAIActionsSystem(entityBotsMap, castSpellQueueSystem, game.getMap()));
         entitySystems.add(new AggroResetTimersSystem());
         entitySystems.add(new AutoAggroSystem());
         entitySystems.add(new AttackMoveSystem());
@@ -151,9 +151,12 @@ public class GameLogic {
         entitySystems.add(new CheckHiddenAreasSystem(intersectionObserver));
         // Add 1 for the neutral team
         entitySystems.add(new TeamVisionSystem(game.getTeamsCount() + 1, game.getMap().getPhysicsInformation().generateVisionObstacles()));
+        entitySystems.add(new TriggerBuffTargetsAmountEffectSystem());
         entitySystems.add(new TriggerCollisionEffectSystem(intersectionObserver));
         entitySystems.add(new TriggerCastingFinishedEffectSystem());
         entitySystems.add(new TriggerFinishedObjectivesEffctSystem());
+        entitySystems.add(new TriggerNoBuffTargetsEffectSystem());
+        entitySystems.add(new TriggerHasBuffsEffectSystem());
         entitySystems.add(new TriggerStacksReachedEffectSystem());
         entitySystems.add(new TriggerRepeatingEffectSystem());
         entitySystems.add(new TriggerInstantEffectSystem());

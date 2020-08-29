@@ -12,7 +12,8 @@ public class ConditionUtil {
         return (isOrConditionMet(entityWorld, conditionEntity, targetEntity)
              && isHasBuffConditionMet(entityWorld, conditionEntity, targetEntity)
              && isHasHealthPortionConditionMet(entityWorld, conditionEntity, targetEntity)
-             && isNameAmountConditionMet(entityWorld, conditionEntity, targetEntity));
+             && isNameAmountConditionMet(entityWorld, conditionEntity, targetEntity)
+             && isNotExistingConditionMet(entityWorld, conditionEntity));
     }
 
     private static boolean isOrConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
@@ -33,7 +34,7 @@ public class ConditionUtil {
     private static boolean isHasBuffConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
         HasBuffConditionComponent hasBuffConditionComponent = entityWorld.getComponent(conditionEntity, HasBuffConditionComponent.class);
         if (hasBuffConditionComponent != null) {
-            return BuffUtil.hasBuffs(entityWorld, targetEntity, hasBuffConditionComponent.getBuffEntities());
+            return BuffUtil.hasAllBuffs(entityWorld, targetEntity, hasBuffConditionComponent.getBuffEntities());
         }
         return true;
     }
@@ -69,5 +70,9 @@ public class ConditionUtil {
             return (amount <= nameAmountConditionComponent.getMaximum());
         }
         return true;
+    }
+
+    private static boolean isNotExistingConditionMet(EntityWorld entityWorld, int conditionEntity) {
+        return !entityWorld.hasComponent(conditionEntity, NotExistingConditionComponent.class);
     }
 }

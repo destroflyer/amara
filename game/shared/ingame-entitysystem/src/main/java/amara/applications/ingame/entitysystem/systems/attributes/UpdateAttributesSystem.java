@@ -9,6 +9,7 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
 import amara.libraries.entitysystem.*;
+import com.jme3.math.FastMath;
 
 public class UpdateAttributesSystem implements EntitySystem{
     
@@ -18,22 +19,26 @@ public class UpdateAttributesSystem implements EntitySystem{
             AttributeBonus attributeBonus = new AttributeBonus();
             BaseAttributesComponent baseAttributesComponent = entityWrapper.getComponent(BaseAttributesComponent.class);
             if(baseAttributesComponent != null){
-                addAttributeBonus(entityWorld, attributeBonus, baseAttributesComponent.getBonusAttributesEntity());
+                addAttributeBonus(entityWorld, attributeBonus, baseAttributesComponent.getBonusAttributesEntity(), 1);
             }
             AttributesPerLevelComponent attributesPerLevelComponent = entityWrapper.getComponent(AttributesPerLevelComponent.class);
             if(attributesPerLevelComponent != null){
                 LevelComponent levelComponent = entityWrapper.getComponent(LevelComponent.class);
                 if(levelComponent != null){
-                    for(int i=0;i<levelComponent.getLevel();i++){
-                        addAttributeBonus(entityWorld, attributeBonus, attributesPerLevelComponent.getBonusAttributesEntity());
+                    float attributesPerLevelFactor;
+                    if (attributesPerLevelComponent.getExponentialBase() != 0) {
+                        attributesPerLevelFactor = FastMath.pow(attributesPerLevelComponent.getExponentialBase(), levelComponent.getLevel() - 1);
+                    } else {
+                        attributesPerLevelFactor = levelComponent.getLevel();
                     }
+                    addAttributeBonus(entityWorld, attributeBonus, attributesPerLevelComponent.getBonusAttributesEntity(), attributesPerLevelFactor);
                 }
             }
             InventoryComponent inventoryComponent = entityWrapper.getComponent(InventoryComponent.class);
             if(inventoryComponent != null){
                 int[] itemEntities = inventoryComponent.getItemEntities();
                 for (int itemEntity : itemEntities) {
-                    addAttributeBonus(entityWorld, attributeBonus, itemEntity);
+                    addAttributeBonus(entityWorld, attributeBonus, itemEntity, 1);
                 }
             }
             BuffsComponent buffsComponent = entityWrapper.getComponent(BuffsComponent.class);
@@ -42,15 +47,13 @@ public class UpdateAttributesSystem implements EntitySystem{
                     int buffEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getBuffEntity();
                     ContinuousAttributesComponent continuousAttributesComponent = entityWorld.getComponent(buffEntity, ContinuousAttributesComponent.class);
                     if (continuousAttributesComponent != null) {
-                        addAttributeBonus(entityWorld, attributeBonus, continuousAttributesComponent.getBonusAttributesEntity());
+                        addAttributeBonus(entityWorld, attributeBonus, continuousAttributesComponent.getBonusAttributesEntity(), 1);
                     }
                     ContinuousAttributesPerStackComponent continuousAttributesPerStackComponent = entityWorld.getComponent(buffEntity, ContinuousAttributesPerStackComponent.class);
                     if (continuousAttributesPerStackComponent != null) {
                         StacksComponent stacksComponent = entityWorld.getComponent(buffStatusEntity, StacksComponent.class);
                         if ((stacksComponent != null) && (stacksComponent.getStacks() > 0)) {
-                            for (int i = 0; i < stacksComponent.getStacks(); i++) {
-                                addAttributeBonus(entityWorld, attributeBonus, continuousAttributesPerStackComponent.getBonusAttributesEntity());
-                            }
+                            addAttributeBonus(entityWorld, attributeBonus, continuousAttributesPerStackComponent.getBonusAttributesEntity(), stacksComponent.getStacks());
                         }
                     }
                 }
@@ -136,71 +139,71 @@ public class UpdateAttributesSystem implements EntitySystem{
         }
     }
     
-    private void addAttributeBonus(EntityWorld entityWorld, AttributeBonus attributeBonus, int bonusAttributesEntity){
+    private void addAttributeBonus(EntityWorld entityWorld, AttributeBonus attributeBonus, int bonusAttributesEntity, float factor){
         EntityWrapper bonusEntityWrapper = entityWorld.getWrapped(bonusAttributesEntity);
         BonusFlatMaximumHealthComponent bonusFlatMaximumHealthComponent = bonusEntityWrapper.getComponent(BonusFlatMaximumHealthComponent.class);
         if(bonusFlatMaximumHealthComponent != null){
-            attributeBonus.addFlatMaximumHealth(bonusFlatMaximumHealthComponent.getValue());
+            attributeBonus.addFlatMaximumHealth(bonusFlatMaximumHealthComponent.getValue() * factor);
         }
-        BonusFlatHealthRegenerationComponent bonusFlatHealthRegenerationComponen = bonusEntityWrapper.getComponent(BonusFlatHealthRegenerationComponent.class);
-        if(bonusFlatHealthRegenerationComponen != null){
-            attributeBonus.addFlatHealthRegeneration(bonusFlatHealthRegenerationComponen.getValue());
+        BonusFlatHealthRegenerationComponent bonusFlatHealthRegenerationComponent = bonusEntityWrapper.getComponent(BonusFlatHealthRegenerationComponent.class);
+        if(bonusFlatHealthRegenerationComponent != null){
+            attributeBonus.addFlatHealthRegeneration(bonusFlatHealthRegenerationComponent.getValue() * factor);
         }
         BonusFlatAttackDamageComponent bonusFlatAttackDamageComponent = bonusEntityWrapper.getComponent(BonusFlatAttackDamageComponent.class);
         if(bonusFlatAttackDamageComponent != null){
-            attributeBonus.addFlatAttackDamage(bonusFlatAttackDamageComponent.getValue());
+            attributeBonus.addFlatAttackDamage(bonusFlatAttackDamageComponent.getValue() * factor);
         }
         BonusFlatAbilityPowerComponent bonusFlatAbilityPowerComponent = bonusEntityWrapper.getComponent(BonusFlatAbilityPowerComponent.class);
         if(bonusFlatAbilityPowerComponent != null){
-            attributeBonus.addFlatAbilityPower(bonusFlatAbilityPowerComponent.getValue());
+            attributeBonus.addFlatAbilityPower(bonusFlatAbilityPowerComponent.getValue() * factor);
         }
         BonusFlatAttackSpeedComponent bonusFlatAttackSpeedComponent = bonusEntityWrapper.getComponent(BonusFlatAttackSpeedComponent.class);
         if(bonusFlatAttackSpeedComponent != null){
-            attributeBonus.addFlatAttackSpeed(bonusFlatAttackSpeedComponent.getValue());
+            attributeBonus.addFlatAttackSpeed(bonusFlatAttackSpeedComponent.getValue() * factor);
         }
         BonusPercentageAttackSpeedComponent bonusPercentageAttackSpeedComponent = bonusEntityWrapper.getComponent(BonusPercentageAttackSpeedComponent.class);
         if(bonusPercentageAttackSpeedComponent != null){
-            attributeBonus.addPercentageAttackSpeed(bonusPercentageAttackSpeedComponent.getValue());
+            attributeBonus.addPercentageAttackSpeed(bonusPercentageAttackSpeedComponent.getValue() * factor);
         }
         BonusPercentageCooldownSpeedComponent bonusPercentageCooldownSpeedComponent = bonusEntityWrapper.getComponent(BonusPercentageCooldownSpeedComponent.class);
         if(bonusPercentageCooldownSpeedComponent != null){
-            attributeBonus.addPercentageCooldownSpeed(bonusPercentageCooldownSpeedComponent.getValue());
+            attributeBonus.addPercentageCooldownSpeed(bonusPercentageCooldownSpeedComponent.getValue() * factor);
         }
         BonusFlatArmorComponent bonusFlatArmorComponent = bonusEntityWrapper.getComponent(BonusFlatArmorComponent.class);
         if(bonusFlatArmorComponent != null){
-            attributeBonus.addFlatArmor(bonusFlatArmorComponent.getValue());
+            attributeBonus.addFlatArmor(bonusFlatArmorComponent.getValue() * factor);
         }
         BonusFlatMagicResistanceComponent bonusFlatMagicResistanceComponent = bonusEntityWrapper.getComponent(BonusFlatMagicResistanceComponent.class);
         if(bonusFlatMagicResistanceComponent != null){
-            attributeBonus.addFlatMagicResistance(bonusFlatMagicResistanceComponent.getValue());
+            attributeBonus.addFlatMagicResistance(bonusFlatMagicResistanceComponent.getValue() * factor);
         }
         BonusFlatWalkSpeedComponent bonusFlatWalkSpeedComponent = bonusEntityWrapper.getComponent(BonusFlatWalkSpeedComponent.class);
         if(bonusFlatWalkSpeedComponent != null){
-            attributeBonus.addFlatWalkSpeed(bonusFlatWalkSpeedComponent.getValue());
+            attributeBonus.addFlatWalkSpeed(bonusFlatWalkSpeedComponent.getValue() * factor);
         }
         BonusPercentageWalkSpeedComponent bonusPercentageWalkSpeedComponent = bonusEntityWrapper.getComponent(BonusPercentageWalkSpeedComponent.class);
         if(bonusPercentageWalkSpeedComponent != null){
-            attributeBonus.multiplicatePercentageWalkSpeed(bonusPercentageWalkSpeedComponent.getValue());
+            attributeBonus.multiplicatePercentageWalkSpeed(bonusPercentageWalkSpeedComponent.getValue() * factor);
         }
         BonusPercentageCriticalChanceComponent bonusPercentageCriticalChanceComponent = bonusEntityWrapper.getComponent(BonusPercentageCriticalChanceComponent.class);
         if(bonusPercentageCriticalChanceComponent != null){
-            attributeBonus.addPercentageCriticalChance(bonusPercentageCriticalChanceComponent.getValue());
+            attributeBonus.addPercentageCriticalChance(bonusPercentageCriticalChanceComponent.getValue() * factor);
         }
         BonusPercentageLifestealComponent bonusPercentageLifestealComponent = bonusEntityWrapper.getComponent(BonusPercentageLifestealComponent.class);
         if(bonusPercentageLifestealComponent != null){
-            attributeBonus.addPercentageLifesteal(bonusPercentageLifestealComponent.getValue());
+            attributeBonus.addPercentageLifesteal(bonusPercentageLifestealComponent.getValue() * factor);
         }
         BonusPercentageIncomingDamageAmplificationComponent bonusPercentageIncomingDamageAmplificationComponent = bonusEntityWrapper.getComponent(BonusPercentageIncomingDamageAmplificationComponent.class);
         if(bonusPercentageIncomingDamageAmplificationComponent != null){
-            attributeBonus.addPercentageIncomingDamageAmplification(bonusPercentageIncomingDamageAmplificationComponent.getValue());
+            attributeBonus.addPercentageIncomingDamageAmplification(bonusPercentageIncomingDamageAmplificationComponent.getValue() * factor);
         }
         BonusPercentageOutgoingDamageAmplificationComponent bonusPercentageOutgoingDamageAmplificationComponent = bonusEntityWrapper.getComponent(BonusPercentageOutgoingDamageAmplificationComponent.class);
         if(bonusPercentageOutgoingDamageAmplificationComponent != null){
-            attributeBonus.addPercentageOutgoingDamageAmplification(bonusPercentageOutgoingDamageAmplificationComponent.getValue());
+            attributeBonus.addPercentageOutgoingDamageAmplification(bonusPercentageOutgoingDamageAmplificationComponent.getValue() * factor);
         }
         BonusFlatGoldPerSecondComponent bonusFlatGoldPerSecondComponent = bonusEntityWrapper.getComponent(BonusFlatGoldPerSecondComponent.class);
         if(bonusFlatGoldPerSecondComponent != null){
-            attributeBonus.addFlatGoldPerSecond(bonusFlatGoldPerSecondComponent.getValue());
+            attributeBonus.addFlatGoldPerSecond(bonusFlatGoldPerSecondComponent.getValue() * factor);
         }
         if(bonusEntityWrapper.hasComponent(DisableGoldPerSecondComponent.class)){
             attributeBonus.setGoldPerSecondDisabled(true);

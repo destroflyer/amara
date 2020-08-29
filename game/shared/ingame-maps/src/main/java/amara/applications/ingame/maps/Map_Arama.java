@@ -63,7 +63,7 @@ public class Map_Arama extends Map {
     private int[] backportPositionEntities = new int[2];
 
     @Override
-    public void load(EntityWorld entityWorld){
+    public void load(EntityWorld entityWorld, int teamPlayersCount){
         EntityWrapper audioBackgroundMusic = entityWorld.getWrapped(entityWorld.createEntity());
         audioBackgroundMusic.setComponent(new AudioComponent("Sounds/music/minds_eye.ogg"));
         audioBackgroundMusic.setComponent(new AudioVolumeComponent(2));

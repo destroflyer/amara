@@ -39,7 +39,7 @@ public class Map_Etherdesert extends Map {
     private int winMapObjectiveTrigger;
 
     @Override
-    public void load(EntityWorld entityWorld) {
+    public void load(EntityWorld entityWorld, int teamPlayersCount) {
         EntityWrapper audioBackgroundMusic = entityWorld.getWrapped(entityWorld.createEntity());
         audioBackgroundMusic.setComponent(new AudioComponent("Sounds/music/desert_village.ogg"));
         audioBackgroundMusic.setComponent(new AudioVolumeComponent(1.75f));
@@ -173,7 +173,7 @@ public class Map_Etherdesert extends Map {
         int disableIncomeBuffContinuousAttributes = entityWorld.createEntity();
         entityWorld.setComponent(disableIncomeBuffContinuousAttributes, new DisableGoldPerSecondComponent());
         entityWorld.setComponent(disableIncomeBuff, new ContinuousAttributesComponent(disableIncomeBuffContinuousAttributes));
-        entityWorld.setComponent(disableIncomeEffect, new AddBuffComponent(disableIncomeBuff, -1));
+        entityWorld.setComponent(disableIncomeEffect, new AddBuffComponent(new int[]{ disableIncomeBuff }, -1));
         entityWorld.setComponent(disableIncomeTrigger, new TriggeredEffectComponent(disableIncomeEffect));
         entityWorld.setComponent(disableIncomeTrigger, new TriggerOnceComponent());
         entityWorld.setComponent(disableIncomeTrigger, new TriggerDelayComponent(1));
