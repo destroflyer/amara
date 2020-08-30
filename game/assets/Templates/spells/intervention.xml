@@ -5,7 +5,7 @@
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <triggerSpellEffects>#spell</triggerSpellEffects>
@@ -23,7 +23,7 @@
         <castedEffectTriggers>
             <!--remove vulnerability-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <removeVulnerability/>

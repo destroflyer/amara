@@ -11,7 +11,7 @@
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <triggerSpellEffects>#spell</triggerSpellEffects>

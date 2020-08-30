@@ -4,7 +4,7 @@
         <instantEffectTriggers>
             <!--spawn object-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <spawn>

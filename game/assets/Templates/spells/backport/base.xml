@@ -7,7 +7,7 @@
         <instantEffectTriggers>
             <!--add buff-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <addBuff duration="-1">
@@ -26,7 +26,7 @@
             </entity>
             <!--play audio, add triggers-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <playAudio>
@@ -38,7 +38,7 @@
                             <!--cancel on damage-->
                             <entity id="damageTakenTrigger">
                                 <damageTakenTrigger physicalDamage="true" magicalDamage="true" trueDamage="true"/>
-                                <casterTarget/>
+                                <sourceCasterTarget/>
                                 <triggeredEffect>
                                     <entity>
                                         <cancelAction/>
@@ -48,7 +48,7 @@
                             <!--action cancelled-->
                             <entity id="actionCancelledTrigger">
                                 <actionCancelledTrigger/>
-                                <casterTarget/>
+                                <sourceCasterTarget/>
                                 <triggeredEffect>
                                     <entity>
                                         <stopAudio>#castAudio</stopAudio>
@@ -59,7 +59,7 @@
                             <!--cleanup-->
                             <entity>
                                 <castingFinishedTrigger/>
-                                <casterTarget/>
+                                <sourceCasterTarget/>
                                 <triggeredEffect>
                                     <entity>
                                         <removeBuff>#buff</removeBuff>
@@ -72,7 +72,7 @@
                             <!--teleport-->
                             <entity>
                                 <castingFinishedTrigger/>
-                                <casterTarget/>
+                                <sourceCasterTarget/>
                                 <triggeredEffect>
                                     <entity>
                                         <triggerSpellEffects>#spell</triggerSpellEffects>

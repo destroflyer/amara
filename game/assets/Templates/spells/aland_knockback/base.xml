@@ -7,7 +7,7 @@
         <instantEffectTriggers>
             <!--spawn object, add visual buff-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <spawn>

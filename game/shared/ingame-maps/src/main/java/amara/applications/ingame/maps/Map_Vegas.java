@@ -595,7 +595,7 @@ public class Map_Vegas extends Map {
                 int spellEffectGold = entityWorld.createEntity();
                 entityWorld.setComponent(spellEffectGold, new CastedSpellComponent(spellSell));
                 int effectTriggerGold = entityWorld.createEntity();
-                entityWorld.setComponent(effectTriggerGold, new CasterTargetComponent());
+                entityWorld.setComponent(effectTriggerGold, new SourceCasterTargetComponent());
                 int conditionGold = entityWorld.createEntity();
                 entityWorld.setComponent(conditionGold, new TargetTargetComponent());
                 entityWorld.setComponent(conditionGold, new HasBuffConditionComponent(unitTypeBuffs[playerIndex][unitIndex][level]));

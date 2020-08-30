@@ -6,7 +6,7 @@
         <passiveAddedEffectTriggers>
             <!--add buff and spawn trigger-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <addBuff duration="-1">[parameter0]</addBuff>
@@ -34,7 +34,7 @@
         <passiveRemovedEffectTriggers>
             <!--remove buff and spawn trigger-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <removeBuff>[parameter0]</removeBuff>

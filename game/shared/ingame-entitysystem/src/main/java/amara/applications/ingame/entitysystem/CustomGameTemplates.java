@@ -62,7 +62,7 @@ public class CustomGameTemplates {
                 int[] effectTriggers = new int[46];
                 for(int i=0;i<effectTriggers.length;i++){
                     EntityWrapper effectTrigger = entityWorld.getWrapped(entityWorld.createEntity());
-                    effectTrigger.setComponent(new CasterTargetComponent());
+                    effectTrigger.setComponent(new SourceCasterTargetComponent());
                     EntityWrapper effect = entityWorld.getWrapped(entityWorld.createEntity());
                     EntityWrapper spawnInformationEntity = entityWorld.getWrapped(entityWorld.createEntity());
                     spawnInformationEntity.setComponent(new SpawnTemplateComponent("spells/sear_projectile", "spells/firestorm/projectile," + i));

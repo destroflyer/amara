@@ -23,7 +23,7 @@
             </entity>
             <!--play cast audio-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <playAudio>
@@ -38,7 +38,7 @@
             </entity>
             <!--play hit audio-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <playAudio>

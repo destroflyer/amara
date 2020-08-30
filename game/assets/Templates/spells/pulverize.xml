@@ -5,7 +5,7 @@
         <instantEffectTriggers>
             <!--spawn object, play audio-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <spawn>

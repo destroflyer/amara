@@ -12,7 +12,7 @@
         <instantEffectTriggers>
             <!--play audio-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <playAudio>
@@ -27,7 +27,7 @@
             </entity>
             <!--move to target-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <removeIntersectionPushes/>

@@ -15,7 +15,7 @@
                                 <castedEffectTriggers>
                                     <!--add buff-->
                                     <entity>
-                                        <casterTarget/>
+                                        <sourceCasterTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <addAutoAttackSpellEffects>
@@ -33,7 +33,7 @@
                                                             </entity>
                                                             <!--remove buff-->
                                                             <entity>
-                                                                <casterTarget/>
+                                                                <sourceCasterTarget/>
                                                                 <triggeredEffect>
                                                                     <entity>
                                                                         <removeBuff>#buff</removeBuff>

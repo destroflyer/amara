@@ -271,11 +271,11 @@ public class ClientComponentBlacklist {
             TriggeredEffectComponent.class,
             // units/effecttriggers/targets
             BuffTargetsTargetComponent.class,
-            CasterTargetComponent.class,
             CustomTargetComponent.class,
             ExcludeTargetTargetComponent.class,
             MaximumTargetsComponent.class,
             RuleTargetComponent.class,
+            SourceCasterTargetComponent.class,
             SourceTargetComponent.class,
             TargetTargetComponent.class,
             TeamTargetComponent.class,

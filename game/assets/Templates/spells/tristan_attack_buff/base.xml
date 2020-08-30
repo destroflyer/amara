@@ -6,7 +6,7 @@
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <triggerSpellEffects>#spell</triggerSpellEffects>
@@ -54,7 +54,7 @@
                                     </entity>
                                     <!--remove buff-->
                                     <entity>
-                                        <casterTarget/>
+                                        <sourceCasterTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <removeBuff>#buff</removeBuff>

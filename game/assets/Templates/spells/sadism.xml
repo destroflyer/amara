@@ -5,7 +5,7 @@
         <instantEffectTriggers>
             <!--trigger spell effects, start audio-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <triggerSpellEffects>#spell</triggerSpellEffects>

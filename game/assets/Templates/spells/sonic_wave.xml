@@ -42,7 +42,7 @@
                                 <buffVisualisation>sonic_wave_mark</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
-                                        <casterTarget/>
+                                        <sourceCasterTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <replaceSpellWithExistingSpell spellIndex="[parameter0]">#spell</replaceSpellWithExistingSpell>
@@ -59,7 +59,7 @@
             </entity>
             <!--target effect-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <replaceSpellWithNewSpell spellIndex="[parameter0]" newSpellTemplate="./resonating_strike(#buff)"/>

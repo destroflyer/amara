@@ -8,7 +8,7 @@
         <passiveAddedEffectTriggers>
             <!--add buff and spelleffect-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <addAutoAttackSpellEffects>
@@ -16,7 +16,7 @@
                                 <castedEffectTriggers>
                                     <!--add buff-->
                                     <entity>
-                                        <casterTarget/>
+                                        <sourceCasterTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <addBuff duration="[duration]">

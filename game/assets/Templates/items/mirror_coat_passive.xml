@@ -6,7 +6,7 @@
         <passiveAddedEffectTriggers>
             <!--add trigger-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <addEffectTriggers>
@@ -29,7 +29,7 @@
         <passiveRemovedEffectTriggers>
             <!--remove trigger-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <removeEffectTriggers>#damageTakenTrigger</removeEffectTriggers>

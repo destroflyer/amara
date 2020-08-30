@@ -20,7 +20,7 @@
             </entity>
             <!--play audio-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <playAudio>

@@ -28,7 +28,7 @@
             </entity>
             <!--play audio-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <playAudio>
@@ -64,6 +64,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
+                        <addBuff duration="3">[parameter0]</addBuff>
                         <magicDamage>90 + (0.5 * source.abilityPower)</magicDamage>
                     </entity>
                 </triggeredEffect>

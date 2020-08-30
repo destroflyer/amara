@@ -21,7 +21,7 @@
             </entity>
             <!--play audio-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <playAudio>
@@ -46,7 +46,7 @@
         <castedEffectTriggers>
             <!--teleport-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <teleportToTargetPosition/>

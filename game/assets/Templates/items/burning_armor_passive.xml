@@ -6,7 +6,7 @@
         <passiveAddedEffectTriggers>
             <!--add spelleffect-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <addBuffArea>
@@ -51,7 +51,7 @@
         <passiveRemovedEffectTriggers>
             <!--remove spelleffect-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <removeBuffArea>#buffArea</removeBuffArea>

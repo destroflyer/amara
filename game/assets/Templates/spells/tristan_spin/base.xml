@@ -7,7 +7,7 @@
         <instantEffectTriggers>
             <!--spawn object, add visual buff-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <spawn>
@@ -47,7 +47,7 @@
             </entity>
             <!--target effect-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <heal>100</heal>

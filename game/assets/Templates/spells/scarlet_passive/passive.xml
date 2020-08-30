@@ -3,7 +3,50 @@
         <name>TODO</name>
         <description>TODO</description>
         <spellVisualisation>scarlet_passive</spellVisualisation>
-        <passiveAddedEffectTriggers/>
-        <passiveRemovedEffectTriggers/>
+        <passiveAddedEffectTriggers>
+            <!--add spelleffect-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addAutoAttackSpellEffects>
+                            <entity id="newSpellEffect">
+                                <castedEffectTriggers>
+                                    <!--target effect-->
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggerConditions>
+                                            <entity>
+                                                <targetTarget/>
+                                                <hasBuffCondition>[parameter0]</hasBuffCondition>
+                                            </entity>
+                                        </triggerConditions>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <magicDamage>20 + (0.1 * source.abilityPower)</magicDamage>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#passive</triggerSource>
+                                    </entity>
+                                </castedEffectTriggers>
+                            </entity>
+                        </addAutoAttackSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveAddedEffectTriggers>
+        <passiveRemovedEffectTriggers>
+            <!--remove spell effect-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeSpellEffects>#newSpellEffect</removeSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveRemovedEffectTriggers>
     </entity>
 </template>

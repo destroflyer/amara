@@ -4260,14 +4260,6 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent(buffEntity);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent.class);
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent>("casterTarget"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent construct(EntityWorld entityWorld, Element element){
-                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CasterTargetComponent();
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent.class.getDeclaredField("targetEntities"), componentFieldSerializer_Entity);
@@ -4317,12 +4309,28 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.RuleTargetComponent(targetRulesEntity);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceCasterTargetComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceCasterTargetComponent>("sourceCasterTarget"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceCasterTargetComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceCasterTargetComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent>("sourceTarget"){
 
             @Override
             public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetCasterTargetComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetCasterTargetComponent>("targetCasterTarget"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetCasterTargetComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetCasterTargetComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent.class);

@@ -123,7 +123,7 @@ public class EffectTriggerUtil {
             EffectSourceComponent effectSourceComponent = entityWorld.getComponent(triggerSourceEntity, EffectSourceComponent.class);
             if (effectSourceComponent != null) {
                 int effectSourceEntity = effectSourceComponent.getSourceEntity();
-                if (entityWorld.hasComponent(entity, CasterTargetComponent.class)) {
+                if (entityWorld.hasComponent(entity, SourceCasterTargetComponent.class)) {
                     tmpTargetEntities.add(effectSourceEntity);
                 }
                 RuleTargetComponent ruleTargetComponent = entityWorld.getComponent(entity, RuleTargetComponent.class);
@@ -138,6 +138,12 @@ public class EffectTriggerUtil {
         }
         if (entityWorld.hasComponent(entity, TargetTargetComponent.class)) {
             tmpTargetEntities.add(targetEntity);
+        }
+        if (entityWorld.hasComponent(entity, TargetCasterTargetComponent.class)) {
+            EffectSourceComponent targetEffectSourceComponent = entityWorld.getComponent(targetEntity, EffectSourceComponent.class);
+            if (targetEffectSourceComponent != null) {
+                tmpTargetEntities.add(targetEffectSourceComponent.getSourceEntity());
+            }
         }
         BuffTargetsTargetComponent buffTargetTargetComponent = entityWorld.getComponent(entity, BuffTargetsTargetComponent.class);
         if (buffTargetTargetComponent != null) {

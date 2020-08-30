@@ -71,15 +71,20 @@
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
         <passives>
-            <entity template="spells/scarlet_passive/passive"/>
+            <entity template="spells/scarlet_passive/passive(#markBuff)"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/scarlet_kunai/base"/>
-            <entity template="spells/scarlet_barrier/base(#unit)"/>
-            <entity template="spells/scarlet_dash/base"/>
-            <entity template="spells/scarlet_ult/base"/>
+            <entity template="spells/scarlet_kunai/base(#markBuff)"/>
+            <entity template="spells/scarlet_barrier/base(#unit,#markBuff)"/>
+            <entity template="spells/scarlet_dash/base(#markBuff)"/>
+            <entity template="spells/scarlet_ult/base(#markBuff)"/>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
+    </entity>
+    <!--mark buff-->
+    <entity id="markBuff">
+        <name>TODO</name>
+        <description>TODO</description>
     </entity>
 </template>

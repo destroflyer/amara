@@ -8,7 +8,7 @@
         <learnEffectTriggers>
             <!--add reward buff-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <addBuff duration="-1">
@@ -33,7 +33,7 @@
         <instantEffectTriggers>
             <!--add attack buff-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <addBuff duration="[duration]">
@@ -62,7 +62,7 @@
                                                             </entity>
                                                             <!--remove buff-->
                                                             <entity>
-                                                                <casterTarget/>
+                                                                <sourceCasterTarget/>
                                                                 <triggeredEffect>
                                                                     <entity>
                                                                         <removeBuff>#attackBuff</removeBuff>
@@ -94,7 +94,7 @@
     <!--add stack on kill trigger-->
     <entity>
         <killTrigger/>
-        <casterTarget/>
+        <sourceCasterTarget/>
         <triggeredEffect>
             <entity>
                 <addStacks stacks="1">#rewardBuff</addStacks>

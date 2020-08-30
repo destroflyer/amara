@@ -12,7 +12,7 @@
         <instantEffectTriggers>
             <!--move to target-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <move>

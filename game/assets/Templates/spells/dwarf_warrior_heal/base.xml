@@ -8,7 +8,7 @@
         <learnEffectTriggers>
             <!--add buff-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <addBuff duration="-1">
@@ -28,7 +28,7 @@
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <triggerSpellEffects>#spell</triggerSpellEffects>

@@ -5,7 +5,7 @@
         <passiveAddedEffectTriggers>
             <!--add buff and spelleffect-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <addBuff duration="-1">
@@ -22,7 +22,7 @@
                                 <castedEffectTriggers>
                                     <!--add stacks-->
                                     <entity>
-                                        <casterTarget/>
+                                        <sourceCasterTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <addStacks stacks="1">#buff</addStacks>
@@ -71,7 +71,7 @@
                                                     </entity>
                                                     <!--remove spelleffect-->
                                                     <entity>
-                                                        <casterTarget/>
+                                                        <sourceCasterTarget/>
                                                         <triggeredEffect>
                                                             <entity>
                                                                 <removeSpellEffects>#newSpellEffect2</removeSpellEffects>
@@ -94,7 +94,7 @@
         <passiveRemovedEffectTriggers>
             <!--remove spelleffects-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <removeBuff>#buff</removeBuff>

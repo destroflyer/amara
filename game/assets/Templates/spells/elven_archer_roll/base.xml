@@ -31,7 +31,7 @@
         <castedEffectTriggers>
             <!--move-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <move>

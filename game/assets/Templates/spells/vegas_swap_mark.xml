@@ -38,7 +38,7 @@
                                 <buffVisualisation>intervention</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
-                                        <casterTarget/>
+                                        <sourceCasterTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <replaceSpellWithExistingSpell spellIndex="[parameter0]">#spell</replaceSpellWithExistingSpell>
@@ -55,7 +55,7 @@
             </entity>
             <!--unit on bench -> replace with put in spell-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggerConditions>
                     <entity>
                         <targetTarget/>
@@ -71,7 +71,7 @@
             </entity>
             <!--unit on board -> replace with put out spell-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggerConditions>
                     <entity>
                         <targetTarget/>

@@ -6,14 +6,14 @@
         <passiveAddedEffectTriggers>
             <!--add trigger-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <addEffectTriggers>
                             <!--add stack on damage-->
                             <entity id="damageTakenTrigger">
                                 <damageTakenTrigger physicalDamage="true" magicDamage="true" trueDamage="true"/>
-                                <casterTarget/>
+                                <sourceCasterTarget/>
                                 <triggeredEffect>
                                     <entity>
                                         <addStacks stacks="1">[parameter0]</addStacks>
@@ -29,7 +29,7 @@
         <passiveRemovedEffectTriggers>
             <!--remove trigger-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <removeEffectTriggers>#damageTakenTrigger</removeEffectTriggers>

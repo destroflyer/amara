@@ -7,7 +7,7 @@
         <instantEffectTriggers>
             <!--trigger spell effects-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <triggerSpellEffects>#spell</triggerSpellEffects>
@@ -28,7 +28,7 @@
         <castedEffectTriggers>
             <!--add buff-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <addBuff duration="-1">
@@ -52,7 +52,7 @@
             </entity>
             <!--play audio, add triggers-->
             <entity>
-                <casterTarget/>
+                <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
                         <playAudio>
@@ -65,7 +65,7 @@
                             <!--cancel on damage-->
                             <entity id="damageTakenTrigger">
                                 <damageTakenTrigger physicalDamage="true" magicalDamage="true" trueDamage="true"/>
-                                <casterTarget/>
+                                <sourceCasterTarget/>
                                 <triggeredEffect>
                                     <entity>
                                         <cancelAction/>
@@ -75,7 +75,7 @@
                             <!--cleanup-->
                             <entity>
                                 <castingFinishedTrigger/>
-                                <casterTarget/>
+                                <sourceCasterTarget/>
                                 <triggeredEffect>
                                     <entity>
                                         <removeBuff>#buff</removeBuff>
