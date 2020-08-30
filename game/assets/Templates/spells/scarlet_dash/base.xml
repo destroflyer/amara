@@ -9,6 +9,8 @@
                 <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
+                        <removeIntersectionPushes/>
+                        <removeIntersectionPushed/>
                         <move>
                             <entity>
                                 <targetedMovementDirection/>
@@ -22,15 +24,51 @@
                                 <distanceLimit>11</distanceLimit>
                             </entity>
                         </move>
-                        <removeCollisionGroups targetOf="map|units" targets="units"/>
                         <addEffectTriggers>
-                            <!--readd collisiongroups-->
+                            <!--collision target effect-->
+                            <entity id="collisionTrigger1">
+                                <collisionTrigger>
+                                    <entity>
+                                        <acceptEnemies/>
+                                    </entity>
+                                </collisionTrigger>
+                                <targetTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <physicalDamage>150 + (0.7 * source.abilityPower)</physicalDamage>
+                                        <addBuff duration="3">[parameter0]</addBuff>
+                                    </entity>
+                                </triggeredEffect>
+                            </entity>
+                            <!--reset cooldown on passive mark collision-->
+                            <entity id="collisionTrigger2">
+                                <collisionTrigger>
+                                    <entity>
+                                        <acceptEnemies/>
+                                    </entity>
+                                </collisionTrigger>
+                                <customTarget>#spell</customTarget>
+                                <triggerConditions>
+                                    <entity>
+                                        <targetTarget/>
+                                        <hasBuffCondition>[parameter0]</hasBuffCondition>
+                                    </entity>
+                                </triggerConditions>
+                                <triggeredEffect>
+                                    <entity>
+                                        <resetCooldown/>
+                                    </entity>
+                                </triggeredEffect>
+                            </entity>
+                            <!--remove collision trigger-->
                             <entity>
                                 <targetReachedTrigger/>
                                 <sourceTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <addCollisionGroups targetOf="map|units" targets="units"/>
+                                        <addIntersectionPushes/>
+                                        <addIntersectionPushed/>
+                                        <removeEffectTriggers>#collisionTrigger1,#collisionTrigger2</removeEffectTriggers>
                                     </entity>
                                 </triggeredEffect>
                                 <triggerOnce/>

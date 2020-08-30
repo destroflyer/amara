@@ -162,6 +162,7 @@ public class ClientComponentBlacklist {
             RemoveSpellEffectsComponent.class,
             ReplaceSpellWithExistingSpellComponent.class,
             ReplaceSpellWithNewSpellComponent.class,
+            ResetCooldownComponent.class,
             TriggerSpellEffectsComponent.class,
             // effects/units
             CancelActionComponent.class,
@@ -277,6 +278,7 @@ public class ClientComponentBlacklist {
             RuleTargetComponent.class,
             SourceCasterTargetComponent.class,
             SourceTargetComponent.class,
+            TargetCasterTargetComponent.class,
             TargetTargetComponent.class,
             TeamTargetComponent.class,
             // units/effecttriggers/triggers

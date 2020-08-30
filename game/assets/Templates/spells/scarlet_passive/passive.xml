@@ -23,7 +23,8 @@
                                         </triggerConditions>
                                         <triggeredEffect>
                                             <entity>
-                                                <magicDamage>20 + (0.1 * source.abilityPower)</magicDamage>
+                                                <magicDamage>40 + (0.2 * source.abilityPower)</magicDamage>
+                                                <removeBuff>[parameter0]</removeBuff>
                                             </entity>
                                         </triggeredEffect>
                                         <triggerSource>#passive</triggerSource>

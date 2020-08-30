@@ -2149,6 +2149,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent(spellIndex, newSpellTemplate);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.spells.ResetCooldownComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.ResetCooldownComponent>("resetCooldown"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.spells.ResetCooldownComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.spells.ResetCooldownComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.spells.TriggerSpellEffectsComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.spells.TriggerSpellEffectsComponent.class.getDeclaredField("spellEntity"), componentFieldSerializer_Entity);

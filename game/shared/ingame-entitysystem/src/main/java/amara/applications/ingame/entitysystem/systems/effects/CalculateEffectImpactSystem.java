@@ -269,6 +269,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         EnqueueSpellCastComponent.class,
                         RemoveSpellEffectsComponent.class,
                         ReplaceSpellWithExistingSpellComponent.class,
+                        ResetCooldownComponent.class,
                         TriggerSpellEffectsComponent.class,
                         AddGoldComponent.class,
                         CancelActionComponent.class,

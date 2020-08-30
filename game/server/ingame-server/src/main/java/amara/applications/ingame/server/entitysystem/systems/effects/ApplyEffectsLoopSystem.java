@@ -95,6 +95,7 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyRemoveSpellEffectsSystem());
         add(new ApplyReplaceSpellsWithExistingSpellsSystem());
         add(new ApplyReplaceSpellsWithNewSpellsSystem());
+        add(new ApplyResetCooldownSystem());
         add(new ApplyTriggerSpellEffectsSystem());
         add(new ApplyAddGoldSystem());
         add(new ApplyCancelActionsSystem());
