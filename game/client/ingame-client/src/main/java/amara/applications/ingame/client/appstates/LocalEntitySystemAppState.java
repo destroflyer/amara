@@ -80,6 +80,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new BuffVisualisationSystem_Maria_Passive(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Meditating(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_RobinsGift(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_Scarlet_Passive(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Slap(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_SonicWaveMark(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Tristan_Empowered(entitySceneMap));

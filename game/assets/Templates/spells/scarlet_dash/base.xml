@@ -35,8 +35,7 @@
                                 <targetTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <physicalDamage>150 + (0.7 * source.abilityPower)</physicalDamage>
-                                        <addBuff duration="3">[parameter0]</addBuff>
+                                        <triggerSpellEffects>#spell</triggerSpellEffects>
                                     </entity>
                                 </triggeredEffect>
                             </entity>
@@ -100,7 +99,8 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <!--TODO-->
+                        <physicalDamage>150 + (0.7 * source.abilityPower)</physicalDamage>
+                        <addBuff duration="3">[parameter0]</addBuff>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

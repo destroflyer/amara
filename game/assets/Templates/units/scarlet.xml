@@ -76,8 +76,8 @@
         <learnableSpells>
             <entity template="spells/scarlet_kunai/base(#markBuff)"/>
             <entity template="spells/scarlet_barrier/base(#unit,#markBuff)"/>
-            <entity template="spells/scarlet_dash/base(#markBuff)"/>
-            <entity template="spells/scarlet_ult/base(#markBuff)"/>
+            <entity id="spell3" template="spells/scarlet_dash/base(#markBuff)"/>
+            <entity template="spells/scarlet_ult/base(#markBuff,#spell3)"/>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
@@ -86,5 +86,6 @@
     <entity id="markBuff">
         <name>TODO</name>
         <description>TODO</description>
+        <buffVisualisation>scarlet_passive</buffVisualisation>
     </entity>
 </template>

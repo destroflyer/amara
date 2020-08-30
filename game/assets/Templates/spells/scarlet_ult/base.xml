@@ -64,19 +64,36 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <physicalDamage>100 + (0.3 * source.attackDamage)</physicalDamage>
-                        <addBuff duration="[slowDuration]">
-                            <entity>
-                                <!--<name>TODO</name>-->
-                                <description>This unit has decreased walk speed.</description>
-                                <!--<buffIcon>TODO</buffIcon>-->
-                                <continuousAttributes>
-                                    <entity>
-                                        <bonusPercentageWalkSpeed>-0.3</bonusPercentageWalkSpeed>
-                                    </entity>
-                                </continuousAttributes>
-                            </entity>
-                        </addBuff>
+                        <physicalDamage>300 + (0.6 * source.abilityPower)</physicalDamage>
+                        <addBuff duration="3">[parameter0]</addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--marked targets below threshhold -> execute-->
+            <entity>
+                <targetTarget/>
+                <triggerConditions>
+                    <entity id="executeCondition">
+                        <targetTarget/>
+                        <hasBuffCondition>[parameter0]</hasBuffCondition>
+                        <hasHealthPortionCondition portion="0.2" lessOrMore="true" allowEqual="false"/>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>999999</physicalDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--marked targets below threshhold -> reset dash-->
+            <entity>
+                <customTarget>[parameter1]</customTarget>
+                <triggerConditions>#executeCondition</triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <resetCooldown/>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
