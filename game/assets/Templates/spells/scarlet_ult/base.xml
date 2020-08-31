@@ -1,5 +1,5 @@
 <template>
-    <value name="delay">0.28</value>
+    <value name="delay">0.1</value>
     <value name="slowDuration">2</value>
     <entity id="spell">
         <name>TODO</name>
@@ -24,23 +24,6 @@
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
-                <triggerDelay>[delay]</triggerDelay>
-            </entity>
-            <!--play audio-->
-            <entity>
-                <sourceCasterTarget/>
-                <triggeredEffect>
-                    <entity>
-                        <playAudio>
-                            <entity>
-                                <audio>Sounds/sounds/spells/scarlet_ult_cast.ogg</audio>
-                                <audioVolume>3</audioVolume>
-                            </entity>
-                        </playAudio>
-                    </entity>
-                </triggeredEffect>
-                <triggerSource>#spell</triggerSource>
-                <triggerDelay>0.13</triggerDelay>
             </entity>
         </instantEffectTriggers>
         <castType>linear_skillshot</castType>
@@ -50,7 +33,7 @@
         <castAnimation>
             <entity>
                 <name>down_hit</name>
-                <loopDuration>0.75</loopDuration>
+                <loopDuration>0.5</loopDuration>
             </entity>
         </castAnimation>
         <baseCooldown>1</baseCooldown>

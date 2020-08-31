@@ -5,8 +5,26 @@
             <rectangle x="4" width="8" height="4"/>
         </hitbox>
         <collisionGroup targetOf="spells" targets="spell_targets"/>
-        <hitboxActive/>
-        <lifetime>0.2</lifetime>
+        <lifetime>0.5</lifetime>
+    </entity>
+    <!--activate hitbox-->
+    <entity>
+        <instantTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <activateHitbox/>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/scarlet_ult_cast.ogg</audio>
+                        <audioVolume>3</audioVolume>
+                    </entity>
+                </playAudio>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+        <triggerDelay>0.1</triggerDelay>
+        <triggerOnce/>
     </entity>
     <!--trigger spell effects-->
     <entity>
@@ -29,7 +47,7 @@
         <sourceTarget/>
         <triggeredEffect>
             <entity>
-                <removeEntity/>
+                <deactivateHitbox/>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
