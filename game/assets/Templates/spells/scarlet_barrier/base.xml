@@ -1,7 +1,7 @@
 <template>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Kunai Vortex</name>
+        <description>Summon circular rotating kunais around you, which destroy enemy projectiles.</description>
         <spellVisualisation>scarlet_barrier</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn object, play audio-->

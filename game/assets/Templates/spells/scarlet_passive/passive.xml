@@ -1,7 +1,7 @@
 <template>
     <entity id="passive">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Mark of the Assasin</name>
+        <description>Your spells mark enemies for 3 seconds. Your autoattacks deal bonus magic damage against marked targets and consume the mark.</description>
         <spellVisualisation>scarlet_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
             <!--add spelleffect-->

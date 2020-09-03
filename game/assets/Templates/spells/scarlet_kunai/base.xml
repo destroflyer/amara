@@ -1,8 +1,8 @@
 <template>
     <value name="delay">0.15</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Kunai Throw</name>
+        <description>Throws a kunai, which deals physical damage to the first target hit.</description>
         <spellVisualisation>scarlet_kunai</spellVisualisation>
         <spellIndicator>
             <entity>

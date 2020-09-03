@@ -1,7 +1,7 @@
 <template>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Shadow Slice</name>
+        <description>Dash a fixed distance forward, dealing physical damage to all enemies hit. Dashing through a marked target resets this abilities cooldown.</description>
         <spellVisualisation>scarlet_dash</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
