@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.database.databases;
 
 import amara.libraries.database.Database;
 
-/**
- *
- * @author Carl
- */
 public class MySQLDatabase extends Database {
 
     public MySQLDatabase(String path, String user, String password) {
@@ -19,6 +10,6 @@ public class MySQLDatabase extends Database {
 
     @Override
     protected String getConnectionUrl(String path) {
-        return "jdbc:mysql:" + path + "?autoReconnect=true";
+        return "jdbc:mysql:" + path + "?autoReconnect=true&serverTimezone=UTC";
     }
 }
