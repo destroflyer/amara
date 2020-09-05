@@ -5,7 +5,7 @@
         <groupId>com.destrostudios.amara</groupId>
         <artifactId>main</artifactId>
         <version>0.7</version>
-        <relativePath>../../game</relativePath>
+        <relativePath>../../</relativePath>
     </parent>
     <artifactId>applications-display</artifactId>
     <dependencies>
