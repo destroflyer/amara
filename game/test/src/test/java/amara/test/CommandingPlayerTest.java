@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.test;
 
 import amara.applications.ingame.entitysystem.components.attributes.HealthComponent;
@@ -13,10 +9,6 @@ import amara.applications.ingame.entitysystem.components.units.TeamComponent;
 import com.jme3.math.Vector2f;
 import org.junit.Before;
 
-/**
- *
- * @author Carl
- */
 public class CommandingPlayerTest extends GameLogicTest {
 
     protected String characterTemplate = "units/annie";
