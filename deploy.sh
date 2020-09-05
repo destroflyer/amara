@@ -11,6 +11,8 @@ if [ -n "$VERSION" ]; then
 fi
 
 # Build
+mkdir workspace
+echo "../assets/" > workspace/assets.ini
 mvn clean install
 
 # Deploy (Client)
