@@ -10,7 +10,6 @@ node {
                 sh 'mvn clean install'
             }
         } finally {
-            step([$class: 'GitHubCommitStatusSetter'])
             cleanWs()
         }
     }
