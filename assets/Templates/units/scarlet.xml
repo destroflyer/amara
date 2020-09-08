@@ -84,8 +84,9 @@
     </entity>
     <!--mark buff-->
     <entity id="markBuff">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Mark of the Assasin</name>
+        <description>Scarlets next basic attack against this target deals bonus magic damage.</description>
+        <buffIcon>spells/scarlet_passive</buffIcon>
         <buffVisualisation>scarlet_passive</buffVisualisation>
     </entity>
 </template>

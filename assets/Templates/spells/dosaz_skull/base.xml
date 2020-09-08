@@ -1,8 +1,8 @@
 <template>
-    <value name="delay">0.18</value>
+    <value name="delay">0.2</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Skull</name>
+        <description>Throws a skull to target position, that triggers all tombstones on its path. If an enemy was hit: Target receives magic damage and generally increased damage for a few seconds - In addition, all ghosts receive attack speed and walk speed and aggro this target. If nothing was hit, a ghost is spawned at the target position.</description>
         <spellVisualisation>dosaz_skull</spellVisualisation>
         <spellIndicator>
             <entity>
@@ -49,12 +49,12 @@
         <castCancelAction/>
         <castDuration>[delay]</castDuration>
         <castTurnToTarget/>
-        <!--<castAnimation>
+        <castAnimation>
             <entity>
-                <name>spell5</name>
-                <loopDuration>1</loopDuration>
+                <name>spell9</name>
+                <loopDuration>0.7</loopDuration>
             </entity>
-        </castAnimation>-->
+        </castAnimation>
         <range type="center_to_center" distance="27"/>
         <baseCooldown>1</baseCooldown>
     </entity>
@@ -70,8 +70,8 @@
                         <magicDamage>90 + (0.5 * source.abilityPower)</magicDamage>
                         <addBuff duration="3">
                             <entity>
-                                <name>TODO</name>
-                                <description>TODO</description>
+                                <name>Cursed</name>
+                                <description>This unit receives increased damage from all sources.</description>
                                 <buffIcon>spells/dosaz_skull</buffIcon>
                                 <continuousAttributes>
                                     <entity>
@@ -104,8 +104,8 @@
                     <entity>
                         <addBuff duration="4">
                             <entity>
-                                <name>TODO</name>
-                                <description>TODO</description>
+                                <name>Chasing Pac-Man</name>
+                                <description>This unit has increased attack speed and walk speed.</description>
                                 <buffIcon>spells/dosaz_skull</buffIcon>
                                 <continuousAttributes>
                                     <entity>

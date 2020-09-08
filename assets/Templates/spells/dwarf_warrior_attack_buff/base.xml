@@ -13,8 +13,8 @@
                     <entity>
                         <addBuff duration="-1">
                             <entity id="rewardBuff">
-                                <name>TODO</name>
-                                <description>This unit has increased resistances.</description>
+                                <name>Hammer Time</name>
+                                <description>This unit has increased resistances for each stack.</description>
                                 <buffIcon>spells/dwarf_warrior_attack_buff</buffIcon>
                                 <continuousAttributesPerStack>
                                     <entity>
@@ -38,7 +38,7 @@
                     <entity>
                         <addBuff duration="[duration]">
                             <entity id="attackBuff">
-                                <name>TODO</name>
+                                <name>Stop! Hammer Time</name>
                                 <description>This units next basic attack will deal bonus damage.</description>
                                 <buffIcon>spells/dwarf_warrior_attack_buff</buffIcon>
                                 <buffVisualisation>dwarf_warrior_empowered</buffVisualisation>

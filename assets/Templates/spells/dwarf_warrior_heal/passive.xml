@@ -1,8 +1,6 @@
 <template>
     <entity id="passive">
         <unique/>
-        <name>TODO</name>
-        <description>TODO</description>
         <passiveAddedEffectTriggers>
             <!--add trigger-->
             <entity>

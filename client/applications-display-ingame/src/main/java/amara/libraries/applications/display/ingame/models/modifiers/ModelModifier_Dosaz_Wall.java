@@ -1,5 +1,6 @@
 package amara.libraries.applications.display.ingame.models.modifiers;
 
+import amara.libraries.applications.display.ingame.models.util.RiseUpControl;
 import amara.libraries.applications.display.models.ModelModifier;
 import amara.libraries.applications.display.models.ModelSkin;
 import amara.libraries.applications.display.models.RegisteredModel;
@@ -22,5 +23,6 @@ public class ModelModifier_Dosaz_Wall extends ModelModifier {
             node.setLocalScale(2, 8, 2);
             registeredModel.getNode().attachChild(node);
         }
+        registeredModel.getNode().addControl(new RiseUpControl(0.318f));
     }
 }

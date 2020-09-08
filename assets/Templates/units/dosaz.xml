@@ -71,25 +71,25 @@
             <entity template="spells/ranged_autoattack"/>
         </autoAttack>
         <passives>
-            <entity template="spells/dosaz_passive/passive(#triggerTombstonesBuff,#zombiesBuff)"/>
+            <entity template="spells/dosaz_passive/passive(#triggerTombstonesBuff,#ghostBuff)"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/dosaz_skull/base(#triggerTombstonesBuff,#zombiesBuff)"/>
-            <entity template="spells/dosaz_teleport/base(#unit,#zombiesBuff)"/>
+            <entity template="spells/dosaz_skull/base(#triggerTombstonesBuff,#ghostBuff)"/>
+            <entity template="spells/dosaz_teleport/base(#unit,#ghostBuff)"/>
             <entity template="spells/dosaz_wall/base(#triggerTombstonesBuff)"/>
-            <entity template="spells/dosaz_ult/base(#zombiesBuff)"/>
+            <entity template="spells/dosaz_ult/base(#ghostBuff)"/>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>
     <!--trigger tombstones buff-->
     <entity id="triggerTombstonesBuff">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Tombstone</name>
     </entity>
-    <!--zombies buff-->
-    <entity id="zombiesBuff">
-        <name>TODO</name>
-        <description>TODO</description>
+    <!--ghost buff-->
+    <entity id="ghostBuff">
+        <name>Ghost</name>
+        <description>This unit is a very spooky ghost.</description>
+        <buffIcon>spells/dosaz_passive</buffIcon>
     </entity>
 </template>

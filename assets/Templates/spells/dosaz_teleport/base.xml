@@ -1,7 +1,8 @@
 <template>
+    <value name="delay">0.7</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Swap</name>
+        <description>Swap places with a ghost.</description>
         <spellVisualisation>dosaz_teleport</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
@@ -13,19 +14,19 @@
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
-                <triggerDelay>0.25</triggerDelay>
+                <triggerDelay>[delay]</triggerDelay>
             </entity>
         </instantEffectTriggers>
         <castType>single_target</castType>
         <castCancelAction/>
-        <castDuration>0.5</castDuration>
+        <castDuration>[delay]</castDuration>
         <castTurnToTarget/>
-        <!--<castAnimation>
+        <castAnimation>
             <entity>
-                <name>pop</name>
-                <loopDuration>0.5</loopDuration>
+                <name>spell7</name>
+                <loopDuration>1.4</loopDuration>
             </entity>
-        </castAnimation>-->
+        </castAnimation>
         <baseCooldown>1</baseCooldown>
         <spellTargetRules>
             <entity>

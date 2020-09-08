@@ -1,7 +1,8 @@
 <template>
+    <value name="delay">0.22</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Bone Wall</name>
+        <description>Summons a curved bone wall at the target position and triggers all nearby tombstones around it.</description>
         <spellVisualisation>dosaz_wall</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
@@ -13,11 +14,19 @@
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
             </entity>
         </instantEffectTriggers>
         <castType>positional_skillshot</castType>
         <castCancelAction/>
+        <castDuration>[delay]</castDuration>
         <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>spell5</name>
+                <loopDuration>0.66</loopDuration>
+            </entity>
+        </castAnimation>
         <range type="center_to_center" distance="20"/>
         <baseCooldown>1</baseCooldown>
     </entity>

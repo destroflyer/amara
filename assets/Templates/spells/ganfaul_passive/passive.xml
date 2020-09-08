@@ -24,7 +24,7 @@
                                                 <buffIcon>spells/ganfaul_passive</buffIcon>
                                                 <continuousAttributes>
                                                     <entity>
-                                                        <bonusFlatAbilityPower>20</bonusFlatAbilityPower>
+                                                        <bonusFlatAbilityPower>30</bonusFlatAbilityPower>
                                                     </entity>
                                                 </continuousAttributes>
                                             </entity>

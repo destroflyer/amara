@@ -1,8 +1,8 @@
 <template>
     <entity id="object">
-        <name>TODO</name>
+        <name>Tombstone</name>
         <!--model-->
-        <model>Models/tombstone/skin.xml</model>
+        <model>Models/tombstone/skin_dosaz_passive.xml</model>
         <!--physics-->
         <hitbox>
             <circle radius="1"/>

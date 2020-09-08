@@ -13,8 +13,8 @@
                     <entity>
                         <addBuff duration="-1">
                             <entity id="buff">
-                                <name>TODO</name>
-                                <description>TODO</description>
+                                <name>Urgent Feast</name>
+                                <description>Stacks can be consumed to heal and gain walk speed for a short duration.</description>
                                 <buffIcon>spells/dwarf_warrior_heal</buffIcon>
                                 <maximumStacks>[maximumStacks]</maximumStacks>
                                 <keepOnDeath/>

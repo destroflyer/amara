@@ -1,7 +1,7 @@
 <template>
     <entity id="passive">
         <name>Mark of the Assasin</name>
-        <description>Your spells mark enemies for 3 seconds. Your autoattacks deal bonus magic damage against marked targets and consume the mark.</description>
+        <description>Your spells mark enemies for 3 seconds. Your basic attacks deal bonus magic damage against marked targets and consume the mark.</description>
         <spellVisualisation>scarlet_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
             <!--add spelleffect-->
@@ -25,6 +25,11 @@
                                             <entity>
                                                 <magicDamage>40 + (0.2 * source.abilityPower)</magicDamage>
                                                 <removeBuff>[parameter0]</removeBuff>
+                                                <playAudio>
+                                                    <entity>
+                                                        <audio>Sounds/sounds/spells/scarlet_passive_hit.ogg</audio>
+                                                    </entity>
+                                                </playAudio>
                                             </entity>
                                         </triggeredEffect>
                                         <triggerSource>#passive</triggerSource>

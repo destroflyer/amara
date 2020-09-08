@@ -1,7 +1,7 @@
 <template>
     <entity id="passive">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>A Walk Among the Tombstones</name>
+        <description>Dying allied minions around you leave a tombstone (expires after 30 seconds) - Whenever you touch a tombstone, a ghost is spawned. Ghosts attack nearby enemies and die after 20 seconds.</description>
         <spellVisualisation>dosaz_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
             <!--add buff and spawn trigger-->

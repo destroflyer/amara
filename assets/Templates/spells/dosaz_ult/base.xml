@@ -1,8 +1,9 @@
 <template>
+    <value name="delay">0.5</value>
     <value name="duration">15</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Power From the Beyond</name>
+        <description>Spawn 5 ghosts in a circle around you, gain health, spellvamp and an aura, that constantly deals magic damage to nearby enemies and slows them.</description>
         <spellVisualisation>dosaz_ult</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
@@ -14,15 +15,18 @@
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
-        <!--<castAnimation>
+        <castCancelAction/>
+        <castDuration>[delay]</castDuration>
+        <castAnimation>
             <entity>
-                <name>shoot_arrow</name>
+                <name>spell6</name>
                 <loopDuration>1</loopDuration>
             </entity>
-        </castAnimation>-->
+        </castAnimation>
         <baseCooldown>1</baseCooldown>
     </entity>
     <!--spell effect-->
@@ -36,8 +40,8 @@
                     <entity>
                         <addBuff duration="[duration]">
                             <entity id="visualisationBuff">
-                                <name>TODO</name>
-                                <description>TODO</description>
+                                <name>Power From the Beyond</name>
+                                <description>This unit has increased spellvamp.</description>
                                 <buffIcon>spells/dosaz_ult</buffIcon>
                                 <buffVisualisation>dosaz_ult</buffVisualisation>
                                 <continuousAttributes>
@@ -54,7 +58,7 @@
                                 </hitbox>
                                 <areaBuff>
                                     <entity>
-                                        <name>TODO</name>
+                                        <name>Lifedrained</name>
                                         <description>This unit has decreased walk speed and receives magic damage over time.</description>
                                         <buffIcon>spells/dosaz_ult</buffIcon>
                                         <continuousAttributes>

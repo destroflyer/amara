@@ -1,6 +1,6 @@
 <template>
     <entity id="unit">
-        <name>TODO</name>
+        <name>Ghost</name>
         <isMinion/>
         <!--model-->
         <model>Models/ghost/skin.xml</model>
