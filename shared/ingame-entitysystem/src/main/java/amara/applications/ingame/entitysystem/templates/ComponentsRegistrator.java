@@ -361,6 +361,24 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent(value);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageSpellvampComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageSpellvampComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageSpellvampComponent>("bonusPercentageSpellvamp"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageSpellvampComponent construct(EntityWorld entityWorld, Element element){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageSpellvampComponent(value);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
@@ -573,6 +591,24 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.SpellvampComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.SpellvampComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.SpellvampComponent>("spellvamp"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.attributes.SpellvampComponent construct(EntityWorld entityWorld, Element element){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.attributes.SpellvampComponent(value);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.WalkSpeedComponent.class);

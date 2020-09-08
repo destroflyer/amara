@@ -120,6 +120,7 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new UpdateDamageHistorySystem());
         add(new TriggerDamageTakenSystem());
         add(new LifestealSystem());
+        add(new SpellvampSystem());
         add(new RemoveAppliedEffectImpactsSystem());
     }
     private CalculateEffectImpactSystem calculateEffectImpactSystem;

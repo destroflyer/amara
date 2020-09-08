@@ -1,27 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.units;
 
-import amara.applications.ingame.entitysystem.components.attributes.*;
-import amara.applications.ingame.entitysystem.components.effects.*;
-import amara.applications.ingame.entitysystem.components.effects.damage.*;
-import amara.applications.ingame.entitysystem.components.units.*;
-import amara.libraries.entitysystem.*;
+import amara.applications.ingame.entitysystem.components.attributes.HealthComponent;
+import amara.applications.ingame.entitysystem.components.attributes.LifestealComponent;
+import amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent;
+import amara.applications.ingame.entitysystem.components.effects.EffectSourceComponent;
+import amara.applications.ingame.entitysystem.components.effects.EffectSourceSpellComponent;
+import amara.applications.ingame.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent;
+import amara.applications.ingame.entitysystem.components.units.AutoAttackComponent;
+import amara.libraries.entitysystem.EntitySystem;
+import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Carl
- */
-public class LifestealSystem implements EntitySystem{
-    
+public class LifestealSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingPhysicalDamageComponent.class)){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingPhysicalDamageComponent.class)){
             EffectSourceComponent effectSourceComponent = entityWorld.getComponent(effectImpactEntity, EffectSourceComponent.class);
             EffectSourceSpellComponent effectSourceSpellComponent = entityWorld.getComponent(effectImpactEntity, EffectSourceSpellComponent.class);
-            if((effectSourceComponent != null) && (effectSourceSpellComponent != null)){
+            if ((effectSourceComponent != null) && (effectSourceSpellComponent != null)) {
                 int sourceEntity = effectSourceComponent.getSourceEntity();
                 AutoAttackComponent autoAttackComponent = entityWorld.getComponent(sourceEntity, AutoAttackComponent.class);
                 if ((autoAttackComponent != null) && (autoAttackComponent.getAutoAttackEntity() == effectSourceSpellComponent.getSpellEntity())) {

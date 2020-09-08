@@ -26,6 +26,7 @@ public class AttributeBonus{
     private float percentageWalkSpeed = 1;
     private float percentageCriticalChance = 0;
     private float percentageLifesteal = 0;
+    private float percentageSpellvamp = 0;
     private float percentageIncomingDamageAmplification = 0;
     private float percentageOutgoingDamageAmplification = 0;
     private boolean isGoldPerSecondDisabled = false;
@@ -133,6 +134,14 @@ public class AttributeBonus{
     
     public void addPercentageLifesteal(float value){
         percentageLifesteal += value;
+    }
+
+    public float getPercentageSpellvamp() {
+        return percentageSpellvamp;
+    }
+
+    public void addPercentageSpellvamp(float value) {
+        percentageSpellvamp += value;
     }
 
     public void addPercentageIncomingDamageAmplification(float value){

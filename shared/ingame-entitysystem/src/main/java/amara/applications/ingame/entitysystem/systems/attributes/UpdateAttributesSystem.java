@@ -77,6 +77,7 @@ public class UpdateAttributesSystem implements EntitySystem{
             walkSpeed *= attributeBonus.getPercentageWalkSpeed();
             float criticalChance = attributeBonus.getPercentageCriticalChance();
             float lifesteal = attributeBonus.getPercentageLifesteal();
+            float spellvamp = attributeBonus.getPercentageSpellvamp();
             float incomingDamageAmplification = Math.max(-1, attributeBonus.getPercentageIncomingDamageAmplification());
             float outgoingDamageAmplification = Math.max(-1, attributeBonus.getPercentageOutgoingDamageAmplification());
             float goldPerSecond = attributeBonus.getFlatGoldPerSecond();
@@ -132,6 +133,7 @@ public class UpdateAttributesSystem implements EntitySystem{
             entityWrapper.setComponent(new WalkSpeedComponent(walkSpeed));
             entityWrapper.setComponent(new CriticalChanceComponent(criticalChance));
             entityWrapper.setComponent(new LifestealComponent(lifesteal));
+            entityWrapper.setComponent(new SpellvampComponent(spellvamp));
             entityWrapper.setComponent(new IncomingDamageAmplificationComponent(incomingDamageAmplification));
             entityWrapper.setComponent(new OutgoingDamageAmplificationComponent(outgoingDamageAmplification));
             entityWrapper.setComponent(new GoldPerSecondComponent(goldPerSecond));
@@ -192,6 +194,10 @@ public class UpdateAttributesSystem implements EntitySystem{
         BonusPercentageLifestealComponent bonusPercentageLifestealComponent = bonusEntityWrapper.getComponent(BonusPercentageLifestealComponent.class);
         if(bonusPercentageLifestealComponent != null){
             attributeBonus.addPercentageLifesteal(bonusPercentageLifestealComponent.getValue() * factor);
+        }
+        BonusPercentageSpellvampComponent bonusPercentageSpellvampComponent = bonusEntityWrapper.getComponent(BonusPercentageSpellvampComponent.class);
+        if(bonusPercentageSpellvampComponent != null){
+            attributeBonus.addPercentageSpellvamp(bonusPercentageSpellvampComponent.getValue() * factor);
         }
         BonusPercentageIncomingDamageAmplificationComponent bonusPercentageIncomingDamageAmplificationComponent = bonusEntityWrapper.getComponent(BonusPercentageIncomingDamageAmplificationComponent.class);
         if(bonusPercentageIncomingDamageAmplificationComponent != null){

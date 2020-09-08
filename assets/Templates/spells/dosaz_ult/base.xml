@@ -46,7 +46,7 @@
                                 <buffVisualisation>dosaz_ult</buffVisualisation>
                                 <continuousAttributes>
                                     <entity>
-                                        <bonusPercentageLifesteal>0.2</bonusPercentageLifesteal>
+                                        <bonusPercentageSpellvamp>0.2</bonusPercentageSpellvamp>
                                     </entity>
                                 </continuousAttributes>
                             </entity>
