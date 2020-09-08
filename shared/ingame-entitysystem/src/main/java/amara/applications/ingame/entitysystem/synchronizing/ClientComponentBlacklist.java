@@ -44,6 +44,7 @@ import amara.applications.ingame.entitysystem.components.units.bounties.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
+import amara.applications.ingame.entitysystem.components.units.shields.*;
 import amara.applications.ingame.entitysystem.components.visuals.animations.*;
 import amara.libraries.entitysystem.synchronizing.ComponentClassSet;
 
@@ -167,6 +168,7 @@ public class ClientComponentBlacklist {
             // effects/units
             CancelActionComponent.class,
             AddGoldComponent.class,
+            AddShieldComponent.class,
             RespawnComponent.class,
             // effects/vision
             AddStealthComponent.class,
@@ -299,6 +301,8 @@ public class ClientComponentBlacklist {
             TargetReachedTriggerComponent.class,
             TeamDeathTriggerComponent.class,
             TimeSinceLastRepeatTriggerComponent.class,
+            // units/shields
+            RemainingShieldDurationComponent.class,
             // visuals
             // visuals/animations
             PassedLoopTimeComponent.class,

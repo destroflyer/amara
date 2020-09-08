@@ -119,6 +119,7 @@ public class Map_Destroforest extends Map {
         EntityWrapper enemy1 = EntityTemplate.createFromTemplate(entityWorld, "units/jaime");
         EntityWrapper enemy1Spell = EntityTemplate.createFromTemplate(entityWorld, "spells/sonic_wave,0");
         enemy1.setComponent(new SpellsComponent(enemy1Spell.getId()));
+        enemy1.setComponent(new IsMonsterComponent());
         Vector2f positionEnemy1 = new Vector2f(98, 91);
         Vector2f directionEnemy1 = new Vector2f(0, -1);
         enemy1.setComponent(new PositionComponent(positionEnemy1));

@@ -99,8 +99,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         HUDAttachmentsSystem hudAttachmentsSystem = new HUDAttachmentsSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapAppState.getMapHeightmap(), healthBarStyleManager, playerAppState.getOwnTeamVisionSystem());
         addEntitySystem(hudAttachmentsSystem);
         EntityHeightMap entityHeightMap = new EntityHeightMap(entitySceneMap);
-        addEntitySystem(new MaximumHealthBarSystem(hudAttachmentsSystem, entityHeightMap, healthBarStyleManager, playerAppState.getPlayerTeamSystem()));
-        addEntitySystem(new CurrentHealthBarSystem(hudAttachmentsSystem, entityHeightMap, healthBarStyleManager));
+        addEntitySystem(new HealthBarSystem(hudAttachmentsSystem, entityHeightMap, healthBarStyleManager, playerAppState.getPlayerTeamSystem()));
         addEntitySystem(new StunVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new SilenceVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new TitleSystem(hudAttachmentsSystem, entityHeightMap));

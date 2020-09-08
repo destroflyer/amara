@@ -1,9 +1,50 @@
 <template>
     <entity id="passive">
         <name>Dwarfen Armor</name>
-        <description>TODO</description>
+        <description>Your basic attacks grant a small shield, that lasts until it is broken. The shield does not stack and is refreshed instead.</description>
         <spellVisualisation>dwarf_warrior_passive</spellVisualisation>
-        <passiveAddedEffectTriggers/>
-        <passiveRemovedEffectTriggers/>
+        <passiveAddedEffectTriggers>
+            <!--add spell effect-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addAutoAttackSpellEffects>
+                            <entity id="newSpellEffect">
+                                <castedEffectTriggers>
+                                    <!--add shield-->
+                                    <entity>
+                                        <sourceCasterTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <addShield duration="-1">
+                                                    <entity id="shield">
+                                                        <shieldAmount>50</shieldAmount>
+                                                    </entity>
+                                                </addShield>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#passive</triggerSource>
+                                    </entity>
+                                </castedEffectTriggers>
+                            </entity>
+                        </addAutoAttackSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveAddedEffectTriggers>
+        <passiveRemovedEffectTriggers>
+            <!--remove spell effect-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeSpellEffects>#newSpellEffect</removeSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveRemovedEffectTriggers>
     </entity>
 </template>

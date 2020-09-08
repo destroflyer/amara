@@ -1,40 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.effects.damage;
 
-import amara.applications.ingame.entitysystem.components.attributes.*;
-import amara.applications.ingame.entitysystem.components.effects.*;
-import amara.applications.ingame.entitysystem.components.effects.damage.*;
-import amara.applications.ingame.entitysystem.components.units.*;
-import amara.libraries.entitysystem.*;
+import amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent;
+import amara.applications.ingame.entitysystem.components.effects.damage.ResultingMagicDamageComponent;
+import amara.libraries.entitysystem.EntitySystem;
+import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Carl
- */
-public class ApplyMagicDamageSystem implements EntitySystem{
-    
+public class ApplyMagicDamageSystem implements EntitySystem {
+
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(EntityWrapper entityWrapper : entityWorld.getWrapped(entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingMagicDamageComponent.class)))
-        {
-            int targetEntity = entityWrapper.getComponent(ApplyEffectImpactComponent.class).getTargetEntity();
-            boolean wasDamaged = false;
-            if(entityWorld.hasComponent(targetEntity, IsVulnerableComponent.class)){
-                HealthComponent healthComponent = entityWorld.getComponent(targetEntity, HealthComponent.class);
-                if(healthComponent != null){
-                    float damage = entityWrapper.getComponent(ResultingMagicDamageComponent.class).getValue();
-                    if(damage > 0){
-                        float health = (healthComponent.getValue() - damage);
-                        entityWorld.setComponent(targetEntity, new HealthComponent(health));
-                        wasDamaged = true;
-                    }
-                }
-            }
-            if(!wasDamaged){
-                entityWorld.removeEntity(entityWrapper.getId());
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, ResultingMagicDamageComponent.class)) {
+            int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
+            float magicDamage = entityWorld.getComponent(effectImpactEntity, ResultingMagicDamageComponent.class).getValue();
+            if (!DamageUtil.dealDamage(entityWorld, targetEntity, magicDamage)) {
+                entityWorld.removeEntity(effectImpactEntity);
             }
         }
     }

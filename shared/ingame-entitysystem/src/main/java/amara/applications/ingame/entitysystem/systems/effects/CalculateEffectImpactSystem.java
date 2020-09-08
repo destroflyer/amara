@@ -106,7 +106,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         }
                         effectImpact.setComponent(effectSourceComponent);
                     }
-                    if (physicalDamage != 0) {
+                    if (physicalDamage > 0) {
                         ArmorComponent armorComponent = entityWorld.getComponent(targetEntity, ArmorComponent.class);
                         if (armorComponent != null) {
                             physicalDamage *= getResistanceDamageFactor(armorComponent.getValue());
@@ -119,9 +119,11 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         if (outgoingDamageAmplificationComponent != null) {
                             physicalDamage *= (1 + outgoingDamageAmplificationComponent.getValue());
                         }
-                        effectImpact.setComponent(new ResultingPhysicalDamageComponent(physicalDamage));
+                        if (physicalDamage > 0) {
+                            effectImpact.setComponent(new ResultingPhysicalDamageComponent(physicalDamage));
+                        }
                     }
-                    if (magicDamage != 0) {
+                    if (magicDamage > 0) {
                         MagicResistanceComponent magicResistanceComponent = entityWorld.getComponent(targetEntity, MagicResistanceComponent.class);
                         if (magicResistanceComponent != null) {
                             magicDamage *= getResistanceDamageFactor(magicResistanceComponent.getValue());
@@ -134,7 +136,9 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         if (outgoingDamageAmplificationComponent != null) {
                             magicDamage *= (1 + outgoingDamageAmplificationComponent.getValue());
                         }
-                        effectImpact.setComponent(new ResultingMagicDamageComponent(magicDamage));
+                        if (magicDamage > 0) {
+                            effectImpact.setComponent(new ResultingMagicDamageComponent(magicDamage));
+                        }
                     }
                     if (heal != 0) {
                         effectImpact.setComponent(new ResultingHealComponent(heal));
@@ -272,6 +276,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         ResetCooldownComponent.class,
                         TriggerSpellEffectsComponent.class,
                         AddGoldComponent.class,
+                        AddShieldComponent.class,
                         CancelActionComponent.class,
                         LevelUpComponent.class,
                         RemoveAutoAggroComponent.class,

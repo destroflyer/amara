@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.visualisation.healthbars;
 
 import java.util.HashMap;
@@ -18,14 +14,10 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.libraries.applications.display.materials.*;
 import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Carl
- */
-public class HealthBarStyleManager{
-    
-    private HashMap<Integer, PaintableImage[]> paintableImages = new HashMap<Integer, PaintableImage[]>();
-    //The order of these objects maps them to the according HealthBarStyleComponent.HealthBarStyle
+public class HealthBarStyleManager {
+
+    private HashMap<Integer, PaintableImage[]> paintableImages = new HashMap<>();
+    // The order of these objects maps them to the according HealthBarStyleComponent.HealthBarStyle
     private HealthBarStyle[] styles = new HealthBarStyle[]{
         new HealthBarStyle_Small(),
         new HealthBarStyle_Medium(),
@@ -34,7 +26,7 @@ public class HealthBarStyleManager{
         new HealthBarStyle_Boss()
     };
 
-    public Spatial createGeometry(EntityWorld entityWorld, int entity){
+    public Spatial createGeometry(EntityWorld entityWorld, int entity) {
         HealthBarStyle style = getStyle(entityWorld, entity);
         Geometry geometry = new Geometry(null, new RectangleMesh((style.getBarWidth() / -2), 0, 0, style.getBarWidth(), style.getBarHeight()));
         Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
@@ -45,18 +37,18 @@ public class HealthBarStyleManager{
         geometry.setMaterial(material);
         return geometry;
     }
-    
-    public PaintableImage getImage_MaximumHealth(int entity, HealthBarStyle style){
+
+    public PaintableImage getImage_MaximumHealth(int entity, HealthBarStyle style) {
         return getImages(entity, style)[0];
     }
-    
-    public PaintableImage getImage_CurrentHealth(int entity, HealthBarStyle style){
+
+    public PaintableImage getImage_CurrentHealth(int entity, HealthBarStyle style) {
         return getImages(entity, style)[1];
     }
-    
-    private PaintableImage[] getImages(int entity, HealthBarStyle style){
+
+    private PaintableImage[] getImages(int entity, HealthBarStyle style) {
         PaintableImage[] images = paintableImages.get(entity);
-        if(images == null){
+        if (images == null) {
             PaintableImage imageMaximum = new PaintableImage(style.getImageWidth(), style.getImageHeight());
             PaintableImage imageCurrent = new PaintableImage(style.getImageWidth(), style.getImageHeight());
             images = new PaintableImage[]{imageMaximum, imageCurrent};
@@ -64,19 +56,19 @@ public class HealthBarStyleManager{
         }
         return images;
     }
-    
-    public float getHealthBarY(EntityWorld entityWorld, int entity){
-        if(entityWorld.hasComponent(entity, HealthComponent.class)){
+
+    public float getHealthBarY(EntityWorld entityWorld, int entity) {
+        if (entityWorld.hasComponent(entity, HealthComponent.class)) {
             HealthBarStyle style = getStyle(entityWorld, entity);
             return style.getBarHeight();
         }
         return 0;
     }
-    
-    public HealthBarStyle getStyle(EntityWorld entityWorld, int entity){
+
+    public HealthBarStyle getStyle(EntityWorld entityWorld, int entity) {
         HealthBarStyleComponent.HealthBarStyle style = HealthBarStyleComponent.HealthBarStyle.SMALL;
         HealthBarStyleComponent healthBarStyleComponent = entityWorld.getComponent(entity, HealthBarStyleComponent.class);
-        if(healthBarStyleComponent != null){
+        if (healthBarStyleComponent != null) {
             style = healthBarStyleComponent.getStyle();
         }
         return styles[style.ordinal()];

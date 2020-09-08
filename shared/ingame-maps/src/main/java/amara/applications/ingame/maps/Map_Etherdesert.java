@@ -219,7 +219,7 @@ public class Map_Etherdesert extends Map {
                 spawnEffect.setComponent(new SpawnComponent(spawnInformation.getId()));
                 spawnTrigger.setComponent(new TriggeredEffectComponent(spawnEffect.getId()));
                 float spawnDelay = ((i == 6) ? 0.5f : 1.25f);
-                spawnTrigger.setComponent(new TriggerDelayComponent(13 + (spawnDelay * r)));
+                spawnTrigger.setComponent(new TriggerDelayComponent(spawnDelay * r));
                 spawnTrigger.setComponent(new TriggerOnceComponent(true));
                 waveSpawnTriggers[r] = spawnTrigger.getId();
             }
@@ -227,7 +227,9 @@ public class Map_Etherdesert extends Map {
         }
         int[] activateSpawnsTriggers = new int[waves];
         int[] activateNextWaveTriggers = new int[waves];
+        int[] delayedActivateActivateNextWaveTriggers = new int[waves];
         int[] displayRecommendedMilitaryValueTriggers = new int[waves];
+        int waveDelay = 13;
         for (int i = 0; i < waves; i++) {
             EntityWrapper activateSpawnsTrigger = entityWorld.getWrapped(entityWorld.createEntity());
             activateSpawnsTrigger.setComponent(new InstantTriggerComponent());
@@ -235,16 +237,29 @@ public class Map_Etherdesert extends Map {
             EntityWrapper activateSpawnEffect = entityWorld.getWrapped(entityWorld.createEntity());
             activateSpawnEffect.setComponent(new AddEffectTriggersComponent(spawnTriggers[i]));
             activateSpawnsTrigger.setComponent(new TriggeredEffectComponent(activateSpawnEffect.getId()));
+            activateSpawnsTrigger.setComponent(new TriggerDelayComponent(waveDelay));
             activateSpawnsTrigger.setComponent(new TriggerOnceComponent(true));
             activateSpawnsTrigger.setComponent(new CustomCleanupComponent());
             activateSpawnsTriggers[i] = activateSpawnsTrigger.getId();
 
             EntityWrapper activateNextWaveTrigger = entityWorld.getWrapped(entityWorld.createEntity());
-            activateNextWaveTrigger.setComponent(new TeamDeathTriggerComponent());
+            activateNextWaveTrigger.setComponent(new TeamDeathTriggerComponent(new int[0]));
             activateNextWaveTrigger.setComponent(new CustomTargetComponent(spawnCasterEntity));
             activateNextWaveTrigger.setComponent(new TriggerOnceComponent(true));
             activateNextWaveTrigger.setComponent(new CustomCleanupComponent());
             activateNextWaveTriggers[i] = activateNextWaveTrigger.getId();
+
+            int delayedActivateActivateNextWaveTrigger = entityWorld.createEntity();
+            entityWorld.setComponent(delayedActivateActivateNextWaveTrigger, new InstantTriggerComponent());
+            entityWorld.setComponent(delayedActivateActivateNextWaveTrigger, new CustomTargetComponent(spawnCasterEntity));
+            int delayedActivateNextWaveEffect = entityWorld.createEntity();
+            entityWorld.setComponent(delayedActivateNextWaveEffect, new AddEffectTriggersComponent(activateNextWaveTrigger.getId()));
+            entityWorld.setComponent(delayedActivateActivateNextWaveTrigger, new TriggeredEffectComponent(delayedActivateNextWaveEffect));
+            // Wait 1 second (for first wave units to spawn) so team death doesn't trigger instantly
+            entityWorld.setComponent(delayedActivateActivateNextWaveTrigger, new TriggerDelayComponent(waveDelay + 1));
+            entityWorld.setComponent(delayedActivateActivateNextWaveTrigger, new TriggerOnceComponent(true));
+            entityWorld.setComponent(delayedActivateActivateNextWaveTrigger, new CustomCleanupComponent());
+            delayedActivateActivateNextWaveTriggers[i] = delayedActivateActivateNextWaveTrigger;
 
             EntityWrapper displayRecommendedMilitaryValueTrigger = entityWorld.getWrapped(entityWorld.createEntity());
             displayRecommendedMilitaryValueTrigger.setComponent(new InstantTriggerComponent());
@@ -258,15 +273,15 @@ public class Map_Etherdesert extends Map {
 
             if (i == 0) {
                 activateSpawnsTrigger.setComponent(new TriggerSourceComponent(entity));
-                activateNextWaveTrigger.setComponent(new TriggerSourceComponent(spawnCasterEntity));
+                entityWorld.setComponent(delayedActivateActivateNextWaveTrigger, new TriggerSourceComponent(entity));
                 displayRecommendedMilitaryValueTrigger.setComponent(new TriggerSourceComponent(entity));
             }
         }
         for (int i = 0; i < waves; i++) {
             int activateNextWaveTrigger = activateNextWaveTriggers[i];
             EntityWrapper activateNextWaveEffect = entityWorld.getWrapped(entityWorld.createEntity());
-            if (i < (waves - 1)){
-                activateNextWaveEffect.setComponent(new AddEffectTriggersComponent(enableIncomeTrigger, disableIncomeTrigger, respawnTeamTrigger, activateSpawnsTriggers[i + 1], activateNextWaveTriggers[i + 1], displayRecommendedMilitaryValueTriggers[i + 1]));
+            if (i < (waves - 1)) {
+                activateNextWaveEffect.setComponent(new AddEffectTriggersComponent(enableIncomeTrigger, disableIncomeTrigger, respawnTeamTrigger, activateSpawnsTriggers[i + 1], delayedActivateActivateNextWaveTriggers[i + 1], displayRecommendedMilitaryValueTriggers[i + 1]));
             } else {
                 activateNextWaveEffect.setComponent(new AddEffectTriggersComponent(winMapObjectiveTrigger));
             }

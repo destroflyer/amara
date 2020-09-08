@@ -25,6 +25,7 @@ import amara.applications.ingame.entitysystem.systems.spells.*;
 import amara.applications.ingame.entitysystem.systems.spells.casting.*;
 import amara.applications.ingame.entitysystem.systems.units.*;
 import amara.applications.ingame.entitysystem.systems.units.scores.*;
+import amara.applications.ingame.entitysystem.systems.units.shields.*;
 import amara.applications.ingame.entitysystem.systems.visuals.*;
 import amara.applications.ingame.network.messages.objects.commands.PlayerCommand;
 import amara.applications.ingame.server.entitysystem.systems.effects.ApplyEffectsLoopSystem;
@@ -79,6 +80,7 @@ public class GameLogic {
         entitySystems.add(new CountdownKnockupSystem());
         entitySystems.add(new CountdownSilenceSystem());
         entitySystems.add(new CountdownStunSystem());
+        entitySystems.add(new CountdownShieldSystem());
         entitySystems.add(new CountdownReactionsSystem());
         entitySystems.add(new CountdownEffectDelaySystem());
         entitySystems.add(new CountdownCampRespawnSystem());

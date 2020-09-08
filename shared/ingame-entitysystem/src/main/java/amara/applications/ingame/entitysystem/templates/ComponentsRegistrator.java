@@ -2185,6 +2185,30 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent(gold);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.units.AddShieldComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.units.AddShieldComponent.class.getDeclaredField("shieldEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.units.AddShieldComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.AddShieldComponent>("addShield"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.units.AddShieldComponent construct(EntityWorld entityWorld, Element element){
+                int shieldEntity = createChildEntity(entityWorld, element, 0, "shieldEntity");
+                float duration = 0;
+                String durationText = element.getAttributeValue("duration");
+                if((durationText != null) && (durationText.length() > 0)){
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                }
+                return new amara.applications.ingame.entitysystem.components.effects.units.AddShieldComponent(shieldEntity, duration);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent>("cancelAction"){
 
@@ -5179,6 +5203,77 @@ public class ComponentsRegistrator{
                     cooldowns[i] = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("cooldowns")));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent(spellIndices, cooldowns);
+            }
+        });
+        //shields
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.shields.ActiveShieldComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.shields.ActiveShieldComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.shields.ActiveShieldComponent.class.getDeclaredField("shieldEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.shields.ActiveShieldComponent>("activeShield"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.shields.ActiveShieldComponent construct(EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+                int shieldEntity = createChildEntity(entityWorld, element, 0, "shieldEntity");
+                return new amara.applications.ingame.entitysystem.components.units.shields.ActiveShieldComponent(targetEntity, shieldEntity);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.shields.RemainingShieldDurationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.shields.RemainingShieldDurationComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.shields.RemainingShieldDurationComponent>("remainingShieldDuration"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.shields.RemainingShieldDurationComponent construct(EntityWorld entityWorld, Element element){
+                float duration = 0;
+                String durationText = element.getText();
+                if((durationText != null) && (durationText.length() > 0)){
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.shields.RemainingShieldDurationComponent(duration);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.shields.ShieldAmountComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.shields.ShieldAmountComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.shields.ShieldAmountComponent>("shieldAmount"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.shields.ShieldAmountComponent construct(EntityWorld entityWorld, Element element){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.shields.ShieldAmountComponent(value);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.ShieldsComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.ShieldsComponent.class.getDeclaredField("shieldStatusEntities"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ShieldsComponent>("shields"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.ShieldsComponent construct(EntityWorld entityWorld, Element element){
+                int[] shieldStatusEntities = createChildEntities(entityWorld, element, 0, "shieldStatusEntities");
+                return new amara.applications.ingame.entitysystem.components.units.ShieldsComponent(shieldStatusEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.ShopGoldExpensesComponent.class);

@@ -1,68 +1,92 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.visualisation;
 
+import amara.libraries.entitysystem.ComponentMapObserver;
+import amara.libraries.entitysystem.EntitySystem;
+import amara.libraries.entitysystem.EntityWorld;
 import com.jme3.scene.Spatial;
-import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
-public abstract class SimpleVisualAttachmentSystem implements EntitySystem{
+public abstract class SimpleVisualAttachmentSystem implements EntitySystem {
 
-    public SimpleVisualAttachmentSystem(Class componentClass){
-        componentClassesToObserve = new Class[]{componentClass};
-        this.componentClass = componentClass;
-    }
-    private Class[] componentClassesToObserve;
-    private Class componentClass;
-    
-    protected void setComponentClassesToObserve(Class... additionalComponentClassesToObserve){
-        componentClassesToObserve = new Class[additionalComponentClassesToObserve.length + 1];
-        componentClassesToObserve[0] = componentClass;
-        for(int i=1;i<componentClassesToObserve.length;i++){
-            componentClassesToObserve[i] = additionalComponentClassesToObserve[i - 1];
+    public SimpleVisualAttachmentSystem(Class<?>[] primaryComponentClasses, Class<?>[] secondaryComponentClasses) {
+        this.primaryComponentClasses = primaryComponentClasses;
+        this.secondaryComponentClasses = secondaryComponentClasses;
+
+        allComponentClasses = new Class[primaryComponentClasses.length + secondaryComponentClasses.length];
+        for (int i = 0; i < primaryComponentClasses.length; i++) {
+            allComponentClasses[i] = primaryComponentClasses[i];
+        }
+        for (int i = 0; i < secondaryComponentClasses.length; i++) {
+            allComponentClasses[primaryComponentClasses.length + i] = secondaryComponentClasses[i];
         }
     }
+    private Class<?>[] primaryComponentClasses;
+    private Class<?>[] secondaryComponentClasses;
+    private Class<?>[] allComponentClasses;
 
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        ComponentMapObserver observer = entityWorld.requestObserver(this, componentClassesToObserve);
-        for(int entity : observer.getNew().getEntitiesWithAny(componentClass)){
-            createAndAttachVisualAttachment(entityWorld, entity);
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        ComponentMapObserver observer = entityWorld.requestObserver(this, allComponentClasses);
+        for (int entity : observer.getNew().getEntitiesWithAny(primaryComponentClasses)) {
+            if (entityWorld.hasAllComponents(entity, primaryComponentClasses)) {
+                createAndAttachVisualAttachment(entityWorld, entity);
+            }
         }
-        for(int entity : observer.getChanged().getEntitiesWithAny(componentClass)){
+        for (int entity : observer.getChanged().getEntitiesWithAny(primaryComponentClasses)) {
             Spatial visualAttachment = getVisualAttachment(entity);
-            updateVisualAttachment(entityWorld, entity, visualAttachment);
+            if (visualAttachment != null) {
+                updateVisualAttachment(entityWorld, entity, visualAttachment);
+            }
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAny(componentClass)){
+        for (int entity : observer.getRemoved().getEntitiesWithAny(primaryComponentClasses)) {
             detach(entity);
         }
+        for (Class<?> secondaryComponentClass : secondaryComponentClasses) {
+            for (int entity : observer.getNew().getEntitiesWithAny(secondaryComponentClass)) {
+                onSecondaryComponentUpdated(entityWorld, entity, secondaryComponentClass);
+            }
+            for (int entity : observer.getChanged().getEntitiesWithAny(secondaryComponentClass)) {
+                onSecondaryComponentUpdated(entityWorld, entity, secondaryComponentClass);
+            }
+            for (int entity : observer.getRemoved().getEntitiesWithAny(secondaryComponentClass)) {
+                onSecondaryComponentUpdated(entityWorld, entity, secondaryComponentClass);
+            }
+        }
     }
-    
-    protected void createAndAttachVisualAttachment(EntityWorld entityWorld, int entity){
+
+    private void onSecondaryComponentUpdated(EntityWorld entityWorld, int secondaryEntity, Class<?> secondaryComponentClass) {
+        int primaryEntity = getPrimaryEntityBySecondaryComponent(entityWorld, secondaryEntity, secondaryComponentClass);
+        if (primaryEntity != -1) {
+            Spatial visualAttachment = getVisualAttachment(primaryEntity);
+            if (visualAttachment != null) {
+                updateVisualAttachment(entityWorld, primaryEntity, visualAttachment);
+            }
+        }
+    }
+
+    protected int getPrimaryEntityBySecondaryComponent(EntityWorld entityWorld, int entity, Class<?> secondaryComponentClass) {
+        return entity;
+    }
+
+    protected void createAndAttachVisualAttachment(EntityWorld entityWorld, int entity) {
         Spatial visualAttachment = createVisualAttachment(entityWorld, entity);
-        if(visualAttachment != null){
+        if (visualAttachment != null) {
             visualAttachment.setName(getVisualAttachmentID(entity));
             updateVisualAttachment(entityWorld, entity, visualAttachment);
             attach(entity, visualAttachment);
         }
     }
-    
+
     protected abstract void attach(int entity, Spatial visualAttachment);
-    
+
     protected abstract void detach(int entity);
-    
+
     protected abstract Spatial getVisualAttachment(int entity);
-    
+
     protected abstract Spatial createVisualAttachment(EntityWorld entityWorld, int entity);
-    
+
     protected abstract void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment);
-    
-    protected String getVisualAttachmentID(int entity){
+
+    protected String getVisualAttachmentID(int entity) {
         return ("visualAttachment_" + hashCode() + "_" + entity);
     }
 }

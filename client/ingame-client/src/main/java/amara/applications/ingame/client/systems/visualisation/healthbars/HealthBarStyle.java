@@ -1,22 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.visualisation.healthbars;
 
 import amara.libraries.applications.display.materials.PaintableImage;
 
-/**
- *
- * @author Carl
- */
-public abstract class HealthBarStyle{
+public abstract class HealthBarStyle {
 
-    public HealthBarStyle(int barWidth, int barHeight){
+    public HealthBarStyle(int barWidth, int barHeight) {
         this(barWidth, barHeight, barWidth, barHeight);
     }
 
-    public HealthBarStyle(int barWidth, int barHeight, int imageWidth, int imageHeight){
+    public HealthBarStyle(int barWidth, int barHeight, int imageWidth, int imageHeight) {
         this.barWidth = barWidth;
         this.barHeight = barHeight;
         this.imageWidth = imageWidth;
@@ -26,24 +18,22 @@ public abstract class HealthBarStyle{
     protected final int barHeight;
     protected final int imageWidth;
     protected final int imageHeight;
-    
-    protected abstract void drawMaximumHealth(PaintableImage paintableImage, float maximumHealth, boolean isAllied);
-    
-    protected abstract void drawCurrentHealth(PaintableImage paintableImage, float healthPortion);
 
-    public int getBarWidth(){
+    protected abstract void draw(PaintableImage paintableImage, float maximumHealth, float currentHealth, float totalShieldAmount, boolean isAllied);
+
+    public int getBarWidth() {
         return barWidth;
     }
 
-    public int getBarHeight(){
+    public int getBarHeight() {
         return barHeight;
     }
 
-    public int getImageWidth(){
+    public int getImageWidth() {
         return imageWidth;
     }
 
-    public int getImageHeight(){
+    public int getImageHeight() {
         return imageHeight;
     }
 }

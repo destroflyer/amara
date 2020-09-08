@@ -98,6 +98,7 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyResetCooldownSystem());
         add(new ApplyTriggerSpellEffectsSystem());
         add(new ApplyAddGoldSystem());
+        add(new ApplyAddShieldSystem());
         add(new ApplyCancelActionsSystem());
         add(new ApplyLevelUpSystem());
         add(new ApplyRemoveAutoAggroSystem());
