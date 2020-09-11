@@ -1,9 +1,10 @@
 <template>
     <entity id="object">
+        <model>Models/tristan_ult/skin.xml</model>
         <!--hitbox is generated via code-->
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
-        <lifetime>0.2</lifetime>
+        <lifetime>1</lifetime>
     </entity>
     <!--trigger spell effects-->
     <entity>
@@ -16,26 +17,32 @@
         <triggeredEffect>
             <entity>
                 <triggerCastedSpellEffects/>
-                <playAudio>
-                    <entity>
-                        <audio>Sounds/sounds/spells/maria_stab_hit.ogg</audio>
-                        <audioVolume>0.75</audioVolume>
-                        <audioRemoveAfterPlaying/>
-                    </entity>
-                </playAudio>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
     </entity>
-    <!--remove object-->
+    <!--deactivate hitbox on collision-->
     <entity>
         <collisionTrigger>#collisionRules</collisionTrigger>
         <sourceTarget/>
         <triggeredEffect>
             <entity>
-                <removeEntity/>
+                <deactivateHitbox/>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
+    </entity>
+    <!--deactivate hitbox after time-->
+    <entity>
+        <instantTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <deactivateHitbox/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+        <triggerDelay>0.2</triggerDelay>
+        <triggerOnce/>
     </entity>
 </template>

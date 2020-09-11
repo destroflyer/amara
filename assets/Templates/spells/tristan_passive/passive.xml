@@ -1,7 +1,7 @@
 <template>
     <entity id="passive">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Courage</name>
+        <description>Gain walk speed while targeting an enemy character.</description>
         <spellVisualisation>tristan_passive</spellVisualisation>
         <passiveAddedEffectTriggers/>
         <passiveRemovedEffectTriggers/>

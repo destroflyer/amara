@@ -1,7 +1,7 @@
 <template>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Smash</name>
+        <description>After a small delay, smashes your sword down, damaging and stunning all enemies in front of you.</description>
         <spellVisualisation>tristan_stun</spellVisualisation>
         <spellIndicator>
             <entity>
@@ -19,6 +19,12 @@
                                 <spawnTemplate>./object</spawnTemplate>
                             </entity>
                         </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/tristan_stun_cast.ogg</audio>
+                                <audioVolume>3</audioVolume>
+                            </entity>
+                        </playAudio>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

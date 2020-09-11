@@ -1,8 +1,10 @@
 package amara.applications.ingame.entitysystem.systems.conditions;
 
-import amara.applications.ingame.entitysystem.components.attributes.*;
+import amara.applications.ingame.entitysystem.components.attributes.HealthComponent;
+import amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent;
 import amara.applications.ingame.entitysystem.components.conditions.*;
 import amara.applications.ingame.entitysystem.components.general.NameComponent;
+import amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent;
 import amara.applications.ingame.entitysystem.systems.buffs.BuffUtil;
 import amara.libraries.entitysystem.EntityWorld;
 
@@ -13,6 +15,7 @@ public class ConditionUtil {
              && isHasBuffConditionMet(entityWorld, conditionEntity, targetEntity)
              && isHasHealthPortionConditionMet(entityWorld, conditionEntity, targetEntity)
              && isNameAmountConditionMet(entityWorld, conditionEntity, targetEntity)
+             && isIsCharacterConditionMet(entityWorld, conditionEntity, targetEntity)
              && isNotExistingConditionMet(entityWorld, conditionEntity));
     }
 
@@ -68,6 +71,14 @@ public class ConditionUtil {
                 }
             }
             return (amount <= nameAmountConditionComponent.getMaximum());
+        }
+        return true;
+    }
+
+    private static boolean isIsCharacterConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
+        IsCharacterConditionComponent isCharacterConditionComponent = entityWorld.getComponent(conditionEntity, IsCharacterConditionComponent.class);
+        if (isCharacterConditionComponent != null) {
+            return entityWorld.hasComponent(targetEntity, IsCharacterComponent.class);
         }
         return true;
     }

@@ -1112,6 +1112,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent(portion, lessOrMore, allowEqual);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.IsCharacterConditionComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.IsCharacterConditionComponent>("isCharacterCondition"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.conditions.IsCharacterConditionComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.conditions.IsCharacterConditionComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.NameAmountConditionComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.NameAmountConditionComponent>("nameAmountCondition"){
 

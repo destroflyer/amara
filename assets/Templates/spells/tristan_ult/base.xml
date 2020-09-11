@@ -1,14 +1,9 @@
 <template>
     <value name="delay">0.2</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Knockback</name>
+        <description>Knockbacks and damages all enemies in front of you - If they collide with a wall, they take additional damage and are stunned.</description>
         <spellVisualisation>tristan_ult</spellVisualisation>
-        <spellIndicator>
-            <entity>
-                <linearIndicator width="2" height="11"/>
-            </entity>
-        </spellIndicator>
         <instantEffectTriggers>
             <!--spawn object-->
             <entity>
@@ -20,6 +15,12 @@
                                 <spawnTemplate>./object</spawnTemplate>
                             </entity>
                         </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/tristan_ult_cast.ogg</audio>
+                                <audioVolume>3</audioVolume>
+                            </entity>
+                        </playAudio>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

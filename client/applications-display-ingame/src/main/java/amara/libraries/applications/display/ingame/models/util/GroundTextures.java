@@ -22,7 +22,7 @@ public class GroundTextures {
         Geometry geometry = new Geometry(null, new Quad(width, height));
         geometry.setLocalTranslation(x, 0, y);
         geometry.rotate(JMonkeyUtil.getQuaternion_X(-90));
-        Material material = MaterialFactory.generateLightingMaterial(textureFilePath);
+        Material material = MaterialFactory.generateUnshadedMaterial(textureFilePath);
         material.getAdditionalRenderState().setBlendMode(blendMode);
         material.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
         material.getAdditionalRenderState().setDepthTest(false);

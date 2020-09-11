@@ -1,9 +1,14 @@
 <template>
     <value name="duration">0.4</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Spin</name>
+        <description>Spins your sword in a circle, dealing damage to all enemies and healing for every character hit.</description>
         <spellVisualisation>tristan_spin</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <circularIndicator radius="6"/>
+            </entity>
+        </spellIndicator>
         <instantEffectTriggers>
             <!--spawn object, add visual buff-->
             <entity>
@@ -15,6 +20,12 @@
                                 <spawnTemplate>./object</spawnTemplate>
                             </entity>
                         </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/tristan_spin_cast.ogg</audio>
+                                <audioVolume>7</audioVolume>
+                            </entity>
+                        </playAudio>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
@@ -48,6 +59,12 @@
             <!--target effect-->
             <entity>
                 <sourceCasterTarget/>
+                <triggerConditions>
+                    <entity>
+                        <targetTarget/>
+                        <isCharacterCondition/>
+                    </entity>
+                </triggerConditions>
                 <triggeredEffect>
                     <entity>
                         <heal>100</heal>
