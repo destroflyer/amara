@@ -1,5 +1,6 @@
 package amara.test;
 
+import amara.applications.ingame.entitysystem.components.units.AutoAttackComponent;
 import amara.applications.ingame.entitysystem.components.units.SpellsComponent;
 import amara.applications.ingame.network.messages.objects.commands.casting.CastLinearSkillshotSpellCommand;
 import amara.applications.ingame.network.messages.objects.commands.casting.SpellIndex;
@@ -19,7 +20,8 @@ public class TestElvenArcher extends CommandingPlayerTest {
 
     @Test
     public void testE() {
-        int spell = createEntity("spells/elven_archer_roll/base");
+        int autoattack = entityWorld.getComponent(character, AutoAttackComponent.class).getAutoAttackEntity();
+        int spell = createEntity("spells/elven_archer_roll/base," + autoattack);
         entityWorld.setComponent(character, new SpellsComponent(spell));
         onLogicStart();
 

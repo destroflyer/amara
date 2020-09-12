@@ -14,7 +14,7 @@
         <castCancelMovement/>
         <castDuration>3</castDuration>
         <castTurnToTarget/>
-        <castAnimation>
+        <castAnimation additionalLoops="14">
             <entity>
                 <name>draw_arrow</name>
                 <loopDuration>0.2</loopDuration>
@@ -31,7 +31,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <magicDamage>80 + (0.2 * source.abilityPower)</magicDamage>
+                        <magicDamage>50 + (0.05 * source.abilityPower)</magicDamage>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

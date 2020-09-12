@@ -68,15 +68,15 @@
         <isStunnable/>
         <!--spells-->
         <autoAttack>
-            <entity template="spells/ranged_autoattack,Models/elven_archer_arrow/skin_small.xml"/>
+            <entity id="autoattack" template="spells/ranged_autoattack,Models/elven_archer_arrow/skin_small.xml"/>
         </autoAttack>
         <passives>
             <entity template="spells/elven_archer_passive/passive"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/elven_archer_attack_buff/base"/>
+            <entity template="spells/elven_archer_attack_buff/base(#autoattack)"/>
             <entity template="spells/elven_archer_arrow/base"/>
-            <entity template="spells/elven_archer_roll/base"/>
+            <entity template="spells/elven_archer_roll/base(#autoattack)"/>
             <entity template="spells/elven_archer_ult/base"/>
         </learnableSpells>
         <!--other-->

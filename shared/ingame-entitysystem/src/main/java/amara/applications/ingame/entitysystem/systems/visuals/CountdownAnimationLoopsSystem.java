@@ -36,7 +36,7 @@ public class CountdownAnimationLoopsSystem implements EntitySystem{
                     entityWorld.removeComponent(animationEntity, PassedLoopTimeComponent.class);
                     int remainingLoops = (remainingLoopsComponent.getLoopsCount() - 1);
                     if(remainingLoops > 0){
-                        entityWorld.setComponent(entity, new RemainingLoopsComponent(remainingLoops));
+                        entityWorld.setComponent(animationEntity, new RemainingLoopsComponent(remainingLoops));
                     }
                     else{
                         entityWorld.removeComponent(entity, AnimationComponent.class);

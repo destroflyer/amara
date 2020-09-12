@@ -9,6 +9,16 @@
             </entity>
         </spellIndicator>
         <instantEffectTriggers>
+            <!--reset autoattack cooldown-->
+            <entity>
+                <customTarget>[parameter0]</customTarget>
+                <triggeredEffect>
+                    <entity>
+                        <resetCooldown/>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
             <!--trigger spell effects-->
             <entity>
                 <targetTarget/>

@@ -3292,7 +3292,12 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent construct(EntityWorld entityWorld, Element element){
                 int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
-                return new amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent(animationEntity);
+                int additionalLoops = 0;
+                String additionalLoopsText = element.getAttributeValue("additionalLoops");
+                if((additionalLoopsText != null) && (additionalLoopsText.length() > 0)){
+                    additionalLoops = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, additionalLoopsText));
+                }
+                return new amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent(animationEntity, additionalLoops);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent.class);

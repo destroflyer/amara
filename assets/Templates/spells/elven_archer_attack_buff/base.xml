@@ -5,6 +5,16 @@
         <description>TODO</description>
         <spellVisualisation>elven_archer_attack_buff</spellVisualisation>
         <instantEffectTriggers>
+            <!--reset autoattack cooldown-->
+            <entity>
+                <customTarget>[parameter0]</customTarget>
+                <triggeredEffect>
+                    <entity>
+                        <resetCooldown/>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
             <!--trigger spell effects-->
             <entity>
                 <sourceCasterTarget/>
