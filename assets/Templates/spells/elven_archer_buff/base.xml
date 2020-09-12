@@ -1,8 +1,8 @@
 <template>
     <value name="duration">5</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Arrowhead Enchantment</name>
+        <description>For the next [duration] seconds, your basic attacks and spells deal additional magic damage and slow enemies.</description>
         <spellVisualisation>elven_archer_buff</spellVisualisation>
         <instantEffectTriggers>
             <!--reset autoattack cooldown-->
@@ -49,8 +49,8 @@
                                                 <magicDamage>50 + (0.1 + source.abilityPower)</magicDamage>
                                                 <addBuff duration="2">
                                                     <entity>
-                                                        <name>TODO</name>
-                                                        <description>TODO</description>
+                                                        <name>Stuck Arrowhead</name>
+                                                        <description>This unit has decreased walk speed.</description>
                                                         <buffIcon>spells/elven_archer_buff</buffIcon>
                                                         <buffVisualisation>frost</buffVisualisation>
                                                         <continuousAttributes>
@@ -79,8 +79,8 @@
                     <entity>
                         <addBuff duration="[duration]">
                             <entity id="buff">
-                                <name>TODO</name>
-                                <description>TODO</description>
+                                <name>Enchanted Arrowheads</name>
+                                <description>This units basic attacks and spells deal additional magic damage and slow enemies.</description>
                                 <buffIcon>spells/elven_archer_buff</buffIcon>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>

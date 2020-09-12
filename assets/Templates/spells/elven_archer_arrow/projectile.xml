@@ -8,7 +8,7 @@
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
         <removeOnMapLeave/>
-        <lifetime>1.5</lifetime>
+        <lifetime>1.25</lifetime>
     </entity>
     <!--trigger spell effects-->
     <entity>

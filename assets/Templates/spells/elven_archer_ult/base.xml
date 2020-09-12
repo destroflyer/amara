@@ -1,7 +1,7 @@
 <template>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Rapid Fire</name>
+        <description>Shoot a large amount of arrows in a cone, with each arrow dealing physical damage when hitting an enemy.</description>
         <spellVisualisation>elven_archer_ult</spellVisualisation>
         <spellIndicator>
             <entity>
@@ -31,7 +31,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <magicDamage>50 + (0.05 * source.abilityPower)</magicDamage>
+                        <physicalDamage>50 + (0.05 * source.abilityPower)</physicalDamage>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

@@ -1,8 +1,8 @@
 <template>
     <value name="delay">0.18</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Piercing Shot</name>
+        <description>Shoot a long-range arrow, which deals physical damage to the first enemy hit.</description>
         <spellVisualisation>elven_archer_arrow</spellVisualisation>
         <spellIndicator>
             <entity>
@@ -49,7 +49,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <magicDamage>150 + (0.7 * source.abilityPower)</magicDamage>
+                        <physicalDamage>150 + (0.7 * source.abilityPower)</physicalDamage>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
