@@ -51,14 +51,6 @@ public class MovementSystem implements EntitySystem {
         return (CastSpellSystem.isAbleToPerformAction(entityWorld, entity) && (!entityWorld.hasComponent(entity, IsBindedComponent.class)));
     }
 
-    public static boolean hasUncancelableMovement(EntityWorld entityWorld, int entity) {
-        MovementComponent movementComponent = entityWorld.getComponent(entity, MovementComponent.class);
-        if (movementComponent != null) {
-            return isMovementUncancelable(entityWorld, movementComponent.getMovementEntity());
-        }
-        return false;
-    }
-
     public static boolean isMovementUncancelable(EntityWorld entityWorld, int movementEntity) {
         return ((!entityWorld.hasComponent(movementEntity, MovementIsCancelableComponent.class)) || isMovementDisplacement(entityWorld, movementEntity));
     }

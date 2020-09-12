@@ -10,7 +10,8 @@
         </spellIndicator>
         <instantEffectTriggers/>
         <castType>linear_skillshot</castType>
-        <castCancelAction/>
+        <castCancelCast/>
+        <castCancelMovement/>
         <castDuration>3</castDuration>
         <castTurnToTarget/>
         <castAnimation>

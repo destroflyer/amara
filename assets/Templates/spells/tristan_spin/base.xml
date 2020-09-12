@@ -33,7 +33,7 @@
         </instantEffectTriggers>
         <castType>selfcast</castType>
         <castDuration>[duration]</castDuration>
-        <castCancelAction/>
+        <castCancelCast/>
         <castAnimation>
             <entity>
                 <name>spin</name>

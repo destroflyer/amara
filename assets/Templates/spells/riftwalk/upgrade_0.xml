@@ -30,7 +30,8 @@
             </entity>
         </instantEffectTriggers>
         <castType>positional_skillshot</castType>
-        <castCancelAction/>
+        <castCancelCast/>
+        <castCancelMovement/>
         <castTurnToTarget/>
         <baseCooldown>6</baseCooldown>
     </entity>

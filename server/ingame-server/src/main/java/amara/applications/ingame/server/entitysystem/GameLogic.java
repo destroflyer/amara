@@ -163,7 +163,7 @@ public class GameLogic {
         entitySystems.add(new TriggerRepeatingEffectSystem());
         entitySystems.add(new TriggerInstantEffectSystem());
         entitySystems.add(new CheckCampMaximumAggroDistanceSystem());
-        entitySystems.add(new SetIdleAnimationsSystem());
+        entitySystems.add(new ResetAnimationsSystem());
         entitySystems.add(new IntersectionPushSystem(intersectionObserver));
         entitySystems.add(new MapIntersectionSystem(polyMapManager));
         entitySystems.add(new RespawnableDeathSystem());

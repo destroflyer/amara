@@ -22,7 +22,8 @@
         </instantEffectTriggers>
         <castType>selfcast</castType>
         <castDuration>[duration]</castDuration>
-        <castCancelAction/>
+        <castCancelCast/>
+        <castCancelMovement/>
         <castAnimation>
             <entity>
                 <name>smash</name>

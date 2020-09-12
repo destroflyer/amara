@@ -6,7 +6,8 @@
             [code]
         </instantEffectTriggers>-->
         <castType>selfcast</castType>
-        <castCancelAction/>
+        <castCancelCast/>
+        <castCancelMovement/>
         <castDuration>3</castDuration>
         <castAnimation>
             <entity>

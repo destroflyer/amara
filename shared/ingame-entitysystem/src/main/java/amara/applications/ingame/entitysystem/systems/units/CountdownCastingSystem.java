@@ -23,7 +23,7 @@ public class CountdownCastingSystem implements EntitySystem{
             }
             else{
                 entityWrapper.removeComponent(IsCastingComponent.class);
-                entityWrapper.removeComponent(CurrentActionEffectCastsComponent.class);
+                entityWrapper.removeComponent(CurrentCastEffectCastsComponent.class);
             }
         }
     }

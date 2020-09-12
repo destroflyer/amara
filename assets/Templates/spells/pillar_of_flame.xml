@@ -26,7 +26,8 @@
             </entity>
         </instantEffectTriggers>
         <castType>positional_skillshot</castType>
-        <castCancelAction/>
+        <castCancelCast/>
+        <castCancelMovement/>
         <castTurnToTarget/>
         <range type="center_to_center" distance="15"/>
         <baseCooldown>10</baseCooldown>

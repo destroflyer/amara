@@ -89,7 +89,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem {
                     }
                 } else if (command instanceof StopWalkInDirectionCommand) {
                     entityWorld.removeComponent(characterEntity, InnateWalkDirectionComponent.class);
-                    UnitUtil.tryStopMovement(entityWorld, characterEntity);
+                    UnitUtil.tryCancelMovement(entityWorld, characterEntity);
                 } else if (command instanceof StopCommand) {
                     UnitUtil.tryCancelAction(entityWorld, characterEntity);
                 } else if (command instanceof AutoAttackCommand) {

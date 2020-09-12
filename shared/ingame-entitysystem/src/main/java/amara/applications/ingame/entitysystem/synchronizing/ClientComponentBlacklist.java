@@ -230,7 +230,8 @@ public class ClientComponentBlacklist {
             // spells
             ApplyCastedSpellComponent.class,
             CastAnimationComponent.class,
-            CastCancelActionComponent.class,
+            CastCancelCastComponent.class,
+            CastCancelMovementComponent.class,
             CastCancelableComponent.class,
             CastTurnToTargetComponent.class,
             InstantEffectTriggersComponent.class,
@@ -250,7 +251,7 @@ public class ClientComponentBlacklist {
             AutoAggroComponent.class,
             CampResetComponent.class,
             CastSpellOnCooldownWhileAttackingComponent.class,
-            CurrentActionEffectCastsComponent.class,
+            CurrentCastEffectCastsComponent.class,
             LifetimeComponent.class,
             LocalAvoidanceWalkComponent.class,
             MaximumAggroRangeComponent.class,
@@ -284,7 +285,7 @@ public class ClientComponentBlacklist {
             TargetTargetComponent.class,
             TeamTargetComponent.class,
             // units/effecttriggers/triggers
-            ActionCancelledTriggerComponent.class,
+            CastCancelledTriggerComponent.class,
             BuffTargetsAmountTriggerComponent.class,
             CastingFinishedTriggerComponent.class,
             CollisionTriggerComponent.class,

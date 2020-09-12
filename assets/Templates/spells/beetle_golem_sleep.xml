@@ -14,7 +14,8 @@
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
-        <castCancelAction/>
+        <castCancelCast/>
+        <castCancelMovement/>
         <!--castDuration = transitionTime + sleepTime + transitionTime-->
         <castDuration>9</castDuration>
         <baseCooldown>15</baseCooldown>

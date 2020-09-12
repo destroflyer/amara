@@ -87,7 +87,8 @@
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
-        <castCancelAction/>
+        <castCancelCast/>
+        <castCancelMovement/>
         <castCancelable/>
         <castDuration>[castDuration]</castDuration>
     </entity>

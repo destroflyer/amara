@@ -17,7 +17,8 @@
             </entity>
         </instantEffectTriggers>
         <castType>single_target</castType>
-        <castCancelAction/>
+        <castCancelCast/>
+        <castCancelMovement/>
         <castDuration>0.2</castDuration>
         <castTurnToTarget/>
         <castAnimation>

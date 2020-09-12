@@ -15,7 +15,8 @@
             </entity>
         </instantEffectTriggers>
         <castType>single_target</castType>
-        <castCancelAction/>
+        <castCancelCast/>
+        <castCancelMovement/>
         <castTurnToTarget/>
         <range type="center_to_center" distance="20"/>
         <baseCooldown>25</baseCooldown>

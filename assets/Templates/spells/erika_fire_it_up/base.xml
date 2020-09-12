@@ -41,7 +41,8 @@
             </entity>
         </instantEffectTriggers>
         <castType>positional_skillshot</castType>
-        <castCancelAction/>
+        <castCancelCast/>
+        <castCancelMovement/>
         <castDuration>0.3</castDuration>
         <castTurnToTarget/>
         <castAnimation>

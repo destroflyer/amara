@@ -63,7 +63,8 @@
         </instantEffectTriggers>
         <castType>linear_skillshot</castType>
         <castDuration>0.5</castDuration>
-        <castCancelAction/>
+        <castCancelCast/>
+        <castCancelMovement/>
         <castTurnToTarget/>
         <baseCooldown>5</baseCooldown>
     </entity>

@@ -3303,12 +3303,20 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent();
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.CastCancelActionComponent.class);
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastCancelActionComponent>("castCancelAction"){
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.CastCancelCastComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastCancelCastComponent>("castCancelCast"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastCancelActionComponent construct(EntityWorld entityWorld, Element element){
-                return new amara.applications.ingame.entitysystem.components.spells.CastCancelActionComponent();
+            public amara.applications.ingame.entitysystem.components.spells.CastCancelCastComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.spells.CastCancelCastComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.CastCancelMovementComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastCancelMovementComponent>("castCancelMovement"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spells.CastCancelMovementComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.spells.CastCancelMovementComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.CastCostComponent.class);
@@ -4281,18 +4289,18 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent(remainingDuration);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent.class);
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.CurrentCastEffectCastsComponent.class);
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent.class.getDeclaredField("effectCastEntities"), componentFieldSerializer_Entity);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.CurrentCastEffectCastsComponent.class.getDeclaredField("effectCastEntities"), componentFieldSerializer_Entity);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent>("currentActionEffectCasts"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CurrentCastEffectCastsComponent>("currentCastEffectCasts"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.CurrentCastEffectCastsComponent construct(EntityWorld entityWorld, Element element){
                 int[] effectCastEntities = createChildEntities(entityWorld, element, 0, "effectCastEntities");
-                return new amara.applications.ingame.entitysystem.components.units.CurrentActionEffectCastsComponent(effectCastEntities);
+                return new amara.applications.ingame.entitysystem.components.units.CurrentCastEffectCastsComponent(effectCastEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent.class);
@@ -4499,14 +4507,6 @@ public class ComponentsRegistrator{
             }
         });
         //triggers
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent.class);
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent>("actionCancelledTrigger"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent construct(EntityWorld entityWorld, Element element){
-                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ActionCancelledTriggerComponent();
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.BuffTargetsAmountTriggerComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.BuffTargetsAmountTriggerComponent.class.getDeclaredField("buffEntity"), componentFieldSerializer_Entity);
@@ -4524,6 +4524,14 @@ public class ComponentsRegistrator{
                     amount = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, amountText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.BuffTargetsAmountTriggerComponent(buffEntity, amount);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastCancelledTriggerComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastCancelledTriggerComponent>("castCancelledTrigger"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastCancelledTriggerComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastCancelledTriggerComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent.class);

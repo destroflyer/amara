@@ -30,7 +30,8 @@
             </entity>
         </instantEffectTriggers>
         <castType>single_target</castType>
-        <castCancelAction/>
+        <castCancelCast/>
+        <castCancelMovement/>
         <castDuration>[delay]</castDuration>
         <castTurnToTarget/>
         <castAnimation>

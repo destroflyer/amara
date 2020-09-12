@@ -49,7 +49,7 @@ public class CastSpellSystem implements EntitySystem {
                     for (int i = 0; i < currentActionEffectCastEntities.length; i++) {
                         currentActionEffectCastEntities[i] = effectCasts.get(i).getId();
                     }
-                    entityWorld.setComponent(casterEntity, new CurrentActionEffectCastsComponent(currentActionEffectCastEntities));
+                    entityWorld.setComponent(casterEntity, new CurrentCastEffectCastsComponent(currentActionEffectCastEntities));
                 }
             }
             entityWorld.removeComponent(casterEntity, CastSpellComponent.class);

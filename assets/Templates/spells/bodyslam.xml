@@ -19,7 +19,8 @@
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
-        <castCancelAction/>
+        <castCancelCast/>
+        <castCancelMovement/>
         <castDuration>2</castDuration>
         <castAnimation>
             <entity>

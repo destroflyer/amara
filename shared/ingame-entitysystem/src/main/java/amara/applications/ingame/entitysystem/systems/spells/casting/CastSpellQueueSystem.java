@@ -101,8 +101,14 @@ public class CastSpellQueueSystem implements EntitySystem {
         }
         if (castInstant) {
             boolean isAllowed = true;
-            if (entityWorld.hasComponent(spellEntity, CastCancelActionComponent.class)) {
+            boolean cancelMovement = entityWorld.hasComponent(spellEntity, CastCancelMovementComponent.class);
+            boolean cancelCast = entityWorld.hasComponent(spellEntity, CastCancelCastComponent.class);
+            if (cancelMovement && cancelCast) {
                 isAllowed = UnitUtil.tryCancelAction(entityWorld, casterEntity);
+            } else if (cancelMovement) {
+                isAllowed = UnitUtil.tryCancelMovement(entityWorld, casterEntity);
+            } else if (cancelCast) {
+                isAllowed = UnitUtil.tryCancelCast(entityWorld, casterEntity);
             }
             if (isAllowed) {
                 if (isAutoAttack) {
