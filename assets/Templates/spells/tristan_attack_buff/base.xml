@@ -2,7 +2,7 @@
     <entity id="spell">
         <name>Cripple</name>
         <description>Your next basic attack deals additional magic damage and heavily slows the target.</description>
-        <spellVisualisation>tristan_attack_buff</spellVisualisation>ca
+        <spellVisualisation>tristan_attack_buff</spellVisualisation>
         <instantEffectTriggers>
             <!--reset autoattack cooldown-->
             <entity>
@@ -48,9 +48,10 @@
                                                 <magicDamage>75 + (0.6 + source.abilityPower)</magicDamage>
                                                 <addBuff duration="2">
                                                     <entity>
-                                                        <name>TODO</name>
-                                                        <description>TODO</description>
-                                                        <buffVisualisation>frost</buffVisualisation>
+                                                        <name>Crippled</name>
+                                                        <description>This unit has decreased walk speed.</description>
+                                                        <buffIcon>spells/tristan_attack_buff</buffIcon>
+                                                        <buffVisualisation>blood</buffVisualisation>
                                                         <continuousAttributes>
                                                             <entity>
                                                                 <bonusPercentageWalkSpeed>-0.5</bonusPercentageWalkSpeed>
@@ -77,8 +78,8 @@
                         </addAutoAttackSpellEffects>
                         <addBuff duration="5">
                             <entity id="buff">
-                                <name>TODO</name>
-                                <description>TODO</description>
+                                <name>Cripple</name>
+                                <description>Your next basic attack deals additional magic damage and heavily slows the target.</description>
                                 <buffIcon>spells/tristan_attack_buff</buffIcon>
                                 <buffVisualisation>tristan_empowered</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
