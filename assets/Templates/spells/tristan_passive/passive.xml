@@ -3,7 +3,67 @@
         <name>Courage</name>
         <description>Gain walk speed while targeting an enemy character.</description>
         <spellVisualisation>tristan_passive</spellVisualisation>
-        <passiveAddedEffectTriggers/>
-        <passiveRemovedEffectTriggers/>
+        <passiveAddedEffectTriggers>
+            <!--add trigger-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addEffectTriggers>
+                            <!--add buff-->
+                            <entity id="hasAggroTargetTrigger">
+                                <hasAggroTargetTrigger/>
+                                <sourceTarget/>
+                                <triggerConditions>
+                                    <entity>
+                                        <targetTarget/>
+                                        <isCharacterCondition/>
+                                    </entity>
+                                </triggerConditions>
+                                <triggeredEffect>
+                                    <entity>
+                                        <addBuff duration="-1">
+                                            <entity id="buff">
+                                                <name>Courage</name>
+                                                <description>This unit has increased walk speed.</description>
+                                                <buffIcon>spells/tristan_passive</buffIcon>
+                                                <continuousAttributes>
+                                                    <entity>
+                                                        <bonusPercentageWalkSpeed>0.15</bonusPercentageWalkSpeed>
+                                                    </entity>
+                                                </continuousAttributes>
+                                            </entity>
+                                        </addBuff>
+                                    </entity>
+                                </triggeredEffect>
+                            </entity>
+                            <!--remove buff-->
+                            <entity id="hasNoAggroTargetTrigger">
+                                <hasNoAggroTargetTrigger/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <removeBuff>#buff</removeBuff>
+                                    </entity>
+                                </triggeredEffect>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveAddedEffectTriggers>
+        <passiveRemovedEffectTriggers>
+            <!--remove trigger-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeEffectTriggers>#hasAggroTargetTrigger,#hasNoAggroTargetTrigger</removeEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveRemovedEffectTriggers>
     </entity>
 </template>

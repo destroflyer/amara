@@ -153,6 +153,7 @@ public class GameLogic {
         entitySystems.add(new CheckHiddenAreasSystem(intersectionObserver));
         // Add 1 for the neutral team
         entitySystems.add(new TeamVisionSystem(game.getTeamsCount() + 1, game.getMap().getPhysicsInformation().generateVisionObstacles()));
+        entitySystems.add(new TriggerAggroTargetEffectSystem());
         entitySystems.add(new TriggerBuffTargetsAmountEffectSystem());
         entitySystems.add(new TriggerCollisionEffectSystem(intersectionObserver));
         entitySystems.add(new TriggerCastingFinishedEffectSystem());

@@ -4587,6 +4587,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasAggroTargetTriggerComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasAggroTargetTriggerComponent>("hasAggroTargetTrigger"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasAggroTargetTriggerComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasAggroTargetTriggerComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasBuffsTriggerComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasBuffsTriggerComponent.class.getDeclaredField("buffEntities"), componentFieldSerializer_Entity);
@@ -4599,6 +4607,14 @@ public class ComponentsRegistrator{
             public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasBuffsTriggerComponent construct(EntityWorld entityWorld, Element element){
                 int[] buffEntities = createChildEntities(entityWorld, element, 0, "buffEntities");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasBuffsTriggerComponent(buffEntities);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasNoAggroTargetTriggerComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasNoAggroTargetTriggerComponent>("hasNoAggroTargetTrigger"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasNoAggroTargetTriggerComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasNoAggroTargetTriggerComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent.class);
