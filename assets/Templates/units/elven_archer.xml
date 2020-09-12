@@ -74,10 +74,10 @@
             <entity template="spells/elven_archer_passive/passive"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/elven_archer_attack_buff/base(#autoattack)"/>
-            <entity template="spells/elven_archer_arrow/base"/>
+            <entity template="spells/elven_archer_buff/base(#autoattack,#spell2,#spell4)"/>
+            <entity id="spell2" template="spells/elven_archer_arrow/base"/>
             <entity template="spells/elven_archer_roll/base(#autoattack)"/>
-            <entity template="spells/elven_archer_ult/base"/>
+            <entity id="spell4" template="spells/elven_archer_ult/base"/>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

@@ -13,7 +13,7 @@
                 <triggeredEffect>
                     <entity>
                         <!--add spell effects-->
-                        <addSpellSpellEffects setSourcesToSpells="true">
+                        <addSpellSpellEffects>
                             <entity id="newSpellEffect">
                                 <castedEffectTriggers>
                                     <!--add buff-->

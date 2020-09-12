@@ -1,10 +1,13 @@
 package amara.applications.ingame.entitysystem.systems.effects.spells;
 
-import amara.applications.ingame.entitysystem.components.effects.*;
-import amara.applications.ingame.entitysystem.components.effects.spells.*;
-import amara.applications.ingame.entitysystem.components.spells.triggers.*;
-import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
-import amara.libraries.entitysystem.*;
+import amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent;
+import amara.applications.ingame.entitysystem.components.effects.spells.AddSpellSpellEffectsComponent;
+import amara.applications.ingame.entitysystem.components.spells.triggers.CastedEffectTriggersComponent;
+import amara.applications.ingame.entitysystem.components.spells.triggers.CastedSpellComponent;
+import amara.applications.ingame.entitysystem.components.spells.triggers.SpellEffectParentComponent;
+import amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerSourceComponent;
+import amara.libraries.entitysystem.EntitySystem;
+import amara.libraries.entitysystem.EntityWorld;
 
 public class ApplyAddSpellSpellEffectsSystem implements EntitySystem {
 
@@ -13,7 +16,7 @@ public class ApplyAddSpellSpellEffectsSystem implements EntitySystem {
         for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, AddSpellSpellEffectsComponent.class)) {
             int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
             AddSpellSpellEffectsComponent addSpellSpellEffectsComponent =  entityWorld.getComponent(effectImpactEntity, AddSpellSpellEffectsComponent.class);
-            for (int spellEffectEntity : addSpellSpellEffectsComponent.getSpellEffectEntities()){
+            for (int spellEffectEntity : addSpellSpellEffectsComponent.getSpellEffectEntities()) {
                 // Clone the spell effect so it can be reused for multiple spells
                 int newSpellEffectEntity = entityWorld.createEntity();
                 entityWorld.setComponent(newSpellEffectEntity, new SpellEffectParentComponent(spellEffectEntity));

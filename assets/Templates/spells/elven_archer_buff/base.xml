@@ -3,7 +3,7 @@
     <entity id="spell">
         <name>TODO</name>
         <description>TODO</description>
-        <spellVisualisation>elven_archer_attack_buff</spellVisualisation>
+        <spellVisualisation>elven_archer_buff</spellVisualisation>
         <instantEffectTriggers>
             <!--reset autoattack cooldown-->
             <entity>
@@ -33,12 +33,12 @@
     <entity>
         <castedSpell>#spell</castedSpell>
         <castedEffectTriggers>
-            <!--add spelleffect and buff-->
+            <!--add spelleffects-->
             <entity>
-                <targetTarget/>
+                <customTarget>[parameter0],[parameter1],[parameter2]</customTarget>
                 <triggeredEffect>
                     <entity>
-                        <addAutoAttackSpellEffects>
+                        <addSpellSpellEffects>
                             <entity id="newSpellEffect">
                                 <castedEffectTriggers>
                                     <!--target effect-->
@@ -51,7 +51,7 @@
                                                     <entity>
                                                         <name>TODO</name>
                                                         <description>TODO</description>
-                                                        <buffIcon>spells/elven_archer_attack_buff</buffIcon>
+                                                        <buffIcon>spells/elven_archer_buff</buffIcon>
                                                         <buffVisualisation>frost</buffVisualisation>
                                                         <continuousAttributes>
                                                             <entity>
@@ -60,18 +60,28 @@
                                                         </continuousAttributes>
                                                     </entity>
                                                 </addBuff>
+                                                <customCleanup/>
                                             </entity>
                                         </triggeredEffect>
                                         <triggerSource>#spell</triggerSource>
                                     </entity>
                                 </castedEffectTriggers>
                             </entity>
-                        </addAutoAttackSpellEffects>
+                        </addSpellSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--add buff-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
                         <addBuff duration="[duration]">
                             <entity id="buff">
                                 <name>TODO</name>
                                 <description>TODO</description>
-                                <buffIcon>spells/elven_archer_attack_buff</buffIcon>
+                                <buffIcon>spells/elven_archer_buff</buffIcon>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
                                         <targetTarget/>
