@@ -68,13 +68,13 @@
         <isStunnable/>
         <!--spells-->
         <autoAttack>
-            <entity template="spells/melee_autoattack"/>
+            <entity id="autoattack" template="spells/melee_autoattack"/>
         </autoAttack>
         <passives>
             <entity template="spells/dwarf_warrior_passive/passive"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/dwarf_warrior_attack_buff/base"/>
+            <entity template="spells/dwarf_warrior_attack_buff/base(#autoattack)"/>
             <entity template="spells/dwarf_warrior_heal/base"/>
             <entity template="spells/dwarf_warrior_knockback/base"/>
             <entity template="spells/dwarf_warrior_charge/base"/>

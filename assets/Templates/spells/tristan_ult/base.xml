@@ -18,7 +18,7 @@
                         <playAudio>
                             <entity>
                                 <audio>Sounds/sounds/spells/tristan_ult_cast.ogg</audio>
-                                <audioVolume>3</audioVolume>
+                                <audioVolume>4</audioVolume>
                             </entity>
                         </playAudio>
                     </entity>

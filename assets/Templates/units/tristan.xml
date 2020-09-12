@@ -74,7 +74,7 @@
             <entity template="spells/tristan_passive/passive"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/tristan_spin/base"/>
+            <entity template="spells/tristan_spin/base(#unit)"/>
             <entity template="spells/tristan_attack_buff/base(#autoattack)"/>
             <entity template="spells/tristan_stun/base"/>
             <entity template="spells/tristan_ult/base"/>

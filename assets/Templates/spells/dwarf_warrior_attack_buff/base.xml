@@ -31,6 +31,16 @@
             </entity>
         </learnEffectTriggers>
         <instantEffectTriggers>
+            <!--reset autoattack cooldown-->
+            <entity>
+                <customTarget>[parameter0]</customTarget>
+                <triggeredEffect>
+                    <entity>
+                        <resetCooldown/>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
             <!--add attack buff-->
             <entity>
                 <sourceCasterTarget/>

@@ -4,6 +4,16 @@
         <description>Your next basic attack deals additional magic damage and heavily slows the target.</description>
         <spellVisualisation>tristan_attack_buff</spellVisualisation>ca
         <instantEffectTriggers>
+            <!--reset autoattack cooldown-->
+            <entity>
+                <customTarget>[parameter0]</customTarget>
+                <triggeredEffect>
+                    <entity>
+                        <resetCooldown/>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
             <!--trigger spell effects-->
             <entity>
                 <sourceCasterTarget/>
@@ -22,16 +32,6 @@
     <entity>
         <castedSpell>#spell</castedSpell>
         <castedEffectTriggers>
-            <!--reset autoattack cooldown-->
-            <entity>
-                <customTarget>[parameter0]</customTarget>
-                <triggeredEffect>
-                    <entity>
-                        <resetCooldown/>
-                    </entity>
-                </triggeredEffect>
-                <triggerSource>#spell</triggerSource>
-            </entity>
             <!--add spelleffect-->
             <entity>
                 <targetTarget/>
