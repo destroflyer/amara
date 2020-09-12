@@ -30,10 +30,10 @@ public class ResetAnimationsSystem implements EntitySystem {
             if (movementAnimationComponent != null) {
                 return movementAnimationComponent.getAnimationEntity();
             }
-            IdleAnimationComponent idleAnimationComponent = entityWorld.getComponent(entity, IdleAnimationComponent.class);
-            if (idleAnimationComponent != null) {
-               return idleAnimationComponent.getAnimationEntity();
-            }
+        }
+        IdleAnimationComponent idleAnimationComponent = entityWorld.getComponent(entity, IdleAnimationComponent.class);
+        if (idleAnimationComponent != null) {
+            return idleAnimationComponent.getAnimationEntity();
         }
         return -1;
     }
