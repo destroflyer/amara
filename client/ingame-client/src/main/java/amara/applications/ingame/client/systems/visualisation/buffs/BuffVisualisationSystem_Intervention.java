@@ -32,7 +32,7 @@ public class BuffVisualisationSystem_Intervention extends BuffVisualisationSyste
         material.getAdditionalRenderState().setDepthTest(false);
         geometry.setMaterial(material);
         geometry.setLocalTranslation(0, 2, 0);
-        geometry.setUserData("layer", 7);
+        geometry.setUserData("layer", 8);
         return geometry;
     }
 }

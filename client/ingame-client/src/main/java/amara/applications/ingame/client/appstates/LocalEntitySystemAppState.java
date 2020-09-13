@@ -70,6 +70,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new BuffVisualisationSystem_Bubble_Default(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Bubble_White(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Burning(entitySceneMap));
+        addEntitySystem(new BuffVisualisationSystem_Charm(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Dosaz_Ult(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_DwarfWarrior_Empowered(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Electrified(entitySceneMap));

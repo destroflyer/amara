@@ -65,7 +65,7 @@
                                 <name>TODO</name>
                                 <description>TODO</description>
                                 <buffIcon>spells/alice_charm</buffIcon>
-                                <buffVisualisation>charmed</buffVisualisation>
+                                <buffVisualisation>charm</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
                                         <targetTarget/>

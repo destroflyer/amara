@@ -26,6 +26,7 @@ public class PreloadAssetsAppState extends BaseDisplayAppState{
     @Override
     public void initialize(AppStateManager stateManager, Application application){
         super.initialize(stateManager, application);
+        preloadDirectory("Effekseer/Texture/");
         preloadDirectory("Textures/effects/");
         preloadDirectory("Textures/spell_indicators/");
     }

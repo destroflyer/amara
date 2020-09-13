@@ -1,23 +1,30 @@
-
 package amara.libraries.applications.display.ingame.models.modifiers;
 
 import amara.core.files.FileAssets;
+import amara.libraries.applications.display.ingame.models.util.FadeOutControl;
+import amara.libraries.applications.display.ingame.models.util.GroundTextures;
 import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.applications.display.models.ModelModifier;
 import amara.libraries.applications.display.models.RegisteredModel;
 import com.destroflyer.jme3.effekseer.model.ParticleEffectSettings;
 import com.destroflyer.jme3.effekseer.reader.EffekseerReader;
 import com.destroflyer.jme3.effekseer.renderer.EffekseerControl;
+import com.jme3.material.RenderState;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.renderer.queue.RenderQueue;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.control.AbstractControl;
 
-public class ModelModifier_LightningStrike extends ModelModifier {
+public class ModelModifier_Alice_Thunder extends ModelModifier {
 
     @Override
     public void modify(RegisteredModel registeredModel) {
+        Geometry indicator = GroundTextures.create("Models/alice_thunder/resources/indicator.png", -2, 2, 4, 4, RenderState.BlendMode.AlphaAdditive);
+        indicator.addControl(new FadeOutControl(0.5f));
+        registeredModel.getNode().attachChild(indicator);
+
         Node particleNode = new Node();
         particleNode.setLocalScale(0.2f);
         particleNode.setShadowMode(RenderQueue.ShadowMode.Off);

@@ -1,6 +1,6 @@
 <template>
     <entity id="object">
-        <model>Models/lightning_strike/skin.xml</model>
+        <model>Models/alice_thunder/skin.xml</model>
         <hitbox>
             <circle radius="2"/>
         </hitbox>
