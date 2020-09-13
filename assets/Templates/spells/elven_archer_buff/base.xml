@@ -46,7 +46,7 @@
                                         <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
-                                                <magicDamage>50 + (0.1 + source.abilityPower)</magicDamage>
+                                                <magicDamage>50 + (0.1 * source.abilityPower)</magicDamage>
                                                 <addBuff duration="2">
                                                     <entity>
                                                         <name>Stuck Arrowhead</name>

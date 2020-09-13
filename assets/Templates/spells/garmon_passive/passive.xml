@@ -1,56 +1,110 @@
 <template>
-    <value name="duration">2</value>
+    <value name="cooldown">8</value>
     <entity id="passive">
         <name>Star Channeling</name>
-        <description>After taking damage, Garmon gains 20 ability power for [duration] seconds.</description>
+        <description>Every [cooldown] seconds, your next basic attack deals additional magic damage.</description>
         <spellVisualisation>garmon_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
-            <!--add trigger-->
+            <!--add triggers-->
             <entity>
                 <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <addEffectTriggers>
-                            <!--gain ability power-->
-                            <entity id="damageTakenTrigger">
-                                <damageTakenTrigger physicalDamage="true" magicDamage="true" trueDamage="true"/>
-                                <sourceTarget/>
-                                <triggeredEffect>
+                        <addBuff duration="-1">
+                            <entity id="buff">
+                                <name>Stargazer</name>
+                                <description>This units next basic attack deals additional magic damage.</description>
+                                <buffIcon>spells/garmon_passive</buffIcon>
+                                <onBuffAddEffectTriggers>
+                                    <!--add spell effect-->
                                     <entity>
-                                        <addBuff duration="[duration]">
+                                        <targetTarget/>
+                                        <triggeredEffect>
                                             <entity>
-                                                <name>Stargazer</name>
-                                                <description>This unit has increased ability power.</description>
-                                                <buffIcon>spells/garmon_passive</buffIcon>
-                                                <continuousAttributes>
-                                                    <entity>
-                                                        <bonusFlatAbilityPower>30</bonusFlatAbilityPower>
+                                                <addAutoAttackSpellEffects>
+                                                    <entity id="newSpellEffect">
+                                                        <castedEffectTriggers>
+                                                            <!--target effect-->
+                                                            <entity>
+                                                                <targetTarget/>
+                                                                <triggeredEffect>
+                                                                    <entity>
+                                                                        <magicDamage>50 + (0.2 * source.abilityPower)</magicDamage>
+                                                                        <customCleanup/>
+                                                                    </entity>
+                                                                </triggeredEffect>
+                                                                <triggerSource>#passive</triggerSource>
+                                                            </entity>
+                                                            <!--remove buff-->
+                                                            <entity>
+                                                                <sourceCasterTarget/>
+                                                                <triggeredEffect>
+                                                                    <entity>
+                                                                        <removeBuff>#buff</removeBuff>
+                                                                        <customCleanup/>
+                                                                    </entity>
+                                                                </triggeredEffect>
+                                                                <triggerSource>#passive</triggerSource>
+                                                            </entity>
+                                                        </castedEffectTriggers>
                                                     </entity>
-                                                </continuousAttributes>
+                                                </addAutoAttackSpellEffects>
                                             </entity>
-                                        </addBuff>
+                                        </triggeredEffect>
+                                        <triggerSource>#passive</triggerSource>
                                     </entity>
-                                </triggeredEffect>
-                                <cooldown>8</cooldown>
+                                </onBuffAddEffectTriggers>
+                                <onBuffRemoveEffectTriggers>
+                                    <!--remove spell effect-->
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <removeSpellEffects>#newSpellEffect</removeSpellEffects>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#passive</triggerSource>
+                                    </entity>
+                                    <!--readd buff-->
+                                    <entity id="readdBuffTrigger">
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <addBuff duration="-1">#buff</addBuff>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#passive</triggerSource>
+                                        <triggerDelay>[cooldown]</triggerDelay>
+                                    </entity>
+                                </onBuffRemoveEffectTriggers>
                             </entity>
-                        </addEffectTriggers>
+                        </addBuff>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#passive</triggerSource>
             </entity>
         </passiveAddedEffectTriggers>
         <passiveRemovedEffectTriggers>
-            <!--remove trigger-->
+            <!--remove buff-->
             <entity>
                 <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <removeEffectTriggers>#damageTakenTrigger</removeEffectTriggers>
+                        <removeBuff>#buff</removeBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+            <!--remove readd trigger-->
+            <entity>
+                <customTarget>#readdBuffTrigger</customTarget>
+                <triggeredEffect>
+                    <entity>
+                        <removeEntity/>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#passive</triggerSource>
             </entity>
         </passiveRemovedEffectTriggers>
-        <linkedCooldown>#damageTakenTrigger</linkedCooldown>
     </entity>
 </template>

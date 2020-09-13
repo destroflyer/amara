@@ -55,7 +55,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <magicDamage>100 + (0.8 + source.abilityPower)</magicDamage>
+                        <magicDamage>100 + (0.8 * source.abilityPower)</magicDamage>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

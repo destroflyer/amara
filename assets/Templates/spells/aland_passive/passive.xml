@@ -63,7 +63,7 @@
         <triggeredEffect>
             <entity>
                 <removeBuff>#buff</removeBuff>
-                <magicDamage>80 + (0.3 + source.abilityPower)</magicDamage>
+                <magicDamage>80 + (0.3 * source.abilityPower)</magicDamage>
                 <addBuff duration="[slowDuration]">
                     <entity>
                         <name>TODO</name>

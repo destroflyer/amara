@@ -35,7 +35,7 @@
                                         <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
-                                                <magicDamage>75 + (0.6 + source.abilityPower)</magicDamage>
+                                                <magicDamage>75 + (0.6 * source.abilityPower)</magicDamage>
                                                 <playAudio>
                                                     <entity>
                                                         <audio>Sounds/sounds/spells/empower_hit.ogg</audio>
