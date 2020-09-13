@@ -74,7 +74,7 @@
             <entity template="spells/alice_passive/passive"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/alice_bubble/base(#thunderPoppableBuff)"/>
+            <entity template="spells/alice_knockup/base(#thunderPoppableBuff)"/>
             <entity template="spells/alice_thunder/base(#thunderPoppableBuff)"/>
             <entity template="spells/alice_charm/base(#thunderPoppableBuff)"/>
             <entity template="spells/alice_ult/base"/>

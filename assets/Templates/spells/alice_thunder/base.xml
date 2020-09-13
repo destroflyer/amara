@@ -1,8 +1,8 @@
 <template>
     <value name="duration">1.5</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Thunder</name>
+        <description>After a small delay, a lightning bolt crashes down at the target location, damaging and slowing all enemies in a small area and popping all bubbles.</description>
         <spellVisualisation>alice_thunder</spellVisualisation>
         <spellIndicator>
             <entity>
@@ -51,7 +51,7 @@
                         <magicDamage>150 + (0.5 * source.abilityPower)</magicDamage>
                         <addBuff duration="[duration]">
                             <entity>
-                                <name>TODO</name>
+                                <name>Thunderstruck</name>
                                 <description>This unit has decreased walk speed.</description>
                                 <buffIcon>spells/alice_thunder</buffIcon>
                                 <continuousAttributes>

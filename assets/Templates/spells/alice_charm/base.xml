@@ -2,8 +2,8 @@
     <value name="delay">0.25</value>
     <value name="duration">1.5</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Charming Bubble</name>
+        <description>Shoot a pink bubble to the target location, which lies around for 6 seconds if not hitting anything. When colliding with an enemy, all near enemies receive magic damage and are charmed.</description>
         <spellVisualisation>alice_charm</spellVisualisation>
         <spellIndicator>
             <entity>
@@ -62,8 +62,8 @@
                         </move>
                         <addBuff duration="[duration]">
                             <entity>
-                                <name>TODO</name>
-                                <description>TODO</description>
+                                <name>Charmed</name>
+                                <description>This unit is in love and can't help but move towards its desire.</description>
                                 <buffIcon>spells/alice_charm</buffIcon>
                                 <buffVisualisation>charm</buffVisualisation>
                                 <onBuffRemoveEffectTriggers>

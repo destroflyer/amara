@@ -1,9 +1,7 @@
 <template>
     <entity id="passive">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Bubbles</name>
+        <description>Your summoned bubbles deal magic damage around them when popping and leave behind a 5 seconds lasting glitter that grants vision.</description>
         <spellVisualisation>alice_passive</spellVisualisation>
-        <passiveAddedEffectTriggers/>
-        <passiveRemovedEffectTriggers/>
     </entity>
 </template>
