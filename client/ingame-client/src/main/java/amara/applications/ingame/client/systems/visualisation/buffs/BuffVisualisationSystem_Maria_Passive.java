@@ -11,6 +11,7 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import amara.applications.ingame.client.systems.visualisation.*;
+import amara.libraries.applications.display.ingame.models.util.SimpleParticleEmitter;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.EntityWorld;
 

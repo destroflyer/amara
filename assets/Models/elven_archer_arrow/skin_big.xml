@@ -6,5 +6,8 @@
         <material>
             <texture source="elven_archer">diffuse_green.png</texture>
         </material>
+        <modifiers>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_ElvenArcher_BigArrow</modifier>
+        </modifiers>
     </model>
 </skin>

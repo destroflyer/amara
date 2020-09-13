@@ -4,13 +4,14 @@
  */
 package amara.applications.ingame.client.systems.visualisation.buffs;
 
+import amara.applications.ingame.client.systems.visualisation.EntitySceneMap;
+import amara.libraries.applications.display.ingame.models.util.SimpleParticleEmitter;
+import amara.libraries.entitysystem.EntityWorld;
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Spatial;
-import amara.applications.ingame.client.systems.visualisation.EntitySceneMap;
-import amara.libraries.entitysystem.EntityWorld;
 
 /**
  *

@@ -52,7 +52,7 @@
                                                         <name>Stuck Arrowhead</name>
                                                         <description>This unit has decreased walk speed.</description>
                                                         <buffIcon>spells/elven_archer_buff</buffIcon>
-                                                        <buffVisualisation>frost</buffVisualisation>
+                                                        <buffVisualisation>slow</buffVisualisation>
                                                         <continuousAttributes>
                                                             <entity>
                                                                 <bonusPercentageWalkSpeed>-0.3</bonusPercentageWalkSpeed>

@@ -3,6 +3,7 @@ package amara.applications.ingame.client.systems.visualisation.buffs;
 import amara.applications.ingame.client.systems.visualisation.EntitySceneMap;
 import amara.applications.ingame.client.systems.visualisation.ModelSystem;
 import amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Tristan_Weapons;
+import amara.libraries.applications.display.ingame.models.util.SimpleParticleEmitter;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.EntityWorld;
 import com.jme3.effect.ParticleEmitter;

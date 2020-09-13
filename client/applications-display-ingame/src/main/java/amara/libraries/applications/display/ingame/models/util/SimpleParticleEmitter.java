@@ -1,8 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package amara.applications.ingame.client.systems.visualisation.buffs;
+package amara.libraries.applications.display.ingame.models.util;
 
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.effect.ParticleMesh;
@@ -11,13 +7,9 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import amara.libraries.applications.display.materials.MaterialFactory;
 
-/**
- *
- * @author Carl
- */
-public class SimpleParticleEmitter extends Node{
+public class SimpleParticleEmitter extends Node {
 
-    public SimpleParticleEmitter(){
+    public SimpleParticleEmitter() {
         particleEmitter = new ParticleEmitter("buff", ParticleMesh.Type.Triangle, 40);
         Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Misc/Particle.j3md");
         material.setTexture("Texture", MaterialFactory.getAssetManager().loadTexture("Textures/effects/flame_additive.png"));
@@ -31,13 +23,8 @@ public class SimpleParticleEmitter extends Node{
         attachChild(particleEmitter);
     }
     protected ParticleEmitter particleEmitter;
-    
-    public void emitAllParticles(){
-        particleEmitter.emitAllParticles();
-        particleEmitter.setParticlesPerSec(0);
-    }
 
-    public ParticleEmitter getParticleEmitter(){
+    public ParticleEmitter getParticleEmitter() {
         return particleEmitter;
     }
 }

@@ -11,10 +11,10 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Spatial;
 
-public class BuffVisualisationSystem_Frost extends BuffVisualisationSystem {
+public class BuffVisualisationSystem_Slow extends BuffVisualisationSystem {
 
-    public BuffVisualisationSystem_Frost(EntitySceneMap entitySceneMap) {
-        super(entitySceneMap, "frost");
+    public BuffVisualisationSystem_Slow(EntitySceneMap entitySceneMap){
+        super(entitySceneMap, "slow");
     }
 
     @Override
@@ -34,8 +34,8 @@ public class BuffVisualisationSystem_Frost extends BuffVisualisationSystem {
         particleEmitter.setHighLife(1);
         particleEmitter.setStartSize(0.8f);
         particleEmitter.setEndSize(0.8f);
-        particleEmitter.setStartColor(new ColorRGBA(0, 0.5f, 1, 1));
-        particleEmitter.setEndColor(new ColorRGBA(0, 0, 0.5f, 0));
+        particleEmitter.setStartColor(new ColorRGBA(1, 0.5f, 0, 1));
+        particleEmitter.setEndColor(new ColorRGBA(0.5f, 0, 0, 0));
         particleEmitter.setFacingVelocity(true);
         particleEmitter.setQueueBucket(RenderQueue.Bucket.Opaque);
         particleEmitter.getMaterial().getAdditionalRenderState().setDepthTest(false);
