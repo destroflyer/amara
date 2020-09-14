@@ -48,6 +48,7 @@
         </baseAttributes>
         <requestUpdateAttributes/>
         <sightRange>30</sightRange>
+        <isAutoAttackEnabled/>
         <isTargetable/>
         <isVulnerable/>
         <isBindable/>

@@ -44,14 +44,26 @@
                 </ruleTarget>
                 <triggeredEffect>
                     <entity>
-                        <removeVulnerability/>
-                        <removeTargetability/>
                         <addBuff duration="[duration]">
                             <entity>
                                 <name>I'm Blue</name>
                                 <description>This unit is invulnerable, untargetable, can't cast spells or basic attacks and has increased walk speed.</description>
                                 <buffIcon>spells/alice_ult</buffIcon>
                                 <buffVisualisation>bubble_blue</buffVisualisation>
+                                <onBuffAddEffectTriggers>
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <removeVulnerability/>
+                                                <removeTargetability/>
+                                                <disableAutoAttack/>
+                                                <disableSpells/>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffAddEffectTriggers>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
                                         <targetTarget/>
@@ -59,6 +71,8 @@
                                             <entity>
                                                 <addVulnerability/>
                                                 <addTargetability/>
+                                                <enableAutoAttack/>
+                                                <enableSpells/>
                                                 <spawn>
                                                     <entity>
                                                         <spawnTemplate>spells/alice_passive/object</spawnTemplate>

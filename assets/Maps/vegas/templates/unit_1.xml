@@ -52,6 +52,7 @@
         </attributesPerLevel>
         <requestUpdateAttributes/>
         <sightRange>999</sightRange>
+        <isAutoAttackEnabled/>
         <isTargetable/>
         <isVulnerable/>
         <isBindable/>

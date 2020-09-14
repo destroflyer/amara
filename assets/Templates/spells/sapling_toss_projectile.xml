@@ -25,6 +25,7 @@
         <!--stats-->
         <walkSpeed>5.5</walkSpeed>
         <sightRange>9</sightRange>
+        <isAutoAttackEnabled/>
         <isAlive/>
         <!--spells-->
         <autoAttack>

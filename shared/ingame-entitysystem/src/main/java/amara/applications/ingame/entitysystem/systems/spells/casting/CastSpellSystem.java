@@ -61,9 +61,9 @@ public class CastSpellSystem implements EntitySystem {
             if (isAbleToPerformAction(entityWorld, casterEntity) && canPayCastCost(entityWorld, casterEntity, spellEntity)) {
                 AutoAttackComponent autoAttackComponent = entityWorld.getComponent(casterEntity, AutoAttackComponent.class);
                 if ((autoAttackComponent != null) && (spellEntity == autoAttackComponent.getAutoAttackEntity())) {
-                    return true;
+                    return entityWorld.hasComponent(casterEntity, IsAutoAttackEnabledComponent.class);
                 }
-                return (!entityWorld.hasComponent(casterEntity, IsSilencedComponent.class));
+                return (entityWorld.hasComponent(casterEntity, IsSpellsEnabledComponent.class) && (!entityWorld.hasComponent(casterEntity, IsSilencedComponent.class)));
             }
         }
         return false;

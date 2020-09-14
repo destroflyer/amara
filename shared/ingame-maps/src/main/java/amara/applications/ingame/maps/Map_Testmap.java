@@ -76,6 +76,7 @@ public class Map_Testmap extends Map {
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(3));
                 unit.setComponent(new BaseAttributesComponent(baseAttributesEntity));
                 unit.setComponent(new RequestUpdateAttributesComponent());
+                unit.setComponent(new IsAutoAttackEnabledComponent());
                 unit.setComponent(new IsTargetableComponent());
                 unit.setComponent(new IsVulnerableComponent());
                 unit.setComponent(new IsBindableComponent());
@@ -170,6 +171,8 @@ public class Map_Testmap extends Map {
         boss.setComponent(new BaseAttributesComponent(baseAttributesEntity));
         boss.setComponent(new RequestUpdateAttributesComponent());
         boss.setComponent(new SightRangeComponent(30));
+        boss.setComponent(new IsAutoAttackEnabledComponent());
+        boss.setComponent(new IsSpellsEnabledComponent());
         boss.setComponent(new IsTargetableComponent());
         boss.setComponent(new IsVulnerableComponent());
         boss.setComponent(new IsBindableComponent());

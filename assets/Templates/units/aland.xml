@@ -60,6 +60,8 @@
             </entity>
         </attributesPerLevel>
         <requestUpdateAttributes/>
+        <isAutoAttackEnabled/>
+        <isSpellsEnabled/>
         <isTargetable/>
         <isVulnerable/>
         <isBindable/>

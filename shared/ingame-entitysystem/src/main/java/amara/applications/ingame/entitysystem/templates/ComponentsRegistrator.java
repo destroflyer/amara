@@ -2261,6 +2261,38 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.units.DisableAutoAttackComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.DisableAutoAttackComponent>("disableAutoAttack"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.units.DisableAutoAttackComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.units.DisableAutoAttackComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.units.DisableSpellsComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.DisableSpellsComponent>("disableSpells"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.units.DisableSpellsComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.units.DisableSpellsComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.units.EnableAutoAttackComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.EnableAutoAttackComponent>("enableAutoAttack"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.units.EnableAutoAttackComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.units.EnableAutoAttackComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.units.EnableSpellsComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.EnableSpellsComponent>("enableSpells"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.units.EnableSpellsComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.units.EnableSpellsComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.units.LevelUpComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.LevelUpComponent>("levelUp"){
 
@@ -4878,6 +4910,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsAutoAttackEnabledComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsAutoAttackEnabledComponent>("isAutoAttackEnabled"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.IsAutoAttackEnabledComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.IsAutoAttackEnabledComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsCastingComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.IsCastingComponent.class.getDeclaredField("remainingDuration"), componentFieldSerializer_Timer);
@@ -4937,6 +4977,14 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsSpellsEnabledComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsSpellsEnabledComponent>("isSpellsEnabled"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.IsSpellsEnabledComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.IsSpellsEnabledComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsStealthedComponent.class);

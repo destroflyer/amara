@@ -92,6 +92,7 @@ public class Map_Etherdesert extends Map {
         entityWorld.setComponent(nexus, new AutoAttackComponent(nexusAutoAttack.getId()));
         entityWorld.setComponent(nexus, new AutoAggroComponent(24));
         entityWorld.setComponent(nexus, new RequestUpdateAttributesComponent());
+        entityWorld.setComponent(nexus, new IsAutoAttackEnabledComponent());
         entityWorld.setComponent(nexus, new IsTargetableComponent());
         entityWorld.setComponent(nexus, new IsVulnerableComponent());
         entityWorld.setComponent(nexus, new TeamComponent(0));

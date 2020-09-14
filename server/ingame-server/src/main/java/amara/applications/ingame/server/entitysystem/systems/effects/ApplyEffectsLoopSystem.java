@@ -100,6 +100,10 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyAddGoldSystem());
         add(new ApplyAddShieldSystem());
         add(new ApplyCancelActionsSystem());
+        add(new ApplyDisableAutoAttackSystem());
+        add(new ApplyDisableSpellsSystem());
+        add(new ApplyEnableAutoAttackSystem());
+        add(new ApplyEnableSpellsSystem());
         add(new ApplyLevelUpSystem());
         add(new ApplyRemoveAutoAggroSystem());
         add(new ApplyRespawnSystem(map));

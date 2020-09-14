@@ -77,6 +77,7 @@ public class Map_Destroforest extends Map {
             entityWorld.setComponent(baseAttributesEntity, new BonusFlatWalkSpeedComponent(3));
             unit.setComponent(new BaseAttributesComponent(baseAttributesEntity));
             unit.setComponent(new RequestUpdateAttributesComponent());
+            unit.setComponent(new IsAutoAttackEnabledComponent());
             unit.setComponent(new IsTargetableComponent());
             unit.setComponent(new IsVulnerableComponent());
             unit.setComponent(new IsBindableComponent());

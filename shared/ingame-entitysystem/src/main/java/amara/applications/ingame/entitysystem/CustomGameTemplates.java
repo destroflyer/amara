@@ -115,6 +115,7 @@ public class CustomGameTemplates {
                 entityWrapper.setComponent(new BaseAttributesComponent(baseAttributesEntity));
                 entityWrapper.setComponent(new RequestUpdateAttributesComponent());
                 entityWrapper.setComponent(new SightRangeComponent(28));
+                entityWrapper.setComponent(new IsAutoAttackEnabledComponent());
                 entityWrapper.setComponent(new IsTargetableComponent());
                 entityWrapper.setComponent(new IsVulnerableComponent());
                 entityWrapper.setComponent(new IsBindableComponent());
@@ -168,6 +169,7 @@ public class CustomGameTemplates {
                 entityWrapper.setComponent(new BaseAttributesComponent(baseAttributesEntity));
                 entityWrapper.setComponent(new RequestUpdateAttributesComponent());
                 entityWrapper.setComponent(new SightRangeComponent(28));
+                entityWrapper.setComponent(new IsAutoAttackEnabledComponent());
                 entityWrapper.setComponent(new IsTargetableComponent());
                 entityWrapper.setComponent(new IsVulnerableComponent());
                 entityWrapper.setComponent(new IsBindableComponent());
@@ -287,6 +289,7 @@ public class CustomGameTemplates {
                 entityWrapper.setComponent(new BaseAttributesComponent(baseAttributesEntity));
                 entityWrapper.setComponent(new RequestUpdateAttributesComponent());
                 entityWrapper.setComponent(new SightRangeComponent(30));
+                entityWrapper.setComponent(new IsAutoAttackEnabledComponent());
                 entityWrapper.setComponent(new IsTargetableComponent());
                 entityWrapper.setComponent(new IsVulnerableComponent());
                 entityWrapper.setComponent(new IsBindableComponent());
@@ -296,9 +299,6 @@ public class CustomGameTemplates {
 
                 EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack,Models/3dsa_fire_dragon_fireball/skin.xml");
                 entityWrapper.setComponent(new AutoAttackComponent(autoAttack.getId()));
-
-                //EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "spells/bodyslam");
-                //entityWrapper.setComponent(new SpellsComponent(bodyslam.getId()));
 
                 entityWrapper.setComponent(new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.BOSS));
                 EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
