@@ -2,7 +2,7 @@
     <value name="duration">3</value>
     <entity id="spell">
         <name>Stealth</name>
-        <description>Gain stealth and a walk speed buff.</description>
+        <description>Gain stealth and a walk speed buff for a short duration. The stealth ends instantly when casting a basic attack or spell.</description>
         <spellVisualisation>aland_stealth</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
@@ -23,14 +23,13 @@
     <entity>
         <castedSpell>#spell</castedSpell>
         <castedEffectTriggers>
-            <!--target effect-->
+            <!--add buff-->
             <entity>
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <addStealth/>
                         <addBuff duration="[duration]">
-                            <entity>
+                            <entity id="buff">
                                 <name>Stealthy</name>
                                 <description>This unit is stealthed.</description>
                                 <buffIcon>spells/aland_stealth</buffIcon>
@@ -39,12 +38,39 @@
                                         <bonusPercentageWalkSpeed>0.3</bonusPercentageWalkSpeed>
                                     </entity>
                                 </continuousAttributes>
+                                <onBuffAddEffectTriggers>
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <addStealth/>
+                                                <removeCollisionGroups targetOf="units" targets="units"/>
+                                                <addEffectTriggers>
+                                                    <!--remove buff-->
+                                                    <entity id="castingStartedTrigger">
+                                                        <castingStartedTrigger/>
+                                                        <sourceTarget/>
+                                                        <triggeredEffect>
+                                                            <entity>
+                                                                <removeBuff>#buff</removeBuff>
+                                                            </entity>
+                                                        </triggeredEffect>
+                                                        <triggerOnce/>
+                                                    </entity>
+                                                </addEffectTriggers>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffAddEffectTriggers>
                                 <onBuffRemoveEffectTriggers>
                                     <entity>
                                         <targetTarget/>
                                         <triggeredEffect>
                                             <entity>
                                                 <removeStealth/>
+                                                <addCollisionGroups targetOf="units" targets="units"/>
+                                                <removeEffectTriggers>#castingStartedTrigger</removeEffectTriggers>
                                             </entity>
                                         </triggeredEffect>
                                         <triggerSource>#spell</triggerSource>

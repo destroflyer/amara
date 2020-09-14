@@ -111,6 +111,7 @@ public class GameLogic {
         entitySystems.add(new CastSpellOnCooldownWhileAttackingSystem(castSpellQueueSystem));
         entitySystems.add(new PerformAutoAttacksSystem(castSpellQueueSystem));
         entitySystems.add(castSpellQueueSystem);
+        entitySystems.add(new TriggerCastingStartedEffectSystem());
         entitySystems.add(new SetCastDurationOnCastingSystem());
         entitySystems.add(new SetCooldownOnCastingSystem());
         entitySystems.add(new ConsumeItemsOnCastingSystem());
