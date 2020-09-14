@@ -1,8 +1,8 @@
 <template>
     <value name="duration">0.4</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Bomb</name>
+        <description>Throw a bomb at your feet, dealing magic damage to all enemies and knocking them away from the center.</description>
         <spellVisualisation>aland_knockback</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn object, add visual buff-->

@@ -92,6 +92,7 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyAddAutoAttackSpellEffectsSystem());
         add(new ApplyAddSpellSpellEffectsSystem());
         add(new ApplyEnqueueSpellCastSystem(castSpellQueueSystem));
+        add(new ApplyReduceRemainingCooldownAbsoluteSystem());
         add(new ApplyRemoveSpellEffectsSystem());
         add(new ApplyReplaceSpellsWithExistingSpellsSystem());
         add(new ApplyReplaceSpellsWithNewSpellsSystem());

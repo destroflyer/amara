@@ -1,8 +1,8 @@
 <template>
     <value name="delay">0.25</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Knife Throw</name>
+        <description>Throw a large knife at a target enemy, dealing magic damage.</description>
         <spellVisualisation>aland_sword</spellVisualisation>
         <spellIndicator>
             <entity>

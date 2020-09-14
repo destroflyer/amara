@@ -2146,6 +2146,24 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.spells.EnqueueSpellCastComponent(spellEntity, targetEntity);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.spells.ReduceRemainingCooldownAbsoluteComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.spells.ReduceRemainingCooldownAbsoluteComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.ReduceRemainingCooldownAbsoluteComponent>("reduceRemainingCooldownAbsolute"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.spells.ReduceRemainingCooldownAbsoluteComponent construct(EntityWorld entityWorld, Element element){
+                float duration = 0;
+                String durationText = element.getText();
+                if((durationText != null) && (durationText.length() > 0)){
+                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                }
+                return new amara.applications.ingame.entitysystem.components.effects.spells.ReduceRemainingCooldownAbsoluteComponent(duration);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent.class.getDeclaredField("spellEffectEntities"), componentFieldSerializer_Entity);

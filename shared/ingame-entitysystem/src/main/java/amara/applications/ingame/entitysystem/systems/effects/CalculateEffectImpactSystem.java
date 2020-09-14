@@ -271,6 +271,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         AddAutoAttackSpellEffectsComponent.class,
                         AddSpellSpellEffectsComponent.class,
                         EnqueueSpellCastComponent.class,
+                        ReduceRemainingCooldownAbsoluteComponent.class,
                         RemoveSpellEffectsComponent.class,
                         ReplaceSpellWithExistingSpellComponent.class,
                         ResetCooldownComponent.class,

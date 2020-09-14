@@ -1,8 +1,8 @@
 <template>
     <value name="duration">3</value>
     <entity id="spell">
-        <name>TODO</name>
-        <description>TODO</description>
+        <name>Stealth</name>
+        <description>Gain stealth and a walk speed buff.</description>
         <spellVisualisation>aland_stealth</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
@@ -17,7 +17,7 @@
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
-        <baseCooldown>1</baseCooldown>
+        <baseCooldown>10</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>
@@ -31,8 +31,8 @@
                         <addStealth/>
                         <addBuff duration="[duration]">
                             <entity>
-                                <name>TODO</name>
-                                <description>TODO</description>
+                                <name>Stealthy</name>
+                                <description>This unit is stealthed.</description>
                                 <buffIcon>spells/aland_stealth</buffIcon>
                                 <continuousAttributes>
                                     <entity>

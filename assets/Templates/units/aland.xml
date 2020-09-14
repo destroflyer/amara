@@ -70,13 +70,13 @@
         <isStunnable/>
         <!--spells-->
         <autoAttack>
-            <entity template="spells/ranged_autoattack,Models/aland_sword/skin_autoattack.xml"/>
+            <entity id="autoattack" template="spells/ranged_autoattack,Models/aland_sword/skin_autoattack.xml"/>
         </autoAttack>
         <passives>
-            <entity template="spells/aland_passive/passive(#spell2,#spell3,#spell4)"/>
+            <entity template="spells/aland_passive/passive(#autoattack,#spell1,#spell2,#spell3,#spell4)"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/aland_stealth/base"/>
+            <entity id="spell1" template="spells/aland_stealth/base"/>
             <entity id="spell2" template="spells/aland_knockback/base"/>
             <entity id="spell3" template="spells/aland_sword/base"/>
             <entity id="spell4" template="spells/aland_trap/base"/>

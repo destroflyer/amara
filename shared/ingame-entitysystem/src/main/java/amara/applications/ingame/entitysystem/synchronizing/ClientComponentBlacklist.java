@@ -160,6 +160,9 @@ public class ClientComponentBlacklist {
             SpawnComponent.class,
             // effects/spells
             AddAutoAttackSpellEffectsComponent.class,
+            AddSpellSpellEffectsComponent.class,
+            EnqueueSpellCastComponent.class,
+            ReduceRemainingCooldownAbsoluteComponent.class,
             RemoveSpellEffectsComponent.class,
             ReplaceSpellWithExistingSpellComponent.class,
             ReplaceSpellWithNewSpellComponent.class,
