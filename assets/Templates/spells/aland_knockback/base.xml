@@ -47,7 +47,7 @@
                                 <displacement/>
                                 <towardsSourceMovementDirection>180</towardsSourceMovementDirection>
                                 <movementSpeed>30</movementSpeed>
-                                <distanceLimit>5</distanceLimit>
+                                <distanceLimit>4</distanceLimit>
                             </entity>
                         </move>
                     </entity>

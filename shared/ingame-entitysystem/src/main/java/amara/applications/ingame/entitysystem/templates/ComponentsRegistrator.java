@@ -4696,6 +4696,42 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.KillTriggerComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerComponent>("movementTrigger"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerComponent construct(EntityWorld entityWorld, Element element){
+                float distance = 0;
+                String distanceText = element.getText();
+                if((distanceText != null) && (distanceText.length() > 0)){
+                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerComponent(distance);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerMovedDistanceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerMovedDistanceComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerMovedDistanceComponent>("movementTriggerMovedDistance"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerMovedDistanceComponent construct(EntityWorld entityWorld, Element element){
+                float distance = 0;
+                String distanceText = element.getText();
+                if((distanceText != null) && (distanceText.length() > 0)){
+                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                }
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerMovedDistanceComponent(distance);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.NoBuffTargetsTriggerComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.NoBuffTargetsTriggerComponent.class.getDeclaredField("buffEntities"), componentFieldSerializer_Entity);

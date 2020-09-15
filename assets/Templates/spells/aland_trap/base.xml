@@ -1,7 +1,7 @@
 <template>
     <entity id="spell">
         <name>Bear Trap</name>
-        <description>Place a hidden bear trap, that will attach to an enemy for X seconds when touched, dealing initial magic damage and slowing. Units with attached traps receive the same effect again (with the slow stacking) for each walked X distance, up to 2 times, then the trap is destroyed.</description>
+        <description>Place a hidden bear trap, that will attach to an enemy for 1 second when touched, dealing initial magic damage and slowing. Units with attached traps receive the same effect again (with the slow stacking) when continuing to walk, up to 2 times, then the trap is destroyed.</description>
         <spellVisualisation>aland_trap</spellVisualisation>
         <spellIndicator>
             <entity>
@@ -16,7 +16,7 @@
                     <entity>
                         <spawn>
                             <entity>
-                                <spawnTemplate>./object</spawnTemplate>
+                                <spawnTemplate>./object(#spell)</spawnTemplate>
                             </entity>
                         </spawn>
                     </entity>
@@ -47,19 +47,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <magicDamage>150 + (0.5 * source.abilityPower)</magicDamage>
-                        <addBuff duration="3">
-                            <entity>
-                                <name>Caught</name>
-                                <description>This unit has decreased walk speed and will receive a further slow and damage when moving.</description>
-                                <buffIcon>spells/aland_trap</buffIcon>
-                                <continuousAttributes>
-                                    <entity>
-                                        <bonusPercentageWalkSpeed>-0.7</bonusPercentageWalkSpeed>
-                                    </entity>
-                                </continuousAttributes>
-                            </entity>
-                        </addBuff>
+                        <magicDamage>60 + (0.2 * source.abilityPower)</magicDamage>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

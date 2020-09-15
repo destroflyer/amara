@@ -185,7 +185,7 @@ public class UpdateAttributesSystem implements EntitySystem{
         }
         BonusPercentageWalkSpeedComponent bonusPercentageWalkSpeedComponent = bonusEntityWrapper.getComponent(BonusPercentageWalkSpeedComponent.class);
         if(bonusPercentageWalkSpeedComponent != null){
-            attributeBonus.multiplicatePercentageWalkSpeed(bonusPercentageWalkSpeedComponent.getValue() * factor);
+            attributeBonus.multiplicatePercentageWalkSpeed(FastMath.pow(1 + bonusPercentageWalkSpeedComponent.getValue(), factor));
         }
         BonusPercentageCriticalChanceComponent bonusPercentageCriticalChanceComponent = bonusEntityWrapper.getComponent(BonusPercentageCriticalChanceComponent.class);
         if(bonusPercentageCriticalChanceComponent != null){

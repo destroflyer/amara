@@ -1,4 +1,6 @@
 <template>
+    <value name="duration">1</value>
+    <value name="moveTriggerDistance">0.75</value>
     <entity id="object">
         <model>Models/bear_trap/skin.xml</model>
         <animation>
@@ -39,7 +41,64 @@
         <targetTarget/>
         <triggeredEffect>
             <entity>
-                <triggerCastedSpellEffects/>
+                <triggerSpellEffects>[parameter0]</triggerSpellEffects>
+                <addBuff duration="[duration]">
+                    <entity id="buff">
+                        <name>Caught</name>
+                        <description>This unit has decreased walk speed and will receive a further slow and damage when moving.</description>
+                        <buffIcon>spells/aland_trap</buffIcon>
+                        <continuousAttributesPerStack>
+                            <entity>
+                                <bonusPercentageWalkSpeed>-0.5</bonusPercentageWalkSpeed>
+                            </entity>
+                        </continuousAttributesPerStack>
+                        <onBuffRemoveEffectTriggers>
+                            <entity>
+                                <customTarget>#buff,#movementTrigger1,#movementTrigger2</customTarget>
+                                <triggeredEffect>
+                                    <entity>
+                                        <removeEntity/>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerSource>[parameter0]</triggerSource>
+                            </entity>
+                        </onBuffRemoveEffectTriggers>
+                        <customCleanup/>
+                    </entity>
+                </addBuff>
+                <addStacks stacks="1">#buff</addStacks>
+                <addEffectTriggers>
+                    <!--refresh buff and add stack-->
+                    <entity id="movementTrigger1">
+                        <movementTrigger>[moveTriggerDistance]</movementTrigger>
+                        <sourceTarget/>
+                        <triggeredEffect>
+                            <entity>
+                                <triggerSpellEffects>[parameter0]</triggerSpellEffects>
+                                <addBuff duration="[duration]">#buff</addBuff>
+                                <addStacks stacks="1">#buff</addStacks>
+                                <addEffectTriggers>
+                                    <!--refresh buff and add stack-->
+                                    <entity id="movementTrigger2">
+                                        <movementTrigger>[moveTriggerDistance]</movementTrigger>
+                                        <sourceTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <triggerSpellEffects>[parameter0]</triggerSpellEffects>
+                                                <addBuff duration="[duration]">#buff</addBuff>
+                                                <addStacks stacks="1">#buff</addStacks>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerOnce>true</triggerOnce>
+                                        <customCleanup/>
+                                    </entity>
+                                </addEffectTriggers>
+                            </entity>
+                        </triggeredEffect>
+                        <triggerOnce>true</triggerOnce>
+                        <customCleanup/>
+                    </entity>
+                </addEffectTriggers>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>

@@ -111,9 +111,9 @@ public class AttributeBonus{
     public float getFlatWalkSpeed(){
         return flatWalkSpeed;
     }
-    
+
     public void multiplicatePercentageWalkSpeed(float value){
-        percentageWalkSpeed *= (1 + value);
+        percentageWalkSpeed *= value;
     }
 
     public float getPercentageWalkSpeed(){

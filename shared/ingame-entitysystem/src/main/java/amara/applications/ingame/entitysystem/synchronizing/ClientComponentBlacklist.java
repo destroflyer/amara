@@ -297,6 +297,8 @@ public class ClientComponentBlacklist {
             HasBuffsTriggerComponent.class,
             HasNoAggroTargetTriggerComponent.class,
             InstantTriggerComponent.class,
+            MovementTriggerComponent.class,
+            MovementTriggerMovedDistanceComponent.class,
             NoBuffTargetsTriggerComponent.class,
             ObjectiveFinishedTriggerComponent.class,
             RemoveTriggerComponent.class,
