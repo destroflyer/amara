@@ -11,6 +11,12 @@
                 <triggeredEffect>
                     <entity>
                         <triggerSpellEffects>#spell</triggerSpellEffects>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/dosaz_wall_cast.ogg</audio>
+                                <audioVolume>4</audioVolume>
+                            </entity>
+                        </playAudio>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

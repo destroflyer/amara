@@ -5,6 +5,39 @@
         <description>Swap places with a ghost.</description>
         <spellVisualisation>dosaz_teleport</spellVisualisation>
         <instantEffectTriggers>
+            <!--add buffs-->
+            <entity>
+                <sourceCasterTarget/>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="[delay]">
+                            <entity id="buff">
+                                <name>Burner</name>
+                                <description>This unit will teleport soon.</description>
+                                <buffIcon>spells/dosaz_teleport</buffIcon>
+                                <buffVisualisation>dosaz_teleport</buffVisualisation>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/dosaz_teleport_cast.ogg</audio>
+                                <audioVolume>2</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
             <!--trigger spell effects-->
             <entity>
                 <targetTarget/>

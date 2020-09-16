@@ -35,8 +35,8 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/ganfaul_binding_cast.ogg</audio>
-                                <audioVolume>0.75</audioVolume>
+                                <audio>Sounds/sounds/spells/dosaz_skull_cast.ogg</audio>
+                                <audioVolume>1.5</audioVolume>
                             </entity>
                         </playAudio>
                     </entity>

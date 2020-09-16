@@ -50,6 +50,7 @@
             </entity>
         </baseAttributes>
         <requestUpdateAttributes/>
+        <isAutoAttackEnabled/>
         <isTargetable/>
         <isVulnerable/>
         <isBindable/>

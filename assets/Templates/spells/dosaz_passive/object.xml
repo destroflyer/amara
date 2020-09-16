@@ -29,6 +29,11 @@
                         <spawnBuffs>[parameter1]</spawnBuffs>
                     </entity>
                 </spawn>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/dosaz_passive_unit_spawn.ogg</audio>
+                    </entity>
+                </playAudio>
                 <removeEntity/>
             </entity>
         </triggeredEffect>

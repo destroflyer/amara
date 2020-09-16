@@ -22,8 +22,8 @@
                 <triggerCastedSpellEffects/>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/ganfaul_binding_hit.ogg</audio>
-                        <audioVolume>0.75</audioVolume>
+                        <audio>Sounds/sounds/spells/dosaz_skull_hit.ogg</audio>
+                        <audioVolume>2</audioVolume>
                         <audioRemoveAfterPlaying/>
                     </entity>
                 </playAudio>
@@ -54,6 +54,11 @@
                         <spawnBuffs>[parameter0]</spawnBuffs>
                     </entity>
                 </spawn>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/dosaz_passive_unit_spawn.ogg</audio>
+                    </entity>
+                </playAudio>
                 <removeEntity/>
             </entity>
         </triggeredEffect>

@@ -8,16 +8,16 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
-public class BuffVisualisationSystem_Dosaz_Ult extends BuffVisualisationSystem {
+public class BuffVisualisationSystem_Dosaz_Teleport extends BuffVisualisationSystem {
 
-    public BuffVisualisationSystem_Dosaz_Ult(EntitySceneMap entitySceneMap) {
-        super(entitySceneMap, "dosaz_ult");
+    public BuffVisualisationSystem_Dosaz_Teleport(EntitySceneMap entitySceneMap) {
+        super(entitySceneMap, "dosaz_teleport");
     }
 
     @Override
     protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity) {
         Node node = new Node();
-        Geometry geometry = GroundTextures.create("Textures/effects/dosaz_ult_area.png", -7.5f, 7.5f, 15, 15, RenderState.BlendMode.AlphaAdditive);
+        Geometry geometry = GroundTextures.create("Textures/effects/dosaz_teleport_marker.png", -2.5f, 2.5f, 5, 5, RenderState.BlendMode.AlphaAdditive);
         node.attachChild(geometry);
         return node;
     }
