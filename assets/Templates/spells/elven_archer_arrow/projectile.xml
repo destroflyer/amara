@@ -21,6 +21,12 @@
         <triggeredEffect>
             <entity>
                 <triggerCastedSpellEffects/>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/elven_archer_arrow_hit.ogg</audio>
+                        <audioVolume>0.25</audioVolume>
+                    </entity>
+                </playAudio>
             </entity>
         </triggeredEffect>
         <triggerSource>#projectile</triggerSource>

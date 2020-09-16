@@ -1,8 +1,9 @@
 <template>
     <value name="delay">0.18</value>
+    <value name="duration">3</value>
     <entity id="spell">
         <name>Piercing Shot</name>
-        <description>Shoot a long-range arrow, which deals physical damage to the first enemy hit.</description>
+        <description>Shoot a long-range arrow, which deals physical damage to the first enemy hit and reduce its armor for [duration] seconds.</description>
         <spellVisualisation>elven_archer_arrow</spellVisualisation>
         <spellIndicator>
             <entity>
@@ -21,6 +22,11 @@
                                 <spawnMovementSpeed>25</spawnMovementSpeed>
                             </entity>
                         </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/elven_archer_arrow_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
@@ -50,6 +56,18 @@
                 <triggeredEffect>
                     <entity>
                         <physicalDamage>150 + (0.7 * source.abilityPower)</physicalDamage>
+                        <addBuff duration="[duration]">
+                            <entity>
+                                <name>Pierced</name>
+                                <description>This unit has decreased armor.</description>
+                                <buffIcon>spells/elven_archer_arrow</buffIcon>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusFlatArmor>-10</bonusFlatArmor>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

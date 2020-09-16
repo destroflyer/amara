@@ -1,4 +1,5 @@
 <template>
+    <value name="duration">3</value>
     <entity id="spell">
         <name>Rapid Fire</name>
         <description>Shoot a large amount of arrows in a cone, with each arrow dealing physical damage when hitting an enemy.</description>
@@ -8,11 +9,39 @@
                 <linearIndicator width="2" height="19.5"/>
             </entity>
         </spellIndicator>
-        <instantEffectTriggers/>
+        <instantEffectTriggers>
+            <!--start audio-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity id="audio">
+                                <audio>Sounds/sounds/spells/elven_archer_ult_cast_loop.ogg</audio>
+                                <audioLoop/>
+                                <audioVolume>4</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--stop audio-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <stopAudio>#audio</stopAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[duration]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
         <castType>linear_skillshot</castType>
         <castCancelCast/>
         <castCancelMovement/>
-        <castDuration>3</castDuration>
+        <castDuration>[duration]</castDuration>
         <castTurnToTarget/>
         <castAnimation additionalLoops="14">
             <entity>
