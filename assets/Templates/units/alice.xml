@@ -85,8 +85,5 @@
         <healthBarStyle>character</healthBarStyle>
     </entity>
     <!--thunder poppable buff-->
-    <entity id="thunderPoppableBuff">
-        <name>TODO</name>
-        <description>TODO</description>
-    </entity>
+    <entity id="thunderPoppableBuff"/>
 </template>
