@@ -18,6 +18,13 @@
         <triggeredEffect>
             <entity>
                 <triggerCastedSpellEffects/>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/alice_charm_hit.ogg</audio>
+                        <audioVolume>4</audioVolume>
+                        <audioRemoveAfterPlaying/>
+                    </entity>
+                </playAudio>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>

@@ -74,7 +74,6 @@
                         <playAudio>
                             <entity>
                                 <audio>Sounds/sounds/spells/dwarf_warrior_heal_cast.ogg</audio>
-                                <audioVolume>1</audioVolume>
                             </entity>
                         </playAudio>
                     </entity>

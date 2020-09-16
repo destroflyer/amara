@@ -21,6 +21,13 @@
         <triggeredEffect>
             <entity>
                 <triggerCastedSpellEffects/>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/alice_knockup_hit.ogg</audio>
+                        <audioVolume>4</audioVolume>
+                        <audioRemoveAfterPlaying/>
+                    </entity>
+                </playAudio>
             </entity>
         </triggeredEffect>
         <triggerSource>#projectile</triggerSource>

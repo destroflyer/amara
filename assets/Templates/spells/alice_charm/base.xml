@@ -29,6 +29,22 @@
                 <triggerSource>#spell</triggerSource>
                 <triggerDelay>[delay]</triggerDelay>
             </entity>
+            <!--play audio-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/alice_charm_cast.ogg</audio>
+                                <audioVolume>4</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
         </instantEffectTriggers>
         <castType>positional_skillshot</castType>
         <castCancelCast/>

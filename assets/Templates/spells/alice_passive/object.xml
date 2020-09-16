@@ -35,4 +35,19 @@
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
     </entity>
+    <!--audio - pop-->
+    <entity>
+        <audio>Sounds/sounds/spells/alice_passive_pop.ogg</audio>
+        <audioVolume>2</audioVolume>
+        <audioRemoveAfterPlaying/>
+        <audioSource>#object</audioSource>
+        <startPlayingAudio/>
+    </entity>
+    <!--audio - loop-->
+    <entity>
+        <audio>Sounds/sounds/spells/alice_passive_loop.ogg</audio>
+        <audioRemoveAfterPlaying/>
+        <audioSource>#object</audioSource>
+        <startPlayingAudio/>
+    </entity>
 </template>
