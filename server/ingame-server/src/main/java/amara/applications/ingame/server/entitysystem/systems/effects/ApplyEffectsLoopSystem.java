@@ -36,6 +36,7 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(calculateEffectImpactSystem);
         // Apply adding and removing effect triggers first, so they are directly considered at the other effect impacts
         add(new ApplyAddEffectTriggersSystem());
+        add(new ApplyAddNewEffectTriggersSystem());
         add(new ApplyRemoveEffectTriggersSystem());
         add(new ApplyPlayCinematicSystem());
         add(new ApplyDrawTeamAggroSystem());

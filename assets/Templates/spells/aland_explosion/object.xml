@@ -45,6 +45,6 @@
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
         <triggerDelay>0.2</triggerDelay>
-        <triggerOnce/>
+        <triggerOnce>true</triggerOnce>
     </entity>
 </template>

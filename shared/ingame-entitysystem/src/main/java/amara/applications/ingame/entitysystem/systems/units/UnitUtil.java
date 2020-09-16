@@ -102,10 +102,10 @@ public class UnitUtil {
                 if (entityWorld.hasComponent(effectTriggerEntity, TriggerOnCancelComponent.class)) {
                     EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, -1);
                 }
-                if (entityWorld.hasComponent(effectTriggerEntity, TriggerOnceComponent.class)) {
-                    entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
-                } else if (entityWorld.hasComponent(effectTriggerEntity, TriggerTemporaryComponent.class)) {
+                if (entityWorld.hasComponent(effectTriggerEntity, TriggerTemporaryComponent.class)) {
                     entityWorld.removeEntity(effectTriggerEntity);
+                } else {
+                    EffectTriggerUtil.removeTriggerOnceTrigger(entityWorld, effectTriggerEntity);
                 }
             }
         }

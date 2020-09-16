@@ -1,0 +1,14 @@
+<template>
+    <entity>
+        <mapCollisionTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <physicalDamage>100 + (0.3 * source.attackDamage)</physicalDamage>
+                <addStun>[parameter0]</addStun>
+                <removeEffectTriggers removeEntities="true">[parameter2]</removeEffectTriggers>
+            </entity>
+        </triggeredEffect>
+        <triggerOnce>true</triggerOnce>
+    </entity>
+</template>

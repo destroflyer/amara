@@ -1,8 +1,9 @@
 <template>
     <value name="delay">0.2</value>
+    <value name="stunDuration">1.5</value>
     <entity id="spell">
         <name>Knockback</name>
-        <description>Knockbacks and damages all enemies in front of you - If they collide with a wall, they take additional damage and are stunned.</description>
+        <description>Knockbacks and damages all enemies in front of you - If they collide with a wall, they take additional damage and are stunned for [stunDuration] seconds.</description>
         <spellVisualisation>tristan_ult</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn object-->
@@ -58,6 +59,7 @@
                                 <distanceLimit>10</distanceLimit>
                             </entity>
                         </move>
+                        <addNewEffectTriggers>./triggers/collision_trigger([stunDuration]),./triggers/remove_collision_trigger</addNewEffectTriggers>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

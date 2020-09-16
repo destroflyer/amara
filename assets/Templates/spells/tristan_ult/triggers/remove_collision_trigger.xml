@@ -1,0 +1,13 @@
+<template>
+    <entity>
+        <targetReachedTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEffectTriggers removeEntities="true">[parameter0]</removeEffectTriggers>
+            </entity>
+        </triggeredEffect>
+        <triggerOnce>true</triggerOnce>
+        <triggerOnCancel/>
+    </entity>
+</template>

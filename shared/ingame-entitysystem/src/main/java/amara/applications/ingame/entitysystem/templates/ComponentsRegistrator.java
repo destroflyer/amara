@@ -1797,6 +1797,22 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.general.AddEffectTriggersComponent(effectTriggerEntities);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.general.AddNewEffectTriggersComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.general.AddNewEffectTriggersComponent>("addNewEffectTriggers"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.general.AddNewEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
+                String[] effectTriggerTemplates = new String[0];
+                String effectTriggerTemplatesText = element.getText();
+                if(effectTriggerTemplatesText != null){
+                    effectTriggerTemplates = effectTriggerTemplatesText.split(",");
+                    for(int i=0;i<effectTriggerTemplates.length;i++){
+                        effectTriggerTemplates[i] = xmlTemplateManager.parseTemplate(entityWorld, effectTriggerTemplates[i]);
+                    }
+                }
+                return new amara.applications.ingame.entitysystem.components.effects.general.AddNewEffectTriggersComponent(effectTriggerTemplates);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.general.RemoveComponentsComponent.class);
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent.class);
         try{
@@ -1809,7 +1825,12 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
                 int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
-                return new amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent(effectTriggerEntities);
+                boolean removeEntities = false;
+                String removeEntitiesText = element.getAttributeValue("removeEntities");
+                if((removeEntitiesText != null) && (removeEntitiesText.length() > 0)){
+                    removeEntities = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, removeEntitiesText));
+                }
+                return new amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent(effectTriggerEntities, removeEntities);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.general.RemoveEntityComponent.class);
@@ -4694,6 +4715,14 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.KillTriggerComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.KillTriggerComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MapCollisionTriggerComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MapCollisionTriggerComponent>("mapCollisionTrigger"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MapCollisionTriggerComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MapCollisionTriggerComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerComponent.class);

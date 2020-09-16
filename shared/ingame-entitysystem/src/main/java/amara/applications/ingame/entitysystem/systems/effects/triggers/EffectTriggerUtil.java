@@ -76,14 +76,7 @@ public class EffectTriggerUtil {
                     effectCast.setComponent(new RemainingEffectDelayComponent(triggerDelayComponent.getDuration()));
                 }
                 SetCooldownOnCastingSystem.setOnCooldown(entityWorld, effectTriggerEntity);
-                TriggerOnceComponent triggerOnceComponent = entityWorld.getComponent(effectTriggerEntity, TriggerOnceComponent.class);
-                if (triggerOnceComponent != null) {
-                    if (triggerOnceComponent.isRemoveEntity()) {
-                        entityWorld.removeEntity(effectTriggerEntity);
-                    } else {
-                        entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
-                    }
-                }
+                removeTriggerOnceTrigger(entityWorld, effectTriggerEntity);
                 return effectCast;
             }
         }
@@ -198,5 +191,16 @@ public class EffectTriggerUtil {
             tmpTargetEntities = targetStream.limit(maximumTargetsComponent.getMaximum()).collect(Collectors.toList());
         }
         return Util.convertToArray_Integer(tmpTargetEntities);
+    }
+
+    public static void removeTriggerOnceTrigger(EntityWorld entityWorld, int effectTriggerEntity) {
+        TriggerOnceComponent triggerOnceComponent = entityWorld.getComponent(effectTriggerEntity, TriggerOnceComponent.class);
+        if (triggerOnceComponent != null) {
+            if (triggerOnceComponent.isRemoveEntity()) {
+                entityWorld.removeEntity(effectTriggerEntity);
+            } else {
+                entityWorld.removeComponent(effectTriggerEntity, TriggerSourceComponent.class);
+            }
+        }
     }
 }

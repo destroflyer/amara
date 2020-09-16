@@ -132,6 +132,7 @@ public class ClientComponentBlacklist {
             // effects/general
             AddComponentsComponent.class,
             AddEffectTriggersComponent.class,
+            AddNewEffectTriggersComponent.class,
             FinishObjectiveComponent.class,
             RemoveComponentsComponent.class,
             RemoveEffectTriggersComponent.class,
@@ -297,6 +298,7 @@ public class ClientComponentBlacklist {
             HasBuffsTriggerComponent.class,
             HasNoAggroTargetTriggerComponent.class,
             InstantTriggerComponent.class,
+            MapCollisionTriggerComponent.class,
             MovementTriggerComponent.class,
             MovementTriggerMovedDistanceComponent.class,
             NoBuffTargetsTriggerComponent.class,

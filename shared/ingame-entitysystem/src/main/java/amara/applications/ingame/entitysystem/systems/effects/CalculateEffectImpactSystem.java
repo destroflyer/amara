@@ -220,6 +220,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         RemoveComponentsComponent.class,
                         FinishObjectiveComponent.class,
                         AddEffectTriggersComponent.class,
+                        AddNewEffectTriggersComponent.class,
                         RemoveEffectTriggersComponent.class,
                         RemoveEntityComponent.class,
                         DrawTeamAggroComponent.class,

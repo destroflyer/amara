@@ -567,7 +567,7 @@ public class Map_Vegas extends Map {
                     // Remove the team death triggers of the enemy when winning a round
                     int teamDeathRemoveEnemyTeamDeathTriggersTrigger = teamDeathRemoveEnemyTeamDeathTriggersTriggers[round][currentPlayerIndex];
                     int teamDeathRemoveEnemyTeamDeathTriggersEffect = entityWorld.createEntity();
-                    entityWorld.setComponent(teamDeathRemoveEnemyTeamDeathTriggersEffect, new RemoveEffectTriggersComponent(teamDeathAddWinTriggers[round][enemyPlayerIndex], teamDeathAddFinishedFightTriggers[round][enemyPlayerIndex], teamDeathRemoveEnemyTeamDeathTriggersTriggers[round][enemyPlayerIndex]));
+                    entityWorld.setComponent(teamDeathRemoveEnemyTeamDeathTriggersEffect, new RemoveEffectTriggersComponent(new int[] { teamDeathAddWinTriggers[round][enemyPlayerIndex], teamDeathAddFinishedFightTriggers[round][enemyPlayerIndex], teamDeathRemoveEnemyTeamDeathTriggersTriggers[round][enemyPlayerIndex] }, false));
                     entityWorld.setComponent(teamDeathRemoveEnemyTeamDeathTriggersTrigger, new TriggeredEffectComponent(teamDeathRemoveEnemyTeamDeathTriggersEffect));
                 }
             }

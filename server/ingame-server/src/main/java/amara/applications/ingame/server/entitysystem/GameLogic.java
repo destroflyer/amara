@@ -168,6 +168,7 @@ public class GameLogic {
         entitySystems.add(new ResetAnimationsSystem());
         entitySystems.add(new IntersectionPushSystem(intersectionObserver));
         entitySystems.add(new MapIntersectionSystem(polyMapManager));
+        entitySystems.add(new RemoveOnMapLeaveSystem(polyMapManager));
         entitySystems.add(new RespawnableDeathSystem());
         entitySystems.add(new RespawnPlayersSystem(game.getMap()));
         entitySystems.add(new CleanupPlayersSystem());
