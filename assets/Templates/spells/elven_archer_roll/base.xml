@@ -77,7 +77,7 @@
                         <playAudio>
                             <entity>
                                 <audio>Sounds/sounds/spells/elven_archer_roll_cast.ogg</audio>
-                                <audioVolume>0.4</audioVolume>
+                                <audioVolume>0.5</audioVolume>
                             </entity>
                         </playAudio>
                     </entity>

@@ -35,7 +35,7 @@
                         <playAudio>
                             <entity>
                                 <audio>Sounds/sounds/spells/aland_sword_cast.ogg</audio>
-                                <audioVolume>1.5</audioVolume>
+                                <audioVolume>1.25</audioVolume>
                             </entity>
                         </playAudio>
                     </entity>
