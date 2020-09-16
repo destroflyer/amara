@@ -1,6 +1,6 @@
 <template>
     <entity id="object">
-        <model>Models/tristan_spin/skin.xml</model>
+        <model>Models/aland_explosion/skin.xml</model>
         <hitbox>
             <circle radius="6"/>
         </hitbox>
@@ -23,7 +23,7 @@
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
     </entity>
-    <!--deactivate hitbox-->
+    <!--deactivate hitbox on collision-->
     <entity>
         <collisionTrigger>#collisionRules</collisionTrigger>
         <sourceTarget/>
@@ -33,5 +33,18 @@
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
+    </entity>
+    <!--deactivate hitbox after time-->
+    <entity>
+        <instantTrigger/>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <deactivateHitbox/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+        <triggerDelay>0.2</triggerDelay>
+        <triggerOnce/>
     </entity>
 </template>

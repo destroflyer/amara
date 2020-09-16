@@ -24,7 +24,7 @@
                                                 <addBuff duration="[stacksDuration]">
                                                     <entity id="buff">
                                                         <name>Aland's Target</name>
-                                                        <description>When reaching 3 stacks, this unit receives magic damage and is slowed.</description>
+                                                        <description>When reaching 3 stacks, this unit is slowed and receives magic damage over time.</description>
                                                         <buffIcon>spells/aland_passive</buffIcon>
                                                         <buffVisualisation>aland_passive</buffVisualisation>
                                                         <maximumStacks>[maximumStacks]</maximumStacks>
@@ -66,9 +66,9 @@
                 <addBuff duration="[slowDuration]">
                     <entity>
                         <name>Aland's Target</name>
-                        <description>This unit has decreased walk speed.</description>
+                        <description>This unit has decreased walk speed and receives magic damage over time.</description>
                         <buffIcon>spells/aland_passive</buffIcon>
-                        <buffVisualisation>slow</buffVisualisation>
+                        <buffVisualisation>aland_passive_full</buffVisualisation>
                         <continuousAttributes>
                             <entity>
                                 <bonusPercentageWalkSpeed>-0.3</bonusPercentageWalkSpeed>

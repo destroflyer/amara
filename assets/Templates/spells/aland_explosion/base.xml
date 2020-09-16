@@ -1,9 +1,9 @@
 <template>
     <value name="duration">0.4</value>
     <entity id="spell">
-        <name>Bomb</name>
+        <name>Explosion</name>
         <description>Throw a bomb at your feet, dealing magic damage to all enemies and knocking them away from the center.</description>
-        <spellVisualisation>aland_knockback</spellVisualisation>
+        <spellVisualisation>aland_explosion</spellVisualisation>
         <instantEffectTriggers>
             <!--spawn object, add visual buff-->
             <entity>

@@ -77,7 +77,7 @@
         </passives>
         <learnableSpells>
             <entity id="spell1" template="spells/aland_stealth/base"/>
-            <entity id="spell2" template="spells/aland_knockback/base"/>
+            <entity id="spell2" template="spells/aland_explosion/base"/>
             <entity id="spell3" template="spells/aland_sword/base"/>
             <entity id="spell4" template="spells/aland_trap/base"/>
         </learnableSpells>

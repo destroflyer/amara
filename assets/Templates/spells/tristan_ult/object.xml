@@ -9,7 +9,7 @@
     <!--trigger spell effects-->
     <entity>
         <collisionTrigger>
-            <entity>
+            <entity id="collisionRules">
                 <acceptEnemies/>
             </entity>
         </collisionTrigger>
