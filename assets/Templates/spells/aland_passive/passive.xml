@@ -81,6 +81,12 @@
                         </repeatingEffect>
                     </entity>
                 </addBuff>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/aland_passive_hit.ogg</audio>
+                        <audioVolume>1.5</audioVolume>
+                    </entity>
+                </playAudio>
             </entity>
         </triggeredEffect>
         <triggerSource>#buff</triggerSource>

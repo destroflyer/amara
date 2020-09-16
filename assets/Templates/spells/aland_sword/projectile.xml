@@ -14,6 +14,13 @@
         <triggeredEffect>
             <entity>
                 <triggerCastedSpellEffects/>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/aland_sword_hit.ogg</audio>
+                        <audioVolume>1.5</audioVolume>
+                        <audioRemoveAfterPlaying/>
+                    </entity>
+                </playAudio>
             </entity>
         </triggeredEffect>
         <triggerSource>#projectile</triggerSource>

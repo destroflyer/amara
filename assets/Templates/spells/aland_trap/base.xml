@@ -19,6 +19,11 @@
                                 <spawnTemplate>./object(#spell)</spawnTemplate>
                             </entity>
                         </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/aland_trap_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

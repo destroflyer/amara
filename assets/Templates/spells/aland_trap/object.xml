@@ -87,18 +87,36 @@
                                                 <triggerSpellEffects>[parameter0]</triggerSpellEffects>
                                                 <addBuff duration="[duration]">#buff</addBuff>
                                                 <addStacks stacks="1">#buff</addStacks>
+                                                <playAudio>
+                                                    <entity>
+                                                        <audio>Sounds/sounds/spells/aland_trap_hit_following.ogg</audio>
+                                                        <audioRemoveAfterPlaying/>
+                                                    </entity>
+                                                </playAudio>
                                             </entity>
                                         </triggeredEffect>
                                         <triggerOnce>true</triggerOnce>
                                         <customCleanup/>
                                     </entity>
                                 </addEffectTriggers>
+                                <playAudio>
+                                    <entity>
+                                        <audio>Sounds/sounds/spells/aland_trap_hit_following.ogg</audio>
+                                        <audioRemoveAfterPlaying/>
+                                    </entity>
+                                </playAudio>
                             </entity>
                         </triggeredEffect>
                         <triggerOnce>true</triggerOnce>
                         <customCleanup/>
                     </entity>
                 </addEffectTriggers>
+                <playAudio>
+                    <entity>
+                        <audio>Sounds/sounds/spells/aland_trap_hit_initial.ogg</audio>
+                        <audioRemoveAfterPlaying/>
+                    </entity>
+                </playAudio>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>

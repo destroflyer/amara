@@ -15,6 +15,12 @@
                                 <spawnTemplate>./object</spawnTemplate>
                             </entity>
                         </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/aland_explosion_cast.ogg</audio>
+                                <audioVolume>3</audioVolume>
+                            </entity>
+                        </playAudio>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
