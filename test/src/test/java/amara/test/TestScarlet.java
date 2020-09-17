@@ -26,7 +26,7 @@ public class TestScarlet extends CommandingPlayerTest {
     public TestScarlet() {
         characterTemplate = "units/scarlet";
     }
-    private static final String BUFF_NAME_PASSIVE = "Mark of the Assasin";
+    private static final String NAME_PASSIVE_BUFF = "Mark of the Assasin";
 
     @Test
     public void testP_Triggered() {
@@ -35,10 +35,10 @@ public class TestScarlet extends CommandingPlayerTest {
 
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_Q, new Vector2f(1, 0)));
         tickSeconds(1);
-        assertTrue(hasBuff(targetDummy, BUFF_NAME_PASSIVE));
+        assertTrue(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(0.5f);
-        assertFalse(hasBuff(targetDummy, BUFF_NAME_PASSIVE));
+        assertFalse(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
         assertEquals(880, getHealth(targetDummy), EPSILON);
         queueCommand(new StopCommand());
 
@@ -52,9 +52,9 @@ public class TestScarlet extends CommandingPlayerTest {
 
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_Q, new Vector2f(1, 0)));
         tickSeconds(1);
-        assertTrue(hasBuff(targetDummy, BUFF_NAME_PASSIVE));
+        assertTrue(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
         tickSeconds(5);
-        assertFalse(hasBuff(targetDummy, BUFF_NAME_PASSIVE));
+        assertFalse(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
         assertEquals(940, getHealth(targetDummy), EPSILON);
 
         onLogicEnd(false, false);
@@ -68,9 +68,9 @@ public class TestScarlet extends CommandingPlayerTest {
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_Q, new Vector2f(1, 0)));
         tickSeconds(1);
         assertEquals(940, getHealth(targetDummy), EPSILON);
-        assertTrue(hasBuff(targetDummy, BUFF_NAME_PASSIVE));
+        assertTrue(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
         tickSeconds(5);
-        assertFalse(hasBuff(targetDummy, BUFF_NAME_PASSIVE));
+        assertFalse(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
 
         onLogicEnd(false, false);
     }
@@ -105,9 +105,9 @@ public class TestScarlet extends CommandingPlayerTest {
         tickSeconds(0.75f);
         entityWorld.removeComponent(targetDummy, AggroTargetComponent.class);
         assertEquals(500, getHealth(character), EPSILON);
-        assertTrue(hasBuff(targetDummy, BUFF_NAME_PASSIVE));
+        assertTrue(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
         tickSeconds(5);
-        assertFalse(hasBuff(targetDummy, BUFF_NAME_PASSIVE));
+        assertFalse(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
 
         onLogicEnd(false, false);
     }
@@ -133,12 +133,12 @@ public class TestScarlet extends CommandingPlayerTest {
         assertEquals(10, getY(character), EPSILON);
         assertEquals(900, getHealth(targetDummy1), EPSILON);
         assertEquals(900, getHealth(targetDummy2), EPSILON);
-        assertTrue(hasBuff(targetDummy1, BUFF_NAME_PASSIVE));
-        assertTrue(hasBuff(targetDummy2, BUFF_NAME_PASSIVE));
+        assertTrue(hasBuff(targetDummy1, NAME_PASSIVE_BUFF));
+        assertTrue(hasBuff(targetDummy2, NAME_PASSIVE_BUFF));
         assertNotEquals(0, getRemainingCooldown(character, SPELL_INDEX_E), EPSILON);
         tickSeconds(5);
-        assertFalse(hasBuff(targetDummy1, BUFF_NAME_PASSIVE));
-        assertFalse(hasBuff(targetDummy2, BUFF_NAME_PASSIVE));
+        assertFalse(hasBuff(targetDummy1, NAME_PASSIVE_BUFF));
+        assertFalse(hasBuff(targetDummy2, NAME_PASSIVE_BUFF));
 
         onLogicEnd(false, false);
     }
@@ -156,9 +156,9 @@ public class TestScarlet extends CommandingPlayerTest {
         assertEquals(10, getY(character), EPSILON);
         assertEquals(840, getHealth(targetDummy), EPSILON);
         assertEquals(0, getRemainingCooldown(character, SPELL_INDEX_E), EPSILON);
-        assertTrue(hasBuff(targetDummy, BUFF_NAME_PASSIVE));
+        assertTrue(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
         tickSeconds(5);
-        assertFalse(hasBuff(targetDummy, BUFF_NAME_PASSIVE));
+        assertFalse(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
 
         onLogicEnd(false, false);
     }
@@ -215,11 +215,11 @@ public class TestScarlet extends CommandingPlayerTest {
         tickSeconds(1);
         assertEquals(800, getHealth(targetDummy1), EPSILON);
         assertEquals(800, getHealth(targetDummy2), EPSILON);
-        assertTrue(hasBuff(targetDummy1, BUFF_NAME_PASSIVE));
-        assertTrue(hasBuff(targetDummy2, BUFF_NAME_PASSIVE));
+        assertTrue(hasBuff(targetDummy1, NAME_PASSIVE_BUFF));
+        assertTrue(hasBuff(targetDummy2, NAME_PASSIVE_BUFF));
         tickSeconds(5);
-        assertFalse(hasBuff(targetDummy1, BUFF_NAME_PASSIVE));
-        assertFalse(hasBuff(targetDummy2, BUFF_NAME_PASSIVE));
+        assertFalse(hasBuff(targetDummy1, NAME_PASSIVE_BUFF));
+        assertFalse(hasBuff(targetDummy2, NAME_PASSIVE_BUFF));
 
         onLogicEnd(false, false);
     }

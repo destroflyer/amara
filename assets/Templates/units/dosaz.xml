@@ -88,7 +88,7 @@
     <entity id="triggerTombstonesBuff"/>
     <!--ghost buff-->
     <entity id="ghostBuff">
-        <name>Ghost</name>
+        <name>I'm a Ghost</name>
         <description>This unit is a very spooky ghost.</description>
         <buffIcon>spells/dosaz_passive</buffIcon>
     </entity>

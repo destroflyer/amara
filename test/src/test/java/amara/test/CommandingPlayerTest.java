@@ -13,12 +13,15 @@ import amara.applications.ingame.entitysystem.components.players.ClientComponent
 import amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent;
 import amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent;
 import amara.applications.ingame.entitysystem.components.units.*;
+import amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent;
 import amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent;
 import amara.applications.ingame.entitysystem.systems.commands.ExecutePlayerCommandsSystem;
 import amara.applications.ingame.entitysystem.systems.units.shields.ShieldUtil;
 import amara.applications.ingame.network.messages.objects.commands.casting.SpellIndex;
 import com.jme3.math.Vector2f;
 import org.junit.Before;
+
+import java.util.LinkedList;
 
 import static org.junit.Assert.fail;
 
@@ -56,6 +59,27 @@ public class CommandingPlayerTest extends GameLogicTest {
         return targetDummy;
     }
 
+    protected Integer findEntity(String name) {
+        for (int entity : entityWorld.getEntitiesWithAny(NameComponent.class)) {
+            String currentName = entityWorld.getComponent(entity, NameComponent.class).getName();
+            if (name.equals(currentName)) {
+                return entity;
+            }
+        }
+        return null;
+    }
+
+    protected LinkedList<Integer> findEntities(String name) {
+        LinkedList<Integer> entities = new LinkedList<>();
+        for (int entity : entityWorld.getEntitiesWithAny(NameComponent.class)) {
+            String currentName = entityWorld.getComponent(entity, NameComponent.class).getName();
+            if (name.equals(currentName)) {
+                entities.add(entity);
+            }
+        }
+        return entities;
+    }
+
     protected float getX(int entity) {
         return getPosition(entity).getX();
     }
@@ -90,6 +114,10 @@ public class CommandingPlayerTest extends GameLogicTest {
 
     protected boolean isAlive(int entity) {
         return entityWorld.hasComponent(entity, IsAliveComponent.class);
+    }
+
+    protected boolean isBinded(int entity) {
+        return entityWorld.hasComponent(entity, IsBindedComponent.class);
     }
 
     protected boolean isKnockuped(int entity) {

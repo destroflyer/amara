@@ -1,7 +1,6 @@
 package amara.test;
 
 import amara.applications.ingame.entitysystem.components.physics.DirectionComponent;
-import amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent;
 import amara.applications.ingame.network.messages.objects.commands.AutoAttackCommand;
 import amara.applications.ingame.network.messages.objects.commands.casting.CastLinearSkillshotSpellCommand;
 import amara.applications.ingame.network.messages.objects.commands.casting.CastSelfcastSpellCommand;
@@ -18,20 +17,20 @@ public class TestGarmon extends CommandingPlayerTest {
     public TestGarmon() {
         characterTemplate = "units/garmon";
     }
-    private static final String BUFF_NAME_PASSIVE = "Stargazer";
+    private static final String NAME_PASSIVE_BUFF = "Stargazer";
 
     @Test
     public void testP() {
         int targetDummy = createTargetDummy(new Vector2f(20, 10));
         onLogicStart();
 
-        assertTrue(hasBuff(character, BUFF_NAME_PASSIVE));
+        assertTrue(hasBuff(character, NAME_PASSIVE_BUFF));
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(1);
         assertEquals(933.3334f, getHealth(targetDummy), EPSILON);
-        assertFalse(hasBuff(character, BUFF_NAME_PASSIVE));
+        assertFalse(hasBuff(character, NAME_PASSIVE_BUFF));
         tickSeconds(8);
-        assertTrue(hasBuff(character, BUFF_NAME_PASSIVE));
+        assertTrue(hasBuff(character, NAME_PASSIVE_BUFF));
 
         onLogicEnd(true, true);
     }
@@ -43,9 +42,9 @@ public class TestGarmon extends CommandingPlayerTest {
 
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_Q, new Vector2f(1, 0)));
         tickSeconds(1);
-        assertTrue(entityWorld.hasComponent(targetDummy, IsBindedComponent.class));
+        assertTrue(isBinded(targetDummy));
         tickSeconds(2);
-        assertFalse(entityWorld.hasComponent(targetDummy, IsBindedComponent.class));
+        assertFalse(isBinded(targetDummy));
         assertEquals(940, getHealth(targetDummy), EPSILON);
 
         onLogicEnd(false, false);
@@ -57,6 +56,7 @@ public class TestGarmon extends CommandingPlayerTest {
         onLogicStart();
 
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_Q, new Vector2f(1, 0)));
+        tickSeconds(5);
         assertTrue(isFullHealth(targetDummy));
 
         onLogicEnd(false, false);

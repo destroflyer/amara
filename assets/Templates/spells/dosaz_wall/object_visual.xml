@@ -1,5 +1,6 @@
 <template>
     <entity id="object">
+        <name>Bone Wall Visual</name>
         <model>Models/dosaz_wall/skin.xml</model>
         <lifetime>6</lifetime>
     </entity>

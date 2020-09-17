@@ -26,8 +26,8 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
     public TestDwarfWarrior() {
         characterTemplate = "units/dwarf_warrior";
     }
-    private static final String BUFF_NAME_W_STACKS = "Urgent Feast";
-    private static final String BUFF_NAME_W_CONSUME = "Full Stomach";
+    private static final String NAME_W_STACKS_BUFF = "Urgent Feast";
+    private static final String NAME_W_CONSUME_BUFF = "Full Stomach";
 
     @Test
     public void testP() {
@@ -62,10 +62,10 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
 
     @Test
     public void testQ_Stack() {
-        int targetDummy = createTargetDummy(new Vector2f(13, 10));
-        entityWorld.setComponent(targetDummy, new HealthComponent(1));
         onLogicStart();
 
+        int targetDummy = createTargetDummy(new Vector2f(13, 10));
+        entityWorld.setComponent(targetDummy, new HealthComponent(1));
         assertEquals(25, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
@@ -77,7 +77,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         assertEquals(31, getMagicResistance(character), EPSILON);
         queueCommand(new StopCommand());
 
-        onLogicEnd(true, true);
+        onLogicEnd(false, true);
     }
 
     @Test
@@ -93,36 +93,36 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         entityWorld.removeComponent(character, IsAutoAttackEnabledComponent.class);
         onLogicStart();
 
-        assertEquals(0, getBuffStacks(character, BUFF_NAME_W_STACKS));
+        assertEquals(0, getBuffStacks(character, NAME_W_STACKS_BUFF));
         entityWorld.setComponent(targetDummy, new AggroTargetComponent(character));
         tickSeconds(15);
         entityWorld.removeComponent(targetDummy, AggroTargetComponent.class);
-        assertEquals(10, getBuffStacks(character, BUFF_NAME_W_STACKS));
+        assertEquals(10, getBuffStacks(character, NAME_W_STACKS_BUFF));
         assertEquals(274.4965f, getHealth(character), EPSILON);
         // Consume #1 --> Successful (10 stacks -> 5 stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
         assertEquals(374.9963f, getHealth(character), EPSILON);
-        assertEquals(5, getBuffStacks(character, BUFF_NAME_W_STACKS));
-        assertTrue(hasBuff(character, BUFF_NAME_W_CONSUME));
+        assertEquals(5, getBuffStacks(character, NAME_W_STACKS_BUFF));
+        assertTrue(hasBuff(character, NAME_W_CONSUME_BUFF));
         tickSeconds(1);
-        assertFalse(hasBuff(character, BUFF_NAME_W_CONSUME));
+        assertFalse(hasBuff(character, NAME_W_CONSUME_BUFF));
         resetCooldown(character, SPELL_INDEX_W);
         // Consume #2 --> Successful (5 stacks -> 0 stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
         assertEquals(476.5126f, getHealth(character), EPSILON);
-        assertEquals(0, getBuffStacks(character, BUFF_NAME_W_STACKS));
-        assertTrue(hasBuff(character, BUFF_NAME_W_CONSUME));
+        assertEquals(0, getBuffStacks(character, NAME_W_STACKS_BUFF));
+        assertTrue(hasBuff(character, NAME_W_CONSUME_BUFF));
         tickSeconds(1);
-        assertFalse(hasBuff(character, BUFF_NAME_W_CONSUME));
+        assertFalse(hasBuff(character, NAME_W_CONSUME_BUFF));
         resetCooldown(character, SPELL_INDEX_W);
         // Consume #3 --> Unsuccessful (Not enough stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
         assertEquals(478.0289f, getHealth(character), EPSILON);
         tickSeconds(5);
-        assertFalse(hasBuff(character, BUFF_NAME_W_CONSUME));
+        assertFalse(hasBuff(character, NAME_W_CONSUME_BUFF));
 
         onLogicEnd(false, false);
     }

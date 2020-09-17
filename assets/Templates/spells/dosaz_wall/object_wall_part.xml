@@ -1,5 +1,6 @@
 <template>
     <entity id="object">
+        <name>Bone Wall Part</name>
         <!--hitbox is generated via code-->
         <intersectionPushes/>
         <collisionGroup targetOf="map|spell_targets" targets="spell_targets"/>
