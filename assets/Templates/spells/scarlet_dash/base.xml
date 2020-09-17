@@ -89,7 +89,7 @@
         <castCancelCast/>
         <castCancelMovement/>
         <castTurnToTarget/>
-        <baseCooldown>1</baseCooldown>
+        <baseCooldown>10</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>

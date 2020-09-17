@@ -1,5 +1,7 @@
 package amara.applications.ingame.entitysystem.systems.effects.buffs.stacks;
 
+import amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent;
+import amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent;
 import amara.applications.ingame.entitysystem.components.buffs.status.StacksComponent;
 import amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent;
 import amara.applications.ingame.entitysystem.components.effects.buffs.stacks.AddStacksComponent;
@@ -25,6 +27,8 @@ public class ApplyAddStacksSystem implements EntitySystem {
             int oldStacks = ((stacksComponent != null) ? stacksComponent.getStacks() : 0);
             int newStacks = (oldStacks + stacks);
             entityWorld.setComponent(buffStatusEntity, new StacksComponent(newStacks));
+            int targetEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getTargetEntity();
+            entityWorld.setComponent(targetEntity, new RequestUpdateAttributesComponent());
         }
     }
 }

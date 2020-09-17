@@ -24,9 +24,9 @@ public class TestAutoAttacks extends CommandingPlayerTest {
         tickSeconds(1);
         queueCommand(new StopCommand());
         tickSeconds(2);
+        assertEquals(966.6667f, getHealth(targetDummy), EPSILON);
 
-        onLogicEnd();
-        assertEquals(966, getHealth(targetDummy), 0);
+        onLogicEnd(false, false);
     }
 
     @Test
@@ -40,8 +40,8 @@ public class TestAutoAttacks extends CommandingPlayerTest {
         tickSeconds(1);
         queueCommand(new StopCommand());
         tickSeconds(2);
+        assertEquals(966.6667f, getHealth(targetDummy), EPSILON);
 
-        onLogicEnd();
-        assertEquals(966, getHealth(targetDummy), 0);
+        onLogicEnd(false, false);
     }
 }

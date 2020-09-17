@@ -9,6 +9,7 @@ import amara.applications.ingame.entitysystem.components.attributes.MaximumHealt
 import amara.applications.ingame.entitysystem.components.units.ShieldsComponent;
 import amara.applications.ingame.entitysystem.components.units.shields.ActiveShieldComponent;
 import amara.applications.ingame.entitysystem.components.units.shields.ShieldAmountComponent;
+import amara.applications.ingame.entitysystem.systems.units.shields.ShieldUtil;
 import amara.libraries.applications.display.materials.PaintableImage;
 import amara.libraries.entitysystem.EntityWorld;
 import com.jme3.math.Vector3f;
@@ -54,24 +55,13 @@ public class HealthBarSystem extends TopHUDAttachmentSystem {
         PaintableImage paintableImage = healthBarStyleManager.getImage_MaximumHealth(entity, style);
         float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();
         float currentHealth = entityWorld.getComponent(entity, HealthComponent.class).getValue();
-        float totalShieldAmount = getTotalShieldAmount(entityWorld, entity);
+        float totalShieldAmount = ShieldUtil.getTotalShieldAmount(entityWorld, entity);
         boolean isAllied = playerTeamSystem.isAllied(entityWorld, entity);
         style.draw(paintableImage, maximumHealth, currentHealth, totalShieldAmount, isAllied);
         Geometry geometry = (Geometry) visualAttachment;
         Texture texture = geometry.getMaterial().getTextureParam("ColorMap").getTextureValue();
         texture.setImage(paintableImage.getImage());
         preparedHudOffset = hudOffset.clone().setY(-1 * style.getBarHeight());
-    }
-
-    private float getTotalShieldAmount(EntityWorld entityWorld, int entity) {
-        float totalShieldAmount = 0;
-        ShieldsComponent shieldsComponent = entityWorld.getComponent(entity, ShieldsComponent.class);
-        if (shieldsComponent != null) {
-            for (int shieldStatusEntity : shieldsComponent.getShieldStatusEntities()) {
-                totalShieldAmount += entityWorld.getComponent(shieldStatusEntity, ShieldAmountComponent.class).getValue();
-            }
-        }
-        return totalShieldAmount;
     }
 
     @Override

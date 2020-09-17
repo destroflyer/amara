@@ -19,10 +19,10 @@ public class TestWalk extends CommandingPlayerTest {
 
         queueCommand(new WalkToTargetCommand(new Vector2f(20, 30)));
         tickSeconds(5);
-
-        onLogicEnd();
         assertEquals(20, getX(character), EPSILON);
         assertEquals(30, getY(character), EPSILON);
+
+        onLogicEnd(false, false);
     }
 
     @Test
@@ -34,9 +34,9 @@ public class TestWalk extends CommandingPlayerTest {
         tickSeconds(5);
         queueCommand(new StopWalkInDirectionCommand());
         tickSeconds(2);
-
-        onLogicEnd();
         assertEquals(10 + (walkSpeed * 5), getX(character), EPSILON);
         assertEquals(10, getY(character), EPSILON);
+
+        onLogicEnd(false, false);
     }
 }

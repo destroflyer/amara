@@ -20,7 +20,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.mockito.Mock;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
@@ -65,19 +67,34 @@ public class GameLogicTest {
     }
 
     void onLogicStart() {
+        // Automatic entity processes like updating attributes, adding initial buffs, etc.
+        tick();
         initialEntities = entityWorld.getEntitiesWithAll();
     }
 
-    void onLogicEnd() {
+    void onLogicEnd(boolean expectRemovedEntities, boolean expectNewEntities) {
+        tickSeconds(5);
         Set<Integer> resultingEntities = entityWorld.getEntitiesWithAll();
-        if (!resultingEntities.equals(initialEntities)) {
-            System.err.println("Entity leak - Expected: " + initialEntities.size() + ", Actual: " + resultingEntities.size());
-            initialEntities.stream().filter(entity -> !resultingEntities.contains(entity)).forEach(entity -> {
-                System.err.println("Removed: " + getEntityDebugString(entity));
-            });
-            resultingEntities.stream().filter(entity -> !initialEntities.contains(entity)).forEach(entity -> {
-                System.err.println("New: " + getEntityDebugString(entity));
-            });
+        boolean shouldFail = false;
+        if (!expectRemovedEntities) {
+            List<Integer> removedEntities = initialEntities.stream().filter(entity -> !resultingEntities.contains(entity)).collect(Collectors.toList());
+            if (removedEntities.size() > 0) {
+                for (Integer removedEntity : removedEntities) {
+                    System.err.println("Unexpected removed entity: #" + removedEntity);
+                }
+                shouldFail = true;
+            }
+        }
+        if (!expectNewEntities) {
+            List<Integer> newEntities = resultingEntities.stream().filter(entity -> !initialEntities.contains(entity)).collect(Collectors.toList());
+            if (newEntities.size() > 0) {
+                for (Integer newEntity : newEntities) {
+                    System.err.println("Unexpected new entity: " + getEntityDebugString(newEntity));
+                }
+                shouldFail = true;
+            }
+        }
+        if (shouldFail) {
             fail();
         }
     }
@@ -90,7 +107,7 @@ public class GameLogicTest {
             }
             componentsString += component.getClass().getSimpleName();
         }
-        return "#" + entity + ": " + componentsString;
+        return "#" + entity + " (" + componentsString + ")";
     }
 
     int createTargetDummy(Vector2f position) {
