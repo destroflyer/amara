@@ -115,6 +115,10 @@ public class CommandingPlayerTest extends GameLogicTest {
         return ShieldUtil.getTotalShieldAmount(entityWorld, entity);
     }
 
+    protected float getAttackSpeed(int entity) {
+        return entityWorld.getComponent(entity, AttackSpeedComponent.class).getValue();
+    }
+
     protected float getArmor(int entity) {
         return entityWorld.getComponent(entity, ArmorComponent.class).getValue();
     }
