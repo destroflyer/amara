@@ -26,6 +26,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
     public TestDwarfWarrior() {
         characterTemplate = "units/dwarf_warrior";
     }
+    private static final String NAME_Q_ATTACK_BUFF = "Stop! Hammer Time";
     private static final String NAME_W_STACKS_BUFF = "Urgent Feast";
     private static final String NAME_W_CONSUME_BUFF = "Full Stomach";
 
@@ -51,8 +52,12 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         assertEquals(25, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
+        tickSeconds(1);
+        assertTrue(hasBuff(character, NAME_Q_ATTACK_BUFF));
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(0.5f);
+        assertFalse(hasBuff(character, NAME_Q_ATTACK_BUFF));
+        assertEquals(916.6667f, getHealth(targetDummy), EPSILON);
         assertEquals(25, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new StopCommand());
@@ -70,8 +75,10 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
         tickSeconds(1);
+        assertTrue(hasBuff(character, NAME_Q_ATTACK_BUFF));
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(0.5f);
+        assertFalse(hasBuff(character, NAME_Q_ATTACK_BUFF));
         assertFalse(isAlive(targetDummy));
         assertEquals(26, getArmor(character), EPSILON);
         assertEquals(31, getMagicResistance(character), EPSILON);
