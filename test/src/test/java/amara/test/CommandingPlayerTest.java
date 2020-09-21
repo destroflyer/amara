@@ -1,12 +1,10 @@
 package amara.test;
 
-import amara.applications.ingame.entitysystem.components.attributes.ArmorComponent;
-import amara.applications.ingame.entitysystem.components.attributes.HealthComponent;
-import amara.applications.ingame.entitysystem.components.attributes.MagicResistanceComponent;
-import amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent;
+import amara.applications.ingame.entitysystem.components.attributes.*;
 import amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent;
 import amara.applications.ingame.entitysystem.components.buffs.status.StacksComponent;
 import amara.applications.ingame.entitysystem.components.general.NameComponent;
+import amara.applications.ingame.entitysystem.components.movements.MovementSpeedComponent;
 import amara.applications.ingame.entitysystem.components.physics.DirectionComponent;
 import amara.applications.ingame.entitysystem.components.physics.PositionComponent;
 import amara.applications.ingame.entitysystem.components.players.ClientComponent;
@@ -15,6 +13,7 @@ import amara.applications.ingame.entitysystem.components.spells.RemainingCooldow
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent;
 import amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent;
+import amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent;
 import amara.applications.ingame.entitysystem.systems.commands.ExecutePlayerCommandsSystem;
 import amara.applications.ingame.entitysystem.systems.units.shields.ShieldUtil;
 import amara.applications.ingame.network.messages.objects.commands.casting.SpellIndex;
@@ -44,6 +43,7 @@ public class CommandingPlayerTest extends GameLogicTest {
         entityWorld.setComponent(player, new PlayerCharacterComponent(character));
         entityWorld.setComponent(character, new PositionComponent(new Vector2f(10, 10)));
         entityWorld.setComponent(character, new DirectionComponent(new Vector2f(0, 1)));
+        entityWorld.setComponent(character, new SightRangeComponent(30));
         entityWorld.setComponent(character, new TeamComponent(1));
         LearnableSpellsComponent learnableSpellsComponent = entityWorld.getComponent(character, LearnableSpellsComponent.class);
         if (learnableSpellsComponent != null) {
@@ -92,6 +92,17 @@ public class CommandingPlayerTest extends GameLogicTest {
         return entityWorld.getComponent(entity, PositionComponent.class).getPosition();
     }
 
+    protected float getMovementSpeed(int entity) {
+        MovementComponent movementComponent = entityWorld.getComponent(entity, MovementComponent.class);
+        if (movementComponent != null) {
+            MovementSpeedComponent movementSpeedComponent = entityWorld.getComponent(movementComponent.getMovementEntity(), MovementSpeedComponent.class);
+            if (movementSpeedComponent != null) {
+                return movementSpeedComponent.getSpeed();
+            }
+        }
+        return 0;
+    }
+
     protected boolean isFullHealth(int entity) {
         return (getHealth(entity) == entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue());
     }
@@ -122,6 +133,10 @@ public class CommandingPlayerTest extends GameLogicTest {
 
     protected boolean isKnockuped(int entity) {
         return entityWorld.hasComponent(entity, IsKnockupedComponent.class);
+    }
+
+    protected boolean isStunned(int entity) {
+        return entityWorld.hasComponent(entity, IsStunnedComponent.class);
     }
 
     protected boolean hasBuff(int entity, String buffName) {

@@ -2,6 +2,7 @@ package amara.test;
 
 import amara.applications.ingame.entitysystem.components.physics.DirectionComponent;
 import amara.applications.ingame.network.messages.objects.commands.AutoAttackCommand;
+import amara.applications.ingame.network.messages.objects.commands.StopCommand;
 import amara.applications.ingame.network.messages.objects.commands.casting.CastLinearSkillshotSpellCommand;
 import amara.applications.ingame.network.messages.objects.commands.casting.CastSelfcastSpellCommand;
 import com.jme3.math.Vector2f;
@@ -29,6 +30,7 @@ public class TestGarmon extends CommandingPlayerTest {
         tickSeconds(1);
         assertEquals(933.3334f, getHealth(targetDummy), EPSILON);
         assertFalse(hasBuff(character, NAME_PASSIVE_BUFF));
+        queueCommand(new StopCommand());
         tickSeconds(8);
         assertTrue(hasBuff(character, NAME_PASSIVE_BUFF));
 

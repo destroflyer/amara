@@ -88,6 +88,19 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
     }
 
     @Test
+    public void testQ_Decay() {
+        onLogicStart();
+
+        queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
+        tickSeconds(1);
+        assertTrue(hasBuff(character, NAME_Q_ATTACK_BUFF));
+        tickSeconds(9);
+        assertFalse(hasBuff(character, NAME_Q_ATTACK_BUFF));
+
+        onLogicEnd(false, false);
+    }
+
+    @Test
     public void testW() {
         int targetDummy = createTargetDummy(new Vector2f(13, 10));
         int targetDummyBaseAttributes = entityWorld.getComponent(targetDummy, BaseAttributesComponent.class).getBonusAttributesEntity();

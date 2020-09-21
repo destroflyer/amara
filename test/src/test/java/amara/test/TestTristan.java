@@ -19,8 +19,42 @@ public class TestTristan extends CommandingPlayerTest {
     public TestTristan() {
         characterTemplate = "units/tristan";
     }
+    private static final String NAME_PASSIVE_BUFF = "Courage";
     private static final String NAME_W_ATTACK_BUFF = "Cripple";
     private static final String NAME_W_SLOW_BUFF = "Crippled";
+
+    @Test
+    public void testP_Active() {
+        int targetDummy = createTargetDummy(new Vector2f(20, 10));
+        entityWorld.setComponent(targetDummy, new IsCharacterComponent());
+        onLogicStart();
+
+        queueCommand(new AutoAttackCommand(targetDummy));
+        tickSeconds(0.5f);
+        assertTrue(hasBuff(character, NAME_PASSIVE_BUFF));
+        assertEquals(9.2f, getMovementSpeed(character), EPSILON);
+        queueCommand(new StopCommand());
+        tickSeconds(1);
+        assertFalse(hasBuff(character, NAME_PASSIVE_BUFF));
+
+        onLogicEnd(false, false);
+    }
+
+    @Test
+    public void testP_Inactive() {
+        int targetDummy = createTargetDummy(new Vector2f(20, 10));
+        onLogicStart();
+
+        queueCommand(new AutoAttackCommand(targetDummy));
+        tickSeconds(0.5f);
+        assertFalse(hasBuff(character, NAME_PASSIVE_BUFF));
+        assertEquals(8, getMovementSpeed(character), EPSILON);
+        queueCommand(new StopCommand());
+        tickSeconds(1);
+        assertFalse(hasBuff(character, NAME_PASSIVE_BUFF));
+
+        onLogicEnd(false, false);
+    }
 
     @Test
     public void testQ_Hit() {
@@ -34,24 +68,27 @@ public class TestTristan extends CommandingPlayerTest {
         tickSeconds(1);
         assertEquals(946.6667f, getHealth(targetDummy1), EPSILON);
         assertEquals(946.6667f, getHealth(targetDummy2), EPSILON);
+        assertEquals(401.0331f, getHealth(character), EPSILON);
 
         onLogicEnd(false, false);
     }
 
     @Test
     public void testQ_Miss() {
+        int targetDummy = createTargetDummy(new Vector2f(20, 10));
         entityWorld.setComponent(character, new HealthComponent(300));
         onLogicStart();
 
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
         tickSeconds(1);
+        assertTrue(isFullHealth(targetDummy));
         assertEquals(301.0331f, getHealth(character), EPSILON);
 
         onLogicEnd(false, false);
     }
 
     @Test
-    public void testW() {
+    public void testW_Hit() {
         int targetDummy = createTargetDummy(new Vector2f(13, 10));
         onLogicStart();
 
@@ -71,13 +108,82 @@ public class TestTristan extends CommandingPlayerTest {
     }
 
     @Test
-    public void testR() {
-        int targetDummy = createTargetDummy(new Vector2f(15, 10));
+    public void testW_Decay() {
+        onLogicStart();
+
+        queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
+        tickSeconds(1);
+        assertTrue(hasBuff(character, NAME_W_ATTACK_BUFF));
+        tickSeconds(4);
+        assertFalse(hasBuff(character, NAME_W_ATTACK_BUFF));
+
+        onLogicEnd(false, false);
+    }
+
+    @Test
+    public void testE_Hit() {
+        int targetDummy1 = createTargetDummy(new Vector2f(13, 10));
+        int targetDummy2 = createTargetDummy(new Vector2f(16, 10));
+        onLogicStart();
+
+        queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_E, new Vector2f(1, 0)));
+        tickSeconds(1);
+        assertEquals(916.6667f, getHealth(targetDummy1), EPSILON);
+        assertEquals(916.6667f, getHealth(targetDummy2), EPSILON);
+        assertTrue(isStunned(targetDummy1));
+        assertTrue(isStunned(targetDummy2));
+        tickSeconds(1);
+        assertFalse(isStunned(targetDummy1));
+        assertFalse(isStunned(targetDummy2));
+
+        onLogicEnd(false, false);
+    }
+
+    @Test
+    public void testE_Miss() {
+        int targetDummy = createTargetDummy(new Vector2f(10, 20));
+        onLogicStart();
+
+        queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_E, new Vector2f(1, 0)));
+        tickSeconds(1);
+        assertTrue(isFullHealth(targetDummy));
+        assertFalse(isStunned(targetDummy));
+
+        onLogicEnd(false, false);
+    }
+
+    @Test
+    public void testR_Hit() {
+        int targetDummy1 = createTargetDummy(new Vector2f(10, 5));
+        int targetDummy2 = createTargetDummy(new Vector2f(15, 10));
+        int targetDummy3 = createTargetDummy(new Vector2f(10, 15));
         onLogicStart();
 
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_R, new Vector2f(1, 0)));
-        tickSeconds(5);
-        assertEquals(923.3333f, getHealth(targetDummy), EPSILON);
+        tickSeconds(1);
+        assertEquals(923.3333f, getHealth(targetDummy1), EPSILON);
+        assertEquals(20, getX(targetDummy1), EPSILON);
+        assertEquals(5, getY(targetDummy1), EPSILON);
+        assertEquals(923.3333f, getHealth(targetDummy2), EPSILON);
+        assertEquals(25, getX(targetDummy2), EPSILON);
+        assertEquals(10, getY(targetDummy2), EPSILON);
+        assertEquals(923.3333f, getHealth(targetDummy3), EPSILON);
+        assertEquals(20, getX(targetDummy3), EPSILON);
+        assertEquals(15, getY(targetDummy3), EPSILON);
+
+        onLogicEnd(false, false);
+    }
+
+    @Test
+    public void testR_Miss() {
+        int targetDummy = createTargetDummy(new Vector2f(20, 10));
+        onLogicStart();
+
+        queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_R, new Vector2f(1, 0)));
+        tickSeconds(1);
+        assertTrue(isFullHealth(targetDummy));
+        assertEquals(20, getX(targetDummy), EPSILON);
+        assertEquals(10, getY(targetDummy), EPSILON);
 
         onLogicEnd(false, false);
     }
