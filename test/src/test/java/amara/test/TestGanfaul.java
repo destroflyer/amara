@@ -1,7 +1,6 @@
 package amara.test;
 
 import amara.applications.ingame.entitysystem.components.physics.DirectionComponent;
-import amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent;
 import amara.applications.ingame.network.messages.objects.commands.casting.CastLinearSkillshotSpellCommand;
 import amara.applications.ingame.network.messages.objects.commands.casting.CastSelfcastSpellCommand;
 import com.jme3.math.Vector2f;
@@ -25,9 +24,9 @@ public class TestGanfaul extends CommandingPlayerTest {
 
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_Q, new Vector2f(1, 0)));
         tickSeconds(1);
-        assertTrue(entityWorld.hasComponent(targetDummy, IsBindedComponent.class));
+        assertTrue(isBinded(targetDummy));
         tickSeconds(2);
-        assertFalse(entityWorld.hasComponent(targetDummy, IsBindedComponent.class));
+        assertFalse(isBinded(targetDummy));
         assertEquals(940, getHealth(targetDummy), EPSILON);
 
         onLogicEnd(false, false);

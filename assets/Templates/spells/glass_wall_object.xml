@@ -1,5 +1,6 @@
 <template>
     <entity id="object">
+        <isProjectile/>
         <model>Models/syfi_glass_wall/skin.xml</model>
         <hitbox>
             <rectangle width="0.75" height="9.5"/>
@@ -7,7 +8,6 @@
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
         <removeOnMapLeave/>
-        <isProjectile/>
         <lifetime>3.75</lifetime>
     </entity>
     <!--trigger spell effects-->

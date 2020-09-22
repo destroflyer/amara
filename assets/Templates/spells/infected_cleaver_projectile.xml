@@ -30,6 +30,7 @@
             </entity>
         </triggeredEffect>
         <triggerSource>#projectile</triggerSource>
+        <triggerOnce>true</triggerOnce>
     </entity>
     <!--remove projectile-->
     <entity>
