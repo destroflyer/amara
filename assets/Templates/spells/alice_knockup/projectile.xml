@@ -31,6 +31,7 @@
             </entity>
         </triggeredEffect>
         <triggerSource>#projectile</triggerSource>
+        <triggerOnce>true</triggerOnce>
     </entity>
     <!--remove projectile-->
     <entity>
@@ -38,7 +39,7 @@
         <sourceTarget/>
         <triggeredEffect>
             <entity>
-                <removeEffectTriggers>#removeTrigger</removeEffectTriggers>
+                <removeEffectTriggers removeEntities="true">#removeTrigger</removeEffectTriggers>
                 <removeEntity/>
             </entity>
         </triggeredEffect>

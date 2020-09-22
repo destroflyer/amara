@@ -116,9 +116,14 @@ public class TestDosaz extends CommandingPlayerTest {
         queueCommand(new CastPositionalSkillshotSpellCommand(SPELL_INDEX_Q, new Vector2f(30, 10)));
         tickSeconds(5);
         assertNull(findEntity(NAME_TOMBSTONE));
-        int ghost = findEntity(NAME_GHOST);
-        assertEquals(20, getX(ghost), EPSILON);
-        assertEquals(10, getY(ghost), EPSILON);
+        LinkedList<Integer> ghosts = findEntities(NAME_GHOST);
+        assertEquals(2, ghosts.size());
+        int ghost1 = ghosts.get(0);
+        assertEquals(20, getX(ghost1), EPSILON);
+        assertEquals(10, getY(ghost1), EPSILON);
+        int ghost2 = ghosts.get(1);
+        assertEquals(30, getX(ghost2), EPSILON);
+        assertEquals(10, getY(ghost2), EPSILON);
         tickSeconds(20);
         assertNull(findEntity(NAME_GHOST));
 

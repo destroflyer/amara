@@ -18,7 +18,7 @@
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
         <triggerDelay>0.5</triggerDelay>
-        <triggerOnce/>
+        <triggerOnce>true</triggerOnce>
     </entity>
     <!--pop bubbles-->
     <entity>

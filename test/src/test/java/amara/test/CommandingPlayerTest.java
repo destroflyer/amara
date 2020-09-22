@@ -14,6 +14,7 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent;
 import amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent;
 import amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent;
+import amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent;
 import amara.applications.ingame.entitysystem.systems.commands.ExecutePlayerCommandsSystem;
 import amara.applications.ingame.entitysystem.systems.units.shields.ShieldUtil;
 import amara.applications.ingame.network.messages.objects.commands.casting.SpellIndex;
@@ -41,6 +42,7 @@ public class CommandingPlayerTest extends GameLogicTest {
         character = createEntity(characterTemplate);
         entityWorld.setComponent(player, new ClientComponent(0));
         entityWorld.setComponent(player, new PlayerCharacterComponent(character));
+        entityWorld.setComponent(character, new IsCharacterComponent());
         entityWorld.setComponent(character, new PositionComponent(new Vector2f(10, 10)));
         entityWorld.setComponent(character, new DirectionComponent(new Vector2f(0, 1)));
         entityWorld.setComponent(character, new SightRangeComponent(30));
@@ -60,13 +62,11 @@ public class CommandingPlayerTest extends GameLogicTest {
     }
 
     protected Integer findEntity(String name) {
-        for (int entity : entityWorld.getEntitiesWithAny(NameComponent.class)) {
-            String currentName = entityWorld.getComponent(entity, NameComponent.class).getName();
-            if (name.equals(currentName)) {
-                return entity;
-            }
+        LinkedList<Integer> entities = findEntities(name);
+        if (entities.size() > 1) {
+            fail();
         }
-        return null;
+        return (entities.isEmpty() ? null : entities.get(0));
     }
 
     protected LinkedList<Integer> findEntities(String name) {
@@ -141,6 +141,22 @@ public class CommandingPlayerTest extends GameLogicTest {
 
     protected boolean isStunned(int entity) {
         return entityWorld.hasComponent(entity, IsStunnedComponent.class);
+    }
+
+    protected boolean isTargetable(int entity) {
+        return entityWorld.hasComponent(entity, IsTargetableComponent.class);
+    }
+
+    protected boolean isVulnerable(int entity) {
+        return entityWorld.hasComponent(entity, IsVulnerableComponent.class);
+    }
+
+    protected boolean isAutoAttackEnabled(int entity) {
+        return entityWorld.hasComponent(entity, IsAutoAttackEnabledComponent.class);
+    }
+
+    protected boolean isSpellsEnabled(int entity) {
+        return entityWorld.hasComponent(entity, IsSpellsEnabledComponent.class);
     }
 
     protected boolean hasBuff(int entity, String buffName) {
