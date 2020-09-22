@@ -22,6 +22,7 @@ public class CleanupUnitsSystem implements EntitySystem {
             AutoAttackComponent.class,
             SpellsComponent.class,
             MapSpellsComponent.class,
+            MovementComponent.class,
             InventoryComponent.class,
             ScoreComponent.class
         );
@@ -66,6 +67,10 @@ public class CleanupUnitsSystem implements EntitySystem {
         for (int entity : observer.getRemoved().getEntitiesWithAny(MapSpellsComponent.class)) {
             int[] spellEntities = observer.getRemoved().getComponent(entity, MapSpellsComponent.class).getSpellsEntities();
             CleanupUtil.tryCleanupEntities(entityWorld, spellEntities);
+        }
+        for (int entity : observer.getRemoved().getEntitiesWithAny(MovementComponent.class)) {
+            int movementEntity = observer.getRemoved().getComponent(entity, MovementComponent.class).getMovementEntity();
+            CleanupUtil.tryCleanupEntity(entityWorld, movementEntity);
         }
         for (int entity : observer.getRemoved().getEntitiesWithAny(InventoryComponent.class)) {
             int[] itemEntities = observer.getRemoved().getComponent(entity, InventoryComponent.class).getItemEntities();

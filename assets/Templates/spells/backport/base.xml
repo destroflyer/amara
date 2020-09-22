@@ -47,7 +47,7 @@
                             </entity>
                             <!--action cancelled-->
                             <entity id="actionCancelledTrigger">
-                                <actionCancelledTrigger/>
+                                <castCancelledTrigger/>
                                 <sourceCasterTarget/>
                                 <triggeredEffect>
                                     <entity>

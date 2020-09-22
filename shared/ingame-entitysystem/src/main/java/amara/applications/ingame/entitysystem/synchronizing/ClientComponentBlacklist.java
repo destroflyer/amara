@@ -262,6 +262,7 @@ public class ClientComponentBlacklist {
             RedirectReceivedBountiesComponent.class,
             RemainingAggroResetDurationComponent.class,
             SetNewCampCombatSpellsOnCooldownComponent.class,
+            SpellCastQueueComponent.class,
             WalkStepDistanceComponent.class,
             // units/animations
             AutoAttackAnimationComponent.class,
@@ -289,8 +290,8 @@ public class ClientComponentBlacklist {
             TargetTargetComponent.class,
             TeamTargetComponent.class,
             // units/effecttriggers/triggers
-            CastCancelledTriggerComponent.class,
             BuffTargetsAmountTriggerComponent.class,
+            CastCancelledTriggerComponent.class,
             CastingFinishedTriggerComponent.class,
             CollisionTriggerComponent.class,
             DeathTriggerComponent.class,

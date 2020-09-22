@@ -18,7 +18,7 @@ public class ApplyEnqueueSpellCastSystem implements EntitySystem {
         for (int effectImpactEntity : entityWorld.getEntitiesWithAll(ApplyEffectImpactComponent.class, EnqueueSpellCastComponent.class)) {
             int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
             EnqueueSpellCastComponent enqueueSpellCastComponent = entityWorld.getComponent(effectImpactEntity, EnqueueSpellCastComponent.class);
-            castSpellQueueSystem.enqueueSpellCast(targetEntity, enqueueSpellCastComponent.getSpellEntity(), enqueueSpellCastComponent.getTargetEntity());
+            castSpellQueueSystem.enqueueSpellCast(entityWorld, targetEntity, enqueueSpellCastComponent.getSpellEntity(), enqueueSpellCastComponent.getTargetEntity());
         }
     }
 }

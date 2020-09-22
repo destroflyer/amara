@@ -53,7 +53,7 @@ public class CastSpellOnCooldownWhileAttackingSystem implements EntitySystem{
                                 break;
                         }
                     }
-                    castSpellQueueSystem.enqueueSpellCast(casterEntity, spellEntity, targetEntity);
+                    castSpellQueueSystem.enqueueSpellCast(entityWorld, casterEntity, spellEntity, targetEntity);
                 }
             }
         }

@@ -5,7 +5,6 @@ import amara.applications.ingame.entitysystem.components.units.CurrentCastEffect
 import amara.applications.ingame.entitysystem.components.units.IsCastingComponent;
 import amara.applications.ingame.entitysystem.components.units.MovementComponent;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent;
-import amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerSourceComponent;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastCancelledTriggerComponent;

@@ -1,17 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.movement;
 
-import amara.applications.ingame.entitysystem.components.movements.*;
-import amara.applications.ingame.entitysystem.components.units.*;
-import amara.libraries.entitysystem.*;
+import amara.applications.ingame.entitysystem.components.movements.MovementTargetReachedComponent;
+import amara.applications.ingame.entitysystem.components.units.MovementComponent;
+import amara.applications.ingame.entitysystem.systems.units.UnitUtil;
+import amara.libraries.entitysystem.EntitySystem;
+import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Carl
- */
 public class FinishTargetedMovementsSystem implements EntitySystem {
 
     @Override
@@ -19,7 +13,7 @@ public class FinishTargetedMovementsSystem implements EntitySystem {
         for (int entity : entityWorld.getEntitiesWithAny(MovementComponent.class)) {
             int movementEntity = entityWorld.getComponent(entity, MovementComponent.class).getMovementEntity();
             if (entityWorld.hasComponent(movementEntity, MovementTargetReachedComponent.class)) {
-                entityWorld.removeComponent(entity, MovementComponent.class);
+                UnitUtil.cancelMovement(entityWorld, entity);
             }
         }
     }

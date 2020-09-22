@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package amara.applications.ingame.entitysystem.templates;
 
 import java.io.File;
@@ -17,16 +12,12 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.core.files.FileManager;
 import amara.libraries.entitysystem.synchronizing.ComponentField;
 
-/**
- *
- * @author Carl
- */
-public class ComponentsRegistrator_Generate{
-    
+public class ComponentsRegistrator_Generate {
+
     private static final String SOURCE_DIRECTORY = "../shared/ingame-entitysystem/src/main/java/";
     private static final String PACKAGE_COMPONENTS = "amara.applications.ingame.entitysystem.components.";
     private static final String LIST_SEPERATOR = ",";
-    private static final Class[] notXMLSupportedComponentClasses = new Class[]{
+    private static final Class[] notXMLSupportedComponentClasses = new Class[] {
         CustomEffectValuesComponent.class,
         AddComponentsComponent.class,
         RemoveComponentsComponent.class,
@@ -39,7 +30,8 @@ public class ComponentsRegistrator_Generate{
         CollisionGroupComponent.class,
         DamageHistoryComponent.class,
         HealthBarStyleComponent.class,
-        ShopGoldExpensesComponent.class
+        ShopGoldExpensesComponent.class,
+        SpellCastQueueComponent.class,
     };
     private static final String[] nativeDataTypes = new String[]{"boolean","int","long","float","double"};
     private static final String[] nativeDataTypes_Defaults = new String[]{"false","0","0","0","0"};

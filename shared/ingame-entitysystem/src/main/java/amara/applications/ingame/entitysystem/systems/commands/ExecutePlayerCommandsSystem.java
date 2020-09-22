@@ -98,25 +98,25 @@ public class ExecutePlayerCommandsSystem implements EntitySystem {
                 } else if (command instanceof CastSelfcastSpellCommand) {
                     CastSelfcastSpellCommand castSelfcastSpellCommand = (CastSelfcastSpellCommand) command;
                     int spellEntity = getSpellEntity(entityWorld, characterEntity, castSelfcastSpellCommand.getSpellIndex());
-                    castSpellQueueSystem.enqueueSpellCast(characterEntity, spellEntity, -1);
+                    castSpellQueueSystem.enqueueSpellCast(entityWorld, characterEntity, spellEntity, -1);
                 } else if (command instanceof CastSingleTargetSpellCommand) {
                     CastSingleTargetSpellCommand castSingleTargetSpellCommand = (CastSingleTargetSpellCommand) command;
                     int spellEntity = getSpellEntity(entityWorld, characterEntity, castSingleTargetSpellCommand.getSpellIndex());
-                    castSpellQueueSystem.enqueueSpellCast(characterEntity, spellEntity, castSingleTargetSpellCommand.getTargetEntityID());
+                    castSpellQueueSystem.enqueueSpellCast(entityWorld, characterEntity, spellEntity, castSingleTargetSpellCommand.getTargetEntityID());
                 } else if (command instanceof CastLinearSkillshotSpellCommand) {
                     CastLinearSkillshotSpellCommand castLinearSkillshotSpellCommand = (CastLinearSkillshotSpellCommand) command;
                     int spellEntity = getSpellEntity(entityWorld, characterEntity, castLinearSkillshotSpellCommand.getSpellIndex());
                     int targetEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetEntity, new TemporaryComponent());
                     entityWorld.setComponent(targetEntity, new DirectionComponent(castLinearSkillshotSpellCommand.getDirection().clone()));
-                    castSpellQueueSystem.enqueueSpellCast(characterEntity, spellEntity, targetEntity);
+                    castSpellQueueSystem.enqueueSpellCast(entityWorld, characterEntity, spellEntity, targetEntity);
                 } else if (command instanceof CastPositionalSkillshotSpellCommand) {
                     CastPositionalSkillshotSpellCommand castPositionalSkillshotSpellCommand = (CastPositionalSkillshotSpellCommand) command;
                     int spellEntity = getSpellEntity(entityWorld, characterEntity, castPositionalSkillshotSpellCommand.getSpellIndex());
                     int targetEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetEntity, new TemporaryComponent());
                     entityWorld.setComponent(targetEntity, new PositionComponent(castPositionalSkillshotSpellCommand.getPosition().clone()));
-                    castSpellQueueSystem.enqueueSpellCast(characterEntity, spellEntity, targetEntity);
+                    castSpellQueueSystem.enqueueSpellCast(entityWorld, characterEntity, spellEntity, targetEntity);
                 } else if (command instanceof ShowReactionCommand) {
                     ShowReactionCommand showReactionCommand = (ShowReactionCommand) command;
                     entityWorld.setComponent(characterEntity, new ReactionComponent(showReactionCommand.getReaction(), 2));

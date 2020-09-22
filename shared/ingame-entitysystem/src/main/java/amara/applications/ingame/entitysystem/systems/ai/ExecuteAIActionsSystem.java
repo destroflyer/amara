@@ -65,7 +65,7 @@ public class ExecuteAIActionsSystem implements EntitySystem {
                 ExecutePlayerCommandsSystem.tryAutoAttack(entityWorld, characterEntity, autoAttackAction.getTargetEntity());
             } else if (action instanceof CastSpellAction) {
                 CastSpellAction castSpellAction = (CastSpellAction) action;
-                castSpellQueueSystem.enqueueSpellCast(characterEntity, castSpellAction.getSpellEntity(), castSpellAction.getTargetEntity());
+                castSpellQueueSystem.enqueueSpellCast(entityWorld, characterEntity, castSpellAction.getSpellEntity(), castSpellAction.getTargetEntity());
             } else if (action instanceof BuyItemAction) {
                 BuyItemAction buyItemAction = (BuyItemAction) action;
                 ShopUtil.buy(entityWorld, characterEntity, buyItemAction.getItemId(), map);

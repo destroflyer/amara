@@ -4,15 +4,16 @@
  */
 package amara.applications.ingame.entitysystem.systems.movement;
 
-import com.jme3.math.Vector2f;
 import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.systems.physics.IntersectionObserver;
+import amara.applications.ingame.entitysystem.systems.units.UnitUtil;
 import amara.libraries.entitysystem.*;
 import amara.libraries.physics.intersectionHelper.PolyMapManager;
 import amara.libraries.physics.shapes.*;
+import com.jme3.math.Vector2f;
 
 /**
  *
@@ -82,7 +83,7 @@ public class TargetedMovementSystem implements EntitySystem{
                     entityWorld.removeEntity(entity);
                 }
                 else{
-                    entityWorld.removeComponent(entity, MovementComponent.class);
+                    UnitUtil.cancelMovement(entityWorld, entity);
                 }
             }
         }

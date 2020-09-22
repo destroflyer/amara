@@ -29,7 +29,6 @@ import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.specials.erika.*;
 import amara.applications.ingame.entitysystem.components.spells.placeholders.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
-import amara.applications.ingame.entitysystem.systems.cleanup.CleanupTemporaryTargetsUtil;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 import amara.libraries.expressions.*;
@@ -300,9 +299,6 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                 }
             }
             entityWorld.removeEntity(effectCast.getId());
-            if (effectCastTargetComponent != null) {
-                CleanupTemporaryTargetsUtil.tryRemoveTemporaryTargetEntity(entityWorld, effectCastTargetComponent.getTargetEntity());
-            }
             appliedEffectEntities.add(effect.getId());
         }
         cleanupUnreferencedAppliedEffects(entityWorld);

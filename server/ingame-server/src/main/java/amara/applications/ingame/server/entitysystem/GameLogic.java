@@ -139,7 +139,6 @@ public class GameLogic {
         entitySystems.add(new CampResetSystem());
         entitySystems.add(new CheckDeadCampsRespawnSystem());
         entitySystems.add(new CampSpawnSystem());
-        entitySystems.add(new RemoveFinishedMovementsSystem());
         entitySystems.add(new InnateWalkSystem());
         entitySystems.add(new PlayMovementAnimationsSystem());
         entitySystems.add(new UpdateWalkMovementsSystem());
@@ -175,9 +174,9 @@ public class GameLogic {
         entitySystems.add(new CleanupUnitsSystem());
         entitySystems.add(new CleanupSpellsSystem());
         entitySystems.add(new CleanupPassivesSystem());
-        entitySystems.add(new CleanupMovementsSystem());
         entitySystems.add(new CleanupBuffAreasSystem());
         entitySystems.add(new CleanupBuffsSystem());
+        entitySystems.add(new CleanupTemporaryEntitiesSystem());
     }
 
     public LinkedList<EntitySystem> getEntitySystems() {

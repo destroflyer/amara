@@ -5507,6 +5507,7 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.SightRangeComponent(range);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.SpellCastQueueComponent.class);
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.SpellsComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.SpellsComponent.class.getDeclaredField("spellsEntities"), componentFieldSerializer_Entity);
