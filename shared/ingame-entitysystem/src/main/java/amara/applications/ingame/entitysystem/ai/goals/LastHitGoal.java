@@ -102,7 +102,7 @@ public class LastHitGoal extends Goal{
         for(int minionEntity : enemyMinionEntities){
             Vector2f minionPosition = entityWorld.getComponent(minionEntity, PositionComponent.class).getPosition();
             Vector2f directionToAlliedStructure = alliedStructurePosition.subtract(minionPosition).normalizeLocal();
-            Vector2f lasthittablePosition = minionPosition.add(directionToAlliedStructure.mult(autoAttackRange + 10));
+            Vector2f lasthittablePosition = minionPosition.add(directionToAlliedStructure.mult(autoAttackRange + 5));
 
             float maximumHealth = entityWorld.getComponent(minionEntity, MaximumHealthComponent.class).getValue();
             float health = entityWorld.getComponent(minionEntity, HealthComponent.class).getValue();
