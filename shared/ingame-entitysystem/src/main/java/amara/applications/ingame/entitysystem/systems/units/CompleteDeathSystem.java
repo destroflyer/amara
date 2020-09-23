@@ -21,10 +21,13 @@ public class CompleteDeathSystem implements EntitySystem {
     }
 
     public static void killCompletely(EntityWorld entityWorld, int entity) {
-        triggerRemoveEffects(entityWorld, entity);
-        UnitUtil.cancelAction(entityWorld, entity);
-        ApplyRemoveBuffsSystem.removeAllBuffs(entityWorld, entity);
-        entityWorld.removeEntity(entity);
+        // Checking if the entity even exists saves time and most importantly avoids multiple triggers of the same remove trigger
+        if (entityWorld.hasEntity(entity)) {
+            triggerRemoveEffects(entityWorld, entity);
+            UnitUtil.cancelAction(entityWorld, entity);
+            ApplyRemoveBuffsSystem.removeAllBuffs(entityWorld, entity);
+            entityWorld.removeEntity(entity);
+        }
     }
 
     private static void triggerRemoveEffects(EntityWorld entityWorld, int entity) {

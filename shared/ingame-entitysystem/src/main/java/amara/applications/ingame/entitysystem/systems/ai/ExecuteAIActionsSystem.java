@@ -39,13 +39,14 @@ public class ExecuteAIActionsSystem implements EntitySystem {
     }
 
     private boolean checkBotDecisionInterval(Bot bot, float deltaSeconds) {
-        Float timeSinceLastDecision = timesSinceLastDecision.get(bot);
-        if (timeSinceLastDecision == null) {
-            timeSinceLastDecision = 0f;
-        }
+        float timeSinceLastDecision = timesSinceLastDecision.getOrDefault(bot, 0f);
         timeSinceLastDecision += deltaSeconds;
+        boolean hasEnoughTimePassed = (timeSinceLastDecision > bot.getDecisionInterval());
+        if (hasEnoughTimePassed) {
+            timeSinceLastDecision = 0;
+        }
         timesSinceLastDecision.put(bot, timeSinceLastDecision);
-        return (timeSinceLastDecision > bot.getDecisionInterval());
+        return hasEnoughTimePassed;
     }
 
     private void executeBotActions(EntityWorld entityWorld, Bot bot, int characterEntity) {
