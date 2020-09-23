@@ -1783,6 +1783,14 @@ public class ComponentsRegistrator{
         });
         //general
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.general.AddComponentsComponent.class);
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.general.AddCustomCleanupComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.general.AddCustomCleanupComponent>("addCustomCleanup"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.general.AddCustomCleanupComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.effects.general.AddCustomCleanupComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.general.AddEffectTriggersComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.general.AddEffectTriggersComponent.class.getDeclaredField("effectTriggerEntities"), componentFieldSerializer_Entity);

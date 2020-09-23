@@ -216,6 +216,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                 EntityUtil.transferComponents(entityWorld, effect.getId(), effectImpact.getId(), new Class[]{
                     AddComponentsComponent.class,
                     RemoveComponentsComponent.class,
+                    AddCustomCleanupComponent.class,
                     FinishObjectiveComponent.class,
                     AddEffectTriggersComponent.class,
                     AddNewEffectTriggersComponent.class,

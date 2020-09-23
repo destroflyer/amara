@@ -65,7 +65,7 @@
                 <removeBuff>#buff</removeBuff>
                 <addBuff duration="[slowDuration]">
                     <entity>
-                        <name>Aland's Target</name>
+                        <name>Previous Aland Target</name>
                         <description>This unit has decreased walk speed and receives magic damage over time.</description>
                         <buffIcon>spells/aland_passive</buffIcon>
                         <buffVisualisation>aland_passive_full</buffVisualisation>

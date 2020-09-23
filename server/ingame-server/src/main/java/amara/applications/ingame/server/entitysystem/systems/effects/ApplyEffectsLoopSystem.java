@@ -116,6 +116,7 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyPlayAnimationsSystem());
         add(new ApplyStopAnimationsSystem());
         add(new ApplyAddComponentsSystem());
+        add(new ApplyAddCustomCleanupSystem());
         add(new ApplyFinishObjectivesSystem());
         add(new ApplyRemoveComponentsSystem());
         add(new ApplyRemoveEntitySystem());

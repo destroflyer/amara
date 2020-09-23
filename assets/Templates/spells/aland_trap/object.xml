@@ -2,14 +2,16 @@
     <value name="duration">1</value>
     <value name="moveTriggerDistance">0.75</value>
     <entity id="object">
+        <name>The Bear Trap</name>
         <model>Models/bear_trap/skin.xml</model>
-        <animation>
+        <idleAnimation>
             <entity>
                 <name>open</name>
                 <loopDuration>0.5</loopDuration>
                 <freezeAfterPlaying/>
             </entity>
-        </animation>
+        </idleAnimation>
+        <animation>#idleAnimation</animation>
         <hitbox>
             <circle radius="1"/>
         </hitbox>
@@ -29,9 +31,9 @@
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
         <triggerDelay>0.5</triggerDelay>
-        <triggerOnce/>
+        <triggerOnce>true</triggerOnce>
     </entity>
-    <!--trigger spell effects-->
+    <!--collision -> trigger spell effects-->
     <entity>
         <collisionTrigger>
             <entity id="collisionRules">
@@ -63,7 +65,6 @@
                                 <triggerSource>[parameter0]</triggerSource>
                             </entity>
                         </onBuffRemoveEffectTriggers>
-                        <customCleanup/>
                     </entity>
                 </addBuff>
                 <addStacks stacks="1">#buff</addStacks>
@@ -96,7 +97,6 @@
                                             </entity>
                                         </triggeredEffect>
                                         <triggerOnce>true</triggerOnce>
-                                        <customCleanup/>
                                     </entity>
                                 </addEffectTriggers>
                                 <playAudio>
@@ -108,7 +108,6 @@
                             </entity>
                         </triggeredEffect>
                         <triggerOnce>true</triggerOnce>
-                        <customCleanup/>
                     </entity>
                 </addEffectTriggers>
                 <playAudio>
@@ -120,8 +119,21 @@
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
+        <triggerOnce>true</triggerOnce>
     </entity>
-    <!--deactivate hitbox-->
+    <!--collision -> prevent too early cleanups-->
+    <entity>
+        <collisionTrigger>#collisionRules</collisionTrigger>
+        <customTarget>#buff,#movementTrigger1,#movementTrigger2</customTarget>
+        <triggeredEffect>
+            <entity>
+                <addCustomCleanup/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#object</triggerSource>
+        <triggerOnce>true</triggerOnce>
+    </entity>
+    <!--collision -> deactivate hitbox-->
     <entity>
         <collisionTrigger>#collisionRules</collisionTrigger>
         <sourceTarget/>
@@ -139,8 +151,9 @@
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
+        <triggerOnce>true</triggerOnce>
     </entity>
-    <!--remove object-->
+    <!--collision -> delayed remove object-->
     <entity>
         <collisionTrigger>#collisionRules</collisionTrigger>
         <sourceTarget/>
@@ -151,5 +164,6 @@
         </triggeredEffect>
         <triggerSource>#object</triggerSource>
         <triggerDelay>0.5</triggerDelay>
+        <triggerOnce>true</triggerOnce>
     </entity>
 </template>

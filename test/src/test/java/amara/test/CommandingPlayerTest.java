@@ -159,6 +159,10 @@ public class CommandingPlayerTest extends GameLogicTest {
         return entityWorld.hasComponent(entity, IsSpellsEnabledComponent.class);
     }
 
+    protected boolean isStealthed(int entity) {
+        return entityWorld.hasComponent(entity, IsStealthedComponent.class);
+    }
+
     protected boolean hasBuff(int entity, String buffName) {
         return (getBuffStatusEntity(entity, buffName) != null);
     }
