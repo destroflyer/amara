@@ -11,7 +11,7 @@ import amara.libraries.applications.display.appstates.BaseDisplayAppState;
 public class PreloadAssetsAppState extends BaseDisplayAppState<DisplayApplication> {
 
     private static final String[] textureFileExtensions = new String[] {
-        "png","jpg"
+        "png", "jpg"
     };
 
     @Override
