@@ -42,8 +42,4 @@ public abstract class SimpleHUDAttachmentSystem extends SimpleVisualAttachmentSy
     protected Vector3f getWorldOffset(EntityWorld entityWorld, int entity) {
         return Vector3f.ZERO;
     }
-
-    protected abstract Spatial createVisualAttachment(EntityWorld entityWorld, int entity);
-
-    protected abstract void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment);
 }

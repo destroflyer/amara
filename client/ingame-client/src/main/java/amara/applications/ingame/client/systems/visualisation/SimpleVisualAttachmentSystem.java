@@ -27,18 +27,25 @@ public abstract class SimpleVisualAttachmentSystem implements EntitySystem {
     public void update(EntityWorld entityWorld, float deltaSeconds) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, allComponentClasses);
         for (int entity : observer.getNew().getEntitiesWithAny(primaryComponentClasses)) {
-            if (entityWorld.hasAllComponents(entity, primaryComponentClasses)) {
+            if (shouldHaveVisualAttachment(entityWorld, entity)) {
                 createAndAttachVisualAttachment(entityWorld, entity);
             }
         }
         for (int entity : observer.getChanged().getEntitiesWithAny(primaryComponentClasses)) {
-            Spatial visualAttachment = getVisualAttachment(entity);
-            if (visualAttachment != null) {
+            if (shouldHaveVisualAttachment(entityWorld, entity)) {
+                Spatial visualAttachment = getVisualAttachment(entity);
+                if (visualAttachment == null) {
+                    visualAttachment = createAndAttachVisualAttachment(entityWorld, entity);
+                }
                 updateVisualAttachment(entityWorld, entity, visualAttachment);
+            } else {
+                detach(entity);
             }
         }
         for (int entity : observer.getRemoved().getEntitiesWithAny(primaryComponentClasses)) {
-            detach(entity);
+            if (!shouldHaveVisualAttachment(entityWorld, entity)) {
+                detach(entity);
+            }
         }
         for (Class<?> secondaryComponentClass : secondaryComponentClasses) {
             for (int entity : observer.getNew().getEntitiesWithAny(secondaryComponentClass)) {
@@ -67,13 +74,12 @@ public abstract class SimpleVisualAttachmentSystem implements EntitySystem {
         return entity;
     }
 
-    protected void createAndAttachVisualAttachment(EntityWorld entityWorld, int entity) {
+    protected Spatial createAndAttachVisualAttachment(EntityWorld entityWorld, int entity) {
         Spatial visualAttachment = createVisualAttachment(entityWorld, entity);
-        if (visualAttachment != null) {
-            visualAttachment.setName(getVisualAttachmentID(entity));
-            updateVisualAttachment(entityWorld, entity, visualAttachment);
-            attach(entity, visualAttachment);
-        }
+        visualAttachment.setName(getVisualAttachmentID(entity));
+        updateVisualAttachment(entityWorld, entity, visualAttachment);
+        attach(entity, visualAttachment);
+        return visualAttachment;
     }
 
     protected abstract void attach(int entity, Spatial visualAttachment);
@@ -82,9 +88,15 @@ public abstract class SimpleVisualAttachmentSystem implements EntitySystem {
 
     protected abstract Spatial getVisualAttachment(int entity);
 
+    protected boolean shouldHaveVisualAttachment(EntityWorld entityWorld, int entity) {
+        return entityWorld.hasAllComponents(entity, primaryComponentClasses);
+    }
+
     protected abstract Spatial createVisualAttachment(EntityWorld entityWorld, int entity);
 
-    protected abstract void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment);
+    protected void updateVisualAttachment(EntityWorld entityWorld, int entity, Spatial visualAttachment) {
+
+    }
 
     protected String getVisualAttachmentID(int entity) {
         return ("visualAttachment_" + hashCode() + "_" + entity);

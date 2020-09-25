@@ -244,10 +244,6 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         }
     }
 
-    public GameSelectionPlayer[][] getTeams() {
-        return teams;
-    }
-
     public void setPlayerEntity(int playerEntity) {
         this.playerEntity = playerEntity;
     }

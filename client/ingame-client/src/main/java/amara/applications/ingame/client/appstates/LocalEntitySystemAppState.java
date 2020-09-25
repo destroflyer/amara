@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.appstates;
 
 import amara.applications.ingame.client.IngameClientApplication;
@@ -24,15 +20,8 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
-/**
- *
- * @author Carl
- */
 public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<IngameClientApplication> {
 
-    public LocalEntitySystemAppState() {
-        
-    }
     private Node entitiesNode = new Node();
     private EntitySceneMap entitySceneMap = new EntitySceneMap(entitiesNode);
     private EntitySystem[] parallelNetworkSystems = ParallelNetworkSystems.generateSystems();
@@ -53,8 +42,6 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         PositionSystem positionSystem = new PositionSystem(entitySceneMap, mapHeightmap);
         addEntitySystem(positionSystem);
         addEntitySystem(new CollisionDebugSystem(getAppState(MapObstaclesAppState.class).getObstaclesNode()));
-        ColorizerSystem colorizerSystem = new ColorizerSystem(entitySceneMap);
-        addEntitySystem(new BushesSystem(entitySceneMap, colorizerSystem, playerAppState.getPlayerEntity()));
         addEntitySystem(new TeamModelSystem(playerAppState.getPlayerTeamSystem()));
         addEntitySystem(new ModelSystem(entitySceneMap, mainApplication));
         addEntitySystem(new DirectionSystem(entitySceneMap));
@@ -92,8 +79,6 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new BuffVisualisationSystem_Turbo(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Wither(entitySceneMap));
         addEntitySystem(new BuffVisualisationSystem_Golden_Eagle(entitySceneMap));
-        addEntitySystem(new StealthSystem(colorizerSystem));
-        addEntitySystem(colorizerSystem);
     }
 
     public void onInitialWorldLoaded() {
@@ -104,6 +89,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         HUDAttachmentsSystem hudAttachmentsSystem = new HUDAttachmentsSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapAppState.getMapHeightmap(), healthBarStyleManager, playerAppState.getOwnTeamVisionSystem());
         addEntitySystem(hudAttachmentsSystem);
         EntityHeightMap entityHeightMap = new EntityHeightMap(entitySceneMap);
+        ColorizerSystem colorizerSystem = new ColorizerSystem(entitySceneMap);
         addEntitySystem(new HealthBarSystem(hudAttachmentsSystem, entityHeightMap, healthBarStyleManager, playerAppState.getPlayerTeamSystem()));
         addEntitySystem(new StunVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new SilenceVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
@@ -114,8 +100,11 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new MinionAggroIndicatorSystem(hudAttachmentsSystem, entityHeightMap, playerAppState.getPlayerEntity()));
         addEntitySystem(new ReactionVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new PopupSystem(hudAttachmentsSystem, entityHeightMap));
+        addEntitySystem(new BushesSystem(entitySceneMap, colorizerSystem, playerAppState.getPlayerEntity()));
+        addEntitySystem(new StealthSystem(colorizerSystem));
         addEntitySystem(new WaterSpeedSystem(mapAppState));
         addEntitySystem(new CinematicsSystem(getAppState(CinematicAppState.class)));
+        addEntitySystem(colorizerSystem);
         isInitialWorldLoaded = true;
     }
 

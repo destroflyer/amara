@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.visualisation;
 
 import com.jme3.font.BitmapFont;
@@ -19,10 +15,6 @@ import amara.applications.ingame.entitysystem.components.units.PopupComponent;
 import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Carl
- */
 public class PopupSystem extends TopHUDAttachmentSystem {
 
     public PopupSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap) {
