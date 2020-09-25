@@ -6,9 +6,6 @@ import amara.libraries.applications.headless.appstates.*;
 import amara.libraries.network.HostInformation;
 import amara.libraries.network.exceptions.*;
 
-/**
- * @author Carl
- */
 public class MasterserverClientApplication extends HeadlessApplication {
 
     public MasterserverClientApplication(HostInformation hostInformation) throws ServerConnectionException, ServerConnectionTimeoutException {
@@ -17,6 +14,7 @@ public class MasterserverClientApplication extends HeadlessApplication {
         stateManager.attach(new PlayerProfilesAppState());
         stateManager.attach(new PlayerStatiAppState());
         stateManager.attach(new CharactersAppState());
+        stateManager.attach(new MapsAppState());
         stateManager.attach(new LoginAppState());
     }
     private static MasterserverClientApplication instance;

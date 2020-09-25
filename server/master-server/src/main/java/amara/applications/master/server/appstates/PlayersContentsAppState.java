@@ -1,26 +1,20 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.master.server.appstates;
 
 import java.util.LinkedList;
-import amara.applications.master.network.messages.objects.*;
+
+import amara.applications.master.network.messages.objects.GameCharacter;
+import amara.applications.master.network.messages.objects.GameCharacterSkin;
+import amara.applications.master.network.messages.objects.OwnedGameCharacter;
 import amara.libraries.database.QueryResult;
 
-/**
- *
- * @author Carl
- */
 public class PlayersContentsAppState extends ServerBaseAppState {
-
-    private LinkedList<GameCharacterSkin> tmpOwnedSkins = new LinkedList<>();
 
     public OwnedGameCharacter[] getOwnedCharacters(int playerId) {
         DatabaseAppState databaseAppState = getAppState(DatabaseAppState.class);
-        String whereClause = (canSeeNonPublicCharacters(playerId) ? "" : " WHERE is_public = 1");
+        String whereClause = (canSeeNonPublicContent(playerId) ? "" : " WHERE is_public = 1");
         QueryResult result_Characters = databaseAppState.getQueryResult("SELECT id, name, title, lore, is_public FROM characters" + whereClause);
         LinkedList<OwnedGameCharacter> ownedCharacters = new LinkedList<>();
+        LinkedList<GameCharacterSkin> tmpOwnedSkins = new LinkedList<>();
         while (result_Characters.next()) {
             // Character
             int characterId = result_Characters.getInteger("id");
@@ -52,7 +46,20 @@ public class PlayersContentsAppState extends ServerBaseAppState {
         return ownedCharacters.toArray(new OwnedGameCharacter[0]);
     }
 
-    private boolean canSeeNonPublicCharacters(int playerId) {
+    public String[] getAvailableMapNames(int playerId) {
+        LinkedList<String> mapNames = new LinkedList<>();
+        mapNames.add("arama");
+        mapNames.add("etherdesert");
+        if (canSeeNonPublicContent(playerId)) {
+            mapNames.add("testmap");
+            mapNames.add("vegas");
+            mapNames.add("destroforest");
+            mapNames.add("techtest");
+        }
+        return mapNames.toArray(new String[0]);
+    }
+
+    private boolean canSeeNonPublicContent(int playerId) {
         // Should be configured somewhere else, e.g. in database
         return ((playerId == 1) || (playerId == 2));
     }

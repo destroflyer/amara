@@ -21,7 +21,7 @@ public class PanPlay extends javax.swing.JPanel{
         panLobby = new PanLobby();
         panGameSelection = new PanGameSelection();
         panIngame = new PanIngame();
-        displaySelectGameModelPanel();
+        displaySelectGameModePanel();
         NetworkClient networkClient = MasterserverClientUtil.getNetworkClient();
         networkClient.addMessageBackend(new GenericInformationBackend(panMainMenu));
         networkClient.addMessageBackend(new UpdateLobbyBackend(this));
@@ -37,7 +37,7 @@ public class PanPlay extends javax.swing.JPanel{
     private PanGameSelection panGameSelection;
     private PanIngame panIngame;
     
-    public void displaySelectGameModelPanel(){
+    public void displaySelectGameModePanel(){
         setDisplayedPanel(panSelectGameMode);
     }
     

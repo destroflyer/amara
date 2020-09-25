@@ -22,14 +22,13 @@ import amara.core.files.FileAssets;
 import amara.libraries.applications.windowed.FrameUtil;
 import amara.libraries.network.NetworkClient;
 
-/**
- *
- * @author Carl
- */
-public class PanLobby extends javax.swing.JPanel{
+import javax.swing.DefaultComboBoxModel;
 
-    public PanLobby(){
+public class PanLobby extends javax.swing.JPanel {
+
+    public PanLobby() {
         initComponents();
+        cbxMapName.setModel(new DefaultComboBoxModel(MasterserverClientUtil.getAvailableMaps()));
         lblMapIcon.setIcon(FileAssets.getImageIcon("Interface/client/unknown.jpg", 120, 120));
     }
     private Lobby lobby;
@@ -161,7 +160,6 @@ public class PanLobby extends javax.swing.JPanel{
             .addGap(0, 453, Short.MAX_VALUE)
         );
 
-        cbxMapName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "testmap", "destroforest", "etherdesert", "arama", "techtest" }));
         cbxMapName.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxMapNameItemStateChanged(evt);

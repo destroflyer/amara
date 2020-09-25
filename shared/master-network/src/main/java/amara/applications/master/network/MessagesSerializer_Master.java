@@ -37,6 +37,7 @@ public class MessagesSerializer_Master {
 
             Message_AcceptGameSelection.class,
             Message_AddLobbyBot.class,
+            Message_AvailableMaps.class,
             Message_CancelLobbyQueue.class,
             Message_CreateLobby.class,
             Message_GameSelectionAcceptRequest.class,

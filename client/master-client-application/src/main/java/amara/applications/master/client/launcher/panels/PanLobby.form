@@ -158,17 +158,6 @@
       </Layout>
     </Container>
     <Component class="javax.swing.JComboBox" name="cbxMapName">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
-            <StringItem index="0" value="testmap"/>
-            <StringItem index="1" value="destroforest"/>
-            <StringItem index="2" value="etherdesert"/>
-            <StringItem index="3" value="arama"/>
-            <StringItem index="4" value="techtest"/>
-          </StringArray>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbxMapNameItemStateChanged"/>
       </Events>
