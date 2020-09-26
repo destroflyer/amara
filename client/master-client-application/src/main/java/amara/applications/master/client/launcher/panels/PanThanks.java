@@ -80,6 +80,8 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("Mahmoud Saleh", "Icon set \"Mini Icons\"", "Interface/client/audio.png", "https://iconarchive.com/artist/salehhh.html"),
         new Thanks("Pixel Mixer", "Icon set \"Basic Icons\"", "Interface/client/user.png", "https://iconarchive.com/artist/pixelmixer.html"),
         new Thanks("juanello", "Cursors \"Warrior Gloves\"", "Interface/client/thanks/realworld_graphics.png", "http://rw-designer.com/user-art/19010"),
+        new Thanks("Digital Worlds JSC", "Icon sets \"Loot Icons Pack Vol.1-6\"", "Interface/client/thanks/unity.png", "https://assetstore.unity.com/publishers/6364"),
+        new Thanks("PONETI", "Icon sets \"500 Skill Icons Vol.1-2\"", "Interface/client/thanks/unity.png", "https://assetstore.unity.com/publishers/38930"),
         new Thanks("Temporalcortex", "HUD Overlay \"Metal Tech\"", "Interface/client/thanks/youtube.png", "https://youtube.com/Temporalcortex"),
         // Textures
         new Thanks("Twitch", "Reaction Emotes", "Interface/client/thanks/twitch.png", "https://twitch.tv"),
