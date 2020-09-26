@@ -144,10 +144,12 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
     private void initializeFilters() {
         for (MapFilter mapFilter : map.getFilters()) {
             if (mapFilter instanceof MapFilter_SSAO) {
-                MapFilter_SSAO mapFilter_SSAO = (MapFilter_SSAO) mapFilter;
-                SSAOFilter ssaoFilter = new SSAOFilter(mapFilter_SSAO.getSampleRadius(), mapFilter_SSAO.getIntensity(), mapFilter_SSAO.getScale(), mapFilter_SSAO.getBias());
-                ssaoFilter.setApproximateNormals(true);
-                addFilter(ssaoFilter);
+                if (Settings.getBoolean("ssao")) {
+                    MapFilter_SSAO mapFilter_SSAO = (MapFilter_SSAO) mapFilter;
+                    SSAOFilter ssaoFilter = new SSAOFilter(mapFilter_SSAO.getSampleRadius(), mapFilter_SSAO.getIntensity(), mapFilter_SSAO.getScale(), mapFilter_SSAO.getBias());
+                    ssaoFilter.setApproximateNormals(true);
+                    addFilter(ssaoFilter);
+                }
             }
         }
     }
