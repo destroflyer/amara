@@ -7,9 +7,6 @@ import amara.libraries.applications.headless.applications.HeadlessApplication;
 import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
 import amara.libraries.network.SubNetworkServer;
 
-/**
- * @author Carl
- */
 public class IngameServerApplication extends HeadlessApplication {
 
     public IngameServerApplication(MasterserverServerApplicationInterface masterServer, SubNetworkServer subNetworkServer, Game game) {
@@ -34,6 +31,10 @@ public class IngameServerApplication extends HeadlessApplication {
         } catch (Exception ex) {
             masterServer.onGameCrashed(this, ex);
         }
+    }
+
+    public void onGameOver() {
+        masterServer.onGameOver(this);
     }
 
     public MasterserverServerApplicationInterface getMasterServer() {
