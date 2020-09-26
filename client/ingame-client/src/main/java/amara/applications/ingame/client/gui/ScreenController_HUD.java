@@ -465,11 +465,11 @@ public class ScreenController_HUD extends GameScreenController {
     public void setStats_PlayerScore_CreepScore(int kills){
         getTextRenderer("stats_player_score_creepscore").setText("" + kills);
     }
-    
-    public void setGameTime(float time){
-        getTextRenderer("game_time").setText(GUIUtil.getFormattedTime(time));
+
+    public void setGameTime(String formattedTime) {
+        getTextRenderer("game_time").setText(formattedTime);
     }
-    
+
     public void setMinimapImage(Texture2D texture2D){
         getImageRenderer("minimap").setImage(createImage(texture2D));
     }
