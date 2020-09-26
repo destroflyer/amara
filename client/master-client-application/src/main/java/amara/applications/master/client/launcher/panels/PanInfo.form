@@ -63,7 +63,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Amara&lt;/b&gt; is a free, real-time online game that was developed using the JMonkeyEngine. If you paid for this program, please report the seller.&lt;br/&gt;&lt;br/&gt;Regarding questions or problems, you can contact &lt;u&gt;support@destrostudios.com&lt;/u&gt;.&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Amara&lt;/b&gt; is a free, real-time online game that was developed using jMonkeyEngine 3. If you paid for this program, please report the seller.&lt;br/&gt;&lt;br/&gt;Regarding questions or problems, you can contact &lt;u&gt;support@destrostudios.com&lt;/u&gt;.&lt;/html&gt;"/>
         <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>

@@ -42,10 +42,10 @@ public class PanInfo extends javax.swing.JPanel{
         setBackground(new java.awt.Color(30, 30, 30));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("<html><b>Amara</b> is a free, real-time online game that was developed using the JMonkeyEngine. If you paid for this program, please report the seller.<br/><br/>Regarding questions or problems, you can contact <u>support@destrostudios.com</u>.</html>");
+        jLabel1.setText("<html><b>Amara</b> is a free, real-time online game that was developed using jMonkeyEngine 3. If you paid for this program, please report the seller.<br/><br/>Regarding questions or problems, you can contact <u>support@destrostudios.com</u>.</html>");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Licence", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Licence", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), java.awt.Color.white)); // NOI18N
         jPanel1.setOpaque(false);
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
