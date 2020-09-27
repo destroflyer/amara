@@ -1,7 +1,7 @@
 <template>
     <entity id="spell">
         <name>Blessing of Might</name>
-        <description>Increases your cooldown speed by 1000000% permanently and grants 1000000 gold.</description>
+        <description>Increases your cooldown speed by 10000% and mana regeneration per second by 10000 permanently and grants 1000000 gold.</description>
         <spellVisualisation>blessing_of_might</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
@@ -33,6 +33,7 @@
                                 <buffIcon>spells/blessing_of_might</buffIcon>
                                 <continuousAttributes>
                                     <entity>
+                                        <bonusFlatManaRegeneration>10000</bonusFlatManaRegeneration>
                                         <bonusPercentageCooldownSpeed>10000</bonusPercentageCooldownSpeed>
                                     </entity>
                                 </continuousAttributes>
