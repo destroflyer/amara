@@ -12,6 +12,7 @@ import amara.applications.ingame.entitysystem.systems.effects.damage.*;
 import amara.applications.ingame.entitysystem.systems.effects.game.*;
 import amara.applications.ingame.entitysystem.systems.effects.general.*;
 import amara.applications.ingame.entitysystem.systems.effects.heal.*;
+import amara.applications.ingame.entitysystem.systems.effects.mana.*;
 import amara.applications.ingame.entitysystem.systems.effects.movement.*;
 import amara.applications.ingame.entitysystem.systems.effects.physics.*;
 import amara.applications.ingame.entitysystem.systems.effects.players.*;
@@ -72,6 +73,7 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplyPhysicalDamageSystem());
         add(new ApplyMagicDamageSystem());
         add(new ApplyHealSystem());
+        add(new ApplyAddManaSystem());
         add(new ApplyStopSystem());
         add(new ApplyMoveSystem());
         add(new ApplyTeleportSystem());

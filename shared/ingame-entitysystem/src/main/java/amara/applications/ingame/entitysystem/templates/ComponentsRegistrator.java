@@ -1985,6 +1985,25 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.heals.ResultingHealComponent(value);
             }
         });
+        //mana
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent>("addMana"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent construct(EntityWorld entityWorld, Element element){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent(value);
+            }
+        });
         //movement
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.movement.MoveComponent.class);
         try{

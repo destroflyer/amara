@@ -1,5 +1,6 @@
 package amara.test;
 
+import amara.applications.ingame.entitysystem.components.attributes.ManaComponent;
 import amara.applications.ingame.entitysystem.components.physics.DirectionComponent;
 import amara.applications.ingame.network.messages.objects.commands.AutoAttackCommand;
 import amara.applications.ingame.network.messages.objects.commands.StopCommand;
@@ -23,12 +24,13 @@ public class TestGarmon extends CommandingPlayerTest {
     @Test
     public void testP() {
         int targetDummy = createTargetDummy(new Vector2f(20, 10));
+        entityWorld.setComponent(character, new ManaComponent(100));
         onLogicStart();
 
         assertTrue(hasBuff(character, NAME_PASSIVE_BUFF));
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(1);
-        assertEquals(933.3334f, getHealth(targetDummy), EPSILON);
+        assertEquals(151.55f, getMana(character), EPSILON);
         assertFalse(hasBuff(character, NAME_PASSIVE_BUFF));
         queueCommand(new StopCommand());
         tickSeconds(8);

@@ -111,6 +111,10 @@ public class CommandingPlayerTest extends GameLogicTest {
         return entityWorld.getComponent(entity, HealthComponent.class).getValue();
     }
 
+    protected float getMana(int entity) {
+        return entityWorld.getComponent(entity, ManaComponent.class).getValue();
+    }
+
     protected float getTotalShieldAmount(int entity) {
         return ShieldUtil.getTotalShieldAmount(entityWorld, entity);
     }

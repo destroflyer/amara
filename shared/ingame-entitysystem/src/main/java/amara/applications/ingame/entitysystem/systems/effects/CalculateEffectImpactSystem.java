@@ -15,6 +15,7 @@ import amara.applications.ingame.entitysystem.components.effects.damage.*;
 import amara.applications.ingame.entitysystem.components.effects.game.*;
 import amara.applications.ingame.entitysystem.components.effects.general.*;
 import amara.applications.ingame.entitysystem.components.effects.heals.*;
+import amara.applications.ingame.entitysystem.components.effects.mana.*;
 import amara.applications.ingame.entitysystem.components.effects.movement.*;
 import amara.applications.ingame.entitysystem.components.effects.physics.*;
 import amara.applications.ingame.entitysystem.components.effects.players.*;
@@ -253,6 +254,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                     AddVulnerabilityComponent.class,
                     RemoveVulnerabilityComponent.class,
                     PlayCinematicComponent.class,
+                    AddManaComponent.class,
                     RelativeTeleportComponent.class,
                     StopComponent.class,
                     TeleportComponent.class,

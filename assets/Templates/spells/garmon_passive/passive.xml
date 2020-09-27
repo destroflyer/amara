@@ -2,7 +2,7 @@
     <value name="cooldown">8</value>
     <entity id="passive">
         <name>Star Channeling</name>
-        <description>Every [cooldown] seconds, your next basic attack deals additional magic damage.</description>
+        <description>Every [cooldown] seconds, your next basic attack restores mana.</description>
         <spellVisualisation>garmon_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
             <!--add triggers-->
@@ -13,7 +13,7 @@
                         <addBuff duration="-1">
                             <entity id="buff">
                                 <name>Stargazer</name>
-                                <description>This units next basic attack deals additional magic damage.</description>
+                                <description>This units next basic attack restores mana.</description>
                                 <buffIcon>spells/garmon_passive</buffIcon>
                                 <onBuffAddEffectTriggers>
                                     <!--add spell effect-->
@@ -24,22 +24,12 @@
                                                 <addAutoAttackSpellEffects>
                                                     <entity id="newSpellEffect">
                                                         <castedEffectTriggers>
-                                                            <!--target effect-->
-                                                            <entity>
-                                                                <targetTarget/>
-                                                                <triggeredEffect>
-                                                                    <entity>
-                                                                        <magicDamage>50 + (0.2 * source.abilityPower)</magicDamage>
-                                                                        <customCleanup/>
-                                                                    </entity>
-                                                                </triggeredEffect>
-                                                                <triggerSource>#passive</triggerSource>
-                                                            </entity>
-                                                            <!--remove buff-->
+                                                            <!--add mana and remove buff-->
                                                             <entity>
                                                                 <sourceCasterTarget/>
                                                                 <triggeredEffect>
                                                                     <entity>
+                                                                        <addMana>50</addMana>
                                                                         <removeBuff>#buff</removeBuff>
                                                                         <playAudio>
                                                                             <entity>
