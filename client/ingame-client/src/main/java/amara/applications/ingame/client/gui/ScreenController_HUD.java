@@ -118,20 +118,32 @@ public class ScreenController_HUD extends GameScreenController {
         getTextRenderer(prefix + "_attribute_value_" + attributeName).setText(text);
     }
 
-    public void setPlayer_ResourceBarWidth_Health(float portion){
+    public void setPlayer_ResourceBar_Health_Width(float portion) {
         setPlayer_ResourceBarWidth("health", portion);
     }
-    
-    private void setPlayer_ResourceBarWidth(String resourceName, float portion){
+
+    public void setPlayer_ResourceBar_Mana_Width(float portion) {
+        setPlayer_ResourceBarWidth("mana", portion);
+    }
+
+    private void setPlayer_ResourceBarWidth(String resourceName, float portion) {
         Element resourceBar = getElementByID("player_resource_bar_" + resourceName);
         resourceBar.setConstraintWidth(new SizeValue((portion * 100) + "%"));
         resourceBar.getParent().layoutElements();
     }
-    
-    public void setPlayer_ResourceBarText_Health(String text){
-        getTextRenderer("player_resource_bar_health_text").setText(text);
+
+    public void setPlayer_ResourceBar_Health_Text(String text) {
+        setPlayer_ResourceBarText("health", text);
     }
-    
+
+    public void setPlayer_ResourceBar_Mana_Text(String text) {
+        setPlayer_ResourceBarText("mana", text);
+    }
+
+    private void setPlayer_ResourceBarText(String resourceName, String text) {
+        getTextRenderer("player_resource_bar_" + resourceName + "_text").setText(text);
+    }
+
     public void setPlayer_PassiveImage(String imagePath){
         getImageRenderer("player_passive_image").setImage(createImage(imagePath));
     }

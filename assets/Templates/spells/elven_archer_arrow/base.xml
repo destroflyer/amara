@@ -38,6 +38,11 @@
         <castCancelMovement/>
         <castDuration>[delay]</castDuration>
         <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>50</manaCost>
+            </entity>
+        </castCost>
         <castAnimation>
             <entity>
                 <name>shoot_recoil</name>

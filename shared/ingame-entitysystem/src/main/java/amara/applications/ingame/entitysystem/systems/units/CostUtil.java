@@ -1,8 +1,10 @@
 package amara.applications.ingame.entitysystem.systems.units;
 
+import amara.applications.ingame.entitysystem.components.attributes.ManaComponent;
 import amara.applications.ingame.entitysystem.components.buffs.status.StacksComponent;
 import amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent;
 import amara.applications.ingame.entitysystem.components.costs.GoldCostComponent;
+import amara.applications.ingame.entitysystem.components.costs.ManaCostComponent;
 import amara.applications.ingame.entitysystem.components.units.GoldComponent;
 import amara.applications.ingame.entitysystem.systems.buffs.BuffUtil;
 import amara.libraries.entitysystem.EntityWorld;
@@ -16,6 +18,14 @@ public class CostUtil {
     }
 
     public static boolean isPayable(EntityWorld entityWorld, int entity, int costEntity) {
+        // Mana
+        ManaCostComponent manaCostComponent = entityWorld.getComponent(costEntity, ManaCostComponent.class);
+        if ((manaCostComponent != null) && (manaCostComponent.getMana() > 0)) {
+            ManaComponent manaComponent = entityWorld.getComponent(entity, ManaComponent.class);
+            if ((manaComponent == null) || (manaComponent.getValue() < manaCostComponent.getMana())) {
+                return false;
+            }
+        }
         // Gold
         GoldCostComponent goldCostComponent = entityWorld.getComponent(costEntity, GoldCostComponent.class);
         if ((goldCostComponent != null) && (goldCostComponent.getGold() > 0)) {
@@ -46,6 +56,12 @@ public class CostUtil {
     }
 
     public static void pay(EntityWorld entityWorld, int entity, int costEntity) {
+        // Mana
+        ManaCostComponent manaCostComponent = entityWorld.getComponent(costEntity, ManaCostComponent.class);
+        if (manaCostComponent != null) {
+            ManaComponent manaComponent = entityWorld.getComponent(entity, ManaComponent.class);
+            entityWorld.setComponent(entity, new ManaComponent(manaComponent.getValue() - manaCostComponent.getMana()));
+        }
         // Gold
         GoldCostComponent goldCostComponent = entityWorld.getComponent(costEntity, GoldCostComponent.class);
         if (goldCostComponent != null) {

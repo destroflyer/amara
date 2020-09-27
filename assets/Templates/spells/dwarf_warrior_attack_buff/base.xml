@@ -99,6 +99,11 @@
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
+        <castCost>
+            <entity>
+                <manaCost>20</manaCost>
+            </entity>
+        </castCost>
         <baseCooldown>7</baseCooldown>
     </entity>
     <!--add stack on kill trigger-->

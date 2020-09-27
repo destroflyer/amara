@@ -30,6 +30,11 @@
         <castDuration>[duration]</castDuration>
         <castCancelCast/>
         <castCancelMovement/>
+        <castCost>
+            <entity>
+                <manaCost>80</manaCost>
+            </entity>
+        </castCost>
         <castAnimation>
             <entity>
                 <name>smash</name>

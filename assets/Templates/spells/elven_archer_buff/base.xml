@@ -33,6 +33,11 @@
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
+        <castCost>
+            <entity>
+                <manaCost>30</manaCost>
+            </entity>
+        </castCost>
         <baseCooldown>1</baseCooldown>
     </entity>
     <!--spell effect-->

@@ -37,6 +37,11 @@
                 <loopDuration>0.5</loopDuration>
             </entity>
         </castAnimation>
+        <castCost>
+            <entity>
+                <manaCost>100</manaCost>
+            </entity>
+        </castCost>
         <baseCooldown>1</baseCooldown>
     </entity>
     <!--spell effect-->

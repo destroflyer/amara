@@ -217,6 +217,24 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatMagicResistanceComponent(value);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.BonusFlatManaRegenerationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.BonusFlatManaRegenerationComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatManaRegenerationComponent>("bonusFlatManaRegeneration"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatManaRegenerationComponent construct(EntityWorld entityWorld, Element element){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatManaRegenerationComponent(value);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumHealthComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumHealthComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
@@ -233,6 +251,24 @@ public class ComponentsRegistrator{
                     value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumHealthComponent(value);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumManaComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumManaComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumManaComponent>("bonusFlatMaximumMana"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumManaComponent construct(EntityWorld entityWorld, Element element){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumManaComponent(value);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.BonusFlatWalkSpeedComponent.class);
@@ -549,6 +585,42 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.attributes.MagicResistanceComponent(value);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.ManaComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.ManaComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.ManaComponent>("mana"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.attributes.ManaComponent construct(EntityWorld entityWorld, Element element){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.attributes.ManaComponent(value);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.ManaRegenerationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.ManaRegenerationComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.ManaRegenerationComponent>("manaRegeneration"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.attributes.ManaRegenerationComponent construct(EntityWorld entityWorld, Element element){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.attributes.ManaRegenerationComponent(value);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
@@ -565,6 +637,24 @@ public class ComponentsRegistrator{
                     value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent(value);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.MaximumManaComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.attributes.MaximumManaComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.MaximumManaComponent>("maximumMana"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.attributes.MaximumManaComponent construct(EntityWorld entityWorld, Element element){
+                float value = 0;
+                String valueText = element.getText();
+                if((valueText != null) && (valueText.length() > 0)){
+                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                }
+                return new amara.applications.ingame.entitysystem.components.attributes.MaximumManaComponent(value);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent.class);
@@ -1191,6 +1281,24 @@ public class ComponentsRegistrator{
                     gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
                 }
                 return new amara.applications.ingame.entitysystem.components.costs.GoldCostComponent(gold);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.costs.ManaCostComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.costs.ManaCostComponent.class.getDeclaredField("mana"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.costs.ManaCostComponent>("manaCost"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.costs.ManaCostComponent construct(EntityWorld entityWorld, Element element){
+                float mana = 0;
+                String manaText = element.getText();
+                if((manaText != null) && (manaText.length() > 0)){
+                    mana = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, manaText));
+                }
+                return new amara.applications.ingame.entitysystem.components.costs.ManaCostComponent(mana);
             }
         });
         //effects

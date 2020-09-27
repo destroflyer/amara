@@ -32,6 +32,11 @@
         <castCancelMovement/>
         <castDuration>[delay]</castDuration>
         <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>60</manaCost>
+            </entity>
+        </castCost>
         <castAnimation>
             <entity>
                 <name>attack_upwards</name>

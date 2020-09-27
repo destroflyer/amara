@@ -31,6 +31,8 @@ public class DisplayAttributesSystem extends GUIDisplaySystem<ScreenController_H
             this,
             HealthComponent.class,
             MaximumHealthComponent.class,
+            ManaComponent.class,
+            MaximumManaComponent.class,
             AttackDamageComponent.class,
             AbilityPowerComponent.class,
             AttackSpeedComponent.class,
@@ -47,7 +49,8 @@ public class DisplayAttributesSystem extends GUIDisplaySystem<ScreenController_H
         updateAttributeValue(entityWorld, observer, entity, forceUpdate, MagicResistanceComponent.class, MagicResistanceComponent::getValue, 0, text -> screenController.setAttributeValue_MagicResistance(uiPrefix, text));
         updateAttributeValue(entityWorld, observer, entity, forceUpdate, WalkSpeedComponent.class, WalkSpeedComponent::getValue, 2, text -> screenController.setAttributeValue_WalkSpeed(uiPrefix, text));
         if ("player".equals(uiPrefix)) {
-            updateHealthBar(entityWorld, observer, entity, forceUpdate);
+            updateResourceBar(entityWorld, observer, entity, forceUpdate, HealthComponent.class, MaximumHealthComponent.class, HealthComponent::getValue, MaximumHealthComponent::getValue, portion -> screenController.setPlayer_ResourceBar_Health_Width(portion), text -> screenController.setPlayer_ResourceBar_Health_Text(text));
+            updateResourceBar(entityWorld, observer, entity, forceUpdate, ManaComponent.class, MaximumManaComponent.class, ManaComponent::getValue, MaximumManaComponent::getValue, portion -> screenController.setPlayer_ResourceBar_Mana_Width(portion), text -> screenController.setPlayer_ResourceBar_Mana_Text(text));
         }
     }
 
@@ -67,24 +70,24 @@ public class DisplayAttributesSystem extends GUIDisplaySystem<ScreenController_H
         }
     }
 
-    private void updateHealthBar(EntityWorld entityWorld, ComponentMapObserver observer, int entity, boolean forceUpdate) {
-        boolean shouldUpdateExistingValues = entityWorld.hasAllComponents(entity, HealthComponent.class, MaximumHealthComponent.class);
+    private <C, M> void updateResourceBar(EntityWorld entityWorld, ComponentMapObserver observer, int entity, boolean forceUpdate, Class<C> currentComponentClass, Class<M> maximumComponentClass, Function<C, Float> getCurrentValue, Function<M, Float> getMaximumValue, Consumer<Float> setWidthPortion, Consumer<String> setText) {
+        boolean shouldUpdateExistingValues = entityWorld.hasAllComponents(entity, currentComponentClass, maximumComponentClass);
         if (!forceUpdate) {
             shouldUpdateExistingValues &= (
-                    observer.getNew().hasAnyComponent(entity, HealthComponent.class, MaximumHealthComponent.class)
-                 || observer.getChanged().hasAnyComponent(entity, HealthComponent.class, MaximumHealthComponent.class)
+                    observer.getNew().hasAnyComponent(entity, currentComponentClass, maximumComponentClass)
+                 || observer.getChanged().hasAnyComponent(entity, currentComponentClass, maximumComponentClass)
             );
         }
         if (shouldUpdateExistingValues) {
-            float health = entityWorld.getComponent(entity, HealthComponent.class).getValue();
-            float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();
-            String healthText = (((int) health) + " / " + ((int) maximumHealth));
-            float healthPortion = (health / maximumHealth);
-            screenController.setPlayer_ResourceBarWidth_Health(healthPortion);
-            screenController.setPlayer_ResourceBarText_Health(healthText);
-        } else  if (forceUpdate || observer.getRemoved().hasAnyComponent(entity, HealthComponent.class, MaximumHealthComponent.class)) {
-            screenController.setPlayer_ResourceBarWidth_Health(0);
-            screenController.setPlayer_ResourceBarText_Health(NON_EXISTING_ATTRIBUTE_TEXT);
+            float currentValue = getCurrentValue.apply(entityWorld.getComponent(entity, currentComponentClass));
+            float maximumValue = getMaximumValue.apply(entityWorld.getComponent(entity, maximumComponentClass));
+            String valueText = (((int) currentValue) + " / " + ((int) maximumValue));
+            float valuePortion = (currentValue / maximumValue);
+            setWidthPortion.accept(valuePortion);
+            setText.accept(valueText);
+        } else  if (forceUpdate || observer.getRemoved().hasAnyComponent(entity, currentComponentClass, maximumComponentClass)) {
+            setWidthPortion.accept(0f);
+            setText.accept(NON_EXISTING_ATTRIBUTE_TEXT);
         }
     }
 }

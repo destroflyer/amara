@@ -43,6 +43,7 @@
         <castType>selfcast</castType>
         <castCost>
             <entity>
+                <manaCost>30</manaCost>
                 <buffStacksCost buffEntity="#buff" stacks="[stacksCost]"/>
             </entity>
         </castCost>

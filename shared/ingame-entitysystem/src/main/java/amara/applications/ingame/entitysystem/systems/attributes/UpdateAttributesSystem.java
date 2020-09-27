@@ -60,6 +60,8 @@ public class UpdateAttributesSystem implements EntitySystem{
             }
             float maximumHealth = attributeBonus.getFlatMaximumHealth();
             float healthRegeneration = attributeBonus.getFlatHealthRegeneration();
+            float maximumMana = attributeBonus.getFlatMaximumMana();
+            float manaRegeneration = attributeBonus.getFlatManaRegeneration();
             float attackDamage = attributeBonus.getFlatAttackDamage();
             float abilityPower = attributeBonus.getFlatAbilityPower();
             float attackSpeed = attributeBonus.getFlatAttackSpeed();
@@ -96,6 +98,20 @@ public class UpdateAttributesSystem implements EntitySystem{
             }
             entityWrapper.setComponent(new MaximumHealthComponent(maximumHealth));
             entityWrapper.setComponent(new HealthRegenerationComponent(healthRegeneration));
+            ManaComponent oldManaComponent = entityWrapper.getComponent(ManaComponent.class);
+            if (oldManaComponent != null) {
+                MaximumManaComponent oldMaximumManaComponent = entityWrapper.getComponent(MaximumManaComponent.class);
+                if (oldMaximumManaComponent != null) {
+                    float manaDifference = (maximumMana - oldMaximumManaComponent.getValue());
+                    if (manaDifference > 0) {
+                        entityWrapper.setComponent(new ManaComponent(oldManaComponent.getValue() + manaDifference));
+                    }
+                }
+            } else if(entityWrapper.hasComponent(IsAliveComponent.class)) {
+                entityWrapper.setComponent(new ManaComponent(maximumMana));
+            }
+            entityWrapper.setComponent(new MaximumManaComponent(maximumMana));
+            entityWrapper.setComponent(new ManaRegenerationComponent(manaRegeneration));
             entityWrapper.setComponent(new AttackDamageComponent(attackDamage));
             entityWrapper.setComponent(new AbilityPowerComponent(abilityPower));
             entityWrapper.setComponent(new AttackSpeedComponent(attackSpeed));
@@ -150,6 +166,14 @@ public class UpdateAttributesSystem implements EntitySystem{
         BonusFlatHealthRegenerationComponent bonusFlatHealthRegenerationComponent = bonusEntityWrapper.getComponent(BonusFlatHealthRegenerationComponent.class);
         if(bonusFlatHealthRegenerationComponent != null){
             attributeBonus.addFlatHealthRegeneration(bonusFlatHealthRegenerationComponent.getValue() * factor);
+        }
+        BonusFlatMaximumManaComponent bonusFlatMaximumManaComponent = bonusEntityWrapper.getComponent(BonusFlatMaximumManaComponent.class);
+        if (bonusFlatMaximumManaComponent != null) {
+            attributeBonus.addFlatMaximumMana(bonusFlatMaximumManaComponent.getValue() * factor);
+        }
+        BonusFlatManaRegenerationComponent bonusFlatManaRegenerationComponent = bonusEntityWrapper.getComponent(BonusFlatManaRegenerationComponent.class);
+        if (bonusFlatManaRegenerationComponent != null) {
+            attributeBonus.addFlatManaRegeneration(bonusFlatManaRegenerationComponent.getValue() * factor);
         }
         BonusFlatAttackDamageComponent bonusFlatAttackDamageComponent = bonusEntityWrapper.getComponent(BonusFlatAttackDamageComponent.class);
         if(bonusFlatAttackDamageComponent != null){

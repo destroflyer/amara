@@ -31,6 +31,11 @@
         <castCancelMovement/>
         <castDuration>[castDuration]</castDuration>
         <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>70</manaCost>
+            </entity>
+        </castCost>
         <castAnimation>
             <entity>
                 <name>spell11</name>

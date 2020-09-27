@@ -89,6 +89,11 @@
         <castCancelCast/>
         <castCancelMovement/>
         <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>60</manaCost>
+            </entity>
+        </castCost>
         <baseCooldown>10</baseCooldown>
     </entity>
     <!--spell effect-->

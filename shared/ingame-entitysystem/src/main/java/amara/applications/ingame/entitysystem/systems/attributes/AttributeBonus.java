@@ -1,20 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.attributes;
 
-/**
- *
- * @author Carl
- */
-public class AttributeBonus{
+public class AttributeBonus {
 
-    public AttributeBonus(){
-        
-    }
     private float flatMaximumHealth = 0;
     private float flatHealthRegeneration = 0;
+    private float flatMaximumMana = 0;
+    private float flatManaRegeneration = 0;
     private float flatAttackDamage = 0;
     private float flatAbilityPower = 0;
     private float flatAttackSpeed = 0;
@@ -32,107 +23,123 @@ public class AttributeBonus{
     private boolean isGoldPerSecondDisabled = false;
     private float flatGoldPerSecond = 0;
 
-    public void addFlatMaximumHealth(float value){
+    public void addFlatMaximumHealth(float value) {
         flatMaximumHealth += value;
     }
-    
-    public float getFlatMaximumHealth(){
+
+    public float getFlatMaximumHealth() {
         return flatMaximumHealth;
     }
-    
-    public void addFlatHealthRegeneration(float value){
+
+    public void addFlatMaximumMana(float value) {
+        flatMaximumMana += value;
+    }
+
+    public float getFlatMaximumMana() {
+        return flatMaximumMana;
+    }
+
+    public void addFlatHealthRegeneration(float value) {
         flatHealthRegeneration += value;
     }
 
-    public float getFlatHealthRegeneration(){
+    public float getFlatHealthRegeneration() {
         return flatHealthRegeneration;
     }
 
-    public void addFlatAttackDamage(float value){
+    public void addFlatManaRegeneration(float value) {
+        flatManaRegeneration += value;
+    }
+
+    public float getFlatManaRegeneration() {
+        return flatManaRegeneration;
+    }
+
+    public void addFlatAttackDamage(float value) {
         flatAttackDamage += value;
     }
 
-    public float getFlatAttackDamage(){
+    public float getFlatAttackDamage() {
         return flatAttackDamage;
     }
 
-    public void addFlatAbilityPower(float value){
+    public void addFlatAbilityPower(float value) {
         flatAbilityPower += value;
     }
 
-    public float getFlatAbilityPower(){
+    public float getFlatAbilityPower() {
         return flatAbilityPower;
     }
-    
-    public void addFlatAttackSpeed(float value){
+
+    public void addFlatAttackSpeed(float value) {
         flatAttackSpeed += value;
     }
 
-    public float getFlatAttackSpeed(){
+    public float getFlatAttackSpeed() {
         return flatAttackSpeed;
     }
-    
-    public void addPercentageAttackSpeed(float value){
+
+    public void addPercentageAttackSpeed(float value) {
         percentageAttackSpeed += value;
     }
 
-    public float getPercentageAttackSpeed(){
+    public float getPercentageAttackSpeed() {
         return percentageAttackSpeed;
     }
 
-    public void addPercentageCooldownSpeed(float value){
+    public void addPercentageCooldownSpeed(float value) {
         percentageCooldownSpeed += value;
     }
 
-    public float getPercentageCooldownSpeed(){
+    public float getPercentageCooldownSpeed() {
         return percentageCooldownSpeed;
     }
 
-    public void addFlatArmor(float value){
+    public void addFlatArmor(float value) {
         flatArmor += value;
     }
 
-    public float getFlatArmor(){
+    public float getFlatArmor() {
         return flatArmor;
     }
 
-    public void addFlatMagicResistance(float value){
+    public void addFlatMagicResistance(float value) {
         flatMagicResistance += value;
     }
 
-    public float getFlatMagicResistance(){
+    public float getFlatMagicResistance() {
         return flatMagicResistance;
     }
-    
-    public void addFlatWalkSpeed(float value){
+
+    public void addFlatWalkSpeed(float value) {
         flatWalkSpeed += value;
     }
 
-    public float getFlatWalkSpeed(){
+    public float getFlatWalkSpeed() {
         return flatWalkSpeed;
     }
 
-    public void multiplicatePercentageWalkSpeed(float value){
+    public void multiplicatePercentageWalkSpeed(float value) {
         percentageWalkSpeed *= value;
     }
 
-    public float getPercentageWalkSpeed(){
+    public float getPercentageWalkSpeed() {
         return percentageWalkSpeed;
     }
 
-    public float getPercentageCriticalChance(){
+    public float getPercentageCriticalChance() {
         return percentageCriticalChance;
     }
 
-    public void addPercentageCriticalChance(float value){
+    public void addPercentageCriticalChance(float value) {
         percentageCriticalChance += value;
     }
 
-    public float getPercentageLifesteal(){
+    public float getPercentageLifesteal() {
         return percentageLifesteal;
     }
-    
-    public void addPercentageLifesteal(float value){
+
+    public void addPercentageLifesteal(float value) {
         percentageLifesteal += value;
     }
 
@@ -144,31 +151,31 @@ public class AttributeBonus{
         percentageSpellvamp += value;
     }
 
-    public void addPercentageIncomingDamageAmplification(float value){
+    public void addPercentageIncomingDamageAmplification(float value) {
         percentageIncomingDamageAmplification += value;
     }
 
-    public float getPercentageIncomingDamageAmplification(){
+    public float getPercentageIncomingDamageAmplification() {
         return percentageIncomingDamageAmplification;
     }
 
-    public void addPercentageOutgoingDamageAmplification(float value){
+    public void addPercentageOutgoingDamageAmplification(float value) {
         percentageOutgoingDamageAmplification += value;
     }
 
-    public float getPercentageOutgoingDamageAmplification(){
+    public float getPercentageOutgoingDamageAmplification() {
         return percentageOutgoingDamageAmplification;
     }
 
     public void setGoldPerSecondDisabled(boolean goldPerSecondDisabled) {
         isGoldPerSecondDisabled = goldPerSecondDisabled;
     }
-    
-    public void addFlatGoldPerSecond(float value){
+
+    public void addFlatGoldPerSecond(float value) {
         flatGoldPerSecond += value;
     }
 
-    public float getFlatGoldPerSecond(){
+    public float getFlatGoldPerSecond() {
         return (isGoldPerSecondDisabled ? 0 : flatGoldPerSecond);
     }
 }

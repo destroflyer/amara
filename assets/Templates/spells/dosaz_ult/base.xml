@@ -37,6 +37,11 @@
         <castCancelCast/>
         <castCancelMovement/>
         <castDuration>[delay]</castDuration>
+        <castCost>
+            <entity>
+                <manaCost>100</manaCost>
+            </entity>
+        </castCost>
         <castAnimation>
             <entity>
                 <name>spell6</name>

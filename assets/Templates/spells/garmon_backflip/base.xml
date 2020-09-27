@@ -29,6 +29,11 @@
         <castCancelCast/>
         <castCancelMovement/>
         <castDuration>0.5</castDuration>
+        <castCost>
+            <entity>
+                <manaCost>70</manaCost>
+            </entity>
+        </castCost>
         <baseCooldown>9</baseCooldown>
     </entity>
     <!--spell effect-->

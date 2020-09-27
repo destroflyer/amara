@@ -42,6 +42,8 @@
             <entity>
                 <bonusFlatMaximumHealth>500</bonusFlatMaximumHealth>
                 <bonusFlatHealthRegeneration>1</bonusFlatHealthRegeneration>
+                <bonusFlatMaximumMana>310</bonusFlatMaximumMana>
+                <bonusFlatManaRegeneration>1.5</bonusFlatManaRegeneration>
                 <bonusFlatAttackDamage>50</bonusFlatAttackDamage>
                 <bonusFlatAttackSpeed>0.75</bonusFlatAttackSpeed>
                 <bonusFlatArmor>25</bonusFlatArmor>
@@ -53,6 +55,8 @@
             <entity>
                 <bonusFlatMaximumHealth>75</bonusFlatMaximumHealth>
                 <bonusFlatHealthRegeneration>0.15</bonusFlatHealthRegeneration>
+                <bonusFlatMaximumMana>40</bonusFlatMaximumMana>
+                <bonusFlatManaRegeneration>0.15</bonusFlatManaRegeneration>
                 <bonusFlatAttackDamage>3</bonusFlatAttackDamage>
                 <bonusFlatAttackSpeed>0.02</bonusFlatAttackSpeed>
                 <bonusFlatArmor>3</bonusFlatArmor>

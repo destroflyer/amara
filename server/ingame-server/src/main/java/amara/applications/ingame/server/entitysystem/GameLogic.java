@@ -125,11 +125,13 @@ public class GameLogic {
         // Cleanup effect triggers here, so they have been triggered before being removed
         entitySystems.add(new CleanupEffectTriggersSystem());
         entitySystems.add(new HealthRegenerationSystem());
+        entitySystems.add(new ManaRegenerationSystem());
         entitySystems.add(new DeathSystem());
         entitySystems.add(new TriggerDeathEffectSystem());
         entitySystems.add(new TriggerSurroundingDeathEffectSystem());
         entitySystems.add(new TriggerTeamDeathEffectSystem());
         entitySystems.add(new MaximumHealthSystem());
+        entitySystems.add(new MaximumManaSystem());
         entitySystems.add(new MaximumStacksSystem());
         entitySystems.add(new GoldGenerationSystem());
         entitySystems.add(new PayOutBountiesSystem());

@@ -43,6 +43,11 @@
         <castCancelMovement/>
         <castDuration>[duration]</castDuration>
         <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>100</manaCost>
+            </entity>
+        </castCost>
         <castAnimation additionalLoops="14">
             <entity>
                 <name>draw_arrow</name>

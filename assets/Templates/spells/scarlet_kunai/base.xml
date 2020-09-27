@@ -48,6 +48,11 @@
         <castCancelMovement/>
         <castDuration>[delay]</castDuration>
         <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>40</manaCost>
+            </entity>
+        </castCost>
         <castAnimation>
             <entity>
                 <name>throw</name>
