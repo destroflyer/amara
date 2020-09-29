@@ -5,13 +5,11 @@
         <name>Red Gem</name>
         <itemRecipe>
             <entity>
-                <goldCost>50</goldCost>
+                <goldCost>400</goldCost>
             </entity>
         </itemRecipe>
-        <isSellable>20</isSellable>
+        <isSellable>250</isSellable>
         <!--stats-->
-        <itemActive consumable="true">
-            <entity template="./red_gem_active"/>
-        </itemActive>
+        <bonusFlatMaximumHealth>120</bonusFlatMaximumHealth>
     </entity>
 </template>

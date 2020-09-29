@@ -1,0 +1,16 @@
+<template>
+    <entity>
+        <itemID>moccasins</itemID>
+        <itemVisualisation>moccasins</itemVisualisation>
+        <name>Moccasins</name>
+        <itemRecipe itemIDs="sandals">
+            <entity>
+                <goldCost>700</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>650</isSellable>
+        <!--stats-->
+        <bonusFlatWalkSpeed>0.4</bonusFlatWalkSpeed>
+        <bonusFlatMagicResistance>15</bonusFlatMagicResistance>
+    </entity>
+</template>

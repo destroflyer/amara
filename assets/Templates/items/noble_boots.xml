@@ -1,0 +1,16 @@
+<template>
+    <entity>
+        <itemID>noble_boots</itemID>
+        <itemVisualisation>noble_boots</itemVisualisation>
+        <name>Noble Boots</name>
+        <itemRecipe itemIDs="sandals">
+            <entity>
+                <goldCost>600</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>550</isSellable>
+        <!--stats-->
+        <bonusFlatWalkSpeed>0.4</bonusFlatWalkSpeed>
+        <bonusPercentageCooldownSpeed>0.15</bonusPercentageCooldownSpeed>
+    </entity>
+</template>

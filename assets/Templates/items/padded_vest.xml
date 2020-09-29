@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>padded_vest</itemID>
+        <itemVisualisation>padded_vest</itemVisualisation>
+        <name>Padded Vest</name>
+        <itemRecipe>
+            <entity>
+                <goldCost>300</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>200</isSellable>
+        <!--stats-->
+        <bonusFlatArmor>10</bonusFlatArmor>
+    </entity>
+</template>

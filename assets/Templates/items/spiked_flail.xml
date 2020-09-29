@@ -1,0 +1,16 @@
+<template>
+    <entity>
+        <itemID>spiked_flail</itemID>
+        <itemVisualisation>spiked_flail</itemVisualisation>
+        <name>Spiked Flail</name>
+        <itemRecipe itemIDs="waraxe,molten_heart">
+            <entity>
+                <goldCost>700</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>1600</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumHealth>450</bonusFlatMaximumHealth>
+        <bonusFlatAttackDamage>40</bonusFlatAttackDamage>
+    </entity>
+</template>

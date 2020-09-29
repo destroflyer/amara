@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>enchanted_cloak</itemID>
+        <itemVisualisation>enchanted_cloak</itemVisualisation>
+        <name>Enchanted Cloak</name>
+        <itemRecipe itemIDs="shredded_cape">
+            <entity>
+                <goldCost>300</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>400</isSellable>
+        <!--stats-->
+        <bonusFlatMagicResistance>25</bonusFlatMagicResistance>
+    </entity>
+</template>

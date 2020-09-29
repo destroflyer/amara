@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.display.gui;
 
 import java.util.List;
@@ -12,14 +8,7 @@ import com.jme3.texture.Texture2D;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.ElementBuilder;
 import de.lessvoid.nifty.builder.HoverEffectBuilder;
-import de.lessvoid.nifty.controls.TextField;
-import de.lessvoid.nifty.controls.Button;
-import de.lessvoid.nifty.controls.CheckBox;
-import de.lessvoid.nifty.controls.DropDown;
-import de.lessvoid.nifty.controls.RadioButton;
-import de.lessvoid.nifty.controls.ScrollPanel;
-import de.lessvoid.nifty.controls.Slider;
-import de.lessvoid.nifty.controls.Window;
+import de.lessvoid.nifty.controls.*;
 import de.lessvoid.nifty.effects.Effect;
 import de.lessvoid.nifty.effects.EffectEventId;
 import de.lessvoid.nifty.effects.impl.Hint;
@@ -29,13 +18,9 @@ import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 
-/**
- *
- * @author Carl
- */
-public class GameScreenController implements ScreenController{
+public class GameScreenController implements ScreenController {
 
-    public GameScreenController(String screenID){
+    public GameScreenController(String screenID) {
         this.screenID = screenID;
     }
     private String screenID;
@@ -73,9 +58,9 @@ public class GameScreenController implements ScreenController{
     public boolean isVisible(){
         return nifty.getCurrentScreen().getScreenId().equals(screenID);
     }
-    
-    //Helper methods
-    
+
+    // Helper methods
+
     protected PanelRenderer getPanelRenderer(String id){
         return getElementByID(id).getRenderer(PanelRenderer.class);
     }
@@ -167,26 +152,27 @@ public class GameScreenController implements ScreenController{
     protected Effect getHintEffect(String elementID){
         return getElementByID(elementID).getEffects(EffectEventId.onHover, Hint.class).get(0);
     }
-    
-    //This method can be called to avoid the user interface to receive the event
-    public void doNothing(){
-        
-    }
-    
-    //ScreenControllerInterface
 
-    @Override
-    public void bind(Nifty nifty, Screen screen){
-        
+    protected void loseFocusWithoutAssigningNext(Element element) {
+        FocusHandler focusHandler = nifty.getCurrentScreen().getFocusHandler();
+        focusHandler.lostKeyboardFocus(element);
+        focusHandler.lostMouseFocus(element);
     }
 
+    // ScreenController interface
+
     @Override
-    public void onStartScreen(){
-        
+    public void bind(Nifty nifty, Screen screen) {
+
     }
 
     @Override
-    public void onEndScreen(){
-        
+    public void onStartScreen() {
+
+    }
+
+    @Override
+    public void onEndScreen() {
+
     }
 }

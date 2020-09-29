@@ -3,14 +3,14 @@
         <itemID>hells_scream</itemID>
         <itemVisualisation>hells_scream</itemVisualisation>
         <name>Hell's Scream</name>
-        <itemRecipe itemIDs="greatsword,doomblade">
+        <itemRecipe itemIDs="greatsword,waraxe,blood_capsule">
             <entity>
-                <goldCost>800</goldCost>
+                <goldCost>400</goldCost>
             </entity>
         </itemRecipe>
-        <isSellable>2000</isSellable>
+        <isSellable>1700</isSellable>
         <!--stats-->
         <bonusFlatAttackDamage>80</bonusFlatAttackDamage>
-        <bonusPercentageLifesteal>0.2</bonusPercentageLifesteal>
+        <bonusPercentageLifesteal>0.25</bonusPercentageLifesteal>
     </entity>
 </template>

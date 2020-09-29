@@ -1,0 +1,16 @@
+<template>
+    <entity>
+        <itemID>silver_scroll</itemID>
+        <itemVisualisation>silver_scroll</itemVisualisation>
+        <name>Silver Scroll</name>
+        <itemRecipe itemIDs="apprentice_notes">
+            <entity>
+                <goldCost>400</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>500</isSellable>
+        <!--stats-->
+        <bonusFlatAbilityPower>35</bonusFlatAbilityPower>
+        <bonusPercentageCooldownSpeed>0.1</bonusPercentageCooldownSpeed>
+    </entity>
+</template>

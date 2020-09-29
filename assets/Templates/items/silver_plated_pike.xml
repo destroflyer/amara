@@ -1,0 +1,16 @@
+<template>
+    <entity>
+        <itemID>silver_plated_pike</itemID>
+        <itemVisualisation>silver_plated_pike</itemVisualisation>
+        <name>Silver Plated Pike</name>
+        <itemRecipe itemIDs="padded_vest,waraxe,padded_vest">
+            <entity>
+                <goldCost>600</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>1250</isSellable>
+        <!--stats-->
+        <bonusFlatAttackDamage>35</bonusFlatAttackDamage>
+        <bonusFlatArmor>35</bonusFlatArmor>
+    </entity>
+</template>

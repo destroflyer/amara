@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>molten_heart</itemID>
+        <itemVisualisation>molten_heart</itemVisualisation>
+        <name>Molten Heart</name>
+        <itemRecipe itemIDs="red_gem">
+            <entity>
+                <goldCost>600</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>750</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumHealth>360</bonusFlatMaximumHealth>
+    </entity>
+</template>

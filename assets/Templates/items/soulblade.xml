@@ -3,14 +3,14 @@
         <itemID>soulblade</itemID>
         <itemVisualisation>soulblade</itemVisualisation>
         <name>Soulblade</name>
-        <itemRecipe itemIDs="arcaneblade,greatsword">
+        <itemRecipe itemIDs="greatsword,enchanted_cloak">
             <entity>
                 <goldCost>600</goldCost>
             </entity>
         </itemRecipe>
-        <isSellable>1200</isSellable>
+        <isSellable>1400</isSellable>
         <!--stats-->
-        <bonusFlatAttackDamage>60</bonusFlatAttackDamage>
-        <bonusFlatMagicResistance>20</bonusFlatMagicResistance>
+        <bonusFlatAttackDamage>50</bonusFlatAttackDamage>
+        <bonusFlatMagicResistance>35</bonusFlatMagicResistance>
     </entity>
 </template>

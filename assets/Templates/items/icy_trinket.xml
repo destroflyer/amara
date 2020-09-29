@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>icy_trinket</itemID>
+        <itemVisualisation>icy_trinket</itemVisualisation>
+        <name>Icy Trinket</name>
+        <itemRecipe>
+            <entity>
+                <goldCost>350</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>220</isSellable>
+        <!--stats-->
+        <bonusFlatManaRegeneration>1</bonusFlatManaRegeneration>
+    </entity>
+</template>

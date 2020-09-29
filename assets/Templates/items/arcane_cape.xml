@@ -1,0 +1,18 @@
+<template>
+    <entity>
+        <itemID>arcane_cape</itemID>
+        <itemVisualisation>arcane_cape</itemVisualisation>
+        <name>Arcane Cape</name>
+        <itemRecipe itemIDs="rainbow_gem,shredded_cape">
+            <entity>
+                <goldCost>600</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>1250</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumHealth>300</bonusFlatMaximumHealth>
+        <bonusFlatMagicResistance>20</bonusFlatMagicResistance>
+        <bonusFlatMaximumMana>350</bonusFlatMaximumMana>
+        <bonusPercentageCooldownSpeed>0.2</bonusPercentageCooldownSpeed>
+    </entity>
+</template>

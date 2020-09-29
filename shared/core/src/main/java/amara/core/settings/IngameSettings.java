@@ -1,17 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.core.settings;
 
 import com.jme3.input.KeyInput;
 import amara.core.input.events.MouseClickEvent;
 import amara.core.settings.types.*;
 
-/**
- *
- * @author Carl
- */
 public class IngameSettings extends SettingsCategory {
 
     public IngameSettings(){
@@ -162,8 +154,7 @@ public class IngameSettings extends SettingsCategory {
                         new Setting("audio_volume", "Audio Volume", new SliderType(0.07f, 0, 1, 0.01f, 0.05f))
                     }
                 )
-            }),
-            new SettingsCategory("other", "Other", new SettingsCategory[0])
+            })
         });
     }
 }

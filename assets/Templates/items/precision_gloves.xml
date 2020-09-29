@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>precision_gloves</itemID>
+        <itemVisualisation>precision_gloves</itemVisualisation>
+        <name>Precision Gloves</name>
+        <itemRecipe>
+            <entity>
+                <goldCost>600</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>350</isSellable>
+        <!--stats-->
+        <bonusPercentageCriticalChance>0.15</bonusPercentageCriticalChance>
+    </entity>
+</template>

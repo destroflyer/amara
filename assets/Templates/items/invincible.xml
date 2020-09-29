@@ -1,0 +1,19 @@
+<template>
+    <entity>
+        <itemID>invincible</itemID>
+        <itemVisualisation>invincible</itemVisualisation>
+        <name>Invincible</name>
+        <itemRecipe itemIDs="runic_bracers,appropriately_sized_wand">
+            <entity>
+                <goldCost>500</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>1600</isSellable>
+        <!--stats-->
+        <bonusFlatAbilityPower>110</bonusFlatAbilityPower>
+        <bonusFlatArmor>30</bonusFlatArmor>
+        <itemActive consumable="false">
+            <entity template="./invincible_active"/>
+        </itemActive>
+    </entity>
+</template>

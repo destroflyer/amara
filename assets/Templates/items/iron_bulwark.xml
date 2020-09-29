@@ -3,7 +3,7 @@
         <itemID>iron_bulwark</itemID>
         <itemVisualisation>iron_bulwark</itemVisualisation>
         <name>Iron Bulwark</name>
-        <itemRecipe itemIDs="heavy_leather_armor,iron_armor">
+        <itemRecipe itemIDs="molten_heart,plated_armor">
             <entity>
                 <goldCost>600</goldCost>
             </entity>

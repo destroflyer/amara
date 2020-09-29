@@ -1,0 +1,19 @@
+<template>
+    <entity>
+        <itemID>glowing_tabard</itemID>
+        <itemVisualisation>glowing_tabard</itemVisualisation>
+        <name>Glowing Tabard</name>
+        <itemRecipe itemIDs="red_gem,plated_armor,red_gem">
+            <entity>
+                <goldCost>600</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>1200</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumHealth>300</bonusFlatMaximumHealth>
+        <bonusFlatArmor>35</bonusFlatArmor>
+        <itemPassives>
+            <entity template="./glowing_tabard_passive"/>
+        </itemPassives>
+    </entity>
+</template>

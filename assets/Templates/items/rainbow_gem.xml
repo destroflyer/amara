@@ -1,0 +1,17 @@
+<template>
+    <entity>
+        <itemID>rainbow_gem</itemID>
+        <itemVisualisation>rainbow_gem</itemVisualisation>
+        <name>Rainbow Gem</name>
+        <itemRecipe itemIDs="red_gem,blue_gem">
+            <entity>
+                <goldCost>350</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>700</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumHealth>180</bonusFlatMaximumHealth>
+        <bonusFlatMaximumMana>300</bonusFlatMaximumMana>
+        <bonusPercentageCooldownSpeed>0.1</bonusPercentageCooldownSpeed>
+    </entity>
+</template>

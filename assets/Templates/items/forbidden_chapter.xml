@@ -1,0 +1,18 @@
+<template>
+    <entity>
+        <itemID>forbidden_chapter</itemID>
+        <itemVisualisation>forbidden_chapter</itemVisualisation>
+        <name>Forbidden Chapter</name>
+        <itemRecipe itemIDs="shard_of_time,silver_scroll">
+            <entity>
+                <goldCost>700</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>1550</isSellable>
+        <!--stats-->
+        <bonusFlatAbilityPower>80</bonusFlatAbilityPower>
+        <bonusFlatMaximumMana>500</bonusFlatMaximumMana>
+        <bonusFlatManaRegeneration>2</bonusFlatManaRegeneration>
+        <bonusPercentageCooldownSpeed>0.2</bonusPercentageCooldownSpeed>
+    </entity>
+</template>

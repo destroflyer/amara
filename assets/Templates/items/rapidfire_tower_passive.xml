@@ -1,0 +1,62 @@
+<template>
+    <value name="duration">2</value>
+    <value name="maximumStacks">8</value>
+    <entity id="passive">
+        <unique/>
+        <name>I'm back!</name>
+        <description>Your basic attacks grant a stack (+12% attack speed), up to a maximum of [maximumStacks] stacks. The stacks are removed after [duration] seconds of not attacking.</description>
+        <passiveAddedEffectTriggers>
+            <!--add buff and spelleffect-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addAutoAttackSpellEffects>
+                            <entity id="newSpellEffect">
+                                <castedEffectTriggers>
+                                    <!--add buff and stack-->
+                                    <entity>
+                                        <sourceCasterTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <addBuff duration="[duration]">
+                                                    <entity id="buff">
+                                                        <name>Rapidfire</name>
+                                                        <description>This unit gains attack speed with each basic attack, up to [maximumStacks] times.</description>
+                                                        <buffIcon>items/rapidfire_tower</buffIcon>
+                                                        <maximumStacks>[maximumStacks]</maximumStacks>
+                                                        <continuousAttributesPerStack>
+                                                            <entity>
+                                                                <bonusPercentageAttackSpeed>0.12</bonusPercentageAttackSpeed>
+                                                            </entity>
+                                                        </continuousAttributesPerStack>
+                                                    </entity>
+                                                </addBuff>
+                                                <addStacks stacks="1">#buff</addStacks>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#passive</triggerSource>
+                                    </entity>
+                                </castedEffectTriggers>
+                            </entity>
+                        </addAutoAttackSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveAddedEffectTriggers>
+        <passiveRemovedEffectTriggers>
+            <!--remove spell effect-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeBuff>#buff</removeBuff>
+                        <removeSpellEffects>#newSpellEffect</removeSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveRemovedEffectTriggers>
+    </entity>
+</template>

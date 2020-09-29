@@ -1,0 +1,18 @@
+<template>
+    <entity>
+        <itemID>rapidfire_tower</itemID>
+        <itemVisualisation>rapidfire_tower</itemVisualisation>
+        <name>Rapidfire Tower</name>
+        <itemRecipe itemIDs="arrowhead,quiver,arrowhead">
+            <entity>
+                <goldCost>500</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>1000</isSellable>
+        <!--stats-->
+        <bonusPercentageAttackSpeed>0.55</bonusPercentageAttackSpeed>
+        <itemPassives>
+            <entity template="./rapidfire_tower_passive"/>
+        </itemPassives>
+    </entity>
+</template>

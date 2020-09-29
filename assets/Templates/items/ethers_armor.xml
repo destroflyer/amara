@@ -3,14 +3,14 @@
         <itemID>ethers_armor</itemID>
         <itemVisualisation>ethers_armor</itemVisualisation>
         <name>Ether's Armor</name>
-        <itemRecipe itemIDs="heavy_leather_armor,book_of_vitality,book_of_vitality">
+        <itemRecipe itemIDs="molten_heart,red_gem,natures_secret">
             <entity>
-                <goldCost>600</goldCost>
+                <goldCost>200</goldCost>
             </entity>
         </itemRecipe>
-        <isSellable>1800</isSellable>
+        <isSellable>1900</isSellable>
         <!--stats-->
-        <bonusFlatMaximumHealth>850</bonusFlatMaximumHealth>
-        <bonusFlatHealthRegeneration>12</bonusFlatHealthRegeneration>
+        <bonusFlatMaximumHealth>800</bonusFlatMaximumHealth>
+        <bonusFlatHealthRegeneration>8</bonusFlatHealthRegeneration>
     </entity>
 </template>

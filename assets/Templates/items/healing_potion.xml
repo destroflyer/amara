@@ -1,0 +1,17 @@
+<template>
+    <entity>
+        <itemID>healing_potion</itemID>
+        <itemVisualisation>healing_potion</itemVisualisation>
+        <name>Healing Potion</name>
+        <itemRecipe>
+            <entity>
+                <goldCost>50</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>20</isSellable>
+        <!--stats-->
+        <itemActive consumable="true">
+            <entity template="./healing_potion_active"/>
+        </itemActive>
+    </entity>
+</template>

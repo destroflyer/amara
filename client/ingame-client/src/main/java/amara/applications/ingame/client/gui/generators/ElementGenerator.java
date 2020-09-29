@@ -28,7 +28,7 @@ public abstract class ElementGenerator {
         return idPrefix + "_" + index;
     }
 
-    public abstract ElementBuilder generate(Nifty nifty, String id);
+    protected abstract ElementBuilder generate(Nifty nifty, String id);
 
     protected TextRenderer getTextRenderer(Nifty nifty, String id) {
         return getElementById(nifty, id).getRenderer(TextRenderer.class);

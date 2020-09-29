@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>evergreen_bamboo</itemID>
+        <itemVisualisation>evergreen_bamboo</itemVisualisation>
+        <name>Evergreen Bamboo</name>
+        <itemRecipe>
+            <entity>
+                <goldCost>800</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>500</isSellable>
+        <!--stats-->
+        <bonusFlatHealthRegeneration>3</bonusFlatHealthRegeneration>
+    </entity>
+</template>

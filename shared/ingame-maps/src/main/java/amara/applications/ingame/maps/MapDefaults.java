@@ -2,22 +2,24 @@ package amara.applications.ingame.maps;
 
 class MapDefaults {
 
-    private static final String[] shopItemNames = new String[]{
+    private static final String[] shopItemNames = new String[] {
         "egos_sword","egos_shield","egos_ring",
-        "red_gem",
-        "wanderers_treads","boots_of_haste","boots_of_ferocity","boots_of_sorcery","boots_of_intellect","boots_of_iron","boots_of_silence",
-        "rusty_sword","reinforced_sword","greatsword","dagger","wooden_bow",
-        "leather_armor","heavy_leather_armor","cotton_armor","iron_armor","arcane_vesture","enchanted_vesture",
-        "book_of_vampirism","doomblade","hells_scream",
-        "cataclysm","icecold","spike_dagger","thunderbolt",
-        "book_of_precision","book_of_extreme_precision","blinkstrike","new_dawn",
-        "swift_dagger","swift_bow",
-        "tiny_scepter","apprentice_rod","the_untamed",
-        "book_of_wisdom","moonlight","nightkiss","requiem",
-        "book_of_vitality","ethers_armor",
-        "iron_bulwark","natures_protector",
-        "burning_armor","mirror_coat",
-        "reaper","arcaneblade","soulblade"
+        "healing_potion",
+        "sandals","boots_of_ferocity","enchanted_boots","noble_boots","plated_boots","moccasins","swiftwalkers",
+        "broken_sword","waraxe","greatsword","arrowhead","quiver",
+        "red_gem","molten_heart","natures_secret","padded_vest","plated_armor","shredded_cape","enchanted_cloak",
+        "blue_gem","icy_trinket","shard_of_time","rainbow_gem",
+        "forbidden_chapter","runic_blades","solar_diadem","arcane_cape",
+        "blood_capsule","hells_scream",
+        "cataclysm", "icecold","rapidfire_tower","thunderlord_trident",
+        "precision_gloves", "new_dawn", "swift_bow",
+        "apprentice_notes","appropriately_sized_wand","the_untamed",
+        "silver_scroll","nightkiss",
+        "runic_bracers","invincible","requiem",
+        "evergreen_bamboo","natures_secret","ethers_armor",
+        "iron_bulwark","demon_figurine",
+        "glowing_tabard","gladiator_helmet",
+        "spiked_flail","silver_plated_pike","soulblade"
     };
 
     static String[] getShopItemTemplateNames() {

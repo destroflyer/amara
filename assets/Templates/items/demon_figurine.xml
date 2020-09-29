@@ -1,0 +1,16 @@
+<template>
+    <entity>
+        <itemID>demon_figurine</itemID>
+        <itemVisualisation>demon_figurine</itemVisualisation>
+        <name>Demon Figurine</name>
+        <itemRecipe itemIDs="molten_heart,enchanted_cloak">
+            <entity>
+                <goldCost>400</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>1100</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumHealth>420</bonusFlatMaximumHealth>
+        <bonusFlatMagicResistance>35</bonusFlatMagicResistance>
+    </entity>
+</template>

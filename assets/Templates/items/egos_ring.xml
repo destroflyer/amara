@@ -12,5 +12,6 @@
         <!--stats-->
         <bonusFlatMaximumHealth>80</bonusFlatMaximumHealth>
         <bonusFlatAbilityPower>10</bonusFlatAbilityPower>
+        <bonusFlatManaRegeneration>0.75</bonusFlatManaRegeneration>
     </entity>
 </template>

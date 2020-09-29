@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>appropriately_sized_wand</itemID>
+        <itemVisualisation>appropriately_sized_wand</itemVisualisation>
+        <name>Appropriately Sized Wand</name>
+        <itemRecipe>
+            <entity>
+                <goldCost>1100</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>800</isSellable>
+        <!--stats-->
+        <bonusFlatAbilityPower>60</bonusFlatAbilityPower>
+    </entity>
+</template>

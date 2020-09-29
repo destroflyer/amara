@@ -3,14 +3,14 @@
         <itemID>new_dawn</itemID>
         <itemVisualisation>new_dawn</itemVisualisation>
         <name>New Dawn</name>
-        <itemRecipe itemIDs="blinkstrike,greatsword">
+        <itemRecipe itemIDs="greatsword,waraxe,precision_gloves">
             <entity>
-                <goldCost>600</goldCost>
+                <goldCost>500</goldCost>
             </entity>
         </itemRecipe>
-        <isSellable>2500</isSellable>
+        <isSellable>1900</isSellable>
         <!--stats-->
-        <bonusFlatAttackDamage>80</bonusFlatAttackDamage>
-        <bonusPercentageCriticalChance>0.3</bonusPercentageCriticalChance>
+        <bonusFlatAttackDamage>90</bonusFlatAttackDamage>
+        <bonusPercentageCriticalChance>0.30</bonusPercentageCriticalChance>
     </entity>
 </template>

@@ -1,0 +1,18 @@
+<template>
+    <entity>
+        <itemID>gladiator_helmet</itemID>
+        <itemVisualisation>gladiator_helmet</itemVisualisation>
+        <name>Gladiator Helmet</name>
+        <itemRecipe itemIDs="padded_vest,plated_armor">
+            <entity>
+                <goldCost>700</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>900</isSellable>
+        <!--stats-->
+        <bonusFlatArmor>45</bonusFlatArmor>
+        <itemPassives>
+            <entity template="./gladiator_helmet_passive"/>
+        </itemPassives>
+    </entity>
+</template>

@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>shredded_cape</itemID>
+        <itemVisualisation>shredded_cape</itemVisualisation>
+        <name>Shredded Cape</name>
+        <itemRecipe>
+            <entity>
+                <goldCost>300</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>200</isSellable>
+        <!--stats-->
+        <bonusFlatMagicResistance>10</bonusFlatMagicResistance>
+    </entity>
+</template>

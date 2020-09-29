@@ -1,0 +1,17 @@
+<template>
+    <entity>
+        <itemID>runic_blades</itemID>
+        <itemVisualisation>runic_blades</itemVisualisation>
+        <name>Runic Blades</name>
+        <itemRecipe itemIDs="waraxe,blue_gem,waraxe">
+            <entity>
+                <goldCost>550</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>1600</isSellable>
+        <!--stats-->
+        <bonusFlatAttackDamage>60</bonusFlatAttackDamage>
+        <bonusFlatMaximumMana>350</bonusFlatMaximumMana>
+        <bonusPercentageCooldownSpeed>0.2</bonusPercentageCooldownSpeed>
+    </entity>
+</template>

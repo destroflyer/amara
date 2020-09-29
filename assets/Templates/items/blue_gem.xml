@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>blue_gem</itemID>
+        <itemVisualisation>blue_gem</itemVisualisation>
+        <name>Blue Gem</name>
+        <itemRecipe>
+            <entity>
+                <goldCost>350</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>280</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumMana>250</bonusFlatMaximumMana>
+    </entity>
+</template>

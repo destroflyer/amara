@@ -12,5 +12,6 @@
         <!--stats-->
         <bonusFlatMaximumHealth>80</bonusFlatMaximumHealth>
         <bonusFlatAttackDamage>10</bonusFlatAttackDamage>
+        <bonusPercentageLifesteal>0.05</bonusPercentageLifesteal>
     </entity>
 </template>

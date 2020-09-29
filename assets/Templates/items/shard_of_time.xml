@@ -1,0 +1,17 @@
+<template>
+    <entity>
+        <itemID>shard_of_time</itemID>
+        <itemVisualisation>shard_of_time</itemVisualisation>
+        <name>Shard of Time</name>
+        <itemRecipe itemIDs="blue_gem,icy_trinket">
+            <entity>
+                <goldCost>300</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>600</isSellable>
+        <!--stats-->
+        <bonusFlatMaximumMana>300</bonusFlatMaximumMana>
+        <bonusFlatManaRegeneration>1.5</bonusFlatManaRegeneration>
+        <bonusPercentageCooldownSpeed>0.1</bonusPercentageCooldownSpeed>
+    </entity>
+</template>

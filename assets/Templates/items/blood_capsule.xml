@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>blood_capsule</itemID>
+        <itemVisualisation>blood_capsule</itemVisualisation>
+        <name>Blood Capsule</name>
+        <itemRecipe>
+            <entity>
+                <goldCost>400</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>250</isSellable>
+        <!--stats-->
+        <bonusPercentageLifesteal>0.1</bonusPercentageLifesteal>
+    </entity>
+</template>

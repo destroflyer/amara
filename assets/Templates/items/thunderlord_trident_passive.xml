@@ -1,0 +1,108 @@
+<template>
+    <value name="maximumStacks">3</value>
+    <entity id="passive">
+        <description>Your basic attacks grant a stack - After reaching [maximumStacks] stacks, the stacks are removed and your next basic attack will deal 70 magic damage (Can crit).</description>
+        <passiveAddedEffectTriggers>
+            <!--add buff and spelleffect-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="-1">
+                            <entity id="buff">
+                                <name>Thunder Attacks</name>
+                                <description>Deal bonus magic damage every [maximumStacks] basic attacks.</description>
+                                <buffIcon>items/thunderlord_trident</buffIcon>
+                                <maximumStacks>[maximumStacks]</maximumStacks>
+                                <keepOnDeath/>
+                            </entity>
+                        </addBuff>
+                        <addAutoAttackSpellEffects>
+                            <entity id="newSpellEffect1">
+                                <castedEffectTriggers>
+                                    <!--add stacks-->
+                                    <entity>
+                                        <sourceCasterTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <addStacks stacks="1">#buff</addStacks>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#passive</triggerSource>
+                                    </entity>
+                                </castedEffectTriggers>
+                            </entity>
+                        </addAutoAttackSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+            <!--add stacks reached trigger-->
+            <entity>
+                <customTarget>#buff</customTarget>
+                <triggeredEffect>
+                    <entity>
+                        <addEffectTriggers>
+                            <!--clear stacks and add spelleffect-->
+                            <entity>
+                                <stacksReachedTrigger>[maximumStacks]</stacksReachedTrigger>
+                                <targetTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <clearStacks>#buff</clearStacks>
+                                        <addAutoAttackSpellEffects>
+                                            <entity id="newSpellEffect2">
+                                                <castedEffectTriggers>
+                                                    <!--target effect-->
+                                                    <entity>
+                                                        <targetTarget/>
+                                                        <triggeredEffect>
+                                                            <entity>
+                                                                <magicDamage>70</magicDamage>
+                                                                <canCrit/>
+                                                                <addBuff duration="0.2">
+                                                                    <entity>
+                                                                        <buffVisualisation>electrified</buffVisualisation>
+                                                                    </entity>
+                                                                </addBuff>
+                                                            </entity>
+                                                        </triggeredEffect>
+                                                        <triggerSource>#passive</triggerSource>
+                                                    </entity>
+                                                    <!--remove spelleffect-->
+                                                    <entity>
+                                                        <sourceCasterTarget/>
+                                                        <triggeredEffect>
+                                                            <entity>
+                                                                <removeSpellEffects>#newSpellEffect2</removeSpellEffects>
+                                                            </entity>
+                                                        </triggeredEffect>
+                                                        <triggerSource>#passive</triggerSource>
+                                                    </entity>
+                                                </castedEffectTriggers>
+                                            </entity>
+                                        </addAutoAttackSpellEffects>
+                                    </entity>
+                                </triggeredEffect>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveAddedEffectTriggers>
+        <passiveRemovedEffectTriggers>
+            <!--remove spelleffects-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeBuff>#buff</removeBuff>
+                        <removeSpellEffects>#newSpellEffect1,#newSpellEffect2</removeSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#passive</triggerSource>
+            </entity>
+        </passiveRemovedEffectTriggers>
+    </entity>
+</template>

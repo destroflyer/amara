@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>quiver</itemID>
+        <itemVisualisation>quiver</itemVisualisation>
+        <name>Quiver</name>
+        <itemRecipe itemIDs="arrowhead,arrowhead">
+            <entity>
+                <goldCost>300</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>700</isSellable>
+        <!--stats-->
+        <bonusPercentageAttackSpeed>0.25</bonusPercentageAttackSpeed>
+    </entity>
+</template>

@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>waraxe</itemID>
+        <itemVisualisation>waraxe</itemVisualisation>
+        <name>Waraxe</name>
+        <itemRecipe itemIDs="broken_sword,broken_sword">
+            <entity>
+                <goldCost>200</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>500</isSellable>
+        <!--stats-->
+        <bonusFlatAttackDamage>25</bonusFlatAttackDamage>
+    </entity>
+</template>

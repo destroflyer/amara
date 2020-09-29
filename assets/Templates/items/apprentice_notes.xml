@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>apprentice_notes</itemID>
+        <itemVisualisation>apprentice_notes</itemVisualisation>
+        <name>Apprentice Notes</name>
+        <itemRecipe>
+            <entity>
+                <goldCost>400</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>250</isSellable>
+        <!--stats-->
+        <bonusFlatAbilityPower>20</bonusFlatAbilityPower>
+    </entity>
+</template>

@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>arrowhead</itemID>
+        <itemVisualisation>arrowhead</itemVisualisation>
+        <name>Arrowhead</name>
+        <itemRecipe>
+            <entity>
+                <goldCost>400</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>250</isSellable>
+        <!--stats-->
+        <bonusPercentageAttackSpeed>0.1</bonusPercentageAttackSpeed>
+    </entity>
+</template>

@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>sandals</itemID>
+        <itemVisualisation>sandals</itemVisualisation>
+        <name>Sandals</name>
+        <itemRecipe>
+            <entity>
+                <goldCost>350</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>250</isSellable>
+        <!--stats-->
+        <bonusFlatWalkSpeed>0.35</bonusFlatWalkSpeed>
+    </entity>
+</template>

@@ -1,0 +1,15 @@
+<template>
+    <entity>
+        <itemID>broken_sword</itemID>
+        <itemVisualisation>broken_sword</itemVisualisation>
+        <name>Broken Sword</name>
+        <itemRecipe>
+            <entity>
+                <goldCost>300</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>200</isSellable>
+        <!--stats-->
+        <bonusFlatAttackDamage>10</bonusFlatAttackDamage>
+    </entity>
+</template>

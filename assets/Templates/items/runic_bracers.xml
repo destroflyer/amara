@@ -1,0 +1,16 @@
+<template>
+    <entity>
+        <itemID>runic_bracers</itemID>
+        <itemVisualisation>runic_bracers</itemVisualisation>
+        <name>Runic Bracers</name>
+        <itemRecipe itemIDs="apprentice_notes,padded_vest">
+            <entity>
+                <goldCost>200</goldCost>
+            </entity>
+        </itemRecipe>
+        <isSellable>550</isSellable>
+        <!--stats-->
+        <bonusFlatAbilityPower>30</bonusFlatAbilityPower>
+        <bonusFlatArmor>20</bonusFlatArmor>
+    </entity>
+</template>
