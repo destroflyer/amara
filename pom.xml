@@ -25,7 +25,6 @@
         <version.jdom>2.0.6</version.jdom>
         <version.jme3>3.2.1-stable</version.jme3>
         <version.jorbis>0.0.17.4</version.jorbis>
-        <version.jsch>0.1.55</version.jsch>
         <version.junit>4.11</version.junit>
         <version.lombok>1.18.10</version.lombok>
         <version.maven-assembly-plugin>3.1.1</version.maven-assembly-plugin>
@@ -251,12 +250,6 @@
                 <groupId>com.github.destroflyer.jme3-effekseer</groupId>
                 <artifactId>jme3-effekseer</artifactId>
                 <version>44aff53b24d90d5431b742bc2da16859c80f9b2a</version>
-            </dependency>
-            <!--JSch-->
-            <dependency>
-                <groupId>com.jcraft</groupId>
-                <artifactId>jsch</artifactId>
-                <version>${version.jsch}</version>
             </dependency>
             <!--JUnit-->
             <dependency>

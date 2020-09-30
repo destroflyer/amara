@@ -40,7 +40,7 @@ public class SendGameContentsBackend implements MessageBackend {
     private GameCharacter[] getCharacters() {
         LinkedList<GameCharacter> tmpCharacters = new LinkedList<>();
         LinkedList<GameCharacterSkin> tmpSkins = new LinkedList<>();
-        QueryResult result_Characters = databaseAppState.getQueryResult("SELECT id, name, title, lore, is_public FROM characters");
+        QueryResult result_Characters = databaseAppState.getQueryResult("SELECT id, name, title, lore, is_public FROM characters ORDER by title");
         while (result_Characters.next()) {
             int characterId = result_Characters.getInteger("id");
             String characterName = result_Characters.getString("name");

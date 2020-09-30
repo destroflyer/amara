@@ -12,7 +12,7 @@ public class PlayersContentsAppState extends ServerBaseAppState {
     public OwnedGameCharacter[] getOwnedCharacters(int playerId) {
         DatabaseAppState databaseAppState = getAppState(DatabaseAppState.class);
         String whereClause = (canSeeNonPublicContent(playerId) ? "" : " WHERE is_public = 1");
-        QueryResult result_Characters = databaseAppState.getQueryResult("SELECT id, name, title, lore, is_public FROM characters" + whereClause);
+        QueryResult result_Characters = databaseAppState.getQueryResult("SELECT id, name, title, lore, is_public FROM characters" + whereClause + " ORDER BY title");
         LinkedList<OwnedGameCharacter> ownedCharacters = new LinkedList<>();
         LinkedList<GameCharacterSkin> tmpOwnedSkins = new LinkedList<>();
         while (result_Characters.next()) {

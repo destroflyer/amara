@@ -1,13 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * MainFrame.java
- *
- * Created on 02.08.2012, 23:50:37
- */
 package amara.applications.master.client.launcher;
 
 import java.awt.*;
@@ -17,7 +7,6 @@ import amara.applications.master.client.MasterserverClientApplication;
 import amara.applications.master.client.appstates.CharactersAppState;
 import amara.applications.master.client.appstates.LoginAppState;
 import amara.applications.master.client.launcher.panels.*;
-import amara.applications.master.client.launcher.panels.connectscreens.ConnectScreen_Shina;
 import amara.applications.master.network.messages.Message_GetGameContents;
 import amara.applications.master.network.messages.Message_Login;
 import amara.applications.master.server.launcher.Launcher_Game;
@@ -31,10 +20,6 @@ import amara.libraries.network.NetworkClient;
 import amara.libraries.network.exceptions.ServerConnectionException;
 import amara.libraries.network.exceptions.ServerConnectionTimeoutException;
 
-/**
- *
- * @author Carl
- */
 public class MainFrame extends JFrame {
 
     public static void main(String[] args) {
@@ -47,17 +32,14 @@ public class MainFrame extends JFrame {
     public MainFrame(String authToken) {
         this.authToken = authToken;
         initComponents();
-        instance = this;
-        panConnect = new PanConnect(this, new ConnectScreen_Shina());
         setSize(1000, 600);
+        panConnect = new PanConnect();
         setDisplayedPanel(panConnect);
-        panConnect.start();
         FrameUtil.initFrameSpecials(this);
         FrameUtil.centerFrame(this);
         UIManager.put("TabbedPane.contentBorderInsets", new Insets(-1, 0, 0, 0));
         connect();
     }
-    private static MainFrame instance;
     private String authToken;
     private PanConnect panConnect;
     private MasterserverClientApplication masterClient;
@@ -103,23 +85,13 @@ public class MainFrame extends JFrame {
                             }
                             Util.sleep(100);
                         }
-                        panConnect.setInfoLabel("");
-                        panConnect.onConnected();
+                        setDisplayedPanel(new PanMainMenu());
                         break;
                 }
             } catch (ServerConnectionException | ServerConnectionTimeoutException ex) {
                 panConnect.setInfoLabel("Seems like there is a problem with our servers :(");
             }
         }).start();
-    }
-
-    public void openMainMenu() {
-        panConnect.close();
-        setDisplayedPanel(new PanMainMenu());
-    }
-
-    public static MainFrame getInstance() {
-        return instance;
     }
 
     /** This method is called from within the constructor to

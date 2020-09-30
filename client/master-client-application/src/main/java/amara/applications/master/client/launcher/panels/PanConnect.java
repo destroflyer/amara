@@ -1,82 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.master.client.launcher.panels;
 
-import amara.applications.master.client.launcher.MainFrame;
-import amara.applications.master.client.launcher.buttons.ButtonUtil;
-import amara.applications.master.client.launcher.buttons.DefaultButtonBuilder;
-import amara.applications.master.client.launcher.buttons.ImageButtonPanel;
-import amara.applications.master.client.launcher.panels.connectscreens.ConnectScreen;
-import amara.core.Util;
-
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-/**
- *
- * @author Carl
- */
 public class PanConnect extends JPanel {
 
-    public PanConnect(MainFrame mainFrame, ConnectScreen connectScreen) {
-        this.mainFrame = mainFrame;
-        this.connectScreen = connectScreen;
+    public PanConnect() {
         initComponents();
-        connectScreen.setSize(994, 572);
-        connectScreen.initialize();
-        updateThread = new Thread(() -> {
-            long lastTimestamp = System.currentTimeMillis();
-            float lastTimePerFrame;
-            while (!stopUpdateThread) {
-                long currentTimestamp = System.currentTimeMillis();
-                lastTimePerFrame = ((currentTimestamp - lastTimestamp) / 1000f);
-                lastTimestamp = currentTimestamp;
-                connectScreen.update(lastTimePerFrame);
-                updateUI();
-                Util.sleep(1000 / 60);
-            }
-            connectScreen.close();
-        });
-    }
-    private MainFrame mainFrame;
-    private ConnectScreen connectScreen;
-    private Thread updateThread;
-    private boolean stopUpdateThread;
-
-    @Override
-    public void paintComponent(Graphics _graphics) {
-        super.paintComponent(_graphics);
-        Graphics2D graphics = (Graphics2D) _graphics;
-        connectScreen.paint(graphics);
     }
 
     public void setInfoLabel(String text) {
         lblInfo.setText(text);
-    }
-
-    public void start() {
-        updateThread.start();
-    }
-
-    public void close() {
-        stopUpdateThread = true;
-    }
-
-    public void onConnected() {
-        ImageButtonPanel btnStart = ButtonUtil.addImageBackgroundButton(panButtonContainer, new DefaultButtonBuilder("default_176x30", "Start"));
-        btnStart.addMouseListener(new MouseAdapter(){
-
-            @Override
-            public void mouseClicked(MouseEvent evt){
-                super.mouseClicked(evt);
-                mainFrame.openMainMenu();
-            }
-        });
     }
 
     /**
@@ -89,7 +22,6 @@ public class PanConnect extends JPanel {
     private void initComponents() {
 
         lblInfo = new javax.swing.JLabel();
-        panButtonContainer = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(30, 30, 30));
 
@@ -97,46 +29,25 @@ public class PanConnect extends JPanel {
         lblInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblInfo.setText("Connecting to servers...");
 
-        panButtonContainer.setOpaque(false);
-        panButtonContainer.setPreferredSize(new java.awt.Dimension(176, 30));
-
-        javax.swing.GroupLayout panButtonContainerLayout = new javax.swing.GroupLayout(panButtonContainer);
-        panButtonContainer.setLayout(panButtonContainerLayout);
-        panButtonContainerLayout.setHorizontalGroup(
-            panButtonContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 176, Short.MAX_VALUE)
-        );
-        panButtonContainerLayout.setVerticalGroup(
-            panButtonContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(412, 412, 412)
-                .addComponent(panButtonContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(412, 412, 412))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(535, Short.MAX_VALUE)
-                .addComponent(lblInfo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panButtonContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addContainerGap()
+                .addComponent(lblInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblInfo;
-    private javax.swing.JPanel panButtonContainer;
     // End of variables declaration//GEN-END:variables
 }
