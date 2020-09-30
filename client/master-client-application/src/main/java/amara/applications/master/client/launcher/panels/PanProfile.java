@@ -361,7 +361,7 @@ public class PanProfile extends javax.swing.JPanel{
             if(panAvatarSelection == null){
                 panAvatarSelection = new PanAvatarSelection(this);
                 panAvatarSelection.setLocation(btnAvatar.getX(), btnAvatar.getY());
-                panAvatarSelection.setSize(352, 212);
+                panAvatarSelection.setSize(422, 282);
                 add(panAvatarSelection, 0);
             }
             btnAvatar.setIcon(null);

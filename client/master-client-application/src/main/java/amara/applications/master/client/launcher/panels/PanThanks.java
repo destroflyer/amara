@@ -76,7 +76,7 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("ShaderBlow", "Shaders (Bubble, CartoonEdge, Electricity, Glass)", "Interface/client/thanks/jmonkeyengine.png", "https://github.com/jMonkeyEngine-Contributions/shaderblowlib"),
         new Thanks("t0neg0d", "Particle effects", "Interface/client/thanks/jmonkeyengine.png", "https://github.com/t0neg0d"),
         // Interface
-        new Thanks("Icons8", "Icon \"Bot\"", "Interface/client/avatars/bot.jpg", "https://icons8.com/icon/37410/bot"),
+        new Thanks("Icons8", "Icon \"Bot\"", "Interface/client/avatars/bot.png", "https://icons8.com/icon/37410/bot"),
         new Thanks("Mahmoud Saleh", "Icon set \"Mini Icons\"", "Interface/client/audio.png", "https://iconarchive.com/artist/salehhh.html"),
         new Thanks("Pixel Mixer", "Icon set \"Basic Icons\"", "Interface/client/user.png", "https://iconarchive.com/artist/pixelmixer.html"),
         new Thanks("juanello", "Cursors \"Warrior Gloves\"", "Interface/client/thanks/realworld_graphics.png", "http://rw-designer.com/user-art/19010"),
