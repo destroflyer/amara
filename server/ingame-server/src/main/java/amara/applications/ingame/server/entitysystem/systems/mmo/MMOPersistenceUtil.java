@@ -89,6 +89,10 @@ public class MMOPersistenceUtil {
                 if (bonusFlatMaximumHealthComponent != null) {
                     mmoItemState.setFlatMaximumHealth(bonusFlatMaximumHealthComponent.getValue());
                 }
+                BonusFlatMaximumManaComponent bonusFlatMaximumManaComponent = entityWorld.getComponent(itemEntity, BonusFlatMaximumManaComponent.class);
+                if (bonusFlatMaximumManaComponent != null) {
+                    mmoItemState.setFlatMaximumMana(bonusFlatMaximumManaComponent.getValue());
+                }
                 BonusPercentageAttackSpeedComponent bonusPercentageAttackSpeedComponent = entityWorld.getComponent(itemEntity, BonusPercentageAttackSpeedComponent.class);
                 if (bonusPercentageAttackSpeedComponent != null) {
                     mmoItemState.setPercentageAttackSpeed(bonusPercentageAttackSpeedComponent.getValue());
@@ -190,6 +194,10 @@ public class MMOPersistenceUtil {
             Float flatMaximumHealth = mmoItemState.getFlatMaximumHealth();
             if (flatMaximumHealth != null) {
                 entityWorld.setComponent(itemEntity, new BonusFlatMaximumHealthComponent(flatMaximumHealth));
+            }
+            Float flatMaximumMana = mmoItemState.getFlatMaximumMana();
+            if (flatMaximumMana != null) {
+                entityWorld.setComponent(itemEntity, new BonusFlatMaximumManaComponent(flatMaximumMana));
             }
             Float percentageAttackSpeed = mmoItemState.getPercentageAttackSpeed();
             if (percentageAttackSpeed != null) {

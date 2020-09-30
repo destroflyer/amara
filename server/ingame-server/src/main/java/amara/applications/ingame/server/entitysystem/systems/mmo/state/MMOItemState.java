@@ -14,6 +14,7 @@ public class MMOItemState {
     private Float flatArmor;
     private Float flatMagicResistance;
     private Float flatMaximumHealth;
+    private Float flatMaximumMana;
     private Float percentageAttackSpeed;
     private Float percentageCooldownSpeed;
     private Float percentageCriticalChance;
