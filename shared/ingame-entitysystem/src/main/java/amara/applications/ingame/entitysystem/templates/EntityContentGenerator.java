@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class EntityContentGenerator {
 
-    private static final int ATTRIBUTES_COUNT = 10;
+    private static final int ATTRIBUTES_COUNT = 11;
 
     public static int generateRandomItem(EntityWorld entityWorld) {
         int attributesCount = generateRandomAttributesCount();
@@ -69,11 +69,12 @@ public class EntityContentGenerator {
                 case 2: bonusAttributeComponent = new BonusFlatArmorComponent(attributeStat); break;
                 case 3: bonusAttributeComponent = new BonusFlatMagicResistanceComponent(attributeStat); break;
                 case 4: bonusAttributeComponent = new BonusFlatMaximumHealthComponent(attributeStat); break;
-                case 5: bonusAttributeComponent = new BonusPercentageAttackSpeedComponent(0.01f * attributeStat); break;
-                case 6: bonusAttributeComponent = new BonusPercentageCooldownSpeedComponent(0.01f * attributeStat); break;
-                case 7: bonusAttributeComponent = new BonusPercentageCriticalChanceComponent(0.01f * attributeStat); break;
-                case 8: bonusAttributeComponent = new BonusPercentageLifestealComponent(0.01f * attributeStat); break;
-                case 9: bonusAttributeComponent = new BonusPercentageWalkSpeedComponent(0.01f * attributeStat); break;
+                case 5: bonusAttributeComponent = new BonusFlatMaximumManaComponent(attributeStat); break;
+                case 6: bonusAttributeComponent = new BonusPercentageAttackSpeedComponent(0.01f * attributeStat); break;
+                case 7: bonusAttributeComponent = new BonusPercentageCooldownSpeedComponent(0.01f * attributeStat); break;
+                case 8: bonusAttributeComponent = new BonusPercentageCriticalChanceComponent(0.01f * attributeStat); break;
+                case 9: bonusAttributeComponent = new BonusPercentageLifestealComponent(0.01f * attributeStat); break;
+                case 10: bonusAttributeComponent = new BonusPercentageWalkSpeedComponent(0.01f * attributeStat); break;
             }
             entityWorld.setComponent(itemEntity, bonusAttributeComponent);
             totalStats += attributeStat;

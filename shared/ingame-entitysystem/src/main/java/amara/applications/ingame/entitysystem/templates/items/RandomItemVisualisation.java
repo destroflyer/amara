@@ -8,25 +8,27 @@ public class RandomItemVisualisation {
 
     private static final String[][] ATTRIBUTE_ITEM_VISUALISATIONS = {
         // AbilityPower
-        { "apprentice_rod", "book_of_wisdom", "egos_ring", "moonlight", "nightkiss", "requiem", "the_untamed", "tiny_scepter" },
+        { "apprentice_notes", "appropriately_sized_wand", "egos_ring", "forbidden_chapter", "nightkiss", "orb_of_might", "requiem", "shard_of_time", "silver_scroll", "the_untamed" },
         // AttackDamage
-        { "arcaneblade", "blinkstrike", "cataclysm", "egos_sword", "greatsword", "hells_scream", "icecold", "new_dawn", "reaper", "reinforced_sword", "rusty_sword", "soulblade" },
+        { "blacksmiths_wrath", "broken_sword", "cataclysm", "egos_sword", "greatsword", "hells_scream", "icecold", "new_dawn", "runic_blades", "silver_plated_pike", "soulblade", "spiked_flail", "waraxe" },
         // Armor
-        { "burning_armor", "ethers_armor", "heavy_leather_armor", "iron_armor", "iron_bulwark", "leather_armor", "lifebinder" },
+        { "egos_shield", "gladiator_helmet", "glowing_tabard", "invincible", "iron_bulwark", "padded_vest", "plated_armor", "runic_bracers", "solar_diadem" },
         // MagicResistance
-        { "arcane_vesture", "arcaneblade", "enchanted_vesture", "green_gem", "mirror_coat", "natures_protector" },
+        { "arcane_cape", "demon_figurine", "enchanted_cloak", "shredded_cape" },
         // MaximumHealth
-        { "book_of_vitality", "cotton_armor", "egos_shield", "leather_armor" },
+        { "ethers_armor", "evergreen_bamboo", "molten_heart", "natures_secret", "rainbow_gem", "red_gem" },
+        // Mana
+        { "blue_gem", "egos_ring", "icy_trinket", "shard_of_time" },
         // AttackSpeed
-        { "dagger", "spike_dagger", "swift_bow", "swift_dagger", "thunderbolt", "wooden_bow" },
+        { "arrowhead", "quiver", "rapidfire_tower", "swift_bow", "thunderlord_trident" },
         // CooldownSpeed
-        { "egos_ring", "book_of_wisdom", "soulblade", "spike_dagger" },
+        { "arcane_cape", "rainbow_gem", "shard_of_time", "solar_diadem" },
         // CriticalChance
-        { "blinkstrike", "book_of_extreme_precision", "book_of_precision", "boots_of_intellect" },
+        { "new_dawn", "precision_gloves", "swift_bow" },
         // Lifesteal
-        { "book_of_vampirism", "doomblade", "hells_scream", "reaper", "red_gem" },
+        { "blood_capsule", "hells_scream" },
         // WalkSpeed
-        { "boots_of_ferocity", "boots_of_haste", "boots_of_intellect", "boots_of_intellect", "boots_of_iron", "boots_of_intellect", "boots_of_silence", "boots_of_sorcery", "wanderers_treads" },
+        { "boots_of_ferocity", "enchanted_boots", "moccasins", "noble_boots", "plated_boots", "sandals", "swiftwalkers" },
     };
     private static final NameGenerator_Bow NAME_GENERATOR_BOW = new NameGenerator_Bow();
     private static final NameGenerator_ChestArmor NAME_GENERATOR_CHEST_ARMOR = new NameGenerator_ChestArmor();
@@ -39,59 +41,64 @@ public class RandomItemVisualisation {
     private static final NameGenerator_Sword NAME_GENERATOR_SWORD = new NameGenerator_Sword();
     private static final HashMap<String, NameGenerator> ITEM_VISUALISATIONS_NAME_GENERATORS = new HashMap<>();
     static {
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("apprentice_rod", NAME_GENERATOR_STAFF);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("arcane_vesture", NAME_GENERATOR_CHEST_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("arcaneblade", NAME_GENERATOR_SWORD);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("blinkstrike", NAME_GENERATOR_SWORD);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("book_of_extreme_precision", NAME_GENERATOR_MAGIC_TOME);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("book_of_precision", NAME_GENERATOR_MAGIC_TOME);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("book_of_vampirism", NAME_GENERATOR_MAGIC_TOME);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("book_of_vitality", NAME_GENERATOR_MAGIC_TOME);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("book_of_wisdom", NAME_GENERATOR_MAGIC_TOME);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("apprentice_notes", NAME_GENERATOR_MAGIC_TOME);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("boots_of_ferocity", NAME_GENERATOR_FEET_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("boots_of_haste", NAME_GENERATOR_FEET_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("boots_of_intellect", NAME_GENERATOR_FEET_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("boots_of_iron", NAME_GENERATOR_FEET_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("boots_of_silence", NAME_GENERATOR_FEET_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("boots_of_sorcery", NAME_GENERATOR_FEET_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("burning_armor", NAME_GENERATOR_CHEST_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("enchanted_boots", NAME_GENERATOR_FEET_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("moccasins", NAME_GENERATOR_FEET_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("noble_boots", NAME_GENERATOR_FEET_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("plated_boots", NAME_GENERATOR_FEET_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("sandals", NAME_GENERATOR_FEET_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("swiftwalkers", NAME_GENERATOR_FEET_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("appropriately_sized_wand", NAME_GENERATOR_STAFF);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("arcane_cape", NAME_GENERATOR_CHEST_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("arrowhead", NAME_GENERATOR_DAGGER);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("blacksmiths_wrath", NAME_GENERATOR_SWORD);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("blood_capsule", NAME_GENERATOR_JEWELRY);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("blue_gem", NAME_GENERATOR_JEWELRY);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("broken_sword", NAME_GENERATOR_SWORD);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("cataclysm", NAME_GENERATOR_SWORD);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("cotton_armor", NAME_GENERATOR_CHEST_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("dagger", NAME_GENERATOR_DAGGER);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("doomblade", NAME_GENERATOR_SWORD);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("demon_figurine", NAME_GENERATOR_JEWELRY);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("egos_ring", NAME_GENERATOR_JEWELRY);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("egos_shield", NAME_GENERATOR_SHIELD);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("egos_sword", NAME_GENERATOR_SWORD);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("enchanted_vesture", NAME_GENERATOR_CHEST_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("enchanted_cloak", NAME_GENERATOR_CHEST_ARMOR);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("ethers_armor", NAME_GENERATOR_CHEST_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("evergreen_bamboo", NAME_GENERATOR_JEWELRY);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("forbidden_chapter", NAME_GENERATOR_MAGIC_TOME);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("gladiator_helmet", NAME_GENERATOR_SHIELD);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("glowing_tabard", NAME_GENERATOR_CHEST_ARMOR);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("greatsword", NAME_GENERATOR_SWORD);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("green_gem", NAME_GENERATOR_JEWELRY);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("heavy_leather_armor", NAME_GENERATOR_CHEST_ARMOR);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("hells_scream", NAME_GENERATOR_SWORD);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("icecold", NAME_GENERATOR_SWORD);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("iron_armor", NAME_GENERATOR_CHEST_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("iron_bulwark", NAME_GENERATOR_CHEST_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("leather_armor", NAME_GENERATOR_CHEST_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("lifebinder", NAME_GENERATOR_CHEST_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("mirror_coat", NAME_GENERATOR_CHEST_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("moonlight", NAME_GENERATOR_STAFF);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("natures_protector", NAME_GENERATOR_CHEST_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("icy_trinket", NAME_GENERATOR_JEWELRY);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("invincible", NAME_GENERATOR_SHIELD);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("iron_bulwark", NAME_GENERATOR_SHIELD);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("molten_heart", NAME_GENERATOR_JEWELRY);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("natures_secret", NAME_GENERATOR_JEWELRY);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("new_dawn", NAME_GENERATOR_SWORD);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("nightkiss", NAME_GENERATOR_STAFF);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("reaper", NAME_GENERATOR_SWORD);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("orb_of_might", NAME_GENERATOR_JEWELRY);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("padded_vest", NAME_GENERATOR_CHEST_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("plated_armor", NAME_GENERATOR_CHEST_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("precision_gloves", NAME_GENERATOR_SHIELD);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("quiver", NAME_GENERATOR_BOW);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("rainbow_gem", NAME_GENERATOR_JEWELRY);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("rapidfire_tower", NAME_GENERATOR_BOW);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("red_gem", NAME_GENERATOR_JEWELRY);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("reinforced_sword", NAME_GENERATOR_SWORD);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("requiem", NAME_GENERATOR_STAFF);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("rusty_sword", NAME_GENERATOR_SWORD);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("runic_blades", NAME_GENERATOR_SWORD);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("runic_bracers", NAME_GENERATOR_JEWELRY);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("shard_of_time", NAME_GENERATOR_JEWELRY);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("shredded_cape", NAME_GENERATOR_CHEST_ARMOR);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("silver_plated_pike", NAME_GENERATOR_SWORD);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("silver_scroll", NAME_GENERATOR_MAGIC_TOME);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("solar_diadem", NAME_GENERATOR_SHIELD);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("soulblade", NAME_GENERATOR_SWORD);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("spike_dagger", NAME_GENERATOR_DAGGER);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("spiked_flail", NAME_GENERATOR_SWORD);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("swift_bow", NAME_GENERATOR_BOW);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("swift_dagger", NAME_GENERATOR_DAGGER);
         ITEM_VISUALISATIONS_NAME_GENERATORS.put("the_untamed", NAME_GENERATOR_STAFF);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("thunderbolt", NAME_GENERATOR_DAGGER);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("tiny_scepter", NAME_GENERATOR_STAFF);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("wanderers_treads", NAME_GENERATOR_FEET_ARMOR);
-        ITEM_VISUALISATIONS_NAME_GENERATORS.put("wooden_bow", NAME_GENERATOR_BOW);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("thunderlord_trident", NAME_GENERATOR_STAFF);
+        ITEM_VISUALISATIONS_NAME_GENERATORS.put("waraxe", NAME_GENERATOR_SWORD);
     }
 
     public static String getRandomItemVisualisation(int attributeIndex) {
