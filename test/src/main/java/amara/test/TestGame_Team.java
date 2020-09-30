@@ -10,7 +10,7 @@ public class TestGame_Team extends TestGame {
         startServerAndLogin(authToken, networkClient -> {
             networkClient.sendMessage(new Message_CreateLobby());
             networkClient.sendMessage(new Message_SetLobbyData(new LobbyData("testmap", new TeamFormat(1, 0))));
-            // networkClient.sendMessage(new Message_AddLobbyBot(new LobbyPlayer_Bot(BotType.EASY, "Bot", new GameSelectionPlayerData(11, null))));
+            // networkClient.sendMessage(new Message_AddLobbyBot(new LobbyPlayer_Bot(BotType.EASY, "Bot", new GameSelectionPlayerData(18, null))));
             networkClient.sendMessage(new Message_StartLobbyQueue());
             networkClient.sendMessage(new Message_AcceptGameSelection(true));
             networkClient.sendMessage(new Message_SetGameSelectionPlayerData(new GameSelectionPlayerData(17, null)));
