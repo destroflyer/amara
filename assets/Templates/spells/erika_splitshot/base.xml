@@ -1,6 +1,8 @@
 <template>
-    <value name="delay">0.3</value>
-    <value name="stunDuration">1</value>
+    <values>
+        <delay>0.3</delay>
+        <stunDuration>1</stunDuration>
+    </values>
     <entity id="spell">
         <name>Splitshot</name>
         <description>Erika shoots two arrows in a 90 degrees angle, each of them damaging the first enemy hit. If a target is marked by "Robin's Gift", it will be stunned for [stunDuration] seconds.</description>

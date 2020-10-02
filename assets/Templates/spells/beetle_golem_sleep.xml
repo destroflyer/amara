@@ -1,4 +1,8 @@
 <template>
+    <values>
+        <transitionTime>2.5</transitionTime>
+        <sleepTime>4</sleepTime>
+    </values>
     <entity id="spell">
         <name>Sleep</name>
         <instantEffectTriggers>
@@ -21,8 +25,6 @@
         <baseCooldown>15</baseCooldown>
     </entity>
     <!--spell effect-->
-    <value name="transitionTime">2.5</value>
-    <value name="sleepTime">4</value>
     <entity>
         <castedSpell>#spell</castedSpell>
         <castedEffectTriggers>

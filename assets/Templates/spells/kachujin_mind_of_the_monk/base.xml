@@ -1,6 +1,8 @@
 <template>
-    <value name="delay">0.15</value>
-    <value name="markDuration">1</value>
+    <values>
+        <delay>0.15</delay>
+        <markDuration>1</markDuration>
+    </values>
     <entity id="spell">
         <name>Mind of the Monk</name>
         <description>Shoots a focsued wave of air in a straight line - The first enemy hit is damaged and marked for [markDuration] second.</description>

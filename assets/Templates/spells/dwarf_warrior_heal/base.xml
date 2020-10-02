@@ -1,6 +1,8 @@
 <template>
-    <value name="maximumStacks">10</value>
-    <value name="stacksCost">5</value>
+    <values>
+        <maximumStacks>10</maximumStacks>
+        <stacksCost>5</stacksCost>
+    </values>
     <entity id="spell">
         <name>Urgent Feast</name>
         <description>When taking damage, gain 1 stack (up to [maximumStacks]). Activate this ability to consume [stacksCost] stacks, healing yourself and gaining walk speed for a short duration.</description>

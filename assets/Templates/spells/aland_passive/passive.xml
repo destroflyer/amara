@@ -1,7 +1,9 @@
 <template>>
-    <value name="stacksDuration">3.5</value>
-    <value name="maximumStacks">3</value>
-    <value name="slowDuration">2</value>
+    <values>
+        <stacksDuration>3.5</stacksDuration>
+        <maximumStacks>3</maximumStacks>
+        <slowDuration>2</slowDuration>
+    </values>
     <entity id="passive">
         <name>Aim</name>
         <description>Your basic attacks and spells add a stack on the target. When a target reaches 3 stacks, the stacks are consumed, slowing and dealing magic damage over time and reducing your remaining cooldown of "Stealth" to 1 second.</description>

@@ -1,5 +1,7 @@
 <template>
-    <value name="duration">15</value>
+    <values>
+        <duration>15</duration>
+    </values>
     <entity id="spell">
         <description>Regenerates 5 health every half-second for [duration] seconds, restoring a total of 150 health.</description>
         <instantEffectTriggers>

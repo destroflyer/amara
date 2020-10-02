@@ -1,5 +1,7 @@
 <template>
-    <value name="delay">1</value>
+    <values>
+        <delay>1</delay>
+    </values>
     <entity id="spell">
         <name>Ult</name>
         <description>Maria channels all power inside her sword for [delay] second and then unleashes a long ranged cut in the target direction, damaging and knockuping every enemy it passes through.</description>

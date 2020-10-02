@@ -1,5 +1,7 @@
 <template>
-    <value name="delay">0.2</value>
+    <values>
+        <delay>0.2</delay>
+    </values>
     <entity id="spell">
         <name>Suplex</name>
         <description>Kachujin kicks an enemy with her knee and flings him backwards behind her.</description>

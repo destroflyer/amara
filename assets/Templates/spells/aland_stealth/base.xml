@@ -1,5 +1,7 @@
 <template>
-    <value name="duration">3</value>
+    <values>
+        <duration>3</duration>
+    </values>
     <entity id="spell">
         <name>Stealth</name>
         <description>Gain stealth and a walk speed buff for a short duration. The stealth ends instantly when casting a basic attack or spell.</description>

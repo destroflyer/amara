@@ -1,5 +1,7 @@
 <template>
-    <value name="duration">1</value>
+    <values>
+        <duration>1</duration>
+    </values>
     <entity id="passive">
         <description>Your basic attacks ignite the target, dealing 40 damage over [duration] second.</description>
         <passiveAddedEffectTriggers>

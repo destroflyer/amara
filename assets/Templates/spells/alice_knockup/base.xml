@@ -1,6 +1,8 @@
 <template>
-    <value name="delay">0.25</value>
-    <value name="duration">1.5</value>
+    <values>
+        <delay>0.25</delay>
+        <duration>1.5</duration>
+    </values>
     <entity id="spell">
         <name>Ascending Bubble</name>
         <description>Shoot a white bubble to the target location, which lies around for 6 seconds if not hitting anything. The first enemy colliding with the bubble will catch it, receiving magic damage and being knockuped for a short duration.</description>

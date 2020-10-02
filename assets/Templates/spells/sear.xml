@@ -1,5 +1,7 @@
 <template>
-    <value name="delay">0.18</value>
+    <values>
+        <delay>0.18</delay>
+    </values>
     <entity id="spell">
         <name>Sear</name>
         <description>Throws a fireball.</description>

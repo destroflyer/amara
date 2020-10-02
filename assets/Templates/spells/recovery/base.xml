@@ -1,5 +1,7 @@
 <template>
-    <value name="castDuration">5</value>
+    <values>
+        <castDuration>5</castDuration>
+    </values>
     <entity id="spell">
         <name>Recovery</name>
         <description>Channels for [castDuration] seconds, regenerating 400 health. Can be cancelled and will be interrupted by damage.</description>

@@ -1,6 +1,8 @@
 <template>
-    <value name="delay">0.4</value>
-    <value name="slowDuration">2</value>
+    <values>
+        <delay>0.4</delay>
+        <slowDuration>2</slowDuration>
+    </values>
     <entity id="spell">
         <name>Rock</name>
         <description>Throws a rock in the target direction. The first enemy hit is damaged and heavily slowed for [slowDuration] seconds.</description>

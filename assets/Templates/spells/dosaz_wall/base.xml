@@ -1,5 +1,7 @@
 <template>
-    <value name="delay">0.22</value>
+    <values>
+        <delay>0.22</delay>
+    </values>
     <entity id="spell">
         <name>Bone Wall</name>
         <description>Summons a curved bone wall at the target position and triggers all nearby tombstones around it.</description>

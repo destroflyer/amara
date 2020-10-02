@@ -1,5 +1,7 @@
 <template>
-    <value name="castDuration">2.5</value>
+    <values>
+        <castDuration>2.5</castDuration>
+    </values>
     <entity id="spell">
         <name>Milkyway Shot</name>
         <description>Ganfaul channels for [castDuration] seconds and, after a small delay, shoots a laser in a straight line. Enemies in the lasers area will be damaged in small intervals.</description>

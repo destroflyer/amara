@@ -1,5 +1,7 @@
 <template>
-    <value name="delay">0.3</value>
+    <values>
+        <delay>0.3</delay>
+    </values>
     <entity id="spell">
         <name>Devastating Strike</name>
         <description>Deal physical damage to an enemy and knockback it.</description>

@@ -79,23 +79,17 @@ public class XMLTemplateManager{
         }
         cachedValues.push(values);
         boolean isFirstEntity = true;
-        for (Element entityElement : templateElement.getChildren()) {
-            if (entityElement.getName().equals("entity")) {
-                if (isFirstEntity) {
-                    String id = entityElement.getAttributeValue("id");
-                    if (id != null) {
-                        cachedEntities.lastElement().put(id, entity);
-                    }
-                    loadEntity(entityWorld, entity, entityElement);
-                } else {
-                    createAndLoadEntity(entityWorld, entityElement);
+        for (Element entityElement : templateElement.getChildren("entity")) {
+            if (isFirstEntity) {
+                String id = entityElement.getAttributeValue("id");
+                if (id != null) {
+                    cachedEntities.lastElement().put(id, entity);
                 }
-                isFirstEntity = false;
-            } else if (entityElement.getName().equals("value")) {
-                String valueName = entityElement.getAttributeValue("name");
-                String value = parseValue(entityWorld, entityElement.getText());
-                cachedValues.lastElement().put(valueName, value);
+                loadEntity(entityWorld, entity, entityElement);
+            } else {
+                createAndLoadEntity(entityWorld, entityElement);
             }
+            isFirstEntity = false;
         }
         currentDirectories.pop();
         cachedEntities.pop();

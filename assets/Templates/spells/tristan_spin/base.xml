@@ -1,5 +1,7 @@
 <template>
-    <value name="duration">0.4</value>
+    <values>
+        <duration>0.4</duration>
+    </values>
     <entity id="spell">
         <name>Spin</name>
         <description>Spins your sword in a circle, dealing damage to all enemies and healing for every character hit.</description>

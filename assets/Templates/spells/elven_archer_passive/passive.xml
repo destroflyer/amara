@@ -1,6 +1,8 @@
 <template>
-    <value name="duration">4</value>
-    <value name="maximumStacks">8</value>
+    <values>
+        <duration>4</duration>
+        <maximumStacks>8</maximumStacks>
+    </values>
     <entity id="passive">
         <name>Elvish Bow</name>
         <description>Your basic attacks grant a stack (+5% attack speed), up to a maximum of [maximumStacks] stacks. The stacks are removed after [duration] seconds of not attacking.</description>

@@ -1,6 +1,8 @@
 <template>
-    <value name="delay">1</value>
-    <value name="duration">3</value>
+    <values>
+        <delay>1</delay>
+        <duration>3</duration>
+    </values>
     <entity id="spell">
         <name>Protecting Bubbles</name>
         <description>Channel for [delay] second and then summon a blue bubble around every allied characters for [duration] seconds, making them invulnerable, untargetable, unable to cast spells or basic attacks and giving them a small walk speed buff.</description>

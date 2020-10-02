@@ -1,5 +1,7 @@
 <template>
-    <value name="delay">0.15</value>
+    <values>
+        <delay>0.15</delay>
+    </values>
     <entity id="spell">
         <name>Kunai Throw</name>
         <description>Throws a kunai, which deals physical damage to the first target hit.</description>

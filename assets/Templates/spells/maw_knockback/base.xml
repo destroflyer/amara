@@ -1,5 +1,7 @@
 <template>
-    <value name="delay">0.35</value>
+    <values>
+        <delay>0.35</delay>
+    </values>
     <entity id="spell">
         <name>Knockback</name>
         <description>Maw takes a swing and knockbacks an enemy with a punch.</description>

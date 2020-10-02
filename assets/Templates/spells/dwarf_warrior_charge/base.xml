@@ -1,5 +1,7 @@
 <template>
-    <value name="delay">0.75</value>
+    <values>
+        <delay>0.75</delay>
+    </values>
     <entity id="spell">
         <name>Bronze Crusade</name>
         <description>Charge forward to the target location, ignoring unit collision and knockuping and damaging all colliding enemies.</description>

@@ -1,5 +1,7 @@
 <template>
-    <value name="duration">3</value>
+    <values>
+        <duration>3</duration>
+    </values>
     <entity id="passive">
         <name>Robin's Gift</name>
         <description>Your spells mark hit targets for [duration] seconds. Your basic abilities have an additional effect if they hit already marked targets.</description>

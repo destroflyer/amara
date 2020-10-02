@@ -1,5 +1,7 @@
 <template>
-    <value name="duration">1.5</value>
+    <values>
+        <duration>1.5</duration>
+    </values>
     <entity id="spell">
         <name>Thunder</name>
         <description>After a small delay, a lightning bolt crashes down at the target location, damaging and slowing all enemies in a small area and popping all bubbles.</description>

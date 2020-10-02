@@ -1,5 +1,7 @@
 <template>
-    <value name="castDuration">6</value>
+    <values>
+        <castDuration>6</castDuration>
+    </values>
     <entity id="spell">
         <name>Backport</name>
         <description>Teleports your character after [castDuration] seconds to your base. Taking damage during that time will cancel the teleport.</description>

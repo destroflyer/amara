@@ -1,5 +1,7 @@
 <template>
-    <value name="duration">3</value>
+    <values>
+        <duration>3</duration>
+    </values>
     <entity id="spell">
         <name>Rapid Fire</name>
         <description>Shoot a large amount of arrows in a cone, with each arrow dealing physical damage when hitting an enemy.</description>

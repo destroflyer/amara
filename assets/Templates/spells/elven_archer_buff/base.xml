@@ -1,5 +1,7 @@
 <template>
-    <value name="duration">5</value>
+    <values>
+        <duration>5</duration>
+    </values>
     <entity id="spell">
         <name>Arrowhead Enchantment</name>
         <description>For the next [duration] seconds, your basic attacks and spells deal additional magic damage and slow enemies.</description>

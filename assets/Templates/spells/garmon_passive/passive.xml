@@ -1,5 +1,7 @@
 <template>
-    <value name="cooldown">8</value>
+    <values>
+        <cooldown>8</cooldown>
+    </values>
     <entity id="passive">
         <name>Star Channeling</name>
         <description>Every [cooldown] seconds, your next basic attack restores mana.</description>

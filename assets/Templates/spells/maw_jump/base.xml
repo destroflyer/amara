@@ -1,5 +1,7 @@
 <template>
-    <value name="delay">1</value>
+    <values>
+        <delay>1</delay>
+    </values>
     <entity id="spell">
         <name>Jump</name>
         <description>After [delay] second, Maw jumps to the target location, damaging and knockuping all enemies around.</description>

@@ -1,5 +1,7 @@
 <template>
-    <value name="buffDuration">4</value>
+    <values>
+        <buffDuration>4</buffDuration>
+    </values>
     <entity id="spell">
         <name>Fire it up</name>
         <description>Shoots an arrow to the target location, damaging all enemies hit. If the target is marked by "Robin's Gift", its armor will be reduced for [buffDuration] seconds.</description>

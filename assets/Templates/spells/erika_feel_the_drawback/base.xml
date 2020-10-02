@@ -1,6 +1,8 @@
 <template>
-    <value name="delay">1.5</value>
-    <value name="bindDuration">1</value>
+    <values>
+        <delay>1.5</delay>
+        <bindDuration>1</bindDuration>
+    </values>
     <entity id="spell">
         <name>Feel the Drawback</name>
         <description>After [delay] seconds, Erika shoots a great number of arrows to the target location. All enemies hit will be damaged and binded for [bindDuration] second.</description>

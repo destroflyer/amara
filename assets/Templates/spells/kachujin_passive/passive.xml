@@ -1,6 +1,8 @@
 <template>
-    <value name="duration">4</value>
-    <value name="maximumStacks">5</value>
+    <values>
+        <duration>4</duration>
+        <maximumStacks>5</maximumStacks>
+    </values>
     <entity id="passive">
         <name>Weakpoint Study</name>
         <description>Kachujin studies an enemies weakpoints while attacking them - Each of your basic attacks adds a stack (-6 armor), up to a maximum of [maximumStacks] stacks. The stacks are removed after [duration] seconds of not attacking.</description>

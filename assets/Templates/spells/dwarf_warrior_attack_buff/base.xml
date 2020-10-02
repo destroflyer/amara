@@ -1,6 +1,8 @@
 <template>
-    <value name="duration">10</value>
-    <value name="resistancePerStack">1</value>
+    <values>
+        <duration>10</duration>
+        <resistancePerStack>1</resistancePerStack>
+    </values>
     <entity id="spell">
         <name>Hammer Time</name>
         <description>Your next basic attack within [duration] seconds deals bonus magic damage. If the attack kills its target, you permanently gain 1 stack, with each stack granting [resistancePerStack] bonus armor and magic resistance.</description>

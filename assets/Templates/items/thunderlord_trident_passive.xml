@@ -1,5 +1,7 @@
 <template>
-    <value name="maximumStacks">3</value>
+    <values>
+        <maximumStacks>3</maximumStacks>
+    </values>
     <entity id="passive">
         <description>Your basic attacks grant a stack - After reaching [maximumStacks] stacks, the stacks are removed and your next basic attack will deal 70 magic damage (Can crit).</description>
         <passiveAddedEffectTriggers>

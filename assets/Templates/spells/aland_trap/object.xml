@@ -1,6 +1,8 @@
 <template>
-    <value name="duration">1</value>
-    <value name="moveTriggerDistance">0.75</value>
+    <values>
+        <duration>1</duration>
+        <moveTriggerDistance>0.75</moveTriggerDistance>
+    </values>
     <entity id="object">
         <name>The Bear Trap</name>
         <model>Models/bear_trap/skin.xml</model>

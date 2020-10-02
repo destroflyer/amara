@@ -1,5 +1,7 @@
 <template>
-    <value name="delay">0.2</value>
+    <values>
+        <delay>0.2</delay>
+    </values>
     <entity id="spell">
         <name>Skull</name>
         <description>Throws a skull to target position, that triggers all tombstones on its path. If an enemy was hit: Target receives magic damage and generally increased damage for a few seconds - In addition, all ghosts receive attack speed and walk speed and aggro this target. If nothing was hit, a ghost is spawned at the target position.</description>

@@ -1,6 +1,8 @@
 <template>
-    <value name="delay">0.1</value>
-    <value name="slowDuration">2</value>
+    <values>
+        <delay>0.1</delay>
+        <slowDuration>2</slowDuration>
+    </values>
     <entity id="spell">
         <name>Assassins Retribution</name>
         <description>Deals physical damage to enemies in front of you. If a target is marked and below 20% of their maximum health, execute the target and reset the cooldown of "Shadow Slice".</description>

@@ -1,6 +1,8 @@
 <template>
-    <value name="duration">2</value>
-    <value name="maximumStacks">8</value>
+    <values>
+        <duration>2</duration>
+        <maximumStacks>8</maximumStacks>
+    </values>
     <entity id="passive">
         <unique/>
         <name>I'm back!</name>

@@ -1,5 +1,7 @@
 <template>
-    <value name="duration">2</value>
+    <values>
+        <duration>2</duration>
+    </values>
     <entity id="passive">
         <name>Star Channeling</name>
         <description>After taking damage, Ganfaul gains 20 ability power for [duration] seconds.</description>

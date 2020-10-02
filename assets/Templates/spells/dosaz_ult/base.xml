@@ -1,6 +1,8 @@
 <template>
-    <value name="delay">0.5</value>
-    <value name="duration">15</value>
+    <values>
+        <delay>0.5</delay>
+        <duration>15</duration>
+    </values>
     <entity id="spell">
         <name>Power From the Beyond</name>
         <description>Spawn 5 ghosts in a circle around you, gain health, spellvamp and an aura, that constantly deals magic damage to nearby enemies and slows them.</description>

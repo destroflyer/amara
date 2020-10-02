@@ -1,6 +1,8 @@
 <template>
-    <value name="delay">0.2</value>
-    <value name="stunDuration">2</value>
+    <values>
+        <delay>0.2</delay>
+        <stunDuration>2</stunDuration>
+    </values>
     <entity id="spell">
         <name>Smash the Bricks</name>
         <description>Kachujin takes a swing and smashes an enemy into the ground, dealing damage and stunning for [stunDuration] seconds.</description>

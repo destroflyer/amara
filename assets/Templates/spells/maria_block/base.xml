@@ -1,5 +1,7 @@
 <template>
-    <value name="duration">1.5</value>
+    <values>
+        <duration>1.5</duration>
+    </values>
     <entity id="spell">
         <name>Block</name>
         <description>Maria takes a blocking pose for [duration] seconds, being unable to move, attack or cast spells. Any incoming damage during that time is reduced by 90%.</description>

@@ -1,5 +1,7 @@
 <template>
-    <value name="delay">0.25</value>
+    <values>
+        <delay>0.25</delay>
+    </values>
     <entity id="spell">
         <name>Knife Throw</name>
         <description>Throw a large knife at a target enemy, dealing magic damage.</description>

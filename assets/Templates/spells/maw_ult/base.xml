@@ -1,5 +1,7 @@
 <template>
-    <value name="duration">15</value>
+    <values>
+        <duration>15</duration>
+    </values>
     <entity id="spell">
         <name>Ult</name>
         <description>Maw empowers himself for [duration] seconds, gaining health, attack damage, armor and magic resistance.</description>

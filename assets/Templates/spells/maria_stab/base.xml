@@ -1,6 +1,8 @@
 <template>
-    <value name="delay">0.3</value>
-    <value name="slowDuration">2</value>
+    <values>
+        <delay>0.3</delay>
+        <slowDuration>2</slowDuration>
+    </values>
     <entity id="spell">
         <name>Stab</name>
         <description>After [delay] seconds, Maria stabs her sword in a straight line. The first enemy hit will be damaged and slowed for [slowDuration] seconds.</description>
