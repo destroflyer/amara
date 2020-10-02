@@ -19,7 +19,7 @@
         <spellTargetRules>
             <entity>
                 <acceptAllies/>
-                <requireAnyBuffs>[parameter4],[parameter8]</requireAnyBuffs>
+                <requireAnyBuffs>[unitOnBenchBuff],[unitOnBoardBuff]</requireAnyBuffs>
             </entity>
         </spellTargetRules>
     </entity>

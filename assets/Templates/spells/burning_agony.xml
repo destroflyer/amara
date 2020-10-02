@@ -61,8 +61,8 @@
                                 <keepOnDeath/>
                             </entity>
                         </addBuff>
-                        <replaceSpellWithExistingSpell spellIndex="[parameter0]">
-                            <entity template="./burning_agony_deactivate([parameter0],#buffArea,#spell,#visualisationBuff)"/>
+                        <replaceSpellWithExistingSpell spellIndex="[spellIndex]">
+                            <entity template="./burning_agony_deactivate([spellIndex],#buffArea,#spell,#visualisationBuff)"/>
                         </replaceSpellWithExistingSpell>
                     </entity>
                 </triggeredEffect>

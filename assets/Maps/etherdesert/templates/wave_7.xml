@@ -67,7 +67,7 @@
         </bounty>
         <!--spells-->
         <autoAttack>
-            <entity template="spells/ranged_autoattack,Models/3dsa_fire_dragon_fireball/skin.xml"/>
+            <entity template="spells/ranged_autoattack(model=Models/3dsa_fire_dragon_fireball/skin.xml)"/>
         </autoAttack>
         <autoAggro>20</autoAggro>
     </entity>

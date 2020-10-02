@@ -1,0 +1,20 @@
+<template>
+    <entity>
+        <removeTrigger/>
+        <buffTargetsTarget>[fullPlaceBuff]</buffTargetsTarget>
+        <maximumTargets>1</maximumTargets>
+        <triggerConditions>
+            <entity>
+                <customTarget>[unit]</customTarget>
+                <hasBuffCondition>[unitOnPlaceBuff]</hasBuffCondition>
+            </entity>
+        </triggerConditions>
+        <triggeredEffect>
+            <entity>
+                <removeBuff>[fullPlaceBuff]</removeBuff>
+                <addBuff duration="-1">[freePlaceBuff],[putTargetBuff]</addBuff>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>[unit]</triggerSource>
+    </entity>
+</template>

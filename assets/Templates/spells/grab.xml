@@ -59,7 +59,7 @@
                     <entity>
                         <move>
                             <entity>
-                                <movementTarget>[parameter0]</movementTarget>
+                                <movementTarget>[unit]</movementTarget>
                                 <movementSpeed>9</movementSpeed>
                                 <movementTurnInDirection/>
                             </entity>

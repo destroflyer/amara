@@ -19,7 +19,7 @@
         <spellTargetRules>
             <entity>
                 <acceptAllies/>
-                <requireAnyBuffs>[parameter5],[parameter9]</requireAnyBuffs>
+                <requireAnyBuffs>[unitOnBenchBuff],[unitOnBoardBuff]</requireAnyBuffs>
             </entity>
         </spellTargetRules>
         <customCleanup/>
@@ -41,7 +41,7 @@
                                         <sourceCasterTarget/>
                                         <triggeredEffect>
                                             <entity>
-                                                <replaceSpellWithExistingSpell spellIndex="[parameter0]">#spell</replaceSpellWithExistingSpell>
+                                                <replaceSpellWithExistingSpell spellIndex="[spellIndex]">#spell</replaceSpellWithExistingSpell>
                                             </entity>
                                         </triggeredEffect>
                                         <triggerSource>#spell</triggerSource>
@@ -59,12 +59,12 @@
                 <triggerConditions>
                     <entity>
                         <targetTarget/>
-                        <hasBuffCondition>[parameter5]</hasBuffCondition>
+                        <hasBuffCondition>[unitOnBenchBuff]</hasBuffCondition>
                     </entity>
                 </triggerConditions>
                 <triggeredEffect>
                     <entity>
-                        <replaceSpellWithNewSpell spellIndex="[parameter0]" newSpellTemplate="./vegas_swap_apply([parameter1],[parameter2],[parameter3],[parameter4],[parameter5],[parameter6],[parameter7],[parameter8],[parameter9],#buff)"/>
+                        <replaceSpellWithNewSpell spellIndex="[spellIndex]" newSpellTemplate="./vegas_swap_apply([putTargetBuff],freeSourcePlacesBuff=[freeBenchPlacesBuff],freeSourcePlaceBuff=[freeBenchPlaceBuff],fullSourcePlaceBuff=[fullBenchPlaceBuff],unitOnSourceBuff=[unitOnBenchBuff],freeTargetPlacesBuff=[freeBoardPlacesBuff],freeTargetPlaceBuff=[freeBoardPlaceBuff],fullTargetPlaceBuff=[fullBoardPlaceBuff],unitOnTargetBuff=[unitOnBoardBuff],#buff)"/>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
@@ -75,12 +75,12 @@
                 <triggerConditions>
                     <entity>
                         <targetTarget/>
-                        <hasBuffCondition>[parameter9]</hasBuffCondition>
+                        <hasBuffCondition>[unitOnBoardBuff]</hasBuffCondition>
                     </entity>
                 </triggerConditions>
                 <triggeredEffect>
                     <entity>
-                        <replaceSpellWithNewSpell spellIndex="[parameter0]" newSpellTemplate="./vegas_swap_apply([parameter1],[parameter6],[parameter7],[parameter8],[parameter9],[parameter2],[parameter3],[parameter4],[parameter5],#buff)"/>
+                        <replaceSpellWithNewSpell spellIndex="[spellIndex]" newSpellTemplate="./vegas_swap_apply([putTargetBuff],freeSourcePlacesBuff=[freeBoardPlacesBuff],freeSourcePlaceBuff=[freeBoardPlaceBuff],fullSourcePlaceBuff=[fullBoardPlaceBuff],unitOnSourceBuff=[unitOnBoardBuff],freeTargetPlacesBuff=[freeBenchPlacesBuff],freeTargetPlaceBuff=[freeBenchPlaceBuff],fullTargetPlaceBuff=[fullBenchPlaceBuff],unitOnTargetBuff=[unitOnBenchBuff],#buff)"/>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

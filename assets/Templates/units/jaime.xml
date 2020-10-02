@@ -66,7 +66,7 @@
             <entity template="spells/melee_autoattack"/>
         </autoAttack>
         <learnableSpells>
-            <entity template="spells/sonic_wave(0)"/>
+            <entity template="spells/sonic_wave(spellIndex=0)"/>
             <entity template="spells/intervention"/>
             <entity template="spells/lunar_rush"/>
             <entity template="spells/dragons_rage"/>

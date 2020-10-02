@@ -1,5 +1,5 @@
 <template>
-    <entity>
+    <entity id="unit">
         <name>Melee Soldier</name>
         <isMinion/>
         <!--model-->
@@ -66,4 +66,8 @@
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>
+    <entity template="./free_place_on_removal_place(#unit,unitOnPlaceBuff=[unitOnBenchBuff],fullPlaceBuff=[fullBenchPlaceBuff],freePlaceBuff=[freeBenchPlaceBuff],[putTargetBuff])"/>
+    <entity template="./free_place_on_removal_place(#unit,unitOnPlaceBuff=[unitOnBoardBuff],fullPlaceBuff=[fullBoardPlaceBuff],freePlaceBuff=[freeBoardPlaceBuff],[putTargetBuff])"/>
+    <entity template="./free_place_on_removal_stack(#unit,[playerCharacter],unitOnPlaceBuff=[unitOnBenchBuff],freePlacesBuff=[freeBenchPlacesBuff])"/>
+    <entity template="./free_place_on_removal_stack(#unit,[playerCharacter],unitOnPlaceBuff=[unitOnBoardBuff],freePlacesBuff=[freeBoardPlacesBuff])"/>
 </template>

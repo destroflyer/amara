@@ -147,7 +147,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                     try {
                         expressionSpace.parse(addNewBuffComponent.getTemplateExpression());
                         int buffEntity = entityWorld.createEntity();
-                        EntityTemplate.loadTemplates(entityWorld, buffEntity, EntityTemplate.parseToOldTemplate(expressionSpace.getResult_String()));
+                        EntityTemplate.loadTemplates(entityWorld, buffEntity, expressionSpace.getResult_String());
                         effectImpact.setComponent(new AddBuffComponent(new int[]{buffEntity}, addNewBuffComponent.getDuration()));
                     } catch (ExpressionException ex) {
                     }
@@ -196,7 +196,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                 }
                 ReplaceSpellWithNewSpellComponent replaceSpellWithNewSpellComponent = effect.getComponent(ReplaceSpellWithNewSpellComponent.class);
                 if (replaceSpellWithNewSpellComponent != null) {
-                    effectImpact.setComponent(new ReplaceSpellWithNewSpellComponent(replaceSpellWithNewSpellComponent.getSpellIndex(), replaceSpellWithNewSpellComponent.getNewSpellTemplate() + "," + effectCastTargetComponent.getTargetEntity()));
+                    effectImpact.setComponent(new ReplaceSpellWithNewSpellComponent(replaceSpellWithNewSpellComponent.getSpellIndex(), replaceSpellWithNewSpellComponent.getNewSpellTemplate() + "(target=" + effectCastTargetComponent.getTargetEntity() + ")"));
                 }
                 DisplayPlayerAnnouncementComponent displayPlayerAnnouncementComponent = effect.getComponent(DisplayPlayerAnnouncementComponent.class);
                 if (displayPlayerAnnouncementComponent != null) {

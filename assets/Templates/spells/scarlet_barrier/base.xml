@@ -11,7 +11,7 @@
                     <entity>
                         <spawn>
                             <entity>
-                                <spawnTemplate>./object([parameter0])</spawnTemplate>
+                                <spawnTemplate>./object([unit])</spawnTemplate>
                             </entity>
                         </spawn>
                         <playAudio>
@@ -52,7 +52,7 @@
                 <targetCasterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <addBuff duration="3">[parameter1]</addBuff>
+                        <addBuff duration="3">[markBuff]</addBuff>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

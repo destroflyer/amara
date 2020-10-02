@@ -149,7 +149,7 @@ public class IngamePlayersAppState extends ServerBaseAppState {
                 int mapSpellIndex = ((mapSpellsIndices != null) ? mapSpellsIndices[i][r] : 0);
                 MapSpell mapSpell = mapSpellsGroup.getMapSpells()[mapSpellIndex];
                 int spellEntity = entityWorld.createEntity();
-                EntityTemplate.loadTemplate(entityWorld, spellEntity, EntityTemplate.parseToOldTemplate(mapSpell.getEntityTemplate()));
+                EntityTemplate.loadTemplate(entityWorld, spellEntity, mapSpell.getEntityTemplate());
                 mapSpellsEntities.add(spellEntity);
             }
         }

@@ -26,9 +26,9 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <removeBuffArea>[parameter1]</removeBuffArea>
-                        <removeBuff>[parameter3]</removeBuff>
-                        <replaceSpellWithExistingSpell spellIndex="[parameter0]">[parameter2]</replaceSpellWithExistingSpell>
+                        <removeBuffArea>[buffArea]</removeBuffArea>
+                        <removeBuff>[visualisationBuff]</removeBuff>
+                        <replaceSpellWithExistingSpell spellIndex="[spellIndex]">[spell]</replaceSpellWithExistingSpell>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

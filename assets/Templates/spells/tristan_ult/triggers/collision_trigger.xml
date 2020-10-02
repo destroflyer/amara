@@ -5,8 +5,8 @@
         <triggeredEffect>
             <entity>
                 <physicalDamage>100 + (0.3 * source.attackDamage)</physicalDamage>
-                <addStun>[parameter0]</addStun>
-                <removeEffectTriggers removeEntities="true">[parameter2]</removeEffectTriggers>
+                <addStun>[stunDuration]</addStun>
+                <removeEffectTriggers removeEntities="true">[newEffectTrigger1]</removeEffectTriggers>
                 <playAudio>
                     <entity>
                         <audio>Sounds/sounds/spells/tristan_ult_collide.ogg</audio>

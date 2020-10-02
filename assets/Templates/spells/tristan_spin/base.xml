@@ -17,7 +17,7 @@
                     <entity>
                         <spawn>
                             <entity>
-                                <spawnTemplate>./object([parameter0])</spawnTemplate>
+                                <spawnTemplate>./object([unit])</spawnTemplate>
                             </entity>
                         </spawn>
                         <playAudio>

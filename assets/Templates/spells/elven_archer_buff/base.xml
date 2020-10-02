@@ -7,7 +7,7 @@
         <instantEffectTriggers>
             <!--reset autoattack cooldown-->
             <entity>
-                <customTarget>[parameter0]</customTarget>
+                <customTarget>[autoattack]</customTarget>
                 <triggeredEffect>
                     <entity>
                         <resetCooldown/>
@@ -46,7 +46,7 @@
         <castedEffectTriggers>
             <!--add spelleffects-->
             <entity>
-                <customTarget>[parameter0],[parameter1],[parameter2]</customTarget>
+                <customTarget>[autoattack],[spell2],[spell4]</customTarget>
                 <triggeredEffect>
                     <entity>
                         <addSpellSpellEffects>

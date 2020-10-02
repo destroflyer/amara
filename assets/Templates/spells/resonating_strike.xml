@@ -10,7 +10,7 @@
                     <entity>
                         <move>
                             <entity>
-                                <movementTarget>[parameter1]</movementTarget>
+                                <movementTarget>[target]</movementTarget>
                                 <movementSpeed>18</movementSpeed>
                                 <movementTurnInDirection/>
                             </entity>
@@ -46,7 +46,7 @@
                 <triggeredEffect>
                     <entity>
                         <physicalDamage>80</physicalDamage>
-                        <removeBuff>[parameter0]</removeBuff>
+                        <removeBuff>[buff]</removeBuff>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

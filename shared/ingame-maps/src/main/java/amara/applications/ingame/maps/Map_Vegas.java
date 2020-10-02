@@ -4,7 +4,6 @@ import amara.applications.ingame.entitysystem.CustomGameTemplates;
 import amara.applications.ingame.entitysystem.components.audio.*;
 import amara.applications.ingame.entitysystem.components.buffs.KeepOnDeathComponent;
 import amara.applications.ingame.entitysystem.components.buffs.OnBuffAddEffectTriggersComponent;
-import amara.applications.ingame.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent;
 import amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent;
 import amara.applications.ingame.entitysystem.components.conditions.NotExistingConditionComponent;
 import amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent;
@@ -34,6 +33,7 @@ import amara.applications.ingame.entitysystem.components.players.PlayerIndexComp
 import amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent;
 import amara.applications.ingame.entitysystem.components.shop.ShopRangeComponent;
 import amara.applications.ingame.entitysystem.components.spawns.SpawnBuffsComponent;
+import amara.applications.ingame.entitysystem.components.spawns.SpawnTemplateComponent;
 import amara.applications.ingame.entitysystem.components.spells.CastCostComponent;
 import amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent;
 import amara.applications.ingame.entitysystem.components.spells.triggers.CastedEffectTriggersComponent;
@@ -46,10 +46,7 @@ import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
-import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.BuffTargetsAmountTriggerComponent;
-import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasBuffsTriggerComponent;
-import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent;
-import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.NoBuffTargetsTriggerComponent;
+import amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.*;
 import amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent;
 import amara.applications.ingame.entitysystem.components.visuals.ModelComponent;
 import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
@@ -220,46 +217,6 @@ public class Map_Vegas extends Map {
             entityWorld.setComponent(unitOnBenchBuff, new NameComponent("Unit on bench"));
             entityWorld.setComponent(unitOnBenchBuff, new CustomCleanupComponent());
             unitOnBenchBuffs[playerIndex] = unitOnBenchBuff;
-
-            // Free bench place - Place
-            int freeBenchPlacePlaceTrigger = entityWorld.createEntity();
-            entityWorld.setComponent(freeBenchPlacePlaceTrigger, new BuffTargetsTargetComponent(fullBenchPlaceBuff));
-            entityWorld.setComponent(freeBenchPlacePlaceTrigger, new MaximumTargetsComponent(1));
-            int freeBenchPlacePlaceEffect = entityWorld.createEntity();
-            entityWorld.setComponent(freeBenchPlacePlaceEffect, new RemoveBuffComponent(fullBenchPlaceBuff));
-            entityWorld.setComponent(freeBenchPlacePlaceEffect, new AddBuffComponent(new int[]{ freeBenchPlaceBuff, putTargetBuff }, -1));
-            entityWorld.setComponent(freeBenchPlacePlaceTrigger, new TriggeredEffectComponent(freeBenchPlacePlaceEffect));
-            entityWorld.setComponent(freeBenchPlacePlaceTrigger, new TriggerSourceComponent(entity));
-
-            // Free bench place - Stack
-            int freeBenchPlaceStackTrigger = entityWorld.createEntity();
-            int freeBenchPlaceStackEffect = entityWorld.createEntity();
-            entityWorld.setComponent(freeBenchPlaceStackEffect, new AddStacksComponent(freeBenchPlacesBuff, 1));
-            entityWorld.setComponent(freeBenchPlaceStackTrigger, new TriggeredEffectComponent(freeBenchPlaceStackEffect));
-            entityWorld.setComponent(freeBenchPlaceStackTrigger, new TriggerSourceComponent(entity));
-            freeBenchPlaceStackTriggers[playerIndex] = freeBenchPlaceStackTrigger;
-
-            entityWorld.setComponent(unitOnBenchBuff, new OnBuffRemoveEffectTriggersComponent(freeBenchPlacePlaceTrigger, freeBenchPlaceStackTrigger));
-
-            // Free board place - Place
-            int freeBoardPlacePlaceTrigger = entityWorld.createEntity();
-            entityWorld.setComponent(freeBoardPlacePlaceTrigger, new BuffTargetsTargetComponent(fullBoardPlaceBuff));
-            entityWorld.setComponent(freeBoardPlacePlaceTrigger, new MaximumTargetsComponent(1));
-            int freeBoardPlacePlaceEffect = entityWorld.createEntity();
-            entityWorld.setComponent(freeBoardPlacePlaceEffect, new RemoveBuffComponent(fullBoardPlaceBuff));
-            entityWorld.setComponent(freeBoardPlacePlaceEffect, new AddBuffComponent(new int[]{ freeBoardPlaceBuff, putTargetBuff }, -1));
-            entityWorld.setComponent(freeBoardPlacePlaceTrigger, new TriggeredEffectComponent(freeBoardPlacePlaceEffect));
-            entityWorld.setComponent(freeBoardPlacePlaceTrigger, new TriggerSourceComponent(entity));
-
-            // Free bench place - Stack
-            int freeBoardPlaceStackTrigger = entityWorld.createEntity();
-            int freeBoardPlaceStackEffect = entityWorld.createEntity();
-            entityWorld.setComponent(freeBoardPlaceStackEffect, new AddStacksComponent(freeBoardPlacesBuff, 1));
-            entityWorld.setComponent(freeBoardPlaceStackTrigger, new TriggeredEffectComponent(freeBoardPlaceStackEffect));
-            entityWorld.setComponent(freeBoardPlaceStackTrigger, new TriggerSourceComponent(entity));
-            freeBoardPlaceStackTriggers[playerIndex] = freeBoardPlaceStackTrigger;
-
-            entityWorld.setComponent(unitOnBoardBuff, new OnBuffRemoveEffectTriggersComponent(freeBoardPlacePlaceTrigger, freeBoardPlaceStackTrigger));
 
             for (int i = 0; i < benchPlaces; i++) {
                 int benchPlace = entityWorld.createEntity();
@@ -579,16 +536,13 @@ public class Map_Vegas extends Map {
         ApplyAddStacksSystem.addStacks(entityWorld, characterEntity, freeBoardPlacesBuffs[playerIndex], boardPlaces);
 
         int spellSwap = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, spellSwap, "spells/vegas_swap_mark,0," + putTargetBuffs[playerIndex]
-                + "," + freeBenchPlacesBuffs[playerIndex] + "," + freeBenchPlaceBuffs[playerIndex] + "," + fullBenchPlaceBuffs[playerIndex] + "," + unitOnBenchBuffs[playerIndex]
-                + "," + freeBoardPlacesBuffs[playerIndex] + "," + freeBoardPlaceBuffs[playerIndex] + "," + fullBoardPlaceBuffs[playerIndex] + "," + unitOnBoardBuffs[playerIndex]
-        );
+        EntityTemplate.loadTemplate(entityWorld, spellSwap, "spells/vegas_swap_mark(spellIndex=0,putTargetBuff=" + putTargetBuffs[playerIndex]
+            + ",freeBenchPlacesBuff=" + freeBenchPlacesBuffs[playerIndex] + ",freeBenchPlaceBuff=" + freeBenchPlaceBuffs[playerIndex] + ",fullBenchPlaceBuff=" + fullBenchPlaceBuffs[playerIndex] + ",unitOnBenchBuff=" + unitOnBenchBuffs[playerIndex]
+            + ",freeBoardPlacesBuff=" + freeBoardPlacesBuffs[playerIndex] + ",freeBoardPlaceBuff=" + freeBoardPlaceBuffs[playerIndex] + ",fullBoardPlaceBuff=" + fullBoardPlaceBuffs[playerIndex] + ",unitOnBoardBuff=" + unitOnBoardBuffs[playerIndex]
+        + ")");
 
         int spellSell = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, spellSell, "spells/vegas_sell," + putTargetBuffs[playerIndex]
-                + "," + freeBenchPlacesBuffs[playerIndex] + "," + freeBenchPlaceBuffs[playerIndex] + "," + fullBenchPlaceBuffs[playerIndex] + "," + unitOnBenchBuffs[playerIndex]
-                + "," + freeBoardPlacesBuffs[playerIndex] + "," + freeBoardPlaceBuffs[playerIndex] + "," + fullBoardPlaceBuffs[playerIndex] + "," + unitOnBoardBuffs[playerIndex]
-        );
+        EntityTemplate.loadTemplate(entityWorld, spellSell, "spells/vegas_sell(unitOnBenchBuff=" + unitOnBenchBuffs[playerIndex] + ",unitOnBoardBuff=" + unitOnBoardBuffs[playerIndex] + ")");
         for (int unitIndex = 0; unitIndex < unitsCount; unitIndex++) {
             for (int level = 0; level < unitUpgradeLevels; level++) {
                 // Add gold
@@ -658,6 +612,10 @@ public class Map_Vegas extends Map {
         int effectEntity = entityWorld.getComponent(instantEffectTriggerEntities[0], TriggeredEffectComponent.class).getEffectEntity();
         // Spawn
         int[] spawnInformationEntities = entityWorld.getComponent(effectEntity, SpawnComponent.class).getSpawnInformationEntites();
+        entityWorld.setComponent(spawnInformationEntities[0], new SpawnTemplateComponent("../Maps/vegas/templates/unit_" + unitIndex + "(playerCharacter=" + buyerEntity + ",putTargetBuff=" + putTargetBuffs[playerIndex]
+            + ",freeBenchPlacesBuff=" + freeBenchPlacesBuffs[playerIndex] + ",freeBenchPlaceBuff=" + freeBenchPlaceBuffs[playerIndex] + ",fullBenchPlaceBuff=" + fullBenchPlaceBuffs[playerIndex] + ",unitOnBenchBuff=" + unitOnBenchBuffs[playerIndex]
+            + ",freeBoardPlacesBuff=" + freeBoardPlacesBuffs[playerIndex] + ",freeBoardPlaceBuff=" + freeBoardPlaceBuffs[playerIndex] + ",fullBoardPlaceBuff=" + fullBoardPlaceBuffs[playerIndex] + ",unitOnBoardBuff=" + unitOnBoardBuffs[playerIndex]
+        + ")"));
         entityWorld.setComponent(spawnInformationEntities[0], new SpawnBuffsComponent(unitOnBenchBuffs[playerIndex], putTargetBuffs[playerIndex], unitTypeBuffs[playerIndex][unitIndex][0]));
         entityWorld.setComponent(effectEntity, new RemoveBuffComponent(freeBenchPlaceBuffs[playerIndex], putTargetBuffs[playerIndex]));
         entityWorld.setComponent(effectEntity, new AddBuffComponent(new int[]{ fullBenchPlaceBuffs[playerIndex] }, -1));

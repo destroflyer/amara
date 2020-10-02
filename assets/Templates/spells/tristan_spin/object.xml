@@ -1,7 +1,7 @@
 <template>
     <entity id="object">
         <model>Models/tristan_spin/skin.xml</model>
-        <transformOrigin>[parameter0]</transformOrigin>
+        <transformOrigin>[unit]</transformOrigin>
         <hitbox>
             <circle radius="6"/>
         </hitbox>

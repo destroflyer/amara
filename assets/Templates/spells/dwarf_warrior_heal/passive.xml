@@ -14,7 +14,7 @@
                                 <sourceCasterTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <addStacks stacks="1">[parameter0]</addStacks>
+                                        <addStacks stacks="1">[buff]</addStacks>
                                     </entity>
                                 </triggeredEffect>
                             </entity>

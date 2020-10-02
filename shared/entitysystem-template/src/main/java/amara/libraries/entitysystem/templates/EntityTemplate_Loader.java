@@ -1,17 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.entitysystem.templates;
 
 import amara.libraries.entitysystem.EntityWorld;
 
+public interface EntityTemplate_Loader {
 
-/**
- *
- * @author Carl
- */
-public interface EntityTemplate_Loader{
-    
-    void loadTemplate(EntityWorld entityWorld, int entity, String templateName, String[] parametersText);
+    void loadTemplate(EntityWorld entityWorld, int entity, EntityTemplate template);
 }

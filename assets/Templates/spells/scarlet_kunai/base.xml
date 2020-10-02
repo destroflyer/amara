@@ -70,7 +70,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <addBuff duration="3">[parameter0]</addBuff>
+                        <addBuff duration="3">[markBuff]</addBuff>
                         <magicDamage>90 + (0.5 * source.abilityPower)</magicDamage>
                     </entity>
                 </triggeredEffect>

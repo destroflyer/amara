@@ -74,7 +74,7 @@
         <isStunnable/>
         <!--spells-->
         <autoAttack>
-            <entity id="autoattack" template="spells/ranged_autoattack,Models/aland_sword/skin_autoattack.xml"/>
+            <entity id="autoattack" template="spells/ranged_autoattack(model=Models/aland_sword/skin_autoattack.xml)"/>
         </autoAttack>
         <passives>
             <entity template="spells/aland_passive/passive(#autoattack,#spell1,#spell2,#spell3,#spell4)"/>

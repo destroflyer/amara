@@ -17,7 +17,7 @@
                                 <sourceTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <addNewBuff templateExpression="&quot;spells/maw_passive/buff(&quot; + (0.03 * totalDamage) + &quot;)&quot;" duration="[duration]"/>
+                                        <addNewBuff templateExpression="&quot;spells/maw_passive/buff(resistances=&quot; + (0.03 * totalDamage) + &quot;)&quot;" duration="[duration]"/>
                                     </entity>
                                 </triggeredEffect>
                             </entity>

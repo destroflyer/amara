@@ -101,7 +101,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <teleport>[parameter0]</teleport>
+                        <teleport>[target]</teleport>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

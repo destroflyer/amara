@@ -9,7 +9,7 @@
         <passiveAddedEffectTriggers>
             <!--add spell effects-->
             <entity>
-                <customTarget>[parameter0],[parameter2],[parameter3],[parameter4]</customTarget>
+                <customTarget>[autoattack],[spell2],[spell3],[spell4]</customTarget>
                 <triggeredEffect>
                     <entity>
                         <!--add spell effects-->
@@ -46,7 +46,7 @@
         <passiveRemovedEffectTriggers>
             <!--remove spell effects-->
             <entity>
-                <customTarget>[parameter0],[parameter2],[parameter3],[parameter4]</customTarget>
+                <customTarget>[autoattack],[spell2],[spell3],[spell4]</customTarget>
                 <triggeredEffect>
                     <entity>
                         <removeSpellEffects>#newSpellEffect</removeSpellEffects>
@@ -94,7 +94,7 @@
     <!--stacks reached trigger -> reduce cooldown-->
     <entity>
         <stacksReachedTrigger>[maximumStacks]</stacksReachedTrigger>
-        <customTarget>[parameter1]</customTarget>
+        <customTarget>[spell1]</customTarget>
         <triggeredEffect>
             <entity>
                 <reduceRemainingCooldownAbsolute>1</reduceRemainingCooldownAbsolute>

@@ -12,7 +12,7 @@
         <itemCategories>economy</itemCategories>
         <!--stats-->
         <itemActive consumable="true">
-            <entity template="./etherdesert_income_active,18"/>
+            <entity template="./etherdesert_income_active(gold=18)"/>
         </itemActive>
     </entity>
 </template>

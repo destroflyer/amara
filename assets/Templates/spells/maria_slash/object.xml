@@ -17,7 +17,7 @@
         <targetTarget/>
         <triggeredEffect>
             <entity>
-                <triggerSpellEffects>[parameter0]</triggerSpellEffects>
+                <triggerSpellEffects>[spell]</triggerSpellEffects>
             </entity>
         </triggeredEffect>
         <triggerSource>#object</triggerSource>

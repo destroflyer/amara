@@ -17,7 +17,7 @@
             <entity>
                 <acceptUntargetable/>
                 <acceptAllies/>
-                <requireAllBuffs>[parameter0]</requireAllBuffs>
+                <requireAllBuffs>[triggerTombstonesBuff]</requireAllBuffs>
             </entity>
         </collisionTrigger>
         <sourceTarget/>
@@ -26,7 +26,7 @@
                 <spawn>
                     <entity>
                         <spawnTemplate>./unit</spawnTemplate>
-                        <spawnBuffs>[parameter1]</spawnBuffs>
+                        <spawnBuffs>[ghostBuff]</spawnBuffs>
                     </entity>
                 </spawn>
                 <playAudio>

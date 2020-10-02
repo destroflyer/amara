@@ -17,10 +17,10 @@
                     <entity>
                         <spawn>
                             <entity>
-                                <spawnTemplate>./projectile([parameter1])</spawnTemplate>
+                                <spawnTemplate>./projectile([ghostBuff])</spawnTemplate>
                                 <spawnMoveToTarget/>
                                 <spawnMovementSpeed>18</spawnMovementSpeed>
-                                <spawnBuffs>[parameter0]</spawnBuffs>
+                                <spawnBuffs>[triggerTombstonesBuff]</spawnBuffs>
                             </entity>
                         </spawn>
                     </entity>
@@ -90,7 +90,7 @@
                             <!--draw aggro instantly-->
                             <entity>
                                 <instantTrigger/>
-                                <buffTargetsTarget>[parameter1]</buffTargetsTarget>
+                                <buffTargetsTarget>[ghostBuff]</buffTargetsTarget>
                                 <triggeredEffect>
                                     <entity>
                                         <setAggroTarget/>
@@ -105,7 +105,7 @@
             </entity>
             <!--add buff-->
             <entity>
-                <buffTargetsTarget>[parameter1]</buffTargetsTarget>
+                <buffTargetsTarget>[ghostBuff]</buffTargetsTarget>
                 <triggeredEffect>
                     <entity>
                         <addBuff duration="4">

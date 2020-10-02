@@ -2,8 +2,8 @@
     <entity id="buff">
         <continuousAttributes>
             <entity>
-                <bonusFlatArmor>[parameter0]</bonusFlatArmor>
-                <bonusFlatMagicResistance>[parameter0]</bonusFlatMagicResistance>
+                <bonusFlatArmor>[resistances]</bonusFlatArmor>
+                <bonusFlatMagicResistance>[resistances]</bonusFlatMagicResistance>
             </entity>
         </continuousAttributes>
     </entity>

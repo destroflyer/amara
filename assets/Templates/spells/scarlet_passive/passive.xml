@@ -18,13 +18,13 @@
                                         <triggerConditions>
                                             <entity>
                                                 <targetTarget/>
-                                                <hasBuffCondition>[parameter0]</hasBuffCondition>
+                                                <hasBuffCondition>[markBuff]</hasBuffCondition>
                                             </entity>
                                         </triggerConditions>
                                         <triggeredEffect>
                                             <entity>
                                                 <magicDamage>40 + (0.2 * source.abilityPower)</magicDamage>
-                                                <removeBuff>[parameter0]</removeBuff>
+                                                <removeBuff>[markBuff]</removeBuff>
                                                 <playAudio>
                                                     <entity>
                                                         <audio>Sounds/sounds/spells/scarlet_passive_hit.ogg</audio>

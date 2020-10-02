@@ -70,7 +70,7 @@
         <spellTargetRules>
             <entity>
                 <acceptAllies/>
-                <requireAllBuffs>[parameter1]</requireAllBuffs>
+                <requireAllBuffs>[ghostBuff]</requireAllBuffs>
             </entity>
         </spellTargetRules>
     </entity>
@@ -83,7 +83,7 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <swapPositions>[parameter0]</swapPositions>
+                        <swapPositions>[unit]</swapPositions>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

@@ -9,7 +9,7 @@
                 <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <addBuff duration="-1">[parameter0]</addBuff>
+                        <addBuff duration="-1">[triggerTombstonesBuff]</addBuff>
                         <addEffectTriggers>
                             <!--spawn trigger-->
                             <entity id="spawnTrigger">
@@ -19,7 +19,7 @@
                                     <entity>
                                         <spawn>
                                             <entity>
-                                                <spawnTemplate>./object([parameter0],[parameter1])</spawnTemplate>
+                                                <spawnTemplate>./object([triggerTombstonesBuff],[ghostBuff])</spawnTemplate>
                                             </entity>
                                         </spawn>
                                     </entity>
@@ -37,7 +37,7 @@
                 <sourceCasterTarget/>
                 <triggeredEffect>
                     <entity>
-                        <removeBuff>[parameter0]</removeBuff>
+                        <removeBuff>[triggerTombstonesBuff]</removeBuff>
                         <removeEffectTriggers>#spawnTrigger,#collisionTrigger</removeEffectTriggers>
                     </entity>
                 </triggeredEffect>

@@ -20,7 +20,7 @@
             <entity>
                 <acceptUntargetable/>
                 <acceptAllies/>
-                <requireAllBuffs>[parameter0]</requireAllBuffs>
+                <requireAllBuffs>[putTargetBuff]</requireAllBuffs>
             </entity>
         </spellTargetRules>
     </entity>
@@ -30,16 +30,16 @@
         <castedEffectTriggers>
             <!--free place -> teleport-->
             <entity>
-                <customTarget>[parameter10]</customTarget>
+                <customTarget>[target]</customTarget>
                 <triggerConditions>
                     <entity>
                         <targetTarget/>
                         <orConditions>
                             <entity>
-                                <hasBuffCondition>[parameter2]</hasBuffCondition>
+                                <hasBuffCondition>[freeSourcePlaceBuff]</hasBuffCondition>
                             </entity>
                             <entity>
-                                <hasBuffCondition>[parameter6]</hasBuffCondition>
+                                <hasBuffCondition>[freeTargetPlaceBuff]</hasBuffCondition>
                             </entity>
                         </orConditions>
                     </entity>
@@ -47,74 +47,6 @@
                 <triggeredEffect>
                     <entity>
                         <teleportToTargetPosition/>
-                    </entity>
-                </triggeredEffect>
-                <triggerSource>#spell</triggerSource>
-            </entity>
-            <!--free same place -> old place -> remove full place buff, add free place buff, add put target buff-->
-            <entity>
-                <buffTargetsTarget>[parameter3]</buffTargetsTarget>
-                <maximumTargets>1</maximumTargets>
-                <triggerConditions>
-                    <entity>
-                        <targetTarget/>
-                        <hasBuffCondition>[parameter2]</hasBuffCondition>
-                    </entity>
-                </triggerConditions>
-                <triggeredEffect>
-                    <entity>
-                        <removeBuff>[parameter3]</removeBuff>
-                        <addBuff duration="-1">[parameter2],[parameter0]</addBuff>
-                    </entity>
-                </triggeredEffect>
-                <triggerSource>[parameter10]</triggerSource>
-            </entity>
-            <!--free same place -> new place -> remove free place buff, remove put target buff, add full place buff-->
-            <entity>
-                <targetTarget/>
-                <triggerConditions>
-                    <entity>
-                        <targetTarget/>
-                        <hasBuffCondition>[parameter2]</hasBuffCondition>
-                    </entity>
-                </triggerConditions>
-                <triggeredEffect>
-                    <entity>
-                        <removeBuff>[parameter2],[parameter0]</removeBuff>
-                        <addBuff duration="-1">[parameter3]</addBuff>
-                    </entity>
-                </triggeredEffect>
-                <triggerSource>#spell</triggerSource>
-            </entity>
-            <!--free different place -> remove free place buff, remove put target buff, add full place buff-->
-            <entity>
-                <targetTarget/>
-                <triggerConditions>
-                    <entity>
-                        <targetTarget/>
-                        <hasBuffCondition>[parameter6]</hasBuffCondition>
-                    </entity>
-                </triggerConditions>
-                <triggeredEffect>
-                    <entity>
-                        <removeBuff>[parameter6],[parameter0]</removeBuff>
-                        <addBuff duration="-1">[parameter7]</addBuff>
-                    </entity>
-                </triggeredEffect>
-                <triggerSource>#spell</triggerSource>
-            </entity>
-            <!--free different place -> subtract new free places stack-->
-            <entity>
-                <sourceCasterTarget/>
-                <triggerConditions>
-                    <entity>
-                        <targetTarget/>
-                        <hasBuffCondition>[parameter6]</hasBuffCondition>
-                    </entity>
-                </triggerConditions>
-                <triggeredEffect>
-                    <entity>
-                        <addStacks stacks="-1">[parameter5]</addStacks>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
@@ -127,51 +59,170 @@
                         <targetTarget/>
                         <orConditions>
                             <entity>
-                                <hasBuffCondition>[parameter2]</hasBuffCondition>
+                                <hasBuffCondition>[unitOnSourceBuff]</hasBuffCondition>
                             </entity>
                             <entity>
-                                <hasBuffCondition>[parameter6]</hasBuffCondition>
+                                <hasBuffCondition>[unitOnTargetBuff]</hasBuffCondition>
                             </entity>
                         </orConditions>
                     </entity>
                 </triggerConditions>
                 <triggeredEffect>
                     <entity>
-                        <swapPositions>[parameter10]</swapPositions>
+                        <swapPositions>[target]</swapPositions>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
             </entity>
-            <!--different place -> remove old unit place buff, add new unit place buff-->
+            <!--free same place -> old place -> remove full source place buff, add free source place buff, add put target buff-->
             <entity>
-                <customTarget>[parameter10]</customTarget>
+                <buffTargetsTarget>[fullSourcePlaceBuff]</buffTargetsTarget>
+                <maximumTargets>1</maximumTargets>
+                <triggerConditions>
+                    <entity>
+                        <targetTarget/>
+                        <hasBuffCondition>[freeSourcePlaceBuff]</hasBuffCondition>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <removeBuff>[fullSourcePlaceBuff]</removeBuff>
+                        <addBuff duration="-1">[freeSourcePlaceBuff],[putTargetBuff]</addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>[target]</triggerSource>
+            </entity>
+            <!--free same place -> new place -> remove free source place buff, remove put target buff, add full source place buff-->
+            <entity>
+                <targetTarget/>
+                <triggerConditions>
+                    <entity>
+                        <targetTarget/>
+                        <hasBuffCondition>[freeSourcePlaceBuff]</hasBuffCondition>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <removeBuff>[freeSourcePlaceBuff],[putTargetBuff]</removeBuff>
+                        <addBuff duration="-1">[fullSourcePlaceBuff]</addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--free different place -> old place -> remove full source place buff, add free source place buff, add put target buff-->
+            <entity>
+                <buffTargetsTarget>[fullSourcePlaceBuff]</buffTargetsTarget>
+                <maximumTargets>1</maximumTargets>
+                <triggerConditions>
+                    <entity>
+                        <targetTarget/>
+                        <hasBuffCondition>[freeTargetPlaceBuff]</hasBuffCondition>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <removeBuff>[fullSourcePlaceBuff]</removeBuff>
+                        <addBuff duration="-1">[freeSourcePlaceBuff],[putTargetBuff]</addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>[target]</triggerSource>
+            </entity>
+            <!--free different place -> new place -> remove free target place buff, remove put target buff, add full target place buff-->
+            <entity>
+                <targetTarget/>
+                <triggerConditions>
+                    <entity>
+                        <targetTarget/>
+                        <hasBuffCondition>[freeTargetPlaceBuff]</hasBuffCondition>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <removeBuff>[freeTargetPlaceBuff],[putTargetBuff]</removeBuff>
+                        <addBuff duration="-1">[fullTargetPlaceBuff]</addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--free different place -> add free source places stack-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggerConditions>
+                    <entity>
+                        <targetTarget/>
+                        <hasBuffCondition>[freeTargetPlaceBuff]</hasBuffCondition>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <addStacks stacks="1">[freeSourcePlacesBuff]</addStacks>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--free different place -> subtract free target places stack-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggerConditions>
+                    <entity>
+                        <targetTarget/>
+                        <hasBuffCondition>[freeTargetPlaceBuff]</hasBuffCondition>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <addStacks stacks="-1">[freeTargetPlacesBuff]</addStacks>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--different place -> source unit -> remove unit on source buff, add unit on target buff-->
+            <entity>
+                <customTarget>[target]</customTarget>
                 <triggerConditions>
                     <entity>
                         <targetTarget/>
                         <orConditions>
                             <entity>
-                                <hasBuffCondition>[parameter6]</hasBuffCondition>
+                                <hasBuffCondition>[freeTargetPlaceBuff]</hasBuffCondition>
                             </entity>
                             <entity>
-                                <hasBuffCondition>[parameter8]</hasBuffCondition>
+                                <hasBuffCondition>[unitOnTargetBuff]</hasBuffCondition>
                             </entity>
                         </orConditions>
                     </entity>
                 </triggerConditions>
                 <triggeredEffect>
                     <entity>
-                        <removeBuff>[parameter4]</removeBuff>
-                        <addBuff duration="-1">[parameter8]</addBuff>
+                        <removeBuff>[unitOnSourceBuff]</removeBuff>
+                        <addBuff duration="-1">[unitOnTargetBuff]</addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--occupied different place -> target unit -> remove unit on target buff, add unit on source buff-->
+            <entity>
+                <targetTarget/>
+                <triggerConditions>
+                    <entity>
+                        <targetTarget/>
+                        <hasBuffCondition>[unitOnTargetBuff]</hasBuffCondition>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <removeBuff>[unitOnTargetBuff]</removeBuff>
+                        <addBuff duration="-1">[unitOnSourceBuff]</addBuff>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
             </entity>
             <!--remove mark buff, set as respawn transform-->
             <entity>
-                <customTarget>[parameter10]</customTarget>
+                <customTarget>[target]</customTarget>
                 <triggeredEffect>
                     <entity>
-                        <removeBuff>[parameter9]</removeBuff>
+                        <removeBuff>[buff]</removeBuff>
                         <setAsRespawnTransform/>
                     </entity>
                 </triggeredEffect>

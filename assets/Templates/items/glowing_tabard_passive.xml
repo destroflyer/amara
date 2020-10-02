@@ -18,7 +18,7 @@
                                     <entity>
                                         <name>Burned</name>
                                         <description>This unit received magic damage over time.</description>
-                                        <buffIcon>items/burning_armor</buffIcon>
+                                        <buffIcon>items/glowing_tabard</buffIcon>
                                         <buffVisualisation>burning</buffVisualisation>
                                         <repeatingEffect interval="0.5">
                                             <entity>
@@ -38,7 +38,7 @@
                             <entity id="visualisationBuff">
                                 <name>Burner</name>
                                 <description>This unit deals magic damage over time to nearby enemies.</description>
-                                <buffIcon>items/burning_armor</buffIcon>
+                                <buffIcon>items/glowing_tabard</buffIcon>
                                 <buffVisualisation>burning</buffVisualisation>
                                 <keepOnDeath/>
                             </entity>

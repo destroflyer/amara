@@ -1,4 +1,7 @@
-<template defaultParameters="Sounds/sounds/spells/melee_autoattack_cast.ogg">
+<template>
+    <values>
+        <soundHit>Sounds/sounds/spells/melee_autoattack_cast.ogg</soundHit>
+    </values>
     <entity id="spell">
         <name>Melee Autoattack</name>
         <instantEffectTriggers>
@@ -10,7 +13,7 @@
                         <triggerSpellEffects>#spell</triggerSpellEffects>
                         <playAudio>
                             <entity>
-                                <audio>[parameter0]</audio>
+                                <audio>[soundHit]</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>

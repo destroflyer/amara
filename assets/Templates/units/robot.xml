@@ -67,7 +67,7 @@
         <learnableSpells>
             <entity template="spells/grab(#unit)"/>
             <entity template="spells/astral_blessing"/>
-            <entity template="spells/sonic_wave(2)"/>
+            <entity template="spells/sonic_wave(spellIndex=2)"/>
             <entity template="spells/wither"/>
         </learnableSpells>
         <!--other-->

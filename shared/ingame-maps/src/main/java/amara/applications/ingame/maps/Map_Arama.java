@@ -53,7 +53,7 @@ public class Map_Arama extends Map {
                 new MapSpell("spells/fatique/base"),
                 new MapSpell("spells/recovery/base")
             ),
-            new MapSpells("backport", new MapSpell("spells/backport/base(-1)"))
+            new MapSpells("backport", new MapSpell("spells/backport/base(target=-1)"))
         };
     }
     private final float laneCenterY = 260.25f;
@@ -180,7 +180,7 @@ public class Map_Arama extends Map {
             tower1DeathTrigger_2.setComponent(new CustomTargetComponent(spawnTargetEntity_Tower1Remains));
             EntityWrapper tower1DeathEffect_2 = entityWorld.getWrapped(entityWorld.createEntity());
             int spawnInformationEntity_Tower1Remains = entityWorld.createEntity();
-            entityWorld.setComponent(spawnInformationEntity_Tower1Remains, new SpawnTemplateComponent("structures/tower_remains," + (i + 1)));
+            entityWorld.setComponent(spawnInformationEntity_Tower1Remains, new SpawnTemplateComponent("structures/tower_remains(team=" + (i + 1) + ")"));
             tower1DeathEffect_2.setComponent(new SpawnComponent(spawnInformationEntity_Tower1Remains));
             tower1DeathTrigger_2.setComponent(new TriggeredEffectComponent(tower1DeathEffect_2.getId()));
             tower1DeathTrigger_2.setComponent(new TriggerSourceComponent(tower1.getId()));
@@ -202,7 +202,7 @@ public class Map_Arama extends Map {
             tower2DeathTrigger_2.setComponent(new CustomTargetComponent(spawnTargetEntity_Tower2Remains));
             EntityWrapper tower2DeathEffect_2 = entityWorld.getWrapped(entityWorld.createEntity());
             int spawnInformationEntity_Tower2Remains = entityWorld.createEntity();
-            entityWorld.setComponent(spawnInformationEntity_Tower2Remains, new SpawnTemplateComponent("structures/tower_remains," + (i + 1)));
+            entityWorld.setComponent(spawnInformationEntity_Tower2Remains, new SpawnTemplateComponent("structures/tower_remains(team=" + (i + 1) + ")"));
             tower2DeathEffect_2.setComponent(new SpawnComponent(spawnInformationEntity_Tower2Remains));
             tower2DeathTrigger_2.setComponent(new TriggeredEffectComponent(tower2DeathEffect_2.getId()));
             tower2DeathTrigger_2.setComponent(new TriggerSourceComponent(tower2.getId()));
@@ -219,8 +219,8 @@ public class Map_Arama extends Map {
                 spawnTrigger.setComponent(new CustomTargetComponent(nexi[(i == 0) ? 1 : 0].getId()));
                 EntityWrapper spawnEffect = entityWorld.getWrapped(entityWorld.createEntity());
                 EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-                String unitTemplate = ((r < 3) ? "etherdesert_creep_melee" : "etherdesert_creep_range");
-                spawnInformation.setComponent(new SpawnTemplateComponent(unitTemplate + "," + spawnTrigger.getId()));
+                String unitTemplate = ((r < 3) ? "arama_minion_melee" : "arama_minion_range");
+                spawnInformation.setComponent(new SpawnTemplateComponent(unitTemplate + "(spawnTrigger=" + spawnTrigger.getId() + ")"));
                 spawnInformation.setComponent(new SpawnMoveToTargetComponent());
                 spawnInformation.setComponent(new SpawnAttackMoveComponent());
                 spawnEffect.setComponent(new SpawnComponent(spawnInformation.getId()));
@@ -288,11 +288,11 @@ public class Map_Arama extends Map {
             int[] campSpawnInformationEntities = new int[3];
             for(int r=0;r<2;r++){
                 EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-                spawnInformation.setComponent(new SpawnTemplateComponent("units/pseudospider", "arama_camp_pseudospider," + i + "," + r));
+                spawnInformation.setComponent(new SpawnTemplateComponent("units/pseudospider", "arama_camp_pseudospider(side=" + i + ",index=" + r + ")"));
                 campSpawnInformationEntities[r] = spawnInformation.getId();
             }
             EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-            spawnInformation.setComponent(new SpawnTemplateComponent("units/beetle_golem", "arama_camp_beetle_golem," + i));
+            spawnInformation.setComponent(new SpawnTemplateComponent("units/beetle_golem", "arama_camp_beetle_golem(side=" + i + ")"));
             campSpawnInformationEntities[2] = spawnInformation.getId();
             camp.setComponent(new CampSpawnInformationComponent(campSpawnInformationEntities));
             camp.setComponent(new CampRespawnDurationComponent(40));
@@ -331,7 +331,7 @@ public class Map_Arama extends Map {
         int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
         int teamEntity = ((playerIndex % 2) + 1);
         entityWorld.setComponent(characterEntity, new TeamComponent(teamEntity));
-        spells[1].getMapSpells()[0] = new MapSpell("spells/backport/base(" + backportPositionEntities[teamEntity - 1] + ")");
+        spells[1].getMapSpells()[0] = new MapSpell("spells/backport/base(target=" + backportPositionEntities[teamEntity - 1] + ")");
         //Bounty
         EntityWrapper characterBounty = entityWorld.getWrapped(entityWorld.createEntity());
         characterBounty.setComponent(new BountyCharacterKillComponent());

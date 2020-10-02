@@ -17,7 +17,7 @@
         <targetTarget/>
         <triggeredEffect>
             <entity>
-                <triggerSpellEffects>[parameter0]</triggerSpellEffects>
+                <triggerSpellEffects>[spell]</triggerSpellEffects>
                 <playAudio>
                     <entity>
                         <audio>Sounds/sounds/spells/unstoppable_force_hit.ogg</audio>

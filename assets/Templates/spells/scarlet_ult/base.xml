@@ -54,7 +54,7 @@
                 <triggeredEffect>
                     <entity>
                         <physicalDamage>300 + (0.6 * source.abilityPower)</physicalDamage>
-                        <addBuff duration="3">[parameter0]</addBuff>
+                        <addBuff duration="3">[markBuff]</addBuff>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
@@ -65,7 +65,7 @@
                 <triggerConditions>
                     <entity id="executeCondition">
                         <targetTarget/>
-                        <hasBuffCondition>[parameter0]</hasBuffCondition>
+                        <hasBuffCondition>[markBuff]</hasBuffCondition>
                         <hasHealthPortionCondition portion="0.2" lessOrMore="true" allowEqual="false"/>
                     </entity>
                 </triggerConditions>
@@ -78,7 +78,7 @@
             </entity>
             <!--marked targets below threshhold -> reset dash-->
             <entity>
-                <customTarget>[parameter1]</customTarget>
+                <customTarget>[spell3]</customTarget>
                 <triggerConditions>#executeCondition</triggerConditions>
                 <triggeredEffect>
                     <entity>

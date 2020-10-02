@@ -104,27 +104,27 @@
                         <spawn>
                             <entity>
                                 <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
-                                <spawnBuffs>[parameter0]</spawnBuffs>
+                                <spawnBuffs>[ghostBuff]</spawnBuffs>
                                 <spawnRelativePosition>0,6.5</spawnRelativePosition>
                             </entity>
                             <entity>
                                 <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
-                                <spawnBuffs>[parameter0]</spawnBuffs>
+                                <spawnBuffs>[ghostBuff]</spawnBuffs>
                                 <spawnRelativePosition>6.1819,2.0086</spawnRelativePosition>
                             </entity>
                             <entity>
                                 <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
-                                <spawnBuffs>[parameter0]</spawnBuffs>
+                                <spawnBuffs>[ghostBuff]</spawnBuffs>
                                 <spawnRelativePosition>3.8206,-5.2586</spawnRelativePosition>
                             </entity>
                             <entity>
                                 <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
-                                <spawnBuffs>[parameter0]</spawnBuffs>
+                                <spawnBuffs>[ghostBuff]</spawnBuffs>
                                 <spawnRelativePosition>-3.8206,-5.2586</spawnRelativePosition>
                             </entity>
                             <entity>
                                 <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
-                                <spawnBuffs>[parameter0]</spawnBuffs>
+                                <spawnBuffs>[ghostBuff]</spawnBuffs>
                                 <spawnRelativePosition>-6.1819,2.0086</spawnRelativePosition>
                             </entity>
                         </spawn>

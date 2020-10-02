@@ -109,7 +109,7 @@ public class Map_Testmap extends Map {
         for(int x=0;x<3;x++){
             for(int y=0;y<2;y++){
                 EntityWrapper spawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-                spawnInformation.setComponent(new SpawnTemplateComponent("units/pseudospider", "testmap_camp_pseudospider," + x + "," + y + "," + testCampUnitBounty.getId()));
+                spawnInformation.setComponent(new SpawnTemplateComponent("units/pseudospider", "testmap_camp_pseudospider(x=" + x + ",y=" + y + ",bounty=" + testCampUnitBounty.getId() + ")"));
                 campSpawnInformationEntities[(x * 2) + y] = spawnInformation.getId();
             }
         }
@@ -130,7 +130,7 @@ public class Map_Testmap extends Map {
         forestMonsterCamp.setComponent(new CampMaximumAggroDistanceComponent(10));
         forestMonsterCamp.setComponent(new CampHealthResetComponent());
         EntityWrapper forestMonsterCamp_SpawnInformation = entityWorld.getWrapped(entityWorld.createEntity());
-        forestMonsterCamp_SpawnInformation.setComponent(new SpawnTemplateComponent("units/forest_monster", "testmap_camp_forest_monster," + forestMonsterBounty.getId()));
+        forestMonsterCamp_SpawnInformation.setComponent(new SpawnTemplateComponent("units/forest_monster", "testmap_camp_forest_monster(bounty=" + forestMonsterBounty.getId() + ")"));
         forestMonsterCamp.setComponent(new CampSpawnInformationComponent(forestMonsterCamp_SpawnInformation.getId()));
         forestMonsterCamp.setComponent(new CampRespawnDurationComponent(5));
         forestMonsterCamp.setComponent(new CampSpawnComponent());

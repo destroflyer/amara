@@ -1,5 +1,5 @@
 <template>
-    <entity>
+    <entity id="unit">
         <name>Ranged Soldier</name>
         <isMinion/>
         <!--model-->
@@ -61,9 +61,13 @@
         <isStunnable/>
         <!--spells-->
         <autoAttack>
-            <entity template="spells/ranged_autoattack,Models/3dsa_archer_arrow/skin.xml"/>
+            <entity template="spells/ranged_autoattack(model=Models/3dsa_archer_arrow/skin.xml)"/>
         </autoAttack>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>
     </entity>
+    <entity template="./free_place_on_removal_place(#unit,unitOnPlaceBuff=[unitOnBenchBuff],fullPlaceBuff=[fullBenchPlaceBuff],freePlaceBuff=[freeBenchPlaceBuff],[putTargetBuff])"/>
+    <entity template="./free_place_on_removal_place(#unit,unitOnPlaceBuff=[unitOnBoardBuff],fullPlaceBuff=[fullBoardPlaceBuff],freePlaceBuff=[freeBoardPlaceBuff],[putTargetBuff])"/>
+    <entity template="./free_place_on_removal_stack(#unit,[playerCharacter],unitOnPlaceBuff=[unitOnBenchBuff],freePlacesBuff=[freeBenchPlacesBuff])"/>
+    <entity template="./free_place_on_removal_stack(#unit,[playerCharacter],unitOnPlaceBuff=[unitOnBoardBuff],freePlacesBuff=[freeBoardPlacesBuff])"/>
 </template>

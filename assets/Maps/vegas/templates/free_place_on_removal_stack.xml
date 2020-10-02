@@ -1,0 +1,18 @@
+<template>
+    <entity>
+        <removeTrigger/>
+        <customTarget>[playerCharacter]</customTarget>
+        <triggerConditions>
+            <entity>
+                <customTarget>[unit]</customTarget>
+                <hasBuffCondition>[unitOnPlaceBuff]</hasBuffCondition>
+            </entity>
+        </triggerConditions>
+        <triggeredEffect>
+            <entity>
+                <addStacks stacks="1">[freePlacesBuff]</addStacks>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>[unit]</triggerSource>
+    </entity>
+</template>

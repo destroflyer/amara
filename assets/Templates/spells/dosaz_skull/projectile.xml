@@ -52,7 +52,7 @@
                 <spawn>
                     <entity>
                         <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
-                        <spawnBuffs>[parameter0]</spawnBuffs>
+                        <spawnBuffs>[ghostBuff]</spawnBuffs>
                     </entity>
                 </spawn>
                 <playAudio>

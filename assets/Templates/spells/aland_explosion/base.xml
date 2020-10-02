@@ -1,5 +1,7 @@
 <template>
-    <value name="duration">0.4</value>
+    <values>
+        <duration>0.4</duration>
+    </values>
     <entity id="spell">
         <name>Explosion</name>
         <description>Throw a bomb at your feet, dealing magic damage to all enemies and knocking them away from the center.</description>

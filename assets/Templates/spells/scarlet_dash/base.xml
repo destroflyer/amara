@@ -50,7 +50,7 @@
                                 <triggerConditions>
                                     <entity>
                                         <targetTarget/>
-                                        <hasBuffCondition>[parameter0]</hasBuffCondition>
+                                        <hasBuffCondition>[markBuff]</hasBuffCondition>
                                     </entity>
                                 </triggerConditions>
                                 <triggeredEffect>
@@ -106,7 +106,7 @@
                 <triggeredEffect>
                     <entity>
                         <physicalDamage>150 + (0.7 * source.abilityPower)</physicalDamage>
-                        <addBuff duration="3">[parameter0]</addBuff>
+                        <addBuff duration="3">[markBuff]</addBuff>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
