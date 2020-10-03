@@ -1202,6 +1202,30 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent(portion, lessOrMore, allowEqual);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.InRangeConditionComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.conditions.InRangeConditionComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.conditions.InRangeConditionComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.InRangeConditionComponent>("inRangeCondition"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.conditions.InRangeConditionComponent construct(EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+                float distance = 0;
+                String distanceText = element.getAttributeValue("distance");
+                if((distanceText != null) && (distanceText.length() > 0)){
+                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                }
+                return new amara.applications.ingame.entitysystem.components.conditions.InRangeConditionComponent(targetEntity, distance);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.IsCharacterConditionComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.IsCharacterConditionComponent>("isCharacterCondition"){
 

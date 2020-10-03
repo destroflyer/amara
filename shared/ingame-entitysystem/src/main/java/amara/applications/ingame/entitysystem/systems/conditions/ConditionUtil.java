@@ -4,9 +4,11 @@ import amara.applications.ingame.entitysystem.components.attributes.HealthCompon
 import amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent;
 import amara.applications.ingame.entitysystem.components.conditions.*;
 import amara.applications.ingame.entitysystem.components.general.NameComponent;
+import amara.applications.ingame.entitysystem.components.physics.PositionComponent;
 import amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent;
 import amara.applications.ingame.entitysystem.systems.buffs.BuffUtil;
 import amara.libraries.entitysystem.EntityWorld;
+import com.jme3.math.Vector2f;
 
 public class ConditionUtil {
 
@@ -16,6 +18,7 @@ public class ConditionUtil {
              && isHasHealthPortionConditionMet(entityWorld, conditionEntity, targetEntity)
              && isNameAmountConditionMet(entityWorld, conditionEntity, targetEntity)
              && isIsCharacterConditionMet(entityWorld, conditionEntity, targetEntity)
+             && isInRangeConditionMet(entityWorld, conditionEntity, targetEntity)
              && isNotExistingConditionMet(entityWorld, conditionEntity));
     }
 
@@ -79,6 +82,20 @@ public class ConditionUtil {
         IsCharacterConditionComponent isCharacterConditionComponent = entityWorld.getComponent(conditionEntity, IsCharacterConditionComponent.class);
         if (isCharacterConditionComponent != null) {
             return entityWorld.hasComponent(targetEntity, IsCharacterComponent.class);
+        }
+        return true;
+    }
+
+    private static boolean isInRangeConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
+        InRangeConditionComponent inRangeConditionComponent = entityWorld.getComponent(conditionEntity, InRangeConditionComponent.class);
+        if (inRangeConditionComponent != null) {
+            PositionComponent positionComponent1 = entityWorld.getComponent(targetEntity, PositionComponent.class);
+            PositionComponent positionComponent2 = entityWorld.getComponent(inRangeConditionComponent.getTargetEntity(), PositionComponent.class);
+            if ((positionComponent1 != null) && (positionComponent2 != null)) {
+                Vector2f position1 = positionComponent1.getPosition();
+                Vector2f position2 = positionComponent2.getPosition();
+                return (position1.distanceSquared(position2) <= (inRangeConditionComponent.getDistance() * inRangeConditionComponent.getDistance()));
+            }
         }
         return true;
     }
