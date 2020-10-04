@@ -382,14 +382,15 @@ public class ScreenController_HUD extends GameScreenController {
     public void setPlayer_SpellUpgradeImage(int upgradeIndex, String imagePath){
         getImageRenderer("upgrade_spell_image_" + upgradeIndex).setImage(createImage(imagePath));
     }
-    
-    public void upgradeSpell(String upgradeIndexString){
+
+    public void upgradeSpell(String upgradeIndexString) {
         int upgradeIndex = Integer.parseInt(upgradeIndexString);
         SendPlayerCommandsAppState sendPlayerCommandsAppState = mainApplication.getStateManager().getState(SendPlayerCommandsAppState.class);
         sendPlayerCommandsAppState.upgradeSpell(currentUpgradeSpellIndex, upgradeIndex);
         hidePlayer_UpgradeSpell();
+        hidePlayer_SpellInformation();
     }
-    
+
     private void hidePlayer_UpgradeSpell(){
         getElementByID("upgrade_spell_layer_container").setVisible(false);
         getElementByID("upgrade_spell_layer_images").setVisible(false);

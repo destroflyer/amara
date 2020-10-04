@@ -3888,6 +3888,15 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent(targetRulesEntity);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.SpellUpgradeDescriptionComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellUpgradeDescriptionComponent>("spellUpgradeDescription"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spells.SpellUpgradeDescriptionComponent construct(EntityWorld entityWorld, Element element){
+                String description = xmlTemplateManager.parseValue(entityWorld, element.getText());
+                return new amara.applications.ingame.entitysystem.components.spells.SpellUpgradeDescriptionComponent(description);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent.class.getDeclaredField("spellsEntities"), componentFieldSerializer_Entity);

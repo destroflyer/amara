@@ -61,10 +61,18 @@ public class UpdateSpellInformationsSystem extends GUIDisplaySystem<ScreenContro
         for (int i = 0; i < spellInformations.length; i++) {
             if (spellEntities[i] != -1) {
                 NameComponent nameComponent = entityWorld.getComponent(spellEntities[i], NameComponent.class);
-                DescriptionComponent descriptionComponent = entityWorld.getComponent(spellEntities[i], DescriptionComponent.class);
-                CooldownComponent cooldownComponent = entityWorld.getComponent(spellEntities[i], CooldownComponent.class);
                 String name = ((nameComponent != null) ? nameComponent.getName() : "[Unnamed]");
-                String description = ((descriptionComponent != null) ? descriptionComponent.getDescription() : "[No description available]");
+                String description = "[No description available]";
+                SpellUpgradeDescriptionComponent spellUpgradeDescriptionComponent = entityWorld.getComponent(spellEntities[i], SpellUpgradeDescriptionComponent.class);
+                if (spellUpgradeDescriptionComponent != null) {
+                    description = spellUpgradeDescriptionComponent.getDescription();
+                } else {
+                    DescriptionComponent descriptionComponent = entityWorld.getComponent(spellEntities[i], DescriptionComponent.class);
+                    if (descriptionComponent != null) {
+                        description = descriptionComponent.getDescription();
+                    }
+                }
+                CooldownComponent cooldownComponent = entityWorld.getComponent(spellEntities[i], CooldownComponent.class);
                 float cooldown = ((cooldownComponent != null) ? cooldownComponent.getDuration() : -1);
                 spellInformations[i] = new SpellInformation(spellEntities[i], name, description, cooldown);
             }

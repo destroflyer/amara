@@ -1,3 +1,8 @@
 <template>
-    <entity template="./template(duration=4)"/>
+    <values>
+        <duration>4</duration>
+    </values>
+    <entity template="./template([duration])">
+        <spellUpgradeDescription>Stealth duration: 3 seconds -> [duration] seconds</spellUpgradeDescription>
+    </entity>
 </template>
