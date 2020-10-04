@@ -3,6 +3,6 @@
         <charmDuration>1.75</charmDuration>
     </values>
     <entity template="./template([thunderPoppableBuff],[charmDuration])">
-        <deltaDescription>Charm duration: 1.5 -> [charmDuration]</deltaDescription>
+        <deltaDescription>Charm duration: 1.5 seconds -> [charmDuration] seconds</deltaDescription>
     </entity>
 </template>

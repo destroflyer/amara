@@ -22,7 +22,6 @@ public class TestDosaz extends CommandingPlayerTest {
     }
     private static final String NAME_TOMBSTONE = "Tombstone";
     private static final String NAME_GHOST = "Ghost";
-    private static final String NAME_Q_BUFF = "Cursed";
     private static final String NAME_WALL_PART = "Bone Wall Part";
     private static final String NAME_WALL_VISUAL = "Bone Wall Visual";
     private static final String NAME_R_BUFF = "Power From the Beyond";
@@ -78,10 +77,7 @@ public class TestDosaz extends CommandingPlayerTest {
 
         queueCommand(new CastPositionalSkillshotSpellCommand(SPELL_INDEX_Q, new Vector2f(30, 10)));
         tickSeconds(1);
-        assertTrue(hasBuff(targetDummy, NAME_Q_BUFF));
         assertEquals(940, getHealth(targetDummy), EPSILON);
-        tickSeconds(3);
-        assertFalse(hasBuff(targetDummy, NAME_Q_BUFF));
 
         onLogicEnd(false, false);
     }

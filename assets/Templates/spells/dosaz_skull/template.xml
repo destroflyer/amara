@@ -1,0 +1,134 @@
+<template>
+    <values>
+        <delay>0.2</delay>
+        <projectileSpeed>18</projectileSpeed>
+        <damageAmplification>0</damageAmplification>
+    </values>
+    <entity id="spell">
+        <name>Skull</name>
+        <description>Throws a skull to target position, that triggers all tombstones on its path. If an enemy was hit, it received magic damage - In addition, all ghosts gain attack speed and walk speed and aggro this target. If nothing was hit, a ghost is spawned at the target position.</description>
+        <spellVisualisation>dosaz_skull</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <circularIndicator radius="27"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./projectile([ghostBuff])</spawnTemplate>
+                                <spawnMoveToTarget/>
+                                <spawnMovementSpeed>[projectileSpeed]</spawnMovementSpeed>
+                                <spawnBuffs>[triggerTombstonesBuff]</spawnBuffs>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/dosaz_skull_cast.ogg</audio>
+                                <audioVolume>1.5</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>positional_skillshot</castType>
+        <castCancelCast/>
+        <castCancelMovement/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>40</manaCost>
+            </entity>
+        </castCost>
+        <castAnimation>
+            <entity>
+                <name>spell9</name>
+                <loopDuration>0.7</loopDuration>
+            </entity>
+        </castAnimation>
+        <range type="center_to_center" distance="27"/>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>90 + (0.5 * source.abilityPower)</magicDamage>
+                        <addBuff  if="[damageAmplification]" duration="3">
+                            <entity>
+                                <name>Cursed</name>
+                                <description>This unit receives increased damage from all sources.</description>
+                                <buffIcon>spells/dosaz_skull</buffIcon>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageIncomingDamageAmplification>[damageAmplification]</bonusPercentageIncomingDamageAmplification>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                        <addEffectTriggers>
+                            <!--draw aggro instantly-->
+                            <entity>
+                                <instantTrigger/>
+                                <buffTargetsTarget>[ghostBuff]</buffTargetsTarget>
+                                <triggeredEffect>
+                                    <entity>
+                                        <setAggroTarget/>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                            </entity>
+                        </addEffectTriggers>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--add buff-->
+            <entity>
+                <buffTargetsTarget>[ghostBuff]</buffTargetsTarget>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="4">
+                            <entity>
+                                <name>Chasing Pac-Man</name>
+                                <description>This unit has increased attack speed and walk speed.</description>
+                                <buffIcon>spells/dosaz_skull</buffIcon>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageAttackSpeed>0.9</bonusPercentageAttackSpeed>
+                                        <bonusPercentageWalkSpeed>0.9</bonusPercentageWalkSpeed>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

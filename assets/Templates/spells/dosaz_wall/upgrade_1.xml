@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <lifetime>7</lifetime>
+    </values>
+    <entity template="./template([triggerTombstonesBuff],[lifetime])">
+        <deltaDescription>Wall lifetime: 4 seconds -> [lifetime] seconds</deltaDescription>
+    </entity>
+</template>

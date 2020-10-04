@@ -97,7 +97,7 @@ public class XMLTemplateManager{
     }
 
     public int createAndLoadEntity(EntityWorld entityWorld, Element entityElement) {
-        if (entityElement.getName().equals("empty")) {
+        if ((!isElementEnabled(entityWorld, entityElement)) || entityElement.getName().equals("empty")) {
             return -1;
         }
         Integer entity = null;
@@ -126,8 +126,7 @@ public class XMLTemplateManager{
             EntityTemplate.loadTemplate(entityWorld, entity, parseTemplate(entityWorld, templateXMLText));
         }
         for (Element componentElement : entityElement.getChildren()) {
-            String ifCondition = componentElement.getAttributeValue("if");
-            if ((ifCondition == null) || parseValueBoolean(entityWorld, ifCondition)) {
+            if (isElementEnabled(entityWorld, componentElement)) {
                 Object component = constructComponent(entityWorld, componentElement);
                 if (component != null) {
                     entityWorld.setComponent(entity, component);
@@ -147,6 +146,11 @@ public class XMLTemplateManager{
             return text;
         }, key -> parseValue(entityWorld, key), value -> parseValue(entityWorld, value));
         return entityTemplate.getText();
+    }
+
+    private boolean isElementEnabled(EntityWorld entityWorld, Element element) {
+        String ifCondition = element.getAttributeValue("if");
+        return ((ifCondition == null) || parseValueBoolean(entityWorld, ifCondition));
     }
 
     private boolean parseValueBoolean(EntityWorld entityWorld, String text) {

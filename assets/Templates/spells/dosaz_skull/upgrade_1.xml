@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <damageAmplification>0.1</damageAmplification>
+    </values>
+    <entity template="./template([triggerTombstonesBuff],[ghostBuff],[damageAmplification])">
+        <deltaDescription>Hit enemies receive 10% increased damage for 3 seconds.</deltaDescription>
+    </entity>
+</template>

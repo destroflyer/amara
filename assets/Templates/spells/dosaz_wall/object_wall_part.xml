@@ -5,6 +5,6 @@
         <intersectionPushes/>
         <collisionGroup targetOf="map|spell_targets" targets="spell_targets"/>
         <hitboxActive/>
-        <lifetime>6</lifetime>
+        <lifetime>[lifetime]</lifetime>
     </entity>
 </template>

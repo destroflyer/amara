@@ -80,10 +80,30 @@
             <entity template="spells/dosaz_passive/passive(#triggerTombstonesBuff,#ghostBuff)"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/dosaz_skull/base(#triggerTombstonesBuff,#ghostBuff)"/>
-            <entity template="spells/dosaz_teleport/base(#unit,#ghostBuff)"/>
-            <entity template="spells/dosaz_wall/base(#triggerTombstonesBuff)"/>
-            <entity template="spells/dosaz_ult/base(#ghostBuff)"/>
+            <entity template="spells/dosaz_skull/base(#triggerTombstonesBuff,#ghostBuff)">
+                <spellUpgrades>
+                    <entity template="spells/dosaz_skull/upgrade_0(#triggerTombstonesBuff,#ghostBuff)"/>
+                    <entity template="spells/dosaz_skull/upgrade_1(#triggerTombstonesBuff,#ghostBuff)"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/dosaz_teleport/base(#unit,#ghostBuff)">
+                <spellUpgrades>
+                    <entity template="spells/dosaz_teleport/upgrade_0(#unit,#ghostBuff)"/>
+                    <entity template="spells/dosaz_teleport/upgrade_1(#unit,#ghostBuff)"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/dosaz_wall/base(#triggerTombstonesBuff)">
+                <spellUpgrades>
+                    <entity template="spells/dosaz_wall/upgrade_0(#triggerTombstonesBuff)"/>
+                    <entity template="spells/dosaz_wall/upgrade_1(#triggerTombstonesBuff)"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/dosaz_ult/base(#ghostBuff)">
+                <spellUpgrades>
+                    <entity template="spells/dosaz_ult/upgrade_0(#ghostBuff)"/>
+                    <entity template="spells/dosaz_ult/upgrade_1(#ghostBuff)"/>
+                </spellUpgrades>
+            </entity>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

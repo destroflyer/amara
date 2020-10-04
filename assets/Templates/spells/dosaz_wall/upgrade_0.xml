@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <range>22</range>
+    </values>
+    <entity template="./template([triggerTombstonesBuff],[range])">
+        <deltaDescription>Range: 18 -> [range]</deltaDescription>
+    </entity>
+</template>

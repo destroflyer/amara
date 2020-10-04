@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <resistancesAfterTeleporting>15</resistancesAfterTeleporting>
+    </values>
+    <entity template="./template([unit],[ghostBuff],[resistancesAfterTeleporting])">
+        <deltaDescription>After teleporting, you gain [resistancesAfterTeleporting] armor and magic resistance for 3 seconds.</deltaDescription>
+    </entity>
+</template>

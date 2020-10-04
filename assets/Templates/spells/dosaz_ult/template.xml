@@ -1,0 +1,153 @@
+<template>
+    <values>
+        <delay>0.5</delay>
+        <duration>15</duration>
+        <bonusHealth>300</bonusHealth>
+        <slow>0</slow>
+    </values>
+    <entity id="spell">
+        <name>Power From the Beyond</name>
+        <description>Spawn 5 ghosts in a circle around you, gain health, spellvamp and an aura, that constantly deals magic damage to nearby enemies.</description>
+        <spellVisualisation>dosaz_ult</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/dosaz_ult_cast.ogg</audio>
+                                <audioVolume>4</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castCancelCast/>
+        <castCancelMovement/>
+        <castDuration>[delay]</castDuration>
+        <castCost>
+            <entity>
+                <manaCost>100</manaCost>
+            </entity>
+        </castCost>
+        <castAnimation>
+            <entity>
+                <name>spell6</name>
+                <loopDuration>1</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--add buff, add buff area, spawn units-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="[duration]">
+                            <entity id="visualisationBuff">
+                                <name>Power From the Beyond</name>
+                                <description>This unit has increased spellvamp.</description>
+                                <buffIcon>spells/dosaz_ult</buffIcon>
+                                <buffVisualisation>dosaz_ult</buffVisualisation>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusFlatMaximumHealth>[bonusHealth]</bonusFlatMaximumHealth>
+                                        <bonusPercentageSpellvamp>0.2</bonusPercentageSpellvamp>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                        <addBuffArea>
+                            <entity id="buffArea">
+                                <hitbox>
+                                    <circle radius="7.5"/>
+                                </hitbox>
+                                <areaBuff>
+                                    <entity>
+                                        <name>Lifedrained</name>
+                                        <description>This unit receives magic damage over time.</description>
+                                        <buffIcon>spells/dosaz_ult</buffIcon>
+                                        <continuousAttributes if="[slow]">
+                                            <entity>
+                                                <bonusPercentageWalkSpeed>[slow]</bonusPercentageWalkSpeed>
+                                            </entity>
+                                        </continuousAttributes>
+                                        <repeatingEffect interval="0.5">
+                                            <entity>
+                                                <magicDamage>50</magicDamage>
+                                            </entity>
+                                        </repeatingEffect>
+                                    </entity>
+                                </areaBuff>
+                                <areaBuffTargetRules>
+                                    <entity>
+                                        <acceptEnemies/>
+                                    </entity>
+                                </areaBuffTargetRules>
+                            </entity>
+                        </addBuffArea>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
+                                <spawnBuffs>[ghostBuff]</spawnBuffs>
+                                <spawnRelativePosition>0,6.5</spawnRelativePosition>
+                            </entity>
+                            <entity>
+                                <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
+                                <spawnBuffs>[ghostBuff]</spawnBuffs>
+                                <spawnRelativePosition>6.1819,2.0086</spawnRelativePosition>
+                            </entity>
+                            <entity>
+                                <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
+                                <spawnBuffs>[ghostBuff]</spawnBuffs>
+                                <spawnRelativePosition>3.8206,-5.2586</spawnRelativePosition>
+                            </entity>
+                            <entity>
+                                <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
+                                <spawnBuffs>[ghostBuff]</spawnBuffs>
+                                <spawnRelativePosition>-3.8206,-5.2586</spawnRelativePosition>
+                            </entity>
+                            <entity>
+                                <spawnTemplate>spells/dosaz_passive/unit</spawnTemplate>
+                                <spawnBuffs>[ghostBuff]</spawnBuffs>
+                                <spawnRelativePosition>-6.1819,2.0086</spawnRelativePosition>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--remove buff area-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeBuffArea>#buffArea</removeBuffArea>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[duration]</triggerDelay>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

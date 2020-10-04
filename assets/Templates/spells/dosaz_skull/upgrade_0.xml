@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <projectileSpeed>25</projectileSpeed>
+    </values>
+    <entity template="./template([triggerTombstonesBuff],[ghostBuff],[projectileSpeed])">
+        <deltaDescription>Projectile speed: 18 -> [projectileSpeed]</deltaDescription>
+    </entity>
+</template>

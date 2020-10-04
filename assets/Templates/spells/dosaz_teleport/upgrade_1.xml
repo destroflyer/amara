@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <incomingDamageAmplificationWhileTeleporting>-0.8</incomingDamageAmplificationWhileTeleporting>
+    </values>
+    <entity template="./template([unit],[ghostBuff],[incomingDamageAmplificationWhileTeleporting])">
+        <deltaDescription>You receive 80% reduced damage while teleporting.</deltaDescription>
+    </entity>
+</template>
