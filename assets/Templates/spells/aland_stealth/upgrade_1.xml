@@ -1,0 +1,3 @@
+<template>
+    <entity template="./template(percentageWalkSpeed=0.5)"/>
+</template>

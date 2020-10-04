@@ -32,6 +32,7 @@ public class ScreenController_HUD extends GameScreenController {
     private SpellInformation[] spellInformations_Passives = new SpellInformation[0];
     private SpellInformation[] spellInformations_LearnableSpells = new SpellInformation[0];
     private SpellInformation[] spellInformations_Spells = new SpellInformation[0];
+    private SpellInformation[] spellInformations_UpgradedSpells = new SpellInformation[0];
     private SpellInformation[] spellInformations_MapSpells = new SpellInformation[0];
     // Show/Hide the information by saving the actions and checking them in an update loop
     // (Since NiftyGUI sometimes seems to be ordering start/end effect methods wrong)
@@ -256,50 +257,63 @@ public class ScreenController_HUD extends GameScreenController {
         niftyAppState.getScreenController(ScreenController_Shop.class).toggleShopVisible();
     }
 
-    public void setPlayer_SpellInformations_Passives(SpellInformation[] spellInformations_Passives){
+    public void setPlayer_SpellInformations_Passives(SpellInformation[] spellInformations_Passives) {
         this.spellInformations_Passives = spellInformations_Passives;
     }
 
-    public void setPlayer_SpellInformations_LearnableSpells(SpellInformation[] spellInformations_LearnableSpells){
+    public void setPlayer_SpellInformations_LearnableSpells(SpellInformation[] spellInformations_LearnableSpells) {
         this.spellInformations_LearnableSpells = spellInformations_LearnableSpells;
     }
 
-    public void setPlayer_SpellInformations_Spells(SpellInformation[] spellInformations_Spells){
+    public void setPlayer_SpellInformations_Spells(SpellInformation[] spellInformations_Spells) {
         this.spellInformations_Spells = spellInformations_Spells;
     }
 
-    public void setPlayer_SpellInformations_MapSpells(SpellInformation[] spellInformations_MapSpells){
+    public void setPlayer_SpellInformations_UpgradedSpells(SpellInformation[] spellInformations_UpgradedSpells) {
+        this.spellInformations_UpgradedSpells = spellInformations_UpgradedSpells;
+    }
+
+    public void setPlayer_SpellInformations_MapSpells(SpellInformation[] spellInformations_MapSpells) {
         this.spellInformations_MapSpells = spellInformations_MapSpells;
     }
-    
-    public void showPlayer_SpellInformation_Passive(String indexText){
+
+    public void showPlayer_SpellInformation_Passive(String indexText) {
         int index = Integer.parseInt(indexText);
-        if(index < spellInformations_Passives.length){
-            action_ShowSpellInformation = spellInformations_Passives[index];
+        tryShowSpellInformation(spellInformations_Passives, index);
+    }
+
+    public void showPlayer_SpellInformation_LearnableSpell(String indexText) {
+        int index = Integer.parseInt(indexText);
+        if (!hasSpellInformation(spellInformations_Spells, index)) {
+            tryShowSpellInformation(spellInformations_LearnableSpells, index);
         }
     }
-    
-    public void showPlayer_SpellInformation_LearnableSpell(String indexText){
+
+    public void showPlayer_SpellInformation_Spell(String indexText) {
         int index = Integer.parseInt(indexText);
-        if(index < spellInformations_LearnableSpells.length){
-            action_ShowSpellInformation = spellInformations_LearnableSpells[index];
+        tryShowSpellInformation(spellInformations_Spells, index);
+    }
+
+    public void showPlayer_SpellInformation_UpgradedSpell(String indexText) {
+        int index = Integer.parseInt(indexText);
+        tryShowSpellInformation(spellInformations_UpgradedSpells, index);
+    }
+
+    public void showPlayer_SpellInformation_MapSpell(String indexText) {
+        int index = Integer.parseInt(indexText);
+        tryShowSpellInformation(spellInformations_MapSpells, index);
+    }
+
+    private void tryShowSpellInformation(SpellInformation[] spellInformations, int index) {
+        if (hasSpellInformation(spellInformations, index)) {
+            action_ShowSpellInformation = spellInformations[index];
         }
     }
-    
-    public void showPlayer_SpellInformation_Spell(String indexText){
-        int index = Integer.parseInt(indexText);
-        if(index < spellInformations_Spells.length){
-            action_ShowSpellInformation = spellInformations_Spells[index];
-        }
+
+    private boolean hasSpellInformation(SpellInformation[] spellInformations, int index) {
+        return ((index < spellInformations.length) && (spellInformations[index] != null));
     }
-    
-    public void showPlayer_SpellInformation_MapSpell(String indexText){
-        int index = Integer.parseInt(indexText);
-        if(index < spellInformations_MapSpells.length){
-            action_ShowSpellInformation = spellInformations_MapSpells[index];
-        }
-    }
-    
+
     public void hidePlayer_SpellInformation(){
         action_HideSpellInformation = true;
     }

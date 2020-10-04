@@ -203,7 +203,7 @@ public class Map_Testmap extends Map {
     }
 
     @Override
-    public void initializePlayer(EntityWorld entityWorld, int playerEntity){
+    public void initializePlayer(EntityWorld entityWorld, int playerEntity) {
         super.initializePlayer(entityWorld, playerEntity);
         int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
         EntityWrapper characterBounty = entityWorld.getWrapped(entityWorld.createEntity());
@@ -214,9 +214,9 @@ public class Map_Testmap extends Map {
         entityWorld.setComponent(bountyRulesEntity, new AcceptEnemiesComponent());
         characterBounty.setComponent(new BountyRulesComponent(bountyRulesEntity));
         entityWorld.setComponent(characterEntity, new BountyComponent(characterBounty.getId()));
-        entityWorld.setComponent(characterEntity, new LevelComponent(6));
-        entityWorld.setComponent(characterEntity, new SpellsUpgradePointsComponent(6));
-        for(int i=0;i<4;i++){
+        entityWorld.setComponent(characterEntity, new LevelComponent(12));
+        entityWorld.setComponent(characterEntity, new SpellsUpgradePointsComponent(12));
+        for (int i = 0; i < 4; i++) {
             SpellUtil.learnSpell(entityWorld, characterEntity, i);
         }
     }

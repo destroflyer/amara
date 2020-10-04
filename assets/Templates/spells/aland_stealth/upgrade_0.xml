@@ -1,0 +1,3 @@
+<template>
+    <entity template="./template(duration=4)"/>
+</template>

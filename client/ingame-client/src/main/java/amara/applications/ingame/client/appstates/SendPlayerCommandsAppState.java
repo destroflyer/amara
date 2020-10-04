@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.appstates;
 
 import java.util.Iterator;
@@ -9,6 +5,7 @@ import java.util.Iterator;
 import amara.applications.ingame.client.IngameClientApplication;
 import amara.applications.ingame.client.gui.*;
 import amara.applications.ingame.client.systems.gui.DisplaySpellsImagesSystem;
+import amara.applications.ingame.client.systems.gui.UpdateSpellInformationsSystem;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.units.*;
@@ -37,10 +34,6 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 
-/**
- *
- * @author Carl
- */
 public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClientApplication> {
 
     private ScreenController_HUD screenController_HUD;
@@ -251,6 +244,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
             if(spellUpgradesComponent != null){
                 int[] upgradedSpellEntities = spellUpgradesComponent.getSpellsEntities();
                 for(int i=0;i<upgradedSpellEntities.length;i++){
+                    screenController_HUD.setPlayer_SpellInformations_UpgradedSpells(UpdateSpellInformationsSystem.createSpellInformations(entityWorld, upgradedSpellEntities));
                     screenController_HUD.setPlayer_SpellUpgradeImage(i, DisplaySpellsImagesSystem.getSpellImageFilePath(entityWorld, upgradedSpellEntities, i));
                 }
                 screenController_HUD.showPlayer_UpgradeSpell(spellIndex);
