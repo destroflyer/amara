@@ -1,0 +1,104 @@
+<template>
+    <values>
+        <delay>0.25</delay>
+        <slow>0</slow>
+        <bounceTargets>1</bounceTargets>
+        <projectileSpeed>25</projectileSpeed>
+    </values>
+    <entity id="spell">
+        <name>Knife Throw</name>
+        <description>Throw a large knife at a target enemy, dealing magic damage.</description>
+        <spellVisualisation>aland_sword</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="2" height="19.5"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./projectile([bounceTargets],[projectileSpeed])</spawnTemplate>
+                                <spawnMoveToTarget/>
+                                <spawnMovementSpeed>[projectileSpeed]</spawnMovementSpeed>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/aland_sword_cast.ogg</audio>
+                                <audioVolume>1.25</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>single_target</castType>
+        <castCancelCast/>
+        <castCancelMovement/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>40</manaCost>
+            </entity>
+        </castCost>
+        <castAnimation>
+            <entity>
+                <name>throw2</name>
+                <loopDuration>0.5</loopDuration>
+            </entity>
+        </castAnimation>
+        <range type="center_to_center" distance="14"/>
+        <spellTargetRules>
+            <entity>
+                <acceptEnemies/>
+            </entity>
+        </spellTargetRules>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>100 + (0.8 * source.abilityPower)</magicDamage>
+                        <addBuff if="[slow]" duration="2">
+                            <entity>
+                                <name>Sword to the Knee</name>
+                                <description>This unit has decreased walk speed.</description>
+                                <buffIcon>spells/aland_sword</buffIcon>
+                                <buffVisualisation>slow</buffVisualisation>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageWalkSpeed>[slow]</bonusPercentageWalkSpeed>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

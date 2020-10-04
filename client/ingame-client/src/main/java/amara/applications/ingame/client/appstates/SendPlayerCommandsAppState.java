@@ -244,7 +244,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
             if(spellUpgradesComponent != null){
                 int[] upgradedSpellEntities = spellUpgradesComponent.getSpellsEntities();
                 for(int i=0;i<upgradedSpellEntities.length;i++){
-                    screenController_HUD.setPlayer_SpellInformations_UpgradedSpells(UpdateSpellInformationsSystem.createSpellInformations(entityWorld, upgradedSpellEntities));
+                    screenController_HUD.setPlayer_SpellInformations_UpgradedSpells(UpdateSpellInformationsSystem.createSpellInformations(entityWorld, upgradedSpellEntities, true));
                     screenController_HUD.setPlayer_SpellUpgradeImage(i, DisplaySpellsImagesSystem.getSpellImageFilePath(entityWorld, upgradedSpellEntities, i));
                 }
                 screenController_HUD.showPlayer_UpgradeSpell(spellIndex);

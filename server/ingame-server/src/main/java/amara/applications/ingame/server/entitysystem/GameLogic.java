@@ -178,6 +178,7 @@ public class GameLogic {
         entitySystems.add(new CleanupPassivesSystem());
         entitySystems.add(new CleanupBuffAreasSystem());
         entitySystems.add(new CleanupBuffsSystem());
+        entitySystems.add(new CleanupConditionsSystem());
         entitySystems.add(new CleanupTemporaryEntitiesSystem());
     }
 

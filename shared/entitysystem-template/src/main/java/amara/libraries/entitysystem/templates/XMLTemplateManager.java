@@ -126,9 +126,12 @@ public class XMLTemplateManager{
             EntityTemplate.loadTemplate(entityWorld, entity, parseTemplate(entityWorld, templateXMLText));
         }
         for (Element componentElement : entityElement.getChildren()) {
-            Object component = constructComponent(entityWorld, componentElement);
-            if (component != null) {
-                entityWorld.setComponent(entity, component);
+            String ifCondition = componentElement.getAttributeValue("if");
+            if ((ifCondition == null) || parseValueBoolean(entityWorld, ifCondition)) {
+                Object component = constructComponent(entityWorld, componentElement);
+                if (component != null) {
+                    entityWorld.setComponent(entity, component);
+                }
             }
         }
     }
@@ -144,6 +147,18 @@ public class XMLTemplateManager{
             return text;
         }, key -> parseValue(entityWorld, key), value -> parseValue(entityWorld, value));
         return entityTemplate.getText();
+    }
+
+    private boolean parseValueBoolean(EntityWorld entityWorld, String text) {
+        String valueText = text;
+        boolean inverted = false;
+        if (valueText.startsWith("!")) {
+            valueText = valueText.substring(1);
+            inverted = true;
+        }
+        String value = parseValue(entityWorld, valueText);
+        boolean isTruthy = ((!value.equals("false")) && (!value.equals("0")));
+        return (isTruthy != inverted);
     }
 
     public String parseValue(EntityWorld entityWorld, String text) {

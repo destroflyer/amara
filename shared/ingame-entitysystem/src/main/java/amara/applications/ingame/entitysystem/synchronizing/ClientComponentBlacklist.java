@@ -240,6 +240,7 @@ public class ClientComponentBlacklist {
             CastTurnToTargetComponent.class,
             InstantEffectTriggersComponent.class,
             // spells/placeholders
+            RuleMovementTargetComponent.class,
             SourceMovementDirectionComponent.class,
             TargetedMovementDirectionComponent.class,
             TargetedMovementTargetComponent.class,

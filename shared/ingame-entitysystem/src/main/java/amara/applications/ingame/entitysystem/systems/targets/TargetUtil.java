@@ -4,9 +4,24 @@ import amara.applications.ingame.entitysystem.components.targets.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.systems.buffs.BuffUtil;
+import amara.applications.ingame.entitysystem.systems.physics.PositionUtil;
 import amara.libraries.entitysystem.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class TargetUtil {
+
+    public static List<Integer> getValidTargets(EntityWorld entityWorld, int sourceEntity, int targetRulesEntity) {
+        return entityWorld.getEntitiesWithAll().stream()
+                .filter(entity -> isValidTarget(entityWorld, sourceEntity, entity, targetRulesEntity))
+                .collect(Collectors.toList());
+    }
+
+    public static boolean hasValidTarget(EntityWorld entityWorld, int sourceEntity, int targetRulesEntity) {
+        return entityWorld.getEntitiesWithAll().stream()
+                .anyMatch(entity -> isValidTarget(entityWorld, sourceEntity, entity, targetRulesEntity));
+    }
 
     public static boolean isValidTarget(EntityWorld entityWorld, int sourceEntity, int targetEntity, int targetRulesEntity) {
         boolean isValid;
@@ -49,6 +64,10 @@ public class TargetUtil {
                 }
                 RequireEntityComponent requireEntityComponent = entityWorld.getComponent(targetRulesEntity, RequireEntityComponent.class);
                 if ((requireEntityComponent != null) && (targetEntity != requireEntityComponent.getEntity())) {
+                    return false;
+                }
+                RequireMaximumDistanceComponent requireMaximumDistanceComponent = entityWorld.getComponent(targetRulesEntity, RequireMaximumDistanceComponent.class);
+                if ((requireMaximumDistanceComponent != null) && (!PositionUtil.isInRange(entityWorld, sourceEntity, targetEntity, requireMaximumDistanceComponent.getDistance()))) {
                     return false;
                 }
             }

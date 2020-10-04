@@ -3,6 +3,6 @@
         <duration>4</duration>
     </values>
     <entity template="./template([duration])">
-        <spellUpgradeDescription>Stealth duration: 3 seconds -> [duration] seconds</spellUpgradeDescription>
+        <deltaDescription>Stealth duration: 3 seconds -> [duration] seconds</deltaDescription>
     </entity>
 </template>

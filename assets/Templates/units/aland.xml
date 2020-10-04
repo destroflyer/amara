@@ -77,13 +77,33 @@
             <entity id="autoattack" template="spells/ranged_autoattack(model=Models/aland_sword/skin_autoattack.xml)"/>
         </autoAttack>
         <passives>
-            <entity template="spells/aland_passive/passive(#autoattack,#spell1,#spell2,#spell3,#spell4)"/>
+            <entity template="spells/aland_passive/passive(#autoattack,#spell1,#spell1_Upgrade1,#spell1_Upgrade2,#spell2,#spell2_Upgrade1,#spell2_Upgrade2,#spell3,#spell3_Upgrade1,#spell3_Upgrade2,#spell4,#spell4_Upgrade1,#spell4_Upgrade2)"/>
         </passives>
         <learnableSpells>
-            <entity id="spell1" template="spells/aland_stealth/base"/>
-            <entity id="spell2" template="spells/aland_explosion/base"/>
-            <entity id="spell3" template="spells/aland_sword/base"/>
-            <entity id="spell4" template="spells/aland_trap/base"/>
+            <entity id="spell1" template="spells/aland_stealth/base">
+                <spellUpgrades>
+                    <entity id="spell1_Upgrade1" template="spells/aland_stealth/upgrade_0"/>
+                    <entity id="spell1_Upgrade2" template="spells/aland_stealth/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
+            <entity id="spell2" template="spells/aland_explosion/base">
+                <spellUpgrades>
+                    <entity id="spell2_Upgrade1" template="spells/aland_explosion/upgrade_0"/>
+                    <entity id="spell2_Upgrade2" template="spells/aland_explosion/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
+            <entity id="spell3" template="spells/aland_sword/base">
+                <spellUpgrades>
+                    <entity id="spell3_Upgrade1" template="spells/aland_sword/upgrade_0"/>
+                    <entity id="spell3_Upgrade2" template="spells/aland_sword/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
+            <entity id="spell4" template="spells/aland_trap/base">
+                <spellUpgrades>
+                    <entity id="spell4_Upgrade1" template="spells/aland_trap/upgrade_0"/>
+                    <entity id="spell4_Upgrade2" template="spells/aland_trap/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

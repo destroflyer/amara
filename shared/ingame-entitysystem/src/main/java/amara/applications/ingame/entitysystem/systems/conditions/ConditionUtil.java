@@ -2,24 +2,25 @@ package amara.applications.ingame.entitysystem.systems.conditions;
 
 import amara.applications.ingame.entitysystem.components.attributes.HealthComponent;
 import amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent;
+import amara.applications.ingame.entitysystem.components.buffs.status.StacksComponent;
 import amara.applications.ingame.entitysystem.components.conditions.*;
 import amara.applications.ingame.entitysystem.components.general.NameComponent;
-import amara.applications.ingame.entitysystem.components.physics.PositionComponent;
 import amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent;
 import amara.applications.ingame.entitysystem.systems.buffs.BuffUtil;
+import amara.applications.ingame.entitysystem.systems.targets.TargetUtil;
 import amara.libraries.entitysystem.EntityWorld;
-import com.jme3.math.Vector2f;
 
 public class ConditionUtil {
 
     public static boolean isConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
-        return (isOrConditionMet(entityWorld, conditionEntity, targetEntity)
+        boolean result = (isOrConditionMet(entityWorld, conditionEntity, targetEntity)
              && isHasBuffConditionMet(entityWorld, conditionEntity, targetEntity)
              && isHasHealthPortionConditionMet(entityWorld, conditionEntity, targetEntity)
              && isNameAmountConditionMet(entityWorld, conditionEntity, targetEntity)
              && isIsCharacterConditionMet(entityWorld, conditionEntity, targetEntity)
-             && isInRangeConditionMet(entityWorld, conditionEntity, targetEntity)
+             && isHasRuleTargetConditionMet(entityWorld, conditionEntity, targetEntity)
              && isNotExistingConditionMet(entityWorld, conditionEntity));
+        return (result != entityWorld.hasComponent(conditionEntity, NotConditionComponent.class));
     }
 
     private static boolean isOrConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
@@ -40,7 +41,14 @@ public class ConditionUtil {
     private static boolean isHasBuffConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
         HasBuffConditionComponent hasBuffConditionComponent = entityWorld.getComponent(conditionEntity, HasBuffConditionComponent.class);
         if (hasBuffConditionComponent != null) {
-            return BuffUtil.hasAllBuffs(entityWorld, targetEntity, hasBuffConditionComponent.getBuffEntities());
+            int buffStatusEntity = BuffUtil.getBuffStatusEntity(entityWorld, targetEntity, hasBuffConditionComponent.getBuffEntity());
+            if (buffStatusEntity == -1) {
+                return false;
+            }
+            if (hasBuffConditionComponent.getRequiredStacks() != 0) {
+                StacksComponent stacksComponent = entityWorld.getComponent(buffStatusEntity, StacksComponent.class);
+                return ((stacksComponent != null) && (stacksComponent.getStacks() >= hasBuffConditionComponent.getRequiredStacks()));
+            }
         }
         return true;
     }
@@ -86,16 +94,10 @@ public class ConditionUtil {
         return true;
     }
 
-    private static boolean isInRangeConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
-        InRangeConditionComponent inRangeConditionComponent = entityWorld.getComponent(conditionEntity, InRangeConditionComponent.class);
-        if (inRangeConditionComponent != null) {
-            PositionComponent positionComponent1 = entityWorld.getComponent(targetEntity, PositionComponent.class);
-            PositionComponent positionComponent2 = entityWorld.getComponent(inRangeConditionComponent.getTargetEntity(), PositionComponent.class);
-            if ((positionComponent1 != null) && (positionComponent2 != null)) {
-                Vector2f position1 = positionComponent1.getPosition();
-                Vector2f position2 = positionComponent2.getPosition();
-                return (position1.distanceSquared(position2) <= (inRangeConditionComponent.getDistance() * inRangeConditionComponent.getDistance()));
-            }
+    private static boolean isHasRuleTargetConditionMet(EntityWorld entityWorld, int conditionEntity, int targetEntity) {
+        HasRuleTargetConditionComponent hasRuleTargetConditionComponent = entityWorld.getComponent(conditionEntity, HasRuleTargetConditionComponent.class);
+        if (hasRuleTargetConditionComponent != null) {
+            return TargetUtil.hasValidTarget(entityWorld, targetEntity, hasRuleTargetConditionComponent.getTargetRulesEntity());
         }
         return true;
     }

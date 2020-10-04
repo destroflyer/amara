@@ -1,0 +1,5 @@
+<template>
+    <entity template="./template(slow=-0.3)">
+        <deltaDescription>The target is slowed for a short duration.</deltaDescription>
+    </entity>
+</template>

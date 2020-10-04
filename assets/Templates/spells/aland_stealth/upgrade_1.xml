@@ -1,5 +1,5 @@
 <template>
     <entity template="./template(percentageWalkSpeed=0.5)">
-        <spellUpgradeDescription>Bonus walk speed: 30% -> 50%</spellUpgradeDescription>
+        <deltaDescription>Bonus walk speed: 30% -> 50%</deltaDescription>
     </entity>
 </template>

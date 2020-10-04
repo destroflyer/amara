@@ -2,24 +2,21 @@ package amara.applications.ingame.entitysystem.systems.effects.triggers;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.casts.*;
 import amara.applications.ingame.entitysystem.components.game.NextEffectActionIndexComponent;
-import amara.applications.ingame.entitysystem.components.physics.PositionComponent;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.*;
 import amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.*;
 import amara.applications.ingame.entitysystem.systems.conditions.ConditionUtil;
+import amara.applications.ingame.entitysystem.systems.physics.PositionUtil;
 import amara.applications.ingame.entitysystem.systems.spells.casting.SetCooldownOnCastingSystem;
 import amara.applications.ingame.entitysystem.systems.targets.TargetUtil;
 import amara.applications.ingame.shared.maps.Map;
 import amara.core.Util;
 import amara.libraries.entitysystem.*;
-import com.jme3.math.Vector2f;
 
 public class EffectTriggerUtil {
 
@@ -121,11 +118,7 @@ public class EffectTriggerUtil {
                 }
                 RuleTargetComponent ruleTargetComponent = entityWorld.getComponent(entity, RuleTargetComponent.class);
                 if (ruleTargetComponent != null) {
-                    for (int otherEntity : entityWorld.getEntitiesWithAll()) {
-                        if (TargetUtil.isValidTarget(entityWorld, effectSourceEntity, otherEntity, ruleTargetComponent.getTargetRulesEntity())) {
-                            tmpTargetEntities.add(otherEntity);
-                        }
-                    }
+                    tmpTargetEntities.addAll(TargetUtil.getValidTargets(entityWorld, effectSourceEntity, ruleTargetComponent.getTargetRulesEntity()));
                 }
             }
         }
@@ -167,28 +160,11 @@ public class EffectTriggerUtil {
         }
         MaximumTargetsComponent maximumTargetsComponent = entityWorld.getComponent(entity, MaximumTargetsComponent.class);
         if ((maximumTargetsComponent != null) && (tmpTargetEntities.size() > maximumTargetsComponent.getMaximum())) {
-            Stream<Integer> targetStream = tmpTargetEntities.stream();
+            // Decide priority by distance
             if (triggerSourceComponent != null) {
-                // Decide priority by distance if existing
-                PositionComponent relevantPositionComponent = entityWorld.getComponent(triggerSourceComponent.getSourceEntity(), PositionComponent.class);
-                if (relevantPositionComponent == null) {
-                    relevantPositionComponent = entityWorld.getComponent(targetEntity, PositionComponent.class);;
-                }
-                if (relevantPositionComponent != null) {
-                    Vector2f relevantPosition = relevantPositionComponent.getPosition();
-                    targetStream = targetStream.sorted((target1, target2) -> {
-                        PositionComponent positionComponentTarget1 = entityWorld.getComponent(target1, PositionComponent.class);
-                        PositionComponent positionComponentTarget2 = entityWorld.getComponent(target2, PositionComponent.class);
-                        if ((positionComponentTarget1 != null) && (positionComponentTarget2 != null)) {
-                            float distanceSquaredTarget1 = relevantPosition.distanceSquared(positionComponentTarget1.getPosition());
-                            float distanceSquaredTarget2 = relevantPosition.distanceSquared(positionComponentTarget2.getPosition());
-                            return Float.compare(distanceSquaredTarget1, distanceSquaredTarget2);
-                        }
-                        return 0;
-                    });
-                }
+                tmpTargetEntities = PositionUtil.sortByDistance(entityWorld, tmpTargetEntities, triggerSourceComponent.getSourceEntity(), targetEntity);
             }
-            tmpTargetEntities = targetStream.limit(maximumTargetsComponent.getMaximum()).collect(Collectors.toList());
+            tmpTargetEntities = tmpTargetEntities.subList(0, maximumTargetsComponent.getMaximum());
         }
         return Util.convertToArray_Integer(tmpTargetEntities);
     }

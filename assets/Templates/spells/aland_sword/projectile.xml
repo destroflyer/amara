@@ -1,4 +1,7 @@
 <template>
+    <values>
+        <bounceRange>5</bounceRange>
+    </values>
     <entity id="projectile">
         <isProjectile/>
         <model>Models/aland_sword/skin_slow.xml</model>
@@ -7,14 +10,17 @@
         </hitbox>
         <hitboxActive/>
     </entity>
-    <!--trigger spell effects-->
+    <!--target reached -> target effect-->
     <entity>
         <targetReachedTrigger/>
         <targetTarget/>
         <triggeredEffect>
             <entity>
                 <triggerCastedSpellEffects/>
-                <playAudio>
+                <addBuff duration="5">
+                    <entity id="alreadyHitTargetBuff"/>
+                </addBuff>
+                <playAudio clone="true">
                     <entity>
                         <audio>Sounds/sounds/spells/aland_sword_hit.ogg</audio>
                         <audioVolume>1.25</audioVolume>
@@ -25,13 +31,76 @@
         </triggeredEffect>
         <triggerSource>#projectile</triggerSource>
     </entity>
-    <!--remove projectile-->
+    <!--target reached -> projectile effect-->
     <entity>
         <targetReachedTrigger/>
         <sourceTarget/>
         <triggeredEffect>
             <entity>
-                <removeEntity/>
+                <addBuff duration="-1">
+                    <entity id="hitTargetsCountBuff"/>
+                </addBuff>
+                <addStacks stacks="1">#hitTargetsCountBuff</addStacks>
+                <!--these effect triggers have to be delayed 1 frame, so both hitTargetsCountBuff and alreadyHitTargetBuff are already updated-->
+                <addEffectTriggers>
+                    <!--bounce if maximum targets not reached and target exists-->
+                    <entity id="bounceTrigger">
+                        <instantTrigger/>
+                        <sourceTarget/>
+                        <triggerConditions>
+                            <entity>
+                                <sourceTarget/>
+                                <hasBuffCondition requiredStacks="[bounceTargets]">#hitTargetsCountBuff</hasBuffCondition>
+                                <notCondition/>
+                            </entity>
+                            <entity>
+                                <sourceTarget/>
+                                <hasRuleTargetCondition>
+                                    <entity id="bounceRules">
+                                        <acceptEnemies/>
+                                        <requireNoBuffs>#alreadyHitTargetBuff</requireNoBuffs>
+                                        <requireMaximumDistance>[bounceRange]</requireMaximumDistance>
+                                    </entity>
+                                </hasRuleTargetCondition>
+                            </entity>
+                        </triggerConditions>
+                        <triggeredEffect>
+                            <entity>
+                                <move>
+                                    <entity>
+                                        <ruleMovementTarget>#bounceRules</ruleMovementTarget>
+                                        <movementSpeed>[projectileSpeed]</movementSpeed>
+                                    </entity>
+                                </move>
+                            </entity>
+                        </triggeredEffect>
+                        <triggerOnce/>
+                    </entity>
+                    <!--remove if maximum targets reached or no target left-->
+                    <entity>
+                        <instantTrigger/>
+                        <sourceTarget/>
+                        <triggerConditions>
+                            <entity>
+                                <customTarget>#projectile</customTarget>
+                                <orConditions>
+                                    <entity>
+                                        <hasBuffCondition requiredStacks="[bounceTargets]">#hitTargetsCountBuff</hasBuffCondition>
+                                    </entity>
+                                    <entity>
+                                        <hasRuleTargetCondition>#bounceRules</hasRuleTargetCondition>
+                                        <notCondition/>
+                                    </entity>
+                                </orConditions>
+                            </entity>
+                        </triggerConditions>
+                        <triggeredEffect>
+                            <entity>
+                                <removeEntity/>
+                            </entity>
+                        </triggeredEffect>
+                    </entity>
+                </addEffectTriggers>
             </entity>
         </triggeredEffect>
         <triggerSource>#projectile</triggerSource>

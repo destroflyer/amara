@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <lifetime>180</lifetime>
+    </values>
+    <entity template="./template([lifetime])">
+        <deltaDescription>Lifetime: 90 -> [lifetime]</deltaDescription>
+    </entity>
+</template>

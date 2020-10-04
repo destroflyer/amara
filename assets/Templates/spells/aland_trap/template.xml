@@ -1,0 +1,71 @@
+<template>
+    <values>
+        <baseDamage>50</baseDamage>
+        <lifetime>90</lifetime>
+    </values>
+    <entity id="spell">
+        <name>Bear Trap</name>
+        <description>Place a hidden bear trap, that will attach to an enemy for 1 second when touched, dealing initial magic damage and slowing. Units with attached traps receive the same effect again (with the slow stacking) when continuing to walk, up to 2 times, then the trap is destroyed.</description>
+        <spellVisualisation>aland_trap</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <circularIndicator radius="10"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object(#spell,[lifetime])</spawnTemplate>
+                            </entity>
+                        </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/aland_trap_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>positional_skillshot</castType>
+        <castCancelCast/>
+        <castCancelMovement/>
+        <castDuration>0.5</castDuration>
+        <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>60</manaCost>
+            </entity>
+        </castCost>
+        <castAnimation>
+            <entity>
+                <name>place</name>
+                <loopDuration>1</loopDuration>
+            </entity>
+        </castAnimation>
+        <range type="center_to_center" distance="7"/>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>[baseDamage] + (0.2 * source.abilityPower)</magicDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

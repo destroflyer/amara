@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <bounceTargets>3</bounceTargets>
+    </values>
+    <entity template="./template([bounceTargets])">
+        <deltaDescription>The sword bounces off, hitting [bounceTargets] targets in total.</deltaDescription>
+    </entity>
+</template>

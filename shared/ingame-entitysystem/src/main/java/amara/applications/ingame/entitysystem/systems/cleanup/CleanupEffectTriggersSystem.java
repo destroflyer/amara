@@ -9,9 +9,14 @@ public class CleanupEffectTriggersSystem implements EntitySystem {
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
-        ComponentMapObserver observer = entityWorld.requestObserver(this, TriggeredEffectComponent.class, CollisionTriggerComponent.class);
-        for (int entity : observer.getRemoved().getEntitiesWithAny(TriggeredEffectComponent.class)) {
-            int effectEntity = observer.getRemoved().getComponent(entity, TriggeredEffectComponent.class).getEffectEntity();
+        ComponentMapObserver observer = entityWorld.requestObserver(
+            this,
+            TriggeredEffectComponent.class,
+            CollisionTriggerComponent.class,
+            TriggerConditionsComponent.class
+        );
+        for (int effectTriggerEntity : observer.getRemoved().getEntitiesWithAny(TriggeredEffectComponent.class)) {
+            int effectEntity = observer.getRemoved().getComponent(effectTriggerEntity, TriggeredEffectComponent.class).getEffectEntity();
             // Only remove the effect entity, if it's not referenced in an ongoing effect cast
             // If it is, it will be cleanuped when the effect impact is calculated
             boolean canEffectBeCleanuped = entityWorld.getEntitiesWithAny(PrepareEffectComponent.class).stream()
@@ -21,9 +26,13 @@ public class CleanupEffectTriggersSystem implements EntitySystem {
                 CleanupUtil.tryCleanupEntity(entityWorld, effectEntity);
             }
         }
-        for (int entity : observer.getRemoved().getEntitiesWithAny(CollisionTriggerComponent.class)) {
-            int targetRulesEntity = observer.getRemoved().getComponent(entity, CollisionTriggerComponent.class).getTargetRulesEntity();
+        for (int effectTriggerEntity : observer.getRemoved().getEntitiesWithAny(CollisionTriggerComponent.class)) {
+            int targetRulesEntity = observer.getRemoved().getComponent(effectTriggerEntity, CollisionTriggerComponent.class).getTargetRulesEntity();
             CleanupUtil.tryCleanupEntity(entityWorld, targetRulesEntity);
+        }
+        for (int effectTriggerEntity : observer.getRemoved().getEntitiesWithAny(TriggerConditionsComponent.class)) {
+            int[] conditionEntities = observer.getRemoved().getComponent(effectTriggerEntity, TriggerConditionsComponent.class).getConditionEntities();
+            CleanupUtil.tryCleanupEntities(entityWorld, conditionEntities);
         }
         for (int effectTriggerEntity : entityWorld.getEntitiesWithAny(TriggerSourceComponent.class)) {
             int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();

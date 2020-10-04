@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <distance>5</distance>
+    </values>
+    <entity template="./template([distance])">
+        <deltaDescription>Knockback distance: 4 -> [distance]</deltaDescription>
+    </entity>
+</template>

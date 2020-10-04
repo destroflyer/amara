@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <baseDamage>150</baseDamage>
+    </values>
+    <entity template="./template([baseDamage])">
+        <deltaDescription>Base damage: 50 -> [baseDamage]</deltaDescription>
+    </entity>
+</template>

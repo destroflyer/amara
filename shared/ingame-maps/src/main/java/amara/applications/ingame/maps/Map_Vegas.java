@@ -552,7 +552,7 @@ public class Map_Vegas extends Map {
                 entityWorld.setComponent(effectTriggerGold, new SourceCasterTargetComponent());
                 int conditionGold = entityWorld.createEntity();
                 entityWorld.setComponent(conditionGold, new TargetTargetComponent());
-                entityWorld.setComponent(conditionGold, new HasBuffConditionComponent(unitTypeBuffs[playerIndex][unitIndex][level]));
+                entityWorld.setComponent(conditionGold, new HasBuffConditionComponent(unitTypeBuffs[playerIndex][unitIndex][level], 0));
                 entityWorld.setComponent(effectTriggerGold, new TriggerConditionsComponent(conditionGold));
                 int effectGold = entityWorld.createEntity();
                 entityWorld.setComponent(effectGold, new AddGoldComponent(CustomGameTemplates.MAP_VEGAS_UNIT_COSTS[unitIndex] * (level + 1)));
@@ -569,7 +569,7 @@ public class Map_Vegas extends Map {
                 entityWorld.setComponent(effectTriggerTransfer, new MaximumTargetsComponent(1));
                 int conditionTransfer = entityWorld.createEntity();
                 entityWorld.setComponent(conditionTransfer, new TargetTargetComponent());
-                entityWorld.setComponent(conditionTransfer, new HasBuffConditionComponent(unitTypeUpgradeTargetBuffs[playerIndex][unitIndex][level]));
+                entityWorld.setComponent(conditionTransfer, new HasBuffConditionComponent(unitTypeUpgradeTargetBuffs[playerIndex][unitIndex][level], 0));
                 entityWorld.setComponent(effectTriggerTransfer, new TriggerConditionsComponent(conditionTransfer));
                 int effectTransfer = entityWorld.createEntity();
                 entityWorld.setComponent(effectTransfer, new AddBuffComponent(new int[] { unitTypeUpgradeTargetBuffs[playerIndex][unitIndex][level] }, -1));

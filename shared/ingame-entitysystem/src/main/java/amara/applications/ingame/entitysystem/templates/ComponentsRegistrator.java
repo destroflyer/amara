@@ -1167,7 +1167,12 @@ public class ComponentsRegistrator{
         //conditions
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent.class);
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent.class.getDeclaredField("buffEntities"), componentFieldSerializer_Entity);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent.class.getDeclaredField("buffEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent.class.getDeclaredField("requiredStacks"), componentFieldSerializer_Stacks);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
@@ -1175,8 +1180,13 @@ public class ComponentsRegistrator{
 
             @Override
             public amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent construct(EntityWorld entityWorld, Element element){
-                int[] buffEntities = createChildEntities(entityWorld, element, 0, "buffEntities");
-                return new amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent(buffEntities);
+                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
+                int requiredStacks = 0;
+                String requiredStacksText = element.getAttributeValue("requiredStacks");
+                if((requiredStacksText != null) && (requiredStacksText.length() > 0)){
+                    requiredStacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, requiredStacksText));
+                }
+                return new amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent(buffEntity, requiredStacks);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent.class);
@@ -1202,28 +1212,18 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent(portion, lessOrMore, allowEqual);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.InRangeConditionComponent.class);
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.HasRuleTargetConditionComponent.class);
         try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.conditions.InRangeConditionComponent.class.getDeclaredField("targetEntity"), componentFieldSerializer_Entity);
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.conditions.HasRuleTargetConditionComponent.class.getDeclaredField("targetRulesEntity"), componentFieldSerializer_Entity);
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.conditions.InRangeConditionComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.InRangeConditionComponent>("inRangeCondition"){
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.HasRuleTargetConditionComponent>("hasRuleTargetCondition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.conditions.InRangeConditionComponent construct(EntityWorld entityWorld, Element element){
-                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
-                float distance = 0;
-                String distanceText = element.getAttributeValue("distance");
-                if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
-                }
-                return new amara.applications.ingame.entitysystem.components.conditions.InRangeConditionComponent(targetEntity, distance);
+            public amara.applications.ingame.entitysystem.components.conditions.HasRuleTargetConditionComponent construct(EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
+                return new amara.applications.ingame.entitysystem.components.conditions.HasRuleTargetConditionComponent(targetRulesEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.IsCharacterConditionComponent.class);
@@ -1245,6 +1245,14 @@ public class ComponentsRegistrator{
                     maximum = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, maximumText));
                 }
                 return new amara.applications.ingame.entitysystem.components.conditions.NameAmountConditionComponent(maximum);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.NotConditionComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.NotConditionComponent>("notCondition"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.conditions.NotConditionComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.conditions.NotConditionComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.conditions.NotExistingConditionComponent.class);
@@ -2644,6 +2652,15 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent();
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.general.DeltaDescriptionComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.DeltaDescriptionComponent>("deltaDescription"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.general.DeltaDescriptionComponent construct(EntityWorld entityWorld, Element element){
+                String description = xmlTemplateManager.parseValue(entityWorld, element.getText());
+                return new amara.applications.ingame.entitysystem.components.general.DeltaDescriptionComponent(description);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.general.DescriptionComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.DescriptionComponent>("description"){
 
@@ -3738,6 +3755,20 @@ public class ComponentsRegistrator{
             }
         });
         //placeholders
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.placeholders.RuleMovementTargetComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.placeholders.RuleMovementTargetComponent.class.getDeclaredField("targetRulesEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.RuleMovementTargetComponent>("ruleMovementTarget"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.RuleMovementTargetComponent construct(EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
+                return new amara.applications.ingame.entitysystem.components.spells.placeholders.RuleMovementTargetComponent(targetRulesEntity);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent>("sourceMovementDirection"){
 
@@ -3888,15 +3919,6 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent(targetRulesEntity);
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.SpellUpgradeDescriptionComponent.class);
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellUpgradeDescriptionComponent>("spellUpgradeDescription"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.spells.SpellUpgradeDescriptionComponent construct(EntityWorld entityWorld, Element element){
-                String description = xmlTemplateManager.parseValue(entityWorld, element.getText());
-                return new amara.applications.ingame.entitysystem.components.spells.SpellUpgradeDescriptionComponent(description);
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent.class.getDeclaredField("spellsEntities"), componentFieldSerializer_Entity);
@@ -4036,6 +4058,24 @@ public class ComponentsRegistrator{
             public amara.applications.ingame.entitysystem.components.targets.RequireEntityComponent construct(EntityWorld entityWorld, Element element){
                 int entity = createChildEntity(entityWorld, element, 0, "entity");
                 return new amara.applications.ingame.entitysystem.components.targets.RequireEntityComponent(entity);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequireMaximumDistanceComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.targets.RequireMaximumDistanceComponent.class.getDeclaredField("distance"), componentFieldSerializer_Distance);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireMaximumDistanceComponent>("requireMaximumDistance"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.targets.RequireMaximumDistanceComponent construct(EntityWorld entityWorld, Element element){
+                float distance = 0;
+                String distanceText = element.getText();
+                if((distanceText != null) && (distanceText.length() > 0)){
+                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                }
+                return new amara.applications.ingame.entitysystem.components.targets.RequireMaximumDistanceComponent(distance);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequireNoBuffsComponent.class);

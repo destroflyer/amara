@@ -1,30 +1,29 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.components.conditions;
 
 import com.jme3.network.serializing.Serializable;
 import amara.libraries.entitysystem.synchronizing.ComponentField;
 
-/**
- *
- * @author Carl
- */
 @Serializable
-public class HasBuffConditionComponent{
+public class HasBuffConditionComponent {
 
-    public HasBuffConditionComponent(){
-        
+    public HasBuffConditionComponent() {
+
     }
 
-    public HasBuffConditionComponent(int... buffEntities){
-        this.buffEntities = buffEntities;
+    public HasBuffConditionComponent(int buffEntity, int requiredStacks) {
+        this.buffEntity = buffEntity;
+        this.requiredStacks = requiredStacks;
     }
     @ComponentField(type=ComponentField.Type.ENTITY)
-    private int[] buffEntities;
+    private int buffEntity;
+    @ComponentField(type=ComponentField.Type.STACKS)
+    private int requiredStacks;
 
-    public int[] getBuffEntities(){
-        return buffEntities;
+    public int getBuffEntity() {
+        return buffEntity;
+    }
+
+    public int getRequiredStacks() {
+        return requiredStacks;
     }
 }

@@ -19,7 +19,7 @@
         </hitbox>
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <sightRange>3</sightRange>
-        <lifetime>180</lifetime>
+        <lifetime>[lifetime]</lifetime>
     </entity>
     <!--activate hitbox-->
     <entity>

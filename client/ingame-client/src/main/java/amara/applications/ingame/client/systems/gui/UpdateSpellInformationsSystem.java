@@ -31,41 +31,41 @@ public class UpdateSpellInformationsSystem extends GUIDisplaySystem<ScreenContro
     private void checkChangedPassives(EntityWorld entityWorld, PassivesComponent passivesComponent) {
         if (passivesComponent != null) {
             int[] passives = passivesComponent.getPassiveEntities();
-            screenController.setPlayer_SpellInformations_Passives(createSpellInformations(entityWorld, passives));
+            screenController.setPlayer_SpellInformations_Passives(createSpellInformations(entityWorld, passives, false));
         }
     }
 
     private void checkChangedLearnableSpells(EntityWorld entityWorld, LearnableSpellsComponent learnableSpellsComponent) {
         if (learnableSpellsComponent != null) {
             int[] spells = learnableSpellsComponent.getSpellsEntities();
-            screenController.setPlayer_SpellInformations_LearnableSpells(createSpellInformations(entityWorld, spells));
+            screenController.setPlayer_SpellInformations_LearnableSpells(createSpellInformations(entityWorld, spells, false));
         }
     }
 
     private void checkChangedSpells(EntityWorld entityWorld, SpellsComponent spellsComponent) {
         if (spellsComponent != null) {
             int[] spells = spellsComponent.getSpellsEntities();
-            screenController.setPlayer_SpellInformations_Spells(createSpellInformations(entityWorld, spells));
+            screenController.setPlayer_SpellInformations_Spells(createSpellInformations(entityWorld, spells, false));
         }
     }
 
     private void checkChangedMapSpells(EntityWorld entityWorld, MapSpellsComponent mapSpellsComponent) {
         if (mapSpellsComponent != null) {
             int[] spells = mapSpellsComponent.getSpellsEntities();
-            screenController.setPlayer_SpellInformations_MapSpells(createSpellInformations(entityWorld, spells));
+            screenController.setPlayer_SpellInformations_MapSpells(createSpellInformations(entityWorld, spells, false));
         }
     }
 
-    public static SpellInformation[] createSpellInformations(EntityWorld entityWorld, int[] spellEntities) {
+    public static SpellInformation[] createSpellInformations(EntityWorld entityWorld, int[] spellEntities, boolean useDeltaDescriptions) {
         SpellInformation[] spellInformations = new SpellInformation[spellEntities.length];
         for (int i = 0; i < spellInformations.length; i++) {
             if (spellEntities[i] != -1) {
                 NameComponent nameComponent = entityWorld.getComponent(spellEntities[i], NameComponent.class);
                 String name = ((nameComponent != null) ? nameComponent.getName() : "[Unnamed]");
                 String description = "[No description available]";
-                SpellUpgradeDescriptionComponent spellUpgradeDescriptionComponent = entityWorld.getComponent(spellEntities[i], SpellUpgradeDescriptionComponent.class);
-                if (spellUpgradeDescriptionComponent != null) {
-                    description = spellUpgradeDescriptionComponent.getDescription();
+                DeltaDescriptionComponent deltaDescriptionComponent = entityWorld.getComponent(spellEntities[i], DeltaDescriptionComponent.class);
+                if (useDeltaDescriptions && (deltaDescriptionComponent != null)) {
+                    description = deltaDescriptionComponent.getDescription();
                 } else {
                     DescriptionComponent descriptionComponent = entityWorld.getComponent(spellEntities[i], DescriptionComponent.class);
                     if (descriptionComponent != null) {

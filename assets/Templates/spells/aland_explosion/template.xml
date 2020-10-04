@@ -1,0 +1,74 @@
+<template>
+    <values>
+        <castDuration>0.4</castDuration>
+        <baseDamage>70</baseDamage>
+        <distance>4</distance>
+    </values>
+    <entity id="spell">
+        <name>Explosion</name>
+        <description>Throw a bomb at your feet, dealing magic damage to all enemies and knocking them away from the center.</description>
+        <spellVisualisation>aland_explosion</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn object, add visual buff-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/aland_explosion_cast.ogg</audio>
+                                <audioVolume>3</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castDuration>[castDuration]</castDuration>
+        <castCancelCast/>
+        <castCancelMovement/>
+        <castCost>
+            <entity>
+                <manaCost>80</manaCost>
+            </entity>
+        </castCost>
+        <castAnimation>
+            <entity>
+                <name>smash</name>
+                <loopDuration>[castDuration]</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>[baseDamage] + (0.3 * source.abilityPower)</magicDamage>
+                        <move>
+                            <entity>
+                                <displacement/>
+                                <towardsSourceMovementDirection>180</towardsSourceMovementDirection>
+                                <movementSpeed>30</movementSpeed>
+                                <distanceLimit>[distance]</distanceLimit>
+                            </entity>
+                        </move>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

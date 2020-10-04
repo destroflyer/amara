@@ -20,13 +20,6 @@ public class DisplayAttributesSystem extends GUIDisplaySystem<ScreenController_H
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity) {
-        updateAttributes(entityWorld, "player", characterEntity, false);
-        int inspectedEntity = getInspectedEntity();
-        updateAttributes(entityWorld, "inspection", inspectedEntity, (inspectedEntity != lastInspectedEntity));
-        lastInspectedEntity = inspectedEntity;
-    }
-
-    private void updateAttributes(EntityWorld entityWorld, String uiPrefix, int entity, boolean forceUpdate) {
         ComponentMapObserver observer = entityWorld.requestObserver(
             this,
             HealthComponent.class,
@@ -41,6 +34,13 @@ public class DisplayAttributesSystem extends GUIDisplaySystem<ScreenController_H
             MagicResistanceComponent.class,
             WalkSpeedComponent.class
         );
+        updateAttributes(entityWorld, observer, "player", characterEntity, false);
+        int inspectedEntity = getInspectedEntity();
+        updateAttributes(entityWorld, observer, "inspection", inspectedEntity, (inspectedEntity != lastInspectedEntity));
+        lastInspectedEntity = inspectedEntity;
+    }
+
+    private void updateAttributes(EntityWorld entityWorld, ComponentMapObserver observer, String uiPrefix, int entity, boolean forceUpdate) {
         updateAttributeValue(entityWorld, observer, entity, forceUpdate, AttackDamageComponent.class, AttackDamageComponent::getValue, 0, text -> screenController.setAttributeValue_AttackDamage(uiPrefix, text));
         updateAttributeValue(entityWorld, observer, entity, forceUpdate, AbilityPowerComponent.class, AbilityPowerComponent::getValue, 0, text -> screenController.setAttributeValue_AbilityPower(uiPrefix, text));
         updateAttributeValue(entityWorld, observer, entity, forceUpdate, AttackSpeedComponent.class, AttackSpeedComponent::getValue, 2, text -> screenController.setAttributeValue_AttackSpeed(uiPrefix, text));
