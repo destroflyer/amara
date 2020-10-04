@@ -1,0 +1,7 @@
+<skin>
+    <model>
+        <modifiers>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Alice_Thunder_Radius_4</modifier>
+        </modifiers>
+    </model>
+</skin>

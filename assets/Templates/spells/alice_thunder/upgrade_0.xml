@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <radius>4</radius>
+    </values>
+    <entity template="./template([thunderPoppableBuff],[radius])">
+        <deltaDescription>Radius: 2 -> [radius]</deltaDescription>
+    </entity>
+</template>

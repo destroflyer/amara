@@ -19,9 +19,14 @@ import com.jme3.scene.control.AbstractControl;
 
 public class ModelModifier_Alice_Thunder extends ModelModifier {
 
+    public ModelModifier_Alice_Thunder(float radius) {
+        this.radius = radius;
+    }
+    private float radius;
+
     @Override
     public void modify(RegisteredModel registeredModel) {
-        Geometry indicator = GroundTextures.create("Models/alice_thunder/resources/indicator.png", -2, 2, 4, 4, RenderState.BlendMode.AlphaAdditive);
+        Geometry indicator = GroundTextures.create("Models/alice_thunder/resources/indicator.png", (-1 * radius), radius, (2 * radius), (2 * radius), RenderState.BlendMode.AlphaAdditive);
         indicator.addControl(new FadeOutControl(0.5f));
         registeredModel.getNode().attachChild(indicator);
 

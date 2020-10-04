@@ -1,8 +1,8 @@
 <template>
     <entity id="object">
-        <model>Models/alice_thunder/skin.xml</model>
+        <model>Models/alice_thunder/skin_radius_[radius].xml</model>
         <hitbox>
-            <circle radius="2"/>
+            <circle radius="[radius]"/>
         </hitbox>
         <collisionGroup targetOf="spells" targets="spells|spell_targets"/>
         <lifetime>1.25</lifetime>

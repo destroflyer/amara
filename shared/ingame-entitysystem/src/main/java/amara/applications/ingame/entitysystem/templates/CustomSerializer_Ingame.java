@@ -94,7 +94,7 @@ public class CustomSerializer_Ingame{
             @Override
             public HitboxComponent construct(EntityWorld entityWorld, Element element){
                 Shape shape = null;
-                Element childElement = (Element) element.getChildren().get(0);
+                Element childElement = element.getChildren().get(0);
                 String shapeType = childElement.getName();
                 double x = 0;
                 String xText = childElement.getAttributeValue("x");
@@ -107,17 +107,17 @@ public class CustomSerializer_Ingame{
                     y = Double.parseDouble(yText);
                 }
                 if(shapeType.equals("regularCyclic")){
-                    int edges = Integer.parseInt(childElement.getAttributeValue("edges"));
-                    double radius = Double.parseDouble(childElement.getAttributeValue("radius"));
+                    int edges = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, childElement.getAttributeValue("edges")));
+                    double radius = Double.parseDouble(xmlTemplateManager.parseValue(entityWorld, childElement.getAttributeValue("radius")));
                     shape = new RegularCyclic(edges, radius);
                 }
                 else if(shapeType.equals("circle")){
-                    double radius = Double.parseDouble(childElement.getAttributeValue("radius"));
+                    double radius = Double.parseDouble(xmlTemplateManager.parseValue(entityWorld, childElement.getAttributeValue("radius")));
                     shape = new Circle(x, y, radius);
                 }
                 else if(shapeType.equals("rectangle")){
-                    double width = Double.parseDouble(childElement.getAttributeValue("width"));
-                    double height = Double.parseDouble(childElement.getAttributeValue("height"));
+                    double width = Double.parseDouble(xmlTemplateManager.parseValue(entityWorld, childElement.getAttributeValue("width")));
+                    double height = Double.parseDouble(xmlTemplateManager.parseValue(entityWorld, childElement.getAttributeValue("height")));
                     shape = new Rectangle(x, y, width, height);
                 }
                 else if(shapeType.equals("point")){

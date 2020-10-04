@@ -1,0 +1,123 @@
+<template>
+    <values>
+        <castDuration>1</castDuration>
+        <castAnimationLoopDuration>2.833</castAnimationLoopDuration>
+        <buffDuration>3</buffDuration>
+        <percentageWalkSpeed>0</percentageWalkSpeed>
+    </values>
+    <entity id="spell">
+        <name>Protecting Bubbles</name>
+        <description>Channel for [castDuration] second and then summon a blue bubble around every allied characters for [buffDuration] seconds, making them invulnerable, untargetable, unable to cast spells or basic attacks and giving them a small walk speed buff.</description>
+        <spellVisualisation>alice_ult</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[castDuration]</triggerDelay>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/alice_ult_cast.ogg</audio>
+                                <audioVolume>4</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castCancelCast/>
+        <castCancelMovement/>
+        <castDuration>[castDuration]</castDuration>
+        <castCost>
+            <entity>
+                <manaCost>100</manaCost>
+            </entity>
+        </castCost>
+        <castAnimation>
+            <entity>
+                <name>spell1</name>
+                <loopDuration>[castAnimationLoopDuration]</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--remove vulnerability and targetability-->
+            <entity>
+                <ruleTarget>
+                    <entity>
+                        <requireCharacter/>
+                        <acceptAllies/>
+                    </entity>
+                </ruleTarget>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="[buffDuration]">
+                            <entity>
+                                <name>I'm Blue</name>
+                                <description>This unit is invulnerable, untargetable, can't cast spells or basic attacks and has increased walk speed.</description>
+                                <buffIcon>spells/alice_ult</buffIcon>
+                                <buffVisualisation>bubble_blue</buffVisualisation>
+                                <continuousAttributes if="[percentageWalkSpeed]">
+                                    <entity>
+                                        <bonusPercentageWalkSpeed>[percentageWalkSpeed]</bonusPercentageWalkSpeed>
+                                    </entity>
+                                </continuousAttributes>
+                                <onBuffAddEffectTriggers>
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <removeVulnerability/>
+                                                <removeTargetability/>
+                                                <disableAutoAttack/>
+                                                <disableSpells/>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffAddEffectTriggers>
+                                <onBuffRemoveEffectTriggers>
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <addVulnerability/>
+                                                <addTargetability/>
+                                                <enableAutoAttack/>
+                                                <enableSpells/>
+                                                <spawn>
+                                                    <entity>
+                                                        <spawnTemplate>spells/alice_passive/object</spawnTemplate>
+                                                    </entity>
+                                                </spawn>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffRemoveEffectTriggers>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

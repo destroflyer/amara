@@ -21,6 +21,7 @@ import amara.applications.ingame.network.messages.objects.commands.casting.Spell
 import com.jme3.math.Vector2f;
 import org.junit.Before;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 
 import static org.junit.Assert.fail;
@@ -77,6 +78,7 @@ public class CommandingPlayerTest extends GameLogicTest {
                 entities.add(entity);
             }
         }
+        entities.sort(Comparator.naturalOrder());
         return entities;
     }
 

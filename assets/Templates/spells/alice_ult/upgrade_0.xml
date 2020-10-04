@@ -1,0 +1,9 @@
+<template>
+    <values>
+        <castDuration>0.75</castDuration>
+        <castAnimationLoopDuration>2.1248</castAnimationLoopDuration>
+    </values>
+    <entity template="./template([castDuration],[castAnimationLoopDuration])">
+        <deltaDescription>Cast duration: 1 -> [castDuration]</deltaDescription>
+    </entity>
+</template>

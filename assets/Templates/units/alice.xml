@@ -80,10 +80,30 @@
             <entity template="spells/alice_passive/passive"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/alice_knockup/base(#thunderPoppableBuff)"/>
-            <entity template="spells/alice_thunder/base(#thunderPoppableBuff)"/>
-            <entity template="spells/alice_charm/base(#thunderPoppableBuff)"/>
-            <entity template="spells/alice_ult/base"/>
+            <entity template="spells/alice_knockup/base(#thunderPoppableBuff)">
+                <spellUpgrades>
+                    <entity template="spells/alice_knockup/upgrade_0(#thunderPoppableBuff)"/>
+                    <entity template="spells/alice_knockup/upgrade_1(#thunderPoppableBuff)"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/alice_thunder/base(#thunderPoppableBuff)">
+                <spellUpgrades>
+                    <entity template="spells/alice_thunder/upgrade_0(#thunderPoppableBuff)"/>
+                    <entity template="spells/alice_thunder/upgrade_1(#thunderPoppableBuff)"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/alice_charm/base(#thunderPoppableBuff)">
+                <spellUpgrades>
+                    <entity template="spells/alice_charm/upgrade_0(#thunderPoppableBuff)"/>
+                    <entity template="spells/alice_charm/upgrade_1(#thunderPoppableBuff)"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/alice_ult/base">
+                <spellUpgrades>
+                    <entity template="spells/alice_ult/upgrade_0"/>
+                    <entity template="spells/alice_ult/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

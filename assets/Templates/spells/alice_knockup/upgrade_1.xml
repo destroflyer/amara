@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <knockupDuration>1.75</knockupDuration>
+    </values>
+    <entity template="./template([thunderPoppableBuff],[knockupDuration])">
+        <deltaDescription>Knockup duration: 1.5 -> [knockupDuration]</deltaDescription>
+    </entity>
+</template>

@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <slow>-0.6</slow>
+    </values>
+    <entity template="./template([thunderPoppableBuff],[slow])">
+        <deltaDescription>Slow: 30% -> 60%</deltaDescription>
+    </entity>
+</template>
