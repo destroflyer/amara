@@ -44,10 +44,12 @@ public class ApplyEffectsLoopSystem extends LoopSystem {
         add(new ApplySetAggroTargetSystem());
         add(new ApplyPlayAudioSystem());
         add(new ApplyStopAudioSystem());
-        add(new ApplyRemoveBuffsSystem());
-        add(new ApplyRemoveBuffAreasSystem());
         add(new ApplyAddBuffsSystem());
+        // Copy buff stacks before removing the source buffs
+        add(new ApplyCopyStacksSystem());
+        add(new ApplyRemoveBuffsSystem());
         add(new ApplyAddBuffAreasSystem());
+        add(new ApplyRemoveBuffAreasSystem());
         add(new ApplyAddStacksSystem());
         add(new ApplyClearStacksSystem());
         add(new ApplyAddBindableSystem());

@@ -154,7 +154,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
 
         queueCommand(new CastSingleTargetSpellCommand(SPELL_INDEX_E, targetDummy));
         tickSeconds(1);
-        assertEquals(23, getX(targetDummy), EPSILON);
+        assertEquals(20, getX(targetDummy), EPSILON);
         assertEquals(10, getY(targetDummy), EPSILON);
         assertEquals(813.3333f, getHealth(targetDummy), EPSILON);
 

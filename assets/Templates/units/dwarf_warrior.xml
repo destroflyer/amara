@@ -80,10 +80,30 @@
             <entity template="spells/dwarf_warrior_passive/passive"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/dwarf_warrior_attack_buff/base(#autoattack)"/>
-            <entity template="spells/dwarf_warrior_heal/base"/>
-            <entity template="spells/dwarf_warrior_knockback/base"/>
-            <entity template="spells/dwarf_warrior_charge/base"/>
+            <entity template="spells/dwarf_warrior_attack_buff/base(#autoattack){baseResistancesRewardBuff=[resistancesRewardBuff]}">
+                <spellUpgrades>
+                    <entity template="spells/dwarf_warrior_attack_buff/upgrade_0(#autoattack,[baseResistancesRewardBuff])"/>
+                    <entity template="spells/dwarf_warrior_attack_buff/upgrade_1(#autoattack,[baseResistancesRewardBuff])"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/dwarf_warrior_heal/base{baseHealBuff=[healBuff]}">
+                <spellUpgrades>
+                    <entity template="spells/dwarf_warrior_heal/upgrade_0([baseHealBuff])"/>
+                    <entity template="spells/dwarf_warrior_heal/upgrade_1([baseHealBuff])"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/dwarf_warrior_knockback/base">
+                <spellUpgrades>
+                    <entity template="spells/dwarf_warrior_knockback/upgrade_0"/>
+                    <entity template="spells/dwarf_warrior_knockback/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/dwarf_warrior_charge/base">
+                <spellUpgrades>
+                    <entity template="spells/dwarf_warrior_charge/upgrade_0"/>
+                    <entity template="spells/dwarf_warrior_charge/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

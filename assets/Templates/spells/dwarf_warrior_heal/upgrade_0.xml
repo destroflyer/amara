@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <newMaximumStacks>15</newMaximumStacks>
+    </values>
+    <entity template="./template([baseHealBuff],maximumStacks=[newMaximumStacks]){oldMaximumStacks=[_maximumStacks]}">
+        <deltaDescription>Maximum stacks: [oldMaximumStacks] -> [newMaximumStacks]</deltaDescription>
+    </entity>
+</template>

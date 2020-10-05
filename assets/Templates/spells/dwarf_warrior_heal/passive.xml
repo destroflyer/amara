@@ -14,7 +14,7 @@
                                 <sourceCasterTarget/>
                                 <triggeredEffect>
                                     <entity>
-                                        <addStacks stacks="1">[buff]</addStacks>
+                                        <addStacks stacks="1">[healBuff]</addStacks>
                                     </entity>
                                 </triggeredEffect>
                             </entity>

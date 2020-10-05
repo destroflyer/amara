@@ -1,0 +1,148 @@
+<template>
+    <values>
+        <duration>10</duration>
+        <baseResistancesRewardBuff>false</baseResistancesRewardBuff>
+        <armorPerStack>1</armorPerStack>
+        <magicResistancePerStack>1</magicResistancePerStack>
+    </values>
+    <entity id="spell">
+        <name>Hammer Time</name>
+        <description>Your next basic attack within [duration] seconds deals bonus magic damage. If the attack kills its target, you permanently gain 1 stack, with each stack granting [armorPerStack] armor and [magicResistancePerStack] magic resistance.</description>
+        <spellVisualisation>dwarf_warrior_attack_buff</spellVisualisation>
+        <learnEffectTriggers>
+            <!--add reward buff-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <copyStacks if="[baseResistancesRewardBuff]" sourceBuffEntity="[baseResistancesRewardBuff]" targetBuffEntity="#resistancesRewardBuff"/>
+                        <removeBuff if="[baseResistancesRewardBuff]">[baseResistancesRewardBuff]</removeBuff>
+                        <addBuff duration="-1">
+                            <entity id="resistancesRewardBuff">
+                                <name>Hammer Time</name>
+                                <description>This unit has increased resistances for each stack.</description>
+                                <buffIcon>spells/dwarf_warrior_attack_buff</buffIcon>
+                                <continuousAttributesPerStack>
+                                    <entity>
+                                        <bonusFlatArmor>[armorPerStack]</bonusFlatArmor>
+                                        <bonusFlatMagicResistance>[magicResistancePerStack]</bonusFlatMagicResistance>
+                                    </entity>
+                                </continuousAttributesPerStack>
+                                <keepOnDeath/>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </learnEffectTriggers>
+        <instantEffectTriggers>
+            <!--reset autoattack cooldown-->
+            <entity>
+                <customTarget>[autoattack]</customTarget>
+                <triggeredEffect>
+                    <entity>
+                        <resetCooldown/>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--add attack buff-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="[duration]">
+                            <entity id="attackBuff">
+                                <name>Stop! Hammer Time</name>
+                                <description>This units next basic attack will deal bonus damage.</description>
+                                <buffIcon>spells/dwarf_warrior_attack_buff</buffIcon>
+                                <buffVisualisation>dwarf_warrior_empowered</buffVisualisation>
+                                <onBuffRemoveEffectTriggers>
+                                    <entity>
+                                        <targetTarget/>
+                                        <triggeredEffect>
+                                            <entity>
+                                                <removeSpellEffects>
+                                                    <entity id="newSpellEffect">
+                                                        <castedEffectTriggers>
+                                                            <!--trigger spell effects-->
+                                                            <entity>
+                                                                <targetTarget/>
+                                                                <triggeredEffect>
+                                                                    <entity>
+                                                                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                                                                    </entity>
+                                                                </triggeredEffect>
+                                                                <triggerSource>#spell</triggerSource>
+                                                            </entity>
+                                                            <!--remove buff-->
+                                                            <entity>
+                                                                <sourceCasterTarget/>
+                                                                <triggeredEffect>
+                                                                    <entity>
+                                                                        <removeBuff>#attackBuff</removeBuff>
+                                                                    </entity>
+                                                                </triggeredEffect>
+                                                                <triggerSource>#spell</triggerSource>
+                                                            </entity>
+                                                        </castedEffectTriggers>
+                                                    </entity>
+                                                </removeSpellEffects>
+                                            </entity>
+                                        </triggeredEffect>
+                                        <triggerSource>#spell</triggerSource>
+                                    </entity>
+                                </onBuffRemoveEffectTriggers>
+                            </entity>
+                        </addBuff>
+                        <addAutoAttackSpellEffects>
+                            <entity id="newSpellEffect"/>
+                        </addAutoAttackSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castCost>
+            <entity>
+                <manaCost>20</manaCost>
+            </entity>
+        </castCost>
+        <baseCooldown>7</baseCooldown>
+    </entity>
+    <!--add stack on kill trigger-->
+    <entity>
+        <killTrigger/>
+        <sourceCasterTarget/>
+        <triggeredEffect>
+            <entity>
+                <addStacks stacks="1">#resistancesRewardBuff</addStacks>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#spell</triggerSource>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>75 + (0.6 * source.abilityPower)</magicDamage>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/dwarf_warrior_attack_buff_hit.ogg</audio>
+                                <audioVolume>8</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

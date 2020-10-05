@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <targetImpact>true</targetImpact>
+    </values>
+    <entity template="./template([targetImpact])">
+        <deltaDescription>When reaching the target, damage and knockup all nearby enemies.</deltaDescription>
+    </entity>
+</template>

@@ -66,7 +66,7 @@ public class CustomGameTemplates {
                 entityWrapper.setComponent(new InstantEffectTriggersComponent(effectTriggers));
             } else if (template.getName().equals("spells/firestorm/projectile")) {
                 Vector2f direction = new Vector2f(0, 1);
-                direction.rotateAroundOrigin(template.getIntegerParameter("index") * (FastMath.TWO_PI / 20), true);
+                direction.rotateAroundOrigin(template.getIntegerInput("index") * (FastMath.TWO_PI / 20), true);
                 entityWrapper.setComponent(new DirectionComponent(direction));
                 EntityWrapper movement = entityWorld.getWrapped(entityWorld.createEntity());
                 movement.setComponent(new MovementDirectionComponent(direction));
@@ -96,7 +96,7 @@ public class CustomGameTemplates {
 
                 entityWrapper.setComponent(new IsAliveComponent());
                 int baseAttributesEntity = entityWorld.createEntity();
-                int spawnCounter = entityWorld.getComponent(template.getIntegerParameter("spawnTrigger"), RepeatingTriggerCounterComponent.class).getCounter();
+                int spawnCounter = entityWorld.getComponent(template.getIntegerInput("spawnTrigger"), RepeatingTriggerCounterComponent.class).getCounter();
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(420 + (spawnCounter * 3)));
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackDamageComponent(15 + (spawnCounter * 0.3f)));
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackSpeedComponent(0.7f));
@@ -149,7 +149,7 @@ public class CustomGameTemplates {
 
                 entityWrapper.setComponent(new IsAliveComponent());
                 int baseAttributesEntity = entityWorld.createEntity();
-                int spawnCounter = entityWorld.getComponent(template.getIntegerParameter("spawnTrigger"), RepeatingTriggerCounterComponent.class).getCounter();
+                int spawnCounter = entityWorld.getComponent(template.getIntegerInput("spawnTrigger"), RepeatingTriggerCounterComponent.class).getCounter();
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatMaximumHealthComponent(320 + (spawnCounter * 3)));
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackDamageComponent(22 + (spawnCounter * 1)));
                 entityWorld.setComponent(baseAttributesEntity, new BonusFlatAttackSpeedComponent(0.7f));
@@ -179,20 +179,20 @@ public class CustomGameTemplates {
                 entityWrapper.setComponent(new BountyComponent(bountyEntity));
                 entityWrapper.setComponent(new LocalAvoidanceWalkComponent());
             } else if (template.getName().equals("testmap_camp_pseudospider")) {
-                entityWrapper.setComponent(new PositionComponent(new Vector2f(40 + (template.getIntegerParameter("x") * 3), 68 + (template.getIntegerParameter("y") * 3))));
+                entityWrapper.setComponent(new PositionComponent(new Vector2f(40 + (template.getIntegerInput("x") * 3), 68 + (template.getIntegerInput("y") * 3))));
                 entityWrapper.setComponent(new DirectionComponent(new Vector2f(0, -1)));
                 entityWrapper.setComponent(new AutoAggroComponent(10));
                 entityWrapper.setComponent(new TeamComponent(0));
-                entityWrapper.setComponent(new BountyComponent(template.getIntegerParameter("bounty")));
+                entityWrapper.setComponent(new BountyComponent(template.getIntegerInput("bounty")));
             } else if (template.getName().equals("testmap_camp_forest_monster")) {
                 entityWrapper.setComponent(new PositionComponent(new Vector2f(57, 42)));
                 entityWrapper.setComponent(new DirectionComponent(new Vector2f(-4, -1)));
                 entityWrapper.setComponent(new TeamComponent(0));
-                entityWrapper.setComponent(new BountyComponent(template.getIntegerParameter("bounty")));
+                entityWrapper.setComponent(new BountyComponent(template.getIntegerInput("bounty")));
             } else if (template.getName().equals("arama_camp_pseudospider")) {
                 Vector2f position = null;
                 Vector2f direction = null;
-                switch (template.getIntegerParameter("index")) {
+                switch (template.getIntegerInput("index")) {
                     case 0:
                         position = new Vector2f(318, 298.5f);
                         direction = new Vector2f(0, 1);
@@ -202,7 +202,7 @@ public class CustomGameTemplates {
                         direction = new Vector2f(-1, 0);
                         break;
                 }
-                if (template.getIntegerParameter("side") == 1) {
+                if (template.getIntegerInput("side") == 1) {
                     position.setX(525 - position.getX());
                     direction.setX(-1 * direction.getX());
                 }
@@ -220,7 +220,7 @@ public class CustomGameTemplates {
             } else if (template.getName().equals("arama_camp_beetle_golem")) {
                 Vector2f position = new Vector2f(324.75f, 300);
                 Vector2f direction = new Vector2f(-1, 1);
-                if (template.getIntegerParameter("side") == 1) {
+                if (template.getIntegerInput("side") == 1) {
                     position.setX(525 - position.getX());
                     direction.setX(-1 * direction.getX());
                 }
@@ -343,7 +343,7 @@ public class CustomGameTemplates {
                 int circlePointsCount = 32;
                 Vector2f[] circlePointsBig = PointUtil.getCirclePoints(7, circlePointsCount);
                 Vector2f[] circlePointsSmall = PointUtil.getCirclePoints(5, circlePointsCount);
-                int circlePointStartIndex = (2 + template.getIntegerParameter("index"));
+                int circlePointStartIndex = (2 + template.getIntegerInput("index"));
                 Vector2D[] outline = new Vector2D[4];
                 outline[0] = getVector2D(circlePointsBig[circlePointStartIndex]);
                 outline[1] = getVector2D(circlePointsBig[circlePointStartIndex + 1]);

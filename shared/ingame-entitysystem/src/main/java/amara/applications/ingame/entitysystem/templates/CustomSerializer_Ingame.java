@@ -143,7 +143,7 @@ public class CustomSerializer_Ingame{
             public SpawnTemplateComponent construct(EntityWorld entityWorld, Element element){
                 String[] templates = element.getText().split("\\|");
                 for(int i=0;i<templates.length;i++){
-                    templates[i] = xmlTemplateManager.parseTemplate(entityWorld, templates[i]);
+                    templates[i] = xmlTemplateManager.parseTemplate(entityWorld, templates[i]).getText();
                 }
                 return new SpawnTemplateComponent(templates);
             }

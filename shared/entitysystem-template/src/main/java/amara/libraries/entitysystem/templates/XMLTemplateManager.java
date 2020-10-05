@@ -66,15 +66,18 @@ public class XMLTemplateManager{
             currentDirectory += directories[i] + "/";
         }
         currentDirectories.push(currentDirectory);
-        cachedEntities.push(new HashMap<>(10));
+        HashMap<String, Integer> entities = new HashMap<>(10);
+        cachedEntities.push(entities);
         HashMap<String, String> values = new HashMap<>();
         Element valuesElement = templateElement.getChild("values");
         if (valuesElement != null) {
             for (Element valueElement : valuesElement.getChildren()) {
                 values.put(valueElement.getName(), valueElement.getText());
+                // Save the unmodified default value so it can be exported and accessed by parent
+                values.put("_" + valueElement.getName(), valueElement.getText());
             }
         }
-        for (Map.Entry<String, String> parameterEntry : template.getParameters().entrySet()) {
+        for (Map.Entry<String, String> parameterEntry : template.getInput().entrySet()) {
             values.put(parameterEntry.getKey(), parameterEntry.getValue());
         }
         cachedValues.push(values);
@@ -90,6 +93,15 @@ public class XMLTemplateManager{
                 createAndLoadEntity(entityWorld, entityElement);
             }
             isFirstEntity = false;
+        }
+        // Export
+        if (cachedValues.size() > 1) {
+            HashMap<String, String> parentTemplateValues = cachedValues.get(cachedValues.size() - 2);
+            for (Map.Entry<String, String> output : template.getOutput().entrySet()) {
+                String name = output.getKey();
+                String value = parseValue(entityWorld, output.getValue());
+                parentTemplateValues.put(name, value);
+            }
         }
         currentDirectories.pop();
         cachedEntities.pop();
@@ -135,9 +147,13 @@ public class XMLTemplateManager{
         }
     }
 
-    public String parseTemplate(EntityWorld entityWorld, String templateXMLText) {
+    public String parseTemplateText(EntityWorld entityWorld, String templateXMLText) {
+        return parseTemplate(entityWorld, templateXMLText).getText();
+    }
+
+    public EntityTemplate parseTemplate(EntityWorld entityWorld, String templateXMLText) {
         String template = templateXMLText.replaceFirst("\\./", currentDirectories.lastElement());
-        EntityTemplate entityTemplate = EntityTemplate.parseTemplate(template, text -> {
+        return EntityTemplate.parseTemplate(template, text -> {
             if (text.startsWith("#")) {
                 return text.substring(1);
             } else if (text.startsWith("[") && text.endsWith("]")) {
@@ -145,7 +161,6 @@ public class XMLTemplateManager{
             }
             return text;
         }, key -> parseValue(entityWorld, key), value -> parseValue(entityWorld, value));
-        return entityTemplate.getText();
     }
 
     private boolean isElementEnabled(EntityWorld entityWorld, Element element) {
@@ -161,7 +176,7 @@ public class XMLTemplateManager{
             inverted = true;
         }
         String value = parseValue(entityWorld, valueText);
-        boolean isTruthy = ((!value.equals("false")) && (!value.equals("0")));
+        boolean isTruthy = ((!value.isEmpty()) && (!value.equals("false")) && (!value.equals("0")));
         return (isTruthy != inverted);
     }
 

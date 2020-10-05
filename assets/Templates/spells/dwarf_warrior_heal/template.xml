@@ -1,0 +1,91 @@
+<template>
+    <values>
+        <baseHealBuff>false</baseHealBuff>
+        <maximumStacks>10</maximumStacks>
+        <stacksCost>5</stacksCost>
+    </values>
+    <entity id="spell">
+        <name>Urgent Feast</name>
+        <description>When taking damage, gain 1 stack (up to [maximumStacks]). Activate this ability to consume [stacksCost] stacks, healing yourself and gaining walk speed for a short duration.</description>
+        <spellVisualisation>dwarf_warrior_heal</spellVisualisation>
+        <learnEffectTriggers>
+            <!--add buff-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <copyStacks if="[baseHealBuff]" sourceBuffEntity="[baseHealBuff]" targetBuffEntity="#healBuff"/>
+                        <removeBuff if="[baseHealBuff]">[baseHealBuff]</removeBuff>
+                        <addBuff duration="-1">
+                            <entity id="healBuff">
+                                <name>Urgent Feast</name>
+                                <description>Stacks can be consumed to heal and gain walk speed for a short duration.</description>
+                                <buffIcon>spells/dwarf_warrior_heal</buffIcon>
+                                <maximumStacks>[maximumStacks]</maximumStacks>
+                                <keepOnDeath/>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </learnEffectTriggers>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <spellPassives>
+            <entity template="./passive(#healBuff)"/>
+        </spellPassives>
+        <castType>selfcast</castType>
+        <castCost>
+            <entity>
+                <manaCost>30</manaCost>
+                <buffStacksCost buffEntity="#healBuff" stacks="[stacksCost]"/>
+            </entity>
+        </castCost>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <heal>100</heal>
+                        <addBuff duration="1">
+                            <entity>
+                                <name>Full Stomach</name>
+                                <description>This unit has increased walk speed.</description>
+                                <buffIcon>spells/dwarf_warrior_heal</buffIcon>
+                                <buffVisualisation>turbo</buffVisualisation>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageWalkSpeed>0.35</bonusPercentageWalkSpeed>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/dwarf_warrior_heal_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

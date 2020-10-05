@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <multipleTargets>true</multipleTargets>
+    </values>
+    <entity template="./template([multipleTargets])">
+        <deltaDescription>Cast: Single Target -> Hit all enemies in target direction</deltaDescription>
+    </entity>
+</template>

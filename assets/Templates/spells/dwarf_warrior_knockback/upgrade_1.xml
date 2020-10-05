@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <newKnockbackDistance>10</newKnockbackDistance>
+    </values>
+    <entity template="./template(knockbackDistance=[newKnockbackDistance]){oldKnockbackDistance=[_knockbackDistance]}">
+        <deltaDescription>Knockback distance: [oldKnockbackDistance] -> [newKnockbackDistance]</deltaDescription>
+    </entity>
+</template>

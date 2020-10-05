@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <newSpeed>35</newSpeed>
+    </values>
+    <entity template="./template(speed=[newSpeed]){oldSpeed=[_speed]}">
+        <deltaDescription>Speed: [oldSpeed] -> [newSpeed]</deltaDescription>
+    </entity>
+</template>

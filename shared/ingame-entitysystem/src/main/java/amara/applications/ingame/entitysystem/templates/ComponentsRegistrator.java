@@ -1549,6 +1549,26 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.effects.buffs.stacks.ClearStacksComponent(buffEntity);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.buffs.stacks.CopyStacksComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.buffs.stacks.CopyStacksComponent.class.getDeclaredField("sourceBuffEntity"), componentFieldSerializer_Stacks);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.buffs.stacks.CopyStacksComponent.class.getDeclaredField("targetBuffEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.stacks.CopyStacksComponent>("copyStacks"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.buffs.stacks.CopyStacksComponent construct(EntityWorld entityWorld, Element element){
+                int sourceBuffEntity = createChildEntity(entityWorld, element, 0, "sourceBuffEntity");
+                int targetBuffEntity = createChildEntity(entityWorld, element, 0, "targetBuffEntity");
+                return new amara.applications.ingame.entitysystem.components.effects.buffs.stacks.CopyStacksComponent(sourceBuffEntity, targetBuffEntity);
+            }
+        });
         //casts
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.casts.EffectCastTargetComponent.class);
         try{
@@ -1955,7 +1975,7 @@ public class ComponentsRegistrator{
                 if(effectTriggerTemplatesText != null){
                     effectTriggerTemplates = effectTriggerTemplatesText.split(",");
                     for(int i=0;i<effectTriggerTemplates.length;i++){
-                        effectTriggerTemplates[i] = xmlTemplateManager.parseTemplate(entityWorld, effectTriggerTemplates[i]);
+                        effectTriggerTemplates[i] = xmlTemplateManager.parseTemplateText(entityWorld, effectTriggerTemplates[i]);
                     }
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.general.AddNewEffectTriggersComponent(effectTriggerTemplates);
@@ -2395,7 +2415,7 @@ public class ComponentsRegistrator{
                 if((spellIndexText != null) && (spellIndexText.length() > 0)){
                     spellIndex = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, spellIndexText));
                 }
-                String newSpellTemplate = xmlTemplateManager.parseTemplate(entityWorld, element.getAttributeValue("newSpellTemplate"));
+                String newSpellTemplate = xmlTemplateManager.parseTemplateText(entityWorld, element.getAttributeValue("newSpellTemplate"));
                 return new amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent(spellIndex, newSpellTemplate);
             }
         });

@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <newMagicResistancePerStack>1.5</newMagicResistancePerStack>
+    </values>
+    <entity template="./template([autoattack],[baseResistancesRewardBuff],magicResistancePerStack=[newMagicResistancePerStack]){oldMagicResistancePerStack=[_magicResistancePerStack]}">
+        <deltaDescription>Magic Resistance per stack: [oldMagicResistancePerStack] -> [newMagicResistancePerStack]</deltaDescription>
+    </entity>
+</template>

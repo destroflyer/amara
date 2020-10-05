@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <newStacksCost>4</newStacksCost>
+    </values>
+    <entity template="./template([baseHealBuff],stacksCost=[newStacksCost]){oldStacksCost=[_stacksCost]}">
+        <deltaDescription>Stacks cost: [oldStacksCost] -> [newStacksCost]</deltaDescription>
+    </entity>
+</template>

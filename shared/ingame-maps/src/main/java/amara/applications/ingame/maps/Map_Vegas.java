@@ -50,7 +50,7 @@ import amara.applications.ingame.entitysystem.components.units.effecttriggers.tr
 import amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent;
 import amara.applications.ingame.entitysystem.components.visuals.ModelComponent;
 import amara.applications.ingame.entitysystem.systems.effects.buffs.ApplyAddBuffsSystem;
-import amara.applications.ingame.entitysystem.systems.effects.buffs.stacks.ApplyAddStacksSystem;
+import amara.applications.ingame.entitysystem.systems.effects.buffs.stacks.StackUtil;
 import amara.applications.ingame.shared.maps.Map;
 import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.entitysystem.templates.EntityTemplate;
@@ -532,8 +532,8 @@ public class Map_Vegas extends Map {
 
         ApplyAddBuffsSystem.addBuff(entityWorld, characterEntity, freeBenchPlacesBuffs[playerIndex]);
         ApplyAddBuffsSystem.addBuff(entityWorld, characterEntity, freeBoardPlacesBuffs[playerIndex]);
-        ApplyAddStacksSystem.addStacks(entityWorld, characterEntity, freeBenchPlacesBuffs[playerIndex], benchPlaces);
-        ApplyAddStacksSystem.addStacks(entityWorld, characterEntity, freeBoardPlacesBuffs[playerIndex], boardPlaces);
+        StackUtil.addStacks(entityWorld, characterEntity, freeBenchPlacesBuffs[playerIndex], benchPlaces);
+        StackUtil.addStacks(entityWorld, characterEntity, freeBoardPlacesBuffs[playerIndex], boardPlaces);
 
         int spellSwap = entityWorld.createEntity();
         EntityTemplate.loadTemplate(entityWorld, spellSwap, "spells/vegas_swap_mark(spellIndex=0,putTargetBuff=" + putTargetBuffs[playerIndex]

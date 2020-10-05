@@ -244,6 +244,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                     RemoveBuffAreaComponent.class,
                     AddStacksComponent.class,
                     ClearStacksComponent.class,
+                    CopyStacksComponent.class,
                     AddBindableComponent.class,
                     AddBindingComponent.class,
                     AddKnockupableComponent.class,

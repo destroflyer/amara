@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <newArmorPerStack>1.5</newArmorPerStack>
+    </values>
+    <entity template="./template([autoattack],[baseResistancesRewardBuff],armorPerStack=[newArmorPerStack]){oldArmorPerStack=[_armorPerStack]}">
+        <deltaDescription>Armor per stack: [oldArmorPerStack] -> [newArmorPerStack]</deltaDescription>
+    </entity>
+</template>
