@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <targetBonusMagicResistance>-10</targetBonusMagicResistance>
+    </values>
+    <entity template="./template([targetBonusMagicResistance])">
+        <deltaDescription>Reduce the magic resistance of targets in the laser by 10.</deltaDescription>
+    </entity>
+</template>

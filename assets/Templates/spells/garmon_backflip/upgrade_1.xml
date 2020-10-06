@@ -1,0 +1,10 @@
+<template>
+    <values>
+        <newSpeed>22</newSpeed>
+        <castDuration>0.364</castDuration>
+        <animationLoopDuration>0.728</animationLoopDuration>
+    </values>
+    <entity template="./template(speed=[newSpeed],[castDuration],[animationLoopDuration]){oldSpeed=[_speed]}">
+        <deltaDescription>Speed: [oldSpeed] -> [newSpeed]</deltaDescription>
+    </entity>
+</template>

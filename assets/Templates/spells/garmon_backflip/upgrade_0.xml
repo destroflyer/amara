@@ -1,0 +1,9 @@
+<template>
+    <values>
+        <newSpeed>20</newSpeed>
+        <newDistance>10</newDistance>
+    </values>
+    <entity template="./template(speed=[newSpeed],distance=[newDistance]){oldDistance=[_distance]}">
+        <deltaDescription>Distance: [oldDistance] -> [newDistance]</deltaDescription>
+    </entity>
+</template>

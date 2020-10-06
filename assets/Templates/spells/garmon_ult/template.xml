@@ -1,0 +1,88 @@
+<template>
+    <values>
+        <delay>0.9</delay>
+        <areaOfEffectImpact>false</areaOfEffectImpact>
+        <longRangeDistanceThreshhold>40</longRangeDistanceThreshhold>
+        <longRangeBonusDamage>0</longRangeBonusDamage>
+    </values>
+    <entity id="spell">
+        <name>Galaxy Blast</name>
+        <description>After gathering energy for [delay] seconds, Garmon fires a global energy missile in the target direction, dealing damage to enemies it passes through.</description>
+        <spellVisualisation>garmon_ult</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="4" height="40"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./projectile([areaOfEffectImpact],[longRangeDistanceThreshhold],[longRangeBonusDamage])</spawnTemplate>
+                                <spawnMovementSpeed>30</spawnMovementSpeed>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+            <!--play audio-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity id="audioStart">
+                                <audio>Sounds/sounds/spells/ganfaul_ult_cast_start.ogg</audio>
+                            </entity>
+                            <entity>
+                                <audio>Sounds/sounds/spells/ganfaul_ult_cast_end.ogg</audio>
+                                <audioSuccessor delay="[delay]">#audioStart</audioSuccessor>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelCast/>
+        <castCancelMovement/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>100</manaCost>
+            </entity>
+        </castCost>
+        <castAnimation>
+            <entity>
+                <name>spell8</name>
+                <loopDuration>2</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>90</baseCooldown>
+        <spellRequiredLevel>6</spellRequiredLevel>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <magicDamage>300 + (1 * source.abilityPower)</magicDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

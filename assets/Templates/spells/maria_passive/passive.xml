@@ -4,7 +4,7 @@
     </values>
     <entity id="passive">
         <name>Holy Sword</name>
-        <description>After hitting an ability, your first autoattack in the next [duration] seconds deals bonus magical damage.</description>
+        <description>After hitting an ability, your first autoattack in the next [duration] seconds deals bonus magic damage.</description>
         <spellVisualisation>maria_passive</spellVisualisation>
         <passiveAddedEffectTriggers>
             <!--add spell effects-->

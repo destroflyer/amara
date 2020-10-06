@@ -19,7 +19,13 @@
                             <entity>
                                 <name>Lasered</name>
                                 <description>This unit receives magic damage over time.</description>
-                                <buffIcon>spells/ganfaul_laser</buffIcon>
+                                <buffIcon>spells/garmon_laser</buffIcon>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusFlatMagicResistance if="[targetBonusMagicResistance]">[targetBonusMagicResistance]</bonusFlatMagicResistance>
+                                        <bonusPercentageWalkSpeed if="[targetBonusPercentageWalkSpeed]">[targetBonusPercentageWalkSpeed]</bonusPercentageWalkSpeed>
+                                    </entity>
+                                </continuousAttributes>
                                 <repeatingEffect interval="0.25">
                                     <entity>
                                         <magicDamage>60 + (0.25 * source.abilityPower)</magicDamage>

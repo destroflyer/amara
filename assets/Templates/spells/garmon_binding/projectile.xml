@@ -21,7 +21,7 @@
         <triggeredEffect>
             <entity>
                 <triggerCastedSpellEffects/>
-                <playAudio>
+                <playAudio clone="true">
                     <entity>
                         <audio>Sounds/sounds/spells/ganfaul_binding_hit.ogg</audio>
                         <audioVolume>0.75</audioVolume>
@@ -31,12 +31,39 @@
             </entity>
         </triggeredEffect>
         <triggerSource>#projectile</triggerSource>
-        <triggerOnce>true</triggerOnce>
     </entity>
     <!--remove projectile-->
     <entity>
         <collisionTrigger>#collisionRules</collisionTrigger>
         <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <addBuff duration="-1">
+                    <entity id="hitTargetsCountBuff">
+                        <name>Hit targets count</name>
+                    </entity>
+                </addBuff>
+                <addStacks stacks="1">#hitTargetsCountBuff</addStacks>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--remove when maximum targets reached-->
+    <entity id="maximumTargetsTrigger">
+        <stacksReachedTrigger>[maximumTargets]</stacksReachedTrigger>
+        <targetTarget/>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#hitTargetsCountBuff</triggerSource>
+        <triggerOnce>true</triggerOnce>
+    </entity>
+    <!--cleanup maximum targets trigger-->
+    <entity>
+        <removeTrigger/>
+        <customTarget>#maximumTargetsTrigger</customTarget>
         <triggeredEffect>
             <entity>
                 <removeEntity/>

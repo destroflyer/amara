@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <targetBonusPercentageWalkSpeed>-0.15</targetBonusPercentageWalkSpeed>
+    </values>
+    <entity template="./template([targetBonusPercentageWalkSpeed])">
+        <deltaDescription>Reduce the walk speed of targets in the laser by 15%.</deltaDescription>
+    </entity>
+</template>

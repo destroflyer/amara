@@ -1,0 +1,51 @@
+<template>
+    <values>
+        <castDuration>2.5</castDuration>
+        <targetBonusMagicResistance>0</targetBonusMagicResistance>
+        <targetBonusPercentageWalkSpeed>0</targetBonusPercentageWalkSpeed>
+    </values>
+    <entity id="spell">
+        <name>Milkyway Shot</name>
+        <description>Garmon channels for [castDuration] seconds and, after a small delay, shoots a laser in a straight line. Enemies in the lasers area will be damaged in small intervals.</description>
+        <spellVisualisation>garmon_laser</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="2.5" height="25"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn object-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object([targetBonusMagicResistance],[targetBonusPercentageWalkSpeed])</spawnTemplate>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>0.7</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelCast/>
+        <castCancelMovement/>
+        <castDuration>[castDuration]</castDuration>
+        <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>70</manaCost>
+            </entity>
+        </castCost>
+        <castAnimation>
+            <entity>
+                <name>spell11</name>
+                <loopDuration>2.5</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>12</baseCooldown>
+    </entity>
+</template>

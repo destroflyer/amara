@@ -80,10 +80,30 @@
             <entity template="spells/garmon_passive/passive"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/garmon_binding/base"/>
-            <entity template="spells/garmon_laser/base"/>
-            <entity template="spells/garmon_backflip/base"/>
-            <entity template="spells/garmon_ult/base"/>
+            <entity id="spell1" template="spells/garmon_binding/base">
+                <spellUpgrades>
+                    <entity id="spell1_Upgrade1" template="spells/garmon_binding/upgrade_0"/>
+                    <entity id="spell1_Upgrade2" template="spells/garmon_binding/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
+            <entity id="spell2" template="spells/garmon_laser/base">
+                <spellUpgrades>
+                    <entity id="spell2_Upgrade1" template="spells/garmon_laser/upgrade_0"/>
+                    <entity id="spell2_Upgrade2" template="spells/garmon_laser/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/garmon_backflip/base">
+                <spellUpgrades>
+                    <entity template="spells/garmon_backflip/upgrade_0"/>
+                    <entity template="spells/garmon_backflip/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
+            <entity id="spell4" template="spells/garmon_ult/base">
+                <spellUpgrades>
+                    <entity id="spell4_Upgrade1" template="spells/garmon_ult/upgrade_0"/>
+                    <entity id="spell4_Upgrade2" template="spells/garmon_ult/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

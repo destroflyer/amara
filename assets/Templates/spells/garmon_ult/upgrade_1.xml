@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <longRangeBonusDamage>300</longRangeBonusDamage>
+    </values>
+    <entity template="./template([longRangeBonusDamage]){longRangeDistanceThreshhold=[_longRangeDistanceThreshhold]}">
+        <deltaDescription>After travelling [longRangeDistanceThreshhold] units, the missile will deal an additional [longRangeBonusDamage] magic damage.</deltaDescription>
+    </entity>
+</template>

@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <areaOfEffectImpact>true</areaOfEffectImpact>
+    </values>
+    <entity template="./template([areaOfEffectImpact])">
+        <deltaDescription>Instead of dealing damage to each hit enemy, deal that damage in an area around it.</deltaDescription>
+    </entity>
+</template>

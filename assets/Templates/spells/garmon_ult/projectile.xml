@@ -12,14 +12,19 @@
     <!--trigger spell effects-->
     <entity>
         <collisionTrigger>
-            <entity>
+            <entity id="collisionRules">
                 <acceptEnemies/>
             </entity>
         </collisionTrigger>
         <targetTarget/>
         <triggeredEffect>
             <entity>
-                <triggerCastedSpellEffects/>
+                <triggerCastedSpellEffects if="![areaOfEffectImpact]"/>
+                <spawn if="[areaOfEffectImpact]">
+                    <entity>
+                        <spawnTemplate>./object</spawnTemplate>
+                    </entity>
+                </spawn>
                 <playAudio clone="true">
                     <entity>
                         <audio>Sounds/sounds/spells/ganfaul_ult_hit.ogg</audio>
@@ -27,6 +32,41 @@
                         <audioRemoveAfterPlaying/>
                     </entity>
                 </playAudio>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+    </entity>
+    <!--add bonus damage trigger after long range-->
+    <entity if="[longRangeBonusDamage]" id="longRangeBonusDamageTrigger">
+        <movementTrigger>[longRangeDistanceThreshhold]</movementTrigger>
+        <sourceTarget/>
+        <triggeredEffect>
+            <entity>
+                <addEffectTriggers>
+                    <!--bonus damage on collision-->
+                    <entity>
+                        <collisionTrigger>#collisionRules</collisionTrigger>
+                        <targetTarget/>
+                        <triggeredEffect>
+                            <entity>
+                                <magicDamage>[longRangeBonusDamage]</magicDamage>
+                            </entity>
+                        </triggeredEffect>
+                        <customCleanup/>
+                    </entity>
+                </addEffectTriggers>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>#projectile</triggerSource>
+        <triggerOnce>true</triggerOnce>
+    </entity>
+    <!--cleanup bonus damage trigger-->
+    <entity if="[longRangeBonusDamage]">
+        <removeTrigger/>
+        <customTarget>#longRangeBonusDamageTrigger</customTarget>
+        <triggeredEffect>
+            <entity>
+                <removeEntity/>
             </entity>
         </triggeredEffect>
         <triggerSource>#projectile</triggerSource>

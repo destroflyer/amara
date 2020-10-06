@@ -39,7 +39,7 @@
                         <addEffectTriggers>
                             <!--cancel on damage-->
                             <entity id="damageTakenTrigger">
-                                <damageTakenTrigger physicalDamage="true" magicalDamage="true" trueDamage="true"/>
+                                <damageTakenTrigger physicalDamage="true" magicDamage="true" trueDamage="true"/>
                                 <sourceCasterTarget/>
                                 <triggeredEffect>
                                     <entity>

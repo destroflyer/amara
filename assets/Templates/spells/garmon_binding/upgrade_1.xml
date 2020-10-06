@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <maximumTargets>2</maximumTargets>
+    </values>
+    <entity template="./template([maximumTargets])">
+        <deltaDescription>The projectile can hit a second target before being destroyed.</deltaDescription>
+    </entity>
+</template>

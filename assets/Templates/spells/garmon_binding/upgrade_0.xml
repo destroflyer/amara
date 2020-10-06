@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <newBindDuration>1.5</newBindDuration>
+    </values>
+    <entity template="./template(bindDuration=[newBindDuration]){oldBindDuration=[_bindDuration]}">
+        <deltaDescription>Bind duration: [oldBindDuration] -> [newBindDuration]</deltaDescription>
+    </entity>
+</template>
