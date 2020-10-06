@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <armorReduction>-10</armorReduction>
+    </values>
+    <entity template="./template([armorReduction])">
+        <deltaDescription>Reduce the targets armor by 10 for 3 seconds.</deltaDescription>
+    </entity>
+</template>

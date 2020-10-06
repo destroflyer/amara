@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <canCrit>true</canCrit>
+    </values>
+    <entity template="./template(angle=45,arrowsPerWave=5,[canCrit])">
+        <deltaDescription>The arrows can crit.</deltaDescription>
+    </entity>
+</template>

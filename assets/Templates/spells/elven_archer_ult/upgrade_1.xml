@@ -1,0 +1,9 @@
+<template>
+    <values>
+        <angle>63</angle>
+        <arrowsPerWave>7</arrowsPerWave>
+    </values>
+    <entity template="./template([angle],[arrowsPerWave])">
+        <deltaDescription>Angle: 45 -> [angle], Arrows per Wave: 5 -> [arrowsPerWave]</deltaDescription>
+    </entity>
+</template>

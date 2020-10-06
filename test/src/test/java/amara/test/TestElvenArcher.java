@@ -56,7 +56,7 @@ public class TestElvenArcher extends CommandingPlayerTest {
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(1);
         assertTrue(hasBuff(targetDummy, NAME_Q_SLOW_BUFF));
-        assertEquals(933.3334f, getHealth(targetDummy), EPSILON);
+        assertEquals(946.6667f, getHealth(targetDummy), EPSILON);
         queueCommand(new StopCommand());
         tickSeconds(2);
         assertFalse(hasBuff(targetDummy, NAME_Q_SLOW_BUFF));
@@ -77,7 +77,7 @@ public class TestElvenArcher extends CommandingPlayerTest {
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_W, new Vector2f(1, 0)));
         tickSeconds(1);
         assertTrue(hasBuff(targetDummy, NAME_Q_SLOW_BUFF));
-        assertEquals(866.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(880, getHealth(targetDummy), EPSILON);
         tickSeconds(2);
         assertFalse(hasBuff(targetDummy, NAME_Q_SLOW_BUFF));
         tickSeconds(1);
@@ -101,8 +101,8 @@ public class TestElvenArcher extends CommandingPlayerTest {
         assertTrue(hasBuff(character, NAME_Q_ATTACK_BUFF));
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_R, new Vector2f(1, 0)));
         tickSeconds(4);
-        assertEquals(8000.0166f, getHealth(targetDummy1), EPSILON);
-        assertEquals(8000.0166f, getHealth(targetDummy2), EPSILON);
+        assertEquals(8400.01f, getHealth(targetDummy1), EPSILON);
+        assertEquals(8400.01f, getHealth(targetDummy2), EPSILON);
         assertTrue(hasBuff(targetDummy1, NAME_Q_SLOW_BUFF));
         assertTrue(hasBuff(targetDummy2, NAME_Q_SLOW_BUFF));
         tickSeconds(1);
@@ -132,13 +132,9 @@ public class TestElvenArcher extends CommandingPlayerTest {
         int targetDummy = createTargetDummy(new Vector2f(20, 10));
         onLogicStart();
 
-        assertEquals(50, getArmor(targetDummy), EPSILON);
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_W, new Vector2f(1, 0)));
         tickSeconds(1);
         assertEquals(900, getHealth(targetDummy), EPSILON);
-        assertEquals(40, getArmor(targetDummy), EPSILON);
-        tickSeconds(3);
-        assertEquals(50, getArmor(targetDummy), EPSILON);
 
         onLogicEnd(false, false);
     }

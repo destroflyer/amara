@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <nextAutoAttackPhysicalDamage>70</nextAutoAttackPhysicalDamage>
+    </values>
+    <entity template="./template([autoattack],[nextAutoAttackPhysicalDamage])">
+        <deltaDescription>After rolling, your next basic attack deals additional physical damage.</deltaDescription>
+    </entity>
+</template>

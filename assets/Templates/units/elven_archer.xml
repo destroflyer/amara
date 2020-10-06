@@ -80,10 +80,30 @@
             <entity template="spells/elven_archer_passive/passive"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/elven_archer_buff/base(#autoattack,#spell2,#spell4)"/>
-            <entity id="spell2" template="spells/elven_archer_arrow/base"/>
-            <entity template="spells/elven_archer_roll/base(#autoattack)"/>
-            <entity id="spell4" template="spells/elven_archer_ult/base"/>
+            <entity template="spells/elven_archer_buff/base(#autoattack,#spell2,#spell2_Upgrade1,#spell2_Upgrade2,#spell4,#spell4_Upgrade1,#spell4_Upgrade2)">
+                <spellUpgrades>
+                    <entity template="spells/elven_archer_buff/upgrade_0(#autoattack,#spell2,#spell2_Upgrade1,#spell2_Upgrade2,#spell4,#spell4_Upgrade1,#spell4_Upgrade2)"/>
+                    <entity template="spells/elven_archer_buff/upgrade_1(#autoattack,#spell2,#spell2_Upgrade1,#spell2_Upgrade2,#spell4,#spell4_Upgrade1,#spell4_Upgrade2)"/>
+                </spellUpgrades>
+            </entity>
+            <entity id="spell2" template="spells/elven_archer_arrow/base">
+                <spellUpgrades>
+                    <entity id="spell2_Upgrade1" template="spells/elven_archer_arrow/upgrade_0"/>
+                    <entity id="spell2_Upgrade2" template="spells/elven_archer_arrow/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/elven_archer_roll/base(#autoattack)">
+                <spellUpgrades>
+                    <entity template="spells/elven_archer_roll/upgrade_0(#autoattack)"/>
+                    <entity template="spells/elven_archer_roll/upgrade_1(#autoattack)"/>
+                </spellUpgrades>
+            </entity>
+            <entity id="spell4" template="spells/elven_archer_ult/base">
+                <spellUpgrades>
+                    <entity id="spell4_Upgrade1" template="spells/elven_archer_ult/upgrade_0"/>
+                    <entity id="spell4_Upgrade2" template="spells/elven_archer_ult/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

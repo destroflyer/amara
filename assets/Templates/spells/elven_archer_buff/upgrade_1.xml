@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <slow>-0.4</slow>
+    </values>
+    <entity template="./template([autoattack],[spell2],[spell2_Upgrade1],[spell2_Upgrade2],[spell4],[spell4_Upgrade1],[spell4_Upgrade2],[slow])">
+        <deltaDescription>Slow: 30% -> 40%</deltaDescription>
+    </entity>
+</template>

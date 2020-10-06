@@ -360,9 +360,10 @@ public class CustomGameTemplates {
                 }
                 ConvexShape convexShape = new SimpleConvexPolygon(outline);
                 entityWrapper.setComponent(new HitboxComponent(convexShape));
-            } else if (template.getName().equals("spells/elven_archer_ult/base")) {
+            } else if (template.getName().equals("spells/elven_archer_ult/template")) {
                 int waves = 15;
-                int arrowsPerWave = 5;
+                int arrowsPerWave = template.getIntegerInput("arrowsPerWave");
+                int angle = template.getIntegerInput("angle");
                 int[] newInstantEffectTriggers = new int[waves * arrowsPerWave];
                 int i = 0;
                 for (int wave = 0; wave < waves; wave++) {
@@ -374,7 +375,7 @@ public class CustomGameTemplates {
                         entityWorld.setComponent(spawnInformation, new SpawnTemplateComponent("spells/elven_archer_ult/projectile"));
                         entityWorld.setComponent(spawnInformation, new SpawnMovementSpeedComponent(20));
                         // -22.5 to +22.5
-                        entityWorld.setComponent(spawnInformation, new SpawnRelativeDirectionComponent((-0.5f + (((float) arrowInWave) / (arrowsPerWave - 1))) * 45));
+                        entityWorld.setComponent(spawnInformation, new SpawnRelativeDirectionComponent((-0.5f + (((float) arrowInWave) / (arrowsPerWave - 1))) * angle));
                         entityWorld.setComponent(effect, new SpawnComponent(spawnInformation));
                         entityWorld.setComponent(effectTrigger, new TriggeredEffectComponent(effect));
                         entityWorld.setComponent(effectTrigger, new TriggerSourceComponent(entity));

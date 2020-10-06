@@ -1,0 +1,79 @@
+<template>
+    <values>
+        <duration>3</duration>
+        <canCrit>false</canCrit>
+    </values>
+    <entity id="spell">
+        <name>Rapid Fire</name>
+        <description>Shoot 15 waves of each [arrowsPerWave] arrows in a [angle] degree cone, with each arrow dealing physical damage to the first enemy hit.</description>
+        <spellVisualisation>elven_archer_ult</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="2" height="19.5"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--start audio-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <playAudio>
+                            <entity id="audio">
+                                <audio>Sounds/sounds/spells/elven_archer_ult_cast_loop.ogg</audio>
+                                <audioLoop/>
+                                <audioVolume>4</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--stop audio-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <stopAudio>#audio</stopAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[duration]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelCast/>
+        <castCancelMovement/>
+        <castDuration>[duration]</castDuration>
+        <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>100</manaCost>
+            </entity>
+        </castCost>
+        <castAnimation additionalLoops="14">
+            <entity>
+                <name>draw_arrow</name>
+                <loopDuration>0.2</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>50 + (0.05 * source.abilityPower)</physicalDamage>
+                        <canCrit if="[canCrit]"/>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <newBaseDamage>45</newBaseDamage>
+    </values>
+    <entity template="./template([autoattack],[spell2],[spell2_Upgrade1],[spell2_Upgrade2],[spell4],[spell4_Upgrade1],[spell4_Upgrade2],baseDamage=[newBaseDamage]){oldBaseDamage=[_baseDamage]}">
+        <deltaDescription>Base damage: [oldBaseDamage] -> [newBaseDamage]</deltaDescription>
+    </entity>
+</template>

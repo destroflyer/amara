@@ -1,0 +1,85 @@
+<template>
+    <values>
+        <delay>0.18</delay>
+        <projectileSpeed>25</projectileSpeed>
+        <armorReduction>0</armorReduction>
+    </values>
+    <entity id="spell">
+        <name>Piercing Shot</name>
+        <description>Shoot a long-range arrow, which deals physical damage to the first enemy hit.</description>
+        <spellVisualisation>elven_archer_arrow</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="2" height="19.5"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./projectile</spawnTemplate>
+                                <spawnMovementSpeed>[projectileSpeed]</spawnMovementSpeed>
+                            </entity>
+                        </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/elven_archer_arrow_cast.ogg</audio>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+                <triggerDelay>[delay]</triggerDelay>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelCast/>
+        <castCancelMovement/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>50</manaCost>
+            </entity>
+        </castCost>
+        <castAnimation>
+            <entity>
+                <name>shoot_recoil</name>
+                <loopDuration>0.75</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>150 + (0.7 * source.abilityPower)</physicalDamage>
+                        <addBuff if="[armorReduction]" duration="3">
+                            <entity>
+                                <name>Pierced</name>
+                                <description>This unit has decreased armor.</description>
+                                <buffIcon>spells/elven_archer_arrow</buffIcon>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusFlatArmor>[armorReduction]</bonusFlatArmor>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <bonusWalkSpeed>0.3</bonusWalkSpeed>
+    </values>
+    <entity template="./template([autoattack],[bonusWalkSpeed])">
+        <deltaDescription>After rolling, gain 30% increased walk speed for 1 seconds.</deltaDescription>
+    </entity>
+</template>
