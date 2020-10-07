@@ -147,11 +147,19 @@ public class ComponentsRegistrator_Generate {
                                     wasHandled = true;
                                 }
                                 else if(parameterType.equals("String...") || parameterType.equals("String[]")){
-                                    String parseMethodName = (parameterName.endsWith("Templates")?"parseTemplateText":"parseValue");
+                                    String parseMethodName;
+                                    String separator;
+                                    if (parameterName.endsWith("Templates")) {
+                                        parseMethodName = "parseTemplateText";
+                                        separator = "\\\\|";
+                                    } else {
+                                        parseMethodName = "parseValue";
+                                        separator = LIST_SEPERATOR;
+                                    }
                                     code += "                String[] " + parameterName + " = new String[0];\n";
                                     code += "                String " + parameterName + "Text = " + textAccessCode + ";\n";
                                     code += "                if(" + parameterName + "Text != null){\n";
-                                    code += "                    " + parameterName + " = " + parameterName + "Text.split(\"" + LIST_SEPERATOR + "\");\n";
+                                    code += "                    " + parameterName + " = " + parameterName + "Text.split(\"" + separator + "\");\n";
                                     code += "                    for(int i=0;i<" + parameterName + ".length;i++){\n";
                                     code += "                        " + parameterName + "[i] = xmlTemplateManager." + parseMethodName + "(entityWorld, " + parameterName + "[i]);\n";
                                     code += "                    }\n";

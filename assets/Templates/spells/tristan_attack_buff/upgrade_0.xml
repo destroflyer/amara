@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <repeatingMagicDamage>30</repeatingMagicDamage>
+    </values>
+    <entity template="./template([autoattack],[repeatingMagicDamage])">
+        <deltaDescription>The target receives 120 magic damage over the duration of the slow.</deltaDescription>
+    </entity>
+</template>

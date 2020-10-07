@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <bonusDamageOnNonCharacters>40 + (0.2 * source.abilityPower)</bonusDamageOnNonCharacters>
+    </values>
+    <entity template="./template([unit],[bonusDamageOnNonCharacters])">
+        <deltaDescription>Non-characters receive additional damage.</deltaDescription>
+    </entity>
+</template>

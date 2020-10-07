@@ -1973,7 +1973,7 @@ public class ComponentsRegistrator{
                 String[] effectTriggerTemplates = new String[0];
                 String effectTriggerTemplatesText = element.getText();
                 if(effectTriggerTemplatesText != null){
-                    effectTriggerTemplates = effectTriggerTemplatesText.split(",");
+                    effectTriggerTemplates = effectTriggerTemplatesText.split("\\|");
                     for(int i=0;i<effectTriggerTemplates.length;i++){
                         effectTriggerTemplates[i] = xmlTemplateManager.parseTemplateText(entityWorld, effectTriggerTemplates[i]);
                     }

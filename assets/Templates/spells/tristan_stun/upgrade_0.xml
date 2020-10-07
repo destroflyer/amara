@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <newStunDuration>1.5</newStunDuration>
+    </values>
+    <entity template="./template(stunDuration=[newStunDuration]){oldStunDuration=[_stunDuration]}">
+        <deltaDescription>Stun duration: [oldStunDuration] -> [newStunDuration]</deltaDescription>
+    </entity>
+</template>

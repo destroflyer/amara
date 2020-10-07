@@ -5,7 +5,13 @@
         <triggeredEffect>
             <entity>
                 <physicalDamage>100 + (0.3 * source.attackDamage)</physicalDamage>
-                <addStun>[stunDuration]</addStun>
+                <addStun if="[stunDuration]">[stunDuration]</addStun>
+                <addKnockup if="[knockupDuration]">
+                    <entity>
+                        <knockupDuration>[knockupDuration]</knockupDuration>
+                        <knockupHeight>7</knockupHeight>
+                    </entity>
+                </addKnockup>
                 <removeEffectTriggers removeEntities="true">[newEffectTrigger1]</removeEffectTriggers>
                 <playAudio>
                     <entity>

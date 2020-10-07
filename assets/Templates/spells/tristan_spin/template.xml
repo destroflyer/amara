@@ -1,0 +1,103 @@
+<template>
+    <values>
+        <duration>0.4</duration>
+        <bonusDamageOnNonCharacters>0</bonusDamageOnNonCharacters>
+        <healOnCharacters>0</healOnCharacters>
+    </values>
+    <entity id="spell">
+        <name>Spin</name>
+        <description>Spins your sword in a circle, dealing damage to all enemies.</description>
+        <spellVisualisation>tristan_spin</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <circularIndicator radius="6"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn object, add visual buff-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object([unit])</spawnTemplate>
+                            </entity>
+                        </spawn>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/tristan_spin_cast.ogg</audio>
+                                <audioVolume>7</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castDuration>[duration]</castDuration>
+        <castCancelCast/>
+        <castCost>
+            <entity>
+                <manaCost>50</manaCost>
+            </entity>
+        </castCost>
+        <castAnimation>
+            <entity>
+                <name>spin</name>
+                <loopDuration>[duration]</loopDuration>
+            </entity>
+        </castAnimation>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--damage-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>80 + (0.5 * source.abilityPower)</physicalDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--bonus damage on non characters-->
+            <entity if="[bonusDamageOnNonCharacters]">
+                <targetTarget/>
+                <triggerConditions>
+                    <entity>
+                        <targetTarget/>
+                        <notCondition/>
+                        <isCharacterCondition/>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>[bonusDamageOnNonCharacters]</physicalDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--heal on characters-->
+            <entity if="[healOnCharacters]">
+                <sourceCasterTarget/>
+                <triggerConditions>
+                    <entity>
+                        <targetTarget/>
+                        <isCharacterCondition/>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <heal>[healOnCharacters]</heal>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

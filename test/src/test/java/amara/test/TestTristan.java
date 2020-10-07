@@ -60,15 +60,12 @@ public class TestTristan extends CommandingPlayerTest {
     public void testQ_Hit() {
         int targetDummy1 = createTargetDummy(new Vector2f(13, 10));
         int targetDummy2 = createTargetDummy(new Vector2f(10, 13));
-        entityWorld.setComponent(targetDummy2, new IsCharacterComponent());
-        entityWorld.setComponent(character, new HealthComponent(300));
         onLogicStart();
 
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
         tickSeconds(1);
         assertEquals(946.6667f, getHealth(targetDummy1), EPSILON);
         assertEquals(946.6667f, getHealth(targetDummy2), EPSILON);
-        assertEquals(401.0331f, getHealth(character), EPSILON);
 
         onLogicEnd(false, false);
     }
@@ -161,13 +158,13 @@ public class TestTristan extends CommandingPlayerTest {
 
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_R, new Vector2f(1, 0)));
         tickSeconds(1);
-        assertEquals(923.3333f, getHealth(targetDummy1), EPSILON);
+        assertEquals(890, getHealth(targetDummy1), EPSILON);
         assertEquals(20, getX(targetDummy1), EPSILON);
         assertEquals(5, getY(targetDummy1), EPSILON);
-        assertEquals(923.3333f, getHealth(targetDummy2), EPSILON);
+        assertEquals(890, getHealth(targetDummy2), EPSILON);
         assertEquals(25, getX(targetDummy2), EPSILON);
         assertEquals(10, getY(targetDummy2), EPSILON);
-        assertEquals(923.3333f, getHealth(targetDummy3), EPSILON);
+        assertEquals(890, getHealth(targetDummy3), EPSILON);
         assertEquals(20, getX(targetDummy3), EPSILON);
         assertEquals(15, getY(targetDummy3), EPSILON);
 

@@ -1,0 +1,7 @@
+<skin>
+    <model>
+        <modifiers>
+            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Tristan_Ult_Radius_8</modifier>
+        </modifiers>
+    </model>
+</skin>

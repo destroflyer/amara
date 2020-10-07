@@ -9,9 +9,14 @@ import com.jme3.scene.Geometry;
 
 public class ModelModifier_Tristan_Ult extends ModelModifier {
 
+    public ModelModifier_Tristan_Ult(float radius) {
+        this.radius = radius;
+    }
+    private float radius;
+
     @Override
     public void modify(RegisteredModel registeredModel) {
-        Geometry geometry = GroundTextures.create("Models/tristan_ult/resources/diffuse.png", -6, 6, 12, 6, RenderState.BlendMode.AlphaAdditive);
+        Geometry geometry = GroundTextures.create("Models/tristan_ult/resources/diffuse.png", (-1 * radius), radius, (2 * radius), radius, RenderState.BlendMode.AlphaAdditive);
         geometry.addControl(new FadeOutControl(1));
         registeredModel.getNode().attachChild(geometry);
     }

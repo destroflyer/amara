@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <targetBonusPercentageWalkSpeed>-0.8</targetBonusPercentageWalkSpeed>
+    </values>
+    <entity template="./template([autoattack],[targetBonusPercentageWalkSpeed])">
+        <deltaDescription>Slow: 50% -> 80%</deltaDescription>
+    </entity>
+</template>

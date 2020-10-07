@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <castShield>250</castShield>
+    </values>
+    <entity template="./template([castShield])">
+        <deltaDescription>Gain a [castShield] health shield while casting.</deltaDescription>
+    </entity>
+</template>

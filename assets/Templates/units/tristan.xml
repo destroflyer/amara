@@ -80,10 +80,30 @@
             <entity template="spells/tristan_passive/passive"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/tristan_spin/base(#unit)"/>
-            <entity template="spells/tristan_attack_buff/base(#autoattack)"/>
-            <entity template="spells/tristan_stun/base"/>
-            <entity template="spells/tristan_ult/base"/>
+            <entity template="spells/tristan_spin/base(#unit)">
+                <spellUpgrades>
+                    <entity template="spells/tristan_spin/upgrade_0(#unit)"/>
+                    <entity template="spells/tristan_spin/upgrade_1(#unit)"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/tristan_attack_buff/base(#autoattack)">
+                <spellUpgrades>
+                    <entity template="spells/tristan_attack_buff/upgrade_0(#autoattack)"/>
+                    <entity template="spells/tristan_attack_buff/upgrade_1(#autoattack)"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/tristan_stun/base">
+                <spellUpgrades>
+                    <entity template="spells/tristan_stun/upgrade_0"/>
+                    <entity template="spells/tristan_stun/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/tristan_ult/base">
+                <spellUpgrades>
+                    <entity template="spells/tristan_ult/upgrade_0"/>
+                    <entity template="spells/tristan_ult/upgrade_1"/>
+                </spellUpgrades>
+            </entity>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

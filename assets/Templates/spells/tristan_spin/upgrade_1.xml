@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <healOnCharacters>100 + (0.1 * source.abilityPower)</healOnCharacters>
+    </values>
+    <entity template="./template([unit],[healOnCharacters])">
+        <deltaDescription>You heal for each character hit.</deltaDescription>
+    </entity>
+</template>
