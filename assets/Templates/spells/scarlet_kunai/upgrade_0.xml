@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <multipleProjectiles>true</multipleProjectiles>
+    </values>
+    <entity template="./template([markBuff],[multipleProjectiles])">
+        <deltaDescription>Throw three kunais in a small arc.</deltaDescription>
+    </entity>
+</template>

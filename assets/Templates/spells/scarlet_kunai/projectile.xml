@@ -21,7 +21,7 @@
         <triggeredEffect>
             <entity>
                 <triggerCastedSpellEffects/>
-                <playAudio>
+                <playAudio clone="true">
                     <entity>
                         <audio>Sounds/sounds/spells/scarlet_kunai_hit.ogg</audio>
                         <audioVolume>1.5</audioVolume>
@@ -31,10 +31,10 @@
             </entity>
         </triggeredEffect>
         <triggerSource>#projectile</triggerSource>
-        <triggerOnce>true</triggerOnce>
+        <triggerOnce if="![multipleTargets]">true</triggerOnce>
     </entity>
     <!--remove projectile-->
-    <entity>
+    <entity if="![multipleTargets]">
         <collisionTrigger>#collisionRules</collisionTrigger>
         <sourceTarget/>
         <triggeredEffect>

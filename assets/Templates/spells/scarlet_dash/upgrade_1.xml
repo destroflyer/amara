@@ -1,0 +1,5 @@
+<template>
+    <entity template="./template([markBuff],[unit],resetOnCharacterKill=true)">
+        <deltaDescription>Killing a character resets this abilities cooldown.</deltaDescription>
+    </entity>
+</template>

@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package amara.libraries.entitysystem.templates;
 
 import java.util.LinkedList;
@@ -11,10 +6,6 @@ import amara.core.Util;
 import amara.libraries.entitysystem.EntityWorld;
 import org.jdom2.Element;
 
-/**
- *
- * @author Carl
- */
 public abstract class XMLComponentConstructor<T>{
 
     public XMLComponentConstructor(String elementName){
@@ -29,23 +20,25 @@ public abstract class XMLComponentConstructor<T>{
 
     public abstract T construct(EntityWorld entityWorld, Element element);
 
-    protected int[] createChildEntities(EntityWorld entityWorld, Element element, int offset, String parameterName){
+    protected int[] createChildEntities(EntityWorld entityWorld, Element element, int offset, String parameterName) {
         LinkedList<Integer> childEntities = new LinkedList<>();
-        List children = element.getChildren();
-        if(children.size() > 0){
-            for(int i=0;i<children.size();i++){
-                childEntities.add(xmlTemplateManager.createAndLoadEntity(entityWorld, (Element) children.get(i)));
+        List<Element> children = element.getChildren();
+        if (children.size() > 0) {
+            for (Element child : children) {
+                int childEntity = xmlTemplateManager.createAndLoadEntity(entityWorld, child);
+                if (childEntity != -1) {
+                    childEntities.add(childEntity);
+                }
             }
-        }
-        else if(element.getText().length() > 0){
+        } else if (element.getText().length() > 0) {
             String[] textParts = element.getText().split(",");
-            for(String textPart : textParts){
+            for (String textPart : textParts) {
                 childEntities.add(parseEntity(entityWorld, textPart));
             }
         }
         int parameterIndex = 0;
         String attributeValue;
-        while((attributeValue = element.getAttributeValue(parameterName + parameterIndex)) != null){
+        while ((attributeValue = element.getAttributeValue(parameterName + parameterIndex)) != null) {
             childEntities.add(parseEntity(entityWorld, attributeValue));
             parameterIndex++;
         }

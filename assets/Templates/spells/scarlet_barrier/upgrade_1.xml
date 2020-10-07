@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <newDuration>3</newDuration>
+    </values>
+    <entity template="./template([unit],[markBuff],duration=[newDuration]){oldDuration=[_duration]}">
+        <deltaDescription>Duration: [oldDuration] -> [newDuration]</deltaDescription>
+    </entity>
+</template>

@@ -1,0 +1,148 @@
+<template>
+    <values>
+        <targetBonusPercentageWalkSpeed>0</targetBonusPercentageWalkSpeed>
+        <resetOnMarkedTargets>false</resetOnMarkedTargets>
+        <resetPerTargetBlockDuration>3</resetPerTargetBlockDuration>
+        <resetOnCharacterKill>false</resetOnCharacterKill>
+    </values>
+    <entity id="spell">
+        <name>Shadow Slice</name>
+        <description>Dash a fixed distance in the target direction, dealing physical damage to all enemies hit.</description>
+        <spellVisualisation>scarlet_dash</spellVisualisation>
+        <instantEffectTriggers>
+            <!--trigger spell effects-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeIntersectionPushes/>
+                        <removeIntersectionPushed/>
+                        <move>
+                            <entity>
+                                <targetedMovementDirection/>
+                                <movementSpeed>50</movementSpeed>
+                                <movementAnimation>
+                                    <entity>
+                                        <name>ninja_run</name>
+                                        <loopDuration>999</loopDuration>
+                                    </entity>
+                                </movementAnimation>
+                                <distanceLimit>11</distanceLimit>
+                            </entity>
+                        </move>
+                        <addEffectTriggers>
+                            <!--collision target effect-->
+                            <entity id="targetCollisionTrigger">
+                                <collisionTrigger>
+                                    <entity>
+                                        <acceptEnemies/>
+                                    </entity>
+                                </collisionTrigger>
+                                <targetTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <triggerSpellEffects>#spell</triggerSpellEffects>
+                                        <addBuff if="[resetOnMarkedTargets]" duration="[resetPerTargetBlockDuration]">#alreadyResettedTargetBuff</addBuff>
+                                    </entity>
+                                </triggeredEffect>
+                            </entity>
+                            <!--reset cooldown on passive mark collision-->
+                            <entity if="[resetOnMarkedTargets]" id="resetOnMarkedTargetsTrigger">
+                                <collisionTrigger>
+                                    <entity>
+                                        <acceptEnemies/>
+                                    </entity>
+                                </collisionTrigger>
+                                <customTarget>#spell</customTarget>
+                                <triggerConditions>
+                                    <entity>
+                                        <targetTarget/>
+                                        <hasBuffCondition>[markBuff]</hasBuffCondition>
+                                    </entity>
+                                    <entity>
+                                        <targetTarget/>
+                                        <notCondition/>
+                                        <hasBuffCondition>#alreadyResettedTargetBuff</hasBuffCondition>
+                                    </entity>
+                                </triggerConditions>
+                                <triggeredEffect>
+                                    <entity>
+                                        <resetCooldown/>
+                                    </entity>
+                                </triggeredEffect>
+                            </entity>
+                            <!--remove collision trigger-->
+                            <entity>
+                                <targetReachedTrigger/>
+                                <sourceTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <addIntersectionPushes/>
+                                        <addIntersectionPushed/>
+                                        <removeEffectTriggers>
+                                            <entity id="targetCollisionTrigger"/>
+                                            <entity if="[resetOnMarkedTargets]" id="resetOnMarkedTargetsTrigger"/>
+                                        </removeEffectTriggers>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                        </addEffectTriggers>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/scarlet_dash_cast.ogg</audio>
+                                <audioVolume>1.5</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelCast/>
+        <castCancelMovement/>
+        <castTurnToTarget/>
+        <castCost>
+            <entity>
+                <manaCost>60</manaCost>
+            </entity>
+        </castCost>
+        <baseCooldown>10</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>150 + (0.7 * source.abilityPower)</physicalDamage>
+                        <addBuff duration="3">[markBuff]</addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+    <!--reset on character kill-->
+    <entity if="[resetOnCharacterKill]">
+        <killTrigger/>
+        <customTarget>#spell</customTarget>
+        <triggerConditions>
+            <entity>
+                <targetTarget/>
+                <isCharacterCondition/>
+            </entity>
+        </triggerConditions>
+        <triggeredEffect>
+            <entity>
+                <resetCooldown/>
+            </entity>
+        </triggeredEffect>
+        <triggerSource>[unit]</triggerSource>
+    </entity>
+</template>

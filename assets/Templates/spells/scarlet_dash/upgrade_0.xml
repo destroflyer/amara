@@ -1,0 +1,5 @@
+<template>
+    <entity template="./template([markBuff],resetOnMarkedTargets=true){resetPerTargetBlockDuration=[_resetPerTargetBlockDuration]}">
+        <deltaDescription>Dashing through a marked target resets this abilities cooldown - This reset can not occur for the same target during the next [resetPerTargetBlockDuration] seconds again.</deltaDescription>
+    </entity>
+</template>

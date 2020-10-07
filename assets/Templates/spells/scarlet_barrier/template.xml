@@ -1,0 +1,79 @@
+<template>
+    <values>
+        <name>Kunai Vortex</name>
+        <duration>2</duration>
+        <bonusPercentageWalkSpeed>0</bonusPercentageWalkSpeed>
+    </values>
+    <entity id="spell">
+        <name>[name]</name>
+        <description>Summon circular rotating kunais around you, which destroy enemy projectiles.</description>
+        <spellVisualisation>scarlet_barrier</spellVisualisation>
+        <instantEffectTriggers>
+            <!--spawn object, play audio-->
+            <entity>
+                <sourceCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object([unit],[duration])</spawnTemplate>
+                            </entity>
+                        </spawn>
+                        <addBuff if="[bonusPercentageWalkSpeed]" duration="[duration]">
+                            <entity>
+                                <name>In the Vortex</name>
+                                <description>This unit has increased walk speed.</description>
+                                <buffIcon>spells/scarlet_barrier</buffIcon>
+                                <continuousAttributes>
+                                    <entity>
+                                        <bonusPercentageWalkSpeed>[bonusPercentageWalkSpeed]</bonusPercentageWalkSpeed>
+                                    </entity>
+                                </continuousAttributes>
+                            </entity>
+                        </addBuff>
+                        <playAudio>
+                            <entity>
+                                <audio>Sounds/sounds/spells/scarlet_barrier_cast_[duration].ogg</audio>
+                                <audioVolume>2</audioVolume>
+                            </entity>
+                        </playAudio>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>selfcast</castType>
+        <castCost>
+            <entity>
+                <manaCost>80</manaCost>
+            </entity>
+        </castCost>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--remove target projectile-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <removeEntity/>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--add mark buff to target projectile caster-->
+            <entity>
+                <targetCasterTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <addBuff duration="3">[markBuff]</addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

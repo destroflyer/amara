@@ -122,7 +122,7 @@ public class TestScarlet extends CommandingPlayerTest {
     }
 
     @Test
-    public void testE_Hit_NoReset() {
+    public void testE_Hit() {
         int targetDummy1 = createTargetDummy(new Vector2f(14, 10));
         int targetDummy2 = createTargetDummy(new Vector2f(18, 10));
         onLogicStart();
@@ -135,30 +135,9 @@ public class TestScarlet extends CommandingPlayerTest {
         assertEquals(900, getHealth(targetDummy2), EPSILON);
         assertTrue(hasBuff(targetDummy1, NAME_PASSIVE_BUFF));
         assertTrue(hasBuff(targetDummy2, NAME_PASSIVE_BUFF));
-        assertNotEquals(0, getRemainingCooldown(character, SPELL_INDEX_E), EPSILON);
         tickSeconds(5);
         assertFalse(hasBuff(targetDummy1, NAME_PASSIVE_BUFF));
         assertFalse(hasBuff(targetDummy2, NAME_PASSIVE_BUFF));
-
-        onLogicEnd(false, false);
-    }
-
-    @Test
-    public void testE_Hit_Reset() {
-        int targetDummy = createTargetDummy(new Vector2f(14, 10));
-        onLogicStart();
-
-        queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_Q, new Vector2f(1, 0)));
-        tickSeconds(1);
-        queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_E, new Vector2f(1, 0)));
-        tickSeconds(1);
-        assertEquals(21, getX(character), EPSILON);
-        assertEquals(10, getY(character), EPSILON);
-        assertEquals(840, getHealth(targetDummy), EPSILON);
-        assertEquals(0, getRemainingCooldown(character, SPELL_INDEX_E), EPSILON);
-        assertTrue(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
-        tickSeconds(5);
-        assertFalse(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
 
         onLogicEnd(false, false);
     }
@@ -178,7 +157,7 @@ public class TestScarlet extends CommandingPlayerTest {
     }
 
     @Test
-    public void testR_Hit_ExecuteAndResetE() {
+    public void testR_Hit_Execute() {
         int targetDummy1 = createTargetDummy(new Vector2f(23, 8));
         int targetDummy2 = createTargetDummy(new Vector2f(23, 12));
         int targetDummyBaseAttributes1 = entityWorld.getComponent(targetDummy1, BaseAttributesComponent.class).getBonusAttributesEntity();
@@ -200,13 +179,12 @@ public class TestScarlet extends CommandingPlayerTest {
         tickSeconds(1);
         assertFalse(isAlive(targetDummy1));
         assertFalse(isAlive(targetDummy2));
-        assertEquals(0, getRemainingCooldown(character, SPELL_INDEX_E), EPSILON);
 
         onLogicEnd(true, false);
     }
 
     @Test
-    public void testR_Hit_NoExecuteAndResetE() {
+    public void testR_Hit_NoExecute() {
         int targetDummy1 = createTargetDummy(new Vector2f(13, 10));
         int targetDummy2 = createTargetDummy(new Vector2f(16, 10));
         onLogicStart();

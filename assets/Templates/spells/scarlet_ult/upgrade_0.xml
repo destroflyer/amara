@@ -1,0 +1,8 @@
+<template>
+    <values>
+        <markedStunDuration>1</markedStunDuration>
+    </values>
+    <entity template="./template([markBuff],[markedStunDuration])">
+        <deltaDescription>Stun marked targets for [markedStunDuration] second.</deltaDescription>
+    </entity>
+</template>

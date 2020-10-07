@@ -7,7 +7,7 @@
         </hitbox>
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
-        <lifetime>2</lifetime>
+        <lifetime>[duration]</lifetime>
     </entity>
     <!--trigger spell effects-->
     <entity>

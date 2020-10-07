@@ -1,0 +1,5 @@
+<template>
+    <entity template="./template([markBuff],resetOnExecute=true)">
+        <deltaDescription>Executing a character with this spell resets its cooldown.</deltaDescription>
+    </entity>
+</template>

@@ -1,0 +1,111 @@
+<template>
+    <values>
+        <delay>0.1</delay>
+        <markedStunDuration>0</markedStunDuration>
+        <resetOnExecute>false</resetOnExecute>
+    </values>
+    <entity id="spell">
+        <name>Assassins Retribution</name>
+        <description>Deals physical damage to enemies in front of you. If a target is marked and below 25% of their maximum health, execute it.</description>
+        <spellVisualisation>scarlet_ult</spellVisualisation>
+        <spellIndicator>
+            <entity>
+                <linearIndicator width="2" height="11"/>
+            </entity>
+        </spellIndicator>
+        <instantEffectTriggers>
+            <!--spawn object-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <spawn>
+                            <entity>
+                                <spawnTemplate>./object</spawnTemplate>
+                            </entity>
+                        </spawn>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </instantEffectTriggers>
+        <castType>linear_skillshot</castType>
+        <castCancelCast/>
+        <castCancelMovement/>
+        <castDuration>[delay]</castDuration>
+        <castTurnToTarget/>
+        <castAnimation>
+            <entity>
+                <name>down_hit</name>
+                <loopDuration>0.5</loopDuration>
+            </entity>
+        </castAnimation>
+        <castCost>
+            <entity>
+                <manaCost>100</manaCost>
+            </entity>
+        </castCost>
+        <baseCooldown>1</baseCooldown>
+    </entity>
+    <!--spell effect-->
+    <entity>
+        <castedSpell>#spell</castedSpell>
+        <castedEffectTriggers>
+            <!--target effect-->
+            <entity>
+                <targetTarget/>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>300 + (0.6 * source.abilityPower)</physicalDamage>
+                        <addBuff duration="3">[markBuff]</addBuff>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--stun marked targets-->
+            <entity if="[markedStunDuration]">
+                <targetTarget/>
+                <triggerConditions>
+                    <entity>
+                        <targetTarget/>
+                        <hasBuffCondition>[markBuff]</hasBuffCondition>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <addStun>[markedStunDuration]</addStun>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--marked targets below threshhold -> execute target-->
+            <entity>
+                <targetTarget/>
+                <triggerConditions>
+                    <entity id="executeCondition">
+                        <targetTarget/>
+                        <hasBuffCondition>[markBuff]</hasBuffCondition>
+                        <hasHealthPortionCondition portion="0.25" lessOrMore="true" allowEqual="false"/>
+                    </entity>
+                </triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <physicalDamage>999999</physicalDamage>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+            <!--marked targets below threshhold -> reset cooldown-->
+            <entity if="[resetOnExecute]">
+                <sourceTarget/>
+                <triggerConditions>#executeCondition</triggerConditions>
+                <triggeredEffect>
+                    <entity>
+                        <resetCooldown/>
+                    </entity>
+                </triggeredEffect>
+                <triggerSource>#spell</triggerSource>
+            </entity>
+        </castedEffectTriggers>
+    </entity>
+</template>

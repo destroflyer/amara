@@ -80,10 +80,30 @@
             <entity template="spells/scarlet_passive/passive(#markBuff)"/>
         </passives>
         <learnableSpells>
-            <entity template="spells/scarlet_kunai/base(#markBuff)"/>
-            <entity template="spells/scarlet_barrier/base(#unit,#markBuff)"/>
-            <entity id="spell3" template="spells/scarlet_dash/base(#markBuff)"/>
-            <entity template="spells/scarlet_ult/base(#markBuff,#spell3)"/>
+            <entity template="spells/scarlet_kunai/base(#markBuff)">
+                <spellUpgrades>
+                    <entity template="spells/scarlet_kunai/upgrade_0(#markBuff)"/>
+                    <entity template="spells/scarlet_kunai/upgrade_1(#markBuff)"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/scarlet_barrier/base(#unit,#markBuff)">
+                <spellUpgrades>
+                    <entity template="spells/scarlet_barrier/upgrade_0(#unit,#markBuff)"/>
+                    <entity template="spells/scarlet_barrier/upgrade_1(#unit,#markBuff)"/>
+                </spellUpgrades>
+            </entity>
+            <entity id="spell3" template="spells/scarlet_dash/base(#markBuff)">
+                <spellUpgrades>
+                    <entity template="spells/scarlet_dash/upgrade_0(#markBuff)"/>
+                    <entity template="spells/scarlet_dash/upgrade_1(#markBuff,#unit)"/>
+                </spellUpgrades>
+            </entity>
+            <entity template="spells/scarlet_ult/base(#markBuff)">
+                <spellUpgrades>
+                    <entity template="spells/scarlet_ult/upgrade_0(#markBuff)"/>
+                    <entity template="spells/scarlet_ult/upgrade_1(#markBuff)"/>
+                </spellUpgrades>
+            </entity>
         </learnableSpells>
         <!--other-->
         <healthBarStyle>character</healthBarStyle>

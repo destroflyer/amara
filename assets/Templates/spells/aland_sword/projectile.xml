@@ -50,8 +50,8 @@
                         <triggerConditions>
                             <entity>
                                 <sourceTarget/>
-                                <hasBuffCondition requiredStacks="[bounceTargets]">#hitTargetsCountBuff</hasBuffCondition>
                                 <notCondition/>
+                                <hasBuffCondition requiredStacks="[bounceTargets]">#hitTargetsCountBuff</hasBuffCondition>
                             </entity>
                             <entity>
                                 <sourceTarget/>
@@ -88,8 +88,8 @@
                                         <hasBuffCondition requiredStacks="[bounceTargets]">#hitTargetsCountBuff</hasBuffCondition>
                                     </entity>
                                     <entity>
-                                        <hasRuleTargetCondition>#bounceRules</hasRuleTargetCondition>
                                         <notCondition/>
+                                        <hasRuleTargetCondition>#bounceRules</hasRuleTargetCondition>
                                     </entity>
                                 </orConditions>
                             </entity>

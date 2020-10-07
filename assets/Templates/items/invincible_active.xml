@@ -34,10 +34,10 @@
                         <removeVulnerability/>
                         <playAudio>
                             <entity id="audioStart">
-                                <audio>Sounds/sounds/spells/golden_eagle_start.ogg</audio>
+                                <audio>Sounds/sounds/spells/invincible_start.ogg</audio>
                             </entity>
                             <entity id="audioLoop">
-                                <audio>Sounds/sounds/spells/golden_eagle_loop.ogg</audio>
+                                <audio>Sounds/sounds/spells/invincible_loop.ogg</audio>
                                 <audioLoop/>
                                 <audioSuccessor delay="0.05">#audioStart</audioSuccessor>
                             </entity>
@@ -58,7 +58,7 @@
                                                 <stopAudio>#audioLoop</stopAudio>
                                                 <playAudio>
                                                     <entity>
-                                                        <audio>Sounds/sounds/spells/golden_eagle_end.ogg</audio>
+                                                        <audio>Sounds/sounds/spells/invincible_end.ogg</audio>
                                                     </entity>
                                                 </playAudio>
                                             </entity>
