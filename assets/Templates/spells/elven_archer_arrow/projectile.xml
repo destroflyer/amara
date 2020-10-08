@@ -1,6 +1,7 @@
 <template>
     <entity id="projectile">
         <isProjectile/>
+        <name>Piercing Arrow</name>
         <model>Models/elven_archer_arrow/skin_big.xml</model>
         <hitbox>
             <circle radius="1"/>

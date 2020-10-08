@@ -105,7 +105,7 @@
                                         </addAutoAttackSpellEffects>
                                         <addBuff if="[nextAutoAttackPhysicalDamage]" duration="4">
                                             <entity id="empoweredBuff">
-                                                <name>Do a Barrel Roll</name>
+                                                <name>I Did a Barrel Roll</name>
                                                 <description>Your next basic attack deals additional physical damage.</description>
                                                 <buffIcon>spells/elven_archer_roll</buffIcon>
                                                 <buffVisualisation>elven_archer_empowered</buffVisualisation>
@@ -124,7 +124,7 @@
                                         </addBuff>
                                         <addBuff if="[bonusWalkSpeed]" duration="1">
                                             <entity>
-                                                <name>I Did a Barrel Roll</name>
+                                                <name>Do a Barrel Roll</name>
                                                 <description>This unit has increased walk speed.</description>
                                                 <buffIcon>spells/elven_archer_roll</buffIcon>
                                                 <continuousAttributes>

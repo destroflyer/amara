@@ -1,6 +1,7 @@
 <template>
     <entity id="projectile">
         <isProjectile/>
+        <name>One of Many Arrows</name>
         <model>Models/elven_archer_arrow/skin_small.xml</model>
         <hitbox>
             <circle radius="1"/>
