@@ -398,9 +398,9 @@ public class TestElvenArcher extends CommandingPlayerTest {
         int targetDummy = createTargetDummy(new Vector2f(20, 20));
         onLogicStart();
 
-        assertEquals(50, getArmor(targetDummy), EPSILON);
         queueCommand(new UpgradeSpellCommand(1, 0));
         tickSeconds(1);
+        assertEquals(50, getArmor(targetDummy), EPSILON);
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_W, new Vector2f(1, 0)));
         tickSeconds(0.5f);
         int projectile = findEntity(NAME_W_PROJECTILE);
@@ -538,7 +538,7 @@ public class TestElvenArcher extends CommandingPlayerTest {
         assertEquals(9000.01f, getHealth(targetDummy1), EPSILON);
         assertEquals(9000.01f, getHealth(targetDummy2), EPSILON);
         tickSeconds(2);
-        assertEquals(0, findEntities(NAME_R_PROJECTILE).size());
+        assertNull(findEntity(NAME_R_PROJECTILE));
 
         onLogicEnd(false, false);
     }
@@ -556,7 +556,7 @@ public class TestElvenArcher extends CommandingPlayerTest {
         assertTrue(isFullHealth(targetDummy1));
         assertTrue(isFullHealth(targetDummy2));
         tickSeconds(2);
-        assertEquals(0, findEntities(NAME_R_PROJECTILE).size());
+        assertNull(findEntity(NAME_R_PROJECTILE));
 
         onLogicEnd(false, false);
     }
@@ -590,7 +590,7 @@ public class TestElvenArcher extends CommandingPlayerTest {
         assertEquals(7999.9917f, getHealth(targetDummy1), EPSILON);
         assertEquals(7999.9917f, getHealth(targetDummy2), EPSILON);
         tickSeconds(2);
-        assertEquals(0, findEntities(NAME_R_PROJECTILE).size());
+        assertNull(findEntity(NAME_R_PROJECTILE));
 
         onLogicEnd(false, false);
     }
@@ -610,7 +610,7 @@ public class TestElvenArcher extends CommandingPlayerTest {
         assertTrue(isFullHealth(targetDummy1));
         assertTrue(isFullHealth(targetDummy2));
         tickSeconds(2);
-        assertEquals(0, findEntities(NAME_R_PROJECTILE).size());
+        assertNull(findEntity(NAME_R_PROJECTILE));
 
         onLogicEnd(false, false);
     }
@@ -639,7 +639,7 @@ public class TestElvenArcher extends CommandingPlayerTest {
         assertEquals(9000.01f, getHealth(targetDummy1), EPSILON);
         assertEquals(9000.01f, getHealth(targetDummy2), EPSILON);
         tickSeconds(2);
-        assertEquals(0, findEntities(NAME_R_PROJECTILE).size());
+        assertNull(findEntity(NAME_R_PROJECTILE));
 
         onLogicEnd(false, false);
     }
@@ -659,7 +659,7 @@ public class TestElvenArcher extends CommandingPlayerTest {
         assertTrue(isFullHealth(targetDummy1));
         assertTrue(isFullHealth(targetDummy2));
         tickSeconds(2);
-        assertEquals(0, findEntities(NAME_R_PROJECTILE).size());
+        assertNull(findEntity(NAME_R_PROJECTILE));
 
         onLogicEnd(false, false);
     }

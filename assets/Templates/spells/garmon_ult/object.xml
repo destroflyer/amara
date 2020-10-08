@@ -1,5 +1,6 @@
 <template>
     <entity id="object">
+        <name>Energetic Missile Impact</name>
         <model>Models/garmon_ult_impact/skin.xml</model>
         <hitbox>
             <circle radius="3"/>

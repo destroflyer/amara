@@ -1,6 +1,7 @@
 <template>
     <entity id="projectile">
         <isProjectile/>
+        <name>Energetic Missile</name>
         <model>Models/ganfaul_ult/skin.xml</model>
         <hitbox>
             <circle radius="2"/>

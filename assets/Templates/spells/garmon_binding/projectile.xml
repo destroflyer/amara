@@ -1,6 +1,7 @@
 <template>
     <entity id="projectile">
         <isProjectile/>
+        <name>Energetic Mass</name>
         <model>Models/ganfaul_binding/skin.xml</model>
         <hitbox>
             <circle radius="1"/>
