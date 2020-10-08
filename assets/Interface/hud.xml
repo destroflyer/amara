@@ -602,21 +602,25 @@
                     <panel width="*"/>
                     <panel childLayout="horizontal" width="312px">
                         <panel id="upgrade_spell_offset_images" width="7px"/>
-                        <image id="upgrade_spell_image_0" width="55px" height="55px">
+                        <panel childLayout="overlay" width="55px" height="55px">
+                            <image id="upgrade_spell_image_0"/>
+                            <image filename="Interface/hud/spell_upgrade_1.png"/>
                             <effect>
                                 <onStartHover name="nop" onStartEffect="showPlayer_SpellInformation_UpgradedSpell(0)"/>
                                 <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                             </effect>
                             <interact onClick="upgradeSpell(0)"/>
-                        </image>
+                        </panel>
                         <panel width="8px"/>
-                        <image id="upgrade_spell_image_1" width="55px" height="55px">
+                        <panel childLayout="overlay" width="55px" height="55px">
+                            <image id="upgrade_spell_image_1"/>
+                            <image filename="Interface/hud/spell_upgrade_2.png"/>
                             <effect>
                                 <onStartHover name="nop" onStartEffect="showPlayer_SpellInformation_UpgradedSpell(1)"/>
                                 <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                             </effect>
                             <interact onClick="upgradeSpell(1)"/>
-                        </image>
+                        </panel>
                         <panel width="*"/>
                     </panel>
                     <panel width="*"/>

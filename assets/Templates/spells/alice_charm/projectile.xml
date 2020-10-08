@@ -1,6 +1,7 @@
 <template>
     <entity id="projectile">
         <isProjectile/>
+        <name>Pink Bubble</name>
         <model>Models/bubble/skin_pink.xml</model>
         <hitbox>
             <circle radius="1"/>

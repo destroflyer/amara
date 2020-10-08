@@ -38,6 +38,7 @@
                 <bonusFlatMaximumHealth>1000</bonusFlatMaximumHealth>
                 <bonusFlatArmor>50</bonusFlatArmor>
                 <bonusFlatMagicResistance>50</bonusFlatMagicResistance>
+                <bonusFlatWalkSpeed>10</bonusFlatWalkSpeed>
             </entity>
         </baseAttributes>
         <requestUpdateAttributes/>

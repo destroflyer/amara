@@ -3,6 +3,6 @@
         <damageAmplification>0.1</damageAmplification>
     </values>
     <entity template="./template([thunderPoppableBuff],[damageAmplification])">
-        <deltaDescription>Enemies receive 10% increased damage while being charmed.</deltaDescription>
+        <deltaDescription>Targets receive 10% increased damage while being charmed.</deltaDescription>
     </entity>
 </template>

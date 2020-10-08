@@ -1,5 +1,6 @@
 <template>
     <entity id="object">
+        <name>Thunder</name>
         <model>Models/alice_thunder/skin_radius_[radius].xml</model>
         <hitbox>
             <circle radius="[radius]"/>

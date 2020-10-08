@@ -49,7 +49,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         int targetDummy = createTargetDummy(new Vector2f(13, 10));
         onLogicStart();
 
-        assertEquals(25, getArmor(character), EPSILON);
+        assertEquals(28, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
         tickSeconds(1);
@@ -57,8 +57,8 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(0.5f);
         assertFalse(hasBuff(character, NAME_Q_ATTACK_BUFF));
-        assertEquals(916.6667f, getHealth(targetDummy), EPSILON);
-        assertEquals(25, getArmor(character), EPSILON);
+        assertEquals(914.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(28, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new StopCommand());
 
@@ -71,7 +71,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
 
         int targetDummy = createTargetDummy(new Vector2f(13, 10));
         entityWorld.setComponent(targetDummy, new HealthComponent(1));
-        assertEquals(25, getArmor(character), EPSILON);
+        assertEquals(28, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
         tickSeconds(1);
@@ -80,7 +80,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         tickSeconds(0.5f);
         assertFalse(hasBuff(character, NAME_Q_ATTACK_BUFF));
         assertFalse(isAlive(targetDummy));
-        assertEquals(26, getArmor(character), EPSILON);
+        assertEquals(29, getArmor(character), EPSILON);
         assertEquals(31, getMagicResistance(character), EPSILON);
         queueCommand(new StopCommand());
 
@@ -118,11 +118,11 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         tickSeconds(15);
         entityWorld.removeComponent(targetDummy, AggroTargetComponent.class);
         assertEquals(10, getBuffStacks(character, NAME_W_STACKS_BUFF));
-        assertEquals(274.4965f, getHealth(character), EPSILON);
+        assertEquals(357.2986f, getHealth(character), EPSILON);
         // Consume #1 --> Successful (10 stacks -> 5 stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
-        assertEquals(374.9963f, getHealth(character), EPSILON);
+        assertEquals(457.8735f, getHealth(character), EPSILON);
         assertEquals(5, getBuffStacks(character, NAME_W_STACKS_BUFF));
         assertTrue(hasBuff(character, NAME_W_CONSUME_BUFF));
         tickSeconds(1);
@@ -131,7 +131,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         // Consume #2 --> Successful (5 stacks -> 0 stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
-        assertEquals(476.5126f, getHealth(character), EPSILON);
+        assertEquals(559.6176f, getHealth(character), EPSILON);
         assertEquals(0, getBuffStacks(character, NAME_W_STACKS_BUFF));
         assertTrue(hasBuff(character, NAME_W_CONSUME_BUFF));
         tickSeconds(1);
@@ -140,7 +140,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         // Consume #3 --> Unsuccessful (Not enough stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
-        assertEquals(478.0289f, getHealth(character), EPSILON);
+        assertEquals(561.3616f, getHealth(character), EPSILON);
         tickSeconds(5);
         assertFalse(hasBuff(character, NAME_W_CONSUME_BUFF));
 
@@ -156,7 +156,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         tickSeconds(1);
         assertEquals(20, getX(targetDummy), EPSILON);
         assertEquals(10, getY(targetDummy), EPSILON);
-        assertEquals(813.3333f, getHealth(targetDummy), EPSILON);
+        assertEquals(812.1333f, getHealth(targetDummy), EPSILON);
 
         onLogicEnd(false, false);
     }

@@ -47,10 +47,12 @@ public class CommandingPlayerTest extends GameLogicTest {
         entityWorld.setComponent(character, new PositionComponent(new Vector2f(10, 10)));
         entityWorld.setComponent(character, new DirectionComponent(new Vector2f(0, 1)));
         entityWorld.setComponent(character, new SightRangeComponent(30));
+        entityWorld.setComponent(character, new LevelComponent(1));
         entityWorld.setComponent(character, new TeamComponent(1));
         LearnableSpellsComponent learnableSpellsComponent = entityWorld.getComponent(character, LearnableSpellsComponent.class);
         if (learnableSpellsComponent != null) {
             entityWorld.setComponent(character, new SpellsComponent(learnableSpellsComponent.getSpellsEntities()));
+            entityWorld.setComponent(character, new SpellsUpgradePointsComponent(2));
         }
     }
 
@@ -131,6 +133,14 @@ public class CommandingPlayerTest extends GameLogicTest {
 
     protected float getMagicResistance(int entity) {
         return entityWorld.getComponent(entity, MagicResistanceComponent.class).getValue();
+    }
+
+    protected float getWalkSpeed(int entity) {
+        return entityWorld.getComponent(entity, WalkSpeedComponent.class).getValue();
+    }
+
+    protected float getIncomingDamageAmplification(int entity) {
+        return entityWorld.getComponent(entity, IncomingDamageAmplificationComponent.class).getValue();
     }
 
     protected boolean isAlive(int entity) {

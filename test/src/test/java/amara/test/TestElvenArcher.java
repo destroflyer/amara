@@ -29,18 +29,18 @@ public class TestElvenArcher extends CommandingPlayerTest {
         onLogicStart();
 
         assertFalse(hasBuff(character, NAME_PASSIVE_BUFF));
-        assertEquals(0.75f, getAttackSpeed(character), EPSILON);
+        assertEquals(0.77f, getAttackSpeed(character), EPSILON);
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(1);
         assertEquals(1, getBuffStacks(character, NAME_PASSIVE_BUFF));
-        assertEquals(0.7875f, getAttackSpeed(character), EPSILON);
+        assertEquals(0.8085f, getAttackSpeed(character), EPSILON);
         tickSeconds(10);
         assertEquals(8, getBuffStacks(character, NAME_PASSIVE_BUFF));
-        assertEquals(1.05f, getAttackSpeed(character), EPSILON);
+        assertEquals(1.078f, getAttackSpeed(character), EPSILON);
         queueCommand(new StopCommand());
         tickSeconds(4);
         assertFalse(hasBuff(character, NAME_PASSIVE_BUFF));
-        assertEquals(0.75f, getAttackSpeed(character), EPSILON);
+        assertEquals(0.77f, getAttackSpeed(character), EPSILON);
 
         onLogicEnd(false, false);
     }
@@ -56,7 +56,7 @@ public class TestElvenArcher extends CommandingPlayerTest {
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(1);
         assertTrue(hasBuff(targetDummy, NAME_Q_SLOW_BUFF));
-        assertEquals(946.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(944.6667f, getHealth(targetDummy), EPSILON);
         queueCommand(new StopCommand());
         tickSeconds(2);
         assertFalse(hasBuff(targetDummy, NAME_Q_SLOW_BUFF));

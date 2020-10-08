@@ -5,7 +5,7 @@
         <slowDuration>1.5</slowDuration>
     </values>
     <entity id="spell">
-        <name>Thunder</name>
+        <name>Thunderbolt</name>
         <description>After a small delay, a lightning bolt crashes down at the target location, damaging and slowing all enemies in a small area and popping all bubbles.</description>
         <spellVisualisation>alice_thunder</spellVisualisation>
         <spellIndicator>

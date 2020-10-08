@@ -39,7 +39,7 @@ public class TestScarlet extends CommandingPlayerTest {
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(0.5f);
         assertFalse(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
-        assertEquals(880, getHealth(targetDummy), EPSILON);
+        assertEquals(878, getHealth(targetDummy), EPSILON);
         queueCommand(new StopCommand());
 
         onLogicEnd(false, false);
@@ -104,7 +104,7 @@ public class TestScarlet extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummy, new AggroTargetComponent(character));
         tickSeconds(0.75f);
         entityWorld.removeComponent(targetDummy, AggroTargetComponent.class);
-        assertEquals(500, getHealth(character), EPSILON);
+        assertEquals(575, getHealth(character), EPSILON);
         assertTrue(hasBuff(targetDummy, NAME_PASSIVE_BUFF));
         tickSeconds(5);
         assertFalse(hasBuff(targetDummy, NAME_PASSIVE_BUFF));

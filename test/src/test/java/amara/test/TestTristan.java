@@ -79,7 +79,7 @@ public class TestTristan extends CommandingPlayerTest {
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
         tickSeconds(1);
         assertTrue(isFullHealth(targetDummy));
-        assertEquals(301.0331f, getHealth(character), EPSILON);
+        assertEquals(301.1882f, getHealth(character), EPSILON);
 
         onLogicEnd(false, false);
     }
@@ -96,7 +96,7 @@ public class TestTristan extends CommandingPlayerTest {
         tickSeconds(0.5f);
         assertFalse(hasBuff(character, NAME_W_ATTACK_BUFF));
         assertTrue(hasBuff(targetDummy, NAME_W_SLOW_BUFF));
-        assertEquals(916.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(914.6667f, getHealth(targetDummy), EPSILON);
         queueCommand(new StopCommand());
         tickSeconds(2);
         assertFalse(hasBuff(targetDummy, NAME_W_SLOW_BUFF));
@@ -125,8 +125,8 @@ public class TestTristan extends CommandingPlayerTest {
 
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_E, new Vector2f(1, 0)));
         tickSeconds(1);
-        assertEquals(916.6667f, getHealth(targetDummy1), EPSILON);
-        assertEquals(916.6667f, getHealth(targetDummy2), EPSILON);
+        assertEquals(915.6667f, getHealth(targetDummy1), EPSILON);
+        assertEquals(915.6667f, getHealth(targetDummy2), EPSILON);
         assertTrue(isStunned(targetDummy1));
         assertTrue(isStunned(targetDummy2));
         tickSeconds(1);
@@ -158,13 +158,13 @@ public class TestTristan extends CommandingPlayerTest {
 
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_R, new Vector2f(1, 0)));
         tickSeconds(1);
-        assertEquals(890, getHealth(targetDummy1), EPSILON);
+        assertEquals(889.4f, getHealth(targetDummy1), EPSILON);
         assertEquals(20, getX(targetDummy1), EPSILON);
         assertEquals(5, getY(targetDummy1), EPSILON);
-        assertEquals(890, getHealth(targetDummy2), EPSILON);
+        assertEquals(889.4f, getHealth(targetDummy2), EPSILON);
         assertEquals(25, getX(targetDummy2), EPSILON);
         assertEquals(10, getY(targetDummy2), EPSILON);
-        assertEquals(890, getHealth(targetDummy3), EPSILON);
+        assertEquals(889.4f, getHealth(targetDummy3), EPSILON);
         assertEquals(20, getX(targetDummy3), EPSILON);
         assertEquals(15, getY(targetDummy3), EPSILON);
 

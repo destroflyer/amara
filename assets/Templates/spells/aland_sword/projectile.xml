@@ -4,6 +4,7 @@
     </values>
     <entity id="projectile">
         <isProjectile/>
+        <name>Aland Sword</name>
         <model>Models/aland_sword/skin_slow.xml</model>
         <hitbox>
             <point/>

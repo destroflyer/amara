@@ -1,8 +1,8 @@
 <template>
     <values>
-        <projectileSpeed>25</projectileSpeed>
+        <knockupDuration>1.75</knockupDuration>
     </values>
-    <entity template="./template([thunderPoppableBuff],[projectileSpeed])">
-        <deltaDescription>Projectile speed: 20 -> [projectileSpeed]</deltaDescription>
+    <entity template="./template([thunderPoppableBuff],[knockupDuration])">
+        <deltaDescription>Knockup duration: 1.5 seconds -> [knockupDuration] seconds</deltaDescription>
     </entity>
 </template>
