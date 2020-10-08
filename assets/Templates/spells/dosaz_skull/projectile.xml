@@ -1,6 +1,7 @@
 <template>
     <entity id="projectile">
         <isProjectile/>
+        <name>Skull</name>
         <model>Models/ghost_head/skin.xml</model>
         <hitbox>
             <circle radius="1"/>
