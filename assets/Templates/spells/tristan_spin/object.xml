@@ -1,5 +1,6 @@
 <template>
     <entity id="object">
+        <name>Tristan Spin Impact</name>
         <model>Models/tristan_spin/skin.xml</model>
         <transformOrigin>[unit]</transformOrigin>
         <hitbox>
@@ -7,7 +8,7 @@
         </hitbox>
         <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
-        <lifetime>0.4</lifetime>
+        <lifetime>[duration]</lifetime>
     </entity>
     <!--trigger spell effects-->
     <entity>

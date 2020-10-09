@@ -1,5 +1,6 @@
 <template>
     <entity id="object">
+        <name>Tristan Smash Impact</name>
         <model>Models/tristan_stun/skin.xml</model>
         <hitbox>
             <rectangle x="4.5" width="9" height="3"/>

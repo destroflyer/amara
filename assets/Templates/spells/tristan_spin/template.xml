@@ -21,7 +21,7 @@
                     <entity>
                         <spawn>
                             <entity>
-                                <spawnTemplate>./object([unit])</spawnTemplate>
+                                <spawnTemplate>./object([unit],[duration])</spawnTemplate>
                             </entity>
                         </spawn>
                         <playAudio>

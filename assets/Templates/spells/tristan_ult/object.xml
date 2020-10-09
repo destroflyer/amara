@@ -1,5 +1,6 @@
 <template>
     <entity id="object">
+        <name>Tristan Ult Impact</name>
         <model>Models/tristan_ult/skin_radius_[radius].xml</model>
         <!--hitbox is generated via code-->
         <collisionGroup targetOf="spells" targets="spell_targets"/>
