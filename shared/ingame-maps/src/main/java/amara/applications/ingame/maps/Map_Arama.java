@@ -13,6 +13,7 @@ import amara.applications.ingame.entitysystem.components.camps.*;
 import amara.applications.ingame.entitysystem.components.effects.*;
 import amara.applications.ingame.entitysystem.components.effects.damage.*;
 import amara.applications.ingame.entitysystem.components.effects.heals.*;
+import amara.applications.ingame.entitysystem.components.effects.mana.*;
 import amara.applications.ingame.entitysystem.components.effects.spawns.*;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.maps.*;
@@ -94,6 +95,7 @@ public class Map_Arama extends Map {
             fountainBuff_Allies.setComponent(new DescriptionComponent("This unit has massively increased health regeneration."));
             EntityWrapper fountainBuffEffect_Allies = entityWorld.getWrapped(entityWorld.createEntity());
             fountainBuffEffect_Allies.setComponent(new HealComponent("(0.021 * target.maximumHealth)"));
+            fountainBuffEffect_Allies.setComponent(new AddManaComponent("(0.021 * target.maximumMana)"));
             fountainBuff_Allies.setComponent(new RepeatingEffectComponent(fountainBuffEffect_Allies.getId(), 0.25f));
             fountainBuffArea_Allies.setComponent(new AreaBuffComponent(fountainBuff_Allies.getId()));
             EntityWrapper fountainAreaBuffTargetRules_Allies = entityWorld.getWrapped(entityWorld.createEntity());

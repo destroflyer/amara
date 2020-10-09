@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.effects;
 
 import amara.applications.ingame.entitysystem.components.attributes.*;
@@ -12,10 +8,6 @@ import amara.libraries.expressions.values.*;
 
 import java.util.Map;
 
-/**
- *
- * @author Carl
- */
 public class ExpressionUtil{
 
     private static final String SEPARATOR = ".";
@@ -38,7 +30,23 @@ public class ExpressionUtil{
         } else{
             expressionSpace.unsetValue(fieldName);
         }
-        //AttackDamage
+        // MaximumMana
+        MaximumManaComponent maximumManaComponent = entityWorld.getComponent(entity, MaximumManaComponent.class);
+        fieldName = (name + SEPARATOR + "maximumMana");
+        if(maximumManaComponent != null){
+            expressionSpace.setValue(fieldName, new NumericValue(maximumManaComponent.getValue()));
+        } else{
+            expressionSpace.unsetValue(fieldName);
+        }
+        // Mana
+        ManaComponent manaComponent = entityWorld.getComponent(entity, ManaComponent.class);
+        fieldName = (name + SEPARATOR + "mana");
+        if(manaComponent != null){
+            expressionSpace.setValue(fieldName, new NumericValue(manaComponent.getValue()));
+        } else{
+            expressionSpace.unsetValue(fieldName);
+        }
+        // AttackDamage
         AttackDamageComponent attackDamageComponent = entityWorld.getComponent(entity, AttackDamageComponent.class);
         fieldName = (name + SEPARATOR + "attackDamage");
         if(attackDamageComponent != null){

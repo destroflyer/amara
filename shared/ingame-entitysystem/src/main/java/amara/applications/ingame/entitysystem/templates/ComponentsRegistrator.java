@@ -2039,21 +2039,30 @@ public class ComponentsRegistrator{
         });
         //mana
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent>("addMana"){
 
             @Override
             public amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent construct(EntityWorld entityWorld, Element element){
+                String expression = xmlTemplateManager.parseValue(entityWorld, element.getText());
+                return new amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent(expression);
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.effects.mana.ResultingAddManaComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.effects.mana.ResultingAddManaComponent.class.getDeclaredField("value"), componentFieldSerializer_Attribute);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.mana.ResultingAddManaComponent>("resultingAddMana"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.effects.mana.ResultingAddManaComponent construct(EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
                     value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
                 }
-                return new amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent(value);
+                return new amara.applications.ingame.entitysystem.components.effects.mana.ResultingAddManaComponent(value);
             }
         });
         //movement

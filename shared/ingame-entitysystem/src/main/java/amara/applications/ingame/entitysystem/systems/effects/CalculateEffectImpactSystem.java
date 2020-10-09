@@ -73,6 +73,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                 float physicalDamage = 0;
                 float magicDamage = 0;
                 float heal = 0;
+                float manaGain = 0;
                 PhysicalDamageComponent physicalDamageComponent = effect.getComponent(PhysicalDamageComponent.class);
                 if (physicalDamageComponent != null) {
                     try {
@@ -94,6 +95,14 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                     try {
                         expressionSpace.parse(healComponent.getExpression());
                         heal += expressionSpace.getResult_Float();
+                    } catch (ExpressionException ex) {
+                    }
+                }
+                AddManaComponent addManaComponent = effect.getComponent(AddManaComponent.class);
+                if (addManaComponent != null) {
+                    try {
+                        expressionSpace.parse(addManaComponent.getExpression());
+                        manaGain += expressionSpace.getResult_Float();
                     } catch (ExpressionException ex) {
                     }
                 }
@@ -143,6 +152,9 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                 }
                 if (heal != 0) {
                     effectImpact.setComponent(new ResultingHealComponent(heal));
+                }
+                if (manaGain != 0) {
+                    effectImpact.setComponent(new ResultingAddManaComponent(manaGain));
                 }
                 AddNewBuffComponent addNewBuffComponent = effect.getComponent(AddNewBuffComponent.class);
                 if (addNewBuffComponent != null) {
@@ -266,7 +278,6 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                     AddVulnerabilityComponent.class,
                     RemoveVulnerabilityComponent.class,
                     PlayCinematicComponent.class,
-                    AddManaComponent.class,
                     RelativeTeleportComponent.class,
                     StopComponent.class,
                     TeleportComponent.class,

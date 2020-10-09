@@ -10,13 +10,13 @@ public class AddManaComponent {
 
     }
 
-    public AddManaComponent(float value) {
-        this.value = value;
+    public AddManaComponent(String expression) {
+        this.expression = expression;
     }
-    @ComponentField(type=ComponentField.Type.ATTRIBUTE)
-    private float value;
+    @ComponentField(type=ComponentField.Type.EXPRESSION)
+    private String expression;
 
-    public float getValue() {
-        return value;
+    public String getExpression() {
+        return expression;
     }
 }
