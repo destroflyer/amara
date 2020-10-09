@@ -2,11 +2,11 @@
     <values>
         <delay>0.1</delay>
         <markedStunDuration>0</markedStunDuration>
-        <resetOnExecute>false</resetOnExecute>
+        <resetOnCharacterExecute>false</resetOnCharacterExecute>
     </values>
     <entity id="spell">
         <name>Assassins Retribution</name>
-        <description>Deals physical damage to enemies in front of you. If a target is marked and below 25% of their maximum health, execute it.</description>
+        <description>Deals physical damage to enemies in front of you. Marked characters below 25% of their maximum health are executed.</description>
         <spellVisualisation>scarlet_ult</spellVisualisation>
         <spellIndicator>
             <entity>
@@ -84,6 +84,7 @@
                 <triggerConditions>
                     <entity id="executeCondition">
                         <targetTarget/>
+                        <isCharacterCondition/>
                         <hasBuffCondition>[markBuff]</hasBuffCondition>
                         <hasHealthPortionCondition portion="0.25" lessOrMore="true" allowEqual="false"/>
                     </entity>
@@ -96,7 +97,7 @@
                 <triggerSource>#spell</triggerSource>
             </entity>
             <!--marked targets below threshhold -> reset cooldown-->
-            <entity if="[resetOnExecute]">
+            <entity if="[resetOnCharacterExecute]">
                 <sourceTarget/>
                 <triggerConditions>#executeCondition</triggerConditions>
                 <triggeredEffect>

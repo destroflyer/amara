@@ -503,6 +503,8 @@ public class TestScarlet extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes2, new BonusFlatMaximumHealthComponent(10000));
         entityWorld.setComponent(targetDummy1, new HealthComponent(1000));
         entityWorld.setComponent(targetDummy2, new HealthComponent(1000));
+        entityWorld.setComponent(targetDummy1, new IsCharacterComponent());
+        entityWorld.setComponent(targetDummy2, new IsCharacterComponent());
         onLogicStart();
 
         queueCommand(new CastLinearSkillshotSpellCommand(SPELL_INDEX_E, new Vector2f(1, 0)));
@@ -560,6 +562,8 @@ public class TestScarlet extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes2, new BonusFlatMaximumHealthComponent(10000));
         entityWorld.setComponent(targetDummy1, new HealthComponent(1000));
         entityWorld.setComponent(targetDummy2, new HealthComponent(1000));
+        entityWorld.setComponent(targetDummy1, new IsCharacterComponent());
+        entityWorld.setComponent(targetDummy2, new IsCharacterComponent());
         onLogicStart();
 
         queueCommand(new UpgradeSpellCommand(3, 0));
@@ -645,6 +649,8 @@ public class TestScarlet extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes2, new BonusFlatMaximumHealthComponent(10000));
         entityWorld.setComponent(targetDummy1, new HealthComponent(1000));
         entityWorld.setComponent(targetDummy2, new HealthComponent(1000));
+        entityWorld.setComponent(targetDummy1, new IsCharacterComponent());
+        entityWorld.setComponent(targetDummy2, new IsCharacterComponent());
         onLogicStart();
 
         queueCommand(new UpgradeSpellCommand(3, 1));
