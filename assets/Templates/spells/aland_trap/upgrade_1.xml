@@ -4,5 +4,6 @@
     </values>
     <entity template="./template([lifetime])">
         <deltaDescription>Lifetime: 90 -> [lifetime]</deltaDescription>
+        <spellRequiredLevel>12</spellRequiredLevel>
     </entity>
 </template>

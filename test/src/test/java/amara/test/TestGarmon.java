@@ -37,7 +37,7 @@ public class TestGarmon extends CommandingPlayerTest {
         assertTrue(hasBuff(character, NAME_PASSIVE_BUFF));
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(1);
-        assertEquals(151.7048f, getMana(character), EPSILON);
+        assertEquals(153.41f, getMana(character), EPSILON);
         assertFalse(hasBuff(character, NAME_PASSIVE_BUFF));
         queueCommand(new StopCommand());
         tickSeconds(8);

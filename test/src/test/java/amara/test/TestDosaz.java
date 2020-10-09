@@ -326,7 +326,7 @@ public class TestDosaz extends CommandingPlayerTest {
     public void testW_Upgrade1() {
         onLogicStart();
 
-        assertEquals(28, getArmor(character), EPSILON);
+        assertEquals(61, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new UpgradeSpellCommand(1, 0));
         tickSeconds(1);
@@ -335,7 +335,7 @@ public class TestDosaz extends CommandingPlayerTest {
         int ghost = findEntity(NAME_GHOST);
         assertEquals(20, getX(ghost), EPSILON);
         assertEquals(20, getY(ghost), EPSILON);
-        assertEquals(28, getArmor(character), EPSILON);
+        assertEquals(61, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new CastSingleTargetSpellCommand(SPELL_INDEX_W, ghost));
         tickSeconds(0.5f);
@@ -348,10 +348,10 @@ public class TestDosaz extends CommandingPlayerTest {
         assertEquals(20, getY(character), EPSILON);
         assertEquals(10, getX(ghost), EPSILON);
         assertEquals(10, getY(ghost), EPSILON);
-        assertEquals(43, getArmor(character), EPSILON);
+        assertEquals(76, getArmor(character), EPSILON);
         assertEquals(45, getMagicResistance(character), EPSILON);
         tickSeconds(3);
-        assertEquals(28, getArmor(character), EPSILON);
+        assertEquals(61, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         tickSeconds(16);
         assertNull(findEntity(NAME_GHOST));
@@ -527,12 +527,12 @@ public class TestDosaz extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatMaximumHealthComponent(10000));
         onLogicStart();
 
-        assertEquals(575, getHealth(character), EPSILON);
+        assertEquals(1400, getHealth(character), EPSILON);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_R));
         tickSeconds(1);
         assertEquals(5, findEntities(NAME_GHOST).size());
         assertTrue(hasBuff(character, NAME_R_CHARACTER_BUFF));
-        assertEquals(875, getHealth(character), EPSILON);
+        assertEquals(1700, getHealth(character), EPSILON);
         assertTrue(hasBuff(targetDummy, NAME_R_TARGET_BUFF));
         assertEquals(9900, getHealth(targetDummy), EPSILON);
         tickSeconds(1);
@@ -543,7 +543,7 @@ public class TestDosaz extends CommandingPlayerTest {
         assertEquals(9533.338f, getHealth(targetDummy), EPSILON);
         tickSeconds(13);
         assertFalse(hasBuff(character, NAME_R_CHARACTER_BUFF));
-        assertEquals(575, getHealth(character), EPSILON);
+        assertEquals(1400, getHealth(character), EPSILON);
         assertFalse(hasBuff(targetDummy, NAME_R_TARGET_BUFF));
         assertEquals(7100.012f, getHealth(targetDummy), EPSILON);
         tickSeconds(5);
@@ -559,14 +559,14 @@ public class TestDosaz extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatMaximumHealthComponent(10000));
         onLogicStart();
 
-        assertEquals(575, getHealth(character), EPSILON);
+        assertEquals(1400, getHealth(character), EPSILON);
         queueCommand(new UpgradeSpellCommand(3, 0));
         tickSeconds(1);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_R));
         tickSeconds(1);
         assertEquals(5, findEntities(NAME_GHOST).size());
         assertTrue(hasBuff(character, NAME_R_CHARACTER_BUFF));
-        assertEquals(875, getHealth(character), EPSILON);
+        assertEquals(1700, getHealth(character), EPSILON);
         assertTrue(hasBuff(targetDummy, NAME_R_TARGET_BUFF));
         assertEquals(9900, getHealth(targetDummy), EPSILON);
         assertEquals(7, getWalkSpeed(targetDummy), EPSILON);
@@ -580,7 +580,7 @@ public class TestDosaz extends CommandingPlayerTest {
         assertEquals(7, getWalkSpeed(targetDummy), EPSILON);
         tickSeconds(13);
         assertFalse(hasBuff(character, NAME_R_CHARACTER_BUFF));
-        assertEquals(575, getHealth(character), EPSILON);
+        assertEquals(1400, getHealth(character), EPSILON);
         assertFalse(hasBuff(targetDummy, NAME_R_TARGET_BUFF));
         assertEquals(7100.012f, getHealth(targetDummy), EPSILON);
         assertEquals(10, getWalkSpeed(targetDummy), EPSILON);
@@ -597,14 +597,14 @@ public class TestDosaz extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatMaximumHealthComponent(10000));
         onLogicStart();
 
-        assertEquals(575, getHealth(character), EPSILON);
+        assertEquals(1400, getHealth(character), EPSILON);
         queueCommand(new UpgradeSpellCommand(3, 1));
         tickSeconds(1);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_R));
         tickSeconds(1);
         assertEquals(5, findEntities(NAME_GHOST).size());
         assertTrue(hasBuff(character, NAME_R_CHARACTER_BUFF));
-        assertEquals(1175, getHealth(character), EPSILON);
+        assertEquals(2000, getHealth(character), EPSILON);
         assertTrue(hasBuff(targetDummy, NAME_R_TARGET_BUFF));
         assertEquals(9900, getHealth(targetDummy), EPSILON);
         tickSeconds(1);
@@ -615,7 +615,7 @@ public class TestDosaz extends CommandingPlayerTest {
         assertEquals(9533.338f, getHealth(targetDummy), EPSILON);
         tickSeconds(13);
         assertFalse(hasBuff(character, NAME_R_CHARACTER_BUFF));
-        assertEquals(575, getHealth(character), EPSILON);
+        assertEquals(1400, getHealth(character), EPSILON);
         assertFalse(hasBuff(targetDummy, NAME_R_TARGET_BUFF));
         assertEquals(7100.012f, getHealth(targetDummy), EPSILON);
         tickSeconds(5);

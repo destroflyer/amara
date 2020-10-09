@@ -41,7 +41,7 @@ public class UpdateUpgradeSpellsPanelSystem extends GUIDisplaySystem<ScreenContr
             boolean learnOrUpgrade = false;
             for (int i = 0; i < 4; i++) {
                 showButton = false;
-                if (SpellUtil.canUpgradeSpell(entityWorld, characterEntity, i)) {
+                if (SpellUtil.canUpgradeSpell(entityWorld, characterEntity, i, 0)) {
                     showButton = true;
                     learnOrUpgrade = false;
                 } else if (SpellUtil.canLearnSpell(entityWorld, characterEntity, i)) {

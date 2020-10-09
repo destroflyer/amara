@@ -40,21 +40,21 @@ public class TestAland extends CommandingPlayerTest {
         assertEquals(0, getBuffStacks(targetDummy, NAME_PASSIVE_STACKS_BUFF));
         assertFalse(hasBuff(targetDummy, NAME_PASSIVE_EFFECT_BUFF));
         queueCommand(new AutoAttackCommand(targetDummy));
-        tickSeconds(1.25f);
-        assertEquals(964.6667f, getHealth(targetDummy), EPSILON);
+        tickSeconds(1);
+        assertEquals(942.6667, getHealth(targetDummy), EPSILON);
         assertEquals(1, getBuffStacks(targetDummy, NAME_PASSIVE_STACKS_BUFF));
         assertFalse(hasBuff(targetDummy, NAME_PASSIVE_EFFECT_BUFF));
-        tickSeconds(1.25f);
-        assertEquals(929.3334f, getHealth(targetDummy), EPSILON);
+        tickSeconds(1);
+        assertEquals(885.3334f, getHealth(targetDummy), EPSILON);
         assertEquals(2, getBuffStacks(targetDummy, NAME_PASSIVE_STACKS_BUFF));
         assertFalse(hasBuff(targetDummy, NAME_PASSIVE_EFFECT_BUFF));
-        tickSeconds(1.25f);
-        assertEquals(877.3334f, getHealth(targetDummy), EPSILON);
+        tickSeconds(1);
+        assertEquals(828.0001f, getHealth(targetDummy), EPSILON);
         assertEquals(0, getBuffStacks(targetDummy, NAME_PASSIVE_STACKS_BUFF));
         assertTrue(hasBuff(targetDummy, NAME_PASSIVE_EFFECT_BUFF));
         queueCommand(new StopCommand());
         tickSeconds(2);
-        assertEquals(827.3333f, getHealth(targetDummy), EPSILON);
+        assertEquals(761.3333f, getHealth(targetDummy), EPSILON);
         assertFalse(hasBuff(targetDummy, NAME_PASSIVE_EFFECT_BUFF));
 
         onLogicEnd(false, false);
@@ -68,13 +68,13 @@ public class TestAland extends CommandingPlayerTest {
         assertEquals(0, getBuffStacks(targetDummy, NAME_PASSIVE_STACKS_BUFF));
         assertFalse(hasBuff(targetDummy, NAME_PASSIVE_EFFECT_BUFF));
         queueCommand(new AutoAttackCommand(targetDummy));
-        tickSeconds(1.25f);
-        assertEquals(964.6667f, getHealth(targetDummy), EPSILON);
+        tickSeconds(1);
+        assertEquals(942.6667f, getHealth(targetDummy), EPSILON);
         assertEquals(1, getBuffStacks(targetDummy, NAME_PASSIVE_STACKS_BUFF));
         assertFalse(hasBuff(targetDummy, NAME_PASSIVE_EFFECT_BUFF));
         queueCommand(new StopCommand());
         tickSeconds(4);
-        assertEquals(964.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(942.6667f, getHealth(targetDummy), EPSILON);
         assertEquals(0, getBuffStacks(targetDummy, NAME_PASSIVE_STACKS_BUFF));
         assertFalse(hasBuff(targetDummy, NAME_PASSIVE_EFFECT_BUFF));
 

@@ -4,5 +4,6 @@
     </values>
     <entity template="./template([ghostBuff],[bonusHealth])">
         <deltaDescription>Bonus health: 300 -> [bonusHealth]</deltaDescription>
+        <spellRequiredLevel>12</spellRequiredLevel>
     </entity>
 </template>

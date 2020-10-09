@@ -1,3 +1,5 @@
 <template>
-    <entity template="./template(angle=45,arrowsPerWave=5)"/>
+    <entity template="./template(angle=45,arrowsPerWave=5)">
+        <spellRequiredLevel>6</spellRequiredLevel>
+    </entity>
 </template>

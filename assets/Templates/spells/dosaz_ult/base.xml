@@ -1,3 +1,5 @@
 <template>
-    <entity template="./template([ghostBuff])"/>
+    <entity template="./template([ghostBuff])">
+        <spellRequiredLevel>6</spellRequiredLevel>
+    </entity>
 </template>

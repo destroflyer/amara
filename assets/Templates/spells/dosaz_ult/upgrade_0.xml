@@ -4,5 +4,6 @@
     </values>
     <entity template="./template([ghostBuff],[slow])">
         <deltaDescription>Enemies in your aura are slowed by 30%.</deltaDescription>
+        <spellRequiredLevel>12</spellRequiredLevel>
     </entity>
 </template>

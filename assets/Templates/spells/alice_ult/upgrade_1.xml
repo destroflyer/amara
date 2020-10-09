@@ -4,5 +4,6 @@
     </values>
     <entity template="./template([percentageWalkSpeed])">
         <deltaDescription>Protected units have 25% increased walk speed.</deltaDescription>
+        <spellRequiredLevel>12</spellRequiredLevel>
     </entity>
 </template>

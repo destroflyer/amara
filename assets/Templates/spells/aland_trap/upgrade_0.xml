@@ -4,5 +4,6 @@
     </values>
     <entity template="./template([baseDamage])">
         <deltaDescription>Base damage: 50 -> [baseDamage]</deltaDescription>
+        <spellRequiredLevel>12</spellRequiredLevel>
     </entity>
 </template>

@@ -51,7 +51,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         int targetDummy = createTargetDummy(new Vector2f(13, 10));
         onLogicStart();
 
-        assertEquals(28, getArmor(character), EPSILON);
+        assertEquals(61, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
         tickSeconds(1);
@@ -59,8 +59,8 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(0.5f);
         assertFalse(hasBuff(character, NAME_Q_ATTACK_BUFF));
-        assertEquals(914.6667f, getHealth(targetDummy), EPSILON);
-        assertEquals(28, getArmor(character), EPSILON);
+        assertEquals(892.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(61, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new StopCommand());
 
@@ -73,7 +73,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
 
         int targetDummy = createTargetDummy(new Vector2f(13, 10));
         entityWorld.setComponent(targetDummy, new HealthComponent(1));
-        assertEquals(28, getArmor(character), EPSILON);
+        assertEquals(61, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
         tickSeconds(1);
@@ -82,7 +82,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         tickSeconds(0.5f);
         assertFalse(hasBuff(character, NAME_Q_ATTACK_BUFF));
         assertFalse(isAlive(targetDummy));
-        assertEquals(29, getArmor(character), EPSILON);
+        assertEquals(62, getArmor(character), EPSILON);
         assertEquals(31, getMagicResistance(character), EPSILON);
         queueCommand(new StopCommand());
 
@@ -109,7 +109,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
 
         queueCommand(new UpgradeSpellCommand(0, 0));
         tickSeconds(1);
-        assertEquals(28, getArmor(character), EPSILON);
+        assertEquals(61, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
         tickSeconds(1);
@@ -117,8 +117,8 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(0.5f);
         assertFalse(hasBuff(character, NAME_Q_ATTACK_BUFF));
-        assertEquals(914.6667f, getHealth(targetDummy), EPSILON);
-        assertEquals(28, getArmor(character), EPSILON);
+        assertEquals(892.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(61, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new StopCommand());
 
@@ -133,7 +133,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         tickSeconds(1);
         int targetDummy = createTargetDummy(new Vector2f(13, 10));
         entityWorld.setComponent(targetDummy, new HealthComponent(1));
-        assertEquals(28, getArmor(character), EPSILON);
+        assertEquals(61, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
         tickSeconds(1);
@@ -142,7 +142,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         tickSeconds(0.5f);
         assertFalse(hasBuff(character, NAME_Q_ATTACK_BUFF));
         assertFalse(isAlive(targetDummy));
-        assertEquals(29.5f, getArmor(character), EPSILON);
+        assertEquals(62.5f, getArmor(character), EPSILON);
         assertEquals(31, getMagicResistance(character), EPSILON);
         queueCommand(new StopCommand());
 
@@ -171,7 +171,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
 
         queueCommand(new UpgradeSpellCommand(0, 1));
         tickSeconds(1);
-        assertEquals(28, getArmor(character), EPSILON);
+        assertEquals(61, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
         tickSeconds(1);
@@ -179,8 +179,8 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(0.5f);
         assertFalse(hasBuff(character, NAME_Q_ATTACK_BUFF));
-        assertEquals(914.6667f, getHealth(targetDummy), EPSILON);
-        assertEquals(28, getArmor(character), EPSILON);
+        assertEquals(892.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(61, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new StopCommand());
 
@@ -195,7 +195,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         tickSeconds(1);
         int targetDummy = createTargetDummy(new Vector2f(13, 10));
         entityWorld.setComponent(targetDummy, new HealthComponent(1));
-        assertEquals(28, getArmor(character), EPSILON);
+        assertEquals(61, getArmor(character), EPSILON);
         assertEquals(30, getMagicResistance(character), EPSILON);
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_Q));
         tickSeconds(1);
@@ -204,7 +204,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         tickSeconds(0.5f);
         assertFalse(hasBuff(character, NAME_Q_ATTACK_BUFF));
         assertFalse(isAlive(targetDummy));
-        assertEquals(29, getArmor(character), EPSILON);
+        assertEquals(62, getArmor(character), EPSILON);
         assertEquals(31.5f, getMagicResistance(character), EPSILON);
         queueCommand(new StopCommand());
 
@@ -230,7 +230,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
     public void testW_Base() {
         int targetDummy = createTargetDummy(new Vector2f(13, 10));
         int targetDummyBaseAttributes = entityWorld.getComponent(targetDummy, BaseAttributesComponent.class).getBonusAttributesEntity();
-        entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackDamageComponent(20));
+        entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackDamageComponent(50));
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackSpeedComponent(1));
         int targetDummyAutoAttack = entityWorld.createEntity();
         EntityTemplate.loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
@@ -244,11 +244,11 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         tickSeconds(15);
         entityWorld.removeComponent(targetDummy, AggroTargetComponent.class);
         assertEquals(10, getBuffStacks(character, NAME_W_STACKS_BUFF));
-        assertEquals(357.2986f, getHealth(character), EPSILON);
+        assertEquals(974.7349f, getHealth(character), EPSILON);
         // Consume #1 --> Successful (10 stacks -> 5 stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
-        assertEquals(457.8735f, getHealth(character), EPSILON);
+        assertEquals(1076.1338f, getHealth(character), EPSILON);
         assertEquals(5, getBuffStacks(character, NAME_W_STACKS_BUFF));
         assertTrue(hasBuff(character, NAME_W_CONSUME_BUFF));
         tickSeconds(1);
@@ -257,7 +257,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         // Consume #2 --> Successful (5 stacks -> 0 stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
-        assertEquals(559.6176f, getHealth(character), EPSILON);
+        assertEquals(1180.3772f, getHealth(character), EPSILON);
         assertEquals(0, getBuffStacks(character, NAME_W_STACKS_BUFF));
         assertTrue(hasBuff(character, NAME_W_CONSUME_BUFF));
         tickSeconds(1);
@@ -266,7 +266,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         // Consume #3 --> Unsuccessful (Not enough stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
-        assertEquals(561.3616f, getHealth(character), EPSILON);
+        assertEquals(1184.6206f, getHealth(character), EPSILON);
         tickSeconds(5);
         assertFalse(hasBuff(character, NAME_W_CONSUME_BUFF));
 
@@ -277,7 +277,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
     public void testW_Upgrade1() {
         int targetDummy = createTargetDummy(new Vector2f(13, 10));
         int targetDummyBaseAttributes = entityWorld.getComponent(targetDummy, BaseAttributesComponent.class).getBonusAttributesEntity();
-        entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackDamageComponent(20));
+        entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackDamageComponent(50));
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackSpeedComponent(1));
         int targetDummyAutoAttack = entityWorld.createEntity();
         EntityTemplate.loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
@@ -293,11 +293,11 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         tickSeconds(20);
         entityWorld.removeComponent(targetDummy, AggroTargetComponent.class);
         assertEquals(15, getBuffStacks(character, NAME_W_STACKS_BUFF));
-        assertEquals(284.9231f, getHealth(character), EPSILON);
+        assertEquals(833.46295f, getHealth(character), EPSILON);
         // Consume #1 --> Successful (15 stacks -> 10 stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
-        assertEquals(385.4981f, getHealth(character), EPSILON);
+        assertEquals(934.8637f, getHealth(character), EPSILON);
         assertEquals(10, getBuffStacks(character, NAME_W_STACKS_BUFF));
         assertTrue(hasBuff(character, NAME_W_CONSUME_BUFF));
         tickSeconds(1);
@@ -306,7 +306,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         // Consume #2 --> Successful (10 stacks -> 5 stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
-        assertEquals(487.2421f, getHealth(character), EPSILON);
+        assertEquals(1039.1108f, getHealth(character), EPSILON);
         assertEquals(5, getBuffStacks(character, NAME_W_STACKS_BUFF));
         assertTrue(hasBuff(character, NAME_W_CONSUME_BUFF));
         tickSeconds(1);
@@ -315,7 +315,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         // Consume #3 --> Successful (5 stacks -> 0 stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
-        assertEquals(575, getHealth(character), EPSILON);
+        assertEquals(1143.3542f, getHealth(character), EPSILON);
         assertEquals(0, getBuffStacks(character, NAME_W_STACKS_BUFF));
         assertTrue(hasBuff(character, NAME_W_CONSUME_BUFF));
         tickSeconds(1);
@@ -324,7 +324,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         // Consume #4 --> Unsuccessful (Not enough stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
-        assertEquals(575, getHealth(character), EPSILON);
+        assertEquals(1147.5977f, getHealth(character), EPSILON);
         tickSeconds(5);
         assertFalse(hasBuff(character, NAME_W_CONSUME_BUFF));
 
@@ -335,7 +335,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
     public void testW_Upgrade2() {
         int targetDummy = createTargetDummy(new Vector2f(13, 10));
         int targetDummyBaseAttributes = entityWorld.getComponent(targetDummy, BaseAttributesComponent.class).getBonusAttributesEntity();
-        entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackDamageComponent(20));
+        entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackDamageComponent(50));
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackSpeedComponent(1));
         int targetDummyAutoAttack = entityWorld.createEntity();
         EntityTemplate.loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
@@ -351,11 +351,11 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         tickSeconds(15);
         entityWorld.removeComponent(targetDummy, AggroTargetComponent.class);
         assertEquals(10, getBuffStacks(character, NAME_W_STACKS_BUFF));
-        assertEquals(357.2986f, getHealth(character), EPSILON);
+        assertEquals(974.7349f, getHealth(character), EPSILON);
         // Consume #1 --> Successful (10 stacks -> 5 stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
-        assertEquals(457.8735f, getHealth(character), EPSILON);
+        assertEquals(1076.1338f, getHealth(character), EPSILON);
         assertEquals(6, getBuffStacks(character, NAME_W_STACKS_BUFF));
         assertTrue(hasBuff(character, NAME_W_CONSUME_BUFF));
         tickSeconds(1);
@@ -364,7 +364,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         // Consume #2 --> Successful (6 stacks -> 2 stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
-        assertEquals(559.6176f, getHealth(character), EPSILON);
+        assertEquals(1180.3772f, getHealth(character), EPSILON);
         assertEquals(2, getBuffStacks(character, NAME_W_STACKS_BUFF));
         assertTrue(hasBuff(character, NAME_W_CONSUME_BUFF));
         tickSeconds(1);
@@ -373,7 +373,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         // Consume #3 --> Unsuccessful (Not enough stacks)
         queueCommand(new CastSelfcastSpellCommand(SPELL_INDEX_W));
         tickSeconds(0.5f);
-        assertEquals(561.3616f, getHealth(character), EPSILON);
+        assertEquals(1184.6206f, getHealth(character), EPSILON);
         tickSeconds(5);
         assertFalse(hasBuff(character, NAME_W_CONSUME_BUFF));
 
@@ -389,7 +389,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         tickSeconds(1);
         assertEquals(20, getX(targetDummy), EPSILON);
         assertEquals(10, getY(targetDummy), EPSILON);
-        assertEquals(812.1333f, getHealth(targetDummy), EPSILON);
+        assertEquals(798.9334f, getHealth(targetDummy), EPSILON);
 
         onLogicEnd(false, false);
     }
@@ -408,8 +408,8 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         assertEquals(8, getY(targetDummy1), EPSILON);
         assertEquals(20, getX(targetDummy2), EPSILON);
         assertEquals(12, getY(targetDummy2), EPSILON);
-        assertEquals(812.1333f, getHealth(targetDummy1), EPSILON);
-        assertEquals(812.1333f, getHealth(targetDummy2), EPSILON);
+        assertEquals(798.9334f, getHealth(targetDummy1), EPSILON);
+        assertEquals(798.9334f, getHealth(targetDummy2), EPSILON);
 
         onLogicEnd(false, false);
     }
@@ -441,7 +441,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         tickSeconds(1);
         assertEquals(23, getX(targetDummy), EPSILON);
         assertEquals(10, getY(targetDummy), EPSILON);
-        assertEquals(812.1333f, getHealth(targetDummy), EPSILON);
+        assertEquals(798.9334f, getHealth(targetDummy), EPSILON);
 
         onLogicEnd(false, false);
     }

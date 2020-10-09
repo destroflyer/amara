@@ -151,7 +151,7 @@ public class TestTristan extends CommandingPlayerTest {
         assertEquals(946.6667f, getHealth(targetDummy1), EPSILON);
         assertEquals(946.6667f, getHealth(targetDummy2), EPSILON);
         assertEquals(946.6667f, getHealth(targetDummy3), EPSILON);
-        assertEquals(501.7632f, getHealth(character), EPSILON);
+        assertEquals(504.2929f, getHealth(character), EPSILON);
 
         onLogicEnd(false, false);
     }
@@ -170,7 +170,7 @@ public class TestTristan extends CommandingPlayerTest {
         tickSeconds(0.25f);
         assertNull(findEntity(NAME_Q_OBJECT));
         assertTrue(isFullHealth(targetDummy));
-        assertEquals(301.7632f, getHealth(character), EPSILON);
+        assertEquals(304.2929f, getHealth(character), EPSILON);
 
         onLogicEnd(false, false);
     }
@@ -188,7 +188,7 @@ public class TestTristan extends CommandingPlayerTest {
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(0.5f);
         assertFalse(hasBuff(character, NAME_W_ATTACK_BUFF));
-        assertEquals(914.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(892.6667f, getHealth(targetDummy), EPSILON);
         assertTrue(hasBuff(targetDummy, NAME_W_SLOW_BUFF));
         assertEquals(5, getWalkSpeed(targetDummy), EPSILON);
         queueCommand(new StopCommand());
@@ -227,18 +227,18 @@ public class TestTristan extends CommandingPlayerTest {
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(0.5f);
         assertFalse(hasBuff(character, NAME_W_ATTACK_BUFF));
-        assertEquals(914.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(892.6667f, getHealth(targetDummy), EPSILON);
         assertTrue(hasBuff(targetDummy, NAME_W_SLOW_BUFF));
         assertEquals(5, getWalkSpeed(targetDummy), EPSILON);
         queueCommand(new StopCommand());
         tickSeconds(0.25f);
-        assertEquals(894.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(872.6667f, getHealth(targetDummy), EPSILON);
         tickSeconds(0.25f);
-        assertEquals(874.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(852.6667f, getHealth(targetDummy), EPSILON);
         tickSeconds(0.25f);
-        assertEquals(854.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(832.6667f, getHealth(targetDummy), EPSILON);
         tickSeconds(0.25f);
-        assertEquals(834.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(812.6667f, getHealth(targetDummy), EPSILON);
         assertFalse(hasBuff(targetDummy, NAME_W_SLOW_BUFF));
         assertEquals(10, getWalkSpeed(targetDummy), EPSILON);
 
@@ -275,7 +275,7 @@ public class TestTristan extends CommandingPlayerTest {
         queueCommand(new AutoAttackCommand(targetDummy));
         tickSeconds(0.5f);
         assertFalse(hasBuff(character, NAME_W_ATTACK_BUFF));
-        assertEquals(914.6667f, getHealth(targetDummy), EPSILON);
+        assertEquals(892.6667f, getHealth(targetDummy), EPSILON);
         assertTrue(hasBuff(targetDummy, NAME_W_SLOW_BUFF));
         assertEquals(2, getWalkSpeed(targetDummy), EPSILON);
         queueCommand(new StopCommand());
@@ -312,8 +312,8 @@ public class TestTristan extends CommandingPlayerTest {
         assertNotNull(findEntity(NAME_E_OBJECT));
         tickSeconds(0.5f);
         assertNull(findEntity(NAME_E_OBJECT));
-        assertEquals(915.6667f, getHealth(targetDummy1), EPSILON);
-        assertEquals(915.6667f, getHealth(targetDummy2), EPSILON);
+        assertEquals(904.6667f, getHealth(targetDummy1), EPSILON);
+        assertEquals(904.6667f, getHealth(targetDummy2), EPSILON);
         assertTrue(isStunned(targetDummy1));
         assertTrue(isStunned(targetDummy2));
         tickSeconds(1.25f);
@@ -352,8 +352,8 @@ public class TestTristan extends CommandingPlayerTest {
         assertNotNull(findEntity(NAME_E_OBJECT));
         tickSeconds(0.5f);
         assertNull(findEntity(NAME_E_OBJECT));
-        assertEquals(915.6667f, getHealth(targetDummy1), EPSILON);
-        assertEquals(915.6667f, getHealth(targetDummy2), EPSILON);
+        assertEquals(904.6667f, getHealth(targetDummy1), EPSILON);
+        assertEquals(904.6667f, getHealth(targetDummy2), EPSILON);
         assertTrue(isStunned(targetDummy1));
         assertTrue(isStunned(targetDummy2));
         tickSeconds(1.25f);
@@ -399,8 +399,8 @@ public class TestTristan extends CommandingPlayerTest {
         tickSeconds(0.5f);
         assertNull(findEntity(NAME_E_OBJECT));
         assertEquals(0, getTotalShieldAmount(character), EPSILON);
-        assertEquals(915.6667f, getHealth(targetDummy1), EPSILON);
-        assertEquals(915.6667f, getHealth(targetDummy2), EPSILON);
+        assertEquals(904.6667f, getHealth(targetDummy1), EPSILON);
+        assertEquals(904.6667f, getHealth(targetDummy2), EPSILON);
         assertTrue(isStunned(targetDummy1));
         assertTrue(isStunned(targetDummy2));
         tickSeconds(1.25f);
@@ -442,13 +442,13 @@ public class TestTristan extends CommandingPlayerTest {
         tickSeconds(0.25f);
         assertNotNull(findEntity(NAME_R_OBJECT));
         tickSeconds(0.75f);
-        assertEquals(889.4f, getHealth(targetDummy1), EPSILON);
+        assertEquals(882.8f, getHealth(targetDummy1), EPSILON);
         assertEquals(20, getX(targetDummy1), EPSILON);
         assertEquals(5, getY(targetDummy1), EPSILON);
-        assertEquals(889.4f, getHealth(targetDummy2), EPSILON);
+        assertEquals(882.8f, getHealth(targetDummy2), EPSILON);
         assertEquals(25, getX(targetDummy2), EPSILON);
         assertEquals(10, getY(targetDummy2), EPSILON);
-        assertEquals(889.4f, getHealth(targetDummy3), EPSILON);
+        assertEquals(882.8f, getHealth(targetDummy3), EPSILON);
         assertEquals(20, getX(targetDummy3), EPSILON);
         assertEquals(15, getY(targetDummy3), EPSILON);
         assertTrue(isFullHealth(targetDummy4));
@@ -491,13 +491,13 @@ public class TestTristan extends CommandingPlayerTest {
         tickSeconds(0.25f);
         assertNotNull(findEntity(NAME_R_OBJECT));
         tickSeconds(0.75f);
-        assertEquals(889.4f, getHealth(targetDummy1), EPSILON);
+        assertEquals(882.8f, getHealth(targetDummy1), EPSILON);
         assertEquals(20, getX(targetDummy1), EPSILON);
         assertEquals(2, getY(targetDummy1), EPSILON);
-        assertEquals(889.4f, getHealth(targetDummy2), EPSILON);
+        assertEquals(882.8f, getHealth(targetDummy2), EPSILON);
         assertEquals(28, getX(targetDummy2), EPSILON);
         assertEquals(10, getY(targetDummy2), EPSILON);
-        assertEquals(889.4f, getHealth(targetDummy3), EPSILON);
+        assertEquals(882.8f, getHealth(targetDummy3), EPSILON);
         assertEquals(20, getX(targetDummy3), EPSILON);
         assertEquals(18, getY(targetDummy3), EPSILON);
         assertTrue(isFullHealth(targetDummy4));
@@ -542,13 +542,13 @@ public class TestTristan extends CommandingPlayerTest {
         tickSeconds(0.25f);
         assertNotNull(findEntity(NAME_R_OBJECT));
         tickSeconds(0.75f);
-        assertEquals(889.4f, getHealth(targetDummy1), EPSILON);
+        assertEquals(882.8f, getHealth(targetDummy1), EPSILON);
         assertEquals(20, getX(targetDummy1), EPSILON);
         assertEquals(5, getY(targetDummy1), EPSILON);
-        assertEquals(889.4f, getHealth(targetDummy2), EPSILON);
+        assertEquals(882.8f, getHealth(targetDummy2), EPSILON);
         assertEquals(25, getX(targetDummy2), EPSILON);
         assertEquals(10, getY(targetDummy2), EPSILON);
-        assertEquals(889.4f, getHealth(targetDummy3), EPSILON);
+        assertEquals(882.8f, getHealth(targetDummy3), EPSILON);
         assertEquals(20, getX(targetDummy3), EPSILON);
         assertEquals(15, getY(targetDummy3), EPSILON);
         assertTrue(isFullHealth(targetDummy4));

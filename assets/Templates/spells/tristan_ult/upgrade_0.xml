@@ -4,5 +4,6 @@
     </values>
     <entity template="./template(radius=[newRadius]){oldRadius=[_radius]}">
         <deltaDescription>Radius: [oldRadius] -> [newRadius]</deltaDescription>
+        <spellRequiredLevel>12</spellRequiredLevel>
     </entity>
 </template>

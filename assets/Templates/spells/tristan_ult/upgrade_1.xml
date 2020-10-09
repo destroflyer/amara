@@ -4,5 +4,6 @@
     </values>
     <entity template="./template(stunDuration=0,[knockupDuration]){oldStunDuration=[_stunDuration]}">
         <deltaDescription>Colliding with a wall: [oldStunDuration] seconds stun -> [knockupDuration] seconds knockup</deltaDescription>
+        <spellRequiredLevel>12</spellRequiredLevel>
     </entity>
 </template>

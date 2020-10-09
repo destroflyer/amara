@@ -4,5 +4,6 @@
     </values>
     <entity template="./template([areaOfEffectImpact])">
         <deltaDescription>Instead of dealing damage to each hit enemy, deal that damage in an area around it.</deltaDescription>
+        <spellRequiredLevel>12</spellRequiredLevel>
     </entity>
 </template>

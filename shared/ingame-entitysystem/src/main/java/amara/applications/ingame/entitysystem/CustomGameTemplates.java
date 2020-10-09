@@ -122,7 +122,7 @@ public class CustomGameTemplates {
                 int bountyEntity = entityWorld.createEntity();
                 entityWorld.setComponent(bountyEntity, new BountyCreepScoreComponent());
                 entityWorld.setComponent(bountyEntity, new BountyGoldComponent(20 + (int) (spawnCounter * 0.5)));
-                entityWorld.setComponent(bountyEntity, new BountyExperienceComponent(25 + (spawnCounter * 5)));
+                entityWorld.setComponent(bountyEntity, new BountyExperienceComponent(45 + (spawnCounter * 2)));
                 entityWrapper.setComponent(new BountyComponent(bountyEntity));
                 entityWrapper.setComponent(new LocalAvoidanceWalkComponent());
             } else if (template.getName().equals("arama_minion_range")) {
@@ -175,7 +175,7 @@ public class CustomGameTemplates {
                 int bountyEntity = entityWorld.createEntity();
                 entityWorld.setComponent(bountyEntity, new BountyCreepScoreComponent());
                 entityWorld.setComponent(bountyEntity, new BountyGoldComponent(15 + (int) (spawnCounter * 0.5)));
-                entityWorld.setComponent(bountyEntity, new BountyExperienceComponent(15 + (spawnCounter * 3)));
+                entityWorld.setComponent(bountyEntity, new BountyExperienceComponent(35 + (spawnCounter * 2)));
                 entityWrapper.setComponent(new BountyComponent(bountyEntity));
                 entityWrapper.setComponent(new LocalAvoidanceWalkComponent());
             } else if (template.getName().equals("testmap_camp_pseudospider")) {

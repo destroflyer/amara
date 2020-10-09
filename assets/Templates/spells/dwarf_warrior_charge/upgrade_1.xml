@@ -4,5 +4,6 @@
     </values>
     <entity template="./template(speed=[newSpeed]){oldSpeed=[_speed]}">
         <deltaDescription>Speed: [oldSpeed] -> [newSpeed]</deltaDescription>
+        <spellRequiredLevel>12</spellRequiredLevel>
     </entity>
 </template>
