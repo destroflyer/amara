@@ -13,10 +13,10 @@ public class HealthBarStyle_Texture extends SimpleHealthBarStyle {
     private int subBarWidth;
 
     @Override
-    protected void draw(PaintableImage paintableImage, float maximumHealth, float currentHealth, float totalShieldAmount, boolean isAllied) {
-        super.draw(paintableImage, maximumHealth, currentHealth, totalShieldAmount, isAllied);
+    protected void draw(PaintableImage paintableImage, float maximumHealth, float currentHealth, float totalShieldAmount, Float manaPortion, boolean isAllied) {
+        super.draw(paintableImage, maximumHealth, currentHealth, totalShieldAmount, manaPortion, isAllied);
         paintableImage.loadImage(textureFilePath);
         drawBars(paintableImage, 2, 2);
-        drawSeparators(paintableImage, currentHealth, totalShieldAmount, subBarWidth);
+        drawHealthSeparators(paintableImage, currentHealth, totalShieldAmount, subBarWidth);
     }
 }

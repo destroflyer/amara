@@ -5,7 +5,9 @@ import amara.applications.ingame.client.systems.visualisation.HUDAttachmentsSyst
 import amara.applications.ingame.client.systems.visualisation.TopHUDAttachmentSystem;
 import amara.applications.ingame.client.systems.information.PlayerTeamSystem;
 import amara.applications.ingame.entitysystem.components.attributes.HealthComponent;
+import amara.applications.ingame.entitysystem.components.attributes.ManaComponent;
 import amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent;
+import amara.applications.ingame.entitysystem.components.attributes.MaximumManaComponent;
 import amara.applications.ingame.entitysystem.components.units.ShieldsComponent;
 import amara.applications.ingame.entitysystem.components.units.shields.ActiveShieldComponent;
 import amara.applications.ingame.entitysystem.components.units.shields.ShieldAmountComponent;
@@ -20,7 +22,7 @@ import com.jme3.texture.Texture;
 public class HealthBarSystem extends TopHUDAttachmentSystem {
 
     public HealthBarSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap, HealthBarStyleManager healthBarStyleManager, PlayerTeamSystem playerTeamSystem) {
-        super(hudAttachmentsSystem, entityHeightMap, new Class[] { MaximumHealthComponent.class, HealthComponent.class }, new Class[] { ShieldsComponent.class, ShieldAmountComponent.class });
+        super(hudAttachmentsSystem, entityHeightMap, new Class[] { MaximumHealthComponent.class, HealthComponent.class }, new Class[] { ShieldsComponent.class, ShieldAmountComponent.class, MaximumManaComponent.class, ManaComponent.class });
         this.healthBarStyleManager = healthBarStyleManager;
         this.playerTeamSystem = playerTeamSystem;
     }
@@ -56,12 +58,24 @@ public class HealthBarSystem extends TopHUDAttachmentSystem {
         float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();
         float currentHealth = entityWorld.getComponent(entity, HealthComponent.class).getValue();
         float totalShieldAmount = ShieldUtil.getTotalShieldAmount(entityWorld, entity);
+        Float manaPortion = getManaPortion(entityWorld, entity);
         boolean isAllied = playerTeamSystem.isAllied(entityWorld, entity);
-        style.draw(paintableImage, maximumHealth, currentHealth, totalShieldAmount, isAllied);
+        style.draw(paintableImage, maximumHealth, currentHealth, totalShieldAmount, manaPortion, isAllied);
         Geometry geometry = (Geometry) visualAttachment;
         Texture texture = geometry.getMaterial().getTextureParam("ColorMap").getTextureValue();
         texture.setImage(paintableImage.getImage());
         preparedHudOffset = hudOffset.clone().setY(-1 * style.getBarHeight());
+    }
+
+    private Float getManaPortion(EntityWorld entityWorld, int entity) {
+        MaximumManaComponent maximumManaComponent = entityWorld.getComponent(entity, MaximumManaComponent.class);
+        if ((maximumManaComponent != null) && (maximumManaComponent.getValue() > 0)) {
+            ManaComponent manaComponent = entityWorld.getComponent(entity, ManaComponent.class);
+            if (manaComponent != null) {
+                return (manaComponent.getValue() / maximumManaComponent.getValue());
+            }
+        }
+        return null;
     }
 
     @Override

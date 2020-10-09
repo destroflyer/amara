@@ -19,7 +19,7 @@ public abstract class HealthBarStyle {
     protected final int imageWidth;
     protected final int imageHeight;
 
-    protected abstract void draw(PaintableImage paintableImage, float maximumHealth, float currentHealth, float totalShieldAmount, boolean isAllied);
+    protected abstract void draw(PaintableImage paintableImage, float maximumHealth, float currentHealth, float totalShieldAmount, Float manaPortion, boolean isAllied);
 
     public int getBarWidth() {
         return barWidth;

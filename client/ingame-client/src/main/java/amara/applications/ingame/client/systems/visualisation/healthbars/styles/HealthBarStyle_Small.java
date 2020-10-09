@@ -11,8 +11,8 @@ public class HealthBarStyle_Small extends SimpleHealthBarStyle {
     private static final int HEIGHT = 5;
 
     @Override
-    protected void draw(PaintableImage paintableImage, float maximumHealth, float currentHealth, float totalShieldAmount, boolean isAllied) {
-        super.draw(paintableImage, maximumHealth, currentHealth, totalShieldAmount, isAllied);
+    protected void draw(PaintableImage paintableImage, float maximumHealth, float currentHealth, float totalShieldAmount, Float manaPortion, boolean isAllied) {
+        super.draw(paintableImage, maximumHealth, currentHealth, totalShieldAmount, manaPortion, isAllied);
         drawBars(paintableImage, 1, 1);
         drawBorder(paintableImage);
     }
