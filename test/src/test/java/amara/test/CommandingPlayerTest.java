@@ -210,7 +210,12 @@ public class CommandingPlayerTest extends GameLogicTest {
 
     protected void resetCooldown(int entity, SpellIndex spellIndex) {
         int spellEntity = getSpellEntity(entity, spellIndex);
-        entityWorld.removeComponent(spellEntity,RemainingCooldownComponent.class);
+        entityWorld.removeComponent(spellEntity, RemainingCooldownComponent.class);
+    }
+
+    protected void setRemainingCooldown(int entity, SpellIndex spellIndex, float duration) {
+        int spellEntity = getSpellEntity(entity, spellIndex);
+        entityWorld.setComponent(spellEntity, new RemainingCooldownComponent(duration));
     }
 
     protected float getRemainingCooldown(int entity, SpellIndex spellIndex) {

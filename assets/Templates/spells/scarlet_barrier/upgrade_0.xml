@@ -1,8 +1,8 @@
 <template>
     <values>
-        <bonusPercentageWalkSpeed>0.3</bonusPercentageWalkSpeed>
+        <newDuration>3</newDuration>
     </values>
-    <entity template="./template([unit],[markBuff],[bonusPercentageWalkSpeed]){name=[_name]}">
-        <deltaDescription>Gain 30% increased walk speed while [name] is active.</deltaDescription>
+    <entity template="./template([unit],[markBuff],duration=[newDuration]){oldDuration=[_duration]}">
+        <deltaDescription>Duration: [oldDuration] -> [newDuration]</deltaDescription>
     </entity>
 </template>

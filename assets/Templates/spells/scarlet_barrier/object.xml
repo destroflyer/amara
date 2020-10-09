@@ -1,5 +1,6 @@
 <template>
     <entity id="object">
+        <name>Kunai Barrier</name>
         <model>Models/scarlet_barrier/skin.xml</model>
         <transformOrigin>[unit]</transformOrigin>
         <hitbox>

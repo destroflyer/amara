@@ -1,6 +1,7 @@
 <template>
     <entity id="projectile">
         <isProjectile/>
+        <name>Kunai</name>
         <model>Models/scarlet_kunai/skin.xml</model>
         <hitbox>
             <circle radius="0.5"/>
