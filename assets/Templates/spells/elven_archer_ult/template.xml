@@ -25,20 +25,23 @@
                                 <audioVolume>4</audioVolume>
                             </entity>
                         </playAudio>
+                        <addEffectTriggers>
+                            <!--stop audio-->
+                            <entity>
+                                <castingFinishedTrigger/>
+                                <sourceCasterTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <stopAudio>#audio</stopAudio>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                                <triggerOnCancel/>
+                            </entity>
+                        </addEffectTriggers>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>
-            </entity>
-            <!--stop audio-->
-            <entity>
-                <sourceCasterTarget/>
-                <triggeredEffect>
-                    <entity>
-                        <stopAudio>#audio</stopAudio>
-                    </entity>
-                </triggeredEffect>
-                <triggerSource>#spell</triggerSource>
-                <triggerDelay>[duration]</triggerDelay>
             </entity>
         </instantEffectTriggers>
         <castType>linear_skillshot</castType>
