@@ -1,49 +1,70 @@
 package amara.applications.ingame.entitysystem.systems.units;
 
 import amara.applications.ingame.entitysystem.components.attributes.ManaComponent;
+import amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent;
 import amara.applications.ingame.entitysystem.components.buffs.status.StacksComponent;
 import amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent;
 import amara.applications.ingame.entitysystem.components.costs.GoldCostComponent;
 import amara.applications.ingame.entitysystem.components.costs.ManaCostComponent;
+import amara.applications.ingame.entitysystem.components.units.BuffsComponent;
 import amara.applications.ingame.entitysystem.components.units.GoldComponent;
 import amara.applications.ingame.entitysystem.systems.buffs.BuffUtil;
 import amara.libraries.entitysystem.EntityWorld;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public class CostUtil {
 
-    public static boolean isPayable(EntityWorld entityWorld, int entity, List<Integer> costEntities) {
-        return costEntities.stream().allMatch(costEntity -> isPayable(entityWorld, entity, costEntity));
+    public static boolean isPayable(EntityWorld entityWorld, int entity, int costEntity) {
+        LinkedList<Integer> costEntities = new LinkedList<>();
+        costEntities.add(costEntity);
+        return isPayable(entityWorld, entity, costEntities);
     }
 
-    public static boolean isPayable(EntityWorld entityWorld, int entity, int costEntity) {
-        // Mana
-        ManaCostComponent manaCostComponent = entityWorld.getComponent(costEntity, ManaCostComponent.class);
-        if ((manaCostComponent != null) && (manaCostComponent.getMana() > 0)) {
-            ManaComponent manaComponent = entityWorld.getComponent(entity, ManaComponent.class);
-            if ((manaComponent == null) || (manaComponent.getValue() < manaCostComponent.getMana())) {
-                return false;
+    public static boolean isPayable(EntityWorld entityWorld, int entity, List<Integer> costEntities) {
+        ManaComponent manaComponent = entityWorld.getComponent(entity, ManaComponent.class);
+        float remainingMana = ((manaComponent != null) ? manaComponent.getValue() : 0);
+        GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
+        float remainingGold = ((goldComponent != null) ? goldComponent.getGold() : 0);
+        HashMap<Integer, Integer> remainingBuffStacks = new HashMap<>();
+        BuffsComponent buffsComponent = entityWorld.getComponent(entity, BuffsComponent.class);
+        if (buffsComponent != null) {
+            for (int buffStatusEntity : buffsComponent.getBuffStatusEntities()) {
+                StacksComponent stacksComponent = entityWorld.getComponent(buffStatusEntity, StacksComponent.class);
+                if (stacksComponent != null) {
+                    int buffEntity = entityWorld.getComponent(buffStatusEntity, ActiveBuffComponent.class).getBuffEntity();
+                    remainingBuffStacks.put(buffEntity, stacksComponent.getStacks());
+                }
             }
         }
-        // Gold
-        GoldCostComponent goldCostComponent = entityWorld.getComponent(costEntity, GoldCostComponent.class);
-        if ((goldCostComponent != null) && (goldCostComponent.getGold() > 0)) {
-            GoldComponent goldComponent = entityWorld.getComponent(entity, GoldComponent.class);
-            if ((goldComponent == null) || (goldComponent.getGold() < goldCostComponent.getGold())) {
-                return false;
+        for (int costEntity : costEntities) {
+            // Mana
+            ManaCostComponent manaCostComponent = entityWorld.getComponent(costEntity, ManaCostComponent.class);
+            if (manaCostComponent != null) {
+                if (manaCostComponent.getMana() > remainingMana) {
+                    return false;
+                }
+                remainingMana -= manaCostComponent.getMana();
             }
-        }
-        // BuffStacks
-        BuffStacksCostComponent buffStacksCostComponent = entityWorld.getComponent(costEntity, BuffStacksCostComponent.class);
-        if (buffStacksCostComponent != null) {
-            int buffStatusEntity = BuffUtil.getBuffStatusEntity(entityWorld, entity, buffStacksCostComponent.getBuffEntity());
-            if (buffStatusEntity == -1) {
-                return false;
+            // Gold
+            GoldCostComponent goldCostComponent = entityWorld.getComponent(costEntity, GoldCostComponent.class);
+            if (goldCostComponent != null) {
+                if (goldCostComponent.getGold() > remainingGold) {
+                    return false;
+                }
+                remainingGold -= goldCostComponent.getGold();
             }
-            StacksComponent stacksComponent = entityWorld.getComponent(buffStatusEntity, StacksComponent.class);
-            if ((stacksComponent == null) || (stacksComponent.getStacks() < buffStacksCostComponent.getStacks())) {
-                return false;
+            // BuffStacks
+            BuffStacksCostComponent buffStacksCostComponent = entityWorld.getComponent(costEntity, BuffStacksCostComponent.class);
+            if (buffStacksCostComponent != null) {
+                int remainingStacks = remainingBuffStacks.get(buffStacksCostComponent.getBuffEntity());
+                if (buffStacksCostComponent.getStacks() > remainingStacks) {
+                    return false;
+                }
+                remainingStacks -= buffStacksCostComponent.getStacks();
+                remainingBuffStacks.put(buffStacksCostComponent.getBuffEntity(), remainingStacks);
             }
         }
         return true;
