@@ -5,6 +5,7 @@
         <hitbox>
             <point/>
         </hitbox>
+        <collisionGroup targetOf="spells" targets="spell_targets"/>
         <hitboxActive/>
     </entity>
     <!--trigger spell effects-->

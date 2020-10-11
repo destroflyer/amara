@@ -6,7 +6,7 @@
         <hitbox>
             <circle radius="2.5"/>
         </hitbox>
-        <collisionGroup targetOf="spells" targets="spell_targets"/>
+        <collisionGroup targetOf="spells" targets="spells"/>
         <hitboxActive/>
         <lifetime>[duration]</lifetime>
     </entity>
