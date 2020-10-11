@@ -33,7 +33,7 @@
         <hitbox>
             <circle radius="0.5"/>
         </hitbox>
-        <collisionGroup targetOf="map|spell_targets" targets="none"/>
+        <collisionGroup targetOf="map|units|spell_targets" targets="units"/>
         <hitboxActive/>
         <!--stats-->
         <isAlive/>
