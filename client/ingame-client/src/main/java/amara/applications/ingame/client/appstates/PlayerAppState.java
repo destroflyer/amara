@@ -10,9 +10,7 @@ import amara.applications.ingame.client.systems.filters.*;
 import amara.applications.ingame.client.systems.gui.*;
 import amara.applications.ingame.client.systems.information.*;
 import amara.applications.ingame.client.systems.visualisation.*;
-import amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent;
 import amara.applications.ingame.entitysystem.components.units.*;
-import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.master.network.messages.objects.GameSelectionPlayer;
 import amara.core.Queue;
 import amara.core.input.Event;
@@ -113,7 +111,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new UpdateRecipeCostsSystem(this::getPlayerEntity, screenController_Shop));
 
         // Needs to best be the very last client system, so no nodes for removed entities are leaked when they would be requested again after being removed
-        localEntitySystemAppState.addEntitySystem(new RemoveModelsSystem(localEntitySystemAppState.getEntitySceneMap()));
+        localEntitySystemAppState.addEntitySystem(new DetachEntityNodesSystem(localEntitySystemAppState.getEntitySceneMap()));
     }
 
     @Override
@@ -127,7 +125,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
         Vector2f cursorPosition = mainApplication.getInputManager().getCursorPosition();
         int tmpCursorHoveredEntity = cursorHoveredEntity;
-        cursorHoveredEntity = getHoveredCollisionResults(mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getEntitiesNode(), cursorPosition));
+        cursorHoveredEntity = getHoveredCollisionResults(mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getNodeVisibleToMouse(), cursorPosition));
         if (cursorHoveredEntity == -1) {
             float alternativeRange = 17;
             Vector2f alternativePosition = new Vector2f();
@@ -136,7 +134,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
                 for (int y = -1; y < 2; y++){
                     if ((x != 0) || (y != 0)) {
                         alternativePosition.set(cursorPosition.getX() + (x * alternativeRange), cursorPosition.getY() + (y * alternativeRange));
-                        tmpEntitiesCollisionResults[i] = mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getEntitiesNode(), alternativePosition);
+                        tmpEntitiesCollisionResults[i] = mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getNodeVisibleToMouse(), alternativePosition);
                         i++;
                     }
                 }
@@ -157,30 +155,20 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
         tmpHoveredEntitiesCount.clear();
         int resultEntity = -1;
-        //float minimumDistance = Float.MAX_VALUE;
         int maximumCount = 0;
         for (CollisionResults collisionResults : entitiesCollisionResults) {
             for (CollisionResult collision : collisionResults) {
                 int entity = localEntitySystemAppState.getEntity(collision.getGeometry());
-                if(isHoverable(localEntitySystemAppState.getEntityWorld(), entity)){
-                    /*if((entity != -1) && (collision.getDistance() < minimumDistance)){
-                        resultEntity = entity;
-                        minimumDistance = collision.getDistance();
-                        break;
-                    }*/
-                    if (entity != -1) {
-                        Integer count = tmpHoveredEntitiesCount.get(entity);
-                        if (count == null) {
-                            count = 0;
-                        }
-                        count++;
-                        tmpHoveredEntitiesCount.put(entity, count);
-                        if (count > maximumCount) {
-                            resultEntity = entity;
-                        }
-                        break;
-                    }
+                Integer count = tmpHoveredEntitiesCount.get(entity);
+                if (count == null) {
+                    count = 0;
                 }
+                count++;
+                tmpHoveredEntitiesCount.put(entity, count);
+                if (count > maximumCount) {
+                    resultEntity = entity;
+                }
+                break;
             }
         }
         return resultEntity;
@@ -199,7 +187,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
                 int mouseButtonIndex = mouseClickEvent.getButton().ordinal();
                 String mapCameraType = getAppState(MapAppState.class).getMap().getCamera().getType();
                 if (mouseButtonIndex == Settings.getInteger("controls_" + mapCameraType + "_navigation_select")) {
-                    if ((cursorHoveredEntity != -1) && isInspectable(entityWorld, cursorHoveredEntity)) {
+                    if ((cursorHoveredEntity != -1) && AttachEntityNodesSystem.isInspectable(entityWorld, cursorHoveredEntity)) {
                         inspectedEntity = cursorHoveredEntity;
                     } else {
                         inspectedEntity = -1;
@@ -213,21 +201,13 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         }
     }
 
-    private static boolean isHoverable(EntityWorld entityWorld, int entity) {
-        return isInspectable(entityWorld, entity) || entityWorld.hasComponent(entity, ShopItemsComponent.class);
-    }
-
-    private static boolean isInspectable(EntityWorld entityWorld, int entity) {
-        return entityWorld.hasAnyComponent(entity, IsCharacterComponent.class, IsMinionComponent.class, IsMonsterComponent.class, IsStructureComponent.class);
-    }
-
     @Override
     public void onAction(String actionName, boolean value, float lastTimePerFrame) {
         if (actionName.equals("lock_camera") && value) {
             lockedCameraSystem.setEnabled(!lockedCameraSystem.isEnabled());
         } else if (actionName.equals("change_sight") && value) {
             if (fogOfWarSystem != null) {
-                //Switch between the three possible states
+                // Switch between the three possible states
                 if (fogOfWarSystem.isEnabled()) {
                     if (fogOfWarSystem.isDisplayAllSight()) {
                         fogOfWarSystem.setEnabled(false);

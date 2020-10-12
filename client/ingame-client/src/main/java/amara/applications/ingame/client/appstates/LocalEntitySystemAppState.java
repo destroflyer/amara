@@ -13,7 +13,6 @@ import amara.applications.ingame.client.systems.visualisation.healthbars.*;
 import amara.applications.ingame.entitysystem.synchronizing.*;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.*;
-import amara.libraries.applications.display.ingame.maps.MapHeightmap;
 import amara.libraries.entitysystem.EntitySystem;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
@@ -22,24 +21,26 @@ import com.jme3.scene.Spatial;
 
 public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<IngameClientApplication> {
 
-    private Node entitiesNode = new Node();
-    private EntitySceneMap entitySceneMap = new EntitySceneMap(entitiesNode);
+    private Node nodeVisibleToMouse = new Node();
+    private Node nodeNotVisibleToMouse = new Node();
+    private EntitySceneMap entitySceneMap = new EntitySceneMap();
     private EntitySystem[] parallelNetworkSystems = ParallelNetworkSystems.generateSystems();
     private boolean isInitialWorldLoaded;
 
     @Override
     public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
-        mainApplication.getRootNode().attachChild(entitiesNode);
         IngameNetworkAppState ingameNetworkAppState = getAppState(IngameNetworkAppState.class);
         ingameNetworkAppState.addMessageBackend(new GameStartedBackend(entityWorld, getAppState(LoadingScreenAppState.class)));
         ingameNetworkAppState.addMessageBackend(new GameCrashedBackend(mainApplication));
         ingameNetworkAppState.addMessageBackend(new GameOverBackend(mainApplication));
+        mainApplication.getRootNode().attachChild(nodeVisibleToMouse);
+        mainApplication.getRootNode().attachChild(nodeNotVisibleToMouse);
+        addEntitySystem(new AttachEntityNodesSystem(entitySceneMap, nodeVisibleToMouse, nodeNotVisibleToMouse));
         PlayerAppState playerAppState = getAppState(PlayerAppState.class);
         addEntitySystem(playerAppState.getPlayerTeamSystem());
         MapAppState mapAppState = getAppState(MapAppState.class);
-        MapHeightmap mapHeightmap = mapAppState.getMapHeightmap();
-        PositionSystem positionSystem = new PositionSystem(entitySceneMap, mapHeightmap);
+        PositionSystem positionSystem = new PositionSystem(entitySceneMap, mapAppState.getMapHeightmap());
         addEntitySystem(positionSystem);
         addEntitySystem(new CollisionDebugSystem(getAppState(MapObstaclesAppState.class).getObstaclesNode()));
         addEntitySystem(new TeamModelSystem(playerAppState.getPlayerTeamSystem()));
@@ -133,11 +134,11 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         return -1;
     }
 
-    public Node getEntitiesNode() {
-        return entitiesNode;
-    }
-
     public EntitySceneMap getEntitySceneMap() {
         return entitySceneMap;
+    }
+
+    public Node getNodeVisibleToMouse() {
+        return nodeVisibleToMouse;
     }
 }
