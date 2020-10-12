@@ -109,7 +109,9 @@
         <healthBarStyle>character</healthBarStyle>
     </entity>
     <!--trigger tombstones buff-->
-    <entity id="triggerTombstonesBuff"/>
+    <entity id="triggerTombstonesBuff">
+        <keepOnDeath/>
+    </entity>
     <!--ghost buff-->
     <entity id="ghostBuff">
         <name>I'm a Ghost</name>

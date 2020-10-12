@@ -45,8 +45,11 @@ public class MarkHoveredUnitsSystem implements EntitySystem {
             ingameMouseCursorAppState.setCursor_Default();
             Node node = entitySceneMap.requestNode(entity);
             ModelObject modelObject = (ModelObject) node.getChild(ModelSystem.NODE_NAME_MODEL);
-            Spatial marker = modelObject.getChild(NODE_NAME_MARKER);
-            modelObject.unregisterModel(marker);
+            // Model can be already removed if entity died while being hovered
+            if (modelObject != null) {
+                Spatial marker = modelObject.getChild(NODE_NAME_MARKER);
+                modelObject.unregisterModel(marker);
+            }
         }
         for (int entity : observer.getNew().getEntitiesWithAny(IsHoveredComponent.class)) {
             boolean isAllied = playerTeamSystem.isAllied(entityWorld, entity);
