@@ -94,7 +94,7 @@ public class UnitUtil {
         }
     }
 
-    private static void removeTemporaryTriggers(EntityWorld entityWorld, int sourceEntity, Class triggerComponentClass) {
+    private static void removeTemporaryTriggers(EntityWorld entityWorld, int sourceEntity, Class<?> triggerComponentClass) {
         for (int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, triggerComponentClass)) {
             int triggerSourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
             if (triggerSourceEntity == sourceEntity) {
@@ -103,8 +103,6 @@ public class UnitUtil {
                 }
                 if (entityWorld.hasComponent(effectTriggerEntity, TriggerTemporaryComponent.class)) {
                     entityWorld.removeEntity(effectTriggerEntity);
-                } else {
-                    EffectTriggerUtil.removeTriggerOnceTrigger(entityWorld, effectTriggerEntity);
                 }
             }
         }

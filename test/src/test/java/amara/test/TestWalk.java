@@ -14,13 +14,27 @@ import static org.junit.Assert.assertEquals;
 public class TestWalk extends CommandingPlayerTest {
 
     @Test
-    public void testWalkToTarget() {
+    public void testWalkToTarget_Once() {
         onLogicStart();
 
         queueCommand(new WalkToTargetCommand(new Vector2f(20, 30)));
         tickSeconds(5);
         assertEquals(20, getX(character), EPSILON);
         assertEquals(30, getY(character), EPSILON);
+
+        onLogicEnd(false, false);
+    }
+
+    @Test
+    public void testWalkToTarget_Retargeted() {
+        onLogicStart();
+
+        queueCommand(new WalkToTargetCommand(new Vector2f(20, 30)));
+        tickSeconds(1);
+        queueCommand(new WalkToTargetCommand(new Vector2f(30, 20)));
+        tickSeconds(5);
+        assertEquals(30, getX(character), EPSILON);
+        assertEquals(20, getY(character), EPSILON);
 
         onLogicEnd(false, false);
     }
