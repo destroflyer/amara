@@ -77,8 +77,10 @@ public class PanGameSelection_Character extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconMouseClicked
-        panGameSelection.setSelectedCharacter(ownedCharacter);
-        panGameSelection.sendGameSelectionPlayerDataUpdate();
+        if (!panGameSelection.isLockedIn()) {
+            panGameSelection.setSelectedCharacter(ownedCharacter);
+            panGameSelection.sendGameSelectionPlayerDataUpdate();
+        }
     }//GEN-LAST:event_lblIconMouseClicked
 
     private void lblIconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconMouseEntered

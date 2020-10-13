@@ -186,18 +186,20 @@ public class GamesQueueAppState extends ServerBaseAppState{
             }
         }
     }
-    
-    public void setGameSelectionPlayerData(int playerID, GameSelectionPlayerData gameSelectionPlayerData){
-        for(GameSelection gameSelection : runningGameSelections){
-            GameSelectionPlayer player = gameSelection.getPlayer(playerID);
-            if(player != null){
-                player.setPlayerData(gameSelectionPlayerData);
-                sendMessageToGameSelectionPlayers(gameSelection, new Message_GameSelectionUpdate(gameSelection));
+
+    public void setGameSelectionPlayerData(int playerId, GameSelectionPlayerData gameSelectionPlayerData) {
+        for (GameSelection gameSelection : runningGameSelections) {
+            GameSelectionPlayer player = gameSelection.getPlayer(playerId);
+            if (player != null) {
+                if (!player.isLockedIn()) {
+                    player.setPlayerData(gameSelectionPlayerData);
+                    sendMessageToGameSelectionPlayers(gameSelection, new Message_GameSelectionUpdate(gameSelection));
+                }
                 break;
             }
         }
     }
-    
+
     public void lockInGameSelection(int playerID){
         for(GameSelection gameSelection : runningGameSelections){
             GameSelectionPlayer player = gameSelection.getPlayer(playerID);

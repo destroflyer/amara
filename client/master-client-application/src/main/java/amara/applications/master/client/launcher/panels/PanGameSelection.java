@@ -39,13 +39,14 @@ public class PanGameSelection extends javax.swing.JPanel {
         tpaneCharacters.setEnabledAt(1, false);
     }
     private PanGameSelection_Characters panCharacters;
-    private HashMap<OwnedGameCharacter, PanGameSelection_CharacterSkins> panCharactersSkins = new HashMap<OwnedGameCharacter, PanGameSelection_CharacterSkins>();
+    private HashMap<OwnedGameCharacter, PanGameSelection_CharacterSkins> panCharactersSkins = new HashMap<>();
     private GameSelection gameSelection;
     private Map map;
     private JComboBox[] cbxMapSpells;
-    private LinkedList<int[]> selectableMapSpellsIndices = new LinkedList<int[]>();
     private int selectedCharacterID;
-    
+    private LinkedList<int[]> selectableMapSpellsIndices = new LinkedList<>();
+    private boolean isLockedIn;
+
     public void reset(){
         //Map
         String mapName = gameSelection.getGameSelectionData().getMapName();
@@ -136,17 +137,18 @@ public class PanGameSelection extends javax.swing.JPanel {
         }
         panTeamContainer.updateUI();
     }
-    
-    private void setLockedIn(boolean isLockedIn){
+
+    private void setLockedIn(boolean isLockedIn) {
+        this.isLockedIn = isLockedIn;
         boolean enableControls = (!isLockedIn);
         cbxMapSpell1.setEnabled(enableControls);
         cbxMapSpell2.setEnabled(enableControls);
         btnLockIn.setEnabled(enableControls);
-        if(isLockedIn){
+        if (isLockedIn) {
             sendMessage(new Message_LockInGameSelection());
         }
     }
-    
+
     private void sendMessage(Message message){
         NetworkClient networkClient = MasterserverClientUtil.getNetworkClient();
         networkClient.sendMessage(message);
@@ -179,6 +181,10 @@ public class PanGameSelection extends javax.swing.JPanel {
 
     public LinkedList<int[]> getSelectableMapSpellsIndices(){
         return selectableMapSpellsIndices;
+    }
+
+    public boolean isLockedIn() {
+        return isLockedIn;
     }
 
     /** This method is called from within the constructor to
