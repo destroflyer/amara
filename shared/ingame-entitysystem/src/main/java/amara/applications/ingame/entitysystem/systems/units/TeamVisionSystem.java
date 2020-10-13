@@ -119,7 +119,7 @@ public class TeamVisionSystem implements EntitySystem{
             for(MergedVision teamVision : teamVisions){
                 SimpleConvexPolygon simpleConvexPolygon = (SimpleConvexPolygon) hitboxComponent.getShape();
                 ConvexedOutline convexedOutline = new ConvexedOutline(simpleConvexPolygon);
-                teamVision.setObstacle(entity, new VisionObstacle(convexedOutline, false));
+                teamVision.setObstacle(entity, new VisionObstacle(convexedOutline, true));
             }
             haveHiddenAreasChanged = true;
         }
