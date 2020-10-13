@@ -160,7 +160,11 @@ public final class PolyMapManager
         if(position.equals(to)) triPaths.remove(id);
         return position;
     }
-    
+
+    public boolean isFollowingTriPath(int id) {
+        return triPaths.containsKey(id);
+    }
+
     public Polygon sightPolygon(Vector2D source, double range)
     {
         if(map.contains(source))
