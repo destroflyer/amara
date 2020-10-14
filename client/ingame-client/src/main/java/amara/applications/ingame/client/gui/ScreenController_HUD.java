@@ -21,6 +21,7 @@ import de.lessvoid.nifty.effects.Effect;
 import de.lessvoid.nifty.effects.EffectEventId;
 import de.lessvoid.nifty.effects.impl.Hint;
 import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.tools.SizeValue;
 
 public class ScreenController_HUD extends GameScreenController {
@@ -331,16 +332,35 @@ public class ScreenController_HUD extends GameScreenController {
             action_HideSpellInformation = false;
         }
     }
-    
-    private void showPlayer_SpellInformation(SpellInformation spellInformation){
+
+    private void showPlayer_SpellInformation(SpellInformation spellInformation) {
         getElementByID("player_spell_information_layer").setVisible(true);
         getTextRenderer("player_spell_information_name").setText(spellInformation.getName());
         getTextRenderer("player_spell_information_description").setText(spellInformation.getDescription());
+        // Cooldown
         boolean hasCooldown = (spellInformation.getCooldown() != -1);
-        getElementByID("player_spell_information_cooldown").setVisible(hasCooldown);
-        if(hasCooldown){
-            getTextRenderer("player_spell_information_cooldown").setText(GUIUtil.getValueText(spellInformation.getCooldown()) + "s");
+        getElementByID("player_spell_information_cooldown_icon").setVisible(hasCooldown);
+        getElementByID("player_spell_information_cooldown_separator").setVisible(hasCooldown);
+        Element cooldownText = getElementByID("player_spell_information_cooldown_text");
+        cooldownText.setVisible(hasCooldown);
+        if (hasCooldown) {
+            TextRenderer cooldownTextRenderer = getTextRenderer(cooldownText.getId());
+            cooldownTextRenderer.setText(GUIUtil.getValueText(spellInformation.getCooldown()) + "s");
+            cooldownText.setConstraintWidth(new SizeValue(cooldownTextRenderer.getTextWidth() + "px"));
         }
+        // ManaCost
+        boolean hasManaCost = (spellInformation.getManaCost() != null);
+        getElementByID("player_spell_information_mana_cost_icon").setVisible(hasManaCost);
+        getElementByID("player_spell_information_mana_cost_separator").setVisible(hasManaCost);
+        Element manaCostText = getElementByID("player_spell_information_mana_cost_text");
+        manaCostText.setVisible(hasManaCost);
+        if (hasManaCost) {
+            TextRenderer manaCostTextRenderer = getTextRenderer(manaCostText.getId());
+            manaCostTextRenderer.setText(GUIUtil.getValueText(spellInformation.getManaCost()));
+            manaCostText.setConstraintWidth(new SizeValue(manaCostTextRenderer.getTextWidth() + "px"));
+        }
+        getElementByID("player_spell_information_separator_mana_cost_and_cooldown").setVisible(hasManaCost && hasCooldown);
+        cooldownText.getParent().layoutElements();
         PlayerAppState playerAppState = mainApplication.getStateManager().getState(PlayerAppState.class);
         playerAppState.getSpellIndicatorSystem().showIndicator(spellInformation.getEntity());
     }

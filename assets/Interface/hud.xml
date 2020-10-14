@@ -489,7 +489,19 @@
                             <panel childLayout="horizontal" height="20px">
                                 <text id="player_spell_information_name" text="?" font="Interface/fonts/Verdana_18.fnt" textHAlign="left"/>
                                 <panel width="*"/>
-                                <text id="player_spell_information_cooldown" text="?" font="Interface/fonts/Verdana_18.fnt" textHAlign="right"/>
+                                <panel id="player_spell_information_mana_cost_icon" childLayout="vertical" width="16px">
+                                    <panel height="4px"/>
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/mana_16.png"/>
+                                </panel>
+                                <panel id="player_spell_information_mana_cost_separator" width="5px"/>
+                                <text id="player_spell_information_mana_cost_text" text="?" font="Interface/fonts/Verdana_18.fnt" textHAlign="left"/>
+                                <panel id="player_spell_information_separator_mana_cost_and_cooldown" width="10px"/>
+                                <panel id="player_spell_information_cooldown_icon" childLayout="vertical" width="16px">
+                                    <panel height="4px"/>
+                                    <image width="16px" height="16px" filename="Interface/hud/attributes/cooldown_speed_16.png"/>
+                                </panel>
+                                <panel id="player_spell_information_cooldown_separator" width="5px"/>
+                                <text id="player_spell_information_cooldown_text" text="?" font="Interface/fonts/Verdana_18.fnt" textHAlign="left"/>
                             </panel>
                             <panel height="8px"/>
                             <text id="player_spell_information_description" text="???" font="Interface/fonts/Verdana_14.fnt" textHAlign="left" textVAlign="top" wrap="true" width="100%"/>

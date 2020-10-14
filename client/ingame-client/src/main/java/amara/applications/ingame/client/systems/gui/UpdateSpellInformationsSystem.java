@@ -3,6 +3,7 @@ package amara.applications.ingame.client.systems.gui;
 import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.client.gui.objects.SpellInformation;
+import amara.applications.ingame.entitysystem.components.costs.ManaCostComponent;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.components.units.*;
@@ -74,7 +75,15 @@ public class UpdateSpellInformationsSystem extends GUIDisplaySystem<ScreenContro
                 }
                 CooldownComponent cooldownComponent = entityWorld.getComponent(spellEntities[i], CooldownComponent.class);
                 float cooldown = ((cooldownComponent != null) ? cooldownComponent.getDuration() : -1);
-                spellInformations[i] = new SpellInformation(spellEntities[i], name, description, cooldown);
+                Float manaCost = null;
+                CastCostComponent castCostComponent = entityWorld.getComponent(spellEntities[i], CastCostComponent.class);
+                if (castCostComponent != null) {
+                    ManaCostComponent manaCostComponent = entityWorld.getComponent(castCostComponent.getCostEntity(), ManaCostComponent.class);
+                    if (manaCostComponent != null) {
+                        manaCost = manaCostComponent.getMana();
+                    }
+                }
+                spellInformations[i] = new SpellInformation(spellEntities[i], name, description, cooldown, manaCost);
             }
         }
         return spellInformations;
