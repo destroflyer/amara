@@ -1,27 +1,20 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.master.client.network.backends;
 
+import amara.applications.master.client.appstates.CurrentGameAppState;
+import amara.applications.master.client.appstates.LoginAppState;
+import amara.libraries.network.MessageBackend;
+import amara.libraries.network.MessageResponse;
 import com.jme3.network.Message;
-import amara.applications.master.client.MasterserverClientApplication;
-import amara.applications.master.client.appstates.*;
 import amara.applications.master.network.messages.Message_LoginResult;
-import amara.libraries.network.*;
 
-/**
- *
- * @author Carl
- */
 public class LoginResultBackend implements MessageBackend {
 
-    public LoginResultBackend(MasterserverClientApplication mainApplication, LoginAppState loginAppState) {
-        this.mainApplication = mainApplication;
+    public LoginResultBackend(LoginAppState loginAppState, CurrentGameAppState currentGameAppState) {
         this.loginAppState = loginAppState;
+        this.currentGameAppState = currentGameAppState;
     }
-    private MasterserverClientApplication mainApplication;
     private LoginAppState loginAppState;
+    private CurrentGameAppState currentGameAppState;
     
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
@@ -30,7 +23,7 @@ public class LoginResultBackend implements MessageBackend {
             int playerId = message.getPlayerId();
             if (playerId != 0) {
                 loginAppState.onLoginSuccessful(playerId);
-                mainApplication.getStateManager().attach(new CurrentGameAppState());
+                currentGameAppState.setIsIngame(message.isIngame());
             } else {
                 loginAppState.onLoginFailed();
             }

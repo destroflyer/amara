@@ -1,6 +1,8 @@
 package amara.applications.ingame.server.appstates;
 
 import java.util.LinkedList;
+import java.util.function.Consumer;
+
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.entitysystem.components.players.*;
@@ -10,6 +12,8 @@ import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.entitysystem.components.visuals.*;
 import amara.applications.ingame.server.entitysystem.systems.mmo.MMOPersistenceUtil;
 import amara.applications.ingame.server.entitysystem.systems.mmo.state.MMOPlayerState;
+import amara.applications.ingame.server.network.backends.AddNewClientsBackend;
+import amara.applications.ingame.server.network.backends.RemoveLeavingClientsBackend;
 import amara.applications.ingame.shared.maps.Map;
 import amara.applications.ingame.shared.maps.MapSpell;
 import amara.applications.ingame.shared.maps.MapSpells;
@@ -29,15 +33,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class IngamePlayersAppState extends ServerBaseAppState {
 
     private ObjectMapper objectMapper = new ObjectMapper();
+    private LinkedList<Integer> newClientIds = new LinkedList<>();
+    private LinkedList<Integer> initializedClientIds = new LinkedList<>();
+    private LinkedList<Integer> removedClientIds = new LinkedList<>();
 
     @Override
     public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application) {
         super.initialize(stateManager, application);
-        addInitialPlayersToSubNetworkServer();
+        SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();
+        subNetworkServer.addMessageBackend(new AddNewClientsBackend(this));
+        subNetworkServer.addMessageBackend(new RemoveLeavingClientsBackend(this));
+        addInitialPlayersToSubNetworkServer(subNetworkServer);
     }
 
-    private void addInitialPlayersToSubNetworkServer() {
-        SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();
+    private void addInitialPlayersToSubNetworkServer(SubNetworkServer subNetworkServer) {
         for (GamePlayer<?> player : mainApplication.getGame().getPlayers()) {
             GamePlayerInfo gamePlayerInfo = player.getGamePlayerInfo();
             if (gamePlayerInfo instanceof GamePlayerInfo_Human) {
@@ -45,6 +54,30 @@ public class IngamePlayersAppState extends ServerBaseAppState {
                 subNetworkServer.add(gamePlayerInfo_Human.getClientId());
             }
         }
+    }
+
+    public void addNewClient(int clientId) {
+        newClientIds.add(clientId);
+    }
+
+    public void addRemovedClient(int clientId) {
+        removedClientIds.add(clientId);
+    }
+
+    public void handleNewClients(Consumer<Integer> initializeClientById) {
+        for (int newClientId : newClientIds) {
+            initializeClientById.accept(newClientId);
+        }
+        initializedClientIds.addAll(newClientIds);
+        newClientIds.clear();
+    }
+
+    public void handleRemovedClients(Consumer<Integer> removeClientById) {
+        for (int newClientId : removedClientIds) {
+            removeClientById.accept(newClientId);
+        }
+        initializedClientIds.removeAll(removedClientIds);
+        removedClientIds.clear();
     }
 
     public void createPlayerEntity(EntityWorld entityWorld, Map map, GamePlayer<?> player, Integer playerIndex) {
@@ -154,5 +187,9 @@ public class IngamePlayersAppState extends ServerBaseAppState {
             }
         }
         return new MapSpellsComponent(Util.convertToArray_Integer(mapSpellsEntities));
+    }
+
+    public LinkedList<Integer> getInitializedClientIds() {
+        return initializedClientIds;
     }
 }

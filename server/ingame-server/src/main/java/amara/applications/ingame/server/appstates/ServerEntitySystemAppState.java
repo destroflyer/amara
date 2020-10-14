@@ -12,8 +12,6 @@ import amara.applications.ingame.server.entitysystem.GameLogic;
 import amara.applications.ingame.server.entitysystem.systems.mmo.MMOPersistenceSystem;
 import amara.applications.ingame.server.entitysystem.systems.objectives.CheckMapObjectiveSystem;
 import amara.applications.ingame.server.network.backends.SendGameInfoBackend;
-import amara.applications.ingame.server.network.backends.AddNewClientsBackend;
-import amara.applications.ingame.server.network.backends.RemoveLeavingClientsBackend;
 import amara.applications.ingame.server.network.backends.StartGameBackend;
 import amara.applications.ingame.shared.maps.Map;
 import amara.applications.master.server.appstates.DatabaseAppState;
@@ -34,8 +32,6 @@ import java.util.LinkedList;
 
 public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<IngameServerApplication> {
 
-    private LinkedList<Integer> newClientIds = new LinkedList<>();
-    private LinkedList<Integer> initializedClientIds = new LinkedList<>();
     private ClientComponentBlacklist clientComponentBlacklist = new ClientComponentBlacklist();
     private MMOPersistenceSystem mmoPersistenceSystem;
 
@@ -45,8 +41,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         Game game = mainApplication.getGame();
         SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();
         subNetworkServer.addMessageBackend(new SendGameInfoBackend(game));
-        subNetworkServer.addMessageBackend(new AddNewClientsBackend(this));
-        subNetworkServer.addMessageBackend(new RemoveLeavingClientsBackend(this));
         subNetworkServer.addMessageBackend(new StartGameBackend(game));
         // Initialize game logic
         GameLogic gameLogic = new GameLogic(
@@ -69,6 +63,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         for (EntitySystem entitySystem : gameLogic.getEntitySystems()) {
             addEntitySystem(entitySystem);
         }
+        LinkedList<Integer> initializedClientIds = getAppState(IngamePlayersAppState.class).getInitializedClientIds();
         addEntitySystem(new SendEntityChangesSystem(subNetworkServer, initializedClientIds, clientComponentBlacklist));
         addEntitySystem(new CheckMapObjectiveSystem(map, mainApplication));
         if (game instanceof MMOGame) {
@@ -85,15 +80,9 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         if (mainApplication.getGame().isStarted()) {
             GameSynchronizingUtil.simulateSecondFrames(entityWorld, lastTimePerFrame, super::update);
         }
-        initializeNewClients();
-    }
-
-    private void initializeNewClients() {
-        for (int newClientId : newClientIds) {
-            sendInitialEntityWorldAndCreatePlayerEntityIfNotExisting(newClientId);
-        }
-        initializedClientIds.addAll(newClientIds);
-        newClientIds.clear();
+        IngamePlayersAppState ingamePlayersAppState = getAppState(IngamePlayersAppState.class);
+        ingamePlayersAppState.handleNewClients(this::sendInitialEntityWorldAndCreatePlayerEntityIfNotExisting);
+        ingamePlayersAppState.handleRemovedClients(this::removePlayer);
     }
 
     private void sendInitialEntityWorldAndCreatePlayerEntityIfNotExisting(int clientId) {
@@ -126,12 +115,7 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
         return gamePlayer.getEntity();
     }
 
-    public void addNewClient(int clientId) {
-        newClientIds.add(clientId);
-    }
-
-    public void removeInitializedClient(int clientId) {
-        initializedClientIds.remove((Integer) clientId);
+    private void removePlayer(int clientId) {
         Game game = mainApplication.getGame();
         GamePlayer<GamePlayerInfo_Human> player = game.getPlayerByClientId(clientId);
         GamePlayerInfo_Human gamePlayerInfo = player.getGamePlayerInfo();
@@ -143,8 +127,6 @@ public class ServerEntitySystemAppState extends EntitySystemHeadlessAppState<Ing
             SubNetworkServer subNetworkServer = getAppState(SubNetworkServerAppState.class).getSubNetworkServer();
             subNetworkServer.sendMessageToClient(clientId, new Message_GameOver());
             subNetworkServer.remove(clientId);
-        } else {
-            gamePlayerInfo.setReady(false);
         }
     }
 }

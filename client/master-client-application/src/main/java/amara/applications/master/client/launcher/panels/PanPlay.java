@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.master.client.launcher.panels;
 
 import javax.swing.JPanel;
@@ -9,19 +5,19 @@ import amara.applications.master.client.MasterserverClientUtil;
 import amara.applications.master.client.launcher.network.backends.*;
 import amara.libraries.network.NetworkClient;
 
-/**
- *
- * @author Carl
- */
-public class PanPlay extends javax.swing.JPanel{
+public class PanPlay extends javax.swing.JPanel {
 
-    public PanPlay(PanMainMenu panMainMenu){
+    public PanPlay(PanMainMenu panMainMenu) {
         initComponents();
         panSelectGameMode = new PanSelectGameMode();
         panLobby = new PanLobby();
         panGameSelection = new PanGameSelection();
         panIngame = new PanIngame();
-        displaySelectGameModePanel();
+        if (MasterserverClientUtil.isIngame()) {
+            displayIngamePanel();
+        } else {
+            displaySelectGameModePanel();
+        }
         NetworkClient networkClient = MasterserverClientUtil.getNetworkClient();
         networkClient.addMessageBackend(new GenericInformationBackend(panMainMenu));
         networkClient.addMessageBackend(new UpdateLobbyBackend(this));
@@ -29,36 +25,36 @@ public class PanPlay extends javax.swing.JPanel{
         networkClient.addMessageBackend(new LobbyQueueStatusBackend(panLobby));
         networkClient.addMessageBackend(new GameSelectionAcceptBackend(this));
         networkClient.addMessageBackend(new UpdateGameSelectionBackend(this));
-        networkClient.addMessageBackend(new GameCreatedBackend(this));
-        networkClient.addMessageBackend(new GameOverOrCrashedBackend(this));
+        networkClient.addMessageBackend(new DisplayGameCreatedBackend(this));
+        networkClient.addMessageBackend(new DisplayGameEndedBackend(this));
     }
     private PanSelectGameMode panSelectGameMode;
     private PanLobby panLobby;
     private PanGameSelection panGameSelection;
     private PanIngame panIngame;
-    
-    public void displaySelectGameModePanel(){
+
+    public void displaySelectGameModePanel() {
         setDisplayedPanel(panSelectGameMode);
     }
-    
-    public void displayLobbyPanel(){
-        if(setDisplayedPanel(panLobby)){
+
+    public void displayLobbyPanel() {
+        if (setDisplayedPanel(panLobby)) {
             panLobby.reset();
         }
     }
-    
-    public void displayGameSelectionPanel(){
-        if(setDisplayedPanel(panGameSelection)){
+
+    public void displayGameSelectionPanel() {
+        if (setDisplayedPanel(panGameSelection)) {
             panGameSelection.reset();
         }
     }
-    
-    public void displayIngamePanel(){
+
+    public void displayIngamePanel() {
         setDisplayedPanel(panIngame);
     }
-    
-    private boolean setDisplayedPanel(JPanel panel){
-        if((getComponentCount() == 0) || (panel != getComponent(0))){
+
+    private boolean setDisplayedPanel(JPanel panel) {
+        if ((getComponentCount() == 0) || (panel != getComponent(0))) {
             removeAll();
             add(panel);
             updateUI();
@@ -67,11 +63,11 @@ public class PanPlay extends javax.swing.JPanel{
         return false;
     }
 
-    public PanLobby getPanLobby(){
+    public PanLobby getPanLobby() {
         return panLobby;
     }
 
-    public PanGameSelection getPanGameSelection(){
+    public PanGameSelection getPanGameSelection() {
         return panGameSelection;
     }
 

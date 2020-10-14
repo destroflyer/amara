@@ -1,13 +1,15 @@
 package amara.applications.master.client.launcher.network.backends;
 
+import amara.applications.ingame.network.messages.Message_GameCrashed;
+import amara.applications.ingame.network.messages.Message_GameOver;
+import amara.libraries.network.MessageBackend;
+import amara.libraries.network.MessageResponse;
 import com.jme3.network.Message;
-import amara.applications.ingame.network.messages.*;
 import amara.applications.master.client.launcher.panels.PanPlay;
-import amara.libraries.network.*;
 
-public class GameOverOrCrashedBackend implements MessageBackend {
+public class DisplayGameEndedBackend implements MessageBackend {
 
-    public GameOverOrCrashedBackend(PanPlay panPlay) {
+    public DisplayGameEndedBackend(PanPlay panPlay) {
         this.panPlay = panPlay;
     }
     private PanPlay panPlay;

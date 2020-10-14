@@ -79,10 +79,7 @@ public class MainFrame extends JFrame {
                         panConnect.setInfoLabel("Retrieving ingame content...");
                         networkClient.sendMessage(new Message_GetGameContents());
                         CharactersAppState charactersAppState = masterClient.getStateManager().getState(CharactersAppState.class);
-                        while (true) {
-                            if (charactersAppState.getCharacters() != null) {
-                                break;
-                            }
+                        while (charactersAppState.getCharacters() == null) {
                             Util.sleep(100);
                         }
                         setDisplayedPanel(new PanMainMenu());

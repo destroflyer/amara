@@ -1,39 +1,28 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.master.server.players;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
-/**
- *
- * @author Carl
- */
-public class ConnectedPlayers{
-    
+public class ConnectedPlayers {
+
     private HashMap<Integer, Player> players = new HashMap<>();
-    
-    public void login(int clientID, Player player){
+
+    public void login(int clientID, Player player) {
         players.put(clientID, player);
     }
-    
-    public void logout(int clientID){
-        players.remove(clientID);
+
+    public void logout(int clientId){
+        players.remove(clientId);
     }
-    
-    public Player getPlayer(int clientID){
-        return players.get(clientID);
+
+    public Player getPlayer(int clientId) {
+        return players.get(clientId);
     }
-    
-    public int getClientID(int playerID){
-        Iterator<Integer> clientIDIterator = players.keySet().iterator();
-        while(clientIDIterator.hasNext()){
-            int clientID = clientIDIterator.next();
-            Player player = players.get(clientID);
-            if(player.getID() == playerID){
-                return clientID;
+
+    public int getClientID(int playerId) {
+        for (int clientId : players.keySet()) {
+            Player player = players.get(clientId);
+            if (player.getID() == playerId) {
+                return clientId;
             }
         }
         return -1;

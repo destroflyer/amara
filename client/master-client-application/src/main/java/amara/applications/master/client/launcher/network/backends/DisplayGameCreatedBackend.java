@@ -1,21 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.master.client.launcher.network.backends;
 
+import amara.libraries.network.MessageBackend;
+import amara.libraries.network.MessageResponse;
 import com.jme3.network.Message;
 import amara.applications.master.client.launcher.panels.PanPlay;
 import amara.applications.master.network.messages.Message_GameCreated;
-import amara.libraries.network.*;
 
-/**
- *
- * @author Carl
- */
-public class GameCreatedBackend implements MessageBackend {
+public class DisplayGameCreatedBackend implements MessageBackend {
 
-    public GameCreatedBackend(PanPlay panPlay) {
+    public DisplayGameCreatedBackend(PanPlay panPlay) {
         this.panPlay = panPlay;
     }
     private PanPlay panPlay;

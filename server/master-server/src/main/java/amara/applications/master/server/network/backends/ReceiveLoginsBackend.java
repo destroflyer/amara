@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.master.server.network.backends;
 
-import amara.core.files.FileManager;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -13,7 +8,11 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.jme3.network.Message;
 import amara.applications.master.network.messages.*;
 import amara.applications.master.server.appstates.*;
+import amara.applications.master.server.games.Game;
+import amara.applications.master.server.games.GamePlayer;
+import amara.applications.master.server.games.GamePlayerInfo_Human;
 import amara.applications.master.server.players.*;
+import amara.core.files.FileManager;
 import amara.libraries.network.*;
 import org.bouncycastle.openssl.PEMReader;
 
@@ -27,36 +26,34 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Map;
 
-/**
- *
- * @author Carl
- */
 public class ReceiveLoginsBackend implements MessageBackend {
 
-    public ReceiveLoginsBackend(PlayersAppState playersAppState) {
+    public ReceiveLoginsBackend(PlayersAppState playersAppState, GamesAppState gamesAppState) {
         this.playersAppState = playersAppState;
+        this.gamesAppState = gamesAppState;
         authTokenVerifier = createAuthTokenVerifier();
     }
     private PlayersAppState playersAppState;
+    private GamesAppState gamesAppState;
     private JWTVerifier authTokenVerifier;
 
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
         if (receivedMessage instanceof Message_Login) {
             Message_Login message = (Message_Login) receivedMessage;
-            int playerId = 0;
             try {
                 DecodedJWT decodedJWT = authTokenVerifier.verify(message.getAuthToken());
                 Map<String, Object> user = decodedJWT.getClaim("user").asMap();
-                playerId = (int) user.get("id");
+                int playerId = (int) user.get("id");
                 String login = (String) user.get("login");
                 ConnectedPlayers connectedPlayers = playersAppState.getConnectedPlayers();
                 connectedPlayers.login(messageResponse.getClientId(), new Player(playerId, login));
                 System.out.println("Login '" + login + "' (#" + playerId + ")");
+                boolean isIngame = checkAndUpdateRunningGame(messageResponse.getClientId(), playerId);
+                messageResponse.addAnswerMessage(new Message_LoginResult(playerId, isIngame));
             } catch (JWTVerificationException ex) {
                 // Token should not be trusted
             }
-            messageResponse.addAnswerMessage(new Message_LoginResult(playerId));
         }
     }
 
@@ -75,5 +72,17 @@ public class ReceiveLoginsBackend implements MessageBackend {
             ex.printStackTrace();
             return null;
         }
+    }
+
+    private boolean checkAndUpdateRunningGame(int clientId, int playerId) {
+        Game game = gamesAppState.getRunningGames().getGame(playerId);
+        if (game != null) {
+            GamePlayer<GamePlayerInfo_Human> gamePlayer = game.getPlayerByPlayerId(playerId);
+            gamePlayer.getGamePlayerInfo().setClientId(clientId);
+            game.getSubNetworkServer().add(clientId);
+            System.out.println("Player #" + playerId + " is already ingame - Updated to the new connection (Client #" + clientId + ").");
+            return true;
+        }
+        return false;
     }
 }

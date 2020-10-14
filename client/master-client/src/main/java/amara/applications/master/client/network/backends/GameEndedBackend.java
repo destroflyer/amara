@@ -1,23 +1,24 @@
 package amara.applications.master.client.network.backends;
 
+import amara.applications.ingame.network.messages.Message_GameCrashed;
+import amara.applications.ingame.network.messages.Message_GameOver;
 import amara.applications.master.client.appstates.CurrentGameAppState;
-import amara.applications.master.network.messages.Message_GameCreated;
 import amara.libraries.network.MessageBackend;
 import amara.libraries.network.MessageResponse;
 import com.jme3.network.Message;
 
-public class GameCreatedBackend implements MessageBackend {
+public class GameEndedBackend implements MessageBackend {
 
-    public GameCreatedBackend(CurrentGameAppState currentGameAppState) {
+    public GameEndedBackend(CurrentGameAppState currentGameAppState) {
         this.currentGameAppState = currentGameAppState;
     }
     private CurrentGameAppState currentGameAppState;
 
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
-        if (receivedMessage instanceof Message_GameCreated) {
-            currentGameAppState.setIsIngame(true);
-            currentGameAppState.startIngameClient();
+        if ((receivedMessage instanceof Message_GameOver)
+         || (receivedMessage instanceof Message_GameCrashed)) {
+            currentGameAppState.setIsIngame(false);
         }
     }
 }

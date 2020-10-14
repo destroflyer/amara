@@ -1,17 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.master.server.games;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-/**
- *
- * @author Carl
- */
 public class RunningGames {
 
     private HashMap<String, Game> mmoGames = new HashMap<>();
@@ -52,26 +44,17 @@ public class RunningGames {
 
     private Game getTeamGame(int playerId) {
         return teamGames.stream()
-                .filter(game -> isInGame(game, playerId)).findAny()
+                .filter(game -> hasPlayer(game, playerId)).findAny()
                 .orElse(null);
     }
 
     private Game getMMOGame(int playerId) {
         return mmoGames.values().stream()
-                .filter(game -> isInGame(game, playerId)).findAny()
+                .filter(game -> hasPlayer(game, playerId)).findAny()
                 .orElse(null);
     }
 
-    private boolean isInGame(Game game, int playerId) {
-        for (GamePlayer player : game.getPlayers()) {
-            GamePlayerInfo gamePlayerInfo = player.getGamePlayerInfo();
-            if (gamePlayerInfo instanceof GamePlayerInfo_Human) {
-                GamePlayerInfo_Human gamePlayerInfo_Human = (GamePlayerInfo_Human) gamePlayerInfo;
-                if (gamePlayerInfo_Human.getPlayerId() == playerId) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    private boolean hasPlayer(Game game, int playerId) {
+        return (game.getPlayerByPlayerId(playerId) != null);
     }
 }

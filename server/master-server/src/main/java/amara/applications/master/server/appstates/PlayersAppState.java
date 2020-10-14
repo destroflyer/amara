@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.master.server.appstates;
 
 import java.util.HashMap;
@@ -14,10 +10,6 @@ import amara.libraries.applications.headless.appstates.NetworkServerAppState;
 import amara.libraries.database.QueryResult;
 import amara.libraries.network.NetworkServer;
 
-/**
- *
- * @author Carl
- */
 public class PlayersAppState extends ServerBaseAppState {
 
     private ConnectedPlayers connectedPlayers = new ConnectedPlayers();
@@ -31,7 +23,8 @@ public class PlayersAppState extends ServerBaseAppState {
         DatabaseAppState databaseAppState = getAppState(DatabaseAppState.class);
         DestrostudiosAppState destrostudiosAppState = getAppState(DestrostudiosAppState.class);
         PlayersContentsAppState playersContentsAppState = getAppState(PlayersContentsAppState.class);
-        networkServer.addMessageBackend(new ReceiveLoginsBackend(this));
+        GamesAppState gamesAppState = getAppState(GamesAppState.class);
+        networkServer.addMessageBackend(new ReceiveLoginsBackend(this, gamesAppState));
         networkServer.addMessageBackend(new SendPlayerProfilesDataBackend(databaseAppState, this, destrostudiosAppState));
         networkServer.addMessageBackend(new SendPlayerStatusesBackend(this));
         networkServer.addMessageBackend(new EditUserMetaBackend(databaseAppState, this));

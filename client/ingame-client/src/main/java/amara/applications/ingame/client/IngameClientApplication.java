@@ -59,13 +59,14 @@ public class IngameClientApplication extends DisplayApplication {
         stateManager.attach(new IngameCameraAppState(true));
         stateManager.attach(new IngameFeedbackAppState());
         stateManager.attach(new LoadingScreenAppState());
-        stateManager.attach(new JoinGameInfoAppState());
+        stateManager.attach(new JoinGameAppState());
     }
 
     @Override
     public void destroy() {
         super.destroy();
         stateManager.getState(IngameNetworkAppState.class).sendMessage(new Message_LeaveGame());
+        System.out.println("Closed ingame client.");
     }
 
     public MasterserverClientInterface getMasterserverClient() {

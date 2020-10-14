@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.network;
 
 import java.util.LinkedList;
 import com.jme3.network.Message;
 
-/**
- *
- * @author Carl
- */
 public class SubNetworkServer extends BaseServer {
 
     SubNetworkServer(NetworkServer networkServer) {
@@ -19,12 +10,6 @@ public class SubNetworkServer extends BaseServer {
     }
     private NetworkServer networkServer;
     private LinkedList<Integer> clientIds = new LinkedList<>();
-
-    @Override
-    public void onClientConnected(int clientId) {
-        super.onClientConnected(clientId);
-        clientIds.add(clientId);
-    }
 
     @Override
     public void onClientDisconnected(int clientId) {

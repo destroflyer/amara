@@ -44,6 +44,10 @@ public class MasterserverClientUtil {
         return getState(MapsAppState.class).getMapNames();
     }
 
+    public static boolean isIngame() {
+        return getState(CurrentGameAppState.class).isIngame();
+    }
+
     private static <T extends HeadlessAppState> T getState(Class<T> stateClass) {
         return MasterserverClientApplication.getInstance().getStateManager().getState(stateClass);
     }

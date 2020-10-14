@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.master.client.appstates;
 
 import amara.applications.ingame.client.IngameClientApplication;
@@ -9,17 +5,17 @@ import amara.applications.ingame.client.interfaces.MasterserverClientInterface;
 import amara.applications.master.client.MasterserverClientApplication;
 import amara.applications.master.client.MasterserverClientUtil;
 import amara.applications.master.client.network.backends.GameCreatedBackend;
+import amara.applications.master.client.network.backends.GameEndedBackend;
 import amara.applications.master.network.messages.objects.PlayerProfileData;
-import amara.libraries.applications.headless.applications.*;
+import amara.libraries.applications.headless.applications.HeadlessAppState;
+import amara.libraries.applications.headless.applications.HeadlessAppStateManager;
+import amara.libraries.applications.headless.applications.HeadlessApplication;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.network.NetworkClient;
 
-/**
- *
- * @author Carl
- */
-public class CurrentGameAppState extends ClientBaseAppState{
+public class CurrentGameAppState extends ClientBaseAppState {
 
+    private boolean isIngame;
     private MasterserverClientInterface masterserverClientInterface = new MasterserverClientInterface() {
 
         @Override
@@ -39,14 +35,24 @@ public class CurrentGameAppState extends ClientBaseAppState{
     };
 
     @Override
-    public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application){
+    public void initialize(HeadlessAppStateManager stateManager, HeadlessApplication application) {
         super.initialize(stateManager, application);
         NetworkClient networkClient = getAppState(NetworkClientHeadlessAppState.class).getNetworkClient();
         networkClient.addMessageBackend(new GameCreatedBackend(this));
+        networkClient.addMessageBackend(new GameEndedBackend(this));
     }
 
     public void startIngameClient() {
+        System.out.println("Starting ingame client.");
         IngameClientApplication ingameClientApplication = new IngameClientApplication(masterserverClientInterface);
         ingameClientApplication.start();
+    }
+
+    public void setIsIngame(boolean isIngame) {
+        this.isIngame = isIngame;
+    }
+
+    public boolean isIngame() {
+        return isIngame;
     }
 }

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.master.server.appstates;
 
 import amara.applications.ingame.network.messages.Message_GameCrashed;
@@ -16,10 +12,6 @@ import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
 import amara.libraries.network.NetworkServer;
 import amara.libraries.network.SubNetworkServer;
 
-/**
- *
- * @author Carl
- */
 public class GamesAppState extends ServerBaseAppState {
 
     public GamesAppState() {
