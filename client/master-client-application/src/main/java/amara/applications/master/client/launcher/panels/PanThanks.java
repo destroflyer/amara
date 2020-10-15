@@ -85,6 +85,9 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("Temporalcortex", "HUD Overlay \"Metal Tech\"", "Interface/client/thanks/youtube.png", "https://youtube.com/Temporalcortex"),
         // Textures
         new Thanks("Twitch", "Reaction Emotes", "Interface/client/thanks/twitch.png", "https://twitch.tv"),
+        new Thanks("stockio", "Texture \"Water drop icon\"", "Interface/hud/attributes/mana_16.png", "https://stockio.com"),
+        new Thanks("pngtree", "Texture \"Der Boden Trocknet Crack Effekt\"", "Models/dwarf_warrior_ult_impact/resources/diffuse.png", "https://pngtree.com"),
+        new Thanks("PNGEgg", "Texture \"Ground cracked circle\"", "Models/tristan_ult/resources/diffuse.png", "https://pngegg.com"),
         new Thanks("Para", "Texture set \"Animated particle effects #2\"", "Textures/effects/blood.png", "https://opengameart.org/users/para"),
         new Thanks("RigzSoft", "Texture \"Frost\"", "Textures/effects/frost_additive.png", "https://rigzsoft.co.uk"),
         new Thanks("Rawshorts", "Texture \"Heart\"", "Textures/effects/heart.png", "https://rawshorts.com"),
