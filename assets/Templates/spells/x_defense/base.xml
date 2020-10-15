@@ -1,7 +1,10 @@
 <template>
+    <values>
+        <duration>3</duration>
+    </values>
     <entity id="spell">
         <name>X Defense</name>
-        <description>Instantly heals for 200 health. (TODO: Shield instead of heal)</description>
+        <description>Grants a 200 health shield for [duration] seconds.</description>
         <spellVisualisation>x_defense</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
@@ -27,7 +30,11 @@
                 <targetTarget/>
                 <triggeredEffect>
                     <entity>
-                        <heal>200</heal>
+                        <addShield duration="[duration]">
+                            <entity>
+                                <shieldAmount>200</shieldAmount>
+                            </entity>
+                        </addShield>
                     </entity>
                 </triggeredEffect>
                 <triggerSource>#spell</triggerSource>

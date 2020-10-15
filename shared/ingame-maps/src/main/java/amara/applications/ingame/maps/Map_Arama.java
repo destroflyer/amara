@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.maps;
 
 import com.jme3.math.Vector2f;
@@ -39,17 +35,13 @@ import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 import amara.libraries.physics.shapes.*;
 
-/**
- *
- * @author Carl
- */
 public class Map_Arama extends Map {
 
     public Map_Arama() {
         spells = new MapSpells[] {
             new MapSpells(new String[]{"player_0", "player_1"},
                 new MapSpell("spells/instant_transmission/base"),
-                new MapSpell("spells/bleed_out/base"),
+                new MapSpell("spells/ember/base"),
                 new MapSpell("spells/x_defense/base"),
                 new MapSpell("spells/fatique/base"),
                 new MapSpell("spells/recovery/base")

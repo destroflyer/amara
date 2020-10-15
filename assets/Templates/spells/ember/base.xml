@@ -1,8 +1,8 @@
 <template>
     <entity id="spell">
-        <name>Bleed Out</name>
-        <description>Deals 200 damage over 5 seconds to the target.</description>
-        <spellVisualisation>bleed_out</spellVisualisation>
+        <name>Ember</name>
+        <description>Deals 200 damage over 5 seconds to the target character.</description>
+        <spellVisualisation>ember</spellVisualisation>
         <spellIndicator>
             <entity>
                 <circularIndicator radius="10"/>
@@ -17,7 +17,7 @@
                         <triggerSpellEffects>#spell</triggerSpellEffects>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/bleed_out_hit.ogg</audio>
+                                <audio>Sounds/sounds/spells/ember_hit.ogg</audio>
                             </entity>
                         </playAudio>
                     </entity>
@@ -47,9 +47,9 @@
                     <entity>
                         <addBuff duration="5">
                             <entity>
-                                <name>Bleeding</name>
+                                <name>Burning</name>
                                 <description>This unit receives magic damage over time.</description>
-                                <buffIcon>spells/bleed_out</buffIcon>
+                                <buffIcon>spells/ember</buffIcon>
                                 <buffVisualisation>burning</buffVisualisation>
                                 <repeatingEffect interval="0.5">
                                     <entity>

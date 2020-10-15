@@ -4,7 +4,7 @@
     </values>
     <entity id="spell">
         <name>Recovery</name>
-        <description>Channels for [castDuration] seconds, regenerating 400 health. Can be cancelled and will be interrupted by damage.</description>
+        <description>Channels for [castDuration] seconds, regenerating 400 health. Will be interrupted by moving or taking damage.</description>
         <spellVisualisation>recovery</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
