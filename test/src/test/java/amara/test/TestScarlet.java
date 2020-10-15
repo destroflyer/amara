@@ -411,7 +411,7 @@ public class TestScarlet extends CommandingPlayerTest {
         assertEquals(900, getHealth(targetDummy2), EPSILON);
         assertTrue(hasBuff(targetDummy1, NAME_PASSIVE_BUFF));
         assertTrue(hasBuff(targetDummy2, NAME_PASSIVE_BUFF));
-        assertEquals(9, getRemainingCooldown(character, SPELL_INDEX_E), EPSILON);
+        assertEquals(11, getRemainingCooldown(character, SPELL_INDEX_E), EPSILON);
         tickSeconds(3);
         assertFalse(hasBuff(targetDummy1, NAME_PASSIVE_BUFF));
         assertFalse(hasBuff(targetDummy2, NAME_PASSIVE_BUFF));
@@ -431,7 +431,7 @@ public class TestScarlet extends CommandingPlayerTest {
         tickSeconds(1);
         assertTrue(isFullHealth(targetDummy1));
         assertTrue(isFullHealth(targetDummy2));
-        assertEquals(9, getRemainingCooldown(character, SPELL_INDEX_E), EPSILON);
+        assertEquals(11, getRemainingCooldown(character, SPELL_INDEX_E), EPSILON);
 
         onLogicEnd(false, false);
     }
@@ -682,7 +682,7 @@ public class TestScarlet extends CommandingPlayerTest {
         assertEquals(800, getHealth(targetDummy2), EPSILON);
         assertTrue(hasBuff(targetDummy1, NAME_PASSIVE_BUFF));
         assertTrue(hasBuff(targetDummy2, NAME_PASSIVE_BUFF));
-        assertEquals(9, getRemainingCooldown(character, SPELL_INDEX_R), EPSILON);
+        assertEquals(89, getRemainingCooldown(character, SPELL_INDEX_R), EPSILON);
         tickSeconds(3);
         assertFalse(hasBuff(targetDummy1, NAME_PASSIVE_BUFF));
         assertFalse(hasBuff(targetDummy2, NAME_PASSIVE_BUFF));
@@ -702,7 +702,7 @@ public class TestScarlet extends CommandingPlayerTest {
         tickSeconds(1);
         assertTrue(isFullHealth(targetDummy1));
         assertTrue(isFullHealth(targetDummy2));
-        assertEquals(9, getRemainingCooldown(character, SPELL_INDEX_R), EPSILON);
+        assertEquals(89, getRemainingCooldown(character, SPELL_INDEX_R), EPSILON);
 
         onLogicEnd(false, false);
     }

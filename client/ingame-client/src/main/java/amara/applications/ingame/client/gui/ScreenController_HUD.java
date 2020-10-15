@@ -339,27 +339,42 @@ public class ScreenController_HUD extends GameScreenController {
         getTextRenderer("player_spell_information_description").setText(spellInformation.getDescription());
         // Cooldown
         boolean hasCooldown = (spellInformation.getCooldown() != -1);
-        getElementByID("player_spell_information_cooldown_icon").setVisible(hasCooldown);
-        getElementByID("player_spell_information_cooldown_separator").setVisible(hasCooldown);
+        Element cooldownIcon = getElementByID("player_spell_information_cooldown_icon");
+        cooldownIcon.setVisible(hasCooldown);
+        cooldownIcon.setConstraintWidth(new SizeValue((hasCooldown ? 16 : 0) + "px"));
+        Element cooldownSeparator = getElementByID("player_spell_information_cooldown_separator");
+        cooldownSeparator.setVisible(hasCooldown);
+        cooldownSeparator.setConstraintWidth(new SizeValue((hasCooldown ? 5 : 0) + "px"));
         Element cooldownText = getElementByID("player_spell_information_cooldown_text");
-        cooldownText.setVisible(hasCooldown);
+        int cooldownTextWidth = 0;
         if (hasCooldown) {
             TextRenderer cooldownTextRenderer = getTextRenderer(cooldownText.getId());
             cooldownTextRenderer.setText(GUIUtil.getValueText(spellInformation.getCooldown()) + "s");
-            cooldownText.setConstraintWidth(new SizeValue(cooldownTextRenderer.getTextWidth() + "px"));
+            cooldownTextWidth = cooldownTextRenderer.getTextWidth();
         }
+        cooldownText.setVisible(hasCooldown);
+        cooldownText.setConstraintWidth(new SizeValue(cooldownTextWidth + "px"));
         // ManaCost
         boolean hasManaCost = (spellInformation.getManaCost() != null);
-        getElementByID("player_spell_information_mana_cost_icon").setVisible(hasManaCost);
-        getElementByID("player_spell_information_mana_cost_separator").setVisible(hasManaCost);
+        Element manaCostIcon = getElementByID("player_spell_information_mana_cost_icon");
+        manaCostIcon.setVisible(hasManaCost);
+        manaCostIcon.setConstraintWidth(new SizeValue((hasManaCost ? 16 : 0) + "px"));
+        Element manaCostSeparator = getElementByID("player_spell_information_mana_cost_separator");
+        manaCostSeparator.setVisible(hasManaCost);
+        manaCostSeparator.setConstraintWidth(new SizeValue((hasManaCost ? 5 : 0) + "px"));
         Element manaCostText = getElementByID("player_spell_information_mana_cost_text");
-        manaCostText.setVisible(hasManaCost);
+        int manaCostTextWidth = 0;
         if (hasManaCost) {
             TextRenderer manaCostTextRenderer = getTextRenderer(manaCostText.getId());
             manaCostTextRenderer.setText(GUIUtil.getValueText(spellInformation.getManaCost()));
-            manaCostText.setConstraintWidth(new SizeValue(manaCostTextRenderer.getTextWidth() + "px"));
+            manaCostTextWidth = manaCostTextRenderer.getTextWidth();
         }
-        getElementByID("player_spell_information_separator_mana_cost_and_cooldown").setVisible(hasManaCost && hasCooldown);
+        manaCostText.setVisible(hasManaCost);
+        manaCostText.setConstraintWidth(new SizeValue(manaCostTextWidth + "px"));
+        boolean displayManaCostAndCooldownSeparator = (hasManaCost && hasCooldown);
+        Element manaCostAndCooldownSeparator = getElementByID("player_spell_information_separator_mana_cost_and_cooldown");
+        manaCostAndCooldownSeparator.setVisible(displayManaCostAndCooldownSeparator);
+        manaCostAndCooldownSeparator.setConstraintWidth(new SizeValue((displayManaCostAndCooldownSeparator ? 10 : 0) + "px"));
         cooldownText.getParent().layoutElements();
         PlayerAppState playerAppState = mainApplication.getStateManager().getState(PlayerAppState.class);
         playerAppState.getSpellIndicatorSystem().showIndicator(spellInformation.getEntity());

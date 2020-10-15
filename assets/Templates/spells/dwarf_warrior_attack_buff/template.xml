@@ -110,7 +110,7 @@
                 <manaCost>20</manaCost>
             </entity>
         </castCost>
-        <baseCooldown>7</baseCooldown>
+        <baseCooldown>6</baseCooldown>
     </entity>
     <!--add stack on kill trigger-->
     <entity>

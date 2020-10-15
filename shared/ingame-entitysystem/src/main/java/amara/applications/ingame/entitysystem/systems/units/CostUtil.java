@@ -59,8 +59,8 @@ public class CostUtil {
             // BuffStacks
             BuffStacksCostComponent buffStacksCostComponent = entityWorld.getComponent(costEntity, BuffStacksCostComponent.class);
             if (buffStacksCostComponent != null) {
-                int remainingStacks = remainingBuffStacks.get(buffStacksCostComponent.getBuffEntity());
-                if (buffStacksCostComponent.getStacks() > remainingStacks) {
+                Integer remainingStacks = remainingBuffStacks.get(buffStacksCostComponent.getBuffEntity());
+                if ((remainingStacks == null) || (buffStacksCostComponent.getStacks() > remainingStacks)) {
                     return false;
                 }
                 remainingStacks -= buffStacksCostComponent.getStacks();

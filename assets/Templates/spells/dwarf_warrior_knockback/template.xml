@@ -54,7 +54,7 @@
             </entity>
         </castAnimation>
         <range if="![multipleTargets]" type="edge_to_edge" distance="2"/>
-        <baseCooldown>1</baseCooldown>
+        <baseCooldown>15</baseCooldown>
         <spellTargetRules if="![multipleTargets]">
             <entity>
                 <acceptEnemies/>

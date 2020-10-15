@@ -50,7 +50,7 @@
             </entity>
         </castAnimation>
         <range type="center_to_center" distance="7"/>
-        <baseCooldown>1</baseCooldown>
+        <baseCooldown>20</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>

@@ -52,7 +52,6 @@
                 <buffStacksCost buffEntity="#healBuff" stacks="[stacksCost]"/>
             </entity>
         </castCost>
-        <baseCooldown>1</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>

@@ -46,6 +46,6 @@
                 <loopDuration>2.5</loopDuration>
             </entity>
         </castAnimation>
-        <baseCooldown>12</baseCooldown>
+        <baseCooldown>15</baseCooldown>
     </entity>
 </template>

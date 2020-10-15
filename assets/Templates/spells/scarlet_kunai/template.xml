@@ -74,7 +74,7 @@
                 <loopDuration>0.75</loopDuration>
             </entity>
         </castAnimation>
-        <baseCooldown>1</baseCooldown>
+        <baseCooldown>7</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>

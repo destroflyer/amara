@@ -66,6 +66,7 @@
             </entity>
         </castAnimation>
         <range type="center_to_center" distance="14"/>
+        <baseCooldown>8</baseCooldown>
         <spellTargetRules>
             <entity>
                 <acceptEnemies/>

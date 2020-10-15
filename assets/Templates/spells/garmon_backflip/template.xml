@@ -40,7 +40,7 @@
                 <manaCost>70</manaCost>
             </entity>
         </castCost>
-        <baseCooldown>9</baseCooldown>
+        <baseCooldown>10</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>

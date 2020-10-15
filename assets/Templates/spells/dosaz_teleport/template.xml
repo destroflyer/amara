@@ -75,7 +75,7 @@
                 <loopDuration>1.4</loopDuration>
             </entity>
         </castAnimation>
-        <baseCooldown>1</baseCooldown>
+        <baseCooldown>20</baseCooldown>
         <spellTargetRules>
             <entity>
                 <acceptAllies/>
