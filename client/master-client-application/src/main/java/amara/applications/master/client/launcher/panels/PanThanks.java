@@ -72,6 +72,7 @@ public class PanThanks extends javax.swing.JPanel {
         new Thanks("Digital Worlds JSC", "Icon sets \"Loot Icons Pack Vol.1-6\"", "Interface/client/thanks/unity.png", "https://assetstore.unity.com/publishers/6364"),
         new Thanks("PONETI", "Icon sets \"500 Skill Icons Vol.1-2\"", "Interface/client/thanks/unity.png", "https://assetstore.unity.com/publishers/38930"),
         new Thanks("Temporalcortex", "HUD Overlay \"Metal Tech\"", "Interface/client/thanks/youtube.png", "https://youtube.com/Temporalcortex"),
+        new Thanks("veryicon", "Texture \"Gold Bullion\"", "Interface/hud/gold.png", "https://veryicon.com"),
         new Thanks("flaticon", "Texture \"Clock With White Face\"", "Interface/hud/time.png", "https://flaticon.com"),
         new Thanks("pngtree", "Texture \"Der Boden Trocknet Crack Effekt\"", "Models/dwarf_warrior_ult_impact/resources/diffuse.png", "https://pngtree.com"),
         new Thanks("PNGEgg", "Texture \"Ground cracked circle\"", "Models/tristan_ult/resources/diffuse.png", "https://pngegg.com"),
@@ -81,6 +82,7 @@ public class PanThanks extends javax.swing.JPanel {
         new Thanks("Rawshorts", "Texture \"Heart\"", "Textures/effects/heart.png", "https://rawshorts.com"),
         new Thanks("ClipArtBest", "Texture \"Crosshair's Cutie Mark\"", "Textures/effects/robins_gift_mark.png", "http://clipartbest.com"),
         new Thanks("CleanPNG", "Texture \"Ninja Shuriken\"", "Textures/effects/scarlet_passive.png", "https://cleanpng.com"),
+        new Thanks("redheadstock", "Texture \"Grass Transparent\"", "Textures/plants/bush.png", "https://deviantart.com/redheadstock"),
         new Thanks("Jockum Skoglund", "Sky map \"Miramar\"", "Textures/skies/miramar/front.png", "https://deviantart.com/hipshot"),
         // Audio
         new Thanks("Michikawa", "Music pack \"Celestial Aeon Project\"", "Interface/client/audio.png", "https://mikseri.net/essence"),
