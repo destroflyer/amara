@@ -2,6 +2,7 @@ package amara.applications.ingame.server.appstates;
 
 import amara.applications.ingame.network.messages.objects.commands.PlayerCommand;
 import amara.applications.ingame.server.network.backends.ReceiveCommandsBackend;
+import amara.applications.master.server.games.TeamGame;
 import amara.core.Queue;
 import amara.libraries.applications.headless.applications.HeadlessAppStateManager;
 import amara.libraries.applications.headless.applications.HeadlessApplication;
@@ -26,7 +27,7 @@ public class ReceiveCommandsAppState extends ServerBaseAppState {
     public void update(float lastTimePerFrame) {
         super.update(lastTimePerFrame);
         timeSinceLastCommand += lastTimePerFrame;
-        if (timeSinceLastCommand > MAXIMUM_TIME_SINCE_LAST_COMMAND) {
+        if ((mainApplication.getGame() instanceof TeamGame) && (timeSinceLastCommand > MAXIMUM_TIME_SINCE_LAST_COMMAND)) {
             System.out.println("Maximum time since last command reached - Closing ingame server...");
             mainApplication.onGameOver();
         }
