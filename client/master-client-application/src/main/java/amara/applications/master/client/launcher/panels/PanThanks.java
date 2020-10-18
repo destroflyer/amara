@@ -1,13 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * PanThanks.java
- *
- * Created on 02.08.2012, 23:56:34
- */
 package amara.applications.master.client.launcher.panels;
 
 import java.awt.Cursor;
@@ -20,17 +10,13 @@ import amara.core.Util;
 import amara.core.files.FileAssets;
 import java.awt.Color;
 
-/**
- *
- * @author Carl
- */
-public class PanThanks extends javax.swing.JPanel{
+public class PanThanks extends javax.swing.JPanel {
 
-    public PanThanks(){
+    public PanThanks() {
         initComponents();
         addThanks();
     }
-    private static final Thanks[] THANKS = new Thanks[]{
+    private static final Thanks[] THANKS = new Thanks[] {
         new Thanks("jMonkeyEngine", "Engine development, Starting help", "Interface/client/thanks/jmonkeyengine.png", "https://jmonkeyengine.org"),
         new Thanks("Meshtint", "Character models", "Interface/client/thanks/meshtint.png", "https://meshtint.com"),
         new Thanks("Mixamo", "Character models and rigs", "Interface/client/thanks/mixamo.png", "https://www.mixamo.com"),
@@ -75,39 +61,40 @@ public class PanThanks extends javax.swing.JPanel{
         new Thanks("Effekseer", "Particle editor including samples", "Interface/client/thanks/effekseer.png", "https://effekseer.github.io"),
         new Thanks("ShaderBlow", "Shaders (Bubble, CartoonEdge, Electricity, Glass)", "Interface/client/thanks/jmonkeyengine.png", "https://github.com/jMonkeyEngine-Contributions/shaderblowlib"),
         new Thanks("t0neg0d", "Particle effects", "Interface/client/thanks/jmonkeyengine.png", "https://github.com/t0neg0d"),
-        // Interface
+        new Thanks("Emily", "Random item name generators", "Interface/client/thanks/emily.png", "https://fantasynamegenerators.com"),
+        // Textures
         new Thanks("Icons8", "Icon \"Bot\"", "Interface/client/avatars/bot.png", "https://icons8.com/icon/37410/bot"),
         new Thanks("Mahmoud Saleh", "Icon set \"Mini Icons\"", "Interface/client/audio.png", "https://iconarchive.com/artist/salehhh.html"),
         new Thanks("Pixel Mixer", "Icon set \"Basic Icons\"", "Interface/client/user.png", "https://iconarchive.com/artist/pixelmixer.html"),
         new Thanks("juanello", "Cursors \"Warrior Gloves\"", "Interface/client/thanks/realworld_graphics.png", "http://rw-designer.com/user-art/19010"),
+        new Thanks("stockio", "Texture \"Water drop icon\"", "Interface/hud/attributes/mana_16.png", "https://stockio.com"),
+        new Thanks("veryicon", "Texture \"Boot icon\"", "Interface/hud/attributes/walk_speed_16.png", "https://veryicon.com"),
         new Thanks("Digital Worlds JSC", "Icon sets \"Loot Icons Pack Vol.1-6\"", "Interface/client/thanks/unity.png", "https://assetstore.unity.com/publishers/6364"),
         new Thanks("PONETI", "Icon sets \"500 Skill Icons Vol.1-2\"", "Interface/client/thanks/unity.png", "https://assetstore.unity.com/publishers/38930"),
         new Thanks("Temporalcortex", "HUD Overlay \"Metal Tech\"", "Interface/client/thanks/youtube.png", "https://youtube.com/Temporalcortex"),
-        // Textures
-        new Thanks("Twitch", "Reaction Emotes", "Interface/client/thanks/twitch.png", "https://twitch.tv"),
-        new Thanks("stockio", "Texture \"Water drop icon\"", "Interface/hud/attributes/mana_16.png", "https://stockio.com"),
+        new Thanks("flaticon", "Texture \"Clock With White Face\"", "Interface/hud/time.png", "https://flaticon.com"),
         new Thanks("pngtree", "Texture \"Der Boden Trocknet Crack Effekt\"", "Models/dwarf_warrior_ult_impact/resources/diffuse.png", "https://pngtree.com"),
         new Thanks("PNGEgg", "Texture \"Ground cracked circle\"", "Models/tristan_ult/resources/diffuse.png", "https://pngegg.com"),
+        new Thanks("Twitch", "Reaction emotes", "Interface/client/thanks/twitch.png", "https://twitch.tv"),
         new Thanks("Para", "Texture set \"Animated particle effects #2\"", "Textures/effects/blood.png", "https://opengameart.org/users/para"),
         new Thanks("RigzSoft", "Texture \"Frost\"", "Textures/effects/frost_additive.png", "https://rigzsoft.co.uk"),
         new Thanks("Rawshorts", "Texture \"Heart\"", "Textures/effects/heart.png", "https://rawshorts.com"),
         new Thanks("ClipArtBest", "Texture \"Crosshair's Cutie Mark\"", "Textures/effects/robins_gift_mark.png", "http://clipartbest.com"),
         new Thanks("CleanPNG", "Texture \"Ninja Shuriken\"", "Textures/effects/scarlet_passive.png", "https://cleanpng.com"),
         new Thanks("Jockum Skoglund", "Sky map \"Miramar\"", "Textures/skies/miramar/front.png", "https://deviantart.com/hipshot"),
-        //Audio
+        // Audio
         new Thanks("Michikawa", "Music pack \"Celestial Aeon Project\"", "Interface/client/audio.png", "https://mikseri.net/essence"),
         new Thanks("Dynamedion", "Music pack \"Music Demo Reel\"", "Interface/client/audio.png", "https://dynamedion.com/home"),
-        new Thanks("Blastwave FX", "Sound pack \"Free Sound Effects Download Pack #1\"", "Interface/client/audio.png", "https://blastwavefx.com"),
+        new Thanks("Blastwave FX", "Sound pack \"Free Sound Effects Download Pack #1\"", "Interface/client/audio.png", "https://blastwavefx.com")
     };
-    
-    private void addThanks(){
+
+    private void addThanks() {
         int padding = 5;
         int lineHeight = 20;
         int lineDistance = 4;
         int x;
         int y = padding;
-        for(int i=0;i<THANKS.length;i++){
-            final Thanks thanks = THANKS[i];
+        for (final Thanks thanks : THANKS) {
             x = padding;
             ImageIcon icon = FileAssets.getImageIcon(thanks.getIconFilePath(), lineHeight, lineHeight);
             JLabel lblIcon = new JLabel(icon);
@@ -127,16 +114,16 @@ public class PanThanks extends javax.swing.JPanel{
             lblDescription.setForeground(Color.WHITE);
             panThanksList.add(lblDescription);
             x += 245;
-            if(thanks.hasURL()){
+            if (thanks.hasURL()) {
                 JLabel lblURL = new JLabel("<html><u>" + thanks.getURL() + "</u></html>");
                 lblURL.setLocation(x, y);
                 lblURL.setSize(300, lineHeight);
                 lblURL.setForeground(Color.WHITE);
                 lblURL.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                lblURL.addMouseListener(new MouseAdapter(){
+                lblURL.addMouseListener(new MouseAdapter() {
 
                     @Override
-                    public void mouseClicked(MouseEvent evt){
+                    public void mouseClicked(MouseEvent evt) {
                         super.mouseClicked(evt);
                         Util.browseURL(thanks.getURL());
                     }
