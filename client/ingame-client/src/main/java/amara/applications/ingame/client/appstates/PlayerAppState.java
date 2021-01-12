@@ -109,9 +109,6 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new DisplayMinimapSystem(this, screenController_HUD, mapAppState.getMap(), playerTeamSystem, ownTeamVisionSystem, fogOfWarSystem));
         localEntitySystemAppState.addEntitySystem(new DisplayShopItemsSystem(this, screenController_Shop));
         localEntitySystemAppState.addEntitySystem(new UpdateRecipeCostsSystem(this::getPlayerEntity, screenController_Shop));
-
-        // Needs to best be the very last client system, so no nodes for removed entities are leaked when they would be requested again after being removed
-        localEntitySystemAppState.addEntitySystem(new DetachEntityNodesSystem(localEntitySystemAppState.getEntitySceneMap()));
     }
 
     @Override

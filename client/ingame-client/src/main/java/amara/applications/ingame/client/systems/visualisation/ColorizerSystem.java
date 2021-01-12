@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.visualisation;
 
 import amara.applications.ingame.client.systems.visualisation.colors.ColorizingInfo;
@@ -19,10 +15,6 @@ import com.jme3.scene.Node;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-/**
- *
- * @author Carl
- */
 public class ColorizerSystem implements EntitySystem {
 
     public ColorizerSystem(EntitySceneMap entitySceneMap) {

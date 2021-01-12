@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.visualisation;
 
 import java.util.HashMap;
@@ -16,13 +12,9 @@ import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.libraries.applications.display.ingame.maps.MapHeightmap;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
-public class HUDAttachmentsSystem implements EntitySystem{
+public class HUDAttachmentsSystem implements EntitySystem {
 
-    public HUDAttachmentsSystem(Node guiNode, Camera camera, MapHeightmap mapHeightmap, HealthBarStyleManager healthBarStyleManager, OwnTeamVisionSystem ownTeamVisionSystem){
+    public HUDAttachmentsSystem(Node guiNode, Camera camera, MapHeightmap mapHeightmap, HealthBarStyleManager healthBarStyleManager, OwnTeamVisionSystem ownTeamVisionSystem) {
         this.guiNode = guiNode;
         this.camera = camera;
         this.mapHeightmap = mapHeightmap;
@@ -35,65 +27,60 @@ public class HUDAttachmentsSystem implements EntitySystem{
     private HealthBarStyleManager healthBarStyleManager;
     private OwnTeamVisionSystem ownTeamVisionSystem;
     private boolean isEnabled = true;
-    private HashMap<String, HUDAttachmentInfo> hudAttachmentInfos = new HashMap<String, HUDAttachmentInfo>();
-    private LinkedList<String> attachmentIDsToRemove = new LinkedList<String>();
+    private HashMap<String, HUDAttachmentInfo> hudAttachmentInfos = new HashMap<>();
+    private LinkedList<String> attachmentIdsToRemove = new LinkedList<>();
     private Vector3f tmpEntityPosition = new Vector3f();
     private Vector3f tmpAttachmentPosition = new Vector3f();
 
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
-        for(HUDAttachmentInfo hudAttachmentInfo : hudAttachmentInfos.values()){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        for (HUDAttachmentInfo hudAttachmentInfo : hudAttachmentInfos.values()) {
             Vector2f gameLocation = hudAttachmentInfo.getFixedGameLocation();
-            if(hudAttachmentInfo.isFollowEntity() || (gameLocation == null)){
+            if (hudAttachmentInfo.isFollowEntity() || (gameLocation == null)) {
                 PositionComponent positionComponent = entityWorld.getComponent(hudAttachmentInfo.getEntity(), PositionComponent.class);
-                if(positionComponent != null){
+                if (positionComponent != null) {
                     gameLocation = positionComponent.getPosition();
-                    if(!hudAttachmentInfo.isFollowEntity()){
+                    if (!hudAttachmentInfo.isFollowEntity()) {
                         hudAttachmentInfo.setFixedGamedLocation(gameLocation);
                     }
                 }
             }
-            if(gameLocation != null){
+            if (gameLocation != null) {
                 tmpEntityPosition.set(gameLocation.getX(), mapHeightmap.getHeight(gameLocation), gameLocation.getY());
                 Spatial hudAttachment = getHUDAttachment(hudAttachmentInfo.getAttachmentID());
-                if(hudAttachment != null){
+                if (hudAttachment != null) {
                     float healthBarY = healthBarStyleManager.getHealthBarY(entityWorld, hudAttachmentInfo.getEntity());
                     camera.getScreenCoordinates(tmpEntityPosition.addLocal(hudAttachmentInfo.getWorldOffset()), tmpAttachmentPosition).addLocal(0, healthBarY, 0).addLocal(hudAttachmentInfo.getHUDOffset());
                     hudAttachment.setLocalTranslation(tmpAttachmentPosition);
                     boolean isVisible = (isEnabled && ownTeamVisionSystem.isVisible(entityWorld, hudAttachmentInfo.getEntity()));
-                    hudAttachment.setCullHint(isVisible?Spatial.CullHint.Inherit:Spatial.CullHint.Always);
-                }
-                else{
-                    attachmentIDsToRemove.add(hudAttachmentInfo.getAttachmentID());
+                    hudAttachment.setCullHint(isVisible ? Spatial.CullHint.Inherit : Spatial.CullHint.Always);
+                } else {
+                    attachmentIdsToRemove.add(hudAttachmentInfo.getAttachmentID());
                 }
             }
         }
-        for(String attachmentID : attachmentIDsToRemove){
-            detach(attachmentID);
+        for (String attachmentId : attachmentIdsToRemove) {
+            detach(attachmentId);
         }
-        attachmentIDsToRemove.clear();
+        attachmentIdsToRemove.clear();
     }
-    
-    public void attach(HUDAttachmentInfo hudAttachmentInfo, Spatial hudAttachment){
+
+    public void attach(HUDAttachmentInfo hudAttachmentInfo, Spatial hudAttachment) {
         hudAttachment.setName(hudAttachmentInfo.getAttachmentID());
         guiNode.attachChild(hudAttachment);
         hudAttachmentInfos.put(hudAttachmentInfo.getAttachmentID(), hudAttachmentInfo);
     }
-    
-    public void detach(String attachmentID){
-        guiNode.detachChildNamed(attachmentID);
-        hudAttachmentInfos.remove(attachmentID);
+
+    public void detach(String attachmentId) {
+        guiNode.detachChildNamed(attachmentId);
+        hudAttachmentInfos.remove(attachmentId);
     }
-    
-    public Spatial getHUDAttachment(String attachmentID){
+
+    public Spatial getHUDAttachment(String attachmentID) {
         return guiNode.getChild(attachmentID);
     }
 
-    public void setEnabled(boolean isEnabled){
+    public void setEnabled(boolean isEnabled) {
         this.isEnabled = isEnabled;
-    }
-
-    public boolean isEnabled(){
-        return isEnabled;
     }
 }

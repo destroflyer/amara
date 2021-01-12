@@ -67,8 +67,8 @@ public class SynchronizeEntityWorldAppState extends BaseDisplayAppState<IngameCl
                 RemovedComponentChange removedComponentChange = (RemovedComponentChange) entityChange;
                 entityWorld.removeComponent(removedComponentChange.getEntity(), removedComponentChange.getComponentClass());
             } else if(entityChange instanceof InitialEntityWorldLoadedChange) {
-                getAppState(LocalEntitySystemAppState.class).onInitialWorldLoaded();
                 getAppState(PlayerAppState.class).onInitialWorldLoaded();
+                getAppState(LocalEntitySystemAppState.class).onInitialWorldLoaded();
                 getAppState(LoadingScreenAppState.class).onInitialWorldLoaded();
                 isInitialWorldLoaded = true;
                 NetworkClient networkClient = mainApplication.getMasterserverClient().getState(NetworkClientHeadlessAppState.class).getNetworkClient();

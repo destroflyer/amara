@@ -19,7 +19,7 @@
             </entity>
         </instantEffectTriggers>
         <castType>selfcast</castType>
-        <baseCooldown>5</baseCooldown>
+        <baseCooldown>120</baseCooldown>
     </entity>
     <!--spell effect-->
     <entity>

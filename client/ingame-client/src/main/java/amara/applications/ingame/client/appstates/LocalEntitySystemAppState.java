@@ -86,11 +86,11 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new AudioSystem(getAppState(AudioAppState.class), getAppState(IngameCameraAppState.class)));
         MapAppState mapAppState = getAppState(MapAppState.class);
         PlayerAppState playerAppState = getAppState(PlayerAppState.class);
+
+        // HUD attachments
+        EntityHeightMap entityHeightMap = new EntityHeightMap(entitySceneMap);
         HealthBarStyleManager healthBarStyleManager = new HealthBarStyleManager();
         HUDAttachmentsSystem hudAttachmentsSystem = new HUDAttachmentsSystem(mainApplication.getGuiNode(), mainApplication.getCamera(), mapAppState.getMapHeightmap(), healthBarStyleManager, playerAppState.getOwnTeamVisionSystem());
-        addEntitySystem(hudAttachmentsSystem);
-        EntityHeightMap entityHeightMap = new EntityHeightMap(entitySceneMap);
-        ColorizerSystem colorizerSystem = new ColorizerSystem(entitySceneMap);
         addEntitySystem(new HealthBarSystem(hudAttachmentsSystem, entityHeightMap, healthBarStyleManager, playerAppState.getPlayerTeamSystem()));
         addEntitySystem(new StunVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new SilenceVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
@@ -101,11 +101,21 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new MinionAggroIndicatorSystem(hudAttachmentsSystem, entityHeightMap, playerAppState.getPlayerEntity()));
         addEntitySystem(new ReactionVisualisationSystem(hudAttachmentsSystem, entityHeightMap));
         addEntitySystem(new PopupSystem(hudAttachmentsSystem, entityHeightMap));
+        addEntitySystem(hudAttachmentsSystem);
+
+        // Colorizers
+        ColorizerSystem colorizerSystem = new ColorizerSystem(entitySceneMap);
         addEntitySystem(new BushesSystem(entitySceneMap, colorizerSystem, playerAppState.getPlayerEntity()));
         addEntitySystem(new StealthSystem(colorizerSystem));
+        addEntitySystem(colorizerSystem);
+
+        // Other
         addEntitySystem(new WaterSpeedSystem(mapAppState));
         addEntitySystem(new CinematicsSystem(getAppState(CinematicAppState.class)));
-        addEntitySystem(colorizerSystem);
+
+        // Needs to best be the very last client system, so no nodes for removed entities are leaked when they would be requested again after being removed
+        addEntitySystem(new DetachEntityNodesSystem(entitySceneMap));
+
         isInitialWorldLoaded = true;
     }
 
