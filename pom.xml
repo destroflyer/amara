@@ -13,8 +13,6 @@
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
         <version.amara>0.7</version.amara>
         <version.apache-httpclient>4.5.12</version.apache-httpclient>
         <version.bouncycastle>1.46</version.bouncycastle>
@@ -28,6 +26,7 @@
         <version.junit>4.11</version.junit>
         <version.lombok>1.18.10</version.lombok>
         <version.maven-assembly-plugin>3.1.1</version.maven-assembly-plugin>
+        <version.maven-compiler-plugin>3.8.1</version.maven-compiler-plugin>
         <version.maven-surefire-plugin>3.0.0-M5</version.maven-surefire-plugin>
         <version.mockito>1.9.5</version.mockito>
         <version.mysql>8.0.20</version.mysql>
@@ -305,6 +304,15 @@
     </dependencyManagement>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.maven-compiler-plugin}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

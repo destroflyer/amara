@@ -170,6 +170,10 @@ public class ScreenController_HUD extends GameScreenController {
         hideCooldown("player_spell", index);
     }
 
+    public void setPlayer_SpellSufficientMana(int index, boolean sufficientMana) {
+        setSufficientMana("player_spell", index, sufficientMana);
+    }
+
     public void generatePlayerInventory(EntityWorld entityWorlds, int[] itemEntities) {
         playerInventoryPanelGenerator.setData(entityWorlds, itemEntities);
         playerInventoryPanelGenerator.update(nifty, "player_inventory_items_layer");
@@ -199,7 +203,11 @@ public class ScreenController_HUD extends GameScreenController {
     public void hidePlayer_MapSpellCooldown(int index){
         hideCooldown("player_map_spell", index);
     }
-    
+
+    public void setPlayer_MapSpellSufficientMana(int index, boolean sufficientMana) {
+        setSufficientMana("player_map_spell", index, sufficientMana);
+    }
+
     private void showCooldown(String prefix, int index, float remainingTime){
         getElementByID(prefix + "_cooldown_" + index).show();
         getTextRenderer(prefix + "_cooldown_time_" + index).setText("" + Util.round(remainingTime, 1));
@@ -208,7 +216,11 @@ public class ScreenController_HUD extends GameScreenController {
     private void hideCooldown(String prefix, int index){
         getElementByID(prefix + "_cooldown_" + index).hide();
     }
-    
+
+    private void setSufficientMana(String prefix, int index, boolean sufficientMana){
+        getElementByID(prefix + "_insufficient_mana_" + index).setVisible(!sufficientMana);
+    }
+
     public void setPlayer_Gold(float gold){
         getTextRenderer(playerInventoryPanelGenerator.getId() + "_player_gold").setText("" + ((int) gold));
     }

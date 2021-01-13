@@ -97,6 +97,8 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new DisplaySpellsCooldownsSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayItemsCooldownsSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayMapSpellsCooldownsSystem(this, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayCharacterSpellsManaSufficientSystem(this, screenController_HUD));
+        localEntitySystemAppState.addEntitySystem(new DisplayMapSpellsManaSufficientSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new UpdateSpellInformationsSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new UpdateUpgradeSpellsPanelSystem(this, screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayGoldSystem(this, screenController_HUD));

@@ -344,6 +344,7 @@
                                         <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                     </effect>
                                 </image>
+                                <image id="player_spell_insufficient_mana_0" filename="Interface/hud/spell_insufficient_mana.png" width="100%" height="100%" visible="false"/>
                                 <panel id="player_spell_cooldown_0" childLayout="center" width="100%" height="100%" backgroundColor="#000C" visible="false">
                                     <text id="player_spell_cooldown_time_0" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
@@ -356,6 +357,7 @@
                                         <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                     </effect>
                                 </image>
+                                <image id="player_spell_insufficient_mana_1" filename="Interface/hud/spell_insufficient_mana.png" width="100%" height="100%" visible="false"/>
                                 <panel id="player_spell_cooldown_1" childLayout="center" width="100%" height="100%" backgroundColor="#000C" visible="false">
                                     <text id="player_spell_cooldown_time_1" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
@@ -368,6 +370,7 @@
                                         <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                     </effect>
                                 </image>
+                                <image id="player_spell_insufficient_mana_2" filename="Interface/hud/spell_insufficient_mana.png" width="100%" height="100%" visible="false"/>
                                 <panel id="player_spell_cooldown_2" childLayout="center" width="100%" height="100%" backgroundColor="#000C" visible="false">
                                     <text id="player_spell_cooldown_time_2" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
@@ -380,6 +383,7 @@
                                         <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                     </effect>
                                 </image>
+                                <image id="player_spell_insufficient_mana_3" filename="Interface/hud/spell_insufficient_mana.png" width="100%" height="100%" visible="false"/>
                                 <panel id="player_spell_cooldown_3" childLayout="center" width="100%" height="100%" backgroundColor="#000C" visible="false">
                                     <text id="player_spell_cooldown_time_3" text="???" font="Interface/fonts/Verdana_18.fnt"/>
                                 </panel>
@@ -394,6 +398,7 @@
                                             <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                         </effect>
                                     </image>
+                                    <image id="player_map_spell_insufficient_mana_0" filename="Interface/hud/spell_insufficient_mana.png" width="100%" height="100%" visible="false"/>
                                     <panel id="player_map_spell_cooldown_0" childLayout="center" width="100%" height="100%" backgroundColor="#000C" visible="false">
                                         <text id="player_map_spell_cooldown_time_0" text="???" font="Interface/fonts/Verdana_14.fnt"/>
                                     </panel>
@@ -409,6 +414,7 @@
                                             <onEndHover name="nop" onStartEffect="hidePlayer_SpellInformation()"/>
                                         </effect>
                                     </image>
+                                    <image id="player_map_spell_insufficient_mana_1" filename="Interface/hud/spell_insufficient_mana.png" width="100%" height="100%" visible="false"/>
                                     <panel id="player_map_spell_cooldown_1" childLayout="center" width="100%" height="100%" backgroundColor="#000C" visible="false">
                                         <text id="player_map_spell_cooldown_time_1" text="???" font="Interface/fonts/Verdana_14.fnt"/>
                                     </panel>
