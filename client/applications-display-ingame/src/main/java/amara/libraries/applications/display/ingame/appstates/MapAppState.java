@@ -147,6 +147,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
                 if (Settings.getBoolean("ssao")) {
                     MapFilter_SSAO mapFilter_SSAO = (MapFilter_SSAO) mapFilter;
                     SSAOFilter ssaoFilter = new SSAOFilter(mapFilter_SSAO.getSampleRadius(), mapFilter_SSAO.getIntensity(), mapFilter_SSAO.getScale(), mapFilter_SSAO.getBias());
+                    // Currently approximateNormals=false is not supported due to the way the ground textures (e.g. spell indicators) are setup, but it would be a graphical enhancement
                     ssaoFilter.setApproximateNormals(true);
                     addFilter(ssaoFilter);
                 }
