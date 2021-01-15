@@ -13,6 +13,7 @@ import amara.applications.ingame.entitysystem.components.shop.*;
 import amara.applications.ingame.entitysystem.components.spells.*;
 import amara.applications.ingame.entitysystem.systems.commands.ExecutePlayerCommandsSystem;
 import amara.applications.ingame.entitysystem.systems.shop.ShopUtil;
+import amara.applications.ingame.entitysystem.systems.spells.SpellUtil;
 import amara.applications.ingame.network.messages.Message_Command;
 import amara.applications.ingame.network.messages.objects.commands.*;
 import amara.applications.ingame.network.messages.objects.commands.casting.*;
@@ -109,7 +110,11 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
                     if (keyEvent.isPressed()) {
                         for (int i = 0; i < 4; i++) {
                             if (keyCode == Settings.getInteger(controlsCameraPrefix + "spells_" + i)) {
-                                castSpell(new SpellIndex(SpellIndex.SpellSet.SPELLS, i));
+                                if (keyEvent.isModifierControl()) {
+                                    learnOrUpgradeSpell(i);
+                                } else {
+                                    castSpell(new SpellIndex(SpellIndex.SpellSet.SPELLS, i));
+                                }
                                 keyWasNotFound = false;
                                 break;
                             }
@@ -233,32 +238,28 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
         }
     }
 
-    public void learnOrUpgradeSpell(int spellIndex){
+    public void learnOrUpgradeSpell(int spellIndex) {
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
-        PlayerAppState playerAppState = getAppState(PlayerAppState.class);
-        int characterEntity = entityWorld.getComponent(playerAppState.getPlayerEntity(), PlayerCharacterComponent.class).getEntity();
-        int[] spells = entityWorld.getComponent(characterEntity, SpellsComponent.class).getSpellsEntities();
-        if((spellIndex < spells.length) && (spells[spellIndex] != -1)){
+        int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();
+        int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
+        if (SpellUtil.canUpgradeSpell(entityWorld, characterEntity, spellIndex, 0)) {
+            int[] spells = entityWorld.getComponent(characterEntity, SpellsComponent.class).getSpellsEntities();
             int spellEntity = spells[spellIndex];
-            SpellUpgradesComponent spellUpgradesComponent = entityWorld.getComponent(spellEntity, SpellUpgradesComponent.class);
-            if(spellUpgradesComponent != null){
-                int[] upgradedSpellEntities = spellUpgradesComponent.getSpellsEntities();
-                for(int i=0;i<upgradedSpellEntities.length;i++){
-                    screenController_HUD.setPlayer_SpellInformations_UpgradedSpells(UpdateSpellInformationsSystem.createSpellInformations(entityWorld, upgradedSpellEntities, true));
-                    screenController_HUD.setPlayer_SpellUpgradeImage(i, DisplaySpellsImagesSystem.getSpellImageFilePath(entityWorld, upgradedSpellEntities, i));
-                }
-                screenController_HUD.showPlayer_UpgradeSpell(spellIndex);
+            int[] upgradedSpellEntities = entityWorld.getComponent(spellEntity, SpellUpgradesComponent.class).getSpellsEntities();
+            for (int i = 0; i < upgradedSpellEntities.length; i++) {
+                screenController_HUD.setPlayer_SpellInformations_UpgradedSpells(UpdateSpellInformationsSystem.createSpellInformations(entityWorld, upgradedSpellEntities, true));
+                screenController_HUD.setPlayer_SpellUpgradeImage(i, DisplaySpellsImagesSystem.getSpellImageFilePath(entityWorld, upgradedSpellEntities, i));
             }
-        }
-        else{
+            screenController_HUD.showPlayer_UpgradeSpell(spellIndex);
+        } else if (SpellUtil.canLearnSpell(entityWorld, characterEntity, spellIndex)) {
             sendCommand(new LearnSpellCommand(spellIndex));
         }
     }
-    
-    public void upgradeSpell(int spellIndex, int upgradeIndex){
+
+    public void upgradeSpell(int spellIndex, int upgradeIndex) {
         sendCommand(new UpgradeSpellCommand(spellIndex, upgradeIndex));
     }
-    
+
     private void castSpell(SpellIndex spellIndex){
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
         int characterEntity = getPlayerCharacterEntity();
