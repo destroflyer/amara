@@ -33,20 +33,21 @@ public class TargetUtil {
             isValid = entityWorld.hasComponent(targetEntity, IsTargetableComponent.class);
         }
         if (isValid) {
-            if (entityWorld.hasComponent(targetRulesEntity, RequireCharacterComponent.class)) {
-                isValid = entityWorld.hasComponent(targetEntity, IsCharacterComponent.class);
+            if (entityWorld.hasComponent(targetRulesEntity, RequireCharacterComponent.class) && (!entityWorld.hasComponent(targetEntity, IsCharacterComponent.class))) {
+                return false;
             }
-            if(isValid){
-                TeamComponent sourceTeamComponent = entityWorld.getComponent(sourceEntity, TeamComponent.class);
-                TeamComponent targetTeamComponent = entityWorld.getComponent(targetEntity, TeamComponent.class);
-                if((sourceTeamComponent != null) && (targetTeamComponent != null)){
-                    isValid = false;
-                    if(entityWorld.hasComponent(targetRulesEntity, AcceptAlliesComponent.class)){
-                        isValid |= (sourceTeamComponent.getTeamEntity() == targetTeamComponent.getTeamEntity());
-                    }
-                    if(entityWorld.hasComponent(targetRulesEntity, AcceptEnemiesComponent.class)){
-                        isValid |= (sourceTeamComponent.getTeamEntity() != targetTeamComponent.getTeamEntity());
-                    }
+            if (entityWorld.hasComponent(targetRulesEntity, RequireMinionComponent.class) && (!entityWorld.hasComponent(targetEntity, IsMinionComponent.class))) {
+                return false;
+            }
+            TeamComponent sourceTeamComponent = entityWorld.getComponent(sourceEntity, TeamComponent.class);
+            TeamComponent targetTeamComponent = entityWorld.getComponent(targetEntity, TeamComponent.class);
+            if((sourceTeamComponent != null) && (targetTeamComponent != null)){
+                isValid = false;
+                if(entityWorld.hasComponent(targetRulesEntity, AcceptAlliesComponent.class)){
+                    isValid |= (sourceTeamComponent.getTeamEntity() == targetTeamComponent.getTeamEntity());
+                }
+                if(entityWorld.hasComponent(targetRulesEntity, AcceptEnemiesComponent.class)){
+                    isValid |= (sourceTeamComponent.getTeamEntity() != targetTeamComponent.getTeamEntity());
                 }
             }
             if (isValid) {

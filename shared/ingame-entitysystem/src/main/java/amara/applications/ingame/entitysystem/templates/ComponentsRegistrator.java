@@ -4107,6 +4107,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.targets.RequireMaximumDistanceComponent(distance);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequireMinionComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireMinionComponent>("requireMinion"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.targets.RequireMinionComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.targets.RequireMinionComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequireNoBuffsComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.targets.RequireNoBuffsComponent.class.getDeclaredField("buffEntities"), componentFieldSerializer_Entity);
@@ -5091,16 +5099,22 @@ public class ComponentsRegistrator{
         }catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent.class.getDeclaredField("targetRulesEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent>("surroundingDeathTrigger"){
 
             @Override
             public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent construct(EntityWorld entityWorld, Element element){
                 float maximumDistance = 0;
-                String maximumDistanceText = element.getText();
+                String maximumDistanceText = element.getAttributeValue("maximumDistance");
                 if((maximumDistanceText != null) && (maximumDistanceText.length() > 0)){
                     maximumDistance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, maximumDistanceText));
                 }
-                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent(maximumDistance);
+                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
+                return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent(maximumDistance, targetRulesEntity);
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent.class);
@@ -5825,6 +5839,14 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent construct(EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.types.IsSummonComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsSummonComponent>("isSummon"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.types.IsSummonComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.units.types.IsSummonComponent();
             }
         });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.WaitingToRespawnComponent.class);

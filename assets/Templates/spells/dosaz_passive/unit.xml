@@ -1,7 +1,7 @@
 <template>
     <entity id="unit">
         <name>Ghost</name>
-        <isMinion/>
+        <isSummon/>
         <!--model-->
         <model>Models/ghost/skin.xml</model>
         <idleAnimation>

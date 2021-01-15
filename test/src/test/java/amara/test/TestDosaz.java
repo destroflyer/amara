@@ -4,6 +4,7 @@ import amara.applications.ingame.entitysystem.components.attributes.BonusFlatMax
 import amara.applications.ingame.entitysystem.components.attributes.HealthComponent;
 import amara.applications.ingame.entitysystem.components.units.BaseAttributesComponent;
 import amara.applications.ingame.entitysystem.components.units.TeamComponent;
+import amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent;
 import amara.applications.ingame.network.messages.objects.commands.UpgradeSpellCommand;
 import amara.applications.ingame.network.messages.objects.commands.WalkToTargetCommand;
 import amara.applications.ingame.network.messages.objects.commands.casting.CastPositionalSkillshotSpellCommand;
@@ -34,10 +35,11 @@ public class TestDosaz extends CommandingPlayerTest {
     private static final String NAME_R_TARGET_BUFF = "Lifedrained";
 
     @Test
-    public void testP_Touch() {
+    public void testP_AlliedMinionDeath_SpawnTombstone_Touch_SpawnGhost() {
         onLogicStart();
 
         int targetDummy = createTargetDummy(new Vector2f(20, 10));
+        entityWorld.setComponent(targetDummy, new IsMinionComponent());
         entityWorld.setComponent(targetDummy, new TeamComponent(1));
         tickSeconds(1);
         entityWorld.setComponent(targetDummy, new HealthComponent(0));
@@ -59,10 +61,11 @@ public class TestDosaz extends CommandingPlayerTest {
     }
 
     @Test
-    public void testP_NoTrigger() {
+    public void testP_AlliedMinionDeath_SpawnTombstone_Expire() {
         onLogicStart();
 
         int targetDummy = createTargetDummy(new Vector2f(20, 10));
+        entityWorld.setComponent(targetDummy, new IsMinionComponent());
         entityWorld.setComponent(targetDummy, new TeamComponent(1));
         tickSeconds(1);
         entityWorld.setComponent(targetDummy, new HealthComponent(0));
@@ -71,6 +74,37 @@ public class TestDosaz extends CommandingPlayerTest {
         assertEquals(20, getX(tombstone), EPSILON);
         assertEquals(10, getY(tombstone), EPSILON);
         tickSeconds(30);
+        assertNull(findEntity(NAME_TOMBSTONE));
+        assertNull(findEntity(NAME_GHOST));
+
+        onLogicEnd(false, false);
+    }
+
+    @Test
+    public void testP_AlliedNonMinionDeath_NoSpawnTombstone() {
+        onLogicStart();
+
+        int targetDummy = createTargetDummy(new Vector2f(20, 10));
+        entityWorld.setComponent(targetDummy, new TeamComponent(1));
+        tickSeconds(1);
+        entityWorld.setComponent(targetDummy, new HealthComponent(0));
+        tickSeconds(1);
+        assertNull(findEntity(NAME_TOMBSTONE));
+        assertNull(findEntity(NAME_GHOST));
+
+        onLogicEnd(false, false);
+    }
+
+    @Test
+    public void testP_EnemyMinionDeath_NoSpawnTombstone() {
+        onLogicStart();
+
+        int targetDummy = createTargetDummy(new Vector2f(20, 10));
+        entityWorld.setComponent(targetDummy, new IsMinionComponent());
+        entityWorld.setComponent(targetDummy, new TeamComponent(2));
+        tickSeconds(1);
+        entityWorld.setComponent(targetDummy, new HealthComponent(0));
+        tickSeconds(1);
         assertNull(findEntity(NAME_TOMBSTONE));
         assertNull(findEntity(NAME_GHOST));
 
@@ -119,6 +153,7 @@ public class TestDosaz extends CommandingPlayerTest {
         onLogicStart();
 
         int targetDummy = createTargetDummy(new Vector2f(20, 10));
+        entityWorld.setComponent(targetDummy, new IsMinionComponent());
         entityWorld.setComponent(targetDummy, new TeamComponent(1));
         tickSeconds(1);
         entityWorld.setComponent(targetDummy, new HealthComponent(0));
@@ -196,6 +231,7 @@ public class TestDosaz extends CommandingPlayerTest {
         queueCommand(new UpgradeSpellCommand(0, 0));
         tickSeconds(1);
         int targetDummy = createTargetDummy(new Vector2f(20, 10));
+        entityWorld.setComponent(targetDummy, new IsMinionComponent());
         entityWorld.setComponent(targetDummy, new TeamComponent(1));
         tickSeconds(1);
         entityWorld.setComponent(targetDummy, new HealthComponent(0));
@@ -270,6 +306,7 @@ public class TestDosaz extends CommandingPlayerTest {
         queueCommand(new UpgradeSpellCommand(0, 1));
         tickSeconds(1);
         int targetDummy = createTargetDummy(new Vector2f(20, 10));
+        entityWorld.setComponent(targetDummy, new IsMinionComponent());
         entityWorld.setComponent(targetDummy, new TeamComponent(1));
         tickSeconds(1);
         entityWorld.setComponent(targetDummy, new HealthComponent(0));
@@ -396,6 +433,8 @@ public class TestDosaz extends CommandingPlayerTest {
 
         int targetDummy1 = createTargetDummy(new Vector2f(18, 10));
         int targetDummy2 = createTargetDummy(new Vector2f(22, 10));
+        entityWorld.setComponent(targetDummy1, new IsMinionComponent());
+        entityWorld.setComponent(targetDummy2, new IsMinionComponent());
         entityWorld.setComponent(targetDummy1, new TeamComponent(1));
         entityWorld.setComponent(targetDummy2, new TeamComponent(1));
         tickSeconds(1);
@@ -440,6 +479,8 @@ public class TestDosaz extends CommandingPlayerTest {
         tickSeconds(1);
         int targetDummy1 = createTargetDummy(new Vector2f(24, 10));
         int targetDummy2 = createTargetDummy(new Vector2f(28, 10));
+        entityWorld.setComponent(targetDummy1, new IsMinionComponent());
+        entityWorld.setComponent(targetDummy2, new IsMinionComponent());
         entityWorld.setComponent(targetDummy1, new TeamComponent(1));
         entityWorld.setComponent(targetDummy2, new TeamComponent(1));
         tickSeconds(1);
@@ -484,6 +525,8 @@ public class TestDosaz extends CommandingPlayerTest {
         tickSeconds(1);
         int targetDummy1 = createTargetDummy(new Vector2f(18, 10));
         int targetDummy2 = createTargetDummy(new Vector2f(22, 10));
+        entityWorld.setComponent(targetDummy1, new IsMinionComponent());
+        entityWorld.setComponent(targetDummy2, new IsMinionComponent());
         entityWorld.setComponent(targetDummy1, new TeamComponent(1));
         entityWorld.setComponent(targetDummy2, new TeamComponent(1));
         tickSeconds(1);

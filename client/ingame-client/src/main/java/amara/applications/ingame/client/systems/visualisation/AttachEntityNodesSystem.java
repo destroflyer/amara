@@ -1,10 +1,7 @@
 package amara.applications.ingame.client.systems.visualisation;
 
 import amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent;
-import amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent;
-import amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent;
-import amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent;
-import amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent;
+import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.libraries.entitysystem.EntitySystem;
 import amara.libraries.entitysystem.EntityWorld;
 import com.jme3.scene.Node;
@@ -40,6 +37,6 @@ public class AttachEntityNodesSystem implements EntitySystem {
     }
 
     public static boolean isInspectable(EntityWorld entityWorld, int entity) {
-        return entityWorld.hasAnyComponent(entity, IsCharacterComponent.class, IsMinionComponent.class, IsMonsterComponent.class, IsStructureComponent.class);
+        return entityWorld.hasAnyComponent(entity, IsCharacterComponent.class, IsMinionComponent.class, IsMonsterComponent.class, IsSummonComponent.class, IsStructureComponent.class);
     }
 }
