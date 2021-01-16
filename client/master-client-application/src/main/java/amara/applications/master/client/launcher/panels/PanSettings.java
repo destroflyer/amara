@@ -1,13 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * panPlay.java
- *
- * Created on 02.08.2012, 23:56:34
- */
 package amara.applications.master.client.launcher.panels;
 
 import java.awt.Dimension;
@@ -15,13 +5,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 import amara.applications.master.client.launcher.buttons.*;
+import amara.core.JavaUtil;
 import amara.core.Util;
 import amara.core.settings.*;
 
-/**
- *
- * @author Carl
- */
 public class PanSettings extends javax.swing.JPanel{
 
     public PanSettings(){
@@ -42,7 +29,7 @@ public class PanSettings extends javax.swing.JPanel{
     private void loadSystemInformation(){
         lblOperatingSystem.setText(System.getProperty("os.name"));
         lblOperatingSystemVersion.setText(System.getProperty("os.version"));
-        lblJavaVersion.setText(System.getProperty("java.version"));
+        lblJavaVersion.setText(JavaUtil.getVersion());
         lblUser.setText(System.getProperty("user.name"));
         lblSystemResolution.setText(getResolutionString(Util.getScreenResolution()));
     }

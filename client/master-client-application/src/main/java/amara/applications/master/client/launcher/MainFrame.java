@@ -10,11 +10,13 @@ import amara.applications.master.client.launcher.panels.*;
 import amara.applications.master.network.messages.Message_GetGameContents;
 import amara.applications.master.network.messages.Message_Login;
 import amara.applications.master.server.launcher.Launcher_Game;
+import amara.core.JavaUtil;
 import amara.core.Launcher_Core;
 import amara.core.Util;
 import amara.core.settings.Settings;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.applications.windowed.FrameUtil;
+import amara.libraries.applications.windowed.dialogs.ErrorDialog;
 import amara.libraries.network.HostInformation;
 import amara.libraries.network.NetworkClient;
 import amara.libraries.network.exceptions.ServerConnectionException;
@@ -25,8 +27,12 @@ public class MainFrame extends JFrame {
     public static void main(String[] args) {
         String authToken = args[0];
         Launcher_Core.initialize();
-        Launcher_Game.initialize();
-        EventQueue.invokeLater(() -> new MainFrame(authToken).setVisible(true));
+        if (JavaUtil.isVersionSufficient()) {
+            Launcher_Game.initialize();
+            EventQueue.invokeLater(() -> new MainFrame(authToken).setVisible(true));
+        } else {
+            new ErrorDialog("Incompatible Java version:<br><br>Required: " + JavaUtil.MINIMUM_VERSION + "<br>Installed: " + JavaUtil.getVersion());
+        }
     }
 
     public MainFrame(String authToken) {

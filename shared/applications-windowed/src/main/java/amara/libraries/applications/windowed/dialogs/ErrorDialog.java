@@ -1,56 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.windowed.dialogs;
 
-import java.awt.Frame;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.JFrame;
+import javax.swing.*;
+
 import amara.libraries.applications.windowed.FrameUtil;
 import amara.libraries.applications.windowed.dialogs.panels.PanError;
 
-/**
- *
- * @author Carl
- */
-public class ErrorDialog extends javax.swing.JDialog{
+public class ErrorDialog extends JDialog {
 
-    public ErrorDialog(Frame parent, String errorMessage){
-        super(parent);
+    public ErrorDialog(String errorMessage) {
         initComponents();
         panContainer.add(new PanError(errorMessage));
         FrameUtil.initDialogSpecials(this);
         FrameUtil.centerFrame(this);
-    }
-    private static JFrame mainFrame;
-    
-    public static void setMainFrame(JFrame _mainFrame){
-        mainFrame = _mainFrame;
-    }
-    
-    public static ErrorDialog show(String errorMessage){
-        if(mainFrame != null){
-            mainFrame.setEnabled(false);
-        }
-        ErrorDialog errorDialog = new ErrorDialog(mainFrame, errorMessage);
-        errorDialog.addWindowListener(new WindowAdapter(){
-
-            @Override
-            public void windowClosed(WindowEvent evt){
-                super.windowClosed(evt);
-                if(mainFrame != null){
-                    mainFrame.setEnabled(true);
-                    mainFrame.toFront();
-                }
-                else{
-                    System.exit(0);
-                }
-            }
-        });
-        errorDialog.setVisible(true);
-        return errorDialog;
+        setVisible(true);
     }
 
     /**
