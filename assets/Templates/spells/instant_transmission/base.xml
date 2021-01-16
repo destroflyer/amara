@@ -35,6 +35,7 @@
             </entity>
         </instantEffectTriggers>
         <castType>positional_skillshot</castType>
+        <castAtMaxRange/>
         <castCancelCast/>
         <castCancelMovement/>
         <castTurnToTarget/>

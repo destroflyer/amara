@@ -260,27 +260,27 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
         sendCommand(new UpgradeSpellCommand(spellIndex, upgradeIndex));
     }
 
-    private void castSpell(SpellIndex spellIndex){
+    private void castSpell(SpellIndex spellIndex) {
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
         int characterEntity = getPlayerCharacterEntity();
         int spellEntity = ExecutePlayerCommandsSystem.getSpellEntity(entityWorld, characterEntity, spellIndex);
-        if(spellEntity != -1){
+        if (spellEntity != -1) {
             Vector2f groundLocation = getAppState(MapAppState.class).getGroundLocation_Cursor();
             CastTypeComponent.CastType castType = entityWorld.getComponent(spellEntity, CastTypeComponent.class).getCastType();
-            switch(castType){
+            switch (castType) {
                 case SELFCAST:
                     sendCommand(new CastSelfcastSpellCommand(spellIndex));
                     break;
 
                 case SINGLE_TARGET:
                     int hoveredEntity = getAppState(PlayerAppState.class).getCursorHoveredEntity();
-                    if(hoveredEntity != -1){
+                    if (hoveredEntity != -1) {
                         sendCommand(new CastSingleTargetSpellCommand(spellIndex, hoveredEntity));
                     }
                     break;
 
                 case LINEAR_SKILLSHOT:
-                    if(groundLocation != null){
+                    if (groundLocation != null) {
                         Vector2f casterPosition = entityWorld.getComponent(characterEntity, PositionComponent.class).getPosition();
                         Vector2f direction = groundLocation.subtract(casterPosition);
                         sendCommand(new CastLinearSkillshotSpellCommand(spellIndex, direction));
@@ -288,14 +288,23 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
                     break;
 
                 case POSITIONAL_SKILLSHOT:
-                    if(groundLocation != null){
-                        sendCommand(new CastPositionalSkillshotSpellCommand(spellIndex, groundLocation));
+                    if (groundLocation != null) {
+                        Vector2f targetLocation = groundLocation;
+                        if (entityWorld.hasComponent(spellEntity, CastAtMaxRangeComponent.class)) {
+                            Vector2f casterPosition = entityWorld.getComponent(characterEntity, PositionComponent.class).getPosition();
+                            Vector2f distance = groundLocation.subtract(casterPosition);
+                            float maximumRange = entityWorld.getComponent(spellEntity, RangeComponent.class).getDistance();
+                            if (distance.lengthSquared() > (maximumRange * maximumRange)) {
+                                targetLocation = distance.normalize().multLocal(maximumRange).addLocal(casterPosition);
+                            }
+                        }
+                        sendCommand(new CastPositionalSkillshotSpellCommand(spellIndex, targetLocation));
                     }
                     break;
             }
         }
     }
-    
+
     private int getPlayerCharacterEntity(){
         EntityWorld entityWorld = getAppState(LocalEntitySystemAppState.class).getEntityWorld();
         int playerEntity = getAppState(PlayerAppState.class).getPlayerEntity();

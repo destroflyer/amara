@@ -3576,6 +3576,14 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent(animationEntity, additionalLoops);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.CastAtMaxRangeComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastAtMaxRangeComponent>("castAtMaxRange"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.spells.CastAtMaxRangeComponent construct(EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.spells.CastAtMaxRangeComponent();
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent>("castCancelable"){
 
