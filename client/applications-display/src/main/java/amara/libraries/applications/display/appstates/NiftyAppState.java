@@ -1,48 +1,41 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.display.appstates;
 
-
 import java.util.ArrayList;
+
+import amara.core.settings.Settings;
+import amara.libraries.applications.display.DisplayApplication;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.ViewPort;
 import amara.libraries.applications.display.gui.GameScreenController;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.render.batch.BatchRenderConfiguration;
 import de.lessvoid.nifty.screen.ScreenController;
 
-/**
- *
- * @author Carl
- */
-public class NiftyAppState extends BaseDisplayAppState{
+public class NiftyAppState extends BaseDisplayAppState<DisplayApplication> {
 
-    public NiftyAppState(){
-        
-    }
     private ViewPort viewPort;
-    private ArrayList<Nifty> runningNifties = new ArrayList<Nifty>();
+    private ArrayList<Nifty> runningNifties = new ArrayList<>();
 
     @Override
-    public void initialize(AppStateManager stateManager, Application application){
+    public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
         viewPort = mainApplication.getRenderManager().createPostView("niftygui", mainApplication.getGuiViewPort().getCamera().clone());
         viewPort.setClearFlags(false, false, false);
     }
-        
-    public void createNifty(String filePath){
+
+    public void createNifty(String filePath) {
         createNifty(filePath, false);
     }
-        
-    public void createNifty(String filePath, boolean useBatchedRenderer){
+
+    public void createNifty(String filePath, boolean useBatchedRenderer) {
         NiftyJmeDisplay niftyDisplay;
-        if(useBatchedRenderer){
-            niftyDisplay = new NiftyJmeDisplay(mainApplication.getAssetManager(), mainApplication.getInputManager(), mainApplication.getAudioRenderer(), mainApplication.getGuiViewPort(), 2048, 2048);
-        }
-        else{
+        if (useBatchedRenderer) {
+            BatchRenderConfiguration batchRenderConfiguration = new BatchRenderConfiguration();
+            batchRenderConfiguration.useHighQualityTextures = Settings.getBoolean("gui_high_quality");
+            niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(mainApplication.getAssetManager(), mainApplication.getInputManager(), mainApplication.getAudioRenderer(), mainApplication.getGuiViewPort(), batchRenderConfiguration);
+        } else {
             niftyDisplay = new NiftyJmeDisplay(mainApplication.getAssetManager(), mainApplication.getInputManager(), mainApplication.getAudioRenderer(), mainApplication.getGuiViewPort());
         }
         viewPort.addProcessor(niftyDisplay);
@@ -51,7 +44,7 @@ public class NiftyAppState extends BaseDisplayAppState{
         goToScreen(nifty, "start");
         runningNifties.add(nifty);
     }
-    
+
     public boolean isReadyForUpdate(){
         for(int i=0;i<runningNifties.size();i++){
             Nifty nifty = runningNifties.get(i);
