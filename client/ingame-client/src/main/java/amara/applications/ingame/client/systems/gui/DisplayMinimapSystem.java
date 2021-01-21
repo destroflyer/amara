@@ -1,14 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.gui;
 
 import java.awt.image.BufferedImage;
 import java.awt.Color;
 
 import amara.applications.ingame.client.appstates.PlayerAppState;
+import amara.applications.ingame.shared.maps.cameras.MapCamera_TopDown;
+import amara.libraries.applications.display.ingame.appstates.IngameCameraAppState;
 import com.jme3.math.Vector2f;
+import com.jme3.math.Vector3f;
 import com.jme3.texture.Texture2D;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.client.systems.filters.FogOfWarSystem;
@@ -23,18 +22,23 @@ import amara.core.settings.Settings;
 import amara.libraries.applications.display.materials.PaintableImage;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
 public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
-    public DisplayMinimapSystem(PlayerAppState playerAppState, ScreenController_HUD screenController_HUD, Map map, PlayerTeamSystem playerTeamSystem, OwnTeamVisionSystem ownTeamVisionSystem, FogOfWarSystem fogOfWarSystem){
+    public DisplayMinimapSystem(
+        PlayerAppState playerAppState,
+        ScreenController_HUD screenController_HUD,
+        Map map,
+        PlayerTeamSystem playerTeamSystem,
+        OwnTeamVisionSystem ownTeamVisionSystem,
+        FogOfWarSystem fogOfWarSystem,
+        IngameCameraAppState ingameCameraAppState
+    ) {
         super(playerAppState, screenController_HUD);
         this.map = map;
         this.playerTeamSystem = playerTeamSystem;
         this.ownTeamVisionSystem = ownTeamVisionSystem;
         this.fogOfWarSystem = fogOfWarSystem;
+        this.ingameCameraAppState = ingameCameraAppState;
         scaleX_Map = (minimapImage.getWidth() / map.getMinimapInformation().getWidth());
         scaleY_Map = (minimapImage.getHeight() / map.getMinimapInformation().getHeight());
         scaleX_Fog = (fogOfWarSystem.getFogImage().getWidth() / map.getPhysicsInformation().getWidth());
@@ -48,10 +52,12 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
     private static final Color COLOR_TEAM_ALLIED = new Color(0, 0.9f, 0);
     private static final Color COLOR_TEAM_ENEMY = new Color(0.9f, 0.2f, 0);
     private static final Color COLOR_TEAM_OTHER = new Color(100, 50, 0);
+    private static final Color COLOR_CAMERA_BOUNDS = new Color(255, 255, 255);
     private Map map;
     private PlayerTeamSystem playerTeamSystem;
     private OwnTeamVisionSystem ownTeamVisionSystem;
     private FogOfWarSystem fogOfWarSystem;
+    private IngameCameraAppState ingameCameraAppState;
     private PaintableImage minimapImage = new PaintableImage(264, 264);
     private Texture2D texture2D = new Texture2D();
     private float scaleX_Map;
@@ -60,11 +66,13 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
     private float scaleY_Fog;
     private byte[] backgroundImageData;
     private BufferedImage towerImage;
+    private boolean hasCameraMovedSinceLastUpdate;
     private boolean isInitialized;
     private float timeSinceLastUpdate;
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity) {
+        hasCameraMovedSinceLastUpdate |= ingameCameraAppState.hasMoved();
         if (isInitialized) {
             timeSinceLastUpdate += deltaSeconds;
             if (timeSinceLastUpdate > Settings.getFloat("minimap_update_interval")) {
@@ -78,7 +86,7 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
 
     private void updateMinimap(EntityWorld entityWorld) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, PositionComponent.class);
-        if ((!observer.getNew().isEmpty()) || (!observer.getChanged().isEmpty()) || (!observer.getRemoved().isEmpty())) {
+        if (hasCameraMovedSinceLastUpdate || (!observer.getNew().isEmpty()) || (!observer.getChanged().isEmpty()) || (!observer.getRemoved().isEmpty())) {
             minimapImage.setData(backgroundImageData);
             for (int entity : entityWorld.getEntitiesWithAny(PositionComponent.class)) {
                 if (ownTeamVisionSystem.isVisible(entityWorld, entity)) {
@@ -88,20 +96,22 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
             if (fogOfWarSystem.isEnabled()) {
                 paintFogOfWar();
             }
+            paintCameraBounds();
             minimapImage.flipY();
             texture2D.setImage(minimapImage.getImage());
             screenController.setMinimapImage(texture2D);
         }
+        hasCameraMovedSinceLastUpdate = false;
         timeSinceLastUpdate = 0;
     }
 
     private void paintEntity(EntityWorld entityWorld, int entity) {
         Color color;
         Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
-        int x = Math.round(((map.getPhysicsInformation().getWidth() - position.getX()) - map.getMinimapInformation().getX()) * scaleX_Map);
-        int y = Math.round(((map.getPhysicsInformation().getHeight() - position.getY()) - map.getMinimapInformation().getY()) * scaleY_Map);
+        int x = getPixelPosition_X(position.getX());
+        int y = getPixelPosition_X(position.getY());
         TeamComponent teamComponent = entityWorld.getComponent(entity, TeamComponent.class);
-        if((teamComponent != null) && (teamComponent.getTeamEntity() != 0)){
+        if ((teamComponent != null) && (teamComponent.getTeamEntity() != 0)) {
             color = (playerTeamSystem.isAllied(teamComponent)?COLOR_TEAM_ALLIED:COLOR_TEAM_ENEMY);
         } else{
             color = COLOR_TEAM_OTHER;
@@ -138,8 +148,8 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
     }
 
     private void paintFogOfWar(){
-        for(int x=0;x<minimapImage.getWidth();x++){
-            for(int y=0;y<minimapImage.getHeight();y++){
+        for (int x = 0; x < minimapImage.getWidth(); x++) {
+            for (int y = 0; y < minimapImage.getHeight(); y++) {
                 float mapX = (map.getPhysicsInformation().getWidth() - (((x / scaleX_Map) + map.getMinimapInformation().getX())));
                 float mapY = (map.getPhysicsInformation().getHeight() - (((y / scaleY_Map) + map.getMinimapInformation().getY())));
                 // Check for the maximum boundary since the physical size of the map reaches 1 unit further than the images
@@ -149,11 +159,43 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
                 int indexRed = minimapImage.getIndex(x, y, 0);
                 int red = ((minimapImage.getPixel(indexRed) * visibility) / 255);
                 int green = ((minimapImage.getPixel(indexRed + 1) * visibility) / 255);
-                int blue = ((minimapImage.getPixel(indexRed +2) * visibility) / 255);
+                int blue = ((minimapImage.getPixel(indexRed + 2) * visibility) / 255);
                 minimapImage.setPixel(indexRed, red);
                 minimapImage.setPixel(indexRed + 1, green);
                 minimapImage.setPixel(indexRed + 2, blue);
             }
         }
+    }
+
+    private void paintCameraBounds() {
+        // TODO: Paint the camera bounds when in 3rd person camera
+        if (map.getCamera() instanceof MapCamera_TopDown) {
+            Vector3f leftTop = ingameCameraAppState.getLeftTopCornerWorldSurfaceLocation();
+            Vector3f rightBottom = ingameCameraAppState.getRightBottomCornerWorldSurfaceLocation();
+            int startX = Math.max(0, Math.min(getPixelPosition_X(leftTop.getX()), minimapImage.getWidth() - 1));
+            int startY = Math.max(0, Math.min(getPixelPosition_Y(leftTop.getZ()), minimapImage.getHeight() - 1));
+            int endX = Math.max(0, Math.min(getPixelPosition_X(rightBottom.getX()), minimapImage.getWidth() - 1));
+            int endY = Math.max(0, Math.min(getPixelPosition_Y(rightBottom.getZ()), minimapImage.getHeight() - 1));
+            for (int x = startX; x <= endX; x++) {
+                minimapImage.setPixel(x, startY, COLOR_CAMERA_BOUNDS);
+                minimapImage.setPixel(x, endY, COLOR_CAMERA_BOUNDS);
+            }
+            for (int y = (startY + 1); y <= (endY - 1); y++) {
+                minimapImage.setPixel(startX, y, COLOR_CAMERA_BOUNDS);
+                minimapImage.setPixel(endX, y, COLOR_CAMERA_BOUNDS);
+            }
+        }
+    }
+
+    private int getPixelPosition_X(float mapX) {
+        return getPixelPosition(mapX, map.getPhysicsInformation().getWidth(), map.getMinimapInformation().getX(), scaleX_Map);
+    }
+
+    private int getPixelPosition_Y(float mapY) {
+        return getPixelPosition(mapY, map.getPhysicsInformation().getHeight(), map.getMinimapInformation().getY(), scaleY_Map);
+    }
+
+    private static int getPixelPosition(float mapPosition, float mapSize, float minimapPosition, float scaleMap) {
+        return Math.round(((mapSize - mapPosition) - minimapPosition) * scaleMap);
     }
 }

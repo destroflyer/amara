@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.display.ingame.appstates;
 
 import java.util.ArrayList;
@@ -25,6 +21,7 @@ import com.jme3.post.Filter;
 import com.jme3.scene.BatchNode;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.jme3.scene.shape.Quad;
 import com.jme3.shadow.DirectionalLightShadowFilter;
 import com.jme3.texture.Texture;
 import com.jme3.util.SkyFactory;
@@ -41,28 +38,34 @@ import amara.libraries.applications.display.ingame.maps.*;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.applications.display.models.objects.SnowEmitter;
 
-/**
- *
- * @author Carl
- */
-public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
+public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
 
-    public MapAppState(Map map){
+    public MapAppState(Map map) {
         this.map = map;
         mapHeightmap = new MapHeightmap(map.getName(), map.getPhysicsInformation());
         mapTerrain = new MapTerrain(map);
+        groundHeightPlane = createGroundHeightPlane(map.getPhysicsInformation());
     }
     private Map map;
     private MapHeightmap mapHeightmap;
     private MapTerrain mapTerrain;
+    private Geometry groundHeightPlane;
     private Node visualsNode = new Node();
     private HashMap<ModelObject, MapVisual> modelObjectsVisuals = new HashMap<>();
     private Node cameraNode = new Node();
     private ChaseCamera chaseCamera;
     private ArrayList<Filter> activeFilters = new ArrayList<>();
 
+    private Geometry createGroundHeightPlane(MapPhysicsInformation mapPhysicsInformation) {
+        // Make the plane way bigger than the map to ensure that the camera always covers it when at the edges
+        Geometry groundHeightPlane = new Geometry(null, new Quad(mapPhysicsInformation.getWidth() * 3, mapPhysicsInformation.getHeight() * 3));
+        groundHeightPlane.setLocalTranslation((-1 * mapPhysicsInformation.getWidth()), map.getPhysicsInformation().getGroundHeight(), (2 * mapPhysicsInformation.getHeight()));
+        groundHeightPlane.rotate(JMonkeyUtil.getQuaternion_X(-90));
+        return groundHeightPlane;
+    }
+
     @Override
-    public void initialize(AppStateManager stateManager, Application application){
+    public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
         mainApplication.getRootNode().attachChild(mapTerrain.getTerrain());
         mainApplication.getRootNode().attachChild(visualsNode);
@@ -88,7 +91,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
             if (ingameCameraAppState.shouldBeLimited()) {
                 MapCamera_Limit limit = mapCamera_TopDown.getLimit();
                 if (limit != null) {
-                    ingameCameraAppState.setLimit(limit.getMinimum(), limit.getMaximum(), mapTerrain.getTerrain());
+                    ingameCameraAppState.setLimit(limit.getMinimum(), limit.getMaximum());
                 }
             }
             // Zoom
@@ -299,6 +302,10 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication>{
 
     public MapTerrain getMapTerrain(){
         return mapTerrain;
+    }
+
+    public Geometry getGroundHeightPlane() {
+        return groundHeightPlane;
     }
 
     public Node getVisualsNode(){

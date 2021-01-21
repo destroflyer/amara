@@ -108,7 +108,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardPlayersNamesSystem(screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardScoresSystem(screenController_HUD));
         localEntitySystemAppState.addEntitySystem(new DisplayScoreboardInventoriesSystem(screenController_HUD));
-        localEntitySystemAppState.addEntitySystem(new DisplayMinimapSystem(this, screenController_HUD, mapAppState.getMap(), playerTeamSystem, ownTeamVisionSystem, fogOfWarSystem));
+        localEntitySystemAppState.addEntitySystem(new DisplayMinimapSystem(this, screenController_HUD, mapAppState.getMap(), playerTeamSystem, ownTeamVisionSystem, fogOfWarSystem, ingameCameraAppState));
         localEntitySystemAppState.addEntitySystem(new DisplayShopItemsSystem(this, screenController_Shop));
         localEntitySystemAppState.addEntitySystem(new UpdateRecipeCostsSystem(this::getPlayerEntity, screenController_Shop));
     }
