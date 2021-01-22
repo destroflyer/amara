@@ -19,10 +19,10 @@ mvn clean install
 rm -rf "${CLIENT}"*
 mv assets "${CLIENT}"
 mv client/master-client-application/target/libs "${CLIENT}"
-mv client/master-client-application/target/master-client-application-0.7.jar "${CLIENT}Amara.jar"
+mv client/master-client-application/target/master-client-application-0.8.jar "${CLIENT}Amara.jar"
 echo "./assets/" > "${CLIENT}assets.ini"
 curl https://destrostudios.com:8080/apps/1/updateFiles
 
 # Deploy (Server)
-mv server/master-server-application/target/master-server-application-0.7-jar-with-dependencies.jar "${SERVER}amara.jar"
+mv server/master-server-application/target/master-server-application-0.8-jar-with-dependencies.jar "${SERVER}amara.jar"
 sh "${SERVER}control.sh" restart
