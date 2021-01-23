@@ -10,7 +10,6 @@ import amara.applications.ingame.client.systems.filters.*;
 import amara.applications.ingame.client.systems.gui.*;
 import amara.applications.ingame.client.systems.information.*;
 import amara.applications.ingame.client.systems.visualisation.*;
-import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.master.network.messages.objects.GameSelectionPlayer;
 import amara.core.Queue;
 import amara.core.input.Event;
@@ -123,7 +122,6 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
     private void updateCursorHoveredEntity() {
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
         Vector2f cursorPosition = mainApplication.getInputManager().getCursorPosition();
-        int tmpCursorHoveredEntity = cursorHoveredEntity;
         cursorHoveredEntity = getHoveredCollisionResults(mainApplication.getRayCastingResults_Screen(localEntitySystemAppState.getNodeVisibleToMouse(), cursorPosition));
         if (cursorHoveredEntity == -1) {
             float alternativeRange = 17;
@@ -139,14 +137,6 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
                 }
             }
             cursorHoveredEntity = getHoveredCollisionResults(tmpEntitiesCollisionResults);
-        }
-        if (cursorHoveredEntity != tmpCursorHoveredEntity) {
-            if (tmpCursorHoveredEntity != -1) {
-                localEntitySystemAppState.getEntityWorld().removeComponent(tmpCursorHoveredEntity, IsHoveredComponent.class);
-            }
-            if (cursorHoveredEntity != -1) {
-                localEntitySystemAppState.getEntityWorld().setComponent(cursorHoveredEntity, new IsHoveredComponent());
-            }
         }
     }
 

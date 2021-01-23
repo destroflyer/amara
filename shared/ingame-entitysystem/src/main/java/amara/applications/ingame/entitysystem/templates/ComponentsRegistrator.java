@@ -5299,14 +5299,6 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.IsHiddenAreaComponent();
             }
         });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsHoveredComponent.class);
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsHoveredComponent>("isHovered"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.units.IsHoveredComponent construct(EntityWorld entityWorld, Element element){
-                return new amara.applications.ingame.entitysystem.components.units.IsHoveredComponent();
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent.class.getDeclaredField("hiddenAreaEntity"), componentFieldSerializer_Entity);

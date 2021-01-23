@@ -50,7 +50,7 @@ public class LocalEntitySystemAppState extends EntitySystemDisplayAppState<Ingam
         addEntitySystem(new DirectionSystem(entitySceneMap));
         addEntitySystem(new ScaleSystem(entitySceneMap));
         addEntitySystem(new AnimationSystem(entitySceneMap));
-        addEntitySystem(new MarkHoveredUnitsSystem(entitySceneMap, playerAppState.getPlayerTeamSystem(), getAppState(IngameMouseCursorAppState.class), assetManager));
+        addEntitySystem(new MarkHoveredUnitsSystem(entitySceneMap, playerAppState.getPlayerTeamSystem(), getAppState(IngameMouseCursorAppState.class), playerAppState::getCursorHoveredEntity, assetManager));
         addEntitySystem(new KnockupVisualisationSystem(entitySceneMap, positionSystem));
         addEntitySystem(new BuffVisualisationSystem_Aland_Passive(entitySceneMap, assetManager));
         addEntitySystem(new BuffVisualisationSystem_Aland_Passive_Full(entitySceneMap, assetManager));
