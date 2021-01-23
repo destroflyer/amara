@@ -1,9 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.visualisation.buffs;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
@@ -15,20 +12,16 @@ import amara.libraries.applications.display.ingame.models.util.SimpleParticleEmi
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Carl
- */
 public class BuffVisualisationSystem_Maria_Passive extends BuffVisualisationSystem {
 
-    public BuffVisualisationSystem_Maria_Passive(EntitySceneMap entitySceneMap) {
-        super(entitySceneMap, "maria_passive");
+    public BuffVisualisationSystem_Maria_Passive(EntitySceneMap entitySceneMap, AssetManager assetManager) {
+        super(entitySceneMap, assetManager, "maria_passive");
     }
     private final static String NODE_NAME_ATTACHMENT = "mariaPassiveEffect";
 
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
-        SimpleParticleEmitter simpleParticleEmitter = new SimpleParticleEmitter();
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity) {
+        SimpleParticleEmitter simpleParticleEmitter = new SimpleParticleEmitter(assetManager);
         simpleParticleEmitter.setName(NODE_NAME_ATTACHMENT);
         ParticleEmitter particleEmitter = simpleParticleEmitter.getParticleEmitter();
         particleEmitter.setNumParticles(80);

@@ -4,27 +4,22 @@ import com.jme3.math.Vector3f;
 import amara.core.Launcher_Core;
 import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.applications.display.appstates.*;
-import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.tools.modelviewer.appstates.*;
 
-/**
- * @author Carl
- */
-public class ModelViewerApplication extends DisplayApplication{
+public class ModelViewerApplication extends DisplayApplication {
     
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Launcher_Core.initialize();
         new ModelViewerApplication().start();
     }
 
-    public ModelViewerApplication(){
+    public ModelViewerApplication() {
         setShowSettings(false);
     }
 
     @Override
-    public void simpleInitApp(){
+    public void simpleInitApp() {
         super.simpleInitApp();
-        MaterialFactory.setAssetManager(assetManager);
         setDisplayStatView(false);
         stateManager.attach(new LightAppState());
         stateManager.attach(new PostFilterAppState());

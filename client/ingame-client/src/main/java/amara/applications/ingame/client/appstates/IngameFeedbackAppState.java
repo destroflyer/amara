@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.appstates;
 
 import com.jme3.app.Application;
@@ -21,29 +17,21 @@ import amara.applications.ingame.client.IngameClientApplication;
 import amara.libraries.applications.display.JMonkeyUtil;
 import amara.libraries.applications.display.appstates.BaseDisplayAppState;
 import amara.libraries.applications.display.ingame.appstates.MapAppState;
-import amara.libraries.applications.display.materials.MaterialFactory;
 
-/**
- *
- * @author Carl
- */
-public class IngameFeedbackAppState extends BaseDisplayAppState<IngameClientApplication>{
+public class IngameFeedbackAppState extends BaseDisplayAppState<IngameClientApplication> {
 
-    public IngameFeedbackAppState(){
-        
-    }
     private Node movementTargetDisplay;
     private ParticleEmitter[] movementTargetDisplay_ParticleEmitters = new ParticleEmitter[4];
 
     @Override
-    public void initialize(AppStateManager stateManager, Application application){
+    public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
         movementTargetDisplay = new Node();
         Vector2f currentArrowAngle = new Vector2f(1, 1);
-        for(int i=0;i<movementTargetDisplay_ParticleEmitters.length;i++){
+        for (int i = 0; i < movementTargetDisplay_ParticleEmitters.length; i++) {
             ParticleEmitter particleEmitter = new ParticleEmitter("", ParticleMesh.Type.Triangle, 1);
-            Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Misc/Particle.j3md");
-            material.setTexture("Texture", MaterialFactory.getAssetManager().loadTexture("Textures/effects/movement_target_arrow_additive.png"));
+            Material material = new Material(mainApplication.getAssetManager(), "Common/MatDefs/Misc/Particle.j3md");
+            material.setTexture("Texture", mainApplication.getAssetManager().loadTexture("Textures/effects/movement_target_arrow_additive.png"));
             particleEmitter.setMaterial(material);
             particleEmitter.getParticleInfluencer().setInitialVelocity(new Vector3f(0, 0, -6));
             particleEmitter.getParticleInfluencer().setVelocityVariation(0);
@@ -71,12 +59,12 @@ public class IngameFeedbackAppState extends BaseDisplayAppState<IngameClientAppl
         movementTargetDisplay.setCullHint(Spatial.CullHint.Always);
         mainApplication.getRootNode().attachChild(movementTargetDisplay);
     }
-    
-    public void displayMovementTarget(Vector2f location){
+
+    public void displayMovementTarget(Vector2f location) {
         float y = getAppState(MapAppState.class).getMapHeightmap().getHeight(location);
         movementTargetDisplay.setLocalTranslation(location.getX(), y, location.getY());
         movementTargetDisplay.setCullHint(Spatial.CullHint.Inherit);
-        for(ParticleEmitter particleEmitter : movementTargetDisplay_ParticleEmitters){
+        for (ParticleEmitter particleEmitter : movementTargetDisplay_ParticleEmitters) {
             particleEmitter.killAllParticles();
             particleEmitter.emitAllParticles();
         }

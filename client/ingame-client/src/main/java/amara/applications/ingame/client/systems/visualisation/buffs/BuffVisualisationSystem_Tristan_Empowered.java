@@ -6,6 +6,7 @@ import amara.libraries.applications.display.ingame.models.modifiers.ModelModifie
 import amara.libraries.applications.display.ingame.models.util.SimpleParticleEmitter;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.EntityWorld;
+import com.jme3.asset.AssetManager;
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
@@ -15,14 +16,14 @@ import com.jme3.scene.Spatial;
 
 public class BuffVisualisationSystem_Tristan_Empowered extends BuffVisualisationSystem {
 
-    public BuffVisualisationSystem_Tristan_Empowered(EntitySceneMap entitySceneMap) {
-        super(entitySceneMap, "tristan_empowered");
+    public BuffVisualisationSystem_Tristan_Empowered(EntitySceneMap entitySceneMap, AssetManager assetManager) {
+        super(entitySceneMap, assetManager, "tristan_empowered");
     }
     private final static String NODE_NAME_ATTACHMENT = "tristanEmpoweredEffect";
 
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
-        SimpleParticleEmitter simpleParticleEmitter = new SimpleParticleEmitter();
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity) {
+        SimpleParticleEmitter simpleParticleEmitter = new SimpleParticleEmitter(assetManager);
         simpleParticleEmitter.setName(NODE_NAME_ATTACHMENT);
         ParticleEmitter particleEmitter = simpleParticleEmitter.getParticleEmitter();
         particleEmitter.setNumParticles(80);

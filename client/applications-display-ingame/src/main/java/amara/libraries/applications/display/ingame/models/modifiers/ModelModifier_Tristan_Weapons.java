@@ -4,6 +4,7 @@ import amara.libraries.applications.display.JMonkeyUtil;
 import amara.libraries.applications.display.models.ModelModifier;
 import amara.libraries.applications.display.models.ModelSkin;
 import amara.libraries.applications.display.models.RegisteredModel;
+import com.jme3.asset.AssetManager;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
@@ -14,10 +15,10 @@ public class ModelModifier_Tristan_Weapons extends ModelModifier {
     public static final String NODE_NAME_SWORD = "tristanSword";
 
     @Override
-    public void modify(RegisteredModel registeredModel) {
+    public void modify(RegisteredModel registeredModel, AssetManager assetManager) {
         // Shield
         Node leftPalmNode = registeredModel.requestBoneAttachmentsNode("RigLPalm");
-        Node shield = ModelSkin.get("Models/tristan_shield/skin.xml").load();
+        Node shield = ModelSkin.get("Models/tristan_shield/skin.xml").load(assetManager);
         shield.setLocalTranslation(8, 3, 2);
         shield.rotate(new Quaternion().fromAngleAxis(FastMath.PI, Vector3f.UNIT_Y));
         shield.rotate(new Quaternion().fromAngleAxis(0.3f, Vector3f.UNIT_Z));
@@ -25,7 +26,7 @@ public class ModelModifier_Tristan_Weapons extends ModelModifier {
         leftPalmNode.attachChild(shield);
         // Sword
         Node rightPalmNode = registeredModel.requestBoneAttachmentsNode("RigRPalm");
-        Node sword = ModelSkin.get("Models/tristan_sword/skin.xml").load();
+        Node sword = ModelSkin.get("Models/tristan_sword/skin.xml").load(assetManager);
         sword.setName(NODE_NAME_SWORD);
         sword.setLocalTranslation(8, -8, 2);
         JMonkeyUtil.setLocalRotation(sword, new Vector3f(0, 0, 1));

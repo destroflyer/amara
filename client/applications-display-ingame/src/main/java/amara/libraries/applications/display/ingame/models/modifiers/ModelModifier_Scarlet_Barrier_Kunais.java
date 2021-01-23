@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.display.ingame.models.modifiers;
 
 import amara.libraries.applications.display.models.ModelModifier;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.applications.display.models.RegisteredModel;
+import com.jme3.asset.AssetManager;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
@@ -15,18 +12,14 @@ import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Node;
 import com.jme3.scene.control.AbstractControl;
 
-/**
- *
- * @author Carl
- */
 public class ModelModifier_Scarlet_Barrier_Kunais extends ModelModifier {
 
     @Override
-    public void modify(RegisteredModel registeredModel) {
+    public void modify(RegisteredModel registeredModel, AssetManager assetManager) {
         Node node = registeredModel.getNode();
         int kunaisCount = 6;
         for (int i = 0; i < kunaisCount; i++) {
-            ModelObject kunai = new ModelObject(null, "Models/scarlet_kunai/skin.xml");
+            ModelObject kunai = new ModelObject(assetManager, "Models/scarlet_kunai/skin.xml");
             final float speed = (2 * FastMath.PI);
             final float startTime = (i * ((FastMath.TWO_PI / speed) / kunaisCount));
             kunai.addControl(new AbstractControl() {

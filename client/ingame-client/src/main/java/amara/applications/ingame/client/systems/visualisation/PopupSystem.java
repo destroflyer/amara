@@ -1,5 +1,6 @@
 package amara.applications.ingame.client.systems.visualisation;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 import com.jme3.font.Rectangle;
@@ -17,8 +18,8 @@ import amara.libraries.entitysystem.EntityWorld;
 
 public class PopupSystem extends TopHUDAttachmentSystem {
 
-    public PopupSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap) {
-        super(hudAttachmentsSystem, entityHeightMap, PopupComponent.class);
+    public PopupSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap, AssetManager assetManager) {
+        super(hudAttachmentsSystem, entityHeightMap, PopupComponent.class, assetManager);
         hudOffset = new Vector3f(0, 0, 2);
     }
     private final static String TEXT_NAME = "text";
@@ -31,11 +32,11 @@ public class PopupSystem extends TopHUDAttachmentSystem {
         int rows = text.split("\n").length;
         Node node = new Node();
         Geometry geometry = new Geometry("", new PopupMesh(rows));
-        Material material = MaterialFactory.generateUnshadedMaterial("Textures/effects/popups/speech_bubble_" + rows + ".png");
+        Material material = MaterialFactory.generateUnshadedMaterial(assetManager, "Textures/effects/popups/speech_bubble_" + rows + ".png");
         material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         geometry.setMaterial(material);
         node.attachChild(geometry);
-        BitmapFont font = MaterialFactory.getAssetManager().loadFont("Interface/fonts/Verdana_18.fnt");
+        BitmapFont font = assetManager.loadFont("Interface/fonts/Verdana_18.fnt");
         BitmapText bitmapText = new BitmapText(font);
         bitmapText.setName(TEXT_NAME);
         bitmapText.setSize(textSize);

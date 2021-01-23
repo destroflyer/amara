@@ -1,9 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.visualisation.buffs;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.effect.ParticleMesh;
 import com.jme3.material.Material;
@@ -13,24 +10,19 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Spatial;
 import amara.applications.ingame.client.systems.visualisation.EntitySceneMap;
-import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Carl
- */
-public class BuffVisualisationSystem_Wither extends BuffVisualisationSystem{
+public class BuffVisualisationSystem_Wither extends BuffVisualisationSystem {
 
-    public BuffVisualisationSystem_Wither(EntitySceneMap entitySceneMap){
-        super(entitySceneMap, "withered");
+    public BuffVisualisationSystem_Wither(EntitySceneMap entitySceneMap, AssetManager assetManager) {
+        super(entitySceneMap, assetManager, "withered");
     }
-    
+
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity) {
         ParticleEmitter particleEmitter = new ParticleEmitter("buff", ParticleMesh.Type.Triangle, 30);
-        Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Misc/Particle.j3md");
-        material.setTexture("Texture", MaterialFactory.getAssetManager().loadTexture("Textures/effects/flame_alpha.png"));
+        Material material = new Material(assetManager, "Common/MatDefs/Misc/Particle.j3md");
+        material.setTexture("Texture", assetManager.loadTexture("Textures/effects/flame_alpha.png"));
         material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         particleEmitter.setMaterial(material);
         particleEmitter.setImagesX(2);
@@ -51,7 +43,7 @@ public class BuffVisualisationSystem_Wither extends BuffVisualisationSystem{
         particleEmitter.setQueueBucket(RenderQueue.Bucket.Opaque);
         particleEmitter.getMaterial().getAdditionalRenderState().setDepthTest(false);
         particleEmitter.setUserData("layer", VISUALISATION_LAYER);
-        //[jME 3.1 Master] Can somehow throw a multithreading error otherwise
+        // [jME 3.1 Master] Can somehow throw a multithreading error otherwise
         particleEmitter.updateLogicalState(10);
         return particleEmitter;
     }

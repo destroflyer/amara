@@ -11,12 +11,8 @@ import com.jme3.scene.Spatial;
 import com.jme3.system.AppSettings;
 import amara.core.GameInfo;
 import amara.core.files.FileAssets;
-import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.applications.display.comparators.LayerGeometryComparator_Opaque;
 
-/**
- * @author Carl
- */
 public class DisplayApplication extends SimpleApplication {
 
     public DisplayApplication() {
@@ -32,7 +28,6 @@ public class DisplayApplication extends SimpleApplication {
     @Override
     public void simpleInitApp() {
         assetManager.registerLocator(FileAssets.ROOT, FileLocator.class);
-        MaterialFactory.setAssetManager(assetManager);
         inputManager.deleteMapping(SimpleApplication.INPUT_MAPPING_EXIT);
         viewPort.getQueue().setGeometryComparator(RenderQueue.Bucket.Opaque, new LayerGeometryComparator_Opaque());
         setDisplayStatView(false);
@@ -40,13 +35,7 @@ public class DisplayApplication extends SimpleApplication {
 
     @Override
     public void simpleUpdate(float lastTimePerFrame) {
-        
-    }
 
-    @Override
-    public void stop(boolean waitFor) {
-        MaterialFactory.setAssetManager(null);
-        super.stop(waitFor);
     }
 
     public CollisionResults getRayCastingResults_Cursor(Spatial spatial) {
@@ -60,8 +49,8 @@ public class DisplayApplication extends SimpleApplication {
     }
 
     public CollisionResults getRayCastingResults_ScreenCenter(Spatial spatial) {
-        Vector3f origin = cam.getWorldCoordinates(new Vector2f((settings.getWidth() / 2), (settings.getHeight() / 2)), 0.0f);
-        Vector3f direction = cam.getWorldCoordinates(new Vector2f((settings.getWidth() / 2), (settings.getHeight() / 2)), 0.3f);
+        Vector3f origin = cam.getWorldCoordinates(new Vector2f((settings.getWidth() / 2f), (settings.getHeight() / 2f)), 0.0f);
+        Vector3f direction = cam.getWorldCoordinates(new Vector2f((settings.getWidth() / 2f), (settings.getHeight() / 2f)), 0.3f);
         direction.subtractLocal(origin).normalizeLocal();
         return getRayCastingResults(spatial, new Ray(origin, direction));
     }

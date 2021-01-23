@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.display.models;
 
 import java.io.File;
@@ -10,6 +6,7 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState.FaceCullMode;
 import com.jme3.math.ColorRGBA;
@@ -28,13 +25,9 @@ import amara.libraries.applications.display.materials.MaterialFactory;
 import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
 
-/**
- *
- * @author Carl
- */
-public class ModelSkin{
+public class ModelSkin {
 
-    private ModelSkin(String filePath){
+    private ModelSkin(String filePath) {
         loadFile(filePath);
     }
     private static ConcurrentHashMap<String, ModelSkin> cachedSkins = new ConcurrentHashMap<>();
@@ -111,20 +104,20 @@ public class ModelSkin{
         return defaultValue;
     }
 
-    public Node load() {
-        Node node = loadModel();
-        loadMaterial(node);
+    public Node load(AssetManager assetManager) {
+        Node node = loadModel(assetManager);
+        loadMaterial(assetManager, node);
         loadPosition(node);
         loadModifiers();
         applyGeometryInformation(node);
         return node;
     }
 
-    private Node loadModel() {
+    private Node loadModel(AssetManager assetManager) {
         Node node;
         if (name != null) {
             String modelPath = getModelFilePath(name, name);
-            node = (Node) MaterialFactory.getAssetManager().loadModel(modelPath);
+            node = (Node) assetManager.loadModel(modelPath);
         } else {
             node = new Node();
         }
@@ -149,7 +142,7 @@ public class ModelSkin{
         return "Models/" + modelName + "/" + fileName + "." + fileExtension;
     }
 
-    private void loadMaterial(Node node) {
+    private void loadMaterial(AssetManager assetManager, Node node) {
         if (materialElement != null) {
             List<Element> materialElements = materialElement.getChildren();
             for (int i = 0; i < materialElements.size(); i++){
@@ -160,17 +153,17 @@ public class ModelSkin{
                 if (currentMaterialElement.getName().equals("color")) {
                     float[] colorComponents = Util.parseToFloatArray(materialDefintion.split(","));
                     ColorRGBA colorRGBA = new ColorRGBA(colorComponents[0], colorComponents[1], colorComponents[2], colorComponents[3]);
-                    material = MaterialFactory.generateLightingMaterial(colorRGBA);
+                    material = MaterialFactory.generateLightingMaterial(assetManager, colorRGBA);
                 } else if(currentMaterialElement.getName().equals("texture")) {
                     String textureFilePath = (getResourcesFilePath(sourceName) + currentMaterialElement.getText());
-                    material = MaterialFactory.generateLightingMaterial(textureFilePath);
+                    material = MaterialFactory.generateLightingMaterial(assetManager, textureFilePath);
                     //[jME 3.1 SNAPSHOT] Hardware skinning currently doesn't seem to support normal maps correctly
                     if (!Settings.getBoolean("hardware_skinning")) {
-                        tryLoadTexture(material, "NormalMap", currentMaterialElement.getAttributeValue("normalMap"), sourceName);
+                        tryLoadTexture(assetManager, material, "NormalMap", currentMaterialElement.getAttributeValue("normalMap"), sourceName);
                     }
-                    tryLoadTexture(material, "AlphaMap", currentMaterialElement.getAttributeValue("alphaMap"), sourceName);
-                    tryLoadTexture(material, "SpecularMap", currentMaterialElement.getAttributeValue("specularMap"), sourceName);
-                    tryLoadTexture(material, "GlowMap", currentMaterialElement.getAttributeValue("glowMap"), sourceName);
+                    tryLoadTexture(assetManager, material, "AlphaMap", currentMaterialElement.getAttributeValue("alphaMap"), sourceName);
+                    tryLoadTexture(assetManager, material, "SpecularMap", currentMaterialElement.getAttributeValue("specularMap"), sourceName);
+                    tryLoadTexture(assetManager, material, "GlowMap", currentMaterialElement.getAttributeValue("glowMap"), sourceName);
                 }
                 if (material != null) {
                     String filter = currentMaterialElement.getAttributeValue("filter", "bilinear");
@@ -192,9 +185,9 @@ public class ModelSkin{
         }
     }
    
-    private void tryLoadTexture(Material material, String materialParameter, String textureName, String sourceName) {
+    private void tryLoadTexture(AssetManager assetManager, Material material, String materialParameter, String textureName, String sourceName) {
         if (textureName != null) {
-            Texture texture = MaterialFactory.loadTexture(getResourcesFilePath(sourceName) + textureName);
+            Texture texture = MaterialFactory.loadTexture(assetManager, getResourcesFilePath(sourceName) + textureName);
             material.setTexture(materialParameter, texture);
         }
     }

@@ -45,9 +45,9 @@ public class LoadingScreenAppState extends OverlayViewportAppState<IngameClientA
         directionalLight.setDirection(new Vector3f(-0.5f, -1.75f, 1));
         rootNode.addLight(directionalLight);
         // Models
-        modelObject1 = new ModelObject(mainApplication, "Models/minion/skin_loadingscreen_1.xml");
+        modelObject1 = new ModelObject(mainApplication.getAssetManager(), "Models/minion/skin_loadingscreen_1.xml");
         modelObject1.playAnimation("walk", 0.38f);
-        modelObject2 = new ModelObject(mainApplication, "Models/minion/skin_loadingscreen_2.xml");
+        modelObject2 = new ModelObject(mainApplication.getAssetManager(), "Models/minion/skin_loadingscreen_2.xml");
         modelObject2.playAnimation("walk", 0.38f);
         rootNode.attachChild(modelObject1);
         rootNode.attachChild(modelObject2);

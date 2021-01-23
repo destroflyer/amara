@@ -1,38 +1,30 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.display.models;
 
 import java.util.*;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import amara.libraries.applications.display.DisplayApplication;
 
-/**
- *
- * @author Carl
- */
 public class ModelObject extends Node {
 
-    public ModelObject(DisplayApplication mainApplication, String skinPath) {
-        this.mainApplication = mainApplication;
+    public ModelObject(AssetManager assetManager, String skinPath) {
+        this.assetManager = assetManager;
         skin = ModelSkin.get(skinPath);
         loadAndRegisterModel();
     }
-    private DisplayApplication mainApplication;
+    private AssetManager assetManager;
     private ModelSkin skin;
     private ArrayList<RegisteredModel> registeredModels = new ArrayList<>();
 
     public RegisteredModel loadAndRegisterModel() {
-        Node node = skin.load();
+        Node node = skin.load(assetManager);
         RegisteredModel registeredModel = new RegisteredModel(node);
         registeredModels.add(registeredModel);
         registeredModel.initialize(this);
         attachChild(node);
         for (ModelModifier modelModifier : skin.getModelModifiers()) {
-            modelModifier.modify(registeredModel);
+            modelModifier.modify(registeredModel, assetManager);
         }
         return registeredModel;
     }
@@ -66,7 +58,7 @@ public class ModelObject extends Node {
     }
 
     public void stopAndRewindAnimation() {
-        mainApplication.enqueueTask(() -> registeredModels.forEach(RegisteredModel::stopAndRewindAnimation));
+        registeredModels.forEach(RegisteredModel::stopAndRewindAnimation);
     }
 
     public ModelSkin getSkin() {

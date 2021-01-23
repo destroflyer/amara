@@ -1,18 +1,18 @@
 package amara.libraries.applications.display.ingame.models.util;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.effect.ParticleMesh;
 import com.jme3.material.Material;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
-import amara.libraries.applications.display.materials.MaterialFactory;
 
 public class SimpleParticleEmitter extends Node {
 
-    public SimpleParticleEmitter() {
+    public SimpleParticleEmitter(AssetManager assetManager) {
         particleEmitter = new ParticleEmitter("buff", ParticleMesh.Type.Triangle, 40);
-        Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Misc/Particle.j3md");
-        material.setTexture("Texture", MaterialFactory.getAssetManager().loadTexture("Textures/effects/flame_additive.png"));
+        Material material = new Material(assetManager, "Common/MatDefs/Misc/Particle.j3md");
+        material.setTexture("Texture", assetManager.loadTexture("Textures/effects/flame_additive.png"));
         particleEmitter.setMaterial(material);
         particleEmitter.setImagesX(2);
         particleEmitter.setImagesY(2);

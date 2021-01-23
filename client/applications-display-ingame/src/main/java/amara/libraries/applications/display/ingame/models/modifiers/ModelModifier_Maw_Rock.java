@@ -1,24 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.display.ingame.models.modifiers;
 
 import amara.libraries.applications.display.JMonkeyUtil;
 import amara.libraries.applications.display.models.ModelModifier;
 import amara.libraries.applications.display.models.RegisteredModel;
+import com.jme3.asset.AssetManager;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.control.AbstractControl;
 
-/**
- *
- * @author Carl
- */
 public class ModelModifier_Maw_Rock extends ModelModifier {
 
     @Override
-    public void modify(RegisteredModel registeredModel) {
+    public void modify(RegisteredModel registeredModel, AssetManager assetManager) {
         registeredModel.getNode().addControl(new AbstractControl() {
 
             @Override

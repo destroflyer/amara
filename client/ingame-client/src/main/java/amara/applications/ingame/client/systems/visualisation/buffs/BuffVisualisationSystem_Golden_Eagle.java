@@ -1,9 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.visualisation.buffs;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
@@ -12,19 +9,14 @@ import com.jme3.animation.AnimChannel;
 import com.jme3.renderer.queue.RenderQueue;
 import amara.applications.ingame.client.systems.visualisation.*;
 import amara.libraries.applications.display.JMonkeyUtil;
-import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.applications.display.models.RegisteredModel;
 import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Carl
- */
 public class BuffVisualisationSystem_Golden_Eagle extends BuffVisualisationSystem {
 
-    public BuffVisualisationSystem_Golden_Eagle(EntitySceneMap entitySceneMap) {
-        super(entitySceneMap, "golden_eagle");
+    public BuffVisualisationSystem_Golden_Eagle(EntitySceneMap entitySceneMap, AssetManager assetManager) {
+        super(entitySceneMap, assetManager, "golden_eagle");
         scaleVisualisation = false;
     }
     private final static String NODE_NAME_CLONED_MODEL = "goldenEagledModel";
@@ -35,7 +27,7 @@ public class BuffVisualisationSystem_Golden_Eagle extends BuffVisualisationSyste
         modelObject.getModelNode().setCullHint(Spatial.CullHint.Always);
         RegisteredModel clonedModel = modelObject.loadAndRegisterModel();
         clonedModel.getNode().setName(NODE_NAME_CLONED_MODEL);
-        Material material = MaterialFactory.getAssetManager().loadMaterial("Shaders/glass/materials/glass_3.j3m");
+        Material material = assetManager.loadMaterial("Shaders/glass/materials/glass_3.j3m");
         for (Geometry geometry : JMonkeyUtil.getAllGeometryChilds(clonedModel.getNode())) {
             geometry.setMaterial(material);
             geometry.setQueueBucket(RenderQueue.Bucket.Transparent);

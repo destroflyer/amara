@@ -1,6 +1,8 @@
 package amara.applications.ingame.client.systems.visualisation.healthbars;
 
 import java.util.HashMap;
+
+import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.scene.Geometry;
@@ -26,10 +28,10 @@ public class HealthBarStyleManager {
         new HealthBarStyle_Boss()
     };
 
-    public Spatial createGeometry(EntityWorld entityWorld, int entity) {
+    public Spatial createGeometry(EntityWorld entityWorld, int entity, AssetManager assetManager) {
         HealthBarStyle style = getStyle(entityWorld, entity);
         Geometry geometry = new Geometry(null, new RectangleMesh((style.getBarWidth() / -2), 0, 0, style.getBarWidth(), style.getBarHeight()));
-        Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
+        Material material = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         Texture2D texture2D = new Texture2D();
         texture2D.setMagFilter(Texture.MagFilter.Nearest);
         material.setTexture("ColorMap", texture2D);

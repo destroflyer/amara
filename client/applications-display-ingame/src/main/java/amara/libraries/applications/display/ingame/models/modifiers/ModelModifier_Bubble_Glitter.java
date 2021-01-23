@@ -1,13 +1,12 @@
-
 package amara.libraries.applications.display.ingame.models.modifiers;
 
 import amara.core.files.FileAssets;
-import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.applications.display.models.ModelModifier;
 import amara.libraries.applications.display.models.RegisteredModel;
 import com.destroflyer.jme3.effekseer.model.ParticleEffectSettings;
 import com.destroflyer.jme3.effekseer.reader.EffekseerReader;
 import com.destroflyer.jme3.effekseer.renderer.EffekseerControl;
+import com.jme3.asset.AssetManager;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.renderer.queue.RenderQueue;
@@ -17,7 +16,7 @@ import com.jme3.scene.control.AbstractControl;
 public class ModelModifier_Bubble_Glitter extends ModelModifier {
 
     @Override
-    public void modify(RegisteredModel registeredModel) {
+    public void modify(RegisteredModel registeredModel, AssetManager assetManager) {
         // Explode
         Node particleNodeExplode = new Node();
         particleNodeExplode.setLocalTranslation(0, 2.5f, 0);
@@ -29,8 +28,8 @@ public class ModelModifier_Bubble_Glitter extends ModelModifier {
                 .loop(false)
                 .frameLength(1f / 50)
                 .build(),
-            MaterialFactory.getAssetManager())
-        );
+            assetManager
+        ));
         registeredModel.getNode().attachChild(particleNodeExplode);
         // Glitter
         Node particleNodeGlitter = new Node();
@@ -51,8 +50,8 @@ public class ModelModifier_Bubble_Glitter extends ModelModifier {
                             .loop(false)
                             .frameLength(4.5f / 120)
                             .build(),
-                        MaterialFactory.getAssetManager())
-                    );
+                        assetManager
+                    ));
                     spatial.removeControl(this);
                 }
             }

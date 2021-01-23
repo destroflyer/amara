@@ -1,11 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.display.ingame.appstates;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.asset.AssetManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
@@ -24,18 +21,14 @@ import amara.libraries.applications.display.meshes.*;
 import amara.libraries.physics.shapes.*;
 import amara.libraries.physics.shapes.PolygonMath.Polygon;
 
-/**
- *
- * @author Carl
- */
-public class MapObstaclesAppState extends BaseDisplayAppState<DisplayApplication> implements ActionListener{
+public class MapObstaclesAppState extends BaseDisplayAppState<DisplayApplication> implements ActionListener {
 
     private Node node = new Node();
     private Node obstaclesNode = new Node();
     private boolean displayObstacles;
-    
+
     @Override
-    public void initialize(AppStateManager stateManager, Application application){
+    public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
         mainApplication.getInputManager().addMapping("toggle_hitboxes", new KeyTrigger(KeyInput.KEY_H));
         mainApplication.getInputManager().addListener(this, "toggle_hitboxes");
@@ -44,14 +37,14 @@ public class MapObstaclesAppState extends BaseDisplayAppState<DisplayApplication
         update();
         setDisplayObstacles(false);
     }
-    
-    public void update(){
+
+    public void update() {
         Map map = getAppState(MapAppState.class).getMap();
         node.setLocalTranslation(0, map.getPhysicsInformation().getGroundHeight(), 0);
         obstaclesNode.detachAllChildren();
-        for(MapObstacle obstacle : map.getPhysicsInformation().getObstacles()){
-            for(ConvexShape convexShape : obstacle.getConvexedOutline().getConvexShapes()){
-                Geometry collisionMeshGeometry = generateGeometry(convexShape);
+        for (MapObstacle obstacle : map.getPhysicsInformation().getObstacles()) {
+            for (ConvexShape convexShape : obstacle.getConvexedOutline().getConvexShapes()) {
+                Geometry collisionMeshGeometry = generateGeometry(mainApplication.getAssetManager(), convexShape);
                 collisionMeshGeometry.setLocalTranslation((float) convexShape.getTransform().extractX(), 0, (float) convexShape.getTransform().extractY());
                 obstaclesNode.attachChild(collisionMeshGeometry);
             }
@@ -59,63 +52,59 @@ public class MapObstaclesAppState extends BaseDisplayAppState<DisplayApplication
     }
 
     @Override
-    public void onAction(String name, boolean isPressed, float lastTimePerFrame){
-        if(name.equals("toggle_hitboxes") && isPressed){
+    public void onAction(String name, boolean isPressed, float lastTimePerFrame) {
+        if (name.equals("toggle_hitboxes") && isPressed) {
             setDisplayObstacles(!displayObstacles);
         }
     }
 
-    public Node getObstaclesNode(){
+    public Node getObstaclesNode() {
         return obstaclesNode;
     }
 
-    public void setDisplayObstacles(boolean displayObstacles){
+    public void setDisplayObstacles(boolean displayObstacles) {
         this.displayObstacles = displayObstacles;
         obstaclesNode.setCullHint(displayObstacles?Spatial.CullHint.Inherit: Spatial.CullHint.Always);
     }
 
-    public boolean areObstaclesDisplayed(){
+    public boolean areObstaclesDisplayed() {
         return displayObstacles;
     }
-    
-    public static Geometry generateGeometry(Shape shape){
-        return generateGeometry(shape, true);
+
+    public static Geometry generateGeometry(AssetManager assetManager, Shape shape) {
+        return generateGeometry(assetManager, shape, true);
     }
-    
-    public static Geometry generateGeometry(Shape shape, boolean isActive){
-        return generateGeometry(shape, (isActive?ColorRGBA.Blue:ColorRGBA.LightGray));
+
+    public static Geometry generateGeometry(AssetManager assetManager, Shape shape, boolean isActive) {
+        return generateGeometry(assetManager, shape, (isActive ? ColorRGBA.Blue : ColorRGBA.LightGray));
     }
-    
-    public static Geometry generateGeometry(Shape shape, ColorRGBA color){
+
+    public static Geometry generateGeometry(AssetManager assetManager, Shape shape, ColorRGBA color) {
         Mesh collisionMesh;
-        if(shape instanceof Circle){
+        if (shape instanceof Circle) {
             Circle circle = (Circle) shape;
             Vector3f center = new Vector3f((float) circle.getLocalPosition().getX(), 0, (float) circle.getLocalPosition().getY());
             collisionMesh = new CircleMesh(center, (float) circle.getGlobalRadius(), 64);
-        }
-        else if(shape instanceof SimpleConvexPolygon){
+        } else if (shape instanceof SimpleConvexPolygon){
             SimpleConvexPolygon simpleConvex = (SimpleConvexPolygon) shape;
             collisionMesh = new ConnectedPointsMesh((float) simpleConvex.getTransform().extractX(), (float) simpleConvex.getTransform().extractY(), simpleConvex.getGlobalPoints());
-        }
-        else if(shape instanceof PolygonShape){
+        } else if (shape instanceof PolygonShape) {
             PolygonShape polygonShape = (PolygonShape) shape;
             Polygon polygon = polygonShape.getGlobalPolygon();
             collisionMesh = new LinesMesh((float) polygonShape.getTransform().extractX(), (float) polygonShape.getTransform().extractY(), polygon.outlines());
-        }
-        else if(shape instanceof ConvexShape){
+        } else if (shape instanceof ConvexShape) {
             ConvexShape convexShape = (ConvexShape) shape;
             collisionMesh = new CircleMesh((float) convexShape.getBoundCircle().getGlobalRadius(), 64);
             color = ColorRGBA.Red;
-        }
-        else{
+        } else {
             throw new UnsupportedOperationException();
         }
-        return generateGeometry(collisionMesh, color);
+        return generateGeometry(assetManager, collisionMesh, color);
     }
-    
-    public static Geometry generateGeometry(Mesh mesh, ColorRGBA color){
+
+    public static Geometry generateGeometry(AssetManager assetManager, Mesh mesh, ColorRGBA color){
         Geometry collisionMeshGeometry = new Geometry("", mesh);
-        collisionMeshGeometry.setMaterial(MaterialFactory.generateUnshadedMaterial(color));
+        collisionMeshGeometry.setMaterial(MaterialFactory.generateUnshadedMaterial(assetManager, color));
         collisionMeshGeometry.getMaterial().getAdditionalRenderState().setDepthTest(false);
         collisionMeshGeometry.setUserData("layer", 999);
         return collisionMeshGeometry;

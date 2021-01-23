@@ -392,7 +392,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
         switch(currentAction){
             case PLACE_HITBOX_CIRCLE:
                 obstacleToPlace = new MapObstacle_Circle(new Vector2D(), circleRadius);
-                toolCursor = MapObstaclesAppState.generateGeometry(obstacleToPlace.getConvexedOutline().getConvexShapes().get(0));
+                toolCursor = MapObstaclesAppState.generateGeometry(mainApplication.getAssetManager(), obstacleToPlace.getConvexedOutline().getConvexShapes().get(0));
                 parentNode = getAppState(MapObstaclesAppState.class).getObstaclesNode();
                 break;
             
@@ -400,12 +400,12 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                 obstacleToPlace = null;
                 Vector2D[] basePoints = Util.toArray(customShapePoints, Vector2D.class);
                 ConnectedPointsMesh connectedPointsMesh = new ConnectedPointsMesh(basePoints);
-                toolCursor = MapObstaclesAppState.generateGeometry(connectedPointsMesh, ColorRGBA.Blue);
+                toolCursor = MapObstaclesAppState.generateGeometry(mainApplication.getAssetManager(), connectedPointsMesh, ColorRGBA.Blue);
                 parentNode = getAppState(MapObstaclesAppState.class).getObstaclesNode();
                 break;
             
             case PLACE_VISUAL:
-                toolCursor = new ModelObject(mainApplication, "/" + visualsModelSkinPaths[visualModelSkinPathIndex]);
+                toolCursor = new ModelObject(mainApplication.getAssetManager(), "/" + visualsModelSkinPaths[visualModelSkinPathIndex]);
                 toolCursor.setShadowMode(RenderQueue.ShadowMode.Cast);
                 parentNode = getAppState(MapAppState.class).getVisualsNode();
                 updateVisualToPlaceTransformation();
@@ -416,7 +416,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                 TerrainAlphamap alphamap = mapAppState.getMapTerrain().getAlphamaps()[terrainTextureIndex / 3];
                 float rectangleSizeX = ((((float) terrainTextureSize) / alphamap.getPaintableImage().getWidth()) * mapAppState.getMap().getPhysicsInformation().getWidth());
                 float rectangleSizeY = ((((float) terrainTextureSize) / alphamap.getPaintableImage().getHeight()) * mapAppState.getMap().getPhysicsInformation().getHeight());
-                toolCursor = MapObstaclesAppState.generateGeometry(new Rectangle(rectangleSizeX, rectangleSizeY), ColorRGBA.White);
+                toolCursor = MapObstaclesAppState.generateGeometry(mainApplication.getAssetManager(), new Rectangle(rectangleSizeX, rectangleSizeY), ColorRGBA.White);
                 parentNode = getAppState(MapAppState.class).getVisualsNode();
                 break;
         }

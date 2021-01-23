@@ -6,6 +6,7 @@ import amara.applications.ingame.entitysystem.components.units.AggroTargetCompon
 import amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent;
 import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.entitysystem.EntityWorld;
+import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.scene.Geometry;
@@ -13,8 +14,8 @@ import com.jme3.scene.Spatial;
 
 public class MinionAggroIndicatorSystem extends TopHUDAttachmentSystem {
 
-    public MinionAggroIndicatorSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap, int playerEntity){
-        super(hudAttachmentsSystem, entityHeightMap, AggroTargetComponent.class);
+    public MinionAggroIndicatorSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap, AssetManager assetManager, int playerEntity){
+        super(hudAttachmentsSystem, entityHeightMap, AggroTargetComponent.class, assetManager);
         this.playerEntity = playerEntity;
     }
     private int playerEntity;
@@ -32,9 +33,9 @@ public class MinionAggroIndicatorSystem extends TopHUDAttachmentSystem {
     }
 
     @Override
-    protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity){
+    protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity) {
         Geometry geometry = new Geometry("", new RectangleMesh(-7.5f, 0, 0, 15, 11));
-        Material material = MaterialFactory.generateUnshadedMaterial("Textures/effects/minion_aggro_indicator.png");
+        Material material = MaterialFactory.generateUnshadedMaterial(assetManager, "Textures/effects/minion_aggro_indicator.png");
         material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         MaterialFactory.setFilter_Nearest(material);
         geometry.setMaterial(material);

@@ -1,10 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.visualisation.buffs;
 
 import java.util.HashMap;
+
+import com.jme3.asset.AssetManager;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
@@ -19,41 +17,37 @@ import amara.libraries.emitter.*;
 import amara.libraries.emitter.influencers.*;
 import amara.libraries.entitysystem.EntityWorld;
 
-/**
- *
- * @author Carl
- */
-public class BuffVisualisationSystem_Meditating extends BuffVisualisationSystem{
+public class BuffVisualisationSystem_Meditating extends BuffVisualisationSystem {
 
-    public BuffVisualisationSystem_Meditating(EntitySceneMap entitySceneMap){
-        super(entitySceneMap, "meditating");
+    public BuffVisualisationSystem_Meditating(EntitySceneMap entitySceneMap, AssetManager assetManager) {
+        super(entitySceneMap, assetManager, "meditating");
     }
-    private HashMap<Integer, MeditatingParticleSystem> particleSystems = new HashMap<Integer, MeditatingParticleSystem>();
+    private HashMap<Integer, MeditatingParticleSystem> particleSystems = new HashMap<>();
 
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
         super.update(entityWorld, deltaSeconds);
-        for(MeditatingParticleSystem particleSystem : particleSystems.values()){
+        for (MeditatingParticleSystem particleSystem : particleSystems.values()) {
             particleSystem.update(deltaSeconds);
         }
     }
-    
+
     @Override
-    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
+    protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity) {
         MeditatingParticleSystem particleSystem = new MeditatingParticleSystem();
         particleSystems.put(targetEntity, particleSystem);
         return particleSystem.getRootNode();
     }
 
     @Override
-    protected void removeVisualAttachment(int entity, Node entityNode, Spatial visualAttachment){
+    protected void removeVisualAttachment(int entity, Node entityNode, Spatial visualAttachment) {
         super.removeVisualAttachment(entity, entityNode, visualAttachment);
         particleSystems.remove(entity);
     }
-    
-    private class MeditatingParticleSystem{
 
-        public MeditatingParticleSystem(){
+    private class MeditatingParticleSystem {
+
+        public MeditatingParticleSystem() {
             rootNode = new Node();
             rootNode.rotate(JMonkeyUtil.getQuaternion_X(90));
             rootNode.setLocalScale(1.5f);
@@ -291,8 +285,8 @@ public class BuffVisualisationSystem_Meditating extends BuffVisualisationSystem{
         private Emitter emitter4;
         private float rotation;
     
-        private void addEmitter(Emitter emitter){
-            emitter.initialize(MaterialFactory.getAssetManager());
+        private void addEmitter(Emitter emitter) {
+            emitter.initialize(assetManager);
             rootNode.addControl(emitter);
             emitter.getParticleNode().setShadowMode(RenderQueue.ShadowMode.Off);
             emitter.setEnabled(true);
@@ -301,14 +295,14 @@ public class BuffVisualisationSystem_Meditating extends BuffVisualisationSystem{
                 geometry.setUserData("layer", VISUALISATION_LAYER);
             }
         }
-    
-        public void update(float lastTimePerFrame){
+
+        public void update(float lastTimePerFrame) {
             rotation += (lastTimePerFrame * 2);
             emitter3.setLocalRotation(emitter3.getLocalRotation().fromAngleAxis(rotation, Vector3f.UNIT_Z));
             emitter4.setLocalRotation(emitter4.getLocalRotation().fromAngleAxis(rotation, Vector3f.UNIT_Z));
         }
 
-        public Node getRootNode(){
+        public Node getRootNode() {
             return rootNode;
         }
     }

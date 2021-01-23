@@ -1,9 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.display.ingame.models.modifiers;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.effect.ParticleMesh;
 import com.jme3.effect.shapes.EmitterPointShape;
@@ -14,22 +11,17 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import amara.libraries.applications.display.JMonkeyUtil;
-import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.applications.display.models.*;
 
-/**
- *
- * @author Carl
- */
-public class ModelModifier_EventHorizon extends ModelModifier{
+public class ModelModifier_EventHorizon extends ModelModifier {
 
     @Override
-    public void modify(RegisteredModel registeredModel){
+    public void modify(RegisteredModel registeredModel, AssetManager assetManager) {
         float radius = 4.5f;
-        for(int i=0;i<5;i++){
+        for (int i = 0; i < 5; i++) {
             ParticleEmitter particleEmitter = new ParticleEmitter("", ParticleMesh.Type.Triangle, 40);
-            Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Misc/Particle.j3md");
-            material.setTexture("Texture", MaterialFactory.getAssetManager().loadTexture("Textures/effects/flash_additive.png"));
+            Material material = new Material(assetManager, "Common/MatDefs/Misc/Particle.j3md");
+            material.setTexture("Texture", assetManager.loadTexture("Textures/effects/flash_additive.png"));
             particleEmitter.setMaterial(material);
             particleEmitter.setImagesX(2);
             particleEmitter.setImagesY(2);

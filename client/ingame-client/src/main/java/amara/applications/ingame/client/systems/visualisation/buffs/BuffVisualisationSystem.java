@@ -7,17 +7,20 @@ import amara.applications.ingame.client.systems.visualisation.*;
 import amara.applications.ingame.entitysystem.components.buffs.status.*;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.*;
+import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
 public abstract class BuffVisualisationSystem implements EntitySystem {
 
-    public BuffVisualisationSystem(EntitySceneMap entitySceneMap, String visualisationName) {
+    public BuffVisualisationSystem(EntitySceneMap entitySceneMap, AssetManager assetManager, String visualisationName) {
         this.entitySceneMap = entitySceneMap;
+        this.assetManager = assetManager;
         this.visualisationName = visualisationName;
     }
     protected final static int VISUALISATION_LAYER = 5;
     protected EntitySceneMap entitySceneMap;
+    protected AssetManager assetManager;
     private String visualisationName;
     protected boolean scaleVisualisation = true;
     private HashMap<Integer, Integer> activeBuffCounts = new HashMap<>();

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.visualisation.buffs;
 
 import amara.applications.ingame.client.systems.visualisation.EntitySceneMap;
@@ -10,6 +6,7 @@ import amara.libraries.applications.display.ingame.models.modifiers.ModelModifie
 import amara.libraries.applications.display.ingame.models.util.SimpleParticleEmitter;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.EntityWorld;
+import com.jme3.asset.AssetManager;
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
@@ -17,20 +14,16 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
-/**
- *
- * @author Carl
- */
 public class BuffVisualisationSystem_DwarfWarrior_Empowered extends BuffVisualisationSystem {
 
-    public BuffVisualisationSystem_DwarfWarrior_Empowered(EntitySceneMap entitySceneMap) {
-        super(entitySceneMap, "dwarf_warrior_empowered");
+    public BuffVisualisationSystem_DwarfWarrior_Empowered(EntitySceneMap entitySceneMap, AssetManager assetManager) {
+        super(entitySceneMap, assetManager, "dwarf_warrior_empowered");
     }
     private final static String NODE_NAME_ATTACHMENT = "dwarfWarriorEmpoweredEffect";
 
     @Override
     protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity){
-        SimpleParticleEmitter simpleParticleEmitter = new SimpleParticleEmitter();
+        SimpleParticleEmitter simpleParticleEmitter = new SimpleParticleEmitter(assetManager);
         simpleParticleEmitter.setName(NODE_NAME_ATTACHMENT);
         ParticleEmitter particleEmitter = simpleParticleEmitter.getParticleEmitter();
         particleEmitter.setNumParticles(80);

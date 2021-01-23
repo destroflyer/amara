@@ -3,12 +3,12 @@ package amara.libraries.applications.display.ingame.models.modifiers;
 import amara.core.files.FileAssets;
 import amara.libraries.applications.display.ingame.models.util.FadeOutControl;
 import amara.libraries.applications.display.ingame.models.util.GroundTextures;
-import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.applications.display.models.ModelModifier;
 import amara.libraries.applications.display.models.RegisteredModel;
 import com.destroflyer.jme3.effekseer.model.ParticleEffectSettings;
 import com.destroflyer.jme3.effekseer.reader.EffekseerReader;
 import com.destroflyer.jme3.effekseer.renderer.EffekseerControl;
+import com.jme3.asset.AssetManager;
 import com.jme3.material.RenderState;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
@@ -25,8 +25,8 @@ public class ModelModifier_Alice_Thunder extends ModelModifier {
     private float radius;
 
     @Override
-    public void modify(RegisteredModel registeredModel) {
-        Geometry indicator = GroundTextures.create("Models/alice_thunder/resources/indicator.png", (-1 * radius), radius, (2 * radius), (2 * radius), RenderState.BlendMode.AlphaAdditive);
+    public void modify(RegisteredModel registeredModel, AssetManager assetManager) {
+        Geometry indicator = GroundTextures.create(assetManager, "Models/alice_thunder/resources/indicator.png", (-1 * radius), radius, (2 * radius), (2 * radius), RenderState.BlendMode.AlphaAdditive);
         indicator.addControl(new FadeOutControl(0.5f));
         registeredModel.getNode().attachChild(indicator);
 
@@ -43,13 +43,13 @@ public class ModelModifier_Alice_Thunder extends ModelModifier {
                 // Lightning has to hit ground (frame 22) at 0.5 --> Start at 0.5 - (22 / 120) = 0.3625
                 if (passedTime > 0.3625f) {
                     spatial.addControl(new EffekseerControl(
-                            new EffekseerReader().read(FileAssets.ROOT, FileAssets.ROOT + "Effekseer/lightning_strike.efkproj"),
-                            ParticleEffectSettings.builder()
-                                    .loop(false)
-                                    .frameLength(0.75f / 120)
-                                    .build(),
-                            MaterialFactory.getAssetManager())
-                    );
+                        new EffekseerReader().read(FileAssets.ROOT, FileAssets.ROOT + "Effekseer/lightning_strike.efkproj"),
+                        ParticleEffectSettings.builder()
+                            .loop(false)
+                            .frameLength(0.75f / 120)
+                            .build(),
+                        assetManager
+                    ));
                     spatial.removeControl(this);
                 }
             }

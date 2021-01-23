@@ -3,13 +3,15 @@ package amara.applications.ingame.client.systems.visualisation;
 import amara.libraries.entitysystem.ComponentMapObserver;
 import amara.libraries.entitysystem.EntitySystem;
 import amara.libraries.entitysystem.EntityWorld;
+import com.jme3.asset.AssetManager;
 import com.jme3.scene.Spatial;
 
 public abstract class SimpleVisualAttachmentSystem implements EntitySystem {
 
-    public SimpleVisualAttachmentSystem(Class<?>[] primaryComponentClasses, Class<?>[] secondaryComponentClasses) {
+    public SimpleVisualAttachmentSystem(Class<?>[] primaryComponentClasses, Class<?>[] secondaryComponentClasses, AssetManager assetManager) {
         this.primaryComponentClasses = primaryComponentClasses;
         this.secondaryComponentClasses = secondaryComponentClasses;
+        this.assetManager = assetManager;
 
         allComponentClasses = new Class[primaryComponentClasses.length + secondaryComponentClasses.length];
         for (int i = 0; i < primaryComponentClasses.length; i++) {
@@ -22,6 +24,7 @@ public abstract class SimpleVisualAttachmentSystem implements EntitySystem {
     private Class<?>[] primaryComponentClasses;
     private Class<?>[] secondaryComponentClasses;
     private Class<?>[] allComponentClasses;
+    protected AssetManager assetManager;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {

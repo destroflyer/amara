@@ -3,14 +3,15 @@ package amara.applications.ingame.client.systems.visualisation.buffs;
 import amara.applications.ingame.client.systems.visualisation.EntitySceneMap;
 import amara.libraries.applications.display.ingame.models.util.GroundTextures;
 import amara.libraries.entitysystem.EntityWorld;
+import com.jme3.asset.AssetManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
 public class BuffVisualisationSystem_Aland_Passive extends BuffVisualisationSystem {
 
-    public BuffVisualisationSystem_Aland_Passive(EntitySceneMap entitySceneMap) {
-        super(entitySceneMap, "aland_passive");
+    public BuffVisualisationSystem_Aland_Passive(EntitySceneMap entitySceneMap, AssetManager assetManager) {
+        super(entitySceneMap, assetManager, "aland_passive");
     }
     private final static String NODE_NAME_PREFIX_STACK = "stack";
 
@@ -23,7 +24,7 @@ public class BuffVisualisationSystem_Aland_Passive extends BuffVisualisationSyst
     }
 
     private Geometry createStackVisualisation(int stackIndex) {
-        Geometry texture = GroundTextures.create("Textures/effects/aland_passive_stack_" + stackIndex + ".png", -1.5f, 1.5f, 3, 3);
+        Geometry texture = GroundTextures.create(assetManager, "Textures/effects/aland_passive_stack_" + stackIndex + ".png", -1.5f, 1.5f, 3, 3);
         texture.setName(NODE_NAME_PREFIX_STACK + stackIndex);
         texture.setCullHint(Spatial.CullHint.Always);
         return texture;

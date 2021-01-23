@@ -1,21 +1,21 @@
 package amara.applications.ingame.client.systems.visualisation;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Node;
 import amara.applications.ingame.entitysystem.components.visuals.ModelComponent;
-import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.applications.display.models.ModelObject;
 import amara.libraries.entitysystem.*;
 
 public class ModelSystem implements EntitySystem {
 
-    public ModelSystem(EntitySceneMap entitySceneMap, DisplayApplication mainApplication) {
+    public ModelSystem(EntitySceneMap entitySceneMap, AssetManager assetManager) {
         this.entitySceneMap = entitySceneMap;
-        this.mainApplication = mainApplication;
+        this.assetManager = assetManager;
     }
     public final static String NODE_NAME_MODEL = "model";
     private EntitySceneMap entitySceneMap;
-    private DisplayApplication mainApplication;
+    private AssetManager assetManager;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
@@ -34,7 +34,7 @@ public class ModelSystem implements EntitySystem {
     private void updateModel(EntityWorld entityWorld, int entity) {
         removeModel(entity);
         ModelComponent modelComponent = entityWorld.getComponent(entity, ModelComponent.class);
-        ModelObject modelObject = new ModelObject(mainApplication, modelComponent.getModelSkinPath());
+        ModelObject modelObject = new ModelObject(assetManager, modelComponent.getModelSkinPath());
         modelObject.setName(NODE_NAME_MODEL);
         modelObject.setShadowMode(RenderQueue.ShadowMode.Cast);
         Node node = entitySceneMap.requestNode(entity);

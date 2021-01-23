@@ -1,50 +1,44 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.visualisation;
 
 import java.util.HashMap;
+
+import com.jme3.asset.AssetManager;
 import com.jme3.math.ColorRGBA;
 import amara.applications.ingame.client.gui.GUIUtil;
 import amara.applications.ingame.entitysystem.components.units.GoldComponent;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
-public class GoldChangeSystem extends EntityTextNotificationSystem{
+public class GoldChangeSystem extends EntityTextNotificationSystem {
 
-    public GoldChangeSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap){
-        super(hudAttachmentsSystem, entityHeightMap);
+    public GoldChangeSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap, AssetManager assetManager) {
+        super(hudAttachmentsSystem, entityHeightMap, assetManager);
         hudOffset.set(0, 16, 0);
     }
-    private HashMap<Integer, Float> cachedGold = new HashMap<Integer, Float>();
+    private HashMap<Integer, Float> cachedGold = new HashMap<>();
     private final ColorRGBA color = new ColorRGBA(1, 1, 0, 1);
 
     @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds){
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
         ComponentMapObserver observer = entityWorld.requestObserver(this, GoldComponent.class);
-        for(int entity : observer.getNew().getEntitiesWithAll()){
+        for (int entity : observer.getNew().getEntitiesWithAll()) {
             cachedGold.put(entity, entityWorld.getComponent(entity, GoldComponent.class).getGold());
         }
-        for(int entity : observer.getChanged().getEntitiesWithAll()){
+        for (int entity : observer.getChanged().getEntitiesWithAll()) {
             onGoldChange(entity, entityWorld.getComponent(entity, GoldComponent.class).getGold());
         }
-        for(int entity : observer.getRemoved().getEntitiesWithAll()){
+        for (int entity : observer.getRemoved().getEntitiesWithAll()) {
             cachedGold.put(entity, 0f);
         }
     }
-    
-    private void onGoldChange(int entity, float currentGold){
+
+    private void onGoldChange(int entity, float currentGold) {
         Float oldGold = cachedGold.get(entity);
-        if(oldGold == null){
+        if (oldGold == null) {
             oldGold = 0f;
         }
-        //Don't judge me...
+        // Don't judge me...
         int change = Math.round(currentGold - oldGold);
-        if(change != 0){
+        if (change != 0) {
             displayTextNotification(entity, GUIUtil.getValueText_Signed(change) + " g", color);
         }
         cachedGold.put(entity, currentGold);

@@ -14,6 +14,7 @@ import amara.applications.ingame.entitysystem.components.units.shields.ShieldAmo
 import amara.applications.ingame.entitysystem.systems.units.shields.ShieldUtil;
 import amara.libraries.applications.display.materials.PaintableImage;
 import amara.libraries.entitysystem.EntityWorld;
+import com.jme3.asset.AssetManager;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
@@ -21,8 +22,8 @@ import com.jme3.texture.Texture;
 
 public class HealthBarSystem extends TopHUDAttachmentSystem {
 
-    public HealthBarSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap, HealthBarStyleManager healthBarStyleManager, PlayerTeamSystem playerTeamSystem) {
-        super(hudAttachmentsSystem, entityHeightMap, new Class[] { MaximumHealthComponent.class, HealthComponent.class }, new Class[] { ShieldsComponent.class, ShieldAmountComponent.class, MaximumManaComponent.class, ManaComponent.class });
+    public HealthBarSystem(HUDAttachmentsSystem hudAttachmentsSystem, EntityHeightMap entityHeightMap, AssetManager assetManager, HealthBarStyleManager healthBarStyleManager, PlayerTeamSystem playerTeamSystem) {
+        super(hudAttachmentsSystem, entityHeightMap, new Class[] { MaximumHealthComponent.class, HealthComponent.class }, new Class[] { ShieldsComponent.class, ShieldAmountComponent.class, MaximumManaComponent.class, ManaComponent.class }, assetManager);
         this.healthBarStyleManager = healthBarStyleManager;
         this.playerTeamSystem = playerTeamSystem;
     }
@@ -48,7 +49,7 @@ public class HealthBarSystem extends TopHUDAttachmentSystem {
 
     @Override
     protected Spatial createVisualAttachment(EntityWorld entityWorld, int entity) {
-        return healthBarStyleManager.createGeometry(entityWorld, entity);
+        return healthBarStyleManager.createGeometry(entityWorld, entity, assetManager);
     }
 
     @Override

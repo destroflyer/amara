@@ -60,7 +60,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         mainApplication.getInputManager().addListener(this, "lock_camera","change_sight");
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
         localEntitySystemAppState.addEntitySystem(ownTeamVisionSystem);
-        spellIndicatorSystem = new SpellIndicatorSystem(this::getPlayerEntity, localEntitySystemAppState.getEntitySceneMap());
+        spellIndicatorSystem = new SpellIndicatorSystem(this::getPlayerEntity, localEntitySystemAppState.getEntitySceneMap(), mainApplication.getAssetManager());
         localEntitySystemAppState.addEntitySystem(spellIndicatorSystem);
         IngameCameraAppState ingameCameraAppState = getAppState(IngameCameraAppState.class);
         MapAppState mapAppState = getAppState(MapAppState.class);

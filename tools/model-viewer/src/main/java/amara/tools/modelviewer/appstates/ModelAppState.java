@@ -72,7 +72,7 @@ public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> i
         modelObjects = new ModelObject[modelSkinPaths.length];
         animationNames = new String[modelSkinPaths.length][];
         for(int i=0;i<modelObjects.length;i++){
-            modelObjects[i] = new ModelObject(mainApplication, modelSkinPaths[i]);
+            modelObjects[i] = new ModelObject(mainApplication.getAssetManager(), modelSkinPaths[i]);
             AnimControl animationControl = modelObjects[i].getModelNode().getControl(AnimControl.class);
             if(animationControl != null){
                 animationNames[i] = animationControl.getAnimationNames().toArray(new String[0]);
@@ -126,8 +126,8 @@ public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> i
     public void onAction(String name, boolean value, float lastTimePerFrame){
         if(name.equals("mouse_click_left") && value){
             Vector2f cursorPosition = mainApplication.getInputManager().getCursorPosition();
-            boolean cursorLeftOrRight = (cursorPosition.getX() < (mainApplication.getContext().getSettings().getWidth() / 2));
-            boolean cursorTopOrBottom = (cursorPosition.getY() > (mainApplication.getContext().getSettings().getHeight() / 2));
+            boolean cursorLeftOrRight = (cursorPosition.getX() < (mainApplication.getContext().getSettings().getWidth() / 2f));
+            boolean cursorTopOrBottom = (cursorPosition.getY() > (mainApplication.getContext().getSettings().getHeight() / 2f));
             if(cursorTopOrBottom){
                 if(cursorLeftOrRight){
                     animationIndex++;
@@ -157,7 +157,7 @@ public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> i
         }
         else if(name.equals("refresh") && value){
             mainApplication.getRootNode().detachChild(modelObjects[modelIndex]);
-            modelObjects[modelIndex] = new ModelObject(mainApplication, modelSkinPaths[modelIndex]);
+            modelObjects[modelIndex] = new ModelObject(mainApplication.getAssetManager(), modelSkinPaths[modelIndex]);
             mainApplication.getRootNode().attachChild(modelObjects[modelIndex]);
         }
     }

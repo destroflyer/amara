@@ -42,9 +42,6 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
 
     public MapAppState(Map map) {
         this.map = map;
-        mapHeightmap = new MapHeightmap(map.getName(), map.getPhysicsInformation());
-        mapTerrain = new MapTerrain(map);
-        groundHeightPlane = createGroundHeightPlane(map.getPhysicsInformation());
     }
     private Map map;
     private MapHeightmap mapHeightmap;
@@ -56,20 +53,15 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
     private ChaseCamera chaseCamera;
     private ArrayList<Filter> activeFilters = new ArrayList<>();
 
-    private Geometry createGroundHeightPlane(MapPhysicsInformation mapPhysicsInformation) {
-        // Make the plane way bigger than the map to ensure that the camera always covers it when at the edges
-        Geometry groundHeightPlane = new Geometry(null, new Quad(mapPhysicsInformation.getWidth() * 3, mapPhysicsInformation.getHeight() * 3));
-        groundHeightPlane.setLocalTranslation((-1 * mapPhysicsInformation.getWidth()), map.getPhysicsInformation().getGroundHeight(), (2 * mapPhysicsInformation.getHeight()));
-        groundHeightPlane.rotate(JMonkeyUtil.getQuaternion_X(-90));
-        return groundHeightPlane;
-    }
-
     @Override
     public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
+        mapHeightmap = new MapHeightmap(map.getName(), map.getPhysicsInformation());
+        mapTerrain = new MapTerrain(map, mainApplication.getAssetManager());
         mainApplication.getRootNode().attachChild(mapTerrain.getTerrain());
         mainApplication.getRootNode().attachChild(visualsNode);
         mainApplication.getRootNode().attachChild(cameraNode);
+        initializeGroundHeightPlane();
         initializeCamera();
         new Thread(() -> {
             removeFilters();
@@ -77,6 +69,13 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
             initializeFilters();
             updateVisuals();
         }).start();
+    }
+
+    private void initializeGroundHeightPlane() {
+        // Make the plane way bigger than the map to ensure that the camera always covers it when at the edges
+        groundHeightPlane = new Geometry(null, new Quad(map.getPhysicsInformation().getWidth() * 3, map.getPhysicsInformation().getHeight() * 3));
+        groundHeightPlane.setLocalTranslation((-1 * map.getPhysicsInformation().getWidth()), map.getPhysicsInformation().getGroundHeight(), (2 * map.getPhysicsInformation().getHeight()));
+        groundHeightPlane.rotate(JMonkeyUtil.getQuaternion_X(-90));
     }
 
     public void initializeCamera() {
@@ -216,7 +215,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
         for(MapVisual visual : visuals.getMapVisuals()){
             if(visual instanceof ModelVisual){
                 ModelVisual modelVisual = (ModelVisual) visual;
-                ModelObject modelObject = new ModelObject(mainApplication, modelVisual.getModelSkinPath());
+                ModelObject modelObject = new ModelObject(mainApplication.getAssetManager(), modelVisual.getModelSkinPath());
                 Vector3f translation = modelVisual.getPosition().clone();
                 translation.setY(mapHeightmap.getHeight(translation.getX(), translation.getZ()));
                 modelObject.setLocalTranslation(translation);
@@ -237,7 +236,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
                 }
             }
             else if(visual instanceof SnowVisual){
-                SnowEmitter snowEmitter = new SnowEmitter();
+                SnowEmitter snowEmitter = new SnowEmitter(mainApplication.getAssetManager());
                 mainApplication.enqueueTask(() -> cameraNode.attachChild(snowEmitter.getParticleEmitter()));
             }
         }

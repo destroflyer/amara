@@ -1,18 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.display.models;
 
 import amara.core.settings.Settings;
 import amara.libraries.applications.display.JMonkeyUtil;
 import com.jme3.animation.*;
+import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 
-/**
- *
- * @author Carl
- */
 public class RegisteredModel {
 
     public RegisteredModel(Node node) {

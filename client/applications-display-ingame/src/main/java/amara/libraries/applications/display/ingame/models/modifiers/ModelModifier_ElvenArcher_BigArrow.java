@@ -3,6 +3,7 @@ package amara.libraries.applications.display.ingame.models.modifiers;
 import amara.libraries.applications.display.ingame.models.util.SimpleParticleEmitter;
 import amara.libraries.applications.display.models.ModelModifier;
 import amara.libraries.applications.display.models.RegisteredModel;
+import com.jme3.asset.AssetManager;
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
@@ -11,8 +12,8 @@ import com.jme3.renderer.queue.RenderQueue;
 public class ModelModifier_ElvenArcher_BigArrow extends ModelModifier {
 
     @Override
-    public void modify(RegisteredModel registeredModel) {
-        SimpleParticleEmitter simpleParticleEmitter = new SimpleParticleEmitter();
+    public void modify(RegisteredModel registeredModel, AssetManager assetManager) {
+        SimpleParticleEmitter simpleParticleEmitter = new SimpleParticleEmitter(assetManager);
         ParticleEmitter particleEmitter = simpleParticleEmitter.getParticleEmitter();
         particleEmitter.setNumParticles(300);
         particleEmitter.setParticlesPerSec(100);

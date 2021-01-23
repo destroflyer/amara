@@ -4,6 +4,7 @@ import amara.libraries.applications.display.ingame.models.util.FadeOutControl;
 import amara.libraries.applications.display.ingame.models.util.GroundTextures;
 import amara.libraries.applications.display.models.ModelModifier;
 import amara.libraries.applications.display.models.RegisteredModel;
+import com.jme3.asset.AssetManager;
 import com.jme3.material.RenderState;
 import com.jme3.scene.Geometry;
 
@@ -15,8 +16,8 @@ public class ModelModifier_Tristan_Ult extends ModelModifier {
     private float radius;
 
     @Override
-    public void modify(RegisteredModel registeredModel) {
-        Geometry geometry = GroundTextures.create("Models/tristan_ult/resources/diffuse.png", (-1 * radius), radius, (2 * radius), radius, RenderState.BlendMode.AlphaAdditive);
+    public void modify(RegisteredModel registeredModel, AssetManager assetManager) {
+        Geometry geometry = GroundTextures.create(assetManager, "Models/tristan_ult/resources/diffuse.png", (-1 * radius), radius, (2 * radius), radius, RenderState.BlendMode.AlphaAdditive);
         geometry.addControl(new FadeOutControl(1));
         registeredModel.getNode().attachChild(geometry);
     }

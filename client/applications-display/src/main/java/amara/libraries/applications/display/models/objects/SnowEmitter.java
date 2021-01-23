@@ -1,26 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.display.models.objects;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.effect.ParticleMesh;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
-import amara.libraries.applications.display.materials.MaterialFactory;
 
-/**
- *
- * @author Carl
- */
-public class SnowEmitter{
+public class SnowEmitter {
 
-    public SnowEmitter(){
+    public SnowEmitter(AssetManager assetManager) {
         particleEmitter = new ParticleEmitter("buff", ParticleMesh.Type.Triangle, 80);
-        Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Misc/Particle.j3md");
-        material.setTexture("Texture", MaterialFactory.getAssetManager().loadTexture("Textures/effects/flame_additive.png"));
+        Material material = new Material(assetManager, "Common/MatDefs/Misc/Particle.j3md");
+        material.setTexture("Texture", assetManager.loadTexture("Textures/effects/flame_additive.png"));
         particleEmitter.setMaterial(material);
         particleEmitter.setImagesX(2);
         particleEmitter.setImagesY(2);
@@ -44,7 +36,7 @@ public class SnowEmitter{
     }
     private ParticleEmitter particleEmitter;
 
-    public ParticleEmitter getParticleEmitter(){
+    public ParticleEmitter getParticleEmitter() {
         return particleEmitter;
     }
 }

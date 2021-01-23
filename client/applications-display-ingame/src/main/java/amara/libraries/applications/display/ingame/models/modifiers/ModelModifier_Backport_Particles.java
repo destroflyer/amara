@@ -1,9 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.display.ingame.models.modifiers;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
@@ -16,16 +13,12 @@ import amara.libraries.applications.display.models.*;
 import amara.libraries.emitter.*;
 import amara.libraries.emitter.influencers.*;
 
-/**
- *
- * @author Carl
- */
-public class ModelModifier_Backport_Particles extends ModelModifier{
+public class ModelModifier_Backport_Particles extends ModelModifier {
 
     private final float scale = 2.5f;
-    
+
     @Override
-    public void modify(RegisteredModel registeredModel){
+    public void modify(RegisteredModel registeredModel, AssetManager assetManager) {
         //Ring
         Emitter ring = new Emitter();
         ring.setName("ring");
@@ -62,7 +55,7 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
         ring.getInfluencer(RotationInfluencer.class).setUseRandomDirection(true);
         ring.setLocalTranslation(0, 0.01f, 0);
         ring.setLocalScale(0.5f);
-        addEmitter(registeredModel, ring);
+        addEmitter(registeredModel, assetManager, ring);
         //Emitter 1
         Emitter emitter1 = new Emitter();
         emitter1.setName("emitter1");
@@ -94,7 +87,7 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
         emitter1.getInfluencer(SizeInfluencer.class).addSize(new Vector3f(0.05f, 0.05f, 0.05f).multLocal(scale));
         emitter1.getInfluencer(SizeInfluencer.class).addSize(new Vector3f(2, 2, 0.5f).multLocal(scale));
         emitter1.getInfluencer(SizeInfluencer.class).setEnabled(true);
-        addEmitter(registeredModel, emitter1);
+        addEmitter(registeredModel, assetManager, emitter1);
         //Emitter 2
         Emitter emitter2 = new Emitter();
         emitter2.setName("emitter2");
@@ -129,7 +122,7 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
         emitter2.getInfluencer(SizeInfluencer.class).addSize(new Vector3f(0.015f, 0.015f, 0.015f).multLocal(scale));
         emitter2.getInfluencer(SizeInfluencer.class).addSize(new Vector3f(0.015f, 0.015f, 0.015f).multLocal(scale));
         emitter2.getInfluencer(SizeInfluencer.class).setEnabled(true);
-        addEmitter(registeredModel, emitter2);
+        addEmitter(registeredModel, assetManager, emitter2);
         //Water Spout
         Emitter waterSpout = new Emitter();
         waterSpout.setName("waterSpout");
@@ -142,7 +135,7 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
             new SpriteInfluencer(),
             new RotationInfluencer()
         );
-        Node circle = (Node) MaterialFactory.getAssetManager().loadModel("Models/shapes/circle.j3o");
+        Node circle = (Node) assetManager.loadModel("Models/shapes/circle.j3o");
         Mesh circleMesh = ((Geometry) circle.getChild(0)).getMesh();
         waterSpout.setShape(circleMesh);
         waterSpout.setDirectionType(EmitterMesh.DirectionType.Normal);
@@ -173,7 +166,7 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
         waterSpout.getInfluencer(RotationInfluencer.class).setUseRandomStartRotation(false, false, true);
         waterSpout.setLocalTranslation(0, 6, 0);
         waterSpout.setLocalScale(0.015f);
-        addEmitter(registeredModel, waterSpout);
+        addEmitter(registeredModel, assetManager, waterSpout);
         //Emitter 3
         Emitter emitter3 = new Emitter();
         emitter3.setName("emitter3");
@@ -185,7 +178,7 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
             new SizeInfluencer(),
             new SpriteInfluencer()
         );
-        Node dome = (Node) MaterialFactory.getAssetManager().loadModel("Models/shapes/dome.j3o");
+        Node dome = (Node) assetManager.loadModel("Models/shapes/dome.j3o");
         Mesh domeMesh = ((Geometry) dome.getChild(0)).getMesh();
         emitter3.setShape(domeMesh);
         emitter3.setDirectionType(EmitterMesh.DirectionType.Normal);
@@ -214,7 +207,7 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
         emitter3.getInfluencer(SpriteInfluencer.class).setUseRandomStartImage(true);
         emitter3.getInfluencer(SpriteInfluencer.class).setAnimate(false);
         emitter3.setLocalScale(0.05f);
-        addEmitter(registeredModel, emitter3);
+        addEmitter(registeredModel, assetManager, emitter3);
         //Emitter 4
         Emitter emitter4 = new Emitter();
         emitter4.setName("emitter4");
@@ -258,15 +251,15 @@ public class ModelModifier_Backport_Particles extends ModelModifier{
         emitter4.getInfluencer(RotationInfluencer.class).setEnabled(false);
         emitter4.setLocalTranslation(0, 0, 0);
         emitter4.setLocalScale(0.05f);
-        addEmitter(registeredModel, emitter4);
+        addEmitter(registeredModel, assetManager, emitter4);
     }
-    
-    private void addEmitter(RegisteredModel registeredModel, Emitter emitter){
-        emitter.initialize(MaterialFactory.getAssetManager());
+
+    private void addEmitter(RegisteredModel registeredModel, AssetManager assetManager, Emitter emitter) {
+        emitter.initialize(assetManager);
         registeredModel.getNode().addControl(emitter);
         emitter.getParticleNode().setShadowMode(RenderQueue.ShadowMode.Off);
         emitter.setEnabled(true);
-        for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(emitter.getParticleNode())){
+        for (Geometry geometry : JMonkeyUtil.getAllGeometryChilds(emitter.getParticleNode())) {
             geometry.getMaterial().getAdditionalRenderState().setDepthTest(false);
             geometry.setUserData("layer", 3);
         }

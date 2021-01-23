@@ -1,8 +1,8 @@
 package amara.applications.ingame.client.systems.visualisation.buffs;
 
 import amara.applications.ingame.client.systems.visualisation.EntitySceneMap;
-import amara.libraries.applications.display.materials.MaterialFactory;
 import amara.libraries.entitysystem.EntityWorld;
+import com.jme3.asset.AssetManager;
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.effect.ParticleMesh;
 import com.jme3.material.Material;
@@ -13,15 +13,15 @@ import com.jme3.scene.Spatial;
 
 public class BuffVisualisationSystem_Frost extends BuffVisualisationSystem {
 
-    public BuffVisualisationSystem_Frost(EntitySceneMap entitySceneMap) {
-        super(entitySceneMap, "frost");
+    public BuffVisualisationSystem_Frost(EntitySceneMap entitySceneMap, AssetManager assetManager) {
+        super(entitySceneMap, assetManager, "frost");
     }
 
     @Override
     protected Spatial createBuffVisualisation(EntityWorld entityWorld, int targetEntity) {
         ParticleEmitter particleEmitter = new ParticleEmitter("", ParticleMesh.Type.Triangle, 100);
-        Material material = new Material(MaterialFactory.getAssetManager(), "Common/MatDefs/Misc/Particle.j3md");
-        material.setTexture("Texture", MaterialFactory.getAssetManager().loadTexture("Textures/effects/frost_additive.png"));
+        Material material = new Material(assetManager, "Common/MatDefs/Misc/Particle.j3md");
+        material.setTexture("Texture", assetManager.loadTexture("Textures/effects/frost_additive.png"));
         particleEmitter.setMaterial(material);
         particleEmitter.setImagesX(2);
         particleEmitter.setImagesY(2);
@@ -40,7 +40,7 @@ public class BuffVisualisationSystem_Frost extends BuffVisualisationSystem {
         particleEmitter.setQueueBucket(RenderQueue.Bucket.Opaque);
         particleEmitter.getMaterial().getAdditionalRenderState().setDepthTest(false);
         particleEmitter.setUserData("layer", VISUALISATION_LAYER);
-        //[jME 3.1 Master] Can somehow throw a multithreading error otherwise
+        // [jME 3.1 Master] Can somehow throw a multithreading error otherwise
         particleEmitter.updateLogicalState(10);
         return particleEmitter;
     }

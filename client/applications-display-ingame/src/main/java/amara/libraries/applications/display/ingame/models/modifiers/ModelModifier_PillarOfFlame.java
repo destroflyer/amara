@@ -1,9 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.display.ingame.models.modifiers;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
@@ -16,14 +13,10 @@ import amara.libraries.applications.display.models.*;
 import amara.libraries.emitter.*;
 import amara.libraries.emitter.influencers.*;
 
-/**
- *
- * @author Carl
- */
-public class ModelModifier_PillarOfFlame extends ModelModifier{
+public class ModelModifier_PillarOfFlame extends ModelModifier {
 
     @Override
-    public void modify(RegisteredModel registeredModel){
+    public void modify(RegisteredModel registeredModel, AssetManager assetManager) {
         //Pillar
         Emitter pillar = new Emitter();
         pillar.setName("pillar");
@@ -62,7 +55,7 @@ public class ModelModifier_PillarOfFlame extends ModelModifier{
         pillar.getInfluencer(RadialVelocityInfluencer.class).setUseRandomDirection(true);
         pillar.setLocalTranslation(0,.2f,0);
         pillar.setLocalScale(0.5f);
-        addEmitter(registeredModel, pillar);
+        addEmitter(registeredModel, assetManager, pillar);
         //Base
         Emitter base = new Emitter();
         base.setName("base");
@@ -94,7 +87,7 @@ public class ModelModifier_PillarOfFlame extends ModelModifier{
         base.getInfluencer(RadialVelocityInfluencer.class).setRadialPull(-3);
         base.setLocalTranslation(0,0,0);
         base.getParticleNode().setLocalScale(0.5f);
-        addEmitter(registeredModel, base);
+        addEmitter(registeredModel, assetManager, base);
         //Rocks
         Emitter rocks = new Emitter();
         rocks.setName("rocks");
@@ -108,7 +101,7 @@ public class ModelModifier_PillarOfFlame extends ModelModifier{
             new SpriteInfluencer(),
             new RadialVelocityInfluencer()
         );
-        Node ring = (Node) MaterialFactory.getAssetManager().loadModel("Models/shapes/circle.j3o");
+        Node ring = (Node) assetManager.loadModel("Models/shapes/circle.j3o");
         Mesh ringMesh = ((Geometry) ring.getChild(0)).getMesh();
         rocks.setShape(ringMesh);
         rocks.setSprite("Models/pillar_of_flame/resources/debris.png", 3, 3);
@@ -138,7 +131,7 @@ public class ModelModifier_PillarOfFlame extends ModelModifier{
         rocks.getInfluencer(RadialVelocityInfluencer.class).setTangentForce(3);
         rocks.getInfluencer(RadialVelocityInfluencer.class).setRadialPull(1);
         rocks.setLocalScale(0.5f,0.5f,0.5f);
-        addEmitter(registeredModel, rocks);
+        addEmitter(registeredModel, assetManager, rocks);
         //Flares
         Emitter flares = new Emitter();
         flares.setName("flares");
@@ -168,15 +161,15 @@ public class ModelModifier_PillarOfFlame extends ModelModifier{
         flares.getInfluencer(SizeInfluencer.class).addSize(new Vector3f(.1f,.1f,.1f));
         flares.getInfluencer(SizeInfluencer.class).addSize(new Vector3f(.065f,.065f,.065f));
         flares.setLocalScale(0.5f);
-        addEmitter(registeredModel, flares);
+        addEmitter(registeredModel, assetManager, flares);
     }
-    
-    private void addEmitter(RegisteredModel registeredModel, Emitter emitter){
-        emitter.initialize(MaterialFactory.getAssetManager());
+
+    private void addEmitter(RegisteredModel registeredModel, AssetManager assetManager, Emitter emitter) {
+        emitter.initialize(assetManager);
         registeredModel.getNode().addControl(emitter);
         emitter.getParticleNode().setShadowMode(RenderQueue.ShadowMode.Off);
         emitter.setEnabled(true);
-        for(Geometry geometry : JMonkeyUtil.getAllGeometryChilds(emitter.getParticleNode())){
+        for (Geometry geometry : JMonkeyUtil.getAllGeometryChilds(emitter.getParticleNode())) {
             geometry.getMaterial().getAdditionalRenderState().setDepthTest(false);
             geometry.setUserData("layer", 2);
         }

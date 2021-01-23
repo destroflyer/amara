@@ -1,13 +1,14 @@
 package amara.applications.ingame.client.systems.visualisation;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
 import amara.libraries.entitysystem.EntityWorld;
 
 public abstract class SimpleHUDAttachmentSystem extends SimpleVisualAttachmentSystem {
 
-    public SimpleHUDAttachmentSystem(HUDAttachmentsSystem hudAttachmentsSystem, Class<?>[] primaryComponentClasses, Class<?>[] secondaryComponentClasses) {
-        super(primaryComponentClasses, secondaryComponentClasses);
+    public SimpleHUDAttachmentSystem(HUDAttachmentsSystem hudAttachmentsSystem, Class<?>[] primaryComponentClasses, Class<?>[] secondaryComponentClasses, AssetManager assetManager) {
+        super(primaryComponentClasses, secondaryComponentClasses, assetManager);
         this.hudAttachmentsSystem = hudAttachmentsSystem;
     }
     private HUDAttachmentsSystem hudAttachmentsSystem;
