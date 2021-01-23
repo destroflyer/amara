@@ -231,7 +231,7 @@ public class CustomGameTemplates {
                 entityWrapper.setComponent(new TeamComponent(0));
                 EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
                 bounty.setComponent(new BountyCreepScoreComponent());
-                bounty.setComponent(new BountyGoldComponent(60));
+                bounty.setComponent(new BountyGoldComponent(100));
                 int bountyRulesEntity = entityWorld.createEntity();
                 entityWorld.setComponent(bountyRulesEntity, new RequireCharacterComponent());
                 entityWorld.setComponent(bountyRulesEntity, new AcceptEnemiesComponent());
@@ -285,12 +285,12 @@ public class CustomGameTemplates {
                 entityWrapper.setComponent(new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.BOSS));
                 EntityWrapper bounty = entityWorld.getWrapped(entityWorld.createEntity());
                 bounty.setComponent(new BountyCreepScoreComponent());
-                bounty.setComponent(new BountyGoldComponent(150));
+                bounty.setComponent(new BountyGoldComponent(300));
                 EntityWrapper bountyBuff = entityWorld.getWrapped(entityWorld.createEntity());
                 bountyBuff.setComponent(new BuffVisualisationComponent("baron_nashor"));
                 EntityWrapper bountyBuffAttributes = entityWorld.getWrapped(entityWorld.createEntity());
-                bountyBuffAttributes.setComponent(new BonusFlatAttackDamageComponent(50));
-                bountyBuffAttributes.setComponent(new BonusFlatAbilityPowerComponent(50));
+                bountyBuffAttributes.setComponent(new BonusFlatAttackDamageComponent(80));
+                bountyBuffAttributes.setComponent(new BonusFlatAbilityPowerComponent(80));
                 bountyBuffAttributes.setComponent(new BonusFlatWalkSpeedComponent(0.5f));
                 bountyBuff.setComponent(new ContinuousAttributesComponent(bountyBuffAttributes.getId()));
                 bounty.setComponent(new BountyBuffComponent(bountyBuff.getId(), 60));
