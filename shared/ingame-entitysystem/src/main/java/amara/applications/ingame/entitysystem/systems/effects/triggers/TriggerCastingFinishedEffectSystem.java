@@ -16,7 +16,9 @@ public class TriggerCastingFinishedEffectSystem implements EntitySystem {
         for (int effectTriggerEntity : entityWorld.getEntitiesWithAll(TriggerSourceComponent.class, CastingFinishedTriggerComponent.class)){
             if (!entityWorld.hasComponent(effectTriggerEntity, RemainingCooldownComponent.class)) {
                 int sourceEntity = entityWorld.getComponent(effectTriggerEntity, TriggerSourceComponent.class).getSourceEntity();
-                if (observer.getRemoved().hasEntity(sourceEntity)) {
+                IsCastingComponent removedIsCastingComponent = observer.getRemoved().getComponent(sourceEntity, IsCastingComponent.class);
+                // Check if the component was removed because of no remaining cast duration (successfully finished) and not by cancelling the cast
+                if ((removedIsCastingComponent != null) && (removedIsCastingComponent.getRemainingDuration() <= deltaSeconds)) {
                     EffectTriggerUtil.triggerEffect(entityWorld, effectTriggerEntity, -1);
                 }
             }
