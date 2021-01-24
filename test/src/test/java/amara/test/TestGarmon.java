@@ -409,7 +409,7 @@ public class TestGarmon extends CommandingPlayerTest {
         tickSeconds(1);
         assertEquals(600, getHealth(targetDummy1), EPSILON);
         assertEquals(600, getHealth(targetDummy2), EPSILON);
-        LinkedList<Integer> objects = findEntities(NAME_R_OBJECT);
+        LinkedList<Integer> objects = findEntities_SortByX(NAME_R_OBJECT);
         assertEquals(2, objects.size());
         int object1 = objects.get(0);
         assertEquals(60, getX(object1), EPSILON);

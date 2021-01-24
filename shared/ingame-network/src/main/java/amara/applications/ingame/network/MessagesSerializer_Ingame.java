@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.network;
 
 import com.jme3.network.serializing.Serializer;
@@ -9,10 +5,6 @@ import amara.applications.ingame.network.messages.*;
 import amara.applications.ingame.network.messages.objects.commands.*;
 import amara.applications.ingame.network.messages.objects.commands.casting.*;
 
-/**
- *
- * @author Carl
- */
 public class MessagesSerializer_Ingame {
 
     public static void registerClasses() {
@@ -25,6 +17,7 @@ public class MessagesSerializer_Ingame {
                 AutoAttackCommand.class,
                 BuyItemCommand.class,
                 Command.class,
+                DanceCommand.class,
                 LearnSpellCommand.class,
                 SellItemCommand.class,
                     ItemIndex.class,

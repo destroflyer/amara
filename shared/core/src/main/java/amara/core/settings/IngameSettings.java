@@ -26,7 +26,8 @@ public class IngameSettings extends SettingsCategory {
                     new Setting[] {
                         new CategorizedSetting("select", "Select", new MouseButtonType(MouseClickEvent.Button.Left)),
                         new CategorizedSetting("walk_attack", "Walk / Attack", new MouseButtonType(MouseClickEvent.Button.Right)),
-                        new CategorizedSetting("stop", "Stop", new KeyType(KeyInput.KEY_S))
+                        new CategorizedSetting("stop", "Stop", new KeyType(KeyInput.KEY_S)),
+                        new CategorizedSetting("dance", "Dance", new KeyType(KeyInput.KEY_F5))
                     }
                 ),
                 new SettingsCategory(
@@ -88,7 +89,8 @@ public class IngameSettings extends SettingsCategory {
                         new CategorizedSetting("backward", "Backward", new KeyType(KeyInput.KEY_S)),
                         new CategorizedSetting("right", "Right", new KeyType(KeyInput.KEY_D)),
                         new CategorizedSetting("select", "Select", new MouseButtonType(MouseClickEvent.Button.Left)),
-                        new CategorizedSetting("attack", "Attack", new MouseButtonType(MouseClickEvent.Button.Right))
+                        new CategorizedSetting("attack", "Attack", new MouseButtonType(MouseClickEvent.Button.Right)),
+                        new CategorizedSetting("dance", "Dance", new KeyType(KeyInput.KEY_F5))
                     }
                 ),
                 new CategorizedSettingsCategory(

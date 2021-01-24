@@ -166,7 +166,7 @@ public class TestDosaz extends CommandingPlayerTest {
         tickSeconds(4);
         assertNull(findEntity(NAME_Q_PROJECTILE));
         assertNull(findEntity(NAME_TOMBSTONE));
-        LinkedList<Integer> ghosts = findEntities(NAME_GHOST);
+        LinkedList<Integer> ghosts = findEntities_SortByX(NAME_GHOST);
         assertEquals(2, ghosts.size());
         int ghost1 = ghosts.get(0);
         assertEquals(20, getX(ghost1), EPSILON);
@@ -244,7 +244,7 @@ public class TestDosaz extends CommandingPlayerTest {
         tickSeconds(4);
         assertNull(findEntity(NAME_Q_PROJECTILE));
         assertNull(findEntity(NAME_TOMBSTONE));
-        LinkedList<Integer> ghosts = findEntities(NAME_GHOST);
+        LinkedList<Integer> ghosts = findEntities_SortByX(NAME_GHOST);
         assertEquals(2, ghosts.size());
         int ghost1 = ghosts.get(0);
         assertEquals(20, getX(ghost1), EPSILON);
@@ -319,7 +319,7 @@ public class TestDosaz extends CommandingPlayerTest {
         tickSeconds(4);
         assertNull(findEntity(NAME_Q_PROJECTILE));
         assertNull(findEntity(NAME_TOMBSTONE));
-        LinkedList<Integer> ghosts = findEntities(NAME_GHOST);
+        LinkedList<Integer> ghosts = findEntities_SortByX(NAME_GHOST);
         assertEquals(2, ghosts.size());
         int ghost1 = ghosts.get(0);
         assertEquals(20, getX(ghost1), EPSILON);
@@ -451,7 +451,7 @@ public class TestDosaz extends CommandingPlayerTest {
         assertEquals(13, findEntities(NAME_WALL_PART).size());
         // Tombstones -> Ghosts
         assertNull(findEntity(NAME_TOMBSTONE));
-        LinkedList<Integer> ghosts = findEntities(NAME_GHOST);
+        LinkedList<Integer> ghosts = findEntities_SortByX(NAME_GHOST);
         assertEquals(2, ghosts.size());
         int ghost1 = ghosts.get(0);
         assertEquals(18, getX(ghost1), EPSILON);
@@ -497,7 +497,7 @@ public class TestDosaz extends CommandingPlayerTest {
         assertEquals(13, findEntities(NAME_WALL_PART).size());
         // Tombstones -> Ghosts
         assertNull(findEntity(NAME_TOMBSTONE));
-        LinkedList<Integer> ghosts = findEntities(NAME_GHOST);
+        LinkedList<Integer> ghosts = findEntities_SortByX(NAME_GHOST);
         assertEquals(2, ghosts.size());
         int ghost1 = ghosts.get(0);
         assertEquals(24, getX(ghost1), EPSILON);
@@ -543,7 +543,7 @@ public class TestDosaz extends CommandingPlayerTest {
         assertEquals(13, findEntities(NAME_WALL_PART).size());
         // Tombstones -> Ghosts
         assertNull(findEntity(NAME_TOMBSTONE));
-        LinkedList<Integer> ghosts = findEntities(NAME_GHOST);
+        LinkedList<Integer> ghosts = findEntities_SortByX(NAME_GHOST);
         assertEquals(2, ghosts.size());
         int ghost1 = ghosts.get(0);
         assertEquals(18, getX(ghost1), EPSILON);

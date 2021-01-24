@@ -27,6 +27,12 @@
                 <freezeAfterPlaying/>
             </entity>
         </deathAnimation>
+        <danceAnimation>
+            <entity>
+                <name>chicken_dance</name>
+                <loopDuration>4.8</loopDuration>
+            </entity>
+        </danceAnimation>
         <animation>#idleAnimation</animation>
         <!--physics-->
         <hitbox>

@@ -2,14 +2,14 @@ package amara.applications.ingame.entitysystem.systems.commands;
 
 import java.util.Iterator;
 
-import amara.applications.ingame.shared.maps.Map;
-import amara.core.Queue;
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.items.*;
 import amara.applications.ingame.entitysystem.components.movements.*;
 import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.players.*;
 import amara.applications.ingame.entitysystem.components.units.*;
+import amara.applications.ingame.entitysystem.components.units.animations.DanceAnimationComponent;
+import amara.applications.ingame.entitysystem.components.visuals.AnimationComponent;
 import amara.applications.ingame.entitysystem.systems.aggro.AggroUtil;
 import amara.applications.ingame.entitysystem.systems.items.ItemUtil;
 import amara.applications.ingame.entitysystem.systems.movement.MovementSystem;
@@ -20,6 +20,8 @@ import amara.applications.ingame.entitysystem.systems.spells.casting.CastSpellQu
 import amara.applications.ingame.entitysystem.systems.units.UnitUtil;
 import amara.applications.ingame.network.messages.objects.commands.*;
 import amara.applications.ingame.network.messages.objects.commands.casting.*;
+import amara.applications.ingame.shared.maps.Map;
+import amara.core.Queue;
 import amara.libraries.entitysystem.*;
 import com.jme3.math.Vector2f;
 
@@ -117,6 +119,13 @@ public class ExecutePlayerCommandsSystem implements EntitySystem {
                     entityWorld.setComponent(targetEntity, new TemporaryComponent());
                     entityWorld.setComponent(targetEntity, new PositionComponent(castPositionalSkillshotSpellCommand.getPosition().clone()));
                     castSpellQueueSystem.enqueueSpellCast(entityWorld, characterEntity, spellEntity, targetEntity);
+                } else if (command instanceof DanceCommand) {
+                    if (UnitUtil.tryCancelAction(entityWorld, characterEntity)) {
+                        DanceAnimationComponent danceAnimationComponent = entityWorld.getComponent(characterEntity, DanceAnimationComponent.class);
+                        if (danceAnimationComponent != null) {
+                            entityWorld.setComponent(characterEntity, new AnimationComponent(danceAnimationComponent.getAnimationEntity()));
+                        }
+                    }
                 } else if (command instanceof ShowReactionCommand) {
                     ShowReactionCommand showReactionCommand = (ShowReactionCommand) command;
                     entityWorld.setComponent(characterEntity, new ReactionComponent(showReactionCommand.getReaction(), 2));

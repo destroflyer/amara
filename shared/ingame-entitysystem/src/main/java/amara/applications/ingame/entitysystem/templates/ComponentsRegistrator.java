@@ -4206,6 +4206,20 @@ public class ComponentsRegistrator{
                 return new amara.applications.ingame.entitysystem.components.units.animations.AutoAttackAnimationComponent(animationEntity);
             }
         });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.animations.DanceAnimationComponent.class);
+        try{
+            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.animations.DanceAnimationComponent.class.getDeclaredField("animationEntity"), componentFieldSerializer_Entity);
+        }catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.DanceAnimationComponent>("danceAnimation"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.units.animations.DanceAnimationComponent construct(EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
+                return new amara.applications.ingame.entitysystem.components.units.animations.DanceAnimationComponent(animationEntity);
+            }
+        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.units.animations.DeathAnimationComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.units.animations.DeathAnimationComponent.class.getDeclaredField("animationEntity"), componentFieldSerializer_Entity);

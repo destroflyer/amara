@@ -837,7 +837,7 @@ public class TestAlice extends CommandingPlayerTest {
         assertTrue(isSpellsEnabled(targetDummy1));
         assertTrue(isSpellsEnabled(targetDummy2));
         // Glitters spawned
-        LinkedList<Integer> glitters = findEntities(NAME_GLITTER);
+        LinkedList<Integer> glitters = findEntities_SortByX(NAME_GLITTER);
         assertEquals(2, glitters.size());
         int glitter1 = glitters.get(0);
         assertEquals(10, getX(glitter1), EPSILON);
@@ -919,7 +919,7 @@ public class TestAlice extends CommandingPlayerTest {
         assertTrue(isSpellsEnabled(targetDummy1));
         assertTrue(isSpellsEnabled(targetDummy2));
         // Glitters spawned
-        LinkedList<Integer> glitters = findEntities(NAME_GLITTER);
+        LinkedList<Integer> glitters = findEntities_SortByX(NAME_GLITTER);
         assertEquals(2, glitters.size());
         int glitter1 = glitters.get(0);
         assertEquals(10, getX(glitter1), EPSILON);
@@ -1010,7 +1010,7 @@ public class TestAlice extends CommandingPlayerTest {
         assertEquals(10, getWalkSpeed(targetDummy1), EPSILON);
         assertEquals(10, getWalkSpeed(targetDummy1), EPSILON);
         // Glitters spawned
-        LinkedList<Integer> glitters = findEntities(NAME_GLITTER);
+        LinkedList<Integer> glitters = findEntities_SortByX(NAME_GLITTER);
         assertEquals(2, glitters.size());
         int glitter1 = glitters.get(0);
         assertEquals(10, getX(glitter1), EPSILON);

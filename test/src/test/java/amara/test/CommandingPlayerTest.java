@@ -23,6 +23,7 @@ import org.junit.Before;
 
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.function.Function;
 
 import static org.junit.Assert.fail;
 
@@ -73,6 +74,14 @@ public class CommandingPlayerTest extends GameLogicTest {
     }
 
     protected LinkedList<Integer> findEntities(String name) {
+        return findEntities(name, null);
+    }
+
+    protected LinkedList<Integer> findEntities_SortByX(String name) {
+        return findEntities(name, entity -> entityWorld.getComponent(entity, PositionComponent.class).getPosition().getX());
+    }
+
+    protected LinkedList<Integer> findEntities(String name, Function<Integer, Comparable> order) {
         LinkedList<Integer> entities = new LinkedList<>();
         for (int entity : entityWorld.getEntitiesWithAny(NameComponent.class)) {
             String currentName = entityWorld.getComponent(entity, NameComponent.class).getName();
@@ -80,7 +89,9 @@ public class CommandingPlayerTest extends GameLogicTest {
                 entities.add(entity);
             }
         }
-        entities.sort(Comparator.naturalOrder());
+        if (order != null) {
+            entities.sort(Comparator.comparing(order::apply));
+        }
         return entities;
     }
 

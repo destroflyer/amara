@@ -148,6 +148,9 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
                             } else if (keyCode == Settings.getInteger(controlsCameraPrefix + "interface_menu")) {
                                 screenController_Menu.toggleMenuVisible();
                                 keyWasNotFound = false;
+                            } else if (keyCode == Settings.getInteger(controlsCameraPrefix + "navigation_dance")) {
+                                sendCommand(new DanceCommand());
+                                keyWasNotFound = false;
                             } else if (keyCode == Settings.getInteger(controlsCameraPrefix + "reactions_0")) {
                                 showReaction("kappa");
                                 keyWasNotFound = false;
