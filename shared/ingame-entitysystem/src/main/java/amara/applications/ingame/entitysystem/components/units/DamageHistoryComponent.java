@@ -44,18 +44,22 @@ public class DamageHistoryComponent {
 
         }
 
-        public DamageHistoryEntry(DamageType damageType, float damage, int sourceActionIndex, int sourceEntity, int sourceSpellEntity) {
+        public DamageHistoryEntry(DamageType damageType, float damage, int sourceActionIndex, int sourceEntity, String sourceName, int sourceSpellEntity, String sourceSpellName) {
             this.damageType = damageType;
             this.damage = damage;
             this.sourceActionIndex = sourceActionIndex;
             this.sourceEntity = sourceEntity;
+            this.sourceName = sourceName;
             this.sourceSpellEntity = sourceSpellEntity;
+            this.sourceSpellName = sourceSpellName;
         }
         private DamageType damageType;
         private float damage;
         private int sourceActionIndex;
         private int sourceEntity;
+        private String sourceName;
         private int sourceSpellEntity;
+        private String sourceSpellName;
 
         public DamageType getDamageType() {
             return damageType;
@@ -73,8 +77,16 @@ public class DamageHistoryComponent {
             return sourceEntity;
         }
 
+        public String getSourceName() {
+            return sourceName;
+        }
+
         public int getSourceSpellEntity() {
             return sourceSpellEntity;
+        }
+
+        public String getSourceSpellName() {
+            return sourceSpellName;
         }
     }
 }
