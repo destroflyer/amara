@@ -8,6 +8,7 @@ import amara.applications.ingame.client.gui.*;
 import amara.applications.ingame.client.systems.camera.*;
 import amara.applications.ingame.client.systems.filters.*;
 import amara.applications.ingame.client.systems.gui.*;
+import amara.applications.ingame.client.systems.gui.deathrecap.DisplayDeathRecapSystem;
 import amara.applications.ingame.client.systems.information.*;
 import amara.applications.ingame.client.systems.visualisation.*;
 import amara.applications.master.network.messages.objects.GameSelectionPlayer;
