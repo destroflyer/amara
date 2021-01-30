@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.server.network.backends;
 
 import java.util.HashMap;
@@ -17,10 +13,6 @@ import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
 import amara.libraries.entitysystem.*;
 import amara.libraries.network.*;
 
-/**
- *
- * @author Carl
- */
 public class ReceiveChatMessagesBackend implements MessageBackend {
 
     public ReceiveChatMessagesBackend(IngameServerApplication ingameServerApplication) {
@@ -51,7 +43,7 @@ public class ReceiveChatMessagesBackend implements MessageBackend {
             if (gamePlayer != null) {
                 Message_ChatMessage chatMessage = new Message_ChatMessage(gamePlayer.getGamePlayerInfo().getPlayerId(), null, message.getText());
                 messageResponse.addBroadcastMessage(chatMessage);
-                ingameServerApplication.enqueueTask(() -> {
+                ingameServerApplication.enqueue(() -> {
                     MessageResponse chatCommandResponse = new MessageResponse(messageResponse.getClientId());
                     if (message.getText().equals("such chat")) {
                         chatCommandResponse.addAnswerMessage(new Message_ChatMessage("very responsive, wow"));

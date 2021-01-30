@@ -18,7 +18,7 @@ public class GameCrashedBackend implements MessageBackend {
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
         if (receivedMessage instanceof Message_GameCrashed) {
             Message_GameCrashed message = (Message_GameCrashed) receivedMessage;
-            ingameClientApplication.enqueueTask(() -> {
+            ingameClientApplication.enqueue(() -> {
                 ingameClientApplication.stop();
                 new ErrorDialog(message.getErrorMessage());
             });

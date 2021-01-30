@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.tools.editors.map.gui;
 
 import java.io.File;
@@ -19,34 +15,26 @@ import amara.libraries.applications.display.ingame.maps.TerrainAlphamap;
 import amara.tools.editors.map.appstates.MapEditorAppState;
 import de.lessvoid.nifty.elements.Element;
 
-/**
- *
- * @author Carl
- */
 public class ScreenController_MapEditor extends GameScreenController{
 
-    public ScreenController_MapEditor(){
+    public ScreenController_MapEditor() {
         super("start");
     }
-    
-    public void openMap(){
-        File file = Util.chooseFile(true, FileAssets.ROOT + "Maps/", MapFileHandler.FILE_FILTER);
-        if(file != null){
-            final String mapName = file.getParentFile().getName();
-            mainApplication.enqueueTask(new Runnable(){
 
-                @Override
-                public void run(){
-                    AppStateManager stateManager = mainApplication.getStateManager();
-                    stateManager.detach(stateManager.getState(MapAppState.class));
-                    Map map = MapFileHandler.load(mapName);
-                    stateManager.attach(new MapAppState(map));
-                    stateManager.getState(MapObstaclesAppState.class).update();
-                }
+    public void openMap() {
+        File file = Util.chooseFile(true, FileAssets.ROOT + "Maps/", MapFileHandler.FILE_FILTER);
+        if (file != null) {
+            final String mapName = file.getParentFile().getName();
+            mainApplication.enqueue(() -> {
+                AppStateManager stateManager = mainApplication.getStateManager();
+                stateManager.detach(stateManager.getState(MapAppState.class));
+                Map map = MapFileHandler.load(mapName);
+                stateManager.attach(new MapAppState(map));
+                stateManager.getState(MapObstaclesAppState.class).update();
             });
         }
     }
-    
+
     public void saveMap(){
         MapAppState mapAppState = mainApplication.getStateManager().getState(MapAppState.class);
         File file = Util.chooseFile(false, FileAssets.ROOT + "Maps/", MapFileHandler.FILE_FILTER);

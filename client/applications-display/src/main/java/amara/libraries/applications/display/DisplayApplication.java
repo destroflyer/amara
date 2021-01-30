@@ -60,11 +60,4 @@ public class DisplayApplication extends SimpleApplication {
         spatial.collideWith(ray, results);
         return results;
     }
-
-    public void enqueueTask(final Runnable runnable) {
-        enqueue(() -> {
-            runnable.run();
-            return null;
-        });
-    }
 }

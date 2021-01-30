@@ -206,13 +206,13 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
         removeFilters();
     }
 
-    public void updateVisuals(){
+    public void updateVisuals() {
         visualsNode.detachAllChildren();
         modelObjectsVisuals.clear();
         cameraNode.detachAllChildren();
         final BatchNode modelsNode = new BatchNode();
         MapVisuals visuals = map.getVisuals();
-        for(MapVisual visual : visuals.getMapVisuals()){
+        for (MapVisual visual : visuals.getMapVisuals()) {
             if(visual instanceof ModelVisual){
                 ModelVisual modelVisual = (ModelVisual) visual;
                 ModelObject modelObject = new ModelObject(mainApplication.getAssetManager(), modelVisual.getModelSkinPath());
@@ -223,33 +223,30 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
                 modelObject.setLocalScale(modelVisual.getScale());
                 modelsNode.attachChild(modelObject);
                 modelObjectsVisuals.put(modelObject, modelVisual);
-            }
-            else if(visual instanceof WaterVisual){
+            } else if (visual instanceof WaterVisual) {
                 WaterVisual waterVisual = (WaterVisual) visual;
-                if(true){
+                if (true) {
                     WaterFilter waterFilter = getAppState(WaterAppState.class).createWaterFilter(waterVisual.getPosition(), waterVisual.getSize());
                     addFilter(waterFilter);
-                }
-                else{
+                } else {
                     Geometry waterPlane = getAppState(WaterAppState.class).createWaterPlane(waterVisual.getPosition(), waterVisual.getSize());
-                    mainApplication.enqueueTask(() -> visualsNode.attachChild(waterPlane));
+                    mainApplication.enqueue(() -> visualsNode.attachChild(waterPlane));
                 }
-            }
-            else if(visual instanceof SnowVisual){
+            } else if (visual instanceof SnowVisual) {
                 SnowEmitter snowEmitter = new SnowEmitter(mainApplication.getAssetManager());
-                mainApplication.enqueueTask(() -> cameraNode.attachChild(snowEmitter.getParticleEmitter()));
+                mainApplication.enqueue(() -> cameraNode.attachChild(snowEmitter.getParticleEmitter()));
             }
         }
         modelsNode.batch();
         modelsNode.setQueueBucket(RenderQueue.Bucket.Transparent);
         modelsNode.setShadowMode(RenderQueue.ShadowMode.Cast);
-        mainApplication.enqueueTask(() -> {
+        mainApplication.enqueue(() -> {
             visualsNode.attachChild(modelsNode);
             addSky("miramar");
         });
     }
-    
-    private void addSky(String skyName){
+
+    private void addSky(String skyName) {
         Texture textureWest = mainApplication.getAssetManager().loadTexture("Textures/skies/" + skyName + "/left.png");
         Texture textureEast = mainApplication.getAssetManager().loadTexture("Textures/skies/" + skyName + "/right.png");
         Texture textureNorth = mainApplication.getAssetManager().loadTexture("Textures/skies/" + skyName + "/front.png");
@@ -258,7 +255,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
         Texture textureDown = mainApplication.getAssetManager().loadTexture("Textures/skies/" + skyName + "/down.png");
         visualsNode.attachChild(SkyFactory.createSky(mainApplication.getAssetManager(), textureWest, textureEast, textureNorth, textureSouth, textureUp, textureDown));
     }
-    
+
     private void addFilter(Filter filter){
         getAppState(PostFilterAppState.class).addFilter(filter);
         activeFilters.add(filter);

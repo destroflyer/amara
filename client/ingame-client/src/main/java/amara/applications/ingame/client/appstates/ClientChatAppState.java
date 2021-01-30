@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.appstates;
 
 import java.util.HashMap;
@@ -22,26 +18,22 @@ import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
 import amara.libraries.network.*;
 
-/**
- *
- * @author Carl
- */
-public class ClientChatAppState extends BaseDisplayAppState<IngameClientApplication>{
-    
+public class ClientChatAppState extends BaseDisplayAppState<IngameClientApplication> {
+
     private static final float HIDE_CHAT_DELAY = 10;
     private float timeSinceLastReceivedMessage;
     private LinkedList<Message_ChatMessage> queuedMessages = new LinkedList<>();
     private boolean isHandlingMessage;
     private HashMap<Integer, String> playerLogins = new HashMap<>();
-    
+
     @Override
-    public void initialize(AppStateManager stateManager, Application application){
+    public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
         IngameNetworkAppState ingameNetworkAppState = getAppState(IngameNetworkAppState.class);
         ingameNetworkAppState.addMessageBackend((Message receivedMessage, MessageResponse messageResponse) -> {
-            if(receivedMessage instanceof Message_ChatMessage){
+            if (receivedMessage instanceof Message_ChatMessage) {
                 final Message_ChatMessage message = (Message_ChatMessage) receivedMessage;
-                mainApplication.enqueueTask(() -> {
+                mainApplication.enqueue(() -> {
                     queuedMessages.add(message);
                 });
             }

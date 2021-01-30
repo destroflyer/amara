@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.appstates;
 
 import com.jme3.app.Application;
@@ -19,10 +15,6 @@ import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.*;
 import amara.libraries.applications.display.models.ModelObject;
 
-/**
- *
- * @author Carl
- */
 public class LoadingScreenAppState extends OverlayViewportAppState<IngameClientApplication> {
 
     private static final Quaternion MODEL_OBJECT_YAW = JMonkeyUtil.getQuaternion_Y(-90);
@@ -73,7 +65,7 @@ public class LoadingScreenAppState extends OverlayViewportAppState<IngameClientA
         updateModelObject(modelObject1, animationProgress);
         updateModelObject(modelObject2, animationProgress - 0.5f);
         if (hasGameStarted && hasInitialWorldLoaded) {
-            mainApplication.enqueueTask(() -> mainApplication.getStateManager().detach(LoadingScreenAppState.this));
+            mainApplication.enqueue(() -> mainApplication.getStateManager().detach(LoadingScreenAppState.this));
         }
     }
 

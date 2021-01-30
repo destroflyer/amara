@@ -34,7 +34,7 @@ public class ReceiveCommandsAppState extends ServerBaseAppState {
     }
 
     public void onCommandReceived(final PlayerCommand playerCommand){
-        mainApplication.enqueueTask(() -> {
+        mainApplication.enqueue(() -> {
             timeSinceLastCommand = 0;
             playerCommandsQueue.add(playerCommand);
         });

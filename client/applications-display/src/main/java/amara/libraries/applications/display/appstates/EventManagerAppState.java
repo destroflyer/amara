@@ -47,7 +47,7 @@ public class EventManagerAppState extends BaseDisplayAppState<DisplayApplication
     @Override
     public void update(float lastTimePerFrame) {
         super.update(lastTimePerFrame);
-        mainApplication.enqueueTask(() -> eventQueue.clear());
+        mainApplication.enqueue(() -> eventQueue.clear());
     }
 
     @Override

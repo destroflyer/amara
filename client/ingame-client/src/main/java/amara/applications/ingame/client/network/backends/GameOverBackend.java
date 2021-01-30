@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.network.backends;
 
 import amara.applications.ingame.client.IngameClientApplication;
@@ -13,10 +9,6 @@ import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.IngameCameraAppState;
 import amara.libraries.network.*;
 
-/**
- *
- * @author Carl
- */
 public class GameOverBackend implements MessageBackend {
 
     public GameOverBackend(IngameClientApplication ingameClientApplication) {
@@ -27,7 +19,7 @@ public class GameOverBackend implements MessageBackend {
     @Override
     public void onMessageReceived(Message receivedMessage, MessageResponse messageResponse) {
         if (receivedMessage instanceof Message_GameOver) {
-            ingameClientApplication.enqueueTask(() -> {
+            ingameClientApplication.enqueue(() -> {
                 ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(PingAppState.class));
                 ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(SendPlayerCommandsAppState.class));
                 ingameClientApplication.getStateManager().detach(ingameClientApplication.getStateManager().getState(LocalEntitySystemAppState.class));

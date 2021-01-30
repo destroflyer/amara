@@ -1,65 +1,51 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.applications.headless.applications;
 
-import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-/**
- *
- * @author Carl
- */
-public class HeadlessApplication{
-    
+public class HeadlessApplication {
+
     private boolean isRunning;
     protected HeadlessAppStateManager stateManager = new HeadlessAppStateManager(this);
-    private ConcurrentLinkedQueue<Runnable> enqueuedTasks = new ConcurrentLinkedQueue<Runnable>();
+    private ConcurrentLinkedQueue<Runnable> enqueuedTasks = new ConcurrentLinkedQueue<>();
     
-    public void update(float lastTimePerFrame){
+    public void update(float lastTimePerFrame) {
         stateManager.update(lastTimePerFrame);
     }
 
-    public HeadlessAppStateManager getStateManager(){
+    public HeadlessAppStateManager getStateManager() {
         return stateManager;
     }
-    
+
     public void start(){
         isRunning = true;
-        new Thread(new Runnable(){
-
-            public void run(){
-                long lastFrameTimestamp = System.currentTimeMillis();
-                while(isRunning){
-                    long currentTimestamp = System.currentTimeMillis();
-                    float lastTimePerFrame = ((currentTimestamp - lastFrameTimestamp) / 1000f);
-                    lastFrameTimestamp = currentTimestamp;
-                    runEnqueuedTasks();
-                    update(lastTimePerFrame);
-                    try{
-                        Thread.sleep(1000 / 60);
-                    }catch(InterruptedException ex){
-                    }
+        new Thread(() -> {
+            long lastFrameTimestamp = System.currentTimeMillis();
+            while (isRunning) {
+                long currentTimestamp = System.currentTimeMillis();
+                float lastTimePerFrame = ((currentTimestamp - lastFrameTimestamp) / 1000f);
+                lastFrameTimestamp = currentTimestamp;
+                runEnqueuedTasks();
+                update(lastTimePerFrame);
+                try {
+                    Thread.sleep(1000 / 60);
+                } catch (InterruptedException ex) {
                 }
             }
         }).start();
     }
-    
-    public void enqueueTask(Runnable runnable){
+
+    public void enqueue(Runnable runnable) {
         enqueuedTasks.add(runnable);
     }
-    
-    private void runEnqueuedTasks(){
-        Iterator<Runnable> iteratorEnqueuedTasks = enqueuedTasks.iterator();
-        while(iteratorEnqueuedTasks.hasNext()){
-            Runnable enqueuedTask = iteratorEnqueuedTasks.next();
-            enqueuedTask.run();
+
+    private void runEnqueuedTasks() {
+        for (Runnable runnable : enqueuedTasks) {
+            runnable.run();
         }
         enqueuedTasks.clear();
     }
-    
-    public void stop(){
+
+    public void stop() {
         isRunning = false;
     }
 }

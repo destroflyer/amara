@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.network.backends;
 
 import com.jme3.app.state.AppStateManager;
@@ -14,10 +10,6 @@ import amara.libraries.applications.display.DisplayApplication;
 import amara.libraries.applications.display.ingame.appstates.*;
 import amara.libraries.network.*;
 
-/**
- *
- * @author Carl
- */
 public class ReceiveGameInfoBackend implements MessageBackend {
 
     public ReceiveGameInfoBackend(DisplayApplication mainApplication) {
@@ -31,7 +23,7 @@ public class ReceiveGameInfoBackend implements MessageBackend {
             final Message_GameInfo message = (Message_GameInfo) receivedMessage;
             message.repairOnUnserialize();
             final AppStateManager stateManager = mainApplication.getStateManager();
-            mainApplication.enqueueTask(() -> {
+            mainApplication.enqueue(() -> {
                 mainApplication.getStateManager().getState(LoadingScreenAppState.class).setTitle("Loading map...");
                 new Thread(() -> {
                     String mapName = message.getMapName();
