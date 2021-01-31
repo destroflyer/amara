@@ -47,13 +47,24 @@
                                     </entity>
                                 </triggeredEffect>
                             </entity>
-                            <!--action cancelled-->
-                            <entity id="actionCancelledTrigger">
+                            <!--cast cancelled-->
+                            <entity id="castCancelledTrigger">
                                 <castCancelledTrigger/>
                                 <sourceCasterTarget/>
                                 <triggeredEffect>
                                     <entity>
                                         <stopAudio>#castAudio</stopAudio>
+                                    </entity>
+                                </triggeredEffect>
+                                <triggerOnce/>
+                            </entity>
+                            <!--teleport-->
+                            <entity id="castingFinishedTrigger">
+                                <castingFinishedTrigger/>
+                                <sourceCasterTarget/>
+                                <triggeredEffect>
+                                    <entity>
+                                        <triggerSpellEffects>#spell</triggerSpellEffects>
                                     </entity>
                                 </triggeredEffect>
                                 <triggerOnce/>
@@ -65,22 +76,11 @@
                                 <triggeredEffect>
                                     <entity>
                                         <removeBuff>#buff</removeBuff>
-                                        <removeEffectTriggers>#damageTakenTrigger,#actionCancelledTrigger</removeEffectTriggers>
+                                        <removeEffectTriggers>#damageTakenTrigger,#castCancelledTrigger,#castingFinishedTrigger</removeEffectTriggers>
                                     </entity>
                                 </triggeredEffect>
                                 <triggerOnce/>
                                 <triggerOnCancel/>
-                            </entity>
-                            <!--teleport-->
-                            <entity>
-                                <castingFinishedTrigger/>
-                                <sourceCasterTarget/>
-                                <triggeredEffect>
-                                    <entity>
-                                        <triggerSpellEffects>#spell</triggerSpellEffects>
-                                    </entity>
-                                </triggeredEffect>
-                                <triggerOnce/>
                             </entity>
                         </addEffectTriggers>
                     </entity>
