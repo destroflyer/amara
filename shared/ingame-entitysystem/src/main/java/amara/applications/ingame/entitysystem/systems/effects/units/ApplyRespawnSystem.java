@@ -1,10 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.effects.units;
 
 import amara.applications.ingame.entitysystem.components.attributes.HealthComponent;
+import amara.applications.ingame.entitysystem.components.attributes.ManaComponent;
 import amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent;
 import amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent;
 import amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent;
@@ -20,10 +17,6 @@ import amara.libraries.entitysystem.EntityWorld;
 
 import java.util.Optional;
 
-/**
- *
- * @author Carl
- */
 public class ApplyRespawnSystem implements EntitySystem {
 
     public ApplyRespawnSystem(Map map) {
@@ -38,6 +31,7 @@ public class ApplyRespawnSystem implements EntitySystem {
             if (entityWorld.hasComponent(targetEntity, IsRespawnableComponent.class)) {
                 entityWorld.removeComponent(targetEntity, AnimationComponent.class);
                 entityWorld.removeComponent(targetEntity, HealthComponent.class);
+                entityWorld.removeComponent(targetEntity, ManaComponent.class);
                 entityWorld.removeComponent(targetEntity, DamageHistoryComponent.class);
                 entityWorld.setComponent(targetEntity, new HitboxActiveComponent());
                 entityWorld.setComponent(targetEntity, new IsAliveComponent());
