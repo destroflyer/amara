@@ -29,7 +29,8 @@ public class FogOfWarSystem implements EntitySystem {
         mapBorderCcwOutline.add(new Vector2D(0, mapPhysicsInformation.getHeight()));
         mapBorderCcwOutline.add(new Vector2D(0, 0));
         teamVision = new MergedVision(mapBorderCcwOutline, mapPhysicsInformation.generateVisionObstacles());
-        teamVision.setEnableSightInSolidObstacles(true);
+        // For fog of war, the obstacles are added reversed, so they are not darkened by the fog - Therefore, they have to be reversed when the player is inside
+        teamVision.setReverseSightInsideObstacles(true);
         float resolutionFactor = Settings.getFloat("fog_of_war_resolution");
         fogImage = new PaintableImage((int) (mapPhysicsInformation.getWidth() * resolutionFactor), (int) (mapPhysicsInformation.getHeight() * resolutionFactor));
         fogRaster = new ImageChannelRaster(fogImage, resolutionFactor, 80, 255, 0);

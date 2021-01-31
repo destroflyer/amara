@@ -1,8 +1,3 @@
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.units;
 
 import java.util.HashMap;
@@ -15,17 +10,12 @@ import amara.libraries.entitysystem.*;
 import amara.libraries.physics.shapes.*;
 import amara.libraries.physics.shapes.vision.*;
 
-/**
- *
- * @author Carl
- */
 public class TeamVisionSystem implements EntitySystem{
 
     public TeamVisionSystem(int teamsCount, List<VisionObstacle> visionObstacles){
         teamVisions = new MergedVision[teamsCount];
         for(int i=0;i<teamVisions.length;i++){
             MergedVision teamVision = new MergedVision(visionObstacles);
-            teamVision.setEnableSightInSolidObstacles(true);
             teamVisions[i] = teamVision;
         }
     }

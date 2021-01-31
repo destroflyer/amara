@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.libraries.physics.shapes.vision;
 
 import java.util.ArrayList;
@@ -10,10 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import amara.libraries.physics.shapes.*;
 
-/**
- *
- * @author Carl
- */
 public class MergedVision {
 
     public MergedVision(List<VisionObstacle> fixedObstacles) {
@@ -31,7 +22,7 @@ public class MergedVision {
     private ArrayList<Vector2D> visionEdges = new ArrayList<>();
     private HashMap<Double, Circle> visionCircleShapes = new HashMap<>();
     private HashMap<Integer, SightResult> sightResults = new HashMap<>();
-    private boolean enableSightInSolidObstacles;
+    private boolean reverseSightInsideObstacles;
 
     public boolean isVisible(Vector2D position) {
         for (SightResult sightResult : sightResults.values()) {
@@ -76,7 +67,7 @@ public class MergedVision {
             ConvexedOutline convexedOutline = obstacle.getConvexedOutline();
             if (convexedOutline.intersects(visionCircleShape)) {
                 boolean blocksVisionInside = obstacle.isBlockingInside();
-                if (enableSightInSolidObstacles && convexedOutline.contains(position)) {
+                if (reverseSightInsideObstacles && convexedOutline.contains(position)) {
                     blocksVisionInside = !blocksVisionInside;
                 }
                 addEdges(edges, convexedOutline.getCcwOutline(), blocksVisionInside);
@@ -113,7 +104,7 @@ public class MergedVision {
         return circle;
     }
 
-    public void setEnableSightInSolidObstacles(boolean enableSightInSolidObstacles) {
-        this.enableSightInSolidObstacles = enableSightInSolidObstacles;
+    public void setReverseSightInsideObstacles(boolean reverseSightInsideObstacles) {
+        this.reverseSightInsideObstacles = reverseSightInsideObstacles;
     }
 }
