@@ -499,23 +499,19 @@ public class ScreenController_HUD extends GameScreenController {
     public void setScoreboard_PlayerName(int playerIndex, String name){
         getTextRenderer("scoreboard_player_" + playerIndex + "_name").setText(name);
     }
-    
-    public void setScoreboard_KDA(int playerIndex, int kills, int deaths, int assists){
+
+    public void setScoreboard_KDA(int playerIndex, int kills, int deaths, int assists) {
         setScoreboard_Score(playerIndex, "kda", (kills + "/" + deaths + "/" + assists));
     }
-    
-    public void setScoreboard_CreepScore(int playerIndex, int kills){
-        setScoreboard_Score(playerIndex, "creepscore", kills);
+
+    public void setScoreboard_CreepScore(int playerIndex, int kills) {
+        setScoreboard_Score(playerIndex, "creepscore", "" + kills);
     }
-    
-    private void setScoreboard_Score(int playerIndex, String suffix, float value){
-        setScoreboard_Score(playerIndex, suffix, GUIUtil.getValueText(value));
-    }
-    
-    private void setScoreboard_Score(int playerIndex, String suffix, String text){
+
+    private void setScoreboard_Score(int playerIndex, String suffix, String text) {
         getTextRenderer("scoreboard_player_" + playerIndex + "_" + suffix).setText(text);
     }
-    
+
     public void setScoreboard_InventoryItem_Image(int playerIndex, int itemIndex, String imagePath){
         getImageRenderer("scoreboard_player_" + playerIndex + "_item_" + itemIndex + "_image").setImage(createImage(imagePath));
     }
