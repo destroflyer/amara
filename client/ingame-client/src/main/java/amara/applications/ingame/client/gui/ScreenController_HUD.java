@@ -330,14 +330,13 @@ public class ScreenController_HUD extends GameScreenController {
     public void hidePlayer_SpellInformation(){
         action_HideSpellInformation = true;
     }
-    
-    public void checkAction_SpellInformation(){
-        if(action_ShowSpellInformation != null){
+
+    public void checkAction_SpellInformation() {
+        if (action_ShowSpellInformation != null) {
             showPlayer_SpellInformation(action_ShowSpellInformation);
             action_ShowSpellInformation = null;
             action_HideSpellInformation = false;
-        }
-        else if(action_HideSpellInformation){
+        } else if (action_HideSpellInformation) {
             getElementByID("player_spell_information_layer").setVisible(false);
             PlayerAppState playerAppState = mainApplication.getStateManager().getState(PlayerAppState.class);
             playerAppState.getSpellIndicatorSystem().hideIndicator();

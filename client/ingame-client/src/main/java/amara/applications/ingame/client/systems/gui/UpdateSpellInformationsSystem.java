@@ -4,10 +4,20 @@ import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.client.gui.objects.SpellInformation;
 import amara.applications.ingame.entitysystem.components.costs.ManaCostComponent;
-import amara.applications.ingame.entitysystem.components.general.*;
-import amara.applications.ingame.entitysystem.components.spells.*;
-import amara.applications.ingame.entitysystem.components.units.*;
-import amara.libraries.entitysystem.*;
+import amara.applications.ingame.entitysystem.components.general.DeltaDescriptionComponent;
+import amara.applications.ingame.entitysystem.components.general.DescriptionComponent;
+import amara.applications.ingame.entitysystem.components.general.NameComponent;
+import amara.applications.ingame.entitysystem.components.spells.CastCostComponent;
+import amara.applications.ingame.entitysystem.components.spells.CooldownComponent;
+import amara.applications.ingame.entitysystem.components.units.LearnableSpellsComponent;
+import amara.applications.ingame.entitysystem.components.units.MapSpellsComponent;
+import amara.applications.ingame.entitysystem.components.units.PassivesComponent;
+import amara.applications.ingame.entitysystem.components.units.SpellsComponent;
+import amara.libraries.entitysystem.ComponentMapObserver;
+import amara.libraries.entitysystem.EntityWorld;
+
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class UpdateSpellInformationsSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
@@ -17,44 +27,65 @@ public class UpdateSpellInformationsSystem extends GUIDisplaySystem<ScreenContro
 
     @Override
     protected void update(EntityWorld entityWorld, float deltaSeconds, int characterEntity) {
-        ComponentMapObserver observer = entityWorld.requestObserver(this, PassivesComponent.class, LearnableSpellsComponent.class, SpellsComponent.class, MapSpellsComponent.class);
-        checkChangedPassives(entityWorld, observer.getNew().getComponent(characterEntity, PassivesComponent.class));
-        checkChangedPassives(entityWorld, observer.getChanged().getComponent(characterEntity, PassivesComponent.class));
-        checkChangedLearnableSpells(entityWorld, observer.getNew().getComponent(characterEntity, LearnableSpellsComponent.class));
-        checkChangedLearnableSpells(entityWorld, observer.getChanged().getComponent(characterEntity, LearnableSpellsComponent.class));;
-        checkChangedSpells(entityWorld, observer.getNew().getComponent(characterEntity, SpellsComponent.class));
-        checkChangedSpells(entityWorld, observer.getChanged().getComponent(characterEntity, SpellsComponent.class));;
-        checkChangedMapSpells(entityWorld, observer.getNew().getComponent(characterEntity, MapSpellsComponent.class));
-        checkChangedMapSpells(entityWorld, observer.getChanged().getComponent(characterEntity, MapSpellsComponent.class));
+        ComponentMapObserver observer = entityWorld.requestObserver(
+            this,
+            // Components directly on spell
+            PassivesComponent.class,
+            LearnableSpellsComponent.class,
+            SpellsComponent.class,
+            MapSpellsComponent.class,
+            NameComponent.class,
+            DescriptionComponent.class,
+            DeltaDescriptionComponent.class,
+            CooldownComponent.class,
+            CastCostComponent.class,
+            // Nested components
+            ManaCostComponent.class
+        );
+        checkChangedSpells(entityWorld, observer, characterEntity, PassivesComponent.class, PassivesComponent::getPassiveEntities, spellInformations -> screenController.setPlayer_SpellInformations_Passives(spellInformations));
+        checkChangedSpells(entityWorld, observer, characterEntity, LearnableSpellsComponent.class, LearnableSpellsComponent::getSpellsEntities, spellInformations -> screenController.setPlayer_SpellInformations_LearnableSpells(spellInformations));
+        checkChangedSpells(entityWorld, observer, characterEntity, SpellsComponent.class, SpellsComponent::getSpellsEntities, spellInformations -> screenController.setPlayer_SpellInformations_Spells(spellInformations));
+        checkChangedSpells(entityWorld, observer, characterEntity, MapSpellsComponent.class, MapSpellsComponent::getSpellsEntities, spellInformations -> screenController.setPlayer_SpellInformations_MapSpells(spellInformations));
         screenController.checkAction_SpellInformation();
     }
 
-    private void checkChangedPassives(EntityWorld entityWorld, PassivesComponent passivesComponent) {
-        if (passivesComponent != null) {
-            int[] passives = passivesComponent.getPassiveEntities();
-            screenController.setPlayer_SpellInformations_Passives(createSpellInformations(entityWorld, passives, false));
+    private <T> void checkChangedSpells(EntityWorld entityWorld, ComponentMapObserver observer, int characterEntity, Class<T> spellsComponentClass, Function<T, int[]> getSpellsEntities, Consumer<SpellInformation[]> displaySpellInformations) {
+        T component = entityWorld.getComponent(characterEntity, spellsComponentClass);
+        if (component != null) {
+            int[] spellsEntities = getSpellsEntities.apply(component);
+            boolean hasSpellsComponentChanged = isNewOrChanged(observer, characterEntity, spellsComponentClass);
+            if (hasSpellsComponentChanged || haveSpellsInternallyChanged(entityWorld, observer, spellsEntities)) {
+                SpellInformation[] spellInformations = createSpellInformations(entityWorld, spellsEntities, false);
+                displaySpellInformations.accept(spellInformations);
+            }
         }
     }
 
-    private void checkChangedLearnableSpells(EntityWorld entityWorld, LearnableSpellsComponent learnableSpellsComponent) {
-        if (learnableSpellsComponent != null) {
-            int[] spells = learnableSpellsComponent.getSpellsEntities();
-            screenController.setPlayer_SpellInformations_LearnableSpells(createSpellInformations(entityWorld, spells, false));
+    private boolean haveSpellsInternallyChanged(EntityWorld entityWorld, ComponentMapObserver observer, int[] spellEntities) {
+        for (int spellEntity : spellEntities) {
+            if (hasSpellInternallyChanged(entityWorld, observer, spellEntity)) {
+                return true;
+            }
         }
+        return false;
     }
 
-    private void checkChangedSpells(EntityWorld entityWorld, SpellsComponent spellsComponent) {
-        if (spellsComponent != null) {
-            int[] spells = spellsComponent.getSpellsEntities();
-            screenController.setPlayer_SpellInformations_Spells(createSpellInformations(entityWorld, spells, false));
+    private boolean hasSpellInternallyChanged(EntityWorld entityWorld, ComponentMapObserver observer, int spellEntity) {
+        // Components directly on spell
+        if (isNewOrChanged(observer, spellEntity, NameComponent.class, DescriptionComponent.class, DeltaDescriptionComponent.class, CooldownComponent.class, CastCostComponent.class)) {
+            return true;
         }
+        // Nested components
+        CastCostComponent castCostComponent = entityWorld.getComponent(spellEntity, CastCostComponent.class);
+        if (castCostComponent != null) {
+            int costEntity = castCostComponent.getCostEntity();
+            return isNewOrChanged(observer, costEntity, ManaCostComponent.class);
+        }
+        return false;
     }
 
-    private void checkChangedMapSpells(EntityWorld entityWorld, MapSpellsComponent mapSpellsComponent) {
-        if (mapSpellsComponent != null) {
-            int[] spells = mapSpellsComponent.getSpellsEntities();
-            screenController.setPlayer_SpellInformations_MapSpells(createSpellInformations(entityWorld, spells, false));
-        }
+    private boolean isNewOrChanged(ComponentMapObserver observer, int entity, Class<?>... componentClass) {
+        return (observer.getNew().hasAnyComponent(entity, componentClass) || observer.getChanged().hasAnyComponent(entity, componentClass));
     }
 
     public static SpellInformation[] createSpellInformations(EntityWorld entityWorld, int[] spellEntities, boolean useDeltaDescriptions) {
