@@ -136,20 +136,16 @@ public class Util{
         }
         return null;
     }
-    
-    public static <T> T createObjectByClass(Class<T> objectClass){
-        return createObjectByClassName(objectClass.getName(), objectClass);
-    }
-    
-    public static <T> T createObjectByClassName(String className, Class<T> convertionClass){
-        try{
+
+    public static <T> T createObjectByClassName(String className) {
+        try {
             return (T) Class.forName(className).newInstance();
-        }catch(Exception ex){
+        } catch (ReflectiveOperationException ex) {
             System.out.println("Error while creating object of class '" + className + "'.");
         }
         return null;
     }
-    
+
     public static int getUniqueObjectID(Object object){
         return object.hashCode();
     }

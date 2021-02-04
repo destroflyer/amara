@@ -373,7 +373,7 @@ public class MapFileHandler{
     }
 
     private static Map createMapObject(Element root, String mapName){
-        Map map = Util.createObjectByClassName(root.getAttributeValue("class"), Map.class);
+        Map map = Util.createObjectByClassName(root.getAttributeValue("class"));
         map.setName(mapName);
         return map;
     }

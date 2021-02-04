@@ -19,7 +19,7 @@ public class MaterialFactory {
         return material;
     }
 
-    public static Material generateLightingMaterial(AssetManager assetManager, ColorRGBA color){
+    public static Material generateLightingMaterial(AssetManager assetManager, ColorRGBA color) {
         Material material = new Material(assetManager, DEFINITION_NAME_LIGHTING);
         material.setBoolean("UseMaterialColors", true);
         material.setColor("Diffuse",  color);

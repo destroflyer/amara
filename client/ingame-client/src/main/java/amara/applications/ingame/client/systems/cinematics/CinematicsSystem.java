@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.client.systems.cinematics;
 
 import amara.applications.ingame.entitysystem.components.game.*;
@@ -11,10 +7,6 @@ import amara.libraries.applications.display.appstates.CinematicAppState;
 import amara.libraries.applications.display.cinematics.Cinematic;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
 public class CinematicsSystem implements EntitySystem {
 
     public CinematicsSystem(CinematicAppState cinematicAppState) {
@@ -31,7 +23,7 @@ public class CinematicsSystem implements EntitySystem {
 
     private void checkCinematicComponent(CinematicComponent cinematicComponent) {
         if (cinematicComponent != null) {
-            Cinematic cinematic = Util.createObjectByClassName(cinematicComponent.getCinematicClassName(), Cinematic.class);
+            Cinematic cinematic = Util.createObjectByClassName(cinematicComponent.getCinematicClassName());
             cinematicAppState.playCinematic(cinematic);
         }
     }

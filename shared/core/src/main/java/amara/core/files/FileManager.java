@@ -201,25 +201,7 @@ public class FileManager{
         }
     }
 
-    public static boolean existsFile(String filePath){
-        File file = new File(filePath);
-        return file.exists();
-    }
-    
-    public static boolean deleteFile(String filePath){
-        return deleteFile(new File(filePath));
-    }
-    
-    public static boolean deleteFile(File file){
-        if(file.isDirectory()){
-            String[] files = file.list();
-            for(String subFile : files){
-                boolean success = deleteFile(new File(file, subFile));
-                if(!success){
-                    return false;
-                }
-            }
-        }
-        return file.delete();
+    public static boolean existsFile(String filePath) {
+        return new File(filePath).exists();
     }
 }

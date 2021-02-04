@@ -157,7 +157,7 @@ public class ModelSkin {
                 } else if(currentMaterialElement.getName().equals("texture")) {
                     String textureFilePath = (getResourcesFilePath(sourceName) + currentMaterialElement.getText());
                     material = MaterialFactory.generateLightingMaterial(assetManager, textureFilePath);
-                    //[jME 3.1 SNAPSHOT] Hardware skinning currently doesn't seem to support normal maps correctly
+                    // [jME 3.1 SNAPSHOT] Hardware skinning currently doesn't seem to support normal maps correctly
                     if (!Settings.getBoolean("hardware_skinning")) {
                         tryLoadTexture(assetManager, material, "NormalMap", currentMaterialElement.getAttributeValue("normalMap"), sourceName);
                     }
@@ -171,7 +171,7 @@ public class ModelSkin {
                         MaterialFactory.setFilter_Nearest(material);
                     }
                     try {
-                        Geometry child = (Geometry) JMonkeyUtil.getChild(node, i);
+                        Geometry child = (Geometry) node.getChild(i);
                         if (getAttributeValue(currentMaterialElement, "alpha", false)) {
                             child.setQueueBucket(RenderQueue.Bucket.Transparent);
                             MaterialFactory.setTransparent(material, true);
@@ -221,7 +221,7 @@ public class ModelSkin {
         if (modifiersElement != null){
             for (Object childObject : modifiersElement.getChildren("modifier")) {
                 Element modifierElement = (Element) childObject;
-                ModelModifier modelModifier = Util.createObjectByClassName(modifierElement.getText(), ModelModifier.class);
+                ModelModifier modelModifier = Util.createObjectByClassName(modifierElement.getText());
                 if (modelModifier != null) {
                     modelModifiers.add(modelModifier);
                 }

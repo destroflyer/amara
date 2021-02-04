@@ -12,7 +12,7 @@ fi
 
 # Build
 mkdir workspace
-echo "../assets/" > workspace/assets.ini
+echo -n "../assets/" > workspace/assets.ini
 mvn clean install
 
 # Deploy (Client)
@@ -20,7 +20,7 @@ rm -rf "${CLIENT}"*
 mv assets "${CLIENT}"
 mv client/master-client-application/target/libs "${CLIENT}"
 mv client/master-client-application/target/master-client-application-0.8.jar "${CLIENT}Amara.jar"
-echo "./assets/" > "${CLIENT}assets.ini"
+echo -n "./assets/" > "${CLIENT}assets.ini"
 curl https://destrostudios.com:8080/apps/1/updateFiles
 
 # Deploy (Server)

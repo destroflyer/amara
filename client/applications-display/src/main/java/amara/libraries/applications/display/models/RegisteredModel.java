@@ -3,7 +3,6 @@ package amara.libraries.applications.display.models;
 import amara.core.settings.Settings;
 import amara.libraries.applications.display.JMonkeyUtil;
 import com.jme3.animation.*;
-import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 
 public class RegisteredModel {
@@ -48,7 +47,7 @@ public class RegisteredModel {
         AnimChannel animationChannel = getAnimationChannel();
         try {
             animationChannel.setAnim(animationName);
-        } catch(IllegalArgumentException ex) {
+        } catch (IllegalArgumentException ex) {
             stopAndRewindAnimation();
         }
     }
