@@ -13,10 +13,6 @@ public class ModelViewerApplication extends DisplayApplication {
         new ModelViewerApplication().start();
     }
 
-    public ModelViewerApplication() {
-        setShowSettings(false);
-    }
-
     @Override
     public void simpleInitApp() {
         super.simpleInitApp();

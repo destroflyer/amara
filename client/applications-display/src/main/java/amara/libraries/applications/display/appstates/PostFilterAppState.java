@@ -1,11 +1,13 @@
 package amara.libraries.applications.display.appstates;
 
 import java.util.LinkedList;
+
+import amara.libraries.applications.display.DisplayApplication;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.post.*;
 
-public class PostFilterAppState extends BaseDisplayAppState {
+public class PostFilterAppState extends BaseDisplayAppState<DisplayApplication> {
 
     private FilterPostProcessor filterPostProcessor;
     private LinkedList<Filter> queuedFilters = new LinkedList<>();
@@ -38,7 +40,7 @@ public class PostFilterAppState extends BaseDisplayAppState {
 
     public void addFilter(final Filter filter) {
         if (isInitialized()) {
-            mainApplication.enqueue(() -> filterPostProcessor.addFilter(filter));
+            filterPostProcessor.addFilter(filter);
         } else {
             queuedFilters.add(filter);
         }
@@ -46,7 +48,7 @@ public class PostFilterAppState extends BaseDisplayAppState {
 
     public void removeFilter(final Filter filter) {
         if (isInitialized()) {
-            mainApplication.enqueue(() -> filterPostProcessor.removeFilter(filter));
+            filterPostProcessor.removeFilter(filter);
         } else {
             queuedFilters.remove(filter);
         }

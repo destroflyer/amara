@@ -180,23 +180,22 @@ public class AudioSystem implements EntitySystem{
         }
         return false;
     }
-    
-    private void updateAudioVolume(EntityWorld entityWorld, int audioEntity){
+
+    private void updateAudioVolume(EntityWorld entityWorld, int audioEntity) {
         AudioNode audioNode = audioNodes.get(audioEntity);
-        float volume = Settings.getFloat("audio_volume");
         AudioVolumeComponent audioVolumeComponent = entityWorld.getComponent(audioEntity, AudioVolumeComponent.class);
-        if(audioVolumeComponent != null){
-            volume *= audioVolumeComponent.getVolume();
-        }
-        if(!entityWorld.hasComponent(audioEntity, AudioGlobalComponent.class)){
+        float customVolume = ((audioVolumeComponent != null) ? audioVolumeComponent.getVolume() : 1);
+        audioNode.setUserData("audio_custom_volume", customVolume);
+        float volume = Settings.getFloat("audio_volume") * customVolume;
+        if (!entityWorld.hasComponent(audioEntity, AudioGlobalComponent.class)) {
             tmpAudioLocation.set(audioNode.getLocalTranslation().getX(), audioNode.getLocalTranslation().getZ());
-            if(!ingameCameraAppState.isVisible(tmpAudioLocation)){
+            if (!ingameCameraAppState.isVisible(tmpAudioLocation)) {
                 volume = 0;
             }
         }
         audioNode.setVolume(volume);
     }
-    
+
     private void updateAudioPitch(EntityWorld entityWorld, AudioNode audioNode){
         float gameSpeed = entityWorld.getComponent(Map.GAME_ENTITY, GameSpeedComponent.class).getSpeed();
         float audioSpeed = Math.max(0.5f, Math.min(gameSpeed, 2));

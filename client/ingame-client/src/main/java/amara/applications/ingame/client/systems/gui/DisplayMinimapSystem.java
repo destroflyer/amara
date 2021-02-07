@@ -4,11 +4,6 @@ import java.awt.image.BufferedImage;
 import java.awt.Color;
 
 import amara.applications.ingame.client.appstates.PlayerAppState;
-import amara.applications.ingame.shared.maps.cameras.MapCamera_TopDown;
-import amara.libraries.applications.display.ingame.appstates.IngameCameraAppState;
-import com.jme3.math.Vector2f;
-import com.jme3.math.Vector3f;
-import com.jme3.texture.Texture2D;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.client.systems.filters.FogOfWarSystem;
 import amara.applications.ingame.client.systems.information.PlayerTeamSystem;
@@ -17,10 +12,15 @@ import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.entitysystem.components.units.types.*;
 import amara.applications.ingame.shared.maps.Map;
+import amara.applications.ingame.shared.maps.cameras.MapCamera_TopDown;
 import amara.core.files.FileAssets;
 import amara.core.settings.Settings;
+import amara.libraries.applications.display.ingame.appstates.IngameCameraAppState;
 import amara.libraries.applications.display.materials.PaintableImage;
 import amara.libraries.entitysystem.*;
+import com.jme3.math.Vector2f;
+import com.jme3.math.Vector3f;
+import com.jme3.texture.Texture2D;
 
 public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD> {
 
@@ -41,8 +41,6 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
         this.ingameCameraAppState = ingameCameraAppState;
         scaleX_Map = (minimapImage.getWidth() / map.getMinimapInformation().getWidth());
         scaleY_Map = (minimapImage.getHeight() / map.getMinimapInformation().getHeight());
-        scaleX_Fog = (fogOfWarSystem.getFogImage().getWidth() / map.getPhysicsInformation().getWidth());
-        scaleY_Fog = (fogOfWarSystem.getFogImage().getHeight() / map.getPhysicsInformation().getHeight());
         BufferedImage backgroundImage = FileAssets.getImage("Maps/" + map.getName() + "/minimap.png", minimapImage.getWidth(), minimapImage.getHeight());
         minimapImage.loadImage(backgroundImage, false);
         backgroundImageData = minimapImage.getData().clone();
@@ -62,8 +60,6 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
     private Texture2D texture2D = new Texture2D();
     private float scaleX_Map;
     private float scaleY_Map;
-    private float scaleX_Fog;
-    private float scaleY_Fog;
     private byte[] backgroundImageData;
     private BufferedImage towerImage;
     private boolean hasCameraMovedSinceLastUpdate;
@@ -147,7 +143,10 @@ public class DisplayMinimapSystem extends GUIDisplaySystem<ScreenController_HUD>
         }
     }
 
-    private void paintFogOfWar(){
+    private void paintFogOfWar() {
+        // Recalculating is easier than subscribing (the fog of war resolution setting can be changed at runtime)
+        float scaleX_Fog = (fogOfWarSystem.getFogImage().getWidth() / map.getPhysicsInformation().getWidth());
+        float scaleY_Fog = (fogOfWarSystem.getFogImage().getHeight() / map.getPhysicsInformation().getHeight());
         for (int x = 0; x < minimapImage.getWidth(); x++) {
             for (int y = 0; y < minimapImage.getHeight(); y++) {
                 float mapX = (map.getPhysicsInformation().getWidth() - (((x / scaleX_Map) + map.getMinimapInformation().getX())));

@@ -448,7 +448,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                 break;
 
             case PAINT_TERRAIN_ALPHAMAP:
-                float y2 = getAppState(MapAppState.class).getMapTerrain().getTerrain().getHeight(currentHoveredLocation);
+                float y2 = getAppState(MapAppState.class).getMapTerrain().getHeight(currentHoveredLocation);
                 toolCursor.setLocalTranslation(toolCursor.getLocalTranslation().getX(), y2, toolCursor.getLocalTranslation().getZ());
                 break;
         }

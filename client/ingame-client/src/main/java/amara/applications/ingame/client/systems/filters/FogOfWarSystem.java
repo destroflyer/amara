@@ -1,6 +1,7 @@
 package amara.applications.ingame.client.systems.filters;
 
 import java.util.ArrayList;
+
 import com.jme3.asset.AssetManager;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
@@ -10,6 +11,7 @@ import amara.applications.ingame.entitysystem.components.physics.*;
 import amara.applications.ingame.entitysystem.components.units.*;
 import amara.applications.ingame.shared.maps.MapPhysicsInformation;
 import amara.core.settings.Settings;
+import amara.core.settings.SettingsSubscriptions;
 import amara.libraries.applications.display.appstates.PostFilterAppState;
 import amara.libraries.applications.display.filters.FogOfWarFilter;
 import amara.libraries.applications.display.materials.*;
@@ -21,8 +23,10 @@ import amara.libraries.physics.shapes.vision.*;
 
 public class FogOfWarSystem implements EntitySystem {
 
-    public FogOfWarSystem(PlayerTeamSystem playerTeamSystem, PostFilterAppState postFilterAppState, final MapPhysicsInformation mapPhysicsInformation) {
+    public FogOfWarSystem(PlayerTeamSystem playerTeamSystem, PostFilterAppState postFilterAppState, MapPhysicsInformation mapPhysicsInformation, SettingsSubscriptions settingsSubscriptions) {
         this.playerTeamSystem = playerTeamSystem;
+        this.postFilterAppState = postFilterAppState;
+        this.mapPhysicsInformation = mapPhysicsInformation;
         ArrayList<Vector2D> mapBorderCcwOutline = new ArrayList<>();
         mapBorderCcwOutline.add(new Vector2D(mapPhysicsInformation.getWidth(), 0));
         mapBorderCcwOutline.add(new Vector2D(mapPhysicsInformation.getWidth(), mapPhysicsInformation.getHeight()));
@@ -31,6 +35,43 @@ public class FogOfWarSystem implements EntitySystem {
         teamVision = new MergedVision(mapBorderCcwOutline, mapPhysicsInformation.generateVisionObstacles());
         // For fog of war, the obstacles are added reversed, so they are not darkened by the fog - Therefore, they have to be reversed when the player is inside
         teamVision.setReverseSightInsideObstacles(true);
+        settingsSubscriptions.subscribeFloat("fog_of_war_resolution", fogOfWarResolution -> {
+            isRecreationNeeded = true;
+        });
+    }
+    private PlayerTeamSystem playerTeamSystem;
+    private PostFilterAppState postFilterAppState;
+    private MapPhysicsInformation mapPhysicsInformation;
+    private MergedVision teamVision;
+    private PaintableImage fogImage;
+    private Texture2D fogTexture = new Texture2D();
+    private ImageChannelRaster fogRaster;
+    private FogOfWarFilter fogOfWarFilter;
+    private boolean isRecreationNeeded;
+    private boolean isUpdateNeeded;
+    private float timeSinceLastUpdate;
+    private boolean displayAllSight;
+
+    @Override
+    public void update(EntityWorld entityWorld, float deltaSeconds) {
+        if (isRecreationNeeded) {
+            recreate();
+            isRecreationNeeded = false;
+            isUpdateNeeded = true;
+        }
+        timeSinceLastUpdate += deltaSeconds;
+        if (isUpdateNeeded || (timeSinceLastUpdate > Settings.getFloat("fog_of_war_update_interval"))) {
+            checkChangedEntities(entityWorld);
+            if (isUpdateNeeded) {
+                updateFogOfWar(entityWorld);
+            }
+        }
+    }
+
+    private void recreate() {
+        if (fogOfWarFilter != null) {
+            postFilterAppState.removeFilter(fogOfWarFilter);
+        }
         float resolutionFactor = Settings.getFloat("fog_of_war_resolution");
         fogImage = new PaintableImage((int) (mapPhysicsInformation.getWidth() * resolutionFactor), (int) (mapPhysicsInformation.getHeight() * resolutionFactor));
         fogRaster = new ImageChannelRaster(fogImage, resolutionFactor, 80, 255, 0);
@@ -45,63 +86,33 @@ public class FogOfWarSystem implements EntitySystem {
         };
         postFilterAppState.addFilter(fogOfWarFilter);
     }
-    private PlayerTeamSystem playerTeamSystem;
-    private MergedVision teamVision;
-    private PaintableImage fogImage;
-    private Texture2D fogTexture = new Texture2D();
-    private ImageChannelRaster fogRaster;
-    private FogOfWarFilter fogOfWarFilter;
-    private boolean isInitialized;
-    private float timeSinceLastUpdate;
-    private boolean isUpdateNeeded;
-    private boolean displayAllSight;
 
-    @Override
-    public void update(EntityWorld entityWorld, float deltaSeconds) {
-        if (isInitialized) {
-            timeSinceLastUpdate += deltaSeconds;
-            if (isUpdateNeeded || (timeSinceLastUpdate > Settings.getFloat("fog_of_war_update_interval"))) {
-                updateFogOfWar(entityWorld);
-            }
-        } else {
-            updateFogOfWar(entityWorld);
-            isInitialized = true;
-        }
-    }
-
-    private void updateFogOfWar(EntityWorld entityWorld) {
-        if (!isUpdateNeeded) {
-            ComponentMapObserver observer = entityWorld.requestObserver(this, IsHiddenAreaComponent.class, PositionComponent.class, SightRangeComponent.class, TeamComponent.class);
-            // Hidden areas
-            for (int entity : observer.getNew().getEntitiesWithAny(IsHiddenAreaComponent.class)) {
-                HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
-                if (hitboxComponent != null) {
-                    SimpleConvexPolygon simpleConvexPolygon = (SimpleConvexPolygon) hitboxComponent.getShape();
-                    ConvexedOutline convexedOutline = new ConvexedOutline(simpleConvexPolygon);
-                    teamVision.setObstacle(entity, new VisionObstacle(convexedOutline, false));
-                    isUpdateNeeded = true;
-                }
-            }
-            for (int entity : observer.getRemoved().getEntitiesWithAny(IsHiddenAreaComponent.class)) {
-                teamVision.removeObstacle(entity);
+    private void checkChangedEntities(EntityWorld entityWorld) {
+        ComponentMapObserver observer = entityWorld.requestObserver(this, IsHiddenAreaComponent.class, PositionComponent.class, SightRangeComponent.class, TeamComponent.class);
+        // Hidden areas
+        for (int entity : observer.getNew().getEntitiesWithAny(IsHiddenAreaComponent.class)) {
+            HitboxComponent hitboxComponent = entityWorld.getComponent(entity, HitboxComponent.class);
+            if (hitboxComponent != null) {
+                SimpleConvexPolygon simpleConvexPolygon = (SimpleConvexPolygon) hitboxComponent.getShape();
+                ConvexedOutline convexedOutline = new ConvexedOutline(simpleConvexPolygon);
+                teamVision.setObstacle(entity, new VisionObstacle(convexedOutline, false));
                 isUpdateNeeded = true;
             }
-            // Units
-            for (int entity : observer.getNew().getEntitiesWithAny(PositionComponent.class, SightRangeComponent.class, TeamComponent.class)) {
-                requireUpdateIfRelevant(entityWorld, entity);
-            }
-            for (int entity : observer.getChanged().getEntitiesWithAny(PositionComponent.class, SightRangeComponent.class, TeamComponent.class)) {
-                requireUpdateIfRelevant(entityWorld, entity);
-            }
-            for (int entity : observer.getRemoved().getEntitiesWithAny(PositionComponent.class, SightRangeComponent.class, TeamComponent.class)) {
-                requireUpdateIfIsOrWasRelevant(entityWorld, observer, entity);
-            }
         }
-        if (isUpdateNeeded) {
-            updateFogTexture_PlayerSight(entityWorld);
-            isUpdateNeeded = false;
+        for (int entity : observer.getRemoved().getEntitiesWithAny(IsHiddenAreaComponent.class)) {
+            teamVision.removeObstacle(entity);
+            isUpdateNeeded = true;
         }
-        timeSinceLastUpdate = 0;
+        // Units
+        for (int entity : observer.getNew().getEntitiesWithAny(PositionComponent.class, SightRangeComponent.class, TeamComponent.class)) {
+            requireUpdateIfRelevant(entityWorld, entity);
+        }
+        for (int entity : observer.getChanged().getEntitiesWithAny(PositionComponent.class, SightRangeComponent.class, TeamComponent.class)) {
+            requireUpdateIfRelevant(entityWorld, entity);
+        }
+        for (int entity : observer.getRemoved().getEntitiesWithAny(PositionComponent.class, SightRangeComponent.class, TeamComponent.class)) {
+            requireUpdateIfIsOrWasRelevant(entityWorld, observer, entity);
+        }
     }
 
     private void requireUpdateIfRelevant(EntityWorld entityWorld, int entity) {
@@ -124,14 +135,7 @@ public class FogOfWarSystem implements EntitySystem {
         }
     }
 
-    public void setDisplayAllSight(boolean displayAllSight) {
-        if (displayAllSight != this.displayAllSight) {
-            this.displayAllSight = displayAllSight;
-            isUpdateNeeded = true;
-        }
-    }
-
-    private void updateFogTexture_PlayerSight(EntityWorld entityWorld) {
+    private void updateFogOfWar(EntityWorld entityWorld) {
         resetFogTexture();
         for (int entity : entityWorld.getEntitiesWithAll(PositionComponent.class, SightRangeComponent.class)) {
             if (isEntitySightIncluded(entityWorld, entity)) {
@@ -145,6 +149,15 @@ public class FogOfWarSystem implements EntitySystem {
         }
         fogTexture.setImage(fogImage.getImage());
         fogOfWarFilter.setFog(fogTexture);
+        isUpdateNeeded = false;
+        timeSinceLastUpdate = 0;
+    }
+
+    private void resetFogTexture() {
+        int bytesCount = (4 * fogImage.getWidth() * fogImage.getHeight());
+        for (int i = 0; i < bytesCount; i += 4) {
+            fogImage.setPixel(i, 80);
+        }
     }
 
     private boolean isEntitySightIncluded(EntityWorld entityWorld, int entity) {
@@ -156,10 +169,10 @@ public class FogOfWarSystem implements EntitySystem {
         return (displayAllSight || playerTeamSystem.isAllied(teamComponent));
     }
 
-    private void resetFogTexture() {
-        int bytesCount = (4 * fogImage.getWidth() * fogImage.getHeight());
-        for (int i = 0; i < bytesCount; i += 4) {
-            fogImage.setPixel(i, 80);
+    public void setDisplayAllSight(boolean displayAllSight) {
+        if (displayAllSight != this.displayAllSight) {
+            this.displayAllSight = displayAllSight;
+            isUpdateNeeded = true;
         }
     }
 

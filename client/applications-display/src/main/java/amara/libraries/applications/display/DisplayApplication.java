@@ -1,5 +1,9 @@
 package amara.libraries.applications.display;
 
+import amara.core.GameInfo;
+import amara.core.files.FileAssets;
+import amara.core.settings.Settings;
+import amara.libraries.applications.display.comparators.LayerGeometryComparator_Opaque;
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.collision.CollisionResults;
@@ -9,20 +13,24 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Spatial;
 import com.jme3.system.AppSettings;
-import amara.core.GameInfo;
-import amara.core.files.FileAssets;
-import amara.libraries.applications.display.comparators.LayerGeometryComparator_Opaque;
 
 public class DisplayApplication extends SimpleApplication {
 
     public DisplayApplication() {
         JMonkeyUtil.disableLogger();
+        loadSettings();
+    }
+
+    private void loadSettings() {
         settings = new AppSettings(true);
-        settings.setTitle(GameInfo.NAME);
-        settings.setWidth(1280);
-        settings.setHeight(720);
-        settings.setVSync(true);
-        setPauseOnLostFocus(false);
+        settings.setTitle(GameInfo.getClientTitle());
+        settings.setIcons(GameInfo.ICONS);
+        settings.setFullscreen(Settings.getBoolean("fullscreen"));
+        settings.setWidth(Settings.getInteger("resolution_width"));
+        settings.setHeight(Settings.getInteger("resolution_height"));
+        settings.setSamples(Settings.getInteger("antialiasing"));
+        settings.setVSync(Settings.getBoolean("vsync"));
+        setShowSettings(false);
     }
 
     @Override
@@ -31,6 +39,7 @@ public class DisplayApplication extends SimpleApplication {
         inputManager.deleteMapping(SimpleApplication.INPUT_MAPPING_EXIT);
         viewPort.getQueue().setGeometryComparator(RenderQueue.Bucket.Opaque, new LayerGeometryComparator_Opaque());
         setDisplayStatView(false);
+        setPauseOnLostFocus(false);
     }
 
     @Override

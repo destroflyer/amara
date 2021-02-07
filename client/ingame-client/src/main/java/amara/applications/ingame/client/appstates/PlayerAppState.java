@@ -73,10 +73,8 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         PostFilterAppState postFilterAppState = getAppState(PostFilterAppState.class);
         localEntitySystemAppState.addEntitySystem(new PlayerDeathDisplaySystem(this::getPlayerEntity, postFilterAppState));
         localEntitySystemAppState.addEntitySystem(new ShopAnimationSystem(this::getPlayerEntity, localEntitySystemAppState.getEntitySceneMap()));
-        if (Settings.getFloat("fog_of_war_update_interval") != -1) {
-            fogOfWarSystem = new FogOfWarSystem(playerTeamSystem, postFilterAppState, mapAppState.getMap().getPhysicsInformation());
-            localEntitySystemAppState.addEntitySystem(fogOfWarSystem);
-        }
+        fogOfWarSystem = new FogOfWarSystem(playerTeamSystem, postFilterAppState, mapAppState.getMap().getPhysicsInformation(), getAppState(SettingsAppState.class));
+        localEntitySystemAppState.addEntitySystem(fogOfWarSystem);
         ScreenController_HUD screenController_HUD = getAppState(NiftyAppState.class).getScreenController(ScreenController_HUD.class);
         ScreenController_Shop screenController_Shop = getAppState(NiftyAppState.class).getScreenController(ScreenController_Shop.class);
         localEntitySystemAppState.addEntitySystem(new DisplayGameTimeSystem(this, screenController_HUD));

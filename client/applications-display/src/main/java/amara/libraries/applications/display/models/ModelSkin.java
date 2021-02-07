@@ -148,16 +148,16 @@ public class ModelSkin {
             for (int i = 0; i < materialElements.size(); i++){
                 Element currentMaterialElement = materialElements.get(i);
                 String sourceName = currentMaterialElement.getAttributeValue("source", name);
-                String materialDefintion = currentMaterialElement.getText();
+                String materialDefinition = currentMaterialElement.getText();
                 Material material = null;
                 if (currentMaterialElement.getName().equals("color")) {
-                    float[] colorComponents = Util.parseToFloatArray(materialDefintion.split(","));
+                    float[] colorComponents = Util.parseToFloatArray(materialDefinition.split(","));
                     ColorRGBA colorRGBA = new ColorRGBA(colorComponents[0], colorComponents[1], colorComponents[2], colorComponents[3]);
                     material = MaterialFactory.generateLightingMaterial(assetManager, colorRGBA);
-                } else if(currentMaterialElement.getName().equals("texture")) {
+                } else if (currentMaterialElement.getName().equals("texture")) {
                     String textureFilePath = (getResourcesFilePath(sourceName) + currentMaterialElement.getText());
                     material = MaterialFactory.generateLightingMaterial(assetManager, textureFilePath);
-                    // [jME 3.1 SNAPSHOT] Hardware skinning currently doesn't seem to support normal maps correctly
+                    // [jME 3.2.1 Stable] Hardware skinning currently doesn't seem to support normal maps correctly / different
                     if (!Settings.getBoolean("hardware_skinning")) {
                         tryLoadTexture(assetManager, material, "NormalMap", currentMaterialElement.getAttributeValue("normalMap"), sourceName);
                     }

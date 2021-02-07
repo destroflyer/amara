@@ -7,20 +7,17 @@ import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.*;
 import amara.tools.editors.map.appstates.*;
 
-/**
- * @author Carl
- */
-public class MapEditorApplication extends DisplayApplication{
-    
-    public static void main(String[] args){
+public class MapEditorApplication extends DisplayApplication {
+
+    public static void main(String[] args) {
         Launcher_Core.initialize();
-        MapEditorApplication application = new MapEditorApplication();
-        application.start();
+        new MapEditorApplication().start();
     }
 
     @Override
-    public void simpleInitApp(){
+    public void simpleInitApp() {
         super.simpleInitApp();
+        stateManager.attach(new SettingsAppState());
         stateManager.attach(new NiftyAppState());
         stateManager.attach(new NiftyAppState_MapEditor());
         stateManager.attach(new AudioAppState());

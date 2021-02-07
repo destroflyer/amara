@@ -145,8 +145,7 @@ public class IngameSettings extends SettingsCategory {
                         new Setting("fog_of_war_resolution", "F.o.W. Resolution", new SliderType(1, 0.5f, 10, 0.1f, 0.5f)),
                         new Setting("fog_of_war_update_interval", "F.o.W. Update Interval", new SliderType(0.02f, 0, 1, 0.005f, 0.01f)),
                         new Setting("minimap_update_interval", "Minimap Update Interval", new SliderType(0.04f, 0, 1, 0.005f, 0.01f)),
-                        new Setting("hover_outline_thickness", "Hover outline thickness", new SliderType(0.1f, 0, 0.5f, 0.005f, 0.05f)),
-                        new Setting("gui_high_quality", "GUI High Quality", new BooleanType(true))
+                        new Setting("hover_outline_thickness", "Hover outline thickness", new SliderType(0.1f, 0, 0.5f, 0.005f, 0.05f))
                     }
                 ),
             }),

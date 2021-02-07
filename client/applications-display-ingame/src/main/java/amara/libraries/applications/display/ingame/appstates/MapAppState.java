@@ -31,7 +31,6 @@ import amara.applications.ingame.shared.maps.cameras.*;
 import amara.applications.ingame.shared.maps.filters.*;
 import amara.applications.ingame.shared.maps.lights.*;
 import amara.applications.ingame.shared.maps.visuals.*;
-import amara.core.settings.Settings;
 import amara.libraries.applications.display.*;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.maps.*;
@@ -51,14 +50,16 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
     private HashMap<ModelObject, MapVisual> modelObjectsVisuals = new HashMap<>();
     private Node cameraNode = new Node();
     private ChaseCamera chaseCamera;
+    private HashMap<MapLight_Directional_Shadows, DirectionalLightShadowFilter> shadowFilters = new HashMap<>();
+    private HashMap<MapFilter, SSAOFilter> ssaoFilters = new HashMap<>();
     private ArrayList<Filter> activeFilters = new ArrayList<>();
 
     @Override
     public void initialize(AppStateManager stateManager, Application application) {
         super.initialize(stateManager, application);
         mapHeightmap = new MapHeightmap(map.getName(), map.getPhysicsInformation());
-        mapTerrain = new MapTerrain(map, mainApplication.getAssetManager());
-        mainApplication.getRootNode().attachChild(mapTerrain.getTerrain());
+        mapTerrain = new MapTerrain(map, getAppState(SettingsAppState.class), mainApplication.getAssetManager());
+        mainApplication.getRootNode().attachChild(mapTerrain.getNode());
         mainApplication.getRootNode().attachChild(visualsNode);
         mainApplication.getRootNode().attachChild(cameraNode);
         initializeGroundHeightPlane();
@@ -112,31 +113,36 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
         }
     }
 
-    private void initializeLights(){
+    private void initializeLights() {
         LightAppState lightAppState = getAppState(LightAppState.class);
         lightAppState.removeAll();
-        for(MapLight mapLight : map.getLights().getMapLights()){
+        for (MapLight mapLight : map.getLights().getMapLights()) {
             Light light = null;
-            if(mapLight instanceof MapLight_Ambient){
+            if (mapLight instanceof MapLight_Ambient) {
                 light = new AmbientLight();
-            }
-            else if(mapLight instanceof MapLight_Directional){
+            } else if (mapLight instanceof MapLight_Directional) {
                 MapLight_Directional mapLight_Directional = (MapLight_Directional) mapLight;
                 DirectionalLight directionalLight = new DirectionalLight();
                 directionalLight.setDirection(mapLight_Directional.getDirection());
                 light = directionalLight;
                 MapLight_Directional_Shadows shadows = mapLight_Directional.getShadows();
-                if(shadows != null){
-                    int shadowQuality = Settings.getInteger("shadow_quality");
-                    if(shadowQuality > 0){
-                        DirectionalLightShadowFilter shadowFilter = new DirectionalLightShadowFilter(mainApplication.getAssetManager(), 2048, shadowQuality);
-                        shadowFilter.setLight(directionalLight);
-                        shadowFilter.setShadowIntensity(shadows.getIntensity());
-                        lightAppState.addShadowFilter(shadowFilter);
-                    }
+                if (shadows != null) {
+                    getAppState(SettingsAppState.class).subscribeInteger("shadow_quality", shadowQuality -> {
+                        DirectionalLightShadowFilter shadowFilter = shadowFilters.remove(shadows);
+                        if (shadowFilter != null) {
+                            removeFilter(shadowFilter);
+                        }
+                        if (shadowQuality > 0) {
+                            shadowFilter = new DirectionalLightShadowFilter(mainApplication.getAssetManager(), 2048, shadowQuality);
+                            shadowFilter.setLight(directionalLight);
+                            shadowFilter.setShadowIntensity(shadows.getIntensity());
+                            addFilter(shadowFilter);
+                            shadowFilters.put(shadows, shadowFilter);
+                        }
+                    });
                 }
             }
-            if(light != null){
+            if (light != null) {
                 light.setColor(mapLight.getColor());
                 lightAppState.addLight(light);
             }
@@ -146,13 +152,20 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
     private void initializeFilters() {
         for (MapFilter mapFilter : map.getFilters()) {
             if (mapFilter instanceof MapFilter_SSAO) {
-                if (Settings.getBoolean("ssao")) {
-                    MapFilter_SSAO mapFilter_SSAO = (MapFilter_SSAO) mapFilter;
-                    SSAOFilter ssaoFilter = new SSAOFilter(mapFilter_SSAO.getSampleRadius(), mapFilter_SSAO.getIntensity(), mapFilter_SSAO.getScale(), mapFilter_SSAO.getBias());
-                    // Currently approximateNormals=false is not supported due to the way the ground textures (e.g. spell indicators) are setup, but it would be a graphical enhancement
-                    ssaoFilter.setApproximateNormals(true);
-                    addFilter(ssaoFilter);
-                }
+                MapFilter_SSAO mapFilter_SSAO = (MapFilter_SSAO) mapFilter;
+                getAppState(SettingsAppState.class).subscribeBoolean("ssao", ssao -> {
+                    SSAOFilter ssaoFilter = ssaoFilters.remove(mapFilter);
+                    if (ssaoFilter != null) {
+                        removeFilter(ssaoFilter);
+                    }
+                    if (ssao) {
+                        ssaoFilter = new SSAOFilter(mapFilter_SSAO.getSampleRadius(), mapFilter_SSAO.getIntensity(), mapFilter_SSAO.getScale(), mapFilter_SSAO.getBias());
+                        // Currently approximateNormals=false is not supported due to the way the ground textures (e.g. spell indicators) are setup, but it would be a graphical enhancement
+                        ssaoFilter.setApproximateNormals(true);
+                        addFilter(ssaoFilter);
+                        ssaoFilters.put(mapFilter, ssaoFilter);
+                    }
+                });
             }
         }
     }
@@ -183,7 +196,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
         if (map.getCamera() instanceof MapCamera_3rdPerson) {
             audioListenerLocation = new Vector3f(camera.getLocation().getX(), 0, camera.getLocation().getZ());
         } else {
-            CollisionResult groundCollision = mainApplication.getRayCastingResults_ScreenCenter(mapTerrain.getTerrain()).getClosestCollision();
+            CollisionResult groundCollision = mainApplication.getRayCastingResults_ScreenCenter(mapTerrain.getNode()).getClosestCollision();
             if (groundCollision != null) {
                 audioListenerLocation = new Vector3f(groundCollision.getContactPoint().getX(), 0, groundCollision.getContactPoint().getZ());
             }
@@ -197,7 +210,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
     @Override
     public void cleanup() {
         super.cleanup();
-        mainApplication.getRootNode().detachChild(mapTerrain.getTerrain());
+        mainApplication.getRootNode().detachChild(mapTerrain.getNode());
         mainApplication.getRootNode().detachChild(visualsNode);
         mainApplication.getRootNode().detachChild(cameraNode);
         if (chaseCamera != null) {
@@ -256,24 +269,28 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
         visualsNode.attachChild(SkyFactory.createSky(mainApplication.getAssetManager(), textureWest, textureEast, textureNorth, textureSouth, textureUp, textureDown));
     }
 
-    private void addFilter(Filter filter){
-        getAppState(PostFilterAppState.class).addFilter(filter);
+    private void addFilter(Filter filter) {
+        mainApplication.enqueue(() -> getAppState(PostFilterAppState.class).addFilter(filter));
         activeFilters.add(filter);
     }
-    
-    private void removeFilters(){
-        for(Filter filter : activeFilters){
-            getAppState(PostFilterAppState.class).removeFilter(filter);
+
+    private void removeFilters() {
+        while (activeFilters.size() > 0) {
+            removeFilter(activeFilters.get(0));
         }
-        activeFilters.clear();
     }
-    
+
+    private void removeFilter(Filter filter) {
+        mainApplication.enqueue(() -> getAppState(PostFilterAppState.class).removeFilter(filter));
+        activeFilters.remove(filter);
+    }
+
     public Vector2f getGroundLocation_Cursor(){
-        return getGroundLocation(mainApplication.getRayCastingResults_Cursor(mapTerrain.getTerrain()));
+        return getGroundLocation(mainApplication.getRayCastingResults_Cursor(mapTerrain.getNode()));
     }
     
     public Vector2f getGroundLocation_ScreenCenter(){
-        return getGroundLocation(mainApplication.getRayCastingResults_ScreenCenter(mapTerrain.getTerrain()));
+        return getGroundLocation(mainApplication.getRayCastingResults_ScreenCenter(mapTerrain.getNode()));
     }
     
     private Vector2f getGroundLocation(CollisionResults groundCollisionResults){

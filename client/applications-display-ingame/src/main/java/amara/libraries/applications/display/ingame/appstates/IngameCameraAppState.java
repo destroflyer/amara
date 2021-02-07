@@ -216,8 +216,8 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
 
     public boolean isVisible(Vector2f mapLocation, int screenExtensionSize) {
         Vector3f screenLocation = mainApplication.getCamera().getScreenCoordinates(getMapLocation(mapLocation));
-        return ((screenLocation.getX() >= (-1 * screenExtensionSize)) && (screenLocation.getX() < (Settings.getInteger("resolution_width") + screenExtensionSize))
-             && (screenLocation.getY() >= (-1 * screenExtensionSize)) && (screenLocation.getY() < (Settings.getInteger("resolution_height") + screenExtensionSize)));
+        return ((screenLocation.getX() >= (-1 * screenExtensionSize)) && (screenLocation.getX() < (mainApplication.getContext().getSettings().getWidth() + screenExtensionSize))
+             && (screenLocation.getY() >= (-1 * screenExtensionSize)) && (screenLocation.getY() < (mainApplication.getContext().getSettings().getHeight() + screenExtensionSize)));
     }
 
     private Vector3f getMapLocation(Vector2f mapLocation) {
