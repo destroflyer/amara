@@ -148,11 +148,15 @@ public class ScreenController_Shop extends GameScreenController {
     }
 
     public void toggleShopVisible() {
-        setShopVisible(!getElementByID("shop_window").isVisible());
+        setShopVisible(!isShopVisible());
     }
 
     public void setShopVisible(boolean isVisible) {
         getElementByID("shop_window").setVisible(isVisible);
+    }
+
+    public boolean isShopVisible() {
+        return getElementByID("shop_window").isVisible();
     }
 
     private void onShopItemFilter(int filterIndex, boolean isSelected) {
