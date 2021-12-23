@@ -8,6 +8,9 @@
         <relativePath>../../</relativePath>
     </parent>
     <artifactId>master-server-application</artifactId>
+    <properties>
+        <version.maven-assembly-plugin>3.3.0</version.maven-assembly-plugin>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.destrostudios.amara</groupId>
@@ -31,6 +34,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>${version.maven-assembly-plugin}</version>
                 <configuration>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
