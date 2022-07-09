@@ -13,7 +13,7 @@ fi
 # Build
 mkdir workspace
 echo -n "../assets/" > workspace/assets.ini
-mvn clean install
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64;mvn clean install
 
 # Deploy (Client)
 rm -rf "${CLIENT}"*

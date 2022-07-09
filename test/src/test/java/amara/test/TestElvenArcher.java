@@ -13,7 +13,7 @@ import amara.applications.ingame.network.messages.objects.commands.casting.CastS
 import com.jme3.math.Vector2f;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 

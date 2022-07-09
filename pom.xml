@@ -24,10 +24,10 @@
         <version.jme3>3.2.1-stable</version.jme3>
         <version.jorbis>0.0.17.4</version.jorbis>
         <version.junit>4.11</version.junit>
-        <version.lombok>1.18.10</version.lombok>
+        <version.lombok>1.18.24</version.lombok>
         <version.maven-compiler-plugin>3.8.1</version.maven-compiler-plugin>
         <version.maven-surefire-plugin>3.0.0-M5</version.maven-surefire-plugin>
-        <version.mockito>1.9.5</version.mockito>
+        <version.mockito>4.6.1</version.mockito>
         <version.mysql>8.0.20</version.mysql>
     </properties>
     <repositories>
@@ -253,7 +253,7 @@
             <!--Mockito-->
             <dependency>
                 <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
+                <artifactId>mockito-core</artifactId>
                 <version>${version.mockito}</version>
                 <scope>test</scope>
             </dependency>
@@ -302,8 +302,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${version.maven-compiler-plugin}</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
             <plugin>
