@@ -51,19 +51,13 @@ public class UpdateDamageHistorySystem implements EntitySystem {
 
     private void onDamageTaken(EntityWorld entityWorld, int effectImpactEntity, DamageHistoryComponent.DamageType damageType) {
         int targetEntity = entityWorld.getComponent(effectImpactEntity, ApplyEffectImpactComponent.class).getTargetEntity();
-        float damage = -1;
-        switch (damageType) {
-            case PHYSICAL:
-                damage = entityWorld.getComponent(effectImpactEntity, ResultingPhysicalDamageComponent.class).getValue();
-                break;
-            
-            case MAGIC:
-                damage = entityWorld.getComponent(effectImpactEntity, ResultingMagicDamageComponent.class).getValue();
-                break;
-        }
+        float damage = switch (damageType) {
+            case PHYSICAL -> entityWorld.getComponent(effectImpactEntity, ResultingPhysicalDamageComponent.class).getValue();
+            case MAGIC -> entityWorld.getComponent(effectImpactEntity, ResultingMagicDamageComponent.class).getValue();
+        };
         int sourceActionIndex = entityWorld.getComponent(effectImpactEntity, EffectSourceActionIndexComponent.class).getIndex();
         int sourceEntity = -1;
-        String sourceName = null;
+        String sourceName = "[Unnamed unit]";
         EffectSourceComponent effectSourceComponent = entityWorld.getComponent(effectImpactEntity, EffectSourceComponent.class);
         if (effectSourceComponent != null) {
             sourceEntity = effectSourceComponent.getSourceEntity();
@@ -73,7 +67,7 @@ public class UpdateDamageHistorySystem implements EntitySystem {
             }
         }
         int sourceSpellEntity = -1;
-        String sourceSpellName = null;
+        String sourceSpellName = "[Unnamed spell]";
         EffectSourceSpellComponent effectSourceSpellComponent = entityWorld.getComponent(effectImpactEntity, EffectSourceSpellComponent.class);
         if (effectSourceSpellComponent != null) {
             sourceSpellEntity = effectSourceSpellComponent.getSpellEntity();

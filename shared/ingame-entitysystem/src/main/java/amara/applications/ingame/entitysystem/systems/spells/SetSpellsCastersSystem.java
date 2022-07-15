@@ -108,8 +108,8 @@ public class SetSpellsCastersSystem implements EntitySystem {
     }
 
     private void updateCaster(EntityWorld entityWorld, int casterEntity, int[] spellOrPassiveEntities) {
-        for (int targetEntity : spellOrPassiveEntities) {
-            updateCaster(entityWorld, casterEntity, targetEntity);
+        for (int spellOrPassiveEntity : spellOrPassiveEntities) {
+            updateCaster(entityWorld, casterEntity, spellOrPassiveEntity);
         }
     }
 

@@ -3,7 +3,6 @@ package amara.applications.ingame.client.systems.gui.deathrecap;
 import amara.applications.ingame.client.appstates.PlayerAppState;
 import amara.applications.ingame.client.gui.ScreenController_HUD;
 import amara.applications.ingame.client.systems.gui.GUIDisplaySystem;
-import amara.applications.ingame.entitysystem.components.general.NameComponent;
 import amara.applications.ingame.entitysystem.components.units.DamageHistoryComponent;
 import amara.applications.ingame.entitysystem.components.units.IsAliveComponent;
 import amara.core.Util;
@@ -31,7 +30,7 @@ public class DisplayDeathRecapSystem extends GUIDisplaySystem<ScreenController_H
                     totalDamage += entry.getDamage();
                 }
                 text = ((int) totalDamage) + " total damage over " + Util.round(damageHistoryComponent.getLastDamageTime() - damageHistoryComponent.getFirstDamageTime(), 3) + " seconds";
-                Collection<DeathRecapUnit> units = getDeathRecapUnits(entityWorld, damageHistoryComponent.getEntries());
+                Collection<DeathRecapUnit> units = getDeathRecapUnits(damageHistoryComponent.getEntries());
                 for (DeathRecapUnit unit : units) {
                     text += "\n\n" + unit.getName() + ":";
                     for (DeathRecapSpell spell : unit.getSpells()) {
@@ -56,29 +55,19 @@ public class DisplayDeathRecapSystem extends GUIDisplaySystem<ScreenController_H
         }
     }
 
-    private Collection<DeathRecapUnit> getDeathRecapUnits(EntityWorld entityWorld, DamageHistoryComponent.DamageHistoryEntry[] damageHistoryEntries) {
+    private Collection<DeathRecapUnit> getDeathRecapUnits(DamageHistoryComponent.DamageHistoryEntry[] damageHistoryEntries) {
         HashMap<Integer, DeathRecapUnit> units = new HashMap<>();
         HashMap<Integer, DeathRecapSpell> spells = new HashMap<>();
         for (DamageHistoryComponent.DamageHistoryEntry entry : damageHistoryEntries) {
-            DeathRecapUnit unit = units.computeIfAbsent(entry.getSourceEntity(), sourceEntity -> {
-                NameComponent nameComponent = entityWorld.getComponent(sourceEntity, NameComponent.class);
-                String name = ((nameComponent != null) ? nameComponent.getName() : "[Unnamed unit]");
-                return new DeathRecapUnit(name);
-            });
+            DeathRecapUnit unit = units.computeIfAbsent(entry.getSourceEntity(), sourceEntity -> new DeathRecapUnit(entry.getSourceName()));
             DeathRecapSpell spell = spells.computeIfAbsent(entry.getSourceSpellEntity(), sourceSpellEntity -> {
-                NameComponent nameComponent = entityWorld.getComponent(sourceSpellEntity, NameComponent.class);
-                String name = ((nameComponent != null) ? nameComponent.getName() : "[Unnamed spell]");
-                DeathRecapSpell newSpell = new DeathRecapSpell(name);
+                DeathRecapSpell newSpell = new DeathRecapSpell(entry.getSourceSpellName());
                 unit.addSpell(newSpell);
                 return newSpell;
             });
             switch (entry.getDamageType()) {
-                case PHYSICAL:
-                    spell.addPhysicalDamage(entry.getDamage());
-                    break;
-                case MAGIC:
-                    spell.addMagicDamage(entry.getDamage());
-                    break;
+                case PHYSICAL -> spell.addPhysicalDamage(entry.getDamage());
+                case MAGIC -> spell.addMagicDamage(entry.getDamage());
             }
         }
         return units.values();
