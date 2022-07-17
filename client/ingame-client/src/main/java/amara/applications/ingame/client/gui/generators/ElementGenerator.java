@@ -31,7 +31,8 @@ public abstract class ElementGenerator {
     protected abstract ElementBuilder generate(Nifty nifty, String id);
 
     protected TextRenderer getTextRenderer(Nifty nifty, String id) {
-        return getElementById(nifty, id).getRenderer(TextRenderer.class);
+        Element element = getElementById(nifty, id);
+        return ((element != null) ? element.getRenderer(TextRenderer.class) : null);
     }
 
     protected Element getElementById(Nifty nifty, String id) {
