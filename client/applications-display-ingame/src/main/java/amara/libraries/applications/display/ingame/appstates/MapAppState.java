@@ -223,11 +223,9 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
         visualsNode.detachAllChildren();
         modelObjectsVisuals.clear();
         cameraNode.detachAllChildren();
-        final BatchNode modelsNode = new BatchNode();
-        MapVisuals visuals = map.getVisuals();
-        for (MapVisual visual : visuals.getMapVisuals()) {
-            if(visual instanceof ModelVisual){
-                ModelVisual modelVisual = (ModelVisual) visual;
+        BatchNode modelsNode = new BatchNode();
+        for (MapVisual visual : map.getVisuals()) {
+            if (visual instanceof ModelVisual modelVisual) {
                 ModelObject modelObject = new ModelObject(mainApplication.getAssetManager(), modelVisual.getModelSkinPath());
                 Vector3f translation = modelVisual.getPosition().clone();
                 translation.setY(mapHeightmap.getHeight(translation.getX(), translation.getZ()));
@@ -236,8 +234,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
                 modelObject.setLocalScale(modelVisual.getScale());
                 modelsNode.attachChild(modelObject);
                 modelObjectsVisuals.put(modelObject, modelVisual);
-            } else if (visual instanceof WaterVisual) {
-                WaterVisual waterVisual = (WaterVisual) visual;
+            } else if (visual instanceof WaterVisual waterVisual) {
                 if (true) {
                     WaterFilter waterFilter = getAppState(WaterAppState.class).createWaterFilter(waterVisual.getPosition(), waterVisual.getSize());
                     addFilter(waterFilter);

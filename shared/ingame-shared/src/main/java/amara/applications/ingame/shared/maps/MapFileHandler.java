@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.shared.maps;
 
 import java.io.File;
@@ -28,10 +24,6 @@ import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.XMLOutputter;
 
-/**
- *
- * @author Carl
- */
 public class MapFileHandler{
     
     private static final String VECTOR_COORDINATES_SEPARATOR = ",";
@@ -71,8 +63,7 @@ public class MapFileHandler{
                 elementZoom.setAttribute("maximumDistance", "" + cameraZoom.getMaximumDistance());
             }
             elementCamera.addContent(elementZoom);
-            if (camera instanceof MapCamera_TopDown) {
-                MapCamera_TopDown camera_TopDown = (MapCamera_TopDown) camera;
+            if (camera instanceof MapCamera_TopDown camera_TopDown) {
                 elementCamera.setAttribute("initialPosition", "" + generateVectorText(camera_TopDown.getInitialPosition()));
                 elementCamera.setAttribute("initialDirection", "" + generateVectorText(camera_TopDown.getInitialDirection()));
                 Element elementLimit = new Element("limit");
@@ -84,22 +75,18 @@ public class MapFileHandler{
                     elementLimit.setAttribute("maxY", "" + cameraLimit.getMaximum().getY());
                     elementCamera.addContent(elementLimit);
                 }
-            } else if (camera instanceof MapCamera_3rdPerson) {
-                MapCamera_3rdPerson camera_3rdPerson = (MapCamera_3rdPerson) camera;
+            } else if (camera instanceof MapCamera_3rdPerson camera_3rdPerson) {
                 elementCamera.setAttribute("initialRotationHorizontal", "" + camera_3rdPerson.getInitialRotationHorizontal());
                 elementCamera.setAttribute("initialRotationVertical", "" + camera_3rdPerson.getInitialRotationVertical());
             }
             root.addContent(elementCamera);
-            //Lights
+            // Lights
             Element elementLights = new Element("lights");
-            for(MapLight mapLight : map.getLights().getMapLights()){
+            for (MapLight mapLight : map.getLights().getMapLights()) {
                 Element elementLight = null;
-                if(mapLight instanceof MapLight_Ambient){
-                    MapLight_Ambient mapLight_Ambient = (MapLight_Ambient) mapLight;
+                if (mapLight instanceof MapLight_Ambient) {
                     elementLight = new Element("ambient");
-                }
-                else if(mapLight instanceof MapLight_Directional){
-                    MapLight_Directional mapLight_Directional = (MapLight_Directional) mapLight;
+                } else if (mapLight instanceof MapLight_Directional mapLight_Directional) {
                     elementLight = new Element("directional");
                     elementLight.setAttribute("direction", generateVectorText(mapLight_Directional.getDirection()));
                     MapLight_Directional_Shadows shadows = mapLight_Directional.getShadows();
@@ -109,25 +96,24 @@ public class MapFileHandler{
                         elementLight.addContent(elementShadows);
                     }
                 }
-                if(elementLight != null){
+                if (elementLight != null) {
                     elementLight.setAttribute("color", generateVectorText(mapLight.getColor().toVector3f()));
                     elementLights.addContent(elementLight);
                 }
             }
             root.addContent(elementLights);
-            //Filters
+            // Filters
             Element elementFilters = new Element("filters");
-            for(MapFilter mapFilter : map.getFilters()){
+            for (MapFilter mapFilter : map.getFilters()) {
                 Element elementFilter = null;
-                if(mapFilter instanceof MapFilter_SSAO){
-                    MapFilter_SSAO mapFilter_SSAO = (MapFilter_SSAO) mapFilter;
+                if (mapFilter instanceof MapFilter_SSAO mapFilter_SSAO) {
                     elementFilter = new Element("ssao");
                     elementFilter.setAttribute("sampleRadius", "" + mapFilter_SSAO.getSampleRadius());
                     elementFilter.setAttribute("intensity", "" + mapFilter_SSAO.getIntensity());
                     elementFilter.setAttribute("scale", "" + mapFilter_SSAO.getScale());
                     elementFilter.setAttribute("bias", "" + mapFilter_SSAO.getBias());
                 }
-                if(elementFilter != null){
+                if (elementFilter != null) {
                     elementFilters.addContent(elementFilter);
                 }
             }
@@ -136,7 +122,7 @@ public class MapFileHandler{
             Element elementTerrain = new Element("terrain");
             TerrainSkin terrainSkin = map.getTerrainSkin();
             Element elementTerrainTextures = new Element("textures");
-            for(TerrainSkin_Texture texture : terrainSkin.getTextures()){
+            for (TerrainSkin_Texture texture : terrainSkin.getTextures()) {
                 Element elementTexture = new Element("texture");
                 elementTexture.setAttribute("scale", "" + texture.getScale());
                 elementTexture.setText(texture.getFilePath());
@@ -144,23 +130,23 @@ public class MapFileHandler{
             }
             elementTerrain.addContent(elementTerrainTextures);
             root.addContent(elementTerrain);
-            //Minimap
+            // Minimap
             Element elementMinimap = new Element("minimap");
             elementMinimap.setAttribute("x", "" + map.getMinimapInformation().getX());
             elementMinimap.setAttribute("y", "" + map.getMinimapInformation().getY());
             elementMinimap.setAttribute("width", "" + map.getMinimapInformation().getWidth());
             elementMinimap.setAttribute("height", "" + map.getMinimapInformation().getHeight());
             root.addContent(elementMinimap);
-            //Physics
+            // Physics
             Element elementPhysics = new Element("physics");
             elementPhysics.setAttribute("width", "" + map.getPhysicsInformation().getWidth());
             elementPhysics.setAttribute("height", "" + map.getPhysicsInformation().getHeight());
             elementPhysics.setAttribute("heightmapScale", "" + map.getPhysicsInformation().getHeightmapScale());
             elementPhysics.setAttribute("groundHeight", "" + map.getPhysicsInformation().getGroundHeight());
             Element elementObstacles = new Element("obstacles");
-            for(MapObstacle mapObstacle : map.getPhysicsInformation().getObstacles()){
+            for (MapObstacle mapObstacle : map.getPhysicsInformation().getObstacles()) {
                 Element elementObstacle = generateElement(mapObstacle);
-                if(elementObstacle != null){
+                if (elementObstacle != null){
                     elementObstacles.addContent(elementObstacle);
                 }
             }
@@ -168,54 +154,50 @@ public class MapFileHandler{
             root.addContent(elementPhysics);
             //Visuals
             Element elementVisuals = new Element("visuals");
-            for(MapVisual mapVisual : map.getVisuals().getMapVisuals()){
+            for (MapVisual mapVisual : map.getVisuals()) {
                 Element elementVisual = null;
-                if(mapVisual instanceof ModelVisual){
-                    ModelVisual modelVisual = (ModelVisual) mapVisual;
+                if (mapVisual instanceof ModelVisual modelVisual) {
                     elementVisual = new Element("model");
                     elementVisual.setAttribute("modelSkinPath", modelVisual.getModelSkinPath());
                     elementVisual.setAttribute("position", generateVectorText(modelVisual.getPosition()));
                     elementVisual.setAttribute("direction", generateVectorText(modelVisual.getDirection()));
                     elementVisual.setAttribute("scale", "" + modelVisual.getScale());
                 }
-                else if(mapVisual instanceof WaterVisual){
-                    WaterVisual waterVisual = (WaterVisual) mapVisual;
+                else if (mapVisual instanceof WaterVisual waterVisual) {
                     elementVisual = new Element("water");
                     elementVisual.setAttribute("position", generateVectorText(waterVisual.getPosition()));
                     elementVisual.setAttribute("size", generateVectorText(waterVisual.getSize()));
-                }
-                else if(mapVisual instanceof SnowVisual){
-                    SnowVisual snowVisual = (SnowVisual) mapVisual;
+                } else if (mapVisual instanceof SnowVisual) {
                     elementVisual = new Element("snow");
                 }
-                if(elementVisual != null){
+                if (elementVisual != null) {
                     elementVisuals.addContent(elementVisual);
                 }
             }
             root.addContent(elementVisuals);
             FileManager.putFileContent(file.getPath(), new XMLOutputter().outputString(document));
         } catch (Exception ex) {
-            System.err.println("Error while saving the map: " + ex.toString());
+            System.err.println("Error while saving the map: " + ex.getMessage());
             ex.printStackTrace();
         }
     }
 
-    public static Map load(String mapName){
+    public static Map load(String mapName) {
         return load(mapName, true);
     }
 
-    public static Map load(String mapName, boolean loadContents){
-        try{
+    public static Map load(String mapName, boolean loadContents) {
+        try {
             InputStream inputStream = FileAssets.getInputStream("Maps/" + mapName + "/map.xml");
             Document document = new SAXBuilder().build(inputStream);
             Element root = document.getRootElement();
             Map map = createMapObject(root, mapName);
-            if(loadContents){
+            if (loadContents) {
                 load(map, root);
             }
             return map;
-        }catch(Exception ex){
-            System.err.println("Error while loading the map: " + ex.toString());
+        } catch(Exception ex) {
+            System.err.println("Error while loading the map: " + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
@@ -232,19 +214,19 @@ public class MapFileHandler{
             float zoomInitialDistance = elementZoom.getAttribute("initialDistance").getFloatValue();
             float zoomMinimumDistance = -1;
             Attribute attributeZoomMinimumDistance = elementZoom.getAttribute("minimumDistance");
-            if(attributeZoomMinimumDistance != null){
+            if (attributeZoomMinimumDistance != null) {
                 zoomMinimumDistance = attributeZoomMinimumDistance.getFloatValue();
             }
             float zoomMaximumDistance = -1;
             Attribute attributeZoomMaximumDistance = elementZoom.getAttribute("maximumDistance");
-            if(attributeZoomMaximumDistance != null){
+            if (attributeZoomMaximumDistance != null) {
                 zoomMaximumDistance = attributeZoomMaximumDistance.getFloatValue();
             }
             MapCamera_Zoom zoom = new MapCamera_Zoom(zoomInterval, zoomInitialDistance, zoomMinimumDistance, zoomMaximumDistance);
 
             String cameraType = elementCamera.getAttributeValue("type");
             switch (cameraType) {
-                case MapCamera_TopDown.TYPE:
+                case MapCamera_TopDown.TYPE -> {
                     Vector3f initialPosition = generateVector3f(elementCamera.getAttributeValue("initialPosition"));
                     Vector3f initialDirection = generateVector3f(elementCamera.getAttributeValue("initialDirection"));
                     MapCamera_Limit limit = null;
@@ -255,70 +237,66 @@ public class MapFileHandler{
                         limit = new MapCamera_Limit(limitMinimum, limitMaximum);
                     }
                     camera = new MapCamera_TopDown(zoom, initialPosition, initialDirection, limit);
-                    break;
-
-                case MapCamera_3rdPerson.TYPE:
+                }
+                case MapCamera_3rdPerson.TYPE -> {
                     float initialRotationHorizontal = elementCamera.getAttribute("initialRotationHorizontal").getFloatValue();
                     float initialRotationVertical = elementCamera.getAttribute("initialRotationVertical").getFloatValue();
                     camera = new MapCamera_3rdPerson(zoom, initialRotationHorizontal, initialRotationVertical);
-                    break;
+                }
             }
             map.setCamera(camera);
 
-            //Lights
+            // Lights
             Element elementLights = root.getChild("lights");
-            for(Object elementLightObject : elementLights.getChildren()){
-                Element elemenLight = (Element) elementLightObject;
+            for (Element elementLight : elementLights.getChildren()) {
                 MapLight mapLight = null;
-                ColorRGBA color = generateColorRGBA(elemenLight.getAttributeValue("color"));
-                if(elemenLight.getName().equals("ambient")){
+                ColorRGBA color = generateColorRGBA(elementLight.getAttributeValue("color"));
+                if (elementLight.getName().equals("ambient")) {
                     mapLight = new MapLight_Ambient(color);
-                }
-                else if(elemenLight.getName().equals("directional")){
-                    Vector3f direction = generateVector3f(elemenLight.getAttributeValue("direction"));
+                } else if (elementLight.getName().equals("directional")) {
+                    Vector3f direction = generateVector3f(elementLight.getAttributeValue("direction"));
                     MapLight_Directional mapLight_Directional = new MapLight_Directional(color, direction);
-                    Element elementShadows = elemenLight.getChild("shadows");
-                    if(elementShadows != null){
+                    Element elementShadows = elementLight.getChild("shadows");
+                    if (elementShadows != null) {
                         float intensity = elementShadows.getAttribute("intensity").getFloatValue();
                         MapLight_Directional_Shadows shadows = new MapLight_Directional_Shadows(intensity);
                         mapLight_Directional.setShadows(shadows);
                     }
                     mapLight = mapLight_Directional;
                 }
-                if(mapLight != null){
+                if (mapLight != null) {
                     map.getLights().addLight(mapLight);
                 }
             }
-            //Filters
+            // Filters
             Element elementFilters = root.getChild("filters");
-            for(Object elementFilterObject : elementFilters.getChildren()){
-                Element elemenFilter = (Element) elementFilterObject;
+            for (Element elementFilter : elementFilters.getChildren()) {
                 MapFilter mapFilter = null;
-                if(elemenFilter.getName().equals("ssao")){
-                    float sampleRadius = elemenFilter.getAttribute("sampleRadius").getFloatValue();
-                    float intensity = elemenFilter.getAttribute("intensity").getFloatValue();
-                    float scale = elemenFilter.getAttribute("scale").getFloatValue();
-                    float bias = elemenFilter.getAttribute("bias").getFloatValue();
+                if (elementFilter.getName().equals("ssao")) {
+                    float sampleRadius = elementFilter.getAttribute("sampleRadius").getFloatValue();
+                    float intensity = elementFilter.getAttribute("intensity").getFloatValue();
+                    float scale = elementFilter.getAttribute("scale").getFloatValue();
+                    float bias = elementFilter.getAttribute("bias").getFloatValue();
                     mapFilter = new MapFilter_SSAO(sampleRadius, intensity, scale, bias);
                 }
-                if(mapFilter != null){
+                if (mapFilter != null) {
                     map.addFilter(mapFilter);
                 }
             }
-            //Terrain
+            // Terrain
             Element elementTerrain = root.getChild("terrain");
             Element elementTerrainTextures = elementTerrain.getChild("textures");
-            List elementTerrainTexturesChildren = elementTerrainTextures.getChildren();
+            List<Element> elementTerrainTexturesChildren = elementTerrainTextures.getChildren();
             TerrainSkin_Texture[] terrainSkinTextures = new TerrainSkin_Texture[elementTerrainTexturesChildren.size()];
-            for(int i=0;i<terrainSkinTextures.length;i++){
-                Element elementTexture = (Element) elementTerrainTexturesChildren.get(i);
+            for (int i = 0; i < terrainSkinTextures.length; i++) {
+                Element elementTexture = elementTerrainTexturesChildren.get(i);
                 String filePath = elementTexture.getText();
                 float scale = elementTexture.getAttribute("scale").getFloatValue();
                 terrainSkinTextures[i] = new TerrainSkin_Texture(filePath, scale);
             }
             TerrainSkin terrainSkin = new TerrainSkin(terrainSkinTextures);
             map.setTerrainSkin(terrainSkin);
-            //Minimap
+            // Minimap
             Element elementMinimap = root.getChild("minimap");
             float minimapX = elementMinimap.getAttribute("x").getFloatValue();
             float minimapY = elementMinimap.getAttribute("y").getFloatValue();
@@ -326,7 +304,7 @@ public class MapFileHandler{
             float minimumHeight = elementMinimap.getAttribute("height").getFloatValue();
             MapMinimapInformation minimapInformation = new MapMinimapInformation(minimapX, minimapY, minimapWidth, minimumHeight);
             map.setMinimapInformation(minimapInformation);
-            //Physics
+            // Physics
             Element elementPhysics = root.getChild("physics");
             float width = elementPhysics.getAttribute("width").getFloatValue();
             float height = elementPhysics.getAttribute("height").getFloatValue();
@@ -334,50 +312,49 @@ public class MapFileHandler{
             float groundHeight = elementPhysics.getAttribute("groundHeight").getFloatValue();
             Element elementObstacles = elementPhysics.getChild("obstacles");
             ArrayList<MapObstacle> obstacles = new ArrayList<>();
-            for(Element elementObstacle : elementObstacles.getChildren()){
+            for (Element elementObstacle : elementObstacles.getChildren()) {
                 MapObstacle obstacle = generateObstacle(elementObstacle);
                 obstacles.add(obstacle);
             }
             MapPhysicsInformation physicsInformation = new MapPhysicsInformation(width, height, heightmapScale, groundHeight, obstacles);
             map.setPhysicsInformation(physicsInformation);
-            //Visuals
+            // Visuals
             Element elementVisuals = root.getChild("visuals");
-            for(Object elementVisualObject : elementVisuals.getChildren()){
-                Element elementVisual = (Element) elementVisualObject;
+            for (Element elementVisual : elementVisuals.getChildren()) {
                 MapVisual mapVisual = null;
-                if(elementVisual.getName().equals("model")){
+                if (elementVisual.getName().equals("model")) {
                     String modelSkinPath = elementVisual.getAttributeValue("modelSkinPath");
                     Vector3f position = generateVector3f(elementVisual.getAttributeValue("position"));
                     Vector3f direction = generateVector3f(elementVisual.getAttributeValue("direction"));
                     float scale = elementVisual.getAttribute("scale").getFloatValue();
                     mapVisual = new ModelVisual(modelSkinPath, position, direction, scale);
                 }
-                else if(elementVisual.getName().equals("water")){
+                else if (elementVisual.getName().equals("water")) {
                     Vector3f position = generateVector3f(elementVisual.getAttributeValue("position"));
                     Vector2f size = generateVector2f(elementVisual.getAttributeValue("size"));
                     mapVisual = new WaterVisual(position, size);
                 }
-                else if(elementVisual.getName().equals("snow")){
+                else if (elementVisual.getName().equals("snow")) {
                     mapVisual = new SnowVisual();
                 }
-                if(mapVisual != null){
-                    map.getVisuals().addVisual(mapVisual);
+                if (mapVisual != null) {
+                    map.addVisual(mapVisual);
                 }
             }
             return map;
         } catch (Exception ex) {
-            System.err.println("Error while loading the map contents: " + ex.toString());
+            System.err.println("Error while loading the map contents: " + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
     }
 
-    private static Map createMapObject(Element root, String mapName){
+    private static Map createMapObject(Element root, String mapName) {
         Map map = Util.createObjectByClassName(root.getAttributeValue("class"));
         map.setName(mapName);
         return map;
     }
-    
+
     private static Element generateElement(MapObstacle mapObstacle){
         Element element = null;
         if(mapObstacle instanceof MapObstacle_Circle){

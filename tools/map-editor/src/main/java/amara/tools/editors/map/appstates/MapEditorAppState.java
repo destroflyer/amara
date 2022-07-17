@@ -238,7 +238,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                     if(actionName.equals("editor_mouse_click_left") && value){
                         Vector3f position = new Vector3f(currentHoveredLocation.getX(), 0, currentHoveredLocation.getY());
                         ModelVisual modelVisual = new ModelVisual(visualsModelSkinPaths[visualModelSkinPathIndex], position, visualDirection, visualScale);
-                        map.getVisuals().addVisual(modelVisual);
+                        map.addVisual(modelVisual);
                         mapAppState.updateVisuals();
                         generateNewToolCursor();
                     }
@@ -278,13 +278,12 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
                             case PLACE_VISUAL:
                                 Node visualsNode = getAppState(MapAppState.class).getVisualsNode();
                                 CollisionResult collisionResult = mainApplication.getRayCastingResults_Cursor(visualsNode).getClosestCollision();
-                                if(collisionResult != null){
+                                if (collisionResult != null) {
                                     Spatial parent = collisionResult.getGeometry().getParent();
-                                    if((parent != null) && (parent.getParent() instanceof ModelObject)){
-                                        ModelObject modelObject = (ModelObject) parent.getParent();
+                                    if ((parent != null) && (parent.getParent() instanceof ModelObject modelObject)) {
                                         MapVisual mapVisual = mapAppState.getMapVisual(modelObject);
-                                        if(mapVisual != null){
-                                            map.getVisuals().removeVisual(mapVisual);
+                                        if (mapVisual != null) {
+                                            map.removeVisual(mapVisual);
                                             mapAppState.updateVisuals();
                                         }
                                     }

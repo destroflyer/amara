@@ -1,111 +1,65 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.shared.maps;
 
 import amara.applications.ingame.shared.maps.terrain.TerrainSkin;
 import amara.libraries.entitysystem.EntityWorld;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- *
- * @author Carl
- */
 public abstract class Map {
 
     public static int GAME_ENTITY = 0;
 
+    @Getter
+    @Setter
     private String name;
+    @Getter
+    @Setter
     protected MapCamera camera;
+    @Getter
     protected MapLights lights = new MapLights();
+    @Getter
     protected List<MapFilter> filters = new LinkedList<>();
+    @Getter
+    @Setter
     protected TerrainSkin terrainSkin;
+    @Getter
+    @Setter
     protected MapMinimapInformation minimapInformation;
+    @Getter
+    @Setter
     protected MapPhysicsInformation physicsInformation;
-    protected MapVisuals visuals = new MapVisuals();
+    @Getter
+    protected List<MapVisual> visuals = new LinkedList<>();
+    @Getter
     protected MapSpells[] spells = new MapSpells[0];
+    @Getter
+    @Setter
     protected int entity;
 
     public abstract void load(EntityWorld entityWorld, int playersCount);
 
-    public void initializePlayer(EntityWorld entityWorld, int playerEntity){
+    public void initializePlayer(EntityWorld entityWorld, int playerEntity) {
 
     }
-    
+
     public abstract void spawnPlayer(EntityWorld entityWorld, int playerEntity);
 
     public void initializeItem(EntityWorld entityWorld, int itemEntity, int buyerEntity) {
 
     }
 
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public void setCamera(MapCamera camera){
-        this.camera = camera;
-    }
-
-    public MapCamera getCamera(){
-        return camera;
-    }
-
-    public MapLights getLights(){
-        return lights;
-    }
-
-    public void addFilter(MapFilter filter){
+    public void addFilter(MapFilter filter) {
         filters.add(filter);
     }
 
-    public List<MapFilter> getFilters(){
-        return filters;
+    public void addVisual(MapVisual visual) {
+        visuals.add(visual);
     }
 
-    public void setTerrainSkin(TerrainSkin terrainSkin){
-        this.terrainSkin = terrainSkin;
-    }
-
-    public TerrainSkin getTerrainSkin(){
-        return terrainSkin;
-    }
-
-    public void setMinimapInformation(MapMinimapInformation minimapInformation){
-        this.minimapInformation = minimapInformation;
-    }
-
-    public MapMinimapInformation getMinimapInformation(){
-        return minimapInformation;
-    }
-
-    public void setPhysicsInformation(MapPhysicsInformation physicsInformation){
-        this.physicsInformation = physicsInformation;
-    }
-
-    public MapPhysicsInformation getPhysicsInformation(){
-        return physicsInformation;
-    }
-
-    public MapVisuals getVisuals(){
-        return visuals;
-    }
-
-    public MapSpells[] getSpells(){
-        return spells;
-    }
-
-    public void setEntity(int entity){
-        this.entity = entity;
-    }
-
-    public int getEntity(){
-        return entity;
+    public void removeVisual(MapVisual visual) {
+        visuals.remove(visual);
     }
 }
