@@ -264,6 +264,7 @@ public class ClientComponentBlacklist {
             RedirectReceivedBountiesComponent.class,
             RemainingAggroResetDurationComponent.class,
             SetNewCampCombatSpellsOnCooldownComponent.class,
+            ShopGoldExpensesComponent.class,
             SpellCastQueueComponent.class,
             WalkStepDistanceComponent.class,
             // units/animations
