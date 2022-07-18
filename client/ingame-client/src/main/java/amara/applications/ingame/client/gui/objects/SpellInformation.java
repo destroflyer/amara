@@ -9,6 +9,6 @@ public class SpellInformation {
     private int entity;
     private String name;
     private String description;
-    private float cooldown;
+    private Float cooldown;
     private Float manaCost;
 }

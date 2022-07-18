@@ -349,7 +349,7 @@ public class ScreenController_HUD extends GameScreenController {
         getTextRenderer("player_spell_information_name").setText(spellInformation.getName());
         getTextRenderer("player_spell_information_description").setText(spellInformation.getDescription());
         // Cooldown
-        boolean hasCooldown = (spellInformation.getCooldown() != -1);
+        boolean hasCooldown = (spellInformation.getCooldown() != null);
         Element cooldownIcon = getElementByID("player_spell_information_cooldown_icon");
         cooldownIcon.setVisible(hasCooldown);
         cooldownIcon.setConstraintWidth(new SizeValue((hasCooldown ? 16 : 0) + "px"));

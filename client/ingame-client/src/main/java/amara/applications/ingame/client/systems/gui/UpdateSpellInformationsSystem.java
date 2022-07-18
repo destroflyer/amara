@@ -105,7 +105,7 @@ public class UpdateSpellInformationsSystem extends GUIDisplaySystem<ScreenContro
                     }
                 }
                 CooldownComponent cooldownComponent = entityWorld.getComponent(spellEntities[i], CooldownComponent.class);
-                float cooldown = ((cooldownComponent != null) ? cooldownComponent.getDuration() : -1);
+                Float cooldown = ((cooldownComponent != null) ? cooldownComponent.getDuration() : null);
                 Float manaCost = null;
                 CastCostComponent castCostComponent = entityWorld.getComponent(spellEntities[i], CastCostComponent.class);
                 if (castCostComponent != null) {
