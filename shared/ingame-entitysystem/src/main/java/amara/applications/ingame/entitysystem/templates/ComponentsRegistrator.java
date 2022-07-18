@@ -3511,34 +3511,6 @@ public class ComponentsRegistrator{
             }
         });
         //spells
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.ApplyCastedSpellComponent.class);
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.ApplyCastedSpellComponent.class.getDeclaredField("casterEntityID"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        try{
-            ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.ApplyCastedSpellComponent.class.getDeclaredField("castedSpellEntityID"), componentFieldSerializer_Entity);
-        }catch(NoSuchFieldException ex){
-            ex.printStackTrace();
-        }
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.ApplyCastedSpellComponent>("applyCastedSpell"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.spells.ApplyCastedSpellComponent construct(EntityWorld entityWorld, Element element){
-                int casterEntityID = 0;
-                String casterEntityIDText = element.getAttributeValue("casterEntityID");
-                if((casterEntityIDText != null) && (casterEntityIDText.length() > 0)){
-                    casterEntityID = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, casterEntityIDText));
-                }
-                int castedSpellEntityID = 0;
-                String castedSpellEntityIDText = element.getAttributeValue("castedSpellEntityID");
-                if((castedSpellEntityIDText != null) && (castedSpellEntityIDText.length() > 0)){
-                    castedSpellEntityID = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, castedSpellEntityIDText));
-                }
-                return new amara.applications.ingame.entitysystem.components.spells.ApplyCastedSpellComponent(casterEntityID, castedSpellEntityID);
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.spells.BaseCooldownComponent.class);
         try{
             ComponentSerializer.registerFieldSerializer(amara.applications.ingame.entitysystem.components.spells.BaseCooldownComponent.class.getDeclaredField("duration"), componentFieldSerializer_Timer);

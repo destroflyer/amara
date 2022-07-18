@@ -233,7 +233,6 @@ public class ClientComponentBlacklist {
             SpawnRelativePositionComponent.class,
             SpawnTemplateComponent.class,
             // spells
-            ApplyCastedSpellComponent.class,
             CastAnimationComponent.class,
             CastCancelCastComponent.class,
             CastCancelMovementComponent.class,
