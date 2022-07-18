@@ -104,7 +104,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem {
                 } else if (command instanceof CastSingleTargetSpellCommand) {
                     CastSingleTargetSpellCommand castSingleTargetSpellCommand = (CastSingleTargetSpellCommand) command;
                     int spellEntity = getSpellEntity(entityWorld, characterEntity, castSingleTargetSpellCommand.getSpellIndex());
-                    castSpellQueueSystem.enqueueSpellCast(entityWorld, characterEntity, spellEntity, castSingleTargetSpellCommand.getTargetEntityID());
+                    castSpellQueueSystem.enqueueSpellCast(entityWorld, characterEntity, spellEntity, castSingleTargetSpellCommand.getTargetEntity());
                 } else if (command instanceof CastLinearSkillshotSpellCommand) {
                     CastLinearSkillshotSpellCommand castLinearSkillshotSpellCommand = (CastLinearSkillshotSpellCommand) command;
                     int spellEntity = getSpellEntity(entityWorld, characterEntity, castLinearSkillshotSpellCommand.getSpellIndex());
