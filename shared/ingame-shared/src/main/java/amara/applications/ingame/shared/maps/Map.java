@@ -19,7 +19,7 @@ public abstract class Map {
     @Setter
     protected MapCamera camera;
     @Getter
-    protected MapLights lights = new MapLights();
+    protected List<MapLight> lights = new LinkedList<>();
     @Getter
     protected List<MapFilter> filters = new LinkedList<>();
     @Getter
@@ -49,6 +49,10 @@ public abstract class Map {
 
     public void initializeItem(EntityWorld entityWorld, int itemEntity, int buyerEntity) {
 
+    }
+
+    public void addLight(MapLight light) {
+        lights.add(light);
     }
 
     public void addFilter(MapFilter filter) {

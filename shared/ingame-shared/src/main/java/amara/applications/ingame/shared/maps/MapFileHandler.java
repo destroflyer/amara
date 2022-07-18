@@ -82,7 +82,7 @@ public class MapFileHandler{
             root.addContent(elementCamera);
             // Lights
             Element elementLights = new Element("lights");
-            for (MapLight mapLight : map.getLights().getMapLights()) {
+            for (MapLight mapLight : map.getLights()) {
                 Element elementLight = null;
                 if (mapLight instanceof MapLight_Ambient) {
                     elementLight = new Element("ambient");
@@ -265,7 +265,7 @@ public class MapFileHandler{
                     mapLight = mapLight_Directional;
                 }
                 if (mapLight != null) {
-                    map.getLights().addLight(mapLight);
+                    map.addLight(mapLight);
                 }
             }
             // Filters

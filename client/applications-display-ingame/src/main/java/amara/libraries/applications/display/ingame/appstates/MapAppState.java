@@ -84,8 +84,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
         Camera camera = mainApplication.getCamera();
         MapCamera mapCamera = map.getCamera();
         MapCamera_Zoom zoom = mapCamera.getZoom();
-        if (mapCamera instanceof MapCamera_TopDown) {
-            MapCamera_TopDown mapCamera_TopDown = (MapCamera_TopDown) mapCamera;
+        if (mapCamera instanceof MapCamera_TopDown mapCamera_TopDown) {
             camera.setLocation(mapCamera_TopDown.getInitialPosition());
             camera.lookAtDirection(mapCamera_TopDown.getInitialDirection(), Vector3f.UNIT_Y);
             if (ingameCameraAppState.shouldBeLimited()) {
@@ -99,8 +98,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
             ingameCameraAppState.setZoomMinimumDistance(zoom.getMinimumDistance());
             ingameCameraAppState.setZoomMaximumDistance(zoom.getMaximumDistance());
             ingameCameraAppState.setZoomInterval(zoom.getInterval());
-        } else if (mapCamera instanceof MapCamera_3rdPerson) {
-            MapCamera_3rdPerson mapCamera_3rdPerson = (MapCamera_3rdPerson) mapCamera;
+        } else if (mapCamera instanceof MapCamera_3rdPerson mapCamera_3rdPerson) {
             chaseCamera = new ChaseCamera(camera, mainApplication.getInputManager());
             chaseCamera.setDefaultHorizontalRotation(mapCamera_3rdPerson.getInitialRotationHorizontal());
             chaseCamera.setDefaultVerticalRotation(mapCamera_3rdPerson.getInitialRotationVertical());
@@ -116,12 +114,11 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
     private void initializeLights() {
         LightAppState lightAppState = getAppState(LightAppState.class);
         lightAppState.removeAll();
-        for (MapLight mapLight : map.getLights().getMapLights()) {
+        for (MapLight mapLight : map.getLights()) {
             Light light = null;
             if (mapLight instanceof MapLight_Ambient) {
                 light = new AmbientLight();
-            } else if (mapLight instanceof MapLight_Directional) {
-                MapLight_Directional mapLight_Directional = (MapLight_Directional) mapLight;
+            } else if (mapLight instanceof MapLight_Directional mapLight_Directional) {
                 DirectionalLight directionalLight = new DirectionalLight();
                 directionalLight.setDirection(mapLight_Directional.getDirection());
                 light = directionalLight;
@@ -151,8 +148,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
 
     private void initializeFilters() {
         for (MapFilter mapFilter : map.getFilters()) {
-            if (mapFilter instanceof MapFilter_SSAO) {
-                MapFilter_SSAO mapFilter_SSAO = (MapFilter_SSAO) mapFilter;
+            if (mapFilter instanceof MapFilter_SSAO mapFilter_SSAO) {
                 getAppState(SettingsAppState.class).subscribeBoolean("ssao", ssao -> {
                     SSAOFilter ssaoFilter = ssaoFilters.remove(mapFilter);
                     if (ssaoFilter != null) {

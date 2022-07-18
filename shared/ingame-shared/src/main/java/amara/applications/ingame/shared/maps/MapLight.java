@@ -1,23 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.shared.maps;
 
 import com.jme3.math.ColorRGBA;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-/**
- *
- * @author Carl
- */
-public class MapLight{
-
-    public MapLight(ColorRGBA color){
-        this.color = color;
-    }
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+public class MapLight {
+    @Getter
     private ColorRGBA color;
-
-    public ColorRGBA getColor(){
-        return color;
-    }
 }
